@@ -1,0 +1,23 @@
+{
+  "name": "@cliqz/autoconsent",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/autoconsent.cjs.js",
+  "module": "dist/autoconsent.esm.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "bundle": "rollup -c"
+  },
+  "author": "Sam Macbeth",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "consent-string": "^1.4.2"
+  },
+  "devDependencies": {
+    "puppeteer": "^1.14.0",
+    "puppeteer-cluster": "^0.15.2",
+    "rollup": "^1.10.0"
+  }
+}
