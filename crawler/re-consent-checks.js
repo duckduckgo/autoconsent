@@ -27,7 +27,10 @@ class Tab {
   }
 
   async clickElement(selector, frameId = 0) {
-    return this.frames[frameId].click(selector);
+    if (await this.elementExists(selector)) {
+      return this.frames[frameId].click(selector);
+    }
+    return false;
   }
 
   async clickElements(selector, frameId = 0) {}
