@@ -63,6 +63,10 @@ class Tab {
     const times = Math.ceil(timeout / interval);
     return waitFor(() => this.elementExists(selector, frameId), times, interval);
   }
+
+  async goto(url) {
+    return this.page.goto(url);
+  }
 }
 
 async function reConsentCheck(page) {
