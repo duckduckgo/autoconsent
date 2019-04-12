@@ -91,6 +91,7 @@ async function reConsentCheck(page) {
   return {
     url,
     rule: rule ? rule.name : null,
+    runOptOut: () => rule.optOut(tab),
   }
 }
 

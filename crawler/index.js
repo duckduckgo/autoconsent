@@ -1,17 +1,20 @@
 const { Cluster } = require('puppeteer-cluster');
 const readline = require('readline');
 const { once } = require('events');
+const devices = require('puppeteer/DeviceDescriptors');
 
 const { getCosmeticsForSite } = require('../');
 const reConsentCheck = require('./re-consent-checks');
 const checkRules = require('./css-check');
 const fanboyRules = require('./fanboy');
 
+const screenshotDir = './screenshots';
+
 (async () => {
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_PAGE,
-    maxConcurrency: 8,
-    retryLimit: 4,
+    maxConcurrency: 4,
+    retryLimit: 2,
   });
 
   async function discoverUrl(page, domain) {
@@ -36,23 +39,52 @@ const fanboyRules = require('./fanboy');
 
   await cluster.task(async ({ page, data: site }) => {
     try {
-      console.log(`load ${site}`);
+      await page.emulate(devices['Pixel 2']);
       await discoverUrl(page, site);
       const reconsent = await reConsentCheck(page);
       const reconsentHidden = await checkRules(await getCosmeticsForSite(site), page);
       const fanboyHidden = await checkRules(await fanboyRules(), page);
-      console.log(JSON.stringify({
+
+      const result = {
         site,
         url: reconsent.url,
-        reConsent: reconsent.rule,
+        reconsent: reconsent.rule,
         reconsentHidden,
         fanboyHidden,
-      }));
+      }
+
+      await page.screenshot({
+        path: `${screenshotDir}/${site}_before.png`,
+      });
+      if (reconsent.rule) {
+        try {
+          await reconsent.runOptOut();
+        } catch (e) {
+          result.reconsentFailure = e.toString();
+        }
+      } else if (reconsentHidden) {
+        await page.evaluate(hideElementsScript(reconsentHidden));
+      }
+      if (reconsent.rule || reconsentHidden.length > 0) {
+        await new Promise((res) => setTimeout(res, 5000));
+        await page.screenshot({
+          path: `${screenshotDir}/${site}_reconsent.png`,
+        });
+      }
+      if (fanboyHidden.length > 0) {
+        await page.evaluate(hideElementsScript(fanboyHidden));
+        await page.screenshot({
+          path: `${screenshotDir}/${site}_fanboy.png`,
+        });
+      }
+
+      result.postUrl = await page.url();
+      console.log(JSON.stringify(result));
     } catch(e) {
-      console.log({
+      console.log(JSON.stringify({
         site,
         error: e.toString(),
-      });
+      }));
     }
   });
 
@@ -69,3 +101,15 @@ const fanboyRules = require('./fanboy');
   await cluster.idle();
   await cluster.close();
 })();
+
+function hideElementsScript(elements) {
+  return `
+  var parent = document.head || document.getElementsByTagName('head')[0] || document.documentElement;
+  var rule = '${elements.join(',')} { display: none !important; }';
+  var css = document.createElement('style');
+  css.type = 'text/css';
+  css.id = 're-consent-css-rules';
+  css.appendChild(document.createTextNode(rule));
+  parent.appendChild(css);
+      `;
+}
