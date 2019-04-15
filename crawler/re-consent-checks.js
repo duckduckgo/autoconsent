@@ -22,8 +22,12 @@ class Tab {
   }
 
   async elementExists(selector, frameId = 0) {
-    const elements = await this.frames[frameId].$$(selector)
-    return elements.length > 0;
+    try {
+      const elements = await this.frames[frameId].$$(selector)
+      return elements.length > 0;
+    } catch (e) {
+      return false;
+    }
   }
 
   async clickElement(selector, frameId = 0) {
@@ -71,7 +75,6 @@ class Tab {
 
 async function reConsentCheck(page) {
   const url = await page.url();
-  // console.log('check', url);
   const frames = {
     0: await page.mainFrame(),
   }

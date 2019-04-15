@@ -8,7 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "bundle": "rollup -c",
+    "bundle": "rollup -c && node build-css.js > dist/autoconsent.css",
     "start": "node crawler/index.js",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://whotracks.me/data/2019-03/eu/sites.csv | awk -F \"\\\"*,\\\"*\" '{print $3}' | tail -n +2 | sort > sites.txt"
@@ -19,6 +19,8 @@
     "consent-string": "^1.4.2"
   },
   "devDependencies": {
+    "bulma": "^0.7.4",
+    "ejs": "^2.6.1",
     "puppeteer": "^1.14.0",
     "puppeteer-cluster": "^0.15.2",
     "rollup": "^1.10.0"

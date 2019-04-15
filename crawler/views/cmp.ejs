@@ -1,0 +1,31 @@
+<%- include('header') -%>
+  <body>
+    <p>Re:consent plugins:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Site</th>
+          <th>Before</th>
+          <th>After</th>
+          <th>Errors</th>
+          <th>Hidden</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results.forEach(({ site, url, postUrl, reconsentFailure, reconsentHidden }) => { %>
+          <tr>
+            <td>
+              <%= site %><br/>
+              <a href="<%= url %>" target="_blank" noreferrer><%= url %></a><br />
+              <a href="<%= postUrl %>" target="_blank" noreferrer><%= postUrl %></a>
+            </td>
+            <td><img src="./screenshots/<%= site %>_before.png" width=400></img></td>
+            <td><img src="./screenshots/<%= site %>_reconsent.png" width=400></img></td>
+            <td><%= reconsentFailure %></td>
+            <td><%= reconsentHidden %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+      </table>
+  </body>
+</html>

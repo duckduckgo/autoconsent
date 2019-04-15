@@ -1,0 +1,27 @@
+<%- include('header') -%>
+  <body>
+    <p>Re:consent plugins:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>CMP</th>
+          <th>Sites</th>
+          <th>Errors</th>
+          <th>Cosmetics</th>
+          <th>Off site redirect</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Object.keys(results).forEach((group) => { %>
+          <tr>
+            <td><a href="./<%= group %>.html"><%= group %></a></td>
+            <td><%= results[group].length %></td>
+            <td><%= results[group].filter(r => !!r.reconsentFailure).length %></td>
+            <td><%= results[group].filter(r => r.reconsentHidden.length > 0).length %></td>
+            <td><%= results[group].filter(r => new URL(r.url).host !== new URL(r.postUrl).host).length %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+      </table>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 const { Cluster } = require('puppeteer-cluster');
 const readline = require('readline');
 const { once } = require('events');
+const fs = require('fs');
 const devices = require('puppeteer/DeviceDescriptors');
 
 const { getCosmeticsForSite } = require('../');
@@ -8,7 +9,8 @@ const reConsentCheck = require('./re-consent-checks');
 const checkRules = require('./css-check');
 const fanboyRules = require('./fanboy');
 
-const screenshotDir = './screenshots';
+const screenshotDir = '_site/screenshots';
+fs.mkdirSync(screenshotDir, { recursive: true });
 
 (async () => {
   const cluster = await Cluster.launch({
@@ -70,8 +72,7 @@ const screenshotDir = './screenshots';
         await page.screenshot({
           path: `${screenshotDir}/${site}_reconsent.png`,
         });
-      }
-      if (fanboyHidden.length > 0) {
+      } else if (fanboyHidden.length > 0) {
         await page.evaluate(hideElementsScript(fanboyHidden));
         await page.screenshot({
           path: `${screenshotDir}/${site}_fanboy.png`,
