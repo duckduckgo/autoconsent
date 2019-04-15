@@ -71,6 +71,7 @@ class Tab {
   async goto(url) {
     return this.page.goto(url);
   }
+
 }
 
 async function reConsentCheck(page) {
@@ -80,7 +81,7 @@ async function reConsentCheck(page) {
   }
   let id = 1;
   const tab = new Tab(page, url, frames);
-  await Promise.all((await page.frames()).map(async (frame) => {
+  const addFrame = async (frame) => {
     const f = {
       id: ++id,
       url: await frame.url(),
@@ -95,8 +96,11 @@ async function reConsentCheck(page) {
         id: f.id,
       };
     }
-  }));
-  // console.log('checking', url);
+  }
+  await Promise.all((await page.frames()).map(addFrame));
+  page.on('frameattached', addFrame);
+  page.on('framenavigated', addFrame);
+
   const rule = await detectDialog(tab, 5);
   return {
     url,
