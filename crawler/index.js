@@ -17,6 +17,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
     concurrency: Cluster.CONCURRENCY_PAGE,
     maxConcurrency: 4,
     retryLimit: 2,
+    puppeteerOptions: { args: ['--no-sandbox'] },
   });
 
   async function discoverUrl(page, domain) {
