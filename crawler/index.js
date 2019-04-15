@@ -62,6 +62,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
         try {
           await reconsent.runOptOut();
         } catch (e) {
+          console.error(e);
           result.reconsentFailure = e.toString();
         }
       } else if (reconsentHidden) {

@@ -31,15 +31,30 @@ class Tab {
   }
 
   async clickElement(selector, frameId = 0) {
-    if (await this.elementExists(selector)) {
-      return this.frames[frameId].click(selector);
+    if (await this.elementExists(selector, frameId)) {
+      try {
+        return await this.frames[frameId].click(selector);
+      } catch (e) {
+        return false;
+      }
     }
     return false;
   }
 
-  async clickElements(selector, frameId = 0) {}
+  async clickElements(selector, frameId = 0) {
+    const elements = await this.frames[frameId].$$(selector);
+    try {
+      await Promise.all(elements.map(elem => elem.click()));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   async elementsAreVisible(selector, check, frameId = 0) {
+    if (!await this.elementExists(selector, frameId)) {
+      return false;
+    }
     const visible = await this.frames[frameId].$$eval(selector, nodes => nodes.map(n => n.offestParent !== null));
     if (visible.length === 0) {
       return false;
