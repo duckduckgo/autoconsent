@@ -26,7 +26,7 @@ node('docker && eu-central-1') {
         }
 
         stage('Run crawl') {
-            sh 'cat sites.txt | node crawler/index.js | tee results.jl'
+            sh 'cat sites.txt | DISABLE_SANDBOX=true node crawler/index.js | tee results.jl'
         }
 
         stage('Build results') {

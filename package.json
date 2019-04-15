@@ -11,7 +11,7 @@
     "bundle": "rollup -c && node build-css.js > dist/autoconsent.css",
     "start": "node crawler/index.js",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
-    "fetch-site-list": "curl https://cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt"
+    "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",

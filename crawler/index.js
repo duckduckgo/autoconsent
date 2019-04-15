@@ -1,3 +1,4 @@
+const process = require('process');
 const { Cluster } = require('puppeteer-cluster');
 const readline = require('readline');
 const { once } = require('events');
@@ -17,7 +18,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
     concurrency: Cluster.CONCURRENCY_PAGE,
     maxConcurrency: 4,
     retryLimit: 2,
-    puppeteerOptions: { args: ['--no-sandbox'] },
+    puppeteerOptions: process.env.DISABLE_SANDBOX ? { args: ['--no-sandbox'] } : {},
   });
 
   async function discoverUrl(page, domain) {
@@ -70,16 +71,11 @@ fs.mkdirSync(screenshotDir, { recursive: true });
         await page.evaluate(hideElementsScript(reconsentHidden));
       }
       if (reconsent.rule || reconsentHidden.length > 0) {
-        await new Promise((res) => setTimeout(res, 5000));
-        await page.screenshot({
-          path: `${screenshotDir}/${site}_reconsent.png`,
-        });
-      } else if (fanboyHidden.length > 0) {
-        await page.evaluate(hideElementsScript(fanboyHidden));
-        await page.screenshot({
-          path: `${screenshotDir}/${site}_fanboy.png`,
-        });
+        await new Promise((res) => setTimeout(res, 10000));
       }
+      await page.screenshot({
+        path: `${screenshotDir}/${site}_reconsent.png`,
+      });
 
       result.postUrl = await page.url();
       console.log(JSON.stringify(result));
