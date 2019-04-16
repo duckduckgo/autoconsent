@@ -62,7 +62,10 @@ fs.mkdirSync(screenshotDir, { recursive: true });
       });
       if (reconsent.rule) {
         try {
-          await reconsent.runOptOut();
+          result.reconsentCMPShown = await reconsent.isShown();
+          if (result.reconsentCMPShown) {
+            await reconsent.runOptOut();
+          }
         } catch (e) {
           console.error(e);
           result.reconsentFailure = e.toString();

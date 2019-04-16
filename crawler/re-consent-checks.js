@@ -45,6 +45,7 @@ async function reConsentCheck(page) {
   return {
     url,
     rule: rule ? rule.name : null,
+    isShown: () => rule.detectPopup(tab),
     runOptOut: () => rule.optOut(tab),
   }
 }
