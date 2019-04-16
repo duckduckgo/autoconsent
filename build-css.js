@@ -1,4 +1,2 @@
-const { getCosmeticsForSite } = require('./');
-
-const rules = getCosmeticsForSite();
-console.log(`${rules.join(',')} { display: none !important; }`);
+const { STATIC_COSMETICS } = require('./');
+console.log(`${STATIC_COSMETICS.join(',')} { display: none !important; }`);
