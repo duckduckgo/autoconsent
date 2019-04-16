@@ -4,15 +4,15 @@
     <table>
       <thead>
         <tr>
-          <th>Site</th>
+          <th width="50px">Site</th>
           <th>Before</th>
           <th>After</th>
-          <th>Errors</th>
-          <th>Hidden</th>
+          <th width="50px">Errors</th>
+          <th width="50px">Hidden</th>
         </tr>
       </thead>
       <tbody>
-        <% results.forEach(({ site, url, postUrl, reconsentFailure, reconsentHidden }) => { %>
+        <% results.forEach(({ site, url, postUrl, reconsentFailure, reconsentHidden, fanboyHidden }) => { %>
           <tr>
             <td>
               <%= site %><br/>
@@ -22,7 +22,9 @@
             <td><img src="./screenshots/<%= site %>_before.png" width=400></img></td>
             <td><img src="./screenshots/<%= site %>_reconsent.png" width=400></img></td>
             <td><%= reconsentFailure %></td>
-            <td><%= reconsentHidden %></td>
+            <td><%= reconsentHidden %><br />
+                <%= `Suggested: ${fanboyHidden}` %>
+            </td>
           </tr>
         <% }) %>
       </tbody>
