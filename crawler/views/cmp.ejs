@@ -12,8 +12,8 @@
         </tr>
       </thead>
       <tbody>
-        <% results.forEach(({ site, url, postUrl, reconsentFailure, reconsentHidden, fanboyHidden }) => { %>
-          <tr>
+        <% results.forEach(({ site, url, postUrl, reconsentFailure, reconsentHidden, fanboyHidden, reconsentCMPShown }) => { %>
+          <tr class="<%= !reconsentCMPShown ? 'nopopup' : '' %>">
             <td>
               <%= site %><br/>
               <a href="<%= url %>" target="_blank" noreferrer><%= url %></a><br />
