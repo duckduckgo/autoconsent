@@ -8,7 +8,6 @@
     "lib": "lib"
   },
   "scripts": {
-    "postinstall": "cp -r node_modules/lit-html ./test",
     "bundle": "rollup -c && node build-css.js > dist/autoconsent.css",
     "start": "node crawler/index.js",
     "test": "web-ext run --source-dir ./ --firefox firefoxdeveloperedition --url about:debugging",

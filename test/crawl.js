@@ -1,4 +1,4 @@
-import { html, render } from './lit-html/lit-html.js';
+import { html, render } from '../node_modules/lit-html/lit-html.js';
 import sitesToTest from './test-sites.js';
 
 // const testCases = sitesToTest.reduce((cases, url) => ({
