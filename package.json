@@ -8,8 +8,10 @@
     "lib": "lib"
   },
   "scripts": {
+    "postinstall": "cp -r node_modules/lit-html ./test",
     "bundle": "rollup -c && node build-css.js > dist/autoconsent.css",
     "start": "node crawler/index.js",
+    "test": "web-ext run --source-dir ./ --firefox firefoxdeveloperedition --url about:debugging",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt"
   },
@@ -22,8 +24,12 @@
   "devDependencies": {
     "bulma": "^0.7.4",
     "ejs": "^2.6.1",
+    "lit-html": "^1.0.0",
     "puppeteer": "^1.14.0",
     "puppeteer-cluster": "^0.15.2",
-    "rollup": "^1.10.0"
+    "rollup": "^1.10.0",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "web-ext": "^3.0.0"
   }
 }

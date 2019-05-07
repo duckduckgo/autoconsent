@@ -11,7 +11,7 @@ const checkRules = require('./css-check');
 const fanboyRules = require('./fanboy');
 
 const screenshotDir = '_site/screenshots';
-fs.mkdirSync(screenshotDir, { recursive: true });
+// fs.mkdirSync(screenshotDir, { recursive: true });
 
 (async () => {
   const cluster = await Cluster.launch({
@@ -65,6 +65,10 @@ fs.mkdirSync(screenshotDir, { recursive: true });
           result.reconsentCMPShown = await reconsent.isShown();
           if (result.reconsentCMPShown) {
             await reconsent.runOptOut();
+            if (reconsent.testable) {
+              await new Promise((res) => setTimeout(res, 5000));
+              result.reconsentTest = await reconsent.test();
+            }
           }
         } catch (e) {
           console.error(e);
