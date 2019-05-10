@@ -90,6 +90,5 @@ export default {
   'Others': [
     'https://www.adobe.com/de/',
     'https://www.economist.com/',
-    'https://www.reddit.com/',
   ]
 };
