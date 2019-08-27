@@ -1,6 +1,4 @@
-import AutoConsent, {
-  getCosmeticsForSite,
-} from '../lib/web';
+import AutoConsent from '../lib/web';
 
 async function checkRules(rules, tab) {
   const matches = [];
@@ -28,7 +26,7 @@ async function test(url) {
     })).id;
   await waitForTabLoaded(tabId);
   const tab = await consent.checkTab(tabId);
-  const reconsentHidden = await checkRules(await getCosmeticsForSite(tab.url.hostname), tab.tab);
+  const reconsentHidden = await checkRules([], tab.tab);
 
   const result = {
     site: url,

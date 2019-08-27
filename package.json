@@ -8,7 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "bundle": "rollup -c && node build-css.js > dist/autoconsent.css",
+    "bundle": "rollup -c",
     "start": "node crawler/index.js",
     "test": "web-ext run --source-dir ./ --firefox firefoxdeveloperedition --url about:debugging",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
