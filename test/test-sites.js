@@ -42,8 +42,6 @@ export default {
     'https://www.anandtech.com/',
     'https://www.jeux.fr/',
     'https://myanimelist.net/',
-    'https://www.nexusmods.com/',
-    'https://www.over-blog.com/',
   ],
   'CookieBot': [
     'https://www.ab-in-den-urlaub.de/',
@@ -60,13 +58,13 @@ export default {
     'https://actu.fr/',
     'https://www.allmusic.com/',
     'https://www.buzzfeed.com/de',
-    'https://www.futura-sciences.com/',
     'https://www.geny.com/',
     'https://imgur.com',
     'https://www.independent.co.uk/',
     'https://www.macrumors.com/',
     'https://www.politico.com/',
     'https://sourceforge.net/',
+    'https://www.nexusmods.com/',
   ],
   'Oath': [
     'https://aol.com',
@@ -76,9 +74,6 @@ export default {
   'TrustArc': [
     'https://www.audible.de',
     'https://www.zoom.us',
-  ],
-  'Conversant': [
-    'https://www.drudgereport.com',
   ],
   'Ebay': [
     'https://www.ebay.de',
@@ -93,5 +88,8 @@ export default {
   'Wikia': [
     'https://www.curseforge.com/',
     'https://www.fandom.com/'
+  ],
+  'Sirdata': [
+    'https://www.futura-sciences.com/',
   ]
 };
