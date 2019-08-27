@@ -40,7 +40,6 @@ export default {
   'app_gdpr': [
     'https://9gag.com',
     'https://www.anandtech.com/',
-    'https://www.curseforge.com/',
     'https://www.jeux.fr/',
     'https://myanimelist.net/',
     'https://www.nexusmods.com/',
@@ -90,5 +89,9 @@ export default {
   'Others': [
     'https://www.adobe.com/de/',
     'https://www.economist.com/',
+  ],
+  'Wikia': [
+    'https://www.curseforge.com/',
+    'https://www.fandom.com/'
   ]
 };
