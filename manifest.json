@@ -11,10 +11,14 @@
     {
       "matches": ["<all_urls>"],
       "js": ["test/content.bundle.js"],
-      "css": ["./dist/autoconsent.css"],
       "all_frames": true
     }
   ],
+  "sidebar_action": {
+    "default_title": "Autoconsent",
+    "default_panel": "test/sidebar.html",
+    "open_at_install": true
+  },
   "permissions": [
     "<all_urls>",
     "cookies",

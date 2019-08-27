@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Autoconsent testing</title>
+
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
+    <style>
+        td {
+            border: solid 1px;
+            padding: 4px;
+            max-width: 300px;
+        }
+
+        .failed>td {
+            border-color: red;
+            border-width: 2px;
+        }
+    </style>
+    <script src="./sidebar.js" type="module"></script>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <p id="url">Site</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>CMP</td>
+                        <td id="cmp"></td>
+                    </tr>
+                    <tr>
+                        <td>Popup Shown</td>
+                        <td id="popup_shown"></td>
+                    </tr>
+                    <tr>
+                        <td>Run opt out</td>
+                        <td id="optout"></td>
+                    </tr>
+                    <tr>
+                        <td>Opt out test</td>
+                        <td id="optout_test"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="button">Run Test</button>
+        </div>
+    </section>
+</body>

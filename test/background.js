@@ -65,6 +65,7 @@ browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 });
 
 window.test = test;
+window.checkTab = consent.checkTab.bind(consent);
 
 browser.tabs.create({
   url: browser.runtime.getURL('test/crawl.html'),
