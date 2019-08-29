@@ -1,17 +1,23 @@
 const process = require('process');
 const { Cluster } = require('puppeteer-cluster');
 const readline = require('readline');
-const { once } = require('events');
 const fs = require('fs');
 const devices = require('puppeteer/DeviceDescriptors');
 
-const { getCosmeticsForSite } = require('../');
+const cosmeticRules = require('../cosmetics/rules');
 const reConsentCheck = require('./re-consent-checks');
 const checkRules = require('./css-check');
 const fanboyRules = require('./fanboy');
 
+function getCosmeticsForSite(site) {
+  return [
+    ...cosmeticRules.site[site] || [],
+    ...cosmeticRules.static,
+  ];
+}
+
 const screenshotDir = '_site/screenshots';
-// fs.mkdirSync(screenshotDir, { recursive: true });
+fs.mkdirSync(screenshotDir, { recursive: true });
 
 (async () => {
   const cluster = await Cluster.launch({
@@ -102,7 +108,9 @@ const screenshotDir = '_site/screenshots';
     cluster.queue(line.trim());
   });
 
-  await once(lineReader, 'close');
+  await new Promise((resolve) => {
+    lineReader.once('close', resolve);
+  });
 
   await cluster.idle();
   await cluster.close();
