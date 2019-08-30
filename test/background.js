@@ -18,7 +18,6 @@ function waitForTabLoaded(id) {
   });
 }
 window.consent = new AutoConsent();
-window.consent.init(browser);
 
 async function test(url) {
   const tabId = (await browser.tabs.create({
@@ -60,6 +59,10 @@ browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
   if (changeInfo.status === 'complete' && tabLoaded[tabId]) {
     tabLoaded[tabId]();
   }
+});
+
+chrome.webNavigation.onDOMContentLoaded.addListener(window.consent.onFrame.bind(window.consent), {
+  url: [{ schemes: ['http', 'https'] }]
 });
 
 window.test = test;
