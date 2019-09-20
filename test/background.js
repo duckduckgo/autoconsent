@@ -1,4 +1,5 @@
 import AutoConsent from '../lib/web';
+import cosmetics from '../cosmetics/rules';
 
 async function checkRules(rules, tab) {
   const matches = [];
@@ -65,8 +66,13 @@ chrome.webNavigation.onDOMContentLoaded.addListener(window.consent.onFrame.bind(
   url: [{ schemes: ['http', 'https'] }]
 });
 
+fetch('./fanboy-cookiemonster.txt').then(res => res.text()).then((lines) => {
+  window.fanboyCosmetics = lines.split('\n').filter(l => l.startsWith('##')).map(l => l.slice(2));
+});
+
 window.test = test;
 window.checkTab = consent.checkTab.bind(consent);
+window.cosmeticRules = cosmetics;
 
 browser.tabs.create({
   url: browser.runtime.getURL('test/crawl.html'),

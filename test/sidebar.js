@@ -21,11 +21,25 @@ async function checkCurrentTab() {
     document.getElementById('popup_shown').innerText = 'checking...';
     document.getElementById('optout').innerText = '';
     document.getElementById('optout_test').innerText = '';
-    const { checkTab } = await browser.runtime.getBackgroundPage();
+    const { checkTab, cosmeticRules } = await browser.runtime.getBackgroundPage();
     const tab = tabs.has(tabId) && tabs.get(tabId).url === url
       ? tabs.get(tabId) : await checkTab(tabId);
     tabs.set(tabId, tab);
     console.log('xxx', tab);
+
+    // async cosmetics check
+    await tab.applyCosmetics(cosmeticRules.static).then((cosmetics) => {
+      if (cosmetics.length > 0) {
+        document.getElementById('cosmetics').innerText = cosmetics.join(', ');
+      } else {
+        document.getElementById('cosmetics').innerText = 'none';
+        document.getElementById('cosmetics2').innerHTML = '<a href="#">check</a>';
+        document.getElementById('cosmetics2').addEventListener('click', () => {
+          checkFanboyCosmetics(tab);
+        });
+      }
+    });
+
     document.getElementById('cmp').innerText = tab.rule ? tab.getCMPName() : 'None';
     if (tab.getCMPName() === null) {
       document.getElementById('popup_shown').innerText = 'N/A';
@@ -46,6 +60,16 @@ async function checkCurrentTab() {
       const reconsentTest = await tab.testOptOutWorked() || false;
       document.getElementById('optout_test').innerText = reconsentTest ? 'PASS' : 'FAIL';
     }
+  }
+}
+
+async function checkFanboyCosmetics(tab) {
+  const { fanboyCosmetics } = await browser.runtime.getBackgroundPage();
+  const cosmetics = await tab.applyCosmetics(fanboyCosmetics);
+  if (cosmetics.length > 0) {
+    document.getElementById('cosmetics2').innerText = cosmetics.join(', ');
+  } else {
+    document.getElementById('cosmetics2').innerText = 'none';
   }
 }
 

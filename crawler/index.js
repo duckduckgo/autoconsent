@@ -29,6 +29,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
 
   async function discoverUrl(page, domain) {
     const candidates = [
+      domain,
       `https://www.${domain}`,
       `https://${domain}`,
       `http://www.${domain}`,
@@ -64,7 +65,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
       }
 
       await page.screenshot({
-        path: `${screenshotDir}/${site}_before.png`,
+        path: `${screenshotDir}/${site.replace('/', '_')}_before.png`,
       });
       if (reconsent.rule) {
         try {
