@@ -103,5 +103,9 @@ export default {
   ],
   'Entrepreneur.com': [
     'https://www.entrepreneur.com/',
-  ]
+  ],
+  'admiral': [
+    'https://getadmiral.com/',
+    'https://bigthink.com/',
+  ],
 };
