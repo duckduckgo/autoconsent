@@ -100,5 +100,8 @@ export default {
   ],
   'w18lara': [
     'https://www.xxxlutz.de/',
+  ],
+  'Entrepreneur.com': [
+    'https://www.entrepreneur.com/',
   ]
 };
