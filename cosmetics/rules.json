@@ -2,6 +2,7 @@
   "static": [
     "#disclaimer-cookies",
     ".cc-banner",
+    ".cc_banner",
     "#js-gdpr-consent-banner",
     "#_evidon-barrier-wrapper",
     "#_evidon_banner",
@@ -34,7 +35,13 @@
     ".cookie-info-modal",
     "#cookie-info-layer",
     ".module-cookie-layer",
-    "#cookie-law-info-bar"
+    "#cookie-law-info-bar",
+    "#cookie-modal",
+    "#element_cookie_banner",
+    ".cmsCookieNotification",
+    ".cookieBar:not(body)",
+    "#cookie-hint",
+    ".expanded.gdpr"
   ],
   "site": {
     "medium.com": [
