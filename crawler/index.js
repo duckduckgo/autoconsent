@@ -64,8 +64,9 @@ fs.mkdirSync(screenshotDir, { recursive: true });
         fanboyHidden,
       }
 
+      const screenshotBasePath = `${screenshotDir}/${site.replace('https://', '').replace(/\//g, '_')}`;
       await page.screenshot({
-        path: `${screenshotDir}/${site.replace('/', '_')}_before.png`,
+        path: `${screenshotBasePath}_before.png`,
       });
       if (reconsent.rule) {
         try {
@@ -88,7 +89,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
         await new Promise((res) => setTimeout(res, 10000));
       }
       await page.screenshot({
-        path: `${screenshotDir}/${site}_reconsent.png`,
+        path: `${screenshotBasePath}_reconsent.png`,
       });
 
       result.postUrl = await page.url();
