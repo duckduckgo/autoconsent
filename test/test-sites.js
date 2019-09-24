@@ -11,6 +11,7 @@ export default {
     'https://www.wetter.de/',
     'https://www.ubisoft.com/en-gb/',
     'https://www.01net.com/',
+    'https://www.sport.fr',
   ],
   'Didomi': [
     'https://www.thetradedesk.com/',
@@ -78,8 +79,11 @@ export default {
   'Ebay': [
     'https://www.ebay.de',
   ],
-  'TechRadar': [
+  'Future': [
     'https://www.techradar.com/',
+    'https://www.cyclingnews.com/',
+    'https://www.livescience.com',
+    'https://www.gamesradar.com',
   ],
   'Others': [
     'https://www.adobe.com/de/',
@@ -91,5 +95,7 @@ export default {
   ],
   'Sirdata': [
     'https://www.futura-sciences.com/',
+    'https://www.abcbourse.com/',
+    'https://www.journaldugeek.com/',
   ]
 };
