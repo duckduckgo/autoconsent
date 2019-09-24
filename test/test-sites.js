@@ -97,5 +97,8 @@ export default {
     'https://www.futura-sciences.com/',
     'https://www.abcbourse.com/',
     'https://www.journaldugeek.com/',
+  ],
+  'w18lara': [
+    'https://www.xxxlutz.de/',
   ]
 };
