@@ -31,6 +31,7 @@ node('docker && eu-central-1') {
 
         stage('Build results') {
             sh 'cat results.jl | node crawler/report.js'
+            sh 'cat results.jl | node crawler/summary.js'
             sh 'mv results.jl _site/'
         }
     }
