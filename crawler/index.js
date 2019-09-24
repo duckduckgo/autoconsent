@@ -56,15 +56,16 @@ fs.mkdirSync(screenshotDir, { recursive: true });
       const reconsentHidden = await checkRules(await getCosmeticsForSite(site), page);
       const fanboyHidden = await checkRules(await fanboyRules(), page);
 
+      const screenshotBasePath = `${screenshotDir}/${site.replace('https://', '').replace(/\//g, '_')}`;
       const result = {
         site,
         url: reconsent.url,
         reconsent: reconsent.rule,
         reconsentHidden,
         fanboyHidden,
+        screenshotBasePath
       }
 
-      const screenshotBasePath = `${screenshotDir}/${site.replace('https://', '').replace(/\//g, '_')}`;
       await page.screenshot({
         path: `${screenshotBasePath}_before.png`,
       });
