@@ -10,7 +10,7 @@
   "scripts": {
     "bundle": "rollup -c",
     "start": "node crawler/index.js",
-    "test": "web-ext run --source-dir ./ --firefox firefoxdeveloperedition --url about:debugging",
+    "test": "web-ext run --source-dir ./ --firefox firefoxdeveloperedition --url about:debugging --no-reload",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt"
   },
