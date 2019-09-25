@@ -5,7 +5,7 @@ browser.tabs.onActivated.addListener(() => {
   checkCurrentTab();
 });
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
-  if (changeInfo.status === 'complete') {
+  if (changeInfo.status === 'complete' && tabInfo.active) {
     checkCurrentTab();
   }
 });
@@ -72,5 +72,7 @@ async function checkFanboyCosmetics(tab) {
     document.getElementById('cosmetics2').innerText = 'none';
   }
 }
+
+document.getElementById('run').addEventListener('click', checkCurrentTab);
 
 checkCurrentTab();
