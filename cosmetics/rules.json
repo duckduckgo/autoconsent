@@ -47,6 +47,12 @@
     "medium.com": [
       "div > .branch-journeys-top",
       "body > div:not(#root) > div[aria-modal=\"true\"]"
+    ],
+    "focus.de": [
+      "div[class^=\"sp_message\"]"
+    ],
+    "chip.de": [
+      "div[class^=\"sp_message\"]"
     ]
   }
 }
