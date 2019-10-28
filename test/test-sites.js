@@ -108,4 +108,7 @@ export default {
     'https://getadmiral.com/',
     'https://bigthink.com/',
   ],
+  'termly': [
+    'https://termly.io/en/',
+  ]
 };
