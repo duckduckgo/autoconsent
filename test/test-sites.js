@@ -110,5 +110,9 @@ export default {
   ],
   'termly': [
     'https://termly.io/en/',
+  ],
+  'civic': [
+    'https://impact.com/ad-fraud-detection/',
+    'https://www.civicuk.com/',
   ]
 };
