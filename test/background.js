@@ -18,14 +18,16 @@ function waitForTabLoaded(id) {
     tabLoaded[id] = resolve;
   });
 }
-window.consent = new AutoConsent();
+window.consent = new AutoConsent(browser.tabs.sendMessage);
 
 async function test(url) {
+  window.testRunning = true;
   const tabId = (await browser.tabs.create({
       url,
     })).id;
   await waitForTabLoaded(tabId);
   const tab = await consent.checkTab(tabId);
+  await tab.checked;
   const reconsentHidden = await checkRules([], tab.tab);
 
   const result = {
@@ -53,6 +55,7 @@ async function test(url) {
   await new Promise((res) => setTimeout(res, 500));
   result.screenshot = await browser.tabs.captureTab(tabId);
   await browser.tabs.remove(tabId);
+  window.testRunning = false;
   return result;
 }
 

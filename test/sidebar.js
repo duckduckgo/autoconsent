@@ -13,7 +13,11 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
 async function checkCurrentTab() {
   const window = await browser.windows.getCurrent({populate: true});
   const activeTab = window.tabs.find(t => t.active);
-  if (activeTab && activeTab.id) {
+  if (activeTab && activeTab.id && !window.testRunning) {
+    const { checkTab, cosmeticRules, testRunning } = await browser.runtime.getBackgroundPage();
+    if (testRunning) {
+      return;
+    }
     const tabId = activeTab.id;
     const url = activeTab.url;
     document.getElementById('url').innerText = url;
@@ -21,11 +25,11 @@ async function checkCurrentTab() {
     document.getElementById('popup_shown').innerText = 'checking...';
     document.getElementById('optout').innerText = '';
     document.getElementById('optout_test').innerText = '';
-    const { checkTab, cosmeticRules } = await browser.runtime.getBackgroundPage();
     const tab = tabs.has(tabId) && tabs.get(tabId).url === url
       ? tabs.get(tabId) : await checkTab(tabId);
     tabs.set(tabId, tab);
     console.log('xxx', tab);
+    await tab.checked;
 
     // async cosmetics check
     await tab.applyCosmetics(cosmeticRules.static).then((cosmetics) => {
