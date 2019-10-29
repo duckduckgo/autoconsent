@@ -5,8 +5,7 @@ can be run in a Firefox webextension, or in a puppeteer orchestrated headless br
 these rules, opt-in and opt-out options can be selected automatically, without requiring
 user-input.
 
-This library is primarily used by the [re:consent](https://github.com/cliqz-oss/re-consent)
-browser extension in order to automate user-consent, and make a cleaner browsing experience.
+This library is primarily used by the [cliqz browser](https://cliqz.com) in order to automate user-consent, and make a cleaner browsing experience.
 
 ### License
 
