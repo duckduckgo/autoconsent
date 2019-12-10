@@ -114,5 +114,10 @@ export default {
   'civic': [
     'https://impact.com/ad-fraud-detection/',
     'https://www.civicuk.com/',
+    'https://www.birdguides.com/'
+  ],
+  'Sourcepoint': [
+    'https://www.brianmadden.com/',
+    'https://www.channelpro.co.uk/news',
   ]
 };
