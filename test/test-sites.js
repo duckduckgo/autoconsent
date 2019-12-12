@@ -126,5 +126,10 @@ export default {
   ],
   'Cevent': [
     'https://www.cvent.com/',
+  ],
+  'InternetBrands': [
+    'https://www.bbonline.com/',
+    'https://www.internetbrands.com/',
+    'https://www.vbulletin.com/',
   ]
 };
