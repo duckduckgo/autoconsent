@@ -123,5 +123,8 @@ export default {
   ],
   'Clarip': [
     'https://www.constantcontact.com/',
+  ],
+  'Cevent': [
+    'https://www.cvent.com/',
   ]
 };
