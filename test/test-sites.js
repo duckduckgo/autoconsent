@@ -131,5 +131,8 @@ export default {
     'https://www.bbonline.com/',
     'https://www.internetbrands.com/',
     'https://www.vbulletin.com/',
+  ],
+  'Drupal': [
+    'https://www.drupal.org/',
   ]
 };
