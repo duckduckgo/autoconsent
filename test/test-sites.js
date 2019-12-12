@@ -119,5 +119,8 @@ export default {
   'Sourcepoint': [
     'https://www.brianmadden.com/',
     'https://www.channelpro.co.uk/news',
+  ],
+  'Clarip': [
+    'https://www.constantcontact.com/',
   ]
 };
