@@ -114,5 +114,25 @@ export default {
   'civic': [
     'https://impact.com/ad-fraud-detection/',
     'https://www.civicuk.com/',
+    'https://www.birdguides.com/'
+  ],
+  'Sourcepoint': [
+    'https://www.brianmadden.com/',
+    'https://www.channelpro.co.uk/news',
+    'https://www.csoonline.com/blogs',
+  ],
+  'Clarip': [
+    'https://www.constantcontact.com/',
+  ],
+  'Cevent': [
+    'https://www.cvent.com/',
+  ],
+  'InternetBrands': [
+    'https://www.bbonline.com/',
+    'https://www.internetbrands.com/',
+    'https://www.vbulletin.com/',
+  ],
+  'Drupal': [
+    'https://www.drupal.org/',
   ]
 };
