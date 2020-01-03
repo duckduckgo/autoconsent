@@ -1,4 +1,4 @@
-const { rules, Tab } = require('../');
+const { rules, Tab } = require('../dist/autoconsent.puppet');
 
 async function detectDialog(tab, retries) {
   const detect = await Promise.all(rules.map(r => r.detectCmp(tab)));

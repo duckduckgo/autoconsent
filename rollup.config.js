@@ -6,7 +6,7 @@ import pkg from './package.json';
 export default [{
   input: './lib/node.js',
   output: [{
-    file: pkg.main,
+    file: 'dist/autoconsent.puppet.js',
     format: 'cjs'
   }],
 }, {
@@ -15,6 +15,9 @@ export default [{
     file: pkg.module,
     format: 'es',
     globals: ['browser'],
+  }, {
+    file: pkg.main,
+    format: 'cjs',
   }],
 }, {
   input: './test/background.js',
