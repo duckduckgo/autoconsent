@@ -1,0 +1,40 @@
+{
+  "name": "Wikia",
+  "detectCmp": [{ "exists": "div[data-tracking-opt-in-overlay=\"true\"]" }],
+  "detectPopup": [
+    {
+      "exists": "button[data-tracking-opt-in-learn-more=\"true\"],div[data-tracking-opt-in-learn-more=\"true\"]"
+    }
+  ],
+  "optIn": [
+    {
+      "click": "button[data-tracking-opt-in-learn-more=\"true\"],div[data-tracking-opt-in-learn-more=\"true\"]"
+    },
+    {
+      "click": "button[data-tracking-opt-in-save=\"true\"],div[data-tracking-opt-in-save=\"true\"]"
+    }
+  ],
+  "optOut": [
+    {
+      "click": "button[data-tracking-opt-in-learn-more=\"true\"],div[data-tracking-opt-in-learn-more=\"true\"]"
+    },
+    { "waitFor": "input[id^=\"switch_\"]", "wait": 500 },
+    { "click": "input[id^=\"switch_\"]:checked" },
+    { "click": "input[id^=\"switch_\"]:checked" },
+    { "click": "input[id^=\"switch_\"]:checked" },
+    { "click": "input[id^=\"switch_\"]:checked" },
+    { "click": "input[id^=\"switch_\"]:checked" },
+    {
+      "click": "button[data-tracking-opt-in-save=\"true\"],div[data-tracking-opt-in-save=\"true\"]"
+    }
+  ],
+  "test": [
+    {
+      "eval": "__cmp('getVendorConsents', undefined, r => window.__rcsResult = r) || true"
+    },
+    { "wait": 500 },
+    {
+      "eval": "Object.values(window.__rcsResult.purposeConsents).every(c => !c)"
+    }
+  ]
+}

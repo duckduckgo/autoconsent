@@ -1,0 +1,25 @@
+{
+  "name": "Sourcepoint",
+  "detectCmp": [{ "visible": "div[id^='sp_message_panel_'" }],
+  "detectPopup": [{ "visible": "div[id^='sp_message_panel_'" }],
+  "frame": "https://pm.sourcepoint.mgr.consensu.org",
+  "optOut": [
+    {
+      "eval": "cipheredClassname = _sp_.msg.getMorphedClassname('sp_choice_type_12');var el = document.getElementsByClassname(cipheredClassname)[0];el.click();",
+      "optional": true
+    },
+    {
+      "click": ".switch-bg.on:not(#strictly-necessary-cookies)",
+      "all": true,
+      "frame": true,
+      "optional": true,
+      "wait": 1000
+    },
+    { "click": "#tab-saveandexit", "frame": true }
+  ],
+  "optIn": [
+    { "click": "span[class^='sp_pm_link']" },
+    { "click": ".switch-bg:not(.on)", "all": true, "frame": true },
+    { "click": "#tab-saveandexit", "frame": true }
+  ]
+}

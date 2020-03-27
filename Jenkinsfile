@@ -1,42 +1,50 @@
+properties([
+    parameters([
+        choice(name: 'CHANNEL', defaultValue: 'staging', choices: 'staging\nproduction')
+    ]),
+])
 
-node('docker && eu-central-1') {
+node('docker && !gpu') {
 
     def img
+    def commitHash
 
     stage('Checkout') {
         checkout scm
+        commitHash = sh(returnStdout: true, script: 'git log --pretty=format:\'%h\' -n 1').trim()
+        currentBuild.description = "${commitHash}-${params.CHANNEL}"
     }
 
     stage('Build Docker Image') {
-        img = docker.build('autoconsent/crawler')
+        img = docker.build('autoconsent/build')
     }
 
     img.inside() {
 
-        stage('Fetch dependencies') {
-            sh 'npm run fetch-fanboy-list'
-            sh 'npm run fetch-site-list'
-        }
-
-        stage('Build Library') {
-            sh 'cp -R /app/node_modules ./'
-            sh 'mkdir -p _site'
-            sh 'cp node_modules/bulma/css/bulma.min.css _site/'
+        stage('Build') {
+            sh 'cp -r /app/node_modules ./'
             sh 'npm run bundle'
         }
 
-        stage('Run crawl') {
-            sh 'cat sites.txt | DISABLE_SANDBOX=true node crawler/index.js | tee results.jl'
-        }
-
-        stage('Build results') {
-            sh 'cat results.jl | node crawler/report.js'
-            sh 'cat results.jl | node crawler/summary.js'
-            sh 'mv results.jl _site/'
+        stage('Build rules') {
+            sh 'node rules/build.js'
+            sh 'rm -f rules/rules.min.*'
+            sh "jq -c '. + { version: \"${commitHash}\" }' rules/rules.json > rules/rules.min.json"
+            sh 'brotli --input rules/rules.min.json --output rules/rules.min.json.br'
+            sh "gzip -9 rules/rules.min.json"
         }
     }
 
-    stage('Upload results') {
-        sh 'aws s3 sync ./_site/ s3://internal.clyqz.com/docs/reconsent/'
+    if (env.BRANCH_NAME == 'master') {
+        stage('Publish') {
+            sh "aws s3 cp rules/rules.min.json.br s3://cdn.cliqz.com/autoconsent/rules/${commitHash}.json.br --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --content-encoding br --content-type application/json --cache-control \"immutable\""
+            sh "aws s3 cp rules/rules.min.json.gz s3://cdn.cliqz.com/autoconsent/rules/${commitHash}.json.gz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --content-encoding gzip --content-type application/json --cache-control \"immutable\""
+            sh "echo '{\"ruleVersion\":\"${commitHash}\",\"disabled\":[]}' > config.json"
+            def fileName = 'config.json'
+            if (params.CHANNEL == 'staging') {
+                fileName = 'staging-config.json'
+            }
+            sh "aws s3 cp config.json s3://cdn.cliqz.com/autoconsent/${fileName} --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --content-type application/json --cache-control \"max-age=3600\""
+        }
     }
 }

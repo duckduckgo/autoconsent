@@ -1,11 +1,12 @@
 import AutoConsentBase from './base';
+import { TabActor } from '../types';
 
 export default class Cookiebot extends AutoConsentBase {
   constructor() {
     super('Cybotcookiebot');
   }
 
-  async detectCmp(tab) {
+  async detectCmp(tab: TabActor) {
     try {
       return await tab.eval('typeof window.CookieConsent === "object"');
     } catch (e) {
@@ -13,11 +14,11 @@ export default class Cookiebot extends AutoConsentBase {
     }
   }
 
-  detectPopup(tab) {
+  detectPopup(tab: TabActor) {
     return tab.elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner');
   }
 
-  async optOut(tab) {
+  async optOut(tab: TabActor) {
     if (await tab.elementExists('#dtcookie-container')) {
       return tab.clickElement('.h-dtcookie-decline');
     }
@@ -36,7 +37,7 @@ export default class Cookiebot extends AutoConsentBase {
     return true;
   }
 
-  async optIn(tab) {
+  async optIn(tab: TabActor) {
     if (await tab.elementExists('#dtcookie-container')) {
       return tab.clickElement('.h-dtcookie-accept');
     }
@@ -46,12 +47,12 @@ export default class Cookiebot extends AutoConsentBase {
     return true;
   }
 
-  async openCmp(tab) {
+  async openCmp(tab: TabActor) {
     await tab.eval('CookieConsent.renew() || true');
     return tab.waitForElement('#CybotCookiebotDialog', 10000);
   }
 
-  async test(tab) {
+  async test(tab: TabActor) {
     return tab.eval('CookieConsent.declined === true');
   }
 }

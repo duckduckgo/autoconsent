@@ -1,6 +1,9 @@
 import Tab from './web/tab';
 import handleContentMessage from './web/content';
-import { rules } from './index';
+import { rules, createAutoCMP } from './index';
+import { Browser, MessageSender, AutoCMP, TabActor } from './types';
+import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
+import { AutoConsentCMPRule } from './rules';
 
 export * from './index';
 export {
@@ -8,24 +11,11 @@ export {
   handleContentMessage,
 }
 
-async function detectDialog(tab, retries) {
-  const detect = await Promise.all(rules.map(r => r.detectCmp(tab)));
-  const found = detect.findIndex(r => r);
-  if (found === -1 && retries > 0) {
-    return new Promise((resolve) => {
-      setTimeout(async () => {
-        const result = detectDialog(tab, retries - 1);
-        resolve(result);
-      }, 1000);
-    });
-  }
-  return found > -1 ? rules[found] : null;
-}
-
 class TabConsent {
-  constructor(tab, url, ruleCheckPromise) {
-    this.tab = tab;
-    this.url = url;
+  checked: Promise<AutoCMP>
+  rule: AutoCMP
+
+  constructor(public tab: TabActor, public url: URL, ruleCheckPromise: Promise<AutoCMP>) {
     this.checked = ruleCheckPromise;
     ruleCheckPromise.then(rule => this.rule = rule);
   }
@@ -52,7 +42,7 @@ class TabConsent {
   }
 
   hasTest() {
-    return !!this.rule.test
+    return !!this.rule.hasSelfTest
   }
 
   async testOptOutWorked() {
@@ -66,25 +56,37 @@ class TabConsent {
 }
 
 export default class AutoConsent {
-  constructor(sendContentMessage) {
-    this.consentFrames = new Map();
-    this.tabCmps = new Map();
+  consentFrames: Map<number, any> = new Map()
+  tabCmps: Map<number, TabConsent> = new Map()
+  rules: AutoCMP[]
+
+  constructor(protected browser: Browser, protected sendContentMessage: MessageSender) {
     this.sendContentMessage = sendContentMessage;
+    this.rules = [...rules];
   }
 
-  createTab(tabId, url) {
+  addCMP(config: AutoConsentCMPRule) {
+    this.rules.push(createAutoCMP(config));
+  }
+
+  addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
+    this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
+  }
+
+  createTab(tabId: number, url: string) {
     return new Tab(tabId,
       url,
       this.consentFrames.get(tabId),
-      this.sendContentMessage);
+      this.sendContentMessage,
+      this.browser);
   }
 
-  async checkTab(tabId) {
-    const tabInfo = await browser.tabs.get(tabId);
+  async checkTab(tabId: number) {
+    const tabInfo = await this.browser.tabs.get(tabId);
     const pageUrl = new URL(tabInfo.url);
-    if (!this.tabCmps.has(tabId) || this.tabCmps.get(tabId).url !== pageUrl.href) {
+    if (!this.tabCmps.has(tabId) || this.tabCmps.get(tabId).url.href !== pageUrl.href) {
       const tab = this.createTab(tabId, pageUrl.href);
-      const consent = new TabConsent(tab, pageUrl, detectDialog(tab, 5));
+      const consent = new TabConsent(tab, pageUrl, this.detectDialog(tab, 5));
       this.tabCmps.set(tabId, consent);
       // check tabs
       consent.checked.then((rule) => {
@@ -100,7 +102,7 @@ export default class AutoConsent {
     return this.tabCmps.get(tabId);
   }
 
-  removeTab(tabId) {
+  removeTab(tabId: number) {
     this.tabCmps.delete(tabId);
   }
 
@@ -129,6 +131,20 @@ export default class AutoConsent {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  async detectDialog(tab: TabActor, retries: number): Promise<AutoCMP> {
+    const detect = await Promise.all(this.rules.map(r => r.detectCmp(tab)));
+    const found = detect.findIndex(r => r);
+    if (found === -1 && retries > 0) {
+      return new Promise((resolve) => {
+        setTimeout(async () => {
+          const result = this.detectDialog(tab, retries - 1);
+          resolve(result);
+        }, 1000);
+      });
+    }
+    return found > -1 ? this.rules[found] : null;
   }
 
 }

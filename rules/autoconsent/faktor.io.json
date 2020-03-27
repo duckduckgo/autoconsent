@@ -1,0 +1,18 @@
+{
+  "name": "faktor.io",
+  "detectCmp": [{ "exists": "#cmp-faktor-io" }],
+  "frame": "https://cw.choice.faktor.io/",
+  "detectPopup": [{ "exists": "body", "frame": true }],
+  "optOut": [
+    { "click": "#privacySettingsButton", "frame": true },
+    { "wait": 100 },
+    {
+      "click": ".mat-slide-toggle-input:checked",
+      "frame": true,
+      "all": true
+    },
+    { "wait": 100 },
+    { "click": "#exitButton", "frame": true }
+  ],
+  "optIn": [{ "click": "#acceptAll", "frame": true }]
+}

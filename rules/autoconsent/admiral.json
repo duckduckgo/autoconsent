@@ -1,0 +1,19 @@
+{
+  "name": "Admiral",
+  "detectCmp": [{ "exists": "._4jQbdwtL-1-" }],
+  "detectPopup": [{ "visible": "._4jQbdwtL-1-" }],
+  "optIn": [{ "click": "._4CT8xzMH-1- :nth-of-type(2)" }],
+  "optOut": [
+    { "click": "._4CT8xzMH-1- :nth-of-type(1)" },
+    { "click": "._8aLmoYax-1-", "optional": true, "wait": 100 },
+    { "click": ".b3uqphfm-1-:nth-of-type(2)" },
+    { "click": "._8aLmoYax-1-", "optional": true, "wait": 100 },
+    { "click": ".b3uqphfm-1-:nth-of-type(3)" },
+    { "click": "._8aLmoYax-1-", "optional": true, "wait": 100 },
+    { "click": ".b3uqphfm-1-:nth-of-type(4)" },
+    { "click": "._8aLmoYax-1-", "optional": true, "wait": 100 },
+    { "click": ".b3uqphfm-1-:nth-of-type(5)" },
+    { "click": "._8aLmoYax-1-", "optional": true, "wait": 100 },
+    { "click": "._2LyvGTsJ-1- > ._6NeLSgRP-1-" }
+  ]
+}

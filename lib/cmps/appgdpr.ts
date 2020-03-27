@@ -1,7 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import AutoConsentBase from './base';
+import { TabActor } from '../types';
 
-async function clickFirstMatching(tab, elements) {
+async function clickFirstMatching(tab: TabActor, elements: string[]) {
   const exists = await Promise.all(elements.map(e => tab.elementExists(e)));
   const first = exists.findIndex(e => !!e);
   if (first >= 0) {
@@ -35,18 +36,18 @@ export default class AppGdpr extends AutoConsentBase {
     super('app_gdpr');
   }
 
-  detectCmp(tab) {
+  detectCmp(tab: TabActor) {
     return tab.elementExists('div[class^="app_gdpr-"]');
   }
 
-  async detectPopup(tab) {
+  async detectPopup(tab: TabActor) {
     return !await tab.elementExists('div[class*="banner_hidden-"]')
       && await tab.elementsAreVisible(popupContainers.join(','), 'any')
       && await tab.elementExists(moreInfoElements.join(','))
       && this.detectCmp(tab);
   }
 
-  async optOut(tab) {
+  async optOut(tab: TabActor) {
     await clickFirstMatching(tab, moreInfoElements);
 
     if (await tab.elementExists('button[class*="details_btnDeactivate-"],button[class*="introV2_rejectAll-"')) {
@@ -72,10 +73,10 @@ export default class AppGdpr extends AutoConsentBase {
         i += 1;
       }
     }
-    await tab.clickElement('button[class*="details_save"]');
+    return await tab.clickElement('button[class*="details_save"]');
   }
 
-  async optIn(tab) {
+  async optIn(tab: TabActor) {
     if (await tab.elementExists('a[class^="banner_continue-"]')) {
       await tab.clickElement('a[class^="banner_continue-"]');
     }

@@ -1,0 +1,30 @@
+{
+  "name": "Termly",
+  "detectCmp": [
+    { "exists": "section[class^='termly-consent-banner-termly-banner-']" }
+  ],
+  "detectPopup": [
+    { "visible": "section[class^='termly-consent-banner-termly-banner-']" }
+  ],
+  "optIn": [
+    { "click": "a[class^='termly-consent-banner-preference-']", "wait": 400 },
+    {
+      "click": "input[class^='termly-switch-checkbox-']:not(:checked)",
+      "all": true
+    },
+    {
+      "click": "[class^='termly-consent-banner-footer-'] > button:first-of-type"
+    }
+  ],
+  "optOut": [
+    { "click": "a[class^='termly-consent-banner-preference-']", "wait": 400 },
+    {
+      "click": "input[class^='termly-switch-checkbox-']:checked",
+      "all": true,
+      "optional": true
+    },
+    {
+      "click": "[class^='termly-consent-banner-footer-'] > button:first-of-type"
+    }
+  ]
+}

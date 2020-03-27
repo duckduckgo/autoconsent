@@ -12,7 +12,8 @@
     "start": "node crawler/index.js",
     "test": "web-ext run --source-dir ./ --firefox firefoxdeveloperedition --url about:debugging --no-reload",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
-    "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt"
+    "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
+    "build-rules": "node rules/build.js"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
@@ -21,15 +22,17 @@
     "webextension-polyfill": "^0.4.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-typescript": "^4.0.0",
     "bulma": "^0.7.4",
     "ejs": "^2.6.1",
     "lit-html": "^1.0.0",
     "puppeteer": "^1.14.0",
     "puppeteer-cluster": "^0.15.2",
-    "rollup": "^1.10.0",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup": "^1.32.1",
+    "typescript": "^3.8.3",
     "web-ext": "^3.1.1"
   }
 }

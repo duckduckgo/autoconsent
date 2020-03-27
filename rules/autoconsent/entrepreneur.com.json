@@ -1,0 +1,7 @@
+{
+  "name": "Entrepreneur.com",
+  "detectCmp": [{ "exists": "form#cookiepolicyconsent" }],
+  "detectPopup": [{ "visible": "form#cookiepolicyconsent" }],
+  "optIn": [{ "click": "#cookieConsent" }, { "click": "#cookie-consent-ok" }],
+  "optOut": [{ "click": ".btn-flat" }]
+}

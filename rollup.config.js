@@ -1,16 +1,20 @@
-import commonjs from 'rollup-plugin-commonjs';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import json from 'rollup-plugin-json';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json';
+import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json';
 
 export default [{
-  input: './lib/node.js',
+  input: './lib/node.ts',
   output: [{
     file: 'dist/autoconsent.puppet.js',
     format: 'cjs'
   }],
+  plugins: [
+    typescript(),
+  ]
 }, {
-  input: './lib/web.js',
+  input: './lib/web.ts',
   output: [{
     file: pkg.module,
     format: 'es',
@@ -19,6 +23,9 @@ export default [{
     file: pkg.main,
     format: 'cjs',
   }],
+  plugins: [
+    typescript(),
+  ]
 }, {
   input: './test/background.js',
   output: [{
@@ -26,6 +33,7 @@ export default [{
     format: 'iife',
   }],
   plugins: [
+    typescript(),
     nodeResolve(),
     commonjs(),
     json(),
@@ -35,5 +43,8 @@ export default [{
   output: [{
     file: './test/content.bundle.js',
     format: 'iife',
-  }]
+  }],
+  plugins: [
+    typescript(),
+  ]
 }];

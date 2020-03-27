@@ -2,7 +2,6 @@
 export default {
   'Guardian': ['https://www.theguardian.com/'],
   'tagcommander': [
-    'https://www.20minutes.fr/',
     'https://www.boursorama.com/',
     'https://www.credit-agricole.fr/',
     'https://www.kiabi.com/',
@@ -14,6 +13,7 @@ export default {
     'https://www.sport.fr',
   ],
   'Didomi': [
+    'https://www.20minutes.fr/',
     'https://www.thetradedesk.com/',
     'https://www.planet.fr/',
     'https://www.abc.es/',
@@ -29,8 +29,6 @@ export default {
     'https://www.myheritage.de/',
     'https://www.okcupid.com/',
     'https://worldofwarcraft.com/',
-    'http://www.travelfuntu.com/',
-    'https://arstechnica.com/',
   ],
   'oil': [
     'https://www.bunte.de/',
@@ -66,6 +64,7 @@ export default {
     'https://www.politico.com/',
     'https://sourceforge.net/',
     'https://www.nexusmods.com/',
+    'http://www.travelfuntu.com/',
   ],
   'Oath': [
     'https://aol.com',
@@ -75,9 +74,6 @@ export default {
   'TrustArc': [
     'https://www.audible.de',
     'https://www.zoom.us',
-  ],
-  'Ebay': [
-    'https://www.ebay.de',
   ],
   'Future': [
     'https://www.techradar.com/',
@@ -134,5 +130,8 @@ export default {
   ],
   'Drupal': [
     'https://www.drupal.org/',
+  ],
+  'onetrust': [
+    'https://arstechnica.com/',
   ]
 };

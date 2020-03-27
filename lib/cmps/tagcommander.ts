@@ -1,11 +1,12 @@
 import AutoConsentBase, { waitFor } from './base';
+import { TabActor } from '../types';
 
 export default class TagCommander extends AutoConsentBase {
   constructor() {
     super('tagcommander');
   }
 
-  async detectCmp(tab) {
+  async detectCmp(tab: TabActor) {
     try {
       return await tab.eval('window.tC && window.tC.privacyCenter !== undefined');
     } catch (e) {
@@ -13,19 +14,19 @@ export default class TagCommander extends AutoConsentBase {
     }
   }
 
-  async detectPopup(tab) {
+  async detectPopup(tab: TabActor) {
     return (await tab.elementExists('#dnt-banner')) ||
       await tab.elementExists('#privacy-iframe') ||
       await tab.elementExists('#footer_tc_privacy') ||
       await tab.elementExists('#header_tc_privacy');
   }
 
-  detectFrame(tab, frame) {
+  detectFrame(tab: TabActor, frame: { url: string }) {
     return frame.url.startsWith('http://cdn.tagcommander.com/privacy') ||
       frame.url.startsWith('https://cdn.tagcommander.com/privacy');
   }
 
-  async openFrame(tab) {
+  async openFrame(tab: TabActor) {
     if (await tab.elementExists('#footer_tc_privacy') || 
       await tab.elementExists('#footer_tc_privacy_privacy_center') ||
       await tab.elementExists('#header_tc_privacy')) {
@@ -33,10 +34,13 @@ export default class TagCommander extends AutoConsentBase {
     }
   }
 
-  async optOut(tab) {
+  async optOut(tab: TabActor) {
     if (!await tab.elementExists('#privacy-iframe')) {
       await this.openFrame(tab);
-      await waitFor(() => tab.frame, 10, 200);
+      await waitFor(() => !!tab.frame, 10, 200);
+    }
+    if (!tab.frame) {
+      return false;
     }
     await tab.wait(500);
     await tab.waitForElement('#privacy-cat-modal', 20000, tab.frame.id);
@@ -47,10 +51,13 @@ export default class TagCommander extends AutoConsentBase {
     return true;
   }
 
-  async optIn(tab) {
+  async optIn(tab: TabActor) {
     if (!await tab.elementExists('#privacy-iframe')) {
       await this.openCmp(tab);
-      await waitFor(() => tab.frame, 10, 200);
+      await waitFor(() => !!tab.frame, 10, 200);
+    }
+    if (!tab.frame) {
+      return false;
     }
     await new Promise(resolve => setTimeout(resolve, 500));
     await tab.waitForElement('#privacy-cat-modal', 20000, tab.frame.id);
@@ -59,7 +66,7 @@ export default class TagCommander extends AutoConsentBase {
     return true;
   }
 
-  async openCmp(tab) {
+  async openCmp(tab: TabActor) {
     await tab.eval('tC.privacyCenter.showPrivacyCenter();');
     if (await tab.waitForElement('#privacy-iframe', 10000)) {
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -68,7 +75,7 @@ export default class TagCommander extends AutoConsentBase {
     return false;
   }
 
-  async test(tab) {
+  async test(tab: TabActor) {
     return tab.eval('tC.privacy.categories[0] === "-1"')
   }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "Sirdata",
+  "detectCmp": [{ "exists": "div[class^='sd-cmp-'" }],
+  "detectPopup": [{ "visible": ".sd-cmp-3HtX8,.sd-cmp-1Og94" }],
+  "optIn": [{ "click": ".sd-cmp-ieaP1" }],
+  "optOut": [
+    { "click": ".sd-cmp-1Q99t" },
+    { "click": ".sd-cmp-2DJbe" },
+    { "click": ".sd-cmp-2F7Cs" }
+  ]
+}

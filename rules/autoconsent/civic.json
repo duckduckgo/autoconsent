@@ -1,0 +1,29 @@
+{
+  "name": "Civic",
+  "detectCmp": [{ "exists": "section#ccc" }],
+  "detectPopup": [{ "visible": ".ccc-notify-buttons,#cookie-control-modal" }],
+  "optIn": [
+    {
+      "click": ".ccc-notify-buttons > button:nth-of-type(2),.js-toggle-cookie-control"
+    },
+    { "waitFor": "#ccc-content" },
+    {
+      "click": "input.checkbox-toggle-input:not(:checked)",
+      "all": true,
+      "optional": true
+    },
+    { "click": "#ccc-close" }
+  ],
+  "optOut": [
+    {
+      "click": ".ccc-notify-buttons > button:nth-of-type(2),.js-toggle-cookie-control"
+    },
+    { "waitFor": "#ccc-content" },
+    {
+      "click": "input.checkbox-toggle-input:checked",
+      "all": true,
+      "optional": true
+    },
+    { "click": "#ccc-close" }
+  ]
+}
