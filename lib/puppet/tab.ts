@@ -52,7 +52,7 @@ export default class Tab implements TabActor {
     if (visible.length === 0) {
       return false;
     } else if (check === 'any') {
-      return visible.some((r => r);
+      return visible.some(r => r);
     } else if (check === 'none') {
       return visible.every(r => !r);
     }
