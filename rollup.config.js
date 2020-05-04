@@ -47,4 +47,22 @@ export default [{
   plugins: [
     typescript(),
   ]
+}, {
+  input: './addon/background.ts',
+  output: [{
+    file: './addon/background.bundle.js',
+    format: 'iife',
+  }],
+  plugins: [
+    typescript(),
+  ]
+}, {
+  input: './addon/content.ts',
+  output: [{
+    file: './addon/content.bundle.js',
+    format: 'iife',
+  }],
+  plugins: [
+    typescript(),
+  ]
 }];

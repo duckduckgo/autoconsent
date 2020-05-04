@@ -22,7 +22,8 @@ export type AutoConsentRuleStep = { frame?: boolean; optional?: boolean } & Part
   Partial<WaitRule> &
   Partial<UrlRule> &
   Partial<GotoUrlRule> &
-  Partial<HideRule>;
+  Partial<HideRule> &
+  Partial<WaitForFrameRule>;
 
 type ElementExistsRule = {
   exists: string;
@@ -66,4 +67,8 @@ type GotoUrlRule = {
 
 type HideRule = {
   hide: string[];
+};
+
+type WaitForFrameRule = {
+  waitForFrame: true
 };

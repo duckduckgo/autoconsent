@@ -117,10 +117,10 @@ export default class AutoConsent {
         url: url,
       };
       const tab = this.createTab(tabId, url);
-      const frameMatch = rules.findIndex(r => r.detectFrame(tab, frame));
+      const frameMatch = this.rules.findIndex(r => r.detectFrame(tab, frame));
       if (frameMatch > -1) {
         this.consentFrames.set(tabId, {
-          type: rules[frameMatch].name,
+          type: this.rules[frameMatch].name,
           url,
           id: frameId,
         });

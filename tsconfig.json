@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "typeRoots": ["node_modules/web-ext-types"],
   },
   "exclude": [
     "node_modules/*",
     "test/lit-html/*"
-  ]
+  ],
 }

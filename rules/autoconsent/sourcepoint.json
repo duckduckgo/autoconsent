@@ -5,21 +5,54 @@
   "frame": "https://pm.sourcepoint.mgr.consensu.org",
   "optOut": [
     {
-      "eval": "cipheredClassname = _sp_.msg.getMorphedClassname('sp_choice_type_12');var el = document.getElementsByClassname(cipheredClassname)[0];el.click();",
+      "click": "button[class^='sp_choice']",
+      "waitForFrame": true
+    },
+    {
+      "waitFor": ".priv-vendor-block",
+      "frame": true
+    },
+    {
+      "click": "a[id^='tab-pan_'] > .right",
+      "all": true,
+      "frame": true,
       "optional": true
     },
     {
-      "click": ".switch-bg.on:not(#strictly-necessary-cookies)",
+      "click": ".on > .inner-switch",
       "all": true,
       "frame": true,
-      "optional": true,
-      "wait": 1000
+      "optional": true
     },
-    { "click": "#tab-saveandexit", "frame": true }
+    {
+      "click": "#tab-saveandexit",
+      "frame": true
+    }
   ],
   "optIn": [
-    { "click": "span[class^='sp_pm_link']" },
-    { "click": ".switch-bg:not(.on)", "all": true, "frame": true },
-    { "click": "#tab-saveandexit", "frame": true }
+    {
+      "click": "button[class^='sp_choice']",
+      "waitForFrame": true
+    },
+    {
+      "waitFor": ".priv-vendor-block",
+      "frame": true
+    },
+    {
+      "click": "a[id^='tab-pan_'] > .left",
+      "all": true,
+      "frame": true,
+      "optional": true
+    },
+    {
+      "click": ".switch-bg:not(.on) > .inner-switch",
+      "all": true,
+      "frame": true,
+      "optional": true
+    },
+    {
+      "click": "#tab-saveandexit",
+      "frame": true
+    }
   ]
 }

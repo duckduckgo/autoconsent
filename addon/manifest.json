@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Autoconsent",
+  "version": "0.5.0",
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.bundle.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "cookies",
+    "tabs",
+    "storage",
+    "webNavigation"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "autoconsent@cliqz.com"
+    }
+  }
+}
