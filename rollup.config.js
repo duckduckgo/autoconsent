@@ -1,6 +1,3 @@
-import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import json from '@rollup/plugin-json';
 import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json';
 
@@ -27,27 +24,6 @@ export default [{
     typescript(),
   ]
 }, {
-  input: './test/background.js',
-  output: [{
-    file: './test/background.bundle.js',
-    format: 'iife',
-  }],
-  plugins: [
-    typescript(),
-    nodeResolve(),
-    commonjs(),
-    json(),
-  ],
-}, {
-  input: './test/content.js',
-  output: [{
-    file: './test/content.bundle.js',
-    format: 'iife',
-  }],
-  plugins: [
-    typescript(),
-  ]
-}, {
   input: './addon/background.ts',
   output: [{
     file: './addon/background.bundle.js',
@@ -65,4 +41,14 @@ export default [{
   plugins: [
     typescript(),
   ]
-}];
+},  {
+  input: './addon/test.ts',
+  output: [{
+    file: './addon/test.bundle.js',
+    format: 'iife',
+    external: ['chai', 'mocha']
+  }],
+  plugins: [
+    typescript(),
+  ]
+},];

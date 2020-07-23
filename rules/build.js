@@ -21,7 +21,7 @@ const buildAutoconsent = Promise.all(
 ).then(r => (rules.autoconsent = r));
 
 // fetch ConsentOMatic rule set and merge with our custom rules
-const consentOMaticCommit = "37fd288df4a2d5e5d6a5f6e222f63001988fb293";
+const consentOMaticCommit = "13ae066c2512da59c1fa64967c548844aae8ca22";
 const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
 const consentOMaticDir = path.join(__dirname, "consentomatic");
 const consentOMaticSkip = ["trustarcbar", "trustarcframe", "sourcepoint"];

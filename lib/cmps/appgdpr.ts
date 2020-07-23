@@ -29,6 +29,7 @@ const moreInfoElements = [
   'div[class^="banner_copy-"] > a',
   'div[class^="main_buttons-"] > div > button:first-child',
   'div[class^="banner_option-"]:nth-child(3) > a,a[class^="banner_option-"]:nth-child(3)',
+  'button[class*="intro_showSettings-"',
 ]
 
 export default class AppGdpr extends AutoConsentBase {

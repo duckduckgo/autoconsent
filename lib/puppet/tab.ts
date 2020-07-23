@@ -1,5 +1,7 @@
 import { waitFor } from '../cmps/base';
-import { TabActor, FindResult } from '../types';
+import { TabActor } from '../types';
+
+const DEBUG = false;
 
 export default class Tab implements TabActor {
   // puppeteer doesn't have tab IDs
@@ -17,8 +19,10 @@ export default class Tab implements TabActor {
   async elementExists(selector: string, frameId = 0) {
     try {
       const elements = await this.frames[frameId].$$(selector)
+      DEBUG && console.log('[exists]', selector, elements.length > 0);
       return elements.length > 0;
     } catch (e) {
+      console.warn(e)
       return false;
     }
   }
@@ -26,8 +30,18 @@ export default class Tab implements TabActor {
   async clickElement(selector: string, frameId = 0) {
     if (await this.elementExists(selector, frameId)) {
       try {
-        return await this.frames[frameId].click(selector);
+        const result = await this.frames[frameId].evaluate((s) => {
+          try {
+            document.querySelector(s).click();
+            return true;
+          } catch (e) {
+            return e.toString();
+          }
+        }, selector);
+        DEBUG && console.log('[click]', selector, result);
+        return result;
       } catch (e) {
+        console.warn(e);
         return false;
       }
     }
@@ -37,9 +51,14 @@ export default class Tab implements TabActor {
   async clickElements(selector: string, frameId = 0) {
     const elements = await this.frames[frameId].$$(selector);
     try {
-      await Promise.all(elements.map((elem: any) => elem.click()));
+      DEBUG && console.log('[click all]', selector);
+      await this.frames[frameId].evaluate((s) => {
+        const elem = document.querySelectorAll<HTMLElement>(s);
+        elem.forEach(e => e.click());
+      }, selector)
       return true;
     } catch (e) {
+      console.warn(e);
       return false;
     }
   }
@@ -48,7 +67,8 @@ export default class Tab implements TabActor {
     if (!await this.elementExists(selector, frameId)) {
       return false;
     }
-    const visible: boolean[] = await this.frames[frameId].$$eval(selector, (nodes: any) => nodes.map((n: any) => n.offestParent !== null));
+    const visible: boolean[] = await this.frames[frameId].$$eval(selector, (nodes: any) => nodes.map((n: any) => n.offsetParent !== null));
+    DEBUG && console.log('[visible]', selector, check, visible);
     if (visible.length === 0) {
       return false;
     } else if (check === 'any') {
@@ -67,6 +87,7 @@ export default class Tab implements TabActor {
   }
 
   async eval(script: string, frameId = 0) {
+    DEBUG && console.log('[eval]', script);
     return await this.frames[frameId].evaluate(script);
   }
 
@@ -95,7 +116,7 @@ export default class Tab implements TabActor {
       setTimeout(() => resolve(true), ms);
     });
   }
- 
+
   matches(options: any): Promise<boolean> {
     throw new Error("Method not implemented.");
   }

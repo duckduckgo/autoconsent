@@ -73,3 +73,9 @@ browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tabInfo) => {
     }
   }
 });
+
+browser.tabs.onRemoved.addListener((tabId) => {
+  consent.tabCmps.delete(tabId);
+});
+
+(<any>window).autoconsent = consent;

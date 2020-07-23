@@ -246,6 +246,22 @@
                 "type": "A"
               },
               {
+                "description": "Social networks",
+                "falseAction": {
+                  "target": {
+                    "selector": ".didomi-components-radio__option[aria-describedby=didomi-purpose-social_media]:first-child"
+                  },
+                  "type": "click"
+                },
+                "trueAction": {
+                  "target": {
+                    "selector": ".didomi-components-radio__option[aria-describedby=didomi-purpose-social_media]:last-child"
+                  },
+                  "type": "click"
+                },
+                "type": "A"
+              },
+              {
                 "description": "Content selection",
                 "falseAction": {
                   "target": {
@@ -279,7 +295,41 @@
               }
             ],
             "type": "consent"
-          }
+          },
+            {
+                "action": {
+                    "consents": [
+                        {
+                            "matcher": {
+                                "childFilter": {
+                                    "target": {
+                                        "selector": ":not(.didomi-components-radio__option--selected)"
+                                    }
+                                },
+                                "type": "css"
+                            },
+                            "trueAction": {
+                                "target": {
+                                    "selector": ":nth-child(2)"
+                                },
+                                "type": "click"
+                            },
+                            "falseAction": {
+                                "target": {
+                                    "selector": ":first-child"
+                                },
+                                "type": "click"
+                            },
+                            "type": "X"
+                        }
+                    ],
+                    "type": "consent"
+                },
+                "target": {
+                    "selector": ".didomi-components-radio"
+                },
+                "type": "foreach"
+            }
         ],
         "type": "list"
       },

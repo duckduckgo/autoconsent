@@ -32,8 +32,11 @@ export default class Cookiebot extends AutoConsentBase {
     if (await tab.elementExists('#CybotCookiebotDialogBodyButtonDecline')) {
       await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
     }
-    await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept');
-    // await tab.clickElement('#CybotCookiebotDialogBodyButtonAccept');
+    if (await tab.elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
+      await tab.clickElement('#CybotCookiebotDialogBodyButtonAcceptSelected');
+    } else {
+      await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept');
+    }
     return true;
   }
 

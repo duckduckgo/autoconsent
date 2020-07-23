@@ -14,6 +14,7 @@ export {
 class TabConsent {
   checked: Promise<AutoCMP>
   rule: AutoCMP
+  optOutStatus: boolean | Error = null
 
   constructor(public tab: TabActor, public url: URL, ruleCheckPromise: Promise<AutoCMP>) {
     this.checked = ruleCheckPromise;
@@ -34,7 +35,13 @@ class TabConsent {
   }
 
   async doOptOut() {
-    return this.rule.optOut(this.tab);
+    try {
+      this.optOutStatus = await this.rule.optOut(this.tab);
+      return this.optOutStatus;
+    } catch (e) {
+      this.optOutStatus = e;
+      throw e;
+    }
   }
 
   async doOptIn() {
