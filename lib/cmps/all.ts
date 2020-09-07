@@ -4,6 +4,7 @@ import TrustArc from './trustarc';
 import CookieBot from './cookiebot';
 import AppGdpr from './appgdpr';
 import Future from './future';
+import PrivacyMgmt from './privacymgmt';
 import { AutoConsentCMPRule } from '../rules';
 
 const rules = [
@@ -12,6 +13,7 @@ const rules = [
   new CookieBot(),
   new AppGdpr(),
   new Future(),
+  new PrivacyMgmt(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsent {

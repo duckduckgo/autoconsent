@@ -207,8 +207,8 @@ describe("CMP Tests", () => {
     });
   });
 
-  describe("com_theGuardian", () => {
-    cmpTest("com_theGuardian", "https://www.theguardian.com/");
+  describe("privacy-mgmt", () => {
+    cmpTest("privacy-mgmt", "https://www.theguardian.com/");
   });
 
   describe("com_didomi.io", () => {
