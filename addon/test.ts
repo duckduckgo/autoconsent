@@ -99,12 +99,6 @@ describe("CMP Tests", () => {
     cmpTest(cmp, "https://www.audible.de");
   });
 
-  describe("app_gdpr", () => {
-    ["https://www.jeux.fr/"].forEach((url) => {
-      cmpTest("app_gdpr", url);
-    });
-  });
-
   describe("Sirdata", () => {
     [
       "https://www.futura-sciences.com/",
@@ -183,7 +177,7 @@ describe("CMP Tests", () => {
   });
 
   describe("com_quantcast", () => {
-    const cmp = "com_quantcast";
+    const cmp = "quantcast";
     [
       "https://www.independent.co.uk/",
       "https://imgur.com",
@@ -244,6 +238,7 @@ describe("CMP Tests", () => {
       "https://mailchimp.com/",
       "https://www.okcupid.com/",
       "https://arstechnica.com/",
+      "https://www.jeux.fr/"
     ].forEach((url) => {
       cmpTest("com_onetrust", url);
     });
@@ -288,6 +283,10 @@ describe("CMP Tests", () => {
     ["https://www.ofeminin.pl/"].forEach((url) => {
       cmpTest("com_springer", url);
     });
+  });
+
+  describe('com_lemonde.fr', () =>{
+    cmpTest('com_lemonde.fr', 'https://lemonde.fr')
   });
 
   xdescribe("unsupported", () => {

@@ -19,11 +19,7 @@ export default class PrivacyMgmt extends AutoConsentBase {
   async detectPopup(tab: TabActor) {
     return (
       tab.frame &&
-      waitFor(
-        () => tab.elementsAreVisible(".message", "any", tab.frame.id),
-        5,
-        50
-      )
+      tab.elementsAreVisible(".message", "any", tab.frame.id)
     );
   }
 
