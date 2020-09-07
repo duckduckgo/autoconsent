@@ -57,8 +57,10 @@ export default class AutoConsentBase implements AutoCMP {
 
   async test(tab: TabActor): Promise<boolean> {
     // try IAB by default
-    await tab.eval('__cmp(\'getVendorConsents\', undefined, r => window.__rcsResult = r)');
-    return tab.eval('Object.values(window.__rcsResult.purposeConsents).every(c => !c)');
+    await tab.eval("__tcfapi('getTCData', 2, r => window.__rcsResult = r)");
+    return tab.eval(
+      "Object.values(window.__rcsResult.purpose.consents).every(c => !c)"
+    );
   }
 }
 
