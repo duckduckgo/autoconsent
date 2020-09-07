@@ -66,7 +66,7 @@ async function evaluateRule(rule: AutoConsentRuleStep, tab: TabActor) {
   if (rule.frame && !tab.frame) {
     await waitFor(() => Promise.resolve(!!tab.frame), 10, 500);
   }
-  const frameId = rule.frame ? tab.frame!!.id : undefined;
+  const frameId = rule.frame && tab.frame ? tab.frame.id : undefined;
   const results = [];
   if (rule.exists) {
     results.push(tab.elementExists(rule.exists, frameId));
