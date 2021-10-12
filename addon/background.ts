@@ -3,7 +3,6 @@ import AutoConsent from "../lib/web";
 
 const consent = new AutoConsent(<any>browser, browser.tabs.sendMessage);
 const tabGuards = new Set();
-let lastAction: { s: string; tab: number; t: number } = null;
 
 async function loadRules() {
   const res = await fetch("./rules.json");
@@ -39,10 +38,7 @@ async function checkShouldShowPageAction({
         log("detected CMP:", cmp.getCMPName());
         if (await cmp.isPopupOpen()) {
           log("popup is open:", cmp.getCMPName());
-          browser.pageAction.setTitle({
-            tabId,
-            title: "Click to opt out",
-          });
+          showOptOutStatus(tabId, "available");
           browser.pageAction.show(tabId);
         } else if (cmp.hasTest() && (await cmp.testOptOutWorked())) {
           showOptOutStatus(tabId, "success");
@@ -58,13 +54,27 @@ async function checkShouldShowPageAction({
 
 function showOptOutStatus(
   tabId: number,
-  status: "success" | "complete" | "failed"
+  status: "success" | "complete" | "working" | "available"
 ) {
-  const title =
-    status === "success" ? "Opt out successful!" : "Opt out complete!";
+  let title = "Click to opt out";
+  let icon = "icons/cookie.png";
+  if (status === "success") {
+    title = "Opt out successful!";
+    icon = "icons/party.png";
+  } else if (status === "complete") {
+    title = "Opt out complete!";
+    icon = "icons/tick.png";
+  } else if (status === "working") {
+    title = "Processing...";
+    icon = "icons/cog.png";
+  }
   browser.pageAction.setTitle({
     tabId,
     title,
+  });
+  browser.pageAction.setIcon({
+    tabId,
+    path: icon,
   });
 }
 
@@ -74,7 +84,6 @@ browser.webNavigation.onCompleted.addListener(consent.onFrame.bind(consent), {
 
 browser.runtime.onMessage.addListener(({ type }, sender) => {
   if (type === "frame" && sender.frameId === 0) {
-    log("content script", type, sender);
     checkShouldShowPageAction({
       tabId: sender.tab.id,
       frameId: sender.frameId,
