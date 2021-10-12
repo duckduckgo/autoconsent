@@ -141,8 +141,18 @@ export default class AutoConsent {
   }
 
   async detectDialog(tab: TabActor, retries: number): Promise<AutoCMP> {
-    const detect = await Promise.all(this.rules.map(r => r.detectCmp(tab)));
-    const found = detect.findIndex(r => r);
+    const found: number = await new Promise(async (resolve) => {
+      let earlyReturn = false;
+      const detect = await Promise.all(this.rules.map(async (r, index) => {
+        if (await r.detectCmp(tab)) {
+          earlyReturn = true;
+          resolve(index)
+        }
+      }));
+      if (!earlyReturn) {
+        resolve(-1)
+      }
+    })
     if (found === -1 && retries > 0) {
       return new Promise((resolve) => {
         setTimeout(async () => {
