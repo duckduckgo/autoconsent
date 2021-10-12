@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Autoconsent",
-  "version": "0.5.4",
+  "version": "2021.10.12",
   "background": {
     "scripts": [
       "background.bundle.js"
@@ -27,7 +27,7 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "autoconsent@cliqz.com"
+      "id": "autoconsent@sammacbeth.eu"
     }
   },
   "page_action": {
