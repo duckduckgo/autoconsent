@@ -15,7 +15,7 @@ export default class TabActions implements TabActor {
   }
 
   async elementExists(selector, frameId = 0) {
-    // console.log(`check for  ${selector} in tab ${this.id}, frame ${frameId}`);
+    console.log(`check for  ${selector} in tab ${this.id}, frame ${frameId}`);
     return this.sendContentMessage(
       this.id,
       {
@@ -29,7 +29,7 @@ export default class TabActions implements TabActor {
   }
 
   async clickElement(selector, frameId = 0) {
-    // console.log(`click element ${selector} in tab ${this.id}`);
+    console.log(`click element ${selector} in tab ${this.id}`);
     return this.sendContentMessage(
       this.id,
       {

@@ -148,7 +148,7 @@ export default class AutoConsent {
         setTimeout(async () => {
           const result = this.detectDialog(tab, retries - 1);
           resolve(result);
-        }, 1000);
+        }, 500);
       });
     }
     return found > -1 ? this.rules[found] : null;
