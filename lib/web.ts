@@ -144,9 +144,13 @@ export default class AutoConsent {
     const found: number = await new Promise(async (resolve) => {
       let earlyReturn = false;
       const detect = await Promise.all(this.rules.map(async (r, index) => {
-        if (await r.detectCmp(tab)) {
-          earlyReturn = true;
-          resolve(index)
+        try {
+          if (await r.detectCmp(tab)) {
+            earlyReturn = true;
+            resolve(index)
+          }
+        } catch (e) {
+          console.warn('detectCMP error', r.name, e)
         }
       }));
       if (!earlyReturn) {
