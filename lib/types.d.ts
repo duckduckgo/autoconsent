@@ -19,7 +19,6 @@ export interface TabActor {
     url: string
   }
   id: number
-  url: string
   elementExists(selector: string, frameId?: number): Promise<boolean>
   clickElement(selector: string, frameId?: number): Promise<boolean>
   clickElements(selector: string, frameId?: number): Promise<boolean>

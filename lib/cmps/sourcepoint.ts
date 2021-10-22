@@ -1,4 +1,4 @@
-import AutoConsentBase, { waitFor } from "./base";
+import AutoConsentBase, { success, waitFor } from "./base";
 import { TabActor } from "../types";
 
 export default class SourcePoint extends AutoConsentBase {
@@ -13,29 +13,36 @@ export default class SourcePoint extends AutoConsentBase {
   }
 
   async detectCmp(tab: TabActor) {
-    return tab.elementExists("div[id^='sp_message_container_']")
+    return await tab.elementExists("div[id^='sp_message_container_']") || !!tab.frame
   }
 
   async detectPopup(tab: TabActor) {
-    return tab.elementsAreVisible("div[id^='sp_message_container_']")
+    return tab.elementsAreVisible("div[id^='sp_message_container_']") || !!tab.frame
   }
 
   async optIn(tab: TabActor) {
     return tab.clickElement(".sp_choice_type_11", tab.frame.id);
   }
 
+  isManagerOpen(tab: TabActor) {
+    return tab.frame && new URL(tab.frame.url).pathname === "/privacy-manager/index.html"
+  }
+
   async optOut(tab: TabActor) {
-    await tab.clickElement(".sp_choice_type_12", tab.frame.id);
-    await waitFor(
-      () =>
-        new URL(tab.frame.url).pathname === "/privacy-manager/index.html",
-      200,
-      100
-    );
+    if (!this.isManagerOpen(tab)) {
+      await success(tab.clickElement("button.sp_choice_type_12", tab.frame.id));
+      await waitFor(
+        () =>
+          new URL(tab.frame.url).pathname === "/privacy-manager/index.html",
+        200,
+        100
+      );
+    }
     await tab.waitForElement('.type-modal', 20000, tab.frame.id);
     // reject all button is offered by some sites
     if (await tab.elementExists('.sp_choice_type_REJECT_ALL', tab.frame.id)) {
-      return await tab.clickElement('.sp_choice_type_REJECT_ALL', tab.frame.id)
+      await tab.wait(1000);
+      return await success(tab.clickElement('.sp_choice_type_REJECT_ALL', tab.frame.id))
     }
     await tab.waitForElement('.pm-features', 10000, tab.frame.id);
     await tab.clickElements('.checked > span', tab.frame.id);

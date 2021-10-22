@@ -1,0 +1,8 @@
+{
+    "name": "Test page CMP",
+    "detectCmp": [{ "exists": "#privacy-test-page-cmp-test" }],
+    "detectPopup": [{ "visible": "#privacy-test-page-cmp-test" }],
+    "optIn": [{ "click": "#accept-all" }],
+    "optOut": [{ "click": "#reject-all" }],
+    "test": [{ "eval": "window.results.results[0] === 'button_clicked'" }]
+  }

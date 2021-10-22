@@ -1,12 +1,11 @@
 import { waitFor } from "../cmps/base";
-import { TabActor, MessageSender, Browser, FindResult } from "../types";
+import { TabActor, MessageSender, Browser } from "../types";
 
 export default class TabActions implements TabActor {
   id: number;
 
   constructor(
     tabId: number,
-    public url: string,
     public frame: any,
     private sendContentMessage: MessageSender,
     private browser: Browser
@@ -43,7 +42,7 @@ export default class TabActions implements TabActor {
   }
 
   async clickElements(selector, frameId = 0) {
-    // console.log(`click elements ${selector} in tab ${this.id}`);
+    console.log(`click elements ${selector} in tab ${this.id}`);
     return this.sendContentMessage(
       this.id,
       {

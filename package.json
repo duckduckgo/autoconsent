@@ -8,6 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "build": "tsc",
     "bundle": "rollup -c",
     "watch": "rollup -c -w",
     "start": "web-ext run -s ./addon --firefox firefoxdeveloperedition",

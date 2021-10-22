@@ -21,6 +21,14 @@ export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTi
 }
 
 
+export async function success(action: Promise<boolean>): Promise<boolean> {
+  const result = await action;
+  if (!result) {
+    throw new Error(`Action failed: ${action}`)
+  }
+  return result
+}
+
 
 export default class AutoConsentBase implements AutoCMP {
 
@@ -102,9 +110,6 @@ async function evaluateRule(rule: AutoConsentRuleStep, tab: TabActor) {
   }
   if (rule.wait) {
     results.push(tab.wait(rule.wait));
-  }
-  if (rule.url) {
-    results.push(Promise.resolve(tab.url.startsWith(rule.url)));
   }
   if (rule.goto) {
     results.push(tab.goto(rule.goto));

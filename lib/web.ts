@@ -16,7 +16,7 @@ class TabConsent {
   rule: AutoCMP
   optOutStatus: boolean | Error = null
 
-  constructor(public tab: TabActor, public url: URL, ruleCheckPromise: Promise<AutoCMP>) {
+  constructor(public tab: TabActor, ruleCheckPromise: Promise<AutoCMP>) {
     this.checked = ruleCheckPromise;
     ruleCheckPromise.then(rule => this.rule = rule);
   }
@@ -80,31 +80,26 @@ export default class AutoConsent {
     this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
   }
 
-  createTab(tabId: number, url: string) {
+  createTab(tabId: number) {
     return new Tab(tabId,
-      url,
       this.consentFrames.get(tabId),
       this.sendContentMessage,
       this.browser);
   }
 
   async checkTab(tabId: number) {
-    const tabInfo = await this.browser.tabs.get(tabId);
-    const pageUrl = new URL(tabInfo.url);
-    if (!this.tabCmps.has(tabId) || this.tabCmps.get(tabId).url.href !== pageUrl.href) {
-      const tab = this.createTab(tabId, pageUrl.href);
-      const consent = new TabConsent(tab, pageUrl, this.detectDialog(tab, 5));
-      this.tabCmps.set(tabId, consent);
-      // check tabs
-      consent.checked.then((rule) => {
-        if (this.consentFrames.has(tabId)) {
-          const frame = this.consentFrames.get(tabId);
-          if (frame.type === rule.name) {
-            consent.tab.frame = frame;
-          }
+    const tab = this.createTab(tabId);
+    const consent = new TabConsent(tab, this.detectDialog(tab, 20));
+    this.tabCmps.set(tabId, consent);
+    // check tabs
+    consent.checked.then((rule) => {
+      if (this.consentFrames.has(tabId) && rule) {
+        const frame = this.consentFrames.get(tabId);
+        if (frame.type === rule.name) {
+          consent.tab.frame = frame;
         }
-      });
-    }
+      }
+    });
 
     return this.tabCmps.get(tabId);
   }
@@ -123,7 +118,7 @@ export default class AutoConsent {
         id: frameId,
         url: url,
       };
-      const tab = this.createTab(tabId, url);
+      const tab = this.createTab(tabId);
       const frameMatch = this.rules.findIndex(r => r.detectFrame(tab, frame));
       if (frameMatch > -1) {
         this.consentFrames.set(tabId, {
@@ -143,7 +138,7 @@ export default class AutoConsent {
   async detectDialog(tab: TabActor, retries: number): Promise<AutoCMP> {
     const found: number = await new Promise(async (resolve) => {
       let earlyReturn = false;
-      const detect = await Promise.all(this.rules.map(async (r, index) => {
+      await Promise.all(this.rules.map(async (r, index) => {
         try {
           if (await r.detectCmp(tab)) {
             earlyReturn = true;
@@ -167,5 +162,4 @@ export default class AutoConsent {
     }
     return found > -1 ? this.rules[found] : null;
   }
-
 }

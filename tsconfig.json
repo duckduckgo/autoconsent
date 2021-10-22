@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "ES2020",
     "typeRoots": ["node_modules/web-ext-types"],
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
   },
   "exclude": [
     "node_modules/*",

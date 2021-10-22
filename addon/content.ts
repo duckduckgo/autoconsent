@@ -1,7 +1,7 @@
 import handleContentMessage from "../lib/web/content";
 
 browser.runtime.onMessage.addListener((message) => {
-  return handleContentMessage(message, false);
+  return Promise.resolve(handleContentMessage(message, false));
 });
 
 browser.runtime.sendMessage({
