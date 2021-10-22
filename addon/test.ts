@@ -246,6 +246,15 @@ describe("CMP Tests", () => {
     });
   });
 
+  describe("funding-choices", () => {
+    [
+      "https://www.dinarguru.com/",
+      "https://blog.alltolearn.com/"
+    ].forEach((url) => {
+      cmpTest("funding-choices", url);
+    })
+  })
+
   xdescribe("unsupported", () => {
     [
       "https://www.lepoint.fr/",
