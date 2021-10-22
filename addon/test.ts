@@ -39,6 +39,7 @@ describe("CMP Tests", () => {
       });
 
       it("Opt out runs", async () => {
+        await autoconsent.tabCmps.get(tabId).doOptOut()
         await waitFor(
           () => {
             return (
@@ -80,12 +81,8 @@ describe("CMP Tests", () => {
   describe("Cybotcookiebot", () => {
     const cmp = "Cybotcookiebot";
     [
-      "https://about.gitlab.com",
       "https://www.ab-in-den-urlaub.de/",
-      "https://www.avira.com/",
       "https://www.centralpoint.nl/",
-      "https://www.deine-tierwelt.de/",
-      "https://www.digitaltrends.com/",
       "https://www.vatera.hu/",
       "https://www.smartsheet.com/",
     ].forEach((url) => {
@@ -96,7 +93,6 @@ describe("CMP Tests", () => {
   describe("TrustArc", () => {
     const cmp = "TrustArc";
     cmpTest(cmp, "https://www.zoom.us");
-    cmpTest(cmp, "https://www.audible.de");
   });
 
   describe("Sirdata", () => {
@@ -109,29 +105,15 @@ describe("CMP Tests", () => {
     });
   });
 
-  describe("w18lara", () => {
-    ["https://www.xxxlutz.de/"].forEach((url) => {
-      cmpTest("w18lara", url, { selfTest: false });
-    });
-  });
-
-  describe("Admiral", () => {
-    ["https://bigthink.com/"].forEach((url) => {
-      cmpTest("Admiral", url);
-    });
-  });
-
-  describe("Termly", () => {
-    ["https://termly.io/en/"].forEach((url) => {
-      cmpTest("Termly", url, { selfTest: false });
-    });
-  });
-
   describe("Sourcepoint", () => {
     [
       "https://www.brianmadden.com/",
       "https://www.channelpro.co.uk/news",
       "https://www.csoonline.com/blogs",
+      "https://www.deine-tierwelt.de/",
+      "https://www.theguardian.com/",
+      "https://www.independent.co.uk/",
+      "https://www.n-tv.de/",
     ].forEach((url) => {
       cmpTest("Sourcepoint", url, { selfTest: false });
     });
@@ -144,7 +126,7 @@ describe("CMP Tests", () => {
   });
 
   describe("InternetBrands", () => {
-    ["https://www.bbonline.com/", "https://www.vbulletin.com/"].forEach(
+    ["https://www.vbulletin.com/"].forEach(
       (url) => {
         cmpTest("InternetBrands", url, { selfTest: false });
       }
@@ -157,20 +139,6 @@ describe("CMP Tests", () => {
     });
   });
 
-  describe("tagcommander", () => {
-    const cmp = "tagcommander";
-    [
-      "https://www.boursorama.com/",
-      "https://www.credit-agricole.fr/",
-      "https://www.kiabi.com/",
-      "https://www.n-tv.de/",
-      "https://www.ovh.de/",
-      "https://www.01net.com/",
-    ].forEach((url) => {
-      cmpTest(cmp, url);
-    });
-  });
-
   describe("com_consentmanager.net", () => {
     const cmp = "com_consentmanager.net";
     cmpTest(cmp, "https://sourceforge.net/");
@@ -179,7 +147,6 @@ describe("CMP Tests", () => {
   describe("com_quantcast", () => {
     const cmp = "quantcast";
     [
-      "https://www.independent.co.uk/",
       "https://imgur.com",
       "https://www.cyclingnews.com/",
       "https://9gag.com",
@@ -188,7 +155,6 @@ describe("CMP Tests", () => {
       "https://www.techradar.com/",
       "https://www.livescience.com",
       "https://www.gamesradar.com",
-      "http://www.allocine.fr/",
     ].forEach((url) => {
       cmpTest(cmp, url);
     });
@@ -201,18 +167,14 @@ describe("CMP Tests", () => {
     });
   });
 
-  describe("privacy-mgmt", () => {
-    cmpTest("privacy-mgmt", "https://www.theguardian.com/");
-  });
-
   describe("com_didomi.io", () => {
     const cmp = "com_didomi.io";
     [
       "https://www.20minutes.fr/",
-      "https://www.thetradedesk.com/",
       "https://www.planet.fr/",
-      "https://www.abc.es/",
-      "https://www.goldens.fr/",
+      "http://www.allocine.fr/",
+      "https://www.01net.com/",
+      "https://www.boursorama.com/",
     ].forEach((url) => {
       cmpTest(cmp, url);
     });
@@ -221,10 +183,7 @@ describe("CMP Tests", () => {
   describe("com_optanon", () => {
     const cmp = "com_optanon";
     [
-      "https://www.atlassian.com/",
-      "https://bitbucket.org/",
       "https://worldofwarcraft.com/",
-      "https://genius.com/",
     ].forEach((url) => {
       cmpTest(cmp, url);
     });
@@ -238,14 +197,20 @@ describe("CMP Tests", () => {
       "https://mailchimp.com/",
       "https://www.okcupid.com/",
       "https://arstechnica.com/",
-      "https://www.jeux.fr/"
+      "https://www.jeux.fr/",
+      "https://www.adobe.com/de/",
+      "https://genius.com/",
+      "https://bitbucket.org/",
+      "https://www.atlassian.com/",
+      "https://www.digitaltrends.com/",
+      "https://about.gitlab.com",
     ].forEach((url) => {
       cmpTest("com_onetrust", url);
     });
   });
 
   describe("com_EvidonBanner", () => {
-    ["https://www.adobe.com/de/", "https://www.economist.com/"].forEach(
+    [, ].forEach(
       (url) => {
         cmpTest("com_EvidonBanner", url);
       }
@@ -254,7 +219,6 @@ describe("CMP Tests", () => {
 
   describe("com_cookiecontrolcivic", () => {
     [
-      "https://impact.com/ad-fraud-detection/",
       "https://www.civicuk.com/",
     ].forEach((url) => {
       cmpTest("com_cookiecontrolcivic", url);
@@ -262,14 +226,11 @@ describe("CMP Tests", () => {
   });
 
   describe("com_tealium.com", () => {
-    ["https://www.constantcontact.com/"].forEach((url) => {
+    [
+      "https://www.constantcontact.com/",
+      "https://www.economist.com/"
+    ].forEach((url) => {
       cmpTest("com_tealium.com", url);
-    });
-  });
-
-  describe("com_chandago", () => {
-    ["https://www.lefigaro.fr/"].forEach((url) => {
-      cmpTest("com_chandago", url);
     });
   });
 
@@ -285,13 +246,11 @@ describe("CMP Tests", () => {
     });
   });
 
-  describe('com_lemonde.fr', () =>{
-    cmpTest('com_lemonde.fr', 'https://lemonde.fr')
-  });
-
   xdescribe("unsupported", () => {
     [
       "https://www.lepoint.fr/",
+      'https://lemonde.fr',
+      "https://www.lefigaro.fr/"
     ].forEach((url) => {
       cmpTest("", url);
     });

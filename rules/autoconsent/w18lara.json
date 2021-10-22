@@ -1,9 +1,0 @@
-{
-  "name": "w18lara",
-  "detectCmp": [{ "exists": "#w18lara_tgplugin_consent" }],
-  "detectPopup": [{ "visible": "#w18lara_tgplugin_consent" }],
-  "optOut": [
-    { "eval": "document.dispatchEvent(new Event('j-dsgvo-generaldeny'));" }
-  ],
-  "optIn": [{ "click": "button[data-purpose=\"cookieBar.button.accept\"]" }]
-}

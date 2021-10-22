@@ -3,7 +3,7 @@ import { TabActor } from "../types";
 
 export default class SourcePoint extends AutoConsentBase {
   constructor() {
-    super("privacy-mgmt");
+    super("Sourcepoint");
   }
 
   detectFrame(_: TabActor, frame: { url: string }) {
