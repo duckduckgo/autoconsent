@@ -35,14 +35,17 @@ const buildConsentOMatic = (async () => {
     });
   });
   consentOMaticSkip.forEach(name => delete comRules[name]);
-  const extraRules = fs.readdirSync(consentOMaticDir);
-  await Promise.all(
-    extraRules.map(async file => {
-      const rule = await readFileJSON(path.join(consentOMaticDir, file));
-      // rule name is file name with JSON extension removed
-      comRules[file.substring(0, file.length - 5)] = rule;
-    })
-  );
+  try {
+    const extraRules = fs.readdirSync(consentOMaticDir);
+    await Promise.all(
+      extraRules.map(async file => {
+        const rule = await readFileJSON(path.join(consentOMaticDir, file));
+        // rule name is file name with JSON extension removed
+        comRules[file.substring(0, file.length - 5)] = rule;
+      })
+    );
+  } catch(e) {
+  }
   rules.consentomatic = comRules;
 })();
 
