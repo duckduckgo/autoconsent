@@ -106,6 +106,7 @@ export default class AutoConsent {
 
   removeTab(tabId: number) {
     this.tabCmps.delete(tabId);
+    this.consentFrames.delete(tabId);
   }
 
   onFrame({ tabId, url, frameId }) {

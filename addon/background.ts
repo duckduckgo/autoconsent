@@ -78,6 +78,17 @@ function showOptOutStatus(
   });
 }
 
+browser.webNavigation.onCommitted.addListener(
+  (details) => {
+    if (details.frameId === 0) {
+      consent.removeTab(details.tabId);
+    }
+  },
+  {
+    url: [{ schemes: ["http", "https"] }],
+  }
+);
+
 browser.webNavigation.onCompleted.addListener(consent.onFrame.bind(consent), {
   url: [{ schemes: ["http", "https"] }],
 });
