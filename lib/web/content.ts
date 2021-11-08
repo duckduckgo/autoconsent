@@ -50,17 +50,13 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
       document.head ||
       document.getElementsByTagName("head")[0] ||
       document.documentElement;
-    const hidden = message.selectors.filter(selector => {
-      const matching = document.querySelectorAll(selector);
-      return matching.length > 0;
-    }, []);
-    const rule = `${hidden.join(",")} { display: none !important; }`;
+    const rule = `${message.selectors.join(",")} { display: none !important; }`;
     const css = document.createElement("style");
     css.type = "text/css";
     css.id = "re-consent-css-rules";
     css.appendChild(document.createTextNode(rule));
     parent.appendChild(css);
-    return hidden.length > 0;
+    return message.selectors.length > 0;
   } else if (message.type === "matches") {
     const matched = matches(message.config);
     return matched;

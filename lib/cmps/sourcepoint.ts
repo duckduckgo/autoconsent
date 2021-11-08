@@ -29,6 +29,7 @@ export default class SourcePoint extends AutoConsentBase {
   }
 
   async optOut(tab: TabActor) {
+    tab.hideElements(["div[id^='sp_message_container_']"])
     if (!this.isManagerOpen(tab)) {
       await success(tab.clickElement("button.sp_choice_type_12", tab.frame.id));
       await waitFor(
