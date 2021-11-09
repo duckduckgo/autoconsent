@@ -1,5 +1,7 @@
 import { waitFor } from '../cmps/base';
 import { TabActor } from '../types';
+import Tools from '../web/consentomatic/tools';
+import { matches } from '../web/consentomatic/index';
 
 const DEBUG = false;
 
@@ -9,6 +11,11 @@ export default class Tab implements TabActor {
   page: any
   url: any
   frames: { [id: number]: any }
+  frame: {
+    type: string
+    id: number
+    url: string
+  }
 
   constructor(page: any, url: string, frames: any) {
     this.page = page;
@@ -67,7 +74,7 @@ export default class Tab implements TabActor {
     if (!await this.elementExists(selector, frameId)) {
       return false;
     }
-    const visible: boolean[] = await this.frames[frameId].$$eval(selector, (nodes: any) => nodes.map((n: any) => n.offsetParent !== null));
+    const visible: boolean[] = await this.frames[frameId].$$eval(selector, (nodes: any) => nodes.map((n: any) => n.offsetParent !== null && window.getComputedStyle(n).display !== "none"));
     DEBUG && console.log('[visible]', selector, check, visible);
     if (visible.length === 0) {
       return false;
@@ -118,7 +125,13 @@ export default class Tab implements TabActor {
   }
 
   matches(options: any): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const script = `(() => {
+      const Tools = ${Tools.toString()};
+      const matches = ${matches.toString()};
+      return matches(${JSON.stringify(options)})
+    })();
+    `
+    return this.frames[0].evaluate(script)
   }
 
   executeAction(config: any, param?: any): Promise<boolean> {
