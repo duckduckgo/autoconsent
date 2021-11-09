@@ -204,6 +204,7 @@ describe("CMP Tests", () => {
       "https://www.atlassian.com/",
       "https://www.digitaltrends.com/",
       "https://about.gitlab.com",
+      "https://doodle.com/"
     ].forEach((url) => {
       cmpTest("com_onetrust", url);
     });
@@ -249,7 +250,8 @@ describe("CMP Tests", () => {
   describe("funding-choices", () => {
     [
       "https://www.dinarguru.com/",
-      "https://blog.alltolearn.com/"
+      "https://blog.alltolearn.com/",
+      "https://www.schulferien.org/deutschland/feiertage/november/"
     ].forEach((url) => {
       cmpTest("funding-choices", url);
     })
