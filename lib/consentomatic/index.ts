@@ -1,21 +1,12 @@
 import { AutoCMP, TabActor } from "../types";
 
-type Method =
-  | "HIDE_CMP"
-  | "OPEN_OPTIONS"
-  | "HIDE_CMP"
-  | "DO_CONSENT"
-  | "SAVE_CONSENT"
-  | "TEST_CONSENT";
 type DetectorConfig = {
   presentMatcher: {};
   showingMatcher: {};
 };
 type MethodConfig = {
-  action: {
-    type: string;
-  };
-  name: Method;
+  action?: any;
+  name: string;
 };
 
 export type ConsentOMaticConfig = {
@@ -24,7 +15,7 @@ export type ConsentOMaticConfig = {
 };
 
 export class ConsentOMaticCMP implements AutoCMP {
-  methods = new Map<Method, {}>();
+  methods = new Map<string, {}>();
   hasSelfTest: boolean;
 
   constructor(public name: string, public config: ConsentOMaticConfig) {
@@ -56,7 +47,7 @@ export class ConsentOMaticCMP implements AutoCMP {
     ).some(matched => matched);
   }
 
-  async executeAction(tab: TabActor, method: Method, param?: any) {
+  async executeAction(tab: TabActor, method: string, param?: any) {
     if (this.methods.has(method)) {
       return tab.executeAction(this.methods.get(method), param);
     }
