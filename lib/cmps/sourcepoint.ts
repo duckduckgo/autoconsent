@@ -17,7 +17,7 @@ export default class SourcePoint extends AutoConsentBase {
   }
 
   async detectPopup(tab: TabActor) {
-    return tab.elementsAreVisible("div[id^='sp_message_container_']") || !!tab.frame
+    return await tab.elementsAreVisible("div[id^='sp_message_container_']") || !!tab.frame
   }
 
   async optIn(tab: TabActor) {

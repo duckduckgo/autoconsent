@@ -1,7 +1,7 @@
 {
   "name": "quantcast",
   "detectCmp": [{ "exists": "#qc-cmp2-container" }],
-  "detectPopup": [{ "visble": "#qc-cmp2-ui" }],
+  "detectPopup": [{ "visible": "#qc-cmp2-ui" }],
   "optOut": [
     { "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]" },
     { "waitFor": "#qc-cmp2-ui" },
