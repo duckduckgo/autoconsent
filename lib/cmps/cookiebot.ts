@@ -8,7 +8,7 @@ export default class Cookiebot extends AutoConsentBase {
 
   async detectCmp(tab: TabActor) {
     try {
-      return await tab.eval('typeof window.CookieConsent === "object"');
+      return await tab.eval('typeof window.CookieConsent === "object" && typeof window.CookieConsent.name === "string"');
     } catch (e) {
       return false;
     }
