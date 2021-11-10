@@ -76,6 +76,10 @@ export default class AutoConsent {
     this.rules.push(createAutoCMP(config));
   }
 
+  disableCMPs(cmpNames: String[]) {
+    this.rules = this.rules.filter((cmp) => !cmpNames.includes(cmp.name))
+  }
+
   addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
     this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
   }
