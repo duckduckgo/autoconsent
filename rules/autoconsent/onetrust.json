@@ -1,0 +1,22 @@
+{
+  "name": "Onetrust",
+  "detectCmp": [{ "exists": "#onetrust-banner-sdk" }],
+  "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
+  "optOut": [
+    { "hide": ["#onetrust-banner-sdk", "#onetrust-consent-sdk"] },
+    { "click": "#onetrust-pc-btn-handler,.ot-sdk-show-settings" },
+    { "waitFor": "#onetrust-consent-sdk", "timeout": 2000 },
+    {
+      "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
+      "all": true,
+      "optional": true
+    },
+    { "waitForThenClick": ".save-preference-btn-handler", "timeout": 1000 }
+  ],
+  "optIn": [{ "click": "onetrust-accept-btn-handler" }],
+  "test": [
+    {
+      "eval": "window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1"
+    }
+  ]
+}
