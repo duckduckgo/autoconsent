@@ -17,7 +17,8 @@
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.js && cp rules/rules.json addon/",
     "version": "node update_version.js && git add addon/manifest.json",
-    "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/"
+    "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
+    "prepublish": "npm run build-rules && npm run build && npm run bundle"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
