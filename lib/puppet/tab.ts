@@ -111,7 +111,8 @@ export default class Tab implements TabActor {
   }
 
   async hideElements(selectors: string[], frameId = 0) {
-    return Promise.resolve(false)
+    // TODO implement this
+    return Promise.resolve(true)
   }
 
   async goto(url: string) {
