@@ -74,7 +74,7 @@ export default class Tab implements TabActor {
     if (!await this.elementExists(selector, frameId)) {
       return false;
     }
-    const visible: boolean[] = await this.frames[frameId].$$eval(selector, (nodes: any) => nodes.map((n: any) => n.offsetParent !== null && window.getComputedStyle(n).display !== "none"));
+    const visible: boolean[] = await this.frames[frameId].$$eval(selector, (nodes: any) => nodes.map((n: any) => n.offsetParent !== null || window.getComputedStyle(n).display !== "none"));
     DEBUG && console.log('[visible]', selector, check, visible);
     if (visible.length === 0) {
       return false;
