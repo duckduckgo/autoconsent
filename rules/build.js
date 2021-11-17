@@ -24,7 +24,7 @@ const buildAutoconsent = Promise.all(
 const consentOMaticCommit = "7d7fd2bd6bf2b662350b0eaeca74db6eba155efe";
 const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
 const consentOMaticDir = path.join(__dirname, "consentomatic");
-const consentOMaticSkip = ["trustarcbar", "trustarcframe", "sourcepoint", "lemonde.fr", "onetrust"];
+const consentOMaticSkip = ["trustarcbar", "trustarcframe", "sourcepoint", "lemonde.fr", "onetrust", "ez-cookie"];
 const buildConsentOMatic = (async () => {
   const comRules = await new Promise(resolve => {
     https.get(consentOMaticUrl, res => {
