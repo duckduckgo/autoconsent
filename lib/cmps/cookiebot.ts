@@ -28,6 +28,9 @@ export default class Cookiebot extends AutoConsentBase {
     if (await tab.elementsAreVisible('#CybotCookiebotDialogBodyButtonDecline', 'all')) {
       return await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
     }
+    if (await tab.elementExists('.cookiebanner__link--details')) {
+      await tab.clickElement('.cookiebanner__link--details')
+    }
     await tab.clickElements('.CybotCookiebotDialogBodyLevelButton:checked:enabled,input[id*="CybotCookiebotDialogBodyLevelButton"]:checked:enabled');
     if (await tab.elementExists('#CybotCookiebotDialogBodyButtonDecline')) {
       await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
@@ -35,7 +38,7 @@ export default class Cookiebot extends AutoConsentBase {
     if (await tab.elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
       await tab.clickElement('#CybotCookiebotDialogBodyButtonAcceptSelected');
     } else {
-      await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept');
+      await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection');
     }
     return true;
   }
