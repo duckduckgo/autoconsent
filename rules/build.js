@@ -26,7 +26,7 @@ const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Ma
 const consentOMaticDir = path.join(__dirname, "consentomatic");
 const consentOMaticSkip = [
   "trustarcbar", "trustarcframe", "sourcepoint", "lemonde.fr", "onetrust", "ez-cookie",
-  "tealium.com", "cookiebot"
+  "tealium.com", "cookiebot", "consentmanager.net"
 ];
 const buildConsentOMatic = (async () => {
   const comRules = await new Promise(resolve => {
