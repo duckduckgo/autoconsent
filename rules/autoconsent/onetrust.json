@@ -1,7 +1,7 @@
 {
   "name": "Onetrust",
-  "detectCmp": [{ "exists": "#onetrust-banner-sdk" }],
-  "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
+  "detectCmp": [{ "exists": "#onetrust-banner-sdk,.optanon-alert-box-wrapper  " }],
+  "detectPopup": [{ "visible": "#onetrust-banner-sdk,.optanon-alert-box-wrapper  " }],
   "optOut": [
     { "hide": ["#onetrust-banner-sdk", "#onetrust-consent-sdk"] },
     { "click": "#onetrust-pc-btn-handler,.ot-sdk-show-settings" },
