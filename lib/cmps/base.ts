@@ -132,7 +132,7 @@ export class AutoConsent extends AutoConsentBase {
 
   async _runRulesParallel(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
     const detections = await Promise.all(rules.map(rule => evaluateRule(rule, tab)));
-    return detections.some(r => !!r);
+    return detections.every(r => !!r);
   }
 
   async _runRulesSequentially(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
