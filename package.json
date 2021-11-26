@@ -8,6 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "clean": "rm -r dist lib/**/*.js lib/*.js",
     "build": "tsc",
     "bundle": "rollup -c",
     "watch": "rollup -c -w",
