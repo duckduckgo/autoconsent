@@ -56,7 +56,7 @@ class TabConsent {
     return this.rule.test(this.tab);
   }
 
-  async applyCosmetics(selectors) {
+  async applyCosmetics(selectors: string[]) {
     const hidden = await this.tab.hideElements(selectors);
     return hidden;
   }
@@ -113,7 +113,7 @@ export default class AutoConsent {
     this.consentFrames.delete(tabId);
   }
 
-  onFrame({ tabId, url, frameId }) {
+  onFrame({ tabId, url, frameId }: { tabId: number, url: string, frameId: number }) {
     // ignore main frames
     if (frameId === 0) {
       return;

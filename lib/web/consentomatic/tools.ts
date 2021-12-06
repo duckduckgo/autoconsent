@@ -3,13 +3,13 @@
  * which is licened under the MIT. 
  */
 export default class Tools {
-  static base = null;
+  static base: HTMLElement = null;
 
-  static setBase(base) {
+  static setBase(base: HTMLElement) {
     Tools.base = base;
   }
 
-  static findElement(options, parent = null, multiple = false) {
+  static findElement(options: any, parent: any = null, multiple = false): HTMLElement[] | HTMLElement {
     let possibleTargets = null;
 
     if (parent != null) {
@@ -117,8 +117,8 @@ export default class Tools {
     }
   }
 
-  static find(options, multiple = false) {
-    let results = [];
+  static find(options: any, multiple = false) {
+    let results: any[] = [];
     if (options.parent != null) {
       let parent = Tools.findElement(options.parent, null, multiple);
       if (parent != null) {

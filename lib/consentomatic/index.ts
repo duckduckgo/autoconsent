@@ -1,10 +1,10 @@
 import { AutoCMP, TabActor } from "../types";
 
-type DetectorConfig = {
+export type DetectorConfig = {
   presentMatcher: {};
   showingMatcher: {};
 };
-type MethodConfig = {
+export type MethodConfig = {
   action?: any;
   name: string;
 };

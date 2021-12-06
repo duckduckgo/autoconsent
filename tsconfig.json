@@ -3,7 +3,8 @@
     "target": "ES2020",
     "typeRoots": ["node_modules/web-ext-types"],
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "noImplicitAny": true,
   },
   "exclude": [
     "node_modules/*",

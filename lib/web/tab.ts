@@ -13,7 +13,7 @@ export default class TabActions implements TabActor {
     this.id = tabId;
   }
 
-  async elementExists(selector, frameId = 0) {
+  async elementExists(selector: string, frameId = 0) {
     console.log(`check for  ${selector} in tab ${this.id}, frame ${frameId}`);
     return this.sendContentMessage(
       this.id,
@@ -27,7 +27,7 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async clickElement(selector, frameId = 0) {
+  async clickElement(selector: string, frameId = 0) {
     console.log(`click element ${selector} in tab ${this.id}`);
     return this.sendContentMessage(
       this.id,
@@ -41,7 +41,7 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async clickElements(selector, frameId = 0) {
+  async clickElements(selector: string, frameId = 0) {
     console.log(`click elements ${selector} in tab ${this.id}`);
     return this.sendContentMessage(
       this.id,
@@ -56,7 +56,7 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async elementsAreVisible(selector, check, frameId = 0) {
+  async elementsAreVisible(selector: string, check?: 'all' | 'any' | 'none', frameId = 0) {
     return this.sendContentMessage(
       this.id,
       {
@@ -70,7 +70,7 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async getAttribute(selector, attribute, frameId) {
+  async getAttribute(selector: string, attribute: string, frameId = 0) {
     return this.sendContentMessage(
       this.id,
       {
@@ -82,7 +82,7 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async eval(script, frameId = 0) {
+  async eval(script: string, frameId = 0) {
     // console.log(`run ${script} in tab ${this.id}`);
     return await this.sendContentMessage(
       this.id,
@@ -94,7 +94,7 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async waitForElement(selector, timeout, frameId = 0) {
+  async waitForElement(selector: string, timeout: number, frameId = 0) {
     const interval = 200;
     const times = Math.ceil(timeout / interval);
     return waitFor(
@@ -104,13 +104,13 @@ export default class TabActions implements TabActor {
     );
   }
 
-  async waitForThenClick(selector, timeout, frameId = 0) {
+  async waitForThenClick(selector: string, timeout: number, frameId = 0) {
     await this.waitForElement(selector, timeout, frameId);
     await this.clickElement(selector, frameId);
     return true;
   }
 
-  async hideElements(selectors, frameId = 0) {
+  async hideElements(selectors: string[], frameId = 0) {
     return this.sendContentMessage(
       this.id,
       {
@@ -125,11 +125,11 @@ export default class TabActions implements TabActor {
     return this.browser.tabs.get(this.id);
   }
 
-  async goto(url) {
+  async goto(url: string) {
     return this.browser.tabs.update(this.id, { url });
   }
 
-  wait(ms): Promise<true> {
+  wait(ms: number): Promise<true> {
     return new Promise(resolve => {
       setTimeout(() => resolve(true), ms);
     });

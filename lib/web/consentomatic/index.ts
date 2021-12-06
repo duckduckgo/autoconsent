@@ -1,6 +1,6 @@
 import Tools from "./tools";
 
-export function matches(config) {
+export function matches(config: any) {
   const result = Tools.find(config);
   if (config.type === "css") {
     return !!result.target;
@@ -9,7 +9,7 @@ export function matches(config) {
   }
 }
 
-export async function executeAction(config, param?): Promise<boolean | void> {
+export async function executeAction(config: any, param?: any): Promise<boolean | void> {
   switch (config.type) {
     case "click":
       return clickAction(config);
@@ -48,7 +48,7 @@ function waitTimeout(timeout: number): Promise<void> {
   });
 }
 
-async function clickAction(config) {
+async function clickAction(config: any) {
   const result = Tools.find(config);
   if (result.target != null) {
     result.target.click();
@@ -56,13 +56,13 @@ async function clickAction(config) {
   return waitTimeout(STEP_TIMEOUT);
 }
 
-async function listAction(config, param) {
+async function listAction(config: any, param: any) {
   for (let action of config.actions) {
     await executeAction(action, param);
   }
 }
 
-async function consentAction(config, consentTypes) {
+async function consentAction(config: any, consentTypes: any) {
   for (const consentConfig of config.consents) {
     const shouldEnable = consentTypes.indexOf(consentConfig.type) !== -1;
     if (consentConfig.matcher && consentConfig.toggleAction) {
@@ -80,7 +80,7 @@ async function consentAction(config, consentTypes) {
   }
 }
 
-async function ifCssAction(config, param) {
+async function ifCssAction(config: any, param: any) {
   const result = Tools.find(config);
   if (!result.target) {
     if (config.trueAction) {
@@ -93,8 +93,8 @@ async function ifCssAction(config, param) {
   }
 }
 
-async function waitCssAction(config) {
-  await new Promise(resolve => {
+async function waitCssAction(config: any) {
+  await new Promise<void>(resolve => {
     let numRetries = config.retries || 10;
     const waitTime = config.waitTime || 250;
     const checkCss = () => {
@@ -117,7 +117,7 @@ async function waitCssAction(config) {
   });
 }
 
-async function forEachAction(config, param) {
+async function forEachAction(config: any, param: any) {
   const results = Tools.find(config, true);
   const oldBase = Tools.base;
   for (const result of results) {
@@ -129,7 +129,7 @@ async function forEachAction(config, param) {
   Tools.setBase(oldBase);
 }
 
-async function hideAction(config) {
+async function hideAction(config: any) {
   const result = Tools.find(config);
   if (result.target) {
     result.target.classList.add("Autoconsent-Hidden");
@@ -137,7 +137,7 @@ async function hideAction(config) {
   }
 }
 
-async function slideAction(config) {
+async function slideAction(config: any) {
   const result = Tools.find(config);
   const dragResult = Tools.find(config.dragTarget);
   if (result.target) {
@@ -221,15 +221,15 @@ async function slideAction(config) {
   }
 }
 
-async function waitAction(config) {
+async function waitAction(config: any) {
   await waitTimeout(config.waitTime);
 }
 
-async function closeAction(config) {
+async function closeAction(config: any) {
   window.close();
 }
 
-async function evalAction(config): Promise<boolean> {
+async function evalAction(config: any): Promise<boolean> {
   console.log("eval!", config.code);
   return new Promise(resolve => {
     try {

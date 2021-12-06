@@ -37,9 +37,9 @@ export default class Tab implements TabActor {
   async clickElement(selector: string, frameId = 0) {
     if (await this.elementExists(selector, frameId)) {
       try {
-        const result = await this.frames[frameId].evaluate((s) => {
+        const result = await this.frames[frameId].evaluate((s: string) => {
           try {
-            document.querySelector(s).click();
+            (document.querySelector(s) as HTMLElement).click();
             return true;
           } catch (e) {
             return e.toString();
@@ -59,7 +59,7 @@ export default class Tab implements TabActor {
     const elements = await this.frames[frameId].$$(selector);
     try {
       DEBUG && console.log('[click all]', selector);
-      await this.frames[frameId].evaluate((s) => {
+      await this.frames[frameId].evaluate((s: string) => {
         const elem = document.querySelectorAll<HTMLElement>(s);
         elem.forEach(e => e.click());
       }, selector)

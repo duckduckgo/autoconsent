@@ -1,12 +1,19 @@
 /* global browser */
+import { ConsentOMaticConfig } from "../lib/consentomatic";
+import { AutoConsentCMPRule } from "../lib/rules";
 import AutoConsent from "../lib/web";
 
 const consent = new AutoConsent(<any>browser, browser.tabs.sendMessage);
 const tabGuards = new Set();
 
+type RuleBundle = {
+  autoconsent: AutoConsentCMPRule[];
+  consentomatic: { [name: string]: ConsentOMaticConfig };
+}
+
 async function loadRules() {
   const res = await fetch("./rules.json");
-  const rules = await res.json();
+  const rules: RuleBundle = await res.json();
   Object.keys(rules.consentomatic).forEach((name) => {
     consent.addConsentomaticCMP(name, rules.consentomatic[name]);
   });
@@ -15,7 +22,7 @@ async function loadRules() {
   });
 }
 
-function log(...msg) {
+function log(...msg: any[]) {
   console.log("[autoconsent]", ...msg);
 }
 
@@ -93,7 +100,7 @@ browser.webNavigation.onCompleted.addListener(consent.onFrame.bind(consent), {
   url: [{ schemes: ["http", "https"] }],
 });
 
-browser.runtime.onMessage.addListener(({ type }, sender) => {
+browser.runtime.onMessage.addListener(({ type }: { type: string }, sender: any) => {
   if (type === "frame" && sender.frameId === 0) {
     checkShouldShowPageAction({
       tabId: sender.tab.id,
