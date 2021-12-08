@@ -1,0 +1,13 @@
+{
+  "name": "cookie-law-info",
+  "detectCmp": [{ "exists": "#cookie-law-info-bar" }],
+  "detectPopup": [{ "visible": "#cookie-law-info-bar" }],
+  "optIn": [{ "click": "[data-cli_action=\"accept\"]" }],
+  "optOut": [
+    { "hide": ["#cookie-law-info-bar"] },
+    {
+      "eval": "CLI.disableAllCookies();CLI.reject_close()"
+    }
+  ],
+  "test": [{ "eval": "document.cookie.indexOf('cookielawinfo-checkbox-non-necessary=yes') === -1" }]
+}

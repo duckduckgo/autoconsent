@@ -1,0 +1,9 @@
+{
+    "name": "osano",
+    "detectCmp": [{ "exists": ".osano-cm-window" }],
+    "detectPopup": [{ "visible": ".osano-cm-dialog" }],
+    "optIn": [{ "click": ".osano-cm-accept-all" }],
+    "optOut": [
+        { "hide": [".osano-cm-window"] }
+    ]
+  }

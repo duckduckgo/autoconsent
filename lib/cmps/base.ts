@@ -4,12 +4,7 @@ import { AutoCMP, TabActor } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep } from "../rules";
 
 export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
-  let result = false;
-  try {
-    result = await predicate();
-  } catch (e) {
-    console.warn('error in waitFor predicate', e);
-  }
+  let result = await predicate();
   if (!result && maxTimes > 0) {
     return new Promise((resolve) => {
       setTimeout(async () => {
@@ -65,10 +60,7 @@ export default class AutoConsentBase implements AutoCMP {
 
   async test(tab: TabActor): Promise<boolean> {
     // try IAB by default
-    await tab.eval("__tcfapi('getTCData', 2, r => window.__rcsResult = r)");
-    return tab.eval(
-      "Object.values(window.__rcsResult.purpose.consents).every(c => !c)"
-    );
+    return Promise.resolve(true);
   }
 }
 

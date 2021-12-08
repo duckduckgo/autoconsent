@@ -28,10 +28,12 @@ class TabConsent {
     return null;
   }
 
-  async isPopupOpen() {
-    return await this.rule.detectPopup(this.tab) || await new Promise((resolve) => {
-      setTimeout(async () => resolve(await this.rule.detectPopup(this.tab)), 1000);
-    });
+  async isPopupOpen(retries = 1, interval = 1000) {
+    const isOpen = await this.rule.detectPopup(this.tab);
+    if (!isOpen && retries > 0) {
+      return new Promise((resolve) => setTimeout(() => resolve(this.isPopupOpen(retries - 1, interval)), interval));
+    }
+    return isOpen;
   }
 
   async doOptOut() {
