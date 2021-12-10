@@ -46,23 +46,25 @@ export default class SourcePoint extends AutoConsentBase {
     }
     await tab.waitForElement('.type-modal', 20000, tab.frame.id);
     // reject all button is offered by some sites
-    const path = await Promise.race([
-      tab.waitForElement('.sp_choice_type_REJECT_ALL', 10000, tab.frame.id).then(r => 0),
-      tab.waitForElement('.reject-toggle', 10000, tab.frame.id).then(() => 1),
-      tab.waitForElement('.pm-features', 10000, tab.frame.id).then(r => 2),
-    ]);
-    if (path === 0) {
-      await tab.wait(1000);
-      return await success(tab.clickElement('.sp_choice_type_REJECT_ALL', tab.frame.id))
-    } else if (path === 1) {
-      await tab.clickElement('.reject-toggle', tab.frame.id)
-    } else {
-      await tab.waitForElement('.pm-features', 10000, tab.frame.id);
-      await tab.clickElements('.checked > span', tab.frame.id);
-      if (await tab.elementExists('.chevron',  tab.frame.id)) {
-        await tab.clickElement('.chevron', tab.frame.id)
+    try {
+      const path = await Promise.race([
+        tab.waitForElement('.sp_choice_type_REJECT_ALL', 2000, tab.frame.id).then(r => 0),
+        tab.waitForElement('.reject-toggle', 2000, tab.frame.id).then(() => 1),
+        tab.waitForElement('.pm-features', 2000, tab.frame.id).then(r => 2),
+      ]);
+      if (path === 0) {
+        await tab.wait(1000);
+        return await success(tab.clickElement('.sp_choice_type_REJECT_ALL', tab.frame.id))
+      } else if (path === 1) {
+        await tab.clickElement('.reject-toggle', tab.frame.id)
+      } else {
+        await tab.waitForElement('.pm-features', 10000, tab.frame.id);
+        await tab.clickElements('.checked > span', tab.frame.id);
+        if (await tab.elementExists('.chevron',  tab.frame.id)) {
+          await tab.clickElement('.chevron', tab.frame.id)
+        }
       }
-    }
+    } catch(e) {}
     return await tab.clickElement('.sp_choice_type_SAVE_AND_EXIT', tab.frame.id);
   }
 
