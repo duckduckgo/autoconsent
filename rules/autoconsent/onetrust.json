@@ -1,19 +1,20 @@
 {
   "name": "Onetrust",
-  "detectCmp": [{ "exists": "#onetrust-banner-sdk,.optanon-alert-box-wrapper  " }],
-  "detectPopup": [{ "visible": "#onetrust-banner-sdk,.optanon-alert-box-wrapper  " }],
+  "detectCmp": [{ "exists": "#onetrust-banner-sdk,.optanon-alert-box-wrapper" }],
+  "detectPopup": [{ "visible": "#onetrust-banner-sdk,.optanon-alert-box-wrapper" }],
   "optOut": [
     { "hide": ["#onetrust-banner-sdk", "#onetrust-consent-sdk"] },
-    { "click": "#onetrust-pc-btn-handler,.ot-sdk-show-settings" },
+    { "click": "#onetrust-pc-btn-handler,.ot-sdk-show-settings,.js-cookie-settings" },
     { "waitFor": "#onetrust-consent-sdk", "timeout": 2000 },
+    { "wait": 1000 },
     {
-      "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
+      "click": "#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked",
       "all": true,
       "optional": true
     },
-    { "waitForThenClick": ".save-preference-btn-handler", "timeout": 1000 }
+    { "waitForThenClick": ".save-preference-btn-handler,.js-consent-save", "timeout": 1000 }
   ],
-  "optIn": [{ "click": "onetrust-accept-btn-handler" }],
+  "optIn": [{ "click": "onetrust-accept-btn-handler,js-accept-cookies" }],
   "test": [
     {
       "eval": "window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1"
