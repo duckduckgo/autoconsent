@@ -22,7 +22,7 @@ export default class TrustArc extends AutoConsentBase {
 
   async detectPopup(tab: TabActor) {
     return (
-      (await tab.elementsAreVisible("#truste-consent-content")) ||
+      (await tab.elementsAreVisible("#truste-consent-content,#trustarc-banner-overlay")) ||
       (tab.frame &&
         (await tab.waitForElement(
           "#defaultpreferencemanager",
@@ -95,7 +95,11 @@ export default class TrustArc extends AutoConsentBase {
       );
       await tab.clickElement(".submit", frameId);
     }
-    await tab.waitForThenClick("#gwt-debug-close_id", 20000, tab.frame.id);
+    try {
+      await tab.waitForThenClick("#gwt-debug-close_id", 20000, tab.frame.id);
+    } catch (e) {
+      // ignore frame disappearing
+    }
     return true;
   }
 

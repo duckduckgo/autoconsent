@@ -13,7 +13,9 @@
     "bundle": "rollup -c",
     "watch": "rollup -c -w",
     "start": "web-ext run -s ./addon --firefox firefoxdeveloperedition",
-    "test": "jest",
+    "test": "playwright test",
+    "test:webkit": "playwright test --project webkit",
+    "test:firefox": "playwright test --project firefox",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.js && cp rules/rules.json addon/",
@@ -25,6 +27,7 @@
   "license": "MPL-2.0",
   "dependencies": {},
   "devDependencies": {
+    "@playwright/test": "^1.17.1",
     "@rollup/plugin-typescript": "^4.0.0",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^8.0.0",

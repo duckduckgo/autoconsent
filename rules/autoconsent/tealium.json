@@ -3,9 +3,9 @@
     "detectCmp": [{ "exists": "#__tealiumGDPRecModal" }, { "eval": "typeof utag.gdpr === 'object'" }],
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
-      { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs"] },
-      { "eval": "utag.gdpr.setPreferencesFromList([])" },
-      { "eval": "utag.gdpr.setConsentValue(0)" }
+      { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs", "#consent-layer"] },
+      { "eval": "utag.gdpr.setPreferencesFromList([]) || true" },
+      { "eval": "utag.gdpr.setConsentValue(0) || true" }
     ],
     "optIn": [
       { "hide": ["#__tealiumGDPRecModal"] },

@@ -19,6 +19,12 @@ export default class Cookiebot extends AutoConsentBase {
   }
 
   async optOut(tab: TabActor) {
+    if (await tab.elementExists('.cookie-alert-extended-detail-link')) {
+      await tab.clickElement('.cookie-alert-extended-detail-link');
+      await tab.waitForElement('.cookie-alert-configuration', 1000);
+      await tab.clickElements('.cookie-alert-configuration-input:checked');
+      return tab.clickElement('.cookie-alert-extended-button-secondary');
+    }
     if (await tab.elementExists('#dtcookie-container')) {
       return tab.clickElement('.h-dtcookie-decline');
     }

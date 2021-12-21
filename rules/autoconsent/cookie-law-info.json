@@ -6,7 +6,7 @@
   "optOut": [
     { "hide": ["#cookie-law-info-bar"] },
     {
-      "eval": "CLI.disableAllCookies();CLI.reject_close()"
+      "eval": "CLI.disableAllCookies();CLI.reject_close() || true"
     }
   ],
   "test": [{ "eval": "document.cookie.indexOf('cookielawinfo-checkbox-non-necessary=yes') === -1" }]

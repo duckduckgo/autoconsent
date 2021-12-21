@@ -1,5 +1,7 @@
 import Tab from './web/tab';
 import handleContentMessage from './web/content';
+import TabConsent from './tabwrapper';
+import detectDialog from './detector';
 import { rules, createAutoCMP } from './index';
 import { Browser, MessageSender, AutoCMP, TabActor } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
@@ -9,59 +11,6 @@ export * from './index';
 export {
   Tab,
   handleContentMessage,
-}
-
-class TabConsent {
-  checked: Promise<AutoCMP>
-  rule: AutoCMP
-  optOutStatus: boolean | Error = null
-
-  constructor(public tab: TabActor, ruleCheckPromise: Promise<AutoCMP>) {
-    this.checked = ruleCheckPromise;
-    ruleCheckPromise.then(rule => this.rule = rule);
-  }
-
-  getCMPName() {
-    if (this.rule) {
-      return this.rule.name;
-    }
-    return null;
-  }
-
-  async isPopupOpen(retries = 1, interval = 1000) {
-    const isOpen = await this.rule.detectPopup(this.tab);
-    if (!isOpen && retries > 0) {
-      return new Promise((resolve) => setTimeout(() => resolve(this.isPopupOpen(retries - 1, interval)), interval));
-    }
-    return isOpen;
-  }
-
-  async doOptOut() {
-    try {
-      this.optOutStatus = await this.rule.optOut(this.tab);
-      return this.optOutStatus;
-    } catch (e) {
-      this.optOutStatus = e;
-      throw e;
-    }
-  }
-
-  async doOptIn() {
-    return this.rule.optIn(this.tab);
-  }
-
-  hasTest() {
-    return !!this.rule.hasSelfTest
-  }
-
-  async testOptOutWorked() {
-    return this.rule.test(this.tab);
-  }
-
-  async applyCosmetics(selectors: string[]) {
-    const hidden = await this.tab.hideElements(selectors);
-    return hidden;
-  }
 }
 
 export default class AutoConsent {
@@ -143,30 +92,6 @@ export default class AutoConsent {
   }
 
   async detectDialog(tab: TabActor, retries: number): Promise<AutoCMP> {
-    const found: number = await new Promise(async (resolve) => {
-      let earlyReturn = false;
-      await Promise.all(this.rules.map(async (r, index) => {
-        try {
-          if (await r.detectCmp(tab)) {
-            earlyReturn = true;
-            resolve(index)
-          }
-        } catch (e) {
-          console.warn('detectCMP error', r.name, e)
-        }
-      }));
-      if (!earlyReturn) {
-        resolve(-1)
-      }
-    })
-    if (found === -1 && retries > 0) {
-      return new Promise((resolve) => {
-        setTimeout(async () => {
-          const result = this.detectDialog(tab, retries - 1);
-          resolve(result);
-        }, 500);
-      });
-    }
-    return found > -1 ? this.rules[found] : null;
+    return detectDialog(tab, retries, this.rules);
   }
 }

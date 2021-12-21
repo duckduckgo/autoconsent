@@ -31,7 +31,9 @@ export default class SourcePoint extends AutoConsentBase {
   async optOut(tab: TabActor) {
     tab.hideElements(["div[id^='sp_message_container_']"])
     if (!this.isManagerOpen(tab)) {
-      await waitFor(() => !!tab.frame, 30, 100);
+      if (!await waitFor(() => !!tab.frame, 30, 100)) {
+        throw "Frame never opened";
+      }
       if (!await tab.elementExists("button.sp_choice_type_12", tab.frame.id)) {
         // do not sell button
         return tab.clickElement('button.sp_choice_type_13', tab.frame.id);

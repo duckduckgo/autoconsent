@@ -24,14 +24,9 @@ export default class Tab implements TabActor {
   }
 
   async elementExists(selector: string, frameId = 0) {
-    try {
-      const elements = await this.frames[frameId].$$(selector)
-      DEBUG && console.log('[exists]', selector, elements.length > 0);
-      return elements.length > 0;
-    } catch (e) {
-      console.warn(e)
-      return false;
-    }
+    const elements = await this.frames[frameId].$$(selector)
+    DEBUG && console.log('[exists]', selector, elements.length > 0);
+    return elements.length > 0;
   }
 
   async clickElement(selector: string, frameId = 0) {
@@ -94,8 +89,9 @@ export default class Tab implements TabActor {
   }
 
   async eval(script: string, frameId = 0) {
-    DEBUG && console.log('[eval]', script);
-    return await this.frames[frameId].evaluate(script);
+    const result = await this.frames[frameId].evaluate(script);
+    DEBUG && console.log('[eval]', script, result);
+    return result
   }
 
   async waitForElement(selector: string, timeout: number, frameId = 0) {
