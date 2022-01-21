@@ -4,20 +4,6 @@ import { test, expect } from '@playwright/test';
 import * as autoconsent from '../dist/autoconsent.puppet';
 import * as extraRules from '../rules/rules.json';
 
-enum Region {
-    EU,
-    US,
-    GB,
-}
-const ALL_REGIONS = [Region.EU, Region.US, Region.GB]
-// Describes a test case:
-// - URL
-// - Expected CMP
-// - Regions where we should skip this test
-// - Should test for successful opt-out
-// - Should test self-test
-type SiteCMPTest = [string, string, boolean?, boolean?, Region[]?]
-
 const consentomatic = extraRules.consentomatic;
 const rules = [
     ...autoconsent.rules,
@@ -35,20 +21,33 @@ async function ensureScreenshotDir() {
     }
 }
 
-export function generateTest(url: string, expectedCmp: string, testOptOut = true, testSelfTest = true) {
+type TestOptions = {
+    testOptOut: boolean;
+    testSelfTest: boolean;
+    skipRegions?: string[];
+}
+const defaultOptions: TestOptions = {
+    testOptOut: true,
+    testSelfTest: true,
+    skipRegions: [],
+}
+
+export function generateTest(url: string, expectedCmp: string, options: TestOptions = { testOptOut: true, testSelfTest: true }) {
     test(`${url.split('://')[1]} .${testRegion}`, async ({ page }) => {
-        test.slow();
         await page.goto(url);
+        if (options.skipRegions && options.skipRegions.indexOf(testRegion) !== -1) {
+            test.skip();
+        }
 
         try {
             const tab = autoconsent.attachToPage(page, url, rules, 4);
             await tab.checked;
             expect(tab.getCMPName()).toBe(expectedCmp);
             expect(await tab.isPopupOpen()).toBeTruthy();
-            if (testOptOut) {
+            if (options.testOptOut) {
                 expect(await tab.doOptOut()).toBeTruthy();
             }
-            if (testSelfTest) {
+            if (options.testSelfTest) {
                 expect(await tab.testOptOutWorked()).toBeTruthy();
             }
         } finally {
@@ -60,10 +59,10 @@ export function generateTest(url: string, expectedCmp: string, testOptOut = true
     });
 }
 
-export default function generateCMPTests(cmp: string, sites: string[], testOptOut: boolean = true, testSelfTest: boolean = true) {
+export default function generateCMPTests(cmp: string, sites: string[], options: Partial<TestOptions> = {}) {
     test.describe(cmp, () => {
         sites.forEach((url) => {
-            generateTest(url, cmp, testOptOut, testSelfTest);
+            generateTest(url, cmp, Object.assign({}, defaultOptions, options));
         });
     })
 }
