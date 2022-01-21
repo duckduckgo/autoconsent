@@ -35,7 +35,7 @@ async function ensureScreenshotDir() {
 }
 
 export function generateTest(url: string, expectedCmp: string, testOptOut = true, testSelfTest = true) {
-    test(`${url} (${expectedCmp})`, async ({ page }) => {
+    test(`${expectedCmp}.${url.split('://')[1]}`, async ({ page }) => {
         await page.goto(url);
 
         try {

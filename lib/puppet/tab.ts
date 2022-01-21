@@ -17,7 +17,7 @@ export default class Tab implements TabActor {
     url: string
   }
 
-  constructor(page: any, url: string, frames: any) {
+  constructor(page: any, url: string, frames: { [id: number]: any }) {
     this.page = page;
     this.url = url;
     this.frames = frames;
