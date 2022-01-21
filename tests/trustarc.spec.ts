@@ -1,8 +1,8 @@
 import generateCMPTests from "./runner";
 
-generateCMPTests([
-    ['https://www.garmin.com/de-DE/', 'TrustArc'],
-    ['https://www.wish.com/', 'TrustArc'],
-    ['https://www.forbes.com/', 'TrustArc'],
-    ['https://www.starbucks.com/', 'TrustArc'],
+generateCMPTests('TrustArc', [
+    'https://www.garmin.com/de-DE/',
+    'https://www.wish.com/',
+    'https://www.forbes.com/',
+    'https://www.starbucks.com/',
 ]);

@@ -1,5 +1,6 @@
 import generateCMPTests from "./runner";
 
-generateCMPTests(
-    ['https://www.mediamarkt.de/', 'https://www.bahn.de/'].map(site => [site, 'Tealium'])
-);
+generateCMPTests('Tealium', [
+    'https://www.mediamarkt.de/',
+    'https://www.bahn.de/'
+]);

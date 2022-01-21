@@ -36,7 +36,8 @@ async function ensureScreenshotDir() {
 }
 
 export function generateTest(url: string, expectedCmp: string, testOptOut = true, testSelfTest = true) {
-    test(`${expectedCmp}.${url.split('://')[1]}.${testRegion}`, async ({ page }) => {
+    test(`${url.split('://')[1]} .${testRegion}`, async ({ page }) => {
+        test.slow();
         await page.goto(url);
 
         try {
@@ -59,9 +60,10 @@ export function generateTest(url: string, expectedCmp: string, testOptOut = true
     });
 }
 
-export default function generateCMPTests(specs: SiteCMPTest[]) {
-    specs.forEach((spec: SiteCMPTest) => {
-        const [url, expectedCmp, testOptOut = true, testSelfTest = true, regions = []] = spec;
-        generateTest(url, expectedCmp, testOptOut, testSelfTest);
-    });
+export default function generateCMPTests(cmp: string, sites: string[], testOptOut: boolean = true, testSelfTest: boolean = true) {
+    test.describe(cmp, () => {
+        sites.forEach((url) => {
+            generateTest(url, cmp, testOptOut, testSelfTest);
+        });
+    })
 }

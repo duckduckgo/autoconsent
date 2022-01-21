@@ -1,7 +1,7 @@
 import generateCMPTests from "./runner";
 
-generateCMPTests([
-    ['https://www.theguardian.com/', 'Sourcepoint'],
-    ['https://www.n-tv.de/', 'Sourcepoint'],
-    ['https://www.sueddeutsche.de/', 'Sourcepoint'],
+generateCMPTests('Sourcepoint', [
+    'https://www.theguardian.com/',
+    'https://www.n-tv.de/',
+    'https://www.sueddeutsche.de/',
 ]);

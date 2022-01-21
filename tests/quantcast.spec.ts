@@ -1,6 +1,6 @@
 import generateCMPTests from "./runner";
 
-generateCMPTests([
-    ['https://www.cyclingnews.com/', 'quantcast'],
-    ['https://www.techradar.com/', 'quantcast']
+generateCMPTests('quantcast', [
+    'https://www.cyclingnews.com/',
+    'https://www.techradar.com/',
 ]);

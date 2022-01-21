@@ -1,8 +1,8 @@
 import generateCMPTests from "./runner";
 
-generateCMPTests([
-    ['https://mailchimp.com/', 'Onetrust'],
-    ['https://arstechnica.com/', 'Onetrust'],
-    ['https://stackoverflow.com/', 'Onetrust'],
-    ['https://www.zdf.de/', 'Onetrust'],
+generateCMPTests('Onetrust', [
+    'https://mailchimp.com/',
+    'https://arstechnica.com/',
+    'https://stackoverflow.com/',
+    'https://www.zdf.de/',
 ]);
