@@ -25,6 +25,7 @@ const rules = [
     ...extraRules.autoconsent.map(spec => autoconsent.createAutoCMP(spec)),
 ];
 const screenshotDir = `./screenshots`;
+const testRegion = process.env.REGION || 'NA'
 
 async function ensureScreenshotDir() {
     try {
@@ -35,7 +36,7 @@ async function ensureScreenshotDir() {
 }
 
 export function generateTest(url: string, expectedCmp: string, testOptOut = true, testSelfTest = true) {
-    test(`${expectedCmp}.${url.split('://')[1]}`, async ({ page }) => {
+    test(`${expectedCmp}.${url.split('://')[1]}.${testRegion}`, async ({ page }) => {
         await page.goto(url);
 
         try {

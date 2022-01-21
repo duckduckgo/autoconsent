@@ -7,9 +7,13 @@ export default class SourcePoint extends AutoConsentBase {
   }
 
   detectFrame(_: TabActor, frame: { url: string }) {
-    const url = new URL(frame.url);
-    return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
-      && url.searchParams.has('message_id') && url.searchParams.has('requestUUID');
+    try {
+      const url = new URL(frame.url);
+      return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
+        && url.searchParams.has('message_id') && url.searchParams.has('requestUUID');
+    } catch (e) {
+      return false;
+    }
   }
 
   async detectCmp(tab: TabActor) {
