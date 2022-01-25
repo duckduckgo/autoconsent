@@ -105,9 +105,10 @@ export default class TabActions implements TabActor {
   }
 
   async waitForThenClick(selector: string, timeout: number, frameId = 0) {
-    await this.waitForElement(selector, timeout, frameId);
-    await this.clickElement(selector, frameId);
-    return true;
+    if (await this.waitForElement(selector, timeout, frameId)) {
+      return await this.clickElement(selector, frameId);
+    }
+    return false;
   }
 
   async hideElements(selectors: string[], frameId = 0) {

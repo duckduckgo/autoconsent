@@ -84,7 +84,15 @@ export default class TrustArc extends AutoConsentBase {
       );
     }
     const frameId = tab.frame!.id;
+    await waitFor(() => tab.eval("document.readyState === 'complete'", frameId), 20, 100);
     tab.hideElements([".truste_popframe", ".truste_overlay", ".truste_box_overlay", "#truste-consent-track"]);
+    if (await tab.elementExists('.rejectAll', frameId)) {
+      return tab.clickElement('.rejectAll', frameId);
+    }
+    if (await tab.waitForElement('#catDetails0', 1000, frameId)) {
+      await tab.clickElement("#catDetails0", frameId);
+      return tab.clickElement(".submit", frameId);
+    }
     if (await tab.elementExists(".required", frameId)) {
       await tab.clickElement(".required", frameId);
     } else {
