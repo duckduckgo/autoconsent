@@ -27,7 +27,8 @@ const consentOMaticDir = path.join(__dirname, "consentomatic");
 const consentOMaticSkip = [
   "trustarcbar", "trustarcframe", "sourcepoint", "lemonde.fr", "onetrust", "ez-cookie",
   "tealium.com", "cookiebot", "consentmanager.net", "SFR", "Webedia", "cookiecontrolcivic",
-  "Autodesk", "cookieinformation", "quantcast", "onetrust-stackoverflow", "cookiebar"
+  "Autodesk", "cookieinformation", "quantcast", "onetrust-stackoverflow", "cookiebar",
+  "EvidonBanner"
 ];
 const buildConsentOMatic = (async () => {
   const comRules = await new Promise(resolve => {

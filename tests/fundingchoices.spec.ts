@@ -5,4 +5,6 @@ generateCMPTests('funding-choices', [
     'https://www.bbc.com/',
     'https://www.accuweather.com/',
     'https://www.lifehack.org/',
-]);
+], {
+    skipRegions: ["US", "GB"]
+});
