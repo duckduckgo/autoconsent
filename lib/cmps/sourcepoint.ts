@@ -2,6 +2,9 @@ import AutoConsentBase, { success, waitFor } from "./base";
 import { TabActor } from "../types";
 
 export default class SourcePoint extends AutoConsentBase {
+
+  ccpaMode = false;
+
   constructor() {
     super("Sourcepoint");
   }
@@ -9,6 +12,10 @@ export default class SourcePoint extends AutoConsentBase {
   detectFrame(_: TabActor, frame: { url: string }) {
     try {
       const url = new URL(frame.url);
+      if (url.searchParams.has('message_id') && url.hostname === 'ccpa-notice.sp-prod.net') {
+        this.ccpaMode = true;
+        return true;
+      }
       return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
         && url.searchParams.has('message_id') && url.searchParams.has('requestUUID');
     } catch (e) {
@@ -29,7 +36,7 @@ export default class SourcePoint extends AutoConsentBase {
   }
 
   isManagerOpen(tab: TabActor) {
-    return tab.frame && new URL(tab.frame.url).pathname === "/privacy-manager/index.html"
+    return tab.frame && new URL(tab.frame.url).pathname === "/privacy-manager/index.html";
   }
 
   async optOut(tab: TabActor) {
