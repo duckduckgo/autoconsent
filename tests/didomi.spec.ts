@@ -5,4 +5,5 @@ generateCMPTests('com_didomi.io', [
 ], {
     testOptOut: false,
     testSelfTest: false,
+    skipRegions: ["US"],
 });

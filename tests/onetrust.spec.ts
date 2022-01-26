@@ -8,6 +8,7 @@ generateCMPTests('Onetrust', [
 
 generateCMPTests('Onetrust', [
     'https://arstechnica.com/',
+    'https://www.nvidia.com/',
 ], {
-    skipRegions: ['US']
+    skipRegions: ['US', 'GB']
 });

@@ -5,10 +5,13 @@ generateCMPTests('Sourcepoint', [
     'https://www.n-tv.de/',
     'https://www.sueddeutsche.de/',
     'https://news.sky.com/'
-]);
+], { 
+    testSelfTest: false,
+});
 
 generateCMPTests('Sourcepoint', [
     'https://www.insider.com/',
 ], {
-    skipRegions: ["US", "GB"]
+    skipRegions: ["US", "GB"],
+    testSelfTest: false,
 });

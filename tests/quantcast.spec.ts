@@ -6,3 +6,11 @@ generateCMPTests('quantcast', [
 ], {
     skipRegions: ["US", "GB"]
 });
+
+generateCMPTests('com_quantcast2', [
+    'https://www.fandom.com/',
+], {
+    testOptOut: false,
+    testSelfTest: false,
+    skipRegions: ["US"]
+});

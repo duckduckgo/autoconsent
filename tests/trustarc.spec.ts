@@ -9,4 +9,5 @@ generateCMPTests('TrustArc', [
 ], {
     testOptOut: true,
     testSelfTest: false,
+    skipRegions: ["US"]
 });

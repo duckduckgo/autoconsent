@@ -53,7 +53,7 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
         } finally {
             await ensureScreenshotDir();
             await page.screenshot({
-                path: path.join(screenshotDir, `${url.replace('https://', '').replace(/\//g, '_')}.png`)
+                path: path.join(screenshotDir, `${expectedCmp} - ${url.replace('https://', '').replace(/\//g, '_')}.png`)
             });
         }
     });
