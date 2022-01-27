@@ -1,7 +1,0 @@
-{
-  "name": "Cevent",
-  "detectCmp": [{ "exists": ".cvent-cookie-disclaimer" }],
-  "detectPopup": [{ "visible": ".cookie-disclaimer-accept" }],
-  "optOut": [{ "click": ".cookie-disclaimer-decline" }],
-  "optIn": [{ "click": ".cookie-disclaimer-accept" }]
-}

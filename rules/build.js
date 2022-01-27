@@ -24,14 +24,12 @@ const buildAutoconsent = Promise.all(
 const consentOMaticCommit = "7d7fd2bd6bf2b662350b0eaeca74db6eba155efe";
 const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
 const consentOMaticDir = path.join(__dirname, "consentomatic");
-const consentOMaticSkip = [
-  "trustarcbar", "trustarcframe", "sourcepoint", "lemonde.fr", "onetrust", "ez-cookie",
-  "tealium.com", "cookiebot", "consentmanager.net", "SFR", "Webedia", "cookiecontrolcivic",
-  "Autodesk", "cookieinformation", "quantcast", "onetrust-stackoverflow", "cookiebar",
-  "EvidonBanner", "uniconsent", 
-];
+const consentOMaticInclude = [
+  'didomi.io', 'oil', 'optanon', 'quantcast2', 'springer', 'uniconsent', 'wordpressgdpr'
+]
 const buildConsentOMatic = (async () => {
-  const comRules = await new Promise(resolve => {
+  const rules = {};
+  const allComRules = await new Promise(resolve => {
     https.get(consentOMaticUrl, res => {
       res.setEncoding("utf-8");
       let content = "";
@@ -39,19 +37,21 @@ const buildConsentOMatic = (async () => {
       res.on("end", () => resolve(JSON.parse(content)));
     });
   });
-  consentOMaticSkip.forEach(name => delete comRules[name]);
+  consentOMaticInclude.forEach((name) => {
+    rules[name] = allComRules[name];
+  })
   try {
     const extraRules = fs.readdirSync(consentOMaticDir);
     await Promise.all(
       extraRules.map(async file => {
         const rule = await readFileJSON(path.join(consentOMaticDir, file));
         // rule name is file name with JSON extension removed
-        comRules[file.substring(0, file.length - 5)] = rule;
+        rules[file.substring(0, file.length - 5)] = rule;
       })
     );
   } catch(e) {
   }
-  rules.consentomatic = comRules;
+  rules.consentomatic = rules;
 })();
 
 Promise.all([buildAutoconsent, buildConsentOMatic]).then(() => {
