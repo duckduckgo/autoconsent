@@ -15,6 +15,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Safari'],
         proxy,
+        screenshot: 'only-on-failure',
       },
     },
     {

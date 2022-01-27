@@ -39,22 +39,15 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
             test.skip();
         }
 
-        try {
-            const tab = autoconsent.attachToPage(page, url, rules, 4);
-            await tab.checked;
-            expect(tab.getCMPName()).toBe(expectedCmp);
-            expect(await tab.isPopupOpen()).toBeTruthy();
-            if (options.testOptOut) {
-                expect(await tab.doOptOut()).toBeTruthy();
-            }
-            if (options.testSelfTest) {
-                expect(await tab.testOptOutWorked()).toBeTruthy();
-            }
-        } finally {
-            await ensureScreenshotDir();
-            await page.screenshot({
-                path: path.join(screenshotDir, `${expectedCmp} - ${url.replace('https://', '').replace(/\//g, '_')}.png`)
-            });
+        const tab = autoconsent.attachToPage(page, url, rules, 10);
+        await tab.checked;
+        expect(tab.getCMPName()).toBe(expectedCmp);
+        expect(await tab.isPopupOpen()).toBeTruthy();
+        if (options.testOptOut) {
+            expect(await tab.doOptOut()).toBeTruthy();
+        }
+        if (options.testSelfTest) {
+            expect(await tab.testOptOutWorked()).toBeTruthy();
         }
     });
 }

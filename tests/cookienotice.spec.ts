@@ -1,6 +1,6 @@
 import generateCMPTests from "./runner";
 
 generateCMPTests('cookie-notice', [
-    'https://www.laweekly.com/',
+    'https://electricbikereview.com/',
     'https://osxdaily.com/',
 ]);
