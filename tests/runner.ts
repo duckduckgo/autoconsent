@@ -11,7 +11,7 @@ const rules = [
     ...extraRules.autoconsent.map(spec => autoconsent.createAutoCMP(spec)),
 ];
 const screenshotDir = `./screenshots`;
-const testRegion = process.env.REGION || 'NA'
+const testRegion = (process.env.REGION || 'NA').trim();
 
 async function ensureScreenshotDir() {
     try {
@@ -34,12 +34,13 @@ const defaultOptions: TestOptions = {
 
 export function generateTest(url: string, expectedCmp: string, options: TestOptions = { testOptOut: true, testSelfTest: true }) {
     test(`${url.split('://')[1]} .${testRegion}`, async ({ page }) => {
-        await page.goto(url);
         if (options.skipRegions && options.skipRegions.indexOf(testRegion) !== -1) {
             test.skip();
         }
+        // test.setTimeout(60000);
+        await page.goto(url, { waitUntil: 'commit' });
 
-        const tab = autoconsent.attachToPage(page, url, rules, 10);
+        const tab = autoconsent.attachToPage(page, url, rules, 20);
         await tab.checked;
         expect(tab.getCMPName()).toBe(expectedCmp);
         expect(await tab.isPopupOpen()).toBeTruthy();

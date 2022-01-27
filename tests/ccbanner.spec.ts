@@ -7,6 +7,6 @@ generateCMPTests('cc_banner', [
 generateCMPTests('cc_banner', [
     'https://distrowatch.com/',
 ], {
-    skipRegions: ['US', 'GB']
+    skipRegions: ['US', 'GB'],
 });
 
