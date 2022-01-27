@@ -37,7 +37,6 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
         if (options.skipRegions && options.skipRegions.indexOf(testRegion) !== -1) {
             test.skip();
         }
-        // test.setTimeout(60000);
         await page.goto(url, { waitUntil: 'commit' });
 
         const tab = autoconsent.attachToPage(page, url, rules, 20);

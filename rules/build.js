@@ -28,7 +28,7 @@ const consentOMaticInclude = [
   'didomi.io', 'oil', 'optanon', 'quantcast2', 'springer', 'uniconsent', 'wordpressgdpr'
 ]
 const buildConsentOMatic = (async () => {
-  const rules = {};
+  const comRules = {};
   const allComRules = await new Promise(resolve => {
     https.get(consentOMaticUrl, res => {
       res.setEncoding("utf-8");
@@ -38,7 +38,7 @@ const buildConsentOMatic = (async () => {
     });
   });
   consentOMaticInclude.forEach((name) => {
-    rules[name] = allComRules[name];
+    comRules[name] = allComRules[name];
   })
   try {
     const extraRules = fs.readdirSync(consentOMaticDir);
@@ -46,12 +46,12 @@ const buildConsentOMatic = (async () => {
       extraRules.map(async file => {
         const rule = await readFileJSON(path.join(consentOMaticDir, file));
         // rule name is file name with JSON extension removed
-        rules[file.substring(0, file.length - 5)] = rule;
+        comRules[file.substring(0, file.length - 5)] = rule;
       })
     );
   } catch(e) {
   }
-  rules.consentomatic = rules;
+  rules.consentomatic = comRules;
 })();
 
 Promise.all([buildAutoconsent, buildConsentOMatic]).then(() => {
