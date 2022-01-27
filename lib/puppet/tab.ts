@@ -43,7 +43,6 @@ export default class Tab implements TabActor {
         DEBUG && console.log('[click]', selector, result);
         return result;
       } catch (e) {
-        console.warn(e);
         return false;
       }
     }
@@ -52,17 +51,12 @@ export default class Tab implements TabActor {
 
   async clickElements(selector: string, frameId = 0) {
     const elements = await this.frames[frameId].$$(selector);
-    try {
-      DEBUG && console.log('[click all]', selector);
-      await this.frames[frameId].evaluate((s: string) => {
-        const elem = document.querySelectorAll<HTMLElement>(s);
-        elem.forEach(e => e.click());
-      }, selector)
-      return true;
-    } catch (e) {
-      console.warn(e);
-      return false;
-    }
+    DEBUG && console.log('[click all]', selector);
+    await this.frames[frameId].evaluate((s: string) => {
+      const elem = document.querySelectorAll<HTMLElement>(s);
+      elem.forEach(e => e.click());
+    }, selector)
+    return true;
   }
 
   async elementsAreVisible(selector: string, check: 'all' | 'any' | 'none', frameId = 0) {
