@@ -43,7 +43,7 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
         const tab = autoconsent.attachToPage(page, url, rules, 20);
         await tab.checked;
         expect(tab.getCMPName()).toBe(expectedCmp);
-        expect(await tab.isPopupOpen()).toBeTruthy();
+        expect(await tab.isPopupOpen(10, 100)).toBeTruthy();
         if (options.testOptOut) {
             expect(await tab.doOptOut()).toBeTruthy();
         }
