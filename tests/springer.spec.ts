@@ -5,6 +5,7 @@ generateCMPTests('com_springer', [
     'https://www.blick.ch/',
     'https://www.onet.pl/',
 ], {
+    skipRegions: ['GB'],
     testOptOut: false,
     testSelfTest: false,
 });

@@ -4,7 +4,7 @@ generateCMPTests('quantcast', [
     'https://www.cyclingnews.com/',
     'https://www.techradar.com/',
 ], {
-    skipRegions: ["US", "GB"]
+    skipRegions: ["US", "GB", "FR"]
 });
 
 generateCMPTests('com_quantcast2', [
