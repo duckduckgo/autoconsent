@@ -41,10 +41,18 @@ export default class Cookiebot extends AutoConsentBase {
     if (await tab.elementExists('#CybotCookiebotDialogBodyButtonDecline')) {
       await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
     }
+    if (await tab.elementExists('input[id^=CybotCookiebotDialogBodyLevelButton]:checked')) {
+      await tab.clickElements('input[id^=CybotCookiebotDialogBodyLevelButton]:checked')
+    }
     if (await tab.elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
       await tab.clickElement('#CybotCookiebotDialogBodyButtonAcceptSelected');
     } else {
       await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection');
+    }
+    // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
+    if (await tab.eval('CookieConsent.hasResponse !== true')) {
+      await tab.eval('Cookiebot.dialog.submitConsent() || true');
+      await tab.wait(500);
     }
     return true;
   }
