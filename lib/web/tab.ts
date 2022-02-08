@@ -122,6 +122,16 @@ export default class TabActions implements TabActor {
     );
   }
 
+  async undoHideElements(frameId = 0): Promise<boolean> {
+    return this.sendContentMessage(
+      this.id,
+      {
+        type: "undohide",
+      },
+      { frameId }
+    );
+  }
+
   async getBrowserTab() {
     return this.browser.tabs.get(this.id);
   }

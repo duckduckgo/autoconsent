@@ -5,6 +5,7 @@ export type ContentScriptMessage =
   | GetAttributeMessage
   | EvalMessage
   | HideMessage
+  | UndoHideMessage
   | MatchesMessage
   | ActionMessage;
 
@@ -39,6 +40,10 @@ type EvalMessage = {
 type HideMessage = {
   type: "hide";
   selectors: string[];
+};
+
+type UndoHideMessage = {
+  type: "undohide"
 };
 
 type MatchesMessage = {

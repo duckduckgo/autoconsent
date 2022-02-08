@@ -109,6 +109,9 @@ async function evaluateRule(rule: AutoConsentRuleStep, tab: TabActor) {
   if (rule.hide) {
     results.push(tab.hideElements(rule.hide, frameId));
   }
+  if (rule.undoHide) {
+    results.push(tab.undoHideElements(frameId));
+  }
   if (rule.waitForFrame) {
     results.push(waitFor(() => !!tab.frame, 40, 500))
   }

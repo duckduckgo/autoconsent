@@ -2,6 +2,8 @@ import { matches, executeAction } from "./consentomatic/index";
 import { ContentScriptMessage } from "../messages";
 
 let actionQueue = Promise.resolve(null);
+const styleOverrideElementId = "autoconsent-css-rules";
+const styleSelector = `style#${styleOverrideElementId}`;
 
 export default function handleMessage(message: ContentScriptMessage, debug = false) {
   if (message.type === "click") {
@@ -50,13 +52,24 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
       document.head ||
       document.getElementsByTagName("head")[0] ||
       document.documentElement;
-    const rule = `${message.selectors.join(",")} { display: none !important; }`;
-    const css = document.createElement("style");
-    css.type = "text/css";
-    css.id = "re-consent-css-rules";
-    css.appendChild(document.createTextNode(rule));
-    parent.appendChild(css);
+    const rule = `${message.selectors.join(",")} { display: none !important; } `;
+    const existingElement = document.querySelector(styleSelector);
+    if (existingElement && existingElement instanceof HTMLStyleElement) {
+      existingElement.innerText += rule;
+    } else {
+      const css = document.createElement("style");
+      css.type = "text/css";
+      css.id = styleOverrideElementId;
+      css.appendChild(document.createTextNode(rule));
+      parent.appendChild(css);
+    }
     return message.selectors.length > 0;
+  } else if (message.type === "undohide") {
+    const existingElement = document.querySelector(styleSelector);
+    if (existingElement) {
+      existingElement.remove();
+    }
+    return !!existingElement
   } else if (message.type === "matches") {
     const matched = matches(message.config);
     return matched;

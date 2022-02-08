@@ -106,6 +106,10 @@ export default class Tab implements TabActor {
     return Promise.resolve(true)
   }
 
+  undoHideElements(frameId?: number): Promise<boolean> {
+    return Promise.resolve(true)
+  }
+
   async goto(url: string) {
     return this.page.goto(url);
   }

@@ -28,6 +28,7 @@ export interface TabActor {
   waitForElement(selector: string, timeout: number, frameId?: number): Promise<boolean>
   waitForThenClick(selector: string, timeout?: number, frameId?: number): Promise<boolean>
   hideElements(selectors: string[], frameId?: number): Promise<boolean>
+  undoHideElements(frameId?: number): Promise<boolean>
   goto(url: string): Promise<void>
   wait(ms: number): Promise<true>
 
