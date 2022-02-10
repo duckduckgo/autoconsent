@@ -4,7 +4,7 @@
   "detectPopup": [{ "visible": ".eu-cookie-compliance-banner-info" }],
   "optIn": [{ "click": ".agree-button" }],
   "optOut": [
-    { "click": ".decline-button", "optional": true },
+    { "click": ".decline-button,.eu-cookie-compliance-save-preferences-button", "optional": true },
     { "hide": [".eu-cookie-compliance-banner-info", "#sliding-popup"] }
   ],
   "test": [

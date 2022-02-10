@@ -25,7 +25,7 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     const elem = document.querySelectorAll<HTMLElement>(message.selector);
     const results = new Array(elem.length);
     elem.forEach((e, i) => {
-      results[i] = e.offsetParent !== null || window.getComputedStyle(e).display !== "none";
+      results[i] = e.offsetParent !== null || window.getComputedStyle(e).display !== "none" || e.style?.display !== "none";
     });
     if (results.length === 0) {
       return false;
@@ -52,7 +52,7 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
       document.head ||
       document.getElementsByTagName("head")[0] ||
       document.documentElement;
-    const rule = `${message.selectors.join(",")} { display: none !important; } `;
+    const rule = `${message.selectors.join(",")} { display: none !important; z-index: -1 !important; } `;
     const existingElement = document.querySelector(styleSelector);
     if (existingElement && existingElement instanceof HTMLStyleElement) {
       existingElement.innerText += rule;
