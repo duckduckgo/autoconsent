@@ -3,6 +3,10 @@ import { ConsentOMaticConfig } from "../lib/consentomatic";
 import { AutoConsentCMPRule } from "../lib/rules";
 import AutoConsent from "../lib/web";
 
+const config = {
+  autoOptOut: true,
+}
+
 const consent = new AutoConsent(<any>browser, browser.tabs.sendMessage);
 const tabGuards = new Set();
 
@@ -47,11 +51,14 @@ async function checkShouldShowPageAction({
           log("popup is open:", cmp.getCMPName());
           showOptOutStatus(tabId, "available");
           browser.pageAction.show(tabId);
+          return true;
         } else if (cmp.hasTest() && (await cmp.testOptOutWorked())) {
           showOptOutStatus(tabId, "success");
         }
+        return false;
       } else {
         log("no CMP found");
+        return false;
       }
     } finally {
       tabGuards.delete(tabId);
@@ -96,21 +103,25 @@ browser.webNavigation.onCommitted.addListener(
   }
 );
 
-browser.webNavigation.onCompleted.addListener(consent.onFrame.bind(consent), {
-  url: [{ schemes: ["http", "https"] }],
-});
-
 browser.runtime.onMessage.addListener(({ type }: { type: string }, sender: any) => {
+  consent.onFrame({
+    tabId: sender.tab.id,
+    frameId: sender.frameId,
+    url: sender.url,
+  });
   if (type === "frame" && sender.frameId === 0) {
     checkShouldShowPageAction({
       tabId: sender.tab.id,
       frameId: sender.frameId,
+    }).then((isShown) => {
+      if (isShown && config.autoOptOut) {
+        runOptOut(sender.tab.id);
+      }
     });
   }
 });
 
-browser.pageAction.onClicked.addListener(async (tab) => {
-  const tabId = tab.id;
+async function runOptOut(tabId: number) {
   try {
     tabGuards.add(tabId);
     const cmp = consent.tabCmps.get(tabId);
@@ -130,6 +141,11 @@ browser.pageAction.onClicked.addListener(async (tab) => {
   } finally {
     tabGuards.delete(tabId);
   }
+}
+
+browser.pageAction.onClicked.addListener(async (tab) => {
+  const tabId = tab.id;
+  runOptOut(tabId);
 });
 
 browser.tabs.onRemoved.addListener((tabId) => {
