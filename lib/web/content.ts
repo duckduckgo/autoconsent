@@ -54,6 +54,7 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
       document.documentElement;
     const rule = `${message.selectors.join(",")} { display: none !important; z-index: -1 !important; } `;
     const existingElement = document.querySelector(styleSelector);
+    debug && console.log("[hide]", message.selectors, !!existingElement);
     if (existingElement && existingElement instanceof HTMLStyleElement) {
       existingElement.innerText += rule;
     } else {
@@ -66,6 +67,7 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     return message.selectors.length > 0;
   } else if (message.type === "undohide") {
     const existingElement = document.querySelector(styleSelector);
+    debug && console.log("[unhide]", !!existingElement);
     if (existingElement) {
       existingElement.remove();
     }

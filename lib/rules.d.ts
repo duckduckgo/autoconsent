@@ -1,7 +1,8 @@
 
 export type AutoConsentCMPRule = {
   name: string
-  popupSelector?: string
+  prehideSelectors?: string[]
+  isHidingRule?: boolean
   detectCmp: AutoConsentRuleStep[]
   detectPopup: AutoConsentRuleStep[]
   frame?: string

@@ -125,6 +125,14 @@ export class AutoConsent extends AutoConsentBase {
     super(config.name);
   }
 
+  get prehideSelectors(): string[] {
+    return this.config.prehideSelectors;
+  }
+
+  get isHidingRule(): boolean {
+    return this.config.isHidingRule;
+  }
+
   async _runRulesParallel(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
     const detections = await Promise.all(rules.map(rule => evaluateRule(rule, tab)));
     return detections.every(r => !!r);

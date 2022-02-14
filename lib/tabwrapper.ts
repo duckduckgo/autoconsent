@@ -32,11 +32,21 @@ export default class TabConsent {
       } catch (e) {
         this.optOutStatus = e;
         throw e;
+      } finally {
+        if (!this.rule.isHidingRule) {
+          await this.tab.undoHideElements();
+        }
       }
     }
   
     async doOptIn() {
-      return this.rule.optIn(this.tab);
+      try {
+        return this.rule.optIn(this.tab);
+      } finally {
+        if (!this.rule.isHidingRule) {
+          await this.tab.undoHideElements();
+        }
+      }
     }
   
     hasTest() {

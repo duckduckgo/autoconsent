@@ -6,6 +6,7 @@ import { rules, createAutoCMP } from './index';
 import { Browser, MessageSender, AutoCMP, TabActor } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
+import prehideElements from './hider';
 
 export * from './index';
 export {
@@ -42,8 +43,11 @@ export default class AutoConsent {
       this.browser);
   }
 
-  async checkTab(tabId: number) {
+  async checkTab(tabId: number, prehide = true) {
     const tab = this.createTab(tabId);
+    if (prehide) {
+      this.prehideElements(tab);
+    }
     const consent = new TabConsent(tab, this.detectDialog(tab, 20));
     this.tabCmps.set(tabId, consent);
     // check tabs
@@ -53,6 +57,10 @@ export default class AutoConsent {
         if (frame.type === rule.name) {
           consent.tab.frame = frame;
         }
+      }
+      // no CMP detected, undo hiding
+      if (!rule && prehide) {
+        tab.undoHideElements();
       }
     });
 
@@ -93,5 +101,9 @@ export default class AutoConsent {
 
   async detectDialog(tab: TabActor, retries: number): Promise<AutoCMP> {
     return detectDialog(tab, retries, this.rules);
+  }
+
+  async prehideElements(tab: TabActor): Promise<void> {
+    return prehideElements(tab, this.rules);
   }
 }
