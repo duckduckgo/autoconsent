@@ -1,5 +1,6 @@
 {
   "name": "Onetrust",
+  "prehideSelectors": ["#onetrust-banner-sdk,.optanon-alert-box-wrapper,.onetrust-pc-dark-filter,.js-consent-banner"],
   "detectCmp": [{ "exists": "#onetrust-banner-sdk,.optanon-alert-box-wrapper" }],
   "detectPopup": [{ "visible": "#onetrust-banner-sdk,.optanon-alert-box-wrapper" }],
   "optOut": [

@@ -4,6 +4,7 @@ import { TabActor } from "../types";
 export default class SourcePoint extends AutoConsentBase {
 
   ccpaMode = false;
+  prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay"]
 
   constructor() {
     super("Sourcepoint");

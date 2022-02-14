@@ -2,6 +2,9 @@ import AutoConsentBase from './base';
 import { TabActor } from '../types';
 
 export default class Cookiebot extends AutoConsentBase {
+
+  prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner"]
+
   constructor() {
     super('Cybotcookiebot');
   }

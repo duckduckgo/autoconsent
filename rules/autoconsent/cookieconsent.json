@@ -1,5 +1,7 @@
 {
     "name": "cookieconsent",
+    "prehideSelectors": ["[aria-label=\"cookieconsent\"]"],
+    "isHidingRule": true,
     "detectCmp": [{ "exists": "[aria-label=\"cookieconsent\"]" }],
     "detectPopup": [{ "visible": "[aria-label=\"cookieconsent\"]" }],
     "optIn": [{ "click": ".cc-dismiss" }],

@@ -1,5 +1,7 @@
 {
   "name": "cc_banner",
+  "prehideSelectors": [".cc_banner-wrapper"],
+  "isHidingRule": true,
   "detectCmp": [{ "exists": ".cc_banner-wrapper" }],
   "detectPopup": [{ "visible": ".cc_banner" }],
   "optIn": [{ "click": ".cc_btn_accept_all" }],

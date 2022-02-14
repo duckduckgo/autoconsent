@@ -9,4 +9,3 @@ generateCMPTests('cc_banner', [
 ], {
     skipRegions: ['US', 'GB'],
 });
-

@@ -4,6 +4,9 @@ import { TabActor } from "../types";
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
 export default class ConsentManager extends AutoConsentBase {
+
+  prehideSelectors = ["#cmpbox,#cmpbox2"]
+
   constructor() {
     super("consentmanager.net");
   }

@@ -1,18 +1,19 @@
 {
     "name": "Tealium",
+    "prehideSelectors": ["#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#consent-layer"],
+    "isHidingRule": false,
     "detectCmp": [{ "exists": "#__tealiumGDPRecModal" }, { "eval": "window.utag && typeof utag.gdpr === 'object'" }],
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
       { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs", "#consent-layer"] },
-      { "eval": "utag.gdpr.setPreferencesFromList([]) || true" },
-      { "eval": "utag.gdpr.setConsentValue(0) || true" }
+      { "click": "#cm-acceptNone,.js-accept-essential-cookies"}
     ],
     "optIn": [
       { "hide": ["#__tealiumGDPRecModal"] },
       { "eval": "utag.gdpr.setConsentValue(true)" }
     ],
     "test": [
-      { "eval": "utag.gdpr.getConsentState() === -1" }
+      { "eval": "utag.gdpr.getConsentState() !== 1" }
     ]
   }
   

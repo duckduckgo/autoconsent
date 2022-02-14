@@ -2,6 +2,12 @@ import AutoConsentBase, { waitFor } from "./base";
 import { TabActor } from "../types";
 
 export default class TrustArc extends AutoConsentBase {
+
+  prehideSelectors = [
+    ".trustarc-banner-container",
+    ".truste_popframe,.truste_overlay,.truste_box_overlay,#truste-consent-track",
+  ]
+
   constructor() {
     super("TrustArc");
   }

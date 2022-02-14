@@ -1,5 +1,6 @@
 {
   "name": "quantcast",
+  "prehideSelectors": ["#qc-cmp2-main,#qc-cmp2-container"],
   "detectCmp": [{ "exists": "#qc-cmp2-container" }],
   "detectPopup": [{ "visible": "#qc-cmp2-ui" }],
   "optOut": [

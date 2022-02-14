@@ -1,5 +1,6 @@
 {
     "name": "funding-choices",
+    "prehideSelectors": [".fc-consent-root,.fc-dialog-container,.fc-dialog-overlay,.fc-dialog-content"],
     "detectCmp": [{ "exists": ".fc-consent-root" }],
     "detectPopup": [{ "exists": ".fc-dialog-container" }],
     "optOut": [
