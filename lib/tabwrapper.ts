@@ -34,7 +34,11 @@ export default class TabConsent {
         throw e;
       } finally {
         if (!this.rule.isHidingRule) {
-          await this.tab.undoHideElements();
+          if (this.getCMPName().startsWith('com_')) {
+            this.tab.wait(5000).then(() => this.tab.undoHideElements())
+          } else {
+            await this.tab.undoHideElements();
+          }
         }
       }
     }
