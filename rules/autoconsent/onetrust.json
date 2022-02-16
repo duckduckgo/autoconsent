@@ -1,11 +1,11 @@
 {
   "name": "Onetrust",
-  "prehideSelectors": ["#onetrust-banner-sdk,.optanon-alert-box-wrapper,.onetrust-pc-dark-filter,.js-consent-banner"],
+  "prehideSelectors": ["#onetrust-banner-sdk,#onetrust-consent-sdk,.optanon-alert-box-wrapper,.onetrust-pc-dark-filter,.js-consent-banner"],
+  "isHidingRule": true,
   "detectCmp": [{ "exists": "#onetrust-banner-sdk,.optanon-alert-box-wrapper" }],
   "detectPopup": [{ "visible": "#onetrust-banner-sdk,.optanon-alert-box-wrapper" }],
   "optOut": [
-    { "hide": ["#onetrust-banner-sdk", "#onetrust-consent-sdk"] },
-    { "click": "#onetrust-pc-btn-handler,.ot-sdk-show-settings,.js-cookie-settings" },
+    { "click": "#onetrust-pc-btn-handler,.ot-sdk-show-settings,button.js-cookie-settings" },
     { "waitFor": "#onetrust-consent-sdk", "timeout": 2000 },
     { "wait": 1000 },
     {
