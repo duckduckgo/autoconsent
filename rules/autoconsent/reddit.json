@@ -1,0 +1,6 @@
+{
+  "name": "reddit",
+  "detectCmp": [{ "eval": "!!document.querySelector('div > section').innerText.match('We use cookies on our websites for a number of purposes')"}],
+  "detectPopup": [{ "eval": "!!document.querySelector('div > section').innerText.match('We use cookies on our websites for a number of purposes')"}],
+  "optOut": [{ "eval": "document.querySelector('form > button').innerText.match('Reject non-essential')"}, {"eval": "document.querySelector('form > button').click()"}]
+}
