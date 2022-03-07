@@ -1,0 +1,6 @@
+{
+  "name": "facebook",
+  "detectCmp": [{ "exists": "#consent_cookies_title"}],
+  "detectPopup": [{ "exists": "#consent_cookies_title"}],
+  "optOut": [{ "eval": "Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Only'))[0].click()"}]
+}
