@@ -1,0 +1,13 @@
+{
+    "name": "etsy",
+    "detectCmp": [{ "exists": "#gdpr-single-choice-overlay" }],
+    "detectPopup": [{ "exists": "#gdpr-single-choice-overlay" }],
+    "optOut": [
+        {"click": "button[data-gdpr-open-full-settings]"},
+        {"wait": "500"},
+        {"eval": "document.querySelector('label[for^=personalization]').innerText === 'Off'"},
+        {"eval": "document.querySelector('label[for^=third_party_consent]').innerText === 'Off'"},
+        {"eval": "Array.from(document.querySelectorAll('button > p')).filter(e => e.innerText === 'Done')[0].click()"}
+    ],
+    "optIn": [{"click": "button[data-gdpr-single-choice-accept]"}
+  }
