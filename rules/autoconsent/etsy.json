@@ -9,5 +9,5 @@
         {"eval": "document.querySelector('label[for^=third_party_consent]').innerText === 'Off'"},
         {"eval": "Array.from(document.querySelectorAll('button > p')).filter(e => e.innerText === 'Done')[0].click()"}
     ],
-    "optIn": [{"click": "button[data-gdpr-single-choice-accept]"}
-  }
+    "optIn": [{"click": "button[data-gdpr-single-choice-accept]"}]
+}
