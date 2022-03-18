@@ -1,0 +1,9 @@
+{
+    "name": "corona-in-zahlen-de",
+    "prehideSelectors": [".cookiealert"],
+    "detectCmp": [{ "exists": ".cookiealert" }],
+    "detectPopup": [{ "exists": ".cookiealert" }],
+    "optOut": [{"click": ".configurecookies"}, {"click": ".confirmcookies"}],
+    "optIn": [{ "click": ".acceptcookies"}],
+    "test": [{ "eval": "!!document.cookie.match('MSCC')"}]
+  }
