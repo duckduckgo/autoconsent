@@ -1,0 +1,26 @@
+{
+ "name": "hl-co-uk",
+  "detectCmp": [{ "exists": "#cookie-banner-overlay" }],
+  "detectPopup": [{ "exists": "#cookie-banner-overlay" }],
+  "optIn": [{ "click": "#acceptCookieButton" }],
+  "optOut": [
+      {
+          "click": "#manageCookie"
+      },
+      {
+          "click": "#ADCookieToggle"
+      },
+      {
+          "eval": "document.querySelector('#AOCookieToggle').getAttribute('aria-pressed') === false"
+      },
+      {
+          "click": "#TPCookieToggle"
+      },
+      {
+          "eval": "document.querySelector('#TPCookieToggle').getAttribute('aria-pressed') === false"
+      },
+      {
+          "click": "#updateCookieButton"
+      }
+  ]
+}
