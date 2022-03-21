@@ -1,0 +1,11 @@
+{
+  "name": "thefreedictionary",
+  "detectCmp": [{ "exists": "#cmpBanner" }],
+  "detectPopup": [{ "visible": "#cmpBanner" }],
+  "optIn": [{ "eval": "cmpUi.allowAll()" }],
+  "optOut": [
+      {
+          "eval": "cmpUi.showPurposes() || cmpUi.rejectAll() || true"
+      }
+  ]
+}
