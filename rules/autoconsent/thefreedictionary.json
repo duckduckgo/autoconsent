@@ -1,5 +1,6 @@
 {
   "name": "thefreedictionary",
+  "prehideSelectors": ["#cmpBanner"],
   "detectCmp": [{ "exists": "#cmpBanner" }],
   "detectPopup": [{ "visible": "#cmpBanner" }],
   "optIn": [{ "eval": "cmpUi.allowAll()" }],

@@ -2,7 +2,7 @@
     "name": "arzt-auskunft",
     "prehideSelectors": ["#cookiescript_injected"],
     "detectCmp": [{"exists": "#cookiescript_injected"}],
-    "detectPopup": [{"exists": "#cookiescript_injected"}],
+    "detectPopup": [{"visible": "#cookiescript_injected"}],
     "optOut": [{"click": "#cookiescript_reject"}],
     "optIn": [{"click": "#cookiescript_accept"}]
 }

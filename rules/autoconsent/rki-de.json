@@ -1,9 +1,0 @@
-{
-    "name": "rki-de",
-    "prehideSelectors": ["#cookiebanner"],
-    "detectCmp": [{ "exists": "#cookiebanner" }],
-    "detectPopup": [{ "exists": "#cookiebanner" }],
-    "optOut": [{ "eval": "Array.from(document.querySelectorAll('.button.right.close')).filter(el => el.innerText.match('Nicht erlauben'))[0].click()" }],
-    "optIn": [{ "eval": "Array.from(document.querySelectorAll('.button.right.close')).filter(el => el.innerText.match('Erlauben'))[0].click()" }],
-    "test": [{ "eval": "!!document.cookie.match('gsbbanner')"}]
-  }

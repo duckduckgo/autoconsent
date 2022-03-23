@@ -1,5 +1,5 @@
 {
-    "name": "steam",
+    "name": "steampowered",
     "detectCmp": [{ "exists": ".cookiepreferences_popup" }],
     "detectPopup": [{ "visible": ".cookiepreferences_popup" }],
     "optOut": [{ "click": "#rejectAllButton" }],

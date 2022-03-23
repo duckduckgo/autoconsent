@@ -2,7 +2,7 @@
     "name": "deepl",
     "prehideSelectors": [".dl_cookieBanner_container"],
     "detectCmp": [{ "exists": ".dl_cookieBanner_container" }],
-    "detectPopup": [{ "exists": ".dl_cookieBanner_container" }],
+    "detectPopup": [{ "visible": ".dl_cookieBanner_container" }],
     "optOut": [{"click": ".dl_cookieBanner--buttonSelected"}],
     "optIn": [{ "click": ".dl_cookieBanner--buttonAll"}]
   }
