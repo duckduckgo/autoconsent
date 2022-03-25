@@ -1,0 +1,8 @@
+{
+    "name": "steampowered",
+    "detectCmp": [{ "exists": ".cookiepreferences_popup" }],
+    "detectPopup": [{ "visible": ".cookiepreferences_popup" }],
+    "optOut": [{ "click": "#rejectAllButton" }],
+    "optIn": [{ "click": "#acceptAllButton" }],
+    "test": [{ "eval": "!!document.cookie.match('cookieSettings')"}]
+  }

@@ -1,0 +1,14 @@
+{
+    "name": "johnlweis",
+    "prehideSelectors": ["div[class^=pecr-cookie-banner-]"],
+    "detectCmp": [{ "exists": "div[class^=pecr-cookie-banner-]" }],
+    "detectPopup": [{ "exists": "div[class^=pecr-cookie-banner-]" }],
+    "optOut": [
+        {"click": "button[data-test^=manage-cookies]"},
+        {"wait": "500"},
+        {"eval": "!!Array.from(document.querySelectorAll('label[data-test^=toggle]')).forEach(e => e.click())", "optional": true },
+        {"eval": "Array.from(document.querySelectorAll('label[data-test^=toggle]')).filter(e => e.className.match('checked') && !e.className.match('disabled')).length === 0"},
+        {"click": "button[data-test=save-preferences]"}
+    ],
+    "optIn": [{ "click": "button[data-test=allow-all]"}]
+  }

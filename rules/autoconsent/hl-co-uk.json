@@ -1,0 +1,33 @@
+{
+ "name": "hl-co-uk",
+ "prehideSelectors": [".cookieModalContent", "#cookie-banner-overlay"],
+  "detectCmp": [{ "exists": "#cookie-banner-overlay" }],
+  "detectPopup": [{ "exists": "#cookie-banner-overlay" }],
+  "optIn": [{ "click": "#acceptCookieButton" }],
+  "optOut": [
+      {
+          "click": "#manageCookie"
+      },
+      {
+          "hide": [".cookieSettingsModal"]
+      },
+      {
+          "wait": 500
+      },
+      {
+          "click": "#AOCookieToggle"
+      },
+      {
+          "eval": "document.querySelector('#AOCookieToggle').getAttribute('aria-pressed') === 'false'"
+      },
+      {
+          "click": "#TPCookieToggle"
+      },
+      {
+          "eval": "document.querySelector('#TPCookieToggle').getAttribute('aria-pressed') === 'false'"
+      },
+      {
+          "click": "#updateCookieButton"
+      }
+  ]
+}
