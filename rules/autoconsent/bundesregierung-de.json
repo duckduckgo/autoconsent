@@ -1,7 +1,7 @@
 {
   "name": "bundesregierung-de",
   "prehideSelectors": [".bpa-cookie-banner"],
-  "detectCmp": [{ "exists": ".bpa-cookie-banner]" }],
+  "detectCmp": [{ "exists": ".bpa-cookie-banner" }],
   "detectPopup": [{ "visible": ".bpa-module-full-hero" }],
   "optIn": [{ "click": ".bpa-accept-all-button" }],
   "optOut": [
