@@ -1,6 +1,5 @@
 {
 	"name": "thalia.de",
-    "prehideSelectors": ["consent-banner[component=consent-banner]", "dialog[.consent-banner-box]"],
 	"detectCmp": [
 		{
 			"exists": "consent-banner[component=consent-banner]"
