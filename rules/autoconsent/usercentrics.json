@@ -1,7 +1,0 @@
-{
-  "name": "usercentrics",
-  "detectCmp": [{ "eval": "!!document.querySelector('#usercentrics-root').shadowRoot.querySelector('#uc-center-container')"}],
-  "detectPopup": [{ "eval": "!!document.querySelector('#usercentrics-root').shadowRoot.querySelector('#uc-center-container')"}],
-  "optIn": [{ "eval": "document.querySelector('#usercentrics-root').shadowRoot.querySelector('button[data-testid=uc-accept-all-button]').click() || true"}],
-  "optOut": [{ "eval": "document.querySelector('#usercentrics-root').shadowRoot.querySelector('button[data-testid=uc-save-button]').click() || true"}]
-}
