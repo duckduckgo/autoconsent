@@ -8,5 +8,8 @@
       {
           "click": ".bpa-close-button"
       }
+  ],
+  "test": [
+      {"eval": "document.cookie.match('cookie-allow-tracking=0')"}
   ]
 }
