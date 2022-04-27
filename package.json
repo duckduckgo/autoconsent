@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/autoconsent.cjs.js",
   "module": "dist/autoconsent.esm.js",
@@ -25,7 +25,6 @@
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
-  "dependencies": {},
   "devDependencies": {
     "@playwright/test": "^1.17.1",
     "@rollup/plugin-typescript": "^4.0.0",
