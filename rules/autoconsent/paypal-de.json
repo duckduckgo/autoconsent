@@ -1,0 +1,12 @@
+{
+  "name": "paypal.de",
+  "prehideSelectors": ["#gdprCookieBanner"],
+  "detectCmp": [{ "exists": "#gdprCookieBanner"}],
+  "detectPopup": [{ "visible": "#gdprCookieContent_wrapper" }],
+  "optIn": [{ "click": "#acceptAllButton" }],
+  "optOut": [
+      {
+          "click": ".gdprCookieBanner_decline-button"
+      }
+  ]
+}

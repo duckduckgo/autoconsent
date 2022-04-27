@@ -1,0 +1,8 @@
+{
+  "name": "usercentrics-1",
+  "detectCmp": [{ "exists": "#usercentrics-root"}],
+  "detectPopup": [{ "eval": "!!document.querySelector('#usercentrics-root').shadowRoot.querySelector('#uc-center-container')"}],
+  "optIn": [{ "eval": "UC_UI.acceptAllConsents() || true"}, {"eval": "UC_UI.closeCMP() || true"}, {"eval": "UC_UI.areAllConsentsAccepted() === true"}],
+  "optOut": [{ "eval": "UC_UI.closeCMP() || UC_UI.denyAllConsents() || true"}],
+  "test": [{"eval": "UC_UI.areAllConsentsAccepted() === false"}]
+}
