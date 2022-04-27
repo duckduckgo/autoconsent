@@ -1,0 +1,7 @@
+{
+  "name": "legislation.gov.uk",
+  "detectCmp": [{ "exists": ".cookie-preferences-banner" }],
+  "detectPopup": [{ "visible": ".cookie-preferences-banner" }],
+  "optOut": [{"hide": [".cookie-preferences-banner"]}, { "click": ".reject-all-cookies"}],
+  "optIn": [{ "click": ".accept-all-cookies"}]
+}
