@@ -3,7 +3,7 @@ import { TabActor } from '../types';
 
 export default class Cookiebot extends AutoConsentBase {
 
-  prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner"]
+  prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookieoverlay"]
 
   constructor() {
     super('Cybotcookiebot');
@@ -18,7 +18,7 @@ export default class Cookiebot extends AutoConsentBase {
   }
 
   detectPopup(tab: TabActor) {
-    return tab.elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner');
+    return tab.elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookiebanner');
   }
 
   async optOut(tab: TabActor) {
@@ -57,6 +57,12 @@ export default class Cookiebot extends AutoConsentBase {
       await tab.eval('Cookiebot.dialog.submitConsent() || true');
       await tab.wait(500);
     }
+    
+    // site with 3rd confirm settings modal
+    if (await tab.elementExists('#cb-confirmedSettings')) {
+        await tab.eval('endCookieProcess()')
+    }
+
     return true;
   }
 
