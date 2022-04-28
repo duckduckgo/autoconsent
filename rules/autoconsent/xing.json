@@ -1,5 +1,5 @@
 {
-  "name": "xing",
+  "name": "xing.com",
   "detectCmp": [{ "exists": "div[class^=cookie-consent-CookieConsent]" }],
   "detectPopup": [{ "exists": "div[class^=cookie-consent-CookieConsent]" }],
   "optIn": [{ "click": "#consent-accept-button" }],
@@ -11,5 +11,5 @@
           "click": ".consent-banner-button-accept-overlay"
       }
   ],
-  "test": [{"eval": "document.cookie.includes('userConsent=%7B%22marketing%22%3Afalse'"}]
+ "test": [{"eval": "document.cookie.includes('userConsent=%7B%22marketing%22%3Afalse')"}]
 }
