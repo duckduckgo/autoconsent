@@ -27,6 +27,7 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     elem.forEach((e, i) => {
       results[i] = e.offsetParent !== null || window.getComputedStyle(e).display !== "none"; // TODO: handle visibility and z-index?
     });
+    debug && console.log("[visible?]", message.selector, elem, results);
     if (results.length === 0) {
       return false;
     } else if (message.check === "any") {
@@ -38,14 +39,15 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     return results.every(r => r);
   } else if (message.type === "getAttribute") {
     const elem = document.querySelector(message.selector);
+    debug && console.log("[getAttribute]", message.selector, elem);
     if (!elem) {
       return false;
     }
     return elem.getAttribute(message.attribute);
   } else if (message.type === "eval") {
     // TODO: chrome support
+    debug && console.log("about to [eval]", message.script); // this will not show in Webkit console
     const result = window.eval(message.script); // eslint-disable-line no-eval
-    debug && console.log("[eval]", message.script, result);
     return result;
   } else if (message.type === "hide") {
     const parent =
@@ -74,8 +76,10 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     return !!existingElement
   } else if (message.type === "matches") {
     const matched = matches(message.config);
+    debug && console.log("[matches?]", message.config.type, JSON.stringify(message.config), matched);
     return matched;
   } else if (message.type === "executeAction") {
+    console.log("[executeAction]", message);
     actionQueue = actionQueue.then(() => executeAction(message.config, message.param));
     return true;
   }

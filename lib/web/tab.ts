@@ -14,7 +14,6 @@ export default class TabActions implements TabActor {
   }
 
   async elementExists(selector: string, frameId = 0) {
-    console.log(`check for  ${selector} in tab ${this.id}, frame ${frameId}`);
     return this.sendContentMessage(
       this.id,
       {
@@ -112,6 +111,7 @@ export default class TabActions implements TabActor {
   }
 
   async hideElements(selectors: string[], frameId = 0) {
+    console.log('Sending hide elements to', this.id, selectors);
     return this.sendContentMessage(
       this.id,
       {
@@ -141,8 +141,12 @@ export default class TabActions implements TabActor {
   }
 
   wait(ms: number): Promise<true> {
+    console.log(`waiting for ${ms}ms in tab ${this.id}`);
     return new Promise(resolve => {
-      setTimeout(() => resolve(true), ms);
+      setTimeout(() => {
+        console.log(`done waiting in tab ${this.id}`);
+        resolve(true);
+      }, ms);
     });
   }
 

@@ -140,7 +140,9 @@ export class AutoConsent extends AutoConsentBase {
 
   async _runRulesSequentially(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
     for (const rule of rules) {
+      console.log('Running rule...', rule, tab.id);
       const result = await evaluateRule(rule, tab);
+      console.log('...rule result', result);
       if (!result && !rule.optional) {
         return false;
       }
@@ -171,6 +173,7 @@ export class AutoConsent extends AutoConsentBase {
 
   async optOut(tab: TabActor) {
     if (this.config.optOut) {
+      console.log('Initiated optOut()', this.config.optOut);
       return this._runRulesSequentially(tab, this.config.optOut);
     }
     return false;
