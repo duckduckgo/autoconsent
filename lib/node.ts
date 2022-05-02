@@ -2,6 +2,7 @@ import Tab from './puppet/tab';
 import detectDialog from './detector';
 import TabConsent from './tabwrapper';
 import { AutoCMP } from './types';
+import prehideElements from './hider';
 
 export * from './index';
 export { ConsentOMaticCMP } from './consentomatic/index';
@@ -11,7 +12,7 @@ export {
   TabConsent,
 }
 
-export function attachToPage(page: any, url: string, rules: AutoCMP[], retries = 1) {
+export function attachToPage(page: any, url: string, rules: AutoCMP[], retries = 1, prehide = false) {
   const frames: { [id: number]: any } = {};
   const tab = new Tab(page, url, frames);
   frames[0] = page.mainFrame();
@@ -34,5 +35,8 @@ export function attachToPage(page: any, url: string, rules: AutoCMP[], retries =
   }
   page.on('framenavigated', onFrame);
   page.frames().forEach(onFrame);
+  if (prehide) {
+    prehideElements(tab, rules);
+  }
   return new TabConsent(tab, detectDialog(tab, retries, rules))
 }

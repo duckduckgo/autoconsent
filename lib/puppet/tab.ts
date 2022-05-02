@@ -102,8 +102,26 @@ export default class Tab implements TabActor {
   }
 
   async hideElements(selectors: string[], frameId = 0) {
-    // TODO implement this
-    return Promise.resolve(true)
+    return this.frames[0].evaluate((hideSelectors: string[]) => {
+      const styleOverrideElementId = "autoconsent-css-rules";
+      const styleSelector = `style#${styleOverrideElementId}`;
+      const parent =
+      document.head ||
+      document.getElementsByTagName("head")[0] ||
+      document.documentElement;
+      const rule = `${hideSelectors.join(",")} { display: none !important; z-index: -1 !important; } `;
+      const existingElement = document.querySelector(styleSelector);
+      if (existingElement && existingElement instanceof HTMLStyleElement) {
+        existingElement.innerText += rule;
+      } else {
+        const css = document.createElement("style");
+        css.type = "text/css";
+        css.id = styleOverrideElementId;
+        css.appendChild(document.createTextNode(rule));
+        parent.appendChild(css);
+      }
+      return hideSelectors.length > 0;
+    }, selectors);
   }
 
   undoHideElements(frameId?: number): Promise<boolean> {
