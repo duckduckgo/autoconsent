@@ -2,6 +2,7 @@ import { waitFor } from '../cmps/base';
 import { TabActor } from '../types';
 import Tools from '../web/consentomatic/tools';
 import { matches } from '../web/consentomatic/index';
+import { HideMethod } from '../messages';
 
 const DEBUG = false;
 
@@ -101,7 +102,7 @@ export default class Tab implements TabActor {
     return false;
   }
 
-  async hideElements(selectors: string[], frameId = 0) {
+  async hideElements(selectors: string[], frameId = 0, method: HideMethod = 'display') {
     // TODO implement this
     return Promise.resolve(true)
   }

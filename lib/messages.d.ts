@@ -9,6 +9,8 @@ export type ContentScriptMessage =
   | MatchesMessage
   | ActionMessage;
 
+export type HideMethod = 'display' | 'opacity';
+
 type ClickMessage = {
   type: "click";
   selector: string;
@@ -40,6 +42,7 @@ type EvalMessage = {
 type HideMessage = {
   type: "hide";
   selectors: string[];
+  method: HideMethod;
 };
 
 type UndoHideMessage = {

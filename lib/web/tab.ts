@@ -1,4 +1,5 @@
 import { waitFor } from "../cmps/base";
+import { HideMethod } from "../messages";
 import { TabActor, MessageSender, Browser } from "../types";
 
 export default class TabActions implements TabActor {
@@ -110,13 +111,14 @@ export default class TabActions implements TabActor {
     return false;
   }
 
-  async hideElements(selectors: string[], frameId = 0) {
+  async hideElements(selectors: string[], frameId = 0, method: HideMethod = 'display') {
     console.log('Sending hide elements to', this.id, selectors);
     return this.sendContentMessage(
       this.id,
       {
         type: "hide",
-        selectors
+        selectors,
+        method,
       },
       { frameId }
     );

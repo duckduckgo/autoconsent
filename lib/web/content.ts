@@ -54,7 +54,8 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
       document.head ||
       document.getElementsByTagName("head")[0] ||
       document.documentElement;
-    const rule = `${message.selectors.join(",")} { display: none !important; z-index: -1 !important; } `;
+    const hidingSnippet = message.method === 'display' ? `display: none` : `opacity: 0`;
+    const rule = `${message.selectors.join(",")} { ${hidingSnippet} !important; z-index: -1 !important; } `;
     const existingElement = document.querySelector(styleSelector);
     debug && console.log("[hide]", message.selectors, !!existingElement);
     if (existingElement && existingElement instanceof HTMLStyleElement) {
