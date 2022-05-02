@@ -39,7 +39,7 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
         }
         await page.goto(url, { waitUntil: 'commit' });
 
-        const tab = autoconsent.attachToPage(page, url, rules, 20);
+        const tab = await autoconsent.attachToPage(page, url, rules, 20);
         await tab.checked;
         expect(tab.getCMPName()).toBe(expectedCmp);
         expect(await tab.isPopupOpen(50, 100)).toBeTruthy();

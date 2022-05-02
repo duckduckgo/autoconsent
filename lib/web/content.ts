@@ -1,9 +1,8 @@
 import { matches, executeAction } from "./consentomatic/index";
 import { ContentScriptMessage } from "../messages";
+import { hideElementsUtil, getStyleElementUtil } from "./content-utils";
 
 let actionQueue = Promise.resolve(null);
-const styleOverrideElementId = "autoconsent-css-rules";
-const styleSelector = `style#${styleOverrideElementId}`;
 
 export default function handleMessage(message: ContentScriptMessage, debug = false) {
   if (message.type === "click") {
@@ -50,26 +49,10 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     const result = window.eval(message.script); // eslint-disable-line no-eval
     return result;
   } else if (message.type === "hide") {
-    const parent =
-      document.head ||
-      document.getElementsByTagName("head")[0] ||
-      document.documentElement;
-    const hidingSnippet = message.method === 'display' ? `display: none` : `opacity: 0`;
-    const rule = `${message.selectors.join(",")} { ${hidingSnippet} !important; z-index: -1 !important; } `;
-    const existingElement = document.querySelector(styleSelector);
-    debug && console.log("[hide]", message.selectors, !!existingElement);
-    if (existingElement && existingElement instanceof HTMLStyleElement) {
-      existingElement.innerText += rule;
-    } else {
-      const css = document.createElement("style");
-      css.type = "text/css";
-      css.id = styleOverrideElementId;
-      css.appendChild(document.createTextNode(rule));
-      parent.appendChild(css);
-    }
-    return message.selectors.length > 0;
+    debug && console.log("[hide]", message.selectors);
+    return hideElementsUtil(message.selectors, message.method);
   } else if (message.type === "undohide") {
-    const existingElement = document.querySelector(styleSelector);
+    const existingElement = getStyleElementUtil();
     debug && console.log("[unhide]", !!existingElement);
     if (existingElement) {
       existingElement.remove();

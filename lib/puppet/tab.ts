@@ -3,6 +3,7 @@ import { TabActor } from '../types';
 import Tools from '../web/consentomatic/tools';
 import { matches } from '../web/consentomatic/index';
 import { HideMethod } from '../messages';
+import { hideElementsUtil, getStyleElementUtil } from '../web/content-utils';
 
 const DEBUG = false;
 
@@ -22,6 +23,18 @@ export default class Tab implements TabActor {
     this.page = page;
     this.url = url;
     this.frames = frames;
+  }
+
+  async _initPlaywrightUtils() {
+    const script = `(() => {
+      ${getStyleElementUtil.toString()}
+      ${hideElementsUtil.toString()}
+      window.autoconsentTestUtils = {
+        getStyleElementUtil,
+        hideElementsUtil,
+      };
+    })();`;
+    return this.frames[0].evaluate(script);
   }
 
   async elementExists(selector: string, frameId = 0) {
@@ -103,8 +116,7 @@ export default class Tab implements TabActor {
   }
 
   async hideElements(selectors: string[], frameId = 0, method: HideMethod = 'display') {
-    // TODO implement this
-    return Promise.resolve(true)
+    return await this.frames[frameId].evaluate(`window.autoconsentTestUtils.hideElementsUtil(${JSON.stringify(selectors)}, '${method}')`);
   }
 
   undoHideElements(frameId?: number): Promise<boolean> {
