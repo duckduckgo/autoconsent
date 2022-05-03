@@ -63,7 +63,7 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     debug && console.log("[matches?]", message.config.type, JSON.stringify(message.config), matched);
     return matched;
   } else if (message.type === "executeAction") {
-    console.log("[executeAction]", message);
+    debug && console.log("[executeAction]", message);
     actionQueue = actionQueue.then(() => executeAction(message.config, message.param));
     return true;
   }

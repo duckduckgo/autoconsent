@@ -7,6 +7,7 @@ import { Browser, MessageSender, AutoCMP, TabActor } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
 import prehideElements from './hider';
+import { enableLogs } from './config';
 
 export * from './index';
 export {
@@ -44,7 +45,7 @@ export default class AutoConsent {
   }
 
   async checkTab(tabId: number, prehide = true) {
-    console.log('checking tab', tabId, this.consentFrames, this.tabCmps);
+    enableLogs && console.log('checking tab', tabId, this.consentFrames, this.tabCmps);
     const tab = this.createTab(tabId);
     if (prehide) {
       this.prehideElements(tab);
@@ -55,15 +56,15 @@ export default class AutoConsent {
     consent.checked.then((rule) => {
       if (this.consentFrames.has(tabId) && rule) {
         const frame = this.consentFrames.get(tabId);
-        console.log(`Found ${rule.name} in a nested iframe ${frame.id} inside tab ${tabId}`);
+        enableLogs && console.log(`Found ${rule.name} in a nested iframe ${frame.id} inside tab ${tabId}`);
         if (frame.type === rule.name) {
           consent.tab.frame = frame;
         }
       }
-      console.log('finished checking tab', tabId, this.consentFrames, this.tabCmps);
+      enableLogs && console.log('finished checking tab', tabId, this.consentFrames, this.tabCmps);
       // no CMP detected, undo hiding
       if (!rule && prehide) {
-        console.log('no CMP detected, undo hiding');
+        enableLogs && console.log('no CMP detected, undo hiding');
         tab.undoHideElements();
       }
     });

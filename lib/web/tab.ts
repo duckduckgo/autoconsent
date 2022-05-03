@@ -1,4 +1,5 @@
 import { waitFor } from "../cmps/base";
+import { enableLogs } from "../config";
 import { HideMethod } from "../messages";
 import { TabActor, MessageSender, Browser } from "../types";
 
@@ -28,7 +29,7 @@ export default class TabActions implements TabActor {
   }
 
   async clickElement(selector: string, frameId = 0) {
-    console.log(`click element ${selector} in tab ${this.id}`);
+    enableLogs && console.log(`click element ${selector} in tab ${this.id}`);
     return this.sendContentMessage(
       this.id,
       {
@@ -42,7 +43,7 @@ export default class TabActions implements TabActor {
   }
 
   async clickElements(selector: string, frameId = 0) {
-    console.log(`click elements ${selector} in tab ${this.id}`);
+    enableLogs && console.log(`click elements ${selector} in tab ${this.id}`);
     return this.sendContentMessage(
       this.id,
       {
@@ -112,7 +113,7 @@ export default class TabActions implements TabActor {
   }
 
   async hideElements(selectors: string[], frameId = 0, method: HideMethod = 'display') {
-    console.log('Sending hide elements to', this.id, selectors);
+    enableLogs && console.log('Sending hide elements to', this.id, selectors);
     return this.sendContentMessage(
       this.id,
       {
@@ -143,10 +144,10 @@ export default class TabActions implements TabActor {
   }
 
   wait(ms: number): Promise<true> {
-    console.log(`waiting for ${ms}ms in tab ${this.id}`);
+    enableLogs && console.log(`waiting for ${ms}ms in tab ${this.id}`);
     return new Promise(resolve => {
       setTimeout(() => {
-        console.log(`done waiting in tab ${this.id}`);
+        enableLogs && console.log(`done waiting in tab ${this.id}`);
         resolve(true);
       }, ms);
     });

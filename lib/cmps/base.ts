@@ -2,6 +2,7 @@
 
 import { AutoCMP, TabActor } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep } from "../rules";
+import { enableLogs } from "../config";
 
 export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
   let result = await predicate();
@@ -140,9 +141,9 @@ export class AutoConsent extends AutoConsentBase {
 
   async _runRulesSequentially(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
     for (const rule of rules) {
-      console.log('Running rule...', rule, tab.id);
+      enableLogs && console.log('Running rule...', rule, tab.id);
       const result = await evaluateRule(rule, tab);
-      console.log('...rule result', result);
+      enableLogs && console.log('...rule result', result);
       if (!result && !rule.optional) {
         return false;
       }
@@ -173,7 +174,7 @@ export class AutoConsent extends AutoConsentBase {
 
   async optOut(tab: TabActor) {
     if (this.config.optOut) {
-      console.log('Initiated optOut()', this.config.optOut);
+      enableLogs && console.log('Initiated optOut()', this.config.optOut);
       return this._runRulesSequentially(tab, this.config.optOut);
     }
     return false;
