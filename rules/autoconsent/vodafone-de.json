@@ -1,10 +1,13 @@
 {
-    "name": "vodafone.de",
-    "prehideSelectors": [".dip-consent,.dip-consent-container"],
-    "detectCmp": [{ "exists": ".dip-consent-container" }],
-    "detectPopup": [{ "visible": ".dip-consent-content" }],
-    "optOut": [{"click": ".dip-consent-btn.white-btn"},
-        {"eval": "Array.from(document.querySelectorAll('.dip-consent-btn.red-btn')).filter(e => e.innerText === 'Auswahl bestätigen')[0].click()"}
-    ],
-    "optIn": [{ "click": ".dip-consent-btn.red-btn"}]
-  }
+  "name": "vodafone.de",
+  "prehideSelectors": [".dip-consent,.dip-consent-container"],
+  "detectCmp": [{ "exists": ".dip-consent-container" }],
+  "detectPopup": [{ "visible": ".dip-consent-content" }],
+  "optOut": [
+    { "click": ".dip-consent-btn.white-btn" },
+    {
+      "eval": "Array.from(document.querySelectorAll('.dip-consent-btn.red-btn')).filter(e => e.innerText === 'Auswahl bestätigen')[0].click() || true"
+    }
+  ],
+  "optIn": [{ "click": ".dip-consent-btn.red-btn" }]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "moneysavingexpert",
+  "name": "moneysavingexpert.com",
   "detectCmp": [{ "exists": "dialog[data-testid=accept-our-cookies-dialog]" }],
   "detectPopup": [{ "visible": "dialog[data-testid=accept-our-cookies-dialog]" }],
   "optIn": [{ "click": "#banner-accept" }],
