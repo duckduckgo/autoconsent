@@ -12,7 +12,7 @@ export {
   TabConsent,
 }
 
-export async function attachToPage(page: any, url: string, rules: AutoCMP[], retries = 1) {
+export function attachToPage(page: any, url: string, rules: AutoCMP[], retries = 1) {
   const frames: { [id: number]: any } = {
     0: page.mainFrame(),
   };
@@ -36,6 +36,6 @@ export async function attachToPage(page: any, url: string, rules: AutoCMP[], ret
   }
   page.on('framenavigated', onFrame);
   page.frames().forEach(onFrame);
-  await prehideElements(tab, rules);
+  prehideElements(tab, rules);
   return new TabConsent(tab, detectDialog(tab, retries, rules));
 }
