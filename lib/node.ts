@@ -17,7 +17,6 @@ export async function attachToPage(page: any, url: string, rules: AutoCMP[], ret
     0: page.mainFrame(),
   };
   const tab = new Tab(page, url, frames);
-  await tab._initPlaywrightUtils();
 
   async function onFrame(frame: any) {
     const allFrames: any[] = await page.frames();

@@ -19,22 +19,16 @@ export default class Tab implements TabActor {
     url: string
   }
 
+  _utilsSnippet: string // serialized RPC functions borrowed from content script
+
   constructor(page: any, url: string, frames: { [id: number]: any }) {
     this.page = page;
     this.url = url;
     this.frames = frames;
-  }
-
-  async _initPlaywrightUtils() {
-    const script = `(() => {
+    this._utilsSnippet = `
       ${getStyleElementUtil.toString()}
       ${hideElementsUtil.toString()}
-      window.autoconsentTestUtils = {
-        getStyleElementUtil,
-        hideElementsUtil,
-      };
-    })();`;
-    return this.frames[0].evaluate(script);
+    `;
   }
 
   async elementExists(selector: string, frameId = 0) {
@@ -116,7 +110,10 @@ export default class Tab implements TabActor {
   }
 
   async hideElements(selectors: string[], frameId = 0, method: HideMethod = 'display') {
-    return await this.frames[frameId].evaluate(`window.autoconsentTestUtils.hideElementsUtil(${JSON.stringify(selectors)}, '${method}')`);
+    return await this.frames[frameId].evaluate(`(() => {
+      ${this._utilsSnippet}
+      return hideElementsUtil(${JSON.stringify(selectors)}, '${method}');
+    })()`);
   }
 
   undoHideElements(frameId?: number): Promise<boolean> {
