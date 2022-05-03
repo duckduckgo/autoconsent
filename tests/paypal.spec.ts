@@ -1,7 +1,9 @@
 import generateCMPTests from "./runner";
 
-generateCMPTests('paypal.de', [
-    'https://paypal.de'], {
-        skipRegions: ["US", "FR", "GB"]
-    }
-);
+generateCMPTests('paypal.com', [
+    'https://paypal.de',
+    'https://paypal.com'
+],{
+    skipRegions: ["US"],
+    testSelfTest: false
+});
