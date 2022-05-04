@@ -5,6 +5,7 @@ import SourcePoint from './sourcepoint';
 import ContentManager from './consentmanager';
 import Evidon from './evidon';
 import { AutoConsentCMPRule } from '../rules';
+import Onetrust from './onetrust';
 
 const rules = [
   new TrustArc(),
@@ -12,6 +13,7 @@ const rules = [
   new SourcePoint(),
   new ContentManager(),
   new Evidon(),
+  new Onetrust(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsent {

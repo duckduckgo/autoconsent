@@ -204,7 +204,8 @@ describe("CMP Tests", () => {
       "https://www.atlassian.com/",
       "https://www.digitaltrends.com/",
       "https://about.gitlab.com",
-      "https://doodle.com/"
+      "https://doodle.com/",
+      "https://www.newyorker.com/",
     ].forEach((url) => {
       cmpTest("com_onetrust", url);
     });
