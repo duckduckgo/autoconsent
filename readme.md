@@ -84,7 +84,7 @@ Returns true if an element returned from `document.querySelect(selector)` is cur
   "eval": "code"
 }
 ```
-Evaluates `code` in the context of the page and returns the truthiness of the result.
+Evaluates `code` in the context of the page. NB: the result of this action depends on the truthiness of the evaluated expression, make sure it returns `true` in case of success.
 
 #### Wait for element
 

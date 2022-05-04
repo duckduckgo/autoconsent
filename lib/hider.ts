@@ -12,5 +12,5 @@ export default async function prehideElements(tab: TabActor, rules: AutoCMP[]): 
         }
         return selectorList;
       }, globalHidden);
-    await tab.hideElements(selectors);
+    await tab.hideElements(selectors, undefined, 'opacity');
 }

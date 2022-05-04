@@ -1,0 +1,13 @@
+{
+    "name": "etsy",
+    "detectCmp": [{ "exists": "#gdpr-single-choice-overlay" }],
+    "detectPopup": [{ "visible": "#gdpr-single-choice-overlay" }],
+    "optOut": [
+        {"hide": ["#gdpr-single-choice-overlay", "#gdpr-privacy-settings"]},
+        {"click": "button[data-gdpr-open-full-settings]"},
+        {"wait": 500},
+        {"eval": "document.querySelectorAll('.gdpr-overlay-body input').forEach(toggle => { toggle.checked = false; }) || true"},
+        {"eval": "document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true"}
+    ],
+    "optIn": [{"click": "button[data-gdpr-single-choice-accept]"}]
+}

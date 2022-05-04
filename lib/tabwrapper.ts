@@ -1,3 +1,4 @@
+import { enableLogs } from './config';
 import { AutoCMP, TabActor } from './types';
 
 export default class TabConsent {
@@ -18,22 +19,27 @@ export default class TabConsent {
     }
   
     async isPopupOpen(retries = 1, interval = 1000): Promise<boolean> {
+      enableLogs && console.log('checking if popup is open...', this.tab.id, this.rule.name);
       const isOpen = await this.rule.detectPopup(this.tab);
       if (!isOpen && retries > 0) {
         return new Promise((resolve) => setTimeout(() => resolve(this.isPopupOpen(retries - 1, interval)), interval));
       }
+      enableLogs && console.log(`popup is ${isOpen ? 'open' : 'not open'}`);
       return isOpen;
     }
   
     async doOptOut() {
       try {
+        enableLogs && console.log(`doing opt out ${this.getCMPName()} in tab ${this.tab.id}`);
         this.optOutStatus = await this.rule.optOut(this.tab);
         return this.optOutStatus;
       } catch (e) {
+        console.error('error during opt out', e);
         this.optOutStatus = e;
         throw e;
       } finally {
         if (!this.rule.isHidingRule) {
+          enableLogs && console.log('unhiding elements');
           if (this.getCMPName().startsWith('com_')) {
             this.tab.wait(5000).then(() => this.tab.undoHideElements())
           } else {

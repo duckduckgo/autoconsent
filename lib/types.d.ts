@@ -1,4 +1,4 @@
-import { ContentScriptMessage } from "./messages";
+import { ContentScriptMessage, HideMethod } from "./messages";
 
 type Tab = {
   url: string
@@ -27,7 +27,7 @@ export interface TabActor {
   eval(script: string, frameId?: number): Promise<boolean>
   waitForElement(selector: string, timeout: number, frameId?: number): Promise<boolean>
   waitForThenClick(selector: string, timeout?: number, frameId?: number): Promise<boolean>
-  hideElements(selectors: string[], frameId?: number): Promise<boolean>
+  hideElements(selectors: string[], frameId?: number, method?: HideMethod): Promise<boolean>
   undoHideElements(frameId?: number): Promise<boolean>
   goto(url: string): Promise<void>
   wait(ms: number): Promise<true>

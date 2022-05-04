@@ -2,6 +2,8 @@ import { waitFor } from '../cmps/base';
 import { TabActor } from '../types';
 import Tools from '../web/consentomatic/tools';
 import { matches } from '../web/consentomatic/index';
+import { HideMethod } from '../messages';
+import { hideElementsUtil, getStyleElementUtil } from '../web/content-utils';
 
 const DEBUG = false;
 
@@ -17,10 +19,16 @@ export default class Tab implements TabActor {
     url: string
   }
 
+  _utilsSnippet: string // serialized RPC functions borrowed from content script
+
   constructor(page: any, url: string, frames: { [id: number]: any }) {
     this.page = page;
     this.url = url;
     this.frames = frames;
+    this._utilsSnippet = `
+      ${getStyleElementUtil.toString()}
+      ${hideElementsUtil.toString()}
+    `;
   }
 
   async elementExists(selector: string, frameId = 0) {
@@ -101,9 +109,11 @@ export default class Tab implements TabActor {
     return false;
   }
 
-  async hideElements(selectors: string[], frameId = 0) {
-    // TODO implement this
-    return Promise.resolve(true)
+  async hideElements(selectors: string[], frameId = 0, method: HideMethod = 'display') {
+    return await this.frames[frameId].evaluate(`(() => {
+      ${this._utilsSnippet}
+      return hideElementsUtil(${JSON.stringify(selectors)}, '${method}');
+    })()`);
   }
 
   undoHideElements(frameId?: number): Promise<boolean> {
