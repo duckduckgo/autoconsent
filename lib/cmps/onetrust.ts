@@ -1,4 +1,4 @@
-import AutoConsentBase from "./base";
+import AutoConsentBase, { success } from "./base";
 import { TabActor } from "../types";
 
 export default class Onetrust extends AutoConsentBase {
@@ -18,18 +18,17 @@ export default class Onetrust extends AutoConsentBase {
   }
 
   async optOut(tab: TabActor) {
-    let res = true;
-
     if (await tab.elementExists("#onetrust-pc-btn-handler")) { // "show purposes" button inside a popup
-      res = res && await tab.clickElement("#onetrust-pc-btn-handler");
+      await success(tab.clickElement("#onetrust-pc-btn-handler"));
     } else { // otherwise look for a generic "show settings" button
-      res = res && await tab.clickElement(".ot-sdk-show-settings,button.js-cookie-settings");
+      await success(tab.clickElement(".ot-sdk-show-settings,button.js-cookie-settings"));
     }
 
-    res = res && await tab.waitForElement("#onetrust-consent-sdk", 2000);
-    res = res && await tab.wait(1000);
+    await success(tab.waitForElement("#onetrust-consent-sdk", 2000));
+    await success(tab.wait(1000));
     await tab.clickElements("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked"); // optional step
-    return res && tab.waitForThenClick(".save-preference-btn-handler,.js-consent-save", 1000);
+    await success(tab.waitForThenClick(".save-preference-btn-handler,.js-consent-save", 1000));
+    return true;
   }
 
   async optIn(tab: TabActor) {

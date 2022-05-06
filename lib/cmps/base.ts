@@ -20,7 +20,7 @@ export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTi
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
   if (!result) {
-    throw new Error(`Action failed: ${action}`)
+    throw new Error(`Action failed: ${action} ${result}`)
   }
   return result
 }
