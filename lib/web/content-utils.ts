@@ -21,7 +21,7 @@ export function getStyleElementUtil(): HTMLStyleElement {
 // hide elements with a CSS rule
 export function hideElementsUtil(selectors: string[], method: HideMethod): boolean {
   const hidingSnippet = method === 'display' ? `display: none` : `opacity: 0`;
-  const rule = `${selectors.join(",")} { ${hidingSnippet} !important; z-index: -1 !important; } `;
+  const rule = `${selectors.join(",")} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
   const styleEl = getStyleElementUtil();
   if (styleEl instanceof HTMLStyleElement) {
     styleEl.innerText += rule;
