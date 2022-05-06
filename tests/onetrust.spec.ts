@@ -12,3 +12,9 @@ generateCMPTests('Onetrust', [
 ], {
     skipRegions: ['US', 'GB']
 });
+
+generateCMPTests('Onetrust', [
+    "https://www.newyorker.com/",
+], {
+    skipRegions: ['US']
+});
