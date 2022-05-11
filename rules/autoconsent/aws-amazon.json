@@ -1,6 +1,6 @@
 {
   "name": "aws.amazon.com",
-  "prehideSelectors": ["#awsccc-cb-content", "#awsccc-cs-container-inner"],
+  "prehideSelectors": ["#awsccc-cb-content", "#awsccc-cs-container", "#awsccc-cs-modalOverlay", "#awsccc-cs-container-inner"],
   "detectCmp": [{ "exists": "#awsccc-cb-content" }],
   "detectPopup": [{ "visible": "#awsccc-cb-content" }],
   "optIn": [{ "click": "button[data-id=awsccc-cb-btn-accept" }],
