@@ -24,7 +24,16 @@ export default function handleMessage(message: ContentScriptMessage, debug = fal
     const elem = document.querySelectorAll<HTMLElement>(message.selector);
     const results = new Array(elem.length);
     elem.forEach((e, i) => {
-      results[i] = e.offsetParent !== null || window.getComputedStyle(e).display !== "none"; // TODO: handle visibility and z-index?
+      // check for display: none
+      results[i] = false;
+      if (e.offsetParent !== null) {
+        results[i] = true;
+      } else {
+        const css = window.getComputedStyle(e);
+        if (css.position === 'fixed' && css.display !== "none") { // fixed elements may be visible even if the parent is not
+          results[i] = true;
+        }
+      }
     });
     debug && console.log("[visible?]", message.selector, elem, results);
     if (results.length === 0) {
