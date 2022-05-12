@@ -1,0 +1,7 @@
+{
+  "name": "tiktok.com",
+  "detectCmp": [{ "exists": "tiktok-cookie-banner"}],
+  "detectPopup": [{ "visible": "tiktok-cookie-banner" }],
+  "optIn": [{ "eval": "Array.from(document.querySelector('tiktok-cookie-banner').shadowRoot.querySelectorAll('button')).filter(e => e.innerText === 'Accept all')[0].click()" }],
+  "optOut": [{"eval": "Array.from(document.querySelector('tiktok-cookie-banner').shadowRoot.querySelectorAll('button')).filter(e => e.innerText === 'Decline all')[0].click()"}]
+}
