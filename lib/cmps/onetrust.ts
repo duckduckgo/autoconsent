@@ -1,4 +1,4 @@
-import AutoConsentBase, { success } from "./base";
+import AutoConsentBase, { success, waitFor } from "./base";
 import { TabActor } from "../types";
 
 export default class Onetrust extends AutoConsentBase {
@@ -28,6 +28,12 @@ export default class Onetrust extends AutoConsentBase {
     await success(tab.wait(1000));
     await tab.clickElements("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked"); // optional step
     await success(tab.waitForThenClick(".save-preference-btn-handler,.js-consent-save", 1000));
+    // popup doesn't disappear immediately
+    await waitFor(
+      async () => !(await tab.elementsAreVisible("#onetrust-banner-sdk")),
+      10,
+      500
+    );
     return true;
   }
 
