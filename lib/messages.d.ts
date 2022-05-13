@@ -1,61 +1,35 @@
+import { RuleBundle } from "./types";
+
+export type BackgroundMessage =
+  InitResponseMessage
+  | DummyResponseMessage;
+
 export type ContentScriptMessage =
-  | ClickMessage
-  | ElemExistsMessage
-  | ElemVisibleMessage
-  | GetAttributeMessage
-  | EvalMessage
-  | HideMessage
-  | UndoHideMessage
-  | MatchesMessage
-  | ActionMessage;
+  InitMessage
+  | SuccessMessage
+  | FailureMessage;
 
 export type HideMethod = 'display' | 'opacity';
 
-type ClickMessage = {
-  type: "click";
-  selector: string;
-  all?: boolean;
+type InitMessage = {
+  type: "init";
 };
 
-type ElemExistsMessage = {
-  type: "elemExists";
-  selector: string;
+type SuccessMessage = {
+  type: "success";
 };
 
-type ElemVisibleMessage = {
-  type: "elemVisible";
-  selector: string;
-  check?: "any" | "none" | "all";
+type FailureMessage = {
+  type: "failure";
 };
 
-type GetAttributeMessage = {
-  type: "getAttribute";
-  selector: string;
-  attribute: string;
-};
+type InitResponseMessage = {
+  type: "initResp";
+  rules: RuleBundle;
+  enabled: boolean;
+  autoOptOut: boolean;
+}
 
-type EvalMessage = {
-  type: "eval";
-  script: string;
-};
-
-type HideMessage = {
-  type: "hide";
-  selectors: string[];
-  method: HideMethod;
-};
-
-type UndoHideMessage = {
-  type: "undohide"
-};
-
-type MatchesMessage = {
-  type: "matches";
-  config: any;
-};
-
-type ActionMessage = {
-  type: "executeAction";
-  config: any;
-  param: any;
-};
+type DummyResponseMessage = {
+  type: "dummyResp";
+}

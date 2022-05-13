@@ -1,4 +1,6 @@
 import { ContentScriptMessage, HideMethod } from "./messages";
+import { ConsentOMaticConfig } from "./consentomatic";
+import { AutoConsentCMPRule } from "./rules";
 
 type Tab = {
   url: string
@@ -37,20 +39,20 @@ export interface TabActor {
   executeAction(actionConfig: any, param?: any): Promise<boolean>
 }
 
-export type MessageSender<ResultType = any> = (tabId: number, message: ContentScriptMessage, options?: { frameId: number }) => Promise<ResultType>;
+export type MessageSender<ResultType = any> = (message: ContentScriptMessage) => Promise<ResultType>;
 
 export interface AutoCMP {
   name: string
   hasSelfTest: boolean
   prehideSelectors?: string[]
   isHidingRule?: boolean
-  detectCmp(tab: TabActor): Promise<boolean>
-  detectPopup(tab: TabActor): Promise<boolean>
-  optOut(tab:TabActor): Promise<boolean>
-  optIn(tab: TabActor): Promise<boolean>
-  openCmp(tab: TabActor): Promise<boolean>
-  test(tab: TabActor): Promise<boolean>
-  detectFrame(tab: TabActor, frame: { url: string }): boolean
+  detectCmp(): Promise<boolean>
+  detectPopup(): Promise<boolean>
+  optOut(): Promise<boolean>
+  optIn(): Promise<boolean>
+  openCmp(): Promise<boolean>
+  test(): Promise<boolean>
+  detectFrame(frame: { url: string }): boolean
 }
 
 type FindResult = {
@@ -59,3 +61,8 @@ type FindResult = {
     checked: boolean
   }
 }
+
+export type RuleBundle = {
+  autoconsent: AutoConsentCMPRule[];
+  consentomatic: { [name: string]: ConsentOMaticConfig };
+};

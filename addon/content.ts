@@ -1,11 +1,8 @@
 import { ContentScriptMessage } from "../lib/messages";
-import handleContentMessage from "../lib/web/content";
+import AutoConsent from "../lib/web";
 
-browser.runtime.onMessage.addListener((message: ContentScriptMessage) => {
-  return Promise.resolve(handleContentMessage(message, false));
-});
+// browser.runtime.onMessage.addListener((message: ContentScriptMessage) => {
+//   return Promise.resolve(handleContentMessage(message, false));
+// });
 
-browser.runtime.sendMessage({
-  type: "frame",
-  url: window.location.href,
-});
+const consent = new AutoConsent(<any>browser, browser.runtime.sendMessage);
