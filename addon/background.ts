@@ -53,6 +53,7 @@ browser.runtime.onMessage.addListener(
       rules,
       enabled: true,
       autoOptOut: true,
+      disabledCmps: [],
     });
   }
 );

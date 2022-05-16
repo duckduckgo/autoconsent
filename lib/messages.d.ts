@@ -6,6 +6,7 @@ export type BackgroundMessage =
 
 export type ContentScriptMessage =
   InitMessage
+  | FoundMessage
   | SuccessMessage
   | FailureMessage;
 
@@ -14,6 +15,10 @@ export type HideMethod = 'display' | 'opacity';
 type InitMessage = {
   type: "init";
 };
+
+type FoundMessage = {
+  type: "popupFound";
+}
 
 type SuccessMessage = {
   type: "success";
@@ -28,6 +33,7 @@ type InitResponseMessage = {
   rules: RuleBundle;
   enabled: boolean;
   autoOptOut: boolean;
+  disabledCmps: string[];
 }
 
 type DummyResponseMessage = {
