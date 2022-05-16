@@ -122,14 +122,6 @@ Combines `waitFor` and `click`.
 ```
 Wait for the specified number of milliseconds.
 
-#### Go to URL
-```json
-{
-  "goto": "url"
-}
-```
-Navigate the page to the given URL.
-
 #### Hide rule
 ```json
 {

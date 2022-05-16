@@ -76,18 +76,11 @@ async function evaluateRule(rule: AutoConsentRuleStep) {
   if (rule.wait) {
     results.push(wait(<WaitRule>rule));
   }
-  // if (rule.goto) {
-  //   results.push(tab.goto(rule.goto));
-  // }
+
   // if (rule.hide) {
   //   results.push(tab.hideElements(rule.hide, frameId));
   // }
-  // if (rule.undoHide) {
-  //   results.push(tab.undoHideElements(frameId));
-  // }
-  // if (rule.waitForFrame) {
-  //   results.push(waitFor(() => !!tab.frame, 40, 500))
-  // }
+
   // boolean and of results
   return (await Promise.all(results)).reduce((a, b) => a && b, true);
 }
