@@ -1,4 +1,3 @@
-
 export type AutoConsentCMPRule = {
   name: string
   prehideSelectors?: string[]
@@ -24,8 +23,7 @@ export type AutoConsentRuleStep = { frame?: boolean; optional?: boolean } & Part
   Partial<UrlRule> &
   Partial<GotoUrlRule> &
   Partial<HideRule> &
-  Partial<UndoHideRule> &
-  Partial<WaitForFrameRule>;
+  Partial<UndoHideRule>;
 
 type ElementExistsRule = {
   exists: string;
@@ -67,14 +65,13 @@ type GotoUrlRule = {
   goto: string;
 };
 
+export type HideMethod = 'display' | 'opacity';
+
 type HideRule = {
   hide: string[];
+  method?: HideMethod;
 };
 
 type UndoHideRule = {
   undoHide: boolean;
 }
-
-type WaitForFrameRule = {
-  waitForFrame: true
-};

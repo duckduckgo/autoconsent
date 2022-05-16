@@ -1,6 +1,6 @@
-import { ContentScriptMessage, HideMethod } from "./messages";
+import { ContentScriptMessage } from "./messages";
 import { ConsentOMaticConfig } from "./consentomatic";
-import { AutoConsentCMPRule } from "./rules";
+import { AutoConsentCMPRule, HideMethod } from "./rules";
 
 type Tab = {
   url: string

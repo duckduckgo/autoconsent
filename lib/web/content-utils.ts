@@ -1,6 +1,5 @@
 import { enableLogs } from "../config";
-import { HideMethod } from "../messages";
-import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
+import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideMethod, HideRule, UndoHideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
 
 // get or create a style container for CSS overrides
 export function getStyleElementUtil(): HTMLStyleElement {
@@ -115,6 +114,7 @@ export function waitForElement(ruleStep: WaitForRule): Promise<boolean> {
 }
 
 export async function waitForThenClick(ruleStep: WaitForThenClickRule): Promise<boolean> {
+  enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
   await waitForElement({ ...ruleStep, waitFor: ruleStep.waitForThenClick });
   return click({ ...ruleStep, click: ruleStep.waitForThenClick });
 }
@@ -127,4 +127,18 @@ export function wait(ruleStep: WaitRule): Promise<true> {
       resolve(true);
     }, ruleStep.wait);
   });
+}
+
+export function hide(ruleStep: HideRule): boolean {
+  enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
+  return hideElementsUtil(ruleStep.hide, ruleStep.method);
+}
+
+export function undoHide(): boolean {
+  const existingElement = getStyleElementUtil();
+  enableLogs && console.log("[unhide]", existingElement);
+  if (existingElement) {
+    existingElement.remove();
+  }
+  return !!existingElement;
 }

@@ -10,8 +10,6 @@ export type ContentScriptMessage =
   | SuccessMessage
   | FailureMessage;
 
-export type HideMethod = 'display' | 'opacity';
-
 type InitMessage = {
   type: "init";
 };

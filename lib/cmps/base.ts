@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
 import { AutoCMP } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep, ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
+import { AutoConsentCMPRule, AutoConsentRuleStep, ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
 import { enableLogs } from "../config";
-import { click, doEval, elementExists, elementVisible, wait, waitForElement, waitForThenClick } from "../web/content-utils";
+import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick } from "../web/content-utils";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -76,10 +76,9 @@ async function evaluateRule(rule: AutoConsentRuleStep) {
   if (rule.wait) {
     results.push(wait(<WaitRule>rule));
   }
-
-  // if (rule.hide) {
-  //   results.push(tab.hideElements(rule.hide, frameId));
-  // }
+  if (rule.hide) {
+    results.push(hide(<HideRule>rule));
+  }
 
   // boolean and of results
   return (await Promise.all(results)).reduce((a, b) => a && b, true);
