@@ -1,22 +1,9 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
 import { AutoCMP } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep, ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule } from "../rules";
+import { AutoConsentCMPRule, AutoConsentRuleStep, ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
 import { enableLogs } from "../config";
-import { click, doEval, elementExists, elementVisible } from "../web/content-utils";
-
-export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
-  let result = await predicate();
-  if (!result && maxTimes > 0) {
-    return new Promise((resolve) => {
-      setTimeout(async () => {
-        resolve(waitFor(predicate, maxTimes - 1, interval));
-      }, interval);
-    });
-  }
-  return Promise.resolve(result);
-}
-
+import { click, doEval, elementExists, elementVisible, wait, waitForElement, waitForThenClick } from "../web/content-utils";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -77,19 +64,18 @@ async function evaluateRule(rule: AutoConsentRuleStep) {
   if (rule.eval) {
     results.push(doEval(<EvalRule>rule));
   }
-  // if (rule.waitFor) {
-  //   results.push(tab.waitForElement(rule.waitFor, rule.timeout || 10000, frameId));
-  // }
+  if (rule.waitFor) {
+    results.push(waitForElement(<WaitForRule>rule));
+  }
   if (rule.click) {
     results.push(click(<ClickRule>rule));
   }
-  // if (rule.waitForThenClick) {
-  //   results.push(tab.waitForElement(rule.waitForThenClick, rule.timeout || 10000, frameId)
-  //     .then(() => tab.clickElement(rule.waitForThenClick!, frameId)));
-  // }
-  // if (rule.wait) {
-  //   results.push(tab.wait(rule.wait));
-  // }
+  if (rule.waitForThenClick) {
+    results.push(waitForThenClick(<WaitForThenClickRule>rule));
+  }
+  if (rule.wait) {
+    results.push(wait(<WaitRule>rule));
+  }
   // if (rule.goto) {
   //   results.push(tab.goto(rule.goto));
   // }

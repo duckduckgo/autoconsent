@@ -1,6 +1,6 @@
 import { enableLogs } from "../config";
 import { HideMethod } from "../messages";
-import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule } from "../rules";
+import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
 
 // get or create a style container for CSS overrides
 export function getStyleElementUtil(): HTMLStyleElement {
@@ -89,4 +89,42 @@ export function doEval(ruleStep: EvalRule): boolean {
   enableLogs && console.log("about to [eval]", ruleStep.eval); // this will not show in Webkit console
   const result = window.eval(ruleStep.eval); // eslint-disable-line no-eval
   return result;
+}
+
+export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
+  let result = await predicate();
+  if (!result && maxTimes > 0) {
+    return new Promise((resolve) => {
+      setTimeout(async () => {
+        resolve(waitFor(predicate, maxTimes - 1, interval));
+      }, interval);
+    });
+  }
+  return Promise.resolve(result);
+}
+
+export function waitForElement(ruleStep: WaitForRule): Promise<boolean> {
+  const interval = 200;
+  const times = Math.ceil((ruleStep.timeout || 10000) / interval);
+  enableLogs && console.log("[waitFor]", ruleStep.waitFor);
+  return waitFor(
+    () => document.querySelector(ruleStep.waitFor) !== null,
+    times,
+    interval
+  );
+}
+
+export async function waitForThenClick(ruleStep: WaitForThenClickRule): Promise<boolean> {
+  await waitForElement({ ...ruleStep, waitFor: ruleStep.waitForThenClick });
+  return click({ ...ruleStep, click: ruleStep.waitForThenClick });
+}
+
+export function wait(ruleStep: WaitRule): Promise<true> {
+  enableLogs && console.log(`waiting for ${ruleStep.wait}ms`);
+  return new Promise(resolve => {
+    setTimeout(() => {
+      enableLogs && console.log(`done waiting`);
+      resolve(true);
+    }, ruleStep.wait);
+  });
 }
