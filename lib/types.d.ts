@@ -45,7 +45,6 @@ export interface AutoCMP {
   name: string
   hasSelfTest: boolean
   prehideSelectors?: string[]
-  isHidingRule?: boolean
   detectCmp(): Promise<boolean>
   detectPopup(): Promise<boolean>
   optOut(): Promise<boolean>

@@ -1,7 +1,6 @@
 {
     "name": "osano",
     "prehideSelectors": [".osano-cm-window"],
-    "isHidingRule": true,
     "detectCmp": [{ "exists": ".osano-cm-window" }],
     "detectPopup": [{ "visible": ".osano-cm-dialog" }],
     "optIn": [{ "click": ".osano-cm-accept-all" }],

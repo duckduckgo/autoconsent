@@ -1,7 +1,6 @@
 {
     "name": "Tealium",
     "prehideSelectors": ["#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#consent-layer"],
-    "isHidingRule": false,
     "detectCmp": [{ "exists": "#__tealiumGDPRecModal" }, { "eval": "window.utag && typeof utag.gdpr === 'object'" }],
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [

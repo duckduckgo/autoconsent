@@ -7,7 +7,7 @@ import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
 import { ContentScriptMessage, InitResponseMessage } from './messages';
-import { hideElementsUtil, undoHide } from './web/content-utils';
+import { prehide, undoPrehide } from './web/content-utils';
 
 export * from './index';
 export {
@@ -40,9 +40,8 @@ export default class AutoConsent {
       }
 
       enableLogs && console.log("added rules", this.rules);
-      enableLogs && console.groupEnd();
-
       this.prehideElements(); // prehide as early as possible to prevent flickering
+      enableLogs && console.groupEnd();
 
       // start detection
       if (document.readyState === 'loading') {
@@ -83,7 +82,7 @@ export default class AutoConsent {
       if (!isOpen) {
         enableLogs && console.log('no popup found');
         enableLogs && console.groupEnd();
-        undoHide();
+        undoPrehide();
         return false;
       }
 
@@ -97,7 +96,7 @@ export default class AutoConsent {
       return true;
     } else {
       enableLogs && console.log("no CMP found");
-      undoHide();
+      undoPrehide();
       enableLogs && console.groupEnd();
       return false;
     }
@@ -107,9 +106,7 @@ export default class AutoConsent {
     enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out`);
     const optOut = await cmp.optOut();
     enableLogs && console.groupEnd();
-    if (!cmp.isHidingRule) {
-      undoHide();
-    }
+    undoPrehide();
     if (optOut && !!cmp.hasSelfTest) {
       return await cmp.test();
     } else {
@@ -140,6 +137,8 @@ export default class AutoConsent {
       return selectorList;
     }, globalHidden);
 
-    return hideElementsUtil(selectors, 'opacity');
+    enableLogs && console.log('prehiding elements', selectors);
+
+    return prehide(selectors);
   }
 }

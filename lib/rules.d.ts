@@ -1,7 +1,6 @@
 export type AutoConsentCMPRule = {
   name: string
   prehideSelectors?: string[]
-  isHidingRule?: boolean
   detectCmp: AutoConsentRuleStep[]
   detectPopup: AutoConsentRuleStep[]
   frame?: string
@@ -22,8 +21,7 @@ export type AutoConsentRuleStep = { frame?: boolean; optional?: boolean } & Part
   Partial<WaitRule> &
   Partial<UrlRule> &
   Partial<GotoUrlRule> &
-  Partial<HideRule> &
-  Partial<UndoHideRule>;
+  Partial<HideRule>;
 
 type ElementExistsRule = {
   exists: string;
@@ -71,7 +69,3 @@ type HideRule = {
   hide: string[];
   method?: HideMethod;
 };
-
-type UndoHideRule = {
-  undoHide: boolean;
-}

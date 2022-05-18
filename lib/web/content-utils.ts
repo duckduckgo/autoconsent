@@ -1,9 +1,8 @@
 import { enableLogs } from "../config";
-import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideMethod, HideRule, UndoHideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
+import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideMethod, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
 
 // get or create a style container for CSS overrides
-export function getStyleElementUtil(): HTMLStyleElement {
-  const styleOverrideElementId = "autoconsent-css-rules";
+export function getStyleElementUtil(styleOverrideElementId = "autoconsent-css-rules"): HTMLStyleElement {
   const styleSelector = `style#${styleOverrideElementId}`;
   const existingElement = document.querySelector(styleSelector);
   if (existingElement && existingElement instanceof HTMLStyleElement) {
@@ -21,15 +20,16 @@ export function getStyleElementUtil(): HTMLStyleElement {
 }
 
 // hide elements with a CSS rule
-export function hideElementsUtil(
+function hideElementsUtil(
+  styleEl: HTMLStyleElement,
   selectors: string[],
   method: HideMethod
 ): boolean {
-  const hidingSnippet = method === "display" ? `display: none` : `opacity: 0`;
+  const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
   const rule = `${selectors.join(
     ","
   )} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
-  const styleEl = getStyleElementUtil();
+
   if (styleEl instanceof HTMLStyleElement) {
     styleEl.innerText += rule;
     return selectors.length > 0;
@@ -131,12 +131,19 @@ export function wait(ruleStep: WaitRule): Promise<true> {
 
 export function hide(ruleStep: HideRule): boolean {
   enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
-  return hideElementsUtil(ruleStep.hide, ruleStep.method);
+  const styleEl = getStyleElementUtil();
+  return hideElementsUtil(styleEl, ruleStep.hide, ruleStep.method);
 }
 
-export function undoHide(): boolean {
-  const existingElement = getStyleElementUtil();
-  enableLogs && console.log("[unhide]", existingElement);
+export function prehide(selectors: string[]): boolean {
+  enableLogs && console.log("[prehide]", selectors);
+  const styleEl = getStyleElementUtil('autoconsent-prehide');
+  return hideElementsUtil(styleEl, selectors, "opacity");
+}
+
+export function undoPrehide(): boolean {
+  const existingElement = getStyleElementUtil('autoconsent-prehide');
+  enableLogs && console.log("[undoprehide]", existingElement);
   if (existingElement) {
     existingElement.remove();
   }
