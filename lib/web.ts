@@ -15,12 +15,12 @@ export {
 }
 
 export default class AutoConsent {
-  rules: AutoCMP[];
-  autoOptOut: boolean;
-  foundCmp: AutoCMP;
+  rules: AutoCMP[] = [];
+  autoOptOut: boolean = false;
+  foundCmp: AutoCMP = null;
+  protected sendContentMessage: MessageSender;
 
-  constructor(protected browser: Browser, protected sendContentMessage: MessageSender) {
-    this.foundCmp = null;
+  constructor(sendContentMessage: MessageSender) {
     this.sendContentMessage = sendContentMessage;
     this.rules = [...dynamicRules];
     const initMsg: InitMessage = {
@@ -72,12 +72,16 @@ export default class AutoConsent {
     this.rules = this.rules.filter((cmp) => !cmpNames.includes(cmp.name))
   }
 
-  addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
-    this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
+  // start the detection process, possibly with a delay
+  start() {
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(() => this._start(), { timeout: 500 });
+    } else {
+      this._start();
+    }
   }
 
-  // start the detection process
-  async start() {
+  async _start() {
     enableLogs && console.groupCollapsed(`Detecting CMPs on ${window.location.href}`)
     const cmp = await this.detectCmp(20);
     enableLogs && console.groupEnd();
