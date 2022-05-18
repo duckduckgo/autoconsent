@@ -83,7 +83,7 @@ export default class AutoConsent {
 
   async _start() {
     enableLogs && console.groupCollapsed(`Detecting CMPs on ${window.location.href}`)
-    const cmp = await this.detectCmp(20);
+    const cmp = await this.findCmp(20);
     enableLogs && console.groupEnd();
     if (cmp) {
       enableLogs && console.groupCollapsed("detected CMP:", cmp.name, window.location.href);
@@ -120,7 +120,7 @@ export default class AutoConsent {
     }
   }
 
-  async detectCmp(retries: number): Promise<AutoCMP> {
+  async findCmp(retries: number): Promise<AutoCMP> {
     enableLogs && console.groupCollapsed(`retries = ${retries}...`)
 
     let foundCmp: AutoCMP = null;
@@ -142,7 +142,7 @@ export default class AutoConsent {
     if (!foundCmp && retries > 0) {
       return new Promise((resolve) => {
         setTimeout(async () => {
-          const result = this.detectCmp(retries - 1);
+          const result = this.findCmp(retries - 1);
           resolve(result);
         }, 500);
       });
