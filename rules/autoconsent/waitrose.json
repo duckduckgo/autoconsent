@@ -1,6 +1,7 @@
 {
   "name": "waitrose.com",
   "prehideSelectors": [
+      "div[aria-labelledby=CookieAlertModalHeading]",
       "section[data-test=initial-waitrose-cookie-consent-banner]",
       "section[data-test=cookie-consent-modal]"
   ],
