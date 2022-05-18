@@ -5,9 +5,9 @@ import { rules as dynamicRules, createAutoCMP } from './index';
 import { Browser, MessageSender, AutoCMP, TabActor, RuleBundle } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
-import prehideElements from './hider';
 import { enableLogs } from './config';
 import { ContentScriptMessage, InitResponseMessage } from './messages';
+import { hideElementsUtil, undoHide } from './web/content-utils';
 
 export * from './index';
 export {
@@ -42,6 +42,8 @@ export default class AutoConsent {
       enableLogs && console.log("added rules", this.rules);
       enableLogs && console.groupEnd();
 
+      this.prehideElements(); // prehide as early as possible to prevent flickering
+
       // start detection
       if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => this.start());
@@ -74,11 +76,6 @@ export default class AutoConsent {
 
   // start the detection process
   async start() {
-    // if (prehide) {
-    //   this.prehideElements(tab);
-    // }
-
-
     const cmp = await detectDialog(20, this.rules);
     if (cmp) {
       enableLogs && console.groupCollapsed("detected CMP:", cmp.name);
@@ -86,6 +83,7 @@ export default class AutoConsent {
       if (!isOpen) {
         enableLogs && console.log('no popup found');
         enableLogs && console.groupEnd();
+        undoHide();
         return false;
       }
 
@@ -99,10 +97,7 @@ export default class AutoConsent {
       return true;
     } else {
       enableLogs && console.log("no CMP found");
-      // if (prehide) {
-      //   enableLogs && console.log('no CMP detected, undo hiding');
-      //   tab.undoHideElements();
-      // }
+      undoHide();
       enableLogs && console.groupEnd();
       return false;
     }
@@ -112,6 +107,9 @@ export default class AutoConsent {
     enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out`);
     const optOut = await cmp.optOut();
     enableLogs && console.groupEnd();
+    if (!cmp.isHidingRule) {
+      undoHide();
+    }
     if (optOut && !!cmp.hasSelfTest) {
       return await cmp.test();
     } else {
@@ -129,7 +127,19 @@ export default class AutoConsent {
     return isOpen;
   }
 
-  async prehideElements(tab: TabActor): Promise<void> {
-    return prehideElements(tab, this.rules);
+  prehideElements(): boolean {
+    // hide rules not specific to a single CMP rule
+    const globalHidden = [
+      "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium",
+    ]
+
+    const selectors = this.rules.reduce((selectorList, rule) => {
+      if (rule.prehideSelectors) {
+        return [...selectorList, ...rule.prehideSelectors];
+      }
+      return selectorList;
+    }, globalHidden);
+
+    return hideElementsUtil(selectors, 'opacity');
   }
 }
