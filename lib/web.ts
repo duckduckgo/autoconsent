@@ -41,7 +41,9 @@ export default class AutoConsent {
       }
 
       enableLogs && console.log("added rules", this.rules);
-      this.prehideElements(); // prehide as early as possible to prevent flickering
+      if (this.autoOptOut) {
+        this.prehideElements(); // prehide as early as possible to prevent flickering
+      }
       enableLogs && console.groupEnd();
 
       // start detection
@@ -85,7 +87,9 @@ export default class AutoConsent {
       if (!isOpen) {
         enableLogs && console.log('no popup found');
         enableLogs && console.groupEnd();
-        undoPrehide();
+        if (this.autoOptOut) {
+          undoPrehide();
+        }
         return false;
       }
 
@@ -100,10 +104,13 @@ export default class AutoConsent {
         return await this.doOptOut(cmp);
       }
 
+      enableLogs && console.log("waiting for opt-out signal...");
       return true;
     } else {
       enableLogs && console.log("no CMP found");
-      undoPrehide();
+      if (this.autoOptOut) {
+        undoPrehide();
+      }
       enableLogs && console.groupEnd();
       return false;
     }
@@ -144,7 +151,9 @@ export default class AutoConsent {
     enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out on ${window.location.href}`);
     let optOutResult = await cmp.optOut();
     enableLogs && console.groupEnd();
-    undoPrehide();
+    if (this.autoOptOut) {
+      undoPrehide();
+    }
     if (optOutResult && !!cmp.hasSelfTest) {
       optOutResult = await cmp.test();
     }
