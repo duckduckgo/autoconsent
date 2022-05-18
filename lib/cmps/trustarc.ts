@@ -23,12 +23,12 @@ export default class TrustArc extends AutoConsentBase {
     ) {
       return true;
     }
-    return tab.elementExists("#truste-show-consent");
+    return tab.elementExists("#truste-show-consent,#truste-consent-track");
   }
 
   async detectPopup(tab: TabActor) {
     return (
-      (await tab.elementsAreVisible("#truste-consent-content,#trustarc-banner-overlay")) ||
+      (await tab.elementsAreVisible("#truste-consent-content,.truste-consent-content,#trustarc-banner-overlay")) ||
       (tab.frame &&
         (await tab.waitForElement(
           "#defaultpreferencemanager",
