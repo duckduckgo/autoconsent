@@ -1,9 +1,16 @@
 /* global browser */
-import { enableLogs } from "../lib/config";
+import { autoOptOut, enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
 import { RuleBundle } from "../lib/types";
 
 type SendResponseFn = (payload: BackgroundMessage) => void;
+interface PageActionState {
+  [tabId: number]: {
+    frameId: number; // (last) frameId that reported a popup
+  }
+}
+
+const pageActionState: PageActionState = {};
 
 let rules: RuleBundle = null;
 
@@ -13,8 +20,6 @@ async function loadRules() {
 }
 
 loadRules();
-
-// browser.pageAction.show(tabId);
 
 function showOptOutStatus(
   tabId: number,
@@ -48,17 +53,42 @@ browser.runtime.onMessage.addListener(
     const frameId = sender.frameId;
     const url = sender.url;
     enableLogs && console.log("received message", msg, sender);
-    sendResponse({
-      type: "initResp",
-      rules,
-      enabled: true,
-      autoOptOut: true,
-      disabledCmps: [],
-    });
+    browser.pageAction.show(tabId);
+
+    switch (msg.type) {
+      case "init":
+        sendResponse({
+          type: "initResp",
+          rules,
+          enabled: true,
+          autoOptOut,
+          disabledCmps: [],
+        });
+        break;
+      case "popupFound":
+        showOptOutStatus(tabId, "available");
+        pageActionState[tabId] = {
+          frameId,
+        }
+        break;
+      case "success":
+        showOptOutStatus(tabId, "success");
+        break;
+      case "failure":
+        break;
+    }
+
   }
 );
 
-browser.pageAction.onClicked.addListener(async (tab) => {
+browser.pageAction.onClicked.addListener((tab) => {
   const tabId = tab.id;
-  // runOptOut(tabId);
+  const frameId = pageActionState[tabId].frameId;
+  enableLogs && console.log("pageAction.onClicked", tabId, frameId);
+  showOptOutStatus(tabId, "working");
+  browser.tabs.sendMessage(tabId, {
+    type: "optOut",
+  }, {
+    frameId,
+  });
 });

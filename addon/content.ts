@@ -1,8 +1,7 @@
-import { ContentScriptMessage } from "../lib/messages";
+import { BackgroundMessage } from "../lib/messages";
 import AutoConsent from "../lib/web";
 
-// browser.runtime.onMessage.addListener((message: ContentScriptMessage) => {
-//   return Promise.resolve(handleContentMessage(message, false));
-// });
-
 const consent = new AutoConsent(<any>browser, browser.runtime.sendMessage);
+browser.runtime.onMessage.addListener((message: BackgroundMessage) => {
+  return Promise.resolve(consent.receiveMessageCallback(message));
+});

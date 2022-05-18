@@ -6,7 +6,7 @@ import { Browser, MessageSender, AutoCMP, TabActor, RuleBundle } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
-import { ContentScriptMessage, InitResponseMessage } from './messages';
+import { BackgroundMessage, InitMessage, InitResponseMessage } from './messages';
 import { prehide, undoPrehide } from './web/content-utils';
 
 export * from './index';
@@ -18,14 +18,16 @@ export {
 export default class AutoConsent {
   rules: AutoCMP[];
   autoOptOut: boolean;
+  foundCmp: AutoCMP;
 
   constructor(protected browser: Browser, protected sendContentMessage: MessageSender) {
+    this.foundCmp = null;
     this.sendContentMessage = sendContentMessage;
     this.rules = [...dynamicRules];
-    const initMsg: ContentScriptMessage = {
+    const initMsg: InitMessage = {
       type: "init",
     };
-    enableLogs && console.groupCollapsed('autoconsent init');
+    enableLogs && console.groupCollapsed('autoconsent init', window.location.href);
     sendContentMessage(initMsg).then((resp: InitResponseMessage) => {
       enableLogs && console.log("received response", resp, JSON.stringify(resp).length, JSON.stringify(resp));
       if (!resp.enabled) {
@@ -77,7 +79,7 @@ export default class AutoConsent {
   async start() {
     const cmp = await detectDialog(20, this.rules);
     if (cmp) {
-      enableLogs && console.groupCollapsed("detected CMP:", cmp.name);
+      enableLogs && console.groupCollapsed("detected CMP:", cmp.name, window.location.href);
       const isOpen = await this.waitForPopup(cmp);
       if (!isOpen) {
         enableLogs && console.log('no popup found');
@@ -86,7 +88,11 @@ export default class AutoConsent {
         return false;
       }
 
-      this.sendContentMessage({ type: 'popupFound' }); // notify the browser
+      this.foundCmp = cmp;
+      this.sendContentMessage({
+        type: 'popupFound',
+        cmp: cmp.name,
+      }); // notify the browser
       enableLogs && console.groupEnd();
 
       if (this.autoOptOut) {
@@ -103,15 +109,26 @@ export default class AutoConsent {
   }
 
   async doOptOut(cmp: AutoCMP): Promise<boolean> {
-    enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out`);
-    const optOut = await cmp.optOut();
+    enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out on ${window.location.href}`);
+    let optOutResult = await cmp.optOut();
     enableLogs && console.groupEnd();
     undoPrehide();
-    if (optOut && !!cmp.hasSelfTest) {
-      return await cmp.test();
-    } else {
-      return optOut;
+    if (optOutResult && !!cmp.hasSelfTest) {
+      optOutResult = await cmp.test();
     }
+
+    if (optOutResult) {
+      this.sendContentMessage({
+        type: 'success',
+      });
+    } else {
+      this.sendContentMessage({
+        type: 'failure',
+      });
+    }
+
+    this.foundCmp = null; // to prevent double opt-out
+    return optOutResult;
   }
 
   async waitForPopup(cmp: AutoCMP, retries = 5, interval = 500): Promise<boolean> {
@@ -140,5 +157,17 @@ export default class AutoConsent {
     enableLogs && console.log('prehiding elements', selectors);
 
     return prehide(selectors);
+  }
+
+  async receiveMessageCallback(message: BackgroundMessage) {
+    enableLogs && console.groupCollapsed('received from background', message, window.location.href);
+    if (message.type === 'optOut') {
+      if (this.foundCmp) {
+        await this.doOptOut(this.foundCmp);
+      } else {
+        enableLogs && console.log('no CMP to opt out');
+      }
+    }
+    enableLogs && console.groupEnd();
   }
 }

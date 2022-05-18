@@ -2,6 +2,7 @@ import { RuleBundle } from "./types";
 
 export type BackgroundMessage =
   InitResponseMessage
+  | OptOutMessage
   | DummyResponseMessage;
 
 export type ContentScriptMessage =
@@ -16,6 +17,7 @@ type InitMessage = {
 
 type FoundMessage = {
   type: "popupFound";
+  cmp: string;
 }
 
 type SuccessMessage = {
@@ -32,6 +34,10 @@ type InitResponseMessage = {
   enabled: boolean;
   autoOptOut: boolean;
   disabledCmps: string[];
+}
+
+type OptOutMessage = {
+  type: "optOut";
 }
 
 type DummyResponseMessage = {

@@ -5,7 +5,7 @@ export default async function detectDialog(retries: number, rules: AutoCMP[]): P
   let breakEarly = false;
   const found: number = await new Promise(async (resolve) => {
     let earlyReturn = false;
-    enableLogs && console.groupCollapsed(`Detecting CMPs (${rules.length} rules)`)
+    enableLogs && console.groupCollapsed(`Detecting CMPs (${rules.length} rules) on ${window.location.href}`)
     await Promise.all(rules.map(async (r, index) => {
       try {
         if (await r.detectCmp()) {
