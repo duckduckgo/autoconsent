@@ -20,7 +20,6 @@ export type AutoConsentRuleStep = { frame?: boolean; optional?: boolean } & Part
   Partial<WaitForThenClickRule> &
   Partial<WaitRule> &
   Partial<UrlRule> &
-  Partial<GotoUrlRule> &
   Partial<HideRule>;
 
 type ElementExistsRule = {
@@ -57,10 +56,6 @@ type WaitRule = {
 
 type UrlRule = {
   url: string;
-};
-
-type GotoUrlRule = {
-  goto: string;
 };
 
 export type HideMethod = 'display' | 'opacity';

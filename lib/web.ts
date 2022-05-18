@@ -1,7 +1,5 @@
-import Tab from './web/tab';
-import handleContentMessage from './web/content';
 import { rules as dynamicRules, createAutoCMP } from './index';
-import { Browser, MessageSender, AutoCMP, TabActor, RuleBundle } from './types';
+import { MessageSender, AutoCMP, RuleBundle } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
@@ -9,10 +7,6 @@ import { BackgroundMessage, InitMessage, InitResponseMessage } from './messages'
 import { prehide, undoPrehide } from './web/content-utils';
 
 export * from './index';
-export {
-  Tab,
-  handleContentMessage,
-}
 
 export default class AutoConsent {
   rules: AutoCMP[] = [];
