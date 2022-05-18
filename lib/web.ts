@@ -1,6 +1,5 @@
 import Tab from './web/tab';
 import handleContentMessage from './web/content';
-import detectDialog from './detector';
 import { rules as dynamicRules, createAutoCMP } from './index';
 import { Browser, MessageSender, AutoCMP, TabActor, RuleBundle } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
@@ -77,7 +76,9 @@ export default class AutoConsent {
 
   // start the detection process
   async start() {
-    const cmp = await detectDialog(20, this.rules);
+    enableLogs && console.groupCollapsed(`Detecting CMPs on ${window.location.href}`)
+    const cmp = await this.detectCmp(20);
+    enableLogs && console.groupEnd();
     if (cmp) {
       enableLogs && console.groupCollapsed("detected CMP:", cmp.name, window.location.href);
       const isOpen = await this.waitForPopup(cmp);
@@ -106,6 +107,37 @@ export default class AutoConsent {
       enableLogs && console.groupEnd();
       return false;
     }
+  }
+
+  async detectCmp(retries: number): Promise<AutoCMP> {
+    enableLogs && console.groupCollapsed(`retries = ${retries}...`)
+
+    let foundCmp: AutoCMP = null;
+
+    for (const cmp of this.rules) {
+      try {
+        const result = await cmp.detectCmp();
+        if (result) {
+          enableLogs && console.log(`Found CMP: ${cmp.name}`);
+          foundCmp = cmp;
+          break;
+        }
+      } catch (e) {
+        enableLogs && console.error(`error detecting ${cmp.name}`);
+      }
+    }
+
+    enableLogs && console.groupEnd();
+    if (!foundCmp && retries > 0) {
+      return new Promise((resolve) => {
+        setTimeout(async () => {
+          const result = this.detectCmp(retries - 1);
+          resolve(result);
+        }, 500);
+      });
+    }
+
+    return foundCmp;
   }
 
   async doOptOut(cmp: AutoCMP): Promise<boolean> {
