@@ -20,3 +20,5 @@ export type RuleBundle = {
   autoconsent: AutoConsentCMPRule[];
   consentomatic: { [name: string]: ConsentOMaticConfig };
 };
+
+export type AutoAction = 'optOut' | 'optIn' | null;

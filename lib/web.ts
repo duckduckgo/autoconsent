@@ -1,5 +1,5 @@
 import { rules as dynamicRules, createAutoCMP } from './index';
-import { MessageSender, AutoCMP, RuleBundle } from './types';
+import { MessageSender, AutoCMP, RuleBundle, AutoAction } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
@@ -10,7 +10,7 @@ export * from './index';
 
 export default class AutoConsent {
   rules: AutoCMP[] = [];
-  autoOptOut: boolean = false;
+  autoAction: AutoAction = null;
   foundCmp: AutoCMP = null;
   protected sendContentMessage: MessageSender;
 
@@ -28,14 +28,14 @@ export default class AutoConsent {
         return;
       }
 
-      this.autoOptOut = resp.autoOptOut;
+      this.autoAction = resp.autoAction;
       this.parseRules(resp.rules);
       if (resp.disabledCmps?.length > 0) {
         this.disableCMPs(resp.disabledCmps);
       }
 
       enableLogs && console.log("added rules", this.rules);
-      if (this.autoOptOut) {
+      if (this.autoAction) {
         this.prehideElements(); // prehide as early as possible to prevent flickering
       }
       enableLogs && console.groupEnd();
@@ -89,7 +89,7 @@ export default class AutoConsent {
       if (!isOpen) {
         enableLogs && console.log('no popup found');
         enableLogs && console.groupEnd();
-        if (this.autoOptOut) {
+        if (this.autoAction) {
           undoPrehide();
         }
         return false;
@@ -102,15 +102,17 @@ export default class AutoConsent {
       }); // notify the browser
       enableLogs && console.groupEnd();
 
-      if (this.autoOptOut) {
+      if (this.autoAction === 'optOut') {
         return await this.doOptOut(cmp);
+      } else if (this.autoAction === 'optIn') {
+        return await this.doOptIn(cmp);
       }
 
       enableLogs && console.log("waiting for opt-out signal...");
       return true;
     } else {
       enableLogs && console.log("no CMP found");
-      if (this.autoOptOut) {
+      if (this.autoAction) {
         undoPrehide();
       }
       enableLogs && console.groupEnd();
@@ -153,7 +155,7 @@ export default class AutoConsent {
     enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out on ${window.location.href}`);
     let optOutResult = await cmp.optOut();
     enableLogs && console.groupEnd();
-    if (this.autoOptOut) {
+    if (this.autoAction) {
       undoPrehide();
     }
     if (optOutResult && !!cmp.hasSelfTest) {
@@ -172,6 +174,31 @@ export default class AutoConsent {
 
     this.foundCmp = null; // to prevent double opt-out
     return optOutResult;
+  }
+
+  async doOptIn(cmp: AutoCMP): Promise<boolean> {
+    enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt in on ${window.location.href}`);
+    let optInResult = await cmp.optIn();
+    enableLogs && console.groupEnd();
+    if (this.autoAction) {
+      undoPrehide();
+    }
+    if (optInResult && !!cmp.hasSelfTest) {
+      optInResult = await cmp.test();
+    }
+
+    if (optInResult) {
+      this.sendContentMessage({
+        type: 'success',
+      });
+    } else {
+      this.sendContentMessage({
+        type: 'failure',
+      });
+    }
+
+    this.foundCmp = null; // to prevent double opt-out
+    return optInResult;
   }
 
   async waitForPopup(cmp: AutoCMP, retries = 5, interval = 500): Promise<boolean> {

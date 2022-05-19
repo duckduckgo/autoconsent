@@ -1,5 +1,5 @@
 /* global browser */
-import { autoOptOut, enableLogs } from "../lib/config";
+import { autoAction, enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
 import { RuleBundle } from "../lib/types";
 
@@ -61,7 +61,7 @@ browser.runtime.onMessage.addListener(
           type: "initResp",
           rules,
           enabled: true,
-          autoOptOut,
+          autoAction,
           disabledCmps: [],
         });
         break;

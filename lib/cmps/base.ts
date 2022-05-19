@@ -131,6 +131,7 @@ export class AutoConsent extends AutoConsentBase {
 
   async optIn() {
     if (this.config.optIn) {
+      enableLogs && console.log('Initiated optIn()', this.config.optIn);
       return this._runRulesSequentially(this.config.optIn);
     }
     return false;

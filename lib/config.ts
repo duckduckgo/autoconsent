@@ -1,2 +1,4 @@
+import { AutoAction } from "./types";
+
 export const enableLogs = true; // change this to enable debug logs
-export const autoOptOut = false; // when true, the extension will automatically opt out when the popup is detected
+export const autoAction: AutoAction = 'optIn'; // if falsy, the extension will wait for an explicit user signal before opting in/out
