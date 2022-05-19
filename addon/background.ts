@@ -48,7 +48,7 @@ function showOptOutStatus(
 }
 
 browser.runtime.onMessage.addListener(
-  (msg: ContentScriptMessage, sender: any, sendResponse: SendResponseFn) => {
+  (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
     const url = sender.url;
@@ -57,12 +57,16 @@ browser.runtime.onMessage.addListener(
 
     switch (msg.type) {
       case "init":
-        sendResponse({
+        browser.tabs.sendMessage(tabId, {
           type: "initResp",
           rules,
-          enabled: true,
-          autoAction,
-          disabledCmps: [],
+          config: {
+            enabled: true,
+            autoAction,
+            disabledCmps: [],
+          },
+        }, {
+          frameId,
         });
         break;
       case "popupFound":

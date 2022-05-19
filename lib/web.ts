@@ -1,52 +1,56 @@
 import { rules as dynamicRules, createAutoCMP } from './index';
-import { MessageSender, AutoCMP, RuleBundle, AutoAction } from './types';
+import { MessageSender, AutoCMP, RuleBundle, Config } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
-import { BackgroundMessage, InitMessage, InitResponseMessage } from './messages';
+import { BackgroundMessage, InitMessage } from './messages';
 import { prehide, undoPrehide } from './web/content-utils';
 
 export * from './index';
 
 export default class AutoConsent {
   rules: AutoCMP[] = [];
-  autoAction: AutoAction = null;
+  config: Config;
   foundCmp: AutoCMP = null;
   protected sendContentMessage: MessageSender;
 
-  constructor(sendContentMessage: MessageSender) {
+  constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
     this.sendContentMessage = sendContentMessage;
     this.rules = [...dynamicRules];
+
+    if (config) {
+      this.initialize(config, declarativeRules);
+    }
+
     const initMsg: InitMessage = {
       type: "init",
     };
-    enableLogs && console.groupCollapsed('autoconsent init', window.location.href);
-    sendContentMessage(initMsg).then((resp: InitResponseMessage) => {
-      enableLogs && console.log("received response", resp, JSON.stringify(resp).length, JSON.stringify(resp));
-      if (!resp.enabled) {
-        enableLogs && console.log("autoconsent is disabled");
-        return;
-      }
+    enableLogs && console.log('autoconsent init', window.location.href);
+    sendContentMessage(initMsg);
+  }
 
-      this.autoAction = resp.autoAction;
-      this.parseRules(resp.rules);
-      if (resp.disabledCmps?.length > 0) {
-        this.disableCMPs(resp.disabledCmps);
-      }
+  initialize(config: Config, declarativeRules: RuleBundle) {
+    this.config = config;
+    if (!config.enabled) {
+      enableLogs && console.log("autoconsent is disabled");
+      return;
+    }
 
-      enableLogs && console.log("added rules", this.rules);
-      if (this.autoAction) {
-        this.prehideElements(); // prehide as early as possible to prevent flickering
-      }
-      enableLogs && console.groupEnd();
+    this.parseRules(declarativeRules);
+    if (config.disabledCmps?.length > 0) {
+      this.disableCMPs(config.disabledCmps);
+    }
 
-      // start detection
-      if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', () => this.start());
-      } else {
-        this.start();
-      }
-    });
+    if (config.autoAction) {
+      this.prehideElements(); // prehide as early as possible to prevent flickering
+    }
+
+    // start detection
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', () => this.start());
+    } else {
+      this.start();
+    }
   }
 
   parseRules(declarativeRules: RuleBundle) {
@@ -56,6 +60,7 @@ export default class AutoConsent {
     declarativeRules.autoconsent.forEach((rule) => {
       this.addCMP(rule);
     });
+    enableLogs && console.log("added rules", this.rules);
   }
 
   addCMP(config: AutoConsentCMPRule) {
@@ -89,7 +94,7 @@ export default class AutoConsent {
       if (!isOpen) {
         enableLogs && console.log('no popup found');
         enableLogs && console.groupEnd();
-        if (this.autoAction) {
+        if (this.config.autoAction) {
           undoPrehide();
         }
         return false;
@@ -102,9 +107,9 @@ export default class AutoConsent {
       }); // notify the browser
       enableLogs && console.groupEnd();
 
-      if (this.autoAction === 'optOut') {
+      if (this.config.autoAction === 'optOut') {
         return await this.doOptOut(cmp);
-      } else if (this.autoAction === 'optIn') {
+      } else if (this.config.autoAction === 'optIn') {
         return await this.doOptIn(cmp);
       }
 
@@ -112,7 +117,7 @@ export default class AutoConsent {
       return true;
     } else {
       enableLogs && console.log("no CMP found");
-      if (this.autoAction) {
+      if (this.config.autoAction) {
         undoPrehide();
       }
       enableLogs && console.groupEnd();
@@ -155,7 +160,7 @@ export default class AutoConsent {
     enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt out on ${window.location.href}`);
     let optOutResult = await cmp.optOut();
     enableLogs && console.groupEnd();
-    if (this.autoAction) {
+    if (this.config.autoAction) {
       undoPrehide();
     }
     if (optOutResult && !!cmp.hasSelfTest) {
@@ -180,7 +185,7 @@ export default class AutoConsent {
     enableLogs && console.groupCollapsed(`CMP ${cmp.name}: opt in on ${window.location.href}`);
     let optInResult = await cmp.optIn();
     enableLogs && console.groupEnd();
-    if (this.autoAction) {
+    if (this.config.autoAction) {
       undoPrehide();
     }
     if (optInResult && !!cmp.hasSelfTest) {
@@ -230,14 +235,15 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
-    enableLogs && console.groupCollapsed('received from background', message, window.location.href);
-    if (message.type === 'optOut') {
+    enableLogs && console.log('received from background', message, window.location.href);
+    if (message.type === 'initResp') {
+      this.initialize(message.config, message.rules);
+    } else if (message.type === 'optOut') {
       if (this.foundCmp) {
         await this.doOptOut(this.foundCmp);
       } else {
         enableLogs && console.log('no CMP to opt out');
       }
     }
-    enableLogs && console.groupEnd();
   }
 }

@@ -22,3 +22,9 @@ export type RuleBundle = {
 };
 
 export type AutoAction = 'optOut' | 'optIn' | null;
+
+export type Config = {
+  enabled: boolean;
+  autoAction: AutoAction;
+  disabledCmps: string[];
+}

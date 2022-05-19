@@ -1,4 +1,4 @@
-import { AutoAction, RuleBundle } from "./types";
+import { Config, RuleBundle } from "./types";
 
 export type BackgroundMessage =
   InitResponseMessage
@@ -31,9 +31,7 @@ type FailureMessage = {
 type InitResponseMessage = {
   type: "initResp";
   rules: RuleBundle;
-  enabled: boolean;
-  autoAction: AutoAction;
-  disabledCmps: string[];
+  config: Config;
 }
 
 type OptOutMessage = {
