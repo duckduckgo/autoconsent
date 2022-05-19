@@ -3,13 +3,15 @@ import { Config, RuleBundle } from "./types";
 export type BackgroundMessage =
   InitResponseMessage
   | OptOutMessage
-  | DummyResponseMessage;
+  | OptInMessage
+  | SelfTestMessage;
 
 export type ContentScriptMessage =
   InitMessage
   | FoundMessage
-  | SuccessMessage
-  | FailureMessage;
+  | OptOutResultMessage
+  | OptInResultMessage
+  | SelfTestResultMessage;
 
 type InitMessage = {
   type: "init";
@@ -20,12 +22,19 @@ type FoundMessage = {
   cmp: string;
 }
 
-type SuccessMessage = {
-  type: "success";
+type OptOutResultMessage = {
+  type: "optOutResult";
+  result: boolean;
 };
 
-type FailureMessage = {
-  type: "failure";
+type OptInResultMessage = {
+  type: "optInResult";
+  result: boolean;
+};
+
+type SelfTestResultMessage = {
+  type: "selfTestResult";
+  result: boolean;
 };
 
 type InitResponseMessage = {
@@ -38,6 +47,10 @@ type OptOutMessage = {
   type: "optOut";
 }
 
-type DummyResponseMessage = {
-  type: "dummyResp";
+type OptInMessage = {
+  type: "optIn";
+}
+
+type SelfTestMessage = {
+  type: "selfTest";
 }

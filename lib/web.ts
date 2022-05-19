@@ -167,15 +167,10 @@ export default class AutoConsent {
       optOutResult = await cmp.test();
     }
 
-    if (optOutResult) {
-      this.sendContentMessage({
-        type: 'success',
-      });
-    } else {
-      this.sendContentMessage({
-        type: 'failure',
-      });
-    }
+    this.sendContentMessage({
+      type: 'optOutResult',
+      result: optOutResult,
+    });
 
     this.foundCmp = null; // to prevent double opt-out
     return optOutResult;
@@ -188,22 +183,23 @@ export default class AutoConsent {
     if (this.config.autoAction) {
       undoPrehide();
     }
-    if (optInResult && !!cmp.hasSelfTest) {
-      optInResult = await cmp.test();
-    }
 
-    if (optInResult) {
-      this.sendContentMessage({
-        type: 'success',
-      });
-    } else {
-      this.sendContentMessage({
-        type: 'failure',
-      });
-    }
+    this.sendContentMessage({
+      type: 'optInResult',
+      result: optInResult,
+    });
 
     this.foundCmp = null; // to prevent double opt-out
     return optInResult;
+  }
+
+  async selfTest(cmp: AutoCMP): Promise<boolean> {
+    const selfTestResult = await cmp.test();
+    this.sendContentMessage({
+      type: 'selfTestResult',
+      result: selfTestResult,
+    });
+    return selfTestResult;
   }
 
   async waitForPopup(cmp: AutoCMP, retries = 5, interval = 500): Promise<boolean> {
@@ -236,14 +232,20 @@ export default class AutoConsent {
 
   async receiveMessageCallback(message: BackgroundMessage) {
     enableLogs && console.log('received from background', message, window.location.href);
-    if (message.type === 'initResp') {
-      this.initialize(message.config, message.rules);
-    } else if (message.type === 'optOut') {
-      if (this.foundCmp) {
-        await this.doOptOut(this.foundCmp);
-      } else {
-        enableLogs && console.log('no CMP to opt out');
-      }
+    switch (message.type) {
+      case 'initResp':
+        this.initialize(message.config, message.rules);
+        break;
+      case 'optOut':
+        if (this.foundCmp) {
+          await this.doOptOut(this.foundCmp);
+        } else {
+          enableLogs && console.log('no CMP to opt out');
+        }
+        break;
+      case 'selfTest':
+        this
+        break;
     }
   }
 }

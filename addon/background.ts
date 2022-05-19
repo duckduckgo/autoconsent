@@ -75,10 +75,13 @@ browser.runtime.onMessage.addListener(
           frameId,
         }
         break;
-      case "success":
-        showOptOutStatus(tabId, "success");
+      case "optOutResult":
+      case "optInResult":
+        if (msg.result) {
+          showOptOutStatus(tabId, "success");
+        }
         break;
-      case "failure":
+      case "selfTestResult":
         break;
     }
 
