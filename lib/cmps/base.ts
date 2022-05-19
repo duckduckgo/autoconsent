@@ -31,10 +31,6 @@ export default class AutoConsentBase implements AutoCMP {
     return false;
   }
 
-  detectFrame(frame: { url: string }) {
-    return false;
-  }
-
   optOut(): Promise<boolean> {
     throw new Error('Not Implemented');
   }
@@ -121,13 +117,6 @@ export class AutoConsent extends AutoConsentBase {
   async detectPopup() {
     if (this.config.detectPopup) {
       return this._runRulesParallel(this.config.detectPopup);
-    }
-    return false;
-  }
-
-  detectFrame(frame: { url: string }) {
-    if (this.config.frame) {
-      return frame.url.startsWith(this.config.frame);
     }
     return false;
   }

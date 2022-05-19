@@ -51,7 +51,7 @@ export default class AutoConsent {
 
   parseRules(declarativeRules: RuleBundle) {
     Object.keys(declarativeRules.consentomatic).forEach((name) => {
-      // this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
+      this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
     });
     declarativeRules.autoconsent.forEach((rule) => {
       this.addCMP(rule);
@@ -64,6 +64,10 @@ export default class AutoConsent {
 
   disableCMPs(cmpNames: String[]) {
     this.rules = this.rules.filter((cmp) => !cmpNames.includes(cmp.name))
+  }
+
+  addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
+    this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
   }
 
   // start the detection process, possibly with a delay

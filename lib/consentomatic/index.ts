@@ -1,4 +1,5 @@
-import { AutoCMP, TabActor } from "../types";
+import { AutoCMP } from "../types";
+import { executeAction, matches } from "../web/consentomatic";
 
 export type DetectorConfig = {
   presentMatcher: {};
@@ -24,63 +25,54 @@ export class ConsentOMaticCMP implements AutoCMP {
         this.methods.set(methodConfig.name, methodConfig.action);
       }
     });
-    this.hasSelfTest = this.methods.has("TEST_CONSENT");
+    this.hasSelfTest = false;
   }
 
-  async detectCmp(tab: TabActor): Promise<boolean> {
-    return (
-      await Promise.all(
-        this.config.detectors.map(detectorConfig =>
-          tab.matches(detectorConfig.presentMatcher)
-        )
-      )
-    ).some(matched => matched);
+  async detectCmp(): Promise<boolean> {
+    const matchResults = this.config.detectors.map(detectorConfig =>
+      matches(detectorConfig.presentMatcher)
+    )
+    return matchResults.some(r => !!r);
   }
 
-  async detectPopup(tab: TabActor): Promise<boolean> {
-    return (
-      await Promise.all(
-        this.config.detectors.map(detectorConfig =>
-          tab.matches(detectorConfig.showingMatcher)
-        )
-      )
-    ).some(matched => matched);
+  async detectPopup(): Promise<boolean> {
+    const matchResults = this.config.detectors.map(detectorConfig =>
+      matches(detectorConfig.showingMatcher)
+    )
+    return matchResults.some(r => !!r);
   }
 
-  async executeAction(tab: TabActor, method: string, param?: any) {
+  async executeAction(method: string, param?: any) {
     if (this.methods.has(method)) {
-      return tab.executeAction(this.methods.get(method), param);
+      return executeAction(this.methods.get(method), param);
     }
     return true;
   }
 
-  async optOut(tab: TabActor): Promise<boolean> {
-    await this.executeAction(tab, "HIDE_CMP");
-    await this.executeAction(tab, "OPEN_OPTIONS");
-    await this.executeAction(tab, "HIDE_CMP");
-    await this.executeAction(tab, "DO_CONSENT", []);
-    await this.executeAction(tab, "SAVE_CONSENT");
+  async optOut(): Promise<boolean> {
+    await this.executeAction("HIDE_CMP");
+    await this.executeAction("OPEN_OPTIONS");
+    await this.executeAction("HIDE_CMP");
+    await this.executeAction("DO_CONSENT", []);
+    await this.executeAction("SAVE_CONSENT");
     return true;
   }
 
-  async optIn(tab: TabActor): Promise<boolean> {
-    await this.executeAction(tab, "HIDE_CMP");
-    await this.executeAction(tab, "OPEN_OPTIONS");
-    await this.executeAction(tab, "HIDE_CMP");
-    await this.executeAction(tab, "DO_CONSENT", ['D', 'A', 'B', 'E', 'F', 'X']);
-    await this.executeAction(tab, "SAVE_CONSENT");
+  async optIn(): Promise<boolean> {
+    await this.executeAction("HIDE_CMP");
+    await this.executeAction("OPEN_OPTIONS");
+    await this.executeAction("HIDE_CMP");
+    await this.executeAction("DO_CONSENT", ['D', 'A', 'B', 'E', 'F', 'X']);
+    await this.executeAction("SAVE_CONSENT");
     return true;
   }
-  async openCmp(tab: TabActor): Promise<boolean> {
-    await this.executeAction(tab, "HIDE_CMP");
-    await this.executeAction(tab, "OPEN_OPTIONS");
+  async openCmp(): Promise<boolean> {
+    await this.executeAction("HIDE_CMP");
+    await this.executeAction("OPEN_OPTIONS");
     return true;
   }
 
-  test(tab: TabActor): Promise<boolean> {
-    return this.executeAction(tab, "TEST_CONSENT");
-  }
-  detectFrame(tab: TabActor, frame: { url: string }): boolean {
-    return false;
+  async test(): Promise<boolean> {
+    return true;
   }
 }
