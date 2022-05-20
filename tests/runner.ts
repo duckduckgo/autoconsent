@@ -45,7 +45,6 @@ export function generateTest(
     const received = [];
     async function messageCallback({ frame }, msg) {
       received.push(msg);
-      console.log('Received', msg, 'from', await frame.url());
       if (msg.type === 'optOutResult' && options.testSelfTest) {
         await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
       }
