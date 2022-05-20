@@ -26,7 +26,7 @@ export async function injectContentScript(page: Page | Frame) {
     await page.evaluate(contentScript);
   } catch (e) {
     // frame was detached
-    console.log(e);
+    // console.log(e);
   }
 }
 
@@ -58,14 +58,14 @@ export function generateTest(
     page.on("framenavigated", injectContentScript);
 
     // wait for all messages and assertions
-    await waitFor(() => received.length > 0, 20, 300);
+    await waitFor(() => received.length > 0, 100, 500);
     expect(received[0]).toEqual({ type: "popupFound", cmp: expectedCmp });
     if (options.testOptOut) {
-      await waitFor(() => received.length > 1, 20, 300);
+      await waitFor(() => received.length > 1, 50, 500);
       expect(received[1]).toEqual({ type: "optOutResult", result: true });
     }
     if (options.testSelfTest) {
-      await waitFor(() => received.length > 2, 20, 300);
+      await waitFor(() => received.length > 2, 50, 500);
       expect(received[2]).toEqual({ type: "selfTestResult", result: true });
     }
   });
