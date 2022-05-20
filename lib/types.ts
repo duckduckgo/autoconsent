@@ -1,5 +1,5 @@
 import { ContentScriptMessage } from "./messages";
-import { ConsentOMaticConfig } from "./consentomatic";
+import { ConsentOMaticConfig } from "./cmps/consentomatic";
 import { AutoConsentCMPRule } from "./rules";
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;

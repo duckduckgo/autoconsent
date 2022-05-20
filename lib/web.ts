@@ -1,10 +1,10 @@
 import { rules as dynamicRules, createAutoCMP } from './index';
 import { MessageSender, AutoCMP, RuleBundle, Config } from './types';
-import { ConsentOMaticCMP, ConsentOMaticConfig } from './consentomatic/index';
+import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
-import { prehide, undoPrehide } from './web/content-utils';
+import { prehide, undoPrehide } from './rule-executors';
 
 export * from './index';
 

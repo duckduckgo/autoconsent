@@ -1,40 +1,12 @@
-import { enableLogs } from "../config";
-import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideMethod, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
+import { enableLogs } from "./config";
+import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "./rules";
+import { getStyleElement, hideElements, waitFor } from "./utils";
 
-// get or create a style container for CSS overrides
-export function getStyleElementUtil(styleOverrideElementId = "autoconsent-css-rules"): HTMLStyleElement {
-  const styleSelector = `style#${styleOverrideElementId}`;
-  const existingElement = document.querySelector(styleSelector);
-  if (existingElement && existingElement instanceof HTMLStyleElement) {
-    return existingElement;
-  } else {
-    const parent =
-      document.head ||
-      document.getElementsByTagName("head")[0] ||
-      document.documentElement;
-    const css = document.createElement("style");
-    css.id = styleOverrideElementId;
-    parent.appendChild(css);
-    return css;
-  }
-}
-
-// hide elements with a CSS rule
-function hideElementsUtil(
-  styleEl: HTMLStyleElement,
-  selectors: string[],
-  method: HideMethod
-): boolean {
-  const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
-  const rule = `${selectors.join(
-    ","
-  )} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
-
-  if (styleEl instanceof HTMLStyleElement) {
-    styleEl.innerText += rule;
-    return selectors.length > 0;
-  }
-  return false;
+export function doEval(ruleStep: EvalRule): boolean {
+  // TODO: chrome support
+  enableLogs && console.log("about to [eval]", ruleStep.eval); // this will not show in Webkit console
+  const result = window.eval(ruleStep.eval); // eslint-disable-line no-eval
+  return result;
 }
 
 export function click(ruleStep: ClickRule): boolean {
@@ -83,25 +55,6 @@ export function elementVisible(ruleStep: ElementVisibleRule): boolean {
     return results.every(r => r);
 }
 
-export function doEval(ruleStep: EvalRule): boolean {
-  // TODO: chrome support
-  enableLogs && console.log("about to [eval]", ruleStep.eval); // this will not show in Webkit console
-  const result = window.eval(ruleStep.eval); // eslint-disable-line no-eval
-  return result;
-}
-
-export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
-  const result = await predicate();
-  if (!result && maxTimes > 0) {
-    return new Promise((resolve) => {
-      setTimeout(async () => {
-        resolve(waitFor(predicate, maxTimes - 1, interval));
-      }, interval);
-    });
-  }
-  return Promise.resolve(result);
-}
-
 export function waitForElement(ruleStep: WaitForRule): Promise<boolean> {
   const interval = 200;
   const times = Math.ceil((ruleStep.timeout || 10000) / interval);
@@ -131,18 +84,18 @@ export function wait(ruleStep: WaitRule): Promise<true> {
 
 export function hide(ruleStep: HideRule): boolean {
   enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
-  const styleEl = getStyleElementUtil();
-  return hideElementsUtil(styleEl, ruleStep.hide, ruleStep.method);
+  const styleEl = getStyleElement();
+  return hideElements(styleEl, ruleStep.hide, ruleStep.method);
 }
 
 export function prehide(selectors: string[]): boolean {
   enableLogs && console.log("[prehide]", selectors);
-  const styleEl = getStyleElementUtil('autoconsent-prehide');
-  return hideElementsUtil(styleEl, selectors, "opacity");
+  const styleEl = getStyleElement('autoconsent-prehide');
+  return hideElements(styleEl, selectors, "opacity");
 }
 
 export function undoPrehide(): boolean {
-  const existingElement = getStyleElementUtil('autoconsent-prehide');
+  const existingElement = getStyleElement('autoconsent-prehide');
   enableLogs && console.log("[undoprehide]", existingElement);
   if (existingElement) {
     existingElement.remove();

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from 'path';
 import { test, expect, Page, Frame } from "@playwright/test";
-import { waitFor } from "../lib/web/content-utils";
+import { waitFor } from "../lib/utils";
 
 const testRegion = (process.env.REGION || "NA").trim();
 
@@ -17,7 +17,7 @@ const defaultOptions: TestOptions = {
 };
 
 const contentScript = fs.readFileSync(
-  path.join(__dirname, "../dist/autoconsent.puppet.js"),
+  path.join(__dirname, "../dist/autoconsent.playwright.js"),
   "utf8"
 );
 

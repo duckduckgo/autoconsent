@@ -1,6 +1,6 @@
-import AutoConsent from "./web";
+import AutoConsent from "../lib/web";
 import { BackgroundMessage } from "../lib/messages";
-import { MessageSender, RuleBundle } from "./types";
+import { MessageSender, RuleBundle } from "../lib/types";
 import * as rules from '../rules/rules.json';
 
 declare global {

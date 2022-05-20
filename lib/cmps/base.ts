@@ -3,7 +3,7 @@
 import { AutoCMP } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep, ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
 import { enableLogs } from "../config";
-import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick } from "../web/content-utils";
+import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick } from "../rule-executors";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;

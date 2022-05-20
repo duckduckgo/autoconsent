@@ -8,8 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "clean": "rm -r dist lib/**/*.js lib/*.js",
-    "build": "tsc",
+    "clean": "rm -r dist lib/**/*.js lib/*.js addon/*.js",
     "bundle": "rollup -c",
     "watch": "rollup -c -w",
     "start": "web-ext run -s ./addon --firefox firefoxdeveloperedition",
@@ -21,7 +20,7 @@
     "build-rules": "node rules/build.js && cp rules/rules.json addon/",
     "version": "node update_version.js && git add addon/manifest.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run build && npm run bundle"
+    "prepublish": "npm run build-rules && npm run bundle"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",

@@ -4,9 +4,9 @@ import { terser } from "rollup-plugin-terser";
 import pkg from './package.json';
 
 export default [{
-  input: './lib/node.ts',
+  input: './playwright/content.ts',
   output: [{
-    file: 'dist/autoconsent.puppet.js',
+    file: 'dist/autoconsent.playwright.js',
     format: 'iife'
   }],
   plugins: [
@@ -46,15 +46,6 @@ export default [{
   }],
   plugins: [
     typescript(),
-  ]
-},  {
-  input: './addon/test.ts',
-  output: [{
-    file: './addon/test.bundle.js',
-    format: 'iife',
-    external: ['chai', 'mocha']
-  }],
-  plugins: [
-    typescript(),
-  ]
+    terser(),
+  ],
 }];
