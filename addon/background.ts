@@ -1,9 +1,8 @@
 /* global browser */
-import { autoAction, enableLogs } from "../lib/config";
-import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
+import { autoAction, enableLogs, runSelfTest } from "../lib/config";
+import { ContentScriptMessage } from "../lib/messages";
 import { RuleBundle } from "../lib/types";
 
-type SendResponseFn = (payload: BackgroundMessage) => void;
 interface PageActionState {
   [tabId: number]: {
     frameId: number; // (last) frameId that reported a popup
@@ -79,12 +78,18 @@ browser.runtime.onMessage.addListener(
       case "optInResult":
         if (msg.result) {
           showOptOutStatus(tabId, "success");
+          if (runSelfTest) {
+            browser.tabs.sendMessage(tabId, {
+              type: "selfTest",
+            }, {
+              frameId,
+            });
+          }
         }
         break;
       case "selfTestResult":
         break;
     }
-
   }
 );
 
