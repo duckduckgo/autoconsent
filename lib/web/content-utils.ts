@@ -91,7 +91,7 @@ export function doEval(ruleStep: EvalRule): boolean {
 }
 
 export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
-  let result = await predicate();
+  const result = await predicate();
   if (!result && maxTimes > 0) {
     return new Promise((resolve) => {
       setTimeout(async () => {

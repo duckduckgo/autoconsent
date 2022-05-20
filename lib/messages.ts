@@ -13,44 +13,44 @@ export type ContentScriptMessage =
   | OptInResultMessage
   | SelfTestResultMessage;
 
-type InitMessage = {
+export type InitMessage = {
   type: "init";
 };
 
-type FoundMessage = {
+export type FoundMessage = {
   type: "popupFound";
   cmp: string;
 }
 
-type OptOutResultMessage = {
+export type OptOutResultMessage = {
   type: "optOutResult";
   result: boolean;
 };
 
-type OptInResultMessage = {
+export type OptInResultMessage = {
   type: "optInResult";
   result: boolean;
 };
 
-type SelfTestResultMessage = {
+export type SelfTestResultMessage = {
   type: "selfTestResult";
   result: boolean;
 };
 
-type InitResponseMessage = {
+export type InitResponseMessage = {
   type: "initResp";
   rules: RuleBundle;
   config: Config;
 }
 
-type OptOutMessage = {
+export type OptOutMessage = {
   type: "optOut";
 }
 
-type OptInMessage = {
+export type OptInMessage = {
   type: "optIn";
 }
 
-type SelfTestMessage = {
+export type SelfTestMessage = {
   type: "selfTest";
 }

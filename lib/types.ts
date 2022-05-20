@@ -2,7 +2,7 @@ import { ContentScriptMessage } from "./messages";
 import { ConsentOMaticConfig } from "./consentomatic";
 import { AutoConsentCMPRule } from "./rules";
 
-export type MessageSender<ResultType = any> = (message: ContentScriptMessage) => Promise<ResultType>;
+export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
 export interface AutoCMP {
   name: string

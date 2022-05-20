@@ -1,14 +1,18 @@
+import json from '@rollup/plugin-json';
 import typescript from '@rollup/plugin-typescript';
+import { terser } from "rollup-plugin-terser";
 import pkg from './package.json';
 
 export default [{
   input: './lib/node.ts',
   output: [{
     file: 'dist/autoconsent.puppet.js',
-    format: 'cjs'
+    format: 'iife'
   }],
   plugins: [
+    json(),
     typescript(),
+    terser(),
   ]
 }, {
   input: './lib/web.ts',
@@ -22,7 +26,8 @@ export default [{
   }],
   plugins: [
     typescript(),
-  ]
+    terser(),
+  ],
 }, {
   input: './addon/background.ts',
   output: [{
@@ -31,6 +36,7 @@ export default [{
   }],
   plugins: [
     typescript(),
+    terser(),
   ]
 }, {
   input: './addon/content.ts',

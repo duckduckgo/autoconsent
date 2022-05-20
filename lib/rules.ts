@@ -22,45 +22,45 @@ export type AutoConsentRuleStep = { frame?: boolean; optional?: boolean } & Part
   Partial<UrlRule> &
   Partial<HideRule>;
 
-type ElementExistsRule = {
+export type ElementExistsRule = {
   exists: string;
 };
 
-type ElementVisibleRule = {
+export type ElementVisibleRule = {
   visible: string;
   check?: "any" | "all" | "none";
 };
 
-type EvalRule = {
+export type EvalRule = {
   eval: string;
 };
 
-type WaitForRule = {
+export type WaitForRule = {
   waitFor: string;
   timeout?: number;
 };
 
-type ClickRule = {
+export type ClickRule = {
   click: string;
   all?: boolean;
 };
 
-type WaitForThenClickRule = {
+export type WaitForThenClickRule = {
   waitForThenClick: string;
   timeout?: number;
 };
 
-type WaitRule = {
+export type WaitRule = {
   wait: number;
 };
 
-type UrlRule = {
+export type UrlRule = {
   url: string;
 };
 
 export type HideMethod = 'display' | 'opacity';
 
-type HideRule = {
+export type HideRule = {
   hide: string[];
   method?: HideMethod;
 };
