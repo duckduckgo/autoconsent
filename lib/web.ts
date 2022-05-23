@@ -176,6 +176,12 @@ export default class AutoConsent {
       result: optOutResult,
     });
 
+    if (this.foundCmp && !this.foundCmp.isIntermediate) {
+      this.sendContentMessage({
+        type: 'autoconsentDone',
+      });
+    }
+
     return optOutResult;
   }
 
@@ -198,6 +204,12 @@ export default class AutoConsent {
       type: 'optInResult',
       result: optInResult,
     });
+
+    if (this.foundCmp && !this.foundCmp.isIntermediate) {
+      this.sendContentMessage({
+        type: 'autoconsentDone',
+      });
+    }
 
     return optInResult;
   }

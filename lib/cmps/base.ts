@@ -26,6 +26,10 @@ export default class AutoConsentCMPBase implements AutoCMP {
     return true;
   }
 
+  get isIntermediate(): boolean {
+    return false;
+  }
+
   detectCmp(): Promise<boolean>  {
     throw new Error('Not Implemented');
   }
@@ -91,6 +95,10 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
   get hasSelfTest(): boolean {
     return !!this.config.test;
+  }
+
+  get isIntermediate(): boolean {
+    return !!this.config.intermediate;
   }
 
   get prehideSelectors(): string[] {

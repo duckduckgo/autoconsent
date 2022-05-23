@@ -28,6 +28,10 @@ export class ConsentOMaticCMP implements AutoCMP {
     this.hasSelfTest = false;
   }
 
+  get isIntermediate(): boolean {
+    return false; // TODO: support UTILITY rules
+  }
+
   async detectCmp(): Promise<boolean> {
     const matchResults = this.config.detectors.map(detectorConfig =>
       matches(detectorConfig.presentMatcher)

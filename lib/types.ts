@@ -7,6 +7,7 @@ export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 export interface AutoCMP {
   name: string
   hasSelfTest: boolean
+  isIntermediate: boolean;
   prehideSelectors?: string[]
   detectCmp(): Promise<boolean>
   detectPopup(): Promise<boolean>

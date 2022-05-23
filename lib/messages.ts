@@ -11,7 +11,8 @@ export type ContentScriptMessage =
   | FoundMessage
   | OptOutResultMessage
   | OptInResultMessage
-  | SelfTestResultMessage;
+  | SelfTestResultMessage
+  | DoneMessage;
 
 export type InitMessage = {
   type: "init";
@@ -36,6 +37,10 @@ export type SelfTestResultMessage = {
   type: "selfTestResult";
   result: boolean;
 };
+
+export type DoneMessage = {
+  type: "autoconsentDone";
+}
 
 export type InitResponseMessage = {
   type: "initResp";

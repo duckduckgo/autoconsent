@@ -77,7 +77,6 @@ browser.runtime.onMessage.addListener(
       case "optOutResult":
       case "optInResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "success");
           if (runSelfTest) {
             browser.tabs.sendMessage(tabId, {
               type: "selfTest",
@@ -88,6 +87,15 @@ browser.runtime.onMessage.addListener(
         }
         break;
       case "selfTestResult":
+        if (msg.result) {
+          showOptOutStatus(tabId, "success");
+        }
+        break;
+      case "autoconsentDone":
+        if (!runSelfTest) {
+          // indicate success immediately
+          showOptOutStatus(tabId, "success");
+        }
         break;
     }
   }
