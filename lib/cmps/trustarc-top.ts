@@ -78,20 +78,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
       optInButton.click();
     }
-    // if (!tab.frame) {
-    //   await this.openFrame(tab);
-    //   await waitFor(() => !!tab.frame, 10, 200);
-    // }
-    // const frameId = tab.frame!.id;
-    // await this.navigateToSettings(tab, frameId);
-    // await tab.clickElements(".switch span:nth-child(2)", frameId);
-    // await tab.clickElement(".submit", frameId);
-    // await waitFor(
-    //   () => tab.elementExists("#gwt-debug-close_id", frameId),
-    //   300,
-    //   1000
-    // );
-    // await tab.clickElement("#gwt-debug-close_id", frameId);
+
     return true;
   }
 

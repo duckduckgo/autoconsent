@@ -1,7 +1,7 @@
-import AutoConsentBase from './base';
-import { TabActor } from '../types';
+import { waitFor, waitMs } from '../utils';
+import AutoConsentCMPBase from './base';
 
-export default class Cookiebot extends AutoConsentBase {
+export default class Cookiebot extends AutoConsentCMPBase {
 
   prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner"]
 
@@ -9,73 +9,107 @@ export default class Cookiebot extends AutoConsentBase {
     super('Cybotcookiebot');
   }
 
-  async detectCmp(tab: TabActor) {
-    try {
-      return await tab.eval('typeof window.CookieConsent === "object" && typeof window.CookieConsent.name === "string"');
-    } catch (e) {
-      return false;
-    }
+  get hasSelfTest(): boolean {
+    return true;
   }
 
-  detectPopup(tab: TabActor) {
-    return tab.elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner');
+  get isIntermediate(): boolean {
+    return false;
   }
 
-  async optOut(tab: TabActor) {
-    if (await tab.elementExists('.cookie-alert-extended-detail-link')) {
-      await tab.clickElement('.cookie-alert-extended-detail-link');
-      await tab.waitForElement('.cookie-alert-configuration', 1000);
-      await tab.clickElements('.cookie-alert-configuration-input:checked');
-      return tab.clickElement('.cookie-alert-extended-button-secondary');
+  async detectCmp() {
+    return typeof (<any>window).CookieConsent === "object" && typeof (<any>window).CookieConsent.name === "string"
+  }
+
+  async detectPopup() {
+    return !!document.querySelector('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner');
+  }
+
+  async optOut() {
+    const detailLink = document.querySelector('.cookie-alert-extended-detail-link') as HTMLElement;
+    if (detailLink) {
+      detailLink.click();
+      await waitFor(async () => !!document.querySelector('.cookie-alert-configuration'), 10, 200);
+      document.querySelectorAll('.cookie-alert-configuration-input:checked').forEach((el: HTMLElement) => {
+        el.click();
+      });
+      (<HTMLElement>document.querySelector('.cookie-alert-extended-button-secondary')).click();
+      return true;
     }
-    if (await tab.elementExists('#dtcookie-container')) {
-      return tab.clickElement('.h-dtcookie-decline');
+
+    const cookieContainer = document.querySelector('#dtcookie-container') as HTMLElement;
+    if (cookieContainer) {
+      (<HTMLElement>document.querySelector('.h-dtcookie-decline')).click();
+      return true;
     }
-    if (await tab.elementExists('.cookiebot__button--settings')) {
-      await tab.clickElement('.cookiebot__button--settings');
+
+    const settingsButton = document.querySelector('.cookiebot__button--settings') as HTMLElement;
+    if (settingsButton) {
+      settingsButton.click();
     }
-    if (await tab.elementsAreVisible('#CybotCookiebotDialogBodyButtonDecline', 'all')) {
-      return await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
+
+    const declineButton = document.querySelector('#CybotCookiebotDialogBodyButtonDecline') as HTMLElement;
+    if (declineButton) {
+      declineButton.click();
+      return true;
     }
-    if (await tab.elementExists('.cookiebanner__link--details')) {
-      await tab.clickElement('.cookiebanner__link--details')
+
+    const detailsLink = document.querySelector('.cookiebanner__link--details') as HTMLElement;
+    if (detailsLink) {
+      detailsLink.click();
     }
-    await tab.clickElements('.CybotCookiebotDialogBodyLevelButton:checked:enabled,input[id*="CybotCookiebotDialogBodyLevelButton"]:checked:enabled');
-    if (await tab.elementExists('#CybotCookiebotDialogBodyButtonDecline')) {
-      await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
+
+    document.querySelectorAll('.CybotCookiebotDialogBodyLevelButton:checked:enabled,input[id*="CybotCookiebotDialogBodyLevelButton"]:checked:enabled').forEach((el: HTMLElement) => {
+      el.click();
+    });
+    const declineButton2 = document.querySelector('#CybotCookiebotDialogBodyButtonDecline') as HTMLElement;
+    if (declineButton2) {
+      declineButton2.click();
     }
-    if (await tab.elementExists('input[id^=CybotCookiebotDialogBodyLevelButton]:checked')) {
-      await tab.clickElements('input[id^=CybotCookiebotDialogBodyLevelButton]:checked')
-    }
-    if (await tab.elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
-      await tab.clickElement('#CybotCookiebotDialogBodyButtonAcceptSelected');
+    document.querySelectorAll('input[id^=CybotCookiebotDialogBodyLevelButton]:checked').forEach((el: HTMLElement) => {
+      el.click();
+    });
+
+    const acceptButton = document.querySelector('#CybotCookiebotDialogBodyButtonAcceptSelected') as HTMLElement;
+    if (acceptButton) {
+      acceptButton.click();
     } else {
-      await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection');
+      document.querySelectorAll(
+        '#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection'
+      ).forEach((el: HTMLElement) => {
+        el.click();
+      });
     }
+
     // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
-    if (await tab.eval('CookieConsent.hasResponse !== true')) {
-      await tab.eval('Cookiebot.dialog.submitConsent() || true');
-      await tab.wait(500);
+    if ((<any>window).CookieConsent.hasResponse !== true) {
+      (<any>window).Cookiebot.dialog.submitConsent();
+      waitMs(500);
     }
     return true;
   }
 
-  async optIn(tab: TabActor) {
-    if (await tab.elementExists('#dtcookie-container')) {
-      return tab.clickElement('.h-dtcookie-accept');
+  async optIn() {
+    const cookieContainer = document.querySelector('#dtcookie-container') as HTMLElement;
+    if (cookieContainer) {
+      (<HTMLElement>document.querySelector('.h-dtcookie-accept')).click();
+      return true;
     }
-    await tab.clickElements('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled');
-    await tab.clickElement('#CybotCookiebotDialogBodyLevelButtonAccept');
-    await tab.clickElement('#CybotCookiebotDialogBodyButtonAccept');
+
+    document.querySelectorAll('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled').forEach((el: HTMLElement) => {
+      el.click();
+    });
+    (<HTMLElement>document.querySelector('#CybotCookiebotDialogBodyLevelButtonAccept')).click();
+    (<HTMLElement>document.querySelector('#CybotCookiebotDialogBodyButtonAccept')).click();
     return true;
   }
 
-  async openCmp(tab: TabActor) {
-    await tab.eval('CookieConsent.renew() || true');
-    return tab.waitForElement('#CybotCookiebotDialog', 10000);
+  async openCmp() {
+    (<any>window).CookieConsent.renew();
+    return waitFor(async () => !!document.querySelector('#CybotCookiebotDialog'), 20, 500);
   }
 
-  async test(tab: TabActor) {
-    return tab.eval('CookieConsent.declined === true');
+  async test() {
+    return (<any>window).CookieConsent.declined === true;
   }
 }
