@@ -17,10 +17,13 @@ export async function success(action: Promise<boolean>): Promise<boolean> {
 export default class AutoConsentCMPBase implements AutoCMP {
 
   name: string
-  hasSelfTest = true
 
   constructor(name: string) {
     this.name = name;
+  }
+
+  get hasSelfTest(): boolean {
+    return true;
   }
 
   detectCmp(): Promise<boolean>  {
@@ -86,6 +89,10 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     super(config.name);
   }
 
+  get hasSelfTest(): boolean {
+    return !!this.config.test;
+  }
+
   get prehideSelectors(): string[] {
     return this.config.prehideSelectors;
   }
@@ -145,7 +152,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
 
   async test() {
-    if (this.config.test) {
+    if (this.hasSelfTest) {
       return this._runRulesSequentially(this.config.test);
     }
     return super.test();
