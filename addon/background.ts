@@ -1,5 +1,5 @@
 /* global browser */
-import { autoAction, enableLogs, runSelfTest } from "../lib/config";
+import { autoAction, enableLogs } from "../lib/config";
 import { ContentScriptMessage } from "../lib/messages";
 import { RuleBundle } from "../lib/types";
 
@@ -22,7 +22,7 @@ loadRules();
 
 function showOptOutStatus(
   tabId: number,
-  status: "success" | "complete" | "working" | "available"
+  status: "success" | "complete" | "working" | "available" | "verified"
 ) {
   let title = "Click to opt out";
   let icon = "icons/cookie.png";
@@ -35,6 +35,9 @@ function showOptOutStatus(
   } else if (status === "working") {
     title = "Processing...";
     icon = "icons/cog.png";
+  } else if (status === "verified") {
+    title = "Verified";
+    icon = "icons/verified.png";
   }
   browser.pageAction.setTitle({
     tabId,
@@ -77,24 +80,22 @@ browser.runtime.onMessage.addListener(
       case "optOutResult":
       case "optInResult":
         if (msg.result) {
-          if (runSelfTest) {
-            browser.tabs.sendMessage(tabId, {
-              type: "selfTest",
-            }, {
-              frameId,
-            });
-          }
+          showOptOutStatus(tabId, "working");
         }
         break;
       case "selfTestResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "success");
+          showOptOutStatus(tabId, "verified");
         }
         break;
       case "autoconsentDone":
-        if (!runSelfTest) {
-          // indicate success immediately
-          showOptOutStatus(tabId, "success");
+        showOptOutStatus(tabId, "success");
+        if (msg.hasSelfTest) {
+          browser.tabs.sendMessage(tabId, {
+            type: "selfTest",
+          }, {
+            frameId,
+          });
         }
         break;
     }

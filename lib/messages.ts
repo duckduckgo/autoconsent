@@ -21,6 +21,7 @@ export type InitMessage = {
 export type FoundMessage = {
   type: "popupFound";
   cmp: string;
+  hasSelfTest: boolean;
 }
 
 export type OptOutResultMessage = {
@@ -40,6 +41,7 @@ export type SelfTestResultMessage = {
 
 export type DoneMessage = {
   type: "autoconsentDone";
+  hasSelfTest: boolean;
 }
 
 export type InitResponseMessage = {

@@ -104,6 +104,7 @@ export default class AutoConsent {
       this.sendContentMessage({
         type: 'popupFound',
         cmp: cmp.name,
+        hasSelfTest: cmp.hasSelfTest,
       }); // notify the browser
       enableLogs && console.groupEnd();
 
@@ -176,9 +177,10 @@ export default class AutoConsent {
       result: optOutResult,
     });
 
-    if (this.foundCmp && !this.foundCmp.isIntermediate) {
+    if (optOutResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
+        hasSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       });
     }
 
@@ -205,9 +207,10 @@ export default class AutoConsent {
       result: optInResult,
     });
 
-    if (this.foundCmp && !this.foundCmp.isIntermediate) {
+    if (optInResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
+        hasSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       });
     }
 
