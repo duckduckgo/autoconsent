@@ -14,7 +14,7 @@ export async function success(action: Promise<boolean>): Promise<boolean> {
 }
 
 
-export default class AutoConsentBase implements AutoCMP {
+export default class AutoConsentCMPBase implements AutoCMP {
 
   name: string
   hasSelfTest = true
@@ -49,7 +49,7 @@ export default class AutoConsentBase implements AutoCMP {
   }
 }
 
-async function evaluateRule(rule: AutoConsentRuleStep) {
+async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   const results = [];
   if (rule.exists) {
     results.push(elementExists(<ElementExistsRule>rule));
@@ -80,7 +80,7 @@ async function evaluateRule(rule: AutoConsentRuleStep) {
   return (await Promise.all(results)).reduce((a, b) => a && b, true);
 }
 
-export class AutoConsent extends AutoConsentBase {
+export class AutoConsentCMP extends AutoConsentCMPBase {
 
   constructor(public config: AutoConsentCMPRule) {
     super(config.name);
@@ -91,14 +91,14 @@ export class AutoConsent extends AutoConsentBase {
   }
 
   async _runRulesParallel(rules: AutoConsentRuleStep[]): Promise<boolean> {
-    const detections = await Promise.all(rules.map(rule => evaluateRule(rule)));
+    const detections = await Promise.all(rules.map(rule => evaluateRuleStep(rule)));
     return detections.every(r => !!r);
   }
 
   async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
     for (const rule of rules) {
       enableLogs && console.log('Running rule...', rule);
-      const result = await evaluateRule(rule);
+      const result = await evaluateRuleStep(rule);
       enableLogs && console.log('...rule result', result);
       if (!result && !rule.optional) {
         return false;
