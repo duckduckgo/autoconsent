@@ -1,4 +1,4 @@
-import generateCMPTests from "./runner";
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('funding-choices', [
     'https://www.schulferien.org/',

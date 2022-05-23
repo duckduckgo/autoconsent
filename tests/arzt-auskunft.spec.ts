@@ -1,4 +1,4 @@
-import generateCMPTests from "./runner";
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('arzt-auskunft.de', [
     'https://arzt-auskunft.de'], {

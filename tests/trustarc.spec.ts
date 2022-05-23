@@ -1,5 +1,4 @@
-import generateCMPTests from "./runner";
-import { test } from '@playwright/test';
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('TrustArc', [
     'https://www.garmin.com/de-DE/',

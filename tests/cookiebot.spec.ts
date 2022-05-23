@@ -1,4 +1,4 @@
-import generateCMPTests from "./runner";
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('Cybotcookiebot', [
     'https://www.wohnen.de/',

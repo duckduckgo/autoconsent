@@ -1,4 +1,4 @@
-import generateCMPTests from "./runner";
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('com_wordpressgdpr', [
     'https://www.yourpension.gov.uk/',

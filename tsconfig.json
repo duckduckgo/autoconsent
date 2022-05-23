@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "typeRoots": ["node_modules/web-ext-types"],
+    "typeRoots": ["node_modules/web-ext-types", "node_modules/@types"],
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules/*",

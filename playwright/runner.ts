@@ -2,6 +2,7 @@ import fs from "fs";
 import path from 'path';
 import { test, expect, Page, Frame } from "@playwright/test";
 import { waitFor } from "../lib/utils";
+import { ContentScriptMessage } from "../lib/messages";
 
 const testRegion = (process.env.REGION || "NA").trim();
 
@@ -42,10 +43,22 @@ export function generateTest(
     await page.goto(url, { waitUntil: "commit" });
 
     // set up a messaging function
-    const received = [];
-    async function messageCallback({ frame }, msg) {
+    const received: ContentScriptMessage[] = [];
+
+    function isMessageReceived(msg: Partial<ContentScriptMessage>, partial: boolean = true) {
+      return received.some((m) => {
+        const keysMatch = partial || Object.keys(m).length === Object.keys(msg).length;
+        return keysMatch && Object.keys(msg).every(
+          (k) => (<any>m)[k] === (<any>msg)[k]
+        );
+      });
+    }
+
+    let hasSelfTest = false;
+    async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
       received.push(msg);
-      if (msg.type === 'optOutResult' && options.testSelfTest) {
+      if (msg.type === 'autoconsentDone' && msg.hasSelfTest && options.testSelfTest) {
+        hasSelfTest = true;
         await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
       }
     }
@@ -57,15 +70,16 @@ export function generateTest(
     page.on("framenavigated", injectContentScript);
 
     // wait for all messages and assertions
-    await waitFor(() => received.length > 0, 100, 500);
-    expect(received[0]).toEqual({ type: "popupFound", cmp: expectedCmp });
+    await waitFor(() => isMessageReceived({ type: "popupFound", cmp: expectedCmp }), 50, 500);
+    expect(isMessageReceived({ type: "popupFound", cmp: expectedCmp })).toBe(true);
+
     if (options.testOptOut) {
-      await waitFor(() => received.length > 1, 50, 500);
-      expect(received[1]).toEqual({ type: "optOutResult", result: true });
+      await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 500);
+      expect(isMessageReceived({ type: "optOutResult", result: true })).toBe(true);
     }
-    if (options.testSelfTest) {
-      await waitFor(() => received.length > 2, 50, 500);
-      expect(received[2]).toEqual({ type: "selfTestResult", result: true });
+    if (options.testSelfTest && hasSelfTest) {
+      await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 500);
+      expect(isMessageReceived({ type: "selfTestResult", result: true })).toBe(true);
     }
   });
 }

@@ -1,4 +1,4 @@
-import generateCMPTests from "./runner";
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('national-lottery.co.uk', [
     'https://national-lottery.co.uk'], {
