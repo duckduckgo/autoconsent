@@ -23,11 +23,11 @@ export default class AutoConsentCMPBase implements AutoCMP {
   }
 
   get hasSelfTest(): boolean {
-    return true;
+    throw new Error('Not Implemented');
   }
 
   get isIntermediate(): boolean {
-    return false;
+    throw new Error('Not Implemented');
   }
 
   detectCmp(): Promise<boolean>  {

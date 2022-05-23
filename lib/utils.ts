@@ -22,7 +22,7 @@ export function getStyleElement(styleOverrideElementId = "autoconsent-css-rules"
 export function hideElements(
   styleEl: HTMLStyleElement,
   selectors: string[],
-  method: HideMethod
+  method: HideMethod = 'display',
 ): boolean {
   const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
   const rule = `${selectors.join(
@@ -36,6 +36,14 @@ export function hideElements(
   return false;
 }
 
+export function waitMs(ms: number): Promise<true> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(true);
+    }, ms);
+  });
+}
+
 export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
   const result = await predicate();
   if (!result && maxTimes > 0) {
@@ -46,4 +54,19 @@ export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTi
     });
   }
   return Promise.resolve(result);
+}
+
+export function isElementVisible(elem: HTMLElement): boolean {
+  if (!elem) {
+    return false;
+  }
+  if (elem.offsetParent !== null) {
+    return true;
+  } else {
+    const css = window.getComputedStyle(elem);
+    if (css.position === 'fixed' && css.display !== "none") { // fixed elements may be visible even if the parent is not
+      return true;
+    }
+  }
+  return false;
 }

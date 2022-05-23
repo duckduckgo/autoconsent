@@ -1,6 +1,6 @@
 import { enableLogs } from "./config";
 import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "./rules";
-import { getStyleElement, hideElements, waitFor } from "./utils";
+import { getStyleElement, hideElements, isElementVisible, waitFor, waitMs } from "./utils";
 
 export function doEval(ruleStep: EvalRule): boolean {
   // TODO: chrome support
@@ -33,15 +33,7 @@ export function elementVisible(ruleStep: ElementVisibleRule): boolean {
     const results = new Array(elem.length);
     elem.forEach((e, i) => {
       // check for display: none
-      results[i] = false;
-      if (e.offsetParent !== null) {
-        results[i] = true;
-      } else {
-        const css = window.getComputedStyle(e);
-        if (css.position === 'fixed' && css.display !== "none") { // fixed elements may be visible even if the parent is not
-          results[i] = true;
-        }
-      }
+      results[i] = isElementVisible(e);
     });
     enableLogs && console.log("[visible?]", ruleStep.visible, elem, results);
     if (results.length === 0) {
@@ -72,14 +64,11 @@ export async function waitForThenClick(ruleStep: WaitForThenClickRule): Promise<
   return click({ ...ruleStep, click: ruleStep.waitForThenClick });
 }
 
-export function wait(ruleStep: WaitRule): Promise<true> {
+export async function wait(ruleStep: WaitRule): Promise<true> {
   enableLogs && console.log(`waiting for ${ruleStep.wait}ms`);
-  return new Promise(resolve => {
-    setTimeout(() => {
-      enableLogs && console.log(`done waiting`);
-      resolve(true);
-    }, ruleStep.wait);
-  });
+  await waitMs(ruleStep.wait);
+  enableLogs && console.log(`done waiting`);
+  return true;
 }
 
 export function hide(ruleStep: HideRule): boolean {
