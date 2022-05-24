@@ -140,7 +140,7 @@ export default class AutoConsent {
           break;
         }
       } catch (e) {
-        enableLogs && console.error(`error detecting ${cmp.name}`);
+        enableLogs && console.error(`error detecting ${cmp.name}`, e);
       }
     }
 
@@ -180,6 +180,7 @@ export default class AutoConsent {
     if (optOutResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
+        cmp: this.foundCmp.name,
         hasSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       });
     }
@@ -210,6 +211,7 @@ export default class AutoConsent {
     if (optInResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
+        cmp: this.foundCmp.name,
         hasSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       });
     }
