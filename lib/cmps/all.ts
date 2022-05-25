@@ -6,7 +6,7 @@ import CookieBot from './cookiebot';
 // import ContentManager from './consentmanager';
 // import Evidon from './evidon';
 import { AutoConsentCMPRule } from '../rules';
-// import Onetrust from './onetrust';
+import Onetrust from './onetrust';
 import { AutoCMP } from '../types';
 
 const rules: AutoCMP[] = [
@@ -16,7 +16,7 @@ const rules: AutoCMP[] = [
   // new SourcePoint(),
   // new ContentManager(),
   // new Evidon(),
-  // new Onetrust(),
+  new Onetrust(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsentCMP {
