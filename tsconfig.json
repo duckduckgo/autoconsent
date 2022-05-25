@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "typeRoots": ["node_modules/web-ext-types", "node_modules/@types"],
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "noImplicitAny": true,

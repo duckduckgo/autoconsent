@@ -3,6 +3,7 @@ import path from 'path';
 import { test, expect, Page, Frame } from "@playwright/test";
 import { waitFor } from "../lib/utils";
 import { ContentScriptMessage } from "../lib/messages";
+import { enableLogs } from "../lib/config";
 
 const testRegion = (process.env.REGION || "NA").trim();
 
@@ -45,7 +46,7 @@ export function generateTest(
     // set up a messaging function
     const received: ContentScriptMessage[] = [];
 
-    function isMessageReceived(msg: Partial<ContentScriptMessage>, partial: boolean = true) {
+    function isMessageReceived(msg: Partial<ContentScriptMessage>, partial = true) {
       return received.some((m) => {
         const keysMatch = partial || Object.keys(m).length === Object.keys(msg).length;
         return keysMatch && Object.keys(msg).every(
@@ -56,10 +57,14 @@ export function generateTest(
 
     let hasSelfTest = false;
     async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
+      enableLogs && console.log(msg);
       received.push(msg);
       if (msg.type === 'autoconsentDone' && msg.hasSelfTest && options.testSelfTest) {
         hasSelfTest = true;
         await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+      } else if (msg.type === 'eval') {
+        const result = await frame.evaluate(msg.code);
+        await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
       }
     }
     await page.exposeBinding("autoconsentSendMessage", messageCallback);
