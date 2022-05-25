@@ -3,7 +3,7 @@ import TrustArcTop from './trustarc-top';
 import TrustArcFrame from './trustarc-frame';
 import CookieBot from './cookiebot';
 // import SourcePoint from './sourcepoint';
-// import ContentManager from './consentmanager';
+import ConsentManager from './consentmanager';
 // import Evidon from './evidon';
 import { AutoConsentCMPRule } from '../rules';
 import Onetrust from './onetrust';
@@ -14,7 +14,7 @@ const rules: AutoCMP[] = [
   new TrustArcFrame(),
   new CookieBot(),
   // new SourcePoint(),
-  // new ContentManager(),
+  new ConsentManager(),
   // new Evidon(),
   new Onetrust(),
 ];
