@@ -1,3 +1,4 @@
+import { requestEval } from '../eval-handler';
 import { waitFor, waitMs } from '../utils';
 import AutoConsentCMPBase from './base';
 
@@ -18,7 +19,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return typeof (<any>window).CookieConsent === "object" && typeof (<any>window).CookieConsent.name === "string"
+    return !!document.querySelector('#CybotCookiebotDialogBodyLevelButtonPreferences');
   }
 
   async detectPopup() {
@@ -82,9 +83,9 @@ export default class Cookiebot extends AutoConsentCMPBase {
     }
 
     // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
-    if ((<any>window).CookieConsent.hasResponse !== true) {
-      (<any>window).Cookiebot.dialog.submitConsent();
-      waitMs(500);
+    if (await requestEval('window.CookieConsent.hasResponse !== true')) {
+      await requestEval('window.Cookiebot.dialog.submitConsent()');
+      await waitMs(500);
     }
     return true;
   }
@@ -104,12 +105,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
     return true;
   }
 
-  async openCmp() {
-    (<any>window).CookieConsent.renew();
-    return waitFor(async () => !!document.querySelector('#CybotCookiebotDialog'), 20, 500);
-  }
-
   async test() {
-    return (<any>window).CookieConsent.declined === true;
+    return requestEval('window.CookieConsent.declined === true');
   }
 }
