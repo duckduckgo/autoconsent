@@ -22,7 +22,7 @@ export function click(ruleStep: ClickRule): boolean {
 
 export function elementExists(ruleStep: ElementExistsRule): boolean {
   const exists = document.querySelector(ruleStep.exists) !== null;
-  enableLogs && console.log("[exists?]", ruleStep.exists, exists);
+  // enableLogs && console.log("[exists?]", ruleStep.exists, exists);
   return exists;
 }
 
@@ -33,7 +33,7 @@ export function elementVisible(ruleStep: ElementVisibleRule): boolean {
       // check for display: none
       results[i] = isElementVisible(e);
     });
-    enableLogs && console.log("[visible?]", ruleStep.visible, elem, results);
+    // enableLogs && console.log("[visible?]", ruleStep.visible, elem, results);
     if (results.length === 0) {
       return false;
     } else if (ruleStep.check === "any") {
@@ -48,7 +48,7 @@ export function elementVisible(ruleStep: ElementVisibleRule): boolean {
 export function waitForElement(ruleStep: WaitForRule): Promise<boolean> {
   const interval = 200;
   const times = Math.ceil((ruleStep.timeout || 10000) / interval);
-  enableLogs && console.log("[waitFor]", ruleStep.waitFor);
+  // enableLogs && console.log("[waitFor]", ruleStep.waitFor);
   return waitFor(
     () => document.querySelector(ruleStep.waitFor) !== null,
     times,
@@ -57,20 +57,20 @@ export function waitForElement(ruleStep: WaitForRule): Promise<boolean> {
 }
 
 export async function waitForThenClick(ruleStep: WaitForThenClickRule): Promise<boolean> {
-  enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
+  // enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
   await waitForElement({ ...ruleStep, waitFor: ruleStep.waitForThenClick });
   return click({ ...ruleStep, click: ruleStep.waitForThenClick });
 }
 
 export async function wait(ruleStep: WaitRule): Promise<true> {
-  enableLogs && console.log(`waiting for ${ruleStep.wait}ms`);
+  // enableLogs && console.log(`waiting for ${ruleStep.wait}ms`);
   await waitMs(ruleStep.wait);
-  enableLogs && console.log(`done waiting`);
+  // enableLogs && console.log(`done waiting`);
   return true;
 }
 
 export function hide(ruleStep: HideRule): boolean {
-  enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
+  // enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
   const styleEl = getStyleElement();
   return hideElements(styleEl, ruleStep.hide, ruleStep.method);
 }

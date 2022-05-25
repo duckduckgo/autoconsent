@@ -87,15 +87,13 @@ export default class AutoConsent {
   }
 
   async _start() {
-    enableLogs && console.groupCollapsed(`Detecting CMPs on ${window.location.href}`)
+    enableLogs && console.log(`Detecting CMPs on ${window.location.href}`)
     const cmp = await this.findCmp(20);
-    enableLogs && console.groupEnd();
     if (cmp) {
-      enableLogs && console.groupCollapsed("detected CMP:", cmp.name, window.location.href);
+      enableLogs && console.log("detected CMP:", cmp.name, window.location.href);
       const isOpen = await this.waitForPopup(cmp);
       if (!isOpen) {
         enableLogs && console.log('no popup found');
-        enableLogs && console.groupEnd();
         if (this.config.autoAction) {
           undoPrehide();
         }
@@ -108,7 +106,6 @@ export default class AutoConsent {
         cmp: cmp.name,
         hasSelfTest: cmp.hasSelfTest,
       }); // notify the browser
-      enableLogs && console.groupEnd();
 
       if (this.config.autoAction === 'optOut') {
         return await this.doOptOut();
@@ -123,14 +120,11 @@ export default class AutoConsent {
       if (this.config.autoAction) {
         undoPrehide();
       }
-      enableLogs && console.groupEnd();
       return false;
     }
   }
 
   async findCmp(retries: number): Promise<AutoCMP> {
-    enableLogs && console.groupCollapsed(`retries = ${retries}...`)
-
     let foundCmp: AutoCMP = null;
 
     for (const cmp of this.rules) {
@@ -146,7 +140,6 @@ export default class AutoConsent {
       }
     }
 
-    enableLogs && console.groupEnd();
     if (!foundCmp && retries > 0) {
       return new Promise((resolve) => {
         setTimeout(async () => {
@@ -165,9 +158,8 @@ export default class AutoConsent {
       enableLogs && console.log('no CMP to opt out');
       optOutResult = false;
     } else {
-      enableLogs && console.groupCollapsed(`CMP ${this.foundCmp.name}: opt out on ${window.location.href}`);
+      enableLogs && console.log(`CMP ${this.foundCmp.name}: opt out on ${window.location.href}`);
       optOutResult = await this.foundCmp.optOut();
-      enableLogs && console.groupEnd();
     }
 
     if (this.config.autoAction) {
@@ -196,9 +188,8 @@ export default class AutoConsent {
       enableLogs && console.log('no CMP to opt in');
       optInResult = false;
     } else {
-      enableLogs && console.groupCollapsed(`CMP ${this.foundCmp.name}: opt in on ${window.location.href}`);
+      enableLogs && console.log(`CMP ${this.foundCmp.name}: opt in on ${window.location.href}`);
       optInResult = await this.foundCmp.optIn();
-      enableLogs && console.groupEnd();
     }
 
     if (this.config.autoAction) {
@@ -227,9 +218,8 @@ export default class AutoConsent {
       enableLogs && console.log('no CMP to self test');
       selfTestResult = false;
     } else {
-      enableLogs && console.groupCollapsed(`CMP ${this.foundCmp.name}: self-test on ${window.location.href}`);
+      enableLogs && console.log(`CMP ${this.foundCmp.name}: self-test on ${window.location.href}`);
       selfTestResult = await this.foundCmp.test();
-      enableLogs && console.groupEnd();
     }
 
     this.sendContentMessage({
