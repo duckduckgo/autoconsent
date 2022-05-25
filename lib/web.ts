@@ -5,6 +5,7 @@ import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
 import { prehide, undoPrehide } from './rule-executors';
+import { evalState, resolveEval } from './eval-handler';
 
 export * from './index';
 
@@ -15,6 +16,7 @@ export default class AutoConsent {
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
+    evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
     this.rules = [...dynamicRules];
 
@@ -266,7 +268,9 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
-    enableLogs && console.log('received from background', message, window.location.href);
+    if (enableLogs && message.type !== 'evalResp' /* evals are noisy */) {
+      console.log('received from background', message, window.location.href);
+    }
     switch (message.type) {
       case 'initResp':
         this.initialize(message.config, message.rules);
@@ -276,6 +280,9 @@ export default class AutoConsent {
         break;
       case 'selfTest':
         await this.doSelfTest();
+        break;
+      case 'evalResp':
+        resolveEval(message.id, message.result);
         break;
     }
   }

@@ -1,31 +1,28 @@
-/* global browser */
-import { autoAction, enableLogs } from "../lib/config";
-import { ContentScriptMessage } from "../lib/messages";
-import { RuleBundle } from "../lib/types";
+import { enableLogs } from "../lib/config";
+import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
+import { AutoAction, RuleBundle } from "../lib/types";
 
-interface PageActionState {
-  [tabId: number]: {
-    frameId: number; // (last) frameId that reported a popup
-  }
-}
+const autoAction: AutoAction = null; //'optOut'; // if falsy, the extension will wait for an explicit user signal before opting in/out
 
-const pageActionState: PageActionState = {};
-
-let rules: RuleBundle = null;
-
-async function loadRules() {
+async function loadRules(): Promise<RuleBundle> {
   const res = await fetch("./rules.json");
-  rules = await res.json();
+  return await res.json();
 }
 
-loadRules();
+chrome.runtime.onInstalled.addListener(() => {
+  loadRules().then(rules => {
+    chrome.storage.local.set({
+      rules: rules,
+    });
+  });
+});
 
 function showOptOutStatus(
   tabId: number,
-  status: "success" | "complete" | "working" | "available" | "verified"
+  status: "success" | "complete" | "working" | "available" | "verified" | "idle"
 ) {
-  let title = "Click to opt out";
-  let icon = "icons/cookie.png";
+  let title = "";
+  let icon = "icons/cookie-idle.png";
   if (status === "success") {
     title = "Opt out successful!";
     icon = "icons/party.png";
@@ -38,28 +35,38 @@ function showOptOutStatus(
   } else if (status === "verified") {
     title = "Verified";
     icon = "icons/verified.png";
+  } else if (status === "idle") {
+    title = "Idle";
+    icon = "icons/cookie-idle.png";
+  } else if (status === "available") {
+    title = "Click to opt out";
+    icon = "icons/cookie.png";
   }
-  browser.pageAction.setTitle({
+  enableLogs && console.log('Setting action state to', status);
+  chrome.action.setTitle({
     tabId,
     title,
   });
-  browser.pageAction.setIcon({
+  chrome.action.setIcon({
     tabId,
     path: icon,
   });
 }
 
-browser.runtime.onMessage.addListener(
-  (msg: ContentScriptMessage, sender: any) => {
+chrome.runtime.onMessage.addListener(
+  async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
     const url = sender.url;
     enableLogs && console.log("received message", msg, sender);
-    browser.pageAction.show(tabId);
+    const rules: RuleBundle = (await chrome.storage.local.get("rules")).rules;
 
     switch (msg.type) {
       case "init":
-        browser.tabs.sendMessage(tabId, {
+        if (frameId === 0) {
+          showOptOutStatus(tabId, 'idle');
+        }
+        chrome.tabs.sendMessage(tabId, {
           type: "initResp",
           rules,
           config: {
@@ -67,15 +74,41 @@ browser.runtime.onMessage.addListener(
             autoAction,
             disabledCmps: [],
           },
-        }, {
+        } as BackgroundMessage, {
           frameId,
+        });
+        break;
+      case "eval":
+        chrome.scripting.executeScript({
+          target: {
+            tabId,
+            frameIds: [frameId],
+          },
+          world: "MAIN",
+          args: [msg.code],
+          func: (code) => {
+            try {
+              return window.eval(code);
+            } catch (e) {
+              // ignore CSP errors
+              return;
+            }
+          },
+        }).then(([result]) => {
+          chrome.tabs.sendMessage(tabId, {
+            id: msg.id,
+            type: "evalResp",
+            result: result.result,
+          } as BackgroundMessage, {
+            frameId,
+          });
         });
         break;
       case "popupFound":
         showOptOutStatus(tabId, "available");
-        pageActionState[tabId] = {
-          frameId,
-        }
+        chrome.storage.local.set({
+          [tabId]: frameId,
+        });
         break;
       case "optOutResult":
       case "optInResult":
@@ -91,7 +124,7 @@ browser.runtime.onMessage.addListener(
       case "autoconsentDone":
         showOptOutStatus(tabId, "success");
         if (msg.hasSelfTest) {
-          browser.tabs.sendMessage(tabId, {
+          chrome.tabs.sendMessage(tabId, {
             type: "selfTest",
           }, {
             frameId,
@@ -102,14 +135,15 @@ browser.runtime.onMessage.addListener(
   }
 );
 
-browser.pageAction.onClicked.addListener((tab) => {
+chrome.action.onClicked.addListener(async (tab) => {
   const tabId = tab.id;
-  const frameId = pageActionState[tabId].frameId;
-  enableLogs && console.log("pageAction.onClicked", tabId, frameId);
+  const r = await chrome.storage.local.get(`${tabId}`);
+  const frameId = r[tabId];
+  enableLogs && console.log("action.onClicked", tabId, frameId);
   showOptOutStatus(tabId, "working");
-  browser.tabs.sendMessage(tabId, {
+  chrome.tabs.sendMessage(tabId, {
     type: "optOut",
-  }, {
+  } as BackgroundMessage, {
     frameId,
   });
 });

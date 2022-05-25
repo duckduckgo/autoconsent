@@ -2,12 +2,14 @@ import { Config, RuleBundle } from "./types";
 
 export type BackgroundMessage =
   InitResponseMessage
+  | EvalResponseMessage
   | OptOutMessage
   | OptInMessage
   | SelfTestMessage;
 
 export type ContentScriptMessage =
   InitMessage
+  | EvalMessage
   | FoundMessage
   | OptOutResultMessage
   | OptInResultMessage
@@ -16,6 +18,12 @@ export type ContentScriptMessage =
 
 export type InitMessage = {
   type: "init";
+};
+
+export type EvalMessage = {
+  type: "eval";
+  id: string;
+  code: string;
 };
 
 export type FoundMessage = {
@@ -49,6 +57,12 @@ export type InitResponseMessage = {
   type: "initResp";
   rules: RuleBundle;
   config: Config;
+}
+
+export type EvalResponseMessage = {
+  type: "evalResp";
+  id: string;
+  result: any;
 }
 
 export type OptOutMessage = {

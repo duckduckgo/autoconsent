@@ -1,12 +1,10 @@
 import { enableLogs } from "./config";
+import { requestEval } from "./eval-handler";
 import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "./rules";
 import { getStyleElement, hideElements, isElementVisible, waitFor, waitMs } from "./utils";
 
-export function doEval(ruleStep: EvalRule): boolean {
-  // TODO: chrome support
-  enableLogs && console.log("about to [eval]", ruleStep.eval); // this will not show in Webkit console
-  const result = window.eval(ruleStep.eval); // eslint-disable-line no-eval
-  return result;
+export async function doEval(ruleStep: EvalRule): Promise<boolean> {
+  return requestEval(ruleStep.eval);
 }
 
 export function click(ruleStep: ClickRule): boolean {

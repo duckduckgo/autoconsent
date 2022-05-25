@@ -5,11 +5,12 @@
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
       { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs", "#consent-layer"] },
-      { "click": "#cm-acceptNone,.js-accept-essential-cookies"}
+      { "click": "#cm-acceptNone,.js-accept-essential-cookies"},
+      { "eval": "utag.gdpr.setConsentValue(false) || true" }
     ],
     "optIn": [
       { "hide": ["#__tealiumGDPRecModal"] },
-      { "eval": "utag.gdpr.setConsentValue(true)" }
+      { "eval": "utag.gdpr.setConsentValue(true) || true" }
     ],
     "test": [
       { "eval": "utag.gdpr.getConsentState() !== 1" }
