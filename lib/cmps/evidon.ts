@@ -1,32 +1,48 @@
-import AutoConsentBase from "./base";
-import { TabActor } from "../types";
+import { getStyleElement, hideElements, isElementVisible, waitFor } from "../utils";
+import AutoConsentCMPBase from "./base";
 
-// Note: JS API is also available:
-// https://help.consentmanager.net/books/cmp/page/javascript-api
-export default class Evidon extends AutoConsentBase {
+export default class Evidon extends AutoConsentCMPBase {
   constructor() {
     super("Evidon");
   }
 
-  detectCmp(tab: TabActor) {
-    return tab.elementExists("#_evidon_banner");
+  get hasSelfTest(): boolean {
+    return false;
   }
 
-  detectPopup(tab: TabActor) {
-    return tab.elementsAreVisible("#_evidon_banner");
+  get isIntermediate(): boolean {
+    return false;
   }
 
-  async optOut(tab: TabActor) {
-    if (await tab.elementExists("#_evidon-decline-button")) {
-      return tab.clickElement("#_evidon-decline-button");
+  async detectCmp() {
+    return !!document.querySelector("#_evidon_banner");
+  }
+
+  async detectPopup() {
+    const popup: HTMLElement = document.querySelector("#_evidon_banner");
+    return isElementVisible(popup);
+  }
+
+  async optOut() {
+    const declineButton: HTMLElement = document.querySelector("#_evidon-decline-button");
+    if (declineButton) {
+      declineButton.click();
+      return true;
     }
-    tab.hideElements(["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"])
-    await tab.clickElement("#_evidon-option-button");
-    await tab.waitForElement("#evidon-prefdiag-overlay", 5000);
-    return tab.clickElement("#evidon-prefdiag-decline");
+    hideElements(getStyleElement(), ["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"]);
+    const optionButton: HTMLElement = document.querySelector("#_evidon-option-button");
+    optionButton.click();
+
+    await waitFor(() => !!document.querySelector("#evidon-prefdiag-overlay"), 10, 500);
+
+    const declineButton2: HTMLElement = document.querySelector("#evidon-prefdiag-decline");
+    declineButton2.click();
+    return true;
   }
 
-  async optIn(tab: TabActor) {
-    return tab.clickElement("#_evidon-accept-button");
+  async optIn() {
+    const acceptButton: HTMLElement = document.querySelector("#_evidon-accept-button");
+    acceptButton.click();
+    return true;
   }
 }
