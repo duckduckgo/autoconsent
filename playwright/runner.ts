@@ -59,8 +59,11 @@ export function generateTest(
     async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
       enableLogs && console.log(msg);
       received.push(msg);
-      if (msg.type === 'autoconsentDone' && msg.hasSelfTest && options.testSelfTest) {
-        hasSelfTest = true;
+      if (msg.type === 'optInResult' || msg.type === 'optOutResult') {
+        if (msg.scheduleSelfTest) {
+          hasSelfTest = true;
+        }
+      } else if (msg.type === 'autoconsentDone' && hasSelfTest && options.testSelfTest) {
         await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
       } else if (msg.type === 'eval') {
         const result = await frame.evaluate(msg.code);

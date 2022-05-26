@@ -107,13 +107,18 @@ chrome.runtime.onMessage.addListener(
       case "popupFound":
         showOptOutStatus(tabId, "available");
         chrome.storage.local.set({
-          [tabId]: frameId,
+          [`detected${tabId}`]: frameId,
         });
         break;
       case "optOutResult":
       case "optInResult":
         if (msg.result) {
           showOptOutStatus(tabId, "working");
+          if (msg.scheduleSelfTest) {
+            await chrome.storage.local.set({
+              [`selfTest${tabId}`]: frameId,
+            });
+          }
         }
         break;
       case "selfTestResult":
@@ -121,29 +126,38 @@ chrome.runtime.onMessage.addListener(
           showOptOutStatus(tabId, "verified");
         }
         break;
-      case "autoconsentDone":
+      case "autoconsentDone": {
         showOptOutStatus(tabId, "success");
-        if (msg.hasSelfTest) {
+        // sometimes self-test needs to be done in another frame
+        const selfTestKey = `selfTest${tabId}`;
+        const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
+
+        if (typeof selfTestFrameId === 'number') {
+          chrome.storage.local.remove(selfTestKey);
           chrome.tabs.sendMessage(tabId, {
             type: "selfTest",
           }, {
-            frameId,
+            frameId: selfTestFrameId,
           });
         }
         break;
+      }
     }
   }
 );
 
 chrome.action.onClicked.addListener(async (tab) => {
   const tabId = tab.id;
-  const r = await chrome.storage.local.get(`${tabId}`);
-  const frameId = r[tabId];
-  enableLogs && console.log("action.onClicked", tabId, frameId);
-  showOptOutStatus(tabId, "working");
-  chrome.tabs.sendMessage(tabId, {
-    type: "optOut",
-  } as BackgroundMessage, {
-    frameId,
-  });
+  const detectedKey = `detected${tabId}`;
+  const frameId = (await chrome.storage.local.get(detectedKey))?.[detectedKey];
+  if (typeof frameId === 'number') {
+    chrome.storage.local.remove(detectedKey);
+    enableLogs && console.log("action.onClicked", tabId, frameId);
+    showOptOutStatus(tabId, "working");
+    chrome.tabs.sendMessage(tabId, {
+      type: "optOut",
+    } as BackgroundMessage, {
+      frameId,
+    });
+  }
 });

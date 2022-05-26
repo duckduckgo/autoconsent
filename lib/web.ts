@@ -104,7 +104,6 @@ export default class AutoConsent {
       this.sendContentMessage({
         type: 'popupFound',
         cmp: cmp.name,
-        hasSelfTest: cmp.hasSelfTest,
       }); // notify the browser
 
       if (this.config.autoAction === 'optOut') {
@@ -169,13 +168,13 @@ export default class AutoConsent {
     this.sendContentMessage({
       type: 'optOutResult',
       result: optOutResult,
+      scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
     });
 
     if (optOutResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
         cmp: this.foundCmp.name,
-        hasSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       });
     }
 
@@ -199,13 +198,13 @@ export default class AutoConsent {
     this.sendContentMessage({
       type: 'optInResult',
       result: optInResult,
+      scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
     });
 
     if (optInResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
         cmp: this.foundCmp.name,
-        hasSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       });
     }
 
