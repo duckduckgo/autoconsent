@@ -1,15 +1,15 @@
 import generateCMPTests from "../playwright/runner";
 
-generateCMPTests('Sourcepoint', [
+generateCMPTests('Sourcepoint-frame', [
     'https://www.theguardian.com/',
-    'https://www.n-tv.de/',
-    'https://www.sueddeutsche.de/',
+    'https://www.n-tv.de/', // broken?
+    'https://www.sueddeutsche.de/', // broken?
     'https://news.sky.com/'
-], { 
+], {
     testSelfTest: false,
 });
 
-generateCMPTests('Sourcepoint', [
+generateCMPTests('Sourcepoint-frame', [
     'https://www.insider.com/',
 ], {
     skipRegions: ["US", "GB"],

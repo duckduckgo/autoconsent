@@ -112,10 +112,10 @@ export default class AutoConsent {
         return await this.doOptIn();
       }
 
-      enableLogs && console.log("waiting for opt-out signal...");
+      enableLogs && console.log("waiting for opt-out signal...", location.href);
       return true;
     } else {
-      enableLogs && console.log("no CMP found");
+      enableLogs && console.log("no CMP found", location.href);
       if (this.config.autoAction) {
         undoPrehide();
       }
