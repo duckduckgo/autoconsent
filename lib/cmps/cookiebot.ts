@@ -4,7 +4,7 @@ import AutoConsentCMPBase from './base';
 
 export default class Cookiebot extends AutoConsentCMPBase {
 
-  prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner"]
+  prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookieoverlay"]
 
   constructor() {
     super('Cybotcookiebot');
@@ -23,7 +23,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return !!document.querySelector('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner');
+    return !!document.querySelector('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookiebanner');
   }
 
   async optOut() {
@@ -87,6 +87,12 @@ export default class Cookiebot extends AutoConsentCMPBase {
       await requestEval('window.Cookiebot.dialog.submitConsent()');
       await waitMs(500);
     }
+
+    // site with 3rd confirm settings modal
+    if (document.querySelector('#cb-confirmedSettings')) {
+      await requestEval('endCookieProcess()');
+    }
+
     return true;
   }
 

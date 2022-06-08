@@ -1,50 +1,79 @@
-properties([
-    parameters([
-        choice(name: 'CHANNEL', defaultValue: 'staging', choices: 'staging\nproduction')
-    ]),
-])
+def runPlaywrightTests(resultDir) {
+    sh 'mkdir -p ./test-results'
+    sh """
+        PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project webkit --reporter=junit || true
+    """
+    junit 'results.xml'
+    sh """
+        mkdir -p ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
+        mkdir -p ./test-results
+        mv ./test-results/ ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
+    """
+}
 
-node('docker && !gpu') {
-
-    def img
-    def commitHash
-
-    stage('Checkout') {
-        checkout scm
-        commitHash = sh(returnStdout: true, script: 'git log --pretty=format:\'%h\' -n 1').trim()
-        currentBuild.description = "${commitHash}-${params.CHANNEL}"
+def withEnvFile(envfile, Closure cb) {
+    def props = readProperties(file: envfile)    
+    withEnv(props.collect{ entry -> "${entry.key}=${entry.value}" }) {
+        cb()
     }
+}
 
-    stage('Build Docker Image') {
-        img = docker.build('autoconsent/build')
+pipeline {
+    agent { label 'crawler-worker' }
+    parameters {
+        string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
     }
-
-    img.inside() {
-
-        stage('Build') {
-            sh 'cp -r /app/node_modules ./'
-            sh 'npm run bundle'
-        }
-
-        stage('Build rules') {
-            sh 'node rules/build.js'
-            sh 'rm -f rules/rules.min.*'
-            sh "jq -c '. + { version: \"${commitHash}\" }' rules/rules.json > rules/rules.min.json"
-            sh 'brotli --input rules/rules.min.json --output rules/rules.min.json.br'
-            sh "gzip -9 rules/rules.min.json"
-        }
+    environment {
+        NODENV_VERSION = "14.15.4"
+        NODENV_ROOT = "/opt/nodeenv"
+        PATH = "/opt/nodenv/shims:/opt/nodenv/bin:$PATH"
     }
-
-    if (env.BRANCH_NAME == 'master') {
-        stage('Publish') {
-            sh "aws s3 cp rules/rules.min.json.br s3://cdn.cliqz.com/autoconsent/rules/${commitHash}.json.br --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --content-encoding br --content-type application/json --cache-control \"immutable\""
-            sh "aws s3 cp rules/rules.min.json.gz s3://cdn.cliqz.com/autoconsent/rules/${commitHash}.json.gz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --content-encoding gzip --content-type application/json --cache-control \"immutable\""
-            sh "echo '{\"ruleVersion\":\"${commitHash}\",\"disabled\":[]}' > config.json"
-            def fileName = 'config.json'
-            if (params.CHANNEL == 'staging') {
-                fileName = 'staging-config.json'
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
             }
-            sh "aws s3 cp config.json s3://cdn.cliqz.com/autoconsent/${fileName} --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --content-type application/json --cache-control \"max-age=3600\""
+        }
+        
+        stage('Build') {
+            steps {
+                sh '''
+                npm ci
+                npx playwright install webkit
+                '''
+            }
+        }
+        
+        stage('Test: DE') {
+            steps {
+                withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
+                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                }
+            }
+        }
+        
+        stage('Test: US') {
+            steps {
+                withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
+                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                }
+            }
+        }
+        
+        stage('Test: GB') {
+            steps {
+                withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
+                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                }
+            }
+        }
+        
+        stage('Test: FR') {
+            steps {
+                withEnvFile("${params.TEST_RESULT_ROOT}/fr.env") {
+                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                }
+            }
         }
     }
 }

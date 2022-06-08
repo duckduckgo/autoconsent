@@ -6,12 +6,13 @@ const shortcutOptOut = '#truste-consent-required';
 const shortcutOptIn = '#truste-consent-button';
 const popupContent = '#truste-consent-content';
 const bannerOverlay = '#trustarc-banner-overlay';
+const bannerContainer = '#truste-consent-track';
 
 export default class TrustArcTop extends AutoConsentCMPBase {
 
   prehideSelectors = [
     ".trustarc-banner-container",
-    ".truste_popframe,.truste_overlay,.truste_box_overlay,#truste-consent-track",
+    `.truste_popframe,.truste_overlay,.truste_box_overlay,${bannerContainer}`,
   ]
 
   _shortcutButton: HTMLElement;
@@ -30,7 +31,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    const result = document.querySelector(cookieSettingsButton) !== null;
+    const result = document.querySelector(`${cookieSettingsButton},${bannerContainer}`) !== null;
     if (result) {
       // additionally detect the opt-out button
       this._shortcutButton = document.querySelector(shortcutOptOut);
@@ -40,7 +41,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
   async detectPopup() {
     // not every element should exist, but if it does, it's a popup
-    const popupElements = document.querySelectorAll(`${popupContent},${bannerOverlay}`);
+    const popupElements = document.querySelectorAll(`${popupContent},${bannerOverlay},${bannerContainer}`);
     return Array.from(popupElements).every(isElementVisible);
   }
 
@@ -60,7 +61,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     // hide elements permanently, so user doesn't see the popup
     hideElements(
       getStyleElement(),
-      [".truste_popframe", ".truste_overlay", ".truste_box_overlay", "#truste-consent-track"],
+      [".truste_popframe", ".truste_overlay", ".truste_box_overlay", bannerContainer],
     );
     (<HTMLElement>document.querySelector(cookieSettingsButton))?.click();
 
