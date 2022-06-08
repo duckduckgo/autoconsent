@@ -1,6 +1,6 @@
 {
- "name": "hl.co.uk",
- "prehideSelectors": [".cookieModalContent", "#cookie-banner-overlay"],
+  "name": "hl.co.uk",
+  "prehideSelectors": [".cookieModalContent", "#cookie-banner-overlay"],
   "detectCmp": [{ "exists": "#cookie-banner-overlay" }],
   "detectPopup": [{ "exists": "#cookie-banner-overlay" }],
   "optIn": [{ "click": "#acceptCookieButton" }],
@@ -12,19 +12,18 @@
           "hide": [".cookieSettingsModal"]
       },
       {
-          "wait": 500
+          "waitFor": "#AOCookieToggle"
       },
       {
-          "click": "#AOCookieToggle"
+          "click": "#AOCookieToggle[aria-pressed=true]",
+          "optional": true
       },
       {
-          "eval": "document.querySelector('#AOCookieToggle').getAttribute('aria-pressed') === 'false'"
+          "waitFor": "#TPCookieToggle"
       },
       {
-          "click": "#TPCookieToggle"
-      },
-      {
-          "eval": "document.querySelector('#TPCookieToggle').getAttribute('aria-pressed') === 'false'"
+          "click": "#TPCookieToggle[aria-pressed=true]",
+          "optional": true
       },
       {
           "click": "#updateCookieButton"
