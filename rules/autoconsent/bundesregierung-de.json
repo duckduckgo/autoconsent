@@ -6,7 +6,11 @@
   "optIn": [{ "click": ".bpa-accept-all-button" }],
   "optOut": [
       {
-          "click": ".bpa-close-button"
+          "wait": 500,
+          "comment": "click is not immediately recognized"
+      },
+      {
+          "waitForThenClick": ".bpa-close-button"
       }
   ],
   "test": [

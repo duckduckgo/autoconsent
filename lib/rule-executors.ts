@@ -3,7 +3,7 @@ import { requestEval } from "./eval-handler";
 import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "./rules";
 import { getStyleElement, hideElements, isElementVisible, waitFor, waitMs } from "./utils";
 
-export async function doEval(ruleStep: EvalRule): Promise<boolean> {
+export function doEval(ruleStep: EvalRule): Promise<boolean> {
   return requestEval(ruleStep.eval);
 }
 

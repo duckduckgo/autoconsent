@@ -41,6 +41,9 @@ export function generateTest(
     if (options.skipRegions && options.skipRegions.indexOf(testRegion) !== -1) {
       test.skip();
     }
+    enableLogs && page.on('console', async msg => {
+      console.log(`    page log:`, msg.text());
+    });
     await page.goto(url, { waitUntil: "commit" });
 
     // set up a messaging function

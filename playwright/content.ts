@@ -20,4 +20,6 @@ if (!window.autoconsentReceiveMessage) {
   window.autoconsentReceiveMessage = (message: BackgroundMessage) => {
     return Promise.resolve(consent.receiveMessageCallback(message));
   };
+} else {
+  console.warn('autoconsent already initialized', window.autoconsentReceiveMessage);
 }

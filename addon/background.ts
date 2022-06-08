@@ -57,8 +57,11 @@ chrome.runtime.onMessage.addListener(
   async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
-    const url = sender.url;
-    enableLogs && console.log("received message", msg, sender);
+    if (enableLogs) {
+      console.groupCollapsed(`${msg.type} from ${sender.origin}`);
+      console.log(msg, sender);
+      console.groupEnd();
+    }
     const rules: RuleBundle = (await chrome.storage.local.get("rules")).rules;
 
     switch (msg.type) {
