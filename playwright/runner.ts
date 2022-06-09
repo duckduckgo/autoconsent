@@ -66,7 +66,7 @@ export function generateTest(
 
     let hasSelfTest = false;
     async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
-      enableLogs && console.log(msg);
+      enableLogs && msg.type !== 'eval' && console.log(msg);
       received.push(msg);
       if (msg.type === 'optInResult' || msg.type === 'optOutResult') {
         if (msg.scheduleSelfTest) {

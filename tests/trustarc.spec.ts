@@ -13,7 +13,7 @@ generateCMPTests('TrustArc-top', [
 ], {
     testOptOut: true,
     testSelfTest: false,
-    skipRegions: ["FR"]
+    skipRegions: ["US", "FR"]
 });
 
 generateCMPTests('TrustArc-frame', [

@@ -159,6 +159,7 @@ export default class AutoConsent {
     } else {
       enableLogs && console.log(`CMP ${this.foundCmp.name}: opt out on ${window.location.href}`);
       optOutResult = await this.foundCmp.optOut();
+      enableLogs && console.log(`${this.foundCmp.name}: opt out result ${optOutResult}`);
     }
 
     if (this.config.autoAction) {

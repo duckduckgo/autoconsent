@@ -95,14 +95,15 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     const submitButton = document.querySelector(".submit") as HTMLElement;
     submitButton.click();
 
-
-    await waitFor(
+    // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
+    waitFor(
       async () => !!document.querySelector("#gwt-debug-close_id"),
       300,
       1000
-    );
-    const closeButton = document.querySelector("#gwt-debug-close_id") as HTMLElement;
-    closeButton && closeButton.click();
+    ).then(() => {
+      const closeButton = document.querySelector("#gwt-debug-close_id") as HTMLElement;
+      closeButton && closeButton.click();
+    });
 
     return true;
   }
