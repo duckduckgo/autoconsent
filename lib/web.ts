@@ -135,7 +135,7 @@ export default class AutoConsent {
           break;
         }
       } catch (e) {
-        enableLogs && console.error(`error detecting ${cmp.name}`, e);
+        enableLogs && console.warn(`error detecting ${cmp.name}`, e);
       }
     }
 
@@ -251,7 +251,7 @@ export default class AutoConsent {
       return selectorList;
     }, globalHidden);
 
-    enableLogs && console.log('prehiding elements', selectors);
+    enableLogs && console.log('prehiding elements on', location.href);
 
     return prehide(selectors);
   }

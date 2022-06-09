@@ -65,7 +65,8 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
     results.push(elementVisible(<ElementVisibleRule>rule));
   }
   if (rule.eval) {
-    results.push(doEval(<EvalRule>rule));
+    const res = doEval(<EvalRule>rule)
+    results.push(res);
   }
   if (rule.waitFor) {
     results.push(waitForElement(<WaitForRule>rule));
@@ -84,7 +85,8 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   }
 
   // boolean and of results
-  return (await Promise.all(results)).reduce((a, b) => a && b, true);
+  const all = await Promise.all(results);
+  return all.reduce((a, b) => a && b, true);
 }
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
@@ -106,7 +108,8 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
 
   async _runRulesParallel(rules: AutoConsentRuleStep[]): Promise<boolean> {
-    const detections = await Promise.all(rules.map(rule => evaluateRuleStep(rule)));
+    const results = rules.map(rule => evaluateRuleStep(rule));
+    const detections = await Promise.all(results);
     return detections.every(r => !!r);
   }
 

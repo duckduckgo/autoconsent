@@ -49,6 +49,7 @@ export function generateTest(
     enableLogs && page.on('console', async msg => {
       console.log(`    page log:`, msg.text());
     });
+    await page.exposeBinding("autoconsentSendMessage", messageCallback);
     await page.goto(url, { waitUntil: "commit" });
 
     // set up a messaging function
@@ -78,7 +79,6 @@ export function generateTest(
         await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
       }
     }
-    await page.exposeBinding("autoconsentSendMessage", messageCallback);
 
     // inject content scripts into every frame
     await injectContentScript(page);

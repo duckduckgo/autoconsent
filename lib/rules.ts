@@ -10,7 +10,7 @@ export type AutoConsentCMPRule = {
   test?: AutoConsentRuleStep[]
 }
 
-export type AutoConsentRuleStep = { frame?: boolean; optional?: boolean } & Partial<
+export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   ElementExistsRule
 > &
   Partial<ElementVisibleRule> &

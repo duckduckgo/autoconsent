@@ -4,7 +4,10 @@ import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, W
 import { getStyleElement, hideElements, isElementVisible, waitFor, waitMs } from "./utils";
 
 export function doEval(ruleStep: EvalRule): Promise<boolean> {
-  return requestEval(ruleStep.eval);
+  return requestEval(ruleStep.eval).catch((e) => {
+    enableLogs && console.error('error evaluating rule', ruleStep, e);
+    return false;
+  });
 }
 
 export function click(ruleStep: ClickRule): boolean {
@@ -76,8 +79,8 @@ export function hide(ruleStep: HideRule): boolean {
 }
 
 export function prehide(selectors: string[]): boolean {
-  enableLogs && console.log("[prehide]", selectors);
   const styleEl = getStyleElement('autoconsent-prehide');
+  enableLogs && console.log("[prehide]", styleEl);
   return hideElements(styleEl, selectors, "opacity");
 }
 
