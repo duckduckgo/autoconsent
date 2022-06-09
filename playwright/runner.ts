@@ -11,11 +11,13 @@ type TestOptions = {
   testOptOut: boolean;
   testSelfTest: boolean;
   skipRegions?: string[];
+  onlyRegions?: string[];
 };
 const defaultOptions: TestOptions = {
   testOptOut: true,
   testSelfTest: true,
   skipRegions: [],
+  onlyRegions: [],
 };
 
 const contentScript = fs.readFileSync(
@@ -38,7 +40,10 @@ export function generateTest(
   options: TestOptions = { testOptOut: true, testSelfTest: true }
 ) {
   test(`${url.split("://")[1]} .${testRegion}`, async ({ page }) => {
-    if (options.skipRegions && options.skipRegions.indexOf(testRegion) !== -1) {
+    if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
+      test.skip();
+    }
+    if (options.skipRegions && options.skipRegions.includes(testRegion)) {
       test.skip();
     }
     enableLogs && page.on('console', async msg => {
