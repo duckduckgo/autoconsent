@@ -34,7 +34,15 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
   async optIn() {
     const acceptButton: HTMLElement = document.querySelector(".sp_choice_type_11");
-    acceptButton.click();
+    if (acceptButton) {
+      acceptButton.click();
+      return true;
+    }
+
+    const acceptButton2: HTMLElement = document.querySelector('.sp_choice_type_ACCEPT_ALL');
+    if (acceptButton2) {
+      acceptButton2.click();
+    }
     return true;
   }
 
@@ -69,19 +77,19 @@ export default class SourcePoint extends AutoConsentCMPBase {
       const rejectSelector1 = '.sp_choice_type_REJECT_ALL';
       const rejectSelector2 = '.reject-toggle';
       const path = await Promise.race([
-        waitFor(() => !!document.querySelector(rejectSelector1), 10, 200).then(() => 0),
-        waitFor(() => !!document.querySelector(rejectSelector2), 10, 200).then(() => 1),
-        waitFor(() => !!document.querySelector('.pm-features'), 10, 200).then(() => 2),
+        waitFor(() => !!document.querySelector(rejectSelector1), 10, 200).then(success => success ? 0: -1),
+        waitFor(() => !!document.querySelector(rejectSelector2), 10, 200).then(success => success ? 1: -1),
+        waitFor(() => !!document.querySelector('.pm-features'), 10, 200).then(success => success ? 2: -1),
       ]);
       if (path === 0) {
         await waitMs(1000);
-        const rejectAllButton: HTMLElement = document.querySelector(".sp_choice_type_REJECT_ALL");
+        const rejectAllButton: HTMLElement = document.querySelector(rejectSelector1);
         rejectAllButton.click();
         return true;
       } else if (path === 1) {
         const rejectToggle: HTMLElement = document.querySelector(rejectSelector2);
         rejectToggle.click();
-      } else {
+      } else if (path === 2) {
         // TODO: check if this is still working
         await waitFor(() => !!document.querySelector('.pm-features'), 50, 200);
         const toggles = document.querySelectorAll('.checked > span');
