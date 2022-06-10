@@ -1,7 +1,7 @@
 {
     "name": "Tealium",
     "prehideSelectors": ["#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#consent-layer"],
-    "detectCmp": [{ "exists": "#__tealiumGDPRecModal" }, { "eval": "typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object'" }],
+    "detectCmp": [{ "visible": "#__tealiumGDPRecModal" }, { "eval": "typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object'" }],
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
       { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs", "#consent-layer"] },
