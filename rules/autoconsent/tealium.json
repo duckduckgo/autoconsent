@@ -5,7 +5,7 @@
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
       { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs", "#consent-layer"] },
-      { "click": "#cm-acceptNone,.js-accept-essential-cookies"},
+      { "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies", "timeout": 1000 },
       { "eval": "utag.gdpr.setConsentValue(false) || true" }
     ],
     "optIn": [
