@@ -64,6 +64,11 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
   async optOut() {
     await waitFor(() => document.readyState === 'complete', 20, 100);
+    await waitFor(
+      () => !!document.querySelector(".mainContent[aria-hidden=false]"),
+      5,
+      1000
+    );
 
     const rejectAll = document.querySelector(".rejectAll") as HTMLElement;
     if (rejectAll) {
