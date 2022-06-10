@@ -1,8 +1,13 @@
 import { enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
-import { AutoAction, RuleBundle } from "../lib/types";
+import { Config, RuleBundle } from "../lib/types";
 
-const autoAction: AutoAction = 'optOut'; // if falsy, the extension will wait for an explicit user signal before opting in/out
+const autoconsentConfig: Config = {
+  enabled: true,
+  autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
+  disabledCmps: [],
+  enablePrehide: true,
+};
 
 async function loadRules(): Promise<RuleBundle> {
   const res = await fetch("./rules.json");
@@ -72,11 +77,7 @@ chrome.runtime.onMessage.addListener(
         chrome.tabs.sendMessage(tabId, {
           type: "initResp",
           rules,
-          config: {
-            enabled: true,
-            autoAction,
-            disabledCmps: [],
-          },
+          config: autoconsentConfig,
         } as BackgroundMessage, {
           frameId,
         });

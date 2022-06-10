@@ -43,7 +43,7 @@ export default class AutoConsent {
       this.disableCMPs(config.disabledCmps);
     }
 
-    if (config.autoAction) {
+    if (config.enablePrehide) {
       this.prehideElements(); // prehide as early as possible to prevent flickering
     }
 
@@ -94,7 +94,7 @@ export default class AutoConsent {
       const isOpen = await this.waitForPopup(cmp);
       if (!isOpen) {
         enableLogs && console.log('no popup found');
-        if (this.config.autoAction) {
+        if (this.config.enablePrehide) {
           undoPrehide();
         }
         return false;
@@ -116,7 +116,7 @@ export default class AutoConsent {
       return true;
     } else {
       enableLogs && console.log("no CMP found", location.href);
-      if (this.config.autoAction) {
+      if (this.config.enablePrehide) {
         undoPrehide();
       }
       return false;
@@ -177,7 +177,7 @@ export default class AutoConsent {
       enableLogs && console.log(`${this.foundCmp.name}: opt out result ${optOutResult}`);
     }
 
-    if (this.config.autoAction) {
+    if (this.config.enablePrehide) {
       undoPrehide();
     }
 
@@ -207,7 +207,7 @@ export default class AutoConsent {
       optInResult = await this.foundCmp.optIn();
     }
 
-    if (this.config.autoAction) {
+    if (this.config.enablePrehide) {
       undoPrehide();
     }
 

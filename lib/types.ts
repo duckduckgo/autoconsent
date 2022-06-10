@@ -28,4 +28,5 @@ export type Config = {
   enabled: boolean;
   autoAction: AutoAction;
   disabledCmps: string[];
+  enablePrehide: boolean;
 }
