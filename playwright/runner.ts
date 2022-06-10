@@ -88,7 +88,7 @@ export function generateTest(
           break;
         }
         case 'autoconsentError': {
-          console.error(msg.details);
+          console.error(url, msg.details);
           break;
         }
       }
