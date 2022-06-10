@@ -2,7 +2,7 @@ import { enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
 import { AutoAction, RuleBundle } from "../lib/types";
 
-const autoAction: AutoAction = null; //'optOut'; // if falsy, the extension will wait for an explicit user signal before opting in/out
+const autoAction: AutoAction = 'optOut'; // if falsy, the extension will wait for an explicit user signal before opting in/out
 
 async function loadRules(): Promise<RuleBundle> {
   const res = await fetch("./rules.json");
