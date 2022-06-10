@@ -98,6 +98,11 @@ chrome.runtime.onMessage.addListener(
             }
           },
         }).then(([result]) => {
+          if (enableLogs) {
+            console.groupCollapsed(`eval result for ${sender.origin}`);
+            console.log(msg.code, result.result);
+            console.groupEnd();
+          }
           chrome.tabs.sendMessage(tabId, {
             id: msg.id,
             type: "evalResp",

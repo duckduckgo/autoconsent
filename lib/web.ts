@@ -267,8 +267,6 @@ export default class AutoConsent {
       return selectorList;
     }, globalHidden);
 
-    enableLogs && console.log('prehiding elements on', location.href);
-
     return prehide(selectors);
   }
 

@@ -80,13 +80,13 @@ export function hide(ruleStep: HideRule): boolean {
 
 export function prehide(selectors: string[]): boolean {
   const styleEl = getStyleElement('autoconsent-prehide');
-  enableLogs && console.log("[prehide]", styleEl);
+  enableLogs && console.log("[prehide]", styleEl, location.href);
   return hideElements(styleEl, selectors, "opacity");
 }
 
 export function undoPrehide(): boolean {
   const existingElement = getStyleElement('autoconsent-prehide');
-  enableLogs && console.log("[undoprehide]", existingElement);
+  enableLogs && console.log("[undoprehide]", existingElement, location.href);
   if (existingElement) {
     existingElement.remove();
   }
