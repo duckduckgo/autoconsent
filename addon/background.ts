@@ -142,12 +142,15 @@ chrome.runtime.onMessage.addListener(
         const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
 
         if (typeof selfTestFrameId === 'number') {
+          enableLogs && console.log(`Requesting self-test in ${selfTestFrameId}`);
           chrome.storage.local.remove(selfTestKey);
           chrome.tabs.sendMessage(tabId, {
             type: "selfTest",
           }, {
             frameId: selfTestFrameId,
           });
+        } else {
+          enableLogs && console.log(`No self-test scheduled`);
         }
         break;
       }

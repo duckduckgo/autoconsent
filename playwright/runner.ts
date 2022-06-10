@@ -64,7 +64,7 @@ export function generateTest(
       });
     }
 
-    let hasSelfTest = false;
+    let selfTestFrame: Frame = null;
     async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
       enableLogs && msg.type !== 'eval' && console.log(msg);
       received.push(msg);
@@ -72,13 +72,13 @@ export function generateTest(
         case 'optInResult':
         case 'optOutResult': {
           if (msg.scheduleSelfTest) {
-            hasSelfTest = true;
+            selfTestFrame = frame;
           }
           break;
         }
         case 'autoconsentDone': {
-          if (hasSelfTest && options.testSelfTest) {
-            await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+          if (selfTestFrame && options.testSelfTest) {
+            await selfTestFrame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
           }
           break;
         }
@@ -107,7 +107,7 @@ export function generateTest(
       await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 500);
       expect(isMessageReceived({ type: "optOutResult", result: true })).toBe(true);
     }
-    if (options.testSelfTest && hasSelfTest) {
+    if (options.testSelfTest && selfTestFrame) {
       await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 500);
       expect(isMessageReceived({ type: "selfTestResult", result: true })).toBe(true);
     }
