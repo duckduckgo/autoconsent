@@ -145,6 +145,9 @@ chrome.runtime.onMessage.addListener(
         }
         break;
       }
+      case "autoconsentError":
+        console.error('Error:', msg.details);
+        break;
     }
   }
 );

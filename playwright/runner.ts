@@ -68,15 +68,29 @@ export function generateTest(
     async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
       enableLogs && msg.type !== 'eval' && console.log(msg);
       received.push(msg);
-      if (msg.type === 'optInResult' || msg.type === 'optOutResult') {
-        if (msg.scheduleSelfTest) {
-          hasSelfTest = true;
+      switch (msg.type) {
+        case 'optInResult':
+        case 'optOutResult': {
+          if (msg.scheduleSelfTest) {
+            hasSelfTest = true;
+          }
+          break;
         }
-      } else if (msg.type === 'autoconsentDone' && hasSelfTest && options.testSelfTest) {
-        await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
-      } else if (msg.type === 'eval') {
-        const result = await frame.evaluate(msg.code);
-        await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
+        case 'autoconsentDone': {
+          if (hasSelfTest && options.testSelfTest) {
+            await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+          }
+          break;
+        }
+        case 'eval': {
+          const result = await frame.evaluate(msg.code);
+          await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
+          break;
+        }
+        case 'autoconsentError': {
+          console.error(msg.details);
+          break;
+        }
       }
     }
 

@@ -14,7 +14,8 @@ export type ContentScriptMessage =
   | OptOutResultMessage
   | OptInResultMessage
   | SelfTestResultMessage
-  | DoneMessage;
+  | DoneMessage
+  | ErrorMessage;
 
 export type InitMessage = {
   type: "init";
@@ -51,6 +52,11 @@ export type SelfTestResultMessage = {
 export type DoneMessage = {
   type: "autoconsentDone";
   cmp: string;
+}
+
+export type ErrorMessage = {
+  type: "autoconsentError";
+  details: any;
 }
 
 export type InitResponseMessage = {

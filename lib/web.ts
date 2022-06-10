@@ -125,18 +125,33 @@ export default class AutoConsent {
 
   async findCmp(retries: number): Promise<AutoCMP> {
     let foundCmp: AutoCMP = null;
+    const allFoundCmps: AutoCMP[] = [];
 
     for (const cmp of this.rules) {
       try {
         const result = await cmp.detectCmp();
         if (result) {
-          enableLogs && console.log(`Found CMP: ${cmp.name}`);
-          foundCmp = cmp;
-          break;
+          allFoundCmps.push(cmp);
+          if (!foundCmp) {
+            enableLogs && console.log(`Found CMP: ${cmp.name}`);
+            foundCmp = cmp;
+          }
         }
       } catch (e) {
         enableLogs && console.warn(`error detecting ${cmp.name}`, e);
       }
+    }
+
+    if (allFoundCmps.length > 1) {
+      const errorDetails = {
+        msg: `Found multiple CMPs, check the detection rules.`,
+        cmps: allFoundCmps.map((cmp) => cmp.name),
+      };
+      enableLogs && console.warn(errorDetails.msg, errorDetails.cmps);
+      this.sendContentMessage({
+        type: 'autoconsentError',
+        details: errorDetails,
+      });
     }
 
     if (!foundCmp && retries > 0) {
