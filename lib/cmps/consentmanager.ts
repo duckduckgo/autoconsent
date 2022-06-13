@@ -1,4 +1,4 @@
-import { isElementVisible, waitFor } from "../utils";
+import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 // Note: JS API is also available:
@@ -20,45 +20,32 @@ export default class ConsentManager extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return !!document.querySelector("#cmpbox");
+    return elementExists("#cmpbox");
   }
 
   async detectPopup() {
-    const popupElements = document.querySelectorAll("#cmpbox .cmpmore");
-    return Array.from(popupElements).some(isElementVisible);
+    return elementVisible("#cmpbox .cmpmore", 'any');
   }
 
   async optOut() {
-    const but: HTMLElement = document.querySelector(".cmpboxbtnno");
-    if (but) {
-      but.click();
+    if (click(".cmpboxbtnno")) {
       return true;
     }
 
-    if (document.querySelector(".cmpwelcomeprpsbtn")) {
-      const toggles = document.querySelectorAll(".cmpwelcomeprpsbtn > a[aria-checked=true]");
-      toggles.forEach((el: HTMLElement) => el.click());
-      const saveButton: HTMLElement = document.querySelector(".cmpboxbtnsave");
-      saveButton.click();
+    if (elementExists(".cmpwelcomeprpsbtn")) {
+      click(".cmpwelcomeprpsbtn > a[aria-checked=true]", true);
+      click(".cmpboxbtnsave");
       return true;
     }
 
-    const customBtn: HTMLElement = document.querySelector(".cmpboxbtncustom");
-    customBtn.click();
-    await waitFor(() => !!document.querySelector(".cmptblbox"), 10, 200);
-    const checkboxes = document.querySelectorAll(".cmptdchoice > a[aria-checked=true]");
-    checkboxes.forEach((el: HTMLElement) => el.click());
-    const saveButton: HTMLElement = document.querySelector(".cmpboxbtnyescustomchoices");
-    saveButton.click();
+    click(".cmpboxbtncustom");
+    await waitForElement(".cmptblbox", 2000);
+    click(".cmptdchoice > a[aria-checked=true]", true);
+    click(".cmpboxbtnyescustomchoices");
     return true;
   }
 
   async optIn() {
-    const acceptButton: HTMLElement = document.querySelector(".cmpboxbtnyes");
-    if (acceptButton) {
-      acceptButton.click();
-      return true;
-    }
-    return false;
+    return click(".cmpboxbtnyes");
   }
 }

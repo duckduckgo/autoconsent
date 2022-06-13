@@ -1,3 +1,4 @@
+import { click, elementExists, elementVisible } from "../rule-executors";
 import { getStyleElement, hideElements, isElementVisible } from "../utils";
 import AutoConsentCMPBase from "./base";
 
@@ -31,7 +32,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    const result = document.querySelector(`${cookieSettingsButton},${bannerContainer}`) !== null;
+    const result = elementExists(`${cookieSettingsButton},${bannerContainer}`);
     if (result) {
       // additionally detect the opt-out button
       this._shortcutButton = document.querySelector(shortcutOptOut);
@@ -41,15 +42,11 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
   async detectPopup() {
     // not every element should exist, but if it does, it's a popup
-    const popupElements = document.querySelectorAll(`${popupContent},${bannerOverlay},${bannerContainer}`);
-    return Array.from(popupElements).every(isElementVisible);
+    return elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'all');
   }
 
   openFrame() {
-    const settingsButtonEl: HTMLElement = document.querySelector(cookieSettingsButton);
-    if (settingsButtonEl) {
-      settingsButtonEl.click();
-    }
+    click(cookieSettingsButton);
   }
 
   async optOut() {
@@ -63,7 +60,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
       getStyleElement(),
       [".truste_popframe", ".truste_overlay", ".truste_box_overlay", bannerContainer],
     );
-    (<HTMLElement>document.querySelector(cookieSettingsButton))?.click();
+    click(cookieSettingsButton);
 
     // schedule cleanup
     setTimeout(() => {
@@ -74,13 +71,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async optIn() {
-    const optInButton: HTMLElement = document.querySelector(shortcutOptIn);
-    if (optInButton) {
-
-      optInButton.click();
-    }
-
-    return true;
+    return click(shortcutOptIn);
   }
 
   async openCmp() {

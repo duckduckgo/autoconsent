@@ -1,4 +1,5 @@
-import { getStyleElement, hideElements, isElementVisible, waitFor } from "../utils";
+import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { getStyleElement, hideElements } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Evidon extends AutoConsentCMPBase {
@@ -15,34 +16,28 @@ export default class Evidon extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return !!document.querySelector("#_evidon_banner");
+    return elementExists("#_evidon_banner");
   }
 
   async detectPopup() {
-    const popup: HTMLElement = document.querySelector("#_evidon_banner");
-    return isElementVisible(popup);
+    return elementVisible("#_evidon_banner", 'any');
   }
 
   async optOut() {
-    const declineButton: HTMLElement = document.querySelector("#_evidon-decline-button");
-    if (declineButton) {
-      declineButton.click();
+    if (click("#_evidon-decline-button")) {
       return true;
     }
+
     hideElements(getStyleElement(), ["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"]);
-    const optionButton: HTMLElement = document.querySelector("#_evidon-option-button");
-    optionButton.click();
+    click("#_evidon-option-button");
 
-    await waitFor(() => !!document.querySelector("#evidon-prefdiag-overlay"), 10, 500);
+    await waitForElement("#evidon-prefdiag-overlay", 5000);
 
-    const declineButton2: HTMLElement = document.querySelector("#evidon-prefdiag-decline");
-    declineButton2.click();
+    click("#evidon-prefdiag-decline");
     return true;
   }
 
   async optIn() {
-    const acceptButton: HTMLElement = document.querySelector("#_evidon-accept-button");
-    acceptButton.click();
-    return true;
+    return click("#_evidon-accept-button");
   }
 }

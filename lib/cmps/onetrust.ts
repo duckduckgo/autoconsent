@@ -1,6 +1,5 @@
-import { requestEval } from "../eval-handler";
-import { wait } from "../rule-executors";
-import { isElementVisible, waitFor } from "../utils";
+import { click, doEval, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
+import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Onetrust extends AutoConsentCMPBase {
@@ -20,35 +19,30 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return !!document.querySelector("#onetrust-banner-sdk,.optanon-alert-box-wrapper");
+    return elementExists("#onetrust-banner-sdk,.optanon-alert-box-wrapper");
   }
 
   async detectPopup() {
-    const popupElements = document.querySelectorAll("#onetrust-banner-sdk,.optanon-alert-box-wrapper");
-    return Array.from(popupElements).every(isElementVisible);
+    return elementVisible("#onetrust-banner-sdk,.optanon-alert-box-wrapper", 'all');
   }
 
   async optOut() {
-    const showPurposesButton: HTMLElement = document.querySelector("#onetrust-pc-btn-handler"); // "show purposes" button inside a popup
-    if (showPurposesButton) {
-      showPurposesButton.click();
+    if (elementExists("#onetrust-pc-btn-handler")) { // "show purposes" button inside a popup
+      click("#onetrust-pc-btn-handler");
     } else { // otherwise look for a generic "show settings" button
-      const settingsButton: HTMLElement = document.querySelector(".ot-sdk-show-settings,button.js-cookie-settings");
-      settingsButton.click();
+      click(".ot-sdk-show-settings,button.js-cookie-settings");
     }
 
-    await waitFor(() => !!document.querySelector('#onetrust-consent-sdk'), 10, 200);
+    await waitForElement('#onetrust-consent-sdk', 2000);
     await wait(1000);
-    const toggles = document.querySelectorAll("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked");
-    toggles.forEach((e: HTMLElement) => e.click()); // optional step
+    click("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked", true); // optional step
 
-    await waitFor(() => !!document.querySelector(".save-preference-btn-handler,.js-consent-save"), 10, 200);
-    const saveButton: HTMLElement = document.querySelector(".save-preference-btn-handler,.js-consent-save");
-    saveButton.click();
+    await waitForElement(".save-preference-btn-handler,.js-consent-save", 2000);
+    click(".save-preference-btn-handler,.js-consent-save");
 
     // popup doesn't disappear immediately
     await waitFor(
-      () => !(Array.from(document.querySelectorAll("#onetrust-banner-sdk")).every(isElementVisible)),
+      () => elementVisible("#onetrust-banner-sdk", 'none'),
       10,
       500
     );
@@ -56,12 +50,10 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async optIn() {
-    const acceptButton: HTMLElement = document.querySelector("onetrust-accept-btn-handler,js-accept-cookies");
-    acceptButton.click();
-    return true;
+    return click("onetrust-accept-btn-handler,js-accept-cookies");
   }
 
   async test() {
-    return await requestEval("window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1");
+    return await doEval("window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1");
   }
 }

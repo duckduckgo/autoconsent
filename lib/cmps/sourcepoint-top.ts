@@ -1,5 +1,4 @@
-import { requestEval } from "../eval-handler";
-import { isElementVisible } from "../utils";
+import { doEval, elementExists, elementVisible } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
@@ -18,12 +17,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return !!document.querySelector("div[id^='sp_message_container_']");
+    return elementExists("div[id^='sp_message_container_']");
   }
 
   async detectPopup() {
-    const popupElements = document.querySelectorAll("div[id^='sp_message_container_']");
-    return Array.from(popupElements).every(isElementVisible);
+    return elementVisible("div[id^='sp_message_container_']", 'all');
   }
 
   async optIn() {
@@ -35,8 +33,8 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async test() {
-    await requestEval("__tcfapi('getTCData', 2, r => window.__rcsResult = r)");
-    return await requestEval(
+    await doEval("__tcfapi('getTCData', 2, r => window.__rcsResult = r)");
+    return await doEval(
       "Object.values(window.__rcsResult.purpose.consents).every(c => !c)"
     );
   }

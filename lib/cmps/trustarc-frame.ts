@@ -1,4 +1,5 @@
-import { isElementVisible, waitFor } from "../utils";
+import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class TrustArcFrame extends AutoConsentCMPBase {
@@ -20,7 +21,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
   async detectPopup() {
     // we're already inside the popup
-    return !!document.querySelector("#defaultpreferencemanager") && !!document.querySelector(".mainContent");
+    return elementVisible("#defaultpreferencemanager", 'any') && elementVisible(".mainContent", 'any');
   }
 
   async navigateToSettings() {
@@ -28,35 +29,29 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     await waitFor(
       async () => {
         return (
-          !!document.querySelector(".shp") ||
-          isElementVisible(document.querySelector(".advance")) ||
-          !!document.querySelector(".switch span:first-child")
+          elementExists(".shp") ||
+          elementVisible(".advance", 'any') ||
+          elementExists(".switch span:first-child")
         );
       },
       10,
       500
     );
     // splash screen -> hit more information
-    const shp = document.querySelector(".shp") as HTMLElement;
-    if (shp) {
-      shp.click();
+    if (elementExists(".shp")) {
+      click(".shp");
     }
 
-    await waitFor(
-      async () => !!document.querySelector(".prefPanel"),
-      10,
-      500
-    );
+    await waitForElement(".prefPanel", 5000);
 
     // go to advanced settings if not yet shown
-    const advance = document.querySelector(".advance") as HTMLElement;
-    if (advance && isElementVisible(advance)) {
-      advance.click();
+    if (elementVisible(".advance", 'any')) {
+      click(".advance");
     }
 
     // takes a while to load the opt-in/opt-out buttons
     return await waitFor(
-      () => isElementVisible(document.querySelector(".switch span:first-child")),
+      () => elementVisible(".switch span:first-child", 'any'),
       5,
       1000
     );
@@ -64,50 +59,30 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
   async optOut() {
     await waitFor(() => document.readyState === 'complete', 20, 100);
-    await waitFor(
-      () => !!document.querySelector(".mainContent[aria-hidden=false]"),
-      5,
-      1000
-    );
+    await waitForElement(".mainContent[aria-hidden=false]", 5000);
 
-    const rejectAll = document.querySelector(".rejectAll") as HTMLElement;
-    if (rejectAll) {
-      rejectAll.click();
+    if (click(".rejectAll")) {
       return true;
     }
 
-    const catDetails = document.querySelector("#catDetails0") as HTMLElement;
-    if (catDetails) {
-      catDetails.click();
-      const submitButton = document.querySelector(".submit") as HTMLElement;
-      submitButton.click();
+    if (click("#catDetails0")) {
+      click(".submit");
       return true;
     }
 
-    const requiredButton = document.querySelector(".required") as HTMLElement;
-    if (requiredButton) {
-      requiredButton.click();
+    if (click(".required")) {
       return true;
     }
 
     await this.navigateToSettings();
 
-    const toggles = document.querySelectorAll(".switch span:nth-child(1):not(.active)");
-    toggles.forEach((toggle: HTMLElement) => {
-      toggle.click();
-    });
+    click(".switch span:nth-child(1):not(.active)", true);
 
-    const submitButton = document.querySelector(".submit") as HTMLElement;
-    submitButton.click();
+    click(".submit");
 
     // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
-    waitFor(
-      async () => !!document.querySelector("#gwt-debug-close_id"),
-      300,
-      1000
-    ).then(() => {
-      const closeButton = document.querySelector("#gwt-debug-close_id") as HTMLElement;
-      closeButton && closeButton.click();
+    waitForElement("#gwt-debug-close_id", 300000).then(() => {
+      click("#gwt-debug-close_id");
     });
 
     return true;
@@ -115,21 +90,14 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
   async optIn() {
     await this.navigateToSettings();
-    const toggles = document.querySelectorAll(".switch span:nth-child(2)");
-    toggles.forEach((toggle: HTMLElement) => {
-      toggle.click();
+    click(".switch span:nth-child(2)", true);
+
+    click(".submit");
+
+    // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
+    waitForElement("#gwt-debug-close_id", 300000).then(() => {
+      click("#gwt-debug-close_id");
     });
-
-    const submitButton = document.querySelector(".submit") as HTMLElement;
-    submitButton.click();
-
-    await waitFor(
-      async () => !!document.querySelector("#gwt-debug-close_id"),
-      300,
-      1000
-    );
-    const closeButton = document.querySelector("#gwt-debug-close_id") as HTMLElement;
-    closeButton && closeButton.click();
 
     return true;
   }

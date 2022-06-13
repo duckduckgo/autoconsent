@@ -1,5 +1,5 @@
 import { enableLogs } from "../config";
-import { wait } from "../rule-executors";
+import { click, elementExists, wait, waitForElement } from "../rule-executors";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
@@ -34,17 +34,14 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async optIn() {
-    const acceptButton: HTMLElement = document.querySelector(".sp_choice_type_11");
-    if (acceptButton) {
-      acceptButton.click();
+    if (click(".sp_choice_type_11")) {
       return true;
     }
 
-    const acceptButton2: HTMLElement = document.querySelector('.sp_choice_type_ACCEPT_ALL');
-    if (acceptButton2) {
-      acceptButton2.click();
+    if (click('.sp_choice_type_ACCEPT_ALL')) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   isManagerOpen() {
@@ -53,14 +50,13 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
   async optOut() {
     if (!this.isManagerOpen()) {
-      const settingsButton: HTMLElement = document.querySelector("button.sp_choice_type_12");
-      if (!settingsButton) {
+      if (!elementExists("button.sp_choice_type_12")) {
         // do not sell button
-        const declineAllButton: HTMLElement = document.querySelector("button.sp_choice_type_13");
-        declineAllButton.click();
+        click("button.sp_choice_type_13");
         return true;
       }
-      settingsButton.click();
+
+      click("button.sp_choice_type_12");
       await waitFor(
         () => location.pathname === "/privacy-manager/index.html",
         200,
@@ -68,44 +64,33 @@ export default class SourcePoint extends AutoConsentCMPBase {
       );
     }
 
-    await waitFor(
-      () => !!document.querySelector('.type-modal'),
-      200,
-      100
-    );
+    await waitForElement('.type-modal', 20000);
     // reject all button is offered by some sites
     try {
       const rejectSelector1 = '.sp_choice_type_REJECT_ALL';
       const rejectSelector2 = '.reject-toggle';
       const path = await Promise.race([
-        waitFor(() => !!document.querySelector(rejectSelector1), 10, 200).then(success => success ? 0: -1),
-        waitFor(() => !!document.querySelector(rejectSelector2), 10, 200).then(success => success ? 1: -1),
-        waitFor(() => !!document.querySelector('.pm-features'), 10, 200).then(success => success ? 2: -1),
+        waitForElement(rejectSelector1, 2000).then(success => success ? 0: -1),
+        waitForElement(rejectSelector2, 2000).then(success => success ? 1: -1),
+        waitForElement('.pm-features', 2000).then(success => success ? 2: -1),
       ]);
       if (path === 0) {
         await wait(1000);
-        const rejectAllButton: HTMLElement = document.querySelector(rejectSelector1);
-        rejectAllButton.click();
+        click(rejectSelector1);
         return true;
       } else if (path === 1) {
-        const rejectToggle: HTMLElement = document.querySelector(rejectSelector2);
-        rejectToggle.click();
+        click(rejectSelector2);
       } else if (path === 2) {
         // TODO: check if this is still working
-        await waitFor(() => !!document.querySelector('.pm-features'), 50, 200);
-        const toggles = document.querySelectorAll('.checked > span');
-        toggles.forEach((t: HTMLElement) => t.click());
+        await waitForElement('.pm-features', 10000);
+        click('.checked > span', true);
 
-        const chevron: HTMLElement = document.querySelector('.chevron');
-        if (chevron) {
-          chevron.click();
-        }
+        click('.chevron');
       }
     } catch (e) {
       enableLogs && console.warn(e);
     }
-    const saveButton: HTMLElement = document.querySelector('.sp_choice_type_SAVE_AND_EXIT');
-    saveButton.click();
+    click('.sp_choice_type_SAVE_AND_EXIT');
     return true;
   }
 }
