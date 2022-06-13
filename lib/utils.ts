@@ -36,14 +36,6 @@ export function hideElements(
   return false;
 }
 
-export function waitMs(ms: number): Promise<true> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(true);
-    }, ms);
-  });
-}
-
 export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
   const result = await predicate();
   if (!result && maxTimes > 0) {

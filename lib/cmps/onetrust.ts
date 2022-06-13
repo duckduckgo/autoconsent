@@ -1,5 +1,6 @@
 import { requestEval } from "../eval-handler";
-import { isElementVisible, waitFor, waitMs } from "../utils";
+import { wait } from "../rule-executors";
+import { isElementVisible, waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Onetrust extends AutoConsentCMPBase {
@@ -37,7 +38,7 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     await waitFor(() => !!document.querySelector('#onetrust-consent-sdk'), 10, 200);
-    await waitMs(1000);
+    await wait(1000);
     const toggles = document.querySelectorAll("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked");
     toggles.forEach((e: HTMLElement) => e.click()); // optional step
 

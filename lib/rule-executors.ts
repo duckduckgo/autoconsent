@@ -1,20 +1,20 @@
 import { enableLogs } from "./config";
 import { requestEval } from "./eval-handler";
-import { ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "./rules";
-import { getStyleElement, hideElements, isElementVisible, waitFor, waitMs } from "./utils";
+import { HideMethod, VisibilityCheck } from "./rules";
+import { getStyleElement, hideElements, isElementVisible, waitFor } from "./utils";
 
-export function doEval(ruleStep: EvalRule): Promise<boolean> {
-  return requestEval(ruleStep.eval).catch((e) => {
-    enableLogs && console.error('error evaluating rule', ruleStep, e);
+export function doEval(expr: string): Promise<boolean> {
+  return requestEval(expr).catch((e) => {
+    enableLogs && console.error('error evaluating rule', expr, e);
     return false;
   });
 }
 
-export function click(ruleStep: ClickRule): boolean {
-  const elem = document.querySelectorAll<HTMLElement>(ruleStep.click);
-  enableLogs && console.log("[click]", ruleStep.click, elem);
+export function click(selector: string, all = false): boolean {
+  const elem = document.querySelectorAll<HTMLElement>(selector);
+  enableLogs && console.log("[click]", selector, all, elem);
   if (elem.length > 0) {
-    if (ruleStep.all === true) {
+    if (all) {
       elem.forEach((e) => e.click());
     } else {
       elem[0].click();
@@ -23,14 +23,14 @@ export function click(ruleStep: ClickRule): boolean {
   return elem.length > 0;
 }
 
-export function elementExists(ruleStep: ElementExistsRule): boolean {
-  const exists = document.querySelector(ruleStep.exists) !== null;
+export function elementExists(selector: string): boolean {
+  const exists = document.querySelector(selector) !== null;
   // enableLogs && console.log("[exists?]", ruleStep.exists, exists);
   return exists;
 }
 
-export function elementVisible(ruleStep: ElementVisibleRule): boolean {
-  const elem = document.querySelectorAll<HTMLElement>(ruleStep.visible);
+export function elementVisible(selector: string, check: VisibilityCheck): boolean {
+  const elem = document.querySelectorAll<HTMLElement>(selector);
     const results = new Array(elem.length);
     elem.forEach((e, i) => {
       // check for display: none
@@ -39,43 +39,46 @@ export function elementVisible(ruleStep: ElementVisibleRule): boolean {
     // enableLogs && console.log("[visible?]", ruleStep.visible, elem, results);
     if (results.length === 0) {
       return false;
-    } else if (ruleStep.check === "any") {
+    } else if (check === "any") {
       return results.some(r => r);
-    } else if (ruleStep.check === "none") {
+    } else if (check === "none") {
       return results.every(r => !r);
     }
     // all
     return results.every(r => r);
 }
 
-export function waitForElement(ruleStep: WaitForRule): Promise<boolean> {
+export function waitForElement(selector: string, timeout = 10000): Promise<boolean> {
   const interval = 200;
-  const times = Math.ceil((ruleStep.timeout || 10000) / interval);
+  const times = Math.ceil((timeout) / interval);
   // enableLogs && console.log("[waitFor]", ruleStep.waitFor);
   return waitFor(
-    () => document.querySelector(ruleStep.waitFor) !== null,
+    () => document.querySelector(selector) !== null,
     times,
     interval
   );
 }
 
-export async function waitForThenClick(ruleStep: WaitForThenClickRule): Promise<boolean> {
+export async function waitForThenClick(selector: string, timeout = 10000, all = false): Promise<boolean> {
   // enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
-  await waitForElement({ ...ruleStep, waitFor: ruleStep.waitForThenClick });
-  return click({ ...ruleStep, click: ruleStep.waitForThenClick });
+  await waitForElement(selector, timeout);
+  return click(selector, all);
 }
 
-export async function wait(ruleStep: WaitRule): Promise<true> {
+export function wait(ms: number): Promise<true> {
   // enableLogs && console.log(`waiting for ${ruleStep.wait}ms`);
-  await waitMs(ruleStep.wait);
-  // enableLogs && console.log(`done waiting`);
-  return true;
+  return new Promise(resolve => {
+    setTimeout(() => {
+      // enableLogs && console.log(`done waiting`);
+      resolve(true);
+    }, ms);
+  });
 }
 
-export function hide(ruleStep: HideRule): boolean {
+export function hide(selectors: string[], method: HideMethod): boolean {
   // enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
   const styleEl = getStyleElement();
-  return hideElements(styleEl, ruleStep.hide, ruleStep.method);
+  return hideElements(styleEl, selectors, method);
 }
 
 export function prehide(selectors: string[]): boolean {

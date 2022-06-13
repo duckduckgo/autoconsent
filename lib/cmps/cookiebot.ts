@@ -1,5 +1,6 @@
 import { requestEval } from '../eval-handler';
-import { waitFor, waitMs } from '../utils';
+import { wait } from '../rule-executors';
+import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Cookiebot extends AutoConsentCMPBase {
@@ -85,7 +86,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
     // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
     if (await requestEval('window.CookieConsent.hasResponse !== true')) {
       await requestEval('window.Cookiebot.dialog.submitConsent()');
-      await waitMs(500);
+      await wait(500);
     }
 
     // site with 3rd confirm settings modal

@@ -1,5 +1,6 @@
 import { enableLogs } from "../config";
-import { waitFor, waitMs } from "../utils";
+import { wait } from "../rule-executors";
+import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
@@ -82,7 +83,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         waitFor(() => !!document.querySelector('.pm-features'), 10, 200).then(success => success ? 2: -1),
       ]);
       if (path === 0) {
-        await waitMs(1000);
+        await wait(1000);
         const rejectAllButton: HTMLElement = document.querySelector(rejectSelector1);
         rejectAllButton.click();
         return true;

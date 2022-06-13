@@ -26,9 +26,11 @@ export type ElementExistsRule = {
   exists: string;
 };
 
+export type VisibilityCheck = "any" | "all" | "none";
+
 export type ElementVisibleRule = {
   visible: string;
-  check?: "any" | "all" | "none";
+  check?: VisibilityCheck;
 };
 
 export type EvalRule = {

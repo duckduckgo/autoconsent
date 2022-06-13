@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
 import { AutoCMP } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep, ClickRule, ElementExistsRule, ElementVisibleRule, EvalRule, HideRule, WaitForRule, WaitForThenClickRule, WaitRule } from "../rules";
+import { AutoConsentCMPRule, AutoConsentRuleStep } from "../rules";
 import { enableLogs } from "../config";
 import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick } from "../rule-executors";
 
@@ -59,29 +59,29 @@ export default class AutoConsentCMPBase implements AutoCMP {
 async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   const results = [];
   if (rule.exists) {
-    results.push(elementExists(<ElementExistsRule>rule));
+    results.push(elementExists(rule.exists));
   }
   if (rule.visible) {
-    results.push(elementVisible(<ElementVisibleRule>rule));
+    results.push(elementVisible(rule.visible, rule.check));
   }
   if (rule.eval) {
-    const res = doEval(<EvalRule>rule)
+    const res = doEval(rule.eval)
     results.push(res);
   }
   if (rule.waitFor) {
-    results.push(waitForElement(<WaitForRule>rule));
+    results.push(waitForElement(rule.waitFor, rule.timeout));
   }
   if (rule.click) {
-    results.push(click(<ClickRule>rule));
+    results.push(click(rule.click, rule.all));
   }
   if (rule.waitForThenClick) {
-    results.push(waitForThenClick(<WaitForThenClickRule>rule));
+    results.push(waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
   }
   if (rule.wait) {
-    results.push(wait(<WaitRule>rule));
+    results.push(wait(rule.wait));
   }
   if (rule.hide) {
-    results.push(hide(<HideRule>rule));
+    results.push(hide(rule.hide, rule.method));
   }
 
   // boolean and of results
