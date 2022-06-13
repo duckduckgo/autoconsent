@@ -1,7 +1,7 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('TrustArc-top', [
-    'https://www.samsung.com/uk/smartphones/all-smartphones/'
+    'https://www.samsung.com/uk/smartphones/all-smartphones/',
 ], {
     testOptOut: true,
     testSelfTest: false,
