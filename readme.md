@@ -1,11 +1,11 @@
-## Autoconsent
+# Autoconsent
 
 This is a library of rules for navigating through common consent popups on the web. These rules
 can be run in a Chrome extension, or in a Playwright-orchestrated headless browser. Using
 these rules, opt-in and opt-out options can be selected automatically, without requiring
 user-input.
 
-### Browser extension
+## Browser extension
 
 The web extension can be built with the following steps:
 
@@ -20,7 +20,7 @@ npm run bundle
 
 The extension-specific code can be found in the `addon` directory and can be [loaded directly from there](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked) in developer mode.
 
-### Rules
+## Rules
 
 The library's functionality is implemented as a set of rules that define how to manage consent on
 a subset of sites. These generally correspond to specific Consent Management Providers (CMPs)
@@ -39,11 +39,11 @@ There are currently three ways of implementing a CMP:
  3. As a [Consent-O-Matic](https://github.com/cavi-au/Consent-O-Matic) rule. The `ConsentOMaticCMP` class implements
  compability with rules written for the Consent-O-Matic extension.
 
-### Intermediate rules
+## Intermediate rules
 
 Sometimes the opt-out process requires actions that span across multiple pages or iframes. In this case it is necessary to define stages (each corresponding to a separate page context) as separate rulesets. Each one, except the very last stage, must be marked as intermediate using the `intermediate: true` flag. If the `intermediate` flag is not set correctly, autoconsent may report a successful opt-out even if it is not yet finished.
 
-### Rule Syntax Reference
+## Rule Syntax Reference
 
 An autoconsent CMP rule can be written as either:
  * a JSON file adhering to the `AutoConsentCMPRule` type.
@@ -65,7 +65,7 @@ Both JSON and class implementations have the following components:
 
 `detectCMP`, `detectPopup`, `optOut`, `optIn`, and `test` are defined as a set of checks or actions on the page. In the JSON syntax this is a list of `AutoConsentRuleStep` objects. For `detect` checks, we return true for the check if all steps return true. For opt in and out, we execute actions in order, exiting if one fails. The following checks/actions are supported:
 
-#### Element exists
+### Element exists
 
 ```json
 {
@@ -74,7 +74,7 @@ Both JSON and class implementations have the following components:
 ```
 Returns true if `document.querySelector(selector)` returns elements.
 
-#### Element visible
+### Element visible
 
 ```json
 {
@@ -84,7 +84,7 @@ Returns true if `document.querySelector(selector)` returns elements.
 ```
 Returns true if elements returned from `document.querySelectorAll(selector)` are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
 
-#### Wait for element
+### Wait for element
 
 ```json
 {
@@ -94,7 +94,7 @@ Returns true if elements returned from `document.querySelectorAll(selector)` are
 ```
 Waits until `selector` exists in the page. After `timeout` ms the step fails.
 
-#### Click an element
+### Click an element
 ```json
 {
   "click": "selector",
@@ -103,7 +103,7 @@ Waits until `selector` exists in the page. After `timeout` ms the step fails.
 ```
 Click on an element returned by `selector`. If `all` is `true`, all matching elements are clicked. If `all` is `false`, only the first returned value is clicked.
 
-#### Wait for then click
+### Wait for then click
 ```json
 {
   "waitForThenClick": "selector",
@@ -113,7 +113,7 @@ Click on an element returned by `selector`. If `all` is `true`, all matching ele
 ```
 Combines `waitFor` and `click`.
 
-#### Unconditional wait
+### Unconditional wait
 ```json
 {
   "wait": 1000,
@@ -121,7 +121,7 @@ Combines `waitFor` and `click`.
 ```
 Wait for the specified number of milliseconds.
 
-#### Hide
+### Hide
 ```json
 {
   "hide": ["selector", ...],
@@ -130,7 +130,7 @@ Wait for the specified number of milliseconds.
 ```
 Hide the elements matched by the selectors. `method` defines how elements are hidden: "display" sets `display: none`, "opacity" sets `opacity: 0`. Method is "display" by default.
 
-#### Eval
+### Eval
 
 ```json
 {
@@ -140,10 +140,14 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 Evaluates `code` in the context of the page. The rule is considered successful if it *evaluates to a truthy value*.
 Eval rules are not 100% reliable because they can be blocked by a CSP policy on the page. Therefore, they should only be used as a last resort when none of the other rules are sufficient.
 
-#### Optional actions
+### Optional actions
 
 Any rule can include the `"optional": true` to ignore failure.
 
-### License
+## API
+
+See [this document](/api.md) for more details on internal APIs.
+
+## License
 
 MPLv2.
