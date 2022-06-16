@@ -59,6 +59,17 @@ export function waitForElement(selector: string, timeout = 10000): Promise<boole
   );
 }
 
+export function waitForVisible(selector: string, timeout = 10000, check: VisibilityCheck = 'any'): Promise<boolean> {
+  const interval = 200;
+  const times = Math.ceil((timeout) / interval);
+  // enableLogs && console.log("[waitForVisible]", ruleStep.waitFor);
+  return waitFor(
+    () => elementVisible(selector, check),
+    times,
+    interval
+  );
+}
+
 export async function waitForThenClick(selector: string, timeout = 10000, all = false): Promise<boolean> {
   // enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
   await waitForElement(selector, timeout);

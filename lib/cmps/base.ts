@@ -3,7 +3,7 @@
 import { AutoCMP } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep } from "../rules";
 import { enableLogs } from "../config";
-import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick } from "../rule-executors";
+import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -70,6 +70,9 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   }
   if (rule.waitFor) {
     results.push(waitForElement(rule.waitFor, rule.timeout));
+  }
+  if (rule.waitForVisible) {
+    results.push(waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
   }
   if (rule.click) {
     results.push(click(rule.click, rule.all));

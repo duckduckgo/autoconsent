@@ -16,6 +16,7 @@ export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   Partial<ElementVisibleRule> &
   Partial<EvalRule> &
   Partial<WaitForRule> &
+  Partial<WaitForVisibleRule> &
   Partial<ClickRule> &
   Partial<WaitForThenClickRule> &
   Partial<WaitRule> &
@@ -40,6 +41,12 @@ export type EvalRule = {
 export type WaitForRule = {
   waitFor: string;
   timeout?: number;
+};
+
+export type WaitForVisibleRule = {
+  waitForVisible: string;
+  timeout?: number;
+  check?: VisibilityCheck;
 };
 
 export type ClickRule = {
