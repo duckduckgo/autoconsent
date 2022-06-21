@@ -30,7 +30,12 @@ export const evalState: EvalState = {
 }
 
 export function requestEval(code: string): Promise<boolean> {
-  const id = crypto.randomUUID();
+  let id;
+  if (crypto && typeof crypto.randomUUID !== 'undefined') {
+    id = crypto.randomUUID();
+  } else {
+    id = Math.random().toString();
+  }
   evalState.sendContentMessage({
     type: 'eval',
     id,
