@@ -36,6 +36,7 @@ export type FoundMessage = {
 
 export type OptOutResultMessage = {
   type: "optOutResult";
+  cmp: string;
   result: boolean;
   scheduleSelfTest: boolean;
   url: string;
@@ -43,6 +44,7 @@ export type OptOutResultMessage = {
 
 export type OptInResultMessage = {
   type: "optInResult";
+  cmp: string;
   result: boolean;
   scheduleSelfTest: boolean;
   url: string;
@@ -50,6 +52,7 @@ export type OptInResultMessage = {
 
 export type SelfTestResultMessage = {
   type: "selfTestResult";
+  cmp: string;
   result: boolean;
   url: string;
 };

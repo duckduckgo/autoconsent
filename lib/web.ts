@@ -185,6 +185,7 @@ export default class AutoConsent {
 
     this.sendContentMessage({
       type: 'optOutResult',
+      cmp: this.foundCmp ? this.foundCmp.name : 'none',
       result: optOutResult,
       scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       url: location.href,
@@ -217,6 +218,7 @@ export default class AutoConsent {
 
     this.sendContentMessage({
       type: 'optInResult',
+      cmp: this.foundCmp ? this.foundCmp.name : 'none',
       result: optInResult,
       scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
       url: location.href,
@@ -245,6 +247,7 @@ export default class AutoConsent {
 
     this.sendContentMessage({
       type: 'selfTestResult',
+      cmp: this.foundCmp ? this.foundCmp.name : 'none',
       result: selfTestResult,
       url: location.href,
     });
