@@ -26,6 +26,7 @@ export default class AutoConsent {
     } else {
       const initMsg: InitMessage = {
         type: "init",
+        url: window.location.href,
       };
       sendContentMessage(initMsg);
     }
@@ -104,6 +105,7 @@ export default class AutoConsent {
       this.sendContentMessage({
         type: 'popupFound',
         cmp: cmp.name,
+        url: location.href,
       }); // notify the browser
 
       if (this.config.autoAction === 'optOut') {
@@ -185,12 +187,14 @@ export default class AutoConsent {
       type: 'optOutResult',
       result: optOutResult,
       scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+      url: location.href,
     });
 
     if (optOutResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
         cmp: this.foundCmp.name,
+        url: location.href,
       });
     }
 
@@ -215,12 +219,14 @@ export default class AutoConsent {
       type: 'optInResult',
       result: optInResult,
       scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+      url: location.href,
     });
 
     if (optInResult && !this.foundCmp.isIntermediate) {
       this.sendContentMessage({
         type: 'autoconsentDone',
         cmp: this.foundCmp.name,
+        url: location.href,
       });
     }
 
@@ -240,6 +246,7 @@ export default class AutoConsent {
     this.sendContentMessage({
       type: 'selfTestResult',
       result: selfTestResult,
+      url: location.href,
     });
     return selfTestResult;
   }

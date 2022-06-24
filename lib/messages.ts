@@ -19,6 +19,7 @@ export type ContentScriptMessage =
 
 export type InitMessage = {
   type: "init";
+  url: string;
 };
 
 export type EvalMessage = {
@@ -30,28 +31,33 @@ export type EvalMessage = {
 export type FoundMessage = {
   type: "popupFound";
   cmp: string;
+  url: string;
 }
 
 export type OptOutResultMessage = {
   type: "optOutResult";
   result: boolean;
   scheduleSelfTest: boolean;
+  url: string;
 };
 
 export type OptInResultMessage = {
   type: "optInResult";
   result: boolean;
   scheduleSelfTest: boolean;
+  url: string;
 };
 
 export type SelfTestResultMessage = {
   type: "selfTestResult";
   result: boolean;
+  url: string;
 };
 
 export type DoneMessage = {
   type: "autoconsentDone";
   cmp: string;
+  url: string;
 }
 
 export type ErrorMessage = {
