@@ -137,9 +137,9 @@ export default class AutoConsent {
       try {
         const result = await cmp.detectCmp();
         if (result) {
+          enableLogs && console.log(`Found CMP: ${cmp.name}`);
           allFoundCmps.push(cmp);
           if (!foundCmp) {
-            enableLogs && console.log(`Found CMP: ${cmp.name}`);
             foundCmp = cmp;
           }
         }
