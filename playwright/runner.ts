@@ -113,6 +113,8 @@ export function generateTest(
     }
     await waitFor(() => isMessageReceived({ type: "autoconsentDone" }), 50, 500);
     expect(isMessageReceived({ type: "autoconsentDone" })).toBe(true);
+
+    expect(isMessageReceived({ type: "autoconsentError" })).toBe(false);
   });
 }
 
