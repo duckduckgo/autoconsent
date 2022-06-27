@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
 import { AutoCMP } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep } from "../rules";
+import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from "../rules";
 import { enableLogs } from "../config";
 import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
 
@@ -13,6 +13,11 @@ export async function success(action: Promise<boolean>): Promise<boolean> {
   return result
 }
 
+const defaultRunContext: RunContext = {
+  main: true,
+  frame: false,
+  url: "",
+}
 
 export default class AutoConsentCMPBase implements AutoCMP {
 
@@ -129,6 +134,25 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
+    const runCtx: RunContext = {
+      ...defaultRunContext,
+      ...(this.config.runContext || {}),
+    }
+
+    const isTop = window.top === window;
+
+    if (isTop && !runCtx.main) {
+      return false;
+    }
+
+    if (!isTop && !runCtx.frame) {
+      return false;
+    }
+
+    if (runCtx.url && !window.location.href.startsWith(runCtx.url)) {
+      return false;
+    }
+
     if (this.config.detectCmp) {
       return this._runRulesParallel(this.config.detectCmp);
     }

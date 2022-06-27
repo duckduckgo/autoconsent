@@ -17,7 +17,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists("div[id^='sp_message_container_']");
+    return window.top === window && elementExists("div[id^='sp_message_container_']");
   }
 
   async detectPopup() {

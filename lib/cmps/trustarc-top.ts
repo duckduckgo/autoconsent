@@ -32,6 +32,9 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
+    if (window.top !== window) {
+      return false;
+    }
     const result = elementExists(`${cookieSettingsButton},${bannerContainer}`);
     if (result) {
       // additionally detect the opt-out button

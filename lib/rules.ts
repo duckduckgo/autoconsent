@@ -1,6 +1,7 @@
 export type AutoConsentCMPRule = {
   name: string
   prehideSelectors?: string[]
+  runContext?: RunContext,
   intermediate?: boolean
   detectCmp: AutoConsentRuleStep[]
   detectPopup: AutoConsentRuleStep[]
@@ -8,6 +9,12 @@ export type AutoConsentCMPRule = {
   optIn: AutoConsentRuleStep[]
   openCmp?: AutoConsentRuleStep[]
   test?: AutoConsentRuleStep[]
+}
+
+export type RunContext = {
+  main?: boolean,
+  frame?: boolean,
+  url?: string,
 }
 
 export type AutoConsentRuleStep = { optional?: boolean } & Partial<

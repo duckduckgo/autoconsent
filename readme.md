@@ -43,6 +43,10 @@ There are currently three ways of implementing a CMP:
 
 Sometimes the opt-out process requires actions that span across multiple pages or iframes. In this case it is necessary to define stages (each corresponding to a separate page context) as separate rulesets. Each one, except the very last stage, must be marked as intermediate using the `intermediate: true` flag. If the `intermediate` flag is not set correctly, autoconsent may report a successful opt-out even if it is not yet finished.
 
+## Context filters
+
+By default, rules will be executed in all top-level documents. Some rules are designed for specific contexts (e.g. only nested iframes, or only specific URLs). This can be configured in `runContext` field (see the syntax reference below).
+
 ## Rule Syntax Reference
 
 An autoconsent CMP rule can be written as either:
@@ -60,6 +64,10 @@ Both JSON and class implementations have the following components:
  * `optIn` - a list of actions for an 'opt-in' from the popup screen.
  * (optional) `prehideSelectors` - a list of CSS selectors to "pre-hide" early before detecting a CMP. This helps against flickering. Pre-hiding is done using CSS `opacity` and `z-index`, so be it should be used with care to prevent conflicts with the opt-out process.
  * (optional) `intermediate` - a boolean flag indicating that the ruleset is part of a multi-stage process, see the [Intermediate rules](#intermediate-rules) section. This is `false` by default.
+ * (optional) `runContext` - an object describing when this rule should be tried:
+   * `main` - boolean, set to `true` if the rule should be executed in top-level documents (default: `true`)
+   * `frame` - boolean, set to `true` if the rule should be executed in nested frames (default: `false`)
+   * `url` - string, specifies a string prefix that should match the page URL (default: empty)
  * (optional) `test` - a list of actions to verify a successful opt-out. This is currently only used in Playwright tests.
 
 

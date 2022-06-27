@@ -20,6 +20,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
+    if (window.top === window) {
+      // this rule is only for nested frames
+      return false;
+    }
     const url = new URL(location.href);
     if (url.searchParams.has('message_id') && url.hostname === 'ccpa-notice.sp-prod.net') {
       this.ccpaMode = true;
