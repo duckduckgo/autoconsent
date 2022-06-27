@@ -104,14 +104,14 @@ export function generateTest(
     expect(isMessageReceived({ type: "popupFound", cmp: expectedCmp })).toBe(true);
 
     if (options.testOptOut) {
-      await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 500);
+      await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 300);
       expect(isMessageReceived({ type: "optOutResult", result: true })).toBe(true);
     }
     if (options.testSelfTest && selfTestFrame) {
-      await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 500);
+      await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 300);
       expect(isMessageReceived({ type: "selfTestResult", result: true })).toBe(true);
     }
-    await waitFor(() => isMessageReceived({ type: "autoconsentDone" }), 50, 500);
+    await waitFor(() => isMessageReceived({ type: "autoconsentDone" }), 10, 500);
     expect(isMessageReceived({ type: "autoconsentDone" })).toBe(true);
 
     expect(isMessageReceived({ type: "autoconsentError" })).toBe(false);
