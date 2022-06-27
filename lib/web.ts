@@ -50,7 +50,11 @@ export default class AutoConsent {
 
     // start detection
     if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', () => this.start());
+      const onReady = () => {
+        window.removeEventListener('DOMContentLoaded', onReady);
+        this.start();
+      }
+      window.addEventListener('DOMContentLoaded', onReady);
     } else {
       this.start();
     }
