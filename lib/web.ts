@@ -45,7 +45,16 @@ export default class AutoConsent {
     }
 
     if (config.enablePrehide) {
-      this.prehideElements(); // prehide as early as possible to prevent flickering
+      if (document.documentElement) {
+        this.prehideElements(); // prehide as early as possible to prevent flickering
+      } else {
+        // we're injected really early
+        const delayedPrehide = () => {
+          window.removeEventListener('DOMContentLoaded', delayedPrehide);
+          this.prehideElements();
+        }
+        window.addEventListener('DOMContentLoaded', delayedPrehide);
+      }
     }
 
     // start detection
