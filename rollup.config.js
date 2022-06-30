@@ -15,6 +15,17 @@ export default [{
     terser(),
   ]
 }, {
+  input: './playwright/standalone.ts',
+  output: [{
+    file: 'dist/autoconsent.standalone.js',
+    format: 'iife'
+  }],
+  plugins: [
+    json(),
+    typescript(),
+    terser(),
+  ]
+}, {
   input: './lib/web.ts',
   output: [{
     file: pkg.module,
