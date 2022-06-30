@@ -10,6 +10,7 @@ export type BackgroundMessage =
 export type ContentScriptMessage =
   InitMessage
   | EvalMessage
+  | DetectedMessage
   | FoundMessage
   | OptOutResultMessage
   | OptInResultMessage
@@ -27,6 +28,12 @@ export type EvalMessage = {
   id: string;
   code: string;
 };
+
+export type DetectedMessage = {
+  type: "cmpDetected";
+  cmp: string;
+  url: string;
+}
 
 export type FoundMessage = {
   type: "popupFound";

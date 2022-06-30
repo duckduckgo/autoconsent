@@ -93,9 +93,14 @@ export default class AutoConsent {
 
   async _start() {
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`)
-    const cmp = await this.findCmp(20);
+    const cmp = await this.findCmp(this.config.detectRetries);
     if (cmp) {
       enableLogs && console.log("detected CMP:", cmp.name, window.location.href);
+      this.sendContentMessage({
+        type: 'cmpDetected',
+        url: location.href,
+        cmp: cmp.name,
+      }); // notify the browser
       const isOpen = await this.waitForPopup(cmp);
       if (!isOpen) {
         enableLogs && console.log('no popup found');

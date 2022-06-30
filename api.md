@@ -11,6 +11,7 @@ const consent = new AutoConsent( // make sure not to leak anything to the page g
         autoAction: 'optOut',
         disabledCmps: [],
         enablePrehide: true,
+        detectRetries: 20,
     },
     { // optionally, pass JSON rules
         autoconsent: [ ... ],
@@ -48,10 +49,12 @@ sequenceDiagram
     Note right of CS: Parse rules and initialize autoconsent code
     Note right of CS: apply prehideSelectors
     Note right of CS: wait for DOMContentLoaded
+    Note right of CS: detect a CMP presence (not necessarily visible)
+
+    CS ->> BG: cmpDetected
     Note right of CS: detect a visible cookie popup
     CS ->> BG: popupFound
     deactivate CS
-
     activate BG
     Note left of BG: (if config.autoAction is not defined)<br/>decide when to trigger opt-in / opt-out
     Note right of CS: (if config.autoAction IS defined)<br/>proceed immediately
@@ -61,11 +64,15 @@ sequenceDiagram
     Note right of CS: execute opt-in / opt-out rules
     CS ->> BG: optOutResult / optInResult
 
-    CS ->> BG: (if not intermediate ruleset)<br/>autoconsentDone
+    opt if not intermediate ruleset
+        CS ->> BG: autoconsentDone
+    end
 
-    BG -->>+ CS: (optional) selfTest
-    Note right of CS: execute self-test rules
-    CS -->>- BG: selfTestResult
+    opt optional
+        BG -->>+ CS: (optional) selfTest
+        Note right of CS: execute self-test rules
+        CS -->>- BG: selfTestResult
+    end
 ```
 
 ### Asynchronous eval rules

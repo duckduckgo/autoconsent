@@ -29,4 +29,5 @@ export type Config = {
   autoAction: AutoAction;
   disabledCmps: string[];
   enablePrehide: boolean;
+  detectRetries: number;
 }

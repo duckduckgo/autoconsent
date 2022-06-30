@@ -16,6 +16,7 @@ if (!window.autoconsentReceiveMessage) {
     autoAction: 'optOut',
     disabledCmps: [],
     enablePrehide: true,
+    detectRetries: 20,
   }, <RuleBundle>rules);
 
   window.autoconsentReceiveMessage = (message: BackgroundMessage) => {

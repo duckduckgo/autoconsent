@@ -7,6 +7,7 @@ const autoconsentConfig: Config = {
   autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
   disabledCmps: [],
   enablePrehide: true,
+  detectRetries: 20,
 };
 
 async function loadRules(): Promise<RuleBundle> {
