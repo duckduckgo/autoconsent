@@ -56,9 +56,13 @@ sequenceDiagram
     CS ->> BG: popupFound
     deactivate CS
     activate BG
-    Note left of BG: (if config.autoAction is not defined)<br/>decide when to trigger opt-in / opt-out
-    Note right of CS: (if config.autoAction IS defined)<br/>proceed immediately
-    BG -->> CS: optIn / optOut
+    alt if config.autoAction is NOT defined
+        Note left of BG: decide when to trigger opt-in / opt-out
+        BG -->> CS: optIn / optOut
+    else if config.autoAction IS defined
+        Note right of CS: <br/>proceed immediately
+    end
+
     deactivate BG
 
     Note right of CS: execute opt-in / opt-out rules
