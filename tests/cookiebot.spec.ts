@@ -5,7 +5,9 @@ generateCMPTests('Cybotcookiebot', [
     'https://www.zwilling.com/de/',
     'https://forums.cpanel.net/',
     'https://tfl.gov.uk',
-    "https://www.ab-in-den-urlaub.de/",
+
+    // "https://www.ab-in-den-urlaub.de/", // often blocked by botwall
+
     "https://www.centralpoint.nl/",
     "https://www.vatera.hu/",
     "https://www.smartsheet.com/",
