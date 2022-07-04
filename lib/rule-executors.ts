@@ -25,7 +25,7 @@ export function click(selector: string, all = false): boolean {
 
 export function elementExists(selector: string): boolean {
   const exists = document.querySelector(selector) !== null;
-  // enableLogs && console.log("[exists?]", ruleStep.exists, exists);
+  // enableLogs && console.log("[exists?]", selector, exists);
   return exists;
 }
 
@@ -36,7 +36,7 @@ export function elementVisible(selector: string, check: VisibilityCheck): boolea
       // check for display: none
       results[i] = isElementVisible(e);
     });
-    // enableLogs && console.log("[visible?]", ruleStep.visible, elem, results);
+    // enableLogs && console.log("[visible?]", selector, check, elem, results);
     if (results.length === 0) {
       return false;
     } else if (check === "any") {

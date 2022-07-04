@@ -60,10 +60,13 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
   async optOut() {
     await waitFor(() => document.readyState === 'complete', 20, 100);
     await waitForElement(".mainContent[aria-hidden=false]", 5000);
-    await waitForElement(".prefPanel", 1000);
 
     if (click(".rejectAll")) {
       return true;
+    }
+
+    if (elementExists('.prefPanel')) {
+      await waitForElement('.prefPanel[style="visibility: visible;"]', 3000);
     }
 
     if (click("#catDetails0")) {
