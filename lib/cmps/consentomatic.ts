@@ -1,5 +1,7 @@
 import { AutoCMP } from "../types";
 import { executeAction, matches } from "../consentomatic";
+import { RunContext } from "../rules";
+import { defaultRunContext } from "./base";
 
 export type DetectorConfig = {
   presentMatcher: any;
@@ -18,6 +20,7 @@ export type ConsentOMaticConfig = {
 export class ConsentOMaticCMP implements AutoCMP {
   methods = new Map<string, any>();
   hasSelfTest: boolean;
+  runContext: RunContext = defaultRunContext;
 
   constructor(public name: string, public config: ConsentOMaticConfig) {
     config.methods.forEach(methodConfig => {
@@ -30,6 +33,10 @@ export class ConsentOMaticCMP implements AutoCMP {
 
   get isIntermediate(): boolean {
     return false; // TODO: support UTILITY rules
+  }
+
+  checkRunContext(): boolean {
+    return true;
   }
 
   async detectCmp(): Promise<boolean> {

@@ -1,11 +1,17 @@
 import { enableLogs } from "../config";
 import { click, elementExists, wait, waitForElement } from "../rule-executors";
+import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
 
   ccpaMode = false;
+
+  runContext: RunContext = {
+    main: false,
+    frame: true,
+  }
 
   constructor() {
     super("Sourcepoint-frame");
@@ -20,10 +26,6 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    if (window.top === window) {
-      // this rule is only for nested frames
-      return false;
-    }
     const url = new URL(location.href);
     if (url.searchParams.has('message_id') && url.hostname === 'ccpa-notice.sp-prod.net') {
       this.ccpaMode = true;

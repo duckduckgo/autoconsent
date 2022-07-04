@@ -1,4 +1,5 @@
 import { doEval, elementExists, elementVisible } from "../rule-executors";
+import { RunContext } from "../rules";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
@@ -6,6 +7,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
   constructor() {
     super("Sourcepoint-top");
+  }
+
+  runContext: RunContext = {
+    main: true,
+    frame: false,
   }
 
   get hasSelfTest(): boolean {
@@ -17,7 +23,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return window.top === window && elementExists("div[id^='sp_message_container_']");
+    return elementExists("div[id^='sp_message_container_']");
   }
 
   async detectPopup() {

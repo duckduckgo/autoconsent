@@ -13,7 +13,7 @@ export async function success(action: Promise<boolean>): Promise<boolean> {
   return result
 }
 
-const defaultRunContext: RunContext = {
+export const defaultRunContext: RunContext = {
   main: true,
   frame: false,
   url: "",
@@ -22,6 +22,7 @@ const defaultRunContext: RunContext = {
 export default class AutoConsentCMPBase implements AutoCMP {
 
   name: string
+  runContext: RunContext = defaultRunContext;
 
   constructor(name: string) {
     this.name = name;
@@ -33,6 +34,28 @@ export default class AutoConsentCMPBase implements AutoCMP {
 
   get isIntermediate(): boolean {
     throw new Error('Not Implemented');
+  }
+
+  checkRunContext(): boolean {
+    const runCtx: RunContext = {
+      ...defaultRunContext,
+      ...this.runContext,
+    }
+
+    const isTop = window.top === window;
+
+    if (isTop && !runCtx.main) {
+      return false;
+    }
+
+    if (!isTop && !runCtx.frame) {
+      return false;
+    }
+
+    if (runCtx.url && !window.location.href.startsWith(runCtx.url)) {
+      return false;
+    }
+    return true;
   }
 
   detectCmp(): Promise<boolean>  {
@@ -101,6 +124,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
   constructor(public config: AutoConsentCMPRule) {
     super(config.name);
+    this.runContext = config.runContext || defaultRunContext;
   }
 
   get hasSelfTest(): boolean {
@@ -134,25 +158,6 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    const runCtx: RunContext = {
-      ...defaultRunContext,
-      ...(this.config.runContext || {}),
-    }
-
-    const isTop = window.top === window;
-
-    if (isTop && !runCtx.main) {
-      return false;
-    }
-
-    if (!isTop && !runCtx.frame) {
-      return false;
-    }
-
-    if (runCtx.url && !window.location.href.startsWith(runCtx.url)) {
-      return false;
-    }
-
     if (this.config.detectCmp) {
       return this._runRulesParallel(this.config.detectCmp);
     }

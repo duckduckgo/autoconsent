@@ -1,6 +1,6 @@
 import { ContentScriptMessage } from "./messages";
 import { ConsentOMaticConfig } from "./cmps/consentomatic";
-import { AutoConsentCMPRule } from "./rules";
+import { AutoConsentCMPRule, RunContext } from "./rules";
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -8,7 +8,9 @@ export interface AutoCMP {
   name: string
   hasSelfTest: boolean
   isIntermediate: boolean;
-  prehideSelectors?: string[]
+  prehideSelectors?: string[];
+  runContext: RunContext;
+  checkRunContext(): boolean;
   detectCmp(): Promise<boolean>
   detectPopup(): Promise<boolean>
   optOut(): Promise<boolean>

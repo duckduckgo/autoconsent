@@ -1,10 +1,17 @@
 import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class TrustArcFrame extends AutoConsentCMPBase {
   constructor() {
     super("TrustArc-frame");
+  }
+
+  runContext: RunContext = {
+    main: false,
+    frame: true,
+    url: "https://consent-pref.trustarc.com/?",
   }
 
   get hasSelfTest(): boolean {
@@ -16,7 +23,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return window.top !== window && location.href.startsWith("https://consent-pref.trustarc.com/?");
+    return true;
   }
 
   async detectPopup() {

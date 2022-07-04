@@ -149,6 +149,9 @@ export default class AutoConsent {
 
     for (const cmp of this.rules) {
       try {
+        if (!cmp.checkRunContext()) {
+          continue;
+        }
         const result = await cmp.detectCmp();
         if (result) {
           enableLogs && console.log(`Found CMP: ${cmp.name}`);

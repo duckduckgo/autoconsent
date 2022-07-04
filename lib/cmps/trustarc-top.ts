@@ -1,5 +1,6 @@
 import { click, elementExists, elementVisible } from "../rule-executors";
-import { getStyleElement, hideElements, isElementVisible } from "../utils";
+import { RunContext } from "../rules";
+import { getStyleElement, hideElements } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 const cookieSettingsButton = "#truste-show-consent";
@@ -15,6 +16,10 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     ".trustarc-banner-container",
     `.truste_popframe,.truste_overlay,.truste_box_overlay,${bannerContainer}`,
   ]
+  runContext: RunContext = {
+    main: true,
+    frame: false,
+  }
 
   _shortcutButton: HTMLElement;
 
@@ -32,9 +37,6 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    if (window.top !== window) {
-      return false;
-    }
     const result = elementExists(`${cookieSettingsButton},${bannerContainer}`);
     if (result) {
       // additionally detect the opt-out button
