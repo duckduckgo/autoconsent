@@ -241,7 +241,7 @@ export default class AutoConsent {
       type: 'optInResult',
       cmp: this.foundCmp ? this.foundCmp.name : 'none',
       result: optInResult,
-      scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+      scheduleSelfTest: false, // self-tests are only for opt-out at the moment
       url: location.href,
     });
 
