@@ -13,7 +13,7 @@ declare global {
 if (!window.autoconsentReceiveMessage) {
   const consent = new AutoConsent(window.autoconsentSendMessage, {
     enabled: true,
-    autoAction: 'optOut',
+    autoAction: 'optIn',
     disabledCmps: [],
     enablePrehide: true,
     detectRetries: 20,

@@ -104,8 +104,8 @@ export function generateTest(
     expect(isMessageReceived({ type: "popupFound", cmp: expectedCmp })).toBe(true);
 
     if (options.testOptOut) {
-      await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 300);
-      expect(isMessageReceived({ type: "optOutResult", result: true })).toBe(true);
+      await waitFor(() => isMessageReceived({ type: "optInResult", result: true }), 50, 300);
+      expect(isMessageReceived({ type: "optInResult", result: true })).toBe(true);
     }
     if (options.testSelfTest && selfTestFrame) {
       await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 300);
