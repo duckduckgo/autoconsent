@@ -40,6 +40,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async optIn() {
+    await waitForElement(".sp_choice_type_11,.sp_choice_type_ACCEPT_ALL", 2000);
     if (click(".sp_choice_type_11")) {
       return true;
     }
