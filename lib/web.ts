@@ -24,6 +24,9 @@ export default class AutoConsent {
     if (config) {
       this.initialize(config, declarativeRules);
     } else {
+      if (declarativeRules) {
+        this.parseRules(declarativeRules);
+      }
       const initMsg: InitMessage = {
         type: "init",
         url: window.location.href,
@@ -39,7 +42,9 @@ export default class AutoConsent {
       return;
     }
 
-    this.parseRules(declarativeRules);
+    if (declarativeRules) {
+      this.parseRules(declarativeRules);
+    }
     if (config.disabledCmps?.length > 0) {
       this.disableCMPs(config.disabledCmps);
     }
