@@ -6,5 +6,6 @@ generateCMPTests('com_oil', [
 ], {
     skipRegions: ['GB'],
     testOptOut: false,
+    testOptIn: false,
     testSelfTest: false,
 });

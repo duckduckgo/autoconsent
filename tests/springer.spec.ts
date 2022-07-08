@@ -7,5 +7,6 @@ generateCMPTests('com_springer', [
 ], {
     skipRegions: ['GB'],
     testOptOut: false,
+    testOptIn: false,
     testSelfTest: false,
 });

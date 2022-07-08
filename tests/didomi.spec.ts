@@ -8,6 +8,7 @@ generateCMPTests('com_didomi.io', [
     "https://www.boursorama.com/",
 ], {
     testOptOut: false,
+    testOptIn: false,
     testSelfTest: false,
     skipRegions: ["US"],
 });
