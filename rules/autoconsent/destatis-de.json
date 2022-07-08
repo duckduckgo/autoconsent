@@ -1,7 +1,6 @@
 {
   "name": "destatis.de",
   "prehideSelectors": ["div[aria-labelledby=cookiebannerhead]"],
-  "isHidingRule": true,
   "detectCmp": [{ "exists": ".cookiebannerbox" }],
   "detectPopup": [{ "visible": ".cookiebannerbox" }],
   "optOut": [{ "hide": [".cookiebannerbox"] }]

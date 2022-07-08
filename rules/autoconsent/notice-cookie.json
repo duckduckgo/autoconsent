@@ -1,7 +1,6 @@
 {
   "name": "notice-cookie",
   "prehideSelectors": [".button--notice"],
-  "isHidingRule": true,
   "detectCmp": [{ "exists": ".notice--cookie" }],
   "detectPopup": [{ "visible": ".notice--cookie" }],
   "optIn": [{ "click": ".button--notice" }],

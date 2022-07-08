@@ -1,21 +1,9 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
-import { AutoCMP, TabActor } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep } from "../rules";
+import { AutoCMP } from "../types";
+import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from "../rules";
 import { enableLogs } from "../config";
-
-export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
-  let result = await predicate();
-  if (!result && maxTimes > 0) {
-    return new Promise((resolve) => {
-      setTimeout(async () => {
-        resolve(waitFor(predicate, maxTimes - 1, interval));
-      }, interval);
-    });
-  }
-  return Promise.resolve(result);
-}
-
+import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -25,124 +13,142 @@ export async function success(action: Promise<boolean>): Promise<boolean> {
   return result
 }
 
+export const defaultRunContext: RunContext = {
+  main: true,
+  frame: false,
+  url: "",
+}
 
-export default class AutoConsentBase implements AutoCMP {
+export default class AutoConsentCMPBase implements AutoCMP {
 
   name: string
-  hasSelfTest = true
+  runContext: RunContext = defaultRunContext;
 
   constructor(name: string) {
     this.name = name;
   }
 
-  detectCmp(tab: TabActor): Promise<boolean>  {
+  get hasSelfTest(): boolean {
     throw new Error('Not Implemented');
   }
 
-  async detectPopup(tab: TabActor) {
+  get isIntermediate(): boolean {
+    throw new Error('Not Implemented');
+  }
+
+  checkRunContext(): boolean {
+    const runCtx: RunContext = {
+      ...defaultRunContext,
+      ...this.runContext,
+    }
+
+    const isTop = window.top === window;
+
+    if (isTop && !runCtx.main) {
+      return false;
+    }
+
+    if (!isTop && !runCtx.frame) {
+      return false;
+    }
+
+    if (runCtx.url && !window.location.href.startsWith(runCtx.url)) {
+      return false;
+    }
+    return true;
+  }
+
+  detectCmp(): Promise<boolean>  {
+    throw new Error('Not Implemented');
+  }
+
+  async detectPopup() {
     return false;
   }
 
-  detectFrame(tab: TabActor, frame: { url: string }) {
-    return false;
-  }
-
-  optOut(tab: TabActor): Promise<boolean> {
+  optOut(): Promise<boolean> {
     throw new Error('Not Implemented');
   }
 
-  optIn(tab: TabActor): Promise<boolean> {
+  optIn(): Promise<boolean> {
     throw new Error('Not Implemented');
   }
 
-  openCmp(tab: TabActor): Promise<boolean> {
+  openCmp(): Promise<boolean> {
     throw new Error('Not Implemented');
   }
 
-  async test(tab: TabActor): Promise<boolean> {
+  async test(): Promise<boolean> {
     // try IAB by default
     return Promise.resolve(true);
   }
 }
 
-async function evaluateRule(rule: AutoConsentRuleStep, tab: TabActor) {
-  if (rule.frame && !tab.frame) {
-    await waitFor(() => Promise.resolve(!!tab.frame), 10, 500);
-  }
-  const frameId = rule.frame && tab.frame ? tab.frame.id : undefined;
+async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   const results = [];
   if (rule.exists) {
-    results.push(tab.elementExists(rule.exists, frameId));
+    results.push(elementExists(rule.exists));
   }
   if (rule.visible) {
-    results.push(tab.elementsAreVisible(rule.visible, rule.check, frameId));
+    results.push(elementVisible(rule.visible, rule.check));
   }
   if (rule.eval) {
-    results.push(new Promise(async (resolve) => {
-      // catch eval error silently
-      try {
-        resolve(await tab.eval(rule.eval!, frameId));
-      } catch (e) {
-        resolve(false);
-      }
-    }));
+    const res = doEval(rule.eval)
+    results.push(res);
   }
   if (rule.waitFor) {
-    results.push(tab.waitForElement(rule.waitFor, rule.timeout || 10000, frameId));
+    results.push(waitForElement(rule.waitFor, rule.timeout));
+  }
+  if (rule.waitForVisible) {
+    results.push(waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
   }
   if (rule.click) {
-    if (rule.all === true) {
-      results.push(tab.clickElements(rule.click, frameId));
-    } else {
-      results.push(tab.clickElement(rule.click, frameId));
-    }
+    results.push(click(rule.click, rule.all));
   }
   if (rule.waitForThenClick) {
-    results.push(tab.waitForElement(rule.waitForThenClick, rule.timeout || 10000, frameId)
-      .then(() => tab.clickElement(rule.waitForThenClick!, frameId)));
+    results.push(waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
   }
   if (rule.wait) {
-    results.push(tab.wait(rule.wait));
-  }
-  if (rule.goto) {
-    results.push(tab.goto(rule.goto));
+    results.push(wait(rule.wait));
   }
   if (rule.hide) {
-    results.push(tab.hideElements(rule.hide, frameId));
+    results.push(hide(rule.hide, rule.method));
   }
-  if (rule.undoHide) {
-    results.push(tab.undoHideElements(frameId));
-  }
-  if (rule.waitForFrame) {
-    results.push(waitFor(() => !!tab.frame, 40, 500))
-  }
+
   // boolean and of results
-  return (await Promise.all(results)).reduce((a, b) => a && b, true);
+  const all = await Promise.all(results);
+  return all.reduce((a, b) => a && b, true);
 }
 
-export class AutoConsent extends AutoConsentBase {
+export class AutoConsentCMP extends AutoConsentCMPBase {
 
   constructor(public config: AutoConsentCMPRule) {
     super(config.name);
+    this.runContext = config.runContext || defaultRunContext;
+  }
+
+  get hasSelfTest(): boolean {
+    return !!this.config.test;
+  }
+
+  get isIntermediate(): boolean {
+    return !!this.config.intermediate;
   }
 
   get prehideSelectors(): string[] {
     return this.config.prehideSelectors;
   }
 
-  get isHidingRule(): boolean {
-    return this.config.isHidingRule;
-  }
-
-  async _runRulesParallel(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
-    const detections = await Promise.all(rules.map(rule => evaluateRule(rule, tab)));
+  async _runRulesParallel(rules: AutoConsentRuleStep[]): Promise<boolean> {
+    const results = rules.map(rule => evaluateRuleStep(rule));
+    const detections = await Promise.all(results);
     return detections.every(r => !!r);
   }
 
-  async _runRulesSequentially(tab: TabActor, rules: AutoConsentRuleStep[]): Promise<boolean> {
+  async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
     for (const rule of rules) {
-      enableLogs && console.log('Running rule...', rule, tab.id);
-      const result = await evaluateRule(rule, tab);
+      enableLogs && console.log('Running rule...', rule);
+      const result = await evaluateRuleStep(rule);
       enableLogs && console.log('...rule result', result);
       if (!result && !rule.optional) {
         return false;
@@ -151,53 +157,47 @@ export class AutoConsent extends AutoConsentBase {
     return true;
   }
 
-  async detectCmp(tab: TabActor) {
+  async detectCmp() {
     if (this.config.detectCmp) {
-      return this._runRulesParallel(tab, this.config.detectCmp);
+      return this._runRulesParallel(this.config.detectCmp);
     }
     return false;
   }
 
-  async detectPopup(tab: TabActor) {
+  async detectPopup() {
     if (this.config.detectPopup) {
-      return this._runRulesParallel(tab, this.config.detectPopup);
+      return this._runRulesParallel(this.config.detectPopup);
     }
     return false;
   }
 
-  detectFrame(tab: TabActor, frame: { url: string }) {
-    if (this.config.frame) {
-      return frame.url.startsWith(this.config.frame);
-    }
-    return false;
-  }
-
-  async optOut(tab: TabActor) {
+  async optOut() {
     if (this.config.optOut) {
       enableLogs && console.log('Initiated optOut()', this.config.optOut);
-      return this._runRulesSequentially(tab, this.config.optOut);
+      return this._runRulesSequentially(this.config.optOut);
     }
     return false;
   }
 
-  async optIn(tab: TabActor) {
+  async optIn() {
     if (this.config.optIn) {
-      return this._runRulesSequentially(tab, this.config.optIn);
+      enableLogs && console.log('Initiated optIn()', this.config.optIn);
+      return this._runRulesSequentially(this.config.optIn);
     }
     return false;
   }
 
-  async openCmp(tab: TabActor) {
+  async openCmp() {
     if (this.config.openCmp) {
-      return this._runRulesSequentially(tab, this.config.openCmp);
+      return this._runRulesSequentially(this.config.openCmp);
     }
     return false;
   }
 
-  async test(tab: TabActor) {
-    if (this.config.test) {
-      return this._runRulesSequentially(tab, this.config.test);
+  async test() {
+    if (this.hasSelfTest) {
+      return this._runRulesSequentially(this.config.test);
     }
-    return super.test(tab);
+    return super.test();
   }
 }

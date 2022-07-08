@@ -1,32 +1,43 @@
-import AutoConsentBase from "./base";
-import { TabActor } from "../types";
+import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { getStyleElement, hideElements } from "../utils";
+import AutoConsentCMPBase from "./base";
 
-// Note: JS API is also available:
-// https://help.consentmanager.net/books/cmp/page/javascript-api
-export default class Evidon extends AutoConsentBase {
+export default class Evidon extends AutoConsentCMPBase {
   constructor() {
     super("Evidon");
   }
 
-  detectCmp(tab: TabActor) {
-    return tab.elementExists("#_evidon_banner");
+  get hasSelfTest(): boolean {
+    return false;
   }
 
-  detectPopup(tab: TabActor) {
-    return tab.elementsAreVisible("#_evidon_banner");
+  get isIntermediate(): boolean {
+    return false;
   }
 
-  async optOut(tab: TabActor) {
-    if (await tab.elementExists("#_evidon-decline-button")) {
-      return tab.clickElement("#_evidon-decline-button");
+  async detectCmp() {
+    return elementExists("#_evidon_banner");
+  }
+
+  async detectPopup() {
+    return elementVisible("#_evidon_banner", 'any');
+  }
+
+  async optOut() {
+    if (click("#_evidon-decline-button")) {
+      return true;
     }
-    tab.hideElements(["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"])
-    await tab.clickElement("#_evidon-option-button");
-    await tab.waitForElement("#evidon-prefdiag-overlay", 5000);
-    return tab.clickElement("#evidon-prefdiag-decline");
+
+    hideElements(getStyleElement(), ["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"]);
+    click("#_evidon-option-button");
+
+    await waitForElement("#evidon-prefdiag-overlay", 5000);
+
+    click("#evidon-prefdiag-decline");
+    return true;
   }
 
-  async optIn(tab: TabActor) {
-    return tab.clickElement("#_evidon-accept-button");
+  async optIn() {
+    return click("#_evidon-accept-button");
   }
 }

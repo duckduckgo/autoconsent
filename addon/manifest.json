@@ -1,37 +1,33 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Autoconsent",
   "version": "2022.5.18",
   "background": {
-    "scripts": [
-      "background.bundle.js"
-    ]
+    "service_worker": "background.bundle.js"
   },
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "*://*/*"
       ],
       "js": [
         "content.bundle.js"
       ],
+      "run_at": "document_start",
       "all_frames": true
     }
   ],
+  "host_permissions": [
+    "*://*/*"
+  ],
   "permissions": [
-    "<all_urls>",
     "cookies",
     "tabs",
+    "scripting",
     "storage",
     "webNavigation"
   ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "autoconsent@sammacbeth.eu",
-      "update_url": "https://sammacbeth.eu/addons/update.json"
-    }
-  },
-  "page_action": {
+  "action": {
     "browser_style": true,
     "default_title": "Autoconsent"
   }

@@ -1,77 +1,34 @@
-/* global browser */
-import { ConsentOMaticConfig } from "../lib/consentomatic";
-import { AutoConsentCMPRule } from "../lib/rules";
-import AutoConsent from "../lib/web";
+import { enableLogs } from "../lib/config";
+import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
+import { Config, RuleBundle } from "../lib/types";
 
-const config = {
-  autoOptOut: true,
-}
+const autoconsentConfig: Config = {
+  enabled: true,
+  autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
+  disabledCmps: [],
+  enablePrehide: true,
+  detectRetries: 20,
+};
 
-const consent = new AutoConsent(<any>browser, browser.tabs.sendMessage);
-const tabGuards = new Set();
-
-type RuleBundle = {
-  autoconsent: AutoConsentCMPRule[];
-  consentomatic: { [name: string]: ConsentOMaticConfig };
-}
-
-async function loadRules() {
+async function loadRules(): Promise<RuleBundle> {
   const res = await fetch("./rules.json");
-  const rules: RuleBundle = await res.json();
-  Object.keys(rules.consentomatic).forEach((name) => {
-    consent.addConsentomaticCMP(name, rules.consentomatic[name]);
+  return await res.json();
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+  loadRules().then(rules => {
+    chrome.storage.local.set({
+      rules: rules,
+    });
   });
-  rules.autoconsent.forEach((rule) => {
-    consent.addCMP(rule);
-  });
-}
-
-function log(...msg: any[]) {
-  console.log("[autoconsent]", ...msg);
-}
-
-loadRules();
-
-async function checkShouldShowPageAction({
-  tabId,
-  frameId,
-}: {
-  tabId: number;
-  frameId: number;
-}) {
-  if (!tabGuards.has(tabId) && frameId === 0) {
-    log("checking tab", tabId);
-    try {
-      tabGuards.add(tabId);
-      const cmp = await consent.checkTab(tabId);
-      await cmp.checked;
-      if (cmp.getCMPName() !== null) {
-        log("detected CMP:", cmp.getCMPName());
-        if (await cmp.isPopupOpen()) {
-          log("popup is open:", cmp.getCMPName());
-          showOptOutStatus(tabId, "available");
-          browser.pageAction.show(tabId);
-          return true;
-        } else if (cmp.hasTest() && (await cmp.testOptOutWorked())) {
-          showOptOutStatus(tabId, "success");
-        }
-        return false;
-      } else {
-        log("no CMP found");
-        return false;
-      }
-    } finally {
-      tabGuards.delete(tabId);
-    }
-  }
-}
+});
 
 function showOptOutStatus(
   tabId: number,
-  status: "success" | "complete" | "working" | "available"
+  status: "success" | "complete" | "working" | "available" | "verified" | "idle"
 ) {
-  let title = "Click to opt out";
-  let icon = "icons/cookie.png";
+  let title = "";
+  let icon = "icons/cookie-idle.png";
   if (status === "success") {
     title = "Opt out successful!";
     icon = "icons/party.png";
@@ -81,75 +38,142 @@ function showOptOutStatus(
   } else if (status === "working") {
     title = "Processing...";
     icon = "icons/cog.png";
+  } else if (status === "verified") {
+    title = "Verified";
+    icon = "icons/verified.png";
+  } else if (status === "idle") {
+    title = "Idle";
+    icon = "icons/cookie-idle.png";
+  } else if (status === "available") {
+    title = "Click to opt out";
+    icon = "icons/cookie.png";
   }
-  browser.pageAction.setTitle({
+  enableLogs && console.log('Setting action state to', status);
+  chrome.action.setTitle({
     tabId,
     title,
   });
-  browser.pageAction.setIcon({
+  chrome.action.setIcon({
     tabId,
     path: icon,
   });
 }
 
-browser.webNavigation.onCommitted.addListener(
-  (details) => {
-    if (details.frameId === 0) {
-      consent.removeTab(details.tabId);
+chrome.runtime.onMessage.addListener(
+  async (msg: ContentScriptMessage, sender: any) => {
+    const tabId = sender.tab.id;
+    const frameId = sender.frameId;
+    if (enableLogs) {
+      console.groupCollapsed(`${msg.type} from ${sender.origin}`);
+      console.log(msg, sender);
+      console.groupEnd();
     }
-  },
-  {
-    url: [{ schemes: ["http", "https"] }],
+    const rules: RuleBundle = (await chrome.storage.local.get("rules")).rules;
+
+    switch (msg.type) {
+      case "init":
+        if (frameId === 0) {
+          showOptOutStatus(tabId, 'idle');
+        }
+        chrome.tabs.sendMessage(tabId, {
+          type: "initResp",
+          rules,
+          config: autoconsentConfig,
+        } as BackgroundMessage, {
+          frameId,
+        });
+        break;
+      case "eval":
+        chrome.scripting.executeScript({
+          target: {
+            tabId,
+            frameIds: [frameId],
+          },
+          world: "MAIN",
+          args: [msg.code],
+          func: (code) => {
+            try {
+              return window.eval(code);
+            } catch (e) {
+              // ignore CSP errors
+              return;
+            }
+          },
+        }).then(([result]) => {
+          if (enableLogs) {
+            console.groupCollapsed(`eval result for ${sender.origin}`);
+            console.log(msg.code, result.result);
+            console.groupEnd();
+          }
+          chrome.tabs.sendMessage(tabId, {
+            id: msg.id,
+            type: "evalResp",
+            result: result.result,
+          } as BackgroundMessage, {
+            frameId,
+          });
+        });
+        break;
+      case "popupFound":
+        showOptOutStatus(tabId, "available");
+        chrome.storage.local.set({
+          [`detected${tabId}`]: frameId,
+        });
+        break;
+      case "optOutResult":
+      case "optInResult":
+        if (msg.result) {
+          showOptOutStatus(tabId, "working");
+          if (msg.scheduleSelfTest) {
+            await chrome.storage.local.set({
+              [`selfTest${tabId}`]: frameId,
+            });
+          }
+        }
+        break;
+      case "selfTestResult":
+        if (msg.result) {
+          showOptOutStatus(tabId, "verified");
+        }
+        break;
+      case "autoconsentDone": {
+        showOptOutStatus(tabId, "success");
+        // sometimes self-test needs to be done in another frame
+        const selfTestKey = `selfTest${tabId}`;
+        const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
+
+        if (typeof selfTestFrameId === 'number') {
+          enableLogs && console.log(`Requesting self-test in ${selfTestFrameId}`);
+          chrome.storage.local.remove(selfTestKey);
+          chrome.tabs.sendMessage(tabId, {
+            type: "selfTest",
+          }, {
+            frameId: selfTestFrameId,
+          });
+        } else {
+          enableLogs && console.log(`No self-test scheduled`);
+        }
+        break;
+      }
+      case "autoconsentError":
+        console.error('Error:', msg.details);
+        break;
+    }
   }
 );
 
-browser.runtime.onMessage.addListener(({ type }: { type: string }, sender: any) => {
-  consent.onFrame({
-    tabId: sender.tab.id,
-    frameId: sender.frameId,
-    url: sender.url,
-  });
-  if (type === "frame" && sender.frameId === 0) {
-    checkShouldShowPageAction({
-      tabId: sender.tab.id,
-      frameId: sender.frameId,
-    }).then((isShown) => {
-      if (isShown && config.autoOptOut) {
-        runOptOut(sender.tab.id);
-      }
+chrome.action.onClicked.addListener(async (tab) => {
+  const tabId = tab.id;
+  const detectedKey = `detected${tabId}`;
+  const frameId = (await chrome.storage.local.get(detectedKey))?.[detectedKey];
+  if (typeof frameId === 'number') {
+    chrome.storage.local.remove(detectedKey);
+    enableLogs && console.log("action.onClicked", tabId, frameId);
+    showOptOutStatus(tabId, "working");
+    chrome.tabs.sendMessage(tabId, {
+      type: "optOut",
+    } as BackgroundMessage, {
+      frameId,
     });
   }
 });
-
-async function runOptOut(tabId: number) {
-  try {
-    tabGuards.add(tabId);
-    const cmp = consent.tabCmps.get(tabId);
-    log("running opt out", tabId, cmp.getCMPName());
-    await cmp.doOptOut();
-    if (cmp.hasTest()) {
-      log(
-        "test opt out success",
-        cmp.getCMPName(),
-        await cmp.testOptOutWorked()
-      );
-      showOptOutStatus(tabId, "success");
-    } else {
-      log("no test for CMP", cmp.getCMPName());
-      showOptOutStatus(tabId, "complete");
-    }
-  } finally {
-    tabGuards.delete(tabId);
-  }
-}
-
-browser.pageAction.onClicked.addListener(async (tab) => {
-  const tabId = tab.id;
-  runOptOut(tabId);
-});
-
-browser.tabs.onRemoved.addListener((tabId) => {
-  consent.tabCmps.delete(tabId);
-});
-
-(<any>window).autoconsent = consent;

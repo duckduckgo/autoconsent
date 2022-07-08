@@ -1,7 +1,7 @@
-import AutoConsentBase from './base';
-import { TabActor } from '../types';
+import { click, doEval, elementExists, wait, waitForElement } from '../rule-executors';
+import AutoConsentCMPBase from './base';
 
-export default class Cookiebot extends AutoConsentBase {
+export default class Cookiebot extends AutoConsentCMPBase {
 
   prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookieoverlay"]
 
@@ -9,79 +9,82 @@ export default class Cookiebot extends AutoConsentBase {
     super('Cybotcookiebot');
   }
 
-  async detectCmp(tab: TabActor) {
-    try {
-      return await tab.eval('typeof window.CookieConsent === "object" && typeof window.CookieConsent.name === "string"');
-    } catch (e) {
-      return false;
-    }
+  get hasSelfTest(): boolean {
+    return true;
   }
 
-  detectPopup(tab: TabActor) {
-    return tab.elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookiebanner');
+  get isIntermediate(): boolean {
+    return false;
   }
 
-  async optOut(tab: TabActor) {
-    if (await tab.elementExists('.cookie-alert-extended-detail-link')) {
-      await tab.clickElement('.cookie-alert-extended-detail-link');
-      await tab.waitForElement('.cookie-alert-configuration', 1000);
-      await tab.clickElements('.cookie-alert-configuration-input:checked');
-      return tab.clickElement('.cookie-alert-extended-button-secondary');
+  async detectCmp() {
+    return elementExists('#CybotCookiebotDialogBodyLevelButtonPreferences');
+  }
+
+  async detectPopup() {
+    return elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookiebanner');
+  }
+
+  async optOut() {
+    if (click('.cookie-alert-extended-detail-link')) {
+      await waitForElement('.cookie-alert-configuration', 2000);
+      click('.cookie-alert-configuration-input:checked', true);
+      click('.cookie-alert-extended-button-secondary');
+      return true;
     }
-    if (await tab.elementExists('#dtcookie-container')) {
-      return tab.clickElement('.h-dtcookie-decline');
+
+    if (elementExists('#dtcookie-container')) {
+      return click('.h-dtcookie-decline');
     }
-    if (await tab.elementExists('.cookiebot__button--settings')) {
-      await tab.clickElement('.cookiebot__button--settings');
+
+    if (click('.cookiebot__button--settings')) {
+      return true;
     }
-    if (await tab.elementsAreVisible('#CybotCookiebotDialogBodyButtonDecline', 'all')) {
-      return await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
+
+    if (click('#CybotCookiebotDialogBodyButtonDecline')) {
+      return true;
     }
-    if (await tab.elementExists('.cookiebanner__link--details')) {
-      await tab.clickElement('.cookiebanner__link--details')
-    }
-    await tab.clickElements('.CybotCookiebotDialogBodyLevelButton:checked:enabled,input[id*="CybotCookiebotDialogBodyLevelButton"]:checked:enabled');
-    if (await tab.elementExists('#CybotCookiebotDialogBodyButtonDecline')) {
-      await tab.clickElement('#CybotCookiebotDialogBodyButtonDecline');
-    }
-    if (await tab.elementExists('input[id^=CybotCookiebotDialogBodyLevelButton]:checked')) {
-      await tab.clickElements('input[id^=CybotCookiebotDialogBodyLevelButton]:checked')
-    }
-    if (await tab.elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
-      await tab.clickElement('#CybotCookiebotDialogBodyButtonAcceptSelected');
+
+    click('.cookiebanner__link--details');
+
+    click('.CybotCookiebotDialogBodyLevelButton:checked:enabled,input[id*="CybotCookiebotDialogBodyLevelButton"]:checked:enabled', true);
+
+    click('#CybotCookiebotDialogBodyButtonDecline');
+
+    click('input[id^=CybotCookiebotDialogBodyLevelButton]:checked', true);
+
+    if (elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
+      click('#CybotCookiebotDialogBodyButtonAcceptSelected');
     } else {
-      await tab.clickElements('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection');
+      click('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection', true);
     }
+
     // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
-    if (await tab.eval('CookieConsent.hasResponse !== true')) {
-      await tab.eval('Cookiebot.dialog.submitConsent() || true');
-      await tab.wait(500);
+    if (await doEval('window.CookieConsent.hasResponse !== true')) {
+      await doEval('window.Cookiebot.dialog.submitConsent()');
+      await wait(500);
     }
-    
+
     // site with 3rd confirm settings modal
-    if (await tab.elementExists('#cb-confirmedSettings')) {
-        await tab.eval('endCookieProcess()')
+    if (elementExists('#cb-confirmedSettings')) {
+      await doEval('endCookieProcess()');
     }
 
     return true;
   }
 
-  async optIn(tab: TabActor) {
-    if (await tab.elementExists('#dtcookie-container')) {
-      return tab.clickElement('.h-dtcookie-accept');
+  async optIn() {
+    if (elementExists('#dtcookie-container')) {
+      return click('.h-dtcookie-accept');
     }
-    await tab.clickElements('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled');
-    await tab.clickElement('#CybotCookiebotDialogBodyLevelButtonAccept');
-    await tab.clickElement('#CybotCookiebotDialogBodyButtonAccept');
+
+    click('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled', true);
+    click('#CybotCookiebotDialogBodyLevelButtonAccept');
+    click('#CybotCookiebotDialogBodyButtonAccept');
     return true;
   }
 
-  async openCmp(tab: TabActor) {
-    await tab.eval('CookieConsent.renew() || true');
-    return tab.waitForElement('#CybotCookiebotDialog', 10000);
-  }
-
-  async test(tab: TabActor) {
-    return tab.eval('CookieConsent.declined === true');
+  async test() {
+    return doEval('window.CookieConsent.declined === true');
   }
 }

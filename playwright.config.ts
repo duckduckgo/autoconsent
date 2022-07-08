@@ -25,6 +25,13 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Firefox'],
         proxy,
       },
+    },
+    {
+      name: 'chrome',
+      use: {
+        ...devices['Desktop Chrome'],
+        proxy,
+      },
     }
   ],
 };

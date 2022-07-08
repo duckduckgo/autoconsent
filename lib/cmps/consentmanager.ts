@@ -1,39 +1,51 @@
-import AutoConsentBase from "./base";
-import { TabActor } from "../types";
+import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import AutoConsentCMPBase from "./base";
 
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
-export default class ConsentManager extends AutoConsentBase {
+export default class ConsentManager extends AutoConsentCMPBase {
 
   prehideSelectors = ["#cmpbox,#cmpbox2"]
+
+  get hasSelfTest(): boolean {
+    return false;
+  }
+
+  get isIntermediate(): boolean {
+    return false;
+  }
 
   constructor() {
     super("consentmanager.net");
   }
 
-  detectCmp(tab: TabActor) {
-    return tab.elementExists("#cmpbox");
+  async detectCmp() {
+    return elementExists("#cmpbox");
   }
 
-  detectPopup(tab: TabActor) {
-    return tab.elementsAreVisible("#cmpbox .cmpmore", "any");
+  async detectPopup() {
+    return elementVisible("#cmpbox .cmpmore", 'any');
   }
 
-  async optOut(tab: TabActor) {
-    if (await tab.elementExists(".cmpboxbtnno")) {
-      return tab.clickElement(".cmpboxbtnno");
+  async optOut() {
+    if (click(".cmpboxbtnno")) {
+      return true;
     }
-    if (await tab.elementExists(".cmpwelcomeprpsbtn")) {
-      await tab.clickElements(".cmpwelcomeprpsbtn > a[aria-checked=true]");
-      return await tab.clickElement(".cmpboxbtnsave");
+
+    if (elementExists(".cmpwelcomeprpsbtn")) {
+      click(".cmpwelcomeprpsbtn > a[aria-checked=true]", true);
+      click(".cmpboxbtnsave");
+      return true;
     }
-    await tab.clickElement(".cmpboxbtncustom");
-    await tab.waitForElement(".cmptblbox", 2000);
-    await tab.clickElements(".cmptdchoice > a[aria-checked=true]");
-    return tab.clickElement(".cmpboxbtnyescustomchoices");
+
+    click(".cmpboxbtncustom");
+    await waitForElement(".cmptblbox", 2000);
+    click(".cmptdchoice > a[aria-checked=true]", true);
+    click(".cmpboxbtnyescustomchoices");
+    return true;
   }
 
-  async optIn(tab: TabActor) {
-    return tab.clickElement(".cmpboxbtnyes");
+  async optIn() {
+    return click(".cmpboxbtnyes");
   }
 }

@@ -1,4 +1,4 @@
-import generateCMPTests from "./runner";
+import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('marksandspencer.com', [
     'https://www.marksandspencer.com/',

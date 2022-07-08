@@ -1,14 +1,29 @@
+import json from '@rollup/plugin-json';
 import typescript from '@rollup/plugin-typescript';
+import { terser } from "rollup-plugin-terser";
 import pkg from './package.json';
 
 export default [{
-  input: './lib/node.ts',
+  input: './playwright/content.ts',
   output: [{
-    file: 'dist/autoconsent.puppet.js',
-    format: 'cjs'
+    file: 'dist/autoconsent.playwright.js',
+    format: 'iife'
   }],
   plugins: [
+    json(),
     typescript(),
+    terser(),
+  ]
+}, {
+  input: './playwright/standalone.ts',
+  output: [{
+    file: 'dist/autoconsent.standalone.js',
+    format: 'iife'
+  }],
+  plugins: [
+    json(),
+    typescript(),
+    terser(),
   ]
 }, {
   input: './lib/web.ts',
@@ -22,7 +37,8 @@ export default [{
   }],
   plugins: [
     typescript(),
-  ]
+    terser(),
+  ],
 }, {
   input: './addon/background.ts',
   output: [{
@@ -31,6 +47,7 @@ export default [{
   }],
   plugins: [
     typescript(),
+    terser(),
   ]
 }, {
   input: './addon/content.ts',
@@ -40,15 +57,6 @@ export default [{
   }],
   plugins: [
     typescript(),
-  ]
-},  {
-  input: './addon/test.ts',
-  output: [{
-    file: './addon/test.bundle.js',
-    format: 'iife',
-    external: ['chai', 'mocha']
-  }],
-  plugins: [
-    typescript(),
-  ]
+    terser(),
+  ],
 }];
