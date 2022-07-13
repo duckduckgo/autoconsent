@@ -1,9 +1,11 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Autoconsent",
   "version": "2022.7.13",
   "background": {
-    "service_worker": "background.bundle.js"
+    "scripts": [
+      "background.bundle.js"
+    ]
   },
   "content_scripts": [
     {
@@ -15,19 +17,15 @@
       ],
       "run_at": "document_start",
       "all_frames": true
-    }
-  ],
-  "host_permissions": [
-    "*://*/*"
+  }
   ],
   "permissions": [
-    "cookies",
+    "*://*/*",
     "tabs",
-    "scripting",
     "storage",
     "webNavigation"
   ],
-  "action": {
+  "page_action": {
     "browser_style": true,
     "default_title": "Autoconsent"
   }

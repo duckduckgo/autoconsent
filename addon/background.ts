@@ -2,6 +2,7 @@ import { enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 
+const manifestVersion = chrome.runtime.getManifest().manifest_version;
 const autoconsentConfig: Config = {
   enabled: true,
   autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
@@ -10,18 +11,79 @@ const autoconsentConfig: Config = {
   detectRetries: 20,
 };
 
-async function loadRules(): Promise<RuleBundle> {
-  const res = await fetch("./rules.json");
-  return await res.json();
+// Storage abstraction: MV2 keeps everything in memory, MV3 uses chrome.storage
+const storage: {[key: string]: any} = {};
+async function storageSet(obj: {[key: string]: any}): Promise<void> {
+  if (manifestVersion === 2) {
+    Object.assign(storage, obj);
+    return;
+  } 
+  return chrome.storage.local.set(obj);
 }
 
-chrome.runtime.onInstalled.addListener(() => {
-  loadRules().then(rules => {
-    chrome.storage.local.set({
-      rules: rules,
-    });
+async function storageGet(key: string): Promise<{[key: string]: any}> {
+  if (manifestVersion === 2) {
+    return storage;
+  }
+  return chrome.storage.local.get(key);
+}
+
+async function storageRemove(key: string): Promise<void> {
+  if (manifestVersion === 2) {
+    delete storage[key];
+    return;
+  }
+  return chrome.storage.local.remove(key);
+}
+
+async function loadRules() {
+  const res = await fetch("./rules.json");
+  storageSet({
+    rules: await res.json(),
   });
+}
+
+async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult[]> {
+  if (manifestVersion === 2) {
+    return new Promise((resolve) => {
+      chrome.tabs.executeScript(tabId, {
+        frameId,
+        code: `window.eval(JSON.parse('${JSON.stringify(code)}'))`
+      }, (result) => {
+        resolve([{
+          result,
+          frameId,
+        }]);
+      })
+    });
+  }
+  return chrome.scripting.executeScript({
+    target: {
+      tabId,
+      frameIds: [frameId],
+    },
+    world: "MAIN",
+    args: [code],
+    func: (code) => {
+      try {
+        return window.eval(code);
+      } catch (e) {
+        // ignore CSP errors
+        return;
+      }
+    },
+  })
+}
+
+chrome.runtime.onStartup.addListener(() => {
+  loadRules()
 });
+if (manifestVersion === 2) {
+  // always load rules on startup in MV2
+  loadRules()
+}
+
+(<any>window).debug = storage;
 
 function showOptOutStatus(
   tabId: number,
@@ -49,11 +111,15 @@ function showOptOutStatus(
     icon = "icons/cookie.png";
   }
   enableLogs && console.log('Setting action state to', status);
-  chrome.action.setTitle({
+  const action = chrome.action || chrome.pageAction;
+  if (chrome.pageAction) {
+    chrome.pageAction.show(tabId);
+  }
+  action.setTitle({
     tabId,
     title,
   });
-  chrome.action.setIcon({
+  action.setIcon({
     tabId,
     path: icon,
   });
@@ -64,11 +130,11 @@ chrome.runtime.onMessage.addListener(
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
     if (enableLogs) {
-      console.groupCollapsed(`${msg.type} from ${sender.origin}`);
+      console.groupCollapsed(`${msg.type} from ${sender.origin || new URL(sender.url).origin}}`);
       console.log(msg, sender);
       console.groupEnd();
     }
-    const rules: RuleBundle = (await chrome.storage.local.get("rules")).rules;
+    const rules: RuleBundle = (await storageGet("rules")).rules;
 
     switch (msg.type) {
       case "init":
@@ -84,22 +150,7 @@ chrome.runtime.onMessage.addListener(
         });
         break;
       case "eval":
-        chrome.scripting.executeScript({
-          target: {
-            tabId,
-            frameIds: [frameId],
-          },
-          world: "MAIN",
-          args: [msg.code],
-          func: (code) => {
-            try {
-              return window.eval(code);
-            } catch (e) {
-              // ignore CSP errors
-              return;
-            }
-          },
-        }).then(([result]) => {
+        evalInTab(tabId, frameId, msg.code).then(([result]) => {
           if (enableLogs) {
             console.groupCollapsed(`eval result for ${sender.origin}`);
             console.log(msg.code, result.result);
@@ -116,7 +167,7 @@ chrome.runtime.onMessage.addListener(
         break;
       case "popupFound":
         showOptOutStatus(tabId, "available");
-        chrome.storage.local.set({
+        storageSet({
           [`detected${tabId}`]: frameId,
         });
         break;
@@ -125,7 +176,7 @@ chrome.runtime.onMessage.addListener(
         if (msg.result) {
           showOptOutStatus(tabId, "working");
           if (msg.scheduleSelfTest) {
-            await chrome.storage.local.set({
+            await storageSet({
               [`selfTest${tabId}`]: frameId,
             });
           }
@@ -144,7 +195,7 @@ chrome.runtime.onMessage.addListener(
 
         if (typeof selfTestFrameId === 'number') {
           enableLogs && console.log(`Requesting self-test in ${selfTestFrameId}`);
-          chrome.storage.local.remove(selfTestKey);
+          storageRemove(selfTestKey);
           chrome.tabs.sendMessage(tabId, {
             type: "selfTest",
           }, {
@@ -162,10 +213,10 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-chrome.action.onClicked.addListener(async (tab) => {
+(chrome.action || chrome.pageAction).onClicked.addListener(async (tab) => {
   const tabId = tab.id;
   const detectedKey = `detected${tabId}`;
-  const frameId = (await chrome.storage.local.get(detectedKey))?.[detectedKey];
+  const frameId = (await storageGet(detectedKey))?.[detectedKey];
   if (typeof frameId === 'number') {
     chrome.storage.local.remove(detectedKey);
     enableLogs && console.log("action.onClicked", tabId, frameId);

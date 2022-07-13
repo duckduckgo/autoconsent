@@ -20,7 +20,9 @@
     "build-rules": "node rules/build.js && cp rules/rules.json addon/",
     "version": "node update_version.js && git add addon/manifest.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run bundle"
+    "prepublish": "npm run build-rules && npm run bundle",
+    "use-mv2": "cp addon/manifest.firefox.json addon/manifest.json",
+    "use-mv3": "git checkout -- addon/manifest.json"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
