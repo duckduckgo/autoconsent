@@ -52,6 +52,16 @@ export function isElementVisible(elem: HTMLElement): boolean {
   if (!elem) {
     return false;
   }
+
+  const bbox = elem.getBoundingClientRect();
+  if (bbox.top >= window.innerHeight ||
+    bbox.bottom <= 0 ||
+    bbox.left >= window.innerWidth ||
+    bbox.right <= 0
+  ) {
+    return false;
+  }
+
   if (elem.offsetParent !== null) {
     return true;
   } else {
