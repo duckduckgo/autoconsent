@@ -75,7 +75,7 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
   })
 }
 
-chrome.runtime.onStartup.addListener(() => {
+chrome.runtime.onInstalled.addListener(() => {
   loadRules()
 });
 if (manifestVersion === 2) {
