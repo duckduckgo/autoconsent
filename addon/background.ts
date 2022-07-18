@@ -83,8 +83,6 @@ if (manifestVersion === 2) {
   loadRules()
 }
 
-(<any>window).debug = storage;
-
 function showOptOutStatus(
   tabId: number,
   status: "success" | "complete" | "working" | "available" | "verified" | "idle"
