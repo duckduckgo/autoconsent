@@ -48,7 +48,7 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
     return new Promise((resolve) => {
       chrome.tabs.executeScript(tabId, {
         frameId,
-        code: `window.eval(JSON.parse('${JSON.stringify(code)}'))`
+        code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`
       }, (result) => {
         resolve([{
           result,
