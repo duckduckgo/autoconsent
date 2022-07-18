@@ -20,6 +20,16 @@ npm run bundle
 
 The extension-specific code can be found in the `addon` directory and can be [loaded directly from there](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked) in developer mode.
 
+### Running on Firefox
+
+The default the web extension is an MV3 extension. At the time of writing, this only works in Chromium-based browsers. If you'd like to run the extension in Firefox, you can switch to an MV2
+compatible build by running:
+```bash
+npm run use-mv3
+```
+
+This will replace the MV3 manifest.json with an MV2 one.
+
 ## Rules
 
 The library's functionality is implemented as a set of rules that define how to manage consent on
