@@ -5,8 +5,9 @@ test/lit-html/
 *.bundle.js
 *.min.css
 rules/rules.*
-addon/rules.json
+addon/**/rules.json
 addon/vendor/*
 lib/**/*.js
 addon/*.js
 .vscode/
+addon/firefox/icons

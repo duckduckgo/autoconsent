@@ -17,12 +17,10 @@
     "test:chrome": "playwright test --project chrome",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
-    "build-rules": "node rules/build.js && cp rules/rules.json addon/",
+    "build-rules": "node rules/build.js && cp rules/rules.json addon/mv3",
     "version": "node update_version.js && git add addon/manifest.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run bundle",
-    "use-mv2": "cp addon/manifest.firefox.json addon/manifest.json",
-    "use-mv3": "git checkout -- addon/manifest.json"
+    "prepublish": "npm run build-rules && npm run bundle"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
@@ -39,6 +37,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "mocha": "^10.0.0",
     "rollup": "^2.73.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4"
