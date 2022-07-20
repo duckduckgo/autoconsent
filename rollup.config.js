@@ -43,10 +43,10 @@ export default [{
 }, {
   input: './addon/background.ts',
   output: [{
-    file: './addon/mv3/background.bundle.js',
+    file: './dist/addon-mv3/background.bundle.js',
     format: 'iife',
   }, {
-    file: './addon/firefox/background.bundle.js',
+    file: './dist/addon-firefox/background.bundle.js',
     format: 'iife',
   }],
   plugins: [
@@ -54,20 +54,22 @@ export default [{
     terser(),
     copy({
       targets: [
-        { src: [
-          './addon/mv3/icons',
-          './addon/mv3/rules.json'
-        ], dest: './addon/firefox/' },
+        {
+          src: ['./addon/mv3/icons',  './rules/rules.json'],
+          dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
+        },
+        { src: './addon/mv3/manifest.json', dest: './dist/addon-mv3' },
+        { src: './addon/firefox/manifest.json', dest: './dist/addon-firefox' },
       ]
     })
   ]
 }, {
   input: './addon/content.ts',
   output: [{
-    file: './addon/mv3/content.bundle.js',
+    file: './dist/addon-mv3/content.bundle.js',
     format: 'iife',
   }, {
-    file: './addon/firefox/content.bundle.js',
+    file: './dist/addon-firefox/content.bundle.js',
     format: 'iife',
   }],
   plugins: [
