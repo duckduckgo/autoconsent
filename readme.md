@@ -18,17 +18,11 @@ npm run build-rules
 npm run bundle
 ```
 
-The extension-specific code can be found in the `addon` directory and can be [loaded directly from there](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked) in developer mode.
-
-### Running on Firefox
-
-The default the web extension is an MV3 extension. At the time of writing, this only works in Chromium-based browsers. If you'd like to run the extension in Firefox, you can switch to an MV2
-compatible build by running:
-```bash
-npm run use-mv3
-```
-
-This will replace the MV3 manifest.json with an MV2 one.
+The extension-specific code can be found in the `addon` directory. There are two versions of the
+addon, one for `mv3` version for Chromium-based browsers, and a `firefox` version for Firefox.
+You can load these in [Chrome](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked)
+in developer mode, and in [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
+as a tempoary addon.
 
 ## Rules
 
