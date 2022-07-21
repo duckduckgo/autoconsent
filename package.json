@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "",
   "main": "dist/autoconsent.cjs.js",
   "module": "dist/autoconsent.esm.js",
@@ -18,7 +18,7 @@
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.js",
-    "version": "node update_version.js && git add addon/manifest.json",
+    "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
     "prepublish": "npm run build-rules && npm run bundle"
   },
