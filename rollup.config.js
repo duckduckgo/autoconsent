@@ -47,8 +47,16 @@ export default [{
           src: ['./addon/icons',  './rules/rules.json'],
           dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
         },
-        { src: './addon/mv3/manifest.mv3.json', dest: './dist/addon-mv3/manifest.json' },
-        { src: './addon/firefox/manifest.firefox.json', dest: './dist/addon-firefox/manifest.json' },
+        {
+          src: './addon/manifest.mv3.json',
+          dest: './dist/addon-mv3',
+          rename: 'manifest.json',
+        },
+        {
+          src: './addon/manifest.firefox.json',
+          dest: './dist/addon-firefox',
+          rename: 'manifest.json',
+        },
       ]
     })
   ]
