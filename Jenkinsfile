@@ -19,7 +19,7 @@ def withEnvFile(envfile, Closure cb) {
 }
 
 pipeline {
-    agent { label 'crawler-worker' }
+    agent { label 'crawler-autoconsent' }
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
     }
