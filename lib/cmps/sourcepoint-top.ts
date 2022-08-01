@@ -35,6 +35,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    // unblock scrolling
+    const container = document.querySelector('.sp-message-open');
+    if (container) {
+      container.classList.remove('sp-message-open');
+    }
     return true;
   }
 
