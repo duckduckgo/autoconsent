@@ -8,6 +8,8 @@
         {"click": ".js-decline-cookie-policy"}
     ],
     "test": [
-        {"eval": "document.cookie.includes('_cookies_banner_dismissed=true') && !document.cookie.includes('_cookie_advertising_accepted')"}
+        {
+            "eval": "document.cookie.includes('_cookies_banner_dismissed=true') && !document.cookie.includes('_cookie_advertising_accepted')"
+        }
     ]
   }
