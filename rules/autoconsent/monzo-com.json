@@ -1,0 +1,9 @@
+{
+    "name": "monzo.com",
+    "detectCmp": [{ "exists": ".cookie-alert"}],
+    "detectPopup": [{ "visible": ".cookie-alert__content" }],
+    "optIn": [{ "click": ".js-accept-cookie-policy" }],
+    "optOut": [
+        {"click": ".js-decline-cookie-policy"}
+    ]
+  }
