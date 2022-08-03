@@ -6,7 +6,7 @@
             "exists": "div.cookie-alert[role=\"dialog\"]"
         },
         {
-            "exists": "a[href*=\"monzo\"]"
+            "exists": ".cookie-alert__text ~ .cookie-alert__button-group"
         }
 ],
     "detectPopup": [{ "visible": ".cookie-alert__content" }],
