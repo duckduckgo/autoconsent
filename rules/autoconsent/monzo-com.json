@@ -3,10 +3,7 @@
     "prehideSelectors": [".cookie-alert"],
     "detectCmp": [
         { 
-            "exists": ".cookie-alert"
-        },
-        {
-            "exists": "[role=\"dialog\"]"
+            "exists": "div.cookie-alert[role=\"dialog\"]"
         }
 ],
     "detectPopup": [{ "visible": ".cookie-alert__content" }],
