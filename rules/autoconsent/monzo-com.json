@@ -1,12 +1,12 @@
 {
     "name": "monzo.com",
-    "prehideSelectors": [".cookie-alert"],
+    "prehideSelectors": [".cookie-alert, cookie-alert__content"],
     "detectCmp": [
         { 
             "exists": "div.cookie-alert[role=\"dialog\"]"
         },
         {
-            "exists": ".cookie-alert__text ~ .cookie-alert__button-group"
+            "exists": "a[href*=\"monzo\"]"
         }
 ],
     "detectPopup": [{ "visible": ".cookie-alert__content" }],

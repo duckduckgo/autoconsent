@@ -1,1 +1,1 @@
-export const enableLogs = true; // change this to enable debug logs
+export const enableLogs = false; // change this to enable debug logs
