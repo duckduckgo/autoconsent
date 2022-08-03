@@ -4,6 +4,9 @@
     "detectCmp": [
         { 
             "exists": "div.cookie-alert[role=\"dialog\"]"
+        },
+        {
+            "exists": "a[href*=\"monzo\"]"
         }
 ],
     "detectPopup": [{ "visible": ".cookie-alert__content" }],
