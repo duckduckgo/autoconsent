@@ -42,7 +42,7 @@ export default class Axeptio extends AutoConsentCMPBase {
 
     // popup doesn't disappear immediately
     await waitFor(
-      () => elementVisible(".axeptio_widget", 'none'),
+      () => elementVisible(".axeptio_widget", '.Elements__Content-sc-xuz5b0-2', 'none'),
       10,
       500
     );
