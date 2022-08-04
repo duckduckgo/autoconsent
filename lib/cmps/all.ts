@@ -8,7 +8,9 @@ import ConsentManager from './consentmanager';
 import Evidon from './evidon';
 import { AutoConsentCMPRule } from '../rules';
 import Onetrust from './onetrust';
+import Axeptio from './axeptio';
 import { AutoCMP } from '../types';
+
 
 const rules: AutoCMP[] = [
   new TrustArcTop(),
@@ -19,6 +21,7 @@ const rules: AutoCMP[] = [
   new ConsentManager(),
   new Evidon(),
   new Onetrust(),
+  new Axeptio(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsentCMP {
