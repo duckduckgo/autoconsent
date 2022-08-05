@@ -5,7 +5,7 @@ import AutoConsentCMPBase from "./base";
 
 export default class Axeptio extends AutoConsentCMPBase {
 
-  prehideSelectors = [".Elements__Content-sc-xuz5b0-2, .axeptio_widget, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .hmRIgy"]
+  prehideSelectors = [".Elements__Content-sc-xuz5b0-2, .axeptio_widget, #axeptio_overlay, .ax-widget, .ax-widget-container, .Widget__WidgetStyle-sc-zhn46e-1, .hmRIgy"]
 
   constructor() {
     super("Axeptio");
@@ -20,46 +20,25 @@ export default class Axeptio extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists(".axeptio_widget");
+    return elementExists(".ax-widget-container");
   }
 
   async detectPopup() {
-    return elementVisible(".axeptio_widget", 'all');
+    return elementVisible(".ax-widget-container", 'all');
   }
 
   async optOut() {
 
-    return click("button#axeptio_btn_dismiss");
+    click("button#axeptio_btn_dismiss");
 
-
-    // if (elementExists("button#axeptio_btn_dismiss")) { // "show purposes" button inside a popup
-    //   click("button#axeptio_btn_dismiss");
-    // } else { // otherwise look for a generic "show settings" button
-    //   click("#axeptio_btn_configure");
-    // }
-
-    // Unfinished below
-    // await waitForElement('.withConsent__CheckboxConsent-sc-16f08h3-0', 2000);
-    // // await wait(1000);
-    // click("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked", true); // optional step
-
-    // await waitForElement(".save-preference-btn-handler,.js-consent-save", 2000);
-    // click(".save-preference-btn-handler,.js-consent-save");
-
-    // await waitForElement('.axeptio_widget', 2000);
-    // await wait(1000);
-    // click("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked", true); // optional step
-
-    // await waitForElement(".save-preference-btn-handler,.js-consent-save", 2000);
-    // click(".save-preference-btn-handler,.js-consent-save");
 
     // popup doesn't disappear immediately
-    // await waitFor(
-    //   () => elementVisible(".axeptio_widget", 'none'),
-    //   10,
-    //   500
-    // );
-    // return true;
+    await waitFor(
+      () => elementVisible(".ax-widget-container", 'none'),
+      10,
+      500
+    );
+    return true;
   }
 
   async optIn() {
