@@ -171,7 +171,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
   async detectPopup() {
     if (this.config.detectPopup) {
-      return this._runRulesParallel(this.config.detectPopup);
+      return this._runRulesSequentially(this.config.detectPopup);
     }
     return false;
   }
