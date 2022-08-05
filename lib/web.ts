@@ -245,6 +245,7 @@ export default class AutoConsent {
     } else {
       enableLogs && console.log(`CMP ${this.foundCmp.name}: opt in on ${window.location.href}`);
       optInResult = await this.foundCmp.optIn();
+      enableLogs && console.log(`${this.foundCmp.name}: opt in result ${optInResult}`);
     }
 
     if (this.config.enablePrehide) {

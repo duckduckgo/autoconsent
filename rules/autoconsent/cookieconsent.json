@@ -1,8 +1,12 @@
 {
     "name": "cookieconsent",
-    "prehideSelectors": ["[aria-label=\"cookieconsent\"][aria-describedby=\"cookieconsent:desc\"]"],
-    "detectCmp": [{ "exists": "[aria-label=\"cookieconsent\"][aria-describedby=\"cookieconsent:desc\"]" }],
-    "detectPopup": [{ "visible": "[aria-label=\"cookieconsent\"][aria-describedby=\"cookieconsent:desc\"]" }],
-    "optIn": [{ "click": ".cc-dismiss" }],
-    "optOut": [{ "hide": ["[aria-label=\"cookieconsent\"][aria-describedby=\"cookieconsent:desc\"]"] }]
+    "prehideSelectors": ["[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": "[aria-describedby=\"cookieconsent:desc\"]" }],
+    "detectPopup": [{ "visible": "[aria-describedby=\"cookieconsent:desc\"]" }],
+    "optIn": [
+        { "click": ".cc-accept-all", "optional": true },
+        { "click": ".cc-allow", "optional": true },
+        { "click": ".cc-dismiss", "optional": true }
+    ],
+    "optOut": [{ "hide": ["[aria-describedby=\"cookieconsent:desc\"]"] }]
 }
