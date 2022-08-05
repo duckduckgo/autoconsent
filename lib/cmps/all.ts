@@ -9,6 +9,7 @@ import Evidon from './evidon';
 import { AutoConsentCMPRule } from '../rules';
 import Onetrust from './onetrust';
 import { AutoCMP } from '../types';
+import Klaro from './klaro';
 
 const rules: AutoCMP[] = [
   new TrustArcTop(),
@@ -19,6 +20,7 @@ const rules: AutoCMP[] = [
   new ConsentManager(),
   new Evidon(),
   new Onetrust(),
+  new Klaro(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsentCMP {
