@@ -1,10 +1,11 @@
+
 import { click, doEval, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Axeptio extends AutoConsentCMPBase {
 
-  prehideSelectors = [".Elements__Content-sc-xuz5b0-2, .axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .hmRIgy, .axeptio_mount"]
+  prehideSelectors = [".Elements__Content-sc-xuz5b0-2, .axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .hmRIgy"]
 
   constructor() {
     super("Axeptio");
@@ -42,7 +43,7 @@ export default class Axeptio extends AutoConsentCMPBase {
 
     // popup doesn't disappear immediately
     await waitFor(
-      () => elementVisible(".axeptio_widget", '.Elements__Content-sc-xuz5b0-2', 'none'),
+      () => elementVisible(".axeptio_widget", 'none'),
       10,
       500
     );
