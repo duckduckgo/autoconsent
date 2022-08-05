@@ -1,0 +1,8 @@
+{
+  "name": "Termly",
+  "prehideSelectors": ["#termly-code-snippet-support"],
+  "detectCmp": [{ "exists": "#termly-code-snippet-support" }],
+  "detectPopup": [{ "visible": "#termly-code-snippet-support div" }],
+  "optIn": [],
+  "optOut": []
+}

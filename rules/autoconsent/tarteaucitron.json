@@ -1,0 +1,11 @@
+{
+  "name": "tarteaucitron.js",
+  "prehideSelectors": ["#tarteaucitronRoot"],
+  "detectCmp": [{ "exists": "#tarteaucitronRoot" }],
+  "detectPopup": [{
+    "visible": "#tarteaucitronRoot #tarteaucitronAlertSmall,#tarteaucitronRoot #tarteaucitronAlertBig",
+    "check": "any"
+  }],
+  "optIn": [],
+  "optOut": []
+}

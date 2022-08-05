@@ -1,0 +1,8 @@
+{
+  "name": "WP DSGVO Tools",
+  "prehideSelectors": [".sp-dsgvo"],
+  "detectCmp": [{ "exists": ".sp-dsgvo" }],
+  "detectPopup": [{ "visible": ".sp-dsgvo", "check": "any" }],
+  "optIn": [],
+  "optOut": []
+}

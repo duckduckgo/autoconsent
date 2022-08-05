@@ -1,0 +1,8 @@
+{
+  "name": "EZoic",
+  "prehideSelectors": ["#ez-cookie-dialog-wrapper"],
+  "detectCmp": [{ "exists": "#ez-cookie-dialog-wrapper" }],
+  "detectPopup": [{ "visible": "#ez-cookie-dialog-wrapper" }],
+  "optIn": [],
+  "optOut": []
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Cookie Information Banner",
+  "prehideSelectors": ["#cookie-information-template-wrapper"],
+  "detectCmp": [{ "exists": "#cookie-information-template-wrapper" }],
+  "detectPopup": [{ "visible": "#cookie-information-template-wrapper" }],
+  "optIn": [],
+  "optOut": []
+}

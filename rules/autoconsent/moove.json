@@ -1,0 +1,8 @@
+{
+  "name": "Moove",
+  "prehideSelectors": ["#moove_gdpr_cookie_info_bar"],
+  "detectCmp": [{ "exists": "#moove_gdpr_cookie_info_bar" }],
+  "detectPopup": [{ "visible": "#moove_gdpr_cookie_info_bar" }],
+  "optIn": [],
+  "optOut": []
+}
