@@ -1,6 +1,6 @@
 {
     "name": "axeptio",
-    "prehideSelectors": [".axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .axeptio_mount"],
+    "prehideSelectors": [".axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .axeptio_mount, #cookieconsent:desc"],
     "detectCmp": [
         { 
             "exists": ".axeptio_widget" 
@@ -24,6 +24,11 @@
             "hide": [
                 ".axeptio_widget"
             ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "document.cookie.includes('axeptio_authorized_vendors=%2C%2C')"
         }
     ]
   }
