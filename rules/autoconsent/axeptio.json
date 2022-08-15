@@ -1,22 +1,29 @@
 {
     "name": "axeptio",
-    "prehideSelectors": [".Elements__Content-sc-xuz5b0-2, .axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .hmRIgy, .axeptio_mount"],
+    "prehideSelectors": [".axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .axeptio_mount"],
     "detectCmp": [
         { 
             "exists": ".axeptio_widget" 
         }
     ],
     "detectPopup": [
-        { "visible": ".axeptio_widget" }
+        { 
+            "visible": ".axeptio_widget" 
+        }
     ],
     "optIn": [
         {
-        "click": "button#axeptio_btn_acceptAll"
+            "click": "button#axeptio_btn_acceptAll"
         }
     ],
     "optOut": [
         {
             "click": "button#axeptio_btn_dismiss" 
+        },
+        {
+            "hide": [
+                ".axeptio_widget"
+            ]
         }
     ]
   }
