@@ -3,6 +3,10 @@
   "prehideSelectors": ["#termly-code-snippet-support"],
   "detectCmp": [{ "exists": "#termly-code-snippet-support" }],
   "detectPopup": [{ "visible": "#termly-code-snippet-support div" }],
-  "optIn": [],
-  "optOut": []
+  "optIn": [
+    { "waitForThenClick": "[data-tid=\"banner-accept\"]" }
+  ],
+  "optOut": [
+    { "waitForThenClick": "[data-tid=\"banner-decline\"]" }
+  ]
 }
