@@ -106,6 +106,17 @@ Returns true if elements returned from `document.querySelectorAll(selector)` are
 ```
 Waits until `selector` exists in the page. After `timeout` ms the step fails.
 
+### Wait for visibility
+
+```json
+{
+  "waitForVisible": "selector",
+  "timeout": 1000,
+  "check": "any" | "all" | "none"
+}
+```
+Waits until element is visible in the page. After `timeout` ms the step fails.
+
 ### Click an element
 ```json
 {
@@ -151,6 +162,24 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 ```
 Evaluates `code` in the context of the page. The rule is considered successful if it *evaluates to a truthy value*.
 Eval rules are not 100% reliable because they can be blocked by a CSP policy on the page. Therefore, they should only be used as a last resort when none of the other rules are sufficient.
+
+### Conditionals
+
+```json
+{
+  "if": { "exists": "selector" },
+  "then": [
+    { "click": ".button1" },
+    { "click": ".button3" }
+  ],
+  "else": [
+    { "click": ".button2" }
+  ]
+}
+```
+
+Allows to do conditional branching in JSON rules. The `if` section can contain any single rule. Depending on the result of that rule, `then` or `else` sequences will be executed. `else` section is optional.
+The "if" rule is considered successful as long as all rules inside the chosen branch are successful. The other branch, as well as the result of the condition itself, do not affect the result of the whole rule.
 
 ### Optional actions
 
