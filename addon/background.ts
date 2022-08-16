@@ -69,6 +69,7 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
         return window.eval(code);
       } catch (e) {
         // ignore CSP errors
+        console.warn('eval error', code, e);
         return;
       }
     },
@@ -85,27 +86,28 @@ if (manifestVersion === 2) {
 
 function showOptOutStatus(
   tabId: number,
-  status: "success" | "complete" | "working" | "available" | "verified" | "idle"
+  status: "success" | "complete" | "working" | "available" | "verified" | "idle",
+  cmp = '',
 ) {
   let title = "";
   let icon = "icons/cookie-idle.png";
   if (status === "success") {
-    title = "Opt out successful!";
+    title = `Opt out successful! (${cmp})`;
     icon = "icons/party.png";
   } else if (status === "complete") {
-    title = "Opt out complete!";
+    title = `Opt out complete! (${cmp})`;
     icon = "icons/tick.png";
   } else if (status === "working") {
-    title = "Processing...";
+    title = `Processing... (${cmp})`;
     icon = "icons/cog.png";
   } else if (status === "verified") {
-    title = "Verified";
+    title = `Verified (${cmp})`;
     icon = "icons/verified.png";
   } else if (status === "idle") {
     title = "Idle";
     icon = "icons/cookie-idle.png";
   } else if (status === "available") {
-    title = "Click to opt out";
+    title = `Click to opt out (${cmp})`;
     icon = "icons/cookie.png";
   }
   enableLogs && console.log('Setting action state to', status);
@@ -164,7 +166,7 @@ chrome.runtime.onMessage.addListener(
         });
         break;
       case "popupFound":
-        showOptOutStatus(tabId, "available");
+        showOptOutStatus(tabId, "available", msg.cmp);
         storageSet({
           [`detected${tabId}`]: frameId,
         });
@@ -172,7 +174,7 @@ chrome.runtime.onMessage.addListener(
       case "optOutResult":
       case "optInResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "working");
+          showOptOutStatus(tabId, "working", msg.cmp);
           if (msg.scheduleSelfTest) {
             await storageSet({
               [`selfTest${tabId}`]: frameId,
@@ -182,11 +184,11 @@ chrome.runtime.onMessage.addListener(
         break;
       case "selfTestResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "verified");
+          showOptOutStatus(tabId, "verified", msg.cmp);
         }
         break;
       case "autoconsentDone": {
-        showOptOutStatus(tabId, "success");
+        showOptOutStatus(tabId, "success", msg.cmp);
         // sometimes self-test needs to be done in another frame
         const selfTestKey = `selfTest${tabId}`;
         const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
