@@ -10,7 +10,7 @@
     { "waitForThenClick": "#cookie-bar .cb-enable" }
   ],
   "optOut": [
-    { "click": "#cookie-bar .cb-disable" , "optional": true },
+    { "click": "#cookie-bar .cb-disable", "optional": true },
     { "hide": ["#cookie-bar"] }
   ],
   "test": [
