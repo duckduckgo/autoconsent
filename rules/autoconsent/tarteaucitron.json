@@ -6,6 +6,13 @@
     "visible": "#tarteaucitronRoot #tarteaucitronAlertSmall,#tarteaucitronRoot #tarteaucitronAlertBig",
     "check": "any"
   }],
-  "optIn": [],
-  "optOut": []
+  "optIn": [
+    { "eval": "tarteaucitron.userInterface.respondAll(true) || true" }
+  ],
+  "optOut": [
+    { "eval": "tarteaucitron.userInterface.respondAll(false) || true" }
+  ],
+  "test": [
+    { "eval": "document.cookie.match(/tarteaucitron=[^;]*/)[0].includes('false')", "comment": "sometimes there are required categories, so we check that at least something is false" }
+  ]
 }
