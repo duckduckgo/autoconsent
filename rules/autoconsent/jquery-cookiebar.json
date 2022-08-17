@@ -7,6 +7,19 @@
     "visible": ".cookie-bar .cookie-bar__message,.cookie-bar .cookie-bar__buttons",
     "check": "any"
   }],
-  "optIn": [],
-  "optOut": []
+  "optIn": [
+    { "click": ".cookie-bar .cookie-bar__btn" }
+  ],
+  "optOut": [
+    { "hide": [".cookie-bar"] }
+  ],
+  "test": [
+    {
+      "visible": ".cookie-bar .cookie-bar__message,.cookie-bar .cookie-bar__buttons",
+      "check": "none"
+    },
+    {
+      "eval": "!document.cookie.includes('cookies-state=accepted')"
+    }
+  ]
 }
