@@ -9,5 +9,5 @@ generateCMPTests('Moove', [
 generateCMPTests('Moove', [
     'https://www.yourcloudlibrary.com/',
 ], {
-    skipRegions: ['US']
+    skipRegions: ['US', 'GB']
 });

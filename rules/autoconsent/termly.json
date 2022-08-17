@@ -7,6 +7,25 @@
     { "waitForThenClick": "[data-tid=\"banner-accept\"]" }
   ],
   "optOut": [
-    { "waitForThenClick": "[data-tid=\"banner-decline\"]" }
+    {
+      "if": { "exists": "[data-tid=\"banner-decline\"]" },
+      "then": [
+        { "click": "[data-tid=\"banner-decline\"]" }
+      ],
+      "else": [
+        { "click": ".t-preference-button" },
+        { "wait": 500 },
+        {
+          "if": { "exists": ".t-declineAllButton" },
+          "then": [
+            { "click": ".t-declineAllButton" }
+          ],
+          "else": [
+            { "waitForThenClick": ".t-preference-modal input[type=checkbox][checked]:not([disabled])", "all": true },
+            { "waitForThenClick": ".t-saveButton" }
+          ]
+        }
+      ]
+    }
   ]
 }
