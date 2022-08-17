@@ -3,6 +3,17 @@
   "prehideSelectors": ["#ez-cookie-dialog-wrapper"],
   "detectCmp": [{ "exists": "#ez-cookie-dialog-wrapper" }],
   "detectPopup": [{ "visible": "#ez-cookie-dialog-wrapper" }],
-  "optIn": [],
-  "optOut": []
+  "optIn": [
+    { "click": "#ez-accept-all", "optional": true },
+    { "eval": "ezCMP.handleAcceptAllClick()", "optional": true }
+  ],
+  "optOut": [
+    { "click": "#ez-manage-settings" },
+    { "waitFor": "#ez-cookie-dialog input[type=checkbox]" },
+    { "click": "#ez-cookie-dialog input[type=checkbox][checked]", "all": true },
+    { "click": "#ez-save-settings" }
+  ],
+  "test": [
+    { "eval": "!!document.cookie.match(/ezCMPCookieConsent=[^;]+\\|2=0\\|3=0\\|4=0/)" }
+  ]
 }
