@@ -7,8 +7,8 @@
     "optOut": [
       { "click": "#configCmpButtonMain" },
       { "click": "#rejectAllConsent" },
-      { "waitFor": "[title=\"Siguiente\"]" },
-      { "click": "#purposesNavLegInt" },
+      { "waitFor": "a[title=\"Siguiente\"]" },
+      { "click": "a#purposesNavLegInt" },
       { "click": "#rejectAllLegInt" },
       { "waitFor": "[title=\"Guardar y cerrar\"]" },
       { "click": "#purposesLegIntSaveAndExit" }
