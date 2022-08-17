@@ -3,6 +3,13 @@
   "prehideSelectors": ["#catapult-cookie-bar"],
   "detectCmp": [{ "exists": "#catapult-cookie-bar" }],
   "detectPopup": [{ "exists": ".has-cookie-bar #catapult-cookie-bar" }],
-  "optIn": [],
-  "optOut": []
+  "optIn": [
+    { "click": "#catapultCookie" }
+  ],
+  "optOut": [
+    { "hide": ["#catapult-cookie-bar"] }
+  ],
+  "test": [
+    { "eval": "!document.cookie.includes('catAccCookies')" }
+  ]
 }
