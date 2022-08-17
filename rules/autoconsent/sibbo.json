@@ -1,0 +1,15 @@
+{
+    "name": "europafm.com",
+    "prehideSelectors": [".sibbo-layout"],
+    "detectCmp": [{ "exists": ".sibbo-layout" }],
+    "detectPopup": [{ "visible": ".sibbo-layout" }],
+    "optIn": [{ "click": "#acceptAllMain" }],
+    "optOut": [
+      { "click": "#configCmpButtonMain" },
+      { "click": "#rejectAllConsent" },
+      {"waitFor": "[title=\"siguiente\"]"},
+      {"click": "#purposesNavLegInt"},
+      {"click": "#rejectAllLegInt"},
+      {"click": "#purposesLegIntSaveAndExit"}
+    ]
+  }
