@@ -32,7 +32,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
       return true;
     }
     return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
-        && url.searchParams.has('message_id') && url.searchParams.has('requestUUID');
+        && (url.searchParams.has('message_id') || url.searchParams.has('requestUUID') || url.searchParams.has('consentUUID'));
   }
 
   async detectPopup() {
@@ -88,7 +88,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         await wait(1000);
         return click(rejectSelector1);
       } else if (path === 1) {
-        return click(rejectSelector2);
+        click(rejectSelector2);
       } else if (path === 2) {
         // TODO: check if this is still working
         await waitForElement('.pm-features', 10000);
@@ -99,6 +99,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
     } catch (e) {
       enableLogs && console.warn(e);
     }
-    return click('.sp_choice_type_SAVE_AND_EXIT');
+    click('.sp_choice_type_SAVE_AND_EXIT');
+    return true;
   }
 }
