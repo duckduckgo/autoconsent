@@ -1,5 +1,5 @@
 {
-  "name": "Complianz",
+  "name": "Complianz banner",
   "prehideSelectors": ["#cmplz-cookiebanner-container"],
   "detectCmp": [{ "exists": "#cmplz-cookiebanner-container .cmplz-cookiebanner" }],
   "detectPopup": [{ "visible": "#cmplz-cookiebanner-container .cmplz-cookiebanner", "check": "any" }],
