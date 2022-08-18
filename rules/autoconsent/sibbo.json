@@ -1,17 +1,17 @@
 {
     "name": "europafm.com",
-    "prehideSelectors": [".sibbo-layout"],
+    "prehideSelectors": [".sibbo-layout, .sibbo-panel"],
     "detectCmp": [{ "exists": "sibbo-cmp-layout" }],
     "detectPopup": [{ "visible": ".sibbo-layout" }],
     "optIn": [{ "click": "#acceptAllMain" }],
     "optOut": [
-      { "click": "#configCmpButtonMain" },
-      { "click": "#rejectAllConsent" },
-      { "waitFor": "a[title=\"Siguiente\"]" },
-      { "click": "a#purposesNavLegInt" },
-      { "click": "#rejectAllLegInt" },
-      { "waitFor": "[title=\"Guardar y cerrar\"]" },
+      { "click": ".sibbo-panel__aside__buttons [data-nav=\"purposes\"]" },
+      { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
+      { "wait": "500" },
+      { "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]" },
+      { "wait": "500" },
+      { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
+      { "wait": "500" },
       { "click": "#purposesLegIntSaveAndExit" }
-    ],
-    "intermediate": [true]
+    ]
   }
