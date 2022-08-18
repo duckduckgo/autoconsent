@@ -1,9 +1,9 @@
 {
     "name": "axeptio",
-    "prehideSelectors": [".axeptio_widget, .axeptio-widget--open, #axeptio_overlay, .ax-widget, .Widget__WidgetStyle-sc-zhn46e-1, .axeptio_mount, #cookieconsent:desc, .Elements__Content-sc-xuz5b0-2"],
+    "prehideSelectors": [".axeptio_widget, #axeptio_overlay, .ax-widget, .axeptio_mount, .axeptio_widget_wrapper"],
     "detectCmp": [
         { 
-            "exists": ".axeptio_widget" 
+            "exists": ".ax-website-overlay" 
         }
     ],
     "detectPopup": [
