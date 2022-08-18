@@ -12,5 +12,6 @@
       { "click": "#rejectAllLegInt" },
       { "waitFor": "[title=\"Guardar y cerrar\"]" },
       { "click": "#purposesLegIntSaveAndExit" }
-    ]
+    ],
+    "intermediate": [true]
   }
