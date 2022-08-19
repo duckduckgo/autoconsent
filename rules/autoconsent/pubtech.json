@@ -4,9 +4,9 @@
     "detectCmp": [{ "exists": "#pubtech-cmp" }],
     "detectPopup": [{ "visible": "#pubtech-cmp" }],
     "optIn": [{ "click": "#pubtech-cmp #pt-accept-all" }],
-    "optOut": [
-        {"wait": 500},
-        { "click": "#pubtech-cmp #pt-close:first-child" }
+    "optOut": [{ "click": "#pubtech-cmp #pt-close:first-child" }],
+    "test": [
+
     ]
   }
   
