@@ -10,10 +10,6 @@
       { "wait": "500" },
       { "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]" },
       { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
-      { "click": "#purposesLegIntSaveAndExit" },
-      {
-        "hide": [".sibbo-layout"],
-        "method": "display"
-      }
+      { "click": "#purposesLegIntSaveAndExit" }
     ]
   }
