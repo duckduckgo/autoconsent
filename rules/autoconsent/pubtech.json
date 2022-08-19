@@ -1,0 +1,9 @@
+{
+    "name": "pubtech",
+    "prehideSelectors": ["#pubtech-cmp"],
+    "detectCmp": [{ "exists": "#pubtech-cmp" }],
+    "detectPopup": [{ "visible": "#pubtech-cmp" }],
+    "optIn": [{ "click": "#pubtech-cmp #pt-accept-all" }],
+    "optOut": [{ "hide": ["#pubtech-cmp pt-close"] }]
+  }
+  
