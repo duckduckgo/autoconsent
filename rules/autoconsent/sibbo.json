@@ -1,15 +1,16 @@
 {
-    "name": "sibbo",
-    "prehideSelectors": [".sibbo-layout, .sibbo-panel"],
-    "detectCmp": [{ "exists": "sibbo-cmp-layout" }],
-    "detectPopup": [{ "visible": ".sibbo-layout" }],
-    "optIn": [{ "click": "#acceptAllMain" }],
-    "optOut": [
-      { "click": ".sibbo-panel__aside__buttons [data-nav=\"purposes\"]" },
-      { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
-      { "wait": "500" },
-      { "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]" },
-      { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
-      { "click": "#purposesLegIntSaveAndExit" }
-    ]
-  }
+  "name": "sibbo",
+  "prehideSelectors": [".sibbo-layout, .sibbo-panel"],
+  "detectCmp": [{ "exists": "sibbo-cmp-layout" }],
+  "detectPopup": [{ "visible": ".sibbo-layout" }],
+  "optIn": [{ "click": "#acceptAllMain" }],
+  "optOut": [
+    { "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]" },
+    { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
+    { "wait": "500" },
+    { "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]" },
+    { "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" },
+    { "wait": "500" },
+    { "click": "#purposesLegIntSaveAndExit" }
+  ]
+}
