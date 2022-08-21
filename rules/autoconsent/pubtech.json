@@ -1,12 +1,30 @@
 {
     "name": "pubtech",
     "prehideSelectors": ["#pubtech-cmp"],
-    "detectCmp": [{ "exists": "#pubtech-cmp" }],
-    "detectPopup": [{ "visible": "#pubtech-cmp" }],
-    "optIn": [{ "click": "#pubtech-cmp #pt-accept-all" }],
-    "optOut": [{ "click": "#pubtech-cmp #pt-close:first-child" }],
+    "detectCmp": [
+      { 
+        "exists": "#pubtech-cmp" 
+      }
+    ],
+    "detectPopup": [
+      { 
+        "visible": "#pubtech-cmp" 
+      }
+    ],
+    "optIn": [
+      { 
+        "click": "#pubtech-cmp #pt-accept-all" 
+      }
+    ],
+    "optOut": [
+      {
+        "click": "#pubtech-cmp #pt-close:first-child" 
+      }
+    ],
     "test": [
-
+      {
+        "eval": "document.cookie.includes('euconsent-v2=CPeDpcAPeDpcAFgADAENCaCgAAAAAAAAABCYAAAAAAAA.YAAAAAAAAAAA') && !document.cookie.includes('IDE')"
+      }
     ]
   }
   
