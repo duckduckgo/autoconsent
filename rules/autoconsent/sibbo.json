@@ -12,5 +12,10 @@
     { "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" },
     { "wait": "500" },
     { "click": "#purposesLegIntSaveAndExit" }
+  ],
+  "test": [
+    {
+      "eval": "!document.cookie.includes('_gpi') && !document.cookie.includes('_gads')"
+    }
   ]
 }
