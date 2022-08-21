@@ -16,18 +16,20 @@
     "optIn": 
     [
         {
+            "waitFor": ".axeptio-widget--open" 
+        },
+        {
             "click": "button#axeptio_btn_acceptAll"
         }
     ],
     "optOut": 
     [
+
         {
-            "click": "button#axeptio_btn_dismiss" 
+            "waitFor": ".axeptio-widget--open" 
         },
         {
-            "hide": [
-                ".axeptio_widget"
-            ]
+            "click": "button#axeptio_btn_dismiss"
         }
     ],
     "test": 
