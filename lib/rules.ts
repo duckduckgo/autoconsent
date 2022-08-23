@@ -83,7 +83,7 @@ export type HideRule = {
 };
 
 export type IfRule = {
-  if: AutoConsentRuleStep;
+  if: Partial<ElementExistsRule> & Partial<ElementVisibleRule>;
   then: AutoConsentRuleStep[];
   else?: AutoConsentRuleStep[];
 };

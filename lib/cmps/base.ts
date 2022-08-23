@@ -115,6 +115,10 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
     results.push(hide(rule.hide, rule.method));
   }
   if (rule.if) {
+    if (!rule.if.exists && !rule.if.visible) {
+      console.error('invalid conditional rule', rule.if);
+      return false;
+    }
     const condition = await evaluateRuleStep(rule.if);
     enableLogs && console.log('Condition is', condition);
     if (condition) {
