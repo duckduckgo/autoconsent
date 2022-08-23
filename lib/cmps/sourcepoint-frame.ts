@@ -57,16 +57,17 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
   async optOut() {
     if (!this.isManagerOpen()) {
-      const actionable = await waitForElement('button.sp_choice_type_12,button.sp_choice_type_13');
+      const actionable = await waitForElement('.sp_choice_type_12,.sp_choice_type_13');
       if (!actionable) {
         return false;
       }
-      if (!elementExists("button.sp_choice_type_12")) {
+      if (!elementExists(".sp_choice_type_12")) {
         // do not sell button
-        return click("button.sp_choice_type_13");
+        return click(".sp_choice_type_13");
       }
 
-      click("button.sp_choice_type_12");
+      click(".sp_choice_type_12");
+      // the page may navigate at this point but that's okay
       await waitFor(
         () => location.pathname === "/privacy-manager/index.html",
         200,
@@ -90,7 +91,6 @@ export default class SourcePoint extends AutoConsentCMPBase {
       } else if (path === 1) {
         click(rejectSelector2);
       } else if (path === 2) {
-        // TODO: check if this is still working
         await waitForElement('.pm-features', 10000);
         click('.checked > span', true);
 
