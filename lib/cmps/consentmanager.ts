@@ -1,14 +1,15 @@
-import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { click, doEval, elementExists, elementVisible, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
 export default class ConsentManager extends AutoConsentCMPBase {
 
-  prehideSelectors = ["#cmpbox,#cmpbox2"]
+  prehideSelectors = ["#cmpbox,#cmpbox2"];
+  apiAvailable = false;
 
   get hasSelfTest(): boolean {
-    return false;
+    return this.apiAvailable;
   }
 
   get isIntermediate(): boolean {
@@ -20,14 +21,26 @@ export default class ConsentManager extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists("#cmpbox");
+    this.apiAvailable = await doEval('__cmp && typeof __cmp("getCMPData") === "object"');
+    if (!this.apiAvailable) {
+      return elementExists("#cmpbox");
+    } else {
+      return true;
+    }
   }
 
   async detectPopup() {
+    if (this.apiAvailable) {
+      return await doEval("!__cmp('consentStatus').userChoiceExists");
+    }
     return elementVisible("#cmpbox .cmpmore", 'any');
   }
 
   async optOut() {
+    if (this.apiAvailable) {
+      return await doEval("__cmp('setConsent', 0)");
+    }
+
     if (click(".cmpboxbtnno")) {
       return true;
     }
@@ -46,6 +59,15 @@ export default class ConsentManager extends AutoConsentCMPBase {
   }
 
   async optIn() {
+    if (this.apiAvailable) {
+      return await doEval("__cmp('setConsent', 1)");
+    }
     return click(".cmpboxbtnyes");
+  }
+
+  async test() {
+    if (this.apiAvailable) {
+      return await doEval("__cmp('consentStatus').userChoiceExists");
+    }
   }
 }
