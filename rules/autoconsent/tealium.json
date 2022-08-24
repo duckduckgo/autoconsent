@@ -4,7 +4,6 @@
     "detectCmp": [{ "visible": "#__tealiumGDPRecModal" }, { "eval": "typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object'" }],
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
-      { "hide": ["#__tealiumGDPRecModal", "#__tealiumGDPRcpPrefs", "#consent-layer"] },
       { "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies", "timeout": 1000 },
       { "eval": "utag.gdpr.setConsentValue(false) || true" }
     ],
