@@ -5,4 +5,6 @@ generateCMPTests('click.io', [
     'https://pedsovet.su/',
     'https://golftoday.co.uk/',
     'https://www.golfshake.com/',
-], {});
+], {
+    skipRegions: ['US']
+});
