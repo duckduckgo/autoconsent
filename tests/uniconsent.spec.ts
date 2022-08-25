@@ -10,4 +10,3 @@ generateCMPTests('Uniconsent', [
 ], {
     skipRegions: ['US']
 });
-
