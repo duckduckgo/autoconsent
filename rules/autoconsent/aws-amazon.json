@@ -9,7 +9,12 @@
           "click": "button[data-id=awsccc-cb-btn-customize]"
       },
       {
-          "eval": "Array.from(document.querySelectorAll('input[aria-checked=true')).forEach(e => e.click()) || true"
+          "waitFor": "input[aria-checked]"
+      },
+      {
+          "click": "input[aria-checked=true]",
+          "all": true,
+          "optional": true
       },
       {
           "click": "button[data-id=awsccc-cs-btn-save]"

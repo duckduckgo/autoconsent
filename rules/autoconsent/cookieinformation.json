@@ -1,0 +1,14 @@
+{
+  "name": "Cookie Information Banner",
+  "prehideSelectors": ["#cookie-information-template-wrapper"],
+  "detectCmp": [{ "exists": "#cookie-information-template-wrapper" }],
+  "detectPopup": [{ "visible": "#cookie-information-template-wrapper" }],
+  "optIn": [ { "eval": "CookieInformation.submitAllCategories() || true"} ],
+  "optOut": [
+    { "hide": ["#cookie-information-template-wrapper"], "comment": "some templates don't hide the banner automatically" },
+    { "eval": "CookieInformation.declineAllCategories() || true"}
+  ],
+  "test": [
+    { "eval": "document.cookie.includes('CookieInformationConsent=')" }
+  ]
+}

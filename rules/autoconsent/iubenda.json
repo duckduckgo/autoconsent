@@ -1,0 +1,23 @@
+{
+  "name": "iubenda",
+  "prehideSelectors": ["#iubenda-cs-banner"],
+  "detectCmp": [{ "exists": "#iubenda-cs-banner" }],
+  "detectPopup": [{ "visible": ".iubenda-cs-accept-btn" }],
+  "optIn": [
+    { "click": ".iubenda-cs-accept-btn" }
+  ],
+  "optOut": [
+    {
+      "click": ".iubenda-cs-customize-btn"
+    },
+    {
+      "eval": "document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach(x => {if(x.checked) x.click()}) || true"
+    },
+    {
+      "click": "#iubFooterBtn"
+    }
+  ],
+  "test": [
+    { "eval": "!!document.cookie.match(/_iub_cs-\\d+=/)" }
+  ]
+}

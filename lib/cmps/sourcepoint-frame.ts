@@ -32,7 +32,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
       return true;
     }
     return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
-        && url.searchParams.has('message_id') && url.searchParams.has('requestUUID');
+        && (url.searchParams.has('message_id') || url.searchParams.has('requestUUID') || url.searchParams.has('consentUUID'));
   }
 
   async detectPopup() {
@@ -57,16 +57,17 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
   async optOut() {
     if (!this.isManagerOpen()) {
-      const actionable = await waitForElement('button.sp_choice_type_12,button.sp_choice_type_13');
+      const actionable = await waitForElement('.sp_choice_type_12,.sp_choice_type_13');
       if (!actionable) {
         return false;
       }
-      if (!elementExists("button.sp_choice_type_12")) {
+      if (!elementExists(".sp_choice_type_12")) {
         // do not sell button
-        return click("button.sp_choice_type_13");
+        return click(".sp_choice_type_13");
       }
 
-      click("button.sp_choice_type_12");
+      click(".sp_choice_type_12");
+      // the page may navigate at this point but that's okay
       await waitFor(
         () => location.pathname === "/privacy-manager/index.html",
         200,
@@ -88,9 +89,8 @@ export default class SourcePoint extends AutoConsentCMPBase {
         await wait(1000);
         return click(rejectSelector1);
       } else if (path === 1) {
-        return click(rejectSelector2);
+        click(rejectSelector2);
       } else if (path === 2) {
-        // TODO: check if this is still working
         await waitForElement('.pm-features', 10000);
         click('.checked > span', true);
 
@@ -99,6 +99,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
     } catch (e) {
       enableLogs && console.warn(e);
     }
-    return click('.sp_choice_type_SAVE_AND_EXIT');
+    click('.sp_choice_type_SAVE_AND_EXIT');
+    return true;
   }
 }
