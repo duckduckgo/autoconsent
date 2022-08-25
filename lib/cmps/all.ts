@@ -11,6 +11,7 @@ import Onetrust from './onetrust';
 import { AutoCMP } from '../types';
 import Klaro from './klaro';
 import Uniconsent from './uniconsent';
+import Conversant from './conversant';
 
 const rules: AutoCMP[] = [
   new TrustArcTop(),
@@ -23,6 +24,7 @@ const rules: AutoCMP[] = [
   new Onetrust(),
   new Klaro(),
   new Uniconsent(),
+  new Conversant(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsentCMP {
