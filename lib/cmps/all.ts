@@ -10,6 +10,8 @@ import { AutoConsentCMPRule } from '../rules';
 import Onetrust from './onetrust';
 import { AutoCMP } from '../types';
 import Klaro from './klaro';
+import Uniconsent from './uniconsent';
+import Conversant from './conversant';
 
 
 const rules: AutoCMP[] = [
@@ -22,6 +24,8 @@ const rules: AutoCMP[] = [
   new Evidon(),
   new Onetrust(),
   new Klaro(),
+  new Uniconsent(),
+  new Conversant(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsentCMP {
