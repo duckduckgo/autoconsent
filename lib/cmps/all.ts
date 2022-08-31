@@ -11,6 +11,7 @@ import Onetrust from './onetrust';
 import { AutoCMP } from '../types';
 import Klaro from './klaro';
 
+
 const rules: AutoCMP[] = [
   new TrustArcTop(),
   new TrustArcFrame(),
