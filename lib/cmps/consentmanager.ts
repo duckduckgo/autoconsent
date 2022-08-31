@@ -1,4 +1,4 @@
-import { click, doEval, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { click, doEval, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 // Note: JS API is also available:
@@ -37,6 +37,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    await wait(500);
     if (this.apiAvailable) {
       return await doEval("__cmp('setConsent', 0)");
     }
