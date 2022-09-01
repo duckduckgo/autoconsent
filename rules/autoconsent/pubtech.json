@@ -8,18 +8,19 @@
   ],
   "detectPopup": [
     { 
-      "visible": "#pubtech-cmp #pt-accept-all"
+      "visible": "#pubtech-cmp #pt-accept-all, #pt-actions"
     }
   ],
   "optIn": [
-    { 
-      "click": "#pubtech-cmp #pt-accept-all" 
+    {
+      "click": "#pubtech-cmp #pt-actions button:nth-of-type(2)"
     }
   ],
   "optOut": [
+
     {
-      "click": "#pubtech-cmp #pt-close:first-child" 
-    }
+      "click": "#pubtech-cmp #pt-close"
+    } 
   ],
   "test": [
     {
