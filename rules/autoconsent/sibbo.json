@@ -5,23 +5,32 @@
   "detectPopup": [{ "visible": ".sibbo-layout" }],
   "optIn": [{ "click": ".sibbo-layout [data-accept-all]" }],
   "optOut": [
-    { "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]" },
-    { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
+  
     { 
-      "waitFor": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]:not(.sibbo-cmp-button--disabled)",
-      "timeout": 500
+      "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]"
     },
-    { "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]"},
-    { "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" },
     { 
-      "waitFor": "#purposesLegIntSaveAndExit:not(.sibbo-cmp-button--disabled)", 
-      "timeout": 500
+      "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" 
     },
-    { "click": "#purposesLegIntSaveAndExit" }
+    { 
+      "waitFor": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]:not(.sibbo-cmp-button--disabled)"
+    },
+    { 
+      "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]"
+    },
+    { 
+      "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" 
+    },
+    { 
+      "waitFor": ".sibbo-panel__main__footer__actions [data-save-and-exit]:not(.sibbo-cmp-button--disabled)"
+    },
+    { 
+      "click": ".sibbo-panel__main__footer__actions [data-save-and-exit]"
+    }
   ],
   "test": [
     {
-      "eval": "!document.cookie.includes('_gpi') && !document.cookie.includes('_gads')"
+      "eval": "window.localStorage.getItem('euconsent-v2')"
     }
   ]
 }
