@@ -7,9 +7,16 @@
   "optOut": [
     { "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]" },
     { "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" },
-    { "click": ".sibbo-panel__main__footer__actions:not(.sibbo-cmp-button--disabled) a[data-focusable=\"next\"]" },
+    { 
+      "waitFor": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]:not(.sibbo-cmp-button--disabled)",
+      "timeout": 500
+    },
+    { "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]"},
     { "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" },
-    { "wait": "500" },
+    { 
+      "waitFor": "#purposesLegIntSaveAndExit:not(.sibbo-cmp-button--disabled)", 
+      "timeout": 500
+    },
     { "click": "#purposesLegIntSaveAndExit" }
   ],
   "test": [
