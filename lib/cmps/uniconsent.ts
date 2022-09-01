@@ -7,7 +7,7 @@ export default class Uniconsent extends AutoConsentCMPBase {
   }
 
   get prehideSelectors(): string[] {
-    return ['.unic'];
+    return ['.unic', '.modal:has(.unic)'];
   }
 
   get hasSelfTest(): boolean {
@@ -49,6 +49,7 @@ export default class Uniconsent extends AutoConsentCMPBase {
         for (const pattern of ['Confirm Choices', 'Save Choices', 'Auswahl speichern']) {
           if (text.includes(pattern)) {
             b.click();
+            await wait(500); // give it some time to close the popup
             return true;
           }
         }
