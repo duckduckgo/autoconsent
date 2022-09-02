@@ -7,7 +7,7 @@
   "optOut": [
     {
       "if": { 
-        "exists": "[data-view=\"purposes\"] .sibbo-panel__main__footer__actions [data-save-and-exit]"
+        "exists": "[data-view=purposes] .sibbo-panel__main__footer__actions [data-save-and-exit]"
       },
       "then": [
         { 
