@@ -28,7 +28,8 @@ export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   Partial<WaitForThenClickRule> &
   Partial<WaitRule> &
   Partial<UrlRule> &
-  Partial<HideRule>;
+  Partial<HideRule> &
+  Partial<IfRule>;
 
 export type ElementExistsRule = {
   exists: string;
@@ -79,4 +80,10 @@ export type HideMethod = 'display' | 'opacity';
 export type HideRule = {
   hide: string[];
   method?: HideMethod;
+};
+
+export type IfRule = {
+  if: Partial<ElementExistsRule> & Partial<ElementVisibleRule>;
+  then: AutoConsentRuleStep[];
+  else?: AutoConsentRuleStep[];
 };

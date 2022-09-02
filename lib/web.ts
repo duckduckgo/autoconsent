@@ -107,29 +107,42 @@ export default class AutoConsent {
 
   async _start() {
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`)
-    const cmp = await this.findCmp(this.config.detectRetries);
-    if (cmp) {
-      enableLogs && console.log("detected CMP:", cmp.name, window.location.href);
-      this.sendContentMessage({
-        type: 'cmpDetected',
-        url: location.href,
-        cmp: cmp.name,
-      }); // notify the browser
-      const isOpen = await this.waitForPopup(cmp);
-      if (!isOpen) {
+    const cmps = await this.findCmp(this.config.detectRetries);
+    if (cmps.length > 0) {
+      const popupLookups: Promise<boolean>[] = [];
+      for (const cmp of cmps) {
+        enableLogs && console.log("detected CMP:", cmp.name, window.location.href);
+        this.sendContentMessage({
+          type: 'cmpDetected',
+          url: location.href,
+          cmp: cmp.name,
+        }); // notify the browser
+        popupLookups.push(this.waitForPopup(cmp).then((isOpen) => {
+          if (isOpen) {
+            if (!this.foundCmp) {
+              this.foundCmp = cmp;
+            }
+            this.sendContentMessage({
+              type: 'popupFound',
+              cmp: cmp.name,
+              url: location.href,
+            }); // notify the browser
+            return true;
+          } else {
+            return Promise.reject(`${cmp.name} popup not found`);
+          }
+        }));
+      }
+
+      const somethingOpen = await Promise.any(popupLookups).catch(() => false);
+
+      if (!somethingOpen) {
         enableLogs && console.log('no popup found');
         if (this.config.enablePrehide) {
           undoPrehide();
         }
         return false;
       }
-
-      this.foundCmp = cmp;
-      this.sendContentMessage({
-        type: 'popupFound',
-        cmp: cmp.name,
-        url: location.href,
-      }); // notify the browser
 
       if (this.config.autoAction === 'optOut') {
         return await this.doOptOut();
@@ -148,8 +161,7 @@ export default class AutoConsent {
     }
   }
 
-  async findCmp(retries: number): Promise<AutoCMP> {
-    let foundCmp: AutoCMP = null;
+  async findCmp(retries: number): Promise<AutoCMP[]> {
     const allFoundCmps: AutoCMP[] = [];
 
     for (const cmp of this.rules) {
@@ -161,9 +173,6 @@ export default class AutoConsent {
         if (result) {
           enableLogs && console.log(`Found CMP: ${cmp.name}`);
           allFoundCmps.push(cmp);
-          if (!foundCmp) {
-            foundCmp = cmp;
-          }
         }
       } catch (e) {
         enableLogs && console.warn(`error detecting ${cmp.name}`, e);
@@ -182,7 +191,7 @@ export default class AutoConsent {
       });
     }
 
-    if (!foundCmp && retries > 0) {
+    if (allFoundCmps.length === 0 && retries > 0) {
       return new Promise((resolve) => {
         setTimeout(async () => {
           const result = this.findCmp(retries - 1);
@@ -191,7 +200,7 @@ export default class AutoConsent {
       });
     }
 
-    return foundCmp;
+    return allFoundCmps;
   }
 
   async doOptOut(): Promise<boolean> {
@@ -236,6 +245,7 @@ export default class AutoConsent {
     } else {
       enableLogs && console.log(`CMP ${this.foundCmp.name}: opt in on ${window.location.href}`);
       optInResult = await this.foundCmp.optIn();
+      enableLogs && console.log(`${this.foundCmp.name}: opt in result ${optInResult}`);
     }
 
     if (this.config.enablePrehide) {
@@ -286,7 +296,7 @@ export default class AutoConsent {
     if (!isOpen && retries > 0) {
       return new Promise((resolve) => setTimeout(() => resolve(this.waitForPopup(cmp, retries - 1, interval)), interval));
     }
-    enableLogs && console.log(`popup is ${isOpen ? 'open' : 'not open'}`);
+    enableLogs && console.log(cmp.name, `popup is ${isOpen ? 'open' : 'not open'}`);
     return isOpen;
   }
 

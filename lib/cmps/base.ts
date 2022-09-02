@@ -114,6 +114,19 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   if (rule.hide) {
     results.push(hide(rule.hide, rule.method));
   }
+  if (rule.if) {
+    if (!rule.if.exists && !rule.if.visible) {
+      console.error('invalid conditional rule', rule.if);
+      return false;
+    }
+    const condition = await evaluateRuleStep(rule.if);
+    enableLogs && console.log('Condition is', condition);
+    if (condition) {
+      results.push(_runRulesSequentially(rule.then));
+    } else if (rule.else) {
+      results.push(_runRulesSequentially(rule.else));
+    }
+  }
 
   if (results.length === 0) {
     enableLogs && console.warn('Unrecognized rule', rule);
@@ -123,6 +136,24 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
   // boolean and of results
   const all = await Promise.all(results);
   return all.reduce((a, b) => a && b, true);
+}
+
+async function _runRulesParallel(rules: AutoConsentRuleStep[]): Promise<boolean> {
+  const results = rules.map(rule => evaluateRuleStep(rule));
+  const detections = await Promise.all(results);
+  return detections.every(r => !!r);
+}
+
+async function _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
+  for (const rule of rules) {
+    enableLogs && console.log('Running rule...', rule);
+    const result = await evaluateRuleStep(rule);
+    enableLogs && console.log('...rule result', result);
+    if (!result && !rule.optional) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
@@ -144,34 +175,16 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     return this.config.prehideSelectors;
   }
 
-  async _runRulesParallel(rules: AutoConsentRuleStep[]): Promise<boolean> {
-    const results = rules.map(rule => evaluateRuleStep(rule));
-    const detections = await Promise.all(results);
-    return detections.every(r => !!r);
-  }
-
-  async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
-    for (const rule of rules) {
-      enableLogs && console.log('Running rule...', rule);
-      const result = await evaluateRuleStep(rule);
-      enableLogs && console.log('...rule result', result);
-      if (!result && !rule.optional) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   async detectCmp() {
     if (this.config.detectCmp) {
-      return this._runRulesParallel(this.config.detectCmp);
+      return _runRulesParallel(this.config.detectCmp);
     }
     return false;
   }
 
   async detectPopup() {
     if (this.config.detectPopup) {
-      return this._runRulesParallel(this.config.detectPopup);
+      return _runRulesSequentially(this.config.detectPopup);
     }
     return false;
   }
@@ -179,7 +192,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   async optOut() {
     if (this.config.optOut) {
       enableLogs && console.log('Initiated optOut()', this.config.optOut);
-      return this._runRulesSequentially(this.config.optOut);
+      return _runRulesSequentially(this.config.optOut);
     }
     return false;
   }
@@ -187,21 +200,21 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   async optIn() {
     if (this.config.optIn) {
       enableLogs && console.log('Initiated optIn()', this.config.optIn);
-      return this._runRulesSequentially(this.config.optIn);
+      return _runRulesSequentially(this.config.optIn);
     }
     return false;
   }
 
   async openCmp() {
     if (this.config.openCmp) {
-      return this._runRulesSequentially(this.config.openCmp);
+      return _runRulesSequentially(this.config.openCmp);
     }
     return false;
   }
 
   async test() {
     if (this.hasSelfTest) {
-      return this._runRulesSequentially(this.config.test);
+      return _runRulesSequentially(this.config.test);
     }
     return super.test();
   }
