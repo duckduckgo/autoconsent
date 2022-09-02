@@ -5,27 +5,47 @@
   "detectPopup": [{ "visible": ".sibbo-layout" }],
   "optIn": [{ "click": ".sibbo-layout [data-accept-all]" }],
   "optOut": [
-  
-    { 
-      "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]"
-    },
-    { 
-      "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" 
-    },
-    { 
-      "waitFor": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]:not(.sibbo-cmp-button--disabled)"
-    },
-    { 
-      "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]"
-    },
-    { 
-      "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" 
-    },
-    { 
-      "waitFor": ".sibbo-panel__main__footer__actions [data-save-and-exit]:not(.sibbo-cmp-button--disabled)"
-    },
-    { 
-      "click": ".sibbo-panel__main__footer__actions [data-save-and-exit]"
+    {
+      "if": { 
+        "exists": "[data-view=\"purposes\"] .sibbo-panel__main__footer__actions [data-save-and-exit]"
+      },
+      "then": [
+        { 
+          "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]"
+        },
+        { 
+          "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" 
+        },
+        { 
+          "waitFor": ".sibbo-panel__main__footer__actions [data-save-and-exit]:not(.sibbo-cmp-button--disabled)"
+        },
+        { 
+          "click": "[data-view=\"purposes\"] .sibbo-panel__main__footer__actions [data-save-and-exit]"
+        }
+      ],
+      "else": [
+        { 
+          "click": ".sibbo-panel__aside__buttons a[data-nav=\"purposes\"]"
+        },
+        { 
+          "click": ".sibbo-panel__main__header__actions a[data-focusable=\"reject-all\"]" 
+        },
+        { 
+          "waitFor": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]:not(.sibbo-cmp-button--disabled)"
+        },
+        { 
+          "click": ".sibbo-panel__main__footer__actions a[data-focusable=\"next\"]"
+        },
+        { 
+          "click": ".sibbo-panel__main div[data-view=\"purposesLegInt\"] a[data-focusable=\"reject-all\"]" 
+        },
+        { 
+          "waitFor": ".sibbo-panel__main__footer__actions [data-save-and-exit]:not(.sibbo-cmp-button--disabled)"
+        },
+        { 
+          "click": ".sibbo-panel__main__footer__actions [data-save-and-exit]"
+        }
+      ]
     }
   ],
   "test": [
