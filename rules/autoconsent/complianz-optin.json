@@ -1,0 +1,20 @@
+{
+    "name": "Complianz optin",
+    "prehideSelectors": [".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
+    "detectPopup": [{ "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
+    "optIn": [
+        { "click": ".cc-accept-all", "optional": true },
+        { "click": ".cc-allow", "optional": true },
+        { "click": ".cc-dismiss", "optional": true }
+    ],
+    "optOut": [
+        { "click": ".cc-settings" },
+        { "waitForVisible": "[aria-label=\"cookies preferences popup\"]" },
+        { "click": "[aria-label=\"cookies preferences popup\"] input[type=checkbox]:not([disabled])", "all": true },
+        { "click": "[aria-label=\"cookies preferences popup\"] [aria-label=\"Accept Selected\"]" }
+    ],
+    "test": [
+        { "eval": "!!document.cookie.match(/cookieconsent_preferences_disabled=[^;]+/)" }
+    ]
+}

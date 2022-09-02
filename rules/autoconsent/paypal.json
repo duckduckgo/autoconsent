@@ -12,5 +12,8 @@
           "click": ".gdprCookieBanner_decline-button"
       }
   ],
-  "test": [{"eval": "document.cookie.includes('cookie_prefs') === true"}]
+  "test": [
+    { "wait": 500 },
+    { "eval": "document.cookie.includes('cookie_prefs') === true" }
+  ]
 }

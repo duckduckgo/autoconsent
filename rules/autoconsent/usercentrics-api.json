@@ -1,9 +1,9 @@
 {
-  "name": "usercentrics-1",
+  "name": "usercentrics-api",
   "detectCmp": [{ "exists": "#usercentrics-root" }],
   "detectPopup": [
     {
-      "eval": "!!document.querySelector('#usercentrics-root').shadowRoot.querySelector('#uc-center-container')"
+      "eval": "typeof UC_UI === 'object'"
     }
   ],
   "optIn": [

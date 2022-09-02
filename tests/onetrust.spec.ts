@@ -9,7 +9,7 @@ generateCMPTests('Onetrust', [
 ]);
 
 generateCMPTests('Onetrust', [
-    'https://mailchimp.com/',
+    // 'https://mailchimp.com/', // polyfills Promise so playwright doesn't work
     "https://www.accenture.com/",
     'https://www.zoom.us',
 ], {
@@ -18,7 +18,7 @@ generateCMPTests('Onetrust', [
 
 // opt-in is not necessary in the US on this sites
 generateCMPTests('Onetrust', [
-    'https://mailchimp.com/',
+    // 'https://mailchimp.com/', // polyfills Promise so playwright doesn't work
     "https://www.accenture.com/",
     'https://www.zoom.us',
 ], {

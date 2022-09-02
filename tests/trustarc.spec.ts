@@ -13,15 +13,7 @@ generateCMPTests('TrustArc-top', [
 ], {
     testOptOut: true,
     testSelfTest: false,
-    skipRegions: ["US", "FR"]
-});
-
-generateCMPTests('TrustArc-frame', [
-    'https://www.garmin.com/de-DE/',
-], {
-    testOptOut: true,
-    testSelfTest: false,
-    onlyRegions: ["FR"]
+    skipRegions: ["US"]
 });
 
 generateCMPTests('TrustArc-frame', [
