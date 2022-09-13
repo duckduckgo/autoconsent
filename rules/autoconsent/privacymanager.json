@@ -19,7 +19,7 @@
                 { "waitForThenClick": ".okButton" }
             ],
             "else": [
-                { "click": "#manageSettings" },
+                { "waitForThenClick": "#manageSettings" },
                 { "waitFor": ".purposes-overview-list" },
                 { "waitFor": "button#saveAndExit" },
                 { "click": "span[role=checkbox][aria-checked=true]", "all": true, "optional": true },
