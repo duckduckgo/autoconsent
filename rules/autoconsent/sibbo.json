@@ -50,7 +50,7 @@
   ],
   "test": [
     {
-      "eval": "window.localStorage.getItem('euconsent-v2')"
+      "eval": "!!window.localStorage.getItem('euconsent-v2')"
     }
   ]
 }
