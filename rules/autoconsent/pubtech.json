@@ -13,7 +13,19 @@
   ],
   "optIn": [
     {
+      "if": {
+        "exists": "#pt-accept-all"
+      },
+      "then": [
+        {
+          "click": "#pubtech-cmp #pt-actions #pt-accept-all"
+        } 
+      ],
+      "else": [
+        {
       "click": "#pubtech-cmp #pt-actions button:nth-of-type(2)"
+        }
+      ]
     }
   ],
   "optOut": [
