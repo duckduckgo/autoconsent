@@ -5,4 +5,6 @@ generateCMPTests('privacymanager.io', [
     'https://www.immmo.at/',
     'https://eckart.net/gb/en/',
     'https://www.actega.com/emea/en/',
-]);
+], {
+    skipRegions: ['US']
+});
