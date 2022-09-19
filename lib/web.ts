@@ -134,7 +134,17 @@ export default class AutoConsent {
         }));
       }
 
-      const somethingOpen = await Promise.any(popupLookups).catch(() => false);
+      // could use `somethingOpen = await Promise.any(popupLookups).catch(() => false)`, but Promise.any is often unavailable in polyfilled environments
+      let somethingOpen = false;
+      for (const popupLookup of popupLookups) {
+        try {
+          await popupLookup;
+          somethingOpen = true;
+          break;
+        } catch (e) {
+          continue;
+        }
+      }
 
       if (!somethingOpen) {
         enableLogs && console.log('no popup found');

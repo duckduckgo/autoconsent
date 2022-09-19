@@ -4,7 +4,7 @@ import AutoConsentCMPBase from "./base";
 
 export default class Onetrust extends AutoConsentCMPBase {
 
-  prehideSelectors = ["#onetrust-banner-sdk,#onetrust-consent-sdk,.optanon-alert-box-wrapper,.onetrust-pc-dark-filter,.js-consent-banner"]
+  prehideSelectors = ["#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner"]
 
   constructor() {
     super("Onetrust");
@@ -19,11 +19,11 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists("#onetrust-banner-sdk,.optanon-alert-box-wrapper");
+    return elementExists("#onetrust-banner-sdk");
   }
 
   async detectPopup() {
-    return elementVisible("#onetrust-banner-sdk,.optanon-alert-box-wrapper", 'all');
+    return elementVisible("#onetrust-banner-sdk", 'all');
   }
 
   async optOut() {
