@@ -1,8 +1,9 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('com_oil', [
-    'https://www.lastminute.com/',
-    'https://www.nubert.de/',
+    'https://www.farbtoner.com/',
+    'https://www.elektro4000.de/',
+    'http://edelholzverkauf.de/',
 ], {
     skipRegions: ['GB'],
     testOptIn: false,
