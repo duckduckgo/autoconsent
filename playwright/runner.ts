@@ -14,6 +14,7 @@ type TestOptions = {
   testOptIn: boolean;
   skipRegions?: string[];
   onlyRegions?: string[];
+  mobile: boolean;
 };
 const defaultOptions: TestOptions = {
   testOptOut: true,
@@ -21,6 +22,7 @@ const defaultOptions: TestOptions = {
   testSelfTest: true,
   skipRegions: [],
   onlyRegions: [],
+  mobile: false,
 };
 
 const contentScript = fs.readFileSync(
@@ -43,13 +45,17 @@ export function generateTest(
   options: TestOptions = defaultOptions
 ) {
   function genTest(autoAction: AutoAction) {
-    test(`${url.split("://")[1]} .${testRegion} ${autoAction}`, async ({ page }) => {
+    test(`${url.split("://")[1]} .${testRegion} ${autoAction}`, async ({ page }, { project }) => {
       if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
         test.skip();
       }
       if (options.skipRegions && options.skipRegions.includes(testRegion)) {
         test.skip();
       }
+      if (options.mobile && !project.use.isMobile || !options.mobile && project.use.isMobile) {
+        test.skip();
+      }
+
       enableLogs && page.on('console', async msg => {
         console.log(`    page log:`, msg.text());
       });
