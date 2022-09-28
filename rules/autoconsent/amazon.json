@@ -1,0 +1,18 @@
+{
+  "name": "amazon.com",
+  "prehideSelectors": ["span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]"],
+  "detectCmp": [
+    { "exists": "span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]" }
+  ],
+  "detectPopup": [
+    { "visible": "span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]" }
+  ],
+  "optIn": [
+    { "waitForThenClick": "#sp-cc-accept" }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#sp-cc-rejectall-link"
+    }
+  ]
+}

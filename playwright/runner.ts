@@ -35,7 +35,7 @@ export async function injectContentScript(page: Page | Frame) {
     await page.evaluate(contentScript);
   } catch (e) {
     // frame was detached
-    // console.log(e);
+    // console.trace(e);
   }
 }
 
@@ -45,7 +45,7 @@ export function generateTest(
   options: TestOptions = defaultOptions
 ) {
   function genTest(autoAction: AutoAction) {
-    test(`${url.split("://")[1]} .${testRegion} ${autoAction}`, async ({ page }, { project }) => {
+    test(`${url.split("://")[1]} .${testRegion} ${autoAction} ${options.mobile ? 'mobile' : ''}`, async ({ page }, { project }) => {
       if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
         test.skip();
       }
