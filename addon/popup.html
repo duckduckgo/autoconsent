@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html {
+      min-height: 10em;
+      min-width: 20em;
+    }
+    #proceed {
+      width: 100%;
+      height: 3em;
+      margin: 1em auto;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <fieldset>
+    <div>
+      <input type="checkbox" id="enabled" name="enabled" checked>
+      <label for="enabled">Enable autoconsent</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Select autoconsent mode:</legend>
+
+    <div>
+      <input type="radio" id="optout" name="mode" value="optOut"
+             checked>
+      <label for="optout">Reject cookies when possible</label>
+    </div>
+
+    <div>
+      <input type="radio" id="optin" name="mode" value="optIn">
+      <label for="optin">Accept all cookies</label>
+    </div>
+
+    <div>
+      <input type="radio" id="prompt" name="mode" value="null">
+      <label for="prompt">Prompt every time</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Hide popups during operation</legend>
+
+    <div>
+      <input type="radio" id="prehide-on" name="prehide" value="true"
+             checked>
+      <label for="prehide-on">On</label>
+    </div>
+
+    <div>
+      <input type="radio" id="prehide-off" name="prehide" value="false">
+      <label for="prehide-off">Off</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Other</legend>
+    <div>
+      <input type="number" id="retries" name="retries" value="20">
+      <label for="retries">Detection attempts</label>
+    </div>
+  </fieldset>
+  <script src="popup.bundle.js"></script>
+</body>
+</html>
