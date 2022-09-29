@@ -93,7 +93,7 @@ chrome.runtime.onMessage.addListener(
     switch (msg.type) {
       case "init":
         if (frameId === 0) {
-          showOptOutStatus(tabId, 'idle');
+          await showOptOutStatus(tabId, 'idle');
         }
         chrome.tabs.sendMessage(tabId, {
           type: "initResp",
@@ -120,7 +120,7 @@ chrome.runtime.onMessage.addListener(
         });
         break;
       case "popupFound":
-        showOptOutStatus(tabId, "available", msg.cmp);
+        await showOptOutStatus(tabId, "available", msg.cmp);
         storageSet({
           [`detected${tabId}`]: frameId,
         });
@@ -128,7 +128,7 @@ chrome.runtime.onMessage.addListener(
       case "optOutResult":
       case "optInResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "working", msg.cmp);
+          await showOptOutStatus(tabId, "working", msg.cmp);
           if (msg.scheduleSelfTest) {
             await storageSet({
               [`selfTest${tabId}`]: frameId,
@@ -138,11 +138,11 @@ chrome.runtime.onMessage.addListener(
         break;
       case "selfTestResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "verified", msg.cmp);
+          await showOptOutStatus(tabId, "verified", msg.cmp);
         }
         break;
       case "autoconsentDone": {
-        showOptOutStatus(tabId, "success", msg.cmp);
+        await showOptOutStatus(tabId, "success", msg.cmp);
         // sometimes self-test needs to be done in another frame
         const selfTestKey = `selfTest${tabId}`;
         const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
@@ -175,7 +175,7 @@ if (manifestVersion === 2) { // MV3 handles this inside the popup
     if (typeof frameId === 'number') {
       storageRemove(detectedKey);
       enableLogs && console.log("action.onClicked", tabId, frameId);
-      showOptOutStatus(tabId, "working");
+      await showOptOutStatus(tabId, "working");
       chrome.tabs.sendMessage(tabId, {
         type: "optOut",
       } as BackgroundMessage, {

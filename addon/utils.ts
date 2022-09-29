@@ -1,6 +1,6 @@
 import { enableLogs } from "../lib/config";
 
-export function showOptOutStatus(
+export async function showOptOutStatus(
   tabId: number,
   status: "success" | "complete" | "working" | "available" | "verified" | "idle",
   cmp = '',
@@ -31,11 +31,11 @@ export function showOptOutStatus(
   if (chrome.pageAction) {
     chrome.pageAction.show(tabId);
   }
-  action.setTitle({
+  await action.setTitle({
     tabId,
     title,
   });
-  action.setIcon({
+  await action.setIcon({
     tabId,
     path: icon,
   });
