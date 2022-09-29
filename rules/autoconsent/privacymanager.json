@@ -2,7 +2,7 @@
     "name": "privacymanager.io",
     "prehideSelectors": ["#gdpr-consent-tool-wrapper", "iframe[src^=\"https://cmp-consent-tool.privacymanager.io\"]"],
     "runContext": {
-        "url": "https://cmp-consent-tool.privacymanager.io",
+        "urlPattern": "^https://cmp-consent-tool\\.privacymanager\\.io/",
         "main": false,
         "frame": true
     },

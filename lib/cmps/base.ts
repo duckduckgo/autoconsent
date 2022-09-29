@@ -16,7 +16,7 @@ export async function success(action: Promise<boolean>): Promise<boolean> {
 export const defaultRunContext: RunContext = {
   main: true,
   frame: false,
-  url: "",
+  urlPattern: "",
 }
 
 export default class AutoConsentCMPBase implements AutoCMP {
@@ -52,7 +52,7 @@ export default class AutoConsentCMPBase implements AutoCMP {
       return false;
     }
 
-    if (runCtx.url && !window.location.href.startsWith(runCtx.url)) {
+    if (runCtx.urlPattern && !window.location.href.match(runCtx.urlPattern)) {
       return false;
     }
     return true;

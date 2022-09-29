@@ -71,7 +71,7 @@ Both JSON and class implementations have the following components:
  * (optional) `runContext` - an object describing when this rule should be tried:
    * `main` - boolean, set to `true` if the rule should be executed in top-level documents (default: `true`)
    * `frame` - boolean, set to `true` if the rule should be executed in nested frames (default: `false`)
-   * `url` - string, specifies a string prefix that should match the page URL (default: empty)
+   * `urlPattern` - string, specifies a regular expression that should match the page URL (default: empty)
  * (optional) `test` - a list of actions to verify a successful opt-out. This is currently only used in Playwright tests.
 
 

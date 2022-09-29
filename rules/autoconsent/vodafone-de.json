@@ -1,7 +1,7 @@
 {
   "name": "vodafone.de",
   "runContext": {
-    "url": "https://www.vodafone.de/"
+    "urlPattern": "^https://www\\.vodafone\\.de/"
   },
   "prehideSelectors": [".dip-consent,.dip-consent-container"],
   "detectCmp": [{ "exists": ".dip-consent-container" }],

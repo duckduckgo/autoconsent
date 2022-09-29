@@ -1,7 +1,7 @@
 {
   "name": "reddit.com",
   "runContext": {
-    "url": "https://www.reddit.com"
+    "urlPattern": "^https://www\\.reddit\\.com/"
   },
   "prehideSelectors": ["section:has(section > span > a[href^=\"https://www.reddit.com/policies/cookies\"])"],
   "detectCmp": [
