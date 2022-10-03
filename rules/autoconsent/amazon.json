@@ -8,11 +8,13 @@
     { "visible": "span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]" }
   ],
   "optIn": [
-    { "waitForThenClick": "#sp-cc-accept" }
+    { "waitForVisible": "#sp-cc-accept" },
+    { "wait": 500 },
+    { "click": "#sp-cc-accept" }
   ],
   "optOut": [
-    {
-      "waitForThenClick": "#sp-cc-rejectall-link"
-    }
+    { "waitForVisible": "#sp-cc-rejectall-link" },
+    { "wait": 500 },
+    { "click": "#sp-cc-rejectall-link" }
   ]
 }
