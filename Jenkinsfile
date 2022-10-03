@@ -1,7 +1,7 @@
 def runPlaywrightTests(resultDir) {
     sh 'mkdir -p ./test-results'
     sh """
-        PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project webkit --project iphoneSE --reporter=junit || true
+        PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --workers 4 --project webkit --project iphoneSE --reporter=junit || true
     """
     junit 'results.xml'
     sh """

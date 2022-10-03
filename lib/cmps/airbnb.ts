@@ -1,7 +1,6 @@
-import { enableLogs } from "../config";
-import { elementExists, elementVisible, wait, waitForThenClick } from "../rule-executors";
+import { elementExists, elementVisible, waitForThenClick } from "../rule-executors";
 import { RunContext } from "../rules";
-import { isElementVisible, waitFor } from "../utils";
+import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Airbnb extends AutoConsentCMPBase {
