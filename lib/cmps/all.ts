@@ -12,6 +12,7 @@ import { AutoCMP } from '../types';
 import Klaro from './klaro';
 import Uniconsent from './uniconsent';
 import Conversant from './conversant';
+import Tiktok from './tiktok';
 
 
 const rules: AutoCMP[] = [
@@ -26,6 +27,7 @@ const rules: AutoCMP[] = [
   new Klaro(),
   new Uniconsent(),
   new Conversant(),
+  new Tiktok(),
 ];
 
 export function createAutoCMP(config: AutoConsentCMPRule): AutoConsentCMP {
