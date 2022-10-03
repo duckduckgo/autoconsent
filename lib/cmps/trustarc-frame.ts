@@ -100,6 +100,9 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
   }
 
   async optIn() {
+    if (click('.call')) {
+      return true;
+    }
     await this.navigateToSettings();
     click(".switch span:nth-child(2)", true);
 

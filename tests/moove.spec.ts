@@ -4,6 +4,7 @@ generateCMPTests('Moove', [
     'https://impact.parkinson.org/',
     'https://wamu.org/',
     'https://www.phorest.com/',
+    'https://theposterclub.com/',
 ], {});
 
 generateCMPTests('Moove', [

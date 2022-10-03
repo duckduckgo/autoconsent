@@ -334,6 +334,9 @@ export default class AutoConsent {
       case 'initResp':
         this.initialize(message.config, message.rules);
         break;
+      case 'optIn':
+        await this.doOptIn();
+        break;
       case 'optOut':
         await this.doOptOut();
         break;
