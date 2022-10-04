@@ -6,11 +6,3 @@ generateCMPTests('airbnb', [
 ],{
     skipRegions: ['US']
 });
-
-generateCMPTests('airbnb', [
-    'https://airbnb.nl',
-    'https://airbnb.co.uk',
-],{
-    skipRegions: ['US'],
-    mobile: true,
-});
