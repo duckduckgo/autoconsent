@@ -192,3 +192,7 @@ See [this document](/api.md) for more details on internal APIs.
 ## License
 
 MPLv2.
+
+## Manual Testing
+
+To test the extension / addon with Firefox, open the `about:debugging`, navigate to "This Firefox" on the menu and under "Temporary Extensions" click on "Load Temporary Addon". Select the `manifest.json` file from the `dist/firefox` directory. You will need to build the extension before as described above. The extension should then be active and you can test it manually by simply visiting websites.
