@@ -11,7 +11,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
   runContext: RunContext = {
     main: false,
     frame: true,
-    url: "https://consent-pref.trustarc.com/?",
+    urlPattern: "^https://consent-pref\\.trustarc\\.com/\\?",
   }
 
   get hasSelfTest(): boolean {

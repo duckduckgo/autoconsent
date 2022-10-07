@@ -44,8 +44,12 @@ export default [{
     copy({
       targets: [
         {
-          src: ['./addon/icons',  './rules/rules.json'],
+          src: ['./addon/icons', './rules/rules.json'],
           dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
+        },
+        {
+          src: ['./addon/popup.html'],
+          dest: ['./dist/addon-mv3/']
         },
         {
           src: './addon/manifest.mv3.json',
@@ -67,6 +71,16 @@ export default [{
     format: 'iife',
   }, {
     file: './dist/addon-firefox/content.bundle.js',
+    format: 'iife',
+  }],
+  plugins: [
+    typescript(),
+    terser(),
+  ],
+}, {
+  input: './addon/popup.ts',
+  output: [{
+    file: './dist/addon-mv3/popup.bundle.js',
     format: 'iife',
   }],
   plugins: [

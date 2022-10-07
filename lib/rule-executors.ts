@@ -31,21 +31,21 @@ export function elementExists(selector: string): boolean {
 
 export function elementVisible(selector: string, check: VisibilityCheck): boolean {
   const elem = document.querySelectorAll<HTMLElement>(selector);
-    const results = new Array(elem.length);
-    elem.forEach((e, i) => {
-      // check for display: none
-      results[i] = isElementVisible(e);
-    });
-    // enableLogs && console.log("[visible?]", selector, check, elem, results);
-    if (results.length === 0) {
-      return false;
-    } else if (check === "any") {
-      return results.some(r => r);
-    } else if (check === "none") {
-      return results.every(r => !r);
-    }
-    // all
-    return results.every(r => r);
+  const results = new Array(elem.length);
+  elem.forEach((e, i) => {
+    // check for display: none
+    results[i] = isElementVisible(e);
+  });
+  // enableLogs && console.log("[visible?]", selector, check, elem, results);
+  if (check === "none") {
+    return results.every(r => !r);
+  } else if (results.length === 0) {
+    return false;
+  } else if (check === "any") {
+    return results.some(r => r);
+  }
+  // all
+  return results.every(r => r);
 }
 
 export function waitForElement(selector: string, timeout = 10000): Promise<boolean> {

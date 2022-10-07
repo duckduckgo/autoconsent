@@ -71,7 +71,7 @@ Both JSON and class implementations have the following components:
  * (optional) `runContext` - an object describing when this rule should be tried:
    * `main` - boolean, set to `true` if the rule should be executed in top-level documents (default: `true`)
    * `frame` - boolean, set to `true` if the rule should be executed in nested frames (default: `false`)
-   * `url` - string, specifies a string prefix that should match the page URL (default: empty)
+   * `urlPattern` - string, specifies a regular expression that should match the page URL (default: empty)
  * (optional) `test` - a list of actions to verify a successful opt-out. This is currently only used in Playwright tests.
 
 
@@ -192,3 +192,7 @@ See [this document](/api.md) for more details on internal APIs.
 ## License
 
 MPLv2.
+
+## Manual Testing
+
+To test the extension / addon with Firefox, open the `about:debugging`, navigate to "This Firefox" on the menu and under "Temporary Extensions" click on "Load Temporary Addon". Select the `manifest.json` file from the `dist/firefox` directory. You will need to build the extension before as described above. The extension should then be active and you can test it manually by simply visiting websites.

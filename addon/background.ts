@@ -1,46 +1,33 @@
 import { enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
-
-const manifestVersion = chrome.runtime.getManifest().manifest_version;
-const autoconsentConfig: Config = {
-  enabled: true,
-  autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
-  disabledCmps: [],
-  enablePrehide: true,
-  detectRetries: 20,
-};
-
-// Storage abstraction: MV2 keeps everything in memory, MV3 uses chrome.storage
-const storage: {[key: string]: any} = {};
-async function storageSet(obj: {[key: string]: any}): Promise<void> {
-  if (manifestVersion === 2) {
-    Object.assign(storage, obj);
-    return;
-  } 
-  return chrome.storage.local.set(obj);
-}
-
-async function storageGet(key: string): Promise<{[key: string]: any}> {
-  if (manifestVersion === 2) {
-    return storage;
-  }
-  return chrome.storage.local.get(key);
-}
-
-async function storageRemove(key: string): Promise<void> {
-  if (manifestVersion === 2) {
-    delete storage[key];
-    return;
-  }
-  return chrome.storage.local.remove(key);
-}
+import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
+import { showOptOutStatus } from "./utils";
 
 async function loadRules() {
   const res = await fetch("./rules.json");
   storageSet({
     rules: await res.json(),
   });
+}
+
+async function initConfig() {
+  console.log('init sw');
+  const storedConfig = await storageGet('config');
+  console.log('storedConfig', storedConfig);
+  if (!storedConfig) {
+    console.log('init config');
+    const defaultConfig: Config = {
+      enabled: true,
+      autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
+      disabledCmps: [],
+      enablePrehide: true,
+      detectRetries: 20,
+    };
+    await storageSet({
+      config: defaultConfig,
+    });
+  }
 }
 
 async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult[]> {
@@ -77,53 +64,18 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
 }
 
 chrome.runtime.onInstalled.addListener(() => {
-  loadRules()
+  loadRules();
+  initConfig();
 });
 if (manifestVersion === 2) {
   // always load rules on startup in MV2
-  loadRules()
+  loadRules();
+  initConfig();
 }
 
-function showOptOutStatus(
-  tabId: number,
-  status: "success" | "complete" | "working" | "available" | "verified" | "idle",
-  cmp = '',
-) {
-  let title = "";
-  let icon = "icons/cookie-idle.png";
-  if (status === "success") {
-    title = `Opt out successful! (${cmp})`;
-    icon = "icons/party.png";
-  } else if (status === "complete") {
-    title = `Opt out complete! (${cmp})`;
-    icon = "icons/tick.png";
-  } else if (status === "working") {
-    title = `Processing... (${cmp})`;
-    icon = "icons/cog.png";
-  } else if (status === "verified") {
-    title = `Verified (${cmp})`;
-    icon = "icons/verified.png";
-  } else if (status === "idle") {
-    title = "Idle";
-    icon = "icons/cookie-idle.png";
-  } else if (status === "available") {
-    title = `Click to opt out (${cmp})`;
-    icon = "icons/cookie.png";
-  }
-  enableLogs && console.log('Setting action state to', status);
-  const action = chrome.action || chrome.pageAction;
-  if (chrome.pageAction) {
-    chrome.pageAction.show(tabId);
-  }
-  action.setTitle({
-    tabId,
-    title,
-  });
-  action.setIcon({
-    tabId,
-    path: icon,
-  });
-}
+chrome.tabs.onRemoved.addListener((tabId: number) => {
+  storageRemove(`detected${tabId}`);
+});
 
 chrome.runtime.onMessage.addListener(
   async (msg: ContentScriptMessage, sender: any) => {
@@ -134,12 +86,14 @@ chrome.runtime.onMessage.addListener(
       console.log(msg, sender);
       console.groupEnd();
     }
-    const rules: RuleBundle = (await storageGet("rules")).rules;
+    const rules: RuleBundle = await storageGet("rules");
+    const autoconsentConfig: Config = await storageGet('config');
+    enableLogs && console.log('got config', autoconsentConfig);
 
     switch (msg.type) {
       case "init":
         if (frameId === 0) {
-          showOptOutStatus(tabId, 'idle');
+          await showOptOutStatus(tabId, 'idle');
         }
         chrome.tabs.sendMessage(tabId, {
           type: "initResp",
@@ -166,7 +120,7 @@ chrome.runtime.onMessage.addListener(
         });
         break;
       case "popupFound":
-        showOptOutStatus(tabId, "available", msg.cmp);
+        await showOptOutStatus(tabId, "available", msg.cmp);
         storageSet({
           [`detected${tabId}`]: frameId,
         });
@@ -174,7 +128,7 @@ chrome.runtime.onMessage.addListener(
       case "optOutResult":
       case "optInResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "working", msg.cmp);
+          await showOptOutStatus(tabId, "working", msg.cmp);
           if (msg.scheduleSelfTest) {
             await storageSet({
               [`selfTest${tabId}`]: frameId,
@@ -184,11 +138,11 @@ chrome.runtime.onMessage.addListener(
         break;
       case "selfTestResult":
         if (msg.result) {
-          showOptOutStatus(tabId, "verified", msg.cmp);
+          await showOptOutStatus(tabId, "verified", msg.cmp);
         }
         break;
       case "autoconsentDone": {
-        showOptOutStatus(tabId, "success", msg.cmp);
+        await showOptOutStatus(tabId, "success", msg.cmp);
         // sometimes self-test needs to be done in another frame
         const selfTestKey = `selfTest${tabId}`;
         const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
@@ -213,18 +167,20 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-(chrome.action || chrome.pageAction).onClicked.addListener(async (tab) => {
-  const tabId = tab.id;
-  const detectedKey = `detected${tabId}`;
-  const frameId = (await storageGet(detectedKey))?.[detectedKey];
-  if (typeof frameId === 'number') {
-    chrome.storage.local.remove(detectedKey);
-    enableLogs && console.log("action.onClicked", tabId, frameId);
-    showOptOutStatus(tabId, "working");
-    chrome.tabs.sendMessage(tabId, {
-      type: "optOut",
-    } as BackgroundMessage, {
-      frameId,
-    });
-  }
-});
+if (manifestVersion === 2) { // MV3 handles this inside the popup
+  chrome.pageAction.onClicked.addListener(async (tab) => {
+    const tabId = tab.id;
+    const detectedKey = `detected${tabId}`;
+    const frameId = await storageGet(detectedKey);
+    if (typeof frameId === 'number') {
+      storageRemove(detectedKey);
+      enableLogs && console.log("action.onClicked", tabId, frameId);
+      await showOptOutStatus(tabId, "working");
+      chrome.tabs.sendMessage(tabId, {
+        type: "optOut",
+      } as BackgroundMessage, {
+        frameId,
+      });
+    }
+  });
+}

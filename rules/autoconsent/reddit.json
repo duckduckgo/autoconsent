@@ -1,0 +1,22 @@
+{
+  "name": "reddit.com",
+  "runContext": {
+    "urlPattern": "^https://www\\.reddit\\.com/"
+  },
+  "prehideSelectors": ["section:has(section > span > a[href^=\"https://www.reddit.com/policies/cookies\"])"],
+  "detectCmp": [
+    { "exists": "section:has(> span > a[href^=\"https://www.reddit.com/policies/cookies\"])" }
+  ],
+  "detectPopup": [
+    { "visible": "section:has(> span > a[href^=\"https://www.reddit.com/policies/cookies\"])" }
+  ],
+  "optIn": [
+    { "waitForThenClick": "section:has(> span > a[href^=\"https://www.reddit.com/policies/cookies\"]) section form:last-child button" }
+  ],
+  "optOut": [
+    { "waitForThenClick": "section:has(> span > a[href^=\"https://www.reddit.com/policies/cookies\"]) section form:first-child button" }
+  ],
+  "test": [
+    {"eval": "document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}')"}
+  ]
+}

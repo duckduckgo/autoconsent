@@ -14,7 +14,7 @@ export type AutoConsentCMPRule = {
 export type RunContext = {
   main?: boolean,
   frame?: boolean,
-  url?: string,
+  urlPattern?: string,
 }
 
 export type AutoConsentRuleStep = { optional?: boolean } & Partial<
