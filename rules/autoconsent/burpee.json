@@ -1,0 +1,15 @@
+{
+    "name": "Burpee.com",
+    "prehideSelectors": ["#html-body #notice-cookie-block"],
+    "detectCmp": [{ "exists": "#html-body #notice-cookie-block" }],
+    "detectPopup": [{ "exists": "#html-body #notice-cookie-block" }],
+    "optIn": [
+      { "click": "#btn-cookie-allow" }
+    ],
+    "optOut": [
+      { "hide": ["#notice-cookie-block"] }
+    ],
+  "test": [
+    { "eval": "!document.cookie.includes('user_allowed_save_cookie')" }
+  ]
+  }
