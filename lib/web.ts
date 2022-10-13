@@ -16,8 +16,14 @@ export default class AutoConsent {
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
-    evalState.sendContentMessage = sendContentMessage;
-    this.sendContentMessage = sendContentMessage;
+
+    let scm = sendContentMessage;
+
+    if (enableLogs)
+      scm = async (msg) => {console.log(`Sending content message of type ${msg.type}:`, msg);return sendContentMessage(msg);}
+
+    evalState.sendContentMessage = scm;
+    this.sendContentMessage = scm;
     this.rules = [...dynamicRules];
 
     enableLogs && console.log('autoconsent init', window.location.href);
