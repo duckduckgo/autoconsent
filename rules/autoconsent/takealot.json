@@ -1,0 +1,15 @@
+{
+    "name": "takealot.com",
+    "prehideSelectors": [".header-module_bottom-banners-container_3F8RC"],
+    "detectCmp": [{ "exists": ".cookies-banner-module_cookie-banner_hsodu" }],
+    "detectPopup": [{ "exists": ".header-module_bottom-banners-container_3F8RC" }],
+    "optIn": [
+      { "click": "button.cookies-banner-module_dismiss-button_24Z98" }
+    ],
+    "optOut": [
+      { "hide": [".header-module_bottom-banners-container_3F8RC"] }
+    ],
+    "test": [
+      { "eval": "!document.cookie.includes('cookieNotice=true')" }
+    ]
+  }
