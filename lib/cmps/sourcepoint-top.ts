@@ -27,7 +27,8 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return elementVisible("div[id^='sp_message_container_']", 'all');
+    // we only return true if the container is visible, as otherwise we won't be able to perform the opt-out...
+    return elementVisible("div[id^='sp_message_container_']", 'all') && document.querySelector('.sp-message-open') !== null;
   }
 
   async optIn() {
