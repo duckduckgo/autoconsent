@@ -1,0 +1,15 @@
+{
+    "name": "stewmac.com",
+    "prehideSelectors": ["div[data-cookie-banner-cookie-name=cookie-banner]"],
+    "detectCmp": [{ "exists": "div[data-cookie-banner-cookie-name=cookie-banner]" }],
+    "detectPopup": [{ "exists": "div[data-cookie-banner-cookie-name=cookie-banner]" }],
+    "optIn": [
+      { "click": "button[aria-label=\"Accept cookie\"" }
+    ],
+    "optOut": [
+      { "hide": ["div[data-cookie-banner-cookie-name=cookie-banner]"] }
+    ],
+    "test": [
+      { "eval": "!document.cookie.includes('cookie-banner=accepted')" }
+    ]
+  }
