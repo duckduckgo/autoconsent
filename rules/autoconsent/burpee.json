@@ -7,7 +7,7 @@
       { "click": "#btn-cookie-allow" }
     ],
     "optOut": [
-      { "hide": ["#notice-cookie-block"] }
+      { "hide": ["#html-body #notice-cookie-block"] }
     ],
   "test": [
     { "eval": "!document.cookie.includes('user_allowed_save_cookie')" }
