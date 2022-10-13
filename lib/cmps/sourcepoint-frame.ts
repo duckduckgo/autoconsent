@@ -36,6 +36,18 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
+
+    // we only return true if the manager is open and we can actually perform an opt-out
+    // otherwise the rule might produce a dialogue in our browser asking the user whether to
+    // enable autoconsent, and then if the user clicks "yes" nothing will happen as the
+    // autoconsent won't work for this CPM unless the manager is open...
+    if (!this.isManagerOpen()) {
+      const actionable = await waitForElement('.sp_choice_type_12,.sp_choice_type_13', 2000);
+      if (!actionable) {
+        return false;
+      }
+    }
+
     return true;
   }
 
