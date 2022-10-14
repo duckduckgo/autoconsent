@@ -1,0 +1,15 @@
+{
+    "name": "justwatch.com",
+    "prehideSelectors": [".consent-banner"],
+    "detectCmp": [{ "exists": ".consent-banner" }],
+    "detectPopup": [{ "exists": ".consent-banner" }],
+    "optIn": [
+      { "click": ".consent-banner__actions button[.primary" }
+    ],
+    "optOut": [
+      { "hide": [".consent-banner"] }
+    ],
+    "test": [
+      { "eval": "!document.cookie.includes('_gat_gaTracker0=1') || !document.cookie.includes('_gat_gaTracker1=1')" }
+    ]
+  }
