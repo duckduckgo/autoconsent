@@ -1,0 +1,15 @@
+{
+    "name": "itopvpn.com",
+    "prehideSelectors": [".pop-cookie"],
+    "detectCmp": [{ "exists": ".pop-cookie" }],
+    "detectPopup": [{ "exists": ".pop-cookie" }],
+    "optIn": [
+      { "click": "#_pcookie" }
+    ],
+    "optOut": [
+      { "hide": [".pop-cookie"] }
+    ],
+    "test": [
+      { "eval": "!window.localStorage.getItem('popvalue')" }
+    ]
+  }
