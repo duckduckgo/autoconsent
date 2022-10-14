@@ -1,0 +1,15 @@
+{
+    "name": "macpaw.com",
+    "prehideSelectors": ["div[data-banner=\"cookies\"]"],
+    "detectCmp": [{ "exists": "div[data-banner=\"cookies\"]" }],
+    "detectPopup": [{ "exists": "div[data-banner=\"cookies\"]" }],
+    "optIn": [
+      { "click": "button[data-banner-close=\"cookies\"]" }
+    ],
+    "optOut": [
+      { "hide": ["div[data-banner=\"cookies\"]"] }
+    ],
+    "test": [
+      { "eval": "!document.cookie.includes('cookies-hide=1')" }
+    ]
+  }
