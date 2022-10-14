@@ -1,0 +1,15 @@
+{
+    "name": "similarweb.com",
+    "prehideSelectors": [".cookies-notification"],
+    "detectCmp": [{ "exists": ".cookies-notification" }],
+    "detectPopup": [{ "exists": ".app-layout .cookies-notification" }],
+    "optIn": [
+      { "click": "button.cookies-notification__dismiss" }
+    ],
+    "optOut": [
+      { "hide": [".app-layout .cookies-notification"] }
+    ],
+    "test": [
+      { "eval": "!document.cookie.includes('sw-cookies-consent=1')" }
+    ]
+  }
