@@ -1,0 +1,15 @@
+{
+    "name": "nrk.no",
+    "prehideSelectors": [".nrk-masthead__info-banner--cookie"],
+    "detectCmp": [{ "exists": ".nrk-masthead__info-banner--cookie" }],
+    "detectPopup": [{ "exists": ".nrk-masthead__info-banner--cookie" }],
+    "optIn": [
+      { "click": ".nrk-masthead__info-banner--cookie .nrk-close" }
+    ],
+    "optOut": [
+      { "hide": [".nrk-masthead__info-banner--cookie"] }
+    ],
+    "test": [
+      { "eval": "!document.cookie.includes('nrkno-cookie-information=1')" }
+    ]
+  }
