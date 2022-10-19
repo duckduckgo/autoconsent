@@ -36,9 +36,9 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
       chrome.tabs.executeScript(tabId, {
         frameId,
         code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`
-      }, (result) => {
+      }, (resultArr) => {
         resolve([{
-          result,
+          result: resultArr[0],
           frameId,
         }]);
       })
@@ -82,7 +82,7 @@ chrome.runtime.onMessage.addListener(
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
     if (enableLogs) {
-      console.groupCollapsed(`${msg.type} from ${sender.origin || new URL(sender.url).origin}}`);
+      console.groupCollapsed(`${msg.type} from ${sender.origin || sender.url}`);
       console.log(msg, sender);
       console.groupEnd();
     }
@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener(
       case "eval":
         evalInTab(tabId, frameId, msg.code).then(([result]) => {
           if (enableLogs) {
-            console.groupCollapsed(`eval result for ${sender.origin}`);
+            console.groupCollapsed(`eval result for ${sender.origin || sender.url}`);
             console.log(msg.code, result.result);
             console.groupEnd();
           }

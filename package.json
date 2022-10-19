@@ -20,7 +20,8 @@
     "build-rules": "node rules/build.js",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run bundle"
+    "prepublish": "npm run build-rules && npm run bundle",
+    "launch:firefox": "web-ext run -s dist/addon-firefox"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
@@ -40,6 +41,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.4.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "web-ext": "^7.3.0"
   }
 }
