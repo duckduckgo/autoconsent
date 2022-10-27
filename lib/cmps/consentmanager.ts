@@ -31,6 +31,9 @@ export default class ConsentManager extends AutoConsentCMPBase {
 
   async detectPopup() {
     if (this.apiAvailable) {
+      // wait before making this check because early in the page lifecycle this may incorrectly return
+      // true, causing an opt-out when it is not needed.
+      await wait(500);
       return await doEval("!__cmp('consentStatus').userChoiceExists");
     }
     return elementVisible("#cmpbox .cmpmore", 'any');
