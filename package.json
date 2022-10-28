@@ -21,7 +21,8 @@
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
     "prepublish": "npm run build-rules && npm run bundle",
-    "launch:firefox": "web-ext run -s dist/addon-firefox"
+    "launch:firefox": "web-ext run -s dist/addon-firefox",
+    "release": "auto shipit"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
@@ -34,6 +35,7 @@
     "@types/mocha": "^9.1.1",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
+    "auto": "^10.37.6",
     "chai": "^4.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "mocha": "^10.0.0",
@@ -43,5 +45,12 @@
     "tslib": "^2.4.0",
     "typescript": "^4.6.4",
     "web-ext": "^7.3.0"
+  },
+  "repository": "duckduckgo/autoconsent",
+  "auto": {
+    "plugins": [
+      "npm"
+    ],
+    "onlyPublishWithReleaseLabel": true
   }
 }
