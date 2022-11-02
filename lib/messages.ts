@@ -5,7 +5,8 @@ export type BackgroundMessage =
   | EvalResponseMessage
   | OptOutMessage
   | OptInMessage
-  | SelfTestMessage;
+  | SelfTestMessage
+  | AuditMessage;
 
 export type ContentScriptMessage =
   InitMessage
@@ -16,7 +17,8 @@ export type ContentScriptMessage =
   | OptInResultMessage
   | SelfTestResultMessage
   | DoneMessage
-  | ErrorMessage;
+  | ErrorMessage
+  | AuditResponseMessage;
 
 export type InitMessage = {
   type: "init";
@@ -97,4 +99,15 @@ export type OptInMessage = {
 
 export type SelfTestMessage = {
   type: "selfTest";
+}
+
+export type AuditMessage = {
+  type: 'audit'
+}
+
+export type AuditResponseMessage = {
+  type: 'auditResponse';
+  url: string;
+  mainFrame: boolean;
+  foundCmp?: string;
 }

@@ -40,11 +40,10 @@ export default [{
   }],
   plugins: [
     typescript(),
-    terser(),
     copy({
       targets: [
         {
-          src: ['./addon/icons', './rules/rules.json'],
+          src: ['./addon/icons', './rules/rules.json', './addon/devtools'],
           dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
         },
         {
@@ -75,7 +74,6 @@ export default [{
   }],
   plugins: [
     typescript(),
-    terser(),
   ],
 }, {
   input: './addon/popup.ts',
@@ -85,6 +83,17 @@ export default [{
   }],
   plugins: [
     typescript(),
-    terser(),
+  ],
+}, {
+  input: './addon/devtools/panel.ts',
+  output: [{
+    file: './dist/addon-mv3/devtools/panel.js',
+    format: 'iife',
+  }, {
+    file: './dist/addon-firefox/devtools/panel.js',
+    format: 'iife',
+  }],
+  plugins: [
+    typescript(),
   ],
 }];

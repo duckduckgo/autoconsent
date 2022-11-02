@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Autoconsent Dev Panel</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <style>
+        .url {
+            width: 30%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        </style>
+    </head>
+    <body>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Frame Id</td>
+                    <td>URL</td>
+                    <td>Active?</td>
+                    <td>Detection attempts</td>
+                    <td>CMP Detected</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <template id="row">
+            <tr>
+                <td></td>
+                <td class="url"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+        <script src="./panel.js"></script>
+    </body>
+</html>

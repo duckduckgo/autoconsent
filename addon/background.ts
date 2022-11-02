@@ -1,8 +1,11 @@
 import { enableLogs } from "../lib/config";
-import { BackgroundMessage, ContentScriptMessage } from "../lib/messages";
+import { BackgroundMessage, ContentScriptMessage, AuditResponseMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { showOptOutStatus } from "./utils";
+
+const frameAudits: { [tabId: number]: {[frameId: number]: AuditResponseMessage } } = {};
+const openDevToolsPanels = new Map()
 
 async function loadRules() {
   const res = await fetch("./rules.json");
@@ -163,6 +166,25 @@ chrome.runtime.onMessage.addListener(
       case "autoconsentError":
         console.error('Error:', msg.details);
         break;
+      case "auditResponse":
+        // console.log('xxx', msg, sender);
+        // eslint-disable-next-line no-case-declarations
+        if (openDevToolsPanels.has(sender.tab?.id)) {
+          openDevToolsPanels.get(sender.tab?.id).postMessage({
+            tabId: sender.tab.id,
+            frameId: sender.frameId,
+            ...msg,
+          })
+        }
+        if (!frameAudits[sender.tab.id]) {
+          frameAudits[sender.tab.id] = {}
+        }
+        frameAudits[sender.tab.id][sender.frameId] = msg;
+        break;
+    }
+
+    if (!['auditResponse', 'eval'].includes(msg.type)) {
+      chrome.tabs.sendMessage(sender.tab.id, { type: 'audit' } as BackgroundMessage);
     }
   }
 );
@@ -184,3 +206,36 @@ if (manifestVersion === 2) { // MV3 handles this inside the popup
     }
   });
 }
+
+// Communicate with devtools panels
+chrome.runtime.onConnect.addListener(function(devToolsConnection) {
+  let tabId = -1;
+  // add the listener
+  devToolsConnection.onMessage.addListener((message) => {
+    tabId = message.tabId;
+    
+
+    switch(message.type) {
+      case 'init':
+        openDevToolsPanels.set(tabId, {
+          postMessage: devToolsConnection.postMessage.bind(devToolsConnection),
+        })
+        // dump data cached in bg to the panel
+        Object.keys(frameAudits[tabId]).forEach((frameId) => {
+          devToolsConnection.postMessage({
+            tabId,
+            frameId,
+            ...frameAudits[tabId][parseInt(frameId, 10)]
+          })
+        });
+        break;
+      case 'audit':
+        chrome.tabs.sendMessage(message.tabId, { type: 'audit' } as BackgroundMessage);
+        break;
+    }
+  });
+
+  devToolsConnection.onDisconnect.addListener(function() {
+    openDevToolsPanels.delete(tabId)
+  });
+});

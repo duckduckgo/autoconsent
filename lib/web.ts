@@ -326,6 +326,15 @@ export default class AutoConsent {
     return prehide(selectors);
   }
 
+  audit() {
+    this.sendContentMessage({
+      type: 'auditResponse',
+      url: document.location.href,
+      mainFrame: window.top === window.self,
+      foundCmp: this.foundCmp?.name,
+    })
+  }
+
   async receiveMessageCallback(message: BackgroundMessage) {
     if (enableLogs && message.type !== 'evalResp' /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
@@ -346,6 +355,8 @@ export default class AutoConsent {
       case 'evalResp':
         resolveEval(message.id, message.result);
         break;
+      case 'audit':
+        this.audit()
     }
   }
 }
