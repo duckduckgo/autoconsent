@@ -1,10 +1,10 @@
 import { enableLogs } from "../lib/config";
-import { BackgroundMessage, ContentScriptMessage, AuditResponseMessage } from "../lib/messages";
+import { BackgroundMessage, ContentScriptMessage, ReportResponseMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { showOptOutStatus } from "./utils";
 
-const frameAudits: { [tabId: number]: {[frameId: number]: AuditResponseMessage } } = {};
+const frameAudits: { [tabId: number]: {[frameId: number]: ReportResponseMessage } } = {};
 const openDevToolsPanels = new Map()
 
 async function loadRules() {
@@ -166,10 +166,13 @@ chrome.runtime.onMessage.addListener(
       case "autoconsentError":
         console.error('Error:', msg.details);
         break;
-      case "auditResponse":
+      case "reportResponse":
         // console.log('xxx', msg, sender);
         // eslint-disable-next-line no-case-declarations
         if (openDevToolsPanels.has(sender.tab?.id)) {
+          if (!msg.active) {
+            console.log('xxx', msg);
+          }
           openDevToolsPanels.get(sender.tab?.id).postMessage({
             tabId: sender.tab.id,
             frameId: sender.frameId,
@@ -183,8 +186,8 @@ chrome.runtime.onMessage.addListener(
         break;
     }
 
-    if (!['auditResponse', 'eval'].includes(msg.type)) {
-      chrome.tabs.sendMessage(sender.tab.id, { type: 'audit' } as BackgroundMessage);
+    if (!['reportResponse', 'eval'].includes(msg.type)) {
+      chrome.tabs.sendMessage(sender.tab.id, { type: 'report' } as BackgroundMessage);
     }
   }
 );
@@ -214,7 +217,6 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
   devToolsConnection.onMessage.addListener((message) => {
     tabId = message.tabId;
     
-
     switch(message.type) {
       case 'init':
         openDevToolsPanels.set(tabId, {
@@ -229,8 +231,8 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
           })
         });
         break;
-      case 'audit':
-        chrome.tabs.sendMessage(message.tabId, { type: 'audit' } as BackgroundMessage);
+      case 'report':
+        chrome.tabs.sendMessage(message.tabId, { type: 'report' } as BackgroundMessage);
         break;
     }
   });

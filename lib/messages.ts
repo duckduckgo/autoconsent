@@ -1,4 +1,4 @@
-import { Config, RuleBundle } from "./types";
+import { Config, ConsentState, RuleBundle } from "./types";
 
 export type BackgroundMessage =
   InitResponseMessage
@@ -6,7 +6,7 @@ export type BackgroundMessage =
   | OptOutMessage
   | OptInMessage
   | SelfTestMessage
-  | AuditMessage;
+  | ReportMessage;
 
 export type ContentScriptMessage =
   InitMessage
@@ -18,7 +18,7 @@ export type ContentScriptMessage =
   | SelfTestResultMessage
   | DoneMessage
   | ErrorMessage
-  | AuditResponseMessage;
+  | ReportResponseMessage;
 
 export type InitMessage = {
   type: "init";
@@ -101,13 +101,14 @@ export type SelfTestMessage = {
   type: "selfTest";
 }
 
-export type AuditMessage = {
-  type: 'audit'
+export type ReportMessage = {
+  type: 'report'
 }
 
-export type AuditResponseMessage = {
-  type: 'auditResponse';
+export type ReportResponseMessage = {
+  type: 'reportResponse';
   url: string;
   mainFrame: boolean;
-  foundCmp?: string;
+  active: boolean;
+  state: ConsentState;
 }

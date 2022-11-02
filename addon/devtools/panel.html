@@ -10,17 +10,22 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .dead {
+            text-decoration: line-through;
+        }
         </style>
     </head>
     <body>
-        <table class="table">
+        <table class="table is-fullwidth">
             <thead>
                 <tr>
                     <td>Frame Id</td>
                     <td>URL</td>
-                    <td>Active?</td>
+                    <td>State</td>
+                    <td>Prehide on?</td>
                     <td>Detection attempts</td>
                     <td>CMP Detected</td>
+                    <td>Popup open</td>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +36,8 @@
             <tr>
                 <td></td>
                 <td class="url"></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

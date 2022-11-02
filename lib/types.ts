@@ -33,3 +33,27 @@ export type Config = {
   enablePrehide: boolean;
   detectRetries: number;
 }
+
+export type LifecycleState = 'loading' |
+'initialized' |
+'waitingForInitResponse' |
+'started' |
+'nothingDetected' |
+'cmpDetected' |
+'openPopupDetected' |
+'runningOptOut' |
+'runningOptIn' |
+'optOutSuceeded' |
+'optOutFailed' |
+'optInSuceeded' |
+'optInFailed' |
+'done';
+
+export type ConsentState = {
+  lifecycle: LifecycleState;
+  prehideOn: boolean;
+  findCmpAttempts: number;
+  detectedCmps: string[],
+  detectedPopups: string[],
+}
+  

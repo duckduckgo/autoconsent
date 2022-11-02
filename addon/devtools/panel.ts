@@ -1,7 +1,24 @@
-import { AuditResponseMessage } from "../../lib/messages";
+import { ReportResponseMessage } from "../../lib/messages";
 
-type DevtoolsAuditMessage = AuditResponseMessage & { tabId: number, frameId: number }
+type DevtoolsAuditMessage = ReportResponseMessage & { tabId: number, frameId: number }
 
+
+function getRowForFrame(frameId: number) {
+    const rowId = `frame-${frameId}`;
+    if (document.getElementById(rowId) !== null) {
+        // update existing row
+        const td = document.getElementById(rowId).querySelectorAll('td');
+        return td;
+    } else {
+        const template : HTMLTemplateElement = document.querySelector('#row');
+        const table = document.querySelector('tbody');
+        const clone = template.content.cloneNode(true) as HTMLElement;
+        const td = clone.querySelectorAll('td');
+        table.appendChild(clone);
+        table.lastElementChild.id = rowId;
+        return td;
+    }
+}
 
 function reconnect(): chrome.runtime.Port {
     const backgroundPageConnection = chrome.runtime.connect({
@@ -9,31 +26,27 @@ function reconnect(): chrome.runtime.Port {
     });
 
     backgroundPageConnection.onMessage.addListener(function (message: DevtoolsAuditMessage) {
-        const rowId = `frame-${message.frameId}`;
-        if (document.getElementById(rowId) !== null) {
-            // update existing row
-            const td = document.getElementById(rowId).querySelectorAll('td');
-            if (message.foundCmp) {
-                td[4].innerText = `${message.foundCmp}`;
-            }
+        const td = getRowForFrame(message.frameId);
+        if (message.active === false) {
+            td[0].classList.add('dead')
+            td[1].classList.add('dead')
         } else {
-            const template : HTMLTemplateElement = document.querySelector('#row');
-            const table = document.querySelector('tbody');
-            const clone = template.content.cloneNode(true) as HTMLElement;
-            clone.id = rowId
-            const td = clone.querySelectorAll('td');
-            td[0].innerText = `${message.frameId}`;
-            td[1].innerText = `${message.url}`;
-            td[4].innerText = `${message.foundCmp}`;
-            table.appendChild(clone);
-            table.lastElementChild.id = rowId;
+            td[0].classList.remove('dead')
+            td[1].classList.remove('dead')
         }
+        td[0].innerText = `${message.frameId}`;
+        td[1].innerText = message.url;
+        td[2].innerText = message.state.lifecycle
+        td[3].innerText = message.state.prehideOn ? 'yes' : 'no'
+        td[4].innerText = `${message.state.findCmpAttempts}`;
+        td[5].innerText = message.state.detectedCmps.join(', ');
+        td[6].innerText = message.state.detectedPopups.join(', ');
     });
     
     // Relay the tab ID to the background page
     const pollInterval = setInterval(() => {
         backgroundPageConnection.postMessage({
-            type: 'audit',
+            type: 'report',
             tabId: chrome.devtools.inspectedWindow.tabId,
         });
     }, 500);
