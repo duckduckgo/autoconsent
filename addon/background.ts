@@ -170,9 +170,6 @@ chrome.runtime.onMessage.addListener(
         // console.log('xxx', msg, sender);
         // eslint-disable-next-line no-case-declarations
         if (openDevToolsPanels.has(sender.tab?.id)) {
-          if (!msg.active) {
-            console.log('xxx', msg);
-          }
           openDevToolsPanels.get(sender.tab?.id).postMessage({
             tabId: sender.tab.id,
             frameId: sender.frameId,
@@ -212,32 +209,49 @@ if (manifestVersion === 2) { // MV3 handles this inside the popup
 
 // Communicate with devtools panels
 chrome.runtime.onConnect.addListener(function(devToolsConnection) {
-  let tabId = -1;
-  // add the listener
-  devToolsConnection.onMessage.addListener((message) => {
-    tabId = message.tabId;
-    
-    switch(message.type) {
-      case 'init':
-        openDevToolsPanels.set(tabId, {
-          postMessage: devToolsConnection.postMessage.bind(devToolsConnection),
-        })
-        // dump data cached in bg to the panel
-        Object.keys(frameAudits[tabId]).forEach((frameId) => {
-          devToolsConnection.postMessage({
+  if (devToolsConnection.name.startsWith('instance-')) {
+    // connection from an autoconsent instance - used to detect frame destruction
+    const tabId = devToolsConnection.sender?.tab?.id;
+    const instanceId = devToolsConnection.name.slice('instance-'.length);
+    if (tabId && instanceId) {
+      devToolsConnection.onDisconnect.addListener(() => {
+        if (openDevToolsPanels.has(tabId)) {
+          openDevToolsPanels.get(tabId).postMessage({
+            type: 'instanceTerminated',
             tabId,
-            frameId,
-            ...frameAudits[tabId][parseInt(frameId, 10)]
-          })
-        });
-        break;
-      case 'report':
-        chrome.tabs.sendMessage(message.tabId, { type: 'report' } as BackgroundMessage);
-        break;
+            instanceId,
+          });
+        }
+      })
     }
-  });
+  } else if (devToolsConnection.name === 'devtools-panel') {
+    let tabId = -1;
+    // add the listener
+    devToolsConnection.onMessage.addListener((message) => {
+      tabId = message.tabId;
+      
+      switch(message.type) {
+        case 'init':
+          openDevToolsPanels.set(tabId, {
+            postMessage: devToolsConnection.postMessage.bind(devToolsConnection),
+          })
+          // dump data cached in bg to the panel
+          Object.keys(frameAudits[tabId]).forEach((frameId) => {
+            devToolsConnection.postMessage({
+              tabId,
+              frameId,
+              ...frameAudits[tabId][parseInt(frameId, 10)]
+            })
+          });
+          break;
+        case 'report':
+          chrome.tabs.sendMessage(message.tabId, { type: 'report' } as BackgroundMessage);
+          break;
+      }
+    });
 
-  devToolsConnection.onDisconnect.addListener(function() {
-    openDevToolsPanels.delete(tabId)
-  });
+    devToolsConnection.onDisconnect.addListener(function() {
+      openDevToolsPanels.delete(tabId)
+    });
+  }
 });

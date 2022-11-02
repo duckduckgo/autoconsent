@@ -1,10 +1,14 @@
 import { ReportResponseMessage } from "../../lib/messages";
 
 type DevtoolsAuditMessage = ReportResponseMessage & { tabId: number, frameId: number }
+type InstanceTerminatedMessage = {
+    type: 'instanceTerminated';
+    tabId: number;
+    instanceId: string;
+}
 
-
-function getRowForFrame(frameId: number) {
-    const rowId = `frame-${frameId}`;
+function getRowForInstance(instanceId: string) {
+    const rowId = `instance-${instanceId}`;
     if (document.getElementById(rowId) !== null) {
         // update existing row
         const td = document.getElementById(rowId).querySelectorAll('td');
@@ -25,22 +29,19 @@ function reconnect(): chrome.runtime.Port {
         name: "devtools-panel"
     });
 
-    backgroundPageConnection.onMessage.addListener(function (message: DevtoolsAuditMessage) {
-        const td = getRowForFrame(message.frameId);
-        if (message.active === false) {
-            td[0].classList.add('dead')
-            td[1].classList.add('dead')
-        } else {
-            td[0].classList.remove('dead')
-            td[1].classList.remove('dead')
+    backgroundPageConnection.onMessage.addListener(function (message: DevtoolsAuditMessage | InstanceTerminatedMessage) {
+        if (message.type === 'reportResponse') {
+            const td = getRowForInstance(message.instanceId);
+            td[0].innerText = `${message.frameId}`;
+            td[1].innerText = message.url;
+            td[2].innerText = message.state.lifecycle
+            td[3].innerText = message.state.prehideOn ? 'yes' : 'no'
+            td[4].innerText = `${message.state.findCmpAttempts}`;
+            td[5].innerText = message.state.detectedCmps.join(', ');
+            td[6].innerText = message.state.detectedPopups.join(', ');
+        } else if (message.type === 'instanceTerminated') {
+            document.getElementById(`instance-${message.instanceId}`).classList.add('dead')
         }
-        td[0].innerText = `${message.frameId}`;
-        td[1].innerText = message.url;
-        td[2].innerText = message.state.lifecycle
-        td[3].innerText = message.state.prehideOn ? 'yes' : 'no'
-        td[4].innerText = `${message.state.findCmpAttempts}`;
-        td[5].innerText = message.state.detectedCmps.join(', ');
-        td[6].innerText = message.state.detectedPopups.join(', ');
     });
     
     // Relay the tab ID to the background page

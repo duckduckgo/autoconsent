@@ -107,8 +107,8 @@ export type ReportMessage = {
 
 export type ReportResponseMessage = {
   type: 'reportResponse';
+  instanceId: string;
   url: string;
   mainFrame: boolean;
-  active: boolean;
   state: ConsentState;
 }

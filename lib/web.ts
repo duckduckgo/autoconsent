@@ -10,6 +10,7 @@ import { evalState, resolveEval } from './eval-handler';
 export * from './index';
 
 export default class AutoConsent {
+  id = window.crypto.randomUUID();
   rules: AutoCMP[] = [];
   config: Config;
   foundCmp: AutoCMP = null;
@@ -266,6 +267,7 @@ export default class AutoConsent {
     } else {
       this.state.lifecycle = optOutResult ? 'optOutSuceeded' : 'optOutFailed';
     }
+    this.sendReport();
 
     return optOutResult;
   }
@@ -355,12 +357,12 @@ export default class AutoConsent {
     return prehide(selectors);
   }
 
-  sendReport(contextIsClosing = false) {
+  sendReport() {
     this.sendContentMessage({
       type: 'reportResponse',
+      instanceId: this.id,
       url: document.location.href,
       mainFrame: window.top === window.self,
-      active: !contextIsClosing,
       state: this.state,
     })
   }

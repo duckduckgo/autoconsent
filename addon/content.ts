@@ -6,4 +6,4 @@ chrome.runtime.onMessage.addListener((message: BackgroundMessage) => {
   return Promise.resolve(consent.receiveMessageCallback(message));
 });
 
-window.addEventListener('beforeunload', () => consent.sendReport(true))
+chrome.runtime.connect({ name: `instance-${consent.id}` });
