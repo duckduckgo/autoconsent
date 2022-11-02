@@ -1,2 +1,2 @@
 /* global chrome */
-chrome.devtools.panels.create('autoconsent', '/icons/cookie.png', "/devtools/panel.html")
+chrome.devtools.panels.create('Autoconsent', '/icons/cookie.png', "/devtools/panel.html")

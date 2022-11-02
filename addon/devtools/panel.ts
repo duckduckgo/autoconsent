@@ -40,7 +40,7 @@ function reconnect(): chrome.runtime.Port {
             td[5].innerText = message.state.detectedCmps.join(', ');
             td[6].innerText = message.state.detectedPopups.join(', ');
         } else if (message.type === 'instanceTerminated') {
-            document.getElementById(`instance-${message.instanceId}`).classList.add('dead')
+            document.getElementById(`instance-${message.instanceId}`)?.classList.add('dead')
         }
     });
     
@@ -64,3 +64,27 @@ reconnect().postMessage({
     type: 'init',
     tabId: chrome.devtools.inspectedWindow.tabId,
 })
+
+const clearStorageCheckbox : HTMLInputElement = document.querySelector('#clear-storage');
+
+document.getElementById('clear').addEventListener('click', () => {
+    const tbody = document.querySelector('tbody');
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+});
+
+document.getElementById('reload').addEventListener('click', async () => {
+    if (clearStorageCheckbox.checked) {
+        const tab = await chrome.tabs.get(chrome.devtools.inspectedWindow.tabId);
+        const url = new URL(tab.url);
+        await chrome.browsingData.remove({
+            origins: [url.origin],
+        }, {
+            cookies: true,
+            localStorage: true,
+            indexedDB: true,
+        });
+    }
+    chrome.devtools.inspectedWindow.reload({});
+});

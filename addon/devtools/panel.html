@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Autoconsent Dev Panel</title>
-        <meta charset="UTF-8" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <style>
         .url {
-            width: 30%;
             overflow: hidden;
             text-overflow: ellipsis;
+            max-width: 300px;
         }
         .dead {
             text-decoration: line-through;
         }
+        td {
+            max-height: 30px;
+        }
         </style>
     </head>
     <body>
+        <div class="container">
+            <button class="button" id="clear">Clear</button>
+            <button class="button" id="reload">Reload</button>
+            <label class="checkbox">
+                <input type="checkbox" id="clear-storage">
+                Clear site storage on reload
+            </label>
+        </div>
         <table class="table is-fullwidth">
             <thead>
                 <tr>
-                    <td>Frame Id</td>
-                    <td>URL</td>
-                    <td>State</td>
-                    <td>Prehide on?</td>
-                    <td>Detection attempts</td>
-                    <td>CMP Detected</td>
-                    <td>Popup open</td>
+                    <th>Frame Id</th>
+                    <th>URL</th>
+                    <th>State</th>
+                    <th>Prehide on?</th>
+                    <th>Detection attempts</th>
+                    <th>CMP Detected</th>
+                    <th>Popup open</th>
                 </tr>
             </thead>
             <tbody>
