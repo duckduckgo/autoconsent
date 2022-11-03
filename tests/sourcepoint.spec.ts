@@ -2,7 +2,6 @@ import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('Sourcepoint-frame', [
     'https://www.theguardian.com/',
-    'https://www.n-tv.de/',
     'https://news.sky.com/',
 ]);
 
@@ -19,6 +18,7 @@ generateCMPTests('Sourcepoint-frame', [
     "https://www.sueddeutsche.de/",
     "https://www.derstandard.at/",
     "https://www.heise.de/",
+    'https://www.n-tv.de/',
 ], {
     skipRegions: ["US", "GB", "FR"],
     expectPopupOpen: false,

@@ -125,7 +125,7 @@ export function generateTest(
       await waitFor(() => isMessageReceived({ type: "cmpDetected", cmp: expectedCmp }), 50, 500);
       expect(isMessageReceived({ type: "cmpDetected", cmp: expectedCmp })).toBe(true);
 
-      await waitFor(() => isMessageReceived({ type: "popupFound", cmp: expectedCmp }), 50, 500);
+      await waitFor(() => isMessageReceived({ type: "popupFound", cmp: expectedCmp }), options.expectPopupOpen ? 50 : 5, 500);
       expect(isMessageReceived({ type: "popupFound", cmp: expectedCmp })).toBe(options.expectPopupOpen);
 
       if (options.expectPopupOpen) {
