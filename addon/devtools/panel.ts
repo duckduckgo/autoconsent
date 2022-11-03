@@ -1,10 +1,10 @@
-import { ReportResponseMessage } from "../../lib/messages";
+import { BackgroundDevtoolsMessage, DevtoolsMessage, ReportMessage } from "../../lib/messages";
+import { storageGet, storageSet } from "../mv-compat";
 
-type DevtoolsAuditMessage = ReportResponseMessage & { tabId: number, frameId: number }
-type InstanceTerminatedMessage = {
-    type: 'instanceTerminated';
-    tabId: number;
-    instanceId: string;
+let backgroundPageConnection: chrome.runtime.Port;
+
+function sendBackgroundMessage(msg: DevtoolsMessage) {
+    backgroundPageConnection.postMessage(msg);
 }
 
 function getRowForInstance(instanceId: string) {
@@ -14,7 +14,7 @@ function getRowForInstance(instanceId: string) {
         const td = document.getElementById(rowId).querySelectorAll('td');
         return td;
     } else {
-        const template : HTMLTemplateElement = document.querySelector('#row');
+        const template: HTMLTemplateElement = document.querySelector('#row');
         const table = document.querySelector('tbody');
         const clone = template.content.cloneNode(true) as HTMLElement;
         const td = clone.querySelectorAll('td');
@@ -25,11 +25,15 @@ function getRowForInstance(instanceId: string) {
 }
 
 function reconnect(): chrome.runtime.Port {
-    const backgroundPageConnection = chrome.runtime.connect({
+    backgroundPageConnection = chrome.runtime.connect({
         name: "devtools-panel"
     });
+    sendBackgroundMessage({
+        type: 'init',
+        tabId: chrome.devtools.inspectedWindow.tabId,
+    });
 
-    backgroundPageConnection.onMessage.addListener(function (message: DevtoolsAuditMessage | InstanceTerminatedMessage) {
+    backgroundPageConnection.onMessage.addListener(function (message: BackgroundDevtoolsMessage) {
         if (message.type === 'reportResponse') {
             const td = getRowForInstance(message.instanceId);
             td[0].innerText = `${message.frameId}`;
@@ -43,15 +47,16 @@ function reconnect(): chrome.runtime.Port {
             document.getElementById(`instance-${message.instanceId}`)?.classList.add('dead')
         }
     });
-    
+
     // Relay the tab ID to the background page
     const pollInterval = setInterval(() => {
-        backgroundPageConnection.postMessage({
-            type: 'report',
-            tabId: chrome.devtools.inspectedWindow.tabId,
-        });
+        // sendBackgroundMessage({
+        //     type: 'report',
+        //     tabId: chrome.devtools.inspectedWindow.tabId,
+        // });
+        chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, { type: 'report' });
     }, 500);
-    
+
     backgroundPageConnection.onDisconnect.addListener(() => {
         clearInterval(pollInterval);
         reconnect();
@@ -60,31 +65,65 @@ function reconnect(): chrome.runtime.Port {
     return backgroundPageConnection;
 }
 
-reconnect().postMessage({
-    type: 'init',
-    tabId: chrome.devtools.inspectedWindow.tabId,
-})
+const clearStorageCheckbox: HTMLInputElement = document.querySelector('#clear-storage');
 
-const clearStorageCheckbox : HTMLInputElement = document.querySelector('#clear-storage');
-
-document.getElementById('clear').addEventListener('click', () => {
+const clearPanel = () => {
     const tbody = document.querySelector('tbody');
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
-});
+}
+document.getElementById('clear').addEventListener('click', clearPanel);
 
 document.getElementById('reload').addEventListener('click', async () => {
+    clearPanel();
     if (clearStorageCheckbox.checked) {
-        const tab = await chrome.tabs.get(chrome.devtools.inspectedWindow.tabId);
-        const url = new URL(tab.url);
-        await chrome.browsingData.remove({
-            origins: [url.origin],
-        }, {
-            cookies: true,
-            localStorage: true,
-            indexedDB: true,
+        sendBackgroundMessage({
+            type: 'clearStorage',
+            tabId: chrome.devtools.inspectedWindow.tabId,
         });
+    } else {
+        chrome.devtools.inspectedWindow.reload({});
     }
-    chrome.devtools.inspectedWindow.reload({});
 });
+
+document.getElementById('mode').addEventListener('change', async () => {
+    const storedConfig = await storageGet('config');
+    let autoAction = document.querySelector('#mode > option:checked').getAttribute('data-autoaction');
+    if (autoAction === 'null') {
+        autoAction = null;
+    }
+    storedConfig.autoAction = autoAction;
+    storageSet({
+        config: storedConfig,
+    })
+});
+
+document.getElementById('optin').addEventListener('click', () => {
+    chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, {
+        type: 'optIn',
+    })
+});
+
+document.getElementById('optout').addEventListener('click', () => {
+    chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, {
+        type: 'optOut',
+    })
+});
+
+(async () => {
+    const config = await storageGet('config');
+    const modeOptions: NodeListOf<HTMLOptionElement> = document.querySelectorAll('#mode > option');
+    switch (config.autoAction) {
+        case "optIn":
+            modeOptions[1].selected = true;
+            break;
+        case "optOut":
+            modeOptions[2].selected = true;
+            break;
+        default:
+            modeOptions[0].selected = true;
+    }
+})()
+
+reconnect()

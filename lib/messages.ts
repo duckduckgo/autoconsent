@@ -1,7 +1,7 @@
 import { Config, ConsentState, RuleBundle } from "./types";
 
 export type BackgroundMessage =
-  InitResponseMessage
+  | InitResponseMessage
   | EvalResponseMessage
   | OptOutMessage
   | OptInMessage
@@ -9,7 +9,7 @@ export type BackgroundMessage =
   | ReportMessage;
 
 export type ContentScriptMessage =
-  InitMessage
+  | InitMessage
   | EvalMessage
   | DetectedMessage
   | FoundMessage
@@ -19,6 +19,16 @@ export type ContentScriptMessage =
   | DoneMessage
   | ErrorMessage
   | ReportResponseMessage;
+
+export type BackgroundDevtoolsMessage =
+  | DevtoolsAuditMessage
+  | InstanceTerminatedMessage
+  | InitResponseMessage;
+
+export type DevtoolsMessage =
+  | DevtoolsInitMessage
+  | ReportMessage & { tabId: number }
+  | DevtoolsClearStorageMessage
 
 export type InitMessage = {
   type: "init";
@@ -35,13 +45,13 @@ export type DetectedMessage = {
   type: "cmpDetected";
   cmp: string;
   url: string;
-}
+};
 
 export type FoundMessage = {
   type: "popupFound";
   cmp: string;
   url: string;
-}
+};
 
 export type OptOutResultMessage = {
   type: "optOutResult";
@@ -70,45 +80,63 @@ export type DoneMessage = {
   type: "autoconsentDone";
   cmp: string;
   url: string;
-}
+};
 
 export type ErrorMessage = {
   type: "autoconsentError";
   details: any;
-}
+};
 
 export type InitResponseMessage = {
   type: "initResp";
   rules: RuleBundle;
   config: Config;
-}
+};
 
 export type EvalResponseMessage = {
   type: "evalResp";
   id: string;
   result: any;
-}
+};
 
 export type OptOutMessage = {
   type: "optOut";
-}
+};
 
 export type OptInMessage = {
   type: "optIn";
-}
+};
 
 export type SelfTestMessage = {
   type: "selfTest";
-}
+};
 
 export type ReportMessage = {
-  type: 'report'
-}
+  type: "report";
+};
 
 export type ReportResponseMessage = {
-  type: 'reportResponse';
+  type: "reportResponse";
   instanceId: string;
   url: string;
   mainFrame: boolean;
   state: ConsentState;
+};
+
+export type DevtoolsAuditMessage = ReportResponseMessage & { tabId: number, frameId: number }
+
+export type InstanceTerminatedMessage = {
+  type: 'instanceTerminated';
+  tabId: number;
+  instanceId: string;
+}
+
+export type DevtoolsInitMessage = {
+  type: 'init';
+  tabId: number;
+}
+
+export type DevtoolsClearStorageMessage = {
+  type: 'clearStorage';
+  tabId: number;
 }

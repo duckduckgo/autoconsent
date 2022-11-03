@@ -1,5 +1,5 @@
 import { enableLogs } from "../lib/config";
-import { BackgroundMessage, ContentScriptMessage, ReportResponseMessage } from "../lib/messages";
+import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportResponseMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { showOptOutStatus } from "./utils";
@@ -227,26 +227,36 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
   } else if (devToolsConnection.name === 'devtools-panel') {
     let tabId = -1;
     // add the listener
-    devToolsConnection.onMessage.addListener((message) => {
+    devToolsConnection.onMessage.addListener(async (message: DevtoolsMessage) => {
       tabId = message.tabId;
       
-      switch(message.type) {
-        case 'init':
-          openDevToolsPanels.set(tabId, {
-            postMessage: devToolsConnection.postMessage.bind(devToolsConnection),
+      if (message.type === 'init') {
+        // save the message channel for this tab
+        openDevToolsPanels.set(tabId, {
+          postMessage: devToolsConnection.postMessage.bind(devToolsConnection),
+        });
+
+        // dump data cached in bg to the panel
+        Object.keys(frameAudits[tabId] || {}).forEach((frameId) => {
+          devToolsConnection.postMessage({
+            tabId,
+            frameId,
+            ...frameAudits[tabId][parseInt(frameId, 10)]
           })
-          // dump data cached in bg to the panel
-          Object.keys(frameAudits[tabId]).forEach((frameId) => {
-            devToolsConnection.postMessage({
-              tabId,
-              frameId,
-              ...frameAudits[tabId][parseInt(frameId, 10)]
-            })
-          });
-          break;
-        case 'report':
-          chrome.tabs.sendMessage(message.tabId, { type: 'report' } as BackgroundMessage);
-          break;
+        });
+      } else if (message.type === 'report') {
+        chrome.tabs.sendMessage(message.tabId, { type: 'report' } as BackgroundMessage);
+      } else if (message.type === 'clearStorage') {
+        const tab = await chrome.tabs.get(message.tabId);
+        const url = new URL(tab.url);
+        await chrome.browsingData.remove({
+            origins: [url.origin],
+        }, {
+            cookies: true,
+            localStorage: true,
+            indexedDB: true,
+        });
+        await chrome.tabs.reload(message.tabId);
       }
     });
 
