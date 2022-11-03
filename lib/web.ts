@@ -368,7 +368,7 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
-    if (enableLogs && message.type !== 'evalResp' /* evals are noisy */) {
+    if (enableLogs && ['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
     }
     switch (message.type) {
