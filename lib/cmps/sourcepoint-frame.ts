@@ -36,7 +36,8 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return true;
+    // check for the paywall button, and bail if it exists to prevent broken opt out
+    return !elementExists('.sp_choice_type_9');
   }
 
   async optIn() {
