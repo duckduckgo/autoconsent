@@ -1,4 +1,4 @@
-import { BackgroundDevtoolsMessage, DevtoolsMessage, ReportMessage } from "../../lib/messages";
+import { BackgroundDevtoolsMessage, DevtoolsMessage } from "../../lib/messages";
 import { storageGet, storageSet } from "../mv-compat";
 
 let backgroundPageConnection: chrome.runtime.Port;
@@ -48,12 +48,8 @@ function reconnect(): chrome.runtime.Port {
         }
     });
 
-    // Relay the tab ID to the background page
+    // Poll for instance reports (responses come via background)
     const pollInterval = setInterval(() => {
-        // sendBackgroundMessage({
-        //     type: 'report',
-        //     tabId: chrome.devtools.inspectedWindow.tabId,
-        // });
         chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, { type: 'report' });
     }, 500);
 
@@ -76,15 +72,19 @@ const clearPanel = () => {
 document.getElementById('clear').addEventListener('click', clearPanel);
 
 document.getElementById('reload').addEventListener('click', async () => {
-    clearPanel();
     if (clearStorageCheckbox.checked) {
-        sendBackgroundMessage({
-            type: 'clearStorage',
-            tabId: chrome.devtools.inspectedWindow.tabId,
+        const tab = await chrome.tabs.get(chrome.devtools.inspectedWindow.tabId);
+        const url = new URL(tab.url);
+        await chrome.browsingData.remove({
+            origins: [url.origin],
+        }, {
+            cookies: true,
+            localStorage: true,
+            indexedDB: true,
         });
-    } else {
-        chrome.devtools.inspectedWindow.reload({});
     }
+    clearPanel();
+    chrome.devtools.inspectedWindow.reload({});
 });
 
 document.getElementById('mode').addEventListener('change', async () => {

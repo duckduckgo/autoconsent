@@ -244,19 +244,6 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
             ...frameAudits[tabId][parseInt(frameId, 10)]
           })
         });
-      } else if (message.type === 'report') {
-        chrome.tabs.sendMessage(message.tabId, { type: 'report' } as BackgroundMessage);
-      } else if (message.type === 'clearStorage') {
-        const tab = await chrome.tabs.get(message.tabId);
-        const url = new URL(tab.url);
-        await chrome.browsingData.remove({
-            origins: [url.origin],
-        }, {
-            cookies: true,
-            localStorage: true,
-            indexedDB: true,
-        });
-        await chrome.tabs.reload(message.tabId);
       }
     });
 

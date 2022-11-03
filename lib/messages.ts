@@ -26,9 +26,7 @@ export type BackgroundDevtoolsMessage =
   | InitResponseMessage;
 
 export type DevtoolsMessage =
-  | DevtoolsInitMessage
-  | ReportMessage & { tabId: number }
-  | DevtoolsClearStorageMessage
+  | DevtoolsInitMessage;
 
 export type InitMessage = {
   type: "init";
@@ -133,10 +131,5 @@ export type InstanceTerminatedMessage = {
 
 export type DevtoolsInitMessage = {
   type: 'init';
-  tabId: number;
-}
-
-export type DevtoolsClearStorageMessage = {
-  type: 'clearStorage';
   tabId: number;
 }

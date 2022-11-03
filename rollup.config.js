@@ -43,11 +43,11 @@ export default [{
     copy({
       targets: [
         {
-          src: ['./addon/icons', './rules/rules.json', './addon/devtools'],
+          src: ['./addon/icons', './rules/rules.json'],
           dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
         },
         {
-          src: ['./addon/popup.html'],
+          src: ['./addon/popup.html', './addon/devtools'],
           dest: ['./dist/addon-mv3/']
         },
         {
@@ -88,9 +88,6 @@ export default [{
   input: './addon/devtools/panel.ts',
   output: [{
     file: './dist/addon-mv3/devtools/panel.js',
-    format: 'iife',
-  }, {
-    file: './dist/addon-firefox/devtools/panel.js',
     format: 'iife',
   }],
   plugins: [

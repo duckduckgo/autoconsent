@@ -23,12 +23,10 @@
     "*://*/*",
     "tabs",
     "storage",
-    "webNavigation",
-    "browsingData"
+    "webNavigation"
   ],
   "page_action": {
     "browser_style": true,
     "default_title": "Autoconsent"
-  },
-  "devtools_page": "devtools/background.html"
+  }
 }
