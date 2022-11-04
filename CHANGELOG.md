@@ -1,3 +1,15 @@
+# v3.0.2 (Fri Nov 04 2022)
+
+#### 🐛 Bug Fix
+
+- Ignore Sourcepoint cookie paywall [#40](https://github.com/duckduckgo/autoconsent/pull/40) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v3.0.1 (Thu Nov 03 2022)
 
 #### 🐛 Bug Fix
