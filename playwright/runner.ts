@@ -15,6 +15,7 @@ type TestOptions = {
   skipRegions?: string[];
   onlyRegions?: string[];
   mobile: boolean;
+  expectPopupOpen: boolean;
 };
 const defaultOptions: TestOptions = {
   testOptOut: true,
@@ -23,6 +24,7 @@ const defaultOptions: TestOptions = {
   skipRegions: [],
   onlyRegions: [],
   mobile: false,
+  expectPopupOpen: true,
 };
 
 const contentScript = fs.readFileSync(
@@ -120,23 +122,28 @@ export function generateTest(
       page.on("framenavigated", injectContentScript);
 
       // wait for all messages and assertions
-      await waitFor(() => isMessageReceived({ type: "popupFound", cmp: expectedCmp }), 50, 500);
-      expect(isMessageReceived({ type: "popupFound", cmp: expectedCmp })).toBe(true);
+      await waitFor(() => isMessageReceived({ type: "cmpDetected", cmp: expectedCmp }), 50, 500);
+      expect(isMessageReceived({ type: "cmpDetected", cmp: expectedCmp })).toBe(true);
 
-      if (autoAction === 'optOut') {
-        await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 300);
-        expect(isMessageReceived({ type: "optOutResult", result: true })).toBe(true);
+      await waitFor(() => isMessageReceived({ type: "popupFound", cmp: expectedCmp }), options.expectPopupOpen ? 50 : 5, 500);
+      expect(isMessageReceived({ type: "popupFound", cmp: expectedCmp })).toBe(options.expectPopupOpen);
+
+      if (options.expectPopupOpen) {
+        if (autoAction === 'optOut') {
+          await waitFor(() => isMessageReceived({ type: "optOutResult", result: true }), 50, 300);
+          expect(isMessageReceived({ type: "optOutResult", result: true })).toBe(true);
+        }
+        if (autoAction === 'optIn') {
+          await waitFor(() => isMessageReceived({ type: "optInResult", result: true }), 50, 300);
+          expect(isMessageReceived({ type: "optInResult", result: true })).toBe(true);
+        }
+        if (options.testSelfTest && selfTestFrame) {
+          await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 300);
+          expect(isMessageReceived({ type: "selfTestResult", result: true })).toBe(true);
+        }
+        await waitFor(() => isMessageReceived({ type: "autoconsentDone" }), 10, 500);
+        expect(isMessageReceived({ type: "autoconsentDone" })).toBe(true);
       }
-      if (autoAction === 'optIn') {
-        await waitFor(() => isMessageReceived({ type: "optInResult", result: true }), 50, 300);
-        expect(isMessageReceived({ type: "optInResult", result: true })).toBe(true);
-      }
-      if (options.testSelfTest && selfTestFrame) {
-        await waitFor(() => isMessageReceived({ type: "selfTestResult", result: true }), 50, 300);
-        expect(isMessageReceived({ type: "selfTestResult", result: true })).toBe(true);
-      }
-      await waitFor(() => isMessageReceived({ type: "autoconsentDone" }), 10, 500);
-      expect(isMessageReceived({ type: "autoconsentDone" })).toBe(true);
 
       expect(isMessageReceived({ type: "autoconsentError" })).toBe(false);
     })

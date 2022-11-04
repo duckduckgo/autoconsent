@@ -1,5 +1,5 @@
 import { enableLogs } from "../config";
-import { click, elementExists, wait, waitForElement } from "../rule-executors";
+import { click, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -36,7 +36,9 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return true;
+    // check for the paywall button, and bail if it exists to prevent broken opt out
+    await waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL", 2000);
+    return !elementExists('.sp_choice_type_9');
   }
 
   async optIn() {
