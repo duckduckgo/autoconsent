@@ -1,14 +1,14 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('Complianz categories', [
-    // 'https://www.expatica.com/de', // cloudflare botwall
-    'https://carnavaldecadiztv.com/',
+  // 'https://www.expatica.com/de', // cloudflare botwall
+  'https://carnavaldecadiztv.com/',
 ], {
-    skipRegions: ['GB']
+  skipRegions: ['GB']
 });
 
 generateCMPTests('Complianz categories', [
-    'https://hypotheses.org/',
+  'https://hypotheses.org/',
 ], {
-    skipRegions: ['US', 'GB']
+  skipRegions: ['US', 'GB']
 });

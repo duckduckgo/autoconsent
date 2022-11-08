@@ -1,16 +1,16 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('dmgmedia', [
-    'https://www.dailymail.co.uk/',
-    'https://metro.co.uk/',
+  'https://www.dailymail.co.uk/',
+  'https://metro.co.uk/',
 ], {
-    skipRegions: ['US']
+  skipRegions: ['US']
 });
 
 generateCMPTests('dmgmedia', [
-    'https://www.dailymail.co.uk/',
-    'https://metro.co.uk/',
+  'https://www.dailymail.co.uk/',
+  'https://metro.co.uk/',
 ], {
-    skipRegions: ['US'],
-    mobile: true
+  skipRegions: ['US'],
+  mobile: true
 });
