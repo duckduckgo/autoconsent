@@ -37,6 +37,7 @@ export default class Onetrust extends AutoConsentCMPBase {
     await wait(1000);
     click("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked", true); // optional step
 
+    await wait(1000);
     await waitForElement(".save-preference-btn-handler,.js-consent-save", 2000);
     click(".save-preference-btn-handler,.js-consent-save");
 
