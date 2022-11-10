@@ -1,7 +1,7 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('Evidon', [
-  'https://www.fujitsu.com/global/'
+  'https://www.crunchyroll.com/',
 ]);
 
 generateCMPTests('Evidon', [
