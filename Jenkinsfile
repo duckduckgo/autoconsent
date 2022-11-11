@@ -1,14 +1,19 @@
 def runPlaywrightTests(resultDir, browser, grep) {
-    sh 'mkdir -p ./test-results'
-    sh """
-        PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --workers 16 --grep "$grep"|| true
-    """
-    junit 'results.xml'
-    sh """
-        mkdir -p ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
-        mkdir -p ./test-results
-        mv ./test-results/ ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
-    """
+    try {
+        timeout(10) {
+            sh 'mkdir -p ./test-results'
+            sh """
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --workers 16 --grep "$grep"|| true
+            """
+        }
+    } finally {
+        junit 'results.xml'
+        sh """
+            mkdir -p ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
+            mkdir -p ./test-results
+            mv ./test-results/ ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
+        """
+    }
 }
 
 def withEnvFile(envfile, Closure cb) {
