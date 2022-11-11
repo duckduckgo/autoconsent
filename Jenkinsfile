@@ -3,7 +3,7 @@ def runPlaywrightTests(resultDir, browser, grep) {
         timeout(10) {
             sh 'mkdir -p ./test-results'
             sh """
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --workers 16 --grep "$grep"|| true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --workers 10 --grep "$grep"|| true
             """
         }
     } finally {
