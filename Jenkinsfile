@@ -1,7 +1,7 @@
-def runPlaywrightTests(resultDir) {
+def runPlaywrightTests(resultDir, browser, grep) {
     sh 'mkdir -p ./test-results'
     sh """
-        PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project webkit --project iphoneSE --reporter=junit || true
+        PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --workers 16 --grep "$grep"|| true
     """
     junit 'results.xml'
     sh """
@@ -19,9 +19,11 @@ def withEnvFile(envfile, Closure cb) {
 }
 
 pipeline {
-    agent { label 'crawler-autoconsent' }
+    agent { label 'crawler-worker' } // TODO - temporarily while crawler-autoconsent is occupied
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
+        choice(name: 'BROWSER', choices: ['webkit', 'iphoneSE', 'chrome', 'firefox'], description: 'Browser')
+        string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
     }
     environment {
         NODENV_VERSION = "14.15.4"
@@ -41,13 +43,16 @@ pipeline {
                 npm ci
                 npx playwright install webkit
                 '''
+                script {
+                    currentBuild.description = "${params.BROWSER} - ${params.GREP}"
+                }
             }
         }
         
         stage('Test: DE') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                 }
             }
         }
@@ -55,7 +60,7 @@ pipeline {
         stage('Test: US') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                 }
             }
         }
@@ -63,7 +68,7 @@ pipeline {
         stage('Test: GB') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                 }
             }
         }
@@ -71,7 +76,7 @@ pipeline {
         stage('Test: FR') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/fr.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT)
+                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                 }
             }
         }
