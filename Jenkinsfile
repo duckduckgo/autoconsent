@@ -24,7 +24,7 @@ def withEnvFile(envfile, Closure cb) {
 }
 
 pipeline {
-    agent { label 'crawler-worker' } // TODO - temporarily while crawler-autoconsent is occupied
+    agent { label 'autoconsent-crawler' }
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['webkit', 'iphoneSE', 'chrome', 'firefox'], description: 'Browser')
