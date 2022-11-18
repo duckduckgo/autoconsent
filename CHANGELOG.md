@@ -1,3 +1,18 @@
+# v3.0.3 (Fri Nov 18 2022)
+
+#### 🐛 Bug Fix
+
+- Fix borlabs tests. [#43](https://github.com/duckduckgo/autoconsent/pull/43) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix reddit [#46](https://github.com/duckduckgo/autoconsent/pull/46) ([@sammacbeth](https://github.com/sammacbeth))
+- Add extra options for Jenkins to improve test reliability. [#48](https://github.com/duckduckgo/autoconsent/pull/48) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix popup showing after opt-out complete on stackoverflow.com [#41](https://github.com/duckduckgo/autoconsent/pull/41) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v3.0.2 (Fri Nov 04 2022)
 
 #### 🐛 Bug Fix
