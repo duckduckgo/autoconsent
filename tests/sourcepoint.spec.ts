@@ -10,6 +10,7 @@ generateCMPTests('Sourcepoint-frame', [
     "https://www.brianmadden.com/",
     "https://www.csoonline.com/blogs",
     "https://www.independent.co.uk/",
+    "https://reitschuster.de/"
 ], {
     skipRegions: ["US", "GB"],
 });
