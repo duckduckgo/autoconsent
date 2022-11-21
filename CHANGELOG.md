@@ -1,3 +1,15 @@
+# v3.0.4 (Mon Nov 21 2022)
+
+#### 🐛 Bug Fix
+
+- Fix sourcepoint prehiding; Remove sourcepoint-top. [#50](https://github.com/duckduckgo/autoconsent/pull/50) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v3.0.3 (Fri Nov 18 2022)
 
 #### 🐛 Bug Fix
