@@ -1,10 +1,11 @@
 import { enableLogs } from "../config";
-import { click, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
+import { click, elementExists, wait, waitForElement } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
+  prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay"]
 
   ccpaMode = false;
 
