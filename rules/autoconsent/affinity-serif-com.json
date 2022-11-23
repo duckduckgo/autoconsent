@@ -2,10 +2,7 @@
   "name": "affinity.serif.com",
   "detectCmp": [
     {
-      "exists": ".c-cookie-banner"
-    },
-    {
-      "exists": ".c-cookie-banner button"
+      "exists": ".c-cookie-banner button[data-qa='allow-all-cookies']"
     }
   ],
   "detectPopup": [
