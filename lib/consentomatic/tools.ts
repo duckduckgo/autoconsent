@@ -28,12 +28,12 @@ export default class Tools {
 
     if (options.textFilter != null) {
       possibleTargets = possibleTargets.filter(possibleTarget => {
-        let textContent = possibleTarget.textContent.toLowerCase();
+        const textContent = possibleTarget.textContent.toLowerCase();
 
         if (Array.isArray(options.textFilter)) {
           let foundText = false;
 
-          for (let text of options.textFilter) {
+          for (const text of options.textFilter) {
             if (textContent.indexOf(text.toLowerCase()) !== -1) {
               foundText = true;
               break;
@@ -49,12 +49,12 @@ export default class Tools {
 
     if (options.styleFilters != null) {
       possibleTargets = possibleTargets.filter(possibleTarget => {
-        let styles = window.getComputedStyle(possibleTarget);
+        const styles = window.getComputedStyle(possibleTarget);
 
         let keep = true;
 
-        for (let styleFilter of options.styleFilters) {
-          let option = styles[styleFilter.option];
+        for (const styleFilter of options.styleFilters) {
+          const option = styles[styleFilter.option];
 
           if (styleFilter.negated) {
             keep = keep && option !== styleFilter.value;
@@ -80,7 +80,7 @@ export default class Tools {
     }
 
     if (options.iframeFilter != null) {
-      possibleTargets = possibleTargets.filter(possibleTarget => {
+      possibleTargets = possibleTargets.filter((/* possibleTarget */) => {
         if (options.iframeFilter) {
           //We should be inside an iframe
           return window.location !== window.parent.location;
@@ -93,9 +93,9 @@ export default class Tools {
 
     if (options.childFilter != null) {
       possibleTargets = possibleTargets.filter(possibleTarget => {
-        let oldBase = Tools.base;
+        const oldBase = Tools.base;
         Tools.setBase(possibleTarget);
-        let childResults = Tools.find(options.childFilter);
+        const childResults = Tools.find(options.childFilter);
         Tools.setBase(oldBase);
         return childResults.target != null;
       });
@@ -118,13 +118,13 @@ export default class Tools {
   }
 
   static find(options: any, multiple = false) {
-    let results: any[] = [];
+    const results: any[] = [];
     if (options.parent != null) {
-      let parent = Tools.findElement(options.parent, null, multiple);
+      const parent = Tools.findElement(options.parent, null, multiple);
       if (parent != null) {
         if (parent instanceof Array) {
           parent.forEach(p => {
-            let targets = Tools.findElement(options.target, p, multiple);
+            const targets = Tools.findElement(options.target, p, multiple);
             if (targets instanceof Array) {
               targets.forEach(target => {
                 results.push({
@@ -142,7 +142,7 @@ export default class Tools {
 
           return results;
         } else {
-          let targets = Tools.findElement(options.target, parent, multiple);
+          const targets = Tools.findElement(options.target, parent, multiple);
           if (targets instanceof Array) {
             targets.forEach(target => {
               results.push({
@@ -159,7 +159,7 @@ export default class Tools {
         }
       }
     } else {
-      let targets = Tools.findElement(options.target, null, multiple);
+      const targets = Tools.findElement(options.target, null, multiple);
       if (targets instanceof Array) {
         targets.forEach(target => {
           results.push({

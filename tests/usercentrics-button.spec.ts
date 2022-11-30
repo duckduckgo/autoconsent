@@ -1,8 +1,8 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('usercentrics-button', [
-    'https://www.commerzbank.de/',
-    'https://www.nkd.com/',
-    'https://shopbetreiber-blog.de/',
+  'https://www.commerzbank.de/',
+  'https://www.nkd.com/',
+  'https://shopbetreiber-blog.de/',
 ], {}
 );

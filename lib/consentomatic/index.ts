@@ -57,7 +57,7 @@ async function clickAction(config: any) {
 }
 
 async function listAction(config: any, param: any) {
-  for (let action of config.actions) {
+  for (const action of config.actions) {
     await executeAction(action, param);
   }
 }
@@ -141,8 +141,8 @@ async function slideAction(config: any) {
   const result = Tools.find(config);
   const dragResult = Tools.find(config.dragTarget);
   if (result.target) {
-    let targetBounds = result.target.getBoundingClientRect();
-    let dragTargetBounds = dragResult.target.getBoundingClientRect();
+    const targetBounds = result.target.getBoundingClientRect();
+    const dragTargetBounds = dragResult.target.getBoundingClientRect();
 
     let yDiff = dragTargetBounds.top - targetBounds.top;
     let xDiff = dragTargetBounds.left - targetBounds.left;
@@ -154,12 +154,12 @@ async function slideAction(config: any) {
       yDiff = 0;
     }
 
-    let screenX = window.screenX + targetBounds.left + targetBounds.width / 2.0;
-    let screenY = window.screenY + targetBounds.top + targetBounds.height / 2.0;
-    let clientX = targetBounds.left + targetBounds.width / 2.0;
-    let clientY = targetBounds.top + targetBounds.height / 2.0;
+    const screenX = window.screenX + targetBounds.left + targetBounds.width / 2.0;
+    const screenY = window.screenY + targetBounds.top + targetBounds.height / 2.0;
+    const clientX = targetBounds.left + targetBounds.width / 2.0;
+    const clientY = targetBounds.top + targetBounds.height / 2.0;
 
-    let mouseDown = document.createEvent("MouseEvents");
+    const mouseDown = document.createEvent("MouseEvents");
     mouseDown.initMouseEvent(
       "mousedown",
       true,
@@ -177,7 +177,7 @@ async function slideAction(config: any) {
       0,
       result.target
     );
-    let mouseMove = document.createEvent("MouseEvents");
+    const mouseMove = document.createEvent("MouseEvents");
     mouseMove.initMouseEvent(
       "mousemove",
       true,
@@ -195,7 +195,7 @@ async function slideAction(config: any) {
       0,
       result.target
     );
-    let mouseUp = document.createEvent("MouseEvents");
+    const mouseUp = document.createEvent("MouseEvents");
     mouseUp.initMouseEvent(
       "mouseup",
       true,
@@ -225,7 +225,7 @@ async function waitAction(config: any) {
   await waitTimeout(config.waitTime);
 }
 
-async function closeAction(config: any) {
+async function closeAction() {
   window.close();
 }
 

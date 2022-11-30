@@ -1,14 +1,14 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('tiktok.com', [
-    'https://tiktok.com/',
+  'https://tiktok.com/',
 ],{
-    skipRegions: ['US']
+  skipRegions: ['US']
 });
 
 generateCMPTests('tiktok.com', [
-    'https://tiktok.com/',
+  'https://tiktok.com/',
 ],{
-    skipRegions: ['US'],
-    mobile: true,
+  skipRegions: ['US'],
+  mobile: true,
 });
