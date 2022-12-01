@@ -7,10 +7,11 @@ import AutoConsentCMPBase from "./base";
 export default class SourcePoint extends AutoConsentCMPBase {
   prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay"]
 
-  ccpaMode = false;
+  ccpaNotice = false;
+  ccpaPopup = false;
 
   runContext: RunContext = {
-    main: false,
+    main: true,
     frame: true,
   }
 
@@ -29,7 +30,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
   async detectCmp() {
     const url = new URL(location.href);
     if (url.searchParams.has('message_id') && url.hostname === 'ccpa-notice.sp-prod.net') {
-      this.ccpaMode = true;
+      this.ccpaNotice = true;
+      return true;
+    }
+    if (url.hostname === 'ccpa-pm.sp-prod.net') {
+      this.ccpaPopup = true;
       return true;
     }
     return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
@@ -37,6 +42,12 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
+    if (this.ccpaNotice) {
+      return false;
+    }
+    if (this.ccpaPopup) {
+      return await waitForElement('.priv-save-btn', 2000);
+    }
     // check for the paywall button, and bail if it exists to prevent broken opt out
     await waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL", 2000);
     return !elementExists('.sp_choice_type_9');
@@ -59,6 +70,15 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    if (this.ccpaPopup) {
+      const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.on div') as NodeListOf<HTMLElement>;
+      for (const t of toggles) {
+        if (t.innerText.includes('Do Not Consent')) {
+          click([t]);
+        }
+      }
+      return click('.priv-save-btn');
+    }
     if (!this.isManagerOpen()) {
       const actionable = await waitForElement('.sp_choice_type_12,.sp_choice_type_13');
       if (!actionable) {
