@@ -28,7 +28,7 @@ export async function executeAction(config: any, param?: any): Promise<boolean |
     case "slide":
       return slideAction(config);
     case "close":
-      return closeAction(config);
+      return closeAction();
     case "wait":
       return waitAction(config);
     case "eval":
