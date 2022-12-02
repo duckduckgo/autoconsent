@@ -11,7 +11,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   ccpaPopup = false;
 
   runContext: RunContext = {
-    main: true,
+    main: false,
     frame: true,
   }
 
