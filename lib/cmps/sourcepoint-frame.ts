@@ -43,7 +43,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
   async detectPopup() {
     if (this.ccpaNotice) {
-      return false;
+      return true;
     }
     if (this.ccpaPopup) {
       return await waitForElement('.priv-save-btn', 2000);
@@ -66,16 +66,20 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   isManagerOpen() {
-    return (new URL(location.href)).pathname === "/privacy-manager/index.html";
+    return location.pathname === "/privacy-manager/index.html";
   }
 
   async optOut() {
     if (this.ccpaPopup) {
-      const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.on div') as NodeListOf<HTMLElement>;
+      // toggles with 2 buttons
+      const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.neutral.on .right') as NodeListOf<HTMLElement>;
       for (const t of toggles) {
-        if (t.innerText.includes('Do Not Consent')) {
-          click([t]);
-        }
+        click([t]);
+      }
+      // switch toggles
+      const switches = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.switch-bg.on') as NodeListOf<HTMLElement>;
+      for (const t of switches) {
+        click([t]);
       }
       return click('.priv-save-btn');
     }
@@ -92,7 +96,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
       click(".sp_choice_type_12");
       // the page may navigate at this point but that's okay
       await waitFor(
-        () => location.pathname === "/privacy-manager/index.html",
+        () => this.isManagerOpen(),
         200,
         100
       );
@@ -122,7 +126,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
     } catch (e) {
       enableLogs && console.warn(e);
     }
-    click('.sp_choice_type_SAVE_AND_EXIT');
-    return true;
+    // TODO: race condition: the popup disappears very quickly, so the background script may not receive a success report.
+    return click('.sp_choice_type_SAVE_AND_EXIT');
   }
 }
