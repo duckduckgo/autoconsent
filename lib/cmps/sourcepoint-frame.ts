@@ -5,7 +5,7 @@ import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
-  prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay"]
+  prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay",'#sp_privacy_manager_container']
 
   ccpaNotice = false;
   ccpaPopup = false;
