@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                 npm ci
-                npx playwright install webkit
+                npx playwright install
                 '''
                 script {
                     currentBuild.description = "${params.BROWSER} - ${params.GREP}"
