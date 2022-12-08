@@ -31,7 +31,7 @@ pipeline {
         string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
     }
     environment {
-        NODENV_VERSION = "14.15.4"
+        NODENV_VERSION = "16.16.0"
         NODENV_ROOT = "/opt/nodeenv"
         PATH = "/opt/nodenv/shims:/opt/nodenv/bin:$PATH"
     }
