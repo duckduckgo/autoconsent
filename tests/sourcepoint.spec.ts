@@ -7,8 +7,8 @@ generateCMPTests('Sourcepoint-frame', [
 
 generateCMPTests('Sourcepoint-frame', [
   'https://www.insider.com/',
-  "https://www.brianmadden.com/",
-  "https://www.csoonline.com/blogs",
+  "https://www.techtarget.com/searchvirtualdesktop/",
+  // "https://www.csoonline.com/blogs", // settings button doesn't work
   "https://www.independent.co.uk/",
   "https://reitschuster.de/"
 ], {
