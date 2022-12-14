@@ -1,3 +1,41 @@
+# v4.0.0 (Wed Dec 14 2022)
+
+#### 💥 Breaking Change
+
+- Bump @rollup/plugin-json from 4.1.0 to 5.0.2 [#61](https://github.com/duckduckgo/autoconsent/pull/61) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @rollup/plugin-typescript from 8.3.2 to 10.0.1 [#58](https://github.com/duckduckgo/autoconsent/pull/58) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🚀 Enhancement
+
+- Bump @typescript-eslint/parser from 5.42.1 to 5.45.1 [#60](https://github.com/duckduckgo/autoconsent/pull/60) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/eslint-plugin from 5.42.1 to 5.45.1 [#59](https://github.com/duckduckgo/autoconsent/pull/59) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add cookiealert CMP (cookiebot variant) [#47](https://github.com/duckduckgo/autoconsent/pull/47) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump @typescript-eslint/parser from 5.45.1 to 5.46.1 [#65](https://github.com/duckduckgo/autoconsent/pull/65) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.188 to 0.0.204 [#63](https://github.com/duckduckgo/autoconsent/pull/63) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Fix Sourcepoint CCPA popup handling [#57](https://github.com/duckduckgo/autoconsent/pull/57) ([@muodov](https://github.com/muodov))
+- Fix typescript warnings [#56](https://github.com/duckduckgo/autoconsent/pull/56) ([@sammacbeth](https://github.com/sammacbeth))
+- Bump tslib from 2.4.0 to 2.4.1 [#52](https://github.com/duckduckgo/autoconsent/pull/52) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump chai from 4.3.6 to 4.3.7 [#51](https://github.com/duckduckgo/autoconsent/pull/51) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Lint all code and rules in CI [#44](https://github.com/duckduckgo/autoconsent/pull/44) ([@sammacbeth](https://github.com/sammacbeth))
+- Reduce triggering of affinity.serif.com rule [#45](https://github.com/duckduckgo/autoconsent/pull/45) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump eslint from 8.28.0 to 8.29.0 [#62](https://github.com/duckduckgo/autoconsent/pull/62) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump mocha and @types/mocha [#53](https://github.com/duckduckgo/autoconsent/pull/53) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump web-ext from 7.3.0 to 7.4.0 [#54](https://github.com/duckduckgo/autoconsent/pull/54) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v3.0.4 (Mon Nov 21 2022)
 
 #### 🐛 Bug Fix
