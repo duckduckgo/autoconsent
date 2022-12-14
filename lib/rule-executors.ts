@@ -10,9 +10,14 @@ export function doEval(expr: string): Promise<boolean> {
   });
 }
 
-export function click(selector: string, all = false): boolean {
-  const elem = document.querySelectorAll<HTMLElement>(selector);
-  enableLogs && console.log("[click]", selector, all, elem);
+export function click(selectorOrElements: string | HTMLElement[], all = false): boolean {
+  let elem: HTMLElement[] = [];
+  if (typeof selectorOrElements === 'string') {
+    elem = Array.from(document.querySelectorAll<HTMLElement>(selectorOrElements));
+  } else {
+    elem = selectorOrElements;
+  }
+  enableLogs && console.log("[click]", selectorOrElements, all, elem);
   if (elem.length > 0) {
     if (all) {
       elem.forEach((e) => e.click());

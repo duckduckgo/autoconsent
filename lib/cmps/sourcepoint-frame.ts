@@ -5,9 +5,10 @@ import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class SourcePoint extends AutoConsentCMPBase {
-  prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay"]
+  prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay",'#sp_privacy_manager_container']
 
-  ccpaMode = false;
+  ccpaNotice = false;
+  ccpaPopup = false;
 
   runContext: RunContext = {
     main: false,
@@ -29,7 +30,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
   async detectCmp() {
     const url = new URL(location.href);
     if (url.searchParams.has('message_id') && url.hostname === 'ccpa-notice.sp-prod.net') {
-      this.ccpaMode = true;
+      this.ccpaNotice = true;
+      return true;
+    }
+    if (url.hostname === 'ccpa-pm.sp-prod.net') {
+      this.ccpaPopup = true;
       return true;
     }
     return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
@@ -37,6 +42,12 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
+    if (this.ccpaNotice) {
+      return true;
+    }
+    if (this.ccpaPopup) {
+      return await waitForElement('.priv-save-btn', 2000);
+    }
     // check for the paywall button, and bail if it exists to prevent broken opt out
     await waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL", 2000);
     return !elementExists('.sp_choice_type_9');
@@ -55,10 +66,23 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   isManagerOpen() {
-    return (new URL(location.href)).pathname === "/privacy-manager/index.html";
+    return location.pathname === "/privacy-manager/index.html";
   }
 
   async optOut() {
+    if (this.ccpaPopup) {
+      // toggles with 2 buttons
+      const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.neutral.on .right') as NodeListOf<HTMLElement>;
+      for (const t of toggles) {
+        click([t]);
+      }
+      // switch toggles
+      const switches = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.switch-bg.on') as NodeListOf<HTMLElement>;
+      for (const t of switches) {
+        click([t]);
+      }
+      return click('.priv-save-btn');
+    }
     if (!this.isManagerOpen()) {
       const actionable = await waitForElement('.sp_choice_type_12,.sp_choice_type_13');
       if (!actionable) {
@@ -72,7 +96,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
       click(".sp_choice_type_12");
       // the page may navigate at this point but that's okay
       await waitFor(
-        () => location.pathname === "/privacy-manager/index.html",
+        () => this.isManagerOpen(),
         200,
         100
       );
@@ -102,7 +126,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
     } catch (e) {
       enableLogs && console.warn(e);
     }
-    click('.sp_choice_type_SAVE_AND_EXIT');
-    return true;
+    // TODO: race condition: the popup disappears very quickly, so the background script may not receive a success report.
+    return click('.sp_choice_type_SAVE_AND_EXIT');
   }
 }
