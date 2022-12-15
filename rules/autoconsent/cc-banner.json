@@ -1,5 +1,6 @@
 {
   "name": "cc_banner",
+  "cosmetic": true,
   "prehideSelectors": [".cc_banner-wrapper"],
   "detectCmp": [{ "exists": ".cc_banner-wrapper" }],
   "detectPopup": [{ "visible": ".cc_banner" }],

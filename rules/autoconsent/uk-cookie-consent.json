@@ -1,6 +1,7 @@
 {
   "name": "UK Cookie Consent",
   "prehideSelectors": ["#catapult-cookie-bar"],
+  "cosmetic": true,
   "detectCmp": [{ "exists": "#catapult-cookie-bar" }],
   "detectPopup": [{ "exists": ".has-cookie-bar #catapult-cookie-bar" }],
   "optIn": [

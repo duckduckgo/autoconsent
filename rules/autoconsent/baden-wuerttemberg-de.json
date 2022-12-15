@@ -1,6 +1,7 @@
 {
   "name": "baden-wuerttemberg.de",
   "prehideSelectors": [".cookie-alert.t-dark"],
+  "cosmetic": true,
   "detectCmp": [{ "exists": ".cookie-alert.t-dark" }],
   "detectPopup": [{ "visible": ".cookie-alert.t-dark" }],
   "optIn": [

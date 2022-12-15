@@ -1,6 +1,7 @@
 {
     "name": "Complianz notice",
     "prehideSelectors": [".cc-type-info[aria-describedby=\"cookieconsent:desc\"]"],
+    "cosmetic": true,
     "detectCmp": [{ "exists": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"]" }],
     "detectPopup": [{ "visible": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"]" }],
     "optIn": [
