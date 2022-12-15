@@ -27,6 +27,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     const url = new URL(location.href);
     if (url.searchParams.has('message_id') && url.hostname === 'ccpa-notice.sp-prod.net') {

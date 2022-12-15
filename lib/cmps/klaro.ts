@@ -18,6 +18,10 @@ export default class Klaro extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     if (elementExists('.klaro > .cookie-modal')) {
       this.settingsOpen = true;

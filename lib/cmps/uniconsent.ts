@@ -18,6 +18,10 @@ export default class Uniconsent extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return elementExists(".unic .unic-box,.unic .unic-bar");
   }

@@ -41,6 +41,10 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     return !this._shortcutButton;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     const result = elementExists(`${cookieSettingsButton},${bannerContainer}`);
     if (result) {

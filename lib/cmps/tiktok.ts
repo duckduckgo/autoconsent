@@ -21,6 +21,10 @@ export default class Tiktok extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   getShadowRoot() {
     const container = document.querySelector('tiktok-cookie-banner');
     if (!container) {

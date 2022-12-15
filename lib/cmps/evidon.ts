@@ -15,6 +15,10 @@ export default class Evidon extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return elementExists("#_evidon_banner");
   }

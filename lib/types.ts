@@ -8,6 +8,7 @@ export interface AutoCMP {
   name: string
   hasSelfTest: boolean
   isIntermediate: boolean;
+  isCosmetic: boolean;
   prehideSelectors?: string[];
   runContext: RunContext;
   checkRunContext(): boolean;
