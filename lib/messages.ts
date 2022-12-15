@@ -67,6 +67,7 @@ export type SelfTestResultMessage = {
 export type DoneMessage = {
   type: "autoconsentDone";
   cmp: string;
+  isCosmetic: boolean;
   url: string;
 }
 

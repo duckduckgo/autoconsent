@@ -45,9 +45,8 @@ export default class AutoConsent {
     if (declarativeRules) {
       this.parseRules(declarativeRules);
     }
-    if (config.disabledCmps?.length > 0) {
-      this.disableCMPs(config.disabledCmps);
-    }
+
+    this.filterCMPs(config);
 
     if (config.enablePrehide) {
       if (document.documentElement) {
@@ -88,8 +87,13 @@ export default class AutoConsent {
     this.rules.push(createAutoCMP(config));
   }
 
-  disableCMPs(cmpNames: string[]) {
-    this.rules = this.rules.filter((cmp) => !cmpNames.includes(cmp.name))
+  filterCMPs(config: Config) {
+    if (config.disabledCmps?.length > 0) {
+      this.rules = this.rules.filter((cmp) => !config.disabledCmps.includes(cmp.name))
+    }
+    if (!config.enableCosmeticRules) {
+      this.rules = this.rules.filter((cmp) => !cmp.isCosmetic);
+    }
   }
 
   addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
@@ -240,6 +244,7 @@ export default class AutoConsent {
       this.sendContentMessage({
         type: 'autoconsentDone',
         cmp: this.foundCmp.name,
+        isCosmetic: this.foundCmp.isCosmetic,
         url: location.href,
       });
     }
@@ -274,6 +279,7 @@ export default class AutoConsent {
       this.sendContentMessage({
         type: 'autoconsentDone',
         cmp: this.foundCmp.name,
+        isCosmetic: this.foundCmp.isCosmetic,
         url: location.href,
       });
     }

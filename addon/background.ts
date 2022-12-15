@@ -22,15 +22,21 @@ async function initConfig() {
       autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
       disabledCmps: [],
       enablePrehide: true,
+      enableCosmeticRules: true,
       detectRetries: 20,
     };
     await storageSet({
       config: defaultConfig,
     });
+  } else if (typeof storedConfig.enableCosmeticRules === 'undefined') { // upgrade from old versions
+    storedConfig.enableCosmeticRules = true;
+    await storageSet({
+      config: storedConfig,
+    });
   }
 }
 
-async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult[]> {
+async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult<any>[]> {
   if (manifestVersion === 2) {
     return new Promise((resolve) => {
       chrome.tabs.executeScript(tabId, {
