@@ -15,12 +15,15 @@ The popup on [site]
  - [ ] other (elaborate below)
 
 **Tested on**
- - [ ] macOS browser
- - [ ] Windows browser
- - [ ] Android
- - [ ] iOS
- - [ ] Browser extension
+ - [ ] DuckDuckGo macOS browser
+ - [ ] DuckDuckGo Windows browser
+ - [ ] DuckDuckGo Android browser
+ - [ ] DuckDuckGo iOS browser
+ - [ ] Chrome browser extension
+ - [ ] Firefox browser extension
 
-**Tested from region**: US/DE/FR/GB
+**Tested from country**: 
 
 **Autoconsent version**:
+
+**Screenshot (optional)**
