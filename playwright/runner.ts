@@ -88,6 +88,7 @@ export function generateTest(
               disabledCmps: [],
               enablePrehide: true,
               detectRetries: 20,
+              enableCosmeticRules: true,
             })} })`);
             break;
           }
