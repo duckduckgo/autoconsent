@@ -111,92 +111,34 @@ export default class AutoConsent {
 
   async _start() {
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`)
-    const cmps = await this.findCmp(this.config.detectRetries);
-    if (cmps.length > 0) {
-      const popupLookups: Promise<boolean>[] = [];
-      for (const cmp of cmps) {
-        enableLogs && console.log("detected CMP:", cmp.name, window.location.href);
-        this.sendContentMessage({
-          type: 'cmpDetected',
-          url: location.href,
-          cmp: cmp.name,
-        }); // notify the browser
-        popupLookups.push(this.waitForPopup(cmp).then((isOpen) => {
-          if (isOpen) {
-            if (!this.foundCmp) {
-              this.foundCmp = cmp;
-            }
-            this.sendContentMessage({
-              type: 'popupFound',
-              cmp: cmp.name,
-              url: location.href,
-            }); // notify the browser
-            return true;
-          } else {
-            return Promise.reject(`${cmp.name} popup not found`);
-          }
-        }));
-      }
-
-      // could use `somethingOpen = await Promise.any(popupLookups).catch(() => false)`, but Promise.any is often unavailable in polyfilled environments
-      let somethingOpen = false;
-      for (const popupLookup of popupLookups) {
-        try {
-          await popupLookup;
-          somethingOpen = true;
-          break;
-        } catch (e) {
-          continue;
-        }
-      }
-
-      if (!somethingOpen) {
-        enableLogs && console.log('no popup found');
-        if (this.config.enablePrehide) {
-          undoPrehide();
-        }
-        return false;
-      }
-
-      if (this.config.autoAction === 'optOut') {
-        return await this.doOptOut();
-      } else if (this.config.autoAction === 'optIn') {
-        return await this.doOptIn();
-      }
-
-      enableLogs && console.log("waiting for opt-out signal...", location.href);
-      return true;
-    } else {
+    const { normal, cosmetic } = await this.findCmp(this.config.detectRetries);
+    if (normal.length === 0 && cosmetic.length === 0) {
       enableLogs && console.log("no CMP found", location.href);
       if (this.config.enablePrehide) {
         undoPrehide();
       }
       return false;
     }
-  }
-
-  async findCmp(retries: number): Promise<AutoCMP[]> {
-    const allFoundCmps: AutoCMP[] = [];
-
-    for (const cmp of this.rules) {
-      try {
-        if (!cmp.checkRunContext()) {
-          continue;
-        }
-        const result = await cmp.detectCmp();
-        if (result) {
-          enableLogs && console.log(`Found CMP: ${cmp.name}`);
-          allFoundCmps.push(cmp);
-        }
-      } catch (e) {
-        enableLogs && console.warn(`error detecting ${cmp.name}`, e);
-      }
+    let foundPopups: AutoCMP[] = [];
+    if (normal.length > 0) {
+      foundPopups = await this.detectPopups(normal);
+    }
+    if (foundPopups.length === 0 && cosmetic.length > 0) {
+      foundPopups = await this.detectPopups(cosmetic);
     }
 
-    if (allFoundCmps.length > 1) {
+    if (foundPopups.length === 0) {
+      enableLogs && console.log('no popup found');
+      if (this.config.enablePrehide) {
+        undoPrehide();
+      }
+      return false;
+    }
+
+    if (foundPopups.length > 1) {
       const errorDetails = {
         msg: `Found multiple CMPs, check the detection rules.`,
-        cmps: allFoundCmps.map((cmp) => cmp.name),
+        cmps: foundPopups.map((cmp) => cmp.name),
       };
       enableLogs && console.warn(errorDetails.msg, errorDetails.cmps);
       this.sendContentMessage({
@@ -205,7 +147,47 @@ export default class AutoConsent {
       });
     }
 
-    if (allFoundCmps.length === 0 && retries > 0) {
+    this.foundCmp = foundPopups[0];
+
+    if (this.config.autoAction === 'optOut') {
+      return await this.doOptOut();
+    } else if (this.config.autoAction === 'optIn') {
+      return await this.doOptIn();
+    } else {
+      enableLogs && console.log("waiting for opt-out signal...", location.href);
+      return true;
+    }
+  }
+
+  async findCmp(retries: number): Promise<{ normal: AutoCMP[], cosmetic: AutoCMP[] }> {
+    const normal: AutoCMP[] = [];
+    const cosmetic: AutoCMP[] = [];
+
+    for (const cmp of this.rules) {
+      try {
+        if (!cmp.checkRunContext()) {
+          continue;
+        }
+        const result = await cmp.detectCmp();
+        if (result) {
+          enableLogs && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
+          this.sendContentMessage({
+            type: 'cmpDetected',
+            url: location.href,
+            cmp: cmp.name,
+          }); // notify the browser
+          if (cmp.isCosmetic) {
+            cosmetic.push(cmp);
+          } else {
+            normal.push(cmp);
+          }
+        }
+      } catch (e) {
+        enableLogs && console.warn(`error detecting ${cmp.name}`, e);
+      }
+    }
+
+    if (normal.length === 0 && cosmetic.length === 0 && retries > 0) {
       return new Promise((resolve) => {
         setTimeout(async () => {
           const result = this.findCmp(retries - 1);
@@ -214,7 +196,40 @@ export default class AutoConsent {
       });
     }
 
-    return allFoundCmps;
+    return {
+      normal,
+      cosmetic,
+    };
+  }
+
+  async detectPopups(cmps: AutoCMP[]): Promise<AutoCMP[]> {
+    const popupLookups: Promise<AutoCMP>[] = [];
+    for (const cmp of cmps) {
+      popupLookups.push(this.waitForPopup(cmp).then((isOpen) => {
+        if (isOpen) {
+          this.sendContentMessage({
+            type: 'popupFound',
+            cmp: cmp.name,
+            url: location.href,
+          }); // notify the browser
+          return cmp;
+        } else {
+          return Promise.reject(`${cmp.name} popup not found`);
+        }
+      }));
+    }
+
+    const result: AutoCMP[] = [];
+    // could use `Promise.allFulfilled`, but it is often unavailable in polyfilled environments
+    for (const popupLookup of popupLookups) {
+      try {
+        result.push(await popupLookup);
+        break;
+      } catch (e) {
+        continue;
+      }
+    }
+    return result;
   }
 
   async doOptOut(): Promise<boolean> {
