@@ -4,8 +4,13 @@ import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { showOptOutStatus } from "./utils";
 
-const frameAudits: { [tabId: number]: {[frameId: number]: ReportMessage } } = {};
-const openDevToolsPanels = new Map<number, chrome.runtime.Port>()
+/**
+ * Mapping of tabIds to Port connections to open devtools panels.
+ * This is kept in memory, as the values are only relevant while the background service worker is
+ * alive. Once the service worker stops, Ports to devtools will be severed, and the panel will
+ * reestablish the connection.
+ */
+const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
   const res = await fetch("./rules.json");
@@ -64,6 +69,17 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
       }
     },
   })
+}
+
+async function getTabReports(tabId: number): Promise<{ [frameId: number]: ReportMessage }> {
+  const storageKey = `reports-${tabId}`
+  return (await chrome.storage.session.get(storageKey))[storageKey] || {}
+}
+
+async function updateTabReports(tabId: number, frameId: number, msg: ReportMessage) {
+  const reportsForTab = await getTabReports(tabId)
+  reportsForTab[frameId] = msg;
+  await chrome.storage.session.set({ [`reports-${tabId}`]: reportsForTab })
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -174,10 +190,7 @@ chrome.runtime.onMessage.addListener(
             ...msg,
           })
         }
-        if (!frameAudits[sender.tab.id]) {
-          frameAudits[sender.tab.id] = {}
-        }
-        frameAudits[sender.tab.id][sender.frameId] = msg;
+        updateTabReports(sender.tab.id, sender.frameId, msg)
         break;
     }
   }
@@ -216,6 +229,8 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
             instanceId,
           });
         }
+        // remove stored frame data
+        updateTabReports(tabId, devToolsConnection.sender.frameId, undefined)
       })
     }
   } else if (devToolsConnection.name === 'devtools-panel') {
@@ -229,11 +244,12 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
         openDevToolsPanels.set(tabId, devToolsConnection);
 
         // dump data cached in bg to the panel
-        Object.keys(frameAudits[tabId] || {}).forEach((frameId) => {
+        const reportsForTab = await getTabReports(tabId)
+        Object.keys(reportsForTab || {}).forEach((frameId) => {
           devToolsConnection.postMessage({
             tabId,
             frameId,
-            ...frameAudits[tabId][parseInt(frameId, 10)]
+            ...reportsForTab[parseInt(frameId, 10)]
           })
         });
       }
@@ -244,3 +260,7 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
     });
   }
 });
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  chrome.storage.session.remove(`reports-${tabId}`)
+})
