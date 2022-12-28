@@ -6,11 +6,12 @@ import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
 import { prehide, undoPrehide } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
+import { getRandomID } from './random';
 
 export * from './index';
 
 export default class AutoConsent {
-  id = window.crypto.randomUUID();
+  id = getRandomID();
   rules: AutoCMP[] = [];
   config: Config;
   foundCmp: AutoCMP = null;
