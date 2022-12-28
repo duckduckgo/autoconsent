@@ -1,4 +1,5 @@
 import { BackgroundDevtoolsMessage, DevtoolsMessage } from "../../lib/messages";
+import { Config } from "../../lib/types";
 import { storageGet, storageSet } from "../mv-compat";
 
 let backgroundPageConnection: chrome.runtime.Port;
@@ -115,8 +116,7 @@ document.getElementById("optout").addEventListener("click", () => {
   });
 });
 
-(async () => {
-  const config = await storageGet("config");
+function onConfigUpdated(config: Config) {
   const modeOptions: NodeListOf<HTMLOptionElement> =
     document.querySelectorAll("#mode > option");
   switch (config.autoAction) {
@@ -129,6 +129,17 @@ document.getElementById("optout").addEventListener("click", () => {
     default:
       modeOptions[0].selected = true;
   }
+}
+
+chrome.storage.local.onChanged.addListener((changes) => {
+  if (changes.config) {
+    onConfigUpdated(changes.config.newValue)
+  }
+});
+
+(async () => {
+  const config = await storageGet("config");
+  onConfigUpdated(config)
 })();
 
 reconnect();
