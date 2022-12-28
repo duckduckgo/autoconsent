@@ -31,9 +31,9 @@ export default class AutoConsent {
     this.rules = [...dynamicRules];
 
     enableLogs && console.log('autoconsent init', window.location.href);
+    this.updateState({ lifecycle: 'loading' });
     if (config) {
       this.initialize(config, declarativeRules);
-      this.state.lifecycle = 'initialized';
     } else {
       if (declarativeRules) {
         this.parseRules(declarativeRules);
@@ -43,7 +43,7 @@ export default class AutoConsent {
         url: window.location.href,
       };
       sendContentMessage(initMsg);
-      this.state.lifecycle = 'waitingForInitResponse';
+      this.updateState({ lifecycle: 'waitingForInitResponse' });
     }
   }
 
@@ -84,6 +84,7 @@ export default class AutoConsent {
     } else {
       this.start();
     }
+    this.updateState({ lifecycle: 'initialized' });
   }
 
   parseRules(declarativeRules: RuleBundle) {
@@ -119,12 +120,12 @@ export default class AutoConsent {
 
   async _start() {
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`)
-    this.state.lifecycle = 'started';
+    this.updateState({ lifecycle: 'started' });
     const cmps = await this.findCmp(this.config.detectRetries);
-    this.state.detectedCmps = cmps.map(c => c.name);
+    this.updateState({ detectedCmps: cmps.map(c => c.name)})
     if (cmps.length > 0) {
       const popupLookups: Promise<boolean>[] = [];
-      this.state.lifecycle = 'cmpDetected';
+      this.updateState({ lifecycle: 'cmpDetected' });
       for (const cmp of cmps) {
         enableLogs && console.log("detected CMP:", cmp.name, window.location.href);
         this.sendContentMessage({
@@ -137,7 +138,7 @@ export default class AutoConsent {
             if (!this.foundCmp) {
               this.foundCmp = cmp;
             }
-            this.state.detectedPopups.push(cmp.name);
+            this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
             this.sendContentMessage({
               type: 'popupFound',
               cmp: cmp.name,
@@ -156,7 +157,7 @@ export default class AutoConsent {
         try {
           await popupLookup;
           somethingOpen = true;
-          this.state.lifecycle = 'openPopupDetected';
+          this.updateState({ lifecycle: 'openPopupDetected' });
           break;
         } catch (e) {
           continue;
@@ -166,8 +167,7 @@ export default class AutoConsent {
       if (!somethingOpen) {
         enableLogs && console.log('no popup found');
         if (this.config.enablePrehide) {
-          undoPrehide();
-          this.state.prehideOn = false;
+          this.undoPrehide();
         }
         return false;
       }
@@ -183,16 +183,15 @@ export default class AutoConsent {
     } else {
       enableLogs && console.log("no CMP found", location.href);
       if (this.config.enablePrehide) {
-        undoPrehide();
-        this.state.prehideOn = false;
+        this.undoPrehide();
       }
-      this.state.lifecycle = 'nothingDetected';
+      this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     }
   }
 
   async findCmp(retries: number): Promise<AutoCMP[]> {
-    this.state.findCmpAttempts += 1;
+    this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 })
     const allFoundCmps: AutoCMP[] = [];
 
     for (const cmp of this.rules) {
@@ -235,7 +234,7 @@ export default class AutoConsent {
   }
 
   async doOptOut(): Promise<boolean> {
-    this.state.lifecycle = 'runningOptOut';
+    this.updateState({ lifecycle: 'runningOptOut' })
     let optOutResult;
     if (!this.foundCmp) {
       enableLogs && console.log('no CMP to opt out');
@@ -247,8 +246,7 @@ export default class AutoConsent {
     }
 
     if (this.config.enablePrehide) {
-      undoPrehide();
-      this.state.prehideOn = false;
+      this.undoPrehide();
     }
 
     this.sendContentMessage({
@@ -265,17 +263,16 @@ export default class AutoConsent {
         cmp: this.foundCmp.name,
         url: location.href,
       });
-      this.state.lifecycle = 'done';
+      this.updateState({ lifecycle: 'done' })
     } else {
-      this.state.lifecycle = optOutResult ? 'optOutSucceeded' : 'optOutFailed';
+      this.updateState({ lifecycle: optOutResult ? 'optOutSucceeded' : 'optOutFailed' })
     }
-    this.sendReport();
 
     return optOutResult;
   }
 
   async doOptIn(): Promise<boolean> {
-    this.state.lifecycle = 'runningOptIn';
+    this.updateState({ lifecycle: 'runningOptIn' })
     let optInResult;
     if (!this.foundCmp) {
       enableLogs && console.log('no CMP to opt in');
@@ -287,8 +284,7 @@ export default class AutoConsent {
     }
 
     if (this.config.enablePrehide) {
-      undoPrehide();
-      this.state.prehideOn = false;
+      this.undoPrehide();
     }
 
     this.sendContentMessage({
@@ -305,9 +301,9 @@ export default class AutoConsent {
         cmp: this.foundCmp.name,
         url: location.href,
       });
-      this.state.lifecycle = 'done';
+      this.updateState({ lifecycle: 'done' })
     } else {
-      this.state.lifecycle = optInResult ? 'optInSucceeded' : 'optInFailed';
+      this.updateState({ lifecycle: optInResult ? 'optInSucceeded' : 'optInFailed' })
     }
 
     return optInResult;
@@ -329,6 +325,7 @@ export default class AutoConsent {
       result: selfTestResult,
       url: location.href,
     });
+    this.updateState({ selfTest: selfTestResult })
     return selfTestResult;
   }
 
@@ -355,13 +352,19 @@ export default class AutoConsent {
       return selectorList;
     }, globalHidden);
 
-    this.state.prehideOn = true
+    this.updateState({ prehideOn: true })
     return prehide(selectors);
   }
 
-  sendReport() {
+  undoPrehide(): boolean {
+    this.updateState({ prehideOn: false })
+    return undoPrehide();
+  }
+
+  updateState(change: Partial<ConsentState>) {
+    Object.assign(this.state, change)
     this.sendContentMessage({
-      type: 'reportResponse',
+      type: 'report',
       instanceId: this.id,
       url: window.location.href,
       mainFrame: window.top === window.self,
@@ -389,8 +392,6 @@ export default class AutoConsent {
       case 'evalResp':
         resolveEval(message.id, message.result);
         break;
-      case 'report':
-        this.sendReport()
     }
   }
 }

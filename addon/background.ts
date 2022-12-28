@@ -1,11 +1,11 @@
 import { enableLogs } from "../lib/config";
-import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportResponseMessage } from "../lib/messages";
+import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { showOptOutStatus } from "./utils";
 
-const frameAudits: { [tabId: number]: {[frameId: number]: ReportResponseMessage } } = {};
-const openDevToolsPanels = new Map()
+const frameAudits: { [tabId: number]: {[frameId: number]: ReportMessage } } = {};
+const openDevToolsPanels = new Map<number, chrome.runtime.Port>()
 
 async function loadRules() {
   const res = await fetch("./rules.json");
@@ -166,7 +166,7 @@ chrome.runtime.onMessage.addListener(
       case "autoconsentError":
         console.error('Error:', msg.details);
         break;
-      case "reportResponse":
+      case "report":
         if (sender.tab && openDevToolsPanels.has(sender.tab.id)) {
           openDevToolsPanels.get(sender.tab.id).postMessage({
             tabId: sender.tab.id,
@@ -179,10 +179,6 @@ chrome.runtime.onMessage.addListener(
         }
         frameAudits[sender.tab.id][sender.frameId] = msg;
         break;
-    }
-
-    if (!['reportResponse', 'eval'].includes(msg.type)) {
-      chrome.tabs.sendMessage(sender.tab.id, { type: 'report' } as BackgroundMessage);
     }
   }
 );

@@ -6,7 +6,6 @@ export type BackgroundMessage =
   | OptOutMessage
   | OptInMessage
   | SelfTestMessage
-  | ReportMessage;
 
 export type ContentScriptMessage =
   | InitMessage
@@ -18,7 +17,7 @@ export type ContentScriptMessage =
   | SelfTestResultMessage
   | DoneMessage
   | ErrorMessage
-  | ReportResponseMessage;
+  | ReportMessage;
 
 export type BackgroundDevtoolsMessage =
   | DevtoolsAuditMessage
@@ -111,17 +110,13 @@ export type SelfTestMessage = {
 
 export type ReportMessage = {
   type: "report";
-};
-
-export type ReportResponseMessage = {
-  type: "reportResponse";
   instanceId: string;
   url: string;
   mainFrame: boolean;
   state: ConsentState;
 };
 
-export type DevtoolsAuditMessage = ReportResponseMessage & { tabId: number, frameId: number }
+export type DevtoolsAuditMessage = ReportMessage & { tabId: number, frameId: number }
 
 export type InstanceTerminatedMessage = {
   type: 'instanceTerminated';
