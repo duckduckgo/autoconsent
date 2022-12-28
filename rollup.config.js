@@ -43,7 +43,10 @@ export default [{
     copy({
       targets: [
         {
-          src: ['./addon/icons', './rules/rules.json'],
+          src: [
+            './addon/icons', 
+            './rules/rules.json'
+          ],
           dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
         },
         {
@@ -60,6 +63,10 @@ export default [{
           dest: './dist/addon-firefox',
           rename: 'manifest.json',
         },
+        {
+          src: './node_modules/bulma/css/bulma.min.css',
+          dest: './dist/addon-mv3/devtools/'
+        }
       ]
     })
   ]
