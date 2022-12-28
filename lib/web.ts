@@ -20,6 +20,7 @@ export default class AutoConsent {
     findCmpAttempts: 0,
     detectedCmps: [],
     detectedPopups: [],
+    selfTest: null,
   }; 
   protected sendContentMessage: MessageSender;
 
@@ -265,7 +266,7 @@ export default class AutoConsent {
       });
       this.state.lifecycle = 'done';
     } else {
-      this.state.lifecycle = optOutResult ? 'optOutSuceeded' : 'optOutFailed';
+      this.state.lifecycle = optOutResult ? 'optOutSucceeded' : 'optOutFailed';
     }
     this.sendReport();
 
@@ -305,7 +306,7 @@ export default class AutoConsent {
       });
       this.state.lifecycle = 'done';
     } else {
-      this.state.lifecycle = optInResult ? 'optInSuceeded' : 'optInFailed';
+      this.state.lifecycle = optInResult ? 'optInSucceeded' : 'optInFailed';
     }
 
     return optInResult;
@@ -361,7 +362,7 @@ export default class AutoConsent {
     this.sendContentMessage({
       type: 'reportResponse',
       instanceId: this.id,
-      url: document.location.href,
+      url: window.location.href,
       mainFrame: window.top === window.self,
       state: this.state,
     })

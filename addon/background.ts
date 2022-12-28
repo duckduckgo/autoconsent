@@ -167,10 +167,8 @@ chrome.runtime.onMessage.addListener(
         console.error('Error:', msg.details);
         break;
       case "reportResponse":
-        // console.log('xxx', msg, sender);
-        // eslint-disable-next-line no-case-declarations
-        if (openDevToolsPanels.has(sender.tab?.id)) {
-          openDevToolsPanels.get(sender.tab?.id).postMessage({
+        if (sender.tab && openDevToolsPanels.has(sender.tab.id)) {
+          openDevToolsPanels.get(sender.tab.id).postMessage({
             tabId: sender.tab.id,
             frameId: sender.frameId,
             ...msg,
@@ -232,9 +230,7 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
       
       if (message.type === 'init') {
         // save the message channel for this tab
-        openDevToolsPanels.set(tabId, {
-          postMessage: devToolsConnection.postMessage.bind(devToolsConnection),
-        });
+        openDevToolsPanels.set(tabId, devToolsConnection);
 
         // dump data cached in bg to the panel
         Object.keys(frameAudits[tabId] || {}).forEach((frameId) => {

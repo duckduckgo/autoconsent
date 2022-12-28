@@ -43,9 +43,9 @@ export type LifecycleState = 'loading' |
 'openPopupDetected' |
 'runningOptOut' |
 'runningOptIn' |
-'optOutSuceeded' |
+'optOutSucceeded' |
 'optOutFailed' |
-'optInSuceeded' |
+'optInSucceeded' |
 'optInFailed' |
 'done';
 
@@ -53,7 +53,8 @@ export type ConsentState = {
   lifecycle: LifecycleState;
   prehideOn: boolean;
   findCmpAttempts: number;
-  detectedCmps: string[],
-  detectedPopups: string[],
+  detectedCmps: string[];
+  detectedPopups: string[];
+  selfTest: boolean;
 }
   
