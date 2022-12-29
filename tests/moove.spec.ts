@@ -6,9 +6,3 @@ generateCMPTests('Moove', [
   'https://www.phorest.com/',
   'https://theposterclub.com/',
 ], {});
-
-generateCMPTests('Moove', [
-  'https://www.yourcloudlibrary.com/',
-], {
-  skipRegions: ['US', 'GB']
-});

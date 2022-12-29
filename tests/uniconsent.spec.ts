@@ -7,7 +7,6 @@ generateCMPTests('Uniconsent', [
 
 generateCMPTests('Uniconsent', [
   'https://www.vivobarefoot.com/eu/',
-  'https://www.gsmarena.com',
 ], {
   skipRegions: ['US']
 });
