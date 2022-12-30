@@ -30,7 +30,7 @@ async function initConfig() {
   }
 }
 
-async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult[]> {
+async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult<boolean>[]> {
   if (manifestVersion === 2) {
     return new Promise((resolve) => {
       chrome.tabs.executeScript(tabId, {
