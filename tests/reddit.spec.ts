@@ -4,5 +4,5 @@ generateCMPTests('reddit.com', [
   'https://www.reddit.com/r/AskReddit/',
 ],{
   mobile: false,
-  skipRegions: ['US'],
+  skipRegions: ['US', 'DE', 'FR', 'GB'], // https://github.com/duckduckgo/autoconsent/issues/82
 });
