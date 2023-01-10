@@ -50,11 +50,11 @@ export type LifecycleState = 'loading' |
 'done';
 
 export type ConsentState = {
-  lifecycle: LifecycleState;
-  prehideOn: boolean;
-  findCmpAttempts: number;
-  detectedCmps: string[];
-  detectedPopups: string[];
-  selfTest: boolean;
+  lifecycle: LifecycleState; // What point in the autoconsent lifecycle this script is at.
+  prehideOn: boolean; // If the script is currently hiding preHide elements.
+  findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.
+  detectedCmps: string[]; // Names of CMP rules where `detectCmp` returned true.
+  detectedPopups: string[]; // Names of CMP rules where `detectPopup` returned true.
+  selfTest: boolean; // null if no self test was run, otherwise it holds the result of the self test.
 }
   

@@ -110,9 +110,9 @@ export type SelfTestMessage = {
 
 export type ReportMessage = {
   type: "report";
-  instanceId: string;
-  url: string;
-  mainFrame: boolean;
+  instanceId: string; // A unique identifier for the frame.
+  url: string; // Current frame URL
+  mainFrame: boolean; // `true` iff this frame is the top frame.
   state: ConsentState;
 };
 
