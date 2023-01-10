@@ -102,3 +102,19 @@ sequenceDiagram
 
     Note over CS: Continue rule execution (or fail with timeout)
 ```
+
+### Report messages
+
+The content-script periodically sends `report` messages which give a summary of the status of what has run
+so far in a particular frame. These messages contain the following information:
+ * `type` (string) - "report".
+ * `instanceId` (string) - A unique identifier for the frame.
+ * `url` (string) - Current frame URL
+ * `mainFrame` (boolean) - `true` iff this frame is the top frame.
+ * `state` -
+   * `lifecycle` (string) - What point in the autoconsent lifecycle this script is at.
+   * `prehideOn` (boolean) - If the script is currently hiding preHide elements.
+   * `findCmpAttempts` (integer) - Number of times we tried to find CMPs in this frame.
+   * `detectedCmp` (string[]) - Names of CMP rules where `detectCmp` returned true.
+   * `detectedPopups` (string[]) - Names of CMP rules where `detectPopup` returned true.
+   * `selfTest` (boolean?) - null if no self test was run, otherwise it holds the result of the self test.
