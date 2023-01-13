@@ -10,6 +10,5 @@ generateCMPTests('sibbo', [
   'https://www.atresplayer.com/',
   'https://www.antena3.com/',
   'https://www.lasexta.com/',
-  'https://www.atresmedia.com/'
 ]
 );

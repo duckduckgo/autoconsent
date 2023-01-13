@@ -1,18 +1,28 @@
 import { rules as dynamicRules, createAutoCMP } from './index';
-import { MessageSender, AutoCMP, RuleBundle, Config } from './types';
+import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
 import { prehide, undoPrehide } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
+import { getRandomID } from './random';
 
 export * from './index';
 
 export default class AutoConsent {
+  id = getRandomID();
   rules: AutoCMP[] = [];
   config: Config;
   foundCmp: AutoCMP = null;
+  state: ConsentState = {
+    lifecycle: 'loading',
+    prehideOn: false,
+    findCmpAttempts: 0,
+    detectedCmps: [],
+    detectedPopups: [],
+    selfTest: null,
+  }; 
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
@@ -21,6 +31,7 @@ export default class AutoConsent {
     this.rules = [...dynamicRules];
 
     enableLogs && console.log('autoconsent init', window.location.href);
+    this.updateState({ lifecycle: 'loading' });
     if (config) {
       this.initialize(config, declarativeRules);
     } else {
@@ -32,6 +43,7 @@ export default class AutoConsent {
         url: window.location.href,
       };
       sendContentMessage(initMsg);
+      this.updateState({ lifecycle: 'waitingForInitResponse' });
     }
   }
 
@@ -71,6 +83,7 @@ export default class AutoConsent {
     } else {
       this.start();
     }
+    this.updateState({ lifecycle: 'initialized' });
   }
 
   parseRules(declarativeRules: RuleBundle) {
@@ -110,15 +123,19 @@ export default class AutoConsent {
   }
 
   async _start() {
-    enableLogs && console.log(`Detecting CMPs on ${window.location.href}`)
+    enableLogs && console.log(`Detecting CMPs on ${window.location.href}`);
+    this.updateState({ lifecycle: 'started' });
     const { normal, cosmetic } = await this.findCmp(this.config.detectRetries);
+    this.updateState({ detectedCmps: [...normal.map(c => c.name), ...cosmetic.map(c => c.name)]})
     if (normal.length === 0 && cosmetic.length === 0) {
       enableLogs && console.log("no CMP found", location.href);
       if (this.config.enablePrehide) {
-        undoPrehide();
+        this.undoPrehide();
       }
+      this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     }
+    this.updateState({ lifecycle: 'cmpDetected' });
     let foundPopups: AutoCMP[] = [];
     if (normal.length > 0) {
       foundPopups = await this.detectPopups(normal);
@@ -130,10 +147,11 @@ export default class AutoConsent {
     if (foundPopups.length === 0) {
       enableLogs && console.log('no popup found');
       if (this.config.enablePrehide) {
-        undoPrehide();
+        this.undoPrehide();
       }
       return false;
     }
+    this.updateState({ lifecycle: 'openPopupDetected' });
 
     if (foundPopups.length > 1) {
       const errorDetails = {
@@ -160,6 +178,7 @@ export default class AutoConsent {
   }
 
   async findCmp(retries: number): Promise<{ normal: AutoCMP[], cosmetic: AutoCMP[] }> {
+    this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 })
     const normal: AutoCMP[] = [];
     const cosmetic: AutoCMP[] = [];
 
@@ -207,6 +226,7 @@ export default class AutoConsent {
     for (const cmp of cmps) {
       popupLookups.push(this.waitForPopup(cmp).then((isOpen) => {
         if (isOpen) {
+          this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
           this.sendContentMessage({
             type: 'popupFound',
             cmp: cmp.name,
@@ -233,6 +253,7 @@ export default class AutoConsent {
   }
 
   async doOptOut(): Promise<boolean> {
+    this.updateState({ lifecycle: 'runningOptOut' })
     let optOutResult;
     if (!this.foundCmp) {
       enableLogs && console.log('no CMP to opt out');
@@ -244,7 +265,7 @@ export default class AutoConsent {
     }
 
     if (this.config.enablePrehide) {
-      undoPrehide();
+      this.undoPrehide();
     }
 
     this.sendContentMessage({
@@ -262,12 +283,16 @@ export default class AutoConsent {
         isCosmetic: this.foundCmp.isCosmetic,
         url: location.href,
       });
+      this.updateState({ lifecycle: 'done' })
+    } else {
+      this.updateState({ lifecycle: optOutResult ? 'optOutSucceeded' : 'optOutFailed' })
     }
 
     return optOutResult;
   }
 
   async doOptIn(): Promise<boolean> {
+    this.updateState({ lifecycle: 'runningOptIn' })
     let optInResult;
     if (!this.foundCmp) {
       enableLogs && console.log('no CMP to opt in');
@@ -279,7 +304,7 @@ export default class AutoConsent {
     }
 
     if (this.config.enablePrehide) {
-      undoPrehide();
+      this.undoPrehide();
     }
 
     this.sendContentMessage({
@@ -297,6 +322,9 @@ export default class AutoConsent {
         isCosmetic: this.foundCmp.isCosmetic,
         url: location.href,
       });
+      this.updateState({ lifecycle: 'done' })
+    } else {
+      this.updateState({ lifecycle: optInResult ? 'optInSucceeded' : 'optInFailed' })
     }
 
     return optInResult;
@@ -318,6 +346,7 @@ export default class AutoConsent {
       result: selfTestResult,
       url: location.href,
     });
+    this.updateState({ selfTest: selfTestResult })
     return selfTestResult;
   }
 
@@ -344,11 +373,28 @@ export default class AutoConsent {
       return selectorList;
     }, globalHidden);
 
+    this.updateState({ prehideOn: true })
     return prehide(selectors);
   }
 
+  undoPrehide(): boolean {
+    this.updateState({ prehideOn: false })
+    return undoPrehide();
+  }
+
+  updateState(change: Partial<ConsentState>) {
+    Object.assign(this.state, change)
+    this.sendContentMessage({
+      type: 'report',
+      instanceId: this.id,
+      url: window.location.href,
+      mainFrame: window.top === window.self,
+      state: this.state,
+    })
+  }
+
   async receiveMessageCallback(message: BackgroundMessage) {
-    if (enableLogs && message.type !== 'evalResp' /* evals are noisy */) {
+    if (enableLogs && ['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
     }
     switch (message.type) {

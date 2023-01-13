@@ -1,4 +1,5 @@
 import { ContentScriptMessage } from "./messages";
+import { getRandomID } from "./random";
 
 class Deferred<T> {
   id: string;
@@ -30,12 +31,7 @@ export const evalState: EvalState = {
 }
 
 export function requestEval(code: string): Promise<boolean> {
-  let id;
-  if (crypto && typeof crypto.randomUUID !== 'undefined') {
-    id = crypto.randomUUID();
-  } else {
-    id = Math.random().toString();
-  }
+  const id = getRandomID();
   evalState.sendContentMessage({
     type: 'eval',
     id,

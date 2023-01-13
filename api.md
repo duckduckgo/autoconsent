@@ -77,6 +77,10 @@ sequenceDiagram
         Note right of CS: execute self-test rules
         CS -->>- BG: selfTestResult
     end
+
+    opt periodically
+        CS ->> BG: report
+    end
 ```
 
 ### Asynchronous eval rules
@@ -102,3 +106,8 @@ sequenceDiagram
 
     Note over CS: Continue rule execution (or fail with timeout)
 ```
+
+### Report messages
+
+The content-script periodically sends `report` messages which give a summary of the status of what has run
+so far in a particular frame. The exact contents of the report messages can be found in [type definitions](/lib/messages.ts).

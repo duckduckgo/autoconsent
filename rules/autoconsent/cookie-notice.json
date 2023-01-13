@@ -6,6 +6,6 @@
     { "visible": "#cookie-notice .cookie-notice-container" }
   ],
   "detectPopup": [{ "visible": "#cookie-notice" }],
-  "optIn": [{ "click": ["#cn-accept-cookie"] }],
+  "optIn": [{ "click": "#cn-accept-cookie" }],
   "optOut": [{ "hide": ["#cookie-notice"] }]
 }

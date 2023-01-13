@@ -40,15 +40,17 @@ export default [{
   }],
   plugins: [
     typescript(),
-    terser(),
     copy({
       targets: [
         {
-          src: ['./addon/icons', './rules/rules.json'],
+          src: [
+            './addon/icons', 
+            './rules/rules.json'
+          ],
           dest: ['./dist/addon-firefox/', './dist/addon-mv3/']
         },
         {
-          src: ['./addon/popup.html'],
+          src: ['./addon/popup.html', './addon/devtools'],
           dest: ['./dist/addon-mv3/']
         },
         {
@@ -61,6 +63,10 @@ export default [{
           dest: './dist/addon-firefox',
           rename: 'manifest.json',
         },
+        {
+          src: './node_modules/bulma/css/bulma.min.css',
+          dest: './dist/addon-mv3/devtools/'
+        }
       ]
     })
   ]
@@ -75,7 +81,6 @@ export default [{
   }],
   plugins: [
     typescript(),
-    terser(),
   ],
 }, {
   input: './addon/popup.ts',
@@ -85,6 +90,14 @@ export default [{
   }],
   plugins: [
     typescript(),
-    terser(),
+  ],
+}, {
+  input: './addon/devtools/panel.ts',
+  output: [{
+    file: './dist/addon-mv3/devtools/panel.js',
+    format: 'iife',
+  }],
+  plugins: [
+    typescript(),
   ],
 }];

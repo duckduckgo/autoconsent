@@ -3,7 +3,7 @@ def runPlaywrightTests(resultDir, browser, grep) {
         timeout(20) {
             sh 'mkdir -p ./test-results'
             sh """
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --workers 10 --grep "$grep"|| true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --grep "$grep"|| true
             """
         }
     } finally {
@@ -27,7 +27,7 @@ pipeline {
     agent { label 'autoconsent-crawler' }
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
-        choice(name: 'BROWSER', choices: ['webkit', 'iphoneSE', 'chrome', 'firefox'], description: 'Browser')
+        choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
     }
     environment {

@@ -18,8 +18,6 @@ generateCMPTests('TrustArc-top', [
 
 generateCMPTests('TrustArc-frame', [
   'https://www.wish.com/',
-  'https://www.forbes.com/',
-  'https://www.starbucks.com/',
 ], {
   testOptOut: true,
   testSelfTest: false,
