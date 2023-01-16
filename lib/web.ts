@@ -10,6 +10,16 @@ import { getRandomID } from './random';
 
 export * from './index';
 
+function filterCMPs(rules: AutoCMP[], config: Config) {
+  return rules.filter((cmp) => {
+    return (
+      (!config.disabledCmps || !config.disabledCmps.includes(cmp.name)) // CMP is not disabled
+      &&
+      (config.enableCosmeticRules || !cmp.isCosmetic) // CMP is not cosmetic or cosmetic rules are enabled
+    );
+  });
+}
+
 export default class AutoConsent {
   id = getRandomID();
   rules: AutoCMP[] = [];
@@ -22,7 +32,7 @@ export default class AutoConsent {
     detectedCmps: [],
     detectedPopups: [],
     selfTest: null,
-  }; 
+  };
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
@@ -58,7 +68,7 @@ export default class AutoConsent {
       this.parseRules(declarativeRules);
     }
 
-    this.filterCMPs(config);
+    this.rules = filterCMPs(this.rules, config);
 
     if (config.enablePrehide) {
       if (document.documentElement) {
@@ -100,15 +110,6 @@ export default class AutoConsent {
     this.rules.push(createAutoCMP(config));
   }
 
-  filterCMPs(config: Config) {
-    if (config.disabledCmps?.length > 0) {
-      this.rules = this.rules.filter((cmp) => !config.disabledCmps.includes(cmp.name))
-    }
-    if (!config.enableCosmeticRules) {
-      this.rules = this.rules.filter((cmp) => !cmp.isCosmetic);
-    }
-  }
-
   addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
     this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
   }
@@ -126,7 +127,7 @@ export default class AutoConsent {
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
     const { normal, cosmetic } = await this.findCmp(this.config.detectRetries);
-    this.updateState({ detectedCmps: [...normal.map(c => c.name), ...cosmetic.map(c => c.name)]})
+    this.updateState({ detectedCmps: [...normal, ...cosmetic].map(c => c.name) });
     if (normal.length === 0 && cosmetic.length === 0) {
       enableLogs && console.log("no CMP found", location.href);
       if (this.config.enablePrehide) {
