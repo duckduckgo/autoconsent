@@ -137,6 +137,8 @@ export default class AutoConsent {
       return false;
     }
     this.updateState({ lifecycle: 'cmpDetected' });
+
+    // we resort to cosmetic rules only if no non-cosmetic rules are found
     let foundPopups = await this.detectPopups(foundCmps.filter(r => !r.isCosmetic))
     if (foundPopups.length === 0) {
       foundPopups = await this.detectPopups(foundCmps.filter(r => r.isCosmetic))
