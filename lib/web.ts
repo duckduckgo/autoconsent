@@ -126,9 +126,9 @@ export default class AutoConsent {
   async _start() {
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
-    const { normal, cosmetic } = await this.findCmp(this.config.detectRetries);
-    this.updateState({ detectedCmps: [...normal, ...cosmetic].map(c => c.name) });
-    if (normal.length === 0 && cosmetic.length === 0) {
+    const foundCmps = await this.findCmp(this.config.detectRetries);
+    this.updateState({ detectedCmps: foundCmps.map(c => c.name) });
+    if (foundCmps.length === 0) {
       enableLogs && console.log("no CMP found", location.href);
       if (this.config.enablePrehide) {
         this.undoPrehide();
@@ -137,12 +137,9 @@ export default class AutoConsent {
       return false;
     }
     this.updateState({ lifecycle: 'cmpDetected' });
-    let foundPopups: AutoCMP[] = [];
-    if (normal.length > 0) {
-      foundPopups = await this.detectPopups(normal);
-    }
-    if (foundPopups.length === 0 && cosmetic.length > 0) {
-      foundPopups = await this.detectPopups(cosmetic);
+    let foundPopups = await this.detectPopups(foundCmps.filter(r => !r.isCosmetic))
+    if (foundPopups.length === 0) {
+      foundPopups = await this.detectPopups(foundCmps.filter(r => r.isCosmetic))
     }
 
     if (foundPopups.length === 0) {
@@ -178,10 +175,9 @@ export default class AutoConsent {
     }
   }
 
-  async findCmp(retries: number): Promise<{ normal: AutoCMP[], cosmetic: AutoCMP[] }> {
+  async findCmp(retries: number): Promise<AutoCMP[]> {
     this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 })
-    const normal: AutoCMP[] = [];
-    const cosmetic: AutoCMP[] = [];
+    const foundCMPs: AutoCMP[] = [];
 
     for (const cmp of this.rules) {
       try {
@@ -196,18 +192,14 @@ export default class AutoConsent {
             url: location.href,
             cmp: cmp.name,
           }); // notify the browser
-          if (cmp.isCosmetic) {
-            cosmetic.push(cmp);
-          } else {
-            normal.push(cmp);
-          }
+          foundCMPs.push(cmp);
         }
       } catch (e) {
         enableLogs && console.warn(`error detecting ${cmp.name}`, e);
       }
     }
 
-    if (normal.length === 0 && cosmetic.length === 0 && retries > 0) {
+    if (foundCMPs.length === 0 && retries > 0) {
       return new Promise((resolve) => {
         setTimeout(async () => {
           const result = this.findCmp(retries - 1);
@@ -216,10 +208,7 @@ export default class AutoConsent {
       });
     }
 
-    return {
-      normal,
-      cosmetic,
-    };
+    return foundCMPs;
   }
 
   async detectPopups(cmps: AutoCMP[]): Promise<AutoCMP[]> {
