@@ -212,32 +212,19 @@ export default class AutoConsent {
   }
 
   async detectPopups(cmps: AutoCMP[]): Promise<AutoCMP[]> {
-    const popupLookups: Promise<AutoCMP>[] = [];
-    for (const cmp of cmps) {
-      popupLookups.push(this.waitForPopup(cmp).then((isOpen) => {
-        if (isOpen) {
-          this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
-          this.sendContentMessage({
-            type: 'popupFound',
-            cmp: cmp.name,
-            url: location.href,
-          }); // notify the browser
-          return cmp;
-        } else {
-          return Promise.reject(`${cmp.name} popup not found`);
-        }
-      }));
-    }
-
     const result: AutoCMP[] = [];
-    // could use `Promise.allSettled`, but it is often unavailable in polyfilled environments
-    for (const popupLookup of popupLookups) {
-      try {
-        result.push(await popupLookup);
-      } catch (e) {
-        continue;
+    const popupLookups = cmps.map((cmp) => this.waitForPopup(cmp).then((isOpen) => {
+      if (isOpen) {
+        this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
+        this.sendContentMessage({
+          type: 'popupFound',
+          cmp: cmp.name,
+          url: location.href,
+        }); // notify the browser
+        result.push(cmp);
       }
-    }
+    }).catch(() => null));
+    await Promise.all(popupLookups);
     return result;
   }
 
