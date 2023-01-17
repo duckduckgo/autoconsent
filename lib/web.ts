@@ -241,11 +241,10 @@ export default class AutoConsent {
     }
 
     const result: AutoCMP[] = [];
-    // could use `Promise.allFulfilled`, but it is often unavailable in polyfilled environments
+    // could use `Promise.allSettled`, but it is often unavailable in polyfilled environments
     for (const popupLookup of popupLookups) {
       try {
         result.push(await popupLookup);
-        break;
       } catch (e) {
         continue;
       }
