@@ -22,6 +22,10 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return true;
   }

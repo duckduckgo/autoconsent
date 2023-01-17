@@ -21,6 +21,7 @@ export class ConsentOMaticCMP implements AutoCMP {
   methods = new Map<string, any>();
   hasSelfTest: boolean;
   runContext: RunContext = defaultRunContext;
+  isCosmetic = false;
 
   constructor(public name: string, public config: ConsentOMaticConfig) {
     config.methods.forEach(methodConfig => {

@@ -18,6 +18,10 @@ export default class Conversant extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return elementExists(".cmp-root .cmp-receptacle");
   }

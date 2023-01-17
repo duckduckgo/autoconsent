@@ -1,0 +1,12 @@
+{
+  "name": "pornhub.com",
+  "runContext": {
+    "urlPattern": "^https://(www\\.)?pornhub\\.com/"
+  },
+  "cosmetic": true,
+  "prehideSelectors": [".cookiesBanner"],
+  "detectCmp": [{ "exists": ".cookiesBanner" }],
+  "detectPopup": [{ "visible": ".cookiesBanner" }],
+  "optIn": [{ "click": ".cookiesBanner .okButton" }],
+  "optOut": [{ "hide": [".cookiesBanner"] }]
+}

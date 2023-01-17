@@ -18,6 +18,10 @@ export default class Onetrust extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return elementExists("#onetrust-banner-sdk");
   }

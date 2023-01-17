@@ -11,6 +11,8 @@ async function init() {
   const promptRadio = document.querySelector('input#prompt') as HTMLInputElement;
   const prehideOnRadio = document.querySelector('input#prehide-on') as HTMLInputElement;
   const prehideOffRadio = document.querySelector('input#prehide-off') as HTMLInputElement;
+  const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
+  const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
   const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
 
   // enable proceed button when necessary
@@ -57,6 +59,12 @@ async function init() {
     prehideOffRadio.checked = true;
   }
 
+  if (autoconsentConfig.enableCosmeticRules) {
+    cosmeticOnRadio.checked = true;
+  } else {
+    cosmeticOffRadio.checked = true;
+  }
+
   // set form event listeners
 
   enabledCheckbox.addEventListener('change', () => {
@@ -89,6 +97,13 @@ async function init() {
   }
   prehideOnRadio.addEventListener('change', prehideChange);
   prehideOffRadio.addEventListener('change', prehideChange);
+
+  function cosmeticChange() {
+    autoconsentConfig.enableCosmeticRules = cosmeticOnRadio.checked;
+    storageSet({ config: autoconsentConfig });
+  }
+  cosmeticOnRadio.addEventListener('change', cosmeticChange);
+  cosmeticOffRadio.addEventListener('change', cosmeticChange);
 }
 
 init();

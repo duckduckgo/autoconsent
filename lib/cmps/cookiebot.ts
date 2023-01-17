@@ -17,6 +17,10 @@ export default class Cookiebot extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return elementExists('#CybotCookiebotDialogBodyLevelButtonPreferences');
   }

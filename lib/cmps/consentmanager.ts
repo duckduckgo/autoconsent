@@ -16,6 +16,10 @@ export default class ConsentManager extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   constructor() {
     super("consentmanager.net");
   }

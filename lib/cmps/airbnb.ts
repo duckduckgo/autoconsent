@@ -25,6 +25,10 @@ export default class Airbnb extends AutoConsentCMPBase {
     return false;
   }
 
+  get isCosmetic(): boolean {
+    return false;
+  }
+
   async detectCmp() {
     return elementExists('div[data-testid=main-cookies-banner-container]');
   }

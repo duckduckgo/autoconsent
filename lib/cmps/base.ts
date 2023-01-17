@@ -36,6 +36,10 @@ export default class AutoConsentCMPBase implements AutoCMP {
     throw new Error('Not Implemented');
   }
 
+  get isCosmetic(): boolean {
+    throw new Error('Not Implemented');
+  }
+
   checkRunContext(): boolean {
     const runCtx: RunContext = {
       ...defaultRunContext,
@@ -169,6 +173,10 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
   get isIntermediate(): boolean {
     return !!this.config.intermediate;
+  }
+
+  get isCosmetic(): boolean {
+    return !!this.config.cosmetic;
   }
 
   get prehideSelectors(): string[] {
