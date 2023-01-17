@@ -1,3 +1,30 @@
+# v4.1.0 (Tue Jan 17 2023)
+
+#### 🚀 Enhancement
+
+- Cosmetic rules [#67](https://github.com/duckduckgo/autoconsent/pull/67) ([@muodov](https://github.com/muodov))
+- Extension Devtools [#42](https://github.com/duckduckgo/autoconsent/pull/42) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Cleaning up invalid tests [#49](https://github.com/duckduckgo/autoconsent/pull/49) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix type warning on bundle. [#83](https://github.com/duckduckgo/autoconsent/pull/83) ([@sammacbeth](https://github.com/sammacbeth))
+- Add broken site issue template [#69](https://github.com/duckduckgo/autoconsent/pull/69) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump @rollup/plugin-json from 5.0.2 to 6.0.0 [#72](https://github.com/duckduckgo/autoconsent/pull/72) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.204 to 0.0.206 [#85](https://github.com/duckduckgo/autoconsent/pull/85) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.29.0 to 8.31.0 [#84](https://github.com/duckduckgo/autoconsent/pull/84) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.0.0 (Wed Dec 14 2022)
 
 #### 💥 Breaking Change
