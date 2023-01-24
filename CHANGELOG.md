@@ -1,3 +1,15 @@
+# v4.1.1 (Tue Jan 24 2023)
+
+#### 🐛 Bug Fix
+
+- Add a test cosmetic rule [#91](https://github.com/duckduckgo/autoconsent/pull/91) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v4.1.0 (Tue Jan 17 2023)
 
 #### 🚀 Enhancement
