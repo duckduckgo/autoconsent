@@ -1,0 +1,49 @@
+{
+  "name": "ketch",
+  "runContext": {
+    "frame": false,
+    "main": true
+  },
+  "intermediate": false,
+  "prehideSelectors": [
+    "#lanyard_root div[role='dialog']"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#lanyard_root div[role='dialog']"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#lanyard_root div[role='dialog']"
+    }
+  ],
+  "optIn": [
+    {
+      "click": "#lanyard_root button[class^='link']",
+      "optional": true
+    },
+    {
+      "wait": 500
+    },
+    {
+      "waitForThenClick": "div[class^='buttons'] > :nth-child(2)"
+    },
+    {
+      "click": "#lanyard_root button[class*='confirmButton']"
+    }
+  ],
+  "optOut": [
+    {
+      "click": "#lanyard_root button[class^='link']",
+      "optional": true
+    },
+    {
+      "waitForThenClick": "#lanyard_root button[class*='rejectButton']"
+    },
+    {
+      "click": "#lanyard_root button[class*='confirmButton']"
+    }
+  ],
+  "test": []
+}
