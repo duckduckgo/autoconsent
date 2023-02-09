@@ -1,3 +1,24 @@
+# v4.1.2 (Thu Feb 09 2023)
+
+#### 🐛 Bug Fix
+
+- New rules [#95](https://github.com/duckduckgo/autoconsent/pull/95) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump mocha from 10.1.0 to 10.2.0 [#64](https://github.com/duckduckgo/autoconsent/pull/64) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.24.2 to 1.30.0 [#92](https://github.com/duckduckgo/autoconsent/pull/92) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump typescript from 4.8.4 to 4.9.5 [#93](https://github.com/duckduckgo/autoconsent/pull/93) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @rollup/plugin-typescript from 10.0.1 to 11.0.0 [#89](https://github.com/duckduckgo/autoconsent/pull/89) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/parser from 5.46.1 to 5.51.0 [#94](https://github.com/duckduckgo/autoconsent/pull/94) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.1.1 (Tue Jan 24 2023)
 
 #### 🐛 Bug Fix
