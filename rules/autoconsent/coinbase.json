@@ -1,0 +1,42 @@
+{
+    "name": "coinbase",
+    "intermediate": false,
+    "runContext": {
+        "frame": true,
+        "main": true
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div[class^=CookieBannerContent__Container]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class^=CookieBannerContent__Container]"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "div[class^=CookieBannerContent__CTA] :nth-last-child(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "button[class^=CookieBannerContent__Settings]"
+        },
+        {
+            "click": "div[class^=CookiePreferencesModal__CategoryContainer] input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "div[class^=CookiePreferencesModal__ButtonContainer] > button"
+        }
+    ],
+    "test": [
+        {
+            "eval": "JSON.parse(decodeURIComponent(document.cookie.match(/cm_eu_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[1])).consent.length <= 1"
+        }
+    ]
+}
