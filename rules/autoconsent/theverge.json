@@ -2,7 +2,8 @@
     "name": "theverge",
     "runContext": {
         "frame": false,
-        "main": true
+        "main": true,
+        "urlPattern": "^https://(www)?\\.theverge\\.com"
     },
     "intermediate": false,
     "prehideSelectors": [
