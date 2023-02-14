@@ -1,3 +1,22 @@
+# v4.1.3 (Tue Feb 14 2023)
+
+#### 🐛 Bug Fix
+
+- Reduce triggering of coinbase and theverge rules [#101](https://github.com/duckduckgo/autoconsent/pull/101) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump tslib from 2.4.1 to 2.5.0 [#97](https://github.com/duckduckgo/autoconsent/pull/97) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump auto from 10.37.6 to 10.42.0 [#98](https://github.com/duckduckgo/autoconsent/pull/98) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.31.0 to 8.34.0 [#100](https://github.com/duckduckgo/autoconsent/pull/100) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.1.2 (Thu Feb 09 2023)
 
 #### 🐛 Bug Fix
