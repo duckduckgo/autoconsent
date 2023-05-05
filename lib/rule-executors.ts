@@ -1,6 +1,6 @@
 import { enableLogs } from "./config";
 import { requestEval } from "./eval-handler";
-import { HideMethod, VisibilityCheck } from "./rules";
+import { ElementSelector, HideMethod, VisibilityCheck } from "./rules";
 import { getStyleElement, hideElements, isElementVisible, waitFor } from "./utils";
 
 export function doEval(expr: string): Promise<boolean> {
@@ -10,14 +10,9 @@ export function doEval(expr: string): Promise<boolean> {
   });
 }
 
-export function click(selectorOrElements: string | HTMLElement[], all = false): boolean {
-  let elem: HTMLElement[] = [];
-  if (typeof selectorOrElements === 'string') {
-    elem = Array.from(document.querySelectorAll<HTMLElement>(selectorOrElements));
-  } else {
-    elem = selectorOrElements;
-  }
-  enableLogs && console.log("[click]", selectorOrElements, all, elem);
+export function click(selector: ElementSelector, all = false): boolean {
+  const elem = elementSelector(selector)
+  enableLogs && console.log("[click]", selector, all, elem);
   if (elem.length > 0) {
     if (all) {
       elem.forEach((e) => e.click());
@@ -28,14 +23,14 @@ export function click(selectorOrElements: string | HTMLElement[], all = false): 
   return elem.length > 0;
 }
 
-export function elementExists(selector: string): boolean {
-  const exists = document.querySelector(selector) !== null;
+export function elementExists(selector: ElementSelector): boolean {
+  const exists = elementSelector(selector).length > 0;
   // enableLogs && console.log("[exists?]", selector, exists);
   return exists;
 }
 
-export function elementVisible(selector: string, check: VisibilityCheck): boolean {
-  const elem = document.querySelectorAll<HTMLElement>(selector);
+export function elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean {
+  const elem = elementSelector(selector);
   const results = new Array(elem.length);
   elem.forEach((e, i) => {
     // check for display: none
@@ -53,18 +48,18 @@ export function elementVisible(selector: string, check: VisibilityCheck): boolea
   return results.every(r => r);
 }
 
-export function waitForElement(selector: string, timeout = 10000): Promise<boolean> {
+export function waitForElement(selector: ElementSelector, timeout = 10000): Promise<boolean> {
   const interval = 200;
   const times = Math.ceil((timeout) / interval);
   // enableLogs && console.log("[waitFor]", ruleStep.waitFor);
   return waitFor(
-    () => document.querySelector(selector) !== null,
+    () => elementSelector(selector).length > 0,
     times,
     interval
   );
 }
 
-export function waitForVisible(selector: string, timeout = 10000, check: VisibilityCheck = 'any'): Promise<boolean> {
+export function waitForVisible(selector: ElementSelector, timeout = 10000, check: VisibilityCheck = 'any'): Promise<boolean> {
   const interval = 200;
   const times = Math.ceil((timeout) / interval);
   // enableLogs && console.log("[waitForVisible]", ruleStep.waitFor);
@@ -75,7 +70,7 @@ export function waitForVisible(selector: string, timeout = 10000, check: Visibil
   );
 }
 
-export async function waitForThenClick(selector: string, timeout = 10000, all = false): Promise<boolean> {
+export async function waitForThenClick(selector: ElementSelector, timeout = 10000, all = false): Promise<boolean> {
   // enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
   await waitForElement(selector, timeout);
   return click(selector, all);
@@ -110,4 +105,57 @@ export function undoPrehide(): boolean {
     existingElement.remove();
   }
   return !!existingElement;
+}
+
+function querySingleReplySelector(selector: string, parent: ParentNode = document): HTMLElement[] {
+  if (selector.startsWith('aria/')) {
+    return []
+  }
+  if (selector.startsWith('xpath/')) {
+    const xpath = selector.slice(6)
+    const result = document.evaluate(xpath, parent, null, XPathResult.ANY_TYPE, null)
+    let node: Node = null
+    const elements: HTMLElement[] = []
+    // eslint-disable-next-line no-cond-assign
+    while (node = result.iterateNext()) {
+      elements.push(node as HTMLElement)
+    }
+    return elements
+  }
+  if (selector.startsWith('text/')) {
+    return []
+  }
+  if (selector.startsWith('pierce/')) {
+    return []
+  }
+  return Array.from(parent.querySelectorAll(selector))
+}
+
+function querySelectorChain(selectors: string[]): HTMLElement[] {
+  let parent: ParentNode = document
+  let matches: HTMLElement[]
+  for (const selector of selectors) {
+    matches = querySingleReplySelector(selector, parent)
+    if (matches.length === 0) {
+      return []
+    }
+    parent = matches[0]
+  }
+  return matches;
+}
+
+export function elementSelector(selector: ElementSelector): HTMLElement[] {
+  if (typeof selector === 'string') {
+    return Array.from(document.querySelectorAll(selector))
+  }
+  // selector is an array of @puppeteer/replay.Selector
+  for (const replySelector of selector) {
+    const results = typeof replySelector === 'string' ? querySingleReplySelector(replySelector) : querySelectorChain(replySelector)
+    if (results.length > 0) {
+      console.log('elementSelector', replySelector, results)
+      return results
+    }
+    console.log('elementSelector', replySelector, results)
+  }
+  return []
 }

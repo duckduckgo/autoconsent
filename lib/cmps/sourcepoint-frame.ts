@@ -78,12 +78,12 @@ export default class SourcePoint extends AutoConsentCMPBase {
       // toggles with 2 buttons
       const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.neutral.on .right') as NodeListOf<HTMLElement>;
       for (const t of toggles) {
-        click([t]);
+        t.click()
       }
       // switch toggles
       const switches = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.switch-bg.on') as NodeListOf<HTMLElement>;
       for (const t of switches) {
-        click([t]);
+        t.click()
       }
       return click('.priv-save-btn');
     }
