@@ -1,0 +1,107 @@
+{
+    "name": "ubuntu.com",
+    "prehideSelectors": [
+        "dialog.cookie-policy"
+    ],
+    "detectCmp": [
+        {
+            "exists": [
+                [
+                    "aria/Your tracker settings[role=\"dialog\"]",
+                    "aria/[role=\"banner\"]"
+                ],
+                [
+                    "dialog.cookie-policy header"
+                ],
+                [
+                    "xpath///*[@id=\"modal\"]/div/header"
+                ],
+                [
+                    "pierce/dialog header"
+                ]
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [
+                [
+                    "aria/Your tracker settings[role=\"dialog\"]",
+                    "aria/[role=\"banner\"]"
+                ],
+                [
+                    "dialog header"
+                ],
+                [
+                    "xpath///*[@id=\"modal\"]/div/header"
+                ],
+                [
+                    "pierce/dialog header"
+                ]
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                [
+                    "aria/Accept all and visit site"
+                ],
+                [
+                    "#cookie-policy-button-accept"
+                ],
+                [
+                    "xpath///*[@id=\"cookie-policy-button-accept\"]"
+                ],
+                [
+                    "pierce/#cookie-policy-button-accept"
+                ],
+                [
+                    "text/Accept all and"
+                ]
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                [
+                    "aria/Manage your tracker settings[role=\"button\"]"
+                ],
+                [
+                    "button.p-button"
+                ],
+                [
+                    "xpath///*[@id=\"cookie-policy-content\"]/p[4]/button[2]"
+                ],
+                [
+                    "pierce/button.p-button"
+                ]
+            ]
+        },
+        {
+            "waitForThenClick": [
+                [
+                    "aria/Save preferences"
+                ],
+                [
+                    "div > button"
+                ],
+                [
+                    "xpath///*[@id=\"modal\"]/div/button"
+                ],
+                [
+                    "pierce/div > button"
+                ],
+                [
+                    "text/Save preferences"
+                ]
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "document.cookie === '_cookies_accepted=essential'"
+        }
+    ]
+}
