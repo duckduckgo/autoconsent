@@ -80,6 +80,11 @@
             ]
         },
         {
+            "waitForThenClick": ".p-switch__input:checked",
+            "optional": true,
+            "all": true
+        },
+        {
             "waitForThenClick": [
                 [
                     "aria/Save preferences"
