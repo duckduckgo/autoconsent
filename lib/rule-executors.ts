@@ -152,10 +152,8 @@ export function elementSelector(selector: ElementSelector): HTMLElement[] {
   for (const replySelector of selector) {
     const results = typeof replySelector === 'string' ? querySingleReplySelector(replySelector) : querySelectorChain(replySelector)
     if (results.length > 0) {
-      console.log('elementSelector', replySelector, results)
       return results
     }
-    console.log('elementSelector', replySelector, results)
   }
   return []
 }
