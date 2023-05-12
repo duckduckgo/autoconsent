@@ -1,0 +1,9 @@
+{
+    "name": "xhamster-us",
+    "cosmetic": true,
+    "prehideSelectors": [".cookie-announce"],
+    "detectCmp": [{ "exists": ".cookie-announce" }],
+    "detectPopup": [{ "visible": ".cookie-announce .announce-text" }],
+    "optIn": [{ "click": ".cookie-announce button.xh-button" }],
+    "optOut": [{ "hide": [".cookie-announce"] }]
+  }
