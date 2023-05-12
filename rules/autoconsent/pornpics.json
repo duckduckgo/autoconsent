@@ -1,0 +1,9 @@
+{
+    "name": "pornpics.com",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-contract"],
+    "detectCmp": [{ "exists": "#cookie-contract" }],
+    "detectPopup": [{ "visible": "#cookie-contract" }],
+    "optIn": [{ "click": "a[href*=\"cookie\"]" }],
+    "optOut": [{ "hide": ["#cookie-contract"] }]
+}
