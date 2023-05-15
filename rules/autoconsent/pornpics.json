@@ -4,6 +4,6 @@
     "prehideSelectors": ["#cookie-contract"],
     "detectCmp": [{ "exists": "#cookie-contract" }],
     "detectPopup": [{ "visible": "#cookie-contract" }],
-    "optIn": [{ "click": "a[href*=\"cookie\"]" }],
+    "optIn": [{ "click": "#cookie-contract .icon-cross" }],
     "optOut": [{ "hide": ["#cookie-contract"] }]
 }
