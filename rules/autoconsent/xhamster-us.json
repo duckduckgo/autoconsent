@@ -1,7 +1,7 @@
 {
     "name": "xhamster-us",
     "runContext": {
-      "urlPattern": "^https:\/\/(www.)?xhamster\\d?.com/"
+      "urlPattern": "^https:\/\/(www\\.)?xhamster\\d?\\.com"
     },
     "cosmetic": true,
     "prehideSelectors": [".cookie-announce"],
@@ -10,4 +10,3 @@
     "optIn": [{ "click": ".cookie-announce button.xh-button" }],
     "optOut": [{ "hide": [".cookie-announce"] }]
   }
-  
