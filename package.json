@@ -12,6 +12,7 @@
     "lint": "eslint lib/ playwright/ tests/ rules/autoconsent/*.json",
     "bundle": "rollup -c",
     "watch": "rollup -c -w",
+    "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
     "test:firefox": "playwright test --project firefox",
