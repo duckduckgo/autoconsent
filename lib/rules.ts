@@ -43,7 +43,7 @@ export type ElementExistsRule = {
 export type VisibilityCheck = "any" | "all" | "none";
 
 export type ElementVisibleRule = {
-  visible: string;
+  visible: ElementSelector;
   check?: VisibilityCheck;
 };
 
