@@ -1,3 +1,4 @@
+import { SelectorType, getSelectorType } from "@puppeteer/replay";
 import { enableLogs } from "./config";
 import { requestEval } from "./eval-handler";
 import { ElementSelector, HideMethod, VisibilityCheck } from "./rules";
@@ -108,10 +109,11 @@ export function undoPrehide(): boolean {
 }
 
 function querySingleReplySelector(selector: string, parent: ParentNode = document): HTMLElement[] {
-  if (selector.startsWith('aria/')) {
+  const type = getSelectorType(selector)
+  if (type === SelectorType.ARIA) {
     return []
   }
-  if (selector.startsWith('xpath/')) {
+  if (type === SelectorType.XPath) {
     const xpath = selector.slice(6)
     const result = document.evaluate(xpath, parent, null, XPathResult.ANY_TYPE, null)
     let node: Node = null
@@ -122,10 +124,10 @@ function querySingleReplySelector(selector: string, parent: ParentNode = documen
     }
     return elements
   }
-  if (selector.startsWith('text/')) {
+  if (type === SelectorType.Text) {
     return []
   }
-  if (selector.startsWith('pierce/')) {
+  if (type === SelectorType.Pierce) {
     return []
   }
   return Array.from(parent.querySelectorAll(selector))
