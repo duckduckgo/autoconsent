@@ -20,30 +20,41 @@
   ],
   "optIn": [
     {
-      "click": "#lanyard_root button[class^='link']",
-      "optional": true
-    },
-    {
-      "wait": 500
-    },
-    {
-      "waitForThenClick": "div[class^='buttons'] > :nth-child(2)"
-    },
-    {
-      "click": "#lanyard_root button[class*='confirmButton']"
+      "if": {
+        "exists": "#lanyard_root button[class='confirmButton']"
+      },
+      "then": [
+       { "waitForThenClick":"#lanyard_root div[class^='buttons'] > :nth-child(2)" },
+       { "click": "#lanyard_root button[class='confirmButton']" }
+      ],
+      "else": [
+        { "waitForThenClick":"#lanyard_root div[class^='buttons'] > :nth-child(2)" }
+      ]
     }
   ],
   "optOut": [
-    {
+    { 
       "click": "#lanyard_root button[class^='link']",
       "optional": true
     },
     {
-      "waitForThenClick": "#lanyard_root button[class*='rejectButton']"
-    },
-    {
-      "click": "#lanyard_root button[class*='confirmButton']"
+      "if": {
+        "exists": "#lanyard_root button[class*='confirmButton']"
+      },  
+      "then": [
+        { "waitForThenClick": "#lanyard_root button[class*='rejectButton']" },
+        { "click": "#lanyard_root button[class*='confirmButton']" }     
+      ],
+      "else": [
+        {
+          "click": "#lanyard_root div[class^='buttons'] > :nth-child(1)",
+          "optional": true
+        },
+        { "waitForThenClick": "#lanyard_root input:checked" },
+        { "click": "#consentsTab > div:nth-child(2) > div > div[class^='actions'] > button:nth-child(1)" }
+      ]
     }
   ],
   "test": []
-}
+  }
+  
