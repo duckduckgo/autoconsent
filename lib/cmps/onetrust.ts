@@ -12,7 +12,7 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   runContext: RunContext = {
-    urlPattern: '^https://(www\\.)?nba\\.[^/]+//'
+    urlPattern: '^(?!.*https://www\\.nba\\.com/)'
   }
 
   get hasSelfTest(): boolean {
