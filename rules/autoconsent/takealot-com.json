@@ -1,0 +1,13 @@
+{
+  "name": "takealot.com",
+  "cosmetic": true,
+  "prehideSelectors": ["div[class^=\"cookies-banner-module_cookie-banner_\"]"],
+  "detectCmp": [{ "exists": "div[class^=\"cookies-banner-module_cookie-banner_\"]" }],
+  "detectPopup": [{ "exists": "div[class^=\"cookies-banner-module_cookie-banner_\"]" }],
+  "optIn": [
+    { "click": "button[class*=\"cookies-banner-module_dismiss-button_\"]" }
+   ],
+  "optOut": [
+    { "hide": ["div[class^=\"cookies-banner-module_cookie-banner_\"]"] }
+   ]
+  }
