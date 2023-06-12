@@ -1,0 +1,9 @@
+{
+  "name": "justwatch.com",
+  "cosmetic": true,
+  "prehideSelectors": [".consent-banner"],
+  "detectCmp": [{ "exists": ".consent-banner" }],
+  "detectPopup": [{ "exists": ".consent-banner" }],
+  "optIn": [{ "click": ".consent-banner__actions button.basic-button.primary" }],
+  "optOut": [{ "hide": [".consent-banner"] }]
+}
