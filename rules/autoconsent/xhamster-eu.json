@@ -1,0 +1,15 @@
+{
+    "name": "xhamster-eu",
+    "prehideSelectors": [".cookies-modal"],
+    "detectCmp": [{ "exists": ".cookies-modal" }],
+    "detectPopup": [{ "exists": ".cookies-modal" }],
+    "optIn": [
+      { "click": "button.cmd-button-accept-all" }
+    ],
+    "optOut": [
+      {
+        "click": "button.cmd-button-reject-all"
+      }
+    ]
+  }
+  
