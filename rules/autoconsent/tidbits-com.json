@@ -1,0 +1,9 @@
+{
+  "name": "tidbits-com",
+  "cosmetic": true,
+  "prehideSelectors": ["#eu_cookie_law_widget-2"],
+  "detectCmp": [{ "exists": "#eu_cookie_law_widget-2" }],
+  "detectPopup": [{ "visible": "#eu_cookie_law_widget-2" }],
+  "optIn": [{ "click": "#eu-cookie-law form > input.accept" }],
+  "optOut": [{ "hide": ["#eu_cookie_law_widget-2"] }]
+}
