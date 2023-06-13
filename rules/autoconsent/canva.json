@@ -8,15 +8,15 @@
   ],
   "optOut": [
     {
-      "click": "div[role=\"dialog\"] button:nth-child(2)"
-    },
-    {
-      "waitFor": "div[role=\"dialog\"] a[data-anchor-id=\"privacy-policy\"]"
-    },
-    {
-      "click": "div[role=\"dialog\"] button:nth-child(2)"
-    },
-    { "click": "div[role=\"dialog\"] div:last-child button:only-child"}
+      "if": { "exists": "div[role=\"dialog\"] button:nth-child(3)" },
+      "then": [{ "click": "div[role=\"dialog\"] button:nth-child(2)" }],
+      "else": [
+        { "click": "div[role=\"dialog\"] button:nth-child(2)" },
+        { "waitFor": "div[role=\"dialog\"] a[data-anchor-id=\"privacy-policy\"]" },
+        { "click": "div[role=\"dialog\"] button:nth-child(2)" },
+        { "click": "div[role=\"dialog\"] div:last-child button:only-child" }
+      ]
+    }   
   ],
   "test": [
     { "eval": "!document.cookie.includes('gtm_fpc_engagement_event')" }
