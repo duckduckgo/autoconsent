@@ -1,6 +1,6 @@
 {
   "name": "onlyFans.com",
-  "prehideSelectors": ["body > div"],
+  "prehideSelectors": ["div.b-cookies-informer"],
   "detectCmp": [{ "exists": "div.b-cookies-informer" }],
   "detectPopup": [{ "exists": "div.b-cookies-informer" }],
   "optIn": [
