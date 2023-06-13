@@ -5,78 +5,48 @@
     ],
     "detectCmp": [
         {
-            "exists": [
-                [
-                    "aria/Your tracker settings[role=\"dialog\"]",
-                    "aria/[role=\"banner\"]"
-                ],
-                [
-                    "dialog.cookie-policy header"
-                ],
-                [
-                    "xpath///*[@id=\"modal\"]/div/header"
-                ],
-                [
-                    "pierce/dialog header"
-                ]
+            "any": [
+                {
+                    "exists": "dialog.cookie-policy header"
+                },
+                {
+                    "exists": "xpath///*[@id=\"modal\"]/div/header"
+                }
             ]
         }
     ],
     "detectPopup": [
         {
-            "visible": [
-                [
-                    "aria/Your tracker settings[role=\"dialog\"]",
-                    "aria/[role=\"banner\"]"
-                ],
-                [
-                    "dialog header"
-                ],
-                [
-                    "xpath///*[@id=\"modal\"]/div/header"
-                ],
-                [
-                    "pierce/dialog header"
-                ]
+            "any": [
+                {
+                    "visible": "dialog header"
+                },
+                {
+                    "visible": "xpath///*[@id=\"modal\"]/div/header"
+                }
             ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": [
-                [
-                    "aria/Accept all and visit site"
-                ],
-                [
-                    "#cookie-policy-button-accept"
-                ],
-                [
-                    "xpath///*[@id=\"cookie-policy-button-accept\"]"
-                ],
-                [
-                    "pierce/#cookie-policy-button-accept"
-                ],
-                [
-                    "text/Accept all and"
-                ]
+            "any": [
+                {
+                    "waitForThenClick": "#cookie-policy-button-accept"
+                }, {
+                    "waitForThenClick": "xpath///*[@id=\"cookie-policy-button-accept\"]"
+                }
             ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": [
-                [
-                    "aria/Manage your tracker settings[role=\"button\"]"
-                ],
-                [
-                    "button.p-button"
-                ],
-                [
-                    "xpath///*[@id=\"cookie-policy-content\"]/p[4]/button[2]"
-                ],
-                [
-                    "pierce/button.p-button"
-                ]
+            "any": [
+                {
+                    "waitForThenClick": "button.p-button"
+                },
+                {
+                    "waitForThenClick": "xpath///*[@id=\"cookie-policy-content\"]/p[4]/button[2]"
+                }
             ]
         },
         {
@@ -85,22 +55,13 @@
             "all": true
         },
         {
-            "waitForThenClick": [
-                [
-                    "aria/Save preferences"
-                ],
-                [
-                    "div > button"
-                ],
-                [
-                    "xpath///*[@id=\"modal\"]/div/button"
-                ],
-                [
-                    "pierce/div > button"
-                ],
-                [
-                    "text/Save preferences"
-                ]
+            "any": [
+                {
+                    "waitForThenClick": "div > button"
+                },
+                {
+                    "waitForThenClick": "xpath///*[@id=\"modal\"]/div/button"
+                }
             ]
         }
     ],
