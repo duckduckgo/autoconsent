@@ -34,7 +34,7 @@
     ],
     "test": [
         {
-            "eval": "let o = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.indexOf('cookiefirst') === 1).trim()).split('=')[1]); (o.performance === false && o.functional === false && o.advertising === false) ? true : false"
+            "eval": "let o = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.indexOf('cookiefirst') !== -1).trim()).split('=')[1]); (o.performance === false && o.functional === false && o.advertising === false) ? true : false"
         }
     ]
   }
