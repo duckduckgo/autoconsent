@@ -1,6 +1,6 @@
 import { click, doEval, elementExists, elementVisible } from "../rule-executors";
 import { RunContext } from "../rules";
-import { getStyleElement, hideElements, waitFor } from "../utils";
+import { getStyleElement, hideElements } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 const cookieSettingsButton = "#truste-show-consent";
