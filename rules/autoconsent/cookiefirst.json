@@ -1,0 +1,41 @@
+{
+    "name": "cookiefirst.com",
+    "prehideSelectors": ["#cookiefirst-root"],
+    "detectCmp": [{ "exists": "#cookiefirst-root" }],
+    "detectPopup": [{ "visible": "#cookiefirst-root" }],
+    "optIn": [{ "click": "button[data-cookiefirst-action=accept]" }],
+    "optOut": [
+        {
+            "if": {
+                "exists": "button[data-cookiefirst-action=adjust]"
+            },
+            "then": [
+                { 
+                    "click": "button[data-cookiefirst-action=adjust]"
+                },
+                { 
+                    "waitForVisible": "[data-cookiefirst-widget=modal]",
+                    "timeout": 1000
+                },
+                {
+                    "eval": "document.querySelectorAll('button[data-cookiefirst-accent-color=true][role=checkbox]:not([disabled])').forEach(i => (i.getAttribute('aria-checked') == 'true' && i.click())) || true"
+                },
+                {
+                    "wait": 1000
+                },
+                {
+                    "click": "button[data-cookiefirst-action=save]"
+                }
+            ],
+            "else": [
+                { "click": "button[data-cookiefirst-action=reject]" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "let o = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.indexOf('cookiefirst') !== -1).trim()).split('=')[1]); (o.performance === false && o.functional === false && o.advertising === false) ? true : false"
+        }
+    ]
+  }
+  
