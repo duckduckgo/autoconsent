@@ -1,4 +1,4 @@
-import { click, elementExists, elementVisible } from "../rule-executors";
+import { click, doEval, elementExists, elementVisible } from "../rule-executors";
 import { RunContext } from "../rules";
 import { getStyleElement, hideElements } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -95,7 +95,8 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async test() {
-    // TODO: find out how to test TrustArc
-    return true;
+    //Test JS variable to check the user's preference
+    //PrefCookie = undefined means no consent is set, PrefCookie = '0' means consent is set to required only 
+    return await doEval("window && window.truste && window.truste.eu.bindMap.prefCookie === '0'");
   }
 }
