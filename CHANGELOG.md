@@ -1,3 +1,53 @@
+# v4.2.0 (Mon Jun 19 2023)
+
+#### 🚀 Enhancement
+
+- Bump @typescript-eslint/eslint-plugin from 5.45.1 to 5.59.2 [#143](https://github.com/duckduckgo/autoconsent/pull/143) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump web-ext from 7.4.0 to 7.6.2 [#145](https://github.com/duckduckgo/autoconsent/pull/145) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/parser from 5.51.0 to 5.59.2 [#146](https://github.com/duckduckgo/autoconsent/pull/146) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.30.0 to 1.33.0 [#147](https://github.com/duckduckgo/autoconsent/pull/147) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Round 2: Add to US top sites optOut banners rules and tests [#175](https://github.com/duckduckgo/autoconsent/pull/175) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added verification to check if user's optout on TrustArc CMP has been set [#159](https://github.com/duckduckgo/autoconsent/pull/159) ([@hyebahi](https://github.com/hyebahi) [@sammacbeth](https://github.com/sammacbeth))
+- Added rule for cookiefirst [#177](https://github.com/duckduckgo/autoconsent/pull/177) ([@kunalvirk](https://github.com/kunalvirk))
+- Bump @typescript-eslint/eslint-plugin from 5.59.5 to 5.59.11 [#182](https://github.com/duckduckgo/autoconsent/pull/182) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tslib from 2.5.0 to 2.5.3 [#179](https://github.com/duckduckgo/autoconsent/pull/179) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.235 to 0.0.237 [#173](https://github.com/duckduckgo/autoconsent/pull/173) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @rollup/plugin-typescript from 11.1.0 to 11.1.1 [#161](https://github.com/duckduckgo/autoconsent/pull/161) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- rewrote CMP Ketch to include US in the rules [#171](https://github.com/duckduckgo/autoconsent/pull/171) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added 2 US CMP optOut rules and tests [#168](https://github.com/duckduckgo/autoconsent/pull/168) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Round 2: added 5 notice banner rules and tests top US sites [#167](https://github.com/duckduckgo/autoconsent/pull/167) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added 4 notice banner rules and tests top sites [#164](https://github.com/duckduckgo/autoconsent/pull/164) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add xhamster.com custom US notice banner rule and test [#154](https://github.com/duckduckgo/autoconsent/pull/154) (arasolofotsara@duckduckgo.com [@muodov](https://github.com/muodov) [@icodebyamanda](https://github.com/icodebyamanda))
+- Add youporn custom notice banner's rule and test [#158](https://github.com/duckduckgo/autoconsent/pull/158) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add pornpics custom US notice banner rule and test [#156](https://github.com/duckduckgo/autoconsent/pull/156) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add whitepages custom US notice banner rule and test [#155](https://github.com/duckduckgo/autoconsent/pull/155) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add the cmp wpcc rule and test to notice banners [#157](https://github.com/duckduckgo/autoconsent/pull/157) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Bump @types/chrome from 0.0.234 to 0.0.235 [#149](https://github.com/duckduckgo/autoconsent/pull/149) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.206 to 0.0.234 [#144](https://github.com/duckduckgo/autoconsent/pull/144) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Tweak the Civic rule [#131](https://github.com/duckduckgo/autoconsent/pull/131) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump auto from 10.42.0 to 10.46.0 [#162](https://github.com/duckduckgo/autoconsent/pull/162) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.36.0 to 8.40.0 [#153](https://github.com/duckduckgo/autoconsent/pull/153) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/eslint-plugin from 5.59.2 to 5.59.5 [#152](https://github.com/duckduckgo/autoconsent/pull/152) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @rollup/plugin-typescript from 11.0.0 to 11.1.0 [#151](https://github.com/duckduckgo/autoconsent/pull/151) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 7
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@hyebahi](https://github.com/hyebahi)
+- Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
+- euw-arasolofotsara1 (arasolofotsara@duckduckgo.com)
+- Kunal Virk ([@kunalvirk](https://github.com/kunalvirk))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.1.3 (Tue Feb 14 2023)
 
 #### 🐛 Bug Fix
