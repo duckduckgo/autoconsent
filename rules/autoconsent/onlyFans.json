@@ -1,0 +1,18 @@
+{
+  "name": "onlyFans.com",
+  "prehideSelectors": ["div.b-cookies-informer"],
+  "detectCmp": [{ "exists": "div.b-cookies-informer" }],
+  "detectPopup": [{ "exists": "div.b-cookies-informer" }],
+  "optIn": [
+    { "click": "div.b-cookies-informer__nav > button:nth-child(2)" }
+  ],
+  "optOut": [
+    {
+      "click": "div.b-cookies-informer__nav > button:nth-child(1)"
+    },
+    {
+      "click": "div.b-cookies-informer__switchers > div:nth-child(2) > div[at-attr=\"checkbox\"] > span.b-input-radio__container > input[type=\"checkbox\"]"
+    },
+    { "click": "div.b-cookies-informer__nav > button"}
+  ]
+}
