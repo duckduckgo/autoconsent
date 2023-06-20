@@ -1,4 +1,5 @@
 import { click, doEval, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
+import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
@@ -8,6 +9,10 @@ export default class Onetrust extends AutoConsentCMPBase {
 
   constructor() {
     super("Onetrust");
+  }
+
+  runContext: RunContext = {
+    urlPattern: '^(?!.*https://www\\.nba\\.com/)'
   }
 
   get hasSelfTest(): boolean {
