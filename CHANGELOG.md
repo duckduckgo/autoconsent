@@ -1,3 +1,24 @@
+# v4.3.1 (Tue Jun 20 2023)
+
+#### 🐛 Bug Fix
+
+- Bump @typescript-eslint/eslint-plugin from 5.59.11 to 5.60.0 [#186](https://github.com/duckduckgo/autoconsent/pull/186) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chai from 4.3.4 to 4.3.5 [#183](https://github.com/duckduckgo/autoconsent/pull/183) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- added nba.com notice rule and test and modified oneTrust rule class [#172](https://github.com/duckduckgo/autoconsent/pull/172) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+
+#### 🔩 Dependency Updates
+
+- Bump @typescript-eslint/parser from 5.59.2 to 5.60.0 [#185](https://github.com/duckduckgo/autoconsent/pull/185) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.40.0 to 8.43.0 [#184](https://github.com/duckduckgo/autoconsent/pull/184) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
+- euw-arasolofotsara1 (arasolofotsara@duckduckgo.com)
+
+---
+
 # v4.3.0 (Tue Jun 20 2023)
 
 #### 🚀 Enhancement
