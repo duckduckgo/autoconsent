@@ -1,9 +1,0 @@
-{
-    "name": "flex-orange-pl",
-    "cosmetic": true,
-    "prehideSelectors": ["div[uib-section=\"home\"] > div > div:nth-child(4) > div"],
-    "detectCmp": [{ "exists": "div[uib-section=\"home\"] > div > div:nth-child(4) > div" }],
-    "detectPopup": [{ "visible": "div[uib-section=\"home\"] > div > div:nth-child(4) > div" }],
-    "optIn": [{"click": "div[uib-section=\"home\"] > div > div:nth-child(4) > div button"}],
-    "optOut": [{ "hide": ["div[uib-section=\"home\"] > div > div:nth-child(4) > div"] }]
-  }
