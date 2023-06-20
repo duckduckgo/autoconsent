@@ -1,3 +1,17 @@
+# v4.3.0 (Tue Jun 20 2023)
+
+#### 🚀 Enhancement
+
+- add batch of rules and tests for banners reported by users [#181](https://github.com/duckduckgo/autoconsent/pull/181) (arasolofotsara@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth) [@icodebyamanda](https://github.com/icodebyamanda))
+
+#### Authors: 3
+
+- Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
+- euw-arasolofotsara1 (arasolofotsara@duckduckgo.com)
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.2.0 (Mon Jun 19 2023)
 
 #### 🚀 Enhancement
