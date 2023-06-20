@@ -11,8 +11,8 @@
     "optOut": [
         { "click": ".cc-settings" },
         { "waitForVisible": "[aria-label=\"cookies preferences popup\"]" },
-        { "click": "[aria-label=\"cookies preferences popup\"] input[type=checkbox]:not([disabled])", "all": true },
-        { "click": "[aria-label=\"cookies preferences popup\"] [aria-label=\"Accept Selected\"]" }
+        { "click": "[aria-label=\"cookies preferences popup\"] input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
+        { "click": "[aria-label=\"cookies preferences popup\"] [aria-label=\"Accept Selected\"], [aria-label=\"cookies preferences popup\"] [aria-label=\"Save my choice\"], .cc-btn-accept-selected, .cc-deny", "optional": true }
     ],
     "test": [
         { "eval": "!!document.cookie.match(/cookieconsent_preferences_disabled=[^;]+/)" }

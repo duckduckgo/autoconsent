@@ -1,0 +1,13 @@
+{
+  "name": "agolde.com",
+  "cosmetic": true,
+  "prehideSelectors": ["#modal-1 div[data-micromodal-close]"],
+  "detectCmp": [{ "exists": "#modal-1 div[aria-labelledby=modal-1-title]" }],
+  "detectPopup": [{ "exists": "#modal-1 div[data-micromodal-close]" }],
+  "optIn": [
+    { "click": "button[aria-label=\"Close modal\"]" }
+  ],
+  "optOut": [
+    { "hide": ["#modal-1 div[data-micromodal-close]"] }
+  ]
+}

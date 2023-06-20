@@ -1,0 +1,10 @@
+{
+  "name": "tumblr-com",
+  "cosmetic": true,
+  "prehideSelectors": ["#cmp-app-container"],
+  "detectCmp": [{ "exists": "#cmp-app-container" }],
+  "detectPopup": [{ "visible": "#cmp-app-container" }],
+  "optIn":
+    [{"click": "#tumblr #cmp-app-container div.components-modal__frame > iframe > html body > div > div > div.cmp__dialog-footer > div > button.components-button.white-space-normal.is-primary" }],
+  "optOut": [{ "hide": ["#cmp-app-container"] }]
+}
