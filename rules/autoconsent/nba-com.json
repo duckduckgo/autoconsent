@@ -1,5 +1,8 @@
 {
   "name": "nba.com",
+  "runContext": {
+    "urlPattern": "^https://(www\\.)?nba.com/"
+  },
   "cosmetic": true,
   "prehideSelectors": ["#onetrust-banner-sdk"],
   "detectCmp": [{ "exists": "#onetrust-banner-sdk" }],
