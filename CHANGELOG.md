@@ -1,3 +1,15 @@
+# v4.3.2 (Wed Jun 21 2023)
+
+#### 🐛 Bug Fix
+
+- Limit triggering of nba.com rule [#187](https://github.com/duckduckgo/autoconsent/pull/187) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.3.1 (Tue Jun 20 2023)
 
 #### 🐛 Bug Fix
