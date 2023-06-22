@@ -1,3 +1,15 @@
+# v4.3.3 (Thu Jun 22 2023)
+
+#### 🐛 Bug Fix
+
+- Remove wait from detectCmp step [#189](https://github.com/duckduckgo/autoconsent/pull/189) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.3.2 (Wed Jun 21 2023)
 
 #### 🐛 Bug Fix
