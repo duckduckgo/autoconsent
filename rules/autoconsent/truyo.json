@@ -2,7 +2,6 @@
   "name": "truyo",
   "prehideSelectors": ["#truyo-consent-module"],
   "detectCmp": [
-    { "wait": 1000 },
     { "exists": "#truyo-cookieBarContent" }
   ],
   "detectPopup": [
