@@ -28,5 +28,5 @@ jobs:
           node-version: 16.x
           cache: 'npm'
       - run: npm ci
-      - run: npx playwright install
+      - run: npx playwright install --with-deps
       - run: npm run test:lib
