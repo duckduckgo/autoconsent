@@ -181,6 +181,19 @@ Eval rules are not 100% reliable because they can be blocked by a CSP policy on 
 Allows to do conditional branching in JSON rules. The `if` section can contain either a "visible" or "exists" rule. Depending on the result of that rule, `then` or `else` sequences will be executed. `else` section is optional.
 The "if" rule is considered successful as long as all rules inside the chosen branch are successful. The other branch, as well as the result of the condition itself, do not affect the result of the whole rule.
 
+### Any
+
+```json
+{
+  "any": [
+    { "exists": ".button1" },
+    { "exists": ".button2" }
+  ]
+}
+```
+
+Evaluates a list of steps in order. If any return true (success), then the step exists and returns true. If all steps return false, the `any` step returns false.
+
 ### Optional actions
 
 Any rule can include the `"optional": true` to ignore failure.
