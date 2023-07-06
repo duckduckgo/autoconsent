@@ -107,7 +107,7 @@ export function undoPrehide(): boolean {
   return !!existingElement;
 }
 
-function querySingleReplySelector(selector: string, parent: ParentNode = document): HTMLElement[] {
+export function querySingleReplySelector(selector: string, parent: ParentNode = document): HTMLElement[] {
   if (selector.startsWith('aria/')) {
     return []
   }
@@ -131,7 +131,7 @@ function querySingleReplySelector(selector: string, parent: ParentNode = documen
   return Array.from(parent.querySelectorAll(selector))
 }
 
-function querySelectorChain(selectors: string[]): HTMLElement[] {
+export function querySelectorChain(selectors: string[]): HTMLElement[] {
   let parent: ParentNode = document
   let matches: HTMLElement[]
   for (const selector of selectors) {
@@ -146,14 +146,7 @@ function querySelectorChain(selectors: string[]): HTMLElement[] {
 
 export function elementSelector(selector: ElementSelector): HTMLElement[] {
   if (typeof selector === 'string') {
-    return Array.from(document.querySelectorAll(selector))
+    return querySingleReplySelector(selector)
   }
-  // selector is an array of @puppeteer/replay.Selector
-  for (const replySelector of selector) {
-    const results = typeof replySelector === 'string' ? querySingleReplySelector(replySelector) : querySelectorChain(replySelector)
-    if (results.length > 0) {
-      return results
-    }
-  }
-  return []
+  return querySelectorChain(selector)
 }

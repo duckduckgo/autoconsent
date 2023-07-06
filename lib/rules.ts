@@ -1,5 +1,3 @@
-import { Selector } from "@puppeteer/replay"
-
 export type AutoConsentCMPRule = {
   name: string
   prehideSelectors?: string[]
@@ -20,7 +18,7 @@ export type RunContext = {
   urlPattern?: string,
 }
 
-export type ElementSelector = Selector
+export type ElementSelector = string | string[]
 
 export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   ElementExistsRule
