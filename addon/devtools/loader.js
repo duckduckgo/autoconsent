@@ -25,7 +25,7 @@ if (chrome.devtools?.recorder) {
     convertStep(selectors) {
       return {
         any: selectors.filter((s) => {
-          return s.every(sel => this.isSupportedSelector(sel))
+          return this.isSupportedSelector(s)
         }).map(s => {
           if (s.length === 1) {
             return {
@@ -39,9 +39,21 @@ if (chrome.devtools?.recorder) {
       }
     }
 
+    /**
+     * 
+     * @param {string | string[]} selector 
+     * @returns 
+     */
     isSupportedSelector(selector) {
       const unsupportedPrefixes = ['aria/', 'pierce/', 'text/']
-      return !unsupportedPrefixes.some(p => selector.startsWith(p))
+      if (!Array.isArray(selector)) {
+        return !unsupportedPrefixes.some(p => selector.startsWith(p))
+      }
+      // Chained xpath selectors are not supported
+      if (selector.length > 1 && selector.some(s => s.startsWith('xpath/'))) {
+        return false
+      }
+      return selector.every(s => this.isSupportedSelector(s))
     }
   }
 
