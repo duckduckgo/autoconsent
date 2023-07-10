@@ -63,4 +63,22 @@ test.describe("click", () => {
     expect(await page.evaluate(() => document.querySelector('#first > button')?.innerHTML)).toEqual('0')
     expect(await page.evaluate(() => document.querySelector('#second > button')?.innerHTML)).toEqual('1')
   })
+
+  test('click open shadow dom element', async ({ page}) => {
+    const shadowRoot = await page.evaluateHandle(() => {
+      const shadowDiv = document.createElement('div')
+      shadowDiv.id = 'shadow'
+      document.body.appendChild(shadowDiv)
+      const shadow = shadowDiv.attachShadow({ mode: 'open' })
+      const shadowButton = document.createElement('button')
+      shadowButton.innerText = '0'
+      shadow.appendChild(shadowButton)
+      shadowButton.addEventListener('click', () => shadowButton.innerText = JSON.stringify(parseInt(shadowButton.innerText, 10) + 1))
+      return shadow
+    })
+    expect(await page.evaluate(buildRuleEvalString(click.toString(), [['#shadow', 'button']]))).toBe(true)
+    expect(await page.evaluate(() => document.querySelector('#first > button')?.innerHTML)).toEqual('0')
+    expect(await page.evaluate(() => document.querySelector('#second > button')?.innerHTML)).toEqual('0')
+    expect(await page.evaluate((shadow) => shadow.querySelector('button')?.innerHTML || '0', shadowRoot)).toEqual('1')
+  })
 });

@@ -107,7 +107,7 @@ export function undoPrehide(): boolean {
   return !!existingElement;
 }
 
-export function querySingleReplySelector(selector: string, parent: ParentNode = document): HTMLElement[] {
+export function querySingleReplySelector(selector: string, parent: any = document): HTMLElement[] {
   if (selector.startsWith('aria/')) {
     return []
   }
@@ -127,6 +127,9 @@ export function querySingleReplySelector(selector: string, parent: ParentNode = 
   }
   if (selector.startsWith('pierce/')) {
     return []
+  }
+  if (parent.shadowRoot) {
+    return Array.from(parent.shadowRoot.querySelectorAll(selector))
   }
   return Array.from(parent.querySelectorAll(selector))
 }
