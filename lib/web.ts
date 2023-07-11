@@ -4,7 +4,7 @@ import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
-import { prehide, undoPrehide } from './rule-executors';
+import { prehide, undoPrehide, wait } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
 
@@ -202,12 +202,8 @@ export default class AutoConsent {
     }
 
     if (foundCMPs.length === 0 && retries > 0) {
-      return new Promise((resolve) => {
-        setTimeout(async () => {
-          const result = this.findCmp(retries - 1);
-          resolve(result);
-        }, 500);
-      });
+      await wait(500);
+      return this.findCmp(retries - 1);
     }
 
     return foundCMPs;
@@ -332,7 +328,8 @@ export default class AutoConsent {
     enableLogs && console.log('checking if popup is open...', cmp.name);
     const isOpen = await cmp.detectPopup();
     if (!isOpen && retries > 0) {
-      return new Promise((resolve) => setTimeout(() => resolve(this.waitForPopup(cmp, retries - 1, interval)), interval));
+      await wait(interval);
+      return this.waitForPopup(cmp, retries - 1, interval);
     }
     enableLogs && console.log(cmp.name, `popup is ${isOpen ? 'open' : 'not open'}`);
     return isOpen;
