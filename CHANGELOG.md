@@ -1,3 +1,19 @@
+# v4.4.0 (Tue Jul 11 2023)
+
+#### 🚀 Enhancement
+
+- Support Chrome recorder generated selectors [#148](https://github.com/duckduckgo/autoconsent/pull/148) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Add initial coverage data [#188](https://github.com/duckduckgo/autoconsent/pull/188) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.3.3 (Thu Jun 22 2023)
 
 #### 🐛 Bug Fix
