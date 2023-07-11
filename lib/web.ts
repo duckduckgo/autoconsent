@@ -356,6 +356,7 @@ export default class AutoConsent {
         this.state.prehideOn &&
         !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)
       ) {
+        enableLogs && console.log('Process is taking too long, unhiding elements');
         this.undoPrehide();
       }
     }, this.config.prehideTimeout || 2000);
