@@ -349,6 +349,16 @@ export default class AutoConsent {
     }, globalHidden);
 
     this.updateState({ prehideOn: true })
+    setTimeout(() => {
+      // unhide things if we are still looking for a pop-up
+      if (
+        this.config.enablePrehide &&
+        this.state.prehideOn &&
+        !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)
+      ) {
+        this.undoPrehide();
+      }
+    }, this.config.prehideTimeout || 2000);
     return prehide(selectors);
   }
 
