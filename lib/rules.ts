@@ -18,7 +18,7 @@ export type RunContext = {
   urlPattern?: string,
 }
 
-export type ElementSelector = string
+export type ElementSelector = string | string[]
 
 export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   ElementExistsRule
