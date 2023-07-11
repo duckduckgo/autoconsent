@@ -34,6 +34,7 @@ export type Config = {
   enablePrehide: boolean;
   enableCosmeticRules: boolean;
   detectRetries: number;
+  prehideTimeout: number;
 }
 
 export type LifecycleState = 'loading' |
