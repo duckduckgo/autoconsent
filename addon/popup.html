@@ -13,6 +13,13 @@
       cursor: pointer;
       border-radius: 3px;
     }
+    #reload {
+      width: 100%;
+      height: 2em;
+      margin: 0.5em auto;
+      cursor: pointer;
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body>
@@ -75,6 +82,7 @@
       <input type="number" id="retries" name="retries" value="20">
       <label for="retries">Detection attempts</label>
     </div>
+    <button id="reload">Reload rules</button>
   </fieldset>
   <script src="popup.bundle.js"></script>
 </body>

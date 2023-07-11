@@ -18,6 +18,8 @@ export type RunContext = {
   urlPattern?: string,
 }
 
+export type ElementSelector = string | string[]
+
 export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   ElementExistsRule
 > &
@@ -30,16 +32,17 @@ export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   Partial<WaitRule> &
   Partial<UrlRule> &
   Partial<HideRule> &
-  Partial<IfRule>;
+  Partial<IfRule> & 
+  Partial<AnyRule>
 
 export type ElementExistsRule = {
-  exists: string;
+  exists: ElementSelector;
 };
 
 export type VisibilityCheck = "any" | "all" | "none";
 
 export type ElementVisibleRule = {
-  visible: string;
+  visible: ElementSelector;
   check?: VisibilityCheck;
 };
 
@@ -48,23 +51,23 @@ export type EvalRule = {
 };
 
 export type WaitForRule = {
-  waitFor: string;
+  waitFor: ElementSelector;
   timeout?: number;
 };
 
 export type WaitForVisibleRule = {
-  waitForVisible: string;
+  waitForVisible: ElementSelector;
   timeout?: number;
   check?: VisibilityCheck;
 };
 
 export type ClickRule = {
-  click: string;
+  click: ElementSelector;
   all?: boolean;
 };
 
 export type WaitForThenClickRule = {
-  waitForThenClick: string;
+  waitForThenClick: ElementSelector;
   timeout?: number;
 };
 
@@ -88,3 +91,7 @@ export type IfRule = {
   then: AutoConsentRuleStep[];
   else?: AutoConsentRuleStep[];
 };
+
+export type AnyRule = {
+  any: AutoConsentRuleStep[];
+}

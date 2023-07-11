@@ -131,6 +131,14 @@ async function evaluateRuleStep(rule: AutoConsentRuleStep) {
       results.push(_runRulesSequentially(rule.else));
     }
   }
+  if (rule.any) {
+    for (const step of rule.any) {
+      if (await evaluateRuleStep(step)) {
+        return true
+      }
+    }
+    return false
+  }
 
   if (results.length === 0) {
     enableLogs && console.warn('Unrecognized rule', rule);

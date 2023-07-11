@@ -14,6 +14,7 @@ async function init() {
   const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
   const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
   const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
+  const ruleReloadButton = document.querySelector('#reload') as HTMLButtonElement;
 
   // enable proceed button when necessary
 
@@ -104,6 +105,13 @@ async function init() {
   }
   cosmeticOnRadio.addEventListener('change', cosmeticChange);
   cosmeticOffRadio.addEventListener('change', cosmeticChange);
+
+  ruleReloadButton.addEventListener('click', async () => {
+    const res = await fetch("./rules.json");
+    storageSet({
+      rules: await res.json(),
+    });
+  })
 }
 
 init();
