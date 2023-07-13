@@ -11,7 +11,7 @@
     "clean": "rm -r dist",
     "lint": "eslint lib/ playwright/ tests/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "chokidar \"lib\" \"addon\" -c \"./build.sh\"",
+    "watch": "chokidar \"lib\" \"addon\" \"rules\" -c \"./build.sh\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
