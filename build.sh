@@ -3,7 +3,7 @@ set -ex
 
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
-$ESBUILD playwright/content.ts --outfile=dist/autoconsent.playwright.js
+$ESBUILD --format=iife --target=chrome90 --minify playwright/content.ts --outfile=dist/autoconsent.playwright.js
 $ESBUILD --format=esm lib/web.ts --outfile=dist/autoconsent.esm.js
 $ESBUILD --format=cjs --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 
