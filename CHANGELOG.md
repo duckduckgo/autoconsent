@@ -1,3 +1,21 @@
+# v5.0.0 (Thu Jul 13 2023)
+
+#### 💥 Breaking Change
+
+- Bump typescript from 4.9.5 to 5.1.6 [#196](https://github.com/duckduckgo/autoconsent/pull/196) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🚀 Enhancement
+
+- Cancel prehide rules if the pop-up takes too long to appear [#205](https://github.com/duckduckgo/autoconsent/pull/205) ([@muodov](https://github.com/muodov))
+- Bump @playwright/test from 1.33.0 to 1.35.1 [#191](https://github.com/duckduckgo/autoconsent/pull/191) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v4.4.0 (Tue Jul 11 2023)
 
 #### 🚀 Enhancement
