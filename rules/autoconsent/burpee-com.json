@@ -8,6 +8,6 @@
     { "click": "#btn-cookie-allow" }
   ],
   "optOut": [
-    { "hide": ["#html-body #notice-cookie-block"] }
+    { "hide": ["#html-body #notice-cookie-block", "#notice-cookie"] }
   ]
 }
