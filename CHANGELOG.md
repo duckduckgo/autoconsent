@@ -1,3 +1,17 @@
+# v5.0.1 (Tue Jul 18 2023)
+
+#### 🐛 Bug Fix
+
+- Fix burpee rule matching and add new rule [#211](https://github.com/duckduckgo/autoconsent/pull/211) ([@sammacbeth](https://github.com/sammacbeth))
+- Add July crawl data [#199](https://github.com/duckduckgo/autoconsent/pull/199) ([@sammacbeth](https://github.com/sammacbeth))
+- Build with ESBuild [#204](https://github.com/duckduckgo/autoconsent/pull/204) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v5.0.0 (Thu Jul 13 2023)
 
 #### 💥 Breaking Change
