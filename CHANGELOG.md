@@ -1,3 +1,26 @@
+# v5.1.0 (Mon Jul 31 2023)
+
+#### 🚀 Enhancement
+
+- Bump @playwright/test from 1.35.1 to 1.36.2 [#213](https://github.com/duckduckgo/autoconsent/pull/213) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Fix usercentrics-api [#214](https://github.com/duckduckgo/autoconsent/pull/214) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump eslint from 8.43.0 to 8.45.0 [#208](https://github.com/duckduckgo/autoconsent/pull/208) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.237 to 0.0.241 [#206](https://github.com/duckduckgo/autoconsent/pull/206) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/parser from 5.60.0 to 5.62.0 [#203](https://github.com/duckduckgo/autoconsent/pull/203) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v5.0.1 (Tue Jul 18 2023)
 
 #### 🐛 Bug Fix
