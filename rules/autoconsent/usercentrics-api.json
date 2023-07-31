@@ -4,6 +4,12 @@
   "detectPopup": [
     {
       "eval": "typeof UC_UI === 'object'"
+    },
+    {
+      "exists": [
+        "#usercentrics-root",
+        "[data-testid=uc-container]"
+      ]
     }
   ],
   "optIn": [
