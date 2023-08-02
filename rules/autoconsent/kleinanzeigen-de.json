@@ -1,0 +1,10 @@
+{
+  "name": "kleinanzeigen-de",
+  "prehideSelectors": ["#gdpr-banner-container"],
+  "detectCmp": [{ "exists": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-cmp-button]" }],
+  "detectPopup": [{ "visible": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-cmp-button]" }],
+  "optIn": [{ "click": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-accept]" }],
+  "optOut": [
+    { "click": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-cmp-button]" }
+  ]
+}
