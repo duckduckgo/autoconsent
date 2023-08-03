@@ -1,3 +1,23 @@
+# v5.2.0 (Thu Aug 03 2023)
+
+#### 🚀 Enhancement
+
+- Bump tslib from 2.5.3 to 2.6.1 [#217](https://github.com/duckduckgo/autoconsent/pull/217) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @puppeteer/replay from 2.11.0 to 2.13.2 [#216](https://github.com/duckduckgo/autoconsent/pull/216) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.45.0 to 8.46.0 [#215](https://github.com/duckduckgo/autoconsent/pull/215) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump @types/chrome from 0.0.241 to 0.0.242 [#218](https://github.com/duckduckgo/autoconsent/pull/218) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rules for twitch.tv and kleinanzeigen.de [#220](https://github.com/duckduckgo/autoconsent/pull/220) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v5.1.0 (Mon Jul 31 2023)
 
 #### 🚀 Enhancement
