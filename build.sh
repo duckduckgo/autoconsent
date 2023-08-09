@@ -4,8 +4,8 @@ set -ex
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
 $ESBUILD --format=iife --target=chrome90 --minify playwright/content.ts --outfile=dist/autoconsent.playwright.js
-$ESBUILD --format=esm lib/web.ts --outfile=dist/autoconsent.esm.js
-$ESBUILD --format=cjs --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
+$ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
+$ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 
 # Extension
 $ESBUILD addon/background.ts --outfile=dist/addon-mv3/background.bundle.js
