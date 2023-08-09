@@ -1,3 +1,15 @@
+# v5.3.0 (Wed Aug 09 2023)
+
+#### 🚀 Enhancement
+
+- Fix the target ES version to avoid surprises downstream [#227](https://github.com/duckduckgo/autoconsent/pull/227) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v5.2.0 (Thu Aug 03 2023)
 
 #### 🚀 Enhancement
