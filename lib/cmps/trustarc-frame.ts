@@ -82,10 +82,16 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
     if (click("#catDetails0")) {
       click(".submit");
+      waitForElement("#gwt-debug-close_id", 5000).then(() => {
+        click("#gwt-debug-close_id");
+      });
       return true;
     }
 
     if (click(".required")) {
+      waitForElement("#gwt-debug-close_id", 5000).then(() => {
+        click("#gwt-debug-close_id");
+      });
       return true;
     }
 
