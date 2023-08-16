@@ -1,4 +1,3 @@
-import { rules as dynamicRules, createAutoCMP } from './index';
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
@@ -38,10 +37,12 @@ export default class AutoConsent {
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
-    this.rules = [...dynamicRules];
+    this.rules = [];
 
     enableLogs && console.log('autoconsent init', window.location.href);
     this.updateState({ lifecycle: 'loading' });
+
+    this.addDynamicRules();
     if (config) {
       this.initialize(config, declarativeRules);
     } else {
@@ -94,6 +95,12 @@ export default class AutoConsent {
       this.start();
     }
     this.updateState({ lifecycle: 'initialized' });
+  }
+
+  addDynamicRules() {
+    dynamicCMPs.forEach((cmp) => {
+      this.rules.push(new cmp(this));
+    });
   }
 
   parseDeclarativeRules(declarativeRules: RuleBundle) {
