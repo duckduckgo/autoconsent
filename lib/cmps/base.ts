@@ -3,7 +3,9 @@
 import { AutoCMP } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from "../rules";
 import { enableLogs } from "../config";
-import { click, doEval, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
+import { click, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
+import { requestEval } from "../eval-handler";
+import AutoConsent from "../web";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -20,12 +22,12 @@ export const defaultRunContext: RunContext = {
 }
 
 export default class AutoConsentCMPBase implements AutoCMP {
-
   name: string
   runContext: RunContext = defaultRunContext;
+  autoconsent: AutoConsent;
 
-  constructor(name: string) {
-    this.name = name;
+  constructor(autoconsentInstance: AutoConsent) {
+    this.autoconsent = autoconsentInstance;
   }
 
   get hasSelfTest(): boolean {
@@ -90,8 +92,9 @@ export default class AutoConsentCMPBase implements AutoCMP {
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
 
-  constructor(public config: AutoConsentCMPRule) {
-    super(config.name);
+  constructor(public config: AutoConsentCMPRule, autoconsentInstance: AutoConsent) {
+    super(autoconsentInstance);
+    this.name = config.name;
     this.runContext = config.runContext || defaultRunContext;
   }
 

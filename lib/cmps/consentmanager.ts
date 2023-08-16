@@ -4,6 +4,7 @@ import AutoConsentCMPBase from "./base";
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
 export default class ConsentManager extends AutoConsentCMPBase {
+  name = "consentmanager.net";
 
   prehideSelectors = ["#cmpbox,#cmpbox2"];
   apiAvailable = false;
@@ -18,10 +19,6 @@ export default class ConsentManager extends AutoConsentCMPBase {
 
   get isCosmetic(): boolean {
     return false;
-  }
-
-  constructor() {
-    super("consentmanager.net");
   }
 
   async detectCmp() {

@@ -1,13 +1,9 @@
-import { click, doEval, elementExists, wait, waitForElement } from '../rule-executors';
+import { click, elementExists, wait, waitForElement } from '../rule-executors';
 import AutoConsentCMPBase from './base';
 
 export default class Cookiebot extends AutoConsentCMPBase {
-
+  name = 'Cybotcookiebot';
   prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookieoverlay"]
-
-  constructor() {
-    super('Cybotcookiebot');
-  }
 
   get hasSelfTest(): boolean {
     return true;

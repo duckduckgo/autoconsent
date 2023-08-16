@@ -5,9 +5,7 @@ import { isElementVisible } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Tiktok extends AutoConsentCMPBase {
-  constructor() {
-    super("tiktok.com");
-  }
+  name = "tiktok.com";
 
   runContext: RunContext = {
     urlPattern: 'tiktok'

@@ -1,14 +1,10 @@
-import { click, doEval, elementExists, elementVisible, waitForElement } from "../rule-executors";
+import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 export default class Klaro extends AutoConsentCMPBase {
-
+  name = "Klaro";
   prehideSelectors = [".klaro"]
   settingsOpen = false;
-
-  constructor() {
-    super("Klaro");
-  }
 
   get hasSelfTest(): boolean {
     return true;

@@ -4,9 +4,7 @@ import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class TrustArcFrame extends AutoConsentCMPBase {
-  constructor() {
-    super("TrustArc-frame");
-  }
+  name = "TrustArc-frame";
 
   runContext: RunContext = {
     main: false,

@@ -7,8 +7,8 @@ import { BackgroundMessage, InitMessage } from './messages';
 import { prehide, undoPrehide, wait } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
-
-export * from './index';
+import { dynamicCMPs } from './cmps/all';
+import { AutoConsentCMP } from './cmps/base';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -46,7 +46,7 @@ export default class AutoConsent {
       this.initialize(config, declarativeRules);
     } else {
       if (declarativeRules) {
-        this.parseRules(declarativeRules);
+        this.parseDeclarativeRules(declarativeRules);
       }
       const initMsg: InitMessage = {
         type: "init",
@@ -65,7 +65,7 @@ export default class AutoConsent {
     }
 
     if (declarativeRules) {
-      this.parseRules(declarativeRules);
+      this.parseDeclarativeRules(declarativeRules);
     }
 
     this.rules = filterCMPs(this.rules, config);
@@ -96,18 +96,18 @@ export default class AutoConsent {
     this.updateState({ lifecycle: 'initialized' });
   }
 
-  parseRules(declarativeRules: RuleBundle) {
+  parseDeclarativeRules(declarativeRules: RuleBundle) {
     Object.keys(declarativeRules.consentomatic).forEach((name) => {
       this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
     });
-    declarativeRules.autoconsent.forEach((rule) => {
-      this.addCMP(rule);
+    declarativeRules.autoconsent.forEach((ruleset) => {
+      this.addDeclarativeCMP(ruleset);
     });
     enableLogs && console.log("added rules", this.rules);
   }
 
-  addCMP(config: AutoConsentCMPRule) {
-    this.rules.push(createAutoCMP(config));
+  addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
+    this.rules.push(new AutoConsentCMP(ruleset, this));
   }
 
   addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {

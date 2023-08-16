@@ -1,6 +1,7 @@
-import { click, doEval, elementExists, elementVisible } from "../rule-executors";
+import { click, elementExists, elementVisible } from "../rule-executors";
 import { RunContext } from "../rules";
 import { getStyleElement, hideElements } from "../utils";
+import AutoConsent from "../web";
 import AutoConsentCMPBase from "./base";
 
 const cookieSettingsButton = "#truste-show-consent";
@@ -11,7 +12,7 @@ const bannerOverlay = '#trustarc-banner-overlay';
 const bannerContainer = '#truste-consent-track';
 
 export default class TrustArcTop extends AutoConsentCMPBase {
-
+  name = "TrustArc-top";
   prehideSelectors = [
     ".trustarc-banner-container",
     `.truste_popframe,.truste_overlay,.truste_box_overlay,${bannerContainer}`,
@@ -24,8 +25,8 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   _shortcutButton: HTMLElement;
   _optInDone: boolean;
 
-  constructor() {
-    super("TrustArc-top");
+  constructor(autoconsentInstance: AutoConsent) {
+    super(autoconsentInstance);
     this._shortcutButton = null; // indicates if the "reject all" button is detected
     this._optInDone = false;
   }
