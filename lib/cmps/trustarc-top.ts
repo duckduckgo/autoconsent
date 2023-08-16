@@ -98,6 +98,6 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   async test() {
     //Test JS variable to check the user's preference
     //PrefCookie = undefined means no consent is set, PrefCookie = '0' means consent is set to required only 
-    return await doEval("window && window.truste && window.truste.eu.bindMap.prefCookie === '0'");
+    return await this.mainWorldEval("window && window.truste && window.truste.eu.bindMap.prefCookie === '0'");
   }
 }

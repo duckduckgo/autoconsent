@@ -42,6 +42,24 @@ export default class AutoConsentCMPBase implements AutoCMP {
     throw new Error('Not Implemented');
   }
 
+  mainWorldEval(expr: string): Promise<boolean> {
+    if (this.autoconsent.config.isMainWorld) {
+      let result = false;
+      try {
+        result = !!globalThis.eval(expr);
+      } catch (e) {
+        // sometimes CSP blocks eval
+        enableLogs && console.error('error evaluating rule', expr, e);
+      }
+      return Promise.resolve(result);
+    }
+
+    return requestEval(expr).catch((e) => {
+      enableLogs && console.error('error evaluating rule', expr, e);
+      return false;
+    });
+  }
+
   checkRunContext(): boolean {
     const runCtx: RunContext = {
       ...defaultRunContext,
@@ -167,7 +185,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
       results.push(elementVisible(rule.visible, rule.check));
     }
     if (rule.eval) {
-      const res = doEval(rule.eval)
+      const res = this.mainWorldEval(rule.eval)
       results.push(res);
     }
     if (rule.waitFor) {

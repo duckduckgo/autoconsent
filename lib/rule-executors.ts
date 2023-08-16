@@ -1,14 +1,6 @@
 import { enableLogs } from "./config";
-import { requestEval } from "./eval-handler";
 import { ElementSelector, HideMethod, VisibilityCheck } from "./rules";
 import { getStyleElement, hideElements, isElementVisible, waitFor } from "./utils";
-
-export function doEval(expr: string): Promise<boolean> {
-  return requestEval(expr).catch((e) => {
-    enableLogs && console.error('error evaluating rule', expr, e);
-    return false;
-  });
-}
 
 export function click(selector: ElementSelector, all = false): boolean {
   const elem = elementSelector(selector)
