@@ -30,6 +30,7 @@ async function initConfig() {
     enablePrehide: true,
     enableCosmeticRules: true,
     detectRetries: 20,
+    isMainWorld: false,
     prehideTimeout: 2000,
   };
   if (!storedConfig) {
