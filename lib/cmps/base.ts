@@ -44,6 +44,7 @@ export default class AutoConsentCMPBase implements AutoCMP {
 
   mainWorldEval(expr: string): Promise<boolean> {
     if (this.autoconsent.config.isMainWorld) {
+      enableLogs && console.log('inline eval:', expr);
       let result = false;
       try {
         result = !!globalThis.eval(expr);
@@ -54,6 +55,7 @@ export default class AutoConsentCMPBase implements AutoCMP {
       return Promise.resolve(result);
     }
 
+    enableLogs && console.log('async eval:', expr);
     return requestEval(expr).catch((e) => {
       enableLogs && console.error('error evaluating rule', expr, e);
       return false;
