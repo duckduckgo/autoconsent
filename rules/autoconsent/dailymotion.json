@@ -17,6 +17,6 @@
     { "waitForThenClick": "button[class*=\"TCF2ContinueWithoutAcceptingButton\"]" }
   ],
   "test": [
-    { "eval": "!!document.cookie.match('dm-euconsent-v2')" }
+    { "eval": "EVAL_DAILYMOTION_0" }
   ]
 }

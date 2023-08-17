@@ -16,13 +16,13 @@
           "wait": 200
       },
       {
-          "eval": "Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach(e => e.click()) || true"
+          "eval": "EVAL_WAITROSE_0"
       },
       {
           "click": "button[data-test=submit]"
       }
   ],
   "test": [
-      {"eval": "document.cookie.includes('wtr_cookies_advertising=0') && document.cookie.includes('wtr_cookies_analytics=0')"}
+      {"eval": "EVAL_WAITROSE_1"}
   ]
 }

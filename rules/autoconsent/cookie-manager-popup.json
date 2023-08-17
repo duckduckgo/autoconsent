@@ -37,6 +37,6 @@
   ],
   "prehideSelectors": ["#btn-cookie-settings"],
   "test": [{
-    "eval": "JSON.parse(document.cookie.split(';').find(c => c.trim().startsWith('CookieLevel')).split('=')[1]).social === false"
+    "eval": "EVAL_COOKIE_MANAGER_POPUP_0"
   }]
 }

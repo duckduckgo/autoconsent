@@ -3,7 +3,7 @@
     "prehideSelectors": ["#wcpConsentBannerCtrl"],
     "detectCmp": [{ "exists": "#wcpConsentBannerCtrl" }],
     "detectPopup": [{ "exists": "#wcpConsentBannerCtrl" }],
-    "optOut": [{ "eval": "Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Reject|Ablehnen'))[0].click() || true" }],
-    "optIn": [{ "eval": "Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Accept|Annehmen'))[0].click() || true" }],
-    "test": [{ "eval": "!!document.cookie.match('MSCC')"}]
+    "optOut": [{ "eval": "EVAL_MICROSOFT_0" }],
+    "optIn": [{ "eval": "EVAL_MICROSOFT_1" }],
+    "test": [{ "eval": "EVAL_MICROSOFT_2"}]
   }

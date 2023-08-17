@@ -8,6 +8,6 @@
     { "hide": [".eu-cookie-compliance-banner-info", "#sliding-popup"] }
   ],
   "test": [
-      { "eval": "document.cookie.indexOf('cookie-agreed=2') === -1" }
+      { "eval": "EVAL_EU_COOKIE_COMPLIANCE_0" }
   ]
 }

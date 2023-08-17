@@ -37,7 +37,7 @@
     ],
     "test": [
         {
-            "eval": "JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent.length <= 1"
+            "eval": "EVAL_COINBASE_0"
         }
     ]
 }

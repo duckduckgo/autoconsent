@@ -14,7 +14,7 @@
       "then": [
         { "click": "#moove_gdpr_cookie_info_bar .change-settings-button" },
         { "waitForVisible": "#moove_gdpr_cookie_modal" },
-        { "eval": "document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach(i => { if (!i.disabled && i.name !== 'moove_gdpr_strict_cookies') i.checked = false }) || true" },
+        { "eval": "EVAL_MOOVE_0" },
         { "click": ".moove-gdpr-modal-save-settings" }
       ],
       "else": [
