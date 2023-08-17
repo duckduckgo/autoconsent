@@ -60,6 +60,6 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async test() {
-    return await this.mainWorldEval("window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1");
+    return await this.mainWorldEval('EVAL_ONETRUST_1');
   }
 }

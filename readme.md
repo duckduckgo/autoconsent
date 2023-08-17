@@ -165,11 +165,11 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 
 ```json
 {
-  "eval": "code"
+  "eval": "SNIPPET_ID"
 }
 ```
-Evaluates `code` in the context of the page. The rule is considered successful if it *evaluates to a truthy value*.
-Eval rules are not 100% reliable because they can be blocked by a CSP policy on the page. Therefore, they should only be used as a last resort when none of the other rules are sufficient.
+Evaluates a code snippet in the context of the page. The rule is considered successful if it *evaluates to a truthy value*. Snippets have to be explicitly defined in [snippets.ts](./lib/eval-snippets.ts).
+Eval rules are not 100% reliable because they can be affected by the page scripts, or blocked by a CSP policy on the page. Therefore, they should only be used as a last resort when none of the other rules are sufficient.
 
 ### Conditionals
 

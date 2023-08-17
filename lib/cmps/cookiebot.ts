@@ -60,14 +60,14 @@ export default class Cookiebot extends AutoConsentCMPBase {
     }
 
     // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
-    if (await this.mainWorldEval('window.CookieConsent.hasResponse !== true')) {
-      await this.mainWorldEval('window.Cookiebot.dialog.submitConsent()');
+    if (await this.mainWorldEval('EVAL_COOKIEBOT_1')) {
+      await this.mainWorldEval('EVAL_COOKIEBOT_2');
       await wait(500);
     }
 
     // site with 3rd confirm settings modal
     if (elementExists('#cb-confirmedSettings')) {
-      await this.mainWorldEval('endCookieProcess()');
+      await this.mainWorldEval('EVAL_COOKIEBOT_3');
     }
 
     return true;
@@ -85,6 +85,6 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async test() {
-    return this.mainWorldEval('window.CookieConsent.declined === true');
+    return this.mainWorldEval('EVAL_COOKIEBOT_4');
   }
 }

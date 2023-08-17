@@ -61,6 +61,6 @@ export default class Klaro extends AutoConsentCMPBase {
   }
 
   async test() {
-    return await this.mainWorldEval('klaro.getManager().config.services.every(c => c.required || !klaro.getManager().consents[c.name])');
+    return await this.mainWorldEval('EVAL_KLARO_1');
   }
 }
