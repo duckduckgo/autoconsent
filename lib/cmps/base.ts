@@ -6,6 +6,7 @@ import { enableLogs } from "../config";
 import { click, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
 import { requestEval } from "../eval-handler";
 import AutoConsent from "../web";
+import { getFunctionBody, snippets } from "../eval-snippets";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -42,22 +43,29 @@ export default class AutoConsentCMPBase implements AutoCMP {
     throw new Error('Not Implemented');
   }
 
-  mainWorldEval(expr: string): Promise<boolean> {
+  mainWorldEval(snippetId: keyof typeof snippets): Promise<boolean> {
+    const snippet = snippets[snippetId];
+    if (!snippet) {
+      console.warn('Snippet not found', snippetId);
+      return Promise.resolve(false);
+    }
+
     if (this.autoconsent.config.isMainWorld) {
-      enableLogs && console.log('inline eval:', expr);
+      enableLogs && console.log('inline eval:', snippetId, snippet);
       let result = false;
       try {
-        result = !!globalThis.eval(expr);
+        result = !!snippet.call(globalThis);
       } catch (e) {
-        // sometimes CSP blocks eval
-        enableLogs && console.error('error evaluating rule', expr, e);
+        // ignore exceptions
+        enableLogs && console.error('error evaluating rule', snippetId, e);
       }
       return Promise.resolve(result);
     }
 
-    enableLogs && console.log('async eval:', expr);
-    return requestEval(expr).catch((e) => {
-      enableLogs && console.error('error evaluating rule', expr, e);
+    const snippetSrc = getFunctionBody(snippet);
+    enableLogs && console.log('async eval:', snippetId, snippetSrc);
+    return requestEval(snippetSrc).catch((e) => {
+      enableLogs && console.error('error evaluating rule', snippetId, e);
       return false;
     });
   }

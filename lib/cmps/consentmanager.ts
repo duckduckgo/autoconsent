@@ -22,7 +22,8 @@ export default class ConsentManager extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    this.apiAvailable = await this.mainWorldEval('window.__cmp && typeof __cmp("getCMPData") === "object"');
+    this.apiAvailable = await this.mainWorldEval('EVAL_1');
+    console.log("ConsentManager API available: ", this.apiAvailable);
     if (!this.apiAvailable) {
       return elementExists("#cmpbox");
     } else {
