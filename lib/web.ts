@@ -228,7 +228,10 @@ export default class AutoConsent {
         }); // notify the browser
         result.push(cmp);
       }
-    }).catch(() => null));
+    }).catch((e) => {
+      enableLogs && console.warn(`error waiting for a popup for ${cmp.name}`, e);
+      return null
+    }));
     await Promise.all(popupLookups);
     return result;
   }
@@ -333,7 +336,10 @@ export default class AutoConsent {
 
   async waitForPopup(cmp: AutoCMP, retries = 5, interval = 500): Promise<boolean> {
     enableLogs && console.log('checking if popup is open...', cmp.name);
-    const isOpen = await cmp.detectPopup();
+    const isOpen = await cmp.detectPopup().catch((e) => {
+      enableLogs && console.warn(`error detecting popup for ${cmp.name}`, e);
+      return false;
+    }); // ignore possible errors in one-time popup detection
     if (!isOpen && retries > 0) {
       await wait(interval);
       return this.waitForPopup(cmp, retries - 1, interval);
