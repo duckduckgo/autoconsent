@@ -14,7 +14,7 @@
   "optOut": [
     { "waitForThenClick": "[data-name=\"mediavine-gdpr-cmp\"] [data-view=\"manageSettings\"]" },
     { "waitFor": "[data-name=\"mediavine-gdpr-cmp\"] input[type=checkbox]" },
-    { "eval": "document.querySelectorAll(\"[data-name=\\\"mediavine-gdpr-cmp\\\"] input[type=checkbox]\").forEach(x => x.checked && x.click()) || true", "optional": true },
+    { "eval": "EVAL_MEDIAVINE_0", "optional": true },
     { "click": "[data-name=\"mediavine-gdpr-cmp\"] [format=\"secondary\"]" }
   ]
 }

@@ -12,6 +12,6 @@
     { "hide": [".sp-dsgvo.sp-dsgvo-popup-overlay"] }
   ],
   "test": [
-    { "eval": "!document.cookie.includes('sp_dsgvo_cookie_settings')" }
+    { "eval": "EVAL_DSGVO_0" }
   ]
 }

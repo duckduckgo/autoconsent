@@ -17,6 +17,6 @@
     { "waitForThenClick": "section:has(a[href^=\"https://www.reddit.com/policies/cookies\"]) section[class^='_'] > section:last-child form button" }
   ],
   "test": [
-    {"eval": "document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}')"}
+    {"eval": "EVAL_REDDIT_0"}
   ]
 }

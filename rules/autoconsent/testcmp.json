@@ -11,5 +11,5 @@
       { "waitFor": "#reject-all" },
       { "click": "#reject-all" }
     ],
-    "test": [{ "eval": "window.results.results[0] === 'button_clicked'" }]
+    "test": [{ "eval": "EVAL_TESTCMP_0" }]
   }

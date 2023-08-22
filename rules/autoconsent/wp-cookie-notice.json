@@ -7,6 +7,6 @@
   "optIn": [ { "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_accept" } ],
   "optOut": [ { "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_reject" } ],
   "test": [
-    { "eval": "document.cookie.includes('wpl_viewed_cookie=no')" }
+    { "eval": "EVAL_WP_COOKIE_NOTICE_0" }
   ]
 }

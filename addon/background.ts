@@ -2,7 +2,7 @@ import { enableLogs } from "../lib/config";
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
-import { showOptOutStatus } from "./utils";
+import { initConfig, showOptOutStatus } from "./utils";
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -17,39 +17,6 @@ async function loadRules() {
   storageSet({
     rules: await res.json(),
   });
-}
-
-async function initConfig() {
-  console.log('init sw');
-  const storedConfig = await storageGet('config');
-  console.log('storedConfig', storedConfig);
-  const defaultConfig: Config = {
-    enabled: true,
-    autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
-    disabledCmps: [],
-    enablePrehide: true,
-    enableCosmeticRules: true,
-    detectRetries: 20,
-    prehideTimeout: 2000,
-  };
-  if (!storedConfig) {
-    console.log('init config');
-    await storageSet({
-      config: defaultConfig,
-    });
-  } else { // clean up the old stored config in case there are new fields
-    const updatedConfig: Config = structuredClone(defaultConfig);
-    for (const key of Object.keys(defaultConfig)) {
-      if (typeof storedConfig[key] !== 'undefined') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TS doesn't know that we've checked for undefined
-        updatedConfig[key] = storedConfig[key];
-      }
-    }
-    await storageSet({
-      config: updatedConfig,
-    });
-  }
 }
 
 async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult<boolean>[]> {

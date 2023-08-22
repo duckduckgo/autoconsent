@@ -1,15 +1,11 @@
-import { click, doEval, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
+import { click, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Onetrust extends AutoConsentCMPBase {
-
+  name = "Onetrust";
   prehideSelectors = ["#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner"]
-
-  constructor() {
-    super("Onetrust");
-  }
 
   runContext: RunContext = {
     urlPattern: '^(?!.*https://www\\.nba\\.com/)'
@@ -64,6 +60,6 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async test() {
-    return await doEval("window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1");
+    return await this.mainWorldEval('EVAL_ONETRUST_1');
   }
 }

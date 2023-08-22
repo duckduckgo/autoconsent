@@ -21,7 +21,7 @@
       "click": "button[data-controller='cookie-alert/extended/button/accept']"
     },
     {
-      "eval": "document.querySelector('body').removeAttribute('style') || true"
+      "eval": "EVAL_COOKIEALERT_0"
     }
   ],
   "optOut": [
@@ -37,12 +37,12 @@
       "click": "button[data-controller='cookie-alert/extended/button/configuration']"
     },
     {
-      "eval": "document.querySelector('body').removeAttribute('style') || true"
+      "eval": "EVAL_COOKIEALERT_0"
     }
   ],
   "test": [
     {
-      "eval": "window.CookieConsent.declined === true"
+      "eval": "EVAL_COOKIEALERT_2"
     }
   ]
 }

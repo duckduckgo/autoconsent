@@ -6,6 +6,6 @@
   "optIn": [ { "waitForThenClick": "#sd-cmp .sd-cmp-3cRQ2" } ],
   "optOut": [ { "waitForThenClick": "#sd-cmp .sd-cmp-1pO44" } ],
   "test": [
-    { "eval": "document.cookie.includes('euconsent-v2')" }
+    { "eval": "EVAL_SIRDATA_0" }
   ]
 }

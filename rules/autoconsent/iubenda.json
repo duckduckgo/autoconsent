@@ -11,13 +11,13 @@
       "click": ".iubenda-cs-customize-btn"
     },
     {
-      "eval": "document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach(x => {if(x.checked) x.click()}) || true"
+      "eval": "EVAL_IUBENDA_0"
     },
     {
       "click": "#iubFooterBtn"
     }
   ],
   "test": [
-    { "eval": "!!document.cookie.match(/_iub_cs-\\d+=/)" }
+    { "eval": "EVAL_IUBENDA_1" }
   ]
 }

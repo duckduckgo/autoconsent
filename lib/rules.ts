@@ -1,3 +1,5 @@
+import { snippets } from "./eval-snippets"
+
 export type AutoConsentCMPRule = {
   name: string
   prehideSelectors?: string[]
@@ -47,7 +49,7 @@ export type ElementVisibleRule = {
 };
 
 export type EvalRule = {
-  eval: string;
+  eval: keyof typeof snippets;
 };
 
 export type WaitForRule = {

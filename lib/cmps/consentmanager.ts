@@ -1,9 +1,10 @@
-import { click, doEval, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
+import { click, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
 export default class ConsentManager extends AutoConsentCMPBase {
+  name = "consentmanager.net";
 
   prehideSelectors = ["#cmpbox,#cmpbox2"];
   apiAvailable = false;
@@ -20,12 +21,8 @@ export default class ConsentManager extends AutoConsentCMPBase {
     return false;
   }
 
-  constructor() {
-    super("consentmanager.net");
-  }
-
   async detectCmp() {
-    this.apiAvailable = await doEval('window.__cmp && typeof __cmp("getCMPData") === "object"');
+    this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
     if (!this.apiAvailable) {
       return elementExists("#cmpbox");
     } else {
@@ -38,7 +35,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
       // wait before making this check because early in the page lifecycle this may incorrectly return
       // true, causing an opt-out when it is not needed.
       await wait(500);
-      return await doEval("!__cmp('consentStatus').userChoiceExists");
+      return await this.mainWorldEval('EVAL_CONSENTMANAGER_2');
     }
     return elementVisible("#cmpbox .cmpmore", 'any');
   }
@@ -46,7 +43,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
   async optOut() {
     await wait(500);
     if (this.apiAvailable) {
-      return await doEval("__cmp('setConsent', 0)");
+      return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
     }
 
     if (click(".cmpboxbtnno")) {
@@ -68,14 +65,14 @@ export default class ConsentManager extends AutoConsentCMPBase {
 
   async optIn() {
     if (this.apiAvailable) {
-      return await doEval("__cmp('setConsent', 1)");
+      return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
     }
     return click(".cmpboxbtnyes");
   }
 
   async test() {
     if (this.apiAvailable) {
-      return await doEval("__cmp('consentStatus').userChoiceExists");
+      return await this.mainWorldEval('EVAL_CONSENTMANAGER_5');
     }
   }
 }

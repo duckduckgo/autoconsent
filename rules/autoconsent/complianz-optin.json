@@ -15,6 +15,6 @@
         { "click": "[aria-label=\"cookies preferences popup\"] [aria-label=\"Accept Selected\"], [aria-label=\"cookies preferences popup\"] [aria-label=\"Save my choice\"], .cc-btn-accept-selected, .cc-deny", "optional": true }
     ],
     "test": [
-        { "eval": "!!document.cookie.match(/cookieconsent_preferences_disabled=[^;]+/)" }
+        { "eval": "EVAL_COMPLIANZ_OPTIN_0" }
     ]
 }
