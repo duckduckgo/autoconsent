@@ -1,3 +1,20 @@
+# v6.0.0 (Tue Aug 22 2023)
+
+#### 💥 Breaking Change
+
+- Inline evals [#236](https://github.com/duckduckgo/autoconsent/pull/236) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- August crawl data [#238](https://github.com/duckduckgo/autoconsent/pull/238) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v5.3.0 (Wed Aug 09 2023)
 
 #### 🚀 Enhancement
