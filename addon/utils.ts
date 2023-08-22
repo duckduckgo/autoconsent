@@ -44,9 +44,8 @@ export async function showOptOutStatus(
 }
 
 export async function initConfig() {
-  console.log('init sw');
   const storedConfig = await storageGet('config');
-  console.log('storedConfig', storedConfig);
+  enableLogs && console.log('storedConfig', storedConfig);
   const defaultConfig: Config = {
     enabled: true,
     autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
@@ -58,7 +57,7 @@ export async function initConfig() {
     prehideTimeout: 2000,
   };
   if (!storedConfig) {
-    console.log('init config');
+    enableLogs && console.log('new config', defaultConfig);
     await storageSet({
       config: defaultConfig,
     });
@@ -71,6 +70,7 @@ export async function initConfig() {
         updatedConfig[key] = storedConfig[key];
       }
     }
+    enableLogs && console.log('updated config', updatedConfig);
     await storageSet({
       config: updatedConfig,
     });
