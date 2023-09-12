@@ -1,3 +1,33 @@
+# v6.1.0 (Tue Sep 12 2023)
+
+#### 🚀 Enhancement
+
+- Bump web-ext from 7.6.2 to 7.7.0 [#249](https://github.com/duckduckgo/autoconsent/pull/249) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Add rule for activobank.pt [#244](https://github.com/duckduckgo/autoconsent/pull/244) ([@muodov](https://github.com/muodov))
+- Update trustarc-frame.ts [#235](https://github.com/duckduckgo/autoconsent/pull/235) ([@hyebahi](https://github.com/hyebahi))
+
+#### 🔩 Dependency Updates
+
+- Bump @types/chrome from 0.0.243 to 0.0.245 [#245](https://github.com/duckduckgo/autoconsent/pull/245) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tslib from 2.6.1 to 2.6.2 [#242](https://github.com/duckduckgo/autoconsent/pull/242) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump chai from 4.3.7 to 4.3.8 [#241](https://github.com/duckduckgo/autoconsent/pull/241) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.36.2 to 1.37.1 [#239](https://github.com/duckduckgo/autoconsent/pull/239) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump esbuild from 0.18.11 to 0.19.2 [#234](https://github.com/duckduckgo/autoconsent/pull/234) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @puppeteer/replay from 2.13.2 to 2.13.3 [#222](https://github.com/duckduckgo/autoconsent/pull/222) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.242 to 0.0.243 [#221](https://github.com/duckduckgo/autoconsent/pull/221) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump auto from 10.46.0 to 11.0.1 [#233](https://github.com/duckduckgo/autoconsent/pull/233) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@hyebahi](https://github.com/hyebahi)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.0.0 (Tue Aug 22 2023)
 
 #### 💥 Breaking Change
