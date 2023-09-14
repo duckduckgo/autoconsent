@@ -9,9 +9,9 @@
     { "visible": "a[href^=\"https://policies.google.com/technologies/cookies\"" }
   ],
   "optIn": [
-    { "waitForThenClick": "form[action^=\"https://consent.\"][action$=\".com/save\"]:has(input[name=set_eom][value=false]) button" }
+    { "waitForThenClick": "form[action^=\"https://consent.\"][action$=\".com/save\"]:has(input[name=set_eom][value=false]) input[type=submit]" }
   ],
   "optOut": [
-    { "waitForThenClick": "form[action^=\"https://consent.\"][action$=\".com/save\"]:has(input[name=set_eom][value=true]) button" }
+    { "waitForThenClick": "form[action^=\"https://consent.\"][action$=\".com/save\"]:has(input[name=set_eom][value=true]) input[type=submit]" }
   ]
 }
