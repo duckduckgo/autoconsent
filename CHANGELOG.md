@@ -1,3 +1,15 @@
+# v6.1.1 (Thu Sep 14 2023)
+
+#### 🐛 Bug Fix
+
+- Update test site domain [#252](https://github.com/duckduckgo/autoconsent/pull/252) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v6.1.0 (Tue Sep 12 2023)
 
 #### 🚀 Enhancement
