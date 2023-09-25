@@ -18,5 +18,5 @@ jobs:
         with:
           ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
           ASANA_WORKSPACE_ID: ${{ secrets.ASANA_WORKSPACE_ID }}
-          ASANA_PROJECT_ID: '1203413160434029'
+          ASANA_PROJECT_ID: '1203409672862476'
           move_to_section_id: '1203409672862480'
