@@ -1,0 +1,15 @@
+{
+  "name": "almacmp",
+  "prehideSelectors": ["#alma-cmpv2-container"],
+  "detectCmp": [{ "exists": "#alma-cmpv2-container" }],
+  "detectPopup": [{ "visible": "#alma-cmpv2-container #almacmp-modal-layer1" }],
+  "optIn": [ { "waitForThenClick": "#alma-cmpv2-container #almacmp-modal-layer1 #almacmp-modalConfirmBtn" } ],
+  "optOut": [
+    { "waitForThenClick": "#alma-cmpv2-container #almacmp-modal-layer1 #almacmp-modalSettingBtn" },
+    { "waitFor": "#alma-cmpv2-container #almacmp-modal-layer2" },
+    { "waitForThenClick": "#alma-cmpv2-container #almacmp-modal-layer2 #almacmp-reject-all-layer2" }
+  ],
+  "test": [
+    { "eval": "EVAL_ALMACMP_0" }
+  ]
+}

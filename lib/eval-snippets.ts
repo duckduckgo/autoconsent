@@ -19,6 +19,7 @@ export const snippets = {
 
   // declarative rules
   EVAL_ADROLL_0: () => !document.cookie.includes('__adroll_fpc'),
+  EVAL_ALMACMP_0: () => document.cookie.includes('"name":"Google","consent":false'),
   EVAL_AFFINITY_SERIF_COM_0: () => document.cookie.includes('serif_manage_cookies_viewed') && !document.cookie.includes('serif_allow_analytics'),
   EVAL_AXEPTIO_0: () => document.cookie.includes('axeptio_authorized_vendors=%2C%2C'),
   EVAL_BING_0: () => document.cookie.includes('AL=0') && document.cookie.includes('AD=0') && document.cookie.includes('SM=0'),
