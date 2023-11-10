@@ -1,3 +1,43 @@
+# v6.2.0 (Fri Nov 10 2023)
+
+#### 🚀 Enhancement
+
+- Bump eslint from 8.48.0 to 8.53.0 [#279](https://github.com/duckduckgo/autoconsent/pull/279) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.38.0 to 1.39.0 [#272](https://github.com/duckduckgo/autoconsent/pull/272) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.37.1 to 1.38.0 [#256](https://github.com/duckduckgo/autoconsent/pull/256) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Add rule for almacmp [#281](https://github.com/duckduckgo/autoconsent/pull/281) ([@muodov](https://github.com/muodov))
+- add rule for tropicfeel.com (shopify site) [#280](https://github.com/duckduckgo/autoconsent/pull/280) ([@muodov](https://github.com/muodov))
+- Bump esbuild from 0.19.2 to 0.19.5 [#273](https://github.com/duckduckgo/autoconsent/pull/273) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Monthly Coverage data update [#277](https://github.com/duckduckgo/autoconsent/pull/277) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#266](https://github.com/duckduckgo/autoconsent/pull/266) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+- Bump version of asana sync action [#260](https://github.com/duckduckgo/autoconsent/pull/260) ([@sammacbeth](https://github.com/sammacbeth))
+- Add asana sync for PRs [#258](https://github.com/duckduckgo/autoconsent/pull/258) ([@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#253](https://github.com/duckduckgo/autoconsent/pull/253) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Final fix of asana project ID ([@sammacbeth](https://github.com/sammacbeth))
+- Fix Asana project ID ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump @puppeteer/replay from 2.13.3 to 2.13.4 [#264](https://github.com/duckduckgo/autoconsent/pull/264) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump typescript from 5.1.6 to 5.2.2 [#251](https://github.com/duckduckgo/autoconsent/pull/251) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chai from 4.3.5 to 4.3.6 [#250](https://github.com/duckduckgo/autoconsent/pull/250) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump auto from 11.0.1 to 11.0.4 [#247](https://github.com/duckduckgo/autoconsent/pull/247) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v6.1.1 (Thu Sep 14 2023)
 
 #### 🐛 Bug Fix
