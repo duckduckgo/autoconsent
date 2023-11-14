@@ -158,7 +158,11 @@ export default class AutoConsent {
       }
       return false;
     }
+
     this.updateState({ lifecycle: 'openPopupDetected' });
+    if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
+      this.prehideElements();
+    }
 
     if (foundPopups.length > 1) {
       const errorDetails = {
