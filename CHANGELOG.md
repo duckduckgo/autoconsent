@@ -1,3 +1,26 @@
+# v6.3.0 (Tue Nov 14 2023)
+
+#### 🚀 Enhancement
+
+- Some optimizations [#283](https://github.com/duckduckgo/autoconsent/pull/283) ([@muodov](https://github.com/muodov))
+- Bump web-ext from 7.7.0 to 7.8.0 [#284](https://github.com/duckduckgo/autoconsent/pull/284) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump chai and @types/chai [#285](https://github.com/duckduckgo/autoconsent/pull/285) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/mocha from 10.0.1 to 10.0.4 [#286](https://github.com/duckduckgo/autoconsent/pull/286) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🔩 Dependency Updates
+
+- Bump @types/chrome from 0.0.245 to 0.0.251 [#287](https://github.com/duckduckgo/autoconsent/pull/287) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.2.0 (Fri Nov 10 2023)
 
 #### 🚀 Enhancement
