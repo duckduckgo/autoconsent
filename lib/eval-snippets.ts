@@ -26,6 +26,7 @@ export const snippets = {
   EVAL_BORLABS_0: () => !JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.indexOf('borlabs-cookie') !== -1).split('=', 2)[1])).consents.statistics,
   EVAL_BUNDESREGIERUNG_DE_0: () => document.cookie.match('cookie-allow-tracking=0'),
   EVAL_CANVA_0: () => !document.cookie.includes('gtm_fpc_engagement_event'),
+  EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
   EVAL_CLICKIO_0: () => document.cookie.includes('__lxG__consent__v2_daisybit='),
   EVAL_CLINCH_0: () => document.cookie.includes('ctc_rejected=1'),
   EVAL_COINBASE_0: () => JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent.length <= 1,
