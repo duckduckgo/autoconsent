@@ -70,6 +70,7 @@ export const snippets = {
   EVAL_SIRDATA_0: () => document.cookie.includes('euconsent-v2'),
   EVAL_SNIGEL_0: () => !!document.cookie.match('snconsent'),
   EVAL_STEAMPOWERED_0: () => JSON.parse(decodeURIComponent(document.cookie.split(';').find(s => s.trim().startsWith('cookieSettings')).split('=')[1])).preference_state === 2,
+  EVAL_TAKEALOT_0: () => document.body.classList.remove('freeze') || (document.body.style = '') || true,
   EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
   EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
   EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)[0].includes('false'),
