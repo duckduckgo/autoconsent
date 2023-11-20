@@ -1,3 +1,22 @@
+# v6.4.0 (Mon Nov 20 2023)
+
+#### 🚀 Enhancement
+
+- Add a rule for nature.com [#290](https://github.com/duckduckgo/autoconsent/pull/290) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Takealot fix [#292](https://github.com/duckduckgo/autoconsent/pull/292) ([@muodov](https://github.com/muodov))
+- Monthly Coverage data update [#289](https://github.com/duckduckgo/autoconsent/pull/289) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v6.3.0 (Tue Nov 14 2023)
 
 #### 🚀 Enhancement
