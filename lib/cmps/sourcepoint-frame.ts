@@ -1,5 +1,5 @@
 import { enableLogs } from "../config";
-import { click, elementExists, wait, waitForElement } from "../rule-executors";
+import { click, elementExists, wait, waitForElement, waitForThenClick } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -38,7 +38,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
       this.ccpaPopup = true;
       return true;
     }
-    return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html')
+    return (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html' || url.pathname === '/ccpa_pm/index.html')
         && (url.searchParams.has('message_id') || url.searchParams.has('requestUUID') || url.searchParams.has('consentUUID'));
   }
 
@@ -50,7 +50,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
       return await waitForElement('.priv-save-btn', 2000);
     }
     // check for the paywall button, and bail if it exists to prevent broken opt out
-    await waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL", 2000);
+    await waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT", 2000);
     return !elementExists('.sp_choice_type_9');
   }
 
@@ -67,7 +67,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   isManagerOpen() {
-    return location.pathname === "/privacy-manager/index.html";
+    return location.pathname === "/privacy-manager/index.html" || location.pathname === '/ccpa_pm/index.html';
   }
 
   async optOut() {
@@ -104,6 +104,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
     }
 
     await waitForElement('.type-modal', 20000);
+
+    // check "Do Not Sell" (CCPA) toggle if it exists
+    waitForThenClick('.ccpa-stack .pm-switch[aria-checked=true] .slider', 500, true); // the UI is reversed: "unchecked" switch displays as an enabled toggle
+
     // reject all button is offered by some sites
     try {
       const rejectSelector1 = '.sp_choice_type_REJECT_ALL';
@@ -127,7 +131,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
     } catch (e) {
       enableLogs && console.warn(e);
     }
-    // TODO: race condition: the popup disappears very quickly, so the background script may not receive a success report.
+    // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
     return click('.sp_choice_type_SAVE_AND_EXIT');
   }
 }
