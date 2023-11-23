@@ -110,7 +110,7 @@ export default class AutoConsent {
     declarativeRules.autoconsent.forEach((ruleset) => {
       this.addDeclarativeCMP(ruleset);
     });
-    enableLogs && console.log("added rules", this.rules);
+    // enableLogs && console.log("added rules", this.rules);
   }
 
   addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
@@ -397,7 +397,7 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
-    if (enableLogs && ['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
+    if (enableLogs && !['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
     }
     switch (message.type) {
