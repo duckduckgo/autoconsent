@@ -1,3 +1,28 @@
+# v6.4.1 (Mon Nov 27 2023)
+
+#### 🐛 Bug Fix
+
+- CCPA fix for Sourcepoint [#302](https://github.com/duckduckgo/autoconsent/pull/302) ([@muodov](https://github.com/muodov))
+- Group dependabot PRs [#299](https://github.com/duckduckgo/autoconsent/pull/299) ([@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#293](https://github.com/duckduckgo/autoconsent/pull/293) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 6 updates [#300](https://github.com/duckduckgo/autoconsent/pull/300) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump typescript from 5.2.2 to 5.3.2 [#298](https://github.com/duckduckgo/autoconsent/pull/298) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.53.0 to 8.54.0 [#297](https://github.com/duckduckgo/autoconsent/pull/297) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump esbuild from 0.19.5 to 0.19.6 [#295](https://github.com/duckduckgo/autoconsent/pull/295) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.39.0 to 1.40.0 [#294](https://github.com/duckduckgo/autoconsent/pull/294) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v6.4.0 (Mon Nov 20 2023)
 
 #### 🚀 Enhancement
