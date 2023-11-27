@@ -43,7 +43,7 @@ export function elementVisible(selector: ElementSelector, check: VisibilityCheck
 export function waitForElement(selector: ElementSelector, timeout = 10000): Promise<boolean> {
   const interval = 200;
   const times = Math.ceil((timeout) / interval);
-  // enableLogs && console.log("[waitFor]", ruleStep.waitFor);
+  enableLogs && console.log("[waitForElement]", selector);
   return waitFor(
     () => elementSelector(selector).length > 0,
     times,
