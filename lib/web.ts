@@ -110,7 +110,6 @@ export default class AutoConsent {
     declarativeRules.autoconsent.forEach((ruleset) => {
       this.addDeclarativeCMP(ruleset);
     });
-    // enableLogs && console.log("added rules", this.rules);
   }
 
   addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
