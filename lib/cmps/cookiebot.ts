@@ -1,9 +1,9 @@
-import { click, elementExists, wait, waitForElement } from '../rule-executors';
+import { click, elementExists, wait } from '../rule-executors';
 import AutoConsentCMPBase from './base';
 
 export default class Cookiebot extends AutoConsentCMPBase {
   name = 'Cybotcookiebot';
-  prehideSelectors = ["#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookieoverlay"]
+  prehideSelectors = ["#CybotCookiebotDialog,#CybotCookiebotDialogBodyUnderlay,#dtcookie-container,#cookiebanner,#cb-cookieoverlay,.modal--cookie-banner,#cookiebanner_outer,#CookieBanner"]
 
   get hasSelfTest(): boolean {
     return true;
@@ -18,59 +18,18 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists('#CybotCookiebotDialogBodyLevelButtonPreferences');
+    return await this.mainWorldEval('EVAL_COOKIEBOT_1');
   }
 
   async detectPopup() {
-    return elementExists('#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookiebanner');
+    return await this.mainWorldEval('EVAL_COOKIEBOT_2');
   }
 
   async optOut() {
-    if (click('.cookie-alert-extended-detail-link')) {
-      await waitForElement('.cookie-alert-configuration', 2000);
-      click('.cookie-alert-configuration-input:checked', true);
-      click('.cookie-alert-extended-button-secondary');
-      return true;
-    }
-
-    if (elementExists('#dtcookie-container')) {
-      return click('.h-dtcookie-decline');
-    }
-
-    if (click('.cookiebot__button--settings')) {
-      return true;
-    }
-
-    if (click('#CybotCookiebotDialogBodyButtonDecline')) {
-      return true;
-    }
-
-    click('.cookiebanner__link--details');
-
-    click('.CybotCookiebotDialogBodyLevelButton:checked:enabled,input[id*="CybotCookiebotDialogBodyLevelButton"]:checked:enabled', true);
-
-    click('#CybotCookiebotDialogBodyButtonDecline');
-
-    click('input[id^=CybotCookiebotDialogBodyLevelButton]:checked', true);
-
-    if (elementExists('#CybotCookiebotDialogBodyButtonAcceptSelected')) {
-      click('#CybotCookiebotDialogBodyButtonAcceptSelected');
-    } else {
-      click('#CybotCookiebotDialogBodyLevelButtonAccept,#CybotCookiebotDialogBodyButtonAccept,#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection', true);
-    }
-
-    // some sites have custom submit buttons with no obvious selectors. In this case we just call the submitConsent API.
-    if (await this.mainWorldEval('EVAL_COOKIEBOT_1')) {
-      await this.mainWorldEval('EVAL_COOKIEBOT_2');
-      await wait(500);
-    }
-
-    // site with 3rd confirm settings modal
-    if (elementExists('#cb-confirmedSettings')) {
-      await this.mainWorldEval('EVAL_COOKIEBOT_3');
-    }
-
-    return true;
+    await wait(500);
+    let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
+    res = res && await this.mainWorldEval('EVAL_COOKIEBOT_4'); // hide
+    return res;
   }
 
   async optIn() {
@@ -85,6 +44,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async test() {
-    return this.mainWorldEval('EVAL_COOKIEBOT_4');
+    await wait(500);
+    return await this.mainWorldEval('EVAL_COOKIEBOT_5');
   }
 }

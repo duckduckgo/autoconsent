@@ -137,6 +137,7 @@ chrome.runtime.onMessage.addListener(
         }
         break;
       case "selfTestResult":
+        enableLogs && console.log(`Self-test result ${msg.result}`);
         if (msg.result) {
           await showOptOutStatus(tabId, "verified", msg.cmp);
         }
