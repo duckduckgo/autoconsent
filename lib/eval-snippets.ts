@@ -44,6 +44,7 @@ export const snippets = {
   EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
   EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
   EVAL_COOKIEINFORMATION_2: () => document.cookie.includes('CookieInformationConsent='),
+  EVAL_COOKIEYES_0: () => document.cookie.includes('advertisement:no'),
   EVAL_DAILYMOTION_0: () => !!document.cookie.match('dm-euconsent-v2'),
   EVAL_DSGVO_0: () => !document.cookie.includes('sp_dsgvo_cookie_settings'),
   EVAL_DUNELM_0: () => document.cookie.includes('cc_functional=0') && document.cookie.includes('cc_targeting=0'),
