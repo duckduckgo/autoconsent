@@ -1,3 +1,15 @@
+# v6.4.3 (Mon Dec 04 2023)
+
+#### 🐛 Bug Fix
+
+- Cookiebot fixes [#304](https://github.com/duckduckgo/autoconsent/pull/304) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.4.2 (Mon Dec 04 2023)
 
 #### 🐛 Bug Fix
