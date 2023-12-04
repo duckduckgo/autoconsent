@@ -10,3 +10,14 @@ generateCMPTests('Cybotcookiebot', [
 ], {
   skipRegions: ['US']
 });
+
+generateCMPTests('Cybotcookiebot', [
+  "https://dl.acm.org/",
+  "https://www.ifm.org/",
+  "https://www.thule.com/",
+  "https://www.dezeen.com/",
+  "https://www.l3harris.com/",
+  "https://www.gog.com/"
+], {
+});
+
