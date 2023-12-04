@@ -10,7 +10,7 @@ export const snippets = {
   EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
   EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
   EVAL_COOKIEBOT_1: () => !!window.Cookiebot,
-  EVAL_COOKIEBOT_2: () => !window.Cookiebot.hasResponse,
+  EVAL_COOKIEBOT_2: () => !window.Cookiebot.hasResponse && window.Cookiebot.dialog?.visible === true,
   EVAL_COOKIEBOT_3: () => window.Cookiebot.withdraw() || true,
   EVAL_COOKIEBOT_4: () => window.Cookiebot.hide() || true,
   EVAL_COOKIEBOT_5: () => window.Cookiebot.declined === true,

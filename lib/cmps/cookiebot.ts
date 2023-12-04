@@ -1,4 +1,5 @@
 import { click, elementExists, wait } from '../rule-executors';
+import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Cookiebot extends AutoConsentCMPBase {
@@ -22,12 +23,15 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return await this.mainWorldEval('EVAL_COOKIEBOT_2');
+    return await waitFor(() => {
+      return this.mainWorldEval('EVAL_COOKIEBOT_2')
+    }, 10, 500);
   }
 
   async optOut() {
     await wait(500);
     let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
+    await wait(500); // prevent race conditions
     res = res && await this.mainWorldEval('EVAL_COOKIEBOT_4'); // hide
     return res;
   }
