@@ -1,3 +1,21 @@
+# v6.4.2 (Mon Dec 04 2023)
+
+#### 🐛 Bug Fix
+
+- Add a rule for CookieYes [#306](https://github.com/duckduckgo/autoconsent/pull/306) ([@muodov](https://github.com/muodov))
+- Add a rule for yahoo pop-up [#305](https://github.com/duckduckgo/autoconsent/pull/305) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 3 updates [#303](https://github.com/duckduckgo/autoconsent/pull/303) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.4.1 (Mon Nov 27 2023)
 
 #### 🐛 Bug Fix
