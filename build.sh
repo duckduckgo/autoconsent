@@ -1,6 +1,7 @@
 #!/bin/bash
 set -ex
 
+node build.mjs
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
 $ESBUILD --format=iife --target=chrome90 --minify playwright/content.ts --outfile=dist/autoconsent.playwright.js

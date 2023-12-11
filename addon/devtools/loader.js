@@ -5,6 +5,12 @@ chrome.devtools.panels.create(
   "/devtools/panel.html"
 );
 
+chrome.devtools.panels.create(
+  "Autoconsent Builder",
+  "/icons/cookie.png",
+  "/devtools/builder-panel/builder-panel.html"
+);
+
 if (chrome.devtools?.recorder) {
   class MyPlugin {
     stringify(recording) {

@@ -1,3 +1,4 @@
+import { SelectedElementData } from "../addon/devtools/builder-panel/types";
 import { Config, ConsentState, RuleBundle } from "./types";
 
 export type BackgroundMessage =
@@ -17,7 +18,8 @@ export type ContentScriptMessage =
   | SelfTestResultMessage
   | DoneMessage
   | ErrorMessage
-  | ReportMessage;
+  | ReportMessage
+  | BuilderSelectedElementMessage;
 
 export type BackgroundDevtoolsMessage =
   | DevtoolsAuditMessage
@@ -26,6 +28,9 @@ export type BackgroundDevtoolsMessage =
 
 export type DevtoolsMessage =
   | DevtoolsInitMessage;
+
+export type BuilderMessage =
+  | BuilderInitMessage;
 
 export type InitMessage = {
   type: "init";
@@ -117,6 +122,11 @@ export type ReportMessage = {
   state: ConsentState;
 };
 
+export type BuilderSelectedElementMessage = {
+  type: 'builderSelectedElement';
+  nodes: SelectedElementData[];
+};
+
 export type DevtoolsAuditMessage = ReportMessage & { tabId: number, frameId: number }
 
 export type InstanceTerminatedMessage = {
@@ -129,3 +139,5 @@ export type DevtoolsInitMessage = {
   type: 'init';
   tabId: number;
 }
+
+export type BuilderInitMessage = DevtoolsInitMessage

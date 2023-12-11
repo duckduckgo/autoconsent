@@ -1,5 +1,5 @@
 import { enableLogs } from "../lib/config";
-import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
+import { BackgroundMessage, BuilderMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { initConfig, showOptOutStatus } from "./utils";
@@ -11,6 +11,7 @@ import { initConfig, showOptOutStatus } from "./utils";
  * reestablish the connection.
  */
 const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
+const openBuilderPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
   const res = await fetch("./rules.json");
@@ -164,6 +165,8 @@ chrome.runtime.onMessage.addListener(
       case "autoconsentError":
         console.error('Error:', msg.details);
         break;
+
+      // messages for DevTools
       case "report":
         if (sender.tab && openDevToolsPanels.has(sender.tab.id)) {
           openDevToolsPanels.get(sender.tab.id).postMessage({
@@ -173,6 +176,11 @@ chrome.runtime.onMessage.addListener(
           })
         }
         updateTabReports(sender.tab.id, sender.frameId, msg)
+        break;
+      case "builderSelectedElement":
+        if (sender.tab && openBuilderPanels.has(sender.tab.id)) {
+          openBuilderPanels.get(sender.tab.id).postMessage(msg)
+        }
         break;
     }
   }
@@ -198,6 +206,7 @@ if (manifestVersion === 2) { // MV3 handles this inside the popup
 
 // Communicate with devtools panels
 chrome.runtime.onConnect.addListener(function(devToolsConnection) {
+  console.log('background received connection');
   if (devToolsConnection.name.startsWith('instance-')) {
     // connection from an autoconsent instance - used to detect frame destruction
     const tabId = devToolsConnection.sender?.tab?.id;
@@ -218,9 +227,9 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
   } else if (devToolsConnection.name === 'devtools-panel') {
     let tabId = -1;
     // add the listener
-    devToolsConnection.onMessage.addListener(async (message: DevtoolsMessage) => {
+    const devtoolsListener = async (message: DevtoolsMessage) => {
       tabId = message.tabId;
-      
+
       if (message.type === 'init') {
         // save the message channel for this tab
         openDevToolsPanels.set(tabId, devToolsConnection);
@@ -235,10 +244,50 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
           })
         });
       }
-    });
+    };
 
+    devToolsConnection.onMessage.addListener(devtoolsListener);
     devToolsConnection.onDisconnect.addListener(function() {
       openDevToolsPanels.delete(tabId)
+      devToolsConnection.onMessage.removeListener(devtoolsListener);
+    });
+  } else if (devToolsConnection.name === 'builder-panel') {
+    let builderTabId = -1;
+
+    const injectBuilderHelpers = async function (tabId: number) {
+      console.log('injecting builder helpers in', tabId);
+      const result = await chrome.scripting.executeScript({
+        target: { tabId },
+        files: ['devtools/builder-panel/page-helpers.js']
+      });
+      console.log('injected builder helpers in', tabId, 'result is', result);
+      return result;
+    }
+
+    const injectHelpersListener = async function (changedTabId: number, changeInfo: chrome.tabs.TabChangeInfo) {
+      if (changedTabId === builderTabId && changeInfo.status === 'complete') {
+        await injectBuilderHelpers(builderTabId);
+      }
+    }
+
+    const builderListener = async (message: BuilderMessage) => {
+      console.log('message from builder panel', message);
+      builderTabId = message.tabId;
+
+      if (message.type === 'init') {
+        // save the message channel for this tab
+        openBuilderPanels.set(builderTabId, devToolsConnection);
+        await injectBuilderHelpers(builderTabId);
+
+        chrome.tabs.onUpdated.addListener(injectHelpersListener)
+      }
+    }
+
+    devToolsConnection.onMessage.addListener(builderListener);
+    devToolsConnection.onDisconnect.addListener(function() {
+      devToolsConnection.onMessage.removeListener(builderListener);
+      chrome.tabs.onUpdated.removeListener(injectHelpersListener);
+      openBuilderPanels.delete(builderTabId)
     });
   }
 });
