@@ -22,9 +22,8 @@ export type RunContext = {
 
 export type ElementSelector = string | string[]
 
-export type AutoConsentRuleStep = { optional?: boolean } & Partial<
-  ElementExistsRule
-> &
+export type AutoConsentRuleStep = { optional?: boolean } &
+  Partial<ElementExistsRule> &
   Partial<ElementVisibleRule> &
   Partial<EvalRule> &
   Partial<WaitForRule> &
@@ -34,7 +33,7 @@ export type AutoConsentRuleStep = { optional?: boolean } & Partial<
   Partial<WaitRule> &
   Partial<UrlRule> &
   Partial<HideRule> &
-  Partial<IfRule> & 
+  Partial<IfRule> &
   Partial<AnyRule>
 
 export type ElementExistsRule = {
