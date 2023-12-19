@@ -1,6 +1,6 @@
 {
   "name": "WP Cookie Notice for GDPR",
-  "comment": "https://wordpress.org/plugins/gdpr-cookie-consent/",
+  "vendorUrl": "https://wordpress.org/plugins/gdpr-cookie-consent/",
   "prehideSelectors": ["#gdpr-cookie-consent-bar"],
   "detectCmp": [{ "exists": "#gdpr-cookie-consent-bar" }],
   "detectPopup": [{ "visible": "#gdpr-cookie-consent-bar" }],

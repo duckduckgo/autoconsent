@@ -1,17 +1,18 @@
 import { snippets } from "./eval-snippets"
 
 export type AutoConsentCMPRule = {
-  name: string
-  prehideSelectors?: string[]
-  runContext?: RunContext,
-  intermediate?: boolean,
-  cosmetic?: boolean,
-  detectCmp: AutoConsentRuleStep[]
-  detectPopup: AutoConsentRuleStep[]
-  optOut: AutoConsentRuleStep[]
-  optIn: AutoConsentRuleStep[]
-  openCmp?: AutoConsentRuleStep[]
-  test?: AutoConsentRuleStep[]
+  name: string;
+  vendorUrl?: string;
+  prehideSelectors?: string[];
+  runContext?: RunContext;
+  intermediate?: boolean;
+  cosmetic?: boolean;
+  detectCmp: AutoConsentRuleStep[];
+  detectPopup: AutoConsentRuleStep[];
+  optOut: AutoConsentRuleStep[];
+  optIn: AutoConsentRuleStep[];
+  openCmp?: AutoConsentRuleStep[];
+  test?: AutoConsentRuleStep[];
 }
 
 export type RunContext = {
