@@ -18,6 +18,7 @@ export default class Evidon extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
+    console.log('check evidon', elementExists("#_evidon_banner"));
     return elementExists("#_evidon_banner");
   }
 

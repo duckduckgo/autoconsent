@@ -1,7 +1,7 @@
 {
     "name": "Tealium",
     "prehideSelectors": ["#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#consent-layer"],
-    "detectCmp": [{ "visible": "#__tealiumGDPRecModal" }, { "eval": "EVAL_TEALIUM_0" }],
+    "detectCmp": [{ "visible": "#__tealiumGDPRecModal *" }, { "eval": "EVAL_TEALIUM_0" }],
     "detectPopup": [{ "visible": "#__tealiumGDPRecModal" }],
     "optOut": [
       { "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies", "timeout": 1000 },

@@ -1,4 +1,4 @@
-import { SelectedElementData } from "./types";
+import { SelectedElementData } from "../types";
 
 export const mockDomPath: SelectedElementData[] = [
   {
@@ -81,3 +81,19 @@ export const mockDomPath: SelectedElementData[] = [
     extras: {},
   },
 ];
+
+export const ruleTemplate = {
+  "name": "My CMP rule",
+  "prehideSelectors": ["#reject-all"],
+  "detectCmp": [{ "exists": "#privacy-test-page-cmp-test" }],
+  "detectPopup": [{ "visible": "#privacy-test-page-cmp-test" }],
+  "optIn": [
+    { "waitFor": "#accept-all" },
+    { "click": "#accept-all" }
+  ],
+  "optOut": [
+    { "waitFor": "#reject-all" },
+    { "click": "#reject-all" }
+  ],
+  "test": [{ "eval": "EVAL_TESTCMP_0" }]
+}
