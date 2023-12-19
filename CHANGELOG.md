@@ -1,3 +1,29 @@
+# v6.5.0 (Tue Dec 19 2023)
+
+#### 🚀 Enhancement
+
+- Blocksy CMP [#313](https://github.com/duckduckgo/autoconsent/pull/313) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Do not click on the youtube consent page [#311](https://github.com/duckduckgo/autoconsent/pull/311) ([@muodov](https://github.com/muodov))
+- Monthly Coverage data update [#307](https://github.com/duckduckgo/autoconsent/pull/307) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 3 updates [#312](https://github.com/duckduckgo/autoconsent/pull/312) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 5 updates [#309](https://github.com/duckduckgo/autoconsent/pull/309) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 5 updates [#308](https://github.com/duckduckgo/autoconsent/pull/308) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v6.4.3 (Mon Dec 04 2023)
 
 #### 🐛 Bug Fix
