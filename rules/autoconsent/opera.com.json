@@ -1,0 +1,34 @@
+{
+  "name": "opera.com",
+  "vendorUrl": "https://unknown",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false
+  },
+  "intermediate": false,
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "#cookie-consent .manage-cookies__btn"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#cookie-consent .cookie-basic-consent__btn"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#cookie-consent .cookie-basic-consent__btn"
+    }
+  ],
+  "optOut": [
+    { "waitForThenClick": "#cookie-consent .manage-cookies__btn" },
+    { "waitForThenClick": "#cookie-consent .active.marketing_option_switch.cookie-consent__switch", "all": true },
+    { "waitForThenClick": "#cookie-consent .cookie-selection__btn" }
+  ],
+  "test": [
+    { "eval": "EVAL_OPERA_0" }
+  ]
+}

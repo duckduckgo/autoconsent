@@ -71,6 +71,7 @@ export type ClickRule = {
 export type WaitForThenClickRule = {
   waitForThenClick: ElementSelector;
   timeout?: number;
+  all?: boolean;
 };
 
 export type WaitRule = {

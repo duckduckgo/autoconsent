@@ -66,6 +66,7 @@ export const snippets = {
   EVAL_MICROSOFT_2: () => !!document.cookie.match('MSCC'),
   EVAL_MOOVE_0: () => document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach(i => { if (!i.disabled && i.name !== 'moove_gdpr_strict_cookies') i.checked = false }) || true,
   EVAL_ONENINETWO_0: () => document.cookie.includes('CC_ADVERTISING=NO') && document.cookie.includes('CC_ANALYTICS=NO'),
+  EVAL_OPERA_0: () => document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
   EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
   EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
   EVAL_PUBTECH_0: () => document.cookie.includes('euconsent-v2') && (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)) ,
