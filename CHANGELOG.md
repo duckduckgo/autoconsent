@@ -1,3 +1,15 @@
+# v6.6.0 (Wed Dec 20 2023)
+
+#### 🚀 Enhancement
+
+- Add rule for opera.com [#314](https://github.com/duckduckgo/autoconsent/pull/314) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.5.0 (Tue Dec 19 2023)
 
 #### 🚀 Enhancement
