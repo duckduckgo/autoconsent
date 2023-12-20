@@ -73,7 +73,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     // hide elements permanently, so user doesn't see the popup
     hideElements(
       getStyleElement(),
-      [".truste_popframe", ".truste_overlay", ".truste_box_overlay", bannerContainer],
+      `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`,
     );
     click(cookieSettingsButton);
 

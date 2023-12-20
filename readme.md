@@ -155,7 +155,7 @@ Wait for the specified number of milliseconds.
 ### Hide
 ```json
 {
-  "hide": ["selector", ...],
+  "hide": "selector",
   "method": "display" | "opacity"
 }
 ```

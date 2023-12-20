@@ -85,7 +85,7 @@ export type UrlRule = {
 export type HideMethod = 'display' | 'opacity';
 
 export type HideRule = {
-  hide: string[];
+  hide: string;
   method?: HideMethod;
 };
 
