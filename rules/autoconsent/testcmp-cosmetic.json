@@ -9,7 +9,7 @@
       { "click": "#accept-all" }
     ],
     "optOut": [
-      { "hide": ["#privacy-test-page-cmp-test-banner"] }
+      { "hide": "#privacy-test-page-cmp-test-banner" }
     ],
     "test": [
       { "wait": 500 },

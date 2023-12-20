@@ -5,5 +5,5 @@
     "detectCmp": [{ "exists": "#pmc-pp-tou--notice" }],
     "detectPopup": [{ "visible": "#pmc-pp-tou--notice" }],
     "optIn": [{ "click": "span.pmc-pp-tou--notice-close-btn" }],
-    "optOut": [{ "hide": ["#pmc-pp-tou--notice"] }]
+    "optOut": [{ "hide": "#pmc-pp-tou--notice" }]
 }

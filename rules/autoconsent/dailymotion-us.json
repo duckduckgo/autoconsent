@@ -5,5 +5,5 @@
     "detectCmp": [{ "exists": "div[class*=\"CookiePopup__desktopContainer\"]" }],
     "detectPopup": [{ "visible": "div[class*=\"CookiePopup__desktopContainer\"]" }],
     "optIn": [{ "click": "div[class*=\"CookiePopup__desktopContainer\"] > button > span" }],
-    "optOut": [{ "hide": ["div[class*=\"CookiePopup__desktopContainer\"]"] }]
+    "optOut": [{ "hide": "div[class*=\"CookiePopup__desktopContainer\"]" }]
 }

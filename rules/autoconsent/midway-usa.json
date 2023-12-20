@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": ["div[aria-label=\"Cookie Policy Banner\"]"] }],
     "detectPopup": [{ "visible": "#cookie-container" }],
     "optIn": [{ "click": "button#cookie-btn" }],
-    "optOut": [{ "hide": ["div[aria-label=\"Cookie Policy Banner\"]"] }]
+    "optOut": [{ "hide": "div[aria-label=\"Cookie Policy Banner\"]" }]
 }

@@ -5,5 +5,5 @@
   "detectCmp": [{ "exists": "#consent-tracking" }],
   "detectPopup": [{ "exists": "#consent-tracking" }],
   "optIn": [{ "click": "#accept_consent" }],
-  "optOut": [{ "hide": ["#consent-tracking"] }]
+  "optOut": [{ "hide": "#consent-tracking" }]
 }

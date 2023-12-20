@@ -5,5 +5,5 @@
     "detectCmp": [{ "exists": ".wpcc-container" }],
     "detectPopup": [{ "exists": ".wpcc-container .wpcc-message" }],
     "optIn": [{ "click": ".wpcc-compliance .wpcc-btn" }],
-    "optOut": [{ "hide": [".wpcc-container"] }]
+    "optOut": [{ "hide": ".wpcc-container" }]
 }

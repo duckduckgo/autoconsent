@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": "div[aria-label=\"use of cookies on bbb.org\"]" }],
     "detectPopup": [{ "visible": "div[aria-label=\"use of cookies on bbb.org\"]" }],
     "optIn": [{ "click": "div[aria-label=\"use of cookies on bbb.org\"] button.bds-button-unstyled span.visually-hidden" }],
-    "optOut": [{ "hide": ["div[aria-label=\"use of cookies on bbb.org\"]"] }]
+    "optOut": [{ "hide": "div[aria-label=\"use of cookies on bbb.org\"]" }]
 }

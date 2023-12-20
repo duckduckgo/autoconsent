@@ -8,5 +8,5 @@
   "detectCmp": [{ "exists": "#footer-container ~ div" }],
   "detectPopup": [{ "visible": "#footer-container > div" }],
   "optIn": [{"click": "#footer-container ~ div button" }],
-  "optOut": [{ "hide": ["#footer-container ~ div"] }]
+  "optOut": [{ "hide": "#footer-container ~ div" }]
 }

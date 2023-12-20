@@ -7,5 +7,5 @@
   ],
   "detectPopup": [{ "visible": "#cookie-notice" }],
   "optIn": [{ "click": "#cn-accept-cookie" }],
-  "optOut": [{ "hide": ["#cookie-notice"] }]
+  "optOut": [{ "hide": "#cookie-notice" }]
 }

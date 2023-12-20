@@ -8,7 +8,7 @@
     { "click": "#catapultCookie" }
   ],
   "optOut": [
-    { "hide": ["#catapult-cookie-bar"] }
+    { "hide": "#catapult-cookie-bar" }
   ],
   "test": [
     { "eval": "EVAL_UK_COOKIE_CONSENT_0" }

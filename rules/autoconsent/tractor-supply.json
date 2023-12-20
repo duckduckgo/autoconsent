@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": ".tsc-cookie-banner" }],
     "detectPopup": [{ "visible": ".tsc-cookie-banner" }],
     "optIn": [{ "click": "#cookie-banner-cancel" }],
-    "optOut": [{ "hide": [".tsc-cookie-banner"] }]
+    "optOut": [{ "hide": ".tsc-cookie-banner" }]
 }

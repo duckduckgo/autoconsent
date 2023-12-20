@@ -3,5 +3,5 @@
   "detectCmp": [{ "exists": "#cookie-disclosure" }],
   "detectPopup": [{ "visible": ".cookie-disclosure-message", "check": "any" }],
   "optIn": [{ "click": ".btn-accept" }],
-  "optOut": [{"hide": ["#cookie-disclosure"]}, {"click": ".btn-reject"}]
+  "optOut": [{"hide": "#cookie-disclosure"}, {"click": ".btn-reject"}]
 }

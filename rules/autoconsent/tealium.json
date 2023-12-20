@@ -11,7 +11,7 @@
     "optOut": [
       { "eval": "EVAL_TEALIUM_1" },
       { "eval": "EVAL_TEALIUM_DONOTSELL" },
-      { "hide": ["#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs"] },
+      { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs" },
       {
         "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies",
         "timeout": 1000,
@@ -19,7 +19,7 @@
       }
     ],
     "optIn": [
-      { "hide": ["#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs"] },
+      { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs" },
       { "eval": "EVAL_TEALIUM_2" }
     ],
     "test": [

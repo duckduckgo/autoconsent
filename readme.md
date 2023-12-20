@@ -37,7 +37,7 @@ that are installed on multiple sites. Each CMP ruleset defines:
 
 There are currently three ways of implementing a CMP:
  
- 1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class. 
+ 1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
  1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
  rulesets allow.
  3. As a [Consent-O-Matic](https://github.com/cavi-au/Consent-O-Matic) rule. The `ConsentOMaticCMP` class implements

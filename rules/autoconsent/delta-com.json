@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": "div.cookie-footer-container" }],
     "detectPopup": [{ "visible": "div.cookie-footer-container" }],
     "optIn": [{ "click": " button.cookie-close-icon" }],
-    "optOut": [{ "hide": ["div.cookie-footer-container"] }]
+    "optOut": [{ "hide": "div.cookie-footer-container" }]
 }
