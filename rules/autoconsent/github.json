@@ -1,0 +1,16 @@
+{
+  "name": "github.com",
+  "prehideSelectors": ["#cookie-consent-banner"],
+  "detectCmp": [
+    { "exists": "#cookie-consent-banner" }
+  ],
+  "detectPopup": [
+    { "visible": "#cookie-consent-banner > #wcpConsentBannerCtrl" }
+  ],
+  "optIn": [
+    { "waitForThenClick": "#cookie-consent-banner > #wcpConsentBannerCtrl > div:nth-child(2) > button:nth-child(1)" }
+  ],
+  "optOut": [
+    { "waitForThenClick": "#cookie-consent-banner > #wcpConsentBannerCtrl > div:nth-child(2) > button:nth-child(2)" }
+  ]
+}
