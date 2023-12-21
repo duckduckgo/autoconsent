@@ -1,3 +1,4 @@
+import { snippets } from "./eval-snippets";
 import { ContentScriptMessage } from "./messages";
 import { getRandomID } from "./random";
 
@@ -30,12 +31,13 @@ export const evalState: EvalState = {
   sendContentMessage: null,
 }
 
-export function requestEval(code: string): Promise<boolean> {
+export function requestEval(code: string, snippetId?: keyof typeof snippets): Promise<boolean> {
   const id = getRandomID();
   evalState.sendContentMessage({
     type: 'eval',
     id,
     code,
+    snippetId,
   });
   const deferred = new Deferred<boolean>(id);
   evalState.pending.set(deferred.id, deferred);
