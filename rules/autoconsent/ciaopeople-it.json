@@ -1,7 +1,7 @@
 {
-  "name": "ohga.it",
+  "name": "ciaopeople.it",
   "runContext": {
-    "urlPattern": "^https://(www\\.)?ohga\\.it/"
+    "urlPattern": "^https://(www\\.)?(ohga|lexplain|wamily|fanpage)\\.it/"
   },
   "prehideSelectors": ["#cp-gdpr-choices"],
   "detectCmp": [
