@@ -1,0 +1,29 @@
+{
+  "name": "ohga.it",
+  "runContext": {
+    "urlPattern": "^https://(www\\.)?ohga\\.it/"
+  },
+  "prehideSelectors": ["#cp-gdpr-choices"],
+  "detectCmp": [
+    { "waitForVisible": "#cp-gdpr-choices" },
+    { "exists": "#cp-gdpr-choices" }
+  ],
+  "detectPopup": [
+    { "waitForVisible": "#cp-gdpr-choices" },
+    { "exists": "#cp-gdpr-choices" }
+  ],
+  "optIn": [
+    { "waitForThenClick": ".gdpr-btm__right > button:nth-child(2)" }
+  ],
+  "optOut": [
+    { "waitForThenClick": ".gdpr-top-content > button" },
+    { "waitFor": ".gdpr-top-back" },
+    { "waitForThenClick": ".gdpr-btm__right > button:nth-child(1)" }
+  ],
+  "test": [
+    {
+      "visible": "#cp-gdpr-choices",
+      "check": "none"
+    }
+  ]
+}
