@@ -1,0 +1,27 @@
+{
+  "name": "hema.com",
+  "runContext": {
+    "urlPattern": "^https://(www\\.)?hema\\.com/"
+  },
+  "prehideSelectors": [".cookie-modal"],
+  "detectCmp": [
+    { "waitForVisible": ".cookie-modal" },
+    { "exists": ".cookie-modal" }
+  ],
+  "detectPopup": [
+    { "waitForVisible": ".cookie-modal" },
+    { "exists": ".cookie-modal" }
+  ],
+  "optIn": [
+    { "waitForThenClick": ".cookie-accept-btn" }
+  ],
+  "optOut": [
+    { "waitForThenClick": ".cookie-reject-btn" }
+  ],
+  "test": [
+    {
+      "visible": ".cookie-modal",
+      "check": "none"
+    }
+  ]
+}
