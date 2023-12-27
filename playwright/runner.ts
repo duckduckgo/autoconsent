@@ -7,6 +7,7 @@ import { enableLogs } from "../lib/config";
 import { AutoAction } from "../lib/types";
 
 const testRegion = (process.env.REGION || "NA").trim();
+test.describe.configure({ mode: 'parallel' });
 
 type TestOptions = {
   testOptOut: boolean;
