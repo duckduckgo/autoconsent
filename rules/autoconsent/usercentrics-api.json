@@ -10,6 +10,10 @@
         "#usercentrics-root",
         "[data-testid=uc-container]"
       ]
+    },
+    {
+      "waitForVisible": "#usercentrics-root",
+      "timeout": 2000
     }
   ],
   "optIn": [
