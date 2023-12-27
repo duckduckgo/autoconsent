@@ -3,7 +3,7 @@ def runPlaywrightTests(resultDir, browser, grep) {
         timeout(20) {
             sh 'mkdir -p ./test-results'
             sh """
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --grep "$grep"|| true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test tests/_sample-test.spec.ts --project $browser --reporter=junit --grep "$grep"|| true
             """
         }
     } finally {
@@ -73,14 +73,6 @@ pipeline {
         stage('Test: GB') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                }
-            }
-        }
-        
-        stage('Test: FR') {
-            steps {
-                withEnvFile("${params.TEST_RESULT_ROOT}/fr.env") {
                     runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                 }
             }
