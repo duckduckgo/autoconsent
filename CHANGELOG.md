@@ -1,3 +1,15 @@
+# v6.6.1 (Wed Dec 27 2023)
+
+#### 🐛 Bug Fix
+
+- Add a deferred check for usercentrics [#322](https://github.com/duckduckgo/autoconsent/pull/322) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
 # v6.6.0 (Wed Dec 20 2023)
 
 #### 🚀 Enhancement
