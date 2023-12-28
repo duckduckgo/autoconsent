@@ -145,9 +145,22 @@ export default class AutoConsent {
     this.updateState({ lifecycle: 'cmpDetected' });
 
     // we resort to cosmetic rules only if no non-cosmetic rules are found
-    let foundPopups = await this.detectPopups(foundCmps.filter(r => !r.isCosmetic))
+    const staticCmps: AutoCMP[] = []
+    const cosmeticCmps: AutoCMP[] = []
+
+    for (const cmp of foundCmps) {
+      if (cmp.isCosmetic) {
+        cosmeticCmps.push(cmp)
+      } else {
+        staticCmps.push(cmp)
+      }
+    }
+
+    let result: Promise<boolean>
+
+    let foundPopups = await this.detectPopups(staticCmps, cmp => { result = this.handleFirstPopupAppears(cmp) })
     if (foundPopups.length === 0) {
-      foundPopups = await this.detectPopups(foundCmps.filter(r => r.isCosmetic))
+      foundPopups = await this.detectPopups(cosmeticCmps, cmp => { result = this.handleFirstPopupAppears(cmp) })
     }
 
     if (foundPopups.length === 0) {
@@ -156,11 +169,6 @@ export default class AutoConsent {
         this.undoPrehide();
       }
       return false;
-    }
-
-    this.updateState({ lifecycle: 'openPopupDetected' });
-    if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
-      this.prehideElements();
     }
 
     if (foundPopups.length > 1) {
@@ -175,16 +183,7 @@ export default class AutoConsent {
       });
     }
 
-    this.foundCmp = foundPopups[0];
-
-    if (this.config.autoAction === 'optOut') {
-      return await this.doOptOut();
-    } else if (this.config.autoAction === 'optIn') {
-      return await this.doOptIn();
-    } else {
-      enableLogs && console.log("waiting for opt-out signal...", location.href);
-      return true;
-    }
+    return result
   }
 
   async findCmp(retries: number): Promise<AutoCMP[]> {
@@ -219,24 +218,67 @@ export default class AutoConsent {
     return foundCMPs;
   }
 
-  async detectPopups(cmps: AutoCMP[]): Promise<AutoCMP[]> {
-    const result: AutoCMP[] = [];
-    const popupLookups = cmps.map((cmp) => this.waitForPopup(cmp).then((isOpen) => {
-      if (isOpen) {
-        this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
-        this.sendContentMessage({
-          type: 'popupFound',
-          cmp: cmp.name,
-          url: location.href,
-        }); // notify the browser
-        result.push(cmp);
+  async detectPopup(cmp: AutoCMP): Promise<AutoCMP> {
+    const isOpen = await this.waitForPopup(cmp);
+
+    if (isOpen) {
+      this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
+      this.sendContentMessage({
+        type: 'popupFound',
+        cmp: cmp.name,
+        url: location.href,
+      }); // notify the browser
+    }
+
+    return cmp
+  }
+
+  detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => unknown = () => {}): Promise<AutoCMP[]> {
+    return new Promise(resolve => {
+      const foundCmps: AutoCMP[] = []
+      let completed = 0
+
+      for (let i = 0, l = cmps.length; i < l; i++) {
+        this.detectPopup(cmps[i])
+          .then(cmp => {
+            foundCmps.push(cmp)
+            
+            if (foundCmps.length === 1) {
+              onFirstPopupAppears(cmp)
+            }
+          })
+          .catch(error => {
+            enableLogs && console.warn(`error waiting for a popup for ${cmps[i].name}`, error)
+          })
+          .finally(() => {
+            if (++completed === l) {
+              resolve(foundCmps)
+            }
+          })
       }
-    }).catch((e) => {
-      enableLogs && console.warn(`error waiting for a popup for ${cmp.name}`, e);
-      return null
-    }));
-    await Promise.all(popupLookups);
-    return result;
+    })
+  }
+
+  async handlePopup(cmp: AutoCMP): Promise<boolean> {
+    this.updateState({ lifecycle: 'openPopupDetected' });
+    if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
+      this.prehideElements();
+    }
+
+    this.foundCmp = cmp;
+
+    if (this.config.autoAction === 'optOut') {
+      return await this.doOptOut();
+    } else if (this.config.autoAction === 'optIn') {
+      return await this.doOptIn();
+    } else {
+      enableLogs && console.log("waiting for opt-out signal...", location.href);
+      return true;
+    }
+  }
+
+  handleFirstPopupAppears(cmp: AutoCMP): Promise<boolean> {
+    return this.handlePopup(cmp)
   }
 
   async doOptOut(): Promise<boolean> {
