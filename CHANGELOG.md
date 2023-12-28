@@ -1,3 +1,15 @@
+# v7.0.0 (Thu Dec 28 2023)
+
+#### 💥 Breaking Change
+
+- Fix CSP errors when running eval rules in MV3 extension [#318](https://github.com/duckduckgo/autoconsent/pull/318) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.7.0 (Thu Dec 28 2023)
 
 #### 🚀 Enhancement
