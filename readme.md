@@ -79,36 +79,45 @@ Both JSON and class implementations have the following components:
 
 ### Element selectors
 
-Most rules use "selectors" to locate elements in a page. In most cases, a selector can be a string, or array of strings, which are used to locale elements as follows:
+Many rules use `ElementSelector` to locate elements in a page. `ElementSelector` can be a string, or array of strings, which are used to locate elements as follows:
  - By default, strings are treated as [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors) via the `querySelector` API. e.g. `#reject-cookies` to find an element whose `id` is 'reject-cookies'.
- - Selectors prefixed with `xpath/` are [Xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) selectors which can locate elements in the page via [`document.evaluate`](https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#document.evaluate). e.g. `xpath///*[@id="reject-cookies"]` can find an element whose `id` is 'reject-cookies'.
- - If an array of selectors is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id` 'reject-cookies', then looks for a match for `button` _that is a decendant_ of that element.
- - If an array of selectors is given, and a selector returns an element that has a `shadowRoot` attribute, the next selector will run within that element's shadow DOM.
+ - Strings prefixed with `xpath/` are [Xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) selectors which can locate elements in the page via [`document.evaluate`](https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#document.evaluate). e.g. `xpath///*[@id="reject-cookies"]` can find an element whose `id` is 'reject-cookies'.
+ - If an array of strings is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id="reject-cookies"`, then looks for a match for `button` _that is a descendant_ of that element.
+ **If one of the selectors returns an element that has a `shadowRoot` property, the next selector will run within that element's shadow DOM.** This is the main difference from nested CSS selectors, which do not cross shadow DOM boundaries.
+
+ For example, consider the following DOM fragment:
+ ```html
+ <open-shadow-root-element>
+  <button>X</button>
+ </open-shadow-root-element>
+ ```
+
+Then `['open-shadow-root-element', 'button']` will find the button, but a usual CSS selector `'open-shadow-root-element button'` will not.
 
 ### Element exists
 
-```json
+```javascript
 {
-  "exists": "selector"
+  "exists": ElementSelector
 }
 ```
 Returns true if the given selector matches one or more elements.
 
 ### Element visible
 
-```json
+```javascript
 {
-  "visible": "selector",
+  "visible": ElementSelector,
   "check": "any" | "all" | "none"
 }
 ```
-Returns true if elements returned matched by "selector" are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
+Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
 
 ### Wait for element
 
-```json
+```javascript
 {
-  "waitFor": "selector",
+  "waitFor": ElementSelector,
   "timeout": 1000
 }
 ```
@@ -116,9 +125,9 @@ Waits until `selector` exists in the page. After `timeout` ms the step fails.
 
 ### Wait for visibility
 
-```json
+```javascript
 {
-  "waitForVisible": "selector",
+  "waitForVisible": ElementSelector,
   "timeout": 1000,
   "check": "any" | "all" | "none"
 }
@@ -126,18 +135,18 @@ Waits until `selector` exists in the page. After `timeout` ms the step fails.
 Waits until element is visible in the page. After `timeout` ms the step fails.
 
 ### Click an element
-```json
+```javascript
 {
-  "click": "selector",
+  "click": ElementSelector,
   "all": true | false,
 }
 ```
 Click on an element returned by `selector`. If `all` is `true`, all matching elements are clicked. If `all` is `false`, only the first returned value is clicked.
 
 ### Wait for then click
-```json
+```javascript
 {
-  "waitForThenClick": "selector",
+  "waitForThenClick": ElementSelector,
   "timeout": 1000,
   "all": true | false
 }
@@ -145,7 +154,7 @@ Click on an element returned by `selector`. If `all` is `true`, all matching ele
 Combines `waitFor` and `click`.
 
 ### Unconditional wait
-```json
+```javascript
 {
   "wait": 1000,
 }
@@ -153,9 +162,9 @@ Combines `waitFor` and `click`.
 Wait for the specified number of milliseconds.
 
 ### Hide
-```json
+```javascript
 {
-  "hide": "selector",
+  "hide": ElementSelector,
   "method": "display" | "opacity"
 }
 ```
@@ -163,7 +172,7 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 
 ### Eval
 
-```json
+```javascript
 {
   "eval": "SNIPPET_ID"
 }
@@ -173,9 +182,9 @@ Eval rules are not 100% reliable because they can be affected by the page script
 
 ### Conditionals
 
-```json
+```javascript
 {
-  "if": { "exists": "selector" },
+  "if": { "exists": ElementSelector },
   "then": [
     { "click": ".button1" },
     { "click": ".button3" }
@@ -191,7 +200,7 @@ The "if" rule is considered successful as long as all rules inside the chosen br
 
 ### Any
 
-```json
+```javascript
 {
   "any": [
     { "exists": ".button1" },
@@ -200,11 +209,11 @@ The "if" rule is considered successful as long as all rules inside the chosen br
 }
 ```
 
-Evaluates a list of steps in order. If any return true (success), then the step exists and returns true. If all steps return false, the `any` step returns false.
+Evaluates a list of steps in order. If any return true (success), then the step returns true. If all steps return false, the `any` step returns false.
 
 ### Optional actions
 
-Any rule can include the `"optional": true` to ignore failure.
+All rules can include the `"optional": true` to ignore failure.
 
 ## API
 
