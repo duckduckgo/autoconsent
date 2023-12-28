@@ -1,16 +1,11 @@
 {
   "name": "ciaopeople.it",
-  "runContext": {
-    "urlPattern": "^https://(www\\.)?(ohga|lexplain|wamily|fanpage)\\.it/"
-  },
   "prehideSelectors": ["#cp-gdpr-choices"],
   "detectCmp": [
-    { "waitForVisible": "#cp-gdpr-choices" },
     { "exists": "#cp-gdpr-choices" }
   ],
   "detectPopup": [
-    { "waitForVisible": "#cp-gdpr-choices" },
-    { "exists": "#cp-gdpr-choices" }
+    { "visible": "#cp-gdpr-choices" }
   ],
   "optIn": [
     { "waitForThenClick": ".gdpr-btm__right > button:nth-child(2)" }
