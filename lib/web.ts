@@ -158,9 +158,9 @@ export default class AutoConsent {
 
     let result: Promise<boolean>
 
-    let foundPopups = await this.detectPopups(staticCmps, cmp => { result = this.handleFirstPopupAppears(cmp) })
+    let foundPopups = await this.detectPopups(staticCmps, cmp => { result = this.handlePopup(cmp) })
     if (foundPopups.length === 0) {
-      foundPopups = await this.detectPopups(cosmeticCmps, cmp => { result = this.handleFirstPopupAppears(cmp) })
+      foundPopups = await this.detectPopups(cosmeticCmps, cmp => { result = this.handlePopup(cmp) })
     }
 
     if (foundPopups.length === 0) {
@@ -275,10 +275,6 @@ export default class AutoConsent {
       enableLogs && console.log("waiting for opt-out signal...", location.href);
       return true;
     }
-  }
-
-  handleFirstPopupAppears(cmp: AutoCMP): Promise<boolean> {
-    return this.handlePopup(cmp)
   }
 
   async doOptOut(): Promise<boolean> {
