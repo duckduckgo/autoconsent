@@ -32,7 +32,6 @@ export type AutoConsentRuleStep = { optional?: boolean } &
   Partial<ClickRule> &
   Partial<WaitForThenClickRule> &
   Partial<WaitRule> &
-  Partial<UrlRule> &
   Partial<HideRule> &
   Partial<IfRule> &
   Partial<AnyRule>
@@ -76,10 +75,6 @@ export type WaitForThenClickRule = {
 
 export type WaitRule = {
   wait: number;
-};
-
-export type UrlRule = {
-  url: string;
 };
 
 export type HideMethod = 'display' | 'opacity';

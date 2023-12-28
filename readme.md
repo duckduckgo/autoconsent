@@ -164,11 +164,11 @@ Wait for the specified number of milliseconds.
 ### Hide
 ```javascript
 {
-  "hide": ElementSelector,
+  "hide": "CSS selector",
   "method": "display" | "opacity"
 }
 ```
-Hide the elements matched by the selectors. `method` defines how elements are hidden: "display" sets `display: none`, "opacity" sets `opacity: 0`. Method is "display" by default.
+Hide the elements matched by the selectors. `method` defines how elements are hidden: "display" sets `display: none`, "opacity" sets `opacity: 0`. Method is "display" by default. Note that only a single string CSS selector is supported here, not an array.
 
 ### Eval
 
