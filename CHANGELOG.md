@@ -1,3 +1,18 @@
+# v6.7.0 (Thu Dec 28 2023)
+
+#### 🚀 Enhancement
+
+- Add a rule for ciaopeople.it [#320](https://github.com/duckduckgo/autoconsent/pull/320) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Add a rule for roofingmegastore.co.uk [#325](https://github.com/duckduckgo/autoconsent/pull/325) ([@seia-soto](https://github.com/seia-soto))
+- Add a rule for csu-landtag.de [#324](https://github.com/duckduckgo/autoconsent/pull/324) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v6.6.1 (Wed Dec 27 2023)
 
 #### 🐛 Bug Fix
