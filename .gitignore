@@ -2,6 +2,7 @@ node_modules/
 dist/
 _site
 test/lit-html/
+test-results/
 *.bundle.js
 *.min.css
 rules/rules.*
@@ -9,3 +10,4 @@ lib/**/*.js
 addon/*.js
 .vscode/
 .env
+.DS_Store
