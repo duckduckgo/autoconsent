@@ -64,7 +64,7 @@ export default class AutoConsentCMPBase implements AutoCMP {
 
     const snippetSrc = getFunctionBody(snippet);
     enableLogs && console.log('async eval:', snippetId, snippetSrc);
-    return requestEval(snippetSrc).catch((e) => {
+    return requestEval(snippetSrc, snippetId).catch((e) => {
       enableLogs && console.error('error evaluating rule', snippetId, e);
       return false;
     });

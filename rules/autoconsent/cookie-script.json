@@ -1,5 +1,6 @@
 {
-    "name": "arzt-auskunft.de",
+    "name": "cookie-script",
+    "vendorUrl": "https://cookie-script.com/",
     "prehideSelectors": ["#cookiescript_injected"],
     "detectCmp": [{"exists": "#cookiescript_injected"}],
     "detectPopup": [{"visible": "#cookiescript_injected"}],

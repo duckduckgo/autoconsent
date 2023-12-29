@@ -1,4 +1,5 @@
 import { enableLogs } from "../lib/config";
+import { snippets } from "../lib/eval-snippets";
 import { BackgroundMessage, BuilderMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
@@ -20,7 +21,7 @@ async function loadRules() {
   });
 }
 
-async function evalInTab(tabId: number, frameId: number, code: string): Promise<chrome.scripting.InjectionResult<boolean>[]> {
+async function evalInTab(tabId: number, frameId: number, code: string, snippetId?: keyof typeof snippets): Promise<chrome.scripting.InjectionResult<boolean>[]> {
   if (manifestVersion === 2) {
     return new Promise((resolve) => {
       chrome.tabs.executeScript(tabId, {
@@ -40,16 +41,7 @@ async function evalInTab(tabId: number, frameId: number, code: string): Promise<
       frameIds: [frameId],
     },
     world: "MAIN",
-    args: [code],
-    func: (code) => {
-      try {
-        return window.eval(code);
-      } catch (e) {
-        // ignore CSP errors
-        console.warn('eval error', code, e);
-        return;
-      }
-    },
+    func: snippets[snippetId],
   })
 }
 
@@ -105,7 +97,7 @@ chrome.runtime.onMessage.addListener(
         });
         break;
       case "eval":
-        evalInTab(tabId, frameId, msg.code).then(([result]) => {
+        evalInTab(tabId, frameId, msg.code, msg.snippetId).then(([result]) => {
           if (enableLogs) {
             console.groupCollapsed(`eval result for ${sender.origin || sender.url}`);
             console.log(msg.code, result.result);
