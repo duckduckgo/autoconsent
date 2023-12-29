@@ -233,7 +233,7 @@ export default class AutoConsent {
     return cmp
   }
 
-  detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => unknown = () => {}): Promise<AutoCMP[]> {
+  detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => unknown): Promise<AutoCMP[]> {
     return new Promise(resolve => {
       const foundCmps: AutoCMP[] = []
       let completed = 0
