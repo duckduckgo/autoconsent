@@ -1,8 +1,8 @@
 {
   "name": "iWink",
-  "prehideSelectors": ["#cookie-bar"],
+  "prehideSelectors": ["body.cookies-request #cookie-bar"],
   "detectCmp": [
-    { "exists": "#cookie-bar" }
+    { "exists": "body.cookies-request #cookie-bar" }
   ],
   "detectPopup": [
     { "visible": "body.cookies-request #cookie-bar" }
@@ -14,6 +14,6 @@
     { "waitForThenClick": "body.cookies-request #cookie-bar .disallow-cookies" }
   ],
   "test": [
-    {"eval": "document.cookie.includes('cookie_permission_granted=no')"}
+    {"eval": "EVAL_IWINK_TEST"}
   ]
 }
