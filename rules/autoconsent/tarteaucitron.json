@@ -7,12 +7,12 @@
     "check": "any"
   }],
   "optIn": [
-    { "eval": "tarteaucitron.userInterface.respondAll(true) || true" }
+    { "eval": "EVAL_TARTEAUCITRON_1" }
   ],
   "optOut": [
-    { "eval": "tarteaucitron.userInterface.respondAll(false) || true" }
+    { "eval": "EVAL_TARTEAUCITRON_0" }
   ],
   "test": [
-    { "eval": "document.cookie.match(/tarteaucitron=[^;]*/)[0].includes('false')", "comment": "sometimes there are required categories, so we check that at least something is false" }
+    { "eval": "EVAL_TARTEAUCITRON_2", "comment": "sometimes there are required categories, so we check that at least something is false" }
   ]
 }

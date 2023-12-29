@@ -5,7 +5,7 @@
   "detectPopup": [{ "visible": "#ez-cookie-dialog-wrapper" }],
   "optIn": [
     { "click": "#ez-accept-all", "optional": true },
-    { "eval": "ezCMP.handleAcceptAllClick()", "optional": true }
+    { "eval": "EVAL_EZOIC_0", "optional": true }
   ],
   "optOut": [
     { "wait": 500 },
@@ -15,6 +15,6 @@
     { "click": "#ez-save-settings" }
   ],
   "test": [
-    { "eval": "!!document.cookie.match(/ezCMPCookieConsent=[^;]+\\|2=0\\|3=0\\|4=0/)" }
+    { "eval": "EVAL_EZOIC_1" }
   ]
 }

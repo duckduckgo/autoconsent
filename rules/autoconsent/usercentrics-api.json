@@ -3,17 +3,27 @@
   "detectCmp": [{ "exists": "#usercentrics-root" }],
   "detectPopup": [
     {
-      "eval": "typeof UC_UI === 'object'"
+      "eval": "EVAL_USERCENTRICS_API_0"
+    },
+    {
+      "exists": [
+        "#usercentrics-root",
+        "[data-testid=uc-container]"
+      ]
+    },
+    {
+      "waitForVisible": "#usercentrics-root",
+      "timeout": 2000
     }
   ],
   "optIn": [
-    { "eval": "!!UC_UI.acceptAllConsents()" },
-    { "eval": "!!UC_UI.closeCMP()" },
-    { "eval": "UC_UI.areAllConsentsAccepted() === true" }
+    { "eval": "EVAL_USERCENTRICS_API_3" },
+    { "eval": "EVAL_USERCENTRICS_API_1" },
+    { "eval": "EVAL_USERCENTRICS_API_5" }
   ],
   "optOut": [
-    { "eval": "!!UC_UI.closeCMP()" },
-    { "eval": "!!UC_UI.denyAllConsents()" }
+    { "eval": "EVAL_USERCENTRICS_API_1" },
+    { "eval": "EVAL_USERCENTRICS_API_2" }
   ],
-  "test": [{ "eval": "UC_UI.areAllConsentsAccepted() === false" }]
+  "test": [{ "eval": "EVAL_USERCENTRICS_API_6" }]
 }

@@ -34,6 +34,8 @@ export type Config = {
   enablePrehide: boolean;
   enableCosmeticRules: boolean;
   detectRetries: number;
+  isMainWorld: boolean;
+  prehideTimeout: number;
 }
 
 export type LifecycleState = 'loading' |
@@ -59,4 +61,3 @@ export type ConsentState = {
   detectedPopups: string[]; // Names of CMP rules where `detectPopup` returned true.
   selfTest: boolean; // null if no self test was run, otherwise it holds the result of the self test.
 }
-  

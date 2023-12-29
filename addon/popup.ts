@@ -1,7 +1,7 @@
 import { BackgroundMessage } from "../lib/messages";
 import { Config } from "../lib/types";
 import { storageGet, storageRemove, storageSet } from "./mv-compat";
-import { showOptOutStatus } from "./utils";
+import { initConfig, showOptOutStatus } from "./utils";
 
 async function init() {
   const autoconsentConfig: Config = await storageGet('config');
@@ -14,6 +14,8 @@ async function init() {
   const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
   const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
   const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
+  const ruleReloadButton = document.querySelector('#reload') as HTMLButtonElement;
+  const resetButton = document.querySelector('#reset') as HTMLButtonElement;
 
   // enable proceed button when necessary
 
@@ -104,6 +106,19 @@ async function init() {
   }
   cosmeticOnRadio.addEventListener('change', cosmeticChange);
   cosmeticOffRadio.addEventListener('change', cosmeticChange);
+
+  ruleReloadButton.addEventListener('click', async () => {
+    const res = await fetch("./rules.json");
+    storageSet({
+      rules: await res.json(),
+    });
+  })
+
+  resetButton.addEventListener('click', async () => {
+    await storageRemove('config');
+    await initConfig();
+    window.close();
+  })
 }
 
 init();

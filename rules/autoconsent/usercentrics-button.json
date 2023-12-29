@@ -10,5 +10,5 @@
   "optOut": [
     { "click": "#usercentrics-button #uc-btn-deny-banner" }
   ],
-  "test": [{ "eval": "JSON.parse(localStorage.getItem('usercentrics')).consents.every(c => c.isEssential || !c.consentStatus)" }]
+  "test": [{ "eval": "EVAL_USERCENTRICS_BUTTON_0" }]
 }

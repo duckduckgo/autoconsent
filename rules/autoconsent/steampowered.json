@@ -9,7 +9,7 @@
       "wait": 1000
     },
     {
-      "eval": "JSON.parse(decodeURIComponent(document.cookie.split(';').find(s => s.trim().startsWith('cookieSettings')).split('=')[1])).preference_state === 2"
+      "eval": "EVAL_STEAMPOWERED_0"
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "name": "aquasana.com",
+  "cosmetic": true,
+  "prehideSelectors": ["#consent-tracking"],
+  "detectCmp": [{ "exists": "#consent-tracking" }],
+  "detectPopup": [{ "exists": "#consent-tracking" }],
+  "optIn": [{ "click": "#accept_consent" }],
+  "optOut": [{ "hide": ["#consent-tracking"] }]
+}

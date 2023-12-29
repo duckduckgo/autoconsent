@@ -17,6 +17,6 @@
     { "waitForThenClick": "[data-testid=\"BottomBar\"] > div:has(>div:first-child>div:last-child>span[role=button]) > div:last-child > div[role=button]:last-child" }
   ],
   "TODOtest": [
-    { "eval": "document.cookie.includes('d_prefs=MjoxLGNvbnNlbnRfdmVyc2lvbjoy')" }
+    { "eval": "EVAL_document.cookie.includes('d_prefs=MjoxLGNvbnNlbnRfdmVyc2lvbjoy')" }
   ]
 }

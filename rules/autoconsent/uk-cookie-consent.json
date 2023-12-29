@@ -11,6 +11,6 @@
     { "hide": ["#catapult-cookie-bar"] }
   ],
   "test": [
-    { "eval": "!document.cookie.includes('catAccCookies')" }
+    { "eval": "EVAL_UK_COOKIE_CONSENT_0" }
   ]
 }

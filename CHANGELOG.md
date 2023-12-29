@@ -1,3 +1,488 @@
+# v7.0.0 (Thu Dec 28 2023)
+
+#### 💥 Breaking Change
+
+- Fix CSP errors when running eval rules in MV3 extension [#318](https://github.com/duckduckgo/autoconsent/pull/318) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.7.0 (Thu Dec 28 2023)
+
+#### 🚀 Enhancement
+
+- Add a rule for ciaopeople.it [#320](https://github.com/duckduckgo/autoconsent/pull/320) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Add a rule for roofingmegastore.co.uk [#325](https://github.com/duckduckgo/autoconsent/pull/325) ([@seia-soto](https://github.com/seia-soto))
+- Add a rule for csu-landtag.de [#324](https://github.com/duckduckgo/autoconsent/pull/324) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.6.1 (Wed Dec 27 2023)
+
+#### 🐛 Bug Fix
+
+- Add a deferred check for usercentrics [#322](https://github.com/duckduckgo/autoconsent/pull/322) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
+# v6.6.0 (Wed Dec 20 2023)
+
+#### 🚀 Enhancement
+
+- Add rule for opera.com [#314](https://github.com/duckduckgo/autoconsent/pull/314) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.5.0 (Tue Dec 19 2023)
+
+#### 🚀 Enhancement
+
+- Blocksy CMP [#313](https://github.com/duckduckgo/autoconsent/pull/313) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Do not click on the youtube consent page [#311](https://github.com/duckduckgo/autoconsent/pull/311) ([@muodov](https://github.com/muodov))
+- Monthly Coverage data update [#307](https://github.com/duckduckgo/autoconsent/pull/307) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 3 updates [#312](https://github.com/duckduckgo/autoconsent/pull/312) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 5 updates [#309](https://github.com/duckduckgo/autoconsent/pull/309) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 5 updates [#308](https://github.com/duckduckgo/autoconsent/pull/308) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v6.4.3 (Mon Dec 04 2023)
+
+#### 🐛 Bug Fix
+
+- Cookiebot fixes [#304](https://github.com/duckduckgo/autoconsent/pull/304) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.4.2 (Mon Dec 04 2023)
+
+#### 🐛 Bug Fix
+
+- Add a rule for CookieYes [#306](https://github.com/duckduckgo/autoconsent/pull/306) ([@muodov](https://github.com/muodov))
+- Add a rule for yahoo pop-up [#305](https://github.com/duckduckgo/autoconsent/pull/305) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 3 updates [#303](https://github.com/duckduckgo/autoconsent/pull/303) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.4.1 (Mon Nov 27 2023)
+
+#### 🐛 Bug Fix
+
+- CCPA fix for Sourcepoint [#302](https://github.com/duckduckgo/autoconsent/pull/302) ([@muodov](https://github.com/muodov))
+- Group dependabot PRs [#299](https://github.com/duckduckgo/autoconsent/pull/299) ([@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#293](https://github.com/duckduckgo/autoconsent/pull/293) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 6 updates [#300](https://github.com/duckduckgo/autoconsent/pull/300) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump typescript from 5.2.2 to 5.3.2 [#298](https://github.com/duckduckgo/autoconsent/pull/298) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.53.0 to 8.54.0 [#297](https://github.com/duckduckgo/autoconsent/pull/297) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump esbuild from 0.19.5 to 0.19.6 [#295](https://github.com/duckduckgo/autoconsent/pull/295) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.39.0 to 1.40.0 [#294](https://github.com/duckduckgo/autoconsent/pull/294) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v6.4.0 (Mon Nov 20 2023)
+
+#### 🚀 Enhancement
+
+- Add a rule for nature.com [#290](https://github.com/duckduckgo/autoconsent/pull/290) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Takealot fix [#292](https://github.com/duckduckgo/autoconsent/pull/292) ([@muodov](https://github.com/muodov))
+- Monthly Coverage data update [#289](https://github.com/duckduckgo/autoconsent/pull/289) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v6.3.0 (Tue Nov 14 2023)
+
+#### 🚀 Enhancement
+
+- Some optimizations [#283](https://github.com/duckduckgo/autoconsent/pull/283) ([@muodov](https://github.com/muodov))
+- Bump web-ext from 7.7.0 to 7.8.0 [#284](https://github.com/duckduckgo/autoconsent/pull/284) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump chai and @types/chai [#285](https://github.com/duckduckgo/autoconsent/pull/285) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/mocha from 10.0.1 to 10.0.4 [#286](https://github.com/duckduckgo/autoconsent/pull/286) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🔩 Dependency Updates
+
+- Bump @types/chrome from 0.0.245 to 0.0.251 [#287](https://github.com/duckduckgo/autoconsent/pull/287) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.2.0 (Fri Nov 10 2023)
+
+#### 🚀 Enhancement
+
+- Bump eslint from 8.48.0 to 8.53.0 [#279](https://github.com/duckduckgo/autoconsent/pull/279) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.38.0 to 1.39.0 [#272](https://github.com/duckduckgo/autoconsent/pull/272) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.37.1 to 1.38.0 [#256](https://github.com/duckduckgo/autoconsent/pull/256) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Add rule for almacmp [#281](https://github.com/duckduckgo/autoconsent/pull/281) ([@muodov](https://github.com/muodov))
+- add rule for tropicfeel.com (shopify site) [#280](https://github.com/duckduckgo/autoconsent/pull/280) ([@muodov](https://github.com/muodov))
+- Bump esbuild from 0.19.2 to 0.19.5 [#273](https://github.com/duckduckgo/autoconsent/pull/273) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Monthly Coverage data update [#277](https://github.com/duckduckgo/autoconsent/pull/277) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#266](https://github.com/duckduckgo/autoconsent/pull/266) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+- Bump version of asana sync action [#260](https://github.com/duckduckgo/autoconsent/pull/260) ([@sammacbeth](https://github.com/sammacbeth))
+- Add asana sync for PRs [#258](https://github.com/duckduckgo/autoconsent/pull/258) ([@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#253](https://github.com/duckduckgo/autoconsent/pull/253) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Final fix of asana project ID ([@sammacbeth](https://github.com/sammacbeth))
+- Fix Asana project ID ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump @puppeteer/replay from 2.13.3 to 2.13.4 [#264](https://github.com/duckduckgo/autoconsent/pull/264) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump typescript from 5.1.6 to 5.2.2 [#251](https://github.com/duckduckgo/autoconsent/pull/251) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chai from 4.3.5 to 4.3.6 [#250](https://github.com/duckduckgo/autoconsent/pull/250) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump auto from 11.0.1 to 11.0.4 [#247](https://github.com/duckduckgo/autoconsent/pull/247) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v6.1.1 (Thu Sep 14 2023)
+
+#### 🐛 Bug Fix
+
+- Update test site domain [#252](https://github.com/duckduckgo/autoconsent/pull/252) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v6.1.0 (Tue Sep 12 2023)
+
+#### 🚀 Enhancement
+
+- Bump web-ext from 7.6.2 to 7.7.0 [#249](https://github.com/duckduckgo/autoconsent/pull/249) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Add rule for activobank.pt [#244](https://github.com/duckduckgo/autoconsent/pull/244) ([@muodov](https://github.com/muodov))
+- Update trustarc-frame.ts [#235](https://github.com/duckduckgo/autoconsent/pull/235) ([@hyebahi](https://github.com/hyebahi))
+
+#### 🔩 Dependency Updates
+
+- Bump @types/chrome from 0.0.243 to 0.0.245 [#245](https://github.com/duckduckgo/autoconsent/pull/245) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tslib from 2.6.1 to 2.6.2 [#242](https://github.com/duckduckgo/autoconsent/pull/242) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump chai from 4.3.7 to 4.3.8 [#241](https://github.com/duckduckgo/autoconsent/pull/241) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.36.2 to 1.37.1 [#239](https://github.com/duckduckgo/autoconsent/pull/239) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump esbuild from 0.18.11 to 0.19.2 [#234](https://github.com/duckduckgo/autoconsent/pull/234) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @puppeteer/replay from 2.13.2 to 2.13.3 [#222](https://github.com/duckduckgo/autoconsent/pull/222) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.242 to 0.0.243 [#221](https://github.com/duckduckgo/autoconsent/pull/221) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump auto from 10.46.0 to 11.0.1 [#233](https://github.com/duckduckgo/autoconsent/pull/233) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@hyebahi](https://github.com/hyebahi)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.0.0 (Tue Aug 22 2023)
+
+#### 💥 Breaking Change
+
+- Inline evals [#236](https://github.com/duckduckgo/autoconsent/pull/236) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- August crawl data [#238](https://github.com/duckduckgo/autoconsent/pull/238) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v5.3.0 (Wed Aug 09 2023)
+
+#### 🚀 Enhancement
+
+- Fix the target ES version to avoid surprises downstream [#227](https://github.com/duckduckgo/autoconsent/pull/227) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v5.2.0 (Thu Aug 03 2023)
+
+#### 🚀 Enhancement
+
+- Bump tslib from 2.5.3 to 2.6.1 [#217](https://github.com/duckduckgo/autoconsent/pull/217) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @puppeteer/replay from 2.11.0 to 2.13.2 [#216](https://github.com/duckduckgo/autoconsent/pull/216) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.45.0 to 8.46.0 [#215](https://github.com/duckduckgo/autoconsent/pull/215) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump @types/chrome from 0.0.241 to 0.0.242 [#218](https://github.com/duckduckgo/autoconsent/pull/218) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rules for twitch.tv and kleinanzeigen.de [#220](https://github.com/duckduckgo/autoconsent/pull/220) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v5.1.0 (Mon Jul 31 2023)
+
+#### 🚀 Enhancement
+
+- Bump @playwright/test from 1.35.1 to 1.36.2 [#213](https://github.com/duckduckgo/autoconsent/pull/213) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Fix usercentrics-api [#214](https://github.com/duckduckgo/autoconsent/pull/214) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump eslint from 8.43.0 to 8.45.0 [#208](https://github.com/duckduckgo/autoconsent/pull/208) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.237 to 0.0.241 [#206](https://github.com/duckduckgo/autoconsent/pull/206) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/parser from 5.60.0 to 5.62.0 [#203](https://github.com/duckduckgo/autoconsent/pull/203) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v5.0.1 (Tue Jul 18 2023)
+
+#### 🐛 Bug Fix
+
+- Fix burpee rule matching and add new rule [#211](https://github.com/duckduckgo/autoconsent/pull/211) ([@sammacbeth](https://github.com/sammacbeth))
+- Add July crawl data [#199](https://github.com/duckduckgo/autoconsent/pull/199) ([@sammacbeth](https://github.com/sammacbeth))
+- Build with ESBuild [#204](https://github.com/duckduckgo/autoconsent/pull/204) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v5.0.0 (Thu Jul 13 2023)
+
+#### 💥 Breaking Change
+
+- Bump typescript from 4.9.5 to 5.1.6 [#196](https://github.com/duckduckgo/autoconsent/pull/196) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🚀 Enhancement
+
+- Cancel prehide rules if the pop-up takes too long to appear [#205](https://github.com/duckduckgo/autoconsent/pull/205) ([@muodov](https://github.com/muodov))
+- Bump @playwright/test from 1.33.0 to 1.35.1 [#191](https://github.com/duckduckgo/autoconsent/pull/191) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v4.4.0 (Tue Jul 11 2023)
+
+#### 🚀 Enhancement
+
+- Support Chrome recorder generated selectors [#148](https://github.com/duckduckgo/autoconsent/pull/148) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Add initial coverage data [#188](https://github.com/duckduckgo/autoconsent/pull/188) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v4.3.3 (Thu Jun 22 2023)
+
+#### 🐛 Bug Fix
+
+- Remove wait from detectCmp step [#189](https://github.com/duckduckgo/autoconsent/pull/189) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v4.3.2 (Wed Jun 21 2023)
+
+#### 🐛 Bug Fix
+
+- Limit triggering of nba.com rule [#187](https://github.com/duckduckgo/autoconsent/pull/187) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v4.3.1 (Tue Jun 20 2023)
+
+#### 🐛 Bug Fix
+
+- Bump @typescript-eslint/eslint-plugin from 5.59.11 to 5.60.0 [#186](https://github.com/duckduckgo/autoconsent/pull/186) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chai from 4.3.4 to 4.3.5 [#183](https://github.com/duckduckgo/autoconsent/pull/183) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- added nba.com notice rule and test and modified oneTrust rule class [#172](https://github.com/duckduckgo/autoconsent/pull/172) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+
+#### 🔩 Dependency Updates
+
+- Bump @typescript-eslint/parser from 5.59.2 to 5.60.0 [#185](https://github.com/duckduckgo/autoconsent/pull/185) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.40.0 to 8.43.0 [#184](https://github.com/duckduckgo/autoconsent/pull/184) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
+- euw-arasolofotsara1 (arasolofotsara@duckduckgo.com)
+
+---
+
+# v4.3.0 (Tue Jun 20 2023)
+
+#### 🚀 Enhancement
+
+- add batch of rules and tests for banners reported by users [#181](https://github.com/duckduckgo/autoconsent/pull/181) (arasolofotsara@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth) [@icodebyamanda](https://github.com/icodebyamanda))
+
+#### Authors: 3
+
+- Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
+- euw-arasolofotsara1 (arasolofotsara@duckduckgo.com)
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v4.2.0 (Mon Jun 19 2023)
+
+#### 🚀 Enhancement
+
+- Bump @typescript-eslint/eslint-plugin from 5.45.1 to 5.59.2 [#143](https://github.com/duckduckgo/autoconsent/pull/143) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump web-ext from 7.4.0 to 7.6.2 [#145](https://github.com/duckduckgo/autoconsent/pull/145) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/parser from 5.51.0 to 5.59.2 [#146](https://github.com/duckduckgo/autoconsent/pull/146) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @playwright/test from 1.30.0 to 1.33.0 [#147](https://github.com/duckduckgo/autoconsent/pull/147) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Round 2: Add to US top sites optOut banners rules and tests [#175](https://github.com/duckduckgo/autoconsent/pull/175) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added verification to check if user's optout on TrustArc CMP has been set [#159](https://github.com/duckduckgo/autoconsent/pull/159) ([@hyebahi](https://github.com/hyebahi) [@sammacbeth](https://github.com/sammacbeth))
+- Added rule for cookiefirst [#177](https://github.com/duckduckgo/autoconsent/pull/177) ([@kunalvirk](https://github.com/kunalvirk))
+- Bump @typescript-eslint/eslint-plugin from 5.59.5 to 5.59.11 [#182](https://github.com/duckduckgo/autoconsent/pull/182) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tslib from 2.5.0 to 2.5.3 [#179](https://github.com/duckduckgo/autoconsent/pull/179) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.235 to 0.0.237 [#173](https://github.com/duckduckgo/autoconsent/pull/173) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @rollup/plugin-typescript from 11.1.0 to 11.1.1 [#161](https://github.com/duckduckgo/autoconsent/pull/161) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- rewrote CMP Ketch to include US in the rules [#171](https://github.com/duckduckgo/autoconsent/pull/171) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added 2 US CMP optOut rules and tests [#168](https://github.com/duckduckgo/autoconsent/pull/168) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Round 2: added 5 notice banner rules and tests top US sites [#167](https://github.com/duckduckgo/autoconsent/pull/167) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added 4 notice banner rules and tests top sites [#164](https://github.com/duckduckgo/autoconsent/pull/164) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add xhamster.com custom US notice banner rule and test [#154](https://github.com/duckduckgo/autoconsent/pull/154) (arasolofotsara@duckduckgo.com [@muodov](https://github.com/muodov) [@icodebyamanda](https://github.com/icodebyamanda))
+- Add youporn custom notice banner's rule and test [#158](https://github.com/duckduckgo/autoconsent/pull/158) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add pornpics custom US notice banner rule and test [#156](https://github.com/duckduckgo/autoconsent/pull/156) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add whitepages custom US notice banner rule and test [#155](https://github.com/duckduckgo/autoconsent/pull/155) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add the cmp wpcc rule and test to notice banners [#157](https://github.com/duckduckgo/autoconsent/pull/157) (arasolofotsara@duckduckgo.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Bump @types/chrome from 0.0.234 to 0.0.235 [#149](https://github.com/duckduckgo/autoconsent/pull/149) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/chrome from 0.0.206 to 0.0.234 [#144](https://github.com/duckduckgo/autoconsent/pull/144) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Tweak the Civic rule [#131](https://github.com/duckduckgo/autoconsent/pull/131) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump auto from 10.42.0 to 10.46.0 [#162](https://github.com/duckduckgo/autoconsent/pull/162) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint from 8.36.0 to 8.40.0 [#153](https://github.com/duckduckgo/autoconsent/pull/153) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/eslint-plugin from 5.59.2 to 5.59.5 [#152](https://github.com/duckduckgo/autoconsent/pull/152) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @rollup/plugin-typescript from 11.0.0 to 11.1.0 [#151](https://github.com/duckduckgo/autoconsent/pull/151) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 7
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@hyebahi](https://github.com/hyebahi)
+- Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
+- euw-arasolofotsara1 (arasolofotsara@duckduckgo.com)
+- Kunal Virk ([@kunalvirk](https://github.com/kunalvirk))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v4.1.3 (Tue Feb 14 2023)
 
 #### 🐛 Bug Fix

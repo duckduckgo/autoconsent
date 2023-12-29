@@ -38,6 +38,6 @@
     "#BorlabsCookieBox"
   ],
   "test": [{
-    "eval": "!JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.indexOf('borlabs-cookie') !== -1).split('=', 2)[1])).consents.statistics"
+    "eval": "EVAL_BORLABS_0"
   }]
 }

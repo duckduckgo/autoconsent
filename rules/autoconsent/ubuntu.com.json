@@ -1,0 +1,73 @@
+{
+    "name": "ubuntu.com",
+    "prehideSelectors": [
+        "dialog.cookie-policy"
+    ],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "dialog.cookie-policy header"
+                },
+                {
+                    "exists": "xpath///*[@id=\"modal\"]/div/header"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "dialog header"
+                },
+                {
+                    "visible": "xpath///*[@id=\"modal\"]/div/header"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "any": [
+                {
+                    "waitForThenClick": "#cookie-policy-button-accept"
+                }, {
+                    "waitForThenClick": "xpath///*[@id=\"cookie-policy-button-accept\"]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "any": [
+                {
+                    "waitForThenClick": "button.p-button"
+                },
+                {
+                    "waitForThenClick": "xpath///*[@id=\"cookie-policy-content\"]/p[4]/button[2]"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".p-switch__input:checked",
+            "optional": true,
+            "all": true
+        },
+        {
+            "any": [
+                {
+                    "waitForThenClick": "div > button"
+                },
+                {
+                    "waitForThenClick": "xpath///*[@id=\"modal\"]/div/button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_UBUNTU_COM_0"
+        }
+    ]
+}

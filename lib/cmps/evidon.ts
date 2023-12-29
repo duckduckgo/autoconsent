@@ -3,9 +3,7 @@ import { getStyleElement, hideElements } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Evidon extends AutoConsentCMPBase {
-  constructor() {
-    super("Evidon");
-  }
+  name = "Evidon";
 
   get hasSelfTest(): boolean {
     return false;

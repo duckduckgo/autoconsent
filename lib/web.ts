@@ -1,14 +1,13 @@
-import { rules as dynamicRules, createAutoCMP } from './index';
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
 import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
-import { prehide, undoPrehide } from './rule-executors';
+import { prehide, undoPrehide, wait } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
-
-export * from './index';
+import { dynamicCMPs } from './cmps/all';
+import { AutoConsentCMP } from './cmps/base';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -38,15 +37,17 @@ export default class AutoConsent {
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
-    this.rules = [...dynamicRules];
+    this.rules = [];
 
     enableLogs && console.log('autoconsent init', window.location.href);
     this.updateState({ lifecycle: 'loading' });
+
+    this.addDynamicRules();
     if (config) {
       this.initialize(config, declarativeRules);
     } else {
       if (declarativeRules) {
-        this.parseRules(declarativeRules);
+        this.parseDeclarativeRules(declarativeRules);
       }
       const initMsg: InitMessage = {
         type: "init",
@@ -65,7 +66,7 @@ export default class AutoConsent {
     }
 
     if (declarativeRules) {
-      this.parseRules(declarativeRules);
+      this.parseDeclarativeRules(declarativeRules);
     }
 
     this.rules = filterCMPs(this.rules, config);
@@ -96,18 +97,23 @@ export default class AutoConsent {
     this.updateState({ lifecycle: 'initialized' });
   }
 
-  parseRules(declarativeRules: RuleBundle) {
+  addDynamicRules() {
+    dynamicCMPs.forEach((cmp) => {
+      this.rules.push(new cmp(this));
+    });
+  }
+
+  parseDeclarativeRules(declarativeRules: RuleBundle) {
     Object.keys(declarativeRules.consentomatic).forEach((name) => {
       this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
     });
-    declarativeRules.autoconsent.forEach((rule) => {
-      this.addCMP(rule);
+    declarativeRules.autoconsent.forEach((ruleset) => {
+      this.addDeclarativeCMP(ruleset);
     });
-    enableLogs && console.log("added rules", this.rules);
   }
 
-  addCMP(config: AutoConsentCMPRule) {
-    this.rules.push(createAutoCMP(config));
+  addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
+    this.rules.push(new AutoConsentCMP(ruleset, this));
   }
 
   addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
@@ -151,7 +157,11 @@ export default class AutoConsent {
       }
       return false;
     }
+
     this.updateState({ lifecycle: 'openPopupDetected' });
+    if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
+      this.prehideElements();
+    }
 
     if (foundPopups.length > 1) {
       const errorDetails = {
@@ -202,12 +212,8 @@ export default class AutoConsent {
     }
 
     if (foundCMPs.length === 0 && retries > 0) {
-      return new Promise((resolve) => {
-        setTimeout(async () => {
-          const result = this.findCmp(retries - 1);
-          resolve(result);
-        }, 500);
-      });
+      await wait(500);
+      return this.findCmp(retries - 1);
     }
 
     return foundCMPs;
@@ -225,7 +231,10 @@ export default class AutoConsent {
         }); // notify the browser
         result.push(cmp);
       }
-    }).catch(() => null));
+    }).catch((e) => {
+      enableLogs && console.warn(`error waiting for a popup for ${cmp.name}`, e);
+      return null
+    }));
     await Promise.all(popupLookups);
     return result;
   }
@@ -330,9 +339,13 @@ export default class AutoConsent {
 
   async waitForPopup(cmp: AutoCMP, retries = 5, interval = 500): Promise<boolean> {
     enableLogs && console.log('checking if popup is open...', cmp.name);
-    const isOpen = await cmp.detectPopup();
+    const isOpen = await cmp.detectPopup().catch((e) => {
+      enableLogs && console.warn(`error detecting popup for ${cmp.name}`, e);
+      return false;
+    }); // ignore possible errors in one-time popup detection
     if (!isOpen && retries > 0) {
-      return new Promise((resolve) => setTimeout(() => resolve(this.waitForPopup(cmp, retries - 1, interval)), interval));
+      await wait(interval);
+      return this.waitForPopup(cmp, retries - 1, interval);
     }
     enableLogs && console.log(cmp.name, `popup is ${isOpen ? 'open' : 'not open'}`);
     return isOpen;
@@ -352,6 +365,17 @@ export default class AutoConsent {
     }, globalHidden);
 
     this.updateState({ prehideOn: true })
+    setTimeout(() => {
+      // unhide things if we are still looking for a pop-up
+      if (
+        this.config.enablePrehide &&
+        this.state.prehideOn &&
+        !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)
+      ) {
+        enableLogs && console.log('Process is taking too long, unhiding elements');
+        this.undoPrehide();
+      }
+    }, this.config.prehideTimeout || 2000);
     return prehide(selectors);
   }
 
@@ -372,7 +396,7 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
-    if (enableLogs && ['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
+    if (enableLogs && !['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
     }
     switch (message.type) {

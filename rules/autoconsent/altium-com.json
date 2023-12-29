@@ -1,0 +1,9 @@
+{
+  "name": "altium.com",
+  "cosmetic": true,
+  "prehideSelectors": [".altium-privacy-bar"],
+  "detectCmp": [{ "exists": ".altium-privacy-bar" }],
+  "detectPopup": [{ "exists": ".altium-privacy-bar" }],
+  "optIn": [{ "click": "a.altium-privacy-bar__btn" }],
+  "optOut": [{ "hide": [".altium-privacy-bar"] }]
+}

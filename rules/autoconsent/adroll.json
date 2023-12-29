@@ -6,6 +6,6 @@
   "optIn": [ { "waitForThenClick": "#adroll_consent_accept" } ],
   "optOut": [ { "waitForThenClick": "#adroll_consent_reject" } ],
   "test": [
-    { "eval": "!document.cookie.includes('__adroll_fpc')" }
+    { "eval": "EVAL_ADROLL_0" }
   ]
 }

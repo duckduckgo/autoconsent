@@ -2,7 +2,6 @@ import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('Onetrust', [
   'https://stackoverflow.com/',
-  'https://www.zdf.de/',
   "https://www.lovescout24.de/",
   "https://www.okcupid.com/",
   "https://doodle.com/",

@@ -5,10 +5,7 @@ import AutoConsentCMPBase from "./base";
 export default class Conversant extends AutoConsentCMPBase {
 
   prehideSelectors = [".cmp-root"]
-
-  constructor() {
-    super("Conversant");
-  }
+  name = "Conversant";
 
   get hasSelfTest(): boolean {
     return true;

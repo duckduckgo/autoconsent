@@ -1,0 +1,25 @@
+{
+  "name": "paypal-us",
+  "prehideSelectors": ["#ccpaCookieContent_wrapper, article.ppvx_modal--overpanel"],
+  "detectCmp": [{ "exists": "#ccpaCookieBanner, .privacy-modal-content" }],
+  "detectPopup": [{ "exists": "#ccpaCookieBanner, .privacy-modal-content" }],
+  "optIn": [{ "click": "#acceptAllButton" }],
+  "optOut": [
+    { 
+      "if": 
+        { "exists": "a#manageCookiesLink" },
+      "then": [
+        { "click": "a#manageCookiesLink" }
+      ],
+      "else": [
+        { "waitForVisible": ".privacy-modal-content #formContent" },
+        { 
+          "click": "#formContent .cookiepref-11m2iee-checkbox_base input:checked",
+          "all": true,
+          "optional": true
+        },
+        { "click": ".confirmCookie #submitCookiesBtn" }
+      ]
+    }
+  ]
+}

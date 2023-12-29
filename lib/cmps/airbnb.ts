@@ -4,9 +4,7 @@ import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
 export default class Airbnb extends AutoConsentCMPBase {
-  constructor() {
-    super("airbnb");
-  }
+  name: "airbnb";
 
   runContext: RunContext = {
     urlPattern: '^https://(www\\.)?airbnb\\.[^/]+/'

@@ -2,9 +2,7 @@ import { elementExists, elementVisible, wait, waitForElement, waitForThenClick }
 import AutoConsentCMPBase from "./base";
 
 export default class Uniconsent extends AutoConsentCMPBase {
-  constructor() {
-    super("Uniconsent");
-  }
+  name = "Uniconsent";
 
   get prehideSelectors(): string[] {
     return ['.unic', '.modal:has(.unic)'];

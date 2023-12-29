@@ -13,6 +13,6 @@
     ],
     "test": [
       { "wait": 500 },
-      { "eval": "window.results.results[0] === 'banner_hidden'" }
+      { "eval": "EVAL_TESTCMP_COSMETIC_0" }
     ]
   }

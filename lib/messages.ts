@@ -1,3 +1,4 @@
+import { snippets } from "./eval-snippets";
 import { Config, ConsentState, RuleBundle } from "./types";
 
 export type BackgroundMessage =
@@ -36,6 +37,7 @@ export type EvalMessage = {
   type: "eval";
   id: string;
   code: string;
+  snippetId?: keyof typeof snippets
 };
 
 export type DetectedMessage = {

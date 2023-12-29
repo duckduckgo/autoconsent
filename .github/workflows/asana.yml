@@ -1,0 +1,22 @@
+name: 'asana sync'
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - closed
+      - reopened
+      - synchronize
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    concurrency: 'asana-${{ github.repository }}'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: sammacbeth/action-asana-sync@v3
+        with:
+          ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
+          ASANA_WORKSPACE_ID: ${{ secrets.ASANA_WORKSPACE_ID }}
+          ASANA_PROJECT_ID: '1203409672862476'
+          move_to_section_id: '1203409672862480'

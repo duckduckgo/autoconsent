@@ -77,6 +77,14 @@ Both JSON and class implementations have the following components:
 
 `detectCMP`, `detectPopup`, `optOut`, `optIn`, and `test` are defined as a set of checks or actions on the page. In the JSON syntax this is a list of `AutoConsentRuleStep` objects. For `detect` checks, we return true for the check if all steps return true. For opt in and out, we execute actions in order, exiting if one fails. The following checks/actions are supported:
 
+### Element selectors
+
+Most rules use "selectors" to locate elements in a page. In most cases, a selector can be a string, or array of strings, which are used to locale elements as follows:
+ - By default, strings are treated as [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors) via the `querySelector` API. e.g. `#reject-cookies` to find an element whose `id` is 'reject-cookies'.
+ - Selectors prefixed with `xpath/` are [Xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) selectors which can locate elements in the page via [`document.evaluate`](https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#document.evaluate). e.g. `xpath///*[@id="reject-cookies"]` can find an element whose `id` is 'reject-cookies'.
+ - If an array of selectors is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id` 'reject-cookies', then looks for a match for `button` _that is a decendant_ of that element.
+ - If an array of selectors is given, and a selector returns an element that has a `shadowRoot` attribute, the next selector will run within that element's shadow DOM.
+
 ### Element exists
 
 ```json
@@ -84,7 +92,7 @@ Both JSON and class implementations have the following components:
   "exists": "selector"
 }
 ```
-Returns true if `document.querySelector(selector)` returns elements.
+Returns true if the given selector matches one or more elements.
 
 ### Element visible
 
@@ -94,7 +102,7 @@ Returns true if `document.querySelector(selector)` returns elements.
   "check": "any" | "all" | "none"
 }
 ```
-Returns true if elements returned from `document.querySelectorAll(selector)` are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
+Returns true if elements returned matched by "selector" are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
 
 ### Wait for element
 
@@ -157,11 +165,11 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 
 ```json
 {
-  "eval": "code"
+  "eval": "SNIPPET_ID"
 }
 ```
-Evaluates `code` in the context of the page. The rule is considered successful if it *evaluates to a truthy value*.
-Eval rules are not 100% reliable because they can be blocked by a CSP policy on the page. Therefore, they should only be used as a last resort when none of the other rules are sufficient.
+Evaluates a code snippet in the context of the page. The rule is considered successful if it *evaluates to a truthy value*. Snippets have to be explicitly defined in [snippets.ts](./lib/eval-snippets.ts).
+Eval rules are not 100% reliable because they can be affected by the page scripts, or blocked by a CSP policy on the page. Therefore, they should only be used as a last resort when none of the other rules are sufficient.
 
 ### Conditionals
 
@@ -180,6 +188,19 @@ Eval rules are not 100% reliable because they can be blocked by a CSP policy on 
 
 Allows to do conditional branching in JSON rules. The `if` section can contain either a "visible" or "exists" rule. Depending on the result of that rule, `then` or `else` sequences will be executed. `else` section is optional.
 The "if" rule is considered successful as long as all rules inside the chosen branch are successful. The other branch, as well as the result of the condition itself, do not affect the result of the whole rule.
+
+### Any
+
+```json
+{
+  "any": [
+    { "exists": ".button1" },
+    { "exists": ".button2" }
+  ]
+}
+```
+
+Evaluates a list of steps in order. If any return true (success), then the step exists and returns true. If all steps return false, the `any` step returns false.
 
 ### Optional actions
 

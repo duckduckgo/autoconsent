@@ -9,5 +9,5 @@
   "optOut": [
     { "waitForThenClick": ".cmplz-cookiebanner .cmplz-deny" }
   ],
-  "test": [ { "eval": "document.cookie.includes('cmplz_banner-status=dismissed')" } ]
+  "test": [ { "eval": "EVAL_COMPLIANZ_BANNER_0" } ]
 }
