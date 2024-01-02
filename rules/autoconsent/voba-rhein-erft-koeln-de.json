@@ -1,0 +1,11 @@
+{
+  "name": "voba-rhein-erft-koeln.de",
+  "runContext": {
+    "urlPattern": "^https://www\\.voba-rhein-erft-koeln\\.de/"
+  },
+  "prehideSelectors": [".darken-layer.open,.lightbox--cookie-consent"],
+  "detectCmp": [{ "exists": ".lightbox--cookie-consent" }],
+  "detectPopup": [{ "visible": ".lightbox--cookie-consent" }],
+  "optOut": [{ "click": ".cookie-consent__footer > button[type='submit']:not([data-button='selectAll'])" }],
+  "optIn": [{ "click": ".cookie-consent__footer > button[type='submit'][data-button='selectAll']" }]
+}
