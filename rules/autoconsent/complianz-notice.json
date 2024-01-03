@@ -10,6 +10,6 @@
         { "click": ".cc-dismiss", "optional": true }
     ],
     "optOut": [
-        { "hide": ["[aria-describedby=\"cookieconsent:desc\"]"] }
+        { "hide": "[aria-describedby=\"cookieconsent:desc\"]" }
     ]
 }

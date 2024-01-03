@@ -18,7 +18,7 @@
         { "click": ".moove-gdpr-modal-save-settings" }
       ],
       "else": [
-        { "hide": ["#moove_gdpr_cookie_info_bar"] }
+        { "hide": "#moove_gdpr_cookie_info_bar" }
       ]
     }
   ],

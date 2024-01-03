@@ -8,7 +8,7 @@
     { "click": "button[class*=\"cookies-banner-module_dismiss-button_\"]" }
    ],
   "optOut": [
-    { "hide": ["div[class^=\"cookies-banner-module_\"]"] },
+    { "hide": "div[class^=\"cookies-banner-module_\"]" },
     {
       "if": { "exists": "div[class^=\"cookies-banner-module_small-cookie-banner_\"]" },
       "then": [{ "eval": "EVAL_TAKEALOT_0"}],

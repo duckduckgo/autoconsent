@@ -5,5 +5,5 @@
   "detectCmp": [{ "exists": ".nrk-masthead__info-banner--cookie" }],
   "detectPopup": [{ "exists": ".nrk-masthead__info-banner--cookie" }],
   "optIn": [{ "click": "div.nrk-masthead__info-banner--cookie button > span:has(+ svg.nrk-close)" }],
-  "optOut": [{ "hide": [".nrk-masthead__info-banner--cookie"] }]
+  "optOut": [{ "hide": ".nrk-masthead__info-banner--cookie" }]
 }

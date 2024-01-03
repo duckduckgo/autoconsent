@@ -5,5 +5,5 @@
   "detectCmp": [{ "exists": "#CookiePrivacyNotice" }],
   "detectPopup": [{ "visible": "#CookiePrivacyNotice" }],
   "optIn": [{ "click": "#CookiePrivacyNotice button[data-gnav-element-name=CookiePrivacyNoticeOk]" }],
-  "optOut": [{ "hide": ["#CookiePrivacyNotice"] }]
+  "optOut": [{ "hide": "#CookiePrivacyNotice" }]
 }

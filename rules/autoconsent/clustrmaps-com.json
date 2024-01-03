@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": "#gdpr-cookie-message" }],
     "detectPopup": [{ "visible": "#gdpr-cookie-message" }],
     "optIn": [{ "click": "button#gdpr-cookie-accept" }],
-    "optOut": [{ "hide": ["#gdpr-cookie-message"] }]
+    "optOut": [{ "hide": "#gdpr-cookie-message" }]
 }

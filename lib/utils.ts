@@ -21,17 +21,15 @@ export function getStyleElement(styleOverrideElementId = "autoconsent-css-rules"
 // hide elements with a CSS rule
 export function hideElements(
   styleEl: HTMLStyleElement,
-  selectors: string[],
+  selector: string,
   method: HideMethod = 'display',
 ): boolean {
   const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
-  const rule = `${selectors.join(
-    ","
-  )} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
+  const rule = `${selector} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
 
   if (styleEl instanceof HTMLStyleElement) {
     styleEl.innerText += rule;
-    return selectors.length > 0;
+    return selector.length > 0;
   }
   return false;
 }
