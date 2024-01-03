@@ -59,6 +59,7 @@ export const snippets = {
   EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
   EVAL_IUBENDA_0: () => document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach(x => {if(x.checked) x.click()}) || true,
   EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+  EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
   EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
   EVAL_MEDIAVINE_0: () => document.querySelectorAll("[data-name=\"mediavine-gdpr-cmp\"] input[type=checkbox]").forEach(x => x.checked && x.click()) || true,
   EVAL_MICROSOFT_0: () => Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Reject|Ablehnen'))[0].click() || true,
