@@ -1,7 +1,7 @@
 {
-  "name": "voba-rhein-erft-koeln.de",
+  "name": "lightbox",
   "runContext": {
-    "urlPattern": "^https://www\\.voba-rhein-erft-koeln\\.de/"
+    "urlPattern": "^https://(www\\.)?(voba-rhein-erft-koeln|volksbank-eg)\\.de/"
   },
   "prehideSelectors": [".darken-layer.open,.lightbox--cookie-consent"],
   "detectCmp": [{ "exists": ".lightbox--cookie-consent" }],
