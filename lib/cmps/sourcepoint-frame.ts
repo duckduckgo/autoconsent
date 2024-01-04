@@ -1,4 +1,3 @@
-import { enableLogs } from "../config";
 import { click, elementExists, wait, waitForElement, waitForThenClick } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
@@ -71,6 +70,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    const enableLogs = this.autoconsent.config.enableLogs;
     if (this.ccpaPopup) {
       // toggles with 2 buttons
       const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.neutral.on .right') as NodeListOf<HTMLElement>;

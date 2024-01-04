@@ -1,4 +1,3 @@
-import { enableLogs } from "../lib/config";
 import { snippets } from "../lib/eval-snippets";
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
@@ -73,14 +72,15 @@ chrome.runtime.onMessage.addListener(
   async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
-    if (enableLogs) {
+    const autoconsentConfig: Config = await storageGet('config');
+    const enableLogs = autoconsentConfig.enableLogs;
+    enableLogs && console.log('got config', autoconsentConfig);
+    if (autoconsentConfig.enableLogs) {
       console.groupCollapsed(`${msg.type} from ${sender.origin || sender.url}`);
       console.log(msg, sender);
       console.groupEnd();
     }
     const rules: RuleBundle = await storageGet("rules");
-    const autoconsentConfig: Config = await storageGet('config');
-    enableLogs && console.log('got config', autoconsentConfig);
 
     switch (msg.type) {
       case "init":
@@ -175,6 +175,7 @@ if (manifestVersion === 2) { // MV3 handles this inside the popup
     const tabId = tab.id;
     const detectedKey = `detected${tabId}`;
     const frameId = await storageGet(detectedKey);
+    const { enableLogs } = await storageGet('config');
     if (typeof frameId === 'number') {
       storageRemove(detectedKey);
       enableLogs && console.log("action.onClicked", tabId, frameId);

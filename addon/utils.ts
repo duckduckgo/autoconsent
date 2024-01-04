@@ -1,4 +1,3 @@
-import { enableLogs } from "../lib/config";
 import { Config } from "../lib/types";
 import { storageGet, storageSet } from "./mv-compat";
 
@@ -28,7 +27,7 @@ export async function showOptOutStatus(
     title = `Click to opt out (${cmp})`;
     icon = "icons/cookie.png";
   }
-  enableLogs && console.log('Setting action state to', status);
+  console.log('Setting action state to', status);
   const action = chrome.action || chrome.pageAction;
   if (chrome.pageAction) {
     chrome.pageAction.show(tabId);
@@ -45,7 +44,7 @@ export async function showOptOutStatus(
 
 export async function initConfig() {
   const storedConfig = await storageGet('config');
-  enableLogs && console.log('storedConfig', storedConfig);
+  console.log('storedConfig', storedConfig);
   const defaultConfig: Config = {
     enabled: true,
     autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
@@ -55,9 +54,10 @@ export async function initConfig() {
     detectRetries: 20,
     isMainWorld: false,
     prehideTimeout: 2000,
+    enableLogs: false,
   };
   if (!storedConfig) {
-    enableLogs && console.log('new config', defaultConfig);
+    console.log('new config', defaultConfig);
     await storageSet({
       config: defaultConfig,
     });
@@ -70,7 +70,7 @@ export async function initConfig() {
         updatedConfig[key] = storedConfig[key];
       }
     }
-    enableLogs && console.log('updated config', updatedConfig);
+    console.log('updated config', updatedConfig);
     await storageSet({
       config: updatedConfig,
     });

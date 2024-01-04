@@ -2,7 +2,6 @@
 
 import { AutoCMP } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from "../rules";
-import { enableLogs } from "../config";
 import { click, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
 import { requestEval } from "../eval-handler";
 import AutoConsent from "../web";
@@ -49,6 +48,7 @@ export default class AutoConsentCMPBase implements AutoCMP {
       console.warn('Snippet not found', snippetId);
       return Promise.resolve(false);
     }
+    const enableLogs = this.autoconsent.config.enableLogs;
 
     if (this.autoconsent.config.isMainWorld) {
       enableLogs && console.log('inline eval:', snippetId, snippet);
@@ -120,74 +120,77 @@ export default class AutoConsentCMPBase implements AutoCMP {
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
 
-  constructor(public config: AutoConsentCMPRule, autoconsentInstance: AutoConsent) {
+  constructor(public rule: AutoConsentCMPRule, autoconsentInstance: AutoConsent) {
     super(autoconsentInstance);
-    this.name = config.name;
-    this.runContext = config.runContext || defaultRunContext;
+    this.name = rule.name;
+    this.runContext = rule.runContext || defaultRunContext;
   }
 
   get hasSelfTest(): boolean {
-    return !!this.config.test;
+    return !!this.rule.test;
   }
 
   get isIntermediate(): boolean {
-    return !!this.config.intermediate;
+    return !!this.rule.intermediate;
   }
 
   get isCosmetic(): boolean {
-    return !!this.config.cosmetic;
+    return !!this.rule.cosmetic;
   }
 
   get prehideSelectors(): string[] {
-    return this.config.prehideSelectors;
+    return this.rule.prehideSelectors;
   }
 
   async detectCmp() {
-    if (this.config.detectCmp) {
-      return this._runRulesParallel(this.config.detectCmp);
+    if (this.rule.detectCmp) {
+      return this._runRulesParallel(this.rule.detectCmp);
     }
     return false;
   }
 
   async detectPopup() {
-    if (this.config.detectPopup) {
-      return this._runRulesSequentially(this.config.detectPopup);
+    if (this.rule.detectPopup) {
+      return this._runRulesSequentially(this.rule.detectPopup);
     }
     return false;
   }
 
   async optOut() {
-    if (this.config.optOut) {
-      enableLogs && console.log('Initiated optOut()', this.config.optOut);
-      return this._runRulesSequentially(this.config.optOut);
+    const enableLogs = this.autoconsent.config.enableLogs;
+    if (this.rule.optOut) {
+      enableLogs && console.log('Initiated optOut()', this.rule.optOut);
+      return this._runRulesSequentially(this.rule.optOut);
     }
     return false;
   }
 
   async optIn() {
-    if (this.config.optIn) {
-      enableLogs && console.log('Initiated optIn()', this.config.optIn);
-      return this._runRulesSequentially(this.config.optIn);
+    const enableLogs = this.autoconsent.config.enableLogs;
+    if (this.rule.optIn) {
+      enableLogs && console.log('Initiated optIn()', this.rule.optIn);
+      return this._runRulesSequentially(this.rule.optIn);
     }
     return false;
   }
 
   async openCmp() {
-    if (this.config.openCmp) {
-      return this._runRulesSequentially(this.config.openCmp);
+    if (this.rule.openCmp) {
+      return this._runRulesSequentially(this.rule.openCmp);
     }
     return false;
   }
 
   async test() {
     if (this.hasSelfTest) {
-      return this._runRulesSequentially(this.config.test);
+      return this._runRulesSequentially(this.rule.test);
     }
     return super.test();
   }
 
   async evaluateRuleStep(rule: AutoConsentRuleStep) {
     const results = [];
+    const enableLogs = this.autoconsent.config.enableLogs;
     if (rule.exists) {
       results.push(elementExists(rule.exists));
     }
@@ -255,6 +258,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
   
   async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
+    const enableLogs = this.autoconsent.config.enableLogs;
     for (const rule of rules) {
       enableLogs && console.log('Running rule...', rule);
       const result = await this.evaluateRuleStep(rule);

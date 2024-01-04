@@ -1,7 +1,6 @@
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
-import { enableLogs } from './config';
 import { BackgroundMessage, InitMessage } from './messages';
 import { prehide, undoPrehide, wait } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
@@ -39,7 +38,6 @@ export default class AutoConsent {
     this.sendContentMessage = sendContentMessage;
     this.rules = [];
 
-    enableLogs && console.log('autoconsent init', window.location.href);
     this.updateState({ lifecycle: 'loading' });
 
     this.addDynamicRules();
@@ -59,9 +57,10 @@ export default class AutoConsent {
   }
 
   initialize(config: Config, declarativeRules: RuleBundle) {
+    config.enableLogs && console.log('autoconsent init', window.location.href);
     this.config = config;
     if (!config.enabled) {
-      enableLogs && console.log("autoconsent is disabled");
+      config.enableLogs && console.log("autoconsent is disabled");
       return;
     }
 
@@ -130,6 +129,7 @@ export default class AutoConsent {
   }
 
   async _start() {
+    const enableLogs = this.config.enableLogs;
     enableLogs && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
     const foundCmps = await this.findCmp(this.config.detectRetries);
@@ -188,6 +188,7 @@ export default class AutoConsent {
   }
 
   async findCmp(retries: number): Promise<AutoCMP[]> {
+    const enableLogs = this.config.enableLogs;
     this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 })
     const foundCMPs: AutoCMP[] = [];
 
@@ -220,6 +221,7 @@ export default class AutoConsent {
   }
 
   async detectPopups(cmps: AutoCMP[]): Promise<AutoCMP[]> {
+    const enableLogs = this.config.enableLogs;
     const result: AutoCMP[] = [];
     const popupLookups = cmps.map((cmp) => this.waitForPopup(cmp).then((isOpen) => {
       if (isOpen) {
@@ -240,6 +242,7 @@ export default class AutoConsent {
   }
 
   async doOptOut(): Promise<boolean> {
+    const enableLogs = this.config.enableLogs;
     this.updateState({ lifecycle: 'runningOptOut' })
     let optOutResult;
     if (!this.foundCmp) {
@@ -279,6 +282,7 @@ export default class AutoConsent {
   }
 
   async doOptIn(): Promise<boolean> {
+    const enableLogs = this.config.enableLogs;
     this.updateState({ lifecycle: 'runningOptIn' })
     let optInResult;
     if (!this.foundCmp) {
@@ -318,6 +322,7 @@ export default class AutoConsent {
   }
 
   async doSelfTest(): Promise<boolean> {
+    const enableLogs = this.config.enableLogs;
     let selfTestResult;
     if (!this.foundCmp) {
       enableLogs && console.log('no CMP to self test');
@@ -338,6 +343,7 @@ export default class AutoConsent {
   }
 
   async waitForPopup(cmp: AutoCMP, retries = 5, interval = 500): Promise<boolean> {
+    const enableLogs = this.config.enableLogs;
     enableLogs && console.log('checking if popup is open...', cmp.name);
     const isOpen = await cmp.detectPopup().catch((e) => {
       enableLogs && console.warn(`error detecting popup for ${cmp.name}`, e);
@@ -352,6 +358,7 @@ export default class AutoConsent {
   }
 
   prehideElements(): boolean {
+    const enableLogs = this.config.enableLogs;
     // hide rules not specific to a single CMP rule
     const globalHidden = [
       "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium",
@@ -396,6 +403,7 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
+    const enableLogs = this.config.enableLogs;
     if (enableLogs && !['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
     }

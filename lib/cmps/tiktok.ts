@@ -1,4 +1,3 @@
-import { enableLogs } from "../config";
 import { elementExists } from "../rule-executors";
 import { RunContext } from "../rules";
 import { isElementVisible } from "../utils";
@@ -41,6 +40,7 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    const enableLogs = this.autoconsent.config.enableLogs;
     const declineButton = this.getShadowRoot().querySelector('.button-wrapper button:first-child') as HTMLElement;
     if (declineButton) {
       enableLogs && console.log("[clicking]", declineButton);
@@ -53,6 +53,7 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   async optIn() {
+    const enableLogs = this.autoconsent.config.enableLogs;
     const acceptButton = this.getShadowRoot().querySelector('.button-wrapper button:last-child') as HTMLElement;
     if (acceptButton) {
       enableLogs && console.log("[clicking]", acceptButton);

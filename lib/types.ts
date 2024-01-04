@@ -36,6 +36,7 @@ export type Config = {
   detectRetries: number;
   isMainWorld: boolean;
   prehideTimeout: number;
+  enableLogs: boolean; // TODO: make it more granular, e.g per rulestep type
 }
 
 export type LifecycleState = 'loading' |
