@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { DomActions } from "../lib/rule-executors";
+import { DomActions } from "../lib/dom-actions";
 
 declare global {
   interface Window {

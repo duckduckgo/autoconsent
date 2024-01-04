@@ -17,7 +17,7 @@
     "test:webkit": "playwright test --project webkit",
     "test:firefox": "playwright test --project firefox",
     "test:chrome": "playwright test --project chrome",
-    "test:lib": "playwright test tests/rule-executors.spec.ts",
+    "test:lib": "playwright test tests/dom-actions.spec.ts",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.mjs",

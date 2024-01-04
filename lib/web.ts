@@ -6,7 +6,7 @@ import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
-import { DomActions } from './rule-executors';
+import { DomActions } from './dom-actions';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {

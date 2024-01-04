@@ -1,5 +1,5 @@
 import Autoconsent from "../lib/web";
-import { DomActions } from "../lib/rule-executors";
+import { DomActions } from "../lib/dom-actions";
 import * as rules from '../rules/rules.json';
 
 declare global {
