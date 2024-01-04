@@ -1,5 +1,8 @@
 {
   "name": "hema",
+  "runContext": {
+    "urlPattern": "^https://(www\\.)?hema\\.com/"
+  },
   "prehideSelectors": [".cookie-modal"],
   "detectCmp": [
     { "exists": ".cookie-modal" }
