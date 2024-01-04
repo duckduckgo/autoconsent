@@ -233,30 +233,32 @@ export default class AutoConsent {
     return cmp
   }
 
-  detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => unknown): Promise<AutoCMP[]> {
-    return new Promise(resolve => {
-      const foundCmps: AutoCMP[] = []
-      let completed = 0
+  async detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => unknown) {
+    const tasks = cmps.map(
+      cmp => this.detectPopup(cmp)
+        // Handle errors immediately and propagate the error to next handler: Promise.allSettled
+        // If we gracefully return errors, Promise.race needs another evaluation
+        .catch(error => {
+          enableLogs && console.warn(`error waiting for a popup for ${cmp.name}`, error)
 
-      for (let i = 0, l = cmps.length; i < l; i++) {
-        this.detectPopup(cmps[i])
-          .then(cmp => {
-            foundCmps.push(cmp)
-            
-            if (foundCmps.length === 1) {
-              onFirstPopupAppears(cmp)
-            }
-          })
-          .catch(error => {
-            enableLogs && console.warn(`error waiting for a popup for ${cmps[i].name}`, error)
-          })
-          .finally(() => {
-            if (++completed === l) {
-              resolve(foundCmps)
-            }
-          })
+          throw error
+        })
+    )
+
+    const firstCmpWithPopup = await Promise.race(tasks)
+
+    onFirstPopupAppears(firstCmpWithPopup)
+
+    const results = await Promise.allSettled(tasks)
+    const popups: AutoCMP[] = []
+
+    for (const result of results) {
+      if (result.status === 'fulfilled') {
+        popups.push(result.value)
       }
-    })
+    }
+
+    return popups
   }
 
   async handlePopup(cmp: AutoCMP): Promise<boolean> {
