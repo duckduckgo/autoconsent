@@ -1,4 +1,3 @@
-import { click, elementExists, wait } from '../rule-executors';
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
@@ -29,26 +28,26 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async optOut() {
-    await wait(500);
+    await this.wait(500);
     let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
-    await wait(500); // prevent race conditions
+    await this.wait(500); // prevent race conditions
     res = res && await this.mainWorldEval('EVAL_COOKIEBOT_4'); // hide
     return res;
   }
 
   async optIn() {
-    if (elementExists('#dtcookie-container')) {
-      return click('.h-dtcookie-accept');
+    if (this.elementExists('#dtcookie-container')) {
+      return this.click('.h-dtcookie-accept');
     }
 
-    click('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled', true);
-    click('#CybotCookiebotDialogBodyLevelButtonAccept');
-    click('#CybotCookiebotDialogBodyButtonAccept');
+    this.click('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled', true);
+    this.click('#CybotCookiebotDialogBodyLevelButtonAccept');
+    this.click('#CybotCookiebotDialogBodyButtonAccept');
     return true;
   }
 
   async test() {
-    await wait(500);
+    await this.wait(500);
     return await this.mainWorldEval('EVAL_COOKIEBOT_5');
   }
 }

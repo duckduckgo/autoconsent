@@ -1,8 +1,7 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
-import { AutoCMP } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from "../rules";
-import { click, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
+import { AutoCMP, DomActionsProvider } from "../types";
+import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from "../rules";
 import { requestEval } from "../eval-handler";
 import AutoConsent from "../web";
 import { getFunctionBody, snippets } from "../eval-snippets";
@@ -21,7 +20,7 @@ export const defaultRunContext: RunContext = {
   urlPattern: "",
 }
 
-export default class AutoConsentCMPBase implements AutoCMP {
+export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
   name: string
   runContext: RunContext = defaultRunContext;
   autoconsent: AutoConsent;
@@ -116,6 +115,59 @@ export default class AutoConsentCMPBase implements AutoCMP {
     // try IAB by default
     return Promise.resolve(true);
   }
+
+  // Implementing DomActionsProvider below:
+  click(selector: ElementSelector, all = false) {
+    return this.autoconsent.domActions.click(selector, all);
+  }
+
+  elementExists(selector: ElementSelector) {
+    return this.autoconsent.domActions.elementExists(selector);
+  }
+
+  elementVisible(selector: ElementSelector, check: VisibilityCheck) {
+    return this.autoconsent.domActions.elementVisible(selector, check);
+  }
+
+  waitForElement(selector: ElementSelector, timeout?: number) {
+    return this.autoconsent.domActions.waitForElement(selector, timeout);
+  }
+
+  waitForVisible(selector: ElementSelector, timeout?: number, check?: VisibilityCheck) {
+    return this.autoconsent.domActions.waitForVisible(selector, timeout, check);
+  }
+
+  waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+    return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
+  }
+
+  wait(ms: number) {
+    return this.autoconsent.domActions.wait(ms);
+  }
+
+  hide(selectors: string[], method: HideMethod) {
+    return this.autoconsent.domActions.hide(selectors, method);
+  }
+
+  prehide(selectors: string[]) {
+    return this.autoconsent.domActions.prehide(selectors);
+  }
+
+  undoPrehide() {
+    return this.autoconsent.domActions.undoPrehide();
+  }
+
+  querySingleReplySelector(selector: string, parent?: any) {
+    return this.autoconsent.domActions.querySingleReplySelector(selector, parent);
+  }
+
+  querySelectorChain(selectors: string[]) {
+    return this.autoconsent.domActions.querySelectorChain(selectors);
+  }
+
+  elementSelector(selector: ElementSelector) {
+    return this.autoconsent.domActions.elementSelector(selector);
+  }
 }
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
@@ -192,32 +244,32 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     const results = [];
     const enableLogs = this.autoconsent.config.enableLogs;
     if (rule.exists) {
-      results.push(elementExists(rule.exists));
+      results.push(this.elementExists(rule.exists));
     }
     if (rule.visible) {
-      results.push(elementVisible(rule.visible, rule.check));
+      results.push(this.elementVisible(rule.visible, rule.check));
     }
     if (rule.eval) {
       const res = this.mainWorldEval(rule.eval)
       results.push(res);
     }
     if (rule.waitFor) {
-      results.push(waitForElement(rule.waitFor, rule.timeout));
+      results.push(this.waitForElement(rule.waitFor, rule.timeout));
     }
     if (rule.waitForVisible) {
-      results.push(waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
+      results.push(this.waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
     }
     if (rule.click) {
-      results.push(click(rule.click, rule.all));
+      results.push(this.click(rule.click, rule.all));
     }
     if (rule.waitForThenClick) {
-      results.push(waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
+      results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
     }
     if (rule.wait) {
-      results.push(wait(rule.wait));
+      results.push(this.wait(rule.wait));
     }
     if (rule.hide) {
-      results.push(hide(rule.hide, rule.method));
+      results.push(this.hide(rule.hide, rule.method));
     }
     if (rule.if) {
       if (!rule.if.exists && !rule.if.visible) {

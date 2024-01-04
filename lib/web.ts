@@ -2,11 +2,11 @@ import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './type
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule } from './rules';
 import { BackgroundMessage, InitMessage } from './messages';
-import { prehide, undoPrehide, wait } from './rule-executors';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
+import { DomActions } from './rule-executors';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -31,6 +31,7 @@ export default class AutoConsent {
     detectedPopups: [],
     selfTest: null,
   };
+  domActions: DomActions;
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
@@ -54,6 +55,7 @@ export default class AutoConsent {
       sendContentMessage(initMsg);
       this.updateState({ lifecycle: 'waitingForInitResponse' });
     }
+    this.domActions = new DomActions(this);
   }
 
   initialize(config: Config, declarativeRules: RuleBundle) {
@@ -213,7 +215,7 @@ export default class AutoConsent {
     }
 
     if (foundCMPs.length === 0 && retries > 0) {
-      await wait(500);
+      await this.domActions.wait(500);
       return this.findCmp(retries - 1);
     }
 
@@ -350,7 +352,7 @@ export default class AutoConsent {
       return false;
     }); // ignore possible errors in one-time popup detection
     if (!isOpen && retries > 0) {
-      await wait(interval);
+      await this.domActions.wait(interval);
       return this.waitForPopup(cmp, retries - 1, interval);
     }
     enableLogs && console.log(cmp.name, `popup is ${isOpen ? 'open' : 'not open'}`);
@@ -383,12 +385,12 @@ export default class AutoConsent {
         this.undoPrehide();
       }
     }, this.config.prehideTimeout || 2000);
-    return prehide(selectors);
+    return this.domActions.prehide(selectors);
   }
 
   undoPrehide(): boolean {
     this.updateState({ prehideOn: false })
-    return undoPrehide();
+    return this.domActions.undoPrehide();
   }
 
   updateState(change: Partial<ConsentState>) {
@@ -403,7 +405,7 @@ export default class AutoConsent {
   }
 
   async receiveMessageCallback(message: BackgroundMessage) {
-    const enableLogs = this.config.enableLogs;
+    const enableLogs = this.config?.enableLogs;
     if (enableLogs && !['evalResp', 'report'].includes(message.type) /* evals are noisy */) {
       console.log('received from background', message, window.location.href);
     }

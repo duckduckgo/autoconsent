@@ -1,4 +1,3 @@
-import { elementExists } from "../rule-executors";
 import { RunContext } from "../rules";
 import { isElementVisible } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -31,7 +30,7 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists("tiktok-cookie-banner");
+    return this.elementExists("tiktok-cookie-banner");
   }
 
   async detectPopup() {

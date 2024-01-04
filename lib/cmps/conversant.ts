@@ -1,4 +1,3 @@
-import { click, elementExists, elementVisible, waitForElement, waitForThenClick } from "../rule-executors";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
 
@@ -20,24 +19,24 @@ export default class Conversant extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists(".cmp-root .cmp-receptacle");
+    return this.elementExists(".cmp-root .cmp-receptacle");
   }
 
   async detectPopup() {
-    return elementVisible(".cmp-root .cmp-receptacle", 'any');
+    return this.elementVisible(".cmp-root .cmp-receptacle", 'any');
   }
 
   async optOut() {
-    if (!(await waitForThenClick(".cmp-main-button:not(.cmp-main-button--primary)"))) {
+    if (!(await this.waitForThenClick(".cmp-main-button:not(.cmp-main-button--primary)"))) {
       return false;
     }
 
-    if (!(await waitForElement(".cmp-view-tab-tabs"))) {
+    if (!(await this.waitForElement(".cmp-view-tab-tabs"))) {
       return false;
     }
 
-    await waitForThenClick(".cmp-view-tab-tabs > :first-child");
-    await waitForThenClick(".cmp-view-tab-tabs > .cmp-view-tab--active:first-child");
+    await this.waitForThenClick(".cmp-view-tab-tabs > :first-child");
+    await this.waitForThenClick(".cmp-view-tab-tabs > .cmp-view-tab--active:first-child");
 
     for (const item of Array.from(document.querySelectorAll('.cmp-accordion-item'))) {
       (<HTMLElement>item.querySelector('.cmp-accordion-item-title')).click();
@@ -47,12 +46,12 @@ export default class Conversant extends AutoConsentCMPBase {
       content.querySelectorAll('.cmp-toggle-actions .cmp-toggle-checkbox:not(.cmp-toggle-checkbox--active)').forEach((e: HTMLElement) => e.click());
       // await waitFor(() => !item.querySelector('.cmp-toggle-deny--active,.cmp-toggle-checkbox--active'), 5, 50); // this may take a long time
     }
-    await click(".cmp-main-button:not(.cmp-main-button--primary)");
+    await this.click(".cmp-main-button:not(.cmp-main-button--primary)");
     return true;
   }
 
   async optIn() {
-    return waitForThenClick(".cmp-main-button.cmp-main-button--primary");
+    return this.waitForThenClick(".cmp-main-button.cmp-main-button--primary");
   }
 
   async test() {

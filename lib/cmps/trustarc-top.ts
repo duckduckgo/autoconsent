@@ -1,4 +1,3 @@
-import { click, elementExists, elementVisible } from "../rule-executors";
 import { RunContext } from "../rules";
 import { getStyleElement, hideElements } from "../utils";
 import AutoConsent from "../web";
@@ -47,7 +46,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    const result = elementExists(`${cookieSettingsButton},${bannerContainer}`);
+    const result = this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
     if (result) {
       // additionally detect the opt-out button
       this._shortcutButton = document.querySelector(shortcutOptOut);
@@ -57,11 +56,11 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
   async detectPopup() {
     // not every element should exist, but if it does, it's a popup
-    return elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'all');
+    return this.elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'all');
   }
 
   openFrame() {
-    click(cookieSettingsButton);
+    this.click(cookieSettingsButton);
   }
 
   async optOut() {
@@ -75,7 +74,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
       getStyleElement(),
       [".truste_popframe", ".truste_overlay", ".truste_box_overlay", bannerContainer],
     );
-    click(cookieSettingsButton);
+    this.click(cookieSettingsButton);
 
     // schedule cleanup
     setTimeout(() => {
@@ -87,7 +86,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
   async optIn() {
     this._optInDone = true; // just a hack to force autoconsentDone
-    return click(shortcutOptIn);
+    return this.click(shortcutOptIn);
   }
 
   async openCmp() {

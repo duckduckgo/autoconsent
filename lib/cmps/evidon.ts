@@ -1,4 +1,3 @@
-import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
 import { getStyleElement, hideElements } from "../utils";
 import AutoConsentCMPBase from "./base";
 
@@ -18,28 +17,28 @@ export default class Evidon extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists("#_evidon_banner");
+    return this.elementExists("#_evidon_banner");
   }
 
   async detectPopup() {
-    return elementVisible("#_evidon_banner", 'any');
+    return this.elementVisible("#_evidon_banner", 'any');
   }
 
   async optOut() {
-    if (click("#_evidon-decline-button")) {
+    if (this.click("#_evidon-decline-button")) {
       return true;
     }
 
     hideElements(getStyleElement(), ["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"]);
-    click("#_evidon-option-button");
+    this.click("#_evidon-option-button");
 
-    await waitForElement("#evidon-prefdiag-overlay", 5000);
+    await this.waitForElement("#evidon-prefdiag-overlay", 5000);
 
-    click("#evidon-prefdiag-decline");
+    this.click("#evidon-prefdiag-decline");
     return true;
   }
 
   async optIn() {
-    return click("#_evidon-accept-button");
+    return this.click("#_evidon-accept-button");
   }
 }

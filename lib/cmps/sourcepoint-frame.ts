@@ -1,4 +1,3 @@
-import { click, elementExists, wait, waitForElement, waitForThenClick } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -46,20 +45,20 @@ export default class SourcePoint extends AutoConsentCMPBase {
       return true;
     }
     if (this.ccpaPopup) {
-      return await waitForElement('.priv-save-btn', 2000);
+      return await this.waitForElement('.priv-save-btn', 2000);
     }
     // check for the paywall button, and bail if it exists to prevent broken opt out
-    await waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT", 2000);
-    return !elementExists('.sp_choice_type_9');
+    await this.waitForElement(".sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT", 2000);
+    return !this.elementExists('.sp_choice_type_9');
   }
 
   async optIn() {
-    await waitForElement(".sp_choice_type_11,.sp_choice_type_ACCEPT_ALL", 2000);
-    if (click(".sp_choice_type_11")) {
+    await this.waitForElement(".sp_choice_type_11,.sp_choice_type_ACCEPT_ALL", 2000);
+    if (this.click(".sp_choice_type_11")) {
       return true;
     }
 
-    if (click('.sp_choice_type_ACCEPT_ALL')) {
+    if (this.click('.sp_choice_type_ACCEPT_ALL')) {
       return true;
     }
     return false;
@@ -82,19 +81,19 @@ export default class SourcePoint extends AutoConsentCMPBase {
       for (const t of switches) {
         t.click()
       }
-      return click('.priv-save-btn');
+      return this.click('.priv-save-btn');
     }
     if (!this.isManagerOpen()) {
-      const actionable = await waitForElement('.sp_choice_type_12,.sp_choice_type_13');
+      const actionable = await this.waitForElement('.sp_choice_type_12,.sp_choice_type_13');
       if (!actionable) {
         return false;
       }
-      if (!elementExists(".sp_choice_type_12")) {
+      if (!this.elementExists(".sp_choice_type_12")) {
         // do not sell button
-        return click(".sp_choice_type_13");
+        return this.click(".sp_choice_type_13");
       }
 
-      click(".sp_choice_type_12");
+      this.click(".sp_choice_type_12");
       // the page may navigate at this point but that's okay
       await waitFor(
         () => this.isManagerOpen(),
@@ -103,35 +102,35 @@ export default class SourcePoint extends AutoConsentCMPBase {
       );
     }
 
-    await waitForElement('.type-modal', 20000);
+    await this.waitForElement('.type-modal', 20000);
 
     // check "Do Not Sell" (CCPA) toggle if it exists
-    waitForThenClick('.ccpa-stack .pm-switch[aria-checked=true] .slider', 500, true); // the UI is reversed: "unchecked" switch displays as an enabled toggle
+    this.waitForThenClick('.ccpa-stack .pm-switch[aria-checked=true] .slider', 500, true); // the UI is reversed: "unchecked" switch displays as an enabled toggle
 
     // reject all button is offered by some sites
     try {
       const rejectSelector1 = '.sp_choice_type_REJECT_ALL';
       const rejectSelector2 = '.reject-toggle';
       const path = await Promise.race([
-        waitForElement(rejectSelector1, 2000).then(success => success ? 0: -1),
-        waitForElement(rejectSelector2, 2000).then(success => success ? 1: -1),
-        waitForElement('.pm-features', 2000).then(success => success ? 2: -1),
+        this.waitForElement(rejectSelector1, 2000).then(success => success ? 0: -1),
+        this.waitForElement(rejectSelector2, 2000).then(success => success ? 1: -1),
+        this.waitForElement('.pm-features', 2000).then(success => success ? 2: -1),
       ]);
       if (path === 0) {
-        await wait(1000);
-        return click(rejectSelector1);
+        await this.wait(1000);
+        return this.click(rejectSelector1);
       } else if (path === 1) {
-        click(rejectSelector2);
+        this.click(rejectSelector2);
       } else if (path === 2) {
-        await waitForElement('.pm-features', 10000);
-        click('.checked > span', true);
+        await this.waitForElement('.pm-features', 10000);
+        this.click('.checked > span', true);
 
-        click('.chevron');
+        this.click('.chevron');
       }
     } catch (e) {
       enableLogs && console.warn(e);
     }
     // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
-    return click('.sp_choice_type_SAVE_AND_EXIT');
+    return this.click('.sp_choice_type_SAVE_AND_EXIT');
   }
 }

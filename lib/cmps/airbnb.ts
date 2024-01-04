@@ -1,4 +1,3 @@
-import { elementExists, elementVisible, waitForThenClick } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -28,25 +27,25 @@ export default class Airbnb extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists('div[data-testid=main-cookies-banner-container]');
+    return this.elementExists('div[data-testid=main-cookies-banner-container]');
   }
 
   async detectPopup() {
-    return elementVisible('div[data-testid=main-cookies-banner-container', 'any');
+    return this.elementVisible('div[data-testid=main-cookies-banner-container', 'any');
   }
 
   async optOut() {
-    await waitForThenClick('div[data-testid=main-cookies-banner-container] button._snbhip0');
+    await this.waitForThenClick('div[data-testid=main-cookies-banner-container] button._snbhip0');
     let check;
     // eslint-disable-next-line no-cond-assign
     while (check = document.querySelector('[data-testid=modal-container] button[aria-checked=true]:not([disabled])') as HTMLElement) { // each click may toggle multiple checkboxes
       check.click();
     }
-    return waitForThenClick('button[data-testid=save-btn]');
+    return this.waitForThenClick('button[data-testid=save-btn]');
   }
 
   async optIn() {
-    return waitForThenClick('div[data-testid=main-cookies-banner-container] button._148dgdpk');
+    return this.waitForThenClick('div[data-testid=main-cookies-banner-container] button._148dgdpk');
   }
 
   async test() {
