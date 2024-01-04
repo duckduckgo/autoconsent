@@ -14,6 +14,7 @@ async function init() {
   const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
   const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
   const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
+  const enableLogsCheckbox = document.querySelector('input#enable-logs') as HTMLInputElement;
   const ruleReloadButton = document.querySelector('#reload') as HTMLButtonElement;
   const resetButton = document.querySelector('#reset') as HTMLButtonElement;
 
@@ -46,6 +47,7 @@ async function init() {
   // set form initial values
 
   enabledCheckbox.checked = autoconsentConfig.enabled;
+  enableLogsCheckbox.checked = autoconsentConfig.enableLogs;
   retriesInput.value = autoconsentConfig.detectRetries.toString();
   if (autoconsentConfig.autoAction === 'optIn') {
     optInRadio.checked = true;
@@ -106,6 +108,11 @@ async function init() {
   }
   cosmeticOnRadio.addEventListener('change', cosmeticChange);
   cosmeticOffRadio.addEventListener('change', cosmeticChange);
+
+  enableLogsCheckbox.addEventListener('change', () => {
+    autoconsentConfig.enableLogs = enableLogsCheckbox.checked;
+    storageSet({ config: autoconsentConfig });
+  });
 
   ruleReloadButton.addEventListener('click', async () => {
     const res = await fetch("./rules.json");
