@@ -54,7 +54,13 @@ export async function initConfig() {
     detectRetries: 20,
     isMainWorld: false,
     prehideTimeout: 2000,
-    enableLogs: false,
+    logs: {
+      lifecycle: false,
+      rulesteps: false,
+      evals: false,
+      errors: true,
+      messages: false,
+    },
   };
   if (!storedConfig) {
     console.log('new config', defaultConfig);
@@ -66,7 +72,7 @@ export async function initConfig() {
     for (const key of Object.keys(defaultConfig)) {
       if (typeof storedConfig[key] !== 'undefined') {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TS doesn't know that we've checked for undefined
+        // @ts-expect-error - TS doesn't know that we've checked for undefined
         updatedConfig[key] = storedConfig[key];
       }
     }

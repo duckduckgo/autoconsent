@@ -47,24 +47,24 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
       console.warn('Snippet not found', snippetId);
       return Promise.resolve(false);
     }
-    const enableLogs = this.autoconsent.config.enableLogs;
+    const logsConfig = this.autoconsent.config.logs;
 
     if (this.autoconsent.config.isMainWorld) {
-      enableLogs && console.log('inline eval:', snippetId, snippet);
+      logsConfig.evals && console.log('inline eval:', snippetId, snippet);
       let result = false;
       try {
         result = !!snippet.call(globalThis);
       } catch (e) {
         // ignore exceptions
-        enableLogs && console.error('error evaluating rule', snippetId, e);
+        logsConfig.evals && console.error('error evaluating rule', snippetId, e);
       }
       return Promise.resolve(result);
     }
 
     const snippetSrc = getFunctionBody(snippet);
-    enableLogs && console.log('async eval:', snippetId, snippetSrc);
+    logsConfig.evals && console.log('async eval:', snippetId, snippetSrc);
     return requestEval(snippetSrc, snippetId).catch((e) => {
-      enableLogs && console.error('error evaluating rule', snippetId, e);
+      logsConfig.evals && console.error('error evaluating rule', snippetId, e);
       return false;
     });
   }
@@ -209,18 +209,18 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
 
   async optOut() {
-    const enableLogs = this.autoconsent.config.enableLogs;
+    const logsConfig = this.autoconsent.config.logs;
     if (this.rule.optOut) {
-      enableLogs && console.log('Initiated optOut()', this.rule.optOut);
+      logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut);
       return this._runRulesSequentially(this.rule.optOut);
     }
     return false;
   }
 
   async optIn() {
-    const enableLogs = this.autoconsent.config.enableLogs;
+    const logsConfig = this.autoconsent.config.logs;
     if (this.rule.optIn) {
-      enableLogs && console.log('Initiated optIn()', this.rule.optIn);
+      logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn);
       return this._runRulesSequentially(this.rule.optIn);
     }
     return false;
@@ -242,7 +242,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
   async evaluateRuleStep(rule: AutoConsentRuleStep) {
     const results = [];
-    const enableLogs = this.autoconsent.config.enableLogs;
+    const logsConfig = this.autoconsent.config.logs;
     if (rule.exists) {
       results.push(this.elementExists(rule.exists));
     }
@@ -277,7 +277,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         return false;
       }
       const condition = await this.evaluateRuleStep(rule.if);
-      enableLogs && console.log('Condition is', condition);
+      logsConfig.rulesteps && console.log('Condition is', condition);
       if (condition) {
         results.push(this._runRulesSequentially(rule.then));
       } else if (rule.else) {
@@ -294,7 +294,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
   
     if (results.length === 0) {
-      enableLogs && console.warn('Unrecognized rule', rule);
+      logsConfig.errors && console.warn('Unrecognized rule', rule);
       return false;
     }
   
@@ -310,11 +310,11 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
   
   async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
-    const enableLogs = this.autoconsent.config.enableLogs;
+    const logsConfig = this.autoconsent.config.logs;
     for (const rule of rules) {
-      enableLogs && console.log('Running rule...', rule);
+      logsConfig.rulesteps && console.log('Running rule...', rule);
       const result = await this.evaluateRuleStep(rule);
-      enableLogs && console.log('...rule result', result);
+      logsConfig.rulesteps && console.log('...rule result', result);
       if (!result && !rule.optional) {
         return false;
       }

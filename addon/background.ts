@@ -73,9 +73,9 @@ chrome.runtime.onMessage.addListener(
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
     const autoconsentConfig: Config = await storageGet('config');
-    const enableLogs = autoconsentConfig.enableLogs;
-    enableLogs && console.log('got config', autoconsentConfig);
-    if (autoconsentConfig.enableLogs) {
+    const logsConfig = autoconsentConfig.logs;
+    if (logsConfig.lifecycle) {
+      console.log('got config', autoconsentConfig);
       console.groupCollapsed(`${msg.type} from ${sender.origin || sender.url}`);
       console.log(msg, sender);
       console.groupEnd();
@@ -97,7 +97,7 @@ chrome.runtime.onMessage.addListener(
         break;
       case "eval":
         evalInTab(tabId, frameId, msg.code, msg.snippetId).then(([result]) => {
-          if (enableLogs) {
+          if (logsConfig.evals) {
             console.groupCollapsed(`eval result for ${sender.origin || sender.url}`);
             console.log(msg.code, result.result);
             console.groupEnd();
@@ -129,7 +129,7 @@ chrome.runtime.onMessage.addListener(
         }
         break;
       case "selfTestResult":
-        enableLogs && console.log(`Self-test result ${msg.result}`);
+        logsConfig.lifecycle && console.log(`Self-test result ${msg.result}`);
         if (msg.result) {
           await showOptOutStatus(tabId, "verified", msg.cmp);
         }
@@ -141,7 +141,7 @@ chrome.runtime.onMessage.addListener(
         const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
 
         if (typeof selfTestFrameId === 'number') {
-          enableLogs && console.log(`Requesting self-test in ${selfTestFrameId}`);
+          logsConfig.lifecycle && console.log(`Requesting self-test in ${selfTestFrameId}`);
           storageRemove(selfTestKey);
           chrome.tabs.sendMessage(tabId, {
             type: "selfTest",
@@ -149,7 +149,7 @@ chrome.runtime.onMessage.addListener(
             frameId: selfTestFrameId,
           });
         } else {
-          enableLogs && console.log(`No self-test scheduled`);
+          logsConfig.lifecycle && console.log(`No self-test scheduled`);
         }
         break;
       }
@@ -175,10 +175,8 @@ if (manifestVersion === 2) { // MV3 handles this inside the popup
     const tabId = tab.id;
     const detectedKey = `detected${tabId}`;
     const frameId = await storageGet(detectedKey);
-    const { enableLogs } = await storageGet('config');
     if (typeof frameId === 'number') {
       storageRemove(detectedKey);
-      enableLogs && console.log("action.onClicked", tabId, frameId);
       await showOptOutStatus(tabId, "working");
       chrome.tabs.sendMessage(tabId, {
         type: "optOut",

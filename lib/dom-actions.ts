@@ -8,7 +8,7 @@ export class DomActions implements DomActionsProvider {
 
   click(selector: ElementSelector, all = false): boolean {
     const elem = this.elementSelector(selector)
-    this.autoconsentInstance.config.enableLogs && console.log("[click]", selector, all, elem);
+    this.autoconsentInstance.config.logs.rulesteps && console.log("[click]", selector, all, elem);
     if (elem.length > 0) {
       if (all) {
         elem.forEach((e) => e.click());
@@ -47,7 +47,7 @@ export class DomActions implements DomActionsProvider {
   waitForElement(selector: ElementSelector, timeout = 10000): Promise<boolean> {
     const interval = 200;
     const times = Math.ceil((timeout) / interval);
-    this.autoconsentInstance.config.enableLogs && console.log("[waitForElement]", selector);
+    this.autoconsentInstance.config.logs.rulesteps && console.log("[waitForElement]", selector);
     return waitFor(
       () => this.elementSelector(selector).length > 0,
       times,
@@ -90,13 +90,13 @@ export class DomActions implements DomActionsProvider {
 
   prehide(selectors: string[]): boolean {
     const styleEl = getStyleElement('autoconsent-prehide');
-    this.autoconsentInstance.config.enableLogs && console.log("[prehide]", styleEl, location.href);
+    this.autoconsentInstance.config.logs.lifecycle && console.log("[prehide]", styleEl, location.href);
     return hideElements(styleEl, selectors, "opacity");
   }
 
   undoPrehide(): boolean {
     const existingElement = getStyleElement('autoconsent-prehide');
-    this.autoconsentInstance.config.enableLogs && console.log("[undoprehide]", existingElement, location.href);
+    this.autoconsentInstance.config.logs.lifecycle && console.log("[undoprehide]", existingElement, location.href);
     if (existingElement) {
       existingElement.remove();
     }

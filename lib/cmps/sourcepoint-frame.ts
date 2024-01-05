@@ -69,7 +69,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
   }
 
   async optOut() {
-    const enableLogs = this.autoconsent.config.enableLogs;
+    const logsConfig = this.autoconsent.config.logs;
     if (this.ccpaPopup) {
       // toggles with 2 buttons
       const toggles = document.querySelectorAll('.priv-purpose-container .sp-switch-arrow-block a.neutral.on .right') as NodeListOf<HTMLElement>;
@@ -128,7 +128,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         this.click('.chevron');
       }
     } catch (e) {
-      enableLogs && console.warn(e);
+      logsConfig.errors && console.warn(e);
     }
     // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
     return this.click('.sp_choice_type_SAVE_AND_EXIT');

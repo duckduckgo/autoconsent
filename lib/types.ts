@@ -52,7 +52,13 @@ export type Config = {
   detectRetries: number;
   isMainWorld: boolean;
   prehideTimeout: number;
-  enableLogs: boolean; // TODO: make it more granular, e.g per rulestep type
+  logs: {
+    lifecycle: boolean;
+    rulesteps: boolean;
+    evals: boolean;
+    errors: boolean;
+    messages: boolean;
+  };
 }
 
 export type LifecycleState = 'loading' |
