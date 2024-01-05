@@ -7,6 +7,7 @@ import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
+import { normalizeConfig } from './utils';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -34,7 +35,7 @@ export default class AutoConsent {
   domActions: DomActions;
   protected sendContentMessage: MessageSender;
 
-  constructor(sendContentMessage: MessageSender, config: Config = null, declarativeRules: RuleBundle = null) {
+  constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
     this.rules = [];
@@ -58,11 +59,12 @@ export default class AutoConsent {
     this.domActions = new DomActions(this);
   }
 
-  initialize(config: Config, declarativeRules: RuleBundle) {
-    config.logs.lifecycle && console.log('autoconsent init', window.location.href);
-    this.config = config;
-    if (!config.enabled) {
-      config.logs.lifecycle && console.log("autoconsent is disabled");
+  initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    const normalizedConfig = normalizeConfig(config);
+    normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
+    this.config = normalizedConfig;
+    if (!normalizedConfig.enabled) {
+      normalizedConfig.logs.lifecycle && console.log("autoconsent is disabled");
       return;
     }
 
@@ -70,7 +72,7 @@ export default class AutoConsent {
       this.parseDeclarativeRules(declarativeRules);
     }
 
-    this.rules = filterCMPs(this.rules, config);
+    this.rules = filterCMPs(this.rules, normalizedConfig);
 
     if (config.enablePrehide) {
       if (document.documentElement) {

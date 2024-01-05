@@ -1,4 +1,4 @@
-import { Config } from "../lib/types";
+import { normalizeConfig } from "../lib/utils";
 import { storageGet, storageSet } from "./mv-compat";
 
 export async function showOptOutStatus(
@@ -43,42 +43,11 @@ export async function showOptOutStatus(
 }
 
 export async function initConfig() {
-  const storedConfig = await storageGet('config');
+  const storedConfig = (await storageGet('config')) || {};
   console.log('storedConfig', storedConfig);
-  const defaultConfig: Config = {
-    enabled: true,
-    autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
-    disabledCmps: [],
-    enablePrehide: true,
-    enableCosmeticRules: true,
-    detectRetries: 20,
-    isMainWorld: false,
-    prehideTimeout: 2000,
-    logs: {
-      lifecycle: false,
-      rulesteps: false,
-      evals: false,
-      errors: true,
-      messages: false,
-    },
-  };
-  if (!storedConfig) {
-    console.log('new config', defaultConfig);
-    await storageSet({
-      config: defaultConfig,
-    });
-  } else { // clean up the old stored config in case there are new fields
-    const updatedConfig: Config = structuredClone(defaultConfig);
-    for (const key of Object.keys(defaultConfig)) {
-      if (typeof storedConfig[key] !== 'undefined') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error - TS doesn't know that we've checked for undefined
-        updatedConfig[key] = storedConfig[key];
-      }
-    }
-    console.log('updated config', updatedConfig);
-    await storageSet({
-      config: updatedConfig,
-    });
-  }
+  const updatedConfig = normalizeConfig(storedConfig);
+  console.log('updated config', updatedConfig);
+  await storageSet({
+    config: updatedConfig,
+  });
 }
