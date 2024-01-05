@@ -30,7 +30,7 @@ test.beforeEach(async ({ page }) => {
   await page.addScriptTag({
     path: 'dist/autoconsent.unit.js'
   });
-  await page.evaluate('window.domActions = new window.DomActions({ config: { enableLogs: true } })');
+  await page.evaluate('window.domActions = new window.DomActions({ config: { logs: { lifecycle: false, rulesteps: false, evals: false, errors: false, messages: false } } })');
 })
 
 test.describe("click", () => {
