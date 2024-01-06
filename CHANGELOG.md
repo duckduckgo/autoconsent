@@ -1,3 +1,20 @@
+# v8.0.0 (Sat Jan 06 2024)
+
+#### 💥 Breaking Change
+
+- single selector in hide rules [#334](https://github.com/duckduckgo/autoconsent/pull/334) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 4 updates [#328](https://github.com/duckduckgo/autoconsent/pull/328) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v7.1.0 (Wed Jan 03 2024)
 
 #### 🚀 Enhancement
