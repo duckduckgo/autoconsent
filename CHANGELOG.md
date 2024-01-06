@@ -1,3 +1,62 @@
+# v7.1.0 (Wed Jan 03 2024)
+
+#### 🚀 Enhancement
+
+- iWink rule [#123](https://github.com/duckduckgo/autoconsent/pull/123) ([@Tomassie91](https://github.com/Tomassie91) [@muodov](https://github.com/muodov))
+- Improve Tealium support [#315](https://github.com/duckduckgo/autoconsent/pull/315) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#330](https://github.com/duckduckgo/autoconsent/pull/330) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@Tomassie91](https://github.com/Tomassie91)
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v7.0.0 (Thu Dec 28 2023)
+
+#### 💥 Breaking Change
+
+- Fix CSP errors when running eval rules in MV3 extension [#318](https://github.com/duckduckgo/autoconsent/pull/318) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.7.0 (Thu Dec 28 2023)
+
+#### 🚀 Enhancement
+
+- Add a rule for ciaopeople.it [#320](https://github.com/duckduckgo/autoconsent/pull/320) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Add a rule for roofingmegastore.co.uk [#325](https://github.com/duckduckgo/autoconsent/pull/325) ([@seia-soto](https://github.com/seia-soto))
+- Add a rule for csu-landtag.de [#324](https://github.com/duckduckgo/autoconsent/pull/324) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v6.6.1 (Wed Dec 27 2023)
+
+#### 🐛 Bug Fix
+
+- Add a deferred check for usercentrics [#322](https://github.com/duckduckgo/autoconsent/pull/322) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
 # v6.6.0 (Wed Dec 20 2023)
 
 #### 🚀 Enhancement
