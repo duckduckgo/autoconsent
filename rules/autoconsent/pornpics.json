@@ -5,5 +5,5 @@
     "detectCmp": [{ "exists": "#cookie-contract" }],
     "detectPopup": [{ "visible": "#cookie-contract" }],
     "optIn": [{ "click": "#cookie-contract .icon-cross" }],
-    "optOut": [{ "hide": ["#cookie-contract"] }]
+    "optOut": [{ "hide": "#cookie-contract" }]
 }

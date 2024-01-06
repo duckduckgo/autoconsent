@@ -78,16 +78,16 @@ export function wait(ms: number): Promise<true> {
   });
 }
 
-export function hide(selectors: string[], method: HideMethod): boolean {
+export function hide(selector: string, method: HideMethod): boolean {
   // enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
   const styleEl = getStyleElement();
-  return hideElements(styleEl, selectors, method);
+  return hideElements(styleEl, selector, method);
 }
 
-export function prehide(selectors: string[]): boolean {
+export function prehide(selector: string): boolean {
   const styleEl = getStyleElement('autoconsent-prehide');
   enableLogs && console.log("[prehide]", styleEl, location.href);
-  return hideElements(styleEl, selectors, "opacity");
+  return hideElements(styleEl, selector, "opacity");
 }
 
 export function undoPrehide(): boolean {

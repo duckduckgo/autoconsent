@@ -8,5 +8,5 @@
   "detectCmp": [{ "exists": "#onetrust-banner-sdk" }],
   "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
   "optIn": [{ "click": "#onetrust-accept-btn-handler" }],
-  "optOut": [{ "hide": ["#onetrust-banner-sdk"]}]
+  "optOut": [{ "hide": "#onetrust-banner-sdk"}]
 }

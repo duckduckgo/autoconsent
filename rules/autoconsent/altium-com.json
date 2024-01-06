@@ -5,5 +5,5 @@
   "detectCmp": [{ "exists": ".altium-privacy-bar" }],
   "detectPopup": [{ "exists": ".altium-privacy-bar" }],
   "optIn": [{ "click": "a.altium-privacy-bar__btn" }],
-  "optOut": [{ "hide": [".altium-privacy-bar"] }]
+  "optOut": [{ "hide": ".altium-privacy-bar" }]
 }

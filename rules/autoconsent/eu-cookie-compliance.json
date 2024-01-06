@@ -5,7 +5,7 @@
   "optIn": [{ "click": ".agree-button" }],
   "optOut": [
     { "click": ".decline-button,.eu-cookie-compliance-save-preferences-button", "optional": true },
-    { "hide": [".eu-cookie-compliance-banner-info", "#sliding-popup"] }
+    { "hide": ".eu-cookie-compliance-banner-info, #sliding-popup" }
   ],
   "test": [
       { "eval": "EVAL_EU_COOKIE_COMPLIANCE_0" }

@@ -8,5 +8,5 @@
   "detectCmp": [{ "exists": ".cookiesBanner" }],
   "detectPopup": [{ "visible": ".cookiesBanner" }],
   "optIn": [{ "click": ".cookiesBanner .okButton" }],
-  "optOut": [{ "hide": [".cookiesBanner"] }]
+  "optOut": [{ "hide": ".cookiesBanner" }]
 }

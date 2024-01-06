@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": ".cookie-announce" }],
     "detectPopup": [{ "visible": ".cookie-announce .announce-text" }],
     "optIn": [{ "click": ".cookie-announce button.xh-button" }],
-    "optOut": [{ "hide": [".cookie-announce"] }]
+    "optOut": [{ "hide": ".cookie-announce" }]
   }
