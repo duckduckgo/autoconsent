@@ -1,14 +1,10 @@
 {
   "name": "hema",
-  "runContext": {
-    "urlPattern": "^https://(www\\.)?hema\\.com/"
-  },
   "prehideSelectors": [".cookie-modal"],
   "detectCmp": [
-    { "exists": ".cookie-modal" }
+    { "visible": ".cookie-modal .cookie-accept-btn" }
   ],
   "detectPopup": [
-    { "visible": ".cookie-modal" },
     { "visible": ".cookie-modal .cookie-accept-btn" }
   ],
   "optIn": [
