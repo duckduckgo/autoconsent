@@ -237,7 +237,6 @@ export default class AutoConsent {
     const tasks = cmps.map(
       cmp => this.detectPopup(cmp)
         // Handle errors immediately and propagate the error to next handler: Promise.allSettled
-        // If we gracefully return errors, Promise.race needs another evaluation
         .catch(error => {
           enableLogs && console.warn(`error waiting for a popup for ${cmp.name}`, error)
 
@@ -245,7 +244,7 @@ export default class AutoConsent {
         })
     )
 
-    const firstCmpWithPopup = await Promise.race(tasks)
+    const firstCmpWithPopup = await Promise.any(tasks)
 
     onFirstPopupAppears(firstCmpWithPopup)
 
