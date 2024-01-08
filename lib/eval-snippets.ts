@@ -57,6 +57,7 @@ export const snippets = {
   EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
   EVAL_EZOIC_1: () => !!document.cookie.match(/ezCMPCookieConsent=[^;]+\|2=0\|3=0\|4=0/),
   EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
+  EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
   EVAL_IUBENDA_0: () => document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach(x => {if(x.checked) x.click()}) || true,
   EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
   EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
