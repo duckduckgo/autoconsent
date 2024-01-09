@@ -1,18 +1,13 @@
 def runPlaywrightTests(resultDir, browser, grep) {
     try {
         timeout(120) {
-            sh 'mkdir -p ./test-results'
             sh """
+                rm -f results.xml
                 PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test tests/_sample-test.spec.ts --project $browser --reporter=junit --grep "$grep"|| true
             """
         }
     } finally {
         junit 'results.xml'
-        sh """
-            mkdir -p ${resultDir}/results/${BUILD_NUMBER}/$REGION/
-            mkdir -p ./test-results
-            mv ./test-results/ ${resultDir}/results/${BUILD_NUMBER}/$REGION/
-        """
     }
 }
 
