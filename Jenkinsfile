@@ -29,6 +29,7 @@ pipeline {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
+        string(name: 'NSITES', defaultValue: '1', description: 'number of sites to test per CMP')
     }
     environment {
         NODENV_VERSION = "16.16.0"
@@ -57,7 +58,9 @@ pipeline {
         stage('Test: DE') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    withEnv(["NSITES=${params.NSITES}}"]) {
+                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    }
                 }
             }
         }
@@ -65,7 +68,9 @@ pipeline {
         stage('Test: US') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    withEnv(["NSITES=${params.NSITES}}"]) {
+                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    }
                 }
             }
         }
@@ -73,7 +78,9 @@ pipeline {
         stage('Test: GB') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    withEnv(["NSITES=${params.NSITES}}"]) {
+                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    }
                 }
             }
         }
