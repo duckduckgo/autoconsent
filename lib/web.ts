@@ -156,11 +156,11 @@ export default class AutoConsent {
       }
     }
 
-    let result: Promise<boolean>
+    let result = false
 
-    let foundPopups = await this.detectPopups(staticCmps, cmp => { result = this.handlePopup(cmp) })
+    let foundPopups = await this.detectPopups(staticCmps, async cmp => { result = await this.handlePopup(cmp) })
     if (foundPopups.length === 0) {
-      foundPopups = await this.detectPopups(cosmeticCmps, cmp => { result = this.handlePopup(cmp) })
+      foundPopups = await this.detectPopups(cosmeticCmps, async cmp => { result = await this.handlePopup(cmp) })
     }
 
     if (foundPopups.length === 0) {
@@ -233,7 +233,7 @@ export default class AutoConsent {
     return cmp
   }
 
-  async detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => unknown) {
+  async detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => Promise<unknown>) {
     const tasks = cmps.map(
       cmp => this.detectPopup(cmp)
         // Handle errors immediately and propagate the error to next handler: Promise.allSettled
@@ -246,7 +246,7 @@ export default class AutoConsent {
 
     const firstCmpWithPopup = await Promise.any(tasks)
 
-    onFirstPopupAppears(firstCmpWithPopup)
+    await onFirstPopupAppears(firstCmpWithPopup)
 
     const results = await Promise.allSettled(tasks)
     const popups: AutoCMP[] = []
