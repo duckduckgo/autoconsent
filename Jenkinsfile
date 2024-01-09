@@ -30,6 +30,7 @@ pipeline {
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
         string(name: 'NSITES', defaultValue: '1', description: 'number of sites to test per CMP')
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
     }
     environment {
         NODENV_VERSION = "16.16.0"
@@ -39,7 +40,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
+                    extensions: [[$class: 'LocalBranch']],
+                    userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'GitHubAccess', url: 'https://github.com/duckduckgo/autoconsent.git']]])
             }
         }
         
@@ -50,7 +53,7 @@ pipeline {
                 npx playwright install
                 '''
                 script {
-                    currentBuild.description = "${params.BROWSER} - ${params.GREP}"
+                    currentBuild.description = "${params.BRANCH}"
                 }
             }
         }
