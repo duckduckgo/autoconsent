@@ -53,7 +53,7 @@ pipeline {
                 npx playwright install
                 '''
                 script {
-                    currentBuild.description = "${params.BRANCH}"
+                    currentBuild.description = "${params.BRANCH} - ${params.BROWSER}"
                 }
             }
         }
