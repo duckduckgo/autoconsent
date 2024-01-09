@@ -21,7 +21,7 @@ def withEnvFile(envfile, Closure cb) {
 pipeline {
     agent { label 'autoconsent-crawler' }
     parameters {
-        string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/tests', description: 'Where test results and configuration are stored')
+        string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
         string(name: 'NSITES', defaultValue: '1', description: 'number of sites to test per CMP')
