@@ -58,28 +58,18 @@ pipeline {
             }
         }
         
-        stage('Test: DE') {
+        stage('Test') {
             steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
                     withEnv(["NSITES=${params.NSITES}}"]) {
                         runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                     }
                 }
-            }
-        }
-        
-        stage('Test: US') {
-            steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
                     withEnv(["NSITES=${params.NSITES}}"]) {
                         runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                     }
                 }
-            }
-        }
-        
-        stage('Test: GB') {
-            steps {
                 withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
                     withEnv(["NSITES=${params.NSITES}}"]) {
                         runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
