@@ -55,18 +55,14 @@ pipeline {
         
         stage('Test') {
             steps {
-                withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
-                    withEnv(["NSITES=${params.NSITES}}"]) {
+                withEnv(["NSITES=${params.NSITES}}"]) {
+                    withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
                         runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                     }
-                }
-                withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
-                    withEnv(["NSITES=${params.NSITES}}"]) {
+                    withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
                         runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                     }
-                }
-                withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                    withEnv(["NSITES=${params.NSITES}}"]) {
+                    withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
                         runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
                     }
                 }
