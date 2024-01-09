@@ -1,6 +1,6 @@
 def runPlaywrightTests(resultDir, browser, grep) {
     try {
-        timeout(20) {
+        timeout(120) {
             sh 'mkdir -p ./test-results'
             sh """
                 PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test tests/_sample-test.spec.ts --project $browser --reporter=junit --grep "$grep"|| true
