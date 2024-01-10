@@ -36,7 +36,7 @@ export default class Klaro extends AutoConsentCMPBase {
     }
 
     if (!this.settingsOpen) {
-      click('.klaro .cn-learn-more');
+      click('.klaro .cn-learn-more,.klaro .cm-button-manage');
       await waitForElement('.klaro > .cookie-modal', 2000);
       this.settingsOpen = true;
     }
@@ -45,8 +45,8 @@ export default class Klaro extends AutoConsentCMPBase {
       return true;
     }
 
-    click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required)', true);
-    return click('.cm-btn-accept');
+    click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required),.cm-purpose:not(.cm-toggle-all) > div > input:not(.half-checked,.required,.only-required)', true);
+    return click('.cm-btn-accept,.cm-button');
   }
 
   async optIn() {

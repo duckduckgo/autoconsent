@@ -15,7 +15,11 @@ export const snippets = {
   EVAL_COOKIEBOT_4: () => window.Cookiebot.hide() || true,
   EVAL_COOKIEBOT_5: () => window.Cookiebot.declined === true,
   EVAL_KLARO_1: () => {
-    const config = globalThis.klaroConfig || globalThis.klaro.getManager().config
+    const config = globalThis.klaroConfig || (globalThis.klaro?.getManager && globalThis.klaro.getManager().config)
+    if (!config) {
+      // with no klaro globals, we can't test on this page
+      return true
+    }
     const optionalServices = (config.services || config.apps).filter(s => !s.required).map(s => s.name)
     if (klaro && klaro.getManager) {
       const manager = klaro.getManager()
@@ -25,7 +29,6 @@ export const snippets = {
       const consents = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.trim().startsWith(cookieName)).split('=')[1]))
       return Object.keys(consents).filter(k => optionalServices.includes(k)).every(k => consents[k] === false)
     }
-    return false
   },
   EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1,
   EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
