@@ -15,11 +15,15 @@ export const snippets = {
   EVAL_COOKIEBOT_4: () => window.Cookiebot.hide() || true,
   EVAL_COOKIEBOT_5: () => window.Cookiebot.declined === true,
   EVAL_KLARO_1: () => {
+    const config = globalThis.klaroConfig || globalThis.klaro.getManager().config
+    const optionalServices = (config.services || config.apps).filter(s => !s.required).map(s => s.name)
     if (klaro && klaro.getManager) {
-      return klaro.getManager().config.services.every(c => c.required || !klaro.getManager().consents[c.name])
-    } else if (klaroConfig) {
-      const consents = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.trim().startsWith(klaroConfig.storageName)).split('=')[1]))
-      return Object.keys(consents).filter(k => k !== 'essential').every(k => consents[k] === false)
+      const manager = klaro.getManager()
+      return optionalServices.every(name => !manager.consents[name])  
+    } else if (klaroConfig && klaroConfig.storageMethod === 'cookie') {
+      const cookieName = klaroConfig.cookieName || klaroConfig.storageName;
+      const consents = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.trim().startsWith(cookieName)).split('=')[1]))
+      return Object.keys(consents).filter(k => optionalServices.includes(k)).every(k => consents[k] === false)
     }
     return false
   },
