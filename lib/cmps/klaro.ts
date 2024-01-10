@@ -45,7 +45,11 @@ export default class Klaro extends AutoConsentCMPBase {
       return true;
     }
 
-    click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked)', true);
+    // if there is no disableAll button, toggle all available toggles
+    if (!click('#purpose-item-disableAll')) {
+      click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked)', true);
+    } 
+
     return click('.cm-btn-accept');
   }
 
