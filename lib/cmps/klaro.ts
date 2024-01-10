@@ -46,7 +46,6 @@ export default class Klaro extends AutoConsentCMPBase {
     }
 
     click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required)', true);
-
     return click('.cm-btn-accept');
   }
 
