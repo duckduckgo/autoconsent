@@ -14,7 +14,15 @@ export const snippets = {
   EVAL_COOKIEBOT_3: () => window.Cookiebot.withdraw() || true,
   EVAL_COOKIEBOT_4: () => window.Cookiebot.hide() || true,
   EVAL_COOKIEBOT_5: () => window.Cookiebot.declined === true,
-  EVAL_KLARO_1: () => klaro.getManager().config.services.every(c => c.required || !klaro.getManager().consents[c.name]),
+  EVAL_KLARO_1: () => {
+    if (klaro && klaro.getManager) {
+      return klaro.getManager().config.services.every(c => c.required || !klaro.getManager().consents[c.name])
+    } else if (klaroConfig) {
+      const consents = JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.trim().startsWith(klaroConfig.storageName)).split('=')[1]))
+      return Object.keys(consents).filter(k => k !== 'essential').every(k => consents[k] === false)
+    }
+    return false
+  },
   EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1,
   EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
 
@@ -112,5 +120,5 @@ export const snippets = {
 
 export function getFunctionBody(snippetFunc: () => any) {
   const snippetStr = snippetFunc.toString();
-  return snippetStr.substring(snippetStr.indexOf("=>") + 2);
+  return `(${snippetStr})()`
 }
