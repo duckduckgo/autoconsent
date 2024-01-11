@@ -1,3 +1,20 @@
+# v9.0.0 (Thu Jan 11 2024)
+
+#### 💥 Breaking Change
+
+- Configurable logs [#332](https://github.com/duckduckgo/autoconsent/pull/332) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 3 updates [#335](https://github.com/duckduckgo/autoconsent/pull/335) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v8.2.0 (Thu Jan 11 2024)
 
 #### 🚀 Enhancement
