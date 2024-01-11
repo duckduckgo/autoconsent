@@ -145,12 +145,12 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     return this.autoconsent.domActions.wait(ms);
   }
 
-  hide(selectors: string[], method: HideMethod) {
-    return this.autoconsent.domActions.hide(selectors, method);
+  hide(selector: string, method: HideMethod) {
+    return this.autoconsent.domActions.hide(selector, method);
   }
 
-  prehide(selectors: string[]) {
-    return this.autoconsent.domActions.prehide(selectors);
+  prehide(selector: string) {
+    return this.autoconsent.domActions.prehide(selector);
   }
 
   undoPrehide() {

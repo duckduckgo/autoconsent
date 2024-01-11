@@ -28,8 +28,8 @@ export interface DomActionsProvider {
   waitForVisible(selector: ElementSelector, timeout?: number, check?: VisibilityCheck): Promise<boolean>;
   waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean): Promise<boolean>;
   wait(ms: number): Promise<true>;
-  hide(selectors: string[], method: HideMethod): boolean;
-  prehide(selectors: string[]): boolean;
+  hide(selector: string, method: HideMethod): boolean;
+  prehide(selector: string): boolean;
   undoPrehide(): boolean;
   querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
   querySelectorChain(selectors: string[]): HTMLElement[];

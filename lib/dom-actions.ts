@@ -82,16 +82,15 @@ export class DomActions implements DomActionsProvider {
     });
   }
 
-  hide(selectors: string[], method: HideMethod): boolean {
-    // enableLogs && console.log("[hide]", ruleStep.hide, ruleStep.method);
+  hide(selector: string, method: HideMethod): boolean {
     const styleEl = getStyleElement();
-    return hideElements(styleEl, selectors, method);
+    return hideElements(styleEl, selector, method);
   }
 
-  prehide(selectors: string[]): boolean {
+  prehide(selector: string): boolean {
     const styleEl = getStyleElement('autoconsent-prehide');
     this.autoconsentInstance.config.logs.lifecycle && console.log("[prehide]", styleEl, location.href);
-    return hideElements(styleEl, selectors, "opacity");
+    return hideElements(styleEl, selector, "opacity");
   }
 
   undoPrehide(): boolean {
