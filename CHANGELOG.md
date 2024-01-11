@@ -1,3 +1,15 @@
+# v9.1.0 (Thu Jan 11 2024)
+
+#### 🚀 Enhancement
+
+- Add a rule for lightbox CMP [#329](https://github.com/duckduckgo/autoconsent/pull/329) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
 # v9.0.0 (Thu Jan 11 2024)
 
 #### 💥 Breaking Change
