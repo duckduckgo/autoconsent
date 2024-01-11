@@ -1,4 +1,3 @@
-import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Cookiebot extends AutoConsentCMPBase {
@@ -22,9 +21,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return await waitFor(() => {
-      return this.mainWorldEval('EVAL_COOKIEBOT_2')
-    }, 10, 500);
+    return this.mainWorldEval('EVAL_COOKIEBOT_2');
   }
 
   async optOut() {

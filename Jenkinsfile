@@ -1,18 +1,13 @@
 def runPlaywrightTests(resultDir, browser, grep) {
     try {
-        timeout(20) {
-            sh 'mkdir -p ./test-results'
+        timeout(120) {
             sh """
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test --project $browser --reporter=junit --grep "$grep"|| true
+                rm -f results.xml
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test tests/_sample-test.spec.ts --project $browser --reporter=junit --grep "$grep"|| true
             """
         }
     } finally {
         junit 'results.xml'
-        sh """
-            mkdir -p ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
-            mkdir -p ./test-results
-            mv ./test-results/ ${resultDir}/results/${BRANCH_NAME}/${BUILD_NUMBER}/$REGION/
-        """
     }
 }
 
@@ -29,6 +24,8 @@ pipeline {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
+        string(name: 'NSITES', defaultValue: '1', description: 'number of sites to test per CMP')
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
     }
     environment {
         NODENV_VERSION = "16.16.0"
@@ -38,7 +35,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
+                    extensions: [[$class: 'LocalBranch']],
+                    userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'GitHubAccess', url: 'https://github.com/duckduckgo/autoconsent.git']]])
             }
         }
         
@@ -49,39 +48,23 @@ pipeline {
                 npx playwright install
                 '''
                 script {
-                    currentBuild.description = "${params.BROWSER} - ${params.GREP}"
+                    currentBuild.description = "${params.BRANCH} - ${params.BROWSER}"
                 }
             }
         }
         
-        stage('Test: DE') {
+        stage('Test') {
             steps {
-                withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                }
-            }
-        }
-        
-        stage('Test: US') {
-            steps {
-                withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                }
-            }
-        }
-        
-        stage('Test: GB') {
-            steps {
-                withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                }
-            }
-        }
-        
-        stage('Test: FR') {
-            steps {
-                withEnvFile("${params.TEST_RESULT_ROOT}/fr.env") {
-                    runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                withEnv(["NSITES=${params.NSITES}}"]) {
+                    withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
+                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    }
+                    withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
+                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    }
+                    withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
+                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                    }
                 }
             }
         }

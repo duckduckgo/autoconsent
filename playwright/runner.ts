@@ -15,6 +15,7 @@ const LOG_MESSAGES: ContentScriptMessage['type'][] = [
 const LOG_PAGE_LOGS = false;
 
 const testRegion = (process.env.REGION || "NA").trim();
+test.describe.configure({ mode: 'parallel' });
 
 type TestOptions = {
   testOptOut: boolean;

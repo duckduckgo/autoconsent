@@ -8,5 +8,5 @@
     "detectCmp": [{ "exists": "div[aria-labelledby=\"cookie-banner-heading\"]" }],
     "detectPopup": [{ "visible": "div[aria-labelledby=\"cookie-banner-heading\"]" }],
     "optIn": [{ "click": "div[aria-labelledby=\"cookie-banner-heading\"] > button[aria-label=\"Close\"]" }],
-    "optOut": [{ "hide": ["div[aria-labelledby=\"cookie-banner-heading\"]"] }]
+    "optOut": [{ "hide": "div[aria-labelledby=\"cookie-banner-heading\"]" }]
 }

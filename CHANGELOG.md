@@ -1,3 +1,52 @@
+# v8.2.0 (Thu Jan 11 2024)
+
+#### 🚀 Enhancement
+
+- Klaro: fix toggle selectors [#339](https://github.com/duckduckgo/autoconsent/pull/339) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v8.1.0 (Wed Jan 10 2024)
+
+#### 🚀 Enhancement
+
+- Add a rule for ing.de [#337](https://github.com/duckduckgo/autoconsent/pull/337) ([@seia-soto](https://github.com/seia-soto))
+- Add a rule for hema.com [#319](https://github.com/duckduckgo/autoconsent/pull/319) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Only use sites where the popup is open by default as examples [#336](https://github.com/duckduckgo/autoconsent/pull/336) ([@sammacbeth](https://github.com/sammacbeth))
+- Test a subset of sites found in the coverage crawl in CI [#323](https://github.com/duckduckgo/autoconsent/pull/323) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v8.0.0 (Sat Jan 06 2024)
+
+#### 💥 Breaking Change
+
+- single selector in hide rules [#334](https://github.com/duckduckgo/autoconsent/pull/334) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 4 updates [#328](https://github.com/duckduckgo/autoconsent/pull/328) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v7.1.0 (Wed Jan 03 2024)
 
 #### 🚀 Enhancement

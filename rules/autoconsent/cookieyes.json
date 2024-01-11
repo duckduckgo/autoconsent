@@ -22,7 +22,7 @@
               { "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button]" }
             ],
             "else": [
-              { "hide": [".cky-consent-container,.cky-overlay"] }
+              { "hide": ".cky-consent-container,.cky-overlay" }
             ]
           }
         ]

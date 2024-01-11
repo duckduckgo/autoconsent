@@ -29,7 +29,7 @@ export default class Evidon extends AutoConsentCMPBase {
       return true;
     }
 
-    hideElements(getStyleElement(), ["#evidon-prefdiag-overlay", "#evidon-prefdiag-background"]);
+    hideElements(getStyleElement(), "#evidon-prefdiag-overlay,#evidon-prefdiag-background");
     this.click("#_evidon-option-button");
 
     await this.waitForElement("#evidon-prefdiag-overlay", 5000);

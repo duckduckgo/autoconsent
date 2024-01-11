@@ -11,7 +11,7 @@
   ],
   "optOut": [
     { "click": "#cookie-bar .cb-disable", "optional": true },
-    { "hide": ["#cookie-bar"] }
+    { "hide": "#cookie-bar" }
   ],
   "test": [
     { "eval": "EVAL_PRIMEBOX_0" }

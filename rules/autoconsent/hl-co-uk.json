@@ -9,7 +9,7 @@
           "click": "#manageCookie"
       },
       {
-          "hide": [".cookieSettingsModal"]
+          "hide": ".cookieSettingsModal"
       },
       {
           "waitFor": "#AOCookieToggle"

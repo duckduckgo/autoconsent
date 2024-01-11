@@ -5,5 +5,5 @@
   "detectCmp": [{ "exists": ".notice--cookie" }],
   "detectPopup": [{ "visible": ".notice--cookie" }],
   "optIn": [{ "click": ".button--notice" }],
-  "optOut": [{ "hide": [".notice--cookie"] }]
+  "optOut": [{ "hide": ".notice--cookie" }]
 }

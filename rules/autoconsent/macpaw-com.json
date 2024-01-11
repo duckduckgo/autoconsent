@@ -8,6 +8,6 @@
     { "click": "button[data-banner-close=\"cookies\"]" }
   ],
   "optOut": [
-    { "hide": ["div[data-banner=\"cookies\"]"] }
+    { "hide": "div[data-banner=\"cookies\"]" }
   ]
 }

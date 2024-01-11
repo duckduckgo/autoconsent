@@ -9,7 +9,7 @@
     { "click": ".sp-dsgvo-privacy-btn-accept-all", "all": true }
   ],
   "optOut": [
-    { "hide": [".sp-dsgvo.sp-dsgvo-popup-overlay"] }
+    { "hide": ".sp-dsgvo.sp-dsgvo-popup-overlay" }
   ],
   "test": [
     { "eval": "EVAL_DSGVO_0" }

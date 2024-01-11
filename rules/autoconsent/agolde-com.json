@@ -8,6 +8,6 @@
     { "click": "button[aria-label=\"Close modal\"]" }
   ],
   "optOut": [
-    { "hide": ["#modal-1 div[data-micromodal-close]"] }
+    { "hide": "#modal-1 div[data-micromodal-close]" }
   ]
 }

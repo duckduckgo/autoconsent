@@ -5,5 +5,5 @@
   "detectCmp": [{ "exists": "#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner" }],
   "detectPopup": [{ "visible": "#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner" }],
   "optIn": [],
-  "optOut": [{ "hide": ["#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner"] }]
+  "optOut": [{ "hide": "#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner" }]
 }
