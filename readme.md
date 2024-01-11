@@ -56,7 +56,7 @@ By default, rules will be executed in all top-level documents. Some rules are de
 An autoconsent CMP rule can be written as either:
  * a JSON file adhering to the `AutoConsentCMPRule` type.
  * a class implementing the `AutoCMP` interface, or
-   * common JSON rules are available as reusable functions in [rule-executors.ts](/lib/rule-executors.ts). You can also use existing class-based rules as reference.
+   * common JSON rules are available as reusable functions in [dom-actions.ts](/lib/dom-actions.ts). You can also use existing class-based rules as reference.
 
 In most cases the JSON syntax should be sufficient, unless some complex non-linear logic is required, in which case a class is required.
 

@@ -3,8 +3,16 @@ import path from 'path';
 import { test, expect, Page, Frame } from "@playwright/test";
 import { waitFor } from "../lib/utils";
 import { ContentScriptMessage } from "../lib/messages";
-import { enableLogs } from "../lib/config";
 import { AutoAction } from "../lib/types";
+
+const LOG_MESSAGES: ContentScriptMessage['type'][] = [
+  'optInResult',
+  'optOutResult',
+  'autoconsentDone',
+  'autoconsentError',
+  'selfTestResult',
+];
+const LOG_PAGE_LOGS = false;
 
 const testRegion = (process.env.REGION || "NA").trim();
 test.describe.configure({ mode: 'parallel' });
@@ -59,7 +67,7 @@ export function generateTest(
         test.skip();
       }
 
-      enableLogs && page.on('console', async msg => {
+      LOG_PAGE_LOGS && page.on('console', async msg => {
         console.log(`    page log:`, msg.text());
       });
       await page.exposeBinding("autoconsentSendMessage", messageCallback);
@@ -79,7 +87,7 @@ export function generateTest(
 
       let selfTestFrame: Frame = null;
       async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
-        enableLogs && msg.type !== 'eval' && console.log(msg);
+        LOG_MESSAGES.includes(msg.type) && console.log(msg);
         received.push(msg);
         switch (msg.type) {
           case 'init': {

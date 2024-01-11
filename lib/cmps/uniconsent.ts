@@ -1,4 +1,3 @@
-import { elementExists, elementVisible, wait, waitForElement, waitForThenClick } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 export default class Uniconsent extends AutoConsentCMPBase {
@@ -21,15 +20,15 @@ export default class Uniconsent extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists(".unic .unic-box,.unic .unic-bar");
+    return this.elementExists(".unic .unic-box,.unic .unic-bar");
   }
 
   async detectPopup() {
-    return elementVisible(".unic .unic-box,.unic .unic-bar", 'any');
+    return this.elementVisible(".unic .unic-box,.unic .unic-bar", 'any');
   }
 
   async optOut() {
-    await waitForElement(".unic button", 1000);
+    await this.waitForElement(".unic button", 1000);
     document.querySelectorAll(".unic button").forEach((button: HTMLButtonElement) => {
       const text = button.textContent;
       if (text.includes('Manage Options') || text.includes('Optionen verwalten')) {
@@ -37,8 +36,8 @@ export default class Uniconsent extends AutoConsentCMPBase {
       }
     });
 
-    if (await waitForElement('.unic input[type=checkbox]', 1000)) {
-      await waitForElement('.unic button', 1000);
+    if (await this.waitForElement('.unic input[type=checkbox]', 1000)) {
+      await this.waitForElement('.unic button', 1000);
 
       document.querySelectorAll('.unic input[type=checkbox]').forEach((c: HTMLInputElement) => {
         if (c.checked) {
@@ -51,7 +50,7 @@ export default class Uniconsent extends AutoConsentCMPBase {
         for (const pattern of ['Confirm Choices', 'Save Choices', 'Auswahl speichern']) {
           if (text.includes(pattern)) {
             b.click();
-            await wait(500); // give it some time to close the popup
+            await this.wait(500); // give it some time to close the popup
             return true;
           }
         }
@@ -62,12 +61,12 @@ export default class Uniconsent extends AutoConsentCMPBase {
   }
 
   async optIn() {
-    return waitForThenClick(".unic #unic-agree");
+    return this.waitForThenClick(".unic #unic-agree");
   }
 
   async test() {
-    await wait(1000);
-    const res = elementExists(".unic .unic-box,.unic .unic-bar");
+    await this.wait(1000);
+    const res = this.elementExists(".unic .unic-box,.unic .unic-bar");
     return !res;
   }
 }

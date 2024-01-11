@@ -1,4 +1,3 @@
-import { click, elementExists, elementVisible, wait, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 // Note: JS API is also available:
@@ -24,7 +23,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
   async detectCmp() {
     this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
     if (!this.apiAvailable) {
-      return elementExists("#cmpbox");
+      return this.elementExists("#cmpbox");
     } else {
       return true;
     }
@@ -34,32 +33,32 @@ export default class ConsentManager extends AutoConsentCMPBase {
     if (this.apiAvailable) {
       // wait before making this check because early in the page lifecycle this may incorrectly return
       // true, causing an opt-out when it is not needed.
-      await wait(500);
+      await this.wait(500);
       return await this.mainWorldEval('EVAL_CONSENTMANAGER_2');
     }
-    return elementVisible("#cmpbox .cmpmore", 'any');
+    return this.elementVisible("#cmpbox .cmpmore", 'any');
   }
 
   async optOut() {
-    await wait(500);
+    await this.wait(500);
     if (this.apiAvailable) {
       return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
     }
 
-    if (click(".cmpboxbtnno")) {
+    if (this.click(".cmpboxbtnno")) {
       return true;
     }
 
-    if (elementExists(".cmpwelcomeprpsbtn")) {
-      click(".cmpwelcomeprpsbtn > a[aria-checked=true]", true);
-      click(".cmpboxbtnsave");
+    if (this.elementExists(".cmpwelcomeprpsbtn")) {
+      this.click(".cmpwelcomeprpsbtn > a[aria-checked=true]", true);
+      this.click(".cmpboxbtnsave");
       return true;
     }
 
-    click(".cmpboxbtncustom");
-    await waitForElement(".cmptblbox", 2000);
-    click(".cmptdchoice > a[aria-checked=true]", true);
-    click(".cmpboxbtnyescustomchoices");
+    this.click(".cmpboxbtncustom");
+    await this.waitForElement(".cmptblbox", 2000);
+    this.click(".cmptdchoice > a[aria-checked=true]", true);
+    this.click(".cmpboxbtnyescustomchoices");
     return true;
   }
 
@@ -67,7 +66,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
     if (this.apiAvailable) {
       return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
     }
-    return click(".cmpboxbtnyes");
+    return this.click(".cmpboxbtnyes");
   }
 
   async test() {

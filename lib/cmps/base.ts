@@ -1,9 +1,7 @@
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
 
-import { AutoCMP } from "../types";
-import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from "../rules";
-import { enableLogs } from "../config";
-import { click, elementExists, elementVisible, hide, wait, waitForElement, waitForThenClick, waitForVisible } from "../rule-executors";
+import { AutoCMP, DomActionsProvider } from "../types";
+import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from "../rules";
 import { requestEval } from "../eval-handler";
 import AutoConsent from "../web";
 import { getFunctionBody, snippets } from "../eval-snippets";
@@ -22,7 +20,7 @@ export const defaultRunContext: RunContext = {
   urlPattern: "",
 }
 
-export default class AutoConsentCMPBase implements AutoCMP {
+export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
   name: string
   runContext: RunContext = defaultRunContext;
   autoconsent: AutoConsent;
@@ -49,23 +47,24 @@ export default class AutoConsentCMPBase implements AutoCMP {
       console.warn('Snippet not found', snippetId);
       return Promise.resolve(false);
     }
+    const logsConfig = this.autoconsent.config.logs;
 
     if (this.autoconsent.config.isMainWorld) {
-      enableLogs && console.log('inline eval:', snippetId, snippet);
+      logsConfig.evals && console.log('inline eval:', snippetId, snippet);
       let result = false;
       try {
         result = !!snippet.call(globalThis);
       } catch (e) {
         // ignore exceptions
-        enableLogs && console.error('error evaluating rule', snippetId, e);
+        logsConfig.evals && console.error('error evaluating rule', snippetId, e);
       }
       return Promise.resolve(result);
     }
 
     const snippetSrc = getFunctionBody(snippet);
-    enableLogs && console.log('async eval:', snippetId, snippetSrc);
+    logsConfig.evals && console.log('async eval:', snippetId, snippetSrc);
     return requestEval(snippetSrc, snippetId).catch((e) => {
-      enableLogs && console.error('error evaluating rule', snippetId, e);
+      logsConfig.evals && console.error('error evaluating rule', snippetId, e);
       return false;
     });
   }
@@ -116,105 +115,161 @@ export default class AutoConsentCMPBase implements AutoCMP {
     // try IAB by default
     return Promise.resolve(true);
   }
+
+  // Implementing DomActionsProvider below:
+  click(selector: ElementSelector, all = false) {
+    return this.autoconsent.domActions.click(selector, all);
+  }
+
+  elementExists(selector: ElementSelector) {
+    return this.autoconsent.domActions.elementExists(selector);
+  }
+
+  elementVisible(selector: ElementSelector, check: VisibilityCheck) {
+    return this.autoconsent.domActions.elementVisible(selector, check);
+  }
+
+  waitForElement(selector: ElementSelector, timeout?: number) {
+    return this.autoconsent.domActions.waitForElement(selector, timeout);
+  }
+
+  waitForVisible(selector: ElementSelector, timeout?: number, check?: VisibilityCheck) {
+    return this.autoconsent.domActions.waitForVisible(selector, timeout, check);
+  }
+
+  waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+    return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
+  }
+
+  wait(ms: number) {
+    return this.autoconsent.domActions.wait(ms);
+  }
+
+  hide(selector: string, method: HideMethod) {
+    return this.autoconsent.domActions.hide(selector, method);
+  }
+
+  prehide(selector: string) {
+    return this.autoconsent.domActions.prehide(selector);
+  }
+
+  undoPrehide() {
+    return this.autoconsent.domActions.undoPrehide();
+  }
+
+  querySingleReplySelector(selector: string, parent?: any) {
+    return this.autoconsent.domActions.querySingleReplySelector(selector, parent);
+  }
+
+  querySelectorChain(selectors: string[]) {
+    return this.autoconsent.domActions.querySelectorChain(selectors);
+  }
+
+  elementSelector(selector: ElementSelector) {
+    return this.autoconsent.domActions.elementSelector(selector);
+  }
 }
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
 
-  constructor(public config: AutoConsentCMPRule, autoconsentInstance: AutoConsent) {
+  constructor(public rule: AutoConsentCMPRule, autoconsentInstance: AutoConsent) {
     super(autoconsentInstance);
-    this.name = config.name;
-    this.runContext = config.runContext || defaultRunContext;
+    this.name = rule.name;
+    this.runContext = rule.runContext || defaultRunContext;
   }
 
   get hasSelfTest(): boolean {
-    return !!this.config.test;
+    return !!this.rule.test;
   }
 
   get isIntermediate(): boolean {
-    return !!this.config.intermediate;
+    return !!this.rule.intermediate;
   }
 
   get isCosmetic(): boolean {
-    return !!this.config.cosmetic;
+    return !!this.rule.cosmetic;
   }
 
   get prehideSelectors(): string[] {
-    return this.config.prehideSelectors;
+    return this.rule.prehideSelectors;
   }
 
   async detectCmp() {
-    if (this.config.detectCmp) {
-      return this._runRulesParallel(this.config.detectCmp);
+    if (this.rule.detectCmp) {
+      return this._runRulesParallel(this.rule.detectCmp);
     }
     return false;
   }
 
   async detectPopup() {
-    if (this.config.detectPopup) {
-      return this._runRulesSequentially(this.config.detectPopup);
+    if (this.rule.detectPopup) {
+      return this._runRulesSequentially(this.rule.detectPopup);
     }
     return false;
   }
 
   async optOut() {
-    if (this.config.optOut) {
-      enableLogs && console.log('Initiated optOut()', this.config.optOut);
-      return this._runRulesSequentially(this.config.optOut);
+    const logsConfig = this.autoconsent.config.logs;
+    if (this.rule.optOut) {
+      logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut);
+      return this._runRulesSequentially(this.rule.optOut);
     }
     return false;
   }
 
   async optIn() {
-    if (this.config.optIn) {
-      enableLogs && console.log('Initiated optIn()', this.config.optIn);
-      return this._runRulesSequentially(this.config.optIn);
+    const logsConfig = this.autoconsent.config.logs;
+    if (this.rule.optIn) {
+      logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn);
+      return this._runRulesSequentially(this.rule.optIn);
     }
     return false;
   }
 
   async openCmp() {
-    if (this.config.openCmp) {
-      return this._runRulesSequentially(this.config.openCmp);
+    if (this.rule.openCmp) {
+      return this._runRulesSequentially(this.rule.openCmp);
     }
     return false;
   }
 
   async test() {
     if (this.hasSelfTest) {
-      return this._runRulesSequentially(this.config.test);
+      return this._runRulesSequentially(this.rule.test);
     }
     return super.test();
   }
 
   async evaluateRuleStep(rule: AutoConsentRuleStep) {
     const results = [];
+    const logsConfig = this.autoconsent.config.logs;
     if (rule.exists) {
-      results.push(elementExists(rule.exists));
+      results.push(this.elementExists(rule.exists));
     }
     if (rule.visible) {
-      results.push(elementVisible(rule.visible, rule.check));
+      results.push(this.elementVisible(rule.visible, rule.check));
     }
     if (rule.eval) {
       const res = this.mainWorldEval(rule.eval)
       results.push(res);
     }
     if (rule.waitFor) {
-      results.push(waitForElement(rule.waitFor, rule.timeout));
+      results.push(this.waitForElement(rule.waitFor, rule.timeout));
     }
     if (rule.waitForVisible) {
-      results.push(waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
+      results.push(this.waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
     }
     if (rule.click) {
-      results.push(click(rule.click, rule.all));
+      results.push(this.click(rule.click, rule.all));
     }
     if (rule.waitForThenClick) {
-      results.push(waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
+      results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
     }
     if (rule.wait) {
-      results.push(wait(rule.wait));
+      results.push(this.wait(rule.wait));
     }
     if (rule.hide) {
-      results.push(hide(rule.hide, rule.method));
+      results.push(this.hide(rule.hide, rule.method));
     }
     if (rule.if) {
       if (!rule.if.exists && !rule.if.visible) {
@@ -222,7 +277,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         return false;
       }
       const condition = await this.evaluateRuleStep(rule.if);
-      enableLogs && console.log('Condition is', condition);
+      logsConfig.rulesteps && console.log('Condition is', condition);
       if (condition) {
         results.push(this._runRulesSequentially(rule.then));
       } else if (rule.else) {
@@ -239,7 +294,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
   
     if (results.length === 0) {
-      enableLogs && console.warn('Unrecognized rule', rule);
+      logsConfig.errors && console.warn('Unrecognized rule', rule);
       return false;
     }
   
@@ -255,10 +310,11 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
   
   async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
+    const logsConfig = this.autoconsent.config.logs;
     for (const rule of rules) {
-      enableLogs && console.log('Running rule...', rule);
+      logsConfig.rulesteps && console.log('Running rule...', rule);
       const result = await this.evaluateRuleStep(rule);
-      enableLogs && console.log('...rule result', result);
+      logsConfig.rulesteps && console.log('...rule result', result);
       if (!result && !rule.optional) {
         return false;
       }
