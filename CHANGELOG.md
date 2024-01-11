@@ -1,3 +1,15 @@
+# v8.2.0 (Thu Jan 11 2024)
+
+#### 🚀 Enhancement
+
+- Klaro: fix toggle selectors [#339](https://github.com/duckduckgo/autoconsent/pull/339) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v8.1.0 (Wed Jan 10 2024)
 
 #### 🚀 Enhancement
