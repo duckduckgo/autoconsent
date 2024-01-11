@@ -21,7 +21,6 @@ export class DomActions implements DomActionsProvider {
 
   elementExists(selector: ElementSelector): boolean {
     const exists = this.elementSelector(selector).length > 0;
-    // enableLogs && console.log("[exists?]", selector, exists);
     return exists;
   }
 
@@ -32,7 +31,6 @@ export class DomActions implements DomActionsProvider {
       // check for display: none
       results[i] = isElementVisible(e);
     });
-    // enableLogs && console.log("[visible?]", selector, check, elem, results);
     if (check === "none") {
       return results.every(r => !r);
     } else if (results.length === 0) {
@@ -58,7 +56,6 @@ export class DomActions implements DomActionsProvider {
   waitForVisible(selector: ElementSelector, timeout = 10000, check: VisibilityCheck = 'any'): Promise<boolean> {
     const interval = 200;
     const times = Math.ceil((timeout) / interval);
-    // enableLogs && console.log("[waitForVisible]", ruleStep.waitFor);
     return waitFor(
       () => this.elementVisible(selector, check),
       times,
@@ -67,16 +64,13 @@ export class DomActions implements DomActionsProvider {
   }
 
   async waitForThenClick(selector: ElementSelector, timeout = 10000, all = false): Promise<boolean> {
-    // enableLogs && console.log("[waitForThenClick]", ruleStep.waitForThenClick);
     await this.waitForElement(selector, timeout);
     return this.click(selector, all);
   }
 
   wait(ms: number): Promise<true> {
-    // enableLogs && console.log(`waiting for ${ruleStep.wait}ms`);
     return new Promise(resolve => {
       setTimeout(() => {
-        // enableLogs && console.log(`done waiting`);
         resolve(true);
       }, ms);
     });
