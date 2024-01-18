@@ -244,9 +244,11 @@ export default class AutoConsent {
         })
     )
 
-    const firstCmpWithPopup = await Promise.any(tasks)
-
-    await onFirstPopupAppears(firstCmpWithPopup)
+    await Promise.any(tasks)
+      .then(cmp => {
+        onFirstPopupAppears(cmp)
+      })
+      .catch(() => null)
 
     const results = await Promise.allSettled(tasks)
     const popups: AutoCMP[] = []
