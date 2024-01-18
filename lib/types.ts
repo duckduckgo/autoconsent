@@ -1,6 +1,6 @@
 import { ContentScriptMessage } from "./messages";
 import { ConsentOMaticConfig } from "./cmps/consentomatic";
-import { AutoConsentCMPRule, RunContext } from "./rules";
+import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from "./rules";
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -20,6 +20,22 @@ export interface AutoCMP {
   test(): Promise<boolean>
 }
 
+export interface DomActionsProvider {
+  click(selector: ElementSelector, all: boolean): boolean;
+  elementExists(selector: ElementSelector): boolean;
+  elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
+  waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;
+  waitForVisible(selector: ElementSelector, timeout?: number, check?: VisibilityCheck): Promise<boolean>;
+  waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean): Promise<boolean>;
+  wait(ms: number): Promise<true>;
+  hide(selector: string, method: HideMethod): boolean;
+  prehide(selector: string): boolean;
+  undoPrehide(): boolean;
+  querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
+  querySelectorChain(selectors: string[]): HTMLElement[];
+  elementSelector(selector: ElementSelector): HTMLElement[];
+}
+
 export type RuleBundle = {
   autoconsent: AutoConsentCMPRule[];
   consentomatic: { [name: string]: ConsentOMaticConfig };
@@ -36,6 +52,13 @@ export type Config = {
   detectRetries: number;
   isMainWorld: boolean;
   prehideTimeout: number;
+  logs: {
+    lifecycle: boolean;
+    rulesteps: boolean;
+    evals: boolean;
+    errors: boolean;
+    messages: boolean;
+  };
 }
 
 export type LifecycleState = 'loading' |

@@ -14,6 +14,11 @@ async function init() {
   const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
   const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
   const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
+  const logsLifecycleCheckbox = document.querySelector('input#logs-lifecycle') as HTMLInputElement;
+  const logsRulestepsCheckbox = document.querySelector('input#logs-rulesteps') as HTMLInputElement;
+  const logsEvalsCheckbox = document.querySelector('input#logs-evals') as HTMLInputElement;
+  const logsErrorsCheckbox = document.querySelector('input#logs-errors') as HTMLInputElement;
+  const logsMessagesCheckbox = document.querySelector('input#logs-messages') as HTMLInputElement;
   const ruleReloadButton = document.querySelector('#reload') as HTMLButtonElement;
   const resetButton = document.querySelector('#reset') as HTMLButtonElement;
 
@@ -46,6 +51,11 @@ async function init() {
   // set form initial values
 
   enabledCheckbox.checked = autoconsentConfig.enabled;
+  logsLifecycleCheckbox.checked = autoconsentConfig.logs.lifecycle;
+  logsRulestepsCheckbox.checked = autoconsentConfig.logs.rulesteps;
+  logsEvalsCheckbox.checked = autoconsentConfig.logs.evals;
+  logsErrorsCheckbox.checked = autoconsentConfig.logs.errors;
+  logsMessagesCheckbox.checked = autoconsentConfig.logs.messages;
   retriesInput.value = autoconsentConfig.detectRetries.toString();
   if (autoconsentConfig.autoAction === 'optIn') {
     optInRadio.checked = true;
@@ -106,6 +116,33 @@ async function init() {
   }
   cosmeticOnRadio.addEventListener('change', cosmeticChange);
   cosmeticOffRadio.addEventListener('change', cosmeticChange);
+
+  function updateLogsConfig() {
+    autoconsentConfig.logs = {
+      lifecycle: logsLifecycleCheckbox.checked,
+      rulesteps: logsRulestepsCheckbox.checked,
+      evals: logsEvalsCheckbox.checked,
+      errors: logsErrorsCheckbox.checked,
+      messages: logsMessagesCheckbox.checked,
+    };
+    storageSet({ config: autoconsentConfig });
+  }
+
+  logsLifecycleCheckbox.addEventListener('change', () => {
+    updateLogsConfig();
+  });
+  logsRulestepsCheckbox.addEventListener('change', () => {
+    updateLogsConfig();
+  });
+  logsEvalsCheckbox.addEventListener('change', () => {
+    updateLogsConfig();
+  });
+  logsErrorsCheckbox.addEventListener('change', () => {
+    updateLogsConfig();
+  });
+  logsMessagesCheckbox.addEventListener('change', () => {
+    updateLogsConfig();
+  });
 
   ruleReloadButton.addEventListener('click', async () => {
     const res = await fetch("./rules.json");

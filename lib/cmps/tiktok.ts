@@ -1,5 +1,3 @@
-import { enableLogs } from "../config";
-import { elementExists } from "../rule-executors";
 import { RunContext } from "../rules";
 import { isElementVisible } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -32,7 +30,7 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return elementExists("tiktok-cookie-banner");
+    return this.elementExists("tiktok-cookie-banner");
   }
 
   async detectPopup() {
@@ -41,25 +39,27 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    const logsConfig = this.autoconsent.config.logs;
     const declineButton = this.getShadowRoot().querySelector('.button-wrapper button:first-child') as HTMLElement;
     if (declineButton) {
-      enableLogs && console.log("[clicking]", declineButton);
+      logsConfig.rulesteps && console.log("[clicking]", declineButton);
       declineButton.click();
       return true;
     } else {
-      enableLogs && console.log("no decline button found");
+      logsConfig.errors && console.log("no decline button found");
       return false;
     }
   }
 
   async optIn() {
+    const logsConfig = this.autoconsent.config.logs;
     const acceptButton = this.getShadowRoot().querySelector('.button-wrapper button:last-child') as HTMLElement;
     if (acceptButton) {
-      enableLogs && console.log("[clicking]", acceptButton);
+      logsConfig.rulesteps && console.log("[clicking]", acceptButton);
       acceptButton.click();
       return true;
     } else {
-      enableLogs && console.log("no accept button found");
+      logsConfig.errors && console.log("no accept button found");
       return false;
     }
   }

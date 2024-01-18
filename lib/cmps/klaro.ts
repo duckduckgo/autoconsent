@@ -1,4 +1,3 @@
-import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
 import AutoConsentCMPBase from "./base";
 
 export default class Klaro extends AutoConsentCMPBase {
@@ -19,45 +18,45 @@ export default class Klaro extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    if (elementExists('.klaro > .cookie-modal')) {
+    if (this.elementExists('.klaro > .cookie-modal')) {
       this.settingsOpen = true;
       return true;
     }
-    return elementExists(".klaro > .cookie-notice");
+    return this.elementExists(".klaro > .cookie-notice");
   }
 
   async detectPopup() {
-    return elementVisible(".klaro > .cookie-notice,.klaro > .cookie-modal", 'any');
+    return this.elementVisible(".klaro > .cookie-notice,.klaro > .cookie-modal", 'any');
   }
 
   async optOut() {
-    if (click('.klaro .cn-decline')) {
+    if (this.click('.klaro .cn-decline')) {
       return true;
     }
 
     if (!this.settingsOpen) {
-      click('.klaro .cn-learn-more');
-      await waitForElement('.klaro > .cookie-modal', 2000);
+      this.click('.klaro .cn-learn-more,.klaro .cm-button-manage');
+      await this.waitForElement('.klaro > .cookie-modal', 2000);
       this.settingsOpen = true;
     }
 
-    if (click('.klaro .cn-decline')) {
+    if (this.click('.klaro .cn-decline')) {
       return true;
     }
 
-    click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked)', true);
-    return click('.cm-btn-accept');
+    this.click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required),.cm-purpose:not(.cm-toggle-all) > div > input:not(.half-checked,.required,.only-required)', true);
+    return this.click('.cm-btn-accept,.cm-button');
   }
 
   async optIn() {
-    if (click('.klaro .cm-btn-accept-all')) {
+    if (this.click('.klaro .cm-btn-accept-all')) {
       return true;
     }
     if (this.settingsOpen) {
-      click('.cm-purpose:not(.cm-toggle-all) > input.half-checked', true);
-      return click('.cm-btn-accept');
+      this.click('.cm-purpose:not(.cm-toggle-all) > input.half-checked', true);
+      return this.click('.cm-btn-accept');
     }
-    return click('.klaro .cookie-notice .cm-btn-success');
+    return this.click('.klaro .cookie-notice .cm-btn-success');
   }
 
   async test() {

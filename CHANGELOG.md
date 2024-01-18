@@ -1,3 +1,44 @@
+# v9.1.0 (Thu Jan 11 2024)
+
+#### 🚀 Enhancement
+
+- Add a rule for lightbox CMP [#329](https://github.com/duckduckgo/autoconsent/pull/329) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
+# v9.0.0 (Thu Jan 11 2024)
+
+#### 💥 Breaking Change
+
+- Configurable logs [#332](https://github.com/duckduckgo/autoconsent/pull/332) ([@muodov](https://github.com/muodov))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 3 updates [#335](https://github.com/duckduckgo/autoconsent/pull/335) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v8.2.0 (Thu Jan 11 2024)
+
+#### 🚀 Enhancement
+
+- Klaro: fix toggle selectors [#339](https://github.com/duckduckgo/autoconsent/pull/339) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v8.1.0 (Wed Jan 10 2024)
 
 #### 🚀 Enhancement

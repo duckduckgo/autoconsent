@@ -1,5 +1,4 @@
-import { enableLogs } from "../lib/config";
-import { Config } from "../lib/types";
+import { normalizeConfig } from "../lib/utils";
 import { storageGet, storageSet } from "./mv-compat";
 
 export async function showOptOutStatus(
@@ -28,7 +27,7 @@ export async function showOptOutStatus(
     title = `Click to opt out (${cmp})`;
     icon = "icons/cookie.png";
   }
-  enableLogs && console.log('Setting action state to', status);
+  console.log('Setting action state to', status);
   const action = chrome.action || chrome.pageAction;
   if (chrome.pageAction) {
     chrome.pageAction.show(tabId);
@@ -44,35 +43,11 @@ export async function showOptOutStatus(
 }
 
 export async function initConfig() {
-  const storedConfig = await storageGet('config');
-  enableLogs && console.log('storedConfig', storedConfig);
-  const defaultConfig: Config = {
-    enabled: true,
-    autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
-    disabledCmps: [],
-    enablePrehide: true,
-    enableCosmeticRules: true,
-    detectRetries: 20,
-    isMainWorld: false,
-    prehideTimeout: 2000,
-  };
-  if (!storedConfig) {
-    enableLogs && console.log('new config', defaultConfig);
-    await storageSet({
-      config: defaultConfig,
-    });
-  } else { // clean up the old stored config in case there are new fields
-    const updatedConfig: Config = structuredClone(defaultConfig);
-    for (const key of Object.keys(defaultConfig)) {
-      if (typeof storedConfig[key] !== 'undefined') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TS doesn't know that we've checked for undefined
-        updatedConfig[key] = storedConfig[key];
-      }
-    }
-    enableLogs && console.log('updated config', updatedConfig);
-    await storageSet({
-      config: updatedConfig,
-    });
-  }
+  const storedConfig = (await storageGet('config')) || {};
+  console.log('storedConfig', storedConfig);
+  const updatedConfig = normalizeConfig(storedConfig);
+  console.log('updated config', updatedConfig);
+  await storageSet({
+    config: updatedConfig,
+  });
 }

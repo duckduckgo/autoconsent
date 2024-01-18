@@ -1,4 +1,5 @@
 import { HideMethod } from "./rules";
+import { Config } from "./types";
 
 // get or create a style container for CSS overrides
 export function getStyleElement(styleOverrideElementId = "autoconsent-css-rules"): HTMLStyleElement {
@@ -59,4 +60,34 @@ export function isElementVisible(elem: HTMLElement): boolean {
     }
   }
   return false;
+}
+
+export function normalizeConfig(providedConfig: any): Config {
+  const defaultConfig: Config = {
+    enabled: true,
+    autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
+    disabledCmps: [],
+    enablePrehide: true,
+    enableCosmeticRules: true,
+    detectRetries: 20,
+    isMainWorld: false,
+    prehideTimeout: 2000,
+    logs: {
+      lifecycle: false,
+      rulesteps: false,
+      evals: false,
+      errors: true,
+      messages: false,
+    },
+  };
+  const updatedConfig: Config = structuredClone(defaultConfig);
+  // filter out any unknown entries
+  for (const key of Object.keys(defaultConfig)) {
+    if (typeof providedConfig[key] !== 'undefined') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error - TS doesn't know that we've checked for undefined
+      updatedConfig[key] = providedConfig[key];
+    }
+  }
+  return updatedConfig;
 }

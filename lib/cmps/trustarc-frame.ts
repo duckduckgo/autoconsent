@@ -1,4 +1,3 @@
-import { click, elementExists, elementVisible, waitForElement } from "../rule-executors";
 import { RunContext } from "../rules";
 import { waitFor } from "../utils";
 import AutoConsentCMPBase from "./base";
@@ -30,7 +29,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
   async detectPopup() {
     // we're already inside the popup
-    return elementVisible("#defaultpreferencemanager", 'any') && elementVisible(".mainContent", 'any');
+    return this.elementVisible("#defaultpreferencemanager", 'any') && this.elementVisible(".mainContent", 'any');
   }
 
   async navigateToSettings() {
@@ -38,29 +37,29 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     await waitFor(
       async () => {
         return (
-          elementExists(".shp") ||
-          elementVisible(".advance", 'any') ||
-          elementExists(".switch span:first-child")
+          this.elementExists(".shp") ||
+          this.elementVisible(".advance", 'any') ||
+          this.elementExists(".switch span:first-child")
         );
       },
       10,
       500
     );
     // splash screen -> hit more information
-    if (elementExists(".shp")) {
-      click(".shp");
+    if (this.elementExists(".shp")) {
+      this.click(".shp");
     }
 
-    await waitForElement(".prefPanel", 5000);
+    await this.waitForElement(".prefPanel", 5000);
 
     // go to advanced settings if not yet shown
-    if (elementVisible(".advance", 'any')) {
-      click(".advance");
+    if (this.elementVisible(".advance", 'any')) {
+      this.click(".advance");
     }
 
     // takes a while to load the opt-in/opt-out buttons
     return await waitFor(
-      () => elementVisible(".switch span:first-child", 'any'),
+      () => this.elementVisible(".switch span:first-child", 'any'),
       5,
       1000
     );
@@ -68,51 +67,51 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
   async optOut() {
     await waitFor(() => document.readyState === 'complete', 20, 100);
-    await waitForElement(".mainContent[aria-hidden=false]", 5000);
+    await this.waitForElement(".mainContent[aria-hidden=false]", 5000);
 
-    if (click(".rejectAll")) {
+    if (this.click(".rejectAll")) {
       return true;
     }
 
-    if (elementExists('.prefPanel')) {
-      await waitForElement('.prefPanel[style="visibility: visible;"]', 3000);
+    if (this.elementExists('.prefPanel')) {
+      await this.waitForElement('.prefPanel[style="visibility: visible;"]', 3000);
     }
 
-    if (click("#catDetails0")) {
-      click(".submit");
-      waitForThenClick("#gwt-debug-close_id", 5000);
+    if (this.click("#catDetails0")) {
+      this.click(".submit");
+      this.waitForThenClick("#gwt-debug-close_id", 5000);
       return true;
     }
 
-    if (click(".required")) {
-      waitForThenClick("#gwt-debug-close_id", 5000);
+    if (this.click(".required")) {
+      this.waitForThenClick("#gwt-debug-close_id", 5000);
       return true;
     }
 
     await this.navigateToSettings();
 
-    click(".switch span:nth-child(1):not(.active)", true);
+    this.click(".switch span:nth-child(1):not(.active)", true);
 
-    click(".submit");
+    this.click(".submit");
 
     // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
-    waitForThenClick("#gwt-debug-close_id", 300000);
+    this.waitForThenClick("#gwt-debug-close_id", 300000);
 
     return true;
   }
 
   async optIn() {
-    if (click('.call')) {
+    if (this.click('.call')) {
       return true;
     }
     await this.navigateToSettings();
-    click(".switch span:nth-child(2)", true);
+    this.click(".switch span:nth-child(2)", true);
 
-    click(".submit");
+    this.click(".submit");
 
     // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
-    waitForElement("#gwt-debug-close_id", 300000).then(() => {
-      click("#gwt-debug-close_id");
+    this.waitForElement("#gwt-debug-close_id", 300000).then(() => {
+      this.click("#gwt-debug-close_id");
     });
 
     return true;
