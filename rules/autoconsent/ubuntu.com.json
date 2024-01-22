@@ -42,7 +42,7 @@
         {
             "any": [
                 {
-                    "waitForThenClick": "button.p-button"
+                    "waitForThenClick": "button.js-manage"
                 },
                 {
                     "waitForThenClick": "xpath///*[@id=\"cookie-policy-content\"]/p[4]/button[2]"
@@ -50,14 +50,15 @@
             ]
         },
         {
-            "waitForThenClick": ".p-switch__input:checked",
+            "waitForThenClick": "dialog.cookie-policy .p-switch__input:checked",
             "optional": true,
-            "all": true
+            "all": true,
+            "timeout": 500
         },
         {
             "any": [
                 {
-                    "waitForThenClick": "div > button"
+                    "waitForThenClick": "dialog.cookie-policy .js-save-preferences"
                 },
                 {
                     "waitForThenClick": "xpath///*[@id=\"modal\"]/div/button"
