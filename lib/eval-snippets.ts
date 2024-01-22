@@ -70,7 +70,7 @@ export const snippets = {
   EVAL_EU_COOKIE_COMPLIANCE_0: () => document.cookie.indexOf('cookie-agreed=2') === -1,
   EVAL_EU_COOKIE_LAW_0: () => !document.cookie.includes('euCookie'),
   EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
-  EVAL_EZOIC_1: () => !!document.cookie.match(/ezCMPCookieConsent=[^;]+\|2=0\|3=0\|4=0/),
+  EVAL_EZOIC_1: () => !!document.cookie.match(/ez-consent-tcf/),
   EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
   EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
   EVAL_IUBENDA_0: () => document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach(x => {if(x.checked) x.click()}) || true,

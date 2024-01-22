@@ -1,7 +1,7 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('EZoic', [
-  'https://www.diyphotography.net/',
+  'https://computingforgeeks.com/',
 ], {
   skipRegions: ['US'],
 });
