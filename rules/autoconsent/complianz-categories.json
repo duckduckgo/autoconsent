@@ -4,14 +4,23 @@
     "detectCmp": [{ "exists": ".cc-type-categories[aria-describedby=\"cookieconsent:desc\"]" }],
     "detectPopup": [{ "visible": ".cc-type-categories[aria-describedby=\"cookieconsent:desc\"]" }],
     "optIn": [
-        { "click": ".cc-accept-all", "optional": true },
-        { "click": ".cc-allow", "optional": true },
-        { "click": ".cc-dismiss", "optional": true }
+        {
+            "any": [
+                { "click": ".cc-accept-all" },
+                { "click": ".cc-allow-all" },
+                { "click": ".cc-allow" },
+                { "click": ".cc-dismiss" }
+            ]
+        }
     ],
     "optOut": [
-        { "click": ".cc-dismiss" }
-    ],
-    "test": [
-        { "eval": "EVAL_COMPLIANZ_CATEGORIES_0" }
+        {
+            "if": { "exists": ".cc-type-categories[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" },
+            "then": [{ "click": ".cc-dismiss" }],
+            "else": [
+                { "click": ".cc-type-categories input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
+                { "click": ".cc-save" }
+            ]
+        }
     ]
 }
