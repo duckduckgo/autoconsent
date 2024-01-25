@@ -1,5 +1,6 @@
 {
   "name": "ketch",
+  "vendorUrl": "https://www.ketch.com",
   "runContext": {
     "frame": false,
     "main": true
@@ -24,37 +25,39 @@
         "exists": "#lanyard_root button[class='confirmButton']"
       },
       "then": [
-       { "waitForThenClick":"#lanyard_root div[class^='buttons'] > :nth-child(2)" },
+       { "waitForThenClick":"#lanyard_root div[class*=buttons] > :nth-child(2)" },
        { "click": "#lanyard_root button[class='confirmButton']" }
       ],
       "else": [
-        { "waitForThenClick":"#lanyard_root div[class^='buttons'] > :nth-child(2)" }
+        { "waitForThenClick":"#lanyard_root div[class*=buttons] > :nth-child(2)" }
       ]
     }
   ],
   "optOut": [
-    { 
-      "click": "#lanyard_root button[class^='link']",
+    {
+      "if": {
+        "exists": "#lanyard_root [aria-describedby=banner-description]"
+      },
+      "then": [
+        {
+          "waitForThenClick":"#lanyard_root div[class*=buttons] > button[class*=secondaryButton]",
+          "comment": "can be either settings or reject button"
+        }
+      ]
+    },
+    {
+      "waitFor": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description]",
+      "timeout": 1000,
       "optional": true
     },
     {
       "if": {
-        "exists": "#lanyard_root button[class*='confirmButton']"
-      },  
+        "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description]"
+      },
       "then": [
-        { "waitForThenClick": "#lanyard_root button[class*='rejectButton']" },
-        { "click": "#lanyard_root button[class*='confirmButton']" }     
-      ],
-      "else": [
-        {
-          "click": "#lanyard_root div[class^='buttons'] > :nth-child(1)",
-          "optional": true
-        },
-        { "waitForThenClick": "#lanyard_root input:checked" },
-        { "click": "#consentsTab > div:nth-child(2) > div > div[class^='actions'] > button:nth-child(1)" }
+        { "waitForThenClick": "#lanyard_root button[class*=rejectButton]" },
+        { "click": "#lanyard_root button[class*=confirmButton],#lanyard_root div[class*=actions_] > button:nth-child(1)" }
       ]
     }
-  ],
-  "test": []
-  }
-  
+  ]
+}
