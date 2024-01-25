@@ -1,3 +1,15 @@
+# v9.2.0 (Thu Jan 25 2024)
+
+#### 🚀 Enhancement
+
+- Handle popup right after first popup detected (#326) [#327](https://github.com/duckduckgo/autoconsent/pull/327) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
 # v9.1.0 (Thu Jan 11 2024)
 
 #### 🚀 Enhancement
