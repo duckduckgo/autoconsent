@@ -282,6 +282,8 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         results.push(this._runRulesSequentially(rule.then));
       } else if (rule.else) {
         results.push(this._runRulesSequentially(rule.else));
+      } else {
+        results.push(true);
       }
     }
     if (rule.any) {
