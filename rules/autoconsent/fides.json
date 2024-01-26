@@ -1,0 +1,25 @@
+{
+  "name": "fides",
+  "vendorUrl": "https://github.com/ethyca/fides",
+  "prehideSelectors": ["#fides-overlay"],
+  "detectCmp": [
+    {
+      "exists": "#fides-overlay #fides-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#fides-overlay #fides-banner"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#fides-banner [data-testid=\"Accept all-btn\"]"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#fides-banner [data-testid=\"Reject all-btn\"]"
+    }
+  ]
+}
