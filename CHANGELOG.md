@@ -1,3 +1,18 @@
+# v9.4.0 (Fri Jan 26 2024)
+
+#### 🚀 Enhancement
+
+- Improve Osano rule [#350](https://github.com/duckduckgo/autoconsent/pull/350) ([@muodov](https://github.com/muodov))
+- Increase timeout in the sourcepoint rule [#349](https://github.com/duckduckgo/autoconsent/pull/349) ([@muodov](https://github.com/muodov))
+- Complianz regression fixes [#347](https://github.com/duckduckgo/autoconsent/pull/347) ([@muodov](https://github.com/muodov))
+- Add rule for bahn.de [#348](https://github.com/duckduckgo/autoconsent/pull/348) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.3.0 (Fri Jan 26 2024)
 
 #### 🚀 Enhancement
