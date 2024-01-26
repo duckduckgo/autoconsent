@@ -4,17 +4,30 @@
     "detectCmp": [{ "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
     "detectPopup": [{ "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
     "optIn": [
-        { "click": ".cc-accept-all", "optional": true },
-        { "click": ".cc-allow", "optional": true },
-        { "click": ".cc-dismiss", "optional": true }
+        {
+            "any": [
+                { "click": ".cc-accept-all" },
+                { "click": ".cc-allow" },
+                { "click": ".cc-dismiss" }
+            ]
+        }
     ],
     "optOut": [
-        { "click": ".cc-settings" },
-        { "waitForVisible": "[aria-label=\"cookies preferences popup\"]" },
-        { "click": "[aria-label=\"cookies preferences popup\"] input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
-        { "click": "[aria-label=\"cookies preferences popup\"] [aria-label=\"Accept Selected\"], [aria-label=\"cookies preferences popup\"] [aria-label=\"Save my choice\"], .cc-btn-accept-selected, .cc-deny", "optional": true }
-    ],
-    "test": [
-        { "eval": "EVAL_COMPLIANZ_OPTIN_0" }
+        {
+            "if": { "visible": ".cc-deny" },
+            "then": [{ "click": ".cc-deny" }],
+            "else": [{
+                "if": {"visible": ".cc-settings"},
+                "then": [
+                    { "waitForThenClick": ".cc-settings" },
+                    { "waitForVisible": ".cc-settings-view"},
+                    { "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
+                    { "click": ".cc-settings-view .cc-btn-accept-selected" }
+                ],
+                "else": [
+                    { "click": ".cc-dismiss" }
+                ]
+            }]
+        }
     ]
 }
