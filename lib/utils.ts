@@ -62,6 +62,13 @@ export function isElementVisible(elem: HTMLElement): boolean {
   return false;
 }
 
+export function copyObject(data: any) {
+  if (globalThis.structuredClone) {
+    return structuredClone(data);
+  }
+  return JSON.parse(JSON.stringify(data));
+}
+
 export function normalizeConfig(providedConfig: any): Config {
   const defaultConfig: Config = {
     enabled: true,
@@ -80,7 +87,7 @@ export function normalizeConfig(providedConfig: any): Config {
       messages: false,
     },
   };
-  const updatedConfig: Config = structuredClone(defaultConfig);
+  const updatedConfig: Config = copyObject(defaultConfig);
   // filter out any unknown entries
   for (const key of Object.keys(defaultConfig)) {
     if (typeof providedConfig[key] !== 'undefined') {
