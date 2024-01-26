@@ -1,3 +1,15 @@
+# v9.2.1 (Fri Jan 26 2024)
+
+#### 🐛 Bug Fix
+
+- Handle absence of structuredClone() [#356](https://github.com/duckduckgo/autoconsent/pull/356) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.2.0 (Thu Jan 25 2024)
 
 #### 🚀 Enhancement
