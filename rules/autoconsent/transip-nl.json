@@ -2,8 +2,7 @@
   "name": "transip-nl",
   "runContext": {
       "urlPattern": "^https://www\\.transip\\.nl/"
-    },
-  "cosmetic": true,
+  },
   "prehideSelectors": ["#consent-modal"],
   "detectCmp": [{
     "any": [

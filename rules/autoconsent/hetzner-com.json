@@ -3,7 +3,6 @@
   "runContext": {
     "urlPattern": "^https://www\\.hetzner\\.com/"
   },
-  "cosmetic": true,
   "prehideSelectors": ["#CookieConsent"],
   "detectCmp": [{ "exists": "#CookieConsent" }],
   "detectPopup": [{ "visible": "#CookieConsent" }],
