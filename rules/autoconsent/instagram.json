@@ -1,0 +1,31 @@
+{
+  "name": "instagram",
+  "vendorUrl": "https://instagram.com",
+  "runContext": {
+    "urlPattern": "^https://www\\.instagram\\.com/"
+  },
+  "prehideSelectors": [".x78zum5.xdt5ytf.xg6iff7.x1n2onr6"],
+  "detectCmp": [
+    {
+      "exists": ".x1qjc9v5.x9f619.x78zum5.xdt5ytf.x1iyjqo2.xl56j7k"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".x1qjc9v5.x9f619.x78zum5.xdt5ytf.x1iyjqo2.xl56j7k"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "._a9--._a9_0"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "._a9--._a9_1"
+    },
+    {
+      "wait": 2000
+    }
+  ]
+}
