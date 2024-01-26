@@ -1,3 +1,18 @@
+# v9.3.0 (Fri Jan 26 2024)
+
+#### 🚀 Enhancement
+
+- Add rules from Jan 10 Ghostery fixes [#341](https://github.com/duckduckgo/autoconsent/pull/341) ([@seia-soto](https://github.com/seia-soto))
+- Fix the Canonical rule [#345](https://github.com/duckduckgo/autoconsent/pull/345) ([@muodov](https://github.com/muodov))
+- Update the EZoic rule [#344](https://github.com/duckduckgo/autoconsent/pull/344) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.2.1 (Fri Jan 26 2024)
 
 #### 🐛 Bug Fix
