@@ -1,0 +1,20 @@
+{
+    "name": "strato.de",
+    "prehideSelectors": ["#cookie_initial_modal", ".modal-backdrop"],
+    "runContext": {
+        "urlPattern": "^https://www\\.strato\\.de/"
+    },
+    "detectCmp": [{ "exists": "#cookie_initial_modal" }],
+    "detectPopup": [{ "visible": "#cookie_initial_modal" }],
+    "optIn": [{
+        "click": "button#jss_consent_all_initial_modal"
+    }],
+    "optOut": [
+        {
+            "click": "button#jss_open_settings_modal"
+        },
+        {
+            "click": "button#jss_consent_checked"
+        }
+    ]
+}
