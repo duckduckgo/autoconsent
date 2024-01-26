@@ -11,7 +11,7 @@
     { "wait": 500 },
     { "click": "#ez-manage-settings" },
     { "waitFor": "#ez-cookie-dialog input[type=checkbox]" },
-    { "click": "#ez-cookie-dialog input[type=checkbox][checked]", "all": true },
+    { "click": "#ez-cookie-dialog input[type=checkbox]:checked", "all": true },
     { "click": "#ez-save-settings" }
   ],
   "test": [
