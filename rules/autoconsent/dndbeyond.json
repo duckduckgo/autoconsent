@@ -1,0 +1,31 @@
+{
+  "name": "dndbeyond",
+  "vendorUrl": "https://www.dndbeyond.com/",
+  "runContext": {
+    "urlPattern": "^https://www\\.dndbeyond\\.com/"
+  },
+  "prehideSelectors": ["[id^=cookie-consent-banner]"],
+  "detectCmp": [
+    {
+      "exists": "[id^=cookie-consent-banner]"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "[id^=cookie-consent-banner]"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#cookie-consent-granted"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#cookie-consent-denied"
+    }
+  ],
+  "test": [{
+    "eval": "EVAL_DNDBEYOND_TEST"
+  }]
+}
