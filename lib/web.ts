@@ -223,8 +223,14 @@ export default class AutoConsent {
     return foundCMPs;
   }
 
+  /**
+   * Detect if a CMP has a popup open. Fullfils with the CMP if a popup is open, otherwise rejects.
+   */
   async detectPopup(cmp: AutoCMP): Promise<AutoCMP> {
-    const isOpen = await this.waitForPopup(cmp);
+    const isOpen = await this.waitForPopup(cmp).catch(error => {
+      this.config.logs.errors && console.warn(`error waiting for a popup for ${cmp.name}`, error);
+      return false;
+    });
 
     if (isOpen) {
       this.updateState({ detectedPopups: this.state.detectedPopups.concat([cmp.name]) });
@@ -233,21 +239,18 @@ export default class AutoConsent {
         cmp: cmp.name,
         url: location.href,
       }); // notify the browser
+      return cmp;
     }
-
-    return cmp
+    throw new Error('Popup is not shown');
   }
 
+  /**
+   * Detect if any of the CMPs has a popup open. Returns a list of CMPs with open popups.
+   */
   async detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => Promise<unknown>) {
     const tasks = cmps.map(
       cmp => this.detectPopup(cmp)
-        // Handle errors immediately and propagate the error to next handler: Promise.allSettled
-        .catch(error => {
-          this.config.logs.errors && console.warn(`error waiting for a popup for ${cmp.name}`, error)
-
-          throw error
-        })
-    )
+    );
 
     await Promise.any(tasks)
       .then(cmp => {
