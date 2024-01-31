@@ -3,18 +3,32 @@
   "runContext": {
     "urlPattern": "^https://www\\.reddit\\.com/"
   },
-  "prehideSelectors": ["section:has(a[href^=\"https://www.reddit.com/policies/cookies\"])"],
+  "prehideSelectors": ["[bundlename=reddit_cookie_banner]"],
   "detectCmp": [
-    { "exists": "section:has(a[href^=\"https://www.reddit.com/policies/cookies\"])" }
+    {
+      "exists": "reddit-cookie-banner"
+    }
   ],
   "detectPopup": [
-    { "visible": "section:has(a[href^=\"https://www.reddit.com/policies/cookies\"])" }
+    {
+      "visible": "reddit-cookie-banner"
+    }
   ],
   "optIn": [
-    { "waitForThenClick": "section:has(a[href^=\"https://www.reddit.com/policies/cookies\"]) section[class^='_'] > section:first-child form button" }
+    {
+      "waitForThenClick": [
+        "reddit-cookie-banner",
+        "#accept-all-cookies-button > button"
+      ]
+    }
   ],
   "optOut": [
-    { "waitForThenClick": "section:has(a[href^=\"https://www.reddit.com/policies/cookies\"]) section[class^='_'] > section:last-child form button" }
+    {
+      "waitForThenClick": [
+        "reddit-cookie-banner",
+        "#reject-nonessential-cookies-button > button"
+      ]
+    }
   ],
   "test": [
     {"eval": "EVAL_REDDIT_0"}
