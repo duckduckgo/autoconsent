@@ -241,7 +241,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
   }
 
   async evaluateRuleStep(rule: AutoConsentRuleStep) {
-    const results = [];
+    const results: Array<Promise<boolean> | boolean> = [];
     const logsConfig = this.autoconsent.config.logs;
     if (rule.exists) {
       results.push(this.elementExists(rule.exists));
