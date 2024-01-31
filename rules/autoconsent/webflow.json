@@ -1,0 +1,34 @@
+{
+  "name": "webflow",
+  "vendorUrl": "https://webflow.com/",
+  "prehideSelectors": [".fs-cc-components"],
+  "detectCmp": [
+    {
+      "exists": ".fs-cc-components"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".fs-cc-components"
+    },
+    {
+      "visible": "[fs-cc=banner]"
+    }
+  ],
+  "optIn": [
+    {
+      "wait": 500
+    },
+    {
+      "waitForThenClick": "[fs-cc=banner] [fs-cc=allow]"
+    }
+  ],
+  "optOut": [
+    {
+      "wait": 500
+    },
+    {
+      "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+    }
+  ]
+}
