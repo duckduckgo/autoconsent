@@ -1,3 +1,21 @@
+# v9.6.0 (Wed Jan 31 2024)
+
+#### 🚀 Enhancement
+
+- Add rule for webflow [#364](https://github.com/duckduckgo/autoconsent/pull/364) ([@muodov](https://github.com/muodov))
+- Handle Tealium implicit modal [#363](https://github.com/duckduckgo/autoconsent/pull/363) ([@muodov](https://github.com/muodov))
+- Fix reddit rule [#362](https://github.com/duckduckgo/autoconsent/pull/362) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- regression fix: Do not run opt-out unless a pop-up is actually shown [#365](https://github.com/duckduckgo/autoconsent/pull/365) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.5.0 (Wed Jan 31 2024)
 
 #### 🚀 Enhancement
