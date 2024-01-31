@@ -59,6 +59,8 @@ export default class ConsentManager extends AutoConsentCMPBase {
     await this.waitForElement(".cmptblbox", 2000);
     this.click(".cmptdchoice > a[aria-checked=true]", true);
     this.click(".cmpboxbtnyescustomchoices");
+
+    this.hide('#cmpwrapper,#cmpbox', 'display');
     return true;
   }
 
