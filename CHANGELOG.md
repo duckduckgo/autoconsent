@@ -1,3 +1,27 @@
+# v9.5.0 (Wed Jan 31 2024)
+
+#### 🚀 Enhancement
+
+- Fix Ketch and eu-cookie-compliance [#351](https://github.com/duckduckgo/autoconsent/pull/351) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group with 7 updates [#360](https://github.com/duckduckgo/autoconsent/pull/360) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rule for fides CMP [#359](https://github.com/duckduckgo/autoconsent/pull/359) ([@muodov](https://github.com/muodov))
+- More site-specific rules [#358](https://github.com/duckduckgo/autoconsent/pull/358) ([@muodov](https://github.com/muodov))
+- Support another version of uniconsent [#355](https://github.com/duckduckgo/autoconsent/pull/355) ([@muodov](https://github.com/muodov))
+- Improve Consentmanager.net [#353](https://github.com/duckduckgo/autoconsent/pull/353) ([@muodov](https://github.com/muodov))
+- Improve cookie-law-info rule [#352](https://github.com/duckduckgo/autoconsent/pull/352) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- fix: paypal-us [#361](https://github.com/duckduckgo/autoconsent/pull/361) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.4.0 (Fri Jan 26 2024)
 
 #### 🚀 Enhancement
