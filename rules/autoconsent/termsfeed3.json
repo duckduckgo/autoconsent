@@ -1,0 +1,27 @@
+{
+  "name": "termsfeed3",
+  "vendorUrl": "https://termsfeed.com",
+  "comment": "v3.x.x",
+  "cosmetic": true,
+  "prehideSelectors": [".cc_dialog.cc_css_reboot"],
+  "detectCmp": [
+    {
+      "exists": ".cc_dialog.cc_css_reboot"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".cc_dialog.cc_css_reboot"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": ".cc_dialog.cc_css_reboot .cc_b_ok"
+    }
+  ],
+  "optOut": [
+    {
+      "hide": ".cc_dialog.cc_css_reboot"
+    }
+  ]
+}
