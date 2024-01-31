@@ -1,0 +1,28 @@
+{
+  "name": "temu",
+  "vendorUrl": "https://temu.com",
+  "runContext": {
+    "urlPattern": "^https://[^/]*temu\\.com/"
+  },
+  "prehideSelectors": ["._2d-8vq-W,._1UdBUwni"],
+  "detectCmp": [
+    {
+      "exists": "._3YCsmIaS"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "._3YCsmIaS"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "._3fKiu5wx._3zN5SumS._3tAK973O.IYOfhWEs.VGNGF1pA"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "._3fKiu5wx._1_XToJBF._3tAK973O.IYOfhWEs.VGNGF1pA"
+    }
+  ]
+}
