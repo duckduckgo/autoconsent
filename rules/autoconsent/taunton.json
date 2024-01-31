@@ -23,7 +23,8 @@
   "optOut": [
     {
       "click": "#taunton-user-consent__toolbar input[type=checkbox]:checked",
-      "optional": true
+      "optional": true,
+      "all": true
     },
     {
       "click": "#taunton-user-consent__toolbar button[type=submit]"
