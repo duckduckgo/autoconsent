@@ -19,14 +19,14 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
     runContext: {
       main: true,
       frame: false,
+      urlPattern: '',
     },
-    intermediate: false,
     prehideSelectors: [],
     detectCmp: [{ exists: '#TODO'}],
     detectPopup: [{ visible: '#TODO'}],
     optIn: [{ waitForThenClick: '#Accept'}],
     optOut: [{ waitForThenClick: '#Reject'}],
-    test: []
+    test: [{ eval: "EVAL_TODO" }]
   }
   const ruleString = JSON.stringify(rule, undefined, 2)
   const testString = `import generateCMPTests from "../playwright/runner";

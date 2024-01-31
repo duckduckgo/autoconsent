@@ -1,0 +1,31 @@
+{
+  "name": "svt.se",
+  "vendorUrl": "https://www.svt.se/",
+  "runContext": {
+    "urlPattern": "^https://www\\.svt\\.se/"
+  },
+  "prehideSelectors": [".CookieConsent__root___3GjU8"],
+  "detectCmp": [
+    {
+      "exists": ".CookieConsent__root___3GjU8"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".CookieConsent__modal___gvkZW"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": ".CookieConsent__primaryButton___Th47k"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": ".CookieConsent__secondaryButton___jzCXF:nth-child(2)"
+    }
+  ],
+  "test": [{
+    "eval": "EVAL_SVT_TEST"
+  }]
+}

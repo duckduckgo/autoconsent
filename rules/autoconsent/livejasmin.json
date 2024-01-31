@@ -1,0 +1,34 @@
+{
+  "name": "livejasmin",
+  "vendorUrl": "https://www.livejasmin.com/",
+  "runContext": {
+    "urlPattern": "^https://www\\.livejasmin\\.com/"
+  },
+  "prehideSelectors": ["#consent_modal"],
+  "detectCmp": [
+    {
+      "exists": "#consent_modal"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#consent_modal"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#consent_modal button.jOyTQg"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#consent_modal button.bwexRL"
+    },
+    {
+      "waitForVisible": "[data-testid=PrivacyPreferenceCenterWithConsentCookieContent]"
+    },
+    {
+      "waitForThenClick": "[data-testid=PrivacyPreferenceCenterWithConsentCookieContent] button.kaQPhj:last-child"
+    }
+  ]
+}
