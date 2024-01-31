@@ -47,6 +47,7 @@ export const snippets = {
   EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
   EVAL_CLICKIO_0: () => document.cookie.includes('__lxG__consent__v2_daisybit='),
   EVAL_CLINCH_0: () => document.cookie.includes('ctc_rejected=1'),
+  EVAL_COOKIECONSENT2_TEST: () => document.cookie.includes('cc_cookie='),
   EVAL_COINBASE_0: () => JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent.length <= 1,
   EVAL_COMPLIANZ_BANNER_0: () => document.cookie.includes('cmplz_banner-status=dismissed'),
   EVAL_COOKIE_LAW_INFO_0: () => CLI.disableAllCookies() || CLI.reject_close() || true,
