@@ -51,6 +51,7 @@ export const snippets = {
   EVAL_COMPLIANZ_BANNER_0: () => document.cookie.includes('cmplz_banner-status=dismissed'),
   EVAL_COOKIE_LAW_INFO_0: () => CLI.disableAllCookies() || CLI.reject_close() || true,
   EVAL_COOKIE_LAW_INFO_1: () => document.cookie.indexOf('cookielawinfo-checkbox-non-necessary=yes') === -1,
+  EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
   EVAL_COOKIE_MANAGER_POPUP_0: () => JSON.parse(document.cookie.split(';').find(c => c.trim().startsWith('CookieLevel')).split('=')[1]).social === false,
   EVAL_COOKIEALERT_0: () => document.querySelector('body').removeAttribute('style') || true,
   EVAL_COOKIEALERT_1: () => document.querySelector('body').removeAttribute('style') || true,
