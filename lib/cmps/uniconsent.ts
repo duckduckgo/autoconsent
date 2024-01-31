@@ -20,11 +20,11 @@ export default class Uniconsent extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return this.elementExists(".unic .unic-box,.unic .unic-bar");
+    return this.elementExists(".unic .unic-box,.unic .unic-bar,.unic .unic-modal");
   }
 
   async detectPopup() {
-    return this.elementVisible(".unic .unic-box,.unic .unic-bar", 'any');
+    return this.elementVisible(".unic .unic-box,.unic .unic-bar,.unic .unic-modal", 'any');
   }
 
   async optOut() {
