@@ -1,0 +1,36 @@
+{
+  "name": "arbeitsagentur",
+  "vendorUrl": "https://www.arbeitsagentur.de/",
+  "prehideSelectors": [".modal-open bahf-cookie-disclaimer-dpl3"],
+  "detectCmp": [
+    {
+      "exists": "bahf-cookie-disclaimer-dpl3"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "bahf-cookie-disclaimer-dpl3"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": [
+        "bahf-cookie-disclaimer-dpl3",
+        "bahf-cd-modal-dpl3 .ba-btn-primary"
+      ]
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": [
+        "bahf-cookie-disclaimer-dpl3",
+        "bahf-cd-modal-dpl3 .ba-btn-contrast"
+      ]
+    }
+  ],
+  "test": [
+    {
+      "eval": "EVAL_ARBEITSAGENTUR_TEST"
+    }
+  ]
+}
