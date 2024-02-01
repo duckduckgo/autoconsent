@@ -17,18 +17,23 @@
   ],
   "optIn": [
     {
-      "waitForThenClick": "#consent_modal button.jOyTQg"
+      "waitForThenClick": "#consent_modal button[data-testid=ButtonStyledButton]:first-of-type"
     }
   ],
   "optOut": [
     {
-      "waitForThenClick": "#consent_modal button.bwexRL"
+      "waitForThenClick": "#consent_modal button[data-testid=ButtonStyledButton]:nth-of-type(2)"
     },
     {
       "waitForVisible": "[data-testid=PrivacyPreferenceCenterWithConsentCookieContent]"
     },
     {
-      "waitForThenClick": "[data-testid=PrivacyPreferenceCenterWithConsentCookieContent] button.kaQPhj:last-child"
+      "click": "[data-testid=PrivacyPreferenceCenterWithConsentCookieContent] input[data-testid=PrivacyPreferenceCenterWithConsentCookieSwitch]:checked",
+      "optional": true,
+      "all": true
+    },
+    {
+      "waitForThenClick": "[data-testid=PrivacyPreferenceCenterWithConsentCookieContent] button[data-testid=ButtonStyledButton]:last-child"
     }
   ]
 }

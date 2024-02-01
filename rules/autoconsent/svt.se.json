@@ -4,25 +4,25 @@
   "runContext": {
     "urlPattern": "^https://www\\.svt\\.se/"
   },
-  "prehideSelectors": [".CookieConsent__root___3GjU8"],
+  "prehideSelectors": ["[class*=CookieConsent__root___]"],
   "detectCmp": [
     {
-      "exists": ".CookieConsent__root___3GjU8"
+      "exists": "[class*=CookieConsent__root___]"
     }
   ],
   "detectPopup": [
     {
-      "visible": ".CookieConsent__modal___gvkZW"
+      "visible": "[class*=CookieConsent__modal___]"
     }
   ],
   "optIn": [
     {
-      "waitForThenClick": ".CookieConsent__primaryButton___Th47k"
+      "waitForThenClick": "[class*=CookieConsent__modal___] > div > button[class*=primary]"
     }
   ],
   "optOut": [
     {
-      "waitForThenClick": ".CookieConsent__secondaryButton___jzCXF:nth-child(2)"
+      "waitForThenClick": "[class*=CookieConsent__modal___] > div > button[class*=secondary]:nth-child(2)"
     }
   ],
   "test": [{
