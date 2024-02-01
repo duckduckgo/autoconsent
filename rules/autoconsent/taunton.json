@@ -9,7 +9,7 @@
   ],
   "detectPopup": [
     {
-      "visible": "#taunton-user-consent__overlay"
+      "exists": "#taunton-user-consent__overlay:not([aria-hidden=true])"
     }
   ],
   "optIn": [

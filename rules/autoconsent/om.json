@@ -4,12 +4,12 @@
   "prehideSelectors": [".tx-om-cookie-consent"],
   "detectCmp": [
     {
-      "exists": ".tx-om-cookie-consent"
+      "exists": ".tx-om-cookie-consent .active[data-omcookie-panel]"
     }
   ],
   "detectPopup": [
     {
-      "visible": ".tx-om-cookie-consent"
+      "exists": ".tx-om-cookie-consent .active[data-omcookie-panel]"
     }
   ],
   "optIn": [
