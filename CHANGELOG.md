@@ -1,3 +1,15 @@
+# v9.7.1 (Fri Feb 02 2024)
+
+#### 🐛 Bug Fix
+
+- Avoid :has selectors in detect rules [#370](https://github.com/duckduckgo/autoconsent/pull/370) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.7.0 (Fri Feb 02 2024)
 
 #### 🚀 Enhancement
