@@ -2,7 +2,7 @@
   "name": "livejasmin",
   "vendorUrl": "https://www.livejasmin.com/",
   "runContext": {
-    "urlPattern": "^https://www\\.livejasmin\\.com/"
+    "urlPattern": "^https://(m|www)\\.livejasmin\\.com/"
   },
   "prehideSelectors": ["#consent_modal"],
   "detectCmp": [

@@ -2,7 +2,7 @@
   "name": "jdsports",
   "vendorUrl": "https://www.jdsports.co.uk/",
   "runContext": {
-    "urlPattern": "^https://www\\.jdsports\\."
+    "urlPattern": "^https://(www|m)\\.jdsports\\."
   },
   "prehideSelectors": [".miniConsent,#PrivacyPolicyBanner"],
   "detectCmp": [
