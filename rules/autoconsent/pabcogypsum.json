@@ -4,12 +4,12 @@
   "prehideSelectors": [".js-cookie-notice:has(#cookie_settings-form)"],
   "detectCmp": [
     {
-      "exists": ".js-cookie-notice:has(#cookie_settings-form)"
+      "exists": ".js-cookie-notice #cookie_settings-form"
     }
   ],
   "detectPopup": [
     {
-      "visible": ".js-cookie-notice:has(#cookie_settings-form)"
+      "visible": ".js-cookie-notice #cookie_settings-form"
     }
   ],
   "optIn": [
