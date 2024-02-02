@@ -1,3 +1,16 @@
+# v9.7.0 (Fri Feb 02 2024)
+
+#### 🚀 Enhancement
+
+- More rules for common CMPs [#367](https://github.com/duckduckgo/autoconsent/pull/367) ([@muodov](https://github.com/muodov))
+- More site-specific pop-ups [#366](https://github.com/duckduckgo/autoconsent/pull/366) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v9.6.0 (Wed Jan 31 2024)
 
 #### 🚀 Enhancement
