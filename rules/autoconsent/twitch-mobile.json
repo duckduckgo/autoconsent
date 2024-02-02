@@ -8,12 +8,12 @@
   "prehideSelectors": [],
   "detectCmp": [
     {
-      "exists": ".ReactModal__Overlay:has([href=\"https://www.twitch.tv/p/cookie-policy\"])"
+      "exists": ".ReactModal__Overlay [href=\"https://www.twitch.tv/p/cookie-policy\"]"
     }
   ],
   "detectPopup": [
     {
-      "visible": ".ReactModal__Overlay:has([href=\"https://www.twitch.tv/p/cookie-policy\"])"
+      "visible": ".ReactModal__Overlay [href=\"https://www.twitch.tv/p/cookie-policy\"]"
     }
   ],
   "optIn": [
