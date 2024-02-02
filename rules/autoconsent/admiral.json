@@ -1,15 +1,15 @@
 {
   "name": "admiral",
   "detectCmp": [{
-    "exists": "div[style*=\"z-index\"] > link + div[width] + div > a[href*=\"/pb/\"] > span + svg > g > path[d^=\"M925 116h59l166 386h-78l-36-88H869l-35\"]"
+    "exists": "div[class^='a__'][style^='z-index'] path[d^='M925']"
   }],
   "detectPopup": [{
-    "visible": "div[style*=\"z-index\"] > link + div[width] + div > a[href*=\"/pb/\"] > span + svg > g > path[d^=\"M925 116h59l166 386h-78l-36-88H869l-35\"]"
+    "visible": "div[class^='a__'][style^='z-index'] path[d^='M925']"
   }],
   "optIn": [{
-    "click": "div[style*=\"z-index\"] > link + div[width] > div > div[direction=\"row\"] > button:nth-child(2)"
+    "click": "div[class^='a__'][style^='z-index'] div[class^='Frame'] > button:nth-child(2)"
   }],
   "optOut": [{
-    "click": "div[style*=\"z-index\"] > link + div[width] > div > div[direction=\"row\"] > button:nth-child(1)"
+    "click": "div[class^='a__'][style^='z-index'] div[class^='Frame'] > button:nth-child(1)"
   }]
 }
