@@ -89,7 +89,7 @@ pipeline {
                             context: 'Tests / Coverage sample',
                             sha: "${env.GIT_COMMIT}", 
                             description: "${testsFailed}/${testsTotal} failed", 
-                            status: 'SUCCESS')
+                            status: testsFailed > 50 ? 'FAILURE' : 'SUCCESS')
                 }
             }
         }
