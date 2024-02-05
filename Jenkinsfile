@@ -35,6 +35,12 @@ pipeline {
     }
     stages {
         stage('Checkout') {
+            when {
+                expression {
+                    // skip the BRANCH variable if this is running in a multibranch job
+                    return env.BRANCH_NAME == null
+                }
+            }
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
                     extensions: [[$class: 'LocalBranch']],
@@ -56,31 +62,44 @@ pipeline {
         
         stage('Test') {
             steps {
-                script {
-                    def testsFailed = 0
-                    def testsTotal = 0
-                    def prCommitSHA = sh(script: "git log --pretty=format:'%H' -n 1 origin/pr/${env.CHANGE_ID}", returnStdout: true).trim()
+                script { 
+                    env.testsFailed = 0
+                    env.testsTotal = 0
                     withEnv(["NSITES=${params.NSITES}}"]) {
                         def testEnvs = [
-                            "${params.TEST_RESULT_ROOT}/de.env",
+                            // "${params.TEST_RESULT_ROOT}/de.env",
                             // "${params.TEST_RESULT_ROOT}/us.env",
-                            // "${params.TEST_RESULT_ROOT}/gb.env"
+                            "${params.TEST_RESULT_ROOT}/gb.env"
                         ]
                         for (testEnv in testEnvs) {
                             withEnvFile(testEnv) {
                                 def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                                testsFailed += summary.failCount
-                                testsTotal += summary.totalCount
+                                env.testsFailed += summary.failCount
+                                env.testsTotal += summary.totalCount
                             }
                         }
-                        githubNotify(
+                        
+                    }
+                }
+            }
+        }
+
+        stage('Post results to Github') {
+            when {
+                expression {
+                    return env.BRANCH_NAME != null
+                }
+            }
+            steps {
+                script {
+                    def prCommitSHA = sh(script: "git log --pretty=format:'%H' -n 1 origin/pr/${env.CHANGE_ID}", returnStdout: true).trim()
+                    githubNotify(
                             account: 'duckduckgo', 
                             repo: 'autoconsent', 
-                            context: 'continuous-integration/jenkins/pr-merge',
+                            context: 'Tests / Coverage sample',
                             sha: "${prCommitSHA}", 
-                            description: "${testsFailed}/${testsTotal} failed", 
+                            description: "${env.testsFailed}/${env.testsTotal} failed", 
                             status: 'SUCCESS')
-                    }
                 }
             }
         }
