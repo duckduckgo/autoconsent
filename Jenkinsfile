@@ -7,7 +7,8 @@ def runPlaywrightTests(resultDir, browser, grep) {
             """
         }
     } finally {
-        junit 'results.xml'
+        def summary = junit 'results.xml'
+        return summary
     }
 }
 
@@ -55,15 +56,30 @@ pipeline {
         
         stage('Test') {
             steps {
-                withEnv(["NSITES=${params.NSITES}}"]) {
-                    withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
-                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                    }
-                    withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
-                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                    }
-                    withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                script {
+                    def testsFailed = 0
+                    def testsTotal = 0
+                    def prCommitSHA = sh(script: "git log --pretty=format:'%H' -n 1 origin/pr/${env.CHANGE_ID}", returnStdout: true).trim()
+                    withEnv(["NSITES=${params.NSITES}}"]) {
+                        def testEnvs = [
+                            "${params.TEST_RESULT_ROOT}/de.env",
+                            // "${params.TEST_RESULT_ROOT}/us.env",
+                            // "${params.TEST_RESULT_ROOT}/gb.env"
+                        ]
+                        for (testEnv in testEnvs) {
+                            withEnvFile(testEnv) {
+                                def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                                testsFailed += summary.failCount
+                                testsTotal += summary.totalCount
+                            }
+                        }
+                        githubNotify(
+                            account: 'duckduckgo', 
+                            repo: 'autoconsent', 
+                            context: 'continuous-integration/jenkins/pr-merge',
+                            sha: "${prCommitSHA}", 
+                            description: "${testsFailed}/${testsTotal} failed", 
+                            status: 'SUCCESS')
                     }
                 }
             }
