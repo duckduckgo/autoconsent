@@ -5,7 +5,7 @@ import { waitFor } from "../lib/utils";
 import { ContentScriptMessage } from "../lib/messages";
 import { AutoAction } from "../lib/types";
 
-const LOG_MESSAGES: ContentScriptMessage['type'][] = [
+const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI ? [] : [
   'optInResult',
   'optOutResult',
   'autoconsentDone',
