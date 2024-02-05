@@ -7,7 +7,7 @@ def runPlaywrightTests(resultDir, browser, grep) {
             """
         }
     } finally {
-        def summary = junit 'results.xml'
+        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: 'results.xml'
         return summary
     }
 }
