@@ -55,7 +55,11 @@ pipeline {
                 npx playwright install
                 '''
                 script {
-                    currentBuild.description = "${params.BRANCH} - ${params.BROWSER}"
+                    if (env.BRANCH_NAME == null) {
+                        currentBuild.description = "${params.BRANCH} - ${params.BROWSER}"
+                    } else {
+                        currentBuild.description = "${env.GIT_COMMIT}"
+                    }
                 }
             }
         }
@@ -63,42 +67,28 @@ pipeline {
         stage('Test') {
             steps {
                 script { 
-                    env.testsFailed = 0
-                    env.testsTotal = 0
+                    def testsFailed = 0
+                    def testsTotal = 0
                     withEnv(["NSITES=${params.NSITES}}"]) {
                         def testEnvs = [
-                            // "${params.TEST_RESULT_ROOT}/de.env",
-                            // "${params.TEST_RESULT_ROOT}/us.env",
+                            "${params.TEST_RESULT_ROOT}/de.env",
+                            "${params.TEST_RESULT_ROOT}/us.env",
                             "${params.TEST_RESULT_ROOT}/gb.env"
                         ]
                         for (testEnv in testEnvs) {
                             withEnvFile(testEnv) {
                                 def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                                env.testsFailed += summary.failCount
-                                env.testsTotal += summary.totalCount
+                                testsFailed += summary.failCount
+                                testsTotal += summary.totalCount
                             }
-                        }
-                        
+                        }   
                     }
-                }
-            }
-        }
-
-        stage('Post results to Github') {
-            when {
-                expression {
-                    return env.BRANCH_NAME != null
-                }
-            }
-            steps {
-                script {
-                    def prCommitSHA = sh(script: "git log --pretty=format:'%H' -n 1 origin/pr/${env.CHANGE_ID}", returnStdout: true).trim()
                     githubNotify(
                             account: 'duckduckgo', 
                             repo: 'autoconsent', 
                             context: 'Tests / Coverage sample',
-                            sha: "${prCommitSHA}", 
-                            description: "${env.testsFailed}/${env.testsTotal} failed", 
+                            sha: "${env.GIT_COMMIT}", 
+                            description: "${testsFailed}/${testsTotal} failed", 
                             status: 'SUCCESS')
                 }
             }
