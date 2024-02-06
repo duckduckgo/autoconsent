@@ -25,15 +25,27 @@
     ],
     "optOut": [
         {
-            "click": "#manage_cookie_preferences"
-        },
-        {
-            "click": "#cookie_consent_preferences input:checked",
-            "all": true,
-            "optional": true
-        },
-        {
-            "click": "#consent_save"
+            "if": {
+                "exists": "#consent_reject"
+            },
+            "then": [
+                {
+                    "click": "#consent_reject"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#manage_cookie_preferences"
+                },
+                {
+                    "click": "#cookie_consent_preferences input:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#consent_save"
+                }
+            ]
         }
     ],
     "test": [
