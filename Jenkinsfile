@@ -7,7 +7,8 @@ def runPlaywrightTests(resultDir, browser, grep) {
             """
         }
     } finally {
-        junit 'results.xml'
+        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: 'results.xml'
+        return summary
     }
 }
 
@@ -34,6 +35,12 @@ pipeline {
     }
     stages {
         stage('Checkout') {
+            when {
+                expression {
+                    // skip the BRANCH variable if this is running in a multibranch job
+                    return env.BRANCH_NAME == null
+                }
+            }
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
                     extensions: [[$class: 'LocalBranch']],
@@ -48,23 +55,41 @@ pipeline {
                 npx playwright install
                 '''
                 script {
-                    currentBuild.description = "${params.BRANCH} - ${params.BROWSER}"
+                    if (env.BRANCH_NAME == null) {
+                        currentBuild.description = "${params.BRANCH} - ${params.BROWSER}"
+                    } else {
+                        currentBuild.description = "${env.GIT_COMMIT}"
+                    }
                 }
             }
         }
         
         stage('Test') {
             steps {
-                withEnv(["NSITES=${params.NSITES}}"]) {
-                    withEnvFile("${params.TEST_RESULT_ROOT}/de.env") {
-                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                script { 
+                    def testsFailed = 0
+                    def testsTotal = 0
+                    withEnv(["NSITES=${params.NSITES}}"]) {
+                        def testEnvs = [
+                            "${params.TEST_RESULT_ROOT}/de.env",
+                            "${params.TEST_RESULT_ROOT}/us.env",
+                            "${params.TEST_RESULT_ROOT}/gb.env"
+                        ]
+                        for (testEnv in testEnvs) {
+                            withEnvFile(testEnv) {
+                                def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                                testsFailed += summary.failCount
+                                testsTotal += summary.totalCount
+                            }
+                        }   
                     }
-                    withEnvFile("${params.TEST_RESULT_ROOT}/us.env") {
-                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                    }
-                    withEnvFile("${params.TEST_RESULT_ROOT}/gb.env") {
-                        runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
-                    }
+                    githubNotify(
+                            account: 'duckduckgo', 
+                            repo: 'autoconsent', 
+                            context: 'Tests / Coverage sample',
+                            sha: "${env.GIT_COMMIT}", 
+                            description: "${testsFailed}/${testsTotal} failed", 
+                            status: testsFailed > 50 ? 'FAILURE' : 'SUCCESS')
                 }
             }
         }
