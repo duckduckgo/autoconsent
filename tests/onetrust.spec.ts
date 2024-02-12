@@ -5,6 +5,7 @@ generateCMPTests('Onetrust', [
   "https://www.lovescout24.de/",
   "https://www.okcupid.com/",
   "https://doodle.com/",
+  "https://www.coca-cola.com/us/en",
 ]);
 
 generateCMPTests('Onetrust', [
