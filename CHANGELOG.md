@@ -1,3 +1,37 @@
+# v10.0.0 (Fri Mar 01 2024)
+
+#### 💥 Breaking Change
+
+- Bump the dev-dependencies group with 4 updates [#377](https://github.com/duckduckgo/autoconsent/pull/377) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🚀 Enhancement
+
+- Support reject button in clinch [#375](https://github.com/duckduckgo/autoconsent/pull/375) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Update action-asana-sync [#378](https://github.com/duckduckgo/autoconsent/pull/378) ([@sammacbeth](https://github.com/sammacbeth))
+- Setup github status reporting for Jenkins multibranch job [#373](https://github.com/duckduckgo/autoconsent/pull/373) ([@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#372](https://github.com/duckduckgo/autoconsent/pull/372) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Update asana.yml ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 7 updates [#382](https://github.com/duckduckgo/autoconsent/pull/382) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 5 updates [#374](https://github.com/duckduckgo/autoconsent/pull/374) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v9.7.2 (Fri Feb 02 2024)
 
 #### 🐛 Bug Fix
