@@ -93,7 +93,12 @@ export const snippets = {
   EVAL_PUBTECH_0: () => document.cookie.includes('euconsent-v2') && (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)) ,
   EVAL_REDDIT_0: () => document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}'),
   EVAL_SIBBO_0: () => !!window.localStorage.getItem('euconsent-v2'),
-  EVAL_SIRDATA_0: () => document.cookie.includes('euconsent-v2'),
+  EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
+    document.documentElement.classList.forEach(cls => {
+      if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls)
+    });
+    return true;
+  },
   EVAL_SNIGEL_0: () => !!document.cookie.match('snconsent'),
   EVAL_STEAMPOWERED_0: () => JSON.parse(decodeURIComponent(document.cookie.split(';').find(s => s.trim().startsWith('cookieSettings')).split('=')[1])).preference_state === 2,
   EVAL_SVT_TEST: () => document.cookie.includes('cookie-consent-1={"optedIn":true,"functionality":false,"statistics":false}'),

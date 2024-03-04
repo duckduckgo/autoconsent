@@ -1,11 +1,12 @@
 {
   "name": "Sirdata",
+  "cosmetic": true,
   "prehideSelectors": ["#sd-cmp"],
   "detectCmp": [{ "exists": "#sd-cmp" }],
   "detectPopup": [{ "visible": "#sd-cmp" }],
   "optIn": [ { "waitForThenClick": "#sd-cmp .sd-cmp-3cRQ2" } ],
-  "optOut": [ { "waitForThenClick": "#sd-cmp .sd-cmp-1pO44, #sd-cmp .sd-cmp-2nUXb" } ],
-  "test": [
-    { "eval": "EVAL_SIRDATA_0" }
+  "optOut": [
+    { "hide": "#sd-cmp" },
+    { "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL" }
   ]
 }
