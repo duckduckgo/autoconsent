@@ -13,7 +13,7 @@
         "else": [
           { "waitForThenClick": ".cc-banner[data-cc-banner] button[data-cc-action=preferences]" },
           { "waitFor": ".cc-preferences[data-cc-preferences]" },
-          { "click": ".cc-preferences[data-cc-preferences] input[type=radio][data-cc-action=toggle-category][value=off]", "all": true },
+          { "click": ".cc-preferences[data-cc-preferences] input[type=radio][data-cc-action=toggle-category][value=off]", "all": true, "optional": true },
           {
             "if": { "exists": ".cc-preferences[data-cc-preferences] button[data-cc-action=reject]" },
             "then": [{ "click": ".cc-preferences[data-cc-preferences] button[data-cc-action=reject]" }],
