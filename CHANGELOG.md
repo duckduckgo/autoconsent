@@ -1,3 +1,22 @@
+# v10.1.0 (Tue Mar 05 2024)
+
+#### 🚀 Enhancement
+
+- Sirdata fix [#379](https://github.com/duckduckgo/autoconsent/pull/379) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix a US popup on nature.com [#384](https://github.com/duckduckgo/autoconsent/pull/384) ([@muodov](https://github.com/muodov))
+- Monthly Coverage data update [#383](https://github.com/duckduckgo/autoconsent/pull/383) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.0.0 (Fri Mar 01 2024)
 
 #### 💥 Breaking Change
