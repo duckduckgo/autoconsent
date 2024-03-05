@@ -23,16 +23,16 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return this.elementExists("#onetrust-banner-sdk");
+    return this.elementExists("#onetrust-banner-sdk,#onetrust-consent-sdk");
   }
 
   async detectPopup() {
-    return this.elementVisible("#onetrust-banner-sdk", 'all');
+    return this.elementVisible("#onetrust-banner-sdk,#onetrust-consent-sdk", "any");
   }
 
   async optOut() {
-    if (this.elementVisible("#onetrust-reject-all-handler,.js-reject-cookies", 'any')) { // 'reject all' shortcut
-      return this.click("#onetrust-reject-all-handler,.js-reject-cookies");
+    if (this.elementVisible("#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies", 'any')) { // 'reject all' shortcut
+      return this.click("#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies");
     }
 
     if (this.elementExists("#onetrust-pc-btn-handler")) { // "show purposes" button inside a popup
@@ -55,7 +55,7 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async optIn() {
-    return this.click("#onetrust-accept-btn-handler,.js-accept-cookies");
+    return this.click("#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies");
   }
 
   async test() {
