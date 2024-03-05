@@ -1,3 +1,20 @@
+# v10.2.0 (Tue Mar 05 2024)
+
+#### 🚀 Enhancement
+
+- feat: support coca-cola.com using OneTrust [#376](https://github.com/duckduckgo/autoconsent/pull/376) ([@seia-soto](https://github.com/seia-soto))
+
+#### 🔩 Dependency Updates
+
+- Bump the dev-dependencies group with 4 updates [#385](https://github.com/duckduckgo/autoconsent/pull/385) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
 # v10.1.0 (Tue Mar 05 2024)
 
 #### 🚀 Enhancement
