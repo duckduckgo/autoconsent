@@ -9,8 +9,8 @@ const md = new MarkdownIt()
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN
 const commit = process.env.GITHUB_SHA
 const version = process.env.VERSION
-const releaseUrl = process.env.RELEASE_URL || ''
-const releaseNotesRaw = process.env.RELEASE_NOTES
+const releaseUrl = process.env.RELEASE_URL || 'https://example.com/'
+const releaseNotesRaw = process.env.RELEASE_NOTES || '<EMPTY RELEASE NOTES>'
 const releaseNotes = md.render(releaseNotesRaw)
 
 const templateTaskGid = '1206774921409831'
