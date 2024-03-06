@@ -3,27 +3,73 @@
  */
 import { chromium } from "@playwright/test";
 
-const locales = ["en-US", "en-GB", "de-DE", "fr-FR", "es-ES"];
+// list of locales supported by DDG apps and extensions
+const locales = [
+  "bg",
+  "cs",
+  "da",
+  "de", 
+  "el",
+  "en", 
+  "en", 
+  "es",
+  "et",
+  "fi",
+  "fr",
+  "hr",
+  "hu",
+  "it",
+  "lt",
+  "lv",
+  "nb",
+  "nl",
+  "pl",
+  "pt",
+  "ro",
+  "ru",
+  "sk",
+  "sl",
+  "sv",
+  "tr"
+];
 if (process.argv.length < 4) {
   console.log('Usage: npm run get-text-for-xpath -- <URL> <XPATH>')
   process.exit(0)
 }
 const url = process.argv[2];
 const xpath = process.argv[3];
+const values = new Set()
 console.log(`Checking contents of ${xpath} on ${url}`);
+
 
 (async () => {
   const browser = await chromium.launch();
-  for (const locale of locales) {
+
+  async function checkLocale(locale: string) {
     const context = await browser.newContext({ locale });
     const page = await context.newPage();
     await page.goto(url, {
       waitUntil: "networkidle",
+      timeout: 30000
     });
     const locator = page.locator(`xpath=${xpath}`);
-    console.log(locale, await locator.textContent());
+    const content = await locator.textContent()
+    console.log(locale, content);
+    values.add(content)
     await page.close();
     await context.close();
   }
+
+  const crawls = locales.map(async (locale) => {
+    try {
+      await checkLocale(locale)
+    } catch (e) {
+      console.warn(`Failed on locale ${locale}, retrying...`, e)
+      await checkLocale(locale)
+    }
+  })
+  await Promise.all(crawls)
   await browser.close();
+  console.log('Final set of strings:')
+  console.log([...values])
 })();
