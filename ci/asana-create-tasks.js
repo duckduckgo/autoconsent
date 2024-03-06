@@ -13,7 +13,7 @@ const releaseUrl = process.env.RELEASE_URL || ''
 const releaseNotesRaw = process.env.RELEASE_NOTES
 const releaseNotes = md.render(releaseNotesRaw)
 
-const templateTaskGid = '1202253736774463'
+const templateTaskGid = '1206774921409831'
 const autoconsentProjectGid = '1201844467387842'
 const releaseSectionGid = '1202253736774466'
 const projectExtractorRegex = /\[\[project_gids=(.+)]]\s/
