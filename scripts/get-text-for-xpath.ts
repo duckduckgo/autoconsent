@@ -72,4 +72,7 @@ console.log(`Checking contents of ${xpath} on ${url}`);
   await browser.close();
   console.log('Final set of strings:')
   console.log([...values])
+  console.log('Example xpath rule:')
+  const containsClause = [...values].map(v => `contains(., '${v}')`).join(' or ')
+  console.log(`xpath///span[${containsClause}]`)
 })();
