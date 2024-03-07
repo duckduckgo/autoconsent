@@ -8,9 +8,13 @@ on:
       - 'release-automation'
 
 env:
-  VERSION: ${{ github.event.release.tag_name }}
-  RELEASE_URL: ${{ github.event.release.html_url }}
-  RELEASE_NOTES: ${{ github.event.release.body }}
+  VERSION1: ${{ github.event.release.tag_name }}
+  VERSION: 'v10.2.0'
+  RELEASE_URL: 'https://github.com/duckduckgo/autoconsent/releases/tag/v10.2.0'
+  RELEASE_URL1: ${{ github.event.release.html_url }}
+  RELEASE_NOTES: 'Some release notes here.'
+  RELEASE_NOTES1: ${{ github.event.release.body }}
+  PR_TITLE: TESTING Update autoconsent to v10.2.0
 
 jobs:
 
@@ -64,7 +68,7 @@ jobs:
       - name: Update Android autoconsent reference
         run: |
           cd android
-          npm install @duckduckgo/autoconsent@${{ github.event.release.tag_name }}
+          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create Android PR Body
@@ -87,9 +91,9 @@ jobs:
             package.json
             package-lock.json
             autoconsent/
-          commit-message: Update autoconsent to ${{ github.event.release.tag_name }}
-          branch: update-autoconsent-${{ github.event.release.tag_name }}
-          title: Update autoconsent to ${{ github.event.release.tag_name }}
+          commit-message: Update autoconsent to ${{ env.VERSION }}
+          branch: update-autoconsent-${{ env.VERSION }}
+          title: ${{ env.PR_TITLE }}
           body: "${{ env.PR_BODY_ANDROID }}"
           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
@@ -139,9 +143,9 @@ jobs:
 #         with:
 #           path: ios/
 #           add-paths: DuckDuckGo.xcodeproj/project.pbxproj
-#           commit-message: Update BSK with autofill ${{ github.event.release.tag_name }}
-#           branch: update-bsk-with-autofill-${{ github.event.release.tag_name }}
-#           title: Update BSK with autofill ${{ github.event.release.tag_name }}
+#           commit-message: Update BSK with autofill ${{ env.VERSION }}
+#           branch: update-bsk-with-autofill-${{ env.VERSION }}
+#           title: Update BSK with autofill ${{ env.VERSION }}
 #           body: ${{ env.PR_BODY_IOS }}
 #           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
@@ -190,9 +194,9 @@ jobs:
 #         with:
 #           path: macos/
 #           add-paths: DuckDuckGo.xcodeproj/project.pbxproj
-#           commit-message: Update BSK with autofill ${{ github.event.release.tag_name }}
-#           branch: update-bsk-with-autofill-${{ github.event.release.tag_name }}
-#           title: Update BSK with autofill ${{ github.event.release.tag_name }}
+#           commit-message: Update BSK with autofill ${{ env.VERSION }}
+#           branch: update-bsk-with-autofill-${{ env.VERSION }}
+#           title: Update BSK with autofill ${{ env.VERSION }}
 #           body: ${{ env.PR_BODY_MACOS }}
 #           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
@@ -223,7 +227,7 @@ jobs:
 #         run: |
 #           cd windows/submodules/duckduckgo-autofill
 #           git fetch --tags
-#           git checkout ${{ github.event.release.tag_name }}
+#           git checkout ${{ env.VERSION }}
 #           cd ../../../
 #       - name: Create Windows PR Body
 #         env:
@@ -243,9 +247,9 @@ jobs:
 #           path: windows/
 #           add-paths: |
 #             submodules/duckduckgo-autofill
-#           commit-message: Update autofill to ${{ github.event.release.tag_name }}
-#           branch: update-autofill-${{ github.event.release.tag_name }}
-#           title: Update autofill to ${{ github.event.release.tag_name }}
+#           commit-message: Update autofill to ${{ env.VERSION }}
+#           branch: update-autofill-${{ env.VERSION }}
+#           title: Update autofill to ${{ env.VERSION }}
 #           body: "${{ env.PR_BODY_WINDOWS }}"
 #           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
