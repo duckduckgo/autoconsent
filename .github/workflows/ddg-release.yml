@@ -98,160 +98,174 @@ jobs:
           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 
-# # ------------------------------------------------------------------------------
-# # Create PR with updated BrowserServicesKit on iOS
-# # ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Create PR with updated autoconsent on iOS
+# ------------------------------------------------------------------------------
 
-#   update_ios:
-#     runs-on: ubuntu-20.04
-#     outputs:
-#       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-#     needs: [create_asana_tasks, update_bsk]
-#     steps:
-#       # --- Setup ---
-#       - uses: actions/checkout@v3
-#         with:
-#           path: autofill/
-#       - uses: ./autofill/.github/actions/setup-release-scripts
-#       # --- Action ---
-#       - name: Checkout iOS
-#         uses: actions/checkout@v3
-#         with:
-#           repository: duckduckgo/iOS
-#           path: ios/
-#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-#       - name: Update iOS autofill reference
-#         env:
-#           BSK_SHA: ${{ needs.update_bsk.outputs.pull-request-head-sha }}
-#         run: |
-#           node ./autofill/ci/update-apple-device-repo.js 'ios'
-#       - name: Create iOS PR Body
-#         env:
-#           ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-#           BSK_PR_URL: ${{ needs.update_bsk.outputs.pull-request-url }}
-#         run: |
-#           TEMPLATE="$(node ./autofill/ci/create-pr-template.js ios)"
-#           # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
-#           DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
-#           echo "PR_BODY_IOS<<$DELIMITER" >> $GITHUB_ENV
-#           echo "$TEMPLATE" >> $GITHUB_ENV
-#           echo "$DELIMITER" >> $GITHUB_ENV
-#       # --- Effect ---
-#       - name: Create PR for iOS
-#         uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
-#         id: create-pr
-#         with:
-#           path: ios/
-#           add-paths: DuckDuckGo.xcodeproj/project.pbxproj
-#           commit-message: Update BSK with autofill ${{ env.VERSION }}
-#           branch: update-bsk-with-autofill-${{ env.VERSION }}
-#           title: Update BSK with autofill ${{ env.VERSION }}
-#           body: ${{ env.PR_BODY_IOS }}
-#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+  update_ios:
+    runs-on: ubuntu-latest
+    outputs:
+      pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
+    needs: create_asana_tasks
+    steps:
+      # --- Setup ---
+      - uses: actions/checkout@v3
+        with:
+          path: autoconsent/
+      - uses: ./autoconsent/.github/actions/setup-release-scripts
+      # --- Action ---
+      - name: Checkout iOS
+        uses: actions/checkout@v3
+        with:
+          repository: duckduckgo/iOS
+          path: ios/
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: current
+      - name: Update iOS autoconsent reference
+        run: |
+          cd ios
+          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm run rebuild-autoconsent
+          cd ..
+      - name: Create iOS PR Body
+        env:
+          ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
+        run: |
+          TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js ios)"
+          # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
+          DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
+          echo "PR_BODY_IOS<<$DELIMITER" >> $GITHUB_ENV
+          echo "$TEMPLATE" >> $GITHUB_ENV
+          echo "$DELIMITER" >> $GITHUB_ENV
+      # --- Effect ---
+      - name: Create PR for iOS
+        uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
+        id: create-pr
+        with:
+          path: ios/
+          add-paths: |
+            package.json
+            package-lock.json
+            DuckDuckGo/Autoconsent/
+          commit-message: Update autoconsent to ${{ env.VERSION }}
+          branch: update-autoconsent-${{ env.VERSION }}
+          title: ${{ env.PR_TITLE }}
+          body: "${{ env.PR_BODY_IOS }}"
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
-# # ------------------------------------------------------------------------------
-# # Create PR with updated BrowserServicesKit on macOS
-# # ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Create PR with updated autoconsent on macOS
+# ------------------------------------------------------------------------------
 
-#   update_macos:
-#     runs-on: ubuntu-20.04
-#     outputs:
-#       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-#     needs: [create_asana_tasks, update_bsk]
-#     steps:
-#       # --- Setup ---
-#       - uses: actions/checkout@v3
-#         with:
-#           path: autofill/
-#       - uses: ./autofill/.github/actions/setup-release-scripts
-#       # --- Action ---
-#       - name: Checkout macOS
-#         uses: actions/checkout@v3
-#         with:
-#           repository: duckduckgo/macos-browser
-#           path: macos/
-#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-#       - name: Update macOS autofill reference
-#         env:
-#           BSK_SHA: ${{ needs.update_bsk.outputs.pull-request-head-sha }}
-#         run: |
-#           node ./autofill/ci/update-apple-device-repo.js 'macos'
-#       - name: Create macOS PR Body
-#         env:
-#           ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-#           BSK_PR_URL: ${{ needs.update_bsk.outputs.pull-request-url }}
-#         run: |
-#           TEMPLATE="$(node ./autofill/ci/create-pr-template.js macos)"
-#           # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
-#           DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
-#           echo "PR_BODY_MACOS<<$DELIMITER" >> $GITHUB_ENV
-#           echo "$TEMPLATE" >> $GITHUB_ENV
-#           echo "$DELIMITER" >> $GITHUB_ENV
-#       # --- Effect ---
-#       - name: Create PR for macOS
-#         uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
-#         id: create-pr
-#         with:
-#           path: macos/
-#           add-paths: DuckDuckGo.xcodeproj/project.pbxproj
-#           commit-message: Update BSK with autofill ${{ env.VERSION }}
-#           branch: update-bsk-with-autofill-${{ env.VERSION }}
-#           title: Update BSK with autofill ${{ env.VERSION }}
-#           body: ${{ env.PR_BODY_MACOS }}
-#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+  update_macos:
+    runs-on: ubuntu-latest
+    outputs:
+      pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
+    needs: create_asana_tasks
+    steps:
+      # --- Setup ---
+      - uses: actions/checkout@v3
+        with:
+          path: autoconsent/
+      - uses: ./autoconsent/.github/actions/setup-release-scripts
+      # --- Action ---
+      - name: Checkout macOS
+        uses: actions/checkout@v3
+        with:
+          repository: duckduckgo/macos-browser
+          path: macos/
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: current
+      - name: Update macOS autoconsent reference
+        run: |
+          cd macos
+          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm run rebuild-autoconsent
+          cd ..
+      - name: Create macOS PR Body
+        env:
+          ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
+        run: |
+          TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js macos)"
+          # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
+          DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
+          echo "PR_BODY_MACOS<<$DELIMITER" >> $GITHUB_ENV
+          echo "$TEMPLATE" >> $GITHUB_ENV
+          echo "$DELIMITER" >> $GITHUB_ENV
+      # --- Effect ---
+      - name: Create PR for macOS
+        uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
+        id: create-pr
+        with:
+          path: macos/
+          add-paths: |
+            package.json
+            package-lock.json
+            DuckDuckGo/Autoconsent/
+          commit-message: Update autoconsent to ${{ env.VERSION }}
+          branch: update-autoconsent-${{ env.VERSION }}
+          title: ${{ env.PR_TITLE }}
+          body: "${{ env.PR_BODY_MACOS }}"
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
-# # ------------------------------------------------------------------------------
-# # Create PR with updated autofill on Windows
-# # ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Create PR with updated autofill on Windows
+# ------------------------------------------------------------------------------
 
-#   update_windows:
-#     runs-on: ubuntu-20.04
-#     outputs:
-#       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-#     needs: create_asana_tasks
-#     steps:
-#       # --- Setup ---
-#       - uses: actions/checkout@v3
-#         with:
-#           path: autofill/
-#       - uses: ./autofill/.github/actions/setup-release-scripts
-#       # --- Action ---
-#       - name: Checkout Windows
-#         uses: actions/checkout@v3
-#         with:
-#           repository: duckduckgo/windows-browser
-#           path: windows/
-#           submodules: true
-#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-#       - name: Update Windows autofill reference
-#         run: |
-#           cd windows/submodules/duckduckgo-autofill
-#           git fetch --tags
-#           git checkout ${{ env.VERSION }}
-#           cd ../../../
-#       - name: Create Windows PR Body
-#         env:
-#           ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-#         run: |
-#           TEMPLATE="$(node ./autofill/ci/create-pr-template.js windows)"
-#           # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
-#           DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
-#           echo "PR_BODY_WINDOWS<<$DELIMITER" >> $GITHUB_ENV
-#           echo "$TEMPLATE" >> $GITHUB_ENV
-#           echo "$DELIMITER" >> $GITHUB_ENV
-#       # --- Effect ---
-#       - name: Create PR for Windows
-#         uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
-#         id: create-pr
-#         with:
-#           path: windows/
-#           add-paths: |
-#             submodules/duckduckgo-autofill
-#           commit-message: Update autofill to ${{ env.VERSION }}
-#           branch: update-autofill-${{ env.VERSION }}
-#           title: Update autofill to ${{ env.VERSION }}
-#           body: "${{ env.PR_BODY_WINDOWS }}"
-#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+  update_windows:
+    runs-on: ubuntu-latest
+    outputs:
+      pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
+    needs: create_asana_tasks
+    steps:
+      # --- Setup ---
+      - uses: actions/checkout@v3
+        with:
+          path: autoconsent/
+      - uses: ./autoconsent/.github/actions/setup-release-scripts
+      # --- Action ---
+      - name: Checkout Windows
+        uses: actions/checkout@v3
+        with:
+          repository: duckduckgo/windows-browser
+          path: windows/
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: current
+      - name: Update Windows autoconsent reference
+        run: |
+          cd windows/WindowsBrowser/Application/Autoconsent/External
+          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm run rebuild-autoconsent
+          cd ../../../../../
+      - name: Create Windows PR Body
+        env:
+          ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
+        run: |
+          TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js windows)"
+          # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
+          DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
+          echo "PR_BODY_WINDOWS<<$DELIMITER" >> $GITHUB_ENV
+          echo "$TEMPLATE" >> $GITHUB_ENV
+          echo "$DELIMITER" >> $GITHUB_ENV
+      # --- Effect ---
+      - name: Create PR for Windows
+        uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
+        id: create-pr
+        with:
+          path: windows/
+          add-paths: |
+            WindowsBrowser/Application/Autoconsent/
+          commit-message: Update autoconsent to ${{ env.VERSION }}
+          branch: update-autoconsent-${{ env.VERSION }}
+          title: ${{ env.PR_TITLE }}
+          body: "${{ env.PR_BODY_WINDOWS }}"
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 # ------------------------------------------------------------------------------
 # Update Asana subtasks with PR URLs
@@ -262,7 +276,7 @@ jobs:
     # Always run this final step, even if any of the updates have failed
     # unless the previous jobs were cancelled
     if: ${{ always() && !contains(needs.*.result, 'cancelled') }}
-    needs: [create_asana_tasks, update_android] # , update_ios, update_macos, update_windows]
+    needs: [create_asana_tasks, update_android, update_ios, update_macos, update_windows]
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -274,10 +288,9 @@ jobs:
         env:
           ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
           ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-          # BSK_PR_URL: ${{ needs.update_bsk.outputs.pull-request-url }}
-          # IOS_PR_URL: ${{ needs.update_ios.outputs.pull-request-url }}
-          # MACOS_PR_URL: ${{ needs.update_macos.outputs.pull-request-url }}
-          # WINDOWS_PR_URL: ${{ needs.update_windows.outputs.pull-request-url }}
+          IOS_PR_URL: ${{ needs.update_ios.outputs.pull-request-url }}
+          MACOS_PR_URL: ${{ needs.update_macos.outputs.pull-request-url }}
+          WINDOWS_PR_URL: ${{ needs.update_windows.outputs.pull-request-url }}
           ANDROID_PR_URL: ${{ needs.update_android.outputs.pull-request-url }}
         run: |
           node ./autoconsent/ci/asana-update-tasks.js
