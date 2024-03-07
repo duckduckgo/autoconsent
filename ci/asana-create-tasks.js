@@ -131,7 +131,7 @@ const asanaCreateTasks = async () => {
     platforms[platform].taskUrl = permalink_url
 
     const newName = name.replace('[[version]]', version)
-    const projectGids = (html_notes.match(projectExtractorRegex)?.[1] || '').split(',')
+    const extractedProjects = html_notes.match(projectExtractorRegex)?.[1]
 
     const subtaskNotes =
             html_notes.replace(projectExtractorRegex, '')
@@ -139,8 +139,10 @@ const asanaCreateTasks = async () => {
 
     await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes })
 
-    for (const projectGid of projectGids) {
-      await asana.tasks.addProjectForTask(gid, { project: projectGid, insert_after: null })
+    if (extractedProjects) {
+      for (const projectGid of extractedProjects.split(',')) {
+        await asana.tasks.addProjectForTask(gid, { project: projectGid, insert_after: null })
+      }
     }
   }
 
