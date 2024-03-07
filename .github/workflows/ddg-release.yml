@@ -14,7 +14,7 @@ env:
   RELEASE_URL1: ${{ github.event.release.html_url }}
   RELEASE_NOTES: 'Some release notes here.'
   RELEASE_NOTES1: ${{ github.event.release.body }}
-  PR_TITLE: TESTING Update autoconsent to v10.2.0
+  PR_TITLE: '[TESTING] Update autoconsent to v10.2.0'
 
 jobs:
 
