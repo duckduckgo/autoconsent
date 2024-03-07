@@ -26,7 +26,7 @@ env:
     - [@dependabot[bot]](https://github.com/dependabot[bot])
     - HoJeong Go ([@seia-soto](https://github.com/seia-soto))
   RELEASE_NOTES1: ${{ github.event.release.body }}
-  PR_TITLE: '[TESTING] Update autoconsent to v10.2.0'
+  PR_TITLE: Update autoconsent to v10.2.0 ${{ github.event.release.tag_name }}
 
 jobs:
 
