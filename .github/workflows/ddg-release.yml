@@ -62,7 +62,7 @@ jobs:
         with:
           repository: duckduckgo/android
           path: android/
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
       - uses: actions/setup-node@v3
         with:
           node-version: current
@@ -121,7 +121,7 @@ jobs:
         with:
           repository: duckduckgo/iOS
           path: ios/
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
       - uses: actions/setup-node@v3
         with:
           node-version: current
@@ -178,7 +178,7 @@ jobs:
         with:
           repository: duckduckgo/macos-browser
           path: macos/
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
       - uses: actions/setup-node@v3
         with:
           node-version: current
@@ -235,7 +235,7 @@ jobs:
         with:
           repository: duckduckgo/windows-browser
           path: windows/
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
       - uses: actions/setup-node@v3
         with:
           node-version: current
