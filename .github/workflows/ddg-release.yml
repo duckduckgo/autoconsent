@@ -91,7 +91,7 @@ jobs:
           branch: update-autoconsent-${{ github.event.release.tag_name }}
           title: Update autoconsent to ${{ github.event.release.tag_name }}
           body: "${{ env.PR_BODY_ANDROID }}"
-          token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 
 # # ------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ jobs:
 #         with:
 #           repository: duckduckgo/iOS
 #           path: ios/
-#           token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 #       - name: Update iOS autofill reference
 #         env:
 #           BSK_SHA: ${{ needs.update_bsk.outputs.pull-request-head-sha }}
@@ -143,7 +143,7 @@ jobs:
 #           branch: update-bsk-with-autofill-${{ github.event.release.tag_name }}
 #           title: Update BSK with autofill ${{ github.event.release.tag_name }}
 #           body: ${{ env.PR_BODY_IOS }}
-#           token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 # # ------------------------------------------------------------------------------
 # # Create PR with updated BrowserServicesKit on macOS
@@ -166,7 +166,7 @@ jobs:
 #         with:
 #           repository: duckduckgo/macos-browser
 #           path: macos/
-#           token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 #       - name: Update macOS autofill reference
 #         env:
 #           BSK_SHA: ${{ needs.update_bsk.outputs.pull-request-head-sha }}
@@ -194,7 +194,7 @@ jobs:
 #           branch: update-bsk-with-autofill-${{ github.event.release.tag_name }}
 #           title: Update BSK with autofill ${{ github.event.release.tag_name }}
 #           body: ${{ env.PR_BODY_MACOS }}
-#           token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 # # ------------------------------------------------------------------------------
 # # Create PR with updated autofill on Windows
@@ -218,7 +218,7 @@ jobs:
 #           repository: duckduckgo/windows-browser
 #           path: windows/
 #           submodules: true
-#           token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 #       - name: Update Windows autofill reference
 #         run: |
 #           cd windows/submodules/duckduckgo-autofill
@@ -247,7 +247,7 @@ jobs:
 #           branch: update-autofill-${{ github.event.release.tag_name }}
 #           title: Update autofill to ${{ github.event.release.tag_name }}
 #           body: "${{ env.PR_BODY_WINDOWS }}"
-#           token: ${{ secrets.DAXMOBILE_AUTOFILL_AUTOMATION }}
+#           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 # ------------------------------------------------------------------------------
 # Update Asana subtasks with PR URLs
