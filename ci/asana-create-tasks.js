@@ -105,6 +105,8 @@ const asanaCreateTasks = async () => {
           .replace('[[release_url]]', getLink(releaseUrl, 'Autoconsent Release'))
           .replace('[[notes]]', releaseNotes)
           .replace(/<\/?p>/ig, '\n')
+          // Asana supports only h1 and h2
+          .replace(/<(h3|h4)>/ig, '<h2>').replace(/<\/(h3|h4)>/ig, '</h2>')
 
   // Updating task and moving to Release section...
   console.error(JSON.stringify(updatedNotes))
