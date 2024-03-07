@@ -3,30 +3,12 @@ name: Propagate Autoconsent To DDG Apps
 on:
   release:
     types: [ created ]
-  push:
-    branches:
-      - 'release-automation'
 
 env:
-  VERSION1: ${{ github.event.release.tag_name }}
-  VERSION: 'v10.2.0'
-  RELEASE_URL: 'https://github.com/duckduckgo/autoconsent/releases/tag/v10.2.0'
-  RELEASE_URL1: ${{ github.event.release.html_url }}
-  RELEASE_NOTES: |
-    #### 🚀 Enhancement
-
-    - feat: support coca-cola.com using OneTrust [#376](https://github.com/duckduckgo/autoconsent/pull/376) ([@seia-soto](https://github.com/seia-soto))
-
-    #### 🔩 Dependency Updates
-
-    - Bump the dev-dependencies group with 4 updates [#385](https://github.com/duckduckgo/autoconsent/pull/385) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-
-    #### Authors: 2
-
-    - [@dependabot[bot]](https://github.com/dependabot[bot])
-    - HoJeong Go ([@seia-soto](https://github.com/seia-soto))
-  RELEASE_NOTES1: ${{ github.event.release.body }}
-  PR_TITLE: Update autoconsent to v10.2.0 ${{ github.event.release.tag_name }}
+  VERSION: ${{ github.event.release.tag_name }}
+  RELEASE_URL: ${{ github.event.release.html_url }}
+  RELEASE_NOTES: ${{ github.event.release.body }}
+  PR_TITLE: Update autoconsent to ${{ github.event.release.tag_name }}
 
 jobs:
 
