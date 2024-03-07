@@ -107,6 +107,7 @@ const asanaCreateTasks = async () => {
           .replace(/<\/?p>/ig, '\n')
 
   // Updating task and moving to Release section...
+  console.error(JSON.stringify(updatedNotes))
   await asana.tasks.updateTask(new_task.gid, {html_notes: updatedNotes})
 
   await asana.tasks.addProjectForTask(new_task.gid, { project: autoconsentProjectGid, section: releaseSectionGid })
