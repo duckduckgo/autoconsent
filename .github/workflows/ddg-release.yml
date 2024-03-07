@@ -12,7 +12,19 @@ env:
   VERSION: 'v10.2.0'
   RELEASE_URL: 'https://github.com/duckduckgo/autoconsent/releases/tag/v10.2.0'
   RELEASE_URL1: ${{ github.event.release.html_url }}
-  RELEASE_NOTES: 'Some release notes here.'
+  RELEASE_NOTES: |
+    #### 🚀 Enhancement
+
+    - feat: support coca-cola.com using OneTrust [#376](https://github.com/duckduckgo/autoconsent/pull/376) ([@seia-soto](https://github.com/seia-soto))
+
+    #### 🔩 Dependency Updates
+
+    - Bump the dev-dependencies group with 4 updates [#385](https://github.com/duckduckgo/autoconsent/pull/385) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+    #### Authors: 2
+
+    - [@dependabot[bot]](https://github.com/dependabot[bot])
+    - HoJeong Go ([@seia-soto](https://github.com/seia-soto))
   RELEASE_NOTES1: ${{ github.event.release.body }}
   PR_TITLE: '[TESTING] Update autoconsent to v10.2.0'
 
