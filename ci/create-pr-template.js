@@ -32,7 +32,7 @@ const data = {
  */
 function createPRTemplate (platform, data) {
   const asanaOutput = JSON.parse(data.asanaOutputRaw)
-  const templatePath = filepath(`./release/clients_pr_template.md`)
+  const templatePath = filepath(`./ci/clients_pr_template.md`)
   const template = readFileSync(templatePath, 'utf8')
 
   const asanaUrlRegex = /\[\[asana_url]]/
@@ -44,11 +44,6 @@ function createPRTemplate (platform, data) {
   let extraContent = ''
 
   let asanaUrl = asanaOutput[platform]?.taskUrl
-
-  if (['ios', 'macos'].includes(platform)) {
-    asanaUrl = asanaOutput.bsk?.taskUrl
-    extraContent = `BSK PR: ${data.bskPrUrl}`
-  }
 
   const updatedTemplate = replaceAllInString(template, [
     [asanaUrlRegex, asanaUrl],
