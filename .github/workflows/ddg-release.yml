@@ -45,6 +45,7 @@ jobs:
 # ------------------------------------------------------------------------------
 
   update_android:
+    if: false
     runs-on: ubuntu-latest
     outputs:
       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
@@ -103,6 +104,7 @@ jobs:
 # ------------------------------------------------------------------------------
 
   update_ios:
+    if: false
     runs-on: ubuntu-latest
     outputs:
       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
