@@ -26,7 +26,8 @@
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
     "prepublish": "npm run build-rules && npm run bundle",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
-    "release": "auto shipit"
+    "release": "auto shipit",
+    "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
@@ -46,6 +47,7 @@
     "eslint": "^8.27.0",
     "eslint-plugin-json": "^3.1.0",
     "mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
     "typescript": "^5.1.6",
     "web-ext": "^7.3.0"
