@@ -2,7 +2,7 @@ name: Propagate Autoconsent To DDG Apps
 
 on:
   release:
-    types: [ created ]
+    types: [ published ]
 
 env:
   VERSION: ${{ github.event.release.tag_name }}
