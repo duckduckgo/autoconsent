@@ -1,3 +1,24 @@
+# v10.3.0 (Fri Mar 15 2024)
+
+#### 🚀 Enhancement
+
+- DDG release automation [#389](https://github.com/duckduckgo/autoconsent/pull/389) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group with 4 updates [#390](https://github.com/duckduckgo/autoconsent/pull/390) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Fix infinite reload for OneTrust sites [#393](https://github.com/duckduckgo/autoconsent/pull/393) ([@muodov](https://github.com/muodov))
+- Script to crawl page text content in multiple languages. [#386](https://github.com/duckduckgo/autoconsent/pull/386) ([@sammacbeth](https://github.com/sammacbeth))
+- Update Asana sync action [#388](https://github.com/duckduckgo/autoconsent/pull/388) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.2.0 (Tue Mar 05 2024)
 
 #### 🚀 Enhancement
