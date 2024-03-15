@@ -23,11 +23,11 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return this.elementExists("#onetrust-banner-sdk,#onetrust-consent-sdk");
+    return this.elementExists("#onetrust-banner-sdk,#onetrust-pc-sdk");
   }
 
   async detectPopup() {
-    return this.elementVisible("#onetrust-banner-sdk,#onetrust-consent-sdk", "any");
+    return this.elementVisible("#onetrust-banner-sdk,#onetrust-pc-sdk", "any");
   }
 
   async optOut() {
