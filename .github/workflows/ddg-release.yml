@@ -3,12 +3,34 @@ name: Propagate Autoconsent To DDG Apps
 on:
   release:
     types: [ published ]
+  push:
+    branches:
+      - 'tmp-automation'
 
 env:
-  VERSION: ${{ github.event.release.tag_name }}
-  RELEASE_URL: ${{ github.event.release.html_url }}
-  RELEASE_NOTES: ${{ github.event.release.body }}
-  PR_TITLE: Update autoconsent to ${{ github.event.release.tag_name }}
+  VERSION1: ${{ github.event.release.tag_name }}
+  VERSION: 'v10.3.0'
+  RELEASE_URL: 'https://github.com/duckduckgo/autoconsent/releases/tag/v10.3.0'
+  RELEASE_URL1: ${{ github.event.release.html_url }}
+  RELEASE_NOTES: |
+    #### 🚀 Enhancement
+
+    - DDG release automation [#389](https://github.com/duckduckgo/autoconsent/pull/389) ([@muodov](https://github.com/muodov))
+    - Bump the dev-dependencies group with 4 updates [#390](https://github.com/duckduckgo/autoconsent/pull/390) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+    #### 🐛 Bug Fix
+
+    - Fix infinite reload for OneTrust sites [#393](https://github.com/duckduckgo/autoconsent/pull/393) ([@muodov](https://github.com/muodov))
+    - Script to crawl page text content in multiple languages. [#386](https://github.com/duckduckgo/autoconsent/pull/386) ([@sammacbeth](https://github.com/sammacbeth))
+    - Update Asana sync action [#388](https://github.com/duckduckgo/autoconsent/pull/388) ([@sammacbeth](https://github.com/sammacbeth))
+
+    #### Authors: 3
+
+    - [@dependabot[bot]](https://github.com/dependabot[bot])
+    - Maxim Tsoy ([@muodov](https://github.com/muodov))
+    - Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+  RELEASE_NOTES1: ${{ github.event.release.body }}
+  PR_TITLE: Update autoconsent to v10.3.0 ${{ github.event.release.tag_name }}
 
 jobs:
 
@@ -38,58 +60,58 @@ jobs:
 # Create PR with updated autoconsent on Android
 # ------------------------------------------------------------------------------
 
-  update_android:
-    runs-on: ubuntu-latest
-    outputs:
-      pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-    needs: create_asana_tasks
-    steps:
-      # --- Setup ---
-      - uses: actions/checkout@v3
-        with:
-          path: autoconsent/
-      - uses: ./autoconsent/.github/actions/setup-release-scripts
-      # --- Action ---
-      - name: Checkout Android
-        uses: actions/checkout@v3
-        with:
-          repository: duckduckgo/android
-          path: android/
-          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: current
-      - name: Update Android autoconsent reference
-        run: |
-          cd android
-          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
-          npm run rebuild-autoconsent
-          cd ..
-      - name: Create Android PR Body
-        env:
-          ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-        run: |
-          TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js android)"
-          # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
-          DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
-          echo "PR_BODY_ANDROID<<$DELIMITER" >> $GITHUB_ENV
-          echo "$TEMPLATE" >> $GITHUB_ENV
-          echo "$DELIMITER" >> $GITHUB_ENV
-      # --- Effect ---
-      - name: Create PR for Android
-        uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
-        id: create-pr
-        with:
-          path: android/
-          add-paths: |
-            package.json
-            package-lock.json
-            autoconsent/
-          commit-message: Update autoconsent to ${{ env.VERSION }}
-          branch: update-autoconsent-${{ env.VERSION }}
-          title: ${{ env.PR_TITLE }}
-          body: "${{ env.PR_BODY_ANDROID }}"
-          token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+  # update_android:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
+  #   needs: create_asana_tasks
+  #   steps:
+  #     # --- Setup ---
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         path: autoconsent/
+  #     - uses: ./autoconsent/.github/actions/setup-release-scripts
+  #     # --- Action ---
+  #     - name: Checkout Android
+  #       uses: actions/checkout@v3
+  #       with:
+  #         repository: duckduckgo/android
+  #         path: android/
+  #         token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: current
+  #     - name: Update Android autoconsent reference
+  #       run: |
+  #         cd android
+  #         npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+  #         npm run rebuild-autoconsent
+  #         cd ..
+  #     - name: Create Android PR Body
+  #       env:
+  #         ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
+  #       run: |
+  #         TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js android)"
+  #         # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
+  #         DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
+  #         echo "PR_BODY_ANDROID<<$DELIMITER" >> $GITHUB_ENV
+  #         echo "$TEMPLATE" >> $GITHUB_ENV
+  #         echo "$DELIMITER" >> $GITHUB_ENV
+  #     # --- Effect ---
+  #     - name: Create PR for Android
+  #       uses: peter-evans/create-pull-request@88bf0de51c7487d91e1abbb4899332e602c58bbf
+  #       id: create-pr
+  #       with:
+  #         path: android/
+  #         add-paths: |
+  #           package.json
+  #           package-lock.json
+  #           autoconsent/
+  #         commit-message: Update autoconsent to ${{ env.VERSION }}
+  #         branch: update-autoconsent-${{ env.VERSION }}
+  #         title: ${{ env.PR_TITLE }}
+  #         body: "${{ env.PR_BODY_ANDROID }}"
+  #         token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
 
 # ------------------------------------------------------------------------------
@@ -270,7 +292,7 @@ jobs:
     # Always run this final step, even if any of the updates have failed
     # unless the previous jobs were cancelled
     if: ${{ always() && !contains(needs.*.result, 'cancelled') }}
-    needs: [create_asana_tasks, update_android, update_ios, update_macos, update_windows]
+    needs: [create_asana_tasks, update_ios, update_macos, update_windows]
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
