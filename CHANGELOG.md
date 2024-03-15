@@ -1,3 +1,15 @@
+# v10.3.1 (Fri Mar 15 2024)
+
+#### 🐛 Bug Fix
+
+- Fix the trigger event for the CI automation [#394](https://github.com/duckduckgo/autoconsent/pull/394) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.3.0 (Fri Mar 15 2024)
 
 #### 🚀 Enhancement
