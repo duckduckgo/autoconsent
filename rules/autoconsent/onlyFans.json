@@ -11,7 +11,8 @@
       "click": "div.b-cookies-informer__nav > button:nth-child(1)"
     },
     {
-      "click": "div.b-cookies-informer__switchers > div:nth-child(2) > div[at-attr=\"checkbox\"] > span.b-input-radio__container > input[type=\"checkbox\"]"
+      "click": "div.b-cookies-informer__switchers input:not([disabled])",
+      "all": true
     },
     { "click": "div.b-cookies-informer__nav > button"}
   ]
