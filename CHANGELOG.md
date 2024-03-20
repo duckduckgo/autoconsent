@@ -1,3 +1,15 @@
+# v10.3.2 (Wed Mar 20 2024)
+
+#### 🐛 Bug Fix
+
+- fix: outdated strato.de [#399](https://github.com/duckduckgo/autoconsent/pull/399) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 1
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+
+---
+
 # v10.3.1 (Fri Mar 15 2024)
 
 #### 🐛 Bug Fix
