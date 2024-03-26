@@ -29,7 +29,19 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cc-deny"
+            "if": {
+                "exists": ".cc-deny"
+            },
+            "then": [
+                {
+                    "click": ".cc-deny"
+                }
+            ],
+            "else": [
+                {
+                    "hide": "[aria-describedby=\"cookieconsent:desc\"]"
+                }
+            ]
         }
     ]
 }
