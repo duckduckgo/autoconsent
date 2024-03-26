@@ -1,3 +1,17 @@
+# v10.4.0 (Tue Mar 26 2024)
+
+#### 🚀 Enhancement
+
+- Check runcontext for prehide selectors. [#400](https://github.com/duckduckgo/autoconsent/pull/400) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix rules for tumblr.com, onlyfans, canva.com, cookie-script [#395](https://github.com/duckduckgo/autoconsent/pull/395) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.3.2 (Wed Mar 20 2024)
 
 #### 🐛 Bug Fix
