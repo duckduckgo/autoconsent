@@ -411,12 +411,10 @@ export default class AutoConsent {
       "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium",
     ]
 
-    const selectors = this.rules.reduce((selectorList, rule) => {
-      if (rule.prehideSelectors) {
-        return [...selectorList, ...rule.prehideSelectors];
-      }
-      return selectorList;
-    }, globalHidden);
+    const selectors = this.rules
+      .filter(rule => rule.prehideSelectors && rule.checkRunContext())
+      .reduce((selectorList, rule) => 
+        [...selectorList, ...rule.prehideSelectors], globalHidden);
 
     this.updateState({ prehideOn: true })
     setTimeout(() => {
