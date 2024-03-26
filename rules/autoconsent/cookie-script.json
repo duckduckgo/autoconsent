@@ -7,7 +7,10 @@
     "optOut": [
         {
             "if": { "exists": "#cookiescript_reject" },
-            "then": [{" click": "#cookiescript_reject" }],
+            "then": [
+                { "wait": 100 },
+                {"click": "#cookiescript_reject" }
+            ],
             "else": [
                 { "click": "#cookiescript_manage" },
                 { "waitForVisible": ".cookiescript_fsd_main" },
