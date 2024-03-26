@@ -1,0 +1,13 @@
+{
+    "name": "Ensighten ensModal",
+    "prehideSelectors": [".ensModal"],
+    "detectCmp": [{ "exists": ".ensModal" }],
+    "detectPopup": [{ "visible": ".ensModal" }],
+    "optIn": [
+        { "waitForThenClick": "#modalAcceptButton" }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".ensCheckbox:checked", "all": true },
+        { "waitForThenClick": "#ensSave" }
+    ]
+}
