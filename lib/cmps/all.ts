@@ -10,7 +10,7 @@ import Uniconsent from './uniconsent';
 import Conversant from './conversant';
 import Tiktok from './tiktok';
 import Airbnb from './airbnb';
-
+import Tumblr from './tumblr-com';
 
 export const dynamicCMPs = [
   TrustArcTop,
@@ -25,4 +25,5 @@ export const dynamicCMPs = [
   Conversant,
   Tiktok,
   Airbnb,
+  Tumblr,
 ];

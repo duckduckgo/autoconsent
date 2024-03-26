@@ -4,6 +4,19 @@
     "prehideSelectors": ["#cookiescript_injected"],
     "detectCmp": [{"exists": "#cookiescript_injected"}],
     "detectPopup": [{"visible": "#cookiescript_injected"}],
-    "optOut": [{"click": "#cookiescript_reject"}],
+    "optOut": [
+        {
+            "if": { "exists": "#cookiescript_reject" },
+            "then": [
+                { "wait": 100 },
+                {"click": "#cookiescript_reject" }
+            ],
+            "else": [
+                { "click": "#cookiescript_manage" },
+                { "waitForVisible": ".cookiescript_fsd_main" },
+                { "waitForThenClick": "#cookiescript_reject" }
+            ]
+        }
+    ],
     "optIn": [{"click": "#cookiescript_accept"}]
 }
