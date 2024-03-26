@@ -30,6 +30,9 @@ export const snippets = {
       return Object.keys(consents).filter(k => optionalServices.includes(k)).every(k => consents[k] === false)
     }
   },
+  EVAL_KLARO_2: () => {
+    klaro.show(undefined, true)
+  },
   EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1,
   EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
 

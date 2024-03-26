@@ -34,11 +34,8 @@ export default class Klaro extends AutoConsentCMPBase {
       return true;
     }
 
-    if (!this.settingsOpen) {
-      this.click('.klaro .cn-learn-more,.klaro .cm-button-manage');
-      await this.waitForElement('.klaro > .cookie-modal', 2000);
-      this.settingsOpen = true;
-    }
+    // open popup via Javascript API
+    await this.mainWorldEval("EVAL_KLARO_2")
 
     if (this.click('.klaro .cn-decline')) {
       return true;
