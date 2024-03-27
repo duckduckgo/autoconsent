@@ -1,0 +1,17 @@
+{
+  "name": "straeto.is",
+  "prehideSelectors": ["div[class*='CookieNotice_wrapper']"],
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https://straeto\\.is/"
+  },
+  "detectCmp": [{ "exists": "div[class*='CookieNotice_wrapper']" }],
+  "detectPopup": [{ "visible": "div[class*='CookieNotice_wrapper']" }],
+  "optIn": [{ "click": "div[class*='CookieNotice_wrapper'] > form > div > button" }],
+  "optOut": [
+    { "click": "div[class*='CookieNotice_wrapper'] > form > div > button + button" },
+    { "waitForThenClick": "input#functional:checked", "optional": true, "timeout": 50 },
+    { "click": "div[class*='CookieNotice_wrapper'] > form > button" }
+  ]
+}
