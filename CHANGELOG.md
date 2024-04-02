@@ -1,3 +1,18 @@
+# v10.5.0 (Tue Apr 02 2024)
+
+#### 🚀 Enhancement
+
+- Fix Moove on mitglieder.franzspitzer.de [#409](https://github.com/duckduckgo/autoconsent/pull/409) ([@muodov](https://github.com/muodov))
+- Add .cc-type-out-out variant of Complianz popup [#402](https://github.com/duckduckgo/autoconsent/pull/402) ([@sammacbeth](https://github.com/sammacbeth))
+- Rules for two Ensighten banner variants [#403](https://github.com/duckduckgo/autoconsent/pull/403) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.4.0 (Tue Mar 26 2024)
 
 #### 🚀 Enhancement
