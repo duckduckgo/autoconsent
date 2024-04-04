@@ -18,7 +18,7 @@ const platform = /** @type {ReleasePlatform} */ (process.argv[2])
 
 /** @type {CreatePRTemplateData} */
 const data = {
-  version: process.env.VERSION || '',
+  version: process.env.TAG || '',
   releaseUrl: process.env.RELEASE_URL || '',
   releaseNotesRaw: process.env.RELEASE_NOTES || '',
   asanaOutputRaw: process.env.ASANA_OUTPUT || '{}'

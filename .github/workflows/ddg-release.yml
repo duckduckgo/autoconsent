@@ -1,24 +1,63 @@
 name: Propagate Autoconsent To DDG Apps
 
 on:
-  release:
-    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'The tag of the release'
+        required: true
+        default: 'latest'
 
 env:
-  VERSION: ${{ github.event.release.tag_name }}
-  RELEASE_URL: ${{ github.event.release.html_url }}
-  RELEASE_NOTES: ${{ github.event.release.body }}
-  PR_TITLE: Update autoconsent to ${{ github.event.release.tag_name }}
+  TAG: ${{ inputs.tag_name }}
 
 jobs:
+# ------------------------------------------------------------------------------
+# Retrieve the corresponding Release data from the GitHub API
+# ------------------------------------------------------------------------------
+  get_release_info:
+    runs-on: ubuntu-latest
+    outputs:
+      release-url: ${{ steps.get-release-url.outputs.result }}
+      release-notes: ${{ steps.get-release-notes.outputs.result }}
+    steps:
+      - name: Get Release URL
+        id: get-release-url
+        uses: actions/github-script@v4
+        with:
+          result-encoding: string
+          script: |
+            const { data } = await github.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: process.env.TAG
+            });
+            return data.html_url;
+
+      - name: Get Release Notes
+        id: get-release-notes
+        uses: actions/github-script@v4
+        with:
+          result-encoding: string
+          script: |
+            const { data } = await github.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: process.env.TAG
+            });
+            return data.body;
 
 # ------------------------------------------------------------------------------
 # Create initial Asana subtasks
 # ------------------------------------------------------------------------------
   create_asana_tasks:
+    needs: get_release_info
     runs-on: ubuntu-latest
     outputs:
       asana-output: ${{ steps.create-asana-tasks.outputs.ASANA_OUTPUT }}
+    env:
+      RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -42,7 +81,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-    needs: create_asana_tasks
+    needs:
+      - create_asana_tasks
+      - get_release_info
+    env:
+      RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -62,7 +106,7 @@ jobs:
       - name: Update Android autoconsent reference
         run: |
           cd android
-          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm install @duckduckgo/autoconsent@${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create Android PR Body
@@ -85,9 +129,9 @@ jobs:
             package.json
             package-lock.json
             autoconsent/
-          commit-message: Update autoconsent to ${{ env.VERSION }}
-          branch: update-autoconsent-${{ env.VERSION }}
-          title: ${{ env.PR_TITLE }}
+          commit-message: Update autoconsent to ${{ env.TAG }}
+          branch: update-autoconsent-${{ env.TAG }}
+          title: Update autoconsent to ${{ env.TAG }}
           body: "${{ env.PR_BODY_ANDROID }}"
           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
@@ -100,7 +144,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-    needs: create_asana_tasks
+    needs:
+      - create_asana_tasks
+      - get_release_info
+    env:
+      RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -120,7 +169,7 @@ jobs:
       - name: Update iOS autoconsent reference
         run: |
           cd ios
-          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm install @duckduckgo/autoconsent@${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create iOS PR Body
@@ -143,9 +192,9 @@ jobs:
             package.json
             package-lock.json
             DuckDuckGo/Autoconsent/
-          commit-message: Update autoconsent to ${{ env.VERSION }}
-          branch: update-autoconsent-${{ env.VERSION }}
-          title: ${{ env.PR_TITLE }}
+          commit-message: Update autoconsent to ${{ env.TAG }}
+          branch: update-autoconsent-${{ env.TAG }}
+          title: Update autoconsent to ${{ env.TAG }}
           body: "${{ env.PR_BODY_IOS }}"
           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
@@ -157,7 +206,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-    needs: create_asana_tasks
+    needs:
+      - create_asana_tasks
+      - get_release_info
+    env:
+      RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -177,7 +231,7 @@ jobs:
       - name: Update macOS autoconsent reference
         run: |
           cd macos
-          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm install @duckduckgo/autoconsent@${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create macOS PR Body
@@ -200,9 +254,9 @@ jobs:
             package.json
             package-lock.json
             DuckDuckGo/Autoconsent/
-          commit-message: Update autoconsent to ${{ env.VERSION }}
-          branch: update-autoconsent-${{ env.VERSION }}
-          title: ${{ env.PR_TITLE }}
+          commit-message: Update autoconsent to ${{ env.TAG }}
+          branch: update-autoconsent-${{ env.TAG }}
+          title: Update autoconsent to ${{ env.TAG }}
           body: "${{ env.PR_BODY_MACOS }}"
           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
@@ -214,7 +268,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-    needs: create_asana_tasks
+    needs:
+      - create_asana_tasks
+      - get_release_info
+    env:
+      RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -234,7 +293,7 @@ jobs:
       - name: Update Windows autoconsent reference
         run: |
           cd windows/WindowsBrowser/Application/Autoconsent/External
-          npm install @duckduckgo/autoconsent@${{ env.VERSION }}
+          npm install @duckduckgo/autoconsent@${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ../../../../../
       - name: Create Windows PR Body
@@ -255,9 +314,9 @@ jobs:
           path: windows/
           add-paths: |
             WindowsBrowser/Application/Autoconsent/
-          commit-message: Update autoconsent to ${{ env.VERSION }}
-          branch: update-autoconsent-${{ env.VERSION }}
-          title: ${{ env.PR_TITLE }}
+          commit-message: Update autoconsent to ${{ env.TAG }}
+          branch: update-autoconsent-${{ env.TAG }}
+          title: Update autoconsent to ${{ env.TAG }}
           body: "${{ env.PR_BODY_WINDOWS }}"
           token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
