@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'The tag of the release'
+        description: 'The tag of the release to propagate'
         required: true
-        default: 'latest'
 
 env:
   TAG: ${{ inputs.tag_name }}
