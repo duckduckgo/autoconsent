@@ -7,7 +7,6 @@ const {getLink} = require('./release-utils.js')
 const md = new MarkdownIt()
 
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN
-const commit = process.env.GITHUB_SHA
 const version = process.env.TAG
 const releaseUrl = process.env.RELEASE_URL || 'https://example.com/'
 const releaseNotesRaw = process.env.RELEASE_NOTES || '<EMPTY RELEASE NOTES>'
@@ -101,7 +100,6 @@ const asanaCreateTasks = async () => {
 
   const updatedNotes =
         notes.replace('[[version]]', version)
-          .replace('[[commit]]', commit)
           .replace('[[release_url]]', getLink(releaseUrl, 'Autoconsent Release'))
           .replace('[[notes]]', releaseNotes)
           .replace(/<\/?p>/ig, '\n')
