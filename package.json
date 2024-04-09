@@ -11,7 +11,7 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/easylist.txt\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -60,5 +60,8 @@
       "npm"
     ],
     "onlyPublishWithReleaseLabel": true
+  },
+  "dependencies": {
+    "@cliqz/adblocker": "^1.26.15"
   }
 }

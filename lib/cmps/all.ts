@@ -11,6 +11,8 @@ import Conversant from './conversant';
 import Tiktok from './tiktok';
 import Airbnb from './airbnb';
 import Tumblr from './tumblr-com';
+import EasyList from './easylist';
+
 
 export const dynamicCMPs = [
   TrustArcTop,
@@ -26,4 +28,5 @@ export const dynamicCMPs = [
   Tiktok,
   Airbnb,
   Tumblr,
+  EasyList,
 ];

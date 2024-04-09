@@ -64,4 +64,13 @@ export function combineRules(autoconsent, consentomatic) {
     JSON.stringify(rules, undefined, "  "),
     () => console.log("Written rules.json")
   );
+
+  const easylistContent = fs.readFileSync(path.join(rulesDir, 'easylist.txt'), 'utf-8');
+  fs.writeFile(
+    path.join(rulesDir, "easylist.json"),
+    JSON.stringify({
+      content: easylistContent
+    }, undefined, "  "),
+    () => console.log("Written easylist.json")
+  );
 })();
