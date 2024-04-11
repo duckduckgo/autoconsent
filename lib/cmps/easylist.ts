@@ -52,7 +52,7 @@ export default class EasyList extends AutoConsentCMPBase {
 
     if (cosmetics.styles) {
       this.selectorsOnly = cosmetics.styles.replace(/\s*{ display: none !important; }\s*/g, ',').replace(/,$/, '');
-      return this.elementExists(this.selectorsOnly);
+      return this.elementVisible(this.selectorsOnly, 'any');
     }
 
     return false;
