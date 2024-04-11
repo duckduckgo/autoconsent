@@ -3,7 +3,7 @@
   "prehideSelectors": ["#tarteaucitronRoot"],
   "detectCmp": [{ "exists": "#tarteaucitronRoot" }],
   "detectPopup": [{
-    "visible": "#tarteaucitronRoot #tarteaucitronAlertSmall,#tarteaucitronRoot #tarteaucitronAlertBig",
+    "visible": "#tarteaucitronRoot #tarteaucitronAlertBig",
     "check": "any"
   }],
   "optIn": [
