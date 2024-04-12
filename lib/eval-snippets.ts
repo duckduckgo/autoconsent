@@ -30,8 +30,22 @@ export const snippets = {
       return Object.keys(consents).filter(k => optionalServices.includes(k)).every(k => consents[k] === false)
     }
   },
-  EVAL_KLARO_2: () => {
+  EVAL_KLARO_OPEN_POPUP: () => {
     klaro.show(undefined, true)
+  },
+  EVAL_KLARO_TRY_API_OPT_OUT: () => {
+    if (window.klaro && typeof klaro.show === 'function' && typeof klaro.getManager === 'function') {
+      try {
+        // opt-out directly via API
+        klaro.getManager().changeAll(false)
+        klaro.getManager().saveAndApplyConsents()
+        return true
+      } catch (e) {
+        console.warn(e)
+        return false
+      }
+    }
+    return false
   },
   EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1,
   EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',

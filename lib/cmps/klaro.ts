@@ -30,12 +30,18 @@ export default class Klaro extends AutoConsentCMPBase {
   }
 
   async optOut() {
+    const apiOptOutSuccess = await this.mainWorldEval("EVAL_KLARO_TRY_API_OPT_OUT")
+    if (apiOptOutSuccess) {
+      return true
+    }
+    // if the API is broken for some reason, try clicking instead
+
     if (this.click('.klaro .cn-decline')) {
       return true;
     }
 
     // open popup via Javascript API
-    await this.mainWorldEval("EVAL_KLARO_2")
+    await this.mainWorldEval("EVAL_KLARO_OPEN_POPUP")
 
     if (this.click('.klaro .cn-decline')) {
       return true;
