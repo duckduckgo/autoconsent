@@ -1,3 +1,27 @@
+# v10.6.0 (Fri Apr 12 2024)
+
+#### 🚀 Enhancement
+
+- Fix detection in tarteaucitron [#415](https://github.com/duckduckgo/autoconsent/pull/415) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#413](https://github.com/duckduckgo/autoconsent/pull/413) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Remove git commit from asana tasks ([@muodov](https://github.com/muodov))
+- Remove the default value for the release workflow ([@muodov](https://github.com/muodov))
+- Make the ddg release workflow manual ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.5.0 (Tue Apr 02 2024)
 
 #### 🚀 Enhancement
