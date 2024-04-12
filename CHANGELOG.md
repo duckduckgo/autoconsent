@@ -1,3 +1,15 @@
+# v10.6.1 (Fri Apr 12 2024)
+
+#### 🐛 Bug Fix
+
+- Fix Klaro rule (wogibtswas.de, www.suedtirol.com) [#404](https://github.com/duckduckgo/autoconsent/pull/404) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.6.0 (Fri Apr 12 2024)
 
 #### 🚀 Enhancement
