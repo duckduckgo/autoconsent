@@ -215,7 +215,13 @@ export default class AutoConsent {
       }
     }
 
-    if (foundCMPs.length === 0 && retries > 0) {
+    if (
+      retries > 0 &&
+      (
+        foundCMPs.length === 0
+        || foundCMPs.length === 1 && foundCMPs[0].name === 'easylist' && retries > (this.config.detectRetries - 3) // easylist is not reliable, give other CMPs a few tries
+      )
+    ) {
       await this.domActions.wait(500);
       return this.findCmp(retries - 1);
     }
