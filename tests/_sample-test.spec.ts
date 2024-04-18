@@ -1,6 +1,7 @@
 import coverageData from "../data/coverage.json";
 import generateCMPTests from "../playwright/runner";
 
+
 const region = (process.env.REGION || "US").trim();
 const nSites = parseInt(process.env.NSITES || '1')
 
