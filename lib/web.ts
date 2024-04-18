@@ -219,7 +219,7 @@ export default class AutoConsent {
       retries > 0 &&
       (
         foundCMPs.length === 0
-        || foundCMPs.length === 1 && foundCMPs[0].name === 'easylist' && retries > (this.config.detectRetries - 3) // easylist is not reliable, give other CMPs a few tries
+        || foundCMPs.length === 1 && foundCMPs[0].name === 'easylist' && retries > (this.config.detectRetries - 7) // easylist is not reliable, give other CMPs a few tries
       )
     ) {
       await this.domActions.wait(500);
