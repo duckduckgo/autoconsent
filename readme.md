@@ -1,5 +1,6 @@
 # Autoconsent
 
+
 This is a library of rules for navigating through common consent popups on the web. These rules
 can be run in a Chrome extension, or in a Playwright-orchestrated headless browser. Using
 these rules, opt-in and opt-out options can be selected automatically, without requiring
