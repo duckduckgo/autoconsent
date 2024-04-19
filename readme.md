@@ -22,7 +22,7 @@ The extension-specific code can be found in the `addon` directory. There are two
 addon (found under `dist/addon` after building), one for `mv3` version for Chromium-based browsers, and a `firefox` version for Firefox.
 You can load these in [Chrome](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked)
 in developer mode, and in [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
-as a tempoary addon.
+as a temporary addon.
 
 ## Rules
 
