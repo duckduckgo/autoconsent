@@ -1,3 +1,18 @@
+# v10.6.2 (Tue Apr 23 2024)
+
+#### 🐛 Bug Fix
+
+- Click 'Save & Exit' instead of 'Cancel' in dmgmedia popup [#425](https://github.com/duckduckgo/autoconsent/pull/425) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix sibbo rule [#423](https://github.com/duckduckgo/autoconsent/pull/423) ([@sammacbeth](https://github.com/sammacbeth))
+- Update readme.md [#420](https://github.com/duckduckgo/autoconsent/pull/420) ([@hyebahi](https://github.com/hyebahi))
+
+#### Authors: 2
+
+- [@hyebahi](https://github.com/hyebahi)
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.6.1 (Fri Apr 12 2024)
 
 #### 🐛 Bug Fix
