@@ -109,7 +109,6 @@ export const snippets = {
   EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
   EVAL_PUBTECH_0: () => document.cookie.includes('euconsent-v2') && (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)) ,
   EVAL_REDDIT_0: () => document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}'),
-  EVAL_SIBBO_0: () => !!window.localStorage.getItem('euconsent-v2'),
   EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
     document.documentElement.classList.forEach(cls => {
       if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls)
