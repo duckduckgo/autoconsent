@@ -141,8 +141,9 @@ const asanaCreateTasks = async () => {
     await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes })
 
     if (extractedProjects) {
-      for (const projectGid of extractedProjects.split(',')) {
-        await asana.tasks.addProjectForTask(gid, { project: projectGid, insert_after: null })
+      for (const projectGidAndSection of extractedProjects.split(',')) {
+        const [projectGid, sectionGid] = projectGidAndSection.split(':')
+        await asana.tasks.addProjectForTask(gid, { project: projectGid, insert_after: null, section: sectionGid })
       }
     }
   }

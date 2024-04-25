@@ -56,7 +56,7 @@ jobs:
       asana-output: ${{ steps.create-asana-tasks.outputs.ASANA_OUTPUT }}
     env:
       RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
-      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
+      RELEASE_NOTES: See release notes [here](https://github.com/duckduckgo/autoconsent/blob/${{ inputs.tag_name }}/CHANGELOG.md)
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
@@ -105,7 +105,7 @@ jobs:
       - name: Update Android autoconsent reference
         run: |
           cd android
-          npm install @duckduckgo/autoconsent@${{ env.TAG }}
+          npm install @duckduckgo/autoconsent~${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create Android PR Body
@@ -168,7 +168,7 @@ jobs:
       - name: Update iOS autoconsent reference
         run: |
           cd ios
-          npm install @duckduckgo/autoconsent@${{ env.TAG }}
+          npm install @duckduckgo/autoconsent~${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create iOS PR Body
@@ -230,7 +230,7 @@ jobs:
       - name: Update macOS autoconsent reference
         run: |
           cd macos
-          npm install @duckduckgo/autoconsent@${{ env.TAG }}
+          npm install @duckduckgo/autoconsent~${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ..
       - name: Create macOS PR Body
@@ -292,7 +292,7 @@ jobs:
       - name: Update Windows autoconsent reference
         run: |
           cd windows/WindowsBrowser/Application/Autoconsent/External
-          npm install @duckduckgo/autoconsent@${{ env.TAG }}
+          npm install @duckduckgo/autoconsent~${{ env.TAG }}
           npm run rebuild-autoconsent
           cd ../../../../../
       - name: Create Windows PR Body
