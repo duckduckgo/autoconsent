@@ -56,7 +56,7 @@ jobs:
       asana-output: ${{ steps.create-asana-tasks.outputs.ASANA_OUTPUT }}
     env:
       RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
-      RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
+      RELEASE_NOTES: See release notes [here](https://github.com/duckduckgo/autoconsent/blob/${{ inputs.tag_name }}/CHANGELOG.md)
     steps:
       # --- Setup ---
       - uses: actions/checkout@v3
