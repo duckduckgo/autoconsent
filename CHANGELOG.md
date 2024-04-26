@@ -1,3 +1,16 @@
+# v10.6.3 (Fri Apr 26 2024)
+
+#### 🐛 Bug Fix
+
+- Fix race condition in iubenda, as seen on https://leaddev.com/leaddev-london [#428](https://github.com/duckduckgo/autoconsent/pull/428) ([@muodov](https://github.com/muodov))
+- Tweak DDG release CI scripts [#426](https://github.com/duckduckgo/autoconsent/pull/426) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.6.2 (Tue Apr 23 2024)
 
 #### 🐛 Bug Fix
