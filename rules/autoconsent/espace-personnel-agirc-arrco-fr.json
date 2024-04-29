@@ -1,0 +1,26 @@
+{
+    "name": "espace-personnel.agirc-arrco.fr",
+    "prehideSelectors": [
+        ".cdk-overlay-container"
+    ],
+    "detectCmp": [
+        {
+            "exists": ".cdk-overlay-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cdk-overlay-container app-esaa-cookie-component"
+        }
+    ],
+    "optIn": [
+        {
+            "click": ".btn-cookie-accepter"
+        }
+    ],
+    "optOut": [
+        {
+            "click": ".btn-cookie-refuser"
+        }
+    ]
+}
