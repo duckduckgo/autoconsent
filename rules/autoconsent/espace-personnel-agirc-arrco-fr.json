@@ -5,7 +5,7 @@
     ],
     "detectCmp": [
         {
-            "exists": ".cdk-overlay-container"
+            "exists": ".cdk-overlay-container app-esaa-cookie-component"
         }
     ],
     "detectPopup": [
@@ -15,12 +15,12 @@
     ],
     "optIn": [
         {
-            "click": ".btn-cookie-accepter"
+            "waitForThenClick": ".btn-cookie-accepter"
         }
     ],
     "optOut": [
         {
-            "click": ".btn-cookie-refuser"
+            "waitForThenClick": ".btn-cookie-refuser"
         }
     ]
 }
