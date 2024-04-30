@@ -1,5 +1,8 @@
 {
     "name": "espace-personnel.agirc-arrco.fr",
+    "runContext": {
+        "urlPattern": "^https://espace-personnel\\.agirc-arrco\\.fr/"
+    },
     "prehideSelectors": [
         ".cdk-overlay-container"
     ],
