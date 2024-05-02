@@ -1,3 +1,20 @@
+# v10.7.0 (Thu May 02 2024)
+
+#### 🚀 Enhancement
+
+- Fix the rule for termsfeed3 [#430](https://github.com/duckduckgo/autoconsent/pull/430) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add espace-personnel.agirc-arrco.fr [#429](https://github.com/duckduckgo/autoconsent/pull/429) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.6.3 (Fri Apr 26 2024)
 
 #### 🐛 Bug Fix
