@@ -49,6 +49,8 @@ export const snippets = {
   },
   EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1,
   EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
+  EVAL_TRUSTARC_FRAME: () => window && window.QueryString && window.QueryString.preferences === '0',
+  EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
   // declarative rules
   EVAL_ADROLL_0: () => !document.cookie.includes('__adroll_fpc'),
@@ -109,6 +111,7 @@ export const snippets = {
   EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
   EVAL_PUBTECH_0: () => document.cookie.includes('euconsent-v2') && (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)) ,
   EVAL_REDDIT_0: () => document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}'),
+  EVAL_SIBBO_0: () => !!window.localStorage.getItem('euconsent-v2'),
   EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
     document.documentElement.classList.forEach(cls => {
       if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls)

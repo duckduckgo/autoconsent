@@ -31,7 +31,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   get hasSelfTest(): boolean {
-    return false;
+    return true;
   }
 
   get isIntermediate(): boolean {
@@ -97,6 +97,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   async test() {
     //Test JS variable to check the user's preference
     //PrefCookie = undefined means no consent is set, PrefCookie = '0' means consent is set to required only 
+    await this.wait(500);
     return await this.mainWorldEval('EVAL_TRUSTARC_TOP');
   }
 }
