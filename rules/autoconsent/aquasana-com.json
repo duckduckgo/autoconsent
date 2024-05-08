@@ -1,5 +1,8 @@
 {
   "name": "aquasana.com",
+  "runContext": {
+    "urlPattern": "^https://www\\.aquasana\\.com/"
+  },
   "cosmetic": true,
   "prehideSelectors": ["#consent-tracking"],
   "detectCmp": [{ "exists": "#consent-tracking" }],
