@@ -74,7 +74,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
 
     //When Tags are being controlled through a tag managment system, the window will not call the vendors' opt-out
     let timeout = 3000;
-    if(await this.mainWorldEval('EVAL_TRUSTARC_FRAME_GTM')) {
+    if (await this.mainWorldEval('EVAL_TRUSTARC_FRAME_GTM')) {
       timeout = 1500;
     }
 
