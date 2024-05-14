@@ -68,7 +68,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
   async optOut() {
 
     // if the user has already opted out, let's not close the window
-    if (await this.mainWorldEval('EVAL_TRUSTART_FRAME_TEST')){
+    if (await this.mainWorldEval('EVAL_TRUSTARC_FRAME_TEST')){
       return true;
     }
 
