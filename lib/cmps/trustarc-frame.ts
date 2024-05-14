@@ -133,6 +133,6 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     //Test JS variable to check the user's preference
     //preferences = undefined means no consent is set, preferences = '0' means consent is set to required only 
     await this.wait(500);
-    return await this.mainWorldEval('EVAL_TRUSTART_FRAME_TEST');
+    return await this.mainWorldEval('EVAL_TRUSTARC_FRAME_TEST');
   }
 }
