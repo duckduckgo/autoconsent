@@ -1,3 +1,23 @@
+# v10.8.0 (Tue May 14 2024)
+
+#### 🚀 Enhancement
+
+- Adjusted TrustArc optout [#436](https://github.com/duckduckgo/autoconsent/pull/436) ([@hyebahi](https://github.com/hyebahi))
+
+#### 🐛 Bug Fix
+
+- fix: instagram.com [#435](https://github.com/duckduckgo/autoconsent/pull/435) ([@seia-soto](https://github.com/seia-soto))
+- Monthly Coverage data update [#434](https://github.com/duckduckgo/autoconsent/pull/434) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@hyebahi](https://github.com/hyebahi)
+- Dax the Deployer (dax@duckduckgo.com)
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.7.0 (Thu May 02 2024)
 
 #### 🚀 Enhancement
