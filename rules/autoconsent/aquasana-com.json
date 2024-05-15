@@ -1,26 +1,18 @@
 {
   "name": "aquasana.com",
-  "cosmetic": true,
   "prehideSelectors": ["#consent-tracking"],
   "detectCmp": [{ "exists": "#consent-tracking" }],
   "detectPopup": [{ "exists": "#consent-tracking" }],
   "optIn": [
     {
-      "click": "#accept_consent",
-      "optional": true
-    },
-    {
-      "click": "#consent-tracking .affirm.btn",
-      "optional": true
+      "waitForThenClick": "#consent-tracking .affirm.btn"
     }
   ],
   "optOut": [
     {
-      "click": "#consent-tracking .decline.btn",
-      "optional": true
-    },
-    {
-      "hide": "#consent-tracking"
+      "if": { "exists": "#consent-tracking .decline.btn" },
+      "then": [{ "click": "#consent-tracking .decline.btn" }],
+      "else": [{ "hide": "#consent-tracking" }]
     }
   ]
 }
