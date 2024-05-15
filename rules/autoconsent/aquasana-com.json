@@ -1,12 +1,26 @@
 {
   "name": "aquasana.com",
-  "runContext": {
-    "urlPattern": "^https://www\\.aquasana\\.com/"
-  },
   "cosmetic": true,
   "prehideSelectors": ["#consent-tracking"],
   "detectCmp": [{ "exists": "#consent-tracking" }],
   "detectPopup": [{ "exists": "#consent-tracking" }],
-  "optIn": [{ "click": "#accept_consent" }],
-  "optOut": [{ "hide": "#consent-tracking" }]
+  "optIn": [
+    {
+      "click": "#accept_consent",
+      "optional": true
+    },
+    {
+      "click": "#consent-tracking .affirm.btn",
+      "optional": true
+    }
+  ],
+  "optOut": [
+    {
+      "click": "#consent-tracking .decline.btn",
+      "optional": true
+    },
+    {
+      "hide": "#consent-tracking"
+    }
+  ]
 }
