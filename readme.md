@@ -12,10 +12,8 @@ The web extension can be built with the following steps:
 ```bash
 # Download dependencies
 npm ci
-# Build consent ruleset
-npm run build-rules
-# Build JS bundles (rules must be built first)
-npm run bundle
+# Build the extension
+npm run prepublish
 ```
 
 The extension-specific code can be found in the `addon` directory. There are two versions of the
