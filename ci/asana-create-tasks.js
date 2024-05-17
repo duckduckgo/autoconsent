@@ -15,7 +15,7 @@ const releaseNotes = md.render(releaseNotesRaw)
 const templateTaskGid = '1206774921409831'
 const autoconsentProjectGid = '1201844467387842'
 const releaseSectionGid = '1202253736774466'
-const projectExtractorRegex = /\[\[project_gids=(.+)]]\s/
+const projectExtractorRegex = /\[\[project_gids=(.*)]]/
 
 /**
  * @typedef {{taskGid: string, taskUrl: string, displayName: string}} platformData
