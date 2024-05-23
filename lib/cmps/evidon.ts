@@ -29,12 +29,13 @@ export default class Evidon extends AutoConsentCMPBase {
       return true;
     }
 
-    hideElements(getStyleElement(), "#evidon-prefdiag-overlay,#evidon-prefdiag-background");
-    this.click("#_evidon-option-button");
+    hideElements(getStyleElement(), "#evidon-prefdiag-overlay,#evidon-prefdiag-background,#_evidon-background");
+    await this.waitForThenClick("#_evidon-option-button");
 
     await this.waitForElement("#evidon-prefdiag-overlay", 5000);
 
-    this.click("#evidon-prefdiag-decline");
+    await this.wait(500);
+    await this.waitForThenClick("#evidon-prefdiag-decline");
     return true;
   }
 
