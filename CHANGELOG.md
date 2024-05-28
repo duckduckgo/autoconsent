@@ -1,3 +1,34 @@
+# v10.9.0 (Tue May 28 2024)
+
+#### 🚀 Enhancement
+
+- Roblox [#448](https://github.com/duckduckgo/autoconsent/pull/448) ([@muodov](https://github.com/muodov))
+- Fix the Ketch rule [#447](https://github.com/duckduckgo/autoconsent/pull/447) ([@muodov](https://github.com/muodov))
+- Make Fides rule more robust [#442](https://github.com/duckduckgo/autoconsent/pull/442) ([@muodov](https://github.com/muodov))
+- Add support for cookieCuttr CMP [#440](https://github.com/duckduckgo/autoconsent/pull/440) ([@muodov](https://github.com/muodov))
+- Add travelonbags.com [#438](https://github.com/duckduckgo/autoconsent/pull/438) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix overlay in complianz-optout [#450](https://github.com/duckduckgo/autoconsent/pull/450) ([@muodov](https://github.com/muodov))
+- Fix overlay on https://sports.tipico.de/de [#451](https://github.com/duckduckgo/autoconsent/pull/451) ([@muodov](https://github.com/muodov))
+- upgrade dependencies [#439](https://github.com/duckduckgo/autoconsent/pull/439) ([@muodov](https://github.com/muodov))
+
+#### ⚠️ Pushed to `main`
+
+- Update DDG PR template ([@muodov](https://github.com/muodov))
+- Refer to the changelog instead of copying github release notes ([@muodov](https://github.com/muodov))
+- Fix ddg release ([@muodov](https://github.com/muodov))
+- Fix Asana API usage ([@muodov](https://github.com/muodov))
+- Update readme.md ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.8.0 (Tue May 14 2024)
 
 #### 🚀 Enhancement
