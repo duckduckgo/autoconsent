@@ -1,5 +1,7 @@
 import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('ebay', [
-  // TODO: Add test URLs here
+  'https://www.ebay.co.uk/',
+  'https://www.ebay.com/',
+  'https://www.ebay.nl/',
 ]);
