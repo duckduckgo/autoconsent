@@ -101,6 +101,7 @@ export const snippets = {
   EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
   EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
   EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
+  EVAL_KETCH_TEST: () => document.cookie.includes('_ketch_consent_v1_'),
   EVAL_MEDIAVINE_0: () => document.querySelectorAll("[data-name=\"mediavine-gdpr-cmp\"] input[type=checkbox]").forEach(x => x.checked && x.click()) || true,
   EVAL_MICROSOFT_0: () => Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Reject|Ablehnen'))[0].click() || true,
   EVAL_MICROSOFT_1: () => Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Accept|Annehmen'))[0].click() || true,
