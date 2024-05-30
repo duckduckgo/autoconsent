@@ -10,16 +10,19 @@
   "detectPopup": [
     {
       "visible": "#fides-overlay #fides-banner"
+    },
+    {
+      "eval": "EVAL_FIDES_DETECT_POPUP"
     }
   ],
   "optIn": [
     {
-      "waitForThenClick": "#fides-banner [data-testid=\"Accept all-btn\"]"
+      "waitForThenClick": "#fides-banner .fides-accept-all-button"
     }
   ],
   "optOut": [
     {
-      "waitForThenClick": "#fides-banner [data-testid=\"Reject all-btn\"]"
+      "waitForThenClick": "#fides-banner .fides-reject-all-button"
     }
   ]
 }

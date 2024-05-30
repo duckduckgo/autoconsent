@@ -1,3 +1,135 @@
+# v10.9.0 (Tue May 28 2024)
+
+#### 🚀 Enhancement
+
+- Roblox [#448](https://github.com/duckduckgo/autoconsent/pull/448) ([@muodov](https://github.com/muodov))
+- Fix the Ketch rule [#447](https://github.com/duckduckgo/autoconsent/pull/447) ([@muodov](https://github.com/muodov))
+- Make Fides rule more robust [#442](https://github.com/duckduckgo/autoconsent/pull/442) ([@muodov](https://github.com/muodov))
+- Add support for cookieCuttr CMP [#440](https://github.com/duckduckgo/autoconsent/pull/440) ([@muodov](https://github.com/muodov))
+- Add travelonbags.com [#438](https://github.com/duckduckgo/autoconsent/pull/438) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix overlay in complianz-optout [#450](https://github.com/duckduckgo/autoconsent/pull/450) ([@muodov](https://github.com/muodov))
+- Fix overlay on https://sports.tipico.de/de [#451](https://github.com/duckduckgo/autoconsent/pull/451) ([@muodov](https://github.com/muodov))
+- upgrade dependencies [#439](https://github.com/duckduckgo/autoconsent/pull/439) ([@muodov](https://github.com/muodov))
+
+#### ⚠️ Pushed to `main`
+
+- Update DDG PR template ([@muodov](https://github.com/muodov))
+- Refer to the changelog instead of copying github release notes ([@muodov](https://github.com/muodov))
+- Fix ddg release ([@muodov](https://github.com/muodov))
+- Fix Asana API usage ([@muodov](https://github.com/muodov))
+- Update readme.md ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v10.8.0 (Tue May 14 2024)
+
+#### 🚀 Enhancement
+
+- Adjusted TrustArc optout [#436](https://github.com/duckduckgo/autoconsent/pull/436) ([@hyebahi](https://github.com/hyebahi))
+
+#### 🐛 Bug Fix
+
+- fix: instagram.com [#435](https://github.com/duckduckgo/autoconsent/pull/435) ([@seia-soto](https://github.com/seia-soto))
+- Monthly Coverage data update [#434](https://github.com/duckduckgo/autoconsent/pull/434) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@hyebahi](https://github.com/hyebahi)
+- Dax the Deployer (dax@duckduckgo.com)
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v10.7.0 (Thu May 02 2024)
+
+#### 🚀 Enhancement
+
+- Fix the rule for termsfeed3 [#430](https://github.com/duckduckgo/autoconsent/pull/430) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add espace-personnel.agirc-arrco.fr [#429](https://github.com/duckduckgo/autoconsent/pull/429) ([@seia-soto](https://github.com/seia-soto))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v10.6.3 (Fri Apr 26 2024)
+
+#### 🐛 Bug Fix
+
+- Fix race condition in iubenda, as seen on https://leaddev.com/leaddev-london [#428](https://github.com/duckduckgo/autoconsent/pull/428) ([@muodov](https://github.com/muodov))
+- Tweak DDG release CI scripts [#426](https://github.com/duckduckgo/autoconsent/pull/426) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v10.6.2 (Tue Apr 23 2024)
+
+#### 🐛 Bug Fix
+
+- Click 'Save & Exit' instead of 'Cancel' in dmgmedia popup [#425](https://github.com/duckduckgo/autoconsent/pull/425) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix sibbo rule [#423](https://github.com/duckduckgo/autoconsent/pull/423) ([@sammacbeth](https://github.com/sammacbeth))
+- Update readme.md [#420](https://github.com/duckduckgo/autoconsent/pull/420) ([@hyebahi](https://github.com/hyebahi))
+
+#### Authors: 2
+
+- [@hyebahi](https://github.com/hyebahi)
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v10.6.1 (Fri Apr 12 2024)
+
+#### 🐛 Bug Fix
+
+- Fix Klaro rule (wogibtswas.de, www.suedtirol.com) [#404](https://github.com/duckduckgo/autoconsent/pull/404) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v10.6.0 (Fri Apr 12 2024)
+
+#### 🚀 Enhancement
+
+- Fix detection in tarteaucitron [#415](https://github.com/duckduckgo/autoconsent/pull/415) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#413](https://github.com/duckduckgo/autoconsent/pull/413) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Remove git commit from asana tasks ([@muodov](https://github.com/muodov))
+- Remove the default value for the release workflow ([@muodov](https://github.com/muodov))
+- Make the ddg release workflow manual ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.5.0 (Tue Apr 02 2024)
 
 #### 🚀 Enhancement

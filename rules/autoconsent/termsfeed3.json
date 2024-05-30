@@ -2,8 +2,7 @@
   "name": "termsfeed3",
   "vendorUrl": "https://termsfeed.com",
   "comment": "v3.x.x",
-  "cosmetic": true,
-  "prehideSelectors": [".cc_dialog.cc_css_reboot"],
+  "prehideSelectors": [".cc_dialog.cc_css_reboot,.cc_overlay_lock"],
   "detectCmp": [
     {
       "exists": ".cc_dialog.cc_css_reboot"
@@ -21,7 +20,15 @@
   ],
   "optOut": [
     {
-      "hide": ".cc_dialog.cc_css_reboot"
+      "if": { "exists": ".cc_dialog.cc_css_reboot .cc_b_cp" },
+      "then": [
+        { "click": ".cc_dialog.cc_css_reboot .cc_b_cp" },
+        { "waitForVisible": ".cookie-consent-preferences-dialog .cc_cp_f_save button" },
+        { "waitForThenClick": ".cookie-consent-preferences-dialog .cc_cp_f_save button" }
+      ],
+      "else": [
+        { "hide": ".cc_dialog.cc_css_reboot,.cc_overlay_lock" }
+      ]
     }
   ]
 }

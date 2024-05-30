@@ -30,8 +30,27 @@ export const snippets = {
       return Object.keys(consents).filter(k => optionalServices.includes(k)).every(k => consents[k] === false)
     }
   },
+  EVAL_KLARO_OPEN_POPUP: () => {
+    klaro.show(undefined, true)
+  },
+  EVAL_KLARO_TRY_API_OPT_OUT: () => {
+    if (window.klaro && typeof klaro.show === 'function' && typeof klaro.getManager === 'function') {
+      try {
+        // opt-out directly via API
+        klaro.getManager().changeAll(false)
+        klaro.getManager().saveAndApplyConsents()
+        return true
+      } catch (e) {
+        console.warn(e)
+        return false
+      }
+    }
+    return false
+  },
   EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter(s => s.length > 0).length <= 1,
   EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
+  EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
+  EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
   // declarative rules
   EVAL_ADROLL_0: () => !document.cookie.includes('__adroll_fpc'),
@@ -75,12 +94,14 @@ export const snippets = {
   EVAL_EU_COOKIE_LAW_0: () => !document.cookie.includes('euCookie'),
   EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
   EVAL_EZOIC_1: () => !!document.cookie.match(/ez-consent-tcf/),
+  EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
   EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
   EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
   EVAL_IUBENDA_0: () => document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach(x => {if(x.checked) x.click()}) || true,
   EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
   EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
   EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
+  EVAL_KETCH_TEST: () => document.cookie.includes('_ketch_consent_v1_'),
   EVAL_MEDIAVINE_0: () => document.querySelectorAll("[data-name=\"mediavine-gdpr-cmp\"] input[type=checkbox]").forEach(x => x.checked && x.click()) || true,
   EVAL_MICROSOFT_0: () => Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Reject|Ablehnen'))[0].click() || true,
   EVAL_MICROSOFT_1: () => Array.from(document.querySelectorAll('div > button')).filter(el => el.innerText.match('Accept|Annehmen'))[0].click() || true,
@@ -92,7 +113,7 @@ export const snippets = {
   EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
   EVAL_PUBTECH_0: () => document.cookie.includes('euconsent-v2') && (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)) ,
   EVAL_REDDIT_0: () => document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}'),
-  EVAL_SIBBO_0: () => !!window.localStorage.getItem('euconsent-v2'),
+  EVAL_ROBLOX_TEST: () => document.cookie.includes('RBXcb'),
   EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
     document.documentElement.classList.forEach(cls => {
       if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls)
@@ -105,7 +126,7 @@ export const snippets = {
   EVAL_TAKEALOT_0: () => document.body.classList.remove('freeze') || (document.body.style = '') || true,
   EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
   EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
-  EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)[0].includes('false'),
+  EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
   EVAL_TAUNTON_TEST: () => document.cookie.includes('taunton_user_consent_submitted=true'),
   EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
   EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,

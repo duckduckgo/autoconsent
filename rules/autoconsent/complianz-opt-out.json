@@ -39,7 +39,18 @@
             ],
             "else": [
                 {
-                    "hide": "[aria-describedby=\"cookieconsent:desc\"]"
+                    "if": { "exists": ".cmp-pref-link" },
+                    "then": [
+                        {
+                            "click": ".cmp-pref-link"
+                        },
+                        {
+                            "waitForThenClick": ".cmp-body [id*=rejectAll]"
+                        },
+                        {
+                            "waitForThenClick": ".cmp-body .cmp-save-btn"
+                        }
+                    ]
                 }
             ]
         }

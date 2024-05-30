@@ -4,17 +4,17 @@
   "detectCmp": [{ "exists": "#iubenda-cs-banner" }],
   "detectPopup": [{ "visible": ".iubenda-cs-accept-btn" }],
   "optIn": [
-    { "click": ".iubenda-cs-accept-btn" }
+    { "waitForThenClick": ".iubenda-cs-accept-btn" }
   ],
   "optOut": [
     {
-      "click": ".iubenda-cs-customize-btn"
+      "waitForThenClick": ".iubenda-cs-customize-btn"
     },
     {
       "eval": "EVAL_IUBENDA_0"
     },
     {
-      "click": "#iubFooterBtn"
+      "waitForThenClick": "#iubFooterBtn"
     }
   ],
   "test": [
