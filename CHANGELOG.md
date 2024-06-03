@@ -1,3 +1,16 @@
+# v10.10.0 (Mon Jun 03 2024)
+
+#### 🚀 Enhancement
+
+- Fix some reload loops on www.fidelity.co.uk and other Ensighten sites [#452](https://github.com/duckduckgo/autoconsent/pull/452) ([@muodov](https://github.com/muodov))
+- Add a rule for ebay [#449](https://github.com/duckduckgo/autoconsent/pull/449) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.9.0 (Tue May 28 2024)
 
 #### 🚀 Enhancement
