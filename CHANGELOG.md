@@ -1,3 +1,21 @@
+# v10.11.0 (Mon Jul 01 2024)
+
+#### 🚀 Enhancement
+
+- Add zentralruf-de [#461](https://github.com/duckduckgo/autoconsent/pull/461) ([@seia-soto](https://github.com/seia-soto))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#454](https://github.com/duckduckgo/autoconsent/pull/454) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.10.0 (Mon Jun 03 2024)
 
 #### 🚀 Enhancement
