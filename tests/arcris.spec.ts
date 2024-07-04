@@ -1,5 +1,5 @@
 import generateCMPTests from "../playwright/runner";
 
-generateCMPTests('arcris', [
+generateCMPTests('acris', [
   'https://www.arctic.de/en/'
 ], {});
