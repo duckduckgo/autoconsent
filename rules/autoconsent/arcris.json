@@ -1,0 +1,24 @@
+{
+  "name": "arcris",
+  "prehideSelectors": ["div.acris-cookie-consent"],
+  "detectCmp": [
+    {
+      "exists": "[data-acris-cookie-consent]"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".acris-cookie-consent.is--modal"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#ccConsentAcceptAllButton"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#ccAcceptOnlyFunctional"
+    }
+  ]
+}
