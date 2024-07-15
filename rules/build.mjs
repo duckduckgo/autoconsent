@@ -65,12 +65,12 @@ export function combineRules(autoconsent, consentomatic) {
     () => console.log("Written rules.json")
   );
 
-  const easylistContent = fs.readFileSync(path.join(rulesDir, 'easylist.txt'), 'utf-8');
+  const easylistContent = fs.readFileSync(path.join(rulesDir, 'fanboy-cookiemonster.txt'), 'utf-8');
   fs.writeFile(
-    path.join(rulesDir, "easylist.json"),
+    path.join(rulesDir, "filterlist.json"),
     JSON.stringify({
       content: easylistContent
     }, undefined, "  "),
-    () => console.log("Written easylist.json")
+    () => console.log("Written filterlist.json")
   );
 })();
