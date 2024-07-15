@@ -8,6 +8,8 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
+import { getFilterlistSelectors, parseFilterList } from './filterlist-utils';
+import { FiltersEngine } from '@cliqz/adblocker';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -25,6 +27,7 @@ export default class AutoConsent {
   config: Config;
   foundCmp: AutoCMP = null;
   state: ConsentState = {
+    cosmeticFiltersOn: false,
     lifecycle: 'loading',
     prehideOn: false,
     findCmpAttempts: 0,
@@ -33,6 +36,7 @@ export default class AutoConsent {
     selfTest: null,
   };
   domActions: DomActions;
+  filtersEngine: FiltersEngine;
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
@@ -107,12 +111,29 @@ export default class AutoConsent {
   }
 
   parseDeclarativeRules(declarativeRules: RuleBundle) {
-    Object.keys(declarativeRules.consentomatic).forEach((name) => {
-      this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
-    });
-    declarativeRules.autoconsent.forEach((ruleset) => {
-      this.addDeclarativeCMP(ruleset);
-    });
+    if (declarativeRules.consentomatic) {
+      Object.keys(declarativeRules.consentomatic).forEach((name) => {
+        this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
+      });
+    }
+
+    if (declarativeRules.autoconsent) {
+      declarativeRules.autoconsent.forEach((ruleset) => {
+        this.addDeclarativeCMP(ruleset);
+      });
+    }
+
+    if (declarativeRules.filterList) {
+      // TODO: use requestIdleCallback
+      this.filtersEngine = parseFilterList(declarativeRules.filterList);
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => {
+          this.applyCosmeticFilters(false);
+        });
+      } else {
+        this.applyCosmeticFilters(false);
+      }
+    }
   }
 
   addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
@@ -215,13 +236,7 @@ export default class AutoConsent {
       }
     }
 
-    if (
-      retries > 0 &&
-      (
-        foundCMPs.length === 0
-        || foundCMPs.length === 1 && foundCMPs[0].name === 'easylist' && retries > (this.config.detectRetries - 7) // easylist is not reliable, give other CMPs a few tries
-      )
-    ) {
+    if (foundCMPs.length === 0 && retries > 0) {
       await this.domActions.wait(500);
       return this.findCmp(retries - 1);
     }
@@ -280,6 +295,10 @@ export default class AutoConsent {
     this.updateState({ lifecycle: 'openPopupDetected' });
     if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
       this.prehideElements();
+    }
+    if (this.state.cosmeticFiltersOn) {
+      // cancel cosmetic filters if we have a rule for this popup
+      this.undoCosmetics();
     }
 
     this.foundCmp = cmp;
@@ -440,6 +459,30 @@ export default class AutoConsent {
   undoPrehide(): boolean {
     this.updateState({ prehideOn: false })
     return this.domActions.undoPrehide();
+  }
+
+  /**
+   * Apply cosmetic filters
+   * @param verify if true, will check if the filters are actually hiding something
+   * @returns true if the cosmetic filters are actually hiding something (only when verify is set).
+   */
+  applyCosmeticFilters(verify: boolean) {
+    if (!this.filtersEngine) {
+      return false;
+    }
+    this.updateState({ cosmeticFiltersOn: true });
+    const selectors = getFilterlistSelectors(this.filtersEngine);
+    if (verify) {
+      // TODO: this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+      return this.domActions.elementVisible(selectors, 'any');
+    }
+    this.domActions.applyCosmetics(selectors);
+    return false;
+  }
+
+  undoCosmetics() {
+    this.updateState({ cosmeticFiltersOn: false });
+    this.domActions.undoCosmetics();
   }
 
   updateState(change: Partial<ConsentState>) {

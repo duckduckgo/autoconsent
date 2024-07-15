@@ -78,6 +78,7 @@ export type LifecycleState = 'loading' |
 'done';
 
 export type ConsentState = {
+  cosmeticFiltersOn: boolean; // true if cosmetic filter rules are currently applied.
   lifecycle: LifecycleState; // What point in the autoconsent lifecycle this script is at.
   prehideOn: boolean; // If the script is currently hiding preHide elements.
   findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.
