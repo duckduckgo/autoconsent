@@ -11,7 +11,6 @@ import Conversant from './conversant';
 import Tiktok from './tiktok';
 import Airbnb from './airbnb';
 import Tumblr from './tumblr-com';
-import EasyList from './easylist';
 
 
 export const dynamicCMPs = [
@@ -28,5 +27,4 @@ export const dynamicCMPs = [
   Tiktok,
   Airbnb,
   Tumblr,
-  EasyList,
 ];

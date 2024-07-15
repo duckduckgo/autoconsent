@@ -509,9 +509,9 @@ export default class AutoConsent {
       });
       this.sendContentMessage({
         type: 'optOutResult',
-        cmp: this.foundCmp ? this.foundCmp.name : 'none',
+        cmp: 'filterList',
         result: true,
-        scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+        scheduleSelfTest: false,
         url: location.href,
       });
       this.updateState({ lifecycle: 'done' });
