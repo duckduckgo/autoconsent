@@ -67,6 +67,7 @@ export type LifecycleState = 'loading' |
 'waitingForInitResponse' |
 'started' |
 'nothingDetected' |
+'cosmeticFiltersDetected' |
 'cmpDetected' |
 'openPopupDetected' |
 'runningOptOut' |

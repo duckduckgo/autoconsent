@@ -164,9 +164,10 @@ export default class AutoConsent {
       if (this.config.enablePrehide) {
         this.undoPrehide();
       }
-      this.updateState({ lifecycle: 'nothingDetected' });
-      return false;
+
+      return this.filterListFallback();
     }
+
     this.updateState({ lifecycle: 'cmpDetected' });
 
     // we resort to cosmetic rules only if no non-cosmetic rules are found
@@ -483,6 +484,45 @@ export default class AutoConsent {
   undoCosmetics() {
     this.updateState({ cosmeticFiltersOn: false });
     this.domActions.undoCosmetics();
+  }
+
+  filterListFallback() {
+    const logsConfig = this.config.logs;
+    const cosmeticFiltersWorked = this.applyCosmeticFilters(true); // this will also refresh filters based on the current DOM state
+    if (!cosmeticFiltersWorked) {
+      logsConfig.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
+      this.undoCosmetics();
+      this.updateState({ lifecycle: 'nothingDetected' });
+      return false;
+    } else {
+      logsConfig.lifecycle && console.log("Keeping cosmetic filters", location.href);
+      this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
+      this.sendContentMessage({
+        type: 'cmpDetected',
+        url: location.href,
+        cmp: 'filterList',
+      });
+      this.sendContentMessage({
+        type: 'popupFound',
+        cmp: 'filterList',
+        url: location.href,
+      });
+      this.sendContentMessage({
+        type: 'optOutResult',
+        cmp: this.foundCmp ? this.foundCmp.name : 'none',
+        result: true,
+        scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+        url: location.href,
+      });
+      this.updateState({ lifecycle: 'done' });
+      this.sendContentMessage({
+        type: 'autoconsentDone',
+        cmp: 'filterList',
+        isCosmetic: true,
+        url: location.href,
+      });
+      return true;
+    }
   }
 
   updateState(change: Partial<ConsentState>) {
