@@ -64,6 +64,7 @@ export default class AutoConsent {
   }
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    console.log('init called with', JSON.stringify(config), JSON.stringify(declarativeRules));
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
