@@ -11,6 +11,8 @@ import { normalizeConfig } from './utils';
 import { getFilterlistSelectors, parseFilterList } from './filterlist-utils';
 import { FiltersEngine } from '@cliqz/adblocker';
 
+import { getFirstConsistentlyInteractive } from 'time-to-interactive-polyfill/src/index.js';
+
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
     return (
@@ -560,4 +562,78 @@ export default class AutoConsent {
         break;
     }
   }
+}
+
+
+/** DELETE THIS */
+/**
+ * code adapted from https://github.com/overlookerjs/total-blocking-time/
+ */
+
+const BLOCKING_TIME_THRESHOLD = 50;
+
+function calcTBT(tti, longTasks = [], fcp) {
+  if (tti <= fcp)
+    return 0;
+
+  return longTasks.reduce((memo, curr) => {
+    // a long task started before FCP and ended after FCP
+    if (curr.startTime < fcp && curr.startTime + curr.duration >= fcp) {
+      const afterFCPDuration = curr.duration - (fcp - curr.startTime);
+
+      if (afterFCPDuration >= BLOCKING_TIME_THRESHOLD) {
+        memo += afterFCPDuration - BLOCKING_TIME_THRESHOLD;
+      }
+
+      return memo;
+    }
+
+    // a long task started before TTI and ended after TTI
+    if (curr.startTime < tti && curr.startTime + curr.duration > tti && tti - curr.startTime >= BLOCKING_TIME_THRESHOLD) {
+      memo += tti - curr.startTime - BLOCKING_TIME_THRESHOLD;
+      return memo;
+    }
+
+    if (curr.startTime < fcp || curr.startTime > tti || curr.duration <= BLOCKING_TIME_THRESHOLD) {
+      return memo;
+    }
+
+    memo += curr.duration - BLOCKING_TIME_THRESHOLD;
+
+    return memo;
+  }, 0);
+}
+
+export async function collectMetrics() {
+  const longTasks: PerformanceEntry[] = [];
+  const longTaskObserver = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      longTasks.push(entry);
+    });
+  });
+  longTaskObserver.observe({ type: "longtask", buffered: true });
+
+  // this is a simplified version of Lightspeed's LCP calculation, that does not care about user interaction and page activation
+  let lcpCandidate = 0;
+  const lcpObserver = new PerformanceObserver((entryList) => {
+    const entries = entryList.getEntries();
+    lcpCandidate = entries[entries.length - 1].startTime;
+  });
+  lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+
+  // this will use FCP as defined by the browser (not Lighthouse), but it doesn't matter for us because we are only using it to calculate TBT
+  const tti = await getFirstConsistentlyInteractive({ useMutationObserver: false });
+  longTaskObserver.disconnect();
+
+  // this is not the same as Lighthouse FCP, but it is ok for us because we are only using it to calculate TBT (we don't need the absulute value)
+  const fcp = performance.getEntriesByName('first-contentful-paint')[0]?.startTime ?? 0;
+  const tbt = calcTBT(tti, longTasks, fcp);
+  lcpObserver.disconnect();
+  return {
+    tbt,
+    tti,
+    fcp,
+    lcp: lcpCandidate,
+    longTasks,
+  };
 }
