@@ -42,6 +42,7 @@ export default class AutoConsent {
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
+    performance.mark('autoconsent-constructor');
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
     this.rules = [];
@@ -66,7 +67,8 @@ export default class AutoConsent {
   }
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
-    console.log('init called with', JSON.stringify(config), JSON.stringify(declarativeRules));
+    performance.mark('autoconsent-initialize');
+    console.log('init called with', JSON.stringify(config), declarativeRules?.filterList?.substring(0, 100));
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
@@ -128,13 +130,19 @@ export default class AutoConsent {
 
     if (declarativeRules.filterList) {
       // TODO: use requestIdleCallback
+      performance.mark('autoconsent-parse-start');
       this.filtersEngine = parseFilterList(declarativeRules.filterList);
+      performance.mark('autoconsent-parse-end');
       if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => {
+          performance.mark('autoconsent-apply-filterlist-start');
           this.applyCosmeticFilters(false);
+          performance.mark('autoconsent-apply-filterlist-end');
         });
       } else {
+        performance.mark('autoconsent-apply-filterlist-start');
         this.applyCosmeticFilters(false);
+        performance.mark('autoconsent-apply-filterlist-end');
       }
     }
   }
@@ -157,6 +165,7 @@ export default class AutoConsent {
   }
 
   async _start() {
+    performance.mark('autoconsent-start');
     const logsConfig = this.config.logs;
     logsConfig.lifecycle && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
@@ -629,11 +638,44 @@ export async function collectMetrics() {
   const fcp = performance.getEntriesByName('first-contentful-paint')[0]?.startTime ?? 0;
   const tbt = calcTBT(tti, longTasks, fcp);
   lcpObserver.disconnect();
+
+  let navigationEntry: PerformanceNavigationTiming;
+  if (document.readyState === 'complete') {
+    navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+  } else {
+    navigationEntry = await new Promise((resolve) => {
+      document.addEventListener('load', () => {
+        resolve(performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming);
+      });
+    });
+  }
+
+  const cpmInit = await new Promise((resolve) => {
+    const observer = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const cpmStart = entries.find(entry => entry.name === 'autoconsent-start');
+      if (cpmStart) {
+        observer.disconnect();
+        resolve(performance.measure('cpmInit', 'autoconsent-constructor', 'autoconsent-start'))
+      }
+    });
+    observer.observe({ type: 'mark', buffered: true });
+  });
+
+  const parseMark = performance.getEntriesByName('autoconsent-parse-end');
+  const cpmParseDuration = parseMark.length > 0 ? performance.measure('cpmParseFilterlist', 'autoconsent-parse-start', 'autoconsent-parse-end').duration : 0;
+  const applyMark = performance.getEntriesByName('autoconsent-apply-filterlist-end');
+  const cpmApplyDuration = applyMark.length > 0 ? performance.measure('cpmApplyFilterlist', 'autoconsent-apply-filterlist-start', 'autoconsent-apply-filterlist-end').duration : 0;
+
   return {
-    tbt,
-    tti,
-    fcp,
-    lcp: lcpCandidate,
-    longTasks,
+    tbt: Math.round(tbt),
+    tti: Math.round(tti),
+    lcp: Math.round(lcpCandidate),
+    longTasks: longTasks.length,
+    navDuration: Math.round(navigationEntry.duration),
+    domReady: Math.round(navigationEntry.domComplete - navigationEntry.domInteractive),
+    cpmInit: Math.round(cpmInit.duration),
+    cpmParseList: Math.round(cpmParseDuration),
+    cpmApplyList: Math.round(cpmApplyDuration),
   };
 }
