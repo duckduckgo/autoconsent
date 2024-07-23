@@ -13,10 +13,24 @@
   ],
   "optIn": [
     {
+      "waitForVisible": "#ccConsentAcceptAllButton",
+      "check": "any"
+    },
+    {
+      "wait": 500
+    },
+    {
       "waitForThenClick": "#ccConsentAcceptAllButton"
     }
   ],
   "optOut": [
+    {
+      "waitForVisible": "#ccAcceptOnlyFunctional",
+      "check": "any"
+    },
+    {
+      "wait": 500
+    },
     {
       "waitForThenClick": "#ccAcceptOnlyFunctional"
     }
