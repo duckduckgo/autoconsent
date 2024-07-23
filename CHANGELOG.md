@@ -1,3 +1,23 @@
+# v10.12.0 (Tue Jul 23 2024)
+
+#### 🚀 Enhancement
+
+- Support check24-partnerprogramm.de [#465](https://github.com/duckduckgo/autoconsent/pull/465) ([@seia-soto](https://github.com/seia-soto))
+- Support Acris CMP [#464](https://github.com/duckduckgo/autoconsent/pull/464) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#463](https://github.com/duckduckgo/autoconsent/pull/463) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- Dax the Deployer (dax@duckduckgo.com)
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.11.0 (Mon Jul 01 2024)
 
 #### 🚀 Enhancement
