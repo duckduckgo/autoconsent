@@ -1,7 +1,7 @@
 {
   "name": "netbeat.de",
   "runContext": {
-    "urlPattern": "^https://(www\\.)?netbeat\\.de"
+    "urlPattern": "^https://(www\\.)?netbeat\\.de/"
   },
   "prehideSelectors": ["div#cookieWarning"],
   "detectCmp": [
