@@ -6,12 +6,22 @@ Most of autoconsent logic is contained in a content script that should be inject
 ```typescript
 const consent = new AutoConsent( // make sure not to leak anything to the page globals
     chrome.runtime.sendMessage, // pass a function to send messages to the background worker
-    { // optionally, pass a config object
+    { // optionally, pass a config object. See the Typescript definitions in /lib/types.ts for all available options
         enabled: true,
         autoAction: 'optOut',
         disabledCmps: [],
         enablePrehide: true,
+        enableCosmeticRules: true,
         detectRetries: 20,
+        isMainWorld: false,
+        prehideTimeout: 2000,
+        logs: {
+            lifecycle: false,
+            rulesteps: false,
+            evals: false,
+            errors: true,
+            messages: false,
+        },
     },
     { // optionally, pass JSON rules
         autoconsent: [ ... ],
