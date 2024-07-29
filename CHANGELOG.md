@@ -1,3 +1,17 @@
+# v10.12.1 (Mon Jul 29 2024)
+
+#### 🐛 Bug Fix
+
+- Add netbeat.de [#471](https://github.com/duckduckgo/autoconsent/pull/471) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Update configuration object in `api.md` [#469](https://github.com/duckduckgo/autoconsent/pull/469) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.12.0 (Tue Jul 23 2024)
 
 #### 🚀 Enhancement
