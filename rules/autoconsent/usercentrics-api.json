@@ -1,19 +1,32 @@
 {
   "name": "usercentrics-api",
-  "detectCmp": [{ "exists": "#usercentrics-root" }],
+  "detectCmp": [{ "exists": "#usercentrics-root,#usercentrics-cmp-ui" }],
   "detectPopup": [
     {
       "eval": "EVAL_USERCENTRICS_API_0"
     },
     {
-      "exists": [
-        "#usercentrics-root",
-        "[data-testid=uc-container]"
+      "if": {
+        "exists": "#usercentrics-cmp-ui"
+      },
+      "then": [
+        {
+          "waitForVisible": "#usercentrics-cmp-ui",
+          "timeout": 2000
+        }
+      ],
+      "else": [
+        {
+          "exists": [
+            "#usercentrics-root",
+            "[data-testid=uc-container]"
+          ]
+        },
+        {
+          "waitForVisible": "#usercentrics-root",
+          "timeout": 2000
+        }
       ]
-    },
-    {
-      "waitForVisible": "#usercentrics-root",
-      "timeout": 2000
     }
   ],
   "optIn": [
