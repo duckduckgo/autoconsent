@@ -11,7 +11,17 @@ const consent = new AutoConsent( // make sure not to leak anything to the page g
         autoAction: 'optOut',
         disabledCmps: [],
         enablePrehide: true,
+        enableCosmeticRules: true,
         detectRetries: 20,
+        isMainWorld: false,
+        prehideTimeout: 2000,
+        logs: {
+            lifecycle: false,
+            rulesteps: false,
+            evals: false,
+            errors: true,
+            messages: false,
+        },
     },
     { // optionally, pass JSON rules
         autoconsent: [ ... ],
