@@ -1,11 +1,12 @@
 import { BackgroundMessage } from "../lib/messages";
 import { Config } from "../lib/types";
 import { storageGet, storageRemove, storageSet } from "./mv-compat";
-import { initConfig, showOptOutStatus } from "./utils";
+import { initConfig, isEnabledForDomain, setIsEnabledForDomain, showOptOutStatus } from "./utils";
 
 async function init() {
   const autoconsentConfig: Config = await storageGet('config');
   const enabledCheckbox = document.querySelector('input#enabled') as HTMLInputElement;
+  const currentSite = document.querySelector('span#current-site') as HTMLSpanElement;
   const optOutRadio = document.querySelector('input#optout') as HTMLInputElement;
   const optInRadio = document.querySelector('input#optin') as HTMLInputElement;
   const promptRadio = document.querySelector('input#prompt') as HTMLInputElement;
@@ -25,6 +26,8 @@ async function init() {
   // enable proceed button when necessary
 
   const [currentTab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+  const currentDomain = (new URL(currentTab.url)).hostname;
+  currentSite.textContent = currentDomain;
   const tabId = currentTab.id;
   const detectedKey = `detected${tabId}`;
   console.log('detectedKey', detectedKey);
@@ -49,8 +52,8 @@ async function init() {
   }
 
   // set form initial values
-
-  enabledCheckbox.checked = autoconsentConfig.enabled;
+  const enabledForCurrentDomain = await isEnabledForDomain(currentDomain);
+  enabledCheckbox.checked = autoconsentConfig.enabled && enabledForCurrentDomain;
   logsLifecycleCheckbox.checked = autoconsentConfig.logs.lifecycle;
   logsRulestepsCheckbox.checked = autoconsentConfig.logs.rulesteps;
   logsEvalsCheckbox.checked = autoconsentConfig.logs.evals;
@@ -79,9 +82,8 @@ async function init() {
 
   // set form event listeners
 
-  enabledCheckbox.addEventListener('change', () => {
-    autoconsentConfig.enabled = enabledCheckbox.checked;
-    storageSet({ config: autoconsentConfig });
+  enabledCheckbox.addEventListener('change', async () => {
+    await setIsEnabledForDomain(currentDomain, enabledCheckbox.checked);
   });
 
   retriesInput.addEventListener('change', () => {

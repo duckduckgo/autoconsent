@@ -1,3 +1,4 @@
+import { parse as tldtsParse } from 'tldts-experimental';
 import { normalizeConfig } from "../lib/utils";
 import { storageGet, storageSet } from "./mv-compat";
 
@@ -50,4 +51,30 @@ export async function initConfig() {
   await storageSet({
     config: updatedConfig,
   });
+}
+
+export async function isEnabledForDomain(domain: string) {
+  const storedExceptions = (await storageGet('exceptions')) || [];
+  console.log('stored exceptions', storedExceptions);
+  const parsed = tldtsParse(domain);
+  return !storedExceptions.includes(parsed.domain);
+}
+
+export async function setIsEnabledForDomain(domain: string, isEnabled: boolean) {
+  const parsed = tldtsParse(domain);
+  const storedExceptions = (await storageGet('exceptions')) || [];
+  const index = storedExceptions.indexOf(parsed.domain);
+  let changed = false;
+  if (isEnabled && index > -1) {
+    storedExceptions.splice(index, 1);
+    changed = true;
+  } else if (!isEnabled && index === -1) {
+    storedExceptions.push(parsed.domain);
+    changed = true;
+  }
+  if (changed) {
+    await storageSet({
+      exceptions: storedExceptions,
+    });
+  }
 }
