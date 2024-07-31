@@ -2,7 +2,7 @@ import AutoConsentCMPBase from "./base";
 
 export default class Klaro extends AutoConsentCMPBase {
   name = "Klaro";
-  prehideSelectors = [".klaro"]
+  prehideSelectors = [".klaro"];
   settingsOpen = false;
 
   get hasSelfTest(): boolean {
@@ -18,7 +18,7 @@ export default class Klaro extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    if (this.elementExists('.klaro > .cookie-modal')) {
+    if (this.elementExists(".klaro > .cookie-modal")) {
       this.settingsOpen = true;
       return true;
     }
@@ -26,43 +26,51 @@ export default class Klaro extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return this.elementVisible(".klaro > .cookie-notice,.klaro > .cookie-modal", 'any');
+    return this.elementVisible(
+      ".klaro > .cookie-notice,.klaro > .cookie-modal",
+      "any",
+    );
   }
 
   async optOut() {
-    const apiOptOutSuccess = await this.mainWorldEval("EVAL_KLARO_TRY_API_OPT_OUT")
+    const apiOptOutSuccess = await this.mainWorldEval(
+      "EVAL_KLARO_TRY_API_OPT_OUT",
+    );
     if (apiOptOutSuccess) {
-      return true
+      return true;
     }
     // if the API is broken for some reason, try clicking instead
 
-    if (this.click('.klaro .cn-decline')) {
+    if (this.click(".klaro .cn-decline")) {
       return true;
     }
 
     // open popup via Javascript API
-    await this.mainWorldEval("EVAL_KLARO_OPEN_POPUP")
+    await this.mainWorldEval("EVAL_KLARO_OPEN_POPUP");
 
-    if (this.click('.klaro .cn-decline')) {
+    if (this.click(".klaro .cn-decline")) {
       return true;
     }
 
-    this.click('.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required),.cm-purpose:not(.cm-toggle-all) > div > input:not(.half-checked,.required,.only-required)', true);
-    return this.click('.cm-btn-accept,.cm-button');
+    this.click(
+      ".cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required),.cm-purpose:not(.cm-toggle-all) > div > input:not(.half-checked,.required,.only-required)",
+      true,
+    );
+    return this.click(".cm-btn-accept,.cm-button");
   }
 
   async optIn() {
-    if (this.click('.klaro .cm-btn-accept-all')) {
+    if (this.click(".klaro .cm-btn-accept-all")) {
       return true;
     }
     if (this.settingsOpen) {
-      this.click('.cm-purpose:not(.cm-toggle-all) > input.half-checked', true);
-      return this.click('.cm-btn-accept');
+      this.click(".cm-purpose:not(.cm-toggle-all) > input.half-checked", true);
+      return this.click(".cm-btn-accept");
     }
-    return this.click('.klaro .cookie-notice .cm-btn-success');
+    return this.click(".klaro .cookie-notice .cm-btn-success");
   }
 
   async test() {
-    return await this.mainWorldEval('EVAL_KLARO_1');
+    return await this.mainWorldEval("EVAL_KLARO_1");
   }
 }

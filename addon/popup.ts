@@ -4,44 +4,79 @@ import { storageGet, storageRemove, storageSet } from "./mv-compat";
 import { initConfig, showOptOutStatus } from "./utils";
 
 async function init() {
-  const autoconsentConfig: Config = await storageGet('config');
-  const enabledCheckbox = document.querySelector('input#enabled') as HTMLInputElement;
-  const optOutRadio = document.querySelector('input#optout') as HTMLInputElement;
-  const optInRadio = document.querySelector('input#optin') as HTMLInputElement;
-  const promptRadio = document.querySelector('input#prompt') as HTMLInputElement;
-  const prehideOnRadio = document.querySelector('input#prehide-on') as HTMLInputElement;
-  const prehideOffRadio = document.querySelector('input#prehide-off') as HTMLInputElement;
-  const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
-  const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
-  const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
-  const logsLifecycleCheckbox = document.querySelector('input#logs-lifecycle') as HTMLInputElement;
-  const logsRulestepsCheckbox = document.querySelector('input#logs-rulesteps') as HTMLInputElement;
-  const logsEvalsCheckbox = document.querySelector('input#logs-evals') as HTMLInputElement;
-  const logsErrorsCheckbox = document.querySelector('input#logs-errors') as HTMLInputElement;
-  const logsMessagesCheckbox = document.querySelector('input#logs-messages') as HTMLInputElement;
-  const ruleReloadButton = document.querySelector('#reload') as HTMLButtonElement;
-  const resetButton = document.querySelector('#reset') as HTMLButtonElement;
+  const autoconsentConfig: Config = await storageGet("config");
+  const enabledCheckbox = document.querySelector(
+    "input#enabled",
+  ) as HTMLInputElement;
+  const optOutRadio = document.querySelector(
+    "input#optout",
+  ) as HTMLInputElement;
+  const optInRadio = document.querySelector("input#optin") as HTMLInputElement;
+  const promptRadio = document.querySelector(
+    "input#prompt",
+  ) as HTMLInputElement;
+  const prehideOnRadio = document.querySelector(
+    "input#prehide-on",
+  ) as HTMLInputElement;
+  const prehideOffRadio = document.querySelector(
+    "input#prehide-off",
+  ) as HTMLInputElement;
+  const cosmeticOnRadio = document.querySelector(
+    "input#cosmetic-on",
+  ) as HTMLInputElement;
+  const cosmeticOffRadio = document.querySelector(
+    "input#cosmetic-off",
+  ) as HTMLInputElement;
+  const retriesInput = document.querySelector(
+    "input#retries",
+  ) as HTMLInputElement;
+  const logsLifecycleCheckbox = document.querySelector(
+    "input#logs-lifecycle",
+  ) as HTMLInputElement;
+  const logsRulestepsCheckbox = document.querySelector(
+    "input#logs-rulesteps",
+  ) as HTMLInputElement;
+  const logsEvalsCheckbox = document.querySelector(
+    "input#logs-evals",
+  ) as HTMLInputElement;
+  const logsErrorsCheckbox = document.querySelector(
+    "input#logs-errors",
+  ) as HTMLInputElement;
+  const logsMessagesCheckbox = document.querySelector(
+    "input#logs-messages",
+  ) as HTMLInputElement;
+  const ruleReloadButton = document.querySelector(
+    "#reload",
+  ) as HTMLButtonElement;
+  const resetButton = document.querySelector("#reset") as HTMLButtonElement;
 
   // enable proceed button when necessary
 
-  const [currentTab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+  const [currentTab] = await chrome.tabs.query({
+    active: true,
+    lastFocusedWindow: true,
+  });
   const tabId = currentTab.id;
   const detectedKey = `detected${tabId}`;
-  console.log('detectedKey', detectedKey);
+  console.log("detectedKey", detectedKey);
   const frameId = await storageGet(detectedKey);
-  console.log('frameId', frameId, typeof frameId);
-  if (typeof frameId === 'number') {
-    const proceedButton = document.createElement('button');
-    proceedButton.innerText = 'Manage popup';
-    proceedButton.id = 'proceed';
-    proceedButton.addEventListener('click', () => {
+  console.log("frameId", frameId, typeof frameId);
+  if (typeof frameId === "number") {
+    const proceedButton = document.createElement("button");
+    proceedButton.innerText = "Manage popup";
+    proceedButton.id = "proceed";
+    proceedButton.addEventListener("click", () => {
       storageRemove(detectedKey);
       showOptOutStatus(tabId, "working");
-      chrome.tabs.sendMessage(tabId, {
-        type: "optOut",
-      } as BackgroundMessage, {
-        frameId,
-      });
+      chrome.tabs.sendMessage(
+        tabId,
+        {
+          type: "optOut",
+        } as BackgroundMessage,
+        {
+          frameId,
+        },
+      );
       proceedButton.remove();
       window.close();
     });
@@ -57,9 +92,9 @@ async function init() {
   logsErrorsCheckbox.checked = autoconsentConfig.logs.errors;
   logsMessagesCheckbox.checked = autoconsentConfig.logs.messages;
   retriesInput.value = autoconsentConfig.detectRetries.toString();
-  if (autoconsentConfig.autoAction === 'optIn') {
+  if (autoconsentConfig.autoAction === "optIn") {
     optInRadio.checked = true;
-  } else if (autoconsentConfig.autoAction === 'optOut') {
+  } else if (autoconsentConfig.autoAction === "optOut") {
     optOutRadio.checked = true;
   } else {
     promptRadio.checked = true;
@@ -79,43 +114,43 @@ async function init() {
 
   // set form event listeners
 
-  enabledCheckbox.addEventListener('change', () => {
+  enabledCheckbox.addEventListener("change", () => {
     autoconsentConfig.enabled = enabledCheckbox.checked;
     storageSet({ config: autoconsentConfig });
   });
 
-  retriesInput.addEventListener('change', () => {
+  retriesInput.addEventListener("change", () => {
     autoconsentConfig.detectRetries = parseInt(retriesInput.value, 10);
     storageSet({ config: autoconsentConfig });
   });
 
   function modeChange() {
     if (optInRadio.checked) {
-      autoconsentConfig.autoAction = 'optIn';
+      autoconsentConfig.autoAction = "optIn";
     } else if (optOutRadio.checked) {
-      autoconsentConfig.autoAction = 'optOut';
+      autoconsentConfig.autoAction = "optOut";
     } else {
       autoconsentConfig.autoAction = null;
     }
     storageSet({ config: autoconsentConfig });
   }
-  optInRadio.addEventListener('change', modeChange);
-  optOutRadio.addEventListener('change', modeChange);
-  promptRadio.addEventListener('change', modeChange);
+  optInRadio.addEventListener("change", modeChange);
+  optOutRadio.addEventListener("change", modeChange);
+  promptRadio.addEventListener("change", modeChange);
 
   function prehideChange() {
     autoconsentConfig.enablePrehide = prehideOnRadio.checked;
     storageSet({ config: autoconsentConfig });
   }
-  prehideOnRadio.addEventListener('change', prehideChange);
-  prehideOffRadio.addEventListener('change', prehideChange);
+  prehideOnRadio.addEventListener("change", prehideChange);
+  prehideOffRadio.addEventListener("change", prehideChange);
 
   function cosmeticChange() {
     autoconsentConfig.enableCosmeticRules = cosmeticOnRadio.checked;
     storageSet({ config: autoconsentConfig });
   }
-  cosmeticOnRadio.addEventListener('change', cosmeticChange);
-  cosmeticOffRadio.addEventListener('change', cosmeticChange);
+  cosmeticOnRadio.addEventListener("change", cosmeticChange);
+  cosmeticOffRadio.addEventListener("change", cosmeticChange);
 
   function updateLogsConfig() {
     autoconsentConfig.logs = {
@@ -128,34 +163,34 @@ async function init() {
     storageSet({ config: autoconsentConfig });
   }
 
-  logsLifecycleCheckbox.addEventListener('change', () => {
+  logsLifecycleCheckbox.addEventListener("change", () => {
     updateLogsConfig();
   });
-  logsRulestepsCheckbox.addEventListener('change', () => {
+  logsRulestepsCheckbox.addEventListener("change", () => {
     updateLogsConfig();
   });
-  logsEvalsCheckbox.addEventListener('change', () => {
+  logsEvalsCheckbox.addEventListener("change", () => {
     updateLogsConfig();
   });
-  logsErrorsCheckbox.addEventListener('change', () => {
+  logsErrorsCheckbox.addEventListener("change", () => {
     updateLogsConfig();
   });
-  logsMessagesCheckbox.addEventListener('change', () => {
+  logsMessagesCheckbox.addEventListener("change", () => {
     updateLogsConfig();
   });
 
-  ruleReloadButton.addEventListener('click', async () => {
+  ruleReloadButton.addEventListener("click", async () => {
     const res = await fetch("./rules.json");
     storageSet({
       rules: await res.json(),
     });
-  })
+  });
 
-  resetButton.addEventListener('click', async () => {
-    await storageRemove('config');
+  resetButton.addEventListener("click", async () => {
+    await storageRemove("config");
     await initConfig();
     window.close();
-  })
+  });
 }
 
 init();

@@ -1,8 +1,10 @@
 export const manifestVersion = chrome.runtime.getManifest().manifest_version;
 
 // Storage abstraction: MV2 keeps everything in memory, MV3 uses chrome.storage
-const storage: {[key: string]: any} = {};
-export async function storageSet(obj: {[key: string]: any}): Promise<void> {
+const storage: { [key: string]: unknown } = {};
+export async function storageSet(obj: {
+  [key: string]: unknown;
+}): Promise<void> {
   if (manifestVersion === 2) {
     Object.assign(storage, obj);
     return;
@@ -10,7 +12,7 @@ export async function storageSet(obj: {[key: string]: any}): Promise<void> {
   return chrome.storage.local.set(obj);
 }
 
-export async function storageGet(key: string | null): Promise<any> {
+export async function storageGet(key: string | null): Promise<unknown> {
   if (key === null) {
     if (manifestVersion === 2) {
       return storage;

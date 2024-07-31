@@ -6,8 +6,8 @@ export default class Tiktok extends AutoConsentCMPBase {
   name = "tiktok.com";
 
   runContext: RunContext = {
-    urlPattern: 'tiktok'
-  }
+    urlPattern: "tiktok",
+  };
 
   get hasSelfTest(): boolean {
     return true;
@@ -22,7 +22,7 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   getShadowRoot() {
-    const container = document.querySelector('tiktok-cookie-banner');
+    const container = document.querySelector("tiktok-cookie-banner");
     if (!container) {
       return null;
     }
@@ -34,13 +34,17 @@ export default class Tiktok extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    const banner = this.getShadowRoot().querySelector('.tiktok-cookie-banner') as HTMLElement;
+    const banner = this.getShadowRoot().querySelector(
+      ".tiktok-cookie-banner",
+    ) as HTMLElement;
     return isElementVisible(banner);
   }
 
   async optOut() {
     const logsConfig = this.autoconsent.config.logs;
-    const declineButton = this.getShadowRoot().querySelector('.button-wrapper button:first-child') as HTMLElement;
+    const declineButton = this.getShadowRoot().querySelector(
+      ".button-wrapper button:first-child",
+    ) as HTMLElement;
     if (declineButton) {
       logsConfig.rulesteps && console.log("[clicking]", declineButton);
       declineButton.click();
@@ -53,7 +57,9 @@ export default class Tiktok extends AutoConsentCMPBase {
 
   async optIn() {
     const logsConfig = this.autoconsent.config.logs;
-    const acceptButton = this.getShadowRoot().querySelector('.button-wrapper button:last-child') as HTMLElement;
+    const acceptButton = this.getShadowRoot().querySelector(
+      ".button-wrapper button:last-child",
+    ) as HTMLElement;
     if (acceptButton) {
       logsConfig.rulesteps && console.log("[clicking]", acceptButton);
       acceptButton.click();
@@ -70,6 +76,8 @@ export default class Tiktok extends AutoConsentCMPBase {
       return false;
     }
     const value = JSON.parse(decodeURIComponent(match[1]));
-    return Object.values(value).every(x => typeof x !== 'boolean' || x === false);
+    return Object.values(value).every(
+      (x) => typeof x !== "boolean" || x === false,
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { snippets } from "./eval-snippets"
+import { snippets } from "./eval-snippets";
 
 export type AutoConsentCMPRule = {
   name: string;
@@ -13,18 +13,19 @@ export type AutoConsentCMPRule = {
   optIn: AutoConsentRuleStep[];
   openCmp?: AutoConsentRuleStep[];
   test?: AutoConsentRuleStep[];
-}
+};
 
 export type RunContext = {
-  main?: boolean,
-  frame?: boolean,
-  urlPattern?: string,
-}
+  main?: boolean;
+  frame?: boolean;
+  urlPattern?: string;
+};
 
-export type ElementSelector = string | string[]
+export type ElementSelector = string | string[];
 
-export type AutoConsentRuleStep = { optional?: boolean } &
-  Partial<ElementExistsRule> &
+export type AutoConsentRuleStep = {
+  optional?: boolean;
+} & Partial<ElementExistsRule> &
   Partial<ElementVisibleRule> &
   Partial<EvalRule> &
   Partial<WaitForRule> &
@@ -34,7 +35,7 @@ export type AutoConsentRuleStep = { optional?: boolean } &
   Partial<WaitRule> &
   Partial<HideRule> &
   Partial<IfRule> &
-  Partial<AnyRule>
+  Partial<AnyRule>;
 
 export type ElementExistsRule = {
   exists: ElementSelector;
@@ -77,7 +78,7 @@ export type WaitRule = {
   wait: number;
 };
 
-export type HideMethod = 'display' | 'opacity';
+export type HideMethod = "display" | "opacity";
 
 export type HideRule = {
   hide: string;
@@ -92,4 +93,4 @@ export type IfRule = {
 
 export type AnyRule = {
   any: AutoConsentRuleStep[];
-}
+};

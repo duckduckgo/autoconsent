@@ -4,22 +4,22 @@ import AutoConsent from "../web";
 import AutoConsentCMPBase from "./base";
 
 const cookieSettingsButton = "#truste-show-consent";
-const shortcutOptOut = '#truste-consent-required';
-const shortcutOptIn = '#truste-consent-button';
-const popupContent = '#truste-consent-content';
-const bannerOverlay = '#trustarc-banner-overlay';
-const bannerContainer = '#truste-consent-track';
+const shortcutOptOut = "#truste-consent-required";
+const shortcutOptIn = "#truste-consent-button";
+const popupContent = "#truste-consent-content";
+const bannerOverlay = "#trustarc-banner-overlay";
+const bannerContainer = "#truste-consent-track";
 
 export default class TrustArcTop extends AutoConsentCMPBase {
   name = "TrustArc-top";
   prehideSelectors = [
     ".trustarc-banner-container",
     `.truste_popframe,.truste_overlay,.truste_box_overlay,${bannerContainer}`,
-  ]
+  ];
   runContext: RunContext = {
     main: true,
     frame: false,
-  }
+  };
 
   _shortcutButton: HTMLElement;
   _optInDone: boolean;
@@ -46,7 +46,9 @@ export default class TrustArcTop extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    const result = this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
+    const result = this.elementExists(
+      `${cookieSettingsButton},${bannerContainer}`,
+    );
     if (result) {
       // additionally detect the opt-out button
       this._shortcutButton = document.querySelector(shortcutOptOut);
@@ -56,7 +58,10 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
   async detectPopup() {
     // not every element should exist, but if it does, it's a popup
-    return this.elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'all');
+    return this.elementVisible(
+      `${popupContent},${bannerOverlay},${bannerContainer}`,
+      "all",
+    );
   }
 
   openFrame() {
@@ -96,8 +101,8 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
   async test() {
     //Test JS variable to check the user's preference
-    //PrefCookie = undefined means no consent is set, PrefCookie = '0' means consent is set to required only 
+    //PrefCookie = undefined means no consent is set, PrefCookie = '0' means consent is set to required only
     await this.wait(500);
-    return await this.mainWorldEval('EVAL_TRUSTARC_TOP');
+    return await this.mainWorldEval("EVAL_TRUSTARC_TOP");
   }
 }

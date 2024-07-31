@@ -4,11 +4,13 @@ import AutoConsentCMPBase from "./base";
 
 export default class Onetrust extends AutoConsentCMPBase {
   name = "Onetrust";
-  prehideSelectors = ["#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner"]
+  prehideSelectors = [
+    "#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner",
+  ];
 
   runContext: RunContext = {
-    urlPattern: '^(?!.*https://www\\.nba\\.com/)'
-  }
+    urlPattern: "^(?!.*https://www\\.nba\\.com/)",
+  };
 
   get hasSelfTest(): boolean {
     return true;
@@ -31,38 +33,52 @@ export default class Onetrust extends AutoConsentCMPBase {
   }
 
   async optOut() {
-    if (this.elementVisible("#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies", 'any')) { // 'reject all' shortcut
-      return this.click("#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies");
+    if (
+      this.elementVisible(
+        "#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies",
+        "any",
+      )
+    ) {
+      // 'reject all' shortcut
+      return this.click(
+        "#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies",
+      );
     }
 
-    if (this.elementExists("#onetrust-pc-btn-handler")) { // "show purposes" button inside a popup
+    if (this.elementExists("#onetrust-pc-btn-handler")) {
+      // "show purposes" button inside a popup
       this.click("#onetrust-pc-btn-handler");
-    } else { // otherwise look for a generic "show settings" button
+    } else {
+      // otherwise look for a generic "show settings" button
       this.click(".ot-sdk-show-settings,button.js-cookie-settings");
     }
 
-    await this.waitForElement('#onetrust-consent-sdk', 2000);
+    await this.waitForElement("#onetrust-consent-sdk", 2000);
     await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-    this.click("#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked", true); // optional step
+    this.click(
+      "#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked",
+      true,
+    ); // optional step
 
     await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-    await this.waitForElement(".save-preference-btn-handler,.js-consent-save", 2000);
+    await this.waitForElement(
+      ".save-preference-btn-handler,.js-consent-save",
+      2000,
+    );
     this.click(".save-preference-btn-handler,.js-consent-save");
 
     // popup doesn't disappear immediately
-    await this.waitForVisible("#onetrust-banner-sdk", 5000, 'none');
+    await this.waitForVisible("#onetrust-banner-sdk", 5000, "none");
     return true;
   }
 
   async optIn() {
-    return this.click("#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies");
+    return this.click(
+      "#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies",
+    );
   }
 
   async test() {
-    return await waitFor(
-      () => this.mainWorldEval('EVAL_ONETRUST_1'),
-      10,
-      500
-    )
+    return await waitFor(() => this.mainWorldEval("EVAL_ONETRUST_1"), 10, 500);
   }
 }

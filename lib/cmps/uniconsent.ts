@@ -4,7 +4,7 @@ export default class Uniconsent extends AutoConsentCMPBase {
   name = "Uniconsent";
 
   get prehideSelectors(): string[] {
-    return ['.unic', '.modal:has(.unic)'];
+    return [".unic", ".modal:has(.unic)"];
   }
 
   get hasSelfTest(): boolean {
@@ -20,34 +20,52 @@ export default class Uniconsent extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    return this.elementExists(".unic .unic-box,.unic .unic-bar,.unic .unic-modal");
+    return this.elementExists(
+      ".unic .unic-box,.unic .unic-bar,.unic .unic-modal",
+    );
   }
 
   async detectPopup() {
-    return this.elementVisible(".unic .unic-box,.unic .unic-bar,.unic .unic-modal", 'any');
+    return this.elementVisible(
+      ".unic .unic-box,.unic .unic-bar,.unic .unic-modal",
+      "any",
+    );
   }
 
   async optOut() {
     await this.waitForElement(".unic button", 1000);
-    document.querySelectorAll(".unic button").forEach((button: HTMLButtonElement) => {
-      const text = button.textContent;
-      if (text.includes('Manage Options') || text.includes('Optionen verwalten')) {
-        button.click();
-      }
-    });
-
-    if (await this.waitForElement('.unic input[type=checkbox]', 1000)) {
-      await this.waitForElement('.unic button', 1000);
-
-      document.querySelectorAll('.unic input[type=checkbox]').forEach((c: HTMLInputElement) => {
-        if (c.checked) {
-          c.click();
+    document
+      .querySelectorAll(".unic button")
+      .forEach((button: HTMLButtonElement) => {
+        const text = button.textContent;
+        if (
+          text.includes("Manage Options") ||
+          text.includes("Optionen verwalten")
+        ) {
+          button.click();
         }
       });
 
-      for (const b of <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.unic button')) {
+    if (await this.waitForElement(".unic input[type=checkbox]", 1000)) {
+      await this.waitForElement(".unic button", 1000);
+
+      document
+        .querySelectorAll(".unic input[type=checkbox]")
+        .forEach((c: HTMLInputElement) => {
+          if (c.checked) {
+            c.click();
+          }
+        });
+
+      for (const b of <NodeListOf<HTMLButtonElement>>(
+        document.querySelectorAll(".unic button")
+      )) {
         const text = b.textContent;
-        for (const pattern of ['Confirm Choices', 'Save Choices', 'Auswahl speichern']) {
+        for (const pattern of [
+          "Confirm Choices",
+          "Save Choices",
+          "Auswahl speichern",
+        ]) {
           if (text.includes(pattern)) {
             b.click();
             await this.wait(500); // give it some time to close the popup

@@ -2,7 +2,9 @@ import { HideMethod } from "./rules";
 import { Config } from "./types";
 
 // get or create a style container for CSS overrides
-export function getStyleElement(styleOverrideElementId = "autoconsent-css-rules"): HTMLStyleElement {
+export function getStyleElement(
+  styleOverrideElementId = "autoconsent-css-rules",
+): HTMLStyleElement {
   const styleSelector = `style#${styleOverrideElementId}`;
   const existingElement = document.querySelector(styleSelector);
   if (existingElement && existingElement instanceof HTMLStyleElement) {
@@ -23,7 +25,7 @@ export function getStyleElement(styleOverrideElementId = "autoconsent-css-rules"
 export function hideElements(
   styleEl: HTMLStyleElement,
   selector: string,
-  method: HideMethod = 'display',
+  method: HideMethod = "display",
 ): boolean {
   const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
   const rule = `${selector} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
@@ -35,7 +37,11 @@ export function hideElements(
   return false;
 }
 
-export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
+export async function waitFor(
+  predicate: () => Promise<boolean> | boolean,
+  maxTimes: number,
+  interval: number,
+): Promise<boolean> {
   const result = await predicate();
   if (!result && maxTimes > 0) {
     return new Promise((resolve) => {
@@ -55,24 +61,27 @@ export function isElementVisible(elem: HTMLElement): boolean {
     return true;
   } else {
     const css = window.getComputedStyle(elem);
-    if (css.position === 'fixed' && css.display !== "none") { // fixed elements may be visible even if the parent is not
+    if (css.position === "fixed" && css.display !== "none") {
+      // fixed elements may be visible even if the parent is not
       return true;
     }
   }
   return false;
 }
 
-export function copyObject(data: any) {
+export function copyObject(data: unknown) {
   if (globalThis.structuredClone) {
     return structuredClone(data);
   }
   return JSON.parse(JSON.stringify(data));
 }
 
-export function normalizeConfig(providedConfig: any): Config {
+export function normalizeConfig(
+  providedConfig: Record<string, unknown>,
+): Config {
   const defaultConfig: Config = {
     enabled: true,
-    autoAction: 'optOut', // if falsy, the extension will wait for an explicit user signal before opting in/out
+    autoAction: "optOut", // if falsy, the extension will wait for an explicit user signal before opting in/out
     disabledCmps: [],
     enablePrehide: true,
     enableCosmeticRules: true,
@@ -90,7 +99,7 @@ export function normalizeConfig(providedConfig: any): Config {
   const updatedConfig: Config = copyObject(defaultConfig);
   // filter out any unknown entries
   for (const key of Object.keys(defaultConfig)) {
-    if (typeof providedConfig[key] !== 'undefined') {
+    if (typeof providedConfig[key] !== "undefined") {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error - TS doesn't know that we've checked for undefined
       updatedConfig[key] = providedConfig[key];

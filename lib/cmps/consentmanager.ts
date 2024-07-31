@@ -21,7 +21,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
   }
 
   async detectCmp() {
-    this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
+    this.apiAvailable = await this.mainWorldEval("EVAL_CONSENTMANAGER_1");
     if (!this.apiAvailable) {
       return this.elementExists("#cmpbox");
     } else {
@@ -34,15 +34,15 @@ export default class ConsentManager extends AutoConsentCMPBase {
       // wait before making this check because early in the page lifecycle this may incorrectly return
       // true, causing an opt-out when it is not needed.
       await this.wait(500);
-      return await this.mainWorldEval('EVAL_CONSENTMANAGER_2');
+      return await this.mainWorldEval("EVAL_CONSENTMANAGER_2");
     }
-    return this.elementVisible("#cmpbox .cmpmore", 'any');
+    return this.elementVisible("#cmpbox .cmpmore", "any");
   }
 
   async optOut() {
     await this.wait(500);
     if (this.apiAvailable) {
-      return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+      return await this.mainWorldEval("EVAL_CONSENTMANAGER_3");
     }
 
     if (this.click(".cmpboxbtnno")) {
@@ -60,20 +60,20 @@ export default class ConsentManager extends AutoConsentCMPBase {
     this.click(".cmptdchoice > a[aria-checked=true]", true);
     this.click(".cmpboxbtnyescustomchoices");
 
-    this.hide('#cmpwrapper,#cmpbox', 'display');
+    this.hide("#cmpwrapper,#cmpbox", "display");
     return true;
   }
 
   async optIn() {
     if (this.apiAvailable) {
-      return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
+      return await this.mainWorldEval("EVAL_CONSENTMANAGER_4");
     }
     return this.click(".cmpboxbtnyes");
   }
 
   async test() {
     if (this.apiAvailable) {
-      return await this.mainWorldEval('EVAL_CONSENTMANAGER_5');
+      return await this.mainWorldEval("EVAL_CONSENTMANAGER_5");
     }
   }
 }

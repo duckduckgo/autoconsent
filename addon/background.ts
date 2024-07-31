@@ -1,7 +1,17 @@
 import { snippets } from "../lib/eval-snippets";
-import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
+import {
+  BackgroundMessage,
+  ContentScriptMessage,
+  DevtoolsMessage,
+  ReportMessage,
+} from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
-import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
+import {
+  manifestVersion,
+  storageGet,
+  storageRemove,
+  storageSet,
+} from "./mv-compat";
 import { initConfig, showOptOutStatus } from "./utils";
 
 /**
@@ -19,18 +29,29 @@ async function loadRules() {
   });
 }
 
-async function evalInTab(tabId: number, frameId: number, code: string, snippetId?: keyof typeof snippets): Promise<chrome.scripting.InjectionResult<boolean>[]> {
+async function evalInTab(
+  tabId: number,
+  frameId: number,
+  code: string,
+  snippetId?: keyof typeof snippets,
+): Promise<Omit<chrome.scripting.InjectionResult<boolean>, "documentId">[]> {
   if (manifestVersion === 2) {
     return new Promise((resolve) => {
-      chrome.tabs.executeScript(tabId, {
-        frameId,
-        code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`
-      }, (resultArr) => {
-        resolve([{
-          result: resultArr[0],
+      chrome.tabs.executeScript(
+        tabId,
+        {
           frameId,
-        }]);
-      })
+          code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`,
+        },
+        (resultArr) => {
+          resolve([
+            {
+              result: resultArr[0],
+              frameId,
+            },
+          ]);
+        },
+      );
     });
   }
   return chrome.scripting.executeScript({
@@ -40,18 +61,24 @@ async function evalInTab(tabId: number, frameId: number, code: string, snippetId
     },
     world: "MAIN",
     func: snippets[snippetId],
-  })
+  });
 }
 
-async function getTabReports(tabId: number): Promise<{ [frameId: number]: ReportMessage }> {
-  const storageKey = `reports-${tabId}`
-  return (await chrome.storage.session.get(storageKey))[storageKey] || {}
+async function getTabReports(
+  tabId: number,
+): Promise<{ [frameId: number]: ReportMessage }> {
+  const storageKey = `reports-${tabId}`;
+  return (await chrome.storage.session.get(storageKey))[storageKey] || {};
 }
 
-async function updateTabReports(tabId: number, frameId: number, msg: ReportMessage) {
-  const reportsForTab = await getTabReports(tabId)
+async function updateTabReports(
+  tabId: number,
+  frameId: number,
+  msg: ReportMessage,
+) {
+  const reportsForTab = await getTabReports(tabId);
   reportsForTab[frameId] = msg;
-  await chrome.storage.session.set({ [`reports-${tabId}`]: reportsForTab })
+  await chrome.storage.session.set({ [`reports-${tabId}`]: reportsForTab });
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -69,46 +96,56 @@ chrome.tabs.onRemoved.addListener((tabId: number) => {
 });
 
 chrome.runtime.onMessage.addListener(
-  async (msg: ContentScriptMessage, sender: any) => {
+  async (msg: ContentScriptMessage, sender: chrome.runtime.MessageSender) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
-    const autoconsentConfig: Config = await storageGet('config');
+    const autoconsentConfig = (await storageGet("config")) as Config;
     const logsConfig = autoconsentConfig.logs;
     if (logsConfig.lifecycle) {
-      console.log('got config', autoconsentConfig);
+      console.log("got config", autoconsentConfig);
       console.groupCollapsed(`${msg.type} from ${sender.origin || sender.url}`);
       console.log(msg, sender);
       console.groupEnd();
     }
-    const rules: RuleBundle = await storageGet("rules");
+    const rules = (await storageGet("rules")) as RuleBundle;
 
     switch (msg.type) {
       case "init":
         if (frameId === 0) {
-          await showOptOutStatus(tabId, 'idle');
+          await showOptOutStatus(tabId, "idle");
         }
-        chrome.tabs.sendMessage(tabId, {
-          type: "initResp",
-          rules,
-          config: autoconsentConfig,
-        } as BackgroundMessage, {
-          frameId,
-        });
+        chrome.tabs.sendMessage(
+          tabId,
+          {
+            type: "initResp",
+            rules,
+            config: autoconsentConfig,
+          } as BackgroundMessage,
+          {
+            frameId,
+          },
+        );
         break;
       case "eval":
         evalInTab(tabId, frameId, msg.code, msg.snippetId).then(([result]) => {
           if (logsConfig.evals) {
-            console.groupCollapsed(`eval result for ${sender.origin || sender.url}`);
+            console.groupCollapsed(
+              `eval result for ${sender.origin || sender.url}`,
+            );
             console.log(msg.code, result.result);
             console.groupEnd();
           }
-          chrome.tabs.sendMessage(tabId, {
-            id: msg.id,
-            type: "evalResp",
-            result: result.result,
-          } as BackgroundMessage, {
-            frameId,
-          });
+          chrome.tabs.sendMessage(
+            tabId,
+            {
+              id: msg.id,
+              type: "evalResp",
+              result: result.result,
+            } as BackgroundMessage,
+            {
+              frameId,
+            },
+          );
         });
         break;
       case "popupFound":
@@ -138,23 +175,30 @@ chrome.runtime.onMessage.addListener(
         await showOptOutStatus(tabId, "success", msg.cmp);
         // sometimes self-test needs to be done in another frame
         const selfTestKey = `selfTest${tabId}`;
-        const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
+        const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[
+          selfTestKey
+        ];
 
-        if (typeof selfTestFrameId === 'number') {
-          logsConfig.lifecycle && console.log(`Requesting self-test in ${selfTestFrameId}`);
+        if (typeof selfTestFrameId === "number") {
+          logsConfig.lifecycle &&
+            console.log(`Requesting self-test in ${selfTestFrameId}`);
           storageRemove(selfTestKey);
-          chrome.tabs.sendMessage(tabId, {
-            type: "selfTest",
-          }, {
-            frameId: selfTestFrameId,
-          });
+          chrome.tabs.sendMessage(
+            tabId,
+            {
+              type: "selfTest",
+            },
+            {
+              frameId: selfTestFrameId,
+            },
+          );
         } else {
           logsConfig.lifecycle && console.log(`No self-test scheduled`);
         }
         break;
       }
       case "autoconsentError":
-        console.error('Error:', msg.details);
+        console.error("Error:", msg.details);
         break;
       case "report":
         if (sender.tab && openDevToolsPanels.has(sender.tab.id)) {
@@ -162,78 +206,85 @@ chrome.runtime.onMessage.addListener(
             tabId: sender.tab.id,
             frameId: sender.frameId,
             ...msg,
-          })
+          });
         }
-        updateTabReports(sender.tab.id, sender.frameId, msg)
+        updateTabReports(sender.tab.id, sender.frameId, msg);
         break;
     }
-  }
+  },
 );
 
-if (manifestVersion === 2) { // MV3 handles this inside the popup
+if (manifestVersion === 2) {
+  // MV3 handles this inside the popup
   chrome.pageAction.onClicked.addListener(async (tab) => {
     const tabId = tab.id;
     const detectedKey = `detected${tabId}`;
     const frameId = await storageGet(detectedKey);
-    if (typeof frameId === 'number') {
+    if (typeof frameId === "number") {
       storageRemove(detectedKey);
       await showOptOutStatus(tabId, "working");
-      chrome.tabs.sendMessage(tabId, {
-        type: "optOut",
-      } as BackgroundMessage, {
-        frameId,
-      });
+      chrome.tabs.sendMessage(
+        tabId,
+        {
+          type: "optOut",
+        } as BackgroundMessage,
+        {
+          frameId,
+        },
+      );
     }
   });
 }
 
 // Communicate with devtools panels
-chrome.runtime.onConnect.addListener(function(devToolsConnection) {
-  if (devToolsConnection.name.startsWith('instance-')) {
+chrome.runtime.onConnect.addListener(function (devToolsConnection) {
+  if (devToolsConnection.name.startsWith("instance-")) {
     // connection from an autoconsent instance - used to detect frame destruction
     const tabId = devToolsConnection.sender?.tab?.id;
-    const instanceId = devToolsConnection.name.slice('instance-'.length);
+    const instanceId = devToolsConnection.name.slice("instance-".length);
     if (tabId && instanceId) {
       devToolsConnection.onDisconnect.addListener(() => {
         if (openDevToolsPanels.has(tabId)) {
           openDevToolsPanels.get(tabId).postMessage({
-            type: 'instanceTerminated',
+            type: "instanceTerminated",
             tabId,
             instanceId,
           });
         }
         // remove stored frame data
-        updateTabReports(tabId, devToolsConnection.sender.frameId, undefined)
-      })
+        updateTabReports(tabId, devToolsConnection.sender.frameId, undefined);
+      });
     }
-  } else if (devToolsConnection.name === 'devtools-panel') {
+  } else if (devToolsConnection.name === "devtools-panel") {
     let tabId = -1;
     // add the listener
-    devToolsConnection.onMessage.addListener(async (message: DevtoolsMessage) => {
-      tabId = message.tabId;
-      
-      if (message.type === 'init') {
-        // save the message channel for this tab
-        openDevToolsPanels.set(tabId, devToolsConnection);
+    devToolsConnection.onMessage.addListener(
+      async (message: DevtoolsMessage) => {
+        tabId = message.tabId;
 
-        // dump data cached in bg to the panel
-        const reportsForTab = await getTabReports(tabId)
-        Object.keys(reportsForTab || {}).forEach((frameId) => {
-          devToolsConnection.postMessage({
-            tabId,
-            frameId,
-            ...reportsForTab[parseInt(frameId, 10)]
-          })
-        });
-      }
-    });
+        if (message.type === "init") {
+          // save the message channel for this tab
+          openDevToolsPanels.set(tabId, devToolsConnection);
 
-    devToolsConnection.onDisconnect.addListener(function() {
-      openDevToolsPanels.delete(tabId)
+          // dump data cached in bg to the panel
+          const reportsForTab = await getTabReports(tabId);
+          Object.keys(reportsForTab || {}).forEach((frameId) => {
+            devToolsConnection.postMessage({
+              tabId,
+              frameId,
+              ...reportsForTab[parseInt(frameId, 10)],
+            });
+          });
+        }
+      },
+    );
+
+    devToolsConnection.onDisconnect.addListener(function () {
+      openDevToolsPanels.delete(tabId);
     });
   }
 });
 
 chrome.tabs.onRemoved.addListener((tabId) => {
-  chrome.storage.session.remove(`reports-${tabId}`)
-})
+  chrome.storage.session.remove(`reports-${tabId}`);
+});

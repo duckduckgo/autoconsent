@@ -3,8 +3,14 @@ import { storageGet, storageSet } from "./mv-compat";
 
 export async function showOptOutStatus(
   tabId: number,
-  status: "success" | "complete" | "working" | "available" | "verified" | "idle",
-  cmp = '',
+  status:
+    | "success"
+    | "complete"
+    | "working"
+    | "available"
+    | "verified"
+    | "idle",
+  cmp = "",
 ) {
   let title = "";
   let icon = "icons/cookie-idle.png";
@@ -27,7 +33,7 @@ export async function showOptOutStatus(
     title = `Click to opt out (${cmp})`;
     icon = "icons/cookie.png";
   }
-  console.log('Setting action state to', status);
+  console.log("Setting action state to", status);
   const action = chrome.action || chrome.pageAction;
   if (chrome.pageAction) {
     chrome.pageAction.show(tabId);
@@ -43,10 +49,10 @@ export async function showOptOutStatus(
 }
 
 export async function initConfig() {
-  const storedConfig = (await storageGet('config')) || {};
-  console.log('storedConfig', storedConfig);
+  const storedConfig = (await storageGet("config")) || {};
+  console.log("storedConfig", storedConfig);
   const updatedConfig = normalizeConfig(storedConfig);
-  console.log('updated config', updatedConfig);
+  console.log("updated config", updatedConfig);
   await storageSet({
     config: updatedConfig,
   });
