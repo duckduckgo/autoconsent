@@ -1,0 +1,19 @@
+{
+  "name": "chaletsplus-com",
+  "runContext": {
+    "urlPattern": "^https://(www\\.)?chaletsplus\\.com/"
+  },
+  "prehideSelectors": ["dialog.cookie-consent"],
+  "detectCmp": [
+    { "exists": "dialog.cookie-consent" }
+  ],
+  "detectPopup": [
+    { "visible": "dialog.cookie-consent" }
+  ],
+  "optIn": [
+    { "waitForThenClick": "button.cookie-consent__button--accept-all" }
+  ],
+  "optOut": [
+    { "waitForThenClick": "a[data-cookie-accept=\"functional\"]" }
+  ]
+}
