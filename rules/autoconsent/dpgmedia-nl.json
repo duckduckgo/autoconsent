@@ -10,7 +10,10 @@
   ],
   "detectPopup": [
     {
-      "visible": "#pg-shadow-host"
+      "visible": [
+        "#pg-shadow-host",
+        "#pg-modal"
+      ]
     }
   ],
   "optIn": [
