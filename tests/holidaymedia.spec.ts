@@ -1,6 +1,6 @@
 import generateCMPTests from "../playwright/runner";
 
-generateCMPTests('chaletsplus-com', [
+generateCMPTests('holidaymedia', [
   'https://www.chaletsplus.com/'], {
 }
 );
