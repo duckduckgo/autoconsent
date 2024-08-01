@@ -1,3 +1,19 @@
+# v10.13.0 (Thu Aug 01 2024)
+
+#### 🚀 Enhancement
+
+- Allow disabling test extension per site [#475](https://github.com/duckduckgo/autoconsent/pull/475) ([@muodov](https://github.com/muodov))
+- Update UserCentrics API [#470](https://github.com/duckduckgo/autoconsent/pull/470) ([@seia-soto](https://github.com/seia-soto))
+- Add chaletplus-com [#472](https://github.com/duckduckgo/autoconsent/pull/472) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Add dpgmedia.nl [#474](https://github.com/duckduckgo/autoconsent/pull/474) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.12.1 (Mon Jul 29 2024)
 
 #### 🐛 Bug Fix
