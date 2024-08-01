@@ -2,7 +2,7 @@ import { snippets } from "../lib/eval-snippets";
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from "../lib/messages";
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
-import { initConfig, showOptOutStatus } from "./utils";
+import { initConfig, isEnabledForDomain, showOptOutStatus } from "./utils";
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -72,11 +72,13 @@ chrome.runtime.onMessage.addListener(
   async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
+    const senderUrl = sender.origin || sender.url;
+    const senderDomain = (new URL(senderUrl)).hostname;
     const autoconsentConfig: Config = await storageGet('config');
     const logsConfig = autoconsentConfig.logs;
     if (logsConfig.lifecycle) {
       console.log('got config', autoconsentConfig);
-      console.groupCollapsed(`${msg.type} from ${sender.origin || sender.url}`);
+      console.groupCollapsed(`${msg.type} from ${senderUrl}`);
       console.log(msg, sender);
       console.groupEnd();
     }
@@ -90,7 +92,7 @@ chrome.runtime.onMessage.addListener(
         chrome.tabs.sendMessage(tabId, {
           type: "initResp",
           rules,
-          config: autoconsentConfig,
+          config: {...autoconsentConfig, enabled: await isEnabledForDomain(senderDomain)},
         } as BackgroundMessage, {
           frameId,
         });
@@ -98,7 +100,7 @@ chrome.runtime.onMessage.addListener(
       case "eval":
         evalInTab(tabId, frameId, msg.code, msg.snippetId).then(([result]) => {
           if (logsConfig.evals) {
-            console.groupCollapsed(`eval result for ${sender.origin || sender.url}`);
+            console.groupCollapsed(`eval result for ${senderUrl}`);
             console.log(msg.code, result.result);
             console.groupEnd();
           }
