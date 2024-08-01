@@ -96,6 +96,22 @@ export class DomActions implements DomActionsProvider {
     return !!existingElement;
   }
 
+  applyCosmetics(selector: string): boolean {
+    // TODO: use document.styleSheets instead of a real DOM element
+    const styleEl = getStyleElement('autoconsent-cosmetics');
+    this.autoconsentInstance.config.logs.lifecycle && console.log("[cosmetics]", styleEl, location.href);
+    return hideElements(styleEl, selector, "opacity");
+  }
+
+  undoCosmetics(): boolean {
+    const existingElement = getStyleElement('autoconsent-cosmetics');
+    this.autoconsentInstance.config.logs.lifecycle && console.log("[undocosmetics]", existingElement, location.href);
+    if (existingElement) {
+      existingElement.remove();
+    }
+    return !!existingElement;
+  }
+
   querySingleReplySelector(selector: string, parent: any = document): HTMLElement[] {
     if (selector.startsWith('aria/')) {
       return []

@@ -8,6 +8,10 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
+import { getFilterlistSelectors, parseFilterList } from './filterlist-utils';
+import { FiltersEngine } from '@cliqz/adblocker';
+
+import { getFirstConsistentlyInteractive } from 'time-to-interactive-polyfill/src/index.js';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -25,6 +29,7 @@ export default class AutoConsent {
   config: Config;
   foundCmp: AutoCMP = null;
   state: ConsentState = {
+    cosmeticFiltersOn: false,
     lifecycle: 'loading',
     prehideOn: false,
     findCmpAttempts: 0,
@@ -33,9 +38,11 @@ export default class AutoConsent {
     selfTest: null,
   };
   domActions: DomActions;
+  filtersEngine: FiltersEngine;
   protected sendContentMessage: MessageSender;
 
   constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
+    performance.mark('autoconsent-constructor');
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
     this.rules = [];
@@ -60,6 +67,8 @@ export default class AutoConsent {
   }
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    performance.mark('autoconsent-initialize');
+    console.log('init called with', JSON.stringify(config), declarativeRules?.filterList?.substring(0, 100));
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
@@ -107,12 +116,35 @@ export default class AutoConsent {
   }
 
   parseDeclarativeRules(declarativeRules: RuleBundle) {
-    Object.keys(declarativeRules.consentomatic).forEach((name) => {
-      this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
-    });
-    declarativeRules.autoconsent.forEach((ruleset) => {
-      this.addDeclarativeCMP(ruleset);
-    });
+    if (declarativeRules.consentomatic) {
+      Object.keys(declarativeRules.consentomatic).forEach((name) => {
+        this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
+      });
+    }
+
+    if (declarativeRules.autoconsent) {
+      declarativeRules.autoconsent.forEach((ruleset) => {
+        this.addDeclarativeCMP(ruleset);
+      });
+    }
+
+    if (declarativeRules.filterList) {
+      // TODO: use requestIdleCallback
+      performance.mark('autoconsent-parse-start');
+      this.filtersEngine = parseFilterList(declarativeRules.filterList);
+      performance.mark('autoconsent-parse-end');
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => {
+          performance.mark('autoconsent-apply-filterlist-start');
+          this.applyCosmeticFilters(false);
+          performance.mark('autoconsent-apply-filterlist-end');
+        });
+      } else {
+        performance.mark('autoconsent-apply-filterlist-start');
+        this.applyCosmeticFilters(false);
+        performance.mark('autoconsent-apply-filterlist-end');
+      }
+    }
   }
 
   addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
@@ -133,6 +165,7 @@ export default class AutoConsent {
   }
 
   async _start() {
+    performance.mark('autoconsent-start');
     const logsConfig = this.config.logs;
     logsConfig.lifecycle && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
@@ -143,9 +176,10 @@ export default class AutoConsent {
       if (this.config.enablePrehide) {
         this.undoPrehide();
       }
-      this.updateState({ lifecycle: 'nothingDetected' });
-      return false;
+
+      return this.filterListFallback();
     }
+
     this.updateState({ lifecycle: 'cmpDetected' });
 
     // we resort to cosmetic rules only if no non-cosmetic rules are found
@@ -274,6 +308,10 @@ export default class AutoConsent {
     this.updateState({ lifecycle: 'openPopupDetected' });
     if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
       this.prehideElements();
+    }
+    if (this.state.cosmeticFiltersOn) {
+      // cancel cosmetic filters if we have a rule for this popup
+      this.undoCosmetics();
     }
 
     this.foundCmp = cmp;
@@ -436,6 +474,69 @@ export default class AutoConsent {
     return this.domActions.undoPrehide();
   }
 
+  /**
+   * Apply cosmetic filters
+   * @param verify if true, will check if the filters are actually hiding something
+   * @returns true if the cosmetic filters are actually hiding something (only when verify is set).
+   */
+  applyCosmeticFilters(verify: boolean) {
+    if (!this.filtersEngine) {
+      return false;
+    }
+    this.updateState({ cosmeticFiltersOn: true });
+    const selectors = getFilterlistSelectors(this.filtersEngine);
+    if (verify) {
+      // TODO: this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+      return this.domActions.elementVisible(selectors, 'any');
+    }
+    this.domActions.applyCosmetics(selectors);
+    return false;
+  }
+
+  undoCosmetics() {
+    this.updateState({ cosmeticFiltersOn: false });
+    this.domActions.undoCosmetics();
+  }
+
+  filterListFallback() {
+    const logsConfig = this.config.logs;
+    const cosmeticFiltersWorked = this.applyCosmeticFilters(true); // this will also refresh filters based on the current DOM state
+    if (!cosmeticFiltersWorked) {
+      logsConfig.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
+      this.undoCosmetics();
+      this.updateState({ lifecycle: 'nothingDetected' });
+      return false;
+    } else {
+      logsConfig.lifecycle && console.log("Keeping cosmetic filters", location.href);
+      this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
+      this.sendContentMessage({
+        type: 'cmpDetected',
+        url: location.href,
+        cmp: 'filterList',
+      });
+      this.sendContentMessage({
+        type: 'popupFound',
+        cmp: 'filterList',
+        url: location.href,
+      });
+      this.sendContentMessage({
+        type: 'optOutResult',
+        cmp: 'filterList',
+        result: true,
+        scheduleSelfTest: false,
+        url: location.href,
+      });
+      this.updateState({ lifecycle: 'done' });
+      this.sendContentMessage({
+        type: 'autoconsentDone',
+        cmp: 'filterList',
+        isCosmetic: true,
+        url: location.href,
+      });
+      return true;
+    }
+  }
+
   updateState(change: Partial<ConsentState>) {
     Object.assign(this.state, change)
     this.sendContentMessage({
@@ -470,4 +571,111 @@ export default class AutoConsent {
         break;
     }
   }
+}
+
+
+/** DELETE THIS */
+/**
+ * code adapted from https://github.com/overlookerjs/total-blocking-time/
+ */
+
+const BLOCKING_TIME_THRESHOLD = 50;
+
+function calcTBT(tti, longTasks = [], fcp) {
+  if (tti <= fcp)
+    return 0;
+
+  return longTasks.reduce((memo, curr) => {
+    // a long task started before FCP and ended after FCP
+    if (curr.startTime < fcp && curr.startTime + curr.duration >= fcp) {
+      const afterFCPDuration = curr.duration - (fcp - curr.startTime);
+
+      if (afterFCPDuration >= BLOCKING_TIME_THRESHOLD) {
+        memo += afterFCPDuration - BLOCKING_TIME_THRESHOLD;
+      }
+
+      return memo;
+    }
+
+    // a long task started before TTI and ended after TTI
+    if (curr.startTime < tti && curr.startTime + curr.duration > tti && tti - curr.startTime >= BLOCKING_TIME_THRESHOLD) {
+      memo += tti - curr.startTime - BLOCKING_TIME_THRESHOLD;
+      return memo;
+    }
+
+    if (curr.startTime < fcp || curr.startTime > tti || curr.duration <= BLOCKING_TIME_THRESHOLD) {
+      return memo;
+    }
+
+    memo += curr.duration - BLOCKING_TIME_THRESHOLD;
+
+    return memo;
+  }, 0);
+}
+
+export async function collectMetrics() {
+  const longTasks: PerformanceEntry[] = [];
+  const longTaskObserver = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      longTasks.push(entry);
+    });
+  });
+  longTaskObserver.observe({ type: "longtask", buffered: true });
+
+  // this is a simplified version of Lightspeed's LCP calculation, that does not care about user interaction and page activation
+  let lcpCandidate = 0;
+  const lcpObserver = new PerformanceObserver((entryList) => {
+    const entries = entryList.getEntries();
+    lcpCandidate = entries[entries.length - 1].startTime;
+  });
+  lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+
+  // this will use FCP as defined by the browser (not Lighthouse), but it doesn't matter for us because we are only using it to calculate TBT
+  const tti = await getFirstConsistentlyInteractive({ useMutationObserver: false });
+  longTaskObserver.disconnect();
+
+  // this is not the same as Lighthouse FCP, but it is ok for us because we are only using it to calculate TBT (we don't need the absulute value)
+  const fcp = performance.getEntriesByName('first-contentful-paint')[0]?.startTime ?? 0;
+  const tbt = calcTBT(tti, longTasks, fcp);
+  lcpObserver.disconnect();
+
+  let navigationEntry: PerformanceNavigationTiming;
+  if (document.readyState === 'complete') {
+    navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+  } else {
+    navigationEntry = await new Promise((resolve) => {
+      document.addEventListener('load', () => {
+        resolve(performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming);
+      });
+    });
+  }
+
+  const cpmInit = await new Promise((resolve) => {
+    const observer = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const cpmStart = entries.find(entry => entry.name === 'autoconsent-start');
+      if (cpmStart) {
+        observer.disconnect();
+        resolve(performance.measure('cpmInit', 'autoconsent-constructor', 'autoconsent-start'))
+      }
+    });
+    observer.observe({ type: 'mark', buffered: true });
+  });
+
+  const parseMark = performance.getEntriesByName('autoconsent-parse-end');
+  const cpmParseDuration = parseMark.length > 0 ? performance.measure('cpmParseFilterlist', 'autoconsent-parse-start', 'autoconsent-parse-end').duration : 0;
+  const applyMark = performance.getEntriesByName('autoconsent-apply-filterlist-end');
+  const cpmApplyDuration = applyMark.length > 0 ? performance.measure('cpmApplyFilterlist', 'autoconsent-apply-filterlist-start', 'autoconsent-apply-filterlist-end').duration : 0;
+
+  return {
+    tbt: Math.round(tbt),
+    tti: Math.round(tti),
+    lcp: Math.round(lcpCandidate),
+    longTasks: longTasks.length,
+    navDuration: Math.round(navigationEntry.duration),
+    domReady: Math.round(navigationEntry.domComplete - navigationEntry.domInteractive),
+    cpmInit: Math.round(cpmInit.duration),
+    cpmParseList: Math.round(cpmParseDuration),
+    cpmApplyList: Math.round(cpmApplyDuration),
+  };
 }

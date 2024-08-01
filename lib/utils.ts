@@ -80,8 +80,8 @@ export function normalizeConfig(providedConfig: any): Config {
     isMainWorld: false,
     prehideTimeout: 2000,
     logs: {
-      lifecycle: false,
-      rulesteps: false,
+      lifecycle: true,
+      rulesteps: true,
       evals: false,
       errors: true,
       messages: false,
