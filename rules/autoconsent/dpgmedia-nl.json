@@ -4,16 +4,35 @@
     "#pg-shadow-host"
   ],
   "detectCmp": [
-    { "exists": "#pg-shadow-host" }
+    {
+      "exists": "#pg-shadow-host"
+    }
   ],
   "detectPopup": [
-    { "visible": "#pg-shadow-host" }
+    {
+      "visible": "#pg-shadow-host"
+    }
   ],
   "optIn": [
-    { "waitForThenClick": "#pg-shadow-host #pg-accept-btn" }
+    {
+      "waitForThenClick": [
+        "#pg-shadow-host",
+        "#pg-accept-btn"
+      ]
+    }
   ],
   "optOut": [
-    { "waitForThenClick": "#pg-shadow-host #pg-configure-btn" },
-    { "waitForThenClick": "#pg-shadow-host #pg-reject-btn" }
+    {
+      "waitForThenClick": [
+        "#pg-shadow-host",
+        "#pg-configure-btn"
+      ]
+    },
+    {
+      "waitForThenClick": [
+        "#pg-shadow-host",
+        "#pg-reject-btn"
+      ]
+    }
   ]
 }
