@@ -7,6 +7,7 @@ generateCMPTests('usercentrics-api', [
   'https://shopbetreiber-blog.de/',
   'https://www.kia.com/us/en',
   'https://www.sportscheck.com/filialen/dortmund/',
+  'https://www.idealo.de/',
 ], {
   skipRegions: ["US", "GB", "FR"]
 }
