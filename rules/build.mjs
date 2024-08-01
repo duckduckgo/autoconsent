@@ -2,9 +2,9 @@
 import fs from "fs";
 import path from "path";
 import https from "https";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
-export const rulesDir = path.dirname(fileURLToPath(import.meta.url))
+export const rulesDir = path.dirname(fileURLToPath(import.meta.url));
 
 async function readFileJSON(filePath) {
   const data = await fs.promises.readFile(filePath, "utf-8");
@@ -16,7 +16,7 @@ export async function buildAutoconsentRules() {
   const autoconsentDir = path.join(rulesDir, "autoconsent");
   const files = fs.readdirSync(autoconsentDir);
   return await Promise.all(
-    files.map((file) => readFileJSON(path.join(autoconsentDir, file)))
+    files.map((file) => readFileJSON(path.join(autoconsentDir, file))),
   );
 }
 
@@ -57,11 +57,11 @@ export function combineRules(autoconsent, consentomatic) {
 (async () => {
   const rules = combineRules(
     await buildAutoconsentRules(),
-    await buildConsentOMaticRules()
+    await buildConsentOMaticRules(),
   );
   fs.writeFile(
     path.join(rulesDir, "rules.json"),
     JSON.stringify(rules, undefined, "  "),
-    () => console.log("Written rules.json")
+    () => console.log("Written rules.json"),
   );
 })();

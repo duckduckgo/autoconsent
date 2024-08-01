@@ -2,7 +2,7 @@ import coverageData from "../data/coverage.json";
 import generateCMPTests from "../playwright/runner";
 
 const region = (process.env.REGION || "US").trim();
-const nSites = parseInt(process.env.NSITES || '1')
+const nSites = parseInt(process.env.NSITES || "1");
 
 Object.keys(coverageData).forEach((name) => {
   if (!coverageData[name][region]) {

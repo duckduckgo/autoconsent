@@ -35,7 +35,7 @@ function reconnect(): chrome.runtime.Port {
   });
 
   backgroundPageConnection.onMessage.addListener(function (
-    message: BackgroundDevtoolsMessage
+    message: BackgroundDevtoolsMessage,
   ) {
     if (message.type === "report") {
       const td = getRowForInstance(message.instanceId);
@@ -83,7 +83,7 @@ document.getElementById("reload").addEventListener("click", async () => {
         cookies: true,
         localStorage: true,
         indexedDB: true,
-      }
+      },
     );
   }
   clearPanel();
@@ -133,13 +133,13 @@ function onConfigUpdated(config: Config) {
 
 chrome.storage.local.onChanged.addListener((changes) => {
   if (changes.config) {
-    onConfigUpdated(changes.config.newValue)
+    onConfigUpdated(changes.config.newValue);
   }
 });
 
 (async () => {
   const config = await storageGet("config");
-  onConfigUpdated(config)
+  onConfigUpdated(config);
 })();
 
 reconnect();

@@ -21,7 +21,7 @@ export default class Evidon extends AutoConsentCMPBase {
   }
 
   async detectPopup() {
-    return this.elementVisible("#_evidon_banner", 'any');
+    return this.elementVisible("#_evidon_banner", "any");
   }
 
   async optOut() {
@@ -29,7 +29,10 @@ export default class Evidon extends AutoConsentCMPBase {
       return true;
     }
 
-    hideElements(getStyleElement(), "#evidon-prefdiag-overlay,#evidon-prefdiag-background,#_evidon-background");
+    hideElements(
+      getStyleElement(),
+      "#evidon-prefdiag-overlay,#evidon-prefdiag-background,#_evidon-background",
+    );
     await this.waitForThenClick("#_evidon-option-button");
 
     await this.waitForElement("#evidon-prefdiag-overlay", 5000);

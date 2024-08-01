@@ -1,7 +1,32 @@
 /**
  * This code is in most parts copied from https://github.com/cavi-au/Consent-O-Matic/blob/master/Extension/Tools.js
- * which is licened under the MIT. 
+ * which is licened under the MIT.
  */
+export type FindOptions = {
+  parent: FindElementOptions | null;
+  target: FindElementOptions | null;
+};
+
+type FindResult<T extends boolean = false> = {
+  parent: T extends true ? HTMLElement[] : HTMLElement;
+  target: HTMLElement;
+};
+
+type FindElementOptions = {
+  selector: string;
+  textFilter: string | string[] | null;
+  styleFilters:
+    | {
+        negated: boolean;
+        option: keyof CSSStyleDeclaration;
+        value: string;
+      }[]
+    | null;
+  displayFilter: boolean | null;
+  iframeFilter: boolean | null;
+  childFilter: FindOptions | null;
+};
+
 export default class Tools {
   static base: HTMLElement = null;
 
@@ -9,25 +34,29 @@ export default class Tools {
     Tools.base = base;
   }
 
-  static findElement(options: any, parent: any = null, multiple = false): HTMLElement[] | HTMLElement {
-    let possibleTargets = null;
+  static findElement<T extends boolean = false>(
+    options: FindElementOptions,
+    parent: ParentNode | null = null,
+    multiple?: T,
+  ): T extends true ? HTMLElement[] : HTMLElement {
+    let possibleTargets: HTMLElement[] | null = null;
 
     if (parent != null) {
       possibleTargets = Array.from(parent.querySelectorAll(options.selector));
     } else {
       if (Tools.base != null) {
         possibleTargets = Array.from(
-          Tools.base.querySelectorAll(options.selector)
+          Tools.base.querySelectorAll(options.selector),
         );
       } else {
         possibleTargets = Array.from(
-          document.querySelectorAll(options.selector)
+          document.querySelectorAll(options.selector),
         );
       }
     }
 
     if (options.textFilter != null) {
-      possibleTargets = possibleTargets.filter(possibleTarget => {
+      possibleTargets = possibleTargets.filter((possibleTarget) => {
         const textContent = possibleTarget.textContent.toLowerCase();
 
         if (Array.isArray(options.textFilter)) {
@@ -48,7 +77,7 @@ export default class Tools {
     }
 
     if (options.styleFilters != null) {
-      possibleTargets = possibleTargets.filter(possibleTarget => {
+      possibleTargets = possibleTargets.filter((possibleTarget) => {
         const styles = window.getComputedStyle(possibleTarget);
 
         let keep = true;
@@ -68,7 +97,7 @@ export default class Tools {
     }
 
     if (options.displayFilter != null) {
-      possibleTargets = possibleTargets.filter(possibleTarget => {
+      possibleTargets = possibleTargets.filter((possibleTarget) => {
         if (options.displayFilter) {
           //We should be displayed
           return possibleTarget.offsetHeight !== 0;
@@ -92,7 +121,7 @@ export default class Tools {
     }
 
     if (options.childFilter != null) {
-      possibleTargets = possibleTargets.filter(possibleTarget => {
+      possibleTargets = possibleTargets.filter((possibleTarget) => {
         const oldBase = Tools.base;
         Tools.setBase(possibleTarget);
         const childResults = Tools.find(options.childFilter);
@@ -102,58 +131,61 @@ export default class Tools {
     }
 
     if (multiple) {
-      return possibleTargets;
+      return possibleTargets as never;
     } else {
       if (possibleTargets.length > 1) {
         console.warn(
           "Multiple possible targets: ",
           possibleTargets,
           options,
-          parent
+          parent,
         );
       }
 
-      return possibleTargets[0];
+      return possibleTargets[0] as never;
     }
   }
 
-  static find(options: any, multiple = false) {
-    const results: any[] = [];
+  static find<T extends boolean = false>(
+    options: FindOptions,
+    multiple?: T,
+  ): T extends true ? FindResult<T>[] : FindResult<T> {
+    const results: FindResult[] = [];
     if (options.parent != null) {
       const parent = Tools.findElement(options.parent, null, multiple);
       if (parent != null) {
         if (parent instanceof Array) {
-          parent.forEach(p => {
+          parent.forEach((p) => {
             const targets = Tools.findElement(options.target, p, multiple);
             if (targets instanceof Array) {
-              targets.forEach(target => {
+              targets.forEach((target) => {
                 results.push({
                   parent: p,
-                  target: target
+                  target: target,
                 });
               });
             } else {
               results.push({
                 parent: p,
-                target: targets
+                target: targets,
               });
             }
           });
 
-          return results;
+          return results as never;
         } else {
           const targets = Tools.findElement(options.target, parent, multiple);
           if (targets instanceof Array) {
-            targets.forEach(target => {
+            targets.forEach((target) => {
               results.push({
                 parent: parent,
-                target: target
+                target: target,
               });
             });
           } else {
             results.push({
               parent: parent,
-              target: targets
+              target: targets,
             });
           }
         }
@@ -161,16 +193,16 @@ export default class Tools {
     } else {
       const targets = Tools.findElement(options.target, null, multiple);
       if (targets instanceof Array) {
-        targets.forEach(target => {
+        targets.forEach((target) => {
           results.push({
             parent: null,
-            target: target
+            target: target,
           });
         });
       } else {
         results.push({
           parent: null,
-          target: targets
+          target: targets,
         });
       }
     }
@@ -178,21 +210,21 @@ export default class Tools {
     if (results.length === 0) {
       results.push({
         parent: null,
-        target: null
+        target: null,
       });
     }
 
     if (multiple) {
-      return results;
+      return results as never;
     } else {
       if (results.length !== 1) {
         console.warn(
           "Multiple results found, even though multiple false",
-          results
+          results,
         );
       }
 
-      return results[0];
+      return results[0] as never;
     }
   }
 }

@@ -6,7 +6,7 @@ export type BackgroundMessage =
   | EvalResponseMessage
   | OptOutMessage
   | OptInMessage
-  | SelfTestMessage
+  | SelfTestMessage;
 
 export type ContentScriptMessage =
   | InitMessage
@@ -25,8 +25,7 @@ export type BackgroundDevtoolsMessage =
   | InstanceTerminatedMessage
   | InitResponseMessage;
 
-export type DevtoolsMessage =
-  | DevtoolsInitMessage;
+export type DevtoolsMessage = DevtoolsInitMessage;
 
 export type InitMessage = {
   type: "init";
@@ -37,7 +36,7 @@ export type EvalMessage = {
   type: "eval";
   id: string;
   code: string;
-  snippetId?: keyof typeof snippets
+  snippetId?: keyof typeof snippets;
 };
 
 export type DetectedMessage = {
@@ -84,7 +83,7 @@ export type DoneMessage = {
 
 export type ErrorMessage = {
   type: "autoconsentError";
-  details: any;
+  details: unknown;
 };
 
 export type InitResponseMessage = {
@@ -96,7 +95,7 @@ export type InitResponseMessage = {
 export type EvalResponseMessage = {
   type: "evalResp";
   id: string;
-  result: any;
+  result: unknown;
 };
 
 export type OptOutMessage = {
@@ -119,15 +118,18 @@ export type ReportMessage = {
   state: ConsentState;
 };
 
-export type DevtoolsAuditMessage = ReportMessage & { tabId: number, frameId: number }
+export type DevtoolsAuditMessage = ReportMessage & {
+  tabId: number;
+  frameId: number;
+};
 
 export type InstanceTerminatedMessage = {
-  type: 'instanceTerminated';
+  type: "instanceTerminated";
   tabId: number;
   instanceId: string;
-}
+};
 
 export type DevtoolsInitMessage = {
-  type: 'init';
+  type: "init";
   tabId: number;
-}
+};

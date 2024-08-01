@@ -6,7 +6,7 @@ class Deferred<T> {
   id: string;
   promise: Promise<T>;
   resolve: (value?: T) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   timer: number;
 
   constructor(id: string, timeout = 1000) {
@@ -24,17 +24,20 @@ class Deferred<T> {
 type EvalState = {
   pending: Map<string, Deferred<boolean>>;
   sendContentMessage: (message: ContentScriptMessage) => void;
-}
+};
 
 export const evalState: EvalState = {
   pending: new Map(),
   sendContentMessage: null,
-}
+};
 
-export function requestEval(code: string, snippetId?: keyof typeof snippets): Promise<boolean> {
+export function requestEval(
+  code: string,
+  snippetId?: keyof typeof snippets,
+): Promise<boolean> {
   const id = getRandomID();
   evalState.sendContentMessage({
-    type: 'eval',
+    type: "eval",
     id,
     code,
     snippetId,
@@ -51,6 +54,6 @@ export function resolveEval(id: string, value: boolean) {
     deferred.timer && window.clearTimeout(deferred.timer);
     deferred.resolve(value);
   } else {
-    console.warn('no eval #', id);
+    console.warn("no eval #", id);
   }
 }

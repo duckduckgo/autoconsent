@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Tools from "./tools";
 
 export function matches(config: any) {
@@ -5,11 +6,14 @@ export function matches(config: any) {
   if (config.type === "css") {
     return !!result.target;
   } else if (config.type === "checkbox") {
-    return !!result.target && result.target.checked;
+    return !!result.target && (result.target as HTMLInputElement).checked;
   }
 }
 
-export async function executeAction(config: any, param?: any): Promise<boolean | void> {
+export async function executeAction(
+  config: any,
+  param?: any,
+): Promise<boolean | void> {
   switch (config.type) {
     case "click":
       return clickAction(config);
@@ -41,7 +45,7 @@ export async function executeAction(config: any, param?: any): Promise<boolean |
 const STEP_TIMEOUT = 0;
 
 function waitTimeout(timeout: number): Promise<void> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, timeout);
@@ -94,7 +98,7 @@ async function ifCssAction(config: any, param: any) {
 }
 
 async function waitCssAction(config: any) {
-  await new Promise<void>(resolve => {
+  await new Promise<void>((resolve) => {
     let numRetries = config.retries || 10;
     const waitTime = config.waitTime || 250;
     const checkCss = () => {
@@ -154,8 +158,10 @@ async function slideAction(config: any) {
       yDiff = 0;
     }
 
-    const screenX = window.screenX + targetBounds.left + targetBounds.width / 2.0;
-    const screenY = window.screenY + targetBounds.top + targetBounds.height / 2.0;
+    const screenX =
+      window.screenX + targetBounds.left + targetBounds.width / 2.0;
+    const screenY =
+      window.screenY + targetBounds.top + targetBounds.height / 2.0;
     const clientX = targetBounds.left + targetBounds.width / 2.0;
     const clientY = targetBounds.top + targetBounds.height / 2.0;
 
@@ -175,7 +181,7 @@ async function slideAction(config: any) {
       false,
       false,
       0,
-      result.target
+      result.target,
     );
     const mouseMove = document.createEvent("MouseEvents");
     mouseMove.initMouseEvent(
@@ -193,7 +199,7 @@ async function slideAction(config: any) {
       false,
       false,
       0,
-      result.target
+      result.target,
     );
     const mouseUp = document.createEvent("MouseEvents");
     mouseUp.initMouseEvent(
@@ -211,7 +217,7 @@ async function slideAction(config: any) {
       false,
       false,
       0,
-      result.target
+      result.target,
     );
     result.target.dispatchEvent(mouseDown);
     await this.waitTimeout(10);
@@ -231,7 +237,7 @@ async function closeAction() {
 
 async function evalAction(config: any): Promise<boolean> {
   console.log("eval!", config.code);
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     try {
       if (config.async) {
         window.eval(config.code);
