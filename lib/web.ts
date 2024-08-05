@@ -38,6 +38,7 @@ export default class AutoConsent {
   domActions: DomActions;
   filtersEngine: FiltersEngine;
   protected sendContentMessage: MessageSender;
+  protected cosmeticStyleSheet: CSSStyleSheet;
 
   constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
     performance.mark('autoconsent-constructor');
@@ -476,7 +477,7 @@ export default class AutoConsent {
    * Apply cosmetic filters
    * @returns true if the filters were applied, false otherwise
    */
-  applyCosmeticFilters(styles?: string) {
+  async applyCosmeticFilters(styles?: string) {
     if (!this.filtersEngine) {
       return false;
     }
@@ -485,13 +486,19 @@ export default class AutoConsent {
       styles = getCosmeticStylesheet(this.filtersEngine);
     }
     this.updateState({ cosmeticFiltersOn: true });
-    this.domActions.applyCosmetics(styles);
+    try {
+      this.cosmeticStyleSheet = await this.domActions.getStyleSheet(styles, this.cosmeticStyleSheet);
+      document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
+    } catch (e) {
+      this.config.logs && console.error('Error applying cosmetic filters', e);
+      return false;
+    }
     return true;
   }
 
   undoCosmetics() {
     this.updateState({ cosmeticFiltersOn: false });
-    this.domActions.undoCosmetics();
+    this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
   }
 
   filterListFallback() {
@@ -511,7 +518,7 @@ export default class AutoConsent {
       this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     } else {
-      this.applyCosmeticFilters(cosmeticStyles);
+      this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
       logsConfig.lifecycle && console.log("Keeping cosmetic filters", location.href);
       this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
       this.sendContentMessage({

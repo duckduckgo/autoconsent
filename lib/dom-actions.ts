@@ -96,21 +96,22 @@ export class DomActions implements DomActionsProvider {
     return !!existingElement;
   }
 
-  applyCosmetics(stylesheet: string): boolean {
-    // TODO: use document.styleSheets instead of a real DOM element
-    const styleEl = getStyleElement('autoconsent-cosmetics');
-    this.autoconsentInstance.config.logs.lifecycle && console.log("[cosmetics]", styleEl, location.href);
-    styleEl.innerText = stylesheet;
-    return stylesheet.length > 0;
+  async getStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
+    if (!styleSheet) {
+      styleSheet = new CSSStyleSheet();
+    }
+    styleSheet = await styleSheet.replace(cssText);
+    this.autoconsentInstance.config.logs.lifecycle && console.log("[cosmetics]", styleSheet, location.href);
+    return styleSheet;
   }
 
-  undoCosmetics(): boolean {
-    const existingElement = getStyleElement('autoconsent-cosmetics');
-    this.autoconsentInstance.config.logs.lifecycle && console.log("[undocosmetics]", existingElement, location.href);
-    if (existingElement) {
-      existingElement.remove();
+  removeStyleSheet(styleSheet?: CSSStyleSheet): boolean {
+    this.autoconsentInstance.config.logs.lifecycle && console.log("[undocosmetics]", styleSheet, location.href);
+    if (styleSheet) {
+      styleSheet.replace('');
+      return true;
     }
-    return !!existingElement;
+    return false;
   }
 
   querySingleReplySelector(selector: string, parent: any = document): HTMLElement[] {
