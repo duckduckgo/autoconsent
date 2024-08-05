@@ -96,11 +96,12 @@ export class DomActions implements DomActionsProvider {
     return !!existingElement;
   }
 
-  applyCosmetics(selector: string): boolean {
+  applyCosmetics(stylesheet: string): boolean {
     // TODO: use document.styleSheets instead of a real DOM element
     const styleEl = getStyleElement('autoconsent-cosmetics');
     this.autoconsentInstance.config.logs.lifecycle && console.log("[cosmetics]", styleEl, location.href);
-    return hideElements(styleEl, selector, "opacity");
+    styleEl.innerText = stylesheet;
+    return stylesheet.length > 0;
   }
 
   undoCosmetics(): boolean {

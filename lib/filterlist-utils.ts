@@ -1,5 +1,5 @@
-import { FiltersEngine } from '@cliqz/adblocker';
-import { extractFeaturesFromDOM } from '@cliqz/adblocker-content';
+import { FiltersEngine } from '../node_modules/@cliqz/adblocker/src/index';
+import { extractFeaturesFromDOM } from '../node_modules/@cliqz/adblocker-content/src/index';
 import { parse as tldtsParse } from 'tldts-experimental';
 
 export function parseFilterList(rawFilterlist: string) {
@@ -12,7 +12,7 @@ export function parseFilterList(rawFilterlist: string) {
   return engine;
 }
 
-export function getFilterlistSelectors(engine: FiltersEngine): string {
+export function getCosmeticStylesheet(engine: FiltersEngine): string {
   const parsed = tldtsParse(location.href);
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
@@ -26,16 +26,18 @@ export function getFilterlistSelectors(engine: FiltersEngine): string {
     ...extractFeaturesFromDOM([document.documentElement]),
 
     getBaseRules: true,
-    getInjectionRules: true,
+    getInjectionRules: false, // we don't inject scripts atm
     getExtendedRules: true,
     getRulesFromDOM: true,
     getRulesFromHostname: true,
   });
+  return cosmetics.styles;
+}
 
-  if (cosmetics.styles) {
-    const selectorsOnly = cosmetics.styles.replace(/\s*{ display: none !important; }\s*/g, ',').replace(/,$/, '');
+export function getFilterlistSelectors(styles: string): string {
+  if (styles) {
+    const selectorsOnly = styles.replace(/\s*{[^\\}]*}\s*/g, ',').replace(/,$/, '');
     return selectorsOnly;
   }
-
   return '';
 }

@@ -19,7 +19,7 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "playwright test tests/dom-actions.spec.ts",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
-    "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt -O rules/fanboy-cookiemonster.txt",
+    "fetch-fanboy-list": "wget https://secure.fanboy.co.nz/fanboy-cookiemonster_ubo.txt -O rules/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.mjs",
     "version": "node update_version.js && git add addon/manifest.*.json",
@@ -62,7 +62,8 @@
     "onlyPublishWithReleaseLabel": true
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.26.15",
+    "@cliqz/adblocker": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker?hiding-styles-hack",
+    "@cliqz/adblocker-content": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker-content?hiding-styles-hack",
     "time-to-interactive-polyfill": "^0.2.4"
   }
 }

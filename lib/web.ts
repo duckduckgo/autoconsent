@@ -8,7 +8,7 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
-import { getFilterlistSelectors, parseFilterList } from './filterlist-utils';
+import { getCosmeticStylesheet, getFilterlistSelectors, parseFilterList } from './filterlist-utils';
 import { FiltersEngine } from '@cliqz/adblocker';
 
 import { getFirstConsistentlyInteractive } from 'time-to-interactive-polyfill/src/index.js';
@@ -136,12 +136,12 @@ export default class AutoConsent {
       if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => {
           performance.mark('autoconsent-apply-filterlist-start');
-          this.applyCosmeticFilters(false);
+          this.applyCosmeticFilters();
           performance.mark('autoconsent-apply-filterlist-end');
         });
       } else {
         performance.mark('autoconsent-apply-filterlist-start');
-        this.applyCosmeticFilters(false);
+        this.applyCosmeticFilters();
         performance.mark('autoconsent-apply-filterlist-end');
       }
     }
@@ -476,21 +476,19 @@ export default class AutoConsent {
 
   /**
    * Apply cosmetic filters
-   * @param verify if true, will check if the filters are actually hiding something
-   * @returns true if the cosmetic filters are actually hiding something (only when verify is set).
+   * @returns true if the filters were applied, false otherwise
    */
-  applyCosmeticFilters(verify: boolean) {
+  applyCosmeticFilters(styles?: string) {
     if (!this.filtersEngine) {
       return false;
     }
-    this.updateState({ cosmeticFiltersOn: true });
-    const selectors = getFilterlistSelectors(this.filtersEngine);
-    if (verify) {
-      // TODO: this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-      return this.domActions.elementVisible(selectors, 'any');
+    if (!styles) {
+      // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
+      styles = getCosmeticStylesheet(this.filtersEngine);
     }
-    this.domActions.applyCosmetics(selectors);
-    return false;
+    this.updateState({ cosmeticFiltersOn: true });
+    this.domActions.applyCosmetics(styles);
+    return true;
   }
 
   undoCosmetics() {
@@ -500,13 +498,22 @@ export default class AutoConsent {
 
   filterListFallback() {
     const logsConfig = this.config.logs;
-    const cosmeticFiltersWorked = this.applyCosmeticFilters(true); // this will also refresh filters based on the current DOM state
+    // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
+    const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
+
+    // TODO: this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+    const cosmeticFiltersWorked = this.domActions.elementVisible(
+      getFilterlistSelectors(cosmeticStyles),
+      'any'
+    );
+
     if (!cosmeticFiltersWorked) {
       logsConfig.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
       this.undoCosmetics();
       this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     } else {
+      this.applyCosmeticFilters(cosmeticStyles);
       logsConfig.lifecycle && console.log("Keeping cosmetic filters", location.href);
       this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
       this.sendContentMessage({
