@@ -3,7 +3,6 @@ import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage
 import { Config, RuleBundle } from "../lib/types";
 import { manifestVersion, storageGet, storageRemove, storageSet } from "./mv-compat";
 import { initConfig, isEnabledForDomain, showOptOutStatus } from "./utils";
-import { content as filterlist } from '../rules/filterlist.json';
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -15,7 +14,6 @@ const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
   const rules: RuleBundle = await (await fetch("./rules.json")).json();
-  rules.filterList = filterlist;
   storageSet({
     rules,
   });

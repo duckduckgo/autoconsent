@@ -79,6 +79,7 @@ export function normalizeConfig(providedConfig: any): Config {
     detectRetries: 20,
     isMainWorld: false,
     prehideTimeout: 2000,
+    enableFilterList: true,
     logs: {
       lifecycle: true,
       rulesteps: true,

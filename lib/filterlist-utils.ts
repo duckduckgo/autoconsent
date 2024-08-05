@@ -1,6 +1,11 @@
 import { FiltersEngine } from '../node_modules/@cliqz/adblocker/src/index';
 import { extractFeaturesFromDOM } from '../node_modules/@cliqz/adblocker-content/src/index';
 import { parse as tldtsParse } from 'tldts-experimental';
+import { serializedEngine } from './filterlist-engine';
+
+export function deserializeFilterList() {
+  return FiltersEngine.deserialize(serializedEngine)
+}
 
 export function parseFilterList(rawFilterlist: string) {
   const engine = FiltersEngine.parse(rawFilterlist, {

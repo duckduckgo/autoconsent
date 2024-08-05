@@ -8,7 +8,7 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
-import { getCosmeticStylesheet, getFilterlistSelectors, parseFilterList } from './filterlist-utils';
+import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors, parseFilterList } from './filterlist-utils';
 import { FiltersEngine } from '@cliqz/adblocker';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
@@ -80,6 +80,26 @@ export default class AutoConsent {
       this.parseDeclarativeRules(declarativeRules);
     }
 
+    if (config.enableFilterList) {
+      // TODO: use requestIdleCallback
+      performance.mark('autoconsent-parse-start');
+      this.filtersEngine = deserializeFilterList();
+      performance.mark('autoconsent-parse-end');
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => {
+          performance.mark('autoconsent-apply-filterlist-start');
+          this.applyCosmeticFilters().then(() => {
+            performance.mark('autoconsent-apply-filterlist-end');
+          });
+        });
+      } else {
+        performance.mark('autoconsent-apply-filterlist-start');
+        this.applyCosmeticFilters().then(() => {
+          performance.mark('autoconsent-apply-filterlist-end');
+        });
+      }
+    }
+
     this.rules = filterCMPs(this.rules, normalizedConfig);
 
     if (config.enablePrehide) {
@@ -125,24 +145,6 @@ export default class AutoConsent {
       declarativeRules.autoconsent.forEach((ruleset) => {
         this.addDeclarativeCMP(ruleset);
       });
-    }
-
-    if (declarativeRules.filterList) {
-      // TODO: use requestIdleCallback
-      performance.mark('autoconsent-parse-start');
-      this.filtersEngine = parseFilterList(declarativeRules.filterList);
-      performance.mark('autoconsent-parse-end');
-      if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', () => {
-          performance.mark('autoconsent-apply-filterlist-start');
-          this.applyCosmeticFilters();
-          performance.mark('autoconsent-apply-filterlist-end');
-        });
-      } else {
-        performance.mark('autoconsent-apply-filterlist-start');
-        this.applyCosmeticFilters();
-        performance.mark('autoconsent-apply-filterlist-end');
-      }
     }
   }
 

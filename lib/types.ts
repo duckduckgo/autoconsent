@@ -53,6 +53,7 @@ export type Config = {
   detectRetries: number;
   isMainWorld: boolean;
   prehideTimeout: number;
+  enableFilterList: boolean;
   logs: {
     lifecycle: boolean;
     rulesteps: boolean;
