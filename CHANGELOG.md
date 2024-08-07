@@ -1,3 +1,15 @@
+# v10.14.0 (Wed Aug 07 2024)
+
+#### 🚀 Enhancement
+
+- Batch of regression fixes [#476](https://github.com/duckduckgo/autoconsent/pull/476) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.13.0 (Thu Aug 01 2024)
 
 #### 🚀 Enhancement
