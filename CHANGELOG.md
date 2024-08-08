@@ -1,3 +1,96 @@
+# v10.14.0 (Wed Aug 07 2024)
+
+#### 🚀 Enhancement
+
+- Batch of regression fixes [#476](https://github.com/duckduckgo/autoconsent/pull/476) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v10.13.0 (Thu Aug 01 2024)
+
+#### 🚀 Enhancement
+
+- Allow disabling test extension per site [#475](https://github.com/duckduckgo/autoconsent/pull/475) ([@muodov](https://github.com/muodov))
+- Update UserCentrics API [#470](https://github.com/duckduckgo/autoconsent/pull/470) ([@seia-soto](https://github.com/seia-soto))
+- Add chaletplus-com [#472](https://github.com/duckduckgo/autoconsent/pull/472) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Add dpgmedia.nl [#474](https://github.com/duckduckgo/autoconsent/pull/474) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v10.12.1 (Mon Jul 29 2024)
+
+#### 🐛 Bug Fix
+
+- Add netbeat.de [#471](https://github.com/duckduckgo/autoconsent/pull/471) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+- Update configuration object in `api.md` [#469](https://github.com/duckduckgo/autoconsent/pull/469) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v10.12.0 (Tue Jul 23 2024)
+
+#### 🚀 Enhancement
+
+- Support check24-partnerprogramm.de [#465](https://github.com/duckduckgo/autoconsent/pull/465) ([@seia-soto](https://github.com/seia-soto))
+- Support Acris CMP [#464](https://github.com/duckduckgo/autoconsent/pull/464) ([@seia-soto](https://github.com/seia-soto) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#463](https://github.com/duckduckgo/autoconsent/pull/463) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- Dax the Deployer (dax@duckduckgo.com)
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v10.11.0 (Mon Jul 01 2024)
+
+#### 🚀 Enhancement
+
+- Add zentralruf-de [#461](https://github.com/duckduckgo/autoconsent/pull/461) ([@seia-soto](https://github.com/seia-soto))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#454](https://github.com/duckduckgo/autoconsent/pull/454) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v10.10.0 (Mon Jun 03 2024)
+
+#### 🚀 Enhancement
+
+- Fix some reload loops on www.fidelity.co.uk and other Ensighten sites [#452](https://github.com/duckduckgo/autoconsent/pull/452) ([@muodov](https://github.com/muodov))
+- Add a rule for ebay [#449](https://github.com/duckduckgo/autoconsent/pull/449) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v10.9.0 (Tue May 28 2024)
 
 #### 🚀 Enhancement

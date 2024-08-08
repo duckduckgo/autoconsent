@@ -1,7 +1,7 @@
 {
   "name": "twitter",
   "runContext": {
-    "urlPattern": "^https://([a-z0-9-]+\\.)?twitter\\.com/"
+    "urlPattern": "^https://([a-z0-9-]+\\.)?(twitter|x)\\.com/"
   },
   "prehideSelectors": ["[data-testid=\"BottomBar\"]"],
   "detectCmp": [
@@ -11,10 +11,10 @@
     { "visible": "[data-testid=\"BottomBar\"] div" }
   ],
   "optIn": [
-    { "waitForThenClick": "[data-testid=\"BottomBar\"] > div:has(>div:first-child>div:last-child>span[role=button]) > div:last-child > div[role=button]:first-child" }
+    { "waitForThenClick": "[data-testid=\"BottomBar\"] > div:has(>div:first-child>div:last-child>button[role=button]>span) > div:last-child > button[role=button]:first-child" }
   ],
   "optOut": [
-    { "waitForThenClick": "[data-testid=\"BottomBar\"] > div:has(>div:first-child>div:last-child>span[role=button]) > div:last-child > div[role=button]:last-child" }
+    { "waitForThenClick": "[data-testid=\"BottomBar\"] > div:has(>div:first-child>div:last-child>button[role=button]>span) > div:last-child > button[role=button]:last-child" }
   ],
   "TODOtest": [
     { "eval": "EVAL_document.cookie.includes('d_prefs=MjoxLGNvbnNlbnRfdmVyc2lvbjoy')" }

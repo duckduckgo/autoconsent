@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "10.9.0",
+  "version": "10.14.0",
   "description": "",
   "main": "dist/autoconsent.cjs.js",
   "module": "dist/autoconsent.esm.js",
@@ -64,6 +64,6 @@
   "dependencies": {
     "@cliqz/adblocker": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker?hiding-styles-hack",
     "@cliqz/adblocker-content": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker-content?hiding-styles-hack",
-    "time-to-interactive-polyfill": "^0.2.4"
+    "tldts-experimental": "^6.1.37"
   }
 }

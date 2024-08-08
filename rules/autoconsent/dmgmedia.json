@@ -2,10 +2,10 @@
   "name": "dmgmedia",
   "prehideSelectors": ["[data-project=\"mol-fe-cmp\"]"],
   "detectCmp": [
-    { "exists": "[data-project=\"mol-fe-cmp\"]" }
+    { "exists": "[data-project=\"mol-fe-cmp\"] [class*=footer]" }
   ],
   "detectPopup": [
-    { "visible": "[data-project=\"mol-fe-cmp\"]" }
+    { "visible": "[data-project=\"mol-fe-cmp\"] [class*=footer]" }
   ],
   "optIn": [
     { "waitForThenClick": "[data-project=\"mol-fe-cmp\"] button[class*=primary]" }
