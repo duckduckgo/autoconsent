@@ -139,6 +139,7 @@ export const snippets = {
   EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
   EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
   EVAL_THEVERGE_0: () => document.cookie.includes('_duet_gdpr_acknowledged=1'),
+  EVAL_TWCC_TEST: () => document.cookie.includes('twCookieConsent='),
   EVAL_UBUNTU_COM_0: () => document.cookie.includes('_cookies_accepted=essential'),
   EVAL_UK_COOKIE_CONSENT_0: () => !document.cookie.includes('catAccCookies'),
   EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
