@@ -101,7 +101,6 @@ export class DomActions implements DomActionsProvider {
       styleSheet = new CSSStyleSheet();
     }
     styleSheet = await styleSheet.replace(cssText);
-    this.autoconsentInstance.config.logs.lifecycle && console.log("[cosmetics]", styleSheet, location.href);
     return styleSheet;
   }
 

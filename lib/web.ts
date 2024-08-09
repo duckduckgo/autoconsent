@@ -490,6 +490,7 @@ export default class AutoConsent {
     this.updateState({ cosmeticFiltersOn: true });
     try {
       this.cosmeticStyleSheet = await this.domActions.getStyleSheet(styles, this.cosmeticStyleSheet);
+      this.config.logs.lifecycle && console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
       document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
     } catch (e) {
       this.config.logs && console.error('Error applying cosmetic filters', e);
