@@ -8,7 +8,7 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
-import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors, parseFilterList } from './filterlist-utils';
+import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@cliqz/adblocker';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
@@ -490,7 +490,7 @@ export default class AutoConsent {
     this.updateState({ cosmeticFiltersOn: true });
     try {
       this.cosmeticStyleSheet = await this.domActions.getStyleSheet(styles, this.cosmeticStyleSheet);
-      this.config.logs.lifecycle && console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
+      console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
       document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
     } catch (e) {
       this.config.logs && console.error('Error applying cosmetic filters', e);
@@ -516,13 +516,13 @@ export default class AutoConsent {
     );
 
     if (!cosmeticFiltersWorked) {
-      logsConfig.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
+      console.log("Cosmetic filters didn't work, removing them", location.href);
       this.undoCosmetics();
       this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     } else {
       this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
-      logsConfig.lifecycle && console.log("Keeping cosmetic filters", location.href);
+      console.log("Keeping cosmetic filters", location.href);
       this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
       this.sendContentMessage({
         type: 'cmpDetected',
