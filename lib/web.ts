@@ -505,7 +505,6 @@ export default class AutoConsent {
   }
 
   filterListFallback() {
-    const logsConfig = this.config.logs;
     // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
     const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
 
