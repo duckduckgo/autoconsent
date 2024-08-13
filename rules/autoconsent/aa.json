@@ -1,0 +1,32 @@
+{
+  "name": "aa",
+  "vendorUrl": "https://aa.com",
+  "prehideSelectors": [],
+  "cosmetic": true,
+  "detectCmp": [
+    {
+      "exists": "#aa_optoutmulti-Modal,#cookieBannerMessage"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#aa_optoutmulti-Modal,#cookieBannerMessage"
+    }
+  ],
+  "optIn": [
+    {
+      "hide": "#aa_optoutmulti-Modal,#cookieBannerMessage"
+    },
+    {
+      "waitForThenClick": "#aa_optoutmulti_checkBox"
+    },
+    {
+      "waitForThenClick": "#aa_optoutmulti-Modal button.optoutmulti_button"
+    }
+  ],
+  "optOut": [
+    {
+      "hide": "#aa_optoutmulti-Modal,#cookieBannerMessage"
+    }
+  ]
+}
