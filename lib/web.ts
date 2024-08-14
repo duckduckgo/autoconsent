@@ -83,7 +83,11 @@ export default class AutoConsent {
     if (config.enableFilterList) {
       // TODO: use requestIdleCallback
       performance.mark('autoconsent-parse-start');
-      this.filtersEngine = deserializeFilterList();
+      try {
+        this.filtersEngine = deserializeFilterList();
+      } catch (e) {
+        console.error('Error parsing filter list', e);
+      }
       performance.mark('autoconsent-parse-end');
       if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => {
@@ -505,6 +509,11 @@ export default class AutoConsent {
   }
 
   filterListFallback() {
+    if (!this.filtersEngine) {
+      this.updateState({ lifecycle: 'nothingDetected' });
+      return false;
+    }
+
     // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
     const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
 
