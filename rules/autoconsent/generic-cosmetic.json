@@ -1,9 +1,0 @@
-{
-  "name": "generic-cosmetic",
-  "cosmetic": true,
-  "prehideSelectors": ["#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner"],
-  "detectCmp": [{ "exists": "#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner" }],
-  "detectPopup": [{ "visible": "#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner" }],
-  "optIn": [],
-  "optOut": [{ "hide": "#js-cookie-banner,.js-cookie-banner,.cookie-banner,#cookie-banner" }]
-}
