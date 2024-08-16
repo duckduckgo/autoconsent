@@ -14,9 +14,7 @@ const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
   const rules: RuleBundle = await (await fetch("./rules.json")).json();
-  storageSet({
-    rules,
-  });
+  storageSet({ rules });
 }
 
 async function evalInTab(tabId: number, frameId: number, code: string, snippetId?: keyof typeof snippets): Promise<chrome.scripting.InjectionResult<boolean>[]> {

@@ -12,7 +12,6 @@ import Tiktok from './tiktok';
 import Airbnb from './airbnb';
 import Tumblr from './tumblr-com';
 
-
 export const dynamicCMPs = [
   TrustArcTop,
   TrustArcFrame,
