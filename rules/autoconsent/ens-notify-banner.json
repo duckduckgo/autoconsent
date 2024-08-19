@@ -9,6 +9,6 @@
     "optOut": [
         { "wait": 500 },
         { "visible": "#ensNotifyBanner[style*=block]" },
-        { "waitForThenClick": "#ensRejectAll,#rejectAll,#ensRejectBanner,.rejectAll" }
+        { "waitForThenClick": "#ensRejectAll,#rejectAll,#ensRejectBanner,.rejectAll,#ensCloseBanner", "timeout": 2000 }
     ]
 }
