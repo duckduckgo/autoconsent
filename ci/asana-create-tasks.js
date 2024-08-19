@@ -71,7 +71,7 @@ const duplicateTemplateTask = (templateTaskGid) => {
 }
 
 const waitForJobSuccess = async (job_gid, attempts = 1) => {
-  const interval = 500
+  const interval = 1000
   const maxAttempts = 20
 
   return new Promise(async (resolve, reject) => {
@@ -82,7 +82,9 @@ const waitForJobSuccess = async (job_gid, attempts = 1) => {
     attempts += 1
 
     if (attempts > maxAttempts) {
-      return reject(new Error(`The job ${job_gid} took too long to execute`))
+      const errMsg = `The job ${job_gid} took too long to execute`
+      console.error(errMsg)
+      return reject(new Error(errMsg))
     }
 
     await timersPromises.setTimeout(interval)
@@ -175,6 +177,7 @@ asanaCreateTasks()
     console.log(result.stdout)
   })
   .catch((e) => {
+    console.error('Failed to create asana tasks:', result.stdout)
     // The Asana API returns errors in e.value.errors. If that's undefined log whatever else we got
     console.error(e.value?.errors || e)
     process.exit(1)
