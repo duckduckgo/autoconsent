@@ -67,7 +67,6 @@ export default class AutoConsent {
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
     performance.mark('autoconsent-initialize');
-    // console.log('init called with', JSON.stringify(config), declarativeRules?.filterList?.substring(0, 100));
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
@@ -487,14 +486,15 @@ export default class AutoConsent {
     if (!this.filtersEngine) {
       return false;
     }
+    const logsConfig = this.config?.logs;
     if (!styles) {
       // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
       styles = getCosmeticStylesheet(this.filtersEngine);
     }
     this.updateState({ cosmeticFiltersOn: true });
     try {
-      this.cosmeticStyleSheet = await this.domActions.getStyleSheet(styles, this.cosmeticStyleSheet);
-      console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
+      this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
+      logsConfig?.lifecycle && console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
       document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
     } catch (e) {
       this.config.logs && console.error('Error applying cosmetic filters', e);
@@ -523,14 +523,16 @@ export default class AutoConsent {
       'any'
     );
 
+    const logsConfig = this.config?.logs;
+
     if (!cosmeticFiltersWorked) {
-      console.log("Cosmetic filters didn't work, removing them", location.href);
+      logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
       this.undoCosmetics();
       this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     } else {
       this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
-      console.log("Keeping cosmetic filters", location.href);
+      logsConfig?.lifecycle && console.log("Keeping cosmetic filters", location.href);
       this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
       this.sendContentMessage({
         type: 'cmpDetected',

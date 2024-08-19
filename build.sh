@@ -3,7 +3,7 @@ set -ex
 
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
-$ESBUILD --format=iife --target=es2021 --minify playwright/content.ts --outfile=dist/autoconsent.playwright.js
+$ESBUILD --format=iife --target=es2021 playwright/content.ts --outfile=dist/autoconsent.playwright.js
 $ESBUILD --format=iife --target=es2021 playwright/unit.ts --outfile=dist/autoconsent.unit.js
 $ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js

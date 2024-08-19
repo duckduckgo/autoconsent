@@ -13,7 +13,6 @@ import Airbnb from './airbnb';
 import Tumblr from './tumblr-com';
 import Admiral from './admiral';
 
-
 export const dynamicCMPs = [
   TrustArcTop,
   TrustArcFrame,

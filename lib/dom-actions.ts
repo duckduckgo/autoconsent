@@ -96,7 +96,7 @@ export class DomActions implements DomActionsProvider {
     return !!existingElement;
   }
 
-  async getStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
+  async createOrUpdateStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
     if (!styleSheet) {
       styleSheet = new CSSStyleSheet();
     }
