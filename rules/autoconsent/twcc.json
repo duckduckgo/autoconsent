@@ -1,0 +1,36 @@
+{
+  "name": "twcc",
+  "vendorUrl": "https://unknown",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": ""
+  },
+  "prehideSelectors": ["#twcc__mechanism"],
+  "detectCmp": [
+    {
+      "exists": "#twcc__mechanism .twcc__notice"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#twcc__mechanism .twcc__notice"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#twcc__accept-button"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#twcc__decline-button"
+    }
+  ],
+  "test": [
+    {
+      "eval": "EVAL_TWCC_TEST"
+    }
+  ]
+}
