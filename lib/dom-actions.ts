@@ -96,12 +96,11 @@ export class DomActions implements DomActionsProvider {
     return !!existingElement;
   }
 
-  async getStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
+  async createOrUpdateStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
     if (!styleSheet) {
       styleSheet = new CSSStyleSheet();
     }
     styleSheet = await styleSheet.replace(cssText);
-    this.autoconsentInstance.config.logs.lifecycle && console.log("[cosmetics]", styleSheet, location.href);
     return styleSheet;
   }
 

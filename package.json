@@ -11,7 +11,7 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/fanboy-cookiemonster.txt\" -c \"npm run prepublish\"",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/fanboy-cookiemonster.txt\" \"rules/filterlist-overrides.txt\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -64,7 +64,6 @@
   "dependencies": {
     "@cliqz/adblocker": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker?hiding-styles-hack",
     "@cliqz/adblocker-content": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker-content?hiding-styles-hack",
-    "time-to-interactive-polyfill": "^0.2.4",
     "tldts-experimental": "^6.1.37"
   }
 }

@@ -67,7 +67,6 @@ export default class AutoConsent {
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
     performance.mark('autoconsent-initialize');
-    console.log('init called with', JSON.stringify(config), declarativeRules?.filterList?.substring(0, 100));
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
@@ -127,21 +126,16 @@ export default class AutoConsent {
       });
     }
 
-    if (declarativeRules.filterList) {
+    if (config.enableFilterList && declarativeRules.filterList) {
       // TODO: use requestIdleCallback
-      performance.mark('autoconsent-parse-start');
       this.filtersEngine = parseFilterList(declarativeRules.filterList);
-      performance.mark('autoconsent-parse-end');
       if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => {
-          performance.mark('autoconsent-apply-filterlist-start');
           this.applyCosmeticFilters();
-          performance.mark('autoconsent-apply-filterlist-end');
         });
       } else {
         performance.mark('autoconsent-apply-filterlist-start');
         this.applyCosmeticFilters();
-        performance.mark('autoconsent-apply-filterlist-end');
       }
     }
   }
@@ -478,19 +472,24 @@ export default class AutoConsent {
    * @returns true if the filters were applied, false otherwise
    */
   async applyCosmeticFilters(styles?: string) {
+    performance.mark('autoconsent-apply-filterlist-start');
     if (!this.filtersEngine) {
       return false;
     }
+    const logsConfig = this.config?.logs;
     if (!styles) {
       // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
       styles = getCosmeticStylesheet(this.filtersEngine);
     }
     this.updateState({ cosmeticFiltersOn: true });
     try {
-      this.cosmeticStyleSheet = await this.domActions.getStyleSheet(styles, this.cosmeticStyleSheet);
+      this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
+      logsConfig?.lifecycle && console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
       document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
+      performance.mark('autoconsent-apply-filterlist-end');
     } catch (e) {
       this.config.logs && console.error('Error applying cosmetic filters', e);
+      performance.mark('autoconsent-apply-filterlist-end');
       return false;
     }
     return true;
@@ -502,7 +501,11 @@ export default class AutoConsent {
   }
 
   filterListFallback() {
-    const logsConfig = this.config.logs;
+    if (!this.filtersEngine) {
+      this.updateState({ lifecycle: 'nothingDetected' });
+      return false;
+    }
+
     // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
     const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
 
@@ -512,14 +515,16 @@ export default class AutoConsent {
       'any'
     );
 
+    const logsConfig = this.config?.logs;
+
     if (!cosmeticFiltersWorked) {
-      logsConfig.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
+      logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
       this.undoCosmetics();
       this.updateState({ lifecycle: 'nothingDetected' });
       return false;
     } else {
       this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
-      logsConfig.lifecycle && console.log("Keeping cosmetic filters", location.href);
+      logsConfig?.lifecycle && console.log("Keeping cosmetic filters", location.href);
       this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
       this.sendContentMessage({
         type: 'cmpDetected',
