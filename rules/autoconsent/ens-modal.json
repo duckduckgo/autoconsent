@@ -2,11 +2,13 @@
     "name": "Ensighten ensModal",
     "prehideSelectors": [".ensModal"],
     "detectCmp": [{ "exists": ".ensModal" }],
-    "detectPopup": [{ "visible": ".ensModal" }],
+    "detectPopup": [{ "visible": "#ensModalWrapper[style*=block]" }],
     "optIn": [
         { "waitForThenClick": "#modalAcceptButton" }
     ],
     "optOut": [
+        { "wait": 500 },
+        { "visible": "#ensModalWrapper[style*=block]" },
         { "waitForThenClick": ".ensCheckbox:checked", "all": true },
         { "waitForThenClick": "#ensSave" }
     ]

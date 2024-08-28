@@ -71,7 +71,7 @@ const duplicateTemplateTask = (templateTaskGid) => {
 }
 
 const waitForJobSuccess = async (job_gid, attempts = 1) => {
-  const interval = 500
+  const interval = 1000
   const maxAttempts = 20
 
   return new Promise(async (resolve, reject) => {
@@ -82,7 +82,9 @@ const waitForJobSuccess = async (job_gid, attempts = 1) => {
     attempts += 1
 
     if (attempts > maxAttempts) {
-      return reject(new Error(`The job ${job_gid} took too long to execute`))
+      const errMsg = `The job ${job_gid} took too long to execute`
+      console.error(errMsg)
+      return reject(new Error(errMsg))
     }
 
     await timersPromises.setTimeout(interval)
@@ -107,17 +109,21 @@ const asanaCreateTasks = async () => {
           .replace(/<(h3|h4)>/ig, '<h2>').replace(/<\/(h3|h4)>/ig, '</h2>')
 
   // Updating task and moving to Release section...
-  console.error(JSON.stringify(updatedNotes))
-  await asana.tasks.updateTask(new_task.gid, {html_notes: updatedNotes})
+  console.error('Updated notes:', JSON.stringify(updatedNotes))
+  let updateTaskResult = await asana.tasks.updateTask(new_task.gid, {html_notes: updatedNotes})
+  console.error('updateTaskResult:', updateTaskResult)
 
-  await asana.tasks.addProjectForTask(new_task.gid, { project: autoconsentProjectGid, section: releaseSectionGid })
+  const addProjectResult = await asana.tasks.addProjectForTask(new_task.gid, { project: autoconsentProjectGid, section: releaseSectionGid })
+  console.error('addProjectResult:', addProjectResult)
 
   // The duplicateTask job returns when the task itself has been duplicated, ignoring the subtasks.
   // We want to wait that the job completes so that we can fetch all the subtasks correctly.
-  await waitForJobSuccess(duplicateTaskJobGid)
+  const duplicateTaskResult = await waitForJobSuccess(duplicateTaskJobGid)
+  console.error('duplicateTaskResult:', duplicateTaskResult)
 
   // Getting subtasks...
   const { data: subtasks } = await asana.tasks.getSubtasksForTask(new_task.gid, {opt_fields: 'name,html_notes,permalink_url'})
+  console.error('subtasks:', subtasks)
 
   // Updating subtasks and moving to appropriate projects...
   for (const subtask of subtasks) {
@@ -138,9 +144,11 @@ const asanaCreateTasks = async () => {
             html_notes.replace(projectExtractorRegex, '')
               .replace('[[notes]]', updatedNotes)
 
+    console.error(`updating task ${gid} with name ${newName} and notes ${subtaskNotes}`)
     await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes })
 
     if (extractedProjects) {
+      console.error(`adding projects ${extractedProjects} to task ${gid}`)
       for (const projectGidAndSection of extractedProjects.split(',')) {
         const [projectGid, sectionGid] = projectGidAndSection.split(':')
         await asana.tasks.addProjectForTask(gid, { project: projectGid, section: sectionGid })
@@ -153,7 +161,9 @@ const asanaCreateTasks = async () => {
           .replace('<li>[[pr_url]]</li>', version)
           .replace('<li>[[extra_content]]</li>', version)
 
-  await asana.tasks.updateTask(new_task.gid, {html_notes: finalNotes})
+  console.error('finalNotes:', finalNotes)
+  updateTaskResult = await asana.tasks.updateTask(new_task.gid, {html_notes: finalNotes})
+  console.error('updateTaskResult:', updateTaskResult)
 
   const jsonString = JSON.stringify(platforms)
   return {stdout: jsonString}
@@ -161,10 +171,13 @@ const asanaCreateTasks = async () => {
 
 asanaCreateTasks()
   .then((result) => {
+    // this log is for visibility in Github web interface
+    console.error('stage result:', result.stdout)
     // The log is needed to read the value from the bash context
     console.log(result.stdout)
   })
   .catch((e) => {
+    console.error('Failed to create asana tasks:', result.stdout)
     // The Asana API returns errors in e.value.errors. If that's undefined log whatever else we got
     console.error(e.value?.errors || e)
     process.exit(1)
