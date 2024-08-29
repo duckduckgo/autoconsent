@@ -126,7 +126,7 @@ export default class AutoConsent {
       });
     }
 
-    if (config.enableFilterList && declarativeRules.filterList) {
+    if (this.config.enableFilterList && declarativeRules.filterList) {
       // TODO: use requestIdleCallback
       this.filtersEngine = parseFilterList(declarativeRules.filterList);
       if (document.readyState === 'loading') {

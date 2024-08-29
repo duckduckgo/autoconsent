@@ -1,6 +1,7 @@
-import { FiltersEngine } from '../node_modules/@cliqz/adblocker/src/index';
-import { extractFeaturesFromDOM } from '../node_modules/@cliqz/adblocker-content/src/index';
+import { FiltersEngine } from '@cliqz/adblocker';
+import { extractFeaturesFromDOM } from '@cliqz/adblocker-content';
 import { parse as tldtsParse } from 'tldts-experimental';
+import { getHidingStyle } from './utils';
 
 export function deserializeFilterList(serializedEngine: Uint8Array) {
   return FiltersEngine.deserialize(serializedEngine)
@@ -37,6 +38,8 @@ export function getCosmeticStylesheet(engine: FiltersEngine): string {
       getExtendedRules: true,
       getRulesFromDOM: true,
       getRulesFromHostname: true,
+
+      hidingStyle: getHidingStyle('opacity'),
     });
     return cosmetics.styles;
   } catch (e) {

@@ -19,14 +19,18 @@ export function getStyleElement(styleOverrideElementId = "autoconsent-css-rules"
   }
 }
 
+export function getHidingStyle(method: HideMethod) {
+  const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
+  return `${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important;`
+}
+
 // hide elements with a CSS rule
 export function hideElements(
   styleEl: HTMLStyleElement,
   selector: string,
   method: HideMethod = 'display',
 ): boolean {
-  const hidingSnippet = method === "opacity" ? `opacity: 0` : `display: none`; // use display by default
-  const rule = `${selector} { ${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important; } `;
+  const rule = `${selector} { ${getHidingStyle(method)} } `;
 
   if (styleEl instanceof HTMLStyleElement) {
     styleEl.innerText += rule;

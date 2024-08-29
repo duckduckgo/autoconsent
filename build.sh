@@ -10,7 +10,7 @@ $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/
 
 # Extension
 $ESBUILD addon/background.ts --outfile=dist/addon-mv3/background.bundle.js
-$ESBUILD addon/content.ts --minify --outfile=dist/addon-mv3/content.bundle.js
+$ESBUILD addon/content.ts --outfile=dist/addon-mv3/content.bundle.js
 $ESBUILD addon/popup.ts --outfile=dist/addon-mv3/popup.bundle.js
 $ESBUILD addon/devtools/panel.ts --outfile=dist/addon-mv3/devtools/panel.js
 
