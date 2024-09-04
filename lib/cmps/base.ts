@@ -5,6 +5,7 @@ import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, R
 import { requestEval } from "../eval-handler";
 import AutoConsent from "../web";
 import { getFunctionBody, snippets } from "../eval-snippets";
+import isTopWindow from "../../addon/is-top-window";
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
   const result = await action;
@@ -75,7 +76,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
       ...this.runContext,
     }
 
-    const isTop = window.top === window;
+    const isTop = isTopWindow()
 
     if (isTop && !runCtx.main) {
       return false;

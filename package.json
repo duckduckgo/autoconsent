@@ -11,6 +11,7 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
+    "build-addon": "node ./addon/build.mjs",
     "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
@@ -19,6 +20,8 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "playwright test tests/dom-actions.spec.ts",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
+    "cypress-open": "npx cypress open",
+    "cypress-test": "npx cypress run --e2e --browser chrome --headed",
     "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.mjs",
@@ -44,6 +47,7 @@
     "bulma": "^0.9.4",
     "chai": "^5.0.0",
     "chokidar-cli": "^3.0.0",
+    "cypress": "^13.14.0",
     "esbuild": "^0.20.0",
     "eslint": "^8.27.0",
     "eslint-plugin-json": "^3.1.0",
@@ -52,7 +56,8 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
     "typescript": "^5.1.6",
-    "web-ext": "^7.3.0"
+    "web-ext": "^7.3.0",
+    "ws": "^8.18.0"
   },
   "repository": "duckduckgo/autoconsent",
   "auto": {
