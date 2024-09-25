@@ -1,0 +1,27 @@
+{
+  "name": "bigcommerce",
+  "prehideSelectors": [
+    "#cookies-banner-overlay",
+    "#consent-manager"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#consent-manager"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#consent-manager"
+    }
+  ],
+  "optIn": [
+    {
+      "click": "#consent-manager div > button[class]:last-child"
+    }
+  ],
+  "optOut": [
+    {
+      "click": "#consent-manager div > button[class]:first-child"
+    }
+  ]
+}
