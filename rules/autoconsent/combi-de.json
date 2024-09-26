@@ -1,0 +1,30 @@
+{
+  "name": "combi-de",
+  "vendorUrl": "https://www.combi.de/",
+  "runContext": {
+    "urlPattern": "^https://(www)\\.combi\\.de"
+  },
+  "prehideSelectors": [
+    ".modal.modal--cookie-notice"
+  ],
+  "detectCmp": [
+    {
+      "exists": ".modal.modal--cookie-notice"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".modal.modal--cookie-notice.open"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#accept-consent-necessary"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#accept-consent-all"
+    }
+  ]
+}
