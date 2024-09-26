@@ -1,0 +1,33 @@
+{
+  "name": "readly",
+  "runContext": {
+    "urlPattern": "^https://([a-z0-9-]+\\.)?readly\\.com/"
+  },
+  "prehideSelectors": [
+    ".DialogHandlerContainer:has(.cookie-dialog)",
+    ".cookie-dialog"
+  ],
+  "detectCmp": [
+    {
+      "exists": ".cookie-dialog"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".cookie-dialog"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": ".cookie-dialog .content button[type='button']"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": ".cookie-dialog .content .cookie-option-large span"
+    },
+    {
+      "waitForThenClick": ".cookie-dialog .content button[type='submit']"
+    }
+  ]
+}
