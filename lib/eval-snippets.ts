@@ -109,6 +109,7 @@ export const snippets = {
   EVAL_MICROSOFT_2: () => !!document.cookie.match('MSCC|GHCC'),
   EVAL_MOOVE_0: () => document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach(i => { if (!i.disabled) i.checked = (i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies') }) || true,
   EVAL_ONENINETWO_0: () => document.cookie.includes('CC_ADVERTISING=NO') && document.cookie.includes('CC_ANALYTICS=NO'),
+  EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
   EVAL_OPERA_0: () => document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
   EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
   EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
