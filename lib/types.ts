@@ -37,8 +37,9 @@ export interface DomActionsProvider {
 }
 
 export type RuleBundle = {
-  autoconsent: AutoConsentCMPRule[];
-  consentomatic: { [name: string]: ConsentOMaticConfig };
+  autoconsent?: AutoConsentCMPRule[];
+  consentomatic?: { [name: string]: ConsentOMaticConfig };
+  filterList?: string;
 };
 
 export type AutoAction = 'optOut' | 'optIn' | null;
@@ -52,6 +53,7 @@ export type Config = {
   detectRetries: number;
   isMainWorld: boolean;
   prehideTimeout: number;
+  enableFilterList: boolean;
   logs: {
     lifecycle: boolean;
     rulesteps: boolean;
@@ -66,6 +68,7 @@ export type LifecycleState = 'loading' |
 'waitingForInitResponse' |
 'started' |
 'nothingDetected' |
+'cosmeticFiltersDetected' |
 'cmpDetected' |
 'openPopupDetected' |
 'runningOptOut' |
@@ -77,6 +80,7 @@ export type LifecycleState = 'loading' |
 'done';
 
 export type ConsentState = {
+  cosmeticFiltersOn: boolean; // true if cosmetic filter rules are currently applied.
   lifecycle: LifecycleState; // What point in the autoconsent lifecycle this script is at.
   prehideOn: boolean; // If the script is currently hiding preHide elements.
   findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.

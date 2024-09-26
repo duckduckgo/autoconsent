@@ -11,7 +11,7 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/fanboy-cookiemonster.txt\" \"rules/filterlist-overrides.txt\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -19,7 +19,7 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "playwright test tests/dom-actions.spec.ts",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
-    "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
+    "fetch-fanboy-list": "wget https://secure.fanboy.co.nz/fanboy-cookiemonster_ubo.txt -O rules/fanboy-cookiemonster.txt",
     "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
     "build-rules": "node rules/build.mjs",
     "version": "node update_version.js && git add addon/manifest.*.json",
@@ -62,6 +62,8 @@
     "onlyPublishWithReleaseLabel": true
   },
   "dependencies": {
+    "@cliqz/adblocker": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker?hiding-styles-hack",
+    "@cliqz/adblocker-content": "https://gitpkg.vercel.app/muodov/adblocker/packages/adblocker-content?hiding-styles-hack",
     "tldts-experimental": "^6.1.37"
   }
 }

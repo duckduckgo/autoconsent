@@ -8,6 +8,8 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
+import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
+import { FiltersEngine } from '@cliqz/adblocker';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -25,6 +27,7 @@ export default class AutoConsent {
   config: Config;
   foundCmp: AutoCMP = null;
   state: ConsentState = {
+    cosmeticFiltersOn: false,
     lifecycle: 'loading',
     prehideOn: false,
     findCmpAttempts: 0,
@@ -33,9 +36,12 @@ export default class AutoConsent {
     selfTest: null,
   };
   domActions: DomActions;
+  filtersEngine: FiltersEngine;
   protected sendContentMessage: MessageSender;
+  protected cosmeticStyleSheet: CSSStyleSheet;
 
   constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
+    performance.mark('autoconsent-constructor');
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
     this.rules = [];
@@ -60,6 +66,7 @@ export default class AutoConsent {
   }
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    performance.mark('autoconsent-initialize');
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
@@ -70,6 +77,30 @@ export default class AutoConsent {
 
     if (declarativeRules) {
       this.parseDeclarativeRules(declarativeRules);
+    }
+
+    if (config.enableFilterList) {
+      // TODO: use requestIdleCallback
+      performance.mark('autoconsent-parse-start');
+      try {
+        this.filtersEngine = deserializeFilterList();
+      } catch (e) {
+        console.error('Error parsing filter list', e);
+      }
+      performance.mark('autoconsent-parse-end');
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => {
+          performance.mark('autoconsent-apply-filterlist-start');
+          this.applyCosmeticFilters().then(() => {
+            performance.mark('autoconsent-apply-filterlist-end');
+          });
+        });
+      } else {
+        performance.mark('autoconsent-apply-filterlist-start');
+        this.applyCosmeticFilters().then(() => {
+          performance.mark('autoconsent-apply-filterlist-end');
+        });
+      }
     }
 
     this.rules = filterCMPs(this.rules, normalizedConfig);
@@ -107,12 +138,17 @@ export default class AutoConsent {
   }
 
   parseDeclarativeRules(declarativeRules: RuleBundle) {
-    Object.keys(declarativeRules.consentomatic).forEach((name) => {
-      this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
-    });
-    declarativeRules.autoconsent.forEach((ruleset) => {
-      this.addDeclarativeCMP(ruleset);
-    });
+    if (declarativeRules.consentomatic) {
+      Object.keys(declarativeRules.consentomatic).forEach((name) => {
+        this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
+      });
+    }
+
+    if (declarativeRules.autoconsent) {
+      declarativeRules.autoconsent.forEach((ruleset) => {
+        this.addDeclarativeCMP(ruleset);
+      });
+    }
   }
 
   addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
@@ -133,6 +169,7 @@ export default class AutoConsent {
   }
 
   async _start() {
+    performance.mark('autoconsent-start');
     const logsConfig = this.config.logs;
     logsConfig.lifecycle && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
@@ -143,9 +180,10 @@ export default class AutoConsent {
       if (this.config.enablePrehide) {
         this.undoPrehide();
       }
-      this.updateState({ lifecycle: 'nothingDetected' });
-      return false;
+
+      return this.filterListFallback();
     }
+
     this.updateState({ lifecycle: 'cmpDetected' });
 
     // we resort to cosmetic rules only if no non-cosmetic rules are found
@@ -274,6 +312,10 @@ export default class AutoConsent {
     this.updateState({ lifecycle: 'openPopupDetected' });
     if (this.config.enablePrehide && !this.state.prehideOn) { // prehide might have timeouted by this time, apply it again
       this.prehideElements();
+    }
+    if (this.state.cosmeticFiltersOn) {
+      // cancel cosmetic filters if we have a rule for this popup
+      this.undoCosmetics();
     }
 
     this.foundCmp = cmp;
@@ -434,6 +476,90 @@ export default class AutoConsent {
   undoPrehide(): boolean {
     this.updateState({ prehideOn: false })
     return this.domActions.undoPrehide();
+  }
+
+  /**
+   * Apply cosmetic filters
+   * @returns true if the filters were applied, false otherwise
+   */
+  async applyCosmeticFilters(styles?: string) {
+    if (!this.filtersEngine) {
+      return false;
+    }
+    const logsConfig = this.config?.logs;
+    if (!styles) {
+      // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
+      styles = getCosmeticStylesheet(this.filtersEngine);
+    }
+    this.updateState({ cosmeticFiltersOn: true });
+    try {
+      this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
+      logsConfig?.lifecycle && console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
+      document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
+    } catch (e) {
+      this.config.logs && console.error('Error applying cosmetic filters', e);
+      return false;
+    }
+    return true;
+  }
+
+  undoCosmetics() {
+    this.updateState({ cosmeticFiltersOn: false });
+    this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+  }
+
+  filterListFallback() {
+    if (!this.filtersEngine) {
+      this.updateState({ lifecycle: 'nothingDetected' });
+      return false;
+    }
+
+    // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
+    const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
+
+    // TODO: this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+    const cosmeticFiltersWorked = this.domActions.elementVisible(
+      getFilterlistSelectors(cosmeticStyles),
+      'any'
+    );
+
+    const logsConfig = this.config?.logs;
+
+    if (!cosmeticFiltersWorked) {
+      logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
+      this.undoCosmetics();
+      this.updateState({ lifecycle: 'nothingDetected' });
+      return false;
+    } else {
+      this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
+      logsConfig?.lifecycle && console.log("Keeping cosmetic filters", location.href);
+      this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
+      this.sendContentMessage({
+        type: 'cmpDetected',
+        url: location.href,
+        cmp: 'filterList',
+      });
+      this.sendContentMessage({
+        type: 'popupFound',
+        cmp: 'filterList',
+        url: location.href,
+      });
+      this.sendContentMessage({
+        type: 'optOutResult',
+        cmp: 'filterList',
+        result: true,
+        scheduleSelfTest: false,
+        url: location.href,
+      });
+      this.updateState({ lifecycle: 'done' });
+      this.sendContentMessage({
+        type: 'autoconsentDone',
+        cmp: 'filterList',
+        isCosmetic: true,
+        url: location.href,
+      });
+      return true;
+    }
   }
 
   updateState(change: Partial<ConsentState>) {

@@ -3,14 +3,14 @@ set -ex
 
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
-$ESBUILD --format=iife --target=es2021 --minify playwright/content.ts --outfile=dist/autoconsent.playwright.js
+$ESBUILD --format=iife --target=es2021 playwright/content.ts --outfile=dist/autoconsent.playwright.js
 $ESBUILD --format=iife --target=es2021 playwright/unit.ts --outfile=dist/autoconsent.unit.js
 $ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 
 # Extension
 $ESBUILD addon/background.ts --outfile=dist/addon-mv3/background.bundle.js
-$ESBUILD addon/content.ts --outfile=dist/addon-mv3/content.bundle.js
+$ESBUILD addon/content.ts --minify --outfile=dist/addon-mv3/content.bundle.js
 $ESBUILD addon/popup.ts --outfile=dist/addon-mv3/popup.bundle.js
 $ESBUILD addon/devtools/panel.ts --outfile=dist/addon-mv3/devtools/panel.js
 
