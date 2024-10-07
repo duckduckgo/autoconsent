@@ -490,7 +490,6 @@ export default class AutoConsent {
     }
     const logsConfig = this.config?.logs;
     if (!styles) {
-      // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
       styles = getCosmeticStylesheet(this.filtersEngine);
     }
     this.updateState({ cosmeticFiltersOn: true });
@@ -518,10 +517,9 @@ export default class AutoConsent {
       return false;
     }
 
-    // TODO: pass the hiding snippet to adblocker https://github.com/ghostery/adblocker/issues/4178
     const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
 
-    // TODO: this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+    // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
     const cosmeticFiltersWorked = this.domActions.elementVisible(
       getFilterlistSelectors(cosmeticStyles),
       'any'
