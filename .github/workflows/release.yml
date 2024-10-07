@@ -20,10 +20,19 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update filterlist
+        run: |
+          npm run update-filterlist
+          git add rules/fanboy-cookiemonster.txt lib/filterlist-engine.ts
+          git commit -m "update filterlist [skip ci]"
+          git push
+
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm ci
           npm run release
