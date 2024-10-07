@@ -1,0 +1,5 @@
+! DDG overrides
+@@||duckduckgo.com^$document
+@@||duckduckgo.com^$elemhide
+! domain-level exceptions above are not working with the adblocker library
+duckduckgo.com#@#li[data-layout="ad"]
