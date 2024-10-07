@@ -105,7 +105,6 @@ export class DomActions implements DomActionsProvider {
   }
 
   removeStyleSheet(styleSheet?: CSSStyleSheet): boolean {
-    this.autoconsentInstance.config.logs.lifecycle && console.log("[undocosmetics]", styleSheet, location.href);
     if (styleSheet) {
       styleSheet.replace('');
       return true;

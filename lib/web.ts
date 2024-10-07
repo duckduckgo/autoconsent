@@ -508,6 +508,7 @@ export default class AutoConsent {
 
   undoCosmetics() {
     this.updateState({ cosmeticFiltersOn: false });
+    this.config.logs.lifecycle && console.log("[undocosmetics]", this.cosmeticStyleSheet, location.href);
     this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
   }
 
