@@ -8,8 +8,9 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
-import { getCosmeticStylesheet, getFilterlistSelectors, parseFilterList } from './filterlist-utils';
+import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@cliqz/adblocker';
+import { serializedEngine } from './filterlist-engine';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {
@@ -79,6 +80,30 @@ export default class AutoConsent {
       this.parseDeclarativeRules(declarativeRules);
     }
 
+    if (config.enableFilterList) {
+      // TODO: use requestIdleCallback
+      performance.mark('autoconsent-parse-start');
+      try {
+        this.filtersEngine = deserializeFilterList(serializedEngine);
+      } catch (e) {
+        console.error('Error parsing filter list', e);
+      }
+      performance.mark('autoconsent-parse-end');
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => {
+          performance.mark('autoconsent-apply-filterlist-start');
+          this.applyCosmeticFilters().then(() => {
+            performance.mark('autoconsent-apply-filterlist-end');
+          });
+        });
+      } else {
+        performance.mark('autoconsent-apply-filterlist-start');
+        this.applyCosmeticFilters().then(() => {
+          performance.mark('autoconsent-apply-filterlist-end');
+        });
+      }
+    }
+
     this.rules = filterCMPs(this.rules, normalizedConfig);
 
     if (config.enablePrehide) {
@@ -124,19 +149,6 @@ export default class AutoConsent {
       declarativeRules.autoconsent.forEach((ruleset) => {
         this.addDeclarativeCMP(ruleset);
       });
-    }
-
-    if (this.config.enableFilterList && declarativeRules.filterList) {
-      // TODO: use requestIdleCallback
-      this.filtersEngine = parseFilterList(declarativeRules.filterList);
-      if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', () => {
-          this.applyCosmeticFilters();
-        });
-      } else {
-        performance.mark('autoconsent-apply-filterlist-start');
-        this.applyCosmeticFilters();
-      }
     }
   }
 

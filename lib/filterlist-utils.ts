@@ -7,18 +7,6 @@ export function deserializeFilterList(serializedEngine: Uint8Array) {
   return FiltersEngine.deserialize(serializedEngine)
 }
 
-export function parseFilterList(rawFilterlist: string) {
-  performance.mark('autoconsent-parse-start');
-  const engine = FiltersEngine.parse(rawFilterlist, {
-    enableMutationObserver: false, // we don't monitor DOM changes at the moment
-    loadNetworkFilters: false,
-    enableHtmlFiltering: false,
-    loadCSPFilters: false,
-  });
-  performance.mark('autoconsent-parse-end');
-  return engine;
-}
-
 export function getCosmeticStylesheet(engine: FiltersEngine): string {
   try {
     const parsed = tldtsParse(location.href);

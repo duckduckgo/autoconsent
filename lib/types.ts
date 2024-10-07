@@ -39,7 +39,6 @@ export interface DomActionsProvider {
 export type RuleBundle = {
   autoconsent?: AutoConsentCMPRule[];
   consentomatic?: { [name: string]: ConsentOMaticConfig };
-  filterList?: string;
 };
 
 export type AutoAction = 'optOut' | 'optIn' | null;
