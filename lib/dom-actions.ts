@@ -1,9 +1,10 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from "./rules";
-import {Config, DomActionsProvider} from "./types";
+import {DomActionsProvider} from "./types";
 import { getStyleElement, hideElements, isElementVisible, waitFor } from "./utils";
+import AutoConsent from "./web";
 
 export class DomActions implements DomActionsProvider {
-  constructor(public autoconsentInstance: {config: Pick<Config, 'logs'>}) { }
+  constructor(public autoconsentInstance: AutoConsent) { }
 
   click(selector: ElementSelector, all = false): boolean {
     const elem = this.elementSelector(selector)
