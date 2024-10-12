@@ -6,44 +6,23 @@ function instantiateDomActions() {
   return new DomActions({config: {logs: {rulesteps: false, lifecycle: false, evals: false, errors: false, messages: false}}})
 }
 
-function getEventCounterFromDataset(eventType: string, querySelector: string, doc: Document | ShadowRoot = document) {
-  return parseInt(doc.querySelector<HTMLElement>(querySelector).dataset[`event:${eventType}`] ?? '0', 10)
-}
-
-function getClicksCount(querySelector: string, doc: Document | ShadowRoot = document) {
-  return getEventCounterFromDataset('click', querySelector, doc)
-}
-
-function addListenerThatIncrementsInDataset(el: HTMLElement, eventType: string) {
-  const listener = () => {
-    const current = parseInt(el.dataset[`event:${eventType}`] ?? '0', 10)
-
-    el.dataset[`event:${eventType}`] = (current + 1).toString()
-  }
-  el.addEventListener(eventType, listener)
-
-  return listener
-}
-
 // must be run from dom-actions.test.html
 describe('click', () => {
-  const elementsWithListeners: {element: HTMLElement, eventType: string, listener: () => void}[] = []
+  let clickCounter1: number
+  let clickCounter2: number
 
-  beforeEach(() => {
-    document.querySelectorAll('button').forEach((el) => {
-      const eventType = 'click'
-
-      const listener = addListenerThatIncrementsInDataset(el, eventType)
-      elementsWithListeners.push({element: el, eventType, listener})
+  before(() => {
+    document.querySelector('#first > button').addEventListener('click', () => {
+      clickCounter1++
+    })
+    document.querySelector('#second > button').addEventListener('click', () => {
+      clickCounter2++
     })
   })
 
-  afterEach(() => {
-    for (const {element, eventType, listener} of elementsWithListeners) {
-      element.removeEventListener(eventType, listener)
-
-      delete element.dataset[`event:${eventType}`]
-    }
+  beforeEach(() => {
+    clickCounter1 = 0
+    clickCounter2 = 0
   })
 
   it('clicks on a button', () => {
@@ -55,7 +34,7 @@ describe('click', () => {
 
     // Then
     expect(clickedSuccessfully).true
-    expect(getClicksCount('#first > button')).to.equal(1)
+    expect(clickCounter1).to.equal(1)
   });
 
   it('clicks all upon multiple matches when all=true', () => {
@@ -67,8 +46,8 @@ describe('click', () => {
 
     // Then
     expect(clickedSuccessfully).true
-    expect(getClicksCount('#first > button')).to.equal(1)
-    expect(getClicksCount('#second > button')).to.equal(1)
+    expect(clickCounter1).to.equal(1)
+    expect(clickCounter2).to.equal(1)
   })
 
   it('clicks only first one upon multiple matches when all=false', () => {
@@ -80,8 +59,8 @@ describe('click', () => {
 
     // Then
     expect(clickedSuccessfully).true
-    expect(getClicksCount('#first > button')).to.equal(1)
-    expect(getClicksCount('#second > button')).to.equal(0)
+    expect(clickCounter1).to.equal(1)
+    expect(clickCounter2).to.equal(0)
   })
 
   it('clicks by chained selector', () => {
@@ -93,8 +72,8 @@ describe('click', () => {
 
     // Then
     expect(clickedSuccessfully).true;
-    expect(getClicksCount('#first > button')).to.equal(0)
-    expect(getClicksCount('#second > button')).to.equal(1)
+    expect(clickCounter1).to.equal(0)
+    expect(clickCounter2).to.equal(1)
   })
 
   it('clicks by xpath selector', () => {
@@ -106,33 +85,34 @@ describe('click', () => {
 
     // Then
     expect(clickedSuccessfully).true;
-    expect(getClicksCount('#first > button')).to.equal(0)
-    expect(getClicksCount('#second > button')).to.equal(1)
+    expect(clickCounter1).to.equal(0)
+    expect(clickCounter2).to.equal(1)
   })
 
   it('clicks an open shadow dom element', () => {
     // Given
     const domActions = instantiateDomActions();
 
-    const shadowRoot = (() => {
-      const shadowDiv = document.createElement('div')
-      shadowDiv.id = 'shadow'
-      document.body.appendChild(shadowDiv)
-      const shadow = shadowDiv.attachShadow({ mode: 'open' })
-      const shadowButton = document.createElement('button')
-      shadowButton.innerText = '0'
-      shadow.appendChild(shadowButton)
-      addListenerThatIncrementsInDataset(shadowButton, 'click')
-      return shadow
-    })()
+    let clickCounterShadowRoot = 0
+
+    const shadowDiv = document.createElement('div')
+    shadowDiv.id = 'shadow'
+    document.body.appendChild(shadowDiv)
+    const shadow = shadowDiv.attachShadow({ mode: 'open' })
+    const shadowButton = document.createElement('button')
+    shadowButton.innerText = '0'
+    shadow.appendChild(shadowButton)
+    shadowButton.addEventListener('click', () => {
+      clickCounterShadowRoot++
+    })
 
     // When
     const clickedSuccessfully = domActions.click(['#shadow', 'button'])
 
     // Then
     expect(clickedSuccessfully).true
-    expect(getClicksCount('#first > button')).to.equal(0)
-    expect(getClicksCount('#second > button')).to.equal(0)
-    expect(getClicksCount('button', shadowRoot)).to.equal(1)
+    expect(clickCounter1).to.equal(0)
+    expect(clickCounter2).to.equal(0)
+    expect(clickCounterShadowRoot).to.equal(1)
   })
 });
