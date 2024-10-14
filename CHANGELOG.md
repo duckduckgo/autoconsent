@@ -1,3 +1,30 @@
+# v10.15.0 (Mon Aug 19 2024)
+
+#### 🚀 Enhancement
+
+- Tweak ensighten rule for britishairways.com [#488](https://github.com/duckduckgo/autoconsent/pull/488) ([@muodov](https://github.com/muodov))
+- Add a rule for admiral GDPR popups [#487](https://github.com/duckduckgo/autoconsent/pull/487) ([@muodov](https://github.com/muodov))
+- Add rule for tesla [#486](https://github.com/duckduckgo/autoconsent/pull/486) ([@muodov](https://github.com/muodov))
+- Add rule for american airlines [#485](https://github.com/duckduckgo/autoconsent/pull/485) ([@muodov](https://github.com/muodov))
+- Aliexpress & temu [#484](https://github.com/duckduckgo/autoconsent/pull/484) ([@muodov](https://github.com/muodov))
+- Add a rule for abc.net.au [#482](https://github.com/duckduckgo/autoconsent/pull/482) ([@muodov](https://github.com/muodov))
+- add rule for medium.com [#481](https://github.com/duckduckgo/autoconsent/pull/481) ([@muodov](https://github.com/muodov))
+- Rule for Dan.com [#480](https://github.com/duckduckgo/autoconsent/pull/480) ([@muodov](https://github.com/muodov))
+- Add a rule for nike [#479](https://github.com/duckduckgo/autoconsent/pull/479) ([@muodov](https://github.com/muodov))
+- Add a rule for wise.com [#478](https://github.com/duckduckgo/autoconsent/pull/478) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Monthly Coverage data update [#477](https://github.com/duckduckgo/autoconsent/pull/477) (dax@duckduckgo.com [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax the Deployer (dax@duckduckgo.com)
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v10.14.0 (Wed Aug 07 2024)
 
 #### 🚀 Enhancement

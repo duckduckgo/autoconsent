@@ -25,7 +25,7 @@ const asanaUpdateTasks = async () => {
   try {
     asanaOutput = JSON.parse(asanaOutputRaw || '')
   } catch (e) {
-    throw new Error('Unable to parse Asana output JSON')
+    throw new Error(`Unable to parse Asana output JSON: ${asanaOutputRaw}`)
   }
 
   setupAsana()
