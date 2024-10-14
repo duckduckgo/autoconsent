@@ -1,5 +1,5 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from "./rules";
-import { DomActionsProvider } from "./types";
+import {DomActionsProvider} from "./types";
 import { getStyleElement, hideElements, isElementVisible, waitFor } from "./utils";
 import AutoConsent from "./web";
 
