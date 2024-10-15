@@ -44,7 +44,7 @@ const contentScript = fs.readFileSync(
 export async function injectContentScript(page: Page | Frame) {
   try {
     await page.evaluate(contentScript);
-  } catch (e) {
+  } catch {
     // frame was detached
     // console.trace(e);
   }
