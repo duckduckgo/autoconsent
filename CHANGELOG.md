@@ -1,3 +1,22 @@
+# v10.16.0 (Tue Oct 15 2024)
+
+#### 🚀 Enhancement
+
+- Update dependencies [#494](https://github.com/duckduckgo/autoconsent/pull/494) ([@muodov](https://github.com/muodov))
+- Add rule for openai [#489](https://github.com/duckduckgo/autoconsent/pull/489) ([@muodov](https://github.com/muodov))
+
+#### 🧪 Tests
+
+- #333 Convert DomActions playwright-based unit test to WebTestRunner HTML test [#491](https://github.com/duckduckgo/autoconsent/pull/491) (frei.ondrej@pm.me [@freiondrej](https://github.com/freiondrej))
+
+#### Authors: 3
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Ondřej Frei ([@freiondrej](https://github.com/freiondrej))
+- ondrej.frei (frei.ondrej@pm.me)
+
+---
+
 # v10.15.0 (Mon Aug 19 2024)
 
 #### 🚀 Enhancement
