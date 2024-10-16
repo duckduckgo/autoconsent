@@ -84,7 +84,9 @@ export default class AutoConsent {
       // TODO: use requestIdleCallback
       performance.mark('autoconsent-parse-start');
       try {
-        this.filtersEngine = deserializeFilterList(serializedEngine);
+        if (serializedEngine && serializedEngine.length > 0) {
+          this.filtersEngine = deserializeFilterList(serializedEngine);
+        }
       } catch (e) {
         console.error('Error parsing filter list', e);
       }

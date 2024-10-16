@@ -26,7 +26,7 @@ jobs:
       - name: Update filterlist
         run: |
           npm run update-filterlist
-          git add rules/fanboy-cookiemonster.txt lib/filterlist-engine.ts
+          git add lib/filterlist-engine.ts
           git commit -m "update filterlist [skip ci]"
           git push
 

@@ -7,7 +7,7 @@ import { FiltersEngine } from "@cliqz/adblocker";
 
 export const rulesDir = path.dirname(fileURLToPath(import.meta.url))
 
-let filterlistContent = fs.readFileSync(path.join(rulesDir, 'fanboy-cookiemonster.txt'), 'utf-8');
+let filterlistContent = fs.readFileSync(path.join(rulesDir, 'filterlist.txt'), 'utf-8');
 filterlistContent += fs.readFileSync(path.join(rulesDir, 'filterlist-overrides.txt'), 'utf-8');
 
 const engine = FiltersEngine.parse(filterlistContent, {
