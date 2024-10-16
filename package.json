@@ -11,7 +11,8 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ tests-wtr/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/filterlist.txt\" \"rules/filterlist-overrides.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run prepublish\"",
+    "build-all": "npm run rebuild-filterlist && npm run build-rules && npm run bundle",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/filterlist.txt\" \"rules/filterlist-overrides.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run build-all\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -25,7 +26,7 @@
     "build-rules": "node rules/build.mjs",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run rebuild-filterlist && npm run build-rules && npm run bundle",
+    "prepublish": "npm run update-filterlist && npm run build-all",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts"

@@ -23,6 +23,6 @@ fs.writeFile(
   path.join(rulesDir, "../lib/filterlist-engine.ts"),
   `export const serializedEngine = new Uint8Array(
   ${engineJson}
-  );`,
+);`,
   () => console.log("Written filterlist-engine.ts")
 );
