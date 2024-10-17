@@ -42,7 +42,6 @@ export default class AutoConsent {
   protected cosmeticStyleSheet: CSSStyleSheet;
 
   constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
-    performance.mark('autoconsent-constructor');
     evalState.sendContentMessage = sendContentMessage;
     this.sendContentMessage = sendContentMessage;
     this.rules = [];
@@ -67,7 +66,6 @@ export default class AutoConsent {
   }
 
   initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
-    performance.mark('autoconsent-initialize');
     const normalizedConfig = normalizeConfig(config);
     normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
     this.config = normalizedConfig;
@@ -81,8 +79,6 @@ export default class AutoConsent {
     }
 
     if (config.enableFilterList) {
-      // TODO: use requestIdleCallback
-      performance.mark('autoconsent-parse-start');
       try {
         if (serializedEngine && serializedEngine.length > 0) {
           this.filtersEngine = deserializeFilterList(serializedEngine);
@@ -90,19 +86,12 @@ export default class AutoConsent {
       } catch (e) {
         console.error('Error parsing filter list', e);
       }
-      performance.mark('autoconsent-parse-end');
       if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => {
-          performance.mark('autoconsent-apply-filterlist-start');
-          this.applyCosmeticFilters().then(() => {
-            performance.mark('autoconsent-apply-filterlist-end');
-          });
+          this.applyCosmeticFilters();
         });
       } else {
-        performance.mark('autoconsent-apply-filterlist-start');
-        this.applyCosmeticFilters().then(() => {
-          performance.mark('autoconsent-apply-filterlist-end');
-        });
+        this.applyCosmeticFilters();
       }
     }
 
@@ -172,7 +161,6 @@ export default class AutoConsent {
   }
 
   async _start() {
-    performance.mark('autoconsent-start');
     const logsConfig = this.config.logs;
     logsConfig.lifecycle && console.log(`Detecting CMPs on ${window.location.href}`);
     this.updateState({ lifecycle: 'started' });
@@ -486,7 +474,6 @@ export default class AutoConsent {
    * @returns true if the filters were applied, false otherwise
    */
   async applyCosmeticFilters(styles?: string) {
-    performance.mark('autoconsent-apply-filterlist-start');
     if (!this.filtersEngine) {
       return false;
     }
@@ -499,10 +486,8 @@ export default class AutoConsent {
       this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
       logsConfig?.lifecycle && console.log("[cosmetics]", this.cosmeticStyleSheet, location.href);
       document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
-      performance.mark('autoconsent-apply-filterlist-end');
     } catch (e) {
       this.config.logs && console.error('Error applying cosmetic filters', e);
-      performance.mark('autoconsent-apply-filterlist-end');
       return false;
     }
     return true;
