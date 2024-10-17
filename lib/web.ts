@@ -10,7 +10,7 @@ import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@cliqz/adblocker';
-import { serializedEngine } from './filterlist-engine';
+import serializedEngine from './filterlist-engine';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
   return rules.filter((cmp) => {

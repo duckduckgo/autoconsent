@@ -21,8 +21,15 @@ const engineJson = JSON.stringify(Array.from(serializedEngine));
 
 fs.writeFile(
   path.join(rulesDir, "../lib/filterlist-engine.ts"),
-  `export const serializedEngine = new Uint8Array(
+  `
+declare global {
+  const BUNDLE_FILTERLIST: boolean;
+}
+const serializedEngine = /* @__PURE__ */ new Uint8Array(
   ${engineJson}
-);`,
+);
+const emptyEngine = /* @__PURE__ */ new Uint8Array([]);
+export default BUNDLE_FILTERLIST ? serializedEngine : emptyEngine;
+`,
   () => console.log("Written filterlist-engine.ts")
 );

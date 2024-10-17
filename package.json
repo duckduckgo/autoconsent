@@ -2,8 +2,16 @@
   "name": "@duckduckgo/autoconsent",
   "version": "10.16.0",
   "description": "",
-  "main": "dist/autoconsent.cjs.js",
-  "module": "dist/autoconsent.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/autoconsent.esm.js",
+      "require": "./dist/autoconsent.cjs.js"
+    },
+    "./extra": {
+      "import": "./dist/autoconsent.extra.esm.js",
+      "require": "./dist/autoconsent.extra.cjs.js"
+    }
+  },
   "directories": {
     "lib": "lib"
   },
