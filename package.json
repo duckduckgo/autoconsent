@@ -10,7 +10,8 @@
     "./extra": {
       "import": "./dist/autoconsent.extra.esm.js",
       "require": "./dist/autoconsent.extra.cjs.js"
-    }
+    },
+    "./rules/rules.json": "./rules/rules.json"
   },
   "directories": {
     "lib": "lib"
