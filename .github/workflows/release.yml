@@ -26,9 +26,6 @@ jobs:
       - name: Update filterlist
         run: |
           npm run update-filterlist
-          git add -f lib/filterlist-engine.ts
-          git commit -m "update filterlist [skip ci]"
-          git push
 
       - name: Create Release
         env:
