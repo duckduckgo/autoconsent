@@ -2,8 +2,17 @@
   "name": "@duckduckgo/autoconsent",
   "version": "10.16.0",
   "description": "",
-  "main": "dist/autoconsent.cjs.js",
-  "module": "dist/autoconsent.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/autoconsent.esm.js",
+      "require": "./dist/autoconsent.cjs.js"
+    },
+    "./extra": {
+      "import": "./dist/autoconsent.extra.esm.js",
+      "require": "./dist/autoconsent.extra.cjs.js"
+    },
+    "./rules/rules.json": "./rules/rules.json"
+  },
   "directories": {
     "lib": "lib"
   },
@@ -11,7 +20,8 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ tests-wtr/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
+    "build-all": "npm run rebuild-filterlist && npm run build-rules && npm run bundle",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/filterlist.txt\" \"rules/filterlist-overrides.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run build-all\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -19,12 +29,13 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
-    "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
-    "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
+    "fetch-fanboy-list": "wget https://secure.fanboy.co.nz/fanboy-cookiemonster_ubo.txt -O rules/filterlist.txt",
+    "rebuild-filterlist": "node rules/rebuild-filterlist.mjs",
+    "update-filterlist": "npm run fetch-fanboy-list && npm run rebuild-filterlist",
     "build-rules": "node rules/build.mjs",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run bundle",
+    "prepublish": "npm run fetch-fanboy-list && npm run build-all",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts"
@@ -65,6 +76,8 @@
     "onlyPublishWithReleaseLabel": true
   },
   "dependencies": {
-    "tldts-experimental": "^6.1.37"
+    "@cliqz/adblocker": "^1.33.1",
+    "@cliqz/adblocker-content": "^1.33.1",
+    "tldts-experimental": "^6.1.41"
   }
 }

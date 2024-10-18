@@ -11,7 +11,7 @@ The web extension can be built with the following steps:
 
 ```bash
 # Download dependencies
-npm ci
+npm install
 # Build the extension
 npm run prepublish
 ```
@@ -21,6 +21,15 @@ addon (found under `dist/addon` after building), one for `mv3` version for Chrom
 You can load these in [Chrome](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked)
 in developer mode, and in [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
 as a temporary addon.
+
+### Watch mode
+For development, you can run in watch mode
+
+```bash
+npm run watch
+```
+
+This will rebuild the extension on every source file change. You still need to refresh the extension in the browser to see the changes.
 
 ## Rules
 
