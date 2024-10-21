@@ -2,26 +2,58 @@
   "name": "bigcommerce",
   "prehideSelectors": [
     "#cookies-banner-overlay",
-    "#consent-manager"
+    "#consent-manager",
+    "div[data-consent-manager-dialog]"
   ],
   "detectCmp": [
     {
-      "exists": "#consent-manager"
+      "exists": "#consent-manager,div[data-consent-manager-dialog]"
     }
   ],
   "detectPopup": [
     {
-      "visible": "#consent-manager"
+      "visible": "#consent-manager,div[data-consent-manager-dialog]",
+      "check": "any"
     }
   ],
   "optIn": [
     {
-      "click": "#consent-manager div > button[class]:last-child"
+      "if": { "exists": "div[data-consent-manager-dialog]" },
+      "then": [
+        {
+          "click": "div[data-consent-manager-dialog] form button[type='submit']"
+        }
+      ],
+      "else": []
+    },
+    {
+      "if": { "exists": "#consent-manager" },
+      "then": [
+        {
+          "click": "#consent-manager div > button[class]:last-child"
+        }
+      ],
+      "else": []
     }
   ],
   "optOut": [
     {
-      "click": "#consent-manager div > button[class]:first-child"
+      "if": { "exists": "div[data-consent-manager-dialog]" },
+      "then": [
+        {
+          "click": "div[data-consent-manager-dialog] form button:not([type='submit'])"
+        }
+      ],
+      "else": []
+    },
+    {
+      "if": { "exists": "#consent-manager" },
+      "then": [
+        {
+          "click": "#consent-manager div > button[class]:nth-child(2)"
+        }
+      ],
+      "else": []
     }
   ]
 }
