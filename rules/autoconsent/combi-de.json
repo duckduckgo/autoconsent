@@ -19,12 +19,12 @@
   ],
   "optIn": [
     {
-      "waitForThenClick": "#accept-consent-necessary"
+      "waitForThenClick": "#accept-consent-all"
     }
   ],
   "optOut": [
     {
-      "waitForThenClick": "#accept-consent-all"
+      "waitForThenClick": "#accept-consent-necessary"
     }
   ]
 }
