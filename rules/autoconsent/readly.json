@@ -4,30 +4,33 @@
     "urlPattern": "^https://([a-z0-9-]+\\.)?readly\\.com/"
   },
   "prehideSelectors": [
-    ".DialogHandlerContainer:has(.cookie-dialog)",
-    ".cookie-dialog"
+    "[class^='CookieConsentDialogContainer']"
   ],
   "detectCmp": [
     {
-      "exists": ".cookie-dialog"
+      "exists": "[class^='CookieConsentDialogContainer']"
     }
   ],
   "detectPopup": [
     {
-      "visible": ".cookie-dialog"
+      "visible": "[class^='CookieConsentDialogContainer']"
     }
   ],
   "optIn": [
     {
-      "waitForThenClick": ".cookie-dialog .content button[type='button']"
+      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [data-testid='cookies-dialog-accept-all'] > button"
     }
   ],
   "optOut": [
     {
-      "waitForThenClick": ".cookie-dialog .content .cookie-option-large span"
+      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [class^='CookieConsentButtonContainer'] ~ div > a[style*='rgb(255, 187, 34)']"
     },
     {
-      "waitForThenClick": ".cookie-dialog .content button[type='submit']"
+      "waitForThenClick": "[class^='CookieSettingCheckboxContainer'] input[type='checkbox']:checked:not(:disabled)",
+      "all": true
+    },
+    {
+      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [class^='CookieConsentButtonContainer'] button"
     }
   ]
 }
