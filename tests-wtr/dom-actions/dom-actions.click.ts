@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { utils } from "./utils";
+import {instantiateDomActions} from "./utils";
 
 // must be run from dom-actions.click.html
 describe('click', () => {
@@ -22,7 +22,7 @@ describe('click', () => {
 
   it('clicks on a button', () => {
     // Given
-    const domActions = utils.instantiateDomActions();
+    const domActions = instantiateDomActions();
 
     // When
     const clickedSuccessfully = domActions.click('#test');
@@ -34,7 +34,7 @@ describe('click', () => {
 
   it('clicks all upon multiple matches when all=true', () => {
     // Given
-    const domActions = utils.instantiateDomActions();
+    const domActions = instantiateDomActions();
 
     // When
     const clickedSuccessfully = domActions.click('button', true);
@@ -47,7 +47,7 @@ describe('click', () => {
 
   it('clicks only first one upon multiple matches when all=false', () => {
     // Given
-    const domActions = utils.instantiateDomActions();
+    const domActions = instantiateDomActions();
 
     // When
     const clickedSuccessfully = domActions.click('button');
@@ -60,7 +60,7 @@ describe('click', () => {
 
   it('clicks by chained selector', () => {
     // Given
-    const domActions = utils.instantiateDomActions();
+    const domActions = instantiateDomActions();
 
     // When
     const clickedSuccessfully = domActions.click(['#second', 'button'])
@@ -73,7 +73,7 @@ describe('click', () => {
 
   it('clicks by xpath selector', () => {
     // Given
-    const domActions = utils.instantiateDomActions();
+    const domActions = instantiateDomActions();
 
     // When
     const clickedSuccessfully = domActions.click(['xpath///*[@id="second"]/button'])
@@ -86,7 +86,7 @@ describe('click', () => {
 
   it('clicks an open shadow dom element', () => {
     // Given
-    const domActions = utils.instantiateDomActions();
+    const domActions = instantiateDomActions();
 
     let clickCounterShadowRoot = 0
 

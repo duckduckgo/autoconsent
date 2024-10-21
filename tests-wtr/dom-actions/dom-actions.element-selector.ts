@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { utils } from "./utils";
+import { instantiateDomActions } from "./utils";
 
 // must be run from dom-actions.element-selector.html
 describe('elementSelector', () => {
@@ -9,7 +9,7 @@ describe('elementSelector', () => {
     specialCasesThatShouldReturnEmptyArray.forEach((selector) => {
       it(`should return empty array if selector starts with "${selector}"`, () => {
         // Given
-        const domActions = utils.instantiateDomActions();
+        const domActions = instantiateDomActions();
 
         // When
         const elements = domActions.querySingleReplySelector(selector + 'something');
@@ -20,7 +20,7 @@ describe('elementSelector', () => {
     })
     it('should return elements by xpath if selector starts with "xpath/"', () => {
       // Given
-      const domActions = utils.instantiateDomActions();
+      const domActions = instantiateDomActions();
 
       // When
       const elements = domActions.querySingleReplySelector('xpath///button[contains(., \'Accept all\')]');
@@ -33,7 +33,7 @@ describe('elementSelector', () => {
     })
     it('should return elements by querySelectorAll from shadow root if available', () => {
       // Given
-      const domActions = utils.instantiateDomActions();
+      const domActions = instantiateDomActions();
 
       const shadowDiv = document.createElement('div')
       document.body.appendChild(shadowDiv)
@@ -54,7 +54,7 @@ describe('elementSelector', () => {
     })
     it('should return elements by querySelectorAll', () => {
       // Given
-      const domActions = utils.instantiateDomActions();
+      const domActions = instantiateDomActions();
 
       // When
       const elements = domActions.querySingleReplySelector('button');
@@ -70,7 +70,7 @@ describe('elementSelector', () => {
   describe('querySelectorChain', () => {
     it('should return empty array if any selector does not produce a match', () => {
       // Given
-      const domActions = utils.instantiateDomActions();
+      const domActions = instantiateDomActions();
 
       // When
       const elements = domActions.querySelectorChain(['.outer', '.outer', '.inner'])
@@ -80,7 +80,7 @@ describe('elementSelector', () => {
     })
     it('should return results if all selectors produce a match in one another', () => {
       // Given
-      const domActions = utils.instantiateDomActions();
+      const domActions = instantiateDomActions();
 
       // When
       const elements = domActions.querySelectorChain(['.outer', '.inner', 'p'])
