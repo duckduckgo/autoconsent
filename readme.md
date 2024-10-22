@@ -5,9 +5,32 @@ can be run in a Chrome extension, or in a Playwright-orchestrated headless brows
 these rules, opt-in and opt-out options can be selected automatically, without requiring
 user-input.
 
+## Using the library
+Autoconsent is meant to be used in browser apps and extensions. DuckDuckGo browser apps use this library to automatically handle cookie consent popups.
+
+To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` class in a content script (running in isolated page context), and implement some configuration hooks in a background script. See [this document](/api.md) for more details on internal APIs and data flows.
+
+```javascript
+import AutoConsent from '@duckduckgo/autoconsent'; // or '@duckduckgo/autoconsent/extra' for the version with filterlists
+import * as rules from '@duckduckgo/autoconsent/rules/rules.json';
+
+const autoconsent = new AutoConsent(
+    chrome.runtime.sendMessage, // provide a callback to send messages to the background script
+    null, // optionally provide a config object here if you don't want to implement a background script
+    rules,
+);
+
+// connect the message receiver callback to handle messages from the background script
+chrome.runtime.onMessage.addListener((message) => {
+  return Promise.resolve(consent.receiveMessageCallback(message));
+});
+```
+
 ## Browser extension
 
-The web extension can be built with the following steps:
+Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all DuckDuckGo browser apps, but you can build it yourself and use for testing.
+
+To build the extension:
 
 ```bash
 # Download dependencies
@@ -54,6 +77,29 @@ There are currently three ways of implementing a CMP:
 
 Sometimes the opt-out process requires actions that span across multiple pages or iframes. In this case it is necessary to define stages (each corresponding to a separate page context) as separate rulesets. Each one, except the very last stage, must be marked as intermediate using the `intermediate: true` flag. If the `intermediate` flag is not set correctly, autoconsent may report a successful opt-out even if it is not yet finished.
 
+## Cosmetic rules
+
+Some rules do not interact with the page, and only hide the cookie pop-ups with CSS. These rules are marked with the `cosmetic: true` flag. They are useful for pop-ups that do not provide a Reject button. Cosmetic rules can be disabled with the `enableCosmeticRules` config option.
+
+### Filterlist
+Autoconsent supports cosmetic filters in common ABP/uBO format. For performance reasons, it needs to be bundled at build time for performance reasons. At the moment we include cosmetic filters from [Easylist Cookie](https://github.com/easylist/easylist/tree/master/easylist_cookie).
+Note that by default filterlist rules are not included, as this significantly increases the resulting bundle size. To use filterlist rules, you need to explicitly import the "extra" version of the library (`@duckduckgo/autoconsent/extra`), and set the `enableFilterlist` config option to `true`.
+
+```javascript
+// import the library version with bundled filterlist rules
+import AutoConsent from '@duckduckgo/autoconsent/extra'
+
+// ...
+
+new AutoConsent({
+  enableFilterlist: true,
+  // other options
+})
+
+```
+
+
+
 ## Context filters
 
 By default, rules will be executed in all top-level documents. Some rules are designed for specific contexts (e.g. only nested iframes, or only specific URLs). This can be configured in `runContext` field (see the syntax reference below).
@@ -75,6 +121,8 @@ Both JSON and class implementations have the following components:
  * `optIn` - a list of actions for an 'opt-in' from the popup screen.
  * (optional) `prehideSelectors` - a list of CSS selectors to "pre-hide" early before detecting a CMP. This helps against flickering. Pre-hiding is done using CSS `opacity` and `z-index`, so be it should be used with care to prevent conflicts with the opt-out process.
  * (optional) `intermediate` - a boolean flag indicating that the ruleset is part of a multi-stage process, see the [Intermediate rules](#intermediate-rules) section. This is `false` by default.
+ * (optional) `vendorUrl` - link to the CMP vendor site, for reference.
+ * (optional) `cosmetic` - a boolean flag indicating that the rule is purely cosmetic and does not affect the consent state. This is `false` by default.
  * (optional) `runContext` - an object describing when this rule should be tried:
    * `main` - boolean, set to `true` if the rule should be executed in top-level documents (default: `true`)
    * `frame` - boolean, set to `true` if the rule should be executed in nested frames (default: `false`)
@@ -221,10 +269,6 @@ Evaluates a list of steps in order. If any return true (success), then the step 
 ### Optional actions
 
 All rules can include the `"optional": true` to ignore failure.
-
-## API
-
-See [this document](/api.md) for more details on internal APIs.
 
 ## License
 
