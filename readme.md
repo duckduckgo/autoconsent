@@ -6,7 +6,7 @@ these rules, opt-in and opt-out options can be selected automatically, without r
 user-input.
 
 ## Using the library
-Autoconsent is meant to be used in browser apps and extensions. DuckDuckGo browser apps use this library to automatically handle cookie consent popups.
+Autoconsent is meant to be used in browser apps and extensions. [DuckDuckGo browser apps](https://duckduckgo.com/app) use this library to automatically handle cookie consent popups.
 
 To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` class in a content script (running in isolated page context), and implement some configuration hooks in a background script. See [this document](/api.md) for more details on internal APIs and data flows.
 
@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ## Browser extension
 
-Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all DuckDuckGo browser apps, but you can build it yourself and use for testing.
+Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all [DuckDuckGo apps](https://duckduckgo.com/app), but you can build it yourself and use for testing.
 
 To build the extension:
 
