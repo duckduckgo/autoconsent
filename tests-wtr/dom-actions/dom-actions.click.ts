@@ -1,12 +1,7 @@
 import { expect } from '@esm-bundle/chai';
-import {DomActions} from "../../lib/dom-actions";
+import {instantiateDomActions} from "./utils";
 
-function instantiateDomActions() {
-  // @ts-expect-error we don't need to add a full AutoConsent instance, DomActions only needs config.logs from it
-  return new DomActions({config: {logs: {rulesteps: false, lifecycle: false, evals: false, errors: false, messages: false}}})
-}
-
-// must be run from dom-actions.test.html
+// must be run from dom-actions.click.html
 describe('click', () => {
   let clickCounter1: number
   let clickCounter2: number
@@ -100,7 +95,6 @@ describe('click', () => {
     document.body.appendChild(shadowDiv)
     const shadow = shadowDiv.attachShadow({ mode: 'open' })
     const shadowButton = document.createElement('button')
-    shadowButton.innerText = '0'
     shadow.appendChild(shadowButton)
     shadowButton.addEventListener('click', () => {
       clickCounterShadowRoot++
