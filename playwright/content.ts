@@ -1,6 +1,7 @@
 import AutoConsent from '../lib/web'
 import { BackgroundMessage } from '../lib/messages'
 import { MessageSender, RuleBundle } from '../lib/types'
+// eslint-disable-next-line no-restricted-syntax
 import * as rules from '../rules/rules.json'
 
 declare global {

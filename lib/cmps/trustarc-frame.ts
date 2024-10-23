@@ -121,7 +121,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
         this.click('.submit')
 
         // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
-        this.waitForElement('#gwt-debug-close_id', 300000).then(() => {
+        await this.waitForElement('#gwt-debug-close_id', 300000).then(() => {
             this.click('#gwt-debug-close_id')
         })
 

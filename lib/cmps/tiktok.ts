@@ -42,11 +42,15 @@ export default class Tiktok extends AutoConsentCMPBase {
         const logsConfig = this.autoconsent.config.logs
         const declineButton = this.getShadowRoot().querySelector('.button-wrapper button:first-child') as HTMLElement
         if (declineButton) {
-            logsConfig.rulesteps && console.log('[clicking]', declineButton)
+            if (logsConfig.rulesteps) {
+                console.log('[clicking]', declineButton)
+            }
             declineButton.click()
             return true
         } else {
-            logsConfig.errors && console.log('no decline button found')
+            if (logsConfig.errors) {
+                console.log('no decline button found')
+            }
             return false
         }
     }
@@ -55,11 +59,15 @@ export default class Tiktok extends AutoConsentCMPBase {
         const logsConfig = this.autoconsent.config.logs
         const acceptButton = this.getShadowRoot().querySelector('.button-wrapper button:last-child') as HTMLElement
         if (acceptButton) {
-            logsConfig.rulesteps && console.log('[clicking]', acceptButton)
+            if (logsConfig.rulesteps) {
+                console.log('[clicking]', acceptButton)
+            }
             acceptButton.click()
             return true
         } else {
-            logsConfig.errors && console.log('no accept button found')
+            if (logsConfig.errors) {
+                console.log('no accept button found')
+            }
             return false
         }
     }

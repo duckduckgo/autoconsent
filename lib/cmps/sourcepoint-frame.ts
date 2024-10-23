@@ -128,7 +128,9 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 this.click('.chevron')
             }
         } catch (e) {
-            logsConfig.errors && console.warn(e)
+            if (logsConfig.errors) {
+                console.warn(e)
+            }
         }
         // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
         return this.click('.sp_choice_type_SAVE_AND_EXIT')

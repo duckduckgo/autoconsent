@@ -8,7 +8,9 @@ export class DomActions implements DomActionsProvider {
 
   click(selector: ElementSelector, all = false): boolean {
     const elem = this.elementSelector(selector)
-    this.autoconsentInstance.config.logs.rulesteps && console.log("[click]", selector, all, elem);
+    if (this.autoconsentInstance.config.logs.rulesteps) {
+      console.log("[click]", selector, all, elem);
+    }
     if (elem.length > 0) {
       if (all) {
         elem.forEach((e) => e.click());

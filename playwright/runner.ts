@@ -65,13 +65,15 @@ export function generateTest (
             if (options.skipRegions && options.skipRegions.includes(testRegion)) {
                 test.skip()
             }
-            if (options.mobile && !project.use.isMobile || !options.mobile && project.use.isMobile) {
+            if ((options.mobile && !project.use.isMobile) || (!options.mobile && project.use.isMobile)) {
                 test.skip()
             }
 
-            LOG_PAGE_LOGS && page.on('console', async msg => {
-                console.log('    page log:', msg.text())
-            })
+            if (LOG_PAGE_LOGS) {
+                page.on('console', async msg => {
+                    console.log('    page log:', msg.text())
+                })
+            }
             await page.exposeBinding('autoconsentSendMessage', messageCallback)
             await page.goto(url, { waitUntil: 'commit' })
 
@@ -89,7 +91,9 @@ export function generateTest (
 
             let selfTestFrame: Frame = null
             async function messageCallback ({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
-                LOG_MESSAGES.includes(msg.type) && console.log(msg)
+                if (LOG_MESSAGES.includes(msg.type)) {
+                    console.log(msg)
+                }
                 received.push(msg)
                 switch (msg.type) {
                 case 'init': {

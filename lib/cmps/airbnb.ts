@@ -36,9 +36,9 @@ export default class Airbnb extends AutoConsentCMPBase {
 
     async optOut () {
         await this.waitForThenClick('div[data-testid=main-cookies-banner-container] button._snbhip0')
-        let check
+        let check: HTMLElement
         // eslint-disable-next-line no-cond-assign
-        while (check = document.querySelector('[data-testid=modal-container] button[aria-checked=true]:not([disabled])') as HTMLElement) { // each click may toggle multiple checkboxes
+        while (check = document.querySelector('[data-testid=modal-container] button[aria-checked=true]:not([disabled])')) { // each click may toggle multiple checkboxes
             check.click()
         }
         return this.waitForThenClick('button[data-testid=save-btn]')

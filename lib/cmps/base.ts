@@ -50,23 +50,33 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         const logsConfig = this.autoconsent.config.logs
 
         if (this.autoconsent.config.isMainWorld) {
-            logsConfig.evals && console.log('inline eval:', snippetId, snippet)
+            if (logsConfig.evals) {
+                console.log('inline eval:', snippetId, snippet)
+            }
             let result = false
             try {
                 result = !!snippet.call(globalThis)
             } catch (e) {
                 // ignore exceptions
-                logsConfig.evals && console.error('error evaluating rule', snippetId, e)
+                if (logsConfig.evals) {
+                    console.error('error evaluating rule', snippetId, e)
+                }
             }
             return Promise.resolve(result)
         }
 
         const snippetSrc = getFunctionBody(snippet)
-        logsConfig.evals && console.log('async eval:', snippetId, snippetSrc)
-        return requestEval(snippetSrc, snippetId).catch((e) => {
-            logsConfig.evals && console.error('error evaluating rule', snippetId, e)
-            return false
-        })
+        if (logsConfig.evals) {
+            console.log('async eval:', snippetId, snippetSrc)
+        }
+        return requestEval(snippetSrc, snippetId)
+            // eslint-disable-next-line promise/prefer-await-to-then
+            .catch((e) => {
+                if (logsConfig.evals) {
+                    console.error('error evaluating rule', snippetId, e)
+                }
+                return false
+            })
     }
 
     checkRunContext (): boolean {
@@ -210,7 +220,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     async optOut () {
         const logsConfig = this.autoconsent.config.logs
         if (this.rule.optOut) {
-            logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut)
+            if (logsConfig.lifecycle) {
+                console.log('Initiated optOut()', this.rule.optOut)
+            }
             return this._runRulesSequentially(this.rule.optOut)
         }
         return false
@@ -219,7 +231,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     async optIn () {
         const logsConfig = this.autoconsent.config.logs
         if (this.rule.optIn) {
-            logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn)
+            if (logsConfig.lifecycle) {
+                console.log('Initiated optIn()', this.rule.optIn)
+            }
             return this._runRulesSequentially(this.rule.optIn)
         }
         return false
@@ -276,7 +290,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
                 return false
             }
             const condition = await this.evaluateRuleStep(rule.if)
-            logsConfig.rulesteps && console.log('Condition is', condition)
+            if (logsConfig.rulesteps) {
+                console.log('Condition is', condition)
+            }
             if (condition) {
                 results.push(this._runRulesSequentially(rule.then))
             } else if (rule.else) {
@@ -295,7 +311,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         }
 
         if (results.length === 0) {
-            logsConfig.errors && console.warn('Unrecognized rule', rule)
+            if (logsConfig.errors) {
+                console.warn('Unrecognized rule', rule)
+            }
             return false
         }
 
@@ -313,9 +331,13 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     async _runRulesSequentially (rules: AutoConsentRuleStep[]): Promise<boolean> {
         const logsConfig = this.autoconsent.config.logs
         for (const rule of rules) {
-            logsConfig.rulesteps && console.log('Running rule...', rule)
+            if (logsConfig.rulesteps) {
+                console.log('Running rule...', rule)
+            }
             const result = await this.evaluateRuleStep(rule)
-            logsConfig.rulesteps && console.log('...rule result', result)
+            if (logsConfig.rulesteps) {
+                console.log('...rule result', result)
+            }
             if (!result && !rule.optional) {
                 return false
             }

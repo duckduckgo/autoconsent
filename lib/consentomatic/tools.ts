@@ -44,6 +44,8 @@ export default class Tools {
                 } else if (options.textFilter != null) {
                     return textContent.indexOf(options.textFilter.toLowerCase()) !== -1
                 }
+
+                return false
             })
         }
 
