@@ -1,22 +1,43 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:json/recommended"
-  ],
-  "overrides": [],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "rules": {
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-unused-expressions": 0,
-    "indent": ["error", 2, { "SwitchCase": 1 }]
-  }
+    "extends": [
+        "standard",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "project": "./tsconfig.eslint.json"
+    },
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": ":matches(ImportNamespaceSpecifier, ExportAllDeclaration, ExportNamespaceSpecifier)",
+                "message": "Prefer explicit named imports over wildcard (import * as x)"
+            }
+        ],
+        "indent": ["error", 4],
+        "require-await": ["error"],
+        "promise/prefer-await-to-then": ["error"],
+        "@typescript-eslint/await-thenable": "error",
+        "@typescript-eslint/no-unused-vars": "error"
+    },
+    "env": {
+        "webextensions": true,
+        "browser": true,
+        "jasmine": true
+    },
+    "overrides": [
+        {
+            "files": ["{tests,tests-wtr}/**/*.ts"],
+            "rules": {
+                "@typescript-eslint/no-unused-expressions": "off"
+            }
+        },
+        {
+            "files": ["rules/autoconsent/*.json"],
+            "extends": ["plugin:json/recommended-legacy"]
+        }
+    ]
 }
