@@ -58,6 +58,19 @@
         }
       ],
       "else": []
+    },
+    {
+      "if": { "waitFor": "div[data-consent-manager-dialog] label" },
+      "then":[
+        {
+          "waitForThenClick": "div[data-consent-manager-dialog] tbody > tr > td > label:nth-child(2) > input[required]",
+          "all": true
+        },
+        {
+          "waitForThenClick": "div[data-consent-manager-dialog] form button[type='submit']"
+        }
+      ],
+      "else": []
     }
   ]
 }
