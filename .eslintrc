@@ -37,6 +37,12 @@
         {
             "files": ["rules/autoconsent/*.json"],
             "extends": ["plugin:json/recommended-legacy"]
+        },
+        {
+            "files": ["**/*.js"],
+            "rules": {
+                "@typescript-eslint/no-require-imports": "off"
+            }
         }
     ]
 }
