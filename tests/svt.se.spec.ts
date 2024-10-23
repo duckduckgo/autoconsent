@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('svt.se', [
-  // TODO: Add test URLs here
-]);
+    // TODO: Add test URLs here
+])

@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('nhs.uk', [
-  'https://nhs.uk'], {
-  skipRegions: ["US", "DE", "GB"]
+    'https://nhs.uk'], {
+    skipRegions: ['US', 'DE', 'GB']
 }
-);
+)

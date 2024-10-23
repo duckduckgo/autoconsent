@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('activobank.pt', [
-  'https://www.activobank.pt/en/'
+    'https://www.activobank.pt/en/'
 ], {
-});
+})

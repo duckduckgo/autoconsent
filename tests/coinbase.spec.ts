@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
-generateCMPTests("coinbase", [
-  "https://www.coinbase.com/",
-]);
+generateCMPTests('coinbase', [
+    'https://www.coinbase.com/'
+])

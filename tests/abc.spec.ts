@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('abc', [
-  'https://iview.abc.net.au/show/abc-live-stream',
-]);
+    'https://iview.abc.net.au/show/abc-live-stream'
+])

@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('wetransfer.com', [
-  'https://wetransfer.com'], {
-  skipRegions: ["US", "FR", "DE"]
+    'https://wetransfer.com'], {
+    skipRegions: ['US', 'FR', 'DE']
 }
-);
+)

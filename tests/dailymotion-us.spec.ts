@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('dailymotion-us', [
-  'https://www.dailymotion.com/us',
-],{
-});
+    'https://www.dailymotion.com/us'
+], {
+})

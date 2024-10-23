@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('true-car', [
-  'https://www.truecar.com/',
-],{
-});
+    'https://www.truecar.com/'
+], {
+})

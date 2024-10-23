@@ -1,8 +1,8 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('airbnb', [
-  'https://airbnb.nl',
-  'https://airbnb.co.uk',
-],{
-  skipRegions: ['US']
-});
+    'https://airbnb.nl',
+    'https://airbnb.co.uk'
+], {
+    skipRegions: ['US']
+})

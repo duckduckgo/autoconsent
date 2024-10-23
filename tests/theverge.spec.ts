@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
-generateCMPTests("theverge", [
-  "https://www.theverge.com/",
-]);
+generateCMPTests('theverge', [
+    'https://www.theverge.com/'
+])

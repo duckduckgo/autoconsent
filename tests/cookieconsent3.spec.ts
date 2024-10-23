@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('cookieconsent3', [
-  'https://playground.cookieconsent.orestbida.com/',
-]);
+    'https://playground.cookieconsent.orestbida.com/'
+])

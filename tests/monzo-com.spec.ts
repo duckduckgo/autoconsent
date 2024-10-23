@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('monzo.com', [
-  'https://monzo.com/us/'
-]);
+    'https://monzo.com/us/'
+])

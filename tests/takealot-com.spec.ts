@@ -1,13 +1,13 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('takealot.com', [
-  'https://www.takealot.com/',
+    'https://www.takealot.com/'
 ], {
-  mobile: false,
-});
+    mobile: false
+})
 
 generateCMPTests('takealot.com', [
-  'https://www.takealot.com/',
+    'https://www.takealot.com/'
 ], {
-  mobile: true,
-});
+    mobile: true
+})

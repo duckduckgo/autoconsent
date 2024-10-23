@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('Complianz optin', [
-  'https://www.briogeohair.com/'
-], {});
+    'https://www.briogeohair.com/'
+], {})

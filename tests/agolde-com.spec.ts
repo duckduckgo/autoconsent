@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('agolde.com', [
-  'https://agolde.com/',
-], {});
+    'https://agolde.com/'
+], {})

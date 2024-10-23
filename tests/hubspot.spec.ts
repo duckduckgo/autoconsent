@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('hubspot', [
-  'https://blog.hubspot.com/',
-  'https://www.hubspot.de/',
-]);
+    'https://blog.hubspot.com/',
+    'https://www.hubspot.de/'
+])

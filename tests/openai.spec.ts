@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('openai', [
-  'https://platform.openai.com/docs/guides',
-]);
+    'https://platform.openai.com/docs/guides'
+])

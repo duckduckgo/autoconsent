@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('openli', [
-  'https://www.chargebee.com/',
-  'https://openli.com/',
-]);
+    'https://www.chargebee.com/',
+    'https://openli.com/'
+])
