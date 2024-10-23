@@ -1,8 +1,19 @@
 import {expect} from '@esm-bundle/chai';
 import {instantiateDomActions} from "./utils";
+import sinon from 'sinon/pkg/sinon-esm.js'
 
 // must be run from dom-actions.wait-for-element.html
 describe('waitForElement', () => {
+  let clock
+
+  beforeEach(() => {
+    clock = sinon.useFakeTimers()
+  })
+
+  afterEach(() => {
+    clock.restore()
+  })
+
   it('should resolve to true immediately if element already present', async () => {
     // Given
     const domActions = instantiateDomActions();
@@ -19,6 +30,8 @@ describe('waitForElement', () => {
 
     // When
     const resultPromise = domActions.waitForElement('#deferred', 1000);
+
+    clock.tickAsync(800)  // intentionally not awaiting
 
     setTimeout(() => {
       const deferredElement = document.createElement('p')
@@ -38,7 +51,11 @@ describe('waitForElement', () => {
     const domActions = instantiateDomActions();
 
     // When
-    const result = await domActions.waitForElement('#not-present', 1000);
+    const resultPromise = domActions.waitForElement('#not-present', 1000);
+
+    clock.tickAsync(1000) // intentionally not awaiting
+
+    const result = await resultPromise
 
     // Then
     expect(result).to.be.false
