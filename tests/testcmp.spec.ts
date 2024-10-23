@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('Test page CMP', [
-  'https://privacy-test-pages.site/features/autoconsent/'
-]);
+    'https://privacy-test-pages.site/features/autoconsent/'
+])

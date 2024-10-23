@@ -1,14 +1,14 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('dailymotion.com', [
-  'https://www.dailymotion.com/us',
-],{
-  skipRegions: ['US']
-});
+    'https://www.dailymotion.com/us'
+], {
+    skipRegions: ['US']
+})
 
 generateCMPTests('dailymotion.com', [
-  'https://www.dailymotion.com/us',
-],{
-  skipRegions: ['US'],
-  mobile: true,
-});
+    'https://www.dailymotion.com/us'
+], {
+    skipRegions: ['US'],
+    mobile: true
+})

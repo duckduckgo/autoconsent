@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('whitepages.com', [
-  'https://www.whitepages.com/',
-], {});
+    'https://www.whitepages.com/'
+], {})

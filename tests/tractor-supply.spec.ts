@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('tractor-supply', [
-  'https://www.tractorsupply.com/',
-],{
-});
+    'https://www.tractorsupply.com/'
+], {
+})

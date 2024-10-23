@@ -1,14 +1,14 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('facebook', [
-  'https://facebook.com/',
+    'https://facebook.com/'
 ], {
-  skipRegions: ['US'],
-});
+    skipRegions: ['US']
+})
 
 generateCMPTests('facebook', [
-  'https://facebook.com/',
+    'https://facebook.com/'
 ], {
-  mobile: true,
-  skipRegions: ['US'],
-});
+    mobile: true,
+    skipRegions: ['US']
+})

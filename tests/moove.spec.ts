@@ -1,8 +1,8 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('Moove', [
-  'https://impact.parkinson.org/',
-  'https://wamu.org/',
-  'https://www.phorest.com/',
-  'https://theposterclub.com/',
-], {});
+    'https://impact.parkinson.org/',
+    'https://wamu.org/',
+    'https://www.phorest.com/',
+    'https://theposterclub.com/'
+], {})

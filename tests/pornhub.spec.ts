@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('pornhub.com', [
-  'https://pornhub.com/',
+    'https://pornhub.com/'
 ], {
-  onlyRegions: ['US'],
-});
+    onlyRegions: ['US']
+})

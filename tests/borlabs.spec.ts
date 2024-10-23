@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('borlabs', [
-  'https://www.kesselheld.de/'
+    'https://www.kesselheld.de/'
 ], {
-  skipRegions: ["US"]
-});
+    skipRegions: ['US']
+})

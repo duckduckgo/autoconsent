@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
-generateCMPTests("zentralruf-de", ["https://www.zentralruf.de/"]);
+generateCMPTests('zentralruf-de', ['https://www.zentralruf.de/'])

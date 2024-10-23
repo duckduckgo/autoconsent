@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('EZoic', [
-  'https://computingforgeeks.com/',
+    'https://computingforgeeks.com/'
 ], {
-  skipRegions: ['US'],
-});
+    skipRegions: ['US']
+})

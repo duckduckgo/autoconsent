@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('transcend', [
-  'https://www.verizon.com/support/account-pin-faqs/'
-]);
+    'https://www.verizon.com/support/account-pin-faqs/'
+])

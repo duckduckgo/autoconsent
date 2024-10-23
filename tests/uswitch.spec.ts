@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('uswitch.com', [
-  'https://uswitch.com'], {
-  skipRegions: ["US", "FR", "DE"]
+    'https://uswitch.com'], {
+    skipRegions: ['US', 'FR', 'DE']
 }
-);
+)

@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('onlyFans.com', [
-  'https://onlyfans.com/',
-], {});
+    'https://onlyfans.com/'
+], {})

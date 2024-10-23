@@ -1,6 +1,6 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('fides', [
-  'https://www.nytimes.com/',
-  'https://vercel.com/',
-]);
+    'https://www.nytimes.com/',
+    'https://vercel.com/'
+])

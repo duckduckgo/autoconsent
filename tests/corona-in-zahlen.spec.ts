@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('corona-in-zahlen.de', [
-  'http://corona-in-zahlen.de'], {
-  skipRegions: ["US", "FR", "GB"]
+    'http://corona-in-zahlen.de'], {
+    skipRegions: ['US', 'FR', 'GB']
 }
-);
+)

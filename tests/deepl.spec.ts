@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('deepl.com', [
-  'https://deepl.com'], {
-  skipRegions: ["US"]
+    'https://deepl.com'], {
+    skipRegions: ['US']
 }
-);
+)

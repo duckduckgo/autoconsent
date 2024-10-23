@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('youporn.com', [
-  'https://www.youporn.com/',
-], {});
+    'https://www.youporn.com/'
+], {})

@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('kleinanzeigen-de', [
-  'https://www.kleinanzeigen.de/',
-]);
+    'https://www.kleinanzeigen.de/'
+])

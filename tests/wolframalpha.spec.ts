@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('wolframalpha', [
-  'https://www.wolframalpha.com',
-]);
+    'https://www.wolframalpha.com'
+])

@@ -1,7 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('thefreedictionary.com', [
-  'https://thefreedictionary.com'], {
-  skipRegions: ["US"]
+    'https://thefreedictionary.com'], {
+    skipRegions: ['US']
 }
-);
+)

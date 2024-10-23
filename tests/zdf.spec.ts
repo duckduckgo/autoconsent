@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('zdf', [
-  'https://www.zdf.de/',
-]);
+    'https://www.zdf.de/'
+])

@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('similarweb.com', [
-  'https://www.similarweb.com/',
-], {});
+    'https://www.similarweb.com/'
+], {})

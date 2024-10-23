@@ -1,5 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner'
 
 generateCMPTests('temu', [
-  'https://www.temu.com/',
-]);
+    'https://www.temu.com/'
+])
