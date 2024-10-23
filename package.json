@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rm -r dist",
-    "lint": "eslint {addon,lib,playwright,tests,tests-wtr}/**/*.ts",
+    "lint": "eslint {addon,lib,playwright,tests,tests-wtr}/**/*.ts *.{js,mjs}",
     "bundle": "./build.sh",
     "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
