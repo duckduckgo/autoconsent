@@ -2,7 +2,7 @@
   "name": "paypal-us",
   "prehideSelectors": ["#ccpaCookieContent_wrapper, article.ppvx_modal--overpanel"],
   "detectCmp": [{ "exists": "#ccpaCookieBanner, .privacy-sheet-content" }],
-  "detectPopup": [{ "exists": "#ccpaCookieBanner, .privacy-sheet-content" }],
+  "detectPopup": [{ "visible": "#ccpaCookieBanner, .privacy-sheet-content" }],
   "optIn": [{ "click": "#acceptAllButton" }],
   "optOut": [
     {
@@ -22,7 +22,7 @@
               "all": true,
               "optional": true
             },
-            { "click": ".confirmCookie #submitCookiesBtn" }
+            { "click": ".cookieAction.saveCookie,.confirmCookie #submitCookiesBtn" }
           ]
         }
       ]
