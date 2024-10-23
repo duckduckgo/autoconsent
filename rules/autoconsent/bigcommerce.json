@@ -8,6 +8,9 @@
   ],
   "detectCmp": [
     {
+      "eval": "EVAL_BIGCOMMERCE_0"
+    },
+    {
       "exists": "#consent-manager,div[data-consent-manager-dialog]"
     }
   ],
