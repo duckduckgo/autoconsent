@@ -56,6 +56,7 @@ export class DomActions implements DomActionsProvider {
   waitForVisible(selector: ElementSelector, timeout = 10000, check: VisibilityCheck = 'any'): Promise<boolean> {
     const interval = 200;
     const times = Math.ceil((timeout) / interval);
+    this.autoconsentInstance.config.logs.rulesteps && console.log("[waitForVisible]", selector);
     return waitFor(
       () => this.elementVisible(selector, check),
       times,
@@ -69,6 +70,7 @@ export class DomActions implements DomActionsProvider {
   }
 
   wait(ms: number): Promise<true> {
+    this.autoconsentInstance.config.logs.rulesteps && console.log("[wait]", ms);
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(true);
@@ -77,6 +79,7 @@ export class DomActions implements DomActionsProvider {
   }
 
   hide(selector: string, method: HideMethod): boolean {
+    this.autoconsentInstance.config.logs.rulesteps && console.log("[hide]", selector);
     const styleEl = getStyleElement();
     return hideElements(styleEl, selector, method);
   }

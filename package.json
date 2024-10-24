@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "10.16.0",
+  "version": "10.17.0",
   "description": "",
   "exports": {
     ".": {
@@ -46,7 +46,7 @@
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@playwright/test": "^1.17.1",
     "@types/chai": "^5.0.0",
-    "@types/chrome": "^0.0.277",
+    "@types/chrome": "^0.0.279",
     "@types/mocha": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
@@ -63,6 +63,7 @@
     "eslint-plugin-json": "^3.1.0",
     "markdown-it": "^14.0.0",
     "mocha": "^10.0.0",
+    "sinon": "^19.0.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
     "typescript": "^5.1.6",

@@ -1,3 +1,25 @@
+# v10.17.0 (Thu Oct 24 2024)
+
+#### 🚀 Enhancement
+
+- Add rule for americanexpress [#503](https://github.com/duckduckgo/autoconsent/pull/503) ([@muodov](https://github.com/muodov))
+- Fix race condition in Sourcepoint rule [#502](https://github.com/duckduckgo/autoconsent/pull/502) ([@muodov](https://github.com/muodov))
+- Add a rule for android.com [#501](https://github.com/duckduckgo/autoconsent/pull/501) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix standalone google for international regions [#500](https://github.com/duckduckgo/autoconsent/pull/500) ([@muodov](https://github.com/muodov))
+- Fix paypal-us [#499](https://github.com/duckduckgo/autoconsent/pull/499) ([@muodov](https://github.com/muodov))
+- (DomActions) WTR tests for elementSelector() [#495](https://github.com/duckduckgo/autoconsent/pull/495) (frei.ondrej@pm.me [@freiondrej](https://github.com/freiondrej))
+
+#### Authors: 3
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Ondřej Frei ([@freiondrej](https://github.com/freiondrej))
+- ondrej.frei (frei.ondrej@pm.me)
+
+---
+
 # v10.16.0 (Tue Oct 15 2024)
 
 #### 🚀 Enhancement
