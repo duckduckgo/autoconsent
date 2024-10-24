@@ -117,7 +117,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         this.waitForElement('.pm-features', 2000).then(success => success ? 2: -1),
       ]);
       if (path === 0) {
-        await this.wait(1500);
+        await this.waitForVisible(rejectSelector1);
         return this.click(rejectSelector1);
       } else if (path === 1) {
         this.click(rejectSelector2);
