@@ -99,6 +99,22 @@ export class DomActions implements DomActionsProvider {
     return !!existingElement;
   }
 
+  async createOrUpdateStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
+    if (!styleSheet) {
+      styleSheet = new CSSStyleSheet();
+    }
+    styleSheet = await styleSheet.replace(cssText);
+    return styleSheet;
+  }
+
+  removeStyleSheet(styleSheet?: CSSStyleSheet): boolean {
+    if (styleSheet) {
+      styleSheet.replace('');
+      return true;
+    }
+    return false;
+  }
+
   querySingleReplySelector(selector: string, parent: any = document): HTMLElement[] {
     if (selector.startsWith('aria/')) {
       return []
