@@ -1,0 +1,36 @@
+{
+  "name": "readly",
+  "runContext": {
+    "urlPattern": "^https://([a-z0-9-]+\\.)?readly\\.com/"
+  },
+  "prehideSelectors": [
+    "[class^='CookieConsentDialogContainer']"
+  ],
+  "detectCmp": [
+    {
+      "exists": "[class^='CookieConsentDialogContainer']"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "[class^='CookieConsentDialogContainer']"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [data-testid='cookies-dialog-accept-all'] > button"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [class^='CookieConsentButtonContainer'] ~ div > a[style*='rgb(255, 187, 34)']"
+    },
+    {
+      "waitForThenClick": "[class^='CookieSettingCheckboxContainer'] input[type='checkbox']:checked:not(:disabled)",
+      "all": true
+    },
+    {
+      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [class^='CookieConsentButtonContainer'] button"
+    }
+  ]
+}

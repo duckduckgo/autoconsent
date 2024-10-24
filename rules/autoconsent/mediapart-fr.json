@@ -1,0 +1,30 @@
+{
+  "name": "mediapart-fr",
+  "vendorUrl": "https://www.mediapart.fr/",
+  "runContext": {
+    "urlPattern": "^https://(www)\\.mediapart\\.fr"
+  },
+  "prehideSelectors": [
+    "#js-gateaux-secs"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#js-gateaux-secs"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#js-gateaux-secs"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#js-gateaux-secs-allow"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#js-gateaux-secs-deny"
+    }
+  ]
+}
