@@ -70,27 +70,35 @@ const duplicateTemplateTask = (templateTaskGid) => {
   return asana.tasks.duplicateTask(templateTaskGid, duplicateOption)
 }
 
-const waitForJobSuccess = async (job_gid, attempts = 1) => {
+const waitForJobSuccess = async (job_gid) => {
   const interval = 1000
   const maxAttempts = 20
 
   return new Promise(async (resolve, reject) => {
-    const { status } = await asana.jobs.getJob(job_gid)
-    if (status === 'succeeded') {
-      return resolve(status)
+    const innerFn = async function(job_gid, attempts) {
+      console.error(`Waiting for job ${job_gid} to complete...`)
+      const { status } = await asana.jobs.getJob(job_gid)
+      console.error(`Job ${job_gid} status: ${status}`)
+      if (status === 'succeeded') {
+        return resolve(status)
+      }
+      attempts += 1
+  
+      if (attempts > maxAttempts) {
+        const errMsg = `The job ${job_gid} took too long to execute`
+        console.error(errMsg)
+        return reject(new Error(errMsg))
+      }
+  
+      console.error(`Retrying in ${interval}ms...`)
+      await timersPromises.setTimeout(interval)
+      console.error(`Attempt ${attempts}`)
+      return await innerFn(job_gid, attempts)
     }
-    attempts += 1
-
-    if (attempts > maxAttempts) {
-      const errMsg = `The job ${job_gid} took too long to execute`
-      console.error(errMsg)
-      return reject(new Error(errMsg))
-    }
-
-    await timersPromises.setTimeout(interval)
-    return waitForJobSuccess(job_gid, attempts)
+    return await innerFn(job_gid, 1)
   })
 }
+
 
 const asanaCreateTasks = async () => {
   setupAsana()
