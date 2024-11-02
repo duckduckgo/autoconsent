@@ -72,7 +72,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
       return true;
     }
 
-    //When Tags are being controlled through a tag managment system, the window will not call the vendors' opt-out
+    // When Tags are being controlled through a tag managment system, the window will not call the vendors' opt-out
     let timeout = 3000;
     if (await this.mainWorldEval('EVAL_TRUSTARC_FRAME_GTM')) {
       timeout = 1500;
@@ -130,8 +130,8 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
   }
 
   async test() {
-    //Test JS variable to check the user's preference
-    //preferences = undefined means no consent is set, preferences = '0' means consent is set to required only 
+    // Test JS variable to check the user's preference
+    // preferences = undefined means no consent is set, preferences = '0' means consent is set to required only 
     await this.wait(500);
     return await this.mainWorldEval('EVAL_TRUSTARC_FRAME_TEST');
   }

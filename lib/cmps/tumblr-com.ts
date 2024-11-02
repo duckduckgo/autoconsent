@@ -4,7 +4,7 @@ import AutoConsentCMPBase from "./base";
 export default class Tumblr extends AutoConsentCMPBase {
   name = "tumblr-com";
   runContext = {
-    "urlPattern": "^https://(www\\.)?tumblr\\.com/"
+    urlPattern: "^https://(www\\.)?tumblr\\.com/"
   }
 
   get hasSelfTest(): boolean {

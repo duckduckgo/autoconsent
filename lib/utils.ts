@@ -91,7 +91,6 @@ export function normalizeConfig(providedConfig: any): Config {
   // filter out any unknown entries
   for (const key of Object.keys(defaultConfig)) {
     if (typeof providedConfig[key] !== 'undefined') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error - TS doesn't know that we've checked for undefined
       updatedConfig[key] = providedConfig[key];
     }

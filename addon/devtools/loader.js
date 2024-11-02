@@ -59,7 +59,7 @@ if (chrome.devtools?.recorder) {
 
   chrome.devtools.recorder.registerRecorderExtensionPlugin(
     new MyPlugin(),
-    /*name=*/ "Autoconsent",
-    /*mediaType=*/ "application/json"
+    /* name= */ "Autoconsent",
+    /* mediaType= */ "application/json"
   );
 }

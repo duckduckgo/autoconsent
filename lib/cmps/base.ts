@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax,no-await-in-loop,no-underscore-dangle */
-
 import { AutoCMP, DomActionsProvider } from "../types";
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from "../rules";
 import { requestEval } from "../eval-handler";

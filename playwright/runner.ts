@@ -93,7 +93,7 @@ export function generateTest(
           case 'init': {
             await frame.evaluate(`autoconsentReceiveMessage({ type: "initResp", config: ${JSON.stringify({
               enabled: true,
-              autoAction: autoAction,
+              autoAction,
               disabledCmps: [],
               enablePrehide: true,
               detectRetries: 20,

@@ -70,10 +70,10 @@ export default class Tools {
     if (options.displayFilter != null) {
       possibleTargets = possibleTargets.filter(possibleTarget => {
         if (options.displayFilter) {
-          //We should be displayed
+          // We should be displayed
           return possibleTarget.offsetHeight !== 0;
         } else {
-          //We should not be displayed
+          // We should not be displayed
           return possibleTarget.offsetHeight === 0;
         }
       });
@@ -82,10 +82,10 @@ export default class Tools {
     if (options.iframeFilter != null) {
       possibleTargets = possibleTargets.filter((/* possibleTarget */) => {
         if (options.iframeFilter) {
-          //We should be inside an iframe
+          // We should be inside an iframe
           return window.location !== window.parent.location;
         } else {
-          //We should not be inside an iframe
+          // We should not be inside an iframe
           return window.location === window.parent.location;
         }
       });
@@ -129,7 +129,7 @@ export default class Tools {
               targets.forEach(target => {
                 results.push({
                   parent: p,
-                  target: target
+                  target
                 });
               });
             } else {
@@ -146,13 +146,13 @@ export default class Tools {
           if (targets instanceof Array) {
             targets.forEach(target => {
               results.push({
-                parent: parent,
-                target: target
+                parent,
+                target
               });
             });
           } else {
             results.push({
-              parent: parent,
+              parent,
               target: targets
             });
           }
@@ -164,7 +164,7 @@ export default class Tools {
         targets.forEach(target => {
           results.push({
             parent: null,
-            target: target
+            target
           });
         });
       } else {
