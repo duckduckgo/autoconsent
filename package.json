@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rm -r dist",
-    "lint": "eslint .",
+    "lint": "eslint . && prettier . --check",
     "bundle": "./build.sh",
     "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
@@ -53,6 +53,7 @@
     "globals": "^15.11.0",
     "markdown-it": "^14.0.0",
     "mocha": "^10.0.0",
+    "prettier": "3.3.3",
     "sinon": "^19.0.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
