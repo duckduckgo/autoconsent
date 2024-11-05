@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rm -r dist",
-    "lint": "eslint addon/ lib/ playwright/ tests/ tests-wtr/ rules/autoconsent/*.json",
+    "lint": "eslint .",
     "bundle": "./build.sh",
     "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
@@ -32,7 +32,7 @@
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
   "devDependencies": {
-    "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#51dc868a4342379d6aec1d0f4214156e7046d5f6",
+    "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#v0.1.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@playwright/test": "^1.17.1",
     "@types/chai": "^5.0.0",

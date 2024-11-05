@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2021",
+    "allowJs": true,
+    "checkJs": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -8,8 +10,6 @@
   },
   "exclude": [
     "node_modules/*",
-    "playwright.config.ts",
-    "tests/*",
     "dist/*"
   ]
 }
