@@ -41,9 +41,9 @@ function createPRTemplate (platform, data) {
   const versionRegex = /\[\[version]]/
   const descriptionRegex = /\[\[description]]/
 
-  let extraContent = ''
+  const extraContent = ''
 
-  let asanaUrl = asanaOutput[platform]?.taskUrl
+  const asanaUrl = asanaOutput[platform]?.taskUrl
 
   const updatedTemplate = replaceAllInString(template, [
     [asanaUrlRegex, asanaUrl],

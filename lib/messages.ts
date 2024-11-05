@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import { snippets } from "./eval-snippets";
 import { Config, ConsentState, RuleBundle } from "./types";
 

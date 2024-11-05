@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
@@ -80,7 +81,7 @@ export const snippets = {
   EVAL_COOKIEALERT_1: () => document.querySelector('body').removeAttribute('style') || true,
   EVAL_COOKIEALERT_2: () => window.CookieConsent.declined === true,
   EVAL_COOKIEFIRST_0: () => ((o)=>o.performance === false && o.functional === false && o.advertising === false) (JSON.parse(decodeURIComponent(document.cookie.split(';').find(c => c.indexOf('cookiefirst') !== -1).trim()).split('=')[1])),
-  EVAL_COOKIEFIRST_1: () => document.querySelectorAll('button[data-cookiefirst-accent-color=true][role=checkbox]:not([disabled])').forEach(i => (i.getAttribute('aria-checked') == 'true' && i.click())) || true,
+  EVAL_COOKIEFIRST_1: () => document.querySelectorAll('button[data-cookiefirst-accent-color=true][role=checkbox]:not([disabled])').forEach(i => (i.getAttribute('aria-checked') === 'true' && i.click())) || true,
   EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
   EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
   EVAL_COOKIEINFORMATION_2: () => document.cookie.includes('CookieInformationConsent='),

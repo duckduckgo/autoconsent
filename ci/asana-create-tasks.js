@@ -74,6 +74,7 @@ const waitForJobSuccess = async (job_gid) => {
   const interval = 1000
   const maxAttempts = 20
 
+  // eslint-disable-next-line no-async-promise-executor -- legacy code
   return new Promise(async (resolve, reject) => {
     const innerFn = async function(job_gid, attempts) {
       console.error(`Waiting for job ${job_gid} to complete...`)

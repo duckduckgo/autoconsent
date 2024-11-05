@@ -101,8 +101,8 @@ export default class AutoConsent {
   }
 
   addDynamicRules() {
-    dynamicCMPs.forEach((cmp) => {
-      this.rules.push(new cmp(this));
+    dynamicCMPs.forEach((Cmp) => {
+      this.rules.push(new Cmp(this));
     });
   }
 

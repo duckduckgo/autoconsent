@@ -63,7 +63,7 @@ export function generateTest(
       if (options.skipRegions && options.skipRegions.includes(testRegion)) {
         test.skip();
       }
-      if (options.mobile && !project.use.isMobile || !options.mobile && project.use.isMobile) {
+      if ((options.mobile && !project.use.isMobile) || (!options.mobile && project.use.isMobile)) {
         test.skip();
       }
 
