@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('strato.de', [
-  'https://www.strato.de/apps/CustomerService',
-], {});
+generateCMPTests('strato.de', ['https://www.strato.de/apps/CustomerService'], {});

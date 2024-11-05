@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('hashicorp', [
-  'https://developer.hashicorp.com/',
-]);
+generateCMPTests('hashicorp', ['https://developer.hashicorp.com/']);

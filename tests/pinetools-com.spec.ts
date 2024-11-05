@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('pinetools.com', [
-  'https://pinetools.com/',
-], {});
+generateCMPTests('pinetools.com', ['https://pinetools.com/'], {});

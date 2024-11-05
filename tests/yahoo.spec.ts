@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Yahoo', [
-  'https://www.yahoo.com/'
-], {
-  skipRegions: ['US']
+generateCMPTests('Yahoo', ['https://www.yahoo.com/'], {
+    skipRegions: ['US'],
 });

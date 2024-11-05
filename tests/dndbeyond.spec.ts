@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('dndbeyond', [
-  'https://www.dndbeyond.com/',
-]);
+generateCMPTests('dndbeyond', ['https://www.dndbeyond.com/']);

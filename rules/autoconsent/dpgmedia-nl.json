@@ -1,41 +1,27 @@
 {
-  "name": "dpgmedia-nl",
-  "prehideSelectors": [
-    "#pg-shadow-host"
-  ],
-  "detectCmp": [
-    {
-      "exists": "#pg-shadow-host"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": [
-        "#pg-shadow-host",
-        "#pg-modal"
-      ]
-    }
-  ],
-  "optIn": [
-    {
-      "waitForThenClick": [
-        "#pg-shadow-host",
-        "#pg-accept-btn"
-      ]
-    }
-  ],
-  "optOut": [
-    {
-      "waitForThenClick": [
-        "#pg-shadow-host",
-        "#pg-configure-btn"
-      ]
-    },
-    {
-      "waitForThenClick": [
-        "#pg-shadow-host",
-        "#pg-reject-btn"
-      ]
-    }
-  ]
+    "name": "dpgmedia-nl",
+    "prehideSelectors": ["#pg-shadow-host"],
+    "detectCmp": [
+        {
+            "exists": "#pg-shadow-host"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#pg-shadow-host", "#pg-modal"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#pg-shadow-host", "#pg-accept-btn"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#pg-shadow-host", "#pg-configure-btn"]
+        },
+        {
+            "waitForThenClick": ["#pg-shadow-host", "#pg-reject-btn"]
+        }
+    ]
 }

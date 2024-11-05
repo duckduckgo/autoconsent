@@ -1,10 +1,9 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Conversant', [
-  'https://www.irishcentral.com/',
-  'https://screencrush.com/',
-  'https://starcrush.com/',
-  'https://mooseradio.com/',
-], {
-  skipRegions: ['US']
-});
+generateCMPTests(
+    'Conversant',
+    ['https://www.irishcentral.com/', 'https://screencrush.com/', 'https://starcrush.com/', 'https://mooseradio.com/'],
+    {
+        skipRegions: ['US'],
+    },
+);

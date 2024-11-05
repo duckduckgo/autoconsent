@@ -1,15 +1,17 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Adroll', [
-  'https://www.adroll.com/',
-  'https://www.appliancewhse.com/',
-  'https://www.michiganhumane.org/',
-  'https://audioplugin.deals/',
-  'https://www.mhu.edu/',
-], {
-  skipRegions: ['US']
-});
+generateCMPTests(
+    'Adroll',
+    [
+        'https://www.adroll.com/',
+        'https://www.appliancewhse.com/',
+        'https://www.michiganhumane.org/',
+        'https://audioplugin.deals/',
+        'https://www.mhu.edu/',
+    ],
+    {
+        skipRegions: ['US'],
+    },
+);
 
-generateCMPTests('Adroll', [
-  'https://agoraeufalo.mykajabi.com/',
-], {});
+generateCMPTests('Adroll', ['https://agoraeufalo.mykajabi.com/'], {});

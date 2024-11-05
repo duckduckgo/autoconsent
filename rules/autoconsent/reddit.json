@@ -1,36 +1,28 @@
 {
-  "name": "reddit.com",
-  "runContext": {
-    "urlPattern": "^https://www\\.reddit\\.com/"
-  },
-  "prehideSelectors": ["[bundlename=reddit_cookie_banner]"],
-  "detectCmp": [
-    {
-      "exists": "reddit-cookie-banner"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "reddit-cookie-banner"
-    }
-  ],
-  "optIn": [
-    {
-      "waitForThenClick": [
-        "reddit-cookie-banner",
-        "#accept-all-cookies-button > button"
-      ]
-    }
-  ],
-  "optOut": [
-    {
-      "waitForThenClick": [
-        "reddit-cookie-banner",
-        "#reject-nonessential-cookies-button > button"
-      ]
-    }
-  ],
-  "test": [
-    {"eval": "EVAL_REDDIT_0"}
-  ]
+    "name": "reddit.com",
+    "runContext": {
+        "urlPattern": "^https://www\\.reddit\\.com/"
+    },
+    "prehideSelectors": ["[bundlename=reddit_cookie_banner]"],
+    "detectCmp": [
+        {
+            "exists": "reddit-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "reddit-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["reddit-cookie-banner", "#accept-all-cookies-button > button"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["reddit-cookie-banner", "#reject-nonessential-cookies-button > button"]
+        }
+    ],
+    "test": [{ "eval": "EVAL_REDDIT_0" }]
 }

@@ -3,9 +3,7 @@
     "prehideSelectors": ["#ensNotifyBanner"],
     "detectCmp": [{ "exists": "#ensNotifyBanner" }],
     "detectPopup": [{ "visible": "#ensNotifyBanner[style*=block]" }],
-    "optIn": [
-        { "waitForThenClick": "#ensCloseBanner" }
-    ],
+    "optIn": [{ "waitForThenClick": "#ensCloseBanner" }],
     "optOut": [
         { "wait": 500 },
         { "visible": "#ensNotifyBanner[style*=block]" },

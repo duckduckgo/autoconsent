@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('steampowered.com', [
-  'https://store.steampowered.com'], {
-  skipRegions: ["US"]
-}
-);
+generateCMPTests('steampowered.com', ['https://store.steampowered.com'], {
+    skipRegions: ['US'],
+});

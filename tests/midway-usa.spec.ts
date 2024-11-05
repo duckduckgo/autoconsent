@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('midway-usa', [
-  'https://www.midwayusa.com/',
-],{
-});
+generateCMPTests('midway-usa', ['https://www.midwayusa.com/'], {});

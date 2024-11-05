@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('mediamarkt.de', [
-  'https://mediamarkt.de'], {
-  skipRegions: ["US", "FR", "GB"]
-}
-);
+generateCMPTests('mediamarkt.de', ['https://mediamarkt.de'], {
+    skipRegions: ['US', 'FR', 'GB'],
+});

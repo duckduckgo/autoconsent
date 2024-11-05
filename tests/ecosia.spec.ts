@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('ecosia', [
-  'https://www.ecosia.org/'
-]);
+generateCMPTests('ecosia', ['https://www.ecosia.org/']);

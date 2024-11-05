@@ -3,13 +3,10 @@
     "prehideSelectors": [".cookies-modal"],
     "detectCmp": [{ "exists": ".cookies-modal" }],
     "detectPopup": [{ "exists": ".cookies-modal" }],
-    "optIn": [
-      { "click": "button.cmd-button-accept-all" }
-    ],
+    "optIn": [{ "click": "button.cmd-button-accept-all" }],
     "optOut": [
-      {
-        "click": "button.cmd-button-reject-all"
-      }
+        {
+            "click": "button.cmd-button-reject-all"
+        }
     ]
-  }
-  
+}

@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('bbb.org', [
-  'https://www.bbb.org/'
-], {});
+generateCMPTests('bbb.org', ['https://www.bbb.org/'], {});

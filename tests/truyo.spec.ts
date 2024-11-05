@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('truyo', [
-  'https://www.oreillyauto.com/'
-], {});
+generateCMPTests('truyo', ['https://www.oreillyauto.com/'], {});

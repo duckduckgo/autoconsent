@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('jquery.cookieBar', [
-  'https://www.minotstateu.edu/',
-  'https://www.myersbriggs.org/',
-], {});
+generateCMPTests('jquery.cookieBar', ['https://www.minotstateu.edu/', 'https://www.myersbriggs.org/'], {});

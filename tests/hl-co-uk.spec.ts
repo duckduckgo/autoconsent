@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('hl.co.uk', [
-  'https://hl.co.uk'], {
-  skipRegions: ["US", "DE", "GB"]
-}
-);
+generateCMPTests('hl.co.uk', ['https://hl.co.uk'], {
+    skipRegions: ['US', 'DE', 'GB'],
+});

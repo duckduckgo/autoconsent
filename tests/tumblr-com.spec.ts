@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('tumblr-com', [
-  'https://www.tumblr.com/'
-], {});
+generateCMPTests('tumblr-com', ['https://www.tumblr.com/'], {});

@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('setapp.com', [
-  'https://setapp.com/'
-]);
+generateCMPTests('setapp.com', ['https://setapp.com/']);

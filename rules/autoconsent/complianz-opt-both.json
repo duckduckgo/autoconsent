@@ -8,7 +8,5 @@
         { "click": ".cc-allow", "optional": true },
         { "click": ".cc-dismiss", "optional": true }
     ],
-    "optOut": [
-        { "waitForThenClick": ".cc-deny" }
-    ]
+    "optOut": [{ "waitForThenClick": ".cc-deny" }]
 }

@@ -8,7 +8,7 @@ const c = tseslint.config(
     ...ddgConfig,
 
     {
-        ignores: ["lib/consentomatic/**/*", "dist/**/*"],
+        ignores: ['lib/consentomatic/**/*', 'dist/**/*'],
     },
 
     {
@@ -28,25 +28,28 @@ const c = tseslint.config(
             },
 
             ecmaVersion: 2021,
-            sourceType: "module",
+            sourceType: 'module',
         },
 
         rules: {
-            "@typescript-eslint/no-explicit-any": 0,
-            "no-unused-expressions": 0,
-            "@typescript-eslint/no-unused-expressions": 0,
+            '@typescript-eslint/no-explicit-any': 0,
+            'no-unused-expressions': 0,
+            '@typescript-eslint/no-unused-expressions': 0,
             '@typescript-eslint/no-require-imports': 0,
-            "@typescript-eslint/no-unused-vars": ["error", {
-                "args": "none",
-                "caughtErrors": "none",
-                "ignoreRestSiblings": true,
-                "vars": "all"
-            }],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    args: 'none',
+                    caughtErrors: 'none',
+                    ignoreRestSiblings: true,
+                    vars: 'all',
+                },
+            ],
         },
     },
 
     {
-        files: ["addon/**/*"],
+        files: ['addon/**/*'],
         languageOptions: {
             globals: {
                 ...globals.webextensions,
@@ -55,7 +58,7 @@ const c = tseslint.config(
     },
 
     {
-        files: ["tests/**/*", "tests-wtr/**/*"],
+        files: ['tests/**/*', 'tests-wtr/**/*'],
         languageOptions: {
             globals: {
                 ...globals.jasmine,

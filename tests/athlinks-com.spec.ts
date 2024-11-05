@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('athlinks-com', [
-  'https://www.athlinks.com/'
-], {});
+generateCMPTests('athlinks-com', ['https://www.athlinks.com/'], {});

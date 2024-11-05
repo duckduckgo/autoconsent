@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('roblox', [
-  'https://www.roblox.com/',
-]);
+generateCMPTests('roblox', ['https://www.roblox.com/']);

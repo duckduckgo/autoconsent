@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('cookieacceptbar', [
-  'https://www.prucenter.com/',
-  'https://www.afmerate.com/',
-]);
+generateCMPTests('cookieacceptbar', ['https://www.prucenter.com/', 'https://www.afmerate.com/']);

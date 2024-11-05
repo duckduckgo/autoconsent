@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('moneysavingexpert.com', [
-  'https://moneysavingexpert.com'], {
-  skipRegions: ["US", "FR", "DE"]
-}
-);
+generateCMPTests('moneysavingexpert.com', ['https://moneysavingexpert.com'], {
+    skipRegions: ['US', 'FR', 'DE'],
+});

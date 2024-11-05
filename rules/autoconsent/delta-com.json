@@ -2,7 +2,7 @@
     "name": "delta.com",
     "runContext": {
         "urlPattern": "^https://www\\.delta\\.com/"
-      },
+    },
     "cosmetic": true,
     "prehideSelectors": ["ngc-cookie-banner"],
     "detectCmp": [{ "exists": "div.cookie-footer-container" }],

@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('livejasmin', [
-  'https://www.livejasmin.com/'
-]);
+generateCMPTests('livejasmin', ['https://www.livejasmin.com/']);

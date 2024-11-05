@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('vodafone.de', [
-  'https://vodafone.de'], {
-  skipRegions: ["US", "FR", "GB"]
-}
-);
+generateCMPTests('vodafone.de', ['https://vodafone.de'], {
+    skipRegions: ['US', 'FR', 'GB'],
+});
