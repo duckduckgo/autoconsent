@@ -1,5 +1,5 @@
-import { FiltersEngine } from '@cliqz/adblocker';
-import { extractFeaturesFromDOM } from '@cliqz/adblocker-content';
+import { FiltersEngine } from '@ghostery/adblocker';
+import { extractFeaturesFromDOM } from '@ghostery/adblocker-content';
 import { parse as tldtsParse } from 'tldts-experimental';
 import { getHidingStyle } from './utils';
 

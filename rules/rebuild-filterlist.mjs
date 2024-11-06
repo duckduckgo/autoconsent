@@ -3,7 +3,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
-import { FiltersEngine } from "@cliqz/adblocker";
+import { FiltersEngine } from "@ghostery/adblocker";
 
 export const rulesDir = path.dirname(fileURLToPath(import.meta.url))
 

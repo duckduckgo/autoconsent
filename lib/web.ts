@@ -9,7 +9,7 @@ import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
-import { FiltersEngine } from '@cliqz/adblocker';
+import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
