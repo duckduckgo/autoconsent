@@ -3,14 +3,16 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
-import { FiltersEngine } from "@ghostery/adblocker";
 
-export const rulesDir = path.dirname(fileURLToPath(import.meta.url))
+const rulesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../rules')
+
+const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_revision.txt'), 'utf-8')
 
 // TODO: consider using python-abp (flrender) to generate filterlist properly
 const filterlistContent = `
 [Adblock Plus 2.0]
 ! Title: CPM Cosmetic Filter List
+! Based on EasyList ${easylistRevision}
 !------------------------General element hiding rules-------------------------!
 ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_general_hide.txt'), 'utf-8')}
 !------------------------Specific element hiding rules------------------------!
@@ -29,28 +31,4 @@ fs.writeFile(
   path.join(rulesDir, "filterlist.txt"),
   filterlistContent,
   () => console.log("Written filterlist.txt")
-);
-
-const engine = FiltersEngine.parse(filterlistContent, {
-  enableMutationObserver: false, // we don't monitor DOM changes at the moment
-  loadNetworkFilters: false,
-  enableHtmlFiltering: false,
-  loadCSPFilters: false,
-});
-const serializedEngine = engine.serialize();
-const engineJson = JSON.stringify(Array.from(serializedEngine));
-
-fs.writeFile(
-  path.join(rulesDir, "../lib/filterlist-engine.ts"),
-  `
-declare global {
-  const BUNDLE_FILTERLIST: boolean;
-}
-const serializedEngine = /* @__PURE__ */ new Uint8Array(
-  ${engineJson}
-);
-const emptyEngine = /* @__PURE__ */ new Uint8Array([]);
-export default BUNDLE_FILTERLIST ? serializedEngine : emptyEngine;
-`,
-  () => console.log("Written filterlist-engine.ts")
 );

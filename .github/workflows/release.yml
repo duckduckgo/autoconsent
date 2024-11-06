@@ -23,9 +23,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Update filterlist
+      - name: Compile filterlist
         run: |
-          npm run update-filterlist
+          npm run compile-filterlist
 
       - name: Create Release
         env:
