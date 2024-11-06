@@ -37,7 +37,7 @@ export interface DomActionsProvider {
 }
 
 export type RuleBundle = {
-  autoconsent?: AutoConsentCMPRule[];
+  autoconsent: AutoConsentCMPRule[];
   consentomatic?: { [name: string]: ConsentOMaticConfig };
 };
 
