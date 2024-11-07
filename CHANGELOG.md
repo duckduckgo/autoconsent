@@ -1,3 +1,31 @@
+# v11.0.0 (Thu Nov 07 2024)
+
+#### 💥 Breaking Change
+
+- Support cosmetic filterlists [#466](https://github.com/duckduckgo/autoconsent/pull/466) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group across 1 directory with 6 updates [#507](https://github.com/duckduckgo/autoconsent/pull/507) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### ⚠️ Pushed to `main`
+
+- Try to fix ci retry [ckip ci] ([@muodov](https://github.com/muodov))
+
+#### 🧪 Tests
+
+- (DomActions) WTR tests for elementVisible() [#497](https://github.com/duckduckgo/autoconsent/pull/497) (frei.ondrej@pm.me [@freiondrej](https://github.com/freiondrej))
+- (DomActions) WTR tests for waitForElement() [#496](https://github.com/duckduckgo/autoconsent/pull/496) (frei.ondrej@pm.me [@freiondrej](https://github.com/freiondrej))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Ondřej Frei ([@freiondrej](https://github.com/freiondrej))
+- ondrej.frei (frei.ondrej@pm.me)
+
+---
+
 # v10.17.0 (Thu Oct 24 2024)
 
 #### 🚀 Enhancement
