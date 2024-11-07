@@ -13,9 +13,8 @@ import { initConfig, isEnabledForDomain, showOptOutStatus } from "./utils";
 const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
-  const res = await fetch("./rules.json");
   storageSet({
-    rules: await res.json(),
+    rules: await (await fetch("./rules.json")).json(),
   });
 }
 

@@ -2,8 +2,17 @@
   "name": "@duckduckgo/autoconsent",
   "version": "10.17.0",
   "description": "",
-  "main": "dist/autoconsent.cjs.js",
-  "module": "dist/autoconsent.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/autoconsent.esm.js",
+      "require": "./dist/autoconsent.cjs.js"
+    },
+    "./extra": {
+      "import": "./dist/autoconsent.extra.esm.js",
+      "require": "./dist/autoconsent.extra.cjs.js"
+    },
+    "./rules/rules.json": "./rules/rules.json"
+  },
   "directories": {
     "lib": "lib"
   },
@@ -11,7 +20,7 @@
     "clean": "rm -r dist",
     "lint": "eslint addon/ lib/ playwright/ tests/ tests-wtr/ rules/autoconsent/*.json",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/filterlist.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -19,12 +28,14 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
-    "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
-    "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
+    "fetch-easylist": "scripts/fetch-easylist.sh",
+    "rebuild-filterlist": "node scripts/rebuild-filterlist.mjs",
+    "update-easylist": "npm run fetch-easylist && npm run rebuild-filterlist",
+    "compile-filterlist": "node scripts/compile-filterlist.mjs",
     "build-rules": "node rules/build.mjs",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run bundle",
+    "prepublish": "npm run compile-filterlist && npm run build-rules && npm run bundle",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts"
@@ -66,6 +77,8 @@
     "onlyPublishWithReleaseLabel": true
   },
   "dependencies": {
-    "tldts-experimental": "^6.1.37"
+    "@ghostery/adblocker": "^2.0.4",
+    "@ghostery/adblocker-content": "^2.0.4",
+    "tldts-experimental": "^6.1.41"
   }
 }
