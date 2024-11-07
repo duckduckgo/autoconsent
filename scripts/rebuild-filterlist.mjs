@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
-const rulesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../rules')
+const rulesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../rules');
 
-const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_revision.txt'), 'utf-8')
+const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_revision.txt'), 'utf-8');
 
 // TODO: consider using python-abp (flrender) to generate filterlist properly
 const filterlistContent = `
@@ -27,8 +27,4 @@ ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist.
 ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
 `;
 
-fs.writeFile(
-  path.join(rulesDir, "filterlist.txt"),
-  filterlistContent,
-  () => console.log("Written filterlist.txt")
-);
+fs.writeFile(path.join(rulesDir, 'filterlist.txt'), filterlistContent, () => console.log('Written filterlist.txt'));

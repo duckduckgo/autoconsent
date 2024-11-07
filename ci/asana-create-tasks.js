@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable camelcase */
 const timersPromises = require('node:timers/promises');
 const Asana = require('asana');

@@ -38,7 +38,7 @@ async function evalInTab(
                         {
                             result: resultArr[0],
                             frameId,
-                            documentId: ''
+                            documentId: '',
                         },
                     ]);
                 },

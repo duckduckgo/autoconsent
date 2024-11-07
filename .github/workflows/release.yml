@@ -25,11 +25,11 @@ jobs:
 
             - name: Compile filterlist
               run: |
-                npm run compile-filterlist
+                  npm run compile-filterlist
 
             - name: Create Release
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
               run: |
-                npm run release
+                  npm run release

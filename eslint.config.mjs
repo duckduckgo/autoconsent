@@ -45,6 +45,7 @@ const c = tseslint.config(
                     vars: 'all',
                 },
             ],
+            'no-undef': 'off',
         },
     },
 
