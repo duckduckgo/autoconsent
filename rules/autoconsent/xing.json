@@ -1,15 +1,15 @@
 {
-  "name": "xing.com",
-  "detectCmp": [{ "exists": "div[class^=cookie-consent-CookieConsent]" }],
-  "detectPopup": [{ "exists": "div[class^=cookie-consent-CookieConsent]" }],
-  "optIn": [{ "click": "#consent-accept-button" }],
-  "optOut": [
-      {
-          "click": "#consent-settings-button"
-      },
-      {
-          "click": ".consent-banner-button-accept-overlay"
-      }
-  ],
- "test": [{"eval": "EVAL_XING_0"}]
+    "name": "xing.com",
+    "detectCmp": [{ "exists": "div[class^=cookie-consent-CookieConsent]" }],
+    "detectPopup": [{ "exists": "div[class^=cookie-consent-CookieConsent]" }],
+    "optIn": [{ "click": "#consent-accept-button" }],
+    "optOut": [
+        {
+            "click": "#consent-settings-button"
+        },
+        {
+            "click": ".consent-banner-button-accept-overlay"
+        }
+    ],
+    "test": [{ "eval": "EVAL_XING_0" }]
 }

@@ -8,16 +8,15 @@
     },
     "detectCmp": [{ "exists": "button#save" }],
     "detectPopup": [{ "visible": "button#save" }],
-    "optIn": [{
-        "click": "button#save"
-    }],
+    "optIn": [
+        {
+            "click": "button#save"
+        }
+    ],
     "optOut": [
         {
             "if": { "exists": "#denyAll" },
-            "then": [
-                { "click": "#denyAll" },
-                { "waitForThenClick": ".okButton" }
-            ],
+            "then": [{ "click": "#denyAll" }, { "waitForThenClick": ".okButton" }],
             "else": [
                 { "waitForThenClick": "#manageSettings" },
                 { "waitFor": ".purposes-overview-list" },

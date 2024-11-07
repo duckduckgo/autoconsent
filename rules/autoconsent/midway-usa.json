@@ -2,7 +2,7 @@
     "name": "midway-usa",
     "runContext": {
         "urlPattern": "^https://www\\.midwayusa\\.com/"
-      },
+    },
     "cosmetic": true,
     "prehideSelectors": ["#cookie-container"],
     "detectCmp": [{ "exists": ["div[aria-label=\"Cookie Policy Banner\"]"] }],

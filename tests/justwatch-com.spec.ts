@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('justwatch.com', [
-  'https://www.justwatch.com/',
-], {});
+generateCMPTests('justwatch.com', ['https://www.justwatch.com/'], {});

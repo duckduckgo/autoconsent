@@ -1,7 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('ubuntu.com', [
-  'https://ubuntu.com/',
-  'https://canonical.com/',
-  'https://snapcraft.io/',
-], {});
+generateCMPTests('ubuntu.com', ['https://ubuntu.com/', 'https://canonical.com/', 'https://snapcraft.io/'], {});

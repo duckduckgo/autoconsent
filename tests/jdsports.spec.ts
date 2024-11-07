@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('jdsports', [
-  'https://www.jdsports.co.uk/',
-]);
+generateCMPTests('jdsports', ['https://www.jdsports.co.uk/']);

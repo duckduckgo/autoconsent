@@ -1,8 +1,6 @@
 {
     "name": "Complianz opt-out",
-    "prehideSelectors": [
-        "[aria-describedby=\"cookieconsent:desc\"].cc-type-opt-out"
-    ],
+    "prehideSelectors": ["[aria-describedby=\"cookieconsent:desc\"].cc-type-opt-out"],
     "detectCmp": [
         {
             "exists": "[aria-describedby=\"cookieconsent:desc\"].cc-type-opt-out"

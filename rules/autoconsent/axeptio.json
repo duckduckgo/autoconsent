@@ -1,41 +1,35 @@
 {
     "name": "axeptio",
     "prehideSelectors": [".axeptio_widget"],
-    "detectCmp": 
-    [
-        { 
-            "exists": ".axeptio_widget" 
-        }
-    ],
-    "detectPopup": 
-    [
-        { 
-            "visible": ".axeptio_widget" 
-        }
-    ],
-    "optIn": 
-    [
+    "detectCmp": [
         {
-            "waitFor": ".axeptio-widget--open" 
+            "exists": ".axeptio_widget"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".axeptio_widget"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": ".axeptio-widget--open"
         },
         {
             "click": "button#axeptio_btn_acceptAll"
         }
     ],
-    "optOut": 
-    [
-
+    "optOut": [
         {
-            "waitFor": ".axeptio-widget--open" 
+            "waitFor": ".axeptio-widget--open"
         },
         {
             "click": "button#axeptio_btn_dismiss"
         }
     ],
-    "test": 
-    [
+    "test": [
         {
             "eval": "EVAL_AXEPTIO_0"
         }
     ]
-  }
+}

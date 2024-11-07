@@ -3,9 +3,7 @@
     "runContext": {
         "urlPattern": "^https://espace-personnel\\.agirc-arrco\\.fr/"
     },
-    "prehideSelectors": [
-        ".cdk-overlay-container"
-    ],
+    "prehideSelectors": [".cdk-overlay-container"],
     "detectCmp": [
         {
             "exists": ".cdk-overlay-container app-esaa-cookie-component"

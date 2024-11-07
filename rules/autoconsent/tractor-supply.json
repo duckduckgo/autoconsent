@@ -2,7 +2,7 @@
     "name": "tractor-supply",
     "runContext": {
         "urlPattern": "^https://www\\.tractorsupply\\.com/"
-      },
+    },
     "cosmetic": true,
     "prehideSelectors": [".tsc-cookie-banner"],
     "detectCmp": [{ "exists": ".tsc-cookie-banner" }],

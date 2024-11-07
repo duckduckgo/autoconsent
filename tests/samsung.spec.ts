@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('samsung.com', [
-  'https://www.samsung.com/us/',
-],{
-});
+generateCMPTests('samsung.com', ['https://www.samsung.com/us/'], {});

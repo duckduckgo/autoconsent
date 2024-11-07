@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('linkedin.com', [
-  'https://linkedin.com/',
-],{
-  skipRegions: ['US'],
+generateCMPTests('linkedin.com', ['https://linkedin.com/'], {
+    skipRegions: ['US'],
 });

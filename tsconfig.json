@@ -1,15 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "es2021",
-    "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "exclude": [
-    "node_modules/*",
-    "playwright.config.ts",
-    "tests/*",
-    "dist/*"
-  ]
+    "compilerOptions": {
+        "target": "es2021",
+        "allowJs": true,
+        "checkJs": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": ["node_modules/*", "dist/*"]
 }

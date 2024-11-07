@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('crossfit-com', [
-  'https://www.crossfit.com/'
-], {});
+generateCMPTests('crossfit-com', ['https://www.crossfit.com/'], {});

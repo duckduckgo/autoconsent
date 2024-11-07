@@ -1,17 +1,26 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "10.17.0",
+  "version": "11.0.0",
   "description": "",
-  "main": "dist/autoconsent.cjs.js",
-  "module": "dist/autoconsent.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/autoconsent.esm.js",
+      "require": "./dist/autoconsent.cjs.js"
+    },
+    "./extra": {
+      "import": "./dist/autoconsent.extra.esm.js",
+      "require": "./dist/autoconsent.extra.cjs.js"
+    },
+    "./rules/rules.json": "./rules/rules.json"
+  },
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "clean": "rm -r dist",
-    "lint": "eslint addon/ lib/ playwright/ tests/ tests-wtr/ rules/autoconsent/*.json",
+    "lint": "eslint . && prettier . --check",
     "bundle": "./build.sh",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" -c \"npm run prepublish\"",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/filterlist.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -19,12 +28,14 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
-    "fetch-fanboy-list": "wget https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
-    "fetch-site-list": "curl https://s3.amazonaws.com/cdn.cliqz.com/re-consent/supported_sites.txt > sites.txt",
+    "fetch-easylist": "scripts/fetch-easylist.sh",
+    "rebuild-filterlist": "node scripts/rebuild-filterlist.mjs",
+    "update-easylist": "npm run fetch-easylist && npm run rebuild-filterlist",
+    "compile-filterlist": "node scripts/compile-filterlist.mjs",
     "build-rules": "node rules/build.mjs",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run build-rules && npm run bundle",
+    "prepublish": "npm run compile-filterlist && npm run build-rules && npm run bundle",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts"
@@ -32,13 +43,13 @@
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
   "devDependencies": {
+    "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#v0.1.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@playwright/test": "^1.17.1",
     "@types/chai": "^5.0.0",
     "@types/chrome": "^0.0.279",
+    "@types/eslint__js": "^8.42.3",
     "@types/mocha": "^10.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.8.1",
-    "@typescript-eslint/parser": "^8.8.1",
     "@web/dev-server-esbuild": "^1.0.2",
     "@web/test-runner": "^0.19.0",
     "@web/test-runner-playwright": "^0.11.0",
@@ -48,14 +59,16 @@
     "chai": "^5.0.0",
     "chokidar-cli": "^3.0.0",
     "esbuild": "^0.24.0",
-    "eslint": "^8.27.0",
-    "eslint-plugin-json": "^3.1.0",
+    "eslint": "^9.14.0",
+    "globals": "^15.11.0",
     "markdown-it": "^14.0.0",
     "mocha": "^10.0.0",
+    "prettier": "3.3.3",
     "sinon": "^19.0.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
     "typescript": "^5.1.6",
+    "typescript-eslint": "^8.12.2",
     "web-ext": "^8.3.0"
   },
   "repository": "duckduckgo/autoconsent",
@@ -66,6 +79,8 @@
     "onlyPublishWithReleaseLabel": true
   },
   "dependencies": {
-    "tldts-experimental": "^6.1.37"
+    "@ghostery/adblocker": "^2.0.4",
+    "@ghostery/adblocker-content": "^2.0.4",
+    "tldts-experimental": "^6.1.41"
   }
 }

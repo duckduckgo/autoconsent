@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('marksandspencer.com', [
-  'https://www.marksandspencer.com/',
-], {
-  skipRegions: ["US", "FR", "DE"]
+generateCMPTests('marksandspencer.com', ['https://www.marksandspencer.com/'], {
+    skipRegions: ['US', 'FR', 'DE'],
 });

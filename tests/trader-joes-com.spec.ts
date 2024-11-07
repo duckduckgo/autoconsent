@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('trader-joes-com', [
-  'https://www.traderjoes.com/home'
-], {});
+generateCMPTests('trader-joes-com', ['https://www.traderjoes.com/home'], {});

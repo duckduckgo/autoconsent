@@ -2,11 +2,8 @@
     "vendorUrl": "https://www.civicuk.com/cookie-control/",
     "name": "civic-cookie-control",
     "prehideSelectors": ["#ccc-module,#ccc-overlay"],
-    "detectCmp": [{"exists": "#ccc-module"}],
-    "detectPopup": [
-        {"visible": "#ccc"},
-        {"visible": "#ccc-module"}
-    ],
-    "optOut": [{"click": "#ccc-reject-settings"}],
-    "optIn": [{"click": "#ccc-recommended-settings"}]
+    "detectCmp": [{ "exists": "#ccc-module" }],
+    "detectPopup": [{ "visible": "#ccc" }, { "visible": "#ccc-module" }],
+    "optOut": [{ "click": "#ccc-reject-settings" }],
+    "optIn": [{ "click": "#ccc-recommended-settings" }]
 }

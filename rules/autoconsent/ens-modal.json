@@ -3,9 +3,7 @@
     "prehideSelectors": [".ensModal"],
     "detectCmp": [{ "exists": ".ensModal" }],
     "detectPopup": [{ "visible": "#ensModalWrapper[style*=block]" }],
-    "optIn": [
-        { "waitForThenClick": "#modalAcceptButton" }
-    ],
+    "optIn": [{ "waitForThenClick": "#modalAcceptButton" }],
     "optOut": [
         { "wait": 500 },
         { "visible": "#ensModalWrapper[style*=block]" },

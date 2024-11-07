@@ -1,7 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('webflow', [
-  'https://www.nexaas.com/',
-  'https://www.boltive.com/',
-  'https://www.hk.co/',
-]);
+generateCMPTests('webflow', ['https://www.nexaas.com/', 'https://www.boltive.com/', 'https://www.hk.co/']);

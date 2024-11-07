@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('healthline-media', [
-  'https://www.healthline.com/',
-  'https://www.medicalnewstoday.com/'
-], {});
+generateCMPTests('healthline-media', ['https://www.healthline.com/', 'https://www.medicalnewstoday.com/'], {});

@@ -10,7 +10,7 @@
                 "exists": "button[data-cookiefirst-action=adjust]"
             },
             "then": [
-                { 
+                {
                     "click": "button[data-cookiefirst-action=adjust]"
                 },
                 {
@@ -27,9 +27,7 @@
                     "click": "button[data-cookiefirst-action=save]"
                 }
             ],
-            "else": [
-                { "click": "button[data-cookiefirst-action=reject]" }
-            ]
+            "else": [{ "click": "button[data-cookiefirst-action=reject]" }]
         }
     ],
     "test": [

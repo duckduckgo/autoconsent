@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('medium', [
-  'https://medium.com/',
-]);
+generateCMPTests('medium', ['https://medium.com/']);

@@ -13,9 +13,7 @@
         {
             "if": { "exists": ".cc-deny" },
             "then": [{ "click": ".cc-deny" }],
-            "else": [
-                { "hide": "[aria-describedby=\"cookieconsent:desc\"]" }
-            ]
+            "else": [{ "hide": "[aria-describedby=\"cookieconsent:desc\"]" }]
         }
     ]
 }

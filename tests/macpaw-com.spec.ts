@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('macpaw.com', [
-  'https://macpaw.com/',
-], {});
+generateCMPTests('macpaw.com', ['https://macpaw.com/'], {});

@@ -2,7 +2,7 @@
     "name": "monzo.com",
     "prehideSelectors": [".cookie-alert, cookie-alert__content"],
     "detectCmp": [
-        { 
+        {
             "exists": "div.cookie-alert[role=\"dialog\"]"
         },
         {
@@ -11,7 +11,5 @@
     ],
     "detectPopup": [{ "visible": ".cookie-alert__content" }],
     "optIn": [{ "click": ".js-accept-cookie-policy" }],
-    "optOut": [
-        {"click": ".js-decline-cookie-policy"}
-    ]
-  }
+    "optOut": [{ "click": ".js-decline-cookie-policy" }]
+}

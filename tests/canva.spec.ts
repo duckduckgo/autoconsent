@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('canva.com', [
-  'https://www.canva.com/',
-], {});
+generateCMPTests('canva.com', ['https://www.canva.com/'], {});

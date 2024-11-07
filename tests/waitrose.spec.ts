@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('waitrose.com', [
-  'https://waitrose.com'], {
-  skipRegions: ["US","FR","DE"]
-}
-);
+generateCMPTests('waitrose.com', ['https://waitrose.com'], {
+    skipRegions: ['US', 'FR', 'DE'],
+});

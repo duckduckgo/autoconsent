@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('amex', [
-  'https://www.americanexpress.com/',
-]);
+generateCMPTests('amex', ['https://www.americanexpress.com/']);

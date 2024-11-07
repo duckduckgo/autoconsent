@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Sirdata', [
-  'https://www.comment-economiser.fr/',
-], {
-  skipRegions: ['US']
+generateCMPTests('Sirdata', ['https://www.comment-economiser.fr/'], {
+    skipRegions: ['US'],
 });

@@ -1,11 +1,7 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('com_springer', [
-  'https://www.beobachter.ch/',
-  'https://www.blick.ch/',
-  'https://www.onet.pl/',
-], {
-  skipRegions: ['GB'],
-  testOptIn: false,
-  testSelfTest: false,
+generateCMPTests('com_springer', ['https://www.beobachter.ch/', 'https://www.blick.ch/', 'https://www.onet.pl/'], {
+    skipRegions: ['GB'],
+    testOptIn: false,
+    testSelfTest: false,
 });

@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('almacmp', [
-  'https://www.iltalehti.fi/',
-], {});
+generateCMPTests('almacmp', ['https://www.iltalehti.fi/'], {});
