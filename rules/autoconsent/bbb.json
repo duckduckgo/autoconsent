@@ -2,7 +2,7 @@
     "name": "bbb.org",
     "runContext": {
         "urlPattern": "^https://www\\.bbb\\.org/"
-      },
+    },
     "cosmetic": true,
     "prehideSelectors": ["div[aria-label=\"use of cookies on bbb.org\"]"],
     "detectCmp": [{ "exists": "div[aria-label=\"use of cookies on bbb.org\"]" }],

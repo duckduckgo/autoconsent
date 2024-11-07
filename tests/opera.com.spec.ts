@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('opera.com', [
-  'https://www.opera.com'
-]);
+generateCMPTests('opera.com', ['https://www.opera.com']);

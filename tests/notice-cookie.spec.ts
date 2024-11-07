@@ -1,7 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('notice-cookie', [
-  'https://forum.proxmox.com/',
-  'https://usethinkscript.com/'
-], {
-});
+generateCMPTests('notice-cookie', ['https://forum.proxmox.com/', 'https://usethinkscript.com/'], {});

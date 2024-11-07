@@ -1,37 +1,33 @@
 {
-  "name": "affinity.serif.com",
-  "detectCmp": [
-    {
-      "exists": ".c-cookie-banner button[data-qa='allow-all-cookies']"
-    }
-  ],
-  "detectPopup": [
-    { "visible": ".c-cookie-banner" }
-  ],
-  "optIn": [
-    { "click": "button[data-qa=\"allow-all-cookies\"]" }
-  ],
-  "optOut": [
-    {
-      "click": "button[data-qa=\"manage-cookies\"]"
-    },
-    {
-      "waitFor": ".c-cookie-banner ~ [role=\"dialog\"]"
-    },
-    {
-      "waitForThenClick": ".c-cookie-banner ~ [role=\"dialog\"] input[type=\"checkbox\"][value=\"true\"]",
-      "all": true
-    },
-    {
-      "click": ".c-cookie-banner ~ [role=\"dialog\"] .c-modal__action button"
-    }
-  ],
-  "test": [
-    {
-      "wait": 500
-    },
-    {
-      "eval": "EVAL_AFFINITY_SERIF_COM_0"
-    }
-  ]
+    "name": "affinity.serif.com",
+    "detectCmp": [
+        {
+            "exists": ".c-cookie-banner button[data-qa='allow-all-cookies']"
+        }
+    ],
+    "detectPopup": [{ "visible": ".c-cookie-banner" }],
+    "optIn": [{ "click": "button[data-qa=\"allow-all-cookies\"]" }],
+    "optOut": [
+        {
+            "click": "button[data-qa=\"manage-cookies\"]"
+        },
+        {
+            "waitFor": ".c-cookie-banner ~ [role=\"dialog\"]"
+        },
+        {
+            "waitForThenClick": ".c-cookie-banner ~ [role=\"dialog\"] input[type=\"checkbox\"][value=\"true\"]",
+            "all": true
+        },
+        {
+            "click": ".c-cookie-banner ~ [role=\"dialog\"] .c-modal__action button"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "eval": "EVAL_AFFINITY_SERIF_COM_0"
+        }
+    ]
 }

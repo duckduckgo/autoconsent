@@ -6,9 +6,11 @@
     },
     "detectCmp": [{ "exists": ".consent" }],
     "detectPopup": [{ "visible": ".consent" }],
-    "optIn": [{
-        "click": "button.consentAgree"
-    }],
+    "optIn": [
+        {
+            "click": "button.consentAgree"
+        }
+    ],
     "optOut": [
         {
             "click": "button.consentSettings"

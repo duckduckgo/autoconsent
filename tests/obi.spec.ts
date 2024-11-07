@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('obi.de', [
-  'https://obi.de'], {
-  skipRegions: ["US", "FR", "GB"]
-}
-);
+generateCMPTests('obi.de', ['https://obi.de'], {
+    skipRegions: ['US', 'FR', 'GB'],
+});

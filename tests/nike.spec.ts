@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('nike', [
-  'https://www.nike.com/',
-]);
+generateCMPTests('nike', ['https://www.nike.com/']);

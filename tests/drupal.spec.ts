@@ -1,8 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Drupal', [
-  "https://www.drupal.org/"
-], {
-  skipRegions: ["US"]
-}
-);
+generateCMPTests('Drupal', ['https://www.drupal.org/'], {
+    skipRegions: ['US'],
+});

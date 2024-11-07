@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('snigel', [
-  'https://w3schools.com'], {
-  skipRegions: ["US"]
-}
-);
+generateCMPTests('snigel', ['https://w3schools.com'], {
+    skipRegions: ['US'],
+});

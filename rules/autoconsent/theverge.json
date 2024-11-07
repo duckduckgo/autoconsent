@@ -6,9 +6,7 @@
         "urlPattern": "^https://(www)?\\.theverge\\.com"
     },
     "intermediate": false,
-    "prehideSelectors": [
-        ".duet--cta--cookie-banner"
-    ],
+    "prehideSelectors": [".duet--cta--cookie-banner"],
     "detectCmp": [
         {
             "exists": ".duet--cta--cookie-banner"

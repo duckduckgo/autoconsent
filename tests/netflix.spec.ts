@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('netflix.de', [
-  'https://netflix.com'], {
-  skipRegions: ["US", "FR", "GB"]
-}
-);
+generateCMPTests('netflix.de', ['https://netflix.com'], {
+    skipRegions: ['US', 'FR', 'GB'],
+});

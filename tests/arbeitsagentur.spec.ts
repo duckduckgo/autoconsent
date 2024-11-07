@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('arbeitsagentur', [
-  'https://www.arbeitsagentur.de/'
-]);
+generateCMPTests('arbeitsagentur', ['https://www.arbeitsagentur.de/']);

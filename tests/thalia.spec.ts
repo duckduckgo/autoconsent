@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('thalia.de', [
-  'https://thalia.de'], {
-  skipRegions: ["US", "FR", "GB"]
-}
-);
+generateCMPTests('thalia.de', ['https://thalia.de'], {
+    skipRegions: ['US', 'FR', 'GB'],
+});

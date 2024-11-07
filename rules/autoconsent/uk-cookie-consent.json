@@ -1,16 +1,10 @@
 {
-  "name": "UK Cookie Consent",
-  "prehideSelectors": ["#catapult-cookie-bar"],
-  "cosmetic": true,
-  "detectCmp": [{ "exists": "#catapult-cookie-bar" }],
-  "detectPopup": [{ "exists": ".has-cookie-bar #catapult-cookie-bar" }],
-  "optIn": [
-    { "click": "#catapultCookie" }
-  ],
-  "optOut": [
-    { "hide": "#catapult-cookie-bar" }
-  ],
-  "test": [
-    { "eval": "EVAL_UK_COOKIE_CONSENT_0" }
-  ]
+    "name": "UK Cookie Consent",
+    "prehideSelectors": ["#catapult-cookie-bar"],
+    "cosmetic": true,
+    "detectCmp": [{ "exists": "#catapult-cookie-bar" }],
+    "detectPopup": [{ "exists": ".has-cookie-bar #catapult-cookie-bar" }],
+    "optIn": [{ "click": "#catapultCookie" }],
+    "optOut": [{ "hide": "#catapult-cookie-bar" }],
+    "test": [{ "eval": "EVAL_UK_COOKIE_CONSENT_0" }]
 }

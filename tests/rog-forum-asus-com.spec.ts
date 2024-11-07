@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('rog-forum.asus.com', [
-  'https://rog-forum.asus.com/'
-], {});
+generateCMPTests('rog-forum.asus.com', ['https://rog-forum.asus.com/'], {});

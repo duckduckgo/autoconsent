@@ -1,8 +1,6 @@
 {
     "name": "ubuntu.com",
-    "prehideSelectors": [
-        "dialog.cookie-policy"
-    ],
+    "prehideSelectors": ["dialog.cookie-policy"],
     "detectCmp": [
         {
             "any": [
@@ -32,7 +30,8 @@
             "any": [
                 {
                     "waitForThenClick": "#cookie-policy-button-accept"
-                }, {
+                },
+                {
                     "waitForThenClick": "xpath///*[@id=\"cookie-policy-button-accept\"]"
                 }
             ]

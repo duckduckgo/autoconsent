@@ -6,17 +6,14 @@
  * @returns {string}
  * @throws {Error} - If the string does not contain the searchRegex
  */
-function replaceInString (string, searchRegex, replace) {
-  if (!searchRegex.test(string)) {
-    const errorMsg = 'No match found in the string. Check both string and regex.'
-    console.log(errorMsg)
-    console.log(string)
-    throw new Error(errorMsg)
-  }
-  return string.replaceAll(
-    new RegExp(searchRegex.source, 'gi'),
-    replace
-  )
+function replaceInString(string, searchRegex, replace) {
+    if (!searchRegex.test(string)) {
+        const errorMsg = 'No match found in the string. Check both string and regex.';
+        console.log(errorMsg);
+        console.log(string);
+        throw new Error(errorMsg);
+    }
+    return string.replaceAll(new RegExp(searchRegex.source, 'gi'), replace);
 }
 
 /**
@@ -26,12 +23,12 @@ function replaceInString (string, searchRegex, replace) {
  * @returns {string}
  * @throws {Error} - If the string does not contain the searchRegex
  */
-function replaceAllInString (string, changes) {
-  let updatedFile = string
-  for (const [searchRegex, replace = ''] of changes) {
-    updatedFile = replaceInString(updatedFile, searchRegex, replace)
-  }
-  return updatedFile
+function replaceAllInString(string, changes) {
+    let updatedFile = string;
+    for (const [searchRegex, replace = ''] of changes) {
+        updatedFile = replaceInString(updatedFile, searchRegex, replace);
+    }
+    return updatedFile;
 }
 
 /**
@@ -40,8 +37,8 @@ function replaceAllInString (string, changes) {
  * @param {string} [anchor]
  * @returns {string}
  */
-function getLink (url, anchor) {
-  return `<a href="${url}">${anchor || url}</a>`
+function getLink(url, anchor) {
+    return `<a href="${url}">${anchor || url}</a>`;
 }
 
 /**
@@ -49,13 +46,13 @@ function getLink (url, anchor) {
  * @param {string} content
  * @returns {string}
  */
-function wrapInLi (content) {
-  return `<li>${content}</li>`
+function wrapInLi(content) {
+    return `<li>${content}</li>`;
 }
 
 module.exports = {
-  replaceInString,
-  replaceAllInString,
-  getLink,
-  wrapInLi
-}
+    replaceInString,
+    replaceAllInString,
+    getLink,
+    wrapInLi,
+};

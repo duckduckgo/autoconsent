@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('csu-landtag-de', [
-  'https://www.csu-landtag.de/',
-]);
+generateCMPTests('csu-landtag-de', ['https://www.csu-landtag.de/']);

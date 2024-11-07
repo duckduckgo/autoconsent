@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('canyon.com', [
-  'https://www.canyon.com/en-us/'
-], {});
+generateCMPTests('canyon.com', ['https://www.canyon.com/en-us/'], {});

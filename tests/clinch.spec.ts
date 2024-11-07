@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests("clinch", [
-  "https://careers.cloud.com/CloudCareers",
-  "https://www.weareroku.com/home"
-]);
+generateCMPTests('clinch', ['https://careers.cloud.com/CloudCareers', 'https://www.weareroku.com/home']);

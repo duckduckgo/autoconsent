@@ -5,12 +5,7 @@
     "detectPopup": [{ "visible": ".cc-type-categories[aria-describedby=\"cookieconsent:desc\"]" }],
     "optIn": [
         {
-            "any": [
-                { "click": ".cc-accept-all" },
-                { "click": ".cc-allow-all" },
-                { "click": ".cc-allow" },
-                { "click": ".cc-dismiss" }
-            ]
+            "any": [{ "click": ".cc-accept-all" }, { "click": ".cc-allow-all" }, { "click": ".cc-allow" }, { "click": ".cc-dismiss" }]
         }
     ],
     "optOut": [

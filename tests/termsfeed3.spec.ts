@@ -1,7 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('termsfeed3', [
-  'https://www.onealsteel.com/',
-  'https://www.millionairematch.com/',
-  'https://www.sugardaddymeet.com/',
-]);
+generateCMPTests('termsfeed3', ['https://www.onealsteel.com/', 'https://www.millionairematch.com/', 'https://www.sugardaddymeet.com/']);

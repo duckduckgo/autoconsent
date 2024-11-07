@@ -1,7 +1,5 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('tropicfeel-com', [
-  'https://shop.tropicfeel.com/',
-], {
-  skipRegions: [],
+generateCMPTests('tropicfeel-com', ['https://shop.tropicfeel.com/'], {
+    skipRegions: [],
 });

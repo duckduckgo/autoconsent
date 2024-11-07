@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('asus', [
-  'https://www.asus.com/us/',
-  'https://www.asus.com/',
-]);
+generateCMPTests('asus', ['https://www.asus.com/us/', 'https://www.asus.com/']);

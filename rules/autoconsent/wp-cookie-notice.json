@@ -1,12 +1,10 @@
 {
-  "name": "WP Cookie Notice for GDPR",
-  "vendorUrl": "https://wordpress.org/plugins/gdpr-cookie-consent/",
-  "prehideSelectors": ["#gdpr-cookie-consent-bar"],
-  "detectCmp": [{ "exists": "#gdpr-cookie-consent-bar" }],
-  "detectPopup": [{ "visible": "#gdpr-cookie-consent-bar" }],
-  "optIn": [ { "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_accept" } ],
-  "optOut": [ { "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_reject" } ],
-  "test": [
-    { "eval": "EVAL_WP_COOKIE_NOTICE_0" }
-  ]
+    "name": "WP Cookie Notice for GDPR",
+    "vendorUrl": "https://wordpress.org/plugins/gdpr-cookie-consent/",
+    "prehideSelectors": ["#gdpr-cookie-consent-bar"],
+    "detectCmp": [{ "exists": "#gdpr-cookie-consent-bar" }],
+    "detectPopup": [{ "visible": "#gdpr-cookie-consent-bar" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_accept" }],
+    "optOut": [{ "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_reject" }],
+    "test": [{ "eval": "EVAL_WP_COOKIE_NOTICE_0" }]
 }

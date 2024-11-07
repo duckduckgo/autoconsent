@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('ourworldindata', [
-  'https://ourworldindata.org/',
-]);
+generateCMPTests('ourworldindata', ['https://ourworldindata.org/']);

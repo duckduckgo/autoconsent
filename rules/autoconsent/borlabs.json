@@ -1,43 +1,43 @@
 {
-  "name": "borlabs",
-  "detectCmp": [
-    {
-      "exists": "._brlbs-block-content"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "._brlbs-bar-wrap,._brlbs-box-wrap"
-    }
-  ],
-  "optIn": [
-    {
-      "click": "a[data-cookie-accept-all]"
-    }
-  ],
-  "optOut": [
-    {
-      "click": "a[data-cookie-individual]"
-    },
-    {
-      "waitForVisible": ".cookie-preference"
-    },
-    {
-      "click": "input[data-borlabs-cookie-checkbox]:checked",
-      "all": true,
-      "optional": true
-    },
-    {
-      "click": "#CookiePrefSave"
-    },
-    {
-      "wait": 500
-    }
-  ],
-  "prehideSelectors": [
-    "#BorlabsCookieBox"
-  ],
-  "test": [{
-    "eval": "EVAL_BORLABS_0"
-  }]
+    "name": "borlabs",
+    "detectCmp": [
+        {
+            "exists": "._brlbs-block-content"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "._brlbs-bar-wrap,._brlbs-box-wrap"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "a[data-cookie-accept-all]"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "a[data-cookie-individual]"
+        },
+        {
+            "waitForVisible": ".cookie-preference"
+        },
+        {
+            "click": "input[data-borlabs-cookie-checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#CookiePrefSave"
+        },
+        {
+            "wait": 500
+        }
+    ],
+    "prehideSelectors": ["#BorlabsCookieBox"],
+    "test": [
+        {
+            "eval": "EVAL_BORLABS_0"
+        }
+    ]
 }

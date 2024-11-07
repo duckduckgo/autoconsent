@@ -2,15 +2,12 @@
     "name": "cookie-script",
     "vendorUrl": "https://cookie-script.com/",
     "prehideSelectors": ["#cookiescript_injected"],
-    "detectCmp": [{"exists": "#cookiescript_injected"}],
-    "detectPopup": [{"visible": "#cookiescript_injected"}],
+    "detectCmp": [{ "exists": "#cookiescript_injected" }],
+    "detectPopup": [{ "visible": "#cookiescript_injected" }],
     "optOut": [
         {
             "if": { "exists": "#cookiescript_reject" },
-            "then": [
-                { "wait": 100 },
-                {"click": "#cookiescript_reject" }
-            ],
+            "then": [{ "wait": 100 }, { "click": "#cookiescript_reject" }],
             "else": [
                 { "click": "#cookiescript_manage" },
                 { "waitForVisible": ".cookiescript_fsd_main" },
@@ -18,5 +15,5 @@
             ]
         }
     ],
-    "optIn": [{"click": "#cookiescript_accept"}]
+    "optIn": [{ "click": "#cookiescript_accept" }]
 }

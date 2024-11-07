@@ -1,6 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('delta.com', [
-  'https://www.delta.com/',
-],{
-});
+generateCMPTests('delta.com', ['https://www.delta.com/'], {});

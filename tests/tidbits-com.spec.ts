@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('tidbits-com', [
-  'https://tidbits.com/'
-], {});
+generateCMPTests('tidbits-com', ['https://tidbits.com/'], {});

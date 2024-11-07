@@ -2,7 +2,7 @@
     "name": "true-car",
     "runContext": {
         "urlPattern": "^https://www\\.truecar\\.com/"
-      },
+    },
     "cosmetic": true,
     "prehideSelectors": [["div[aria-labelledby=\"cookie-banner-heading\"]"]],
     "detectCmp": [{ "exists": "div[aria-labelledby=\"cookie-banner-heading\"]" }],

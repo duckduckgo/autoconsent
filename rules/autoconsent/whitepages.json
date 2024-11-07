@@ -2,7 +2,7 @@
     "name": "whitepages.com",
     "runContext": {
         "urlPattern": "^https://www\\.whitepages\\.com/"
-      },
+    },
     "cosmetic": true,
     "prehideSelectors": [".cookie-wrapper, .cookie-overlay"],
     "detectCmp": [{ "exists": ".cookie-wrapper" }],
