@@ -26,7 +26,7 @@ jobs:
 
             - name: Read EasyList revision
               id: read-revision
-              run: echo "revision=`cat rules/filterlists/easylist_revision.txt`"" >> "$GITHUB_OUTPUT"
+              run: echo "revision=`cat rules/filterlists/easylist_revision.txt`" >> "$GITHUB_OUTPUT"
 
             - name: Create Pull Request
               uses: peter-evans/create-pull-request@v7
