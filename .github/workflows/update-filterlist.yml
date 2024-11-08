@@ -36,6 +36,7 @@ jobs:
                   labels: |
                       minor
                       dependencies
+                      release
                   reviewers: muodov,sammacbeth
                   body: |
                       This PR updates the filterlist based on EasyList Cookie commit [${{ steps.read-revision.outputs.revision }}](https://github.com/easylist/easylist/tree/${{ steps.read-revision.outputs.revision }}/easylist_cookie).
