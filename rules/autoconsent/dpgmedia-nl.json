@@ -1,27 +1,27 @@
 {
     "name": "dpgmedia-nl",
-    "prehideSelectors": ["#pg-shadow-host"],
+    "prehideSelectors": ["#pg-shadow-root-host"],
     "detectCmp": [
         {
-            "exists": "#pg-shadow-host"
+            "exists": "#pg-shadow-root-host"
         }
     ],
     "detectPopup": [
         {
-            "visible": ["#pg-shadow-host", "#pg-modal"]
+            "visible": ["#pg-shadow-root-host", "#pg-modal"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#pg-shadow-host", "#pg-accept-btn"]
+            "waitForThenClick": ["#pg-shadow-root-host", "#pg-accept-btn"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["#pg-shadow-host", "#pg-configure-btn"]
+            "waitForThenClick": ["#pg-shadow-root-host", "#pg-configure-btn"]
         },
         {
-            "waitForThenClick": ["#pg-shadow-host", "#pg-reject-btn"]
+            "waitForThenClick": ["#pg-shadow-root-host", "#pg-reject-btn"]
         }
     ]
 }
