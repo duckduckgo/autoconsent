@@ -13,6 +13,7 @@ const filterlistContent = `
 [Adblock Plus 2.0]
 ! Title: CPM Cosmetic Filter List
 ! Based on EasyList ${easylistRevision}
+! Generated on ${new Date().toISOString()}
 !------------------------General element hiding rules-------------------------!
 ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_general_hide.txt'), 'utf-8')}
 !------------------------Specific element hiding rules------------------------!
