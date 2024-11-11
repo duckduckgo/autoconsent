@@ -14,12 +14,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ["bahf-cookie-disclaimer-dpl3", "bahf-cd-modal-dpl3 .ba-btn-primary"]
+            "waitForThenClick": ["bahf-cookie-disclaimer-dpl3", "#bahf-cookie-disclaimer-modal .ba-btn-primary"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["bahf-cookie-disclaimer-dpl3", "bahf-cd-modal-dpl3 .ba-btn-contrast"]
+            "waitForThenClick": ["bahf-cookie-disclaimer-dpl3", "#bahf-cookie-disclaimer-modal .ba-btn-contrast"]
         }
     ],
     "test": [
