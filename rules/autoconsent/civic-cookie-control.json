@@ -1,9 +1,27 @@
 {
     "vendorUrl": "https://www.civicuk.com/cookie-control/",
     "name": "civic-cookie-control",
-    "prehideSelectors": ["#ccc-module,#ccc-overlay"],
-    "detectCmp": [{ "exists": "#ccc-module" }],
-    "detectPopup": [{ "visible": "#ccc" }, { "visible": "#ccc-module" }],
-    "optOut": [{ "click": "#ccc-reject-settings" }],
-    "optIn": [{ "click": "#ccc-recommended-settings" }]
+    "prehideSelectors": ["#ccc-module,#ccc-overlay,#ccc"],
+    "detectCmp": [{ "exists": "#ccc-module,#ccc-notify" }],
+    "detectPopup": [{ "visible": "#ccc" }, { "visible": "#ccc-module,#ccc-notify" }],
+    "optOut": [
+        {
+            "if": { "exists": "#ccc-notify" },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#ccc #ccc-notify .ccc-notify-buttons",
+                        "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences')]"
+                    ]
+                },
+                { "waitForVisible": "#ccc-module" }
+            ]
+        },
+        {
+            "if": { "exists": "#ccc-reject-settings" },
+            "then": [{ "waitForThenClick": "#ccc-reject-settings" }],
+            "else": [{ "waitForThenClick": "#ccc-dismiss-button" }]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#ccc-recommended-settings,#ccc-notify-accept" }]
 }
