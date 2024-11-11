@@ -1,3 +1,32 @@
+# v11.1.0 (Mon Nov 11 2024)
+
+#### 🚀 Enhancement
+
+- Fix arbeitsagentur [#523](https://github.com/duckduckgo/autoconsent/pull/523) ([@muodov](https://github.com/muodov))
+- Update dpgmedia [#521](https://github.com/duckduckgo/autoconsent/pull/521) ([@muodov](https://github.com/muodov))
+- Fix a rule for pornhub [#520](https://github.com/duckduckgo/autoconsent/pull/520) ([@muodov](https://github.com/muodov))
+- fix trustarc popup detection [#519](https://github.com/duckduckgo/autoconsent/pull/519) ([@muodov](https://github.com/muodov))
+- Add rule for tesco.com [#508](https://github.com/duckduckgo/autoconsent/pull/508) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 3e2a625d9b08717134a6a0b6b39b73de3e7c792b [#522](https://github.com/duckduckgo/autoconsent/pull/522) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#515](https://github.com/duckduckgo/autoconsent/pull/515) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Ignore lint PR commit [#516](https://github.com/duckduckgo/autoconsent/pull/516) ([@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 6.1.51 to 6.1.58 [#511](https://github.com/duckduckgo/autoconsent/pull/511) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🧪 Tests
+
+- Use shared ESLint config + adopt Prettier [#513](https://github.com/duckduckgo/autoconsent/pull/513) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v11.0.0 (Thu Nov 07 2024)
 
 #### 💥 Breaking Change
