@@ -53,7 +53,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     async detectPopup() {
         // not every element should exist, but if it does, it's a popup
-        return this.elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'all');
+        return this.elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'any');
     }
 
     openFrame() {
