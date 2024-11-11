@@ -3,10 +3,26 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?pornhub\\.com/"
     },
-    "cosmetic": true,
-    "prehideSelectors": [".cookiesBanner"],
-    "detectCmp": [{ "exists": ".cookiesBanner" }],
-    "detectPopup": [{ "visible": ".cookiesBanner" }],
-    "optIn": [{ "click": ".cookiesBanner .okButton" }],
-    "optOut": [{ "hide": ".cookiesBanner" }]
+    "cosmetic": false,
+    "prehideSelectors": ["#cookieBanner #cookieBannerContent"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBanner #cookieBannerContent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBanner #cookieBannerContent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBanner [data-label=accept_all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieBanner [data-label=accept_essential]"
+        }
+    ]
 }
