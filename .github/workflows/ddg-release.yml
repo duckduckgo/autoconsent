@@ -7,6 +7,13 @@ on:
                 description: 'The tag of the release to propagate'
                 required: true
 
+    workflow_call:
+        inputs:
+            tag_name:
+                type: string
+                description: 'The tag of the release to propagate'
+                required: true
+
 env:
     TAG: ${{ inputs.tag_name }}
     RELEASE_NOTES: See release notes [here](https://github.com/duckduckgo/autoconsent/blob/${{ inputs.tag_name }}/CHANGELOG.md)
