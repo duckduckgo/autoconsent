@@ -19,8 +19,7 @@ wget --directory-prefix="${RULES_DIR}" \
     "https://raw.githubusercontent.com/easylist/easylist/${EASYLIST_REVISION}/easylist_cookie/easylist_cookie_specific_hide.txt" \
     "https://raw.githubusercontent.com/easylist/easylist/${EASYLIST_REVISION}/easylist_cookie/easylist_cookie_specific_uBO.txt" \
     "https://raw.githubusercontent.com/easylist/easylist/${EASYLIST_REVISION}/easylist_cookie/easylist_cookie_international_specific_hide.txt" \
-    "https://raw.githubusercontent.com/easylist/easylist/${EASYLIST_REVISION}/easylist_cookie/easylist_cookie_allowlist_general_hide.txt" \
-    "https://raw.githubusercontent.com/easylist/easylist/${EASYLIST_REVISION}/easylist_cookie/easylist_cookie_allowlist.txt"
+    "https://raw.githubusercontent.com/easylist/easylist/${EASYLIST_REVISION}/easylist_cookie/easylist_cookie_allowlist_general_hide.txt"
 
 echo "${EASYLIST_REVISION}" > "${RULES_DIR}/easylist_revision.txt"
 echo "Saved the Easylist revision to ${RULES_DIR}/easylist_revision.txt"
