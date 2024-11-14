@@ -6,6 +6,26 @@ on:
             tag_name:
                 description: 'The tag of the release to propagate'
                 required: true
+            android:
+                description: 'Propagate to Android'
+                type: boolean
+                required: true
+                default: true
+            ios:
+                description: 'Propagate to iOS'
+                type: boolean
+                required: true
+                default: true
+            macos:
+                description: 'Propagate to macOS'
+                type: boolean
+                required: true
+                default: true
+            windows:
+                description: 'Propagate to Windows'
+                type: boolean
+                required: true
+                default: true
 
     workflow_call:
         inputs:
@@ -13,6 +33,26 @@ on:
                 type: string
                 description: 'The tag of the release to propagate'
                 required: true
+            android:
+                description: 'Propagate to Android'
+                type: boolean
+                required: true
+                default: true
+            ios:
+                description: 'Propagate to iOS'
+                type: boolean
+                required: true
+                default: true
+            macos:
+                description: 'Propagate to macOS'
+                type: boolean
+                required: true
+                default: true
+            windows:
+                description: 'Propagate to Windows'
+                type: boolean
+                required: true
+                default: true
 
 env:
     TAG: ${{ inputs.tag_name }}
@@ -84,6 +124,7 @@ jobs:
     # ------------------------------------------------------------------------------
 
     update_android:
+        if: ${{ inputs.android }}
         runs-on: ubuntu-latest
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
@@ -145,6 +186,7 @@ jobs:
     # ------------------------------------------------------------------------------
 
     update_ios:
+        if: ${{ inputs.ios }}
         runs-on: ubuntu-latest
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
@@ -206,6 +248,7 @@ jobs:
     # ------------------------------------------------------------------------------
 
     update_macos:
+        if: ${{ inputs.macos }}
         runs-on: ubuntu-latest
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
@@ -267,6 +310,7 @@ jobs:
     # ------------------------------------------------------------------------------
 
     update_windows:
+        if: ${{ inputs.windows }}
         runs-on: ubuntu-latest
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}

@@ -3,10 +3,10 @@ const { replaceAllInString, getLink } = require('./release-utils.js');
 
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN;
 const prUrls = {
-    android: process.env.ANDROID_PR_URL || 'https://example.com/',
-    ios: process.env.IOS_PR_URL || 'https://example.com/',
-    macos: process.env.MACOS_PR_URL || 'https://example.com/',
-    windows: process.env.WINDOWS_PR_URL || 'https://example.com/',
+    android: process.env.ANDROID_PR_URL,
+    ios: process.env.IOS_PR_URL,
+    macos: process.env.MACOS_PR_URL,
+    windows: process.env.WINDOWS_PR_URL,
 };
 const asanaOutputRaw = process.env.ASANA_OUTPUT;
 
@@ -34,7 +34,10 @@ const asanaUpdateTasks = async () => {
     for (const [platformName, platformObj] of platformEntries) {
         // If we're missing required data, either we haven't implemented automation for that platform yet,
         // or something went wrong in a previous job
-        if (!platformObj.taskGid || !prUrls[platformName]) continue;
+        if (!platformObj.taskGid || !prUrls[platformName]) {
+            console.error(`Skipping ${platformName} task update`);
+            continue;
+        }
 
         const { html_notes: notes } = await asana.tasks.getTask(platformObj.taskGid, { opt_fields: 'html_notes' });
 
