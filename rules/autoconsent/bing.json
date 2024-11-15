@@ -2,8 +2,8 @@
     "name": "bing.com",
     "prehideSelectors": ["#bnp_container"],
     "detectCmp": [{ "exists": "#bnp_cookie_banner" }],
-    "detectPopup": [{ "visible": "#bnp_cookie_banner" }],
-    "optIn": [{ "click": "#bnp_btn_accept" }],
-    "optOut": [{ "click": "#bnp_btn_preference" }, { "click": "#mcp_savesettings" }],
+    "detectPopup": [{ "visible": "#bnp_cookie_banner" }, { "visible": "#bnp_btn_accept,#bnp_btn_reject" }],
+    "optIn": [{ "waitForThenClick": "#bnp_btn_accept" }],
+    "optOut": [{ "wait": 500 }, { "waitForThenClick": "#bnp_btn_reject" }],
     "test": [{ "eval": "EVAL_BING_0" }]
 }
