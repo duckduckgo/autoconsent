@@ -45,5 +45,6 @@ jobs:
         needs: release
         if: ${{ !contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci') }}
         uses: ./.github/workflows/ddg-release.yml
+        secrets: inherit
         with:
             tag_name: ${{ needs.release.outputs.tag_name }}
