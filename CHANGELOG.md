@@ -1,3 +1,15 @@
+# v11.4.0 (Fri Nov 15 2024)
+
+#### 🚀 Enhancement
+
+- Fix rule for bing [#529](https://github.com/duckduckgo/autoconsent/pull/529) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v11.3.0 (Fri Nov 15 2024)
 
 #### 🚀 Enhancement
