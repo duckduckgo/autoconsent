@@ -1,3 +1,17 @@
+# v11.3.0 (Fri Nov 15 2024)
+
+#### 🚀 Enhancement
+
+- Fix release workflow parameters [#531](https://github.com/duckduckgo/autoconsent/pull/531) ([@muodov](https://github.com/muodov))
+- Fix release workflow [#530](https://github.com/duckduckgo/autoconsent/pull/530) ([@muodov](https://github.com/muodov))
+- Automate DDG releases [#528](https://github.com/duckduckgo/autoconsent/pull/528) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v11.2.0 (Thu Nov 14 2024)
 
 #### 🚀 Enhancement
