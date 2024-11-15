@@ -181,7 +181,7 @@ asanaCreateTasks()
         console.log(result.stdout);
     })
     .catch((e) => {
-        console.error('Failed to create asana tasks:', result.stdout);
+        console.error('Failed to create asana tasks:');
         // The Asana API returns errors in e.value.errors. If that's undefined log whatever else we got
         console.error(e.value?.errors || e);
         process.exit(1);
