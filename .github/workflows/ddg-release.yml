@@ -9,18 +9,22 @@ on:
             android:
                 description: 'Propagate to Android'
                 type: boolean
+                required: true
                 default: true
             ios:
                 description: 'Propagate to iOS'
                 type: boolean
+                required: true
                 default: true
             macos:
                 description: 'Propagate to macOS'
                 type: boolean
+                required: true
                 default: true
             windows:
                 description: 'Propagate to Windows'
                 type: boolean
+                required: true
                 default: true
 
     workflow_call:
@@ -32,22 +36,18 @@ on:
             android:
                 description: 'Propagate to Android'
                 type: boolean
-                required: true
                 default: true
             ios:
                 description: 'Propagate to iOS'
                 type: boolean
-                required: true
                 default: true
             macos:
                 description: 'Propagate to macOS'
                 type: boolean
-                required: true
                 default: true
             windows:
                 description: 'Propagate to Windows'
                 type: boolean
-                required: true
                 default: true
 
 env:
