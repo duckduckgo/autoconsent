@@ -1,3 +1,16 @@
+# v11.5.0 (Sun Nov 17 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 4061c37b19f3992043ed817d82b3e171c4e8cc6c [#532](https://github.com/duckduckgo/autoconsent/pull/532) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### Authors: 2
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v11.4.0 (Fri Nov 15 2024)
 
 #### 🚀 Enhancement
