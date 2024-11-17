@@ -23,7 +23,6 @@ ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_u
 ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_international_specific_hide.txt'), 'utf-8')}
 !---------------------------------Allowlists----------------------------------!
 ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist_general_hide.txt'), 'utf-8')}
-${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist.txt'), 'utf-8')}
 !--------------------------------DDG overrides--------------------------------!
 ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
 `;
