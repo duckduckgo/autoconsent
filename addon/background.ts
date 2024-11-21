@@ -134,9 +134,11 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             break;
         case 'popupFound':
             await showOptOutStatus(tabId, 'available', msg.cmp);
-            storageSet({
-                [`detected${tabId}`]: frameId,
-            });
+            if (msg.cmp !== 'filterList') {
+                storageSet({
+                    [`detected${tabId}`]: frameId,
+                });
+            }
             break;
         case 'optOutResult':
         case 'optInResult':

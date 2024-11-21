@@ -12,6 +12,7 @@ const consent = new AutoConsent( // make sure not to leak anything to the page g
         disabledCmps: [],
         enablePrehide: true,
         enableCosmeticRules: true,
+        enableFilterList: false,
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,
@@ -57,8 +58,13 @@ sequenceDiagram
 
     activate CS
     Note right of CS: Parse rules and initialize autoconsent code
-    Note right of CS: apply prehideSelectors
+    Note right of CS: apply prehideSelectors and filterlist rules (if enabled)
     Note right of CS: wait for DOMContentLoaded
+
+    opt if filterlist enabled and filterlist selectors matched
+        CS -->> BG: popupFound (with cmp: "filterList")
+    end
+
     Note right of CS: detect a CMP presence (not necessarily visible)
 
     CS ->> BG: cmpDetected

@@ -474,6 +474,22 @@ export default class AutoConsent {
         if (!styles) {
             styles = getCosmeticStylesheet(this.filtersEngine);
         }
+
+        setTimeout(() => {
+            // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+            const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(styles), 'any');
+            if (cosmeticFiltersWorked) {
+                logsConfig?.lifecycle && console.log('Prehide cosmetic filters matched', location.href);
+                this.sendContentMessage({
+                    type: 'popupFound',
+                    url: location.href,
+                    cmp: 'filterList',
+                });
+            } else {
+                logsConfig?.lifecycle && console.log("Prehide cosmetic filters didn't match", location.href);
+            }
+        }, 1000);
+
         this.updateState({ cosmeticFiltersOn: true });
         try {
             this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
