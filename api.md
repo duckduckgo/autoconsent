@@ -62,6 +62,7 @@ sequenceDiagram
     Note right of CS: wait for DOMContentLoaded
 
     opt if filterlist enabled and filterlist selectors matched
+        CS -->> BG: cmpDetected (with cmp: "filterList")
         CS -->> BG: popupFound (with cmp: "filterList")
     end
 
