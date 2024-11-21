@@ -63,7 +63,7 @@ export class DomActions implements DomActionsProvider {
     }
 
     wait(ms: number): Promise<true> {
-        this.autoconsentInstance.config.logs.rulesteps && console.log('[wait]', ms);
+        this.autoconsentInstance.config.logs.rulesteps && this.autoconsentInstance.config.logs.waits && console.log('[wait]', ms);
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(true);

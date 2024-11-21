@@ -59,6 +59,7 @@ export type Config = {
         evals: boolean;
         errors: boolean;
         messages: boolean;
+        waits: boolean;
     };
 };
 

@@ -17,6 +17,7 @@ async function init() {
     const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
     const logsLifecycleCheckbox = document.querySelector('input#logs-lifecycle') as HTMLInputElement;
     const logsRulestepsCheckbox = document.querySelector('input#logs-rulesteps') as HTMLInputElement;
+    const logsWaitsCheckbox = document.querySelector('input#logs-waits') as HTMLInputElement;
     const logsEvalsCheckbox = document.querySelector('input#logs-evals') as HTMLInputElement;
     const logsErrorsCheckbox = document.querySelector('input#logs-errors') as HTMLInputElement;
     const logsMessagesCheckbox = document.querySelector('input#logs-messages') as HTMLInputElement;
@@ -61,6 +62,7 @@ async function init() {
     enabledCheckbox.checked = autoconsentConfig.enabled && enabledForCurrentDomain;
     logsLifecycleCheckbox.checked = autoconsentConfig.logs.lifecycle;
     logsRulestepsCheckbox.checked = autoconsentConfig.logs.rulesteps;
+    logsWaitsCheckbox.checked = autoconsentConfig.logs.waits;
     logsEvalsCheckbox.checked = autoconsentConfig.logs.evals;
     logsErrorsCheckbox.checked = autoconsentConfig.logs.errors;
     logsMessagesCheckbox.checked = autoconsentConfig.logs.messages;
@@ -132,6 +134,7 @@ async function init() {
             evals: logsEvalsCheckbox.checked,
             errors: logsErrorsCheckbox.checked,
             messages: logsMessagesCheckbox.checked,
+            waits: logsWaitsCheckbox.checked,
         };
         storageSet({ config: autoconsentConfig });
     }
@@ -140,6 +143,9 @@ async function init() {
         updateLogsConfig();
     });
     logsRulestepsCheckbox.addEventListener('change', () => {
+        updateLogsConfig();
+    });
+    logsWaitsCheckbox.addEventListener('change', () => {
         updateLogsConfig();
     });
     logsEvalsCheckbox.addEventListener('change', () => {
