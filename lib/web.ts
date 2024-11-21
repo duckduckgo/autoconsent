@@ -7,7 +7,7 @@ import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { normalizeConfig } from './utils';
+import { normalizeConfig, scheduleWhenIdle } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
@@ -152,11 +152,7 @@ export default class AutoConsent {
 
     // start the detection process, possibly with a delay
     start() {
-        if (window.requestIdleCallback) {
-            window.requestIdleCallback(() => this._start(), { timeout: 500 });
-        } else {
-            this._start();
-        }
+        scheduleWhenIdle(() => this._start());
     }
 
     async _start() {
