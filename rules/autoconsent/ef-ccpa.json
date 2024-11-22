@@ -1,0 +1,30 @@
+{
+    "name": "ef-ccpa",
+    "vendorUrl": "https://eforms.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#ef-ccpa"],
+    "detectCmp": [
+        {
+            "exists": "#ef-ccpa"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ef-ccpa"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ef-button-ccpa-agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ef-button-ccpa-decline"
+        }
+    ]
+}
