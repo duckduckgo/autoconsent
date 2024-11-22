@@ -7,7 +7,7 @@ import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { normalizeConfig } from './utils';
+import { normalizeConfig, scheduleWhenIdle } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
@@ -28,6 +28,7 @@ export default class AutoConsent {
     foundCmp: AutoCMP = null;
     state: ConsentState = {
         cosmeticFiltersOn: false,
+        filterListReported: false,
         lifecycle: 'loading',
         prehideOn: false,
         findCmpAttempts: 0,
@@ -152,11 +153,7 @@ export default class AutoConsent {
 
     // start the detection process, possibly with a delay
     start() {
-        if (window.requestIdleCallback) {
-            window.requestIdleCallback(() => this._start(), { timeout: 500 });
-        } else {
-            this._start();
-        }
+        scheduleWhenIdle(() => this._start());
     }
 
     async _start() {
@@ -478,6 +475,22 @@ export default class AutoConsent {
         if (!styles) {
             styles = getCosmeticStylesheet(this.filtersEngine);
         }
+
+        setTimeout(() => {
+            if (this.state.cosmeticFiltersOn && !this.state.filterListReported) {
+                // if the cosmetic filters are actually working, report the hidden popup to the background.
+                // This may still be overridden later if an autoconsent rule matches.
+                // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+                const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(styles), 'any');
+                if (cosmeticFiltersWorked) {
+                    logsConfig?.lifecycle && console.log('Prehide cosmetic filters matched', location.href);
+                    this.reportFilterlist();
+                } else {
+                    logsConfig?.lifecycle && console.log("Prehide cosmetic filters didn't match", location.href);
+                }
+            }
+        }, 1000);
+
         this.updateState({ cosmeticFiltersOn: true });
         try {
             this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
@@ -494,6 +507,20 @@ export default class AutoConsent {
         this.updateState({ cosmeticFiltersOn: false });
         this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
         this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+    }
+
+    reportFilterlist() {
+        this.sendContentMessage({
+            type: 'cmpDetected',
+            url: location.href,
+            cmp: 'filterList',
+        });
+        this.sendContentMessage({
+            type: 'popupFound',
+            cmp: 'filterList',
+            url: location.href,
+        });
+        this.updateState({ filterListReported: true });
     }
 
     filterListFallback() {
@@ -518,16 +545,10 @@ export default class AutoConsent {
             this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
             logsConfig?.lifecycle && console.log('Keeping cosmetic filters', location.href);
             this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
-            this.sendContentMessage({
-                type: 'cmpDetected',
-                url: location.href,
-                cmp: 'filterList',
-            });
-            this.sendContentMessage({
-                type: 'popupFound',
-                cmp: 'filterList',
-                url: location.href,
-            });
+            if (!this.state.filterListReported) {
+                this.reportFilterlist();
+            }
+
             this.sendContentMessage({
                 type: 'optOutResult',
                 cmp: 'filterList',

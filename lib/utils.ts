@@ -96,3 +96,11 @@ export function normalizeConfig(providedConfig: any): Config {
     }
     return updatedConfig;
 }
+
+export function scheduleWhenIdle(callback: () => void, timeout = 500) {
+    if (globalThis.requestIdleCallback) {
+        requestIdleCallback(callback, { timeout });
+    } else {
+        setTimeout(callback, 0);
+    }
+}
