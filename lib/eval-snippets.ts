@@ -204,6 +204,7 @@ export const snippets = {
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
     EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
     EVAL_TESLA_TEST: () => document.cookie.includes('tsla-cookie-consent=rejected'),
+    EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
