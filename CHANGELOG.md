@@ -1,3 +1,38 @@
+# v12.0.0 (Fri Nov 22 2024)
+
+#### 💥 Breaking Change
+
+- Report filterlist early [#538](https://github.com/duckduckgo/autoconsent/pull/538) ([@muodov](https://github.com/muodov))
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 71bf77b47b6c0ab286d2e210ba2b2640e63434ae [#546](https://github.com/duckduckgo/autoconsent/pull/546) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Improve Civic rule [#524](https://github.com/duckduckgo/autoconsent/pull/524) ([@muodov](https://github.com/muodov))
+- Add a rule for skyscanner [#537](https://github.com/duckduckgo/autoconsent/pull/537) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add cookie-consent-spice rule [#540](https://github.com/duckduckgo/autoconsent/pull/540) ([@sammacbeth](https://github.com/sammacbeth))
+- Add kconsent rule [#541](https://github.com/duckduckgo/autoconsent/pull/541) ([@sammacbeth](https://github.com/sammacbeth))
+- Add Cassie rule [#543](https://github.com/duckduckgo/autoconsent/pull/543) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix tealium on eurostar.com [#544](https://github.com/duckduckgo/autoconsent/pull/544) ([@sammacbeth](https://github.com/sammacbeth))
+- Bump tldts-experimental from 6.1.60 to 6.1.61 [#534](https://github.com/duckduckgo/autoconsent/pull/534) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 3 updates [#533](https://github.com/duckduckgo/autoconsent/pull/533) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Tweak easylist update schedule to fit app release schedule [#535](https://github.com/duckduckgo/autoconsent/pull/535) ([@muodov](https://github.com/muodov))
+
+#### 🧪 Tests
+
+- Make sure that the test page uses an eval rule [#536](https://github.com/duckduckgo/autoconsent/pull/536) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v11.5.0 (Sun Nov 17 2024)
 
 #### 🚀 Enhancement
