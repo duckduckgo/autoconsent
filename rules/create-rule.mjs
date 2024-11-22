@@ -28,7 +28,7 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
         optOut: [{ waitForThenClick: '#Reject' }],
         test: [{ eval: 'EVAL_TODO' }],
     };
-    const ruleString = JSON.stringify(rule, undefined, 2);
+    const ruleString = JSON.stringify(rule, undefined, 4);
     const testString = `import generateCMPTests from "../playwright/runner";
 
 generateCMPTests('${name}', [
