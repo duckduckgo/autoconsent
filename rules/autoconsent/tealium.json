@@ -8,7 +8,7 @@
         { "eval": "EVAL_TEALIUM_DONOTSELL" },
         { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
         {
-            "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies",
+            "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting",
             "timeout": 1000,
             "optional": true
         }
