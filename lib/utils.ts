@@ -74,6 +74,7 @@ export function normalizeConfig(providedConfig: any): Config {
         disabledCmps: [],
         enablePrehide: true,
         enableCosmeticRules: true,
+        enableHeuristicDetection: false,
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,

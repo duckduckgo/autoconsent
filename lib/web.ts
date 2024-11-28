@@ -11,6 +11,7 @@ import { normalizeConfig, scheduleWhenIdle } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
+import { checkHeuristicPatterns } from './heuristics';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
@@ -34,6 +35,8 @@ export default class AutoConsent {
         findCmpAttempts: 0,
         detectedCmps: [],
         detectedPopups: [],
+        heuristicPatterns: [],
+        heuristicSnippets: [],
         selfTest: null,
     };
     domActions: DomActions;
@@ -223,6 +226,17 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
+
+        if (this.config.enableHeuristicDetection) {
+            const { patterns, snippets } = checkHeuristicPatterns();
+            if (
+                patterns.length > 0 &&
+                (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
+            ) {
+                logsConfig.lifecycle && console.log('Heuristic patterns found', patterns, snippets);
+                this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
+            }
+        }
 
         for (const cmp of this.rules) {
             try {

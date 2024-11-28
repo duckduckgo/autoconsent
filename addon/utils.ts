@@ -47,6 +47,7 @@ export async function initConfig() {
     const storedConfig = (await storageGet('config')) || {};
     console.log('storedConfig', storedConfig);
     const updatedConfig = normalizeConfig(storedConfig);
+    updatedConfig.enableHeuristicDetection = true;
     console.log('updated config', updatedConfig);
     await storageSet({
         config: updatedConfig,
