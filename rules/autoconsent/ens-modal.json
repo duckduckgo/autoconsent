@@ -1,7 +1,7 @@
 {
     "name": "Ensighten ensModal",
     "prehideSelectors": [".ensModal"],
-    "detectCmp": [{ "exists": ".ensModal" }],
+    "detectCmp": [{ "exists": ".ensModal" }, { "visible": "#ensModalWrapper[style*=block]" }],
     "detectPopup": [{ "visible": "#ensModalWrapper[style*=block]" }],
     "optIn": [{ "waitForThenClick": "#modalAcceptButton" }],
     "optOut": [
