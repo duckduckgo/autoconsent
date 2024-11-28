@@ -489,7 +489,7 @@ export default class AutoConsent {
                     logsConfig?.lifecycle && console.log("Prehide cosmetic filters didn't match", location.href);
                 }
             }
-        }, 1000);
+        }, 2000);
 
         this.updateState({ cosmeticFiltersOn: true });
         try {
