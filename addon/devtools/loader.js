@@ -1,5 +1,7 @@
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 chrome.devtools.panels.create('Autoconsent', '/icons/cookie.png', '/devtools/panel.html');
 
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 if (chrome.devtools?.recorder) {
     class MyPlugin {
         stringify(recording) {
@@ -48,6 +50,7 @@ if (chrome.devtools?.recorder) {
         }
     }
 
+    // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
     chrome.devtools.recorder.registerRecorderExtensionPlugin(
         new MyPlugin(),
         /* name= */ 'Autoconsent',

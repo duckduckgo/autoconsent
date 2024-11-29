@@ -234,14 +234,11 @@ async function evalAction(config: any): Promise<boolean> {
   return new Promise(resolve => {
     try {
       if (config.async) {
-        // eslint-disable-next-line no-eval
         window.eval(config.code);
         setTimeout(() => {
-          // eslint-disable-next-line no-eval
           resolve(window.eval("window.__consentCheckResult"));
         }, config.timeout || 250);
       } else {
-        // eslint-disable-next-line no-eval
         resolve(window.eval(config.code));
       }
     } catch (e) {
