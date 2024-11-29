@@ -1,3 +1,20 @@
+# v12.1.0 (Fri Nov 29 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 683577e4ba3f1454aed77ea23cde7308356a0be3 [#551](https://github.com/duckduckgo/autoconsent/pull/551) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Restrict ensighten detection to only when popup is visible. [#539](https://github.com/duckduckgo/autoconsent/pull/539) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.0.0 (Fri Nov 22 2024)
 
 #### 💥 Breaking Change
