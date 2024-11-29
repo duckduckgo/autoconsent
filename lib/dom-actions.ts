@@ -4,7 +4,6 @@ import { getStyleElement, hideElements, isElementVisible, waitFor } from './util
 import AutoConsent from './web';
 
 export class DomActions implements DomActionsProvider {
-    // eslint-disable-next-line no-useless-constructor
     constructor(public autoconsentInstance: AutoConsent) {}
 
     click(selector: ElementSelector, all = false): boolean {

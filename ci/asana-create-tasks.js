@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const timersPromises = require('node:timers/promises');
 const Asana = require('asana');
 const MarkdownIt = require('markdown-it');
@@ -73,7 +72,7 @@ const waitForJobSuccess = async (job_gid) => {
     const interval = 1000;
     const maxAttempts = 20;
 
-    // eslint-disable-next-line no-async-promise-executor -- legacy code
+    // biome-ignore  lint/suspicious/noAsyncPromiseExecutor: legacy code
     return new Promise(async (resolve, reject) => {
         const innerFn = async function (job_gid, attempts) {
             console.error(`Waiting for job ${job_gid} to complete...`);
