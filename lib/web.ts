@@ -227,17 +227,6 @@ export default class AutoConsent {
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
 
-        if (this.config.enableHeuristicDetection) {
-            const { patterns, snippets } = checkHeuristicPatterns();
-            if (
-                patterns.length > 0 &&
-                (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
-            ) {
-                logsConfig.lifecycle && console.log('Heuristic patterns found', patterns, snippets);
-                this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
-            }
-        }
-
         for (const cmp of this.rules) {
             try {
                 if (!cmp.checkRunContext()) {
@@ -258,12 +247,27 @@ export default class AutoConsent {
             }
         }
 
+        this.detectHeuristics();
+
         if (foundCMPs.length === 0 && retries > 0) {
             await this.domActions.wait(500);
             return this.findCmp(retries - 1);
         }
 
         return foundCMPs;
+    }
+
+    detectHeuristics() {
+        if (this.config.enableHeuristicDetection) {
+            const { patterns, snippets } = checkHeuristicPatterns();
+            if (
+                patterns.length > 0 &&
+                (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
+            ) {
+                this.config.logs.lifecycle && console.log('Heuristic patterns found', patterns, snippets);
+                this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
+            }
+        }
     }
 
     /**
@@ -295,6 +299,7 @@ export default class AutoConsent {
 
         await Promise.any(tasks)
             .then((cmp) => {
+                this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
             .catch(() => null);
