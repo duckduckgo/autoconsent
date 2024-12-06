@@ -11,6 +11,7 @@ import { normalizeConfig, scheduleWhenIdle } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
+import { checkHeuristicPatterns } from './heuristics';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
@@ -34,6 +35,8 @@ export default class AutoConsent {
         findCmpAttempts: 0,
         detectedCmps: [],
         detectedPopups: [],
+        heuristicPatterns: [],
+        heuristicSnippets: [],
         selfTest: null,
     };
     domActions: DomActions;
@@ -244,12 +247,27 @@ export default class AutoConsent {
             }
         }
 
+        this.detectHeuristics();
+
         if (foundCMPs.length === 0 && retries > 0) {
             await this.domActions.wait(500);
             return this.findCmp(retries - 1);
         }
 
         return foundCMPs;
+    }
+
+    detectHeuristics() {
+        if (this.config.enableHeuristicDetection) {
+            const { patterns, snippets } = checkHeuristicPatterns();
+            if (
+                patterns.length > 0 &&
+                (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
+            ) {
+                this.config.logs.lifecycle && console.log('Heuristic patterns found', patterns, snippets);
+                this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
+            }
+        }
     }
 
     /**
@@ -281,6 +299,7 @@ export default class AutoConsent {
 
         await Promise.any(tasks)
             .then((cmp) => {
+                this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
             .catch(() => null);
@@ -489,7 +508,7 @@ export default class AutoConsent {
                     logsConfig?.lifecycle && console.log("Prehide cosmetic filters didn't match", location.href);
                 }
             }
-        }, 1000);
+        }, 2000);
 
         this.updateState({ cosmeticFiltersOn: true });
         try {

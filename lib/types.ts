@@ -53,6 +53,7 @@ export type Config = {
     isMainWorld: boolean;
     prehideTimeout: number;
     enableFilterList: boolean;
+    enableHeuristicDetection: boolean;
     logs: {
         lifecycle: boolean;
         rulesteps: boolean;
@@ -88,5 +89,7 @@ export type ConsentState = {
     findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.
     detectedCmps: string[]; // Names of CMP rules where `detectCmp` returned true.
     detectedPopups: string[]; // Names of CMP rules where `detectPopup` returned true.
+    heuristicPatterns: string[]; // Matched heuristic patterns
+    heuristicSnippets: string[]; // Matched heuristic snippets
     selfTest: boolean; // null if no self test was run, otherwise it holds the result of the self test.
 };
