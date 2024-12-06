@@ -1,3 +1,16 @@
+# v12.2.0 (Fri Dec 06 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 3684b7f8a35e3dc59fcfbfeb1ca270eec1ddde31 [#558](https://github.com/duckduckgo/autoconsent/pull/558) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### Authors: 2
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.1.0 (Fri Nov 29 2024)
 
 #### 🚀 Enhancement
