@@ -83,7 +83,7 @@ export default class AutoConsent {
 
         if (config.enableFilterList) {
             try {
-                if (serializedEngine && serializedEngine.length > 0) {
+                if (BUNDLE_FILTERLIST && serializedEngine && serializedEngine.length > 0) {
                     this.filtersEngine = deserializeFilterList(serializedEngine);
                 }
             } catch (e) {
@@ -491,7 +491,7 @@ export default class AutoConsent {
             return false;
         }
         const logsConfig = this.config?.logs;
-        if (!styles) {
+        if (BUNDLE_FILTERLIST && !styles) {
             styles = getCosmeticStylesheet(this.filtersEngine);
         }
 
@@ -543,7 +543,7 @@ export default class AutoConsent {
     }
 
     filterListFallback() {
-        if (!this.filtersEngine) {
+        if (!BUNDLE_FILTERLIST) {
             this.updateState({ lifecycle: 'nothingDetected' });
             return false;
         }
