@@ -12,14 +12,15 @@ const dataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../data
 const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_revision.txt'), 'utf-8');
 
 const trancoCSV = fs.readFileSync(path.join(dataDir, 'top-1m.csv'), 'utf-8');
-const MAX_DOMAIN_RANK = 500000
+const MAX_DOMAIN_RANK = 100000;
 
-let uBOList, domainMap
+let domainMap
 
-function processFiltersIntoJson (listFileName) {
+async function processFilterList (listFileName) {
+    console.log(`Processing ${listFileName}`);
     const data = fs.readFileSync(path.join(rulesDir, 'filterlists', listFileName), 'utf-8');
     const lines = data.split('\n');
-    const filterlistJSON = {"rules": {}}
+    const filterlistJSON = {"rules": {}};
 
     // first remove irrelevant rules
     const filteredLines = lines.filter(line => !line.startsWith('!') &&
@@ -30,28 +31,28 @@ function processFiltersIntoJson (listFileName) {
                                                !line.includes('redirect-rule'));
     // dump rules into json structure for parsing
     for (const line in filteredLines) {
-        const rule = filteredLines[line]
-        const splitRule = rule.split('##')
-        const target = splitRule[0]
-        const action = splitRule[1]
+        const rule = filteredLines[line];
+        const splitRule = rule.split('##');
+        const target = splitRule[0];
+        const action = splitRule[1];
 
         if (!target || !action) {
-            continue
+            continue;
         }
 
         if (!filterlistJSON.rules[target]) {
-            filterlistJSON.rules[target] = [action]
+            filterlistJSON.rules[target] = [action];
         } else {
-            filterlistJSON.rules[target].push(action)
+            filterlistJSON.rules[target].push(action);
         }
     }
 
     // remove any targets that contain a +js rule. we do it this way because
     // when a target has a :js rule, we must also remove any css rules
     for (const item in filterlistJSON.rules) {
-        const containsJS = filterlistJSON.rules[item].some(filter => filter.includes('+js'))
+        const containsJS = filterlistJSON.rules[item].some(filter => filter.includes('+js'));
         if (containsJS) {
-            delete filterlistJSON.rules[item]
+            delete filterlistJSON.rules[item];
         }
     }
 
@@ -62,7 +63,7 @@ function processFiltersIntoJson (listFileName) {
         if (item.includes(',')) {
             domains = item.split(',');
         } else {
-            domains = [item]
+            domains = [item];
         }
 
         const filteredDomains = domains.filter(domain => {
@@ -73,28 +74,26 @@ function processFiltersIntoJson (listFileName) {
         // if no domains meet cutoff, remove rule entirely. if one or more
         // domains meet cutoff, remove those that don't
         if (filteredDomains.length === 0) {
-            delete filterlistJSON.rules[item]
+            delete filterlistJSON.rules[item];
         } else if (filteredDomains.length !== domains.length) {
-            const filteredDomainString = filteredDomains.join(',')
-            filterlistJSON.rules[filteredDomainString] = filterlistJSON.rules[item]
-            delete filterlistJSON.rules[item]
+            const filteredDomainString = filteredDomains.join(',');
+            filterlistJSON.rules[filteredDomainString] = filterlistJSON.rules[item];
+            delete filterlistJSON.rules[item];
         }
     }
 
-    fs.writeFileSync(path.join(rulesDir, 'filterlist.json'), JSON.stringify(filterlistJSON, null, 4));
-    console.log('written')
+    await convertAndWriteADB(filterlistJSON, listFileName);
 }
 
 function isPopularDomain (domain) {
     // first load tranco csv into Map for easy querying
     if (typeof domainMap !== 'object') {
-        console.log('loading tranco')
-        loadTrancoList()
+        loadTrancoList();
     }
 
-    const match = domainMap.has(domain)
+    const match = domainMap.has(domain);
 
-    return match
+    return match;
 }
 
 function loadTrancoList () {
@@ -105,48 +104,70 @@ function loadTrancoList () {
 
     domainMap = new Map();
     
-    // we want to query by domain, so flip columns
+    // we want to query by domain, not rank
     records.slice(0, MAX_DOMAIN_RANK).forEach(([key, value]) => {
         domainMap.set(value, key);
     });
-//    console.log("rank", domainMap.get('mega.io'))
-}
-//loadTrancoList()
-processFiltersIntoJson('easylist_cookie_specific_uBO.txt');
-
-function filterCruft (listFileName) {
-    const data = fs.readFileSync(path.join(rulesDir, 'filterlists', listFileName), 'utf-8');
-    const lines = data.split('\n');
-
-    const filteredLines = lines.filter(line => !line.startsWith('!') &&
-                                               !line.includes('+js') &&
-                                               !line.includes(':remove') &&
-                                               !line.includes(':upward') &&
-                                               !line.includes('redirect-rule'));
-    uBOList = filteredLines.join('\n');
 }
 
-//filterCruft('easylist_cookie_specific_uBO.txt');
+function convertAndWriteADB(JSONList, fileName) {
+    return new Promise((resolve, reject) => {
+        const liteFileName = fileName.replace('.', '_lite.');
+        const liteFileLocation = path.join(rulesDir, 'filterlists', liteFileName);
+        const stream = fs.createWriteStream(liteFileLocation, { flags: 'w' });
 
-// TODO: consider using python-abp (flrender) to generate filterlist properly
-/*
-const filterlistContent = `
-[Adblock Plus 2.0]
-! Title: CPM Cosmetic Filter List
-! Based on EasyList ${easylistRevision}
-! Generated on ${new Date().toISOString()}
-!------------------------General element hiding rules-------------------------!
-${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_general_hide.txt'), 'utf-8')}
-!------------------------Specific element hiding rules------------------------!
-${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_hide.txt'), 'utf-8')}
-${uBOList}
-!------------------------Rules for international sites------------------------!
-${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_international_specific_hide.txt'), 'utf-8')}
-!---------------------------------Allowlists----------------------------------!
-${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist_general_hide.txt'), 'utf-8')}
-!--------------------------------DDG overrides--------------------------------!
-${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
-`;
+        stream.once('open', () => {
+            for (const item in JSONList.rules) {
+                JSONList.rules[item].forEach(filter => {
+                    const abpRule = item + '##' + filter;
+                    stream.write(abpRule + '\n');
+                })
+            }
+            stream.end();
+        })
 
-fs.writeFile(path.join(rulesDir, 'filterlist.txt'), filterlistContent, () => console.log('Written filterlist.txt'));
-*/
+        stream.on('finish', () => {
+            console.log(`ABP format list written to ${liteFileLocation}`);
+            resolve();
+        })
+
+        stream.on('error', (err) => {
+            console.error(`An error occurred: ${err.message}`);
+        });
+    });
+
+}
+
+function combineFilterLists () {
+    console.log(`Combining filterlists`);
+
+    // TODO: consider using python-abp (flrender) to generate filterlist properly
+    const filterlistContent = `
+    [Adblock Plus 2.0]
+    ! Title: CPM Cosmetic Filter List
+    ! Based on EasyList ${easylistRevision}
+    ! Generated on ${new Date().toISOString()}
+    !------------------------General element hiding rules-------------------------!
+    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_general_hide.txt'), 'utf-8')}
+    !------------------------Specific element hiding rules------------------------!
+    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_hide_lite.txt'), 'utf-8')}
+    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_uBO_lite.txt'), 'utf-8')}
+    !------------------------Rules for international sites------------------------!
+    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_international_specific_hide_lite.txt'), 'utf-8')}
+    !---------------------------------Allowlists----------------------------------!
+    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist_general_hide.txt'), 'utf-8')}
+    !--------------------------------DDG overrides--------------------------------!
+    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
+    `;
+
+    fs.writeFile(path.join(rulesDir, 'filterlist.txt'), filterlistContent, () => console.log('Written filterlist.txt'));
+}
+
+async function rebuildFilterList () {
+    await processFilterList('easylist_cookie_specific_uBO.txt');
+    await processFilterList('easylist_cookie_specific_hide.txt');
+    await processFilterList('easylist_cookie_international_specific_hide.txt');
+    combineFilterLists();
+}
+
+rebuildFilterList();
