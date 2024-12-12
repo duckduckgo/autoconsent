@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { parse } from 'csv-parse/sync';
-import { getDomain } from 'tldts';
+import { getDomain } from 'tldts-experimental';
 
 const rulesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../rules');
 const dataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../data');
@@ -142,23 +142,23 @@ function combineFilterLists () {
     console.log(`Combining filterlists`);
 
     // TODO: consider using python-abp (flrender) to generate filterlist properly
-    const filterlistContent = `
-    [Adblock Plus 2.0]
-    ! Title: CPM Cosmetic Filter List
-    ! Based on EasyList ${easylistRevision}
-    ! Generated on ${new Date().toISOString()}
-    !------------------------General element hiding rules-------------------------!
-    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_general_hide.txt'), 'utf-8')}
-    !------------------------Specific element hiding rules------------------------!
-    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_hide_lite.txt'), 'utf-8')}
-    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_uBO_lite.txt'), 'utf-8')}
-    !------------------------Rules for international sites------------------------!
-    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_international_specific_hide_lite.txt'), 'utf-8')}
-    !---------------------------------Allowlists----------------------------------!
-    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist_general_hide.txt'), 'utf-8')}
-    !--------------------------------DDG overrides--------------------------------!
-    ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
-    `;
+    const filterlistContent =
+`[Adblock Plus 2.0]
+! Title: CPM Cosmetic Filter List
+! Based on EasyList ${easylistRevision}
+! Generated on ${new Date().toISOString()}
+!------------------------General element hiding rules-------------------------!
+${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_general_hide.txt'), 'utf-8')}
+!------------------------Specific element hiding rules------------------------!
+${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_hide_lite.txt'), 'utf-8')}
+${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_specific_uBO_lite.txt'), 'utf-8')}
+!------------------------Rules for international sites------------------------!
+${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_international_specific_hide_lite.txt'), 'utf-8')}
+!---------------------------------Allowlists----------------------------------!
+${fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_cookie_allowlist_general_hide.txt'), 'utf-8')}
+!--------------------------------DDG overrides--------------------------------!
+${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
+`;
 
     fs.writeFile(path.join(rulesDir, 'filterlist.txt'), filterlistContent, () => console.log('Written filterlist.txt'));
 }
