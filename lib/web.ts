@@ -13,6 +13,8 @@ import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
 import { checkHeuristicPatterns } from './heuristics';
 
+export { snippets as evalSnippets } from './eval-snippets';
+
 function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
         return (
@@ -302,7 +304,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => null);
+            .catch(() => {});
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
