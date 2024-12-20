@@ -1,3 +1,20 @@
+# v12.4.0 (Fri Dec 20 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to b0774541b1f941a5c0ed2d62b1ab75a8235e2e5b [#577](https://github.com/duckduckgo/autoconsent/pull/577) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Export eval snippets [#572](https://github.com/duckduckgo/autoconsent/pull/572) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#566](https://github.com/duckduckgo/autoconsent/pull/566) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.3.0 (Fri Dec 13 2024)
 
 #### 🚀 Enhancement
