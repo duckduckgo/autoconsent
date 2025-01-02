@@ -4,33 +4,39 @@
     "urlPattern": "^https://([a-z0-9-]+\\.)?readly\\.com/"
   },
   "prehideSelectors": [
-    "[class^='CookieConsentDialogContainer']"
+    ".DialogHandlerContainer.visible:has(.cookie-dialog)"
   ],
   "detectCmp": [
     {
-      "exists": "[class^='CookieConsentDialogContainer']"
+      "exists": ".DialogHandlerContainer.visible:has(.cookie-dialog)"
     }
   ],
   "detectPopup": [
     {
-      "visible": "[class^='CookieConsentDialogContainer']"
+      "visible": ".DialogHandlerContainer.visible:has(.cookie-dialog)"
     }
   ],
   "optIn": [
     {
-      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [data-testid='cookies-dialog-accept-all'] > button"
+      "waitForThenClick": "span.cookie-option-large+div+div>button.gui-button"
     }
   ],
   "optOut": [
     {
-      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [class^='CookieConsentButtonContainer'] ~ div > a[style*='rgb(255, 187, 34)']"
+      "waitForThenClick": "span.cookie-option-large>div>span.link-no-decoration.gui-text"
     },
     {
-      "waitForThenClick": "[class^='CookieSettingCheckboxContainer'] input[type='checkbox']:checked:not(:disabled)",
-      "all": true
+      "if": { "exists": ".cookie-dialog form .CookieConsentOption input[type='checkbox']:not([name='permanent']):checked" },
+      "then": [
+        {
+          "waitForThenClick": ".cookie-dialog form .CookieConsentOption input[type='checkbox']:not([name='permanent']):checked",
+          "all": true
+        }
+      ],
+      "else": []
     },
     {
-      "waitForThenClick": "[class^='CookieConsentDialogContainer'] [class^='CookieConsentButtonContainer'] button"
+      "waitForThenClick": ".cookie-dialog button[type='submit']"
     }
   ]
 }
