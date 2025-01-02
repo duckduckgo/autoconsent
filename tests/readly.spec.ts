@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('readly', [
-  'https://go.readly.com/discover'
-], {});
+generateCMPTests('readly', ['https://go.readly.com/discover'], {});
