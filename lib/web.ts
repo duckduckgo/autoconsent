@@ -545,7 +545,7 @@ export default class AutoConsent {
     }
 
     filterListFallback() {
-        if (!BUNDLE_FILTERLIST) {
+        if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
             this.updateState({ lifecycle: 'nothingDetected' });
             return false;
         }
