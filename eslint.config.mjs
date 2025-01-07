@@ -36,7 +36,6 @@ const c = tseslint.config(
             'no-unused-expressions': 0,
             '@typescript-eslint/no-unused-expressions': 0,
             '@typescript-eslint/no-require-imports': 0,
-            'no-redeclare': 'off', // from https://typescript-eslint.io/rules/no-redeclare/: The code problem checked by this ESLint rule is automatically checked by the TypeScript compiler. Thus, it is not recommended to turn on this rule in new TypeScript projects. You only need to enable this rule if you prefer the ESLint error messages over the TypeScript compiler error messages.
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {

@@ -2,22 +2,17 @@ import { HideMethod } from './rules';
 import { Config } from './types';
 
 // get or create a style container for CSS overrides
-export function getStyleElement(styleOverrideElementId: string): HTMLStyleElement;
-export function getStyleElement(styleOverrideElementId: string, createIfNotExists: true): HTMLStyleElement;
-export function getStyleElement(styleOverrideElementId: string, createIfNotExists: false): HTMLStyleElement | null;
-export function getStyleElement(styleOverrideElementId = 'autoconsent-css-rules', createIfNotExists = true): HTMLStyleElement | null {
+export function getStyleElement(styleOverrideElementId = 'autoconsent-css-rules'): HTMLStyleElement {
     const styleSelector = `style#${styleOverrideElementId}`;
     const existingElement = document.querySelector(styleSelector);
     if (existingElement && existingElement instanceof HTMLStyleElement) {
         return existingElement;
-    } else if (createIfNotExists) {
+    } else {
         const parent = document.head || document.getElementsByTagName('head')[0] || document.documentElement;
         const css = document.createElement('style');
         css.id = styleOverrideElementId;
         parent.appendChild(css);
         return css;
-    } else {
-        return null;
     }
 }
 

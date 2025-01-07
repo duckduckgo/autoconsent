@@ -84,7 +84,7 @@ export class DomActions implements DomActionsProvider {
     }
 
     undoPrehide(): boolean {
-        const existingElement = getStyleElement('autoconsent-prehide', false);
+        const existingElement = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[undoprehide]', existingElement, location.href);
         if (existingElement) {
             existingElement.remove();
