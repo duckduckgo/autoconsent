@@ -461,9 +461,9 @@ export default class AutoConsent {
         return this.domActions.prehide(selectors.join(','));
     }
 
-    undoPrehide(): boolean {
+    undoPrehide(): void {
         this.updateState({ prehideOn: false });
-        return this.domActions.undoPrehide();
+        this.domActions.undoPrehide();
     }
 
     /**

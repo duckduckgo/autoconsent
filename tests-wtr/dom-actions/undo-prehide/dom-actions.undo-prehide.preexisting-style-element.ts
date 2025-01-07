@@ -11,15 +11,14 @@ describe('undoPrehide', () => {
         domActions = instantiateDomActions();
     });
 
-    it('returns true when style element not exist', () => {
+    it('removes preexisting style element', () => {
         // Given
         expect(document.querySelector('style#autoconsent-prehide')).to.not.be.null; // check that style element already exists
 
         // When
-        const result = domActions.undoPrehide();
+        domActions.undoPrehide();
 
         // Then
-        expect(result).to.be.true;
         expect(document.querySelector('style#autoconsent-prehide')).to.be.null; // check that style element was removed
     });
 });

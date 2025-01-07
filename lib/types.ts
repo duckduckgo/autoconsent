@@ -30,7 +30,7 @@ export interface DomActionsProvider {
     wait(ms: number): Promise<true>;
     hide(selector: string, method: HideMethod): boolean;
     prehide(selector: string): boolean;
-    undoPrehide(): boolean;
+    undoPrehide(): void;
     querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
     querySelectorChain(selectors: string[]): HTMLElement[];
     elementSelector(selector: ElementSelector): HTMLElement[];

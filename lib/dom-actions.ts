@@ -83,13 +83,11 @@ export class DomActions implements DomActionsProvider {
         return hideElements(styleEl, selector, 'opacity');
     }
 
-    undoPrehide(): boolean {
+    undoPrehide(): void {
         const existingElement = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[undoprehide]', existingElement, location.href);
-        if (existingElement) {
-            existingElement.remove();
-        }
-        return !!existingElement;
+
+        existingElement.remove();
     }
 
     async createOrUpdateStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {
