@@ -118,7 +118,13 @@ const asanaCreateTasks = async () => {
 
     // Updating task and moving to Release section...
     console.error('Updated notes:', JSON.stringify(updatedNotes));
-    let updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: updatedNotes });
+
+    // set due date 6 days from now
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 6);
+    const dueDateString = dueDate.toISOString().split('T')[0];
+
+    let updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: updatedNotes, due_on: dueDateString });
     console.error('updateTaskResult:', updateTaskResult);
 
     const addProjectResult = await asana.tasks.addProjectForTask(new_task.gid, {

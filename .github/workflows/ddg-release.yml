@@ -389,13 +389,13 @@ jobs:
               run: |
                   node ./autoconsent/ci/asana-update-tasks.js
 
-            - name: Ouput workflow summary
+            - name: Output workflow summary
               # Show failure message if any of the jobs report failed
               if: ${{ contains(needs.*.result, 'failure') }}
               run: |
                   echo "Release process completed but with failures reported." >> $GITHUB_STEP_SUMMARY
                   echo "Please review the job output to see which steps require manual intervention." >> $GITHUB_STEP_SUMMARY
-            - name: Ouput workflow summary
+            - name: Output workflow summary
               # Show success message as long as none of the jobs report failed
               if: ${{ !contains(needs.*.result, 'failure') }}
               run: |

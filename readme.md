@@ -26,6 +26,12 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
+In some environments (e.g. browser extensions), it's useful to access [eval snippet functions](./lib/eval-snippets.ts) directly in the background script. This can be done by importing the `evalSnippets` object from the library:
+
+```javascript
+import { evalSnippets } from '@duckduckgo/autoconsent';
+```
+
 ## Browser extension
 
 Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all [DuckDuckGo apps](https://duckduckgo.com/app), but you can build it yourself and use for testing.

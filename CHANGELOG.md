@@ -1,3 +1,63 @@
+# v12.4.0 (Fri Dec 20 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to b0774541b1f941a5c0ed2d62b1ab75a8235e2e5b [#577](https://github.com/duckduckgo/autoconsent/pull/577) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Export eval snippets [#572](https://github.com/duckduckgo/autoconsent/pull/572) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#566](https://github.com/duckduckgo/autoconsent/pull/566) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.3.0 (Fri Dec 13 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 2063c2ed880d0bd63019fb98192ca753e6e68044 [#569](https://github.com/duckduckgo/autoconsent/pull/569) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump @ghostery/adblocker from 2.0.4 to 2.3.0 [#565](https://github.com/duckduckgo/autoconsent/pull/565) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker-content from 2.0.4 to 2.3.0 [#563](https://github.com/duckduckgo/autoconsent/pull/563) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Allow adblocker module to be tree-shaked for builds without a bundled filterlist [#567](https://github.com/duckduckgo/autoconsent/pull/567) ([@sammacbeth](https://github.com/sammacbeth))
+- Add optional heuristic pattern detection [#555](https://github.com/duckduckgo/autoconsent/pull/555) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 6.1.61 to 6.1.66 [#564](https://github.com/duckduckgo/autoconsent/pull/564) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Set the due date on the release task [#560](https://github.com/duckduckgo/autoconsent/pull/560) ([@muodov](https://github.com/muodov))
+- Monthly Coverage data update [#561](https://github.com/duckduckgo/autoconsent/pull/561) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Add a fake filterlist rule for testing [#562](https://github.com/duckduckgo/autoconsent/pull/562) ([@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.2.0 (Fri Dec 06 2024)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 3684b7f8a35e3dc59fcfbfeb1ca270eec1ddde31 [#558](https://github.com/duckduckgo/autoconsent/pull/558) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### Authors: 2
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.1.0 (Fri Nov 29 2024)
 
 #### 🚀 Enhancement
