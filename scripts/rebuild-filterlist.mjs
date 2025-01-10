@@ -15,6 +15,9 @@ const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'eas
 
 const MAX_DOMAIN_RANK = 100000;
 
+/** @typedef {{ rules: Record<string, string[]>}} FilterlistJSON */
+
+/** @type {Map<string, string>} */
 let domainMap;
 
 /**
@@ -25,6 +28,7 @@ async function processFilterList(listFileName) {
     console.log(`Processing ${listFileName}`);
     const data = fs.readFileSync(path.join(rulesDir, 'filterlists', listFileName), 'utf-8');
     const lines = data.split('\n');
+    /** @type {FilterlistJSON} */
     const filterlistJSON = { rules: {} };
 
     // Remove unsupported rule types
@@ -121,6 +125,7 @@ async function loadTrancoList() {
 
     if (typeof domainMap !== 'object') {
         const trancoCSV = fs.readFileSync(path.join(dataDir, 'top-1m.csv'), 'utf-8');
+        /** @type {string[][]} */
         const records = parse(trancoCSV, {
             columns: false,
             skip_empty_lines: true,
@@ -136,7 +141,7 @@ async function loadTrancoList() {
 
 /**
  * Convert filter list to ABP format and write to disk
- * @param {Object} JSONList
+ * @param {FilterlistJSON} JSONList
  * @param {String} fileName
  */
 function convertAndWriteABP(JSONList, fileName) {
