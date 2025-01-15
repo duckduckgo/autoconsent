@@ -12,6 +12,11 @@ const rulesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../rul
 const dataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../data');
 
 const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_revision.txt'), 'utf-8');
+const domainSpecificLists = [
+    'easylist_cookie_specific_uBO.txt',
+    'easylist_cookie_specific_hide.txt',
+    'easylist_cookie_international_specific_hide.txt',
+];
 
 const MAX_DOMAIN_RANK = 100000;
 
@@ -31,7 +36,13 @@ async function processFilterList(listFileName) {
     /** @type {FilterlistJSON} */
     const filterlistJSON = { rules: {} };
 
-    // Remove unsupported rule types
+    // Remove unsupported rule types:
+    // !  at start of line indicates comment
+    // ## at start of line indicates a non-domain-specific rule
+    // || at start of line indicates network rule
+    // :remove is uBO syntax for removing an element from the DOM
+    // :upward is uBO syntax for iterating upward from an anchor element
+    // redirect-rule is uBO syntax for redirecting a request to a surrogate script
     const filteredLines = lines.filter(
         (line) =>
             !line.startsWith('!') &&
@@ -42,8 +53,7 @@ async function processFilterList(listFileName) {
             !line.includes('redirect-rule'),
     );
     // Dump rules into json structure for parsing
-    for (const line in filteredLines) {
-        const rule = filteredLines[line];
+    for (const rule of filteredLines) {
         const splitRule = rule.split('##');
         const target = splitRule[0];
         const action = splitRule[1];
@@ -201,9 +211,11 @@ ${fs.readFileSync(path.join(rulesDir, 'filterlists', 'overrides.txt'), 'utf-8')}
  */
 async function rebuildFilterList() {
     await loadTrancoList();
-    await processFilterList('easylist_cookie_specific_uBO.txt');
-    await processFilterList('easylist_cookie_specific_hide.txt');
-    await processFilterList('easylist_cookie_international_specific_hide.txt');
+
+    for (const list of domainSpecificLists) {
+        await processFilterList(list);
+    }
+
     combineFilterLists();
 }
 
