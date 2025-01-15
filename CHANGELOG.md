@@ -1,3 +1,35 @@
+# v12.5.0 (Fri Jan 10 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to dd9fb5774b073ef64b28d515e3814e70e7211d0e [#588](https://github.com/duckduckgo/autoconsent/pull/588) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Update EasyList Cookie to f686424e0b6048c5c8934a389933a0fed837aaf6 [#580](https://github.com/duckduckgo/autoconsent/pull/580) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#582](https://github.com/duckduckgo/autoconsent/pull/582) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- feat: readly.com [#583](https://github.com/duckduckgo/autoconsent/pull/583) ([@seia-soto](https://github.com/seia-soto))
+
+#### 🐛 Bug Fix
+
+- Fix an exception in the test extension when filterlist is disabled [#584](https://github.com/duckduckgo/autoconsent/pull/584) ([@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 6.1.66 to 6.1.70 [#581](https://github.com/duckduckgo/autoconsent/pull/581) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker from 2.3.0 to 2.3.1 [#576](https://github.com/duckduckgo/autoconsent/pull/576) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker-content from 2.3.0 to 2.3.1 [#575](https://github.com/duckduckgo/autoconsent/pull/575) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🧪 Tests
+
+- Add tests for DomActions.undoPrehide() [#553](https://github.com/duckduckgo/autoconsent/pull/553) (frei.ondrej@pm.me [@freiondrej](https://github.com/freiondrej))
+
+#### Authors: 7
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- HoJeong Go ([@seia-soto](https://github.com/seia-soto))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Ondřej Frei ([@freiondrej](https://github.com/freiondrej))
+- ondrej.frei (frei.ondrej@pm.me)
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.4.0 (Fri Dec 20 2024)
 
 #### 🚀 Enhancement
