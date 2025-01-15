@@ -26,10 +26,11 @@ const MAX_DOMAIN_RANK = 100000;
 let domainMap;
 
 /**
- * Processes a list, filters out unsupported rules, and removes longtail domain rules
+ * Processes a list containing domain-specific cosmetic rules, filters
+ * out unsupported rules and removes longtail domain rules
  * @param {String} listFileName
  */
-async function processFilterList(listFileName) {
+async function processDomainSpecificFilterList(listFileName) {
     console.log(`Processing ${listFileName}`);
     const data = fs.readFileSync(path.join(rulesDir, 'filterlists', listFileName), 'utf-8');
     const lines = data.split('\n');
@@ -213,7 +214,7 @@ async function rebuildFilterList() {
     await loadTrancoList();
 
     for (const list of domainSpecificLists) {
-        await processFilterList(list);
+        await processDomainSpecificFilterList(list);
     }
 
     combineFilterLists();
