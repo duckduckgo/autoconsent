@@ -1,9 +1,9 @@
 [Adblock Plus 2.0]
 ! Title: CPM Cosmetic Filter List
-! Based on EasyList dd3a7c08e4fd5c306a042a52b420eb0162ba2e39
+! Based on EasyList f71790e6c5e094a1c7eedfe4fb82a8fa3f8af385
 
 ! DO NOT EDIT MANUALLY, your changes will be lost
-! Generated on 2025-01-15T14:35:53.864Z
+! Generated on 2025-01-16T22:10:37.049Z
 !------------------------General element hiding rules-------------------------!
 ! easylist_cookie_general_hide.txt
 ###-CookieConsentContainer
@@ -10216,28 +10216,17 @@
 ##.cookie-popup-overlay
 ##.cookie-popup-win
 ##.cookie-popup-wrapper
-##.cookie-popup.variantSelectMobile
 ##.cookie-popup__heading
 ##.cookie-popup__wrapper
-##.cookie-pp
-##.cookie-preference-modal
-##.cookie-preference__overlay
-##.cookie-privacy
 ##.cookie-privacy-banner
 ##.cookie-privacy-container
 ##.cookie-privacy-message
 ##.cookie-privacy-notice
 ##.cookie-privacy-policy-popup
 ##.cookie-privacy-popup
-##.cookie-processed
-##.cookie-promo
 ##.cookie-prompt-container
 ##.cookie-prompt-wrap
 ##.cookie-prompt-wrapper
-##.cookie-prompt__outer
-##.cookie-prompter
-##.cookie-question
-##.cookie-region
 ##.cookie-request
 ##.cookie-request-ctn
 ##.cookie-revoke-hidden
@@ -10247,8 +10236,6 @@
 ##.cookie-rodo
 ##.cookie-rodo--center
 ##.cookie-rodo-dialog
-##.cookie-rogla-div
-##.cookie-rules-wrapper
 ##.cookie-runway
 ##.cookie-script-content
 ##.cookie-set-pop-up
@@ -10369,8 +10356,6 @@
 ##.cookie.change-message--on-click
 ##.cookie.container-fluid
 ##.cookie.conteudo
-##.cookie.cookie-fullfat
-##.cookie.cookie-lowfat
 ##.cookie.custom
 ##.cookie.fixed
 ##.cookie.fixed-bottom
@@ -16273,6 +16258,7 @@ egamersworld.com###cookieBot
 fastenal.com###cookieFooterMsg
 forbestravelguide.com###cookiePolicyWrap
 semiconductor.samsung.com###cookie_component_emea
+esa.int###cookie_loc
 cvedetails.com###cookieconsentwarningcontainer
 emerald.com###cookies-consent
 telus.com###cookies-notice-banner
@@ -17370,6 +17356,10 @@ ezviz.com,hikvision.com##.gdpr-wrapper
 festo.com,frandroid.com,giphy.com,idealista.com,idealista.pt,ivoox.com,marianne.net,portail.lotoquebec.com,researchgate.net,rtl.be###didomi-host
 clarochile.cl##.cookieModal
 bloomberg.co.jp,hitc.com##div[id^="sp_message_container_"]
+###pp_b.pp-p
+##.wrap > .consent-widget
+###cookies.cookies-container
+##div[style*="box-shadow: rgb(136, 136, 136) 0px 0px 12px; color: "]
 cs.android.com,source.chromium.org###cdk-overlay-0
 sprintersports.com##.bottom-0.left-0
 haberturk.com##.bottom-14
@@ -17568,7 +17558,6 @@ carbonite.com###notice
 lesoleil.com,livejournal.com,takealot.com##[class^="cookies-banner"]
 foxbusiness.com,foxnews.com,vgchartz.com##.notification-banner
 easybell.de,foodwatch.org,jku.at,stmwi.bayern.de###cookieman-modal
-mojehobby.pl##.message-footer-panel
 autotrader.com,coingecko.com,disponivel.com,farmers.com,g2g.com,getmailbird.com,plantnet.org,remove.bg,skokka.com,tjsc.jus.br,unscreen.com##.fixed-bottom
 cheddar.com,couchsurfing.com,jumia.ci,jumia.co.ke,jumia.com.dz,jumia.com.eg,jumia.com.ng,jumia.ma,jumia.ug,kaleido.ai,modrinth.com,pluralsight.com,securitylab.github.com,usatoday.com,versobooks.com##.banner
 cgtrader.com,delo.si,discordapp.com,dotmailer.com,evgo.com,instreamatic.com,keenfootwear.com,medicalxpress.com,outsideonline.com,phys.org,revolver.news,slovenskenovice.si,socialmediagirls.com,techxplore.com##.notice
@@ -17732,6 +17721,7 @@ mega.io,mega.nz##.fm-dialog-overlay
 mega.io,mega.nz##.overlayed .bottom-page.scroll-block:style(filter: none !important; -webkit-filter: none !important)
 germany.travel##body.consent-overlay:style(overflow:auto !important)
 germany.travel##.consent
+##.js-consent.consent
 mediamarkt.de,saturn.de###__tealiumGDPRecModal > #privacy-layer__wrapper
 smartphonehoesjes.nl###consent
 smartphonehoesjes.nl###consent__overlay
@@ -17784,6 +17774,9 @@ publico.pt##.site-message--cookies
 games.dailymail.co.uk##[class^="CookieBanner"]
 arkadium.com##[class^="CookieMessage"]
 seatgeek.com##[class^="withGDPRBanner__Wrapper-"]
+xe.com##button:has-text(Accept):upward(section)
+nature.com##.cc-banner:remove()
+link.springer.com##.cc-banner:remove()
 cursorinfo.co.il###cmp-iframe
 cursorinfo.co.il##body:style(overflow: auto !important)
 dpp.cz##.cc
@@ -18211,6 +18204,7 @@ dfg.de##.bab-modul-cookie-consent
 shop.m-budget.migros.ch##.backdrop-filter
 galaxus.de##.bnCqgP
 galaxus.de##.gIRfBN
+postfinance.ch##.ccb
 immoscout24.ch##.cmOzGN
 verivox.de##.cmp-container
 verivox.de##.usercentrics-bg

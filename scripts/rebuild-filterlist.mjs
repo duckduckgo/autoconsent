@@ -37,21 +37,13 @@ async function processDomainSpecificFilterList(listFileName) {
     /** @type {FilterlistJSON} */
     const filterlistJSON = { rules: {} };
 
-    // Remove unsupported rule types:
+    // Remove comments and network rules, which take a different format:
     // !  at start of line indicates comment
-    // ## at start of line indicates a non-domain-specific rule
     // || at start of line indicates network rule
-    // :remove is uBO syntax for removing an element from the DOM
-    // :upward is uBO syntax for iterating upward from an anchor element
-    // redirect-rule is uBO syntax for redirecting a request to a surrogate script
     const filteredLines = lines.filter(
         (line) =>
             !line.startsWith('!') &&
-            !line.startsWith('##') &&
-            !line.startsWith('||') &&
-            !line.includes(':remove') &&
-            !line.includes(':upward') &&
-            !line.includes('redirect-rule'),
+            !line.startsWith('||')
     );
     // Dump rules into json structure for parsing
     for (const rule of filteredLines) {
@@ -59,7 +51,7 @@ async function processDomainSpecificFilterList(listFileName) {
         const target = splitRule[0];
         const action = splitRule[1];
 
-        if (!target || !action) {
+        if (!action) {
             continue;
         }
 
@@ -89,6 +81,11 @@ async function processDomainSpecificFilterList(listFileName) {
         }
 
         const filteredDomains = domains.filter((domain) => {
+            // Don't filter global rules which don't have a domain
+            if (domain === '') {
+                return true;
+            }
+
             const tlDomain = getDomain(domain);
             return domainMap.has(tlDomain);
         });
