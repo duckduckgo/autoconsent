@@ -40,11 +40,7 @@ async function processDomainSpecificFilterList(listFileName) {
     // Remove comments and network rules, which take a different format:
     // !  at start of line indicates comment
     // || at start of line indicates network rule
-    const filteredLines = lines.filter(
-        (line) =>
-            !line.startsWith('!') &&
-            !line.startsWith('||')
-    );
+    const filteredLines = lines.filter((line) => !line.startsWith('!') && !line.startsWith('||'));
     // Dump rules into json structure for parsing
     for (const rule of filteredLines) {
         const splitRule = rule.split('##');
