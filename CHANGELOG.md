@@ -1,3 +1,22 @@
+# v12.6.0 (Fri Jan 17 2025)
+
+#### 🚀 Enhancement
+
+- Reduce filter list size by using domain popularity, updating encoding, and removing unapplicable rules [#592](https://github.com/duckduckgo/autoconsent/pull/592) ([@dharb](https://github.com/dharb) [@muodov](https://github.com/muodov))
+
+#### 🧪 Tests
+
+- Add tests for DomActions.prehide() [#552](https://github.com/duckduckgo/autoconsent/pull/552) (frei.ondrej@pm.me [@freiondrej](https://github.com/freiondrej))
+
+#### Authors: 4
+
+- David Harbage ([@dharb](https://github.com/dharb))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Ondřej Frei ([@freiondrej](https://github.com/freiondrej))
+- ondrej.frei (frei.ondrej@pm.me)
+
+---
+
 # v12.5.0 (Fri Jan 10 2025)
 
 #### 🚀 Enhancement
