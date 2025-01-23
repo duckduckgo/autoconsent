@@ -1,0 +1,39 @@
+{
+    "name": "squiz",
+    "vendorUrl": "https://www.squiz.net/webinars/cdp",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": ""
+    },
+    "prehideSelectors": ["#cookie-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#accept-cdp-cookie"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#reject-cdp-cookie"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "eval": "EVAL_SQUIZ_TEST"
+        }
+    ]
+}
