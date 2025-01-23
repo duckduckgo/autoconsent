@@ -37,7 +37,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return true;
         }
         return (
-            (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html' || url.pathname === '/ccpa_pm/index.html') &&
+            (url.pathname === '/index.html' ||
+                url.pathname === '/privacy-manager/index.html' ||
+                url.pathname === '/ccpa_pm/index.html' ||
+                url.pathname === '/us_pm/index.html') &&
             (url.searchParams.has('message_id') || url.searchParams.has('requestUUID') || url.searchParams.has('consentUUID'))
         );
     }
@@ -93,7 +96,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return this.click('.priv-save-btn');
         }
         if (!this.isManagerOpen()) {
-            const actionable = await this.waitForElement('.sp_choice_type_12,.sp_choice_type_13');
+            const actionable = await this.waitForVisible('.sp_choice_type_12,.sp_choice_type_13');
             if (!actionable) {
                 return false;
             }
