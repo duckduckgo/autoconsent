@@ -2,26 +2,12 @@
     "name": "affinity.serif.com",
     "detectCmp": [
         {
-            "exists": ".c-cookie-banner button[data-qa='allow-all-cookies']"
+            "exists": ".c-cookie-notice button[data-qa='allow-all-cookies']"
         }
     ],
-    "detectPopup": [{ "visible": ".c-cookie-banner" }],
+    "detectPopup": [{ "visible": ".c-cookie-notice" }],
     "optIn": [{ "click": "button[data-qa=\"allow-all-cookies\"]" }],
-    "optOut": [
-        {
-            "click": "button[data-qa=\"manage-cookies\"]"
-        },
-        {
-            "waitFor": ".c-cookie-banner ~ [role=\"dialog\"]"
-        },
-        {
-            "waitForThenClick": ".c-cookie-banner ~ [role=\"dialog\"] input[type=\"checkbox\"][value=\"true\"]",
-            "all": true
-        },
-        {
-            "click": ".c-cookie-banner ~ [role=\"dialog\"] .c-modal__action button"
-        }
-    ],
+    "optOut": [{ "click": "button[data-qa=\"reject-non-essentials\"]" }],
     "test": [
         {
             "wait": 500
