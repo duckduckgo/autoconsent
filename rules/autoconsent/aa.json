@@ -16,12 +16,6 @@
     "optIn": [
         {
             "hide": "#aa_optoutmulti-Modal,#cookieBannerMessage"
-        },
-        {
-            "waitForThenClick": "#aa_optoutmulti_checkBox"
-        },
-        {
-            "waitForThenClick": "#aa_optoutmulti-Modal button.optoutmulti_button"
         }
     ],
     "optOut": [
