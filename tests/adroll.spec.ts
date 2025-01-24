@@ -13,5 +13,3 @@ generateCMPTests(
         skipRegions: ['US'],
     },
 );
-
-generateCMPTests('Adroll', ['https://agoraeufalo.mykajabi.com/'], {});
