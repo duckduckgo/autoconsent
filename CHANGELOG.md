@@ -1,3 +1,22 @@
+# v12.7.0 (Fri Jan 24 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to c9d3f97eb2e68f73a6648dcc76e607be41ed952c [#600](https://github.com/duckduckgo/autoconsent/pull/600) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix sourcepoint on the US version of theguardian.com [#598](https://github.com/duckduckgo/autoconsent/pull/598) ([@muodov](https://github.com/muodov))
+- Cleaning up tests: 1-as [#597](https://github.com/duckduckgo/autoconsent/pull/597) ([@sammacbeth](https://github.com/sammacbeth))
+- Add consent-manager rule [#542](https://github.com/duckduckgo/autoconsent/pull/542) ([@sammacbeth](https://github.com/sammacbeth))
+- Add ef-ccpa rule [#545](https://github.com/duckduckgo/autoconsent/pull/545) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix dpgmedia rule https://gathering.tweakers.net/ [#596](https://github.com/duckduckgo/autoconsent/pull/596) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.6.0 (Fri Jan 17 2025)
 
 #### 🚀 Enhancement
