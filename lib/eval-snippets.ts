@@ -181,6 +181,7 @@ export const snippets = {
         return true;
     },
     EVAL_SNIGEL_0: () => !!document.cookie.match('snconsent'),
+    EVAL_SQUIZ_TEST: () => !!document.cookie.includes('squiz.cdp.consent'),
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(
