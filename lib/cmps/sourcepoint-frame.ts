@@ -37,7 +37,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return true;
         }
         return (
-            (url.pathname === '/index.html' || url.pathname === '/privacy-manager/index.html' || url.pathname === '/ccpa_pm/index.html') &&
+            (url.pathname === '/index.html' ||
+                url.pathname === '/privacy-manager/index.html' ||
+                url.pathname === '/ccpa_pm/index.html' ||
+                url.pathname === '/us_pm/index.html') &&
             (url.searchParams.has('message_id') || url.searchParams.has('requestUUID') || url.searchParams.has('consentUUID'))
         );
     }
@@ -92,11 +95,13 @@ export default class SourcePoint extends AutoConsentCMPBase {
             }
             return this.click('.priv-save-btn');
         }
+
         if (!this.isManagerOpen()) {
-            const actionable = await this.waitForElement('.sp_choice_type_12,.sp_choice_type_13');
+            const actionable = await this.waitForVisible('.sp_choice_type_12,.sp_choice_type_13');
             if (!actionable) {
                 return false;
             }
+
             if (!this.elementExists('.sp_choice_type_12')) {
                 // do not sell button
                 return this.click('.sp_choice_type_13');
@@ -108,6 +113,9 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         await this.waitForElement('.type-modal', 20000);
+        if (this.elementExists('[role=tablist]')) {
+            await this.waitForElement('[role=tablist] [role=tab]', 10000);
+        }
 
         // check "Do Not Sell" (CCPA) toggle if it exists
         this.waitForThenClick('.ccpa-stack .pm-switch[aria-checked=true] .slider', 500, true); // the UI is reversed: "unchecked" switch displays as an enabled toggle
@@ -121,6 +129,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 this.waitForElement(rejectSelector2, 2000).then((success) => (success ? 1 : -1)),
                 this.waitForElement('.pm-features', 2000).then((success) => (success ? 2 : -1)),
             ]);
+
             if (path === 0) {
                 await this.waitForVisible(rejectSelector1);
                 return this.click(rejectSelector1);
@@ -129,7 +138,6 @@ export default class SourcePoint extends AutoConsentCMPBase {
             } else if (path === 2) {
                 await this.waitForElement('.pm-features', 10000);
                 this.click('.checked > span', true);
-
                 this.click('.chevron');
             }
         } catch (e) {
