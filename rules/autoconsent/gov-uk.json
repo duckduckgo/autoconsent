@@ -1,10 +1,24 @@
 {
     "name": "gov.uk",
-    "detectCmp": [{ "exists": "#global-cookie-message" }],
-    "detectPopup": [{ "exists": "#global-cookie-message" }],
-    "optIn": [{ "click": "button[data-accept-cookies=true]" }],
+    "detectCmp": [{ "exists": ".govuk-cookie-banner__message" }],
+    "detectPopup": [{ "exists": ".govuk-cookie-banner__message .govuk-button" }],
+    "optIn": [{ "click": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Accept')] | //a[contains(., 'Accept')]"] }],
     "optOut": [
-        { "click": "button[data-reject-cookies=true],#reject-cookies" },
-        { "click": "button[data-hide-cookie-banner=true],#hide-cookie-decision" }
+        {
+            "if": {
+                "exists": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Reject')] | //a[contains(., 'Reject')]"]
+            },
+            "then": [
+                {
+                    "click": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Reject')] | //a[contains(., 'Reject')]"]
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Hide')] | //a[contains(., 'Hide')]"]
+            },
+            "then": [{ "click": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Hide')] | //a[contains(., 'Hide')]"] }]
+        }
     ]
 }
