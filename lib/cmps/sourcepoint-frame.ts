@@ -96,6 +96,19 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return this.click('.priv-save-btn');
         }
 
+        // sometimes there's a "Save and Exit" / "Essential cookies" button
+        if (this.elementVisible('.sp_choice_type_SE', 'any')) {
+            // click the "Do Not Sell" toggle if it exists
+            this.click(
+                [
+                    "xpath///div[contains(., 'Do not share my personal information') and contains(@class, 'switch-container')]",
+                    '.pm-switch[aria-checked=false] .slider',
+                ],
+                false,
+            );
+            return this.click('.sp_choice_type_SE');
+        }
+
         if (!this.isManagerOpen()) {
             const actionable = await this.waitForVisible('.sp_choice_type_12,.sp_choice_type_13');
             if (!actionable) {
