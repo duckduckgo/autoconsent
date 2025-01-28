@@ -10,12 +10,12 @@
     "prehideSelectors": ["#cookie-consent-banner"],
     "detectCmp": [
         {
-            "exists": "#cookie-consent-banner"
+            "exists": "#cookie-consent-banner #accept-cdp-cookie"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-consent-banner"
+            "visible": "#cookie-consent-banner #accept-cdp-cookie"
         }
     ],
     "optIn": [
