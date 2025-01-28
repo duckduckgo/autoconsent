@@ -11,7 +11,6 @@ const locales = [
     'de',
     'el',
     'en',
-    'en',
     'es',
     'et',
     'fi',
@@ -42,7 +41,7 @@ const values = new Set();
 console.log(`Checking contents of ${xpath} on ${url}`);
 
 (async () => {
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ headless: false });
 
     async function checkLocale(locale: string) {
         const context = await browser.newContext({ locale });
@@ -51,6 +50,11 @@ console.log(`Checking contents of ${xpath} on ${url}`);
             waitUntil: 'networkidle',
             timeout: 30000,
         });
+
+        // TODO: add extra interactions here if ne4cessary, e.g.
+        // const locator1 = page.locator('.my-button');
+        // await locator1.click();
+
         const locator = page.locator(`xpath=${xpath}`);
         const content = await locator.textContent();
         console.log(locale, content);
