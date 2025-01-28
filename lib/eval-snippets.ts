@@ -138,6 +138,7 @@ export const snippets = {
     EVAL_EZOIC_1: () => !!document.cookie.match(/ez-consent-tcf/),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
+    EVAL_GRAVITO_TEST: () => document.cookie.includes('gravitoData'),
     EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
