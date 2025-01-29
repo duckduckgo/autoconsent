@@ -51,9 +51,8 @@ console.log(`Checking contents of ${xpath} on ${url}`);
             timeout: 30000,
         });
 
-        // TODO: add extra interactions here if ne4cessary, e.g.
-        // const locator1 = page.locator('.my-button');
-        // await locator1.click();
+        // add extra interactions here if necessary, e.g.
+        // await page.locator('.my-button').click();
 
         const locator = page.locator(`xpath=${xpath}`);
         const content = await locator.textContent();
