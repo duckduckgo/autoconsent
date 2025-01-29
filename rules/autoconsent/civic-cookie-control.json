@@ -6,22 +6,33 @@
     "detectPopup": [{ "visible": "#ccc" }, { "visible": "#ccc-module,#ccc-notify" }],
     "optOut": [
         {
-            "if": { "exists": "#ccc-notify" },
-            "then": [
+            "if": { "visible": ".ccc-reject-button" },
+            "then": [{ "waitForThenClick": ".ccc-reject-button" }],
+            "else": [
                 {
-                    "waitForThenClick": [
-                        "#ccc #ccc-notify .ccc-notify-buttons",
-                        "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences')]"
+                    "if": {
+                        "exists": [
+                            "#ccc #ccc-notify .ccc-notify-buttons",
+                            "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences') or contains(., 'Einstellungen️')]"
+                        ]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": [
+                                "#ccc #ccc-notify .ccc-notify-buttons",
+                                "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences') or contains(., 'Einstellungen️')]"
+                            ]
+                        },
+                        { "waitForVisible": "#ccc-module" }
                     ]
                 },
-                { "waitForVisible": "#ccc-module" }
+                {
+                    "if": { "visible": ".ccc-reject-button" },
+                    "then": [{ "waitForThenClick": ".ccc-reject-button" }],
+                    "else": [{ "waitForThenClick": "#ccc-dismiss-button" }]
+                }
             ]
-        },
-        {
-            "if": { "exists": "#ccc-reject-settings" },
-            "then": [{ "waitForThenClick": "#ccc-reject-settings" }],
-            "else": [{ "waitForThenClick": "#ccc-dismiss-button" }]
         }
     ],
-    "optIn": [{ "waitForThenClick": "#ccc-recommended-settings,#ccc-notify-accept" }]
+    "optIn": [{ "waitForThenClick": "#ccc-recommended-settings,#ccc-notify-accept,.ccc-accept-button" }]
 }
