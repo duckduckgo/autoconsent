@@ -14,6 +14,7 @@ export type AutoConsentCMPRule = {
     optIn: AutoConsentRuleStep[];
     openCmp?: AutoConsentRuleStep[];
     test?: AutoConsentRuleStep[];
+    comment?: string;
 };
 
 export type RunContext = {
@@ -24,7 +25,7 @@ export type RunContext = {
 
 export type ElementSelector = string | string[];
 
-export type AutoConsentRuleStep = { optional?: boolean } & Partial<ElementExistsRule> &
+export type AutoConsentRuleStep = { optional?: boolean; comment?: string } & Partial<ElementExistsRule> &
     Partial<ElementVisibleRule> &
     Partial<EvalRule> &
     Partial<WaitForRule> &
