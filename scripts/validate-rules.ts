@@ -1,22 +1,23 @@
 import Ajv, { ErrorObject } from 'ajv';
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync, readFileSync, existsSync } from 'fs';
 import path from 'path';
-import { createGenerator } from 'ts-json-schema-generator';
+import { execSync } from 'child_process';
 
 function formatErrors(errors: ErrorObject[]) {
     if (!Array.isArray(errors)) {
         return '';
     }
-
     return errors.map((item) => `${item.instancePath}: ${item.message}`).join(', ');
 }
 
-const config = {
-    path: path.join(__dirname, '../lib/rules.ts'),
-    type: 'AutoConsentCMPRule',
-};
-const schema = createGenerator(config).createSchema(config.type);
+// Check if schema exists, if not generate it
+const schemaPath = path.join(__dirname, '../rules/schema.json');
+if (!existsSync(schemaPath)) {
+    console.log('Schema not found, generating...');
+    execSync('ts-node scripts/generate-rule-schema.ts');
+}
 
+const schema = JSON.parse(readFileSync(schemaPath, 'utf8'));
 const ajv = new Ajv({ allowUnionTypes: true });
 const validator = ajv.compile(schema);
 
