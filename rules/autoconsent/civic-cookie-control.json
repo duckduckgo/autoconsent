@@ -1,7 +1,7 @@
 {
-    "vendo
-      "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",rUrl": "https://www.civicuk.com/cookie-control/",
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "civic-cookie-control",
+    "vendorUrl": "https://www.civicuk.com/cookie-control/",
     "prehideSelectors": ["#ccc-module,#ccc-overlay,#ccc"],
     "detectCmp": [{ "exists": "#ccc-module,#ccc-notify" }],
     "detectPopup": [{ "visible": "#ccc" }, { "visible": "#ccc-module,#ccc-notify" }],
