@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "woo-commerce-com",
     "prehideSelectors": [".wccom-comp-privacy-banner .wccom-privacy-banner"],
     "detectCmp": [{ "exists": ".wccom-comp-privacy-banner .wccom-privacy-banner" }],

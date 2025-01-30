@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "snigel",
     "detectCmp": [{ "exists": ".snigel-cmp-framework" }],
     "detectPopup": [{ "visible": ".snigel-cmp-framework" }],

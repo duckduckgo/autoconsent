@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "funding-choices",
     "prehideSelectors": [".fc-consent-root,.fc-dialog-container,.fc-dialog-overlay,.fc-dialog-content"],
     "detectCmp": [{ "exists": ".fc-consent-root" }],

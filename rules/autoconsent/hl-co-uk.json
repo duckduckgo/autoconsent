@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "hl.co.uk",
     "prehideSelectors": [".cookieModalContent", "#cookie-banner-overlay"],
     "detectCmp": [{ "exists": "#cookie-banner-overlay" }],

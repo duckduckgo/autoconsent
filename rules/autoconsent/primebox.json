@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "PrimeBox CookieBar",
     "prehideSelectors": ["#cookie-bar"],
     "detectCmp": [{ "exists": "#cookie-bar .cb-enable,#cookie-bar .cb-disable,#cookie-bar .cb-policy" }],

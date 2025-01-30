@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "dmgmedia",
     "prehideSelectors": ["[data-project=\"mol-fe-cmp\"]"],
     "detectCmp": [{ "exists": "[data-project=\"mol-fe-cmp\"] [class*=footer]" }],

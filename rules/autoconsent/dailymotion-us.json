@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "dailymotion-us",
     "cosmetic": true,
     "prehideSelectors": ["div[class*=\"CookiePopup__desktopContainer\"]:has(div[class*=\"CookiePopup\"])"],

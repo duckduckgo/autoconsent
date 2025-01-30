@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "facebook",
     "runContext": {
         "urlPattern": "^https://([a-z0-9-]+\\.)?facebook\\.com/"
