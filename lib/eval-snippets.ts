@@ -168,6 +168,7 @@ export const snippets = {
         document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
     EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
     EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
+    EVAL_POSTNL_TEST: () => document.cookie.includes('CookiePermissionInfo'),
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
