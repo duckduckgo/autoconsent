@@ -10,5 +10,5 @@ const config = {
 const schema = createGenerator(config).createSchema(config.type);
 const schemaPath = path.join(__dirname, '../rules/schema.json');
 
-writeFileSync(schemaPath, JSON.stringify(schema, null, 2));
+writeFileSync(schemaPath, JSON.stringify(schema, null, 4));
 console.log(`Schema generated and saved to ${schemaPath}`);
