@@ -1,3 +1,42 @@
+# v12.8.0 (Fri Jan 31 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 71afe4eb4e86bb49fac1a7d5e53a10373081336e [#618](https://github.com/duckduckgo/autoconsent/pull/618) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Improve Termly rule [#619](https://github.com/duckduckgo/autoconsent/pull/619) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 5 updates [#621](https://github.com/duckduckgo/autoconsent/pull/621) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rule for Shopify Customer Privacy CMP [#616](https://github.com/duckduckgo/autoconsent/pull/616) ([@noisysocks](https://github.com/noisysocks))
+- Add rule for Gravito [#610](https://github.com/duckduckgo/autoconsent/pull/610) ([@muodov](https://github.com/muodov))
+- Improve the Civic rule [#614](https://github.com/duckduckgo/autoconsent/pull/614) ([@muodov](https://github.com/muodov))
+- Add rule for postnl.nl [#612](https://github.com/duckduckgo/autoconsent/pull/612) ([@muodov](https://github.com/muodov))
+- Quantcast fixes [#611](https://github.com/duckduckgo/autoconsent/pull/611) ([@muodov](https://github.com/muodov))
+- Add rule for Privado CMP [#602](https://github.com/duckduckgo/autoconsent/pull/602) ([@muodov](https://github.com/muodov))
+- Support CCPA sourcepoint popup on timeout.com [#603](https://github.com/duckduckgo/autoconsent/pull/603) ([@muodov](https://github.com/muodov))
+- Fix opera rule [#604](https://github.com/duckduckgo/autoconsent/pull/604) ([@muodov](https://github.com/muodov))
+- Adapt gov.uk rule for https://www.tax.service.gov.uk/business-account [#605](https://github.com/duckduckgo/autoconsent/pull/605) ([@muodov](https://github.com/muodov))
+- cosmetic rule for womenshealthmag [#601](https://github.com/duckduckgo/autoconsent/pull/601) ([@muodov](https://github.com/muodov))
+- Add rule for Squiz CDP [#599](https://github.com/duckduckgo/autoconsent/pull/599) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 6.1.70 to 6.1.75 [#606](https://github.com/duckduckgo/autoconsent/pull/606) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Monthly Coverage data update [#620](https://github.com/duckduckgo/autoconsent/pull/620) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Validate JSON rules [#613](https://github.com/duckduckgo/autoconsent/pull/613) ([@muodov](https://github.com/muodov))
+
+#### Authors: 6
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.7.0 (Fri Jan 24 2025)
 
 #### 🚀 Enhancement
