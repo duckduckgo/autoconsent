@@ -5,7 +5,7 @@
     "detectPopup": [{ "exists": "div[class^=pecr-cookie-banner-]" }],
     "optOut": [
         { "click": "button[data-test^=manage-cookies]" },
-        { "wait": "500" },
+        { "wait": 500 },
         {
             "click": "label[data-test^=toggle][class*=checked]:not([class*=disabled])",
             "all": true,
