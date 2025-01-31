@@ -21,7 +21,7 @@
     "lint": "eslint . && prettier . --check && npm run validate-rules",
     "bundle": "./build.sh",
     "generate-rule-schema": "ts-node scripts/generate-rule-schema.ts",
-    "validate-rules": "ts-node scripts/validate-rules.ts",
+    "validate-rules": "npm run generate-rule-schema && ts-node scripts/validate-rules.ts",
     "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/filterlist.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",

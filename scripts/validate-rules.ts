@@ -1,7 +1,6 @@
 import Ajv, { ErrorObject } from 'ajv';
 import { readdirSync, readFileSync, existsSync } from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
 
 function formatErrors(errors: ErrorObject[]) {
     if (!Array.isArray(errors)) {
@@ -10,11 +9,10 @@ function formatErrors(errors: ErrorObject[]) {
     return errors.map((item) => `${item.instancePath}: ${item.message}`).join(', ');
 }
 
-// Check if schema exists, if not generate it
 const schemaPath = path.join(__dirname, '../rules/schema.json');
 if (!existsSync(schemaPath)) {
-    console.log('Schema not found, generating...');
-    execSync('ts-node scripts/generate-rule-schema.ts');
+    console.error(`Schema file does not exist at: ${schemaPath}`);
+    process.exit(1);
 }
 
 const schema = JSON.parse(readFileSync(schemaPath, 'utf8'));
