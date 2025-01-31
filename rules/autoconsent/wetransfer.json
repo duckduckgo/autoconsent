@@ -1,5 +1,5 @@
 {
-    "$schema": "../schema.json",
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "wetransfer.com",
     "detectCmp": [{ "exists": ".welcome__cookie-notice" }],
     "detectPopup": [{ "visible": ".welcome__cookie-notice" }],

@@ -1,5 +1,5 @@
 {
-    "$schema": "../schema.json",
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "Complianz opt-both",
     "prehideSelectors": ["[aria-describedby=\"cookieconsent:desc\"] .cc-type-opt-both"],
     "detectCmp": [{ "exists": "[aria-describedby=\"cookieconsent:desc\"] .cc-type-opt-both" }],

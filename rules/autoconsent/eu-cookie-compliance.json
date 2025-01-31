@@ -1,5 +1,5 @@
 {
-    "$schema": "../schema.json",
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "eu-cookie-compliance-banner",
     "detectCmp": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
     "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
