@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "etsy",
     "prehideSelectors": ["#gdpr-single-choice-overlay", "#gdpr-privacy-settings"],
     "detectCmp": [{ "exists": "#gdpr-single-choice-overlay" }],

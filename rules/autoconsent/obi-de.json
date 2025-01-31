@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "obi.de",
     "prehideSelectors": [".disc-cp--active"],
     "detectCmp": [{ "exists": ".disc-cp-modal__modal" }],

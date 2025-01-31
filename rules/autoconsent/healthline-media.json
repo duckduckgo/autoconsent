@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "healthline-media",
     "prehideSelectors": ["#modal-host > div.no-hash > div.window-wrapper"],
     "detectCmp": [{ "exists": "#modal-host > div.no-hash > div.window-wrapper, div[data-testid=qualtrics-container]" }],

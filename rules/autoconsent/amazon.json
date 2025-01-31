@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "amazon.com",
     "prehideSelectors": ["span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]"],
     "detectCmp": [{ "exists": "span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]" }],

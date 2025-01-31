@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "otto.de",
     "prehideSelectors": [".cookieBanner--visibility"],
     "detectCmp": [{ "exists": ".cookieBanner--visibility" }],

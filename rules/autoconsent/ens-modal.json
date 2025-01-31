@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "Ensighten ensModal",
     "prehideSelectors": [".ensModal"],
     "detectCmp": [{ "exists": ".ensModal" }, { "visible": "#ensModalWrapper[style*=block]" }],

@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "mediamarkt.de",
     "prehideSelectors": ["div[aria-labelledby=pwa-consent-layer-title]", "div[class^=StyledConsentLayerWrapper-]"],
     "detectCmp": [{ "exists": "div[aria-labelledby^=pwa-consent-layer-title]" }],
