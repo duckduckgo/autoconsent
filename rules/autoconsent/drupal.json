@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
+    "$schema": "../schema.json",
     "name": "Drupal",
     "detectCmp": [{ "exists": "#drupalorg-crosssite-gdpr" }],
     "detectPopup": [{ "visible": "#drupalorg-crosssite-gdpr" }],

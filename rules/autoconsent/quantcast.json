@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
+    "$schema": "../schema.json",
     "name": "quantcast",
     "prehideSelectors": ["#qc-cmp2-main,#qc-cmp2-container"],
     "detectCmp": [{ "exists": "#qc-cmp2-container" }],

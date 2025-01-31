@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
+    "$schema": "../schema.json",
     "name": "netbeat.de",
     "runContext": {
         "urlPattern": "^https://(www\\.)?netbeat\\.de/"

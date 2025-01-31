@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
+    "$schema": "../schema.json",
     "name": "Moove",
     "prehideSelectors": ["#moove_gdpr_cookie_info_bar"],
     "detectCmp": [{ "exists": "#moove_gdpr_cookie_info_bar" }],
