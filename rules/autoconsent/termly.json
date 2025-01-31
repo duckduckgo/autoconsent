@@ -9,8 +9,8 @@
             "if": { "exists": "[data-tid=\"banner-decline\"]" },
             "then": [{ "click": "[data-tid=\"banner-decline\"]" }],
             "else": [
-                { "click": ".t-preference-button" },
-                { "wait": 500 },
+                { "waitForThenClick": ".t-preference-button,[data-testid=\"preferences-link\"]" },
+                { "waitFor": ".t-declineAllButton", "timeout": 700 },
                 {
                     "if": { "exists": ".t-declineAllButton" },
                     "then": [{ "click": ".t-declineAllButton" }],
