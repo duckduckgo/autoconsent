@@ -11,13 +11,8 @@ on:
                 type: boolean
                 required: true
                 default: true
-            ios:
-                description: 'Propagate to iOS'
-                type: boolean
-                required: true
-                default: true
-            macos:
-                description: 'Propagate to macOS'
+            apple:
+                description: 'Propagate to iOS & macOS'
                 type: boolean
                 required: true
                 default: true
@@ -37,12 +32,8 @@ on:
                 description: 'Propagate to Android'
                 type: boolean
                 default: true
-            ios:
-                description: 'Propagate to iOS'
-                type: boolean
-                default: true
-            macos:
-                description: 'Propagate to macOS'
+            apple:
+                description: 'Propagate to iOS & macOS'
                 type: boolean
                 default: true
             windows:
@@ -178,11 +169,11 @@ jobs:
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
     # ------------------------------------------------------------------------------
-    # Create PR with updated autoconsent on iOS
+    # Create PR with updated autoconsent on iOS & macOS
     # ------------------------------------------------------------------------------
 
-    update_ios:
-        if: ${{ inputs.ios }}
+    update_apple:
+        if: ${{ inputs.apple }}
         runs-on: ubuntu-latest
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
@@ -198,107 +189,54 @@ jobs:
                   path: autoconsent/
             - uses: ./autoconsent/.github/actions/setup-release-scripts
             # --- Action ---
-            - name: Checkout iOS
+            - name: Checkout Apple monorepo
               uses: actions/checkout@v3
               with:
-                  repository: duckduckgo/iOS
-                  path: ios/
+                  repository: duckduckgo/apple-monorepo-test # TODO: Update with final monorepo URL
+                  path: apple-monorepo/
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
             - uses: actions/setup-node@v3
               with:
                   node-version: current
             - name: Update iOS autoconsent reference
               run: |
-                  cd ios
+                  cd apple-monorepo/iOS
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
                   cd ..
-            - name: Create iOS PR Body
-              env:
-                  ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-              run: |
-                  TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js ios)"
-                  # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
-                  DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
-                  echo "PR_BODY_IOS<<$DELIMITER" >> $GITHUB_ENV
-                  echo "$TEMPLATE" >> $GITHUB_ENV
-                  echo "$DELIMITER" >> $GITHUB_ENV
-            # --- Effect ---
-            - name: Create PR for iOS
-              uses: peter-evans/create-pull-request@v7
-              id: create-pr
-              with:
-                  path: ios/
-                  add-paths: |
-                      package.json
-                      package-lock.json
-                      DuckDuckGo/Autoconsent/
-                  commit-message: Update autoconsent to ${{ env.TAG }}
-                  branch: update-autoconsent
-                  title: Update autoconsent to ${{ env.TAG }}
-                  body: '${{ env.PR_BODY_IOS }}'
-                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-
-    # ------------------------------------------------------------------------------
-    # Create PR with updated autoconsent on macOS
-    # ------------------------------------------------------------------------------
-
-    update_macos:
-        if: ${{ inputs.macos }}
-        runs-on: ubuntu-latest
-        outputs:
-            pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-        needs:
-            - create_asana_tasks
-            - get_release_info
-        env:
-            RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
-        steps:
-            # --- Setup ---
-            - uses: actions/checkout@v3
-              with:
-                  path: autoconsent/
-            - uses: ./autoconsent/.github/actions/setup-release-scripts
-            # --- Action ---
-            - name: Checkout macOS
-              uses: actions/checkout@v3
-              with:
-                  repository: duckduckgo/macos-browser
-                  path: macos/
-                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: current
             - name: Update macOS autoconsent reference
               run: |
-                  cd macos
+                  cd apple-monorepo/macOS
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
                   cd ..
-            - name: Create macOS PR Body
+            - name: Create Apple PR Body
               env:
                   ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
               run: |
-                  TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js macos)"
+                  TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js apple)"
                   # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
                   DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
-                  echo "PR_BODY_MACOS<<$DELIMITER" >> $GITHUB_ENV
+                  echo "PR_BODY_APPLE<<$DELIMITER" >> $GITHUB_ENV
                   echo "$TEMPLATE" >> $GITHUB_ENV
                   echo "$DELIMITER" >> $GITHUB_ENV
             # --- Effect ---
-            - name: Create PR for macOS
+            - name: Create PR for Apple platforms
               uses: peter-evans/create-pull-request@v7
               id: create-pr
               with:
-                  path: macos/
+                  path: apple-monorepo/
                   add-paths: |
-                      package.json
-                      package-lock.json
-                      DuckDuckGo/Autoconsent/
+                      iOS/package.json
+                      iOS/package-lock.json
+                      iOS/DuckDuckGo/Autoconsent/
+                      macOS/package.json
+                      macOS/package-lock.json
+                      macOS/DuckDuckGo/Autoconsent/
                   commit-message: Update autoconsent to ${{ env.TAG }}
                   branch: update-autoconsent
                   title: Update autoconsent to ${{ env.TAG }}
-                  body: '${{ env.PR_BODY_MACOS }}'
+                  body: '${{ env.PR_BODY_APPLE }}'
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
     # ------------------------------------------------------------------------------
@@ -370,7 +308,7 @@ jobs:
         # Always run this final step, even if any of the updates have failed
         # unless the previous jobs were cancelled
         if: ${{ always() && !contains(needs.*.result, 'cancelled') }}
-        needs: [create_asana_tasks, update_android, update_ios, update_macos, update_windows]
+        needs: [create_asana_tasks, update_android, update_apple, update_windows]
         steps:
             # --- Setup ---
             - uses: actions/checkout@v3
@@ -382,8 +320,7 @@ jobs:
               env:
                   ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
-                  IOS_PR_URL: ${{ needs.update_ios.outputs.pull-request-url }}
-                  MACOS_PR_URL: ${{ needs.update_macos.outputs.pull-request-url }}
+                  APPLE_PR_URL: ${{ needs.update_apple.outputs.pull-request-url }}
                   WINDOWS_PR_URL: ${{ needs.update_windows.outputs.pull-request-url }}
                   ANDROID_PR_URL: ${{ needs.update_android.outputs.pull-request-url }}
               run: |
