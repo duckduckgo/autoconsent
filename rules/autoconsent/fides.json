@@ -1,15 +1,15 @@
 {
     "name": "fides",
     "vendorUrl": "https://github.com/ethyca/fides",
-    "prehideSelectors": ["#fides-overlay"],
+    "prehideSelectors": ["#fides-overlay, #fides-overlay-wrapper"],
     "detectCmp": [
         {
-            "exists": "#fides-overlay #fides-banner"
+            "exists": "#fides-overlay-wrapper #fides-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#fides-overlay #fides-banner"
+            "visible": "#fides-overlay-wrapper #fides-banner"
         },
         {
             "eval": "EVAL_FIDES_DETECT_POPUP"
