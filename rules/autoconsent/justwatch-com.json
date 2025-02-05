@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "justwatch.com",
     "prehideSelectors": [".consent-banner"],
     "detectCmp": [{ "exists": ".consent-banner .consent-banner__actions" }],

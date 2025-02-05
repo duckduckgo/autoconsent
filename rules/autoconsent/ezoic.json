@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "EZoic",
     "prehideSelectors": ["#ez-cookie-dialog-wrapper"],
     "detectCmp": [{ "exists": "#ez-cookie-dialog-wrapper" }],

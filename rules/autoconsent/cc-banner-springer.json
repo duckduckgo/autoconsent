@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "cc-banner-springer",
     "prehideSelectors": [".cc-banner[data-cc-banner]"],
     "detectCmp": [{ "exists": ".cc-banner[data-cc-banner]" }],
