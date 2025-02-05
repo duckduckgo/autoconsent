@@ -4,8 +4,7 @@ const { replaceAllInString, getLink } = require('./release-utils.js');
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN;
 const prUrls = {
     android: process.env.ANDROID_PR_URL,
-    ios: process.env.IOS_PR_URL,
-    macos: process.env.MACOS_PR_URL,
+    apple: process.env.APPLE_PR_URL,
     windows: process.env.WINDOWS_PR_URL,
 };
 const asanaOutputRaw = process.env.ASANA_OUTPUT;

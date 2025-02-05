@@ -11,7 +11,7 @@ const releaseUrl = process.env.RELEASE_URL || 'https://example.com/';
 const releaseNotesRaw = process.env.RELEASE_NOTES || '<EMPTY RELEASE NOTES>';
 const releaseNotes = md.render(releaseNotesRaw);
 
-const templateTaskGid = '1206774921409831';
+const templateTaskGid = '1209334124753471'; /* TODO: Replace with original template ID after monorepo migration */
 const autoconsentProjectGid = '1201844467387842';
 const releaseSectionGid = '1202253736774466';
 const projectExtractorRegex = /\[\[project_gids=(.*)]]/;
@@ -21,7 +21,8 @@ const projectExtractorRegex = /\[\[project_gids=(.*)]]/;
  *
  * @typedef {{
  *   android: platformData,
- *   windows: platformData
+ *   windows: platformData,
+ *   apple: platformData
  * }} AsanaOutput
  */
 
@@ -37,13 +38,8 @@ const platforms = {
         taskGid: '',
         taskUrl: '',
     },
-    ios: {
-        displayName: 'iOS',
-        taskGid: '',
-        taskUrl: '',
-    },
-    macos: {
-        displayName: 'macOS',
+    apple: {
+        displayName: 'Apple',
         taskGid: '',
         taskUrl: '',
     },
