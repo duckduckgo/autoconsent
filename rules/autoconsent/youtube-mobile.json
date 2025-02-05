@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "youtube-mobile",
     "prehideSelectors": [".consent-bump-v2-lightbox"],
     "detectCmp": [{ "exists": "ytm-consent-bump-v2-renderer" }],

@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "gov.uk",
     "detectCmp": [{ "exists": ".govuk-cookie-banner__message" }],
     "detectPopup": [{ "exists": ".govuk-cookie-banner__message .govuk-button" }],

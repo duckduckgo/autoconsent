@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "automattic-cmp-optout",
     "prehideSelectors": ["form[class*=\"cookie-banner\"][method=\"post\"]"],
     "detectCmp": [{ "exists": "form[class*=\"cookie-banner\"][method=\"post\"]" }],

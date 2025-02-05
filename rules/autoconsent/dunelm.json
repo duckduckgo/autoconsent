@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "dunelm.com",
     "prehideSelectors": ["div[data-testid=cookie-consent-modal-backdrop]"],
     "detectCmp": [{ "exists": "div[data-testid=cookie-consent-message-contents]" }],

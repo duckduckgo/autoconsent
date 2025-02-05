@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "dmgmedia-us",
     "prehideSelectors": ["#mol-ads-cmp-iframe, div.mol-ads-cmp > form > div"],
     "detectCmp": [{ "exists": "div.mol-ads-cmp > form > div" }],

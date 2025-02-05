@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "Complianz categories",
     "prehideSelectors": [".cc-type-categories[aria-describedby=\"cookieconsent:desc\"]"],
     "detectCmp": [{ "exists": ".cc-type-categories[aria-describedby=\"cookieconsent:desc\"]" }],

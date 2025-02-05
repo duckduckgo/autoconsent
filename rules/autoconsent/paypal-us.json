@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "paypal-us",
     "prehideSelectors": ["#ccpaCookieContent_wrapper, article.ppvx_modal--overpanel"],
     "detectCmp": [{ "exists": "#ccpaCookieBanner, .privacy-sheet-content" }],

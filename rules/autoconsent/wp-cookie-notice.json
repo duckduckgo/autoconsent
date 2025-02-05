@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "WP Cookie Notice for GDPR",
     "vendorUrl": "https://wordpress.org/plugins/gdpr-cookie-consent/",
     "prehideSelectors": ["#gdpr-cookie-consent-bar"],

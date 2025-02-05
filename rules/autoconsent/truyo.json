@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "truyo",
     "prehideSelectors": ["#truyo-consent-module"],
     "detectCmp": [{ "exists": "#truyo-cookieBarContent" }],

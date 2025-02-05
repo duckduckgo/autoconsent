@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "steampowered.com",
     "detectCmp": [{ "exists": ".cookiepreferences_popup" }, { "visible": ".cookiepreferences_popup" }],
     "detectPopup": [{ "visible": ".cookiepreferences_popup" }],

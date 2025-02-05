@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "iWink",
     "prehideSelectors": ["body.cookies-request #cookie-bar"],
     "detectCmp": [{ "exists": "body.cookies-request #cookie-bar" }],

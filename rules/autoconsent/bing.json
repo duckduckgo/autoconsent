@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "bing.com",
     "prehideSelectors": ["#bnp_container"],
     "detectCmp": [{ "exists": "#bnp_cookie_banner" }],
