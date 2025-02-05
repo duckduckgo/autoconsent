@@ -2,6 +2,7 @@
 import { snippets } from './eval-snippets';
 
 export type AutoConsentCMPRule = {
+    $schema?: string;
     name: string;
     vendorUrl?: string;
     prehideSelectors?: string[];

@@ -1,0 +1,333 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$ref": "#/definitions/AutoConsentCMPRule",
+    "definitions": {
+        "AutoConsentCMPRule": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "vendorUrl": {
+                    "type": "string"
+                },
+                "prehideSelectors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "runContext": {
+                    "$ref": "#/definitions/RunContext"
+                },
+                "intermediate": {
+                    "type": "boolean"
+                },
+                "cosmetic": {
+                    "type": "boolean"
+                },
+                "detectCmp": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "detectPopup": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "optOut": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "optIn": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "openCmp": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "test": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "comment": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "detectCmp",
+                "detectPopup",
+                "optOut",
+                "optIn"
+            ],
+            "additionalProperties": false
+        },
+        "RunContext": {
+            "type": "object",
+            "properties": {
+                "main": {
+                    "type": "boolean"
+                },
+                "frame": {
+                    "type": "boolean"
+                },
+                "urlPattern": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AutoConsentRuleStep": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "any": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "if": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "visible": {
+                            "$ref": "#/definitions/ElementSelector"
+                        },
+                        "check": {
+                            "$ref": "#/definitions/VisibilityCheck"
+                        },
+                        "exists": {
+                            "$ref": "#/definitions/ElementSelector"
+                        }
+                    }
+                },
+                "then": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "else": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutoConsentRuleStep"
+                    }
+                },
+                "hide": {
+                    "type": "string"
+                },
+                "method": {
+                    "$ref": "#/definitions/HideMethod"
+                },
+                "wait": {
+                    "type": "number"
+                },
+                "waitForThenClick": {
+                    "$ref": "#/definitions/ElementSelector"
+                },
+                "timeout": {
+                    "type": "number"
+                },
+                "all": {
+                    "type": "boolean"
+                },
+                "click": {
+                    "$ref": "#/definitions/ElementSelector"
+                },
+                "waitForVisible": {
+                    "$ref": "#/definitions/ElementSelector"
+                },
+                "check": {
+                    "$ref": "#/definitions/VisibilityCheck"
+                },
+                "waitFor": {
+                    "$ref": "#/definitions/ElementSelector"
+                },
+                "eval": {
+                    "type": "string",
+                    "enum": [
+                        "EVAL_0",
+                        "EVAL_CONSENTMANAGER_1",
+                        "EVAL_CONSENTMANAGER_2",
+                        "EVAL_CONSENTMANAGER_3",
+                        "EVAL_CONSENTMANAGER_4",
+                        "EVAL_CONSENTMANAGER_5",
+                        "EVAL_COOKIEBOT_1",
+                        "EVAL_COOKIEBOT_2",
+                        "EVAL_COOKIEBOT_3",
+                        "EVAL_COOKIEBOT_4",
+                        "EVAL_COOKIEBOT_5",
+                        "EVAL_KLARO_1",
+                        "EVAL_KLARO_OPEN_POPUP",
+                        "EVAL_KLARO_TRY_API_OPT_OUT",
+                        "EVAL_ONETRUST_1",
+                        "EVAL_TRUSTARC_TOP",
+                        "EVAL_TRUSTARC_FRAME_TEST",
+                        "EVAL_TRUSTARC_FRAME_GTM",
+                        "EVAL_ABC_TEST",
+                        "EVAL_ADROLL_0",
+                        "EVAL_AFFINITY_SERIF_COM_0",
+                        "EVAL_ARBEITSAGENTUR_TEST",
+                        "EVAL_AXEPTIO_0",
+                        "EVAL_BAHN_TEST",
+                        "EVAL_BING_0",
+                        "EVAL_BLOCKSY_0",
+                        "EVAL_BORLABS_0",
+                        "EVAL_BUNDESREGIERUNG_DE_0",
+                        "EVAL_CANVA_0",
+                        "EVAL_CC_BANNER2_0",
+                        "EVAL_CLICKIO_0",
+                        "EVAL_CLINCH_0",
+                        "EVAL_COOKIECONSENT2_TEST",
+                        "EVAL_COOKIECONSENT3_TEST",
+                        "EVAL_COINBASE_0",
+                        "EVAL_COMPLIANZ_BANNER_0",
+                        "EVAL_COOKIE_LAW_INFO_0",
+                        "EVAL_COOKIE_LAW_INFO_1",
+                        "EVAL_COOKIE_LAW_INFO_DETECT",
+                        "EVAL_COOKIE_MANAGER_POPUP_0",
+                        "EVAL_COOKIEALERT_0",
+                        "EVAL_COOKIEALERT_1",
+                        "EVAL_COOKIEALERT_2",
+                        "EVAL_COOKIEFIRST_0",
+                        "EVAL_COOKIEFIRST_1",
+                        "EVAL_COOKIEINFORMATION_0",
+                        "EVAL_COOKIEINFORMATION_1",
+                        "EVAL_COOKIEINFORMATION_2",
+                        "EVAL_COOKIEYES_0",
+                        "EVAL_DAILYMOTION_0",
+                        "EVAL_DNDBEYOND_TEST",
+                        "EVAL_DSGVO_0",
+                        "EVAL_DUNELM_0",
+                        "EVAL_ETSY_0",
+                        "EVAL_ETSY_1",
+                        "EVAL_EU_COOKIE_COMPLIANCE_0",
+                        "EVAL_EU_COOKIE_LAW_0",
+                        "EVAL_EZOIC_0",
+                        "EVAL_EZOIC_1",
+                        "EVAL_FIDES_DETECT_POPUP",
+                        "EVAL_GOOGLE_0",
+                        "EVAL_GRAVITO_TEST",
+                        "EVAL_HEMA_TEST_0",
+                        "EVAL_IUBENDA_0",
+                        "EVAL_IUBENDA_1",
+                        "EVAL_IWINK_TEST",
+                        "EVAL_JQUERY_COOKIEBAR_0",
+                        "EVAL_KETCH_TEST",
+                        "EVAL_MEDIAVINE_0",
+                        "EVAL_MICROSOFT_0",
+                        "EVAL_MICROSOFT_1",
+                        "EVAL_MICROSOFT_2",
+                        "EVAL_MOOVE_0",
+                        "EVAL_ONENINETWO_0",
+                        "EVAL_OPENAI_TEST",
+                        "EVAL_OPERA_0",
+                        "EVAL_PAYPAL_0",
+                        "EVAL_PRIMEBOX_0",
+                        "EVAL_POSTNL_TEST",
+                        "EVAL_PUBTECH_0",
+                        "EVAL_REDDIT_0",
+                        "EVAL_ROBLOX_TEST",
+                        "EVAL_SHOPIFY_TEST",
+                        "EVAL_SKYSCANNER_TEST",
+                        "EVAL_SIRDATA_UNBLOCK_SCROLL",
+                        "EVAL_SNIGEL_0",
+                        "EVAL_SQUIZ_TEST",
+                        "EVAL_STEAMPOWERED_0",
+                        "EVAL_SVT_TEST",
+                        "EVAL_TAKEALOT_0",
+                        "EVAL_TARTEAUCITRON_0",
+                        "EVAL_TARTEAUCITRON_1",
+                        "EVAL_TARTEAUCITRON_2",
+                        "EVAL_TAUNTON_TEST",
+                        "EVAL_TEALIUM_0",
+                        "EVAL_TEALIUM_1",
+                        "EVAL_TEALIUM_DONOTSELL",
+                        "EVAL_TEALIUM_2",
+                        "EVAL_TEALIUM_3",
+                        "EVAL_TEALIUM_DONOTSELL_CHECK",
+                        "EVAL_TESLA_TEST",
+                        "EVAL_TESTCMP_STEP",
+                        "EVAL_TESTCMP_0",
+                        "EVAL_TESTCMP_COSMETIC_0",
+                        "EVAL_THEFREEDICTIONARY_0",
+                        "EVAL_THEFREEDICTIONARY_1",
+                        "EVAL_THEVERGE_0",
+                        "EVAL_TWCC_TEST",
+                        "EVAL_UBUNTU_COM_0",
+                        "EVAL_UK_COOKIE_CONSENT_0",
+                        "EVAL_USERCENTRICS_API_0",
+                        "EVAL_USERCENTRICS_API_1",
+                        "EVAL_USERCENTRICS_API_2",
+                        "EVAL_USERCENTRICS_API_3",
+                        "EVAL_USERCENTRICS_API_4",
+                        "EVAL_USERCENTRICS_API_5",
+                        "EVAL_USERCENTRICS_API_6",
+                        "EVAL_USERCENTRICS_BUTTON_0",
+                        "EVAL_WAITROSE_0",
+                        "EVAL_WAITROSE_1",
+                        "EVAL_WP_COOKIE_NOTICE_0",
+                        "EVAL_XE_TEST",
+                        "EVAL_XING_0",
+                        "EVAL_YOUTUBE_DESKTOP_0",
+                        "EVAL_YOUTUBE_MOBILE_0"
+                    ]
+                },
+                "visible": {
+                    "$ref": "#/definitions/ElementSelector"
+                },
+                "exists": {
+                    "$ref": "#/definitions/ElementSelector"
+                },
+                "optional": {
+                    "type": "boolean"
+                },
+                "comment": {
+                    "type": "string"
+                }
+            }
+        },
+        "ElementSelector": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "VisibilityCheck": {
+            "type": "string",
+            "enum": [
+                "any",
+                "all",
+                "none"
+            ]
+        },
+        "HideMethod": {
+            "type": "string",
+            "enum": [
+                "display",
+                "opacity"
+            ]
+        }
+    }
+}

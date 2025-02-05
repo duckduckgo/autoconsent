@@ -1,19 +1,6 @@
 const Ajv = require('ajv').default;
 const fs = require('fs');
 const path = require('path');
-const schemaGenerator = require('ts-json-schema-generator');
-
-function createGenerator() {
-    try {
-        return schemaGenerator.createGenerator({
-            path: path.join(__dirname, '../lib/rules.ts'),
-            type: 'AutoConsentCMPRule',
-        });
-    } catch (e) {
-        console.error(e.diagnostic);
-        throw e;
-    }
-}
 
 function formatErrors(errors) {
     if (!Array.isArray(errors)) {
@@ -23,8 +10,14 @@ function formatErrors(errors) {
     return errors.map((item) => `${item.instancePath}: ${item.message}`).join(', ');
 }
 
+const schemaPath = path.join(__dirname, '../rules/schema.json');
+if (!fs.existsSync(schemaPath)) {
+    console.error(`Schema file does not exist at: ${schemaPath}`);
+    process.exit(1);
+}
+
+const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
 const ajv = new Ajv({ allowUnionTypes: true });
-const schema = createGenerator().createSchema('AutoConsentCMPRule');
 const validator = ajv.compile(schema);
 
 const rulesDir = path.join(__dirname, '../rules/autoconsent');
