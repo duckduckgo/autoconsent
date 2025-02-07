@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "johnlewis.com",
     "prehideSelectors": ["div[class^=pecr-cookie-banner-]"],
     "detectCmp": [{ "exists": "div[class^=pecr-cookie-banner-]" }],

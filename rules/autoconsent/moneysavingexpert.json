@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "moneysavingexpert.com",
     "detectCmp": [{ "exists": "dialog[data-testid=accept-our-cookies-dialog]" }],
     "detectPopup": [{ "visible": "dialog[data-testid=accept-our-cookies-dialog]" }],

@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "deepl.com",
     "prehideSelectors": [".dl_cookieBanner_container"],
     "detectCmp": [{ "exists": ".dl_cookieBanner_container" }],

@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "youtube-desktop",
     "prehideSelectors": ["tp-yt-iron-overlay-backdrop.opened", "ytd-consent-bump-v2-lightbox"],
     "detectCmp": [

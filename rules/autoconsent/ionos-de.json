@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "ionos.de",
     "prehideSelectors": [".privacy-consent--backdrop", ".privacy-consent--modal"],
     "detectCmp": [{ "exists": ".privacy-consent--modal" }],

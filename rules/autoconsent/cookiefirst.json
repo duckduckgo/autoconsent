@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "cookiefirst.com",
     "prehideSelectors": ["#cookiefirst-root,.cookiefirst-root,[aria-labelledby=cookie-preference-panel-title]"],
     "detectCmp": [{ "exists": "#cookiefirst-root,.cookiefirst-root" }],

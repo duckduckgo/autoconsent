@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/duckduckgo/autoconsent/refs/heads/main/rules/schema.json",
     "name": "Test page cosmetic CMP",
     "cosmetic": true,
     "prehideSelectors": ["#privacy-test-page-cmp-test-prehide"],
