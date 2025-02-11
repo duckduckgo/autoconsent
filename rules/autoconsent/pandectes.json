@@ -24,7 +24,8 @@
             "else": [
                 { "click": "#pandectes-banner .cc-settings" },
                 { "waitForThenClick": ".pd-cp-ui-rejectAll" },
-                { "click": ".pd-cp-ui-save" }
+                { "click": ".pd-cp-ui-save" },
+                { "wait": 200 }
             ]
         }
     ],
