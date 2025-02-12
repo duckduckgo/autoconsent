@@ -24,14 +24,9 @@
             "else": [
                 { "click": "#pandectes-banner .cc-settings" },
                 { "waitForThenClick": ".pd-cp-ui-rejectAll" },
-                { "click": ".pd-cp-ui-save" },
-                { "wait": 200 }
+                { "click": ".pd-cp-ui-save" }
             ]
         }
     ],
-    "test": [
-        {
-            "eval": "EVAL_PANDECTES_TEST"
-        }
-    ]
+    "test": [{ "wait": 500 }, { "eval": "EVAL_PANDECTES_TEST" }]
 }
