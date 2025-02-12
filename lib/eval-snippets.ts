@@ -167,6 +167,16 @@ export const snippets = {
     EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
     EVAL_OPERA_0: () =>
         document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
+    EVAL_PANDECTES_TEST: () =>
+        document.cookie.includes('_pandectes_gdpr=') &&
+        JSON.parse(
+            atob(
+                document.cookie
+                    .split(';')
+                    .find((s) => s.trim().startsWith('_pandectes_gdpr'))
+                    .split('=')[1],
+            ),
+        ).status === 'deny',
     EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
     EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
     EVAL_POSTNL_TEST: () => document.cookie.includes('CookiePermissionInfo'),
