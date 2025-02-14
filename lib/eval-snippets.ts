@@ -142,6 +142,7 @@ export const snippets = {
     EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
     EVAL_GRAVITO_TEST: () => document.cookie.includes('gravitoData'),
     EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
+    EVAL_INMOBI_TEST: () => document.cookie.includes('cookie-pref=rejected'),
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
