@@ -69,6 +69,7 @@ export const snippets = {
     EVAL_ARBEITSAGENTUR_TEST: () => document.cookie.includes('cookie_consent=denied'),
     EVAL_AXEPTIO_0: () => document.cookie.includes('axeptio_authorized_vendors=%2C%2C'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
+    EVAL_BBC_TEST: () => document.cookie.includes('ckns_explicit=1'),
     EVAL_BING_0: () => document.cookie.includes('AD=0'),
     EVAL_BLOCKSY_0: () => document.cookie.includes('blocksy_cookies_consent_accepted=no'),
     EVAL_BORLABS_0: () =>
