@@ -77,6 +77,9 @@ export default class SourcePoint extends AutoConsentCMPBase {
     }
 
     async optOut() {
+        // FIXME: ideally we want to wait until the outer frame is ready, but it's tricky in cross-origin frames
+        await this.wait(500);
+
         const logsConfig = this.autoconsent.config.logs;
         if (this.ccpaPopup) {
             // toggles with 2 buttons
