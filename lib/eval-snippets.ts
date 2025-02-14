@@ -124,6 +124,7 @@ export const snippets = {
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
     EVAL_COOKIEINFORMATION_2: () => document.cookie.includes('CookieInformationConsent='),
     EVAL_COOKIEYES_0: () => document.cookie.includes('advertisement:no'),
+    EVAL_CT_ULTIMATE_GDPR_TEST: () => document.cookie.includes('ct-ultimate-gdpr-cookie='),
     EVAL_DAILYMOTION_0: () => !!document.cookie.match('dm-euconsent-v2'),
     EVAL_DNDBEYOND_TEST: () => document.cookie.includes('cookie-consent=denied'),
     EVAL_DSGVO_0: () => !document.cookie.includes('sp_dsgvo_cookie_settings'),
