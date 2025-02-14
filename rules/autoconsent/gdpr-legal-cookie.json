@@ -4,10 +4,14 @@
     "prehideSelectors": [".overlay_bc_banner"],
     "detectCmp": [
         {
-            "eval": "EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP"
-        },
-        {
-            "exists": "a[href=\"https://gdpr-legal-cookie.myshopify.com/\"]"
+            "any": [
+                {
+                    "eval": "EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP"
+                },
+                {
+                    "exists": "a[href=\"https://gdpr-legal-cookie.myshopify.com/\"]"
+                }
+            ]
         }
     ],
     "detectPopup": [
