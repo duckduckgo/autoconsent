@@ -9,7 +9,8 @@
     ],
     "detectPopup": [
         {
-            "visible": "#ct-ultimate-gdpr-cookie-popup"
+            "waitForVisible": "#ct-ultimate-gdpr-cookie-popup",
+            "timeout": 30000
         }
     ],
     "optIn": [
