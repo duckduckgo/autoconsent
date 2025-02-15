@@ -1,3 +1,51 @@
+# v12.10.0 (Fri Feb 14 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 7c1f69a77b0ee7c97112fba6f7394d11edcf3877 [#638](https://github.com/duckduckgo/autoconsent/pull/638) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Add site specific rule for bbc.com [#637](https://github.com/duckduckgo/autoconsent/pull/637) ([@noisysocks](https://github.com/noisysocks))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#634](https://github.com/duckduckgo/autoconsent/pull/634) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Add rule for inmobi.com and related websites [#639](https://github.com/duckduckgo/autoconsent/pull/639) ([@noisysocks](https://github.com/noisysocks))
+- Add rule for ct-ultimate-gdpr CMP [#635](https://github.com/duckduckgo/autoconsent/pull/635) ([@noisysocks](https://github.com/noisysocks) [@muodov](https://github.com/muodov))
+- Add Pandectes CMP [#632](https://github.com/duckduckgo/autoconsent/pull/632) ([@noisysocks](https://github.com/noisysocks))
+- Bump tldts-experimental from 6.1.75 to 6.1.77 [#633](https://github.com/duckduckgo/autoconsent/pull/633) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add jetpack-eu-cookie-law CMP [#631](https://github.com/duckduckgo/autoconsent/pull/631) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.9.0 (Fri Feb 07 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 7eba802a2208dd322d820a2aad7a256377c3afec [#630](https://github.com/duckduckgo/autoconsent/pull/630) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Fix Tealium rule on barmer.de [#628](https://github.com/duckduckgo/autoconsent/pull/628) ([@noisysocks](https://github.com/noisysocks))
+- Adjust cookie-law-info to hide site-specific #cookie-law-bg element [#625](https://github.com/duckduckgo/autoconsent/pull/625) ([@noisysocks](https://github.com/noisysocks))
+- Remove wetransfer rule, update fide to remove popup on wetransfer.com [#626](https://github.com/duckduckgo/autoconsent/pull/626) ([@noisysocks](https://github.com/noisysocks))
+- Monthly Coverage data update [#622](https://github.com/duckduckgo/autoconsent/pull/622) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.8.0 (Fri Jan 31 2025)
 
 #### 🚀 Enhancement

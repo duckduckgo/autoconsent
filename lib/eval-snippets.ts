@@ -69,6 +69,7 @@ export const snippets = {
     EVAL_ARBEITSAGENTUR_TEST: () => document.cookie.includes('cookie_consent=denied'),
     EVAL_AXEPTIO_0: () => document.cookie.includes('axeptio_authorized_vendors=%2C%2C'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
+    EVAL_BBC_TEST: () => document.cookie.includes('ckns_explicit=1'),
     EVAL_BING_0: () => document.cookie.includes('AD=0'),
     EVAL_BLOCKSY_0: () => document.cookie.includes('blocksy_cookies_consent_accepted=no'),
     EVAL_BORLABS_0: () =>
@@ -123,6 +124,7 @@ export const snippets = {
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
     EVAL_COOKIEINFORMATION_2: () => document.cookie.includes('CookieInformationConsent='),
     EVAL_COOKIEYES_0: () => document.cookie.includes('advertisement:no'),
+    EVAL_CT_ULTIMATE_GDPR_TEST: () => document.cookie.includes('ct-ultimate-gdpr-cookie='),
     EVAL_DAILYMOTION_0: () => !!document.cookie.match('dm-euconsent-v2'),
     EVAL_DNDBEYOND_TEST: () => document.cookie.includes('cookie-consent=denied'),
     EVAL_DSGVO_0: () => !document.cookie.includes('sp_dsgvo_cookie_settings'),
@@ -140,6 +142,7 @@ export const snippets = {
     EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
     EVAL_GRAVITO_TEST: () => document.cookie.includes('gravitoData'),
     EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
+    EVAL_INMOBI_TEST: () => document.cookie.includes('cookie-pref=rejected'),
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
@@ -167,6 +170,16 @@ export const snippets = {
     EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
     EVAL_OPERA_0: () =>
         document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
+    EVAL_PANDECTES_TEST: () =>
+        document.cookie.includes('_pandectes_gdpr=') &&
+        JSON.parse(
+            atob(
+                document.cookie
+                    .split(';')
+                    .find((s) => s.trim().startsWith('_pandectes_gdpr'))
+                    .split('=')[1],
+            ),
+        ).status === 'deny',
     EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
     EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
     EVAL_POSTNL_TEST: () => document.cookie.includes('CookiePermissionInfo'),
