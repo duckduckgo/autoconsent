@@ -192,7 +192,7 @@ jobs:
             - name: Checkout Apple monorepo
               uses: actions/checkout@v3
               with:
-                  repository: duckduckgo/apple-monorepo-test # TODO: Update with final monorepo URL
+                  repository: duckduckgo/apple-browsers
                   path: apple-monorepo/
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
             - uses: actions/setup-node@v3
