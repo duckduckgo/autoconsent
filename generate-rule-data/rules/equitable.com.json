@@ -1,0 +1,23 @@
+{
+  "name": "equitable.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.default-device.bodyclass > div.optanon-alert-box-wrapper.hide-cookie-setting-button"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.default-device.bodyclass > div.optanon-alert-box-wrapper.hide-cookie-setting-button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.default-device.bodyclass > div.optanon-alert-box-wrapper.hide-cookie-setting-button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.default-device.bodyclass > div.optanon-alert-box-wrapper.hide-cookie-setting-button"
+    }
+  ]
+}

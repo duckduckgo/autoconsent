@@ -1,0 +1,23 @@
+{
+  "name": "allaboutvision.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div > div.privacy_prompt1.explicit_consent"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div > div.privacy_prompt1.explicit_consent"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div.privacy_prompt1.explicit_consent"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div > div.privacy_prompt1.explicit_consent"
+    }
+  ]
+}

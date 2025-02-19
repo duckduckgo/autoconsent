@@ -1,0 +1,23 @@
+{
+  "name": "digialps.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.home.page-template > div.cky-consent-container.cky-box-bottom-left"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.home.page-template > div.cky-consent-container.cky-box-bottom-left"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.home.page-template > div.cky-consent-container.cky-box-bottom-left"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.home.page-template > div.cky-consent-container.cky-box-bottom-left"
+    }
+  ]
+}

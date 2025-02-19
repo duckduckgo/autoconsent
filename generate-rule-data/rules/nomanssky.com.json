@@ -1,0 +1,23 @@
+{
+  "name": "nomanssky.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#ccc-module"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#ccc-module"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#ccc-module"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#ccc-module"
+    }
+  ]
+}

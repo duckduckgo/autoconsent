@@ -1,0 +1,23 @@
+{
+  "name": "lenovo.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#evidon_banner_wrap"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#evidon_banner_wrap"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#evidon_banner_wrap"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#evidon_banner_wrap"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "bikez.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div.qc-cmp2-container > div.qc-cmp2-main > div.qc-cmp-cleanslate.css-1r6a05s"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div.qc-cmp2-container > div.qc-cmp2-main > div.qc-cmp-cleanslate.css-1r6a05s"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div.qc-cmp2-container > div.qc-cmp2-main > div.qc-cmp-cleanslate.css-1r6a05s"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div.qc-cmp2-container > div.qc-cmp2-main > div.qc-cmp-cleanslate.css-1r6a05s"
+    }
+  ]
+}

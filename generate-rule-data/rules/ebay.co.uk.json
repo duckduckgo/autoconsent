@@ -1,0 +1,23 @@
+{
+  "name": "ebay.co.uk",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#gdpr-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#gdpr-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#gdpr-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#gdpr-banner"
+    }
+  ]
+}

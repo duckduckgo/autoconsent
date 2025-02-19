@@ -1,0 +1,23 @@
+{
+  "name": "en.geneanet.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#tarteaucitronAlertBig"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#tarteaucitronAlertBig"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#tarteaucitronAlertBig"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#tarteaucitronAlertBig"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "lsu.edu",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.alert-visible > div.alert.cookiealert"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.alert-visible > div.alert.cookiealert"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.alert-visible > div.alert.cookiealert"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.alert-visible > div.alert.cookiealert"
+    }
+  ]
+}

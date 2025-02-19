@@ -1,0 +1,23 @@
+{
+  "name": "clustrmaps.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#gdpr-cookie-message"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#gdpr-cookie-message"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#gdpr-cookie-message"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#gdpr-cookie-message"
+    }
+  ]
+}

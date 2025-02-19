@@ -1,0 +1,23 @@
+{
+  "name": "skimag.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.home.page-template > div.cc-window.cc-floating"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.home.page-template > div.cc-window.cc-floating"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.home.page-template > div.cc-window.cc-floating"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.home.page-template > div.cc-window.cc-floating"
+    }
+  ]
+}

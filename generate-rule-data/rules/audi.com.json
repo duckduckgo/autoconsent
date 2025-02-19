@@ -1,0 +1,23 @@
+{
+  "name": "audi.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#ensModalWrapper"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#ensModalWrapper"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#ensModalWrapper"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#ensModalWrapper"
+    }
+  ]
+}

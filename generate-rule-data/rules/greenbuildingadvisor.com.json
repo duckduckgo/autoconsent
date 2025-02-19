@@ -1,0 +1,23 @@
+{
+  "name": "greenbuildingadvisor.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#taunton-user-consent__overlay"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#taunton-user-consent__overlay"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#taunton-user-consent__overlay"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#taunton-user-consent__overlay"
+    }
+  ]
+}

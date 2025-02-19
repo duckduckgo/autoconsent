@@ -1,0 +1,23 @@
+{
+  "name": "commercial.century21.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#truste-consent-track"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#truste-consent-track"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#truste-consent-track"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#truste-consent-track"
+    }
+  ]
+}

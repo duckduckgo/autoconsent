@@ -1,0 +1,23 @@
+{
+  "name": "arduino.cc",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#iubenda-cs-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#iubenda-cs-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#iubenda-cs-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#iubenda-cs-banner"
+    }
+  ]
+}

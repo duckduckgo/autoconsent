@@ -1,0 +1,23 @@
+{
+  "name": "bimmerforums.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#eu_cookie_law_widget-2"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#eu_cookie_law_widget-2"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#eu_cookie_law_widget-2"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#eu_cookie_law_widget-2"
+    }
+  ]
+}

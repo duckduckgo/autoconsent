@@ -1,0 +1,23 @@
+{
+  "name": "azmen.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div.wpcc-container.wpcc-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div.wpcc-container.wpcc-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div.wpcc-container.wpcc-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div.wpcc-container.wpcc-banner"
+    }
+  ]
+}

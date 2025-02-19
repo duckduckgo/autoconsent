@@ -1,0 +1,23 @@
+{
+  "name": "revouninstaller.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.en_US.home > dialog.cookiefirst-root.notranslate > div.cf2CeT.cf2DrG"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.en_US.home > dialog.cookiefirst-root.notranslate > div.cf2CeT.cf2DrG"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.en_US.home > dialog.cookiefirst-root.notranslate > div.cf2CeT.cf2DrG"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.en_US.home > dialog.cookiefirst-root.notranslate > div.cf2CeT.cf2DrG"
+    }
+  ]
+}

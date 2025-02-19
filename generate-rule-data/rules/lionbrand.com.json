@@ -1,0 +1,23 @@
+{
+  "name": "lionbrand.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.prestige--v4.template-index > div.csm-cookie-consent > div.SOYR0oPj0Q6UOw2AemzM > div._Vh4fQODII8fY3icfuun.CA2rTKQjNeSPfoCYA3oV"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.prestige--v4.template-index > div.csm-cookie-consent > div.SOYR0oPj0Q6UOw2AemzM > div._Vh4fQODII8fY3icfuun.CA2rTKQjNeSPfoCYA3oV"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.prestige--v4.template-index > div.csm-cookie-consent > div.SOYR0oPj0Q6UOw2AemzM > div._Vh4fQODII8fY3icfuun.CA2rTKQjNeSPfoCYA3oV"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.prestige--v4.template-index > div.csm-cookie-consent > div.SOYR0oPj0Q6UOw2AemzM > div._Vh4fQODII8fY3icfuun.CA2rTKQjNeSPfoCYA3oV"
+    }
+  ]
+}

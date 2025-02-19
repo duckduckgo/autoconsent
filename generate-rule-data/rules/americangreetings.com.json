@@ -1,0 +1,23 @@
+{
+  "name": "americangreetings.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#privacy_manager"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#privacy_manager"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#privacy_manager"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#privacy_manager"
+    }
+  ]
+}

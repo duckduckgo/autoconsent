@@ -1,0 +1,23 @@
+{
+  "name": "asus.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#cookie-policy-info"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#cookie-policy-info"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#cookie-policy-info"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#cookie-policy-info"
+    }
+  ]
+}

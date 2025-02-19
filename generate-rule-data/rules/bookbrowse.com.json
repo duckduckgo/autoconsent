@@ -1,0 +1,23 @@
+{
+  "name": "bookbrowse.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#cookie-bar"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#cookie-bar"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#cookie-bar"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#cookie-bar"
+    }
+  ]
+}

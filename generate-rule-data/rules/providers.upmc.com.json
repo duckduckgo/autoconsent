@@ -1,0 +1,23 @@
+{
+  "name": "providers.upmc.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#cookiebanner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#cookiebanner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#cookiebanner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#cookiebanner"
+    }
+  ]
+}

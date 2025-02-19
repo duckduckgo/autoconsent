@@ -1,0 +1,23 @@
+{
+  "name": "buffalowildwings.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div > div.root__A7aXF > div.ketch-fixed.ketch-z-ketch-max-z-index"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#ketch-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#ketch-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div > div.root__A7aXF > div.ketch-fixed.ketch-z-ketch-max-z-index"
+    }
+  ]
+}

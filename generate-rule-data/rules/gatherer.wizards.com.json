@@ -1,0 +1,23 @@
+{
+  "name": "gatherer.wizards.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#ketch-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#ketch-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#ketch-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#ketch-banner"
+    }
+  ]
+}

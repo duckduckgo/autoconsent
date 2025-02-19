@@ -1,0 +1,23 @@
+{
+  "name": "forums.debian.net",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.notouch.section-index// > div > div.klaro > div.cookie-notice"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.notouch.section-index// > div > div.klaro > div.cookie-notice"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.notouch.section-index// > div > div.klaro > div.cookie-notice"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.notouch.section-index// > div > div.klaro > div.cookie-notice"
+    }
+  ]
+}
