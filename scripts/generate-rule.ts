@@ -1,34 +1,33 @@
-import { chromium, ElementHandle, Page } from '@playwright/test';
+import { chromium, ElementHandle, JSHandle, Page } from '@playwright/test';
+import 'dotenv/config';
 import * as fs from 'fs/promises';
-import path from 'path';
 import OpenAI from 'openai';
 import { zodResponseFormat } from 'openai/helpers/zod';
+import path from 'path';
 import { z } from 'zod';
 import { AutoConsentCMPRule } from '../lib/rules';
-import 'dotenv/config';
 
-interface CandidateNotice {
-    text: string;
-    selector: string;
-    boundingBox: { x: number; y: number; width: number; height: number };
-    innermostHideableElementSelector: string;
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
+
+const ClassifyCookieConsentNoticeResponse = z.object({
+    isCookieConsentNotice: z.boolean(),
+});
+
+async function unwrapArrayHandle<T>(handle: JSHandle<T[]>): Promise<JSHandle<T>[]> {
+    const length = await handle.evaluate((array) => array.length);
+    const promises: Promise<JSHandle<T>>[] = [];
+    for (let i = 0; i < length; i++) {
+        promises.push(handle.evaluateHandle((array, index) => array[index], i));
+    }
+    return Promise.all(promises);
 }
 
-interface NoticeAction {
-    selector: string;
-    action: 'click' | 'toggle';
-    purpose: 'reject' | 'save' | 'show_options';
-}
-
-async function detectCandidateNotices(page: Page): Promise<CandidateNotice[]> {
-    await page.exposeFunction('extractFrameText', async (iframeHandle: ElementHandle<HTMLIFrameElement>) => {
-        return iframeHandle.contentFrame().then((frameDoc) => frameDoc.evaluate(() => document.documentElement.innerText));
-    });
-
-    const candidates = await page.evaluate(async () => {
-        // Helper function to check visibility
+async function findOverlays(page: Page): Promise<ElementHandle<HTMLElement>[]> {
+    const elements = await page.evaluateHandle(() => {
         const isVisible = (node: HTMLElement) => {
-            if (!(node instanceof HTMLElement) || !node.isConnected) {
+            if (!node.isConnected) {
                 return false;
             }
             const style = window.getComputedStyle(node);
@@ -46,8 +45,7 @@ async function detectCandidateNotices(page: Page): Promise<CandidateNotice[]> {
             );
         };
 
-        // Helper function to collect matching elements
-        const collectMatchingElements = (criteria: (e: HTMLElement) => boolean) => {
+        const collectMatchingElements = (criteria: (el: HTMLElement) => boolean) => {
             const elements: HTMLElement[] = [];
             const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_ELEMENT, {
                 acceptNode: (n) => (n instanceof HTMLElement && criteria(n) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP),
@@ -58,7 +56,6 @@ async function detectCandidateNotices(page: Page): Promise<CandidateNotice[]> {
             return elements;
         };
 
-        // Helper function to filter out parent elements
         const nonParentElements = (elements: HTMLElement[]) => {
             const results: HTMLElement[] = [];
             if (elements.length > 0) {
@@ -78,16 +75,14 @@ async function detectCandidateNotices(page: Page): Promise<CandidateNotice[]> {
             return results;
         };
 
-        // Helper that simulates getting the eTLD+1 of a domain
         const getETLDP1 = (domain: string) => {
             // Simple implementation - remove www. and take last 2 parts
             const parts = domain.replace('www.', '').split('.');
             return parts.slice(-2).join('.');
         };
 
-        // Helper to check if element has many first-party links
-        const hasManyFirstPartyLinks = (thisDomain: string, e: HTMLElement) => {
-            const linkPartiness = Array.from(e.querySelectorAll('a[href]')).map((a) => {
+        const hasManyFirstPartyLinks = (thisDomain: string, el: HTMLElement) => {
+            const linkPartiness = Array.from(el.querySelectorAll('a[href]')).map((a) => {
                 try {
                     const linkETLDP1 = getETLDP1(new URL((a as HTMLAnchorElement).href).host);
                     return thisDomain === linkETLDP1;
@@ -106,108 +101,17 @@ async function detectCandidateNotices(page: Page): Promise<CandidateNotice[]> {
                 },
                 { first: 0, third: 0 },
             );
-
             if (linkPartinessCount.first > 10 && linkPartinessCount.first > linkPartinessCount.third) {
                 return false;
             }
             return true;
         };
 
-        // Helper to get text from a candidate element
-        const getText = async (el: HTMLElement) => {
-            const innerText = el.innerText;
-            if (innerText.trim() !== '') {
-                return innerText;
-            }
-
-            // some sites dump their cookie notices into iframes
-            const iframes = el.querySelectorAll('iframe');
-            for (const iframe of iframes) {
-                const innerText = await (window as any).extractFrameText(iframe);
-                if (innerText.trim() !== '') {
-                    return innerText;
-                }
-            }
-
-            return '';
-        };
-
-        // Helper function to generate a unique CSS selector for an element
-        function getCssSelector(el: HTMLElement): string {
-            if (el.id) {
-                return `#${el.id}`;
-            }
-
-            const path: string[] = [];
-            while (el.parentElement) {
-                let selector = el.tagName.toLowerCase();
-
-                // Add classes (but not too many to keep selector reasonable)
-                const classes = Array.from(el.classList).slice(0, 2);
-                if (classes.length) {
-                    selector += `.${classes.join('.')}`;
-                }
-
-                path.unshift(selector);
-                el = el.parentElement;
-            }
-
-            return path.join(' > ');
-        }
-
-        /**
-         * Given a "minimum viable cookie notice", i.e. some element that fully contains the text
-         * of a cookie notice and nothing further, collect:
-         * - the furthest ancestor element that **should** be hidden in addition to the notice (for e.g. overlays)
-         * - the furthest ancestor element that **can** be safely hidden without removing important page content
-         * - a number representing the tree depth between the previous two elements
-         * - any CSS `id`s within the tree between the previous two elements
-         */
-        const expandDetectedCookieNotice = (node: HTMLElement) => {
-            const windowRect = {
-                left: 0,
-                right: window.innerWidth,
-                top: 0,
-                bottom: window.innerHeight,
-            };
-
-            let outermostHideableElement = node;
-            let innermostHideableElement = node;
-            // Begin by looking upwards in the DOM for the outermost element that _can_ be hidden.
-            // When traversing upwards, this is the last element that adds no additional content to the
-            // original notice's `innerText`.
-            while (
-                outermostHideableElement.parentElement &&
-                outermostHideableElement.parentElement.innerText.trim() === node.innerText.trim()
-            ) {
-                outermostHideableElement = outermostHideableElement.parentElement;
-                // In the meantime, look for the innermost element that _should_ be hidden.
-                // While traversing upwards, this is either the first element, or the last element that has:
-                // - full screen dimensions, AND
-                // - a blur filter and/or semi-transparent background style
-                const style = getComputedStyle(outermostHideableElement);
-                const nodeRect = outermostHideableElement.getBoundingClientRect();
-                if (
-                    nodeRect.left === windowRect.left &&
-                    nodeRect.right === windowRect.right &&
-                    nodeRect.top === windowRect.top &&
-                    nodeRect.bottom === windowRect.bottom &&
-                    (style.backgroundColor.startsWith('rgba(') || style.backdropFilter !== 'none')
-                ) {
-                    innermostHideableElement = outermostHideableElement;
-                }
-            }
-            return {
-                innermostHideableElement,
-                outermostHideableElement,
-            };
-        };
-
         // Collect fixed/sticky positioned elements that are visible
-        let elements = collectMatchingElements((e) => {
-            if (e.tagName === 'BODY') return false;
-            const computedStyle = window.getComputedStyle(e).position;
-            return (computedStyle === 'fixed' || computedStyle === 'sticky') && isVisible(e);
+        let elements = collectMatchingElements((el) => {
+            if (el.tagName === 'BODY') return false;
+            const computedStyle = window.getComputedStyle(el).position;
+            return (computedStyle === 'fixed' || computedStyle === 'sticky') && isVisible(el);
         });
 
         // Filter out elements with many first party links (likely a nav)
@@ -217,121 +121,269 @@ async function detectCandidateNotices(page: Page): Promise<CandidateNotice[]> {
         // Get non-parent elements
         elements = nonParentElements(elements);
 
-        // Return the candidates with their text content and some metadata
-        return Promise.all(
-            elements.map(async (e) => ({
-                text: await getText(e),
-                selector: getCssSelector(e),
-                boundingBox: e.getBoundingClientRect().toJSON(),
-                innermostHideableElementSelector: getCssSelector(expandDetectedCookieNotice(e).innermostHideableElement),
-            })),
-        );
+        return elements;
     });
 
-    return candidates;
+    const handles = await unwrapArrayHandle(elements);
+    return handles.map((handle) => handle.asElement());
 }
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+async function getText(element: ElementHandle<HTMLElement>): Promise<string> {
+    const innerText = (await element.evaluate((el) => el.innerText)).trim();
+    if (innerText) {
+        return innerText;
+    }
 
-const ClassificationResponse = z.object({
-    isCookieNotice: z.boolean(),
-});
-
-async function classifyCookieNotice(candidates: CandidateNotice[]): Promise<CandidateNotice | null> {
-    const systemPrompt = `Your task is to classify text from the innerText property of HTML overlay elements.
-
-An overlay element is considered to be a "cookie consent notice" if it meets all of these criteria:
-1. it explicitly notifies the user of the site's use of cookies or other storage technology, such as: "We use cookies...", "This site uses...", etc.
-2. it offers the user choices for the usage of cookies on the site, such as: "Accept", "Reject", "Learn More", etc., or informs the user that their use of the site means they accept the usage of cookies.
-
-Note: This definition does not include adult content notices or any other type of notice that is primarily focused on age verification or content restrictions. Cookie consent notices are specifically intended to inform users about the website's use of cookies and obtain their consent for such use.
-
-Note: A cookie consent notice should specifically relate to the site's use of cookies or other storage technology that stores data on the user's device, such as HTTP cookies, local storage, or session storage. Requests for permission to access geolocation information, camera, microphone, etc., do not fall under this category.
-
-Note: Do NOT classify a website header or footer as a "cookie consent notice". Website headers or footers may contain a list of links, possibly including a privacy policy, cookie policy, or terms of service document, but their primary purpose is navigational rather than informational.`;
-
-    for (const candidate of candidates) {
-        const innerText = candidate.text.trim();
-        if (!innerText) continue;
-
-        const MAX_LENGTH = 500;
-        let innerTextSnippet = innerText.slice(0, MAX_LENGTH);
-        let ifTruncated = '';
-        if (innerTextSnippet.length !== innerText.length) {
-            innerTextSnippet += '...';
-            ifTruncated = `the first ${MAX_LENGTH} characters of `;
-        }
-
-        try {
-            const completion = await openai.beta.chat.completions.parse({
-                model: 'gpt-4o-mini-2024-07-18',
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    {
-                        role: 'user',
-                        content: `
-The following text was captured from ${ifTruncated}the innerText of an HTML overlay element:
-
-\`\`\`
-${innerTextSnippet}
-\`\`\`
-
-Is the overlay element above considered to be a "cookie consent notice"? Provide your answer as a boolean.`,
-                    },
-                ],
-                response_format: zodResponseFormat(ClassificationResponse, 'classification'),
-            });
-
-            const result = completion.choices[0].message.parsed;
-
-            if (result.isCookieNotice) {
-                return candidate;
-            }
-        } catch (error) {
-            console.error('Error classifying candidate:', error);
-            continue;
+    const iframes = await element.$$('iframe');
+    for (const iframe of iframes) {
+        const contentFrame = await iframe.contentFrame();
+        const contentText = (await contentFrame.evaluate(() => document.documentElement.innerText)).trim();
+        if (contentText) {
+            return contentText;
         }
     }
 
-    return null;
+    return '';
 }
 
-async function analyzeCookieNotice(page: Page, notice: CandidateNotice): Promise<NoticeAction[]> {
-    return [];
+async function classifyCookieConsentNotice(text: string): Promise<boolean> {
+    const systemPrompt = `Your task is to classify text from the innerText property of HTML overlay elements.
+
+  An overlay element is considered to be a "cookie consent notice" if it meets all of these criteria:
+  1. it explicitly notifies the user of the site's use of cookies or other storage technology, such as: "We use cookies...", "This site uses...", etc.
+  2. it offers the user choices for the usage of cookies on the site, such as: "Accept", "Reject", "Learn More", etc., or informs the user that their use of the site means they accept the usage of cookies.
+
+  Note: This definition does not include adult content notices or any other type of notice that is primarily focused on age verification or content restrictions. Cookie consent notices are specifically intended to inform users about the website's use of cookies and obtain their consent for such use.
+
+  Note: A cookie consent notice should specifically relate to the site's use of cookies or other storage technology that stores data on the user's device, such as HTTP cookies, local storage, or session storage. Requests for permission to access geolocation information, camera, microphone, etc., do not fall under this category.
+
+  Note: Do NOT classify a website header or footer as a "cookie consent notice". Website headers or footers may contain a list of links, possibly including a privacy policy, cookie policy, or terms of service document, but their primary purpose is navigational rather than informational.`;
+
+    const MAX_LENGTH = 500;
+    let snippet = text.slice(0, MAX_LENGTH);
+    let ifTruncated = '';
+    if (snippet.length !== text.length) {
+        snippet += '...';
+        ifTruncated = `the first ${MAX_LENGTH} characters of `;
+    }
+
+    try {
+        const completion = await openai.beta.chat.completions.parse({
+            model: 'gpt-4o-mini-2024-07-18',
+            messages: [
+                { role: 'system', content: systemPrompt },
+                {
+                    role: 'user',
+                    content: `
+  The following text was captured from ${ifTruncated}the innerText of an HTML overlay element:
+
+  \`\`\`
+  ${snippet}
+  \`\`\`
+
+  Is the overlay element above considered to be a "cookie consent notice"? Provide your answer as a boolean.`,
+                },
+            ],
+            response_format: zodResponseFormat(ClassifyCookieConsentNoticeResponse, 'classifyCookieConsentNotice'),
+        });
+
+        const result = completion.choices[0].message.parsed;
+        return result.isCookieConsentNotice;
+    } catch (error) {
+        console.error('Error classifying candidate:', error);
+    }
+
+    return false;
 }
 
-async function generateRule(domain: string, notice: CandidateNotice): Promise<AutoConsentCMPRule> {
+async function getCssSelector(element: ElementHandle<HTMLElement>): Promise<string> {
+    return element.evaluate((element) => {
+        const id = element.id;
+        if (id) {
+            return '#' + id;
+        }
+
+        const classes = Array.from(element.classList);
+        if (!classes.length) {
+            return element.tagName.toLowerCase();
+        }
+
+        // Try combinations of classes, starting with single classes
+        for (let i = 1; i <= classes.length; i++) {
+            const combinations: string[] = [];
+            const generate = (start: number, current: string[]) => {
+                if (current.length === i) {
+                    combinations.push(current.join(''));
+                    return;
+                }
+                for (let j = start; j < classes.length; j++) {
+                    generate(j + 1, [...current, '.' + classes[j]]);
+                }
+            };
+            generate(0, []);
+
+            for (const selector of combinations) {
+                const matches = document.querySelectorAll(selector);
+                if (matches.length === 1 && matches[0] === element) {
+                    return selector;
+                }
+            }
+        }
+
+        // Fallback to nth-child selector
+        let current = element;
+        const parts = [];
+        while (current !== document.documentElement) {
+            let selector = current.tagName.toLowerCase();
+            const parent = current.parentElement;
+            if (!parent) break;
+
+            const siblings = Array.from(parent.children);
+            const index = siblings.indexOf(current) + 1;
+            if (siblings.length > 1) {
+                selector += `:nth-child(${index})`;
+            }
+            parts.unshift(selector);
+            current = parent;
+        }
+        return parts.join(' > ');
+    });
+}
+
+async function getHideableElement(element: ElementHandle<HTMLElement>): Promise<ElementHandle<HTMLElement>> {
+    return element.evaluateHandle((element) => {
+        const windowRect = {
+            left: 0,
+            right: window.innerWidth,
+            top: 0,
+            bottom: window.innerHeight,
+        };
+
+        let outermostHideableElement = element;
+        let innermostHideableElement = element;
+        // Begin by looking upwards in the DOM for the outermost element that _can_ be hidden.
+        // When traversing upwards, this is the last element that adds no additional content to the
+        // original notice's `innerText`.
+        while (
+            outermostHideableElement.parentElement &&
+            outermostHideableElement.parentElement.innerText.trim() === element.innerText.trim()
+        ) {
+            outermostHideableElement = outermostHideableElement.parentElement;
+            // In the meantime, look for the innermost element that _should_ be hidden.
+            // While traversing upwards, this is either the first element, or the last element that has:
+            // - full screen dimensions, AND
+            // - a blur filter and/or semi-transparent background style
+            const style = getComputedStyle(outermostHideableElement);
+            const rect = outermostHideableElement.getBoundingClientRect();
+            if (
+                rect.left === windowRect.left &&
+                rect.right === windowRect.right &&
+                rect.top === windowRect.top &&
+                rect.bottom === windowRect.bottom &&
+                (style.backgroundColor.startsWith('rgba(') || style.backdropFilter !== 'none')
+            ) {
+                innermostHideableElement = outermostHideableElement;
+            }
+        }
+        return innermostHideableElement;
+    });
+}
+
+async function generateRule(domain: string, element: ElementHandle<HTMLElement>): Promise<AutoConsentCMPRule> {
+    const hideableSelector = await getCssSelector(await getHideableElement(element));
+    const selector = await getCssSelector(element);
     return {
         name: domain,
         cosmetic: true,
-        prehideSelectors: [notice.innermostHideableElementSelector],
+        prehideSelectors: [hideableSelector],
         detectCmp: [
             {
-                exists: notice.selector,
+                exists: selector,
             },
         ],
         detectPopup: [
             {
-                visible: notice.selector,
+                visible: selector,
             },
         ],
         optIn: [],
         optOut: [
             {
-                hide: notice.innermostHideableElementSelector,
+                hide: hideableSelector,
             },
         ],
     };
 }
 
+async function getAccessibilityTree(page: Page, element: ElementHandle<HTMLElement>) {
+    const snapshot = await page.accessibility.snapshot({ root: element, interestingOnly: false });
+
+    const INTERACTIVE_ROLES = new Set([
+        'button',
+        'link',
+        'switch',
+        'checkbox',
+        'radio',
+        'menuitem',
+        'option',
+        'searchbox',
+        'textbox',
+        'combobox',
+        'slider',
+        'spinbutton',
+    ]);
+
+    const hasInteractiveNodes = (node: typeof snapshot): boolean => {
+        if (!node) {
+            return false;
+        }
+        if (INTERACTIVE_ROLES.has(node.role)) {
+            return true;
+        }
+        if (node.children && node.children.length > 0) {
+            return node.children.some((child) => hasInteractiveNodes(child));
+        }
+        return false;
+    };
+
+    const filterNode = (node: typeof snapshot): typeof snapshot => {
+        if (!node) {
+            return null;
+        }
+        if (hasInteractiveNodes(node)) {
+            return {
+                ...node,
+                children: node.children?.map((child) => filterNode(child)).filter(Boolean),
+            };
+        }
+        return null;
+    };
+
+    return filterNode(snapshot);
+}
+
+async function isSameNode(left: ElementHandle<HTMLElement>, right: ElementHandle<HTMLElement>) {
+    return left.evaluate((left, right) => left.isSameNode(right), right);
+}
+
+async function debugDescription(element: ElementHandle<HTMLElement>): Promise<string> {
+    return element.evaluate((element) => {
+        const parts = [element.tagName.toLowerCase()];
+        if (element.id) {
+            parts.push(`id="${element.id}"`);
+        }
+        if (element.className) {
+            parts.push(`class="${element.className}"`);
+        }
+        return `<${parts.join(' ')} />`;
+    });
+}
+
 async function main() {
     const url = process.argv[2];
-    const mode = process.argv[3];
 
     if (!url) {
-        console.log('Usage: generate-rule <URL> [detection-data|analysis-data]');
+        console.log('Usage: generate-rule <URL>');
         process.exit(1);
     }
 
@@ -342,47 +394,64 @@ async function main() {
     const page = await context.newPage();
 
     try {
-        console.log('Navigating to ' + url);
+        console.log('Navigating to', url);
         await page.goto(url, { waitUntil: 'networkidle' });
 
-        // Detection phase
-        console.log('Detecting candidate notices');
-        const candidates = await detectCandidateNotices(page);
-        console.log('Found', candidates.length, 'candidates');
+        console.log('Detecting overlays...');
+        const overlays = await findOverlays(page);
+        console.log('Found', overlays.length, 'overlays');
 
-        if (mode === 'detection-data') {
-            const outputDir = path.join(process.cwd(), 'generate-rule-data/detection-data');
-            await fs.mkdir(outputDir, { recursive: true });
-            await fs.writeFile(path.join(outputDir, domain + '.json'), JSON.stringify(candidates, null, 2));
-            console.log('Wrote detection data to', path.join(outputDir, domain + '.json'));
+        if (overlays.length === 0) {
             return;
         }
 
-        // Use OpenAI to verify cookie notices
-        console.log('Classifying candidate notices');
-        const cookieNotice = await classifyCookieNotice(candidates);
+        console.log('Classifying overlay text...');
+        let cookieConsentOverlay: ElementHandle<HTMLElement> | undefined;
+        for (const overlay of overlays) {
+            const text = await getText(overlay);
+            if (await classifyCookieConsentNotice(text)) {
+                cookieConsentOverlay = overlay;
+                break;
+            }
+        }
 
-        if (!cookieNotice) {
-            console.log('No cookie notice detected');
+        if (!cookieConsentOverlay) {
+            console.log('No cookie consent overlay detected');
             return;
         }
 
-        console.log('Found a cookie notice', cookieNotice);
+        console.log('Found a cookie consent overlay', await debugDescription(cookieConsentOverlay));
 
-        // // Analysis phase
-        // const actions = await analyzeCookieNotice(page, cookieNotice);
-
-        // if (mode === 'analysis-data') {
-        //     await fs.writeFile(path.join(process.cwd(), 'analysis-data.json'), JSON.stringify(actions, null, 2));
-        //     return;
-        // }
-
-        // Generate rule
-        const rule = await generateRule(domain, cookieNotice);
+        const rule = await generateRule(domain, cookieConsentOverlay);
 
         const outputDir = path.join(process.cwd(), 'generate-rule-data/rules');
+        const outputPath = path.join(outputDir, domain + '.json');
         await fs.mkdir(outputDir, { recursive: true });
-        await fs.writeFile(path.join(outputDir, domain + '.json'), JSON.stringify(rule, null, 2));
+        await fs.writeFile(outputPath, JSON.stringify(rule, null, 2));
+        console.log('Wrote rule to', outputPath);
+
+        // // const snapshot = await getAccessibilityTree(page, cookiePopup.element);
+        // // console.log('Snapshot', JSON.stringify(snapshot, null, 2));
+        // await page.click('#onetrust-pc-btn-handler');
+        // await page.waitForTimeout(1000);
+        // const newPotentialCookiePopups = await detectPotentialCookiePopups(page);
+        // const newlyAddedCookiePopups = [];
+        // for (const newPopup of newPotentialCookiePopups) {
+        //     let isNew = true;
+        //     for (const originalPopup of overlays) {
+        //         if (await isSameNode(newPopup.element, originalPopup.element)) {
+        //             isNew = false;
+        //             break;
+        //         }
+        //     }
+        //     if (isNew) {
+        //         newlyAddedCookiePopups.push(newPopup);
+        //     }
+        // }
+        // console.log('newly added cookie popups', newlyAddedCookiePopups.length, newlyAddedCookiePopups);
+        // // const newPopup = await page.$('#onetrust-pc-sdk');
+        // // const newSnapshot = await getAccessibilityTree(page, newPopup as ElementHandle<HTMLElement>);
+        // // console.log('New snapshot', JSON.stringify(newSnapshot, null, 2));
     } finally {
         await browser.close();
     }
