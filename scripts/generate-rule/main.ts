@@ -1,11 +1,12 @@
-import { chromium, ElementHandle, JSHandle, Page } from '@playwright/test';
+import { chromium, ElementHandle, Frame, JSHandle, Page } from '@playwright/test';
 import 'dotenv/config';
 import * as fs from 'fs/promises';
 import OpenAI from 'openai';
 import { zodResponseFormat } from 'openai/helpers/zod';
 import path from 'path';
 import { z } from 'zod';
-import { AutoConsentCMPRule } from '../../lib/rules';
+import { AutoConsentCMPRule, AutoConsentRuleStep } from '../../lib/rules';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions.mjs';
 
 type InteractiveElementDescription = {
     key: string;
@@ -22,14 +23,24 @@ const CookieConsentNoticeClassification = z.object({
     isCookieConsentNotice: z.boolean(),
 });
 
-const CookieConsentNoticeFeaturesSchema = z.object({
-    acceptButtonKey: z.string(),
-    rejectButtonKey: z.string(),
-    settingsButtonKey: z.string(),
-    dismissButtonKey: z.string(),
+const UserActionSchema = z.object({
+    type: z.enum(['click', 'toggle']),
+    key: z.string(),
 });
 
-type CookieConsentNoticeFeatures = z.infer<typeof CookieConsentNoticeFeaturesSchema>;
+type UserAction = z.infer<typeof UserActionSchema>;
+
+const AcceptActionSchema = z.object({
+    action: UserActionSchema.nullable(),
+});
+
+type AcceptAction = z.infer<typeof AcceptActionSchema>;
+
+const RejectActionSchema = z.object({
+    action: UserActionSchema.nullable(),
+});
+
+type RejectAction = z.infer<typeof RejectActionSchema>;
 
 async function unwrapArrayHandle<T>(handle: JSHandle<T[]>): Promise<JSHandle<T>[]> {
     const length = await handle.evaluate((array) => array.length);
@@ -303,7 +314,7 @@ async function getHideableElement(element: ElementHandle<HTMLElement>): Promise<
     });
 }
 
-async function findByKey(root: ElementHandle<HTMLElement>, key: string): Promise<ElementHandle<HTMLElement> | null> {
+async function findByKey(root: Frame | ElementHandle<HTMLElement>, key: string): Promise<ElementHandle<HTMLElement> | null> {
     if (!key) return null;
     return (await root.$(`*[data-autoconsent-key="${key}"]`)) as ElementHandle<HTMLElement> | null;
 }
@@ -311,7 +322,8 @@ async function findByKey(root: ElementHandle<HTMLElement>, key: string): Promise
 async function generateRule(
     domain: string,
     overlay: ElementHandle<HTMLElement>,
-    features: CookieConsentNoticeFeatures,
+    acceptAction: UserAction | null,
+    rejectActions: UserAction[],
 ): Promise<AutoConsentCMPRule> {
     const frame = await overlay.ownerFrame();
     if (!frame) throw new Error('Overlay is not in a frame');
@@ -321,76 +333,31 @@ async function generateRule(
     const hideableElement = await getHideableElement(overlay);
     const hideableSelector = await getCssSelector(hideableElement);
 
-    const acceptButton = await findByKey(overlay, features.acceptButtonKey);
-    const acceptButtonSelector = acceptButton ? await getCssSelector(acceptButton) : null;
-    const rejectButton = await findByKey(overlay, features.rejectButtonKey);
-    const rejectButtonSelector = rejectButton ? await getCssSelector(rejectButton) : null;
+    let optIn: AutoConsentRuleStep[] = [];
+    if (acceptAction) {
+        const element = await findByKey(frame, acceptAction.key);
+        if (element) {
+            optIn.push({ waitForThenClick: await getCssSelector(element) });
+        }
+    }
+
+    let optOut: AutoConsentRuleStep[] = [];
+    for (const action of rejectActions) {
+        const element = await findByKey(frame, action.key);
+        if (element) {
+            optOut.push({ waitForThenClick: await getCssSelector(element) });
+        }
+    }
 
     return {
         name: domain,
         prehideSelectors: [hideableSelector],
         detectCmp: [{ exists: selector }],
         detectPopup: [{ visible: selector }],
-        optIn: acceptButtonSelector ? [{ waitForThenClick: acceptButtonSelector }] : [],
-        optOut: rejectButtonSelector ? [{ waitForThenClick: rejectButtonSelector }] : [],
+        optIn,
+        optOut,
     };
 }
-
-async function getAccessibilityTree(element: ElementHandle<HTMLElement>) {
-    const frame = await element.ownerFrame();
-    if (!frame) throw new Error('Element is not in a frame');
-
-    const snapshot = await frame.page().accessibility.snapshot({ root: element, interestingOnly: false });
-
-    const INTERACTIVE_ROLES = new Set([
-        'button',
-        'link',
-        'switch',
-        'checkbox',
-        'radio',
-        'menuitem',
-        'option',
-        'searchbox',
-        'textbox',
-        'combobox',
-        'slider',
-        'spinbutton',
-    ]);
-
-    const hasInteractiveNodes = (node: typeof snapshot): boolean => {
-        if (!node) {
-            return false;
-        }
-        if (INTERACTIVE_ROLES.has(node.role)) {
-            return true;
-        }
-        if (node.children && node.children.length > 0) {
-            return node.children.some((child) => hasInteractiveNodes(child));
-        }
-        return false;
-    };
-
-    const filterNode = (node: typeof snapshot): typeof snapshot => {
-        if (!node) {
-            return null;
-        }
-        if (hasInteractiveNodes(node)) {
-            return {
-                ...node,
-                children: node.children?.flatMap((child) => {
-                    const filteredChild = filterNode(child);
-                    return filteredChild ? [filteredChild] : [];
-                }),
-            };
-        }
-        return null;
-    };
-
-    return filterNode(snapshot);
-}
-
-// This type isn't exported, so we infer it
-type AccessibilityNode = Awaited<ReturnType<typeof getAccessibilityTree>>;
 
 async function markInteractiveElements(root: ElementHandle<HTMLElement>): Promise<InteractiveElementDescription[]> {
     return root.evaluate((rootElement) => {
@@ -535,92 +502,125 @@ async function debugDescription(element: ElementHandle<HTMLElement>): Promise<st
     });
 }
 
-async function identifyCookieConsentNoticeFeatures(
-    interactiveElements: InteractiveElementDescription[],
-): Promise<CookieConsentNoticeFeatures> {
+async function inferAcceptAction(interactiveElements: InteractiveElementDescription[]): Promise<AcceptAction> {
     const systemPrompt = `
-      Your task is to identify the Accept button, Reject button, Settings button, and Dismiss button within a cookie consent notice overlay displayed on a website.
+      You will be given a list of interactive elements (buttons, checkboxes, etc.) that are inside a website cookie consent notice.
 
-      ## INPUT
+      The user wishes to ACCEPT cookies or non-essential cookies.
 
-      Your input will be a list of objects representing all buttons that were found within the overlay. Each object contains:
+      Your task is to choose the most appropriate element for the user to click.
 
+      If there is no suitable element, return null.
+
+      Interactive elements are represented by an object containing:
       - key: A number you will use to reference this element.
-      - role: The ARIA role of the button.
-      - name: The ARIA label of the button.
-      - description: The ARIA description of the button. May be empty.
+      - role: The ARIA role of the element.
+      - name: The ARIA label of the element.
+      - description: The ARIA description of the element. May be empty.
 
-      ## OUTPUT
+      The action is represented by an object containing:
+      - type: Always "click".
+      - key: The key of the interactive element to perform the action on.
 
-      Return an object containing:
-
-      - acceptButtonKey: The key of the element that should be clicked to accept cookies, or ''. This is usually a button with the text "Accept" or "Allow".
-      - rejectButtonKey: The key of the element that should be clicked to reject cookies or accept only non-essential cookies, or ''. This is usually a button with the text "Reject" or "Allow essential".
-      - settingsButtonKey: The key of the element that should be clicked to open a settings page, or ''. This is usually a button with the text "Settings" or "Preferences".
-      - dismissButtonKey: The key of the element that should be clicked to close the overlay, or ''. This is usually a button with the text "Dismiss" or "Close".
-
-      ## REQUIREMENTS
-
-      The overlay may not contain some or all of these buttons. If there is no such button, set the corresponding property to ''.
-
-      If a button is unrelated, set the corresponding property to ''.
-
-      You must ONLY reference buttons that are present in the overlay.
-
-      ## EXAMPLES
-
-      Input:
-      {
-        { key: 'a7a630e3-eade-4a78-b6ff-153189b22ecc', role: 'button', name: 'Privacy Policy', description: '' },
-        { key: 'c05d8df9-c80f-43cd-8e60-99114d4a3a1a', role: 'button', name: 'Accept', description: '' },
-        { key: 'd588908f-115c-4a69-a669-bd280dcaefc4', role: 'button', name: 'Accept Essential', description: '' },
-      ]
-
-      Output:
-      {
-        acceptButtonKey: 'c05d8df9-c80f-43cd-8e60-99114d4a3a1a',
-        rejectButtonKey: 'd588908f-115c-4a69-a669-bd280dcaefc4',
-        settingsButtonKey: '',
-        dismissButtonKey: '',
-      }
-
-      Input:
-      {
-        { key: '82c1a499-c9ef-4881-8a9d-2c4c233945ad', role: 'button', name: 'Accept All', description: '' },
-        { key: '6c073697-66b0-4a78-b43b-b5e2df8641f0', role: 'button', name: 'Customize', description: '' },
-      ]
-
-      Output:
-      {
-        acceptButtonKey: '82c1a499-c9ef-4881-8a9d-2c4c233945ad',
-        rejectButtonKey: '',
-        settingsButtonKey: '6c073697-66b0-4a78-b43b-b5e2df8641f0',
-        dismissButtonKey: '',
-      }
-  `;
-
-    const EMPTY_RESULT = { acceptButtonKey: '', rejectButtonKey: '', settingsButtonKey: '', dismissButtonKey: '' };
+      Accepting (non-essential) cookies usually, but not always, involves clicking on a button labeled "Accept" or "Allow".
+    `;
 
     try {
         const completion = await openai.beta.chat.completions.parse({
-            model: 'gpt-4o-2024-08-06',
-            // model: 'gpt-4o-mini-2024-07-18',
+            // model: 'gpt-4o-2024-08-06',
+            model: 'gpt-4o-mini-2024-07-18',
             messages: [
-                { role: 'system', content: systemPrompt },
+                {
+                    role: 'system',
+                    content: systemPrompt,
+                },
                 {
                     role: 'user',
-                    content: `Input:\n\n${JSON.stringify(interactiveElements)}`,
+                    content: JSON.stringify(interactiveElements),
                 },
             ],
-            response_format: zodResponseFormat(CookieConsentNoticeFeaturesSchema, 'CookieConsentNoticeFeatures'),
+            response_format: zodResponseFormat(AcceptActionSchema, 'AcceptAction'),
         });
 
-        return completion.choices[0].message.parsed ?? EMPTY_RESULT;
+        return completion.choices[0].message.parsed ?? { action: null };
     } catch (error) {
         console.error('Error classifying candidate:', error);
     }
 
-    return EMPTY_RESULT;
+    return { action: null };
+}
+
+function inferRejectActions(): (interactiveElements: InteractiveElementDescription[]) => Promise<RejectAction> {
+    const systemPrompt = `
+      You will be given a list of interactive elements (buttons, checkboxes, etc.) that are inside a website cookie consent notice.
+
+      The user wishes to REJECT cookies or non-essential cookies.
+
+      Your task is to choose the most appropriate action for the user to perform.
+
+      If there is no suitable action, return null.
+
+      Multiple steps may be required. In this case, after you provide an action, you will be given a new list of interactive elements to process.
+
+      Interactive elements are represented by an object containing:
+      - key: A number you will use to reference this element.
+      - role: The ARIA role of the element.
+      - name: The ARIA label of the element.
+      - description: The ARIA description of the element. May be empty.
+
+      Actions are represented by an object containing:
+      - type: Either "click" or "toggle".
+      - key: The key of the interactive element to perform the action on.
+
+      Rejecting (non-essential) cookies usually, but not always, involves:
+      - Clicking a button labelled "Reject" or "Deny".
+      - Opening a settings menu and then clicking "Reject". (Two steps.)
+      - Opening a settings menu and then unchecking all cookie settings and clicking "Save". (Two steps.)
+    `;
+
+    const messages: ChatCompletionMessageParam[] = [{ role: 'system', content: systemPrompt }];
+
+    return async function next(interactiveElements) {
+        try {
+            messages.push({
+                role: 'user',
+                content: JSON.stringify(interactiveElements),
+            });
+
+            const completion = await openai.beta.chat.completions.parse({
+                // model: 'gpt-4o-2024-08-06',
+                model: 'gpt-4o-mini-2024-07-18',
+                messages,
+                response_format: zodResponseFormat(RejectActionSchema, 'RejectAction'),
+            });
+
+            messages.push({
+                role: 'assistant',
+                content: JSON.stringify(completion.choices[0].message.parsed),
+            });
+
+            return completion.choices[0].message.parsed ?? { action: null };
+        } catch (error) {
+            console.error('Error classifying candidate:', error);
+        }
+        return { action: null };
+    };
+}
+
+async function performActions(root: ElementHandle<HTMLElement>, actions: UserAction[]) {
+    for (const action of actions) {
+        const { type, key } = action;
+        switch (type) {
+            case 'click':
+            case 'toggle': {
+                const element = await findByKey(root, key);
+                if (element) {
+                    await element.click();
+                }
+                break;
+            }
+        }
+    }
 }
 
 async function main() {
@@ -633,7 +633,7 @@ async function main() {
 
     const domain = new URL(url).hostname.replace('www.', '');
 
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -666,18 +666,7 @@ async function main() {
 
         console.log('Found a cookie consent overlay:', await debugDescription(cookieConsentOverlay));
 
-        console.log('Identifying features...');
-        const interactiveElements = await markInteractiveElements(cookieConsentOverlay);
-        const features = await identifyCookieConsentNoticeFeatures(interactiveElements);
-        console.log('Features:', {
-            acceptButton: interactiveElements.find((element) => element.key === features.acceptButtonKey),
-            rejectButton: interactiveElements.find((element) => element.key === features.rejectButtonKey),
-            settingsButton: interactiveElements.find((element) => element.key === features.settingsButtonKey),
-            dismissButton: interactiveElements.find((element) => element.key === features.dismissButtonKey),
-        });
-
-        const detectNewOverlays = async () => {
-            const newOverlays = [];
+        const detectNewOverlay = async () => {
             for (const newOverlay of await findOverlays(page)) {
                 let isNew = true;
                 for (const existingOverlay of overlays) {
@@ -687,41 +676,59 @@ async function main() {
                     }
                 }
                 if (isNew) {
-                    newOverlays.push(newOverlay);
+                    return newOverlay;
                 }
             }
-            return newOverlays;
+            return null;
         };
 
-        const waitForNewOverlays = async () => {
-            const newOverlays = await detectNewOverlays();
-            if (newOverlays.length > 0) {
-                return newOverlays;
+        const waitForNewOverlay = async () => {
+            const newOverlay = await detectNewOverlay();
+            if (newOverlay) {
+                return newOverlay;
             }
             await page.waitForTimeout(50);
-            return await waitForNewOverlays();
+            return await waitForNewOverlay();
         };
 
-        let rule: AutoConsentCMPRule | undefined;
+        console.log('Inferring accept action...');
+        const interactiveElements = await markInteractiveElements(cookieConsentOverlay);
+        console.log('Interactive elements:', interactiveElements);
+        const { action: acceptAction } = await inferAcceptAction(interactiveElements);
+        console.log('Accept action:', acceptAction);
 
-        // if (!features.rejectButton && features.settingsButton) {
-        //     console.log('Opening settings...');
-        //     const settingsButton = await findByKey(cookieConsentOverlay, features.settingsButton);
-        //     if (settingsButton) {
-        //         await settingsButton.click();
-        //         const newOverlays = await Promise.race([waitForNewOverlays(), page.waitForTimeout(10000)]);
-        //         if (newOverlays) {
-        //             const newOverlay = newOverlays[0];
-        //             console.log('Found new overlay:', await debugDescription(newOverlay));
-        //             const newInteractiveElements = await markInteractiveElements(newOverlay);
-        //         }
-        //     }
-        // }
+        let currentOverlay: ElementHandle<HTMLElement> | null = cookieConsentOverlay;
+        const next = inferRejectActions();
+        const rejectActions: UserAction[] = [];
 
-        if (!rule) {
-            rule = await generateRule(domain, cookieConsentOverlay, features);
-        }
+        do {
+            console.log('Inferring next reject action...');
+            const currentInteractiveElements = await markInteractiveElements(currentOverlay);
+            console.log('Current interactive elements:', currentInteractiveElements);
+            const { action: nextRejectAction } = await next(currentInteractiveElements);
+            if (!nextRejectAction) {
+                console.log('No next reject action found');
+                break;
+            }
+            rejectActions.push(nextRejectAction);
 
+            console.log('Performing reject action:', nextRejectAction);
+            await performActions(currentOverlay, [nextRejectAction]);
+
+            console.log('Waiting for new overlay...');
+            currentOverlay = (await Promise.race([waitForNewOverlay(), page.waitForTimeout(5000)])) ?? null;
+            if (currentOverlay) {
+                console.log('New overlay found:', await debugDescription(currentOverlay));
+                if ((await currentOverlay.$$('*[data-autoconsent-key]')).length) {
+                    console.log('Overlay already processed');
+                    break;
+                }
+            } else {
+                console.log('No new overlay found');
+            }
+        } while (currentOverlay);
+
+        const rule = await generateRule(domain, cookieConsentOverlay, acceptAction, rejectActions);
         console.log('Rule:', rule);
 
         const outputDir = path.join(process.cwd(), 'generate-rule-data/rules');
