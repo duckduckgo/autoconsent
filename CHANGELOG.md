@@ -1,3 +1,33 @@
+# v12.11.0 (Fri Feb 21 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 021d8018ab06e861b47cb0c6f2eae756f27c05de [#643](https://github.com/duckduckgo/autoconsent/pull/643) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Add artificial delay to the sourcepoint rule to mitigate race conditions [#640](https://github.com/duckduckgo/autoconsent/pull/640) ([@muodov](https://github.com/muodov))
+- Add rule for gdpr-legal-cookie CMP [#636](https://github.com/duckduckgo/autoconsent/pull/636) ([@noisysocks](https://github.com/noisysocks))
+
+#### 🏠 Internal
+
+- Update release workflow to support Apple monorepo [#627](https://github.com/duckduckgo/autoconsent/pull/627) ([@samsymons](https://github.com/samsymons))
+
+#### 🧪 Tests
+
+- Monthly Coverage data update [#642](https://github.com/duckduckgo/autoconsent/pull/642) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 6
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+- Sam Symons ([@samsymons](https://github.com/samsymons))
+
+---
+
 # v12.10.0 (Fri Feb 14 2025)
 
 #### 🚀 Enhancement
