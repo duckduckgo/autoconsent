@@ -1,23 +1,26 @@
 {
   "name": "christianeducatorsacademy.com",
-  "cosmetic": true,
   "prehideSelectors": [
-    "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+    ".cmplz-cookiebanner"
   ],
   "detectCmp": [
     {
-      "exists": "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+      "exists": ".cmplz-cookiebanner"
     }
   ],
   "detectPopup": [
     {
-      "visible": "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+      "visible": ".cmplz-cookiebanner"
     }
   ],
-  "optIn": [],
+  "optIn": [
+    {
+      "waitForThenClick": ".cmplz-accept"
+    }
+  ],
   "optOut": [
     {
-      "hide": "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+      "waitForThenClick": ".cmplz-deny"
     }
   ]
 }

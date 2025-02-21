@@ -1,23 +1,25 @@
 {
   "name": "brokercheck.finra.org",
-  "cosmetic": true,
   "prehideSelectors": [
-    "body.font-sans > div.cc-window.cc-banner"
+    ".cc-window"
   ],
   "detectCmp": [
     {
-      "exists": "body.font-sans > div.cc-window.cc-banner"
+      "exists": ".cc-window"
     }
   ],
   "detectPopup": [
     {
-      "visible": "body.font-sans > div.cc-window.cc-banner"
+      "visible": ".cc-window"
     }
   ],
   "optIn": [],
   "optOut": [
     {
-      "hide": "body.font-sans > div.cc-window.cc-banner"
+      "waitForThenClick": "#securitiCmpCookiePrefBtn"
+    },
+    {
+      "waitForThenClick": "#rejectAll-cookies"
     }
   ]
 }

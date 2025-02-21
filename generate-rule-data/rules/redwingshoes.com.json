@@ -1,6 +1,5 @@
 {
   "name": "redwingshoes.com",
-  "cosmetic": true,
   "prehideSelectors": [
     "#ensNotifyBanner"
   ],
@@ -15,9 +14,5 @@
     }
   ],
   "optIn": [],
-  "optOut": [
-    {
-      "hide": "#ensNotifyBanner"
-    }
-  ]
+  "optOut": []
 }

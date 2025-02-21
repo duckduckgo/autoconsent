@@ -1,16 +1,16 @@
 {
-  "name": "forum.freecad.org",
+  "name": "plos.org",
   "prehideSelectors": [
-    ".cc-window"
+    ""
   ],
   "detectCmp": [
     {
-      "exists": ".cc-window"
+      "exists": ""
     }
   ],
   "detectPopup": [
     {
-      "visible": ".cc-window"
+      "visible": ""
     }
   ],
   "optIn": [],

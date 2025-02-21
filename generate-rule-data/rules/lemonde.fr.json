@@ -1,0 +1,22 @@
+{
+  "name": "lemonde.fr",
+  "prehideSelectors": [
+    ".gdpr-lmd-wall"
+  ],
+  "detectCmp": [
+    {
+      "exists": ".gdpr-lmd-wall"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".gdpr-lmd-wall"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": ".gdpr-lmd-button--slate-darker"
+    }
+  ],
+  "optOut": []
+}

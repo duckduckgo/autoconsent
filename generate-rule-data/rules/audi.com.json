@@ -1,6 +1,5 @@
 {
   "name": "audi.com",
-  "cosmetic": true,
   "prehideSelectors": [
     "#ensModalWrapper"
   ],
@@ -14,10 +13,14 @@
       "visible": "#ensModalWrapper"
     }
   ],
-  "optIn": [],
+  "optIn": [
+    {
+      "waitForThenClick": "#ensCancel"
+    }
+  ],
   "optOut": [
     {
-      "hide": "#ensModalWrapper"
+      "waitForThenClick": "body:nth-child(2) > section:nth-child(5) > div > div:nth-child(4) > div:nth-child(5) > button:nth-child(3)"
     }
   ]
 }
