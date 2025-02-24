@@ -257,7 +257,6 @@ export const domainsWithUboRules = [
     "zapatos.es",
     "zwic.nl",
     "kavosdraugas.lt",
-    "",
     "egmont.com",
     "stackapps.com",
     "askubuntu.com",
