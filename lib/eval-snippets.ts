@@ -64,6 +64,7 @@ export const snippets = {
     // declarative rules
     EVAL_ABC_TEST: () => document.cookie.includes('trackingconsent'),
     EVAL_ADROLL_0: () => !document.cookie.includes('__adroll_fpc'),
+    EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AFFINITY_SERIF_COM_0: () =>
         document.cookie.includes('serif_manage_cookies_viewed') && !document.cookie.includes('serif_allow_analytics'),
     EVAL_ARBEITSAGENTUR_TEST: () => document.cookie.includes('cookie_consent=denied'),
