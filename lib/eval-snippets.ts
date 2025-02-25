@@ -153,6 +153,7 @@ export const snippets = {
     EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
     EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
     EVAL_KETCH_TEST: () => document.cookie.includes('_ketch_consent_v1_'),
+    EVAL_MACARON_TEST: () => document.cookie.includes('_deCookiesConsent'),
     EVAL_MEDIAVINE_0: () =>
         document.querySelectorAll('[data-name="mediavine-gdpr-cmp"] input[type=checkbox]').forEach((x) => x.checked && x.click()) || true,
     EVAL_MICROSOFT_0: () =>
