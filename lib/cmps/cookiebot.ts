@@ -29,7 +29,7 @@ export default class Cookiebot extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
-        await this.wait(500); // prevent race conditions
+        await this.wait(1000); // prevent race conditions
         res = res && (await this.mainWorldEval('EVAL_COOKIEBOT_4')); // hide
         return res;
     }
