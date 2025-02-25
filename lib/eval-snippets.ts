@@ -92,6 +92,8 @@ export const snippets = {
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
     EVAL_COMPLIANZ_BANNER_0: () => document.cookie.includes('cmplz_banner-status=dismissed'),
+    EVAL_COOKIEJS_BANNER_TEST: () => document.cookie.includes('analytics_cookies=false'),
+    EVAL_COOKIEJS_MODAL_TEST: () => document.cookie.includes('cookiejs_preferences'),
     EVAL_COOKIE_LAW_INFO_0: () => CLI.disableAllCookies() || CLI.reject_close() || true,
     EVAL_COOKIE_LAW_INFO_1: () => document.cookie.indexOf('cookielawinfo-checkbox-non-necessary=yes') === -1,
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
