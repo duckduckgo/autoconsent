@@ -86,6 +86,7 @@ export const snippets = {
     EVAL_BUNDESREGIERUNG_DE_0: () => document.cookie.match('cookie-allow-tracking=0'),
     EVAL_CANVA_0: () => !document.cookie.includes('gtm_fpc_engagement_event'),
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
+    EVAL_CKIES_TEST: () => document.cookie.includes('ckies_cookielaw'),
     EVAL_CLICKIO_0: () => document.cookie.includes('__lxG__consent__v2_daisybit='),
     EVAL_CLINCH_0: () => document.cookie.includes('ctc_rejected=1'),
     EVAL_COOKIECONSENT2_TEST: () => document.cookie.includes('cc_cookie='),
