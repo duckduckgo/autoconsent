@@ -170,6 +170,7 @@ export const snippets = {
         document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach((i) => {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
+    EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_ONENINETWO_0: () => document.cookie.includes('CC_ADVERTISING=NO') && document.cookie.includes('CC_ANALYTICS=NO'),
     EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
     EVAL_OPERA_0: () =>
