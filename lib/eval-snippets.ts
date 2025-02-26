@@ -254,6 +254,7 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WAITROSE_1: () => document.cookie.includes('wtr_cookies_advertising=0') && document.cookie.includes('wtr_cookies_analytics=0'),
+    EVAL_WEBFLOW_TEST: () => document.cookie.includes('fs-cc'),
     EVAL_WP_COOKIE_NOTICE_0: () => document.cookie.includes('wpl_viewed_cookie=no'),
     EVAL_XE_TEST: () =>
         document.cookie.includes('xeConsentState={%22performance%22:false%2C%22marketing%22:false%2C%22compliance%22:false}'),
