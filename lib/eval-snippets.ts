@@ -83,6 +83,7 @@ export const snippets = {
                     .split('=', 2)[1],
             ),
         ).consents.statistics,
+    EVAL_BSWHEALTH_TEST: () => document.cookie.includes('x-bsw-consentCookie'),
     EVAL_BUNDESREGIERUNG_DE_0: () => document.cookie.match('cookie-allow-tracking=0'),
     EVAL_CANVA_0: () => !document.cookie.includes('gtm_fpc_engagement_event'),
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
@@ -128,6 +129,7 @@ export const snippets = {
     EVAL_COOKIEYES_0: () => document.cookie.includes('advertisement:no'),
     EVAL_CT_ULTIMATE_GDPR_TEST: () => document.cookie.includes('ct-ultimate-gdpr-cookie='),
     EVAL_DAILYMOTION_0: () => !!document.cookie.match('dm-euconsent-v2'),
+    EVAL_DEPOP_TEST: () => document.cookie.includes('gdpr__'),
     EVAL_DNDBEYOND_TEST: () => document.cookie.includes('cookie-consent=denied'),
     EVAL_DSGVO_0: () => !document.cookie.includes('sp_dsgvo_cookie_settings'),
     EVAL_DUNELM_0: () => document.cookie.includes('cc_functional=0') && document.cookie.includes('cc_targeting=0'),
@@ -174,6 +176,7 @@ export const snippets = {
     EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
     EVAL_OPERA_0: () =>
         document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
+    EVAL_OVERLEAF_TEST: () => document.cookie.includes('oa'),
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -192,6 +195,7 @@ export const snippets = {
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
     EVAL_REDDIT_0: () => document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}'),
     EVAL_ROBLOX_TEST: () => document.cookie.includes('RBXcb'),
+    EVAL_SAS_TEST: () => document.cookie.includes('_cookieanalytics'),
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&
@@ -260,6 +264,7 @@ export const snippets = {
     EVAL_XING_0: () => document.cookie.includes('userConsent=%7B%22marketing%22%3Afalse'),
     EVAL_YOUTUBE_DESKTOP_0: () => !!document.cookie.match(/SOCS=CAE/),
     EVAL_YOUTUBE_MOBILE_0: () => !!document.cookie.match(/SOCS=CAE/),
+    EVAL_ZINIO_TEST: () => document.cookie.includes('zinio-cookie-consent'),
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
