@@ -147,6 +147,10 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.hide(selector, method);
     }
 
+    cookieMatch(cookieMatch: string, reverse: boolean) {
+        return this.autoconsent.domActions.cookieMatch(cookieMatch, reverse);
+    }
+
     prehide(selector: string) {
         return this.autoconsent.domActions.prehide(selector);
     }
@@ -270,6 +274,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         }
         if (rule.hide) {
             results.push(this.hide(rule.hide, rule.method));
+        }
+        if (rule.cookieMatch) {
+            results.push(this.cookieMatch(rule.cookieMatch, rule.reverse));
         }
         if (rule.if) {
             if (!rule.if.exists && !rule.if.visible) {

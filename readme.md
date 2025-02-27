@@ -231,6 +231,15 @@ Wait for the specified number of milliseconds.
 ```
 Hide the elements matched by the selectors. `method` defines how elements are hidden: "display" sets `display: none`, "opacity" sets `opacity: 0`. Method is "display" by default. Note that only a single string CSS selector is supported here, not an array.
 
+### Cookie match
+```javascript
+{
+  "cookieMatch": "substring",
+  "reverse": true | false
+}
+```
+Checks if the substring is present in the document.cookie string. If `reverse` is true, the rule will return true if the substring is not present. By default, `reverse` is false.
+
 ### Eval
 
 ```javascript

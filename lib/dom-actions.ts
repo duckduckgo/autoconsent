@@ -71,6 +71,11 @@ export class DomActions implements DomActionsProvider {
         });
     }
 
+    cookieMatch(cookieMatch: string, reverse: boolean): boolean {
+        // simple substring matching
+        return document.cookie.includes(cookieMatch) !== reverse;
+    }
+
     hide(selector: string, method: HideMethod): boolean {
         this.autoconsentInstance.config.logs.rulesteps && console.log('[hide]', selector);
         const styleEl = getStyleElement();
