@@ -40,7 +40,7 @@
     "test": [
         { "wait": 500 },
         {
-            "eval": "EVAL_CT_ULTIMATE_GDPR_TEST"
+            "cookieMatch": "ct-ultimate-gdpr-cookie="
         }
     ]
 }

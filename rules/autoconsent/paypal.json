@@ -12,5 +12,5 @@
             "click": ".gdprCookieBanner_decline-button"
         }
     ],
-    "test": [{ "wait": 500 }, { "eval": "EVAL_PAYPAL_0" }]
+    "test": [{ "wait": 500 }, { "cookieMatch": "cookie_prefs" }]
 }

@@ -15,5 +15,5 @@
         },
         { "wait": 500 }
     ],
-    "test": [{ "wait": 500 }, { "eval": "EVAL_YOUTUBE_MOBILE_0" }]
+    "test": [{ "wait": 500 }, { "cookieMatch": "SOCS=CAE" }]
 }

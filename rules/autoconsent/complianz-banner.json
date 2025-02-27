@@ -5,5 +5,5 @@
     "detectPopup": [{ "visible": "#cmplz-cookiebanner-container .cmplz-cookiebanner", "check": "any" }],
     "optIn": [{ "waitForThenClick": ".cmplz-cookiebanner .cmplz-accept" }],
     "optOut": [{ "waitForThenClick": ".cmplz-cookiebanner .cmplz-deny" }],
-    "test": [{ "eval": "EVAL_COMPLIANZ_BANNER_0" }]
+    "test": [{ "cookieMatch": "cmplz_banner-status=dismissed" }]
 }
