@@ -142,14 +142,11 @@ export const snippets = {
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
     EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
-    EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
-    EVAL_INMOBI_TEST: () => document.cookie.includes('cookie-pref=rejected'),
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
-    EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
     EVAL_MEDIAVINE_0: () =>
         document.querySelectorAll('[data-name="mediavine-gdpr-cmp"] input[type=checkbox]').forEach((x) => x.checked && x.click()) || true,
     EVAL_MICROSOFT_0: () =>
