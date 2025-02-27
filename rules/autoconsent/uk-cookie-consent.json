@@ -6,5 +6,5 @@
     "detectPopup": [{ "exists": ".has-cookie-bar #catapult-cookie-bar" }],
     "optIn": [{ "click": "#catapultCookie" }],
     "optOut": [{ "hide": "#catapult-cookie-bar" }],
-    "test": [{ "eval": "EVAL_UK_COOKIE_CONSENT_0" }]
+    "test": [{ "cookieMatch": "catAccCookies", "reverse": true }]
 }

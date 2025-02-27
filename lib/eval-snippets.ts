@@ -155,7 +155,6 @@ export const snippets = {
     EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
     EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
     EVAL_KETCH_TEST: () => document.cookie.includes('_ketch_consent_v1_'),
-    EVAL_MACARON_TEST: () => document.cookie.includes('_deCookiesConsent'),
     EVAL_MEDIAVINE_0: () =>
         document.querySelectorAll('[data-name="mediavine-gdpr-cmp"] input[type=checkbox]').forEach((x) => x.checked && x.click()) || true,
     EVAL_MICROSOFT_0: () =>
@@ -186,12 +185,10 @@ export const snippets = {
         ).status === 'deny',
     EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
     EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
-    EVAL_POSTNL_TEST: () => document.cookie.includes('CookiePermissionInfo'),
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
     EVAL_REDDIT_0: () => document.cookie.includes('eu_cookie={%22opted%22:true%2C%22nonessential%22:false}'),
-    EVAL_ROBLOX_TEST: () => document.cookie.includes('RBXcb'),
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&
@@ -224,7 +221,6 @@ export const snippets = {
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
-    EVAL_TAUNTON_TEST: () => document.cookie.includes('taunton_user_consent_submitted=true'),
     EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
     EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,
     EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(false) || true,
@@ -236,9 +232,6 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
-    EVAL_THEVERGE_0: () => document.cookie.includes('_duet_gdpr_acknowledged=1'),
-    EVAL_UBUNTU_COM_0: () => document.cookie.includes('_cookies_accepted=essential'),
-    EVAL_UK_COOKIE_CONSENT_0: () => !document.cookie.includes('catAccCookies'),
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
