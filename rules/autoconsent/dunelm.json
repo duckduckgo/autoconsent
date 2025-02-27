@@ -12,5 +12,5 @@
             "click": "button[data-testid=cookie-consent-preferences-save]"
         }
     ],
-    "test": [{ "eval": "EVAL_DUNELM_0" }]
+    "test": [{ "cookieMatch": "cc_functional=0" }, { "cookieMatch": "cc_targeting=0" }]
 }

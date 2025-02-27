@@ -22,5 +22,5 @@
             "click": "button[data-test=submit]"
         }
     ],
-    "test": [{ "eval": "EVAL_WAITROSE_1" }]
+    "test": [{ "cookieMatch": "wtr_cookies_advertising=0" }, { "cookieMatch": "wtr_cookies_analytics=0" }]
 }

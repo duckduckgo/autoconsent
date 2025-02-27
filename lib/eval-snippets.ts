@@ -63,8 +63,6 @@ export const snippets = {
 
     // declarative rules
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
-    EVAL_AFFINITY_SERIF_COM_0: () =>
-        document.cookie.includes('serif_manage_cookies_viewed') && !document.cookie.includes('serif_allow_analytics'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BORLABS_0: () =>
         !JSON.parse(
@@ -75,14 +73,11 @@ export const snippets = {
                     .split('=', 2)[1],
             ),
         ).consents.statistics,
-    EVAL_BUNDESREGIERUNG_DE_0: () => document.cookie.match('cookie-allow-tracking=0'),
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
-    EVAL_COOKIEJS_BANNER_TEST: () => document.cookie.includes('analytics_cookies=false'),
     EVAL_COOKIE_LAW_INFO_0: () => CLI.disableAllCookies() || CLI.reject_close() || true,
-    EVAL_COOKIE_LAW_INFO_1: () => document.cookie.indexOf('cookielawinfo-checkbox-non-necessary=yes') === -1,
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
@@ -111,13 +106,11 @@ export const snippets = {
             .forEach((i) => i.getAttribute('aria-checked') === 'true' && i.click()) || true,
     EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
-    EVAL_DUNELM_0: () => document.cookie.includes('cc_functional=0') && document.cookie.includes('cc_targeting=0'),
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
-    EVAL_EU_COOKIE_COMPLIANCE_0: () => document.cookie.indexOf('cookie-agreed=2') === -1,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
@@ -143,7 +136,6 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
-    EVAL_ONENINETWO_0: () => document.cookie.includes('CC_ADVERTISING=NO') && document.cookie.includes('CC_ANALYTICS=NO'),
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -209,9 +201,6 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
-    EVAL_WAITROSE_1: () => document.cookie.includes('wtr_cookies_advertising=0') && document.cookie.includes('wtr_cookies_analytics=0'),
-    EVAL_XE_TEST: () =>
-        document.cookie.includes('xeConsentState={%22performance%22:false%2C%22marketing%22:false%2C%22compliance%22:false}'),
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
