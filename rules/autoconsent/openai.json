@@ -26,5 +26,5 @@
             "waitForThenClick": "xpath///button[contains(., 'Reject all')]"
         }
     ],
-    "test": [{ "wait": 500 }, { "eval": "EVAL_OPENAI_TEST" }]
+    "test": [{ "wait": 500 }, { "cookieMatch": "oai-allow-ne=false" }]
 }

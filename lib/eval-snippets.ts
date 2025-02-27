@@ -62,14 +62,10 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
-    EVAL_ADROLL_0: () => !document.cookie.includes('__adroll_fpc'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AFFINITY_SERIF_COM_0: () =>
         document.cookie.includes('serif_manage_cookies_viewed') && !document.cookie.includes('serif_allow_analytics'),
-    EVAL_ARBEITSAGENTUR_TEST: () => document.cookie.includes('cookie_consent=denied'),
-    EVAL_AXEPTIO_0: () => document.cookie.includes('axeptio_authorized_vendors=%2C%2C'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
-    EVAL_BLOCKSY_0: () => document.cookie.includes('blocksy_cookies_consent_accepted=no'),
     EVAL_BORLABS_0: () =>
         !JSON.parse(
             decodeURIComponent(
@@ -81,7 +77,6 @@ export const snippets = {
         ).consents.statistics,
     EVAL_BUNDESREGIERUNG_DE_0: () => document.cookie.match('cookie-allow-tracking=0'),
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
-    EVAL_CLINCH_0: () => document.cookie.includes('ctc_rejected=1'),
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
@@ -149,7 +144,6 @@ export const snippets = {
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_ONENINETWO_0: () => document.cookie.includes('CC_ADVERTISING=NO') && document.cookie.includes('CC_ANALYTICS=NO'),
-    EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -160,7 +154,6 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).status === 'deny',
-    EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
