@@ -9,7 +9,7 @@
     ],
     "detectPopup": [
         {
-            "visible": "bahf-cookie-disclaimer-dpl3"
+            "exists": "bahf-cookie-disclaimer-dpl3:not([aria-hidden=true])"
         }
     ],
     "optIn": [
