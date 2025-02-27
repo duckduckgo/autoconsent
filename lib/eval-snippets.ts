@@ -128,8 +128,6 @@ export const snippets = {
     EVAL_COOKIEYES_0: () => document.cookie.includes('advertisement:no'),
     EVAL_CT_ULTIMATE_GDPR_TEST: () => document.cookie.includes('ct-ultimate-gdpr-cookie='),
     EVAL_DAILYMOTION_0: () => !!document.cookie.match('dm-euconsent-v2'),
-    EVAL_DNDBEYOND_TEST: () => document.cookie.includes('cookie-consent=denied'),
-    EVAL_DSGVO_0: () => !document.cookie.includes('sp_dsgvo_cookie_settings'),
     EVAL_DUNELM_0: () => document.cookie.includes('cc_functional=0') && document.cookie.includes('cc_targeting=0'),
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
@@ -144,7 +142,6 @@ export const snippets = {
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
     EVAL_GOOGLE_0: () => !!document.cookie.match(/SOCS=CAE/),
-    EVAL_GRAVITO_TEST: () => document.cookie.includes('gravitoData'),
     EVAL_HEMA_TEST_0: () => document.cookie.includes('cookies_rejected=1'),
     EVAL_INMOBI_TEST: () => document.cookie.includes('cookie-pref=rejected'),
     EVAL_IUBENDA_0: () =>
@@ -152,9 +149,7 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
-    EVAL_IWINK_TEST: () => document.cookie.includes('cookie_permission_granted=no'),
     EVAL_JQUERY_COOKIEBAR_0: () => !document.cookie.includes('cookies-state=accepted'),
-    EVAL_KETCH_TEST: () => document.cookie.includes('_ketch_consent_v1_'),
     EVAL_MEDIAVINE_0: () =>
         document.querySelectorAll('[data-name="mediavine-gdpr-cmp"] input[type=checkbox]').forEach((x) => x.checked && x.click()) || true,
     EVAL_MICROSOFT_0: () =>
