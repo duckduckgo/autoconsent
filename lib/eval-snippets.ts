@@ -63,7 +63,6 @@ export const snippets = {
 
     // declarative rules
     EVAL_ABC_TEST: () => document.cookie.includes('trackingconsent'),
-    EVAL_ANTHROPIC_TEST: () => !!document.cookie.includes('anthropic-consent-preferences'),
     EVAL_ADROLL_0: () => !document.cookie.includes('__adroll_fpc'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AFFINITY_SERIF_COM_0: () =>
@@ -71,8 +70,6 @@ export const snippets = {
     EVAL_ARBEITSAGENTUR_TEST: () => document.cookie.includes('cookie_consent=denied'),
     EVAL_AXEPTIO_0: () => document.cookie.includes('axeptio_authorized_vendors=%2C%2C'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
-    EVAL_BBC_TEST: () => document.cookie.includes('ckns_explicit=1'),
-    EVAL_BING_0: () => document.cookie.includes('AD=0'),
     EVAL_BLOCKSY_0: () => document.cookie.includes('blocksy_cookies_consent_accepted=no'),
     EVAL_BORLABS_0: () =>
         !JSON.parse(
@@ -177,8 +174,6 @@ export const snippets = {
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_ONENINETWO_0: () => document.cookie.includes('CC_ADVERTISING=NO') && document.cookie.includes('CC_ANALYTICS=NO'),
     EVAL_OPENAI_TEST: () => document.cookie.includes('oai-allow-ne=false'),
-    EVAL_OPERA_0: () =>
-        document.cookie.includes('cookie_consent_essential=true') && !document.cookie.includes('cookie_consent_marketing=true'),
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -190,7 +185,6 @@ export const snippets = {
             ),
         ).status === 'deny',
     EVAL_PAYPAL_0: () => document.cookie.includes('cookie_prefs') === true,
-    EVAL_PLOS_TEST: () => document.cookie.includes('plosCookieConsentStatus=false'),
     EVAL_PRIMEBOX_0: () => !document.cookie.includes('cb-enabled=accepted'),
     EVAL_POSTNL_TEST: () => document.cookie.includes('CookiePermissionInfo'),
     EVAL_PUBTECH_0: () =>
@@ -217,7 +211,6 @@ export const snippets = {
         return true;
     },
     EVAL_SNIGEL_0: () => !!document.cookie.match('snconsent'),
-    EVAL_SQUIZ_TEST: () => !!document.cookie.includes('squiz.cdp.consent'),
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(
@@ -227,7 +220,6 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).preference_state === 2,
-    EVAL_SVT_TEST: () => document.cookie.includes('cookie-consent-1={"optedIn":true,"functionality":false,"statistics":false}'),
     EVAL_TAKEALOT_0: () => document.body.classList.remove('freeze') || (document.body.style = '') || true,
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
@@ -239,14 +231,12 @@ export const snippets = {
     EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
     EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
-    EVAL_TESLA_TEST: () => document.cookie.includes('tsla-cookie-consent=rejected'),
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
     EVAL_THEVERGE_0: () => document.cookie.includes('_duet_gdpr_acknowledged=1'),
-    EVAL_TWCC_TEST: () => document.cookie.includes('twCookieConsent='),
     EVAL_UBUNTU_COM_0: () => document.cookie.includes('_cookies_accepted=essential'),
     EVAL_UK_COOKIE_CONSENT_0: () => !document.cookie.includes('catAccCookies'),
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',

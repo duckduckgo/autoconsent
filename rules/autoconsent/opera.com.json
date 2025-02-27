@@ -25,5 +25,5 @@
         { "waitForThenClick": "#cookie-consent .cookie-consent__switch:not(.always_on)", "all": true },
         { "waitForThenClick": "#cookie-consent .cookie-selection__btn" }
     ],
-    "test": [{ "eval": "EVAL_OPERA_0" }]
+    "test": [{ "cookieMatch": "cookie_consent_essential=true" }, { "cookieMatch": "cookie_consent_marketing=true", "reverse": true }]
 }
