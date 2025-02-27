@@ -36,7 +36,6 @@ generateCMPTests('${name}', [
 ]);
 `;
     console.log('Writing rule to', filename);
-    console.log(ruleString);
     await fs.promises.writeFile(path.join(rulesDir, filename), ruleString);
     console.log('Writing test to', `tests/${name}.spec.ts`);
     await fs.promises.writeFile(path.join(testsDir, `${name}.spec.ts`), testString);
