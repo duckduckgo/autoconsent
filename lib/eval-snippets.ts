@@ -251,6 +251,7 @@ export const snippets = {
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
     EVAL_THEVERGE_0: () => document.cookie.includes('_duet_gdpr_acknowledged=1'),
+    EVAL_TPLINK_TEST: () => document.cookie.includes('tp_privacy_base'),
     EVAL_TWCC_TEST: () => document.cookie.includes('twCookieConsent='),
     EVAL_UBUNTU_COM_0: () => document.cookie.includes('_cookies_accepted=essential'),
     EVAL_UK_COOKIE_CONSENT_0: () => !document.cookie.includes('catAccCookies'),
