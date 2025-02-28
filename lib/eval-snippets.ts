@@ -232,6 +232,7 @@ export const snippets = {
             ),
         ).preference_state === 2,
     EVAL_SVT_TEST: () => document.cookie.includes('cookie-consent-1={"optedIn":true,"functionality":false,"statistics":false}'),
+    EVAL_SYNOLOGY_TEST: () => document.cookie.includes('syno_confirm_v5_answer') && document.cookie.includes('"targeting":false'),
     EVAL_TAKEALOT_0: () => document.body.classList.remove('freeze') || (document.body.style = '') || true,
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
