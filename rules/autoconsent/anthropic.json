@@ -24,7 +24,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "anthropic-consent-preferences"
+            "cookieContains": "anthropic-consent-preferences"
         }
     ]
 }

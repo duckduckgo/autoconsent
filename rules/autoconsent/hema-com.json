@@ -7,7 +7,7 @@
     "optOut": [{ "waitForThenClick": ".cookie-modal .js-cookie-reject-btn" }],
     "test": [
         {
-            "cookieMatch": "cookies_rejected=1"
+            "cookieContains": "cookies_rejected=1"
         }
     ]
 }

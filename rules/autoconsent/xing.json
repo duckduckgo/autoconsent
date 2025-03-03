@@ -11,5 +11,5 @@
             "click": ".consent-banner-button-accept-overlay"
         }
     ],
-    "test": [{ "cookieMatch": "userConsent=%7B%22marketing%22%3Afalse" }]
+    "test": [{ "cookieContains": "userConsent=%7B%22marketing%22%3Afalse" }]
 }

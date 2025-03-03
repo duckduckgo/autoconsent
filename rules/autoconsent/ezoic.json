@@ -14,5 +14,5 @@
         { "click": "#ez-cookie-dialog input[type=checkbox]:checked", "all": true },
         { "click": "#ez-save-settings" }
     ],
-    "test": [{ "cookieMatch": "ez-consent-tcf" }]
+    "test": [{ "cookieContainsins": "ez-consent-tcf" }]
 }

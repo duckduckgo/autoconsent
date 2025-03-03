@@ -24,7 +24,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "cookie_consent=denied"
+            "cookieContains": "cookie_consent=denied"
         }
     ]
 }

@@ -15,5 +15,5 @@
         },
         { "wait": 500 }
     ],
-    "test": [{ "wait": 500 }, { "cookieMatch": "SOCS=CAE" }]
+    "test": [{ "wait": 500 }, { "cookieContains": "SOCS=CAE" }]
 }

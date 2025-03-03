@@ -12,5 +12,5 @@
             "click": "button[data-testid=cookie-consent-preferences-save]"
         }
     ],
-    "test": [{ "cookieMatch": "cc_functional=0" }, { "cookieMatch": "cc_targeting=0" }]
+    "test": [{ "cookieContains": "cc_functional=0" }, { "cookieContains": "cc_targeting=0" }]
 }

@@ -24,7 +24,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "analytics_cookies=false"
+            "cookieContains": "analytics_cookies=false"
         }
     ]
 }

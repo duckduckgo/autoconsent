@@ -48,7 +48,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "ctc_rejected=1"
+            "cookieContains": "ctc_rejected=1"
         }
     ]
 }

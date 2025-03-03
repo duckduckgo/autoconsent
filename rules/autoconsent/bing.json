@@ -5,5 +5,5 @@
     "detectPopup": [{ "visible": "#bnp_cookie_banner" }, { "visible": "#bnp_btn_accept,#bnp_btn_reject" }],
     "optIn": [{ "waitForThenClick": "#bnp_btn_accept" }],
     "optOut": [{ "wait": 500 }, { "waitForThenClick": "#bnp_btn_reject" }],
-    "test": [{ "cookieMatch": "AD=0" }]
+    "test": [{ "cookieContains": "AD=0" }]
 }

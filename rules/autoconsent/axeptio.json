@@ -29,7 +29,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "axeptio_authorized_vendors=%2C%2C"
+            "cookieContains": "axeptio_authorized_vendors=%2C%2C"
         }
     ]
 }

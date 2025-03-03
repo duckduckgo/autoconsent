@@ -13,10 +13,10 @@
             "wait": 500
         },
         {
-            "cookieMatch": "serif_manage_cookies_viewed"
+            "cookieContains": "serif_manage_cookies_viewed"
         },
         {
-            "cookieMatch": "serif_allow_analytics",
+            "cookieContains": "serif_allow_analytics",
             "reverse": true
         }
     ]

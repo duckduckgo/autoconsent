@@ -10,5 +10,5 @@
             "eval": "EVAL_COOKIE_LAW_INFO_0"
         }
     ],
-    "test": [{ "cookieMatch": "cookielawinfo-checkbox-non-necessary=yes", "reverse": true }]
+    "test": [{ "cookieContains": "cookielawinfo-checkbox-non-necessary=yes", "reverse": true }]
 }

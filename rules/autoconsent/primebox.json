@@ -10,5 +10,5 @@
     ],
     "optIn": [{ "waitForThenClick": "#cookie-bar .cb-enable" }],
     "optOut": [{ "click": "#cookie-bar .cb-disable", "optional": true }, { "hide": "#cookie-bar" }],
-    "test": [{ "cookieMatch": "cb-enabled=accepted", "reverse": true }]
+    "test": [{ "cookieContains": "cb-enabled=accepted", "reverse": true }]
 }

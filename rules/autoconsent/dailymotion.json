@@ -8,5 +8,5 @@
     "detectPopup": [{ "visible": "[class*=\"TCF2Popup\"] a[href^=\"https://www.dailymotion.com/legal/cookiemanagement\"]" }],
     "optIn": [{ "waitForThenClick": "button[class*=\"TCF2Popup__button\"]:not([class*=\"TCF2Popup__personalize\"])" }],
     "optOut": [{ "waitForThenClick": "button[class*=\"TCF2ContinueWithoutAcceptingButton\"]" }],
-    "test": [{ "cookieMatch": "dm-euconsent-v2" }]
+    "test": [{ "cookieContains": "dm-euconsent-v2" }]
 }

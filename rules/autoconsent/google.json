@@ -12,5 +12,5 @@
             "waitForThenClick": ".HTjtHe#xe7COe button#W0wltc"
         }
     ],
-    "test": [{ "cookieMatch": "SOCS=CAE" }]
+    "test": [{ "cookieContains": "SOCS=CAE" }]
 }

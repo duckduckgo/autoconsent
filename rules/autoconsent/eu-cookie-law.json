@@ -10,5 +10,5 @@
         }
     ],
     "optOut": [{ "hide": ".pea_cook_wrapper" }],
-    "test": [{ "cookieMatch": "euCookie", "reverse": true }]
+    "test": [{ "cookieContains": "euCookie", "reverse": true }]
 }

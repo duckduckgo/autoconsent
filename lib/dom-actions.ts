@@ -71,9 +71,9 @@ export class DomActions implements DomActionsProvider {
         });
     }
 
-    cookieMatch(cookieMatch: string, reverse: boolean): boolean {
+    cookieContains(substring: string, reverse: boolean): boolean {
         // simple substring matching
-        return document.cookie.includes(cookieMatch) !== reverse;
+        return document.cookie.includes(substring) !== reverse;
     }
 
     hide(selector: string, method: HideMethod): boolean {

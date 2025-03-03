@@ -13,5 +13,5 @@
             "waitForThenClick": ".bpa-close-button"
         }
     ],
-    "test": [{ "cookieMatch": "cookie-allow-tracking=0" }]
+    "test": [{ "cookieContains": "cookie-allow-tracking=0" }]
 }

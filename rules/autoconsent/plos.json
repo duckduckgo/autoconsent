@@ -33,7 +33,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "plosCookieConsentStatus=false"
+            "cookieContains": "plosCookieConsentStatus=false"
         }
     ]
 }

@@ -27,7 +27,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "cookie-consent-1={\"optedIn\":true,\"functionality\":false,\"statistics\":false}"
+            "cookieContains": "cookie-consent-1={\"optedIn\":true,\"functionality\":false,\"statistics\":false}"
         }
     ]
 }

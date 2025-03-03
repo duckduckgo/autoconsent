@@ -18,7 +18,7 @@
             "check": "none"
         },
         {
-            "cookieMatch": "cookies-state=accepted",
+            "cookieContains": "cookies-state=accepted",
             "reverse": true
         }
     ]

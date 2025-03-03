@@ -234,7 +234,7 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 ### Cookie match
 ```javascript
 {
-  "cookieMatch": "substring",
+  "cookieContains": "substring",
   "reverse": true | false
 }
 ```

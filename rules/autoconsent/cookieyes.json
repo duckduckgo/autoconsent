@@ -22,5 +22,5 @@
             ]
         }
     ],
-    "test": [{ "cookieMatch": "advertisement:no" }]
+    "test": [{ "cookieContains": "advertisement:no" }]
 }

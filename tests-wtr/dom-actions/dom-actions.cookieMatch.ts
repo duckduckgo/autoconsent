@@ -12,32 +12,32 @@ describe('click', () => {
     });
 
     it('existing cookie matches by value', () => {
-        const cookieMatch = domActions.cookieMatch('testcookie1', false);
-        expect(cookieMatch).true;
+        const cookieContains = domActions.cookieContains('testcookie1', false);
+        expect(cookieContains).true;
     });
 
     it('existing cookie matches by value when reversed', () => {
-        const cookieMatch = domActions.cookieMatch('testcookie1', true);
-        expect(cookieMatch).false;
+        const cookieContains = domActions.cookieContains('testcookie1', true);
+        expect(cookieContains).false;
     });
 
     it('non-existent cookie does not match', () => {
-        const cookieMatch = domActions.cookieMatch('nonexistentcookie', false);
-        expect(cookieMatch).false;
+        const cookieContains = domActions.cookieContains('nonexistentcookie', false);
+        expect(cookieContains).false;
     });
 
     it('non-existent cookie matches when reversed', () => {
-        const cookieMatch = domActions.cookieMatch('nonexistentcookie', true);
-        expect(cookieMatch).true;
+        const cookieContains = domActions.cookieContains('nonexistentcookie', true);
+        expect(cookieContains).true;
     });
 
     it('matches partial cookie value', () => {
-        const cookieMatch = domActions.cookieMatch('cookie1', false);
-        expect(cookieMatch).true;
+        const cookieContains = domActions.cookieContains('cookie1', false);
+        expect(cookieContains).true;
     });
 
     it('matches full cookie name=value', () => {
-        const cookieMatch = domActions.cookieMatch('testcookie1=testcookievalue1', false);
-        expect(cookieMatch).true;
+        const cookieContains = domActions.cookieContains('testcookie1=testcookievalue1', false);
+        expect(cookieContains).true;
     });
 });

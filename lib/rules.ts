@@ -36,10 +36,10 @@ export type AutoConsentRuleStep = { optional?: boolean; comment?: string } & Par
     Partial<HideRule> &
     Partial<IfRule> &
     Partial<AnyRule> &
-    Partial<CookieMatchRule>;
+    Partial<CookieContainsRule>;
 
-export type CookieMatchRule = {
-    cookieMatch: string;
+export type CookieContainsRule = {
+    cookieContains: string;
     reverse: boolean;
 };
 

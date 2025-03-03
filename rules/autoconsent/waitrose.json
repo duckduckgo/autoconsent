@@ -22,5 +22,5 @@
             "click": "button[data-test=submit]"
         }
     ],
-    "test": [{ "cookieMatch": "wtr_cookies_advertising=0" }, { "cookieMatch": "wtr_cookies_analytics=0" }]
+    "test": [{ "cookieContains": "wtr_cookies_advertising=0" }, { "cookieContains": "wtr_cookies_analytics=0" }]
 }

@@ -33,7 +33,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "xeConsentState={%22performance%22:false%2C%22marketing%22:false%2C%22compliance%22:false}"
+            "cookieContains": "xeConsentState={%22performance%22:false%2C%22marketing%22:false%2C%22compliance%22:false}"
         }
     ]
 }

@@ -32,7 +32,7 @@
     ],
     "test": [
         {
-            "cookieMatch": "taunton_user_consent_submitted=true"
+            "cookieContains": "taunton_user_consent_submitted=true"
         }
     ]
 }
