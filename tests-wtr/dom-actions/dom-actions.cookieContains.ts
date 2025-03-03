@@ -2,8 +2,8 @@ import { expect } from '@esm-bundle/chai';
 import { instantiateDomActions } from './utils';
 import { DomActions } from '../../lib/dom-actions';
 
-// must be run from dom-actions.click.html
-describe('click', () => {
+// must be run from dom-actions.cookieContains.html
+describe('cookieContains', () => {
     let domActions: DomActions;
 
     before(() => {
