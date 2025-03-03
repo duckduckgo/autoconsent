@@ -36,11 +36,15 @@ export type AutoConsentRuleStep = { optional?: boolean; comment?: string } & Par
     Partial<HideRule> &
     Partial<IfRule> &
     Partial<AnyRule> &
+    Partial<NegatedRule> &
     Partial<CookieContainsRule>;
+
+export type NegatedRule = {
+    negated: boolean;
+};
 
 export type CookieContainsRule = {
     cookieContains: string;
-    reverse: boolean;
 };
 
 export type ElementExistsRule = {

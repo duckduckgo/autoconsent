@@ -234,11 +234,10 @@ Hide the elements matched by the selectors. `method` defines how elements are hi
 ### Cookie match
 ```javascript
 {
-  "cookieContains": "substring",
-  "reverse": true | false
+  "cookieContains": "substring"
 }
 ```
-Checks if the substring is present in the document.cookie string. If `reverse` is true, the rule will return true if the substring is not present. By default, `reverse` is false.
+Checks if the substring is present in the document.cookie string.
 
 ### Eval
 
@@ -280,6 +279,16 @@ The "if" rule is considered successful as long as all rules inside the chosen br
 ```
 
 Evaluates a list of steps in order. If any return true (success), then the step returns true. If all steps return false, the `any` step returns false.
+
+### Negation
+
+```javascript
+{
+  "negated": true | false
+}
+```
+
+If `negated` is true, the result will be inverted. For example, `{ "exists": ".my-class", "negated": true }` will return true if `.my-class` does not exist.
 
 ### Optional actions
 

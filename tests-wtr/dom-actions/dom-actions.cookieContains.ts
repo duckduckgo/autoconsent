@@ -12,32 +12,27 @@ describe('click', () => {
     });
 
     it('existing cookie matches by value', () => {
-        const cookieContains = domActions.cookieContains('testcookie1', false);
+        const cookieContains = domActions.cookieContains('testcookie1');
         expect(cookieContains).true;
-    });
-
-    it('existing cookie matches by value when reversed', () => {
-        const cookieContains = domActions.cookieContains('testcookie1', true);
-        expect(cookieContains).false;
     });
 
     it('non-existent cookie does not match', () => {
-        const cookieContains = domActions.cookieContains('nonexistentcookie', false);
+        const cookieContains = domActions.cookieContains('nonexistentcookie');
         expect(cookieContains).false;
     });
 
-    it('non-existent cookie matches when reversed', () => {
-        const cookieContains = domActions.cookieContains('nonexistentcookie', true);
+    it('matches partial cookie value', () => {
+        const cookieContains = domActions.cookieContains('cookie1');
         expect(cookieContains).true;
     });
 
-    it('matches partial cookie value', () => {
-        const cookieContains = domActions.cookieContains('cookie1', false);
+    it('matches partial substring', () => {
+        const cookieContains = domActions.cookieContains('cookie1=test');
         expect(cookieContains).true;
     });
 
     it('matches full cookie name=value', () => {
-        const cookieContains = domActions.cookieContains('testcookie1=testcookievalue1', false);
+        const cookieContains = domActions.cookieContains('testcookie1=testcookievalue1');
         expect(cookieContains).true;
     });
 });

@@ -17,5 +17,5 @@
             ]
         }
     ],
-    "test": [{ "cookieContains": "gtm_fpc_engagement_event", "reverse": true }]
+    "test": [{ "cookieContains": "gtm_fpc_engagement_event", "negated": true }]
 }

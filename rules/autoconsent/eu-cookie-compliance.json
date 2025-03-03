@@ -16,5 +16,5 @@
         },
         { "hide": ".eu-cookie-compliance-banner-info, #sliding-popup" }
     ],
-    "test": [{ "cookieContains": "cookie-agreed=2", "reverse": true }]
+    "test": [{ "cookieContains": "cookie-agreed=2", "negated": true }]
 }
