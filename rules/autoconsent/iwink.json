@@ -5,5 +5,5 @@
     "detectPopup": [{ "visible": "body.cookies-request #cookie-bar" }],
     "optIn": [{ "waitForThenClick": "body.cookies-request #cookie-bar .allow-cookies" }],
     "optOut": [{ "waitForThenClick": "body.cookies-request #cookie-bar .disallow-cookies" }],
-    "test": [{ "cookieContainsins": "cookie_permission_granted=no" }]
+    "test": [{ "cookieContains": "cookie_permission_granted=no" }]
 }
