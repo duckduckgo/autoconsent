@@ -31,7 +31,7 @@
     ],
     "test": [
         {
-            "eval": "EVAL_ZINIO_TEST"
+            "cookieContains": "zinio-cookie-consent"
         }
     ]
 }

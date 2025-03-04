@@ -18,7 +18,8 @@
             "check": "none"
         },
         {
-            "eval": "EVAL_JQUERY_COOKIEBAR_0"
+            "cookieContains": "cookies-state=accepted",
+            "negated": true
         }
     ]
 }

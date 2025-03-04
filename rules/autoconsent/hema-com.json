@@ -7,7 +7,7 @@
     "optOut": [{ "waitForThenClick": ".cookie-modal .js-cookie-reject-btn" }],
     "test": [
         {
-            "eval": "EVAL_HEMA_TEST_0"
+            "cookieContains": "cookies_rejected=1"
         }
     ]
 }
