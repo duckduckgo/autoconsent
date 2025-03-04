@@ -10,22 +10,30 @@
     "detectPopup": [
         {
             "visible": ".fs-cc-components,[fs-cc=banner]"
+        },
+        {
+            "visible": ".fs-cc-components,[fs-cc=banner] [fs-cc=allow]"
         }
     ],
     "optIn": [
-        {
-            "wait": 500
-        },
         {
             "waitForThenClick": "[fs-cc=banner] [fs-cc=allow]"
         }
     ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+            "if": { "exists": "[fs-cc=banner] [fs-cc=deny]" },
+            "then": [
+                { "wait": 500 },
+                {
+                    "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+                }
+            ],
+            "else": [
+                {
+                    "hide": "[fs-cc=banner]"
+                }
+            ]
         }
     ],
     "test": [
