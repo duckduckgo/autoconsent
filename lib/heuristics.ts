@@ -25,11 +25,11 @@ export const DETECT_PATTERNS = [
 ];
 
 export function checkHeuristicPatterns() {
-    const allText = document.documentElement.innerText;
+    const allText = document.documentElement?.innerText;
     const patterns = [];
     const snippets = [];
     for (const p of DETECT_PATTERNS) {
-        const matches = allText.match(p);
+        const matches = allText?.match(p);
         if (matches) {
             patterns.push(p.toString());
             snippets.push(...matches.map((m) => m.substring(0, 200)));
