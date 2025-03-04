@@ -17,5 +17,5 @@
             ]
         }
     ],
-    "test": [{ "eval": "EVAL_CANVA_0" }]
+    "test": [{ "cookieContains": "gtm_fpc_engagement_event", "negated": true }]
 }

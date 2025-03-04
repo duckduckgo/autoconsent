@@ -231,6 +231,14 @@ Wait for the specified number of milliseconds.
 ```
 Hide the elements matched by the selectors. `method` defines how elements are hidden: "display" sets `display: none`, "opacity" sets `opacity: 0`. Method is "display" by default. Note that only a single string CSS selector is supported here, not an array.
 
+### Cookie match
+```javascript
+{
+  "cookieContains": "substring"
+}
+```
+Checks if the substring is present in the document.cookie string.
+
 ### Eval
 
 ```javascript
@@ -271,6 +279,16 @@ The "if" rule is considered successful as long as all rules inside the chosen br
 ```
 
 Evaluates a list of steps in order. If any return true (success), then the step returns true. If all steps return false, the `any` step returns false.
+
+### Negation
+
+```javascript
+{
+  "negated": true | false
+}
+```
+
+If `negated` is true, the result will be inverted. For example, `{ "exists": ".my-class", "negated": true }` will return true if `.my-class` does not exist.
 
 ### Optional actions
 
