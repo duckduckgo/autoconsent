@@ -1,34 +1,44 @@
 {
     "name": "webflow",
-    "vendorUrl": "https://webflow.com/",
-    "prehideSelectors": [".fs-cc-components"],
+    "vendorUrl": "https://finsweet.com/cookie-consent",
+    "prehideSelectors": [".fs-cc-components,[fs-cc=banner]"],
     "detectCmp": [
         {
-            "exists": ".fs-cc-components"
+            "exists": ".fs-cc-components,[fs-cc=banner]"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".fs-cc-components"
+            "visible": ".fs-cc-components,[fs-cc=banner]"
         },
         {
-            "visible": "[fs-cc=banner]"
+            "visible": ".fs-cc-components,[fs-cc=banner] [fs-cc=allow]"
         }
     ],
     "optIn": [
-        {
-            "wait": 500
-        },
         {
             "waitForThenClick": "[fs-cc=banner] [fs-cc=allow]"
         }
     ],
     "optOut": [
         {
-            "wait": 500
-        },
+            "if": { "exists": "[fs-cc=banner] [fs-cc=deny]" },
+            "then": [
+                { "wait": 500 },
+                {
+                    "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+                }
+            ],
+            "else": [
+                {
+                    "hide": "[fs-cc=banner]"
+                }
+            ]
+        }
+    ],
+    "test": [
         {
-            "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+            "cookieContains": "fs-cc"
         }
     ]
 }
