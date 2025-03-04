@@ -147,6 +147,10 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.hide(selector, method);
     }
 
+    cookieContains(substring: string) {
+        return this.autoconsent.domActions.cookieContains(substring);
+    }
+
     prehide(selector: string) {
         return this.autoconsent.domActions.prehide(selector);
     }
@@ -271,6 +275,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         if (rule.hide) {
             results.push(this.hide(rule.hide, rule.method));
         }
+        if (rule.cookieContains) {
+            results.push(this.cookieContains(rule.cookieContains));
+        }
         if (rule.if) {
             if (!rule.if.exists && !rule.if.visible) {
                 console.error('invalid conditional rule', rule.if);
@@ -287,22 +294,30 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             }
         }
         if (rule.any) {
+            let resultOfAny = false;
             for (const step of rule.any) {
                 if (await this.evaluateRuleStep(step)) {
-                    return true;
+                    resultOfAny = true;
+                    break;
                 }
             }
-            return false;
+            results.push(resultOfAny);
         }
 
         if (results.length === 0) {
             logsConfig.errors && console.warn('Unrecognized rule', rule);
+            // return immediately so that this result cannot be negated
             return false;
         }
 
         // boolean and of results
         const all = await Promise.all(results);
-        return all.reduce((a, b) => a && b, true);
+        const result = all.reduce((a, b) => a && b, true);
+
+        if (rule.negated) {
+            return !result;
+        }
+        return result;
     }
 
     async _runRulesParallel(rules: AutoConsentRuleStep[]): Promise<boolean> {

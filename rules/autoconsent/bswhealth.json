@@ -36,7 +36,7 @@
     ],
     "test": [
         {
-            "eval": "EVAL_BSWHEALTH_TEST"
+            "cookieContains": "x-bsw-consentCookie"
         }
     ]
 }

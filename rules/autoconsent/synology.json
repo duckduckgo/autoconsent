@@ -36,7 +36,10 @@
     ],
     "test": [
         {
-            "eval": "EVAL_SYNOLOGY_TEST"
+            "cookieContains": "syno_confirm_v5_answer"
+        },
+        {
+            "cookieContains": "\"targeting\":false"
         }
     ]
 }

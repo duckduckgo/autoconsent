@@ -6,5 +6,5 @@
     "detectPopup": [{ "visible": "#gdpr-cookie-consent-bar" }],
     "optIn": [{ "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_accept" }],
     "optOut": [{ "waitForThenClick": "#gdpr-cookie-consent-bar #cookie_action_reject" }],
-    "test": [{ "eval": "EVAL_WP_COOKIE_NOTICE_0" }]
+    "test": [{ "cookieContains": "wpl_viewed_cookie=no" }]
 }
