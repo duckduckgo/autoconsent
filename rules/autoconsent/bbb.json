@@ -1,12 +1,20 @@
 {
     "name": "bbb.org",
-    "runContext": {
-        "urlPattern": "^https://www\\.bbb\\.org/"
-    },
-    "cosmetic": true,
-    "prehideSelectors": ["div[aria-label=\"use of cookies on bbb.org\"]"],
-    "detectCmp": [{ "exists": "div[aria-label=\"use of cookies on bbb.org\"]" }],
-    "detectPopup": [{ "visible": "div[aria-label=\"use of cookies on bbb.org\"]" }],
-    "optIn": [{ "click": "div[aria-label=\"use of cookies on bbb.org\"] button.bds-button-unstyled span.visually-hidden" }],
-    "optOut": [{ "hide": "div[aria-label=\"use of cookies on bbb.org\"]" }]
+    "cosmetic": false,
+    "prehideSelectors": [".cookies-message"],
+    "detectCmp": [{ "exists": ".cookies-message" }],
+    "detectPopup": [{ "visible": ".cookies-message [name='allow-all']" }],
+    "optIn": [{ "click": ".cookies-message [name='allow-all']" }],
+    "optOut": [
+        { "waitForThenClick": ".cookies-message button.bds-button-unstyled" },
+        { "waitFor": ".cookies-policy-dialog[open]" },
+        {
+            "click": ".cookies-policy-dialog fieldset input[type=radio][value=false]:not(:checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".cookies-policy-dialog button.bds-button"
+        }
+    ]
 }
