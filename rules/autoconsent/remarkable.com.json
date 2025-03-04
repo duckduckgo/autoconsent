@@ -1,0 +1,43 @@
+{
+    "name": "remarkable.com",
+    "vendorUrl": "https://www.remarkable.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?remarkable\\.com/"
+    },
+    "prehideSelectors": ["[data-cy=cookie-consent-banner-info-only],[data-cy=cookie-consent-banner]"],
+    "detectCmp": [
+        {
+            "exists": "[data-cy=cookie-consent-banner-info-only],[data-cy=cookie-consent-banner]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-cy=cookie-consent-banner-info-only],[data-cy=cookie-consent-banner]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-cy=cookie-consent-banner-accept-all-button],[data-cy=cookie-consent-banner-info-only-dismiss-button]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[data-cy=cookie-consent-banner-change-settings-button]" },
+            "then": [
+                {
+                    "waitForThenClick": "[data-cy=cookie-consent-banner-change-settings-button]"
+                },
+                {
+                    "waitForThenClick": "[data-cy=cookie-consent-banner-save-settings-button]"
+                }
+            ],
+            "else": [{ "hide": "[data-cy=cookie-consent-banner-info-only]" }]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_REMARKABLE_TEST"
+        }
+    ]
+}
