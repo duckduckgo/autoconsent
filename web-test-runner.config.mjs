@@ -2,7 +2,7 @@ import { esbuildPlugin } from '@web/dev-server-esbuild';
 import { fileURLToPath } from 'url';
 
 export default {
-    files: ['tests-wtr/**/*.html'],
+    files: ['tests-wtr/**/*.html', 'tests-wtr/**/*.test.ts'],
     nodeResolve: true,
     plugins: [
         esbuildPlugin({

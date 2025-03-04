@@ -8,5 +8,5 @@
         { "hide": "#cookie-information-template-wrapper", "comment": "some templates don't hide the banner automatically" },
         { "eval": "EVAL_COOKIEINFORMATION_0" }
     ],
-    "test": [{ "eval": "EVAL_COOKIEINFORMATION_2" }]
+    "test": [{ "cookieContains": "CookieInformationConsent=" }]
 }

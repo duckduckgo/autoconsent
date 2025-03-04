@@ -22,5 +22,5 @@
             ]
         }
     ],
-    "test": [{ "eval": "EVAL_COOKIEYES_0" }]
+    "test": [{ "cookieContains": "advertisement:no" }]
 }
