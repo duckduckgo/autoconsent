@@ -1,23 +1,20 @@
 {
     "name": "asus",
     "vendorUrl": "https://www.asus.com/",
-    "runContext": {
-        "urlPattern": "^https://www\\.asus\\.com/"
-    },
     "prehideSelectors": ["#cookie-policy-info,#cookie-policy-info-bg"],
     "detectCmp": [
         {
-            "exists": "#cookie-policy-info"
+            "exists": "#cookie-policy-info button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-policy-info"
+            "visible": "#cookie-policy-info button"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookie-policy-info [data-agree=\"Accept Cookies\"]"
+            "waitForThenClick": "#cookie-policy-info .btn-ok"
         }
     ],
     "optOut": [
@@ -27,7 +24,7 @@
             },
             "then": [
                 {
-                    "waitForThenClick": "#cookie-policy-info .btn-reject"
+                    "click": "#cookie-policy-info .btn-reject"
                 }
             ],
             "else": [
@@ -35,7 +32,7 @@
                     "waitForThenClick": "#cookie-policy-info .btn-setting"
                 },
                 {
-                    "waitForThenClick": "#cookie-policy-lightbox-wrapper [data-agree=\"Save Settings\"]"
+                    "waitForThenClick": "#cookie-policy-info .btn-ok"
                 }
             ]
         }
