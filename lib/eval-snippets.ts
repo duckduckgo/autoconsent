@@ -64,6 +64,7 @@ export const snippets = {
     // declarative rules
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
+    EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>
         !JSON.parse(
             decodeURIComponent(
