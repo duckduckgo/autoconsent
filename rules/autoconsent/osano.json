@@ -1,5 +1,6 @@
 {
     "name": "osano",
+    "vendorUrl": "https://developers.osano.com/cmp/",
     "prehideSelectors": [".osano-cm-window,.osano-cm-dialog"],
     "detectCmp": [{ "exists": ".osano-cm-window" }],
     "detectPopup": [{ "eval": "EVAL_OSANO_DETECT" }, { "visible": ".osano-cm-dialog:not(.osano-cm-dialog--hidden)" }],
