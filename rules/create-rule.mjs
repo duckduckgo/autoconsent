@@ -26,7 +26,7 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
         detectPopup: [{ visible: '#TODO' }],
         optIn: [{ waitForThenClick: '#Accept' }],
         optOut: [{ waitForThenClick: '#Reject' }],
-        test: [{ eval: 'EVAL_TODO' }],
+        test: [{ cookieContains: 'TODO' }],
     };
     const ruleString = JSON.stringify(rule, undefined, 4);
     const testString = `import generateCMPTests from "../playwright/runner";
