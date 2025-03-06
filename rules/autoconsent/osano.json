@@ -2,12 +2,18 @@
     "name": "osano",
     "prehideSelectors": [".osano-cm-window,.osano-cm-dialog"],
     "detectCmp": [{ "exists": ".osano-cm-window" }],
-    "detectPopup": [{ "visible": ".osano-cm-dialog" }],
+    "detectPopup": [{ "eval": "EVAL_OSANO_DETECT" }, { "visible": ".osano-cm-dialog:not(.osano-cm-dialog--hidden)" }],
     "optIn": [
         {
-            "click": ".osano-cm-accept-all",
+            "waitForThenClick": ".osano-cm-accept-all,.osano-cm-accept",
             "optional": true
         }
     ],
-    "optOut": [{ "waitForThenClick": ".osano-cm-denyAll" }]
+    "optOut": [
+        {
+            "if": { "exists": ".osano-cm-denyAll,.osano-cm-deny" },
+            "then": [{ "click": ".osano-cm-denyAll,.osano-cm-deny" }],
+            "else": [{ "hide": ".osano-cm-window,.osano-cm-dialog" }]
+        }
+    ]
 }
