@@ -17,6 +17,7 @@ describe('AutoConsentCMP', () => {
                 logs: {},
             },
             domActions: domActionsMock,
+            sendContentMessage: sinon.stub(),
         };
         cmp = new AutoConsentCMP(
             {
