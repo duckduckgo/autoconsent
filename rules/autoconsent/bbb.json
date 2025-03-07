@@ -6,7 +6,9 @@
     "detectPopup": [{ "visible": ".cookies-message [name='allow-all']" }],
     "optIn": [{ "click": ".cookies-message [name='allow-all']" }],
     "optOut": [
-        { "waitForThenClick": ".cookies-message button.bds-button-unstyled" },
+        { "waitForVisible": ".cookies-message button.bds-button-unstyled" },
+        { "wait": 500 },
+        { "click": ".cookies-message button.bds-button-unstyled" },
         { "waitFor": ".cookies-policy-dialog[open]" },
         {
             "click": ".cookies-policy-dialog fieldset input[type=radio][value=false]:not(:checked)",
