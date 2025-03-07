@@ -23,10 +23,13 @@
     ],
     "optOut": [
         {
+            "waitFor": ".cookies-agreement-notification .cb_setup"
+        },
+        {
             "wait": 1000
         },
         {
-            "waitForThenClick": ".cookies-agreement-notification .cb_setup"
+            "click": ".cookies-agreement-notification .cb_setup"
         },
         {
             "waitForVisible": "[data-module=SetupCookies]"
