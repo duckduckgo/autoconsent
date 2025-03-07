@@ -5,34 +5,41 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?remarkable\\.com/"
     },
-    "prehideSelectors": ["[data-cy=cookie-consent-banner-info-only],[data-cy=cookie-consent-banner]"],
+    "prehideSelectors": [".overlay-cookies"],
     "detectCmp": [
         {
-            "exists": "[data-cy=cookie-consent-banner-info-only],[data-cy=cookie-consent-banner]"
+            "exists": ".overlay-cookies,#cookieBar-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-cy=cookie-consent-banner-info-only],[data-cy=cookie-consent-banner]"
+            "visible": ".overlay-cookies,#cookieBar-button"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[data-cy=cookie-consent-banner-accept-all-button],[data-cy=cookie-consent-banner-info-only-dismiss-button]"
+            "waitForThenClick": ".overlay-cookies .ark-button--primary-neutral,#cookieBar-button"
         }
     ],
     "optOut": [
         {
-            "if": { "exists": "[data-cy=cookie-consent-banner-change-settings-button]" },
+            "if": { "exists": "#cookieBar-button" },
             "then": [
                 {
-                    "waitForThenClick": "[data-cy=cookie-consent-banner-change-settings-button]"
-                },
-                {
-                    "waitForThenClick": "[data-cy=cookie-consent-banner-save-settings-button]"
+                    "hide": "div:has(> button#cookieBar-button)"
                 }
             ],
-            "else": [{ "hide": "[data-cy=cookie-consent-banner-info-only]" }]
+            "else": [
+                {
+                    "waitForThenClick": ".overlay-cookies .ark-button--tertiary-neutral"
+                },
+                {
+                    "waitFor": ".overlay-cookies #cookie-group-control-necessary"
+                },
+                {
+                    "waitForThenClick": ".overlay-cookies .ark-button--secondary"
+                }
+            ]
         }
     ],
     "test": [
