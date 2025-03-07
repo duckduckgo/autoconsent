@@ -1,3 +1,39 @@
+# v12.13.0 (Fri Mar 07 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 0f2116100a57d0ec74666508d405fc4da80f1f9d [#685](https://github.com/duckduckgo/autoconsent/pull/685) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Several site-specific rules [#673](https://github.com/duckduckgo/autoconsent/pull/673) ([@muodov](https://github.com/muodov))
+- add rule for fedex.com [#669](https://github.com/duckduckgo/autoconsent/pull/669) ([@muodov](https://github.com/muodov))
+- Rule batch [#684](https://github.com/duckduckgo/autoconsent/pull/684) ([@muodov](https://github.com/muodov))
+- Add rule for pornhat and a few other sites [#677](https://github.com/duckduckgo/autoconsent/pull/677) ([@muodov](https://github.com/muodov))
+- Add rule for live.paloaltonetworks.com [#672](https://github.com/duckduckgo/autoconsent/pull/672) ([@muodov](https://github.com/muodov))
+- Update rules for finsweet CMPs [#658](https://github.com/duckduckgo/autoconsent/pull/658) ([@muodov](https://github.com/muodov))
+- add rules for povr.com and tinyurl.com [#659](https://github.com/duckduckgo/autoconsent/pull/659) ([@muodov](https://github.com/muodov))
+- fix instagram rule [#668](https://github.com/duckduckgo/autoconsent/pull/668) ([@muodov](https://github.com/muodov))
+- add rule for acs.org [#671](https://github.com/duckduckgo/autoconsent/pull/671) ([@muodov](https://github.com/muodov))
+- Add rule for ryanair [#670](https://github.com/duckduckgo/autoconsent/pull/670) ([@muodov](https://github.com/muodov))
+- [NSFW] add rule for several sites [#682](https://github.com/duckduckgo/autoconsent/pull/682) ([@muodov](https://github.com/muodov))
+- Batch of site-specific rules [#680](https://github.com/duckduckgo/autoconsent/pull/680) ([@muodov](https://github.com/muodov))
+- Rules for Toyota sites [#679](https://github.com/duckduckgo/autoconsent/pull/679) ([@muodov](https://github.com/muodov))
+- Another batch of rules [#681](https://github.com/duckduckgo/autoconsent/pull/681) ([@muodov](https://github.com/muodov))
+- Declarative rule steps for negation and for matching cookies [#663](https://github.com/duckduckgo/autoconsent/pull/663) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 6.1.77 to 6.1.82 [#674](https://github.com/duckduckgo/autoconsent/pull/674) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Monthly Coverage data update [#667](https://github.com/duckduckgo/autoconsent/pull/667) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.12.0 (Fri Feb 28 2025)
 
 #### 🚀 Enhancement
