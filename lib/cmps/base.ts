@@ -333,6 +333,13 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             const result = await this.evaluateRuleStep(rule);
             logsConfig.rulesteps && console.log('...rule result', result);
             if (!result && !rule.optional) {
+                this.autoconsent.sendContentMessage({
+                    type: 'autoconsentError',
+                    details: {
+                        msg: 'Rule step failed',
+                        details: `${JSON.stringify(rule)}`,
+                    },
+                });
                 return false;
             }
         }

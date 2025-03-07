@@ -6,7 +6,7 @@ import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction } from '../lib/types';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
-    ? []
+    ? ['autoconsentError']
     : ['optInResult', 'optOutResult', 'autoconsentDone', 'autoconsentError', 'selfTestResult'];
 const LOG_PAGE_LOGS = false;
 
@@ -87,6 +87,14 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                                 enablePrehide: true,
                                 detectRetries: 20,
                                 enableCosmeticRules: true,
+                                logs: {
+                                    lifecycle: true,
+                                    rulesteps: true,
+                                    evals: false,
+                                    errors: true,
+                                    messages: false,
+                                    waits: false,
+                                },
                             })} })`,
                         );
                         break;
