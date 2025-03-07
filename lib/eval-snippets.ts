@@ -147,6 +147,7 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).status === 'deny',
+    EVAL_POVR_GOBACK: () => window.history.back() || true,
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
