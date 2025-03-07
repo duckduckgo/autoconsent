@@ -145,6 +145,7 @@ export class DomActions implements DomActionsProvider {
             if (matches.length === 0) {
                 return [];
             }
+            // TODO: try all matches recursively?
             parent = matches[0];
         }
         return matches;
