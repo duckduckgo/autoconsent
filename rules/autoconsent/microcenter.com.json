@@ -5,7 +5,7 @@
     "runContext": {
         "urlPattern": "^https://(www.)?microcenter.com/"
     },
-    "prehideSelectors": ["#privacyAlertDiv"],
+    "prehideSelectors": ["#PnlPrivacyAlert"],
     "detectCmp": [
         {
             "exists": "#privacyAlertDiv"
@@ -23,7 +23,7 @@
     ],
     "optOut": [
         {
-            "hide": "#privacyAlertDiv"
+            "hide": "#PnlPrivacyAlert"
         }
     ]
 }
