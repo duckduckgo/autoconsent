@@ -13,5 +13,5 @@
             "waitForThenClick": ".bpa-close-button"
         }
     ],
-    "test": [{ "eval": "EVAL_BUNDESREGIERUNG_DE_0" }]
+    "test": [{ "cookieContains": "cookie-allow-tracking=0" }]
 }

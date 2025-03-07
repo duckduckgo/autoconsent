@@ -5,5 +5,5 @@
     "detectPopup": [{ "visible": "#adroll_consent_container" }],
     "optIn": [{ "waitForThenClick": "#adroll_consent_accept" }],
     "optOut": [{ "waitForThenClick": "#adroll_consent_reject" }],
-    "test": [{ "eval": "EVAL_ADROLL_0" }]
+    "test": [{ "cookieContains": "__adroll_fpc", "negated": true }]
 }

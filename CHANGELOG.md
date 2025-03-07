@@ -1,3 +1,39 @@
+# v12.12.0 (Fri Feb 28 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 1f078adcab61d59e006a1b16847c07bcede57ea3 [#664](https://github.com/duckduckgo/autoconsent/pull/664) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- add rule for tplink sites [#662](https://github.com/duckduckgo/autoconsent/pull/662) ([@muodov](https://github.com/muodov))
+- Add rule for synology sites [#661](https://github.com/duckduckgo/autoconsent/pull/661) ([@muodov](https://github.com/muodov))
+- add rule for wix.com [#666](https://github.com/duckduckgo/autoconsent/pull/666) ([@muodov](https://github.com/muodov))
+- Site-specific rules for several top domains [#657](https://github.com/duckduckgo/autoconsent/pull/657) ([@muodov](https://github.com/muodov))
+- Fix rules for xhamster [#649](https://github.com/duckduckgo/autoconsent/pull/649) ([@muodov](https://github.com/muodov))
+- Support another flavor of borlabs [#650](https://github.com/duckduckgo/autoconsent/pull/650) ([@muodov](https://github.com/muodov))
+- Add rule for macaron CMP [#651](https://github.com/duckduckgo/autoconsent/pull/651) ([@muodov](https://github.com/muodov))
+- add rule for a common cmp [#652](https://github.com/duckduckgo/autoconsent/pull/652) ([@muodov](https://github.com/muodov))
+- Add rule for ring.com [#654](https://github.com/duckduckgo/autoconsent/pull/654) ([@muodov](https://github.com/muodov))
+- add rule for nhnieuws.nl [#655](https://github.com/duckduckgo/autoconsent/pull/655) ([@muodov](https://github.com/muodov))
+- add rule for plos.org [#656](https://github.com/duckduckgo/autoconsent/pull/656) ([@muodov](https://github.com/muodov))
+- Add rule for help.twitter.com [#648](https://github.com/duckduckgo/autoconsent/pull/648) ([@muodov](https://github.com/muodov))
+- Add rule for anthropic [#647](https://github.com/duckduckgo/autoconsent/pull/647) ([@muodov](https://github.com/muodov))
+- add rule for adultfriendfinder.com [#646](https://github.com/duckduckgo/autoconsent/pull/646) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- increase the timeout in cookiebot to prevent race conditions [#653](https://github.com/duckduckgo/autoconsent/pull/653) ([@muodov](https://github.com/muodov))
+
+#### 🏠 Internal
+
+- Do not print the rule in creation script [#660](https://github.com/duckduckgo/autoconsent/pull/660) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.11.0 (Fri Feb 21 2025)
 
 #### 🚀 Enhancement

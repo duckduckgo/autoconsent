@@ -13,7 +13,11 @@
             "wait": 500
         },
         {
-            "eval": "EVAL_AFFINITY_SERIF_COM_0"
+            "cookieContains": "serif_manage_cookies_viewed"
+        },
+        {
+            "cookieContains": "serif_allow_analytics",
+            "negated": true
         }
     ]
 }
