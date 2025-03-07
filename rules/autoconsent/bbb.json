@@ -15,6 +15,9 @@
         },
         {
             "click": ".cookies-policy-dialog button.bds-button"
+        },
+        {
+            "waitForThenClick": ".cookies-message button.bds-button:not([name])"
         }
     ]
 }
