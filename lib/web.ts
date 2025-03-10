@@ -45,6 +45,7 @@ export default class AutoConsent {
     filtersEngine: FiltersEngine;
     protected sendContentMessage: MessageSender;
     protected cosmeticStyleSheet: CSSStyleSheet;
+    protected focusedElement: HTMLElement = null;
 
     constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
         evalState.sendContentMessage = sendContentMessage;
@@ -126,6 +127,25 @@ export default class AutoConsent {
             this.start();
         }
         this.updateState({ lifecycle: 'initialized' });
+    }
+
+    saveFocus() {
+        this.focusedElement = document.activeElement as HTMLElement;
+        if (this.focusedElement) {
+            this.config.logs.lifecycle && console.log('saving focus', this.focusedElement, location.href);
+        }
+    }
+
+    restoreFocus() {
+        if (this.focusedElement) {
+            this.config.logs.lifecycle && console.log('restoring focus', this.focusedElement, location.href);
+            try {
+                this.focusedElement.focus({ preventScroll: true }); // preventScroll doesn't work on Android https://issues.chromium.org/issues/41453122
+            } catch (e) {
+                this.config.logs.errors && console.warn('error restoring focus', e);
+            }
+            this.focusedElement = null;
+        }
     }
 
     addDynamicRules() {
@@ -344,6 +364,8 @@ export default class AutoConsent {
     async doOptOut(): Promise<boolean> {
         const logsConfig = this.config.logs;
         this.updateState({ lifecycle: 'runningOptOut' });
+        this.saveFocus();
+
         let optOutResult;
         if (!this.foundCmp) {
             logsConfig.errors && console.log('no CMP to opt out');
@@ -378,12 +400,15 @@ export default class AutoConsent {
             this.updateState({ lifecycle: optOutResult ? 'optOutSucceeded' : 'optOutFailed' });
         }
 
+        this.restoreFocus();
         return optOutResult;
     }
 
     async doOptIn(): Promise<boolean> {
         const logsConfig = this.config.logs;
         this.updateState({ lifecycle: 'runningOptIn' });
+        this.saveFocus();
+
         let optInResult;
         if (!this.foundCmp) {
             logsConfig.errors && console.log('no CMP to opt in');
@@ -418,6 +443,7 @@ export default class AutoConsent {
             this.updateState({ lifecycle: optInResult ? 'optInSucceeded' : 'optInFailed' });
         }
 
+        this.restoreFocus();
         return optInResult;
     }
 

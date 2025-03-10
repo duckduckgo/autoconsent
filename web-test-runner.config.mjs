@@ -9,6 +9,9 @@ export default {
             ts: true,
             tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
             target: 'es2021',
+            define: {
+                BUNDLE_FILTERLIST: 'false',
+            },
         }),
     ],
 };
