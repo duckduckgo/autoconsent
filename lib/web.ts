@@ -12,6 +12,8 @@ import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } 
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
 import { checkHeuristicPatterns } from './heuristics';
+import { domainsWithJsRules } from './domains-with-js-rules';
+import { easylistFilters } from './easylist-filters';
 
 export { snippets as evalSnippets } from './eval-snippets';
 
@@ -39,6 +41,8 @@ export default class AutoConsent {
         detectedPopups: [],
         heuristicPatterns: [],
         heuristicSnippets: [],
+        matchedFilters: [],
+        matchedJsRule: false,
         selfTest: null,
     };
     domActions: DomActions;
@@ -270,6 +274,7 @@ export default class AutoConsent {
         }
 
         this.detectHeuristics();
+        this.matchEasylist();
 
         if (foundCMPs.length === 0 && retries > 0) {
             await this.domActions.wait(500);
@@ -290,6 +295,28 @@ export default class AutoConsent {
                 this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
             }
         }
+    }
+
+    matchEasylist() {
+        const matchedJsRule = domainsWithJsRules.some((domain) => location.hostname.endsWith(domain));
+        const matchedFilters = easylistFilters
+            .filter((filter) => {
+                const domains = filter[0].split(',');
+                const selector = filter[1];
+                return domains.some((domain) => location.hostname.endsWith(domain)) && this.domActions.elementVisible(selector, 'any');
+            })
+            .map((filter) => filter[1]);
+        if (this.config.logs.lifecycle) {
+            if (matchedJsRule || matchedFilters.length > 0) {
+                console.log('matchedJsRule', matchedJsRule, 'matchedFilters', matchedFilters);
+            } else {
+                console.log('no easylist filters matched');
+            }
+        }
+        this.updateState({
+            matchedJsRule: this.state.matchedJsRule && matchedJsRule,
+            matchedFilters: Array.from(new Set([...this.state.matchedFilters, ...matchedFilters])).sort(),
+        });
     }
 
     /**

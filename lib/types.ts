@@ -91,5 +91,7 @@ export type ConsentState = {
     detectedPopups: string[]; // Names of CMP rules where `detectPopup` returned true.
     heuristicPatterns: string[]; // Matched heuristic patterns
     heuristicSnippets: string[]; // Matched heuristic snippets
+    matchedFilters: string[]; // Matched EasyList filters
+    matchedJsRule: boolean; // whether there's a JS Easylist rule for this domain
     selfTest: boolean; // null if no self test was run, otherwise it holds the result of the self test.
 };
