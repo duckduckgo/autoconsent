@@ -227,7 +227,7 @@ async function rebuildFilterList() {
     }
 
     for (const [target, action] of parseFilterlist('easylist_cookie_specific_uBO.txt')) {
-        if (!action) {
+        if (!action || !target) {
             continue;
         }
 
