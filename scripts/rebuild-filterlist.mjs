@@ -14,13 +14,12 @@ const libDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../lib')
 
 const easylistRevision = fs.readFileSync(path.join(rulesDir, 'filterlists', 'easylist_revision.txt'), 'utf-8');
 const domainSpecificLists = [
-    'easylist_cookie_specific_uBO.txt',
     'easylist_cookie_specific_hide.txt',
     'easylist_cookie_international_specific_hide.txt',
 ];
 
 /** @type {Set<string>} */
-const domainsWithJsRules = new Set();
+const domainsWithUboRules = new Set();
 
 /** @type {[string, string][]} */
 const filterRules = [];
@@ -233,7 +232,7 @@ async function rebuildFilterList() {
         }
 
         target.split(',').forEach((domain) => {
-            domainsWithJsRules.add(domain);
+            domainsWithUboRules.add(domain);
         });
     }
 
@@ -242,8 +241,8 @@ async function rebuildFilterList() {
     }
 
     // Write domains with JS rules to a file
-    const jsDomainsPath = path.join(libDir, 'domains-with-js-rules.ts');
-    fs.writeFileSync(jsDomainsPath, `export const domainsWithJsRules = ${JSON.stringify(Array.from(domainsWithJsRules), null, 4)};\n`, 'utf-8');
+    const jsDomainsPath = path.join(libDir, 'domains-with-ubo-rules.ts');
+    fs.writeFileSync(jsDomainsPath, `export const domainsWithUboRules = ${JSON.stringify(Array.from(domainsWithUboRules), null, 4)};\n`, 'utf-8');
     console.log(`Saved domains with JS rules to ${jsDomainsPath}`);
 
     const filterRulesPath = path.join(libDir, 'easylist-filters.ts');

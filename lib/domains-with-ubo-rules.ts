@@ -1,4 +1,4 @@
-export const domainsWithJsRules = [
+export const domainsWithUboRules = [
     "mohito.com",
     "housebrand.com",
     "cropp.com",

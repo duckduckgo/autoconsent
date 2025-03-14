@@ -12,7 +12,7 @@ import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } 
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
 import { checkHeuristicPatterns } from './heuristics';
-import { domainsWithJsRules } from './domains-with-js-rules';
+import { domainsWithUboRules } from './domains-with-ubo-rules';
 import { easylistFilters } from './easylist-filters';
 
 export { snippets as evalSnippets } from './eval-snippets';
@@ -42,7 +42,7 @@ export default class AutoConsent {
         heuristicPatterns: [],
         heuristicSnippets: [],
         matchedFilters: [],
-        matchedJsRule: false,
+        matchedUboRule: false,
         selfTest: null,
     };
     domActions: DomActions;
@@ -298,23 +298,33 @@ export default class AutoConsent {
     }
 
     matchEasylist() {
-        const matchedJsRule = domainsWithJsRules.some((domain) => location.hostname.endsWith(domain));
+        const matchedUboRule = domainsWithUboRules.some((domain) => location.hostname.endsWith(domain));
         const matchedFilters = easylistFilters
             .filter((filter) => {
                 const domains = filter[0].split(',');
                 const selector = filter[1];
-                return domains.some((domain) => location.hostname.endsWith(domain)) && this.domActions.elementVisible(selector, 'any');
+                let match = false;
+                try {
+                    match = domains.some((domain) => location.hostname.endsWith(domain)) && this.domActions.elementVisible(selector, 'any');
+                } catch (e) {
+                    console.error('Error matching easylist filter', filter, e);
+                    this.sendContentMessage({
+                        type: 'autoconsentError',
+                        details: `${e}`,
+                    });
+                }
+                return match;
             })
             .map((filter) => filter[1]);
         if (this.config.logs.lifecycle) {
-            if (matchedJsRule || matchedFilters.length > 0) {
-                console.log('matchedJsRule', matchedJsRule, 'matchedFilters', matchedFilters);
+            if (matchedUboRule || matchedFilters.length > 0) {
+                console.log('matchedUboRule', matchedUboRule, 'matchedFilters', matchedFilters);
             } else {
                 console.log('no easylist filters matched');
             }
         }
         this.updateState({
-            matchedJsRule: this.state.matchedJsRule && matchedJsRule,
+            matchedUboRule: this.state.matchedUboRule || matchedUboRule,
             matchedFilters: Array.from(new Set([...this.state.matchedFilters, ...matchedFilters])).sort(),
         });
     }
