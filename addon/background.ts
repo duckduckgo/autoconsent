@@ -143,7 +143,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
         case 'optOutResult':
         case 'optInResult':
             if (msg.result) {
-                await showOptOutStatus(tabId, 'working', msg.cmp);
+                // make sure we set the flag first, so that it's set by the time we handle autoconsentDone
                 if (msg.scheduleSelfTest) {
                     await storageSet({
                         [`selfTest${tabId}`]: frameId,
@@ -161,7 +161,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             await showOptOutStatus(tabId, 'success', msg.cmp);
             // sometimes self-test needs to be done in another frame
             const selfTestKey = `selfTest${tabId}`;
-            const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
+            const selfTestFrameId = await storageGet(selfTestKey);
 
             if (typeof selfTestFrameId === 'number') {
                 logsConfig.lifecycle && console.log(`Requesting self-test in ${selfTestFrameId}`);
