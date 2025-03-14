@@ -19,15 +19,15 @@ const domainSpecificLists = [
     'easylist_cookie_international_specific_hide.txt',
 ];
 
-/** @type {string[]} */
-const domainsWithJsRules = [];
+/** @type {Set<string>} */
+const domainsWithJsRules = new Set();
 
 /** @type {[string, string][]} */
 const filterRules = [];
 
 const MAX_DOMAIN_RANK = 100000;
 
-/** @typedef {{ rules: Record<string, string[]>, domainsWithJsRules: string[] }} FilterlistJSON */
+/** @typedef {{ rules: Record<string, string[]> }} FilterlistJSON */
 
 /** @type {Map<string, string>} */
 let domainMap;
@@ -55,7 +55,7 @@ async function processDomainSpecificFilterList(listFileName) {
     console.log(`Processing ${listFileName}`);
 
     /** @type {FilterlistJSON} */
-    const filterlistJSON = { rules: {}, domainsWithJsRules: [] };
+    const filterlistJSON = { rules: {} };
 
     for (const [target, action] of parseFilterlist(listFileName)) {
         if (!action) {
@@ -68,16 +68,6 @@ async function processDomainSpecificFilterList(listFileName) {
             filterlistJSON.rules[target] = [action];
         } else {
             filterlistJSON.rules[target].push(action);
-        }
-    }
-
-    // Remove any targets that contain a +js rule. we do it this way because
-    // when a target has a :js rule, we must also remove any css rules
-    for (const item in filterlistJSON.rules) {
-        const containsJS = filterlistJSON.rules[item].some((filter) => filter.includes('+js'));
-        if (containsJS) {
-            filterlistJSON.rules[item] = filterlistJSON.rules[item].filter((filter) => !filter.includes('+js'));
-            filterlistJSON.domainsWithJsRules = filterlistJSON.domainsWithJsRules.concat(item.split(','));
         }
     }
 
@@ -120,7 +110,6 @@ async function processDomainSpecificFilterList(listFileName) {
     //     }
     // }
 
-    domainsWithJsRules.push(...filterlistJSON.domainsWithJsRules);
     await convertAndWriteABP(filterlistJSON, listFileName);
 }
 
@@ -238,13 +227,23 @@ async function rebuildFilterList() {
         filterRules.push([target, action]);
     }
 
+    for (const [target, action] of parseFilterlist('easylist_cookie_specific_uBO.txt')) {
+        if (!action) {
+            continue;
+        }
+
+        target.split(',').forEach((domain) => {
+            domainsWithJsRules.add(domain);
+        });
+    }
+
     for (const list of domainSpecificLists) {
         await processDomainSpecificFilterList(list);
     }
 
     // Write domains with JS rules to a file
     const jsDomainsPath = path.join(libDir, 'domains-with-js-rules.ts');
-    fs.writeFileSync(jsDomainsPath, `export const domainsWithJsRules = ${JSON.stringify(domainsWithJsRules, null, 4)};\n`, 'utf-8');
+    fs.writeFileSync(jsDomainsPath, `export const domainsWithJsRules = ${JSON.stringify(Array.from(domainsWithJsRules), null, 4)};\n`, 'utf-8');
     console.log(`Saved domains with JS rules to ${jsDomainsPath}`);
 
     const filterRulesPath = path.join(libDir, 'easylist-filters.ts');
