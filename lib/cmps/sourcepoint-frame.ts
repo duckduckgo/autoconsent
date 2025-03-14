@@ -113,17 +113,17 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         if (!this.isManagerOpen()) {
-            const actionable = await this.waitForVisible('.sp_choice_type_12,.sp_choice_type_13');
+            const actionable = await this.waitForVisible('.sp_choice_type_12,.sp_choice_type_13,[data-choice="1739968508799"]');
             if (!actionable) {
                 return false;
             }
 
-            if (!this.elementExists('.sp_choice_type_12')) {
+            if (!this.elementExists('.sp_choice_type_12,[data-choice="1739968508799"]')) {
                 // do not sell button
                 return this.click('.sp_choice_type_13');
             }
 
-            this.click('.sp_choice_type_12');
+            this.click('.sp_choice_type_12,[data-choice="1739968508799"]');
             // the page may navigate at this point but that's okay
             await waitFor(() => this.isManagerOpen(), 200, 100);
         }
