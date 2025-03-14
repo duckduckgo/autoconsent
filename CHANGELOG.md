@@ -1,3 +1,33 @@
+# v12.14.0 (Fri Mar 14 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to b6ba5e180e756441787c7415b894e2ade23a758f [#692](https://github.com/duckduckgo/autoconsent/pull/692) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix sourcepoint rule for US version of ft.com [#693](https://github.com/duckduckgo/autoconsent/pull/693) ([@muodov](https://github.com/muodov))
+- More site-specific rules [#676](https://github.com/duckduckgo/autoconsent/pull/676) ([@muodov](https://github.com/muodov))
+- Fix a race condition with self-test in test extension [#690](https://github.com/duckduckgo/autoconsent/pull/690) ([@muodov](https://github.com/muodov))
+- add rule for web.de [#691](https://github.com/duckduckgo/autoconsent/pull/691) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 12 updates [#689](https://github.com/duckduckgo/autoconsent/pull/689) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump @ghostery/adblocker-content from 2.3.1 to 2.5.0 [#607](https://github.com/duckduckgo/autoconsent/pull/607) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker from 2.3.1 to 2.5.0 [#608](https://github.com/duckduckgo/autoconsent/pull/608) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- support no-reject Osano popups [#683](https://github.com/duckduckgo/autoconsent/pull/683) ([@muodov](https://github.com/muodov))
+- Add rule for ok.ru [#665](https://github.com/duckduckgo/autoconsent/pull/665) ([@muodov](https://github.com/muodov))
+- Automatically restore element focus after the opt-in/opt-out [#687](https://github.com/duckduckgo/autoconsent/pull/687) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Update Asana sync action [#694](https://github.com/duckduckgo/autoconsent/pull/694) ([@sammacbeth](https://github.com/sammacbeth))
+- Bump tldts-experimental from 6.1.82 to 6.1.84 [#688](https://github.com/duckduckgo/autoconsent/pull/688) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.13.0 (Fri Mar 07 2025)
 
 #### 🚀 Enhancement
