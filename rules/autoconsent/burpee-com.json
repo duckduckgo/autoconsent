@@ -1,6 +1,9 @@
 {
     "name": "burpee.com",
     "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?burpee.com"
+    },
     "prehideSelectors": ["#notice-cookie-block"],
     "detectCmp": [{ "exists": "#notice-cookie-block" }],
     "detectPopup": [{ "exists": "#html-body #notice-cookie-block" }],
