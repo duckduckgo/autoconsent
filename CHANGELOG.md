@@ -1,3 +1,26 @@
+# v12.15.0 (Fri Mar 21 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 9232b2df4b9314504bc835d2aaf3fb72c3aa872a [#700](https://github.com/duckduckgo/autoconsent/pull/700) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Update deepl rule to match new markup [#695](https://github.com/duckduckgo/autoconsent/pull/695) ([@noisysocks](https://github.com/noisysocks) [@muodov](https://github.com/muodov))
+- Add rule for caranddriver.com [#696](https://github.com/duckduckgo/autoconsent/pull/696) ([@noisysocks](https://github.com/noisysocks))
+- Add AdOpt CMP [#697](https://github.com/duckduckgo/autoconsent/pull/697) ([@noisysocks](https://github.com/noisysocks))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group with 2 updates [#699](https://github.com/duckduckgo/autoconsent/pull/699) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.14.0 (Fri Mar 14 2025)
 
 #### 🚀 Enhancement
