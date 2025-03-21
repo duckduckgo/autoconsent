@@ -62,6 +62,7 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
+    EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
