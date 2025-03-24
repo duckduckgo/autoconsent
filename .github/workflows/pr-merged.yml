@@ -1,0 +1,37 @@
+name: 'PR Merged Actions'
+
+on:
+    pull_request_target:
+        types:
+            - closed
+
+jobs:
+    process-asana-tasks:
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.merged == true
+        steps:
+            - name: Mark tasks as completed
+              uses: duckduckgo/native-github-asana-sync@v1.5
+              with:
+                  action: 'notify-pr-merged'
+                  asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
+                  trigger-phrase: 'Task/Issue URL:'
+                  is-complete: 'true'
+
+            - name: Find Asana task ID
+              id: find-task
+              uses: duckduckgo/native-github-asana-sync@v1.5
+              with:
+                  action: 'find-asana-task-id'
+                  asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
+                  trigger-phrase: 'Task/Issue URL:'
+
+            - name: Move task to "Scheduled for release" section
+              if: steps.find-task.outputs.asanaTaskId
+              uses: duckduckgo/native-github-asana-sync@v1.5
+              with:
+                  action: 'add-task-asana-project'
+                  asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
+                  asana-project: '1203268166580279' # CPM (Cookie Pop-up Management) Triage project
+                  asana-section: '1207140808076253' # "Scheduled for release" section ID
+                  asana-task-id: ${{ steps.find-task.outputs.asanaTaskId }}
