@@ -10,14 +10,6 @@ jobs:
         runs-on: ubuntu-latest
         if: github.event.pull_request.merged == true
         steps:
-            - name: Mark tasks as completed
-              uses: duckduckgo/native-github-asana-sync@v1.5
-              with:
-                  action: 'notify-pr-merged'
-                  asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
-                  trigger-phrase: 'Task/Issue URL:'
-                  is-complete: 'true'
-
             - name: Find Asana task ID
               id: find-task
               uses: duckduckgo/native-github-asana-sync@v1.5
