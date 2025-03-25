@@ -1,3 +1,26 @@
+# v12.16.0 (Tue Mar 25 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 43935b4bf6a715553ae4d2ccc628462fad8188f2 [#704](https://github.com/duckduckgo/autoconsent/pull/704) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix rule for bbb.org [#678](https://github.com/duckduckgo/autoconsent/pull/678) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add Asana automations [#701](https://github.com/duckduckgo/autoconsent/pull/701) ([@noisysocks](https://github.com/noisysocks))
+- Bump the dev-dependencies group with 5 updates [#702](https://github.com/duckduckgo/autoconsent/pull/702) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tldts-experimental from 6.1.84 to 6.1.85 [#703](https://github.com/duckduckgo/autoconsent/pull/703) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Improve burpee.com rule [#698](https://github.com/duckduckgo/autoconsent/pull/698) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+
+---
+
 # v12.15.0 (Fri Mar 21 2025)
 
 #### 🚀 Enhancement
