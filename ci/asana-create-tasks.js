@@ -14,6 +14,7 @@ const releaseNotes = md.render(releaseNotesRaw);
 const templateTaskGid = '1206774921409831';
 const autoconsentProjectGid = '1201844467387842';
 const releaseSectionGid = '1202253736774466';
+const scheduledForReleaseSectionGid = '1207140808076253';
 const projectExtractorRegex = /\[\[project_gids=(.*)]]/;
 
 /**
@@ -95,6 +96,32 @@ const waitForJobSuccess = async (job_gid) => {
     });
 };
 
+/**
+ * Generates an HTML summary of the tasks in the "Scheduled for Release"
+ * section, then marks those tasks as completed.
+ *
+ * @returns {Promise<string>}
+ */
+const processReleaseTasks = async () => {
+    const { data: tasks } = await asana.tasks.getTasksForSection(scheduledForReleaseSectionGid, {
+        opt_fields: 'name,permalink_url,completed',
+        completed_since: 'now', // Fetch only incomplete tasks
+    });
+
+    if (!tasks || tasks.length === 0) {
+        return '';
+    }
+
+    let taskListHtml = '<strong>Tasks included in this release:</strong>\n<ul>';
+    for (const task of tasks) {
+        taskListHtml += getLink(task.permalink_url) + '\n';
+        await asana.tasks.updateTask(task.gid, { completed: true });
+    }
+    taskListHtml += '</ul>';
+
+    return taskListHtml;
+};
+
 const asanaCreateTasks = async () => {
     setupAsana();
 
@@ -106,7 +133,7 @@ const asanaCreateTasks = async () => {
     const updatedNotes = notes
         .replace('[[version]]', version)
         .replace('[[release_url]]', getLink(releaseUrl, 'Autoconsent Release'))
-        .replace('[[notes]]', releaseNotes)
+        .replace('[[notes]]', [await processReleaseTasks(), releaseNotes].filter(Boolean).join('\n\n'))
         .replace(/<\/?p>/gi, '\n')
         // Asana supports only h1 and h2
         .replace(/<(h3|h4)>/gi, '<h2>')
