@@ -112,9 +112,9 @@ const processReleaseTasks = async () => {
         return '';
     }
 
-    let taskListHtml = '<strong>Tasks included in this release:</strong>\n<ul>';
+    let taskListHtml = '<strong>Tasks included in this release:</strong>\n<ul>\n';
     for (const task of tasks) {
-        taskListHtml += getLink(task.permalink_url) + '\n';
+        taskListHtml += '<li>' + getLink(task.permalink_url) + '</li>\n';
         await asana.tasks.updateTask(task.gid, { completed: true });
     }
     taskListHtml += '</ul>';
