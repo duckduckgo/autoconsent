@@ -8,8 +8,11 @@
             "if": { "exists": "button[data-testid='cookie-banner-strict-accept-selected']" },
             "then": [{ "click": "button[data-testid='cookie-banner-strict-accept-selected']" }],
             "else": [{ "hide": "[data-testid='dl-cookieBanner']" }]
+        },
+        {
+            "if": { "exists": "#noop" },
+            "then": [{ "click": "#noop" }]
         }
     ],
-    "optIn": [{ "click": "button[data-testid='cookie-banner-strict-accept-all'],button[data-testid='cookie-banner-lax-close-button']" }],
-    "noop": "noop"
+    "optIn": [{ "click": "button[data-testid='cookie-banner-strict-accept-all'],button[data-testid='cookie-banner-lax-close-button']" }]
 }
