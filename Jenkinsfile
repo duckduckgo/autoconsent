@@ -77,7 +77,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
                     extensions: [[$class: 'LocalBranch']],
-                    userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'GitHubAccess', url: 'https://github.com/duckduckgo/autoconsent.git']]])
+                    userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'autoconsent-rw', url: 'https://github.com/duckduckgo/autoconsent.git']]])
             }
         }
 
