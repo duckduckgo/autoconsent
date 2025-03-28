@@ -10,5 +10,6 @@
             "else": [{ "hide": "[data-testid='dl-cookieBanner']" }]
         }
     ],
-    "optIn": [{ "click": "button[data-testid='cookie-banner-strict-accept-all'],button[data-testid='cookie-banner-lax-close-button']" }]
+    "optIn": [{ "click": "button[data-testid='cookie-banner-strict-accept-all'],button[data-testid='cookie-banner-lax-close-button']" }],
+    "noop": "noop"
 }
