@@ -1,9 +1,10 @@
-def runPlaywrightTests(resultDir, browser, grep) {
+def runPlaywrightTests(resultDir, browser, testFiles) {
     try {
         timeout(120) {
+            def testFilesArg = testFiles.join(' ')
             sh """
                 rm -f results.xml
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test tests/_sample-test.spec.ts --project $browser --reporter=junit --grep "$grep"|| true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test ${testFilesArg} --project ${browser} --reporter=junit || true
             """
         }
     } finally {
@@ -19,13 +20,45 @@ def withEnvFile(envfile, Closure cb) {
     }
 }
 
+def getModifiedFiles() {
+    if (env.CHANGE_ID) {
+        def changedFiles = sh(script: "git diff --name-only origin/${env.CHANGE_TARGET} HEAD", returnStdout: true).trim()
+        return changedFiles.split("\n")
+    } else {
+        return []
+    }
+}
+
+def getTestsToRun(modifiedFiles) {
+    def testsToRun = []
+
+    // Run any modified test files
+    modifiedFiles.each { file ->
+        if (file ==~ /tests\/.*\.spec\.ts/) {
+            testsToRun.add(file)
+        }
+    }
+
+    // Run the corresponding test file for any modified rule file
+    modifiedFiles.each { file ->
+        def matcher = file =~ /rules\/autoconsent\/(.+)\.json/
+        if (matcher.matches()) {
+            def baseName = matcher.group(1)
+            def testFile = "tests/${baseName}.spec.ts"
+            if (fileExists(testFile) && !testsToRun.contains(testFile)) {
+                testsToRun.add(testFile)
+            }
+        }
+    }
+
+    return testsToRun
+}
+
 pipeline {
     agent { label 'autoconsent-crawler' }
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
-        string(name: 'GREP', defaultValue: '', description: 'filter for tests matching a specific string')
-        string(name: 'NSITES', defaultValue: '1', description: 'number of sites to test per CMP')
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
     }
     environment {
@@ -47,7 +80,7 @@ pipeline {
                     userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'GitHubAccess', url: 'https://github.com/duckduckgo/autoconsent.git']]])
             }
         }
-        
+
         stage('Build') {
             steps {
                 sh '''
@@ -63,13 +96,22 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Test') {
             steps {
-                script { 
+                script {
                     def testsFailed = 0
                     def testsTotal = 0
-                    withEnv(["NSITES=${params.NSITES}}"]) {
+
+                    def modifiedFiles = getModifiedFiles()
+                    echo "Modified files: ${modifiedFiles.join(', ')}"
+
+                    def testsToRun = getTestsToRun(modifiedFiles)
+                    echo "Tests to run: ${testsToRun.join(', ')}"
+
+                    if (testsToRun.isEmpty()) {
+                        echo "No tests to run for this change"
+                    } else {
                         def testEnvs = [
                             "${params.TEST_RESULT_ROOT}/de.env",
                             "${params.TEST_RESULT_ROOT}/us.env",
@@ -77,19 +119,30 @@ pipeline {
                         ]
                         for (testEnv in testEnvs) {
                             withEnvFile(testEnv) {
-                                def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, params.GREP)
+                                def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
                                 testsFailed += summary.failCount
                                 testsTotal += summary.totalCount
                             }
-                        }   
+                        }
                     }
+
+                    def status = 'SUCCESS'
+                    def description = "No tests to run"
+
+                    if (testsTotal > 0) {
+                        description = "${testsFailed}/${testsTotal} failed"
+                        if (testsFailed > 0) {
+                            status = 'FAILURE'
+                        }
+                    }
+
                     githubNotify(
-                            account: 'duckduckgo', 
-                            repo: 'autoconsent', 
-                            context: 'Tests / Coverage sample',
-                            sha: "${env.GIT_COMMIT}", 
-                            description: "${testsFailed}/${testsTotal} failed", 
-                            status: testsFailed > 50 ? 'FAILURE' : 'SUCCESS')
+                            account: 'duckduckgo',
+                            repo: 'autoconsent',
+                            context: 'Tests / Changed files',
+                            sha: "${env.GIT_COMMIT}",
+                            description: description,
+                            status: status)
                 }
             }
         }
