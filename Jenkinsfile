@@ -144,7 +144,8 @@ pipeline {
                             context: 'Tests / Changed files',
                             sha: "${prHeadSha}",
                             description: description,
-                            status: status
+                            status: status,
+                            credentialsId: 'autoconsent-rw'
                     )
                 }
             }
