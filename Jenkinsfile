@@ -33,18 +33,19 @@ def getTestsToRun(modifiedFiles) {
     def testsToRun = []
 
     // Run any modified test files
-    modifiedFiles.each { file ->
-        if (file ==~ /tests\/.*\.spec\.ts/) {
+    for (file in modifiedFiles) {
+        if (file.startsWith("tests/") && file.endsWith(".spec.ts")) {
             testsToRun.add(file)
         }
     }
 
     // Run the corresponding test file for any modified rule file
-    modifiedFiles.each { file ->
-        def matcher = file =~ /rules\/autoconsent\/(.+)\.json/
-        if (matcher.matches()) {
-            def baseName = matcher.group(1)
+    for (file in modifiedFiles) {
+        if (file.startsWith("rules/autoconsent/") && file.endsWith(".json")) {
+            def fileName = file.substring("rules/autoconsent/".length())
+            def baseName = fileName.substring(0, fileName.lastIndexOf(".json"))
             def testFile = "tests/${baseName}.spec.ts"
+
             if (fileExists(testFile) && !testsToRun.contains(testFile)) {
                 testsToRun.add(testFile)
             }
