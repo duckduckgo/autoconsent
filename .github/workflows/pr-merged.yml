@@ -12,7 +12,7 @@ jobs:
         steps:
             - name: Find Asana task ID(s)
               id: find-tasks
-              uses: noisysocks/native-github-asana-sync@2f7adf9cbd90a5cd971498919f4d9c5831143a29
+              uses: duckduckgo/native-github-asana-sync@main
               with:
                   action: 'find-asana-task-ids'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
@@ -21,7 +21,7 @@ jobs:
 
             - name: Move task(s) to "Scheduled for release" section
               if: steps.find-tasks.outputs.asanaTaskIds
-              uses: noisysocks/native-github-asana-sync@2f7adf9cbd90a5cd971498919f4d9c5831143a29
+              uses: duckduckgo/native-github-asana-sync@main
               with:
                   action: 'add-task-asana-project'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
