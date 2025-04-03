@@ -10,20 +10,21 @@ jobs:
         runs-on: ubuntu-latest
         if: github.event.pull_request.merged == true
         steps:
-            - name: Find Asana task ID
-              id: find-task
-              uses: duckduckgo/native-github-asana-sync@v1.5
+            - name: Find Asana task ID(s)
+              id: find-tasks
+              uses: noisysocks/native-github-asana-sync@2ff5d8939713f26e2cafb87742ad883969f53240
               with:
-                  action: 'find-asana-task-id'
+                  action: 'find-asana-task-ids'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   trigger-phrase: 'Task/Issue URL:'
+                  asana-project: '1203268166580279' # CPM (Cookie Pop-up Management) Triage project
 
-            - name: Move task to "Scheduled for release" section
-              if: steps.find-task.outputs.asanaTaskId
-              uses: duckduckgo/native-github-asana-sync@v1.5
+            - name: Move task(s) to "Scheduled for release" section
+              if: steps.find-tasks.outputs.asanaTaskIds
+              uses: noisysocks/native-github-asana-sync@2ff5d8939713f26e2cafb87742ad883969f53240
               with:
                   action: 'add-task-asana-project'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   asana-project: '1203268166580279' # CPM (Cookie Pop-up Management) Triage project
                   asana-section: '1207140808076253' # "Scheduled for release" section ID
-                  asana-task-id: ${{ steps.find-task.outputs.asanaTaskId }}
+                  asana-task-id: ${{ steps.find-tasks.outputs.asanaTaskIds }}
