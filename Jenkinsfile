@@ -137,12 +137,11 @@ pipeline {
                         }
                     }
 
-                    def prHeadSha = env.CHANGE_ID ? sh(script: "git rev-parse HEAD^2", returnStdout: true).trim() : env.GIT_COMMIT
                     githubNotify(
                             account: 'duckduckgo',
                             repo: 'autoconsent',
                             context: 'Tests / Changed files',
-                            sha: "${prHeadSha}",
+                            sha: "${env.GIT_COMMIT}",
                             description: description,
                             status: status,
                             credentialsId: 'autoconsent-rw'
