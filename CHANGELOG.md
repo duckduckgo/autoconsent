@@ -1,3 +1,34 @@
+# v12.17.0 (Mon Apr 14 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to e1d6329233498d8cb5a5fe473e516475ee3da6e8 [#713](https://github.com/duckduckgo/autoconsent/pull/713) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group across 1 directory with 5 updates [#715](https://github.com/duckduckgo/autoconsent/pull/715) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rule for nos.nl [#712](https://github.com/duckduckgo/autoconsent/pull/712) ([@noisysocks](https://github.com/noisysocks))
+- Update EasyList Cookie to 54998140e5d5e212ead7be504a42fe3afb8cfdc6 [#708](https://github.com/duckduckgo/autoconsent/pull/708) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Jenkins CI: Use GIT_COMMIT when notifying GitHub [#714](https://github.com/duckduckgo/autoconsent/pull/714) ([@noisysocks](https://github.com/noisysocks))
+- Update Asana integration to support multiple tasks and ignore tasks not in CPM project [#707](https://github.com/duckduckgo/autoconsent/pull/707) ([@noisysocks](https://github.com/noisysocks))
+- Update CI pipeline to run only relevant tests for a PR [#710](https://github.com/duckduckgo/autoconsent/pull/710) ([@noisysocks](https://github.com/noisysocks))
+- Fix HTML formatting for task list in release notes [#705](https://github.com/duckduckgo/autoconsent/pull/705) ([@noisysocks](https://github.com/noisysocks))
+
+#### ⚠️ Pushed to `main`
+
+- Try main branch of native-github-asana-sync ([@noisysocks](https://github.com/noisysocks))
+- Try a different build of native-github-asana-sync ([@noisysocks](https://github.com/noisysocks))
+- Try different build of native-github-asana-sync ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.16.0 (Tue Mar 25 2025)
 
 #### 🚀 Enhancement
