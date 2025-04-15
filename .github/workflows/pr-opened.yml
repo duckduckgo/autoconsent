@@ -9,6 +9,7 @@ on:
 jobs:
     process-asana-tasks:
         runs-on: ubuntu-latest
+        if: "contains(github.event.pull_request.body, 'Task/Issue URL:')"
         steps:
             - name: Add comment to Asana task(s)
               uses: duckduckgo/native-github-asana-sync@main

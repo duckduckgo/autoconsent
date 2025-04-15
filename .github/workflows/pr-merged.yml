@@ -8,7 +8,7 @@ on:
 jobs:
     process-asana-tasks:
         runs-on: ubuntu-latest
-        if: github.event.pull_request.merged == true
+        if: "contains(github.event.pull_request.body, 'Task/Issue URL:') && github.event.pull_request.merged == true"
         steps:
             - name: Find Asana task ID(s)
               id: find-tasks
