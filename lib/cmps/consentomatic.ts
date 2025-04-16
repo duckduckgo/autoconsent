@@ -44,7 +44,7 @@ export class ConsentOMaticCMP implements AutoCMP {
     }
 
     hasMatchingUrlPattern(): boolean {
-        return false
+        return false;
     }
 
     async detectCmp(): Promise<boolean> {
