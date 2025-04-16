@@ -257,11 +257,9 @@ export default class AutoConsent {
             }
             return cmp.runContext.frame || false
         })
-        let detectionCount = 0
 
         const detectCmp = async (cmp: AutoCMP) => {
             try {
-                detectionCount += 1;
                 const result = await cmp.detectCmp();
                 if (result) {
                     logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
