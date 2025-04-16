@@ -83,10 +83,14 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
             return false;
         }
 
-        if (runCtx.urlPattern && !window.location.href.match(runCtx.urlPattern)) {
+        if (runCtx.urlPattern && !this.hasMatchingUrlPattern()) {
             return false;
         }
         return true;
+    }
+
+    hasMatchingUrlPattern(): boolean {
+        return this.runContext?.urlPattern && !!window.location.href.match(this.runContext.urlPattern)
     }
 
     detectCmp(): Promise<boolean> {

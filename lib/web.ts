@@ -249,11 +249,19 @@ export default class AutoConsent {
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
 
-        for (const cmp of this.rules) {
+        const isTop = window.top === window;
+        // refilter relevant rules for this context
+        const rulesForContext = this.rules.filter(cmp => {
+            if (isTop) {
+                return cmp.runContext.main || cmp.runContext === undefined
+            }
+            return cmp.runContext.frame || false
+        })
+        let detectionCount = 0
+
+        const detectCmp = async (cmp: AutoCMP) => {
             try {
-                if (!cmp.checkRunContext()) {
-                    continue;
-                }
+                detectionCount += 1;
                 const result = await cmp.detectCmp();
                 if (result) {
                     logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
@@ -268,6 +276,21 @@ export default class AutoConsent {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
             }
         }
+    
+        // collect relevant site-specific rules and run them first
+        await Promise.all(rulesForContext
+            .filter(cmp => cmp.hasMatchingUrlPattern())
+            .map(detectCmp))
+
+        // // exit early if we already found a site-specific popup
+        if (foundCMPs.length > 0) {
+            return foundCMPs
+        }
+
+        // // check generic popups
+        await Promise.all(rulesForContext
+            .filter(cmp => !cmp.hasMatchingUrlPattern() && cmp.checkRunContext())
+            .map(detectCmp))
 
         this.detectHeuristics();
 

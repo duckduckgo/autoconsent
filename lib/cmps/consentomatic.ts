@@ -43,6 +43,10 @@ export class ConsentOMaticCMP implements AutoCMP {
         return true;
     }
 
+    hasMatchingUrlPattern(): boolean {
+        return false
+    }
+
     async detectCmp(): Promise<boolean> {
         const matchResults = this.config.detectors.map((detectorConfig) => matches(detectorConfig.presentMatcher));
         return matchResults.some((r) => !!r);
