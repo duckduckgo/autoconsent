@@ -157,4 +157,21 @@ export class DomActions implements DomActionsProvider {
         }
         return this.querySelectorChain(selector);
     }
+
+    waitForMutation(selector: ElementSelector): Promise<boolean> {
+        const node = this.elementSelector(selector);
+        if (node.length === 0) {
+            throw new Error(`${selector} did not match any elements`);
+        }
+        return new Promise((resolve) => {
+            const observer = new MutationObserver(() => {
+                observer.disconnect();
+                resolve(true);
+            });
+            observer.observe(node[0], {
+                subtree: true,
+                childList: true,
+            });
+        });
+    }
 }
