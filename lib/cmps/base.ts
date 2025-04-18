@@ -200,7 +200,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
     async detectCmp() {
         if (this.rule.detectCmp) {
-            return this._runRulesParallel(this.rule.detectCmp);
+            return this._runRulesSequentially(this.rule.detectCmp);
         }
         return false;
     }
