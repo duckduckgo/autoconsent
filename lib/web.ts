@@ -278,7 +278,7 @@ export default class AutoConsent {
                 await Promise.all([this.domActions.wait(500), this.domActions.waitForMutation('html')]);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
-                return []
+                return [];
             }
 
             return this.findCmp(retries - 1);
