@@ -10,19 +10,21 @@ jobs:
     process-asana-tasks:
         runs-on: ubuntu-latest
         steps:
-            - name: Add comment to Asana task(s)
+            - name: Find Asana task ID(s)
+              id: find-tasks
               uses: duckduckgo/native-github-asana-sync@main
+              continue-on-error: true
               with:
-                  action: 'add-asana-comment'
+                  action: 'find-asana-task-ids'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   trigger-phrase: 'Task/Issue URL:'
                   asana-project: '1203268166580279' # CPM (Cookie Pop-up Management) Triage project
 
-            - name: Find Asana task ID(s)
-              id: find-tasks
+            - name: Add comment to Asana task(s)
+              if: steps.find-tasks.outputs.asanaTaskIds
               uses: duckduckgo/native-github-asana-sync@main
               with:
-                  action: 'find-asana-task-ids'
+                  action: 'add-asana-comment'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   trigger-phrase: 'Task/Issue URL:'
                   asana-project: '1203268166580279' # CPM (Cookie Pop-up Management) Triage project

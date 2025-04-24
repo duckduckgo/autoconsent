@@ -13,6 +13,7 @@ jobs:
             - name: Find Asana task ID(s)
               id: find-tasks
               uses: duckduckgo/native-github-asana-sync@main
+              continue-on-error: true
               with:
                   action: 'find-asana-task-ids'
                   asana-pat: ${{ secrets.ASANA_ACCESS_TOKEN }}
