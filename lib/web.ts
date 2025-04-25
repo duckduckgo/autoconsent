@@ -251,11 +251,18 @@ export default class AutoConsent {
 
         const isTop = window.top === window;
         // refilter relevant rules for this context
-        const rulesForContext = this.rules.filter((cmp) => {
-            if (isTop) {
-                return cmp.runContext.main || cmp.runContext === undefined;
+        const siteSpecificRules: AutoCMP[] = [];
+        const otherRules: AutoCMP[] = [];
+        this.rules.forEach((cmp) => {
+            // first filter out rules that don't run in this frame-type.
+            if (cmp.checkFrameContext(isTop)) {
+                // Pull out any rule that has a urlPattern that matches here to be prioritized.
+                if (cmp.hasMatchingUrlPattern()) {
+                    siteSpecificRules.push(cmp);
+                } else {
+                    otherRules.push(cmp);
+                }
             }
-            return cmp.runContext.frame || false;
         });
 
         const detectCmp = async (cmp: AutoCMP) => {
@@ -276,7 +283,7 @@ export default class AutoConsent {
         };
 
         // collect relevant site-specific rules and run them first
-        await Promise.all(rulesForContext.filter((cmp) => cmp.hasMatchingUrlPattern()).map(detectCmp));
+        await Promise.all(siteSpecificRules.map(detectCmp));
 
         // // exit early if we already found a site-specific popup
         if (foundCMPs.length > 0) {
@@ -284,7 +291,7 @@ export default class AutoConsent {
         }
 
         // // check generic popups
-        await Promise.all(rulesForContext.filter((cmp) => !cmp.hasMatchingUrlPattern() && cmp.checkRunContext()).map(detectCmp));
+        await Promise.all(otherRules.map(detectCmp));
 
         this.detectHeuristics();
 

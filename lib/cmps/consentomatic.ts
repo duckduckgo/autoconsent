@@ -43,6 +43,10 @@ export class ConsentOMaticCMP implements AutoCMP {
         return true;
     }
 
+    checkFrameContext(isTop: boolean): boolean {
+        return true;
+    }
+
     hasMatchingUrlPattern(): boolean {
         return false;
     }

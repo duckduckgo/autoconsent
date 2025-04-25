@@ -68,22 +68,26 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     checkRunContext(): boolean {
+        if (!this.checkFrameContext(window.top === window)) {
+            return false;
+        }
+        if (this.runContext.urlPattern && !this.hasMatchingUrlPattern()) {
+            return false;
+        }
+        return true;
+    }
+
+    checkFrameContext(isTop: boolean): boolean {
         const runCtx: RunContext = {
             ...defaultRunContext,
             ...this.runContext,
         };
-
-        const isTop = window.top === window;
 
         if (isTop && !runCtx.main) {
             return false;
         }
 
         if (!isTop && !runCtx.frame) {
-            return false;
-        }
-
-        if (runCtx.urlPattern && !this.hasMatchingUrlPattern()) {
             return false;
         }
         return true;
