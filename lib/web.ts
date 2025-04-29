@@ -296,7 +296,15 @@ export default class AutoConsent {
         this.detectHeuristics();
 
         if (foundCMPs.length === 0 && retries > 0) {
-            await this.domActions.wait(500);
+            // We wait 500ms, and also for some kind of dom mutation to happen before
+            // rerunning the findCmp check
+            try {
+                await Promise.all([this.domActions.wait(500), this.domActions.waitForMutation('html')]);
+            } catch (e) {
+                // timeout waiting for mutation - break out of detection
+                return [];
+            }
+
             return this.findCmp(retries - 1);
         }
 

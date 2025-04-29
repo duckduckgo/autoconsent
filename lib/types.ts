@@ -36,6 +36,7 @@ export interface DomActionsProvider {
     querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
     querySelectorChain(selectors: string[]): HTMLElement[];
     elementSelector(selector: ElementSelector): HTMLElement[];
+    waitForMutation(selector: ElementSelector): Promise<boolean>;
 }
 
 export type RuleBundle = {
