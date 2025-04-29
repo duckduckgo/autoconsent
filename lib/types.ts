@@ -12,6 +12,8 @@ export interface AutoCMP {
     prehideSelectors?: string[];
     runContext: RunContext;
     checkRunContext(): boolean;
+    checkFrameContext(isTop: boolean): boolean;
+    hasMatchingUrlPattern(): boolean;
     detectCmp(): Promise<boolean>;
     detectPopup(): Promise<boolean>;
     optOut(): Promise<boolean>;
