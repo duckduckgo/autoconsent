@@ -1,3 +1,26 @@
+# v12.18.0 (Tue Apr 29 2025)
+
+#### 🚀 Enhancement
+
+- Delay reruns of the detectCmp phase until there is a dom mutation. [#721](https://github.com/duckduckgo/autoconsent/pull/721) ([@sammacbeth](https://github.com/sammacbeth))
+- Prioritize checking of site-specific rules in detection phase. [#720](https://github.com/duckduckgo/autoconsent/pull/720) ([@sammacbeth](https://github.com/sammacbeth))
+- Run detection phase sequentially per CMP. [#719](https://github.com/duckduckgo/autoconsent/pull/719) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix rule for openai [#723](https://github.com/duckduckgo/autoconsent/pull/723) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 39338825841d682f464b10b174ea835000e30c0f [#722](https://github.com/duckduckgo/autoconsent/pull/722) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Only process Asana tasks when PR contains task URL [#718](https://github.com/duckduckgo/autoconsent/pull/718) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 4
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.17.0 (Mon Apr 14 2025)
 
 #### 🚀 Enhancement
