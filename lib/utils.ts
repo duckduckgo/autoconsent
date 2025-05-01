@@ -82,6 +82,7 @@ export function normalizeConfig(providedConfig: any): Config {
         logs: {
             lifecycle: false,
             rulesteps: false,
+            detectionsteps: false,
             evals: false,
             errors: true,
             messages: false,
