@@ -33,7 +33,7 @@
     "rebuild-filterlist": "node scripts/rebuild-filterlist.mjs",
     "update-easylist": "npm run fetch-easylist && npm run rebuild-filterlist",
     "compile-filterlist": "node scripts/compile-filterlist.mjs",
-    "build-rules": "node rules/build.mjs",
+    "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
     "prepublish": "npm run compile-filterlist && npm run build-rules && npm run bundle",
