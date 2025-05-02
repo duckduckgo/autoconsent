@@ -178,6 +178,10 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     elementSelector(selector: ElementSelector) {
         return this.autoconsent.domActions.elementSelector(selector);
     }
+
+    waitForMutation(selector: ElementSelector) {
+        return this.autoconsent.domActions.waitForMutation(selector);
+    }
 }
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
@@ -208,14 +212,14 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
     async detectCmp() {
         if (this.rule.detectCmp) {
-            return this._runRulesSequentially(this.rule.detectCmp);
+            return this._runRulesSequentially(this.rule.detectCmp, this.autoconsent.config.logs.detectionsteps);
         }
         return false;
     }
 
     async detectPopup() {
         if (this.rule.detectPopup) {
-            return this._runRulesSequentially(this.rule.detectPopup);
+            return this._runRulesSequentially(this.rule.detectPopup, this.autoconsent.config.logs.detectionsteps);
         }
         return false;
     }
@@ -224,7 +228,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         const logsConfig = this.autoconsent.config.logs;
         if (this.rule.optOut) {
             logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut);
-            return this._runRulesSequentially(this.rule.optOut);
+            return this._runRulesSequentially(this.rule.optOut, this.autoconsent.config.logs.rulesteps);
         }
         return false;
     }
@@ -233,21 +237,21 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         const logsConfig = this.autoconsent.config.logs;
         if (this.rule.optIn) {
             logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn);
-            return this._runRulesSequentially(this.rule.optIn);
+            return this._runRulesSequentially(this.rule.optIn, this.autoconsent.config.logs.rulesteps);
         }
         return false;
     }
 
     async openCmp() {
         if (this.rule.openCmp) {
-            return this._runRulesSequentially(this.rule.openCmp);
+            return this._runRulesSequentially(this.rule.openCmp, this.autoconsent.config.logs.rulesteps);
         }
         return false;
     }
 
     async test() {
         if (this.hasSelfTest) {
-            return this._runRulesSequentially(this.rule.test);
+            return this._runRulesSequentially(this.rule.test, this.autoconsent.config.logs.rulesteps);
         }
         return super.test();
     }
@@ -334,12 +338,11 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         return detections.every((r) => !!r);
     }
 
-    async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
-        const logsConfig = this.autoconsent.config.logs;
+    async _runRulesSequentially(rules: AutoConsentRuleStep[], logSteps = true): Promise<boolean> {
         for (const rule of rules) {
-            logsConfig.rulesteps && console.log('Running rule...', rule);
+            logSteps && console.log('Running rule...', rule);
             const result = await this.evaluateRuleStep(rule);
-            logsConfig.rulesteps && console.log('...rule result', result);
+            logSteps && console.log('...rule result', result);
             if (!result && !rule.optional) {
                 return false;
             }

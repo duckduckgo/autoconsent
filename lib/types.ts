@@ -60,6 +60,7 @@ export type Config = {
     logs: {
         lifecycle: boolean;
         rulesteps: boolean;
+        detectionsteps: boolean;
         evals: boolean;
         errors: boolean;
         messages: boolean;
