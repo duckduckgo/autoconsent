@@ -19,12 +19,13 @@ type CompactNullableBoolean = 0 | 1 | 2;
 export type CompactCMPRule = [
     string, // name
     CompactNullableBoolean, // cosmetic
+    RunContext, // runContext
     number[], // prehideSelectors
     CompactCMPRuleStep[], // detectCMP
     CompactCMPRuleStep[], // detectPopup
     CompactCMPRuleStep[], // optOut
     CompactCMPRuleStep[], // test
-    Pick<AutoConsentCMPRule, 'intermediate' | 'runContext'>, // extra
+    Pick<AutoConsentCMPRule, 'intermediate'>, // extra
 ];
 
 export type CompactCMPRuleset = {
@@ -85,6 +86,7 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
         return [
             r.name,
             encodeNullableBoolean(r.cosmetic),
+            r.runContext,
             r.prehideSelectors?.map(replaceStrings),
             r.detectCmp.map(encodeRuleStep),
             r.detectPopup.map(encodeRuleStep),
@@ -92,7 +94,6 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
             r.test?.map(encodeRuleStep),
             {
                 intermediate: r.intermediate,
-                runContext: r.runContext,
             },
         ];
     });
@@ -125,11 +126,12 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
         return { ...clonedStep };
     }
     return encoded.r.map((rule) => {
-        const [name, cosmetic, prehideSelectors, detectCmp, detectPopup, optOut, test, extra] = rule;
+        const [name, cosmetic, runContext, prehideSelectors, detectCmp, detectPopup, optOut, test, extra] = rule;
         const optIn: AutoConsentRuleStep[] = [];
         return {
             name,
             cosmetic: decodeNullableBoolean(cosmetic),
+            runContext,
             prehideSelectors: prehideSelectors?.map((i) => encoded.s[i].toString()),
             detectCmp: detectCmp.map(decodeRuleStep),
             detectPopup: detectPopup.map(decodeRuleStep),
