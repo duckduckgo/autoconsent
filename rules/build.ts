@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
-import https from 'https';
 import { encodeRules } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 import { RuleBundle } from '../lib/types';
@@ -76,7 +75,7 @@ export function compactPrettyPrint(encodedRules: string) {
 }
 
 (async () => {
-    const stringify = (rules: object) => JSON.stringify(rules, undefined, 2)
+    const stringify = (rules: object) => JSON.stringify(rules)
     const rules = combineRules(await buildAutoconsentRules());
     fs.writeFile(path.join(rulesDir, 'rules.json'), stringify(rules), () => console.log('Written rules.json'));
     fs.writeFile(path.join(rulesDir, 'encoded-autoconsent-rules.json'), compactPrettyPrint(stringify(encodeRules(rules.autoconsent))), () => console.log('Written encoded-autoconsent-rules.json'));
