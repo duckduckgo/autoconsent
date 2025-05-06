@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
+import https from 'https';
 import { encodeRules } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 import { RuleBundle } from '../lib/types';
@@ -19,25 +20,25 @@ export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     return await Promise.all(files.map((file) => readFileJSON(path.join(autoconsentDir, file))));
 }
 
-// export async function buildConsentOMaticRules() {
-//     // fetch ConsentOMatic rule set and merge with our custom rules
-//     const consentOMaticCommit = '7d7fd2bd6bf2b662350b0eaeca74db6eba155efe';
-//     const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
-//     const consentOMaticInclude = ['didomi.io', 'oil', 'optanon', 'quantcast2', 'springer', 'wordpressgdpr'];
-//     const comRules = {};
-//     const allComRules = await new Promise((resolve) => {
-//         https.get(consentOMaticUrl, (res) => {
-//             res.setEncoding('utf-8');
-//             let content = '';
-//             res.on('data', (data) => (content += data));
-//             res.on('end', () => resolve(JSON.parse(content)));
-//         });
-//     });
-//     consentOMaticInclude.forEach((name) => {
-//         comRules[name] = allComRules[name];
-//     });
-//     return comRules;
-// }
+export async function buildConsentOMaticRules() {
+    // fetch ConsentOMatic rule set and merge with our custom rules
+    const consentOMaticCommit = '7d7fd2bd6bf2b662350b0eaeca74db6eba155efe';
+    const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
+    const consentOMaticInclude = ['didomi.io', 'oil', 'optanon', 'quantcast2', 'springer', 'wordpressgdpr'];
+    const comRules: Record<string, object> = {};
+    const allComRules: Record<string, object> = await new Promise((resolve) => {
+        https.get(consentOMaticUrl, (res) => {
+            res.setEncoding('utf-8');
+            let content = '';
+            res.on('data', (data) => (content += data));
+            res.on('end', () => resolve(JSON.parse(content)));
+        });
+    });
+    consentOMaticInclude.forEach((name) => {
+        comRules[name] = allComRules[name];
+    });
+    return comRules;
+}
 
 export function combineRules(autoconsent: AutoConsentCMPRule[]): RuleBundle {
     return {
@@ -76,7 +77,9 @@ export function compactPrettyPrint(encodedRules: string) {
 
 (async () => {
     const stringify = (rules: object) => JSON.stringify(rules)
-    const rules = combineRules(await buildAutoconsentRules());
-    fs.writeFile(path.join(rulesDir, 'rules.json'), stringify(rules), () => console.log('Written rules.json'));
-    fs.writeFile(path.join(rulesDir, 'encoded-autoconsent-rules.json'), compactPrettyPrint(stringify(encodeRules(rules.autoconsent))), () => console.log('Written encoded-autoconsent-rules.json'));
+    const autoconsent = await buildAutoconsentRules()
+    const consentomatic = await buildAutoconsentRules()
+    fs.writeFile(path.join(rulesDir, 'rules.json'), stringify({ autoconsent }), () => console.log('Written rules.json'));
+    fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
+    fs.writeFile(path.join(rulesDir, 'encoded-autoconsent-rules.json'), compactPrettyPrint(stringify(encodeRules(autoconsent))), () => console.log('Written compact-rules.json'));
 })();
