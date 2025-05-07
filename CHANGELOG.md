@@ -1,3 +1,26 @@
+# v12.19.0 (Wed May 07 2025)
+
+#### 🚀 Enhancement
+
+- Bump tldts-experimental from 6.1.85 to 7.0.4 [#728](https://github.com/duckduckgo/autoconsent/pull/728) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#729](https://github.com/duckduckgo/autoconsent/pull/729) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Fix: Exclude rules from detection if they have a urlPattern and it does not match. [#736](https://github.com/duckduckgo/autoconsent/pull/736) ([@sammacbeth](https://github.com/sammacbeth))
+- Make detection logs toggleable [#730](https://github.com/duckduckgo/autoconsent/pull/730) ([@muodov](https://github.com/muodov))
+- Bump action-asana-sync to v11 [#731](https://github.com/duckduckgo/autoconsent/pull/731) ([@sammacbeth](https://github.com/sammacbeth))
+- Bump @ghostery/adblocker-content from 2.5.0 to 2.5.1 [#725](https://github.com/duckduckgo/autoconsent/pull/725) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker from 2.5.0 to 2.5.1 [#724](https://github.com/duckduckgo/autoconsent/pull/724) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.18.0 (Tue Apr 29 2025)
 
 #### 🚀 Enhancement
