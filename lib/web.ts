@@ -257,9 +257,10 @@ export default class AutoConsent {
             // first filter out rules that don't run in this frame-type.
             if (cmp.checkFrameContext(isTop)) {
                 // Pull out any rule that has a urlPattern that matches here to be prioritized.
+                const isSiteSpecific = !!cmp.runContext.urlPattern;
                 if (cmp.hasMatchingUrlPattern()) {
                     siteSpecificRules.push(cmp);
-                } else {
+                } else if (!isSiteSpecific) {
                     otherRules.push(cmp);
                 }
             }
