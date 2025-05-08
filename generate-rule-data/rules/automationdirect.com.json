@@ -1,0 +1,23 @@
+{
+  "name": "automationdirect.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#termsfeed-com---nb"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#termsfeed-com---nb"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#termsfeed-com---nb"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#termsfeed-com---nb"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "umass.edu",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.umass-platform-homepage.path-frontpage > div.dialog-off-canvas-main-canvas > footer.site-footer > div.cc_banner-wrapper > div.cc_banner.cc_container"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.umass-platform-homepage.path-frontpage > div.dialog-off-canvas-main-canvas > footer.site-footer > div.cc_banner-wrapper > div.cc_banner.cc_container"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.umass-platform-homepage.path-frontpage > div.dialog-off-canvas-main-canvas > footer.site-footer > div.cc_banner-wrapper > div.cc_banner.cc_container"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.umass-platform-homepage.path-frontpage > div.dialog-off-canvas-main-canvas > footer.site-footer > div.cc_banner-wrapper > div.cc_banner.cc_container"
+    }
+  ]
+}

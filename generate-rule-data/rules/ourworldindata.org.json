@@ -1,0 +1,23 @@
+{
+  "name": "ourworldindata.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div > div.cookie-manager > div.cookie-notice.open"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div > div.cookie-manager > div.cookie-notice.open"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div.cookie-manager > div.cookie-notice.open"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div > div.cookie-manager > div.cookie-notice.open"
+    }
+  ]
+}

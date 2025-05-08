@@ -1,0 +1,23 @@
+{
+  "name": "support.roku.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div.roku-cookie-consent.cc-window"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div.roku-cookie-consent.cc-window"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div.roku-cookie-consent.cc-window"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div.roku-cookie-consent.cc-window"
+    }
+  ]
+}

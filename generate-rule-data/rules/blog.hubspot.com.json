@@ -1,0 +1,23 @@
+{
+  "name": "blog.hubspot.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#hs-eu-cookie-confirmation"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#hs-eu-cookie-confirmation"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#hs-eu-cookie-confirmation"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#hs-eu-cookie-confirmation"
+    }
+  ]
+}

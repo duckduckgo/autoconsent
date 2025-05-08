@@ -1,0 +1,23 @@
+{
+  "name": "codes.iccsafe.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.iccnonpremium > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.iccnonpremium > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.iccnonpremium > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.iccnonpremium > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+    }
+  ]
+}

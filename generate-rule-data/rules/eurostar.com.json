@@ -1,0 +1,23 @@
+{
+  "name": "eurostar.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#__tealiumGDPRecModal"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#consent_modal"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#consent_modal"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#__tealiumGDPRecModal"
+    }
+  ]
+}

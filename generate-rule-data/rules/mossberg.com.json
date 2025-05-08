@@ -1,0 +1,23 @@
+{
+  "name": "mossberg.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#notice-cookie-block"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#notice-cookie-block"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#notice-cookie-block"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#notice-cookie-block"
+    }
+  ]
+}

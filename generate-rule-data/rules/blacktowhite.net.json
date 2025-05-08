@@ -1,0 +1,23 @@
+{
+  "name": "blacktowhite.net",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div.u-bottomFixer.js-bottomFixTarget"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div.u-bottomFixer.js-bottomFixTarget"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div.u-bottomFixer.js-bottomFixTarget"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div.u-bottomFixer.js-bottomFixTarget"
+    }
+  ]
+}

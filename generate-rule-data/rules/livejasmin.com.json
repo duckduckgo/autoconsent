@@ -1,0 +1,23 @@
+{
+  "name": "livejasmin.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#consent_modal"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#consent_modal"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#consent_modal"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#consent_modal"
+    }
+  ]
+}

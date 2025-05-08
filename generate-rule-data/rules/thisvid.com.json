@@ -1,0 +1,23 @@
+{
+  "name": "thisvid.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.no-touch > div.wpcc-container.wpcc-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.no-touch > div.wpcc-container.wpcc-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.no-touch > div.wpcc-container.wpcc-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.no-touch > div.wpcc-container.wpcc-banner"
+    }
+  ]
+}

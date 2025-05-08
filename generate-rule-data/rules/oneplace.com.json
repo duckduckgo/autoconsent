@@ -1,0 +1,23 @@
+{
+  "name": "oneplace.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#cookiescript_injected"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#cookiescript_injected"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#cookiescript_injected"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#cookiescript_injected"
+    }
+  ]
+}

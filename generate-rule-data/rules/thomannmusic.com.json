@@ -1,0 +1,23 @@
+{
+  "name": "thomannmusic.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.font-sans.font-normal > div.theme-fx.spicy-consent-wrapper"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.font-sans.font-normal > div.theme-fx.spicy-consent-wrapper"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.font-sans.font-normal > div.theme-fx.spicy-consent-wrapper"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.font-sans.font-normal > div.theme-fx.spicy-consent-wrapper"
+    }
+  ]
+}

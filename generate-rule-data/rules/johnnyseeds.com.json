@@ -1,0 +1,23 @@
+{
+  "name": "johnnyseeds.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#consent-tracking"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#consent-tracking"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#consent-tracking"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#consent-tracking"
+    }
+  ]
+}

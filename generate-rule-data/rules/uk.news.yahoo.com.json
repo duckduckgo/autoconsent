@@ -1,0 +1,23 @@
+{
+  "name": "uk.news.yahoo.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    ""
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.no-touch.blur-preview-tpl > div.theme-2.v4 > div.consent-overlay"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.no-touch.blur-preview-tpl > div.theme-2.v4 > div.consent-overlay"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": ""
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "gopsusports.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > div > div > div.termly-styles-root-b0aebb.termly-styles-termly-banner-e1ed59"
+    }
+  ]
+}

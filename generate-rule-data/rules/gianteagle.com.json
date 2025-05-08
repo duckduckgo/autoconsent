@@ -1,0 +1,23 @@
+{
+  "name": "gianteagle.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#klaro-cookie-notice"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#klaro-cookie-notice"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#klaro-cookie-notice"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#klaro-cookie-notice"
+    }
+  ]
+}

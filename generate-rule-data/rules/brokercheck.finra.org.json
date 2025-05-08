@@ -1,0 +1,23 @@
+{
+  "name": "brokercheck.finra.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.font-sans > div.cc-window.cc-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.font-sans > div.cc-window.cc-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.font-sans > div.cc-window.cc-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.font-sans > div.cc-window.cc-banner"
+    }
+  ]
+}

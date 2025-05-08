@@ -1,0 +1,23 @@
+{
+  "name": "flickr.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#consent_blackbar"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#consent_blackbar"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#consent_blackbar"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#consent_blackbar"
+    }
+  ]
+}

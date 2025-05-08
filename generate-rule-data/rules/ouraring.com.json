@@ -1,0 +1,23 @@
+{
+  "name": "ouraring.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.tailwind > div.consent-manager-styles-1m6fvb2"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.tailwind > div.consent-manager-styles-1m6fvb2"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.tailwind > div.consent-manager-styles-1m6fvb2"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.tailwind > div.consent-manager-styles-1m6fvb2"
+    }
+  ]
+}

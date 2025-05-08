@@ -1,0 +1,23 @@
+{
+  "name": "link.springer.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > dialog.cc-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > dialog.cc-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > dialog.cc-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > dialog.cc-banner"
+    }
+  ]
+}

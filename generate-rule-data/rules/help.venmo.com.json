@@ -1,0 +1,23 @@
+{
+  "name": "help.venmo.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#ccpaCookieBanner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#ccpaCookieBanner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#ccpaCookieBanner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#ccpaCookieBanner"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "ascensus.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.page-Ascensus.macos > div.cky-consent-container.cky-banner-bottom"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.page-Ascensus.macos > div.cky-consent-container.cky-banner-bottom"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.page-Ascensus.macos > div.cky-consent-container.cky-banner-bottom"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.page-Ascensus.macos > div.cky-consent-container.cky-banner-bottom"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "printify.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body > dialog.cookiefirst-root.notranslate > div.cf1e63.cfKJ4I"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body > dialog.cookiefirst-root.notranslate > div.cf1e63.cfKJ4I"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > dialog.cookiefirst-root.notranslate > div.cf1e63.cfKJ4I"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body > dialog.cookiefirst-root.notranslate > div.cf1e63.cfKJ4I"
+    }
+  ]
+}

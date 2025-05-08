@@ -1,0 +1,23 @@
+{
+  "name": "locations.oreillyauto.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#truyo-consent-module"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#truyo-consent-module"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#truyo-consent-module"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#truyo-consent-module"
+    }
+  ]
+}

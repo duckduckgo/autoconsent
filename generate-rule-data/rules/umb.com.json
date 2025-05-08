@@ -1,0 +1,23 @@
+{
+  "name": "umb.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.acquia-cms-toolbar.acquia-cms-environment-prod > div > div.klaro > div.cookie-notice"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.acquia-cms-toolbar.acquia-cms-environment-prod > div > div.klaro > div.cookie-notice"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.acquia-cms-toolbar.acquia-cms-environment-prod > div > div.klaro > div.cookie-notice"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.acquia-cms-toolbar.acquia-cms-environment-prod > div > div.klaro > div.cookie-notice"
+    }
+  ]
+}

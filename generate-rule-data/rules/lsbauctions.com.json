@@ -1,0 +1,23 @@
+{
+  "name": "lsbauctions.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+    }
+  ]
+}

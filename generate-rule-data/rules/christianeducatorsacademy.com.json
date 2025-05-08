@@ -1,0 +1,23 @@
+{
+  "name": "christianeducatorsacademy.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.home.blog > div > div.cmplz-cookiebanner.banner-1"
+    }
+  ]
+}

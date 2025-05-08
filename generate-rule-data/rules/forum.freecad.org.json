@@ -1,0 +1,23 @@
+{
+  "name": "forum.freecad.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.notouch.section-index > div.cc-window.cc-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.notouch.section-index > div.cc-window.cc-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.notouch.section-index > div.cc-window.cc-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.notouch.section-index > div.cc-window.cc-banner"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "concretenetwork.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.bg-light.home > div.cc-window.cc-banner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.bg-light.home > div.cc-window.cc-banner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.bg-light.home > div.cc-window.cc-banner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.bg-light.home > div.cc-window.cc-banner"
+    }
+  ]
+}

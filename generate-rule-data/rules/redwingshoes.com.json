@@ -1,0 +1,23 @@
+{
+  "name": "redwingshoes.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#ensNotifyBanner"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#ensNotifyBanner"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#ensNotifyBanner"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#ensNotifyBanner"
+    }
+  ]
+}

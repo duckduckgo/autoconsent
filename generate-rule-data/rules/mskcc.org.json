@@ -1,0 +1,23 @@
+{
+  "name": "mskcc.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "body.template_full_width.not-disaster-recovery > div.syrenis-cookie-widget > div.cassie-cookie-module > div.cassie-pre-banner.cassie-bottom"
+  ],
+  "detectCmp": [
+    {
+      "exists": "body.template_full_width.not-disaster-recovery > div.syrenis-cookie-widget > div.cassie-cookie-module > div.cassie-pre-banner.cassie-bottom"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body.template_full_width.not-disaster-recovery > div.syrenis-cookie-widget > div.cassie-cookie-module > div.cassie-pre-banner.cassie-bottom"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "body.template_full_width.not-disaster-recovery > div.syrenis-cookie-widget > div.cassie-cookie-module > div.cassie-pre-banner.cassie-bottom"
+    }
+  ]
+}

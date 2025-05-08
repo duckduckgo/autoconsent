@@ -1,0 +1,23 @@
+{
+  "name": "fnamerica.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#cookie-notice"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#cookie-notice"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#cookie-notice"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#cookie-notice"
+    }
+  ]
+}

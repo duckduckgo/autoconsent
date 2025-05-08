@@ -1,0 +1,23 @@
+{
+  "name": "marca.com",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#didomi-popup"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#didomi-popup"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#didomi-popup"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#didomi-popup"
+    }
+  ]
+}

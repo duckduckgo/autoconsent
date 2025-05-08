@@ -1,0 +1,23 @@
+{
+  "name": "battlefields.org",
+  "cosmetic": true,
+  "prehideSelectors": [
+    "#sliding-popup"
+  ],
+  "detectCmp": [
+    {
+      "exists": "#sliding-popup"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#sliding-popup"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "hide": "#sliding-popup"
+    }
+  ]
+}
