@@ -1,6 +1,5 @@
 {
   "name": "yumpu.com",
-  "cosmetic": true,
   "prehideSelectors": [
     "#onetrust-banner-sdk"
   ],
@@ -14,10 +13,10 @@
       "visible": "#onetrust-banner-sdk"
     }
   ],
-  "optIn": [],
-  "optOut": [
+  "optIn": [
     {
-      "hide": "#onetrust-banner-sdk"
+      "waitForThenClick": "#onetrust-accept-btn-handler"
     }
-  ]
+  ],
+  "optOut": []
 }
