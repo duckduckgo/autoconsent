@@ -18,5 +18,12 @@
       "waitForThenClick": "#onetrust-accept-btn-handler"
     }
   ],
-  "optOut": []
+  "optOut": [
+    {
+      "waitForThenClick": "#onetrust-pc-btn-handler"
+    },
+    {
+      "waitForThenClick": ".ot-pc-refuse-all-handler"
+    }
+  ]
 }
