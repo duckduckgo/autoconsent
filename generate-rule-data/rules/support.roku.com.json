@@ -1,23 +1,26 @@
 {
   "name": "support.roku.com",
-  "cosmetic": true,
   "prehideSelectors": [
-    "body > div.roku-cookie-consent.cc-window"
+    ".roku-cookie-consent"
   ],
   "detectCmp": [
     {
-      "exists": "body > div.roku-cookie-consent.cc-window"
+      "exists": ".roku-cookie-consent"
     }
   ],
   "detectPopup": [
     {
-      "visible": "body > div.roku-cookie-consent.cc-window"
+      "visible": ".roku-cookie-consent"
     }
   ],
-  "optIn": [],
+  "optIn": [
+    {
+      "waitForThenClick": ".cc-allow"
+    }
+  ],
   "optOut": [
     {
-      "hide": "body > div.roku-cookie-consent.cc-window"
+      "waitForThenClick": ".cc-deny"
     }
   ]
 }

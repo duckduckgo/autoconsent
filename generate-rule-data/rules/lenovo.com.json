@@ -1,6 +1,5 @@
 {
   "name": "lenovo.com",
-  "cosmetic": true,
   "prehideSelectors": [
     "#evidon_banner_wrap"
   ],
@@ -15,9 +14,5 @@
     }
   ],
   "optIn": [],
-  "optOut": [
-    {
-      "hide": "#evidon_banner_wrap"
-    }
-  ]
+  "optOut": []
 }

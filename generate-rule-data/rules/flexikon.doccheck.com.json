@@ -1,0 +1,29 @@
+{
+  "name": "flexikon.doccheck.com",
+  "prehideSelectors": [
+    ".cf2CeT"
+  ],
+  "detectCmp": [
+    {
+      "exists": ".cf2CeT"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": ".cf2CeT"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "body:nth-child(2) > dialog:nth-child(13) > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "body:nth-child(2) > dialog:nth-child(13) > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button"
+    },
+    {
+      "waitForThenClick": "body:nth-child(2) > dialog:nth-child(15) > div > div > div > div > div > div:nth-child(5) > div:nth-child(3) > button"
+    }
+  ]
+}

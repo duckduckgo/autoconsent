@@ -633,7 +633,7 @@ async function main() {
 
     const domain = new URL(url).hostname.replace('www.', '');
 
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
 

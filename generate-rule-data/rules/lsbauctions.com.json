@@ -1,23 +1,22 @@
 {
   "name": "lsbauctions.com",
-  "cosmetic": true,
   "prehideSelectors": [
-    "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+    ".cmplz-cookiebanner"
   ],
   "detectCmp": [
     {
-      "exists": "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+      "exists": ".cmplz-cookiebanner"
     }
   ],
   "detectPopup": [
     {
-      "visible": "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+      "visible": ".cmplz-cookiebanner"
     }
   ],
-  "optIn": [],
-  "optOut": [
+  "optIn": [
     {
-      "hide": "body.home.page-template > div > div.cmplz-cookiebanner.banner-1"
+      "waitForThenClick": ".cmplz-accept"
     }
-  ]
+  ],
+  "optOut": []
 }

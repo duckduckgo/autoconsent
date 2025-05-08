@@ -1,6 +1,5 @@
 {
   "name": "providers.upmc.com",
-  "cosmetic": true,
   "prehideSelectors": [
     "#cookiebanner"
   ],
@@ -15,9 +14,5 @@
     }
   ],
   "optIn": [],
-  "optOut": [
-    {
-      "hide": "#cookiebanner"
-    }
-  ]
+  "optOut": []
 }

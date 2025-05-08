@@ -6,12 +6,11 @@ DATA_FILE="${SCRIPT_DIR}/../generate-rule-data/us.txt"
 
 # Check if minimum required arguments are provided
 if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 <concurrency> [mode]"
+    echo "Usage: $0 <concurrency>"
     exit 1
 fi
 
 concurrency="$1"
-mode="${2:-}" # Optional mode argument, will be empty if not provided
 
 # Validate inputs
 if ! [[ "$concurrency" =~ ^[0-9]+$ ]]; then
@@ -26,11 +25,7 @@ domains=($(cat "$DATA_FILE"))
 process_domain() {
     local domain="$1"
     echo "Processing $domain"
-    if [ -n "$mode" ]; then
-        npx ts-node "$SCRIPT_DIR/generate-rule.ts" "$domain" "$mode"
-    else
-        npx ts-node "$SCRIPT_DIR/generate-rule.ts" "$domain"
-    fi
+    npx ts-node "$SCRIPT_DIR/generate-rule/main.ts" "$domain"
 }
 
 # Process all domains maintaining maximum concurrent processes
