@@ -12,6 +12,7 @@ import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } 
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
 import { checkHeuristicPatterns } from './heuristics';
+import { decodeRules } from './encoding';
 
 export { snippets as evalSnippets } from './eval-snippets';
 
@@ -165,6 +166,15 @@ export default class AutoConsent {
             declarativeRules.autoconsent.forEach((ruleset) => {
                 this.addDeclarativeCMP(ruleset);
             });
+        }
+
+        if (declarativeRules.compact) {
+            try {
+                const rules = decodeRules(declarativeRules.compact)
+                rules.forEach(this.addDeclarativeCMP.bind(this))
+            } catch (e) {
+                this.config.logs.errors && console.error(e)
+            }
         }
     }
 
