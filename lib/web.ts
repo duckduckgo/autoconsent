@@ -291,7 +291,6 @@ export default class AutoConsent {
             );
         // collect relevant site-specific rules and run them first
         await Promise.all(siteSpecificRules.map(detectCmp));
-        console.log('exists', this.domActions.elementExists('body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button'));
 
         // exit early if we already found a site-specific popup
         if (foundCMPs.length > 0) {
@@ -301,7 +300,6 @@ export default class AutoConsent {
         logsConfig.lifecycle && console.log('Trying generic rules');
         // check generic popups
         await Promise.all(otherRules.map(detectCmp));
-        console.log('exists', this.domActions.elementExists('body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button'));
 
         this.detectHeuristics();
 
@@ -398,6 +396,7 @@ export default class AutoConsent {
         if (this.foundCmp.name.startsWith('auto_')) {
             const el = this.domActions.elementSelector(this.foundCmp.rule?.detectCmp?.[0]?.exists)[0];
             if (el) {
+                console.log('highlighting', el);
                 highlightNode(el);
                 await this.domActions.wait(3000);
                 unhighlightNode(el);
