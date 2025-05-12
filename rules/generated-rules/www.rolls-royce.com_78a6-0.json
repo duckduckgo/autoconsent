@@ -1,0 +1,28 @@
+{
+  "name": "auto_rolls-royce.com_0",
+  "vendorUrl": "https://www.rolls-royce.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?rolls-royce\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(1) > div > div > div > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(1) > div > div > div > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(1) > div > div > div > div > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "DECLINE COOKIES"
+    }
+  ]
+}

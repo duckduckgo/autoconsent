@@ -1,0 +1,28 @@
+{
+  "name": "auto_rexel.co.uk_0",
+  "vendorUrl": "https://www.rexel.co.uk/uki/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?rexel\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(18) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > button:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(18) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > button:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(18) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > button:nth-child(3)",
+      "text": "Decline all"
+    }
+  ]
+}

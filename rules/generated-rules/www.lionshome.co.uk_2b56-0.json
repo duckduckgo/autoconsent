@@ -1,0 +1,28 @@
+{
+  "name": "auto_lionshome.co.uk_0",
+  "vendorUrl": "https://www.lionshome.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?lionshome\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div:nth-child(2)",
+      "text": "Accept Only necessary cookies"
+    }
+  ]
+}

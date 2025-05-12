@@ -1,0 +1,28 @@
+{
+  "name": "auto_lloydspharmacy.com_0",
+  "vendorUrl": "https://lloydspharmacy.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?lloydspharmacy\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
+      "text": "Reject unrequired cookies"
+    }
+  ]
+}

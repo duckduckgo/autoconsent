@@ -1,0 +1,28 @@
+{
+  "name": "auto_honor.com_0",
+  "vendorUrl": "https://www.honor.com/uk/?host=honor.com",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?honor\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(3) > div:nth-child(12) > div:nth-child(4) > div > div:nth-child(2) > a:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(3) > div:nth-child(12) > div:nth-child(4) > div > div:nth-child(2) > a:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(3) > div:nth-child(12) > div:nth-child(4) > div > div:nth-child(2) > a:nth-child(2)",
+      "text": "Reject all cookies"
+    }
+  ]
+}

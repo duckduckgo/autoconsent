@@ -1,0 +1,28 @@
+{
+  "name": "auto_watch.thechosen.tv_0",
+  "vendorUrl": "https://watch.thechosen.tv/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?watch\\.thechosen\\.tv/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(4) > div:nth-child(3) > button:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(4) > div:nth-child(3) > button:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(4) > div:nth-child(3) > button:nth-child(3)",
+      "text": "Necessary only"
+    }
+  ]
+}

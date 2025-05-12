@@ -1,0 +1,28 @@
+{
+  "name": "auto_velux.co.uk_0",
+  "vendorUrl": "https://www.velux.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?velux\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div:nth-child(3) > div > a:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div:nth-child(3) > div > a:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div:nth-child(3) > div > a:nth-child(1)",
+      "text": "NECESSARY ONLY"
+    }
+  ]
+}

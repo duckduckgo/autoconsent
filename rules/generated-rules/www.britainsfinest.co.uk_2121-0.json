@@ -1,0 +1,28 @@
+{
+  "name": "auto_britainsfinest.co.uk_0",
+  "vendorUrl": "https://www.britainsfinest.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?britainsfinest\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(4) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(4) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(4) > button:nth-child(2)",
+      "text": "ESSENTIAL ONLY"
+    }
+  ]
+}

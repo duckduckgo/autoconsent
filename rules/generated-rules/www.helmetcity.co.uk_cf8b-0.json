@@ -1,0 +1,28 @@
+{
+  "name": "auto_helmetcity.co.uk_0",
+  "vendorUrl": "https://www.helmetcity.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?helmetcity\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(7) > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(7) > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(7) > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
+      "text": "Decline"
+    }
+  ]
+}

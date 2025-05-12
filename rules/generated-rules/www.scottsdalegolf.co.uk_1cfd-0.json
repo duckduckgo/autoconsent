@@ -1,0 +1,28 @@
+{
+  "name": "auto_scottsdalegolf.co.uk_0",
+  "vendorUrl": "https://www.scottsdalegolf.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?scottsdalegolf\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(12) > button:nth-child(4)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(12) > button:nth-child(4)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(12) > button:nth-child(4)",
+      "text": "DECLINE"
+    }
+  ]
+}

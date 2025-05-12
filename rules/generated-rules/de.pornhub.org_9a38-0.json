@@ -1,0 +1,28 @@
+{
+  "name": "auto_de.pornhub.org_0",
+  "vendorUrl": "https://de.pornhub.org/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?de\\.pornhub\\.org/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > button:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > button:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > button:nth-child(3)",
+      "text": "Accept Only Essential Cookies"
+    }
+  ]
+}

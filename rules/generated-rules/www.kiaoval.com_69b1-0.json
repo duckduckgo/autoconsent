@@ -1,0 +1,28 @@
+{
+  "name": "auto_kiaoval.com_0",
+  "vendorUrl": "https://www.kiaoval.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?kiaoval\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > span:nth-child(2) > div > div:nth-child(2) > a:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > span:nth-child(2) > div > div:nth-child(2) > a:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > span:nth-child(2) > div > div:nth-child(2) > a:nth-child(1)",
+      "text": "REJECT"
+    }
+  ]
+}

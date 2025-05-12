@@ -1,0 +1,28 @@
+{
+  "name": "auto_ncsc.gov.uk_0",
+  "vendorUrl": "https://www.ncsc.gov.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?ncsc\\.gov\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(1) > div > div > div:nth-child(2) > button:nth-child(2) > div:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(1) > div > div > div:nth-child(2) > button:nth-child(2) > div:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(1) > div > div > div:nth-child(2) > button:nth-child(2) > div:nth-child(1)",
+      "text": "Reject optional cookies"
+    }
+  ]
+}

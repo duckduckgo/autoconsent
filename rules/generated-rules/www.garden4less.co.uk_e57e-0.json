@@ -1,0 +1,28 @@
+{
+  "name": "auto_garden4less.co.uk_0",
+  "vendorUrl": "https://www.garden4less.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?garden4less\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > p > span > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > p > span > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > p > span > button:nth-child(2)",
+      "text": "DECLINE"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "auto_accounts.o2.co.uk_0",
+  "vendorUrl": "https://accounts.o2.co.uk/auth?sendTo=https%3A%2F%2Faccounts.o2.co.uk%2F%3Fcheckproduct%3Dtrue&failureUrl=https%3A%2F%2Faccounts.o2.co.uk%2F&auth_requirement_id=8ecbb814-2fa7-4780-b73f-3f215694dae1",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?accounts\\.o2\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Accept essential cookies only"
+    }
+  ]
+}

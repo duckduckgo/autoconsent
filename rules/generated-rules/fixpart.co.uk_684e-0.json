@@ -1,0 +1,28 @@
+{
+  "name": "auto_fixpart.co.uk_0",
+  "vendorUrl": "https://fixpart.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?fixpart\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div > div:nth-child(1) > p:nth-child(2) > a:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div > div:nth-child(1) > p:nth-child(2) > a:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div > div:nth-child(1) > p:nth-child(2) > a:nth-child(3)",
+      "text": "essential cookies"
+    }
+  ]
+}

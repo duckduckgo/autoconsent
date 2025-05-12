@@ -1,0 +1,28 @@
+{
+  "name": "auto_fareham.gov.uk_0",
+  "vendorUrl": "https://www.fareham.gov.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?fareham\\.gov\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(2) > p:nth-child(4) > a:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(2) > p:nth-child(4) > a:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(2) > p:nth-child(4) > a:nth-child(2)",
+      "text": "I Do Not Accept"
+    }
+  ]
+}

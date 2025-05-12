@@ -1,0 +1,28 @@
+{
+  "name": "auto_tfgm.com_0",
+  "vendorUrl": "https://tfgm.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?tfgm\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div > div > div > div > button:nth-child(6)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div > div > div > div > button:nth-child(6)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div > div > div > div > button:nth-child(6)",
+      "text": "Accept only essential cookies"
+    }
+  ]
+}

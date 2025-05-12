@@ -1,0 +1,28 @@
+{
+  "name": "auto_thingiverse.com_0",
+  "vendorUrl": "https://www.thingiverse.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?thingiverse\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)",
+      "text": "Deny"
+    }
+  ]
+}

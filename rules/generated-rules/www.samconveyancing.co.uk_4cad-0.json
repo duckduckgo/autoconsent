@@ -1,0 +1,28 @@
+{
+  "name": "auto_samconveyancing.co.uk_0",
+  "vendorUrl": "https://www.samconveyancing.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?samconveyancing\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(1) > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(1) > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(1) > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > button",
+      "text": "Reject All"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "auto_resume.io_1",
+  "vendorUrl": "https://resume.io/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?resume\\.io/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(2) > a:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(2) > a:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(2) > a:nth-child(1)",
+      "text": "reject"
+    }
+  ]
+}

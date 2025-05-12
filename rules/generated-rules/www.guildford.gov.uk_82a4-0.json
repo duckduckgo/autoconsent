@@ -1,0 +1,28 @@
+{
+  "name": "auto_guildford.gov.uk_0",
+  "vendorUrl": "https://www.guildford.gov.uk/?ccp=true",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?guildford\\.gov\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)",
+      "text": "Reject additional cookies"
+    }
+  ]
+}

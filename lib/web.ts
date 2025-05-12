@@ -7,7 +7,7 @@ import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { normalizeConfig, scheduleWhenIdle } from './utils';
+import { highlightNode, normalizeConfig, scheduleWhenIdle, unhighlightNode } from './utils';
 import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import serializedEngine from './filterlist-engine';
@@ -291,15 +291,17 @@ export default class AutoConsent {
             );
         // collect relevant site-specific rules and run them first
         await Promise.all(siteSpecificRules.map(detectCmp));
+        console.log('exists', this.domActions.elementExists('body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button'));
 
         // exit early if we already found a site-specific popup
         if (foundCMPs.length > 0) {
             return foundCMPs;
         }
 
-        logsConfig.lifecycle && console.log("Site-specific rules didn't match, trying generic rules");
+        logsConfig.lifecycle && console.log('Trying generic rules');
         // check generic popups
         await Promise.all(otherRules.map(detectCmp));
+        console.log('exists', this.domActions.elementExists('body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button'));
 
         this.detectHeuristics();
 
@@ -307,7 +309,9 @@ export default class AutoConsent {
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             try {
+                console.log('waiting for mutation');
                 await Promise.all([this.domActions.wait(500), this.domActions.waitForMutation('html')]);
+                console.log('mutation detected');
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];
@@ -390,6 +394,15 @@ export default class AutoConsent {
         }
 
         this.foundCmp = cmp;
+
+        if (this.foundCmp.name.startsWith('auto_')) {
+            const el = this.domActions.elementSelector(this.foundCmp.rule?.detectCmp?.[0]?.exists)[0];
+            if (el) {
+                highlightNode(el);
+                await this.domActions.wait(3000);
+                unhighlightNode(el);
+            }
+        }
 
         if (this.config.autoAction === 'optOut') {
             return await this.doOptOut();

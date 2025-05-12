@@ -1,0 +1,28 @@
+{
+  "name": "auto_bristan.com_0",
+  "vendorUrl": "https://www.bristan.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?bristan\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div:nth-child(3) > div:nth-child(2) > button:nth-child(5)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div:nth-child(3) > div:nth-child(2) > button:nth-child(5)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div:nth-child(3) > div:nth-child(2) > button:nth-child(5)",
+      "text": "Necessary Cookies"
+    }
+  ]
+}

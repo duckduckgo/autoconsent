@@ -1,0 +1,28 @@
+{
+  "name": "auto_poferries.com_0",
+  "vendorUrl": "https://www.poferries.com/en",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?poferries\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)",
+      "text": "Deny"
+    }
+  ]
+}

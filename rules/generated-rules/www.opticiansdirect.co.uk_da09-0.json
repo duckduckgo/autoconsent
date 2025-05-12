@@ -1,0 +1,28 @@
+{
+  "name": "auto_opticiansdirect.co.uk_0",
+  "vendorUrl": "https://www.opticiansdirect.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?opticiansdirect\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > button:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > button:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > button:nth-child(3)",
+      "text": "I Decline"
+    }
+  ]
+}
