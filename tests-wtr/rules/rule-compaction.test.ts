@@ -42,7 +42,7 @@ describe('RuleCompaction', () => {
         // Visible lookup: 70%
         // waitForThenClick: 73%
         console.log('Original Size:', originalLength, 'Encoded Size:', encodedLength);
-        expect((originalLength - encodedLength) / encodedLength).to.be.greaterThan(0.7);
+        expect((originalLength - encodedLength) / encodedLength).to.be.greaterThan(0.75);
     });
 
     it('decodeRules: refuses to decode future formats', () => {
