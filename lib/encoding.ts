@@ -20,7 +20,7 @@ export type CompactCMPRule = [
     string, // name
     CompactNullableBoolean, // cosmetic
     string, // runContext.urlPattern
-    number,  // runContext.main + runContext.frame
+    number, // runContext.main + runContext.frame
     number[], // prehideSelectors
     CompactCMPRuleStep[], // detectCMP
     CompactCMPRuleStep[], // detectPopup
@@ -130,17 +130,17 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
     return encoded.r.map((rule) => {
         const [name, cosmetic, urlPattern, mainFrame, prehideSelectors, detectCmp, detectPopup, optOut, test, extra] = rule;
         const optIn: AutoConsentRuleStep[] = [];
-        const runContext: RunContext = {}
-        const runInMainFrame = decodeNullableBoolean(Math.floor(mainFrame / 10) as CompactNullableBoolean)
-        const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean)
+        const runContext: RunContext = {};
+        const runInMainFrame = decodeNullableBoolean(Math.floor(mainFrame / 10) as CompactNullableBoolean);
+        const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean);
         if (runInMainFrame !== undefined) {
-            runContext.main = runInMainFrame
+            runContext.main = runInMainFrame;
         }
         if (runInSubFrame !== undefined) {
-            runContext.frame = runInSubFrame
+            runContext.frame = runInSubFrame;
         }
-        if (urlPattern !== "") {
-            runContext.urlPattern = urlPattern
+        if (urlPattern !== '') {
+            runContext.urlPattern = urlPattern;
         }
 
         return {

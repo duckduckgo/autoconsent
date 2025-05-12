@@ -26,7 +26,7 @@ describe('RuleCompaction', () => {
             const originalRule = rules[i];
             // ensure that runContext exists
             if (!originalRule.runContext) {
-                originalRule.runContext = {}
+                originalRule.runContext = {};
             }
             const finalRule = decoded[i];
             for (const key of requiredKeys) {
