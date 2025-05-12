@@ -22,6 +22,11 @@ export default class Onetrust extends AutoConsentCMPBase {
         return false;
     }
 
+    hasMatchingUrlPattern(): boolean {
+        // this is not a site-specific rule despite the urlPattern
+        return false;
+    }
+
     async detectCmp() {
         return this.elementExists('#onetrust-banner-sdk,#onetrust-pc-sdk');
     }
