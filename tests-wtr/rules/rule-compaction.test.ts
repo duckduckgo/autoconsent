@@ -24,10 +24,14 @@ describe('RuleCompaction', () => {
         ];
         for (let i = 0; i < rules.length; i++) {
             const originalRule = rules[i];
+            // ensure that runContext exists
+            if (!originalRule.runContext) {
+                originalRule.runContext = {}
+            }
             const finalRule = decoded[i];
             for (const key of requiredKeys) {
                 // @ts-expect-error Type checker doesn't like us using dynamic attributes here
-                expect(originalRule[key]).to.deep.equal(finalRule[key], `${key} is correctly preserved`);
+                expect(finalRule[key]).to.deep.equal(originalRule[key], `${key} is correctly preserved`);
             }
         }
         const originalLength = JSON.stringify(rules).length;
@@ -37,8 +41,8 @@ describe('RuleCompaction', () => {
         // Exists lookup:  53%
         // Visible lookup: 70%
         // waitForThenClick: 73%
-        expect((originalLength - encodedLength) / encodedLength).to.be.greaterThan(0.7);
         console.log('Original Size:', originalLength, 'Encoded Size:', encodedLength);
+        expect((originalLength - encodedLength) / encodedLength).to.be.greaterThan(0.7);
     });
 
     it('decodeRules: refuses to decode future formats', () => {
