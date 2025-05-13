@@ -4,7 +4,6 @@ import path from 'path';
 import https from 'https';
 import { encodeRules } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
-import { RuleBundle } from '../lib/types';
 
 export const rulesDir = __dirname;
 
@@ -40,48 +39,13 @@ export async function buildConsentOMaticRules() {
     return comRules;
 }
 
-export function combineRules(autoconsent: AutoConsentCMPRule[]): RuleBundle {
-    return {
-        autoconsent,
-        // consentomatic,
-    };
-}
-
-export function compactPrettyPrint(encodedRules: string) {
-    const outputLines = [];
-    let inRules = false;
-    let ruleAcc = '';
-    for (const line of encodedRules.split('\n')) {
-        if (!inRules && line === '  "r": [') {
-            inRules = true;
-            outputLines.push(line);
-            continue;
-        }
-        if (!inRules) {
-            outputLines.push(line);
-            continue;
-        }
-        if (line.startsWith('    ]')) {
-            const rule = JSON.parse(ruleAcc + ']');
-            outputLines.push(`    ${JSON.stringify(rule)}${line.endsWith(',') ? ',' : ''}`);
-            ruleAcc = '';
-            if (!line.endsWith(',')) {
-                inRules = false;
-            }
-            continue;
-        }
-        ruleAcc += line;
-    }
-    return outputLines.join('\n');
-}
-
 (async () => {
     const stringify = (rules: object) => JSON.stringify(rules);
     const autoconsent = await buildAutoconsentRules();
     const consentomatic = await buildConsentOMaticRules();
     fs.writeFile(path.join(rulesDir, 'rules.json'), stringify({ autoconsent }), () => console.log('Written rules.json'));
     fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
-    fs.writeFile(path.join(rulesDir, 'compact-rules.json'), compactPrettyPrint(stringify(encodeRules(autoconsent))), () =>
+    fs.writeFile(path.join(rulesDir, 'compact-rules.json'), stringify(encodeRules(autoconsent)), () =>
         console.log('Written compact-rules.json'),
     );
 })();

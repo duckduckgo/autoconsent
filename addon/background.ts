@@ -3,6 +3,7 @@ import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage
 import { Config, RuleBundle } from '../lib/types';
 import { manifestVersion, storageGet, storageRemove, storageSet } from './mv-compat';
 import { initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
+import { consentomatic } from '../rules/consentomatic.json'
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -94,6 +95,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
         console.groupEnd();
     }
     const rules: RuleBundle = await storageGet('rules');
+    rules.consentomatic = consentomatic;
 
     switch (msg.type) {
         case 'init':

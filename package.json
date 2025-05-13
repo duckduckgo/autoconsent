@@ -40,7 +40,8 @@
     "prepublish": "npm run compile-filterlist && npm run build-rules && npm run bundle",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
-    "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts"
+    "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
+    "bundle-config-rules": "ts-node scripts/bundle-config-rules"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
