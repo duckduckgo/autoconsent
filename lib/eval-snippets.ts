@@ -114,6 +114,12 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    EVAL_FASTCMP_OPTIN: () =>
+        document?.querySelector?.('iframe#fast-cmp-iframe')?.contentDocument?.querySelector?.('.fast-cmp-home-accept button')?.click?.() ||
+        true,
+    EVAL_FASTCMP_OPTOUT: () =>
+        document?.querySelector?.('iframe#fast-cmp-iframe')?.contentDocument?.querySelector?.('.fast-cmp-home-refuse button')?.click?.() ||
+        true,
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
