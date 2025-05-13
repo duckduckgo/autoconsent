@@ -36,7 +36,7 @@ export type CompactCMPRuleset = {
     r: CompactCMPRule[];
 };
 
-function encodeNullableBoolean(value: boolean): CompactNullableBoolean {
+function encodeNullableBoolean(value: boolean | undefined): CompactNullableBoolean {
     if (value === true) {
         return 1;
     }
@@ -90,12 +90,12 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
             encodeNullableBoolean(r.cosmetic),
             r.runContext?.urlPattern || '',
             parseInt(`${encodeNullableBoolean(r.runContext?.main)}${encodeNullableBoolean(r.runContext?.frame)}`),
-            r.prehideSelectors?.map(replaceStrings),
+            r.prehideSelectors?.map(replaceStrings) || [],
             r.minimumRuleStepVersion || 0,
             r.detectCmp.map(encodeRuleStep),
             r.detectPopup.map(encodeRuleStep),
             r.optOut.map(encodeRuleStep),
-            r.test?.map(encodeRuleStep),
+            (r.test || []).map(encodeRuleStep),
             {
                 intermediate: r.intermediate,
             },

@@ -195,7 +195,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     get hasSelfTest(): boolean {
-        return !!this.rule.test;
+        return !!this.rule.test && this.rule.test.length > 0;
     }
 
     get isIntermediate(): boolean {
