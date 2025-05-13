@@ -43,3 +43,16 @@ for (const ruleFile of ruleFiles) {
 }
 
 console.log('All rules look good!');
+
+// Write out allowed rule keys to lib/cmps/validation.ts
+fs.writeFileSync(
+    path.join(__dirname, '../lib/cmps/validation.ts'),
+    `/**
+ * This is a list of all allowed properties on rule step keys.
+ * We can use this to validate if a given step is supported by
+ * the current library version.
+ */
+export const PERMITTED_STEP_KEYS = ${JSON.stringify(Object.keys(schema.definitions.AutoConsentRuleStep.properties), undefined, 4)}
+`,
+);
+console.log('Written lib/cmps/validation.ts');

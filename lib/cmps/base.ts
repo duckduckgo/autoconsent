@@ -3,6 +3,7 @@ import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, R
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
+import { PERMITTED_STEP_KEYS } from './validation';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -19,19 +20,24 @@ export const defaultRunContext: RunContext = {
 };
 
 function validateRuleSteps(rules: AutoConsentRuleStep[]): boolean {
-    return rules.every(step => {
+    return rules.every((step) => {
         if (step.if) {
-            return validateRuleSteps(step.then || []) && validateRuleSteps(step.else || [])
+            return validateRuleSteps(step.then || []) && validateRuleSteps(step.else || []);
         }
-        return validateRuleStep(step)
-    })
+        return validateRuleStep(step);
+    });
 }
 
 function validateRuleStep(rule: AutoConsentRuleStep): boolean {
     if (rule.eval && !snippets[rule.eval]) {
-        return false
+        return false;
     }
-    return true
+    for (const key of Object.keys(rule)) {
+        if (!PERMITTED_STEP_KEYS.includes(key)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
@@ -228,7 +234,11 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
     async detectCmp() {
         if (this.rule.detectCmp) {
-            return await this._runRulesSequentially(this.rule.detectCmp, this.autoconsent.config.logs.detectionsteps) && validateRuleSteps(this.rule.detectPopup) && validateRuleSteps(this.rule.optOut);
+            return (
+                (await this._runRulesSequentially(this.rule.detectCmp, this.autoconsent.config.logs.detectionsteps)) &&
+                validateRuleSteps(this.rule.detectPopup) &&
+                validateRuleSteps(this.rule.optOut)
+            );
         }
         return false;
     }
