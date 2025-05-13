@@ -282,6 +282,8 @@ export default class AutoConsent {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
             }
         };
+        const mutationObserver = this.domActions.waitForMutation('html');
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
         // collect relevant site-specific rules and run them first
         await Promise.all(siteSpecificRules.map(detectCmp));
@@ -300,7 +302,7 @@ export default class AutoConsent {
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             try {
-                await Promise.all([this.domActions.wait(500), this.domActions.waitForMutation('html')]);
+                await Promise.all([this.domActions.wait(500), mutationObserver]);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];
