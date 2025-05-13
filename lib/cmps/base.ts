@@ -18,6 +18,22 @@ export const defaultRunContext: RunContext = {
     urlPattern: '',
 };
 
+function validateRuleSteps(rules: AutoConsentRuleStep[]): boolean {
+    return rules.every(step => {
+        if (step.if) {
+            return validateRuleSteps(step.then || []) && validateRuleSteps(step.else || [])
+        }
+        return validateRuleStep(step)
+    })
+}
+
+function validateRuleStep(rule: AutoConsentRuleStep): boolean {
+    if (rule.eval && !snippets[rule.eval]) {
+        return false
+    }
+    return true
+}
+
 export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     name: string;
     runContext: RunContext = defaultRunContext;
@@ -212,7 +228,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
     async detectCmp() {
         if (this.rule.detectCmp) {
-            return this._runRulesSequentially(this.rule.detectCmp, this.autoconsent.config.logs.detectionsteps);
+            return await this._runRulesSequentially(this.rule.detectCmp, this.autoconsent.config.logs.detectionsteps) && validateRuleSteps(this.rule.detectPopup) && validateRuleSteps(this.rule.optOut);
         }
         return false;
     }
