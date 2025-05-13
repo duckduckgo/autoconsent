@@ -22,6 +22,7 @@ export type CompactCMPRule = [
     string, // runContext.urlPattern
     number, // runContext.main + runContext.frame
     number[], // prehideSelectors
+    number, // minimumRuleStepVersion
     CompactCMPRuleStep[], // detectCMP
     CompactCMPRuleStep[], // detectPopup
     CompactCMPRuleStep[], // optOut
@@ -90,6 +91,7 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
             r.runContext?.urlPattern || '',
             parseInt(`${encodeNullableBoolean(r.runContext?.main)}${encodeNullableBoolean(r.runContext?.frame)}`),
             r.prehideSelectors?.map(replaceStrings),
+            r.minimumRuleStepVersion || 0,
             r.detectCmp.map(encodeRuleStep),
             r.detectPopup.map(encodeRuleStep),
             r.optOut.map(encodeRuleStep),
@@ -128,7 +130,19 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
         return { ...clonedStep };
     }
     return encoded.r.map((rule) => {
-        const [name, cosmetic, urlPattern, mainFrame, prehideSelectors, detectCmp, detectPopup, optOut, test, extra] = rule;
+        const [
+            name,
+            cosmetic,
+            urlPattern,
+            mainFrame,
+            prehideSelectors,
+            minimumRuleStepVersion,
+            detectCmp,
+            detectPopup,
+            optOut,
+            test,
+            extra,
+        ] = rule;
         const optIn: AutoConsentRuleStep[] = [];
         const runContext: RunContext = {};
         const runInMainFrame = decodeNullableBoolean(Math.floor(mainFrame / 10) as CompactNullableBoolean);
@@ -153,6 +167,7 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
             optOut: optOut.map(decodeRuleStep),
             optIn,
             test: test?.map(decodeRuleStep),
+            minimumRuleStepVersion: minimumRuleStepVersion || undefined,
             ...extra,
         };
     });

@@ -1,6 +1,6 @@
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
-import { AutoConsentCMPRule } from './rules';
+import { AutoConsentCMPRule, SUPPORTED_RULE_STEP_VERSION } from './rules';
 import { BackgroundMessage, InitMessage } from './messages';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
@@ -179,7 +179,10 @@ export default class AutoConsent {
     }
 
     addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
-        this.rules.push(new AutoConsentCMP(ruleset, this));
+        // Filter out any rules that need newer step/eval support
+        if ((ruleset.minimumRuleStepVersion || 1) <= SUPPORTED_RULE_STEP_VERSION) {
+            this.rules.push(new AutoConsentCMP(ruleset, this));
+        }
     }
 
     addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {

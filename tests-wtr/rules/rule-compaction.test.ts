@@ -2,6 +2,7 @@ import { expect } from '@esm-bundle/chai';
 import { encodeRules, decodeRules } from '../../lib/encoding';
 import { AutoConsentCMPRule } from '../../lib/rules';
 import { autoconsent } from '../../rules/rules.json';
+import AutoConsent from '../../lib/web';
 
 describe('RuleCompaction', () => {
     it('decodeRules(encodeRules(rules)) preserves required attributes', () => {
@@ -21,6 +22,7 @@ describe('RuleCompaction', () => {
             'optOut',
             'openCmp',
             'test',
+            'minimumRuleStepVersion',
         ];
         for (let i = 0; i < rules.length; i++) {
             const originalRule = rules[i];
@@ -47,5 +49,34 @@ describe('RuleCompaction', () => {
 
     it('decodeRules: refuses to decode future formats', () => {
         expect(() => decodeRules({ v: 2, s: [], r: [] })).to.throw('Unsupported rule format.');
+    });
+});
+
+describe('AutoConsent', () => {
+    it('parseDeclarativeRules: filters out rules that use newer step/eval rules', () => {
+        const autoconsent = new AutoConsent(() => Promise.resolve());
+        const dynamicRuleCount = autoconsent.rules.length;
+        autoconsent.parseDeclarativeRules({
+            autoconsent: [],
+            compact: encodeRules([
+                {
+                    name: 'test',
+                    detectCmp: [{ exists: '#cmp' }],
+                    detectPopup: [{ visible: '#cmp' }],
+                    optOut: [{ click: '#opt-out' }],
+                    optIn: [],
+                    minimumRuleStepVersion: 1,
+                },
+                {
+                    name: 'future_rule',
+                    detectCmp: [{ exists: '#cmp' }],
+                    detectPopup: [{ visible: '#cmp' }],
+                    optOut: [{ click: '#opt-out' }],
+                    optIn: [],
+                    minimumRuleStepVersion: 6,
+                },
+            ]),
+        });
+        expect(autoconsent.rules).to.have.length(dynamicRuleCount + 1);
     });
 });
