@@ -30,6 +30,10 @@ describe('RuleCompaction', () => {
             if (!originalRule.runContext) {
                 originalRule.runContext = {};
             }
+            // Default value for test and prehideSelectors is empty array
+            originalRule.test = originalRule.test || []
+            originalRule.prehideSelectors = originalRule.prehideSelectors || []
+
             const finalRule = decoded[i];
             for (const key of requiredKeys) {
                 // @ts-expect-error Type checker doesn't like us using dynamic attributes here
