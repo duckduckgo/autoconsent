@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_learn.ligonier.org_0",
+  "vendorUrl": "https://learn.ligonier.org/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?learn\\.ligonier\\.org/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[class] > form > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[class] > form > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[class] > form > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Strictly Necessary"
+    }
+  ]
+}

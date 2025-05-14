@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_support.nordvpn.com_0",
+  "vendorUrl": "https://support.nordvpn.com/hc/en-us",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?support\\.nordvpn\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[class][id] > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[class][id] > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[class][id] > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Reject"
+    }
+  ]
+}

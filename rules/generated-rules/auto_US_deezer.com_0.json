@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_deezer.com_0",
+  "vendorUrl": "https://www.deezer.com/us/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?deezer\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[id][cookie-banner-data-theme] > div > div > div > div:nth-child(2) > div:nth-child(2) > button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[id][cookie-banner-data-theme] > div > div > div > div:nth-child(2) > div:nth-child(2) > button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[id][cookie-banner-data-theme] > div > div > div > div:nth-child(2) > div:nth-child(2) > button",
+      "text": "Refuse"
+    }
+  ]
+}

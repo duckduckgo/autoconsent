@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_marriedbiography.com_0",
+  "vendorUrl": "https://marriedbiography.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?marriedbiography\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[id][data-nosnippet][data-cli-type][style] > span > a:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[id][data-nosnippet][data-cli-type][style] > span > a:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[id][data-nosnippet][data-cli-type][style] > span > a:nth-child(3)",
+      "text": "REJECT"
+    }
+  ]
+}

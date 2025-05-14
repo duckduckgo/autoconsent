@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_tv.yandex.com_0",
+  "vendorUrl": "http://tv.yandex.com/showcaptcha?cc=1&form-fb-hint=2.46&mt=E8520F7D490D8E70C0A6EC04A97B98DAC6F74063586201018CF157E29CB9A7003B711D9F7CC7EBFF083BA3323912DFF80A095302AC1257744CD8728B9DCAEE38288EDEC033A9097D02D58E87396DB860E9BD5F43B5F7E7BB8FCB738D6231514894D4D685775E9A370E93C8DAF670B967B265706F73015049F7303C8FAD0236C10D0BFA4A23BB72999EEBE5418861E62A311A053E1DF6BEEC952791A5E51407E8A44FE38394A3A663350D33A0E1C23355C889492809693890096BB0F6C6A2DA9005F418B1A8B511FD0046C31410D40099C139EDED0FCB9E51DBD660AE&retpath=aHR0cDovL3R2LnlhbmRleC5jb20vPw%2C%2C_3b9620ed58a4f7a18a59e6464bdefe71&t=2/1747071878/8aeb7be02a10b81c8864706c30954d18&u=6563544663781699041&s=2b02a18f2a605ddb76df067dc3d2dab1",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?tv\\.yandex\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[class][role][aria-labelledby][aria-live][lang] > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[class][role][aria-labelledby][aria-live][lang] > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[class][role][aria-labelledby][aria-live][lang] > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)",
+      "text": "Allow essential cookies"
+    }
+  ]
+}
