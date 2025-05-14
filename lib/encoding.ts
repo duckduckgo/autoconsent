@@ -145,7 +145,7 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
         ] = rule;
         const optIn: AutoConsentRuleStep[] = [];
         const runContext: RunContext = {};
-        const runInMainFrame = decodeNullableBoolean(Math.floor(mainFrame / 10) % 10 as CompactNullableBoolean);
+        const runInMainFrame = decodeNullableBoolean((Math.floor(mainFrame / 10) % 10) as CompactNullableBoolean);
         const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean);
         if (runInMainFrame !== undefined) {
             runContext.main = runInMainFrame;
