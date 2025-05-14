@@ -31,8 +31,8 @@ describe('RuleCompaction', () => {
                 originalRule.runContext = {};
             }
             // Default value for test and prehideSelectors is empty array
-            originalRule.test = originalRule.test || []
-            originalRule.prehideSelectors = originalRule.prehideSelectors || []
+            originalRule.test = originalRule.test || [];
+            originalRule.prehideSelectors = originalRule.prehideSelectors || [];
 
             const finalRule = decoded[i];
             for (const key of requiredKeys) {
@@ -53,6 +53,21 @@ describe('RuleCompaction', () => {
 
     it('decodeRules: refuses to decode future formats', () => {
         expect(() => decodeRules({ v: 2, s: [], r: [] })).to.throw('Unsupported rule format.');
+    });
+
+    it('decodeRules: runContext flags are extendable', () => {
+        // We can add new flags on the left-hand side of the runContext field and only clients
+        // will still be able to parse the lower two.
+        const decoded = decodeRules({
+            v: 1,
+            s: [],
+            r: [
+                [1, 'test_extra_flag', 0, '', 112, [], [], [], [], [], {}],
+                [1, 'test', 0, '', 10, [], [], [], [], [], {}],
+            ],
+        });
+        expect(decoded[0].runContext).to.eql({ main: true });
+        expect(decoded[1].runContext).to.eql({ main: true, frame: false });
     });
 });
 
