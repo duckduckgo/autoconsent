@@ -285,15 +285,22 @@ export default class AutoConsent {
         const mutationObserver = this.domActions.waitForMutation('html');
         mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
+        logsConfig.lifecycle &&
+            siteSpecificRules.length > 0 &&
+            console.log(
+                'Detecting site-specific rules',
+                siteSpecificRules.map((r) => r.name),
+            );
         // collect relevant site-specific rules and run them first
         await Promise.all(siteSpecificRules.map(detectCmp));
 
-        // // exit early if we already found a site-specific popup
+        // exit early if we already found a site-specific popup
         if (foundCMPs.length > 0) {
             return foundCMPs;
         }
 
-        // // check generic popups
+        logsConfig.lifecycle && console.log("Site-specific rules didn't match, trying generic rules");
+        // check generic popups
         await Promise.all(otherRules.map(detectCmp));
 
         this.detectHeuristics();
