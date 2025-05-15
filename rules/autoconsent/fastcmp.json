@@ -15,12 +15,12 @@
     ],
     "optIn": [
         {
-            "eval": "EVAL_FASTCMP_OPTIN"
+            "waitForThenClick": ["iframe#fast-cmp-iframe", ".fast-cmp-home-accept button"]
         }
     ],
     "optOut": [
         {
-            "eval": "EVAL_FASTCMP_OPTOUT"
+            "waitForThenClick": ["iframe#fast-cmp-iframe", ".fast-cmp-home-refuse button"]
         }
     ],
     "test": [
