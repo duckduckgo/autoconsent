@@ -1,4 +1,4 @@
-import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, RunContext } from './rules';
+import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from './rules';
 
 export type CompactExists = {
     e: number;
@@ -32,7 +32,7 @@ export type CompactCMPRule = [
 
 export type CompactCMPRuleset = {
     v: number;
-    s: ElementSelector[];
+    s: string[];
     r: CompactCMPRule[];
 };
 
