@@ -1,4 +1,4 @@
-import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext } from './rules';
+import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext, SUPPORTED_RULE_STEP_VERSION } from './rules';
 
 export type CompactExists = {
     e: number;
@@ -129,46 +129,48 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
         }
         return { ...clonedStep };
     }
-    return encoded.r.map((rule) => {
-        const [
-            minimumRuleStepVersion,
-            name,
-            cosmetic,
-            urlPattern,
-            mainFrame,
-            prehideSelectors,
-            detectCmp,
-            detectPopup,
-            optOut,
-            test,
-            extra,
-        ] = rule;
-        const optIn: AutoConsentRuleStep[] = [];
-        const runContext: RunContext = {};
-        const runInMainFrame = decodeNullableBoolean((Math.floor(mainFrame / 10) % 10) as CompactNullableBoolean);
-        const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean);
-        if (runInMainFrame !== undefined) {
-            runContext.main = runInMainFrame;
-        }
-        if (runInSubFrame !== undefined) {
-            runContext.frame = runInSubFrame;
-        }
-        if (urlPattern !== '') {
-            runContext.urlPattern = urlPattern;
-        }
+    return encoded.r
+        .filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION)
+        .map((rule) => {
+            const [
+                minimumRuleStepVersion,
+                name,
+                cosmetic,
+                urlPattern,
+                mainFrame,
+                prehideSelectors,
+                detectCmp,
+                detectPopup,
+                optOut,
+                test,
+                extra,
+            ] = rule;
+            const optIn: AutoConsentRuleStep[] = [];
+            const runContext: RunContext = {};
+            const runInMainFrame = decodeNullableBoolean((Math.floor(mainFrame / 10) % 10) as CompactNullableBoolean);
+            const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean);
+            if (runInMainFrame !== undefined) {
+                runContext.main = runInMainFrame;
+            }
+            if (runInSubFrame !== undefined) {
+                runContext.frame = runInSubFrame;
+            }
+            if (urlPattern !== '') {
+                runContext.urlPattern = urlPattern;
+            }
 
-        return {
-            name,
-            cosmetic: decodeNullableBoolean(cosmetic),
-            runContext,
-            prehideSelectors: prehideSelectors.map((i) => encoded.s[i].toString()),
-            detectCmp: detectCmp.map(decodeRuleStep),
-            detectPopup: detectPopup.map(decodeRuleStep),
-            optOut: optOut.map(decodeRuleStep),
-            optIn,
-            test: test?.map(decodeRuleStep),
-            minimumRuleStepVersion: minimumRuleStepVersion || undefined,
-            ...extra,
-        };
-    });
+            return {
+                name,
+                cosmetic: decodeNullableBoolean(cosmetic),
+                runContext,
+                prehideSelectors: prehideSelectors.map((i) => encoded.s[i].toString()),
+                detectCmp: detectCmp.map(decodeRuleStep),
+                detectPopup: detectPopup.map(decodeRuleStep),
+                optOut: optOut.map(decodeRuleStep),
+                optIn,
+                test: test?.map(decodeRuleStep),
+                minimumRuleStepVersion: minimumRuleStepVersion || undefined,
+                ...extra,
+            };
+        });
 }

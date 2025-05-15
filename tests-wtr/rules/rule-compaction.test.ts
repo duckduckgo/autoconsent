@@ -69,6 +69,20 @@ describe('RuleCompaction', () => {
         expect(decoded[0].runContext).to.eql({ main: true });
         expect(decoded[1].runContext).to.eql({ main: true, frame: false });
     });
+
+    it('decodeRules: filters out rules that use newer step/eval rules', () => {
+        const decoded = decodeRules({
+            v: 1,
+            s: [],
+            r: [
+                // @ts-expect-error Test rule has different shape on purpose
+                [10, 'test_future', 0, '', 112, [], [], [], [], [], [], {}],
+                [1, 'test', 0, '', 10, [], [], [], [], [], {}],
+            ],
+        });
+        expect(decoded).to.have.length(1);
+        expect(decoded[0].name).to.equal('test');
+    });
 });
 
 describe('AutoConsent', () => {
