@@ -12,8 +12,13 @@ export type CompactWaitForThenClick = {
     c: number;
 };
 
-export type CompactCMPRuleStep = AutoConsentRuleStep & Partial<CompactExists> & Partial<CompactVisible> & Partial<CompactWaitForThenClick>;
+export type CompactClick = {
+    k: number;
+};
 
+export type CompactRulesStep = CompactExists & CompactVisible & CompactWaitForThenClick & CompactClick;
+export type CompactCMPRuleStep = AutoConsentRuleStep & Partial<CompactRulesStep>;
+type CompactableRuleStepKey = 'exists' | 'visible' | 'waitForThenClick' | 'click';
 type CompactNullableBoolean = 0 | 1 | 2;
 
 export type CompactCMPRule = [
@@ -35,6 +40,17 @@ export type CompactCMPRuleset = {
     s: string[];
     r: CompactCMPRule[];
 };
+
+/**
+ * Mapping of long to short key for rule step keys that should be shortened, with their value
+ * replaced by an array offset.
+ */
+const compactedRuleSteps: [CompactableRuleStepKey, keyof CompactRulesStep][] = [
+    ['exists', 'e'],
+    ['visible', 'v'],
+    ['waitForThenClick', 'c'],
+    ['click', 'k'],
+];
 
 function encodeNullableBoolean(value: boolean | undefined): CompactNullableBoolean {
     if (value === true) {
@@ -69,17 +85,11 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
-        if (clonedStep.exists && typeof clonedStep.exists === 'string') {
-            clonedStep.e = replaceStrings(clonedStep.exists);
-            delete clonedStep.exists;
-        }
-        if (clonedStep.visible && typeof clonedStep.visible === 'string') {
-            clonedStep.v = replaceStrings(clonedStep.visible);
-            delete clonedStep.visible;
-        }
-        if (clonedStep.waitForThenClick && typeof clonedStep.waitForThenClick === 'string') {
-            clonedStep.c = replaceStrings(clonedStep.waitForThenClick);
-            delete clonedStep.waitForThenClick;
+        for (const [longKey, shortKey] of compactedRuleSteps) {
+            if (clonedStep[longKey] && typeof clonedStep[longKey] === 'string') {
+                clonedStep[shortKey] = replaceStrings(clonedStep[longKey]);
+                delete clonedStep[longKey];
+            }
         }
         return clonedStep;
     }
@@ -115,17 +125,11 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
     }
     function decodeRuleStep(step: CompactCMPRuleStep): AutoConsentRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
-        if (clonedStep.e !== undefined) {
-            clonedStep.exists = encoded.s[clonedStep.e];
-            delete clonedStep.e;
-        }
-        if (clonedStep.v !== undefined) {
-            clonedStep.visible = encoded.s[clonedStep.v];
-            delete clonedStep.v;
-        }
-        if (clonedStep.c !== undefined) {
-            clonedStep.waitForThenClick = encoded.s[clonedStep.c];
-            delete clonedStep.c;
+        for (const [longKey, shortKey] of compactedRuleSteps) {
+            if (clonedStep[shortKey] !== undefined) {
+                clonedStep[longKey] = encoded.s[clonedStep[shortKey]];
+                delete clonedStep[shortKey];
+            }
         }
         return { ...clonedStep };
     }
