@@ -134,6 +134,9 @@ export class DomActions implements DomActionsProvider {
         if (parent.shadowRoot) {
             return Array.from(parent.shadowRoot.querySelectorAll(selector));
         }
+        if (parent.contentDocument?.querySelectorAll) {
+            return Array.from(parent.contentDocument.querySelectorAll(selector));
+        }
         return Array.from(parent.querySelectorAll(selector));
     }
 
