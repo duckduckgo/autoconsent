@@ -1,5 +1,6 @@
 import fs from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 if (process.argv.length !== 3) {
     console.log('Usage: npm run bundle-config-rules path/to/privacy-configuration');
@@ -9,7 +10,7 @@ if (process.argv.length !== 3) {
 const privacyConfigPath = process.argv[2];
 const autoconsentConfigPath = join(privacyConfigPath, 'features', 'autoconsent.json');
 const config = JSON.parse(fs.readFileSync(autoconsentConfigPath, 'utf-8'));
-const compactRules = JSON.parse(fs.readFileSync(join(__dirname, '../rules/compact-rules.json'), 'utf-8'));
+const compactRules = JSON.parse(fs.readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../rules/compact-rules.json'), 'utf-8'));
 
 config.settings.compactRuleList = compactRules;
 // generate standard pretty-printed output
