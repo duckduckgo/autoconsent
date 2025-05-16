@@ -44,7 +44,7 @@ describe('RuleCompaction', () => {
     });
 
     it('decodeRules: runContext flags are extendable', () => {
-        // We can add new flags on the left-hand side of the runContext field and only clients
+        // We can add new flags on the left-hand side of the runContext field and old clients
         // will still be able to parse the lower two.
         const decoded = decodeRules({
             v: 1,
