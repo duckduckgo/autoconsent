@@ -1,24 +1,26 @@
 import { AutoConsentCMPRule, AutoConsentRuleStep, RunContext, SUPPORTED_RULE_STEP_VERSION } from './rules';
 
-export type CompactExists = {
-    e: number;
+export type CompactRuleStep = {
+    e: number; // exists
+    v: number; // visible
+    c: number; // waitForThenClick
+    k: number; // click
+    w: number; // waitFor
+    wv: number; // waitForVisible
+    h: number; // hide
+    cc: number; // cookieContains
 };
 
-export type CompactVisible = {
-    v: number;
-};
-
-export type CompactWaitForThenClick = {
-    c: number;
-};
-
-export type CompactClick = {
-    k: number;
-};
-
-export type CompactRulesStep = CompactExists & CompactVisible & CompactWaitForThenClick & CompactClick;
-export type CompactCMPRuleStep = AutoConsentRuleStep & Partial<CompactRulesStep>;
-type CompactableRuleStepKey = 'exists' | 'visible' | 'waitForThenClick' | 'click';
+export type CompactCMPRuleStep = AutoConsentRuleStep & Partial<CompactRuleStep>;
+type CompactableRuleStepKey =
+    | 'exists'
+    | 'visible'
+    | 'waitForThenClick'
+    | 'click'
+    | 'waitFor'
+    | 'waitForVisible'
+    | 'hide'
+    | 'cookieContains';
 type CompactNullableBoolean = 0 | 1 | 2;
 
 export type CompactCMPRule = [
@@ -45,11 +47,15 @@ export type CompactCMPRuleset = {
  * Mapping of long to short key for rule step keys that should be shortened, with their value
  * replaced by an array offset.
  */
-const compactedRuleSteps: [CompactableRuleStepKey, keyof CompactRulesStep][] = [
+const compactedRuleSteps: [CompactableRuleStepKey, keyof CompactRuleStep][] = [
     ['exists', 'e'],
     ['visible', 'v'],
     ['waitForThenClick', 'c'],
     ['click', 'k'],
+    ['waitFor', 'w'],
+    ['waitForVisible', 'wv'],
+    ['hide', 'h'],
+    ['cookieContains', 'cc'],
 ];
 
 function encodeNullableBoolean(value: boolean | undefined): CompactNullableBoolean {
@@ -91,6 +97,16 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
                 delete clonedStep[longKey];
             }
         }
+        if (clonedStep.if) {
+            clonedStep.if = encodeRuleStep(step.if);
+            clonedStep.then = step.then && step.then.map(encodeRuleStep);
+            if (step.else) {
+                clonedStep.else = step.else.map(encodeRuleStep);
+            }
+        }
+        if (clonedStep.any) {
+            clonedStep.any = step.any.map(encodeRuleStep);
+        }
         return clonedStep;
     }
 
@@ -128,6 +144,16 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
                 clonedStep[longKey] = encoded.s[clonedStep[shortKey]];
                 delete clonedStep[shortKey];
             }
+        }
+        if (clonedStep.if) {
+            clonedStep.if = decodeRuleStep(step.if);
+            clonedStep.then = step.then && step.then.map(decodeRuleStep);
+            if (step.else) {
+                clonedStep.else = step.else.map(decodeRuleStep);
+            }
+        }
+        if (clonedStep.any) {
+            clonedStep.any = step.any.map(decodeRuleStep);
         }
         return { ...clonedStep };
     }
