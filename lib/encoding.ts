@@ -106,9 +106,7 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
             r.detectPopup.map(encodeRuleStep),
             r.optOut.map(encodeRuleStep),
             (r.test || []).map(encodeRuleStep),
-            {
-                intermediate: r.intermediate,
-            },
+            r.intermediate !== undefined ? { intermediate: r.intermediate } : {},
         ];
     });
 
