@@ -1,3 +1,15 @@
+# v12.20.1 (Fri May 16 2025)
+
+#### 🐛 Bug Fix
+
+- Fix onetrust rule [#746](https://github.com/duckduckgo/autoconsent/pull/746) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v12.20.0 (Fri May 16 2025)
 
 #### 🚀 Enhancement
