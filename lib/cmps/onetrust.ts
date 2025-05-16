@@ -1,14 +1,9 @@
-import { RunContext } from '../rules';
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Onetrust extends AutoConsentCMPBase {
     name = 'Onetrust';
     prehideSelectors = ['#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner'];
-
-    runContext: RunContext = {
-        urlPattern: '^(?!.*https://www\\.nba\\.com/)',
-    };
 
     get hasSelfTest(): boolean {
         return true;
@@ -19,11 +14,6 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     get isCosmetic(): boolean {
-        return false;
-    }
-
-    hasMatchingUrlPattern(): boolean {
-        // this is not a site-specific rule despite the urlPattern
         return false;
     }
 
