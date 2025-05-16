@@ -11,19 +11,7 @@ describe('RuleCompaction', () => {
         const encoded = encodeRules(rules);
         const decoded = decodeRules(encoded);
         expect(rules.length).to.equal(decoded.length);
-        const requiredKeys = [
-            'name',
-            'intermediate',
-            'cosmetic',
-            'prehideSelectors',
-            'runContext',
-            'detectCmp',
-            'detectPopup',
-            'optOut',
-            'openCmp',
-            'test',
-            'minimumRuleStepVersion',
-        ];
+        const ignoredKeys = ['comment', 'optIn', 'vendorUrl'];
         for (let i = 0; i < rules.length; i++) {
             const originalRule = rules[i];
             // ensure that runContext exists
@@ -35,7 +23,7 @@ describe('RuleCompaction', () => {
             originalRule.prehideSelectors = originalRule.prehideSelectors || [];
 
             const finalRule = decoded[i];
-            for (const key of requiredKeys) {
+            for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
                 // @ts-expect-error Type checker doesn't like us using dynamic attributes here
                 expect(finalRule[key]).to.deep.equal(originalRule[key], `${key} is correctly preserved`);
             }
