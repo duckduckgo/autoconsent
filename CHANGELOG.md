@@ -1,3 +1,29 @@
+# v12.20.0 (Fri May 16 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 2f58b73d955695278fb506b785926f67ee2785f9 [#745](https://github.com/duckduckgo/autoconsent/pull/745) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#739](https://github.com/duckduckgo/autoconsent/pull/739) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add support for FastCMP and iframe piercing [#744](https://github.com/duckduckgo/autoconsent/pull/744) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to eed61600bcc040dd99171437652da1884d43dfcb [#737](https://github.com/duckduckgo/autoconsent/pull/737) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump @ghostery/adblocker from 2.5.1 to 2.5.2 [#732](https://github.com/duckduckgo/autoconsent/pull/732) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker-content from 2.5.1 to 2.5.2 [#733](https://github.com/duckduckgo/autoconsent/pull/733) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tldts-experimental from 7.0.4 to 7.0.7 [#740](https://github.com/duckduckgo/autoconsent/pull/740) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Prevent OneTrust from being detected as site-specific [#738](https://github.com/duckduckgo/autoconsent/pull/738) ([@muodov](https://github.com/muodov))
+- Fix: Mutation observer race condition during rule detection [#741](https://github.com/duckduckgo/autoconsent/pull/741) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.19.0 (Wed May 07 2025)
 
 #### 🚀 Enhancement
