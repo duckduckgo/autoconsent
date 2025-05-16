@@ -112,7 +112,7 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
 
     const compactRules: CompactCMPRule[] = rules.map((r) => {
         return [
-            r.minimumRuleStepVersion || 0,
+            r.minimumRuleStepVersion || 1,
             r.name,
             encodeNullableBoolean(r.cosmetic),
             r.runContext?.urlPattern || '',
