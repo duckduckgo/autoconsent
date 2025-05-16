@@ -12,12 +12,13 @@ To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` clas
 
 ```javascript
 import AutoConsent from '@duckduckgo/autoconsent'; // or '@duckduckgo/autoconsent/extra' for the version with filterlists
-import * as rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
+import { consentomatic } from '@duckduckgo/autoconsent/rules/consentomatic.json'
 
 const autoconsent = new AutoConsent(
     chrome.runtime.sendMessage, // provide a callback to send messages to the background script
     null, // optionally provide a config object here if you don't want to implement a background script
-    rules,
+    { autoconsent, consentomatic },
 );
 
 // connect the message receiver callback to handle messages from the background script
@@ -72,7 +73,7 @@ that are installed on multiple sites. Each CMP ruleset defines:
  * Optionally, a test if the consent was correctly applied.
 
 There are currently three ways of implementing a CMP:
- 
+
  1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
  1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
  rulesets allow.

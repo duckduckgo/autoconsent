@@ -12,6 +12,7 @@ export default {
             define: {
                 BUNDLE_FILTERLIST: 'false',
             },
+            json: true,
         }),
     ],
 };

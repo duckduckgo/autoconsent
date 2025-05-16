@@ -1,6 +1,7 @@
 import { ContentScriptMessage } from './messages';
 import { ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from './rules';
+import { CompactCMPRuleset } from './encoding';
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -41,6 +42,7 @@ export interface DomActionsProvider {
 
 export type RuleBundle = {
     autoconsent: AutoConsentCMPRule[];
+    compact?: CompactCMPRuleset;
     consentomatic?: { [name: string]: ConsentOMaticConfig };
 };
 

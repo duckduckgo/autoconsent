@@ -1,6 +1,8 @@
 /* eslint-disable no-use-before-define */
 import { snippets } from './eval-snippets';
 
+export const SUPPORTED_RULE_STEP_VERSION = 1;
+
 export type AutoConsentCMPRule = {
     name: string;
     vendorUrl?: string;
@@ -15,6 +17,7 @@ export type AutoConsentCMPRule = {
     openCmp?: AutoConsentRuleStep[];
     test?: AutoConsentRuleStep[];
     comment?: string;
+    minimumRuleStepVersion?: number;
 };
 
 export type RunContext = {
