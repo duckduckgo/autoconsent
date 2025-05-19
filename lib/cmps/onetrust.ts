@@ -1,14 +1,9 @@
-import { RunContext } from '../rules';
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Onetrust extends AutoConsentCMPBase {
     name = 'Onetrust';
     prehideSelectors = ['#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner'];
-
-    runContext: RunContext = {
-        urlPattern: '^(?!.*https://www\\.nba\\.com/)',
-    };
 
     get hasSelfTest(): boolean {
         return true;

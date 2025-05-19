@@ -144,8 +144,9 @@ Both JSON and class implementations have the following components:
 Many rules use `ElementSelector` to locate elements in a page. `ElementSelector` can be a string, or array of strings, which are used to locate elements as follows:
  - By default, strings are treated as [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors) via the `querySelector` API. e.g. `#reject-cookies` to find an element whose `id` is 'reject-cookies'.
  - Strings prefixed with `xpath/` are [Xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) selectors which can locate elements in the page via [`document.evaluate`](https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#document.evaluate). e.g. `xpath///*[@id="reject-cookies"]` can find an element whose `id` is 'reject-cookies'.
- - If an array of strings is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id="reject-cookies"`, then looks for a match for `button` _that is a descendant_ of that element.
- **If one of the selectors returns an element that has a `shadowRoot` property, the next selector will run within that element's shadow DOM.** This is the main difference from nested CSS selectors, which do not cross shadow DOM boundaries.
+ - If an array of strings is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id="reject-cookies"`, then looks for a match for `button` _that is a descendant_ of that element. Compared to normal CSS selectors, this allows piercing shadow DOM and iframes:
+   - If one of the selectors returns an element that has a non-null `shadowRoot` property (open shadow DOM), the next selector will run within that element's shadow DOM.
+   - If one of the selectors returns an iframe element with a non-null `contentDocument` property (same-origin iframe), the next selector will run within that iframe's document.
 
  For example, consider the following DOM fragment:
  ```html

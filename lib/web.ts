@@ -295,16 +295,25 @@ export default class AutoConsent {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
             }
         };
+        const mutationObserver = this.domActions.waitForMutation('html');
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
+        logsConfig.lifecycle &&
+            siteSpecificRules.length > 0 &&
+            console.log(
+                'Detecting site-specific rules',
+                siteSpecificRules.map((r) => r.name),
+            );
         // collect relevant site-specific rules and run them first
         await Promise.all(siteSpecificRules.map(detectCmp));
 
-        // // exit early if we already found a site-specific popup
+        // exit early if we already found a site-specific popup
         if (foundCMPs.length > 0) {
             return foundCMPs;
         }
 
-        // // check generic popups
+        logsConfig.lifecycle && console.log("Site-specific rules didn't match, trying generic rules");
+        // check generic popups
         await Promise.all(otherRules.map(detectCmp));
 
         this.detectHeuristics();
@@ -313,7 +322,7 @@ export default class AutoConsent {
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             try {
-                await Promise.all([this.domActions.wait(500), this.domActions.waitForMutation('html')]);
+                await Promise.all([this.domActions.wait(500), mutationObserver]);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];
