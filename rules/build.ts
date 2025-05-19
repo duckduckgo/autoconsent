@@ -2,16 +2,17 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import { fileURLToPath } from 'url';
+import { encodeRules } from '../lib/encoding';
+import { AutoConsentCMPRule } from '../lib/rules';
 
-export const rulesDir = path.dirname(fileURLToPath(import.meta.url));
+export const rulesDir = __dirname;
 
-async function readFileJSON(filePath) {
+async function readFileJSON(filePath: string) {
     const data = await fs.promises.readFile(filePath, 'utf-8');
     return JSON.parse(data);
 }
 
-export async function buildAutoconsentRules() {
+export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     // merge rules from ./autoconsent into rules.autoconsent array
     const autoconsentDir = path.join(rulesDir, 'autoconsent');
     const files = fs.readdirSync(autoconsentDir);
@@ -23,8 +24,8 @@ export async function buildConsentOMaticRules() {
     const consentOMaticCommit = '7d7fd2bd6bf2b662350b0eaeca74db6eba155efe';
     const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
     const consentOMaticInclude = ['didomi.io', 'oil', 'optanon', 'quantcast2', 'springer', 'wordpressgdpr'];
-    const comRules = {};
-    const allComRules = await new Promise((resolve) => {
+    const comRules: Record<string, object> = {};
+    const allComRules: Record<string, object> = await new Promise((resolve) => {
         https.get(consentOMaticUrl, (res) => {
             res.setEncoding('utf-8');
             let content = '';
@@ -38,14 +39,13 @@ export async function buildConsentOMaticRules() {
     return comRules;
 }
 
-export function combineRules(autoconsent, consentomatic) {
-    return {
-        autoconsent,
-        consentomatic,
-    };
-}
-
 (async () => {
-    const rules = combineRules(await buildAutoconsentRules(), await buildConsentOMaticRules());
-    fs.writeFile(path.join(rulesDir, 'rules.json'), JSON.stringify(rules, undefined, '  '), () => console.log('Written rules.json'));
+    const stringify = (rules: object) => JSON.stringify(rules);
+    const autoconsent = await buildAutoconsentRules();
+    const consentomatic = await buildConsentOMaticRules();
+    fs.writeFile(path.join(rulesDir, 'rules.json'), stringify({ autoconsent }), () => console.log('Written rules.json'));
+    fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
+    fs.writeFile(path.join(rulesDir, 'compact-rules.json'), stringify(encodeRules(autoconsent)), () =>
+        console.log('Written compact-rules.json'),
+    );
 })();

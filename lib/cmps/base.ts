@@ -42,7 +42,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     mainWorldEval(snippetId: keyof typeof snippets): Promise<boolean> {
         const snippet = snippets[snippetId];
         if (!snippet) {
-            console.warn('Snippet not found', snippetId);
+            this.autoconsent.config.logs.errors && console.warn('Snippet not found', snippetId);
             return Promise.resolve(false);
         }
         const logsConfig = this.autoconsent.config.logs;
@@ -195,7 +195,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     get hasSelfTest(): boolean {
-        return !!this.rule.test;
+        return !!this.rule.test && this.rule.test.length > 0;
     }
 
     get isIntermediate(): boolean {
