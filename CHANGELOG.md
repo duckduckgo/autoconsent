@@ -1,3 +1,19 @@
+# v13.0.0 (Mon May 19 2025)
+
+#### 💥 Breaking Change
+
+- Compact rule format [#743](https://github.com/duckduckgo/autoconsent/pull/743) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Disable auto release to native apps [#747](https://github.com/duckduckgo/autoconsent/pull/747) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.20.1 (Fri May 16 2025)
 
 #### 🐛 Bug Fix
