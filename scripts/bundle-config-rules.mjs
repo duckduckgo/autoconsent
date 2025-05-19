@@ -8,11 +8,24 @@ if (process.argv.length !== 3) {
 }
 
 const privacyConfigPath = process.argv[2];
-const autoconsentConfigPath = join(privacyConfigPath, 'features', 'autoconsent.json');
-const config = JSON.parse(fs.readFileSync(autoconsentConfigPath, 'utf-8'));
+
+const bundleLocations = [
+    // join(privacyConfigPath, 'features', 'autoconsent.json'),
+    join(privacyConfigPath, 'overrides', 'macos-override.json'),
+];
+
 const compactRules = JSON.parse(fs.readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../rules/compact-rules.json'), 'utf-8'));
 
-config.settings.compactRuleList = compactRules;
-// generate standard pretty-printed output
-const outputData = JSON.stringify(config, undefined, 4);
-fs.writeFileSync(autoconsentConfigPath, outputData);
+for (const location of bundleLocations) {
+    const config = JSON.parse(fs.readFileSync(location, 'utf-8'));
+    if (location.endsWith('autoconsent.json')) {
+        // global config
+        config.settings.compactRuleList = compactRules;
+    } else {
+        // platform override
+        config.features.autoconsent.settings.compactRuleList = compactRules;
+    }
+    // generate standard pretty-printed output
+    const outputData = JSON.stringify(config, undefined, 4);
+    fs.writeFileSync(location, outputData);
+}
