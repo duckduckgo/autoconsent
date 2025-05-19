@@ -97,14 +97,14 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
                 delete clonedStep[longKey];
             }
         }
-        if (clonedStep.if) {
+        if (step.if) {
             clonedStep.if = encodeRuleStep(step.if);
             clonedStep.then = step.then && step.then.map(encodeRuleStep);
             if (step.else) {
                 clonedStep.else = step.else.map(encodeRuleStep);
             }
         }
-        if (clonedStep.any) {
+        if (step.any) {
             clonedStep.any = step.any.map(encodeRuleStep);
         }
         return clonedStep;
@@ -145,14 +145,14 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
                 delete clonedStep[shortKey];
             }
         }
-        if (clonedStep.if) {
+        if (step.if) {
             clonedStep.if = decodeRuleStep(step.if);
             clonedStep.then = step.then && step.then.map(decodeRuleStep);
             if (step.else) {
                 clonedStep.else = step.else.map(decodeRuleStep);
             }
         }
-        if (clonedStep.any) {
+        if (step.any) {
             clonedStep.any = step.any.map(decodeRuleStep);
         }
         return { ...clonedStep };
