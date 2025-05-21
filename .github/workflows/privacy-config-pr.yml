@@ -29,7 +29,7 @@ jobs:
               with:
                   repository: duckduckgo/privacy-configuration
                   path: privacy-configuration/
-                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+                  token: ${{ secrets.PRIVACY_CONFIG_PAT }}
             - name: Build and compact rules
               run: |
                   cd autoconsent
