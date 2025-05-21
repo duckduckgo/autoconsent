@@ -45,15 +45,12 @@ jobs:
                   cd privacy-configuration
                   npm ci
                   npm run lint-fix
-                  npm install @duckduckgo/autoconsent@${{ env.TAG }}
             - name: Create config PR
               uses: peter-evans/create-pull-request@v7
               id: create-pr
               with:
                   path: privacy-configuration/
                   add-paths: |
-                      package.json
-                      package-lock.json
                       overrides/*
                       features/autoconsent.json
                   commit-message: Update autoconsent to ${{ env.TAG }}
