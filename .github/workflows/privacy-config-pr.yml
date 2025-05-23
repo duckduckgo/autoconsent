@@ -24,20 +24,15 @@ jobs:
               with:
                   path: autoconsent/
             - uses: ./autoconsent/.github/actions/setup-release-scripts
-
             - name: Checkout config
               uses: actions/checkout@v3
               with:
                   repository: duckduckgo/privacy-configuration
                   path: privacy-configuration/
-                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: current
+                  token: ${{ secrets.PRIVACY_CONFIG_PAT }}
             - name: Build and compact rules
               run: |
                   cd autoconsent
-                  npm ci
                   npm run build-rules
                   npm run bundle-config-rules ../privacy-configuration
             - name: Prepare and update privacy-config
@@ -45,19 +40,16 @@ jobs:
                   cd privacy-configuration
                   npm ci
                   npm run lint-fix
-                  npm install @duckduckgo/autoconsent@${{ env.TAG }}
             - name: Create config PR
               uses: peter-evans/create-pull-request@v7
               id: create-pr
               with:
                   path: privacy-configuration/
                   add-paths: |
-                      package.json
-                      package-lock.json
                       overrides/*
                       features/autoconsent.json
                   commit-message: Update autoconsent to ${{ env.TAG }}
                   branch: update-autoconsent
                   title: Update autoconsent to ${{ env.TAG }}
                   body: ''
-                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+                  token: ${{ secrets.PRIVACY_CONFIG_PAT }}
