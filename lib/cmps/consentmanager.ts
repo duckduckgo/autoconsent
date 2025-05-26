@@ -75,5 +75,6 @@ export default class ConsentManager extends AutoConsentCMPBase {
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_5');
         }
+        return false;
     }
 }
