@@ -9,10 +9,7 @@ if (process.argv.length !== 3) {
 
 const privacyConfigPath = process.argv[2];
 
-const bundleLocations = [
-    // join(privacyConfigPath, 'features', 'autoconsent.json'),
-    join(privacyConfigPath, 'overrides', 'macos-override.json'),
-];
+const bundleLocations = [join(privacyConfigPath, 'features', 'autoconsent.json')];
 
 const compactRules = JSON.parse(fs.readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../rules/compact-rules.json'), 'utf-8'));
 
