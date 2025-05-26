@@ -1,3 +1,20 @@
+# v13.0.0 (Tue May 20 2025)
+
+#### 💥 Breaking Change
+
+- Compact rule format [#743](https://github.com/duckduckgo/autoconsent/pull/743) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- CI: Release hook to update privacy-config repo. [#748](https://github.com/duckduckgo/autoconsent/pull/748) ([@sammacbeth](https://github.com/sammacbeth))
+- Disable auto release to native apps [#747](https://github.com/duckduckgo/autoconsent/pull/747) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.20.1 (Fri May 16 2025)
 
 #### 🐛 Bug Fix
