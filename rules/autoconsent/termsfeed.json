@@ -20,7 +20,30 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cc-nb-reject"
+            "if": {
+                "exists": ".cc-nb-reject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cc-nb-reject"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cc-nb-changep"
+                },
+                {
+                    "waitFor": "input[cookie_consent_toggler=\"true\"]"
+                },
+                {
+                    "click": "input[cookie_consent_toggler=\"true\"]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".cc-cp-foot-save"
+                }
+            ]
         }
     ]
 }
