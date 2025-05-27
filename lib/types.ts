@@ -59,6 +59,7 @@ export type Config = {
     prehideTimeout: number;
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
+    visualTest: boolean;
     logs: {
         lifecycle: boolean;
         rulesteps: boolean;

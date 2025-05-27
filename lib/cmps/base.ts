@@ -3,6 +3,7 @@ import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, R
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
+import { highlightNode, unhighlightNode } from '../utils';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -256,6 +257,21 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         return super.test();
     }
 
+    async delayForElement(selector: ElementSelector, all = false) {
+        let elements = this.elementSelector(selector);
+        if (!all) {
+            elements = [elements[0]];
+        }
+        for (const el of elements) {
+            this.autoconsent.config.logs.rulesteps && console.log('highlighting', el);
+            highlightNode(el);
+        }
+        await this.wait(2000);
+        for (const el of elements) {
+            unhighlightNode(el);
+        }
+    }
+
     async evaluateRuleStep(rule: AutoConsentRuleStep) {
         const results: Array<Promise<boolean> | boolean> = [];
         const logsConfig = this.autoconsent.config.logs;
@@ -276,9 +292,15 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             results.push(this.waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
         }
         if (rule.click) {
+            if (this.autoconsent.config.visualTest) {
+                await this.delayForElement(rule.click, rule.all);
+            }
             results.push(this.click(rule.click, rule.all));
         }
         if (rule.waitForThenClick) {
+            if (this.autoconsent.config.visualTest) {
+                await this.delayForElement(rule.waitForThenClick, rule.all);
+            }
             results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
         }
         if (rule.wait) {

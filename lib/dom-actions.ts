@@ -142,7 +142,7 @@ export class DomActions implements DomActionsProvider {
 
     querySelectorChain(selectors: string[]): HTMLElement[] {
         let parent: ParentNode = document;
-        let matches: HTMLElement[];
+        let matches: HTMLElement[] = [];
         for (const selector of selectors) {
             matches = this.querySingleReplySelector(selector, parent);
             if (matches.length === 0) {

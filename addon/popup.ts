@@ -14,6 +14,8 @@ async function init() {
     const prehideOffRadio = document.querySelector('input#prehide-off') as HTMLInputElement;
     const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
     const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
+    const visualTestOnRadio = document.querySelector('input#visual-test-on') as HTMLInputElement;
+    const visualTestOffRadio = document.querySelector('input#visual-test-off') as HTMLInputElement;
     const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
     const logsLifecycleCheckbox = document.querySelector('input#logs-lifecycle') as HTMLInputElement;
     const logsRulestepsCheckbox = document.querySelector('input#logs-rulesteps') as HTMLInputElement;
@@ -90,6 +92,12 @@ async function init() {
         cosmeticOffRadio.checked = true;
     }
 
+    if (autoconsentConfig.visualTest) {
+        visualTestOnRadio.checked = true;
+    } else {
+        visualTestOffRadio.checked = true;
+    }
+
     // set form event listeners
 
     enabledCheckbox.addEventListener('change', async () => {
@@ -128,6 +136,13 @@ async function init() {
     }
     cosmeticOnRadio.addEventListener('change', cosmeticChange);
     cosmeticOffRadio.addEventListener('change', cosmeticChange);
+
+    function visualTestChange() {
+        autoconsentConfig.visualTest = visualTestOnRadio.checked;
+        storageSet({ config: autoconsentConfig });
+    }
+    visualTestOnRadio.addEventListener('change', visualTestChange);
+    visualTestOffRadio.addEventListener('change', visualTestChange);
 
     function updateLogsConfig() {
         autoconsentConfig.logs = {
