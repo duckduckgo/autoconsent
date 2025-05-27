@@ -45,14 +45,14 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
         );
         // splash screen -> hit more information
         if (this.elementExists('.shp')) {
-            this.click('.shp');
+            await this.click('.shp');
         }
 
         await this.waitForElement('.prefPanel', 5000);
 
         // go to advanced settings if not yet shown
         if (this.elementVisible('.advance', 'any')) {
-            this.click('.advance');
+            await this.click('.advance');
         }
 
         // takes a while to load the opt-in/opt-out buttons
@@ -74,7 +74,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
         await waitFor(() => document.readyState === 'complete', 20, 100);
         await this.waitForElement('.mainContent[aria-hidden=false]', timeout);
 
-        if (this.click('.rejectAll')) {
+        if (await this.click('.rejectAll')) {
             return true;
         }
 
@@ -82,22 +82,22 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
             await this.waitForElement('.prefPanel[style="visibility: visible;"]', timeout);
         }
 
-        if (this.click('#catDetails0')) {
-            this.click('.submit');
+        if (await this.click('#catDetails0')) {
+            await this.click('.submit');
             this.waitForThenClick('#gwt-debug-close_id', timeout);
             return true;
         }
 
-        if (this.click('.required')) {
+        if (await this.click('.required')) {
             this.waitForThenClick('#gwt-debug-close_id', timeout);
             return true;
         }
 
         await this.navigateToSettings();
 
-        this.click('.switch span:nth-child(1):not(.active)', true);
+        await this.click('.switch span:nth-child(1):not(.active)', true);
 
-        this.click('.submit');
+        await this.click('.submit');
 
         // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
         this.waitForThenClick('#gwt-debug-close_id', timeout * 10);
@@ -106,13 +106,13 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     }
 
     async optIn() {
-        if (this.click('.call')) {
+        if (await this.click('.call')) {
             return true;
         }
         await this.navigateToSettings();
-        this.click('.switch span:nth-child(2)', true);
+        await this.click('.switch span:nth-child(2)', true);
 
-        this.click('.submit');
+        await this.click('.submit');
 
         // at this point, iframe usually closes. Sometimes we need to close manually, but we don't wait for it to report success
         this.waitForElement('#gwt-debug-close_id', 300000).then(() => {

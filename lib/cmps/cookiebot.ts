@@ -36,12 +36,12 @@ export default class Cookiebot extends AutoConsentCMPBase {
 
     async optIn() {
         if (this.elementExists('#dtcookie-container')) {
-            return this.click('.h-dtcookie-accept');
+            return await this.click('.h-dtcookie-accept');
         }
 
-        this.click('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled', true);
-        this.click('#CybotCookiebotDialogBodyLevelButtonAccept');
-        this.click('#CybotCookiebotDialogBodyButtonAccept');
+        await this.click('.CybotCookiebotDialogBodyLevelButton:not(:checked):enabled', true);
+        await this.click('#CybotCookiebotDialogBodyLevelButtonAccept');
+        await this.click('#CybotCookiebotDialogBodyButtonAccept');
         return true;
     }
 

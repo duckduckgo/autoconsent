@@ -62,11 +62,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
     async optIn() {
         await this.waitForElement('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL', 2000);
-        if (this.click('.sp_choice_type_11')) {
+        if (await this.click('.sp_choice_type_11')) {
             return true;
         }
 
-        if (this.click('.sp_choice_type_ACCEPT_ALL')) {
+        if (await this.click('.sp_choice_type_ACCEPT_ALL')) {
             return true;
         }
         return false;
@@ -96,20 +96,20 @@ export default class SourcePoint extends AutoConsentCMPBase {
             for (const t of switches) {
                 t.click();
             }
-            return this.click('.priv-save-btn');
+            return await this.click('.priv-save-btn');
         }
 
         // sometimes there's a "Save and Exit" / "Essential cookies" button
         if (this.elementVisible('.sp_choice_type_SE', 'any')) {
             // click the "Do Not Sell" toggle if it exists
-            this.click(
+            await this.click(
                 [
                     "xpath///div[contains(., 'Do not share my personal information') and contains(@class, 'switch-container')]",
                     '.pm-switch[aria-checked=false] .slider',
                 ],
                 false,
             );
-            return this.click('.sp_choice_type_SE');
+            return await this.click('.sp_choice_type_SE');
         }
 
         if (!this.isManagerOpen()) {
@@ -120,10 +120,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
             if (!this.elementExists('.sp_choice_type_12,[data-choice="1739968508799"]')) {
                 // do not sell button
-                return this.click('.sp_choice_type_13');
+                return await this.click('.sp_choice_type_13');
             }
 
-            this.click('.sp_choice_type_12,[data-choice="1739968508799"]');
+            await this.click('.sp_choice_type_12,[data-choice="1739968508799"]');
             // the page may navigate at this point but that's okay
             await waitFor(() => this.isManagerOpen(), 200, 100);
         }
@@ -148,18 +148,18 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
             if (path === 0) {
                 await this.waitForVisible(rejectSelector1);
-                return this.click(rejectSelector1);
+                return await this.click(rejectSelector1);
             } else if (path === 1) {
-                this.click(rejectSelector2);
+                await this.click(rejectSelector2);
             } else if (path === 2) {
                 await this.waitForElement('.pm-features', 10000);
-                this.click('.checked > span', true);
-                this.click('.chevron');
+                await this.click('.checked > span', true);
+                await this.click('.chevron');
             }
         } catch (e) {
             logsConfig.errors && console.warn(e);
         }
         // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
-        return this.click('.sp_choice_type_SAVE_AND_EXIT');
+        return await this.click('.sp_choice_type_SAVE_AND_EXIT');
     }
 }

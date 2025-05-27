@@ -24,7 +24,7 @@ export interface AutoCMP {
 }
 
 export interface DomActionsProvider {
-    click(selector: ElementSelector, all: boolean): boolean;
+    click(selector: ElementSelector, all: boolean): Promise<boolean>;
     elementExists(selector: ElementSelector): boolean;
     elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
     waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;

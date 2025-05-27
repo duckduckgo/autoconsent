@@ -20,24 +20,24 @@ describe('click', () => {
         clickCounter2 = 0;
     });
 
-    it('clicks on a button', () => {
+    it('clicks on a button', async () => {
         // Given
         const domActions = instantiateDomActions();
 
         // When
-        const clickedSuccessfully = domActions.click('#test');
+        const clickedSuccessfully = await domActions.click('#test');
 
         // Then
         expect(clickedSuccessfully).true;
         expect(clickCounter1).to.equal(1);
     });
 
-    it('clicks all upon multiple matches when all=true', () => {
+    it('clicks all upon multiple matches when all=true', async () => {
         // Given
         const domActions = instantiateDomActions();
 
         // When
-        const clickedSuccessfully = domActions.click('button', true);
+        const clickedSuccessfully = await domActions.click('button', true);
 
         // Then
         expect(clickedSuccessfully).true;
@@ -45,12 +45,12 @@ describe('click', () => {
         expect(clickCounter2).to.equal(1);
     });
 
-    it('clicks only first one upon multiple matches when all=false', () => {
+    it('clicks only first one upon multiple matches when all=false', async () => {
         // Given
         const domActions = instantiateDomActions();
 
         // When
-        const clickedSuccessfully = domActions.click('button');
+        const clickedSuccessfully = await domActions.click('button');
 
         // Then
         expect(clickedSuccessfully).true;
@@ -58,12 +58,12 @@ describe('click', () => {
         expect(clickCounter2).to.equal(0);
     });
 
-    it('clicks by chained selector', () => {
+    it('clicks by chained selector', async () => {
         // Given
         const domActions = instantiateDomActions();
 
         // When
-        const clickedSuccessfully = domActions.click(['#second', 'button']);
+        const clickedSuccessfully = await domActions.click(['#second', 'button']);
 
         // Then
         expect(clickedSuccessfully).true;
@@ -71,12 +71,12 @@ describe('click', () => {
         expect(clickCounter2).to.equal(1);
     });
 
-    it('clicks by xpath selector', () => {
+    it('clicks by xpath selector', async () => {
         // Given
         const domActions = instantiateDomActions();
 
         // When
-        const clickedSuccessfully = domActions.click(['xpath///*[@id="second"]/button']);
+        const clickedSuccessfully = await domActions.click(['xpath///*[@id="second"]/button']);
 
         // Then
         expect(clickedSuccessfully).true;
@@ -84,7 +84,7 @@ describe('click', () => {
         expect(clickCounter2).to.equal(1);
     });
 
-    it('clicks an open shadow dom element', () => {
+    it('clicks an open shadow dom element', async () => {
         // Given
         const domActions = instantiateDomActions();
 
@@ -101,7 +101,7 @@ describe('click', () => {
         });
 
         // When
-        const clickedSuccessfully = domActions.click(['#shadow', 'button']);
+        const clickedSuccessfully = await domActions.click(['#shadow', 'button']);
 
         // Then
         expect(clickedSuccessfully).true;

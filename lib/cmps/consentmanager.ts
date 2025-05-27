@@ -45,20 +45,20 @@ export default class ConsentManager extends AutoConsentCMPBase {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
         }
 
-        if (this.click('.cmpboxbtnno')) {
+        if (await this.click('.cmpboxbtnno')) {
             return true;
         }
 
         if (this.elementExists('.cmpwelcomeprpsbtn')) {
-            this.click('.cmpwelcomeprpsbtn > a[aria-checked=true]', true);
-            this.click('.cmpboxbtnsave');
+            await this.click('.cmpwelcomeprpsbtn > a[aria-checked=true]', true);
+            await this.click('.cmpboxbtnsave');
             return true;
         }
 
-        this.click('.cmpboxbtncustom');
+        await this.click('.cmpboxbtncustom');
         await this.waitForElement('.cmptblbox', 2000);
-        this.click('.cmptdchoice > a[aria-checked=true]', true);
-        this.click('.cmpboxbtnyescustomchoices');
+        await this.click('.cmptdchoice > a[aria-checked=true]', true);
+        await this.click('.cmpboxbtnyescustomchoices');
 
         this.hide('#cmpwrapper,#cmpbox', 'display');
         return true;
@@ -68,7 +68,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
         }
-        return this.click('.cmpboxbtnyes');
+        return await this.click('.cmpboxbtnyes');
     }
 
     async test() {

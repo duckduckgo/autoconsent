@@ -25,7 +25,7 @@ export default class Evidon extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        if (this.click('#_evidon-decline-button')) {
+        if (await this.click('#_evidon-decline-button')) {
             return true;
         }
 
@@ -40,6 +40,6 @@ export default class Evidon extends AutoConsentCMPBase {
     }
 
     async optIn() {
-        return this.click('#_evidon-accept-button');
+        return await this.click('#_evidon-accept-button');
     }
 }

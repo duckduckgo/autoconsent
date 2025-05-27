@@ -7,7 +7,7 @@ export class DomActions implements DomActionsProvider {
     // eslint-disable-next-line no-useless-constructor
     constructor(public autoconsentInstance: AutoConsent) {}
 
-    click(selector: ElementSelector, all = false): boolean {
+    async click(selector: ElementSelector, all = false): Promise<boolean> {
         const elem = this.elementSelector(selector);
         this.autoconsentInstance.config.logs.rulesteps && console.log('[click]', selector, all, elem);
         if (elem.length > 0) {
@@ -59,7 +59,7 @@ export class DomActions implements DomActionsProvider {
 
     async waitForThenClick(selector: ElementSelector, timeout = 10000, all = false): Promise<boolean> {
         await this.waitForElement(selector, timeout);
-        return this.click(selector, all);
+        return await this.click(selector, all);
     }
 
     wait(ms: number): Promise<true> {
