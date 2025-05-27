@@ -19,6 +19,8 @@ export const defaultRunContext: RunContext = {
     urlPattern: '',
 };
 
+const VISUAL_DELAY_TIMEOUT = 2000;
+
 export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     name: string = 'BASERULE';
     runContext: RunContext = defaultRunContext;
@@ -259,14 +261,23 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
     async delayForElement(selector: ElementSelector, all = false) {
         let elements = this.elementSelector(selector);
+        if (elements.length === 0) {
+            return;
+        }
         if (!all) {
             elements = [elements[0]];
         }
+
+        this.autoconsent.sendContentMessage({
+            type: 'visualDelay',
+            timeout: VISUAL_DELAY_TIMEOUT,
+        });
+
         for (const el of elements) {
             this.autoconsent.config.logs.rulesteps && console.log('highlighting', el);
             highlightNode(el);
         }
-        await this.wait(2000);
+        await this.wait(VISUAL_DELAY_TIMEOUT);
         for (const el of elements) {
             unhighlightNode(el);
         }

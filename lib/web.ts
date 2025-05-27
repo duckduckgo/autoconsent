@@ -46,7 +46,7 @@ export default class AutoConsent {
     };
     domActions: DomActions;
     filtersEngine: FiltersEngine | null = null;
-    protected sendContentMessage: MessageSender;
+    sendContentMessage: MessageSender;
     protected cosmeticStyleSheet?: CSSStyleSheet;
     protected focusedElement: HTMLElement | null = null;
 

@@ -59,7 +59,7 @@ export type Config = {
     prehideTimeout: number;
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
-    visualTest: boolean;
+    visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
         rulesteps: boolean;
