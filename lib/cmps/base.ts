@@ -125,8 +125,35 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return Promise.resolve(true);
     }
 
+    async delayForElement(selector: ElementSelector, all = false) {
+        let elements = this.elementSelector(selector);
+        if (elements.length === 0) {
+            return;
+        }
+        if (!all) {
+            elements = [elements[0]];
+        }
+
+        this.autoconsent.sendContentMessage({
+            type: 'visualDelay',
+            timeout: VISUAL_DELAY_TIMEOUT,
+        });
+
+        for (const el of elements) {
+            this.autoconsent.config.logs.rulesteps && console.log('highlighting', el);
+            highlightNode(el);
+        }
+        await this.wait(VISUAL_DELAY_TIMEOUT);
+        for (const el of elements) {
+            unhighlightNode(el);
+        }
+    }
+
     // Implementing DomActionsProvider below:
-    click(selector: ElementSelector, all = false) {
+    async click(selector: ElementSelector, all = false) {
+        if (this.autoconsent.config.visualTest) {
+            await this.delayForElement(selector, all);
+        }
         return this.autoconsent.domActions.click(selector, all);
     }
 
@@ -146,7 +173,10 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.waitForVisible(selector, timeout, check);
     }
 
-    waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+    async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+        if (this.autoconsent.config.visualTest) {
+            await this.delayForElement(selector, all);
+        }
         return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
     }
 
@@ -259,30 +289,6 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         return super.test();
     }
 
-    async delayForElement(selector: ElementSelector, all = false) {
-        let elements = this.elementSelector(selector);
-        if (elements.length === 0) {
-            return;
-        }
-        if (!all) {
-            elements = [elements[0]];
-        }
-
-        this.autoconsent.sendContentMessage({
-            type: 'visualDelay',
-            timeout: VISUAL_DELAY_TIMEOUT,
-        });
-
-        for (const el of elements) {
-            this.autoconsent.config.logs.rulesteps && console.log('highlighting', el);
-            highlightNode(el);
-        }
-        await this.wait(VISUAL_DELAY_TIMEOUT);
-        for (const el of elements) {
-            unhighlightNode(el);
-        }
-    }
-
     async evaluateRuleStep(rule: AutoConsentRuleStep) {
         const results: Array<Promise<boolean> | boolean> = [];
         const logsConfig = this.autoconsent.config.logs;
@@ -303,15 +309,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             results.push(this.waitForVisible(rule.waitForVisible, rule.timeout, rule.check));
         }
         if (rule.click) {
-            if (this.autoconsent.config.visualTest) {
-                await this.delayForElement(rule.click, rule.all);
-            }
             results.push(this.click(rule.click, rule.all));
         }
         if (rule.waitForThenClick) {
-            if (this.autoconsent.config.visualTest) {
-                await this.delayForElement(rule.waitForThenClick, rule.all);
-            }
             results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
         }
         if (rule.wait) {
