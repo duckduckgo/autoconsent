@@ -61,6 +61,7 @@ export function isElementVisible(elem: HTMLElement): boolean {
 }
 
 export function copyObject(data: any) {
+    // @ts-expect-error - globalThis.structuredClone may be undefined
     if (globalThis.structuredClone) {
         return structuredClone(data);
     }
@@ -102,6 +103,7 @@ export function normalizeConfig(providedConfig: any): Config {
 }
 
 export function scheduleWhenIdle(callback: () => void, timeout = 500) {
+    // @ts-expect-error - globalThis.requestIdleCallback may be undefined
     if (globalThis.requestIdleCallback) {
         requestIdleCallback(callback, { timeout });
     } else {

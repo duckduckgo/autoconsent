@@ -25,7 +25,7 @@ export class DomActions implements DomActionsProvider {
         return exists;
     }
 
-    elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean {
+    elementVisible(selector: ElementSelector, check: VisibilityCheck = 'all'): boolean {
         const elem = this.elementSelector(selector);
         const results = new Array(elem.length);
         elem.forEach((e, i) => {
@@ -76,7 +76,7 @@ export class DomActions implements DomActionsProvider {
         return document.cookie.includes(substring);
     }
 
-    hide(selector: string, method: HideMethod): boolean {
+    hide(selector: string, method?: HideMethod): boolean {
         this.autoconsentInstance.config.logs.rulesteps && console.log('[hide]', selector);
         const styleEl = getStyleElement();
         return hideElements(styleEl, selector, method);
@@ -118,7 +118,7 @@ export class DomActions implements DomActionsProvider {
         if (selector.startsWith('xpath/')) {
             const xpath = selector.slice(6);
             const result = document.evaluate(xpath, parent, null, XPathResult.ANY_TYPE, null);
-            let node: Node = null;
+            let node: Node | null = null;
             const elements: HTMLElement[] = [];
             while ((node = result.iterateNext())) {
                 elements.push(node as HTMLElement);

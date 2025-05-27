@@ -7,10 +7,10 @@ describe('click', () => {
     let clickCounter2: number;
 
     before(() => {
-        document.querySelector('#first > button').addEventListener('click', () => {
+        document.querySelector('#first > button')?.addEventListener('click', () => {
             clickCounter1++;
         });
-        document.querySelector('#second > button').addEventListener('click', () => {
+        document.querySelector('#second > button')?.addEventListener('click', () => {
             clickCounter2++;
         });
     });

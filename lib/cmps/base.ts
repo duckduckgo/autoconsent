@@ -20,7 +20,7 @@ export const defaultRunContext: RunContext = {
 };
 
 export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
-    name: string;
+    name: string = 'BASERULE';
     runContext: RunContext = defaultRunContext;
     autoconsent: AutoConsent;
 
@@ -95,7 +95,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     hasMatchingUrlPattern(): boolean {
-        return this.runContext?.urlPattern && !!window.location.href.match(this.runContext.urlPattern);
+        return Boolean(this.runContext?.urlPattern && window.location.href.match(this.runContext.urlPattern));
     }
 
     detectCmp(): Promise<boolean> {
@@ -132,7 +132,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.elementExists(selector);
     }
 
-    elementVisible(selector: ElementSelector, check: VisibilityCheck) {
+    elementVisible(selector: ElementSelector, check?: VisibilityCheck) {
         return this.autoconsent.domActions.elementVisible(selector, check);
     }
 
@@ -152,7 +152,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.wait(ms);
     }
 
-    hide(selector: string, method: HideMethod) {
+    hide(selector: string, method?: HideMethod) {
         return this.autoconsent.domActions.hide(selector, method);
     }
 
@@ -208,7 +208,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     get prehideSelectors(): string[] {
-        return this.rule.prehideSelectors;
+        return this.rule.prehideSelectors || [];
     }
 
     async detectCmp() {
@@ -251,7 +251,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     async test() {
-        if (this.hasSelfTest) {
+        if (this.hasSelfTest && this.rule.test) {
             return this._runRulesSequentially(this.rule.test, this.autoconsent.config.logs.rulesteps);
         }
         return super.test();
@@ -320,6 +320,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             const condition = await this.evaluateRuleStep(rule.if);
             logsConfig.rulesteps && console.log('Condition is', condition);
             if (condition) {
+                // @ts-expect-error - if.then is required
                 results.push(this._runRulesSequentially(rule.then));
             } else if (rule.else) {
                 results.push(this._runRulesSequentially(rule.else));

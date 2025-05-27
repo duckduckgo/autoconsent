@@ -31,6 +31,10 @@ async function init() {
     // enable proceed button when necessary
 
     const [currentTab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    if (!currentTab.url || !currentTab.id) {
+        console.error('Current tab is not valid');
+        return;
+    }
     const currentDomain = new URL(currentTab.url).hostname;
     currentSite.textContent = currentDomain;
     const tabId = currentTab.id;

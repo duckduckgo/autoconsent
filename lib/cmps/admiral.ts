@@ -41,9 +41,10 @@ export default class Admiral extends AutoConsentCMPBase {
             "xpath///button[contains(., 'Spara & avsluta') or contains(., 'Save & exit') or contains(., 'Uložit a ukončit') or contains(., 'Enregistrer et quitter') or contains(., 'Speichern & Verlassen') or contains(., 'Tallenna ja poistu') or contains(., 'Išsaugoti ir išeiti') or contains(., 'Opslaan & afsluiten') or contains(., 'Guardar y salir') or contains(., 'Shrani in zapri') or contains(., 'Uložiť a ukončiť') or contains(., 'Kaydet ve çıkış yap') or contains(., 'Сохранить и выйти') or contains(., 'Salvesta ja välju') or contains(., 'Salva ed esci') or contains(., 'Gem & afslut') or contains(., 'Αποθήκευση και έξοδος') or contains(., 'Saglabāt un iziet') or contains(., 'Mentés és kilépés') or contains(., 'Guardar e sair') or contains(., 'Zapisz & zakończ') or contains(., 'Salvare și ieșire') or contains(., 'Spremi i izađi') or contains(., 'Запазване и изход')]";
 
         if ((await this.waitForThenClick(purposesButtonSelector)) && (await this.waitForVisible(saveAndExitSelector))) {
-            const popupBody = this.elementSelector(saveAndExitSelector)[0].parentElement.parentElement;
-            const checkboxes = popupBody.querySelectorAll('input[type=checkbox]:checked');
-            checkboxes.forEach((checkbox: HTMLElement) => checkbox.click());
+            const popupBody = this.elementSelector(saveAndExitSelector)[0].parentElement?.parentElement;
+            const checkboxes = popupBody?.querySelectorAll('input[type=checkbox]:checked');
+            // @ts-expect-error - checkboxes are HTMLElements
+            checkboxes?.forEach((checkbox: HTMLElement) => checkbox.click());
 
             return await this.click(saveAndExitSelector);
         }
