@@ -110,3 +110,44 @@ export function scheduleWhenIdle(callback: () => void, timeout = 500) {
         setTimeout(callback, 0);
     }
 }
+
+export function highlightNode(node: HTMLElement) {
+    if (!node.style) return;
+    if (node.hasAttribute('style')) {
+        // @ts-expect-error __oldStyles is needed to restore the original styles
+        node.__oldStyles = node.style.cssText;
+    }
+    node.style.animation = 'pulsate .5s infinite';
+    node.style.outline = 'solid red';
+
+    const styleTag = document.createElement('style');
+    styleTag.id = 'autoconsent-builder-styles';
+    styleTag.textContent = `
+      @keyframes pulsate {
+        0% {
+          outline-width: 8px;
+          outline-offset: -4px;
+        }
+        50% {
+          outline-width: 4px;
+          outline-offset: -2px;
+        }
+        100% {
+          outline-width: 8px;
+          outline-offset: -4px;
+        }
+      }
+    `;
+    document.head.appendChild(styleTag);
+}
+
+export function unhighlightNode(node: HTMLElement) {
+    if (!node.style || !node.hasAttribute('style')) return;
+    if ('__oldStyles' in node) {
+        // @ts-expect-error __oldStyles is set in highlightNode
+        node.style.cssText = node.__oldStyles;
+        delete node.__oldStyles;
+    } else {
+        node.removeAttribute('style');
+    }
+}
