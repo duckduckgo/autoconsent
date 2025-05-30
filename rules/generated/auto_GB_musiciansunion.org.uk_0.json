@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_musiciansunion.org.uk_0",
+    "vendorUrl": "https://musiciansunion.org.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?musiciansunion\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form > div:nth-child(15) > div:nth-child(1) > div > span:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form > div:nth-child(15) > div:nth-child(1) > div > span:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > form > div:nth-child(15) > div:nth-child(1) > div > span:nth-child(2) > button:nth-child(2)",
+            "text": "Reject analytics cookies"
+        }
+    ]
+}

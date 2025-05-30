@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_goodenergy.co.uk_0",
+    "vendorUrl": "https://www.goodenergy.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?goodenergy\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > form:nth-child(3) > ul:nth-child(2) > li:nth-child(3) > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > form:nth-child(3) > ul:nth-child(2) > li:nth-child(3) > button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div > form:nth-child(3) > ul:nth-child(2) > li:nth-child(3) > button",
+            "text": "Reject all\nextra cookies"
+        }
+    ]
+}

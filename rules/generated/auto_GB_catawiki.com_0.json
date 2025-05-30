@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_catawiki.com_0",
+    "vendorUrl": "https://www.catawiki.com/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?catawiki\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > div:nth-child(6) > footer:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button > span:nth-child(2) > span:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > div:nth-child(6) > footer:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button > span:nth-child(2) > span:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div > div:nth-child(6) > footer:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button > span:nth-child(2) > span:nth-child(1)",
+            "text": "Continue without accepting"
+        }
+    ]
+}

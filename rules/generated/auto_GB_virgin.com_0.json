@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_virgin.com_0",
+    "vendorUrl": "https://www.virgin.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?virgin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(3) > div > div > div > div:nth-child(4) > div:nth-child(2) > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(3) > div > div > div > div:nth-child(4) > div:nth-child(2) > button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div:nth-child(3) > div > div > div > div:nth-child(4) > div:nth-child(2) > button",
+            "text": "Reject all"
+        }
+    ]
+}

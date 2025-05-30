@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_momondo.co.uk_0",
+    "vendorUrl": "https://www.momondo.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?momondo\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(1) > button:nth-child(3) > div > div"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(1) > button:nth-child(3) > div > div"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(1) > button:nth-child(3) > div > div",
+            "text": "Reject all"
+        }
+    ]
+}

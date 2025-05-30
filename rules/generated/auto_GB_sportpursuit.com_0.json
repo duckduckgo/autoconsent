@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_sportpursuit.com_0",
+    "vendorUrl": "https://www.sportpursuit.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sportpursuit\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > button:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > button:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > button:nth-child(1)",
+            "text": "REJECT ALL"
+        }
+    ]
+}

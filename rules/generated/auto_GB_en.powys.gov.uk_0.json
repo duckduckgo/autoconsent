@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_en.powys.gov.uk_0",
+    "vendorUrl": "https://en.powys.gov.uk/?ccp=true",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.powys\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header > div:nth-child(2) > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header > div:nth-child(2) > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > header > div:nth-child(2) > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)",
+            "text": "Reject all"
+        }
+    ]
+}

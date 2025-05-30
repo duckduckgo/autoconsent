@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_news.bet365.com_0",
+    "vendorUrl": "https://news.bet365.com/en-gb",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?news\\.bet365\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div > div:nth-child(2) > button:nth-child(2)",
+            "text": "Essential Only"
+        }
+    ]
+}

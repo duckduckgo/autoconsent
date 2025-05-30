@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_thebushcraftstore.co.uk_0",
+    "vendorUrl": "https://www.thebushcraftstore.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thebushcraftstore\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)",
+            "text": "Reject All"
+        }
+    ]
+}

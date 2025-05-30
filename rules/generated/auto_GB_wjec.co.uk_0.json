@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_wjec.co.uk_0",
+    "vendorUrl": "https://www.wjec.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wjec\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header > div > nav:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header > div > nav:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > header > div > nav:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)",
+            "text": "Decline"
+        }
+    ]
+}

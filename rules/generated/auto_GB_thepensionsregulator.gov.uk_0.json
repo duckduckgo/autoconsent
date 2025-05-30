@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_thepensionsregulator.gov.uk_0",
+    "vendorUrl": "https://www.thepensionsregulator.gov.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thepensionsregulator\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > header:nth-child(5) > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > a"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > header:nth-child(5) > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > a"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > header:nth-child(5) > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > a",
+            "text": "Reject"
+        }
+    ]
+}

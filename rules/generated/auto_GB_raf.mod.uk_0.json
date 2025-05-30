@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_raf.mod.uk_0",
+    "vendorUrl": "https://www.raf.mod.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?raf\\.mod\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > div > div:nth-child(4) > a:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > div > div:nth-child(4) > a:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div > div > div:nth-child(4) > a:nth-child(1)",
+            "text": "Necessary cookies only"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_wwws.airfrance.co.uk_0",
+    "vendorUrl": "https://wwws.airfrance.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wwws\\.airfrance\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > div > div:nth-child(1) > div > div:nth-child(3) > button:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > div > div:nth-child(1) > div > div:nth-child(3) > button:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div > div > div:nth-child(1) > div > div:nth-child(3) > button:nth-child(1)",
+            "text": "Reject"
+        }
+    ]
+}
