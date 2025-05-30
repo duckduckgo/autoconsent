@@ -114,14 +114,13 @@ export function scheduleWhenIdle(callback: () => void, timeout = 500) {
 export function highlightNode(node: HTMLElement) {
     if (!node.style) return;
     if (node.hasAttribute('style')) {
-        // @ts-expect-error __oldStyles is needed to restore the original styles
         node.__oldStyles = node.style.cssText;
     }
     node.style.animation = 'pulsate .5s infinite';
     node.style.outline = 'solid red';
 
     const styleTag = document.createElement('style');
-    styleTag.id = 'autoconsent-builder-styles';
+    styleTag.id = 'autoconsent-debug-styles';
     styleTag.textContent = `
       @keyframes pulsate {
         0% {
