@@ -1,0 +1,28 @@
+{
+  "name": "auto_autodesk.com_0",
+  "vendorUrl": "https://www.autodesk.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?autodesk\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div > div:nth-child(2) > button:nth-child(1)",
+      "text": "Decline"
+    }
+  ]
+}

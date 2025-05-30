@@ -1,0 +1,28 @@
+{
+  "name": "auto_thegazette.co.uk_0",
+  "vendorUrl": "https://www.thegazette.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?thegazette\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > ul:nth-child(3) > li:nth-child(4) > button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > ul:nth-child(3) > li:nth-child(4) > button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > ul:nth-child(3) > li:nth-child(4) > button",
+      "text": "Reject all cookies"
+    }
+  ]
+}

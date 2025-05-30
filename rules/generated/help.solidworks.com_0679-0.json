@@ -1,0 +1,28 @@
+{
+  "name": "auto_help.solidworks.com_0",
+  "vendorUrl": "https://help.solidworks.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?help\\.solidworks\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(1) > div > h2:nth-child(1) > button",
+      "text": "Continue with only necessary cookies"
+    }
+  ]
+}

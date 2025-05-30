@@ -1,0 +1,28 @@
+{
+  "name": "auto_cameraworld.co.uk_0",
+  "vendorUrl": "https://www.cameraworld.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?cameraworld\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > aside:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > aside:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > aside:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Decline"
+    }
+  ]
+}

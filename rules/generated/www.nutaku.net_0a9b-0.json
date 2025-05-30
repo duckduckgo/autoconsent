@@ -1,0 +1,28 @@
+{
+  "name": "auto_nutaku.net_0",
+  "vendorUrl": "https://www.nutaku.net/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?nutaku\\.net/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > section:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > section:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > section:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
+      "text": "Accept Only Essential Cookies"
+    }
+  ]
+}

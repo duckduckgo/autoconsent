@@ -1,0 +1,28 @@
+{
+  "name": "auto_dpd.com_0",
+  "vendorUrl": "https://www.dpd.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?dpd\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(2) > button:nth-child(3)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(2) > button:nth-child(3)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(2) > button:nth-child(3)",
+      "text": "Refuse all"
+    }
+  ]
+}

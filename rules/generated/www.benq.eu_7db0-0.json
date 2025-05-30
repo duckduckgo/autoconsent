@@ -1,0 +1,28 @@
+{
+  "name": "auto_benq.eu_0",
+  "vendorUrl": "https://www.benq.eu/en-uk/index.html",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?benq\\.eu/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(92) > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(92) > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(92) > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)",
+      "text": "Only Required Cookies"
+    }
+  ]
+}

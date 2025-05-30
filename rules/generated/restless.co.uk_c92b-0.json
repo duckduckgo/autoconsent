@@ -1,0 +1,28 @@
+{
+  "name": "auto_restless.co.uk_0",
+  "vendorUrl": "https://restless.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?restless\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)",
+      "text": "Reject All"
+    }
+  ]
+}

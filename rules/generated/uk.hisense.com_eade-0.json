@@ -1,0 +1,28 @@
+{
+  "name": "auto_uk.hisense.com_0",
+  "vendorUrl": "https://uk.hisense.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?uk\\.hisense\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > app-root > cx-storefront:nth-child(1) > footer:nth-child(6) > cx-page-layout > cx-page-slot:nth-child(3) > app-gg-cookie-consent-management-banner:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > app-root > cx-storefront:nth-child(1) > footer:nth-child(6) > cx-page-layout > cx-page-slot:nth-child(3) > app-gg-cookie-consent-management-banner:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > app-root > cx-storefront:nth-child(1) > footer:nth-child(6) > cx-page-layout > cx-page-slot:nth-child(3) > app-gg-cookie-consent-management-banner:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Reject all"
+    }
+  ]
+}

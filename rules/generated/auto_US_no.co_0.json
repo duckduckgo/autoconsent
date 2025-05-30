@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_no.co_0",
+  "vendorUrl": "https://no.co/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?no\\.co/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > main[class] > div:nth-child(5) > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > main[class] > div:nth-child(5) > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > main[class] > div:nth-child(5) > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "REJECT"
+    }
+  ]
+}

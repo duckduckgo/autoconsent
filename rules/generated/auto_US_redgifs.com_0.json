@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_redgifs.com_0",
+  "vendorUrl": "https://www.redgifs.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?redgifs\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[id] > div > div:nth-child(4) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[id] > div > div:nth-child(4) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[id] > div > div:nth-child(4) > div:nth-child(2) > button:nth-child(2)",
+      "text": "Decline"
+    }
+  ]
+}

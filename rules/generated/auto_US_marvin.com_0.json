@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_marvin.com_0",
+  "vendorUrl": "https://www.marvin.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?marvin\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[class] > div > div:nth-child(2) > div > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[class] > div > div:nth-child(2) > div > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[class] > div > div:nth-child(2) > div > button:nth-child(1)",
+      "text": "Decline"
+    }
+  ]
+}

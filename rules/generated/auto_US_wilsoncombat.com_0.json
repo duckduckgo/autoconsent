@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_wilsoncombat.com_0",
+  "vendorUrl": "https://wilsoncombat.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?wilsoncombat\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[class] > aside:nth-child(1) > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[class] > aside:nth-child(1) > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[class] > aside:nth-child(1) > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
+      "text": "DECLINE"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "auto_englandgolf.org_0",
+  "vendorUrl": "https://www.englandgolf.org/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?englandgolf\\.org/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > form:nth-child(1) > div:nth-child(43) > div:nth-child(2) > div > div > button:nth-child(5)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > form:nth-child(1) > div:nth-child(43) > div:nth-child(2) > div > div > button:nth-child(5)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > form:nth-child(1) > div:nth-child(43) > div:nth-child(2) > div > div > button:nth-child(5)",
+      "text": "Accept strictly necessary cookies"
+    }
+  ]
+}

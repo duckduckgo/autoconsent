@@ -1,0 +1,28 @@
+{
+  "name": "auto_stereonet.com_0",
+  "vendorUrl": "https://stereonet.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?stereonet\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(3) > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(2) > span > div"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(3) > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(2) > span > div"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(3) > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(2) > span > div",
+      "text": "Reject All"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "auto_help.revolut.com_0",
+  "vendorUrl": "https://help.revolut.com/help/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?help\\.revolut\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > button:nth-child(5)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > button:nth-child(5)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > button:nth-child(5)",
+      "text": "Reject non-essential cookies"
+    }
+  ]
+}

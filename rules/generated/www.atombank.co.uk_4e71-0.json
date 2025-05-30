@@ -1,0 +1,28 @@
+{
+  "name": "auto_atombank.co.uk_0",
+  "vendorUrl": "https://www.atombank.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?atombank\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > astro-island > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > astro-island > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > astro-island > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Reject"
+    }
+  ]
+}

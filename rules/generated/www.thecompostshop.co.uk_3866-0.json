@@ -1,0 +1,28 @@
+{
+  "name": "auto_thecompostshop.co.uk_0",
+  "vendorUrl": "https://www.thecompostshop.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?thecompostshop\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > p > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > p > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > p > button:nth-child(2)",
+      "text": "DECLINE"
+    }
+  ]
+}

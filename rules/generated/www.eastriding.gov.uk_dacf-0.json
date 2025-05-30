@@ -1,0 +1,28 @@
+{
+  "name": "auto_eastriding.gov.uk_0",
+  "vendorUrl": "https://www.eastriding.gov.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?eastriding\\.gov\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > section:nth-child(13) > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(1) > div > div > a:nth-child(5)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > section:nth-child(13) > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(1) > div > div > a:nth-child(5)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > section:nth-child(13) > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(1) > div > div > a:nth-child(5)",
+      "text": " Reject all cookies"
+    }
+  ]
+}

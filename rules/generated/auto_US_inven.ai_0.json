@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_inven.ai_0",
+  "vendorUrl": "https://www.inven.ai/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?inven\\.ai/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[id][class][style] > div > div:nth-child(2) > a:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[id][class][style] > div > div:nth-child(2) > a:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[id][class][style] > div > div:nth-child(2) > a:nth-child(2)",
+      "text": "Necessary"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "auto_seetickets.com_0",
+  "vendorUrl": "https://www.seetickets.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?seetickets\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > footer > div:nth-child(2) > div > p:nth-child(2) > a:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > footer > div:nth-child(2) > div > p:nth-child(2) > a:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > footer > div:nth-child(2) > div > p:nth-child(2) > a:nth-child(2)",
+      "text": "Reject"
+    }
+  ]
+}

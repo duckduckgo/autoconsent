@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_e-chords.com_0",
+  "vendorUrl": "https://www.e-chords.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?e-chords\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > main[id][data-v-app] > div:nth-child(4) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > main[id][data-v-app] > div:nth-child(4) > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > main[id][data-v-app] > div:nth-child(4) > div:nth-child(2) > button:nth-child(2)",
+      "text": "Reject all"
+    }
+  ]
+}

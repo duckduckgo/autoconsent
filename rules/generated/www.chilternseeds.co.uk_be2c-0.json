@@ -1,0 +1,28 @@
+{
+  "name": "auto_chilternseeds.co.uk_0",
+  "vendorUrl": "https://www.chilternseeds.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?chilternseeds\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(1) > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(3) > button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(1) > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(3) > button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(1) > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(3) > button",
+      "text": "Essential cookies only"
+    }
+  ]
+}

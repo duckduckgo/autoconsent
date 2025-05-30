@@ -1,0 +1,28 @@
+{
+  "name": "auto_US_news.sky.com_0",
+  "vendorUrl": "https://news.sky.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": false,
+    "frame": true,
+    "urlPattern": "^https?://(www\\.)?cdn\\.privacy-mgmt\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div[class] > div:nth-child(2) > div:nth-child(5) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div[class] > div:nth-child(2) > div:nth-child(5) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div[class] > div:nth-child(2) > div:nth-child(5) > button:nth-child(1)",
+      "text": "Essential cookies only"
+    }
+  ]
+}

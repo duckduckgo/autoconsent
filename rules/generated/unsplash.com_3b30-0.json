@@ -1,0 +1,28 @@
+{
+  "name": "auto_unsplash.com_0",
+  "vendorUrl": "https://unsplash.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?unsplash\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > dialog > div:nth-child(5) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > dialog > div:nth-child(5) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > dialog > div:nth-child(5) > button:nth-child(1)",
+      "text": "Accept essential only"
+    }
+  ]
+}

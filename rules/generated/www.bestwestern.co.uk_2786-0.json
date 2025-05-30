@@ -1,0 +1,28 @@
+{
+  "name": "auto_bestwestern.co.uk_0",
+  "vendorUrl": "https://www.bestwestern.co.uk/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?bestwestern\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)",
+      "text": "Deny"
+    }
+  ]
+}

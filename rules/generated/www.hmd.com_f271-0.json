@@ -1,0 +1,28 @@
+{
+  "name": "auto_hmd.com_0",
+  "vendorUrl": "https://www.hmd.com/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?hmd\\.com/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div > div:nth-child(4) > div:nth-child(4) > button:nth-child(1)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div > div:nth-child(4) > div:nth-child(4) > button:nth-child(1)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div > div:nth-child(4) > div:nth-child(4) > button:nth-child(1)",
+      "text": "Reject all"
+    }
+  ]
+}

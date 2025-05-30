@@ -1,0 +1,28 @@
+{
+  "name": "auto_lecreuset.co.uk_0",
+  "vendorUrl": "https://www.lecreuset.co.uk/en_GB/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?lecreuset\\.co\\.uk/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div > div:nth-child(2) > div > div:nth-child(2) > ul > li:nth-child(1) > button"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div > div:nth-child(2) > div > div:nth-child(2) > ul > li:nth-child(1) > button"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div > div:nth-child(2) > div > div:nth-child(2) > ul > li:nth-child(1) > button",
+      "text": "ACCEPT NECESSARY COOKIES ONLY"
+    }
+  ]
+}

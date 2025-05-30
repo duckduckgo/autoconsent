@@ -1,0 +1,28 @@
+{
+  "name": "auto_remove.bg_0",
+  "vendorUrl": "https://www.remove.bg/",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": "^https?://(www\\.)?remove\\.bg/"
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "body > div > div:nth-child(6) > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "body > div > div:nth-child(6) > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > button:nth-child(2)"
+    }
+  ],
+  "optIn": [],
+  "optOut": [
+    {
+      "waitForThenClick": "body > div > div:nth-child(6) > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > button:nth-child(2)",
+      "text": "Reject all"
+    }
+  ]
+}
