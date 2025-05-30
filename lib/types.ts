@@ -24,7 +24,7 @@ export interface AutoCMP {
 }
 
 export interface DomActionsProvider {
-    click(selector: ElementSelector, all: boolean): boolean;
+    click(selector: ElementSelector, all: boolean): Promise<boolean>;
     elementExists(selector: ElementSelector): boolean;
     elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
     waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;
@@ -59,6 +59,7 @@ export type Config = {
     prehideTimeout: number;
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
+    visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
         rulesteps: boolean;
@@ -97,5 +98,5 @@ export type ConsentState = {
     detectedPopups: string[]; // Names of CMP rules where `detectPopup` returned true.
     heuristicPatterns: string[]; // Matched heuristic patterns
     heuristicSnippets: string[]; // Matched heuristic snippets
-    selfTest: boolean; // null if no self test was run, otherwise it holds the result of the self test.
+    selfTest: boolean | null; // null if no self test was run, otherwise it holds the result of the self test.
 };

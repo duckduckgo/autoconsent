@@ -174,7 +174,7 @@ Returns true if the given selector matches one or more elements.
   "check": "any" | "all" | "none"
 }
 ```
-Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
+Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all` (default), every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
 
 ### Wait for element
 

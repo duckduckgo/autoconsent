@@ -28,8 +28,10 @@ function filterCMPs(rules: AutoCMP[], config: Config) {
 export default class AutoConsent {
     id = getRandomID();
     rules: AutoCMP[] = [];
+    // @ts-expect-error - config is initialized in initialize
     config: Config;
-    foundCmp: AutoCMP = null;
+    // @ts-expect-error - foundCmp is initialized in findCmp
+    foundCmp: AutoCMP;
     state: ConsentState = {
         cosmeticFiltersOn: false,
         filterListReported: false,
@@ -43,12 +45,12 @@ export default class AutoConsent {
         selfTest: null,
     };
     domActions: DomActions;
-    filtersEngine: FiltersEngine;
-    protected sendContentMessage: MessageSender;
-    protected cosmeticStyleSheet: CSSStyleSheet;
-    protected focusedElement: HTMLElement = null;
+    filtersEngine: FiltersEngine | null = null;
+    sendContentMessage: MessageSender;
+    protected cosmeticStyleSheet?: CSSStyleSheet;
+    protected focusedElement: HTMLElement | null = null;
 
-    constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
+    constructor(sendContentMessage: MessageSender, config: Partial<Config> | null = null, declarativeRules: RuleBundle | null = null) {
         evalState.sendContentMessage = sendContentMessage;
         this.sendContentMessage = sendContentMessage;
         this.rules = [];
@@ -72,7 +74,7 @@ export default class AutoConsent {
         this.domActions = new DomActions(this);
     }
 
-    initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    initialize(config: Partial<Config>, declarativeRules: RuleBundle | null) {
         const normalizedConfig = normalizeConfig(config);
         normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
         this.config = normalizedConfig;
@@ -104,7 +106,7 @@ export default class AutoConsent {
 
         this.rules = filterCMPs(this.rules, normalizedConfig);
 
-        if (config.enablePrehide) {
+        if (this.shouldPrehide) {
             if (document.documentElement) {
                 this.prehideElements(); // prehide as early as possible to prevent flickering
             } else {
@@ -128,6 +130,10 @@ export default class AutoConsent {
             this.start();
         }
         this.updateState({ lifecycle: 'initialized' });
+    }
+
+    get shouldPrehide() {
+        return this.config?.enablePrehide && !this.config?.visualTest;
     }
 
     saveFocus() {
@@ -158,6 +164,7 @@ export default class AutoConsent {
     parseDeclarativeRules(declarativeRules: RuleBundle) {
         if (declarativeRules.consentomatic) {
             Object.keys(declarativeRules.consentomatic).forEach((name) => {
+                // @ts-expect-error - consentomatic is defined at this point
                 this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
             });
         }
@@ -202,7 +209,7 @@ export default class AutoConsent {
         this.updateState({ detectedCmps: foundCmps.map((c) => c.name) });
         if (foundCmps.length === 0) {
             logsConfig.lifecycle && console.log('no CMP found', location.href);
-            if (this.config.enablePrehide) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
 
@@ -236,7 +243,7 @@ export default class AutoConsent {
 
         if (foundPopups.length === 0) {
             logsConfig.lifecycle && console.log('no popup found');
-            if (this.config.enablePrehide) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
             return false;
@@ -395,7 +402,7 @@ export default class AutoConsent {
 
     async handlePopup(cmp: AutoCMP): Promise<boolean> {
         this.updateState({ lifecycle: 'openPopupDetected' });
-        if (this.config.enablePrehide && !this.state.prehideOn) {
+        if (this.shouldPrehide && !this.state.prehideOn) {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
@@ -431,7 +438,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt out result ${optOutResult}`);
         }
 
-        if (this.config.enablePrehide) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -474,7 +481,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt in result ${optInResult}`);
         }
 
-        if (this.config.enablePrehide) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -547,12 +554,12 @@ export default class AutoConsent {
 
         const selectors = this.rules
             .filter((rule) => rule.prehideSelectors && rule.checkRunContext())
-            .reduce((selectorList, rule) => [...selectorList, ...rule.prehideSelectors], globalHidden);
+            .reduce((selectorList, rule) => [...(selectorList || []), ...(rule.prehideSelectors || [])], globalHidden);
 
         this.updateState({ prehideOn: true });
         setTimeout(() => {
             // unhide things if we are still looking for a pop-up
-            if (this.config.enablePrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
+            if (this.shouldPrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
                 logsConfig.lifecycle && console.log('Process is taking too long, unhiding elements');
                 this.undoPrehide();
             }
@@ -583,6 +590,7 @@ export default class AutoConsent {
                 // if the cosmetic filters are actually working, report the hidden popup to the background.
                 // This may still be overridden later if an autoconsent rule matches.
                 // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
+                // @ts-expect-error - styles is defined at this point
                 const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(styles), 'any');
                 if (cosmeticFiltersWorked) {
                     logsConfig?.lifecycle && console.log('Prehide cosmetic filters matched', location.href);
@@ -595,6 +603,7 @@ export default class AutoConsent {
 
         this.updateState({ cosmeticFiltersOn: true });
         try {
+            // @ts-expect-error - styles is defined at this point
             this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
             logsConfig?.lifecycle && console.log('[cosmetics]', this.cosmeticStyleSheet, location.href);
             document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
