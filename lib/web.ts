@@ -106,7 +106,7 @@ export default class AutoConsent {
 
         this.rules = filterCMPs(this.rules, normalizedConfig);
 
-        if (config.enablePrehide && !config.visualTest) {
+        if (this.shouldPrehide) {
             if (document.documentElement) {
                 this.prehideElements(); // prehide as early as possible to prevent flickering
             } else {
@@ -130,6 +130,10 @@ export default class AutoConsent {
             this.start();
         }
         this.updateState({ lifecycle: 'initialized' });
+    }
+
+    get shouldPrehide() {
+        return this.config?.enablePrehide && !this.config?.visualTest;
     }
 
     saveFocus() {
@@ -205,7 +209,7 @@ export default class AutoConsent {
         this.updateState({ detectedCmps: foundCmps.map((c) => c.name) });
         if (foundCmps.length === 0) {
             logsConfig.lifecycle && console.log('no CMP found', location.href);
-            if (this.config.enablePrehide && !this.config.visualTest) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
 
@@ -239,7 +243,7 @@ export default class AutoConsent {
 
         if (foundPopups.length === 0) {
             logsConfig.lifecycle && console.log('no popup found');
-            if (this.config.enablePrehide && !this.config.visualTest) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
             return false;
@@ -398,7 +402,7 @@ export default class AutoConsent {
 
     async handlePopup(cmp: AutoCMP): Promise<boolean> {
         this.updateState({ lifecycle: 'openPopupDetected' });
-        if (this.config.enablePrehide && !this.config.visualTest && !this.state.prehideOn) {
+        if (this.shouldPrehide && !this.state.prehideOn) {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
@@ -434,7 +438,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt out result ${optOutResult}`);
         }
 
-        if (this.config.enablePrehide && !this.config.visualTest) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -477,7 +481,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt in result ${optInResult}`);
         }
 
-        if (this.config.enablePrehide && !this.config.visualTest) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -555,12 +559,7 @@ export default class AutoConsent {
         this.updateState({ prehideOn: true });
         setTimeout(() => {
             // unhide things if we are still looking for a pop-up
-            if (
-                this.config.enablePrehide &&
-                !this.config.visualTest &&
-                this.state.prehideOn &&
-                !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)
-            ) {
+            if (this.shouldPrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
                 logsConfig.lifecycle && console.log('Process is taking too long, unhiding elements');
                 this.undoPrehide();
             }
