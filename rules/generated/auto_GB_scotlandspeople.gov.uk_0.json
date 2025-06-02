@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2) > div > header:nth-child(1) > nav:nth-child(1) > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2) > div > header:nth-child(1) > nav:nth-child(1) > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(2) > div > header:nth-child(1) > nav:nth-child(1) > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Use essential cookies only"
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Use essential cookies only"
         }
     ]
 }

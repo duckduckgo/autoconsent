@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(4) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(4) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(4) > button:nth-child(2)",
-            "text": "ESSENTIAL ONLY"
+            "waitForThenClick": "body:not([id]) > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton",
+            "comment": "ESSENTIAL ONLY"
         }
     ]
 }

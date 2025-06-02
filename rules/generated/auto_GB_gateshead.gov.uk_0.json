@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div > div:nth-child(3) > form > button:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div > div:nth-child(3) > form > button:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div > div:nth-child(3) > form > button:nth-child(2)",
-            "text": "Reject additional cookies"
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])",
+            "comment": "Reject additional cookies"
         }
     ]
 }

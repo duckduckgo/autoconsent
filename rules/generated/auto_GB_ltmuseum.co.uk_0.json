@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_ltmuseum.co.uk_0",
+    "vendorUrl": "https://www.ltmuseum.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ltmuseum\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons-0 > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons-0 > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons-0 > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Accept only essential cookies"
+        }
+    ]
+}

@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > header > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body#body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > header > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body#body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > header > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject analytics cookies"
+            "waitForThenClick": "body#body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button",
+            "comment": "Reject analytics cookies"
         }
     ]
 }

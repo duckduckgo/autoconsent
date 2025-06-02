@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > a:nth-child(6)"
+            "exists": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > a:nth-child(6)"
+            "visible": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > a:nth-child(6)",
-            "text": " I do not accept cookies"
+            "waitForThenClick": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo",
+            "comment": " I do not accept cookies"
         }
     ]
 }

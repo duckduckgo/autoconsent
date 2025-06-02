@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > p > span > button:nth-child(2)"
+            "exists": "body:not([id]) > div#consent-box > p:not([id]) > span:not([id]) > button:nth-child(2)#decline-cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > p > span > button:nth-child(2)"
+            "visible": "body:not([id]) > div#consent-box > p:not([id]) > span:not([id]) > button:nth-child(2)#decline-cookies"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > p > span > button:nth-child(2)",
-            "text": "DECLINE"
+            "waitForThenClick": "body:not([id]) > div#consent-box > p:not([id]) > span:not([id]) > button:nth-child(2)#decline-cookies",
+            "comment": "DECLINE"
         }
     ]
 }

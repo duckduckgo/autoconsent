@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > footer > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > button:nth-child(2) > div"
+            "exists": "body:not([id]) > div#modal-root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > div:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > footer > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > button:nth-child(2) > div"
+            "visible": "body:not([id]) > div#modal-root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > div:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > footer > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > button:nth-child(2) > div",
-            "text": "DECLINE OPTIONAL COOKIES"
+            "waitForThenClick": "body:not([id]) > div#modal-root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "comment": "DECLINE OPTIONAL COOKIES"
         }
     ]
 }

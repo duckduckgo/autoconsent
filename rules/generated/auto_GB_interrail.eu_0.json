@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)"
+            "exists": "body#home-page-6eedb0f0cb > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)"
+            "visible": "body#home-page-6eedb0f0cb > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(1)",
-            "text": "Use necessary cookies only"
+            "waitForThenClick": "body#home-page-6eedb0f0cb > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Use necessary cookies only"
         }
     ]
 }

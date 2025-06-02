@@ -5,24 +5,24 @@
     "runContext": {
         "main": false,
         "frame": true,
-        "urlPattern": "^https?://(www\\.)?help\\.dropbox\\.com/"
+        "urlPattern": "^https?://(www\\.)?dropbox\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > div > div > div:nth-child(3) > span > span > div:nth-child(2) > span:nth-child(1) > button"
+            "exists": "body:not([id]) > div#root > div#ccpa-iframe-theme-provider > div#ccpa-iframe > div#ccpa_consent_banner > div:not([id]) > div:nth-child(3):not([id]) > span:not([id]) > span:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#decline_cookies_button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > div > div > div:nth-child(3) > span > span > div:nth-child(2) > span:nth-child(1) > button"
+            "visible": "body:not([id]) > div#root > div#ccpa-iframe-theme-provider > div#ccpa-iframe > div#ccpa_consent_banner > div:not([id]) > div:nth-child(3):not([id]) > span:not([id]) > span:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#decline_cookies_button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > div > div > div:nth-child(3) > span > span > div:nth-child(2) > span:nth-child(1) > button",
-            "text": "Decline"
+            "waitForThenClick": "body:not([id]) > div#root > div#ccpa-iframe-theme-provider > div#ccpa-iframe > div#ccpa_consent_banner > div:not([id]) > div:nth-child(3):not([id]) > span:not([id]) > span:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#decline_cookies_button",
+            "comment": "Decline"
         }
     ]
 }

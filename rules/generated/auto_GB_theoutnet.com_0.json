@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Allow only essential cookies"
+            "waitForThenClick": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2",
+            "comment": "Allow only essential cookies"
         }
     ]
 }

@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > div:nth-child(3) > div > a:nth-child(1)"
+            "exists": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > div:nth-child(3) > div > a:nth-child(1)"
+            "visible": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > div:nth-child(3) > div > a:nth-child(1)",
-            "text": "NECESSARY ONLY"
+            "waitForThenClick": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
+            "comment": "NECESSARY ONLY"
         }
     ]
 }

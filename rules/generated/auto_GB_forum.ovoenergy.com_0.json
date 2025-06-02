@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)"
+            "exists": "body#customcss > div#root > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)"
+            "visible": "body#customcss > div#root > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)",
-            "text": "Deny all"
+            "waitForThenClick": "body#customcss > div#root > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny all"
         }
     ]
 }

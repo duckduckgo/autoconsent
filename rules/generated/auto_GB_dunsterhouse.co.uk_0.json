@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > div:nth-child(2) > div > a:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#cookie-reject-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > div:nth-child(2) > div > a:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#cookie-reject-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > div:nth-child(2) > div > a:nth-child(2)",
-            "text": "Reject non-essential"
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#cookie-reject-button",
+            "comment": "Reject non-essential"
         }
     ]
 }

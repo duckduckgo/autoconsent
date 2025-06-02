@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(18) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > button:nth-child(3)"
+            "exists": "body:not([id]) > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(18) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > button:nth-child(3)"
+            "visible": "body:not([id]) > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(18) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > button:nth-child(3)",
-            "text": "Decline all"
+            "waitForThenClick": "body:not([id]) > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary",
+            "comment": "Decline all"
         }
     ]
 }

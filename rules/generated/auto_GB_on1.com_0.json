@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > div:nth-child(1) > p > a:nth-child(3)"
+            "exists": "body:not([id]) > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > div:nth-child(1) > p > a:nth-child(3)"
+            "visible": "body:not([id]) > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > div:nth-child(1) > p > a:nth-child(3)",
-            "text": "Decline"
+            "waitForThenClick": "body:not([id]) > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Decline"
         }
     ]
 }

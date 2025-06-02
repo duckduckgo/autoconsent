@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > dialog > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > dialog#biccy-banner > div#biccy-prompt > div:nth-child(2):not([id]) > button:nth-child(2)#biccy-reject-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > dialog > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > dialog#biccy-banner > div#biccy-prompt > div:nth-child(2):not([id]) > button:nth-child(2)#biccy-reject-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > dialog > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject optional cookies"
+            "waitForThenClick": "body:not([id]) > dialog#biccy-banner > div#biccy-prompt > div:nth-child(2):not([id]) > button:nth-child(2)#biccy-reject-button",
+            "comment": "Reject optional cookies"
         }
     ]
 }

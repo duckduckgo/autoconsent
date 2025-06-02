@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body#mainGMC > div:not([id]) > div:nth-child(1)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerRejectAllButton"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body#mainGMC > div:not([id]) > div:nth-child(1)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerRejectAllButton"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject cookies"
+            "waitForThenClick": "body#mainGMC > div:not([id]) > div:nth-child(1)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerRejectAllButton",
+            "comment": "Reject cookies"
         }
     ]
 }

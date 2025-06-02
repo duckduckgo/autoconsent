@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Refuse Cookies"
+            "waitForThenClick": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "comment": "Refuse Cookies"
         }
     ]
 }

@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject"
+            "waitForThenClick": "body:not([id]) > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2",
+            "comment": "Reject"
         }
     ]
 }

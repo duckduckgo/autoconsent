@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body#lloydspharmacy-online-pharmacy-prescriptions-amp-health > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body#lloydspharmacy-online-pharmacy-prescriptions-amp-health > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject unrequired cookies"
+            "waitForThenClick": "body#lloydspharmacy-online-pharmacy-prescriptions-amp-health > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject unrequired cookies"
         }
     ]
 }

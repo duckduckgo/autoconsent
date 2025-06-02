@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > button:nth-child(3)"
+            "exists": "body:not([id]) > div#cookieBanner > div#cookieBannerWrapper > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > button:nth-child(3)"
+            "visible": "body:not([id]) > div#cookieBanner > div#cookieBannerWrapper > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > button:nth-child(3)",
-            "text": "Accept Only Essential Cookies"
+            "waitForThenClick": "body:not([id]) > div#cookieBanner > div#cookieBannerWrapper > button:nth-child(3):not([id])",
+            "comment": "Accept Only Essential Cookies"
         }
     ]
 }

@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div > div:nth-child(4) > div > section:nth-child(3) > div > div > div:nth-child(3) > button:nth-child(1)"
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1)#account-identifier-root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div > div:nth-child(4) > div > section:nth-child(3) > div > div > div:nth-child(3) > button:nth-child(1)"
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1)#account-identifier-root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div > div:nth-child(4) > div > section:nth-child(3) > div > div > div:nth-child(3) > button:nth-child(1)",
-            "text": "Essential Only"
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1)#account-identifier-root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Essential Only"
         }
     ]
 }

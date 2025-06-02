@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#consent-widget-container > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#consent-widget-container > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject"
+            "waitForThenClick": "body:not([id]) > div#consent-widget-container > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject",
+            "comment": "Reject"
         }
     ]
 }

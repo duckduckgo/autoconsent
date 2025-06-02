@@ -5,24 +5,24 @@
     "runContext": {
         "main": false,
         "frame": true,
-        "urlPattern": "^https?://(www\\.)?investing\\.thisismoney\\.co\\.uk/"
+        "urlPattern": "^https?://(www\\.)?thisismoney\\.co\\.uk/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(4) > a:nth-child(11)"
+            "exists": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(4) > a:nth-child(11)"
+            "visible": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(4) > a:nth-child(11)",
-            "text": "Do not sell or share my personal information"
+            "waitForThenClick": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])",
+            "comment": "Do not sell or share my personal information"
         }
     ]
 }

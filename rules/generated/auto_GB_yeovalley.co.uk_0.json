@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
+            "exists": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
+            "visible": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)",
-            "text": "Deny"
+            "waitForThenClick": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Deny"
         }
     ]
 }

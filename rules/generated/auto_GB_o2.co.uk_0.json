@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Accept essential cookies only"
+            "waitForThenClick": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
+            "comment": "Accept essential cookies only"
         }
     ]
 }

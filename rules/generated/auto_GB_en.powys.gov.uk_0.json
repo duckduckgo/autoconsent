@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > header > div:nth-child(2) > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > header > div:nth-child(2) > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > header > div:nth-child(2) > div > div:nth-child(2) > form:nth-child(2) > button:nth-child(2)",
-            "text": "Reject all"
+            "waitForThenClick": "body:not([id]) > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
+            "comment": "Reject all"
         }
     ]
 }

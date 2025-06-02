@@ -9,7 +9,12 @@ export const rulesDir = __dirname;
 
 async function readFileJSON(filePath: string) {
     const data = await fs.promises.readFile(filePath, 'utf-8');
-    return JSON.parse(data);
+    try {
+        return JSON.parse(data);
+    } catch (e) {
+        console.error(`Error parsing ${filePath}:`, e);
+        throw e;
+    }
 }
 
 export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {

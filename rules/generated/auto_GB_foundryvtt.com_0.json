@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > main > div:nth-child(1) > form:nth-child(2) > footer:nth-child(5) > button:nth-child(2)"
+            "exists": "body:not([id]) > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > main > div:nth-child(1) > form:nth-child(2) > footer:nth-child(5) > button:nth-child(2)"
+            "visible": "body:not([id]) > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > main > div:nth-child(1) > form:nth-child(2) > footer:nth-child(5) > button:nth-child(2)",
-            "text": " REQUIRED ONLY"
+            "waitForThenClick": "body:not([id]) > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "comment": " REQUIRED ONLY"
         }
     ]
 }

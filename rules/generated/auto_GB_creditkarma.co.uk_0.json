@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > main > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(6) > div > div > div:nth-child(1) > div > div:nth-child(4) > div > button"
+            "exists": "body:not([id]) > main#app-root > div:nth-child(1)#app-parent > div#app-app > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > main > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(6) > div > div > div:nth-child(1) > div > div:nth-child(4) > div > button"
+            "visible": "body:not([id]) > main#app-root > div:nth-child(1)#app-parent > div#app-app > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > main > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(6) > div > div > div:nth-child(1) > div > div:nth-child(4) > div > button",
-            "text": "Reject non-essential cookies"
+            "waitForThenClick": "body:not([id]) > main#app-root > div:nth-child(1)#app-parent > div#app-app > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:not([id])",
+            "comment": "Reject non-essential cookies"
         }
     ]
 }

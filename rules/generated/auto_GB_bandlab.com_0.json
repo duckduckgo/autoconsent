@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > privacy-banner > div > div:nth-child(2) > button:nth-child(2) > span"
+            "exists": "body:not([id]) > privacy-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > privacy-banner > div > div:nth-child(2) > button:nth-child(2) > span"
+            "visible": "body:not([id]) > privacy-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > privacy-banner > div > div:nth-child(2) > button:nth-child(2) > span",
-            "text": "Reject All"
+            "waitForThenClick": "body:not([id]) > privacy-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Reject All"
         }
     ]
 }

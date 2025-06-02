@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > button:nth-child(2)"
+            "exists": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > button:nth-child(2)"
+            "visible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > button:nth-child(2)",
-            "text": "Reject all cookies"
+            "waitForThenClick": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler",
+            "comment": "Reject all cookies"
         }
     ]
 }

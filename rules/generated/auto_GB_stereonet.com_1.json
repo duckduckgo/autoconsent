@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)",
-            "text": "REJECT ALL"
+            "waitForThenClick": "body:not([id]) > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "REJECT ALL"
         }
     ]
 }

@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > section:nth-child(13) > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(1) > div > div > a:nth-child(5)"
+            "exists": "body:not([id]) > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > section:nth-child(13) > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(1) > div > div > a:nth-child(5)"
+            "visible": "body:not([id]) > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > section:nth-child(13) > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(1) > div > div > a:nth-child(5)",
-            "text": " Reject all cookies"
+            "waitForThenClick": "body:not([id]) > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])",
+            "comment": " Reject all cookies"
         }
     ]
 }

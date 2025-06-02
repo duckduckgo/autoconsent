@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_riverside.fm_0",
+    "vendorUrl": "https://riverside.fm/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?riverside\\.fm/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny all"
+        }
+    ]
+}

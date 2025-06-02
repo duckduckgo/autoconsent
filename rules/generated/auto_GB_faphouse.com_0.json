@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(4) > div > div:nth-child(4) > button:nth-child(2) > span"
+            "exists": "body:not([id]) > div#cookie-wall > div#cwi > div:nth-child(4)#cw-controls > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cwc-reject > span:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(4) > div > div:nth-child(4) > button:nth-child(2) > span"
+            "visible": "body:not([id]) > div#cookie-wall > div#cwi > div:nth-child(4)#cw-controls > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cwc-reject > span:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(4) > div > div:nth-child(4) > button:nth-child(2) > span",
-            "text": "Reject cookies"
+            "waitForThenClick": "body:not([id]) > div#cookie-wall > div#cwi > div:nth-child(4)#cw-controls > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cwc-reject > span:not([id])",
+            "comment": "Reject cookies"
         }
     ]
 }

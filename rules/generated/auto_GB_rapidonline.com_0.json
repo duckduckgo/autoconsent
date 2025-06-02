@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)",
-            "text": "Reject non-essential"
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential",
+            "comment": "Reject non-essential"
         }
     ]
 }

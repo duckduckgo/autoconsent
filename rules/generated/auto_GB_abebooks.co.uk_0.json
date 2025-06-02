@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > header:nth-child(1) > div:nth-child(1) > div > div > div > div > button:nth-child(4)"
+            "exists": "body:not([id]) > div#wrapper > header:nth-child(1)#abe-top > div:nth-child(1)#abe-gdpr-banner > div:not([id]) > div#gdpr-banner-component > div:not([id]) > div:not([id]) > button:nth-child(4)#gdpr-banner-component-decline-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > header:nth-child(1) > div:nth-child(1) > div > div > div > div > button:nth-child(4)"
+            "visible": "body:not([id]) > div#wrapper > header:nth-child(1)#abe-top > div:nth-child(1)#abe-gdpr-banner > div:not([id]) > div#gdpr-banner-component > div:not([id]) > div:not([id]) > button:nth-child(4)#gdpr-banner-component-decline-btn"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > header:nth-child(1) > div:nth-child(1) > div > div > div > div > button:nth-child(4)",
-            "text": "Decline"
+            "waitForThenClick": "body:not([id]) > div#wrapper > header:nth-child(1)#abe-top > div:nth-child(1)#abe-gdpr-banner > div:not([id]) > div#gdpr-banner-component > div:not([id]) > div:not([id]) > button:nth-child(4)#gdpr-banner-component-decline-btn",
+            "comment": "Decline"
         }
     ]
 }

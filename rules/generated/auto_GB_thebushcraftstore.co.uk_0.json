@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)"
+            "exists": "body:not([id]) > div#shopui-cookie-popup-container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)"
+            "visible": "body:not([id]) > div#shopui-cookie-popup-container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)",
-            "text": "Reject All"
+            "waitForThenClick": "body:not([id]) > div#shopui-cookie-popup-container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
+            "comment": "Reject All"
         }
     ]
 }

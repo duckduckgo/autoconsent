@@ -10,19 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > form:nth-child(3) > ul:nth-child(2) > li:nth-child(3) > button"
+            "exists": "body:not([id]) > div#site-cookies-notice > div:not([id]) > form:nth-child(3)#cookies-1 > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > form:nth-child(3) > ul:nth-child(2) > li:nth-child(3) > button"
+            "visible": "body:not([id]) > div#site-cookies-notice > div:not([id]) > form:nth-child(3)#cookies-1 > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > form:nth-child(3) > ul:nth-child(2) > li:nth-child(3) > button",
-            "text": "Reject all\nextra cookies"
+            "waitForThenClick": "body:not([id]) > div#site-cookies-notice > div:not([id]) > form:nth-child(3)#cookies-1 > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Reject all\nextra cookies"
         }
     ]
 }
