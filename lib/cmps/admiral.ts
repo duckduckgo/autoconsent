@@ -42,9 +42,8 @@ export default class Admiral extends AutoConsentCMPBase {
 
         if ((await this.waitForThenClick(purposesButtonSelector)) && (await this.waitForVisible(saveAndExitSelector))) {
             const popupBody = this.elementSelector(saveAndExitSelector)[0].parentElement?.parentElement;
-            const checkboxes = popupBody?.querySelectorAll('input[type=checkbox]:checked');
-            // @ts-expect-error - checkboxes are HTMLElements
-            checkboxes?.forEach((checkbox: HTMLElement) => checkbox.click());
+            const checkboxes = popupBody?.querySelectorAll<HTMLElement>('input[type=checkbox]:checked');
+            checkboxes?.forEach((checkbox) => checkbox.click());
 
             return await this.click(saveAndExitSelector);
         }
