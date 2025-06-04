@@ -44,10 +44,10 @@ export default class AutoConsent {
         selfTest: null,
     };
     domActions: DomActions;
-    filtersEngine: FiltersEngine | null = null;
+    filtersEngine?: FiltersEngine;
     sendContentMessage: MessageSender;
     protected cosmeticStyleSheet?: CSSStyleSheet;
-    protected focusedElement: HTMLElement | null = null;
+    protected focusedElement?: HTMLElement;
 
     constructor(sendContentMessage: MessageSender, config: Partial<Config> | null = null, declarativeRules: RuleBundle | null = null) {
         evalState.sendContentMessage = sendContentMessage;
@@ -150,7 +150,7 @@ export default class AutoConsent {
             } catch (e) {
                 this.config.logs.errors && console.warn('error restoring focus', e);
             }
-            this.focusedElement = null;
+            this.focusedElement = undefined;
         }
     }
 
