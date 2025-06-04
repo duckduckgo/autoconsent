@@ -326,10 +326,13 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
                 console.error('invalid conditional rule', rule.if);
                 return false;
             }
+            if (!rule.then) {
+                console.error('invalid conditional rule, missing "then" step', rule.if);
+                return false;
+            }
             const condition = await this.evaluateRuleStep(rule.if);
             logsConfig.rulesteps && console.log('Condition is', condition);
             if (condition) {
-                // @ts-expect-error - if.then is required
                 results.push(this._runRulesSequentially(rule.then));
             } else if (rule.else) {
                 results.push(this._runRulesSequentially(rule.else));
