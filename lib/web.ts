@@ -30,8 +30,7 @@ export default class AutoConsent {
     rules: AutoCMP[] = [];
     // @ts-expect-error - config is initialized in initialize
     config: Config;
-    // @ts-expect-error - foundCmp is initialized in findCmp
-    foundCmp: AutoCMP;
+    foundCmp?: AutoCMP;
     state: ConsentState = {
         cosmeticFiltersOn: false,
         filterListReported: false,
@@ -446,15 +445,15 @@ export default class AutoConsent {
             type: 'optOutResult',
             cmp: this.foundCmp ? this.foundCmp.name : 'none',
             result: optOutResult,
-            scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+            scheduleSelfTest: Boolean(this.foundCmp && this.foundCmp.hasSelfTest),
             url: location.href,
         });
 
-        if (optOutResult && !this.foundCmp.isIntermediate) {
+        if (optOutResult && this.foundCmp && !this.foundCmp.isIntermediate) {
             this.sendContentMessage({
                 type: 'autoconsentDone',
-                cmp: this.foundCmp.name,
-                isCosmetic: this.foundCmp.isCosmetic,
+                cmp: this.foundCmp?.name,
+                isCosmetic: this.foundCmp?.isCosmetic,
                 url: location.href,
             });
             this.updateState({ lifecycle: 'done' });
@@ -493,7 +492,7 @@ export default class AutoConsent {
             url: location.href,
         });
 
-        if (optInResult && !this.foundCmp.isIntermediate) {
+        if (optInResult && this.foundCmp && !this.foundCmp.isIntermediate) {
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp.name,
