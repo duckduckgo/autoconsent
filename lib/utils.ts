@@ -113,6 +113,9 @@ export function scheduleWhenIdle(callback: () => void, timeout = 500) {
 
 export function highlightNode(node: HTMLElement) {
     if (!node.style) return;
+    if (node.__oldStyles !== undefined) {
+        return; // already highlighted
+    }
     if (node.hasAttribute('style')) {
         node.__oldStyles = node.style.cssText;
     }
