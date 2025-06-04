@@ -162,10 +162,9 @@ export default class AutoConsent {
 
     parseDeclarativeRules(declarativeRules: RuleBundle) {
         if (declarativeRules.consentomatic) {
-            Object.keys(declarativeRules.consentomatic).forEach((name) => {
-                // @ts-expect-error - consentomatic is defined at this point
-                this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
-            });
+            for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
+                this.addConsentomaticCMP(name, rule);
+            }
         }
 
         if (declarativeRules.autoconsent) {
