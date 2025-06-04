@@ -86,9 +86,9 @@ export default class AutoConsent {
             this.parseDeclarativeRules(declarativeRules);
         }
 
-        if (config.enableFilterList) {
+        if (BUNDLE_FILTERLIST && config.enableFilterList) {
             try {
-                if (BUNDLE_FILTERLIST && serializedEngine && serializedEngine.length > 0) {
+                if (serializedEngine && serializedEngine.length > 0) {
                     this.filtersEngine = deserializeFilterList(serializedEngine);
                 }
             } catch (e) {
@@ -404,7 +404,7 @@ export default class AutoConsent {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
-        if (this.state.cosmeticFiltersOn) {
+        if (BUNDLE_FILTERLIST && this.state.cosmeticFiltersOn) {
             // cancel cosmetic filters if we have a rule for this popup
             this.undoCosmetics();
         }
@@ -575,11 +575,11 @@ export default class AutoConsent {
      * @returns true if the filters were applied, false otherwise
      */
     async applyCosmeticFilters(styles?: string) {
-        if (!this.filtersEngine) {
+        if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
             return false;
         }
         const logsConfig = this.config?.logs;
-        if (BUNDLE_FILTERLIST && !styles) {
+        if (!styles) {
             styles = getCosmeticStylesheet(this.filtersEngine);
         }
 
@@ -588,7 +588,6 @@ export default class AutoConsent {
                 // if the cosmetic filters are actually working, report the hidden popup to the background.
                 // This may still be overridden later if an autoconsent rule matches.
                 // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-                // @ts-expect-error - styles is defined at this point
                 const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(styles), 'any');
                 if (cosmeticFiltersWorked) {
                     logsConfig?.lifecycle && console.log('Prehide cosmetic filters matched', location.href);
@@ -601,7 +600,6 @@ export default class AutoConsent {
 
         this.updateState({ cosmeticFiltersOn: true });
         try {
-            // @ts-expect-error - styles is defined at this point
             this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
             logsConfig?.lifecycle && console.log('[cosmetics]', this.cosmeticStyleSheet, location.href);
             document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
@@ -613,9 +611,11 @@ export default class AutoConsent {
     }
 
     undoCosmetics() {
-        this.updateState({ cosmeticFiltersOn: false });
-        this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
-        this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+        if (BUNDLE_FILTERLIST) {
+            this.updateState({ cosmeticFiltersOn: false });
+            this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
+            this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+        }
     }
 
     reportFilterlist() {
