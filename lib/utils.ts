@@ -142,8 +142,7 @@ export function highlightNode(node: HTMLElement) {
 
 export function unhighlightNode(node: HTMLElement) {
     if (!node.style || !node.hasAttribute('style')) return;
-    if ('__oldStyles' in node) {
-        // @ts-expect-error __oldStyles is set in highlightNode
+    if (node.__oldStyles !== undefined) {
         node.style.cssText = node.__oldStyles;
         delete node.__oldStyles;
     } else {
