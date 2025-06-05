@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_thedrardisshow.com_0",
-  "vendorUrl": "https://thedrardisshow.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?thedrardisshow\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id][aria-hidden][style] > div > div > div > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id][aria-hidden][style] > div > div > div > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id][aria-hidden][style] > div > div > div > div:nth-child(2) > button:nth-child(2)",
-      "text": "Reject all"
-    }
-  ]
+    "name": "auto_US_thedrardisshow.com_0",
+    "vendorUrl": "https://thedrardisshow.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thedrardisshow\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][aria-hidden][style] > div > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][aria-hidden][style] > div > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][aria-hidden][style] > div > div > div > div:nth-child(2) > button:nth-child(2)",
+            "text": "Reject all"
+        }
+    ]
 }

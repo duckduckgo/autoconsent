@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_kentucky.com_0', [ 'https://www.kentucky.com/' ]);
+generateCMPTests('auto_US_kentucky.com_0', ['https://www.kentucky.com/']);

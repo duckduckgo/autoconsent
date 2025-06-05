@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_oakley.com_0",
-  "vendorUrl": "https://www.oakley.com/en-us",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?oakley\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)",
-      "text": "REJECT"
-    }
-  ]
+    "name": "auto_US_oakley.com_0",
+    "vendorUrl": "https://www.oakley.com/en-us",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oakley\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)",
+            "text": "REJECT"
+        }
+    ]
 }

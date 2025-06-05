@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_computerworld.com_0', [ 'https://www.computerworld.com/' ]);
+generateCMPTests('auto_US_computerworld.com_0', ['https://www.computerworld.com/']);

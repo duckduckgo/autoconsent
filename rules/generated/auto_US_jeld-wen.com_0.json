@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_jeld-wen.com_0",
-  "vendorUrl": "https://www.jeld-wen.com/en-us",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?jeld-wen\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id][name][role][aria-modal][aria-labelledby][tabindex][lang][dir][ng-non-bindable][style][data-template][class] > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id][name][role][aria-modal][aria-labelledby][tabindex][lang][dir][ng-non-bindable][style][data-template][class] > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id][name][role][aria-modal][aria-labelledby][tabindex][lang][dir][ng-non-bindable][style][data-template][class] > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)",
-      "text": "Deny"
-    }
-  ]
+    "name": "auto_US_jeld-wen.com_0",
+    "vendorUrl": "https://www.jeld-wen.com/en-us",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jeld-wen\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][name][role][aria-modal][aria-labelledby][tabindex][lang][dir][ng-non-bindable][style][data-template][class] > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][name][role][aria-modal][aria-labelledby][tabindex][lang][dir][ng-non-bindable][style][data-template][class] > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][name][role][aria-modal][aria-labelledby][tabindex][lang][dir][ng-non-bindable][style][data-template][class] > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(2) > button:nth-child(4)",
+            "text": "Deny"
+        }
+    ]
 }

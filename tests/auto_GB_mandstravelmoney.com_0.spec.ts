@@ -1,2 +1,6 @@
-import generateCMPTests from "../playwright/runner";
-generateCMPTests('auto_GB_mandstravelmoney.com_0', ["https://mandstravelmoney.com/"], {testOptIn: false, testSelfTest: false, onlyRegions: ["GB"]});
+import generateCMPTests from '../playwright/runner';
+generateCMPTests('auto_GB_mandstravelmoney.com_0', ['https://mandstravelmoney.com/'], {
+    testOptIn: false,
+    testSelfTest: false,
+    onlyRegions: ['GB'],
+});

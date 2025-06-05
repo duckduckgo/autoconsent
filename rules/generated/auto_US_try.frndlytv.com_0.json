@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_try.frndlytv.com_0",
-  "vendorUrl": "https://try.frndlytv.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?try\\.frndlytv\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[class] > div:nth-child(2) > button:nth-child(1)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[class] > div:nth-child(2) > button:nth-child(1)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[class] > div:nth-child(2) > button:nth-child(1)",
-      "text": "Reject All"
-    }
-  ]
+    "name": "auto_US_try.frndlytv.com_0",
+    "vendorUrl": "https://try.frndlytv.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?try\\.frndlytv\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class] > div:nth-child(2) > button:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class] > div:nth-child(2) > button:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class] > div:nth-child(2) > button:nth-child(1)",
+            "text": "Reject All"
+        }
+    ]
 }

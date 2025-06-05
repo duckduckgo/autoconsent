@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_docs.snowflake.com_0', [ 'https://docs.snowflake.com/' ]);
+generateCMPTests('auto_US_docs.snowflake.com_0', ['https://docs.snowflake.com/']);

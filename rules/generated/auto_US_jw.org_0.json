@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_jw.org_0",
-  "vendorUrl": "https://www.jw.org/en/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?jw\\.org/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[class][style] > div > div:nth-child(3) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[class][style] > div > div:nth-child(3) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[class][style] > div > div:nth-child(3) > button:nth-child(2)",
-      "text": "Decline"
-    }
-  ]
+    "name": "auto_US_jw.org_0",
+    "vendorUrl": "https://www.jw.org/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jw\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class][style] > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class][style] > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class][style] > div > div:nth-child(3) > button:nth-child(2)",
+            "text": "Decline"
+        }
+    ]
 }

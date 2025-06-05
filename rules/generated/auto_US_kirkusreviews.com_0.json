@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_kirkusreviews.com_0",
-  "vendorUrl": "https://www.kirkusreviews.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?kirkusreviews\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[class] > div > div:nth-child(3) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[class] > div > div:nth-child(3) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[class] > div > div:nth-child(3) > button:nth-child(2)",
-      "text": "Decline"
-    }
-  ]
+    "name": "auto_US_kirkusreviews.com_0",
+    "vendorUrl": "https://www.kirkusreviews.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kirkusreviews\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class] > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class] > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class] > div > div:nth-child(3) > button:nth-child(2)",
+            "text": "Decline"
+        }
+    ]
 }

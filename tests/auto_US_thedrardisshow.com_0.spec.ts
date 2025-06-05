@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_thedrardisshow.com_0', [ 'https://thedrardisshow.com/' ]);
+generateCMPTests('auto_US_thedrardisshow.com_0', ['https://thedrardisshow.com/']);

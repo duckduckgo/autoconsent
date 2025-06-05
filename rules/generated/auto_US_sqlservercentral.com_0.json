@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_sqlservercentral.com_0",
-  "vendorUrl": "https://www.sqlservercentral.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?sqlservercentral\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[class] > div > div > ul:nth-child(3) > li:nth-child(2) > button"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[class] > div > div > ul:nth-child(3) > li:nth-child(2) > button"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[class] > div > div > ul:nth-child(3) > li:nth-child(2) > button",
-      "text": "Reject additional cookies"
-    }
-  ]
+    "name": "auto_US_sqlservercentral.com_0",
+    "vendorUrl": "https://www.sqlservercentral.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sqlservercentral\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class] > div > div > ul:nth-child(3) > li:nth-child(2) > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class] > div > div > ul:nth-child(3) > li:nth-child(2) > button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class] > div > div > ul:nth-child(3) > li:nth-child(2) > button",
+            "text": "Reject additional cookies"
+        }
+    ]
 }

@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_monkeytype.com_0",
-  "vendorUrl": "https://monkeytype.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?monkeytype\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-      "text": "reject non-essential"
-    }
-  ]
+    "name": "auto_US_monkeytype.com_0",
+    "vendorUrl": "https://monkeytype.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?monkeytype\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
+            "text": "reject non-essential"
+        }
+    ]
 }

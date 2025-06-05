@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_kentucky.com_0",
-  "vendorUrl": "https://www.kentucky.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?kentucky\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-      "text": "Deny"
-    }
-  ]
+    "name": "auto_US_kentucky.com_0",
+    "vendorUrl": "https://www.kentucky.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kentucky\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
+            "text": "Deny"
+        }
+    ]
 }

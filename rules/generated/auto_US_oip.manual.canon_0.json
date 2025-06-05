@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_oip.manual.canon_0",
-  "vendorUrl": "https://oip.manual.canon/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?oip\\.manual\\.canon/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id] > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id] > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id] > div:nth-child(2) > button:nth-child(2)",
-      "text": "Reject"
-    }
-  ]
+    "name": "auto_US_oip.manual.canon_0",
+    "vendorUrl": "https://oip.manual.canon/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oip\\.manual\\.canon/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id] > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id] > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id] > div:nth-child(2) > button:nth-child(2)",
+            "text": "Reject"
+        }
+    ]
 }

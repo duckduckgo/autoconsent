@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_newsbreak.com_0",
-  "vendorUrl": "https://www.newsbreak.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?newsbreak\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id][data-reactroot] > div:nth-child(2) > main:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(26) > div > div > div:nth-child(2) > div > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id][data-reactroot] > div:nth-child(2) > main:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(26) > div > div > div:nth-child(2) > div > div:nth-child(2) > button:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id][data-reactroot] > div:nth-child(2) > main:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(26) > div > div > div:nth-child(2) > div > div:nth-child(2) > button:nth-child(2)",
-      "text": "Reject"
-    }
-  ]
+    "name": "auto_US_newsbreak.com_0",
+    "vendorUrl": "https://www.newsbreak.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?newsbreak\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][data-reactroot] > div:nth-child(2) > main:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(26) > div > div > div:nth-child(2) > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][data-reactroot] > div:nth-child(2) > main:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(26) > div > div > div:nth-child(2) > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][data-reactroot] > div:nth-child(2) > main:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(26) > div > div > div:nth-child(2) > div > div:nth-child(2) > button:nth-child(2)",
+            "text": "Reject"
+        }
+    ]
 }

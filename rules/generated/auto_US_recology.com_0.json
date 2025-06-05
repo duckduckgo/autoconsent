@@ -1,28 +1,28 @@
 {
-  "name": "auto_US_recology.com_0",
-  "vendorUrl": "https://www.recology.com/",
-  "cosmetic": false,
-  "runContext": {
-    "main": true,
-    "frame": false,
-    "urlPattern": "^https?://(www\\.)?recology\\.com/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [
-    {
-      "exists": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)"
-    }
-  ],
-  "detectPopup": [
-    {
-      "visible": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)"
-    }
-  ],
-  "optIn": [],
-  "optOut": [
-    {
-      "waitForThenClick": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)",
-      "text": "Reject cookies"
-    }
-  ]
+    "name": "auto_US_recology.com_0",
+    "vendorUrl": "https://www.recology.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?recology\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)",
+            "text": "Reject cookies"
+        }
+    ]
 }

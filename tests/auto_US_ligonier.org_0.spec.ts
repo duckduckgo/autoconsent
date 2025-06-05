@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_ligonier.org_0', [ 'https://www.ligonier.org/' ]);
+generateCMPTests('auto_US_ligonier.org_0', ['https://www.ligonier.org/']);

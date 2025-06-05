@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_strava.com_0', [ 'https://www.strava.com/' ]);
+generateCMPTests('auto_US_strava.com_0', ['https://www.strava.com/']);

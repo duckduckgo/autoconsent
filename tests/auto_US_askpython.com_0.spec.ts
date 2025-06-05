@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_askpython.com_0', [ 'https://www.askpython.com/' ]);
+generateCMPTests('auto_US_askpython.com_0', ['https://www.askpython.com/']);

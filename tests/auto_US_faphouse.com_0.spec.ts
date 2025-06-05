@@ -1,3 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('auto_US_faphouse.com_0', [ 'https://faphouse.com/' ]);
+generateCMPTests('auto_US_faphouse.com_0', ['https://faphouse.com/']);
