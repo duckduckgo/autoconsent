@@ -3,7 +3,7 @@ set -ex
 
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
-$ESBUILD --format=iife --define:BUNDLE_FILTERLIST=true --target=es2021 playwright/content.ts --outfile=dist/autoconsent.playwright.js
+$ESBUILD --format=iife --define:BUNDLE_FILTERLIST=false --target=es2021 playwright/content.ts --outfile=dist/autoconsent.playwright.js
 $ESBUILD --format=esm --define:BUNDLE_FILTERLIST=true --target=es2021 lib/web.ts --outfile=dist/autoconsent.extra.esm.js
 $ESBUILD --format=cjs --define:BUNDLE_FILTERLIST=true --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.extra.cjs.js
 $ESBUILD --format=esm --define:BUNDLE_FILTERLIST=false --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
