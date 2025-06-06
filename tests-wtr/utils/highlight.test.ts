@@ -106,6 +106,9 @@ describe('Node highlighting', () => {
 
             // Should still be highlighted (styles should not have changed)
             expect(testElement.style.cssText).to.equal(highlightCssText);
+
+            // Should not create a second style tag
+            expect(document.querySelectorAll('#autoconsent-debug-styles').length).to.equal(1);
         });
     });
 

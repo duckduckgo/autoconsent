@@ -122,8 +122,12 @@ export function highlightNode(node: HTMLElement) {
     node.style.animation = 'pulsate .5s infinite';
     node.style.outline = 'solid red';
 
-    const styleTag = document.createElement('style');
-    styleTag.id = 'autoconsent-debug-styles';
+    let styleTag = document.querySelector('style#autoconsent-debug-styles');
+    if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'autoconsent-debug-styles';
+    }
+
     styleTag.textContent = `
       @keyframes pulsate {
         0% {
