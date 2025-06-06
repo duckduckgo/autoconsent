@@ -125,7 +125,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return Promise.resolve(true);
     }
 
-    async delayForElement(selector: ElementSelector, all = false) {
+    async highlightElements(selector: ElementSelector, all = false, delayTimeout = 2000) {
         let elements = this.elementSelector(selector);
         if (elements.length === 0) {
             return;
@@ -136,14 +136,14 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
 
         this.autoconsent.sendContentMessage({
             type: 'visualDelay',
-            timeout: VISUAL_DELAY_TIMEOUT,
+            timeout: delayTimeout,
         });
 
         for (const el of elements) {
             this.autoconsent.config.logs.rulesteps && console.log('highlighting', el);
             highlightNode(el);
         }
-        await this.wait(VISUAL_DELAY_TIMEOUT);
+        await this.wait(delayTimeout);
         for (const el of elements) {
             unhighlightNode(el);
         }
@@ -152,7 +152,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     // Implementing DomActionsProvider below:
     async click(selector: ElementSelector, all = false) {
         if (this.autoconsent.config.visualTest) {
-            await this.delayForElement(selector, all);
+            await this.highlightElements(selector, all);
         }
         return this.autoconsent.domActions.click(selector, all);
     }
@@ -175,7 +175,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
 
     async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
         if (this.autoconsent.config.visualTest) {
-            await this.delayForElement(selector, all);
+            await this.highlightElements(selector, all);
         }
         return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
     }
@@ -328,10 +328,13 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
                 console.error('invalid conditional rule', rule.if);
                 return false;
             }
+            if (!rule.then) {
+                console.error('invalid conditional rule, missing "then" step', rule.if);
+                return false;
+            }
             const condition = await this.evaluateRuleStep(rule.if);
             logsConfig.rulesteps && console.log('Condition is', condition);
             if (condition) {
-                // @ts-expect-error - if.then is required
                 results.push(this._runRulesSequentially(rule.then));
             } else if (rule.else) {
                 results.push(this._runRulesSequentially(rule.else));

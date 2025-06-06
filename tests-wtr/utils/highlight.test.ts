@@ -83,6 +83,33 @@ describe('Node highlighting', () => {
             expect(testElement.hasAttribute('style')).to.be.true;
             expect(testElement.__oldStyles).to.be.undefined; // No old styles to store
         });
+
+        it('should handle being called twice on the same element', () => {
+            testElement.style.color = 'blue';
+            testElement.style.fontSize = '16px';
+            const originalCssText = testElement.style.cssText;
+
+            // First call
+            highlightNode(testElement);
+            expect(testElement.__oldStyles).to.equal(originalCssText);
+            const highlightCssText = testElement.style.cssText;
+
+            // Second call
+            highlightNode(testElement);
+
+            // Should preserve the original styles, not the first highlight styles
+            expect(testElement.__oldStyles).to.equal(originalCssText);
+            expect(testElement.__oldStyles).to.not.equal(highlightCssText);
+
+            // Should still be highlighted (styles should be different from original)
+            expect(testElement.style.cssText).to.not.equal(originalCssText);
+
+            // Should still be highlighted (styles should not have changed)
+            expect(testElement.style.cssText).to.equal(highlightCssText);
+
+            // Should not create a second style tag
+            expect(document.querySelectorAll('#autoconsent-debug-styles').length).to.equal(1);
+        });
     });
 
     describe('unhighlightNode', () => {

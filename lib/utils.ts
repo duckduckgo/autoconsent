@@ -113,14 +113,21 @@ export function scheduleWhenIdle(callback: () => void, timeout = 500) {
 
 export function highlightNode(node: HTMLElement) {
     if (!node.style) return;
+    if (node.__oldStyles !== undefined) {
+        return; // already highlighted
+    }
     if (node.hasAttribute('style')) {
         node.__oldStyles = node.style.cssText;
     }
     node.style.animation = 'pulsate .5s infinite';
     node.style.outline = 'solid red';
 
-    const styleTag = document.createElement('style');
-    styleTag.id = 'autoconsent-debug-styles';
+    let styleTag = document.querySelector('style#autoconsent-debug-styles');
+    if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'autoconsent-debug-styles';
+    }
+
     styleTag.textContent = `
       @keyframes pulsate {
         0% {
@@ -142,8 +149,7 @@ export function highlightNode(node: HTMLElement) {
 
 export function unhighlightNode(node: HTMLElement) {
     if (!node.style || !node.hasAttribute('style')) return;
-    if ('__oldStyles' in node) {
-        // @ts-expect-error __oldStyles is set in highlightNode
+    if (node.__oldStyles !== undefined) {
         node.style.cssText = node.__oldStyles;
         delete node.__oldStyles;
     } else {
