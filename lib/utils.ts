@@ -61,6 +61,7 @@ export function isElementVisible(elem: HTMLElement): boolean {
 }
 
 export function copyObject(data: any) {
+    // @ts-expect-error - globalThis.structuredClone may be undefined
     if (globalThis.structuredClone) {
         return structuredClone(data);
     }
@@ -79,6 +80,7 @@ export function normalizeConfig(providedConfig: any): Config {
         isMainWorld: false,
         prehideTimeout: 2000,
         enableFilterList: false,
+        visualTest: false,
         logs: {
             lifecycle: false,
             rulesteps: false,
@@ -101,9 +103,56 @@ export function normalizeConfig(providedConfig: any): Config {
 }
 
 export function scheduleWhenIdle(callback: () => void, timeout = 500) {
+    // @ts-expect-error - globalThis.requestIdleCallback may be undefined
     if (globalThis.requestIdleCallback) {
         requestIdleCallback(callback, { timeout });
     } else {
         setTimeout(callback, 0);
+    }
+}
+
+export function highlightNode(node: HTMLElement) {
+    if (!node.style) return;
+    if (node.__oldStyles !== undefined) {
+        return; // already highlighted
+    }
+    if (node.hasAttribute('style')) {
+        node.__oldStyles = node.style.cssText;
+    }
+    node.style.animation = 'pulsate .5s infinite';
+    node.style.outline = 'solid red';
+
+    let styleTag = document.querySelector('style#autoconsent-debug-styles');
+    if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'autoconsent-debug-styles';
+    }
+
+    styleTag.textContent = `
+      @keyframes pulsate {
+        0% {
+          outline-width: 8px;
+          outline-offset: -4px;
+        }
+        50% {
+          outline-width: 4px;
+          outline-offset: -2px;
+        }
+        100% {
+          outline-width: 8px;
+          outline-offset: -4px;
+        }
+      }
+    `;
+    document.head.appendChild(styleTag);
+}
+
+export function unhighlightNode(node: HTMLElement) {
+    if (!node.style || !node.hasAttribute('style')) return;
+    if (node.__oldStyles !== undefined) {
+        node.style.cssText = node.__oldStyles;
+        delete node.__oldStyles;
+    } else {
+        node.removeAttribute('style');
     }
 }

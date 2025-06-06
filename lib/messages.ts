@@ -7,6 +7,7 @@ export type BackgroundMessage = InitResponseMessage | EvalResponseMessage | OptO
 export type ContentScriptMessage =
     | InitMessage
     | EvalMessage
+    | DelayMessage
     | DetectedMessage
     | FoundMessage
     | OptOutResultMessage
@@ -30,6 +31,11 @@ export type EvalMessage = {
     id: string;
     code: string;
     snippetId?: keyof typeof snippets;
+};
+
+export type DelayMessage = {
+    type: 'visualDelay';
+    timeout: number;
 };
 
 export type DetectedMessage = {

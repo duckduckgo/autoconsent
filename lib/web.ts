@@ -28,8 +28,8 @@ function filterCMPs(rules: AutoCMP[], config: Config) {
 export default class AutoConsent {
     id = getRandomID();
     rules: AutoCMP[] = [];
-    config: Config;
-    foundCmp: AutoCMP = null;
+    #config?: Config;
+    foundCmp?: AutoCMP;
     state: ConsentState = {
         cosmeticFiltersOn: false,
         filterListReported: false,
@@ -43,12 +43,12 @@ export default class AutoConsent {
         selfTest: null,
     };
     domActions: DomActions;
-    filtersEngine: FiltersEngine;
-    protected sendContentMessage: MessageSender;
-    protected cosmeticStyleSheet: CSSStyleSheet;
-    protected focusedElement: HTMLElement = null;
+    filtersEngine?: FiltersEngine;
+    sendContentMessage: MessageSender;
+    protected cosmeticStyleSheet?: CSSStyleSheet;
+    protected focusedElement?: HTMLElement;
 
-    constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
+    constructor(sendContentMessage: MessageSender, config: Partial<Config> | null = null, declarativeRules: RuleBundle | null = null) {
         evalState.sendContentMessage = sendContentMessage;
         this.sendContentMessage = sendContentMessage;
         this.rules = [];
@@ -72,10 +72,17 @@ export default class AutoConsent {
         this.domActions = new DomActions(this);
     }
 
-    initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    get config() {
+        if (!this.#config) {
+            throw new Error('AutoConsent is not initialized yet');
+        }
+        return this.#config;
+    }
+
+    initialize(config: Partial<Config>, declarativeRules: RuleBundle | null) {
         const normalizedConfig = normalizeConfig(config);
         normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
-        this.config = normalizedConfig;
+        this.#config = normalizedConfig;
         if (!normalizedConfig.enabled) {
             normalizedConfig.logs.lifecycle && console.log('autoconsent is disabled');
             return;
@@ -85,9 +92,9 @@ export default class AutoConsent {
             this.parseDeclarativeRules(declarativeRules);
         }
 
-        if (config.enableFilterList) {
+        if (BUNDLE_FILTERLIST && config.enableFilterList) {
             try {
-                if (BUNDLE_FILTERLIST && serializedEngine && serializedEngine.length > 0) {
+                if (serializedEngine && serializedEngine.length > 0) {
                     this.filtersEngine = deserializeFilterList(serializedEngine);
                 }
             } catch (e) {
@@ -104,7 +111,7 @@ export default class AutoConsent {
 
         this.rules = filterCMPs(this.rules, normalizedConfig);
 
-        if (config.enablePrehide) {
+        if (this.shouldPrehide) {
             if (document.documentElement) {
                 this.prehideElements(); // prehide as early as possible to prevent flickering
             } else {
@@ -130,6 +137,10 @@ export default class AutoConsent {
         this.updateState({ lifecycle: 'initialized' });
     }
 
+    get shouldPrehide() {
+        return this.config.enablePrehide && !this.config.visualTest;
+    }
+
     saveFocus() {
         this.focusedElement = document.activeElement as HTMLElement;
         if (this.focusedElement) {
@@ -145,7 +156,7 @@ export default class AutoConsent {
             } catch (e) {
                 this.config.logs.errors && console.warn('error restoring focus', e);
             }
-            this.focusedElement = null;
+            this.focusedElement = undefined;
         }
     }
 
@@ -157,9 +168,9 @@ export default class AutoConsent {
 
     parseDeclarativeRules(declarativeRules: RuleBundle) {
         if (declarativeRules.consentomatic) {
-            Object.keys(declarativeRules.consentomatic).forEach((name) => {
-                this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
-            });
+            for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
+                this.addConsentomaticCMP(name, rule);
+            }
         }
 
         if (declarativeRules.autoconsent) {
@@ -202,7 +213,7 @@ export default class AutoConsent {
         this.updateState({ detectedCmps: foundCmps.map((c) => c.name) });
         if (foundCmps.length === 0) {
             logsConfig.lifecycle && console.log('no CMP found', location.href);
-            if (this.config.enablePrehide) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
 
@@ -236,7 +247,7 @@ export default class AutoConsent {
 
         if (foundPopups.length === 0) {
             logsConfig.lifecycle && console.log('no popup found');
-            if (this.config.enablePrehide) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
             return false;
@@ -395,11 +406,11 @@ export default class AutoConsent {
 
     async handlePopup(cmp: AutoCMP): Promise<boolean> {
         this.updateState({ lifecycle: 'openPopupDetected' });
-        if (this.config.enablePrehide && !this.state.prehideOn) {
+        if (this.shouldPrehide && !this.state.prehideOn) {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
-        if (this.state.cosmeticFiltersOn) {
+        if (BUNDLE_FILTERLIST && this.state.cosmeticFiltersOn) {
             // cancel cosmetic filters if we have a rule for this popup
             this.undoCosmetics();
         }
@@ -431,7 +442,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt out result ${optOutResult}`);
         }
 
-        if (this.config.enablePrehide) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -439,15 +450,15 @@ export default class AutoConsent {
             type: 'optOutResult',
             cmp: this.foundCmp ? this.foundCmp.name : 'none',
             result: optOutResult,
-            scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+            scheduleSelfTest: Boolean(this.foundCmp && this.foundCmp.hasSelfTest),
             url: location.href,
         });
 
-        if (optOutResult && !this.foundCmp.isIntermediate) {
+        if (optOutResult && this.foundCmp && !this.foundCmp.isIntermediate) {
             this.sendContentMessage({
                 type: 'autoconsentDone',
-                cmp: this.foundCmp.name,
-                isCosmetic: this.foundCmp.isCosmetic,
+                cmp: this.foundCmp?.name,
+                isCosmetic: this.foundCmp?.isCosmetic,
                 url: location.href,
             });
             this.updateState({ lifecycle: 'done' });
@@ -474,7 +485,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt in result ${optInResult}`);
         }
 
-        if (this.config.enablePrehide) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -486,7 +497,7 @@ export default class AutoConsent {
             url: location.href,
         });
 
-        if (optInResult && !this.foundCmp.isIntermediate) {
+        if (optInResult && this.foundCmp && !this.foundCmp.isIntermediate) {
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp.name,
@@ -547,12 +558,12 @@ export default class AutoConsent {
 
         const selectors = this.rules
             .filter((rule) => rule.prehideSelectors && rule.checkRunContext())
-            .reduce((selectorList, rule) => [...selectorList, ...rule.prehideSelectors], globalHidden);
+            .reduce((selectorList, rule) => [...(selectorList || []), ...(rule.prehideSelectors || [])], globalHidden);
 
         this.updateState({ prehideOn: true });
         setTimeout(() => {
             // unhide things if we are still looking for a pop-up
-            if (this.config.enablePrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
+            if (this.shouldPrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
                 logsConfig.lifecycle && console.log('Process is taking too long, unhiding elements');
                 this.undoPrehide();
             }
@@ -570,11 +581,11 @@ export default class AutoConsent {
      * @returns true if the filters were applied, false otherwise
      */
     async applyCosmeticFilters(styles?: string) {
-        if (!this.filtersEngine) {
+        if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
             return false;
         }
-        const logsConfig = this.config?.logs;
-        if (BUNDLE_FILTERLIST && !styles) {
+        const logsConfig = this.config.logs;
+        if (!styles) {
             styles = getCosmeticStylesheet(this.filtersEngine);
         }
 
@@ -606,9 +617,11 @@ export default class AutoConsent {
     }
 
     undoCosmetics() {
-        this.updateState({ cosmeticFiltersOn: false });
-        this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
-        this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+        if (BUNDLE_FILTERLIST) {
+            this.updateState({ cosmeticFiltersOn: false });
+            this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
+            this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+        }
     }
 
     reportFilterlist() {
@@ -636,7 +649,7 @@ export default class AutoConsent {
         // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
         const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(cosmeticStyles), 'any');
 
-        const logsConfig = this.config?.logs;
+        const logsConfig = this.config.logs;
 
         if (!cosmeticFiltersWorked) {
             logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
@@ -681,7 +694,7 @@ export default class AutoConsent {
     }
 
     async receiveMessageCallback(message: BackgroundMessage) {
-        const logsConfig = this.config?.logs;
+        const logsConfig = this.#config?.logs;
         if (logsConfig?.messages) {
             console.log('received from background', message, window.location.href);
         }

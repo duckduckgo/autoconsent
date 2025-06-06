@@ -73,7 +73,7 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 });
             }
 
-            let selfTestFrame: Frame = null;
+            let selfTestFrame: Frame | null = null;
             async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
                 LOG_MESSAGES.includes(msg.type) && console.log(msg);
                 received.push(msg);
