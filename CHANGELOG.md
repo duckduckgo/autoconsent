@@ -1,3 +1,17 @@
+# v14.0.1 (Mon Jun 02 2025)
+
+#### 🐛 Bug Fix
+
+- Add support for non-'reject-all' version of the termsfeed popup. [#750](https://github.com/duckduckgo/autoconsent/pull/750) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+- CI: Fix release PR to privacy config repo [#751](https://github.com/duckduckgo/autoconsent/pull/751) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v13.0.0 (Tue May 20 2025)
 
 #### 💥 Breaking Change
