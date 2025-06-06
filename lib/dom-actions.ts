@@ -7,7 +7,7 @@ export class DomActions implements DomActionsProvider {
     // eslint-disable-next-line no-useless-constructor
     constructor(public autoconsentInstance: AutoConsent) {}
 
-    click(selector: ElementSelector, all = false): boolean {
+    async click(selector: ElementSelector, all = false): Promise<boolean> {
         const elem = this.elementSelector(selector);
         this.autoconsentInstance.config.logs.rulesteps && console.log('[click]', selector, all, elem);
         if (elem.length > 0) {
@@ -25,7 +25,7 @@ export class DomActions implements DomActionsProvider {
         return exists;
     }
 
-    elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean {
+    elementVisible(selector: ElementSelector, check: VisibilityCheck = 'all'): boolean {
         const elem = this.elementSelector(selector);
         const results = new Array(elem.length);
         elem.forEach((e, i) => {
@@ -59,7 +59,7 @@ export class DomActions implements DomActionsProvider {
 
     async waitForThenClick(selector: ElementSelector, timeout = 10000, all = false): Promise<boolean> {
         await this.waitForElement(selector, timeout);
-        return this.click(selector, all);
+        return await this.click(selector, all);
     }
 
     wait(ms: number): Promise<true> {
@@ -76,7 +76,7 @@ export class DomActions implements DomActionsProvider {
         return document.cookie.includes(substring);
     }
 
-    hide(selector: string, method: HideMethod): boolean {
+    hide(selector: string, method?: HideMethod): boolean {
         this.autoconsentInstance.config.logs.rulesteps && console.log('[hide]', selector);
         const styleEl = getStyleElement();
         return hideElements(styleEl, selector, method);
@@ -118,7 +118,7 @@ export class DomActions implements DomActionsProvider {
         if (selector.startsWith('xpath/')) {
             const xpath = selector.slice(6);
             const result = document.evaluate(xpath, parent, null, XPathResult.ANY_TYPE, null);
-            let node: Node = null;
+            let node: Node | null = null;
             const elements: HTMLElement[] = [];
             while ((node = result.iterateNext())) {
                 elements.push(node as HTMLElement);
@@ -142,7 +142,7 @@ export class DomActions implements DomActionsProvider {
 
     querySelectorChain(selectors: string[]): HTMLElement[] {
         let parent: ParentNode = document;
-        let matches: HTMLElement[];
+        let matches: HTMLElement[] = [];
         for (const selector of selectors) {
             matches = this.querySingleReplySelector(selector, parent);
             if (matches.length === 0) {

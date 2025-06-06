@@ -1,3 +1,30 @@
+# v14.1.0 (Fri Jun 06 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 9fba285e18d0dc14f2ee64142b56e76a59b58649 [#777](https://github.com/duckduckgo/autoconsent/pull/777) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Visual test mode [#756](https://github.com/duckduckgo/autoconsent/pull/756) ([@muodov](https://github.com/muodov))
+- Bump @ghostery/adblocker-content from 2.5.2 to 2.6.1 [#754](https://github.com/duckduckgo/autoconsent/pull/754) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump @ghostery/adblocker from 2.5.2 to 2.6.1 [#753](https://github.com/duckduckgo/autoconsent/pull/753) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#763](https://github.com/duckduckgo/autoconsent/pull/763) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Add cookiehub CMP [#778](https://github.com/duckduckgo/autoconsent/pull/778) ([@noisysocks](https://github.com/noisysocks))
+- Update EasyList Cookie to 0b4c698c6cf070415d7dcda1b8eabe9d6cb5fa99 [#752](https://github.com/duckduckgo/autoconsent/pull/752) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.7 to 7.0.8 [#762](https://github.com/duckduckgo/autoconsent/pull/762) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump node in CI to LTS. [#761](https://github.com/duckduckgo/autoconsent/pull/761) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.0.1 (Mon Jun 02 2025)
 
 #### 🐛 Bug Fix

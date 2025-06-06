@@ -195,6 +195,9 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             }
             updateTabReports(sender.tab.id, sender.frameId, msg);
             break;
+        case 'visualDelay':
+            console.log('visualDelay', msg);
+            break;
     }
 });
 
