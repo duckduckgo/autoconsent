@@ -28,8 +28,7 @@ function filterCMPs(rules: AutoCMP[], config: Config) {
 export default class AutoConsent {
     id = getRandomID();
     rules: AutoCMP[] = [];
-    // @ts-expect-error - config is initialized in initialize
-    config: Config;
+    #config?: Config;
     foundCmp?: AutoCMP;
     state: ConsentState = {
         cosmeticFiltersOn: false,
@@ -73,10 +72,17 @@ export default class AutoConsent {
         this.domActions = new DomActions(this);
     }
 
+    get config() {
+        if (!this.#config) {
+            throw new Error('AutoConsent is not initialized yet');
+        }
+        return this.#config;
+    }
+
     initialize(config: Partial<Config>, declarativeRules: RuleBundle | null) {
         const normalizedConfig = normalizeConfig(config);
         normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
-        this.config = normalizedConfig;
+        this.#config = normalizedConfig;
         if (!normalizedConfig.enabled) {
             normalizedConfig.logs.lifecycle && console.log('autoconsent is disabled');
             return;
@@ -132,7 +138,7 @@ export default class AutoConsent {
     }
 
     get shouldPrehide() {
-        return this.config?.enablePrehide && !this.config?.visualTest;
+        return this.config.enablePrehide && !this.config.visualTest;
     }
 
     saveFocus() {
@@ -578,7 +584,7 @@ export default class AutoConsent {
         if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
             return false;
         }
-        const logsConfig = this.config?.logs;
+        const logsConfig = this.config.logs;
         if (!styles) {
             styles = getCosmeticStylesheet(this.filtersEngine);
         }
@@ -643,7 +649,7 @@ export default class AutoConsent {
         // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
         const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(cosmeticStyles), 'any');
 
-        const logsConfig = this.config?.logs;
+        const logsConfig = this.config.logs;
 
         if (!cosmeticFiltersWorked) {
             logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
@@ -688,7 +694,7 @@ export default class AutoConsent {
     }
 
     async receiveMessageCallback(message: BackgroundMessage) {
-        const logsConfig = this.config?.logs;
+        const logsConfig = this.#config?.logs;
         if (logsConfig?.messages) {
             console.log('received from background', message, window.location.href);
         }
