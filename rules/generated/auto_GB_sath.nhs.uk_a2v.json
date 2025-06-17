@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_sath.nhs.uk_a2v",
+    "vendorUrl": "https://www.sath.nhs.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sath\\.nhs\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Reject"
+        }
+    ]
+}
