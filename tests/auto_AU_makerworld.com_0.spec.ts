@@ -1,2 +1,2 @@
-import generateCMPTests from "../playwright/runner";
-generateCMPTests('auto_AU_makerworld.com_0', ["https://makerworld.com/en"], {testOptIn: false, testSelfTest: false, onlyRegions: ["AU"]});
+import generateCMPTests from '../playwright/runner';
+generateCMPTests('auto_AU_makerworld.com_0', ['https://makerworld.com/en'], { testOptIn: false, testSelfTest: false, onlyRegions: ['AU'] });
