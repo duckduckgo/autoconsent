@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_condorferries.co.uk_10h",
+    "vendorUrl": "https://www.condorferries.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?condorferries\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#top > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#top > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#top > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])",
+            "comment": "Strictly necessary"
+        }
+    ]
+}
