@@ -79,7 +79,12 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
-    EVAL_COOKIE_LAW_INFO_0: () => CLI.disableAllCookies() || CLI.reject_close() || true,
+    EVAL_COOKIE_LAW_INFO_0: () => {
+        if (CLI.disableAllCookies) CLI.disableAllCookies();
+        if (CLI.reject_close) CLI.reject_close();
+        document.body.classList.remove('cli-barmodal-open');
+        return true;
+    },
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
