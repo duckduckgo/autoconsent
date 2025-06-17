@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_iopscience.iop.org_7yt",
+    "vendorUrl": "https://iopscience.iop.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iopscience\\.iop\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyIABSectionCookie > div:nth-child(4):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyIABSectionCookie > div:nth-child(4):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyIABSectionCookie > div:nth-child(4):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Necessary"
+        }
+    ]
+}
