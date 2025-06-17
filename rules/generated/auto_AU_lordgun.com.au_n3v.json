@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_lordgun.com.au_n3v",
+    "vendorUrl": "https://www.lordgun.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lordgun\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#bannerCookiesConsent > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#btnCookieBannerClose"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#bannerCookiesConsent > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#btnCookieBannerClose"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#bannerCookiesConsent > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#btnCookieBannerClose",
+            "comment": "Reject"
+        }
+    ]
+}
