@@ -1,0 +1,28 @@
+{
+    "name": "auto_CA_redirection.ubisoft.com_mh4",
+    "vendorUrl": "https://redirection.ubisoft.com/site/entrance?entrance=www.ubisoft.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?redirection\\.ubisoft\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close",
+            "comment": "I REFUSE COOKIES"
+        }
+    ]
+}
