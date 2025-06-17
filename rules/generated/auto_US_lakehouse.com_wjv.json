@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_lakehouse.com_wjv",
+    "vendorUrl": "https://www.lakehouse.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lakehouse\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#main > div:nth-child(4):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#main > div:nth-child(4):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#main > div:nth-child(4):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Deny"
+        }
+    ]
+}
