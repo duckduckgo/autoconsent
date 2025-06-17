@@ -1,0 +1,28 @@
+{
+    "name": "auto_CA_rfi.fr_0",
+    "vendorUrl": "https://www.rfi.fr/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rfi\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#buttons > button:nth-child(2)#didomi-notice-disagree-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#buttons > button:nth-child(2)#didomi-notice-disagree-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#buttons > button:nth-child(2)#didomi-notice-disagree-button",
+            "comment": "Deny"
+        }
+    ]
+}
