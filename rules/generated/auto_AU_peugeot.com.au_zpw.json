@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_peugeot.com.au_zpw",
+    "vendorUrl": "https://www.peugeot.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?peugeot\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "comment": "CONTINUE WITHOUT ACCEPTING →"
+        }
+    ]
+}
