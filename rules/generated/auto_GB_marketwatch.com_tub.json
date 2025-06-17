@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_marketwatch.com_tub",
+    "vendorUrl": "https://www.marketwatch.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cdn\\.privacy-mgmt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "comment": "REJECT ALL"
+        }
+    ]
+}
