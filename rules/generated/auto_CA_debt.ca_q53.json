@@ -1,0 +1,28 @@
+{
+    "name": "auto_CA_debt.ca_q53",
+    "vendorUrl": "https://www.debt.ca/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?debt\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected",
+            "comment": "Reject"
+        }
+    ]
+}
