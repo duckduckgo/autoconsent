@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_coverworld.com.au_t04",
+    "vendorUrl": "https://www.coverworld.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?coverworld\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#html-body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-11 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#html-body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-11 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-11 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "Decline"
+        }
+    ]
+}
