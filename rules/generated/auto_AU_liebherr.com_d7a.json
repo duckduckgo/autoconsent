@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_liebherr.com_d7a",
+    "vendorUrl": "https://www.liebherr.com/en-au/group/start-page-4862106",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?liebherr\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cmpStart > div#cmpStartx > div:nth-child(2)#cmpStartModal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#uc-btn-deny-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cmpStart > div#cmpStartx > div:nth-child(2)#cmpStartModal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#uc-btn-deny-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cmpStart > div#cmpStartx > div:nth-child(2)#cmpStartModal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#uc-btn-deny-banner",
+            "comment": "DECLINE"
+        }
+    ]
+}
