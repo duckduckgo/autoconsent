@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_mailerlite.com_fvd",
+    "vendorUrl": "https://www.mailerlite.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mailerlite\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll",
+            "comment": "Reject all"
+        }
+    ]
+}
