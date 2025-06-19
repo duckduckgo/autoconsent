@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_hpe.com_2hy",
+    "vendorUrl": "https://www.hpe.com/us/en/home.html",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hpe\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Decline optional cookies"
+        }
+    ]
+}
