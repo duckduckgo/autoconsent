@@ -63,7 +63,7 @@ pipeline {
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
     }
     environment {
-        NODENV_VERSION = "16.16.0"
+        NODENV_VERSION = "20.12.1"
         NODENV_ROOT = "/opt/nodeenv"
         PATH = "/opt/nodenv/shims:/opt/nodenv/bin:$PATH"
     }
