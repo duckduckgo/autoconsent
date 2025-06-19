@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_publichealthscotland.scot_woh",
+    "vendorUrl": "https://publichealthscotland.scot/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?publichealthscotland\\.scot/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal",
+            "comment": "Reject all"
+        }
+    ]
+}
