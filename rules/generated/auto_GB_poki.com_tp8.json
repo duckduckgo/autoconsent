@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_poki.com_tp8",
+    "vendorUrl": "https://poki.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?poki\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#app-root > div:nth-child(6)#notification-stack > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#app-root > div:nth-child(6)#notification-stack > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#app-root > div:nth-child(6)#notification-stack > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject all optional Cookies"
+        }
+    ]
+}
