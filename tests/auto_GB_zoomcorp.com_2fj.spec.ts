@@ -1,0 +1,6 @@
+import generateCMPTests from '../playwright/runner';
+generateCMPTests('auto_GB_zoomcorp.com_2fj', ['https://zoomcorp.com/en/gb/'], {
+    testOptIn: false,
+    testSelfTest: false,
+    onlyRegions: ['GB'],
+});
