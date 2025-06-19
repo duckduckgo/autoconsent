@@ -1,0 +1,28 @@
+{
+    "name": "auto_CA_spirit.com_sb2",
+    "vendorUrl": "https://www.spirit.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?spirit\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-reject-all-handler",
+            "comment": "REJECT TARGETING COOKIES"
+        }
+    ]
+}
