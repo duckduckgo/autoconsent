@@ -1,3 +1,19 @@
+# v14.2.0 (Wed Jun 18 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 83f2073ea4b9c66c3c6b1b9034f2164034b1a515 [#782](https://github.com/duckduckgo/autoconsent/pull/782) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Remove 'hide' step from eu-cookie-compliance-banner [#784](https://github.com/duckduckgo/autoconsent/pull/784) ([@noisysocks](https://github.com/noisysocks))
+- Update cookie-law-info rule to hide .cli-popup-overlay [#785](https://github.com/duckduckgo/autoconsent/pull/785) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.1.0 (Fri Jun 06 2025)
 
 #### 🚀 Enhancement
