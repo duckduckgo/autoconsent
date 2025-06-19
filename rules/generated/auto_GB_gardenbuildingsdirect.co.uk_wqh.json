@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_gardenbuildingsdirect.co.uk_wqh",
+    "vendorUrl": "https://www.gardenbuildingsdirect.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gardenbuildingsdirect\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_bottompart > div#cookiescript_cookietablewrap > div:nth-child(2)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_bottompart > div#cookiescript_cookietablewrap > div:nth-child(2)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_bottompart > div#cookiescript_cookietablewrap > div:nth-child(2)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])",
+            "comment": "Strictly necessary"
+        }
+    ]
+}
