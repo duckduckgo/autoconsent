@@ -19,8 +19,6 @@ export const defaultRunContext: RunContext = {
     urlPattern: '',
 };
 
-const VISUAL_DELAY_TIMEOUT = 2000;
-
 export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     name: string = 'BASERULE';
     runContext: RunContext = defaultRunContext;
