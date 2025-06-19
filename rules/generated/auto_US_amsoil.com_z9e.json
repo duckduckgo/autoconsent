@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_amsoil.com_z9e",
+    "vendorUrl": "https://www.amsoil.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amsoil\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#consent-banner > div:nth-child(2)#truste-consent-track > div:nth-child(3)#truste-consent-content > div:nth-child(3):not([id]) > div#truste-consent-buttons > button:nth-child(3)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#consent-banner > div:nth-child(2)#truste-consent-track > div:nth-child(3)#truste-consent-content > div:nth-child(3):not([id]) > div#truste-consent-buttons > button:nth-child(3)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#consent-banner > div:nth-child(2)#truste-consent-track > div:nth-child(3)#truste-consent-content > div:nth-child(3):not([id]) > div#truste-consent-buttons > button:nth-child(3)#truste-consent-required",
+            "comment": "REJECT OPTIONAL"
+        }
+    ]
+}
