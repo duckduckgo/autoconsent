@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_arubanetworking.hpe.com_232",
+    "vendorUrl": "https://arubanetworking.hpe.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arubanetworking\\.hpe\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Decline optional cookies"
+        }
+    ]
+}

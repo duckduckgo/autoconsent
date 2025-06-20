@@ -10,18 +10,18 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > section#active-consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body:not([id]) > div#dux-privacy > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > section#active-consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body:not([id]) > div#dux-privacy > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > section#active-consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body:not([id]) > div#dux-privacy > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
             "comment": "Reject all"
         }
     ]

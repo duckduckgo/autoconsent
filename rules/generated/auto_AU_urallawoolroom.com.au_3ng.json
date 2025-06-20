@@ -1,0 +1,28 @@
+{
+    "name": "auto_AU_urallawoolroom.com.au_3ng",
+    "vendorUrl": "https://www.urallawoolroom.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?urallawoolroom\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#collection-59d726c7f6576e961db44d2c > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#collection-59d726c7f6576e961db44d2c > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#collection-59d726c7f6576e961db44d2c > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ]
+}

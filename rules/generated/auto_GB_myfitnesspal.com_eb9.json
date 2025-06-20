@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_myfitnesspal.com_eb9",
+    "vendorUrl": "https://www.myfitnesspal.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cdn\\.privacy-mgmt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#notice > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#notice > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#notice > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject All"
+        }
+    ]
+}
