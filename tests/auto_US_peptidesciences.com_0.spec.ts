@@ -1,3 +1,6 @@
 import generateCMPTests from '../playwright/runner';
-
-generateCMPTests('auto_US_peptidesciences.com_0', ['https://www.peptidesciences.com/']);
+generateCMPTests('auto_US_peptidesciences.com_0', ['https://www.peptidesciences.com/'], {
+    testOptIn: false,
+    testSelfTest: false,
+    onlyRegions: ['US'],
+});
