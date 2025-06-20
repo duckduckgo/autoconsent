@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_xmlsearch.yandex.ru_0",
+    "vendorUrl": "http://xmlsearch.yandex.ru/showcaptcha?cc=1&form-fb-hint=2.46&mt=5235F211244F27DB389E15936076B249A7183076674DB088041B99419F12BB902ED7EE9D0A1C0C29660BB5F8027B02D825C5C944600A0B9597A7FABA95A4604010886AB62BCFC48EBB2B0D9A5944F5295B068DB3142F3C620544C45DEF3A35D23E73FF5A7CAA21CD45C924A53813130DCAC68EA4B19E614606DA986426F2BF335F9E379637FFE088ED6A479BBCC75C642B60C2B9457F95F7D4030254F991E439D26E3F9B2C77F808BCC1CFE371F72FFC2BEA60FD158C5EE2D8ED97E98E1559997E6A76511C47F0750B9355235719544CB6AE275062F5214674F0FA83&retpath=aHR0cDovL3htbHNlYXJjaC55YW5kZXgucnUvPw%2C%2C_c7fb16a61d9f94f55710c79a0fec2254&t=2/1747051796/704f5ee1a32f741d5a630a7c1151ac51&u=6562196981291979412&s=ddc964486073cb77944fbf1fea224565",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?xmlsearch\\.yandex\\.ru/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)",
+            "text": "Allow essential cookies"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_kirklees.gov.uk_0",
+    "vendorUrl": "https://www.kirklees.gov.uk/beta/default.aspx",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kirklees\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo",
+            "comment": " I do not accept cookies"
+        }
+    ]
+}

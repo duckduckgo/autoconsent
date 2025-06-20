@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_catawiki.com_0",
+    "vendorUrl": "https://www.catawiki.com/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?catawiki\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#__next > div:not([id]) > div:nth-child(6)#cw-footer-container > footer:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#__next > div:not([id]) > div:nth-child(6)#cw-footer-container > footer:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#__next > div:not([id]) > div:nth-child(6)#cw-footer-container > footer:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id]) > span:nth-child(1):not([id])",
+            "comment": "Continue without accepting"
+        }
+    ]
+}

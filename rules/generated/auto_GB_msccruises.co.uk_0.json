@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_msccruises.co.uk_0",
+    "vendorUrl": "https://www.msccruises.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?msccruises\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#outerContainer > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#outerContainer > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#outerContainer > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button",
+            "comment": "Reject all"
+        }
+    ]
+}

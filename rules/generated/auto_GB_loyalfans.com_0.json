@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_loyalfans.com_0",
+    "vendorUrl": "https://www.loyalfans.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?loyalfans\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > app-root:not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > app-root:not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > app-root:not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "ONLY NECESSARY COOKIES"
+        }
+    ]
+}

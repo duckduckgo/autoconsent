@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_emagine-entertainment.com_0",
+    "vendorUrl": "https://www.emagine-entertainment.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?emagine-entertainment\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class][id][style] > div:nth-child(2) > div:nth-child(2) > a:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class][id][style] > div:nth-child(2) > div:nth-child(2) > a:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class][id][style] > div:nth-child(2) > div:nth-child(2) > a:nth-child(2)",
+            "text": "Disable All"
+        }
+    ]
+}

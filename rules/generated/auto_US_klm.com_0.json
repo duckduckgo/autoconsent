@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_klm.com_0",
+    "vendorUrl": "https://www.klm.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?klm\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][class] > div > div > div:nth-child(1) > div > div:nth-child(3) > button:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][class] > div > div > div:nth-child(1) > div > div:nth-child(3) > button:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][class] > div > div > div:nth-child(1) > div > div:nth-child(3) > button:nth-child(1)",
+            "text": "Reject"
+        }
+    ]
+}

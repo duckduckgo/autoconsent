@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_mynm.nm.org_0",
+    "vendorUrl": "https://mynm.nm.org/MyChart/Authentication/Login?utm_source=mychart.nm.org&utm_medium=301re&utm_campaign=mynm",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mynm\\.nm\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id] > div > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id] > div > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id] > div > div > div:nth-child(3) > button:nth-child(2)",
+            "text": "Decline"
+        }
+    ]
+}

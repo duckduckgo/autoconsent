@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_interrail.eu_0",
+    "vendorUrl": "https://www.interrail.eu/en",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?interrail\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#home-page-6eedb0f0cb > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#home-page-6eedb0f0cb > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#home-page-6eedb0f0cb > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Use necessary cookies only"
+        }
+    ]
+}

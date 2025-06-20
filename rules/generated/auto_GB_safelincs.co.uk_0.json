@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_safelincs.co.uk_0",
+    "vendorUrl": "https://www.safelincs.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?safelincs\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(8) > div > div:nth-child(6) > a:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(8) > div > div:nth-child(6) > a:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div:nth-child(8) > div > div:nth-child(6) > a:nth-child(1)",
+            "text": "Reject all"
+        }
+    ]
+}

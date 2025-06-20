@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_hearth.com_0",
+    "vendorUrl": "https://www.hearth.com/talk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hearth\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class] > ul > li > div > div:nth-child(2) > div > div:nth-child(2) > a:nth-child(2) > span"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class] > ul > li > div > div:nth-child(2) > div > div:nth-child(2) > a:nth-child(2) > span"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class] > ul > li > div > div:nth-child(2) > div > div:nth-child(2) > a:nth-child(2) > span",
+            "text": "Reject optional cookies"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_sportpursuit.com_0",
+    "vendorUrl": "https://www.sportpursuit.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sportpursuit\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#app > div:nth-child(1):not([id]) > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#app > div:nth-child(1):not([id]) > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#app > div:nth-child(1):not([id]) > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "REJECT ALL"
+        }
+    ]
+}

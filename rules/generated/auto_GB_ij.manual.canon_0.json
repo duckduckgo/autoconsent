@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_ij.manual.canon_0",
+    "vendorUrl": "https://ij.manual.canon/ij/webmanual/WebPortal/PTL/ptl-top.html?lng=en",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ij\\.manual\\.canon/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2",
+            "comment": "Reject"
+        }
+    ]
+}

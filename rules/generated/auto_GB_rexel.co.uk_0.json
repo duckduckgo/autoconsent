@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_rexel.co.uk_0",
+    "vendorUrl": "https://www.rexel.co.uk/uki/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rexel\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary",
+            "comment": "Decline all"
+        }
+    ]
+}

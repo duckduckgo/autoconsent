@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_notcutts.co.uk_0",
+    "vendorUrl": "https://www.notcutts.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?notcutts\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#html-body > div#CybotCookiebotDialog > div:nth-child(3):not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonUseNecessaryOnly"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#html-body > div#CybotCookiebotDialog > div:nth-child(3):not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonUseNecessaryOnly"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#html-body > div#CybotCookiebotDialog > div:nth-child(3):not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonUseNecessaryOnly",
+            "comment": "Use necessary cookies only"
+        }
+    ]
+}

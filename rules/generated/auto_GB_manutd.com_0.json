@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_manutd.com_0",
+    "vendorUrl": "https://www.manutd.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?manutd\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#siteCorePage > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#siteCorePage > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#siteCorePage > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
+            "comment": "REJECT ALL"
+        }
+    ]
+}

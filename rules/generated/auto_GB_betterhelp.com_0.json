@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_betterhelp.com_0",
+    "vendorUrl": "https://www.betterhelp.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?betterhelp\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#main > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#main > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#main > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject All"
+        }
+    ]
+}

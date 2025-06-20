@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_tackledirect.com_0",
+    "vendorUrl": "https://www.tackledirect.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tackledirect\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][style] > div > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][style] > div > div > div > div:nth-child(2) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][style] > div > div > div > div:nth-child(2) > button:nth-child(2)",
+            "text": "Reject all"
+        }
+    ]
+}

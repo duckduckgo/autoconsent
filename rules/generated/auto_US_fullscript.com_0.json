@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_fullscript.com_0",
+    "vendorUrl": "https://fullscript.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fullscript\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class] > div > div:nth-child(7) > div:nth-child(2) > button:nth-child(1)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class] > div > div:nth-child(7) > div:nth-child(2) > button:nth-child(1)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class] > div > div:nth-child(7) > div:nth-child(2) > button:nth-child(1)",
+            "text": "Decline cookies"
+        }
+    ]
+}

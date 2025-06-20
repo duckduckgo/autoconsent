@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_wjec.co.uk_0",
+    "vendorUrl": "https://www.wjec.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wjec\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "comment": "Decline"
+        }
+    ]
+}

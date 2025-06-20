@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_investing.thisismoney.co.uk_0",
+    "vendorUrl": "https://investing.thisismoney.co.uk/companies/A",
+    "cosmetic": false,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?thisismoney\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])",
+            "comment": "Do not sell or share my personal information"
+        }
+    ]
+}

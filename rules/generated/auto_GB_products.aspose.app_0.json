@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_products.aspose.app_0",
+    "vendorUrl": "https://products.aspose.app/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?products\\.aspose\\.app/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll",
+            "comment": "DENY"
+        }
+    ]
+}

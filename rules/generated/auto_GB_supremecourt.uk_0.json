@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_supremecourt.uk_0",
+    "vendorUrl": "https://www.supremecourt.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?supremecourt\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button",
+            "comment": "Reject analytics cookies"
+        }
+    ]
+}

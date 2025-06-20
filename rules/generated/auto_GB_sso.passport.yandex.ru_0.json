@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_sso.passport.yandex.ru_0",
+    "vendorUrl": "https://sso.passport.yandex.ru/showcaptcha?cc=1&form-fb-hint=2.188&mt=4C5C10F0FBF8AADA5C63DB655AA32FED1303F0487ECF06DD60DEC9C0E06AE04242591C1DFC8038026684D8C03E2BCBE4F525B56D34D2F28A0E2CEC36CD08B36CABA2580C0E97D80125DB4CF2BBFD0E67812E254FD775BD633469F43E71B710DE0325638933E4570C29C602E65E70CF19439B46CC731F052A05949979D69BD7CBC2D248F364498112AD854FB54B1FE32F4B778DE25F72BB6E3FF60BA27897EDC6DA0E4E3F6C4940C46B79D49E9C93BABE0CE4918A3BBF0F2B03454C92B117E46E66A3859F1308EA6EB2C4C3C21F9B203B4C5A6998E633D1258986EE1CE5&retpath=aHR0cHM6Ly9zc28ucGFzc3BvcnQueWFuZGV4LnJ1L3B1c2g_cmV0cGF0aD1odHRwcyUzQSUyRiUyRnd3dy5raW5vcG9pc2sucnUlMkYmdXVpZD04ZTI0M2FlMS0yNzMyLTQ1YTgtODY5ZC04ZjFlYTA3ZDQwZDM%2C_74bfa8778dd155086e0e2c4c7ea91661&t=2/1748631993/2bb4049dae017d4768310d98e8aba5b9&u=6668242215649448863&s=574b0890a898c3433dff74b37ed2758e",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sso\\.passport\\.yandex\\.ru/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "comment": "Allow essential cookies"
+        }
+    ]
+}

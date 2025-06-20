@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_seetickets.com_0",
+    "vendorUrl": "https://www.seetickets.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?seetickets\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject",
+            "comment": "Reject"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_interactivebrokers.com_0",
+    "vendorUrl": "https://www.interactivebrokers.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?interactivebrokers\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class][id][tabindex][role][aria-labelledby][aria-modal][style] > div > div > div:nth-child(3) > div > div > p > button:nth-child(3)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class][id][tabindex][role][aria-labelledby][aria-modal][style] > div > div > div:nth-child(3) > div > div > p > button:nth-child(3)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class][id][tabindex][role][aria-labelledby][aria-modal][style] > div > div > div:nth-child(3) > div > div > p > button:nth-child(3)",
+            "text": "Reject All Cookies"
+        }
+    ]
+}

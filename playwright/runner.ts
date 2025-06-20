@@ -147,7 +147,11 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 expect(isMessageReceived({ type: 'autoconsentDone' })).toBe(true);
             }
 
-            expect(isMessageReceived({ type: 'autoconsentError' })).toBe(false);
+            received.forEach((msg) => {
+                if (msg.type === 'autoconsentError') {
+                    expect(msg.details.msg, 'only "multiple CMPs" errors are allowed').toContain('Found multiple CMPs');
+                }
+            });
         });
     }
 

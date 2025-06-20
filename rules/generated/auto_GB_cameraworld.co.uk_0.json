@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_cameraworld.co.uk_0",
+    "vendorUrl": "https://www.cameraworld.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cameraworld\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-14 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-14 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-14 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "Decline"
+        }
+    ]
+}

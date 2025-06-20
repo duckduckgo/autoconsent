@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_honeybaked.com_0",
+    "vendorUrl": "https://www.honeybaked.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?honeybaked\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[class] > div > div:nth-child(2) > div > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class] > div > div:nth-child(2) > div > div > div:nth-child(3) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class] > div > div:nth-child(2) > div > div > div:nth-child(3) > button:nth-child(2)",
+            "text": "Deny Cookies and Close"
+        }
+    ]
+}

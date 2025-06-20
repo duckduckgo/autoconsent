@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_musicnotes.com_0",
+    "vendorUrl": "https://www.musicnotes.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?musicnotes\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies",
+            "comment": "Reject"
+        }
+    ]
+}

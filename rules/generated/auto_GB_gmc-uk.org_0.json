@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_gmc-uk.org_0",
+    "vendorUrl": "https://www.gmc-uk.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gmc-uk\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#mainGMC > div:not([id]) > div:nth-child(1)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerRejectAllButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#mainGMC > div:not([id]) > div:nth-child(1)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerRejectAllButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#mainGMC > div:not([id]) > div:nth-child(1)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerRejectAllButton",
+            "comment": "Reject cookies"
+        }
+    ]
+}

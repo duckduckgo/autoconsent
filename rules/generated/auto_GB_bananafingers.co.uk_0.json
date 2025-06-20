@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_bananafingers.co.uk_0",
+    "vendorUrl": "https://bananafingers.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bananafingers\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > aside > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)",
+            "text": "Decline Cookies"
+        }
+    ]
+}

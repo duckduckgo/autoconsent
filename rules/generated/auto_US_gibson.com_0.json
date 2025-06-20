@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_gibson.com_0",
+    "vendorUrl": "https://www.gibson.com/en-US/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gibson\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][class][role][aria-labelledby][tabindex][data-backdrop][data-keyboard][aria-modal][style] > div > div > button:nth-child(6)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][class][role][aria-labelledby][tabindex][data-backdrop][data-keyboard][aria-modal][style] > div > div > button:nth-child(6)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][class][role][aria-labelledby][tabindex][data-backdrop][data-keyboard][aria-modal][style] > div > div > button:nth-child(6)",
+            "text": "ACCEPT ESSENTIAL COOKIES"
+        }
+    ]
+}

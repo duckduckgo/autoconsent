@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_fanatics.co.uk_0",
+    "vendorUrl": "https://www.fanatics.co.uk/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fanatics\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(9):not([id]) > div:nth-child(1)#global-footer > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(9):not([id]) > div:nth-child(1)#global-footer > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(9):not([id]) > div:nth-child(1)#global-footer > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject"
+        }
+    ]
+}
