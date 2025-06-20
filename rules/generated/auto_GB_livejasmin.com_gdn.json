@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_livejasmin.com_gdn",
+    "vendorUrl": "https://www.livejasmin.com/en/girls",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?livejasmin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn",
+            "comment": "Reject All"
+        }
+    ]
+}
