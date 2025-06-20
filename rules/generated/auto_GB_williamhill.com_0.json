@@ -10,18 +10,18 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerAcceptEssential"
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerAcceptEssential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerAcceptEssential"
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerAcceptEssential"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerAcceptEssential",
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieBannerAcceptEssential",
             "comment": "Accept essential cookies only"
         }
     ]
