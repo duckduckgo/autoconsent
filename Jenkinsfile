@@ -115,9 +115,15 @@ pipeline {
                         echo "No tests to run for this change"
                     } else {
                         def testEnvs = [
-                            "${params.TEST_RESULT_ROOT}/de.env",
                             "${params.TEST_RESULT_ROOT}/us.env",
-                            "${params.TEST_RESULT_ROOT}/gb.env"
+                            "${params.TEST_RESULT_ROOT}/gb.env",
+                            "${params.TEST_RESULT_ROOT}/au.env",
+                            "${params.TEST_RESULT_ROOT}/ca.env",
+                            "${params.TEST_RESULT_ROOT}/de.env",
+                            "${params.TEST_RESULT_ROOT}/fr.env",
+                            "${params.TEST_RESULT_ROOT}/nl.env",
+                            "${params.TEST_RESULT_ROOT}/ch.env",
+                            "${params.TEST_RESULT_ROOT}/no.env"
                         ]
                         for (testEnv in testEnvs) {
                             withEnvFile(testEnv) {
