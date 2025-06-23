@@ -1,6 +1,0 @@
-import generateCMPTests from '../playwright/runner';
-generateCMPTests('auto_GB_avantiwestcoast.co.uk_tri', ['https://www.avantiwestcoast.co.uk/'], {
-    testOptIn: false,
-    testSelfTest: false,
-    onlyRegions: ['GB'],
-});
