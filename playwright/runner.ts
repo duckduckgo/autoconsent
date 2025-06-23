@@ -43,9 +43,13 @@ export async function injectContentScript(page: Page | Frame) {
     }
 }
 
+const screenshotsDir = path.join(__dirname, '../test-results/screenshots');
+
 export function generateTest(url: string, expectedCmp: string, options: TestOptions = defaultOptions) {
+    const domain = new URL(url).hostname;
     function genTest(autoAction: AutoAction) {
-        test(`${url.split('://')[1]} .${testRegion} ${autoAction} ${options.mobile ? 'mobile' : ''}`, async ({ page }, { project }) => {
+        test(`${domain} .${testRegion} ${autoAction} ${options.mobile ? 'mobile' : ''}`, async ({ page }, { project }) => {
+            let screenshotCounter = 0;
             if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
                 test.skip();
             }
@@ -73,6 +77,16 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 });
             }
 
+            function takeScreenshot(name: string) {
+                return page.screenshot({
+                    path: path.join(screenshotsDir, `${expectedCmp}-${autoAction}-${domain}-${name}.jpg`),
+                    quality: 50,
+                    scale: 'css',
+                    timeout: 2000,
+                    type: 'jpeg',
+                });
+            }
+
             let selfTestFrame: Frame | null = null;
             async function messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
                 LOG_MESSAGES.includes(msg.type) && console.log(msg);
@@ -84,21 +98,32 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                                 enabled: true,
                                 autoAction,
                                 disabledCmps: [],
-                                enablePrehide: true,
+                                enablePrehide: false,
                                 detectRetries: 20,
                                 enableCosmeticRules: true,
+                                visualTest: true,
                             })} })`,
                         );
                         break;
                     }
+                    case 'cmpDetected': {
+                        await takeScreenshot(`${screenshotCounter++}-cmpDetected`);
+                        break;
+                    }
+                    case 'popupFound': {
+                        await takeScreenshot(`${screenshotCounter++}-popupFound`);
+                        break;
+                    }
                     case 'optInResult':
                     case 'optOutResult': {
+                        await takeScreenshot(`${screenshotCounter++}-result`);
                         if (msg.scheduleSelfTest) {
                             selfTestFrame = frame;
                         }
                         break;
                     }
                     case 'autoconsentDone': {
+                        await takeScreenshot(`${screenshotCounter++}-done`);
                         if (selfTestFrame && options.testSelfTest) {
                             await selfTestFrame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
                         }
@@ -109,6 +134,11 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                         await frame.evaluate(
                             `autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`,
                         );
+                        break;
+                    }
+                    case 'visualDelay': {
+                        console.log('visualDelay', msg.timeout);
+                        await takeScreenshot(`${screenshotCounter++}`);
                         break;
                     }
                     case 'autoconsentError': {
@@ -123,35 +153,40 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
             page.frames().forEach(injectContentScript);
             page.on('framenavigated', injectContentScript);
 
-            // wait for all messages and assertions
-            await waitFor(() => isMessageReceived({ type: 'cmpDetected', cmp: expectedCmp }), 50, 500);
-            expect(isMessageReceived({ type: 'cmpDetected', cmp: expectedCmp })).toBe(true);
+            try {
+                // wait for all messages and assertions
+                await waitFor(() => isMessageReceived({ type: 'cmpDetected', cmp: expectedCmp }), 50, 500);
+                expect(isMessageReceived({ type: 'cmpDetected', cmp: expectedCmp })).toBe(true);
 
-            await waitFor(() => isMessageReceived({ type: 'popupFound', cmp: expectedCmp }), options.expectPopupOpen ? 50 : 5, 500);
-            expect(isMessageReceived({ type: 'popupFound', cmp: expectedCmp })).toBe(options.expectPopupOpen);
+                await waitFor(() => isMessageReceived({ type: 'popupFound', cmp: expectedCmp }), options.expectPopupOpen ? 50 : 5, 500);
+                expect(isMessageReceived({ type: 'popupFound', cmp: expectedCmp })).toBe(options.expectPopupOpen);
 
-            if (options.expectPopupOpen) {
-                if (autoAction === 'optOut') {
-                    await waitFor(() => isMessageReceived({ type: 'optOutResult', result: true }), 50, 300);
-                    expect(isMessageReceived({ type: 'optOutResult', result: true })).toBe(true);
+                if (options.expectPopupOpen) {
+                    if (autoAction === 'optOut') {
+                        await waitFor(() => isMessageReceived({ type: 'optOutResult', result: true }), 50, 300);
+                        expect(isMessageReceived({ type: 'optOutResult', result: true })).toBe(true);
+                    }
+                    if (autoAction === 'optIn') {
+                        await waitFor(() => isMessageReceived({ type: 'optInResult', result: true }), 50, 300);
+                        expect(isMessageReceived({ type: 'optInResult', result: true })).toBe(true);
+                    }
+                    if (options.testSelfTest && selfTestFrame) {
+                        await waitFor(() => isMessageReceived({ type: 'selfTestResult', result: true }), 50, 300);
+                        expect(isMessageReceived({ type: 'selfTestResult', result: true })).toBe(true);
+                    }
+                    await waitFor(() => isMessageReceived({ type: 'autoconsentDone' }), 10, 500);
+                    expect(isMessageReceived({ type: 'autoconsentDone' })).toBe(true);
                 }
-                if (autoAction === 'optIn') {
-                    await waitFor(() => isMessageReceived({ type: 'optInResult', result: true }), 50, 300);
-                    expect(isMessageReceived({ type: 'optInResult', result: true })).toBe(true);
-                }
-                if (options.testSelfTest && selfTestFrame) {
-                    await waitFor(() => isMessageReceived({ type: 'selfTestResult', result: true }), 50, 300);
-                    expect(isMessageReceived({ type: 'selfTestResult', result: true })).toBe(true);
-                }
-                await waitFor(() => isMessageReceived({ type: 'autoconsentDone' }), 10, 500);
-                expect(isMessageReceived({ type: 'autoconsentDone' })).toBe(true);
+
+                received.forEach((msg) => {
+                    if (msg.type === 'autoconsentError') {
+                        expect(msg.details.msg, 'only "multiple CMPs" errors are allowed').toContain('Found multiple CMPs');
+                    }
+                });
+            } catch (e) {
+                await takeScreenshot(`${screenshotCounter++}-failure`);
+                throw e;
             }
-
-            received.forEach((msg) => {
-                if (msg.type === 'autoconsentError') {
-                    expect(msg.details.msg, 'only "multiple CMPs" errors are allowed').toContain('Found multiple CMPs');
-                }
-            });
         });
     }
 
