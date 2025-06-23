@@ -137,7 +137,6 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                         break;
                     }
                     case 'visualDelay': {
-                        console.log('visualDelay', msg.timeout);
                         await takeScreenshot(`${screenshotCounter++}`);
                         break;
                     }
