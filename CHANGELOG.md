@@ -1,3 +1,22 @@
+# v14.3.0 (Tue Jun 24 2025)
+
+#### 🚀 Enhancement
+
+- Support generated rules [#793](https://github.com/duckduckgo/autoconsent/pull/793) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add generated autoconsent rules from latest crawl [#796](https://github.com/duckduckgo/autoconsent/pull/796) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#791](https://github.com/duckduckgo/autoconsent/pull/791) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.2.0 (Wed Jun 18 2025)
 
 #### 🚀 Enhancement
