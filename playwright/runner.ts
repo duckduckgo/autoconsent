@@ -79,14 +79,18 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 });
             }
 
-            function takeScreenshot(name: string) {
-                return page.screenshot({
-                    path: path.join(screenshotsDir, `${expectedCmp}-${autoAction}-${domain}-${urlHash}-${name}.jpg`),
-                    quality: 50,
-                    scale: 'css',
-                    timeout: 2000,
-                    type: 'jpeg',
-                });
+            async function takeScreenshot(name: string) {
+                try {
+                    await page.screenshot({
+                        path: path.join(screenshotsDir, `${expectedCmp}-${autoAction}-${domain}-${urlHash}-${name}.jpg`),
+                        quality: 50,
+                        scale: 'css',
+                        timeout: 2000,
+                        type: 'jpeg',
+                    });
+                } catch (e) {
+                    console.error(`Failed to take screenshot ${name}`, e);
+                }
             }
 
             let selfTestFrame: Frame | null = null;
