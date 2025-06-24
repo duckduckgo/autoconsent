@@ -9,6 +9,7 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
         }
     } finally {
         def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: 'results.xml'
+        archiveArtifacts artifacts: 'test-results/screenshots/**/*.jpg', fingerprint: true, allowEmptyArchive: true
         return summary
     }
 }
@@ -114,9 +115,15 @@ pipeline {
                         echo "No tests to run for this change"
                     } else {
                         def testEnvs = [
-                            "${params.TEST_RESULT_ROOT}/de.env",
                             "${params.TEST_RESULT_ROOT}/us.env",
-                            "${params.TEST_RESULT_ROOT}/gb.env"
+                            "${params.TEST_RESULT_ROOT}/gb.env",
+                            "${params.TEST_RESULT_ROOT}/au.env",
+                            "${params.TEST_RESULT_ROOT}/ca.env",
+                            "${params.TEST_RESULT_ROOT}/de.env",
+                            "${params.TEST_RESULT_ROOT}/fr.env",
+                            "${params.TEST_RESULT_ROOT}/nl.env",
+                            "${params.TEST_RESULT_ROOT}/ch.env",
+                            "${params.TEST_RESULT_ROOT}/no.env"
                         ]
                         for (testEnv in testEnvs) {
                             withEnvFile(testEnv) {

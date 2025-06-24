@@ -10,18 +10,18 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie_alert > div:nth-child(2)#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline"
+            "exists": "body:not([id]) > div#cookie_alert > div:nth-child(2)#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie_alert > div:nth-child(2)#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline"
+            "visible": "body:not([id]) > div#cookie_alert > div:nth-child(2)#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookie_alert > div:nth-child(2)#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline",
+            "waitForThenClick": "body:not([id]) > div#cookie_alert > div:nth-child(2)#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline",
             "comment": "Reject All Cookies"
         }
     ]
