@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_csagroup.org_3ho",
+    "vendorUrl": "https://www.csagroup.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?csagroup\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#en_lang > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#en_lang > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#en_lang > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#en_lang > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

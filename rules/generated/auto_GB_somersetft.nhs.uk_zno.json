@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_somersetft.nhs.uk_zno",
+    "vendorUrl": "https://www.somersetft.nhs.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?somersetft\\.nhs\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#consentPopup > button:nth-child(3)#consentReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#consentPopup > button:nth-child(3)#consentReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#consentPopup > button:nth-child(3)#consentReject",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#consentPopup > button:nth-child(3)#consentReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
