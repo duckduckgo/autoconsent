@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_ddsb.ca_v6p",
+    "vendorUrl": "https://www.ddsb.ca/en/index.aspx",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ddsb\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#ct-ultimate-gdpr-cookie-popup > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#ct-ultimate-gdpr-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#ct-ultimate-gdpr-cookie-popup > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#ct-ultimate-gdpr-cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#ct-ultimate-gdpr-cookie-popup > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#ct-ultimate-gdpr-cookie-reject",
+            "comment": " Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#ct-ultimate-gdpr-cookie-popup > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#ct-ultimate-gdpr-cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
