@@ -5,7 +5,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?wwws\\.airfrance\\.co\\.uk/"
+        "urlPattern": "^https?://(wwws?\\.)?airfrance\\.([a-z]+|co\\.uk|co\\.jp)/"
     },
     "prehideSelectors": [],
     "detectCmp": [
