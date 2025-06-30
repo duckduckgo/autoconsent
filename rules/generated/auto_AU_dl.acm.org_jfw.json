@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_dl.acm.org_jfw",
+    "vendorUrl": "https://dl.acm.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dl\\.acm\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Use necessary cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(4)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
