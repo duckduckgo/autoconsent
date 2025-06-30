@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > aside:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-17 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > aside:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-17 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > aside:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Decline"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-17 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-17 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
