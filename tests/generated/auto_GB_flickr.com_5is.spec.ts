@@ -1,2 +1,0 @@
-import generateCMPTests from '../../playwright/runner';
-generateCMPTests('auto_GB_flickr.com_5is', ['https://www.flickr.com/'], { testOptIn: false, testSelfTest: false, onlyRegions: ['GB'] });
