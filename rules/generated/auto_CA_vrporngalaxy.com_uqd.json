@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_vrporngalaxy.com_uqd",
+    "vendorUrl": "https://www.vrporngalaxy.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vrporngalaxy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
