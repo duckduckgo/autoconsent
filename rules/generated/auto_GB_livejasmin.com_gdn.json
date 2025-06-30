@@ -10,12 +10,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn"
+            "exists": "body#index\\.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn"
+            "visible": "body#index\\.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn"
         }
     ],
     "optIn": [],
@@ -24,13 +24,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn",
+            "waitForThenClick": "body#index\\.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#index.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn",
+            "waitForVisible": "body#index\\.index > div#consent_modal > div:nth-child(2):not([id]) > button:nth-child(4)#reject-all-cookies-btn",
             "timeout": 1000,
             "check": "none"
         }
