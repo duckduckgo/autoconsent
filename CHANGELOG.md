@@ -1,3 +1,21 @@
+# v14.5.0 (Wed Jul 02 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#809](https://github.com/duckduckgo/autoconsent/pull/809) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix gov.uk rule [#803](https://github.com/duckduckgo/autoconsent/pull/803) ([@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.0.8 to 7.0.9 [#800](https://github.com/duckduckgo/autoconsent/pull/800) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.4.0 (Wed Jul 02 2025)
 
 #### 🚀 Enhancement
