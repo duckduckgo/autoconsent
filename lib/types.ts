@@ -54,6 +54,7 @@ export type Config = {
     disabledCmps: string[];
     enablePrehide: boolean;
     enableCosmeticRules: boolean;
+    enableGeneratedRules: boolean;
     detectRetries: number;
     isMainWorld: boolean;
     prehideTimeout: number;
