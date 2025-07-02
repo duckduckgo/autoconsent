@@ -20,8 +20,8 @@
     ],
     "optOut": [
         {
-            "if": { "visible": "#ct_ultimate-gdpr-cookie-reject a" },
-            "then": [{ "click": "#ct_ultimate-gdpr-cookie-reject a" }],
+            "if": { "visible": "#ct_ultimate-gdpr-cookie-reject a,#ct-ultimate-gdpr-cookie-reject" },
+            "then": [{ "click": "#ct_ultimate-gdpr-cookie-reject a,#ct-ultimate-gdpr-cookie-reject" }],
             "else": [
                 {
                     "if": { "visible": "#ct-ultimate-gdpr-cookie-change-settings" },
