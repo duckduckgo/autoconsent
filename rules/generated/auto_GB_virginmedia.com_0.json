@@ -21,8 +21,18 @@
     "optIn": [],
     "optOut": [
         {
+            "wait": 500
+        },
+        {
             "waitForThenClick": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
             "comment": "Accept essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

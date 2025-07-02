@@ -14,6 +14,8 @@ async function init() {
     const prehideOffRadio = document.querySelector('input#prehide-off') as HTMLInputElement;
     const cosmeticOnRadio = document.querySelector('input#cosmetic-on') as HTMLInputElement;
     const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
+    const generatedOnRadio = document.querySelector('input#generated-on') as HTMLInputElement;
+    const generatedOffRadio = document.querySelector('input#generated-off') as HTMLInputElement;
     const visualTestOnRadio = document.querySelector('input#visual-test-on') as HTMLInputElement;
     const visualTestOffRadio = document.querySelector('input#visual-test-off') as HTMLInputElement;
     const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
@@ -96,6 +98,12 @@ async function init() {
         cosmeticOffRadio.checked = true;
     }
 
+    if (autoconsentConfig.enableGeneratedRules) {
+        generatedOnRadio.checked = true;
+    } else {
+        generatedOffRadio.checked = true;
+    }
+
     if (autoconsentConfig.visualTest) {
         visualTestOnRadio.checked = true;
     } else {
@@ -140,6 +148,13 @@ async function init() {
     }
     cosmeticOnRadio.addEventListener('change', cosmeticChange);
     cosmeticOffRadio.addEventListener('change', cosmeticChange);
+
+    function generatedChange() {
+        autoconsentConfig.enableGeneratedRules = generatedOnRadio.checked;
+        storageSet({ config: autoconsentConfig });
+    }
+    generatedOnRadio.addEventListener('change', generatedChange);
+    generatedOffRadio.addEventListener('change', generatedChange);
 
     function visualTestChange() {
         autoconsentConfig.visualTest = visualTestOnRadio.checked;

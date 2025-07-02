@@ -137,11 +137,29 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
     if (encoded.v > 1) {
         throw new Error('Unsupported rule format.');
     }
-    function decodeRuleStep(step: CompactCMPRuleStep): AutoConsentRuleStep {
+    return encoded.r.filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION).map((rule) => new CompactedCMPRule(rule, encoded.s));
+}
+
+class CompactedCMPRule implements AutoConsentCMPRule {
+    r: CompactCMPRule;
+    s: string[];
+    intermediate = false;
+    optIn = [];
+
+    constructor(rule: CompactCMPRule, strings: string[]) {
+        this.r = rule;
+        this.s = strings;
+        if (this.r[10] && this.r[10].intermediate) {
+            this.intermediate = this.r[10].intermediate;
+        }
+    }
+
+    _decodeRuleStep(step: CompactCMPRuleStep): AutoConsentRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
+        const decodeRuleStep = this._decodeRuleStep.bind(this);
         for (const [longKey, shortKey] of compactedRuleSteps) {
             if (clonedStep[shortKey] !== undefined) {
-                clonedStep[longKey] = encoded.s[clonedStep[shortKey]];
+                clonedStep[longKey] = this.s[clonedStep[shortKey]];
                 delete clonedStep[shortKey];
             }
         }
@@ -157,48 +175,50 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
         }
         return { ...clonedStep };
     }
-    return encoded.r
-        .filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION)
-        .map((rule) => {
-            const [
-                minimumRuleStepVersion,
-                name,
-                cosmetic,
-                urlPattern,
-                mainFrame,
-                prehideSelectors,
-                detectCmp,
-                detectPopup,
-                optOut,
-                test,
-                extra,
-            ] = rule;
-            const optIn: AutoConsentRuleStep[] = [];
-            const runContext: RunContext = {};
-            const runInMainFrame = decodeNullableBoolean((Math.floor(mainFrame / 10) % 10) as CompactNullableBoolean);
-            const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean);
-            if (runInMainFrame !== undefined) {
-                runContext.main = runInMainFrame;
-            }
-            if (runInSubFrame !== undefined) {
-                runContext.frame = runInSubFrame;
-            }
-            if (urlPattern !== '') {
-                runContext.urlPattern = urlPattern;
-            }
 
-            return {
-                name,
-                cosmetic: decodeNullableBoolean(cosmetic),
-                runContext,
-                prehideSelectors: prehideSelectors.map((i) => encoded.s[i].toString()),
-                detectCmp: detectCmp.map(decodeRuleStep),
-                detectPopup: detectPopup.map(decodeRuleStep),
-                optOut: optOut.map(decodeRuleStep),
-                optIn,
-                test: test?.map(decodeRuleStep),
-                minimumRuleStepVersion: minimumRuleStepVersion || undefined,
-                ...extra,
-            };
-        });
+    get name() {
+        return this.r[1];
+    }
+
+    get cosmetic() {
+        return decodeNullableBoolean(this.r[2]);
+    }
+
+    get runContext() {
+        const runContext: RunContext = {};
+        const urlPattern = this.r[3];
+        const mainFrame = this.r[4];
+        const runInMainFrame = decodeNullableBoolean((Math.floor(mainFrame / 10) % 10) as CompactNullableBoolean);
+        const runInSubFrame = decodeNullableBoolean((mainFrame % 10) as CompactNullableBoolean);
+        if (runInMainFrame !== undefined) {
+            runContext.main = runInMainFrame;
+        }
+        if (runInSubFrame !== undefined) {
+            runContext.frame = runInSubFrame;
+        }
+        if (urlPattern !== '') {
+            runContext.urlPattern = urlPattern;
+        }
+        return runContext;
+    }
+
+    get prehideSelectors() {
+        return this.r[5].map((i) => this.s[i].toString());
+    }
+
+    get detectCmp() {
+        return this.r[6].map(this._decodeRuleStep.bind(this));
+    }
+
+    get detectPopup() {
+        return this.r[7].map(this._decodeRuleStep.bind(this));
+    }
+
+    get optOut() {
+        return this.r[8].map(this._decodeRuleStep.bind(this));
+    }
+
+    get test() {
+        return this.r[9].map(this._decodeRuleStep.bind(this));
+    }
 }

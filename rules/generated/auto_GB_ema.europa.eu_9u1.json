@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_ema.europa.eu_9u1",
+    "vendorUrl": "https://www.ema.europa.eu/en/homepage",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ema\\.europa\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#oe-back-to-top > div#cck_here > div:nth-child(2)#cookie-consent-banner > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#oe-back-to-top > div#cck_here > div:nth-child(2)#cookie-consent-banner > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body#oe-back-to-top > div#cck_here > div:nth-child(2)#cookie-consent-banner > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Accept only essential cookies"
+        }
+    ]
+}

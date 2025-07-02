@@ -13,11 +13,17 @@
                     "if": { "exists": ".cky-consent-container [data-cky-tag=settings-button]" },
                     "then": [
                         { "click": ".cky-consent-container [data-cky-tag=settings-button]" },
-                        { "waitFor": ".cky-modal-open input[type=checkbox]" },
-                        { "click": ".cky-modal-open input[type=checkbox]:checked", "all": true, "optional": true },
-                        { "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button]" }
+                        { "waitFor": ".cky-modal-open input[type=checkbox],.cky-consent-bar-expand input[type=checkbox]" },
+                        {
+                            "click": ".cky-modal-open input[type=checkbox]:checked,.cky-consent-bar-expand input[type=checkbox]:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
+                        }
                     ],
-                    "else": [{ "hide": ".cky-consent-container,.cky-overlay" }]
+                    "else": [{ "hide": ".cky-consent-container,.cky-overlay,.cky-consent-bar-expand" }]
                 }
             ]
         }
