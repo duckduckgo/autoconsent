@@ -1,3 +1,25 @@
+# v14.4.0 (Wed Jul 02 2025)
+
+#### 🚀 Enhancement
+
+- [test] Add autoconsent rules for 69 sites [#802](https://github.com/duckduckgo/autoconsent/pull/802) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Expand the airfrance rule [#804](https://github.com/duckduckgo/autoconsent/pull/804) ([@muodov](https://github.com/muodov))
+- Toggle for generated rules [#807](https://github.com/duckduckgo/autoconsent/pull/807) ([@muodov](https://github.com/muodov))
+- Process compact rules lazily [#764](https://github.com/duckduckgo/autoconsent/pull/764) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#801](https://github.com/duckduckgo/autoconsent/pull/801) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#795](https://github.com/duckduckgo/autoconsent/pull/795) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.3.0 (Tue Jun 24 2025)
 
 #### 🚀 Enhancement
