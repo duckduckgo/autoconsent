@@ -20,7 +20,8 @@ function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
         return (
             (!config.disabledCmps || !config.disabledCmps.includes(cmp.name)) && // CMP is not disabled
-            (config.enableCosmeticRules || !cmp.isCosmetic) // CMP is not cosmetic or cosmetic rules are enabled
+            (config.enableCosmeticRules || !cmp.isCosmetic) && // CMP is not cosmetic or cosmetic rules are enabled
+            (config.enableGeneratedRules || !cmp.name.startsWith('auto_')) // CMP is not generated or generated rules are enabled
         );
     });
 }
