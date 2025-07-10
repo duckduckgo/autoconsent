@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#c8e70f91-c677-4736-b26e-275dc0a97a80 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#c8e70f91-c677-4736-b26e-275dc0a97a80 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Deny"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#c8e70f91-c677-4736-b26e-275dc0a97a80 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#c8e70f91-c677-4736-b26e-275dc0a97a80 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
