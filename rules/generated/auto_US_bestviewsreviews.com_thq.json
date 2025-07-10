@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_bestviewsreviews.com_thq",
+    "vendorUrl": "https://bestviewsreviews.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bestviewsreviews\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])",
+            "comment": "Reject Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
