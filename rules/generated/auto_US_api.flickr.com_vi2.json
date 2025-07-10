@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_api.flickr.com_vi2",
+    "vendorUrl": "https://api.flickr.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?api\\.flickr\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div:nth-child(3):not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(2)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div:nth-child(3):not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(2)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div:nth-child(3):not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(2)#truste-consent-required",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div:nth-child(3):not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(2)#truste-consent-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
