@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_illion.com.au_oqe",
+    "vendorUrl": "https://www.illion.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?illion\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > add:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > a#decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > add:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > a#decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > add:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > a#decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > add:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > a#decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
