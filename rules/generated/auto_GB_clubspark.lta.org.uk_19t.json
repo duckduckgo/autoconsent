@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_clubspark.lta.org.uk_19t",
+    "vendorUrl": "https://clubspark.lta.org.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clubspark\\.lta\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
