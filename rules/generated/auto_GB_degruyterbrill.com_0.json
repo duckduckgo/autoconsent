@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie-banner"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject non-essential cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie-banner",
+            "comment": "Reject non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie-banner",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
