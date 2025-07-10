@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_zoosk.com_x44",
+    "vendorUrl": "https://www.zoosk.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zoosk\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "comment": "Do Not Sell My Personal Information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
