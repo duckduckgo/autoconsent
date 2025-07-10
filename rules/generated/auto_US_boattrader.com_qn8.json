@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_boattrader.com_qn8",
+    "vendorUrl": "https://www.boattrader.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boattrader\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(3)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(3)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(3)#truste-consent-required",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#consent_blackbar > div:nth-child(2)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(3)#truste-consent-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
