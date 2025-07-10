@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_lolesports.com_7qh",
+    "vendorUrl": "https://lolesports.com/en-GB/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lolesports\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#f449b777-bc8b-4446-8218-caf6bc35b155 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#f449b777-bc8b-4446-8218-caf6bc35b155 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#f449b777-bc8b-4446-8218-caf6bc35b155 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#f449b777-bc8b-4446-8218-caf6bc35b155 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
