@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id] > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button:nth-child(1)"
+            "exists": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id] > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button:nth-child(1)"
+            "visible": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id] > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button:nth-child(1)",
-            "text": "Accept Necessary"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
+            "comment": "Accept Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
