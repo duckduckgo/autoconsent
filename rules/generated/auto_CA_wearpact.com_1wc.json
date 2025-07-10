@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_wearpact.com_1wc",
+    "vendorUrl": "https://wearpact.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wearpact\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#eed78320-52ac-497e-9c9c-ac55e49d7762 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#eed78320-52ac-497e-9c9c-ac55e49d7762 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#eed78320-52ac-497e-9c9c-ac55e49d7762 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#eed78320-52ac-497e-9c9c-ac55e49d7762 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
