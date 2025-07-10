@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id][class] > div > div:nth-child(1) > div > h2:nth-child(1) > button"
+            "exists": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(1)#footer_tc_privacy_container_text > div#footer_tc_privacy_text > h2:nth-child(1):not([id]) > button#footer_tc_privacy_button_2"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][class] > div > div:nth-child(1) > div > h2:nth-child(1) > button"
+            "visible": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(1)#footer_tc_privacy_container_text > div#footer_tc_privacy_text > h2:nth-child(1):not([id]) > button#footer_tc_privacy_button_2"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][class] > div > div:nth-child(1) > div > h2:nth-child(1) > button",
-            "text": "Continue with only necessary cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(1)#footer_tc_privacy_container_text > div#footer_tc_privacy_text > h2:nth-child(1):not([id]) > button#footer_tc_privacy_button_2",
+            "comment": "Continue with only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(1)#footer_tc_privacy_container_text > div#footer_tc_privacy_text > h2:nth-child(1):not([id]) > button#footer_tc_privacy_button_2",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
