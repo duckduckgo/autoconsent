@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_ray-ban.com_6lz",
+    "vendorUrl": "https://www.ray-ban.com/usa",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ray-ban\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
