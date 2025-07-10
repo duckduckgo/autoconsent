@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_sherwin-williams.com_90b",
+    "vendorUrl": "https://www.sherwin-williams.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sherwin-williams\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#page-7408d854b1 > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#doNotSell"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#page-7408d854b1 > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#doNotSell"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#page-7408d854b1 > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#doNotSell",
+            "comment": "Do Not Sell or Share My Personal Information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#page-7408d854b1 > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#doNotSell",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
