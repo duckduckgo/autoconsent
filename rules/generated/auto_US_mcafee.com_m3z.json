@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_mcafee.com_m3z",
+    "vendorUrl": "https://www.mcafee.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mcafee\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#page-b86f596677 > div#_evidon_banner > button:nth-child(4)#_evidon-option-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#page-b86f596677 > div#_evidon_banner > button:nth-child(4)#_evidon-option-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#page-b86f596677 > div#_evidon_banner > button:nth-child(4)#_evidon-option-button",
+            "comment": "Do not sell or share my personal information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#page-b86f596677 > div#_evidon_banner > button:nth-child(4)#_evidon-option-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
