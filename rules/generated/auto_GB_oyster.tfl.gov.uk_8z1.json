@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_oyster.tfl.gov.uk_8z1",
+    "vendorUrl": "https://oyster.tfl.gov.uk/oyster/entry.do",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oyster\\.tfl\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Accept only essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
