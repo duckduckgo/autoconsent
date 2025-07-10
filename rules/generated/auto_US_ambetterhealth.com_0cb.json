@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_ambetterhealth.com_0cb",
+    "vendorUrl": "https://www.ambetterhealth.com/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ambetterhealth\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2):not([id])[data-theme=\"default-color-palette\"][data-interceptor-active-comps=\"@usearch-public-search-component/universal-search-public-search-autocomplete,@usearch-public-search-component/universal-search-public-AutoCompleteComponent-mobile\"][data-interceptor-inactive-comps=\"@usearch-public-search-component/usearch-public-search-component,@usearch-public-search-component/universal-search-public-search-Icon,@usearch-public-search-component/universal-search-public-search-Icon-mobile\"] > div:nth-child(6):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2):not([id])[data-theme=\"default-color-palette\"][data-interceptor-active-comps=\"@usearch-public-search-component/universal-search-public-search-autocomplete,@usearch-public-search-component/universal-search-public-AutoCompleteComponent-mobile\"][data-interceptor-inactive-comps=\"@usearch-public-search-component/usearch-public-search-component,@usearch-public-search-component/universal-search-public-search-Icon,@usearch-public-search-component/universal-search-public-search-Icon-mobile\"] > div:nth-child(6):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2):not([id])[data-theme=\"default-color-palette\"][data-interceptor-active-comps=\"@usearch-public-search-component/universal-search-public-search-autocomplete,@usearch-public-search-component/universal-search-public-AutoCompleteComponent-mobile\"][data-interceptor-inactive-comps=\"@usearch-public-search-component/usearch-public-search-component,@usearch-public-search-component/universal-search-public-search-Icon,@usearch-public-search-component/universal-search-public-search-Icon-mobile\"] > div:nth-child(6):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2):not([id])[data-theme=\"default-color-palette\"][data-interceptor-active-comps=\"@usearch-public-search-component/universal-search-public-search-autocomplete,@usearch-public-search-component/universal-search-public-AutoCompleteComponent-mobile\"][data-interceptor-inactive-comps=\"@usearch-public-search-component/usearch-public-search-component,@usearch-public-search-component/universal-search-public-search-Icon,@usearch-public-search-component/universal-search-public-search-Icon-mobile\"] > div:nth-child(6):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
