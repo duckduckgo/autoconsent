@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_zimmermann.com_9kn",
+    "vendorUrl": "https://www.zimmermann.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zimmermann\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#html-body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#html-body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#html-body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])",
+            "comment": "Continue without agreeing →"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#html-body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
