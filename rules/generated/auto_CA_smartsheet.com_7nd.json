@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_smartsheet.com_7nd",
+    "vendorUrl": "https://www.smartsheet.com/home-overview",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?smartsheet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
