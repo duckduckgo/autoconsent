@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_crystalski.co.uk_2vp",
+    "vendorUrl": "https://www.crystalski.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?crystalski\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div#cmNotifyBanner > div#cmBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#cmDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div#cmNotifyBanner > div#cmBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#cmDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div#cmNotifyBanner > div#cmBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#cmDecline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#__tealiumGDPRecModal > div:not([id]) > div#cmNotifyBanner > div#cmBannerDescription > div:nth-child(5):not([id]) > button:nth-child(3)#cmDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
