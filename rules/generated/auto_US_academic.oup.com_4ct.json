@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_academic.oup.com_4ct",
+    "vendorUrl": "https://academic.oup.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?academic\\.oup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage-settings-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage-settings-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage-settings-button",
+            "comment": "Reject and manage"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage-settings-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
