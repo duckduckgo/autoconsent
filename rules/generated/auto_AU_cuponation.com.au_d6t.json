@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_cuponation.com.au_d6t",
+    "vendorUrl": "https://www.cuponation.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cuponation\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1)#cmpwelcomebtnno > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1)#cmpwelcomebtnno > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1)#cmpwelcomebtnno > a:not([id])",
+            "comment": "REJECT ALL OPTIONAL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(1)#cmpwelcomebtnno > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
