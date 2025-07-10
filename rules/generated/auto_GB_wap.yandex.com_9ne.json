@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_wap.yandex.com_9ne",
+    "vendorUrl": "https://wap.yandex.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wap\\.yandex\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "comment": "Allow essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
