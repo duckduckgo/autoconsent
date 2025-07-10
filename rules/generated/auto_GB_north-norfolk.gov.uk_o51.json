@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_north-norfolk.gov.uk_o51",
+    "vendorUrl": "https://www.north-norfolk.gov.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?north-norfolk\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#page > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#page > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#page > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "comment": "I Do Not Accept"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#page > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
