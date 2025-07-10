@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_scribd.com_ysg",
+    "vendorUrl": "https://www.scribd.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?scribd\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#aca3039e-1e94-45f9-af1d-b3cd74891d17 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#aca3039e-1e94-45f9-af1d-b3cd74891d17 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#aca3039e-1e94-45f9-af1d-b3cd74891d17 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#aca3039e-1e94-45f9-af1d-b3cd74891d17 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
