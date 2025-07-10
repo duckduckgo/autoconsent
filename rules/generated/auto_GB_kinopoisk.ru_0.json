@@ -1,6 +1,6 @@
 {
     "name": "auto_GB_kinopoisk.ru_0",
-    "vendorUrl": "https://www.kinopoisk.ru/showcaptcha?cc=1&form-fb-hint=8.20&mt=7042431B451C368AE24A0DDC8A597C86E6193B9F66AC996B625B1F43158632F9CCA2135BB7B347696C076D6859DE3C71F38862A52B1AA27C9A5F3C4300BFFE3289AB058A3B187E9C9BEA50EB23E48C20B952B2EA06BD4ED21E2C804D82F6A0E0F7542642938331A931941A7E8B9BB96E40CE77E8DED7D2AF2C4A881746B9B5088A0FB0973EBC31CA30EE250E778E990989BC8BFAC680F67CD2456A61C3EF1650E96D2EF31810C7A2D49C2795F1847909AE82F166D81E08BE9746F6BC2E5F9A8B8935C440ECD29460AA8D9B7495CA06FA82B2193379E27A36C37F353A&retpath=aHR0cHM6Ly93d3cua2lub3BvaXNrLnJ1Lz8%2C_e8cf39c16909ae09f7cda366691c0372&t=2/1747053250/63ab0c9aac30a8ede1e7332a89e4bd62&u=6562294569592051912&s=f41a45a2ee3b0ec83092021f1483036f",
+    "vendorUrl": "https://www.kinopoisk.ru/showcaptcha?cc=1&form-fb-hint=8.20&mt=798603B2FEA308B20DCE8F4B678227055BDD1C4A3E793729F1E21CA23D7CB0BE54F566F942C65918CA4744C224135010D31DC80B6B6994302AD33CAD136C183CB40DBE3C5F81905E21EE65227F19E13276CAD6C5C90782C7AEF0C7CA5FF181A41ADB64AD7F24B8231F6BF4B331A030F37B39EF3DD253A235A7D60C9C41876361F9F3FB5A00F2AC40E16E3E4C2C1E22201E8A37D4A912250E7C81014975496C4BFBFE083CFE02409E7F6ED4CDA636B74E1ABAA54D456ED898BC709CCAADFF04B1FB068940A4FFB49BD95081241E8D0ECBBD960043106F0A207D52BF76&retpath=aHR0cHM6Ly93d3cua2lub3BvaXNrLnJ1Lz8%2C_a04e65c1d02a3d4a1c20c9cd40c3072d&t=2/1752082776/dc308e3395bd96e7bdd2ecae1d0e5622&u=6899820338865940629&s=e28e07a3bac3b42e8217d5d612c537e1",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)",
-            "text": "Allow essential cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "comment": "Allow essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
