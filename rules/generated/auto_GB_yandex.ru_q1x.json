@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_yandex.ru_q1x",
+    "vendorUrl": "https://yandex.ru/showcaptcha?cc=1&form-fb-hint=8.46&mt=BFCAF3C546928139FFDCBBF3FD766E8B4BD5BE53B5B6467DB54327CB16927FEB97652F4AEEBAFB3D3B6F489F86D68765BCF0DA20CF66C9B7AA942ED2C39E04CBC21764B2A450A44B2357DF34A9C74A6004493E9426FD599695BDF3614FBE24739D4B2BD489B31B3540037B428D31E2818599CE76AF922590AA836D7409462183290DB2F3EEC754ED5F5B1F48DBAFE2E2F96C1E9E318750B2AE5EF3D007DA5B5913744CD1A97125F0340884DE2C25AACAFB52536B6FF2821EB6392059CF9DFD60A0D51A2CDB28F8C31EDCD4E43DDDE53D940ECCE5D925449B8DFBDDE5&retpath=aHR0cHM6Ly95YW5kZXgucnUvPw%2C%2C_a6a12a304d92e9b4926aeb9fbb3e34ec&t=2/1752081801/5dfcb92530e2d060475d1234685fb15b&u=6899754915171406020&s=c77a29208e640f1703123a91bd3d7325",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?yandex\\.ru/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "comment": "Allow essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
