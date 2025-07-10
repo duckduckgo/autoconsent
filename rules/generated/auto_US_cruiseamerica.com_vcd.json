@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_cruiseamerica.com_vcd",
+    "vendorUrl": "https://www.cruiseamerica.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cruiseamerica\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#cruise-america-app > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#cruise-america-app > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#cruise-america-app > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "comment": "Do Not Sell My Personal Information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#cruise-america-app > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
