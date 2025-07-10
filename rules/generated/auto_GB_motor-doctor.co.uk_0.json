@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(3) > div > div:nth-child(1) > div:nth-child(1) > span"
+            "exists": "cookiepopups-collector-selector-error"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(3) > div > div:nth-child(1) > div:nth-child(1) > span"
+            "visible": "cookiepopups-collector-selector-error"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(3) > div > div:nth-child(1) > div:nth-child(1) > span",
-            "text": "Reject all cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
