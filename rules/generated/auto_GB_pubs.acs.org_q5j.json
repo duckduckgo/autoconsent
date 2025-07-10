@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_pubs.acs.org_q5j",
+    "vendorUrl": "https://pubs.acs.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pubs\\.acs\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#d7a42cbb-7b6d-4a68-a3e9-93cb7880dfe1 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#d7a42cbb-7b6d-4a68-a3e9-93cb7880dfe1 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#d7a42cbb-7b6d-4a68-a3e9-93cb7880dfe1 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#d7a42cbb-7b6d-4a68-a3e9-93cb7880dfe1 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
