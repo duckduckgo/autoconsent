@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_historyskills.com_cwb",
+    "vendorUrl": "https://www.historyskills.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?historyskills\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#page-2112891857 > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#page-2112891857 > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#page-2112891857 > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#page-2112891857 > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
