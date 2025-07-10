@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_aa.com_hxc",
+    "vendorUrl": "https://www.aa.com/homePage.do?locale=en_CA",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aa\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#aa-lang-en > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#aa-lang-en > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#aa-lang-en > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#aa-lang-en > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
