@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2)"
+            "exists": "cookiepopups-collector-selector-error"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2)"
+            "visible": "cookiepopups-collector-selector-error"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2)",
-            "text": "Decline"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
