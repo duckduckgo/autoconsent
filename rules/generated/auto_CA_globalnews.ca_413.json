@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_globalnews.ca_413",
+    "vendorUrl": "https://globalnews.ca/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?globalnews\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#_evidon_banner > button:nth-child(2)#_evidon-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#_evidon_banner > button:nth-child(2)#_evidon-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#_evidon_banner > button:nth-child(2)#_evidon-decline-button",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#_evidon_banner > button:nth-child(2)#_evidon-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
