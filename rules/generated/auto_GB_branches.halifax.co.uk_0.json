@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > footer:nth-child(8) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#lbganalyticsCookies > footer:nth-child(8):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > footer:nth-child(8) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#lbganalyticsCookies > footer:nth-child(8):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > footer:nth-child(8) > button:nth-child(2)",
-            "text": "Reject all"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#lbganalyticsCookies > footer:nth-child(8):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#lbganalyticsCookies > footer:nth-child(8):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
