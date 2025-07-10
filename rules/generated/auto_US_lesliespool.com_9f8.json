@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_lesliespool.com_9f8",
+    "vendorUrl": "https://lesliespool.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lesliespool\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > div:nth-child(2)#onetrust-policy-text > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > div:nth-child(2)#onetrust-policy-text > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > div:nth-child(2)#onetrust-policy-text > a:nth-child(1):not([id])",
+            "comment": "Do Not Sell or Share My Personal Information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > div:nth-child(2)#onetrust-policy-text > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
