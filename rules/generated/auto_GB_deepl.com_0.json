@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(3) > div > div:nth-child(3) > button:nth-child(1)"
+            "exists": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(3) > div > div:nth-child(3) > button:nth-child(1)"
+            "visible": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(3) > div > div:nth-child(3) > button:nth-child(1)",
-            "text": "Reject"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
