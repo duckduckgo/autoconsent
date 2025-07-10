@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_amazon.fr_sxl",
+    "vendorUrl": "https://www.amazon.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amazon\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#a-page > span:nth-child(6):not([id]) > form#sp-cc > div:nth-child(11):not([id]) > div:not([id]) > span:nth-child(2)#a-autoid-1 > span:not([id]) > button#sp-cc-rejectall-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#a-page > span:nth-child(6):not([id]) > form#sp-cc > div:nth-child(11):not([id]) > div:not([id]) > span:nth-child(2)#a-autoid-1 > span:not([id]) > button#sp-cc-rejectall-link"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#a-page > span:nth-child(6):not([id]) > form#sp-cc > div:nth-child(11):not([id]) > div:not([id]) > span:nth-child(2)#a-autoid-1 > span:not([id]) > button#sp-cc-rejectall-link",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#a-page > span:nth-child(6):not([id]) > form#sp-cc > div:nth-child(11):not([id]) > div:not([id]) > span:nth-child(2)#a-autoid-1 > span:not([id]) > button#sp-cc-rejectall-link",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
