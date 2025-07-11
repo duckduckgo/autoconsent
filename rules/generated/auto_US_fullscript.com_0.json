@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[class] > div > div:nth-child(7) > div:nth-child(2) > button:nth-child(1)"
+            "exists": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[class] > div > div:nth-child(7) > div:nth-child(2) > button:nth-child(1)"
+            "visible": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[class] > div > div:nth-child(7) > div:nth-child(2) > button:nth-child(1)",
-            "text": "Decline cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Decline cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
