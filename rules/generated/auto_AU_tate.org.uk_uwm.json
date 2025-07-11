@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_tate.org.uk_uwm",
+    "vendorUrl": "https://www.tate.org.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tate\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(3)#onetrust-close-btn-container > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(3)#onetrust-close-btn-container > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(3)#onetrust-close-btn-container > button:not([id])",
+            "comment": "Continue without Accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(3)#onetrust-close-btn-container > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
