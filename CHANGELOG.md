@@ -1,3 +1,16 @@
+# v14.5.1 (Fri Jul 11 2025)
+
+#### 🐛 Bug Fix
+
+- Make itopvpn.com rule site-specific. [#816](https://github.com/duckduckgo/autoconsent/pull/816) ([@sammacbeth](https://github.com/sammacbeth))
+- Handle fides alternative without a top-level reject all button. [#817](https://github.com/duckduckgo/autoconsent/pull/817) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.5.0 (Wed Jul 02 2025)
 
 #### 🚀 Enhancement
