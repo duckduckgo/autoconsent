@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_complex.com_z45",
+    "vendorUrl": "https://www.complex.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?complex\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
