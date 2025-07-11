@@ -1,3 +1,6 @@
 import generateCMPTests from '../../playwright/runner';
-
-generateCMPTests('auto_US_learn.ligonier.org_0', ['https://learn.ligonier.org/']);
+generateCMPTests('auto_US_learn.ligonier.org_0', ['https://learn.ligonier.org/'], {
+    testOptIn: false,
+    testSelfTest: false,
+    onlyRegions: ['US'],
+});
