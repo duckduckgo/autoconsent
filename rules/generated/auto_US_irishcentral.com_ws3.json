@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_irishcentral.com_ws3",
+    "vendorUrl": "https://www.irishcentral.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?irishcentral\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#ic-page-top > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#ic-page-top > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#ic-page-top > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#ic-page-top > div#CybotCookiebotDialog > div:not([id]) > div:nth-child(4)#CybotCookiebotDialogFooter > div:nth-child(1):not([id]) > div#CybotCookiebotDialogBodyButtons > div:nth-child(2)#CybotCookiebotDialogBodyButtonsWrapper > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

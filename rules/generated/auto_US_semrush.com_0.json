@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[data-region][class][data-nosnippet][style] > div > div > div:nth-child(2) > button:nth-child(1)"
+            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[data-region][class][data-nosnippet][style] > div > div > div:nth-child(2) > button:nth-child(1)"
+            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[data-region][class][data-nosnippet][style] > div > div > div:nth-child(2) > button:nth-child(1)",
-            "text": "Do not sell or share my personal information"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Do not sell or share my personal information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

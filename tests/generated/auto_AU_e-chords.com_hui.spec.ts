@@ -1,0 +1,2 @@
+import generateCMPTests from '../../playwright/runner';
+generateCMPTests('auto_AU_e-chords.com_hui', ['https://www.e-chords.com/'], { testOptIn: false, testSelfTest: false, onlyRegions: ['AU'] });

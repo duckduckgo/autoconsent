@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(92) > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)"
+            "exists": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(92) > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)"
+            "visible": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(92) > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)",
-            "text": "Only Required Cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Only Required Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
