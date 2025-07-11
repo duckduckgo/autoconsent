@@ -1,6 +1,6 @@
 {
     "name": "auto_US_recology.com_0",
-    "vendorUrl": "https://www.recology.com/",
+    "vendorUrl": "https://www.recology.com/?cookie-consent-set=true",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)"
+            "exists": "body:not([id]) > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)"
+            "visible": "body:not([id]) > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][role][class][aria-label] > div > div:nth-child(2) > a:nth-child(2)",
-            "text": "Reject cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
