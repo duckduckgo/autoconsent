@@ -22,7 +22,25 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#fides-banner .fides-reject-all-button"
+            "waitFor": ".fides-banner-button"
+        },
+        {
+            "if": {
+                "visible": "#fides-banner .fides-reject-all-button"
+            },
+            "then": [
+                {
+                    "click": "#fides-banner .fides-reject-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#fides-banner .fides-manage-preferences-button"
+                },
+                {
+                    "waitForThenClick": ".fides-reject-all-button"
+                }
+            ]
         }
     ]
 }
