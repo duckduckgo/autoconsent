@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_arket.com_ih0",
+    "vendorUrl": "https://www.arket.com/en-gb/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arket\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn",
+            "comment": "Only required cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
