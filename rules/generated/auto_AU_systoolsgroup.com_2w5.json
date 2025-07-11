@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_systoolsgroup.com_2w5",
+    "vendorUrl": "https://www.systoolsgroup.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?systoolsgroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > footer:not([id]) > div:nth-child(4)#cookie-bar > button:nth-child(3)#cookiesc"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > footer:not([id]) > div:nth-child(4)#cookie-bar > button:nth-child(3)#cookiesc"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > footer:not([id]) > div:nth-child(4)#cookie-bar > button:nth-child(3)#cookiesc",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > footer:not([id]) > div:nth-child(4)#cookie-bar > button:nth-child(3)#cookiesc",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
