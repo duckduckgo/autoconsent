@@ -1,6 +1,6 @@
 {
     "name": "auto_GB_virginmedia.com_0",
-    "vendorUrl": "https://www.virginmedia.com/myvmo2",
+    "vendorUrl": "https://www.virginmedia.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +10,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
+            "exists": "body#home > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
+            "visible": "body#home > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
         }
     ],
     "optIn": [],
@@ -24,13 +24,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
+            "waitForThenClick": "body#home > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
             "comment": "Accept essential cookies only"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
+            "waitForVisible": "body#home > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
             "timeout": 1000,
             "check": "none"
         }
