@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_watchcrunch.com_0kn",
+    "vendorUrl": "https://www.watchcrunch.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?watchcrunch\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2):not([id])[data-controller=\"amplitude\"][data-amplitude-cusio-url=\"https://www\\.watchcrunch\\.com/cusio/track\"][data-amplitude-referrer-url=\"https://www\\.watchcrunch\\.com/onboarding/source\"][data-amplitude-instantly=\"1\"].auth-guest.locale-en.env-production > div:nth-child(5):not([id]).cky-consent-container.cky-banner-bottom > div:nth-child(1):not([id])[data-cky-tag=\"notice\"].cky-consent-bar > div:nth-child(2):not([id]).cky-notice > div:nth-child(2):not([id]).cky-notice-group > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"].cky-notice-btn-wrapper > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"].cky-btn.cky-btn-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2):not([id])[data-controller=\"amplitude\"][data-amplitude-cusio-url=\"https://www\\.watchcrunch\\.com/cusio/track\"][data-amplitude-referrer-url=\"https://www\\.watchcrunch\\.com/onboarding/source\"][data-amplitude-instantly=\"1\"].auth-guest.locale-en.env-production > div:nth-child(5):not([id]).cky-consent-container.cky-banner-bottom > div:nth-child(1):not([id])[data-cky-tag=\"notice\"].cky-consent-bar > div:nth-child(2):not([id]).cky-notice > div:nth-child(2):not([id]).cky-notice-group > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"].cky-notice-btn-wrapper > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"].cky-btn.cky-btn-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2):not([id])[data-controller=\"amplitude\"][data-amplitude-cusio-url=\"https://www\\.watchcrunch\\.com/cusio/track\"][data-amplitude-referrer-url=\"https://www\\.watchcrunch\\.com/onboarding/source\"][data-amplitude-instantly=\"1\"].auth-guest.locale-en.env-production > div:nth-child(5):not([id]).cky-consent-container.cky-banner-bottom > div:nth-child(1):not([id])[data-cky-tag=\"notice\"].cky-consent-bar > div:nth-child(2):not([id]).cky-notice > div:nth-child(2):not([id]).cky-notice-group > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"].cky-notice-btn-wrapper > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"].cky-btn.cky-btn-reject",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2):not([id])[data-controller=\"amplitude\"][data-amplitude-cusio-url=\"https://www\\.watchcrunch\\.com/cusio/track\"][data-amplitude-referrer-url=\"https://www\\.watchcrunch\\.com/onboarding/source\"][data-amplitude-instantly=\"1\"].auth-guest.locale-en.env-production > div:nth-child(5):not([id]).cky-consent-container.cky-banner-bottom > div:nth-child(1):not([id])[data-cky-tag=\"notice\"].cky-consent-bar > div:nth-child(2):not([id]).cky-notice > div:nth-child(2):not([id]).cky-notice-group > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"].cky-notice-btn-wrapper > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"].cky-btn.cky-btn-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
