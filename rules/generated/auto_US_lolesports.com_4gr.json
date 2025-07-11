@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_lolesports.com_4gr",
+    "vendorUrl": "https://lolesports.com/en-US/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lolesports\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

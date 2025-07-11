@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_komoot.com_xhv",
+    "vendorUrl": "https://www.komoot.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?komoot\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

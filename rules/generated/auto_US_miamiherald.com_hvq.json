@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_miamiherald.com_hvq",
+    "vendorUrl": "https://www.miamiherald.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?miamiherald\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#b6db55c2-5aa8-4da8-8493-b6b514b3dcea > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#b6db55c2-5aa8-4da8-8493-b6b514b3dcea > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#b6db55c2-5aa8-4da8-8493-b6b514b3dcea > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#b6db55c2-5aa8-4da8-8493-b6b514b3dcea > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_wellcare.com_xk4",
+    "vendorUrl": "https://www.wellcare.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wellcare\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2):not([id])[data-interceptor-active-comps=\"\"][data-interceptor-inactive-comps=\"@met-interceptor/met-interceptor\"] > div:nth-child(5):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2):not([id])[data-interceptor-active-comps=\"\"][data-interceptor-inactive-comps=\"@met-interceptor/met-interceptor\"] > div:nth-child(5):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2):not([id])[data-interceptor-active-comps=\"\"][data-interceptor-inactive-comps=\"@met-interceptor/met-interceptor\"] > div:nth-child(5):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2):not([id])[data-interceptor-active-comps=\"\"][data-interceptor-inactive-comps=\"@met-interceptor/met-interceptor\"] > div:nth-child(5):not([id]).cc-window.cc-banner.cc-type-opt-out.cc-theme-classic.cc-bottom.cc-color-override-25097996 > div:nth-child(2):not([id]).cc-compliance.cc-highlight.cc-regular > a:nth-child(1):not([id]).cc-btn.cc-deny.cc-btn-format",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

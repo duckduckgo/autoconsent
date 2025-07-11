@@ -1,3 +1,2 @@
 import generateCMPTests from '../../playwright/runner';
-
-generateCMPTests('auto_US_klm.com_0', ['https://www.klm.com/']);
+generateCMPTests('auto_US_klm.com_0', ['https://www.klm.com/'], { testOptIn: false, testSelfTest: false, onlyRegions: ['US'] });

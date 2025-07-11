@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_ussoccer.com_b1o",
+    "vendorUrl": "https://www.ussoccer.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ussoccer\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "DENY NON-ESSENTIAL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

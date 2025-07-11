@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id][style][class] > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][style][class] > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][style][class] > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject All"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

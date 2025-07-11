@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_federalnewsnetwork.com_2o6",
+    "vendorUrl": "https://federalnewsnetwork.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?federalnewsnetwork\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookiepopups-collector-selector-error"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "cookiepopups-collector-selector-error",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookiepopups-collector-selector-error",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#popups > dialog:nth-child(2)#cookiesModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#popups > dialog:nth-child(2)#cookiesModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id] > dialog:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-            "text": "reject non-essential"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#popups > dialog:nth-child(2)#cookiesModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#popups > dialog:nth-child(2)#cookiesModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

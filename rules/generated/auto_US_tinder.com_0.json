@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id][class] > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button"
+            "exists": "body:not([id]) > div#c1054502469 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][class] > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button"
+            "visible": "body:not([id]) > div#c1054502469 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][class] > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button",
-            "text": "I decline"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#c1054502469 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "I decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#c1054502469 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
