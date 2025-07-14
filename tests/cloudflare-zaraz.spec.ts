@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('cloudflare-zaraz', [
-  'https://uk.bookshop.org/', 'https://mindmapwizard.com/',
-]);
+generateCMPTests('cloudflare-zaraz', ['https://uk.bookshop.org/', 'https://mindmapwizard.com/']);
