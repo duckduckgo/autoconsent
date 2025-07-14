@@ -78,22 +78,95 @@ function decodeNullableBoolean(value: CompactNullableBoolean): boolean | undefin
     return undefined;
 }
 
-export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
-    const strings: string[] = [];
+/**
+ * Builds a map of strings to their indices, preserving the indices of existing strings, when possible.
+ * @param existingStrings - The strings array from the previous version of the ruleset.
+ * @param rules - The rules to collect strings from.
+ * @returns A new strings array.
+ */
+function buildStrings(existingStrings: string[], rules: AutoConsentCMPRule[]): string[] {
+    // First pass: collect all strings that will be used
+    const usedStrings = new Set<string>();
 
-    function replaceStrings(selector: string): number {
-        let index = strings.indexOf(selector);
-        if (index === -1) {
-            index = strings.push(selector) - 1;
+    function collectStrings(step: AutoConsentRuleStep) {
+        for (const [longKey] of compactedRuleSteps) {
+            if (step[longKey] && typeof step[longKey] === 'string') {
+                usedStrings.add(step[longKey]);
+            }
         }
-        return index;
+        if (step.if) {
+            collectStrings(step.if);
+            step.then?.forEach(collectStrings);
+            step.else?.forEach(collectStrings);
+        }
+        if (step.any) {
+            step.any.forEach(collectStrings);
+        }
     }
+
+    // Collect all used strings from all rules
+    rules.forEach((rule) => {
+        (rule.prehideSelectors || []).forEach((selector) => usedStrings.add(selector));
+        rule.detectCmp.forEach(collectStrings);
+        rule.detectPopup.forEach(collectStrings);
+        rule.optOut.forEach(collectStrings);
+        (rule.test || []).forEach(collectStrings);
+    });
+
+    // Separate existing strings that are still used vs new strings
+    const existingUsedStrings: Array<{ str: string; originalIndex: number }> = [];
+    const newStrings: string[] = [];
+
+    usedStrings.forEach((str) => {
+        const existingIndex = existingStrings.indexOf(str);
+        if (existingIndex !== -1) {
+            existingUsedStrings.push({ str, originalIndex: existingIndex });
+        } else {
+            newStrings.push(str);
+        }
+    });
+
+    // Create compact array, trying to preserve original indices
+    const finalSize = usedStrings.size;
+    const strings: string[] = new Array(finalSize);
+    const stringIndexMap = new Map<string, number>();
+    const usedIndices = new Set<number>();
+
+    // First, place existing strings at their original indices if possible
+    existingUsedStrings.forEach(({ str, originalIndex }) => {
+        if (originalIndex < finalSize && !usedIndices.has(originalIndex)) {
+            strings[originalIndex] = str;
+            stringIndexMap.set(str, originalIndex);
+            usedIndices.add(originalIndex);
+        }
+    });
+
+    // Then place remaining existing strings that couldn't keep their original indices
+    const remainingExistingStrings = existingUsedStrings.filter(({ str }) => !stringIndexMap.has(str));
+
+    // Finally, fill remaining slots with new strings and displaced existing strings
+    const remainingStrings = [...newStrings, ...remainingExistingStrings.map(({ str }) => str)];
+    let remainingIndex = 0;
+
+    for (let i = 0; i < finalSize; i++) {
+        if (!usedIndices.has(i)) {
+            const str = remainingStrings[remainingIndex++];
+            strings[i] = str;
+            stringIndexMap.set(str, i);
+        }
+    }
+
+    return strings;
+}
+
+export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRuleset {
+    const strings = buildStrings(existingCompactRules?.s || [], rules);
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
         for (const [longKey, shortKey] of compactedRuleSteps) {
             if (clonedStep[longKey] && typeof clonedStep[longKey] === 'string') {
-                clonedStep[shortKey] = replaceStrings(clonedStep[longKey]);
+                clonedStep[shortKey] = strings.indexOf(clonedStep[longKey]);
                 delete clonedStep[longKey];
             }
         }
@@ -117,7 +190,7 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
             encodeNullableBoolean(r.cosmetic),
             r.runContext?.urlPattern || '',
             parseInt(`${encodeNullableBoolean(r.runContext?.main)}${encodeNullableBoolean(r.runContext?.frame)}`),
-            (r.prehideSelectors || []).map(replaceStrings),
+            (r.prehideSelectors || []).map((s) => strings.indexOf(s)),
             r.detectCmp.map(encodeRuleStep),
             r.detectPopup.map(encodeRuleStep),
             r.optOut.map(encodeRuleStep),
