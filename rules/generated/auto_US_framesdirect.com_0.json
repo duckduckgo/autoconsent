@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id] > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "REJECT"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
