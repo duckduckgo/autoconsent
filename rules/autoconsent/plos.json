@@ -18,7 +18,7 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#cookie-consent", "xpath///button[contains(., 'Accept')"]
+            "waitForThenClick": ["#cookie-consent", "xpath///button[contains(., 'Accept')]"]
         }
     ],
     "optOut": [
