@@ -5,7 +5,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?genome\\.ch\\.bbc\\.co\\.uk/"
+        "urlPattern": "^https?://([.a-zA-Z0-9-]+\\.)?bbc\\.co\\.uk/"
     },
     "prehideSelectors": [],
     "detectCmp": [
