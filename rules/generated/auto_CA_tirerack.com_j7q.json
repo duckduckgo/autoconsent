@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_tirerack.com_j7q",
+    "vendorUrl": "https://www.tirerack.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tirerack\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#homepage-8eb2fc1cff > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
