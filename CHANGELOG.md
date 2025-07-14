@@ -1,3 +1,20 @@
+# v14.6.0 (Mon Jul 14 2025)
+
+#### 🚀 Enhancement
+
+- Fix some outdated rules [#826](https://github.com/duckduckgo/autoconsent/pull/826) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Expand plos rule to cover journals.plos.org [#823](https://github.com/duckduckgo/autoconsent/pull/823) ([@muodov](https://github.com/muodov))
+- expand existing bbc rule to another dubdomains [#822](https://github.com/duckduckgo/autoconsent/pull/822) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.5.1 (Fri Jul 11 2025)
 
 #### 🐛 Bug Fix
