@@ -83,7 +83,10 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
             async function takeScreenshot(name: string) {
                 try {
                     await page.screenshot({
-                        path: path.join(screenshotsDir, `${expectedCmp}-${autoAction}-${testRegion}-${formFactor}-${domain}-${urlHash}-${name}.jpg`),
+                        path: path.join(
+                            screenshotsDir,
+                            `${expectedCmp}-${autoAction}-${testRegion}-${formFactor}-${domain}-${urlHash}-${name}.jpg`,
+                        ),
                         quality: 50,
                         scale: 'css',
                         timeout: 2000,
