@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_outboarddealers.ca_mt8",
+    "vendorUrl": "https://www.outboarddealers.ca/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?outboarddealers\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "comment": "ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
