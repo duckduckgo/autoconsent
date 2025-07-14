@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_viewsonic.com_0nq",
+    "vendorUrl": "https://www.viewsonic.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?viewsonic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "Decline Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
