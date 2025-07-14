@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_zacks.com_jra",
+    "vendorUrl": "https://www.zacks.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zacks\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#home > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#deny_cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#home > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#deny_cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#home > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#deny_cookie",
+            "comment": "Deny Optional"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#home > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#deny_cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
