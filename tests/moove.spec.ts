@@ -5,8 +5,7 @@ generateCMPTests(
     [
         'https://impact.parkinson.org/',
         'https://wamu.org/',
-        'https://www.phorest.com/',
-        'https://theposterclub.com/',
+        'https://kulturnews.de/',
         'https://gcloyola.com/autor/fernando-vidal/',
     ],
     {},
