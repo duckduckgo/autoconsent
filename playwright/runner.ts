@@ -49,8 +49,9 @@ const screenshotsDir = path.join(__dirname, '../test-results/screenshots');
 export function generateTest(url: string, expectedCmp: string, options: TestOptions = defaultOptions) {
     const domain = new URL(url).hostname;
     const urlHash = crypto.createHash('md5').update(url).digest('hex').slice(0, 4);
+    const formFactor = options.mobile ? 'mobile' : 'desktop';
     function genTest(autoAction: AutoAction) {
-        test(`${domain} ${urlHash} .${testRegion} ${autoAction} ${options.mobile ? 'mobile' : ''}`, async ({ page }, { project }) => {
+        test(`${domain} ${urlHash} .${testRegion} ${autoAction} ${formFactor}`, async ({ page }, { project }) => {
             let screenshotCounter = 0;
             if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
                 test.skip();
@@ -82,7 +83,7 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
             async function takeScreenshot(name: string) {
                 try {
                     await page.screenshot({
-                        path: path.join(screenshotsDir, `${expectedCmp}-${autoAction}-${domain}-${urlHash}-${name}.jpg`),
+                        path: path.join(screenshotsDir, `${expectedCmp}-${autoAction}-${testRegion}-${formFactor}-${domain}-${urlHash}-${name}.jpg`),
                         quality: 50,
                         scale: 'css',
                         timeout: 2000,
