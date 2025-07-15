@@ -10,12 +10,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#MicroTeleport > div:nth-child(17):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div > div > div > div > button[data-testid=\"micro-cookie-decline\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#MicroTeleport > div:nth-child(17):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div > div > div > div > button[data-testid=\"micro-cookie-decline\"]"
         }
     ],
     "optIn": [],
@@ -24,13 +24,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#MicroTeleport > div:nth-child(17):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div > div > div > div > button[data-testid=\"micro-cookie-decline\"]",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#MicroTeleport > div:nth-child(17):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div > div > div > div > button[data-testid=\"micro-cookie-decline\"]",
             "timeout": 1000,
             "check": "none"
         }
