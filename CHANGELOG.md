@@ -1,3 +1,26 @@
+# v14.8.0 (Tue Jul 15 2025)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group with 2 updates [#832](https://github.com/duckduckgo/autoconsent/pull/832) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add autoconsent rules for 158 sites [#821](https://github.com/duckduckgo/autoconsent/pull/821) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Minimize the compact rules diff [#828](https://github.com/duckduckgo/autoconsent/pull/828) ([@muodov](https://github.com/muodov))
+
+#### ⚠️ Pushed to `main`
+
+- Group ghostery updates in a single PR ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.7.0 (Tue Jul 15 2025)
 
 #### 🚀 Enhancement
