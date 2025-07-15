@@ -1,5 +1,5 @@
 import generateCMPTests from '../../playwright/runner';
-generateCMPTests('auto_GB_virginmedia.com_0', ['https://www.virginmedia.com/myvmo2'], {
+generateCMPTests('auto_GB_virginmedia.com_0', ['https://www.virginmedia.com/'], {
     testOptIn: false,
     testSelfTest: false,
     onlyRegions: ['GB'],

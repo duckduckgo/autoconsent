@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_rubylane.com_g5g",
+    "vendorUrl": "https://www.rubylane.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rubylane\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > div#cookie-settings > small:nth-child(1):not([id]) > form#manage-cookie-settings > div:nth-child(2):not([id]) > button:nth-child(1)#declinecookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > div#cookie-settings > small:nth-child(1):not([id]) > form#manage-cookie-settings > div:nth-child(2):not([id]) > button:nth-child(1)#declinecookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div#cookie-settings > small:nth-child(1):not([id]) > form#manage-cookie-settings > div:nth-child(2):not([id]) > button:nth-child(1)#declinecookies",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > div#cookie-settings > small:nth-child(1):not([id]) > form#manage-cookie-settings > div:nth-child(2):not([id]) > button:nth-child(1)#declinecookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
