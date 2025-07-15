@@ -5,7 +5,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?airbnb\\.ca/"
+        "urlPattern": "^https?://(www\\.)?airbnb\\.(ca|com|nl|co\\.uk)/"
     },
     "prehideSelectors": [],
     "detectCmp": [
