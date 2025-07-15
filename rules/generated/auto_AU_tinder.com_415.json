@@ -10,12 +10,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#s-1607660828 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "body:not([id]) > div > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#s-1607660828 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "body:not([id]) > div > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +24,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#s-1607660828 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "waitForThenClick": "body:not([id]) > div > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
             "comment": "I decline"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#s-1607660828 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "waitForVisible": "body:not([id]) > div > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
             "timeout": 1000,
             "check": "none"
         }
