@@ -113,49 +113,21 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
         (rule.test || []).forEach(collectStrings);
     });
 
-    // Separate existing strings that are still used vs new strings
-    const existingUsedStrings: Array<{ str: string; originalIndex: number }> = [];
-    const newStrings: string[] = [];
-
-    usedStrings.forEach((str) => {
-        const existingIndex = existingStrings.indexOf(str);
-        if (existingIndex !== -1) {
-            existingUsedStrings.push({ str, originalIndex: existingIndex });
-        } else {
-            newStrings.push(str);
+    // New array of undefined, ready to be filled.
+    const strings = new Array(usedStrings.size).fill(undefined);
+    // copy existing values to the same, capping to the max array length
+    existingStrings.slice(0, usedStrings.size).forEach((s, i) => {
+        if (usedStrings.has(s)) {
+            strings[i] = s;
         }
     });
-
-    // Create compact array, trying to preserve original indices
-    const finalSize = usedStrings.size;
-    const strings: string[] = new Array(finalSize);
-    const stringIndexMap = new Map<string, number>();
-    const usedIndices = new Set<number>();
-
-    // First, place existing strings at their original indices if possible
-    existingUsedStrings.forEach(({ str, originalIndex }) => {
-        if (originalIndex < finalSize && !usedIndices.has(originalIndex)) {
-            strings[originalIndex] = str;
-            stringIndexMap.set(str, originalIndex);
-            usedIndices.add(originalIndex);
+    // copy remaining strings into empty slots. This will also place any existing strings whose previous indices are out of the bounds of the new array.
+    usedStrings.forEach((s) => {
+        if (strings.indexOf(s) === -1) {
+            const nextFreeSlot = strings.indexOf(undefined); // find next undefined value
+            strings[nextFreeSlot] = s;
         }
-    });
-
-    // Then place remaining existing strings that couldn't keep their original indices
-    const remainingExistingStrings = existingUsedStrings.filter(({ str }) => !stringIndexMap.has(str));
-
-    // Finally, fill remaining slots with new strings and displaced existing strings
-    const remainingStrings = [...newStrings, ...remainingExistingStrings.map(({ str }) => str)];
-    let remainingIndex = 0;
-
-    for (let i = 0; i < finalSize; i++) {
-        if (!usedIndices.has(i)) {
-            const str = remainingStrings[remainingIndex++];
-            strings[i] = str;
-            stringIndexMap.set(str, i);
-        }
-    }
-
+    })
     return strings;
 }
 
