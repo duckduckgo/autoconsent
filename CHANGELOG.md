@@ -1,3 +1,33 @@
+# v14.6.0 (Mon Jul 14 2025)
+
+#### 🚀 Enhancement
+
+- Fix some outdated rules [#826](https://github.com/duckduckgo/autoconsent/pull/826) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Expand plos rule to cover journals.plos.org [#823](https://github.com/duckduckgo/autoconsent/pull/823) ([@muodov](https://github.com/muodov))
+- expand existing bbc rule to another dubdomains [#822](https://github.com/duckduckgo/autoconsent/pull/822) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.5.1 (Fri Jul 11 2025)
+
+#### 🐛 Bug Fix
+
+- Make itopvpn.com rule site-specific. [#816](https://github.com/duckduckgo/autoconsent/pull/816) ([@sammacbeth](https://github.com/sammacbeth))
+- Handle fides alternative without a top-level reject all button. [#817](https://github.com/duckduckgo/autoconsent/pull/817) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.5.0 (Wed Jul 02 2025)
 
 #### 🚀 Enhancement
