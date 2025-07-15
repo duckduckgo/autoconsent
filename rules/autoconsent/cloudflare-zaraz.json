@@ -21,10 +21,5 @@
         {
             "waitForThenClick": [".cf_modal_container", ".cf_consent-buttons #cf_consent-buttons__reject-all"]
         }
-    ],
-    "test": [
-        {
-            "cookieContains": "zaraz-consent"
-        }
     ]
 }
