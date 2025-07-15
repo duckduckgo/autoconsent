@@ -1,3 +1,28 @@
+# v14.7.0 (Tue Jul 15 2025)
+
+#### 🚀 Enhancement
+
+- Support reject button in moove [#825](https://github.com/duckduckgo/autoconsent/pull/825) ([@muodov](https://github.com/muodov))
+- Fix outdated rules [#827](https://github.com/duckduckgo/autoconsent/pull/827) ([@muodov](https://github.com/muodov))
+- Add rule for cloudflare's CMP [#824](https://github.com/duckduckgo/autoconsent/pull/824) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to f1abae853dc0a78b829121feef19ca8cd30e031d [#815](https://github.com/duckduckgo/autoconsent/pull/815) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.9 to 7.0.10 [#811](https://github.com/duckduckgo/autoconsent/pull/811) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#830](https://github.com/duckduckgo/autoconsent/pull/830) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Coverage data update [#820](https://github.com/duckduckgo/autoconsent/pull/820) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.6.0 (Mon Jul 14 2025)
 
 #### 🚀 Enhancement
