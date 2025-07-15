@@ -84,7 +84,7 @@ function decodeNullableBoolean(value: CompactNullableBoolean): boolean | undefin
  * @param rules - The rules to collect strings from.
  * @returns A new strings array.
  */
-function buildStrings(existingStrings: string[], rules: AutoConsentCMPRule[]): string[] {
+export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRule[]): string[] {
     // First pass: collect all strings that will be used
     const usedStrings = new Set<string>();
 

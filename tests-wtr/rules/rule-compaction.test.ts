@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { encodeRules, decodeRules } from '../../lib/encoding';
+import { encodeRules, decodeRules, buildStrings } from '../../lib/encoding';
 import { AutoConsentCMPRule } from '../../lib/rules';
 import { autoconsent } from '../../rules/rules.json';
 import AutoConsent from '../../lib/web';
@@ -8,20 +8,18 @@ describe('RuleCompaction', () => {
     it('decodeRules(encodeRules(rules)) preserves required attributes', () => {
         const rules: AutoConsentCMPRule[] = JSON.parse(JSON.stringify(autoconsent));
 
-        const encoded = encodeRules(rules);
+        const encoded = encodeRules(rules, null);
         const decoded = decodeRules(encoded);
         expect(rules.length).to.equal(decoded.length);
         const ignoredKeys = ['comment', 'optIn', 'vendorUrl'];
         for (let i = 0; i < rules.length; i++) {
-            const originalRule = rules[i];
-            // ensure that runContext exists
-            if (!originalRule.runContext) {
-                originalRule.runContext = {};
-            }
-            // Default value for test and prehideSelectors is empty array
-            originalRule.test = originalRule.test || [];
-            originalRule.prehideSelectors = originalRule.prehideSelectors || [];
-
+            // ensure non-empty values for runContext, test, and prehideSelectors
+            const originalRule = {
+                runContext: {},
+                test: [],
+                prehideSelectors: [],
+                ...rules[i],
+            };
             const finalRule = decoded[i];
             for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
                 // @ts-expect-error Type checker doesn't like us using dynamic attributes here
@@ -71,6 +69,56 @@ describe('RuleCompaction', () => {
         expect(decoded).to.have.length(1);
         expect(decoded[0].name).to.equal('test');
     });
+
+    describe('buildStrings: minimizes string index diff', () => {
+        it('remove and add strings', () => {
+            const rules: AutoConsentCMPRule[] = [{
+                name: 'test',
+                detectCmp: [{ exists: 'staysinplace1' }],
+                detectPopup: [{ visible: 'staysinplace2' }],
+                optOut: [{ click: 'staysinplace3' }, { click: 'new1' }, { click: 'new2' }, { click: 'new3' }],
+                optIn: [],
+            }];
+            const strings = buildStrings(['staysinplace1', 'staysinplace2', 'gone1', 'gone2', 'staysinplace3'], rules);
+            expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'new1', 'new2', 'staysinplace3', 'new3']);
+        });
+
+        it('only add strings', () => {
+            const rules: AutoConsentCMPRule[] = [{
+                name: 'test',
+                detectCmp: [{ exists: 'staysinplace1' }],
+                detectPopup: [{ visible: 'staysinplace2' }],
+                optOut: [{ click: 'staysinplace3' }, { click: 'new1' }, { click: 'new2' }, { click: 'new3' }],
+                optIn: [],
+            }];
+            const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3'], rules);
+            expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3', 'new1', 'new2', 'new3']);
+        });
+
+        it('only remove strings', () => {
+            const rules: AutoConsentCMPRule[] = [{
+                name: 'test',
+                detectCmp: [{ exists: 'staysinplace1' }],
+                detectPopup: [{ visible: 'staysinplace2' }],
+                optOut: [{ click: 'staysinplace3' }],
+                optIn: [],
+            }];
+            const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3', 'gone1', 'gone2', 'gone3'], rules);
+            expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3']);
+        });
+
+        it('unchanged strings', () => {
+            const rules: AutoConsentCMPRule[] = [{
+                name: 'test',
+                detectCmp: [{ exists: 'staysinplace1' }],
+                detectPopup: [{ visible: 'staysinplace2' }],
+                optOut: [{ click: 'staysinplace3' }],
+                optIn: [],
+            }];
+            const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3'], rules);
+            expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3']);
+        });
+    });
 });
 
 describe('AutoConsent', () => {
@@ -96,7 +144,7 @@ describe('AutoConsent', () => {
                     optIn: [],
                     minimumRuleStepVersion: 6,
                 },
-            ]),
+            ], null),
         });
         expect(autoconsent.rules).to.have.length(dynamicRuleCount + 1);
     });
