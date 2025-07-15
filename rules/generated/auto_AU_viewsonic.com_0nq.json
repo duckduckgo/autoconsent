@@ -10,12 +10,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+            "exists": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+            "visible": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)"
         }
     ],
     "optIn": [],
@@ -24,13 +24,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "waitForThenClick": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)",
             "comment": "Decline Cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#html-body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-19 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "waitForVisible": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)",
             "timeout": 1000,
             "check": "none"
         }
