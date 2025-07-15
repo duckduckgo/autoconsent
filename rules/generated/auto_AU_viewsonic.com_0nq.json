@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_viewsonic.com_0nq",
+    "vendorUrl": "https://www.viewsonic.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?viewsonic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)",
+            "comment": "Decline Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div > aside.pr-cookie-modal > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > button:nth-of-type(2)",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

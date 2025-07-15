@@ -1,0 +1,25 @@
+{
+    "name": "cloudflare-zaraz",
+    "vendorUrl": "https://cloudflare.com",
+    "prehideSelectors": [".cf_modal_container"],
+    "detectCmp": [
+        {
+            "exists": [".cf_modal_container", ".cf_consent-buttons"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [".cf_modal_container", ".cf_consent-buttons"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".cf_modal_container", ".cf_consent-buttons #cf_consent-buttons__accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [".cf_modal_container", ".cf_consent-buttons #cf_consent-buttons__reject-all"]
+        }
+    ]
+}

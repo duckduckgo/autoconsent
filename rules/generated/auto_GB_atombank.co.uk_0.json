@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > astro-island > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > astro-island > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > astro-island > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Reject"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
