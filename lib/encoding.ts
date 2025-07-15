@@ -127,7 +127,7 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
             const nextFreeSlot = strings.indexOf(undefined); // find next undefined value
             strings[nextFreeSlot] = s;
         }
-    })
+    });
     return strings;
 }
 

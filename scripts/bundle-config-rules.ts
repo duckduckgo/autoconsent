@@ -22,7 +22,10 @@ for (const location of bundleLocations) {
         config.settings.compactRuleList = encodeRules(autoconsentRules, config.settings.compactRuleList);
     } else {
         // platform override
-        config.features.autoconsent.settings.compactRuleList = encodeRules(autoconsentRules, config.features.autoconsent.settings.compactRuleList);
+        config.features.autoconsent.settings.compactRuleList = encodeRules(
+            autoconsentRules,
+            config.features.autoconsent.settings.compactRuleList,
+        );
     }
     // generate standard pretty-printed output
     const outputData = JSON.stringify(config, undefined, 4);

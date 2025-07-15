@@ -72,49 +72,57 @@ describe('RuleCompaction', () => {
 
     describe('buildStrings: minimizes string index diff', () => {
         it('remove and add strings', () => {
-            const rules: AutoConsentCMPRule[] = [{
-                name: 'test',
-                detectCmp: [{ exists: 'staysinplace1' }],
-                detectPopup: [{ visible: 'staysinplace2' }],
-                optOut: [{ click: 'staysinplace3' }, { click: 'new1' }, { click: 'new2' }, { click: 'new3' }],
-                optIn: [],
-            }];
+            const rules: AutoConsentCMPRule[] = [
+                {
+                    name: 'test',
+                    detectCmp: [{ exists: 'staysinplace1' }],
+                    detectPopup: [{ visible: 'staysinplace2' }],
+                    optOut: [{ click: 'staysinplace3' }, { click: 'new1' }, { click: 'new2' }, { click: 'new3' }],
+                    optIn: [],
+                },
+            ];
             const strings = buildStrings(['staysinplace1', 'staysinplace2', 'gone1', 'gone2', 'staysinplace3'], rules);
             expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'new1', 'new2', 'staysinplace3', 'new3']);
         });
 
         it('only add strings', () => {
-            const rules: AutoConsentCMPRule[] = [{
-                name: 'test',
-                detectCmp: [{ exists: 'staysinplace1' }],
-                detectPopup: [{ visible: 'staysinplace2' }],
-                optOut: [{ click: 'staysinplace3' }, { click: 'new1' }, { click: 'new2' }, { click: 'new3' }],
-                optIn: [],
-            }];
+            const rules: AutoConsentCMPRule[] = [
+                {
+                    name: 'test',
+                    detectCmp: [{ exists: 'staysinplace1' }],
+                    detectPopup: [{ visible: 'staysinplace2' }],
+                    optOut: [{ click: 'staysinplace3' }, { click: 'new1' }, { click: 'new2' }, { click: 'new3' }],
+                    optIn: [],
+                },
+            ];
             const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3'], rules);
             expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3', 'new1', 'new2', 'new3']);
         });
 
         it('only remove strings', () => {
-            const rules: AutoConsentCMPRule[] = [{
-                name: 'test',
-                detectCmp: [{ exists: 'staysinplace1' }],
-                detectPopup: [{ visible: 'staysinplace2' }],
-                optOut: [{ click: 'staysinplace3' }],
-                optIn: [],
-            }];
+            const rules: AutoConsentCMPRule[] = [
+                {
+                    name: 'test',
+                    detectCmp: [{ exists: 'staysinplace1' }],
+                    detectPopup: [{ visible: 'staysinplace2' }],
+                    optOut: [{ click: 'staysinplace3' }],
+                    optIn: [],
+                },
+            ];
             const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3', 'gone1', 'gone2', 'gone3'], rules);
             expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3']);
         });
 
         it('unchanged strings', () => {
-            const rules: AutoConsentCMPRule[] = [{
-                name: 'test',
-                detectCmp: [{ exists: 'staysinplace1' }],
-                detectPopup: [{ visible: 'staysinplace2' }],
-                optOut: [{ click: 'staysinplace3' }],
-                optIn: [],
-            }];
+            const rules: AutoConsentCMPRule[] = [
+                {
+                    name: 'test',
+                    detectCmp: [{ exists: 'staysinplace1' }],
+                    detectPopup: [{ visible: 'staysinplace2' }],
+                    optOut: [{ click: 'staysinplace3' }],
+                    optIn: [],
+                },
+            ];
             const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3'], rules);
             expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3']);
         });
@@ -127,24 +135,27 @@ describe('AutoConsent', () => {
         const dynamicRuleCount = autoconsent.rules.length;
         autoconsent.parseDeclarativeRules({
             autoconsent: [],
-            compact: encodeRules([
-                {
-                    name: 'test',
-                    detectCmp: [{ exists: '#cmp' }],
-                    detectPopup: [{ visible: '#cmp' }],
-                    optOut: [{ click: '#opt-out' }],
-                    optIn: [],
-                    minimumRuleStepVersion: 1,
-                },
-                {
-                    name: 'future_rule',
-                    detectCmp: [{ exists: '#cmp' }],
-                    detectPopup: [{ visible: '#cmp' }],
-                    optOut: [{ click: '#opt-out' }],
-                    optIn: [],
-                    minimumRuleStepVersion: 6,
-                },
-            ], null),
+            compact: encodeRules(
+                [
+                    {
+                        name: 'test',
+                        detectCmp: [{ exists: '#cmp' }],
+                        detectPopup: [{ visible: '#cmp' }],
+                        optOut: [{ click: '#opt-out' }],
+                        optIn: [],
+                        minimumRuleStepVersion: 1,
+                    },
+                    {
+                        name: 'future_rule',
+                        detectCmp: [{ exists: '#cmp' }],
+                        detectPopup: [{ visible: '#cmp' }],
+                        optOut: [{ click: '#opt-out' }],
+                        optIn: [],
+                        minimumRuleStepVersion: 6,
+                    },
+                ],
+                null,
+            ),
         });
         expect(autoconsent.rules).to.have.length(dynamicRuleCount + 1);
     });
