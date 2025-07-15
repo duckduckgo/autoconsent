@@ -43,7 +43,7 @@
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
-    "bundle-config-rules": "node scripts/bundle-config-rules.mjs"
+    "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
