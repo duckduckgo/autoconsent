@@ -53,9 +53,16 @@ export async function buildConsentOMaticRules() {
     const stringify = (rules: object) => JSON.stringify(rules);
     const autoconsent = await buildAutoconsentRules();
     const consentomatic = await buildConsentOMaticRules();
+
+    const compactRulesPath = path.join(rulesDir, 'compact-rules.json');
+    let existingCompactRules = null;
+    if (fs.existsSync(compactRulesPath)) {
+        existingCompactRules = await readFileJSON(compactRulesPath);
+    }
+
     fs.writeFile(path.join(rulesDir, 'rules.json'), stringify({ autoconsent }), () => console.log('Written rules.json'));
     fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
-    fs.writeFile(path.join(rulesDir, 'compact-rules.json'), stringify(encodeRules(autoconsent)), () =>
+    fs.writeFile(compactRulesPath, stringify(encodeRules(autoconsent, existingCompactRules)), () =>
         console.log('Written compact-rules.json'),
     );
 })();

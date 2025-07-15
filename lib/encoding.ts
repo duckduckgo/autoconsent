@@ -78,22 +78,67 @@ function decodeNullableBoolean(value: CompactNullableBoolean): boolean | undefin
     return undefined;
 }
 
-export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
-    const strings: string[] = [];
+/**
+ * Builds a map of strings to their indices, preserving the indices of existing strings, when possible.
+ * @param existingStrings - The strings array from the previous version of the ruleset.
+ * @param rules - The rules to collect strings from.
+ * @returns A new strings array.
+ */
+export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRule[]): string[] {
+    // First pass: collect all strings that will be used
+    const usedStrings = new Set<string>();
 
-    function replaceStrings(selector: string): number {
-        let index = strings.indexOf(selector);
-        if (index === -1) {
-            index = strings.push(selector) - 1;
+    function collectStrings(step: AutoConsentRuleStep) {
+        for (const [longKey] of compactedRuleSteps) {
+            if (step[longKey] && typeof step[longKey] === 'string') {
+                usedStrings.add(step[longKey]);
+            }
         }
-        return index;
+        if (step.if) {
+            collectStrings(step.if);
+            step.then?.forEach(collectStrings);
+            step.else?.forEach(collectStrings);
+        }
+        if (step.any) {
+            step.any.forEach(collectStrings);
+        }
     }
+
+    // Collect all used strings from all rules
+    rules.forEach((rule) => {
+        (rule.prehideSelectors || []).forEach((selector) => usedStrings.add(selector));
+        rule.detectCmp.forEach(collectStrings);
+        rule.detectPopup.forEach(collectStrings);
+        rule.optOut.forEach(collectStrings);
+        (rule.test || []).forEach(collectStrings);
+    });
+
+    // New array of undefined, ready to be filled.
+    const strings = new Array(usedStrings.size).fill(undefined);
+    // copy existing values to the same, capping to the max array length
+    existingStrings.slice(0, usedStrings.size).forEach((s, i) => {
+        if (usedStrings.has(s)) {
+            strings[i] = s;
+        }
+    });
+    // copy remaining strings into empty slots. This will also place any existing strings whose previous indices are out of the bounds of the new array.
+    usedStrings.forEach((s) => {
+        if (strings.indexOf(s) === -1) {
+            const nextFreeSlot = strings.indexOf(undefined); // find next undefined value
+            strings[nextFreeSlot] = s;
+        }
+    });
+    return strings;
+}
+
+export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRuleset {
+    const strings = buildStrings(existingCompactRules?.s || [], rules);
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
         for (const [longKey, shortKey] of compactedRuleSteps) {
             if (clonedStep[longKey] && typeof clonedStep[longKey] === 'string') {
-                clonedStep[shortKey] = replaceStrings(clonedStep[longKey]);
+                clonedStep[shortKey] = strings.indexOf(clonedStep[longKey]);
                 delete clonedStep[longKey];
             }
         }
@@ -117,7 +162,7 @@ export function encodeRules(rules: AutoConsentCMPRule[]): CompactCMPRuleset {
             encodeNullableBoolean(r.cosmetic),
             r.runContext?.urlPattern || '',
             parseInt(`${encodeNullableBoolean(r.runContext?.main)}${encodeNullableBoolean(r.runContext?.frame)}`),
-            (r.prehideSelectors || []).map(replaceStrings),
+            (r.prehideSelectors || []).map((s) => strings.indexOf(s)),
             r.detectCmp.map(encodeRuleStep),
             r.detectPopup.map(encodeRuleStep),
             r.optOut.map(encodeRuleStep),
