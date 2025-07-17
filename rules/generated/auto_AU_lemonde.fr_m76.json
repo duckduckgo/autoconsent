@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_lemonde.fr_m76",
+    "vendorUrl": "https://www.lemonde.fr/en/opinion/article/2024/03/21/will-china-really-become-the-world-s-leading-economic-power_6640185_23.html",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lemonde\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div > a"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div > a"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div > div > a",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div > div > a",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
