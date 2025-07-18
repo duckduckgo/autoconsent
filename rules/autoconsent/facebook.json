@@ -7,11 +7,15 @@
     "detectCmp": [{ "exists": "div[data-testid=\"cookie-policy-manage-dialog\"]" }],
     "detectPopup": [{ "visible": "div[data-testid=\"cookie-policy-manage-dialog\"]" }],
     "optIn": [
-        { "waitForThenClick": "button[data-cookiebanner=\"accept_button\"]" },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        },
         { "waitForVisible": "div[data-testid=\"cookie-policy-manage-dialog\"]", "check": "none" }
     ],
     "optOut": [
-        { "waitForThenClick": "button[data-cookiebanner=\"accept_only_essential_button\"]" },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id])"
+        },
         { "waitForVisible": "div[data-testid=\"cookie-policy-manage-dialog\"]", "check": "none" }
     ]
 }
