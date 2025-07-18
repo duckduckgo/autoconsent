@@ -1,0 +1,35 @@
+{
+    "name": "app.discuss.io",
+    "vendorUrl": "https://app.discuss.io/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://app\\.discuss\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-banner #deny-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-banner #deny-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-banner #allow-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent-banner #deny-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "tracking-preferences"
+        }
+    ]
+}
