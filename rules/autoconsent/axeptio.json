@@ -1,6 +1,6 @@
 {
     "name": "axeptio",
-    "prehideSelectors": [".axeptio_mount,.axeptio_mount"],
+    "prehideSelectors": [".axeptio_widget,.axeptio_mount"],
     "detectCmp": [
         {
             "exists": ".axeptio_widget,.axeptio_mount"
@@ -8,13 +8,20 @@
     ],
     "detectPopup": [
         {
-            "visible": ".axeptio_widget,.axeptio_mount"
+            "any": [
+                {
+                    "exists": ".axeptio-widget--open"
+                },
+                {
+                    "visible": ".axeptio_mount .axeptio_widget"
+                },
+                {
+                    "visible": [".axeptio_mount .needsclick", ".axeptio_widget"]
+                }
+            ]
         }
     ],
     "optIn": [
-        {
-            "waitFor": ".axeptio-widget--open"
-        },
         {
             "if": { "exists": ".axeptio_mount .needsclick" },
             "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_acceptAll"] }],
@@ -22,9 +29,6 @@
         }
     ],
     "optOut": [
-        {
-            "waitFor": ".axeptio-widget--open"
-        },
         {
             "if": { "exists": ".axeptio_mount .needsclick" },
             "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss"] }],
