@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_vrsmash.com_fg7",
+    "vendorUrl": "https://www.vrsmash.com/?link_data=eyJvZmZlcl9pZCI6IjI2IiwiYWZmX2lkIjoiODYiLCJjYW1wYWlnbl9pZCI6IjI3NDAiLCJsaW5rX2lkIjoiMzE1ODMiLCJjbGlja19pZCI6IjlkMGU3YzNiLTk5ZWItNDM4Mi1hZTI5LWZmYWZjYTc5YjNlYyIsImNyZWF0aXZlX2lkIjoiODEiLCJ0eXBlIjoibGFuZGluZyJ9",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vrporngalaxy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
