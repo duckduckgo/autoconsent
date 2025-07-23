@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_camper.com_udx",
+    "vendorUrl": "https://www.camper.com/en_AU",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?camper\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#background_blocking_cookies > div#popup_configuration_cookies > div:nth-child(7):not([id]) > span:nth-child(3)#popup_cookies_button_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#background_blocking_cookies > div#popup_configuration_cookies > div:nth-child(7):not([id]) > span:nth-child(3)#popup_cookies_button_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#background_blocking_cookies > div#popup_configuration_cookies > div:nth-child(7):not([id]) > span:nth-child(3)#popup_cookies_button_decline",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#background_blocking_cookies > div#popup_configuration_cookies > div:nth-child(7):not([id]) > span:nth-child(3)#popup_cookies_button_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
