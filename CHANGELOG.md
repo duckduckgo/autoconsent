@@ -1,3 +1,25 @@
+# v14.9.0 (Wed Jul 23 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to e7935b07845c1e76822103bcbf0676a3a147d67c [#836](https://github.com/duckduckgo/autoconsent/pull/836) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Add rule for app.discuss.io [#833](https://github.com/duckduckgo/autoconsent/pull/833) ([@muodov](https://github.com/muodov))
+- Add autoconsent rules for 1 sites [#834](https://github.com/duckduckgo/autoconsent/pull/834) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Cookie Information Banner: only hide if banner is actually left open [#840](https://github.com/duckduckgo/autoconsent/pull/840) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix the facebook rule [#805](https://github.com/duckduckgo/autoconsent/pull/805) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.8.0 (Tue Jul 15 2025)
 
 #### 🚀 Enhancement
