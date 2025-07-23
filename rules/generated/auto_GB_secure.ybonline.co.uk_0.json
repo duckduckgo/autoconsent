@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > button:nth-child(2)"
+            "exists": "body:not([id]) > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(2)#_evidon-barrier-declinebutton"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > button:nth-child(2)"
+            "visible": "body:not([id]) > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(2)#_evidon-barrier-declinebutton"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > button:nth-child(2)",
-            "text": "Reject optional cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(2)#_evidon-barrier-declinebutton",
+            "comment": "Reject optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(2)#_evidon-barrier-declinebutton",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
