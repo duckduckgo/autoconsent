@@ -1,21 +1,21 @@
 {
     "name": "auto_US_mychart.wellstar.org_pwj",
-    "vendorUrl": "https://mychart.wellstar.org/MyChart/Authentication/Login?",
+    "vendorUrl": "https://www.wellstar.org/",
     "cosmetic": false,
     "runContext": {
-        "main": false,
-        "frame": true,
+        "main": true,
+        "frame": false,
         "urlPattern": "^https?://(www\\.)?wellstar\\.org/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#prelogin > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(4)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn"
+            "exists": "body#home > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#prelogin > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(4)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn"
+            "visible": "body#home > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn"
         }
     ],
     "optIn": [],
@@ -24,13 +24,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#prelogin > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(4)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn",
+            "waitForThenClick": "body#home > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn",
             "comment": "Deny all cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#prelogin > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(4)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn",
+            "waitForVisible": "body#home > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn",
             "timeout": 1000,
             "check": "none"
         }
