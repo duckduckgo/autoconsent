@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_thws.de_swx",
+    "vendorUrl": "https://www.thws.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thws\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cc__modal__container > div:nth-child(1)#cc__modal > div:nth-child(3)#cc__modal__btns > button:nth-child(2)#cc__modal__decline__btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cc__modal__container > div:nth-child(1)#cc__modal > div:nth-child(3)#cc__modal__btns > button:nth-child(2)#cc__modal__decline__btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cc__modal__container > div:nth-child(1)#cc__modal > div:nth-child(3)#cc__modal__btns > button:nth-child(2)#cc__modal__decline__btn",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cc__modal__container > div:nth-child(1)#cc__modal > div:nth-child(3)#cc__modal__btns > button:nth-child(2)#cc__modal__decline__btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
