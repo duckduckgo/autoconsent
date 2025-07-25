@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_cgb.fr_9jo",
+    "vendorUrl": "https://www.cgb.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cgb\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies > div:nth-child(1):not([id]) > button:nth-child(3)#cookieRefuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies > div:nth-child(1):not([id]) > button:nth-child(3)#cookieRefuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies > div:nth-child(1):not([id]) > button:nth-child(3)#cookieRefuse",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies > div:nth-child(1):not([id]) > button:nth-child(3)#cookieRefuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
