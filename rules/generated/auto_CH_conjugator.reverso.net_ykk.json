@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_conjugator.reverso.net_ykk",
+    "vendorUrl": "https://conjugator.reverso.net/conjugation-english.html",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?conjugator\\.reverso\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])",
+            "comment": "Continue without agreeing →"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
