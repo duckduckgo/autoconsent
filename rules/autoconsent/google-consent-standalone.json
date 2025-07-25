@@ -3,13 +3,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         { "exists": "a[href^=\"https://policies.google.com/technologies/cookies\"" },
-        { "exists": "form[action^=\"https://consent.google.\"][action$=\"/save\"]" }
+        {
+            "exists": "form[action^=\"https://consent.google.\"][action$=\"/save\"],form[action^=\"https://consent.youtube.\"][action$=\"/save\"]"
+        }
     ],
     "detectPopup": [{ "visible": "a[href^=\"https://policies.google.com/technologies/cookies\"" }],
     "optIn": [
-        { "waitForThenClick": "form[action^=\"https://consent.google.\"][action$=\"/save\"]:has(input[name=set_eom][value=false]) button" }
+        {
+            "waitForThenClick": "form[action^=\"https://consent.google.\"][action$=\"/save\"]:has(input[name=set_eom][value=false]) button,form[action^=\"https://consent.youtube.\"][action$=\"/save\"]:has(input[name=set_eom][value=false]) button"
+        }
     ],
     "optOut": [
-        { "waitForThenClick": "form[action^=\"https://consent.google.\"][action$=\"/save\"]:has(input[name=set_eom][value=true]) button" }
+        {
+            "waitForThenClick": "form[action^=\"https://consent.google.\"][action$=\"/save\"]:has(input[name=set_eom][value=true]) button,form[action^=\"https://consent.youtube.\"][action$=\"/save\"]:has(input[name=set_eom][value=true]) button"
+        }
     ]
 }
