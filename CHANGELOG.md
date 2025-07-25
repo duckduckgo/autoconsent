@@ -1,3 +1,29 @@
+# v14.10.0 (Fri Jul 25 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to c620f1f1950adc8d8f709d80f60593ad8cb59ec3 [#848](https://github.com/duckduckgo/autoconsent/pull/848) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group with 5 updates [#839](https://github.com/duckduckgo/autoconsent/pull/839) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rule for shein.com [#844](https://github.com/duckduckgo/autoconsent/pull/844) ([@muodov](https://github.com/muodov))
+- [test] Add autoconsent rules for https://arthurbanana.com/arthur-banana/ [#846](https://github.com/duckduckgo/autoconsent/pull/846) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Bump the adblocker group with 2 updates [#838](https://github.com/duckduckgo/autoconsent/pull/838) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Fix rule for nos.nl [#847](https://github.com/duckduckgo/autoconsent/pull/847) ([@muodov](https://github.com/muodov))
+- extend google-standalone to youtube [#845](https://github.com/duckduckgo/autoconsent/pull/845) ([@muodov](https://github.com/muodov))
+- expand imdb rule to the mobile site [#843](https://github.com/duckduckgo/autoconsent/pull/843) ([@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.9.0 (Wed Jul 23 2025)
 
 #### 🚀 Enhancement
