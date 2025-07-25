@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_date50.ch_otn",
+    "vendorUrl": "https://www.date50.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?date50\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
