@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_metis.afpa.fr_ceo",
+    "vendorUrl": "https://metis.afpa.fr/login/index.php",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?metis\\.afpa\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page-wrapper > div:nth-child(7)#page > div#page-content > div#region-main-box > section#region-main > div:nth-child(2):not([id]) > div:nth-child(3)#loginform > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page-wrapper > div:nth-child(7)#page > div#page-content > div#region-main-box > section#region-main > div:nth-child(2):not([id]) > div:nth-child(3)#loginform > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page-wrapper > div:nth-child(7)#page > div#page-content > div#region-main-box > section#region-main > div:nth-child(2):not([id]) > div:nth-child(3)#loginform > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page-wrapper > div:nth-child(7)#page > div#page-content > div#region-main-box > section#region-main > div:nth-child(2):not([id]) > div:nth-child(3)#loginform > div:nth-child(5):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
