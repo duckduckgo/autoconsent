@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#home-2017 > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential"
+            "exists": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#home-2017 > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential"
+            "visible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body#home-2017 > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential",
             "comment": "Essential "
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
