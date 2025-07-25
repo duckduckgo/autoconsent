@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_keesvanderspek.nl_qvp",
+    "vendorUrl": "https://www.keesvanderspek.nl/nl",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?keesvanderspek\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "ALLEEN NOODZAKELIJKE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
