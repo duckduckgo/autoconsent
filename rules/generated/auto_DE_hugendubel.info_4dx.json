@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_hugendubel.info_4dx",
+    "vendorUrl": "https://www.hugendubel.info/home",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hugendubel\\.info/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#r215155-0-0 > dialog#r215156-0-0 > div:nth-child(2)#r215157-0-0 > div:nth-child(2)#r215158-0-0 > button:nth-child(2)#r215160-0-0"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#r215155-0-0 > dialog#r215156-0-0 > div:nth-child(2)#r215157-0-0 > div:nth-child(2)#r215158-0-0 > button:nth-child(2)#r215160-0-0"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#r215155-0-0 > dialog#r215156-0-0 > div:nth-child(2)#r215157-0-0 > div:nth-child(2)#r215158-0-0 > button:nth-child(2)#r215160-0-0",
+            "comment": "Nur erforderliche akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#r215155-0-0 > dialog#r215156-0-0 > div:nth-child(2)#r215157-0-0 > div:nth-child(2)#r215158-0-0 > button:nth-child(2)#r215160-0-0",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
