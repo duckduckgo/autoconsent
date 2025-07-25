@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_sso.passport.yandex.ru_pql",
+    "vendorUrl": "https://sso.passport.yandex.ru/showcaptcha?cc=1&form-fb-hint=8.188&mt=11835B7F37F433804FD292B9586F74ABF687AFBC6AF321F74BA7A4590AFD0F6190C57D78237E5601A03B813094EB0826CF89F735F3A7D829041E152B556A1A50A7F22CFA7905D4E7A5159F3492BADA1CCF0BFE353D55A09515DC1663B1342547C6CFE37394F1164C5586E0E029E807C594C9FFB73D7F20D62F1CA137194D23D33C52017967577606B8752F7B4F88E2F1457245127FCB0A3DA428B8D4020A1C3C5676307DD82A1B1E6008DB2D1E0EC6091E899774B6EBD742C18995DEC300B1925A35FC9E7EBE33127238FCA3C9D6D83ED420733DA4A3DDC217A53BD64531&retpath=aHR0cHM6Ly9zc28ucGFzc3BvcnQueWFuZGV4LnJ1L3B1c2g_cmV0cGF0aD1odHRwcyUzQSUyRiUyRnlhLnJ1JTJGJTNGbnIlM0QxJTI2cmVkaXJlY3RfdHMlM0QxNzUzNDU1MjI4LjAwMDAwJnV1aWQ9MTJlMWI5MjgtODBlZi00YTVlLTg3ZmUtOGQ2N2NhN2YyZmI2_490e90ef984e4babdeb88f7db6d7dc6a&t=2/1753455228/cd823d5448c12021e07df46f7bcfc324&u=6991924047974154471&s=1ae3409e9f48e20af3b6c4ebc9e479e4",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sso\\.passport\\.yandex\\.ru/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "comment": "Allow essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
