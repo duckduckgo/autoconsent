@@ -4,25 +4,25 @@
     "runContext": {
         "urlPattern": "^https://nos\\.nl/"
     },
-    "prehideSelectors": ["#ccm_notification_host"],
+    "prehideSelectors": ["ccm-notification"],
     "detectCmp": [
         {
-            "exists": "#ccm_notification_host"
+            "exists": "ccm-notification"
         }
     ],
     "detectPopup": [
         {
-            "visible": ["#ccm_notification_host", "#ccm_notification"]
+            "visible": ["ccm-notification"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#ccm_notification_host", "#ccm_close"]
+            "waitForThenClick": ["ccm-notification", "#ccm_close"]
         }
     ],
     "optOut": [
         {
-            "hide": "#ccm_notification_host"
+            "hide": "ccm-notification"
         }
     ]
 }
