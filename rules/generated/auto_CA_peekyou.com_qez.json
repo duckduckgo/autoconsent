@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_peekyou.com_qez",
+    "vendorUrl": "https://www.peekyou.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?peekyou\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#index_landing > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#index_landing > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#index_landing > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-consent",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#index_landing > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

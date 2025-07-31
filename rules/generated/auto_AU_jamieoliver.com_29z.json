@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_jamieoliver.com_29z",
+    "vendorUrl": "https://www.jamieoliver.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jamieoliver\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#default > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#default > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#default > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#default > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

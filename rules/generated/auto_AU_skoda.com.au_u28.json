@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_skoda.com.au_u28",
+    "vendorUrl": "https://www.skoda.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?skoda\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler",
+            "comment": "Reject All optional"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

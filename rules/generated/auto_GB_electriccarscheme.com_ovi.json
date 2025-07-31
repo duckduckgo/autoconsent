@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_electriccarscheme.com_ovi",
+    "vendorUrl": "https://www.electriccarscheme.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?electriccarscheme\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#collection-63e560080fa5763d7cee86f9 > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#collection-63e560080fa5763d7cee86f9 > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#collection-63e560080fa5763d7cee86f9 > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#collection-63e560080fa5763d7cee86f9 > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

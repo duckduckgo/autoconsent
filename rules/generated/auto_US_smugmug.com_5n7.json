@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_smugmug.com_5n7",
+    "vendorUrl": "https://www.smugmug.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?smugmug\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#gdpr-reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#gdpr-reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#gdpr-reject-cookies",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#gdpr-reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_ajbell.co.uk_e33",
+    "vendorUrl": "https://www.ajbell.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ajbell\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential",
+            "comment": "Accept essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
