@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_sip-scootershop.com_ka9",
+    "vendorUrl": "https://www.sip-scootershop.com/en",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sip-scootershop\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(7):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#decline-tracking-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(7):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#decline-tracking-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(7):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#decline-tracking-cookies",
+            "comment": "DECLINE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(7):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#decline-tracking-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

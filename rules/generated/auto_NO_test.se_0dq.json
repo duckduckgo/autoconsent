@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_test.se_0dq",
+    "vendorUrl": "https://www.test.se/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?test\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-bar > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-bar > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#accept-necessary",
+            "comment": "BARA NÖDVÄNDIGA"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

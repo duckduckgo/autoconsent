@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#homepage > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn"
+            "exists": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#homepage > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn"
+            "visible": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body#homepage > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn",
             "comment": "REQUIRED COOKIES ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_oberrieden.ch_pb0",
+    "vendorUrl": "https://www.oberrieden.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oberrieden\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-0 > div:nth-child(1)#my-page > div:nth-child(2):not([id]) > div:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-0 > div:nth-child(1)#my-page > div:nth-child(2):not([id]) > div:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-0 > div:nth-child(1)#my-page > div:nth-child(2):not([id]) > div:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES VERWEIGERN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-0 > div:nth-child(1)#my-page > div:nth-child(2):not([id]) > div:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

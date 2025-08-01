@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_netze-bw.de_vbm",
+    "vendorUrl": "https://www.netze-bw.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?netze-bw\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#\\37 8f684e4-9943-4bb0-90d1-9779e4114c3d > div#CookieBanner > div:not([id]) > div#radix-\\:r0\\: > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#\\37 8f684e4-9943-4bb0-90d1-9779e4114c3d > div#CookieBanner > div:not([id]) > div#radix-\\:r0\\: > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#\\37 8f684e4-9943-4bb0-90d1-9779e4114c3d > div#CookieBanner > div:not([id]) > div#radix-\\:r0\\: > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Nur funktionale Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#\\37 8f684e4-9943-4bb0-90d1-9779e4114c3d > div#CookieBanner > div:not([id]) > div#radix-\\:r0\\: > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

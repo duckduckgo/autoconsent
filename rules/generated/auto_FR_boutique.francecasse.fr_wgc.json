@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_boutique.francecasse.fr_wgc",
+    "vendorUrl": "https://boutique.francecasse.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boutique\\.francecasse\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#idxrcookies > div#center > div:not([id]) > div#idxrcookie-content > div:nth-child(1)#top-content-cookie-h > a#idxrcookiesPartial"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#idxrcookies > div#center > div:not([id]) > div#idxrcookie-content > div:nth-child(1)#top-content-cookie-h > a#idxrcookiesPartial"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#idxrcookies > div#center > div:not([id]) > div#idxrcookie-content > div:nth-child(1)#top-content-cookie-h > a#idxrcookiesPartial",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#idxrcookies > div#center > div:not([id]) > div#idxrcookie-content > div:nth-child(1)#top-content-cookie-h > a#idxrcookiesPartial",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

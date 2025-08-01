@@ -1,6 +1,6 @@
 {
     "name": "auto_CA_lawyer.com_glx",
-    "vendorUrl": "http://www.lawyer.com/",
+    "vendorUrl": "https://www.lawyer.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Necessary Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

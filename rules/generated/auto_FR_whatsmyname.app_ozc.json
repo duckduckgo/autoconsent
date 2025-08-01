@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_whatsmyname.app_ozc",
+    "vendorUrl": "https://www.whatsmyname.app/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?whatsmyname\\.app/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#wmn-cookie-consent-modal > div:not([id]) > div#wmn-cookie-consent > button:nth-child(4)#declineCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#wmn-cookie-consent-modal > div:not([id]) > div#wmn-cookie-consent > button:nth-child(4)#declineCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#wmn-cookie-consent-modal > div:not([id]) > div#wmn-cookie-consent > button:nth-child(4)#declineCookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#wmn-cookie-consent-modal > div:not([id]) > div#wmn-cookie-consent > button:nth-child(4)#declineCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

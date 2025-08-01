@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_horrengigant.nl_23j",
+    "vendorUrl": "https://www.horrengigant.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?horrengigant\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form1 > div:nth-child(10):not([id]) > span:nth-child(2)#CookieWallControl > div:nth-child(1)#CookieWallContainer > a:nth-child(6):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form1 > div:nth-child(10):not([id]) > span:nth-child(2)#CookieWallControl > div:nth-child(1)#CookieWallContainer > a:nth-child(6):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form1 > div:nth-child(10):not([id]) > span:nth-child(2)#CookieWallControl > div:nth-child(1)#CookieWallContainer > a:nth-child(6):not([id])",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form1 > div:nth-child(10):not([id]) > span:nth-child(2)#CookieWallControl > div:nth-child(1)#CookieWallContainer > a:nth-child(6):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

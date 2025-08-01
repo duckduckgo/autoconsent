@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_niviuk.com_rmm",
+    "vendorUrl": "https://niviuk.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?niviuk\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#msg_cookies_fbox > div#cookies_text > div:nth-child(3)#cookies_botons > form:not([id]) > button:nth-child(2)#boto_acceptar_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#msg_cookies_fbox > div#cookies_text > div:nth-child(3)#cookies_botons > form:not([id]) > button:nth-child(2)#boto_acceptar_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#msg_cookies_fbox > div#cookies_text > div:nth-child(3)#cookies_botons > form:not([id]) > button:nth-child(2)#boto_acceptar_cookies",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#msg_cookies_fbox > div#cookies_text > div:nth-child(3)#cookies_botons > form:not([id]) > button:nth-child(2)#boto_acceptar_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

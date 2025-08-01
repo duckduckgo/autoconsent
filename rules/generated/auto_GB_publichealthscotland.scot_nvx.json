@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal"
+            "exists": "body > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal"
+            "visible": "body > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieModal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a#reject-all-cookies-modal",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

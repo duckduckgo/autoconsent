@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_bahnprojekt-stuttgart-ulm.de_2d3",
+    "vendorUrl": "https://www.bahnprojekt-stuttgart-ulm.de/aktuell/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bahnprojekt-stuttgart-ulm\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookienotice_box > div#cookienotice_box_inner > div:nth-child(7):not([id]) > a:nth-child(2)#cookienotice_box_decline_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookienotice_box > div#cookienotice_box_inner > div:nth-child(7):not([id]) > a:nth-child(2)#cookienotice_box_decline_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookienotice_box > div#cookienotice_box_inner > div:nth-child(7):not([id]) > a:nth-child(2)#cookienotice_box_decline_all",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookienotice_box > div#cookienotice_box_inner > div:nth-child(7):not([id]) > a:nth-child(2)#cookienotice_box_decline_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

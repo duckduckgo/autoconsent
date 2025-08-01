@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_barnes-international.com_sf5",
+    "vendorUrl": "https://www.barnes-international.com//",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?barnes-international\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#managerCookies > div:not([id]) > div:not([id]) > form#form_manager_cookie > div:nth-child(1):not([id]) > a#btn-cookie-off-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#managerCookies > div:not([id]) > div:not([id]) > form#form_manager_cookie > div:nth-child(1):not([id]) > a#btn-cookie-off-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#managerCookies > div:not([id]) > div:not([id]) > form#form_manager_cookie > div:nth-child(1):not([id]) > a#btn-cookie-off-all",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#managerCookies > div:not([id]) > div:not([id]) > form#form_manager_cookie > div:nth-child(1):not([id]) > a#btn-cookie-off-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
