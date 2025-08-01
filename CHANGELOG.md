@@ -1,3 +1,21 @@
+# v14.10.1 (Fri Aug 01 2025)
+
+#### 🐛 Bug Fix
+
+- Fix on1.com rule [#851](https://github.com/duckduckgo/autoconsent/pull/851) ([@sammacbeth](https://github.com/sammacbeth))
+- [test] Add autoconsent rules for https://epoch.ai/ [#850](https://github.com/duckduckgo/autoconsent/pull/850) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Coverage data update [#842](https://github.com/duckduckgo/autoconsent/pull/842) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.10.0 (Fri Jul 25 2025)
 
 #### 🚀 Enhancement
