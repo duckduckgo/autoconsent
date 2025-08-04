@@ -1,0 +1,2 @@
+import generateCMPTests from '../../playwright/runner';
+generateCMPTests('auto_AU_almanac.com_656', ['https://www.almanac.com/'], { testOptIn: false, testSelfTest: true, onlyRegions: ['AU'] });
