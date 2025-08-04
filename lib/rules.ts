@@ -18,6 +18,7 @@ export type AutoConsentCMPRule = {
     readonly test?: AutoConsentRuleStep[];
     readonly comment?: string;
     readonly minimumRuleStepVersion?: number;
+    readonly reviewUpdates?: boolean;
 };
 
 export type RunContext = {
