@@ -62,7 +62,13 @@ function waitForMessage(receivedMessages: ContentScriptMessage[], msg: Partial<C
     return waitFor(() => isMessageReceived(receivedMessages, msg), maxTimes, interval);
 }
 
-async function assertMessageReceived(receivedMessages: ContentScriptMessage[], msg: Partial<ContentScriptMessage>, expectedState = true, maxTimes = 50, interval = 500) {
+async function assertMessageReceived(
+    receivedMessages: ContentScriptMessage[],
+    msg: Partial<ContentScriptMessage>,
+    expectedState = true,
+    maxTimes = 50,
+    interval = 500,
+) {
     await waitForMessage(receivedMessages, msg, maxTimes, interval);
     expect(isMessageReceived(receivedMessages, msg)).toBe(expectedState);
 }
@@ -221,7 +227,6 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 await takeScreenshot(`${screenshotCounter++}-failure`);
                 throw e;
             }
-
         });
     }
 
