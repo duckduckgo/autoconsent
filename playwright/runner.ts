@@ -22,6 +22,7 @@ type TestOptions = {
     onlyRegions?: string[];
     mobile: boolean;
     expectPopupOpen: boolean;
+    expectedRuns: number;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -31,6 +32,7 @@ const defaultOptions: TestOptions = {
     onlyRegions: [],
     mobile: false,
     expectPopupOpen: true,
+    expectedRuns: 1,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -192,6 +194,17 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                         expect(msg.details.msg, 'only "multiple CMPs" errors are allowed').toContain('Found multiple CMPs');
                     }
                 });
+
+                try {
+                    await page.waitForLoadState('networkidle', { timeout: 5000 });
+                } catch (e) {
+                    // ignore timeout errors
+                }
+                await page.waitForTimeout(3000); // capture potential reloads
+                if (options.expectPopupOpen) {
+                    // check that the autoconsentDone message was received the expected number of times (typically 1)
+                    expect(received.filter((msg) => msg.type === 'autoconsentDone').length, 'Too many autoconsentDone messages (reload loop?)').toBe(options.expectedRuns);
+                }
             } catch (e) {
                 await takeScreenshot(`${screenshotCounter++}-failure`);
                 throw e;
