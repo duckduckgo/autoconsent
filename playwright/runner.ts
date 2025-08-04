@@ -63,6 +63,7 @@ function waitForMessage(receivedMessages: ContentScriptMessage[], msg: Partial<C
 }
 
 async function assertMessageReceived(
+    failureMessage: string,
     receivedMessages: ContentScriptMessage[],
     msg: Partial<ContentScriptMessage>,
     expectedState = true,
@@ -70,15 +71,16 @@ async function assertMessageReceived(
     interval = 500,
 ) {
     await waitForMessage(receivedMessages, msg, maxTimes, interval);
-    expect(isMessageReceived(receivedMessages, msg)).toBe(expectedState);
+    expect(isMessageReceived(receivedMessages, msg), failureMessage).toBe(expectedState);
 }
 
 export function generateTest(url: string, expectedCmp: string, options: TestOptions, autoAction: AutoAction | null) {
     const domain = new URL(url).hostname;
     const urlHash = crypto.createHash('md5').update(url).digest('hex').slice(0, 4);
     const formFactor = options.mobile ? 'mobile' : 'desktop';
+    const testName = `${domain} ${urlHash} .${testRegion} ${autoAction} ${formFactor}`;
 
-    test(`${domain} ${urlHash} .${testRegion} ${autoAction} ${formFactor}`, async ({ page }, { project }) => {
+    test(testName, async ({ page }, { project }) => {
         let screenshotCounter = 0;
 
         if ((options.mobile && !project.use.isMobile) || (!options.mobile && project.use.isMobile)) {
@@ -181,10 +183,10 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
         try {
             // wait for all messages and assertions
             const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: expectedCmp };
-            await assertMessageReceived(received, expectedCmpDetected);
+            await assertMessageReceived(`${expectedCmp} not detected`, received, expectedCmpDetected);
 
             const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: expectedCmp };
-            await assertMessageReceived(received, expectedPopupFound, options.expectPopupOpen, options.expectPopupOpen ? 50 : 5, 500);
+            await assertMessageReceived(`${expectedCmp} popup not found`, received, expectedPopupFound, options.expectPopupOpen, options.expectPopupOpen ? 50 : 5, 500);
 
             if (options.expectPopupOpen) {
                 const expectedOptOutResult: Partial<ContentScriptMessage> = { type: 'optOutResult', result: true };
@@ -193,15 +195,15 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 const expectedAutoconsentDone: Partial<ContentScriptMessage> = { type: 'autoconsentDone', cmp: expectedCmp };
 
                 if (autoAction === 'optOut') {
-                    await assertMessageReceived(received, expectedOptOutResult, true, 50, 300);
+                    await assertMessageReceived(`${expectedCmp} optOut failed`, received, expectedOptOutResult, true, 50, 300);
                 }
                 if (autoAction === 'optIn') {
-                    await assertMessageReceived(received, expectedOptInResult, true, 50, 300);
+                    await assertMessageReceived(`${expectedCmp} optIn failed`, received, expectedOptInResult, true, 50, 300);
                 }
                 if (options.testSelfTest && selfTestFrame) {
-                    await assertMessageReceived(received, expectedSelfTestResult, true, 50, 300);
+                    await assertMessageReceived(`${expectedCmp} self test failed`, received, expectedSelfTestResult, true, 50, 300);
                 }
-                await assertMessageReceived(received, expectedAutoconsentDone, true, 10, 500);
+                await assertMessageReceived(`${expectedCmp} not done`, received, expectedAutoconsentDone, true, 10, 500);
             }
 
             received.forEach((msg) => {
