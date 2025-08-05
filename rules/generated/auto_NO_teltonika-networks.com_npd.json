@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_teltonika-networks.com_npd",
+    "vendorUrl": "https://teltonika-networks.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?teltonika-networks\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessary_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessary_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessary_cookies",
+            "comment": "USE ONLY NECESSARY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessary_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
