@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button"
+            "exists": "body > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button"
+            "visible": "body > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button",
             "comment": "Reject all non-essential cookies and continue"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
