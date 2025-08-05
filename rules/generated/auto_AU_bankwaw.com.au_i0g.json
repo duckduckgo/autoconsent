@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_bankwaw.com.au_i0g",
+    "vendorUrl": "https://www.bankwaw.com.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bankwaw\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#Form > div:nth-child(10):not([id]) > div:nth-child(4)#content > div:nth-child(3)#dnn_ContentPaneBottom > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div#dnn_ctr2406_ContentPane > div#dnn_ctr2406_ModuleContent > div#mvcContainer-2406 > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#Form > div:nth-child(10):not([id]) > div:nth-child(4)#content > div:nth-child(3)#dnn_ContentPaneBottom > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div#dnn_ctr2406_ContentPane > div#dnn_ctr2406_ModuleContent > div#mvcContainer-2406 > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#Form > div:nth-child(10):not([id]) > div:nth-child(4)#content > div:nth-child(3)#dnn_ContentPaneBottom > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div#dnn_ctr2406_ContentPane > div#dnn_ctr2406_ModuleContent > div#mvcContainer-2406 > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#Form > div:nth-child(10):not([id]) > div:nth-child(4)#content > div:nth-child(3)#dnn_ContentPaneBottom > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div#dnn_ctr2406_ContentPane > div#dnn_ctr2406_ModuleContent > div#mvcContainer-2406 > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
