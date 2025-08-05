@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
+            "exists": "body > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
+            "visible": "body > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body#hgcBody > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo",
             "comment": " I do not accept cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-banner > a:nth-child(6)#btnCookieBannerNo",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
