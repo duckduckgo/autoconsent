@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_escort-side.dk_6xn",
+    "vendorUrl": "https://www.escort-side.dk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?escort-side\\.dk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiePolicyModal > div#cookie_policy > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#acceptNecessaryCookiePolicyBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiePolicyModal > div#cookie_policy > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#acceptNecessaryCookiePolicyBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiePolicyModal > div#cookie_policy > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#acceptNecessaryCookiePolicyBtn",
+            "comment": "Accept Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiePolicyModal > div#cookie_policy > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#acceptNecessaryCookiePolicyBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
