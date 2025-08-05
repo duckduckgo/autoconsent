@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_tcl.com_2v9",
+    "vendorUrl": "https://www.tcl.com/no/nb",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tcl\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#container-d3fa4bc94c > div:not([id]) > div#container-586a0cef17 > div:nth-child(3):not([id]) > div#experiencefragment-9bfc8a501f > div#container-4b73e8b642 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#container-d3fa4bc94c > div:not([id]) > div#container-586a0cef17 > div:nth-child(3):not([id]) > div#experiencefragment-9bfc8a501f > div#container-4b73e8b642 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#container-d3fa4bc94c > div:not([id]) > div#container-586a0cef17 > div:nth-child(3):not([id]) > div#experiencefragment-9bfc8a501f > div#container-4b73e8b642 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(2):not([id])",
+            "comment": "Refuse all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#container-d3fa4bc94c > div:not([id]) > div#container-586a0cef17 > div:nth-child(3):not([id]) > div#experiencefragment-9bfc8a501f > div#container-4b73e8b642 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
