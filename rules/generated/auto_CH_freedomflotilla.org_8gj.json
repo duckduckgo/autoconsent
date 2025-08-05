@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_freedomflotilla.org_8gj",
+    "vendorUrl": "https://freedomflotilla.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?newscord\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > main:nth-child(1):not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > main:nth-child(1):not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > main:nth-child(1):not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > main:nth-child(1):not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
