@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_bpi.com.ph_kcj",
+    "vendorUrl": "https://www.bpi.com.ph/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bpi\\.com\\.ph/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#container-4227ea7804 > div:not([id]) > div:nth-child(7):not([id]) > div#experiencefragment-933ee6a0ae > div#container-475d9fc520 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button#button-39e1dd94fa > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#container-4227ea7804 > div:not([id]) > div:nth-child(7):not([id]) > div#experiencefragment-933ee6a0ae > div#container-475d9fc520 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button#button-39e1dd94fa > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#container-4227ea7804 > div:not([id]) > div:nth-child(7):not([id]) > div#experiencefragment-933ee6a0ae > div#container-475d9fc520 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button#button-39e1dd94fa > div:nth-child(1):not([id])",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#container-4227ea7804 > div:not([id]) > div:nth-child(7):not([id]) > div#experiencefragment-933ee6a0ae > div#container-475d9fc520 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button#button-39e1dd94fa > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
