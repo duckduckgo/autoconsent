@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_caixabank.es_l9k",
+    "vendorUrl": "https://www.caixabank.es/particular/home/particulares_es.html",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?caixabank\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div > div:not([id]) > div#cookies-banner > div:nth-child(1)#cookie-form > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span#cookies-deny-button > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div > div:not([id]) > div#cookies-banner > div:nth-child(1)#cookie-form > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span#cookies-deny-button > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div > div:not([id]) > div#cookies-banner > div:nth-child(1)#cookie-form > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span#cookies-deny-button > a:not([id])",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div > div:not([id]) > div#cookies-banner > div:nth-child(1)#cookie-form > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span#cookies-deny-button > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
