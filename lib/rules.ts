@@ -22,7 +22,7 @@ export type AutoConsentCMPRule = {
     readonly comment?: string;
     readonly minimumRuleStepVersion?: number;
     readonly _metadata?: {
-        readonly reviewUpdates?: boolean;
+        readonly manuallyReviewUpdates?: boolean;
         readonly vendorUrl?: string;
     };
 };
