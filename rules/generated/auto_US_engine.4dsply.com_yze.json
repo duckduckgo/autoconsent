@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_engine.4dsply.com_yze",
+    "vendorUrl": "https://engine.4dsply.com/Redirect.eng?MediaSegmentId=99838&dcid=&vmId=00000000-0000-0000-0000-000000000000&abr=false&timeZoneOffset=0&dst=False&v=s-JMevZSkd69ZwX8Uxmdh8dRqJyXwfwGz0_nT0cSSLcm4XpcgJdsNyH4uDw6JPeqJIP-8_zCsBoFQmZMMsLxMSz5ej98eRRl-0Hp6ZRBnkTSK2J5H5Ok8X6xUyziPGlJD9f4Tloio6E3li97-7616z596oTYj-A9FHHgX_fTOw_4yFi4m-6R2-CmaQsLpyw7oACLwYW8fOaXdHUrrkLfPv-4_2Kw2xNCjL2tKxgKAVllc8hkm1HPY71U4GcIhGjCsYshvZyDVAPH8-LxdE4RtP4w3y6xma1U61IYBlqokH_-APBka0gAM7IK5lz5uuJ4c5wXy7N1RdnXDFWqydb0hJhObsksE_WjU6BwpSow-bHJ6cdSuzt6PBgPGOPhs81sRasOpbOb4R7W60bzVAXxjYdpMzg52RwpjcCc4r5uJnJOn3L-m-o2Cdu9tQiewJx5HDMrdzXJeJ5ngFp0HlRdUshkNic_diuA8AI8S1m2D3fBNWskbfc5BknH0U6_D7qDAZ_O70LeoXN_SIv9-B_JLyI_ybhT-w5EMbXO-uizSvtkZvia9CUpb_keNI-wntfx3QzivuI13Xyf-dod1QiYYmaw9CLKpaTzrMx-FEra-NdGPHeN6lRcWwGI7aDlpIBFVUnFN89w8sfmxgF4lI5jf2O0EQzOjxXXY2HlHxbXos-SnmTQSxgnBnihl617kHRVj-BNID9Z1cHmZUH3obB-eCYrmBygkiuV5YzcrFUjpI6zbbTKJ6ERc36yeHLOMXXau7Ht3oLMuUEjHLf8g2_lmoYYsQuDC5xrWXgM3atnPWMRmfcus-pCxys-_uU9UIRwqmo-CA7x8y6ChjQ_x3sqwkBo1C8j-L9NxmX_oBC6rsxCKYrBHTJXgZGHCVlaWDSt3MkTVRTVY0re4Ikee1Yuj5NzX5_S2p5RcyaRySiNu8bT7XrJhlYd0uhKhUbKzq-KymhS4Wwcs7o2-_nvfqGlmOnCP4zmAzD57aULFdALiEkeXj3tUlSCTFcPAnchjl8x0&kw=&mw=1024&mh=768&at=&dc=c8UYVDOIWsay1_jC1D1ePDBSzpIsAeWC8OCtU3sUl8zbAezJcOBu-v0QdoXuSU9woJ4VPgBilvC2xEsRXisWHQ2&res=1920x1080&spt=0&kw=",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mycharisma\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
