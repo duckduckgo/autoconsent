@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > section:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > section:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > section:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]",
             "comment": "I Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
