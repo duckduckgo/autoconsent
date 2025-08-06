@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])"
+            "exists": "body > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])"
+            "visible": "body > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])",
-            "comment": "Reject"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])",
+            "comment": "Reject All Optional"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > nkd-cookie-banner:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > span:not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
