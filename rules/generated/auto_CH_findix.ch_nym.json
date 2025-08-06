@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_findix.ch_nym",
+    "vendorUrl": "https://www.findix.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?findix\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
