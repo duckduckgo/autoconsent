@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_odido.nl_2wd",
+    "vendorUrl": "https://www.odido.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?odido\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sCHGtwuADuBHEEAAIsFJwAICGvBsEHHs > div:not([id]) > form:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#Row1_Column1_Cell1_CookieSettings_AdvancedSaveCancel"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sCHGtwuADuBHEEAAIsFJwAICGvBsEHHs > div:not([id]) > form:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#Row1_Column1_Cell1_CookieSettings_AdvancedSaveCancel"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sCHGtwuADuBHEEAAIsFJwAICGvBsEHHs > div:not([id]) > form:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#Row1_Column1_Cell1_CookieSettings_AdvancedSaveCancel",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sCHGtwuADuBHEEAAIsFJwAICGvBsEHHs > div:not([id]) > form:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#Row1_Column1_Cell1_CookieSettings_AdvancedSaveCancel",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
