@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_moncompte.permisdeconduire.gouv.fr_8ug",
+    "vendorUrl": "https://moncompte.permisdeconduire.gouv.fr/auth/realms/usager/protocol/openid-connect/auth?response_type=code&client_id=gndc-mes-points-permis&scope=openid&state=3Zn-NI0nQPinp6TmQ0V3NnVi43QmcmNU7yHO1ong8ac%3D&redirect_uri=https://mespoints.permisdeconduire.gouv.fr/login/oauth2/code/mes-points-permis&nonce=7fx5XnvqnHxWQzdmv_Ptz3yvoZGn5RN740EhKtikzlM",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?moncompte\\.permisdeconduire\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div:nth-child(2)#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div:nth-child(2)#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div:nth-child(2)#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div:nth-child(2)#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
