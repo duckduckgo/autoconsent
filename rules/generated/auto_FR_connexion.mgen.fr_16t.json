@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_connexion.mgen.fr_16t",
+    "vendorUrl": "https://connexion.mgen.fr/auth/realms/mgen//protocol/openid-connect/auth?client_id=mgen-epg-app-oidc&scope=openid&response_type=code&code_challenge_method=S256&redirect_uri=https://mon.espace-personnel.mgen.fr/&code_challenge=iXcJNmZ8iJGxINA0u2zIwYtveP8El3LCvf5yqhBi5WQ&state=fEBBLxOr25ZEVy56YQhxjEB2dHBH8MzC64wLeEVW&referer=mgen-epg-app-oidc",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?connexion\\.mgen\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
