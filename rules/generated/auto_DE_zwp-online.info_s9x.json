@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_zwp-online.info_s9x",
+    "vendorUrl": "https://www.zwp-online.info/de",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zwp-online\\.info/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-box > div:not([id]) > div:not([id]) > div:nth-child(6)#buttonDefaultSelection > button:nth-child(1)#cookiesDisabled"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-box > div:not([id]) > div:not([id]) > div:nth-child(6)#buttonDefaultSelection > button:nth-child(1)#cookiesDisabled"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-box > div:not([id]) > div:not([id]) > div:nth-child(6)#buttonDefaultSelection > button:nth-child(1)#cookiesDisabled",
+            "comment": "Nur notwendige akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-box > div:not([id]) > div:not([id]) > div:nth-child(6)#buttonDefaultSelection > button:nth-child(1)#cookiesDisabled",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
