@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_handy-deutschland.de_bcs",
+    "vendorUrl": "https://www.handy-deutschland.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?handy-deutschland\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-settings > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-settings > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-settings > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-settings > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
