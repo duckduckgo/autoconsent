@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_pharmaphant.de_ko2",
+    "vendorUrl": "https://www.pharmaphant.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pharmaphant\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).overflow-x-hidden > comply-consent-manager:nth-child(24):not([id]) > div:nth-child(1)#comply-consent-manager > div:nth-child(1):not([id]).comply-Menu > div:nth-child(3):not([id]).comply-ButtonWrapper > button:nth-child(2):not([id]).comply-SaveSettingsButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).overflow-x-hidden > comply-consent-manager:nth-child(24):not([id]) > div:nth-child(1)#comply-consent-manager > div:nth-child(1):not([id]).comply-Menu > div:nth-child(3):not([id]).comply-ButtonWrapper > button:nth-child(2):not([id]).comply-SaveSettingsButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).overflow-x-hidden > comply-consent-manager:nth-child(24):not([id]) > div:nth-child(1)#comply-consent-manager > div:nth-child(1):not([id]).comply-Menu > div:nth-child(3):not([id]).comply-ButtonWrapper > button:nth-child(2):not([id]).comply-SaveSettingsButton",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).overflow-x-hidden > comply-consent-manager:nth-child(24):not([id]) > div:nth-child(1)#comply-consent-manager > div:nth-child(1):not([id]).comply-Menu > div:nth-child(3):not([id]).comply-ButtonWrapper > button:nth-child(2):not([id]).comply-SaveSettingsButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
