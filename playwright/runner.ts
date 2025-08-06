@@ -48,6 +48,25 @@ export async function injectContentScript(page: Page | Frame) {
 
 const screenshotsDir = path.join(__dirname, '../test-results/screenshots');
 
+function findReceivedMessages(receivedMessages: ContentScriptMessage[], msg: Partial<ContentScriptMessage>) {
+    return receivedMessages.filter((m) => {
+        return Object.keys(msg).every((k) => (<any>m)[k] === (<any>msg)[k]);
+    });
+}
+
+function isMessageReceived(receivedMessages: ContentScriptMessage[], msg: Partial<ContentScriptMessage>) {
+    return findReceivedMessages(receivedMessages, msg).length > 0;
+}
+
+function waitForMessage(receivedMessages: ContentScriptMessage[], msg: Partial<ContentScriptMessage>, maxTimes = 50, interval = 500) {
+    return waitFor(() => isMessageReceived(receivedMessages, msg), maxTimes, interval);
+}
+
+async function assertMessageReceived(receivedMessages: ContentScriptMessage[], msg: Partial<ContentScriptMessage>, expectedState = true, maxTimes = 50, interval = 500) {
+    await waitForMessage(receivedMessages, msg, maxTimes, interval);
+    expect(isMessageReceived(receivedMessages, msg)).toBe(expectedState);
+}
+
 export function generateTest(url: string, expectedCmp: string, options: TestOptions = defaultOptions) {
     const domain = new URL(url).hostname;
     const urlHash = crypto.createHash('md5').update(url).digest('hex').slice(0, 4);
@@ -55,12 +74,7 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
     function genTest(autoAction: AutoAction) {
         test(`${domain} ${urlHash} .${testRegion} ${autoAction} ${formFactor}`, async ({ page }, { project }) => {
             let screenshotCounter = 0;
-            if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
-                test.skip();
-            }
-            if (options.skipRegions && options.skipRegions.includes(testRegion)) {
-                test.skip();
-            }
+
             if ((options.mobile && !project.use.isMobile) || (!options.mobile && project.use.isMobile)) {
                 test.skip();
             }
@@ -69,18 +83,12 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 page.on('console', async (msg) => {
                     console.log(`    page log:`, msg.text());
                 });
+
             await page.exposeBinding('autoconsentSendMessage', messageCallback);
             await page.goto(url, { waitUntil: 'commit' });
 
             // set up a messaging function
             const received: ContentScriptMessage[] = [];
-
-            function isMessageReceived(msg: Partial<ContentScriptMessage>, partial = true) {
-                return received.some((m) => {
-                    const keysMatch = partial || Object.keys(m).length === Object.keys(msg).length;
-                    return keysMatch && Object.keys(msg).every((k) => (<any>m)[k] === (<any>msg)[k]);
-                });
-            }
 
             async function takeScreenshot(name: string) {
                 try {
@@ -94,8 +102,8 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                         timeout: 2000,
                         type: 'jpeg',
                     });
-                } catch (e) {
-                    console.error(`Failed to take screenshot ${name}`, e);
+                } catch (e: any) {
+                    console.error(`Failed to take screenshot ${name}`, e.message);
                 }
             }
 
@@ -166,27 +174,28 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
 
             try {
                 // wait for all messages and assertions
-                await waitFor(() => isMessageReceived({ type: 'cmpDetected', cmp: expectedCmp }), 50, 500);
-                expect(isMessageReceived({ type: 'cmpDetected', cmp: expectedCmp })).toBe(true);
+                const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: expectedCmp };
+                await assertMessageReceived(received, expectedCmpDetected);
 
-                await waitFor(() => isMessageReceived({ type: 'popupFound', cmp: expectedCmp }), options.expectPopupOpen ? 50 : 5, 500);
-                expect(isMessageReceived({ type: 'popupFound', cmp: expectedCmp })).toBe(options.expectPopupOpen);
+                const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: expectedCmp };
+                await assertMessageReceived(received, expectedPopupFound, options.expectPopupOpen, options.expectPopupOpen ? 50 : 5, 500);
 
                 if (options.expectPopupOpen) {
+                    const expectedOptOutResult: Partial<ContentScriptMessage> = { type: 'optOutResult', result: true };
+                    const expectedOptInResult: Partial<ContentScriptMessage> = { type: 'optInResult', result: true };
+                    const expectedSelfTestResult: Partial<ContentScriptMessage> = { type: 'selfTestResult', result: true };
+                    const expectedAutoconsentDone: Partial<ContentScriptMessage> = { type: 'autoconsentDone', cmp: expectedCmp };
+
                     if (autoAction === 'optOut') {
-                        await waitFor(() => isMessageReceived({ type: 'optOutResult', result: true }), 50, 300);
-                        expect(isMessageReceived({ type: 'optOutResult', result: true })).toBe(true);
+                        await assertMessageReceived(received, expectedOptOutResult, true, 50, 300);
                     }
                     if (autoAction === 'optIn') {
-                        await waitFor(() => isMessageReceived({ type: 'optInResult', result: true }), 50, 300);
-                        expect(isMessageReceived({ type: 'optInResult', result: true })).toBe(true);
+                        await assertMessageReceived(received, expectedOptInResult, true, 50, 300);
                     }
                     if (options.testSelfTest && selfTestFrame) {
-                        await waitFor(() => isMessageReceived({ type: 'selfTestResult', result: true }), 50, 300);
-                        expect(isMessageReceived({ type: 'selfTestResult', result: true })).toBe(true);
+                        await assertMessageReceived(received, expectedSelfTestResult, true, 50, 300);
                     }
-                    await waitFor(() => isMessageReceived({ type: 'autoconsentDone' }), 10, 500);
-                    expect(isMessageReceived({ type: 'autoconsentDone' })).toBe(true);
+                    await assertMessageReceived(received, expectedAutoconsentDone, true, 10, 500);
                 }
 
                 received.forEach((msg) => {
@@ -203,13 +212,24 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
                 await page.waitForTimeout(3000); // capture potential reloads
                 if (options.expectPopupOpen) {
                     // check that the autoconsentDone message was received the expected number of times (typically 1)
-                    expect(received.filter((msg) => msg.type === 'autoconsentDone').length, 'Too many autoconsentDone messages (reload loop?)').toBe(options.expectedRuns);
+                    expect(
+                        findReceivedMessages(received, { type: 'autoconsentDone' }).length,
+                        'Possible reload loop: too many autoconsentDone messages',
+                    ).toBe(options.expectedRuns);
                 }
             } catch (e) {
                 await takeScreenshot(`${screenshotCounter++}-failure`);
                 throw e;
             }
+
         });
+    }
+
+    if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
+        return;
+    }
+    if (options.skipRegions && options.skipRegions.includes(testRegion)) {
+        return;
     }
 
     if (!options.testOptIn && !options.testOptOut) {
