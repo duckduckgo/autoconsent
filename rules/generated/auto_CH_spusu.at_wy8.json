@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_spusu.at_wy8",
+    "vendorUrl": "https://www.spusu.at/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?spusu\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acceptCookieOverlay > div#acceptCookieBanner > div:nth-child(1)#cookieBannerDefault > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acceptCookieOverlay > div#acceptCookieBanner > div:nth-child(1)#cookieBannerDefault > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acceptCookieOverlay > div#acceptCookieBanner > div:nth-child(1)#cookieBannerDefault > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acceptCookieOverlay > div#acceptCookieBanner > div:nth-child(1)#cookieBannerDefault > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
