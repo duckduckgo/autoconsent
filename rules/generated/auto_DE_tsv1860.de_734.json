@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_tsv1860.de_734",
+    "vendorUrl": "https://www.tsv1860.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tsv1860\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieacceptlayer > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#btncookiedeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieacceptlayer > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#btncookiedeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieacceptlayer > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#btncookiedeny",
+            "comment": "ABLEHNEN\n...nur technisch notwendige Cookies verwendet werden"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieacceptlayer > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#btncookiedeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
