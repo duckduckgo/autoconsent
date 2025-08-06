@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_gardenoasis.co.uk_0vv",
+    "vendorUrl": "https://www.gardenoasis.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gardenoasis\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#google-consent-mode > div#google-consent-mode-window > div:nth-child(3)#google-consent-mode-window-footer > button:nth-child(1)#consent-window-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#google-consent-mode > div#google-consent-mode-window > div:nth-child(3)#google-consent-mode-window-footer > button:nth-child(1)#consent-window-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#google-consent-mode > div#google-consent-mode-window > div:nth-child(3)#google-consent-mode-window-footer > button:nth-child(1)#consent-window-reject",
+            "comment": "Decline all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#google-consent-mode > div#google-consent-mode-window > div:nth-child(3)#google-consent-mode-window-footer > button:nth-child(1)#consent-window-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
