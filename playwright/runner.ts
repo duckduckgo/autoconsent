@@ -204,42 +204,24 @@ class TestRun {
         expect(this.isMessageReceived(msg), failureMessage).toBe(expectedState);
     }
 
-    async runAssertions() {
-        const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: this.expectedCmp };
-        await this.assertMessageReceived(`${this.expectedCmp} not detected`, expectedCmpDetected);
-
-        const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: this.expectedCmp };
-        await this.assertMessageReceived(`${this.expectedCmp} popup not found`, expectedPopupFound, this.options.expectPopupOpen, this.options.expectPopupOpen ? 50 : 5, 500);
-
-        if (this.options.expectPopupOpen) {
-            if (this.autoAction === 'optOut') {
-                await this.assertMessageReceived(`optOutResult not received`, { type: 'optOutResult' }, true, 50, 300);
-                await this.assertMessageReceived(`optOutResult received, but failed`, { type: 'optOutResult', result: true }, true, 50, 300);
-            }
-            if (this.autoAction === 'optIn') {
-                await this.assertMessageReceived(`optInResult not received`, { type: 'optInResult' }, true, 50, 300);
-                await this.assertMessageReceived(`optInResult received, but failed`, { type: 'optInResult', result: true }, true, 50, 300);
-            }
-            if (this.options.testSelfTest && this.selfTestFrame) {
-                await this.assertMessageReceived(`selfTestResult not received`, { type: 'selfTestResult' }, true, 50, 300);
-                await this.assertMessageReceived(`selfTestResult received, but failed`, { type: 'selfTestResult', result: true }, true, 50, 300);
-            }
-            await this.assertMessageReceived(`autoconsentDone not received`, { type: 'autoconsentDone' }, true, 10, 500);
-            await this.assertMessageReceived(`autoconsentDone received for unexpected CMP`, { type: 'autoconsentDone', cmp: this.expectedCmp }, true, 10, 500);
-        }
-
-        this.received.forEach((msg) => {
-            if (msg.type === 'autoconsentError') {
-                expect(msg.details.msg, 'only "multiple CMPs" errors are allowed').toContain('Found multiple CMPs');
-            }
-        });
-
+    async assertNoReloadLoop() {
         try {
             await this.page.waitForLoadState('networkidle', { timeout: 5000 });
         } catch (e) {
             // ignore timeout errors
         }
         await this.page.waitForTimeout(3000); // capture potential reloads
+        // check that popupFound messages are unique
+        const popupFoundMessages = this.findReceivedMessages({ type: 'popupFound' });
+        for (let i = 0; i < popupFoundMessages.length; i++) {
+            for (let j = i + 1; j < popupFoundMessages.length; j++) {
+                expect(
+                    popupFoundMessages[i],
+                    `Possible reload loop: found multiple identical popupFound messages: ${JSON.stringify(popupFoundMessages[i])}`,
+                ).not.toEqual(popupFoundMessages[j]);
+            }
+        }
+
         if (this.options.expectPopupOpen) {
             // check that the autoconsentDone message was received the expected number of times (typically 1)
             expect(
@@ -247,6 +229,44 @@ class TestRun {
                 'Possible reload loop: too many autoconsentDone messages',
             ).toBe(this.options.expectedRuns);
         }
+    }
+
+    async runAssertions() {
+        const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: this.expectedCmp };
+        await this.assertMessageReceived(`${this.expectedCmp} not detected`, expectedCmpDetected);
+
+        const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: this.expectedCmp };
+        await this.assertMessageReceived(`${this.expectedCmp} popup not found`, expectedPopupFound, this.options.expectPopupOpen, this.options.expectPopupOpen ? 50 : 5, 500);
+
+        await this.assertNoReloadLoop();
+
+        if (this.options.expectPopupOpen) {
+            // first long wait for autoconsentDone
+            await this.assertMessageReceived(`autoconsentDone not received`, { type: 'autoconsentDone' }, true, 90, 500);
+            await this.assertMessageReceived(`autoconsentDone received for unexpected CMP`, { type: 'autoconsentDone', cmp: this.expectedCmp }, true, 90, 500);
+
+            await this.assertNoReloadLoop();
+
+            // short waits for other messages because they should have already arrived by now
+            if (this.autoAction === 'optOut') {
+                await this.assertMessageReceived(`optOutResult not received`, { type: 'optOutResult' }, true, 1, 300);
+                await this.assertMessageReceived(`optOutResult received, but failed`, { type: 'optOutResult', result: true }, true, 1, 300);
+            }
+            if (this.autoAction === 'optIn') {
+                await this.assertMessageReceived(`optInResult not received`, { type: 'optInResult' }, true, 1, 300);
+                await this.assertMessageReceived(`optInResult received, but failed`, { type: 'optInResult', result: true }, true, 1, 300);
+            }
+            if (this.options.testSelfTest && this.selfTestFrame) {
+                await this.assertMessageReceived(`selfTestResult not received`, { type: 'selfTestResult' }, true, 1, 300);
+                await this.assertMessageReceived(`selfTestResult received, but failed`, { type: 'selfTestResult', result: true }, true, 1, 300);
+            }
+        }
+
+        this.received.forEach((msg) => {
+            if (msg.type === 'autoconsentError') {
+                expect(msg.details.msg, 'only "multiple CMPs" errors are allowed').toContain('Found multiple CMPs');
+            }
+        });
     }
 }
 
