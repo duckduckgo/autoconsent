@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_canon-europe.com_smi",
+    "vendorUrl": "https://www.canon-europe.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?canon-europe\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_evidon_banner > button:nth-child(3)#_evidon-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_evidon_banner > button:nth-child(3)#_evidon-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_evidon_banner > button:nth-child(3)#_evidon-decline-button",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_evidon_banner > button:nth-child(3)#_evidon-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
