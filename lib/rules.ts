@@ -5,6 +5,9 @@ export const SUPPORTED_RULE_STEP_VERSION = 1;
 
 export type AutoConsentCMPRule = {
     readonly name: string;
+    /**
+     * @deprecated Use `_metadata.vendorUrl` instead.
+     */
     readonly vendorUrl?: string;
     readonly prehideSelectors?: string[];
     readonly runContext?: RunContext;
@@ -20,6 +23,7 @@ export type AutoConsentCMPRule = {
     readonly minimumRuleStepVersion?: number;
     readonly _metadata?: {
         readonly reviewUpdates?: boolean;
+        readonly vendorUrl?: string;
     };
 };
 
