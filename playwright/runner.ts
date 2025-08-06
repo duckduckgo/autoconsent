@@ -189,21 +189,20 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
             await assertMessageReceived(`${expectedCmp} popup not found`, received, expectedPopupFound, options.expectPopupOpen, options.expectPopupOpen ? 50 : 5, 500);
 
             if (options.expectPopupOpen) {
-                const expectedOptOutResult: Partial<ContentScriptMessage> = { type: 'optOutResult', result: true };
-                const expectedOptInResult: Partial<ContentScriptMessage> = { type: 'optInResult', result: true };
-                const expectedSelfTestResult: Partial<ContentScriptMessage> = { type: 'selfTestResult', result: true };
-                const expectedAutoconsentDone: Partial<ContentScriptMessage> = { type: 'autoconsentDone', cmp: expectedCmp };
-
                 if (autoAction === 'optOut') {
-                    await assertMessageReceived(`${expectedCmp} optOut failed`, received, expectedOptOutResult, true, 50, 300);
+                    await assertMessageReceived(`optOutResult not received`, received, { type: 'optOutResult' }, true, 50, 300);
+                    await assertMessageReceived(`optOutResult received, but failed`, received, { type: 'optOutResult', result: true }, true, 50, 300);
                 }
                 if (autoAction === 'optIn') {
-                    await assertMessageReceived(`${expectedCmp} optIn failed`, received, expectedOptInResult, true, 50, 300);
+                    await assertMessageReceived(`optInResult not received`, received, { type: 'optInResult' }, true, 50, 300);
+                    await assertMessageReceived(`optInResult received, but failed`, received, { type: 'optInResult', result: true }, true, 50, 300);
                 }
                 if (options.testSelfTest && selfTestFrame) {
-                    await assertMessageReceived(`${expectedCmp} self test failed`, received, expectedSelfTestResult, true, 50, 300);
+                    await assertMessageReceived(`selfTestResult not received`, received, { type: 'selfTestResult' }, true, 50, 300);
+                    await assertMessageReceived(`selfTestResult received, but failed`, received, { type: 'selfTestResult', result: true }, true, 50, 300);
                 }
-                await assertMessageReceived(`${expectedCmp} not done`, received, expectedAutoconsentDone, true, 10, 500);
+                await assertMessageReceived(`autoconsentDone not received`, received, { type: 'autoconsentDone' }, true, 10, 500);
+                await assertMessageReceived(`autoconsentDone received for unexpected CMP`, received, { type: 'autoconsentDone', cmp: expectedCmp }, true, 10, 500);
             }
 
             received.forEach((msg) => {
