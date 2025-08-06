@@ -1,3 +1,15 @@
+# v14.11.0 (Wed Aug 06 2025)
+
+#### 🚀 Enhancement
+
+- Add a flag to mark generated rules requiring review [#858](https://github.com/duckduckgo/autoconsent/pull/858) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.10.1 (Fri Aug 01 2025)
 
 #### 🐛 Bug Fix
