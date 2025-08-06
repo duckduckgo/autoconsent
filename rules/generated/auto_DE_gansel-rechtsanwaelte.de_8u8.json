@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_gansel-rechtsanwaelte.de_8u8",
+    "vendorUrl": "https://www.gansel-rechtsanwaelte.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gansel-rechtsanwaelte\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBackdrop > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBackdrop > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBackdrop > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject",
+            "comment": "Nur notwendige Cookies zulassen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBackdrop > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
