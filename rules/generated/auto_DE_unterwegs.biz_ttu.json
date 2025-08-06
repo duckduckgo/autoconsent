@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_unterwegs.biz_ttu",
+    "vendorUrl": "https://www.unterwegs.biz/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unterwegs\\.biz/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieSettingsToast > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#saveNecessaryCookiesFromToast"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieSettingsToast > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#saveNecessaryCookiesFromToast"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieSettingsToast > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#saveNecessaryCookiesFromToast",
+            "comment": "NUR NOTWENDIGE COOKIES ZULASSEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieSettingsToast > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#saveNecessaryCookiesFromToast",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
