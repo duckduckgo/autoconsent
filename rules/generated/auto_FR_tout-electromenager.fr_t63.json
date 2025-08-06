@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_tout-electromenager.fr_t63",
+    "vendorUrl": "https://tout-electromenager.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tout-electromenager\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiesBanner > div:not([id]) > div:not([id]) > p:nth-child(7):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiesBanner > div:not([id]) > div:not([id]) > p:nth-child(7):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiesBanner > div:not([id]) > div:not([id]) > p:nth-child(7):not([id]) > a:not([id])",
+            "comment": "REFUSER LES COOKIES FACULTATIFS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiesBanner > div:not([id]) > div:not([id]) > p:nth-child(7):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
