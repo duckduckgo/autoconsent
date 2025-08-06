@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_ldlc.com_nck",
+    "vendorUrl": "https://www.ldlc.com/fr-ch/?origin=www.ldlc.com",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ldlc\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button#cookieConsentRefuseButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button#cookieConsentRefuseButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button#cookieConsentRefuseButton",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button#cookieConsentRefuseButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
