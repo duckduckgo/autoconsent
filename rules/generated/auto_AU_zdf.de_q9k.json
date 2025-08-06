@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_zdf.de_q9k",
+    "vendorUrl": "https://www.zdf.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zdf\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#portal-root > div:nth-child(2)#radix-_r_a_ > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#portal-root > div:nth-child(2)#radix-_r_a_ > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#portal-root > div:nth-child(2)#radix-_r_a_ > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#portal-root > div:nth-child(2)#radix-_r_a_ > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
