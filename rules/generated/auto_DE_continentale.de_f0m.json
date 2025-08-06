@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_continentale.de_f0m",
+    "vendorUrl": "https://www.continentale.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?continentale\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#document > div:nth-child(1)#cookie-info > a:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#document > div:nth-child(1)#cookie-info > a:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#document > div:nth-child(1)#cookie-info > a:nth-child(4):not([id])",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#document > div:nth-child(1)#cookie-info > a:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
