@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_woningruil24.nl_1is",
+    "vendorUrl": "https://www.woningruil24.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?woningruil24\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-modal-wrapper > div:nth-child(2):not([id]) > div:nth-child(1)#step1 > button:nth-child(3)#handleAcceptOnlyNecessaryClick"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-modal-wrapper > div:nth-child(2):not([id]) > div:nth-child(1)#step1 > button:nth-child(3)#handleAcceptOnlyNecessaryClick"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal-wrapper > div:nth-child(2):not([id]) > div:nth-child(1)#step1 > button:nth-child(3)#handleAcceptOnlyNecessaryClick",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-modal-wrapper > div:nth-child(2):not([id]) > div:nth-child(1)#step1 > button:nth-child(3)#handleAcceptOnlyNecessaryClick",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
