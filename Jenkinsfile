@@ -4,7 +4,7 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
             def testFilesArg = testFiles.join(' ')
             sh """
                 rm -f results.xml
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test ${testFilesArg} --project ${browser} --reporter=junit || true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test ${testFilesArg} --project ${browser} --workers 10 --reporter=junit,line || true
             """
         }
     } finally {
