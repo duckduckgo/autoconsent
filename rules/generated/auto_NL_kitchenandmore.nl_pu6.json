@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_kitchenandmore.nl_pu6",
+    "vendorUrl": "https://www.kitchenandmore.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kitchenandmore\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#CookiePopupDialog > form#cookiePopup > div:nth-child(1):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#CookiePopupDialog > form#cookiePopup > div:nth-child(1):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#CookiePopupDialog > form#cookiePopup > div:nth-child(1):not([id]) > a:nth-child(3):not([id])",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#CookiePopupDialog > form#cookiePopup > div:nth-child(1):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
