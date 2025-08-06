@@ -232,27 +232,27 @@ export function generateTest(url: string, expectedCmp: string, options: TestOpti
     });
 }
 
-export default function generateCMPTests(cmp: string, sites: string[], options: Partial<TestOptions> = {}) {
+export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
     test.describe(cmp, () => {
         sites.forEach((url) => {
-            const testOptions = Object.assign({}, defaultOptions, options);
-            if (options.onlyRegions && options.onlyRegions.length > 0 && !options.onlyRegions.includes(testRegion)) {
+            const finalOptions = Object.assign({}, defaultOptions, overrideOptions);
+            if (finalOptions.onlyRegions && finalOptions.onlyRegions.length > 0 && !finalOptions.onlyRegions.includes(testRegion)) {
                 return;
             }
-            if (options.skipRegions && options.skipRegions.includes(testRegion)) {
+            if (finalOptions.skipRegions && finalOptions.skipRegions.includes(testRegion)) {
                 return;
             }
 
-            if (!options.testOptIn && !options.testOptOut) {
-                generateTest(url, cmp, testOptions, null);
+            if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
+                generateTest(url, cmp, finalOptions, null);
             }
 
-            if (options.testOptIn) {
-                generateTest(url, cmp, testOptions, 'optIn');
+            if (finalOptions.testOptIn) {
+                generateTest(url, cmp, finalOptions, 'optIn');
             }
 
-            if (options.testOptOut) {
-                generateTest(url, cmp, testOptions, 'optOut');
+            if (finalOptions.testOptOut) {
+                generateTest(url, cmp, finalOptions, 'optOut');
             }
         });
     });
