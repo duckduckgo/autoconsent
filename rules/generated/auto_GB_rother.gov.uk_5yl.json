@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_rother.gov.uk_5yl",
+    "vendorUrl": "https://www.rother.gov.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rother\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-popup-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-popup-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-popup-required",
+            "comment": "Accept only required cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-popup-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
