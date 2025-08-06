@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_motorkledingstore.nl_mfa",
+    "vendorUrl": "https://www.motorkledingstore.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?motorkledingstore\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all",
+            "comment": "Alles afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
