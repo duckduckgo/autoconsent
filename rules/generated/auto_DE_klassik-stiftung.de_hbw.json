@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_klassik-stiftung.de_hbw",
+    "vendorUrl": "https://www.klassik-stiftung.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?klassik-stiftung\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Nur notwendige Cookies verwenden"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
