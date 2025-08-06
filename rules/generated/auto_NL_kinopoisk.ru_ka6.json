@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_kinopoisk.ru_ka6",
+    "vendorUrl": "https://www.kinopoisk.ru/showcaptcha?cc=1&form-fb-hint=8.20&mt=C84180B21BBBD3A5D1E633BA1999CF85A9FE3ED6A827D090F90C93F1EF925F7627DDD3363AEB76433A75C050329A4EDA940B802606828D833770D27950751B3C008839928550132FDFAFCB27109F559BD63392FC888242005AAC012A391421453A4CB014943C94A6F9330CE1AAB3430B5BD4CE48D63F0C86BEB61448BA58FC98998449F3C375EAD8E85C39ECC442118887BB624C6E00C240D882E57D262BD4B859615CE1C79046FBF668ED6001AAD99C71B93F608E1D5C1286CC309A7841BE9818D40079F02EBCEFDCFEA8BF8F035E8F48A33C202EDC00FB28D18BFE&retpath=aHR0cHM6Ly93d3cua2lub3BvaXNrLnJ1Lz8%2C_6ca400f17bfc990b8e51a4098ad2383a&t=2/1754475581/70821917505b206afc0286f4b1ee1b15&u=7060398761101292034&s=f2c0cdd24515396716454976733554fd",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kinopoisk\\.ru/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "comment": "Allow essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
