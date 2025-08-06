@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_wijdeman.nl_my4",
+    "vendorUrl": "https://www.wijdeman.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wijdeman\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
