@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_epflpress.org_dif",
+    "vendorUrl": "https://www.epflpress.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?epflpress\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification",
+            "comment": "Refuse all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
