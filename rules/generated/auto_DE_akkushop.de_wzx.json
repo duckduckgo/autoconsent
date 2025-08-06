@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_akkushop.de_wzx",
+    "vendorUrl": "https://www.akkushop.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?akkushop\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(4):not([id])",
+            "comment": "nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
