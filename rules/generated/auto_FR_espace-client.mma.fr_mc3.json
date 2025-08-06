@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_espace-client.mma.fr_mc3",
+    "vendorUrl": "https://espace-client.mma.fr/connexion/?code=2d9e0b34e285b499d8de18ccd3996f30&profile=accesec&origin=2&state=e30%3D&redirect_uri=https%3A%2F%2Fespace-client.mma.fr%2Fmes-contrats%2F&client_id=acces-ec-PROD",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?espace-client\\.mma\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
