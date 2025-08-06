@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_help.ch_k8k",
+    "vendorUrl": "https://www.help.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?help\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(14)#consent-banner > a:nth-child(4)#denyConsent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(14)#consent-banner > a:nth-child(4)#denyConsent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(14)#consent-banner > a:nth-child(4)#denyConsent",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(14)#consent-banner > a:nth-child(4)#denyConsent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
