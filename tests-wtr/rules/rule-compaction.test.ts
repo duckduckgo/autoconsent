@@ -11,7 +11,7 @@ describe('RuleCompaction', () => {
         const encoded = encodeRules(rules, null);
         const decoded = decodeRules(encoded);
         expect(rules.length).to.equal(decoded.length);
-        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', 'reviewUpdates'];
+        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata'];
         for (let i = 0; i < rules.length; i++) {
             // ensure non-empty values for runContext, test, and prehideSelectors
             const originalRule = {
