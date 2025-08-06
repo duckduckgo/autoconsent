@@ -156,9 +156,7 @@ class TestRun {
             }
             case 'eval': {
                 const result = await frame.evaluate(msg.code);
-                await frame.evaluate(
-                    `autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`,
-                );
+                await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
                 break;
             }
             case 'visualDelay': {
@@ -236,14 +234,26 @@ class TestRun {
         await this.assertMessageReceived(`${this.expectedCmp} not detected`, expectedCmpDetected);
 
         const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: this.expectedCmp };
-        await this.assertMessageReceived(`${this.expectedCmp} popup not found`, expectedPopupFound, this.options.expectPopupOpen, this.options.expectPopupOpen ? 50 : 5, 500);
+        await this.assertMessageReceived(
+            `${this.expectedCmp} popup not found`,
+            expectedPopupFound,
+            this.options.expectPopupOpen,
+            this.options.expectPopupOpen ? 50 : 5,
+            500,
+        );
 
         await this.assertNoReloadLoop();
 
         if (this.options.expectPopupOpen) {
             // first long wait for autoconsentDone
             await this.assertMessageReceived(`autoconsentDone not received`, { type: 'autoconsentDone' }, true, 90, 500);
-            await this.assertMessageReceived(`autoconsentDone received for unexpected CMP`, { type: 'autoconsentDone', cmp: this.expectedCmp }, true, 90, 500);
+            await this.assertMessageReceived(
+                `autoconsentDone received for unexpected CMP`,
+                { type: 'autoconsentDone', cmp: this.expectedCmp },
+                true,
+                90,
+                500,
+            );
 
             await this.assertNoReloadLoop();
 
@@ -258,7 +268,13 @@ class TestRun {
             }
             if (this.options.testSelfTest && this.selfTestFrame) {
                 await this.assertMessageReceived(`selfTestResult not received`, { type: 'selfTestResult' }, true, 1, 300);
-                await this.assertMessageReceived(`selfTestResult received, but failed`, { type: 'selfTestResult', result: true }, true, 1, 300);
+                await this.assertMessageReceived(
+                    `selfTestResult received, but failed`,
+                    { type: 'selfTestResult', result: true },
+                    true,
+                    1,
+                    300,
+                );
             }
         }
 
