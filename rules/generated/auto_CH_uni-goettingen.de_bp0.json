@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_uni-goettingen.de_bp0",
+    "vendorUrl": "https://www.uni-goettingen.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uni-goettingen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#page > div#scrollable-area > footer:nth-child(10):not([id]) > div:nth-child(2)#cookie_banner_footer > button:nth-child(6)#btnCookieFunctions"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#page > div#scrollable-area > footer:nth-child(10):not([id]) > div:nth-child(2)#cookie_banner_footer > button:nth-child(6)#btnCookieFunctions"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#page > div#scrollable-area > footer:nth-child(10):not([id]) > div:nth-child(2)#cookie_banner_footer > button:nth-child(6)#btnCookieFunctions",
+            "comment": "Nur notwendige Funktionscookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#page > div#scrollable-area > footer:nth-child(10):not([id]) > div:nth-child(2)#cookie_banner_footer > button:nth-child(6)#btnCookieFunctions",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
