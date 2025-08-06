@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_brico.be_ixd",
+    "vendorUrl": "https://www.brico.be/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?brico\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-5 > div#chakra-modal--body-5 > div:nth-child(4):not([id]) > p:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-5 > div#chakra-modal--body-5 > div:nth-child(4):not([id]) > p:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-5 > div#chakra-modal--body-5 > div:nth-child(4):not([id]) > p:not([id]) > a:nth-child(2):not([id])",
+            "comment": "refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-5 > div#chakra-modal--body-5 > div:nth-child(4):not([id]) > p:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
