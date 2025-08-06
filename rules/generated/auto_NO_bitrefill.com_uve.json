@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_bitrefill.com_uve",
+    "vendorUrl": "https://www.bitrefill.com/no/en/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bitrefill\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#radix-«r0» > div:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#radix-«r0» > div:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#radix-«r0» > div:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Essential only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#radix-«r0» > div:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
