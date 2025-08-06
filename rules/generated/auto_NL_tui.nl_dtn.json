@@ -1,0 +1,38 @@
+{
+    "name": "auto_NL_tui.nl_dtn",
+    "vendorUrl": "https://www.tui.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tui\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#CookieReject-submit"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#CookieReject-submit"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#CookieReject-submit",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#CookieReject-submit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
