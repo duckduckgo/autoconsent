@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_lgt.com_drj",
+    "vendorUrl": "https://www.lgt.com/ch-en",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lgt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_27136e43-c45d-47f7-95db-e9cd18ede8fc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-057bcc16-1fde-4b05-9c2a-b94f96d15e8b > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_27136e43-c45d-47f7-95db-e9cd18ede8fc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-057bcc16-1fde-4b05-9c2a-b94f96d15e8b > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_27136e43-c45d-47f7-95db-e9cd18ede8fc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-057bcc16-1fde-4b05-9c2a-b94f96d15e8b > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_27136e43-c45d-47f7-95db-e9cd18ede8fc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-057bcc16-1fde-4b05-9c2a-b94f96d15e8b > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
