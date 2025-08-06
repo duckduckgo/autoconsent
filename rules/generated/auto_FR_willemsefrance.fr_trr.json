@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_willemsefrance.fr_trr",
+    "vendorUrl": "https://www.willemsefrance.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?willemsefrance\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
