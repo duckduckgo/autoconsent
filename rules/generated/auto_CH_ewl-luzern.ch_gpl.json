@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_ewl-luzern.ch_gpl",
+    "vendorUrl": "https://www.ewl-luzern.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ewl-luzern\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
