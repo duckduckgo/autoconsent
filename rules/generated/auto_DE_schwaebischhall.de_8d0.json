@@ -1,0 +1,38 @@
+{
+    "name": "auto_DE_schwaebischhall.de_8d0",
+    "vendorUrl": "https://www.schwaebischhall.de/de/startseite",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schwaebischhall\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > dialog:nth-child(1)#hw_datenschutz_banner__small > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#hw_datenschutz_banner__none > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > dialog:nth-child(1)#hw_datenschutz_banner__small > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#hw_datenschutz_banner__none > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > dialog:nth-child(1)#hw_datenschutz_banner__small > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#hw_datenschutz_banner__none > span:not([id])",
+            "comment": "Verweigern"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > dialog:nth-child(1)#hw_datenschutz_banner__small > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#hw_datenschutz_banner__none > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
