@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_takfonster.fr_dxi",
+    "vendorUrl": "https://www.takfonster.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?takfonster\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(1)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(1)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(1)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(1)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
