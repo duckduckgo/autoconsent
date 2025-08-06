@@ -1,0 +1,38 @@
+{
+    "name": "auto_FR_cimetieres-de-france.fr_mp2",
+    "vendorUrl": "https://www.cimetieres-de-france.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cimetieres-de-france\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header#js-header-cookie > div:not([id]) > nav:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header#js-header-cookie > div:not([id]) > nav:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header#js-header-cookie > div:not([id]) > nav:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])",
+            "comment": " REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header#js-header-cookie > div:not([id]) > nav:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
