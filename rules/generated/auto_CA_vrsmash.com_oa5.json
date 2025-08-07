@@ -1,0 +1,41 @@
+{
+    "name": "auto_CA_vrsmash.com_oa5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.vrsmash.com/?link_data=eyJvZmZlcl9pZCI6IjI2IiwiYWZmX2lkIjoiODYiLCJjYW1wYWlnbl9pZCI6IjI3NDAiLCJsaW5rX2lkIjoiMzE1ODMiLCJjbGlja19pZCI6IjlkMGU3YzNiLTk5ZWItNDM4Mi1hZTI5LWZmYWZjYTc5YjNlYyIsImNyZWF0aXZlX2lkIjoiODEiLCJ0eXBlIjoibGFuZGluZyJ9",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vrsmash\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".accept-cookies-modal .accept-cookies-modal__actions > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".accept-cookies-modal .accept-cookies-modal__actions > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": ".accept-cookies-modal .accept-cookies-modal__actions > button:nth-child(2)",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".accept-cookies-modal .accept-cookies-modal__actions > button:nth-child(2)",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

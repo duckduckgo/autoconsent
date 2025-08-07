@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_zenmarket.jp_afe",
+    "vendorUrl": "https://zenmarket.jp/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zenmarket\\.jp/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form1 > div:nth-child(29)#gdpr-terms-warning > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#decline-gdpr-terms"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form1 > div:nth-child(29)#gdpr-terms-warning > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#decline-gdpr-terms"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form1 > div:nth-child(29)#gdpr-terms-warning > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#decline-gdpr-terms",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form1 > div:nth-child(29)#gdpr-terms-warning > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#decline-gdpr-terms",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
