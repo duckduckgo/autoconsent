@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_ukrainianlessons.com_dwh",
+    "vendorUrl": "https://www.ukrainianlessons.com/greetings/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ukrainianlessons\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#a4b27c6c9-a9e4-46a7-a962-f4c23bf0ff89 > dialog:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#a4b27c6c9-a9e4-46a7-a962-f4c23bf0ff89 > dialog:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#a4b27c6c9-a9e4-46a7-a962-f4c23bf0ff89 > dialog:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Continue without consent"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#a4b27c6c9-a9e4-46a7-a962-f4c23bf0ff89 > dialog:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
