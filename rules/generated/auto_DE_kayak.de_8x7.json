@@ -1,11 +1,14 @@
 {
     "name": "auto_DE_kayak.de_8x7",
-    "vendorUrl": "https://www.kayak.de/?ispredir=true",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.kayak.de/?ispredir=true",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?kayak\\.de/"
+        "urlPattern": "^https?://(www\\.)?kayak\\.(co\\.uk|[a-z]+)/"
     },
     "prehideSelectors": [],
     "detectCmp": [
