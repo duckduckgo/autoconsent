@@ -173,7 +173,7 @@ class TestRun {
     // inject content scripts into every frame
     async injectContentScripts() {
         await this.injectContentScript(this.page);
-        this.page.frames().forEach(this.injectContentScript);
+        this.page.frames().forEach((frame) => this.injectContentScript(frame));
         this.page.on('framenavigated', (frame) => this.injectContentScript(frame));
     }
 
