@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_support.hpe.com_j94",
+    "vendorUrl": "https://support.hpe.com/connect/s/?language=en_US",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.hpe\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Decline optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hpealertcomp_container > div#hpealertcomp > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

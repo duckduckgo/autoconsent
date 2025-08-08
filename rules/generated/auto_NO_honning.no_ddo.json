@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_honning.no_ddo",
+    "vendorUrl": "https://honning.no/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?honning\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies-eu-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
