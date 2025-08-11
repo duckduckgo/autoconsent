@@ -1,21 +1,24 @@
 {
     "name": "auto_GB_uk.trip.com_0",
-    "vendorUrl": "https://uk.trip.com/",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://uk.trip.com/",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?uk\\.trip\\.com/"
+        "urlPattern": "^https?://([a-zA-Z0-9]+\\.)?trip\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "#ibu-cookie-banner-btn-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "#ibu-cookie-banner-btn-decline"
         }
     ],
     "optIn": [],
@@ -24,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Decline"
+            "waitForThenClick": "#ibu-cookie-banner-btn-decline",
+            "comment": "Decline all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "#ibu-cookie-banner-btn-decline",
             "timeout": 1000,
             "check": "none"
         }

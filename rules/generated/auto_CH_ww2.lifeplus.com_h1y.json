@@ -1,11 +1,14 @@
 {
     "name": "auto_CH_ww2.lifeplus.com_h1y",
-    "vendorUrl": "https://ww2.lifeplus.com/us/en",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://ww2.lifeplus.com/us/en",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?ww2\\.lifeplus\\.com/"
+        "urlPattern": "^https?://([a-z0-9]+\\.)?lifeplus\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [

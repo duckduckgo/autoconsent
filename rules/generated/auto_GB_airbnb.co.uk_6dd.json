@@ -1,11 +1,14 @@
 {
     "name": "auto_GB_airbnb.co.uk_6dd",
-    "vendorUrl": "https://www.airbnb.co.uk/?_set_bev_on_new_domain=1753867199_EAYzkxY2JmY2YwZD",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.airbnb.co.uk/?_set_bev_on_new_domain=1753867199_EAYzkxY2JmY2YwZD",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?airbnb\\.co\\.uk/"
+        "urlPattern": "^https?://(www\\.)?airbnb\\.(co\\.uk|[a-z]+)/"
     },
     "prehideSelectors": [],
     "detectCmp": [

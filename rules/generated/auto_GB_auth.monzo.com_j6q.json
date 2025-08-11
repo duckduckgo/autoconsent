@@ -1,11 +1,14 @@
 {
     "name": "auto_GB_auth.monzo.com_j6q",
-    "vendorUrl": "https://auth.monzo.com/?client_id=oauth2client_00009XXTN0biZ3vgvysb21&redirect_uri=https://web.monzo.com/callback&response_type=code&state=88404da5-b99e-4e98-8f62-f8a1665d7dfd",
+    "_metadata": {
+        "vendorUrl": "https://auth.monzo.com/?client_id=oauth2client_00009XXTN0biZ3vgvysb21&redirect_uri=https://web.monzo.com/callback&response_type=code&state=88404da5-b99e-4e98-8f62-f8a1665d7dfd",
+        "manuallyReviewUpdates": true
+    },
     "cosmetic": false,
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?auth\\.monzo\\.com/"
+        "urlPattern": "^https?://(www\\.)?(auth\\.)?monzo\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
