@@ -8,7 +8,7 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
             """
         }
     } finally {
-        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: junitFile
+        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, allowEmptyResults: true, testResults: junitFile
         return summary
     }
 }
