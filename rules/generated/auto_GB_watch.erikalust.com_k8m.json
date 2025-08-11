@@ -1,11 +1,14 @@
 {
     "name": "auto_GB_watch.erikalust.com_k8m",
-    "vendorUrl": "https://watch.erikalust.com/age-verification",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://watch.erikalust.com/age-verification",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?watch\\.erikalust\\.com/"
+        "urlPattern": "^https?://(www\\.)?(watch\\.)?erikalust\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [

@@ -1,11 +1,14 @@
 {
     "name": "auto_US_try.frndlytv.com_0",
-    "vendorUrl": "https://try.frndlytv.com/",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://try.frndlytv.com/",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?try\\.frndlytv\\.com/"
+        "urlPattern": "^https?://(www\\.)?(try\\.)?frndlytv\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [

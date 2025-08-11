@@ -1,11 +1,13 @@
 {
     "name": "auto_US_klm.com_0",
-    "vendorUrl": "https://www.klm.com/",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.klm.com/"
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?klm\\.com/"
+        "urlPattern": "^https?://(www\\.)?klm\\.(co\\.uk|[a-z]+)/"
     },
     "prehideSelectors": [],
     "detectCmp": [

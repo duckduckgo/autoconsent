@@ -82,6 +82,8 @@ class TestRun {
         try {
             await this.runAssertions();
         } catch (e) {
+            // log the full url in the error message
+            console.error(`Autoconsent test failed on ${this.url}`);
             await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
             throw e;
         }
@@ -99,10 +101,7 @@ class TestRun {
     async takeScreenshot(name: string) {
         try {
             await this.page.screenshot({
-                path: path.join(
-                    screenshotsDir,
-                    `${this.expectedCmp}-${this.autoAction}-${testRegion}-${this.formFactor}-${this.domain}-${this.urlHash}-${name}.jpg`,
-                ),
+                path: path.join(screenshotsDir, `${this.testInfo.title}-${name}.jpg`),
                 quality: 50,
                 scale: 'css',
                 timeout: 2000,
@@ -173,7 +172,7 @@ class TestRun {
     // inject content scripts into every frame
     async injectContentScripts() {
         await this.injectContentScript(this.page);
-        this.page.frames().forEach(this.injectContentScript);
+        this.page.frames().forEach((frame) => this.injectContentScript(frame));
         this.page.on('framenavigated', (frame) => this.injectContentScript(frame));
     }
 
