@@ -10,6 +10,7 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
     } finally {
         def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: 'results.xml'
         archiveArtifacts artifacts: 'test-results/screenshots/**/*.jpg', fingerprint: true, allowEmptyArchive: true
+        archiveArtifacts artifacts: 'results.xml', fingerprint: true, allowEmptyArchive: true
         return summary
     }
 }
