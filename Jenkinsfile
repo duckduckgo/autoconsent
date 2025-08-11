@@ -4,12 +4,13 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
             def testFilesArg = testFiles.join(' ')
             sh """
                 rm -f results.xml
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test ${testFilesArg} --project ${browser} --reporter=junit || true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test ${testFilesArg} --project ${browser} --workers 10 --reporter=junit,line || true
             """
         }
     } finally {
         def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: 'results.xml'
         archiveArtifacts artifacts: 'test-results/screenshots/**/*.jpg', fingerprint: true, allowEmptyArchive: true
+        archiveArtifacts artifacts: 'results.xml', fingerprint: true, allowEmptyArchive: true
         return summary
     }
 }
