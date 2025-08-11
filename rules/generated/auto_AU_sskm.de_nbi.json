@@ -2,7 +2,8 @@
     "name": "auto_AU_sskm.de_nbi",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "https://www.sskm.de/de/home/login-online-banking.html"
+        "vendorUrl": "https://www.sskm.de/de/home/login-online-banking.html",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,27 +13,24 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(19):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+            "exists": "a[data-form=\".eprivacy_optin_decline\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(19):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+            "visible": "a[data-form=\".eprivacy_optin_decline\"]"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(19):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "waitForThenClick": "a[data-form=\".eprivacy_optin_decline\"]",
             "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(19):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "waitForVisible": "a[data-form=\".eprivacy_optin_decline\"]",
             "timeout": 1000,
             "check": "none"
         }
