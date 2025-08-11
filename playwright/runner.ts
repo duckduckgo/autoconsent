@@ -101,7 +101,7 @@ class TestRun {
             await this.page.screenshot({
                 path: path.join(
                     screenshotsDir,
-                    `${this.expectedCmp}-${this.autoAction}-${testRegion}-${this.formFactor}-${this.domain}-${this.urlHash}-${name}.jpg`,
+                    `${this.testInfo.title}-${name}.jpg`,
                 ),
                 quality: 50,
                 scale: 'css',
