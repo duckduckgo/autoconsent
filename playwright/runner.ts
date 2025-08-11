@@ -82,6 +82,8 @@ class TestRun {
         try {
             await this.runAssertions();
         } catch (e) {
+            // log the full url in the error message
+            console.error(`Autoconsent test failed on ${this.url}`);
             await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
             throw e;
         }
