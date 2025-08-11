@@ -101,10 +101,7 @@ class TestRun {
     async takeScreenshot(name: string) {
         try {
             await this.page.screenshot({
-                path: path.join(
-                    screenshotsDir,
-                    `${this.testInfo.title}-${name}.jpg`,
-                ),
+                path: path.join(screenshotsDir, `${this.testInfo.title}-${name}.jpg`),
                 quality: 50,
                 scale: 'css',
                 timeout: 2000,
