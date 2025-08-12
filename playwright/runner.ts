@@ -82,8 +82,19 @@ class TestRun {
         try {
             await this.runAssertions();
         } catch (e) {
-            // log the full url in the error message
-            console.error(`Autoconsent test failed on ${this.url}`);
+            if (e instanceof Error) {
+                const failureStats = {
+                    reason: e.message,
+                    url: this.url,
+                    cmp: this.expectedCmp,
+                    autoAction: this.autoAction,
+                    region: testRegion,
+                    formFactor: this.formFactor,
+                    testName: this.testInfo.title,
+                };
+                // log the full url in the error message
+                console.error(`Autoconsent test failed on ${this.url}`, failureStats);
+            }
             await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
             throw e;
         }
