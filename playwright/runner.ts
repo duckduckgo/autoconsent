@@ -226,7 +226,7 @@ class TestRun {
             for (let j = i + 1; j < popupFoundMessages.length; j++) {
                 expect(
                     popupFoundMessages[i],
-                    `Possible reload loop: found multiple identical popupFound messages: ${JSON.stringify(popupFoundMessages[i])}`,
+                    `Possible reload loop: found multiple identical popupFound messages`,
                 ).not.toEqual(popupFoundMessages[j]);
             }
         }
@@ -241,12 +241,14 @@ class TestRun {
     }
 
     async runAssertions() {
+        await this.assertMessageReceived(`no CMP detected`, { type: 'cmpDetected' });
+
         const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: this.expectedCmp };
-        await this.assertMessageReceived(`${this.expectedCmp} not detected`, expectedCmpDetected);
+        await this.assertMessageReceived(`detected a wrong CMP`, expectedCmpDetected);
 
         const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: this.expectedCmp };
         await this.assertMessageReceived(
-            `${this.expectedCmp} popup not found`,
+            `expected popup not found`,
             expectedPopupFound,
             this.options.expectPopupOpen,
             this.options.expectPopupOpen ? 50 : 5,
