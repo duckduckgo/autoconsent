@@ -15,36 +15,7 @@ const templateTaskGid = '1206774921409831';
 const autoconsentProjectGid = '1201844467387842';
 const releaseSectionGid = '1202253736774466';
 const scheduledForReleaseSectionGid = '1207140808076253';
-const projectExtractorRegex = /\[\[project_gids=(.*)]]/;
 
-/**
- * @typedef {{taskGid: string, taskUrl: string, displayName: string}} platformData
- *
- * @typedef {{
- *   android: platformData,
- *   windows: platformData,
- *   apple: platformData
- * }} AsanaOutput
- */
-
-/** @type {AsanaOutput} */
-const platforms = {
-    android: {
-        displayName: 'Android',
-        taskGid: '',
-        taskUrl: '',
-    },
-    windows: {
-        displayName: 'Windows',
-        taskGid: '',
-        taskUrl: '',
-    },
-    apple: {
-        displayName: 'Apple',
-        taskGid: '',
-        taskUrl: '',
-    },
-};
 
 let asana;
 
@@ -160,37 +131,6 @@ const asanaCreateTasks = async () => {
     // We want to wait that the job completes so that we can fetch all the subtasks correctly.
     const duplicateTaskResult = await waitForJobSuccess(duplicateTaskJobGid);
     console.error('duplicateTaskResult:', duplicateTaskResult);
-
-    // Getting subtasks...
-    const { data: subtasks } = await asana.tasks.getSubtasksForTask(new_task.gid, { opt_fields: 'name,html_notes,permalink_url' });
-    console.error('subtasks:', subtasks);
-
-    // Updating subtasks and moving to appropriate projects...
-    for (const subtask of subtasks) {
-        const { gid, name, html_notes, permalink_url } = subtask;
-
-        const platform = Object.keys(platforms).find((key) => name.includes(platforms[key].displayName));
-        if (!platform) throw new Error('Unexpected platform name: ' + name);
-
-        platforms[platform].taskGid = gid;
-        platforms[platform].taskUrl = permalink_url;
-
-        const newName = name.replace('[[version]]', version);
-        const extractedProjects = html_notes.match(projectExtractorRegex)?.[1];
-
-        const subtaskNotes = html_notes.replace(projectExtractorRegex, '').replace('[[notes]]', updatedNotes);
-
-        console.error(`updating task ${gid} with name ${newName} and notes ${subtaskNotes}`);
-        await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes });
-
-        if (extractedProjects) {
-            console.error(`adding projects ${extractedProjects} to task ${gid}`);
-            for (const projectGidAndSection of extractedProjects.split(',')) {
-                const [projectGid, sectionGid] = projectGidAndSection.split(':');
-                await asana.tasks.addProjectForTask(gid, { project: projectGid, section: sectionGid });
-            }
-        }
-    }
 
     const finalNotes = updatedNotes.replace('<li>[[pr_url]]</li>', version).replace('<li>[[extra_content]]</li>', version);
 
