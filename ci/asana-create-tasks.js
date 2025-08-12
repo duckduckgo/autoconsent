@@ -58,7 +58,7 @@ const setupAsana = () => {
 
 const duplicateTemplateTask = (templateTaskGid) => {
     const duplicateOption = {
-        include: ['notes', 'assignee', 'subtasks', 'projects'],
+        include: ['notes', 'assignee', 'projects'],
         name: `Autoconsent release ${version}`,
         opt_fields: 'html_notes',
     };
@@ -198,8 +198,7 @@ const asanaCreateTasks = async () => {
     updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: finalNotes });
     console.error('updateTaskResult:', updateTaskResult);
 
-    const jsonString = JSON.stringify(platforms);
-    return { stdout: jsonString };
+    return { stdout: new_task.gid };
 };
 
 asanaCreateTasks()
