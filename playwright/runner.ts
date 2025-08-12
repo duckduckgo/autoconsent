@@ -91,6 +91,7 @@ class TestRun {
                     region: testRegion,
                     formFactor: this.formFactor,
                     testName: this.testInfo.title,
+                    retry: this.testInfo.retry,
                 };
                 // log the full url in the error message, this will be parsed by the review tool
                 console.error(`Autoconsent test failed on ${this.url} failure stats: ${JSON.stringify(failureStats)}`);
