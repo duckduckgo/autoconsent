@@ -92,8 +92,8 @@ class TestRun {
                     formFactor: this.formFactor,
                     testName: this.testInfo.title,
                 };
-                // log the full url in the error message
-                console.error(`Autoconsent test failed on ${this.url}`, failureStats);
+                // log the full url in the error message, this will be parsed by the review tool
+                console.error(`Autoconsent test failed on ${this.url} failure stats: ${JSON.stringify(failureStats)}`);
             }
             await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
             throw e;
