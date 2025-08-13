@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_eurojackpot.nederlandseloterij.nl_7hr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eurojackpot.nederlandseloterij.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eurojackpot\\.nederlandseloterij\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > mini-profiler:not([id]) > div:nth-child(1)#nlportal > div:nth-child(2)#nlportal-cookie-consent > div:not([id]) > div:nth-child(1):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > mini-profiler:not([id]) > div:nth-child(1)#nlportal > div:nth-child(2)#nlportal-cookie-consent > div:not([id]) > div:nth-child(1):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > mini-profiler:not([id]) > div:nth-child(1)#nlportal > div:nth-child(2)#nlportal-cookie-consent > div:not([id]) > div:nth-child(1):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > mini-profiler:not([id]) > div:nth-child(1)#nlportal > div:nth-child(2)#nlportal-cookie-consent > div:not([id]) > div:nth-child(1):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
