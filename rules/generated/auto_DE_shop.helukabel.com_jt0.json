@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_shop.helukabel.com_jt0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://shop.helukabel.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?shop\\.helukabel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_4cd48388-34db-43b6-b9fa-585f915a2ed6 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-b44413cd-63c1-40e3-8034-a9a44ec12300 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_4cd48388-34db-43b6-b9fa-585f915a2ed6 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-b44413cd-63c1-40e3-8034-a9a44ec12300 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_4cd48388-34db-43b6-b9fa-585f915a2ed6 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-b44413cd-63c1-40e3-8034-a9a44ec12300 > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_4cd48388-34db-43b6-b9fa-585f915a2ed6 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-b44413cd-63c1-40e3-8034-a9a44ec12300 > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
