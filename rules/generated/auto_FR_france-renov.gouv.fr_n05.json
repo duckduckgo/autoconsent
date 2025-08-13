@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_france-renov.gouv.fr_n05",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://france-renov.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?france-renov\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
