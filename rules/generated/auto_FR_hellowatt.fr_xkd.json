@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_hellowatt.fr_xkd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hellowatt.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hellowatt\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
