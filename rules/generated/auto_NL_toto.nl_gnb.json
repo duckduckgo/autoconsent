@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_toto.nl_gnb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.toto.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?toto\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:not([id]) > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse-cookie-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:not([id]) > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse-cookie-consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:not([id]) > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse-cookie-consent",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:not([id]) > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse-cookie-consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
