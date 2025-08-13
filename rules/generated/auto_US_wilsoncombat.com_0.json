@@ -1,6 +1,5 @@
 {
     "name": "auto_US_wilsoncombat.com_0",
-    "vendorUrl": "https://wilsoncombat.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-92 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+            "exists": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-99 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-92 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+            "visible": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-99 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-92 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-99 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
             "comment": "DECLINE"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#html-body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-92 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-99 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
             "timeout": 1000,
             "check": "none"
         }
