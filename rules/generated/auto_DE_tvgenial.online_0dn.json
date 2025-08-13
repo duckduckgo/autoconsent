@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_tvgenial.online_0dn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tvgenial.online/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tvgenial\\.online/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > button:nth-child(5):not([id])",
+            "comment": "Nur erforderliche Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
