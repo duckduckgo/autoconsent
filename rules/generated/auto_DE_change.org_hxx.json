@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_change.org_hxx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.change.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?change\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#rootApp > div:nth-child(3):not([id])[data-testid=\"cookie-wall-modal\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-wall-reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#rootApp > div:nth-child(3):not([id])[data-testid=\"cookie-wall-modal\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-wall-reject\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#rootApp > div:nth-child(3):not([id])[data-testid=\"cookie-wall-modal\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-wall-reject\"]",
+            "comment": "Nicht notwendige Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#rootApp > div:nth-child(3):not([id])[data-testid=\"cookie-wall-modal\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-wall-reject\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
