@@ -1,0 +1,38 @@
+{
+    "name": "auto_CH_schweiztrendshop.ch_12e",
+    "vendorUrl": "https://schweiztrendshop.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schweiztrendshop\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > span:nth-child(1)#cookies-dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > span:nth-child(1)#cookies-dismiss"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > span:nth-child(1)#cookies-dismiss",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > span:nth-child(1)#cookies-dismiss",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
