@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_tutonaut.de_ttq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tutonaut.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tutonaut\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#a1dab4e51-d100-4ca1-890c-16d6fb6b0a89 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#a1dab4e51-d100-4ca1-890c-16d6fb6b0a89 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#a1dab4e51-d100-4ca1-890c-16d6fb6b0a89 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "comment": "Weiter mit essentiellen Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#a1dab4e51-d100-4ca1-890c-16d6fb6b0a89 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
