@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_storen.ch_vqn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.storen.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?storen\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-accept-required-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-accept-required-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-accept-required-banner",
+            "comment": "Notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-accept-required-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
