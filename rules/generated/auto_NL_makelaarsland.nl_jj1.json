@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_makelaarsland.nl_jj1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.makelaarsland.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?makelaarsland\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#si-cookie-notice > div:nth-child(3):not([id]) > button:nth-child(4)#si-cookie-notice-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#si-cookie-notice > div:nth-child(3):not([id]) > button:nth-child(4)#si-cookie-notice-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#si-cookie-notice > div:nth-child(3):not([id]) > button:nth-child(4)#si-cookie-notice-reject-button",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#si-cookie-notice > div:nth-child(3):not([id]) > button:nth-child(4)#si-cookie-notice-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
