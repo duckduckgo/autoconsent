@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lexbase.fr_5to",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lexbase.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lexbase\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__cc-lexbase > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#__button-accept-min-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__cc-lexbase > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#__button-accept-min-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__cc-lexbase > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#__button-accept-min-cookies",
+            "comment": "Refuser les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__cc-lexbase > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#__button-accept-min-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
