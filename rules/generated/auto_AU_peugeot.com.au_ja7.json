@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_peugeot.com.au_ja7",
-    "vendorUrl": "https://www.peugeot.com.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+            "exists": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+            "visible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
             "comment": "CONTINUE WITHOUT ACCEPTING →"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
