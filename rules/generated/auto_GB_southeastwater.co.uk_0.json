@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_southeastwater.co.uk_0",
-    "vendorUrl": "https://www.southeastwater.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+            "exists": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+            "visible": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
             "comment": "Refuse Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
