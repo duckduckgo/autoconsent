@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fachinfo.de_4mw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fachinfo.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fachinfo\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
