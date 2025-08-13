@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pedagogie.ac-orleans-tours.fr_538",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pedagogie.ac-orleans-tours.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pedagogie\\.ac-orleans-tours\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bandeau-gestion_des_cookies > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#bouton-tout_refuser-bandeau-gestion_des_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bandeau-gestion_des_cookies > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#bouton-tout_refuser-bandeau-gestion_des_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bandeau-gestion_des_cookies > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#bouton-tout_refuser-bandeau-gestion_des_cookies",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bandeau-gestion_des_cookies > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#bouton-tout_refuser-bandeau-gestion_des_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
