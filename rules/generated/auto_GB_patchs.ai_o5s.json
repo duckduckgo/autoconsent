@@ -2,12 +2,13 @@
     "name": "auto_GB_patchs.ai_o5s",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.patchs.ai/"
+        "vendorUrl": "http://www.patchs.ai/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?hub\\.patchs\\.ai/"
+        "urlPattern": "^https?://([a-z]+\\.)?patchs\\.ai/"
     },
     "prehideSelectors": [],
     "detectCmp": [
