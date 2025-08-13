@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_betterhelp.com_0",
-    "vendorUrl": "https://www.betterhelp.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#main > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings[data-testid=\"dialog-container-cookie-settings-modal\"] > div:not([id]) > div:not([id])[data-testid=\"modal-content\"] > div:nth-child(2):not([id])[data-testid=\"modal-body\"] > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-reject-all\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#main > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings[data-testid=\"dialog-container-cookie-settings-modal\"] > div:not([id]) > div:not([id])[data-testid=\"modal-content\"] > div:nth-child(2):not([id])[data-testid=\"modal-body\"] > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-reject-all\"]"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body#main > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings[data-testid=\"dialog-container-cookie-settings-modal\"] > div:not([id]) > div:not([id])[data-testid=\"modal-content\"] > div:nth-child(2):not([id])[data-testid=\"modal-body\"] > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-reject-all\"]",
             "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#body-container > div:nth-child(41)#cookie-settings-modal-container > div#modal-cookie-settings[data-testid=\"dialog-container-cookie-settings-modal\"] > div:not([id]) > div:not([id])[data-testid=\"modal-content\"] > div:nth-child(2):not([id])[data-testid=\"modal-body\"] > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-reject-all\"]",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
