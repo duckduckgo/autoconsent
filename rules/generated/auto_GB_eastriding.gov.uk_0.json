@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_eastriding.gov.uk_0",
-    "vendorUrl": "https://www.eastriding.gov.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])"
+            "exists": "body > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])"
+            "visible": "body > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])",
             "comment": " Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#g-page-surround > section:nth-child(13)#g-cookies > div:not([id]) > div:nth-child(2):not([id]) > div#cookie-tabs > div#tabs-3280-particle > div#tabs-3280 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#er-cookie-placeholder-settings > div:not([id]) > a:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
