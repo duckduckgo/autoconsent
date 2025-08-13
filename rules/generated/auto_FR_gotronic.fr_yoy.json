@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_gotronic.fr_yoy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gotronic.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gotronic\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > form:nth-child(3):not([id]) > button:nth-child(4)#cookie_consent_use_only_functional_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > form:nth-child(3):not([id]) > button:nth-child(4)#cookie_consent_use_only_functional_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > form:nth-child(3):not([id]) > button:nth-child(4)#cookie_consent_use_only_functional_cookies",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > form:nth-child(3):not([id]) > button:nth-child(4)#cookie_consent_use_only_functional_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
