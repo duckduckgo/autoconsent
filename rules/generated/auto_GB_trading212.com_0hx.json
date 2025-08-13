@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_trading212.com_0hx",
-    "vendorUrl": "https://www.trading212.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
+            "exists": "body > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
+            "visible": "body > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
             "comment": "Reject non-essential"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
+            "waitForVisible": "body > div#__next > main:nth-child(3):not([id]) > div:nth-child(18):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
