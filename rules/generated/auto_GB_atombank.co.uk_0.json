@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_atombank.co.uk_0",
-    "vendorUrl": "https://www.atombank.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
+            "exists": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
+            "visible": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
+            "waitForThenClick": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
+            "waitForVisible": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
             "timeout": 1000,
             "check": "none"
         }
