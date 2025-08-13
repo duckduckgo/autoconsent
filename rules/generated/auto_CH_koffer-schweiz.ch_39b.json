@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_koffer-schweiz.ch_39b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.koffer-schweiz.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?koffer-schweiz\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#page > footer:nth-child(4)#footer > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#page > footer:nth-child(4)#footer > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#page > footer:nth-child(4)#footer > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "DENY ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#page > footer:nth-child(4)#footer > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
