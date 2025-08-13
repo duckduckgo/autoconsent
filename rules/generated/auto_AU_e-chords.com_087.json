@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_e-chords.com_087",
-    "vendorUrl": "https://www.e-chords.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > main#app > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
