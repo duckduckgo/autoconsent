@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dvb.de_c8m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dvb.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dvb\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#matomo-popup > button:nth-child(8)#matomo-popup-btn-cancel"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#matomo-popup > button:nth-child(8)#matomo-popup-btn-cancel"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#matomo-popup > button:nth-child(8)#matomo-popup-btn-cancel",
+            "comment": "Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#matomo-popup > button:nth-child(8)#matomo-popup-btn-cancel",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
