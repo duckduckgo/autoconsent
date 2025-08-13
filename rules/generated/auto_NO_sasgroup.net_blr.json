@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_sasgroup.net_blr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sasgroup.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sasgroup\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_cookiebanner-opt-in-out > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_cookiebanner-opt-in-out > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_cookiebanner-opt-in-out > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "DENY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_cookiebanner-opt-in-out > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
