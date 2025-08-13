@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_surrey.ac.uk_rnf",
-    "vendorUrl": "https://www.surrey.ac.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button"
+            "exists": "body > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button"
+            "visible": "body > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookie-consent-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-consent-reject-button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
