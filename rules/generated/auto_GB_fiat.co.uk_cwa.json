@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_fiat.co.uk_cwa",
-    "vendorUrl": "https://www.fiat.co.uk/?adobe_mc_ref=",
     "cosmetic": false,
     "runContext": {
         "main": false,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text"
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text"
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text",
             "comment": "REJECT ALL"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(2)#dashboard-body-container > div:nth-child(2):not([id]) > button:nth-child(4)#decline-text",
             "timeout": 1000,
             "check": "none"
         }
