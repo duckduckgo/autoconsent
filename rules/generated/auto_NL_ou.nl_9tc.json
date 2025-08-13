@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ou.nl_9tc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ou.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ou\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(3)#ounl > div:nth-child(2)#layout__wrapper > div#layout__wrapper__inner > div#layout__container > div:nth-child(3)#p_p_id_cookieDisplay_WAR_corpcookieportlet_ > div:nth-child(3)#_cookieDisplay_WAR_corpcookieportlet_privacy-info-message > div:not([id]) > div:nth-child(2) > div:not([id]) > button:nth-child(1)#_cookieDisplay_WAR_corpcookieportlet_necessaryCookiesButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(3)#ounl > div:nth-child(2)#layout__wrapper > div#layout__wrapper__inner > div#layout__container > div:nth-child(3)#p_p_id_cookieDisplay_WAR_corpcookieportlet_ > div:nth-child(3)#_cookieDisplay_WAR_corpcookieportlet_privacy-info-message > div:not([id]) > div:nth-child(2) > div:not([id]) > button:nth-child(1)#_cookieDisplay_WAR_corpcookieportlet_necessaryCookiesButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(3)#ounl > div:nth-child(2)#layout__wrapper > div#layout__wrapper__inner > div#layout__container > div:nth-child(3)#p_p_id_cookieDisplay_WAR_corpcookieportlet_ > div:nth-child(3)#_cookieDisplay_WAR_corpcookieportlet_privacy-info-message > div:not([id]) > div:nth-child(2) > div:not([id]) > button:nth-child(1)#_cookieDisplay_WAR_corpcookieportlet_necessaryCookiesButton",
+            "comment": "ALLEEN NOODZAKELIJKE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(3)#ounl > div:nth-child(2)#layout__wrapper > div#layout__wrapper__inner > div#layout__container > div:nth-child(3)#p_p_id_cookieDisplay_WAR_corpcookieportlet_ > div:nth-child(3)#_cookieDisplay_WAR_corpcookieportlet_privacy-info-message > div:not([id]) > div:nth-child(2) > div:not([id]) > button:nth-child(1)#_cookieDisplay_WAR_corpcookieportlet_necessaryCookiesButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
