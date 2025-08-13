@@ -1,6 +1,5 @@
 {
     "name": "auto_US_dickblick.com_0",
-    "vendorUrl": "https://www.dickblick.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id] > div > div:nth-child(3) > header:nth-child(1) > div:nth-child(2) > div > div > div:nth-child(3) > button:nth-child(1)"
+            "exists": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id] > div > div:nth-child(3) > header:nth-child(1) > div:nth-child(2) > div > div > div:nth-child(3) > button:nth-child(1)"
+            "visible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id] > div > div:nth-child(3) > header:nth-child(1) > div:nth-child(2) > div > div > div:nth-child(3) > button:nth-child(1)",
-            "text": "REJECT ALL NON-ESSENTIAL COOKIES"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
+            "comment": "REJECT ALL NON-ESSENTIAL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
