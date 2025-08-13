@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ugc.fr_rvv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ugc.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ugc\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hagreed > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hagreed > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hagreed > div:not([id]) > button:nth-child(1):not([id])",
+            "comment": "Continuer sans accepter →"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hagreed > div:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
