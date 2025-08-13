@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_emp.de_23v",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.emp.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?emp\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(5)#main > div:nth-child(2)#cookie-banner > div:not([id]) > div#js-cookie-banner-content > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-banner-close-disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(5)#main > div:nth-child(2)#cookie-banner > div:not([id]) > div#js-cookie-banner-content > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-banner-close-disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(5)#main > div:nth-child(2)#cookie-banner > div:not([id]) > div#js-cookie-banner-content > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-banner-close-disagree",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(5)#main > div:nth-child(2)#cookie-banner > div:not([id]) > div#js-cookie-banner-content > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-banner-close-disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
