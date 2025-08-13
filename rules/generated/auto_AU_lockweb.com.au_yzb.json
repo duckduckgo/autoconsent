@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_lockweb.com.au_yzb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lockweb.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lockweb\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#onetrust-reject-all-handler",
+            "comment": "Reject Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#onetrust-reject-all-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
