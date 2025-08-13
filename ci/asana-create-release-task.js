@@ -16,7 +16,6 @@ const autoconsentProjectGid = '1201844467387842';
 const releaseSectionGid = '1202253736774466';
 const scheduledForReleaseSectionGid = '1207140808076253';
 
-
 let asana;
 
 const setupAsana = () => {

@@ -1,9 +1,5 @@
 /* eslint-disable camelcase */
-const timersPromises = require('node:timers/promises');
 const Asana = require('asana');
-const MarkdownIt = require('markdown-it');
-const { getLink } = require('./release-utils.js');
-const md = new MarkdownIt();
 
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN;
 const RELEASE_TASK_URL = process.env.RELEASE_TASK_URL || '';
@@ -14,8 +10,8 @@ const projectExtractorRegex = /\[\[project_gids=(.*)]]/;
 
 // Parse task GID out of URL
 const regex = /^https:\/\/app.asana.com\/(\d+)\/((\d+)\/)?(project\/)?(?<project>\d+)(\/task)?\/(?<task>\d+).*?/;
-const match = regex.exec(RELEASE_TASK_URL)
-const releaseTaskGid = match?.groups?.task
+const match = regex.exec(RELEASE_TASK_URL);
+const releaseTaskGid = match?.groups?.task;
 
 /**
  * @typedef {{taskGid: string, taskUrl: string, displayName: string}} platformData
@@ -46,7 +42,6 @@ const platforms = {
     },
 };
 
-
 const setupAsana = () => {
     return Asana.Client.create({
         defaultHeaders: {
@@ -57,14 +52,20 @@ const setupAsana = () => {
 
 async function main() {
     const asana = setupAsana();
-    const { data: templateSubTasks } = await asana.tasks.getSubtasksForTask(templateTaskGid, { opt_fields: 'name,html_notes,permalink_url' });
+    const { data: templateSubTasks } = await asana.tasks.getSubtasksForTask(templateTaskGid, {
+        opt_fields: 'name,html_notes,permalink_url',
+    });
 
     // Creating subtasks...
-    await Promise.all(templateSubTasks.map((subtask) => asana.tasks.createSubtaskForTask(releaseTaskGid, {
-        name: subtask.name,
-        html_notes: subtask.html_notes,
-        opt_fields: 'name,html_notes,permalink_url',
-    })));
+    await Promise.all(
+        templateSubTasks.map((subtask) =>
+            asana.tasks.createSubtaskForTask(releaseTaskGid, {
+                name: subtask.name,
+                html_notes: subtask.html_notes,
+                opt_fields: 'name,html_notes,permalink_url',
+            }),
+        ),
+    );
     const { data: subtasks } = await asana.tasks.getSubtasksForTask(releaseTaskGid, { opt_fields: 'gid,name,html_notes,permalink_url' });
     console.error('subtasks:', subtasks);
 
@@ -104,15 +105,15 @@ async function main() {
 }
 
 main()
- .then((result) => {
-    // this log is for visibility in Github web interface
-    console.error('stage result:', result.stdout);
-    // The log is needed to read the value from the bash context
-    console.log(result.stdout);
-})
-.catch((e) => {
-    console.error('Failed to create asana tasks:');
-    // The Asana API returns errors in e.value.errors. If that's undefined log whatever else we got
-    console.error(e.value?.errors || e);
-    process.exit(1);
-});
+    .then((result) => {
+        // this log is for visibility in Github web interface
+        console.error('stage result:', result.stdout);
+        // The log is needed to read the value from the bash context
+        console.log(result.stdout);
+    })
+    .catch((e) => {
+        console.error('Failed to create asana tasks:');
+        // The Asana API returns errors in e.value.errors. If that's undefined log whatever else we got
+        console.error(e.value?.errors || e);
+        process.exit(1);
+    });
