@@ -228,10 +228,9 @@ class TestRun {
         const popupFoundMessages = this.findReceivedMessages({ type: 'popupFound' });
         for (let i = 0; i < popupFoundMessages.length; i++) {
             for (let j = i + 1; j < popupFoundMessages.length; j++) {
-                expect(
-                    popupFoundMessages[i],
-                    `Possible reload loop: found multiple identical popupFound messages`,
-                ).not.toEqual(popupFoundMessages[j]);
+                expect(popupFoundMessages[i], `Possible reload loop: found multiple identical popupFound messages`).not.toEqual(
+                    popupFoundMessages[j],
+                );
             }
         }
 
