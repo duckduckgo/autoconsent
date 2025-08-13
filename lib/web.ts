@@ -319,6 +319,7 @@ export default class AutoConsent {
         // collect relevant site-specific rules and run them first
         await Promise.all(siteSpecificRules.map(detectCmp));
 
+        this.detectHeuristics();
         // exit early if we already found a site-specific popup
         if (foundCMPs.length > 0) {
             return foundCMPs;
@@ -327,8 +328,6 @@ export default class AutoConsent {
         logsConfig.lifecycle && console.log("Site-specific rules didn't match, trying generic rules");
         // check generic popups
         await Promise.all(otherRules.map(detectCmp));
-
-        this.detectHeuristics();
 
         if (foundCMPs.length === 0 && retries > 0) {
             // We wait 500ms, and also for some kind of dom mutation to happen before
