@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_deloox.nl_qzv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://deloox.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deloox\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4)#cookie-popup-footer > a:nth-child(1)#denyCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4)#cookie-popup-footer > a:nth-child(1)#denyCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4)#cookie-popup-footer > a:nth-child(1)#denyCookies",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4)#cookie-popup-footer > a:nth-child(1)#denyCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
