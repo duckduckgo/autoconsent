@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_olympic.ca_rdr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://olympic.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?olympic\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#accept-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#accept-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#accept-essential",
+            "comment": "ACCEPT ONLY ESSENTIAL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#accept-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
