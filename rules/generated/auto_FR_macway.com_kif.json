@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_macway.com_kif",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.macway.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?macway\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#grpd-consent > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2)#set-all-no-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#grpd-consent > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2)#set-all-no-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#grpd-consent > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2)#set-all-no-cookie",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#grpd-consent > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2)#set-all-no-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
