@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_livegigs.de_e5q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.livegigs.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?livegigs\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "comment": "Notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
