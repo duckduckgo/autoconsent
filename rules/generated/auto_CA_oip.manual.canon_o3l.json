@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_oip.manual.canon_o3l",
-    "vendorUrl": "https://oip.manual.canon/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent"
+            "exists": "body > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent"
+            "visible": "body > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent",
+            "waitForThenClick": "body > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent",
+            "waitForVisible": "body > div#cookie_banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_discent",
             "timeout": 1000,
             "check": "none"
         }
