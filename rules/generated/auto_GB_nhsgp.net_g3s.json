@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_nhsgp.net_g3s",
-    "vendorUrl": "https://www.nhsgp.net/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies"
+            "exists": "body > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies"
+            "visible": "body > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies",
+            "waitForThenClick": "body > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies",
             "comment": "Reject optional cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies",
+            "waitForVisible": "body > div#nhs-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#nhs-reject-cookies",
             "timeout": 1000,
             "check": "none"
         }
