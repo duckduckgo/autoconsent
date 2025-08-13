@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_naturitas.com.au_7m0",
-    "vendorUrl": "https://www.naturitas.com.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#html-body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#html-body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body#html-body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
