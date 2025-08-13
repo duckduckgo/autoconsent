@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cyclable.com_z3l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cyclable.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cyclable\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-cookie-message > button:nth-child(1)#gdpr-skip-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-cookie-message > button:nth-child(1)#gdpr-skip-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-cookie-message > button:nth-child(1)#gdpr-skip-cookies",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-cookie-message > button:nth-child(1)#gdpr-skip-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
