@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_hetzner.com_hwl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hetzner.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hetzner\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header#header > div:nth-child(1)#InitModal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#DeclineCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header#header > div:nth-child(1)#InitModal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#DeclineCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header#header > div:nth-child(1)#InitModal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#DeclineCookies",
+            "comment": "Allow necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header#header > div:nth-child(1)#InitModal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#DeclineCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
