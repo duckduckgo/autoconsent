@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_boatdealers.ca_wpl",
-    "vendorUrl": "https://www.boatdealers.ca/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
             "comment": "ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
