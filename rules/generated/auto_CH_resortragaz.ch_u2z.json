@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_resortragaz.ch_u2z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.resortragaz.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?resortragaz\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#fd-unCheckAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#fd-unCheckAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#fd-unCheckAll",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#fd-unCheckAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
