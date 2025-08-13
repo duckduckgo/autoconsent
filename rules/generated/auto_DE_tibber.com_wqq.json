@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_tibber.com_wqq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tibber.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tibber\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2):not([id]) > main#app-root > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2):not([id]) > main#app-root > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2):not([id]) > main#app-root > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2):not([id]) > main#app-root > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
