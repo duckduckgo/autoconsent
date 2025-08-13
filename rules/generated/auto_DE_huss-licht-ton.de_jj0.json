@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_huss-licht-ton.de_jj0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.huss-licht-ton.de/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?huss-licht-ton\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > button#cookie_all_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > button#cookie_all_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > button#cookie_all_reject",
+            "comment": " Optionale ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > button#cookie_all_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
