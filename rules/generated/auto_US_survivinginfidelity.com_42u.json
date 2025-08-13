@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_survivinginfidelity.com_42u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.survivinginfidelity.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?survivinginfidelity\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#PageWrapper > div:nth-child(5)#CookiePolicyContainer > div#CookiePolicy > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#PageWrapper > div:nth-child(5)#CookiePolicyContainer > div#CookiePolicy > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#PageWrapper > div:nth-child(5)#CookiePolicyContainer > div#CookiePolicy > button:nth-child(4):not([id])",
+            "comment": " decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#PageWrapper > div:nth-child(5)#CookiePolicyContainer > div#CookiePolicy > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
