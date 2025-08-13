@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bmeia.gv.at_03n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bmeia.gv.at/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bmeia\\.gv\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#truendo_container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#tru_deselect_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#truendo_container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#tru_deselect_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#truendo_container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#tru_deselect_btn",
+            "comment": "NUR ERFORDERLICHE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#truendo_container > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#tru_deselect_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
