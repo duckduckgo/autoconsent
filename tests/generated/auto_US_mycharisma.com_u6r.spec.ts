@@ -2,7 +2,7 @@ import generateCMPTests from '../../playwright/runner';
 generateCMPTests(
     'auto_US_mycharisma.com_u6r',
     [
-        'https://engine.4dsply.com/Redirect.eng?MediaSegmentId=99838&dcid=&vmId=00000000-0000-0000-0000-000000000000&abr=false&timeZoneOffset=0&dst=False&v=4V86B_kjo6BsKPgJHQlug686vdOUYXDnp38W3jKZa-5tEj9hS-NX-y6ZGEe1J914Hx_4e20KJsim9ZNgmOHtOMF7YU6mGNOsXqBpanp9J6q13U-OSkT2w_6f4J2qRdl2e3UvBjfhivopH3il8xEmajjWjL_lQWxl3oN4uSFHmHThpZjnAfB70J30qwaP_iKzjlD1HEMAhiSNaeOrEojGZFzouS3O03RBmvlYYiBv9_GSuEJ54LajmplsrKoXbctr08LBfu2IMU6u_tw-93VYMyepfWLlervsec2kz94LOW24S-HqDS4qJ_mAqn2m8CGDCXR-B6G7MVHEg0A5XOOB5XjFHQg2KH12j2bpUW3mcVpFPG3UOil1TMxVThCzYp2dW6q9OzOBZhox67tVH8UpOCXbYaEkM73AKXuUYaKfIfvnjR6J0NP5cDBGIVxXbv6jMN-v2A8IMl3e4sAGE76bzp7UHiEfDN5M-zvzhHfwhOdN4BbHIf3BPba26xGjFX7J89sBmNcI_ZcJDdrBrAPXMO-WrxfqjPLGj03TT0eO1alhgnhK5AyhIdf0E3zZDtpKDUvtbxPaNzQC_3QfR1VHTapkLYJxSwdApsDvquKaxDl7IAugdWqaSmPg1Z4o6w38-qBftbM-vbUunAFmyMa3eks1E4tFEH083Pf6Xe9HKLRWFMgBiBB2r-HO8_Fz8Pp4CALqRS9XRGp_1-1GkWQXUWfpoWCN_QCVwuRJs0svjBH3CGeaADFeSyWnfTpJrtqHV80bXchHmfQXQKMfRoIwxMpo7VV_lx-h12lAG2wn_ouY2_ssiFpgs7495pPHvBCMURNUJeI_pZXjpiWhtsTHGr4L2vmoCCJ5Rt_0oKRwUsEcPiDHDbPlkz4YXC03K30rG9yOa0xQhPzqyGIJSWDtJGZdPiipAgklyHcWr1U6JAEE0xSAIjBvmmRYwQ62L7Pky6viTTEo_SIj8oHwDCED4ANRQ-ygWbPLz27QWfgQfJoym1aSjDh2Bm_G7HsU0vuG0&kw=&mw=1024&mh=768&at=&dc=GgXq9_xLz7iYRMnablO22ewJYw57hJndif6QWKM0Tw0Qhg62-nEpPCeVyIvlSC1n3Jw1Jqdt9VC8C_4eu7p5yQ2&res=1920x1080&spt=0&kw=',
+        'https://mycharisma.com/',
     ],
     { testOptIn: false, testSelfTest: true, onlyRegions: ['US'] },
 );
