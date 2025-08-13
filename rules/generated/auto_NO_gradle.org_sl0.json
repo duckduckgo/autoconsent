@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_gradle.org_sl0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gradle.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gradle\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
