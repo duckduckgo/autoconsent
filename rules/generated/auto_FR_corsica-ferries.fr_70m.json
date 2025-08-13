@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_corsica-ferries.fr_70m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.corsica-ferries.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?corsica-ferries\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(2)#ckieBnr_footer_button_container > button:nth-child(1)#ckieBnr_footer_button_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(2)#ckieBnr_footer_button_container > button:nth-child(1)#ckieBnr_footer_button_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(2)#ckieBnr_footer_button_container > button:nth-child(1)#ckieBnr_footer_button_deny",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(2)#ckieBnr_footer_button_container > button:nth-child(1)#ckieBnr_footer_button_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
