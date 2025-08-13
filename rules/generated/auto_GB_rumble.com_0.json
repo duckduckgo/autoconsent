@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_rumble.com_0",
-    "vendorUrl": "https://rumble.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject"
+            "exists": "body > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject"
+            "visible": "body > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject",
             "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-client-storage-consent__popup > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-client-storage-consent__reject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
