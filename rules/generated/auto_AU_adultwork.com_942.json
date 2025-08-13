@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_adultwork.com_942",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://adultwork.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adultwork\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_fade > div#cookie_light > div:not([id]) > form:not([id]) > div:nth-child(1)#g-cookie-buttons > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_fade > div#cookie_light > div:not([id]) > form:not([id]) > div:nth-child(1)#g-cookie-buttons > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_fade > div#cookie_light > div:not([id]) > form:not([id]) > div:nth-child(1)#g-cookie-buttons > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_fade > div#cookie_light > div:not([id]) > form:not([id]) > div:nth-child(1)#g-cookie-buttons > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
