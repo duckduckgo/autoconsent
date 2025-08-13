@@ -30,6 +30,11 @@ jobs:
               run: |
                   npm run compile-filterlist
 
+            - name: Set Git identity
+              run: |
+                  git config --global user.email "dax@duckduckgo.com"
+                  git config --global user.name "Dax the Deployer"
+
             - name: Create Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
