@@ -1,36 +1,43 @@
 {
     "name": "auto_GB_signin.ebay.co.uk_0",
-    "vendorUrl": "https://signin.ebay.co.uk/ws/eBayISAPI.dll?SignIn&ru=https%3A%2F%2Fmy.ebay.co.uk%2F&sgfl=sm&smuid=8224f427-6d26-11f0-b153-2b5468523676",
     "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://signin.ebay.co.uk/ws/eBayISAPI.dll?SignIn&ru=https%3A%2F%2Fmy.ebay.co.uk%2F&sgfl=sm&smuid=8224f427-6d26-11f0-b153-2b5468523676",
+        "manuallyReviewUpdates": true
+    },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?signin\\.ebay\\.co\\.uk/"
+        "urlPattern": "^https?://(www\\.)?(signin\\.)?ebay\\.([.a-z]+)/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#gdpr-banner"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+            "exists": "#gdpr-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+            "visible": "#gdpr-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-banner-accept"
+        }
+    ],
     "optOut": [
         {
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "waitForThenClick": "#gdpr-banner-decline",
             "comment": "Decline all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "waitForVisible": "#gdpr-banner-decline",
             "timeout": 1000,
             "check": "none"
         }
