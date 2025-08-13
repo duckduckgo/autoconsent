@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_gstaadmenuhinfestival.ch_vp3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gstaadmenuhinfestival.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gstaadmenuhinfestival\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cb-cookie-warning > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-cookie-warning__button--decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cb-cookie-warning > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-cookie-warning__button--decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cb-cookie-warning > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-cookie-warning__button--decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cb-cookie-warning > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-cookie-warning__button--decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
