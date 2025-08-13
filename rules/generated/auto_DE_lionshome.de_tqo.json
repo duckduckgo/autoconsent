@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_lionshome.de_tqo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lionshome.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lionshome\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_banner_container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_banner_container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_banner_container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id])",
+            "comment": "Akzeptieren Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_banner_container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
