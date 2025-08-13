@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_elbphilharmonie.de_0hp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.elbphilharmonie.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?elbphilharmonie\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-modal > div#consent-modal-body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-modal > div#consent-modal-body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-modal > div#consent-modal-body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-modal > div#consent-modal-body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
