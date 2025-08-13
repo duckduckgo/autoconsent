@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_docs.gradle.org_oau",
+    "vendorUrl": "https://docs.gradle.org/current/userguide/userguide.html",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?docs\\.gradle\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#analytics-consent-div > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#analytics-consent-div > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#analytics-consent-div > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#analytics-consent-div > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
