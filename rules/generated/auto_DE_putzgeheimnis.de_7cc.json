@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_putzgeheimnis.de_7cc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.putzgeheimnis.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?putzgeheimnis\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#adc8be35c-f340-4390-96ac-661b2d99cb45 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#adc8be35c-f340-4390-96ac-661b2d99cb45 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#adc8be35c-f340-4390-96ac-661b2d99cb45 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Weiter ohne Einwilligung"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#adc8be35c-f340-4390-96ac-661b2d99cb45 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
