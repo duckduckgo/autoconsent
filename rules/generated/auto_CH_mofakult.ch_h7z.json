@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mofakult.ch_h7z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mofakult.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mofakult\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > mk-root:not([id]) > mk-cookie-modal:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > mk-button:nth-child(1):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > mk-root:not([id]) > mk-cookie-modal:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > mk-button:nth-child(1):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > mk-root:not([id]) > mk-cookie-modal:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > mk-button:nth-child(1):not([id]) > button:not([id]) > span:not([id])",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > mk-root:not([id]) > mk-cookie-modal:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > mk-button:nth-child(1):not([id]) > button:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
