@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_semrush.com_ygc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.semrush.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?semrush\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
