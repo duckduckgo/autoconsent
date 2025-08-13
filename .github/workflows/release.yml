@@ -60,12 +60,16 @@ jobs:
     # Create initial Asana subtasks
     # ------------------------------------------------------------------------------
     create_asana_tasks:
-        needs: get_release_info
+        needs:
+            - get_release_info
+            - release
         runs-on: ubuntu-latest
         outputs:
             task-gid: ${{ steps.create-asana-tasks.outputs.TASK_GID }}
         env:
+            TAG: ${{ needs.release.outputs.tag_name }}
             RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+            RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
         steps:
             # --- Setup ---
             - uses: actions/checkout@v3
