@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_befr.ebay.be_uxy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.befr.ebay.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?befr\\.ebay\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#globalHeaderWrapper > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#globalHeaderWrapper > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#globalHeaderWrapper > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#globalHeaderWrapper > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
