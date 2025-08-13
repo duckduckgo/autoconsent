@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_guildford.gov.uk_0",
-    "vendorUrl": "https://www.guildford.gov.uk/?ccp=true",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
+            "exists": "body > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
+            "visible": "body > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
             "comment": "Reject additional cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
