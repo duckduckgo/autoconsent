@@ -1,6 +1,5 @@
 {
     "name": "auto_US_nm.org_0",
-    "vendorUrl": "https://www.nm.org/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all"
+            "exists": "body > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all"
+            "visible": "body > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all",
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all",
             "comment": "Decline All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all",
+            "waitForVisible": "body > div#ppms_cm_consent_popup_4abb1e4c-f063-4207-8488-64f5e44dc7cf > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-c5578703-0386-4f6a-adac-b60b97d64768 > div:nth-child(2)#ppms-11c5795d-8223-468c-aa09-9889bb5ef03a > button:nth-child(2)#ppms_cm_reject-all",
             "timeout": 1000,
             "check": "none"
         }
