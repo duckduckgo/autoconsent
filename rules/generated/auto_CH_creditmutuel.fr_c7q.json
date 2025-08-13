@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_creditmutuel.fr_c7q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.creditmutuel.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?creditmutuel\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lightbox_page > div:nth-child(8)#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lightbox_page > div:nth-child(8)#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lightbox_page > div:nth-child(8)#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lightbox_page > div:nth-child(8)#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
