@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_visdeal.nl_ktm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://visdeal.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?visdeal\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > consented-cookie-block:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > consented-cookie-block:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > consented-cookie-block:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(5):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > consented-cookie-block:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
