@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_homeswapper.co.uk_x3o",
-    "vendorUrl": "https://www.homeswapper.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy"
+            "exists": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy"
+            "visible": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy",
+            "waitForThenClick": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy",
             "comment": "Reject non-essential cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy",
+            "waitForVisible": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy",
             "timeout": 1000,
             "check": "none"
         }
