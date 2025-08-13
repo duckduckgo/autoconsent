@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_vrbangers.com_l3h",
-    "vendorUrl": "https://vrbangers.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"elem_v_000310\"] > div:nth-child(7):not([id])[data-testid=\"elem_v_002593\"] > div:not([id])[data-testid=\"elem_v_002594\"] > div:nth-child(2):not([id])[data-testid=\"elem_v_002596\"] > button:nth-child(2):not([id])[data-testid=\"app_link_button_elem_v_002598\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"elem_v_000310\"] > div:nth-child(7):not([id])[data-testid=\"elem_v_002593\"] > div:not([id])[data-testid=\"elem_v_002594\"] > div:nth-child(2):not([id])[data-testid=\"elem_v_002596\"] > button:nth-child(2):not([id])[data-testid=\"app_link_button_elem_v_002598\"]"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"elem_v_000310\"] > div:nth-child(7):not([id])[data-testid=\"elem_v_002593\"] > div:not([id])[data-testid=\"elem_v_002594\"] > div:nth-child(2):not([id])[data-testid=\"elem_v_002596\"] > button:nth-child(2):not([id])[data-testid=\"app_link_button_elem_v_002598\"]",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"elem_v_000310\"] > div:nth-child(7):not([id])[data-testid=\"elem_v_002593\"] > div:not([id])[data-testid=\"elem_v_002594\"] > div:nth-child(2):not([id])[data-testid=\"elem_v_002596\"] > button:nth-child(2):not([id])[data-testid=\"app_link_button_elem_v_002598\"]",
             "timeout": 1000,
             "check": "none"
         }
