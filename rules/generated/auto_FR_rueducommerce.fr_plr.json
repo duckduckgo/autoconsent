@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_rueducommerce.fr_plr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rueducommerce.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rueducommerce\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieConsentRefuseButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieConsentRefuseButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieConsentRefuseButton",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieConsentRefuseButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
