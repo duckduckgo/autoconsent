@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_averoachmea.nl_fxj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.averoachmea.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?averoachmea\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
