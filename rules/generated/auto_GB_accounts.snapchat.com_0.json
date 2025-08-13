@@ -1,6 +1,6 @@
 {
     "name": "auto_GB_accounts.snapchat.com_0",
-    "vendorUrl": "https://accounts.snapchat.com/accounts/v2/login",
+    "vendorUrl": "https://accounts.snapchat.com/v2/login",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +10,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1)#account-identifier-root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div#__next > div:nth-child(1):not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1)#account-identifier-root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div#__next > div:nth-child(1):not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1)#account-identifier-root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(1):not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
             "comment": "Essential Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(1):not([id]) > section:nth-child(3):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
