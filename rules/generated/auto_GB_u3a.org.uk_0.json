@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_u3a.org.uk_0",
-    "vendorUrl": "https://www.u3a.org.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline"
+            "exists": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline"
+            "visible": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline",
             "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
