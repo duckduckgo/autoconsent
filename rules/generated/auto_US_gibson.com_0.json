@@ -1,6 +1,5 @@
 {
     "name": "auto_US_gibson.com_0",
-    "vendorUrl": "https://www.gibson.com/en-US/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id][class][role][aria-labelledby][tabindex][data-backdrop][data-keyboard][aria-modal][style] > div > div > button:nth-child(6)"
+            "exists": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][class][role][aria-labelledby][tabindex][data-backdrop][data-keyboard][aria-modal][style] > div > div > button:nth-child(6)"
+            "visible": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][class][role][aria-labelledby][tabindex][data-backdrop][data-keyboard][aria-modal][style] > div > div > button:nth-child(6)",
-            "text": "ACCEPT ESSENTIAL COOKIES"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies",
+            "comment": "ACCEPT ESSENTIAL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
