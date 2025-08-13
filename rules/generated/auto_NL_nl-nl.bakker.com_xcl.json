@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nl-nl.bakker.com_xcl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://nl-nl.bakker.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nl-nl\\.bakker\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
