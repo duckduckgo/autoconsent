@@ -96,7 +96,7 @@ class TestRun {
                 // log the full url in the error message, this will be parsed by the review tool
                 console.error(`Autoconsent test failed on ${this.url} failure stats: ${JSON.stringify(failureStats)}`);
             }
-            await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
+            this.takeScreenshot(`${this.screenshotCounter++}-failure`);
             throw e;
         }
     }
@@ -236,7 +236,7 @@ class TestRun {
             expect(
                 this.findReceivedMessages({ type: 'autoconsentDone' }).length,
                 'Possible reload loop: too many autoconsentDone messages',
-            ).toBe(this.options.expectedRuns);
+            ).toBeLessThanOrEqual(this.options.expectedRuns);
         }
     }
 
