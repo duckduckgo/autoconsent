@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bnpparibasfortis.be_02b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bnpparibasfortis.be/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?bnpparibasfortis\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn",
+            "comment": "Refuse optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
