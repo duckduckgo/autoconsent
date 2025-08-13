@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_milkandmore.co.uk_0",
-    "vendorUrl": "https://www.milkandmore.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject"
+            "exists": "body > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject"
+            "visible": "body > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies_notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_notice_reject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
