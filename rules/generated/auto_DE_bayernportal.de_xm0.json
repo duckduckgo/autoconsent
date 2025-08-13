@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bayernportal.de_xm0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bayernportal.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bayernportal\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentOverlay > div:nth-child(1)#cookieConsentDescription > div:nth-child(3):not([id]) > button:nth-child(1)#cookieConsentNecessaryOnlyButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentOverlay > div:nth-child(1)#cookieConsentDescription > div:nth-child(3):not([id]) > button:nth-child(1)#cookieConsentNecessaryOnlyButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentOverlay > div:nth-child(1)#cookieConsentDescription > div:nth-child(3):not([id]) > button:nth-child(1)#cookieConsentNecessaryOnlyButton",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentOverlay > div:nth-child(1)#cookieConsentDescription > div:nth-child(3):not([id]) > button:nth-child(1)#cookieConsentNecessaryOnlyButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
