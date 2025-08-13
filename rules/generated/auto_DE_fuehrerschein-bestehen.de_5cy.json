@@ -2,12 +2,13 @@
     "name": "auto_DE_fuehrerschein-bestehen.de_5cy",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.fuehrerschein-bestehen.de/"
+        "vendorUrl": "http://www.fuehrerschein-bestehen.de/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?en\\.fuehrerschein-bestehen\\.de/"
+        "urlPattern": "^https?://([a-z]+\\.)?fuehrerschein-bestehen\\.de/"
     },
     "prehideSelectors": [],
     "detectCmp": [
