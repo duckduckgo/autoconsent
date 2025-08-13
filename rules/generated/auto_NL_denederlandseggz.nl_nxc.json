@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_denederlandseggz.nl_nxc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.denederlandseggz.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?denederlandseggz\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_5ef3b96e-e36b-4b17-b70a-17cae056a2f2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_5ef3b96e-e36b-4b17-b70a-17cae056a2f2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_5ef3b96e-e36b-4b17-b70a-17cae056a2f2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_5ef3b96e-e36b-4b17-b70a-17cae056a2f2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
