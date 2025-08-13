@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_politie.nl_8bl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.politie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?politie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])",
+            "comment": "Accepteren\nWeigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
