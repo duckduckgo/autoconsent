@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_orpheum.com.au_kdl",
-    "vendorUrl": "https://www.orpheum.com.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+            "exists": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+            "visible": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
             "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
