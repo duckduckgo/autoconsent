@@ -1,0 +1,38 @@
+{
+    "name": "auto_AU_sskm.de_nbi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.sskm.de/de/home/login-online-banking.html",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sskm\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "a[data-form=\".eprivacy_optin_decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "a[data-form=\".eprivacy_optin_decline\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "a[data-form=\".eprivacy_optin_decline\"]",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "a[data-form=\".eprivacy_optin_decline\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
