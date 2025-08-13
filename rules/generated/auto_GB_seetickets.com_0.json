@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_seetickets.com_0",
-    "vendorUrl": "https://www.seetickets.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject"
+            "exists": "body > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject"
+            "visible": "body > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(2)#seeGdprCookieConsent > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#seeGdprReject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
