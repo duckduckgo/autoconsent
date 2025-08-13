@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_hlinkagretzkycup.ca_xc9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hlinkagretzkycup.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hlinkagretzkycup\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])",
+            "comment": "Accept Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
