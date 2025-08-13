@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.ryobitools.eu_dal",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.ryobitools.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.ryobitools\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
+            "comment": "COOKIES NÉCESSAIRES UNIQUEMENT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
