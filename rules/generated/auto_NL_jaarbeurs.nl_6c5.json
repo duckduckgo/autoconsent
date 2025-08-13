@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_jaarbeurs.nl_6c5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jaarbeurs.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jaarbeurs\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
