@@ -1,6 +1,5 @@
 {
     "name": "auto_US_hearth.com_0",
-    "vendorUrl": "https://www.hearth.com/talk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[class] > ul > li > div > div:nth-child(2) > div > div:nth-child(2) > a:nth-child(2) > span"
+            "exists": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[class] > ul > li > div > div:nth-child(2) > div > div:nth-child(2) > a:nth-child(2) > span"
+            "visible": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[class] > ul > li > div > div:nth-child(2) > div > div:nth-child(2) > a:nth-child(2) > span",
-            "text": "Reject optional cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Reject optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
