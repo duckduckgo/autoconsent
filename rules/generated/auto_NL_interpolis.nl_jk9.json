@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_interpolis.nl_jk9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.interpolis.nl/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?interpolis\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > a:nth-child(1)#ipoclick-btn-cookiebar-ik_ga_niet_akkoord_var_a"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > a:nth-child(1)#ipoclick-btn-cookiebar-ik_ga_niet_akkoord_var_a"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > a:nth-child(1)#ipoclick-btn-cookiebar-ik_ga_niet_akkoord_var_a",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > a:nth-child(1)#ipoclick-btn-cookiebar-ik_ga_niet_akkoord_var_a",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
