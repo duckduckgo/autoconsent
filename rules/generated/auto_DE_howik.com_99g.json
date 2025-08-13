@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_howik.com_99g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://howik.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?howik\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentWidget > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentWidget > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentWidget > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyBtn",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentWidget > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
