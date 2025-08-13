@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_namsu.de_0or",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.namsu.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?namsu\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mbmcookie > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mbmcookie > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mbmcookie > a:nth-child(2):not([id])",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mbmcookie > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
