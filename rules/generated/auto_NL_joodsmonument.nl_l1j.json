@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_joodsmonument.nl_l1j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.joodsmonument.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?joodsmonument\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > form#cookie-consent__form > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-consent__accept-none"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > form#cookie-consent__form > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-consent__accept-none"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > form#cookie-consent__form > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-consent__accept-none",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > form#cookie-consent__form > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-consent__accept-none",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
