@@ -1,3 +1,32 @@
+# v14.12.0 (Wed Aug 13 2025)
+
+#### 🚀 Enhancement
+
+- [test] Add autoconsent rules for 1 sites (0 requiring review) [#873](https://github.com/duckduckgo/autoconsent/pull/873) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Release automation update [#880](https://github.com/duckduckgo/autoconsent/pull/880) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix playwright tests [#877](https://github.com/duckduckgo/autoconsent/pull/877) ([@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#874](https://github.com/duckduckgo/autoconsent/pull/874) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### ⚠️ Pushed to `main`
+
+- Temp disable release tag requirement ([@sammacbeth](https://github.com/sammacbeth))
+- Set Dax's credentials for releases ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Improve playwright tests [#852](https://github.com/duckduckgo/autoconsent/pull/852) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.11.0 (Wed Aug 06 2025)
 
 #### 🚀 Enhancement

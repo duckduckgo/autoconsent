@@ -1,0 +1,49 @@
+name: Get Release Info
+
+on:
+    workflow_call:
+        inputs:
+            tag_name:
+                type: string
+                description: 'The tag of the release to get info for'
+                required: true
+        outputs:
+            release-url:
+                description: 'The HTML URL of the release'
+                value: ${{ jobs.get_release_info.outputs.release-url }}
+            release-notes:
+                description: 'The release notes body'
+                value: ${{ jobs.get_release_info.outputs.release-notes }}
+
+jobs:
+    get_release_info:
+        runs-on: ubuntu-latest
+        outputs:
+            release-url: ${{ steps.get-release-url.outputs.result }}
+            release-notes: ${{ steps.get-release-notes.outputs.result }}
+        steps:
+            - name: Get Release URL
+              id: get-release-url
+              uses: actions/github-script@v4
+              with:
+                  result-encoding: string
+                  script: |
+                      const { data } = await github.repos.getReleaseByTag({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        tag: '${{ inputs.tag_name }}'
+                      });
+                      return data.html_url;
+
+            - name: Get Release Notes
+              id: get-release-notes
+              uses: actions/github-script@v4
+              with:
+                  result-encoding: string
+                  script: |
+                      const { data } = await github.repos.getReleaseByTag({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        tag: '${{ inputs.tag_name }}'
+                      });
+                      return data.body;
