@@ -1,0 +1,38 @@
+{
+    "name": "auto_NO_nicegram.app_des",
+    "vendorUrl": "https://nicegram.app/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nicegram\\.app/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(13):not([id]) > div:nth-child(3):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(13):not([id]) > div:nth-child(3):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(13):not([id]) > div:nth-child(3):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(13):not([id]) > div:nth-child(3):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
