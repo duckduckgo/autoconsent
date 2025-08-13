@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_greenpeace.fr_fbh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.greenpeace.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?greenpeace\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#discreto > div:nth-child(2):not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#discreto > div:nth-child(2):not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#discreto > div:nth-child(2):not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Je refuse tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#discreto > div:nth-child(2):not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
