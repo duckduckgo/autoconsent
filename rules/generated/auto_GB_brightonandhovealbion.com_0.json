@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_brightonandhovealbion.com_0",
-    "vendorUrl": "https://www.brightonandhovealbion.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(11) > div > div > div > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(3)"
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(11) > div > div > div > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(3)"
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(11) > div > div > div > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(3)",
-            "text": "Reject Cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
