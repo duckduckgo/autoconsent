@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_betterhomes.ch_2d8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.betterhomes.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?betterhomes\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > dialog:nth-child(1):not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > dialog:nth-child(1):not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > dialog:nth-child(1):not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > dialog:nth-child(1):not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
