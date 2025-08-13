@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_zonecouture.fr_vdh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.zonecouture.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zonecouture\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification",
+            "comment": "Rejeter la bannière"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
