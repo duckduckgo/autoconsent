@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_finom.co_vhv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://finom.co/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?finom\\.co/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:not([id])",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

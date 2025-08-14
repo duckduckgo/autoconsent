@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_gezondr.nl_x1f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gezondr.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gezondr\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

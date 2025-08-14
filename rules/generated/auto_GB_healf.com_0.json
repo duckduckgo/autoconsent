@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_healf.com_0",
-    "vendorUrl": "https://healf.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(3) > button:nth-child(2)"
+            "exists": "body > div:not([id]) > div#radix-\\:R2j9db\\: > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(3) > button:nth-child(2)"
+            "visible": "body > div:not([id]) > div#radix-\\:R2j9db\\: > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(3) > button:nth-child(2)",
-            "text": "Deny all"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#radix-\\:R2j9db\\: > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#radix-\\:R2j9db\\: > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

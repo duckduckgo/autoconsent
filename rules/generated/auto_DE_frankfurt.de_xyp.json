@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_frankfurt.de_xyp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://frankfurt.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?frankfurt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookieModal > button:nth-child(9)#btnCookiesAcceptMandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookieModal > button:nth-child(9)#btnCookiesAcceptMandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookieModal > button:nth-child(9)#btnCookiesAcceptMandatory",
+            "comment": "Optionale Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookieModal > button:nth-child(9)#btnCookiesAcceptMandatory",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

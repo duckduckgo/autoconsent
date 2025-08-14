@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bikeimport.ch_6vr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bikeimport.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bikeimport\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentBanner > form:nth-child(3)#consentBannerForm > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentBanner > form:nth-child(3)#consentBannerForm > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentBanner > form:nth-child(3)#consentBannerForm > button:nth-child(5):not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentBanner > form:nth-child(3)#consentBannerForm > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

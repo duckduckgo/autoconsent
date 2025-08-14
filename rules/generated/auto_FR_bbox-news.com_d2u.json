@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bbox-news.com_d2u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bbox-news.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bbox-news\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#manage-cookies-modal > div:nth-child(3):not([id]) > div#popup-buttons > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#manage-cookies-modal > div:nth-child(3):not([id]) > div#popup-buttons > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#manage-cookies-modal > div:nth-child(3):not([id]) > div#popup-buttons > button:nth-child(2):not([id])",
+            "comment": "Seulement nécessaires"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#manage-cookies-modal > div:nth-child(3):not([id]) > div#popup-buttons > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

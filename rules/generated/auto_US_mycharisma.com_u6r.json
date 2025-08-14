@@ -1,6 +1,5 @@
 {
     "name": "auto_US_mycharisma.com_u6r",
-    "vendorUrl": "https://mycharisma.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline"
+            "exists": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline"
+            "visible": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline",
+            "waitForThenClick": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline",
             "comment": "Deny"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline",
+            "waitForVisible": "body > div#zcb-banner > div#zcb-info > span:nth-child(2):not([id]) > a:nth-child(1)#zc-decline",
             "timeout": 1000,
             "check": "none"
         }

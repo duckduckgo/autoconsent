@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_core.ac.uk_pyc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://core.ac.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?core\\.ac\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(5)#cookies-popup > div:nth-child(2):not([id]) > button:nth-child(1)#essential_cookies_allowed"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(5)#cookies-popup > div:nth-child(2):not([id]) > button:nth-child(1)#essential_cookies_allowed"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(5)#cookies-popup > div:nth-child(2):not([id]) > button:nth-child(1)#essential_cookies_allowed",
+            "comment": "ESSENTIAL COOKIES ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(5)#cookies-popup > div:nth-child(2):not([id]) > button:nth-child(1)#essential_cookies_allowed",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

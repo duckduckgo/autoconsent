@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_berck.fr_hjj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://berck.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?berck\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-background > div#cookie-consent-window > div:nth-child(4)#cookie-consent-button-container > button:nth-child(2)#cookie-consent-button-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-background > div#cookie-consent-window > div:nth-child(4)#cookie-consent-button-container > button:nth-child(2)#cookie-consent-button-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-background > div#cookie-consent-window > div:nth-child(4)#cookie-consent-button-container > button:nth-child(2)#cookie-consent-button-refuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-background > div#cookie-consent-window > div:nth-child(4)#cookie-consent-button-container > button:nth-child(2)#cookie-consent-button-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

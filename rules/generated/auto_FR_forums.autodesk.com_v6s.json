@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_forums.autodesk.com_v6s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://forums.autodesk.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?forums\\.autodesk\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).lia-user-status-anonymous.CommunityPage.lia-body > div:nth-child(21):not([id]).adsk-gdpr-footer-wrapper > div:nth-child(1):not([id]).adsk-gdpr-content > div:nth-child(2):not([id]).adsk-gdpr-confirm > button:nth-child(1)#adsk-eprivacy-privacy-decline-all-button[data-trigger-close=\"true\"][data-yesno=\"false\"][data-slim-trigger=\"true\"].adsk-eprivacy-no-to-all--trigger"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).lia-user-status-anonymous.CommunityPage.lia-body > div:nth-child(21):not([id]).adsk-gdpr-footer-wrapper > div:nth-child(1):not([id]).adsk-gdpr-content > div:nth-child(2):not([id]).adsk-gdpr-confirm > button:nth-child(1)#adsk-eprivacy-privacy-decline-all-button[data-trigger-close=\"true\"][data-yesno=\"false\"][data-slim-trigger=\"true\"].adsk-eprivacy-no-to-all--trigger"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).lia-user-status-anonymous.CommunityPage.lia-body > div:nth-child(21):not([id]).adsk-gdpr-footer-wrapper > div:nth-child(1):not([id]).adsk-gdpr-content > div:nth-child(2):not([id]).adsk-gdpr-confirm > button:nth-child(1)#adsk-eprivacy-privacy-decline-all-button[data-trigger-close=\"true\"][data-yesno=\"false\"][data-slim-trigger=\"true\"].adsk-eprivacy-no-to-all--trigger",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).lia-user-status-anonymous.CommunityPage.lia-body > div:nth-child(21):not([id]).adsk-gdpr-footer-wrapper > div:nth-child(1):not([id]).adsk-gdpr-content > div:nth-child(2):not([id]).adsk-gdpr-confirm > button:nth-child(1)#adsk-eprivacy-privacy-decline-all-button[data-trigger-close=\"true\"][data-yesno=\"false\"][data-slim-trigger=\"true\"].adsk-eprivacy-no-to-all--trigger",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
