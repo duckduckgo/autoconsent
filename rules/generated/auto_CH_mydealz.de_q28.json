@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mydealz.de_q28",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mydealz.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mydealz\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(4)#pageContent > div:nth-child(4)#app > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(4)#pageContent > div:nth-child(4)#app > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(4)#pageContent > div:nth-child(4)#app > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "Ohne Zustimmung weiter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(4)#pageContent > div:nth-child(4)#app > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

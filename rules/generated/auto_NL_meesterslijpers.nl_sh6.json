@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_meesterslijpers.nl_sh6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.meesterslijpers.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?meesterslijpers\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(3)#ism-consent-box > div:nth-child(2)#ism-consent-body > div:nth-child(2)#ism-consent-buttons > button:nth-child(2)#ism-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(3)#ism-consent-box > div:nth-child(2)#ism-consent-body > div:nth-child(2)#ism-consent-buttons > button:nth-child(2)#ism-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(3)#ism-consent-box > div:nth-child(2)#ism-consent-body > div:nth-child(2)#ism-consent-buttons > button:nth-child(2)#ism-reject",
+            "comment": "Alles Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(3)#ism-consent-box > div:nth-child(2)#ism-consent-body > div:nth-child(2)#ism-consent-buttons > button:nth-child(2)#ism-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

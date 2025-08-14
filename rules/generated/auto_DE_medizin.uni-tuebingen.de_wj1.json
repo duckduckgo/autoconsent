@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_medizin.uni-tuebingen.de_wj1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.medizin.uni-tuebingen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?medizin\\.uni-tuebingen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-container > div:nth-child(4)#privacy-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-container > div:nth-child(4)#privacy-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-container > div:nth-child(4)#privacy-buttons > button:nth-child(3):not([id])",
+            "comment": "Nur notwendige Cookies zulassen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-container > div:nth-child(4)#privacy-buttons > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_libertic.com_yv2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.libertic.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?libertic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#conteneur-simple > div:nth-child(6)#band-cookies > form:nth-child(6):not([id]) > right:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#conteneur-simple > div:nth-child(6)#band-cookies > form:nth-child(6):not([id]) > right:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#conteneur-simple > div:nth-child(6)#band-cookies > form:nth-child(6):not([id]) > right:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Refuser les cookies non nécessaires"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#conteneur-simple > div:nth-child(6)#band-cookies > form:nth-child(6):not([id]) > right:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_miles-and-more.com_kxm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.miles-and-more.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?miles-and-more\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Accept necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_morges.ch_p9r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.morges.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?morges\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie_consent_use_only_functional_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie_consent_use_only_functional_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie_consent_use_only_functional_cookies",
+            "comment": "Utiliser uniquement les cookies fonctionnels"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie_consent_use_only_functional_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

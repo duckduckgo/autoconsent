@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_krys.com_9mr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.krys.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?krys\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#trackers-ask-consent-gdpr > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#trackers-ask-consent-gdpr > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#trackers-ask-consent-gdpr > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#trackers-ask-consent-gdpr > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

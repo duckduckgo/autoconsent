@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_kiaoval.com_0",
-    "vendorUrl": "https://www.kiaoval.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject"
+            "exists": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject"
+            "visible": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject",
+            "waitForThenClick": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject",
             "comment": "REJECT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject",
+            "waitForVisible": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject",
             "timeout": 1000,
             "check": "none"
         }

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_juedische-allgemeine.de_qff",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.juedische-allgemeine.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?juedische-allgemeine\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_journaux.fr_ppo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.journaux.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?journaux\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > app-cookies:nth-child(6):not([id]) > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > app-cookies:nth-child(6):not([id]) > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > app-cookies:nth-child(6):not([id]) > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > app-cookies:nth-child(6):not([id]) > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

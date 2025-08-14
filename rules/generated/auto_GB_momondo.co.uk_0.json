@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_momondo.co.uk_0",
-    "vendorUrl": "https://www.momondo.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])"
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])"
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(3):not([id]) > div:not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
