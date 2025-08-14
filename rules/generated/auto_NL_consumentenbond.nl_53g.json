@@ -2,7 +2,8 @@
     "name": "auto_NL_consumentenbond.nl_53g",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.consumentenbond.nl/"
+        "vendorUrl": "http://www.consumentenbond.nl/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div#__FAAS_SSR__1755044480608__LLQ__ > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div#__FAAS_SSR__1755044480608__LLQ__ > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div#__FAAS_SSR__1755044480608__LLQ__ > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
             "comment": "Niet accepteren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div#__FAAS_SSR__1755044480608__LLQ__ > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
