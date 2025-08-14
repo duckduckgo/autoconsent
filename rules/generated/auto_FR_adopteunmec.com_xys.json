@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_adopteunmec.com_xys",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.adopteunmec.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adopte\\.app/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#banner-wrap > div#cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#refuse-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#banner-wrap > div#cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#refuse-consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#banner-wrap > div#cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#refuse-consent",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#banner-wrap > div#cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#refuse-consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_unsplash.com_15t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://unsplash.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unsplash\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Accept essential only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

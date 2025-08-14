@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_mediathekviewweb.de_i81",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mediathekviewweb.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mediathekviewweb\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

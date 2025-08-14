@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_voordeelshop.ah.nl_59x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://voordeelshop.ah.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?voordeelshop\\.ah\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-overlay > div#cookie-popup > div:nth-child(1)#cookie-index > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-overlay > div#cookie-popup > div:nth-child(1)#cookie-index > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-overlay > div#cookie-popup > div:nth-child(1)#cookie-index > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#decline-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-overlay > div#cookie-popup > div:nth-child(1)#cookie-index > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

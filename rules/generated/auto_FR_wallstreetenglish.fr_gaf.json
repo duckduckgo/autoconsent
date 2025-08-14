@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_wallstreetenglish.fr_gaf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://wallstreetenglish.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wallstreetenglish\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(1):not([id]) > p:not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(1):not([id]) > p:not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(1):not([id]) > p:not([id]) > a:nth-child(1):not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1)#block-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(1):not([id]) > p:not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

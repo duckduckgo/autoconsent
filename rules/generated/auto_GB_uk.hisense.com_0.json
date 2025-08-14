@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_uk.hisense.com_0",
-    "vendorUrl": "https://uk.hisense.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > cx-storefront:nth-child(1):not([id]) > footer:nth-child(6):not([id]) > cx-page-layout:not([id]) > cx-page-slot:nth-child(3):not([id]) > app-gg-cookie-consent-management-banner:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

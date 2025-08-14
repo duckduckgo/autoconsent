@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_nextcloud.com_f8e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://nextcloud.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nextcloud\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_banner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#save_settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_banner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#save_settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_banner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#save_settings",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_banner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#save_settings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

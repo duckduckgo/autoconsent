@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_of.moncompteformation.gouv.fr_bdc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://of.moncompteformation.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?of\\.moncompteformation\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > mcf-cm-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id]) > span:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > mcf-cm-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id]) > span:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > mcf-cm-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id]) > span:nth-child(3):not([id])",
+            "comment": "TOUT REFUSER ET FERMER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > mcf-cm-banner:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id]) > span:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

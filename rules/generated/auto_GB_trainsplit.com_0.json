@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_trainsplit.com_0",
-    "vendorUrl": "https://trainsplit.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > span:nth-child(2) > a:nth-child(2)"
+            "exists": "body > div#app > div:nth-child(1)#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-banner-reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > span:nth-child(2) > a:nth-child(2)"
+            "visible": "body > div#app > div:nth-child(1)#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-banner-reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > span:nth-child(2) > a:nth-child(2)",
-            "text": " Reject non-essential cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(1)#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-banner-reject",
+            "comment": "Reject non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(1)#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-banner-reject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

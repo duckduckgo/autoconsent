@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_uk.trip.com_0",
-    "vendorUrl": "https://uk.trip.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Decline"
+            "waitForThenClick": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline",
+            "comment": "Decline all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#main > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline",
             "timeout": 1000,
             "check": "none"
         }
