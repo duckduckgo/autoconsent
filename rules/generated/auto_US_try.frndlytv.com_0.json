@@ -4,7 +4,10 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?try\\.frndlytv\\.com/"
+        "urlPattern": "^https?://([a-z]+\\.)?frndlytv\\.com/"
+    },
+    "_metadata": {
+        "vendorUrl": "https://frndlytv.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
