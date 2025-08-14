@@ -145,11 +145,13 @@ pipeline {
                         }
                     }
 
+                    // Apply the status to the previous commit: We're assuming that there was a merge commit when Jenkins picked up the PR.
+                    def prCommitSha = sh(script: "git rev-parse HEAD~1", returnStdout: true).trim()
                     githubNotify(
                         account: 'duckduckgo',
                         repo: 'autoconsent',
                         context: 'Tests / Changed files',
-                        sha: "${env.GIT_COMMIT}",
+                        sha: "${prCommitSha}",
                         description: description,
                         status: status,
                         credentialsId: 'autoconsent-rw'
