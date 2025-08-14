@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_lnk.bio_go3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://lnk.bio/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lnk\\.bio/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pb_cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#coco_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pb_cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#coco_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pb_cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#coco_reject",
+            "comment": "Reject non-necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pb_cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#coco_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

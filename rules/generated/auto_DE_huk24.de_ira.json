@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_huk24.de_ira",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.huk24.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?huk24\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > smc-consent-banner:not([id]) > s-dialog:not([id]) > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > s-button:not([id])[data-testid=\"button--einstellungen-speichern\"] > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > smc-consent-banner:not([id]) > s-dialog:not([id]) > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > s-button:not([id])[data-testid=\"button--einstellungen-speichern\"] > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > smc-consent-banner:not([id]) > s-dialog:not([id]) > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > s-button:not([id])[data-testid=\"button--einstellungen-speichern\"] > button:not([id])",
+            "comment": "Mit erforderlichen Einstellungen fortfahren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > smc-consent-banner:not([id]) > s-dialog:not([id]) > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > s-button:not([id])[data-testid=\"button--einstellungen-speichern\"] > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

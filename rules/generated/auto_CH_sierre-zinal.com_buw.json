@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_sierre-zinal.com_buw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sierre-zinal.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sierre-zinal\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#disclaimerCtn > div:nth-child(1):not([id]) > a:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#disclaimerCtn > div:nth-child(1):not([id]) > a:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#disclaimerCtn > div:nth-child(1):not([id]) > a:nth-child(4):not([id])",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#disclaimerCtn > div:nth-child(1):not([id]) > a:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

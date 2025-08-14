@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ligabank.de_bgt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ligabank.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ligabank\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-0 > div:not([id]) > div:not([id]) > hra-consent-layer-ui:not([id]) > hra-cookie-buttons:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-0 > div:not([id]) > div:not([id]) > hra-consent-layer-ui:not([id]) > hra-cookie-buttons:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-0 > div:not([id]) > div:not([id]) > hra-consent-layer-ui:not([id]) > hra-cookie-buttons:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])",
+            "comment": "Technisch Notwendige annehmen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-0 > div:not([id]) > div:not([id]) > hra-consent-layer-ui:not([id]) > hra-cookie-buttons:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

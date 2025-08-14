@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bomenenzo.nl_b3z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bomenenzo.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bomenenzo\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_ec-dialog > div:not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_ec-dialog > div:not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_ec-dialog > div:not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Weiger alles"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_ec-dialog > div:not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

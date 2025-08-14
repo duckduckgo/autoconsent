@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "14.11.0",
+  "version": "14.12.0",
   "description": "",
   "exports": {
     ".": {
@@ -84,8 +84,7 @@
   "auto": {
     "plugins": [
       "npm"
-    ],
-    "onlyPublishWithReleaseLabel": true
+    ]
   },
   "dependencies": {
     "@ghostery/adblocker": "^2.0.4",

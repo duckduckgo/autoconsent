@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_mycare.de_icd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mycare.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mycare\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > form:nth-child(5)#cookie-settings-form > div#cookie-settings-content > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > form:nth-child(5)#cookie-settings-form > div#cookie-settings-content > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > form:nth-child(5)#cookie-settings-form > div#cookie-settings-content > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > form:nth-child(5)#cookie-settings-form > div#cookie-settings-content > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

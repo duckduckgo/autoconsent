@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_lotto-niedersachsen.de_7a4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lotto-niedersachsen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lotto-niedersachsen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_441c7312-6ae9-4bf3-b0c4-744c7b47c147 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_441c7312-6ae9-4bf3-b0c4-744c7b47c147 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_441c7312-6ae9-4bf3-b0c4-744c7b47c147 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_441c7312-6ae9-4bf3-b0c4-744c7b47c147 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

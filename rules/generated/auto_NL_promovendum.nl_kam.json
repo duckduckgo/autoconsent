@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_promovendum.nl_kam",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.promovendum.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?promovendum\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookie",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

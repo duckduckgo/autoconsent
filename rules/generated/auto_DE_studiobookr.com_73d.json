@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_studiobookr.com_73d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.studiobookr.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?studiobookr\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header:not([id]) > div:nth-child(2)#cookie-hint-display > div:not([id]) > button:nth-child(3)#cookie-hint-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header:not([id]) > div:nth-child(2)#cookie-hint-display > div:not([id]) > button:nth-child(3)#cookie-hint-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:nth-child(2)#cookie-hint-display > div:not([id]) > button:nth-child(3)#cookie-hint-decline-button",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:nth-child(2)#cookie-hint-display > div:not([id]) > button:nth-child(3)#cookie-hint-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

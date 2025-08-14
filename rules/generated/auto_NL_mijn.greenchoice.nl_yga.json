@@ -1,0 +1,41 @@
+{
+    "name": "auto_NL_mijn.greenchoice.nl_yga",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mijn.greenchoice.nl/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://([a-z]+\\.)?greenchoice\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookiebar__disagree\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookiebar__disagree\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookiebar__disagree\"]",
+            "comment": "Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookiebar__disagree\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

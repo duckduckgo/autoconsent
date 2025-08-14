@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_honeybirdette.com_7g5",
-    "vendorUrl": "https://www.honeybirdette.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#honey-birdette-luxury-lingerie-bras-thongs-amp-briefs > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > div:nth-child(1)#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#honey-birdette-luxury-lingerie-bras-thongs-amp-briefs > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > div:nth-child(1)#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#honey-birdette-luxury-lingerie-bras-thongs-amp-briefs > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "REJECT"
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#honey-birdette-luxury-lingerie-bras-thongs-amp-briefs > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_infomalade.fr_d1i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://infomalade.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?infomalade\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#PrivacyBox > button:nth-child(3)#No"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#PrivacyBox > button:nth-child(3)#No"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#PrivacyBox > button:nth-child(3)#No",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#PrivacyBox > button:nth-child(3)#No",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

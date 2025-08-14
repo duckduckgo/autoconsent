@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_visa.com.au_j3q",
-    "vendorUrl": "https://www.visa.com.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+            "exists": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+            "visible": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

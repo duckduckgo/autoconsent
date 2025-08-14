@@ -6,6 +6,9 @@ on:
             tag_name:
                 description: 'The tag of the release to propagate'
                 required: true
+            release_task_url:
+                description: 'The link to the release task in Asana'
+                required: true
             android:
                 description: 'Propagate to Android'
                 type: boolean
@@ -27,6 +30,10 @@ on:
             tag_name:
                 type: string
                 description: 'The tag of the release to propagate'
+                required: true
+            release_task_url:
+                type: string
+                description: 'The link to the release task in Asana'
                 required: true
             android:
                 description: 'Propagate to Android'
@@ -50,39 +57,12 @@ jobs:
     # Retrieve the corresponding Release data from the GitHub API
     # ------------------------------------------------------------------------------
     get_release_info:
-        runs-on: ubuntu-latest
-        outputs:
-            release-url: ${{ steps.get-release-url.outputs.result }}
-            release-notes: ${{ steps.get-release-notes.outputs.result }}
-        steps:
-            - name: Get Release URL
-              id: get-release-url
-              uses: actions/github-script@v4
-              with:
-                  result-encoding: string
-                  script: |
-                      const { data } = await github.repos.getReleaseByTag({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        tag: process.env.TAG
-                      });
-                      return data.html_url;
-
-            - name: Get Release Notes
-              id: get-release-notes
-              uses: actions/github-script@v4
-              with:
-                  result-encoding: string
-                  script: |
-                      const { data } = await github.repos.getReleaseByTag({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        tag: process.env.TAG
-                      });
-                      return data.body;
+        uses: ./.github/workflows/get-release-info.yml
+        with:
+            tag_name: ${{ inputs.tag_name }}
 
     # ------------------------------------------------------------------------------
-    # Create initial Asana subtasks
+    # Create platform release subtasks
     # ------------------------------------------------------------------------------
     create_asana_tasks:
         needs: get_release_info
@@ -91,6 +71,7 @@ jobs:
             asana-output: ${{ steps.create-asana-tasks.outputs.ASANA_OUTPUT }}
         env:
             RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+            RELEASE_TASK_URL: ${{ inputs.release_task_url }}
         steps:
             # --- Setup ---
             - uses: actions/checkout@v3
@@ -103,7 +84,7 @@ jobs:
               env:
                   ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
               run: |
-                  JSON_STRING="$(node ./autoconsent/ci/asana-create-tasks.js)"
+                  JSON_STRING="$(node ./autoconsent/ci/asana-create-platform-release-tasks.js)"
                   echo "ASANA_OUTPUT=$JSON_STRING" >> $GITHUB_OUTPUT
 
     # ------------------------------------------------------------------------------
@@ -113,11 +94,11 @@ jobs:
     update_android:
         if: ${{ inputs.android }}
         runs-on: ubuntu-latest
+        needs:
+            - get_release_info
+            - create_asana_tasks
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
-        needs:
-            - create_asana_tasks
-            - get_release_info
         env:
             RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
         steps:
@@ -178,8 +159,8 @@ jobs:
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
         needs:
-            - create_asana_tasks
             - get_release_info
+            - create_asana_tasks
         env:
             RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
         steps:
@@ -201,12 +182,14 @@ jobs:
             - name: Update iOS autoconsent reference
               run: |
                   cd apple-monorepo/iOS
+                  npm ci --include-workspace-root
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
                   cd ..
             - name: Update macOS autoconsent reference
               run: |
                   cd apple-monorepo/macOS
+                  npm ci --include-workspace-root
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
                   cd ..
@@ -249,8 +232,8 @@ jobs:
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
         needs:
-            - create_asana_tasks
             - get_release_info
+            - create_asana_tasks
         env:
             RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
         steps:

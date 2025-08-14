@@ -1,6 +1,5 @@
 {
     "name": "auto_US_raymondjames.com_0",
-    "vendorUrl": "https://www.raymondjames.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[class] > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)"
+            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[class] > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)"
+            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[class] > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button:nth-child(1)",
-            "text": "Decline"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

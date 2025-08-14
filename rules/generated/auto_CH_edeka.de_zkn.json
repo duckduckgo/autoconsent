@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_edeka.de_zkn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.edeka.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?edeka\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2",
+            "comment": "NUR NOTWENDIGE TECHNOLOGIEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

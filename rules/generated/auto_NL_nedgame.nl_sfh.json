@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nedgame.nl_sfh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nedgame.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nedgame\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div#cookieConsentContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#rejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div#cookieConsentContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#rejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div#cookieConsentContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#rejectAll",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div#cookieConsentContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#rejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

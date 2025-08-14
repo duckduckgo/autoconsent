@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_biker-boarder.de_9cp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.biker-boarder.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?biker-boarder\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacymodal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button#approve_all_nothing"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacymodal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button#approve_all_nothing"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacymodal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button#approve_all_nothing",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacymodal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button#approve_all_nothing",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_rapidonline.com_0",
-    "vendorUrl": "https://www.rapidonline.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential"
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential"
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential",
             "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(2)#st-cookie-accept-essential",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

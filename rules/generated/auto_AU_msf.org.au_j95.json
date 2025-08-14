@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_msf.org.au_j95",
-    "vendorUrl": "https://msf.org.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])"
+            "exists": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])"
+            "visible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

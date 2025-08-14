@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_signin.ebay.co.uk_0",
-    "vendorUrl": "https://signin.ebay.co.uk/ws/eBayISAPI.dll?SignIn&ru=https%3A%2F%2Fmy.ebay.co.uk%2F&sgfl=sm&smuid=5dd614ba443b42679a133019ab896beb",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+            "exists": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+            "visible": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
             "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

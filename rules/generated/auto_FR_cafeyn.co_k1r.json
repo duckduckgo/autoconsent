@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cafeyn.co_k1r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cafeyn.co/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cafeyn\\.co/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

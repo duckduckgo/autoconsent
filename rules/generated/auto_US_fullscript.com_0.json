@@ -1,6 +1,5 @@
 {
     "name": "auto_US_fullscript.com_0",
-    "vendorUrl": "https://fullscript.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
             "comment": "Decline cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#us > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }

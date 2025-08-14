@@ -1,6 +1,5 @@
 {
     "name": "auto_US_kansascity.com_0",
-    "vendorUrl": "https://www.kansascity.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\33 0a2c122-d37e-493a-9cb3-02f3cd929157 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\33 0a2c122-d37e-493a-9cb3-02f3cd929157 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Deny"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\33 0a2c122-d37e-493a-9cb3-02f3cd929157 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\33 0a2c122-d37e-493a-9cb3-02f3cd929157 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

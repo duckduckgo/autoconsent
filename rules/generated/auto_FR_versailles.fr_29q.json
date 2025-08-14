@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_versailles.fr_29q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.versailles.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?versailles\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#myModalCookieConsent > div:not([id]) > div:nth-child(1)#myModalCookieConsentPart1 > div:nth-child(1):not([id]) > button:nth-child(1)#myModalCookieConsentBtnContinueWithoutAccepting"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#myModalCookieConsent > div:not([id]) > div:nth-child(1)#myModalCookieConsentPart1 > div:nth-child(1):not([id]) > button:nth-child(1)#myModalCookieConsentBtnContinueWithoutAccepting"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#myModalCookieConsent > div:not([id]) > div:nth-child(1)#myModalCookieConsentPart1 > div:nth-child(1):not([id]) > button:nth-child(1)#myModalCookieConsentBtnContinueWithoutAccepting",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#myModalCookieConsent > div:not([id]) > div:nth-child(1)#myModalCookieConsentPart1 > div:nth-child(1):not([id]) > button:nth-child(1)#myModalCookieConsentBtnContinueWithoutAccepting",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

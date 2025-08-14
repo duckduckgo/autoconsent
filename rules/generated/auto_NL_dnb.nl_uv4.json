@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dnb.nl_uv4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dnb.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dnb\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

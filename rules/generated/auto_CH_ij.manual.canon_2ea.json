@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_ij.manual.canon_2ea",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ij.manual.canon/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ij\\.manual\\.canon/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#infocookie_modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

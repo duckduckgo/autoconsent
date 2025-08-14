@@ -1,6 +1,5 @@
 {
     "name": "auto_US_lakehouse.com_qes",
-    "vendorUrl": "https://www.lakehouse.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#main > div:nth-child(4):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
+            "exists": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#main > div:nth-child(4):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
+            "visible": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#main > div:nth-child(4):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])",
             "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

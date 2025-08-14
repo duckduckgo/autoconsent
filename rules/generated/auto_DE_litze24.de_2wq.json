@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_litze24.de_2wq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.litze24.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?litze24\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

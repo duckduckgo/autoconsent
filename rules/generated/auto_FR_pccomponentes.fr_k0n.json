@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pccomponentes.fr_k0n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pccomponentes.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pccomponentes\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:nth-child(12):not([id]) > div:not([id])[data-testid=\"modal\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookiesrejectAll > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:nth-child(12):not([id]) > div:not([id])[data-testid=\"modal\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookiesrejectAll > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(12):not([id]) > div:not([id])[data-testid=\"modal\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookiesrejectAll > div:not([id])",
+            "comment": "Rejeter les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:nth-child(12):not([id]) > div:not([id])[data-testid=\"modal\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookiesrejectAll > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

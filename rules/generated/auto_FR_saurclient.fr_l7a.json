@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_saurclient.fr_l7a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.saurclient.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?saurclient\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(10)#cookies > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(8)#refuser"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(10)#cookies > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(8)#refuser"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(10)#cookies > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(8)#refuser",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(10)#cookies > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(8)#refuser",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

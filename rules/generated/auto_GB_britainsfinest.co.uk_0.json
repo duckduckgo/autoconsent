@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_britainsfinest.co.uk_0",
-    "vendorUrl": "https://www.britainsfinest.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton"
+            "exists": "body > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton"
+            "visible": "body > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton",
             "comment": "ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieMessage > div#CookieBox > div:nth-child(4):not([id]) > button:nth-child(2)#DenyButton",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

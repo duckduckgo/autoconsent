@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_charliehebdo.fr_smr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://charliehebdo.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?charliehebdo\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies",
+            "comment": "REFUSER TOUS LES COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

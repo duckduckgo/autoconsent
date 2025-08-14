@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_rolls-royce.com_0",
-    "vendorUrl": "https://www.rolls-royce.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#Homepage > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
+            "exists": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#Homepage > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
+            "visible": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#Homepage > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
+            "waitForThenClick": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
             "comment": "DECLINE COOKIES"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#Homepage > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
+            "waitForVisible": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
             "timeout": 1000,
             "check": "none"
         }

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cic-epargnesalariale.fr_3n2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cic-epargnesalariale.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cic-epargnesalariale\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

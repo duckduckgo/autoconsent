@@ -1,0 +1,41 @@
+{
+    "name": "auto_FR_bnpparibasfortis.be_02b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bnpparibasfortis.be/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?bnpparibasfortis\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "button#cookies_few_accept_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button#cookies_few_accept_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "button#cookies_few_accept_btn",
+            "comment": "Refuse optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "button#cookies_few_accept_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

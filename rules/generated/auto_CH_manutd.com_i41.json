@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_manutd.com_i41",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.manutd.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?manutd\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

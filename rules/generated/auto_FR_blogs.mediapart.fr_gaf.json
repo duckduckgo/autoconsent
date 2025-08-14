@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_blogs.mediapart.fr_gaf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blogs.mediapart.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blogs\\.mediapart\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#js-gateaux-secs > div:not([id]) > div:nth-child(1)#gateaux-secs-landing > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#js-gateaux-secs-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#js-gateaux-secs > div:not([id]) > div:nth-child(1)#gateaux-secs-landing > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#js-gateaux-secs-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#js-gateaux-secs > div:not([id]) > div:nth-child(1)#gateaux-secs-landing > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#js-gateaux-secs-deny",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#js-gateaux-secs > div:not([id]) > div:nth-child(1)#gateaux-secs-landing > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#js-gateaux-secs-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

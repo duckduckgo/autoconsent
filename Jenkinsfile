@@ -1,16 +1,16 @@
 def runPlaywrightTests(resultDir, browser, testFiles) {
+    def junitFile = "results-${env.REGION}.xml"
     try {
         timeout(120) {
             def testFilesArg = testFiles.join(' ')
             sh """
-                rm -f results.xml
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml npx playwright test ${testFilesArg} --project ${browser} --workers 10 --reporter=junit,line || true
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project ${browser} --workers 10 --reporter=junit,line || true
             """
         }
     } finally {
-        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: 'results.xml'
-        archiveArtifacts artifacts: 'test-results/screenshots/**/*.jpg', fingerprint: true, allowEmptyArchive: true
-        archiveArtifacts artifacts: 'results.xml', fingerprint: true, allowEmptyArchive: true
+        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, allowEmptyResults: true, testResults: junitFile
+        archiveArtifacts artifacts: "test-results/screenshots/**/*.jpg", fingerprint: true, allowEmptyArchive: true
+        archiveArtifacts artifacts: junitFile, fingerprint: true, allowEmptyArchive: true
         return summary
     }
 }
@@ -146,13 +146,13 @@ pipeline {
                     }
 
                     githubNotify(
-                            account: 'duckduckgo',
-                            repo: 'autoconsent',
-                            context: 'Tests / Changed files',
-                            sha: "${env.GIT_COMMIT}",
-                            description: description,
-                            status: status,
-                            credentialsId: 'autoconsent-rw'
+                        account: 'duckduckgo',
+                        repo: 'autoconsent',
+                        context: 'Tests / Changed files',
+                        sha: "${env.GIT_COMMIT}",
+                        description: description,
+                        status: status,
+                        credentialsId: 'autoconsent-rw'
                     )
                 }
             }

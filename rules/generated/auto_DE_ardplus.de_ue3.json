@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ardplus.de_ue3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ardplus.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ardplus\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id])[data-testid=\"cookie_notice_reject_all_button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id])[data-testid=\"cookie_notice_reject_all_button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id])[data-testid=\"cookie_notice_reject_all_button\"]",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id])[data-testid=\"cookie_notice_reject_all_button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

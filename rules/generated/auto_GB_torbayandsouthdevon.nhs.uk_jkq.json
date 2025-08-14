@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_torbayandsouthdevon.nhs.uk_jkq",
-    "vendorUrl": "https://www.torbayandsouthdevon.nhs.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

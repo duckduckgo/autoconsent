@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_farfetch.com_4o6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.farfetch.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?farfetch\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > section:nth-child(7):not([id])[data-testid=\"gdpr-callout-notification-desktop\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"necessary_only_cookies_cta\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > section:nth-child(7):not([id])[data-testid=\"gdpr-callout-notification-desktop\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"necessary_only_cookies_cta\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > section:nth-child(7):not([id])[data-testid=\"gdpr-callout-notification-desktop\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"necessary_only_cookies_cta\"]",
+            "comment": "Necessary Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > section:nth-child(7):not([id])[data-testid=\"gdpr-callout-notification-desktop\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"necessary_only_cookies_cta\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

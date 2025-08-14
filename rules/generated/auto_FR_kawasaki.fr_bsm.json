@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_kawasaki.fr_bsm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kawasaki.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kawasaki\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form1 > div:nth-child(4)#Panel_Cookies > div:not([id]) > div:not([id]) > a:nth-child(4)#aAgreeCookieFunctionality"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form1 > div:nth-child(4)#Panel_Cookies > div:not([id]) > div:not([id]) > a:nth-child(4)#aAgreeCookieFunctionality"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form1 > div:nth-child(4)#Panel_Cookies > div:not([id]) > div:not([id]) > a:nth-child(4)#aAgreeCookieFunctionality",
+            "comment": "N'ACCEPTER QUE LES COOKIES INDISPENSABLES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form1 > div:nth-child(4)#Panel_Cookies > div:not([id]) > div:not([id]) > a:nth-child(4)#aAgreeCookieFunctionality",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
