@@ -21,7 +21,7 @@
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": ".over-18__manage-cookies-link",
+            "waitForThenClick": ".over-18__manage-cookies-link"
         },
         {
             "waitFor": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieSwitch\"]"
