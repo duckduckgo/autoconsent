@@ -4,7 +4,11 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?monzo\\.com/"
+        "urlPattern": "^https?://([a-z]+\\.)?monzo\\.com/"
+    },
+    "_metadata": {
+        "vendorUrl": "https://monzo.com/",
+        "manuallyReviewUpdates": true
     },
     "prehideSelectors": [],
     "detectCmp": [
