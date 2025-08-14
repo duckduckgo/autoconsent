@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hamburger-kunsthalle.de_wnt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hamburger-kunsthalle.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hamburger-kunsthalle\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#hkhContent > div:nth-child(2)#main-wrapper > div#main > div:not([id]) > main#content > section:not([id]) > div:nth-child(3)#block-hkh-barrio-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#hkhContent > div:nth-child(2)#main-wrapper > div#main > div:not([id]) > main#content > section:not([id]) > div:nth-child(3)#block-hkh-barrio-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#hkhContent > div:nth-child(2)#main-wrapper > div#main > div:not([id]) > main#content > section:not([id]) > div:nth-child(3)#block-hkh-barrio-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES VERWEIGERN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#hkhContent > div:nth-child(2)#main-wrapper > div#main > div:not([id]) > main#content > section:not([id]) > div:nth-child(3)#block-hkh-barrio-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

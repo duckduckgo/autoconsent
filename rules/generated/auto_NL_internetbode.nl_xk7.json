@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_internetbode.nl_xk7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.internetbode.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?internetbode\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieconsent > section:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieconsent > section:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieconsent > section:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])",
+            "comment": "Alleen functionele cookies accepteren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieconsent > section:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

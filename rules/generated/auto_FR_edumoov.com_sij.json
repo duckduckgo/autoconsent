@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_edumoov.com_sij",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.edumoov.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?edumoov\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-message > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-message > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-message > a:nth-child(2):not([id])",
+            "comment": "refuser ce cookie"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-message > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

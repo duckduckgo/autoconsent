@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_evivanlanschot.nl_r6g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.evivanlanschot.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?evivanlanschot\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#js-cookie-notice > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#js-decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#js-cookie-notice > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#js-decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#js-cookie-notice > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#js-decline-cookies",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-cookie-notice > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#js-decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
