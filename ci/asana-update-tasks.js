@@ -1,5 +1,5 @@
 const Asana = require('asana');
-const { replaceAllInString, getLink } = require('./release-utils.js');
+const { getLink } = require('./release-utils.js');
 
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN;
 const prUrls = {
