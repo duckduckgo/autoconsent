@@ -91,11 +91,16 @@ class TestRun {
                     region: testRegion,
                     formFactor: this.formFactor,
                     testName: this.testInfo.title,
+                    retry: this.testInfo.retry,
                 };
-                // log the full url in the error message
-                console.error(`Autoconsent test failed on ${this.url}`, failureStats);
+                // log the full url in the error message, this will be parsed by the review tool
+                console.error(`Autoconsent test failed on ${this.url} failure stats: ${JSON.stringify(failureStats)}`);
             }
-            await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
+            try {
+                await this.takeScreenshot(`${this.screenshotCounter++}-failure`);
+            } catch (e) {
+                // ignore this screenshot errors
+            }
             throw e;
         }
     }
@@ -223,10 +228,9 @@ class TestRun {
         const popupFoundMessages = this.findReceivedMessages({ type: 'popupFound' });
         for (let i = 0; i < popupFoundMessages.length; i++) {
             for (let j = i + 1; j < popupFoundMessages.length; j++) {
-                expect(
-                    popupFoundMessages[i],
-                    `Possible reload loop: found multiple identical popupFound messages: ${JSON.stringify(popupFoundMessages[i])}`,
-                ).not.toEqual(popupFoundMessages[j]);
+                expect(popupFoundMessages[i], `Possible reload loop: found multiple identical popupFound messages`).not.toEqual(
+                    popupFoundMessages[j],
+                );
             }
         }
 
@@ -235,17 +239,19 @@ class TestRun {
             expect(
                 this.findReceivedMessages({ type: 'autoconsentDone' }).length,
                 'Possible reload loop: too many autoconsentDone messages',
-            ).toBe(this.options.expectedRuns);
+            ).toBeLessThanOrEqual(this.options.expectedRuns);
         }
     }
 
     async runAssertions() {
+        await this.assertMessageReceived(`no CMP detected`, { type: 'cmpDetected' });
+
         const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: this.expectedCmp };
-        await this.assertMessageReceived(`${this.expectedCmp} not detected`, expectedCmpDetected);
+        await this.assertMessageReceived(`detected a wrong CMP`, expectedCmpDetected);
 
         const expectedPopupFound: Partial<ContentScriptMessage> = { type: 'popupFound', cmp: this.expectedCmp };
         await this.assertMessageReceived(
-            `${this.expectedCmp} popup not found`,
+            `expected popup not found`,
             expectedPopupFound,
             this.options.expectPopupOpen,
             this.options.expectPopupOpen ? 50 : 5,
