@@ -1,5 +1,6 @@
 {
     "name": "auto_GB_benefitsandwork.co.uk_0",
+    "vendorUrl": "https://www.benefitsandwork.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -9,29 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+            "exists": "body#baw > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+            "visible": "body#baw > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "waitForThenClick": "body#baw > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
             "comment": "Decline"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
-            "timeout": 1000,
-            "check": "none"
         }
     ]
 }
