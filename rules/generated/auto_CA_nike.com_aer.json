@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_nike.com_aer",
-    "vendorUrl": "https://www.nike.com/ca/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]",
             "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

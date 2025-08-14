@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_otrium.nl_5cu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.otrium.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?otrium\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(3):not([id])[data-testid=\"consent-manager-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"consent-manager-reject-btn\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(3):not([id])[data-testid=\"consent-manager-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"consent-manager-reject-btn\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(3):not([id])[data-testid=\"consent-manager-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"consent-manager-reject-btn\"]",
+            "comment": "Cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(3):not([id])[data-testid=\"consent-manager-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"consent-manager-reject-btn\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

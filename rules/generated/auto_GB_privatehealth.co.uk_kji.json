@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_privatehealth.co.uk_kji",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.privatehealth.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?privatehealth\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

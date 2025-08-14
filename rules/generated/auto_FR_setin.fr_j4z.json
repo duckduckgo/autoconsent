@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_setin.fr_j4z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.setin.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?setin\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookieDisclaimerPopup > div:nth-child(2):not([id]) > div:nth-child(2)#wookiesDisclaimer > div:nth-child(1)#divCookiesGeneral > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookieDisclaimerPopup > div:nth-child(2):not([id]) > div:nth-child(2)#wookiesDisclaimer > div:nth-child(1)#divCookiesGeneral > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookieDisclaimerPopup > div:nth-child(2):not([id]) > div:nth-child(2)#wookiesDisclaimer > div:nth-child(1)#divCookiesGeneral > div:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Continuer sans accepter "
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookieDisclaimerPopup > div:nth-child(2):not([id]) > div:nth-child(2)#wookiesDisclaimer > div:nth-child(1)#divCookiesGeneral > div:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

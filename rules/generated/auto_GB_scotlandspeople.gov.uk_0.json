@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_scotlandspeople.gov.uk_0",
-    "vendorUrl": "https://www.scotlandspeople.gov.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Use essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#page-wrapper > div#page > header:nth-child(1)#header > nav:nth-child(1)#navbar-top > div:not([id]) > div:nth-child(2)#block-sp2024-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

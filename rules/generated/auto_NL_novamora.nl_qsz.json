@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_novamora.nl_qsz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.novamora.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?novamora\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-disclaimer > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-disclaimer-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-disclaimer > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-disclaimer-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-disclaimer > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-disclaimer-reject-all",
+            "comment": "Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-disclaimer > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-disclaimer-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

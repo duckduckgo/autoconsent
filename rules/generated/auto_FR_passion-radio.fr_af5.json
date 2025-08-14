@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_passion-radio.fr_af5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.passion-radio.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?passion-radio\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Rejeter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

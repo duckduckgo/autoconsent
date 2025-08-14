@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_opticiansdirect.co.uk_0",
-    "vendorUrl": "https://www.opticiansdirect.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > button:nth-child(3)"
+            "exists": "body > div:not([id]) > button:nth-child(3)#btn-cookie-policy-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > button:nth-child(3)"
+            "visible": "body > div:not([id]) > button:nth-child(3)#btn-cookie-policy-decline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > button:nth-child(3)",
-            "text": "I Decline"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > button:nth-child(3)#btn-cookie-policy-decline",
+            "comment": "I Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > button:nth-child(3)#btn-cookie-policy-decline",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

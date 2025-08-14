@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_ratp.fr_v7t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ratp.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ratp\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > ul:not([id]) > li:nth-child(1):not([id]) > button#popin_tc_privacy_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > ul:not([id]) > li:nth-child(1):not([id]) > button#popin_tc_privacy_button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > ul:not([id]) > li:nth-child(1):not([id]) > button#popin_tc_privacy_button",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > ul:not([id]) > li:nth-child(1):not([id]) > button#popin_tc_privacy_button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
