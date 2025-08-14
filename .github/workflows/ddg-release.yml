@@ -182,12 +182,14 @@ jobs:
             - name: Update iOS autoconsent reference
               run: |
                   cd apple-monorepo/iOS
+                  npm ci --include-workspace-root
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
                   cd ..
             - name: Update macOS autoconsent reference
               run: |
                   cd apple-monorepo/macOS
+                  npm ci --include-workspace-root
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
                   cd ..
