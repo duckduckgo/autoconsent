@@ -7,7 +7,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?hansgrohe\\.ch/"
+        "urlPattern": "^https?://(www\\.)?hansgrohe\\.([a-z]+)/"
     },
     "prehideSelectors": [],
     "detectCmp": [
