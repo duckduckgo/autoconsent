@@ -7,7 +7,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?ww2\\.lifeplus\\.com/"
+        "urlPattern": "^https?://([a-z0-9]+\\.)?lifeplus\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
