@@ -2,7 +2,8 @@
     "name": "auto_NL_praxis.nl_wd8",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.praxis.nl/"
+        "vendorUrl": "http://www.praxis.nl/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-4 > div#chakra-modal--body-4 > div:nth-child(4):not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "button[data-gtm-id=consent_functional]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-4 > div#chakra-modal--body-4 > div:nth-child(4):not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "button[data-gtm-id=consent_functional]"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-4 > div#chakra-modal--body-4 > div:nth-child(4):not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "button[data-gtm-id=consent_functional]",
             "comment": "WEIGEREN"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > section#chakra-modal-4 > div#chakra-modal--body-4 > div:nth-child(4):not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "button[data-gtm-id=consent_functional]",
             "timeout": 1000,
             "check": "none"
         }
