@@ -2,12 +2,13 @@
     "name": "auto_NL_mijn.greenchoice.nl_yga",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://mijn.greenchoice.nl/"
+        "vendorUrl": "http://mijn.greenchoice.nl/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?sso\\.greenchoice\\.nl/"
+        "urlPattern": "^https?://([a-z]+\\.)?greenchoice\\.nl/"
     },
     "prehideSelectors": [],
     "detectCmp": [
