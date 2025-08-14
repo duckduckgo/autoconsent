@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cdandlp.com_xyi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cdandlp.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cdandlp\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#id_cookie-alert > button:nth-child(6):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#id_cookie-alert > button:nth-child(6):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#id_cookie-alert > button:nth-child(6):not([id])",
+            "comment": "REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#id_cookie-alert > button:nth-child(6):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

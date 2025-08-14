@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bm-geneve.ch_ms0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bm-geneve.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bm-geneve\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "REFUSE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

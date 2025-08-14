@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bevolkingsonderzoeknederland.nl_33f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bevolkingsonderzoeknederland.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bevolkingsonderzoeknederland\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieWallOverlay > div:not([id]) > section:nth-child(2):not([id]) > a:nth-child(1)#not-ok-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieWallOverlay > div:not([id]) > section:nth-child(2):not([id]) > a:nth-child(1)#not-ok-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieWallOverlay > div:not([id]) > section:nth-child(2):not([id]) > a:nth-child(1)#not-ok-cookies",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieWallOverlay > div:not([id]) > section:nth-child(2):not([id]) > a:nth-child(1)#not-ok-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

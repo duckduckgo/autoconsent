@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_daikin.co.uk_0",
-    "vendorUrl": "https://www.daikin.co.uk/en_gb/residential.html",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#page-2f54ffa0ba > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])"
+            "exists": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#page-2f54ffa0ba > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])"
+            "visible": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#page-2f54ffa0ba > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])",
+            "waitForThenClick": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#page-2f54ffa0ba > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])",
+            "waitForVisible": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-d47199b033 > div:not([id]) > div:not([id]) > section#cookie-modal-39c257092c > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])",
             "timeout": 1000,
             "check": "none"
         }

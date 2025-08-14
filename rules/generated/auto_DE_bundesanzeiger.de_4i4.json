@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bundesanzeiger.de_4i4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bundesanzeiger.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bundesanzeiger\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc > div#cc_banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc > div#cc_banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc > div#cc_banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Nur technisch notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc > div#cc_banner > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

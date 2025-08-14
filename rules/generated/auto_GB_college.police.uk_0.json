@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_college.police.uk_0",
-    "vendorUrl": "https://www.college.police.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Decline non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(2)#main-content > div:not([id]) > div:nth-child(1):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cofidis.fr_bz2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cofidis.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cofidis\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(1):not([id]) > p:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

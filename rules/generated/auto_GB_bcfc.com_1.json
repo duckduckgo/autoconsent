@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_bcfc.com_1",
-    "vendorUrl": "https://www.bcfc.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div:nth-child(1) > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div > div > div:nth-child(2) > div:nth-child(9) > div > div > div > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body > div#app > div#framework7-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#yc-card-component\\:7ef3a3b5-d042-4a69-99fe-48cfbee28f3a > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#eeb08196-e58b-426f-a69e-105a887fa45a > div:not([id]) > div#yc-card-component\\:eeb08196-e58b-426f-a69e-105a887fa45a > div:nth-child(2):not([id]) > div:nth-child(9)#yc-card-component\\:b8abb9b0-75bc-4aba-b46a-62d6f97c2ded > div:not([id]) > div#yc-card-component\\:c99f6c1f-84f5-4fed-a84c-4f239af3c6f0 > div:not([id]) > div:not([id]) > div#yc-card-component\\:aa3f7adc-0a16-49a8-9b52-bf7d70a7c191 > div:not([id]) > div#yc-card-component\\:54240ef0-efa8-483d-9b05-f2e3cfb7812c > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div:nth-child(1) > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div > div > div:nth-child(2) > div:nth-child(9) > div > div > div > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body > div#app > div#framework7-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#yc-card-component\\:7ef3a3b5-d042-4a69-99fe-48cfbee28f3a > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#eeb08196-e58b-426f-a69e-105a887fa45a > div:not([id]) > div#yc-card-component\\:eeb08196-e58b-426f-a69e-105a887fa45a > div:nth-child(2):not([id]) > div:nth-child(9)#yc-card-component\\:b8abb9b0-75bc-4aba-b46a-62d6f97c2ded > div:not([id]) > div#yc-card-component\\:c99f6c1f-84f5-4fed-a84c-4f239af3c6f0 > div:not([id]) > div:not([id]) > div#yc-card-component\\:aa3f7adc-0a16-49a8-9b52-bf7d70a7c191 > div:not([id]) > div#yc-card-component\\:54240ef0-efa8-483d-9b05-f2e3cfb7812c > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div:nth-child(1) > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div > div > div:nth-child(2) > div:nth-child(9) > div > div > div > div > div > div > div > div > div > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Accept Essential Cookies Only"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div#framework7-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#yc-card-component\\:7ef3a3b5-d042-4a69-99fe-48cfbee28f3a > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#eeb08196-e58b-426f-a69e-105a887fa45a > div:not([id]) > div#yc-card-component\\:eeb08196-e58b-426f-a69e-105a887fa45a > div:nth-child(2):not([id]) > div:nth-child(9)#yc-card-component\\:b8abb9b0-75bc-4aba-b46a-62d6f97c2ded > div:not([id]) > div#yc-card-component\\:c99f6c1f-84f5-4fed-a84c-4f239af3c6f0 > div:not([id]) > div:not([id]) > div#yc-card-component\\:aa3f7adc-0a16-49a8-9b52-bf7d70a7c191 > div:not([id]) > div#yc-card-component\\:54240ef0-efa8-483d-9b05-f2e3cfb7812c > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Accept Essential Cookies Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div#framework7-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#yc-card-component\\:7ef3a3b5-d042-4a69-99fe-48cfbee28f3a > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#eeb08196-e58b-426f-a69e-105a887fa45a > div:not([id]) > div#yc-card-component\\:eeb08196-e58b-426f-a69e-105a887fa45a > div:nth-child(2):not([id]) > div:nth-child(9)#yc-card-component\\:b8abb9b0-75bc-4aba-b46a-62d6f97c2ded > div:not([id]) > div#yc-card-component\\:c99f6c1f-84f5-4fed-a84c-4f239af3c6f0 > div:not([id]) > div:not([id]) > div#yc-card-component\\:aa3f7adc-0a16-49a8-9b52-bf7d70a7c191 > div:not([id]) > div#yc-card-component\\:54240ef0-efa8-483d-9b05-f2e3cfb7812c > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
