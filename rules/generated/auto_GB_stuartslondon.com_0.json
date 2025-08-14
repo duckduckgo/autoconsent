@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_stuartslondon.com_0",
-    "vendorUrl": "https://www.stuartslondon.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline"
+            "exists": "body > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline"
+            "visible": "body > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline",
+            "waitForThenClick": "body > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline",
             "comment": "REJECT ALL COOKIES"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline",
+            "waitForVisible": "body > div#cookie_alert > div#cookie_alert_container > div#cookie_alert_text > div:nth-child(2):not([id]) > div:nth-child(2)#js-cookie_alert_button_decline > a#cookie_alert_decline",
             "timeout": 1000,
             "check": "none"
         }

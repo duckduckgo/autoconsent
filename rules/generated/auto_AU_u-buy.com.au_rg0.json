@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_u-buy.com.au_rg0",
-    "vendorUrl": "https://www.u-buy.com.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "body > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "body > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

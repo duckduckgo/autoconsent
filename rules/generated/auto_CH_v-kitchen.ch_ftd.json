@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_v-kitchen.ch_ftd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.v-kitchen.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?v-kitchen\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > amp-consent#notification > div:nth-child(2)#notification-box > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookielaw-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > amp-consent#notification > div:nth-child(2)#notification-box > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookielaw-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > amp-consent#notification > div:nth-child(2)#notification-box > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookielaw-reject",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > amp-consent#notification > div:nth-child(2)#notification-box > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookielaw-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

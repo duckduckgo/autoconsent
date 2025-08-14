@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_viniou.fr_uy6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.viniou.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?viniou\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

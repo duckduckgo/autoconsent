@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_uni-kassel.de_l1p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.uni-kassel.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uni-kassel\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-reject",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
