@@ -1,0 +1,38 @@
+{
+    "name": "auto_CA_worldelectricsupply.com_f0d",
+    "vendorUrl": "https://www.worldelectricsupply.com/product/detail/74131/hubbell-wiring-device-ss8",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?worldelectricsupply\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-container > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-container > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-container > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-container > div#cookie-consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
