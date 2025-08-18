@@ -11,23 +11,23 @@ jobs:
         outputs:
             ci_skip: ${{ steps.check_commits.outputs.ci_skip }}
         steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-        - name: Check for new commits and CI skip
-          id: check_commits
-          run: |
-            git fetch origin main
-            latest_commit_message=$(git log -1 --pretty=%B HEAD)
-            echo "Latest commit message: $latest_commit_message"
+            - name: Check for new commits and CI skip
+              id: check_commits
+              run: |
+                  git fetch origin main
+                  latest_commit_message=$(git log -1 --pretty=%B HEAD)
+                  echo "Latest commit message: $latest_commit_message"
 
-            if [[ "$latest_commit_message" == *"[ci skip]"* || "$latest_commit_message" == *"[skip ci]"* ]]; then
-                echo "CI skip detected in the latest commit message."
-                echo "ci_skip=true" >> $GITHUB_OUTPUT
-            else
-                echo "No CI skip detected."
-                echo "ci_skip=false" >> $GITHUB_OUTPUT
-            fi
+                  if [[ "$latest_commit_message" == *"[ci skip]"* || "$latest_commit_message" == *"[skip ci]"* ]]; then
+                      echo "CI skip detected in the latest commit message."
+                      echo "ci_skip=true" >> $GITHUB_OUTPUT
+                  else
+                      echo "No CI skip detected."
+                      echo "ci_skip=false" >> $GITHUB_OUTPUT
+                  fi
 
     release:
         runs-on: ubuntu-latest
