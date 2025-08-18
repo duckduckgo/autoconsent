@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import { encodeRules, decodeRules, buildStrings } from '../../lib/encoding';
-import { AutoConsentCMPRule } from '../../lib/rules';
+import { AutoConsentCMPRule, AutoConsentRuleStep } from '../../lib/rules';
 import { autoconsent } from '../../rules/rules.json';
 import AutoConsent from '../../lib/web';
 
@@ -11,7 +11,7 @@ describe('RuleCompaction', () => {
         const encoded = encodeRules(rules, null);
         const decoded = decodeRules(encoded);
         expect(rules.length).to.equal(decoded.length);
-        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata'];
+        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata', 'detectPopup', 'detectCmp', 'optOut', 'test'];
         for (let i = 0; i < rules.length; i++) {
             // ensure non-empty values for runContext, test, and prehideSelectors
             const originalRule = {
@@ -21,6 +21,28 @@ describe('RuleCompaction', () => {
                 ...rules[i],
             };
             const finalRule = decoded[i];
+
+            const stripCommentFromStep = (step: AutoConsentRuleStep) => {
+                if (step.comment) {
+                    delete step.comment; // comments are not encoded
+                }
+                if (step.if) {
+                    step.if = stripCommentFromStep(step.if);
+                }
+                if (step.then) {
+                    step.then = step.then.map(stripCommentFromStep);
+                }
+                if (step.else) {
+                    step.else = step.else.map(stripCommentFromStep);
+                }
+                return step;
+            };
+            const stripComments = (steps: AutoConsentRuleStep[]) => steps.map(stripCommentFromStep);
+            expect(finalRule.detectCmp).to.deep.equal(stripComments(originalRule.detectCmp), 'detectCmp is correctly preserved');
+            expect(finalRule.detectPopup).to.deep.equal(stripComments(originalRule.detectPopup), 'detectPopup is correctly preserved');
+            expect(finalRule.optOut).to.deep.equal(stripComments(originalRule.optOut), 'optOut is correctly preserved');
+            expect(finalRule.test).to.deep.equal(stripComments(originalRule.test), 'test is correctly preserved');
+
             for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
                 // @ts-expect-error Type checker doesn't like us using dynamic attributes here
                 expect(finalRule[key]).to.deep.equal(originalRule[key], `${key} is correctly preserved`);
