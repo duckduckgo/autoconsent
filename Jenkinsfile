@@ -143,6 +143,12 @@ pipeline {
                         if (testsFailed > 0) {
                             status = 'FAILURE'
                         }
+                        if (env.CHANGE_ID) {
+                            def artifactsUrl = "${env.BUILD_URL}artifact/*zip*/archive.zip"
+                            withCredentials([string(credentialsId: 'github.com-autoconsent-PAT', variable: 'GH_TOKEN')]) {
+                                sh "curl -L -X POST -H 'Authorization: Bearer ${GH_TOKEN}' -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' https://api.github.com/repos/duckduckgo/autoconsent/issues/${env.CHANGE_ID}/comments -d '{\"body\":\"CI run finished. Artifacts ZIP for the [review tool](https://zok.pw/autoconsent-review-tool/): ${artifactsUrl}\"}' || true"
+                            }
+                        }
                     }
 
                     githubNotify(
@@ -154,18 +160,6 @@ pipeline {
                         status: status,
                         credentialsId: 'autoconsent-rw'
                     )
-                }
-            }
-        }
-    }
-    post {
-        always {
-            script {
-                if (env.CHANGE_ID) {
-                    def artifactsUrl = "${env.BUILD_URL}artifact/*zip*/archive.zip"
-                    withCredentials([string(credentialsId: 'github.com-autoconsent-PAT', variable: 'GH_TOKEN')]) {
-                        sh "curl -L -X POST -H 'Authorization: Bearer ${GH_TOKEN}' -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' https://api.github.com/repos/duckduckgo/autoconsent/issues/${env.CHANGE_ID}/comments -d '{\"body\":\"CI run finished. Artifacts ZIP for the [review tool](https://zok.pw/autoconsent-review-tool/): ${artifactsUrl}\"}' || true"
-                    }
                 }
             }
         }
