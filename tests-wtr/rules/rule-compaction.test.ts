@@ -11,7 +11,7 @@ describe('RuleCompaction', () => {
         const encoded = encodeRules(rules, null);
         const decoded = decodeRules(encoded);
         expect(rules.length).to.equal(decoded.length);
-        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata', 'detectPopup', 'detectCmp', 'optOut', 'test'];
+        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata'];
         for (let i = 0; i < rules.length; i++) {
             // ensure non-empty values for runContext, test, and prehideSelectors
             const originalRule = {
@@ -21,7 +21,7 @@ describe('RuleCompaction', () => {
                 ...rules[i],
             };
             const finalRule = decoded[i];
-
+            // strip comments from original rules
             const stripCommentFromStep = (step: AutoConsentRuleStep) => {
                 if (step.comment) {
                     delete step.comment; // comments are not encoded
@@ -38,10 +38,9 @@ describe('RuleCompaction', () => {
                 return step;
             };
             const stripComments = (steps: AutoConsentRuleStep[]) => steps.map(stripCommentFromStep);
-            expect(finalRule.detectCmp).to.deep.equal(stripComments(originalRule.detectCmp), 'detectCmp is correctly preserved');
-            expect(finalRule.detectPopup).to.deep.equal(stripComments(originalRule.detectPopup), 'detectPopup is correctly preserved');
-            expect(finalRule.optOut).to.deep.equal(stripComments(originalRule.optOut), 'optOut is correctly preserved');
-            expect(finalRule.test).to.deep.equal(stripComments(originalRule.test), 'test is correctly preserved');
+            [originalRule.detectPopup, originalRule.detectCmp, originalRule.optOut, originalRule.test].forEach((steps) =>
+                stripComments(steps),
+            );
 
             for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
                 // @ts-expect-error Type checker doesn't like us using dynamic attributes here
