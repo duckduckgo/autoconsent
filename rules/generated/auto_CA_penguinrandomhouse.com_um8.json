@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_penguinrandomhouse.com_um8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.penguinrandomhouse.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?penguinrandomhouse\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#prh_privacy_prompt > div:nth-child(2):not([id]) > div:nth-child(2)#consent_prompt_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#prh_privacy_prompt > div:nth-child(2):not([id]) > div:nth-child(2)#consent_prompt_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#prh_privacy_prompt > div:nth-child(2):not([id]) > div:nth-child(2)#consent_prompt_decline",
+            "comment": "I Decline All Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#prh_privacy_prompt > div:nth-child(2):not([id]) > div:nth-child(2)#consent_prompt_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
