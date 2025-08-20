@@ -1,3 +1,30 @@
+# v14.14.0 (Wed Aug 20 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group with 4 updates [#909](https://github.com/duckduckgo/autoconsent/pull/909) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Prevent release if the last commit has [ci skip] (i.e. is is a release commit). [#907](https://github.com/duckduckgo/autoconsent/pull/907) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#906](https://github.com/duckduckgo/autoconsent/pull/906) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#903](https://github.com/duckduckgo/autoconsent/pull/903) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#902](https://github.com/duckduckgo/autoconsent/pull/902) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#901](https://github.com/duckduckgo/autoconsent/pull/901) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### ⚠️ Pushed to `main`
+
+- disable nightly releases ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.13.1 (Fri Aug 15 2025)
 
 
