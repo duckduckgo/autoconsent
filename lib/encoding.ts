@@ -136,6 +136,9 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
+        if (step.comment) {
+            delete clonedStep.comment; // comments are not encoded
+        }
         for (const [longKey, shortKey] of compactedRuleSteps) {
             if (clonedStep[longKey] && typeof clonedStep[longKey] === 'string') {
                 clonedStep[shortKey] = strings.indexOf(clonedStep[longKey]);
