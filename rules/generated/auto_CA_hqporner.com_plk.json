@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_hqporner.com_plk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://hqporner.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hqporner\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#skel-layers-wrapper > div:nth-child(19)#cookie-banner > a:nth-child(3)#accept-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#skel-layers-wrapper > div:nth-child(19)#cookie-banner > a:nth-child(3)#accept-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#skel-layers-wrapper > div:nth-child(19)#cookie-banner > a:nth-child(3)#accept-essential",
+            "comment": "ALLOW ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#skel-layers-wrapper > div:nth-child(19)#cookie-banner > a:nth-child(3)#accept-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
