@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_skandix.de_qkh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.skandix.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?skandix\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(1)#cookie-law > div#cookie-banner > div:nth-child(2)#cookie-buttons > span:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(1)#cookie-law > div#cookie-banner > div:nth-child(2)#cookie-buttons > span:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(1)#cookie-law > div#cookie-banner > div:nth-child(2)#cookie-buttons > span:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Accept only required"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(1)#cookie-law > div#cookie-banner > div:nth-child(2)#cookie-buttons > span:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

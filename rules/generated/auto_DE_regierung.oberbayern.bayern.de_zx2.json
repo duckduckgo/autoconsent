@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_regierung.oberbayern.bayern.de_zx2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.regierung.oberbayern.bayern.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?regierung\\.oberbayern\\.bayern\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Webanalyse ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

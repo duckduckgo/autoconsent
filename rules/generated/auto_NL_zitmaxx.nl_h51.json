@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_zitmaxx.nl_h51",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.zitmaxx.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zitmaxx\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_ec-dialog > div:not([id]) > div:nth-child(1)#_ec-default > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_ec-dialog > div:not([id]) > div:nth-child(1)#_ec-default > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_ec-dialog > div:not([id]) > div:nth-child(1)#_ec-default > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Weiger alles"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_ec-dialog > div:not([id]) > div:nth-child(1)#_ec-default > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

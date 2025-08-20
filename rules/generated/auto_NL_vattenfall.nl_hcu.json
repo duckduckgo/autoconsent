@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_vattenfall.nl_hcu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vattenfall.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vattenfall\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookie-consent-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(2)#rejectBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookie-consent-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(2)#rejectBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookie-consent-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(2)#rejectBtn",
+            "comment": "Nee, weiger cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookie-consent-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(2)#rejectBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

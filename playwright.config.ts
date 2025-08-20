@@ -7,7 +7,7 @@ const config: PlaywrightTestConfig = {
     retries: process.env.CI ? 2 : 0,
     testDir: 'tests',
     use: {
-        trace: 'on-first-retry',
+        trace: 'off',
     },
     projects: [
         {

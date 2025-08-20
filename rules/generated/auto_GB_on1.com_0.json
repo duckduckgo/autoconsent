@@ -1,7 +1,10 @@
 {
     "name": "auto_GB_on1.com_0",
-    "vendorUrl": "https://www.on1.com/",
     "cosmetic": false,
+    "_metadata": {
+        "manuallyReviewUpdates": true,
+        "vendorUrl": "https://www.on1.com/"
+    },
     "runContext": {
         "main": true,
         "frame": false,
@@ -10,18 +13,18 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(3):not([id])"
+            "exists": "#on1-cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(3):not([id])"
+            "visible": "#on1-cookie-banner"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(3):not([id])",
+            "waitForThenClick": "#on1-cookie-banner a[onclick=\"declineCookieBanner();\"]",
             "comment": "Decline"
         }
     ]

@@ -1,0 +1,41 @@
+{
+    "name": "auto_AU_epoch.ai_2pl",
+    "cosmetic": false,
+    "_metadata": {
+        "manuallyReviewUpdates": true,
+        "vendorUrl": "https://epoch.ai/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?epoch\\.ai/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-notice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-notice-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "#cookie-notice-decline",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-notice-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

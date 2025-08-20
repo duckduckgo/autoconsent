@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_wealthsimple.com_kgz",
-    "vendorUrl": "https://www.wealthsimple.com/en-ca/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div:not([id])[data-testid=\"CookieBanner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div:not([id])[data-testid=\"CookieBanner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id])[data-testid=\"CookieBanner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
             "comment": "Allow necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id])[data-testid=\"CookieBanner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

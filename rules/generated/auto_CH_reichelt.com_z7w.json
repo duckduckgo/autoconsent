@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_reichelt.com_z7w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.reichelt.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?reichelt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header#pageHeader > div:nth-child(4)#cookieConsentHolder > div:not([id]) > div:nth-child(3):not([id]) > form#ccForm > button:nth-child(1)#cookiedeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header#pageHeader > div:nth-child(4)#cookieConsentHolder > div:not([id]) > div:nth-child(3):not([id]) > form#ccForm > button:nth-child(1)#cookiedeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header#pageHeader > div:nth-child(4)#cookieConsentHolder > div:not([id]) > div:nth-child(3):not([id]) > form#ccForm > button:nth-child(1)#cookiedeny",
+            "comment": "Necessary cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header#pageHeader > div:nth-child(4)#cookieConsentHolder > div:not([id]) > div:nth-child(3):not([id]) > form#ccForm > button:nth-child(1)#cookiedeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

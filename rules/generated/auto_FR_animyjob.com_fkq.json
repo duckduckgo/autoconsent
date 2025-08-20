@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_animyjob.com_fkq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.animyjob.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?animyjob\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_uhrzeit123.de_zgn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://uhrzeit123.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uhrzeit123\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccbox > div#ccbox-inner > div:nth-child(2):not([id]) > a:nth-child(6)#ccbox-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccbox > div#ccbox-inner > div:nth-child(2):not([id]) > a:nth-child(6)#ccbox-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccbox > div#ccbox-inner > div:nth-child(2):not([id]) > a:nth-child(6)#ccbox-deny",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccbox > div#ccbox-inner > div:nth-child(2):not([id]) > a:nth-child(6)#ccbox-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

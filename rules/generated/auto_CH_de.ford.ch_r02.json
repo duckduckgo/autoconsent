@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_de.ford.ch_r02",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.de.ford.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.ford\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#accelerator-page > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#accelerator-page > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#accelerator-page > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#accelerator-page > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

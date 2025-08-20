@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_banfflakelouise.com_4eg",
-    "vendorUrl": "https://www.banfflakelouise.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+            "exists": "body > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+            "visible": "body > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "waitForThenClick": "body > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "waitForVisible": "body > div#__next > section:nth-child(1)#cookieConsent > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }

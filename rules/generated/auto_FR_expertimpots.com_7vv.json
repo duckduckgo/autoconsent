@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_expertimpots.com_7vv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://expertimpots.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?expertimpots\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > a:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > a:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > a:nth-child(4):not([id])",
+            "comment": "Refuser les cookies non essentiels"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > a:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

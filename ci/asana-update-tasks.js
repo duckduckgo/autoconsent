@@ -1,5 +1,5 @@
 const Asana = require('asana');
-const { replaceAllInString, getLink } = require('./release-utils.js');
+const { getLink } = require('./release-utils.js');
 
 const ASANA_ACCESS_TOKEN = process.env.ASANA_ACCESS_TOKEN;
 const prUrls = {
@@ -39,12 +39,8 @@ const asanaUpdateTasks = async () => {
         }
 
         const { html_notes: notes } = await asana.tasks.getTask(platformObj.taskGid, { opt_fields: 'html_notes' });
-
         const prLink = getLink(prUrls[platformName], `${platformObj.displayName} PR`);
-        /** @type {[[RegExp, string]]} */
-        const taskDescriptionSubstitutions = [[/\[\[pr_url]]/, prLink]];
-
-        const updatedNotes = replaceAllInString(notes, taskDescriptionSubstitutions);
+        const updatedNotes = prLink + '\n\n' + notes;
 
         await asana.tasks.updateTask(platformObj.taskGid, { html_notes: updatedNotes });
     }

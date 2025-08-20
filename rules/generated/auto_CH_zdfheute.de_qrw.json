@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_zdfheute.de_qrw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.zdfheute.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zdfheute\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id])[data-testid=\"modalBackground\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id])[data-testid=\"modalBackground\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id])[data-testid=\"modalBackground\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id])[data-testid=\"modalBackground\"] > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"cmp-revoke-all\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

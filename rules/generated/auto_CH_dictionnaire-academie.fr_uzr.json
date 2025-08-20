@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_dictionnaire-academie.fr_uzr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dictionnaire-academie.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dictionnaire-academie\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#blocCookies > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#blocCookies > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#blocCookies > button:nth-child(3):not([id])",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#blocCookies > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

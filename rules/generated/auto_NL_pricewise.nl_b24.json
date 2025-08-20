@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_pricewise.nl_b24",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pricewise.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pricewise\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > form#mainForm > div:nth-child(2)#cookieBar > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > form#mainForm > div:nth-child(2)#cookieBar > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > form#mainForm > div:nth-child(2)#cookieBar > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(1):not([id])",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > form#mainForm > div:nth-child(2)#cookieBar > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

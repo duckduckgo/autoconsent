@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_hifi-regler.de_95j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hifi-regler.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hifi-regler\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mmenu > div:nth-child(1)#page-container > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#cms-container-1602 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#deny-all-2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mmenu > div:nth-child(1)#page-container > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#cms-container-1602 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#deny-all-2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mmenu > div:nth-child(1)#page-container > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#cms-container-1602 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#deny-all-2",
+            "comment": "alle nicht notwendigen Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mmenu > div:nth-child(1)#page-container > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div#cms-container-1602 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#deny-all-2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

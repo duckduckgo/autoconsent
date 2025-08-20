@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_asda.jobs_y0y",
-    "vendorUrl": "https://www.asda.jobs/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all"
+            "exists": "body > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all"
+            "visible": "body > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

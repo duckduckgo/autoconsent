@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_theoceanrace.com_rfc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.theoceanrace.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?theoceanrace\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(2)#reject-all-cookie-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(2)#reject-all-cookie-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(2)#reject-all-cookie-btn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(2)#reject-all-cookie-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

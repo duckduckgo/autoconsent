@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_schnittberichte.com_das",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.schnittberichte.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schnittberichte\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "NUR NOTWENDIGE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#drdsgvo_div > div#drdsgvo_popup > div:not([id]) > div:nth-child(1):not([id]) > div#drdsgvo_show1 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

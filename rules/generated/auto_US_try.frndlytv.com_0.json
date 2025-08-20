@@ -1,21 +1,23 @@
 {
     "name": "auto_US_try.frndlytv.com_0",
-    "vendorUrl": "https://try.frndlytv.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?try\\.frndlytv\\.com/"
+        "urlPattern": "^https?://([a-z]+\\.)?frndlytv\\.com/"
+    },
+    "_metadata": {
+        "vendorUrl": "https://frndlytv.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject"
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject"
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject"
         }
     ],
     "optIn": [],
@@ -24,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#privacy-reject",
             "timeout": 1000,
             "check": "none"
         }

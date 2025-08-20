@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_amayama.com_kw8",
-    "vendorUrl": "https://www.amayama.com/en",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject"
+            "exists": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject"
+            "visible": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

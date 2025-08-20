@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_cfo.coop_edx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cfo.coop/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cfo\\.coop/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

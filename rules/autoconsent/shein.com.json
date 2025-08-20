@@ -1,0 +1,35 @@
+{
+    "name": "shein.com",
+    "vendorUrl": "https://shein.com/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z]+\\.)?shein\\.com/"
+    },
+    "prehideSelectors": ["body > div[class*=_shein_privacy]"],
+    "detectCmp": [
+        {
+            "exists": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

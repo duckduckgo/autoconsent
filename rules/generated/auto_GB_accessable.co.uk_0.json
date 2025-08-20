@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_accessable.co.uk_0",
-    "vendorUrl": "https://www.accessable.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn"
+            "exists": "body > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn"
+            "visible": "body > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#aa-cookie > div#cookieBannerBox > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2)#aa-cookie-reject-btn",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

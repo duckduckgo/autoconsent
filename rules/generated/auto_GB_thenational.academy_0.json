@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_thenational.academy_0",
-    "vendorUrl": "https://www.thenational.academy/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+            "exists": "body > div#__next > div:nth-child(4):not([id]) > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])[data-testid=\"cookie-banner-reject\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+            "visible": "body > div#__next > div:nth-child(4):not([id]) > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])[data-testid=\"cookie-banner-reject\"]"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "waitForThenClick": "body > div#__next > div:nth-child(4):not([id]) > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])[data-testid=\"cookie-banner-reject\"]",
             "comment": "Reject non-essential cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "waitForVisible": "body > div#__next > div:nth-child(4):not([id]) > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])[data-testid=\"cookie-banner-reject\"]",
             "timeout": 1000,
             "check": "none"
         }

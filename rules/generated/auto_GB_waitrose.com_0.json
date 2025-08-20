@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_waitrose.com_0",
-    "vendorUrl": "https://www.waitrose.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id])[data-testid=\"initial-waitrose-cookie-consent-banner\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-all\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id])[data-testid=\"initial-waitrose-cookie-consent-banner\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-all\"]"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id])[data-testid=\"initial-waitrose-cookie-consent-banner\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-all\"]",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#content > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > section:not([id])[data-testid=\"initial-waitrose-cookie-consent-banner\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-all\"]",
             "timeout": 1000,
             "check": "none"
         }

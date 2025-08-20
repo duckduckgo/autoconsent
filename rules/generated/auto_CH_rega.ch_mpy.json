@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_rega.ch_mpy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rega.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rega\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie > div:nth-child(1)#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie > div:nth-child(1)#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie > div:nth-child(1)#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie > div:nth-child(1)#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

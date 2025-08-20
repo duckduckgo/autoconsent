@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_zenodo.org_5w4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://zenodo.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zenodo\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-essential",
+            "comment": "Accept only essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

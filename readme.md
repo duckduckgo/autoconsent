@@ -128,7 +128,7 @@ Both JSON and class implementations have the following components:
  * `optIn` - a list of actions for an 'opt-in' from the popup screen.
  * (optional) `prehideSelectors` - a list of CSS selectors to "pre-hide" early before detecting a CMP. This helps against flickering. Pre-hiding is done using CSS `opacity` and `z-index`, so be it should be used with care to prevent conflicts with the opt-out process.
  * (optional) `intermediate` - a boolean flag indicating that the ruleset is part of a multi-stage process, see the [Intermediate rules](#intermediate-rules) section. This is `false` by default.
- * (optional) `vendorUrl` - link to the CMP vendor site, for reference.
+ * (optional) `_metadata` - an object containing additional metadata about the rule. Metadata is lost during the build process, and is not used by the library in runtime.
  * (optional) `cosmetic` - a boolean flag indicating that the rule is purely cosmetic and does not affect the consent state. This is `false` by default.
  * (optional) `runContext` - an object describing when this rule should be tried:
    * `main` - boolean, set to `true` if the rule should be executed in top-level documents (default: `true`)

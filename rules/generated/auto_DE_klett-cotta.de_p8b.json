@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_klett-cotta.de_p8b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.klett-cotta.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?klett-cotta\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > dialog#whCookieManager > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#whcookiemanager_decline_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > dialog#whCookieManager > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#whcookiemanager_decline_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > dialog#whCookieManager > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#whcookiemanager_decline_all",
+            "comment": "Alle Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > dialog#whCookieManager > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#whcookiemanager_decline_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

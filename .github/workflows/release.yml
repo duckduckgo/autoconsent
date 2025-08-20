@@ -1,14 +1,38 @@
 name: Release
 
 on:
-    push:
-        branches:
-            - main
+    schedule:
+        - cron: '0 0 * * *'
+    workflow_dispatch:
 
 jobs:
+    check-for-commits:
+        runs-on: ubuntu-latest
+        outputs:
+            ci_skip: ${{ steps.check_commits.outputs.ci_skip }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Check for new commits and CI skip
+              id: check_commits
+              run: |
+                  git fetch origin main
+                  latest_commit_message=$(git log -1 --pretty=%B HEAD)
+                  echo "Latest commit message: $latest_commit_message"
+
+                  if [[ "$latest_commit_message" == *"[ci skip]"* || "$latest_commit_message" == *"[skip ci]"* ]]; then
+                      echo "CI skip detected in the latest commit message."
+                      echo "ci_skip=true" >> $GITHUB_OUTPUT
+                  else
+                      echo "No CI skip detected."
+                      echo "ci_skip=false" >> $GITHUB_OUTPUT
+                  fi
+
     release:
         runs-on: ubuntu-latest
-        if: ${{ !contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci') }}
+        needs: check-for-commits
+        if: ${{ needs.check-for-commits.outputs.ci_skip == 'false' }}
         outputs:
             tag_name: ${{ steps.remember_tag.outputs.tag_name }}
         steps:
@@ -29,6 +53,11 @@ jobs:
               run: |
                   npm run compile-filterlist
 
+            - name: Set Git identity
+              run: |
+                  git config --global user.email "dax@duckduckgo.com"
+                  git config --global user.name "Dax the Deployer"
+
             - name: Create Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,11 +69,55 @@ jobs:
               id: remember_tag
               run: echo "tag_name=$(git describe --exact-match --tags)" >> "$GITHUB_OUTPUT"
 
+    # ------------------------------------------------------------------------------
+    # Retrieve the corresponding Release data from the GitHub API
+    # ------------------------------------------------------------------------------
+    get_release_info:
+        needs: release
+        if: ${{ needs.release.outputs.tag_name != '' }}
+        uses: ./.github/workflows/get-release-info.yml
+        with:
+            tag_name: ${{ needs.release.outputs.tag_name }}
+
+    # ------------------------------------------------------------------------------
+    # Create initial Asana subtasks
+    # ------------------------------------------------------------------------------
+    create_asana_tasks:
+        needs:
+            - get_release_info
+            - release
+        runs-on: ubuntu-latest
+        outputs:
+            task-gid: ${{ steps.create-asana-tasks.outputs.TASK_GID }}
+        env:
+            TAG: ${{ needs.release.outputs.tag_name }}
+            RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+            RELEASE_NOTES: ${{ needs.get_release_info.outputs.release-notes }}
+        steps:
+            # --- Setup ---
+            - uses: actions/checkout@v3
+              with:
+                  path: autoconsent/
+            - uses: ./autoconsent/.github/actions/setup-release-scripts
+            # --- Effect ---
+            - name: Create Asana Tasks
+              id: create-asana-tasks
+              env:
+                  ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
+              run: |
+                  RELEASE_TASK_GID="$(node ./autoconsent/ci/asana-create-release-task.js)"
+                  echo "TASK_GID=$RELEASE_TASK_GID" >> "$GITHUB_OUTPUT"
+
+    # ------------------------------------------------------------------------------
+    # Create PR to privacy-configuration repository
+    # ------------------------------------------------------------------------------
     rule-release:
         name: Propagate rules to privacy config
-        needs: release
-        if: ${{ !contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci') && needs.release.outputs.tag_name != '' }}
+        needs:
+            - release
+            - create_asana_tasks
         uses: ./.github/workflows/privacy-config-pr.yml
         secrets: inherit
         with:
             tag_name: ${{ needs.release.outputs.tag_name }}
+            asana_task_gid: ${{ needs.create_asana_tasks.outputs.task-gid }}

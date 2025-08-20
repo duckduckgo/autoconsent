@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.trip.com_a2x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.trip.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.trip\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#ibu-cookie-banner-ref > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#ibu-cookie-banner-btn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

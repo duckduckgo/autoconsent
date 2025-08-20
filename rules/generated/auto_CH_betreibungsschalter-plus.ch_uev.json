@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_betreibungsschalter-plus.ch_uev",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.betreibungsschalter-plus.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?betreibungsschalter-plus\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#all > div:nth-child(4)#footer > footer:not([id]) > div:nth-child(3)#c3087 > div:nth-child(1)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#all > div:nth-child(4)#footer > footer:not([id]) > div:nth-child(3)#c3087 > div:nth-child(1)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#all > div:nth-child(4)#footer > footer:not([id]) > div:nth-child(3)#c3087 > div:nth-child(1)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#all > div:nth-child(4)#footer > footer:not([id]) > div:nth-child(3)#c3087 > div:nth-child(1)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

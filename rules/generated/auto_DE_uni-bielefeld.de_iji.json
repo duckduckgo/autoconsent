@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_uni-bielefeld.de_iji",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.uni-bielefeld.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uni-bielefeld\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div#ubfBanner > div#bannerContent > button:nth-child(4)#cookieModalBanner__deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div#ubfBanner > div#bannerContent > button:nth-child(4)#cookieModalBanner__deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div#ubfBanner > div#bannerContent > button:nth-child(4)#cookieModalBanner__deny",
+            "comment": "Nur notwendige Cookies zulassen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div#ubfBanner > div#bannerContent > button:nth-child(4)#cookieModalBanner__deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

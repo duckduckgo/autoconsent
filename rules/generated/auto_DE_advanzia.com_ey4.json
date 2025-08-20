@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_advanzia.com_ey4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.advanzia.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?advanzia\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_8cf81d25-2866-41cd-9aae-76c888e5bff7 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-a28c9881-6f32-4276-b820-273f7cfec5c6 > div:nth-child(2)#ppms-8171a867-495e-4d2f-9aec-1b92cbbfb895 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_8cf81d25-2866-41cd-9aae-76c888e5bff7 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-a28c9881-6f32-4276-b820-273f7cfec5c6 > div:nth-child(2)#ppms-8171a867-495e-4d2f-9aec-1b92cbbfb895 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_8cf81d25-2866-41cd-9aae-76c888e5bff7 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-a28c9881-6f32-4276-b820-273f7cfec5c6 > div:nth-child(2)#ppms-8171a867-495e-4d2f-9aec-1b92cbbfb895 > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_8cf81d25-2866-41cd-9aae-76c888e5bff7 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-a28c9881-6f32-4276-b820-273f7cfec5c6 > div:nth-child(2)#ppms-8171a867-495e-4d2f-9aec-1b92cbbfb895 > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

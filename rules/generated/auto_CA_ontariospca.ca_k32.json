@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_ontariospca.ca_k32",
-    "vendorUrl": "https://ontariospca.ca/",
     "cosmetic": false,
     "runContext": {
         "main": false,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }

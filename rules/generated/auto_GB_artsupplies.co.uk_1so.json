@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_artsupplies.co.uk_1so",
-    "vendorUrl": "https://www.artsupplies.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "ONLY NECESSARY COOKIES"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > sf-root:not([id]) > kb-cookie-consent:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }

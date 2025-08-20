@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_psyq.nl_5o0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.psyq.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?psyq\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_ > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button#_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_declineAllButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_ > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button#_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_declineAllButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_ > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button#_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_declineAllButton",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_ > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button#_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_declineAllButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
