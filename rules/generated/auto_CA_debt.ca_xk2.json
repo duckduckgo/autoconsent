@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_debt.ca_xk2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.debt.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?debt\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-modal-container > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-action-rejected",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
