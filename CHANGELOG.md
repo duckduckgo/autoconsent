@@ -1,3 +1,21 @@
+# v14.14.1 (Fri Aug 22 2025)
+
+#### 🐛 Bug Fix
+
+- Add fast-path to quantcast rule when there is a simple reject button [#912](https://github.com/duckduckgo/autoconsent/pull/912) ([@sammacbeth](https://github.com/sammacbeth))
+- Remove comments from encoded rule steps [#908](https://github.com/duckduckgo/autoconsent/pull/908) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Post a PR comment with links for review [#899](https://github.com/duckduckgo/autoconsent/pull/899) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.14.0 (Wed Aug 20 2025)
 
 #### 🚀 Enhancement
