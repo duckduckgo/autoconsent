@@ -1,3 +1,16 @@
+# v14.15.0 (Sat Aug 23 2025)
+
+#### 🚀 Enhancement
+
+- Clean duplicated asus.com rules [#914](https://github.com/duckduckgo/autoconsent/pull/914) ([@sammacbeth](https://github.com/sammacbeth))
+- Run heuristic detection also when site-specific rules apply. [#894](https://github.com/duckduckgo/autoconsent/pull/894) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.14.1 (Fri Aug 22 2025)
 
 #### 🐛 Bug Fix
