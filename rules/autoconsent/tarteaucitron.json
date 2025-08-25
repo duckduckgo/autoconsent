@@ -4,16 +4,31 @@
     "detectCmp": [{ "exists": "#tarteaucitronRoot" }],
     "detectPopup": [
         {
-            "visible": "#tarteaucitronRoot #tarteaucitronAlertBig",
-            "check": "any"
+            "visible": "#tarteaucitronCloseAlert"
+        },
+        {
+            "exists": "#tarteaucitronAllDenied2",
+            "negated": true
         }
     ],
-    "optIn": [{ "eval": "EVAL_TARTEAUCITRON_1" }],
-    "optOut": [{ "eval": "EVAL_TARTEAUCITRON_0" }],
+    "optIn": [{ "click": "#tarteaucitronPersonalize" }],
+    "optOut": [
+        {
+            "if": { "exists": ".dsgvoaio-checkbox" },
+            "then": [
+                { "click": ".dsgvoaio-checkbox > input:checked", "all": true, "optional": true },
+                { "click": "#tarteaucitronCloseAlert" }
+            ],
+            "else": [
+                { "click": "#tarteaucitronPersonalize" },
+                { "waitForThenClick": "#tarteaucitronAllDenied" },
+                { "click": "#tarteaucitronClosePanel" }
+            ]
+        }
+    ],
     "test": [
         {
-            "eval": "EVAL_TARTEAUCITRON_2",
-            "comment": "sometimes there are required categories, so we check that at least something is false"
+            "eval": "EVAL_TARTEAUCITRON_2"
         }
     ]
 }
