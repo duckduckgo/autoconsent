@@ -1,0 +1,33 @@
+{
+    "name": "ah.nl",
+    "_metadata": {
+        "vendorUrl": "https://www.ah.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ah\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-overlay"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-overlay"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#decline-cookies"
+        }
+    ]
+}
