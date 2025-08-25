@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_airmiles.nl_f6z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.airmiles.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?airmiles\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > air-root:not([id]) > ion-app:not([id]) > air-layout:not([id]) > air-cookie-banner:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > air-root:not([id]) > ion-app:not([id]) > air-layout:not([id]) > air-cookie-banner:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > air-root:not([id]) > ion-app:not([id]) > air-layout:not([id]) > air-cookie-banner:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > air-root:not([id]) > ion-app:not([id]) > air-layout:not([id]) > air-cookie-banner:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

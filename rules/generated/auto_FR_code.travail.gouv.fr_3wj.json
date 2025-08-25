@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_code.travail.gouv.fr_3wj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://code.travail.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?code\\.travail\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,6 +1,5 @@
 {
     "name": "auto_US_framesdirect.com_0",
-    "vendorUrl": "https://www.framesdirect.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
+            "exists": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
+            "visible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
             "comment": "REJECT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#ctl00_mp_body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
             "timeout": 1000,
             "check": "none"
         }

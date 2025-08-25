@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_vvs.de_op7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vvs.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vvs\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-disclaimer-wrap-sticky-wrapper > div#cookie-disclaimer-wrap > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-disclaimer-wrap-sticky-wrapper > div#cookie-disclaimer-wrap > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-disclaimer-wrap-sticky-wrapper > div#cookie-disclaimer-wrap > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Nur notwendigen Cookies zustimmen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-disclaimer-wrap-sticky-wrapper > div#cookie-disclaimer-wrap > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

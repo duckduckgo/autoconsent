@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bienmanger.com_qk0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bienmanger.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bienmanger\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(5)#bloc-bm-cookies-consent > div:nth-child(1)#modal-bm-cookies-consent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#modal-bm-cookies-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(5)#bloc-bm-cookies-consent > div:nth-child(1)#modal-bm-cookies-consent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#modal-bm-cookies-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(5)#bloc-bm-cookies-consent > div:nth-child(1)#modal-bm-cookies-consent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#modal-bm-cookies-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(5)#bloc-bm-cookies-consent > div:nth-child(1)#modal-bm-cookies-consent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#modal-bm-cookies-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

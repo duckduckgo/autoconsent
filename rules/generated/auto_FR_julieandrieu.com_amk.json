@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_julieandrieu.com_amk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.julieandrieu.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?julieandrieu\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-refuse-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-refuse-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-refuse-all",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-refuse-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

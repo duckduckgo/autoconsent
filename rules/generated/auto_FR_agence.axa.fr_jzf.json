@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_agence.axa.fr_jzf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://agence.axa.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?agence\\.axa\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > button:nth-child(1)#footer_tc_privacy_button_3"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > button:nth-child(1)#footer_tc_privacy_button_3"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > button:nth-child(1)#footer_tc_privacy_button_3",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > button:nth-child(1)#footer_tc_privacy_button_3",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

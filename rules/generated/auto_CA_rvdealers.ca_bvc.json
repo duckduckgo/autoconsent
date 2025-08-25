@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_rvdealers.ca_bvc",
-    "vendorUrl": "https://www.rvdealers.ca/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
             "comment": "ESSENTIAL ONLY"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
             "timeout": 1000,
             "check": "none"
         }

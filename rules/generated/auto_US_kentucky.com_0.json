@@ -1,6 +1,5 @@
 {
     "name": "auto_US_kentucky.com_0",
-    "vendorUrl": "https://www.kentucky.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body > div:not([id]) > div:nth-child(2)#bb81bcb0-4bdf-40f4-bf8a-9eb709e2ebbd > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body > div:not([id]) > div:nth-child(2)#bb81bcb0-4bdf-40f4-bf8a-9eb709e2ebbd > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[data-nosnippet][class][dir] > div:nth-child(2) > div:nth-child(2) > button:nth-child(2)",
-            "text": "Deny"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#bb81bcb0-4bdf-40f4-bf8a-9eb709e2ebbd > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#bb81bcb0-4bdf-40f4-bf8a-9eb709e2ebbd > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

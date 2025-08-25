@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bonprix.nl_ovi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bonprix.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bonprix\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-bar-2019 > div:nth-child(4):not([id]) > a#declineLink"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-bar-2019 > div:nth-child(4):not([id]) > a#declineLink"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar-2019 > div:nth-child(4):not([id]) > a#declineLink",
+            "comment": "hier weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar-2019 > div:nth-child(4):not([id]) > a#declineLink",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

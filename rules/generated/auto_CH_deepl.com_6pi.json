@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_deepl.com_6pi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.deepl.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deepl\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id])[data-testid=\"dl-cookieBanner\"] > div:not([id])[data-testid=\"cookie-banner-strict\"] > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected[data-testid=\"cookie-banner-strict-accept-selected\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id])[data-testid=\"dl-cookieBanner\"] > div:not([id])[data-testid=\"cookie-banner-strict\"] > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected[data-testid=\"cookie-banner-strict-accept-selected\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id])[data-testid=\"dl-cookieBanner\"] > div:not([id])[data-testid=\"cookie-banner-strict\"] > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected[data-testid=\"cookie-banner-strict-accept-selected\"]",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > div:nth-child(3):not([id])[data-testid=\"dl-cookieBanner\"] > div:not([id])[data-testid=\"cookie-banner-strict\"] > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-banner-strict-accept-selected[data-testid=\"cookie-banner-strict-accept-selected\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

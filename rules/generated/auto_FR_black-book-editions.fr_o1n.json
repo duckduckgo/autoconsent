@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_black-book-editions.fr_o1n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://black-book-editions.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?black-book-editions\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-popup > div:not([id]) > form:nth-child(2)#form-accept-cookies > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-popup > div:not([id]) > form:nth-child(2)#form-accept-cookies > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-popup > div:not([id]) > form:nth-child(2)#form-accept-cookies > button:nth-child(5):not([id])",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-popup > div:not([id]) > form:nth-child(2)#form-accept-cookies > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

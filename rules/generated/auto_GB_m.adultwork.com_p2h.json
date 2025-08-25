@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_m.adultwork.com_p2h",
-    "vendorUrl": "https://m.adultwork.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
             "timeout": 1000,
             "check": "none"
         }

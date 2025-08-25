@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_sia.aviation-civile.gouv.fr_a4i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sia.aviation-civile.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sia\\.aviation-civile\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id]) > div#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id]) > div#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id]) > div#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2)#decline-cookies",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id]) > div#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

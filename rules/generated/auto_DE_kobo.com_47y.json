@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kobo.com_47y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kobo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kobo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

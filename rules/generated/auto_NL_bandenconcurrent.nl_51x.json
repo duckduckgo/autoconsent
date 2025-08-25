@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bandenconcurrent.nl_51x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bandenconcurrent.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bandenconcurrent\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cwall > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#cookie-not-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cwall > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#cookie-not-consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cwall > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#cookie-not-consent",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cwall > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:nth-child(2)#cookie-not-consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 import generateCMPTests from '../../playwright/runner';
-generateCMPTests('auto_CA_airbnb.ca_d52', ['https://www.airbnb.ca/?locale=en&_set_bev_on_new_domain=1750349954_EAZjM3OTdhMWQyMD'], {
+generateCMPTests('auto_CA_airbnb.ca_d52', ['https://www.airbnb.ca/?locale=en&_set_bev_on_new_domain=1755050444_EAYjc3NTdlYjA3YW'], {
     testOptIn: false,
-    testSelfTest: false,
-    onlyRegions: ['CA', 'AU', 'GB', 'NL'],
+    testSelfTest: true,
+    onlyRegions: ['CA'],
 });

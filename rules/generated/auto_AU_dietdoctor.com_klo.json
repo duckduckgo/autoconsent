@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_dietdoctor.com_klo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dietdoctor.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dietdoctor\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "comment": "ONLY NECESSARY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

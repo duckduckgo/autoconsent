@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hsn-tsn.de_i6g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hsn-tsn.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hsn-tsn\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies > div:not([id]) > button:nth-child(4)#consent-no"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies > div:not([id]) > button:nth-child(4)#consent-no"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies > div:not([id]) > button:nth-child(4)#consent-no",
+            "comment": "Nur notwendige Cookies erlauben"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies > div:not([id]) > button:nth-child(4)#consent-no",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

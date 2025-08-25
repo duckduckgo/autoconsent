@@ -1,6 +1,5 @@
 {
     "name": "auto_US_airport.guide_0",
-    "vendorUrl": "https://www.airport.guide/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline"
+            "exists": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline"
+            "visible": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

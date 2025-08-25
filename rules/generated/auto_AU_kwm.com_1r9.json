@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_kwm.com_1r9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kwm.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kwm\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div#container-8ee478ce7e > div:nth-child(4):not([id]) > div#experiencefragment-4b657be6a8 > div:not([id]) > div#container-216749502c > div:not([id]) > div:not([id]) > div#dynamicContainer-eb1e113116 > div:not([id]) > div#cookie-mask > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#saveNecessCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div#container-8ee478ce7e > div:nth-child(4):not([id]) > div#experiencefragment-4b657be6a8 > div:not([id]) > div#container-216749502c > div:not([id]) > div:not([id]) > div#dynamicContainer-eb1e113116 > div:not([id]) > div#cookie-mask > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#saveNecessCookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div#container-8ee478ce7e > div:nth-child(4):not([id]) > div#experiencefragment-4b657be6a8 > div:not([id]) > div#container-216749502c > div:not([id]) > div:not([id]) > div#dynamicContainer-eb1e113116 > div:not([id]) > div#cookie-mask > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#saveNecessCookie",
+            "comment": "USE ESSENTIAL COOKIES ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div#container-8ee478ce7e > div:nth-child(4):not([id]) > div#experiencefragment-4b657be6a8 > div:not([id]) > div#container-216749502c > div:not([id]) > div:not([id]) > div#dynamicContainer-eb1e113116 > div:not([id]) > div#cookie-mask > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#saveNecessCookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

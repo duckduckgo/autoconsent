@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_jetcamp.com_l0i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jetcamp.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jetcamp\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "comment": "I do not accept"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

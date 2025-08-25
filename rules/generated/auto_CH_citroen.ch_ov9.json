@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_citroen.ch_ov9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.citroen.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?citroen\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "comment": "WEITER OHNE ANNAHME →"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

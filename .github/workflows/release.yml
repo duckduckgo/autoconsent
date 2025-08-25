@@ -6,8 +6,33 @@ on:
     workflow_dispatch:
 
 jobs:
+    check-for-commits:
+        runs-on: ubuntu-latest
+        outputs:
+            ci_skip: ${{ steps.check_commits.outputs.ci_skip }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Check for new commits and CI skip
+              id: check_commits
+              run: |
+                  git fetch origin main
+                  latest_commit_message=$(git log -1 --pretty=%B HEAD)
+                  echo "Latest commit message: $latest_commit_message"
+
+                  if [[ "$latest_commit_message" == *"[ci skip]"* || "$latest_commit_message" == *"[skip ci]"* ]]; then
+                      echo "CI skip detected in the latest commit message."
+                      echo "ci_skip=true" >> $GITHUB_OUTPUT
+                  else
+                      echo "No CI skip detected."
+                      echo "ci_skip=false" >> $GITHUB_OUTPUT
+                  fi
+
     release:
         runs-on: ubuntu-latest
+        needs: check-for-commits
+        if: ${{ needs.check-for-commits.outputs.ci_skip == 'false' }}
         outputs:
             tag_name: ${{ steps.remember_tag.outputs.tag_name }}
         steps:

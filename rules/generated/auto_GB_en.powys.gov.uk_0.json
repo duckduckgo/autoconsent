@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_en.powys.gov.uk_0",
-    "vendorUrl": "https://en.powys.gov.uk/?ccp=true",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
+            "exists": "body > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
+            "visible": "body > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
             "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:nth-child(2)#cookie-consent-prompt > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2)#cookie-consent-form > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

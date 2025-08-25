@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_autopartspro.co.uk_0",
-    "vendorUrl": "https://www.autopartspro.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > span"
+            "exists": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 "
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > span"
+            "visible": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 "
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > span",
-            "text": "Reject all cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 ",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 ",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

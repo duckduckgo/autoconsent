@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_inview.nl_zwu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.inview.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?inview\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#udtCookiebox > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#udtFullBig > div:nth-child(1)#AcceptB-custom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#udtCookiebox > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#udtFullBig > div:nth-child(1)#AcceptB-custom"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#udtCookiebox > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#udtFullBig > div:nth-child(1)#AcceptB-custom",
+            "comment": "Accepteer alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#udtCookiebox > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#udtFullBig > div:nth-child(1)#AcceptB-custom",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

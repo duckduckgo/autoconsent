@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_cinch.co.uk_pj2",
-    "vendorUrl": "https://www.cinch.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]",
             "comment": "Decline"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#__next > main:nth-child(3)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]",
             "timeout": 1000,
             "check": "none"
         }

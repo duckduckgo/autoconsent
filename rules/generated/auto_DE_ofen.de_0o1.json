@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ofen.de_0o1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ofen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ofen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button",
+            "comment": "Nur funktionale Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_tennet.eu_s9e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tennet.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tennet\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "comment": "Accept necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

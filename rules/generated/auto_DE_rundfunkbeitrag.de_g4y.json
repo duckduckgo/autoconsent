@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_rundfunkbeitrag.de_g4y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rundfunkbeitrag.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rundfunkbeitrag\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#optInId > div:nth-child(4):not([id]) > button:nth-child(2)#Ablehnen"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#optInId > div:nth-child(4):not([id]) > button:nth-child(2)#Ablehnen"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#optInId > div:nth-child(4):not([id]) > button:nth-child(2)#Ablehnen",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#optInId > div:nth-child(4):not([id]) > button:nth-child(2)#Ablehnen",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

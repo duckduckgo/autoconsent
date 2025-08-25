@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.endress.com_777",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.de.endress.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.endress\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#eh-page > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#eh-page > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#eh-page > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Accept only essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#eh-page > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

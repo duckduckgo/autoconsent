@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_parasol-shop.nl_gps",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.parasol-shop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?parasol-shop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(15)#mod-cookieacceptatie > div:not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(15)#mod-cookieacceptatie > div:not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(15)#mod-cookieacceptatie > div:not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(15)#mod-cookieacceptatie > div:not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

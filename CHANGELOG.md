@@ -1,3 +1,110 @@
+# v14.15.0 (Sat Aug 23 2025)
+
+#### 🚀 Enhancement
+
+- Clean duplicated asus.com rules [#914](https://github.com/duckduckgo/autoconsent/pull/914) ([@sammacbeth](https://github.com/sammacbeth))
+- Run heuristic detection also when site-specific rules apply. [#894](https://github.com/duckduckgo/autoconsent/pull/894) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.14.1 (Fri Aug 22 2025)
+
+#### 🐛 Bug Fix
+
+- Add fast-path to quantcast rule when there is a simple reject button [#912](https://github.com/duckduckgo/autoconsent/pull/912) ([@sammacbeth](https://github.com/sammacbeth))
+- Remove comments from encoded rule steps [#908](https://github.com/duckduckgo/autoconsent/pull/908) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Post a PR comment with links for review [#899](https://github.com/duckduckgo/autoconsent/pull/899) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.14.0 (Wed Aug 20 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group with 4 updates [#909](https://github.com/duckduckgo/autoconsent/pull/909) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Prevent release if the last commit has [ci skip] (i.e. is is a release commit). [#907](https://github.com/duckduckgo/autoconsent/pull/907) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#906](https://github.com/duckduckgo/autoconsent/pull/906) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#903](https://github.com/duckduckgo/autoconsent/pull/903) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#902](https://github.com/duckduckgo/autoconsent/pull/902) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#901](https://github.com/duckduckgo/autoconsent/pull/901) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### ⚠️ Pushed to `main`
+
+- disable nightly releases ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.13.1 (Fri Aug 15 2025)
+
+
+
+---
+
+# v14.13.0 (Thu Aug 14 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 4 updates [#879](https://github.com/duckduckgo/autoconsent/pull/879) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- [8 / 8] 🤖 Add autoconsent rules for 45 sites (5 requiring review) [#892](https://github.com/duckduckgo/autoconsent/pull/892) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [7 / 8] 🤖 Add autoconsent rules for 300 sites (4 requiring review) [#891](https://github.com/duckduckgo/autoconsent/pull/891) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [6 / 8] 🤖 Add autoconsent rules for 300 sites (3 requiring review) [#890](https://github.com/duckduckgo/autoconsent/pull/890) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [5 / 8] 🤖 Add autoconsent rules for 300 sites (5 requiring review) [#889](https://github.com/duckduckgo/autoconsent/pull/889) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [4 / 8] 🤖 Add autoconsent rules for 300 sites (6 requiring review) [#888](https://github.com/duckduckgo/autoconsent/pull/888) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [3 / 8] 🤖 Add autoconsent rules for 300 sites (8 requiring review) [#887](https://github.com/duckduckgo/autoconsent/pull/887) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [2 / 8] 🤖 Add autoconsent rules for 300 sites (23 requiring review) [#886](https://github.com/duckduckgo/autoconsent/pull/886) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [1 / 8] 🤖 Add autoconsent rules for 300 sites (5 requiring review) [#885](https://github.com/duckduckgo/autoconsent/pull/885) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.10 to 7.0.11 [#878](https://github.com/duckduckgo/autoconsent/pull/878) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Coverage data update [#868](https://github.com/duckduckgo/autoconsent/pull/868) ([@daxtheduck](https://github.com/daxtheduck))
+- Ensure release npm version bump doesn't clear other deps [#897](https://github.com/duckduckgo/autoconsent/pull/897) ([@sammacbeth](https://github.com/sammacbeth))
+- Run releases nightly [#893](https://github.com/duckduckgo/autoconsent/pull/893) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#875](https://github.com/duckduckgo/autoconsent/pull/875) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- [test] Add autoconsent rules for 2 sites (0 requiring review) [#859](https://github.com/duckduckgo/autoconsent/pull/859) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### ⚠️ Pushed to `main`
+
+- Simple task notes update ([@sammacbeth](https://github.com/sammacbeth))
+- Set RELEASE_TASK_URL env for release job ([@sammacbeth](https://github.com/sammacbeth))
+- Pass release information to release task creation ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Fix reporting of test results to github [#898](https://github.com/duckduckgo/autoconsent/pull/898) ([@sammacbeth](https://github.com/sammacbeth))
+- Playwright test output [#896](https://github.com/duckduckgo/autoconsent/pull/896) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.12.0 (Wed Aug 13 2025)
 
 #### 🚀 Enhancement

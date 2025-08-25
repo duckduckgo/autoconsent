@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_qatarairways.com_o9u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.qatarairways.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?qatarairways\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(18)#cookiebarNew > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-container > div#cookie-id > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#rejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(18)#cookiebarNew > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-container > div#cookie-id > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#rejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(18)#cookiebarNew > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-container > div#cookie-id > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#rejectAll",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(18)#cookiebarNew > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-container > div#cookie-id > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(2)#rejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

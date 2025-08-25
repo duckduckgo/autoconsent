@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_nutrixeal.fr_ehe",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nutrixeal.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nutrixeal\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_gstaad.ch_n3x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gstaad.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gstaad\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > base-popup#gpuAupTMRHO > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > menu:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > base-popup#gpuAupTMRHO > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > menu:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > base-popup#gpuAupTMRHO > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > menu:not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > base-popup#gpuAupTMRHO > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > menu:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

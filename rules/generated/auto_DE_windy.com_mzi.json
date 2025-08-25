@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_windy.com_mzi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.windy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?windy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

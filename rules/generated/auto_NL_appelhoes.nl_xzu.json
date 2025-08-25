@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_appelhoes.nl_xzu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.appelhoes.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?appelhoes\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "weigeren?"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

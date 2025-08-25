@@ -1,0 +1,37 @@
+{
+    "name": "auto_CH_coinbase.com_ewt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.coinbase.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?coinbase\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-testid=\"body-hydrated\"] > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])[data-testid=\"cookie-banner-reject-all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-testid=\"body-hydrated\"] > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])[data-testid=\"cookie-banner-reject-all\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body[data-testid=\"body-hydrated\"] > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])[data-testid=\"cookie-banner-reject-all\"]",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-testid=\"body-hydrated\"] > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])[data-testid=\"cookie-banner-reject-all\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

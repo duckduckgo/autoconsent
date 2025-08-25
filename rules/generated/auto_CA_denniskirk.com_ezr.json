@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_denniskirk.com_ezr",
-    "vendorUrl": "https://www.denniskirk.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])"
+            "exists": "body > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])"
+            "visible": "body > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])",
             "comment": "Necessary cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dk-cookie-message > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

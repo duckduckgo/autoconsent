@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_123ink.ca_uhb",
-    "vendorUrl": "https://www.123ink.ca/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookie-modal > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-btn",
             "timeout": 1000,
             "check": "none"
         }

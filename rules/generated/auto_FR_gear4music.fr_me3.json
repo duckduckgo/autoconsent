@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_gear4music.fr_me3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gear4music.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gear4music\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentWidgetDiv > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#banner-cookie-consent-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentWidgetDiv > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#banner-cookie-consent-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentWidgetDiv > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#banner-cookie-consent-reject-all",
+            "comment": "REFUSER TOUS LES COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentWidgetDiv > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#banner-cookie-consent-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
