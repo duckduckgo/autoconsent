@@ -23,9 +23,6 @@
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
             "waitForThenClick": "body[data-testid=\"body-hydrated\"] > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])[data-testid=\"cookie-banner-reject-all\"]",
             "comment": "Reject all"
         }
