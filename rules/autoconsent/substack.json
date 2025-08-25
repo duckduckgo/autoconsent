@@ -1,0 +1,36 @@
+{
+    "name": "substack",
+    "_metadata": {
+        "vendorUrl": "https://substack.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div[class*=cookieBanner].pencraft"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class*=cookieBanner].pencraft"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Accept All')]"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Only Necessary')]"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "hideCookieBanner="
+        }
+    ]
+}
