@@ -1,3 +1,30 @@
+# v14.16.0 (Tue Aug 26 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#921](https://github.com/duckduckgo/autoconsent/pull/921) ([@daxtheduck](https://github.com/daxtheduck))
+- Update EasyList Cookie to d0018b618e733641797d796649354c05c9278edb [#900](https://github.com/duckduckgo/autoconsent/pull/900) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Use reject-all button on iubenda form. [#911](https://github.com/duckduckgo/autoconsent/pull/911) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix non-US paypal opt-out. [#913](https://github.com/duckduckgo/autoconsent/pull/913) ([@sammacbeth](https://github.com/sammacbeth))
+- Clean duplicated coinbase.com rules [#915](https://github.com/duckduckgo/autoconsent/pull/915) ([@sammacbeth](https://github.com/sammacbeth))
+- Handle some alternative variants of the tarteaucitron popup [#916](https://github.com/duckduckgo/autoconsent/pull/916) ([@sammacbeth](https://github.com/sammacbeth))
+- Add substack rule [#917](https://github.com/duckduckgo/autoconsent/pull/917) ([@sammacbeth](https://github.com/sammacbeth))
+- Use one click opt-out on kleinanzeigen.de [#918](https://github.com/duckduckgo/autoconsent/pull/918) ([@sammacbeth](https://github.com/sammacbeth))
+- Limit webflow detection to when popup is visible. [#920](https://github.com/duckduckgo/autoconsent/pull/920) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#904](https://github.com/duckduckgo/autoconsent/pull/904) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#905](https://github.com/duckduckgo/autoconsent/pull/905) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.15.0 (Sat Aug 23 2025)
 
 #### 🚀 Enhancement
