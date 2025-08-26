@@ -18,7 +18,7 @@
     ],
     "optIn": [
         {
-            "wait": 1000
+            "wait": 2000
         },
         {
             "waitForThenClick": "xpath///button[contains(., 'Accept all')]"
@@ -26,7 +26,7 @@
     ],
     "optOut": [
         {
-            "wait": 1000
+            "wait": 2000
         },
         {
             "waitForThenClick": "xpath///button[contains(., 'Reject all')]"
