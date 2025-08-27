@@ -1,3 +1,23 @@
+# v14.17.0 (Wed Aug 27 2025)
+
+#### 🚀 Enhancement
+
+- Add rule for ah.nl [#919](https://github.com/duckduckgo/autoconsent/pull/919) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group with 3 updates [#924](https://github.com/duckduckgo/autoconsent/pull/924) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- 🤖 Add autoconsent rules for 2 sites (0 requiring review) [#882](https://github.com/duckduckgo/autoconsent/pull/882) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.16.0 (Tue Aug 26 2025)
 
 #### 🚀 Enhancement
