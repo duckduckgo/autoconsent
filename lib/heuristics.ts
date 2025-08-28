@@ -1,4 +1,3 @@
-// FIXME: the detection patterns are defined both in the crawl postprocessing codebase and here. We should consolidate them in one place.
 // TODO: check for false positive detections per pattern
 export const DETECT_PATTERNS = [
     /accept cookies/gi,
