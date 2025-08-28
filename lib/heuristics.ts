@@ -80,7 +80,7 @@ export const DETECT_PATTERNS = [
     /cookies.*en.*vergelijkbare/gi,
 
     /(alles|cookies).*(afwijzen|weigeren|verwerpen)/gi,
-    /alleen.*noodzakelijke?/gi,
+    /alleen.*noodzakelijke?\b/gi,
     /cookies weigeren/gi,
     /weiger.*(cookies|alles)/gi,
     /doorgaan zonder (te accepteren|akkoord te gaan)/gi,
