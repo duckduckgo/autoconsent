@@ -6,13 +6,19 @@
     "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
     "optOut": [
         {
-            "waitForThenClick": ".iubenda-cs-customize-btn"
-        },
-        {
-            "eval": "EVAL_IUBENDA_0"
-        },
-        {
-            "waitForThenClick": "#iubFooterBtn"
+            "if": { "exists": ".iubenda-cs-reject-btn" },
+            "then": [{ "click": ".iubenda-cs-reject-btn" }],
+            "else": [
+                {
+                    "waitForThenClick": ".iubenda-cs-customize-btn"
+                },
+                {
+                    "waitForThenClick": ".iub-btn-reject"
+                },
+                {
+                    "waitForThenClick": "#iubFooterBtn"
+                }
+            ]
         }
     ],
     "test": [{ "eval": "EVAL_IUBENDA_1" }]
