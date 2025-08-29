@@ -31,8 +31,12 @@
     "optOut": [
         {
             "if": { "exists": ".axeptio_mount .needsclick" },
-            "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss"] }],
-            "else": [{ "click": "button#axeptio_btn_dismiss" }]
+            "then": [
+                { "waitForVisible": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss"] },
+                { "wait": 300 },
+                { "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss"] }
+            ],
+            "else": [{ "waitForVisible": "button#axeptio_btn_dismiss" }, { "wait": 300 }, { "click": "button#axeptio_btn_dismiss" }]
         }
     ],
     "test": [
