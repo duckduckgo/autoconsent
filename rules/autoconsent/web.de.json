@@ -4,7 +4,7 @@
     "runContext": {
         "main": false,
         "frame": true,
-        "urlPattern": "^https://(.*\\.)?web\\.de/"
+        "urlPattern": "^https://(.*\\.)?web\\.de/|^https://(.*\\.)?gmx\\.net/"
     },
     "prehideSelectors": [],
     "detectCmp": [
