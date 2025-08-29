@@ -36,7 +36,11 @@
                 { "wait": 300 },
                 { "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss"] }
             ],
-            "else": [{ "waitForVisible": "button#axeptio_btn_dismiss" }, { "wait": 300 }, { "click": "button#axeptio_btn_dismiss" }]
+            "else": [
+                { "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton" },
+                { "wait": 300 },
+                { "click": "button#axeptio_btn_dismiss,button.ax-discardButton" }
+            ]
         }
     ],
     "test": [
