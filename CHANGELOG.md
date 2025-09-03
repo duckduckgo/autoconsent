@@ -1,3 +1,15 @@
+# v14.19.0 (Wed Sep 03 2025)
+
+#### 🚀 Enhancement
+
+- Add heuristic patterns for NL,FR,DE [#930](https://github.com/duckduckgo/autoconsent/pull/930) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.18.0 (Fri Aug 29 2025)
 
 #### 🚀 Enhancement
