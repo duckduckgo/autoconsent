@@ -1,3 +1,15 @@
+# v14.20.0 (Thu Sep 04 2025)
+
+#### 🚀 Enhancement
+
+- Expand web.de rule to gmx.net [#925](https://github.com/duckduckgo/autoconsent/pull/925) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.19.0 (Wed Sep 03 2025)
 
 #### 🚀 Enhancement
