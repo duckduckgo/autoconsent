@@ -1,3 +1,59 @@
+# v14.20.0 (Thu Sep 04 2025)
+
+#### 🚀 Enhancement
+
+- Expand web.de rule to gmx.net [#925](https://github.com/duckduckgo/autoconsent/pull/925) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.19.0 (Wed Sep 03 2025)
+
+#### 🚀 Enhancement
+
+- Add heuristic patterns for NL,FR,DE [#930](https://github.com/duckduckgo/autoconsent/pull/930) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.18.0 (Fri Aug 29 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#929](https://github.com/duckduckgo/autoconsent/pull/929) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.17.0 (Wed Aug 27 2025)
+
+#### 🚀 Enhancement
+
+- Add rule for ah.nl [#919](https://github.com/duckduckgo/autoconsent/pull/919) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group with 3 updates [#924](https://github.com/duckduckgo/autoconsent/pull/924) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- 🤖 Add autoconsent rules for 2 sites (0 requiring review) [#882](https://github.com/duckduckgo/autoconsent/pull/882) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.16.0 (Tue Aug 26 2025)
 
 #### 🚀 Enhancement
