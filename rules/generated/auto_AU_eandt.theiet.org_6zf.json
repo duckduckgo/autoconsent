@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_eandt.theiet.org_6zf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://eandt.theiet.org/noindex/rscc/verification-failed?destination=/2022/11/21/rights-campaigner-sues-meta-over-advertising-practices"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eandt\\.theiet\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#page-wrapper > footer:nth-child(6):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#page-wrapper > footer:nth-child(6):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#page-wrapper > footer:nth-child(6):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#page-wrapper > footer:nth-child(6):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
