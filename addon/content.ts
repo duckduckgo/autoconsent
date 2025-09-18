@@ -1,5 +1,5 @@
 import { BackgroundMessage } from '../lib/messages';
-import AutoConsent from '../lib/web';
+import AutoConsent from '../lib/web-extra';
 
 const consent = new AutoConsent(chrome.runtime.sendMessage);
 chrome.runtime.onMessage.addListener((message: BackgroundMessage) => {
