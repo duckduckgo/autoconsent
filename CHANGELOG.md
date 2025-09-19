@@ -1,3 +1,22 @@
+# v14.21.0 (Fri Sep 19 2025)
+
+#### 🚀 Enhancement
+
+- Cleanup obsolete site-specific cosmetic rules [#937](https://github.com/duckduckgo/autoconsent/pull/937) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#932](https://github.com/duckduckgo/autoconsent/pull/932) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Fix: Respect the configuration for logging [#933](https://github.com/duckduckgo/autoconsent/pull/933) ([@chrmod](https://github.com/chrmod))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Krzysztof Modras ([@chrmod](https://github.com/chrmod))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.20.0 (Thu Sep 04 2025)
 
 #### 🚀 Enhancement
