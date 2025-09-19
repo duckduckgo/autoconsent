@@ -179,20 +179,17 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: current
-            - name: Update iOS autoconsent reference
+            - name: Update autoconsent version
               run: |
-                  cd apple-monorepo/iOS
-                  npm ci --include-workspace-root
+                  cd apple-monorepo/
+                  npm ci
                   npm install @duckduckgo/autoconsent@${{ env.TAG }}
-                  npm run rebuild-autoconsent
-                  cd ..
-            - name: Update macOS autoconsent reference
+            - name: Rebuild autoconsent bundles
               run: |
                   cd apple-monorepo/macOS
-                  npm ci --include-workspace-root
-                  npm install @duckduckgo/autoconsent@${{ env.TAG }}
                   npm run rebuild-autoconsent
-                  cd ..
+                  cd ../iOS
+                  npm run rebuild-autoconsent
             - name: Create Apple PR Body
               env:
                   ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
