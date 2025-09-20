@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_m.livejasmin.com_cvg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://m.livejasmin.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?livejasmin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
