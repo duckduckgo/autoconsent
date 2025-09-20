@@ -8,9 +8,7 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig, scheduleWhenIdle } from './utils';
-import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
 import { FiltersEngine } from '@ghostery/adblocker';
-import serializedEngine from './filterlist-engine';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
 
@@ -93,21 +91,8 @@ export default class AutoConsent {
             this.parseDeclarativeRules(declarativeRules);
         }
 
-        if (BUNDLE_FILTERLIST && config.enableFilterList) {
-            try {
-                if (serializedEngine && serializedEngine.length > 0) {
-                    this.filtersEngine = deserializeFilterList(serializedEngine);
-                }
-            } catch (e) {
-                console.error('Error parsing filter list', e);
-            }
-            if (document.readyState === 'loading') {
-                window.addEventListener('DOMContentLoaded', () => {
-                    this.applyCosmeticFilters();
-                });
-            } else {
-                this.applyCosmeticFilters();
-            }
+        if (config.enableFilterList) {
+            this.initializeFilterList();
         }
 
         this.rules = filterCMPs(this.rules, normalizedConfig);
@@ -136,6 +121,10 @@ export default class AutoConsent {
             this.start();
         }
         this.updateState({ lifecycle: 'initialized' });
+    }
+
+    initializeFilterList() {
+        // no-op by default
     }
 
     get shouldPrehide() {
@@ -410,7 +399,7 @@ export default class AutoConsent {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
-        if (BUNDLE_FILTERLIST && this.state.cosmeticFiltersOn) {
+        if (this.state.cosmeticFiltersOn) {
             // cancel cosmetic filters if we have a rule for this popup
             this.undoCosmetics();
         }
@@ -576,52 +565,8 @@ export default class AutoConsent {
         this.domActions.undoPrehide();
     }
 
-    /**
-     * Apply cosmetic filters
-     * @returns true if the filters were applied, false otherwise
-     */
-    async applyCosmeticFilters(styles?: string) {
-        if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
-            return false;
-        }
-        const logsConfig = this.config.logs;
-        if (!styles) {
-            styles = getCosmeticStylesheet(this.filtersEngine);
-        }
-
-        setTimeout(() => {
-            if (this.state.cosmeticFiltersOn && !this.state.filterListReported) {
-                // if the cosmetic filters are actually working, report the hidden popup to the background.
-                // This may still be overridden later if an autoconsent rule matches.
-                // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-                const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(styles), 'any');
-                if (cosmeticFiltersWorked) {
-                    logsConfig?.lifecycle && console.log('Prehide cosmetic filters matched', location.href);
-                    this.reportFilterlist();
-                } else {
-                    logsConfig?.lifecycle && console.log("Prehide cosmetic filters didn't match", location.href);
-                }
-            }
-        }, 2000);
-
-        this.updateState({ cosmeticFiltersOn: true });
-        try {
-            this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
-            logsConfig?.lifecycle && console.log('[cosmetics]', this.cosmeticStyleSheet, location.href);
-            document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
-        } catch (e) {
-            this.config.logs && console.error('Error applying cosmetic filters', e);
-            return false;
-        }
-        return true;
-    }
-
     undoCosmetics() {
-        if (BUNDLE_FILTERLIST) {
-            this.updateState({ cosmeticFiltersOn: false });
-            this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
-            this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
-        }
+        // no-op by default
     }
 
     reportFilterlist() {
@@ -639,47 +584,9 @@ export default class AutoConsent {
     }
 
     filterListFallback() {
-        if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
-            this.updateState({ lifecycle: 'nothingDetected' });
-            return false;
-        }
-
-        const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
-
-        // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-        const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(cosmeticStyles), 'any');
-
-        const logsConfig = this.config.logs;
-
-        if (!cosmeticFiltersWorked) {
-            logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
-            this.undoCosmetics();
-            this.updateState({ lifecycle: 'nothingDetected' });
-            return false;
-        } else {
-            this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
-            logsConfig?.lifecycle && console.log('Keeping cosmetic filters', location.href);
-            this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
-            if (!this.state.filterListReported) {
-                this.reportFilterlist();
-            }
-
-            this.sendContentMessage({
-                type: 'optOutResult',
-                cmp: 'filterList',
-                result: true,
-                scheduleSelfTest: false,
-                url: location.href,
-            });
-            this.updateState({ lifecycle: 'done' });
-            this.sendContentMessage({
-                type: 'autoconsentDone',
-                cmp: 'filterList',
-                isCosmetic: true,
-                url: location.href,
-            });
-            return true;
-        }
+        // no-op by default
+        this.updateState({ lifecycle: 'nothingDetected' });
+        return false;
     }
 
     updateState(change: Partial<ConsentState>) {
