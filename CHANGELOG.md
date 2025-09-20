@@ -1,3 +1,15 @@
+# v14.22.0 (Sat Sep 20 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#940](https://github.com/duckduckgo/autoconsent/pull/940) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v14.21.0 (Fri Sep 19 2025)
 
 #### 🚀 Enhancement
