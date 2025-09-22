@@ -3,4 +3,5 @@ generateCMPTests('auto_DE_m.livejasmin.com_cvg', ['https://www.livejasmin.com/en
     testOptIn: false,
     testSelfTest: true,
     onlyRegions: ['DE'],
+    mobile: true,
 });
