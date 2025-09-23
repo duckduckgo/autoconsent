@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_deutsches-museum.de_j08",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.deutsches-museum.de/en/verkehrszentrum"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deutsches-museum\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-1754083234627"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-1754083234627"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-1754083234627",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-1754083234627",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
