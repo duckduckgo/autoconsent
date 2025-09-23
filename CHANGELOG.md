@@ -1,3 +1,25 @@
+# v14.23.0 (Tue Sep 23 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#946](https://github.com/duckduckgo/autoconsent/pull/946) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#942](https://github.com/duckduckgo/autoconsent/pull/942) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#944](https://github.com/duckduckgo/autoconsent/pull/944) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#943](https://github.com/duckduckgo/autoconsent/pull/943) ([@daxtheduck](https://github.com/daxtheduck))
+- Better tree-shaking of adblocker library [#939](https://github.com/duckduckgo/autoconsent/pull/939) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Update iOS release flow to use top-level package.json only. [#941](https://github.com/duckduckgo/autoconsent/pull/941) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.22.0 (Sat Sep 20 2025)
 
 #### 🚀 Enhancement
