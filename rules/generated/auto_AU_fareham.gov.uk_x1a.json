@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_fareham.gov.uk_x1a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.fareham.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fareham\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookieControl > a:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookieControl > a:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookieControl > a:nth-child(5):not([id])",
+            "comment": "Reject non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookieControl > a:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
