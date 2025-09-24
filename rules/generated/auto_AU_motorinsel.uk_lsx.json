@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_motorinsel.uk_lsx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.motorinsel.uk/n18b16a-engine"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?motorinsel\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:nth-child(2):not([id]) > form:nth-child(3)#cookieHandling > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:nth-child(2):not([id]) > form:nth-child(3)#cookieHandling > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:nth-child(2):not([id]) > form:nth-child(3)#cookieHandling > button:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:nth-child(2):not([id]) > form:nth-child(3)#cookieHandling > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
