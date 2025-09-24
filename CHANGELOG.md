@@ -1,3 +1,26 @@
+# v14.24.0 (Wed Sep 24 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#962](https://github.com/duckduckgo/autoconsent/pull/962) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#961](https://github.com/duckduckgo/autoconsent/pull/961) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#960](https://github.com/duckduckgo/autoconsent/pull/960) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#959](https://github.com/duckduckgo/autoconsent/pull/959) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 2 sites (1 need review) [#957](https://github.com/duckduckgo/autoconsent/pull/957) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#958](https://github.com/duckduckgo/autoconsent/pull/958) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#956](https://github.com/duckduckgo/autoconsent/pull/956) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#954](https://github.com/duckduckgo/autoconsent/pull/954) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#953](https://github.com/duckduckgo/autoconsent/pull/953) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#952](https://github.com/duckduckgo/autoconsent/pull/952) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#949](https://github.com/duckduckgo/autoconsent/pull/949) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#947](https://github.com/duckduckgo/autoconsent/pull/947) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v14.23.0 (Tue Sep 23 2025)
 
 #### 🚀 Enhancement
