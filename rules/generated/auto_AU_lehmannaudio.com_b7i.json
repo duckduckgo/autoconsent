@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_lehmannaudio.com_b7i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.lehmannaudio.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lehmannaudio\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieoverlay > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3)#cookies-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieoverlay > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3)#cookies-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieoverlay > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3)#cookies-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieoverlay > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3)#cookies-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
