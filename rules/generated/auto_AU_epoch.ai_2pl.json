@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "#cookie-notice"
+            "exists": "body > div#cookie-notice > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-notice-decline"
+            "visible": "body > div#cookie-notice > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-decline"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#cookie-notice-decline",
+            "waitForThenClick": "body > div#cookie-notice > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-decline",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "#cookie-notice-decline",
+            "waitForVisible": "body > div#cookie-notice > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-notice-decline",
             "timeout": 1000,
             "check": "none"
         }
