@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_pnp.co.za_9lg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.pnp.co.za/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pnp\\.co\\.za/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > pnp-root:not([id]) > div:not([id]) > ui-storefront:not([id]) > footer:nth-child(8):not([id]) > cx-page-layout:not([id]) > cx-page-slot:not([id]) > cms-popia-component:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > pnp-root:not([id]) > div:not([id]) > ui-storefront:not([id]) > footer:nth-child(8):not([id]) > cx-page-layout:not([id]) > cx-page-slot:not([id]) > cms-popia-component:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > pnp-root:not([id]) > div:not([id]) > ui-storefront:not([id]) > footer:nth-child(8):not([id]) > cx-page-layout:not([id]) > cx-page-slot:not([id]) > cms-popia-component:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > pnp-root:not([id]) > div:not([id]) > ui-storefront:not([id]) > footer:nth-child(8):not([id]) > cx-page-layout:not([id]) > cx-page-slot:not([id]) > cms-popia-component:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
