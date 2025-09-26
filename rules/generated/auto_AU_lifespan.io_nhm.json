@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_lifespan.io_nhm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.lifespan.io/topic/spermidine-benefits-side-effects/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lifespan\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(11)#pum-128427 > div#popmake-128427 > div:nth-child(1):not([id]) > form:nth-child(1):not([id]) > div:nth-child(11):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(11)#pum-128427 > div#popmake-128427 > div:nth-child(1):not([id]) > form:nth-child(1):not([id]) > div:nth-child(11):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(11)#pum-128427 > div#popmake-128427 > div:nth-child(1):not([id]) > form:nth-child(1):not([id]) > div:nth-child(11):not([id]) > button:nth-child(1)#btn-reject-all",
+            "comment": "Do not consent"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(11)#pum-128427 > div#popmake-128427 > div:nth-child(1):not([id]) > form:nth-child(1):not([id]) > div:nth-child(11):not([id]) > button:nth-child(1)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
