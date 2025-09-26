@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_danco.com_j60",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.danco.com/product/square-hair-catcher-for-shower-drain-in-chrome/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?danco\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body.wp-singular.product-template-default.single.single-product.postid-29477.wp-theme-danco.wp-child-theme-danco-child.theme-danco.woocommerce.woocommerce-page.woocommerce-js.wp-schema-pro-2\\.7\\.18.et_pb_button_helper_class.et_fixed_nav.et_show_nav.et_primary_nav_dropdown_animation_fade.et_secondary_nav_dropdown_animation_fade.et_header_style_left.et_pb_footer_columns4.et_cover_background.et_pb_gutter.linux.et_pb_gutters3.et_right_sidebar.et_divi_theme.et-db.et_minified_js.et_minified_css.chrome > div:not([id]).privacy-notice > div:not([id]).content > div:nth-child(3):not([id]).privacy-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body.wp-singular.product-template-default.single.single-product.postid-29477.wp-theme-danco.wp-child-theme-danco-child.theme-danco.woocommerce.woocommerce-page.woocommerce-js.wp-schema-pro-2\\.7\\.18.et_pb_button_helper_class.et_fixed_nav.et_show_nav.et_primary_nav_dropdown_animation_fade.et_secondary_nav_dropdown_animation_fade.et_header_style_left.et_pb_footer_columns4.et_cover_background.et_pb_gutter.linux.et_pb_gutters3.et_right_sidebar.et_divi_theme.et-db.et_minified_js.et_minified_css.chrome > div:not([id]).privacy-notice > div:not([id]).content > div:nth-child(3):not([id]).privacy-accept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body.wp-singular.product-template-default.single.single-product.postid-29477.wp-theme-danco.wp-child-theme-danco-child.theme-danco.woocommerce.woocommerce-page.woocommerce-js.wp-schema-pro-2\\.7\\.18.et_pb_button_helper_class.et_fixed_nav.et_show_nav.et_primary_nav_dropdown_animation_fade.et_secondary_nav_dropdown_animation_fade.et_header_style_left.et_pb_footer_columns4.et_cover_background.et_pb_gutter.linux.et_pb_gutters3.et_right_sidebar.et_divi_theme.et-db.et_minified_js.et_minified_css.chrome > div:not([id]).privacy-notice > div:not([id]).content > div:nth-child(3):not([id]).privacy-accept",
+            "comment": "OK"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body.wp-singular.product-template-default.single.single-product.postid-29477.wp-theme-danco.wp-child-theme-danco-child.theme-danco.woocommerce.woocommerce-page.woocommerce-js.wp-schema-pro-2\\.7\\.18.et_pb_button_helper_class.et_fixed_nav.et_show_nav.et_primary_nav_dropdown_animation_fade.et_secondary_nav_dropdown_animation_fade.et_header_style_left.et_pb_footer_columns4.et_cover_background.et_pb_gutter.linux.et_pb_gutters3.et_right_sidebar.et_divi_theme.et-db.et_minified_js.et_minified_css.chrome > div:not([id]).privacy-notice > div:not([id]).content > div:nth-child(3):not([id]).privacy-accept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
