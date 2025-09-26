@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_frostbrowntodd.com_j2w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://frostbrowntodd.com/decoding-the-american-privacy-rights-act-of-2024-what-your-business-needs-to-know-about-the-proposed-privacy-framework/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?frostbrowntodd\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#cookie-banner > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#cookie-banner > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#cookie-banner > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Continue Browsing"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#cookie-banner > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
