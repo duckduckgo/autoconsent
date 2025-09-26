@@ -1,3 +1,46 @@
+# v14.26.0 (Fri Sep 26 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#992](https://github.com/duckduckgo/autoconsent/pull/992) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#991](https://github.com/duckduckgo/autoconsent/pull/991) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#990](https://github.com/duckduckgo/autoconsent/pull/990) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#988](https://github.com/duckduckgo/autoconsent/pull/988) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#987](https://github.com/duckduckgo/autoconsent/pull/987) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#986](https://github.com/duckduckgo/autoconsent/pull/986) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#985](https://github.com/duckduckgo/autoconsent/pull/985) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#984](https://github.com/duckduckgo/autoconsent/pull/984) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#983](https://github.com/duckduckgo/autoconsent/pull/983) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#982](https://github.com/duckduckgo/autoconsent/pull/982) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#981](https://github.com/duckduckgo/autoconsent/pull/981) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#980](https://github.com/duckduckgo/autoconsent/pull/980) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#979](https://github.com/duckduckgo/autoconsent/pull/979) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#978](https://github.com/duckduckgo/autoconsent/pull/978) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 2 sites (0 need review) [#976](https://github.com/duckduckgo/autoconsent/pull/976) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#975](https://github.com/duckduckgo/autoconsent/pull/975) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#974](https://github.com/duckduckgo/autoconsent/pull/974) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#973](https://github.com/duckduckgo/autoconsent/pull/973) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#972](https://github.com/duckduckgo/autoconsent/pull/972) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#971](https://github.com/duckduckgo/autoconsent/pull/971) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#970](https://github.com/duckduckgo/autoconsent/pull/970) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#969](https://github.com/duckduckgo/autoconsent/pull/969) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#968](https://github.com/duckduckgo/autoconsent/pull/968) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#967](https://github.com/duckduckgo/autoconsent/pull/967) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#966](https://github.com/duckduckgo/autoconsent/pull/966) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#948](https://github.com/duckduckgo/autoconsent/pull/948) ([@daxtheduck](https://github.com/daxtheduck))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#951](https://github.com/duckduckgo/autoconsent/pull/951) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tldts-experimental from 7.0.11 to 7.0.15 [#950](https://github.com/duckduckgo/autoconsent/pull/950) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v14.25.0 (Thu Sep 25 2025)
 
 #### 🚀 Enhancement
