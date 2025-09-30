@@ -22,9 +22,7 @@ function compareRules(originalRule: AutoConsentCMPRule, finalRule: AutoConsentCM
         return step;
     };
     const stripComments = (steps: AutoConsentRuleStep[]) => steps.map(stripCommentFromStep);
-    [originalRule.detectPopup, originalRule.detectCmp, originalRule.optOut, originalRule.test].forEach((steps) =>
-        stripComments(steps!),
-    );
+    [originalRule.detectPopup, originalRule.detectCmp, originalRule.optOut, originalRule.test].forEach((steps) => stripComments(steps!));
 
     for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
         // @ts-expect-error Type checker doesn't like us using dynamic attributes here
@@ -96,10 +94,10 @@ describe('RuleCompaction', () => {
                 prehideSelectors: [],
                 ...rules[i],
             };
-            const finalRule = decoded.find(r => r.name === originalRule.name);
+            const finalRule = decoded.find((r) => r.name === originalRule.name);
             compareRules(originalRule, finalRule!, ignoredKeys);
         }
-    })
+    });
 
     it('decodeRules: filters out rules that use newer step/eval rules', () => {
         const decoded = decodeRules({

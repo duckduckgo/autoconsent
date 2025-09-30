@@ -54,7 +54,7 @@ export type CompactCMPRulesetV2 = CompactCMPRuleset & {
     m: {
         simpleIdx: number; // index in r where simple rules start
         strIdx: number; // index in s where new strings start
-    }
+    };
 };
 
 export function isSimpleRule(rule: AutoConsentCMPRule): boolean {
@@ -213,25 +213,23 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
 }
 
 export function encodeRulesV2(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRulesetV2 {
-    const { v, s, r} = encodeRules(rules.filter(r => !isSimpleRule(r)), existingCompactRules);
+    const { v, s, r } = encodeRules(
+        rules.filter((r) => !isSimpleRule(r)),
+        existingCompactRules,
+    );
     const m = {
         simpleIdx: r.length,
         strIdx: s.length,
-    }
+    };
     rules.filter(isSimpleRule).forEach((rule) => {
         const urlPattern = rule.runContext!.urlPattern!;
         const selector = rule.detectCmp[0].exists as string;
         const selectorIds = selector.split('>').map((str) => {
             const trimmed = str.trim();
             return s.indexOf(trimmed) !== -1 ? s.indexOf(trimmed) : s.push(trimmed) - 1;
-        })
-        r.push([
-            2,
-            rule.name,
-            urlPattern,
-            [selectorIds]
-        ])
-    })
+        });
+        r.push([2, rule.name, urlPattern, [selectorIds]]);
+    });
 
     return { v, s, r, m };
 }
