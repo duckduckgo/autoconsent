@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import { encodeRules, encodeRulesV2 } from '../lib/encoding';
+import { encodeRules, encodeRulesV2, isSimpleRule } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 
 export const rulesDir = __dirname;
@@ -34,7 +34,7 @@ function deduplicateRules(rules: AutoConsentCMPRule[]) {
     const dedupedRules: AutoConsentCMPRule[] = [];
     rules.forEach((rule) => {
         const selector = rule.detectCmp[0].exists || '';
-        if (selector && typeof selector === 'string' && rule.runContext?.urlPattern) {
+        if (isSimpleRule(rule) && selector && typeof selector === 'string') {
             const patterns = rulesBySelector.get(selector) || [];
             patterns.push(rule);
             rulesBySelector.set(selector, patterns);

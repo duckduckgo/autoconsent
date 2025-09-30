@@ -57,7 +57,7 @@ export type CompactCMPRulesetV2 = CompactCMPRuleset & {
     }
 };
 
-function isSimpleRule(rule: AutoConsentCMPRule): boolean {
+export function isSimpleRule(rule: AutoConsentCMPRule): boolean {
     return (
         rule.runContext?.main === true &&
         rule.runContext?.frame === false &&
@@ -68,8 +68,9 @@ function isSimpleRule(rule: AutoConsentCMPRule): boolean {
         rule.detectPopup.length === 1 &&
         rule.detectCmp[0].exists !== undefined &&
         rule.detectPopup[0].visible !== undefined &&
-        ((rule.optOut.length === 1 && rule.optOut[0].waitForThenClick !== undefined) ||
-            (rule.optOut.length === 2 && rule.optOut[0].wait !== undefined && rule.optOut[1].waitForThenClick !== undefined))
+        rule.detectCmp[0].exists === rule.detectPopup[0].visible &&
+        ((rule.optOut.length === 1 && rule.optOut[0].waitForThenClick === rule.detectCmp[0].exists) ||
+            (rule.optOut.length === 2 && rule.optOut[0].wait !== undefined && rule.optOut[1].waitForThenClick === rule.detectCmp[0].exists))
     );
 }
 
@@ -190,7 +191,7 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
 
     const compactRules: CompactCMPRule[] = rules.map((r) => {
         return [
-            1,
+            r.minimumRuleStepVersion || 1,
             r.name,
             encodeNullableBoolean(r.cosmetic),
             r.runContext?.urlPattern || '',
