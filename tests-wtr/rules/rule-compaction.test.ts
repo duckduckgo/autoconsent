@@ -1,8 +1,36 @@
 import { expect } from '@esm-bundle/chai';
-import { encodeRules, decodeRules, buildStrings } from '../../lib/encoding';
+import { encodeRules, decodeRules, buildStrings, encodeRulesV2 } from '../../lib/encoding';
 import { AutoConsentCMPRule, AutoConsentRuleStep } from '../../lib/rules';
 import { autoconsent } from '../../rules/rules.json';
 import AutoConsent from '../../lib/web';
+
+function compareRules(originalRule: AutoConsentCMPRule, finalRule: AutoConsentCMPRule, ignoredKeys: string[] = []) {
+    // strip comments from original rules
+    const stripCommentFromStep = (step: AutoConsentRuleStep) => {
+        if (step.comment) {
+            delete step.comment; // comments are not encoded
+        }
+        if (step.if) {
+            step.if = stripCommentFromStep(step.if);
+        }
+        if (step.then) {
+            step.then = step.then.map(stripCommentFromStep);
+        }
+        if (step.else) {
+            step.else = step.else.map(stripCommentFromStep);
+        }
+        return step;
+    };
+    const stripComments = (steps: AutoConsentRuleStep[]) => steps.map(stripCommentFromStep);
+    [originalRule.detectPopup, originalRule.detectCmp, originalRule.optOut, originalRule.test].forEach((steps) =>
+        stripComments(steps!),
+    );
+
+    for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
+        // @ts-expect-error Type checker doesn't like us using dynamic attributes here
+        expect(finalRule[key]).to.deep.equal(originalRule[key], `${key} is correctly preserved`);
+    }
+}
 
 describe('RuleCompaction', () => {
     it('decodeRules(encodeRules(rules)) preserves required attributes', () => {
@@ -10,8 +38,8 @@ describe('RuleCompaction', () => {
 
         const encoded = encodeRules(rules, null);
         const decoded = decodeRules(encoded);
-        expect(rules.length).to.equal(decoded.length);
         const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata'];
+        expect(rules.length).to.equal(decoded.length);
         for (let i = 0; i < rules.length; i++) {
             // ensure non-empty values for runContext, test, and prehideSelectors
             const originalRule = {
@@ -21,31 +49,7 @@ describe('RuleCompaction', () => {
                 ...rules[i],
             };
             const finalRule = decoded[i];
-            // strip comments from original rules
-            const stripCommentFromStep = (step: AutoConsentRuleStep) => {
-                if (step.comment) {
-                    delete step.comment; // comments are not encoded
-                }
-                if (step.if) {
-                    step.if = stripCommentFromStep(step.if);
-                }
-                if (step.then) {
-                    step.then = step.then.map(stripCommentFromStep);
-                }
-                if (step.else) {
-                    step.else = step.else.map(stripCommentFromStep);
-                }
-                return step;
-            };
-            const stripComments = (steps: AutoConsentRuleStep[]) => steps.map(stripCommentFromStep);
-            [originalRule.detectPopup, originalRule.detectCmp, originalRule.optOut, originalRule.test].forEach((steps) =>
-                stripComments(steps),
-            );
-
-            for (const key of Object.keys(originalRule).filter((k) => !ignoredKeys.includes(k))) {
-                // @ts-expect-error Type checker doesn't like us using dynamic attributes here
-                expect(finalRule[key]).to.deep.equal(originalRule[key], `${key} is correctly preserved`);
-            }
+            compareRules(originalRule, finalRule, ignoredKeys);
         }
         const originalLength = JSON.stringify(rules).length;
         const encodedLength = JSON.stringify(encoded).length;
@@ -76,6 +80,26 @@ describe('RuleCompaction', () => {
         expect(decoded[0].runContext).to.eql({ main: true });
         expect(decoded[1].runContext).to.eql({ main: true, frame: false });
     });
+
+    it('decodeRules(encodeRulesV2(rules)) preserves required attributes', () => {
+        const rules: AutoConsentCMPRule[] = JSON.parse(JSON.stringify(autoconsent));
+
+        const encoded = encodeRulesV2(rules, null);
+        const decoded = decodeRules(encoded);
+        const ignoredKeys = ['comment', 'optIn', 'vendorUrl', '_metadata', 'test'];
+        expect(rules.length).to.equal(decoded.length);
+        for (let i = 0; i < rules.length; i++) {
+            // ensure non-empty values for runContext, test, and prehideSelectors
+            const originalRule = {
+                runContext: {},
+                test: [],
+                prehideSelectors: [],
+                ...rules[i],
+            };
+            const finalRule = decoded.find(r => r.name === originalRule.name);
+            compareRules(originalRule, finalRule!, ignoredKeys);
+        }
+    })
 
     it('decodeRules: filters out rules that use newer step/eval rules', () => {
         const decoded = decodeRules({
@@ -172,7 +196,7 @@ describe('AutoConsent', () => {
                         detectPopup: [{ visible: '#cmp' }],
                         optOut: [{ click: '#opt-out' }],
                         optIn: [],
-                        minimumRuleStepVersion: 6,
+                        minimumRuleStepVersion: 7,
                     },
                 ],
                 null,
