@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import { encodeRules } from '../lib/encoding';
+import { encodeRules, encodeRulesV2 } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 
 export const rulesDir = __dirname;
@@ -98,5 +98,8 @@ export async function buildConsentOMaticRules() {
     fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
     fs.writeFile(compactRulesPath, stringify(encodeRules(autoconsent, existingCompactRules)), () =>
         console.log('Written compact-rules.json'),
+    );
+    fs.writeFile(path.join(rulesDir, 'compact-rules-v2.json'), stringify(encodeRulesV2(autoconsent, existingCompactRules)), () =>
+        console.log('Written compact-rules-v2.json'),
     );
 })();

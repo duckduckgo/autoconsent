@@ -37,11 +37,34 @@ export type CompactCMPRule = [
     Pick<AutoConsentCMPRule, 'intermediate'>, // extra
 ];
 
+export type CompactSimpleRule = [
+    number, // minimumRuleStepVersion
+    string, // name
+    string, // runContext.urlPattern
+    string[], // selectors (1st for detectCmp/first click, others for subsequent clicks)
+];
+
 export type CompactCMPRuleset = {
     v: number;
     s: string[];
-    r: CompactCMPRule[];
+    r: (CompactCMPRule | CompactSimpleRule)[];
 };
+
+function isSimpleRule(rule: AutoConsentCMPRule): boolean {
+    return (
+        rule.runContext?.main === true &&
+        rule.runContext?.frame === false &&
+        rule.optIn.length === 0 &&
+        rule.prehideSelectors?.length === 0 &&
+        rule.intermediate !== true &&
+        rule.detectCmp.length === 1 &&
+        rule.detectPopup.length === 1 &&
+        rule.detectCmp[0].exists !== undefined &&
+        rule.detectPopup[0].visible !== undefined &&
+        ((rule.optOut.length === 1 && rule.optOut[0].waitForThenClick !== undefined) ||
+            (rule.optOut.length === 2 && rule.optOut[0].wait !== undefined && rule.optOut[1].waitForThenClick !== undefined))
+    );
+}
 
 /**
  * Mapping of long to short key for rule step keys that should be shortened, with their value
@@ -160,7 +183,7 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
 
     const compactRules: CompactCMPRule[] = rules.map((r) => {
         return [
-            r.minimumRuleStepVersion || 1,
+            1,
             r.name,
             encodeNullableBoolean(r.cosmetic),
             r.runContext?.urlPattern || '',
@@ -181,11 +204,30 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
     };
 }
 
+export function encodeRulesV2(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRuleset {
+    const { v, s, r} = encodeRules(rules.filter(r => !isSimpleRule(r)), existingCompactRules);
+
+    rules.filter(isSimpleRule).forEach((rule) => {
+        const urlPattern = rule.runContext!.urlPattern!;
+        const selector = rule.detectCmp[0].exists as string;
+        r.push([
+            2,
+            rule.name,
+            urlPattern,
+            [selector]
+        ])
+    })
+
+    return { v, s, r };
+}
+
 export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
     if (encoded.v > 1) {
         throw new Error('Unsupported rule format.');
     }
-    return encoded.r.filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION).map((rule) => new CompactedCMPRule(rule, encoded.s));
+    return encoded.r
+        .filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION)
+        .map((rule) => (rule.length === 4 ? new CompactedSimpleRule(rule) : new CompactedCMPRule(rule, encoded.s)));
 }
 
 class CompactedCMPRule implements AutoConsentCMPRule {
@@ -268,5 +310,47 @@ class CompactedCMPRule implements AutoConsentCMPRule {
 
     get test() {
         return this.r[9].map(this._decodeRuleStep.bind(this));
+    }
+}
+
+class CompactedSimpleRule implements AutoConsentCMPRule {
+    name: string;
+    cosmetic = false;
+    runContext: RunContext;
+    selectors: string[];
+    optIn = [];
+    prehideSelectors = [];
+
+    constructor(rule: CompactSimpleRule) {
+        const [, name, urlPattern, selectors] = rule;
+        this.name = name;
+        this.runContext = {
+            main: true,
+            frame: false,
+            urlPattern,
+        };
+        this.selectors = selectors;
+    }
+
+    get detectCmp() {
+        return [{ exists: this.selectors[0] }];
+    }
+
+    get detectPopup() {
+        return [{ visible: this.selectors[0] }];
+    }
+
+    get optOut() {
+        return this.selectors.map((s) => ({ waitForThenClick: s }));
+    }
+
+    get test() {
+        return [
+            {
+                waitForVisible: this.selectors[0],
+                timeout: 1000,
+                // check: 'none'
+            },
+        ];
     }
 }
