@@ -49,6 +49,7 @@ function deduplicateRules(rules: AutoConsentCMPRule[]) {
         }
         dedupedRules.push({
             name: `${rules[0].name}_+${rules.length - 1}`,
+            prehideSelectors: [],
             detectCmp: [{ exists: selector }],
             detectPopup: [{
                 visible: selector,
@@ -57,7 +58,7 @@ function deduplicateRules(rules: AutoConsentCMPRule[]) {
                 waitForThenClick: selector,
             }],
             optIn: [],
-            runContext: { urlPattern: rules.map(rule => rule.runContext!.urlPattern).join('|') },
+            runContext: { urlPattern: rules.map(rule => rule.runContext!.urlPattern).join('|'), main: true, frame: false },
         } as AutoConsentCMPRule);
     });
     return dedupedRules;
