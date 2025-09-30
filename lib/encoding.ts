@@ -41,13 +41,20 @@ export type CompactSimpleRule = [
     number, // minimumRuleStepVersion
     string, // name
     string, // runContext.urlPattern
-    string[], // selectors (1st for detectCmp/first click, others for subsequent clicks)
+    number[][], // selectors (1st for detectCmp/first click, others for subsequent clicks), encoded as array of string indices in strings array to be re-joined by '>'
 ];
 
 export type CompactCMPRuleset = {
     v: number;
     s: string[];
     r: (CompactCMPRule | CompactSimpleRule)[];
+};
+
+export type CompactCMPRulesetV2 = CompactCMPRuleset & {
+    m: {
+        simpleIdx: number; // index in r where simple rules start
+        strIdx: number; // index in s where new strings start
+    }
 };
 
 function isSimpleRule(rule: AutoConsentCMPRule): boolean {
@@ -204,21 +211,28 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
     };
 }
 
-export function encodeRulesV2(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRuleset {
+export function encodeRulesV2(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRulesetV2 {
     const { v, s, r} = encodeRules(rules.filter(r => !isSimpleRule(r)), existingCompactRules);
-
+    const m = {
+        simpleIdx: r.length,
+        strIdx: s.length,
+    }
     rules.filter(isSimpleRule).forEach((rule) => {
         const urlPattern = rule.runContext!.urlPattern!;
         const selector = rule.detectCmp[0].exists as string;
+        const selectorIds = selector.split('>').map((str) => {
+            const trimmed = str.trim();
+            return s.indexOf(trimmed) !== -1 ? s.indexOf(trimmed) : s.push(trimmed) - 1;
+        })
         r.push([
             2,
             rule.name,
             urlPattern,
-            [selector]
+            [selectorIds]
         ])
     })
 
-    return { v, s, r };
+    return { v, s, r, m };
 }
 
 export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
@@ -227,7 +241,7 @@ export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
     }
     return encoded.r
         .filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION)
-        .map((rule) => (rule.length === 4 ? new CompactedSimpleRule(rule) : new CompactedCMPRule(rule, encoded.s)));
+        .map((rule) => (rule.length === 4 ? new CompactedSimpleRule(rule, encoded.s) : new CompactedCMPRule(rule, encoded.s)));
 }
 
 class CompactedCMPRule implements AutoConsentCMPRule {
@@ -315,13 +329,15 @@ class CompactedCMPRule implements AutoConsentCMPRule {
 
 class CompactedSimpleRule implements AutoConsentCMPRule {
     name: string;
+    selectors: number[][];
+    s: string[];
+
     cosmetic = false;
     runContext: RunContext;
-    selectors: string[];
     optIn = [];
     prehideSelectors = [];
 
-    constructor(rule: CompactSimpleRule) {
+    constructor(rule: CompactSimpleRule, strings: string[]) {
         const [, name, urlPattern, selectors] = rule;
         this.name = name;
         this.runContext = {
@@ -330,24 +346,29 @@ class CompactedSimpleRule implements AutoConsentCMPRule {
             urlPattern,
         };
         this.selectors = selectors;
+        this.s = strings;
+    }
+
+    rebuildSelector(selectorIds: number[]) {
+        return selectorIds.map((id) => this.s[id].toString()).join(' > ');
     }
 
     get detectCmp() {
-        return [{ exists: this.selectors[0] }];
+        return [{ exists: this.rebuildSelector(this.selectors[0]) }];
     }
 
     get detectPopup() {
-        return [{ visible: this.selectors[0] }];
+        return [{ visible: this.rebuildSelector(this.selectors[0]) }];
     }
 
     get optOut() {
-        return this.selectors.map((s) => ({ waitForThenClick: s }));
+        return this.selectors.map((s) => ({ waitForThenClick: this.rebuildSelector(s) }));
     }
 
     get test() {
         return [
             {
-                waitForVisible: this.selectors[0],
+                waitForVisible: this.rebuildSelector(this.selectors[0]),
                 timeout: 1000,
                 // check: 'none'
             },
