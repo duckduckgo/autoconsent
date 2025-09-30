@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import { encodeRules } from '../lib/encoding';
+import { encodeRules, deduplicateRules } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 
 export const rulesDir = __dirname;
@@ -27,41 +27,6 @@ export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     const generatedRules = await Promise.all(generatedFiles.map((file) => readFileJSON(path.join(generatedRulesDir, file))));
 
     return [...normalRules, ...deduplicateRules(generatedRules)];
-}
-
-function deduplicateRules(rules: AutoConsentCMPRule[]) {
-    const rulesBySelector = new Map<string, AutoConsentCMPRule[]>();
-    const dedupedRules: AutoConsentCMPRule[] = [];
-    rules.forEach((rule) => {
-        const selector = rule.detectCmp[0].exists || '';
-        if (selector && typeof selector === 'string' && rule.runContext?.urlPattern) {
-            const patterns = rulesBySelector.get(selector) || [];
-            patterns.push(rule);
-            rulesBySelector.set(selector, patterns);
-        } else {
-            dedupedRules.push(rule);
-        }
-    });
-    rulesBySelector.forEach((rules, selector) => {
-        if (rules.length === 1) {
-            dedupedRules.push(rules[0]);
-            return;
-        }
-        dedupedRules.push({
-            name: `${rules[0].name}_+${rules.length - 1}`,
-            prehideSelectors: [],
-            detectCmp: [{ exists: selector }],
-            detectPopup: [{
-                visible: selector,
-            }],
-            optOut: [{
-                waitForThenClick: selector,
-            }],
-            optIn: [],
-            runContext: { urlPattern: rules.map(rule => rule.runContext!.urlPattern).join('|'), main: true, frame: false },
-        } as AutoConsentCMPRule);
-    });
-    return dedupedRules;
 }
 
 export async function buildConsentOMaticRules() {

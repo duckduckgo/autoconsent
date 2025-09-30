@@ -270,3 +270,42 @@ class CompactedCMPRule implements AutoConsentCMPRule {
         return this.r[9].map(this._decodeRuleStep.bind(this));
     }
 }
+
+export function deduplicateRules(rules: AutoConsentCMPRule[]) {
+    const rulesBySelector = new Map<string, AutoConsentCMPRule[]>();
+    const dedupedRules: AutoConsentCMPRule[] = [];
+    rules.forEach((rule) => {
+        const selector = rule.detectCmp[0].exists || '';
+        if (isSimpleRule(rule) && selector && typeof selector === 'string') {
+            const patterns = rulesBySelector.get(selector) || [];
+            patterns.push(rule);
+            rulesBySelector.set(selector, patterns);
+        } else {
+            dedupedRules.push(rule);
+        }
+    });
+    rulesBySelector.forEach((rules, selector) => {
+        if (rules.length === 1) {
+            dedupedRules.push(rules[0]);
+            return;
+        }
+        dedupedRules.push({
+            name: `${rules[0].name}_+${rules.length - 1}`,
+            prehideSelectors: [],
+            detectCmp: [{ exists: selector }],
+            detectPopup: [
+                {
+                    visible: selector,
+                },
+            ],
+            optOut: [
+                {
+                    waitForThenClick: selector,
+                },
+            ],
+            optIn: [],
+            runContext: { urlPattern: rules.map((rule) => rule.runContext!.urlPattern).join('|'), main: true, frame: false },
+        } as AutoConsentCMPRule);
+    });
+    return dedupedRules;
+}
