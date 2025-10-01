@@ -24,7 +24,9 @@ describe('deduplicateRules', () => {
         ];
         const deduped = deduplicateRules(rules);
         expect(deduped).to.have.length(2);
-        expect(deduped.map(r => r.name)).to.include('rule1').and.include('rule2');
+        expect(deduped.map((r) => r.name))
+            .to.include('rule1')
+            .and.include('rule2');
     });
 
     it('deduplicates rules with same selector', () => {
@@ -103,9 +105,9 @@ describe('deduplicateRules', () => {
         ];
         const deduped = deduplicateRules(rules);
         expect(deduped).to.have.length(2);
-        expect(deduped.some(r => r.name === 'complex')).to.be.true;
-        expect(deduped.some(r => /^rule1_\+\d+$/.test(r.name))).to.be.true;
-        const combinedRule = deduped.find(r => r.name !== 'complex');
+        expect(deduped.some((r) => r.name === 'complex')).to.be.true;
+        expect(deduped.some((r) => /^rule1_\+\d+$/.test(r.name))).to.be.true;
+        const combinedRule = deduped.find((r) => r.name !== 'complex');
         const urlPatternMatches = (url: string) => url.match(combinedRule!.runContext!.urlPattern!) !== null;
         expect(urlPatternMatches('http://www.a.com/')).to.be.true;
         expect(urlPatternMatches('https://b.com/')).to.be.true;

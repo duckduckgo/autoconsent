@@ -37,7 +37,9 @@ const defaultOptions: TestOptions = {
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
 const screenshotsDir = path.join(__dirname, '../test-results/screenshots');
-const deduplicatedRuleLookup = (JSON.parse(fs.readFileSync(path.join(__dirname, '../rules/rules.json'), 'utf-8')) as RuleBundle).autoconsent.reduce((acc, rule) => {
+const deduplicatedRuleLookup = (
+    JSON.parse(fs.readFileSync(path.join(__dirname, '../rules/rules.json'), 'utf-8')) as RuleBundle
+).autoconsent.reduce((acc, rule) => {
     if (rule._metadata?.deduplicatedFrom) {
         rule._metadata.deduplicatedFrom.forEach((from: string) => acc.set(from, rule.name));
     }
