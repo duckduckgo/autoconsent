@@ -275,8 +275,8 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
     const rulesBySelector = new Map<string, AutoConsentCMPRule[]>();
     const dedupedRules: AutoConsentCMPRule[] = [];
     const dedupKey = (rule: AutoConsentCMPRule) => {
-        if (rule.intermediate || rule.cosmetic || !rule.runContext?.urlPattern) {
-            return null; // do not deduplicate intermediate, cosmetic-only, or generic rules
+        if (rule.intermediate || !rule.runContext?.urlPattern) {
+            return null; // do not deduplicate intermediate or generic rules
         }
         return JSON.stringify({
             mainFrame: rule.runContext?.main,
@@ -285,6 +285,7 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
             detectPopup: rule.detectPopup,
             optOut: rule.optOut,
             prehideSelectors: rule.prehideSelectors,
+            cosmetic: rule.cosmetic,
         });
     };
     rules.forEach((rule) => {
@@ -318,7 +319,7 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
             optOut: rules[0].optOut,
             optIn: [],
             test: rules[0].test,
-            cosmetic: false,
+            cosmetic: rules[0].cosmetic,
         } as AutoConsentCMPRule);
     });
     return dedupedRules;
