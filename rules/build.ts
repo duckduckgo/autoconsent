@@ -25,8 +25,7 @@ export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     const generatedFiles = fs.readdirSync(generatedRulesDir);
     const normalRules = await Promise.all(files.map((file) => readFileJSON(path.join(autoconsentDir, file))));
     const generatedRules = await Promise.all(generatedFiles.map((file) => readFileJSON(path.join(generatedRulesDir, file))));
-
-    return [...normalRules, ...deduplicateRules(generatedRules)];
+    return deduplicateRules([...normalRules, ...generatedRules]);
 }
 
 export async function buildConsentOMaticRules() {

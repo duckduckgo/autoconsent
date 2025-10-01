@@ -272,9 +272,9 @@ class CompactedCMPRule implements AutoConsentCMPRule {
 }
 
 export function deduplicateRules(rules: AutoConsentCMPRule[]) {
-    const rulesBySelector = new Map<string, AutoConsentCMPRule[]>();
+    const rulesByHash = new Map<string, AutoConsentCMPRule[]>();
     const dedupedRules: AutoConsentCMPRule[] = [];
-    const dedupKey = (rule: AutoConsentCMPRule) => {
+    const dedupHash = (rule: AutoConsentCMPRule) => {
         if (rule.intermediate || !rule.runContext?.urlPattern) {
             return null; // do not deduplicate intermediate or generic rules
         }
@@ -284,21 +284,22 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
             detectCmp: rule.detectCmp,
             detectPopup: rule.detectPopup,
             optOut: rule.optOut,
+            optIn: rule.optIn,
             prehideSelectors: rule.prehideSelectors,
             cosmetic: rule.cosmetic,
         });
     };
     rules.forEach((rule) => {
-        const key = dedupKey(rule);
-        if (key && typeof key === 'string') {
-            const patterns = rulesBySelector.get(key) || [];
-            patterns.push(rule);
-            rulesBySelector.set(key, patterns);
+        const hash = dedupHash(rule);
+        if (hash && typeof hash === 'string') {
+            const matchingRules = rulesByHash.get(hash) || [];
+            matchingRules.push(rule);
+            rulesByHash.set(hash, matchingRules);
         } else {
             dedupedRules.push(rule);
         }
     });
-    rulesBySelector.forEach((rules, selector) => {
+    rulesByHash.forEach((rules, hash) => {
         if (rules.length === 1) {
             dedupedRules.push(rules[0]);
             return;
@@ -317,7 +318,7 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
             detectCmp: rules[0].detectCmp,
             detectPopup: rules[0].detectPopup,
             optOut: rules[0].optOut,
-            optIn: [],
+            optIn: rules[0].optIn,
             test: rules[0].test,
             cosmetic: rules[0].cosmetic,
         } as AutoConsentCMPRule);
