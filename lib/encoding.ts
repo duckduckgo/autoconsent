@@ -274,12 +274,25 @@ class CompactedCMPRule implements AutoConsentCMPRule {
 export function deduplicateRules(rules: AutoConsentCMPRule[]) {
     const rulesBySelector = new Map<string, AutoConsentCMPRule[]>();
     const dedupedRules: AutoConsentCMPRule[] = [];
+    const dedupKey = (rule: AutoConsentCMPRule) => {
+        if (rule.intermediate || rule.cosmetic || !rule.runContext?.urlPattern) {
+            return null; // do not deduplicate intermediate, cosmetic-only, or generic rules
+        }
+        return JSON.stringify({
+            mainFrame: rule.runContext?.main,
+            frame: rule.runContext?.frame,
+            detectCmp: rule.detectCmp,
+            detectPopup: rule.detectPopup,
+            optOut: rule.optOut,
+            prehideSelectors: rule.prehideSelectors,
+        });
+    };
     rules.forEach((rule) => {
-        const selector = rule.detectCmp[0].exists || '';
-        if (isSimpleRule(rule) && selector && typeof selector === 'string') {
-            const patterns = rulesBySelector.get(selector) || [];
+        const key = dedupKey(rule);
+        if (key && typeof key === 'string') {
+            const patterns = rulesBySelector.get(key) || [];
             patterns.push(rule);
-            rulesBySelector.set(selector, patterns);
+            rulesBySelector.set(key, patterns);
         } else {
             dedupedRules.push(rule);
         }
@@ -291,20 +304,18 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
         }
         dedupedRules.push({
             name: `${rules[0].name}_+${rules.length - 1}`,
-            prehideSelectors: [],
-            detectCmp: [{ exists: selector }],
-            detectPopup: [
-                {
-                    visible: selector,
-                },
-            ],
-            optOut: [
-                {
-                    waitForThenClick: selector,
-                },
-            ],
+            runContext: {
+                urlPattern: rules.map((rule) => rule.runContext!.urlPattern).join('|'),
+                main: rules[0].runContext?.main,
+                frame: rules[0].runContext?.frame,
+            },
+            prehideSelectors: rules[0].prehideSelectors,
+            detectCmp: rules[0].detectCmp,
+            detectPopup: rules[0].detectPopup,
+            optOut: rules[0].optOut,
             optIn: [],
-            runContext: { urlPattern: rules.map((rule) => rule.runContext!.urlPattern).join('|'), main: true, frame: false },
+            test: rules[0].test,
+            cosmetic: false,
         } as AutoConsentCMPRule);
     });
     return dedupedRules;
