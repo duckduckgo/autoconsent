@@ -4,7 +4,7 @@ import path from 'path';
 import { test, expect, Page, Frame, TestInfo } from '@playwright/test';
 import { waitFor } from '../lib/utils';
 import { ContentScriptMessage } from '../lib/messages';
-import { AutoAction } from '../lib/types';
+import { AutoAction, RuleBundle } from '../lib/types';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []
@@ -37,6 +37,12 @@ const defaultOptions: TestOptions = {
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
 const screenshotsDir = path.join(__dirname, '../test-results/screenshots');
+const deduplicatedRuleLookup = (JSON.parse(fs.readFileSync(path.join(__dirname, '../rules/rules.json'), 'utf-8')) as RuleBundle).autoconsent.reduce((acc, rule) => {
+    if (rule._metadata?.deduplicatedFrom) {
+        rule._metadata.deduplicatedFrom.forEach((from: string) => acc.set(from, rule.name));
+    }
+    return acc;
+}, new Map<string, string>());
 
 class TestRun {
     page: Page;
@@ -56,7 +62,12 @@ class TestRun {
         this.page = page;
         this.testInfo = testInfo;
         this.url = url;
-        this.expectedCmp = expectedCmp;
+        // if a rule was deduplicated, update the expectation to the new deduplicate rule name
+        if (deduplicatedRuleLookup.has(expectedCmp)) {
+            this.expectedCmp = deduplicatedRuleLookup.get(expectedCmp)!;
+        } else {
+            this.expectedCmp = expectedCmp;
+        }
         this.options = options;
         this.autoAction = autoAction;
         this.domain = new URL(url).hostname;

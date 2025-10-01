@@ -304,6 +304,9 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
         }
         dedupedRules.push({
             name: `${rules[0].name}_+${rules.length - 1}`,
+            _metadata: {
+                deduplicatedFrom: rules.map((r) => r.name),
+            },
             runContext: {
                 urlPattern: rules.map((rule) => rule.runContext!.urlPattern).join('|'),
                 main: rules[0].runContext?.main,

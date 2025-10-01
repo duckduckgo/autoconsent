@@ -24,6 +24,7 @@ export type AutoConsentCMPRule = {
     readonly _metadata?: {
         readonly manuallyReviewUpdates?: boolean;
         readonly vendorUrl?: string;
+        readonly deduplicatedFrom?: string[];
     };
 };
 
