@@ -20,12 +20,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Accept All')]"]
+            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Accept All')] or contains(., 'Accept')]"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Only Necessary')]"]
+            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Only Necessary') or contains(., 'Reject')]"]
         }
     ],
     "test": [
