@@ -1,3 +1,15 @@
+# v14.28.1 (Thu Oct 02 2025)
+
+#### 🐛 Bug Fix
+
+- Handle alternative reject text on substack sites [#1008](https://github.com/duckduckgo/autoconsent/pull/1008) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.28.0 (Wed Oct 01 2025)
 
 #### 🚀 Enhancement
