@@ -270,3 +270,58 @@ class CompactedCMPRule implements AutoConsentCMPRule {
         return this.r[9].map(this._decodeRuleStep.bind(this));
     }
 }
+
+export function deduplicateRules(rules: AutoConsentCMPRule[]) {
+    const rulesByHash = new Map<string, AutoConsentCMPRule[]>();
+    const dedupedRules: AutoConsentCMPRule[] = [];
+    const dedupHash = (rule: AutoConsentCMPRule) => {
+        if (rule.intermediate || !rule.runContext?.urlPattern) {
+            return null; // do not deduplicate intermediate or generic rules
+        }
+        return JSON.stringify({
+            mainFrame: rule.runContext?.main,
+            frame: rule.runContext?.frame,
+            detectCmp: rule.detectCmp,
+            detectPopup: rule.detectPopup,
+            optOut: rule.optOut,
+            optIn: rule.optIn,
+            prehideSelectors: rule.prehideSelectors,
+            cosmetic: rule.cosmetic,
+        });
+    };
+    rules.forEach((rule) => {
+        const hash = dedupHash(rule);
+        if (hash && typeof hash === 'string') {
+            const matchingRules = rulesByHash.get(hash) || [];
+            matchingRules.push(rule);
+            rulesByHash.set(hash, matchingRules);
+        } else {
+            dedupedRules.push(rule);
+        }
+    });
+    rulesByHash.forEach((rules, hash) => {
+        if (rules.length === 1) {
+            dedupedRules.push(rules[0]);
+            return;
+        }
+        dedupedRules.push({
+            name: `${rules[0].name}_+${rules.length - 1}`,
+            _metadata: {
+                deduplicatedFrom: rules.map((r) => r.name),
+            },
+            runContext: {
+                urlPattern: rules.map((rule) => rule.runContext!.urlPattern).join('|'),
+                main: rules[0].runContext?.main,
+                frame: rules[0].runContext?.frame,
+            },
+            prehideSelectors: rules[0].prehideSelectors,
+            detectCmp: rules[0].detectCmp,
+            detectPopup: rules[0].detectPopup,
+            optOut: rules[0].optOut,
+            optIn: rules[0].optIn,
+            test: rules[0].test,
+            cosmetic: rules[0].cosmetic,
+        } as AutoConsentCMPRule);
+    });
+    return dedupedRules;
+}
