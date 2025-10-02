@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import { encodeRules } from '../lib/encoding';
+import { encodeRules, encodeRulesV2, isSimpleRule } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 
 export const rulesDir = __dirname;
@@ -26,7 +26,46 @@ export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     const normalRules = await Promise.all(files.map((file) => readFileJSON(path.join(autoconsentDir, file))));
     const generatedRules = await Promise.all(generatedFiles.map((file) => readFileJSON(path.join(generatedRulesDir, file))));
 
-    return [...normalRules, ...generatedRules];
+    return [...normalRules, ...deduplicateRules(generatedRules)];
+}
+
+function deduplicateRules(rules: AutoConsentCMPRule[]) {
+    const rulesBySelector = new Map<string, AutoConsentCMPRule[]>();
+    const dedupedRules: AutoConsentCMPRule[] = [];
+    rules.forEach((rule) => {
+        const selector = rule.detectCmp[0].exists || '';
+        if (isSimpleRule(rule) && selector && typeof selector === 'string') {
+            const patterns = rulesBySelector.get(selector) || [];
+            patterns.push(rule);
+            rulesBySelector.set(selector, patterns);
+        } else {
+            dedupedRules.push(rule);
+        }
+    });
+    rulesBySelector.forEach((rules, selector) => {
+        if (rules.length === 1) {
+            dedupedRules.push(rules[0]);
+            return;
+        }
+        dedupedRules.push({
+            name: `${rules[0].name}_+${rules.length - 1}`,
+            prehideSelectors: [],
+            detectCmp: [{ exists: selector }],
+            detectPopup: [
+                {
+                    visible: selector,
+                },
+            ],
+            optOut: [
+                {
+                    waitForThenClick: selector,
+                },
+            ],
+            optIn: [],
+            runContext: { urlPattern: rules.map((rule) => rule.runContext!.urlPattern).join('|'), main: true, frame: false },
+        } as AutoConsentCMPRule);
+    });
+    return dedupedRules;
 }
 
 export async function buildConsentOMaticRules() {
@@ -64,5 +103,8 @@ export async function buildConsentOMaticRules() {
     fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
     fs.writeFile(compactRulesPath, stringify(encodeRules(autoconsent, existingCompactRules)), () =>
         console.log('Written compact-rules.json'),
+    );
+    fs.writeFile(path.join(rulesDir, 'compact-rules-v2.json'), stringify(encodeRulesV2(autoconsent, existingCompactRules)), () =>
+        console.log('Written compact-rules-v2.json'),
     );
 })();

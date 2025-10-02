@@ -37,11 +37,42 @@ export type CompactCMPRule = [
     Pick<AutoConsentCMPRule, 'intermediate'>, // extra
 ];
 
+export type CompactSimpleRule = [
+    number, // minimumRuleStepVersion
+    string, // name
+    string, // runContext.urlPattern
+    number[][], // selectors (1st for detectCmp/first click, others for subsequent clicks), encoded as array of string indices in strings array to be re-joined by '>'
+];
+
 export type CompactCMPRuleset = {
     v: number;
     s: string[];
-    r: CompactCMPRule[];
+    r: (CompactCMPRule | CompactSimpleRule)[];
 };
+
+export type CompactCMPRulesetV2 = CompactCMPRuleset & {
+    m: {
+        simpleIdx: number; // index in r where simple rules start
+        strIdx: number; // index in s where new strings start
+    };
+};
+
+export function isSimpleRule(rule: AutoConsentCMPRule): boolean {
+    return (
+        rule.runContext?.main === true &&
+        rule.runContext?.frame === false &&
+        rule.optIn.length === 0 &&
+        rule.prehideSelectors?.length === 0 &&
+        rule.intermediate !== true &&
+        rule.detectCmp.length === 1 &&
+        rule.detectPopup.length === 1 &&
+        rule.detectCmp[0].exists !== undefined &&
+        rule.detectPopup[0].visible !== undefined &&
+        rule.detectCmp[0].exists === rule.detectPopup[0].visible &&
+        ((rule.optOut.length === 1 && rule.optOut[0].waitForThenClick === rule.detectCmp[0].exists) ||
+            (rule.optOut.length === 2 && rule.optOut[0].wait !== undefined && rule.optOut[1].waitForThenClick === rule.detectCmp[0].exists))
+    );
+}
 
 /**
  * Mapping of long to short key for rule step keys that should be shortened, with their value
@@ -181,11 +212,35 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
     };
 }
 
+export function encodeRulesV2(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRulesetV2 {
+    const { v, s, r } = encodeRules(
+        rules.filter((r) => !isSimpleRule(r)),
+        existingCompactRules,
+    );
+    const m = {
+        simpleIdx: r.length,
+        strIdx: s.length,
+    };
+    rules.filter(isSimpleRule).forEach((rule) => {
+        const urlPattern = rule.runContext!.urlPattern!;
+        const selector = rule.detectCmp[0].exists as string;
+        const selectorIds = selector.split('>').map((str) => {
+            const trimmed = str.trim();
+            return s.indexOf(trimmed) !== -1 ? s.indexOf(trimmed) : s.push(trimmed) - 1;
+        });
+        r.push([2, rule.name, urlPattern, [selectorIds]]);
+    });
+
+    return { v, s, r, m };
+}
+
 export function decodeRules(encoded: CompactCMPRuleset): AutoConsentCMPRule[] {
     if (encoded.v > 1) {
         throw new Error('Unsupported rule format.');
     }
-    return encoded.r.filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION).map((rule) => new CompactedCMPRule(rule, encoded.s));
+    return encoded.r
+        .filter((r) => r[0] <= SUPPORTED_RULE_STEP_VERSION)
+        .map((rule) => (rule.length === 4 ? new CompactedSimpleRule(rule, encoded.s) : new CompactedCMPRule(rule, encoded.s)));
 }
 
 class CompactedCMPRule implements AutoConsentCMPRule {
@@ -268,5 +323,54 @@ class CompactedCMPRule implements AutoConsentCMPRule {
 
     get test() {
         return this.r[9].map(this._decodeRuleStep.bind(this));
+    }
+}
+
+class CompactedSimpleRule implements AutoConsentCMPRule {
+    name: string;
+    selectors: number[][];
+    s: string[];
+
+    cosmetic = false;
+    runContext: RunContext;
+    optIn = [];
+    prehideSelectors = [];
+
+    constructor(rule: CompactSimpleRule, strings: string[]) {
+        const [, name, urlPattern, selectors] = rule;
+        this.name = name;
+        this.runContext = {
+            main: true,
+            frame: false,
+            urlPattern,
+        };
+        this.selectors = selectors;
+        this.s = strings;
+    }
+
+    rebuildSelector(selectorIds: number[]) {
+        return selectorIds.map((id) => this.s[id].toString()).join(' > ');
+    }
+
+    get detectCmp() {
+        return [{ exists: this.rebuildSelector(this.selectors[0]) }];
+    }
+
+    get detectPopup() {
+        return [{ visible: this.rebuildSelector(this.selectors[0]) }];
+    }
+
+    get optOut() {
+        return this.selectors.map((s) => ({ waitForThenClick: this.rebuildSelector(s) }));
+    }
+
+    get test() {
+        return [
+            {
+                waitForVisible: this.rebuildSelector(this.selectors[0]),
+                timeout: 1000,
+                // check: 'none'
+            },
+        ];
     }
 }

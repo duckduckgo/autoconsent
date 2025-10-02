@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import { snippets } from './eval-snippets';
 
-export const SUPPORTED_RULE_STEP_VERSION = 1;
+export const SUPPORTED_RULE_STEP_VERSION = 2;
 
 export type AutoConsentCMPRule = {
     readonly name: string;
