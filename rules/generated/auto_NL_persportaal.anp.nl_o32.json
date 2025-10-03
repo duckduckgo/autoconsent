@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_persportaal.anp.nl_o32",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://persportaal.anp.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?persportaal\\.anp\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(2)#cookieParent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#noCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(2)#cookieParent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#noCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(2)#cookieParent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#noCookies",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(2)#cookieParent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#noCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
