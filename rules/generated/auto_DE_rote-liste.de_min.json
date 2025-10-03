@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
-            "comment": "Alles ablehnen"
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn",
+            "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn",
             "timeout": 1000,
             "check": "none"
         }
