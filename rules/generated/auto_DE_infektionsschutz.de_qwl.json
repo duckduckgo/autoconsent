@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_infektionsschutz.de_qwl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.infektionsschutz.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?infektionsschutz\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ww_bzga_matomo_cookiebanner > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ww_bzga_matomo_cookiebanner > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ww_bzga_matomo_cookiebanner > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ww_bzga_matomo_cookiebanner > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
