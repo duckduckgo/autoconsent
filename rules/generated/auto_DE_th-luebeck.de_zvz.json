@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_th-luebeck.de_zvz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.th-luebeck.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?th-luebeck\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(5):not([id]) > a#data-cookie-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(5):not([id]) > a#data-cookie-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(5):not([id]) > a#data-cookie-refuse",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(5):not([id]) > a#data-cookie-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

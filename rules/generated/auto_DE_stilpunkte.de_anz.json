@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_stilpunkte.de_anz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.stilpunkte.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stilpunkte\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-settings-background > div#privacy-settings > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-settings-background > div#privacy-settings > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-settings-background > div#privacy-settings > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-settings-background > div#privacy-settings > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

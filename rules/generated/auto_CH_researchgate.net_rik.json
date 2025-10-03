@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_researchgate.net_rik",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.researchgate.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?researchgate\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice[data-testid=\"notice\"] > div:not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice[data-testid=\"notice\"] > div:not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice[data-testid=\"notice\"] > div:not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice[data-testid=\"notice\"] > div:not([id]) > div:nth-child(2)#buttons > button:nth-child(2)#didomi-notice-disagree-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

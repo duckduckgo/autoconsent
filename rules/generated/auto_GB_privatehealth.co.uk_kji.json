@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn"
+            "exists": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(2)#reject-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn"
+            "visible": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(2)#reject-btn"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn",
+            "waitForThenClick": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(2)#reject-btn",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(3)#reject-btn",
+            "waitForVisible": "body > amp-consent#cookie-consent > div:nth-child(2)#consent-ui > div#c-box > button:nth-child(2)#reject-btn",
             "timeout": 1000,
             "check": "none"
         }

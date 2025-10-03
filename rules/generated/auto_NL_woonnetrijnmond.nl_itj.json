@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_woonnetrijnmond.nl_itj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.woonnetrijnmond.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?woonnetrijnmond\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-banner-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-banner-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-banner-reject",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-banner-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

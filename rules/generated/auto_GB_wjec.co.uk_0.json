@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_wjec.co.uk_0",
-    "vendorUrl": "https://www.wjec.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+            "exists": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+            "visible": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
             "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

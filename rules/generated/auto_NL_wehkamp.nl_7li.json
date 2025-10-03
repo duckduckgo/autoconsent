@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_wehkamp.nl_7li",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wehkamp.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wehkamp\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8583354579-\\:ro\\:"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8583354579-\\:ro\\:"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8583354579-\\:ro\\:",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8583354579-\\:ro\\:",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
