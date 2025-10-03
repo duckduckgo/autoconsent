@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])"
+            "exists": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(9)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])"
+            "visible": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(9)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])",
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(9)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])",
             "comment": "Accepteren\nWeigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(10)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])",
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:not([id]) > div:nth-child(9)#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
