@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(17)#cookie-consent-popup > div:not([id]) > div:not([id]) > form:nth-child(2)#form0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])"
+            "exists": "body > form#cookieConsentForm > div#cookie-consent-modal > div:not([id]) > div#cookie-consent-modal-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(17)#cookie-consent-popup > div:not([id]) > div:not([id]) > form:nth-child(2)#form0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])"
+            "visible": "body > form#cookieConsentForm > div#cookie-consent-modal > div:not([id]) > div#cookie-consent-modal-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(17)#cookie-consent-popup > div:not([id]) > div:not([id]) > form:nth-child(2)#form0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > form#cookieConsentForm > div#cookie-consent-modal > div:not([id]) > div#cookie-consent-modal-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])",
             "comment": "Nödvändiga cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(17)#cookie-consent-popup > div:not([id]) > div:not([id]) > form:nth-child(2)#form0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])",
+            "waitForVisible": "body > form#cookieConsentForm > div#cookie-consent-modal > div:not([id]) > div#cookie-consent-modal-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1)#heading-StrictlyNecessary > button:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
