@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button"
+            "exists": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button"
+            "visible": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button",
-            "comment": "Nur funktionale Cookies akzeptieren"
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ABLEHNEN"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-permission--accept-only-functional-button",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }

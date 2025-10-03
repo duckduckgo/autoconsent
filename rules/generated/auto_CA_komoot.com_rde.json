@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_komoot.com_rde",
-    "vendorUrl": "https://www.komoot.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+            "exists": "body > div#pageMountNode > div:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+            "visible": "body > div#pageMountNode > div:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "waitForThenClick": "body > div#pageMountNode > div:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])",
             "comment": "Refuse"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#pageMountNode > div:nth-child(24):not([id]) > dialog:nth-child(7):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "waitForVisible": "body > div#pageMountNode > div:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > footer:nth-child(4):not([id]) > button:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
