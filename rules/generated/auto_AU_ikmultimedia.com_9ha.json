@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_ikmultimedia.com_9ha",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ikmultimedia.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ikmultimedia\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:nth-child(2)#cookiesBannerMain > div:nth-child(6):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:nth-child(2)#cookiesBannerMain > div:nth-child(6):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(2)#cookiesBannerMain > div:nth-child(6):not([id]) > a:not([id])",
+            "comment": "Deny All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(2)#cookiesBannerMain > div:nth-child(6):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
