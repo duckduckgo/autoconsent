@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
+            "exists": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
+            "visible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
+            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
             "comment": "REJECT ALL NON-ESSENTIAL COOKIES"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
+            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
             "timeout": 1000,
             "check": "none"
         }
