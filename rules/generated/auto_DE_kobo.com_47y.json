@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6842953369-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6842953369-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
-            "comment": "Decline"
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6842953369-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
+            "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria4521901931-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6842953369-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
             "timeout": 1000,
             "check": "none"
         }
