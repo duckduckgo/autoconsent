@@ -1,10 +1,10 @@
 {
     "name": "auto_AU_candaceowens.com_vwh",
+    "cosmetic": false,
     "_metadata": {
         "vendorUrl": "https://candaceowens.com/",
         "manuallyReviewUpdates": true
     },
-    "cosmetic": false,
     "runContext": {
         "main": true,
         "frame": false,
@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(4):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(4):not([id])"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(4):not([id])",
             "comment": "ESSENTIAL ONLY"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(4):not([id])",
             "timeout": 1000,
             "check": "none"
         }
