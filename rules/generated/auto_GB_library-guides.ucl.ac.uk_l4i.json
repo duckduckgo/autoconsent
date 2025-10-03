@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_library-guides.ucl.ac.uk_l4i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://library-guides.ucl.ac.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?library-guides\\.ucl\\.ac\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ucl-privacy-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ucl-privacy-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ucl-privacy-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Accept necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ucl-privacy-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
