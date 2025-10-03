@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_digiplein.com_8rz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.digiplein.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?digiplein\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-control > a:nth-child(1)#cookie-control-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-control > a:nth-child(1)#cookie-control-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-control > a:nth-child(1)#cookie-control-decline",
+            "comment": "Doorgaan zonder cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-control > a:nth-child(1)#cookie-control-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

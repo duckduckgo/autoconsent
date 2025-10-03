@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_atd.ahk.nl_ltv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.atd.ahk.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?atd\\.ahk\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > form:not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > form:not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > form:not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])",
+            "comment": "alleen essentiële cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > form:not([id]) > div:nth-child(7):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies"
+            "exists": "body > div#wrapper > div:nth-child(6)#ajc-sheet > div#ajc-wrap > div:nth-child(3)#ajc-actions > button:nth-child(2)#ajc-deny"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies"
+            "visible": "body > div#wrapper > div:nth-child(6)#ajc-sheet > div#ajc-wrap > div:nth-child(3)#ajc-actions > button:nth-child(2)#ajc-deny"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies",
-            "comment": "Refuser"
+            "waitForThenClick": "body > div#wrapper > div:nth-child(6)#ajc-sheet > div#ajc-wrap > div:nth-child(3)#ajc-actions > button:nth-child(2)#ajc-deny",
+            "comment": "Continuer sans accepter"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookie-popup > div:nth-child(1)#cookie-message > button:nth-child(6)#decline-cookies",
+            "waitForVisible": "body > div#wrapper > div:nth-child(6)#ajc-sheet > div#ajc-wrap > div:nth-child(3)#ajc-actions > button:nth-child(2)#ajc-deny",
             "timeout": 1000,
             "check": "none"
         }

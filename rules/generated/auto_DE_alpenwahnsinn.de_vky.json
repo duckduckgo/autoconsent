@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_alpenwahnsinn.de_vky",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.alpenwahnsinn.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alpenwahnsinn\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lightboximgct > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lightboximgct > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lightboximgct > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lightboximgct > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

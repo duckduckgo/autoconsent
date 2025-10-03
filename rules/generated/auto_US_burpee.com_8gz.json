@@ -1,6 +1,5 @@
 {
     "name": "auto_US_burpee.com_8gz",
-    "vendorUrl": "https://www.burpee.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#html-body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler"
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#html-body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler"
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#html-body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler",
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#html-body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler",
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-reject-all-handler",
             "timeout": 1000,
             "check": "none"
         }
