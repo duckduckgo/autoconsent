@@ -28,7 +28,6 @@ async function init() {
     const logsMessagesCheckbox = document.querySelector('input#logs-messages') as HTMLInputElement;
     const ruleReloadButton = document.querySelector('#reload') as HTMLButtonElement;
     const resetButton = document.querySelector('#reset') as HTMLButtonElement;
-    const filterlistCheckbox = document.querySelector('input#filterlist') as HTMLInputElement;
 
     // enable proceed button when necessary
 
@@ -77,7 +76,6 @@ async function init() {
     logsErrorsCheckbox.checked = autoconsentConfig.logs.errors;
     logsMessagesCheckbox.checked = autoconsentConfig.logs.messages;
     retriesInput.value = autoconsentConfig.detectRetries.toString();
-    filterlistCheckbox.checked = autoconsentConfig.enableFilterList;
     if (autoconsentConfig.autoAction === 'optIn') {
         optInRadio.checked = true;
     } else if (autoconsentConfig.autoAction === 'optOut') {
@@ -196,11 +194,6 @@ async function init() {
     });
     logsMessagesCheckbox.addEventListener('change', () => {
         updateLogsConfig();
-    });
-
-    filterlistCheckbox.addEventListener('change', () => {
-        autoconsentConfig.enableFilterList = filterlistCheckbox.checked;
-        storageSet({ config: autoconsentConfig });
     });
 
     ruleReloadButton.addEventListener('click', async () => {
