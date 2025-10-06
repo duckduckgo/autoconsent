@@ -1,4 +1,4 @@
-import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
+import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors, matchCosmeticFilters, injectCosmeticFilters, CosmeticFilterMatch } from './filterlist-utils';
 import serializedEngine from './filterlist-engine';
 import AutoConsent from './web';
 
@@ -34,10 +34,15 @@ export default class AutoConsentExtra extends AutoConsent {
             return false;
         }
 
-        const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
+        // Use extended control: separate matching from injection
+        const matchedFilters = matchCosmeticFilters(this.filtersEngine);
+        
+        // Here users can implement custom logic to control which filters to inject
+        // For example, they might filter based on filter type, complexity, or other criteria
+        const injectedStyles = injectCosmeticFilters(matchedFilters);
 
         // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-        const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(cosmeticStyles), 'any');
+        const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(injectedStyles), 'any');
 
         const logsConfig = this.config.logs;
 
@@ -47,7 +52,7 @@ export default class AutoConsentExtra extends AutoConsent {
             this.updateState({ lifecycle: 'nothingDetected' });
             return false;
         } else {
-            this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
+            this.applyCosmeticFilters(injectedStyles); // do not wait for it to finish
             logsConfig?.lifecycle && console.log('Keeping cosmetic filters', location.href);
             this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
             if (!this.state.filterListReported) {
@@ -73,7 +78,7 @@ export default class AutoConsentExtra extends AutoConsent {
     }
 
     /**
-     * Apply cosmetic filters
+     * Apply cosmetic filters with extended control
      * @returns true if the filters were applied, false otherwise
      */
     async applyCosmeticFilters(styles?: string) {
@@ -81,8 +86,11 @@ export default class AutoConsentExtra extends AutoConsent {
             return false;
         }
         const logsConfig = this.config.logs;
+        
         if (!styles) {
-            styles = getCosmeticStylesheet(this.filtersEngine);
+            // Use the new extended control: match first, then inject
+            const matchedFilters = matchCosmeticFilters(this.filtersEngine);
+            styles = injectCosmeticFilters(matchedFilters);
         }
 
         setTimeout(() => {
