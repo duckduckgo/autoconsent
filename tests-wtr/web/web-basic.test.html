@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./web-basic.test');
+            });
+        </script>
+
+        <!-- Test elements -->
+        <div id="prehide-target">This should be hidden during prehide</div>
+        <button id="test-button">Test Button</button>
+    </body>
+</html>
