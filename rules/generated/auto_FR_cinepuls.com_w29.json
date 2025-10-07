@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cinepuls.com_w29",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cinepuls.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cinepuls\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(1):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(1):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(1):not([id]) > button:nth-child(4):not([id])",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(1):not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
