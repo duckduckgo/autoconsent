@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_piecesauto.fr_qt9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.piecesauto.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?piecesauto\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 214\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
