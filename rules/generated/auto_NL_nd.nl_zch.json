@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nd.nl_zch",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nd.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nd\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Alleen functionele cookies accepteren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
