@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bingo-umweltlotterie.de_zmv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bingo-umweltlotterie.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bingo-umweltlotterie\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_0a9c67dc-c346-412b-9156-234d036e1851 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_0a9c67dc-c346-412b-9156-234d036e1851 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_0a9c67dc-c346-412b-9156-234d036e1851 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all > span:not([id])",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_0a9c67dc-c346-412b-9156-234d036e1851 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-9e6c3a8f-209e-4713-ac3e-9cef19ae483e > button:nth-child(2)#ppms_cm_reject-all > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

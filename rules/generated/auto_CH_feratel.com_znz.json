@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_feratel.com_znz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.feratel.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?feratel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pp-consent-manager-banner-container > div#pp-consent-manager-banner-container-inner > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#cookie-banner-button-save-essentials"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pp-consent-manager-banner-container > div#pp-consent-manager-banner-container-inner > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#cookie-banner-button-save-essentials"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pp-consent-manager-banner-container > div#pp-consent-manager-banner-container-inner > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#cookie-banner-button-save-essentials",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pp-consent-manager-banner-container > div#pp-consent-manager-banner-container-inner > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#cookie-banner-button-save-essentials",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

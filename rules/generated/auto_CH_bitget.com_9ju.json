@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bitget.com_9ju",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bitget.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bitget\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#MicroTeleport > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"micro-cookie-decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#MicroTeleport > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"micro-cookie-decline\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#MicroTeleport > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"micro-cookie-decline\"]",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#MicroTeleport > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"micro-cookie-decline\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_birsfelden.ch_dey",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.birsfelden.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?birsfelden\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser",
+            "comment": "ALLES ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

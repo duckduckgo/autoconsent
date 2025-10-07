@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_fh-swf.de_d4w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fh-swf.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fh-swf\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#saveCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#saveCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#saveCookies",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#saveCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
