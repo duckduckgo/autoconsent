@@ -1,0 +1,46 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./web.test');
+            });
+        </script>
+
+        <!-- Test DOM elements for CMP detection -->
+        <div id="test-container">
+            <!-- Mock CMP popup -->
+            <div id="mock-cmp-popup" style="display: none;">
+                <div class="consent-dialog">
+                    <button id="accept-all">Accept All</button>
+                    <button id="reject-all">Reject All</button>
+                    <button id="customize">Customize</button>
+                </div>
+            </div>
+
+            <!-- Elements for prehide testing -->
+            <div id="prehide-target" class="should-be-hidden">
+                This should be hidden during prehide
+            </div>
+            
+            <!-- Heuristic detection elements -->
+            <div class="cookie-banner">
+                <p>We use cookies</p>
+                <button class="accept-cookies">Accept</button>
+            </div>
+        </div>
+
+        <!-- Shadow DOM test container -->
+        <div id="shadow-host"></div>
+
+        <script>
+            // Setup shadow DOM for testing
+            const shadowHost = document.getElementById('shadow-host');
+            const shadow = shadowHost.attachShadow({ mode: 'open' });
+            const shadowContent = document.createElement('div');
+            shadowContent.innerHTML = '<button id="shadow-button">Shadow Button</button>';
+            shadow.appendChild(shadowContent);
+        </script>
+    </body>
+</html>
