@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nro.nl_woi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nro.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nro\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Alle weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
