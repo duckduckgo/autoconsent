@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hochschulsport.hu-berlin.de_iv1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hochschulsport.hu-berlin.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hochschulsport\\.hu-berlin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#portal-footer > div:nth-child(3):not([id]) > div:nth-child(2)#footer-analytics > div#CookieConsent > div:not([id]) > p:nth-child(2):not([id]) > span:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#portal-footer > div:nth-child(3):not([id]) > div:nth-child(2)#footer-analytics > div#CookieConsent > div:not([id]) > p:nth-child(2):not([id]) > span:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#portal-footer > div:nth-child(3):not([id]) > div:nth-child(2)#footer-analytics > div#CookieConsent > div:not([id]) > p:nth-child(2):not([id]) > span:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#portal-footer > div:nth-child(3):not([id]) > div:nth-child(2)#footer-analytics > div#CookieConsent > div:not([id]) > p:nth-child(2):not([id]) > span:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
