@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_pcc.edu_20d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pcc.edu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pcc\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent > div:nth-child(1):not([id]) > div:nth-child(2)#consent-buttons > button:nth-child(1)#consent-button-nope"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent > div:nth-child(1):not([id]) > div:nth-child(2)#consent-buttons > button:nth-child(1)#consent-button-nope"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent > div:nth-child(1):not([id]) > div:nth-child(2)#consent-buttons > button:nth-child(1)#consent-button-nope",
+            "comment": "Use required only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent > div:nth-child(1):not([id]) > div:nth-child(2)#consent-buttons > button:nth-child(1)#consent-button-nope",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
