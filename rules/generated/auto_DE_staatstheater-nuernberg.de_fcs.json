@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_staatstheater-nuernberg.de_fcs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.staatstheater-nuernberg.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?staatstheater-nuernberg\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Nicht notwendige ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
