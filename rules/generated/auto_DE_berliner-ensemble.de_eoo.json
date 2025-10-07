@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_berliner-ensemble.de_eoo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.berliner-ensemble.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?berliner-ensemble\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > main:nth-child(2)#main-content > div:nth-child(2)#block-cookies > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > main:nth-child(2)#main-content > div:nth-child(2)#block-cookies > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > main:nth-child(2)#main-content > div:nth-child(2)#block-cookies > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "NUR NOTWENDIGE COOKIES ZULASSEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > main:nth-child(2)#main-content > div:nth-child(2)#block-cookies > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
