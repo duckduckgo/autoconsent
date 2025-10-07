@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_latamairlines.com_7lj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.latamairlines.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?latamairlines\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-politics[data-testid=\"cookies-politics--dialog\"] > div#cookies-politics--dialog__body[data-testid=\"cookies-politics--dialog__body\"] > div:not([id])[data-testid=\"cookies-politics--dialog__content\"] > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-politics-reject-button[data-testid=\"cookies-politics-reject-button--button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-politics[data-testid=\"cookies-politics--dialog\"] > div#cookies-politics--dialog__body[data-testid=\"cookies-politics--dialog__body\"] > div:not([id])[data-testid=\"cookies-politics--dialog__content\"] > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-politics-reject-button[data-testid=\"cookies-politics-reject-button--button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-politics[data-testid=\"cookies-politics--dialog\"] > div#cookies-politics--dialog__body[data-testid=\"cookies-politics--dialog__body\"] > div:not([id])[data-testid=\"cookies-politics--dialog__content\"] > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-politics-reject-button[data-testid=\"cookies-politics-reject-button--button\"]",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-politics[data-testid=\"cookies-politics--dialog\"] > div#cookies-politics--dialog__body[data-testid=\"cookies-politics--dialog__body\"] > div:not([id])[data-testid=\"cookies-politics--dialog__content\"] > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookies-politics-reject-button[data-testid=\"cookies-politics-reject-button--button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
