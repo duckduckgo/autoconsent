@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4m_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4s_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])"
+            "exists": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4l_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4r_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4m_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4s_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])"
+            "visible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4l_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4r_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4m_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4s_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])",
+            "waitForThenClick": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4l_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4r_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4m_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4s_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])",
+            "waitForVisible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-_r_4l_ > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-_r_4r_ > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:not([id])",
             "timeout": 1000,
             "check": "none"
         }
