@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_france-visas.gouv.fr_mzl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://france-visas.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?france-visas\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(3):not([id]) > div#fragment-f66e6d1a-9b42-adbe-ff40-de1e1cfb38f3 > div:nth-child(2)#p_p_id_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d_ > section:nth-child(2)#portlet_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d > div:not([id]) > div:not([id]) > div:not([id]) > fvfo-cookie:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(3):not([id]) > div#fragment-f66e6d1a-9b42-adbe-ff40-de1e1cfb38f3 > div:nth-child(2)#p_p_id_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d_ > section:nth-child(2)#portlet_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d > div:not([id]) > div:not([id]) > div:not([id]) > fvfo-cookie:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(3):not([id]) > div#fragment-f66e6d1a-9b42-adbe-ff40-de1e1cfb38f3 > div:nth-child(2)#p_p_id_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d_ > section:nth-child(2)#portlet_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d > div:not([id]) > div:not([id]) > div:not([id]) > fvfo-cookie:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(3):not([id]) > div#fragment-f66e6d1a-9b42-adbe-ff40-de1e1cfb38f3 > div:nth-child(2)#p_p_id_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d_ > section:nth-child(2)#portlet_com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_20097_6e02b092_0171_58f2_02d8_ccb81dce5e4d > div:not([id]) > div:not([id]) > div:not([id]) > fvfo-cookie:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
