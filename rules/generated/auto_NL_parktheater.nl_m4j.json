@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_parktheater.nl_m4j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.parktheater.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?parktheater\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#cookie-consent-banner > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#cookie-consent-banner > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#cookie-consent-banner > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Alleen functionele cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#cookie-consent-banner > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
