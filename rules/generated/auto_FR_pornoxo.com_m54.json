@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pornoxo.com_m54",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pornoxo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pornoxo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#combinedBanner > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#combinedBanner > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#combinedBanner > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Essential only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#combinedBanner > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
