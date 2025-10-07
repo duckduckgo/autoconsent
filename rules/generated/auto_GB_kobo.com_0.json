@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_kobo.com_0",
-    "vendorUrl": "https://www.kobo.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2)"
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria5019014405-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2)"
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria5019014405-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2)",
-            "text": "Decline"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria5019014405-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria5019014405-\\:r0\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
