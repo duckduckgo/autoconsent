@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_medbud.wiki_fig",
-    "vendorUrl": "https://medbud.wiki/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])"
+            "exists": "body > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])"
+            "visible": "body > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])",
+            "waitForThenClick": "body > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])",
             "comment": " Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])",
+            "waitForVisible": "body > div#notices_wrapper > div:nth-child(1)#notices > section:not([id]) > section:not([id]) > button:nth-child(8):not([id])",
             "timeout": 1000,
             "check": "none"
         }
