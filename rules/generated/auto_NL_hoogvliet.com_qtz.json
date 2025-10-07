@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hoogvliet.com_qtz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hoogvliet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hoogvliet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
