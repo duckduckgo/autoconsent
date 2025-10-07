@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_my.numworks.com_ljm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://my.numworks.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?my\\.numworks\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#pi_tracking_opt_in_no"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#pi_tracking_opt_in_no"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#pi_tracking_opt_in_no",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#pi_tracking_opt_in_no",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
