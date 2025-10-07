@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_tiemeyer.de_cnz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tiemeyer.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tiemeyer\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ConsentMessage > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ConsentMessage > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ConsentMessage > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ConsentMessage > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
