@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_fapjerks.com_85b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fapjerks.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fapjerks\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#disclaimer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#disclaimer"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#disclaimer",
+            "comment": "I Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#disclaimer",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
