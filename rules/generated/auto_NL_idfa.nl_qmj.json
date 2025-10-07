@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_idfa.nl_qmj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.idfa.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?idfa\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#chakra-modal-\\:R5qcrbq6\\: > div#chakra-modal--body-\\:R5qcrbq6\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#chakra-modal-\\:R5qcrbq6\\: > div#chakra-modal--body-\\:R5qcrbq6\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#chakra-modal-\\:R5qcrbq6\\: > div#chakra-modal--body-\\:R5qcrbq6\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#chakra-modal-\\:R5qcrbq6\\: > div#chakra-modal--body-\\:R5qcrbq6\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
