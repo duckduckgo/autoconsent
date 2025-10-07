@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_janbommerez.com_mbq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://janbommerez.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?janbommerez\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie_consent_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie_consent_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie_consent_deny",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie_consent_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
