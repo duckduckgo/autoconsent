@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_renens.ch_bz0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.renens.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?renens\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject",
+            "comment": "Rejeter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNoticePro > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
