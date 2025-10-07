@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_roddelpraat.nl_rj8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.roddelpraat.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?roddelpraat\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#deny-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#deny-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#deny-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#deny-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

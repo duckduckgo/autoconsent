@@ -1,0 +1,2 @@
+import generateCMPTests from '../../playwright/runner';
+generateCMPTests('auto_CH_renens.ch_bz0', ['https://www.renens.ch/'], { testOptIn: false, testSelfTest: true, onlyRegions: ['CH'] });

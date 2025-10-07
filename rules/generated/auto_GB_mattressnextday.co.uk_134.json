@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_mattressnextday.co.uk_134",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mattressnextday.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mattressnextday\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Continue without cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

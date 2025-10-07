@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#react-view > div:nth-child(11):not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+            "exists": "body > div:not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#react-view > div:nth-child(11):not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+            "visible": "body > div:not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#react-view > div:nth-child(11):not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "waitForThenClick": "body > div:not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#react-view > div:nth-child(11):not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "waitForVisible": "body > div:not([id]) > section#cookie_consent > div:not([id]) > div:not([id]) > div:not([id]) > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > div:not([id])",
             "timeout": 1000,
             "check": "none"
         }

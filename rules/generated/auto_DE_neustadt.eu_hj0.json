@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_neustadt.eu_hj0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.neustadt.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?neustadt\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-note > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-note-hide"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-note > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-note-hide"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-note > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-note-hide",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-note > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-note-hide",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

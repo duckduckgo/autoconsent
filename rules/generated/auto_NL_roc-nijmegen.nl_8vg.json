@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_roc-nijmegen.nl_8vg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.roc-nijmegen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?roc-nijmegen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-accept > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cc-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-accept > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cc-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-accept > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cc-reject-all",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-accept > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cc-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

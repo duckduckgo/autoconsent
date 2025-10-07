@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_netbeheernederland.nl_juo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.netbeheernederland.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?netbeheernederland\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#block-reactapp > div:nth-child(3)#ssr-root > div:nth-child(2)#root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#block-reactapp > div:nth-child(3)#ssr-root > div:nth-child(2)#root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#block-reactapp > div:nth-child(3)#ssr-root > div:nth-child(2)#root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree",
+            "comment": "Alleen noodzakelijke"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#block-reactapp > div:nth-child(3)#ssr-root > div:nth-child(2)#root > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

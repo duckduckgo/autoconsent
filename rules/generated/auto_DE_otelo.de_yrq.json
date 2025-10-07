@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "comment": "ALLE ABLEHNEN"
+            "waitForThenClick": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Nur erforderliche"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "waitForVisible": "body > main:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
             "timeout": 1000,
             "check": "none"
         }

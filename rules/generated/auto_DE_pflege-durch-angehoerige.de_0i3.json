@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_pflege-durch-angehoerige.de_0i3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pflege-durch-angehoerige.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pflege-durch-angehoerige\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#af16d6f54-6008-4e41-9298-e0f254792285 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#af16d6f54-6008-4e41-9298-e0f254792285 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#af16d6f54-6008-4e41-9298-e0f254792285 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Weiter ohne Einwilligung"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#af16d6f54-6008-4e41-9298-e0f254792285 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

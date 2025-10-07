@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_mayoclinichealthsystem.org_rfq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mayoclinichealthsystem.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mayoclinichealthsystem\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

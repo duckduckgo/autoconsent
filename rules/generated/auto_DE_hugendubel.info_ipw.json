@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#r247655-0-0 > dialog#r247656-0-0 > div:nth-child(2)#r247657-0-0 > div:nth-child(2)#r247658-0-0 > button:nth-child(2)#r247660-0-0"
+            "exists": "body > div#r281671-0-0 > dialog#r281672-0-0 > div:nth-child(2)#r281673-0-0 > div:nth-child(2)#r281674-0-0 > button:nth-child(2)#r281676-0-0"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#r247655-0-0 > dialog#r247656-0-0 > div:nth-child(2)#r247657-0-0 > div:nth-child(2)#r247658-0-0 > button:nth-child(2)#r247660-0-0"
+            "visible": "body > div#r281671-0-0 > dialog#r281672-0-0 > div:nth-child(2)#r281673-0-0 > div:nth-child(2)#r281674-0-0 > button:nth-child(2)#r281676-0-0"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#r247655-0-0 > dialog#r247656-0-0 > div:nth-child(2)#r247657-0-0 > div:nth-child(2)#r247658-0-0 > button:nth-child(2)#r247660-0-0",
+            "waitForThenClick": "body > div#r281671-0-0 > dialog#r281672-0-0 > div:nth-child(2)#r281673-0-0 > div:nth-child(2)#r281674-0-0 > button:nth-child(2)#r281676-0-0",
             "comment": "Nur erforderliche akzeptieren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#r247655-0-0 > dialog#r247656-0-0 > div:nth-child(2)#r247657-0-0 > div:nth-child(2)#r247658-0-0 > button:nth-child(2)#r247660-0-0",
+            "waitForVisible": "body > div#r281671-0-0 > dialog#r281672-0-0 > div:nth-child(2)#r281673-0-0 > div:nth-child(2)#r281674-0-0 > button:nth-child(2)#r281676-0-0",
             "timeout": 1000,
             "check": "none"
         }
