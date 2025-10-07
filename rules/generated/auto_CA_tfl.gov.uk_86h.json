@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_tfl.gov.uk_86h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tfl.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tfl\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Accept only essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cb-cookieoverlay > div:nth-child(1)#cb-cookiebanner > div:nth-child(2)#cb-buttons > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
