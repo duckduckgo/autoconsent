@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_kleding.nl_227",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kleding.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kleding\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookies-dialog > div:not([id]) > button:nth-child(3)#reject-cookies-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookies-dialog > div:not([id]) > button:nth-child(3)#reject-cookies-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cookies-dialog > div:not([id]) > button:nth-child(3)#reject-cookies-button",
+            "comment": "Weiger niet-essentiële cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookies-dialog > div:not([id]) > button:nth-child(3)#reject-cookies-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
