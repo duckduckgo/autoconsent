@@ -1,6 +1,5 @@
 {
     "name": "auto_US_medifind.com_0",
-    "vendorUrl": "https://www.medifind.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
+            "exists": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
+            "visible": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
+            "waitForThenClick": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
             "comment": "Accept Necessary"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
+            "waitForVisible": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
             "timeout": 1000,
             "check": "none"
         }
