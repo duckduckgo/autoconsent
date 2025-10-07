@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_meformerenregion.fr_mf1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.meformerenregion.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?meformerenregion\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#advencyRgpd > button:nth-child(3)#refuseAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#advencyRgpd > button:nth-child(3)#refuseAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#advencyRgpd > button:nth-child(3)#refuseAll",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#advencyRgpd > button:nth-child(3)#refuseAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
