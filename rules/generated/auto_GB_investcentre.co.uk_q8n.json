@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_investcentre.co.uk_q8n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.investcentre.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?investcentre\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential",
+            "comment": "ACCEPT ESSENTIAL COOKIES ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-modal > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
