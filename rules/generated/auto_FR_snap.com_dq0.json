@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_snap.com_dq0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.snap.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?snap\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > section:nth-child(3):not([id])[data-testid=\"sdsm-motif-root\"] > section:nth-child(5):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > section:nth-child(3):not([id])[data-testid=\"sdsm-motif-root\"] > section:nth-child(5):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > section:nth-child(3):not([id])[data-testid=\"sdsm-motif-root\"] > section:nth-child(5):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Essential Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > section:nth-child(3):not([id])[data-testid=\"sdsm-motif-root\"] > section:nth-child(5):not([id]) > div:not([id]) > div:not([id])[data-testid=\"mwp-cookie-landing-screen\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
