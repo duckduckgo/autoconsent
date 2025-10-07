@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_swp-potsdam.de_fgd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.swp-potsdam.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?swp-potsdam\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:not([id]) > button:nth-child(3)#accept-required-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:not([id]) > button:nth-child(3)#accept-required-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:not([id]) > button:nth-child(3)#accept-required-cookies",
+            "comment": "Nur notwendige Cookies erlauben"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:not([id]) > button:nth-child(3)#accept-required-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

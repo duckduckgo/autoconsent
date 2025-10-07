@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "#ez-cookie-notification__decline"
+            "exists": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#ez-cookie-notification__decline"
+            "visible": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#ez-cookie-notification__decline",
-            "comment": "Refuser"
+            "waitForThenClick": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification",
+            "comment": "Rejeter la bannière"
         }
     ],
     "test": [
         {
-            "waitForVisible": "#ez-cookie-notification__decline",
+            "waitForVisible": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#close-notification",
             "timeout": 1000,
             "check": "none"
         }

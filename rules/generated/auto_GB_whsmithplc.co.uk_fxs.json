@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_whsmithplc.co.uk_fxs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.whsmithplc.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?whsmithplc\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-0 > div:nth-child(1)#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-0 > div:nth-child(1)#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-0 > div:nth-child(1)#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
+            "comment": "Decline cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-0 > div:nth-child(1)#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

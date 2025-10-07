@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_tikamoon.com_mok",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tikamoon.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tikamoon\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(1)#close_footer > button#ckieBnr_footer_button_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(1)#close_footer > button#ckieBnr_footer_button_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(1)#close_footer > button#ckieBnr_footer_button_deny",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ckieBnr_wall > div#ckieBnr_footer > div:nth-child(1)#close_footer > button#ckieBnr_footer_button_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
