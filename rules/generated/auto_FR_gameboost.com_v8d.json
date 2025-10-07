@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_gameboost.com_v8d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gameboost.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gameboost\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Necessary Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
