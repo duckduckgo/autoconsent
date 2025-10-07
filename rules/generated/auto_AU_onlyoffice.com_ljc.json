@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_onlyoffice.com_ljc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.onlyoffice.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?onlyoffice\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > form:nth-child(2)#aspnetForm > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(4)#declineCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > form:nth-child(2)#aspnetForm > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(4)#declineCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > form:nth-child(2)#aspnetForm > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(4)#declineCookies",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > form:nth-child(2)#aspnetForm > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(4)#declineCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
