@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_jonak.fr_6su",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jonak.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jonak\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
