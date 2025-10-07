@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_circus-paul-busch.de_g5s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.circus-paul-busch.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?circus-paul-busch\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consensemsg > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > a#denyall > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consensemsg > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > a#denyall > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consensemsg > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > a#denyall > button:not([id])",
+            "comment": "Alles verweigern"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consensemsg > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > a#denyall > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
