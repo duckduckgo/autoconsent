@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bonprix.ch_opn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bonprix.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bonprix\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#JOISH987_bar_holder > div:nth-child(2)#JOISH987_bar > div:nth-child(3)#JOISH987_bar__bottom__info > span#JOISH987_inlineRejectBar_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#JOISH987_bar_holder > div:nth-child(2)#JOISH987_bar > div:nth-child(3)#JOISH987_bar__bottom__info > span#JOISH987_inlineRejectBar_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#JOISH987_bar_holder > div:nth-child(2)#JOISH987_bar > div:nth-child(3)#JOISH987_bar__bottom__info > span#JOISH987_inlineRejectBar_btn",
+            "comment": "Einwilligung ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#JOISH987_bar_holder > div:nth-child(2)#JOISH987_bar > div:nth-child(3)#JOISH987_bar__bottom__info > span#JOISH987_inlineRejectBar_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
