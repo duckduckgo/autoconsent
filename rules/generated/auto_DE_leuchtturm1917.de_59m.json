@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_leuchtturm1917.de_59m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.leuchtturm1917.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?leuchtturm1917\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccg-cookie-consent-banner > div:nth-child(4)#ccg-btns > div:not([id]) > button:nth-child(2)#ccg-btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccg-cookie-consent-banner > div:nth-child(4)#ccg-btns > div:not([id]) > button:nth-child(2)#ccg-btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccg-cookie-consent-banner > div:nth-child(4)#ccg-btns > div:not([id]) > button:nth-child(2)#ccg-btn-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccg-cookie-consent-banner > div:nth-child(4)#ccg-btns > div:not([id]) > button:nth-child(2)#ccg-btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
