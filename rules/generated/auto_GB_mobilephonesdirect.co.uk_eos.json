@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_mobilephonesdirect.co.uk_eos",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mobilephonesdirect.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mobilephonesdirect\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookieConsentAccept > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#declineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookieConsentAccept > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#declineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookieConsentAccept > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#declineAll",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookieConsentAccept > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#declineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
