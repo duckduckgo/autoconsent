@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_basket4ballers.com_sv9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.basket4ballers.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?basket4ballers\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
