@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_bananafingers.co.uk_0",
-    "vendorUrl": "https://bananafingers.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > aside > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)"
+            "exists": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > aside > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)"
+            "visible": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > aside > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > button:nth-child(3)",
-            "text": "Decline Cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Decline Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

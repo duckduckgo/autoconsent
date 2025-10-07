@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_modebayard.ch_xbx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://modebayard.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?modebayard\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > pages-page:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(6):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > pages-page:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(6):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > pages-page:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(6):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > pages-page:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(6):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

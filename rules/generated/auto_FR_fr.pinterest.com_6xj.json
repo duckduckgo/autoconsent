@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.pinterest.com_6xj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.pinterest.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.pinterest\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__PWS_ROOT__ > div:nth-child(2):not([id]) > header:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__PWS_ROOT__ > div:nth-child(2):not([id]) > header:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__PWS_ROOT__ > div:nth-child(2):not([id]) > header:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__PWS_ROOT__ > div:nth-child(2):not([id]) > header:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

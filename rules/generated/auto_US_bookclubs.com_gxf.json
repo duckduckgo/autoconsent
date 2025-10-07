@@ -1,6 +1,5 @@
 {
     "name": "auto_US_bookclubs.com_gxf",
-    "vendorUrl": "https://bookclubs.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+            "exists": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+            "visible": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
             "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

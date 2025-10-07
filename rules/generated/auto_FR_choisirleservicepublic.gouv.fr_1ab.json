@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_choisirleservicepublic.gouv.fr_1ab",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://choisirleservicepublic.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?choisirleservicepublic\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

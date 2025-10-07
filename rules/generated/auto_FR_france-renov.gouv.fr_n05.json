@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall"
+            "exists": "body > div#fr-gdpr-cookie-consent--banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent--decline-all"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall"
+            "visible": "body > div#fr-gdpr-cookie-consent--banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent--decline-all"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall",
+            "waitForThenClick": "body > div#fr-gdpr-cookie-consent--banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent--decline-all",
             "comment": "Tout refuser"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#fr-gdpr-cookie-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent-declineall",
+            "waitForVisible": "body > div#fr-gdpr-cookie-consent--banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#gdpr-cookie-consent--decline-all",
             "timeout": 1000,
             "check": "none"
         }

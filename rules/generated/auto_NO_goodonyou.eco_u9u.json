@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_goodonyou.eco_u9u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://goodonyou.eco/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?goodonyou\\.eco/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > button:nth-child(3)#only-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > button:nth-child(3)#only-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > button:nth-child(3)#only-necessary",
+            "comment": "Only Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > button:nth-child(3)#only-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

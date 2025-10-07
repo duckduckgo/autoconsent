@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_cds.climate.copernicus.eu_6rw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cds.climate.copernicus.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cds\\.climate\\.copernicus\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

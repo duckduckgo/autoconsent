@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_deutscheoperberlin.de_wsy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://deutscheoperberlin.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deutscheoperberlin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-manager > div:nth-child(5):not([id]) > div:nth-child(2)#one-panel > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-manager > div:nth-child(5):not([id]) > div:nth-child(2)#one-panel > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-manager > div:nth-child(5):not([id]) > div:nth-child(2)#one-panel > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-manager > div:nth-child(5):not([id]) > div:nth-child(2)#one-panel > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
