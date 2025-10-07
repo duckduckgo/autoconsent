@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_caterallen.co.uk_t24",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.caterallen.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?caterallen\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieSettings > div:not([id]) > div:nth-child(1)#CookieSettingsInfo > div:nth-child(3):not([id]) > button:nth-child(2)#btnCookieSettingsReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieSettings > div:not([id]) > div:nth-child(1)#CookieSettingsInfo > div:nth-child(3):not([id]) > button:nth-child(2)#btnCookieSettingsReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieSettings > div:not([id]) > div:nth-child(1)#CookieSettingsInfo > div:nth-child(3):not([id]) > button:nth-child(2)#btnCookieSettingsReject",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieSettings > div:not([id]) > div:nth-child(1)#CookieSettingsInfo > div:nth-child(3):not([id]) > button:nth-child(2)#btnCookieSettingsReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
