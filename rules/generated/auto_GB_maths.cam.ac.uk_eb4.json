@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_maths.cam.ac.uk_eb4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.maths.cam.ac.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?maths\\.cam\\.ac\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#chem-cookie-banner > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#chem-cookie-banner > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#chem-cookie-banner > button:nth-child(3):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#chem-cookie-banner > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
