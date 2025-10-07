@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_mandg.com_55c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mandg.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mandg\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
+            "comment": "Decline cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__cookieWrapper > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cc-reject-Btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
