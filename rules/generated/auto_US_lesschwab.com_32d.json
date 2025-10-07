@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_lesschwab.com_32d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lesschwab.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lesschwab\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
