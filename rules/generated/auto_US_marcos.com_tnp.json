@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_marcos.com_tnp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.marcos.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?marcos\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(21)#modal_cookie_preference > div:nth-child(3):not([id]) > button:nth-child(3)#btn_cookie_preference_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(21)#modal_cookie_preference > div:nth-child(3):not([id]) > button:nth-child(3)#btn_cookie_preference_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(21)#modal_cookie_preference > div:nth-child(3):not([id]) > button:nth-child(3)#btn_cookie_preference_reject",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(21)#modal_cookie_preference > div:nth-child(3):not([id]) > button:nth-child(3)#btn_cookie_preference_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
