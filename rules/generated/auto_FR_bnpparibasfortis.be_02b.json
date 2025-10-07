@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "button#cookies_few_accept_btn"
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "button#cookies_few_accept_btn"
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "button#cookies_few_accept_btn",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn",
             "comment": "Refuse optional cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "button#cookies_few_accept_btn",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookies_few_accept_btn",
             "timeout": 1000,
             "check": "none"
         }
