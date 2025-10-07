@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pharmacie-homeopathie.com_hv5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pharmacie-homeopathie.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pharmacie-homeopathie\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#toastconsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btnDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#toastconsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btnDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#toastconsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btnDeny",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#toastconsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btnDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
