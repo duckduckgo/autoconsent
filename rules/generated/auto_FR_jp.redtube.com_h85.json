@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_jp.redtube.com_h85",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://jp.redtube.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jp\\.redtube\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#consent_accept_essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#consent_accept_essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#consent_accept_essential",
+            "comment": "Accept Only Essential Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#consent_accept_essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
