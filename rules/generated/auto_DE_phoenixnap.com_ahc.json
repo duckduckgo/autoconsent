@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_phoenixnap.com_ahc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://phoenixnap.com/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?widget-next\\.clym-sdk\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#handle-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#handle-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#handle-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-notice-layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#handle-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
