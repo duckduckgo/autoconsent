@@ -4,7 +4,7 @@ const compactRules = require('../rules/compact-rules.json');
 
 const testUrlMap = [];
 
-compactRules.r.forEach(rule => {
+compactRules.r.forEach((rule) => {
     const urlPattern = rule[3];
     if (urlPattern.length === 0) {
         return;

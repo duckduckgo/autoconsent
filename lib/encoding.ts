@@ -427,7 +427,7 @@ function clearUnusedStrings(ruleset: CompactCMPRuleset, ignoreBeforeIndex = 0) {
             return '';
         }),
     };
-};
+}
 
 function shouldRunRuleInContext(rule: CompactCMPRule, mainFrame: boolean, url: string): boolean {
     const runContext = rule[4];
@@ -442,7 +442,7 @@ function shouldRunRuleInContext(rule: CompactCMPRule, mainFrame: boolean, url: s
         return false;
     }
     return true;
-};
+}
 
 export function filterCompactRules(rules: IndexedCMPRuleset, context: { url: string; mainFrame: boolean }): CompactCMPRuleset {
     const { v, s, r, index } = rules;
@@ -451,7 +451,7 @@ export function filterCompactRules(rules: IndexedCMPRuleset, context: { url: str
     const shouldRunInContext = (rule: CompactCMPRule) => shouldRunRuleInContext(rule, mainFrame, url);
 
     if (!mainFrame) {
-        const ruleset =  {
+        const ruleset = {
             v,
             s: s.slice(0, index.frameStringEnd),
             r: r.slice(index.frameRuleRange[0], index.frameRuleRange[1]).filter(shouldRunInContext),
