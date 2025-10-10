@@ -1,7 +1,7 @@
 {
     "name": "nba.com",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?nba.com/"
+        "urlPattern": "^https://(www\\.)?nba\\.com/"
     },
     "cosmetic": true,
     "prehideSelectors": ["#onetrust-banner-sdk"],

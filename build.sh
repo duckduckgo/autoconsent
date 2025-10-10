@@ -22,7 +22,9 @@ cp dist/addon-mv3/content.bundle.js dist/addon-firefox/content.bundle.js
 cp -r addon/icons dist/addon-mv3/
 cp -r addon/icons dist/addon-firefox/
 cp rules/rules.json dist/addon-mv3/
+cp rules/compact-rules.json dist/addon-mv3/
 cp rules/rules.json dist/addon-firefox/
+cp rules/compact-rules.json dist/addon-firefox/
 cp addon/popup.html dist/addon-mv3/
 cp -r addon/devtools dist/addon-mv3/
 cp addon/manifest.mv3.json dist/addon-mv3/manifest.json

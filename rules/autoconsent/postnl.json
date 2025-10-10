@@ -3,7 +3,7 @@
     "vendorUrl": "https://postnl.nl",
     "cosmetic": false,
     "runContext": {
-        "urlPattern": "^https://([^.]+\\.)?postnl\\.nl/"
+        "urlPattern": "^https://([a-z]*\\.)?postnl\\.nl/"
     },
     "prehideSelectors": ["pnl-cookie-wall-widget"],
     "detectCmp": [

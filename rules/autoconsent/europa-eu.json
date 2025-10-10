@@ -2,7 +2,7 @@
     "name": "europa-eu",
     "vendorUrl": "https://ec.europa.eu/",
     "runContext": {
-        "urlPattern": "^https://[^/]*europa\\.eu/"
+        "urlPattern": "^https://([a-z\\.]*\\.)?europa\\.eu/"
     },
     "prehideSelectors": ["#cookie-consent-banner"],
     "detectCmp": [
