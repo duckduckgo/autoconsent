@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_profond.ch_z0n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.profond.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?profond\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:nth-child(1)#cookiesjsr > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:nth-child(1)#cookiesjsr > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:nth-child(1)#cookiesjsr > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#block-cookiesui > div:nth-child(1)#cookiesjsr > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

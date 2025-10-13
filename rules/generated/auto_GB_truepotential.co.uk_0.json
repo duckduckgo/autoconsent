@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_truepotential.co.uk_0",
-    "vendorUrl": "https://www.truepotential.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div > div > div:nth-child(2) > a:nth-child(2)"
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div > div > div:nth-child(2) > a:nth-child(2)"
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div > div > div:nth-child(2) > a:nth-child(2)",
-            "text": "Reject all"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

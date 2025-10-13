@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > dialog#cookieconsent-container > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])"
+            "exists": "body > dialog#cookieconsent-container > section:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > dialog#cookieconsent-container > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])"
+            "visible": "body > dialog#cookieconsent-container > section:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > dialog#cookieconsent-container > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])",
+            "waitForThenClick": "body > dialog#cookieconsent-container > section:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])",
             "comment": "Nur notwendige Cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > dialog#cookieconsent-container > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])",
+            "waitForVisible": "body > dialog#cookieconsent-container > section:not([id]) > div:nth-child(2):not([id]) > form:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > button:not([id])",
             "timeout": 1000,
             "check": "none"
         }
