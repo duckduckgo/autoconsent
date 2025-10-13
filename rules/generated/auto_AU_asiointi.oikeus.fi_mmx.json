@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_asiointi.oikeus.fi_mmx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://asiointi.oikeus.fi/oikeusrekisterikeskus/#/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?asiointi\\.oikeus\\.fi/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > ng-component:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > ng-component:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > ng-component:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])",
+            "comment": "Jatka välttämättömillä"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div#cdk-overlay-0 > mat-bottom-sheet-container:nth-child(2)#cdk-dialog-0 > ng-component:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

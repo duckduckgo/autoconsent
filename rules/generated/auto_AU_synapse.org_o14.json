@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_synapse.org_o14",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.synapse.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?synapse\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(7)#headerPanel > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(7)#headerPanel > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(7)#headerPanel > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Disable All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(7)#headerPanel > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

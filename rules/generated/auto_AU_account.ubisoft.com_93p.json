@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_account.ubisoft.com_93p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://account.ubisoft.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?account\\.ubisoft\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close",
+            "comment": "I REFUSE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy_modal > div:nth-child(2)#privacy__modal__only > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#privacy__modal__close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

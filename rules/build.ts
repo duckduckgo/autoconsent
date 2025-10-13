@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import { encodeRules } from '../lib/encoding';
+import { encodeRules, deduplicateRules } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
 
 export const rulesDir = __dirname;
@@ -25,8 +25,7 @@ export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     const generatedFiles = fs.readdirSync(generatedRulesDir);
     const normalRules = await Promise.all(files.map((file) => readFileJSON(path.join(autoconsentDir, file))));
     const generatedRules = await Promise.all(generatedFiles.map((file) => readFileJSON(path.join(generatedRulesDir, file))));
-
-    return [...normalRules, ...generatedRules];
+    return deduplicateRules([...normalRules, ...generatedRules]);
 }
 
 export async function buildConsentOMaticRules() {

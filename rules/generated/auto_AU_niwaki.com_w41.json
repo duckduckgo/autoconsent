@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_niwaki.com_w41",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.niwaki.com/cedar-bark-tape/?source=aw&amp;awc=117415_1751929847_9263c63ecafa1f9842d029427e54c402#P00580-1"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?niwaki\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#trackingConsent > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#trackingConsent > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#trackingConsent > button:nth-child(2):not([id])",
+            "comment": "NO"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#trackingConsent > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

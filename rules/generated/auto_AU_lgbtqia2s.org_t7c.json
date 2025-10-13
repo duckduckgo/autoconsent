@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_lgbtqia2s.org_t7c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.lgbtqia2s.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lgbtqia2s\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccokies > div:not([id]) > span:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccokies > div:not([id]) > span:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccokies > div:not([id]) > span:nth-child(5):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccokies > div:not([id]) > span:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

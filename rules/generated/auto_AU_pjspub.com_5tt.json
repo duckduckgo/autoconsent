@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_pjspub.com_5tt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://pjspub.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pjspub\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4)#cookies-dialog > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4)#cookies-dialog > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4)#cookies-dialog > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "DENY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4)#cookies-dialog > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
