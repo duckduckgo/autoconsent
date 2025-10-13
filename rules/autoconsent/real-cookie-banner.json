@@ -6,10 +6,9 @@
     "cosmetic": false,
     "runContext": {
         "main": true,
-        "frame": false,
-        "urlPattern": ""
+        "frame": false
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div[consent-skip-blocker=\"1\"][id][data-bg]"],
     "detectCmp": [
         {
             "exists": "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button][id]"
