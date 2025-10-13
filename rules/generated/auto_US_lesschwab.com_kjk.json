@@ -2,7 +2,8 @@
     "name": "auto_US_lesschwab.com_kjk",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.lesschwab.com/"
+        "vendorUrl": "http://www.lesschwab.com/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
+            "exists": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
+            "visible": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "waitForThenClick": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div:nth-child(2)#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
+            "waitForVisible": "body > div#meru-cc--main > div#meru-cc > div:nth-child(1)#meru-cm > div#meru-cm__cnt-inr > div:nth-child(2)#meru-cm__bns > button:nth-child(2)#c-rall-bn",
             "timeout": 1000,
             "check": "none"
         }
