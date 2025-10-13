@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2"
+            "exists": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2"
+            "visible": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2",
-            "comment": "Refuser"
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])",
+            "comment": "continuer sans accepter"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(2)#popin_tc_privacy_button_2",
+            "waitForVisible": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }

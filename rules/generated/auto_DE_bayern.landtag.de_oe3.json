@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bayern.landtag.de_oe3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bayern.landtag.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bayern\\.landtag\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#matomo-cookie-consent > p:nth-child(3):not([id]) > button:nth-child(1)#mcc-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#matomo-cookie-consent > p:nth-child(3):not([id]) > button:nth-child(1)#mcc-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#matomo-cookie-consent > p:nth-child(3):not([id]) > button:nth-child(1)#mcc-deny",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#matomo-cookie-consent > p:nth-child(3):not([id]) > button:nth-child(1)#mcc-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

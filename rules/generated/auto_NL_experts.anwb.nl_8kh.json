@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_experts.anwb.nl_8kh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://experts.anwb.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?experts\\.anwb\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#anwb-cookie-module > div#anwb-cookie-modal > div:nth-child(1)#anwb-cookie-card > div:nth-child(3):not([id]) > button:nth-child(1)#anwb-cookie-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#anwb-cookie-module > div#anwb-cookie-modal > div:nth-child(1)#anwb-cookie-card > div:nth-child(3):not([id]) > button:nth-child(1)#anwb-cookie-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#anwb-cookie-module > div#anwb-cookie-modal > div:nth-child(1)#anwb-cookie-card > div:nth-child(3):not([id]) > button:nth-child(1)#anwb-cookie-refuse",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#anwb-cookie-module > div#anwb-cookie-modal > div:nth-child(1)#anwb-cookie-card > div:nth-child(3):not([id]) > button:nth-child(1)#anwb-cookie-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

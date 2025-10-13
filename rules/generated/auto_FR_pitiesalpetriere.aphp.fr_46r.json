@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pitiesalpetriere.aphp.fr_46r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pitiesalpetriere.aphp.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pitiesalpetriere\\.aphp\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mgdpr-mainpopup > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#mgdpr-refuseall"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mgdpr-mainpopup > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#mgdpr-refuseall"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mgdpr-mainpopup > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#mgdpr-refuseall",
+            "comment": "Refuser tout, sauf les cookies techniques"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mgdpr-mainpopup > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#mgdpr-refuseall",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

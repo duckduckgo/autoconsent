@@ -1,27 +1,30 @@
 {
     "name": "auto_GB_redtube.com_0",
-    "vendorUrl": "https://www.redtube.com/",
+    "_metadata": {
+        "vendorUrl": "http://redtube.com/",
+        "manuallyReviewUpdates": true
+    },
     "cosmetic": false,
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?redtube\\.com/"
+        "urlPattern": "^https?://([a-z]+\\.)?redtube\\.(com|net)/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#consent_accept_essential"
+            "exists": "body:not([id]) > div#cookie_consent_wrapper > div:not([id]) > div > button#consent_accept_essential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#consent_accept_essential"
+            "visible": "body:not([id]) > div#cookie_consent_wrapper > div:not([id]) > div > button#consent_accept_essential"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookie_consent_wrapper > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#consent_accept_essential",
+            "waitForThenClick": "body:not([id]) > div#cookie_consent_wrapper > div:not([id]) > div > button#consent_accept_essential",
             "comment": "Accept only essential cookies"
         }
     ]
