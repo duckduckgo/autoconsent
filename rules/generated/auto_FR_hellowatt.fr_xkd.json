@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse"
+            "exists": "body > div:not([id]) > ds-modal:nth-child(7):not([id]) > dialog#cookie-dialog > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#cookie-refuse"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse"
+            "visible": "body > div:not([id]) > ds-modal:nth-child(7):not([id]) > dialog#cookie-dialog > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#cookie-refuse"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse",
-            "comment": "Refuser"
+            "waitForThenClick": "body > div:not([id]) > ds-modal:nth-child(7):not([id]) > dialog#cookie-dialog > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#cookie-refuse",
+            "comment": "Continuer sans accepter"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(6)#cookie-modal__container > div:nth-child(1)#cookie-modal__initial > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-refuse",
+            "waitForVisible": "body > div:not([id]) > ds-modal:nth-child(7):not([id]) > dialog#cookie-dialog > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#cookie-refuse",
             "timeout": 1000,
             "check": "none"
         }

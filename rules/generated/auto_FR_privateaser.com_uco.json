@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_privateaser.com_uco",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.privateaser.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?privateaser\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

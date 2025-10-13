@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_eventfrog.de_b4k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eventfrog.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eventfrog\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tf-modal-container > div#tf-modal-container__modal > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tf-modal-container > div#tf-modal-container__modal > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tf-modal-container > div#tf-modal-container__modal > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tf-modal-container > div#tf-modal-container__modal > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

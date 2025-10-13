@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hella.com_ql4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hella.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hella\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(4)#PiwikPROConsentForm-container > div#PiwikPROConsentForm-container-inner > div#PiwikPROConsentForm-content > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#PiwikPROConsentForm-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(4)#PiwikPROConsentForm-container > div#PiwikPROConsentForm-container-inner > div#PiwikPROConsentForm-content > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#PiwikPROConsentForm-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(4)#PiwikPROConsentForm-container > div#PiwikPROConsentForm-container-inner > div#PiwikPROConsentForm-content > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#PiwikPROConsentForm-reject-all",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(4)#PiwikPROConsentForm-container > div#PiwikPROConsentForm-container-inner > div#PiwikPROConsentForm-content > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#PiwikPROConsentForm-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

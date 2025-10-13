@@ -1,0 +1,41 @@
+{
+    "name": "auto_NL_voordeelshop.ah.nl_6lf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://voordeelshop.ah.nl/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?voordeelshop\\.ah\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).dope-shop > div:not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testhook=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testhook=\"cookie-popup\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testhook=\"decline-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).dope-shop > div:not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testhook=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testhook=\"cookie-popup\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testhook=\"decline-cookies\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).dope-shop > div:not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testhook=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testhook=\"cookie-popup\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testhook=\"decline-cookies\"]",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).dope-shop > div:not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testhook=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testhook=\"cookie-popup\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testhook=\"decline-cookies\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

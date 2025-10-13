@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_rabobank.jobs_opx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://rabobank.jobs/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rabobank\\.jobs/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#\\:r6\\: > section:nth-child(3)#\\:R0H1\\: > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#\\:r6\\: > section:nth-child(3)#\\:R0H1\\: > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#\\:r6\\: > section:nth-child(3)#\\:R0H1\\: > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ONLY NECESSARY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#\\:r6\\: > section:nth-child(3)#\\:R0H1\\: > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
