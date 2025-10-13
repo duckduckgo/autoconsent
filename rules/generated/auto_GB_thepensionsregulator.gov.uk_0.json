@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_thepensionsregulator.gov.uk_0",
-    "vendorUrl": "https://www.thepensionsregulator.gov.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#pagetop > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject"
+            "exists": "body > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#pagetop > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject"
+            "visible": "body > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body#pagetop > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > header:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

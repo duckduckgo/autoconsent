@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hetschip.nl_39e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hetschip.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hetschip\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiesck > div:not([id]) > span:nth-child(2)#cookiesck_buttons > a:nth-child(2)#cookiesck_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

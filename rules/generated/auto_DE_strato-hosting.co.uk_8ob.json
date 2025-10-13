@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_strato-hosting.co.uk_8ob",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.strato-hosting.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?strato-hosting\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(1)#consentLayerOne > div:nth-child(2):not([id]) > button:nth-child(1)#consentDisagreeButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(1)#consentLayerOne > div:nth-child(2):not([id]) > button:nth-child(1)#consentDisagreeButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(1)#consentLayerOne > div:nth-child(2):not([id]) > button:nth-child(1)#consentDisagreeButton",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(1)#consentLayerOne > div:nth-child(2):not([id]) > button:nth-child(1)#consentDisagreeButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

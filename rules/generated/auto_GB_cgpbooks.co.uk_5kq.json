@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_cgpbooks.co.uk_5kq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cgpbooks.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cgpbooks\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_werk.ah.nl_r90",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://werk.ah.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?werk\\.ah\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#custom-wrapper > div:nth-child(4)#custom-banner > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#custom-wrapper > div:nth-child(4)#custom-banner > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#custom-wrapper > div:nth-child(4)#custom-banner > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#custom-wrapper > div:nth-child(4)#custom-banner > div:nth-child(6):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
