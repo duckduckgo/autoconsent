@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Autoconsent",
-  "version": "2025.8.29",
+  "version": "2025.10.7",
   "background": {
     "service_worker": "background.bundle.js"
   },
@@ -13,6 +13,7 @@
       "js": [
         "content.bundle.js"
       ],
+      "match_origin_as_fallback": true,
       "run_at": "document_start",
       "all_frames": true
     }

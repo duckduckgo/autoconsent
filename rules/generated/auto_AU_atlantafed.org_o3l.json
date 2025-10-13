@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_atlantafed.org_o3l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.atlantafed.org/cqer/research/gdpnow"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?atlantafed\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > article:nth-child(3):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookieBanner-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > article:nth-child(3):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookieBanner-accept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > article:nth-child(3):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookieBanner-accept",
+            "comment": "Proceed"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > article:nth-child(3):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookieBanner-accept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

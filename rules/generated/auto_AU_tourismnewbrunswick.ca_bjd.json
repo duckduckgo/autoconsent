@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_tourismnewbrunswick.ca_bjd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://tourismnewbrunswick.ca/listing/fundy-trail-provincial-park"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tourismnewbrunswick\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#message-banner > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#message-banner > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#message-banner > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "OK"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#message-banner > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

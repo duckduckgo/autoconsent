@@ -54,14 +54,10 @@ function ensure32BitAlignment(originalBuffer) {
 fs.writeFile(
     path.join(rulesDir, '../lib/filterlist-engine.ts'),
     `
-declare global {
-const BUNDLE_FILTERLIST: boolean;
-}
 const serializedEngine = /* @__PURE__ */ new Uint8Array(new Uint32Array(
   ${engineJson}
 ).buffer).slice(0, ${engineLength});
-const emptyEngine = /* @__PURE__ */ new Uint8Array([]);
-export default BUNDLE_FILTERLIST ? serializedEngine : emptyEngine;
+export default serializedEngine;
 `,
     () => console.log('Written filterlist-engine.ts'),
 );
