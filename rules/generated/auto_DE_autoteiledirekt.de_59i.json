@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]"
+            "exists": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]"
+            "visible": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]",
+            "waitForThenClick": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]",
             "comment": "Alle Cookies ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"][data-gtm-vis-recent-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-first-on-screen30941244_769=\"\\32 211\"][data-gtm-vis-total-visible-time30941244_769=\"\\31 00\"][data-gtm-vis-has-fired30941244_769=\"\\31 \"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]",
+            "waitForVisible": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]",
             "timeout": 1000,
             "check": "none"
         }
