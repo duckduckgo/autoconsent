@@ -1,5 +1,6 @@
 {
     "name": "auto_GB_investing.thisismoney.co.uk_0",
+    "vendorUrl": "https://investing.thisismoney.co.uk/companies/A",
     "cosmetic": false,
     "runContext": {
         "main": false,
@@ -9,29 +10,19 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(12):not([id])"
+            "exists": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(12):not([id])"
+            "visible": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(12):not([id])",
+            "waitForThenClick": "body#moneyinvesting > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(11):not([id])",
             "comment": "Do not sell or share my personal information"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#top > div#content > div:nth-child(4):not([id]) > a:nth-child(12):not([id])",
-            "timeout": 1000,
-            "check": "none"
         }
     ]
 }
