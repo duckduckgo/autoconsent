@@ -2,7 +2,8 @@
     "name": "auto_GB_fresha.com_i5v",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.fresha.com/"
+        "vendorUrl": "http://www.fresha.com/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#button-react-aria8456525448-\\:r2j\\:"
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)[id]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#button-react-aria8456525448-\\:r2j\\:"
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)[id]"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#button-react-aria8456525448-\\:r2j\\:",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)[id]",
             "comment": "Only necessary"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#button-react-aria8456525448-\\:r2j\\:",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)[id]",
             "timeout": 1000,
             "check": "none"
         }
