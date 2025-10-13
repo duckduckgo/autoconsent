@@ -300,7 +300,7 @@ export default class AutoConsent {
             }
         };
         const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => { }); // ensure promise rejection is caught
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
         logsConfig.lifecycle &&
             siteSpecificRules.length > 0 &&
@@ -382,7 +382,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => { });
+            .catch(() => {});
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
@@ -448,7 +448,10 @@ export default class AutoConsent {
 
         if (optOutResult && this.foundCmp && !this.foundCmp.isIntermediate) {
             this.state.endTime = Date.now();
-            logsConfig.lifecycle && console.log(`${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`);
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp?.name,
@@ -495,7 +498,10 @@ export default class AutoConsent {
 
         if (optInResult && this.foundCmp && !this.foundCmp.isIntermediate) {
             this.state.endTime = Date.now();
-            logsConfig.lifecycle && console.log(`${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`);
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp.name,
