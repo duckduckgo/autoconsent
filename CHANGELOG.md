@@ -1,3 +1,20 @@
+# v14.30.0 (Tue Oct 07 2025)
+
+#### 🚀 Enhancement
+
+- Fix an exception in text extension [#1024](https://github.com/duckduckgo/autoconsent/pull/1024) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1022](https://github.com/duckduckgo/autoconsent/pull/1022) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.29.0 (Fri Oct 03 2025)
 
 #### 🚀 Enhancement
