@@ -1,3 +1,19 @@
+# v14.31.0 (Tue Oct 14 2025)
+
+#### 🚀 Enhancement
+
+- [1 / 4] 🤖 Add autoconsent rules for 200 sites (7 need review) [#1018](https://github.com/duckduckgo/autoconsent/pull/1018) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#1023](https://github.com/duckduckgo/autoconsent/pull/1023) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1037](https://github.com/duckduckgo/autoconsent/pull/1037) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1036](https://github.com/duckduckgo/autoconsent/pull/1036) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.30.0 (Tue Oct 07 2025)
 
 #### 🚀 Enhancement
