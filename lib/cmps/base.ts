@@ -152,6 +152,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         if (this.autoconsent.config.visualTest) {
             await this.highlightElements(selector, all);
         }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
         return this.autoconsent.domActions.click(selector, all);
     }
 
@@ -175,6 +176,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         if (this.autoconsent.config.visualTest) {
             await this.highlightElements(selector, all);
         }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
         return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
     }
 

@@ -100,4 +100,7 @@ export type ConsentState = {
     heuristicPatterns: string[]; // Matched heuristic patterns
     heuristicSnippets: string[]; // Matched heuristic snippets
     selfTest: boolean | null; // null if no self test was run, otherwise it holds the result of the self test.
+    clicks: number; // Number of clicks the script has made.
+    startTime: number; // The time the script started.
+    endTime: number; // The time the script ended.
 };

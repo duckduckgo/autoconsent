@@ -67,6 +67,8 @@ export default class AutoConsentExtra extends AutoConsent {
                 cmp: 'filterList',
                 isCosmetic: true,
                 url: location.href,
+                duration: 0,
+                totalClicks: this.state.clicks,
             });
             return true;
         }
