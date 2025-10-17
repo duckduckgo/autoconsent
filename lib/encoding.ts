@@ -44,6 +44,7 @@ export type CompactCMPRuleset = {
 };
 
 export type IndexedCMPRuleset = CompactCMPRuleset & {
+    // Index for quick filtering of rules and strings, when the ruleset is sorted appropriately (see encodeRules).
     index: {
         genericRuleRange: [number, number]; // [startIndex, endIndex] of rules that are generic
         frameRuleRange: [number, number]; // [startIndex, endIndex] of rules that run in frames
@@ -141,6 +142,23 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
     return strings;
 }
 
+/**
+ * Encoding the rules into the compact format, with rules and strings sorted for efficient filtering.
+ *
+ * The ruleset is sorted such that:
+ * 1. Generic rules (no urlPattern) come first
+ * 2. Rules that run in frames come next
+ * 3. Specific rules (with urlPattern) come last
+ * Within each category, rules are sorted by name.
+ * Strings are sorted such that:
+ * 1. Strings used by generic rules come first
+ * 2. Strings used by frame rules come next
+ * 3. Strings used by specific rules come last
+ * All indicies are inclusive of start index and exclusive of end index.
+ * @param rules - The rules to encode.
+ * @param existingCompactRules - The existing compact rules to use as a base.
+ * @returns The encoded ruleset.
+ */
 export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): IndexedCMPRuleset {
     rules.sort((a, b) => {
         const isGeneric = (r: AutoConsentCMPRule) => !r.runContext?.urlPattern;
@@ -185,7 +203,7 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
 
     const genericStrings = buildStrings(existingCompactRules?.s || [], rules.slice(0, genericRuleEnd));
     const frameStrings = buildStrings(genericStrings, rules.slice(0, frameRuleEnd));
-    const strings = buildStrings(frameStrings || [], rules);
+    const strings = buildStrings(frameStrings, rules);
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
