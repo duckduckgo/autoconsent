@@ -180,7 +180,7 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
         return r.runContext?.frame === true;
     });
     const frameRuleEnd = rules.findIndex((r, i) => {
-        return (!r.runContext || !r.runContext?.frame) && i >= frameRuleStart;
+        return !r.runContext?.frame && i >= frameRuleStart;
     });
 
     const genericStrings = buildStrings(existingCompactRules?.s || [], rules.slice(0, genericRuleEnd));
