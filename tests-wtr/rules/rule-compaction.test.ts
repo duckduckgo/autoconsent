@@ -196,6 +196,20 @@ describe('RuleCompaction', () => {
             const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace3'], rules);
             expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3']);
         });
+
+        it('does not preserve duplicates from existing strings', () => {
+            const rules: AutoConsentCMPRule[] = [
+                {
+                    name: 'test',
+                    detectCmp: [{ exists: 'staysinplace1' }],
+                    detectPopup: [{ visible: 'staysinplace2' }],
+                    optOut: [{ click: 'staysinplace1' }, { click: 'staysinplace3' }],
+                    optIn: [],
+                },
+            ];
+            const strings = buildStrings(['staysinplace1', 'staysinplace2', 'staysinplace1', 'staysinplace3'], rules);
+            expect(strings).to.deep.equal(['staysinplace1', 'staysinplace2', 'staysinplace3']);
+        });
     });
 });
 

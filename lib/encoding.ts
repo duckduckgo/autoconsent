@@ -130,6 +130,7 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
     existingStrings.slice(0, usedStrings.size).forEach((s, i) => {
         if (usedStrings.has(s)) {
             strings[i] = s;
+            usedStrings.delete(s); // remove from set so if the existing string appears twice, we only keep one.
         }
     });
     // copy remaining strings into empty slots. This will also place any existing strings whose previous indices are out of the bounds of the new array.
@@ -212,7 +213,8 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
 
     const genericStrings = buildStrings(existingCompactRules?.s || [], rules.slice(0, genericRuleEnd));
     const frameStrings = buildStrings(genericStrings, rules.slice(0, frameRuleEnd));
-    const strings = buildStrings(frameStrings, rules);
+    // add back remaining strings from existing ruleset, if any, so specific string ordering can be preserved.
+    const strings = buildStrings(frameStrings.concat(existingCompactRules?.s.slice(frameStrings.length) || []), rules);
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
