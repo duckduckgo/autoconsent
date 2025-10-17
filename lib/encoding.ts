@@ -143,7 +143,7 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
 
 export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): IndexedCMPRuleset {
     rules.sort((a, b) => {
-        const isGeneric = (r: AutoConsentCMPRule) => !r.runContext?.urlPattern || r.runContext.urlPattern === '';
+        const isGeneric = (r: AutoConsentCMPRule) => !r.runContext?.urlPattern;
         const isFrame = (r: AutoConsentCMPRule) => r.runContext?.frame === true;
         if (isGeneric(a) && !isGeneric(b)) {
             return -1;
