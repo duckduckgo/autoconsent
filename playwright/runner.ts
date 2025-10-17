@@ -5,6 +5,8 @@ import { test, expect, Page, Frame, TestInfo } from '@playwright/test';
 import { waitFor } from '../lib/utils';
 import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
+import { filterCompactRules } from '../lib/encoding';
+import compactRules from '../rules/compact-rules.json';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []
@@ -146,6 +148,8 @@ class TestRun {
         this.received.push(msg);
         switch (msg.type) {
             case 'init': {
+                const url = frame.url();
+                const mainFrame = frame.parentFrame() === null;
                 await frame.evaluate(
                     `autoconsentReceiveMessage({ type: "initResp", config: ${JSON.stringify({
                         enabled: true,
@@ -155,7 +159,7 @@ class TestRun {
                         detectRetries: 20,
                         enableCosmeticRules: true,
                         visualTest: true,
-                    })} })`,
+                    })}, rules: ${JSON.stringify({ compact: filterCompactRules(compactRules, { url, mainFrame }) })} })`,
                 );
                 break;
             }
