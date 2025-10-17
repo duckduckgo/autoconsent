@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { encodeRules, decodeRules, buildStrings } from '../../lib/encoding';
+import { encodeRules, decodeRules, buildStrings, IndexedCMPRuleset } from '../../lib/encoding';
 import { AutoConsentCMPRule, AutoConsentRuleStep } from '../../lib/rules';
 import { autoconsent } from '../../rules/rules.json';
 import AutoConsent from '../../lib/web';
@@ -89,6 +89,55 @@ describe('RuleCompaction', () => {
         });
         expect(decoded).to.have.length(1);
         expect(decoded[0].name).to.equal('test');
+    });
+
+    function validateRulesetIndex(encoded: IndexedCMPRuleset) {
+        expect(encoded.index).to.exist;
+        // validate index ranges
+        expect(encoded.index.genericRuleRange[0]).to.be.lessThanOrEqual(encoded.index.genericRuleRange[1], 'Generic rule range is valid');
+        expect(encoded.index.frameRuleRange[0]).to.be.lessThanOrEqual(encoded.index.frameRuleRange[1], 'Frame rule range is valid');
+        expect(encoded.index.specificRuleRange[0]).to.be.lessThanOrEqual(
+            encoded.index.specificRuleRange[1],
+            'Specific rule range is valid',
+        );
+        expect(encoded.index.specificRuleRange[1]).to.be.equal(encoded.r.length, 'Specific rule range ends at the end of the rule list');
+        // validate ordering
+        expect(encoded.index.genericRuleRange[0]).to.equal(0, 'Generic rules should be first');
+        expect(encoded.index.frameRuleRange[0]).to.be.lessThanOrEqual(
+            encoded.index.genericRuleRange[1],
+            'Frame rules should follow generic rules',
+        );
+        expect(encoded.index.specificRuleRange[0]).to.be.lessThanOrEqual(
+            encoded.index.frameRuleRange[1],
+            'Specific rules should follow frame rules',
+        );
+        // validate string indexes
+        expect(encoded.index.genericStringEnd).to.be.lessThanOrEqual(encoded.s.length, 'Frame strings are within string array.');
+        expect(encoded.index.frameStringEnd).to.be.lessThanOrEqual(encoded.s.length, 'Frame strings are within string array.');
+    }
+
+    it('decodeRules: generates an index for efficient filtering', () => {
+        const rules: AutoConsentCMPRule[] = autoconsent;
+        const encoded = encodeRules(rules, null);
+        validateRulesetIndex(encoded);
+    });
+
+    it('decodedRules: generates a valid index with no generic rules', () => {
+        const rules: AutoConsentCMPRule[] = autoconsent.filter((r) => r.runContext?.urlPattern);
+        const encoded = encodeRules(rules, null);
+        validateRulesetIndex(encoded);
+    });
+
+    it('decodedRules: generates a valid index with no frame rules', () => {
+        const rules: AutoConsentCMPRule[] = autoconsent.filter((r) => !r.runContext?.frame);
+        const encoded = encodeRules(rules, null);
+        validateRulesetIndex(encoded);
+    });
+
+    it('decodedRules: generates a valid index with no specific rules', () => {
+        const rules: AutoConsentCMPRule[] = autoconsent.filter((r) => !r.runContext?.urlPattern);
+        const encoded = encodeRules(rules, null);
+        validateRulesetIndex(encoded);
     });
 
     describe('buildStrings: minimizes string index diff', () => {

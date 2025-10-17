@@ -191,15 +191,24 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
         return a.name.localeCompare(b.name);
     });
 
-    const genericRuleEnd = rules.findIndex((r) => {
+    let genericRuleEnd = rules.findIndex((r) => {
         return r.runContext?.urlPattern;
     });
-    const frameRuleStart = rules.findIndex((r) => {
+    if (genericRuleEnd === -1) {
+        genericRuleEnd = rules.length;
+    }
+    let frameRuleStart = rules.findIndex((r) => {
         return r.runContext?.frame === true;
     });
-    const frameRuleEnd = rules.findIndex((r, i) => {
+    if (frameRuleStart === -1) {
+        frameRuleStart = genericRuleEnd;
+    }
+    let frameRuleEnd = rules.findIndex((r, i) => {
         return !r.runContext?.frame && i >= frameRuleStart;
     });
+    if (frameRuleEnd === -1) {
+        frameRuleEnd = rules.length;
+    }
 
     const genericStrings = buildStrings(existingCompactRules?.s || [], rules.slice(0, genericRuleEnd));
     const frameStrings = buildStrings(genericStrings, rules.slice(0, frameRuleEnd));
