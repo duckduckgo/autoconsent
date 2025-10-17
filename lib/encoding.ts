@@ -174,7 +174,7 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
     });
 
     const genericRuleEnd = rules.findIndex((r) => {
-        return r.runContext?.urlPattern && r.runContext.urlPattern !== '';
+        return r.runContext?.urlPattern;
     });
     const frameRuleStart = rules.findIndex((r) => {
         return r.runContext?.frame === true;
