@@ -16,6 +16,8 @@ async function init() {
     const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
     const generatedOnRadio = document.querySelector('input#generated-on') as HTMLInputElement;
     const generatedOffRadio = document.querySelector('input#generated-off') as HTMLInputElement;
+    const heuristicActionOnRadio = document.querySelector('input#heuristic-action-on') as HTMLInputElement;
+    const heuristicActionOffRadio = document.querySelector('input#heuristic-action-off') as HTMLInputElement;
     const visualTestOnRadio = document.querySelector('input#visual-test-on') as HTMLInputElement;
     const visualTestOffRadio = document.querySelector('input#visual-test-off') as HTMLInputElement;
     const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
@@ -102,6 +104,12 @@ async function init() {
         generatedOffRadio.checked = true;
     }
 
+    if (autoconsentConfig.enableHeuristicAction) {
+        heuristicActionOnRadio.checked = true;
+    } else {
+        heuristicActionOffRadio.checked = true;
+    }
+
     if (autoconsentConfig.visualTest) {
         visualTestOnRadio.checked = true;
     } else {
@@ -153,6 +161,13 @@ async function init() {
     }
     generatedOnRadio.addEventListener('change', generatedChange);
     generatedOffRadio.addEventListener('change', generatedChange);
+
+    function heuristicActionChange() {
+        autoconsentConfig.enableHeuristicAction = heuristicActionOnRadio.checked;
+        storageSet({ config: autoconsentConfig });
+    }
+    heuristicActionOnRadio.addEventListener('change', heuristicActionChange);
+    heuristicActionOffRadio.addEventListener('change', heuristicActionChange);
 
     function visualTestChange() {
         autoconsentConfig.visualTest = visualTestOnRadio.checked;
