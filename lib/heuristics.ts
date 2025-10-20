@@ -1,3 +1,5 @@
+import { NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './button-patterns';
+
 interface ButtonData {
     text: string;
     selector: string;
@@ -7,8 +9,6 @@ interface PopupData {
     text: string;
     selector: string;
     buttons: ButtonData[];
-    llmMatch?: boolean;
-    regexMatch?: boolean;
     rejectButtons?: ButtonData[];
     otherButtons?: ButtonData[];
 }
@@ -105,10 +105,10 @@ export const DETECT_PATTERNS = [
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 
-export function checkHeuristicPatterns() {
-    const allText = document.documentElement?.innerText;
+export function checkHeuristicPatterns(allText: string) {
     const patterns = [];
     const snippets = [];
+
     for (const p of DETECT_PATTERNS) {
         const matches = allText?.match(p);
         if (matches) {
@@ -119,7 +119,75 @@ export function checkHeuristicPatterns() {
     return { patterns, snippets };
 }
 
-export function getPotentialPopups() {
+export function getActionablePopups(): PopupData[] {
+    const popups = getPotentialPopups();
+    const result = popups.reduce((acc, popup) => {
+        const popupText = popup.text?.trim();
+        if (popupText) {
+            const { patterns } = checkHeuristicPatterns(popupText);
+            if (patterns.length > 0) {
+                const { rejectButtons, otherButtons } = classifyButtons(popup.buttons);
+                if (rejectButtons.length > 0) {
+                    acc.push({
+                        ...popup,
+                        rejectButtons,
+                        otherButtons,
+                    });
+                }
+            }
+        }
+        return acc;
+    }, [] as PopupData[]);
+    return result;
+}
+
+function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; otherButtons: ButtonData[] } {
+    const rejectButtons = [];
+    const otherButtons = [];
+    for (const button of buttons) {
+        if (isRejectButton(button.text)) {
+            rejectButtons.push(button);
+        } else {
+            otherButtons.push(button);
+        }
+    }
+    return {
+        rejectButtons,
+        otherButtons,
+    };
+}
+
+function isRejectButton(buttonText: string): boolean {
+    if (!buttonText) {
+        return false;
+    }
+    const cleanedButtonText = cleanButtonText(buttonText);
+    return (
+        !NEVER_MATCH_PATTERNS.some((p) => p.test(cleanedButtonText)) &&
+        REJECT_PATTERNS.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText)
+    );
+}
+
+function cleanButtonText(buttonText: string): string {
+    // lowercase
+    let result = buttonText.toLowerCase();
+    // remove special characters
+    result = result.replace(/[“”"'/#&[\]→✕×⟩❯><✗×‘’›«»]+/g, '');
+    // remove emojis
+    result = result.replace(
+        /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u2600-\u26FF\u2700-\u27BF\u{1F900}-\u{1F9FF}\u{1FA70}-\u{1FAFF}]/gu,
+        '',
+    );
+    // remove newlines
+    result = result.replace(/\n+/g, ' ');
+    // remove multiple spaces
+    result = result.replace(/\s+/g, ' ');
+    // strip whitespace around the text
+    result = result.trim();
+    return result;
+}
+
+function getPotentialPopups() {
     const isFramed = window.top !== window || location.ancestorOrigins?.length > 0;
     // do not inspect frames that are more than one level deep
     if (isFramed && window.parent && window.parent !== window.top) {
@@ -185,7 +253,6 @@ function getPopupLikeElements(): HTMLElement[] {
     }
     return excludeContainers(found);
 }
-
 
 /**
  * Get a unique selector for an element
@@ -263,14 +330,16 @@ function getButtonData(el: HTMLElement): ButtonData[] {
     }));
 }
 
-
 /**
  * Get the selector for an element
  * @param el - The element to get the selector for
  * @param specificity - details to add to the selector
  * @returns The selector for the element
  */
-function getSelector(el: HTMLElement, specificity: { order?: boolean, ids?: boolean, dataAttributes?: boolean, classes?: boolean, absoluteOrder?: boolean, testid?: boolean }): string {
+function getSelector(
+    el: HTMLElement,
+    specificity: { order?: boolean; ids?: boolean; dataAttributes?: boolean; classes?: boolean; absoluteOrder?: boolean; testid?: boolean },
+): string {
     let element = el;
     let parent;
     let result = '';

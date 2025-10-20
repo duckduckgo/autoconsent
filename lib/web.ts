@@ -336,7 +336,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
-            const { patterns, snippets } = checkHeuristicPatterns();
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText);
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
