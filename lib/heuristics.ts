@@ -8,7 +8,8 @@ export const DETECT_PATTERNS = [
     /reject all/gi,
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /by clicking.*(accept|agree|allow)/gi,
-    /by continuing/gi,
+    /(by continuing.*cookie)|(cookie.*by continuing)/gi,
+    /(by continuing.*privacy)|(privacy.*by continuing)/gi,
     /we (use|serve)( optional)? cookies/gi,
     /we are using cookies/gi,
     /use of cookies/gi,
