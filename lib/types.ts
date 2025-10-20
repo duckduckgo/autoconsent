@@ -102,3 +102,16 @@ export type ConsentState = {
     heuristicSnippets: string[]; // Matched heuristic snippets
     selfTest: boolean | null; // null if no self test was run, otherwise it holds the result of the self test.
 };
+
+export interface ButtonData {
+    text: string;
+    selector: string;
+}
+
+export interface PopupData {
+    text: string;
+    selector: string;
+    buttons: ButtonData[];
+    rejectButtons?: ButtonData[];
+    otherButtons?: ButtonData[];
+}

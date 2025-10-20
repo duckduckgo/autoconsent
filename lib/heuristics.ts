@@ -1,17 +1,5 @@
 import { NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './button-patterns';
-
-interface ButtonData {
-    text: string;
-    selector: string;
-}
-
-interface PopupData {
-    text: string;
-    selector: string;
-    buttons: ButtonData[];
-    rejectButtons?: ButtonData[];
-    otherButtons?: ButtonData[];
-}
+import { ButtonData, PopupData } from './types';
 
 // TODO: check for false positive detections per pattern
 export const DETECT_PATTERNS = [

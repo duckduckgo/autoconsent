@@ -1,9 +1,10 @@
-import { AutoCMP, DomActionsProvider } from '../types';
+import { AutoCMP, DomActionsProvider, PopupData } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
 import { highlightNode, unhighlightNode } from '../utils';
+import { getActionablePopups } from '../heuristics';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -383,5 +384,75 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             }
         }
         return true;
+    }
+}
+
+export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
+    popups: PopupData[] = [];
+
+    constructor(autoconsentInstance: AutoConsent) {
+        super(autoconsentInstance);
+        this.name = 'HEURISTIC';
+        this.runContext = {
+            main: true,
+            frame: true,
+        } as RunContext;
+    }
+
+    get hasSelfTest(): boolean {
+        return true;
+    }
+
+    get isIntermediate(): boolean {
+        return false;
+    }
+
+    get isCosmetic(): boolean {
+        return false;
+    }
+
+    detectCmp(): Promise<boolean> {
+        this.popups = getActionablePopups();
+        if (this.popups.length > 0) {
+            return Promise.resolve(true);
+        }
+        return Promise.resolve(false);
+    }
+
+    async detectPopup() {
+        if (this.popups.length > 0) {
+            if (this.popups.length > 1 || (this.popups[0].rejectButtons && this.popups[0].rejectButtons.length > 1)) {
+                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple reject buttons');
+            }
+            return true;
+        }
+        return false;
+    }
+
+    optOut(): Promise<boolean> {
+        // use only the first found popup candidate
+        const buttonSelector = this.popups[0].rejectButtons?.[0].selector;
+        if (buttonSelector) {
+            return this.click(buttonSelector, false);
+        }
+        return Promise.resolve(false);
+    }
+
+    optIn(): Promise<boolean> {
+        throw new Error('Not Implemented');
+    }
+
+    openCmp(): Promise<boolean> {
+        throw new Error('Not Implemented');
+    }
+
+    async test(): Promise<boolean> {
+        const buttonSelector = this.popups[0].rejectButtons?.[0].selector;
+        if (buttonSelector) {
+            await this.wait(500);
+            return this.elementVisible(buttonSelector, 'none');
+        } else {
+            return false;
+        }
     }
 }
