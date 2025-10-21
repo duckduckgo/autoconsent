@@ -1,3 +1,37 @@
+# v14.32.0 (Tue Oct 21 2025)
+
+#### 🚀 Enhancement
+
+- Add rule for real-cookie-banner [#1038](https://github.com/duckduckgo/autoconsent/pull/1038) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Remove cookie-notice and notice-cookie cosmetic rules [#1043](https://github.com/duckduckgo/autoconsent/pull/1043) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix webextension in Safari/Webkit [#1042](https://github.com/duckduckgo/autoconsent/pull/1042) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.31.0 (Tue Oct 14 2025)
+
+#### 🚀 Enhancement
+
+- [1 / 4] 🤖 Add autoconsent rules for 200 sites (7 need review) [#1018](https://github.com/duckduckgo/autoconsent/pull/1018) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#1023](https://github.com/duckduckgo/autoconsent/pull/1023) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1037](https://github.com/duckduckgo/autoconsent/pull/1037) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1036](https://github.com/duckduckgo/autoconsent/pull/1036) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.30.0 (Tue Oct 07 2025)
 
 #### 🚀 Enhancement
