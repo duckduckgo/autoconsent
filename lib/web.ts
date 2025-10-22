@@ -40,6 +40,9 @@ export default class AutoConsent {
         heuristicPatterns: [],
         heuristicSnippets: [],
         selfTest: null,
+        clicks: 0,
+        startTime: 0,
+        endTime: 0,
     };
     domActions: DomActions;
     filtersEngine?: FiltersEngine;
@@ -404,7 +407,7 @@ export default class AutoConsent {
     }
 
     async handlePopup(cmp: AutoCMP): Promise<boolean> {
-        this.updateState({ lifecycle: 'openPopupDetected' });
+        this.updateState({ lifecycle: 'openPopupDetected', startTime: Date.now() });
         if (this.shouldPrehide && !this.state.prehideOn) {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
@@ -454,11 +457,18 @@ export default class AutoConsent {
         });
 
         if (optOutResult && this.foundCmp && !this.foundCmp.isIntermediate) {
+            this.state.endTime = Date.now();
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp?.name,
                 isCosmetic: this.foundCmp?.isCosmetic,
                 url: location.href,
+                duration: this.state.endTime - this.state.startTime,
+                totalClicks: this.state.clicks,
             });
             this.updateState({ lifecycle: 'done' });
         } else {
@@ -497,11 +507,18 @@ export default class AutoConsent {
         });
 
         if (optInResult && this.foundCmp && !this.foundCmp.isIntermediate) {
+            this.state.endTime = Date.now();
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp.name,
                 isCosmetic: this.foundCmp.isCosmetic,
                 url: location.href,
+                duration: this.state.endTime - this.state.startTime,
+                totalClicks: this.state.clicks,
             });
             this.updateState({ lifecycle: 'done' });
         } else {

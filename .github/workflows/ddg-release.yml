@@ -207,6 +207,7 @@ jobs:
               with:
                   path: apple-monorepo/
                   add-paths: |
+                      package.json
                       iOS/package.json
                       iOS/package-lock.json
                       iOS/DuckDuckGo/Autoconsent/
