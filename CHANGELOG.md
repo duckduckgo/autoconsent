@@ -1,3 +1,33 @@
+# v14.32.1 (Wed Oct 22 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Add package.json to paths in ddg-release workflow ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.32.0 (Tue Oct 21 2025)
+
+#### 🚀 Enhancement
+
+- Add rule for real-cookie-banner [#1038](https://github.com/duckduckgo/autoconsent/pull/1038) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Remove cookie-notice and notice-cookie cosmetic rules [#1043](https://github.com/duckduckgo/autoconsent/pull/1043) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix webextension in Safari/Webkit [#1042](https://github.com/duckduckgo/autoconsent/pull/1042) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.31.0 (Tue Oct 14 2025)
 
 #### 🚀 Enhancement

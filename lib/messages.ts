@@ -78,6 +78,8 @@ export type DoneMessage = {
     cmp: string;
     isCosmetic: boolean;
     url: string;
+    duration: number;
+    totalClicks: number;
 };
 
 export type ErrorMessage = {
