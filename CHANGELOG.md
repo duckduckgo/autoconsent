@@ -1,3 +1,15 @@
+# v14.32.1 (Wed Oct 22 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Add package.json to paths in ddg-release workflow ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.32.0 (Tue Oct 21 2025)
 
 #### 🚀 Enhancement
