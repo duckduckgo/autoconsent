@@ -1,8 +1,8 @@
 {
-    "name": "amazon.com",
+    "name": "track.amazon.com",
     "vendorUrl": "https://track.amazon.co.uk/",
     "runContext": {
-        "urlPattern": "\\.amazon\\."
+        "urlPattern": "^https://[a-z]*\\.amazon\\."
     },
     "prehideSelectors": ["div:has(> button#accept-button):has(> button#decline-button)"],
     "detectCmp": [{ "exists": "button#accept-button,button#decline-button" }],

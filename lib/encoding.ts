@@ -43,6 +43,17 @@ export type CompactCMPRuleset = {
     r: CompactCMPRule[];
 };
 
+export type IndexedCMPRuleset = CompactCMPRuleset & {
+    // Index for quick filtering of rules and strings, when the ruleset is sorted appropriately (see encodeRules).
+    index: {
+        genericRuleRange: [number, number]; // [startIndex, endIndex] of rules that are generic
+        frameRuleRange: [number, number]; // [startIndex, endIndex] of rules that run in frames
+        specificRuleRange: [number, number]; // [startIndex, endIndex] of rules that are specific
+        genericStringEnd: number; // end index of strings that are used by generic rules
+        frameStringEnd: number; // end index of strings that are used by frame rules
+    };
+};
+
 /**
  * Mapping of long to short key for rule step keys that should be shortened, with their value
  * replaced by an array offset.
@@ -119,6 +130,7 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
     existingStrings.slice(0, usedStrings.size).forEach((s, i) => {
         if (usedStrings.has(s)) {
             strings[i] = s;
+            usedStrings.delete(s); // remove from set so if the existing string appears twice, we only keep one.
         }
     });
     // copy remaining strings into empty slots. This will also place any existing strings whose previous indices are out of the bounds of the new array.
@@ -131,8 +143,78 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
     return strings;
 }
 
-export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): CompactCMPRuleset {
-    const strings = buildStrings(existingCompactRules?.s || [], rules);
+/**
+ * Encoding the rules into the compact format, with rules and strings sorted for efficient filtering.
+ *
+ * The ruleset is sorted such that:
+ * 1. Generic rules (no urlPattern) come first
+ * 2. Rules that run in frames come next
+ * 3. Specific rules (with urlPattern) come last
+ * Within each category, rules are sorted by name.
+ * Strings are sorted such that:
+ * 1. Strings used by generic rules come first
+ * 2. Strings used by frame rules come next
+ * 3. Strings used by specific rules come last
+ * All indicies are inclusive of start index and exclusive of end index.
+ * @param rules - The rules to encode.
+ * @param existingCompactRules - The existing compact rules to use as a base.
+ * @returns The encoded ruleset.
+ */
+export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: CompactCMPRuleset | null): IndexedCMPRuleset {
+    rules.sort((a, b) => {
+        const isGeneric = (r: AutoConsentCMPRule) => !r.runContext?.urlPattern;
+        const isFrame = (r: AutoConsentCMPRule) => r.runContext?.frame === true;
+        if (isGeneric(a) && !isGeneric(b)) {
+            return -1;
+        }
+        if (!isGeneric(a) && isGeneric(b)) {
+            return 1;
+        }
+        // both generic, sort frames to the end
+        if (isGeneric(a) && isGeneric(b)) {
+            if (isFrame(a) && !isFrame(b)) {
+                return 1;
+            }
+            if (!isFrame(a) && isFrame(b)) {
+                return -1;
+            }
+        }
+        // both specific, sort frames to the front
+        if (!isGeneric(a) && !isGeneric(b)) {
+            if (isFrame(a) && !isFrame(b)) {
+                return -1;
+            }
+            if (!isFrame(a) && isFrame(b)) {
+                return 1;
+            }
+        }
+        // all else being equal, sort by name
+        return a.name.localeCompare(b.name);
+    });
+
+    let genericRuleEnd = rules.findIndex((r) => {
+        return r.runContext?.urlPattern;
+    });
+    if (genericRuleEnd === -1) {
+        genericRuleEnd = rules.length;
+    }
+    let frameRuleStart = rules.findIndex((r) => {
+        return r.runContext?.frame === true;
+    });
+    if (frameRuleStart === -1) {
+        frameRuleStart = genericRuleEnd;
+    }
+    let frameRuleEnd = rules.findIndex((r, i) => {
+        return !r.runContext?.frame && i >= frameRuleStart;
+    });
+    if (frameRuleEnd === -1) {
+        frameRuleEnd = rules.length;
+    }
+
+    const genericStrings = buildStrings(existingCompactRules?.s || [], rules.slice(0, genericRuleEnd));
+    const frameStrings = buildStrings(genericStrings, rules.slice(0, frameRuleEnd));
+    // add back remaining strings from existing ruleset, if any, so specific string ordering can be preserved.
+    const strings = buildStrings(frameStrings.concat(existingCompactRules?.s.slice(frameStrings.length) || []), rules);
 
     function encodeRuleStep(step: AutoConsentRuleStep): CompactCMPRuleStep {
         const clonedStep: CompactCMPRuleStep = { ...step };
@@ -178,6 +260,13 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
         v: 1,
         s: strings,
         r: compactRules,
+        index: {
+            genericRuleRange: [0, genericRuleEnd],
+            frameRuleRange: [frameRuleStart, frameRuleEnd],
+            specificRuleRange: [genericRuleEnd, compactRules.length],
+            genericStringEnd: genericStrings.length,
+            frameStringEnd: frameStrings.length,
+        },
     };
 }
 
@@ -324,4 +413,94 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
         } as AutoConsentCMPRule);
     });
     return dedupedRules;
+}
+
+function clearUnusedStrings(ruleset: CompactCMPRuleset, ignoreBeforeIndex = 0) {
+    const { v, s, r } = ruleset;
+    const usedStringIds = new Set<number>();
+    function addStringIdsFromRuleSteps(steps: CompactCMPRuleStep[]) {
+        steps.forEach((step) => {
+            for (const [, shortKey] of compactedRuleSteps) {
+                if (step[shortKey] !== undefined) {
+                    usedStringIds.add(step[shortKey] as number);
+                }
+            }
+            if (step.if) {
+                addStringIdsFromRuleSteps([step.if]);
+            }
+            if (step.then) {
+                addStringIdsFromRuleSteps(step.then);
+            }
+            if (step.else) {
+                addStringIdsFromRuleSteps(step.else);
+            }
+            if (step.any) {
+                addStringIdsFromRuleSteps(step.any);
+            }
+        });
+    }
+    ruleset.r.forEach((rule) => {
+        addStringIdsFromRuleSteps(rule[6]);
+        addStringIdsFromRuleSteps(rule[7]);
+        addStringIdsFromRuleSteps(rule[8]);
+        addStringIdsFromRuleSteps(rule[9]);
+        rule[5].forEach((id) => usedStringIds.add(id));
+    });
+    return {
+        v,
+        r,
+        s: s.slice(0, Math.max(...usedStringIds) + 1).map((str, idx) => {
+            if (idx < ignoreBeforeIndex || usedStringIds.has(idx)) {
+                return str;
+            }
+            return '';
+        }),
+    };
+}
+
+function shouldRunRuleInContext(rule: CompactCMPRule, mainFrame: boolean, url: string): boolean {
+    const runContext = rule[4];
+    if (mainFrame && runContext === 1) {
+        return false;
+    }
+    if (!mainFrame && [20, 22, 10, 12].includes(runContext)) {
+        return false;
+    }
+    const urlPattern = rule[3];
+    if (urlPattern && urlPattern !== '' && url.match(urlPattern) === null) {
+        return false;
+    }
+    return true;
+}
+
+export function filterCompactRules(rules: IndexedCMPRuleset, context: { url: string; mainFrame: boolean }): CompactCMPRuleset {
+    const { v, s, r, index } = rules;
+    const { url, mainFrame } = context;
+
+    const shouldRunInContext = (rule: CompactCMPRule) => shouldRunRuleInContext(rule, mainFrame, url);
+
+    if (!mainFrame) {
+        const ruleset = {
+            v,
+            s: s.slice(0, index.frameStringEnd),
+            r: r.slice(index.frameRuleRange[0], index.frameRuleRange[1]).filter(shouldRunInContext),
+        };
+        return clearUnusedStrings(ruleset);
+    }
+    const genericRules = r.slice(index.genericRuleRange[0], index.genericRuleRange[1]);
+    const specificRules = r.slice(index.specificRuleRange[0], index.specificRuleRange[1]).filter(shouldRunInContext);
+
+    if (specificRules.length > 0) {
+        const ruleset = {
+            v,
+            s,
+            r: [...genericRules, ...specificRules],
+        };
+        return clearUnusedStrings(ruleset);
+    }
+    return {
+        v,
+        s: s.slice(0, index.genericStringEnd),
+        r: genericRules,
+    };
 }
