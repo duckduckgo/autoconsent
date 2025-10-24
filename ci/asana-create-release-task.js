@@ -131,7 +131,7 @@ const asanaCreateTasks = async () => {
     const duplicateTaskResult = await waitForJobSuccess(duplicateTaskJobGid);
     console.error('duplicateTaskResult:', duplicateTaskResult);
 
-    const finalNotes = updatedNotes.replace('<li>[[pr_url]]</li>', version).replace('<li>[[extra_content]]</li>', version);
+    const finalNotes = updatedNotes.replace('<li>[[extra_content]]</li>', version);
 
     console.error('finalNotes:', finalNotes);
     updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: finalNotes });

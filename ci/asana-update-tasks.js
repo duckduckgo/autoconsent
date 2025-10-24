@@ -40,7 +40,7 @@ const asanaUpdateTasks = async () => {
 
         const { html_notes: notes } = await asana.tasks.getTask(platformObj.taskGid, { opt_fields: 'html_notes' });
         const prLink = getLink(prUrls[platformName], `${platformObj.displayName} PR`);
-        const updatedNotes = prLink + '\n\n' + notes;
+        const updatedNotes = notes.replace('[[pr_url]]', prLink);
 
         await asana.tasks.updateTask(platformObj.taskGid, { html_notes: updatedNotes });
     }
