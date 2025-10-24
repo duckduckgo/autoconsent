@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./web-actions.test');
+            });
+        </script>
+
+        <!-- Test elements for actions -->
+        <div id="action-container"></div>
+    </body>
+</html>
