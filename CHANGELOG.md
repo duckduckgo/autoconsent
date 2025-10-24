@@ -1,3 +1,19 @@
+# v14.33.1 (Fri Oct 24 2025)
+
+#### 🐛 Bug Fix
+
+- Index compact rules for faster filtering [#1035](https://github.com/duckduckgo/autoconsent/pull/1035) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Add package-lock.json to release workflow paths ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.33.0 (Thu Oct 23 2025)
 
 #### 🚀 Enhancement
