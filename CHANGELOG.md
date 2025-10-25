@@ -1,3 +1,15 @@
+# v14.33.2 (Sat Oct 25 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Fix asana platform tasks ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.33.1 (Fri Oct 24 2025)
 
 #### 🐛 Bug Fix
