@@ -5,7 +5,7 @@ import { BackgroundMessage, InitMessage } from './messages';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
-import { AutoConsentCMP } from './cmps/base';
+import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
@@ -321,6 +321,16 @@ export default class AutoConsent {
         // check generic popups
         await Promise.all(otherRules.map(detectCmp));
 
+        if (this.config.enableHeuristicAction && foundCMPs.length === 0) {
+            // when enabled, try to use heuristics to find a popup
+            const heuristicCmp = new AutoConsentHeuristicCMP(this);
+            const result = await heuristicCmp.detectCmp();
+            if (result) {
+                foundCMPs.push(heuristicCmp);
+                logsConfig.lifecycle && console.log('Heuristic CMP found');
+            }
+        }
+
         if (foundCMPs.length === 0 && retries > 0) {
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
@@ -339,7 +349,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
-            const { patterns, snippets } = checkHeuristicPatterns();
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText);
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))

@@ -60,6 +60,7 @@ export type Config = {
     prehideTimeout: number;
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
+    enableHeuristicAction: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
@@ -104,3 +105,16 @@ export type ConsentState = {
     startTime: number; // The time the script started.
     endTime: number; // The time the script ended.
 };
+
+export interface ButtonData {
+    text: string;
+    selector: string;
+}
+
+export interface PopupData {
+    text: string;
+    selector: string;
+    buttons: ButtonData[];
+    rejectButtons?: ButtonData[];
+    otherButtons?: ButtonData[];
+}
