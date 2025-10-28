@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_groupe3f.fr_pp0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.groupe3f.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?groupe3f\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3):not([id])",
+            "comment": "✗ Deny all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
