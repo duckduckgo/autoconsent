@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_stadsschouwburghaarlem.nl_k6c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://stadsschouwburghaarlem.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stadsschouwburghaarlem\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#phx-GHJjoOxR4oZbfIrh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#phx-GHJjoOxR4oZbfIrh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#phx-GHJjoOxR4oZbfIrh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#phx-GHJjoOxR4oZbfIrh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
