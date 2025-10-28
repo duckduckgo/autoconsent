@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_volkswagen.nl_qwh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.volkswagen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?volkswagen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(3):not([id]) > button:nth-child(2)#bannerRejectButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(3):not([id]) > button:nth-child(2)#bannerRejectButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(3):not([id]) > button:nth-child(2)#bannerRejectButton",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(3):not([id]) > button:nth-child(2)#bannerRejectButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
