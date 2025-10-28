@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_telekomhilft.telekom.de_2p6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://telekomhilft.telekom.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?telekomhilft\\.telekom\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div:not([id]) > dialog:nth-child(2)#promptLayerContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#rejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div:not([id]) > dialog:nth-child(2)#promptLayerContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#rejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:not([id]) > dialog:nth-child(2)#promptLayerContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#rejectAll",
+            "comment": "Only required"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:not([id]) > dialog:nth-child(2)#promptLayerContent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#rejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
