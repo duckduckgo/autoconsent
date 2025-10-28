@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_belalp.ch_22y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.belalp.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?belalp\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
