@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_orange-telephone.com_kr5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://orange-telephone.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?orange-telephone\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
