@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_survival-kompass.de_pnp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://survival-kompass.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?survival-kompass\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentMinimal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentMinimal"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentMinimal",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentMinimal",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
