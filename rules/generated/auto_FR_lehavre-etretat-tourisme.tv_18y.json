@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lehavre-etretat-tourisme.tv_18y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://lehavre-etretat-tourisme.tv/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lehavre-etretat-tourisme\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
