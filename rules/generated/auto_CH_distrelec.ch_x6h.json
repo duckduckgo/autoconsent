@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_distrelec.ch_x6h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.distrelec.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?distrelec\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#btn-accept-essential-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#btn-accept-essential-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#btn-accept-essential-cookies",
+            "comment": "Only essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#btn-accept-essential-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
