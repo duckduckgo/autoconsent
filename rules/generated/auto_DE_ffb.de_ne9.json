@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ffb.de_ne9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ffb.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ffb\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:nth-child(1)#ensNotifyBanner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:nth-child(1)#ensNotifyBanner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:nth-child(1)#ensNotifyBanner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:nth-child(1)#ensNotifyBanner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
