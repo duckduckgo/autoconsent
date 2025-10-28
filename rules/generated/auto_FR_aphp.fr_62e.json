@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_aphp.fr_62e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.aphp.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aphp\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2)#tarteaucitronAlertBigBtnWrapper > button:nth-child(2)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2)#tarteaucitronAlertBigBtnWrapper > button:nth-child(2)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2)#tarteaucitronAlertBigBtnWrapper > button:nth-child(2)#tarteaucitronAllDenied2",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2)#tarteaucitronAlertBigBtnWrapper > button:nth-child(2)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
