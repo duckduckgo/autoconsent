@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.rs-online.com_q8x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.rs-online.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.rs-online\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
