@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_trustdeals.fr_q6a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.trustdeals.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?trustdeals\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "comment": "REFUSER TOUT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
