@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_uk.usembassy.gov_ait",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://uk.usembassy.gov/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uk\\.usembassy\\.gov/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmplz-cookiebanner-container > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmplz-cookiebanner-container > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmplz-cookiebanner-container > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
