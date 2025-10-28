@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dtv.de_w7z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dtv.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dtv\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
