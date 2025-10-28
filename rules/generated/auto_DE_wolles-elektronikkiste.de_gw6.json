@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_wolles-elektronikkiste.de_gw6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://wolles-elektronikkiste.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wolles-elektronikkiste\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen / Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
