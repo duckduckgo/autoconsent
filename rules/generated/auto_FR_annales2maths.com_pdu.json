@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_annales2maths.com_pdu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.annales2maths.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?annales2maths\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
