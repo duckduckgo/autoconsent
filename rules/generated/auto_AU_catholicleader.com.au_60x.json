@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_catholicleader.com.au_60x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://catholicleader.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?catholicleader\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
