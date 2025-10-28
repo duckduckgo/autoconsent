@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_army.mod.uk_qd2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.army.mod.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?army\\.mod\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "comment": "I DO NOT ACCEPT COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
