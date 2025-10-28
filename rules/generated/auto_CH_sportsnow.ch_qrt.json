@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_sportsnow.ch_qrt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sportsnow.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sportsnow\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).welcome.index.\\/app\\/app\\/views\\/layouts\\/application\\.html\\.erb > div:nth-child(2):not([id]).cc-window.cc-banner.cc-type-opt-in.cc-theme-block.cc-bottom.cc-color-override--1876210491 > div:nth-child(2):not([id]).cc-compliance.cc-highlight > a:nth-child(1):not([id]).cc-btn.cc-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).welcome.index.\\/app\\/app\\/views\\/layouts\\/application\\.html\\.erb > div:nth-child(2):not([id]).cc-window.cc-banner.cc-type-opt-in.cc-theme-block.cc-bottom.cc-color-override--1876210491 > div:nth-child(2):not([id]).cc-compliance.cc-highlight > a:nth-child(1):not([id]).cc-btn.cc-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).welcome.index.\\/app\\/app\\/views\\/layouts\\/application\\.html\\.erb > div:nth-child(2):not([id]).cc-window.cc-banner.cc-type-opt-in.cc-theme-block.cc-bottom.cc-color-override--1876210491 > div:nth-child(2):not([id]).cc-compliance.cc-highlight > a:nth-child(1):not([id]).cc-btn.cc-deny",
+            "comment": "Only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).welcome.index.\\/app\\/app\\/views\\/layouts\\/application\\.html\\.erb > div:nth-child(2):not([id]).cc-window.cc-banner.cc-type-opt-in.cc-theme-block.cc-bottom.cc-color-override--1876210491 > div:nth-child(2):not([id]).cc-compliance.cc-highlight > a:nth-child(1):not([id]).cc-btn.cc-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
