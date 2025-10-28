@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_newsnetwork.mayoclinic.org_hss",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://newsnetwork.mayoclinic.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?newsnetwork\\.mayoclinic\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mayo-privacy-consent-banner > div:nth-child(3)#privacy-popup-controls-div > div:not([id]) > button:nth-child(2)#mayo-privacy-opt-out",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
