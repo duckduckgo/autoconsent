@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_governmentjobs.com_5e6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.governmentjobs.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?governmentjobs\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\38 2d253d0-0bea-4d35-a6d2-8c9e8f121afc > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\38 2d253d0-0bea-4d35-a6d2-8c9e8f121afc > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\38 2d253d0-0bea-4d35-a6d2-8c9e8f121afc > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\38 2d253d0-0bea-4d35-a6d2-8c9e8f121afc > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
