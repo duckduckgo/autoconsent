@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_tescotravelmoney.com_9jk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tescotravelmoney.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tescotravelmoney\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
