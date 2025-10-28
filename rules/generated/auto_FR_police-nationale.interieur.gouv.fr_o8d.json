@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_police-nationale.interieur.gouv.fr_o8d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.police-nationale.interieur.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?police-nationale\\.interieur\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#tarteaucitronAllDenied2",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
