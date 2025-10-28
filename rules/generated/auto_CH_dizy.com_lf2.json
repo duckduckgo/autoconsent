@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_dizy.com_lf2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dizy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dizy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])",
+            "comment": "Continua senza accettare"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
