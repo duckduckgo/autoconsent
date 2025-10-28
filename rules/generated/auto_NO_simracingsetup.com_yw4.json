@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_simracingsetup.com_yw4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://simracingsetup.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?simracingsetup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie_action_close_header_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie_action_close_header_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie_action_close_header_reject",
+            "comment": "Deny All Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie_action_close_header_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
