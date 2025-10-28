@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_wr.no_grm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wr.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wr\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div:nth-child(1)#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#declineButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div:nth-child(1)#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#declineButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div:nth-child(1)#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#declineButton",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div:nth-child(1)#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#declineButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
