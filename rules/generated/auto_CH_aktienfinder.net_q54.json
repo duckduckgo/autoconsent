@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_aktienfinder.net_q54",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aktienfinder.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aktienfinder\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > cookie-consent-dataprivacy-component:nth-child(2):not([id]) > div#cookie-consent-dataprivacy > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > cookie-consent-dataprivacy-component:nth-child(2):not([id]) > div#cookie-consent-dataprivacy > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > cookie-consent-dataprivacy-component:nth-child(2):not([id]) > div#cookie-consent-dataprivacy > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > cookie-consent-dataprivacy-component:nth-child(2):not([id]) > div#cookie-consent-dataprivacy > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
