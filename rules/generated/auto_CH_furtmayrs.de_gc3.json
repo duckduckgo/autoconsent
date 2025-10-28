@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_furtmayrs.de_gc3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.furtmayrs.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?furtmayrs\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Nur notwendige Cookies verwenden"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
