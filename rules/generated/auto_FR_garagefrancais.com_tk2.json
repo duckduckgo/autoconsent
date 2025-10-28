@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_garagefrancais.com_tk2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://garagefrancais.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?garagefrancais\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-rsssl=\"\\31 \"][data-burst_id=\"\\30 \"][data-burst_type=\"front-page\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-rsssl=\"\\31 \"][data-burst_id=\"\\30 \"][data-burst_type=\"front-page\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-rsssl=\"\\31 \"][data-burst_id=\"\\30 \"][data-burst_type=\"front-page\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-rsssl=\"\\31 \"][data-burst_id=\"\\30 \"][data-burst_type=\"front-page\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
