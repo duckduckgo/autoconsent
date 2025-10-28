@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_kingston.com_th7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kingston.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kingston\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#b186aee9-4f0c-4ee8-8f7b-4c2437b4d535 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#b186aee9-4f0c-4ee8-8f7b-4c2437b4d535 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#b186aee9-4f0c-4ee8-8f7b-4c2437b4d535 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#b186aee9-4f0c-4ee8-8f7b-4c2437b4d535 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
