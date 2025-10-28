@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_link.aps.org_wk6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://link.aps.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?link\\.aps\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#bc9878c5-6702-4db5-99c8-4c4f7cb21a25 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#bc9878c5-6702-4db5-99c8-4c4f7cb21a25 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#bc9878c5-6702-4db5-99c8-4c4f7cb21a25 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#bc9878c5-6702-4db5-99c8-4c4f7cb21a25 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
