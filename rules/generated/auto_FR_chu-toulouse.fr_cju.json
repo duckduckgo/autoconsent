@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_chu-toulouse.fr_cju",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.chu-toulouse.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chu-toulouse\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(2)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronToutRefuser"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(2)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronToutRefuser"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(2)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronToutRefuser",
+            "comment": " Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(2)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronToutRefuser",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
