@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_citizensinformation.ie_r2x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.citizensinformation.ie/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?citizensinformation\\.ie/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies-btn",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
