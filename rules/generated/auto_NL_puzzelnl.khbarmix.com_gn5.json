@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_puzzelnl.khbarmix.com_gn5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://puzzelnl.khbarmix.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?puzzelnl\\.khbarmix\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
