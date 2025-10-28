@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_arthritis.ca_zrd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arthritis.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arthritis\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
