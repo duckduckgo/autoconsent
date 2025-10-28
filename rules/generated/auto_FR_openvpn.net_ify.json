@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_openvpn.net_ify",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://openvpn.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?openvpn\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#e3e23cef-64b1-4e2c-b5f2-b9edd21fac5a > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#e3e23cef-64b1-4e2c-b5f2-b9edd21fac5a > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#e3e23cef-64b1-4e2c-b5f2-b9edd21fac5a > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#e3e23cef-64b1-4e2c-b5f2-b9edd21fac5a > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
