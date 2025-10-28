@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_der-hauseigentuemer.ch_xjn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://der-hauseigentuemer.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?der-hauseigentuemer\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieconsent\\:window > div#cookieconsent\\:body > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
