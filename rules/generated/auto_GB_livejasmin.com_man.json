@@ -13,34 +13,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieContent\"]"
+            "exists": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > button:nth-child(4)#reject-all-cookies-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".over-18__manage-cookies-link"
+            "visible": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > button:nth-child(4)#reject-all-cookies-btn"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": ".over-18__manage-cookies-link"
+            "wait": 500
         },
         {
-            "waitFor": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieSwitch\"]"
-        },
-        {
-            "click": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieSwitch\"]:checked",
-            "all": true,
-            "optional": true
-        },
-        {
-            "click": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieContent\"] > [data-testid=\"ButtonStyledButton\"]"
+            "waitForThenClick": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > button:nth-child(4)#reject-all-cookies-btn",
+            "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "cookieContains": "is_personalized_content_consent_given=0"
+            "waitForVisible": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > button:nth-child(4)#reject-all-cookies-btn",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
