@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_bto.org_zsj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bto.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bto\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(3):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
