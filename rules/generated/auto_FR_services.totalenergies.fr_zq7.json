@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_services.totalenergies.fr_zq7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://services.totalenergies.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?services\\.totalenergies\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(3):not([id]) > button#teal-decline-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(3):not([id]) > button#teal-decline-consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(3):not([id]) > button#teal-decline-consent",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(3):not([id]) > button#teal-decline-consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
