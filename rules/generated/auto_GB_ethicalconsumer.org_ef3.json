@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_ethicalconsumer.org_ef3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ethicalconsumer.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ethicalconsumer\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Accept only essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
