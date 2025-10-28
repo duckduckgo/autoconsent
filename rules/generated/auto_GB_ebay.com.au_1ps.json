@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_ebay.com.au_1ps",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ebay.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ebay\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(6)#widgets-placeholder > div:nth-child(1):not([id]) > section:nth-child(2)#gdpr-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-banner-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
