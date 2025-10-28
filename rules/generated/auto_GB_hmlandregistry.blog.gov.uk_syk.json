@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_hmlandregistry.blog.gov.uk_syk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://hmlandregistry.blog.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hmlandregistry\\.blog\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
