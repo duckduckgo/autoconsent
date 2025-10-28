@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_tfa-dostmann.de_qjp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tfa-dostmann.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tfa-dostmann\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper-fluid > div:nth-child(9):not([id]) > div#BorlabsCookieBoxWrap > div#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper-fluid > div:nth-child(9):not([id]) > div#BorlabsCookieBoxWrap > div#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper-fluid > div:nth-child(9):not([id]) > div#BorlabsCookieBoxWrap > div#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper-fluid > div:nth-child(9):not([id]) > div#BorlabsCookieBoxWrap > div#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > p:nth-child(6):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
