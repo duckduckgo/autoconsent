@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_login.ionos.de_38z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://login.ionos.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?login\\.ionos\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > p:nth-child(1):not([id]) > button:nth-child(4)#confirmSelection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > p:nth-child(1):not([id]) > button:nth-child(4)#confirmSelection"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > p:nth-child(1):not([id]) > button:nth-child(4)#confirmSelection",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > p:nth-child(1):not([id]) > button:nth-child(4)#confirmSelection",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
