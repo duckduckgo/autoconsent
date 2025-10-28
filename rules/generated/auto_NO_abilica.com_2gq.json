@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_abilica.com_2gq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://abilica.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?abilica\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coi-cookie > div:nth-child(1)#c-left > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coi-cookie > div:nth-child(1)#c-left > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coi-cookie > div:nth-child(1)#c-left > a:nth-child(3):not([id])",
+            "comment": "Endast nödvändiga cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coi-cookie > div:nth-child(1)#c-left > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
