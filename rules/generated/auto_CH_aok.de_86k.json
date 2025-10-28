@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_aok.de_86k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.aok.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aok\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "Optionale Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
