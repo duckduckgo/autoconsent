@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
             "comment": "Accept essential only"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body[data-testid=\"client-side-hydration-complete\"] > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > dialog:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
