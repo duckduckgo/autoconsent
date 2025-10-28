@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_mobypark.com_zcw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mobypark.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mobypark\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#frontend-app > div:nth-child(6)#cookie-consent-component > div#cc--main > div#cm > div#c-inr > div:nth-child(3)#c-bns > button:nth-child(2)#c-p-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#frontend-app > div:nth-child(6)#cookie-consent-component > div#cc--main > div#cm > div#c-inr > div:nth-child(3)#c-bns > button:nth-child(2)#c-p-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#frontend-app > div:nth-child(6)#cookie-consent-component > div#cc--main > div#cm > div#c-inr > div:nth-child(3)#c-bns > button:nth-child(2)#c-p-bn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#frontend-app > div:nth-child(6)#cookie-consent-component > div#cc--main > div#cm > div#c-inr > div:nth-child(3)#c-bns > button:nth-child(2)#c-p-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
