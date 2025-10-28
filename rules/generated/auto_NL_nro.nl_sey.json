@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--wzT7bBsyqs8 > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--wzT7bBsyqs8 > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--wzT7bBsyqs8 > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Alle weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--9MQ2RSW0j4Y > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#container > section:nth-child(1):not([id]) > div:not([id]) > div#block-nro-cookiesui--wzT7bBsyqs8 > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
