@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_pan.nl_isy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pan.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pan\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieGuardMsg > div#cookieGuardMsgInner > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieGuardMsg > div#cookieGuardMsgInner > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieGuardMsg > div#cookieGuardMsgInner > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieGuardMsg > div#cookieGuardMsgInner > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
