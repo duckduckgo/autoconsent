@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_allaboutvision.com_ccn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.allaboutvision.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?allaboutvision\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent_prompt_submitNo",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
