@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_toogoodtogo.com_cnw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.toogoodtogo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?toogoodtogo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div#coiPage-1 > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#declineButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div#coiPage-1 > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#declineButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div#coiPage-1 > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#declineButton",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div#coiPage-1 > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#declineButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
