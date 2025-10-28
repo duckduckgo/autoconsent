@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_calendartimes.co.uk_yim",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://calendartimes.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?calendartimes\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-elementor-device-mode=\"desktop\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-elementor-device-mode=\"desktop\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-elementor-device-mode=\"desktop\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-elementor-device-mode=\"desktop\"] > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
