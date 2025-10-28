@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_easyjet.com_g0r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.easyjet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?easyjet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div#ensNotifyBannerInner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div#ensNotifyBannerInner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div#ensNotifyBannerInner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "comment": "Decline Advertising Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div#ensNotifyBannerInner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
