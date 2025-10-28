@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.tommy.com_yi3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.tommy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.tommy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"reject-cookies-pvh-button\"] > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"reject-cookies-pvh-button\"] > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"reject-cookies-pvh-button\"] > div:not([id])",
+            "comment": "REJETER TOUS LES NON FONCTIONNELS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"reject-cookies-pvh-button\"] > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
