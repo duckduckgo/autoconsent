@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#page-wrap > div:nth-child(7)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button"
+            "exists": "body > div#page-wrap > div:nth-child(8)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#page-wrap > div:nth-child(7)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button"
+            "visible": "body > div#page-wrap > div:nth-child(8)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#page-wrap > div:nth-child(7)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button",
+            "waitForThenClick": "body > div#page-wrap > div:nth-child(8)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button",
             "comment": "DISABLE NON-ESSENTIAL COOKIES"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#page-wrap > div:nth-child(7)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button",
+            "waitForVisible": "body > div#page-wrap > div:nth-child(8)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(3)#decline-cookies > button#cookie-decline-button",
             "timeout": 1000,
             "check": "none"
         }
