@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_mnt.fr_4h7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mnt.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mnt\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:nth-child(1):not([id]) > button#tarteaucitronContinue"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:nth-child(1):not([id]) > button#tarteaucitronContinue"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:nth-child(1):not([id]) > button#tarteaucitronContinue",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:nth-child(1):not([id]) > button#tarteaucitronContinue",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
