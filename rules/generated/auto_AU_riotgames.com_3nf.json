@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_riotgames.com_3nf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.riotgames.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?riotgames\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\31 670f7b7-0c34-4b7c-bccc-b4db514f38f7 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\31 670f7b7-0c34-4b7c-bccc-b4db514f38f7 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\31 670f7b7-0c34-4b7c-bccc-b4db514f38f7 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\31 670f7b7-0c34-4b7c-bccc-b4db514f38f7 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
