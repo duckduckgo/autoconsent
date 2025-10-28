@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_u-picardie.fr_fml",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.u-picardie.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?u-picardie\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > ul:not([id]) > li:nth-child(4):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > ul:not([id]) > li:nth-child(4):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > ul:not([id]) > li:nth-child(4):not([id]) > button:not([id]) > span:not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > ul:not([id]) > li:nth-child(4):not([id]) > button:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
