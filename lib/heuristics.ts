@@ -88,8 +88,10 @@ export const DETECT_PATTERNS = [
     /wijs alles af/gi,
 ];
 
+const TEXT_LIMIT = 100000;
+
 export function checkHeuristicPatterns() {
-    const allText = document.documentElement?.innerText;
+    const allText = document.documentElement?.innerText?.slice(0, TEXT_LIMIT);
     const patterns = [];
     const snippets = [];
     for (const p of DETECT_PATTERNS) {
