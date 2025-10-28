@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_meinschiff.com_j7q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.meinschiff.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?meinschiff\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div:nth-child(1)#blur > div#promptLayerContent > div:nth-child(3):not([id]) > div:nth-child(2)#privacy_pref_optout"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div:nth-child(1)#blur > div#promptLayerContent > div:nth-child(3):not([id]) > div:nth-child(2)#privacy_pref_optout"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:nth-child(1)#blur > div#promptLayerContent > div:nth-child(3):not([id]) > div:nth-child(2)#privacy_pref_optout",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:nth-child(1)#blur > div#promptLayerContent > div:nth-child(3):not([id]) > div:nth-child(2)#privacy_pref_optout",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
