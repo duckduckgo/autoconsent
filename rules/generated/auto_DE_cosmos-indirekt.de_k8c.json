@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_cosmos-indirekt.de_k8c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cosmos-indirekt.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cosmos-indirekt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-all",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
