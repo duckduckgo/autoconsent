@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bhphotovideo.com_pof",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bhphotovideo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bhphotovideo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "comment": "Reject All Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
