@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])"
+            "exists": "body > div#cookieconsent > section#geom_inter_1761578154899_39_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])"
+            "visible": "body > div#cookieconsent > section#geom_inter_1761578154899_39_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])",
+            "waitForThenClick": "body > div#cookieconsent > section#geom_inter_1761578154899_39_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])",
             "comment": "Alleen functionele cookies accepteren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookieconsent > section#geom_inter_1759502054905_2_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])",
+            "waitForVisible": "body > div#cookieconsent > section#geom_inter_1761578154899_39_1 > div:not([id]) > p:nth-child(5):not([id]) > a:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
