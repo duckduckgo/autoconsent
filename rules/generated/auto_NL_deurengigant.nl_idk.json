@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_deurengigant.nl_idk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.deurengigant.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deurengigant\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:not([id]) > div:nth-child(5):not([id]) > button#reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:not([id]) > div:nth-child(5):not([id]) > button#reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:not([id]) > div:nth-child(5):not([id]) > button#reject",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:not([id]) > div:nth-child(5):not([id]) > button#reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
