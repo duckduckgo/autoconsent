@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_e-pneu.ch_da1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://e-pneu.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?e-pneu\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > a#cookies_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > a#cookies_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > a#cookies_reject",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > a#cookies_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
