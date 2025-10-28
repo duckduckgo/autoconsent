@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kommwirmachendaseinfach.de_ftc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://kommwirmachendaseinfach.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kommwirmachendaseinfach\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Nur essenzielle Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#BorlabsCookieBox > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
