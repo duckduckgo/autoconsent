@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_biogena.com_06b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://biogena.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?biogena\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(1)#cc-deny-01"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(1)#cc-deny-01"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(1)#cc-deny-01",
+            "comment": "Only required cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(1)#cc-deny-01",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
