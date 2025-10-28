@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_gadero.nl_zvq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gadero.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gadero\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])",
+            "comment": "Strikt noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(6)#cookiescript_cookietablewrap > div:nth-child(3)#cookiescript_tabscontent > div:nth-child(1)#cookiescript_declarationwrap > div:nth-child(1)#cookiescript_categories > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
