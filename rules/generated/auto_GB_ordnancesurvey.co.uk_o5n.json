@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_ordnancesurvey.co.uk_o5n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ordnancesurvey.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ordnancesurvey\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(3)#ccc-notify-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(3)#ccc-notify-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(3)#ccc-notify-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(3)#ccc-notify-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
