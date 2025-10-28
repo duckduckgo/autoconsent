@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kirche-im-swr.de_la8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kirche-im-swr.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kirche-im-swr\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc > div:not([id]) > div:nth-child(3)#cc-buttons > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc > div:not([id]) > div:nth-child(3)#cc-buttons > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc > div:not([id]) > div:nth-child(3)#cc-buttons > button:nth-child(4):not([id])",
+            "comment": "NUR NOTWENDIGE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc > div:not([id]) > div:nth-child(3)#cc-buttons > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
