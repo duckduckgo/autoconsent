@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_tutoriaux-excalibur.com_0xp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tutoriaux-excalibur.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tutoriaux-excalibur\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Refuser les cookies optionnels"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > ul:not([id]) > li:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
