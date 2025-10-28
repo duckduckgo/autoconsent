@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_3sat.de_rmk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.3sat.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?3sat\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#zdf-cmp-consent-sdk > div#zdf-cmp-modal > div:not([id]) > div#zdf-cmp-banner-sdk > section:nth-child(1)#zdf-cmp-main > div:nth-child(4):not([id]) > button:nth-child(2)#zdf-cmp-deny-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#zdf-cmp-consent-sdk > div#zdf-cmp-modal > div:not([id]) > div#zdf-cmp-banner-sdk > section:nth-child(1)#zdf-cmp-main > div:nth-child(4):not([id]) > button:nth-child(2)#zdf-cmp-deny-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#zdf-cmp-consent-sdk > div#zdf-cmp-modal > div:not([id]) > div#zdf-cmp-banner-sdk > section:nth-child(1)#zdf-cmp-main > div:nth-child(4):not([id]) > button:nth-child(2)#zdf-cmp-deny-btn",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#zdf-cmp-consent-sdk > div#zdf-cmp-modal > div:not([id]) > div#zdf-cmp-banner-sdk > section:nth-child(1)#zdf-cmp-main > div:nth-child(4):not([id]) > button:nth-child(2)#zdf-cmp-deny-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
