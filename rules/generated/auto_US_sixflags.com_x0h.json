@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_sixflags.com_x0h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sixflags.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sixflags\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\33 08647ab-ee81-4c48-8536-1c7f0cc26f68 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\33 08647ab-ee81-4c48-8536-1c7f0cc26f68 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\33 08647ab-ee81-4c48-8536-1c7f0cc26f68 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\33 08647ab-ee81-4c48-8536-1c7f0cc26f68 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
