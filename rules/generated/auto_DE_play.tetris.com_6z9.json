@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_play.tetris.com_6z9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://play.tetris.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?play\\.tetris\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "comment": "I Do Not Accept Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
