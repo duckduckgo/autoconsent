@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_bbk.ac.uk_1up",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bbk.ac.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bbk\\.ac\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
