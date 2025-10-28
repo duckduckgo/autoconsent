@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_advocard.de_2e6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.advocard.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?advocard\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
