@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bing.com_tt4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bing.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bing\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bnp\\.nid\\.63245 > div:nth-child(1)#bnp_cookie_banner > div#bnp_container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bnp_btn_reject > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bnp\\.nid\\.63245 > div:nth-child(1)#bnp_cookie_banner > div#bnp_container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bnp_btn_reject > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bnp\\.nid\\.63245 > div:nth-child(1)#bnp_cookie_banner > div#bnp_container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bnp_btn_reject > a:not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bnp\\.nid\\.63245 > div:nth-child(1)#bnp_cookie_banner > div#bnp_container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bnp_btn_reject > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
