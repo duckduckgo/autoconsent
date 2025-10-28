@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ens-paris-saclay.fr_vz8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ens-paris-saclay.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ens-paris-saclay\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
