@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_tastingbook.com_wwk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tastingbook.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tastingbook\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-banner > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-banner > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-banner > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-deny",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-banner > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
