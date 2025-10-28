@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_groot-waterland.nl_c6l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://groot-waterland.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?groot-waterland\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
