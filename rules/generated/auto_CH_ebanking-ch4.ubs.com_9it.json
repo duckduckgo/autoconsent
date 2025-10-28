@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_ebanking-ch4.ubs.com_9it",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ebanking-ch4.ubs.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?secure\\.ubs\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > privacy-settings-form:nth-child(2):not([id]) > div:not([id]) > fieldset:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > privacy-settings-form:nth-child(2):not([id]) > div:not([id]) > fieldset:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > privacy-settings-form:nth-child(2):not([id]) > div:not([id]) > fieldset:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > privacy-settings-form:nth-child(2):not([id]) > div:not([id]) > fieldset:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
