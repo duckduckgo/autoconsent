@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nl.geneanet.org_8fn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://nl.geneanet.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nl\\.geneanet\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "comment": "Weiger alle cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
