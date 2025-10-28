@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cinehorizon.com_eea",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cinehorizon.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cinehorizon\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id])[data-cky-tag=\"notice\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])[data-cky-tag=\"notice-buttons\"] > button:nth-child(2):not([id])[data-cky-tag=\"reject-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
