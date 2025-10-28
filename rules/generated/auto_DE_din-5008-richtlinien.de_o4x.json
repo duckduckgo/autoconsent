@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_din-5008-richtlinien.de_o4x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.din-5008-richtlinien.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?din-5008-richtlinien\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
