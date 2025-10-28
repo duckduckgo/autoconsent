@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bidfood.nl_sbz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bidfood.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bidfood\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
