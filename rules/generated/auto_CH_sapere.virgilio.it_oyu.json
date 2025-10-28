@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_sapere.virgilio.it_oyu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://sapere.virgilio.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sapere\\.virgilio\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#iubenda-cs-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#iol_cmp_cont_senz_acce"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#iubenda-cs-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#iol_cmp_cont_senz_acce"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#iubenda-cs-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#iol_cmp_cont_senz_acce",
+            "comment": "CONTINUA SENZA ACCETTARE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#iubenda-cs-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#iol_cmp_cont_senz_acce",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
