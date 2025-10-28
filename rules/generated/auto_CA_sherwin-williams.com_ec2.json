@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_sherwin-williams.com_ec2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sherwin-williams.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sherwin-williams\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(2)#ensRejectBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(2)#ensRejectBanner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(2)#ensRejectBanner",
+            "comment": "Reject All Non-Essential Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(5):not([id]) > button:nth-child(2)#ensRejectBanner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
