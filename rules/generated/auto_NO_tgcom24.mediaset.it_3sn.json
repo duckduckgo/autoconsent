@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_tgcom24.mediaset.it_3sn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tgcom24.mediaset.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tgcom24\\.mediaset\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#iubenda-cs-banner > div:nth-child(2)#rti-privacy-banner-id > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(4)#rti-privacy-open-modal-btn-id"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#iubenda-cs-banner > div:nth-child(2)#rti-privacy-banner-id > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(4)#rti-privacy-open-modal-btn-id"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#iubenda-cs-banner > div:nth-child(2)#rti-privacy-banner-id > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(4)#rti-privacy-open-modal-btn-id",
+            "comment": "CONTINUA SENZA ACCETTARE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#iubenda-cs-banner > div:nth-child(2)#rti-privacy-banner-id > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(4)#rti-privacy-open-modal-btn-id",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
