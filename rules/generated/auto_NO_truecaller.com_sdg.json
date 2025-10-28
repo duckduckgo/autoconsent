@@ -5,19 +5,19 @@
         "vendorUrl": "http://www.truecaller.com/"
     },
     "runContext": {
-        "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(www\\.)?truecaller\\.com/"
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cookies\\.truecaller\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary",
             "comment": "Accept Necessary Cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary",
             "timeout": 1000,
             "check": "none"
         }
