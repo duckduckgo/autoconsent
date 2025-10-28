@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_flashrc.com_km9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.flashrc.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?flashrc\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all",
+            "comment": "I decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > footer:nth-child(4)#footer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
