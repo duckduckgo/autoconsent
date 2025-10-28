@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_money.it_hzy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.money.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?money\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Rifiuta e chiudi"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
