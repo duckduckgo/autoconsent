@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dali-speakers.com_j8l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dali-speakers.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?static\\.dali-speakers\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div:nth-child(2)#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div:nth-child(2)#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div:nth-child(2)#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-en-cookie-confirmation-buttons-area > div:nth-child(2)#hs-eu-cookie-confirmation-button-group > a:nth-child(2)#hs-eu-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
