@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_annonces-caravaning.com_3w0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.annonces-caravaning.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?annonces-caravaning\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#politecookiebanner > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#politecookiebanner > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#politecookiebanner > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#politecookiebanner > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
