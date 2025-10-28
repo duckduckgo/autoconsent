@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_dollargeneral.com_ctk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dollargeneral.com/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cdn\\.clarip\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-manager-details > div:nth-child(1)#accordion > div:nth-child(1):not([id]) > div#heading-required > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > h2:not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-manager-details > div:nth-child(1)#accordion > div:nth-child(1):not([id]) > div#heading-required > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > h2:not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-manager-details > div:nth-child(1)#accordion > div:nth-child(1):not([id]) > div#heading-required > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > h2:not([id]) > a:not([id])",
+            "comment": "Strictly Necessary Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-manager-details > div:nth-child(1)#accordion > div:nth-child(1):not([id]) > div#heading-required > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > h2:not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
