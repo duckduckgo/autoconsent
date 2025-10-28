@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_vw.com_joe",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vw.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vw\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#bannerRejectButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#bannerRejectButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#bannerRejectButton",
+            "comment": "Required Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > button:nth-child(2)#bannerRejectButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
