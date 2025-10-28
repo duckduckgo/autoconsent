@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-951749864375"
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-981071758470"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-951749864375"
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-981071758470"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-951749864375",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-981071758470",
             "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-951749864375",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button:nth-child(1)#acc-btn-981071758470",
             "timeout": 1000,
             "check": "none"
         }
