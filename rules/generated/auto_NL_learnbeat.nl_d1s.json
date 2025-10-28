@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_learnbeat.nl_d1s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://learnbeat.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?learnbeat\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
