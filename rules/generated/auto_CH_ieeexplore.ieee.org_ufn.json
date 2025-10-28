@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_ieeexplore.ieee.org_ufn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ieeexplore.ieee.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ieeexplore\\.ieee\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\37 6ad0e47-8cb2-4399-a70b-a9fbcbcbc85f > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\37 6ad0e47-8cb2-4399-a70b-a9fbcbcbc85f > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\37 6ad0e47-8cb2-4399-a70b-a9fbcbcbc85f > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\37 6ad0e47-8cb2-4399-a70b-a9fbcbcbc85f > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
