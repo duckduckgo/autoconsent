@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_123piecesderechange.fr_t5g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.123piecesderechange.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?123piecesderechange\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrap > div:nth-child(3)#container > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > span:nth-child(1)#\\33 "
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrap > div:nth-child(3)#container > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > span:nth-child(1)#\\33 "
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrap > div:nth-child(3)#container > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > span:nth-child(1)#\\33 ",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrap > div:nth-child(3)#container > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > span:nth-child(1)#\\33 ",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
