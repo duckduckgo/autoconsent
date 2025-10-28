@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_battlefields.org_9ke",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.battlefields.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?battlefields\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(3):not([id])",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
