@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_airchina.fr_pxo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.airchina.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?airchina\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > header:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6)#cookie-notice-popin > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2)#cookieNoticePref > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#denyCookieButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > header:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6)#cookie-notice-popin > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2)#cookieNoticePref > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#denyCookieButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > header:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6)#cookie-notice-popin > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2)#cookieNoticePref > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#denyCookieButton",
+            "comment": "Rejeter tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > header:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6)#cookie-notice-popin > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2)#cookieNoticePref > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#denyCookieButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
