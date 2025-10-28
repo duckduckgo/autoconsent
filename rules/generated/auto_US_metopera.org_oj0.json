@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_metopera.org_oj0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.metopera.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?metopera\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\35 804ef15-ef19-41e6-a06a-d7f15def1e05 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\35 804ef15-ef19-41e6-a06a-d7f15def1e05 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\35 804ef15-ef19-41e6-a06a-d7f15def1e05 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "DENY NON-ESSENTIAL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\35 804ef15-ef19-41e6-a06a-d7f15def1e05 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
