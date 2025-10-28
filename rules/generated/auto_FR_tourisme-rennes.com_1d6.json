@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_tourisme-rennes.com_1d6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tourisme-rennes.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tourisme-rennes\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(5)#wt-cli-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(5)#wt-cli-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(5)#wt-cli-reject-btn",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(5)#wt-cli-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
