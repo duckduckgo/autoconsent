@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_guideachatgamer.com_al9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.guideachatgamer.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?guideachatgamer\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:nth-child(2)#consent-container > div#consent-modal > div:nth-child(3)#consent-buttons > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:nth-child(2)#consent-container > div#consent-modal > div:nth-child(3)#consent-buttons > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(2)#consent-container > div#consent-modal > div:nth-child(3)#consent-buttons > button:nth-child(2):not([id])",
+            "comment": "DECLINE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(2)#consent-container > div#consent-modal > div:nth-child(3)#consent-buttons > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
