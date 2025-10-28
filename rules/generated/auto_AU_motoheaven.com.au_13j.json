@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_motoheaven.com.au_13j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://motoheaven.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?motoheaven\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
