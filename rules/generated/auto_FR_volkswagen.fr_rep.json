@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_volkswagen.fr_rep",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.volkswagen.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?volkswagen\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > a:nth-child(3)#extraLink"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > a:nth-child(3)#extraLink"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > a:nth-child(3)#extraLink",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiemgmt > section:nth-child(1):not([id]) > div#ensNotifyBanner > div:nth-child(1)#ensBannerDescription > div:nth-child(4):not([id]) > a:nth-child(3)#extraLink",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
