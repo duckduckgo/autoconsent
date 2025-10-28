@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_shiny.posit.co_l1a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://shiny.posit.co/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?shiny\\.posit\\.co/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "I decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
