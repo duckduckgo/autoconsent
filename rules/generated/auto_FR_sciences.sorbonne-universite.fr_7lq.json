@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_sciences.sorbonne-universite.fr_7lq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://sciences.sorbonne-universite.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sciences\\.sorbonne-universite\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > div:nth-child(4):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
