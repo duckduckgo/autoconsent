@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_everand.com_f4l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.everand.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?everand\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\38 c1e9402-5661-46da-aa9a-535ac3fcba3b > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\38 c1e9402-5661-46da-aa9a-535ac3fcba3b > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\38 c1e9402-5661-46da-aa9a-535ac3fcba3b > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\38 c1e9402-5661-46da-aa9a-535ac3fcba3b > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
