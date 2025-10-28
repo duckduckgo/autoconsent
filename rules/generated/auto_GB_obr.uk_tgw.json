@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_obr.uk_tgw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://obr.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?obr\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(3)#wt-cli-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(3)#wt-cli-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(3)#wt-cli-reject-btn",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span#wt-cli-cookie-banner > a:nth-child(3)#wt-cli-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
