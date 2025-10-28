@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_maskworld.com_juf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://maskworld.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?maskworld\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-v2 > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-v2 > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-v2 > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(1):not([id]) > a:not([id])",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-v2 > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
