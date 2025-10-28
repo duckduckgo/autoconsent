@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_tourisme-aveyron.com_7k5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tourisme-aveyron.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tourisme-aveyron\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(6)#lae-rgpd-pop > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(6)#lae-rgpd-pop > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(6)#lae-rgpd-pop > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(6)#lae-rgpd-pop > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
