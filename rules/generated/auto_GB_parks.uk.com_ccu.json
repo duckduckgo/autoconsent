@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_parks.uk.com_ccu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.parks.uk.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?parks\\.uk\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#d9111f7c-f446-41db-b8fa-f8e63e390d4c > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#d9111f7c-f446-41db-b8fa-f8e63e390d4c > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#d9111f7c-f446-41db-b8fa-f8e63e390d4c > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#d9111f7c-f446-41db-b8fa-f8e63e390d4c > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
