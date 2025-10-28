@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_reseaulilas.fr_anv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://reseaulilas.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?reseaulilas\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#termsModal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineTerms"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#termsModal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineTerms"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#termsModal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineTerms",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#termsModal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineTerms",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
