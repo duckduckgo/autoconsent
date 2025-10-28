@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_watch.thechosen.tv_2do",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://watch.thechosen.tv/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?watch\\.thechosen\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookies-banner\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookies-banner\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookies-banner\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Necessary only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookies-banner\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
