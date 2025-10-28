@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_mostert-juweliers.nl_k3j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mostert-juweliers.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mostert-juweliers\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > p:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > p:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > p:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > p:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
