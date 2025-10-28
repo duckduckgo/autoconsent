@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_petitions.assemblee-nationale.fr_nxe",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://petitions.assemblee-nationale.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?petitions\\.assemblee-nationale\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
