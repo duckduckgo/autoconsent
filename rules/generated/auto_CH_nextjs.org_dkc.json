@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_nextjs.org_dkc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://nextjs.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nextjs\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-reject-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-reject-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-reject-all-button",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-reject-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
