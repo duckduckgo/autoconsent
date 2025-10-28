@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_berrybase.de_ssu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.berrybase.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?berrybase\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
