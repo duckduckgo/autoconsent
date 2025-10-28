@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_pepperl-fuchs.com_wul",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pepperl-fuchs.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pepperl-fuchs\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#privacy_optout"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#privacy_optout"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#privacy_optout",
+            "comment": "Deny all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#privacy_optout",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
