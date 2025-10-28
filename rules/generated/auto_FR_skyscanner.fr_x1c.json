@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_skyscanner.fr_x1c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.skyscanner.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?skyscanner\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Cookies essentiels uniquement"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
