@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cliniqueveterinairechampionnet.fr_wo5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cliniqueveterinairechampionnet.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cliniqueveterinairechampionnet\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Déclin"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
