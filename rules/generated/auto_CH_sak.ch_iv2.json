@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_sak.ch_iv2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sak.ch/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?chat\\.aiaibot\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#chatbot > div:nth-child(1)#chat > div:nth-child(1)#chat-window > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(9)#chat-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"rejectButton\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#chatbot > div:nth-child(1)#chat > div:nth-child(1)#chat-window > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(9)#chat-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"rejectButton\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#chatbot > div:nth-child(1)#chat > div:nth-child(1)#chat-window > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(9)#chat-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"rejectButton\"]",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#chatbot > div:nth-child(1)#chat > div:nth-child(1)#chat-window > section:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(9)#chat-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"rejectButton\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
