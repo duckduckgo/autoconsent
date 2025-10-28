@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lannuaire.fr_ka8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lannuaire.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lannuaire\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#cookie_action_close_header_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#cookie_action_close_header_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#cookie_action_close_header_reject",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a#cookie_action_close_header_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
