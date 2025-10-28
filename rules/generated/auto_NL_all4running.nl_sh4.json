@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_all4running.nl_sh4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://all4running.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?all4running\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#notice-cookie-block > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#notice-cookie-block > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#notice-cookie-block > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-reject",
+            "comment": "Cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#notice-cookie-block > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
