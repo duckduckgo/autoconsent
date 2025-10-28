@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_bitwarden.com_e6x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bitwarden.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bitwarden\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(1)#ketch-banner-button-tertiary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(1)#ketch-banner-button-tertiary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(1)#ketch-banner-button-tertiary",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lanyard_root > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(1)#ketch-banner-button-tertiary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
