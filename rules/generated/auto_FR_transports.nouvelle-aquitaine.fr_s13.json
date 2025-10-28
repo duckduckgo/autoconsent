@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_transports.nouvelle-aquitaine.fr_s13",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://transports.nouvelle-aquitaine.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?transports\\.nouvelle-aquitaine\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#naq_cookie_container > div#sliding-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-cookie-rechFormModifier"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#naq_cookie_container > div#sliding-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-cookie-rechFormModifier"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#naq_cookie_container > div#sliding-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-cookie-rechFormModifier",
+            "comment": "Je refuse\nl'utilisation de cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#naq_cookie_container > div#sliding-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-cookie-rechFormModifier",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
