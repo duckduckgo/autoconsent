@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_volkswagen-nutzfahrzeuge.de_sid",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.volkswagen-nutzfahrzeuge.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?volkswagen-nutzfahrzeuge\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiemgmt > section#ensModalWrapper > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#ensSave"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiemgmt > section#ensModalWrapper > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#ensSave"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiemgmt > section#ensModalWrapper > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#ensSave",
+            "comment": "Optionale Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiemgmt > section#ensModalWrapper > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#ensSave",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
