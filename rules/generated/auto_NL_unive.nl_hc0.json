@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_unive.nl_hc0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.unive.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unive\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRcpPrefs > div:nth-child(3)#consent-container > div#consent-wrapper > div:nth-child(1)#consent-modal-settings > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#no-consent-popup-close-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(3)#consent-container > div#consent-wrapper > div:nth-child(1)#consent-modal-settings > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#no-consent-popup-close-modal"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRcpPrefs > div:nth-child(3)#consent-container > div#consent-wrapper > div:nth-child(1)#consent-modal-settings > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#no-consent-popup-close-modal",
+            "comment": "Weiger alle cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(3)#consent-container > div#consent-wrapper > div:nth-child(1)#consent-modal-settings > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#no-consent-popup-close-modal",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
