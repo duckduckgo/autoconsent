@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_aktion-mensch.de_msn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.aktion-mensch.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aktion-mensch\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#__tealiumGDPRecModal > div#GDPR_Modal > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#preferences"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#__tealiumGDPRecModal > div#GDPR_Modal > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#preferences"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#__tealiumGDPRecModal > div#GDPR_Modal > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#preferences",
+            "comment": "Cookie Einstellungen/ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#__tealiumGDPRecModal > div#GDPR_Modal > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#preferences",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
