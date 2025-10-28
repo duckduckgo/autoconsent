@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_thiriet.com_pl7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.thiriet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thiriet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(1)#tarteaucitron > div:nth-child(3)#cookie > div#tarteaucitronAlertBig > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(1)#tarteaucitron > div:nth-child(3)#cookie > div#tarteaucitronAlertBig > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(1)#tarteaucitron > div:nth-child(3)#cookie > div#tarteaucitronAlertBig > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#tarteaucitronAllDenied2",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(1)#tarteaucitron > div:nth-child(3)#cookie > div#tarteaucitronAlertBig > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
