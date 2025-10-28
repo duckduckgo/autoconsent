@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bus-und-bahn.de_2hj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bus-und-bahn.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bus-und-bahn\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#usercentrics-button > div:nth-child(4)#uc-central-banner-modal > div:nth-child(2)#uc-banner-centered > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#uc-btn-deny-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
