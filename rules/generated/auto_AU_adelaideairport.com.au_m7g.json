@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_adelaideairport.com.au_m7g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://adelaideairport.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adelaideairport\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#component-1ee7519f-a003-44fc-bb3f-1b9c8adf3a36 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#component-1ee7519f-a003-44fc-bb3f-1b9c8adf3a36 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#component-1ee7519f-a003-44fc-bb3f-1b9c8adf3a36 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#component-1ee7519f-a003-44fc-bb3f-1b9c8adf3a36 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
