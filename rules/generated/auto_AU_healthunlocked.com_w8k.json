@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_healthunlocked.com_w8k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://healthunlocked.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?healthunlocked\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
