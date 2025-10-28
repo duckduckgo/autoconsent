@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.automobiledimension.com_nl7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.automobiledimension.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.automobiledimension\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#disagree-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#disagree-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#disagree-btn",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#disagree-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
