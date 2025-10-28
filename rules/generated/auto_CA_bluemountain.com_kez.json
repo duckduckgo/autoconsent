@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_bluemountain.com_kez",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bluemountain.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bluemountain\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#privacy_manager > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#privacy_manager > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#privacy_manager > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline_cookies",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#privacy_manager > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
