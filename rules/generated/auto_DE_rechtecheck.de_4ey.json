@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_rechtecheck.de_4ey",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://rechtecheck.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rechtecheck\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main > div:nth-child(5)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main > div:nth-child(5)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main > div:nth-child(5)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie",
+            "comment": "Nur notwendige Cookies zulassen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main > div:nth-child(5)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
