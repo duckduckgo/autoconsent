@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lamaison.fr_aqj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lamaison.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lamaison\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-container=\"body\"].cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > div:nth-child(1)#tarteaucitronDisclaimerAlertTopWrapper > button#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-container=\"body\"].cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > div:nth-child(1)#tarteaucitronDisclaimerAlertTopWrapper > button#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-container=\"body\"].cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > div:nth-child(1)#tarteaucitronDisclaimerAlertTopWrapper > button#tarteaucitronAllDenied2",
+            "comment": "X Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-container=\"body\"].cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > div:nth-child(1)#tarteaucitronDisclaimerAlertTopWrapper > button#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
