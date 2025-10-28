@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(17):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+            "exists": "body > div:not([id]) > div:nth-child(19):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(17):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+            "visible": "body > div:not([id]) > div:nth-child(19):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(17):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(19):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
             "comment": "Decline"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(17):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(19):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
