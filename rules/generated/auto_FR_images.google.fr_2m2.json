@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_images.google.fr_2m2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://images.google.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?images\\.google\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4)#xe7COe > div:nth-child(3):not([id]) > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#W0wltc"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4)#xe7COe > div:nth-child(3):not([id]) > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#W0wltc"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4)#xe7COe > div:nth-child(3):not([id]) > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#W0wltc",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4)#xe7COe > div:nth-child(3):not([id]) > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#W0wltc",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
