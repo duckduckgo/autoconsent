@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_sallys-blog.de_3m6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://sallys-blog.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sallys-blog\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional",
+            "comment": "Nur funktionale Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#ccAcivateModal > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#ccAcceptOnlyFunctional",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
