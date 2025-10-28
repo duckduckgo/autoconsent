@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_avis.fr_oa1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.avis.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?avis\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#consent_prompt_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#consent_prompt_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#consent_prompt_decline",
+            "comment": "NE PAS ACCEPTER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#consent_prompt_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
