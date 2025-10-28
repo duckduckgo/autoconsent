@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "exists": "body > div:not([id]) > div:nth-child(27)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "visible": "body > div:not([id]) > div:nth-child(27)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(27)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
             "comment": "Accept required"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(27)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
             "timeout": 1000,
             "check": "none"
         }
