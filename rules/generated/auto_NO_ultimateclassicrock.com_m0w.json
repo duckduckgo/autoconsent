@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_ultimateclassicrock.com_m0w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ultimateclassicrock.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ultimateclassicrock\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\32 e1a7e8d-d9c1-44da-80a5-f137a3a2b9cf > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\32 e1a7e8d-d9c1-44da-80a5-f137a3a2b9cf > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\32 e1a7e8d-d9c1-44da-80a5-f137a3a2b9cf > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\32 e1a7e8d-d9c1-44da-80a5-f137a3a2b9cf > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
