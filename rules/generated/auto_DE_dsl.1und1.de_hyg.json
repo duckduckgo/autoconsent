@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dsl.1und1.de_hyg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dsl.1und1.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dsl\\.1und1\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:nth-child(2)#consent-wall > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#consent_wall_optout"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:nth-child(2)#consent-wall > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#consent_wall_optout"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:nth-child(2)#consent-wall > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#consent_wall_optout",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:nth-child(2)#consent-wall > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#consent_wall_optout",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
