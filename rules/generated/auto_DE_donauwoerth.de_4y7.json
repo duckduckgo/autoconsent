@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_donauwoerth.de_4y7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.donauwoerth.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?donauwoerth\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#myModal > div:not([id]) > p:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#myModal > div:not([id]) > p:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#myModal > div:not([id]) > p:nth-child(3):not([id]) > a:not([id])",
+            "comment": "Nein, ich stimme nicht zu"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#myModal > div:not([id]) > p:nth-child(3):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
