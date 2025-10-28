@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_me-deplacer.iledefrance-mobilites.fr_wkr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://me-deplacer.iledefrance-mobilites.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?me-deplacer\\.iledefrance-mobilites\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#axeptio_overlay > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#axeptio_btn_dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#axeptio_overlay > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#axeptio_btn_dismiss"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#axeptio_overlay > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#axeptio_btn_dismiss",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#axeptio_overlay > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#axeptio_btn_dismiss",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
