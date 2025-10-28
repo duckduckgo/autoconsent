@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_portsmouth.gov.uk_xw8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.portsmouth.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?portsmouth\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-law-info-bar > span:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie_action_close_header_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
