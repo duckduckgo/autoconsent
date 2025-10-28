@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+            "exists": "body > div#phx-GHJjWYbSwz2ftGgh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+            "visible": "body > div#phx-GHJjWYbSwz2ftGgh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "waitForThenClick": "body > div#phx-GHJjWYbSwz2ftGgh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
             "comment": "Weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "waitForVisible": "body > div#phx-GHJjWYbSwz2ftGgh > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
             "timeout": 1000,
             "check": "none"
         }
