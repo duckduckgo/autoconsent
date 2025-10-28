@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ut-capitole.fr_bht",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ut-capitole.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ut-capitole\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieAcceptBar > button:nth-child(4)#cookieRefuseBarConfirm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieAcceptBar > button:nth-child(4)#cookieRefuseBarConfirm"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieAcceptBar > button:nth-child(4)#cookieRefuseBarConfirm",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieAcceptBar > button:nth-child(4)#cookieRefuseBarConfirm",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
