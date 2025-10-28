@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_playvalorant.com_q72",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://playvalorant.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?playvalorant\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\36 d4a67fb-9a98-4624-8315-be5a7b2813ca > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\36 d4a67fb-9a98-4624-8315-be5a7b2813ca > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\36 d4a67fb-9a98-4624-8315-be5a7b2813ca > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\36 d4a67fb-9a98-4624-8315-be5a7b2813ca > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
