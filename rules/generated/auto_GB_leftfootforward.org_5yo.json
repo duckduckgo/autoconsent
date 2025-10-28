@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_leftfootforward.org_5yo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://leftfootforward.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?leftfootforward\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
