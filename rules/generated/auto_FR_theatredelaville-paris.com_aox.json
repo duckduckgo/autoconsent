@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_theatredelaville-paris.com_aox",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.theatredelaville-paris.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?theatredelaville-paris\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-node-type=\"homepage\"][data-is-home=\"\\31 \"].homepage.accueil-5aafc90d8f7a2.en.is-desktop.is-black.is-transparent > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-node-type=\"homepage\"][data-is-home=\"\\31 \"].homepage.accueil-5aafc90d8f7a2.en.is-desktop.is-black.is-transparent > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-node-type=\"homepage\"][data-is-home=\"\\31 \"].homepage.accueil-5aafc90d8f7a2.en.is-desktop.is-black.is-transparent > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny",
+            "comment": "Deny all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-node-type=\"homepage\"][data-is-home=\"\\31 \"].homepage.accueil-5aafc90d8f7a2.en.is-desktop.is-black.is-transparent > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
