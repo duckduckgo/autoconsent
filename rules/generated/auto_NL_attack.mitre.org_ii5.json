@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_attack.mitre.org_ii5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://attack.mitre.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?attack\\.mitre\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\34 648b4e0-5a0a-41ae-bb5c-4eeb6ddfd63a > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\34 648b4e0-5a0a-41ae-bb5c-4eeb6ddfd63a > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\34 648b4e0-5a0a-41ae-bb5c-4eeb6ddfd63a > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\34 648b4e0-5a0a-41ae-bb5c-4eeb6ddfd63a > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
