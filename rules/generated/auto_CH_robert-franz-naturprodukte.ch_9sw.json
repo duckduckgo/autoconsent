@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_robert-franz-naturprodukte.ch_9sw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://robert-franz-naturprodukte.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?robert-franz-naturprodukte\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ae2674776-51e1-44db-a194-f156a1be8355 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ae2674776-51e1-44db-a194-f156a1be8355 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ae2674776-51e1-44db-a194-f156a1be8355 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Weiter ohne Einwilligung"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ae2674776-51e1-44db-a194-f156a1be8355 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
