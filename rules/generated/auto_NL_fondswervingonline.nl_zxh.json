@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_fondswervingonline.nl_zxh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fondswervingonline.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fondswervingonline\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#smooth-scroll-wrapper > div:nth-child(6)#cookiebar-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#smooth-scroll-wrapper > div:nth-child(6)#cookiebar-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#smooth-scroll-wrapper > div:nth-child(6)#cookiebar-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Enkel noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#smooth-scroll-wrapper > div:nth-child(6)#cookiebar-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
