@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_support-leagueoflegends.riotgames.com_89l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support-leagueoflegends.riotgames.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support-leagueoflegends\\.riotgames\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\34 d770d91-4e9a-426e-8c2e-2ed1c76546e3 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\34 d770d91-4e9a-426e-8c2e-2ed1c76546e3 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\34 d770d91-4e9a-426e-8c2e-2ed1c76546e3 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\34 d770d91-4e9a-426e-8c2e-2ed1c76546e3 > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
