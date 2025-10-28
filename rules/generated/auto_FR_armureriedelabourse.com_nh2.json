@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_armureriedelabourse.com_nh2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.armureriedelabourse.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?armureriedelabourse\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all",
+            "comment": "REJETER TOUT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main-page-content > footer:nth-child(3)#footer > div:nth-child(2)#footer-container-main > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5)#lgcookieslaw_banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#lgcookieslaw_reject_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
