@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_uship.fr_4uf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.uship.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uship\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-container=\"body\"].nav-md.cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot.tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > span:nth-child(1)#tarteaucitronDisclaimerAlert > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-container=\"body\"].nav-md.cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot.tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > span:nth-child(1)#tarteaucitronDisclaimerAlert > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-container=\"body\"].nav-md.cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot.tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > span:nth-child(1)#tarteaucitronDisclaimerAlert > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-container=\"body\"].nav-md.cms-home.cms-index-index.page-layout-1column > div#tarteaucitronRoot.tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigTop > span:nth-child(1)#tarteaucitronDisclaimerAlert > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
