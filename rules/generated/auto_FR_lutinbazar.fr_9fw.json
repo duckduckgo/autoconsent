@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lutinbazar.fr_9fw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://lutinbazar.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lutinbazar\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Rejeter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
