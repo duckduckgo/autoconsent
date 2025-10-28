@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_bath.ac.uk_aqp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bath.ac.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bath\\.ac\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "comment": "REJECT OPTIONAL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(4)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
