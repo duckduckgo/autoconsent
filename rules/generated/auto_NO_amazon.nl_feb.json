@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_amazon.nl_feb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.amazon.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amazon\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#a-page > div:nth-child(3)#sp-cc-wrapper > form:nth-child(2)#cos-banner > div:nth-child(13):not([id]) > div:not([id]) > span:nth-child(2):not([id]) > span:not([id]) > span:not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#a-page > div:nth-child(3)#sp-cc-wrapper > form:nth-child(2)#cos-banner > div:nth-child(13):not([id]) > div:not([id]) > span:nth-child(2):not([id]) > span:not([id]) > span:not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#a-page > div:nth-child(3)#sp-cc-wrapper > form:nth-child(2)#cos-banner > div:nth-child(13):not([id]) > div:not([id]) > span:nth-child(2):not([id]) > span:not([id]) > span:not([id]) > span:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#a-page > div:nth-child(3)#sp-cc-wrapper > form:nth-child(2)#cos-banner > div:nth-child(13):not([id]) > div:not([id]) > span:nth-child(2):not([id]) > span:not([id]) > span:not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
