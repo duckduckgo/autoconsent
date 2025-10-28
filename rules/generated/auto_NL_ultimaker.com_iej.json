@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ultimaker.com_iej",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ultimaker.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ultimaker\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > button:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > button:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > button:nth-child(2)#cn-refuse-cookie",
+            "comment": "Refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > button:nth-child(2)#cn-refuse-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
