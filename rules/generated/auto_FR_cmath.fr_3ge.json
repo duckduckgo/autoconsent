@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cmath.fr_3ge",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cmath.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cmath\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pubtech-cmp > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#pt-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pubtech-cmp > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#pt-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pubtech-cmp > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#pt-close",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pubtech-cmp > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(1)#pt-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
