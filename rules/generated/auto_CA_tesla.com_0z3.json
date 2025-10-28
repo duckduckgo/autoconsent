@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_tesla.com_0z3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tesla.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tesla\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_banner > div:nth-child(2)#tsla-button-container > button:nth-child(2)#tsla-reject-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_banner > div:nth-child(2)#tsla-button-container > button:nth-child(2)#tsla-reject-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_banner > div:nth-child(2)#tsla-button-container > button:nth-child(2)#tsla-reject-cookie",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_banner > div:nth-child(2)#tsla-button-container > button:nth-child(2)#tsla-reject-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
