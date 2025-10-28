@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_mediamarkt.be_pf1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mediamarkt.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mediamarkt\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mms-consent-portal-container > div:not([id]) > div:nth-child(2):not([id]) > form#pwa-consent-layer-form > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > section:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mms-consent-portal-container > div:not([id]) > div:nth-child(2):not([id]) > form#pwa-consent-layer-form > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > section:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mms-consent-portal-container > div:not([id]) > div:nth-child(2):not([id]) > form#pwa-consent-layer-form > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > section:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#required",
+            "comment": "Noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mms-consent-portal-container > div:not([id]) > div:nth-child(2):not([id]) > form#pwa-consent-layer-form > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > section:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(2):not([id]) > span:nth-child(1):not([id]) > button#required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
