@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_blackfriday.ch_m39",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blackfriday.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blackfriday\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div#app > div:nth-child(2)#coockie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div#app > div:nth-child(2)#coockie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div#app > div:nth-child(2)#coockie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div#app > div:nth-child(2)#coockie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
