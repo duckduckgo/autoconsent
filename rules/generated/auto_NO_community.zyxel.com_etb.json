@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_community.zyxel.com_etb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://community.zyxel.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?community\\.zyxel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
