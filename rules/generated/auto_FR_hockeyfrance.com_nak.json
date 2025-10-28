@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_hockeyfrance.com_nak",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hockeyfrance.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hockeyfrance\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#cookie-law-info-bar > span:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#cookie-law-info-bar > span:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#cookie-law-info-bar > span:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#cookie-law-info-bar > span:nth-child(2):not([id]) > a:nth-child(3)#cookie_action_close_header_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
