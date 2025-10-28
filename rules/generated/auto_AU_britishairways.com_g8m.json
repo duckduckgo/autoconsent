@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_britishairways.com_g8m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.britishairways.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?britishairways\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(3)#ensCloseBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(3)#ensCloseBanner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(3)#ensCloseBanner",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(3)#ensCloseBanner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
