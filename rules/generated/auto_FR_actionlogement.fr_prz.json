@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_actionlogement.fr_prz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.actionlogement.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?actionlogement\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
