@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_england.shelter.org.uk_c39",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://england.shelter.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?england\\.shelter\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "comment": "I reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2)#ccc-notify-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
