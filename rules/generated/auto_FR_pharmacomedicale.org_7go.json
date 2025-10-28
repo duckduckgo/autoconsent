@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pharmacomedicale.org_7go",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pharmacomedicale.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pharmacomedicale\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Refuser les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
