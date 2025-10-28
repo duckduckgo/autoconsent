@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_daepp-pflanzen.ch_gdn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.daepp-pflanzen.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?daepp-pflanzen\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#Wrapper > div:nth-child(18)#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#Wrapper > div:nth-child(18)#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#Wrapper > div:nth-child(18)#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#Wrapper > div:nth-child(18)#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
