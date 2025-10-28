@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_delonghi.com_i2l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.delonghi.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?delonghi\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(1)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(1)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(1)#truste-consent-required",
+            "comment": "ACCEPT ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(1)#truste-consent-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
