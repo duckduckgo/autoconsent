@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.wikiital.com_fv8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.wikiital.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.wikiital\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
