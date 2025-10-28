@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_prostata-hilfe-deutschland.de_398",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.prostata-hilfe-deutschland.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?prostata-hilfe-deutschland\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ccDisallow"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ccDisallow"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ccDisallow",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ccDisallow",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
