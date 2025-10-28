@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_chatelet.com_2qg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.chatelet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chatelet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-rsssl=\"\\31 \"].home.page-template.page-template-page-homepage.page.page-id-389.app-data.index-data.singular-data.page-data.page-389-data.page-accueil-data.page-homepage-data.front-page-data > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-rsssl=\"\\31 \"].home.page-template.page-template-page-homepage.page.page-id-389.app-data.index-data.singular-data.page-data.page-389-data.page-accueil-data.page-homepage-data.front-page-data > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-rsssl=\"\\31 \"].home.page-template.page-template-page-homepage.page.page-id-389.app-data.index-data.singular-data.page-data.page-389-data.page-accueil-data.page-homepage-data.front-page-data > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-rsssl=\"\\31 \"].home.page-template.page-template-page-homepage.page.page-id-389.app-data.index-data.singular-data.page-data.page-389-data.page-accueil-data.page-homepage-data.front-page-data > div#tarteaucitronRoot[data-nosnippet=\"true\"].tarteaucitronBeforeVisible > div:nth-child(5)#tarteaucitronAlertBig.tarteaucitronAlertBigBottom > button:nth-child(3)#tarteaucitronAllDenied2.tarteaucitronCTAButton.tarteaucitronDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
