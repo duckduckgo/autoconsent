@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_aux-fourneaux.fr_yht",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.aux-fourneaux.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aux-fourneaux\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onesignal-slidedown-container > div#onesignal-slidedown-dialog > div#normal-slidedown > div:nth-child(2)#slidedown-footer > button:nth-child(2)#onesignal-slidedown-cancel-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onesignal-slidedown-container > div#onesignal-slidedown-dialog > div#normal-slidedown > div:nth-child(2)#slidedown-footer > button:nth-child(2)#onesignal-slidedown-cancel-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#onesignal-slidedown-container > div#onesignal-slidedown-dialog > div#normal-slidedown > div:nth-child(2)#slidedown-footer > button:nth-child(2)#onesignal-slidedown-cancel-button",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onesignal-slidedown-container > div#onesignal-slidedown-dialog > div#normal-slidedown > div:nth-child(2)#slidedown-footer > button:nth-child(2)#onesignal-slidedown-cancel-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
