@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pro.inserm.fr_37u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pro.inserm.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pro\\.inserm\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > div#wt-cli-cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#wt-cli-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > div#wt-cli-cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#wt-cli-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > div#wt-cli-cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#wt-cli-reject-btn",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > div#wt-cli-cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#wt-cli-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
