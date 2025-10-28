@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bijdeles.online_a6n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bijdeles.online/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bijdeles\\.online/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(2)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(2)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "comment": "ALLES AFWIJZEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
