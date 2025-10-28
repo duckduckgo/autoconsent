@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_iccsydney.com.au_52h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://iccsydney.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iccsydney\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\36 6845f16-dcc0-4b10-a591-5a6bbb771372 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\36 6845f16-dcc0-4b10-a591-5a6bbb771372 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\36 6845f16-dcc0-4b10-a591-5a6bbb771372 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\36 6845f16-dcc0-4b10-a591-5a6bbb771372 > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
