@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_pubs.acs.org_ik9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pubs.acs.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pubs\\.acs\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\38 6f26419-a4cb-47da-b1e0-cd2095ea9252 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\38 6f26419-a4cb-47da-b1e0-cd2095ea9252 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\38 6f26419-a4cb-47da-b1e0-cd2095ea9252 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\38 6f26419-a4cb-47da-b1e0-cd2095ea9252 > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
