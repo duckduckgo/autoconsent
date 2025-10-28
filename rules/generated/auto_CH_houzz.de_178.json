@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_houzz.de_178",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.houzz.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?houzz\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-reject\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-reject\"]",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-reject\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
