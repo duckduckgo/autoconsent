@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_transavia.com_ely",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.transavia.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?transavia\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#transavia-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"button-accept-no-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#transavia-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"button-accept-no-cookies\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#transavia-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"button-accept-no-cookies\"]",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#transavia-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"button-accept-no-cookies\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
