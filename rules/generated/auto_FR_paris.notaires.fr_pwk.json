@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_paris.notaires.fr_pwk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://paris.notaires.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?paris\\.notaires\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(4):not([id])",
+            "comment": "REFUSER TOUT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
