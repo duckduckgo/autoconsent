@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_sunbeam.com.au_tbw",
-    "vendorUrl": "https://www.sunbeam.com.au/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#html-body > div#ppms_cm_consent_popup_aa2675b4-35d1-4c66-8c52-887d40d15592 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ppms_cm_reject-all"
+            "exists": "body > div:not([id]) > div:nth-child(2)#\\38 9668b5d-b390-4f8f-8981-47bece7dbcad > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#html-body > div#ppms_cm_consent_popup_aa2675b4-35d1-4c66-8c52-887d40d15592 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ppms_cm_reject-all"
+            "visible": "body > div:not([id]) > div:nth-child(2)#\\38 9668b5d-b390-4f8f-8981-47bece7dbcad > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#html-body > div#ppms_cm_consent_popup_aa2675b4-35d1-4c66-8c52-887d40d15592 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ppms_cm_reject-all",
-            "comment": "Decline all"
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#\\38 9668b5d-b390-4f8f-8981-47bece7dbcad > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#html-body > div#ppms_cm_consent_popup_aa2675b4-35d1-4c66-8c52-887d40d15592 > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ppms_cm_reject-all",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#\\38 9668b5d-b390-4f8f-8981-47bece7dbcad > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
