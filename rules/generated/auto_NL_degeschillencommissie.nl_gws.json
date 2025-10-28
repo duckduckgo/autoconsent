@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_degeschillencommissie.nl_gws",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.degeschillencommissie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?degeschillencommissie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > p:not([id]) > a:nth-child(10)#wt-cli-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > p:not([id]) > a:nth-child(10)#wt-cli-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > p:not([id]) > a:nth-child(10)#wt-cli-reject-btn",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > p:not([id]) > a:nth-child(10)#wt-cli-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
