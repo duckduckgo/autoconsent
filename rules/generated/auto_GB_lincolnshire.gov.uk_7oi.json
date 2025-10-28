@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_lincolnshire.gov.uk_7oi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lincolnshire.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lincolnshire\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#lm-cookie-wall-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#lm-accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#lm-cookie-wall-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#lm-accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#lm-cookie-wall-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#lm-accept-necessary",
+            "comment": "Accept necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#lm-cookie-wall-container > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#lm-accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
