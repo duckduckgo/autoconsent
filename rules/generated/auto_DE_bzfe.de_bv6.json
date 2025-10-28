@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bzfe.de_bv6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bzfe.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bzfe\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#et-consent-overlay > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
