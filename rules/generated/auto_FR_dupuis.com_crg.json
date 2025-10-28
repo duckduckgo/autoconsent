@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_dupuis.com_crg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dupuis.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dupuis\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(3):not([id]) > button:nth-child(2)#tarteaucitronPersonalize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(3):not([id]) > button:nth-child(2)#tarteaucitronPersonalize"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(3):not([id]) > button:nth-child(2)#tarteaucitronPersonalize",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(3):not([id]) > button:nth-child(2)#tarteaucitronPersonalize",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
