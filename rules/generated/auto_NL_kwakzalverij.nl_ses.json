@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_kwakzalverij.nl_ses",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kwakzalverij.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kwakzalverij\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-5 > div:nth-child(1)#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-5 > div:nth-child(1)#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-5 > div:nth-child(1)#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-5 > div:nth-child(1)#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
