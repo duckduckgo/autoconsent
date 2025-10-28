@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_esure.com_p1z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.esure.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?esure\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "comment": "Reject All Non-essential Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
