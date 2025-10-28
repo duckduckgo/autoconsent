@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_assas-universite.fr_hi5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.assas-universite.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?assas-universite\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronAllDenied2",
+            "comment": " Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
