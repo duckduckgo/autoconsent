@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_electroworld.nl_q0v",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.electroworld.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?electroworld\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-decline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
