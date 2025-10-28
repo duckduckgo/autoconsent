@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_urechlyss.ch_kdy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://urechlyss.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?urechlyss\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_description > span:nth-child(1):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_description > span:nth-child(1):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_description > span:nth-child(1):not([id]) > a:nth-child(3):not([id])",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(3)#cookiescript_description > span:nth-child(1):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
