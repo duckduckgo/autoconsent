@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dws.de_645",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dws.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dws\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#consent_prompt_footer > button:nth-child(1)#consent_prompt_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#consent_prompt_footer > button:nth-child(1)#consent_prompt_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#consent_prompt_footer > button:nth-child(1)#consent_prompt_reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#consent_prompt_footer > button:nth-child(1)#consent_prompt_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
