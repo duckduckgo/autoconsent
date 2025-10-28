@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dak.de_bcv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dak.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dak\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#global-modal-root-container > div:nth-child(8):not([id]) > div#extended-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"extenden-consent-only-technical\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#global-modal-root-container > div:nth-child(8):not([id]) > div#extended-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"extenden-consent-only-technical\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#global-modal-root-container > div:nth-child(8):not([id]) > div#extended-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"extenden-consent-only-technical\"]",
+            "comment": "Nur erforderliche"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#global-modal-root-container > div:nth-child(8):not([id]) > div#extended-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"extenden-consent-only-technical\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
