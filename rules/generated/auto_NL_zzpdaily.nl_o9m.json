@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_zzpdaily.nl_o9m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://zzpdaily.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zzpdaily\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(1)#cookiescript_leftpart > div:nth-child(2)#cookiescript_description > span:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(1)#cookiescript_leftpart > div:nth-child(2)#cookiescript_description > span:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(1)#cookiescript_leftpart > div:nth-child(2)#cookiescript_description > span:not([id]) > a:nth-child(2):not([id])",
+            "comment": "weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(1)#cookiescript_leftpart > div:nth-child(2)#cookiescript_description > span:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
