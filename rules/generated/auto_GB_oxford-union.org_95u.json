@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_oxford-union.org_95u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://oxford-union.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oxford-union\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookieConsentContainer > div:nth-child(1)#cm > div#cm_inner > div:nth-child(3)#cm_btns > button:nth-child(2)#cm_secondary_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookieConsentContainer > div:nth-child(1)#cm > div#cm_inner > div:nth-child(3)#cm_btns > button:nth-child(2)#cm_secondary_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookieConsentContainer > div:nth-child(1)#cm > div#cm_inner > div:nth-child(3)#cm_btns > button:nth-child(2)#cm_secondary_btn",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookieConsentContainer > div:nth-child(1)#cm > div#cm_inner > div:nth-child(3)#cm_btns > button:nth-child(2)#cm_secondary_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
