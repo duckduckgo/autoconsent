@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_skyscanner.nl_0ri",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.skyscanner.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?skyscanner\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Alleen essentiële cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-container > div:not([id]) > div:nth-child(2)#cookieBannerContent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
