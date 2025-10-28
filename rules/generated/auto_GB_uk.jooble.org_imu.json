@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_uk.jooble.org_imu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://uk.jooble.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uk\\.jooble\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(2)#cookiescript_toppart > div:nth-child(2)#cookiescript_rightpart > div#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
