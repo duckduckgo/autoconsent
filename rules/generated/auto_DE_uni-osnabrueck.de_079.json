@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_uni-osnabrueck.de_079",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.uni-osnabrueck.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uni-osnabrueck\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "comment": " Deny all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(5)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
