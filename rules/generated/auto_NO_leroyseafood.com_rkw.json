@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_leroyseafood.com_rkw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.leroyseafood.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?leroyseafood\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiConsentBanner > div:nth-child(1)#coiConsentBannerBase > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiConsentBanner > div:nth-child(1)#coiConsentBannerBase > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiConsentBanner > div:nth-child(1)#coiConsentBannerBase > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiConsentBanner > div:nth-child(1)#coiConsentBannerBase > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
