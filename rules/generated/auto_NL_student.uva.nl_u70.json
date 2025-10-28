@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_student.uva.nl_u70",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://student.uva.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?student\\.uva\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-banner-accept\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-banner-accept\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-banner-accept\"]",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-banner-accept\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
