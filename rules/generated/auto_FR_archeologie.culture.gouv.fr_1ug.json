@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_archeologie.culture.gouv.fr_1ug",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://archeologie.culture.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?archeologie\\.culture\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(4)#tarteaucitronAllAccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(4)#tarteaucitronAllAccept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(4)#tarteaucitronAllAccept",
+            "comment": "✓ Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(4)#tarteaucitronAllAccept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
