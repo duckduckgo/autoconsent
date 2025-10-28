@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_charlotteobserver.com_nju",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.charlotteobserver.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?charlotteobserver\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#e944c64d-7b85-4b25-bb0b-2cfc0978eddf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#e944c64d-7b85-4b25-bb0b-2cfc0978eddf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#e944c64d-7b85-4b25-bb0b-2cfc0978eddf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#e944c64d-7b85-4b25-bb0b-2cfc0978eddf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
