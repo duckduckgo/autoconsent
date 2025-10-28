@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_pubs.acs.org_pfl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pubs.acs.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pubs\\.acs\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#f9a8e55e-2cb0-42ae-99f4-270e9198e7fc > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#f9a8e55e-2cb0-42ae-99f4-270e9198e7fc > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#f9a8e55e-2cb0-42ae-99f4-270e9198e7fc > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#f9a8e55e-2cb0-42ae-99f4-270e9198e7fc > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
