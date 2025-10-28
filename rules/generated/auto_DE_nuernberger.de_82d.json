@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_nuernberger.de_82d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nuernberger.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nuernberger\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#modal > div:nth-child(2)#buttonArray > button:nth-child(2)#consent_prompt_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#modal > div:nth-child(2)#buttonArray > button:nth-child(2)#consent_prompt_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#modal > div:nth-child(2)#buttonArray > button:nth-child(2)#consent_prompt_reject",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#modal > div:nth-child(2)#buttonArray > button:nth-child(2)#consent_prompt_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
