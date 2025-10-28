@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_denbypottery.com_4b4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.denbypottery.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?denbypottery\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentik-cookie > div:nth-child(1)#cst-cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#cst-cookies-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentik-cookie > div:nth-child(1)#cst-cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#cst-cookies-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentik-cookie > div:nth-child(1)#cst-cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#cst-cookies-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentik-cookie > div:nth-child(1)#cst-cookie-banner > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1)#cst-cookies-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
