@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_milestonesrestaurants.com_j2k",
-    "vendorUrl": "https://milestonesrestaurants.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])"
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])"
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
