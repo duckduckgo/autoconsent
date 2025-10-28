@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_blog.hubspot.fr_zvk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blog.hubspot.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blog\\.hubspot\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div:nth-child(2)#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-eu-cookie-confirmation-buttons-area > div:nth-child(1)#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div:nth-child(2)#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-eu-cookie-confirmation-buttons-area > div:nth-child(1)#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div:nth-child(2)#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-eu-cookie-confirmation-buttons-area > div:nth-child(1)#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button",
+            "comment": "Refuser Tous Les Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div:nth-child(2)#hs-eu-cookie-confirmation-inner > div:nth-child(3)#hs-eu-cookie-confirmation-buttons-area > div:nth-child(1)#hs-eu-confirmation-button-group > div#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
