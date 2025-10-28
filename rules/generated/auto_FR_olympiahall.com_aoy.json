@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_olympiahall.com_aoy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.olympiahall.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?olympiahall\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div#tarteaucitronAlertBigContent > div:nth-child(2)#tarteaucitronAlertButtons > div:nth-child(1):not([id]) > button:nth-child(1)#tarteaucitronPersonalize2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div#tarteaucitronAlertBigContent > div:nth-child(2)#tarteaucitronAlertButtons > div:nth-child(1):not([id]) > button:nth-child(1)#tarteaucitronPersonalize2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div#tarteaucitronAlertBigContent > div:nth-child(2)#tarteaucitronAlertButtons > div:nth-child(1):not([id]) > button:nth-child(1)#tarteaucitronPersonalize2",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div#tarteaucitronAlertBigContent > div:nth-child(2)#tarteaucitronAlertButtons > div:nth-child(1):not([id]) > button:nth-child(1)#tarteaucitronPersonalize2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
