@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_personalised.clothing_pkl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://personalised.clothing/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?personalised\\.clothing/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form1 > div:nth-child(9)#consent-bar > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form1 > div:nth-child(9)#consent-bar > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form1 > div:nth-child(9)#consent-bar > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#reject-all",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form1 > div:nth-child(9)#consent-bar > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
