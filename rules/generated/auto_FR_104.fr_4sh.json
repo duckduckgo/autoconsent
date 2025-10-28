@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_104.fr_4sh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.104.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?104\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronDenyAllTop"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronDenyAllTop"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronDenyAllTop",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > div:nth-child(2):not([id]) > button:nth-child(2)#tarteaucitronDenyAllTop",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
