@@ -7,17 +7,17 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?klm\\.(co\\.uk|[a-z]+)/"
+        "urlPattern": "^https?://(www\\.)?klm\\.ch/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies_btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies_btn"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies_btn",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies_btn",
             "timeout": 1000,
             "check": "none"
         }
