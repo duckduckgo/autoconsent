@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_tescobank.com_2o0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tescobank.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tescobank\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:nth-child(2):not([id]) > button:nth-child(2)#ensRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
