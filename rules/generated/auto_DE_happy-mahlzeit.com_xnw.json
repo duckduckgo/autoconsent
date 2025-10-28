@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_happy-mahlzeit.com_xnw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.happy-mahlzeit.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?happy-mahlzeit\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cc-individual-cookie-settings > div:nth-child(6):not([id]) > button:nth-child(3)#cookie-settings-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
