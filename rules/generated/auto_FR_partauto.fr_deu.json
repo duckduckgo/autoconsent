@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_partauto.fr_deu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.partauto.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?partauto\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(1):not([id]) > header#header > div:nth-child(1)#first_header_row > div:nth-child(4)#menu_right > div:nth-child(2):not([id]) > div:nth-child(4)#lgcookieslaw_banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(1):not([id]) > header#header > div:nth-child(1)#first_header_row > div:nth-child(4)#menu_right > div:nth-child(2):not([id]) > div:nth-child(4)#lgcookieslaw_banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(1):not([id]) > header#header > div:nth-child(1)#first_header_row > div:nth-child(4)#menu_right > div:nth-child(2):not([id]) > div:nth-child(4)#lgcookieslaw_banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(1):not([id]) > header#header > div:nth-child(1)#first_header_row > div:nth-child(4)#menu_right > div:nth-child(2):not([id]) > div:nth-child(4)#lgcookieslaw_banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
