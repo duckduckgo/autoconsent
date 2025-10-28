@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_human-immobilier.fr_0c3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.human-immobilier.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?human-immobilier\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(1)#tarteaucitronDisclaimerAlert > span:nth-child(3):not([id]) > button#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(1)#tarteaucitronDisclaimerAlert > span:nth-child(3):not([id]) > button#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(1)#tarteaucitronDisclaimerAlert > span:nth-child(3):not([id]) > button#tarteaucitronAllDenied2",
+            "comment": "“Continuer sans accepter”"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > span:nth-child(1)#tarteaucitronDisclaimerAlert > span:nth-child(3):not([id]) > button#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
