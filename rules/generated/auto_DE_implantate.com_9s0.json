@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#abeb59e00-7cf7-4308-96ee-810b58fe3d7b > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+            "exists": "body > div#a5343be43-f31d-4d5e-8d7b-7b1147980d54 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#abeb59e00-7cf7-4308-96ee-810b58fe3d7b > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+            "visible": "body > div#a5343be43-f31d-4d5e-8d7b-7b1147980d54 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#abeb59e00-7cf7-4308-96ee-810b58fe3d7b > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "waitForThenClick": "body > div#a5343be43-f31d-4d5e-8d7b-7b1147980d54 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
             "comment": "Weiter ohne Einwilligung"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#abeb59e00-7cf7-4308-96ee-810b58fe3d7b > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "waitForVisible": "body > div#a5343be43-f31d-4d5e-8d7b-7b1147980d54 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
