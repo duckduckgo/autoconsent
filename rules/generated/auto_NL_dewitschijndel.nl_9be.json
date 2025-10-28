@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dewitschijndel.nl_9be",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dewitschijndel.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dewitschijndel\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#refuse_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#refuse_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#refuse_cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#notice-cookie-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#refuse_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
