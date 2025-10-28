@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_gls-group.com_8tj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gls-group.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gls-group\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-rall-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-rall-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-rall-bn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-rall-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
