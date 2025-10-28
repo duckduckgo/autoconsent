@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_blog.magnuslegal.com_3xz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blog.magnuslegal.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blog\\.magnuslegal\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div:nth-child(2)#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div:nth-child(2)#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div:nth-child(2)#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hs-banner-parent > div#hs-eu-cookie-confirmation > div#hs-eu-cookie-confirmation-inner > div:nth-child(4)#hs-eu-cookie-confirmation-buttons-area > div#hs-eu-confirmation-button-group > div:nth-child(2)#hs-eu-opt-in-buttons > button:nth-child(2)#hs-eu-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
