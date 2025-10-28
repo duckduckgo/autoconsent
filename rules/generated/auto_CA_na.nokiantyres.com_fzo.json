@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_na.nokiantyres.com_fzo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://na.nokiantyres.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?na\\.nokiantyres\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton",
+            "comment": "ALLOW ONLY REQUIRED COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-information-template-wrapper > div:nth-child(2)#coiOverlay > div#coi-banner-wrapper > div:nth-child(1)#coiPage-1 > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#declineButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
