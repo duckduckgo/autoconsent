@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_arbys.com_x3p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.arbys.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arbys\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lanyard_root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lanyard_root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lanyard_root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lanyard_root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#ketch-banner > div#ketch-consent-banner > div:not([id]) > div:nth-child(2)#ketch-banner-buttons-container-standard > button:nth-child(2)#ketch-banner-button-secondary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
