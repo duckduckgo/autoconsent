@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_conseils-animaux.fr_k5w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://conseils-animaux.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?conseils-animaux\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a#cookie_action_close_header_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a#cookie_action_close_header_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a#cookie_action_close_header_reject",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a#cookie_action_close_header_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
