@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_proprofs.com_vai",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.proprofs.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?proprofs\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#adroll_consent_container > div:nth-child(1)#adroll_consent_banner_container > div#adroll_consent_banner > div:nth-child(3):not([id]) > a:nth-child(1)#adroll_consent_reject > div#adroll_reject > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#adroll_consent_container > div:nth-child(1)#adroll_consent_banner_container > div#adroll_consent_banner > div:nth-child(3):not([id]) > a:nth-child(1)#adroll_consent_reject > div#adroll_reject > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#adroll_consent_container > div:nth-child(1)#adroll_consent_banner_container > div#adroll_consent_banner > div:nth-child(3):not([id]) > a:nth-child(1)#adroll_consent_reject > div#adroll_reject > div:not([id])",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#adroll_consent_container > div:nth-child(1)#adroll_consent_banner_container > div#adroll_consent_banner > div:nth-child(3):not([id]) > a:nth-child(1)#adroll_consent_reject > div#adroll_reject > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
