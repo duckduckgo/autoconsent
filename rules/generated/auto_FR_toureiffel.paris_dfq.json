@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_toureiffel.paris_dfq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.toureiffel.paris/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?toureiffel\\.paris/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "comment": "Continuer sans accepter "
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tarteaucitronRoot > div:nth-child(4)#tarteaucitronAlertBig > button:nth-child(3)#tarteaucitronAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
