@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_celestron.com_lls",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.celestron.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?celestron\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "dialog#polaris-consent-widgets > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#polaris-consent-widgets > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "dialog#polaris-consent-widgets > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "dialog#polaris-consent-widgets > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
