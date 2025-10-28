@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_thezebra.com_lpo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.thezebra.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thezebra\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#a5d5968a-1e06-4c5d-8eae-bc5db48a4caf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#a5d5968a-1e06-4c5d-8eae-bc5db48a4caf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#a5d5968a-1e06-4c5d-8eae-bc5db48a4caf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#a5d5968a-1e06-4c5d-8eae-bc5db48a4caf > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
