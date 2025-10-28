@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_de.rs-online.com_wnk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.rs-online.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.rs-online\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div#ensNotifyBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
