@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_abacus.ch_s1d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.abacus.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?abacus\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookieman-settings > form:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookieman-settings > form:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookieman-settings > form:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Strictly necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookieman-settings > form:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
