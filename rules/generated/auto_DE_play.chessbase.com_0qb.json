@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_play.chessbase.com_0qb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://play.chessbase.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?play\\.chessbase\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#askForCookiesBackground > div:not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#askForCookiesBackground > div:not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#askForCookiesBackground > div:not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept",
+            "comment": "Reject\nall"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#askForCookiesBackground > div:not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
