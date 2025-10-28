@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nederland.tv_lsl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nederland.tv/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nederland\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(8)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(8)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(8)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "comment": "Alles afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div:nth-child(2)#cc-panel > div:nth-child(8)#ccc-button-holder > button:nth-child(2)#ccc-reject-settings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
