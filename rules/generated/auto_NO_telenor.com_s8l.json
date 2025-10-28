@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_telenor.com_s8l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.telenor.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?telenor\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#global-overlay-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > a#consent_prompt_decline > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#global-overlay-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > a#consent_prompt_decline > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#global-overlay-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > a#consent_prompt_decline > button:not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#global-overlay-block > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > a#consent_prompt_decline > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
