@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_treccani.it_n2w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.treccani.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?treccani\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Continua senza accettare"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cl-consent > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
