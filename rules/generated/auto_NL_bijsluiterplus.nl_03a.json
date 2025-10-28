@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bijsluiterplus.nl_03a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bijsluiterplus.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bijsluiterplus\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "comment": "Alles afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
