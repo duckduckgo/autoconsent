@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser"
+            "exists": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(6)#cookieNoticeDeclineCloser"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser"
+            "visible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(6)#cookieNoticeDeclineCloser"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser",
+            "waitForThenClick": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(6)#cookieNoticeDeclineCloser",
             "comment": "Alles ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(5)#cookieNoticeDeclineCloser",
+            "waitForVisible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > button:nth-child(6)#cookieNoticeDeclineCloser",
             "timeout": 1000,
             "check": "none"
         }
