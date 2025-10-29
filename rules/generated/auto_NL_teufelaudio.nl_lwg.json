@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_teufelaudio.nl_lwg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://teufelaudio.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?teufelaudio\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > custom-privacy-accordion:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > custom-privacy-accordion:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > custom-privacy-accordion:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > custom-privacy-accordion:not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
