@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_vandenhoeck-ruprecht-verlage.com_jj9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vandenhoeck-ruprecht-verlage.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vandenhoeck-ruprecht-verlage\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-permission--accept-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-permission--accept-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-permission--accept-button",
+            "comment": "Nicht notwendige Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acris--page-wrap--cookie-permission > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-permission--accept-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
