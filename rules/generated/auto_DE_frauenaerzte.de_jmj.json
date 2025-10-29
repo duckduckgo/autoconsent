@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_frauenaerzte.de_jmj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.frauenaerzte.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?frauenaerzte\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-info > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2)#cookies_are_evil"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-info > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2)#cookies_are_evil"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-info > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2)#cookies_are_evil",
+            "comment": "Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-info > div:not([id]) > p:nth-child(3):not([id]) > a:nth-child(2)#cookies_are_evil",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
