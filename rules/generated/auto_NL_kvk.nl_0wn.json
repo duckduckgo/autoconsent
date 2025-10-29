@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-«r0»"
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-_r_0_"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-«r0»"
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-_r_0_"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-«r0»",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-_r_0_",
             "comment": "Functioneel"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-«r0»",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > section#cookie-consent > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#button-_r_0_",
             "timeout": 1000,
             "check": "none"
         }
