@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_topparken.nl_6ml",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.topparken.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?topparken\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
