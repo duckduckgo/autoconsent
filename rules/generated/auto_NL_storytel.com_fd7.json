@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_storytel.com_fd7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.storytel.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?storytel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(1):not([id]) > div#cb-content > div:nth-child(1)#cb-banner > div:nth-child(3)#cb-left > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(1):not([id]) > div#cb-content > div:nth-child(1)#cb-banner > div:nth-child(3)#cb-left > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(1):not([id]) > div#cb-content > div:nth-child(1)#cb-banner > div:nth-child(3)#cb-left > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(1):not([id]) > div#cb-content > div:nth-child(1)#cb-banner > div:nth-child(3)#cb-left > button:nth-child(1)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
