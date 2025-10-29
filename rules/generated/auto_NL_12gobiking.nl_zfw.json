@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_12gobiking.nl_zfw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.12gobiking.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?12gobiking\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_ec-dialog > div:nth-child(2):not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_ec-dialog > div:nth-child(2):not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_ec-dialog > div:nth-child(2):not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Alles afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_ec-dialog > div:nth-child(2):not([id]) > div:nth-child(2)#_ec-default > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
