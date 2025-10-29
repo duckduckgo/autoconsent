@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_karafun.fr_0z5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.karafun.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?karafun\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#modalReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#modalReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#modalReject",
+            "comment": "Refuser tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#modalReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
