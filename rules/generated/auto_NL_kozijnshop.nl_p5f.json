@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_kozijnshop.nl_p5f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kozijnshop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kozijnshop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

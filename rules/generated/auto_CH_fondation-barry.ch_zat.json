@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fondation-barry.ch_zat",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fondation-barry.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fondation-barry\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

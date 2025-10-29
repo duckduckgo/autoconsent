@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hva.nl_wbw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hva.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hva\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline",
+            "comment": "Alle cookies afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > button:nth-child(2)#CookieInfoDialogDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
