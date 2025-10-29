@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_zugkraft-stucki.ch_2in",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.zugkraft-stucki.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zugkraft-stucki\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

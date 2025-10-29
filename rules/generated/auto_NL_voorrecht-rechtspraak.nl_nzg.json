@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_voorrecht-rechtspraak.nl_nzg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.voorrecht-rechtspraak.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?voorrecht-rechtspraak\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mxui_widget_Window_0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#mxui_widget_HorizontalScrollContainer_0 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div#mxui_widget_Wrapper_8 > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mxui_widget_Window_0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#mxui_widget_HorizontalScrollContainer_0 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div#mxui_widget_Wrapper_8 > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mxui_widget_Window_0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#mxui_widget_HorizontalScrollContainer_0 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div#mxui_widget_Wrapper_8 > button:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mxui_widget_Window_0 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#mxui_widget_HorizontalScrollContainer_0 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div#mxui_widget_Wrapper_8 > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
