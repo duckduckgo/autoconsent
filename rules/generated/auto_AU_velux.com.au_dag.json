@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_velux.com.au_dag",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.velux.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?velux\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
+            "comment": "NECESSARY ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
