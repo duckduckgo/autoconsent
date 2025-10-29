@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_velux.co.uk_0",
-    "vendorUrl": "https://www.velux.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
+            "exists": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
+            "visible": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
             "comment": "NECESSARY ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
