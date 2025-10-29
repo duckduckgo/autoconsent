@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_highcharts.com_tt4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.highcharts.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?highcharts\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hc-cookie-dialog > div:nth-child(4):not([id]) > button:nth-child(1)#hc-cookie-dialog-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hc-cookie-dialog > div:nth-child(4):not([id]) > button:nth-child(1)#hc-cookie-dialog-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hc-cookie-dialog > div:nth-child(4):not([id]) > button:nth-child(1)#hc-cookie-dialog-decline",
+            "comment": "Use necessary cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hc-cookie-dialog > div:nth-child(4):not([id]) > button:nth-child(1)#hc-cookie-dialog-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
