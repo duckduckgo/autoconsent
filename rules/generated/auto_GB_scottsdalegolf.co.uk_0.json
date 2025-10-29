@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#app > div:nth-child(11):not([id]) > button:nth-child(4):not([id])"
+            "exists": "body > div#app > div:nth-child(14):not([id]) > button:nth-child(4):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#app > div:nth-child(11):not([id]) > button:nth-child(4):not([id])"
+            "visible": "body > div#app > div:nth-child(14):not([id]) > button:nth-child(4):not([id])"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#app > div:nth-child(11):not([id]) > button:nth-child(4):not([id])",
+            "waitForThenClick": "body > div#app > div:nth-child(14):not([id]) > button:nth-child(4):not([id])",
             "comment": "DECLINE"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#app > div:nth-child(11):not([id]) > button:nth-child(4):not([id])",
+            "waitForVisible": "body > div#app > div:nth-child(14):not([id]) > button:nth-child(4):not([id])",
             "timeout": 1000,
             "check": "none"
         }

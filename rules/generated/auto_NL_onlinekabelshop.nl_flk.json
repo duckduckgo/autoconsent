@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_onlinekabelshop.nl_flk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.onlinekabelshop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?onlinekabelshop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(1)#c-left > p:nth-child(2):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(1)#c-left > p:nth-child(2):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(1)#c-left > p:nth-child(2):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "‘weigeren’"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(1)#c-left > p:nth-child(2):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
