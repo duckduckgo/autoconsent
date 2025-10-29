@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_allango.net_59c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.allango.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?allango\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#radix-\\:r5\\: > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#radix-\\:r5\\: > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#radix-\\:r5\\: > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#radix-\\:r5\\: > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
