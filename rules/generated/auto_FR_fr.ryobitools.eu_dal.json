@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
+            "exists": "body > form#form > div:nth-child(9)#react_740F9344C2AE480EB920D1BD5921ED97 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
+            "visible": "body > form#form > div:nth-child(9)#react_740F9344C2AE480EB920D1BD5921ED97 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
+            "waitForThenClick": "body > form#form > div:nth-child(9)#react_740F9344C2AE480EB920D1BD5921ED97 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
             "comment": "COOKIES NÉCESSAIRES UNIQUEMENT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > form#form > div:nth-child(9)#react_956F165BF7ED8A277F34A314FF9F1276 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
+            "waitForVisible": "body > form#form > div:nth-child(9)#react_740F9344C2AE480EB920D1BD5921ED97 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
             "timeout": 1000,
             "check": "none"
         }
