@@ -1,3 +1,27 @@
+# v14.34.1 (Thu Oct 30 2025)
+
+#### 🐛 Bug Fix
+
+- Fix evaluateRuleStep [#1070](https://github.com/duckduckgo/autoconsent/pull/1070) ([@chrmod](https://github.com/chrmod))
+
+#### Authors: 1
+
+- Krzysztof Modras ([@chrmod](https://github.com/chrmod))
+
+---
+
+# v14.34.0 (Tue Oct 28 2025)
+
+#### 🚀 Enhancement
+
+- Optimize heuristics [#1069](https://github.com/duckduckgo/autoconsent/pull/1069) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.33.2 (Sat Oct 25 2025)
 
 #### ⚠️ Pushed to `main`
