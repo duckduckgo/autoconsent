@@ -4,6 +4,7 @@ import { Config, RuleBundle } from '../lib/types';
 import { manifestVersion, storageGet, storageRemove, storageSet } from './mv-compat';
 import { initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
 import { consentomatic } from '../rules/consentomatic.json';
+import { filterCompactRules } from '../lib/encoding';
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -14,7 +15,7 @@ import { consentomatic } from '../rules/consentomatic.json';
 const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
-    const res = await fetch('./rules.json');
+    const res = await fetch('./compact-rules.json');
     storageSet({
         rules: await res.json(),
     });
@@ -84,7 +85,7 @@ chrome.tabs.onRemoved.addListener((tabId: number) => {
 chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
-    const senderUrl = sender.origin || sender.url;
+    const senderUrl = sender.url || `${sender.origin}/`;
     const senderDomain = new URL(senderUrl).hostname;
     const autoconsentConfig: Config = await storageGet('config');
     const logsConfig = autoconsentConfig.logs;
@@ -94,14 +95,18 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
         console.log(msg, sender);
         console.groupEnd();
     }
-    const rules: RuleBundle = await storageGet('rules');
-    rules.consentomatic = consentomatic;
 
     switch (msg.type) {
-        case 'init':
+        case 'init': {
             if (frameId === 0) {
                 await showOptOutStatus(tabId, 'idle');
             }
+            const rules: RuleBundle = {
+                autoconsent: [],
+                consentomatic,
+                compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
+            };
+            console.log('filtered rules:', rules.compact, JSON.stringify(rules.compact).length);
             chrome.tabs.sendMessage(
                 tabId,
                 {
@@ -114,6 +119,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
                 },
             );
             break;
+        }
         case 'eval':
             evalInTab(tabId, frameId, msg.code, msg.snippetId).then(([result]) => {
                 if (logsConfig.evals) {

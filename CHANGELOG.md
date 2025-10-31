@@ -1,3 +1,79 @@
+# v14.34.1 (Thu Oct 30 2025)
+
+#### 🐛 Bug Fix
+
+- Fix evaluateRuleStep [#1070](https://github.com/duckduckgo/autoconsent/pull/1070) ([@chrmod](https://github.com/chrmod))
+
+#### Authors: 1
+
+- Krzysztof Modras ([@chrmod](https://github.com/chrmod))
+
+---
+
+# v14.34.0 (Tue Oct 28 2025)
+
+#### 🚀 Enhancement
+
+- Optimize heuristics [#1069](https://github.com/duckduckgo/autoconsent/pull/1069) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.33.2 (Sat Oct 25 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Fix asana platform tasks ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.33.1 (Fri Oct 24 2025)
+
+#### 🐛 Bug Fix
+
+- Index compact rules for faster filtering [#1035](https://github.com/duckduckgo/autoconsent/pull/1035) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Add package-lock.json to release workflow paths ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.33.0 (Thu Oct 23 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1047](https://github.com/duckduckgo/autoconsent/pull/1047) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 1667026bc3fd895fdb107ab947615e657a975531 [#931](https://github.com/duckduckgo/autoconsent/pull/931) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1046](https://github.com/duckduckgo/autoconsent/pull/1046) ([@daxtheduck](https://github.com/daxtheduck))
+- Report the number of clicks and total opt-out time [#1039](https://github.com/duckduckgo/autoconsent/pull/1039) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#1045](https://github.com/duckduckgo/autoconsent/pull/1045) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.0.15 to 7.0.17 [#1040](https://github.com/duckduckgo/autoconsent/pull/1040) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.32.1 (Wed Oct 22 2025)
 
 #### ⚠️ Pushed to `main`

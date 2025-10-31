@@ -335,9 +335,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             const condition = await this.evaluateRuleStep(rule.if);
             logsConfig.rulesteps && console.log('Condition is', condition);
             if (condition) {
-                results.push(this._runRulesSequentially(rule.then), logsConfig.rulesteps);
+                results.push(this._runRulesSequentially(rule.then, logsConfig.rulesteps));
             } else if (rule.else) {
-                results.push(this._runRulesSequentially(rule.else), logsConfig.rulesteps);
+                results.push(this._runRulesSequentially(rule.else, logsConfig.rulesteps));
             } else {
                 results.push(true);
             }
