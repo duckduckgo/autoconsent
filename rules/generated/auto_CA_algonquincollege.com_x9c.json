@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential"
+            "exists": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1)#btn_cookie_essential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential"
+            "visible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1)#btn_cookie_essential"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential",
-            "comment": "Essential "
+            "waitForThenClick": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1)#btn_cookie_essential",
+            "comment": "Essential"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2):not([id]) > div:nth-child(1)#btn_cookie_essential",
+            "waitForVisible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(1)#btn_cookie_essential",
             "timeout": 1000,
             "check": "none"
         }
