@@ -1,3 +1,20 @@
+# v14.35.0 (Sat Nov 01 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group with 3 updates [#1049](https://github.com/duckduckgo/autoconsent/pull/1049) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump the adblocker group with 2 updates [#927](https://github.com/duckduckgo/autoconsent/pull/927) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.34.1 (Thu Oct 30 2025)
 
 #### 🐛 Bug Fix
