@@ -2,7 +2,7 @@
     "name": "hashicorp",
     "vendorUrl": "https://hashicorp.com/",
     "runContext": {
-        "urlPattern": "^https://[^.]*\\.hashicorp\\.com/"
+        "urlPattern": "^https://[a-z]*\\.hashicorp\\.com/"
     },
     "prehideSelectors": ["[data-testid=consent-banner]"],
     "detectCmp": [
