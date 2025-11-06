@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_kika.nl_199",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://kika.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kika\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-main > div#cookiebanner-inner > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(6):not([id]) > li:nth-child(1):not([id]) > button#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-main > div#cookiebanner-inner > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(6):not([id]) > li:nth-child(1):not([id]) > button#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-main > div#cookiebanner-inner > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(6):not([id]) > li:nth-child(1):not([id]) > button#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-main > div#cookiebanner-inner > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(6):not([id]) > li:nth-child(1):not([id]) > button#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
