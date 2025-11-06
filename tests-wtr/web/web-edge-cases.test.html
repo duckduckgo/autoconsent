@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./web-edge-cases.test');
+            });
+        </script>
+
+        <!-- Test elements for edge cases -->
+        <div id="edge-case-container"></div>
+    </body>
+</html>
