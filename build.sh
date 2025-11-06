@@ -17,8 +17,9 @@ $ESBUILD addon/devtools/panel.ts --outfile=dist/addon-mv3/devtools/panel.js
 
 ## Copy extension files into place
 mkdir -p dist/addon-firefox
-cp dist/addon-mv3/background.bundle.js dist/addon-firefox/background.bundle.js
-cp dist/addon-mv3/content.bundle.js dist/addon-firefox/content.bundle.js
+cp -r dist/addon-mv3/*.js dist/addon-firefox/
+cp -r dist/addon-mv3/*.html dist/addon-firefox/
+cp -r dist/addon-mv3/devtools dist/addon-firefox/
 cp -r addon/icons dist/addon-mv3/
 cp -r addon/icons dist/addon-firefox/
 cp rules/rules.json dist/addon-mv3/
