@@ -18,8 +18,6 @@ $ESBUILD addon/devtools/panel.ts --outfile=dist/addon-mv3/devtools/panel.js
 ## Copy extension files into place
 mkdir -p dist/addon-firefox
 cp -r dist/addon-mv3/*.js dist/addon-firefox/
-cp -r dist/addon-mv3/*.html dist/addon-firefox/
-cp -r dist/addon-mv3/devtools dist/addon-firefox/
 cp -r addon/icons dist/addon-mv3/
 cp -r addon/icons dist/addon-firefox/
 cp rules/rules.json dist/addon-mv3/
@@ -27,7 +25,9 @@ cp rules/compact-rules.json dist/addon-mv3/
 cp rules/rules.json dist/addon-firefox/
 cp rules/compact-rules.json dist/addon-firefox/
 cp addon/popup.html dist/addon-mv3/
+cp addon/popup.html dist/addon-firefox/
 cp -r addon/devtools dist/addon-mv3/
+cp -r addon/devtools dist/addon-firefox/
 cp addon/manifest.mv3.json dist/addon-mv3/manifest.json
 cp addon/manifest.firefox.json dist/addon-firefox/manifest.json
 cp node_modules/bulma/css/bulma.min.css dist/addon-mv3/devtools/
