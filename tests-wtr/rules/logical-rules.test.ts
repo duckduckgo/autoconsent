@@ -141,7 +141,7 @@ describe('AutoConsentCMP', () => {
             expect(domActionsMock.click.calledWith('selector3')).to.be.true;
         });
 
-        it('returns false if both "then" and "else" branches return false', async () => {
+        it('returns false if the executed branch returns false', async () => {
             domActionsMock.elementExists.withArgs('selector1').returns(false);
             domActionsMock.click.returns(Promise.resolve(false));
 
