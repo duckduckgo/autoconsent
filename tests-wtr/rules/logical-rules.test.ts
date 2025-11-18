@@ -183,6 +183,7 @@ describe('AutoConsentCMP', () => {
             domActionsMock.elementExists.withArgs('selector1').returns(true);
             domActionsMock.elementExists.withArgs('selector2').returns(false);
             domActionsMock.click.withArgs('selector3').returns(Promise.resolve(true));
+            domActionsMock.click.withArgs('selector4').returns(Promise.resolve(false));
 
             const result = await cmp._runRulesSequentially([
                 {
@@ -197,6 +198,7 @@ describe('AutoConsentCMP', () => {
                 },
             ]);
             expect(result).to.equal(false);
+            expect(domActionsMock.click.calledWith('selector4')).to.be.true;
         });
     });
 });
