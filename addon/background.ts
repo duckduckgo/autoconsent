@@ -1,7 +1,7 @@
 import { snippets } from '../lib/eval-snippets';
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from '../lib/messages';
 import { Config, RuleBundle } from '../lib/types';
-import { manifestVersion, storageGet, storageRemove, storageSet } from './mv-compat';
+import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
 import { consentomatic } from '../rules/consentomatic.json';
 import { filterCompactRules } from '../lib/encoding';
@@ -27,26 +27,6 @@ async function evalInTab(
     code: string,
     snippetId?: keyof typeof snippets,
 ): Promise<chrome.scripting.InjectionResult<boolean>[]> {
-    if (manifestVersion === 2) {
-        return new Promise((resolve) => {
-            chrome.tabs.executeScript(
-                tabId,
-                {
-                    frameId,
-                    code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`,
-                },
-                (resultArr) => {
-                    resolve([
-                        {
-                            result: resultArr[0],
-                            frameId,
-                            documentId: '',
-                        },
-                    ]);
-                },
-            );
-        });
-    }
     return chrome.scripting.executeScript({
         target: {
             tabId,
@@ -72,11 +52,6 @@ chrome.runtime.onInstalled.addListener(() => {
     loadRules();
     initConfig();
 });
-if (manifestVersion === 2) {
-    // always load rules on startup in MV2
-    loadRules();
-    initConfig();
-}
 
 chrome.tabs.onRemoved.addListener((tabId: number) => {
     storageRemove(`detected${tabId}`);
@@ -206,28 +181,6 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             break;
     }
 });
-
-if (manifestVersion === 2) {
-    // MV3 handles this inside the popup
-    chrome.pageAction.onClicked.addListener(async (tab) => {
-        const tabId = tab.id;
-        const detectedKey = `detected${tabId}`;
-        const frameId = await storageGet(detectedKey);
-        if (typeof frameId === 'number') {
-            storageRemove(detectedKey);
-            await showOptOutStatus(tabId, 'working');
-            chrome.tabs.sendMessage(
-                tabId,
-                {
-                    type: 'optOut',
-                } as BackgroundMessage,
-                {
-                    frameId,
-                },
-            );
-        }
-    });
-}
 
 // Communicate with devtools panels
 chrome.runtime.onConnect.addListener(function (devToolsConnection) {

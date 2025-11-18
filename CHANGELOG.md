@@ -1,3 +1,44 @@
+# v14.36.0 (Thu Nov 06 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1079](https://github.com/duckduckgo/autoconsent/pull/1079) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.35.0 (Sat Nov 01 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group with 3 updates [#1049](https://github.com/duckduckgo/autoconsent/pull/1049) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump the adblocker group with 2 updates [#927](https://github.com/duckduckgo/autoconsent/pull/927) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.34.1 (Thu Oct 30 2025)
+
+#### 🐛 Bug Fix
+
+- Fix evaluateRuleStep [#1070](https://github.com/duckduckgo/autoconsent/pull/1070) ([@chrmod](https://github.com/chrmod))
+
+#### Authors: 1
+
+- Krzysztof Modras ([@chrmod](https://github.com/chrmod))
+
+---
+
 # v14.34.0 (Tue Oct 28 2025)
 
 #### 🚀 Enhancement
