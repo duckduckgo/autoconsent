@@ -1,3 +1,22 @@
+# v14.37.0 (Wed Nov 19 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#1085](https://github.com/duckduckgo/autoconsent/pull/1085) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Use MV3 for Firefox extension [#1080](https://github.com/duckduckgo/autoconsent/pull/1080) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.17 to 7.0.18 [#1084](https://github.com/duckduckgo/autoconsent/pull/1084) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.36.0 (Thu Nov 06 2025)
 
 #### 🚀 Enhancement
