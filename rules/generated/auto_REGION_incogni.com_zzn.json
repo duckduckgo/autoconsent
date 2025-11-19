@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_incogni.com_zzn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://incogni.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?incogni\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id])[data-testid=\"cookie-consent-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-consent-left\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id])[data-testid=\"cookie-consent-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-consent-left\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > aside:not([id])[data-testid=\"cookie-consent-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-consent-left\"]",
+            "comment": "Cookie settings"
+        },
+        {
+            "waitForThenClick": "body > aside:not([id])[data-testid=\"cookie-consent-wrapper\"] > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-consent-right\"]",
+            "comment": "Confirm selection"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id])[data-testid=\"cookie-consent-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookie-consent-left\"]",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > aside:not([id])[data-testid=\"cookie-consent-wrapper\"] > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-consent-right\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

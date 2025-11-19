@@ -1,0 +1,58 @@
+{
+    "name": "auto_REGION_lanxshoes.com_f1f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://lanxshoes.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lanxshoes\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#cookies-preferences"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#cookies-preferences"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#cookies-preferences",
+            "comment": "PREFERENCES"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(6):not([id]) > div#cst-quick-categories > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#quick-cat-38474",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(6):not([id]) > div#cst-quick-categories > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#quick-cat-38475",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(6):not([id]) > div#cst-quick-categories > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#quick-cat-38476",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#cookies-preferences",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

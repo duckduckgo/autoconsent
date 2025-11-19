@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.etyres.co.uk_cc7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.etyres.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.etyres\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(3)#cookieBanner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(3)#cookieBanner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(3)#cookieBanner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage",
+            "comment": "No, manage cookies"
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(4)#cookieModalSettings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save changes"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(3)#cookieBanner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#manage",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#app > div:nth-child(4)#cookieModalSettings > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.turkishairlines.com_cal",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.turkishairlines.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.turkishairlines\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:not([id]) > main:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#changeCookiesSettingsButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:not([id]) > main:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#changeCookiesSettingsButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#__next > div:not([id]) > main:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#changeCookiesSettingsButton",
+            "comment": "Change settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"undefined-content\"] > div:nth-child(2):not([id]) > button:nth-child(6):not([id])",
+            "comment": "Confirm and close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:not([id]) > main:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#changeCookiesSettingsButton",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"undefined-content\"] > div:nth-child(2):not([id]) > button:nth-child(6):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

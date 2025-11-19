@@ -1,0 +1,71 @@
+{
+    "name": "auto_REGION_www.rolex.com_4zv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rolex.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.rolex\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn",
+            "comment": "MORE OPTIONS"
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(1):not([id]) > main:nth-child(5):not([id]) > section:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > fieldset:not([id]) > div:nth-child(2):not([id]) > input[type=\"radio\"]:nth-child(1)#page-1",
+            "comment": "slide-2"
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(1):not([id]) > main:nth-child(5):not([id]) > section:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > fieldset:not([id]) > div:nth-child(3):not([id]) > input[type=\"radio\"]:nth-child(1)#page-2",
+            "comment": "slide-3"
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(1):not([id]) > main:nth-child(5):not([id]) > section:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > fieldset:not([id]) > div:nth-child(4):not([id]) > input[type=\"radio\"]:nth-child(1)#page-3",
+            "comment": "slide-4"
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(1):not([id]) > main:nth-child(5):not([id]) > section:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > fieldset:not([id]) > div:nth-child(5):not([id]) > input[type=\"radio\"]:nth-child(1)#page-4",
+            "comment": "slide-5"
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-all-btn",
+            "comment": "REJECT ALL"
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#save-and-exit",
+            "comment": "SAVE & EXIT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-all-btn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#save-and-exit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

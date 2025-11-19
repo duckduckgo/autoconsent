@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.rspb.org.uk_nnw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rspb.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.rspb\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > ng-component:nth-child(2):not([id]) > app-layout-default:not([id]) > rspb-cookie-banner:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > ng-component:nth-child(2):not([id]) > app-layout-default:not([id]) > rspb-cookie-banner:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > app-root:not([id]) > ng-component:nth-child(2):not([id]) > app-layout-default:not([id]) > rspb-cookie-banner:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Edit settings"
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > ng-component:nth-child(2):not([id]) > app-layout-default:not([id]) > rspb-cookie-banner:nth-child(4):not([id]) > div:nth-child(4):not([id])[data-testid=\"options\"] > button:nth-child(2):not([id])",
+            "comment": "Save settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > ng-component:nth-child(2):not([id]) > app-layout-default:not([id]) > rspb-cookie-banner:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > app-root:not([id]) > ng-component:nth-child(2):not([id]) > app-layout-default:not([id]) > rspb-cookie-banner:nth-child(4):not([id]) > div:nth-child(4):not([id])[data-testid=\"options\"] > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

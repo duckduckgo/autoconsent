@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_goodlawproject.org_5x6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://goodlawproject.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?goodlawproject\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(1):not([id]) > form:nth-child(2):not([id]) > fieldset:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#more_options"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(1):not([id]) > form:nth-child(2):not([id]) > fieldset:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#more_options"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(1):not([id]) > form:nth-child(2):not([id]) > fieldset:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#more_options",
+            "comment": "More options"
+        },
+        {
+            "waitForThenClick": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject_all",
+            "comment": "Reject all"
+        },
+        {
+            "waitForThenClick": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#confirm_selection",
+            "comment": "Confirm selection"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(1):not([id]) > form:nth-child(2):not([id]) > fieldset:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#more_options",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject_all",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#chd-cookie-card > div:not([id]) > div:nth-child(2):not([id]) > fieldset:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#confirm_selection",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

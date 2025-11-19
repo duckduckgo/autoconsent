@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_uk.smart.com_muq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://uk.smart.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uk\\.smart\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookie-pro-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-pro-info-button[data-testid=\"button-component\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookie-pro-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-pro-info-button[data-testid=\"button-component\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > dialog#cookie-pro-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-pro-info-button[data-testid=\"button-component\"]",
+            "comment": "Privacy Settings"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(4)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject All"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(4)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookie-pro-dialog > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-pro-info-button[data-testid=\"button-component\"]",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(4)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(4)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "name": "auto_REGION_www.bax-shop.co.uk_9aw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bax-shop.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.bax-shop\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2)#cookies-content-x > a:nth-child(4)#edit-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2)#cookies-content-x > a:nth-child(4)#edit-settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2)#cookies-content-x > a:nth-child(4)#edit-settings",
+            "comment": "Cookie Settings"
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(3)#settings-content > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1)#CybotCookiebotDialogBodyLevelButtonPreferences",
+            "comment": "Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(3)#settings-content > div:nth-child(3):not([id]) > div:nth-child(5):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1)#CybotCookiebotDialogBodyLevelButtonStatistics",
+            "comment": "Statistics"
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(3)#settings-content > div:nth-child(3):not([id]) > div:nth-child(7):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1)#CybotCookiebotDialogBodyLevelButtonMarketing",
+            "comment": "Marketing"
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(3)#settings-content > div:nth-child(4):not([id]) > a#AcceptReload",
+            "comment": "Save cookie preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2)#cookies-content-x > a:nth-child(4)#edit-settings",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(3)#settings-content > div:nth-child(4):not([id]) > a#AcceptReload",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

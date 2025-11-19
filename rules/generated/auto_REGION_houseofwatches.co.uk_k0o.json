@@ -1,0 +1,54 @@
+{
+    "name": "auto_REGION_houseofwatches.co.uk_k0o",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://houseofwatches.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?houseofwatches\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#btn-cookie-manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#btn-cookie-manage"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#btn-cookie-manage",
+            "comment": "Manage Cookies"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#cookie-mark-func",
+            "comment": "cookie-mark-func"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_d8d6a0a654000 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > form#seg-email-collection > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1):not([id])",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button#btn-cookie-save",
+            "comment": "SAVE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#btn-cookie-manage",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#modal-content-16 > div#notice-cookie-block > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button#btn-cookie-save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

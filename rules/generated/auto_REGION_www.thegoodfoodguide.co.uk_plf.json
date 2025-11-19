@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.thegoodfoodguide.co.uk_plf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.thegoodfoodguide.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.thegoodfoodguide\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "comment": "MANAGE COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(2):not([id]) > form:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "SAVE CHANGES"
+        },
+        {
+            "waitForThenClick": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(2):not([id]) > form:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "SAVE CHANGES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(2):not([id]) > form:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ama-layout-29479 > div:nth-child(3)#ama-layout-2815 > div#ama-section-4455 > div#ama-section-body-4455 > div:nth-child(2)#ama-field-69582 > div:nth-child(2)#CookiePolicy > div:nth-child(2):not([id]) > form:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

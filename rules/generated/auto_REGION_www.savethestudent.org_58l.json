@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_www.savethestudent.org_58l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.savethestudent.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.savethestudent\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Cookie settings"
+        },
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > details:nth-child(1):not([id]) > summary:nth-child(1):not([id]) > span:not([id]) > span:nth-child(2):not([id]) > span:not([id]) > input[type=\"checkbox\"]:nth-child(1)#cmplz-functional-optin",
+            "comment": "Functional"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#side-menu-container > aside:nth-child(6)#mob4 > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Save Money"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#side-menu-container > aside:nth-child(6)#mob4 > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

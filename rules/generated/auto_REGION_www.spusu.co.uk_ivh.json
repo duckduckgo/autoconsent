@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.spusu.co.uk_ivh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.spusu.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.spusu\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > dialog:nth-child(5)#dialog-id-4974166230734995 > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])[data-testid=\"button\"] > span:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > dialog:nth-child(5)#dialog-id-4974166230734995 > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])[data-testid=\"button\"] > span:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#app > dialog:nth-child(5)#dialog-id-4974166230734995 > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])[data-testid=\"button\"] > span:not([id]) > span:not([id])",
+            "comment": "Manage cookies"
+        },
+        {
+            "waitForThenClick": "body > div#app > dialog:nth-child(5)#dialog-id-4974166230734995 > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])[data-testid=\"button\"] > span:not([id]) > span:not([id])",
+            "comment": "Save selection"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > dialog:nth-child(5)#dialog-id-4974166230734995 > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])[data-testid=\"button\"] > span:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#app > dialog:nth-child(5)#dialog-id-4974166230734995 > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])[data-testid=\"button\"] > span:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

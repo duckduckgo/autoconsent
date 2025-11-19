@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_uk.milwaukeetool.eu_613",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://uk.milwaukeetool.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uk\\.milwaukeetool\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > relay-component#hydrate_4d85db7d-8f48-48e9-bbad-6f3eb674ca1e > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > relay-component#hydrate_4d85db7d-8f48-48e9-bbad-6f3eb674ca1e > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > relay-component#hydrate_4d85db7d-8f48-48e9-bbad-6f3eb674ca1e > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info",
+            "comment": "COOKIE SETTINGS"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > relay-component#hydrate_4d85db7d-8f48-48e9-bbad-6f3eb674ca1e > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

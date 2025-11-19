@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.digital-tv.co.uk_w6u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.digital-tv.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.digital-tv\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_manage_wrap"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_manage_wrap"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_manage_wrap",
+            "comment": " MANAGE COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_fsd > div#cookiescript_fsd_wrapper > div:nth-child(5):not([id]) > div:nth-child(1)#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "comment": "DECLINE ALL"
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected_fsd > div#cookiescript_fsd_wrapper > div:nth-child(5):not([id]) > div:nth-child(1)#cookiescript_buttons > div:nth-child(3)#cookiescript_save",
+            "comment": "SAVE & CLOSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected_wrapper > div#cookiescript_injected > div:nth-child(5)#cookiescript_manage_wrap",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookiescript_injected_fsd > div#cookiescript_fsd_wrapper > div:nth-child(5):not([id]) > div:nth-child(1)#cookiescript_buttons > div:nth-child(2)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookiescript_injected_fsd > div#cookiescript_fsd_wrapper > div:nth-child(5):not([id]) > div:nth-child(1)#cookiescript_buttons > div:nth-child(3)#cookiescript_save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

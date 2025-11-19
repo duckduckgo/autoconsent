@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.resolver.co.uk_r9u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.resolver.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.resolver\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-options"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-options"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-options",
+            "comment": "Options"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-save",
+            "comment": "Save"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-options",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

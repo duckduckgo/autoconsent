@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_the-ear.net_2jt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://the-ear.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?the-ear\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2)#moove-gdpr-menu > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "STRICTLY NECESSARY COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save Changes"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2)#moove-gdpr-menu > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

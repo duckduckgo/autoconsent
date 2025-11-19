@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.local.gov.uk_ctu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.local.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.local\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > aside:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > aside:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#sliding-popup > aside:not([id]) > button:nth-child(1):not([id])",
+            "comment": "Privacy settings"
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > aside:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(1):not([id])",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > aside:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#sliding-popup > aside:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

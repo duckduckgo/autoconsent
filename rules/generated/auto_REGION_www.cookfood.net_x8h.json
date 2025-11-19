@@ -1,0 +1,63 @@
+{
+    "name": "auto_REGION_www.cookfood.net_x8h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cookfood.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.cookfood\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "comment": "Manage Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(2)#s-bl > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > label:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1):not([id])",
+            "comment": "Functional cookies"
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(2)#s-bl > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > label:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1):not([id])",
+            "comment": "Analytics cookies"
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(2)#s-bl > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Strictly necessary cookies"
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-sv-bn",
+            "comment": "Save settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(2)#s-bl > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-sv-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

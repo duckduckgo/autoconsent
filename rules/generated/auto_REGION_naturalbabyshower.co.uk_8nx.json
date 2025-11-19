@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_naturalbabyshower.co.uk_8nx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://naturalbabyshower.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?naturalbabyshower\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Let me choose"
+        },
+        {
+            "waitForThenClick": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id])",
+            "comment": "Strictly necessary cookies"
+        },
+        {
+            "waitForThenClick": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

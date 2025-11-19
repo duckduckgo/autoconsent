@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.londonpicturearchive.org.uk_pgl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.londonpicturearchive.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.londonpicturearchive\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Cookie Preferences"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookiePreferences > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save and Continue"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookiePreferences > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

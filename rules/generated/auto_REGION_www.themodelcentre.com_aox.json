@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_www.themodelcentre.com_aox",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.themodelcentre.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.themodelcentre\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-bar > div:nth-child(1)#cookie-main > div:nth-child(2):not([id]) > button:nth-child(2)#preferences-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-bar > div:nth-child(1)#cookie-main > div:nth-child(2):not([id]) > button:nth-child(2)#preferences-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie-consent-bar > div:nth-child(1)#cookie-main > div:nth-child(2):not([id]) > button:nth-child(2)#preferences-cookies",
+            "comment": "Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-bar > div:nth-child(2)#cookie-preferences > div:nth-child(3):not([id]) > label:not([id]) > input[type=\"checkbox\"]#performance-cookies",
+            "comment": "Functionality and Performance Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-bar > div:nth-child(2)#cookie-preferences > div:nth-child(4):not([id]) > button:nth-child(2)#save-preferences",
+            "comment": "Save Preferences & Exit"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-bar > div:nth-child(1)#cookie-main > div:nth-child(2):not([id]) > button:nth-child(2)#preferences-cookies",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-consent-bar > div:nth-child(2)#cookie-preferences > div:nth-child(4):not([id]) > button:nth-child(2)#save-preferences",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_tommy.com_69y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tommy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tommy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "comment": "MANAGE PREFERENCES"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "comment": "CONFIRM CHOICE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

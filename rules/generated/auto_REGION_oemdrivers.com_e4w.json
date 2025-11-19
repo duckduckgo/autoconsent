@@ -1,0 +1,67 @@
+{
+    "name": "auto_REGION_oemdrivers.com_e4w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://oemdrivers.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oemdrivers\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Change my preferences"
+        },
+        {
+            "waitForThenClick": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3)#content_functionality > div:nth-child(4):not([id]) > input[type=\"checkbox\"]:nth-child(1)#functionality",
+            "comment": "Active"
+        },
+        {
+            "waitForThenClick": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4)#content_tracking > div:nth-child(5):not([id]) > input[type=\"checkbox\"]:nth-child(1)#tracking",
+            "comment": "Active"
+        },
+        {
+            "waitForThenClick": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#content_targeting > div:nth-child(5):not([id]) > input[type=\"checkbox\"]:nth-child(1)#targeting",
+            "comment": "Active"
+        },
+        {
+            "waitForThenClick": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(1):not([id]) > li:nth-child(2):not([id]) > button#title_strictly-necessary",
+            "comment": "Strictly necessary cookies"
+        },
+        {
+            "waitForThenClick": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Save my preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#termsfeed-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(1):not([id]) > li:nth-child(2):not([id]) > button#title_strictly-necessary",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#termsfeed-com---preferences-center > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

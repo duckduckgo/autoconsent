@@ -1,0 +1,79 @@
+{
+    "name": "auto_REGION_www.museumselection.co.uk_zc0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.museumselection.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.museumselection\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "comment": "Show Purposes"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(2)#ot-pc-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(7)#ot-desc-id-V2STACK42 > div:nth-child(3):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IAB2V2_2-leg-out",
+            "comment": "Switch Label"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(2)#ot-pc-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(7)#ot-desc-id-V2STACK42 > div:nth-child(8):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IAB2V2_7-leg-out",
+            "comment": "Switch Label"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(2)#ot-pc-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(7)#ot-desc-id-V2STACK42 > div:nth-child(9):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IAB2V2_8-leg-out",
+            "comment": "Switch Label"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(2)#ot-pc-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(7)#ot-desc-id-V2STACK42 > div:nth-child(10):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IAB2V2_9-leg-out",
+            "comment": "Switch Label"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(2)#ot-pc-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(7)#ot-desc-id-V2STACK42 > div:nth-child(11):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IAB2V2_10-leg-out",
+            "comment": "Switch Label"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(2)#ot-pc-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(7)#ot-desc-id-V2STACK42 > div:nth-child(12):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IAB2V2_11-leg-out",
+            "comment": "Switch Label"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject All"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

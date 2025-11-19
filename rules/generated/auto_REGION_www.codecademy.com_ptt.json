@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.codecademy.com_ptt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.codecademy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.codecademy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(2):not([id]) > button#fides-manage-preferences-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(2):not([id]) > button#fides-manage-preferences-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(2):not([id]) > button#fides-manage-preferences-button",
+            "comment": "Manage Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(2)#fides-consent-content > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span:nth-child(1):not([id])",
+            "comment": "Essential"
+        },
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-save-button",
+            "comment": "Save"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(2)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(2):not([id]) > button#fides-manage-preferences-button",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(2)#fides-consent-content > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-save-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

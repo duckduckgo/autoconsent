@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.omniplexcinemas.co.uk_qm7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.omniplexcinemas.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.omniplexcinemas\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBar > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#managePrefs"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBar > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#managePrefs"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookieConsentBar > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#managePrefs",
+            "comment": "Manage"
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBar > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#savePrefs",
+            "comment": "Save Preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBar > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#managePrefs",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookieConsentBar > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#savePrefs",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

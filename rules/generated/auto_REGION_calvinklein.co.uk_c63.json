@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_calvinklein.co.uk_c63",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://calvinklein.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?calvinklein\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "comment": "Manage Preferences"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "comment": "Confirm Choice"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"CookieNotice-main-wrapper\"] > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"Modal-component\"] > div:not([id]) > div:not([id]) > button:nth-child(3):not([id])[data-testid=\"pvh-button\"] > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

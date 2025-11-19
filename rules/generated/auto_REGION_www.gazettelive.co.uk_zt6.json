@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.gazettelive.co.uk_zt6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gazettelive.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.gazettelive\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#more-options-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#more-options-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#more-options-btn",
+            "comment": "More options"
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#save-and-exit",
+            "comment": "SAVE & EXIT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#more-options-btn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#save-and-exit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

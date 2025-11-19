@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.hoxtonmacs.co.uk_ucl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hoxtonmacs.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.hoxtonmacs\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-dialogBox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-dialogBox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie-consent-dialogBox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id])",
+            "comment": "Strictly necessary cookies"
+        },
+        {
+            "waitForThenClick": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Save preferences & exit"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-dialogBox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

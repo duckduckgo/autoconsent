@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.renewableenergyhub.co.uk_59j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.renewableenergyhub.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.renewableenergyhub\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > a:nth-child(1)#notificationManagerLink"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > a:nth-child(1)#notificationManagerLink"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > a:nth-child(1)#notificationManagerLink",
+            "comment": "Manage Cookies"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#enzuzo-modal-wrap > div#enzuzo-modal > div:nth-child(3):not([id]) > div#ez-cookie-preferences-buttons-wrapper > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#ez-reject-modal",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#ez-cookie-notification > div:nth-child(2):not([id]) > a:nth-child(1)#notificationManagerLink",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div#enzuzo-modal-wrap > div#enzuzo-modal > div:nth-child(3):not([id]) > div#ez-cookie-preferences-buttons-wrapper > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#ez-reject-modal",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.lufthansa.com_95g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lufthansa.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.lufthansa\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cm-descToggle"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cm-descToggle"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cm-descToggle",
+            "comment": "My settings"
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#cm-consentDesc > div:nth-child(5):not([id]) > div#cm-allSelectBtns > button:nth-child(1)#cm-selectSpecific",
+            "comment": "Save selection"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cm-descToggle",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#__tealiumGDPRcpPrefs > div:nth-child(2)#cm-dial-v211 > div#cm_v230 > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#cm-consentDesc > div:nth-child(5):not([id]) > div#cm-allSelectBtns > button:nth-child(1)#cm-selectSpecific",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

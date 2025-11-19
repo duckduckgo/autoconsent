@@ -1,0 +1,63 @@
+{
+    "name": "auto_REGION_www.warrenjames.co.uk_px5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.warrenjames.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.warrenjames\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(7):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(7):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(7):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "MANAGE PREFERENCES"
+        },
+        {
+            "waitForThenClick": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1):not([id])",
+            "comment": "Analytics\n\nThese cookies help us understand how you interact with the site. We use this data to identify areas to improve. Includes: Google Analytics, SessionCam."
+        },
+        {
+            "waitForThenClick": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(7):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1):not([id])",
+            "comment": "Marketing\n\nThese cookies are used to optimize marketing communications and show you ads on other sites. Includes: Klaviyo, Facebook Pixel, TikTok Pixel."
+        },
+        {
+            "waitForThenClick": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline all"
+        },
+        {
+            "waitForThenClick": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(8):not([id]) > div:not([id]) > button:nth-child(8):not([id])",
+            "comment": "SAVE MY CHOICES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(7):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#siteVueApp > header:nth-child(1)#navFixDesktop > div:nth-child(8):not([id]) > div:not([id]) > button:nth-child(8):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

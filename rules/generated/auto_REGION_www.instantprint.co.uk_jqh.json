@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.instantprint.co.uk_jqh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.instantprint.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.instantprint\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2) > div:nth-child(2)#privacypolicies-com---nb.privacypolicies-com---reset.privacypolicies-com---nb.privacypolicies-com---palette-light.privacypolicies-com---nb-simple.privacypolicies-com---lang-en.shadow-lg > div:nth-child(1):not([id]).cc-nb-main-container > div:nth-child(3):not([id]).cc-nb-buttons-container > button:nth-child(2):not([id]).cc-nb-changep"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2) > div:nth-child(2)#privacypolicies-com---nb.privacypolicies-com---reset.privacypolicies-com---nb.privacypolicies-com---palette-light.privacypolicies-com---nb-simple.privacypolicies-com---lang-en.shadow-lg > div:nth-child(1):not([id]).cc-nb-main-container > div:nth-child(3):not([id]).cc-nb-buttons-container > button:nth-child(2):not([id]).cc-nb-changep"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:nth-child(2) > div:nth-child(2)#privacypolicies-com---nb.privacypolicies-com---reset.privacypolicies-com---nb.privacypolicies-com---palette-light.privacypolicies-com---nb-simple.privacypolicies-com---lang-en.shadow-lg > div:nth-child(1):not([id]).cc-nb-main-container > div:nth-child(3):not([id]).cc-nb-buttons-container > button:nth-child(2):not([id]).cc-nb-changep",
+            "comment": "Change my preferences"
+        },
+        {
+            "waitForThenClick": "body:nth-child(2) > div:nth-child(40)#privacypolicies-com---preferences-center.privacypolicies-com---pc-overlay.privacypolicies-com---palette-light.privacypolicies-com---reset.privacypolicies-com---is-visible.privacypolicies-com---lang-en > div:nth-child(1):not([id]).privacypolicies-com---pc-dialog > div:nth-child(1):not([id]).cc-pc-container > div:nth-child(2):not([id]).cc-cp-body > ul:nth-child(1):not([id]).cc-cp-body-tabs > li:nth-child(2):not([id]).cc-cp-body-tabs-item > button:nth-child(1)#title_strictly-necessary.cc-cp-body-tabs-item-link",
+            "comment": "Strictly necessary cookies"
+        },
+        {
+            "waitForThenClick": "body:nth-child(2) > div:nth-child(40)#privacypolicies-com---preferences-center.privacypolicies-com---pc-overlay.privacypolicies-com---palette-light.privacypolicies-com---reset.privacypolicies-com---is-visible.privacypolicies-com---lang-en > div:nth-child(1):not([id]).privacypolicies-com---pc-dialog > div:nth-child(1):not([id]).cc-pc-container > div:nth-child(3):not([id]).cc-cp-foot > div:nth-child(2):not([id]).cc-cp-foot-button > button:nth-child(1):not([id]).cc-cp-foot-save",
+            "comment": "Save my preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2) > div:nth-child(2)#privacypolicies-com---nb.privacypolicies-com---reset.privacypolicies-com---nb.privacypolicies-com---palette-light.privacypolicies-com---nb-simple.privacypolicies-com---lang-en.shadow-lg > div:nth-child(1):not([id]).cc-nb-main-container > div:nth-child(3):not([id]).cc-nb-buttons-container > button:nth-child(2):not([id]).cc-nb-changep",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body:nth-child(2) > div:nth-child(40)#privacypolicies-com---preferences-center.privacypolicies-com---pc-overlay.privacypolicies-com---palette-light.privacypolicies-com---reset.privacypolicies-com---is-visible.privacypolicies-com---lang-en > div:nth-child(1):not([id]).privacypolicies-com---pc-dialog > div:nth-child(1):not([id]).cc-pc-container > div:nth-child(2):not([id]).cc-cp-body > ul:nth-child(1):not([id]).cc-cp-body-tabs > li:nth-child(2):not([id]).cc-cp-body-tabs-item > button:nth-child(1)#title_strictly-necessary.cc-cp-body-tabs-item-link",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body:nth-child(2) > div:nth-child(40)#privacypolicies-com---preferences-center.privacypolicies-com---pc-overlay.privacypolicies-com---palette-light.privacypolicies-com---reset.privacypolicies-com---is-visible.privacypolicies-com---lang-en > div:nth-child(1):not([id]).privacypolicies-com---pc-dialog > div:nth-child(1):not([id]).cc-pc-container > div:nth-child(3):not([id]).cc-cp-foot > div:nth-child(2):not([id]).cc-cp-foot-button > button:nth-child(1):not([id]).cc-cp-foot-save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

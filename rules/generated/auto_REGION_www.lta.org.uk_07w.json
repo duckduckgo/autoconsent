@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.lta.org.uk_07w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lta.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.lta\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lta-cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-lta-cookie-modal-trigger"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lta-cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-lta-cookie-modal-trigger"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#lta-cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-lta-cookie-modal-trigger",
+            "comment": "Manage settings"
+        },
+        {
+            "waitForThenClick": "body > div#lta-cookies-modal > div:nth-child(3):not([id]) > form:nth-child(2)#lta-cookies-form > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#js-lta-cookie-modal-set",
+            "comment": "Save my settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lta-cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#js-lta-cookie-modal-trigger",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#lta-cookies-modal > div:nth-child(3):not([id]) > form:nth-child(2)#lta-cookies-form > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#js-lta-cookie-modal-set",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

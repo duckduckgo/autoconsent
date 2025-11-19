@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_www.jewson.co.uk_xl9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jewson.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.jewson\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Manage Cookies"
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > section:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > form:nth-child(3)#modal-location-form > div:nth-child(2):not([id]) > fieldset:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > input[type=\"radio\"]:nth-child(1)#drawer-location-collection",
+            "comment": "Click & Collect"
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(9)#ccc-end > button#ccc-dismiss-button",
+            "comment": "Save and close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(9)#ccc-end > button#ccc-dismiss-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

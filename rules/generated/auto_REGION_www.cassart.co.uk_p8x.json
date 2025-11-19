@@ -1,0 +1,58 @@
+{
+    "name": "auto_REGION_www.cassart.co.uk_p8x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cassart.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.cassart\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-manager > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-manager > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#consent-manager > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "SETTINGS"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > section:not([id]) > form:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > table:not([id]) > tbody:nth-child(2):not([id]) > tr:nth-child(1):not([id]) > td:nth-child(1):not([id]) > label:nth-child(2):not([id]) > input[type=\"radio\"]:not([id])",
+            "comment": "No"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > section:not([id]) > form:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > table:not([id]) > tbody:nth-child(2):not([id]) > tr:nth-child(2):not([id]) > td:nth-child(1):not([id]) > label:nth-child(2):not([id]) > input[type=\"radio\"]:not([id])",
+            "comment": "No"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > section:not([id]) > form:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > table:not([id]) > tbody:nth-child(2):not([id]) > tr:nth-child(3):not([id]) > td:nth-child(1):not([id]) > label:nth-child(2):not([id]) > input[type=\"radio\"]:not([id])",
+            "comment": "No"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > section:not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "SAVE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-manager > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > section:not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

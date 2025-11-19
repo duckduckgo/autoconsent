@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_uk.ryobitools.eu_a1i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://uk.ryobitools.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uk\\.ryobitools\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form > div:nth-child(9)#react_B52404C2DED0B2C9D31DDF07C5398F19 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form > div:nth-child(9)#react_B52404C2DED0B2C9D31DDF07C5398F19 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > form#form > div:nth-child(9)#react_B52404C2DED0B2C9D31DDF07C5398F19 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info",
+            "comment": "COOKIE SETTINGS"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form > div:nth-child(9)#react_B52404C2DED0B2C9D31DDF07C5398F19 > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-onetrust-show-info",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

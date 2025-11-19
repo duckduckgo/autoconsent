@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_www.realfoods.co.uk_g2e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.realfoods.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.realfoods\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pnlCookies > div#coPo > div:nth-child(1):not([id]) > button:nth-child(3)#settingsButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pnlCookies > div#coPo > div:nth-child(1):not([id]) > button:nth-child(3)#settingsButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#pnlCookies > div#coPo > div:nth-child(1):not([id]) > button:nth-child(3)#settingsButton",
+            "comment": "Settings"
+        },
+        {
+            "waitForThenClick": "body > div#pnlCookies > div#coPo > div:nth-child(2)#coSe > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#analyticsCookies",
+            "comment": "Analytics Cookies +"
+        },
+        {
+            "waitForThenClick": "body > div#pnlCookies > div#coPo > div:nth-child(2)#coSe > button:nth-child(4)#saveSettings",
+            "comment": "Save Settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pnlCookies > div#coPo > div:nth-child(1):not([id]) > button:nth-child(3)#settingsButton",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pnlCookies > div#coPo > div:nth-child(2)#coSe > button:nth-child(4)#saveSettings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

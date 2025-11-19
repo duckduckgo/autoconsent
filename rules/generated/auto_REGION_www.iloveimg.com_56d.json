@@ -1,0 +1,327 @@
+{
+    "name": "auto_REGION_www.iloveimg.com_56d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.iloveimg.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.iloveimg\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#toast-container > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(6)#ck_set"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#toast-container > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(6)#ck_set"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#toast-container > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(6)#ck_set",
+            "comment": "MANAGE OPTIONS"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2)#cmpPurposes > div#ck_purposes > div:nth-child(3)#el-pv-2 > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lpv-2",
+            "comment": "Legitimate interest (41)"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2)#cmpPurposes > div#ck_purposes > div:nth-child(8)#el-pv-7 > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lpv-7",
+            "comment": "Legitimate interest (57)"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2)#cmpPurposes > div#ck_purposes > div:nth-child(9)#el-pv-8 > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lpv-8",
+            "comment": "Legitimate interest (20)"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2)#cmpPurposes > div#ck_purposes > div:nth-child(10)#el-pv-9 > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lpv-9",
+            "comment": "Legitimate interest (28)"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2)#cmpPurposes > div#ck_purposes > div:nth-child(11)#el-pv-10 > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lpv-10",
+            "comment": "Legitimate interest (48)"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2)#cmpPurposes > div#ck_purposes > div:nth-child(12)#el-pv-11 > div:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lpv-11",
+            "comment": "Legitimate interest (5)"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(3)#el-v-11 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv11",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(6)#el-v-14 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv14",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(7)#el-v-15 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv15",
+            "comment": "Legitimate interest: Measure advertising performance. Measure content performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(9)#el-v-21 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv21",
+            "comment": "Legitimate interest: Use limited data to select advertising (Retention: 365 days). Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(10)#el-v-23 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv23",
+            "comment": "Legitimate interest: Use limited data to select advertising (Retention: 30 days). Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(14)#el-v-28 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv28",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(15)#el-v-32 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv32",
+            "comment": "Legitimate interest: Use limited data to select advertising (Retention: 180 days). Measure advertising performance (Retention: 60 days). Develop and improve services (Retention: 60 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(16)#el-v-36 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv36",
+            "comment": "Legitimate interest: Use limited data to select advertising (Retention: 30 days). Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(21)#el-v-50 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv50",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(22)#el-v-52 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv52",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Develop and improve services (Retention: 90 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(29)#el-v-76 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv76",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(35)#el-v-85 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv85",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance (Retention: 1095 days). Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services (Retention: 1095 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(37)#el-v-93 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv93",
+            "comment": "Legitimate interest: Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(39)#el-v-98 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv98",
+            "comment": "Legitimate interest: Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(40)#el-v-104 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv104",
+            "comment": "Legitimate interest: Measure advertising performance. Measure content performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(44)#el-v-124 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv124",
+            "comment": "Legitimate interest: Measure advertising performance (Retention: 365 days). Understand audiences through statistics or combinations of data from different sources (Retention: 365 days). Develop and improve services (Retention: 183 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(45)#el-v-126 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv126",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(49)#el-v-132 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv132",
+            "comment": "Legitimate interest: Use limited data to select advertising."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(50)#el-v-142 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv142",
+            "comment": "Legitimate interest: Use limited data to select advertising (Retention: 395 days). Measure advertising performance. Understand audiences through statistics or combinations of data from different sources (Retention: 180 days). Develop and improve services (Retention: 180 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(52)#el-v-156 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv156",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance (Retention: 35 days). Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(55)#el-v-163 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv163",
+            "comment": "Legitimate interest: Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(58)#el-v-173 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv173",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(60)#el-v-192 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv192",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance (Retention: 365 days). Understand audiences through statistics or combinations of data from different sources (Retention: 365 days). Develop and improve services (Retention: 365 days). Use limited data to select content."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(62)#el-v-195 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv195",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(63)#el-v-202 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv202",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Develop and improve services (Retention: 90 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(64)#el-v-209 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv209",
+            "comment": "Legitimate interest: Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(66)#el-v-231 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv231",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(67)#el-v-232 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv232",
+            "comment": "Legitimate interest: Measure advertising performance (Retention: 30 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(68)#el-v-238 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv238",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance (Retention: 3652 days). Measure content performance (Retention: 180 days). Understand audiences through statistics or combinations of data from different sources (Retention: 4320 days). Develop and improve services (Retention: 180 days). Use limited data to select content (Retention: 180 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(70)#el-v-246 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv246",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(71)#el-v-253 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv253",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(72)#el-v-264 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv264",
+            "comment": "Legitimate interest: Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(75)#el-v-278 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv278",
+            "comment": "Legitimate interest: Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(77)#el-v-284 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv284",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services. Use limited data to select content."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(78)#el-v-290 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv290",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance (Retention: 4320 days). Develop and improve services (Retention: 4320 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(79)#el-v-294 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv294",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(81)#el-v-297 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv297",
+            "comment": "Legitimate interest: Use limited data to select advertising (Retention: 1095 days). Measure advertising performance. Measure content performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(95)#el-v-394 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv394",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(99)#el-v-431 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv431",
+            "comment": "Legitimate interest: Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(101)#el-v-452 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv452",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(103)#el-v-486 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv486",
+            "comment": "Legitimate interest: Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(108)#el-v-527 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv527",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services. Use limited data to select content."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(109)#el-v-528 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv528",
+            "comment": "Legitimate interest: Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(110)#el-v-541 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv541",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(112)#el-v-559 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv559",
+            "comment": "Legitimate interest: Measure advertising performance (Retention: 731 days). Understand audiences through statistics or combinations of data from different sources (Retention: 731 days). Develop and improve services (Retention: 731 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(116)#el-v-612 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv612",
+            "comment": "Legitimate interest: Measure advertising performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(120)#el-v-667 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv667",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services. Use limited data to select content."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(122)#el-v-690 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv690",
+            "comment": "Legitimate interest: Develop and improve services (Retention: 1095 days)."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(123)#el-v-699 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv699",
+            "comment": "Legitimate interest: Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(124)#el-v-728 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv728",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(126)#el-v-740 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv740",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(127)#el-v-755 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv755",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(129)#el-v-767 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv767",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(131)#el-v-804 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv804",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(132)#el-v-807 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv807",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Understand audiences through statistics or combinations of data from different sources. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(133)#el-v-867 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv867",
+            "comment": "Legitimate interest: Use limited data to select advertising."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(137)#el-v-1005 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv1005",
+            "comment": "Legitimate interest: Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(138)#el-v-1019 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv1019",
+            "comment": "Legitimate interest: Measure advertising performance. Measure content performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(140)#el-v-1067 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv1067",
+            "comment": "Legitimate interest: Use limited data to select advertising. Measure advertising performance. Measure content performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(141)#el-v-1071 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv1071",
+            "comment": "Legitimate interest: Use limited data to select advertising. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(143)#el-v-1135 > div:not([id]) > div:not([id]) > p:nth-child(3):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv1135",
+            "comment": "Legitimate interest: Measure advertising performance. Measure content performance."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(4)#cmpVendors > div:nth-child(2)#cmp__vendor > div:nth-child(144)#el-v-1142 > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#lv1142",
+            "comment": "Legitimate interest: Measure advertising performance. Develop and improve services."
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])",
+            "comment": "REJECT ALL"
+        },
+        {
+            "waitForThenClick": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "SAVE SELECTED"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#toast-container > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(6)#ck_set",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cmp_settings > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

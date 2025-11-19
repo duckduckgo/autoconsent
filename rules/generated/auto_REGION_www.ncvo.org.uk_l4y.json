@@ -1,0 +1,67 @@
+{
+    "name": "auto_REGION_www.ncvo.org.uk_l4y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ncvo.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.ncvo\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Cookie settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#c2-c-3",
+            "comment": "\b"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#c2-c-4",
+            "comment": "\b"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#c2-c-5",
+            "comment": "\b"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > button:nth-child(4):not([id])",
+            "comment": "Disable all"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:not([id])",
+            "comment": "Save settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(1)#ch2-dialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

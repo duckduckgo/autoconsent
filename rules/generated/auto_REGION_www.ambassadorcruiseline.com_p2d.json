@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.ambassadorcruiseline.com_p2d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ambassadorcruiseline.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.ambassadorcruiseline\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-v2-1 > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-v2-5 > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-v2-1 > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-v2-5 > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-v2-1 > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-v2-5 > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "MANAGE COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-v2-1 > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-v2-5 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "REJECT NON-ESSENTIAL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-v2-1 > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-v2-5 > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#headlessui-portal-root > div:not([id]) > div:nth-child(2):not([id]) > div#headlessui-dialog-v2-1 > div:nth-child(2):not([id]) > div:not([id]) > div#headlessui-dialog-panel-v2-5 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

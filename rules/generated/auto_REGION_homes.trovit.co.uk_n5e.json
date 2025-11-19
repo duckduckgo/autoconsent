@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_homes.trovit.co.uk_n5e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://homes.trovit.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?homes\\.trovit\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(1)#didomi-notice-learn-more-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(1)#didomi-notice-learn-more-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(1)#didomi-notice-learn-more-button",
+            "comment": "Set preferences"
+        },
+        {
+            "waitForThenClick": "body > div#didomi-host > div:not([id]) > div:nth-child(1)#didomi-consent-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"dialog-purposes\"] > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > p:not([id]) > span:nth-child(2):not([id]) > span:nth-child(11):not([id]) > span:not([id])",
+            "comment": "Save and communicate privacy choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > div:nth-child(2)#buttons > button:nth-child(1)#didomi-notice-learn-more-button",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#didomi-host > div:not([id]) > div:nth-child(1)#didomi-consent-popup > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"dialog-purposes\"] > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > p:not([id]) > span:nth-child(2):not([id]) > span:nth-child(11):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_woocommerce.com_4j6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://woocommerce.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?woocommerce\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > div:not([id])",
+            "comment": "Customize"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#modal-zowmif > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#checkbox-control-1",
+            "comment": "Analytics"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#modal-zowmif > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:not([id]) > div:nth-child(2):not([id])",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div#modal-zowmif > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:not([id]) > div:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

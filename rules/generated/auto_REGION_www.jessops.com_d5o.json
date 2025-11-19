@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.jessops.com_d5o",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jessops.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.jessops\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Settings"
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(10)#ccc-end > button#ccc-dismiss-button",
+            "comment": "Save and close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(3)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(10)#ccc-end > button#ccc-dismiss-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

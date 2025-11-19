@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.tlc-direct.co.uk_p1b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tlc-direct.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.tlc-direct\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:nth-child(2)#cookie-consent-state-1 > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-btn-customise"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:nth-child(2)#cookie-consent-state-1 > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-btn-customise"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:nth-child(2)#cookie-consent-state-1 > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-btn-customise",
+            "comment": "Customise"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:nth-child(3)#cookie-consent-state-2 > div:nth-child(2):not([id]) > button#cookie-consent-btn-accept-some",
+            "comment": "Accept Selection"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:nth-child(2)#cookie-consent-state-1 > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-consent-btn-customise",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-consent > div:nth-child(3)#cookie-consent-state-2 > div:nth-child(2):not([id]) > button#cookie-consent-btn-accept-some",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

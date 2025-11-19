@@ -1,0 +1,87 @@
+{
+    "name": "auto_REGION_iopscience.iop.org_b58",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://iopscience.iop.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iopscience\\.iop\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Customize"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyIABSectionPurpose > div:nth-child(2):not([id]) > div:nth-child(1)#ckyIABPNFSection1 > div:nth-child(2)#ckyIABPNFSection1Body > div:nth-child(2)#ckyIABPNFSection1Item2 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABPNFSection1Item2ToggleLegitimate",
+            "comment": "Disable Use limited data to select advertising Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyIABSectionPurpose > div:nth-child(2):not([id]) > div:nth-child(1)#ckyIABPNFSection1 > div:nth-child(2)#ckyIABPNFSection1Body > div:nth-child(7)#ckyIABPNFSection1Item7 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABPNFSection1Item7ToggleLegitimate",
+            "comment": "Disable Measure advertising performance Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyIABSectionPurpose > div:nth-child(2):not([id]) > div:nth-child(1)#ckyIABPNFSection1 > div:nth-child(2)#ckyIABPNFSection1Body > div:nth-child(8)#ckyIABPNFSection1Item8 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABPNFSection1Item8ToggleLegitimate",
+            "comment": "Disable Measure content performance Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyIABSectionPurpose > div:nth-child(2):not([id]) > div:nth-child(1)#ckyIABPNFSection1 > div:nth-child(2)#ckyIABPNFSection1Body > div:nth-child(9)#ckyIABPNFSection1Item9 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABPNFSection1Item9ToggleLegitimate",
+            "comment": "Disable Understand audiences through statistics or combinations of data from different sources Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyIABSectionPurpose > div:nth-child(2):not([id]) > div:nth-child(1)#ckyIABPNFSection1 > div:nth-child(2)#ckyIABPNFSection1Body > div:nth-child(10)#ckyIABPNFSection1Item10 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABPNFSection1Item10ToggleLegitimate",
+            "comment": "Disable Develop and improve services Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyIABSectionPurpose > div:nth-child(2):not([id]) > div:nth-child(1)#ckyIABPNFSection1 > div:nth-child(2)#ckyIABPNFSection1Body > div:nth-child(11)#ckyIABPNFSection1Item11 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABPNFSection1Item11ToggleLegitimate",
+            "comment": "Disable Use limited data to select content Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3)#ckyIABSectionVendor > div:nth-child(2):not([id]) > div#ckyIABVendorSection1 > div:nth-child(2)#ckyIABVendorSection1Body > div:nth-child(1)#ckyIABVendorSection1Item755 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABVendorSection1Item755ToggleLegitimate",
+            "comment": "Disable Google Advertising Products Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3)#ckyIABSectionVendor > div:nth-child(2):not([id]) > div#ckyIABVendorSection1 > div:nth-child(2)#ckyIABVendorSection1Body > div:nth-child(2)#ckyIABVendorSection1Item804 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckyIABVendorSection1Item804ToggleLegitimate",
+            "comment": "Disable LinkedIn Ireland Unlimited Company Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyIABSectionCookie > div:nth-child(4):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Necessary"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save My Preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyIABSectionCookie > div:nth-child(4):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

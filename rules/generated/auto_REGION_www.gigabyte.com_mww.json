@@ -1,0 +1,67 @@
+{
+    "name": "auto_REGION_www.gigabyte.com_mww",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gigabyte.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.gigabyte\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Customize"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#ckyDetailCategoryfunctional > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckySwitchfunctional",
+            "comment": "Disable Functional"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3)#ckyDetailCategoryanalytics > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckySwitchanalytics",
+            "comment": "Disable Analytics"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(4)#ckyDetailCategoryadvertisement > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]#ckySwitchadvertisement",
+            "comment": "Disable Advertisement"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Strictly Necessary"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save and Exit"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ckyDetailCategorynecessary > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div#ckyPreferenceCenter > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

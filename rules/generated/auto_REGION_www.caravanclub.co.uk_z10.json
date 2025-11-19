@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.caravanclub.co.uk_z10",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.caravanclub.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.caravanclub\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "MANAGE COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(9)#ccc-end > button#ccc-dismiss-button",
+            "comment": "SAVE PREFERENCES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-notify > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ccc > div:nth-child(2)#ccc-module > div#ccc-content > div#cc-panel > div:nth-child(9)#ccc-end > button#ccc-dismiss-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

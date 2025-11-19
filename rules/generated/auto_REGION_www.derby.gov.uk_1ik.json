@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.derby.gov.uk_1ik",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.derby.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.derby\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#js-modal-page > div:nth-child(1):not([id]) > div:nth-child(2)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#label_modal_o53e9iq3b5"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#js-modal-page > div:nth-child(1):not([id]) > div:nth-child(2)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#label_modal_o53e9iq3b5"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#js-modal-page > div:nth-child(1):not([id]) > div:nth-child(2)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#label_modal_o53e9iq3b5",
+            "comment": "Cookie settings"
+        },
+        {
+            "waitForThenClick": "body > dialog#js-modal > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#js-modal-content > div:nth-child(3):not([id]) > button:nth-child(4)#save-cookie-preferences",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-modal-page > div:nth-child(1):not([id]) > div:nth-child(2)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#label_modal_o53e9iq3b5",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > dialog#js-modal > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#js-modal-content > div:nth-child(3):not([id]) > button:nth-child(4)#save-cookie-preferences",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

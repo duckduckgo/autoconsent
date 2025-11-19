@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.sth.nhs.uk_97m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sth.nhs.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.sth\\.nhs\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_alert_box > div:nth-child(3)#cookie_alert_buttons > a:nth-child(1)#cookie_alert_manage_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_alert_box > div:nth-child(3)#cookie_alert_buttons > a:nth-child(1)#cookie_alert_manage_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie_alert_box > div:nth-child(3)#cookie_alert_buttons > a:nth-child(1)#cookie_alert_manage_btn",
+            "comment": "Manage Additional Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#manage_cookie_popup > div:nth-child(3)#cookie_manage_popup_body > a:nth-child(12)#cookie_alert_reject_popup_btn",
+            "comment": "Reject Additional Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_alert_box > div:nth-child(3)#cookie_alert_buttons > a:nth-child(1)#cookie_alert_manage_btn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#manage_cookie_popup > div:nth-child(3)#cookie_manage_popup_body > a:nth-child(12)#cookie_alert_reject_popup_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

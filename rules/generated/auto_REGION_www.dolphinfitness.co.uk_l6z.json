@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.dolphinfitness.co.uk_l6z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dolphinfitness.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.dolphinfitness\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#content > div#page > div#pg-w > div#pg-mw > div:nth-child(10)#ari-nw-x > div:not([id]) > p:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#content > div#page > div#pg-w > div#pg-mw > div:nth-child(10)#ari-nw-x > div:not([id]) > p:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#content > div#page > div#pg-w > div#pg-mw > div:nth-child(10)#ari-nw-x > div:not([id]) > p:nth-child(2):not([id]) > button:not([id])",
+            "comment": "privacy settings"
+        },
+        {
+            "waitForThenClick": "body > div#ss-su > div:nth-child(1):not([id]) > form#ss-rl-f > div:nth-child(2)#ari-su-sc-v0 > ul:not([id]) > li:nth-child(3):not([id]) > h4:nth-child(1):not([id]) > button#ss3-r-h",
+            "comment": "Saved Data"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#content > div#page > div#pg-w > div#pg-mw > div:nth-child(10)#ari-nw-x > div:not([id]) > p:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ss-su > div:nth-child(1):not([id]) > form#ss-rl-f > div:nth-child(2)#ari-su-sc-v0 > ul:not([id]) > li:nth-child(3):not([id]) > h4:nth-child(1):not([id]) > button#ss3-r-h",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

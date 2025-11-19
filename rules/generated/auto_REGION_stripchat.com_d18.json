@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_stripchat.com_d18",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://stripchat.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stripchat\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#body > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#body > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#body > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Manage"
+        },
+        {
+            "waitForThenClick": "body > div#portal-root > div:not([id]) > div:not([id]) > dialog:not([id]) > div:nth-child(2):not([id])[data-testid=\"ScrollBarContainer\"] > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > span:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Essential cookies"
+        },
+        {
+            "waitForThenClick": "body > div#portal-root > div:not([id]) > div:not([id]) > dialog:not([id]) > div:nth-child(2):not([id])[data-testid=\"ScrollBarContainer\"] > div:nth-child(2):not([id]) > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#body > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#portal-root > div:not([id]) > div:not([id]) > dialog:not([id]) > div:nth-child(2):not([id])[data-testid=\"ScrollBarContainer\"] > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > span:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#portal-root > div:not([id]) > div:not([id]) > dialog:not([id]) > div:nth-child(2):not([id])[data-testid=\"ScrollBarContainer\"] > div:nth-child(2):not([id]) > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

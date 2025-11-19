@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.souschef.co.uk_6rw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.souschef.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.souschef\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id])",
+            "comment": "STRICTLY NECESSARY COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "SAVE PREFERENCES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pandectes-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#pd-cp-preferences > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

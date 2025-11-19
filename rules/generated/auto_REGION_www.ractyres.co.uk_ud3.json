@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.ractyres.co.uk_ud3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ractyres.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.ractyres\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id]) > div#cookieBanner > div#cookie-dialog > div#cookiePulse > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id]) > div#cookieBanner > div#cookie-dialog > div#cookiePulse > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id]) > div#cookieBanner > div#cookie-dialog > div#cookiePulse > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Change preferences"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(6)#manage-cookie-modal > div:not([id]) > div:not([id]) > form#cookie_settings_form > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save changes"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id]) > div#cookieBanner > div#cookie-dialog > div#cookiePulse > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(6)#manage-cookie-modal > div:not([id]) > div:not([id]) > form#cookie_settings_form > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

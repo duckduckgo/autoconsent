@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.avis.co.uk_ys5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.avis.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.avis\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#consent_prompt_manage--secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#consent_prompt_manage--secondary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#consent_prompt_manage--secondary",
+            "comment": "MANAGE PREFERENCES"
+        },
+        {
+            "waitForThenClick": "body > div#__tealiumGDPRcpPrefs > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a#preferences_prompt_submit",
+            "comment": "CONFIRM"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__tealiumGDPRecModal > div#consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#consent_prompt_manage--secondary",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#__tealiumGDPRcpPrefs > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a#preferences_prompt_submit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.tapo.com_06u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tapo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.tapo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tapo-cookie > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tapo-cookie > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#tapo-cookie > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:not([id])",
+            "comment": "your privacy choices"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Save Settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tapo-cookie > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

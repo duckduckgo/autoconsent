@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.shawbrook.co.uk_4ub",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.shawbrook.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.shawbrook\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#PiwikPROConsentForm-container > div:nth-child(2):not([id]) > button:nth-child(1)#PiwikPROConsentForm-toggle-details"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#PiwikPROConsentForm-container > div:nth-child(2):not([id]) > button:nth-child(1)#PiwikPROConsentForm-toggle-details"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > dialog#PiwikPROConsentForm-container > div:nth-child(2):not([id]) > button:nth-child(1)#PiwikPROConsentForm-toggle-details",
+            "comment": "Manage cookies"
+        },
+        {
+            "waitForThenClick": "body > dialog#PiwikPROConsentForm-container > div:nth-child(2):not([id]) > button:nth-child(1)#PiwikPROConsentForm-toggle-details",
+            "comment": "Save choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#PiwikPROConsentForm-container > div:nth-child(2):not([id]) > button:nth-child(1)#PiwikPROConsentForm-toggle-details",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > dialog#PiwikPROConsentForm-container > div:nth-child(2):not([id]) > button:nth-child(1)#PiwikPROConsentForm-toggle-details",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

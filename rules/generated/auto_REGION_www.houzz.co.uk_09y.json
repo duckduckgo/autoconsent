@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.houzz.co.uk_09y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.houzz.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.houzz\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-manage\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-manage\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-manage\"]",
+            "comment": "Manage Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save Preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"consents-manage\"]",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#hz-page > div:nth-child(8):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

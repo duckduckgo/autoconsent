@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_ahdb.org.uk_2q1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ahdb.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ahdb\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "comment": "Manage preferences"
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-rall-bn",
+            "comment": "Reject all"
+        },
+        {
+            "waitForThenClick": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(3)#s-sv-bn",
+            "comment": "Save settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(1)#cm > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(2)#s-rall-bn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cc--main > div#cc_div > div:nth-child(3)#s-cnt > div#c-vln > div#cs > div#c-s-in > div#s-inr > div:nth-child(3)#s-bns > button:nth-child(3)#s-sv-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.birdguides.com_wcp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.birdguides.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.birdguides\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn",
+            "comment": "MORE OPTIONS"
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-all-btn",
+            "comment": "REJECT ALL"
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#save-and-exit",
+            "comment": "SAVE AND CLOSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#more-options-btn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#reject-all-btn",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#save-and-exit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

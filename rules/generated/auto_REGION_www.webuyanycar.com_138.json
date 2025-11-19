@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.webuyanycar.com_138",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.webuyanycar.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.webuyanycar\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div#onetrust-policy > div:nth-child(3)#onetrust-policy-text > a:nth-child(2)#variation3"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div#onetrust-policy > div:nth-child(3)#onetrust-policy-text > a:nth-child(2)#variation3"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div#onetrust-policy > div:nth-child(3)#onetrust-policy-text > a:nth-child(2)#variation3",
+            "comment": "manage cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div#onetrust-policy > div:nth-child(3)#onetrust-policy-text > a:nth-child(2)#variation3",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-pc-sdk > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.pirelli.com_a69",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pirelli.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.pirelli\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-bar > div:nth-child(1)#cookie-intro > div:nth-child(3):not([id]) > button:nth-child(1)#cp-manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-bar > div:nth-child(1)#cookie-intro > div:nth-child(3):not([id]) > button:nth-child(1)#cp-manage"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:nth-child(1)#cookie-intro > div:nth-child(3):not([id]) > button:nth-child(1)#cp-manage",
+            "comment": "MANAGE YOUR COOKIES PREFERENCES"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:nth-child(2)#cookie-options > div:nth-child(1):not([id]) > div:nth-child(2)#cookie-accordion > div:nth-child(1):not([id]) > button:nth-child(1)#accordion0-header",
+            "comment": "NECESSARY COOKIES"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:nth-child(2)#cookie-options > div:nth-child(2):not([id]) > button:nth-child(2)#cp-save",
+            "comment": "SAVE & EXIT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar > div:nth-child(1)#cookie-intro > div:nth-child(3):not([id]) > button:nth-child(1)#cp-manage",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-bar > div:nth-child(2)#cookie-options > div:nth-child(1):not([id]) > div:nth-child(2)#cookie-accordion > div:nth-child(1):not([id]) > button:nth-child(1)#accordion0-header",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-bar > div:nth-child(2)#cookie-options > div:nth-child(2):not([id]) > button:nth-child(2)#cp-save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

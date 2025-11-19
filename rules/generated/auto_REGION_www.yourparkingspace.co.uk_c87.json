@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.yourparkingspace.co.uk_c87",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.yourparkingspace.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.yourparkingspace\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > section:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > section:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > section:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Manage cookies"
+        },
+        {
+            "waitForThenClick": "body > div#cookieModal___BV_modal_outer_ > div:nth-child(1)#cookieModal > div:not([id]) > div:nth-child(2)#cookieModal___BV_modal_content_ > footer:nth-child(3)#cookieModal___BV_modal_footer_ > button:nth-child(1):not([id])",
+            "comment": "Accept selected"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > section:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookieModal___BV_modal_outer_ > div:nth-child(1)#cookieModal > div:not([id]) > div:nth-child(2)#cookieModal___BV_modal_content_ > footer:nth-child(3)#cookieModal___BV_modal_footer_ > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_pickmypostcode.com_ro3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pickmypostcode.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pickmypostcode\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(1):not([id]) > li:nth-child(4):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(1):not([id]) > li:nth-child(4):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(1):not([id]) > li:nth-child(4):not([id]) > a:not([id])",
+            "comment": "Advertising Preferences"
+        },
+        {
+            "waitForThenClick": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(1):not([id]) > li:nth-child(4):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#qc-cmp2-container > div#qc-cmp2-main > div:not([id]) > div#qc-cmp2-ui > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

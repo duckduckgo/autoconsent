@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.depop.com_9h0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.depop.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.depop\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookieBanner__manageCookiesButton\"] > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookieBanner__manageCookiesButton\"] > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookieBanner__manageCookiesButton\"] > span:not([id])",
+            "comment": "Manage"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside#cookies-modal[data-testid=\"cookieModal\"] > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieModal__acceptButton\"] > span:not([id])",
+            "comment": "Save my choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookieBanner__manageCookiesButton\"] > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > aside#cookies-modal[data-testid=\"cookieModal\"] > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieModal__acceptButton\"] > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

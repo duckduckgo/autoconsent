@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.simplyowners.net_494",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.simplyowners.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.simplyowners\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-background > aside#cookies-policy > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-background > aside#cookies-policy > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookies-background > aside#cookies-policy > div:not([id]) > a:nth-child(2):not([id])",
+            "comment": "Customise"
+        },
+        {
+            "waitForThenClick": "body > div#cookies-background > aside#cookies-policy > div:not([id]) > div:nth-child(3)#cookies-policy-customize > form:not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Save settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-background > aside#cookies-policy > div:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookies-background > aside#cookies-policy > div:not([id]) > div:nth-child(3)#cookies-policy-customize > form:not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "name": "auto_REGION_snagtights.com_te7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://snagtights.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?snagtights\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#shopify-pc__banner__btn-manage-prefs"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#shopify-pc__banner__btn-manage-prefs"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#shopify-pc__banner__btn-manage-prefs",
+            "comment": "Manage preferences"
+        },
+        {
+            "waitForThenClick": "body > div#shopify-pc__prefs > section:nth-child(2)#shopify-pc__prefs__dialog > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#shopify-pc__prefs__essential > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#shopify-pc__prefs__essential-input",
+            "comment": "Operate the website"
+        },
+        {
+            "waitForThenClick": "body > div#shopify-pc__prefs > section:nth-child(2)#shopify-pc__prefs__dialog > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#shopify-pc__prefs__header-decline",
+            "comment": "Decline all"
+        },
+        {
+            "waitForThenClick": "body > div#shopify-pc__prefs > section:nth-child(2)#shopify-pc__prefs__dialog > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#shopify-pc__prefs__header-save",
+            "comment": "Save my choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#shopify-pc__banner__btn-manage-prefs",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#shopify-pc__prefs > section:nth-child(2)#shopify-pc__prefs__dialog > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#shopify-pc__prefs__header-decline",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#shopify-pc__prefs > section:nth-child(2)#shopify-pc__prefs__dialog > header:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#shopify-pc__prefs__header-save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

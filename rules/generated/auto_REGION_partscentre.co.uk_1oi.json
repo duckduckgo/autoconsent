@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_partscentre.co.uk_1oi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://partscentre.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?partscentre\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-16 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-16 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-16 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Customise Settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-17 > div#pr-cookie-setting-bar > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline All"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-17 > div#pr-cookie-setting-bar > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#modal-content-16 > div#pr-cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-17 > div#pr-cookie-setting-bar > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div#modal-content-17 > div#pr-cookie-setting-bar > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_support.lenovo.com_zjl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support.lenovo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.lenovo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(1)#_evidon-banner-cookiebutton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(1)#_evidon-banner-cookiebutton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(1)#_evidon-banner-cookiebutton",
+            "comment": "Cookie Settings"
+        },
+        {
+            "waitForThenClick": "body > div#evidon-prefdiag-overlay > div:nth-child(2)#evidon-prefdialog-tabpanel > div:nth-child(4)#evidon-prefdiag-tabfooter > button:nth-child(1)#evidon-prefdiag-decline",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_evidon-barrier-wrapper > div:nth-child(2)#_evidon-banner > div:nth-child(1)#_evidon-banner-content > div:nth-child(5):not([id]) > button:nth-child(1)#_evidon-banner-cookiebutton",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#evidon-prefdiag-overlay > div:nth-child(2)#evidon-prefdialog-tabpanel > div:nth-child(4)#evidon-prefdiag-tabfooter > button:nth-child(1)#evidon-prefdiag-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

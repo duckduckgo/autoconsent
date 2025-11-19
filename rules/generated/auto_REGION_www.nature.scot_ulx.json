@@ -1,0 +1,63 @@
+{
+    "name": "auto_REGION_www.nature.scot_ulx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nature.scot/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.nature\\.scot/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(2):not([id])",
+            "comment": "Manage cookies"
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#eu-cookie-compliance-categories > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#cookie-category-statistics_cookies",
+            "comment": "Performance cookies"
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#eu-cookie-compliance-categories > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > input[type=\"checkbox\"]:nth-child(1)#cookie-category-marketing_cookies",
+            "comment": "Third party cookies"
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(3):not([id])",
+            "comment": "Reject All"
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Save selected"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(3)#popup-buttons > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.qnap.com_aiz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.qnap.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.qnap\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-main > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-main > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cc-main > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Manage preferences"
+        },
+        {
+            "waitForThenClick": "body > div#cc-main > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-main > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cc-main > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

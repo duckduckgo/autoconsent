@@ -1,0 +1,63 @@
+{
+    "name": "auto_REGION_boundaryoutlet.com_f8e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://boundaryoutlet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boundaryoutlet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(6)#cookie-law-info-bar > span:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(6)#cookie-law-info-bar > span:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(6)#cookie-law-info-bar > span:not([id]) > a:nth-child(2):not([id])",
+            "comment": "Cookie settings"
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(8)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#wt-cli-checkbox-necessary",
+            "comment": "Necessary"
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(8)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#wt-cli-checkbox-non-necessary",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(8)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Necessary"
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(8)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > a#wt-cli-privacy-save-btn",
+            "comment": "SAVE & ACCEPT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(6)#cookie-law-info-bar > span:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#page > div:nth-child(8)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#page > div:nth-child(8)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > a#wt-cli-privacy-save-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

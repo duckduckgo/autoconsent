@@ -1,0 +1,58 @@
+{
+    "name": "auto_REGION_www.mysteryguides.co.uk_j0s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mysteryguides.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.mysteryguides\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "comment": "Preferences"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div#cookieconsent\\:settings > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1)#analytics-cookies-checkbox",
+            "comment": "Analytics and Statistics"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div#cookieconsent\\:settings > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1)#marketing-cookies-checkbox",
+            "comment": "Marketing and Retargeting"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div#cookieconsent\\:settings > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(7):not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(1)#functionality-cookies-checkbox",
+            "comment": "Functional Cookies"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div#cookieconsent\\:settings > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Save my choice"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div#cookieconsent\\:settings > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

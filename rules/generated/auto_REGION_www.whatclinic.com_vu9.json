@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.whatclinic.com_vu9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.whatclinic.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.whatclinic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookiesPopup > div:not([id]) > div:nth-child(1)#cookiesInfo > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookiesPopup > div:not([id]) > div:nth-child(1)#cookiesInfo > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookiesPopup > div:not([id]) > div:nth-child(1)#cookiesInfo > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Manage settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookiesPopup > div:not([id]) > div:nth-child(2)#cookiesSeeMore > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookiesPopup > div:not([id]) > div:nth-child(1)#cookiesInfo > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookiesPopup > div:not([id]) > div:nth-child(2)#cookiesSeeMore > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

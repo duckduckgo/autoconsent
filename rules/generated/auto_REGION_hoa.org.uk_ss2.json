@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_hoa.org.uk_ss2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://hoa.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hoa\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])",
+            "comment": "settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#third_party_cookies > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > label:not([id]) > input[type=\"checkbox\"]:nth-child(2)#moove_gdpr_performance_cookies",
+            "comment": "Enable or Disable Cookies\nEnabled"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Save Changes"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#moove_gdpr_cookie_info_bar > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > dialog#moove_gdpr_cookie_modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

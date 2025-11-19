@@ -1,0 +1,59 @@
+{
+    "name": "auto_REGION_www.stmartin-in-the-fields.org_xpz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.stmartin-in-the-fields.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.stmartin-in-the-fields\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Cookie Settings"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(12)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > input[type=\"checkbox\"]:nth-child(1)#wt-cli-checkbox-necessary",
+            "comment": "Necessary"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(12)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Necessary"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(12)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a#wt-cli-privacy-save-btn",
+            "comment": "SAVE & ACCEPT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(10)#cookie-law-info-bar > span:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(12)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(12)#cliSettingsPopup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a#wt-cli-privacy-save-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.rbo.org.uk_k4n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rbo.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.rbo\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookie-banner > div#cookie-banner-grid > button:nth-child(3)#cookie-banner-manage-preferences-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookie-banner > div#cookie-banner-grid > button:nth-child(3)#cookie-banner-manage-preferences-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > dialog#cookie-banner > div#cookie-banner-grid > button:nth-child(3)#cookie-banner-manage-preferences-button",
+            "comment": "Manage my preferences"
+        },
+        {
+            "waitForThenClick": "body > dialog#cookie-preferences > div#cookie-preferences-div > button:nth-child(16)#cookie-preferences-reject",
+            "comment": "Reject all"
+        },
+        {
+            "waitForThenClick": "body > dialog#cookie-preferences > div#cookie-preferences-div > button:nth-child(17)#cookie-preferences-accept",
+            "comment": "Confirm my choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookie-banner > div#cookie-banner-grid > button:nth-child(3)#cookie-banner-manage-preferences-button",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > dialog#cookie-preferences > div#cookie-preferences-div > button:nth-child(16)#cookie-preferences-reject",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > dialog#cookie-preferences > div#cookie-preferences-div > button:nth-child(17)#cookie-preferences-accept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

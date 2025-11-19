@@ -1,0 +1,86 @@
+{
+    "name": "auto_REGION_games.washingtonpost.com_4ui",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://games.washingtonpost.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?games\\.washingtonpost\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-pc-btn-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-pc-btn-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-pc-btn-handler",
+            "comment": "Show Purposes"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > div:nth-child(2)#ot-desc-id-C0001 > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-group-id-C0001",
+            "comment": "Strictly Necessary Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(6):not([id]) > div:nth-child(2)#ot-desc-id-IABV2_10 > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-group-id-IABV2_10-leg-out",
+            "comment": "Develop and improve products"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(3):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_6-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(4):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_8-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(5):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_4-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(6):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_3-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(7):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_9-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(8):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_2-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(9):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_7-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(2)#ot-content > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(12):not([id]) > div:nth-child(2)#ot-desc-id-STACK26 > div:nth-child(10):not([id]) > ul:not([id]) > li:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1)#ot-sub-group-id-IABV2_5-leg-out",
+            "comment": "Targeting Cookies"
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(3)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(2)#onetrust-pc-btn-handler",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-pc-sdk > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_reelcinemas.co.uk_jl3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://reelcinemas.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?reelcinemas\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > x-head:not([id]) > x-styles:nth-child(4):not([id]) > div:nth-child(35)#a1CookieBar > div:nth-child(1)#cookieBar > div:nth-child(2):not([id]) > button:nth-child(3)#manage_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > x-head:not([id]) > x-styles:nth-child(4):not([id]) > div:nth-child(35)#a1CookieBar > div:nth-child(1)#cookieBar > div:nth-child(2):not([id]) > button:nth-child(3)#manage_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > x-head:not([id]) > x-styles:nth-child(4):not([id]) > div:nth-child(35)#a1CookieBar > div:nth-child(1)#cookieBar > div:nth-child(2):not([id]) > button:nth-child(3)#manage_cookies",
+            "comment": "Manage"
+        },
+        {
+            "waitForThenClick": "body > x-head:not([id]) > x-styles:nth-child(4):not([id]) > div:nth-child(35)#a1CookieBar > div:nth-child(1)#cookieBar > div:nth-child(2):not([id]) > button:nth-child(2)#save_cookies",
+            "comment": "Save Preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > x-head:not([id]) > x-styles:nth-child(4):not([id]) > div:nth-child(35)#a1CookieBar > div:nth-child(1)#cookieBar > div:nth-child(2):not([id]) > button:nth-child(3)#manage_cookies",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > x-head:not([id]) > x-styles:nth-child(4):not([id]) > div:nth-child(35)#a1CookieBar > div:nth-child(1)#cookieBar > div:nth-child(2):not([id]) > button:nth-child(2)#save_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

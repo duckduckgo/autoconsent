@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_rode.com_lbc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://rode.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rode\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header#header > div:nth-child(1)#gdpr > div#cookie_popup > div#RODE-GDPRx > div:nth-child(1)#mainDisplay > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header#header > div:nth-child(1)#gdpr > div#cookie_popup > div#RODE-GDPRx > div:nth-child(1)#mainDisplay > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > header#header > div:nth-child(1)#gdpr > div#cookie_popup > div#RODE-GDPRx > div:nth-child(1)#mainDisplay > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "comment": "Preferences"
+        },
+        {
+            "waitForThenClick": "body > header#header > div:nth-child(1)#gdpr > div#cookie_popup > div#RODE-GDPRx > div:nth-child(2)#customiseDisplay > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#reqdButton > span:nth-child(1):not([id])",
+            "comment": "Necessary"
+        },
+        {
+            "waitForThenClick": "body > header#header > nav:nth-child(2)#top-nav > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Save up to 33% on Wireless Microphones!"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header#header > div:nth-child(1)#gdpr > div#cookie_popup > div#RODE-GDPRx > div:nth-child(1)#mainDisplay > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > header#header > div:nth-child(1)#gdpr > div#cookie_popup > div#RODE-GDPRx > div:nth-child(2)#customiseDisplay > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#reqdButton > span:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > header#header > nav:nth-child(2)#top-nav > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

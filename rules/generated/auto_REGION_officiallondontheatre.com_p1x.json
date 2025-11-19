@@ -1,0 +1,50 @@
+{
+    "name": "auto_REGION_officiallondontheatre.com_p1x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://officiallondontheatre.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?officiallondontheatre\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_flo-consent1763562134979 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_flo-consent1763562134979 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#_flo-consent1763562134979 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Cookie Settings"
+        },
+        {
+            "waitForThenClick": "body > div#_flo-consent1763562134979 > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > input[type=\"checkbox\"]:nth-child(9)#_flo-consent1763562134979--cross_domain",
+            "comment": "Remember Preferences\n\nOur service may involve redirecting you to another website to complete your journey. For simplicity, we can remember your preferences and not show this message again on the following websites:\n\nofficiallondontheatre.com\nofficiallondontheatre.seetickets.com\ntktsonline.seetickets.com\nkidsweek.seetickets.com\noltsale.seetickets.com\nofficiallondontheatre.queue-fair.net"
+        },
+        {
+            "waitForThenClick": "body > div#_flo-consent1763562134979 > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Accept Selected"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_flo-consent1763562134979 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#_flo-consent1763562134979 > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

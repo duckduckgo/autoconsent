@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.sex.com_0i3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sex.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.sex\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div#radix-«Rlpd6nb» > div:nth-child(5):not([id]) > button:nth-child(2):not([id])[data-testid=\"customize-cookie-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div#radix-«Rlpd6nb» > div:nth-child(5):not([id]) > button:nth-child(2):not([id])[data-testid=\"customize-cookie-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div#radix-«Rlpd6nb» > div:nth-child(5):not([id]) > button:nth-child(2):not([id])[data-testid=\"customize-cookie-button\"]",
+            "comment": "Manage or reject Cookies"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div#radix-«Rlpd6nb» > button:nth-child(6):not([id])[data-testid=\"confirm-settings-cookie-button\"]",
+            "comment": "Confirm your settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div#radix-«Rlpd6nb» > div:nth-child(5):not([id]) > button:nth-child(2):not([id])[data-testid=\"customize-cookie-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div#radix-«Rlpd6nb» > button:nth-child(6):not([id])[data-testid=\"confirm-settings-cookie-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

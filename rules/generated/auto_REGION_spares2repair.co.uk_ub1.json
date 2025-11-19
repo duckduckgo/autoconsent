@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_spares2repair.co.uk_ub1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://spares2repair.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?spares2repair\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5)#cc-manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5)#cc-manage"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5)#cc-manage",
+            "comment": "Customise"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#cc-reject-all",
+            "comment": "Reject all"
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cc-save",
+            "comment": "Save preferences"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5)#cc-manage",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-modal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#cc-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#cookie-modal > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cc-save",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

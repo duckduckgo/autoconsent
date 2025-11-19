@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.oxfordshire.gov.uk_cnv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.oxfordshire.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.oxfordshire\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-container > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#button-manage > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-container > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#button-manage > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#modal-container > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#button-manage > button:nth-child(2):not([id])",
+            "comment": "Manage cookies"
+        },
+        {
+            "waitForThenClick": "body > div#modal-container > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#button-manage > button:nth-child(2):not([id])",
+            "comment": "Save settings"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-container > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#button-manage > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#modal-container > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#button-manage > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

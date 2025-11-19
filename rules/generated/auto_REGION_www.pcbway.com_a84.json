@@ -1,0 +1,55 @@
+{
+    "name": "auto_REGION_www.pcbway.com_a84",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pcbway.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.pcbway\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Cookie Preferences"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Decline All"
+        },
+        {
+            "waitForThenClick": "body > div:not([id]).footer > div:nth-child(4):not([id]).cookies-pop-box.js-cookies-pop-box > div:nth-child(1):not([id]).cookies-pop-body > div:nth-child(3):not([id]).cookies-pop-footer > a:nth-child(1):not([id]).cookie-btn.js-choices-btn",
+            "comment": "Submit my choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div:not([id]).footer > div:nth-child(4):not([id]).cookies-pop-box.js-cookies-pop-box > div:nth-child(1):not([id]).cookies-pop-body > div:nth-child(3):not([id]).cookies-pop-footer > a:nth-child(1):not([id]).cookie-btn.js-choices-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "name": "auto_REGION_gb.readly.com_vxo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gb.readly.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gb\\.readly\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(7):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(7):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(7):not([id]) > a:nth-child(3):not([id])",
+            "comment": "Adjust Settings"
+        },
+        {
+            "waitForThenClick": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": ""
+        },
+        {
+            "waitForThenClick": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:not([id])",
+            "comment": "Save\ne"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(7):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#CookieConsentDialog-react-component-55460d8f-51fe-4cac-ab1b-c403b4d67ab1 > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

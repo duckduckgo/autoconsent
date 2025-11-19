@@ -1,0 +1,46 @@
+{
+    "name": "auto_REGION_www.jotform.com_c7d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jotform.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.jotform\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#CustomCookiebotOpenDetails"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#CustomCookiebotOpenDetails"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#CustomCookiebotOpenDetails",
+            "comment": "Customize Settings"
+        },
+        {
+            "waitForThenClick": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#CustomCookiebotOpenDetails",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

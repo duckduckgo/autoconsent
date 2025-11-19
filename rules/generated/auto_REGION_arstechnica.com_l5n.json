@@ -1,0 +1,59 @@
+{
+    "name": "auto_REGION_arstechnica.com_l5n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arstechnica.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arstechnica\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(3)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-manage-preferences-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(3)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-manage-preferences-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(3)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-manage-preferences-button",
+            "comment": "Your Privacy Choices"
+        },
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(2)#fides-consent-content > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > section:nth-child(1)#fides-panel-purposes > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > div:not([id]) > input[type=\"checkbox\"]:nth-child(1):not([id])",
+            "comment": "Audience Measurement"
+        },
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(2)#fides-reject-all-button",
+            "comment": "Reject"
+        },
+        {
+            "waitForThenClick": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-save-button",
+            "comment": "Confirm My Choices"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(3)#fides-banner-container > div#fides-banner > div#fides-banner-inner > div:nth-child(3)#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-manage-preferences-button",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(2)#fides-reject-all-button",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#fides-overlay > div#fides-overlay-wrapper > div:nth-child(1)#fides-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div#fides-button-group > div:nth-child(1):not([id]) > button:nth-child(1)#fides-save-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

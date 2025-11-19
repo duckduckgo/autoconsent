@@ -1,0 +1,70 @@
+{
+    "name": "auto_REGION_www.thewindowsclub.com_1u9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.thewindowsclub.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?www\\.thewindowsclub\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cookie-form > div#ez-cookie-template > p:nth-child(5):not([id]) > span#button-row > button:nth-child(1)#ez-manage-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cookie-form > div#ez-cookie-template > p:nth-child(5):not([id]) > span#button-row > button:nth-child(1)#ez-manage-settings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cookie-form > div#ez-cookie-template > p:nth-child(5):not([id]) > span#button-row > button:nth-child(1)#ez-manage-settings",
+            "comment": "Manage Settings"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > div:nth-child(1):not([id]) > div:nth-child(10):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": "Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > div:nth-child(1):not([id]) > div:nth-child(10):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": "Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > div:nth-child(1):not([id]) > div:nth-child(10):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": "Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > div:nth-child(1):not([id]) > div:nth-child(10):not([id]) > div:nth-child(9):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": "Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > div:nth-child(1):not([id]) > div:nth-child(10):not([id]) > div:nth-child(10):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": "Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > div:nth-child(1):not([id]) > div:nth-child(10):not([id]) > div:nth-child(11):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > label:nth-child(1):not([id]) > input[type=\"checkbox\"]:not([id])",
+            "comment": "Legitimate Interest"
+        },
+        {
+            "waitForThenClick": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > p:nth-child(2):not([id]) > span#button-row > button:nth-child(2)#ez-save-settings",
+            "comment": "Save Settings & Exit"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cookie-form > div#ez-cookie-template > p:nth-child(5):not([id]) > span#button-row > button:nth-child(1)#ez-manage-settings",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "body > div#ez-cmpv2-container > div:nth-child(1)#ez-cookie-dialog-wrapper > div#ez-cookie-dialog > div#ez-cmp-purposes > p:nth-child(2):not([id]) > span#button-row > button:nth-child(2)#ez-save-settings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
