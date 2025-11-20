@@ -30,6 +30,9 @@ jobs:
                   fi
 
     release:
+        permissions:
+            id-token: write # Required for OIDC
+            contents: read
         runs-on: ubuntu-latest
         needs: check-for-commits
         if: ${{ needs.check-for-commits.outputs.ci_skip == 'false' }}
@@ -61,7 +64,6 @@ jobs:
             - name: Create Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
               run: |
                   npm run release
 
