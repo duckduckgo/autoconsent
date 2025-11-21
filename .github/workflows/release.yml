@@ -31,7 +31,8 @@ jobs:
 
     release:
         permissions:
-            id-token: write # Required for OIDC
+            id-token: write # Required for OIDC to publish to npm
+            contents: write # Required to push commits and tags to git
 
         runs-on: ubuntu-latest
         needs: check-for-commits
