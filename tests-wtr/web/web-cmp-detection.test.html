@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./web-cmp-detection.test');
+            });
+        </script>
+
+        <!-- Test elements for CMP detection -->
+        <div id="cmp-container"></div>
+    </body>
+</html>
