@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_newsnetwork.mayoclinic.org_pwa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://newsnetwork.mayoclinic.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?newsnetwork\\.mayoclinic\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).home.wp-singular.page-template.page-template-page_full-width-nosidebar-notitle.page-template-page_full-width-nosidebar-notitle-php.page.page-id-349710.wp-embed-responsive.wp-theme-velocity > div:nth-child(28)#mayo-privacy-consent-banner[data-nosnippet=\"true\"].mayo-privacy-popup > div:nth-child(3)#privacy-popup-controls-div > div:nth-child(1):not([id]).mayo-button-container > button:nth-child(2)#mayo-privacy-opt-out.mayo-primary-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).home.wp-singular.page-template.page-template-page_full-width-nosidebar-notitle.page-template-page_full-width-nosidebar-notitle-php.page.page-id-349710.wp-embed-responsive.wp-theme-velocity > div:nth-child(28)#mayo-privacy-consent-banner[data-nosnippet=\"true\"].mayo-privacy-popup > div:nth-child(3)#privacy-popup-controls-div > div:nth-child(1):not([id]).mayo-button-container > button:nth-child(2)#mayo-privacy-opt-out.mayo-primary-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).home.wp-singular.page-template.page-template-page_full-width-nosidebar-notitle.page-template-page_full-width-nosidebar-notitle-php.page.page-id-349710.wp-embed-responsive.wp-theme-velocity > div:nth-child(28)#mayo-privacy-consent-banner[data-nosnippet=\"true\"].mayo-privacy-popup > div:nth-child(3)#privacy-popup-controls-div > div:nth-child(1):not([id]).mayo-button-container > button:nth-child(2)#mayo-privacy-opt-out.mayo-primary-button",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).home.wp-singular.page-template.page-template-page_full-width-nosidebar-notitle.page-template-page_full-width-nosidebar-notitle-php.page.page-id-349710.wp-embed-responsive.wp-theme-velocity > div:nth-child(28)#mayo-privacy-consent-banner[data-nosnippet=\"true\"].mayo-privacy-popup > div:nth-child(3)#privacy-popup-controls-div > div:nth-child(1):not([id]).mayo-button-container > button:nth-child(2)#mayo-privacy-opt-out.mayo-primary-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

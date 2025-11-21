@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+            "exists": "body > div#root > section:nth-child(1):not([id]) > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+            "visible": "body > div#root > section:nth-child(1):not([id]) > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "waitForThenClick": "body > div#root > section:nth-child(1):not([id]) > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
             "comment": "Tout refuser"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "waitForVisible": "body > div#root > section:nth-child(1):not([id]) > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
             "timeout": 1000,
             "check": "none"
         }
