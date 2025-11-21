@@ -1,3 +1,18 @@
+# v14.37.1 (Fri Nov 21 2025)
+
+#### 🐛 Bug Fix
+
+- Explicitly set write permission in the release job [#1089](https://github.com/duckduckgo/autoconsent/pull/1089) ([@muodov](https://github.com/muodov))
+- Fix github release workflow [#1088](https://github.com/duckduckgo/autoconsent/pull/1088) ([@muodov](https://github.com/muodov))
+- Fix popup detection on amazon.com [#1087](https://github.com/duckduckgo/autoconsent/pull/1087) ([@muodov](https://github.com/muodov))
+- Use trusted publishers for npm release [#1086](https://github.com/duckduckgo/autoconsent/pull/1086) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.37.0 (Wed Nov 19 2025)
 
 #### 🚀 Enhancement
