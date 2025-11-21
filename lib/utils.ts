@@ -77,6 +77,7 @@ export function normalizeConfig(providedConfig: any): Config {
         enableCosmeticRules: true,
         enableGeneratedRules: true,
         enableHeuristicDetection: false,
+        enableHeuristicAction: false,
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,
