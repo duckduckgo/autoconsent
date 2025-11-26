@@ -3,7 +3,7 @@ import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, R
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
-import { highlightNode, unhighlightNode } from '../utils';
+import { highlightNode, isElementList, unhighlightNode } from '../utils';
 import { getActionablePopups } from '../heuristics';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
@@ -124,8 +124,9 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return Promise.resolve(true);
     }
 
-    async highlightElements(selector: ElementSelector, all = false, delayTimeout = 2000) {
-        let elements = this.elementSelector(selector);
+    async highlightElements(selectorOrElementList: ElementSelector | HTMLElement[], all = false, delayTimeout = 2000) {
+        let elements = isElementList(selectorOrElementList) ? selectorOrElementList : this.elementSelector(selectorOrElementList);
+
         if (elements.length === 0) {
             return;
         }
@@ -149,20 +150,20 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     // Implementing DomActionsProvider below:
-    async click(selector: ElementSelector, all = false) {
+    async click(selectorOrElementList: ElementSelector | HTMLElement[], all = false) {
         if (this.autoconsent.config.visualTest) {
-            await this.highlightElements(selector, all);
+            await this.highlightElements(selectorOrElementList, all);
         }
         this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
-        return this.autoconsent.domActions.click(selector, all);
+        return this.autoconsent.domActions.click(selectorOrElementList, all);
     }
 
     elementExists(selector: ElementSelector) {
         return this.autoconsent.domActions.elementExists(selector);
     }
 
-    elementVisible(selector: ElementSelector, check?: VisibilityCheck) {
-        return this.autoconsent.domActions.elementVisible(selector, check);
+    elementVisible(selectorOrElementList: ElementSelector | HTMLElement[], check?: VisibilityCheck) {
+        return this.autoconsent.domActions.elementVisible(selectorOrElementList, check);
     }
 
     waitForElement(selector: ElementSelector, timeout?: number) {
@@ -433,9 +434,9 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
 
     optOut(): Promise<boolean> {
         // use only the first found popup candidate
-        const buttonSelector = this.popups[0].rejectButtons?.[0].selector;
-        if (buttonSelector) {
-            return this.click(buttonSelector, false);
+        const button = this.popups[0].rejectButtons?.[0];
+        if (button) {
+            return this.click([button.element], false);
         }
         return Promise.resolve(false);
     }
@@ -449,12 +450,11 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     }
 
     async test(): Promise<boolean> {
-        const buttonSelector = this.popups[0].rejectButtons?.[0].selector;
-        if (buttonSelector) {
+        const button = this.popups[0].rejectButtons?.[0];
+        if (button) {
             await this.wait(500);
-            return this.elementVisible(buttonSelector, 'none');
-        } else {
-            return false;
+            return this.elementVisible([button.element], 'none');
         }
+        return false;
     }
 }

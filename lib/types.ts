@@ -108,12 +108,12 @@ export type ConsentState = {
 
 export interface ButtonData {
     text: string;
-    selector: string;
+    element: HTMLElement;
 }
 
 export interface PopupData {
     text: string;
-    selector: string;
+    element: HTMLElement;
     buttons: ButtonData[];
     rejectButtons?: ButtonData[];
     otherButtons?: ButtonData[];

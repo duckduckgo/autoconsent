@@ -1,4 +1,4 @@
-import { HideMethod } from './rules';
+import { ElementSelector, HideMethod } from './rules';
 import { Config } from './types';
 
 // get or create a style container for CSS overrides
@@ -157,4 +157,13 @@ export function unhighlightNode(node: HTMLElement) {
     } else {
         node.removeAttribute('style');
     }
+}
+
+/**
+ * Distinguish between list of elements and list of selectors.
+ * @param selectorOrElementList - The argument to check.
+ * @returns true if the argument is a list of elements, false otherwise.
+ */
+export function isElementList(selectorOrElementList: ElementSelector | HTMLElement[]): selectorOrElementList is HTMLElement[] {
+    return Array.isArray(selectorOrElementList) && selectorOrElementList[0] instanceof HTMLElement;
 }
