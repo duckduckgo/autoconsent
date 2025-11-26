@@ -17,6 +17,9 @@ describe('AutoConsentCMP', () => {
                 logs: {},
             },
             domActions: domActionsMock,
+            // @ts-expect-error - it's a mock!
+            state: {},
+            updateState: () => Promise.resolve(),
         };
         cmp = new AutoConsentCMP(
             {
@@ -100,6 +103,102 @@ describe('AutoConsentCMP', () => {
                 ]),
             ).to.equal(false);
             expect(domActionsMock.cookieContains.callCount).to.equal(2);
+        });
+    });
+
+    describe('"if" rules', () => {
+        it('executes "then" branch when "if" condition is true', async () => {
+            domActionsMock.elementExists.withArgs('selector1').returns(true);
+            domActionsMock.click.withArgs('selector2').returns(Promise.resolve(true));
+
+            const result = await cmp._runRulesSequentially([
+                {
+                    if: { exists: 'selector1' },
+                    then: [{ click: 'selector2' }],
+                    else: [{ click: 'selector3' }],
+                },
+            ]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.elementExists.calledWith('selector1')).to.be.true;
+            expect(domActionsMock.click.calledWith('selector2')).to.be.true;
+            expect(domActionsMock.click.calledWith('selector3')).to.be.false;
+        });
+
+        it('executes "else" branch when "if" condition is false', async () => {
+            domActionsMock.elementExists.withArgs('selector1').returns(false);
+            domActionsMock.click.withArgs('selector3').returns(Promise.resolve(true));
+
+            const result = await cmp._runRulesSequentially([
+                {
+                    if: { exists: 'selector1' },
+                    then: [{ click: 'selector2' }],
+                    else: [{ click: 'selector3' }],
+                },
+            ]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.elementExists.calledWith('selector1')).to.be.true;
+            expect(domActionsMock.click.calledWith('selector2')).to.be.false;
+            expect(domActionsMock.click.calledWith('selector3')).to.be.true;
+        });
+
+        it('returns false if the executed branch returns false', async () => {
+            domActionsMock.elementExists.withArgs('selector1').returns(false);
+            domActionsMock.click.returns(Promise.resolve(false));
+
+            const result = await cmp._runRulesSequentially([
+                {
+                    if: { exists: 'selector1' },
+                    then: [{ click: 'selector2' }],
+                    else: [{ click: 'selector3' }],
+                },
+            ]);
+            expect(result).to.equal(false);
+        });
+
+        it('handles missing "else" branch by returning true when "if" is false', async () => {
+            domActionsMock.elementExists.withArgs('selector1').returns(false);
+
+            const result = await cmp._runRulesSequentially([
+                {
+                    if: { exists: 'selector1' },
+                    then: [{ click: 'selector2' }],
+                },
+            ]);
+            expect(result).to.equal(true);
+        });
+
+        it('handles missing "then" branch by returning false when "if" is true', async () => {
+            domActionsMock.elementExists.withArgs('selector1').returns(true);
+
+            const result = await cmp._runRulesSequentially([
+                {
+                    if: { exists: 'selector1' },
+                    else: [{ click: 'selector2' }],
+                },
+            ]);
+            expect(result).to.equal(false);
+        });
+
+        it('supports nested "if" rules', async () => {
+            domActionsMock.elementExists.withArgs('selector1').returns(true);
+            domActionsMock.elementExists.withArgs('selector2').returns(false);
+            domActionsMock.click.withArgs('selector3').returns(Promise.resolve(true));
+            domActionsMock.click.withArgs('selector4').returns(Promise.resolve(false));
+
+            const result = await cmp._runRulesSequentially([
+                {
+                    if: { exists: 'selector1' },
+                    then: [
+                        {
+                            if: { exists: 'selector2' },
+                            then: [{ click: 'selector3' }],
+                            else: [{ click: 'selector4' }],
+                        },
+                    ],
+                },
+            ]);
+            expect(result).to.equal(false);
+            expect(domActionsMock.click.calledWith('selector4')).to.be.true;
         });
     });
 });
