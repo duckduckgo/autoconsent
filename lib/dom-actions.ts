@@ -3,10 +3,9 @@ import { DomActionsProvider } from './types';
 import { getStyleElement, hideElements, isElementList, isElementVisible, waitFor } from './utils';
 import AutoConsent from './web';
 
-
 export class DomActions implements DomActionsProvider {
     // eslint-disable-next-line no-useless-constructor
-    constructor(public autoconsentInstance: AutoConsent) { }
+    constructor(public autoconsentInstance: AutoConsent) {}
 
     async click(selectorOrElementList: ElementSelector | HTMLElement[], all = false): Promise<boolean> {
         const elements = isElementList(selectorOrElementList) ? selectorOrElementList : this.elementSelector(selectorOrElementList);

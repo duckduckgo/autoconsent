@@ -300,7 +300,7 @@ export default class AutoConsent {
             }
         };
         const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => { }); // ensure promise rejection is caught
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
         logsConfig.lifecycle &&
             siteSpecificRules.length > 0 &&
@@ -392,7 +392,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => { });
+            .catch(() => {});
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
