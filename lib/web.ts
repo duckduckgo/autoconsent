@@ -300,7 +300,7 @@ export default class AutoConsent {
             }
         };
         const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => {}); // ensure promise rejection is caught
+        mutationObserver.catch(() => { }); // ensure promise rejection is caught
 
         logsConfig.lifecycle &&
             siteSpecificRules.length > 0 &&
@@ -349,7 +349,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
-            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText);
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
@@ -392,7 +392,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => {});
+            .catch(() => { });
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
