@@ -312,7 +312,7 @@ function getButtonData(el: HTMLElement): ButtonData[] {
             !isDisabled(b) &&
             (b.innerText.trim() ||
                 // <input> values do not appear in innerText
-                (b instanceof HTMLInputElement && b.type in ['submit', 'button'] && b.value?.trim())),
+                (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) && b.value?.trim())),
     );
 
     return actionableButtons.map((b) => ({
