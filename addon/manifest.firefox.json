@@ -1,9 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Autoconsent",
-  "version": "2025.11.6",
+  "version": "2025.11.21",
   "background": {
-    "scripts": ["background.bundle.js"]
+    "scripts": [
+      "background.bundle.js"
+    ]
   },
   "content_scripts": [
     {
