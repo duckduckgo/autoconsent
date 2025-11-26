@@ -168,7 +168,7 @@ function getButtonData(el: HTMLElement): ButtonData[] {
     );
 
     return actionableButtons.map((b) => ({
-        text: b.innerText ?? b.textContent ?? '',
+        text: (b.innerText || b.textContent || '').trim() || (b as HTMLInputElement).value?.trim() || '',
         element: b,
     }));
 }
