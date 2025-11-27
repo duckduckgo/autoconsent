@@ -326,11 +326,7 @@ export default class AutoConsent {
 
         if (heuristicCmp && foundCMPs.length === 0) {
             // when enabled, try to use heuristics to find a popup
-            const result = await heuristicCmp.detectCmp();
-            if (result) {
-                foundCMPs.push(heuristicCmp);
-                logsConfig.lifecycle && console.log('Heuristic CMP found');
-            }
+            await detectCmp(heuristicCmp);
         }
 
         if (foundCMPs.length === 0 && retries > 0) {
