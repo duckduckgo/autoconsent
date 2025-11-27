@@ -26,12 +26,6 @@ describe('click', () => {
         // with selector
         expect(await domActions.click('#test')).true;
         expect(clickCounter1).to.equal(1);
-
-        // with pre-selected elements
-        clickCounter1 = 0;
-        const elements = [document.querySelector('#first > button') as HTMLElement];
-        expect(await domActions.click(elements)).true;
-        expect(clickCounter1).to.equal(1);
     });
 
     it('clicks all upon multiple matches when all=true', async () => {
@@ -39,17 +33,6 @@ describe('click', () => {
 
         // with selector
         expect(await domActions.click('button', true)).true;
-        expect(clickCounter1).to.equal(1);
-        expect(clickCounter2).to.equal(1);
-
-        // with pre-selected elements
-        clickCounter1 = 0;
-        clickCounter2 = 0;
-        const elements = [
-            document.querySelector('#first > button') as HTMLElement,
-            document.querySelector('#second > button') as HTMLElement,
-        ];
-        expect(await domActions.click(elements, true)).true;
         expect(clickCounter1).to.equal(1);
         expect(clickCounter2).to.equal(1);
     });
@@ -61,16 +44,6 @@ describe('click', () => {
         expect(await domActions.click('button')).true;
         expect(clickCounter1).to.equal(1);
         expect(clickCounter2).to.equal(0);
-
-        // with pre-selected elements
-        clickCounter1 = 0;
-        const elements = [
-            document.querySelector('#first > button') as HTMLElement,
-            document.querySelector('#second > button') as HTMLElement,
-        ];
-        expect(await domActions.click(elements, false)).true;
-        expect(clickCounter1).to.equal(1);
-        expect(clickCounter2).to.equal(0);
     });
 
     it('returns false when no elements match', async () => {
@@ -78,11 +51,6 @@ describe('click', () => {
 
         // with non-matching selector
         expect(await domActions.click('#nonexistent')).false;
-        expect(clickCounter1).to.equal(0);
-        expect(clickCounter2).to.equal(0);
-
-        // with empty element list
-        expect(await domActions.click([])).false;
         expect(clickCounter1).to.equal(0);
         expect(clickCounter2).to.equal(0);
     });

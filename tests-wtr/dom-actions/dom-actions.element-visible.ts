@@ -17,22 +17,13 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible([], 'none')).to.be.true;
         });
         it('should return false if all elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#all-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#all-visible', 'button'], 'none')).to.be.false;
-            expect(domActions.elementVisible(elements, 'none')).to.be.false;
         });
         it('should return false if some elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#some-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#some-visible', 'button'], 'none')).to.be.false;
-            expect(domActions.elementVisible(elements, 'none')).to.be.false;
         });
         it('should return true if no elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#none-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#none-visible', 'button'], 'none')).to.be.true;
-            expect(domActions.elementVisible(elements, 'none')).to.be.true;
         });
     });
 
@@ -43,22 +34,13 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible([], 'any')).to.be.false;
         });
         it('should return false if no elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#none-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#none-visible', 'button'], 'any')).to.be.false;
-            expect(domActions.elementVisible(elements, 'any')).to.be.false;
         });
         it('should return true if some elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#some-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#some-visible', 'button'], 'any')).to.be.true;
-            expect(domActions.elementVisible(elements, 'any')).to.be.true;
         });
         it('should return true if all elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#all-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#all-visible', 'button'], 'any')).to.be.true;
-            expect(domActions.elementVisible(elements, 'any')).to.be.true;
         });
     });
 
@@ -69,22 +51,13 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible([], 'all')).to.be.false;
         });
         it('should return false if no elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#none-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#none-visible', 'button'], 'all')).to.be.false;
-            expect(domActions.elementVisible(elements, 'all')).to.be.false;
         });
         it('should return false if some elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#some-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#some-visible', 'button'], 'all')).to.be.false;
-            expect(domActions.elementVisible(elements, 'all')).to.be.false;
         });
         it('should return true if all elements are visible', () => {
-            const elements = Array.from(document.querySelectorAll('#all-visible button')) as HTMLElement[];
-            // with selector / with pre-selected elements
             expect(domActions.elementVisible(['#all-visible', 'button'], 'all')).to.be.true;
-            expect(domActions.elementVisible(elements, 'all')).to.be.true;
         });
     });
 });
