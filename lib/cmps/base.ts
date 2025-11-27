@@ -434,7 +434,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
 
     optOut(): Promise<boolean> {
         // use only the first found popup candidate
-        const button = this.popups[0].rejectButtons?.[0];
+        const button = this.popups[0]?.rejectButtons?.[0];
         if (button) {
             return this.click([button.element], false);
         }
