@@ -293,4 +293,3 @@ describe('getButtonData', () => {
         expect(buttons[0].text).to.equal('Spaced Text');
     });
 });
-

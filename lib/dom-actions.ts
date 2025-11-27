@@ -1,15 +1,24 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from './rules';
 import { DomActionsProvider } from './types';
-import { getStyleElement, hideElements, isElementList, isElementVisible, waitFor } from './utils';
+import { getStyleElement, hideElements, isElementVisible, waitFor } from './utils';
 import AutoConsent from './web';
 
 export class DomActions implements DomActionsProvider {
     // eslint-disable-next-line no-useless-constructor
     constructor(public autoconsentInstance: AutoConsent) {}
 
-    async click(selectorOrElementList: ElementSelector | HTMLElement[], all = false): Promise<boolean> {
-        const elements = isElementList(selectorOrElementList) ? selectorOrElementList : this.elementSelector(selectorOrElementList);
-        this.autoconsentInstance.config.logs.rulesteps && console.log('[click]', selectorOrElementList, all, elements);
+    async clickElement(element: HTMLElement): Promise<boolean> {
+        if (!element || !(element instanceof HTMLElement)) {
+            return false;
+        }
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[clickElement]', element);
+        element.click();
+        return true;
+    }
+
+    async click(selector: ElementSelector, all = false): Promise<boolean> {
+        const elements = this.elementSelector(selector);
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[click]', selector, all, elements);
 
         if (elements.length > 0) {
             if (all) {
@@ -26,8 +35,8 @@ export class DomActions implements DomActionsProvider {
         return exists;
     }
 
-    elementVisible(selectorOrElementList: ElementSelector | HTMLElement[], check: VisibilityCheck = 'all'): boolean {
-        const elem = isElementList(selectorOrElementList) ? selectorOrElementList : this.elementSelector(selectorOrElementList);
+    elementVisible(selector: ElementSelector, check: VisibilityCheck = 'all'): boolean {
+        const elem = this.elementSelector(selector);
         const results = new Array(elem.length);
         elem.forEach((e, i) => {
             // check for display: none
