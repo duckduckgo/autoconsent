@@ -5,12 +5,12 @@ import { isElementVisible } from './utils';
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const TEXT_LIMIT = 100000;
 
-export function checkHeuristicPatterns(allText: string) {
+export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
     allText = allText.slice(0, TEXT_LIMIT);
     const patterns = [];
     const snippets = [];
 
-    for (const p of DETECT_PATTERNS) {
+    for (const p of detectPatterns) {
         const matches = allText?.match(p);
         if (matches) {
             patterns.push(p.toString());
@@ -42,7 +42,7 @@ export function getActionablePopups(): PopupData[] {
     return result;
 }
 
-function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; otherButtons: ButtonData[] } {
+export function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; otherButtons: ButtonData[] } {
     const rejectButtons = [];
     const otherButtons = [];
     for (const button of buttons) {
@@ -58,18 +58,18 @@ function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; 
     };
 }
 
-function isRejectButton(buttonText: string): boolean {
+export function isRejectButton(buttonText: string, rejectPatterns = REJECT_PATTERNS, neverMatchPatterns = NEVER_MATCH_PATTERNS): boolean {
     if (!buttonText) {
         return false;
     }
     const cleanedButtonText = cleanButtonText(buttonText);
     return (
-        !NEVER_MATCH_PATTERNS.some((p) => p.test(cleanedButtonText)) &&
-        REJECT_PATTERNS.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText)
+        !neverMatchPatterns.some((p) => p.test(cleanedButtonText)) &&
+        rejectPatterns.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText)
     );
 }
 
-function cleanButtonText(buttonText: string): string {
+export function cleanButtonText(buttonText: string): string {
     // lowercase
     let result = buttonText.toLowerCase();
     // remove special characters
@@ -158,7 +158,7 @@ function getPopupLikeElements(): HTMLElement[] {
 /**
  * Serialize all actionable buttons on the page
  */
-function getButtonData(el: HTMLElement): ButtonData[] {
+export function getButtonData(el: HTMLElement): ButtonData[] {
     const actionableButtons = excludeContainers(getButtonLikeElements(el)).filter(
         (b) =>
             isElementVisible(b) &&
@@ -178,7 +178,7 @@ function getButtonLikeElements(el: HTMLElement): HTMLElement[] {
     return Array.from(el.querySelectorAll(BUTTON_LIKE_ELEMENT_SELECTOR));
 }
 
-function isDisabled(el: HTMLElement): boolean {
+export function isDisabled(el: HTMLElement): boolean {
     // we want to be lenient here: if a non-input element has a disabled attribute, we want to consider it too
     return ('disabled' in el && Boolean(el.disabled)) || el.hasAttribute('disabled');
 }
@@ -186,7 +186,7 @@ function isDisabled(el: HTMLElement): boolean {
 /**
  * Leave only elements that do not contain any other elements
  */
-function excludeContainers(elements: HTMLElement[]): HTMLElement[] {
+export function excludeContainers(elements: HTMLElement[]): HTMLElement[] {
     const results = [];
     if (elements.length > 0) {
         for (let i = elements.length - 1; i >= 0; i--) {
