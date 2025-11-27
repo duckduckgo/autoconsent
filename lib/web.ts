@@ -265,9 +265,11 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
-        const heuristicCmp = this.config.enableHeuristicAction ? new AutoConsentHeuristicCMP(this) : null;
-
         const isTop = window.top === window;
+
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
+        const heuristicCmp = isTop && this.config.enableHeuristicAction ? new AutoConsentHeuristicCMP(this) : null;
+
         // refilter relevant rules for this context
         const siteSpecificRules: AutoCMP[] = [];
         const otherRules: AutoCMP[] = [];
