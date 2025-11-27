@@ -7,7 +7,7 @@ import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { normalizeConfig, scheduleWhenIdle } from './utils';
+import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
@@ -265,7 +265,7 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
-        const isTop = window.top === window;
+        const isTop = isTopFrame();
 
         // refilter relevant rules for this context
         const siteSpecificRules: AutoCMP[] = [];
@@ -618,7 +618,7 @@ export default class AutoConsent {
             type: 'report',
             instanceId: this.id,
             url: window.location.href,
-            mainFrame: window.top === window.self,
+            mainFrame: isTopFrame(),
             state: this.state,
         });
     }

@@ -1,6 +1,6 @@
 import { DETECT_PATTERNS, NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './heuristic-patterns';
 import { ButtonData, PopupData } from './types';
-import { isElementVisible } from './utils';
+import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const TEXT_LIMIT = 100000;
@@ -89,7 +89,7 @@ export function cleanButtonText(buttonText: string): string {
 }
 
 function getPotentialPopups() {
-    const isFramed = window.top !== window || location.ancestorOrigins?.length > 0;
+    const isFramed = !isTopFrame();
     // do not inspect frames that are more than one level deep
     if (isFramed && window.parent && window.parent !== window.top) {
         return [];

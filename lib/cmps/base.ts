@@ -3,7 +3,7 @@ import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, R
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
-import { highlightNode, isElementVisible, unhighlightNode } from '../utils';
+import { highlightNode, isElementVisible, isTopFrame, unhighlightNode } from '../utils';
 import { getActionablePopups } from '../heuristics';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
@@ -70,7 +70,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     checkRunContext(): boolean {
-        if (!this.checkFrameContext(window.top === window)) {
+        if (!this.checkFrameContext(isTopFrame())) {
             return false;
         }
         if (this.runContext.urlPattern && !this.hasMatchingUrlPattern()) {

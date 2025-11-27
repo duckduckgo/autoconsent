@@ -158,3 +158,7 @@ export function unhighlightNode(node: HTMLElement) {
         node.removeAttribute('style');
     }
 }
+
+export function isTopFrame(): boolean {
+    return window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
+}
