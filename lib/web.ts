@@ -267,12 +267,9 @@ export default class AutoConsent {
         const foundCMPs: AutoCMP[] = [];
         const isTop = window.top === window;
 
-        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
-        const heuristicCmp = isTop && this.config.enableHeuristicAction ? new AutoConsentHeuristicCMP(this) : null;
-
         // refilter relevant rules for this context
         const siteSpecificRules: AutoCMP[] = [];
-        const otherRules: AutoCMP[] = [];
+        const genericRules: AutoCMP[] = [];
         this.rules.forEach((cmp) => {
             // first filter out rules that don't run in this frame-type.
             if (cmp.checkFrameContext(isTop)) {
@@ -281,12 +278,19 @@ export default class AutoConsent {
                 if (cmp.hasMatchingUrlPattern()) {
                     siteSpecificRules.push(cmp);
                 } else if (!isSiteSpecific) {
-                    otherRules.push(cmp);
+                    genericRules.push(cmp);
                 }
             }
         });
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
+        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
 
-        const detectCmp = async (cmp: AutoCMP) => {
+        const rulesPriorityStages: [string, AutoCMP[]][] = [
+            ['site-specific', siteSpecificRules],
+            ['generic', genericRules],
+            ['heuristic', heuristicRules],
+        ];
+        const runDetectCmp = async (cmp: AutoCMP) => {
             try {
                 const result = await cmp.detectCmp();
                 if (result) {
@@ -302,34 +306,28 @@ export default class AutoConsent {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
             }
         };
+
         const mutationObserver = this.domActions.waitForMutation('html');
         mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
-        logsConfig.lifecycle &&
-            siteSpecificRules.length > 0 &&
-            console.log(
-                'Detecting site-specific rules',
-                siteSpecificRules.map((r) => r.name),
-            );
-        // collect relevant site-specific rules and run them first
-        await Promise.all(siteSpecificRules.map(detectCmp));
+        for (const [stageName, ruleGroup] of rulesPriorityStages) {
+            logsConfig.lifecycle &&
+                ruleGroup.length > 0 &&
+                console.log(
+                    `Trying ${stageName} rules`,
+                    ruleGroup.map((r) => r.name),
+                );
+            await Promise.all(ruleGroup.map(runDetectCmp));
 
-        this.detectHeuristics();
-        // exit early if we already found a site-specific popup
-        if (foundCMPs.length > 0) {
-            return foundCMPs;
+            // exit early if we already found a CMP
+            if (foundCMPs.length > 0) {
+                break;
+            }
         }
 
-        logsConfig.lifecycle && console.log("Site-specific rules didn't match, trying generic rules");
-        // check generic popups
-        await Promise.all(otherRules.map(detectCmp));
+        this.detectHeuristics(); // run heuristics after trying rules
 
-        if (heuristicCmp && foundCMPs.length === 0) {
-            // when enabled, try to use heuristics to find a popup
-            await detectCmp(heuristicCmp);
-        }
-
-        if (foundCMPs.length === 0 && retries > 0) {
+        if (foundCMPs.length === 0 && retries > 0) { // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             try {

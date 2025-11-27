@@ -142,6 +142,13 @@ describe('Autoconsent.findCmp', () => {
         });
 
         it('returns heuristic CMP when no declarative rules match', async () => {
+            autoconsent.addDeclarativeCMP({
+                name: 'test',
+                detectCmp: [{ exists: '#privacy-test-page-cmp-test-not-existing' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
             const found = await autoconsent.findCmp(0);
 
             expect(found).to.have.length(1);
