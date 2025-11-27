@@ -398,7 +398,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         this.name = 'HEURISTIC';
         this.runContext = {
             main: true,
-            frame: true,
+            frame: false, // do not run in iframes for security reasons
         } as RunContext;
     }
 
