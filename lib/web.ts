@@ -265,6 +265,7 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
+        const heuristicCmp = this.config.enableHeuristicAction ? new AutoConsentHeuristicCMP(this) : null;
 
         const isTop = window.top === window;
         // refilter relevant rules for this context
@@ -321,9 +322,8 @@ export default class AutoConsent {
         // check generic popups
         await Promise.all(otherRules.map(detectCmp));
 
-        if (this.config.enableHeuristicAction && foundCMPs.length === 0) {
+        if (heuristicCmp && foundCMPs.length === 0) {
             // when enabled, try to use heuristics to find a popup
-            const heuristicCmp = new AutoConsentHeuristicCMP(this);
             const result = await heuristicCmp.detectCmp();
             if (result) {
                 foundCMPs.push(heuristicCmp);
