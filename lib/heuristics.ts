@@ -1,5 +1,6 @@
 import { DETECT_PATTERNS, NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './heuristic-patterns';
 import { ButtonData, PopupData } from './types';
+import { isElementVisible } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const TEXT_LIMIT = 100000;
@@ -104,7 +105,7 @@ function collectPotentialPopups(isFramed: boolean): PopupData[] {
     } else {
         // for iframes, just take the whole document
         const doc = document.body || document.documentElement;
-        if (doc && isVisible(doc) && doc.innerText) {
+        if (doc && isElementVisible(doc) && doc.innerText) {
             elements.push(doc);
         }
     }
@@ -139,7 +140,7 @@ function getPopupLikeElements(): HTMLElement[] {
                     return NodeFilter.FILTER_SKIP;
                 }
                 const cssPosition = window.getComputedStyle(node).position;
-                if ((cssPosition === 'fixed' || cssPosition === 'sticky') && isVisible(node)) {
+                if ((cssPosition === 'fixed' || cssPosition === 'sticky') && isElementVisible(node)) {
                     return NodeFilter.FILTER_ACCEPT;
                 }
                 return NodeFilter.FILTER_SKIP;
@@ -160,7 +161,7 @@ function getPopupLikeElements(): HTMLElement[] {
 function getButtonData(el: HTMLElement): ButtonData[] {
     const actionableButtons = excludeContainers(getButtonLikeElements(el)).filter(
         (b) =>
-            isVisible(b) &&
+            isElementVisible(b) &&
             !isDisabled(b) &&
             (b.innerText.trim() ||
                 // <input> values do not appear in innerText
@@ -202,24 +203,4 @@ function excludeContainers(elements: HTMLElement[]): HTMLElement[] {
         }
     }
     return results;
-}
-
-// See also isElementVisible() in utils.ts
-function isVisible(node: HTMLElement): boolean {
-    if (!node.isConnected) {
-        return false;
-    }
-    const style = window.getComputedStyle(node);
-    if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
-        return false;
-    }
-    const rect = node.getBoundingClientRect();
-    return (
-        rect.width > 0 &&
-        rect.height > 0 &&
-        rect.top < window.innerHeight &&
-        rect.left < window.innerWidth &&
-        rect.bottom > 0 &&
-        rect.right > 0
-    );
 }
