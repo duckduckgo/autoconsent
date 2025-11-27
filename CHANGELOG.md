@@ -1,3 +1,16 @@
+# v14.38.0 (Thu Nov 27 2025)
+
+#### 🚀 Enhancement
+
+- Add tests for if statements in rules. [#1071](https://github.com/duckduckgo/autoconsent/pull/1071) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.37.1 (Fri Nov 21 2025)
 
 #### 🐛 Bug Fix
