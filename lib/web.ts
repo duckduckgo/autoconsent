@@ -327,7 +327,8 @@ export default class AutoConsent {
 
         this.detectHeuristics(); // run heuristics after trying rules
 
-        if (foundCMPs.length === 0 && retries > 0) { // if we didn't find a CMP, try again
+        if (foundCMPs.length === 0 && retries > 0) {
+            // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             try {
