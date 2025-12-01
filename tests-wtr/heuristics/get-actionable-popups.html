@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <style>
+            .popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 300px;
+                height: 200px;
+                background: white;
+                display: none;
+            }
+            .popup.visible {
+                display: block;
+            }
+            .popup.static-pos {
+                position: static;
+            }
+            .popup.sticky-pos {
+                position: sticky;
+                top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./get-actionable-popups');
+            });
+        </script>
+
+        <div id="popup-reject-all" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+
+        <div id="popup-newsletter" class="popup">
+            <p>Welcome to our website! Sign up for our newsletter.</p>
+            <button>Subscribe</button>
+            <button>No thanks</button>
+        </div>
+
+        <div id="popup-no-reject" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Settings</button>
+        </div>
+
+        <div id="popup-static" class="popup static-pos">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+
+        <div id="popup-sticky" class="popup sticky-pos">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+
+        <div id="popup-multiple-buttons" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+            <button>Settings</button>
+            <button>Learn More</button>
+        </div>
+    </body>
+</html>
