@@ -1,3 +1,15 @@
+# v14.39.0 (Tue Dec 02 2025)
+
+#### 🚀 Enhancement
+
+- Add heuristic reject mode [#1044](https://github.com/duckduckgo/autoconsent/pull/1044) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.38.0 (Thu Nov 27 2025)
 
 #### 🚀 Enhancement
