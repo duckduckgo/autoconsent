@@ -5,4 +5,5 @@ generateCMPTests('axeptio', [
     'https://www.dorcel.com/',
     'https://mistral.ai/news/le-chat-dives-deep',
     'https://lahalledesgourmets.com/pages/angelina',
+    'https://www.narbonneaccessoires.fr/fr-fr/',
 ]);
