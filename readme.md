@@ -12,12 +12,13 @@ To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` clas
 
 ```javascript
 import AutoConsent from '@duckduckgo/autoconsent'; // or '@duckduckgo/autoconsent/extra' for the version with filterlists
-import * as rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
+import { consentomatic } from '@duckduckgo/autoconsent/rules/consentomatic.json'
 
 const autoconsent = new AutoConsent(
     chrome.runtime.sendMessage, // provide a callback to send messages to the background script
     null, // optionally provide a config object here if you don't want to implement a background script
-    rules,
+    { autoconsent, consentomatic },
 );
 
 // connect the message receiver callback to handle messages from the background script
@@ -72,7 +73,7 @@ that are installed on multiple sites. Each CMP ruleset defines:
  * Optionally, a test if the consent was correctly applied.
 
 There are currently three ways of implementing a CMP:
- 
+
  1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
  1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
  rulesets allow.
@@ -127,7 +128,7 @@ Both JSON and class implementations have the following components:
  * `optIn` - a list of actions for an 'opt-in' from the popup screen.
  * (optional) `prehideSelectors` - a list of CSS selectors to "pre-hide" early before detecting a CMP. This helps against flickering. Pre-hiding is done using CSS `opacity` and `z-index`, so be it should be used with care to prevent conflicts with the opt-out process.
  * (optional) `intermediate` - a boolean flag indicating that the ruleset is part of a multi-stage process, see the [Intermediate rules](#intermediate-rules) section. This is `false` by default.
- * (optional) `vendorUrl` - link to the CMP vendor site, for reference.
+ * (optional) `_metadata` - an object containing additional metadata about the rule. Metadata is lost during the build process, and is not used by the library in runtime.
  * (optional) `cosmetic` - a boolean flag indicating that the rule is purely cosmetic and does not affect the consent state. This is `false` by default.
  * (optional) `runContext` - an object describing when this rule should be tried:
    * `main` - boolean, set to `true` if the rule should be executed in top-level documents (default: `true`)
@@ -143,8 +144,9 @@ Both JSON and class implementations have the following components:
 Many rules use `ElementSelector` to locate elements in a page. `ElementSelector` can be a string, or array of strings, which are used to locate elements as follows:
  - By default, strings are treated as [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors) via the `querySelector` API. e.g. `#reject-cookies` to find an element whose `id` is 'reject-cookies'.
  - Strings prefixed with `xpath/` are [Xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) selectors which can locate elements in the page via [`document.evaluate`](https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript#document.evaluate). e.g. `xpath///*[@id="reject-cookies"]` can find an element whose `id` is 'reject-cookies'.
- - If an array of strings is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id="reject-cookies"`, then looks for a match for `button` _that is a descendant_ of that element.
- **If one of the selectors returns an element that has a `shadowRoot` property, the next selector will run within that element's shadow DOM.** This is the main difference from nested CSS selectors, which do not cross shadow DOM boundaries.
+ - If an array of strings is given, the selectors are applied in array order, with the search scope constrained each time but the first match of the previous selector. e.g. `['#reject-cookies', 'button']` first looks for an element with `id="reject-cookies"`, then looks for a match for `button` _that is a descendant_ of that element. Compared to normal CSS selectors, this allows piercing shadow DOM and iframes:
+   - If one of the selectors returns an element that has a non-null `shadowRoot` property (open shadow DOM), the next selector will run within that element's shadow DOM.
+   - If one of the selectors returns an iframe element with a non-null `contentDocument` property (same-origin iframe), the next selector will run within that iframe's document.
 
  For example, consider the following DOM fragment:
  ```html
@@ -172,7 +174,7 @@ Returns true if the given selector matches one or more elements.
   "check": "any" | "all" | "none"
 }
 ```
-Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all`, every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
+Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all` (default), every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
 
 ### Wait for element
 

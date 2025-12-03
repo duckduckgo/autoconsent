@@ -1,6 +1,7 @@
 import { ContentScriptMessage } from './messages';
 import { ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from './rules';
+import { CompactCMPRuleset } from './encoding';
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -12,6 +13,8 @@ export interface AutoCMP {
     prehideSelectors?: string[];
     runContext: RunContext;
     checkRunContext(): boolean;
+    checkFrameContext(isTop: boolean): boolean;
+    hasMatchingUrlPattern(): boolean;
     detectCmp(): Promise<boolean>;
     detectPopup(): Promise<boolean>;
     optOut(): Promise<boolean>;
@@ -21,7 +24,8 @@ export interface AutoCMP {
 }
 
 export interface DomActionsProvider {
-    click(selector: ElementSelector, all: boolean): boolean;
+    click(selector: ElementSelector, all: boolean): Promise<boolean>;
+    clickElement(element: HTMLElement): Promise<boolean>;
     elementExists(selector: ElementSelector): boolean;
     elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
     waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;
@@ -34,10 +38,12 @@ export interface DomActionsProvider {
     querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
     querySelectorChain(selectors: string[]): HTMLElement[];
     elementSelector(selector: ElementSelector): HTMLElement[];
+    waitForMutation(selector: ElementSelector): Promise<boolean>;
 }
 
 export type RuleBundle = {
     autoconsent: AutoConsentCMPRule[];
+    compact?: CompactCMPRuleset;
     consentomatic?: { [name: string]: ConsentOMaticConfig };
 };
 
@@ -49,14 +55,18 @@ export type Config = {
     disabledCmps: string[];
     enablePrehide: boolean;
     enableCosmeticRules: boolean;
+    enableGeneratedRules: boolean;
     detectRetries: number;
     isMainWorld: boolean;
     prehideTimeout: number;
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
+    enableHeuristicAction: boolean;
+    visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
         rulesteps: boolean;
+        detectionsteps: boolean;
         evals: boolean;
         errors: boolean;
         messages: boolean;
@@ -91,5 +101,21 @@ export type ConsentState = {
     detectedPopups: string[]; // Names of CMP rules where `detectPopup` returned true.
     heuristicPatterns: string[]; // Matched heuristic patterns
     heuristicSnippets: string[]; // Matched heuristic snippets
-    selfTest: boolean; // null if no self test was run, otherwise it holds the result of the self test.
+    selfTest: boolean | null; // null if no self test was run, otherwise it holds the result of the self test.
+    clicks: number; // Number of clicks the script has made.
+    startTime: number; // The time the script started.
+    endTime: number; // The time the script ended.
 };
+
+export interface ButtonData {
+    text: string;
+    element: HTMLElement;
+}
+
+export interface PopupData {
+    text: string;
+    element: HTMLElement;
+    buttons: ButtonData[];
+    rejectButtons?: ButtonData[];
+    otherButtons?: ButtonData[];
+}

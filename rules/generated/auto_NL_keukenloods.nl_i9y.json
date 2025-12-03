@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_keukenloods.nl_i9y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.keukenloods.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?keukenloods\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notification > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notification > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notification > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie_decline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notification > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

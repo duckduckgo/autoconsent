@@ -8,6 +8,7 @@ generateCMPTests(
         'https://www.anandtech.com/',
         'https://www.livescience.com',
         'https://www.gamesradar.com',
+        'https://time.is/',
     ],
     {
         skipRegions: ['US', 'GB', 'FR'],

@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kzvb.de_7t3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kzvb.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kzvb\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#wrap > section:nth-child(5):not([id]) > div:nth-child(1)#mms-cookie-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(1)#reject-all-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#wrap > section:nth-child(5):not([id]) > div:nth-child(1)#mms-cookie-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(1)#reject-all-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#wrap > section:nth-child(5):not([id]) > div:nth-child(1)#mms-cookie-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(1)#reject-all-cookies",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#wrap > section:nth-child(5):not([id]) > div:nth-child(1)#mms-cookie-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > a:nth-child(1)#reject-all-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

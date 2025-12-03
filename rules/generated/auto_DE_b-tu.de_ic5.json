@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_b-tu.de_ic5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.b-tu.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?b-tu\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookieman-modal > div:nth-child(6):not([id]) > button:nth-child(1)#cookieman-accept-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookieman-modal > div:nth-child(6):not([id]) > button:nth-child(1)#cookieman-accept-mandatory"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookieman-modal > div:nth-child(6):not([id]) > button:nth-child(1)#cookieman-accept-mandatory",
+            "comment": "Erforderliche Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookieman-modal > div:nth-child(6):not([id]) > button:nth-child(1)#cookieman-accept-mandatory",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

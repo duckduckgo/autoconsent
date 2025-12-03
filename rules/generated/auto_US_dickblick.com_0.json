@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_dickblick.com_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dickblick\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
+            "comment": "REJECT ALL NON-ESSENTIAL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > header:nth-child(1):not([id]) > div:nth-child(2)#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn_privacy_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

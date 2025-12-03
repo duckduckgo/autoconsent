@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_boutique.arte.tv_ljx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://boutique.arte.tv/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boutique\\.arte\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > main:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > main:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > main:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > main:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

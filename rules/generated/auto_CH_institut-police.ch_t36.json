@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_institut-police.ch_t36",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.institut-police.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?institut-police\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#cookies-eu-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > nobr:not([id]) > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#cookies-eu-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > nobr:not([id]) > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#cookies-eu-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > nobr:not([id]) > button:nth-child(2)#cookies-eu-reject",
+            "comment": "Accepter les cookies nécessaires"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#cookies-eu-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > nobr:not([id]) > button:nth-child(2)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

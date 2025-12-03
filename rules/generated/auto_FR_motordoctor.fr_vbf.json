@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_motordoctor.fr_vbf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.motordoctor.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?motordoctor\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#\\33 "
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#\\33 "
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#\\33 ",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > span:nth-child(1)#\\33 ",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

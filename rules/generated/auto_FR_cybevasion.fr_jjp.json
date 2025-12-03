@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cybevasion.fr_jjp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cybevasion.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cybevasion\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieChoiceInfo > div:nth-child(2)#cookieButtonBar > a:nth-child(2)#cookieChoiceRefuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieChoiceInfo > div:nth-child(2)#cookieButtonBar > a:nth-child(2)#cookieChoiceRefuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieChoiceInfo > div:nth-child(2)#cookieButtonBar > a:nth-child(2)#cookieChoiceRefuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieChoiceInfo > div:nth-child(2)#cookieButtonBar > a:nth-child(2)#cookieChoiceRefuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

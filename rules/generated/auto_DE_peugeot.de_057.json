@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_peugeot.de_057",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.peugeot.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?peugeot\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

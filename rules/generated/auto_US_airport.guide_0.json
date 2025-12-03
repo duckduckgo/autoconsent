@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_airport.guide_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?airport\\.guide/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

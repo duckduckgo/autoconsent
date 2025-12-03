@@ -1,0 +1,37 @@
+{
+    "name": "auto_AU_amayama.com_kw8",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amayama\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > noindex:not([id]) > div#gdpr-alert > div:nth-child(2):not([id]) > button:nth-child(1)#close-gdpr-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

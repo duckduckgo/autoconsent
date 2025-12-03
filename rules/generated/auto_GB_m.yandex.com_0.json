@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_m.yandex.com_0",
+    "vendorUrl": "http://m.yandex.com/showcaptcha?cc=1&form-fb-hint=2.46&mt=F7C0FAE631266AFB96520DBCB75DF828A77F7FCCCD68CAA18D00CBBA52071C2A20E3DFBA014C09519BFA7F889E27A24B26A997D45C44909B329D1477E475729C691F4B27CD899CED7CCD59F1AD6FCA8091F16B8F6E3D1F090855F132DB803617B122A7CC32AC5EC0944EC3E8BDDF6C78FD89BAE782334CBF9F6427401D1715C6DD8CDDAAAC50550F55F1BFE993AF29659972EE1319B625AB3FC5C35E05E283C4120727245A336F15107F2A284199B30558A30F80CA62138F56A266F0AB69A2EF4E6DE65025B781C03150C2EDE646A430730D133F323C75CCEEFFF7AD&retpath=aHR0cDovL20ueWFuZGV4LmNvbS8__e2cccf39d1ecba0d9a70ef5363ccd5c6&t=2/1747054244/701dd9a870e8d68a9ced0a07ef5e590d&u=6562361253256153619&s=9303a881d3ea3770ed3bc85e517761f3",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?m\\.yandex\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(2)",
+            "text": "Allow essential cookies"
+        }
+    ]
+}

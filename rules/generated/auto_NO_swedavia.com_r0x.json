@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_swedavia.com_r0x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.swedavia.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?swedavia\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#Body > main:nth-child(1)#MainContent > div:not([id]) > div#frontPage > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:nth-child(2)#CookieDisclaimerBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#Body > main:nth-child(1)#MainContent > div:not([id]) > div#frontPage > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:nth-child(2)#CookieDisclaimerBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#Body > main:nth-child(1)#MainContent > div:not([id]) > div#frontPage > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:nth-child(2)#CookieDisclaimerBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "Only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#Body > main:nth-child(1)#MainContent > div:not([id]) > div#frontPage > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:nth-child(2)#CookieDisclaimerBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_guggenheim.org_m1o",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.guggenheim.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?guggenheim\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#decline-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#decline-consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#decline-consent",
+            "comment": "I Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#decline-consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "auto_CA_nike.com_aer",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nike\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-root > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"modal-backdrop\"] > div:not([id])[data-testid=\"cookie-modal-root\"] > section:not([id])[data-testid=\"cookie-modal\"] > div:nth-child(2):not([id])[data-testid=\"modal-actions\"] > div:not([id]) > button:nth-child(2):not([id])[data-testid=\"modal-decline-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

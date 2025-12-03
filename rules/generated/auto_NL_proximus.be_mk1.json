@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_proximus.be_mk1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.proximus.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?proximus\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(19):not([id]) > main#maincontent > div:nth-child(24)#eweb-cc-banner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"Cookie-Banner-Btn-Reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(19):not([id]) > main#maincontent > div:nth-child(24)#eweb-cc-banner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"Cookie-Banner-Btn-Reject\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(19):not([id]) > main#maincontent > div:nth-child(24)#eweb-cc-banner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"Cookie-Banner-Btn-Reject\"]",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(19):not([id]) > main#maincontent > div:nth-child(24)#eweb-cc-banner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])[data-testid=\"Cookie-Banner-Btn-Reject\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

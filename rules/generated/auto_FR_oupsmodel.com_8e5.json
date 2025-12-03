@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_oupsmodel.com_8e5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.oupsmodel.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oupsmodel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#body_wrapper > footer:nth-child(3)#footer > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > section#footer-primary > div:nth-child(6)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#body_wrapper > footer:nth-child(3)#footer > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > section#footer-primary > div:nth-child(6)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#body_wrapper > footer:nth-child(3)#footer > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > section#footer-primary > div:nth-child(6)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#body_wrapper > footer:nth-child(3)#footer > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > section#footer-primary > div:nth-child(6)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

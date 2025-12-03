@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_lakehouse.com_qes",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lakehouse\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#main > div:nth-child(3):not([id]) > div:nth-child(10):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

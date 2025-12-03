@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lecode.laposte.fr_2h6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lecode.laposte.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lecode\\.laposte\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(1)#footer_tc_privacy_button_3"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(1)#footer_tc_privacy_button_3"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(1)#footer_tc_privacy_button_3",
+            "comment": "Continuer sans accepter >"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(1)#footer_tc_privacy_button_3",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_tvgids.nl_9u8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tvgids.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tvgids\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#eiS3ai > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-eiS3ai-deny-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#eiS3ai > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-eiS3ai-deny-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#eiS3ai > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-eiS3ai-deny-all",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#eiS3ai > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-eiS3ai-deny-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

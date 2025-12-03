@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_foundryvtt.com_2jv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://foundryvtt.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?foundryvtt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "comment": " REQUIRED ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#main-content > div:nth-child(1)#banner-messages > form:nth-child(2)#analytics-prompt > footer:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

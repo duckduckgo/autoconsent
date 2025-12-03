@@ -1,0 +1,46 @@
+{
+    "name": "auto_GB_livejasmin.com_man",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.livejasmin.com/en/girls?forcedesktop=1",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?livejasmin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieContent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".over-18__manage-cookies-link"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": ".over-18__manage-cookies-link"
+        },
+        {
+            "waitFor": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieSwitch\"]"
+        },
+        {
+            "click": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieSwitch\"]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieContent\"] > [data-testid=\"ButtonStyledButton\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "is_personalized_content_consent_given=0"
+        }
+    ]
+}

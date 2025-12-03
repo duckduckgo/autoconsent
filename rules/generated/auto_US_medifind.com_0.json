@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_medifind.com_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?medifind\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
+            "comment": "Accept Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mf-root > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#accept-necessary-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_benefitsandwork.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?benefitsandwork\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

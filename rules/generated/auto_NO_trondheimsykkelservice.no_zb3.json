@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_trondheimsykkelservice.no_zb3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://trondheimsykkelservice.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?trondheimsykkelservice\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#wpmagus-consent-manager-dialog-wrapper > div#wpmagus-consent-manager-dialog > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#wpmagus-consent-manager-dialog-wrapper > div#wpmagus-consent-manager-dialog > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#wpmagus-consent-manager-dialog-wrapper > div#wpmagus-consent-manager-dialog > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#wpmagus-consent-manager-dialog-wrapper > div#wpmagus-consent-manager-dialog > footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_pkwteile.ch_m2h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pkwteile.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pkwteile\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 "
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 "
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 ",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > span#\\33 ",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

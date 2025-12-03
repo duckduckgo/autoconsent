@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_saint-bernard.ch_7p4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.saint-bernard.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?saint-bernard\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fancybox-1 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fancybox-1 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fancybox-1 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fancybox-1 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#bmg-gdpr-wrapper > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

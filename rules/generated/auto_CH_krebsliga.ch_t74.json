@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_krebsliga.ch_t74",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.krebsliga.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?krebsliga\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#btn-accept-required-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#btn-accept-required-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#btn-accept-required-banner",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#btn-accept-required-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

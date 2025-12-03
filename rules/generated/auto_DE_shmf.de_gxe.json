@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_shmf.de_gxe",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.shmf.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?shmf\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gcms_cookie_manager > div#gcms_cookie_main > div:nth-child(1):not([id]) > div#gcms_cookie_tblock > div:nth-child(2)#gcms_cookie_tblock2 > div:not([id]) > div:not([id]) > a:nth-child(3)#gcms_cookie_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gcms_cookie_manager > div#gcms_cookie_main > div:nth-child(1):not([id]) > div#gcms_cookie_tblock > div:nth-child(2)#gcms_cookie_tblock2 > div:not([id]) > div:not([id]) > a:nth-child(3)#gcms_cookie_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gcms_cookie_manager > div#gcms_cookie_main > div:nth-child(1):not([id]) > div#gcms_cookie_tblock > div:nth-child(2)#gcms_cookie_tblock2 > div:not([id]) > div:not([id]) > a:nth-child(3)#gcms_cookie_deny",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gcms_cookie_manager > div#gcms_cookie_main > div:nth-child(1):not([id]) > div#gcms_cookie_tblock > div:nth-child(2)#gcms_cookie_tblock2 > div:not([id]) > div:not([id]) > a:nth-child(3)#gcms_cookie_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

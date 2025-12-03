@@ -1,0 +1,38 @@
+{
+    "name": "auto_US_tecadmin.net_4bn",
+    "vendorUrl": "https://tecadmin.net/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tecadmin\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#decline-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#decline-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#decline-all",
+            "comment": "DECLINE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#decline-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

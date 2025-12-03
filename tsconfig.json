@@ -7,6 +7,7 @@
         "moduleResolution": "NodeNext",
         "noImplicitAny": true,
         "allowSyntheticDefaultImports": true,
+        "strict": true,
         "module": "NodeNext"
     },
     "exclude": ["node_modules/*", "dist/*"]

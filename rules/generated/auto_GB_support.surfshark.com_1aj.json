@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_support.surfshark.com_1aj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support.surfshark.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.surfshark\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer#site-footer > div:nth-child(3)#gdprPopup > div:nth-child(2):not([id]) > button:nth-child(2)#gdprDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer#site-footer > div:nth-child(3)#gdprPopup > div:nth-child(2):not([id]) > button:nth-child(2)#gdprDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer#site-footer > div:nth-child(3)#gdprPopup > div:nth-child(2):not([id]) > button:nth-child(2)#gdprDecline",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer#site-footer > div:nth-child(3)#gdprPopup > div:nth-child(2):not([id]) > button:nth-child(2)#gdprDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

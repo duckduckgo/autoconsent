@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_engie-homeservices.fr_lyo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.engie-homeservices.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?engie-homeservices\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_all",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

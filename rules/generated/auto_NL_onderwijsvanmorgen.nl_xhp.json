@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_onderwijsvanmorgen.nl_xhp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.onderwijsvanmorgen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?onderwijsvanmorgen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_a5cc4655-83d8-461c-af8a-0659597000bc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-acbe7d0b-0320-48f9-b8ee-c0e7cf9780b8 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_a5cc4655-83d8-461c-af8a-0659597000bc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-acbe7d0b-0320-48f9-b8ee-c0e7cf9780b8 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_a5cc4655-83d8-461c-af8a-0659597000bc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-acbe7d0b-0320-48f9-b8ee-c0e7cf9780b8 > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_a5cc4655-83d8-461c-af8a-0659597000bc > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-acbe7d0b-0320-48f9-b8ee-c0e7cf9780b8 > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

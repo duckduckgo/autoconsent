@@ -1,14 +1,25 @@
 {
     "name": "cookie-law-info",
-    "prehideSelectors": ["#cookie-law-info-bar, #cookie-law-bg"],
+    "prehideSelectors": ["#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay"],
     "detectCmp": [{ "exists": "#cookie-law-info-bar" }, { "eval": "EVAL_COOKIE_LAW_INFO_DETECT" }],
-    "detectPopup": [{ "visible": "#cookie-law-info-bar, #cookie-law-bg", "check": "any" }],
-    "optIn": [{ "click": "[data-cli_action=\"accept\"]" }],
+    "detectPopup": [{ "visible": "#cookie-law-info-bar" }],
+    "optIn": [
+        {
+            "click": "[data-cli_action=\"accept\"]"
+        }
+    ],
     "optOut": [
-        { "hide": "#cookie-law-info-bar, #cookie-law-bg" },
+        {
+            "hide": "#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay"
+        },
         {
             "eval": "EVAL_COOKIE_LAW_INFO_0"
         }
     ],
-    "test": [{ "cookieContains": "cookielawinfo-checkbox-non-necessary=yes", "negated": true }]
+    "test": [
+        {
+            "cookieContains": "cookielawinfo-checkbox-non-necessary=yes",
+            "negated": true
+        }
+    ]
 }

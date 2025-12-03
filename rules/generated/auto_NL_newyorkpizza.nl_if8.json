@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_newyorkpizza.nl_if8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.newyorkpizza.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?newyorkpizza\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ecom2-spa-root > div:nth-child(4)#layout-grid > div:nth-child(4)#main-content-v2 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-btn-deny\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ecom2-spa-root > div:nth-child(4)#layout-grid > div:nth-child(4)#main-content-v2 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-btn-deny\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ecom2-spa-root > div:nth-child(4)#layout-grid > div:nth-child(4)#main-content-v2 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-btn-deny\"]",
+            "comment": "DENY ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ecom2-spa-root > div:nth-child(4)#layout-grid > div:nth-child(4)#main-content-v2 > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookie-btn-deny\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "auto_CA_boatdealers.ca_wpl",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boatdealers\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "comment": "ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#acceptEssentials",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ubaldi.com_pys",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ubaldi.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ubaldi\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cb-frame > div:not([id]) > div:nth-child(1):not([id]) > a#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cb-frame > div:not([id]) > div:nth-child(1):not([id]) > a#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cb-frame > div:not([id]) > div:nth-child(1):not([id]) > a#cookie-decline",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cb-frame > div:not([id]) > div:nth-child(1):not([id]) > a#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

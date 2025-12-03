@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_arronet.se_vo5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arronet.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arronet\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cc-b-custom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cc-b-custom"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cc-b-custom",
+            "comment": "Endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cc-b-custom",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

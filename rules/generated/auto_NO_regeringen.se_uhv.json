@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_regeringen.se_uhv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.regeringen.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?regeringen\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cc-b-custom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cc-b-custom"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cc-b-custom",
+            "comment": "Endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieConsent > dialog:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cc-b-custom",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

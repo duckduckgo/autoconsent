@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_cardmarket.com_15t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cardmarket.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cardmarket\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header#header > div:nth-child(1)#CookiesConsent > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:not([id])[data-testid=\"AcceptRequiredCookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header#header > div:nth-child(1)#CookiesConsent > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:not([id])[data-testid=\"AcceptRequiredCookies\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header#header > div:nth-child(1)#CookiesConsent > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:not([id])[data-testid=\"AcceptRequiredCookies\"]",
+            "comment": "ONLY REQUIRED COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header#header > div:nth-child(1)#CookiesConsent > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:not([id])[data-testid=\"AcceptRequiredCookies\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

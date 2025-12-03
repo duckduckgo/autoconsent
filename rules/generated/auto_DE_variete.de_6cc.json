@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_variete.de_6cc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.variete.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?variete\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebar > div:not([id]) > span:nth-child(3)#declineCookie > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebar > div:not([id]) > span:nth-child(3)#declineCookie > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebar > div:not([id]) > span:nth-child(3)#declineCookie > button:not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebar > div:not([id]) > span:nth-child(3)#declineCookie > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

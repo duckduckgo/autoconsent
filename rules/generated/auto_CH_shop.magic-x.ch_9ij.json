@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_shop.magic-x.ch_9ij",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://shop.magic-x.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?shop\\.magic-x\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies",
+            "comment": " ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shop_table > div:nth-child(1)#cookiewarning > div:nth-child(3):not([id]) > button:nth-child(1)#decline_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

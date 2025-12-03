@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hanau.de_n3f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hanau.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hanau\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pirvate_policy > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(1):not([id]) > button:nth-child(2)#functional_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pirvate_policy > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(1):not([id]) > button:nth-child(2)#functional_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pirvate_policy > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(1):not([id]) > button:nth-child(2)#functional_cookies",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pirvate_policy > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(1):not([id]) > button:nth-child(2)#functional_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

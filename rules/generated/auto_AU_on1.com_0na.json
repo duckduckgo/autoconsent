@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_on1.com_0na",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.on1.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?on1\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > span:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > span:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > span:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#on1-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > span:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

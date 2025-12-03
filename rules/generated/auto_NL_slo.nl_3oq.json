@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_slo.nl_3oq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.slo.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?slo\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#canvas > footer:nth-child(3):not([id]) > div:nth-child(2)#Cookies_question > div:nth-child(4):not([id]) > form:nth-child(3)#cookies_allowed_false > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#canvas > footer:nth-child(3):not([id]) > div:nth-child(2)#Cookies_question > div:nth-child(4):not([id]) > form:nth-child(3)#cookies_allowed_false > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#canvas > footer:nth-child(3):not([id]) > div:nth-child(2)#Cookies_question > div:nth-child(4):not([id]) > form:nth-child(3)#cookies_allowed_false > button:nth-child(2):not([id])",
+            "comment": "cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#canvas > footer:nth-child(3):not([id]) > div:nth-child(2)#Cookies_question > div:nth-child(4):not([id]) > form:nth-child(3)#cookies_allowed_false > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

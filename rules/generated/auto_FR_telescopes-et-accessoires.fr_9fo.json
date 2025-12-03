@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_telescopes-et-accessoires.fr_9fo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.telescopes-et-accessoires.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?telescopes-et-accessoires\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(12)#acb-banner > div:not([id]) > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(12)#acb-banner > div:not([id]) > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(12)#acb-banner > div:not([id]) > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(12)#acb-banner > div:not([id]) > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

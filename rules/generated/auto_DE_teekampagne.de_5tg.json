@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_teekampagne.de_5tg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.teekampagne.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?teekampagne\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#dcCookieHelper--bg > div:not([id]) > div:not([id]) > div#dcCookieHelper > div:nth-child(1):not([id]) > div:nth-child(2)#dcCookieHelper--body > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#dcCookieHelper--bg > div:not([id]) > div:not([id]) > div#dcCookieHelper > div:nth-child(1):not([id]) > div:nth-child(2)#dcCookieHelper--body > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#dcCookieHelper--bg > div:not([id]) > div:not([id]) > div#dcCookieHelper > div:nth-child(1):not([id]) > div:nth-child(2)#dcCookieHelper--body > div:nth-child(1):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#dcCookieHelper--bg > div:not([id]) > div:not([id]) > div#dcCookieHelper > div:nth-child(1):not([id]) > div:nth-child(2)#dcCookieHelper--body > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

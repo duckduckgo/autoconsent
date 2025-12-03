@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_archive-ouverte.unige.ch_1pb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://archive-ouverte.unige.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?archive-ouverte\\.unige\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aou-root:not([id]) > solidify-cookie-consent-banner-container:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aou-root:not([id]) > solidify-cookie-consent-banner-container:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aou-root:not([id]) > solidify-cookie-consent-banner-container:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aou-root:not([id]) > solidify-cookie-consent-banner-container:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

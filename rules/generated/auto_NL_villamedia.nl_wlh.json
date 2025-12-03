@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_villamedia.nl_wlh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.villamedia.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?villamedia\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie > div:not([id]) > p:nth-child(4):not([id]) > button:nth-child(2)#btn-cookie-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie > div:not([id]) > p:nth-child(4):not([id]) > button:nth-child(2)#btn-cookie-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie > div:not([id]) > p:nth-child(4):not([id]) > button:nth-child(2)#btn-cookie-deny",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie > div:not([id]) > p:nth-child(4):not([id]) > button:nth-child(2)#btn-cookie-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

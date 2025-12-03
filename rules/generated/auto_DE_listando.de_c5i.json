@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_listando.de_c5i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.listando.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?listando\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

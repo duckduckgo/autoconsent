@@ -1,0 +1,41 @@
+{
+    "name": "auto_AU_miles-and-more.com_hqi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.miles-and-more.com/row/en/earn/airlines/mileage-calculator.html",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?miles-and-more\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button.cookieconsent__buttonAcceptNecessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button.cookieconsent__buttonAcceptNecessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button.cookieconsent__buttonAcceptNecessary",
+            "comment": "Accept necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > dialog:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button.cookieconsent__buttonAcceptNecessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_thermalbad-wallis.ch_gx7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://thermalbad-wallis.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thermalbad-wallis\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > pages:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(5):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > pages:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(5):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > pages:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(5):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > pages:nth-child(2):not([id]) > megacms-cookie-banner-component:nth-child(5):not([id]) > aside:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

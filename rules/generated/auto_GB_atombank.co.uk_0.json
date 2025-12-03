@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_atombank.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?atombank\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > astro-island:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

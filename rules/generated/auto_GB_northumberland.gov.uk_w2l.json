@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_northumberland.gov.uk_w2l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.northumberland.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?northumberland\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#silktide-wrapper > div:nth-child(4)#silktide-banner > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

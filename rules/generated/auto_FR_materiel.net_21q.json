@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_materiel.net_21q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.materiel.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?materiel\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#cookieConsentRefuseButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#cookieConsentRefuseButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#cookieConsentRefuseButton",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button#cookieConsentRefuseButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

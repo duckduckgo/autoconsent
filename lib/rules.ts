@@ -1,20 +1,31 @@
 /* eslint-disable no-use-before-define */
 import { snippets } from './eval-snippets';
 
+export const SUPPORTED_RULE_STEP_VERSION = 1;
+
 export type AutoConsentCMPRule = {
-    name: string;
-    vendorUrl?: string;
-    prehideSelectors?: string[];
-    runContext?: RunContext;
-    intermediate?: boolean;
-    cosmetic?: boolean;
-    detectCmp: AutoConsentRuleStep[];
-    detectPopup: AutoConsentRuleStep[];
-    optOut: AutoConsentRuleStep[];
-    optIn: AutoConsentRuleStep[];
-    openCmp?: AutoConsentRuleStep[];
-    test?: AutoConsentRuleStep[];
-    comment?: string;
+    readonly name: string;
+    /**
+     * @deprecated Use `_metadata.vendorUrl` instead.
+     */
+    readonly vendorUrl?: string;
+    readonly prehideSelectors?: string[];
+    readonly runContext?: RunContext;
+    readonly intermediate?: boolean;
+    readonly cosmetic?: boolean;
+    readonly detectCmp: AutoConsentRuleStep[];
+    readonly detectPopup: AutoConsentRuleStep[];
+    readonly optOut: AutoConsentRuleStep[];
+    readonly optIn: AutoConsentRuleStep[];
+    readonly openCmp?: AutoConsentRuleStep[];
+    readonly test?: AutoConsentRuleStep[];
+    readonly comment?: string;
+    readonly minimumRuleStepVersion?: number;
+    readonly _metadata?: {
+        readonly manuallyReviewUpdates?: boolean;
+        readonly vendorUrl?: string;
+        readonly deduplicatedFrom?: string[];
+    };
 };
 
 export type RunContext = {

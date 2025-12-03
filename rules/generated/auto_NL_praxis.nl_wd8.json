@@ -1,0 +1,41 @@
+{
+    "name": "auto_NL_praxis.nl_wd8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.praxis.nl/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?praxis\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "button[data-gtm-id=consent_functional]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[data-gtm-id=consent_functional]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "button[data-gtm-id=consent_functional]",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "button[data-gtm-id=consent_functional]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

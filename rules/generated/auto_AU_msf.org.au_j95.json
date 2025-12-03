@@ -1,0 +1,37 @@
+{
+    "name": "auto_AU_msf.org.au_j95",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?msf\\.org\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div:not([id]) > div:not([id]) > div:nth-child(2)#popup-buttons > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

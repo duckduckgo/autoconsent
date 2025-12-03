@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_support.eset.com_ehu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support.eset.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.eset\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#cc-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#cc-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#cc-decline",
+            "comment": "Accept essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#cc-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

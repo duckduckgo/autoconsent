@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_postman.com_yvc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.postman.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?postman\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler",
+            "comment": "Only Essential Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > div:nth-child(2):not([id]) > button:nth-child(1)#onetrust-reject-all-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

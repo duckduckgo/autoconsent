@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_wesco.fr_jlq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wesco.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wesco\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#notice-consents-block > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#notice-consents-block-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#notice-consents-block > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#notice-consents-block-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#notice-consents-block > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#notice-consents-block-deny",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#notice-consents-block > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#notice-consents-block-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

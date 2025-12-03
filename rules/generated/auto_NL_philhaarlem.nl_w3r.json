@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_philhaarlem.nl_w3r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://philhaarlem.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?philhaarlem\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div > div:nth-child(2)#cookie-consent-footer > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

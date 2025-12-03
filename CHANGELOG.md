@@ -1,3 +1,1165 @@
+# v14.39.0 (Tue Dec 02 2025)
+
+#### 🚀 Enhancement
+
+- Add heuristic reject mode [#1044](https://github.com/duckduckgo/autoconsent/pull/1044) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.38.0 (Thu Nov 27 2025)
+
+#### 🚀 Enhancement
+
+- Add tests for if statements in rules. [#1071](https://github.com/duckduckgo/autoconsent/pull/1071) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.37.1 (Fri Nov 21 2025)
+
+#### 🐛 Bug Fix
+
+- Explicitly set write permission in the release job [#1089](https://github.com/duckduckgo/autoconsent/pull/1089) ([@muodov](https://github.com/muodov))
+- Fix github release workflow [#1088](https://github.com/duckduckgo/autoconsent/pull/1088) ([@muodov](https://github.com/muodov))
+- Fix popup detection on amazon.com [#1087](https://github.com/duckduckgo/autoconsent/pull/1087) ([@muodov](https://github.com/muodov))
+- Use trusted publishers for npm release [#1086](https://github.com/duckduckgo/autoconsent/pull/1086) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.37.0 (Wed Nov 19 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#1085](https://github.com/duckduckgo/autoconsent/pull/1085) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Use MV3 for Firefox extension [#1080](https://github.com/duckduckgo/autoconsent/pull/1080) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.17 to 7.0.18 [#1084](https://github.com/duckduckgo/autoconsent/pull/1084) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.36.0 (Thu Nov 06 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1079](https://github.com/duckduckgo/autoconsent/pull/1079) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.35.0 (Sat Nov 01 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group with 3 updates [#1049](https://github.com/duckduckgo/autoconsent/pull/1049) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump the adblocker group with 2 updates [#927](https://github.com/duckduckgo/autoconsent/pull/927) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.34.1 (Thu Oct 30 2025)
+
+#### 🐛 Bug Fix
+
+- Fix evaluateRuleStep [#1070](https://github.com/duckduckgo/autoconsent/pull/1070) ([@chrmod](https://github.com/chrmod))
+
+#### Authors: 1
+
+- Krzysztof Modras ([@chrmod](https://github.com/chrmod))
+
+---
+
+# v14.34.0 (Tue Oct 28 2025)
+
+#### 🚀 Enhancement
+
+- Optimize heuristics [#1069](https://github.com/duckduckgo/autoconsent/pull/1069) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.33.2 (Sat Oct 25 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Fix asana platform tasks ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.33.1 (Fri Oct 24 2025)
+
+#### 🐛 Bug Fix
+
+- Index compact rules for faster filtering [#1035](https://github.com/duckduckgo/autoconsent/pull/1035) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### ⚠️ Pushed to `main`
+
+- Add package-lock.json to release workflow paths ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.33.0 (Thu Oct 23 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1047](https://github.com/duckduckgo/autoconsent/pull/1047) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 1667026bc3fd895fdb107ab947615e657a975531 [#931](https://github.com/duckduckgo/autoconsent/pull/931) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1046](https://github.com/duckduckgo/autoconsent/pull/1046) ([@daxtheduck](https://github.com/daxtheduck))
+- Report the number of clicks and total opt-out time [#1039](https://github.com/duckduckgo/autoconsent/pull/1039) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#1045](https://github.com/duckduckgo/autoconsent/pull/1045) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.0.15 to 7.0.17 [#1040](https://github.com/duckduckgo/autoconsent/pull/1040) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.32.1 (Wed Oct 22 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Add package.json to paths in ddg-release workflow ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.32.0 (Tue Oct 21 2025)
+
+#### 🚀 Enhancement
+
+- Add rule for real-cookie-banner [#1038](https://github.com/duckduckgo/autoconsent/pull/1038) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Remove cookie-notice and notice-cookie cosmetic rules [#1043](https://github.com/duckduckgo/autoconsent/pull/1043) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix webextension in Safari/Webkit [#1042](https://github.com/duckduckgo/autoconsent/pull/1042) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.31.0 (Tue Oct 14 2025)
+
+#### 🚀 Enhancement
+
+- [1 / 4] 🤖 Add autoconsent rules for 200 sites (7 need review) [#1018](https://github.com/duckduckgo/autoconsent/pull/1018) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#1023](https://github.com/duckduckgo/autoconsent/pull/1023) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1037](https://github.com/duckduckgo/autoconsent/pull/1037) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1036](https://github.com/duckduckgo/autoconsent/pull/1036) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.30.0 (Tue Oct 07 2025)
+
+#### 🚀 Enhancement
+
+- Fix an exception in text extension [#1024](https://github.com/duckduckgo/autoconsent/pull/1024) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1022](https://github.com/duckduckgo/autoconsent/pull/1022) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.29.0 (Fri Oct 03 2025)
+
+#### 🚀 Enhancement
+
+- Deduplicate autogenerated rules [#1016](https://github.com/duckduckgo/autoconsent/pull/1016) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1017](https://github.com/duckduckgo/autoconsent/pull/1017) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.28.1 (Thu Oct 02 2025)
+
+#### 🐛 Bug Fix
+
+- Handle alternative reject text on substack sites [#1008](https://github.com/duckduckgo/autoconsent/pull/1008) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.28.0 (Wed Oct 01 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1012](https://github.com/duckduckgo/autoconsent/pull/1012) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.27.0 (Sat Sep 27 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1011](https://github.com/duckduckgo/autoconsent/pull/1011) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1010](https://github.com/duckduckgo/autoconsent/pull/1010) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1009](https://github.com/duckduckgo/autoconsent/pull/1009) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1007](https://github.com/duckduckgo/autoconsent/pull/1007) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1006](https://github.com/duckduckgo/autoconsent/pull/1006) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1005](https://github.com/duckduckgo/autoconsent/pull/1005) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1004](https://github.com/duckduckgo/autoconsent/pull/1004) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1003](https://github.com/duckduckgo/autoconsent/pull/1003) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1002](https://github.com/duckduckgo/autoconsent/pull/1002) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#1001](https://github.com/duckduckgo/autoconsent/pull/1001) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1000](https://github.com/duckduckgo/autoconsent/pull/1000) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#999](https://github.com/duckduckgo/autoconsent/pull/999) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#997](https://github.com/duckduckgo/autoconsent/pull/997) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#996](https://github.com/duckduckgo/autoconsent/pull/996) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#995](https://github.com/duckduckgo/autoconsent/pull/995) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#994](https://github.com/duckduckgo/autoconsent/pull/994) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#993](https://github.com/duckduckgo/autoconsent/pull/993) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.26.0 (Fri Sep 26 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#992](https://github.com/duckduckgo/autoconsent/pull/992) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#991](https://github.com/duckduckgo/autoconsent/pull/991) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#990](https://github.com/duckduckgo/autoconsent/pull/990) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#988](https://github.com/duckduckgo/autoconsent/pull/988) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#987](https://github.com/duckduckgo/autoconsent/pull/987) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#986](https://github.com/duckduckgo/autoconsent/pull/986) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#985](https://github.com/duckduckgo/autoconsent/pull/985) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#984](https://github.com/duckduckgo/autoconsent/pull/984) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#983](https://github.com/duckduckgo/autoconsent/pull/983) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#982](https://github.com/duckduckgo/autoconsent/pull/982) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#981](https://github.com/duckduckgo/autoconsent/pull/981) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#980](https://github.com/duckduckgo/autoconsent/pull/980) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#979](https://github.com/duckduckgo/autoconsent/pull/979) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#978](https://github.com/duckduckgo/autoconsent/pull/978) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 2 sites (0 need review) [#976](https://github.com/duckduckgo/autoconsent/pull/976) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#975](https://github.com/duckduckgo/autoconsent/pull/975) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#974](https://github.com/duckduckgo/autoconsent/pull/974) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#973](https://github.com/duckduckgo/autoconsent/pull/973) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#972](https://github.com/duckduckgo/autoconsent/pull/972) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#971](https://github.com/duckduckgo/autoconsent/pull/971) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#970](https://github.com/duckduckgo/autoconsent/pull/970) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#969](https://github.com/duckduckgo/autoconsent/pull/969) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#968](https://github.com/duckduckgo/autoconsent/pull/968) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#967](https://github.com/duckduckgo/autoconsent/pull/967) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#966](https://github.com/duckduckgo/autoconsent/pull/966) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#948](https://github.com/duckduckgo/autoconsent/pull/948) ([@daxtheduck](https://github.com/daxtheduck))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#951](https://github.com/duckduckgo/autoconsent/pull/951) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tldts-experimental from 7.0.11 to 7.0.15 [#950](https://github.com/duckduckgo/autoconsent/pull/950) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.25.0 (Thu Sep 25 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#965](https://github.com/duckduckgo/autoconsent/pull/965) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#964](https://github.com/duckduckgo/autoconsent/pull/964) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#963](https://github.com/duckduckgo/autoconsent/pull/963) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.24.0 (Wed Sep 24 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#962](https://github.com/duckduckgo/autoconsent/pull/962) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#961](https://github.com/duckduckgo/autoconsent/pull/961) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#960](https://github.com/duckduckgo/autoconsent/pull/960) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#959](https://github.com/duckduckgo/autoconsent/pull/959) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 2 sites (1 need review) [#957](https://github.com/duckduckgo/autoconsent/pull/957) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#958](https://github.com/duckduckgo/autoconsent/pull/958) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#956](https://github.com/duckduckgo/autoconsent/pull/956) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#954](https://github.com/duckduckgo/autoconsent/pull/954) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#953](https://github.com/duckduckgo/autoconsent/pull/953) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#952](https://github.com/duckduckgo/autoconsent/pull/952) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#949](https://github.com/duckduckgo/autoconsent/pull/949) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#947](https://github.com/duckduckgo/autoconsent/pull/947) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.23.0 (Tue Sep 23 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#946](https://github.com/duckduckgo/autoconsent/pull/946) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#942](https://github.com/duckduckgo/autoconsent/pull/942) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#944](https://github.com/duckduckgo/autoconsent/pull/944) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (1 need review) [#943](https://github.com/duckduckgo/autoconsent/pull/943) ([@daxtheduck](https://github.com/daxtheduck))
+- Better tree-shaking of adblocker library [#939](https://github.com/duckduckgo/autoconsent/pull/939) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Update iOS release flow to use top-level package.json only. [#941](https://github.com/duckduckgo/autoconsent/pull/941) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.22.0 (Sat Sep 20 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#940](https://github.com/duckduckgo/autoconsent/pull/940) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.21.0 (Fri Sep 19 2025)
+
+#### 🚀 Enhancement
+
+- Cleanup obsolete site-specific cosmetic rules [#937](https://github.com/duckduckgo/autoconsent/pull/937) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#932](https://github.com/duckduckgo/autoconsent/pull/932) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Fix: Respect the configuration for logging [#933](https://github.com/duckduckgo/autoconsent/pull/933) ([@chrmod](https://github.com/chrmod))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Krzysztof Modras ([@chrmod](https://github.com/chrmod))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.20.0 (Thu Sep 04 2025)
+
+#### 🚀 Enhancement
+
+- Expand web.de rule to gmx.net [#925](https://github.com/duckduckgo/autoconsent/pull/925) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.19.0 (Wed Sep 03 2025)
+
+#### 🚀 Enhancement
+
+- Add heuristic patterns for NL,FR,DE [#930](https://github.com/duckduckgo/autoconsent/pull/930) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.18.0 (Fri Aug 29 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#929](https://github.com/duckduckgo/autoconsent/pull/929) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.17.0 (Wed Aug 27 2025)
+
+#### 🚀 Enhancement
+
+- Add rule for ah.nl [#919](https://github.com/duckduckgo/autoconsent/pull/919) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group with 3 updates [#924](https://github.com/duckduckgo/autoconsent/pull/924) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- 🤖 Add autoconsent rules for 2 sites (0 requiring review) [#882](https://github.com/duckduckgo/autoconsent/pull/882) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.16.0 (Tue Aug 26 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#921](https://github.com/duckduckgo/autoconsent/pull/921) ([@daxtheduck](https://github.com/daxtheduck))
+- Update EasyList Cookie to d0018b618e733641797d796649354c05c9278edb [#900](https://github.com/duckduckgo/autoconsent/pull/900) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Use reject-all button on iubenda form. [#911](https://github.com/duckduckgo/autoconsent/pull/911) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix non-US paypal opt-out. [#913](https://github.com/duckduckgo/autoconsent/pull/913) ([@sammacbeth](https://github.com/sammacbeth))
+- Clean duplicated coinbase.com rules [#915](https://github.com/duckduckgo/autoconsent/pull/915) ([@sammacbeth](https://github.com/sammacbeth))
+- Handle some alternative variants of the tarteaucitron popup [#916](https://github.com/duckduckgo/autoconsent/pull/916) ([@sammacbeth](https://github.com/sammacbeth))
+- Add substack rule [#917](https://github.com/duckduckgo/autoconsent/pull/917) ([@sammacbeth](https://github.com/sammacbeth))
+- Use one click opt-out on kleinanzeigen.de [#918](https://github.com/duckduckgo/autoconsent/pull/918) ([@sammacbeth](https://github.com/sammacbeth))
+- Limit webflow detection to when popup is visible. [#920](https://github.com/duckduckgo/autoconsent/pull/920) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#904](https://github.com/duckduckgo/autoconsent/pull/904) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#905](https://github.com/duckduckgo/autoconsent/pull/905) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.15.0 (Sat Aug 23 2025)
+
+#### 🚀 Enhancement
+
+- Clean duplicated asus.com rules [#914](https://github.com/duckduckgo/autoconsent/pull/914) ([@sammacbeth](https://github.com/sammacbeth))
+- Run heuristic detection also when site-specific rules apply. [#894](https://github.com/duckduckgo/autoconsent/pull/894) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.14.1 (Fri Aug 22 2025)
+
+#### 🐛 Bug Fix
+
+- Add fast-path to quantcast rule when there is a simple reject button [#912](https://github.com/duckduckgo/autoconsent/pull/912) ([@sammacbeth](https://github.com/sammacbeth))
+- Remove comments from encoded rule steps [#908](https://github.com/duckduckgo/autoconsent/pull/908) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Post a PR comment with links for review [#899](https://github.com/duckduckgo/autoconsent/pull/899) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.14.0 (Wed Aug 20 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group with 4 updates [#909](https://github.com/duckduckgo/autoconsent/pull/909) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Prevent release if the last commit has [ci skip] (i.e. is is a release commit). [#907](https://github.com/duckduckgo/autoconsent/pull/907) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#906](https://github.com/duckduckgo/autoconsent/pull/906) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#903](https://github.com/duckduckgo/autoconsent/pull/903) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#902](https://github.com/duckduckgo/autoconsent/pull/902) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#901](https://github.com/duckduckgo/autoconsent/pull/901) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### ⚠️ Pushed to `main`
+
+- disable nightly releases ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.13.1 (Fri Aug 15 2025)
+
+
+
+---
+
+# v14.13.0 (Thu Aug 14 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 4 updates [#879](https://github.com/duckduckgo/autoconsent/pull/879) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- [8 / 8] 🤖 Add autoconsent rules for 45 sites (5 requiring review) [#892](https://github.com/duckduckgo/autoconsent/pull/892) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [7 / 8] 🤖 Add autoconsent rules for 300 sites (4 requiring review) [#891](https://github.com/duckduckgo/autoconsent/pull/891) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [6 / 8] 🤖 Add autoconsent rules for 300 sites (3 requiring review) [#890](https://github.com/duckduckgo/autoconsent/pull/890) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [5 / 8] 🤖 Add autoconsent rules for 300 sites (5 requiring review) [#889](https://github.com/duckduckgo/autoconsent/pull/889) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [4 / 8] 🤖 Add autoconsent rules for 300 sites (6 requiring review) [#888](https://github.com/duckduckgo/autoconsent/pull/888) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [3 / 8] 🤖 Add autoconsent rules for 300 sites (8 requiring review) [#887](https://github.com/duckduckgo/autoconsent/pull/887) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [2 / 8] 🤖 Add autoconsent rules for 300 sites (23 requiring review) [#886](https://github.com/duckduckgo/autoconsent/pull/886) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- [1 / 8] 🤖 Add autoconsent rules for 300 sites (5 requiring review) [#885](https://github.com/duckduckgo/autoconsent/pull/885) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.10 to 7.0.11 [#878](https://github.com/duckduckgo/autoconsent/pull/878) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Coverage data update [#868](https://github.com/duckduckgo/autoconsent/pull/868) ([@daxtheduck](https://github.com/daxtheduck))
+- Ensure release npm version bump doesn't clear other deps [#897](https://github.com/duckduckgo/autoconsent/pull/897) ([@sammacbeth](https://github.com/sammacbeth))
+- Run releases nightly [#893](https://github.com/duckduckgo/autoconsent/pull/893) ([@sammacbeth](https://github.com/sammacbeth))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#875](https://github.com/duckduckgo/autoconsent/pull/875) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- [test] Add autoconsent rules for 2 sites (0 requiring review) [#859](https://github.com/duckduckgo/autoconsent/pull/859) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### ⚠️ Pushed to `main`
+
+- Simple task notes update ([@sammacbeth](https://github.com/sammacbeth))
+- Set RELEASE_TASK_URL env for release job ([@sammacbeth](https://github.com/sammacbeth))
+- Pass release information to release task creation ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Fix reporting of test results to github [#898](https://github.com/duckduckgo/autoconsent/pull/898) ([@sammacbeth](https://github.com/sammacbeth))
+- Playwright test output [#896](https://github.com/duckduckgo/autoconsent/pull/896) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.12.0 (Wed Aug 13 2025)
+
+#### 🚀 Enhancement
+
+- [test] Add autoconsent rules for 1 sites (0 requiring review) [#873](https://github.com/duckduckgo/autoconsent/pull/873) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Release automation update [#880](https://github.com/duckduckgo/autoconsent/pull/880) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix playwright tests [#877](https://github.com/duckduckgo/autoconsent/pull/877) ([@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 requiring review) [#874](https://github.com/duckduckgo/autoconsent/pull/874) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### ⚠️ Pushed to `main`
+
+- Temp disable release tag requirement ([@sammacbeth](https://github.com/sammacbeth))
+- Set Dax's credentials for releases ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Improve playwright tests [#852](https://github.com/duckduckgo/autoconsent/pull/852) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.11.0 (Wed Aug 06 2025)
+
+#### 🚀 Enhancement
+
+- Add a flag to mark generated rules requiring review [#858](https://github.com/duckduckgo/autoconsent/pull/858) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.10.1 (Fri Aug 01 2025)
+
+#### 🐛 Bug Fix
+
+- Fix on1.com rule [#851](https://github.com/duckduckgo/autoconsent/pull/851) ([@sammacbeth](https://github.com/sammacbeth))
+- [test] Add autoconsent rules for https://epoch.ai/ [#850](https://github.com/duckduckgo/autoconsent/pull/850) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🧪 Tests
+
+- Coverage data update [#842](https://github.com/duckduckgo/autoconsent/pull/842) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.10.0 (Fri Jul 25 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to c620f1f1950adc8d8f709d80f60593ad8cb59ec3 [#848](https://github.com/duckduckgo/autoconsent/pull/848) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group with 5 updates [#839](https://github.com/duckduckgo/autoconsent/pull/839) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rule for shein.com [#844](https://github.com/duckduckgo/autoconsent/pull/844) ([@muodov](https://github.com/muodov))
+- [test] Add autoconsent rules for https://arthurbanana.com/arthur-banana/ [#846](https://github.com/duckduckgo/autoconsent/pull/846) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Bump the adblocker group with 2 updates [#838](https://github.com/duckduckgo/autoconsent/pull/838) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Fix rule for nos.nl [#847](https://github.com/duckduckgo/autoconsent/pull/847) ([@muodov](https://github.com/muodov))
+- extend google-standalone to youtube [#845](https://github.com/duckduckgo/autoconsent/pull/845) ([@muodov](https://github.com/muodov))
+- expand imdb rule to the mobile site [#843](https://github.com/duckduckgo/autoconsent/pull/843) ([@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.9.0 (Wed Jul 23 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to e7935b07845c1e76822103bcbf0676a3a147d67c [#836](https://github.com/duckduckgo/autoconsent/pull/836) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Add rule for app.discuss.io [#833](https://github.com/duckduckgo/autoconsent/pull/833) ([@muodov](https://github.com/muodov))
+- Add autoconsent rules for 1 sites [#834](https://github.com/duckduckgo/autoconsent/pull/834) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Cookie Information Banner: only hide if banner is actually left open [#840](https://github.com/duckduckgo/autoconsent/pull/840) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix the facebook rule [#805](https://github.com/duckduckgo/autoconsent/pull/805) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.8.0 (Tue Jul 15 2025)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group with 2 updates [#832](https://github.com/duckduckgo/autoconsent/pull/832) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add autoconsent rules for 158 sites [#821](https://github.com/duckduckgo/autoconsent/pull/821) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Minimize the compact rules diff [#828](https://github.com/duckduckgo/autoconsent/pull/828) ([@muodov](https://github.com/muodov))
+
+#### ⚠️ Pushed to `main`
+
+- Group ghostery updates in a single PR ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.7.0 (Tue Jul 15 2025)
+
+#### 🚀 Enhancement
+
+- Support reject button in moove [#825](https://github.com/duckduckgo/autoconsent/pull/825) ([@muodov](https://github.com/muodov))
+- Fix outdated rules [#827](https://github.com/duckduckgo/autoconsent/pull/827) ([@muodov](https://github.com/muodov))
+- Add rule for cloudflare's CMP [#824](https://github.com/duckduckgo/autoconsent/pull/824) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to f1abae853dc0a78b829121feef19ca8cd30e031d [#815](https://github.com/duckduckgo/autoconsent/pull/815) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.9 to 7.0.10 [#811](https://github.com/duckduckgo/autoconsent/pull/811) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#830](https://github.com/duckduckgo/autoconsent/pull/830) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Coverage data update [#820](https://github.com/duckduckgo/autoconsent/pull/820) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.6.0 (Mon Jul 14 2025)
+
+#### 🚀 Enhancement
+
+- Fix some outdated rules [#826](https://github.com/duckduckgo/autoconsent/pull/826) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Expand plos rule to cover journals.plos.org [#823](https://github.com/duckduckgo/autoconsent/pull/823) ([@muodov](https://github.com/muodov))
+- expand existing bbc rule to another dubdomains [#822](https://github.com/duckduckgo/autoconsent/pull/822) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.5.1 (Fri Jul 11 2025)
+
+#### 🐛 Bug Fix
+
+- Make itopvpn.com rule site-specific. [#816](https://github.com/duckduckgo/autoconsent/pull/816) ([@sammacbeth](https://github.com/sammacbeth))
+- Handle fides alternative without a top-level reject all button. [#817](https://github.com/duckduckgo/autoconsent/pull/817) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.5.0 (Wed Jul 02 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#809](https://github.com/duckduckgo/autoconsent/pull/809) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix gov.uk rule [#803](https://github.com/duckduckgo/autoconsent/pull/803) ([@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.0.8 to 7.0.9 [#800](https://github.com/duckduckgo/autoconsent/pull/800) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.4.0 (Wed Jul 02 2025)
+
+#### 🚀 Enhancement
+
+- [test] Add autoconsent rules for 69 sites [#802](https://github.com/duckduckgo/autoconsent/pull/802) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Expand the airfrance rule [#804](https://github.com/duckduckgo/autoconsent/pull/804) ([@muodov](https://github.com/muodov))
+- Toggle for generated rules [#807](https://github.com/duckduckgo/autoconsent/pull/807) ([@muodov](https://github.com/muodov))
+- Process compact rules lazily [#764](https://github.com/duckduckgo/autoconsent/pull/764) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#801](https://github.com/duckduckgo/autoconsent/pull/801) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#795](https://github.com/duckduckgo/autoconsent/pull/795) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.3.0 (Tue Jun 24 2025)
+
+#### 🚀 Enhancement
+
+- Support generated rules [#793](https://github.com/duckduckgo/autoconsent/pull/793) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add generated autoconsent rules from latest crawl [#796](https://github.com/duckduckgo/autoconsent/pull/796) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#791](https://github.com/duckduckgo/autoconsent/pull/791) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.2.0 (Wed Jun 18 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 83f2073ea4b9c66c3c6b1b9034f2164034b1a515 [#782](https://github.com/duckduckgo/autoconsent/pull/782) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Remove 'hide' step from eu-cookie-compliance-banner [#784](https://github.com/duckduckgo/autoconsent/pull/784) ([@noisysocks](https://github.com/noisysocks))
+- Update cookie-law-info rule to hide .cli-popup-overlay [#785](https://github.com/duckduckgo/autoconsent/pull/785) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.1.0 (Fri Jun 06 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 9fba285e18d0dc14f2ee64142b56e76a59b58649 [#777](https://github.com/duckduckgo/autoconsent/pull/777) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Visual test mode [#756](https://github.com/duckduckgo/autoconsent/pull/756) ([@muodov](https://github.com/muodov))
+- Bump @ghostery/adblocker-content from 2.5.2 to 2.6.1 [#754](https://github.com/duckduckgo/autoconsent/pull/754) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump @ghostery/adblocker from 2.5.2 to 2.6.1 [#753](https://github.com/duckduckgo/autoconsent/pull/753) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#763](https://github.com/duckduckgo/autoconsent/pull/763) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Add cookiehub CMP [#778](https://github.com/duckduckgo/autoconsent/pull/778) ([@noisysocks](https://github.com/noisysocks))
+- Update EasyList Cookie to 0b4c698c6cf070415d7dcda1b8eabe9d6cb5fa99 [#752](https://github.com/duckduckgo/autoconsent/pull/752) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.7 to 7.0.8 [#762](https://github.com/duckduckgo/autoconsent/pull/762) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump node in CI to LTS. [#761](https://github.com/duckduckgo/autoconsent/pull/761) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.0.1 (Mon Jun 02 2025)
+
+#### 🐛 Bug Fix
+
+- Add support for non-'reject-all' version of the termsfeed popup. [#750](https://github.com/duckduckgo/autoconsent/pull/750) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+- CI: Fix release PR to privacy config repo [#751](https://github.com/duckduckgo/autoconsent/pull/751) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v13.0.0 (Tue May 20 2025)
+
+#### 💥 Breaking Change
+
+- Compact rule format [#743](https://github.com/duckduckgo/autoconsent/pull/743) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- CI: Release hook to update privacy-config repo. [#748](https://github.com/duckduckgo/autoconsent/pull/748) ([@sammacbeth](https://github.com/sammacbeth))
+- Disable auto release to native apps [#747](https://github.com/duckduckgo/autoconsent/pull/747) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.20.1 (Fri May 16 2025)
+
+#### 🐛 Bug Fix
+
+- Fix onetrust rule [#746](https://github.com/duckduckgo/autoconsent/pull/746) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v12.20.0 (Fri May 16 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 2f58b73d955695278fb506b785926f67ee2785f9 [#745](https://github.com/duckduckgo/autoconsent/pull/745) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group across 1 directory with 6 updates [#739](https://github.com/duckduckgo/autoconsent/pull/739) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add support for FastCMP and iframe piercing [#744](https://github.com/duckduckgo/autoconsent/pull/744) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to eed61600bcc040dd99171437652da1884d43dfcb [#737](https://github.com/duckduckgo/autoconsent/pull/737) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Bump @ghostery/adblocker from 2.5.1 to 2.5.2 [#732](https://github.com/duckduckgo/autoconsent/pull/732) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker-content from 2.5.1 to 2.5.2 [#733](https://github.com/duckduckgo/autoconsent/pull/733) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tldts-experimental from 7.0.4 to 7.0.7 [#740](https://github.com/duckduckgo/autoconsent/pull/740) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Prevent OneTrust from being detected as site-specific [#738](https://github.com/duckduckgo/autoconsent/pull/738) ([@muodov](https://github.com/muodov))
+- Fix: Mutation observer race condition during rule detection [#741](https://github.com/duckduckgo/autoconsent/pull/741) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.19.0 (Wed May 07 2025)
+
+#### 🚀 Enhancement
+
+- Bump tldts-experimental from 6.1.85 to 7.0.4 [#728](https://github.com/duckduckgo/autoconsent/pull/728) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group across 1 directory with 7 updates [#729](https://github.com/duckduckgo/autoconsent/pull/729) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🐛 Bug Fix
+
+- Fix: Exclude rules from detection if they have a urlPattern and it does not match. [#736](https://github.com/duckduckgo/autoconsent/pull/736) ([@sammacbeth](https://github.com/sammacbeth))
+- Make detection logs toggleable [#730](https://github.com/duckduckgo/autoconsent/pull/730) ([@muodov](https://github.com/muodov))
+- Bump action-asana-sync to v11 [#731](https://github.com/duckduckgo/autoconsent/pull/731) ([@sammacbeth](https://github.com/sammacbeth))
+- Bump @ghostery/adblocker-content from 2.5.0 to 2.5.1 [#725](https://github.com/duckduckgo/autoconsent/pull/725) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker from 2.5.0 to 2.5.1 [#724](https://github.com/duckduckgo/autoconsent/pull/724) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.18.0 (Tue Apr 29 2025)
+
+#### 🚀 Enhancement
+
+- Delay reruns of the detectCmp phase until there is a dom mutation. [#721](https://github.com/duckduckgo/autoconsent/pull/721) ([@sammacbeth](https://github.com/sammacbeth))
+- Prioritize checking of site-specific rules in detection phase. [#720](https://github.com/duckduckgo/autoconsent/pull/720) ([@sammacbeth](https://github.com/sammacbeth))
+- Run detection phase sequentially per CMP. [#719](https://github.com/duckduckgo/autoconsent/pull/719) ([@sammacbeth](https://github.com/sammacbeth))
+- Fix rule for openai [#723](https://github.com/duckduckgo/autoconsent/pull/723) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 39338825841d682f464b10b174ea835000e30c0f [#722](https://github.com/duckduckgo/autoconsent/pull/722) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Only process Asana tasks when PR contains task URL [#718](https://github.com/duckduckgo/autoconsent/pull/718) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 4
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.17.0 (Mon Apr 14 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to e1d6329233498d8cb5a5fe473e516475ee3da6e8 [#713](https://github.com/duckduckgo/autoconsent/pull/713) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Bump the dev-dependencies group across 1 directory with 5 updates [#715](https://github.com/duckduckgo/autoconsent/pull/715) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add rule for nos.nl [#712](https://github.com/duckduckgo/autoconsent/pull/712) ([@noisysocks](https://github.com/noisysocks))
+- Update EasyList Cookie to 54998140e5d5e212ead7be504a42fe3afb8cfdc6 [#708](https://github.com/duckduckgo/autoconsent/pull/708) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+
+#### 🐛 Bug Fix
+
+- Jenkins CI: Use GIT_COMMIT when notifying GitHub [#714](https://github.com/duckduckgo/autoconsent/pull/714) ([@noisysocks](https://github.com/noisysocks))
+- Update Asana integration to support multiple tasks and ignore tasks not in CPM project [#707](https://github.com/duckduckgo/autoconsent/pull/707) ([@noisysocks](https://github.com/noisysocks))
+- Update CI pipeline to run only relevant tests for a PR [#710](https://github.com/duckduckgo/autoconsent/pull/710) ([@noisysocks](https://github.com/noisysocks))
+- Fix HTML formatting for task list in release notes [#705](https://github.com/duckduckgo/autoconsent/pull/705) ([@noisysocks](https://github.com/noisysocks))
+
+#### ⚠️ Pushed to `main`
+
+- Try main branch of native-github-asana-sync ([@noisysocks](https://github.com/noisysocks))
+- Try a different build of native-github-asana-sync ([@noisysocks](https://github.com/noisysocks))
+- Try different build of native-github-asana-sync ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.16.0 (Tue Mar 25 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 43935b4bf6a715553ae4d2ccc628462fad8188f2 [#704](https://github.com/duckduckgo/autoconsent/pull/704) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix rule for bbb.org [#678](https://github.com/duckduckgo/autoconsent/pull/678) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add Asana automations [#701](https://github.com/duckduckgo/autoconsent/pull/701) ([@noisysocks](https://github.com/noisysocks))
+- Bump the dev-dependencies group with 5 updates [#702](https://github.com/duckduckgo/autoconsent/pull/702) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tldts-experimental from 6.1.84 to 6.1.85 [#703](https://github.com/duckduckgo/autoconsent/pull/703) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Improve burpee.com rule [#698](https://github.com/duckduckgo/autoconsent/pull/698) ([@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+
+---
+
+# v12.15.0 (Fri Mar 21 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 9232b2df4b9314504bc835d2aaf3fb72c3aa872a [#700](https://github.com/duckduckgo/autoconsent/pull/700) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Update deepl rule to match new markup [#695](https://github.com/duckduckgo/autoconsent/pull/695) ([@noisysocks](https://github.com/noisysocks) [@muodov](https://github.com/muodov))
+- Add rule for caranddriver.com [#696](https://github.com/duckduckgo/autoconsent/pull/696) ([@noisysocks](https://github.com/noisysocks))
+- Add AdOpt CMP [#697](https://github.com/duckduckgo/autoconsent/pull/697) ([@noisysocks](https://github.com/noisysocks))
+
+#### 🐛 Bug Fix
+
+- Bump the dev-dependencies group with 2 updates [#699](https://github.com/duckduckgo/autoconsent/pull/699) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.14.0 (Fri Mar 14 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to b6ba5e180e756441787c7415b894e2ade23a758f [#692](https://github.com/duckduckgo/autoconsent/pull/692) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix sourcepoint rule for US version of ft.com [#693](https://github.com/duckduckgo/autoconsent/pull/693) ([@muodov](https://github.com/muodov))
+- More site-specific rules [#676](https://github.com/duckduckgo/autoconsent/pull/676) ([@muodov](https://github.com/muodov))
+- Fix a race condition with self-test in test extension [#690](https://github.com/duckduckgo/autoconsent/pull/690) ([@muodov](https://github.com/muodov))
+- add rule for web.de [#691](https://github.com/duckduckgo/autoconsent/pull/691) ([@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 12 updates [#689](https://github.com/duckduckgo/autoconsent/pull/689) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Bump @ghostery/adblocker-content from 2.3.1 to 2.5.0 [#607](https://github.com/duckduckgo/autoconsent/pull/607) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @ghostery/adblocker from 2.3.1 to 2.5.0 [#608](https://github.com/duckduckgo/autoconsent/pull/608) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- support no-reject Osano popups [#683](https://github.com/duckduckgo/autoconsent/pull/683) ([@muodov](https://github.com/muodov))
+- Add rule for ok.ru [#665](https://github.com/duckduckgo/autoconsent/pull/665) ([@muodov](https://github.com/muodov))
+- Automatically restore element focus after the opt-in/opt-out [#687](https://github.com/duckduckgo/autoconsent/pull/687) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Update Asana sync action [#694](https://github.com/duckduckgo/autoconsent/pull/694) ([@sammacbeth](https://github.com/sammacbeth))
+- Bump tldts-experimental from 6.1.82 to 6.1.84 [#688](https://github.com/duckduckgo/autoconsent/pull/688) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v12.13.0 (Fri Mar 07 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 0f2116100a57d0ec74666508d405fc4da80f1f9d [#685](https://github.com/duckduckgo/autoconsent/pull/685) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Several site-specific rules [#673](https://github.com/duckduckgo/autoconsent/pull/673) ([@muodov](https://github.com/muodov))
+- add rule for fedex.com [#669](https://github.com/duckduckgo/autoconsent/pull/669) ([@muodov](https://github.com/muodov))
+- Rule batch [#684](https://github.com/duckduckgo/autoconsent/pull/684) ([@muodov](https://github.com/muodov))
+- Add rule for pornhat and a few other sites [#677](https://github.com/duckduckgo/autoconsent/pull/677) ([@muodov](https://github.com/muodov))
+- Add rule for live.paloaltonetworks.com [#672](https://github.com/duckduckgo/autoconsent/pull/672) ([@muodov](https://github.com/muodov))
+- Update rules for finsweet CMPs [#658](https://github.com/duckduckgo/autoconsent/pull/658) ([@muodov](https://github.com/muodov))
+- add rules for povr.com and tinyurl.com [#659](https://github.com/duckduckgo/autoconsent/pull/659) ([@muodov](https://github.com/muodov))
+- fix instagram rule [#668](https://github.com/duckduckgo/autoconsent/pull/668) ([@muodov](https://github.com/muodov))
+- add rule for acs.org [#671](https://github.com/duckduckgo/autoconsent/pull/671) ([@muodov](https://github.com/muodov))
+- Add rule for ryanair [#670](https://github.com/duckduckgo/autoconsent/pull/670) ([@muodov](https://github.com/muodov))
+- [NSFW] add rule for several sites [#682](https://github.com/duckduckgo/autoconsent/pull/682) ([@muodov](https://github.com/muodov))
+- Batch of site-specific rules [#680](https://github.com/duckduckgo/autoconsent/pull/680) ([@muodov](https://github.com/muodov))
+- Rules for Toyota sites [#679](https://github.com/duckduckgo/autoconsent/pull/679) ([@muodov](https://github.com/muodov))
+- Another batch of rules [#681](https://github.com/duckduckgo/autoconsent/pull/681) ([@muodov](https://github.com/muodov))
+- Declarative rule steps for negation and for matching cookies [#663](https://github.com/duckduckgo/autoconsent/pull/663) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 6.1.77 to 6.1.82 [#674](https://github.com/duckduckgo/autoconsent/pull/674) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Monthly Coverage data update [#667](https://github.com/duckduckgo/autoconsent/pull/667) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v12.12.0 (Fri Feb 28 2025)
 
 #### 🚀 Enhancement

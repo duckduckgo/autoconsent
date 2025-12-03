@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_inven.ai_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?inven\\.ai/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-modal > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cc-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-modal > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cc-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-modal > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cc-necessary",
+            "comment": "Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-modal > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cc-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

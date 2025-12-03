@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_one.network_2qo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://one.network/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?one\\.network/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#on-main > div:nth-child(3):not([id]) > div:nth-child(2)#on-app-container > div:nth-child(1)#on-map > div:nth-child(1)#on-privacy-info > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#on-main > div:nth-child(3):not([id]) > div:nth-child(2)#on-app-container > div:nth-child(1)#on-map > div:nth-child(1)#on-privacy-info > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#on-main > div:nth-child(3):not([id]) > div:nth-child(2)#on-app-container > div:nth-child(1)#on-map > div:nth-child(1)#on-privacy-info > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:not([id])",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#on-main > div:nth-child(3):not([id]) > div:nth-child(2)#on-app-container > div:nth-child(1)#on-map > div:nth-child(1)#on-privacy-info > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

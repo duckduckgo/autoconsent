@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_gibson.com_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gibson\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies",
+            "comment": "ACCEPT ESSENTIAL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieModal > div:not([id]) > div#modal-content > button:nth-child(6)#essentialCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_unimedizin-ffm.de_euw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.unimedizin-ffm.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unimedizin-ffm\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieman-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_streetparade.com_euh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.streetparade.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?streetparade\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-container > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-container > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-container > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-container > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

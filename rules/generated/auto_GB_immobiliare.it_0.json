@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_immobiliare.it_0",
+    "vendorUrl": "https://www.immobiliare.it/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?immobiliare\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#didomi-host > div:not([id]) > div:not([id]) > div#didomi-notice > div:not([id]) > span:nth-child(1):not([id])",
+            "comment": "Continue without agreeing →"
+        }
+    ]
+}

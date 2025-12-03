@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_vvaa.nl_avs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vvaa.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vvaa\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section#chakra-modal-\\:rd\\: > div#chakra-modal--body-\\:rd\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section#chakra-modal-\\:rd\\: > div#chakra-modal--body-\\:rd\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section#chakra-modal-\\:rd\\: > div#chakra-modal--body-\\:rd\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Nee, bedankt"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section#chakra-modal-\\:rd\\: > div#chakra-modal--body-\\:rd\\: > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

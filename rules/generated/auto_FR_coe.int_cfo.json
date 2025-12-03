@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_coe.int_cfo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.coe.int/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?coe\\.int/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_7a8e4f13-52de-496c-9239-96129f02cf08 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-124c44a9-52c6-4136-9964-9a6be955271a > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_7a8e4f13-52de-496c-9239-96129f02cf08 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-124c44a9-52c6-4136-9964-9a6be955271a > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_7a8e4f13-52de-496c-9239-96129f02cf08 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-124c44a9-52c6-4136-9964-9a6be955271a > button:nth-child(2)#ppms_cm_disagree",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_7a8e4f13-52de-496c-9239-96129f02cf08 > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-124c44a9-52c6-4136-9964-9a6be955271a > button:nth-child(2)#ppms_cm_disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

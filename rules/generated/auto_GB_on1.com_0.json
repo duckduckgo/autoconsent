@@ -1,0 +1,31 @@
+{
+    "name": "auto_GB_on1.com_0",
+    "cosmetic": false,
+    "_metadata": {
+        "manuallyReviewUpdates": true,
+        "vendorUrl": "https://www.on1.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?on1\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#on1-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#on1-cookie-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "#on1-cookie-banner a[onclick=\"declineCookieBanner();\"]",
+            "comment": "Decline"
+        }
+    ]
+}

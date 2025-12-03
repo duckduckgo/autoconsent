@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_jongbloed-fiscaaljuristen.nl_69v",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jongbloed-fiscaaljuristen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jongbloed-fiscaaljuristen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form:not([id]) > div:not([id]) > button:nth-child(8):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form:not([id]) > div:not([id]) > button:nth-child(8):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form:not([id]) > div:not([id]) > button:nth-child(8):not([id])",
+            "comment": "Nee, geen cookies a.u.b."
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form:not([id]) > div:not([id]) > button:nth-child(8):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

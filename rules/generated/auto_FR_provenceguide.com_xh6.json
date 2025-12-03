@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_provenceguide.com_xh6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.provenceguide.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?provenceguide\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer#footer > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2)#cookie-show-div > div:nth-child(1):not([id]) > div:not([id]) > button#cookie-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer#footer > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2)#cookie-show-div > div:nth-child(1):not([id]) > div:not([id]) > button#cookie-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer#footer > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2)#cookie-show-div > div:nth-child(1):not([id]) > div:not([id]) > button#cookie-deny",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer#footer > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2)#cookie-show-div > div:nth-child(1):not([id]) > div:not([id]) > button#cookie-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

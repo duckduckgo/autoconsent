@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_insel-sylt.de_7ui",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.insel-sylt.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?insel-sylt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-cookie-slim > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-cookie-slim > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-cookie-slim > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])",
+            "comment": "NUR WESENTLICHE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-cookie-slim > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

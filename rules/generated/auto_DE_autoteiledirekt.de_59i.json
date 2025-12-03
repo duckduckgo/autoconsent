@@ -1,0 +1,41 @@
+{
+    "name": "auto_DE_autoteiledirekt.de_59i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.autoteiledirekt.de/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autoteiledirekt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]",
+            "comment": "Alle Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "button[data-cookies=disallow_all_cookies][data-cookies-refuse]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

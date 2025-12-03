@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_knab.nl_646",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.knab.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?knab\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

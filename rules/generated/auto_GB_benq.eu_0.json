@@ -1,0 +1,38 @@
+{
+    "name": "auto_GB_benq.eu_0",
+    "vendorUrl": "https://www.benq.eu/en-uk/index.html",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?benq\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Only Required Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body#g6-index-page-7bede839ee > div:not([id]) > div:nth-child(92)#cookie-bar > div#cookie-bar-eu > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_wjec.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wjec\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:not([id]) > nav:nth-child(2)#navbar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

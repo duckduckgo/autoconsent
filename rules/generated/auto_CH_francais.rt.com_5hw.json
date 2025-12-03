@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_francais.rt.com_5hw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://francais.rt.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?francais\\.rt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3)#gdprCookie > div:nth-child(3):not([id]) > span:not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3)#gdprCookie > div:nth-child(3):not([id]) > span:not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3)#gdprCookie > div:nth-child(3):not([id]) > span:not([id]) > span:nth-child(2):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3)#gdprCookie > div:nth-child(3):not([id]) > span:not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

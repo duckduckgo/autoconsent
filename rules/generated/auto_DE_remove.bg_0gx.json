@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_remove.bg_0gx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.remove.bg/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?remove\\.bg/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div#wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div#wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div#wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div#wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_gemeentebanen.nl_trq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gemeentebanen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gemeentebanen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#jr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#functionalCookiesBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#jr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#functionalCookiesBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#jr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#functionalCookiesBtn",
+            "comment": "Alleen functioneel"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#jr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a#functionalCookiesBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+import generateCMPTests from '../../playwright/runner';
+generateCMPTests('auto_DE_buinger.com_6ns', ['https://buinger.com/'], { testOptIn: false, testSelfTest: true, onlyRegions: ['DE'] });

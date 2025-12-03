@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_caremetix.mahle.com_vgt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.caremetix.mahle.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mahle-aftermarket\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a#denyCookiePolicyAndSetHash"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a#denyCookiePolicyAndSetHash"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a#denyCookiePolicyAndSetHash",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(3):not([id]) > a#denyCookiePolicyAndSetHash",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

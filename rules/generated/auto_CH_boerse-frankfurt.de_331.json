@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_boerse-frankfurt.de_331",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.boerse-frankfurt.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boerse-frankfurt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > app-wrapper:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > app-cookie-hint:nth-child(3):not([id]) > div#cookie-hint > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-hint-btn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > app-wrapper:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > app-cookie-hint:nth-child(3):not([id]) > div#cookie-hint > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-hint-btn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > app-wrapper:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > app-cookie-hint:nth-child(3):not([id]) > div#cookie-hint > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-hint-btn-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > app-wrapper:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > app-cookie-hint:nth-child(3):not([id]) > div#cookie-hint > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-hint-btn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

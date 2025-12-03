@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_crow.nl_z0j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.crow.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?crow\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])[data-testid=\"cookie-banner-decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])[data-testid=\"cookie-banner-decline\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])[data-testid=\"cookie-banner-decline\"]",
+            "comment": "weiger targeting en third party cookies."
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > button:not([id])[data-testid=\"cookie-banner-decline\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

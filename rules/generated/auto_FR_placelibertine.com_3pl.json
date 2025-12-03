@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_placelibertine.com_3pl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.placelibertine.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?placelibertine\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > span:nth-child(1):not([id]) > button:nth-child(1)#not_accept_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > span:nth-child(1):not([id]) > button:nth-child(1)#not_accept_button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > span:nth-child(1):not([id]) > button:nth-child(1)#not_accept_button",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > span:nth-child(1):not([id]) > button:nth-child(1)#not_accept_button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

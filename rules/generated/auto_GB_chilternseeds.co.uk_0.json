@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_chilternseeds.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chilternseeds\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:not([id]) > div:nth-child(1) > div:nth-child(2)#cookieDisclaimer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:not([id]) > div:nth-child(1) > div:nth-child(2)#cookieDisclaimer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div > div:not([id]) > div:nth-child(1) > div:nth-child(2)#cookieDisclaimer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div > div:not([id]) > div:nth-child(1) > div:nth-child(2)#cookieDisclaimer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

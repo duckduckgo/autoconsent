@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_naturhaeuschen.de_rm3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.naturhaeuschen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?naturhaeuschen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > cookie-consent-dialog#cookie-consent-dialog > dialog:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > cookie-consent-dialog#cookie-consent-dialog > dialog:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > cookie-consent-dialog#cookie-consent-dialog > dialog:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > cookie-consent-dialog#cookie-consent-dialog > dialog:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

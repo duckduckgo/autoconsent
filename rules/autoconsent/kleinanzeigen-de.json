@@ -6,32 +6,18 @@
     "prehideSelectors": ["#gdpr-banner-container"],
     "detectCmp": [
         {
-            "any": [
-                { "exists": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-cmp-button]" },
-                { "exists": "#ConsentManagementPage" }
-            ]
+            "exists": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-decline-button]"
         }
     ],
-    "detectPopup": [
-        {
-            "any": [
-                { "visible": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-cmp-button]" },
-                { "visible": "#ConsentManagementPage" }
-            ]
-        }
-    ],
+    "detectPopup": [{ "visible": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-decline-button]" }],
     "optIn": [
         {
-            "if": { "exists": "#gdpr-banner-container #gdpr-banner" },
-            "then": [{ "click": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-accept]" }],
-            "else": [{ "click": "#ConsentManagementPage .Button-primary" }]
+            "click": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-accept]"
         }
     ],
     "optOut": [
         {
-            "if": { "exists": "#gdpr-banner-container #gdpr-banner" },
-            "then": [{ "click": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-cmp-button]" }],
-            "else": [{ "click": "#ConsentManagementPage .Button-secondary" }]
+            "click": "#gdpr-banner-container #gdpr-banner [data-testid=gdpr-banner-decline-button]"
         }
     ]
 }

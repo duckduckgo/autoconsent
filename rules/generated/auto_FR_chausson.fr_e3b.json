@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_chausson.fr_e3b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.chausson.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chausson\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#PopupCookieContent > div#cookieAdvice > div:not([id]) > div:not([id]) > div:nth-child(1)#cookie-advice-general > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-popupCookies-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#PopupCookieContent > div#cookieAdvice > div:not([id]) > div:not([id]) > div:nth-child(1)#cookie-advice-general > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-popupCookies-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#PopupCookieContent > div#cookieAdvice > div:not([id]) > div:not([id]) > div:nth-child(1)#cookie-advice-general > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-popupCookies-refuse",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#PopupCookieContent > div#cookieAdvice > div:not([id]) > div:not([id]) > div:nth-child(1)#cookie-advice-general > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-popupCookies-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

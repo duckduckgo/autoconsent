@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_amundietf.fr_9lx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.amundietf.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amundietf\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > amundi-consent-disclaimer:not([id]) > amundi-minimized-disclaimer:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button#CookiesDisclaimerRibbonV1-AllOff"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > amundi-consent-disclaimer:not([id]) > amundi-minimized-disclaimer:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button#CookiesDisclaimerRibbonV1-AllOff"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > amundi-consent-disclaimer:not([id]) > amundi-minimized-disclaimer:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button#CookiesDisclaimerRibbonV1-AllOff",
+            "comment": "Continuer sans Accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > amundi-consent-disclaimer:not([id]) > amundi-minimized-disclaimer:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button#CookiesDisclaimerRibbonV1-AllOff",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_immersion-facile.beta.gouv.fr_bl5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://immersion-facile.beta.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?immersion-facile\\.beta\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:nth-child(1)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

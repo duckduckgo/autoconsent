@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_die-agv.ch_u3p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://die-agv.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?die-agv\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

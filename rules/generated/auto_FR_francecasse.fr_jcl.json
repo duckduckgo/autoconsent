@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_francecasse.fr_jcl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.francecasse.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?francecasse\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cf_cookiesconsent > div#bandeau_cookies > div#bandeau_cookies_conteneur > a:nth-child(5)#lienrefusecookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cf_cookiesconsent > div#bandeau_cookies > div#bandeau_cookies_conteneur > a:nth-child(5)#lienrefusecookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cf_cookiesconsent > div#bandeau_cookies > div#bandeau_cookies_conteneur > a:nth-child(5)#lienrefusecookie",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cf_cookiesconsent > div#bandeau_cookies > div#bandeau_cookies_conteneur > a:nth-child(5)#lienrefusecookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

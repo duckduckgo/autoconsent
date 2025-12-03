@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_siberoloji.com_4l8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.siberoloji.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?siberoloji\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > a:nth-child(3)#cookie-notice-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > a:nth-child(3)#cookie-notice-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > a:nth-child(3)#cookie-notice-deny",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > a:nth-child(3)#cookie-notice-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

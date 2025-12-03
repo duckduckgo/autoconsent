@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_lotto24.de_v5j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lotto24.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lotto24\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-shell:not([id]) > website-popup-feature-popup-stack:nth-child(10):not([id]) > website-popup-feature-popup:nth-child(2):not([id]) > website-popup-feature-sheet-and-overlay-wrapper:not([id]) > ca-overlay:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > ca-generic-button:nth-child(2):not([id]) > button:not([id]) > ca-ripple-effect:not([id]) > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-shell:not([id]) > website-popup-feature-popup-stack:nth-child(10):not([id]) > website-popup-feature-popup:nth-child(2):not([id]) > website-popup-feature-sheet-and-overlay-wrapper:not([id]) > ca-overlay:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > ca-generic-button:nth-child(2):not([id]) > button:not([id]) > ca-ripple-effect:not([id]) > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-shell:not([id]) > website-popup-feature-popup-stack:nth-child(10):not([id]) > website-popup-feature-popup:nth-child(2):not([id]) > website-popup-feature-sheet-and-overlay-wrapper:not([id]) > ca-overlay:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > ca-generic-button:nth-child(2):not([id]) > button:not([id]) > ca-ripple-effect:not([id]) > div:not([id])",
+            "comment": "Nur funktionale akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-shell:not([id]) > website-popup-feature-popup-stack:nth-child(10):not([id]) > website-popup-feature-popup:nth-child(2):not([id]) > website-popup-feature-sheet-and-overlay-wrapper:not([id]) > ca-overlay:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > ca-generic-button:nth-child(2):not([id]) > button:not([id]) > ca-ripple-effect:not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_sparda.de_3xf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sparda.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sparda\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieLayer > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a#tmart-cookie-layer-only-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieLayer > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a#tmart-cookie-layer-only-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieLayer > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a#tmart-cookie-layer-only-necessary",
+            "comment": "Alle ablehnen (außer notwendige Cookies)"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieLayer > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a#tmart-cookie-layer-only-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

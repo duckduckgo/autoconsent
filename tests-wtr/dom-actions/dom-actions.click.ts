@@ -7,10 +7,10 @@ describe('click', () => {
     let clickCounter2: number;
 
     before(() => {
-        document.querySelector('#first > button').addEventListener('click', () => {
+        document.querySelector('#first > button')?.addEventListener('click', () => {
             clickCounter1++;
         });
-        document.querySelector('#second > button').addEventListener('click', () => {
+        document.querySelector('#second > button')?.addEventListener('click', () => {
             clickCounter2++;
         });
     });
@@ -20,76 +20,64 @@ describe('click', () => {
         clickCounter2 = 0;
     });
 
-    it('clicks on a button', () => {
-        // Given
+    it('clicks on a button', async () => {
         const domActions = instantiateDomActions();
 
-        // When
-        const clickedSuccessfully = domActions.click('#test');
-
-        // Then
-        expect(clickedSuccessfully).true;
+        // with selector
+        expect(await domActions.click('#test')).true;
         expect(clickCounter1).to.equal(1);
     });
 
-    it('clicks all upon multiple matches when all=true', () => {
-        // Given
+    it('clicks all upon multiple matches when all=true', async () => {
         const domActions = instantiateDomActions();
 
-        // When
-        const clickedSuccessfully = domActions.click('button', true);
-
-        // Then
-        expect(clickedSuccessfully).true;
+        // with selector
+        expect(await domActions.click('button', true)).true;
         expect(clickCounter1).to.equal(1);
         expect(clickCounter2).to.equal(1);
     });
 
-    it('clicks only first one upon multiple matches when all=false', () => {
-        // Given
+    it('clicks only first one upon multiple matches when all=false', async () => {
         const domActions = instantiateDomActions();
 
-        // When
-        const clickedSuccessfully = domActions.click('button');
-
-        // Then
-        expect(clickedSuccessfully).true;
+        // with selector
+        expect(await domActions.click('button')).true;
         expect(clickCounter1).to.equal(1);
         expect(clickCounter2).to.equal(0);
     });
 
-    it('clicks by chained selector', () => {
-        // Given
+    it('returns false when no elements match', async () => {
         const domActions = instantiateDomActions();
 
-        // When
-        const clickedSuccessfully = domActions.click(['#second', 'button']);
+        // with non-matching selector
+        expect(await domActions.click('#nonexistent')).false;
+        expect(clickCounter1).to.equal(0);
+        expect(clickCounter2).to.equal(0);
+    });
 
-        // Then
+    it('clicks by chained selector', async () => {
+        const domActions = instantiateDomActions();
+        const clickedSuccessfully = await domActions.click(['#second', 'button']);
+
         expect(clickedSuccessfully).true;
         expect(clickCounter1).to.equal(0);
         expect(clickCounter2).to.equal(1);
     });
 
-    it('clicks by xpath selector', () => {
-        // Given
+    it('clicks by xpath selector', async () => {
         const domActions = instantiateDomActions();
+        const clickedSuccessfully = await domActions.click(['xpath///*[@id="second"]/button']);
 
-        // When
-        const clickedSuccessfully = domActions.click(['xpath///*[@id="second"]/button']);
-
-        // Then
         expect(clickedSuccessfully).true;
         expect(clickCounter1).to.equal(0);
         expect(clickCounter2).to.equal(1);
     });
 
-    it('clicks an open shadow dom element', () => {
-        // Given
+    it('clicks an open shadow dom element', async () => {
         const domActions = instantiateDomActions();
-
         let clickCounterShadowRoot = 0;
 
+        // dynamically create a shadow DOM with a button
         const shadowDiv = document.createElement('div');
         shadowDiv.id = 'shadow';
         document.body.appendChild(shadowDiv);
@@ -100,10 +88,9 @@ describe('click', () => {
             clickCounterShadowRoot++;
         });
 
-        // When
-        const clickedSuccessfully = domActions.click(['#shadow', 'button']);
+        // chained selector pierces into shadow root
+        const clickedSuccessfully = await domActions.click(['#shadow', 'button']);
 
-        // Then
         expect(clickedSuccessfully).true;
         expect(clickCounter1).to.equal(0);
         expect(clickCounter2).to.equal(0);

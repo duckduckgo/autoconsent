@@ -82,6 +82,48 @@
         </fieldset>
 
         <fieldset>
+            <legend>Apply generated rules</legend>
+
+            <div>
+                <input type="radio" id="generated-on" name="generated" value="true" checked />
+                <label for="generated-on">On</label>
+            </div>
+
+            <div>
+                <input type="radio" id="generated-off" name="generated" value="false" />
+                <label for="generated-off">Off</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Handle unknown popups (beta)</legend>
+
+            <div>
+                <input type="radio" id="heuristic-action-on" name="heuristic-action" value="true" />
+                <label for="heuristic-action-on">On</label>
+            </div>
+
+            <div>
+                <input type="radio" id="heuristic-action-off" name="heuristic-action" value="false" checked />
+                <label for="heuristic-action-off">Off</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Highlight clicks</legend>
+
+            <div>
+                <input type="radio" id="visual-test-on" name="visual-test" value="true" checked />
+                <label for="visual-test-on">On</label>
+            </div>
+
+            <div>
+                <input type="radio" id="visual-test-off" name="visual-test" value="false" />
+                <label for="visual-test-off">Off</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
             <legend>Debug logging</legend>
             <div>
                 <input type="checkbox" id="logs-lifecycle" name="logs-lifecycle" checked />
@@ -90,6 +132,10 @@
             <div>
                 <input type="checkbox" id="logs-rulesteps" name="logs-rulesteps" checked />
                 <label for="logs-rulesteps">Rule steps</label>
+            </div>
+            <div>
+                <input type="checkbox" id="logs-detectionsteps" name="logs-detectionsteps" checked />
+                <label for="logs-detectionsteps">Include detection steps</label>
             </div>
             <div>
                 <input type="checkbox" id="logs-waits" name="logs-waits" checked />
@@ -117,10 +163,6 @@
             </div>
             <button id="reload">Reload rules</button>
             <button id="reset">Reset settings</button>
-            <div>
-                <input type="checkbox" id="filterlist" name="filterlist" checked />
-                <label for="filterlist">Enable cosmetic filterlist</label>
-            </div>
         </fieldset>
         <script src="popup.bundle.js"></script>
     </body>

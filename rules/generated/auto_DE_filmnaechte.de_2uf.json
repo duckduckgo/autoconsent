@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_filmnaechte.de_2uf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://filmnaechte.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?filmnaechte\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookieConsentNotification > div:not([id]) > div:nth-child(4):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookieConsentNotification > div:not([id]) > div:nth-child(4):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookieConsentNotification > div:not([id]) > div:nth-child(4):not([id]) > span:nth-child(2):not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookieConsentNotification > div:not([id]) > div:nth-child(4):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

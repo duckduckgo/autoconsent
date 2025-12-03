@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_energiedirect.nl_u7m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.energiedirect.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?energiedirect\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > wl-cookiewall:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > crnt-button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > wl-cookiewall:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > crnt-button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > wl-cookiewall:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > crnt-button:nth-child(2):not([id])",
+            "comment": "Cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > wl-cookiewall:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > crnt-button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

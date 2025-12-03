@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_forum.vodafone.de_6up",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://forum.vodafone.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?forum\\.vodafone\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dip-consent > div:nth-child(1)#dip-consent-container > div#dip-consent-summary > div:nth-child(5):not([id]) > button:nth-child(3)#dip-consent-summary-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dip-consent > div:nth-child(1)#dip-consent-container > div#dip-consent-summary > div:nth-child(5):not([id]) > button:nth-child(3)#dip-consent-summary-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dip-consent > div:nth-child(1)#dip-consent-container > div#dip-consent-summary > div:nth-child(5):not([id]) > button:nth-child(3)#dip-consent-summary-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dip-consent > div:nth-child(1)#dip-consent-container > div#dip-consent-summary > div:nth-child(5):not([id]) > button:nth-child(3)#dip-consent-summary-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

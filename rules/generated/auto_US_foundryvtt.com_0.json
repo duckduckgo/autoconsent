@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_foundryvtt.com_0",
+    "vendorUrl": "https://foundryvtt.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?foundryvtt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main[class][id] > div:nth-child(1) > form:nth-child(2) > footer:nth-child(5) > button:nth-child(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main[class][id] > div:nth-child(1) > form:nth-child(2) > footer:nth-child(5) > button:nth-child(2)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > main[class][id] > div:nth-child(1) > form:nth-child(2) > footer:nth-child(5) > button:nth-child(2)",
+            "text": " REQUIRED ONLY"
+        }
+    ]
+}

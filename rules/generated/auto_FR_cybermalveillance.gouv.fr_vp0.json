@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cybermalveillance.gouv.fr_vp0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cybermalveillance.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cybermalveillance\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-banner-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-banner-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-banner-decline",
+            "comment": "Tout Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookie-banner-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

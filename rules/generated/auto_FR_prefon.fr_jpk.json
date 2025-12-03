@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_prefon.fr_jpk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.prefon.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?prefon\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(6)#rgpd > div:not([id]) > div#cookies > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(6)#rgpd > div:not([id]) > div#cookies > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(6)#rgpd > div:not([id]) > div#cookies > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(6)#rgpd > div:not([id]) > div#cookies > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

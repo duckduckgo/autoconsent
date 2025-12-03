@@ -2,7 +2,7 @@
     "name": "pinterest-business",
     "vendorUrl": "https://business.pinterest.com/",
     "runContext": {
-        "urlPattern": "^https://.*\\.pinterest\\.com/"
+        "urlPattern": "^https://[a-z]*\\.pinterest\\.com/"
     },
     "prehideSelectors": [".BusinessCookieConsent"],
     "detectCmp": [

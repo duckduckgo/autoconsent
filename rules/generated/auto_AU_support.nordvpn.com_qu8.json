@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_support.nordvpn.com_qu8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support.nordvpn.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.nordvpn\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-widget-container > div:not([id])[data-testid=\"consent-widget-view\"] > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject[data-testid=\"consent-widget-reject-all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-widget-container > div:not([id])[data-testid=\"consent-widget-view\"] > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject[data-testid=\"consent-widget-reject-all\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-widget-container > div:not([id])[data-testid=\"consent-widget-view\"] > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject[data-testid=\"consent-widget-reject-all\"]",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-widget-container > div:not([id])[data-testid=\"consent-widget-view\"] > div:nth-child(2):not([id]) > button:nth-child(2)#widget-button-reject[data-testid=\"consent-widget-reject-all\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

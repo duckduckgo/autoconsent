@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_semiconductor.samsung.com_9ur",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://semiconductor.samsung.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?semiconductor\\.samsung\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_component_emea > div:not([id]) > div#cookiePopupForm > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_component_emea > div:not([id]) > div#cookiePopupForm > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_component_emea > div:not([id]) > div#cookiePopupForm > button:nth-child(2):not([id])",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_component_emea > div:not([id]) > div#cookiePopupForm > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

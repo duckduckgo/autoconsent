@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_mawaqit.net_0cw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mawaqit.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mawaqit\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:nth-child(1):not([id]) > button:nth-child(1)#cookie-deny-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:nth-child(1):not([id]) > button:nth-child(1)#cookie-deny-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:nth-child(1):not([id]) > button:nth-child(1)#cookie-deny-button",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:nth-child(1):not([id]) > button:nth-child(1)#cookie-deny-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

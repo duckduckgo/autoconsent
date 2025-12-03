@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_jeep.nl_szr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jeep.nl/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cookielaw\\.emea\\.fcagroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(1):not([id]) > button#decline-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(1):not([id]) > button#decline-text"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(1):not([id]) > button#decline-text",
+            "comment": "GA VERDER ZONDER AANVAARDEN "
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#dashboard > div:not([id]) > div:nth-child(1):not([id]) > button#decline-text",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

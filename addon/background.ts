@@ -1,8 +1,10 @@
 import { snippets } from '../lib/eval-snippets';
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from '../lib/messages';
 import { Config, RuleBundle } from '../lib/types';
-import { manifestVersion, storageGet, storageRemove, storageSet } from './mv-compat';
+import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
+import { consentomatic } from '../rules/consentomatic.json';
+import { filterCompactRules } from '../lib/encoding';
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -13,7 +15,7 @@ import { initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
 const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
-    const res = await fetch('./rules.json');
+    const res = await fetch('./compact-rules.json');
     storageSet({
         rules: await res.json(),
     });
@@ -25,26 +27,6 @@ async function evalInTab(
     code: string,
     snippetId?: keyof typeof snippets,
 ): Promise<chrome.scripting.InjectionResult<boolean>[]> {
-    if (manifestVersion === 2) {
-        return new Promise((resolve) => {
-            chrome.tabs.executeScript(
-                tabId,
-                {
-                    frameId,
-                    code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`,
-                },
-                (resultArr) => {
-                    resolve([
-                        {
-                            result: resultArr[0],
-                            frameId,
-                            documentId: '',
-                        },
-                    ]);
-                },
-            );
-        });
-    }
     return chrome.scripting.executeScript({
         target: {
             tabId,
@@ -70,11 +52,6 @@ chrome.runtime.onInstalled.addListener(() => {
     loadRules();
     initConfig();
 });
-if (manifestVersion === 2) {
-    // always load rules on startup in MV2
-    loadRules();
-    initConfig();
-}
 
 chrome.tabs.onRemoved.addListener((tabId: number) => {
     storageRemove(`detected${tabId}`);
@@ -83,7 +60,7 @@ chrome.tabs.onRemoved.addListener((tabId: number) => {
 chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
-    const senderUrl = sender.origin || sender.url;
+    const senderUrl = sender.url || `${sender.origin}/`;
     const senderDomain = new URL(senderUrl).hostname;
     const autoconsentConfig: Config = await storageGet('config');
     const logsConfig = autoconsentConfig.logs;
@@ -93,13 +70,18 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
         console.log(msg, sender);
         console.groupEnd();
     }
-    const rules: RuleBundle = await storageGet('rules');
 
     switch (msg.type) {
-        case 'init':
+        case 'init': {
             if (frameId === 0) {
                 await showOptOutStatus(tabId, 'idle');
             }
+            const rules: RuleBundle = {
+                autoconsent: [],
+                consentomatic,
+                compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
+            };
+            console.log('filtered rules:', rules.compact, JSON.stringify(rules.compact).length);
             chrome.tabs.sendMessage(
                 tabId,
                 {
@@ -112,6 +94,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
                 },
             );
             break;
+        }
         case 'eval':
             evalInTab(tabId, frameId, msg.code, msg.snippetId).then(([result]) => {
                 if (logsConfig.evals) {
@@ -143,7 +126,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
         case 'optOutResult':
         case 'optInResult':
             if (msg.result) {
-                await showOptOutStatus(tabId, 'working', msg.cmp);
+                // make sure we set the flag first, so that it's set by the time we handle autoconsentDone
                 if (msg.scheduleSelfTest) {
                     await storageSet({
                         [`selfTest${tabId}`]: frameId,
@@ -161,7 +144,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             await showOptOutStatus(tabId, 'success', msg.cmp);
             // sometimes self-test needs to be done in another frame
             const selfTestKey = `selfTest${tabId}`;
-            const selfTestFrameId = (await chrome.storage.local.get(selfTestKey))?.[selfTestKey];
+            const selfTestFrameId = await storageGet(selfTestKey);
 
             if (typeof selfTestFrameId === 'number') {
                 logsConfig.lifecycle && console.log(`Requesting self-test in ${selfTestFrameId}`);
@@ -193,30 +176,11 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             }
             updateTabReports(sender.tab.id, sender.frameId, msg);
             break;
+        case 'visualDelay':
+            console.log('visualDelay', msg);
+            break;
     }
 });
-
-if (manifestVersion === 2) {
-    // MV3 handles this inside the popup
-    chrome.pageAction.onClicked.addListener(async (tab) => {
-        const tabId = tab.id;
-        const detectedKey = `detected${tabId}`;
-        const frameId = await storageGet(detectedKey);
-        if (typeof frameId === 'number') {
-            storageRemove(detectedKey);
-            await showOptOutStatus(tabId, 'working');
-            chrome.tabs.sendMessage(
-                tabId,
-                {
-                    type: 'optOut',
-                } as BackgroundMessage,
-                {
-                    frameId,
-                },
-            );
-        }
-    });
-}
 
 // Communicate with devtools panels
 chrome.runtime.onConnect.addListener(function (devToolsConnection) {

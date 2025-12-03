@@ -1,0 +1,61 @@
+{
+    "name": "cookiehub",
+    "vendorUrl": "https://www.cookiehub.com/",
+    "prehideSelectors": [".ch2-container"],
+    "detectCmp": [
+        {
+            "exists": ".ch2-dialog"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ch2-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ch2-allow-all-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".ch2-open-settings-btn, .ch2-open-personal-data-btn" },
+            "then": [
+                {
+                    "click": ".ch2-open-settings-btn, .ch2-open-personal-data-btn"
+                },
+                {
+                    "waitForVisible": ".ch2-settings"
+                },
+                {
+                    "if": { "exists": ".ch2-deny-all-btn" },
+                    "then": [
+                        {
+                            "click": ".ch2-deny-all-btn"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": ".ch2-settings input[type=checkbox]:not([disabled]):checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": ".ch2-save-settings-btn"
+                        }
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "hide": ".ch2-container"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiehub="
+        }
+    ]
+}

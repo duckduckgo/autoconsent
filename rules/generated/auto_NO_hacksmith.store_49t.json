@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_hacksmith.store_49t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://hacksmith.store/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hacksmith\\.store/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-section-sections--20055816765655__privacy-banner > cookie-bar:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-section-sections--20055816765655__privacy-banner > cookie-bar:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-section-sections--20055816765655__privacy-banner > cookie-bar:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-section-sections--20055816765655__privacy-banner > cookie-bar:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

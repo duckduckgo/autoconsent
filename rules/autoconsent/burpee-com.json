@@ -1,9 +1,18 @@
 {
     "name": "burpee.com",
-    "cosmetic": true,
-    "prehideSelectors": ["#notice-cookie-block"],
+    "prehideSelectors": [".cookie-modal", "#notice-cookie-block"],
     "detectCmp": [{ "exists": "#notice-cookie-block" }],
-    "detectPopup": [{ "exists": "#html-body #notice-cookie-block" }],
-    "optIn": [{ "click": "#btn-cookie-allow" }],
-    "optOut": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+    "detectPopup": [{ "visible": "#html-body #notice-cookie-block" }],
+    "optIn": [{ "waitForThenClick": "#btn-cookie-allow" }],
+    "optOut": [
+        {
+            "if": { "exists": "#btn-cookie-manage" },
+            "then": [
+                { "waitForThenClick": "#btn-cookie-manage" },
+                { "click": "#notice-cookie-block input:checked", "all": true },
+                { "click": "#btn-cookie-save" }
+            ],
+            "else": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+        }
+    ]
 }

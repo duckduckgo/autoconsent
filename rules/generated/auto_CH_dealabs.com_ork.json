@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_dealabs.com_ork",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dealabs.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dealabs\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "button[data-t=rejectAll]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[data-t=rejectAll]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "button[data-t=rejectAll]",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "button[data-t=rejectAll]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

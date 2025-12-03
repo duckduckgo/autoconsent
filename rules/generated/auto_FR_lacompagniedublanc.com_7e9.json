@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lacompagniedublanc.com_7e9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lacompagniedublanc.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lacompagniedublanc\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

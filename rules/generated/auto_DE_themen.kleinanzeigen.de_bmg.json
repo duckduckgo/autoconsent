@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_themen.kleinanzeigen.de_bmg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://themen.kleinanzeigen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?themen\\.kleinanzeigen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentBanner > div:not([id]) > div#gdpr-banner-container[data-testid=\"gdpr-banner-container\"] > dialog#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-banner-cmp-button[data-testid=\"gdpr-banner-decline-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentBanner > div:not([id]) > div#gdpr-banner-container[data-testid=\"gdpr-banner-container\"] > dialog#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-banner-cmp-button[data-testid=\"gdpr-banner-decline-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentBanner > div:not([id]) > div#gdpr-banner-container[data-testid=\"gdpr-banner-container\"] > dialog#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-banner-cmp-button[data-testid=\"gdpr-banner-decline-button\"]",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentBanner > div:not([id]) > div#gdpr-banner-container[data-testid=\"gdpr-banner-container\"] > dialog#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-banner-cmp-button[data-testid=\"gdpr-banner-decline-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

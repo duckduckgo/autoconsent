@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_hmd.com_uv4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hmd.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hmd\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmp-modal > div:not([id]) > div#gravitoCMP-modal-layer1 > div:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#modalRejectAllFirstLayerBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmp-modal > div:not([id]) > div#gravitoCMP-modal-layer1 > div:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#modalRejectAllFirstLayerBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmp-modal > div:not([id]) > div#gravitoCMP-modal-layer1 > div:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#modalRejectAllFirstLayerBtn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmp-modal > div:not([id]) > div#gravitoCMP-modal-layer1 > div:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#modalRejectAllFirstLayerBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -34,13 +34,13 @@ export default class Tiktok extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
-        const banner = this.getShadowRoot().querySelector('.tiktok-cookie-banner') as HTMLElement;
+        const banner = this.getShadowRoot()?.querySelector('.tiktok-cookie-banner') as HTMLElement;
         return isElementVisible(banner);
     }
 
     async optOut() {
         const logsConfig = this.autoconsent.config.logs;
-        const declineButton = this.getShadowRoot().querySelector('.button-wrapper button:first-child') as HTMLElement;
+        const declineButton = this.getShadowRoot()?.querySelector('.button-wrapper button:first-child') as HTMLElement;
         if (declineButton) {
             logsConfig.rulesteps && console.log('[clicking]', declineButton);
             declineButton.click();
@@ -53,7 +53,7 @@ export default class Tiktok extends AutoConsentCMPBase {
 
     async optIn() {
         const logsConfig = this.autoconsent.config.logs;
-        const acceptButton = this.getShadowRoot().querySelector('.button-wrapper button:last-child') as HTMLElement;
+        const acceptButton = this.getShadowRoot()?.querySelector('.button-wrapper button:last-child') as HTMLElement;
         if (acceptButton) {
             logsConfig.rulesteps && console.log('[clicking]', acceptButton);
             acceptButton.click();

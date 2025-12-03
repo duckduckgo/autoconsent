@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_swissmedical.net_d45",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.swissmedical.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?swissmedical\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#fd-unCheckAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#fd-unCheckAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#fd-unCheckAll",
+            "comment": "I do not accept"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#fd-unCheckAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

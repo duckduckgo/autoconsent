@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_strunz.com_vtz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.strunz.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?strunz\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > div:nth-child(1):not([id]) > form#amgdprcookie-form > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essentials"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > div:nth-child(1):not([id]) > form#amgdprcookie-form > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essentials"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > div:nth-child(1):not([id]) > form#amgdprcookie-form > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essentials",
+            "comment": "Nur notwendige Cookies verwenden"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > div:nth-child(1):not([id]) > form#amgdprcookie-form > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-essentials",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

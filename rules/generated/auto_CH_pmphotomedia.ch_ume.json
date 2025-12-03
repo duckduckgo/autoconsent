@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_pmphotomedia.ch_ume",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pmphotomedia.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pmphotomedia\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#c-pop > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ctl07_declinebtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#c-pop > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ctl07_declinebtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#c-pop > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ctl07_declinebtn",
+            "comment": "Nur notwendige Cookies zulassen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#c-pop > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ctl07_declinebtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

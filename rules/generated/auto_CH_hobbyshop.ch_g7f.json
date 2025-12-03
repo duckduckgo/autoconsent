@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_hobbyshop.ch_g7f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hobbyshop.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hobbyshop\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

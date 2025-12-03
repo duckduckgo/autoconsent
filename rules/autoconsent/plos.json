@@ -3,7 +3,7 @@
     "vendorUrl": "https://plos.org/",
     "cosmetic": false,
     "runContext": {
-        "urlPattern": "^https://(www\\.)?plos\\.org/"
+        "urlPattern": "^https://([.a-zA-Z0-9-]+\\.)?plos\\.org/"
     },
     "prehideSelectors": ["#cookie-consent"],
     "detectCmp": [
@@ -18,7 +18,7 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#cookie-consent", "xpath///button[contains(., 'Accept')"]
+            "waitForThenClick": ["#cookie-consent", "xpath///button[contains(., 'Accept')]"]
         }
     ],
     "optOut": [

@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_sozialpolitik-aktuell.de_pnk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sozialpolitik-aktuell.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sozialpolitik-aktuell\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#hofff-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#hofff-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#hofff-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Alle Funktionen ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#hofff-consent-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

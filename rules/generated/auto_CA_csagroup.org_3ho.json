@@ -1,0 +1,37 @@
+{
+    "name": "auto_CA_csagroup.org_3ho",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?csagroup\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#customise-cookies-main-bottom-notification > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2):not([id]) > button:nth-child(1)#customise-cookies-required-cookies-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

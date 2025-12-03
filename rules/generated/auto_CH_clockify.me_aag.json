@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_clockify.me_aag",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://clockify.me/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clockify\\.me/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

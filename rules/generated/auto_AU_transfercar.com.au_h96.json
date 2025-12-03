@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_transfercar.com.au_h96",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.transfercar.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?transfercar\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CCManager_wrapper > div#CCManager_modal > div:not([id]) > div:nth-child(2)#CCManager_modal_buttons > button:nth-child(2)#CCManager_modal_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CCManager_wrapper > div#CCManager_modal > div:not([id]) > div:nth-child(2)#CCManager_modal_buttons > button:nth-child(2)#CCManager_modal_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CCManager_wrapper > div#CCManager_modal > div:not([id]) > div:nth-child(2)#CCManager_modal_buttons > button:nth-child(2)#CCManager_modal_decline",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CCManager_wrapper > div#CCManager_modal > div:not([id]) > div:nth-child(2)#CCManager_modal_buttons > button:nth-child(2)#CCManager_modal_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

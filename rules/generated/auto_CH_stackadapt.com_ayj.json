@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_stackadapt.com_ayj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.stackadapt.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stackadapt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#located-in-eu-ca-quebec > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#located-in-eu-ca-quebec > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-dismiss"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#located-in-eu-ca-quebec > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-dismiss",
+            "comment": "I Refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#located-in-eu-ca-quebec > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-dismiss",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

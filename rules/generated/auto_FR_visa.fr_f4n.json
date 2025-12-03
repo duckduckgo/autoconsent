@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_visa.fr_f4n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.visa.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?visa\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Tout Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieReportsPanel > div:nth-child(2)#CookieReportsBanner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

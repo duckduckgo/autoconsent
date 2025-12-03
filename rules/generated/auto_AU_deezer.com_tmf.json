@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_deezer.com_tmf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.deezer.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deezer\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all[data-testid=\"gdpr-btn-refuse-all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all[data-testid=\"gdpr-btn-refuse-all\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all[data-testid=\"gdpr-btn-refuse-all\"]",
+            "comment": "Refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id])[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all[data-testid=\"gdpr-btn-refuse-all\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

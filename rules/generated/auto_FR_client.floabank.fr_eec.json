@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_client.floabank.fr_eec",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://client.floabank.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?client\\.floabank\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieLB > div:nth-child(2)#cookieModal > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#cookieLBmainbuttons > span:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

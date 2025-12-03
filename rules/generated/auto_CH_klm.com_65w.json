@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_klm.com_65w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.klm.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?klm\\.(co\\.uk|[a-z]+)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bw-cookie-banner > div:not([id]) > div#bw-cookie-banner-container > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

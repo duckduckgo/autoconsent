@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_mychart.wellstar.org_pwj",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wellstar\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn",
+            "comment": "Deny all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > main:nth-child(3):not([id]) > div:nth-child(6)#cookie-consent-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-deny-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

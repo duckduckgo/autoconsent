@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_eneco.nl_0ag",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.eneco.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eneco\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div#radix-«R9l6» > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div#radix-«R9l6» > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div#radix-«R9l6» > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id]) > span:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div#radix-«R9l6» > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

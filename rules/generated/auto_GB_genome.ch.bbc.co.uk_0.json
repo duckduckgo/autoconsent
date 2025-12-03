@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_genome.ch.bbc.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.bbc\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

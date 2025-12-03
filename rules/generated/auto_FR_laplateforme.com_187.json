@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_laplateforme.com_187",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.laplateforme.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?laplateforme\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#container > div:nth-child(2)#pinned-bottom > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-no"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#container > div:nth-child(2)#pinned-bottom > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-no"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#container > div:nth-child(2)#pinned-bottom > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-no",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#container > div:nth-child(2)#pinned-bottom > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-no",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

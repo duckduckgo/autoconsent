@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_homeswapper.co.uk_x3o",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?homeswapper\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy",
+            "comment": "Reject non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-container-id > div:nth-child(1)#cookie-partial-div > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#rejectPolicy",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

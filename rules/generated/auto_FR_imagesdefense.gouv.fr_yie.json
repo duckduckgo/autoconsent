@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_imagesdefense.gouv.fr_yie",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://imagesdefense.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?imagesdefense\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-7 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-7 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-7 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-7 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

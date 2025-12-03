@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_chicagobooth.edu_ikx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.chicagobooth.edu/media-relations-and-communications/press-releases/economists-versus-everyone-else#:~:text=Trust%20Index%2C%20a%20survey%20of,representative%20sample%20of%20US%20households"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chicagobooth\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "REJECT COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > p:not([id]) > span:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

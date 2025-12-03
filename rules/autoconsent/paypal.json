@@ -6,10 +6,7 @@
     "optIn": [{ "click": "#acceptAllButton" }],
     "optOut": [
         {
-            "wait": 200
-        },
-        {
-            "click": ".gdprCookieBanner_decline-button"
+            "waitForThenClick": "#bannerDeclineButton"
         }
     ],
     "test": [{ "wait": 500 }, { "cookieContains": "cookie_prefs" }]

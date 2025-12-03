@@ -1,0 +1,28 @@
+{
+    "name": "auto_GB_velux.co.uk_0",
+    "vendorUrl": "https://www.velux.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?velux\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body:not([id]) > div#cookiebot__body > div:not([id]) > div#cookiebot__modal-wrapper > div:nth-child(3):not([id]) > div:not([id]) > a:nth-child(1)#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection",
+            "comment": "NECESSARY ONLY"
+        }
+    ]
+}

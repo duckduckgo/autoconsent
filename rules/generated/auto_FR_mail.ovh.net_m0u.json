@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_mail.ovh.net_m0u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mail.ovh.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ovhcloud\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#header_tc_privacy > div:nth-child(2)#header_tc_privacy_container_button > button:nth-child(3)#header_tc_privacy_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#header_tc_privacy > div:nth-child(2)#header_tc_privacy_container_button > button:nth-child(3)#header_tc_privacy_button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#header_tc_privacy > div:nth-child(2)#header_tc_privacy_container_button > button:nth-child(3)#header_tc_privacy_button",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#header_tc_privacy > div:nth-child(2)#header_tc_privacy_container_button > button:nth-child(3)#header_tc_privacy_button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

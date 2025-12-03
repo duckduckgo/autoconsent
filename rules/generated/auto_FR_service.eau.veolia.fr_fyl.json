@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_service.eau.veolia.fr_fyl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.service.eau.veolia.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?service\\.eau\\.veolia\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div#cookie-banner > div#content > div:nth-child(2)#options > button:nth-child(2)#ga-cancel-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div#cookie-banner > div#content > div:nth-child(2)#options > button:nth-child(2)#ga-cancel-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "div#cookie-banner > div#content > div:nth-child(2)#options > button:nth-child(2)#ga-cancel-button",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div#cookie-banner > div#content > div:nth-child(2)#options > button:nth-child(2)#ga-cancel-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

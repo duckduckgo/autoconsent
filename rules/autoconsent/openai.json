@@ -5,15 +5,15 @@
     "runContext": {
         "urlPattern": "^https://([a-z0-9-]+\\.)?openai\\.com/"
     },
-    "prehideSelectors": ["[data-testid=cookie-consent-banner]"],
+    "prehideSelectors": ["[aria-labelledby=cookieConsentTitle]"],
     "detectCmp": [
         {
-            "exists": "[data-testid=cookie-consent-banner]"
+            "exists": "[aria-labelledby=cookieConsentTitle]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-testid=cookie-consent-banner]"
+            "visible": "[aria-labelledby=cookieConsentTitle]"
         }
     ],
     "optIn": [
@@ -23,8 +23,8 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///button[contains(., 'Reject all')]"
+            "waitForThenClick": "xpath///button[contains(., 'Reject non-essential')]"
         }
     ],
-    "test": [{ "wait": 500 }, { "cookieContains": "oai-allow-ne=false" }]
+    "test": [{ "wait": 500 }, { "cookieContains": "consent=rejected" }]
 }

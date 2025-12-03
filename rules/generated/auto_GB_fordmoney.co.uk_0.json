@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_fordmoney.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fordmoney\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#accelerator-page > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#accelerator-page > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#accelerator-page > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Decline cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#accelerator-page > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

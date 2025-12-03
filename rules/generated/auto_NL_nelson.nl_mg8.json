@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nelson.nl_mg8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nelson.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nelson\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-consent-modal__reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-consent-modal__reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-consent-modal__reject-button",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-consent-modal__reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

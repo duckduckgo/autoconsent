@@ -1,0 +1,17 @@
+{
+    "name": "tarteaucitron deny",
+    "prehideSelectors": ["#tarteaucitronRoot"],
+    "detectCmp": [{ "exists": "#tarteaucitronRoot" }],
+    "detectPopup": [
+        {
+            "visible": "#tarteaucitronAllDenied2"
+        }
+    ],
+    "optIn": [{ "click": "#tarteaucitronPersonalize2" }],
+    "optOut": [{ "click": "#tarteaucitronAllDenied2" }],
+    "test": [
+        {
+            "eval": "EVAL_TARTEAUCITRON_2"
+        }
+    ]
+}

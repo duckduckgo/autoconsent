@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_products.aspose.app_7yy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://products.aspose.app/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?products\\.aspose\\.app/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll",
+            "comment": "DENY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-consent-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

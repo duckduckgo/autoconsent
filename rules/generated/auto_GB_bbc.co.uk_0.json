@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_bbc.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bbc\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > header#header-content[data-testid=\"header-content\"] > section:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > header#header-content[data-testid=\"header-content\"] > section:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > header#header-content[data-testid=\"header-content\"] > section:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > header#header-content[data-testid=\"header-content\"] > section:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_airbnb.de_83z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.airbnb.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?airbnb\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#react-application > div:not([id]) > div:not([id])[data-testid=\"linaria-injector\"] > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"main-cookies-banner-container\"] > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#react-application > div:not([id]) > div:not([id])[data-testid=\"linaria-injector\"] > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"main-cookies-banner-container\"] > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#react-application > div:not([id]) > div:not([id])[data-testid=\"linaria-injector\"] > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"main-cookies-banner-container\"] > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#react-application > div:not([id]) > div:not([id])[data-testid=\"linaria-injector\"] > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"main-cookies-banner-container\"] > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

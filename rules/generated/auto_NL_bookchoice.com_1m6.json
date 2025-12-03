@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bookchoice.com_1m6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bookchoice.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bookchoice\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:not([id]) > div:nth-child(6)#cookieBar[data-testid=\"cookie-bar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"required-btn\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:not([id]) > div:nth-child(6)#cookieBar[data-testid=\"cookie-bar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"required-btn\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:nth-child(6)#cookieBar[data-testid=\"cookie-bar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"required-btn\"]",
+            "comment": "Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:nth-child(6)#cookieBar[data-testid=\"cookie-bar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"required-btn\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

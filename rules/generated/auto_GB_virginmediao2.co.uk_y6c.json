@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_virginmediao2.co.uk_y6c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.virginmediao2.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?virginmediao2\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
+            "comment": "Accept essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiePrompt > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#privacy_pref_optout",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

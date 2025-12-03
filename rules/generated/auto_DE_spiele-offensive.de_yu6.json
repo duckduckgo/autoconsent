@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_spiele-offensive.de_yu6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.spiele-offensive.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?spiele-offensive\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentContainer > div:nth-child(3)#consentButtons > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentContainer > div:nth-child(3)#consentButtons > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentContainer > div:nth-child(3)#consentButtons > button:nth-child(3):not([id])",
+            "comment": "ablehnen 😥"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentContainer > div:nth-child(3)#consentButtons > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

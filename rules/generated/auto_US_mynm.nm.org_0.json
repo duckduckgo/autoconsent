@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_mynm.nm.org_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mynm\\.nm\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_d0bd516e-280a-44ef-bf9b-de66419ba0f0 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_d0bd516e-280a-44ef-bf9b-de66419ba0f0 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_d0bd516e-280a-44ef-bf9b-de66419ba0f0 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_d0bd516e-280a-44ef-bf9b-de66419ba0f0 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

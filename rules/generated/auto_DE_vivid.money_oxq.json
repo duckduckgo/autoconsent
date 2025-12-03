@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_vivid.money_oxq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://vivid.money/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vivid\\.money/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#popup-root > div:not([id])[data-testid=\"overlay\"] > div#popup-1 > section:not([id]) > header:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#popup-root > div:not([id])[data-testid=\"overlay\"] > div#popup-1 > section:not([id]) > header:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#popup-root > div:not([id])[data-testid=\"overlay\"] > div#popup-1 > section:not([id]) > header:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#popup-root > div:not([id])[data-testid=\"overlay\"] > div#popup-1 > section:not([id]) > header:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

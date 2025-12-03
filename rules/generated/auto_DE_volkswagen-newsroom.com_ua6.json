@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_volkswagen-newsroom.com_ua6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.volkswagen-newsroom.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?volkswagen-newsroom\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Decline optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

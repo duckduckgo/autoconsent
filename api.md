@@ -16,6 +16,7 @@ const consent = new AutoConsent( // make sure not to leak anything to the page g
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,
+        visualTest: false,
         logs: {
             lifecycle: false,
             rulesteps: false,

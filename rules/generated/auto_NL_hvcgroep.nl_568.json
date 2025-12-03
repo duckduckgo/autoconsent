@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hvcgroep.nl_568",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hvcgroep.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hvcgroep\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#uncinc-cookie-compliance > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#uncinc-cookie-compliance > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#uncinc-cookie-compliance > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree",
+            "comment": "noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#uncinc-cookie-compliance > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#only-necessary-agree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

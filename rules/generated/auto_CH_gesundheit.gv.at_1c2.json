@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_gesundheit.gv.at_1c2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gesundheit.gv.at/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gesundheit\\.gv\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner-wrapper > div#cookiebanner-container > div:nth-child(4):not([id]) > div:nth-child(3)#cookiebanner-button-accept-necessary > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner-wrapper > div#cookiebanner-container > div:nth-child(4):not([id]) > div:nth-child(3)#cookiebanner-button-accept-necessary > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner-wrapper > div#cookiebanner-container > div:nth-child(4):not([id]) > div:nth-child(3)#cookiebanner-button-accept-necessary > button:not([id])",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner-wrapper > div#cookiebanner-container > div:nth-child(4):not([id]) > div:nth-child(3)#cookiebanner-button-accept-necessary > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

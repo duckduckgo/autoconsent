@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_milvus.io_j4n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://milvus.io/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?milvus\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_studentenwerk-dresden.de_txo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.studentenwerk-dresden.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?studentenwerk-dresden\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > main:nth-child(2)#swdd-mainbody > div:nth-child(7)#cookieconsent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieconsent_essentiell"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > main:nth-child(2)#swdd-mainbody > div:nth-child(7)#cookieconsent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieconsent_essentiell"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > main:nth-child(2)#swdd-mainbody > div:nth-child(7)#cookieconsent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieconsent_essentiell",
+            "comment": "Nur notwendige Cookies erlauben"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > main:nth-child(2)#swdd-mainbody > div:nth-child(7)#cookieconsent > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieconsent_essentiell",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

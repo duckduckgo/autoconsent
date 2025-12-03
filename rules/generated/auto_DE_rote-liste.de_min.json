@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_rote-liste.de_min",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rote-liste.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rote-liste\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(7)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-decline-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

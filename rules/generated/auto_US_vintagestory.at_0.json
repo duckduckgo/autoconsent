@@ -1,0 +1,28 @@
+{
+    "name": "auto_US_vintagestory.at_0",
+    "vendorUrl": "https://www.vintagestory.at/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vintagestory\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div[id][class][data-role][data-controller][style] > div > div:nth-child(2) > form > button:nth-child(3)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div[id][class][data-role][data-controller][style] > div > div:nth-child(2) > form > button:nth-child(3)"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForThenClick": "body > div[id][class][data-role][data-controller][style] > div > div:nth-child(2) > form > button:nth-child(3)",
+            "text": " Reject Cookies"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_chichester.gov.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chichester\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-consent-prompt > div:not([id]) > div:nth-child(3):not([id]) > form#cookie-consent-form > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

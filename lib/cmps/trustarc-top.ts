@@ -56,10 +56,6 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         return this.elementVisible(`${popupContent},${bannerOverlay},${bannerContainer}`, 'any');
     }
 
-    openFrame() {
-        this.click(cookieSettingsButton);
-    }
-
     async optOut() {
         if (this._shortcutButton) {
             this._shortcutButton.click();
@@ -68,7 +64,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
         // hide elements permanently, so user doesn't see the popup
         hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
-        this.click(cookieSettingsButton);
+        await this.click(cookieSettingsButton);
 
         // schedule cleanup
         setTimeout(() => {
@@ -80,7 +76,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     async optIn() {
         this._optInDone = true; // just a hack to force autoconsentDone
-        return this.click(shortcutOptIn);
+        return await this.click(shortcutOptIn);
     }
 
     async openCmp() {

@@ -1,0 +1,37 @@
+{
+    "name": "auto_US_wilsoncombat.com_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wilsoncombat\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-117 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-117 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-117 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#modal-content-117 > div#pr-cookie-notice > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

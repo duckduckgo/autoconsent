@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_vistaprint.fr_35d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vistaprint.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vistaprint\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-manager-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-manager-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-manager-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-manager-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_mon-camping-car.com_uyj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mon-camping-car.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mon-camping-car\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(13)#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#refuse_cookies_consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(13)#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#refuse_cookies_consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(13)#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#refuse_cookies_consent",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(13)#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#refuse_cookies_consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

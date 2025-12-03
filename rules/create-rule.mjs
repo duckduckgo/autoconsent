@@ -14,7 +14,9 @@ const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
     const filename = `autoconsent/${name}.json`;
     const rule = {
         name,
-        vendorUrl: 'https://unknown',
+        _metadata: {
+            vendorUrl: 'https://unknown',
+        },
         cosmetic: false,
         runContext: {
             main: true,

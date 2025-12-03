@@ -3,7 +3,7 @@
     "vendorUrl": "https://imdb.com/",
     "cosmetic": false,
     "runContext": {
-        "urlPattern": "^https://(www.)?imdb.com/"
+        "urlPattern": "^https://(www\\.)?(m\\.)?imdb.com/"
     },
     "prehideSelectors": ["[data-testid=consent-banner]"],
     "detectCmp": [

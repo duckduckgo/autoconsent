@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_felgenshop.de_31c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.felgenshop.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?felgenshop\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button#accept-essential-kekse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button#accept-essential-kekse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button#accept-essential-kekse",
+            "comment": "Nur essenzielle akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button#accept-essential-kekse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

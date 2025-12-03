@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_interhyp.de_olf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.interhyp.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?interhyp\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2):not([id]) > article:nth-child(2)#modal-content-id > div:nth-child(3):not([id]) > button:nth-child(2)#cm-btnRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2):not([id]) > article:nth-child(2)#modal-content-id > div:nth-child(3):not([id]) > button:nth-child(2)#cm-btnRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2):not([id]) > article:nth-child(2)#modal-content-id > div:nth-child(3):not([id]) > button:nth-child(2)#cm-btnRejectAll",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2):not([id]) > article:nth-child(2)#modal-content-id > div:nth-child(3):not([id]) > button:nth-child(2)#cm-btnRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

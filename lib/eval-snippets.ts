@@ -62,6 +62,7 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
+    EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
@@ -78,7 +79,12 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
-    EVAL_COOKIE_LAW_INFO_0: () => CLI.disableAllCookies() || CLI.reject_close() || true,
+    EVAL_COOKIE_LAW_INFO_0: () => {
+        if (CLI.disableAllCookies) CLI.disableAllCookies();
+        if (CLI.reject_close) CLI.reject_close();
+        document.body.classList.remove('cli-barmodal-open');
+        return true;
+    },
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
@@ -137,6 +143,7 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
+    EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -151,6 +158,7 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
+    EVAL_REMARKABLE_TEST: () => !!localStorage.getItem('rmCookieConsent'),
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&

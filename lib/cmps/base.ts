@@ -1,8 +1,10 @@
-import { AutoCMP, DomActionsProvider } from '../types';
+import { AutoCMP, DomActionsProvider, PopupData } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
+import { highlightNode, isElementVisible, isTopFrame, unhighlightNode } from '../utils';
+import { getActionablePopups } from '../heuristics';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -19,7 +21,7 @@ export const defaultRunContext: RunContext = {
 };
 
 export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
-    name: string;
+    name: string = 'BASERULE';
     runContext: RunContext = defaultRunContext;
     autoconsent: AutoConsent;
 
@@ -42,7 +44,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     mainWorldEval(snippetId: keyof typeof snippets): Promise<boolean> {
         const snippet = snippets[snippetId];
         if (!snippet) {
-            console.warn('Snippet not found', snippetId);
+            this.autoconsent.config.logs.errors && console.warn('Snippet not found', snippetId);
             return Promise.resolve(false);
         }
         const logsConfig = this.autoconsent.config.logs;
@@ -68,12 +70,20 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     checkRunContext(): boolean {
+        if (!this.checkFrameContext(isTopFrame())) {
+            return false;
+        }
+        if (this.runContext.urlPattern && !this.hasMatchingUrlPattern()) {
+            return false;
+        }
+        return true;
+    }
+
+    checkFrameContext(isTop: boolean): boolean {
         const runCtx: RunContext = {
             ...defaultRunContext,
             ...this.runContext,
         };
-
-        const isTop = window.top === window;
 
         if (isTop && !runCtx.main) {
             return false;
@@ -82,11 +92,11 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         if (!isTop && !runCtx.frame) {
             return false;
         }
-
-        if (runCtx.urlPattern && !window.location.href.match(runCtx.urlPattern)) {
-            return false;
-        }
         return true;
+    }
+
+    hasMatchingUrlPattern(): boolean {
+        return Boolean(this.runContext?.urlPattern && window.location.href.match(this.runContext.urlPattern));
     }
 
     detectCmp(): Promise<boolean> {
@@ -114,8 +124,43 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return Promise.resolve(true);
     }
 
+    async highlightElements(elements: HTMLElement[], all = false, delayTimeout = 2000) {
+        if (elements.length === 0) {
+            return;
+        }
+        if (!all) {
+            elements = [elements[0]];
+        }
+
+        this.autoconsent.sendContentMessage({
+            type: 'visualDelay',
+            timeout: delayTimeout,
+        });
+
+        for (const el of elements) {
+            this.autoconsent.config.logs.rulesteps && console.log('highlighting', el);
+            highlightNode(el);
+        }
+        await this.wait(delayTimeout);
+        for (const el of elements) {
+            unhighlightNode(el);
+        }
+    }
+
     // Implementing DomActionsProvider below:
-    click(selector: ElementSelector, all = false) {
+    async clickElement(element: HTMLElement): Promise<boolean> {
+        if (this.autoconsent.config.visualTest) {
+            await this.highlightElements([element]);
+        }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
+        return this.autoconsent.domActions.clickElement(element);
+    }
+
+    async click(selector: ElementSelector, all = false) {
+        if (this.autoconsent.config.visualTest) {
+            await this.highlightElements(this.elementSelector(selector), all);
+        }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
         return this.autoconsent.domActions.click(selector, all);
     }
 
@@ -123,7 +168,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.elementExists(selector);
     }
 
-    elementVisible(selector: ElementSelector, check: VisibilityCheck) {
+    elementVisible(selector: ElementSelector, check?: VisibilityCheck) {
         return this.autoconsent.domActions.elementVisible(selector, check);
     }
 
@@ -135,7 +180,11 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.waitForVisible(selector, timeout, check);
     }
 
-    waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+    async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+        if (this.autoconsent.config.visualTest) {
+            await this.highlightElements(this.elementSelector(selector), all);
+        }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
         return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
     }
 
@@ -143,7 +192,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.wait(ms);
     }
 
-    hide(selector: string, method: HideMethod) {
+    hide(selector: string, method?: HideMethod) {
         return this.autoconsent.domActions.hide(selector, method);
     }
 
@@ -170,6 +219,10 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     elementSelector(selector: ElementSelector) {
         return this.autoconsent.domActions.elementSelector(selector);
     }
+
+    waitForMutation(selector: ElementSelector) {
+        return this.autoconsent.domActions.waitForMutation(selector);
+    }
 }
 
 export class AutoConsentCMP extends AutoConsentCMPBase {
@@ -183,7 +236,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     get hasSelfTest(): boolean {
-        return !!this.rule.test;
+        return !!this.rule.test && this.rule.test.length > 0;
     }
 
     get isIntermediate(): boolean {
@@ -195,19 +248,19 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     get prehideSelectors(): string[] {
-        return this.rule.prehideSelectors;
+        return this.rule.prehideSelectors || [];
     }
 
     async detectCmp() {
         if (this.rule.detectCmp) {
-            return this._runRulesParallel(this.rule.detectCmp);
+            return this._runRulesSequentially(this.rule.detectCmp, this.autoconsent.config.logs.detectionsteps);
         }
         return false;
     }
 
     async detectPopup() {
         if (this.rule.detectPopup) {
-            return this._runRulesSequentially(this.rule.detectPopup);
+            return this._runRulesSequentially(this.rule.detectPopup, this.autoconsent.config.logs.detectionsteps);
         }
         return false;
     }
@@ -216,7 +269,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         const logsConfig = this.autoconsent.config.logs;
         if (this.rule.optOut) {
             logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut);
-            return this._runRulesSequentially(this.rule.optOut);
+            return this._runRulesSequentially(this.rule.optOut, this.autoconsent.config.logs.rulesteps);
         }
         return false;
     }
@@ -225,21 +278,21 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         const logsConfig = this.autoconsent.config.logs;
         if (this.rule.optIn) {
             logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn);
-            return this._runRulesSequentially(this.rule.optIn);
+            return this._runRulesSequentially(this.rule.optIn, this.autoconsent.config.logs.rulesteps);
         }
         return false;
     }
 
     async openCmp() {
         if (this.rule.openCmp) {
-            return this._runRulesSequentially(this.rule.openCmp);
+            return this._runRulesSequentially(this.rule.openCmp, this.autoconsent.config.logs.rulesteps);
         }
         return false;
     }
 
     async test() {
-        if (this.hasSelfTest) {
-            return this._runRulesSequentially(this.rule.test);
+        if (this.hasSelfTest && this.rule.test) {
+            return this._runRulesSequentially(this.rule.test, this.autoconsent.config.logs.rulesteps);
         }
         return super.test();
     }
@@ -283,12 +336,16 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
                 console.error('invalid conditional rule', rule.if);
                 return false;
             }
+            if (!rule.then) {
+                console.error('invalid conditional rule, missing "then" step', rule.if);
+                return false;
+            }
             const condition = await this.evaluateRuleStep(rule.if);
             logsConfig.rulesteps && console.log('Condition is', condition);
             if (condition) {
-                results.push(this._runRulesSequentially(rule.then));
+                results.push(this._runRulesSequentially(rule.then, logsConfig.rulesteps));
             } else if (rule.else) {
-                results.push(this._runRulesSequentially(rule.else));
+                results.push(this._runRulesSequentially(rule.else, logsConfig.rulesteps));
             } else {
                 results.push(true);
             }
@@ -326,12 +383,11 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         return detections.every((r) => !!r);
     }
 
-    async _runRulesSequentially(rules: AutoConsentRuleStep[]): Promise<boolean> {
-        const logsConfig = this.autoconsent.config.logs;
+    async _runRulesSequentially(rules: AutoConsentRuleStep[], logSteps = true): Promise<boolean> {
         for (const rule of rules) {
-            logsConfig.rulesteps && console.log('Running rule...', rule);
+            logSteps && console.log('Running rule...', rule);
             const result = await this.evaluateRuleStep(rule);
-            logsConfig.rulesteps && console.log('...rule result', result);
+            logSteps && console.log('...rule result', result);
             if (!result && !rule.optional) {
                 this.autoconsent.sendContentMessage({
                     type: 'autoconsentError',
@@ -344,5 +400,74 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             }
         }
         return true;
+    }
+}
+
+export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
+    popups: PopupData[] = [];
+
+    constructor(autoconsentInstance: AutoConsent) {
+        super(autoconsentInstance);
+        this.name = 'HEURISTIC';
+        this.runContext = {
+            main: true,
+            frame: false, // do not run in iframes for security reasons
+        } as RunContext;
+    }
+
+    get hasSelfTest(): boolean {
+        return true;
+    }
+
+    get isIntermediate(): boolean {
+        return false;
+    }
+
+    get isCosmetic(): boolean {
+        return false;
+    }
+
+    detectCmp(): Promise<boolean> {
+        this.popups = getActionablePopups();
+        if (this.popups.length > 0) {
+            return Promise.resolve(true);
+        }
+        return Promise.resolve(false);
+    }
+
+    async detectPopup() {
+        if (this.popups.length > 0) {
+            if (this.popups.length > 1 || (this.popups[0].rejectButtons && this.popups[0].rejectButtons.length > 1)) {
+                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple reject buttons');
+            }
+            return true;
+        }
+        return false;
+    }
+
+    optOut(): Promise<boolean> {
+        // use only the first found popup candidate
+        const button = this.popups[0]?.rejectButtons?.[0];
+        if (button) {
+            return this.clickElement(button.element);
+        }
+        return Promise.resolve(false);
+    }
+
+    optIn(): Promise<boolean> {
+        throw new Error('Not Implemented');
+    }
+
+    openCmp(): Promise<boolean> {
+        throw new Error('Not Implemented');
+    }
+
+    async test(): Promise<boolean> {
+        const button = this.popups[0].rejectButtons?.[0];
+        if (button) {
+            await this.wait(500);
+            return !isElementVisible(button.element);
+        }
+        return false;
     }
 }

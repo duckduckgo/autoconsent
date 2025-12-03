@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_watch.plex.tv_esx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://watch.plex.tv/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?watch\\.plex\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]",
+            "comment": "I Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > section:nth-child(7):not([id])[data-testid=\"cookieBar\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])[data-testid=\"cookieBarRejectButton\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

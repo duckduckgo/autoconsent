@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_audacityteam.org_oth",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.audacityteam.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?audacityteam\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > astro-island:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > astro-island:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > astro-island:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > astro-island:not([id]) > div#consent-popup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

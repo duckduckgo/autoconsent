@@ -7,15 +7,23 @@
     "optOut": [
         {
             "if": {
-                "exists": "#moove_gdpr_cookie_info_bar .change-settings-button"
+                "exists": ".moove-gdpr-infobar-reject-btn"
             },
-            "then": [
-                { "click": "#moove_gdpr_cookie_info_bar .change-settings-button" },
-                { "waitForVisible": "#moove_gdpr_cookie_modal" },
-                { "eval": "EVAL_MOOVE_0" },
-                { "click": ".moove-gdpr-modal-save-settings" }
-            ],
-            "else": [{ "hide": "#moove_gdpr_cookie_info_bar" }]
+            "then": [{ "click": ".moove-gdpr-infobar-reject-btn" }],
+            "else": [
+                {
+                    "if": {
+                        "exists": "#moove_gdpr_cookie_info_bar .change-settings-button"
+                    },
+                    "then": [
+                        { "click": "#moove_gdpr_cookie_info_bar .change-settings-button" },
+                        { "waitForVisible": "#moove_gdpr_cookie_modal" },
+                        { "eval": "EVAL_MOOVE_0" },
+                        { "click": ".moove-gdpr-modal-save-settings" }
+                    ],
+                    "else": [{ "hide": "#moove_gdpr_cookie_info_bar" }]
+                }
+            ]
         }
     ],
     "test": [{ "visible": "#moove_gdpr_cookie_info_bar", "check": "none" }]

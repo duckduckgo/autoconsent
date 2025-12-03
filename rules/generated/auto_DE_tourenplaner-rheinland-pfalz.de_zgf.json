@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_tourenplaner-rheinland-pfalz.de_zgf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tourenplaner-rheinland-pfalz.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tourenplaner-rheinland-pfalz\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Necessary cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

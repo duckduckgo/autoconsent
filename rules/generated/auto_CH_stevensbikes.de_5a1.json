@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_stevensbikes.de_5a1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.stevensbikes.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stevensbikes\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-0 > div:nth-child(3):not([id]) > section#cookiesettings > div:not([id]) > form:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-0 > div:nth-child(3):not([id]) > section#cookiesettings > div:not([id]) > form:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-0 > div:nth-child(3):not([id]) > section#cookiesettings > div:not([id]) > form:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Necessary only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-0 > div:nth-child(3):not([id]) > section#cookiesettings > div:not([id]) > form:not([id]) > div:nth-child(6):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

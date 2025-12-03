@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_mindfactory.de_me9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mindfactory.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mindfactory\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

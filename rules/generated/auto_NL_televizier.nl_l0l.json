@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_televizier.nl_l0l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.televizier.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?voorkeuren\\.tvgids\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-consent-deny-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-consent-deny-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-consent-deny-all",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-consent-deny-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

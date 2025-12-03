@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_jobvector.de_641",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jobvector.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jobvector\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ddt-M1 > div:not([id]) > div:nth-child(1)#ddt-Seite1 > div:nth-child(2)#ddt-sectionFirst > p:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ddt-M1 > div:not([id]) > div:nth-child(1)#ddt-Seite1 > div:nth-child(2)#ddt-sectionFirst > p:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ddt-M1 > div:not([id]) > div:nth-child(1)#ddt-Seite1 > div:nth-child(2)#ddt-sectionFirst > p:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "comment": "fortfahren ohne zu akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ddt-M1 > div:not([id]) > div:nth-child(1)#ddt-Seite1 > div:nth-child(2)#ddt-sectionFirst > p:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

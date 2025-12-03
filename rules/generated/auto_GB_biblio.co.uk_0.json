@@ -1,0 +1,37 @@
+{
+    "name": "auto_GB_biblio.co.uk_0",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?biblio\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn",
+            "comment": "REQUIRED COOKIES ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#eu-cookie-disclaimer > div:not([id]) > form#new-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#required-only-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

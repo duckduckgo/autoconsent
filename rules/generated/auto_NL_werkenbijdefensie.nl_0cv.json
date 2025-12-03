@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_werkenbijdefensie.nl_0cv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://werkenbijdefensie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?werkenbijdefensie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(2)#cookie_settings_disallowed"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(2)#cookie_settings_disallowed"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(2)#cookie_settings_disallowed",
+            "comment": "Alleen noodzakelijke"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > form:not([id]) > button:nth-child(2)#cookie_settings_disallowed",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

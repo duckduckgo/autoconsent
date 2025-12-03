@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_annaziekenhuis.nl_gz7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.annaziekenhuis.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?annaziekenhuis\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookie-card > div:nth-child(3):not([id]) > a:nth-child(3)#cookies-no"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookie-card > div:nth-child(3):not([id]) > a:nth-child(3)#cookies-no"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookie-card > div:nth-child(3):not([id]) > a:nth-child(3)#cookies-no",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookie-card > div:nth-child(3):not([id]) > a:nth-child(3)#cookies-no",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

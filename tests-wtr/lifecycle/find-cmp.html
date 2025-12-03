@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./find-cmp');
+            });
+        </script>
+        <input type="text" id="pre-focused-input" />
+        <p id="privacy-test-page-cmp-test">
+            This is a fake consent popup:
+            <input type="text" id="popup-input" />
+            <button id="reject-all">Reject all</button>
+            <button id="accept-all">Accept all</button>
+        </p>
+        <div id="heuristic-popup" style="position: fixed; top: 0; left: 0; width: 300px; height: 200px; background: white">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+    </body>
+</html>

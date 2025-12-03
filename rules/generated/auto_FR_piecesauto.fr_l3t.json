@@ -1,0 +1,41 @@
+{
+    "name": "auto_FR_piecesauto.fr_l3t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.piecesauto.fr/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?piecesauto\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-popup-close=\"\"][data-cookies=\"disallow_all_cookies\"][data-cookies-refuse=\"\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

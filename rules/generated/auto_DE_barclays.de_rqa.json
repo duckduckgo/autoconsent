@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_barclays.de_rqa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.barclays.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?barclays\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bcConsentWrapper > div:nth-child(2)#bcConsentDialog > div:not([id]) > div:not([id]) > div:nth-child(4)#bcStickyFooter > div:nth-child(1)#bcFooterButtons > button:nth-child(1)#bcConsentAblehnen"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bcConsentWrapper > div:nth-child(2)#bcConsentDialog > div:not([id]) > div:not([id]) > div:nth-child(4)#bcStickyFooter > div:nth-child(1)#bcFooterButtons > button:nth-child(1)#bcConsentAblehnen"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bcConsentWrapper > div:nth-child(2)#bcConsentDialog > div:not([id]) > div:not([id]) > div:nth-child(4)#bcStickyFooter > div:nth-child(1)#bcFooterButtons > button:nth-child(1)#bcConsentAblehnen",
+            "comment": "Optionale Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bcConsentWrapper > div:nth-child(2)#bcConsentDialog > div:not([id]) > div:not([id]) > div:nth-child(4)#bcStickyFooter > div:nth-child(1)#bcFooterButtons > button:nth-child(1)#bcConsentAblehnen",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

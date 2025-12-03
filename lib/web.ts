@@ -1,17 +1,16 @@
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
 import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
-import { AutoConsentCMPRule } from './rules';
+import { AutoConsentCMPRule, SUPPORTED_RULE_STEP_VERSION } from './rules';
 import { BackgroundMessage, InitMessage } from './messages';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
-import { AutoConsentCMP } from './cmps/base';
+import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { normalizeConfig, scheduleWhenIdle } from './utils';
-import { deserializeFilterList, getCosmeticStylesheet, getFilterlistSelectors } from './filterlist-utils';
+import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
-import serializedEngine from './filterlist-engine';
 import { checkHeuristicPatterns } from './heuristics';
+import { decodeRules } from './encoding';
 
 export { snippets as evalSnippets } from './eval-snippets';
 
@@ -19,7 +18,8 @@ function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
         return (
             (!config.disabledCmps || !config.disabledCmps.includes(cmp.name)) && // CMP is not disabled
-            (config.enableCosmeticRules || !cmp.isCosmetic) // CMP is not cosmetic or cosmetic rules are enabled
+            (config.enableCosmeticRules || !cmp.isCosmetic) && // CMP is not cosmetic or cosmetic rules are enabled
+            (config.enableGeneratedRules || !cmp.name.startsWith('auto_')) // CMP is not generated or generated rules are enabled
         );
     });
 }
@@ -27,8 +27,8 @@ function filterCMPs(rules: AutoCMP[], config: Config) {
 export default class AutoConsent {
     id = getRandomID();
     rules: AutoCMP[] = [];
-    config: Config;
-    foundCmp: AutoCMP = null;
+    #config?: Config;
+    foundCmp?: AutoCMP;
     state: ConsentState = {
         cosmeticFiltersOn: false,
         filterListReported: false,
@@ -40,13 +40,17 @@ export default class AutoConsent {
         heuristicPatterns: [],
         heuristicSnippets: [],
         selfTest: null,
+        clicks: 0,
+        startTime: 0,
+        endTime: 0,
     };
     domActions: DomActions;
-    filtersEngine: FiltersEngine;
+    filtersEngine?: FiltersEngine;
     sendContentMessage: MessageSender;
-    protected cosmeticStyleSheet: CSSStyleSheet;
+    protected cosmeticStyleSheet?: CSSStyleSheet;
+    protected focusedElement?: HTMLElement;
 
-    constructor(sendContentMessage: MessageSender, config: Partial<Config> = null, declarativeRules: RuleBundle = null) {
+    constructor(sendContentMessage: MessageSender, config: Partial<Config> | null = null, declarativeRules: RuleBundle | null = null) {
         evalState.sendContentMessage = sendContentMessage;
         this.sendContentMessage = sendContentMessage;
         this.rules = [];
@@ -70,10 +74,17 @@ export default class AutoConsent {
         this.domActions = new DomActions(this);
     }
 
-    initialize(config: Partial<Config>, declarativeRules: RuleBundle) {
+    get config() {
+        if (!this.#config) {
+            throw new Error('AutoConsent is not initialized yet');
+        }
+        return this.#config;
+    }
+
+    initialize(config: Partial<Config>, declarativeRules: RuleBundle | null) {
         const normalizedConfig = normalizeConfig(config);
         normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
-        this.config = normalizedConfig;
+        this.#config = normalizedConfig;
         if (!normalizedConfig.enabled) {
             normalizedConfig.logs.lifecycle && console.log('autoconsent is disabled');
             return;
@@ -84,25 +95,12 @@ export default class AutoConsent {
         }
 
         if (config.enableFilterList) {
-            try {
-                if (BUNDLE_FILTERLIST && serializedEngine && serializedEngine.length > 0) {
-                    this.filtersEngine = deserializeFilterList(serializedEngine);
-                }
-            } catch (e) {
-                console.error('Error parsing filter list', e);
-            }
-            if (document.readyState === 'loading') {
-                window.addEventListener('DOMContentLoaded', () => {
-                    this.applyCosmeticFilters();
-                });
-            } else {
-                this.applyCosmeticFilters();
-            }
+            this.initializeFilterList();
         }
 
         this.rules = filterCMPs(this.rules, normalizedConfig);
 
-        if (config.enablePrehide) {
+        if (this.shouldPrehide) {
             if (document.documentElement) {
                 this.prehideElements(); // prehide as early as possible to prevent flickering
             } else {
@@ -128,6 +126,33 @@ export default class AutoConsent {
         this.updateState({ lifecycle: 'initialized' });
     }
 
+    initializeFilterList() {
+        // no-op by default
+    }
+
+    get shouldPrehide() {
+        return this.config.enablePrehide && !this.config.visualTest;
+    }
+
+    saveFocus() {
+        this.focusedElement = document.activeElement as HTMLElement;
+        if (this.focusedElement) {
+            this.config.logs.lifecycle && console.log('saving focus', this.focusedElement, location.href);
+        }
+    }
+
+    restoreFocus() {
+        if (this.focusedElement) {
+            this.config.logs.lifecycle && console.log('restoring focus', this.focusedElement, location.href);
+            try {
+                this.focusedElement.focus({ preventScroll: true }); // preventScroll doesn't work on Android https://issues.chromium.org/issues/41453122
+            } catch (e) {
+                this.config.logs.errors && console.warn('error restoring focus', e);
+            }
+            this.focusedElement = undefined;
+        }
+    }
+
     addDynamicRules() {
         dynamicCMPs.forEach((Cmp) => {
             this.rules.push(new Cmp(this));
@@ -136,9 +161,9 @@ export default class AutoConsent {
 
     parseDeclarativeRules(declarativeRules: RuleBundle) {
         if (declarativeRules.consentomatic) {
-            Object.keys(declarativeRules.consentomatic).forEach((name) => {
-                this.addConsentomaticCMP(name, declarativeRules.consentomatic[name]);
-            });
+            for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
+                this.addConsentomaticCMP(name, rule);
+            }
         }
 
         if (declarativeRules.autoconsent) {
@@ -146,10 +171,22 @@ export default class AutoConsent {
                 this.addDeclarativeCMP(ruleset);
             });
         }
+
+        if (declarativeRules.compact) {
+            try {
+                const rules = decodeRules(declarativeRules.compact);
+                rules.forEach(this.addDeclarativeCMP.bind(this));
+            } catch (e) {
+                this.config.logs.errors && console.error(e);
+            }
+        }
     }
 
     addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
-        this.rules.push(new AutoConsentCMP(ruleset, this));
+        // Filter out any rules that need newer step/eval support
+        if ((ruleset.minimumRuleStepVersion || 1) <= SUPPORTED_RULE_STEP_VERSION) {
+            this.rules.push(new AutoConsentCMP(ruleset, this));
+        }
     }
 
     addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
@@ -169,7 +206,7 @@ export default class AutoConsent {
         this.updateState({ detectedCmps: foundCmps.map((c) => c.name) });
         if (foundCmps.length === 0) {
             logsConfig.lifecycle && console.log('no CMP found', location.href);
-            if (this.config.enablePrehide) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
 
@@ -203,7 +240,7 @@ export default class AutoConsent {
 
         if (foundPopups.length === 0) {
             logsConfig.lifecycle && console.log('no popup found');
-            if (this.config.enablePrehide) {
+            if (this.shouldPrehide) {
                 this.undoPrehide();
             }
             return false;
@@ -228,12 +265,33 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
+        const isTop = isTopFrame();
 
-        for (const cmp of this.rules) {
-            try {
-                if (!cmp.checkRunContext()) {
-                    continue;
+        // refilter relevant rules for this context
+        const siteSpecificRules: AutoCMP[] = [];
+        const genericRules: AutoCMP[] = [];
+        this.rules.forEach((cmp) => {
+            // first filter out rules that don't run in this frame-type.
+            if (cmp.checkFrameContext(isTop)) {
+                // Pull out any rule that has a urlPattern that matches here to be prioritized.
+                const isSiteSpecific = !!cmp.runContext.urlPattern;
+                if (cmp.hasMatchingUrlPattern()) {
+                    siteSpecificRules.push(cmp);
+                } else if (!isSiteSpecific) {
+                    genericRules.push(cmp);
                 }
+            }
+        });
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
+        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
+
+        const rulesPriorityStages: [string, AutoCMP[]][] = [
+            ['site-specific', siteSpecificRules],
+            ['generic', genericRules],
+            ['heuristic', heuristicRules],
+        ];
+        const runDetectCmp = async (cmp: AutoCMP) => {
+            try {
                 const result = await cmp.detectCmp();
                 if (result) {
                     logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
@@ -254,12 +312,39 @@ export default class AutoConsent {
                     },
                 });
             }
+        };
+
+        const mutationObserver = this.domActions.waitForMutation('html');
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
+
+        for (const [stageName, ruleGroup] of rulesPriorityStages) {
+            logsConfig.lifecycle &&
+                ruleGroup.length > 0 &&
+                console.log(
+                    `Trying ${stageName} rules`,
+                    ruleGroup.map((r) => r.name),
+                );
+            await Promise.all(ruleGroup.map(runDetectCmp));
+
+            // exit early if we already found a CMP
+            if (foundCMPs.length > 0) {
+                break;
+            }
         }
 
-        this.detectHeuristics();
+        this.detectHeuristics(); // run heuristics after trying rules
 
         if (foundCMPs.length === 0 && retries > 0) {
-            await this.domActions.wait(500);
+            // if we didn't find a CMP, try again
+            // We wait 500ms, and also for some kind of dom mutation to happen before
+            // rerunning the findCmp check
+            try {
+                await Promise.all([this.domActions.wait(500), mutationObserver]);
+            } catch (e) {
+                // timeout waiting for mutation - break out of detection
+                return [];
+            }
+
             return this.findCmp(retries - 1);
         }
 
@@ -268,7 +353,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
-            const { patterns, snippets } = checkHeuristicPatterns();
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
@@ -326,8 +411,8 @@ export default class AutoConsent {
     }
 
     async handlePopup(cmp: AutoCMP): Promise<boolean> {
-        this.updateState({ lifecycle: 'openPopupDetected' });
-        if (this.config.enablePrehide && !this.state.prehideOn) {
+        this.updateState({ lifecycle: 'openPopupDetected', startTime: Date.now() });
+        if (this.shouldPrehide && !this.state.prehideOn) {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
@@ -351,6 +436,8 @@ export default class AutoConsent {
     async doOptOut(): Promise<boolean> {
         const logsConfig = this.config.logs;
         this.updateState({ lifecycle: 'runningOptOut' });
+        this.saveFocus();
+
         let optOutResult;
         if (!this.foundCmp) {
             logsConfig.errors && console.log('no CMP to opt out');
@@ -361,7 +448,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt out result ${optOutResult}`);
         }
 
-        if (this.config.enablePrehide) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -369,28 +456,38 @@ export default class AutoConsent {
             type: 'optOutResult',
             cmp: this.foundCmp ? this.foundCmp.name : 'none',
             result: optOutResult,
-            scheduleSelfTest: this.foundCmp && this.foundCmp.hasSelfTest,
+            scheduleSelfTest: Boolean(this.foundCmp && this.foundCmp.hasSelfTest),
             url: location.href,
         });
 
-        if (optOutResult && !this.foundCmp.isIntermediate) {
+        if (optOutResult && this.foundCmp && !this.foundCmp.isIntermediate) {
+            this.state.endTime = Date.now();
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
-                cmp: this.foundCmp.name,
-                isCosmetic: this.foundCmp.isCosmetic,
+                cmp: this.foundCmp?.name,
+                isCosmetic: this.foundCmp?.isCosmetic,
                 url: location.href,
+                duration: this.state.endTime - this.state.startTime,
+                totalClicks: this.state.clicks,
             });
             this.updateState({ lifecycle: 'done' });
         } else {
             this.updateState({ lifecycle: optOutResult ? 'optOutSucceeded' : 'optOutFailed' });
         }
 
+        this.restoreFocus();
         return optOutResult;
     }
 
     async doOptIn(): Promise<boolean> {
         const logsConfig = this.config.logs;
         this.updateState({ lifecycle: 'runningOptIn' });
+        this.saveFocus();
+
         let optInResult;
         if (!this.foundCmp) {
             logsConfig.errors && console.log('no CMP to opt in');
@@ -401,7 +498,7 @@ export default class AutoConsent {
             logsConfig.lifecycle && console.log(`${this.foundCmp.name}: opt in result ${optInResult}`);
         }
 
-        if (this.config.enablePrehide) {
+        if (this.shouldPrehide) {
             this.undoPrehide();
         }
 
@@ -413,18 +510,26 @@ export default class AutoConsent {
             url: location.href,
         });
 
-        if (optInResult && !this.foundCmp.isIntermediate) {
+        if (optInResult && this.foundCmp && !this.foundCmp.isIntermediate) {
+            this.state.endTime = Date.now();
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp.name,
                 isCosmetic: this.foundCmp.isCosmetic,
                 url: location.href,
+                duration: this.state.endTime - this.state.startTime,
+                totalClicks: this.state.clicks,
             });
             this.updateState({ lifecycle: 'done' });
         } else {
             this.updateState({ lifecycle: optInResult ? 'optInSucceeded' : 'optInFailed' });
         }
 
+        this.restoreFocus();
         return optInResult;
     }
 
@@ -480,12 +585,12 @@ export default class AutoConsent {
 
         const selectors = this.rules
             .filter((rule) => rule.prehideSelectors && rule.checkRunContext())
-            .reduce((selectorList, rule) => [...selectorList, ...rule.prehideSelectors], globalHidden);
+            .reduce((selectorList, rule) => [...(selectorList || []), ...(rule.prehideSelectors || [])], globalHidden);
 
         this.updateState({ prehideOn: true });
         setTimeout(() => {
             // unhide things if we are still looking for a pop-up
-            if (this.config.enablePrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
+            if (this.shouldPrehide && this.state.prehideOn && !['runningOptOut', 'runningOptIn'].includes(this.state.lifecycle)) {
                 logsConfig.lifecycle && console.log('Process is taking too long, unhiding elements');
                 this.undoPrehide();
             }
@@ -498,50 +603,8 @@ export default class AutoConsent {
         this.domActions.undoPrehide();
     }
 
-    /**
-     * Apply cosmetic filters
-     * @returns true if the filters were applied, false otherwise
-     */
-    async applyCosmeticFilters(styles?: string) {
-        if (!this.filtersEngine) {
-            return false;
-        }
-        const logsConfig = this.config?.logs;
-        if (BUNDLE_FILTERLIST && !styles) {
-            styles = getCosmeticStylesheet(this.filtersEngine);
-        }
-
-        setTimeout(() => {
-            if (this.state.cosmeticFiltersOn && !this.state.filterListReported) {
-                // if the cosmetic filters are actually working, report the hidden popup to the background.
-                // This may still be overridden later if an autoconsent rule matches.
-                // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-                const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(styles), 'any');
-                if (cosmeticFiltersWorked) {
-                    logsConfig?.lifecycle && console.log('Prehide cosmetic filters matched', location.href);
-                    this.reportFilterlist();
-                } else {
-                    logsConfig?.lifecycle && console.log("Prehide cosmetic filters didn't match", location.href);
-                }
-            }
-        }, 2000);
-
-        this.updateState({ cosmeticFiltersOn: true });
-        try {
-            this.cosmeticStyleSheet = await this.domActions.createOrUpdateStyleSheet(styles, this.cosmeticStyleSheet);
-            logsConfig?.lifecycle && console.log('[cosmetics]', this.cosmeticStyleSheet, location.href);
-            document.adoptedStyleSheets.push(this.cosmeticStyleSheet);
-        } catch (e) {
-            this.config.logs && console.error('Error applying cosmetic filters', e);
-            return false;
-        }
-        return true;
-    }
-
     undoCosmetics() {
-        this.updateState({ cosmeticFiltersOn: false });
-        this.config.logs.lifecycle && console.log('[undocosmetics]', this.cosmeticStyleSheet, location.href);
-        this.domActions.removeStyleSheet(this.cosmeticStyleSheet);
+        // no-op by default
     }
 
     reportFilterlist() {
@@ -559,47 +622,9 @@ export default class AutoConsent {
     }
 
     filterListFallback() {
-        if (!BUNDLE_FILTERLIST || !this.filtersEngine) {
-            this.updateState({ lifecycle: 'nothingDetected' });
-            return false;
-        }
-
-        const cosmeticStyles = getCosmeticStylesheet(this.filtersEngine);
-
-        // this may be a false positive: sometimes filters hide unrelated elements that are not cookie pop-ups
-        const cosmeticFiltersWorked = this.domActions.elementVisible(getFilterlistSelectors(cosmeticStyles), 'any');
-
-        const logsConfig = this.config?.logs;
-
-        if (!cosmeticFiltersWorked) {
-            logsConfig?.lifecycle && console.log("Cosmetic filters didn't work, removing them", location.href);
-            this.undoCosmetics();
-            this.updateState({ lifecycle: 'nothingDetected' });
-            return false;
-        } else {
-            this.applyCosmeticFilters(cosmeticStyles); // do not wait for it to finish
-            logsConfig?.lifecycle && console.log('Keeping cosmetic filters', location.href);
-            this.updateState({ lifecycle: 'cosmeticFiltersDetected' });
-            if (!this.state.filterListReported) {
-                this.reportFilterlist();
-            }
-
-            this.sendContentMessage({
-                type: 'optOutResult',
-                cmp: 'filterList',
-                result: true,
-                scheduleSelfTest: false,
-                url: location.href,
-            });
-            this.updateState({ lifecycle: 'done' });
-            this.sendContentMessage({
-                type: 'autoconsentDone',
-                cmp: 'filterList',
-                isCosmetic: true,
-                url: location.href,
-            });
-            return true;
-        }
+        // no-op by default
+        this.updateState({ lifecycle: 'nothingDetected' });
+        return false;
     }
 
     updateState(change: Partial<ConsentState>) {
@@ -608,13 +633,13 @@ export default class AutoConsent {
             type: 'report',
             instanceId: this.id,
             url: window.location.href,
-            mainFrame: window.top === window.self,
+            mainFrame: isTopFrame(),
             state: this.state,
         });
     }
 
     async receiveMessageCallback(message: BackgroundMessage) {
-        const logsConfig = this.config?.logs;
+        const logsConfig = this.#config?.logs;
         if (logsConfig?.messages) {
             console.log('received from background', message, window.location.href);
         }

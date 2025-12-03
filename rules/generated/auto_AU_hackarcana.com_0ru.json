@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_hackarcana.com_0ru",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://hackarcana.com/article/yet-another-zip-trick"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hackarcana\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-bar > p:nth-child(2):not([id]) > button:nth-child(1)#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-bar > p:nth-child(2):not([id]) > button:nth-child(1)#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > p:nth-child(2):not([id]) > button:nth-child(1)#reject-all",
+            "comment": "REJECT OPTIONAL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar > p:nth-child(2):not([id]) > button:nth-child(1)#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
