@@ -7,17 +7,27 @@ export class DomActions implements DomActionsProvider {
     // eslint-disable-next-line no-useless-constructor
     constructor(public autoconsentInstance: AutoConsent) {}
 
+    async clickElement(element: HTMLElement): Promise<boolean> {
+        if (!element || !(element instanceof HTMLElement)) {
+            return false;
+        }
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[clickElement]', element);
+        element.click();
+        return true;
+    }
+
     async click(selector: ElementSelector, all = false): Promise<boolean> {
-        const elem = this.elementSelector(selector);
-        this.autoconsentInstance.config.logs.rulesteps && console.log('[click]', selector, all, elem);
-        if (elem.length > 0) {
+        const elements = this.elementSelector(selector);
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[click]', selector, all, elements);
+
+        if (elements.length > 0) {
             if (all) {
-                elem.forEach((e) => e.click());
+                elements.forEach((e) => e.click());
             } else {
-                elem[0].click();
+                elements[0].click();
             }
         }
-        return elem.length > 0;
+        return elements.length > 0;
     }
 
     elementExists(selector: ElementSelector): boolean {

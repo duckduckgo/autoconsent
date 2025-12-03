@@ -1,3 +1,62 @@
+# v14.39.0 (Tue Dec 02 2025)
+
+#### 🚀 Enhancement
+
+- Add heuristic reject mode [#1044](https://github.com/duckduckgo/autoconsent/pull/1044) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.38.0 (Thu Nov 27 2025)
+
+#### 🚀 Enhancement
+
+- Add tests for if statements in rules. [#1071](https://github.com/duckduckgo/autoconsent/pull/1071) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.37.1 (Fri Nov 21 2025)
+
+#### 🐛 Bug Fix
+
+- Explicitly set write permission in the release job [#1089](https://github.com/duckduckgo/autoconsent/pull/1089) ([@muodov](https://github.com/muodov))
+- Fix github release workflow [#1088](https://github.com/duckduckgo/autoconsent/pull/1088) ([@muodov](https://github.com/muodov))
+- Fix popup detection on amazon.com [#1087](https://github.com/duckduckgo/autoconsent/pull/1087) ([@muodov](https://github.com/muodov))
+- Use trusted publishers for npm release [#1086](https://github.com/duckduckgo/autoconsent/pull/1086) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.37.0 (Wed Nov 19 2025)
+
+#### 🚀 Enhancement
+
+- Bump the dev-dependencies group across 1 directory with 8 updates [#1085](https://github.com/duckduckgo/autoconsent/pull/1085) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Use MV3 for Firefox extension [#1080](https://github.com/duckduckgo/autoconsent/pull/1080) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.17 to 7.0.18 [#1084](https://github.com/duckduckgo/autoconsent/pull/1084) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.36.0 (Thu Nov 06 2025)
 
 #### 🚀 Enhancement
