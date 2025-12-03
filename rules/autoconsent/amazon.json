@@ -3,7 +3,9 @@
     "vendorUrl": "https://amazon.com/",
     "prehideSelectors": ["#sp-cc-wrapper,[data-action=sp-cc],span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]"],
     "detectCmp": [{ "exists": "#sp-cc-wrapper,[data-action=sp-cc],span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]" }],
-    "detectPopup": [{ "visible": "#sp-cc-wrapper,[data-action=sp-cc],span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]" }],
+    "detectPopup": [
+        { "visible": "#sp-cc-wrapper *,[data-action=sp-cc],span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]", "check": "any" }
+    ],
     "optIn": [{ "waitForVisible": "#sp-cc-accept" }, { "wait": 5000 }, { "click": "#sp-cc-accept" }],
     "optOut": [{ "waitForVisible": "#sp-cc-rejectall-link" }, { "wait": 5000 }, { "click": "#sp-cc-rejectall-link" }]
 }

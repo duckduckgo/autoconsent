@@ -1,9 +1,10 @@
-import { AutoCMP, DomActionsProvider } from '../types';
+import { AutoCMP, DomActionsProvider, PopupData } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
-import { highlightNode, unhighlightNode } from '../utils';
+import { highlightNode, isElementVisible, isTopFrame, unhighlightNode } from '../utils';
+import { getActionablePopups } from '../heuristics';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -69,7 +70,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     checkRunContext(): boolean {
-        if (!this.checkFrameContext(window.top === window)) {
+        if (!this.checkFrameContext(isTopFrame())) {
             return false;
         }
         if (this.runContext.urlPattern && !this.hasMatchingUrlPattern()) {
@@ -123,8 +124,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return Promise.resolve(true);
     }
 
-    async highlightElements(selector: ElementSelector, all = false, delayTimeout = 2000) {
-        let elements = this.elementSelector(selector);
+    async highlightElements(elements: HTMLElement[], all = false, delayTimeout = 2000) {
         if (elements.length === 0) {
             return;
         }
@@ -148,10 +148,19 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
     }
 
     // Implementing DomActionsProvider below:
+    async clickElement(element: HTMLElement): Promise<boolean> {
+        if (this.autoconsent.config.visualTest) {
+            await this.highlightElements([element]);
+        }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
+        return this.autoconsent.domActions.clickElement(element);
+    }
+
     async click(selector: ElementSelector, all = false) {
         if (this.autoconsent.config.visualTest) {
-            await this.highlightElements(selector, all);
+            await this.highlightElements(this.elementSelector(selector), all);
         }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
         return this.autoconsent.domActions.click(selector, all);
     }
 
@@ -173,8 +182,9 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
 
     async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
         if (this.autoconsent.config.visualTest) {
-            await this.highlightElements(selector, all);
+            await this.highlightElements(this.elementSelector(selector), all);
         }
+        this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
         return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
     }
 
@@ -333,9 +343,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             const condition = await this.evaluateRuleStep(rule.if);
             logsConfig.rulesteps && console.log('Condition is', condition);
             if (condition) {
-                results.push(this._runRulesSequentially(rule.then), logsConfig.rulesteps);
+                results.push(this._runRulesSequentially(rule.then, logsConfig.rulesteps));
             } else if (rule.else) {
-                results.push(this._runRulesSequentially(rule.else), logsConfig.rulesteps);
+                results.push(this._runRulesSequentially(rule.else, logsConfig.rulesteps));
             } else {
                 results.push(true);
             }
@@ -383,5 +393,74 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             }
         }
         return true;
+    }
+}
+
+export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
+    popups: PopupData[] = [];
+
+    constructor(autoconsentInstance: AutoConsent) {
+        super(autoconsentInstance);
+        this.name = 'HEURISTIC';
+        this.runContext = {
+            main: true,
+            frame: false, // do not run in iframes for security reasons
+        } as RunContext;
+    }
+
+    get hasSelfTest(): boolean {
+        return true;
+    }
+
+    get isIntermediate(): boolean {
+        return false;
+    }
+
+    get isCosmetic(): boolean {
+        return false;
+    }
+
+    detectCmp(): Promise<boolean> {
+        this.popups = getActionablePopups();
+        if (this.popups.length > 0) {
+            return Promise.resolve(true);
+        }
+        return Promise.resolve(false);
+    }
+
+    async detectPopup() {
+        if (this.popups.length > 0) {
+            if (this.popups.length > 1 || (this.popups[0].rejectButtons && this.popups[0].rejectButtons.length > 1)) {
+                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple reject buttons');
+            }
+            return true;
+        }
+        return false;
+    }
+
+    optOut(): Promise<boolean> {
+        // use only the first found popup candidate
+        const button = this.popups[0]?.rejectButtons?.[0];
+        if (button) {
+            return this.clickElement(button.element);
+        }
+        return Promise.resolve(false);
+    }
+
+    optIn(): Promise<boolean> {
+        throw new Error('Not Implemented');
+    }
+
+    openCmp(): Promise<boolean> {
+        throw new Error('Not Implemented');
+    }
+
+    async test(): Promise<boolean> {
+        const button = this.popups[0].rejectButtons?.[0];
+        if (button) {
+            await this.wait(500);
+            return !isElementVisible(button.element);
+        }
+        return false;
     }
 }

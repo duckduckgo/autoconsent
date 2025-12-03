@@ -77,6 +77,7 @@ export function normalizeConfig(providedConfig: any): Config {
         enableCosmeticRules: true,
         enableGeneratedRules: true,
         enableHeuristicDetection: false,
+        enableHeuristicAction: false,
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,
@@ -156,4 +157,8 @@ export function unhighlightNode(node: HTMLElement) {
     } else {
         node.removeAttribute('style');
     }
+}
+
+export function isTopFrame(): boolean {
+    return window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
 }

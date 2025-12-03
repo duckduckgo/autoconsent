@@ -5,9 +5,9 @@ import { BackgroundMessage, InitMessage } from './messages';
 import { evalState, resolveEval } from './eval-handler';
 import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
-import { AutoConsentCMP } from './cmps/base';
+import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { normalizeConfig, scheduleWhenIdle } from './utils';
+import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
@@ -40,6 +40,9 @@ export default class AutoConsent {
         heuristicPatterns: [],
         heuristicSnippets: [],
         selfTest: null,
+        clicks: 0,
+        startTime: 0,
+        endTime: 0,
     };
     domActions: DomActions;
     filtersEngine?: FiltersEngine;
@@ -262,11 +265,11 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
+        const isTop = isTopFrame();
 
-        const isTop = window.top === window;
         // refilter relevant rules for this context
         const siteSpecificRules: AutoCMP[] = [];
-        const otherRules: AutoCMP[] = [];
+        const genericRules: AutoCMP[] = [];
         this.rules.forEach((cmp) => {
             // first filter out rules that don't run in this frame-type.
             if (cmp.checkFrameContext(isTop)) {
@@ -275,12 +278,19 @@ export default class AutoConsent {
                 if (cmp.hasMatchingUrlPattern()) {
                     siteSpecificRules.push(cmp);
                 } else if (!isSiteSpecific) {
-                    otherRules.push(cmp);
+                    genericRules.push(cmp);
                 }
             }
         });
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
+        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
 
-        const detectCmp = async (cmp: AutoCMP) => {
+        const rulesPriorityStages: [string, AutoCMP[]][] = [
+            ['site-specific', siteSpecificRules],
+            ['generic', genericRules],
+            ['heuristic', heuristicRules],
+        ];
+        const runDetectCmp = async (cmp: AutoCMP) => {
             try {
                 const result = await cmp.detectCmp();
                 if (result) {
@@ -296,29 +306,29 @@ export default class AutoConsent {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
             }
         };
+
         const mutationObserver = this.domActions.waitForMutation('html');
         mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
-        logsConfig.lifecycle &&
-            siteSpecificRules.length > 0 &&
-            console.log(
-                'Detecting site-specific rules',
-                siteSpecificRules.map((r) => r.name),
-            );
-        // collect relevant site-specific rules and run them first
-        await Promise.all(siteSpecificRules.map(detectCmp));
+        for (const [stageName, ruleGroup] of rulesPriorityStages) {
+            logsConfig.lifecycle &&
+                ruleGroup.length > 0 &&
+                console.log(
+                    `Trying ${stageName} rules`,
+                    ruleGroup.map((r) => r.name),
+                );
+            await Promise.all(ruleGroup.map(runDetectCmp));
 
-        this.detectHeuristics();
-        // exit early if we already found a site-specific popup
-        if (foundCMPs.length > 0) {
-            return foundCMPs;
+            // exit early if we already found a CMP
+            if (foundCMPs.length > 0) {
+                break;
+            }
         }
 
-        logsConfig.lifecycle && console.log("Site-specific rules didn't match, trying generic rules");
-        // check generic popups
-        await Promise.all(otherRules.map(detectCmp));
+        this.detectHeuristics(); // run heuristics after trying rules
 
         if (foundCMPs.length === 0 && retries > 0) {
+            // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             try {
@@ -336,7 +346,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
-            const { patterns, snippets } = checkHeuristicPatterns();
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
@@ -394,7 +404,7 @@ export default class AutoConsent {
     }
 
     async handlePopup(cmp: AutoCMP): Promise<boolean> {
-        this.updateState({ lifecycle: 'openPopupDetected' });
+        this.updateState({ lifecycle: 'openPopupDetected', startTime: Date.now() });
         if (this.shouldPrehide && !this.state.prehideOn) {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
@@ -444,11 +454,18 @@ export default class AutoConsent {
         });
 
         if (optOutResult && this.foundCmp && !this.foundCmp.isIntermediate) {
+            this.state.endTime = Date.now();
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp?.name,
                 isCosmetic: this.foundCmp?.isCosmetic,
                 url: location.href,
+                duration: this.state.endTime - this.state.startTime,
+                totalClicks: this.state.clicks,
             });
             this.updateState({ lifecycle: 'done' });
         } else {
@@ -487,11 +504,18 @@ export default class AutoConsent {
         });
 
         if (optInResult && this.foundCmp && !this.foundCmp.isIntermediate) {
+            this.state.endTime = Date.now();
+            logsConfig.lifecycle &&
+                console.log(
+                    `${this.foundCmp.name}: done in ${this.state.endTime - this.state.startTime}ms with ${this.state.clicks} clicks`,
+                );
             this.sendContentMessage({
                 type: 'autoconsentDone',
                 cmp: this.foundCmp.name,
                 isCosmetic: this.foundCmp.isCosmetic,
                 url: location.href,
+                duration: this.state.endTime - this.state.startTime,
+                totalClicks: this.state.clicks,
             });
             this.updateState({ lifecycle: 'done' });
         } else {
@@ -596,7 +620,7 @@ export default class AutoConsent {
             type: 'report',
             instanceId: this.id,
             url: window.location.href,
-            mainFrame: window.top === window.self,
+            mainFrame: isTopFrame(),
             state: this.state,
         });
     }

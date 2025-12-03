@@ -25,6 +25,7 @@ export interface AutoCMP {
 
 export interface DomActionsProvider {
     click(selector: ElementSelector, all: boolean): Promise<boolean>;
+    clickElement(element: HTMLElement): Promise<boolean>;
     elementExists(selector: ElementSelector): boolean;
     elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
     waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;
@@ -60,6 +61,7 @@ export type Config = {
     prehideTimeout: number;
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
+    enableHeuristicAction: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
@@ -100,4 +102,20 @@ export type ConsentState = {
     heuristicPatterns: string[]; // Matched heuristic patterns
     heuristicSnippets: string[]; // Matched heuristic snippets
     selfTest: boolean | null; // null if no self test was run, otherwise it holds the result of the self test.
+    clicks: number; // Number of clicks the script has made.
+    startTime: number; // The time the script started.
+    endTime: number; // The time the script ended.
 };
+
+export interface ButtonData {
+    text: string;
+    element: HTMLElement;
+}
+
+export interface PopupData {
+    text: string;
+    element: HTMLElement;
+    buttons: ButtonData[];
+    rejectButtons?: ButtonData[];
+    otherButtons?: ButtonData[];
+}

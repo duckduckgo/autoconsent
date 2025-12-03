@@ -1,0 +1,42 @@
+{
+    "name": "real-cookie-banner",
+    "_metadata": {
+        "vendorUrl": "https://devowl.io/wordpress-real-cookie-banner/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["div[consent-skip-blocker=\"1\"][id][data-bg]"],
+    "detectCmp": [
+        {
+            "exists": "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button][id]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button][id]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button][id]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button]:not([id])",
+                "xpath///span[contains(., ' ohne ') or contains(., 'without')]"
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button][id]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
