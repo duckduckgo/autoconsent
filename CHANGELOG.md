@@ -1,3 +1,25 @@
+# v14.40.0 (Thu Dec 04 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1094](https://github.com/duckduckgo/autoconsent/pull/1094) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1083](https://github.com/duckduckgo/autoconsent/pull/1083) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1082](https://github.com/duckduckgo/autoconsent/pull/1082) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Bump the dev-dependencies group across 1 directory with 5 updates [#1093](https://github.com/duckduckgo/autoconsent/pull/1093) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.18 to 7.0.19 [#1091](https://github.com/duckduckgo/autoconsent/pull/1091) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the adblocker group with 2 updates [#1078](https://github.com/duckduckgo/autoconsent/pull/1078) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.39.0 (Tue Dec 02 2025)
 
 #### 🚀 Enhancement
