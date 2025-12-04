@@ -7,22 +7,44 @@
     "prehideSelectors": ["#cookieBanner #cookieBannerContent"],
     "detectCmp": [
         {
-            "exists": "#cookieBanner #cookieBannerContent"
+            "exists": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieBanner #cookieBannerContent"
+            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookieBanner [data-label=accept_all]"
+            "waitForThenClick": "#cookieBanner [data-label=accept_all], #globalCookieBanner .js-acceptGlobalCookies"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookieBanner [data-label=accept_essential]"
+            "if": {
+                "exists": "#globalCookieBanner .js-customizeGlobalCookies"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#globalCookieBanner .js-customizeGlobalCookies"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#cookieBanner [data-label=accept_essential]"
+            },
+            "then": [
+                {
+                    "click": "#cookieBanner [data-label=accept_essential]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
+                }
+            ]
         }
     ]
 }
