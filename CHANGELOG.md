@@ -1,3 +1,16 @@
+# v14.41.0 (Fri Dec 05 2025)
+
+#### 🚀 Enhancement
+
+- Support shadowDOM version of axeptio [#837](https://github.com/duckduckgo/autoconsent/pull/837) ([@muodov](https://github.com/muodov))
+- Fix pornhub rule for US [#1095](https://github.com/duckduckgo/autoconsent/pull/1095) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.40.0 (Thu Dec 04 2025)
 
 #### 🚀 Enhancement
