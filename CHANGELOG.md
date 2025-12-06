@@ -1,3 +1,18 @@
+# v14.42.0 (Sat Dec 06 2025)
+
+#### 🚀 Enhancement
+
+- Update EasyList Cookie to 22991206f866d0ce43d4e342b1ccb0a81dd3a312 [#1048](https://github.com/duckduckgo/autoconsent/pull/1048) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1096](https://github.com/duckduckgo/autoconsent/pull/1096) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.41.0 (Fri Dec 05 2025)
 
 #### 🚀 Enhancement
