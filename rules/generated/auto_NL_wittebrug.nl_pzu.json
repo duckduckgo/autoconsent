@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_wittebrug.nl_pzu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://wittebrug.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wittebrug\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
