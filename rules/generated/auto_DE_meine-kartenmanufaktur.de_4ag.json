@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_meine-kartenmanufaktur.de_4ag",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.meine-kartenmanufaktur.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?meine-kartenmanufaktur\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > p:nth-child(2):not([id]) > button:nth-child(1)#decline-all-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > p:nth-child(2):not([id]) > button:nth-child(1)#decline-all-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > p:nth-child(2):not([id]) > button:nth-child(1)#decline-all-btn",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > p:nth-child(2):not([id]) > button:nth-child(1)#decline-all-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
