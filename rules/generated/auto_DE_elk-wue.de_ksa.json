@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_elk-wue.de_ksa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.elk-wue.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?elk-wue\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tx-ekd-consentmanager > div:nth-child(1)#ekdcm_showBanner > ul:nth-child(3):not([id]) > li:nth-child(3):not([id]) > button#tx-ekd-consentmanager-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tx-ekd-consentmanager > div:nth-child(1)#ekdcm_showBanner > ul:nth-child(3):not([id]) > li:nth-child(3):not([id]) > button#tx-ekd-consentmanager-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tx-ekd-consentmanager > div:nth-child(1)#ekdcm_showBanner > ul:nth-child(3):not([id]) > li:nth-child(3):not([id]) > button#tx-ekd-consentmanager-deny",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tx-ekd-consentmanager > div:nth-child(1)#ekdcm_showBanner > ul:nth-child(3):not([id]) > li:nth-child(3):not([id]) > button#tx-ekd-consentmanager-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
