@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookieConsentDecline"
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieConsentDecline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookieConsentDecline"
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieConsentDecline"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookieConsentDecline",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieConsentDecline",
             "comment": "Weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookieConsentDecline",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#rnd27 > form:not([id]) > article:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieConsentDecline",
             "timeout": 1000,
             "check": "none"
         }
