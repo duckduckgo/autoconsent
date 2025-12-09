@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_goedkoopdrank.nl_2dl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://goedkoopdrank.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?goedkoopdrank\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentease-banner-49 > div:not([id]) > button:nth-child(3)#decline-button-49"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentease-banner-49 > div:not([id]) > button:nth-child(3)#decline-button-49"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentease-banner-49 > div:not([id]) > button:nth-child(3)#decline-button-49",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentease-banner-49 > div:not([id]) > button:nth-child(3)#decline-button-49",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
