@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_latoquedor.com_6l9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.latoquedor.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?latoquedor\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(3):not([id]) > footer#footer > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a#gdpr_refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(3):not([id]) > footer#footer > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a#gdpr_refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(3):not([id]) > footer#footer > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a#gdpr_refuse",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(3):not([id]) > footer#footer > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a#gdpr_refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
