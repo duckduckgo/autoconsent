@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_chronoshop2shop.fr_dkg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.chronoshop2shop.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chronoshop2shop\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2)#wrapper > div:nth-child(3)#c-right > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2)#wrapper > div:nth-child(3)#c-right > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2)#wrapper > div:nth-child(3)#c-right > a:nth-child(2):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2)#wrapper > div:nth-child(3)#c-right > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
