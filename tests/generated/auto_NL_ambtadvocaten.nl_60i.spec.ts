@@ -1,0 +1,6 @@
+import generateCMPTests from '../../playwright/runner';
+generateCMPTests('auto_NL_ambtadvocaten.nl_60i', ['https://www.ambtadvocaten.nl/'], {
+    testOptIn: false,
+    testSelfTest: true,
+    onlyRegions: ['NL'],
+});
