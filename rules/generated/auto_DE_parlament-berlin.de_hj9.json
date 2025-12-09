@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_parlament-berlin.de_hj9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.parlament-berlin.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?parlament-berlin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#main-app > div:nth-child(5):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(3)#cookie_consent_reject_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#main-app > div:nth-child(5):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(3)#cookie_consent_reject_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#main-app > div:nth-child(5):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(3)#cookie_consent_reject_all",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#main-app > div:nth-child(5):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(3)#cookie_consent_reject_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

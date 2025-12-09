@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_puzzleyou.de_5u5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://puzzleyou.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?puzzleyou\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layer-1765213365310 > div#cookie-policy-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookies-consent-only-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layer-1765213365310 > div#cookie-policy-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookies-consent-only-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layer-1765213365310 > div#cookie-policy-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookies-consent-only-necessary",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layer-1765213365310 > div#cookie-policy-layer > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#cookies-consent-only-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

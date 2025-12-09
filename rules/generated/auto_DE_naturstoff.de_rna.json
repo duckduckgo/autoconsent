@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_naturstoff.de_rna",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.naturstoff.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?naturstoff\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#c-cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#c-cookie-min"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#c-cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#c-cookie-min"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#c-cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#c-cookie-min",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#c-cookie-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#c-cookie-min",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

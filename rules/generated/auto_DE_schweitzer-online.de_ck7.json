@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_schweitzer-online.de_ck7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.schweitzer-online.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schweitzer-online\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent_management_popup > div:nth-child(2)#consent_management_popup__content_wrapper > div#block\\$consentManagement > div:nth-child(2):not([id]) > span:nth-child(3):not([id]) > a:nth-child(2)#id_my_form_fe5931671493f9c2 > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent_management_popup > div:nth-child(2)#consent_management_popup__content_wrapper > div#block\\$consentManagement > div:nth-child(2):not([id]) > span:nth-child(3):not([id]) > a:nth-child(2)#id_my_form_fe5931671493f9c2 > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent_management_popup > div:nth-child(2)#consent_management_popup__content_wrapper > div#block\\$consentManagement > div:nth-child(2):not([id]) > span:nth-child(3):not([id]) > a:nth-child(2)#id_my_form_fe5931671493f9c2 > span:not([id])",
+            "comment": "Notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent_management_popup > div:nth-child(2)#consent_management_popup__content_wrapper > div#block\\$consentManagement > div:nth-child(2):not([id]) > span:nth-child(3):not([id]) > a:nth-child(2)#id_my_form_fe5931671493f9c2 > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

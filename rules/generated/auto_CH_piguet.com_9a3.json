@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_piguet.com_9a3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.piguet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?piguet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject",
+            "comment": "Tout rejeter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

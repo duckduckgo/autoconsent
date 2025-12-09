@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mountains.ch_vkg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mountains.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mountains\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdrp-cookieoverlay > div:nth-child(2)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-accept-required-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdrp-cookieoverlay > div:nth-child(2)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-accept-required-banner"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdrp-cookieoverlay > div:nth-child(2)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-accept-required-banner",
+            "comment": "ACCEPT REQUIRED COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdrp-cookieoverlay > div:nth-child(2)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-accept-required-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

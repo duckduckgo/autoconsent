@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_pff.de_0qi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pff.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pff\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pageContainer > section:nth-child(5)#main > div:not([id]) > div#content > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#jsCookieConsentDialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pageContainer > section:nth-child(5)#main > div:not([id]) > div#content > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#jsCookieConsentDialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pageContainer > section:nth-child(5)#main > div:not([id]) > div#content > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#jsCookieConsentDialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pageContainer > section:nth-child(5)#main > div:not([id]) > div#content > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div#jsCookieConsentDialog > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

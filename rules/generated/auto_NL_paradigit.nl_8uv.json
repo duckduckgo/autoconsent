@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_paradigit.nl_8uv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.paradigit.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?paradigit\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:nth-child(2)#cookieBannerBody > div:nth-child(2)#CybotCookiebotDialogBodyButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:nth-child(2)#cookieBannerBody > div:nth-child(2)#CybotCookiebotDialogBodyButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:nth-child(2)#cookieBannerBody > div:nth-child(2)#CybotCookiebotDialogBodyButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:nth-child(2)#cookieBannerBody > div:nth-child(2)#CybotCookiebotDialogBodyButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

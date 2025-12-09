@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_unicef.nl_3e0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.unicef.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unicef\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#radix-_R_1daunb_ > form:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria406511362-_r_o_"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#radix-_R_1daunb_ > form:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria406511362-_r_o_"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#radix-_R_1daunb_ > form:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria406511362-_r_o_",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#radix-_R_1daunb_ > form:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria406511362-_r_o_",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

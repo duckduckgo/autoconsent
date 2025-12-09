@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_schwedentritt.ch_5y4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.schwedentritt.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schwedentritt\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dscontainer > div:nth-child(2)#dsbox > div:nth-child(4):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dscontainer > div:nth-child(2)#dsbox > div:nth-child(4):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dscontainer > div:nth-child(2)#dsbox > div:nth-child(4):not([id]) > div:nth-child(1):not([id])",
+            "comment": "Nur notwendige akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dscontainer > div:nth-child(2)#dsbox > div:nth-child(4):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,28 +1,37 @@
 {
     "name": "auto_US_truecaller.com_0",
-    "vendorUrl": "https://www.truecaller.com/",
     "cosmetic": false,
     "runContext": {
-        "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(www\\.)?truecaller\\.com/"
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cookies\\.truecaller\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id] > div > div:nth-child(1) > div > div > div > div:nth-child(2) > button:nth-child(2)"
+            "exists": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id] > div > div:nth-child(1) > div > div > div > div:nth-child(2) > button:nth-child(2)"
+            "visible": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id] > div > div:nth-child(1) > div > div > div > div:nth-child(2) > button:nth-child(2)",
-            "text": "Accept Necessary Cookies"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary",
+            "comment": "Accept Necessary Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent > div:nth-child(1)#consent-dialog > div:nth-child(2):not([id]) > button:nth-child(2)#btn-accept-necessary",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

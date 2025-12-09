@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])"
+            "exists": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(6):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])"
+            "visible": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(6):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])",
+            "waitForThenClick": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(6):not([id])",
             "comment": "Only essential"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(5):not([id])",
+            "waitForVisible": "body > div#outer-container > div:nth-child(1)#inner-container > div:nth-child(5)#zoom-win > div:nth-child(7)#cookie-consent > aside:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(6):not([id])",
             "timeout": 1000,
             "check": "none"
         }
