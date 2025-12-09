@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_vesteda.com_8ov",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vesteda.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vesteda\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "ALLES WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookiebanner > div:nth-child(1)#cookies-content > div:nth-child(3):not([id]) > a:nth-child(3)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
