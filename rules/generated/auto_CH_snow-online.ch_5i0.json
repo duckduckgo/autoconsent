@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_snow-online.ch_5i0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.snow-online.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?snow-online\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#grid > div:nth-child(28)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#grid > div:nth-child(28)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#grid > div:nth-child(28)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Nur notwendige akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#grid > div:nth-child(28)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
