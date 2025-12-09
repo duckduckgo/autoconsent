@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_schreibers.ch_35r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.schreibers.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schreibers\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#r539769-0-0 > dialog#r539770-0-0 > div:nth-child(2)#r539771-0-0 > div:nth-child(2)#r539772-0-0 > button:nth-child(2)#r539774-0-0"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#r539769-0-0 > dialog#r539770-0-0 > div:nth-child(2)#r539771-0-0 > div:nth-child(2)#r539772-0-0 > button:nth-child(2)#r539774-0-0"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#r539769-0-0 > dialog#r539770-0-0 > div:nth-child(2)#r539771-0-0 > div:nth-child(2)#r539772-0-0 > button:nth-child(2)#r539774-0-0",
+            "comment": "Nur erforderliche akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#r539769-0-0 > dialog#r539770-0-0 > div:nth-child(2)#r539771-0-0 > div:nth-child(2)#r539772-0-0 > button:nth-child(2)#r539774-0-0",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
