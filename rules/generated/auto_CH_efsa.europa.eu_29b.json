@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_efsa.europa.eu_29b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.efsa.europa.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?efsa\\.europa\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_cdb2708a-d4fa-4240-a574-20f1821f7650 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_cdb2708a-d4fa-4240-a574-20f1821f7650 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_cdb2708a-d4fa-4240-a574-20f1821f7650 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_cdb2708a-d4fa-4240-a574-20f1821f7650 > div#ppms_cm_popup_overlay > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
