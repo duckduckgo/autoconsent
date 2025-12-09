@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])",
             "comment": "Weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > dialog#r42CookieBar > section:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(4):not([id])",
             "timeout": 1000,
             "check": "none"
         }
