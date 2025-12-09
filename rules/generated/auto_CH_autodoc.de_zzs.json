@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_autodoc.de_zzs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.autodoc.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autodoc\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id])[data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-cookies=\"disallow_all_cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id])[data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-cookies=\"disallow_all_cookies\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id])[data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-cookies=\"disallow_all_cookies\"]",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id])[data-popup=\"\"][data-popup-cookies=\"\"][data-terms-cookies-popup-common=\"\"][data-popup-need-overlay=\"true\"] > div:not([id])[data-terms-cookies-popup=\"\"][data-terms-cookies-popup-common=\"\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-cookies=\"disallow_all_cookies\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
