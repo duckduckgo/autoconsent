@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_greenfieldfestival.ch_tdd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://greenfieldfestival.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?greenfieldfestival\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2)#decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2)#decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2)#decline-button",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(3)#cookie-banner > div#cookie-banner-inlay > div:nth-child(3):not([id]) > button:nth-child(2)#decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
