@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_wolky.ch_9jo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wolky.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wolky\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body.min-h-screen.__variable_b9c7ce.__variable_ebdfad > div:not([id]).pointer-events-none.fixed.inset-x-0.bottom-0.px-6.pb-6.z-50 > div:not([id]).pointer-events-auto.max-w-xl.rounded-md.bg-white.p-6.shadow-lg.ring-1.ring-custom-600\\/10 > div:nth-child(2):not([id]).mt-4.flex.items-center.justify-end.gap-x-2 > button:nth-child(1):not([id]).inline-flex.items-center.justify-center.gap-2.font-medium.transition-colors.focus-visible\\:outline-none.focus-visible\\:ring-1.focus-visible\\:ring-ring.disabled\\:pointer-events-none.disabled\\:opacity-50.\\[\\&_svg\\]\\:pointer-events-none.\\[\\&_svg\\]\\:shrink-0.rounded-3xl.border.border-purple-900.bg-transparent.text-purple-900.hover\\:bg-purple-900.hover\\:text-white.h-8.px-3.text-xs.whitespace-nowrap"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body.min-h-screen.__variable_b9c7ce.__variable_ebdfad > div:not([id]).pointer-events-none.fixed.inset-x-0.bottom-0.px-6.pb-6.z-50 > div:not([id]).pointer-events-auto.max-w-xl.rounded-md.bg-white.p-6.shadow-lg.ring-1.ring-custom-600\\/10 > div:nth-child(2):not([id]).mt-4.flex.items-center.justify-end.gap-x-2 > button:nth-child(1):not([id]).inline-flex.items-center.justify-center.gap-2.font-medium.transition-colors.focus-visible\\:outline-none.focus-visible\\:ring-1.focus-visible\\:ring-ring.disabled\\:pointer-events-none.disabled\\:opacity-50.\\[\\&_svg\\]\\:pointer-events-none.\\[\\&_svg\\]\\:shrink-0.rounded-3xl.border.border-purple-900.bg-transparent.text-purple-900.hover\\:bg-purple-900.hover\\:text-white.h-8.px-3.text-xs.whitespace-nowrap"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body.min-h-screen.__variable_b9c7ce.__variable_ebdfad > div:not([id]).pointer-events-none.fixed.inset-x-0.bottom-0.px-6.pb-6.z-50 > div:not([id]).pointer-events-auto.max-w-xl.rounded-md.bg-white.p-6.shadow-lg.ring-1.ring-custom-600\\/10 > div:nth-child(2):not([id]).mt-4.flex.items-center.justify-end.gap-x-2 > button:nth-child(1):not([id]).inline-flex.items-center.justify-center.gap-2.font-medium.transition-colors.focus-visible\\:outline-none.focus-visible\\:ring-1.focus-visible\\:ring-ring.disabled\\:pointer-events-none.disabled\\:opacity-50.\\[\\&_svg\\]\\:pointer-events-none.\\[\\&_svg\\]\\:shrink-0.rounded-3xl.border.border-purple-900.bg-transparent.text-purple-900.hover\\:bg-purple-900.hover\\:text-white.h-8.px-3.text-xs.whitespace-nowrap",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body.min-h-screen.__variable_b9c7ce.__variable_ebdfad > div:not([id]).pointer-events-none.fixed.inset-x-0.bottom-0.px-6.pb-6.z-50 > div:not([id]).pointer-events-auto.max-w-xl.rounded-md.bg-white.p-6.shadow-lg.ring-1.ring-custom-600\\/10 > div:nth-child(2):not([id]).mt-4.flex.items-center.justify-end.gap-x-2 > button:nth-child(1):not([id]).inline-flex.items-center.justify-center.gap-2.font-medium.transition-colors.focus-visible\\:outline-none.focus-visible\\:ring-1.focus-visible\\:ring-ring.disabled\\:pointer-events-none.disabled\\:opacity-50.\\[\\&_svg\\]\\:pointer-events-none.\\[\\&_svg\\]\\:shrink-0.rounded-3xl.border.border-purple-900.bg-transparent.text-purple-900.hover\\:bg-purple-900.hover\\:text-white.h-8.px-3.text-xs.whitespace-nowrap",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
