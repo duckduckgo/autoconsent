@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_smarkets.com_0",
-    "vendorUrl": "https://smarkets.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#smarkets > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#smarkets > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body#smarkets > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "REJECT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body#smarkets > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#content > div:nth-child(3)#app > div:nth-child(2)#app-content-wrapper > div#header-wrapper > div:nth-child(2)#content-wrapper > div:nth-child(2)#cookies-notice > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
