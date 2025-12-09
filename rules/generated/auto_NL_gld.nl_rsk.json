@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div:not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div#geom_inter_1765207714434_17_6 > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div:not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div#geom_inter_1765207714434_17_6 > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div:not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div#geom_inter_1765207714434_17_6 > button:nth-child(2):not([id])",
             "comment": "Alles weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div:not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#consent-plugin > div:nth-child(2)#consent-plugin-layout > div:nth-child(4)#consent-plugin-buttons-wrapper > div#consent-plugin-buttons-container > div#consent-plugin-buttons > div#geom_inter_1765207714434_17_6 > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
