@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_auraframes.com_48h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://auraframes.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auraframes\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
