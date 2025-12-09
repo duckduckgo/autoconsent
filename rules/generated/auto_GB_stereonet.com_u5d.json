@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#st-cmp-v2 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:not([id])"
+            "exists": "body > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#st-cmp-v2 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:not([id])"
+            "visible": "body > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#st-cmp-v2 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:not([id])",
-            "comment": "Reject All"
+            "waitForThenClick": "body > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "REJECT ALL"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#st-cmp-v2 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > span:not([id]) > div:not([id])",
+            "waitForVisible": "body > div#geotargetlygeoconsent1740635347323container > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
