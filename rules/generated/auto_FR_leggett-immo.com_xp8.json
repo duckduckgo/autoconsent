@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Je refuse"
+            "waitForThenClick": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline",
+            "comment": "Continuer sans accepter"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline",
             "timeout": 1000,
             "check": "none"
         }
