@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_blijkaartje.nl_yxs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.blijkaartje.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blijkaartje\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(1):not([id]) > div#js-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#js-deny-cookies-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(1):not([id]) > div#js-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#js-deny-cookies-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(1):not([id]) > div#js-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#js-deny-cookies-button",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(1):not([id]) > div#js-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#js-deny-cookies-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
