@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_aanhuis.nl_x0s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aanhuis.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aanhuis\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(3):not([id]) > a:nth-child(1)#DeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(3):not([id]) > a:nth-child(1)#DeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(3):not([id]) > a:nth-child(1)#DeclineAll",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(3):not([id]) > a:nth-child(1)#DeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
