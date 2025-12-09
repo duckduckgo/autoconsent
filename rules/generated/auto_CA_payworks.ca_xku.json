@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_payworks.ca_xku",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.payworks.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?payworks\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#content-wrapper > div:nth-child(1)#consent-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#content-wrapper > div:nth-child(1)#consent-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#content-wrapper > div:nth-child(1)#consent-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-decline-button",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#content-wrapper > div:nth-child(1)#consent-banner > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
