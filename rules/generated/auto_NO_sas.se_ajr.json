@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_sas.se_ajr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sas.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sas\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button",
+            "comment": "Neka"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
