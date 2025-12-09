@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_psyned.nl_vvu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.psyned.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?psyned\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(7):not([id]) > a:nth-child(2)#DeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(7):not([id]) > a:nth-child(2)#DeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(7):not([id]) > a:nth-child(2)#DeclineAll",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#adwise-cb > div:nth-child(1)#adwise-cb-content > div:nth-child(7):not([id]) > a:nth-child(2)#DeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
