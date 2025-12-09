@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nkon.nl_og5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nkon.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nkon\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > form:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > form:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > form:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > form:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
