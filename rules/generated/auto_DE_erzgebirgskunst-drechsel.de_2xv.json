@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_erzgebirgskunst-drechsel.de_2xv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.erzgebirgskunst-drechsel.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?erzgebirgskunst-drechsel\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cconsent-bar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(1)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cconsent-bar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(1)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cconsent-bar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(1)#decline-cookies",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cconsent-bar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:nth-child(1)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
