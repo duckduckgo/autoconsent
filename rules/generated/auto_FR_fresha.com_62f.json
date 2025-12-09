@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fresha.com_62f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fresha.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fresha\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria4846608334-\\:r5s\\:"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria4846608334-\\:r5s\\:"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria4846608334-\\:r5s\\:",
+            "comment": "Only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria4846608334-\\:r5s\\:",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
