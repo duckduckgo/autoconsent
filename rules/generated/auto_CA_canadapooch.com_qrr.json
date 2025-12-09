@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_canadapooch.com_qrr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://canadapooch.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ca\\.canadapooch\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-section-cookie-disclaimer > div:nth-child(2)#cookie-disclaimer > p:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-section-cookie-disclaimer > div:nth-child(2)#cookie-disclaimer > p:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-section-cookie-disclaimer > div:nth-child(2)#cookie-disclaimer > p:nth-child(3):not([id]) > a:not([id])",
+            "comment": "Do Not Sell or Share My Personal Information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-section-cookie-disclaimer > div:nth-child(2)#cookie-disclaimer > p:nth-child(3):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
