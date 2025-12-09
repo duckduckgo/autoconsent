@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hu.nl_lhp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hu.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hu\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div#c-wrapper > div:nth-child(3)#CybotCookiebotDialogBodyLevelButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div#c-wrapper > div:nth-child(3)#CybotCookiebotDialogBodyLevelButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div#c-wrapper > div:nth-child(3)#CybotCookiebotDialogBodyLevelButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div#c-wrapper > div:nth-child(3)#CybotCookiebotDialogBodyLevelButtons > button:nth-child(2)#CybotCookiebotDialogBodyLevelButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

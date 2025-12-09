@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_energiewacht.nl_9q7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.energiewacht.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?energiewacht\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#stTagPopup > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > div:nth-child(2)#stSettings > a#stSettingsButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#stTagPopup > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > div:nth-child(2)#stSettings > a#stSettingsButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#stTagPopup > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > div:nth-child(2)#stSettings > a#stSettingsButton",
+            "comment": "Cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#stTagPopup > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > div:nth-child(2)#stSettings > a#stSettingsButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

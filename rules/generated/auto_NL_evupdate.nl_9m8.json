@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_evupdate.nl_9m8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.evupdate.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?evupdate\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sg-cookiesBar > div:nth-child(1)#cookies-bar > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sg-cookiesBar > div:nth-child(1)#cookies-bar > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sg-cookiesBar > div:nth-child(1)#cookies-bar > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sg-cookiesBar > div:nth-child(1)#cookies-bar > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_into-led.com_m9d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.into-led.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?into-led\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(2):not([id]) > div#CookieInfoDialogContent > div:nth-child(1)#CookieInfoDialogIntro > p:not([id]) > a:nth-child(3)#CookieInfoButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(2):not([id]) > div#CookieInfoDialogContent > div:nth-child(1)#CookieInfoDialogIntro > p:not([id]) > a:nth-child(3)#CookieInfoButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(2):not([id]) > div#CookieInfoDialogContent > div:nth-child(1)#CookieInfoDialogIntro > p:not([id]) > a:nth-child(3)#CookieInfoButtonDecline",
+            "comment": "refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(2):not([id]) > div#CookieInfoDialogContent > div:nth-child(1)#CookieInfoDialogIntro > p:not([id]) > a:nth-child(3)#CookieInfoButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

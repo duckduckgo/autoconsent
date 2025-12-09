@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn"
+            "exists": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"kc-button\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn"
+            "visible": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"kc-button\"]"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn",
-            "comment": "Weigeren"
+            "waitForThenClick": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"kc-button\"]",
+            "comment": "Alleen noodzakelijke cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookieConsent > div:nth-child(3)#cookieConsent__popup > div:nth-child(2)#cookieConsent__popupContent > div:nth-child(3)#cookieConsent__popupAccept > button:nth-child(2)#cookieConsent__popupDenyBtn",
+            "waitForVisible": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"kc-button\"]",
             "timeout": 1000,
             "check": "none"
         }

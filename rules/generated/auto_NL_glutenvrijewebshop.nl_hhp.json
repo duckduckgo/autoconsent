@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_glutenvrijewebshop.nl_hhp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.glutenvrijewebshop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?glutenvrijewebshop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#silktide-wrapper > div:nth-child(3)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#silktide-wrapper > div:nth-child(3)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#silktide-wrapper > div:nth-child(3)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#silktide-wrapper > div:nth-child(3)#silktide-banner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

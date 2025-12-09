@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > div:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "exists": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > sip-cs-dynamic-component:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > div:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "visible": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > sip-cs-dynamic-component:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > div:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "waitForThenClick": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > sip-cs-dynamic-component:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > div:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "waitForVisible": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(4):not([id]) > sip-cs-dynamic-component:nth-child(6):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
             "timeout": 1000,
             "check": "none"
         }
