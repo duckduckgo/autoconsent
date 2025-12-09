@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_olympia.nl_9qw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.olympia.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?olympia\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > div:nth-child(2)#CookieInfoDialogButtonWrap > button:nth-child(1)#CookieInfoDialogDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > div:nth-child(2)#CookieInfoDialogButtonWrap > button:nth-child(1)#CookieInfoDialogDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > div:nth-child(2)#CookieInfoDialogButtonWrap > button:nth-child(1)#CookieInfoDialogDecline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieInfoDialog > div:nth-child(1)#CookieInfoDialogContainer > div:nth-child(3)#CookieInfoDialogButtons > div:nth-child(1)#CookieInfoDialogButtonsIntro > div:nth-child(2)#CookieInfoDialogButtonWrap > button:nth-child(1)#CookieInfoDialogDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
