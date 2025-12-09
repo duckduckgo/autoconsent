@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_wildkamp.nl_4b9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wildkamp.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wildkamp\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#c-right > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#c-right > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#c-right > a:nth-child(1):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#c-right > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
