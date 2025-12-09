@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bartli-socken.ch_j7f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bartli-socken.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bartli-socken\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#GcCookieBox > div#cookie-box-outer > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > p:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#GcCookieBox > div#cookie-box-outer > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > p:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#GcCookieBox > div#cookie-box-outer > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > p:nth-child(2):not([id]) > a:not([id])",
+            "comment": "NUR NOTWENDIGE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#GcCookieBox > div#cookie-box-outer > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > p:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

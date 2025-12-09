@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies"
+            "exists": "body > form#form > div:nth-child(18):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies"
+            "visible": "body > form#form > div:nth-child(18):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies",
+            "waitForThenClick": "body > form#form > div:nth-child(18):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies",
             "comment": "Reject all"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > form#form > div:nth-child(16):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies",
+            "waitForVisible": "body > form#form > div:nth-child(18):not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectAllOptionalCookies",
             "timeout": 1000,
             "check": "none"
         }

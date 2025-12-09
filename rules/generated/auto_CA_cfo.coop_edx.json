@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon"
+            "exists": "body > div#wrapwrap > div:nth-child(5)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-banner-essential"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon"
+            "visible": "body > div#wrapwrap > div:nth-child(5)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-banner-essential"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon",
-            "comment": "Je refuse"
+            "waitForThenClick": "body > div#wrapwrap > div:nth-child(5)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-banner-essential",
+            "comment": "Only essentials"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookie-alert > div:nth-child(2)#btnChoix > a:nth-child(2)#choixNon",
+            "waitForVisible": "body > div#wrapwrap > div:nth-child(5)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-banner-essential",
             "timeout": 1000,
             "check": "none"
         }

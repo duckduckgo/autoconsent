@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bielefeld.jetzt_auy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bielefeld.jetzt/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bielefeld\\.jetzt/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > main:nth-child(2)#content > footer:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > main:nth-child(2)#content > footer:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > main:nth-child(2)#content > footer:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES VERWEIGERN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > main:nth-child(2)#content > footer:nth-child(6):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2)#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

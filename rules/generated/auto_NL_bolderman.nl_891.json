@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:not([id]) > span:not([id])"
+            "exists": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:not([id]) > span:not([id])"
+            "visible": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:not([id]) > span:not([id])",
-            "comment": "Alles weigeren"
+            "waitForThenClick": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])",
+            "comment": "Weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id]) > span:not([id]) > span:not([id])",
+            "waitForVisible": "body > via-modal:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])",
             "timeout": 1000,
             "check": "none"
         }

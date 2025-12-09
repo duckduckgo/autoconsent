@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_vaadin.com_bm4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://vaadin.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vaadin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#haas-cookie-dialog > div#cookie-dialog-container > div:nth-child(2)#cookie-buttons > button:nth-child(1)#haas-cookie-dialog-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#haas-cookie-dialog > div#cookie-dialog-container > div:nth-child(2)#cookie-buttons > button:nth-child(1)#haas-cookie-dialog-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#haas-cookie-dialog > div#cookie-dialog-container > div:nth-child(2)#cookie-buttons > button:nth-child(1)#haas-cookie-dialog-decline-button",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#haas-cookie-dialog > div#cookie-dialog-container > div:nth-child(2)#cookie-buttons > button:nth-child(1)#haas-cookie-dialog-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

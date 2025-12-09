@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_britishmuseumshoponline.org_68f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.britishmuseumshoponline.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?britishmuseumshoponline\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

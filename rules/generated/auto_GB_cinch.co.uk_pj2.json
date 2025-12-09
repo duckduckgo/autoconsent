@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]"
+            "exists": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(14):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]"
+            "visible": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(14):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]",
+            "waitForThenClick": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(14):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]",
             "comment": "Decline"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(12):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]",
+            "waitForVisible": "body > div#__next > main:nth-child(4)#main-content > div:nth-child(14):not([id]) > div#cookie-banner[data-testid=\"cookie-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"decline\"]",
             "timeout": 1000,
             "check": "none"
         }

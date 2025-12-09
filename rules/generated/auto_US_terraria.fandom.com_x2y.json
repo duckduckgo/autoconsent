@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_terraria.fandom.com_x2y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://terraria.fandom.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?terraria\\.fandom\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "comment": "Do Not Sell My Personal Information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#onetrust-button-group-parent > div#onetrust-button-group > button:nth-child(1)#onetrust-pc-btn-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
