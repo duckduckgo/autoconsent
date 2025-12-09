@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
+            "exists": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
+            "visible": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
+            "waitForThenClick": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#__next > main:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
+            "waitForVisible": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
             "timeout": 1000,
             "check": "none"
         }

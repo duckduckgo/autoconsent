@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_shc-care.de_vb9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://shc-care.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?shc-care\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#\\38 95ea240-9747-4c85-83bd-d09b1a2cd8ce > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#admin-btn-cancel"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#\\38 95ea240-9747-4c85-83bd-d09b1a2cd8ce > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#admin-btn-cancel"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#\\38 95ea240-9747-4c85-83bd-d09b1a2cd8ce > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#admin-btn-cancel",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#\\38 95ea240-9747-4c85-83bd-d09b1a2cd8ce > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#admin-btn-cancel",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

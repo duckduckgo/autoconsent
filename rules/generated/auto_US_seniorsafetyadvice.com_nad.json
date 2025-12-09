@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_seniorsafetyadvice.com_nad",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://seniorsafetyadvice.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?seniorsafetyadvice\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
