@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig"
+            "exists": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig"
+            "visible": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig",
-            "comment": "ABLEHNEN"
+            "waitForThenClick": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig",
+            "comment": "REJECT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig",
+            "waitForVisible": "body > dialog#ai-hinweis > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > center:not([id]) > button:nth-child(1)#policy_notwendig",
             "timeout": 1000,
             "check": "none"
         }
