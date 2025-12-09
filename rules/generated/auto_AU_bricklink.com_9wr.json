@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_bricklink.com_9wr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bricklink.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bricklink\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#js-blp-cookie-notice > div:not([id]) > article:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#js-blp-cookie-notice > div:not([id]) > article:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#js-blp-cookie-notice > div:not([id]) > article:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-blp-cookie-notice > div:not([id]) > article:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
