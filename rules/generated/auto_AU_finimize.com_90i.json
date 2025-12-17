@@ -2,7 +2,8 @@
     "name": "auto_AU_finimize.com_90i",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "https://finimize.com/content/mozilla-names-ceo-to-drive-ai-into-firefoxs-future"
+        "vendorUrl": "https://finimize.com/content/mozilla-names-ceo-to-drive-ai-into-firefoxs-future",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div#id-4gt6ho > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div:not([id]) > div > div[data-cy=cookie-modal] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div#id-4gt6ho > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div:not([id]) > div > div[data-cy=cookie-modal] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div#id-4gt6ho > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div:not([id]) > div > div[data-cy=cookie-modal] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Reject All"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div#id-4gt6ho > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div:not([id]) > div > div[data-cy=cookie-modal] > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
