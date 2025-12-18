@@ -1,3 +1,17 @@
+# v14.44.0 (Thu Dec 18 2025)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1107](https://github.com/duckduckgo/autoconsent/pull/1107) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for finimize.com [#1108](https://github.com/duckduckgo/autoconsent/pull/1108) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.43.0 (Tue Dec 09 2025)
 
 #### 🚀 Enhancement
