@@ -21,7 +21,7 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#data-protection-consent-dialog rpl-modal-card > button.button-primary"
+            "waitForThenClick": "#data-protection-consent-dialog rpl-modal-card > button.button-secondary"
         }
     ],
     "test": [{ "cookieContains": "eu_cookie={%22opted%22:true%2C%22nonessential%22:false}" }]
