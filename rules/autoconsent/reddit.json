@@ -6,22 +6,22 @@
     "prehideSelectors": ["[bundlename=reddit_cookie_banner]"],
     "detectCmp": [
         {
-            "exists": "reddit-cookie-banner"
+            "exists": "#data-protection-consent-dialog rpl-modal-card > button.button-primary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "reddit-cookie-banner"
+            "visible": "#data-protection-consent-dialog rpl-modal-card > button.button-primary"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["reddit-cookie-banner", "#accept-all-cookies-button > button"]
+            "waitForThenClick": "#data-protection-consent-dialog rpl-modal-card > button.button-primary"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["reddit-cookie-banner", "#reject-nonessential-cookies-button > button"]
+            "waitForThenClick": "#data-protection-consent-dialog rpl-modal-card > button.button-secondary"
         }
     ],
     "test": [{ "cookieContains": "eu_cookie={%22opted%22:true%2C%22nonessential%22:false}" }]
