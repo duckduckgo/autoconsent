@@ -1,3 +1,15 @@
+# v14.46.0 (Wed Dec 24 2025)
+
+#### 🚀 Enhancement
+
+- Fix reddit rule [#1112](https://github.com/duckduckgo/autoconsent/pull/1112) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.45.0 (Tue Dec 23 2025)
 
 #### 🚀 Enhancement
