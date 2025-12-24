@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_beacons.ai_ink",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://beacons.ai/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?beacons\\.ai/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:nth-child(2):not([id]) > div#beacons-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:nth-child(2):not([id]) > div#beacons-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(2):not([id]) > div#beacons-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:nth-child(2):not([id]) > div#beacons-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
