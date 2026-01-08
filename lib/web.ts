@@ -14,7 +14,7 @@ import { decodeRules } from './encoding';
 
 export { snippets as evalSnippets } from './eval-snippets';
 
-function filterCMPs(rules: AutoCMP[], config: Config) {
+export function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
         return (
             (!config.disabledCmps || !config.disabledCmps.includes(cmp.name)) && // CMP is not disabled
