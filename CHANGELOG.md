@@ -1,3 +1,22 @@
+# v14.47.0 (Thu Jan 08 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1116](https://github.com/duckduckgo/autoconsent/pull/1116) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1115](https://github.com/duckduckgo/autoconsent/pull/1115) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1114](https://github.com/duckduckgo/autoconsent/pull/1114) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1118](https://github.com/duckduckgo/autoconsent/pull/1118) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1105](https://github.com/duckduckgo/autoconsent/pull/1105) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v14.46.0 (Wed Dec 24 2025)
 
 #### 🚀 Enhancement
