@@ -19,9 +19,33 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": [
-                "#sd-cmp",
-                "xpath///span[contains(., 'Do not accept') or contains(., 'Acceptera inte') or contains(., 'No aceptar') or contains(., 'Ikke acceptere') or contains(., 'Nicht akzeptieren') or contains(., 'Не приемам') or contains(., 'Να μην γίνει αποδοχή') or contains(., 'Niet accepteren') or contains(., 'Nepřijímat') or contains(., 'Nie akceptuj') or contains(., 'Nu acceptați') or contains(., 'Não aceitar') or contains(., 'Continuer sans accepter') or contains(., 'Non accettare') or contains(., 'Nem fogad el')]"
+            "if": {
+                "exists": [
+                    "#sd-cmp",
+                    "xpath///button[contains(., 'Do not accept') or contains(., 'Acceptera inte') or contains(., 'No aceptar') or contains(., 'Ikke acceptere') or contains(., 'Nicht akzeptieren') or contains(., 'Не приемам') or contains(., 'Να μην γίνει αποδοχή') or contains(., 'Niet accepteren') or contains(., 'Nepřijímat') or contains(., 'Nie akceptuj') or contains(., 'Nu acceptați') or contains(., 'Não aceitar') or contains(., 'Continuer sans accepter') or contains(., 'Non accettare') or contains(., 'Nem fogad el')]"
+                ]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#sd-cmp",
+                        "xpath///button[contains(., 'Do not accept') or contains(., 'Acceptera inte') or contains(., 'No aceptar') or contains(., 'Ikke acceptere') or contains(., 'Nicht akzeptieren') or contains(., 'Не приемам') or contains(., 'Να μην γίνει αποδοχή') or contains(., 'Niet accepteren') or contains(., 'Nepřijímat') or contains(., 'Nie akceptuj') or contains(., 'Nu acceptați') or contains(., 'Não aceitar') or contains(., 'Continuer sans accepter') or contains(., 'Non accettare') or contains(., 'Nem fogad el')]"
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": [
+                        "#sd-cmp",
+                        "xpath///span[contains(., 'Задайте вашите избори') or contains(., 'Nastavit vaše volby') or contains(., 'Angiv dine valg') or contains(., 'Ihre Auswahl treffen') or contains(., 'Ορίστε τις επιλογές σας') or contains(., 'Set your choices') or contains(., 'Establecer preferencias') or contains(., 'Paramétrer vos choix') or contains(., 'Válassza ki a beállításokat') or contains(., 'Imposta le tue scelte') or contains(., 'Stel uw keuzes in') or contains(., 'Ustaw swoje wybory') or contains(., 'Definir suas escolhas') or contains(., 'Setați-vă opțiunile') or contains(., 'Ställ in dina val')]"
+                    ]
+                },
+                {
+                    "waitForThenClick": [
+                        "#sd-cmp",
+                        "xpath///span[contains(., 'Отхвърлям всичко') or contains(., 'Odmítnout vše') or contains(., 'Afvis alt') or contains(., 'Alle ablehnen') or contains(., 'Απόρριψη όλων') or contains(., 'Reject all') or contains(., 'Rechazar todo') or contains(., 'Tout refuser') or contains(., 'Mind elutasítása') or contains(., 'Rifiuta tutto') or contains(., 'Alles weigeren') or contains(., 'Odrzuć wszystkie') or contains(., 'Rejeitar todos') or contains(., 'Respingeți toate') or contains(., 'Avvisa allt')]"
+                    ]
+                }
             ]
         }
     ]
