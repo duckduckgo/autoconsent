@@ -1,5 +1,3 @@
-import generateCMPTests from "../playwright/runner";
+import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('chatgpt', [
-  'https://chatgpt.com/',
-]);
+generateCMPTests('chatgpt', ['https://chatgpt.com/']);
