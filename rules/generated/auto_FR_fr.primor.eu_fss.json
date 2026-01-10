@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.primor.eu_fss",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.primor.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.primor\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > strong:not([id]) > strong:not([id]) > div:nth-child(53)#am-cookie-bar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > strong:not([id]) > strong:not([id]) > div:nth-child(53)#am-cookie-bar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > strong:not([id]) > strong:not([id]) > div:nth-child(53)#am-cookie-bar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "REFUSER TOUT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > strong:not([id]) > strong:not([id]) > div:nth-child(53)#am-cookie-bar > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

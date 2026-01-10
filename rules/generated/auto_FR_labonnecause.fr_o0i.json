@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_labonnecause.fr_o0i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://labonnecause.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?labonnecause\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-banner > span:nth-child(4):not([id]) > a#without-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-banner > span:nth-child(4):not([id]) > a#without-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-banner > span:nth-child(4):not([id]) > a#without-cookies",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-banner > span:nth-child(4):not([id]) > a#without-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

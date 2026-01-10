@@ -1,6 +1,5 @@
 {
     "name": "auto_CA_no.co_2uo",
-    "vendorUrl": "https://no.co/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#react-aria-\\:Rlamkq\\:"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#react-aria-\\:Rlamkq\\:"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#react-aria-\\:Rlamkq\\:",
             "comment": "REJECT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > main:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#react-aria-\\:Rlamkq\\:",
             "timeout": 1000,
             "check": "none"
         }

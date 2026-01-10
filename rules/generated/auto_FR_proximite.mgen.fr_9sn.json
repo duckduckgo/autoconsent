@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])"
+            "exists": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])"
+            "visible": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])",
-            "comment": "continuer sans accepter"
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
+            "comment": "Continuer sans accepter"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(1)#popin_tc_privacy_container_text > div#popin_tc_privacy_text > div:not([id]) > p:nth-child(6):not([id]) > a:nth-child(1):not([id])",
+            "waitForVisible": "body > div#tc-privacy-wrapper > div:nth-child(2)#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
             "timeout": 1000,
             "check": "none"
         }

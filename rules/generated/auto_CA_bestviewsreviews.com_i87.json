@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_bestviewsreviews.com_i87",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bestviewsreviews.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bestviewsreviews\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:nth-child(25)#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:nth-child(25)#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:nth-child(25)#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])",
+            "comment": "Reject Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:nth-child(25)#cookie_container-id > div:nth-child(2):not([id]) > a:nth-child(1):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

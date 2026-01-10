@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton"
+            "exists": "body > div#app > dialog:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton"
+            "visible": "body > div#app > dialog:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton",
-            "comment": "ABLEHNEN"
+            "waitForThenClick": "body > div#app > dialog:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#blur > div:nth-child(2):not([id]) > div:nth-child(6)#cookieModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#cookieDenyButton",
+            "waitForVisible": "body > div#app > dialog:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
