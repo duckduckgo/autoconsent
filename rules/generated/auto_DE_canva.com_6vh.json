@@ -2,7 +2,8 @@
     "name": "auto_DE_canva.com_6vh",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "https://www.canva.com/ai-art-generator/global-trends/"
+        "vendorUrl": "https://www.canva.com/ai-art-generator/global-trends/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -27,7 +28,22 @@
         },
         {
             "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Reject all cookies"
+            "comment": "Reject all cookies / Manage Cookies"
+        },
+        {
+            "if": {
+                "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+                    "comment": "Reject all"
+                },
+                {
+                    "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:not([id])",
+                    "comment": "Save & Close"
+                }
+            ]
         }
     ],
     "test": [
