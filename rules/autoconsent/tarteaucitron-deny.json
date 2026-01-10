@@ -8,7 +8,7 @@
         }
     ],
     "optIn": [{ "click": "#tarteaucitronPersonalize2" }],
-    "optOut": [{ "click": "#tarteaucitronAllDenied2" }],
+    "optOut": [{ "wait": 500 }, { "click": "#tarteaucitronAllDenied2" }],
     "test": [
         {
             "eval": "EVAL_TARTEAUCITRON_2"
