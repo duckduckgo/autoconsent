@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_tui.nl_6b8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tui.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tui\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#CookieReject-submit"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#CookieReject-submit"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#CookieReject-submit",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#CookieBar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#CookieReject-submit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

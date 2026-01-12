@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_seeking.com_vii",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.seeking.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?seeking\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > span:nth-child(2)#deny-all-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > span:nth-child(2)#deny-all-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > span:nth-child(2)#deny-all-cookies",
+            "comment": "Deny All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > span:nth-child(2)#deny-all-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

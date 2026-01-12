@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_sheetmusicplus.com_zwg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sheetmusicplus.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sheetmusicplus\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria3540358775-P0-1"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria3540358775-P0-1"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria3540358775-P0-1",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria3540358775-P0-1",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
