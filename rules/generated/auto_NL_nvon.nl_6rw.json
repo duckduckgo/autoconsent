@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_nvon.nl_6rw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nvon.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nvon\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-message-container > a:nth-child(3)#cookie-decline-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-message-container > a:nth-child(3)#cookie-decline-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-message-container > a:nth-child(3)#cookie-decline-btn",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-message-container > a:nth-child(3)#cookie-decline-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
