@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_wpcu.coop_6m1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wpcu.coop/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wpcu\\.coop/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > section:nth-child(1)#consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2)#declineBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > section:nth-child(1)#consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2)#declineBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > section:nth-child(1)#consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2)#declineBtn",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > section:nth-child(1)#consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2)#declineBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
