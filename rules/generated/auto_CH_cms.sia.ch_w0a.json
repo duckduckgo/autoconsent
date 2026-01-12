@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_cms.sia.ch_w0a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cms.sia.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sia\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bx--modal-body--modal-1 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bx--modal-body--modal-1 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bx--modal-body--modal-1 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Accept only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#bx--modal-body--modal-1 > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
