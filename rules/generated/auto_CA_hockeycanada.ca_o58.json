@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_hockeycanada.ca_o58",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hockeycanada.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hockeycanada\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > main:not([id]) > div:nth-child(2):not([id]) > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > main:not([id]) > div:nth-child(2):not([id]) > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > main:not([id]) > div:nth-child(2):not([id]) > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])",
+            "comment": "Accept essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > main:not([id]) > div:nth-child(2):not([id]) > div#cookieInfo > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
