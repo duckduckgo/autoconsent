@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_mobilesupplies.nl_8fy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mobilesupplies.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mobilesupplies\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ms-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ms-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ms-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ms-cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ms-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ms-cookie-reject",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ms-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ms-cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
