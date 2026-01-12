@@ -1,6 +1,5 @@
 {
     "name": "auto_AU_hpm.com.au_hbc",
-    "vendorUrl": "https://www.hpm.com.au/en",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all"
+            "exists": "body > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all"
+            "visible": "body > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all",
             "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_41c35535-a0f0-40c6-8b4f-81749e4c584f > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-a6a62119-1ec7-4283-a44a-97861a542f46 > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
