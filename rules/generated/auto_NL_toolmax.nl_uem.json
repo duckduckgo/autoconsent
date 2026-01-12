@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_toolmax.nl_uem",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.toolmax.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?toolmax\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pnlCookieFooter > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#btnCookieFooterRefuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pnlCookieFooter > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#btnCookieFooterRefuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pnlCookieFooter > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#btnCookieFooterRefuse",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pnlCookieFooter > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#btnCookieFooterRefuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
