@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_coolbe.ch_353",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.coolbe.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?coolbe\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#content > dialog:nth-child(2):not([id]) > div:nth-child(1):not([id])[data-testid=\"CookieBannerConditionalWrapper\"] > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#content > dialog:nth-child(2):not([id]) > div:nth-child(1):not([id])[data-testid=\"CookieBannerConditionalWrapper\"] > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#content > dialog:nth-child(2):not([id]) > div:nth-child(1):not([id])[data-testid=\"CookieBannerConditionalWrapper\"] > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "comment": "decline non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#content > dialog:nth-child(2):not([id]) > div:nth-child(1):not([id])[data-testid=\"CookieBannerConditionalWrapper\"] > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
