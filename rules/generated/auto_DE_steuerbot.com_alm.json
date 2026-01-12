@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#radix-«R16» > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#radix-_R_16_ > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#radix-«R16» > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#radix-_R_16_ > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#radix-«R16» > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#radix-_R_16_ > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
             "comment": "Alle ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#radix-«R16» > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#radix-_R_16_ > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
