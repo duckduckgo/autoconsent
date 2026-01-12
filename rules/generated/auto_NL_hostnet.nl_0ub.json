@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hostnet.nl_0ub",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hostnet.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hostnet\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(3)#buttons-cookie-basic > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(3)#buttons-cookie-basic > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(3)#buttons-cookie-basic > a:nth-child(1):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(3)#buttons-cookie-basic > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
