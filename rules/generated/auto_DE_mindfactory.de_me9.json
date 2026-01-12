@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie"
+            "exists": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(61)#popup > section:nth-child(1):not([id]) > div:not([id]) > div#info_center > div:not([id]) > div:not([id]) > div#ic_cookie_settings > div#cookie-settings-ic > div:nth-child(6):not([id]) > a:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie"
+            "visible": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(61)#popup > section:nth-child(1):not([id]) > div:not([id]) > div#info_center > div:not([id]) > div:not([id]) > div#ic_cookie_settings > div#cookie-settings-ic > div:nth-child(6):not([id]) > a:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie",
+            "waitForThenClick": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(61)#popup > section:nth-child(1):not([id]) > div:not([id]) > div#info_center > div:not([id]) > div:not([id]) > div#ic_cookie_settings > div#cookie-settings-ic > div:nth-child(6):not([id]) > a:nth-child(2):not([id])",
             "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(6):not([id]) > a:nth-child(2)#justneededcookie",
+            "waitForVisible": "body > div#cookieModalOverlay > div#cookieModalContent > div:nth-child(61)#popup > section:nth-child(1):not([id]) > div:not([id]) > div#info_center > div:not([id]) > div:not([id]) > div#ic_cookie_settings > div#cookie-settings-ic > div:nth-child(6):not([id]) > a:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
