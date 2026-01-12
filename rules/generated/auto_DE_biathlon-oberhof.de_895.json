@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_biathlon-oberhof.de_895",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.biathlon-oberhof.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?biathlon-oberhof\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > toujou-consent-widget:nth-child(14):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentDenyAllButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > toujou-consent-widget:nth-child(14):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentDenyAllButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > toujou-consent-widget:nth-child(14):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentDenyAllButton",
+            "comment": "ALLES ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > toujou-consent-widget:nth-child(14):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#consentDenyAllButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
