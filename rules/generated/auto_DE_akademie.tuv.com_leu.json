@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_akademie.tuv.com_leu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://akademie.tuv.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?akademie\\.tuv\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_ad550b69-68dc-4ce4-a8e8-a85d175e8bad > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-807a2912-2817-4ab9-8153-1823459be08f > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_ad550b69-68dc-4ce4-a8e8-a85d175e8bad > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-807a2912-2817-4ab9-8153-1823459be08f > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_ad550b69-68dc-4ce4-a8e8-a85d175e8bad > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-807a2912-2817-4ab9-8153-1823459be08f > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_ad550b69-68dc-4ce4-a8e8-a85d175e8bad > div#ppms_cm_popup_overlay > div#ppms_cm_popup_wrapper > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_popup_main_id > div:nth-child(2)#ppms-807a2912-2817-4ab9-8153-1823459be08f > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
