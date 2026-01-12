@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_snow-online.com_9o9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.snow-online.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?snow-online\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#grid > div:nth-child(27)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#grid > div:nth-child(27)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#grid > div:nth-child(27)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Accept only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#grid > div:nth-child(27)#cookie-consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
