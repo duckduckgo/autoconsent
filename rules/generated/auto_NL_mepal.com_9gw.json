@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_mepal.com_9gw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mepal.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mepal\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mepal-cb > div:nth-child(1)#mepal-cb-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mepal-cb > div:nth-child(1)#mepal-cb-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mepal-cb > div:nth-child(1)#mepal-cb-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mepal-cb > div:nth-child(1)#mepal-cb-content > div:nth-child(3):not([id]) > a:nth-child(2)#DeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
