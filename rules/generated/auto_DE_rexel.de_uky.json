@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
+            "exists": "body > app-root:not([id]) > app-hybris-container:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(17)#mmenu-wrap-target > div:nth-child(12)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
+            "visible": "body > app-root:not([id]) > app-hybris-container:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(17)#mmenu-wrap-target > div:nth-child(12)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary",
+            "waitForThenClick": "body > app-root:not([id]) > app-hybris-container:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(17)#mmenu-wrap-target > div:nth-child(12)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary",
             "comment": "Alle ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#mmenu-wrap-target > div:nth-child(18)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary",
+            "waitForVisible": "body > app-root:not([id]) > app-hybris-container:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(17)#mmenu-wrap-target > div:nth-child(12)#gdprCookieConsentManagedSummary > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(3)#declineAllConsentSummary",
             "timeout": 1000,
             "check": "none"
         }
