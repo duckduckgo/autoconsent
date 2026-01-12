@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dutchitchannel.nl_hpo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dutchitchannel.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dutchitchannel\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#allowBasicCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#allowBasicCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#allowBasicCookies",
+            "comment": "Alleen basiscookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#allowBasicCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
