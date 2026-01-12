@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#site-wrapper > div:nth-child(1)#site-canvas > div#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+            "exists": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8522925723-P0-1"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#site-wrapper > div:nth-child(1)#site-canvas > div#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+            "visible": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8522925723-P0-1"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#site-wrapper > div:nth-child(1)#site-canvas > div#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8522925723-P0-1",
             "comment": "REJECT"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#site-wrapper > div:nth-child(1)#site-canvas > div#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div#site-wrapper > div#site-canvas > div:nth-child(1)#wrapper1 > main:nth-child(2)#mainSection1 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria8522925723-P0-1",
             "timeout": 1000,
             "check": "none"
         }
