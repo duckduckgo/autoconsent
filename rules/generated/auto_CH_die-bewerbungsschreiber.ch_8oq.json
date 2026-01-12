@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_die-bewerbungsschreiber.ch_8oq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.die-bewerbungsschreiber.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?die-bewerbungsschreiber\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#super-gtag-cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button#super-gtag-cookie-consent-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#super-gtag-cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button#super-gtag-cookie-consent-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#super-gtag-cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button#super-gtag-cookie-consent-deny",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#super-gtag-cookie-consent > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button#super-gtag-cookie-consent-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
