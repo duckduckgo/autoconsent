@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_tgirl.nl_tfj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tgirl.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tgirl\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner_reject",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
