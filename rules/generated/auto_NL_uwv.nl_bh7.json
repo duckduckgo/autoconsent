@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_uwv.nl_bh7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.uwv.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?uwv\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#js-pw-consent-wrapper > bgl-modal:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > bgl-button-bar:not([id]) > div:not([id]) > div:not([id]) > bgl-button:nth-child(2):not([id]) > button:not([id]) > span#pw-consent-rejectAllButton-label"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#js-pw-consent-wrapper > bgl-modal:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > bgl-button-bar:not([id]) > div:not([id]) > div:not([id]) > bgl-button:nth-child(2):not([id]) > button:not([id]) > span#pw-consent-rejectAllButton-label"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#js-pw-consent-wrapper > bgl-modal:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > bgl-button-bar:not([id]) > div:not([id]) > div:not([id]) > bgl-button:nth-child(2):not([id]) > button:not([id]) > span#pw-consent-rejectAllButton-label",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-pw-consent-wrapper > bgl-modal:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > bgl-button-bar:not([id]) > div:not([id]) > div:not([id]) > bgl-button:nth-child(2):not([id]) > button:not([id]) > span#pw-consent-rejectAllButton-label",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
