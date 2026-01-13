@@ -1,3 +1,16 @@
+# v14.49.0 (Tue Jan 13 2026)
+
+#### 🚀 Enhancement
+
+- Export filterCompactRules from main module [#1120](https://github.com/duckduckgo/autoconsent/pull/1120) ([@rafaelr-hub](https://github.com/rafaelr-hub) [@Ezhik-777](https://github.com/Ezhik-777))
+
+#### Authors: 2
+
+- [@rafaelr-hub](https://github.com/rafaelr-hub)
+- Evgenij Eliseew ([@Ezhik-777](https://github.com/Ezhik-777))
+
+---
+
 # v14.48.0 (Sat Jan 10 2026)
 
 #### 🚀 Enhancement
