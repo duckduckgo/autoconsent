@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_support.hpe.com_utb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support.hpe.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.hpe\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(1)#truste-consent-text > a:nth-child(3)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(1)#truste-consent-text > a:nth-child(3)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(1)#truste-consent-text > a:nth-child(3)#truste-consent-required",
+            "comment": "Decline optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(1)#truste-consent-text > a:nth-child(3)#truste-consent-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

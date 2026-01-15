@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_recette-de-grand-mere.fr_x94",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://recette-de-grand-mere.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?recette-de-grand-mere\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
