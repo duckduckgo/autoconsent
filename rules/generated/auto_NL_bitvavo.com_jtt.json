@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bitvavo.com_jtt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bitvavo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bitvavo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-wall > div:not([id]) > slot:not([id]) > slot:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > slot:nth-child(2):not([id]) > button#cookie-reject-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-wall > div:not([id]) > slot:not([id]) > slot:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > slot:nth-child(2):not([id]) > button#cookie-reject-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-wall > div:not([id]) > slot:not([id]) > slot:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > slot:nth-child(2):not([id]) > button#cookie-reject-all-button",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-wall > div:not([id]) > slot:not([id]) > slot:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > slot:nth-child(2):not([id]) > button#cookie-reject-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

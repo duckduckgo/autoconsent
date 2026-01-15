@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_ffzh.ch_ppa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ffzh.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ffzh\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form1 > div:nth-child(3):not([id]) > div:nth-child(7)#ffzh-cookie-banner > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form1 > div:nth-child(3):not([id]) > div:nth-child(7)#ffzh-cookie-banner > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form1 > div:nth-child(3):not([id]) > div:nth-child(7)#ffzh-cookie-banner > button:nth-child(4):not([id])",
+            "comment": "Nicht notwendige Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form1 > div:nth-child(3):not([id]) > div:nth-child(7)#ffzh-cookie-banner > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

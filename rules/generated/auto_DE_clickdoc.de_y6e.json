@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_clickdoc.de_y6e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://clickdoc.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clickdoc\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > cd-modal-dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > cd-consent-gdpr-container:not([id]) > div:not([id]) > cd-dialog:not([id]) > cd-dialog-footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > cd-modal-dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > cd-consent-gdpr-container:not([id]) > div:not([id]) > cd-dialog:not([id]) > cd-dialog-footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > cd-modal-dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > cd-consent-gdpr-container:not([id]) > div:not([id]) > cd-dialog:not([id]) > cd-dialog-footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "NUR NOTWENDIGE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > cd-modal-dialog:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > cd-consent-gdpr-container:not([id]) > div:not([id]) > cd-dialog:not([id]) > cd-dialog-footer:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

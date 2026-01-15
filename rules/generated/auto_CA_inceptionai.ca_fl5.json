@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_inceptionai.ca_fl5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://inceptionai.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?inceptionai\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body.scroll-smooth.bg-light.antialiased.transition-colors.dark\\:bg-dark > div:not([id]).fixed.bottom-0.left-0.right-0.z-\\[300\\].transition-all.duration-500.ease-out.translate-y-0.opacity-100 > div:not([id]).mx-auto.max-w-7xl.px-4.pb-4.sm\\:px-6.lg\\:px-8 > div:not([id]).overflow-hidden.rounded-xl.border.border-gray-200.bg-white.shadow-xl.dark\\:border-zinc-700.dark\\:bg-\\[rgb\\(0\\,11\\,37\\)\\] > div:not([id]).p-5.sm\\:p-6 > div:not([id]).flex.flex-col.gap-4.sm\\:flex-row.sm\\:items-center.sm\\:justify-between.sm\\:gap-6 > div:nth-child(2):not([id]).flex.flex-col.gap-2.sm\\:flex-row.sm\\:flex-shrink-0.sm\\:gap-2\\.5 > button:nth-child(2):not([id]).order-2.rounded-lg.border.border-gray-300.bg-white.px-5.py-3.text-sm.font-semibold.text-gray-700.shadow-sm.transition-colors.hover\\:bg-gray-50.dark\\:border-zinc-600.dark\\:bg-zinc-800.dark\\:text-zinc-300.dark\\:hover\\:bg-zinc-700.sm\\:py-2\\.5"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body.scroll-smooth.bg-light.antialiased.transition-colors.dark\\:bg-dark > div:not([id]).fixed.bottom-0.left-0.right-0.z-\\[300\\].transition-all.duration-500.ease-out.translate-y-0.opacity-100 > div:not([id]).mx-auto.max-w-7xl.px-4.pb-4.sm\\:px-6.lg\\:px-8 > div:not([id]).overflow-hidden.rounded-xl.border.border-gray-200.bg-white.shadow-xl.dark\\:border-zinc-700.dark\\:bg-\\[rgb\\(0\\,11\\,37\\)\\] > div:not([id]).p-5.sm\\:p-6 > div:not([id]).flex.flex-col.gap-4.sm\\:flex-row.sm\\:items-center.sm\\:justify-between.sm\\:gap-6 > div:nth-child(2):not([id]).flex.flex-col.gap-2.sm\\:flex-row.sm\\:flex-shrink-0.sm\\:gap-2\\.5 > button:nth-child(2):not([id]).order-2.rounded-lg.border.border-gray-300.bg-white.px-5.py-3.text-sm.font-semibold.text-gray-700.shadow-sm.transition-colors.hover\\:bg-gray-50.dark\\:border-zinc-600.dark\\:bg-zinc-800.dark\\:text-zinc-300.dark\\:hover\\:bg-zinc-700.sm\\:py-2\\.5"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body.scroll-smooth.bg-light.antialiased.transition-colors.dark\\:bg-dark > div:not([id]).fixed.bottom-0.left-0.right-0.z-\\[300\\].transition-all.duration-500.ease-out.translate-y-0.opacity-100 > div:not([id]).mx-auto.max-w-7xl.px-4.pb-4.sm\\:px-6.lg\\:px-8 > div:not([id]).overflow-hidden.rounded-xl.border.border-gray-200.bg-white.shadow-xl.dark\\:border-zinc-700.dark\\:bg-\\[rgb\\(0\\,11\\,37\\)\\] > div:not([id]).p-5.sm\\:p-6 > div:not([id]).flex.flex-col.gap-4.sm\\:flex-row.sm\\:items-center.sm\\:justify-between.sm\\:gap-6 > div:nth-child(2):not([id]).flex.flex-col.gap-2.sm\\:flex-row.sm\\:flex-shrink-0.sm\\:gap-2\\.5 > button:nth-child(2):not([id]).order-2.rounded-lg.border.border-gray-300.bg-white.px-5.py-3.text-sm.font-semibold.text-gray-700.shadow-sm.transition-colors.hover\\:bg-gray-50.dark\\:border-zinc-600.dark\\:bg-zinc-800.dark\\:text-zinc-300.dark\\:hover\\:bg-zinc-700.sm\\:py-2\\.5",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body.scroll-smooth.bg-light.antialiased.transition-colors.dark\\:bg-dark > div:not([id]).fixed.bottom-0.left-0.right-0.z-\\[300\\].transition-all.duration-500.ease-out.translate-y-0.opacity-100 > div:not([id]).mx-auto.max-w-7xl.px-4.pb-4.sm\\:px-6.lg\\:px-8 > div:not([id]).overflow-hidden.rounded-xl.border.border-gray-200.bg-white.shadow-xl.dark\\:border-zinc-700.dark\\:bg-\\[rgb\\(0\\,11\\,37\\)\\] > div:not([id]).p-5.sm\\:p-6 > div:not([id]).flex.flex-col.gap-4.sm\\:flex-row.sm\\:items-center.sm\\:justify-between.sm\\:gap-6 > div:nth-child(2):not([id]).flex.flex-col.gap-2.sm\\:flex-row.sm\\:flex-shrink-0.sm\\:gap-2\\.5 > button:nth-child(2):not([id]).order-2.rounded-lg.border.border-gray-300.bg-white.px-5.py-3.text-sm.font-semibold.text-gray-700.shadow-sm.transition-colors.hover\\:bg-gray-50.dark\\:border-zinc-600.dark\\:bg-zinc-800.dark\\:text-zinc-300.dark\\:hover\\:bg-zinc-700.sm\\:py-2\\.5",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
