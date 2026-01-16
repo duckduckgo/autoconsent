@@ -1,3 +1,17 @@
+# v14.50.0 (Fri Jan 16 2026)
+
+#### 🚀 Enhancement
+
+- [2 / 5] 🤖 Add autoconsent rules for 200 sites (11 need review) [#1130](https://github.com/duckduckgo/autoconsent/pull/1130) ([@daxtheduck](https://github.com/daxtheduck) [@noisysocks](https://github.com/noisysocks))
+- [1 / 5] 🤖 Add autoconsent rules for 200 sites (9 need review) [#1129](https://github.com/duckduckgo/autoconsent/pull/1129) ([@daxtheduck](https://github.com/daxtheduck) [@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+
+---
+
 # v14.49.0 (Tue Jan 13 2026)
 
 #### 🚀 Enhancement
