@@ -1,3 +1,15 @@
+# v14.50.1 (Sat Jan 17 2026)
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1134](https://github.com/duckduckgo/autoconsent/pull/1134) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v14.50.0 (Fri Jan 16 2026)
 
 #### 🚀 Enhancement
