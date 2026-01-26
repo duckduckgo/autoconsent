@@ -1,0 +1,39 @@
+{
+    "name": "raspberrypi.com",
+    "_metadata": {
+        "vendorUrl": "https://raspberrypi.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://([a-z0-9-]+\\.)?raspberrypi\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#__rptl-cookiebanner #__rptl-cookiebanner-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__rptl-cookiebanner #__rptl-cookiebanner-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__rptl-cookiebanner #__rptl-cookiebanner-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#__rptl-cookiebanner #__rptl-cookiebanner-reject"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#__rptl-cookiebanner #__rptl-cookiebanner-reject",
+            "check": "none"
+        }
+    ]
+}
