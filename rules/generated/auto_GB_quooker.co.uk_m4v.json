@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_quooker.co.uk_m4v",
-    "vendorUrl": "https://www.quooker.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject"
+            "exists": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject"
+            "visible": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject",
+            "waitForThenClick": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject",
+            "waitForVisible": "body > div#cookie-consent-shadow-bg > div#cookie-consent-cookie-bar-center > div:nth-child(1)#cookie-consent-io-main > div:nth-child(5):not([id]) > button:nth-child(3)#CookieConsentIOReject",
             "timeout": 1000,
             "check": "none"
         }

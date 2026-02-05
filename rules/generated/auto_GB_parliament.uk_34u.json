@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_parliament.uk_34u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.parliament.uk/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?now\\.parliament\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#cookiebanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#rejectall"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#cookiebanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#rejectall"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#cookiebanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#rejectall",
+            "comment": "Reject additional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#cookiebanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#rejectall",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

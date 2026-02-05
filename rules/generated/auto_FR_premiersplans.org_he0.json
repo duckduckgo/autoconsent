@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_premiersplans.org_he0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.premiersplans.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?premiersplans\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#AIPrivacy > div#AIPrivacy_wrapper > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#AIPrivacy > div#AIPrivacy_wrapper > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#AIPrivacy > div#AIPrivacy_wrapper > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Cookies nécessaires seulement"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#AIPrivacy > div#AIPrivacy_wrapper > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_rcgp.org.uk_vw7",
-    "vendorUrl": "https://www.rcgp.org.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected"
+            "exists": "body > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected"
+            "visible": "body > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected",
             "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-rejected",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }

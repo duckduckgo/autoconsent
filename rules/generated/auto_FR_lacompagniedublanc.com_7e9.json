@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+            "exists": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(8)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+            "visible": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(8)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "waitForThenClick": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(8)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
             "comment": "Tout refuser"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(9)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "waitForVisible": "body > div#page > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(8)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
             "timeout": 1000,
             "check": "none"
         }

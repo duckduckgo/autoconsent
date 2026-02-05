@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_psy.ch_w2l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.psy.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?psy\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > div:nth-child(1):not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > div:nth-child(1):not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > div:nth-child(1):not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > div:nth-child(1):not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

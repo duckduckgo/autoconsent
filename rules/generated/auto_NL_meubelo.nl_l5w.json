@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_meubelo.nl_l5w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.meubelo.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?meubelo\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog:not([id])[data-testid=\"modal-dialog\"] > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"uc-button-decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog:not([id])[data-testid=\"modal-dialog\"] > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"uc-button-decline\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog:not([id])[data-testid=\"modal-dialog\"] > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"uc-button-decline\"]",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog:not([id])[data-testid=\"modal-dialog\"] > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])[data-testid=\"uc-button-decline\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
