@@ -1,3 +1,63 @@
+# v14.51.0 (Tue Jan 27 2026)
+
+#### 🚀 Enhancement
+
+- multi-click canva rule [#1126](https://github.com/duckduckgo/autoconsent/pull/1126) ([@muodov](https://github.com/muodov))
+- add rule for raspberrypi.com [#1127](https://github.com/duckduckgo/autoconsent/pull/1127) ([@muodov](https://github.com/muodov))
+- Fix false positive on x [#1125](https://github.com/duckduckgo/autoconsent/pull/1125) ([@muodov](https://github.com/muodov))
+- Sirdata multi-click [#1123](https://github.com/duckduckgo/autoconsent/pull/1123) ([@muodov](https://github.com/muodov))
+- Add  rule for chatgpt [#1122](https://github.com/duckduckgo/autoconsent/pull/1122) ([@muodov](https://github.com/muodov))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1138](https://github.com/duckduckgo/autoconsent/pull/1138) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1137](https://github.com/duckduckgo/autoconsent/pull/1137) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1136](https://github.com/duckduckgo/autoconsent/pull/1136) ([@daxtheduck](https://github.com/daxtheduck))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1139](https://github.com/duckduckgo/autoconsent/pull/1139) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.50.1 (Sat Jan 17 2026)
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1134](https://github.com/duckduckgo/autoconsent/pull/1134) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.50.0 (Fri Jan 16 2026)
+
+#### 🚀 Enhancement
+
+- [2 / 5] 🤖 Add autoconsent rules for 200 sites (11 need review) [#1130](https://github.com/duckduckgo/autoconsent/pull/1130) ([@daxtheduck](https://github.com/daxtheduck) [@noisysocks](https://github.com/noisysocks))
+- [1 / 5] 🤖 Add autoconsent rules for 200 sites (9 need review) [#1129](https://github.com/duckduckgo/autoconsent/pull/1129) ([@daxtheduck](https://github.com/daxtheduck) [@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+
+---
+
+# v14.49.0 (Tue Jan 13 2026)
+
+#### 🚀 Enhancement
+
+- Export filterCompactRules from main module [#1120](https://github.com/duckduckgo/autoconsent/pull/1120) ([@rafaelr-hub](https://github.com/rafaelr-hub) [@Ezhik-777](https://github.com/Ezhik-777))
+
+#### Authors: 2
+
+- [@rafaelr-hub](https://github.com/rafaelr-hub)
+- Evgenij Eliseew ([@Ezhik-777](https://github.com/Ezhik-777))
+
+---
+
 # v14.48.0 (Sat Jan 10 2026)
 
 #### 🚀 Enhancement

@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-thex1znu-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": ".site-modals__modal--cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-thex1znu-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": ".site-modals__modal--cookies"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-thex1znu-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": ".site-modals__modal-decline",
             "comment": "DECLINE"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-thex1znu-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": ".site-modals__modal--cookies",
             "timeout": 1000,
             "check": "none"
         }

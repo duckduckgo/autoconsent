@@ -2,7 +2,8 @@
     "name": "auto_CH_de.forgeofempires.com_pur",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://de.forgeofempires.com/"
+        "vendorUrl": "http://de.forgeofempires.com/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#app > div:nth-child(2)#foe > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline"
+            "exists": "#pop-up_cookie_button_decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#app > div:nth-child(2)#foe > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline"
+            "visible": "#pop-up_cookie_button_decline"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#app > div:nth-child(2)#foe > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline",
+            "waitForThenClick": "#pop-up_cookie_button_decline",
             "comment": "NEIN, DANKE"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#app > div:nth-child(2)#foe > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline",
+            "waitForVisible": "#pop-up_cookie_button_decline",
             "timeout": 1000,
             "check": "none"
         }
