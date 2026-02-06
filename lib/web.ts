@@ -310,9 +310,7 @@ export default class AutoConsent {
         };
 
         const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => {
-            // Intentionally swallowed: mutation observer may reject if no mutations occur before timeout
-        });
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
         for (const [stageName, ruleGroup] of rulesPriorityStages) {
             logsConfig.lifecycle &&
@@ -393,9 +391,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => {
-                // Intentionally swallowed: all CMPs failing to detect a popup is an expected outcome
-            });
+            .catch(() => {});
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
