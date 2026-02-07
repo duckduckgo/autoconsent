@@ -16,7 +16,7 @@ export { snippets as evalSnippets } from './eval-snippets';
 export { filterCompactRules } from './encoding';
 export type { IndexedCMPRuleset, CompactCMPRuleset } from './encoding';
 
-function filterCMPs(rules: AutoCMP[], config: Config) {
+export function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
         return (
             (!config.disabledCmps || !config.disabledCmps.includes(cmp.name)) && // CMP is not disabled
