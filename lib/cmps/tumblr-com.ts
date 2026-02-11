@@ -41,7 +41,7 @@ export default class Tumblr extends AutoConsentCMPBase {
         await waitFor(
             () => {
                 const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-                return !!(iframe?.contentDocument?.querySelector('.cmp__dialog input'));
+                return !!iframe?.contentDocument?.querySelector('.cmp__dialog input');
             },
             5,
             500,
@@ -59,7 +59,8 @@ export default class Tumblr extends AutoConsentCMPBase {
 
     async optIn() {
         const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-        const acceptButton: HTMLButtonElement | null | undefined = iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
+        const acceptButton: HTMLButtonElement | null | undefined =
+            iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
         if (acceptButton) {
             acceptButton.click();
             return true;
