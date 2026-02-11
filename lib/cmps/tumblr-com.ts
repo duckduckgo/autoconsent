@@ -32,16 +32,16 @@ export default class Tumblr extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        let iframe: HTMLIFrameElement = document.querySelector('#cmp-app-container iframe');
-        let settingsButton: HTMLButtonElement = iframe.contentDocument?.querySelector('.cmp-components-button.is-secondary');
+        let iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
+        let settingsButton: HTMLElement | null | undefined = iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
         if (!settingsButton) {
             return false;
         }
         settingsButton.click();
         await waitFor(
             () => {
-                const iframe: HTMLIFrameElement = document.querySelector('#cmp-app-container iframe');
-                return !!iframe.contentDocument?.querySelector('.cmp__dialog input');
+                const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
+                return !!(iframe?.contentDocument?.querySelector('.cmp__dialog input'));
             },
             5,
             500,
@@ -49,7 +49,7 @@ export default class Tumblr extends AutoConsentCMPBase {
 
         // it's a different button now
         iframe = document.querySelector('#cmp-app-container iframe');
-        settingsButton = iframe.contentDocument?.querySelector('.cmp-components-button.is-secondary');
+        settingsButton = iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
         if (!settingsButton) {
             return false;
         }
@@ -58,8 +58,8 @@ export default class Tumblr extends AutoConsentCMPBase {
     }
 
     async optIn() {
-        const iframe: HTMLIFrameElement = document.querySelector('#cmp-app-container iframe');
-        const acceptButton: HTMLButtonElement = iframe.contentDocument.querySelector('.cmp-components-button.is-primary');
+        const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
+        const acceptButton: HTMLButtonElement | null | undefined = iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
         if (acceptButton) {
             acceptButton.click();
             return true;
