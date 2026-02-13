@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_isde.nl_vr6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.isde.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?isde\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consentease-banner-23 > div:not([id]) > button:nth-child(3)#decline-button-23"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consentease-banner-23 > div:not([id]) > button:nth-child(3)#decline-button-23"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consentease-banner-23 > div:not([id]) > button:nth-child(3)#decline-button-23",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consentease-banner-23 > div:not([id]) > button:nth-child(3)#decline-button-23",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_bergzeit.co.uk_d1r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bergzeit.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bergzeit\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bergzeit-app > div:nth-child(9)#cookie-disclaimer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bergzeit-app > div:nth-child(9)#cookie-disclaimer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bergzeit-app > div:nth-child(9)#cookie-disclaimer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bergzeit-app > div:nth-child(9)#cookie-disclaimer > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_crazypatterns.net_di3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.crazypatterns.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?crazypatterns\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-component-simple > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-component-simple > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-component-simple > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-component-simple > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

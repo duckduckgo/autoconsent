@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_112-meldingen.nl_4jg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://112-meldingen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?112-meldingen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-decline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebar > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

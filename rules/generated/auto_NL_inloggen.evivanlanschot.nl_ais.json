@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_inloggen.evivanlanschot.nl_ais",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://inloggen.evivanlanschot.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?inloggen\\.evivanlanschot\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > form:nth-child(3)#cookie-options > button:nth-child(2)#declineCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > form:nth-child(3)#cookie-options > button:nth-child(2)#declineCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > form:nth-child(3)#cookie-options > button:nth-child(2)#declineCookies",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > form:nth-child(3)#cookie-options > button:nth-child(2)#declineCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

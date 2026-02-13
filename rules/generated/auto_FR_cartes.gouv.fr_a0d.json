@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cartes.gouv.fr_a0d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cartes.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cartes\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2)#my-consent > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2)#my-consent > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2)#my-consent > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2)#my-consent > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

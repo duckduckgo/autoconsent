@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_analyticsvidhya.com_pbu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.analyticsvidhya.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?analyticsvidhya\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > main:not([id]) > div:nth-child(24)#Cookies > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > main:not([id]) > div:nth-child(24)#Cookies > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > main:not([id]) > div:nth-child(24)#Cookies > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Use necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > main:not([id]) > div:nth-child(24)#Cookies > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

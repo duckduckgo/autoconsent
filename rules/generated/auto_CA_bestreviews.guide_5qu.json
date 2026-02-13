@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_bestreviews.guide_5qu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bestreviews.guide/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bestreviews\\.guide/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookie-consent\"] > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookie-consent\"] > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookie-consent\"] > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookie-consent\"] > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"reject-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

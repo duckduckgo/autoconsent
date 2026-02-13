@@ -1,0 +1,41 @@
+{
+    "name": "auto_CH_de.forgeofempires.com_pur",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.forgeofempires.com/",
+        "manuallyReviewUpdates": true
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de-play\\.forgeofempires\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#pop-up_cookie_button_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#pop-up_cookie_button_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "#pop-up_cookie_button_decline",
+            "comment": "NEIN, DANKE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#pop-up_cookie_button_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

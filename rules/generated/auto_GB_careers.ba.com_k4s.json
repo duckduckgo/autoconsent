@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_careers.ba.com_k4s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.ba.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.ba\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

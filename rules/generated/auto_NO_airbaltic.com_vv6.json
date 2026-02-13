@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_airbaltic.com_vv6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.airbaltic.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?airbaltic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Accept only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieBanner > div:nth-child(2)#CookieBannerNotice > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

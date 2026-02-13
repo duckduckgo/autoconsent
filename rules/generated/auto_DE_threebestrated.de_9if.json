@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_threebestrated.de_9if",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://threebestrated.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?threebestrated\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#main > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#main > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#main > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#main > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

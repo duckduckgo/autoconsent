@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_eropaste.net_gmv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eropaste.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eropaste\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#glowCookies-banner > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_nationalarchives.gov.uk_rx0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nationalarchives.gov.uk/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?webarchive\\.nationalarchives\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ds-cookie-consent-banner > div:not([id]) > div:not([id]) > button:nth-child(4)#reject_optional_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ds-cookie-consent-banner > div:not([id]) > div:not([id]) > button:nth-child(4)#reject_optional_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ds-cookie-consent-banner > div:not([id]) > div:not([id]) > button:nth-child(4)#reject_optional_cookies",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ds-cookie-consent-banner > div:not([id]) > div:not([id]) > button:nth-child(4)#reject_optional_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

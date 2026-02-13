@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_armtec.ch_hep",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://armtec.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?armtec\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-dismiss"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-dismiss",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookies-wrapper > div:nth-child(2)#ot-cookie-banner > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1)#cookies-dismiss",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

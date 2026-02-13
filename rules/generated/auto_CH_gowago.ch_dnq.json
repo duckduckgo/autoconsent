@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#user-consent-decline"
+            "exists": "body > div:not([id]) > div#radix-_R_4ivatb_[data-testid=\"user-consent-dialog\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-decline\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#user-consent-decline"
+            "visible": "body > div:not([id]) > div#radix-_R_4ivatb_[data-testid=\"user-consent-dialog\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-decline\"]"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#user-consent-decline",
+            "waitForThenClick": "body > div:not([id]) > div#radix-_R_4ivatb_[data-testid=\"user-consent-dialog\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-decline\"]",
             "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#user-consent-decline",
+            "waitForVisible": "body > div:not([id]) > div#radix-_R_4ivatb_[data-testid=\"user-consent-dialog\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-decline\"]",
             "timeout": 1000,
             "check": "none"
         }

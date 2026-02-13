@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_m.adultwork.com_59d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://m.adultwork.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?m\\.adultwork\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(1):not([id]) > div:nth-child(6):not([id]) > div:not([id])[data-testid=\"cookies-banner-container\"] > div:not([id]) > div:nth-child(2):not([id])[data-testid=\"cookies-banner-actions\"] > button:nth-child(2):not([id])[data-testid=\"cookies-reject-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

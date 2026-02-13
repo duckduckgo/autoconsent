@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bauer-baumschulen.ch_s18",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bauer-baumschulen.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bauer-baumschulen\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn-Rejected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn-Rejected"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn-Rejected",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CookieMessage > div:nth-child(2)#button_wrapper > button:nth-child(1)#SaveBtnnn-Rejected",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
