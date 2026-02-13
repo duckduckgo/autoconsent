@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_aegon.nl_y2y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.aegon.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aegon\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cribbon > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#select-only-necessary > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cribbon > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#select-only-necessary > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cribbon > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#select-only-necessary > span:not([id])",
+            "comment": "Alleen noodzakelijke"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cribbon > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#select-only-necessary > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

@@ -13,6 +13,8 @@ import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
 
 export { snippets as evalSnippets } from './eval-snippets';
+export { filterCompactRules } from './encoding';
+export type { IndexedCMPRuleset, CompactCMPRuleset } from './encoding';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {

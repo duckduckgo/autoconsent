@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bouwencyclopedie.nl_2q6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bouwencyclopedie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bouwencyclopedie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiedialog > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-essential-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiedialog > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-essential-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiedialog > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-essential-btn",
+            "comment": "Alleen essentiële cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiedialog > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#cookie-essential-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

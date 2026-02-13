@@ -2,7 +2,8 @@
     "name": "auto_DE_betterstack.com_285",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://betterstack.com/"
+        "vendorUrl": "http://betterstack.com/",
+        "manuallyReviewUpdates": true
     },
     "runContext": {
         "main": true,
@@ -12,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "exists": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "visible": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
         }
     ],
     "optIn": [],
@@ -26,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "waitForThenClick": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
             "comment": "Accept required"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(26)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "waitForVisible": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
             "timeout": 1000,
             "check": "none"
         }
