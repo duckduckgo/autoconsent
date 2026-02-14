@@ -61,6 +61,97 @@ npm run watch
 
 This will rebuild the extension on every source file change. You still need to refresh the extension in the browser to see the changes.
 
+## Using with Puppeteer
+
+Autoconsent can be used with [Puppeteer](https://pptr.dev) via the bundled `dist/autoconsent.playwright.js` script. This self-contained IIFE expects two globals:
+
+- `window.autoconsentSendMessage` — used by the content script to send messages from the page to Node.
+- `window.autoconsentReceiveMessage` — used by Node to send messages back into the page.
+
+Puppeteer's `page.exposeFunction` and `page.evaluateOnNewDocument` bridge the gap.
+
+If you're looking for a batteries-included solution, [browserless](https://browserless.js.org) integrates autoconsent out of the box as part of its `adblock` option.
+
+You can do it at your end too:
+
+```javascript
+const puppeteer = require('puppeteer')
+const path = require('path')
+const fs = require('fs')
+
+// Read the bundled content script (IIFE that runs in the page context)
+const autoconsentScript = fs.readFileSync(
+  path.resolve(
+    path.dirname(require.resolve('@duckduckgo/autoconsent')),
+    'autoconsent.playwright.js'
+  ),
+  'utf8'
+)
+
+// Configuration sent back to the content script on `init`.
+// See https://github.com/duckduckgo/autoconsent/blob/main/api.md
+const autoconsentConfig = {
+  enabled: true,
+  autoAction: 'optOut',
+  enablePrehide: true,
+  enableCosmeticRules: true,
+  detectRetries: 20,
+}
+
+// Helper: forward a message from Node into the page's autoconsent instance
+const sendMessage = (page, message) =>
+  page
+    .evaluate(msg => {
+      if (window.autoconsentReceiveMessage) {
+        return window.autoconsentReceiveMessage(msg)
+      }
+    }, message)
+    .catch(() => {})
+
+async function setupAutoconsent(page) {
+  // Expose a function the content script calls to send messages to Node
+  await page.exposeFunction('autoconsentSendMessage', async message => {
+    if (!message || typeof message !== 'object') return
+
+    // Respond to the init handshake with our config
+    if (message.type === 'init') {
+      return sendMessage(page, { type: 'initResp', config: autoconsentConfig })
+    }
+
+    // Eval rules are not supported in Puppeteer; return false so the
+    // rule step fails gracefully and the next rule is tried
+    if (message.type === 'eval') {
+      return sendMessage(page, { type: 'evalResp', id: message.id, result: false })
+    }
+  })
+
+  // Inject the content script before any page script runs
+  await page.evaluateOnNewDocument(autoconsentScript)
+}
+
+;(async () => {
+  const browser = await puppeteer.launch({ headless: 'new' })
+  const page = await browser.newPage()
+
+  await setupAutoconsent(page)
+  await page.goto('https://example.com', { waitUntil: 'load' })
+
+  // Re-run on the current document in case the page was already loaded
+  // before evaluateOnNewDocument had a chance to fire
+  await page.evaluate(autoconsentScript).catch(() => {})
+
+  // … continue with your automation
+  await browser.close()
+})()
+```
+
+### How it works
+
+1. **`page.exposeFunction`** binds `window.autoconsentSendMessage` in the page, giving the content script a way to call back into Node.
+2. **`page.evaluateOnNewDocument`** injects the content script so it runs before any page JavaScript, enabling early CMP detection and prehiding.
+3. When the content script starts, it sends an `init` message. The Node-side handler replies with `initResp` containing the config, which triggers CMP detection and automatic opt-out.
+4. A post-navigation `page.evaluate(autoconsentScript)` re-triggers the script on the current document, covering cases where the page loaded before the `evaluateOnNewDocument` hook was set up.
+
 ## Rules
 
 The library's functionality is implemented as a set of rules that define how to manage consent on
