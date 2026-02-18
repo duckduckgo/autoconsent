@@ -6,6 +6,8 @@ const prUrls = {
     android: process.env.ANDROID_PR_URL,
     apple: process.env.APPLE_PR_URL,
     windows: process.env.WINDOWS_PR_URL,
+    extension: process.env.EXTENSION_PR_URL,
+    appleEmbedded: process.env.APPLE_EMBEDDED_PR_URL,
 };
 const asanaOutputRaw = process.env.ASANA_OUTPUT;
 
