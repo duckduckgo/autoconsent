@@ -1,0 +1,28 @@
+{
+    "name": "schoolhouse-com",
+    "_metadata": {
+        "vendorUrl": "https://schoolhouse.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["body > div#__next > div#app > div:nth-child(7):not([id])"],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div#app > div:nth-child(7):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div#app > div:nth-child(7):not([id])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "body > div#__next > div#app > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "body > div#__next > div#app > div:nth-child(7):not([id])"
+        }
+    ]
+}
