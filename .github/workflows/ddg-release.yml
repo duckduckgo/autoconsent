@@ -24,6 +24,16 @@ on:
                 type: boolean
                 required: true
                 default: true
+            extension:
+                description: 'Propagate to Extension'
+                type: boolean
+                required: true
+                default: true
+            apple_embedded:
+                description: 'Propagate embedded extension to Apple'
+                type: boolean
+                required: true
+                default: true
 
     workflow_call:
         inputs:
@@ -45,6 +55,14 @@ on:
                 default: true
             windows:
                 description: 'Propagate to Windows'
+                type: boolean
+                default: true
+            extension:
+                description: 'Propagate to Extension'
+                type: boolean
+                default: true
+            apple_embedded:
+                description: 'Propagate embedded extension to Apple'
                 type: boolean
                 default: true
 
@@ -282,6 +300,151 @@ jobs:
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
     # ------------------------------------------------------------------------------
+    # Create PR with updated autoconsent in the DDG Extension
+    # ------------------------------------------------------------------------------
+
+    update_extension:
+        if: ${{ inputs.extension }}
+        runs-on: ubuntu-latest
+        needs:
+            - get_release_info
+            - create_asana_tasks
+        outputs:
+            pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
+        env:
+            RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+        steps:
+            # --- Setup ---
+            - uses: actions/checkout@v3
+              with:
+                  path: autoconsent/
+            - uses: ./autoconsent/.github/actions/setup-release-scripts
+            # --- Action ---
+            - name: Checkout DDG Extension
+              uses: actions/checkout@v3
+              with:
+                  repository: duckduckgo/duckduckgo-privacy-extension
+                  path: extension/
+                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: current
+            - name: Update extension autoconsent reference
+              run: |
+                  cd extension
+                  npm ci
+                  npm install @duckduckgo/autoconsent@${{ env.TAG }}
+                  cd ..
+            - name: Create Extension PR Body
+              env:
+                  ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
+              run: |
+                  TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js extension)"
+                  # Creates a randomised delimiter. See https://app.asana.com/0/1199892415909552/1203243297643584/f
+                  DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
+                  echo "PR_BODY_EXTENSION<<$DELIMITER" >> $GITHUB_ENV
+                  echo "$TEMPLATE" >> $GITHUB_ENV
+                  echo "$DELIMITER" >> $GITHUB_ENV
+            # --- Effect ---
+            - name: Create PR for DDG Extension
+              uses: peter-evans/create-pull-request@v7
+              id: create-pr
+              with:
+                  path: extension/
+                  add-paths: |
+                      package.json
+                      package-lock.json
+                  commit-message: Update autoconsent to ${{ env.TAG }}
+                  branch: update-autoconsent
+                  title: Update autoconsent to ${{ env.TAG }}
+                  body: '${{ env.PR_BODY_EXTENSION }}'
+                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+
+    # ------------------------------------------------------------------------------
+    # Build embedded extension and create PR in Apple repo
+    # ------------------------------------------------------------------------------
+
+    update_apple_embedded:
+        if: ${{ inputs.apple_embedded }}
+        runs-on: ubuntu-latest
+        needs:
+            - get_release_info
+            - create_asana_tasks
+        outputs:
+            pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
+        env:
+            RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
+            APPLE_EMBEDDED_PATH: SharedPackages/WebExtensions/embedded-extension.zip
+        steps:
+            # --- Setup ---
+            - uses: actions/checkout@v3
+              with:
+                  path: autoconsent/
+            - uses: ./autoconsent/.github/actions/setup-release-scripts
+            # --- Build embedded extension from updated extension branch ---
+            - name: Checkout Browser Extension
+              uses: actions/checkout@v3
+              with:
+                  repository: duckduckgo/duckduckgo-privacy-extension
+                  path: extension/
+                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: current
+            - name: Prepare updated extension branch
+              run: |
+                  cd extension
+                  npm ci
+                  npm install @duckduckgo/autoconsent@${{ env.TAG }}
+                  cd ..
+            - name: Build embedded extension
+              run: |
+                  cd extension
+                  npm run release-embedded
+                  cd ..
+            - name: Locate embedded zip
+              id: find-zip
+              run: |
+                  ZIP_PATH=$(ls extension/build/embedded/release/embedded-release-*.zip)
+                  ZIP_NAME=$(basename "$ZIP_PATH")
+                  echo "ZIP_PATH=$ZIP_PATH" >> $GITHUB_OUTPUT
+                  echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
+            # --- Create PR in Apple repo ---
+            - name: Checkout Apple monorepo
+              uses: actions/checkout@v3
+              with:
+                  repository: duckduckgo/apple-browsers
+                  path: apple-monorepo/
+                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+            - name: Copy embedded zip to Apple repo
+              run: |
+                  TARGET_PATH="apple-monorepo/${{ env.APPLE_EMBEDDED_PATH }}"
+                  mkdir -p "$(dirname "$TARGET_PATH")"
+                  rm -f "$TARGET_PATH"
+                  cp "${{ steps.find-zip.outputs.ZIP_PATH }}" "$TARGET_PATH"
+            - name: Create Apple Embedded PR Body
+              env:
+                  ASANA_OUTPUT: ${{ needs.create_asana_tasks.outputs.asana-output }}
+              run: |
+                  TEMPLATE="$(node ./autoconsent/ci/create-pr-template.js appleEmbedded)"
+                  DELIMITER=$(echo $RANDOM | md5sum | head -c 20;)
+                  echo "PR_BODY_APPLE_EMBEDDED<<$DELIMITER" >> $GITHUB_ENV
+                  echo "$TEMPLATE" >> $GITHUB_ENV
+                  echo "$DELIMITER" >> $GITHUB_ENV
+            - name: Create PR for Apple embedded extension
+              uses: peter-evans/create-pull-request@v7
+              id: create-pr
+              with:
+                  path: apple-monorepo/
+                  add-paths: |
+                      ${{ env.APPLE_EMBEDDED_PATH }}
+                  commit-message: Update embedded extension to autoconsent ${{ env.TAG }}
+                  branch: update-autoconsent-embedded
+                  title: Update embedded extension to autoconsent ${{ env.TAG }}
+                  body: '${{ env.PR_BODY_APPLE_EMBEDDED }}'
+                  token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
+
+    # ------------------------------------------------------------------------------
     # Update Asana subtasks with PR URLs
     # ------------------------------------------------------------------------------
 
@@ -290,7 +453,7 @@ jobs:
         # Always run this final step, even if any of the updates have failed
         # unless the previous jobs were cancelled
         if: ${{ always() && !contains(needs.*.result, 'cancelled') }}
-        needs: [create_asana_tasks, update_android, update_apple, update_windows]
+        needs: [create_asana_tasks, update_android, update_apple, update_windows, update_extension, update_apple_embedded]
         steps:
             # --- Setup ---
             - uses: actions/checkout@v3
@@ -305,6 +468,8 @@ jobs:
                   APPLE_PR_URL: ${{ needs.update_apple.outputs.pull-request-url }}
                   WINDOWS_PR_URL: ${{ needs.update_windows.outputs.pull-request-url }}
                   ANDROID_PR_URL: ${{ needs.update_android.outputs.pull-request-url }}
+                  EXTENSION_PR_URL: ${{ needs.update_extension.outputs.pull-request-url }}
+                  APPLE_EMBEDDED_PR_URL: ${{ needs.update_apple_embedded.outputs.pull-request-url }}
               run: |
                   node ./autoconsent/ci/asana-update-tasks.js
 
