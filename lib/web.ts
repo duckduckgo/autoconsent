@@ -12,9 +12,13 @@ import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
 
+// Re-export types and functions for external use
 export { snippets as evalSnippets } from './eval-snippets';
-export { filterCompactRules } from './encoding';
-export type { IndexedCMPRuleset, CompactCMPRuleset } from './encoding';
+export { filterCompactRules, encodeRules, decodeRules } from './encoding';
+export type { CompactRuleStep, CompactCMPRuleStep, CompactCMPRule, CompactCMPRuleset, IndexedCMPRuleset } from './encoding';
+export type { ConsentState, Config, RuleBundle } from './types';
+export type * from './rules';
+export type * from './messages';
 
 function filterCMPs(rules: AutoCMP[], config: Config) {
     return rules.filter((cmp) => {
