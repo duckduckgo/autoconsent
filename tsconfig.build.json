@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "declarationDir": "./dist/types",
+        "noCheck": true
+    },
+    "include": ["lib/web.ts", "lib/web-extra.ts"],
+    "exclude": []
+}

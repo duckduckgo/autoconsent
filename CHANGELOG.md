@@ -1,3 +1,32 @@
+# v14.54.0 (Fri Feb 13 2026)
+
+#### 🚀 Enhancement
+
+- Generate and export Typescript definitions [#1151](https://github.com/duckduckgo/autoconsent/pull/1151) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.53.0 (Sat Feb 07 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1145](https://github.com/duckduckgo/autoconsent/pull/1145) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### 🐛 Bug Fix
+
+- Re-generate test urls to fix a test regression [#1146](https://github.com/duckduckgo/autoconsent/pull/1146) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.52.0 (Fri Feb 06 2026)
 
 #### 🚀 Enhancement
