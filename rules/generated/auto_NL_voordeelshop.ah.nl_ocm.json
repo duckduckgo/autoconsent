@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_voordeelshop.ah.nl_ocm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://voordeelshop.ah.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?voordeelshop\\.ah\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).dope-shop > div:nth-child(48):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testid=\"cookie-popup\"].modal-xoIgHC.designTokens-l0p4Bk.modal-dfcGnP > div:nth-child(3):not([id]).root-mOnab9.footer-JImgFg > div:nth-child(1):not([id]).root-mOnab9.buttonGroup-QuqiSP.button-U3FLBE > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-UuP9f1.secondary-aEsRRY.button-Lfnimv.button-U3FLBE > span:nth-child(1):not([id]).typography-DH1VqT.button-kMgZeY.align-center-q5YgQJ.text-Pxxd6K"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).dope-shop > div:nth-child(48):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testid=\"cookie-popup\"].modal-xoIgHC.designTokens-l0p4Bk.modal-dfcGnP > div:nth-child(3):not([id]).root-mOnab9.footer-JImgFg > div:nth-child(1):not([id]).root-mOnab9.buttonGroup-QuqiSP.button-U3FLBE > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-UuP9f1.secondary-aEsRRY.button-Lfnimv.button-U3FLBE > span:nth-child(1):not([id]).typography-DH1VqT.button-kMgZeY.align-center-q5YgQJ.text-Pxxd6K"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).dope-shop > div:nth-child(48):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testid=\"cookie-popup\"].modal-xoIgHC.designTokens-l0p4Bk.modal-dfcGnP > div:nth-child(3):not([id]).root-mOnab9.footer-JImgFg > div:nth-child(1):not([id]).root-mOnab9.buttonGroup-QuqiSP.button-U3FLBE > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-UuP9f1.secondary-aEsRRY.button-Lfnimv.button-U3FLBE > span:nth-child(1):not([id]).typography-DH1VqT.button-kMgZeY.align-center-q5YgQJ.text-Pxxd6K",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).dope-shop > div:nth-child(48):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1):not([id])[data-testid=\"cookie-popup\"].modal-xoIgHC.designTokens-l0p4Bk.modal-dfcGnP > div:nth-child(3):not([id]).root-mOnab9.footer-JImgFg > div:nth-child(1):not([id]).root-mOnab9.buttonGroup-QuqiSP.button-U3FLBE > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-UuP9f1.secondary-aEsRRY.button-Lfnimv.button-U3FLBE > span:nth-child(1):not([id]).typography-DH1VqT.button-kMgZeY.align-center-q5YgQJ.text-Pxxd6K",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

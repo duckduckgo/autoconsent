@@ -1,13 +1,16 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "14.50.1",
+  "version": "14.54.0",
   "description": "",
+  "types": "./dist/types/web.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/web.d.ts",
       "import": "./dist/autoconsent.esm.js",
       "require": "./dist/autoconsent.cjs.js"
     },
     "./extra": {
+      "types": "./dist/types/web-extra.d.ts",
       "import": "./dist/autoconsent.extra.esm.js",
       "require": "./dist/autoconsent.extra.cjs.js"
     },

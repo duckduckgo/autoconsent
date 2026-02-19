@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_hachettebookgroup.com_t5n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hachettebookgroup.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hachettebookgroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(4)#privacy_collapse > div:not([id]) > div:nth-child(3)#privacyOptInOut > button:nth-child(2)#optOut"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(4)#privacy_collapse > div:not([id]) > div:nth-child(3)#privacyOptInOut > button:nth-child(2)#optOut"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(4)#privacy_collapse > div:not([id]) > div:nth-child(3)#privacyOptInOut > button:nth-child(2)#optOut",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(4)#privacy_collapse > div:not([id]) > div:nth-child(3)#privacyOptInOut > button:nth-child(2)#optOut",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

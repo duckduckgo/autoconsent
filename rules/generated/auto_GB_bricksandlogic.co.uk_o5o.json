@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:not([id])"
+            "exists": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:not([id])"
+            "visible": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:not([id])",
-            "comment": "essential cookies"
+            "waitForThenClick": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Essential Only"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > a:not([id])",
+            "waitForVisible": "body > div#cookie-banner-container > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
