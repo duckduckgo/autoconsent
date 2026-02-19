@@ -9,6 +9,9 @@ $ESBUILD --format=cjs --target=es2021 --platform=node lib/web-extra.ts --outfile
 $ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 
+# Generate type declarations for consumers
+npx tsc -p tsconfig.build.json
+
 # Extension
 $ESBUILD addon/background.ts --outfile=dist/addon-mv3/background.bundle.js
 $ESBUILD addon/content.ts --outfile=dist/addon-mv3/content.bundle.js

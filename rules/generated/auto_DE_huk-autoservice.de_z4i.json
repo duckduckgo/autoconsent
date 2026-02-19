@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_huk-autoservice.de_z4i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.huk-autoservice.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?huk-autoservice\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-cookie-consent > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-cookie-consent > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-cookie-consent > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Mit erforderlichen Einstellungen fortfahren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-cookie-consent > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

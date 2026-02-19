@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bonnorange.de_kt7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bonnorange.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bonnorange\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(2)#ConsentDialogText > div:nth-child(2):not([id]) > p:nth-child(5):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(2)#ConsentDialogText > div:nth-child(2):not([id]) > p:nth-child(5):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(2)#ConsentDialogText > div:nth-child(2):not([id]) > p:nth-child(5):not([id]) > button:not([id])",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#CookieBox > div:not([id]) > div:nth-child(2)#ConsentDialogText > div:nth-child(2):not([id]) > p:nth-child(5):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

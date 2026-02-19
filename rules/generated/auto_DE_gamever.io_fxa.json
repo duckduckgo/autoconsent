@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_gamever.io_fxa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gamever.io/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gamever\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > app-modal-confirm-cookies-unsubscribe:not([id]) > gc-dialog-box:not([id]) > gc-dialog-footer:nth-child(3):not([id]) > uikit-grid-columns:not([id]) > uikit-button:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > app-modal-confirm-cookies-unsubscribe:not([id]) > gc-dialog-box:not([id]) > gc-dialog-footer:nth-child(3):not([id]) > uikit-grid-columns:not([id]) > uikit-button:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > app-modal-confirm-cookies-unsubscribe:not([id]) > gc-dialog-box:not([id]) > gc-dialog-footer:nth-child(3):not([id]) > uikit-grid-columns:not([id]) > uikit-button:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Accept essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-0 > app-modal-confirm-cookies-unsubscribe:not([id]) > gc-dialog-box:not([id]) > gc-dialog-footer:nth-child(3):not([id]) > uikit-grid-columns:not([id]) > uikit-button:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

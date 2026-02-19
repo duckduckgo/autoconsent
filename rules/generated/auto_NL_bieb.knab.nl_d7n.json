@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bieb.knab.nl_d7n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bieb.knab.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bieb\\.knab\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:nth-child(2)#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:nth-child(2)#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(2)#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(2)#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

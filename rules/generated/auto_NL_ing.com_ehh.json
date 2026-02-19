@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ing.com_ehh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ing.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ing\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CLID_f936e33c-24b9-4899-9b6e-e4a3ad8cee96 > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuseAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CLID_f936e33c-24b9-4899-9b6e-e4a3ad8cee96 > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuseAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CLID_f936e33c-24b9-4899-9b6e-e4a3ad8cee96 > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuseAll",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CLID_f936e33c-24b9-4899-9b6e-e4a3ad8cee96 > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuseAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

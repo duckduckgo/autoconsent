@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip"
+            "exists": "body > div#app-vue > div:not([id]) > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip"
+            "visible": "body > div#app-vue > div:not([id]) > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip",
+            "waitForThenClick": "body > div#app-vue > div:not([id]) > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip",
             "comment": "Continuer sans accepter"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#app-vue > div#app > div:nth-child(2):not([id]) > div#app-container > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip",
+            "waitForVisible": "body > div#app-vue > div:not([id]) > div:nth-child(5):not([id]) > div#cookiesStrip > div:not([id]) > div:nth-child(3)#cookiesStrip_buttons > div:not([id]) > button:nth-child(2)#cookiesStrip_content_skip",
             "timeout": 1000,
             "check": "none"
         }

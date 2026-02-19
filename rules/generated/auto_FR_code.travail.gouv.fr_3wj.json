@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:"
+            "exists": "body > section#fr-consent-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button#fr-button-_r_1_"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:"
+            "visible": "body > section#fr-consent-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button#fr-button-_r_1_"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:",
+            "waitForThenClick": "body > section#fr-consent-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button#fr-button-_r_1_",
             "comment": "Tout refuser"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#fr-button-\\:r5\\:",
+            "waitForVisible": "body > section#fr-consent-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button#fr-button-_r_1_",
             "timeout": 1000,
             "check": "none"
         }

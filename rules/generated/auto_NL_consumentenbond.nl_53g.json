@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div[data-test-consent-banner-popup] button[aria-label=\"Niet accepteren\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div[data-test-consent-banner-popup] button[aria-label=\"Niet accepteren\"]"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "div[data-test-consent-banner-popup] button[aria-label=\"Niet accepteren\"]",
             "comment": "Niet accepteren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "div[data-test-consent-banner-popup] button[aria-label=\"Niet accepteren\"]",
             "timeout": 1000,
             "check": "none"
         }

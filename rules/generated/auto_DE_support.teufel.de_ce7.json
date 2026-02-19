@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_support.teufel.de_ce7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://support.teufel.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?support\\.teufel\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "\"Reject All\""
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > privacy-layer#privacy-layer-modal > dialog#privacy-layer-modal-content > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

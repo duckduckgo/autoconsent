@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_cognitoedu.org_a7t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cognitoedu.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cognitoedu\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Essential cookies only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

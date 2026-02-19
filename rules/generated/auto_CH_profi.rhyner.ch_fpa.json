@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_profi.rhyner.ch_fpa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://profi.rhyner.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?profi\\.rhyner\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-manager-window > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1)#cookie-manager-consent > div:nth-child(2)#cookie-manager > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-required-header"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-manager-window > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1)#cookie-manager-consent > div:nth-child(2)#cookie-manager > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-required-header"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-manager-window > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1)#cookie-manager-consent > div:nth-child(2)#cookie-manager > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-required-header",
+            "comment": "Required cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-manager-window > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1)#cookie-manager-consent > div:nth-child(2)#cookie-manager > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-required-header",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

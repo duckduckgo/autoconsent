@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_211ontario.ca_zg3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://211ontario.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?211ontario\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div#cookie-info > div:nth-child(2)#cookie-decline > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div#cookie-info > div:nth-child(2)#cookie-decline > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div#cookie-info > div:nth-child(2)#cookie-decline > a:not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div#cookie-info > div:nth-child(2)#cookie-decline > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
