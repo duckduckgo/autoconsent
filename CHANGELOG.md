@@ -1,3 +1,15 @@
+# v14.54.0 (Fri Feb 13 2026)
+
+#### 🚀 Enhancement
+
+- Generate and export Typescript definitions [#1151](https://github.com/duckduckgo/autoconsent/pull/1151) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.53.0 (Sat Feb 07 2026)
 
 #### 🚀 Enhancement
