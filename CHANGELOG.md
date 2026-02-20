@@ -1,3 +1,25 @@
+# v14.55.0 (Fri Feb 20 2026)
+
+#### 🚀 Enhancement
+
+- mitigate a race condition in tarteaucitron-deny [#1128](https://github.com/duckduckgo/autoconsent/pull/1128) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to e97cf92272b9a6706202c70878b168693d4bd0e8 [#1106](https://github.com/duckduckgo/autoconsent/pull/1106) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Prevent exceptions in tumblr rule [#1150](https://github.com/duckduckgo/autoconsent/pull/1150) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.19 to 7.0.23 [#1147](https://github.com/duckduckgo/autoconsent/pull/1147) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Fix: baden-wuerttemberg.de rule [#1155](https://github.com/duckduckgo/autoconsent/pull/1155) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.54.0 (Fri Feb 13 2026)
 
 #### 🚀 Enhancement
