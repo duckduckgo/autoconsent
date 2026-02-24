@@ -20,8 +20,7 @@ const releaseTaskGid = match?.groups?.task;
  *   android: platformData,
  *   windows: platformData,
  *   apple: platformData,
- *   extension: platformData,
- *   appleEmbedded: platformData
+ *   extension: platformData
  * }} AsanaOutput
  */
 
@@ -44,11 +43,6 @@ const platforms = {
     },
     extension: {
         displayName: 'Extension',
-        taskGid: '',
-        taskUrl: '',
-    },
-    appleEmbedded: {
-        displayName: 'Apple Embedded Extension',
         taskGid: '',
         taskUrl: '',
     },

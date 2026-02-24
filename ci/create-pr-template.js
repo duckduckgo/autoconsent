@@ -12,7 +12,7 @@ const filepath = (...pathParts) => join(cwd, ...pathParts);
  *   releaseUrl: string,
  *   version: string
  * }} CreatePRTemplateData
- * @typedef {'android' | 'extension' | 'apple' | 'windows' | 'appleEmbedded'} ReleasePlatform
+ * @typedef {'android' | 'extension' | 'apple' | 'windows'} ReleasePlatform
  */
 
 const platform = /** @type {ReleasePlatform} */ (process.argv[2]);
