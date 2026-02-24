@@ -374,7 +374,7 @@ jobs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
         env:
             RELEASE_URL: ${{ needs.get_release_info.outputs.release-url }}
-            APPLE_EMBEDDED_PATH: SharedPackages/WebExtensions/embedded-extension.zip
+            APPLE_EMBEDDED_PATH: SharedPackages/WebExtensions/Sources/WebExtensions/BundledWebExtensions/duckduckgo-embedded-web-extension.zip
         steps:
             # --- Setup ---
             - uses: actions/checkout@v3
