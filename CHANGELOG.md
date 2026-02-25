@@ -1,3 +1,17 @@
+# v14.55.1 (Wed Feb 25 2026)
+
+#### 🐛 Bug Fix
+
+- Add CI workflow for updating DDG extensions [#1154](https://github.com/duckduckgo/autoconsent/pull/1154) ([@muodov](https://github.com/muodov))
+- Revert "Bump tldts-experimental from 7.0.19 to 7.0.23" [#1156](https://github.com/duckduckgo/autoconsent/pull/1156) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.55.0 (Fri Feb 20 2026)
 
 #### 🚀 Enhancement
