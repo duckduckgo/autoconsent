@@ -332,7 +332,8 @@ jobs:
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
             - uses: actions/setup-node@v4
               with:
-                  node-version: lts/*
+                  # this should match the node version in the extension CI, to avoid package.lock inconsistencies
+                  node-version: 22
                   cache: 'npm'
                   cache-dependency-path: extension/package-lock.json
             - name: Update extension autoconsent reference
