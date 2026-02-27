@@ -85,16 +85,14 @@ async function main() {
     // Creating subtasks...
     const createdSubtasks = await Promise.all(
         filteredSubTasks.map(
-            // @ts-ignore
-            (subtask) => asana.tasks.createSubtaskForTask(
-                releaseTaskGid,
-                {
+            // @ts-expect-error Asana types are missing
+            (subtask) =>
+                asana.tasks.createSubtaskForTask(releaseTaskGid, {
                     name: subtask.name,
                     html_notes: subtask.html_notes,
                     opt_fields: 'name,html_notes,permalink_url',
-                }
-            )
-        )
+                }),
+        ),
     );
     console.error('created subtasks:', createdSubtasks);
 
@@ -107,15 +105,14 @@ async function main() {
 
     // Updating subtasks and moving to appropriate projects...
     for (const { gid, name, html_notes, permalink_url } of subtasks) {
-
         const platform = Object.keys(platforms).find((key) => name.includes(platforms[key].displayName));
         if (!platform) {
             continue;
         }
 
-        // @ts-ignore
+        // @ts-expect-error Asana types are missing
         platforms[platform].taskGid = gid;
-        // @ts-ignore
+        // @ts-expect-error Asana types are missing
         platforms[platform].taskUrl = permalink_url;
 
         const newName = name.replace('[[version]]', version);
