@@ -83,7 +83,7 @@ async function main() {
     console.error(`Creating ${filteredSubTasks.length} of ${templateSubTasks.length} subtasks`);
 
     // Creating subtasks...
-    const subtasks = await Promise.all(
+    const createdSubtasks = await Promise.all(
         filteredSubTasks.map(
             // @ts-ignore
             (subtask) => asana.tasks.createSubtaskForTask(
@@ -96,14 +96,17 @@ async function main() {
             )
         )
     );
-    console.error('subtasks:', subtasks);
+    console.error('created subtasks:', createdSubtasks);
+
+    // Need to fetch the subtasks again to get the html_notes
+    const { data: subtasks } = await asana.tasks.getSubtasksForTask(releaseTaskGid, { opt_fields: 'gid,name,html_notes,permalink_url' });
+    console.error('fetched subtasks:', subtasks);
 
     // Get html_notes from the release task
     const { html_notes: releaseTaskNotes } = await asana.tasks.getTask(releaseTaskGid, { opt_fields: 'html_notes' });
 
     // Updating subtasks and moving to appropriate projects...
-    for (const subtask of subtasks) {
-        const { gid, name, html_notes, permalink_url } = subtask.data;
+    for (const { gid, name, html_notes, permalink_url } of subtasks) {
 
         const platform = Object.keys(platforms).find((key) => name.includes(platforms[key].displayName));
         if (!platform) {
