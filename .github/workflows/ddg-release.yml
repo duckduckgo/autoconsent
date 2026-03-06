@@ -15,7 +15,7 @@ on:
                 required: true
                 default: true
             apple:
-                description: 'Propagate to iOS & macOS'
+                description: 'Propagate to iOS & macOS (always true if apple_embedded is set)'
                 type: boolean
                 required: true
                 default: true
@@ -176,7 +176,7 @@ jobs:
     # ------------------------------------------------------------------------------
 
     update_apple:
-        if: ${{ inputs.apple }}
+        if: ${{ inputs.apple || inputs.apple_embedded }}
         runs-on: ubuntu-latest
         outputs:
             pull-request-url: ${{ steps.create-pr.outputs.pull-request-url }}
