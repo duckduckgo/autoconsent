@@ -31,6 +31,14 @@ export default class Onetrust extends AutoConsentCMPBase {
             return await this.click('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies');
         }
 
+        if (this.elementVisible('.onetrust-close-btn-handler', 'any')) {
+            // Check if this close button is a 'continue without accepting' button (not just a simple close 'X')
+            const closeBtn = document.querySelector<HTMLElement>('.onetrust-close-btn-handler');
+            if (closeBtn && closeBtn.textContent?.trim()) {
+                return await this.click('.onetrust-close-btn-handler');
+            }
+        }
+
         if (this.elementExists('#onetrust-pc-btn-handler')) {
             // "show purposes" button inside a popup
             await this.click('#onetrust-pc-btn-handler');
