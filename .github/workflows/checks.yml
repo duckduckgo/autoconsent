@@ -30,6 +30,14 @@ jobs:
                   git commit -m "chore: auto-fix lint errors"
                   git push
 
+            - name: Fail if lint fixes are needed (non-PR push events)
+              if: github.event_name != 'pull_request'
+              run: |
+                  if ! git diff --quiet; then
+                      echo "Lint/formatting errors found. Please run 'npm run lint-fix' locally and commit the changes."
+                      exit 1
+                  fi
+
     test:
         runs-on: ubuntu-latest
         steps:
