@@ -7,6 +7,7 @@ generateCMPTests(
         'https://www.dastelefonbuch.de/',
         'https://www.history.de/',
         'https://www.consentmanager.net/',
+        'https://www.thermador.com/us/',
     ],
     {
         skipRegions: ['US', 'GB'],
