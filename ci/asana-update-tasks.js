@@ -49,8 +49,10 @@ const asanaUpdateTasks = async () => {
         // Notify the Apple DRIs that the Apple PR will be updated once the extension PR is merged
         if (platformName === 'apple' && process.env.APPLE_EMBEDDED === 'true') {
             const extensionPrUrl = prUrls.extension;
-            const note = 'The PR is in DRAFT. The embedded ZIP will be added once the extension PR is merged.' +
-                (extensionPrUrl ? `\nExtension PR: ${extensionPrUrl}` : '');
+            let note = `This PR is in DRAFT. The embedded ZIP will be added once the extension PR is merged: ${extensionPrUrl}`;
+            if (!extensionPrUrl) {
+                note = 'Extension PR URL is not found. CPM DRI, please check the PR and mark it as ready.';
+            }
             await asana.stories.createStoryForTask(platformObj.taskGid, { text: note });
         }
     }
