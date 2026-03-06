@@ -241,6 +241,8 @@ jobs:
                   branch: update-autoconsent
                   title: Update autoconsent to ${{ env.TAG }}
                   body: '${{ env.PR_BODY_APPLE }}'
+                  # the PR will be marked ready when the extension PR is merged
+                  draft: ${{ inputs.apple_embedded }}
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
     # ------------------------------------------------------------------------------
@@ -399,6 +401,7 @@ jobs:
                   WINDOWS_PR_URL: ${{ needs.update_windows.outputs.pull-request-url }}
                   ANDROID_PR_URL: ${{ needs.update_android.outputs.pull-request-url }}
                   EXTENSION_PR_URL: ${{ needs.update_extension.outputs.pull-request-url }}
+                  APPLE_EMBEDDED: ${{ inputs.apple_embedded }}
               run: |
                   node ./autoconsent/ci/asana-update-tasks.js
 

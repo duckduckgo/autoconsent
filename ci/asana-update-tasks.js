@@ -32,18 +32,27 @@ const asanaUpdateTasks = async () => {
 
     const platformEntries = Object.entries(asanaOutput);
     for (const [platformName, platformObj] of platformEntries) {
-        // If we're missing required data, either we haven't implemented automation for that platform yet,
-        // or something went wrong in a previous job
-        if (!platformObj.taskGid || !prUrls[platformName]) {
-            console.error(`Skipping ${platformName} task update`);
+        if (!platformObj.taskGid) {
+            console.error(`Skipping ${platformName} task update - no task GID`);
             continue;
         }
 
-        const { html_notes: notes } = await asana.tasks.getTask(platformObj.taskGid, { opt_fields: 'html_notes' });
-        const prLink = getLink(prUrls[platformName], `${platformObj.displayName} PR`);
-        const updatedNotes = notes.replace('[[pr_url]]', prLink);
+        if (prUrls[platformName]) {
+            const { html_notes: notes } = await asana.tasks.getTask(platformObj.taskGid, { opt_fields: 'html_notes' });
+            const prLink = getLink(prUrls[platformName], `${platformObj.displayName} PR`);
+            const updatedNotes = notes.replace('[[pr_url]]', prLink);
+            await asana.tasks.updateTask(platformObj.taskGid, { html_notes: updatedNotes });
+        } else {
+            console.error(`Skipping ${platformName} PR URL update - no PR URL`);
+        }
 
-        await asana.tasks.updateTask(platformObj.taskGid, { html_notes: updatedNotes });
+        // Notify the Apple DRIs that the Apple PR will be updated once the extension PR is merged
+        if (platformName === 'apple' && process.env.APPLE_EMBEDDED === 'true') {
+            const extensionPrUrl = prUrls.extension;
+            const note = 'The PR is in DRAFT. The embedded ZIP will be added once the extension PR is merged.' +
+                (extensionPrUrl ? `\nExtension PR: ${extensionPrUrl}` : '');
+            await asana.stories.createStoryForTask(platformObj.taskGid, { text: note });
+        }
     }
 };
 
