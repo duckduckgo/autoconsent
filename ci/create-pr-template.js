@@ -42,9 +42,10 @@ function createPRTemplate(platform, data) {
     const versionRegex = /\[\[version]]/;
     const descriptionRegex = /\[\[description]]/;
 
-    const extraContent = platform === 'extension'
-        ? `<!-- THESE COMMENTS ARE USED BY CI, DON"T CHANGE THEM MANUALLY: --> <!-- apple_task_url: ${asanaOutput.apple?.taskUrl || ''} -->`
-        : '';
+    const extraContent =
+        platform === 'extension'
+            ? `<!-- THESE COMMENTS ARE USED BY CI, DON"T CHANGE THEM MANUALLY: --> <!-- apple_task_url: ${asanaOutput.apple?.taskUrl || ''} -->`
+            : '';
 
     const asanaUrl = asanaOutput[platform]?.taskUrl;
 
