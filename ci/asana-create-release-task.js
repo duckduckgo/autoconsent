@@ -117,10 +117,10 @@ const asanaCreateTasks = async () => {
     dueDate.setDate(dueDate.getDate() + 6);
     const dueDateString = dueDate.toISOString().split('T')[0];
 
-    let updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: updatedNotes, due_on: dueDateString });
+    await asana.tasks.updateTask(new_task.gid, { html_notes: updatedNotes, due_on: dueDateString });
     console.error('Task updated:', new_task.gid);
 
-    const addProjectResult = await asana.tasks.addProjectForTask(new_task.gid, {
+    await asana.tasks.addProjectForTask(new_task.gid, {
         project: autoconsentProjectGid,
         section: releaseSectionGid,
     });
@@ -134,7 +134,7 @@ const asanaCreateTasks = async () => {
     const finalNotes = updatedNotes.replace('<li>[[extra_content]]</li>', version);
 
     console.error('Final notes updated for task', new_task.gid);
-    updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: finalNotes });
+    await asana.tasks.updateTask(new_task.gid, { html_notes: finalNotes });
     console.error('Final task update complete:', new_task.gid);
 
     return { stdout: new_task.gid };

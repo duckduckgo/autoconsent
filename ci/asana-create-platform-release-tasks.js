@@ -94,11 +94,11 @@ async function main() {
                 }),
         ),
     );
-    console.error(`created ${createdSubtasks.length} subtasks:`, createdSubtasks.map(s => s.data?.gid || s.gid).join(', '));
+    console.error(`created ${createdSubtasks.length} subtasks:`, createdSubtasks.map((s) => s.data?.gid || s.gid).join(', '));
 
     // Need to fetch the subtasks again to get the html_notes
     const { data: subtasks } = await asana.tasks.getSubtasksForTask(releaseTaskGid, { opt_fields: 'gid,name,html_notes,permalink_url' });
-    console.error('fetched subtasks:', subtasks.map(s => `${s.gid} "${s.name}"`).join(', '));
+    console.error('fetched subtasks:', subtasks.map((s) => `${s.gid} "${s.name}"`).join(', '));
 
     // Get html_notes from the release task
     const { html_notes: releaseTaskNotes } = await asana.tasks.getTask(releaseTaskGid, { opt_fields: 'html_notes' });
