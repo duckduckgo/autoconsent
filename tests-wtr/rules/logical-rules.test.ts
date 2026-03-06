@@ -17,6 +17,7 @@ describe('AutoConsentCMP', () => {
                 logs: {},
             },
             domActions: domActionsMock,
+            sendContentMessage: sinon.stub(),
             // @ts-expect-error - it's a mock!
             state: {},
             updateState: () => Promise.resolve(),
