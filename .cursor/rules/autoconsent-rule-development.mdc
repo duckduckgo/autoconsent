@@ -1,0 +1,224 @@
+---
+description: Workflow for testing cookie consent sites and iterating on autoconsent rule changes
+globs:
+  - lib/cmps/*.ts
+  - rules/**/*.json
+  - tests/*.spec.ts
+---
+
+# Autoconsent Rule Development Workflow
+
+This document describes the process for testing a website's cookie consent banner and developing or modifying autoconsent rules.
+
+## Prerequisites
+
+Before starting, ensure dependencies are installed and the project is built:
+
+```bash
+npm ci
+npm run prepublish
+```
+
+## Step 1: Load the Site and Check for Cookie Banner
+
+Use Playwright to load the site with the extension and take a screenshot to see the current state:
+
+```javascript
+xvfb-run --auto-servernum node -e "
+const { chromium } = require('playwright');
+const path = require('path');
+
+(async () => {
+  const extensionPath = path.resolve(process.cwd(), 'dist/addon-mv3');
+  
+  const browser = await chromium.launchPersistentContext('/tmp/chrome-test', {
+    headless: false,
+    args: [
+      '--disable-extensions-except=' + extensionPath,
+      '--load-extension=' + extensionPath,
+      '--no-sandbox',
+      '--disable-gpu',
+    ],
+  });
+  
+  const page = await browser.newPage();
+  await page.goto('https://YOUR_SITE_URL', { waitUntil: 'networkidle', timeout: 60000 });
+  await page.waitForTimeout(5000);
+  
+  await page.screenshot({ path: 'screenshot.png', fullPage: false });
+  console.log('Screenshot saved');
+  
+  await browser.close();
+})();
+"
+```
+
+## Step 2: Analyze the Cookie Banner HTML
+
+Extract the HTML of the cookie banner to understand its structure:
+
+```javascript
+xvfb-run --auto-servernum node -e "
+const { chromium } = require('playwright');
+
+(async () => {
+  const browser = await chromium.launchPersistentContext('/tmp/chrome-analyze', {
+    headless: false,
+    args: ['--no-sandbox', '--disable-gpu'],
+  });
+  
+  const page = await browser.newPage();
+  await page.goto('https://YOUR_SITE_URL', { waitUntil: 'networkidle', timeout: 60000 });
+  await page.waitForTimeout(3000);
+  
+  // Adjust selector based on the CMP type (e.g., #onetrust-banner-sdk for OneTrust)
+  const bannerHTML = await page.evaluate(() => {
+    const banner = document.querySelector('#onetrust-banner-sdk');
+    return banner ? banner.outerHTML : 'Banner not found';
+  });
+  
+  console.log('Banner HTML:', bannerHTML);
+  
+  // Check for specific elements
+  const selectors = [
+    '#onetrust-reject-all-handler',
+    '.onetrust-close-btn-handler',
+    '#onetrust-accept-btn-handler',
+    // Add other selectors as needed
+  ];
+  
+  for (const selector of selectors) {
+    const el = await page.$(selector);
+    if (el) {
+      const text = await el.textContent();
+      const visible = await el.isVisible();
+      console.log('Found:', selector, { text: text?.trim(), visible });
+    }
+  }
+  
+  await browser.close();
+})();
+"
+```
+
+## Step 3: Run Existing Tests (Baseline)
+
+Before making any changes, run existing tests for the CMP to establish a baseline:
+
+```bash
+# For European sites, use REGION=DE
+REGION=DE npm test -- --grep "CmpName" --project=chrome
+
+# For US sites
+REGION=US npm test -- --grep "CmpName" --project=chrome
+```
+
+Note the number of passing/failing tests as your baseline.
+
+## Step 4: Add Test Case for the New Site
+
+Add a test case to the appropriate spec file in `tests/`:
+
+```typescript
+// Example for OneTrust (tests/onetrust.spec.ts)
+generateCMPTests('Onetrust', ['https://your-site.com/'], {
+    skipRegions: ['US'],  // Skip if banner doesn't appear in US
+});
+```
+
+## Step 5: Run the New Test (Expect Failure or Suboptimal Behavior)
+
+```bash
+REGION=DE npm test -- --grep "your-site" --project=chrome
+```
+
+Observe:
+- Does the test pass or fail?
+- How long does it take?
+- How many clicks are required?
+
+## Step 6: Modify the CMP Rule
+
+Edit the relevant CMP file in `lib/cmps/`:
+
+Key methods to modify:
+- `detectCmp()` - Detects if this CMP is present
+- `detectPopup()` - Detects if the popup is visible
+- `optOut()` - Rejects/declines cookies
+- `optIn()` - Accepts cookies
+- `test()` - Self-test to verify opt-out worked
+
+Common patterns:
+```typescript
+// Check for element visibility
+if (this.elementVisible('selector', 'any')) {
+    return await this.click('selector');
+}
+
+// Check element text content before clicking
+const btn = document.querySelector<HTMLElement>('selector');
+if (btn && btn.textContent?.includes('expected text')) {
+    return await this.click('selector');
+}
+
+// Wait for element then click
+await this.waitForThenClick('selector');
+```
+
+## Step 7: Rebuild and Test
+
+After each change, rebuild and test:
+
+```bash
+npm run prepublish
+REGION=DE npm test -- --grep "your-site" --project=chrome
+```
+
+Check:
+- Does the test pass?
+- Is the duration reasonable (1-2 seconds is good)?
+- Does the self-test pass (cookies properly rejected)?
+
+## Step 8: Verify No Regressions
+
+Run the full test suite for the CMP:
+
+```bash
+REGION=DE npm test -- --grep "CmpName" --project=chrome
+```
+
+Compare results with your baseline:
+- Same or fewer failures = good
+- More failures = investigate if your change caused regressions
+
+## Step 9: Commit and Push
+
+```bash
+git add lib/cmps/your-cmp.ts tests/your-cmp.spec.ts
+git commit -m "Add support for [feature] in [CMP]
+
+- Description of what was added/changed
+- Performance improvement details if applicable
+- Test coverage added"
+git push
+```
+
+## Common CMP Types and Their Files
+
+| CMP | File | Detection Selector |
+|-----|------|-------------------|
+| OneTrust | `lib/cmps/onetrust.ts` | `#onetrust-banner-sdk` |
+| Cookiebot | `lib/cmps/cookiebot.ts` | `#CybotCookiebotDialog` |
+| TrustArc | `lib/cmps/trustarc.ts` | `.truste_box_overlay` |
+| Quantcast | `lib/cmps/quantcast.ts` | `.qc-cmp2-container` |
+| Didomi | `lib/cmps/didomi.ts` | `#didomi-popup` |
+
+For JSON-based rules, see `rules/autoconsent/` directory.
+
+## Tips
+
+1. **Always check text content** when using close/dismiss buttons - some reject cookies, some just close the banner
+2. **Use self-tests** to verify opt-out actually worked
+3. **Test with different regions** - banners may differ by geography
+4. **Check mobile too** - use `--project=iphoneSE` for mobile tests
+5. **Performance matters** - prefer single-click solutions over multi-step flows
