@@ -48,6 +48,14 @@ const platforms = {
     },
 };
 
+/** @type {Record<keyof typeof platforms, boolean>} */
+const selectedPlatforms = {
+    android: process.env.PLATFORM_ANDROID === 'true',
+    apple: process.env.PLATFORM_APPLE === 'true',
+    windows: process.env.PLATFORM_WINDOWS === 'true',
+    extension: process.env.PLATFORM_EXTENSION === 'true',
+};
+
 const setupAsana = () => {
     return Asana.Client.create({
         defaultHeaders: {
@@ -62,32 +70,49 @@ async function main() {
         opt_fields: 'name,html_notes,permalink_url',
     });
 
+    const filteredSubTasks = templateSubTasks.filter(({ name }) => {
+        for (const [key, platformObj] of Object.entries(platforms)) {
+            if (name.includes(platformObj.displayName)) {
+                return selectedPlatforms[key];
+            }
+        }
+        // If the subtask doesn't match any known platform, include it by default
+        return true;
+    });
+    console.error('Selected platforms:', selectedPlatforms);
+    console.error(`Creating ${filteredSubTasks.length} of ${templateSubTasks.length} subtasks`);
+
     // Creating subtasks...
-    await Promise.all(
-        templateSubTasks.map((subtask) =>
-            asana.tasks.createSubtaskForTask(releaseTaskGid, {
-                name: subtask.name,
-                html_notes: subtask.html_notes,
-                opt_fields: 'name,html_notes,permalink_url',
-            }),
+    const createdSubtasks = await Promise.all(
+        filteredSubTasks.map(
+            // @ts-expect-error Asana types are missing
+            (subtask) =>
+                asana.tasks.createSubtaskForTask(releaseTaskGid, {
+                    name: subtask.name,
+                    html_notes: subtask.html_notes,
+                    opt_fields: 'name,html_notes,permalink_url',
+                }),
         ),
     );
+    console.error(`created ${createdSubtasks.length} subtasks:`, createdSubtasks.map((s) => s.data?.gid || s.gid).join(', '));
+
+    // Need to fetch the subtasks again to get the html_notes
     const { data: subtasks } = await asana.tasks.getSubtasksForTask(releaseTaskGid, { opt_fields: 'gid,name,html_notes,permalink_url' });
-    console.error('subtasks:', subtasks);
+    console.error('fetched subtasks:', subtasks.map((s) => `${s.gid} "${s.name}"`).join(', '));
 
     // Get html_notes from the release task
     const { html_notes: releaseTaskNotes } = await asana.tasks.getTask(releaseTaskGid, { opt_fields: 'html_notes' });
 
     // Updating subtasks and moving to appropriate projects...
-    for (const subtask of subtasks) {
-        const { gid, name, html_notes, permalink_url } = subtask;
-
+    for (const { gid, name, html_notes, permalink_url } of subtasks) {
         const platform = Object.keys(platforms).find((key) => name.includes(platforms[key].displayName));
         if (!platform) {
             continue;
         }
 
+        // @ts-expect-error Asana types are missing
         platforms[platform].taskGid = gid;
+        // @ts-expect-error Asana types are missing
         platforms[platform].taskUrl = permalink_url;
 
         const newName = name.replace('[[version]]', version);
@@ -95,7 +120,7 @@ async function main() {
 
         const subtaskNotes = html_notes.replace(projectExtractorRegex, '').replace('[[notes]]', releaseTaskNotes);
 
-        console.error(`updating task ${gid} with name ${newName} and notes ${subtaskNotes}`);
+        console.error(`updating task ${gid} with name "${newName}"`);
         await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes });
 
         if (extractedProjects) {
@@ -112,8 +137,7 @@ async function main() {
 
 main()
     .then((result) => {
-        // this log is for visibility in Github web interface
-        console.error('stage result:', result.stdout);
+        console.error('stage completed successfully');
         // The log is needed to read the value from the bash context
         console.log(result.stdout);
     })

@@ -110,21 +110,21 @@ const asanaCreateTasks = async () => {
         .replace(/<\/(h3|h4)>/gi, '</h2>');
 
     // Updating task and moving to Release section...
-    console.error('Updated notes:', JSON.stringify(updatedNotes));
+    console.error('Updated notes for task', new_task.gid);
 
     // set due date 6 days from now
     const dueDate = new Date();
     dueDate.setDate(dueDate.getDate() + 6);
     const dueDateString = dueDate.toISOString().split('T')[0];
 
-    let updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: updatedNotes, due_on: dueDateString });
-    console.error('updateTaskResult:', updateTaskResult);
+    await asana.tasks.updateTask(new_task.gid, { html_notes: updatedNotes, due_on: dueDateString });
+    console.error('Task updated:', new_task.gid);
 
-    const addProjectResult = await asana.tasks.addProjectForTask(new_task.gid, {
+    await asana.tasks.addProjectForTask(new_task.gid, {
         project: autoconsentProjectGid,
         section: releaseSectionGid,
     });
-    console.error('addProjectResult:', addProjectResult);
+    console.error('Task added to project', autoconsentProjectGid);
 
     // The duplicateTask job returns when the task itself has been duplicated, ignoring the subtasks.
     // We want to wait that the job completes so that we can fetch all the subtasks correctly.
@@ -133,9 +133,9 @@ const asanaCreateTasks = async () => {
 
     const finalNotes = updatedNotes.replace('<li>[[extra_content]]</li>', version);
 
-    console.error('finalNotes:', finalNotes);
-    updateTaskResult = await asana.tasks.updateTask(new_task.gid, { html_notes: finalNotes });
-    console.error('updateTaskResult:', updateTaskResult);
+    console.error('Final notes updated for task', new_task.gid);
+    await asana.tasks.updateTask(new_task.gid, { html_notes: finalNotes });
+    console.error('Final task update complete:', new_task.gid);
 
     return { stdout: new_task.gid };
 };
