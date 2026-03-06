@@ -5,25 +5,36 @@ on: [push, pull_request]
 jobs:
     lint:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
         steps:
             - uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.head_ref || github.ref }}
 
-            - name: Use Node.js
-              uses: actions/setup-node@v3
+            - uses: actions/setup-node@v3
               with:
                   node-version: lts/*
                   cache: 'npm'
 
             - run: npm ci
+            - run: npm run lint-fix
 
-            - run: npm run lint
+            - name: Commit and push lint fixes (only PRs from the same repo)
+              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+              run: |
+                  git diff --quiet && exit 0
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git add -A
+                  git commit -m "chore: auto-fix lint errors"
+                  git push
 
     test:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - name: Use Node.js
-              uses: actions/setup-node@v3
+            - uses: actions/setup-node@v3
               with:
                   node-version: lts/*
                   cache: 'npm'
