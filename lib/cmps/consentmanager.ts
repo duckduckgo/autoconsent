@@ -30,13 +30,15 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
-        if (this.apiAvailable) {
+        if (this.elementVisible('#cmpbox .cmpmore', 'any')) {
+            return true;
+        } else if (this.apiAvailable) {
             // wait before making this check because early in the page lifecycle this may incorrectly return
             // true, causing an opt-out when it is not needed.
             await this.wait(500);
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_2');
         }
-        return this.elementVisible('#cmpbox .cmpmore', 'any');
+        return false;
     }
 
     async optOut() {
