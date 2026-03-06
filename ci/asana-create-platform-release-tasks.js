@@ -94,11 +94,11 @@ async function main() {
                 }),
         ),
     );
-    console.error('created subtasks:', createdSubtasks);
+    console.error(`created ${createdSubtasks.length} subtasks:`, createdSubtasks.map(s => s.data?.gid || s.gid).join(', '));
 
     // Need to fetch the subtasks again to get the html_notes
     const { data: subtasks } = await asana.tasks.getSubtasksForTask(releaseTaskGid, { opt_fields: 'gid,name,html_notes,permalink_url' });
-    console.error('fetched subtasks:', subtasks);
+    console.error('fetched subtasks:', subtasks.map(s => `${s.gid} "${s.name}"`).join(', '));
 
     // Get html_notes from the release task
     const { html_notes: releaseTaskNotes } = await asana.tasks.getTask(releaseTaskGid, { opt_fields: 'html_notes' });
@@ -120,7 +120,7 @@ async function main() {
 
         const subtaskNotes = html_notes.replace(projectExtractorRegex, '').replace('[[notes]]', releaseTaskNotes);
 
-        console.error(`updating task ${gid} with name ${newName} and notes ${subtaskNotes}`);
+        console.error(`updating task ${gid} with name "${newName}"`);
         await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes });
 
         if (extractedProjects) {
@@ -137,8 +137,7 @@ async function main() {
 
 main()
     .then((result) => {
-        // this log is for visibility in Github web interface
-        console.error('stage result:', result.stdout);
+        console.error('stage completed successfully');
         // The log is needed to read the value from the bash context
         console.log(result.stdout);
     })
