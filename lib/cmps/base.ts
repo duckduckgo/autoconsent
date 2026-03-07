@@ -340,13 +340,13 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         if (rule.hide) {
             results.push(this.hide(rule.hide, rule.method));
         }
-        if (rule.removeClass) {
+        if (rule.removeClass !== undefined) {
             results.push(rule.selector ? this.removeClass(rule.selector, rule.removeClass) : false);
         }
-        if (rule.setStyle) {
+        if (rule.setStyle !== undefined) {
             results.push(rule.selector ? this.setStyle(rule.selector, rule.setStyle) : false);
         }
-        if (rule.addStyle) {
+        if (rule.addStyle !== undefined) {
             results.push(rule.selector ? this.addStyle(rule.selector, rule.addStyle) : false);
         }
         if (rule.cookieContains) {
