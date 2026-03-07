@@ -1,3 +1,16 @@
+# v14.57.0 (Sat Mar 07 2026)
+
+#### 🚀 Enhancement
+
+- Reverse consentmanager popup detection: visible elements first, then API [#1165](https://github.com/duckduckgo/autoconsent/pull/1165) ([@sammacbeth](https://github.com/sammacbeth))
+- Add quick click path for cookiebot. [#1164](https://github.com/duckduckgo/autoconsent/pull/1164) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.56.0 (Thu Feb 26 2026)
 
 #### 🚀 Enhancement
