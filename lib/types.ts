@@ -33,6 +33,9 @@ export interface DomActionsProvider {
     waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean): Promise<boolean>;
     wait(ms: number): Promise<true>;
     hide(selector: string, method: HideMethod): boolean;
+    removeClass(selector: ElementSelector, className: string): boolean;
+    setStyle(selector: ElementSelector, css: string): boolean;
+    addStyle(selector: ElementSelector, css: string): boolean;
     prehide(selector: string): boolean;
     undoPrehide(): void;
     querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
