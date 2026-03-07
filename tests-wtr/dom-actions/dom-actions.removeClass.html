@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./dom-actions.removeClass');
+            });
+        </script>
+
+        <div id="target" class="foo bar baz"></div>
+        <div id="multi-a" class="scroll-lock overlay"></div>
+        <div id="multi-b" class="scroll-lock overlay"></div>
+    </body>
+</html>
