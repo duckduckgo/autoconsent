@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_careers.ing.com_qox",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.ing.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.ing\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#igdpr-alert > button:nth-child(3)#igdpr-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#igdpr-alert > button:nth-child(3)#igdpr-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#igdpr-alert > button:nth-child(3)#igdpr-reject-button",
+            "comment": "Accept essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#igdpr-alert > button:nth-child(3)#igdpr-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
