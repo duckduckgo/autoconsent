@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_armin-risi.ch_pfa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://armin-risi.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?armin-risi\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiejar_stacks_in_42 > div:nth-child(4)#stacks_out_48 > div#stacks_in_48 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#stacks_out_51 > div#stacks_in_51 > div#stacks_in_51_button > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiejar_stacks_in_42 > div:nth-child(4)#stacks_out_48 > div#stacks_in_48 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#stacks_out_51 > div#stacks_in_51 > div#stacks_in_51_button > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiejar_stacks_in_42 > div:nth-child(4)#stacks_out_48 > div#stacks_in_48 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#stacks_out_51 > div#stacks_in_51 > div#stacks_in_51_button > a:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiejar_stacks_in_42 > div:nth-child(4)#stacks_out_48 > div#stacks_in_48 > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div#stacks_out_51 > div#stacks_in_51 > div#stacks_in_51_button > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
