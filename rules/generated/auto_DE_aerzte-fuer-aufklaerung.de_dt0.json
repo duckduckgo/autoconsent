@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_aerzte-fuer-aufklaerung.de_dt0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aerzte-fuer-aufklaerung.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aerzte-fuer-aufklaerung\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > button:nth-child(3)#cc-cookie-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > button:nth-child(3)#cc-cookie-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > button:nth-child(3)#cc-cookie-necessary",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > button:nth-child(3)#cc-cookie-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
