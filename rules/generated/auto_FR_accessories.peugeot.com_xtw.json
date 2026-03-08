@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_accessories.peugeot.com_xtw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://accessories.peugeot.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?accessories\\.peugeot\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all",
+            "comment": "REFUSE ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_text_div > div:nth-child(3)#_psaihm_cta_container > a:nth-child(3)#_psaihm_refuse_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
