@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fidentity.ch_de0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fidentity.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fidentity\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-popup > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-popup > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-popup > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-popup > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
