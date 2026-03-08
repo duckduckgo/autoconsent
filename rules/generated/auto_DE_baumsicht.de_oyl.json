@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_baumsicht.de_oyl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://baumsicht.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?baumsicht\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#cc-cookie-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#cc-cookie-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#cc-cookie-necessary",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-cookie-message > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > a:nth-child(3)#cc-cookie-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
