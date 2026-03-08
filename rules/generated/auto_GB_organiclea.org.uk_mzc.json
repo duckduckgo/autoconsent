@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_organiclea.org.uk_mzc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.organiclea.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?crm\\.organiclea\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).wp-singular.page-template.page-template-page-templates.page-template-page-sidebar-none.page-template-page-templatespage-sidebar-none-php.page.page-id-108.wp-theme-bootscore.wp-child-theme-bootscore-child.theme-bootscore.woocommerce-js.orderable--button-style-rounded.no-sidebar > div:nth-child(43)#bs-cookie-settings > div:nth-child(1)#bs-cookie-wrapper.cc_div > div:nth-child(1)#bs-cookie-bar.bg-body-tertiary.fixed-bottom.d-block > div:nth-child(1):not([id]).container.py-4 > div:nth-child(1)#c-inr.row.align-items-center > div:nth-child(2)#c-bns.col-md-4.col-lg-3.d-flex.flex-column.justify-content-center.gap-2 > button:nth-child(2)#c-s-bn.c-bn.c_link.btn.btn-primary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).wp-singular.page-template.page-template-page-templates.page-template-page-sidebar-none.page-template-page-templatespage-sidebar-none-php.page.page-id-108.wp-theme-bootscore.wp-child-theme-bootscore-child.theme-bootscore.woocommerce-js.orderable--button-style-rounded.no-sidebar > div:nth-child(43)#bs-cookie-settings > div:nth-child(1)#bs-cookie-wrapper.cc_div > div:nth-child(1)#bs-cookie-bar.bg-body-tertiary.fixed-bottom.d-block > div:nth-child(1):not([id]).container.py-4 > div:nth-child(1)#c-inr.row.align-items-center > div:nth-child(2)#c-bns.col-md-4.col-lg-3.d-flex.flex-column.justify-content-center.gap-2 > button:nth-child(2)#c-s-bn.c-bn.c_link.btn.btn-primary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).wp-singular.page-template.page-template-page-templates.page-template-page-sidebar-none.page-template-page-templatespage-sidebar-none-php.page.page-id-108.wp-theme-bootscore.wp-child-theme-bootscore-child.theme-bootscore.woocommerce-js.orderable--button-style-rounded.no-sidebar > div:nth-child(43)#bs-cookie-settings > div:nth-child(1)#bs-cookie-wrapper.cc_div > div:nth-child(1)#bs-cookie-bar.bg-body-tertiary.fixed-bottom.d-block > div:nth-child(1):not([id]).container.py-4 > div:nth-child(1)#c-inr.row.align-items-center > div:nth-child(2)#c-bns.col-md-4.col-lg-3.d-flex.flex-column.justify-content-center.gap-2 > button:nth-child(2)#c-s-bn.c-bn.c_link.btn.btn-primary",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).wp-singular.page-template.page-template-page-templates.page-template-page-sidebar-none.page-template-page-templatespage-sidebar-none-php.page.page-id-108.wp-theme-bootscore.wp-child-theme-bootscore-child.theme-bootscore.woocommerce-js.orderable--button-style-rounded.no-sidebar > div:nth-child(43)#bs-cookie-settings > div:nth-child(1)#bs-cookie-wrapper.cc_div > div:nth-child(1)#bs-cookie-bar.bg-body-tertiary.fixed-bottom.d-block > div:nth-child(1):not([id]).container.py-4 > div:nth-child(1)#c-inr.row.align-items-center > div:nth-child(2)#c-bns.col-md-4.col-lg-3.d-flex.flex-column.justify-content-center.gap-2 > button:nth-child(2)#c-s-bn.c-bn.c_link.btn.btn-primary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
