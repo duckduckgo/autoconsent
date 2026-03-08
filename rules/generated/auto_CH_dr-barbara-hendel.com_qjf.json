@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_dr-barbara-hendel.com_qjf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dr-barbara-hendel.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dr-barbara-hendel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-50 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-50 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-50 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-50 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
