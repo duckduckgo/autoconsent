@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_awsolutions.fr_033",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://awsolutions.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?awsolutions\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(42)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(42)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(42)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(42)#cookie-notice > div:not([id]) > span:nth-child(2)#cn-notice-buttons > a:nth-child(2)#cn-refuse-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
