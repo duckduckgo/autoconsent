@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bewerbungsvorlagen.de_emd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bewerbungsvorlagen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bewerbungsvorlagen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#div-consent-manager > div:not([id]) > div#element-consent-banner > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#interaction-consent-bannerDeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#div-consent-manager > div:not([id]) > div#element-consent-banner > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#interaction-consent-bannerDeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#div-consent-manager > div:not([id]) > div#element-consent-banner > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#interaction-consent-bannerDeclineAll",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#div-consent-manager > div:not([id]) > div#element-consent-banner > section:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#interaction-consent-bannerDeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
