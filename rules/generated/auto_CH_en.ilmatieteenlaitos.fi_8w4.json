@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_en.ilmatieteenlaitos.fi_8w4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://en.ilmatieteenlaitos.fi/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.ilmatieteenlaitos\\.fi/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:not([id]) > section:nth-child(4)#cookie-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:not([id]) > section:nth-child(4)#cookie-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > section:nth-child(4)#cookie-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "comment": "Allow only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > section:nth-child(4)#cookie-consent-content > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
