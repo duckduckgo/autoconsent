@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fr.milwaukeetool.eu_4zu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fr.milwaukeetool.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fr\\.milwaukeetool\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > relay-component#hydrate_b414102f-73ba-43ca-a0d7-213fb68b9197 > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > relay-component#hydrate_b414102f-73ba-43ca-a0d7-213fb68b9197 > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > relay-component#hydrate_b414102f-73ba-43ca-a0d7-213fb68b9197 > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
+            "comment": "REFUSER LES COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > relay-component#hydrate_b414102f-73ba-43ca-a0d7-213fb68b9197 > section#onetrust-cookie-popup > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-onetrust-only-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
