@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dominik-krause.de_61b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dominik-krause.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dominik-krause\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-consent-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-consent-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-consent-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-consent-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
