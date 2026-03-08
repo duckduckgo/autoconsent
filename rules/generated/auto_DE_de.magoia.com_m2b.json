@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.magoia.com_m2b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.magoia.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.magoia\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieOverlay > div#cookie-notice > div:not([id]) > a:nth-child(7)#cn-reject-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieOverlay > div#cookie-notice > div:not([id]) > a:nth-child(7)#cn-reject-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieOverlay > div#cookie-notice > div:not([id]) > a:nth-child(7)#cn-reject-cookie",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieOverlay > div#cookie-notice > div:not([id]) > a:nth-child(7)#cn-reject-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
