@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_archiviofotografico.museoegizio.it_zo4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://archiviofotografico.museoegizio.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?archiviofotografico\\.museoegizio\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])",
+            "comment": "Accept only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
