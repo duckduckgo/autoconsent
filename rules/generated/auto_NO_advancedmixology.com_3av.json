@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_advancedmixology.com_3av",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://advancedmixology.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?advancedmixology\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > footer:nth-child(9)#cookie-bar > div#cookie-inner > p:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > footer:nth-child(9)#cookie-bar > div#cookie-inner > p:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > footer:nth-child(9)#cookie-bar > div#cookie-inner > p:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > footer:nth-child(9)#cookie-bar > div#cookie-inner > p:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
