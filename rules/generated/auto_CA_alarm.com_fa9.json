@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_alarm.com_fa9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.alarm.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alarm\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div#cookieBannerContent > div:nth-child(3):not([id]) > div:nth-child(2)#btn-reject-all > button#cookies-reject-all-867088589"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div#cookieBannerContent > div:nth-child(3):not([id]) > div:nth-child(2)#btn-reject-all > button#cookies-reject-all-867088589"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div#cookieBannerContent > div:nth-child(3):not([id]) > div:nth-child(2)#btn-reject-all > button#cookies-reject-all-867088589",
+            "comment": "Reject All Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div#cookieBannerContent > div:nth-child(3):not([id]) > div:nth-child(2)#btn-reject-all > button#cookies-reject-all-867088589",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
