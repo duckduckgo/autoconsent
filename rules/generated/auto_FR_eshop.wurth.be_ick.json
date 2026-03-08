@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_eshop.wurth.be_ick",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eshop.wurth.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eshop\\.wurth\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#consent-buttonReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#consent-buttonReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#consent-buttonReject",
+            "comment": "Alle cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-container > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#consent-buttonReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
