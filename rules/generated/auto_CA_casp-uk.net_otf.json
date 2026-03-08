@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_casp-uk.net_otf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://casp-uk.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?casp-uk\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
