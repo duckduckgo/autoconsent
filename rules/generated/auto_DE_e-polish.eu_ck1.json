@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_e-polish.eu_ck1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://e-polish.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?e-polish\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#gl-cmp-settings > div:nth-child(3):not([id]) > form:not([id]) > fieldset:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#gl-cmp-settings > div:nth-child(3):not([id]) > form:not([id]) > fieldset:nth-child(3):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#gl-cmp-settings > div:nth-child(3):not([id]) > form:not([id]) > fieldset:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "comment": "decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#gl-cmp-settings > div:nth-child(3):not([id]) > form:not([id]) > fieldset:nth-child(3):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
