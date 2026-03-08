@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bleche-nach-mass.de_0cc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bleche-nach-mass.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bleche-nach-mass\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bb-cm-blocker-notice > div#bb-cm-notice-ui > div:nth-child(3):not([id]) > button:nth-child(2)#bb-cm-notice-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bb-cm-blocker-notice > div#bb-cm-notice-ui > div:nth-child(3):not([id]) > button:nth-child(2)#bb-cm-notice-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bb-cm-blocker-notice > div#bb-cm-notice-ui > div:nth-child(3):not([id]) > button:nth-child(2)#bb-cm-notice-necessary",
+            "comment": "Nur technisch notwendige akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bb-cm-blocker-notice > div#bb-cm-notice-ui > div:nth-child(3):not([id]) > button:nth-child(2)#bb-cm-notice-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
