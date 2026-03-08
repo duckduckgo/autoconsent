@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_cpaexamsmastery.com_8im",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cpaexamsmastery.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cpaexamsmastery\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:not([id]) > div:nth-child(3)#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:not([id]) > div:nth-child(3)#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:not([id]) > div:nth-child(3)#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:not([id]) > div:nth-child(3)#consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#consent-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
