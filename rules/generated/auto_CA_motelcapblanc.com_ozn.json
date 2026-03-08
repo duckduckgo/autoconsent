@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_motelcapblanc.com_ozn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://motelcapblanc.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?motelcapblanc\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header:not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header:not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:nth-child(1)#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
