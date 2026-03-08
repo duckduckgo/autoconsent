@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bluespassions.com_zjf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bluespassions.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bluespassions\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gigz-gdpr-modals > div:nth-child(3)#gigz-gdpr-modal > div:nth-child(1)#gigz-gdpr-home > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gigz-gdpr-modals > div:nth-child(3)#gigz-gdpr-modal > div:nth-child(1)#gigz-gdpr-home > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gigz-gdpr-modals > div:nth-child(3)#gigz-gdpr-modal > div:nth-child(1)#gigz-gdpr-home > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gigz-gdpr-modals > div:nth-child(3)#gigz-gdpr-modal > div:nth-child(1)#gigz-gdpr-home > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
