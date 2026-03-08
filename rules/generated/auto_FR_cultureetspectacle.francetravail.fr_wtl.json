@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cultureetspectacle.francetravail.fr_wtl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cultureetspectacle.francetravail.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cultureetspectacle\\.francetravail\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1)#wzbCloseBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1)#wzbCloseBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1)#wzbCloseBtn",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > aside:nth-child(2):not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1)#wzbCloseBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
