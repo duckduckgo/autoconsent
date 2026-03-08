@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_designsystem.nsw.gov.au_v2v",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://designsystem.nsw.gov.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?designsystem\\.nsw\\.gov\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sticky-container > div:not([id]) > div:not([id]) > span:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sticky-container > div:not([id]) > div:not([id]) > span:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sticky-container > div:not([id]) > div:not([id]) > span:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sticky-container > div:not([id]) > div:not([id]) > span:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
