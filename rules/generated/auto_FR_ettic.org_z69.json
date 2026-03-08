@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ettic.org_z69",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ettic.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ettic\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
