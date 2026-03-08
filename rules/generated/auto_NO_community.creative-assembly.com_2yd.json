@@ -5,19 +5,19 @@
         "vendorUrl": "http://community.creative-assembly.com/"
     },
     "runContext": {
-        "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(www\\.)?community\\.creative-assembly\\.com/"
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?twitch\\.tv/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > g2g-bootstrap:not([id]) > g2g-app:nth-child(2):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2)#cookies-settings > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+            "exists": "body > div#root > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > g2g-bootstrap:not([id]) > g2g-app:nth-child(2):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2)#cookies-settings > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+            "visible": "body > div#root > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > g2g-bootstrap:not([id]) > g2g-app:nth-child(2):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2)#cookies-settings > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
-            "comment": "Reject all"
+            "waitForThenClick": "body > div#root > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:not([id])",
+            "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > g2g-bootstrap:not([id]) > g2g-app:nth-child(2):not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:nth-child(2)#cookies-settings > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "waitForVisible": "body > div#root > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:not([id])",
             "timeout": 1000,
             "check": "none"
         }
