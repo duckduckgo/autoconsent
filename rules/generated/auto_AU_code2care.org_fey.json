@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_code2care.org_fey",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://code2care.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?code2care\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessaryOnly"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessaryOnly"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessaryOnly",
+            "comment": "Necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#necessaryOnly",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
