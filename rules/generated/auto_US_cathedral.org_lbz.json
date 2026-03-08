@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_cathedral.org_lbz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cathedral.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cathedral\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(2):not([id]) > div#cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(2):not([id]) > div#cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(2):not([id]) > div#cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "REJECT ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(3)#footer > div:nth-child(2):not([id]) > div#cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
