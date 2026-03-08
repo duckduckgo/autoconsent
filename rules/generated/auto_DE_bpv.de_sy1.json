@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bpv.de_sy1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bpv.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bpv\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#vbcn > div:nth-child(3):not([id]) > button:nth-child(1)#vbcn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#vbcn > div:nth-child(3):not([id]) > button:nth-child(1)#vbcn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#vbcn > div:nth-child(3):not([id]) > button:nth-child(1)#vbcn-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#vbcn > div:nth-child(3):not([id]) > button:nth-child(1)#vbcn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
