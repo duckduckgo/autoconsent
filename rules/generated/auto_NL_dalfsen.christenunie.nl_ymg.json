@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dalfsen.christenunie.nl_ymg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dalfsen.christenunie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dalfsen\\.christenunie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#scms-cc-cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > p:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#scms-cc-cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > p:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#scms-cc-cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > p:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Alleen essentiële cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#scms-cc-cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > p:not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
