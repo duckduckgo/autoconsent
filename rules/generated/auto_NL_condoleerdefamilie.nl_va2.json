@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_condoleerdefamilie.nl_va2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://condoleerdefamilie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?condoleerdefamilie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Weiger alle cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
