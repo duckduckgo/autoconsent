@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_compressiekousen-shop.nl_kal",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://compressiekousen-shop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?compressiekousen-shop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-0 > div:nth-child(15):not([id]) > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-0 > div:nth-child(15):not([id]) > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-0 > div:nth-child(15):not([id]) > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Alle weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-0 > div:nth-child(15):not([id]) > div:not([id]) > form:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
