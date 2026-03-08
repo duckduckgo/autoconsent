@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_fee-calculator.landregistry.gov.uk_hoy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fee-calculator.landregistry.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fee-calculator\\.landregistry\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#fc_cookies-banner > div:nth-child(4):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#fc_cookies-banner > div:nth-child(4):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#fc_cookies-banner > div:nth-child(4):not([id]) > button:nth-child(2)#rejectCookies",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#fc_cookies-banner > div:nth-child(4):not([id]) > button:nth-child(2)#rejectCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
