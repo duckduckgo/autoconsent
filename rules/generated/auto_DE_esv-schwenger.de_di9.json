@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_esv-schwenger.de_di9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://esv-schwenger.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?esv-schwenger\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_opt_in_box_wrapper > div#cookie_opt_in_box > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_opt_in_btn_basic"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_opt_in_box_wrapper > div#cookie_opt_in_box > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_opt_in_btn_basic"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_opt_in_box_wrapper > div#cookie_opt_in_box > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_opt_in_btn_basic",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_opt_in_box_wrapper > div#cookie_opt_in_box > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_opt_in_btn_basic",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
