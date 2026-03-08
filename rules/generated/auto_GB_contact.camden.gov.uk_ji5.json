@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_contact.camden.gov.uk_ji5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://contact.camden.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?contact\\.camden\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-not-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-not-accept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-not-accept",
+            "comment": "Do not accept"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#js-cookie-not-accept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
