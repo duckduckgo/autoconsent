@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_fbhvc.co.uk_vpi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fbhvc.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fbhvc\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > button:nth-child(5)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > button:nth-child(5)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > button:nth-child(5)#btn-reject-all",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > button:nth-child(5)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
