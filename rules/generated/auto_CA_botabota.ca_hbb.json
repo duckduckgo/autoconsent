@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_botabota.ca_hbb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://botabota.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?botabota\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie > a:nth-child(3)#cookies-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie > a:nth-child(3)#cookies-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie > a:nth-child(3)#cookies-decline",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie > a:nth-child(3)#cookies-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
