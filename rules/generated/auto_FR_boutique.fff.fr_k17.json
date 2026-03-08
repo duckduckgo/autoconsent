@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_boutique.fff.fr_k17",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://boutique.fff.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boutique\\.fff\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(14):not([id]) > div#global-footer > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6958437707-1 > div:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(14):not([id]) > div#global-footer > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6958437707-1 > div:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(14):not([id]) > div#global-footer > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6958437707-1 > div:not([id]) > span:not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(14):not([id]) > div#global-footer > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria6958437707-1 > div:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
