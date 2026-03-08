@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_darmon-avocat-divorce.fr_vr6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://darmon-avocat-divorce.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?darmon-avocat-divorce\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookies > div:not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookies > div:not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookies > div:not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "JE REFUSE TOUS LES COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookies > div:not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
