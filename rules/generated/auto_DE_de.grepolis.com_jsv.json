@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.grepolis.com_jsv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.grepolis.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de-play\\.grepolis\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(2)#grepo > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(2)#grepo > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(2)#grepo > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline",
+            "comment": "Nein, danke"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(2)#grepo > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
