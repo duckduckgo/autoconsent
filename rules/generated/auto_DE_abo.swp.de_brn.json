@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_abo.swp.de_brn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://abo.swp.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?abo\\.swp\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]).cookieManager__box > div:not([id]).cookieManager__bar.cookieManager__visible > div:not([id]).cookieManager__content > div:nth-child(3):not([id]).cookieManager__buttons > button:nth-child(2):not([id]).cookieManager__button.cookieManager__deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]).cookieManager__box > div:not([id]).cookieManager__bar.cookieManager__visible > div:not([id]).cookieManager__content > div:nth-child(3):not([id]).cookieManager__buttons > button:nth-child(2):not([id]).cookieManager__button.cookieManager__deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]).cookieManager__box > div:not([id]).cookieManager__bar.cookieManager__visible > div:not([id]).cookieManager__content > div:nth-child(3):not([id]).cookieManager__buttons > button:nth-child(2):not([id]).cookieManager__button.cookieManager__deny",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]).cookieManager__box > div:not([id]).cookieManager__bar.cookieManager__visible > div:not([id]).cookieManager__content > div:nth-child(3):not([id]).cookieManager__buttons > button:nth-child(2):not([id]).cookieManager__button.cookieManager__deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
