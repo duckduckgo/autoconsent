@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_axonops.com_1rc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://axonops.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?axonops\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
