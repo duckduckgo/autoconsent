@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_boutiquehotel.me_r3f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://boutiquehotel.me/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boutiquehotel\\.me/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#content-wrapper > div:nth-child(2)#main-content > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#content-wrapper > div:nth-child(2)#main-content > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#content-wrapper > div:nth-child(2)#main-content > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#content-wrapper > div:nth-child(2)#main-content > div:nth-child(5):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
