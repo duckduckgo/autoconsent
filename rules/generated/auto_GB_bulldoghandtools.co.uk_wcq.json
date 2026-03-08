@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_bulldoghandtools.co.uk_wcq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bulldoghandtools.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bulldoghandtools\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(13)#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(13)#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(13)#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2):not([id])",
+            "comment": "Refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(13)#m-cookienotice > div:nth-child(3)#action-custom-css > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
