@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_clothesfree.smugmug.com_dl6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://clothesfree.smugmug.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clothesfree\\.smugmug\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > reach-portal:not([id]) > aside:not([id])[data-testid=\"cookiebanner_panel\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookiebanner_reject_button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > reach-portal:not([id]) > aside:not([id])[data-testid=\"cookiebanner_panel\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookiebanner_reject_button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > reach-portal:not([id]) > aside:not([id])[data-testid=\"cookiebanner_panel\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookiebanner_reject_button\"]",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > reach-portal:not([id]) > aside:not([id])[data-testid=\"cookiebanner_panel\"] > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"cookiebanner_reject_button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
