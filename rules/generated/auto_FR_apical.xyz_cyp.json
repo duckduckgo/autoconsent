@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_apical.xyz_cyp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://apical.xyz/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?apical\\.xyz/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > button:nth-child(4)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > button:nth-child(4)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > button:nth-child(4)#btn-reject-all",
+            "comment": "Je refuse tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > button:nth-child(4)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
