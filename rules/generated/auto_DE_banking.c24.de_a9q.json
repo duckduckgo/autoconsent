@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_banking.c24.de_a9q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://banking.c24.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?banking\\.c24\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > app-login:nth-child(2):not([id]) > app-footer:nth-child(2):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > app-cookie:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > app-login:nth-child(2):not([id]) > app-footer:nth-child(2):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > app-cookie:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > app-login:nth-child(2):not([id]) > app-footer:nth-child(2):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > app-cookie:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > app-login:nth-child(2):not([id]) > app-footer:nth-child(2):not([id]) > footer:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > app-cookie:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
