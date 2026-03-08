@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_careservices.bexley.gov.uk_g6a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careservices.bexley.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careservices\\.bexley\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#js-cookie-banner-panel > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#js-cookie-banner-panel > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#js-cookie-banner-panel > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#js-cookie-banner-panel > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
