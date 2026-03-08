@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_dudeperfect.com_vb9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dudeperfect.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dudeperfect\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "comment": "Decline Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
