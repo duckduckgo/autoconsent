@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_freshfiction.com_s6b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://freshfiction.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?freshfiction\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > table:not([id]) > tbody:not([id]) > tr:nth-child(4):not([id]) > td:not([id]) > table:not([id]) > tbody:not([id]) > tr:not([id]) > td:nth-child(3):not([id]) > strong:nth-child(5):not([id]) > div:nth-child(4):not([id]) > div:nth-child(15):not([id]) > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > table:not([id]) > tbody:not([id]) > tr:nth-child(4):not([id]) > td:not([id]) > table:not([id]) > tbody:not([id]) > tr:not([id]) > td:nth-child(3):not([id]) > strong:nth-child(5):not([id]) > div:nth-child(4):not([id]) > div:nth-child(15):not([id]) > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > table:not([id]) > tbody:not([id]) > tr:nth-child(4):not([id]) > td:not([id]) > table:not([id]) > tbody:not([id]) > tr:not([id]) > td:nth-child(3):not([id]) > strong:nth-child(5):not([id]) > div:nth-child(4):not([id]) > div:nth-child(15):not([id]) > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > table:not([id]) > tbody:not([id]) > tr:nth-child(4):not([id]) > td:not([id]) > table:not([id]) > tbody:not([id]) > tr:not([id]) > td:nth-child(3):not([id]) > strong:nth-child(5):not([id]) > div:nth-child(4):not([id]) > div:nth-child(15):not([id]) > div:nth-child(5)#gdpr-popup > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
