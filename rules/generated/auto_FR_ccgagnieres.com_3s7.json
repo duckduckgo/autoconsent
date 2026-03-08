@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ccgagnieres.com_3s7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ccgagnieres.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ccgagnieres\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
