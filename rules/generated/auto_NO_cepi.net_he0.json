@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_cepi.net_he0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cepi.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cepi\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > astro-island:not([id]) > div:not([id]) > dialog:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > astro-island:not([id]) > div:not([id]) > dialog:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > astro-island:not([id]) > div:not([id]) > dialog:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > astro-island:not([id]) > div:not([id]) > dialog:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
