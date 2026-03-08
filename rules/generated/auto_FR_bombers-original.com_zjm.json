@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bombers-original.com_zjm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bombers-original.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bombers-original\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-section-popups > div:nth-child(2)#t4s-popup__cookies-law > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-section-popups > div:nth-child(2)#t4s-popup__cookies-law > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-section-popups > div:nth-child(2)#t4s-popup__cookies-law > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-section-popups > div:nth-child(2)#t4s-popup__cookies-law > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
