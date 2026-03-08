@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_autodoc.pro_kiz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://autodoc.pro/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autodoc\\.pro/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(4):not([id])[data-testid=\"user-consent-cookies\"] > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-cookies-btn-reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(4):not([id])[data-testid=\"user-consent-cookies\"] > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-cookies-btn-reject\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(4):not([id])[data-testid=\"user-consent-cookies\"] > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-cookies-btn-reject\"]",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(4):not([id])[data-testid=\"user-consent-cookies\"] > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(1):not([id])[data-testid=\"user-consent-cookies-btn-reject\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
