@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_attelage-accessoire-auto.com_ep5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://attelage-accessoire-auto.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?attelage-accessoire-auto\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).index.show-left-column.hide-right-column.lang_fr > div:nth-child(35)#cookiesplus-modal-container.container.cookiesplus-move > div:nth-child(1):not([id]).row > div:nth-child(1)#cookiesplus-modal.cookiesplus-center.col-12.col-xs-12.col-md-9.col-lg-6 > div:nth-child(2)#cookiesplus-content > div:nth-child(1):not([id]).row > form:nth-child(1)#cookiesplus-form > div:nth-child(3):not([id]).cookiesplus-actions.col-12.col-xs-12 > div:nth-child(1):not([id]).first-layer > div:nth-child(1):not([id]).row > div:nth-child(2):not([id]).col-xs-12.col-md-4.float-xs-right > button:nth-child(1):not([id]).cookiesplus-btn.cookiesplus-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).index.show-left-column.hide-right-column.lang_fr > div:nth-child(35)#cookiesplus-modal-container.container.cookiesplus-move > div:nth-child(1):not([id]).row > div:nth-child(1)#cookiesplus-modal.cookiesplus-center.col-12.col-xs-12.col-md-9.col-lg-6 > div:nth-child(2)#cookiesplus-content > div:nth-child(1):not([id]).row > form:nth-child(1)#cookiesplus-form > div:nth-child(3):not([id]).cookiesplus-actions.col-12.col-xs-12 > div:nth-child(1):not([id]).first-layer > div:nth-child(1):not([id]).row > div:nth-child(2):not([id]).col-xs-12.col-md-4.float-xs-right > button:nth-child(1):not([id]).cookiesplus-btn.cookiesplus-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).index.show-left-column.hide-right-column.lang_fr > div:nth-child(35)#cookiesplus-modal-container.container.cookiesplus-move > div:nth-child(1):not([id]).row > div:nth-child(1)#cookiesplus-modal.cookiesplus-center.col-12.col-xs-12.col-md-9.col-lg-6 > div:nth-child(2)#cookiesplus-content > div:nth-child(1):not([id]).row > form:nth-child(1)#cookiesplus-form > div:nth-child(3):not([id]).cookiesplus-actions.col-12.col-xs-12 > div:nth-child(1):not([id]).first-layer > div:nth-child(1):not([id]).row > div:nth-child(2):not([id]).col-xs-12.col-md-4.float-xs-right > button:nth-child(1):not([id]).cookiesplus-btn.cookiesplus-reject",
+            "comment": "Refuser tous les cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).index.show-left-column.hide-right-column.lang_fr > div:nth-child(35)#cookiesplus-modal-container.container.cookiesplus-move > div:nth-child(1):not([id]).row > div:nth-child(1)#cookiesplus-modal.cookiesplus-center.col-12.col-xs-12.col-md-9.col-lg-6 > div:nth-child(2)#cookiesplus-content > div:nth-child(1):not([id]).row > form:nth-child(1)#cookiesplus-form > div:nth-child(3):not([id]).cookiesplus-actions.col-12.col-xs-12 > div:nth-child(1):not([id]).first-layer > div:nth-child(1):not([id]).row > div:nth-child(2):not([id]).col-xs-12.col-md-4.float-xs-right > button:nth-child(1):not([id]).cookiesplus-btn.cookiesplus-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
