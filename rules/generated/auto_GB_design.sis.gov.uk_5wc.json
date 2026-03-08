@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_design.sis.gov.uk_5wc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://design.sis.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?design\\.sis\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > ic-theme:nth-child(1)#theme-wrapper > div:nth-child(1):not([id]) > div#cookie-banner > ic-section-container:not([id]) > div:nth-child(3):not([id]) > ic-button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > ic-theme:nth-child(1)#theme-wrapper > div:nth-child(1):not([id]) > div#cookie-banner > ic-section-container:not([id]) > div:nth-child(3):not([id]) > ic-button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > ic-theme:nth-child(1)#theme-wrapper > div:nth-child(1):not([id]) > div#cookie-banner > ic-section-container:not([id]) > div:nth-child(3):not([id]) > ic-button:nth-child(2):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#___gatsby > div:nth-child(1)#gatsby-focus-wrapper > ic-theme:nth-child(1)#theme-wrapper > div:nth-child(1):not([id]) > div#cookie-banner > ic-section-container:not([id]) > div:nth-child(3):not([id]) > ic-button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
