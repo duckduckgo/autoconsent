@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fencing.ophardt.online_8yg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fencing.ophardt.online/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fencing\\.ophardt\\.online/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]).cookie-consent-banner > div:not([id]).cookie-consent-banner__inner > div:not([id]).cookie-consent-banner__copy > div:nth-child(3):not([id]).cookie-consent-banner__actions > a:nth-child(1):not([id]).cookie-consent-banner__cta--secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]).cookie-consent-banner > div:not([id]).cookie-consent-banner__inner > div:not([id]).cookie-consent-banner__copy > div:nth-child(3):not([id]).cookie-consent-banner__actions > a:nth-child(1):not([id]).cookie-consent-banner__cta--secondary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]).cookie-consent-banner > div:not([id]).cookie-consent-banner__inner > div:not([id]).cookie-consent-banner__copy > div:nth-child(3):not([id]).cookie-consent-banner__actions > a:nth-child(1):not([id]).cookie-consent-banner__cta--secondary",
+            "comment": "accept only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]).cookie-consent-banner > div:not([id]).cookie-consent-banner__inner > div:not([id]).cookie-consent-banner__copy > div:nth-child(3):not([id]).cookie-consent-banner__actions > a:nth-child(1):not([id]).cookie-consent-banner__cta--secondary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
