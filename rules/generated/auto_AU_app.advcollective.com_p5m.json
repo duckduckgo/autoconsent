@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]"
+            "exists": "body > div:not([id])[data-testid=\"banner-cookie-consent\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]"
+            "visible": "body > div:not([id])[data-testid=\"banner-cookie-consent\"]"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]",
-            "comment": "Do not sell my personal information"
+            "waitForThenClick": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] button:not([id])[data-testid*=\"reject\"], body > div:not([id])[data-testid=\"banner-cookie-consent\"] a:not([id])[data-testid*=\"reject\"], body > div:not([id])[data-testid=\"banner-cookie-consent\"] button:not([id])[id*=\"reject\"], body > div:not([id])[data-testid=\"banner-cookie-consent\"] a:not([id])[id*=\"reject\"], body > div:not([id])[data-testid=\"banner-cookie-consent\"] button:not([id])[data-testid*=\"decline\"], body > div:not([id])[data-testid=\"banner-cookie-consent\"] a:not([id])[data-testid*=\"decline\"]",
+            "comment": "Reject/decline cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]",
+            "waitForVisible": "body > div:not([id])[data-testid=\"banner-cookie-consent\"]",
             "timeout": 1000,
             "check": "none"
         }
