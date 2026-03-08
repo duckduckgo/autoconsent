@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_chezleveque.ca_ejs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://chezleveque.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chezleveque\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
