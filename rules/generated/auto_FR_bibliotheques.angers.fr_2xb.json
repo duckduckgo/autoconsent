@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bibliotheques.angers.fr_2xb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bibliotheques.angers.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bibliotheques\\.angers\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(1)#gdpr-cookie-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(1)#gdpr-cookie-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(1)#gdpr-cookie-refuse",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-cookie-message > p:nth-child(4):not([id]) > button:nth-child(1)#gdpr-cookie-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
