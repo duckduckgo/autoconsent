@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ellasante.paris_mmn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ellasante.paris/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ellasante\\.paris/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
