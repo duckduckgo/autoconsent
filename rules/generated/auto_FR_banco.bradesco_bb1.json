@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_banco.bradesco_bb1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://banco.bradesco/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?banco\\.bradesco/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejeitarCookiesNaoNecessarios"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejeitarCookiesNaoNecessarios"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejeitarCookiesNaoNecessarios",
+            "comment": "Rejeitar cookies não necessários"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejeitarCookiesNaoNecessarios",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
