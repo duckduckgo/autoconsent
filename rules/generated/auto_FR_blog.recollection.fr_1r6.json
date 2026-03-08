@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_blog.recollection.fr_1r6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blog.recollection.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blog\\.recollection\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > p:not([id]) > a:nth-child(2)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > p:not([id]) > a:nth-child(2)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > p:not([id]) > a:nth-child(2)#reject-cookies",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > p:not([id]) > a:nth-child(2)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
