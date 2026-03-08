@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_em-chiemgau.de_l90",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://em-chiemgau.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?em-chiemgau\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#js-cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3)#js-cookie-note__deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#js-cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3)#js-cookie-note__deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#js-cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3)#js-cookie-note__deny",
+            "comment": "Nur essenzielle Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3)#js-cookie-note__deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
