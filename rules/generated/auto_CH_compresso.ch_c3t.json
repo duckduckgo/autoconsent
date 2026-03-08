@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_compresso.ch_c3t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://compresso.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?compresso\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmp-banner > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#cmp-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmp-banner > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#cmp-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmp-banner > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#cmp-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmp-banner > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#cmp-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
