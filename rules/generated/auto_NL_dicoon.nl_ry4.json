@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dicoon.nl_ry4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dicoon.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dicoon\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > article#gdpr-dialog > div#gdrp-dialog-content > section:nth-child(1)#gdpr-dialog-basic > div:nth-child(2)#consent-dialog-basic-options > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > article#gdpr-dialog > div#gdrp-dialog-content > section:nth-child(1)#gdpr-dialog-basic > div:nth-child(2)#consent-dialog-basic-options > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > article#gdpr-dialog > div#gdrp-dialog-content > section:nth-child(1)#gdpr-dialog-basic > div:nth-child(2)#consent-dialog-basic-options > button:nth-child(2):not([id])",
+            "comment": "Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > article#gdpr-dialog > div#gdrp-dialog-content > section:nth-child(1)#gdpr-dialog-basic > div:nth-child(2)#consent-dialog-basic-options > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
