@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_hotelmadatsch.it_uul",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hotelmadatsch.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hotelmadatsch\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#condeon-consentmanager > div:nth-child(5):not([id]) > p:nth-child(2)#consent-save-no-consent > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#condeon-consentmanager > div:nth-child(5):not([id]) > p:nth-child(2)#consent-save-no-consent > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#condeon-consentmanager > div:nth-child(5):not([id]) > p:nth-child(2)#consent-save-no-consent > button:not([id])",
+            "comment": "Only essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#condeon-consentmanager > div:nth-child(5):not([id]) > p:nth-child(2)#consent-save-no-consent > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
