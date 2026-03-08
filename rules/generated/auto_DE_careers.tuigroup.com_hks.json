@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_careers.tuigroup.com_hks",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.tuigroup.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.tuigroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#system-ialert > div#system-imessage > div:nth-child(3):not([id]) > button:nth-child(2)#system-ialert-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#system-ialert > div#system-imessage > div:nth-child(3):not([id]) > button:nth-child(2)#system-ialert-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#system-ialert > div#system-imessage > div:nth-child(3):not([id]) > button:nth-child(2)#system-ialert-reject-button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#system-ialert > div#system-imessage > div:nth-child(3):not([id]) > button:nth-child(2)#system-ialert-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
