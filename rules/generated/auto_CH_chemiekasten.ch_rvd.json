@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_chemiekasten.ch_rvd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://chemiekasten.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chemiekasten\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ec-instantsite-website > div#ec-instantsite > div:nth-child(5):not([id]) > div:not([id]) > div#tile-gdpr-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id]) > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ec-instantsite-website > div#ec-instantsite > div:nth-child(5):not([id]) > div:not([id]) > div#tile-gdpr-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id]) > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ec-instantsite-website > div#ec-instantsite > div:nth-child(5):not([id]) > div:not([id]) > div#tile-gdpr-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id]) > div:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ec-instantsite-website > div#ec-instantsite > div:nth-child(5):not([id]) > div:not([id]) > div#tile-gdpr-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2):not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
