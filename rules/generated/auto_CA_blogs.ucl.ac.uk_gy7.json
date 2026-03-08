@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_blogs.ucl.ac.uk_gy7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blogs.ucl.ac.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blogs\\.ucl\\.ac\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ucl-privacy-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ucl-privacy-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ucl-privacy-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Accept necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ucl-privacy-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
