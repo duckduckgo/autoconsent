@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_flexibits.com_5ac",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://flexibits.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?flexibits\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fullBodyWrapper > header:nth-child(7)#fbp-cookies-banner > div:nth-child(2):not([id]) > button:nth-child(1)#deny-cookies-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fullBodyWrapper > header:nth-child(7)#fbp-cookies-banner > div:nth-child(2):not([id]) > button:nth-child(1)#deny-cookies-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fullBodyWrapper > header:nth-child(7)#fbp-cookies-banner > div:nth-child(2):not([id]) > button:nth-child(1)#deny-cookies-button",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fullBodyWrapper > header:nth-child(7)#fbp-cookies-banner > div:nth-child(2):not([id]) > button:nth-child(1)#deny-cookies-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
