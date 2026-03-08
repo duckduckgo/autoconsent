@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_frankreich-connexion.com_2hh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://frankreich-connexion.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?frankreich-connexion\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-info > button:nth-child(4)#refusal-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-info > button:nth-child(4)#refusal-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-info > button:nth-child(4)#refusal-button",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-info > button:nth-child(4)#refusal-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
