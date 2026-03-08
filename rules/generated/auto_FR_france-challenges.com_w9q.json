@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_france-challenges.com_w9q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://france-challenges.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?france-challenges\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
