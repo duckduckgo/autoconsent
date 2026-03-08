@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_forum.netmarble.com_7kn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://forum.netmarble.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?forum\\.netmarble\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#NMCookieBanner > div:nth-child(2)#popupAgreed > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#NMCookieBanner > div:nth-child(2)#popupAgreed > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#NMCookieBanner > div:nth-child(2)#popupAgreed > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#NMCookieBanner > div:nth-child(2)#popupAgreed > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
