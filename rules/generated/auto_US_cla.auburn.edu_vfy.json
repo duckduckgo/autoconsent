@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_cla.auburn.edu_vfy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cla.auburn.edu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cla\\.auburn\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#gdpr > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(2)#cookieDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#gdpr > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(2)#cookieDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#gdpr > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(2)#cookieDeny",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#gdpr > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > p:not([id]) > button:nth-child(2)#cookieDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
