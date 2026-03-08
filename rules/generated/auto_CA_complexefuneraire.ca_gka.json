@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_complexefuneraire.ca_gka",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://complexefuneraire.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?complexefuneraire\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#loi-confidentialite > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#loi-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#loi-confidentialite > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#loi-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#loi-confidentialite > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#loi-refuse",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#loi-confidentialite > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#loi-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
