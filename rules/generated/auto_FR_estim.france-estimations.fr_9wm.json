@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_estim.france-estimations.fr_9wm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://estim.france-estimations.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?estim\\.france-estimations\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#estim-cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-bar-btn-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#estim-cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-bar-btn-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#estim-cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-bar-btn-reject",
+            "comment": "continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#estim-cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-bar-btn-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
