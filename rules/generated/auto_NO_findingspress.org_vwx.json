@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_findingspress.org_vwx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://findingspress.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?findingspress\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > cookie-consent:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > cookie-consent:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > cookie-consent:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "Deny\ncookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > cookie-consent:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
