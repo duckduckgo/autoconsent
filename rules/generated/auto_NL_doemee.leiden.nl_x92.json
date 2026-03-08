@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_doemee.leiden.nl_x92",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://doemee.leiden.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?doemee\\.leiden\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(2):not([id])[data-testid=\"modal-queue-provider\"] > div:not([id]) > div:nth-child(1)#modal-portal > div#e2e-modal-container[data-testid=\"consent-manager\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)[data-testid=\"reject-cookies-btn\"] > button:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(2):not([id])[data-testid=\"modal-queue-provider\"] > div:not([id]) > div:nth-child(1)#modal-portal > div#e2e-modal-container[data-testid=\"consent-manager\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)[data-testid=\"reject-cookies-btn\"] > button:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(2):not([id])[data-testid=\"modal-queue-provider\"] > div:not([id]) > div:nth-child(1)#modal-portal > div#e2e-modal-container[data-testid=\"consent-manager\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)[data-testid=\"reject-cookies-btn\"] > button:not([id]) > span:not([id])",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(2):not([id])[data-testid=\"modal-queue-provider\"] > div:not([id]) > div:nth-child(1)#modal-portal > div#e2e-modal-container[data-testid=\"consent-manager\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)[data-testid=\"reject-cookies-btn\"] > button:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
