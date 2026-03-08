@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_auto-zeilinger.de_7yz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://auto-zeilinger.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auto-zeilinger\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button#rejectCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button#rejectCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button#rejectCookies",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button#rejectCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
