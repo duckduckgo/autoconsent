@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_clads.com.au_8pa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://clads.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clads\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:nth-child(2):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#zpconsent-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:nth-child(2):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#zpconsent-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:nth-child(2):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#zpconsent-decline",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:nth-child(2):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#zpconsent-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
