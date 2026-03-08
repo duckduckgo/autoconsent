@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "#pop-up_cookie_button_decline"
+            "exists": "body > div#app > div:nth-child(2)#foe > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#pop-up_cookie_button_decline"
+            "visible": "body > div#app > div:nth-child(2)#foe > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#pop-up_cookie_button_decline",
+            "waitForThenClick": "body > div#app > div:nth-child(2)#foe > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline",
             "comment": "NEIN, DANKE"
         }
     ],
     "test": [
         {
-            "waitForVisible": "#pop-up_cookie_button_decline",
+            "waitForVisible": "body > div#app > div:nth-child(2)#foe > div:nth-child(7):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#pop-up_cookie_button_decline",
             "timeout": 1000,
             "check": "none"
         }
