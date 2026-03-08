@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ephy.anses.fr_4x3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ephy.anses.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ephy\\.anses\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > button:nth-child(4)#reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > button:nth-child(4)#reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > button:nth-child(4)#reject-btn",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > button:nth-child(4)#reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
