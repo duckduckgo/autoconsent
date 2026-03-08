@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bembel-with-care.com_s0g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bembel-with-care.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bembel-with-care\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:not([id]) > div:nth-child(4)#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:not([id]) > div:nth-child(4)#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:not([id]) > div:nth-child(4)#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:not([id]) > div:nth-child(4)#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
