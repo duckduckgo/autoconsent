@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bestswiss.ch_tab",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bestswiss.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bestswiss\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
