@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fille-coquine.com_8ht",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fille-coquine.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fille-coquine\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#overlay > div:nth-child(2)#main > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id]) > div#decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#overlay > div:nth-child(2)#main > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id]) > div#decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#overlay > div:nth-child(2)#main > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id]) > div#decline",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#overlay > div:nth-child(2)#main > span:nth-child(2):not([id]) > div#CXQnmb > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id]) > div#decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
