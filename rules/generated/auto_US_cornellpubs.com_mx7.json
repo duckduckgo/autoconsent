@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_cornellpubs.com_mx7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cornellpubs.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cornellpubs\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#elementor-popup-modal-56695 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#elementor-popup-modal-56695 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#elementor-popup-modal-56695 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#elementor-popup-modal-56695 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
