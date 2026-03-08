@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_berninabern.ch_hwr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://berninabern.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?berninabern\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice",
+            "comment": "Nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#accept-min-cookie-notice",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
