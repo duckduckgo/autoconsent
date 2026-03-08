@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_fanfansy.com_4fc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fanfansy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fanfansy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:not([id]) > div:nth-child(12):not([id]) > article:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:not([id]) > div:nth-child(12):not([id]) > article:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:nth-child(12):not([id]) > article:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])",
+            "comment": "Accept Only Essential Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:nth-child(12):not([id]) > article:not([id]) > div:nth-child(2):not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
