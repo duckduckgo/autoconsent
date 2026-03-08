@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_fischer-honsel.de_has",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fischer-honsel.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fischer-honsel\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(9):not([id]) > div:not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
