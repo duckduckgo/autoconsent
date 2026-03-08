@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_club-oase.de_pti",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://club-oase.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?club-oase\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#elementor-popup-modal-3080 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#elementor-popup-modal-3080 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#elementor-popup-modal-3080 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#elementor-popup-modal-3080 > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > a:not([id]) > span:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
