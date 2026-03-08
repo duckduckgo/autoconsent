@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_docs.tigera.io_7ns",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://docs.tigera.io/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?widget-next\\.clym-sdk\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-widget-layout > div:nth-child(1):not([id]) > div#widget-layout > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#main-container > main:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#initial-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#handle-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-widget-layout > div:nth-child(1):not([id]) > div#widget-layout > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#main-container > main:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#initial-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#handle-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-widget-layout > div:nth-child(1):not([id]) > div#widget-layout > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#main-container > main:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#initial-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#handle-reject",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#clym-app-layout > div:nth-child(2)#clym-widget-layout > div:nth-child(1):not([id]) > div#widget-layout > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#main-container > main:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3)#initial-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#handle-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
