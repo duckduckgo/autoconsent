@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bdfil.ch_fa0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bdfil.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bdfil\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#refuseButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#refuseButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#refuseButton",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#refuseButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
