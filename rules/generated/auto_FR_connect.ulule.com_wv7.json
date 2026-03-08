@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_connect.ulule.com_wv7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://connect.ulule.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?connect\\.ulule\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id])[data-testid=\"full-screen-layout-wrapper\"] > div:not([id])[data-testid=\"app-mount-point\"] > div:nth-child(4)#compass-app-root > div#headless-ui-popover-root[data-testid=\"main-app-provider\"] > div:not([id]) > div:not([id]) > div:nth-child(4)#circle-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id])[data-testid=\"full-screen-layout-wrapper\"] > div:not([id])[data-testid=\"app-mount-point\"] > div:nth-child(4)#compass-app-root > div#headless-ui-popover-root[data-testid=\"main-app-provider\"] > div:not([id]) > div:not([id]) > div:nth-child(4)#circle-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id])[data-testid=\"full-screen-layout-wrapper\"] > div:not([id])[data-testid=\"app-mount-point\"] > div:nth-child(4)#compass-app-root > div#headless-ui-popover-root[data-testid=\"main-app-provider\"] > div:not([id]) > div:not([id]) > div:nth-child(4)#circle-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id])[data-testid=\"full-screen-layout-wrapper\"] > div:not([id])[data-testid=\"app-mount-point\"] > div:nth-child(4)#compass-app-root > div#headless-ui-popover-root[data-testid=\"main-app-provider\"] > div:not([id]) > div:not([id]) > div:nth-child(4)#circle-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
