@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_akademie.addison.de_m9n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://akademie.addison.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?akademie\\.addison\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > div:nth-child(1):not([id]) > form:nth-child(3)#amgdprcookie-form-sidebar > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > div:nth-child(1):not([id]) > form:nth-child(3)#amgdprcookie-form-sidebar > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > div:nth-child(1):not([id]) > form:nth-child(3)#amgdprcookie-form-sidebar > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > div:nth-child(1):not([id]) > form:nth-child(3)#amgdprcookie-form-sidebar > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
