@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_diagmed.com.au_avj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://diagmed.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?diagmed\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapwrap > div:nth-child(7)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapwrap > div:nth-child(7)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapwrap > div:nth-child(7)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential",
+            "comment": "Only essentials"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapwrap > div:nth-child(7)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
