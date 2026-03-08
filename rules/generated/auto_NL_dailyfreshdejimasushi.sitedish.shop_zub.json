@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dailyfreshdejimasushi.sitedish.shop_zub",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dailyfreshdejimasushi.sitedish.shop/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dailyfreshdejimasushi\\.sitedish\\.shop/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnDeny",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
