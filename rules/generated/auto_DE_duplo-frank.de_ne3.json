@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_duplo-frank.de_ne3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://duplo-frank.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?duplo-frank\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(7):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(7):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(7):not([id])",
+            "comment": "nur notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(7):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
