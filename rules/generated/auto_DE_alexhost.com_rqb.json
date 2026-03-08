@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_alexhost.com_rqb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://alexhost.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alexhost\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#alx-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#alx-gae-consent-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#alx-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#alx-gae-consent-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#alx-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#alx-gae-consent-necessary",
+            "comment": "Necessary Cookies Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#alx-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#alx-gae-consent-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
