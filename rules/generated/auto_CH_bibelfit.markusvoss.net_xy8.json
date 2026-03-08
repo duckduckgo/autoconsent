@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bibelfit.markusvoss.net_xy8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bibelfit.markusvoss.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bibelfit\\.markusvoss\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#undefined[data-testid=\"consent-accept-deny\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#undefined[data-testid=\"consent-accept-deny\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#undefined[data-testid=\"consent-accept-deny\"]",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#undefined[data-testid=\"consent-accept-deny\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
