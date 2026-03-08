@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bitshake.de_wed",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bitshake.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bitshake\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(8):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(8):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(8):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(8):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
