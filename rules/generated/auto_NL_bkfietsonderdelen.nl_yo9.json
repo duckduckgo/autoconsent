@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_bkfietsonderdelen.nl_yo9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bkfietsonderdelen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bkfietsonderdelen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tsb_cookie_bar > div:nth-child(2):not([id]) > div:nth-child(1)#button_section > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tsb_cookie_bar > div:nth-child(2):not([id]) > div:nth-child(1)#button_section > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tsb_cookie_bar > div:nth-child(2):not([id]) > div:nth-child(1)#button_section > a:nth-child(2):not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tsb_cookie_bar > div:nth-child(2):not([id]) > div:nth-child(1)#button_section > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
