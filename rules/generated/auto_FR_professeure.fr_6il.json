@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_professeure.fr_6il",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://professeure.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?educanou\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieRefuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieRefuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieRefuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieRefuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
