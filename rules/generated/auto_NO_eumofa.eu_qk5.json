@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_eumofa.eu_qk5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eumofa.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eumofa\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(14):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(14):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(14):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "I refuse cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(14):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
