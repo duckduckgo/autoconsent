@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_asfored.org_szi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://asfored.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?asfored\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cooky > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cooky > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cooky > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Continuer sans accepter→"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cooky > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
