@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_chessly.com_mqh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://chessly.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chessly\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div#font-root > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div#font-root > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div#font-root > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div#font-root > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
