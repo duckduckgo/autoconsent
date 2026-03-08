@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dronten.begrotingsapp.nl_5wr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dronten.begrotingsapp.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dronten\\.begrotingsapp\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#btnCookiedissent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#btnCookiedissent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#btnCookiedissent",
+            "comment": "Alleen strikt noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#btnCookiedissent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
