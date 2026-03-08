@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_cottbus-tourismus.de_ds4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cottbus-tourismus.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cottbus-tourismus\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#privacySetup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#privacySetupQuick > p:nth-child(4):not([id]) > a:nth-child(2)#privacySetupAll2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#privacySetup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#privacySetupQuick > p:nth-child(4):not([id]) > a:nth-child(2)#privacySetupAll2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#privacySetup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#privacySetupQuick > p:nth-child(4):not([id]) > a:nth-child(2)#privacySetupAll2",
+            "comment": "NUR NOTWENDIGE COOKIES ZULASSEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#privacySetup > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#privacySetupQuick > p:nth-child(4):not([id]) > a:nth-child(2)#privacySetupAll2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
