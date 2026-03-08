@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#component-0b0eedb5-0632-4762-96e7-53f11da6f3f8 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])"
+            "exists": "body > div#component-2f86e3bf-cefc-4a6d-b08a-b6aa0c3fbcc6 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#component-0b0eedb5-0632-4762-96e7-53f11da6f3f8 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])"
+            "visible": "body > div#component-2f86e3bf-cefc-4a6d-b08a-b6aa0c3fbcc6 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#component-0b0eedb5-0632-4762-96e7-53f11da6f3f8 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])",
-            "comment": "Reject all"
+            "waitForThenClick": "body > div#component-2f86e3bf-cefc-4a6d-b08a-b6aa0c3fbcc6 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])",
+            "comment": "Accept essential only"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#component-0b0eedb5-0632-4762-96e7-53f11da6f3f8 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])",
+            "waitForVisible": "body > div#component-2f86e3bf-cefc-4a6d-b08a-b6aa0c3fbcc6 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > p:not([id])",
             "timeout": 1000,
             "check": "none"
         }
