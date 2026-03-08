@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_centres.firststop.fr_eep",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://centres.firststop.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?centres\\.firststop\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sm-cookie-container > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#sm-btn-cookie-policy-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sm-cookie-container > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#sm-btn-cookie-policy-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sm-cookie-container > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#sm-btn-cookie-policy-reject-all",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sm-cookie-container > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#sm-btn-cookie-policy-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
