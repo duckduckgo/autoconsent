@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_brandwondenstichting.nl_cs7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://brandwondenstichting.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?brandwondenstichting\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > a:nth-child(4)#cookiebar-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > a:nth-child(4)#cookiebar-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > a:nth-child(4)#cookiebar-decline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > a:nth-child(4)#cookiebar-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
