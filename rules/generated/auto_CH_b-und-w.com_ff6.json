@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_b-und-w.com_ff6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://b-und-w.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?b-und-w\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(4)#consent-banner > div:not([id]) > span:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a#reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(4)#consent-banner > div:not([id]) > span:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a#reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(4)#consent-banner > div:not([id]) > span:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a#reject-button",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(4)#consent-banner > div:not([id]) > span:nth-child(2):not([id]) > p:nth-child(2):not([id]) > a#reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
