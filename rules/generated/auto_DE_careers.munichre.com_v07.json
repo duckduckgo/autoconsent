@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_careers.munichre.com_v07",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.munichre.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.munichre\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button",
+            "comment": "Reject non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#system-ialert > div#system-imessage > div:nth-child(2):not([id]) > button:nth-child(2)#system-ialert-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
