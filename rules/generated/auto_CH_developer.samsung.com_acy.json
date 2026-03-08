@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_developer.samsung.com_acy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://developer.samsung.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?developer\\.samsung\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(2)#el-sdp-popup-cookies-wrapper > article:nth-child(1)#el-sdp-popup-samsung-cookies-main-menu-eu > section:not([id]) > div:not([id]) > a:nth-child(4)#accept-none-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(2)#el-sdp-popup-cookies-wrapper > article:nth-child(1)#el-sdp-popup-samsung-cookies-main-menu-eu > section:not([id]) > div:not([id]) > a:nth-child(4)#accept-none-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(2)#el-sdp-popup-cookies-wrapper > article:nth-child(1)#el-sdp-popup-samsung-cookies-main-menu-eu > section:not([id]) > div:not([id]) > a:nth-child(4)#accept-none-btn",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(2)#el-sdp-popup-cookies-wrapper > article:nth-child(1)#el-sdp-popup-samsung-cookies-main-menu-eu > section:not([id]) > div:not([id]) > a:nth-child(4)#accept-none-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
