@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_en.consultation.altotrain.ca_lx0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://en.consultation.altotrain.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.consultation\\.altotrain\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-drawer-wrapper > section#drawer > div:nth-child(2)#drawer-body > div:nth-child(2)#btn-group > button:nth-child(1)#accept-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-drawer-wrapper > section#drawer > div:nth-child(2)#drawer-body > div:nth-child(2)#btn-group > button:nth-child(1)#accept-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-drawer-wrapper > section#drawer > div:nth-child(2)#drawer-body > div:nth-child(2)#btn-group > button:nth-child(1)#accept-btn",
+            "comment": "Necessary Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-drawer-wrapper > section#drawer > div:nth-child(2)#drawer-body > div:nth-child(2)#btn-group > button:nth-child(1)#accept-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
