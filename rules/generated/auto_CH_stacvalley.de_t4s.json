@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_stacvalley.de_t4s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.stacvalley.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.stacvalley\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
