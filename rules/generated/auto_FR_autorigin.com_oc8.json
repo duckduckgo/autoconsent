@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_autorigin.com_oc8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://autorigin.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autorigin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmp-container > div:not([id]) > form#rgpd-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#rgpdCookieBtnNone"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmp-container > div:not([id]) > form#rgpd-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#rgpdCookieBtnNone"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmp-container > div:not([id]) > form#rgpd-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#rgpdCookieBtnNone",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmp-container > div:not([id]) > form#rgpd-cookie-form > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#rgpdCookieBtnNone",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
