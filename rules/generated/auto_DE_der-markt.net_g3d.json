@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_der-markt.net_g3d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://der-markt.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?der-markt\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#vc-cmp-overlay > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#vc-cmp-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#vc-cmp-overlay > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#vc-cmp-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#vc-cmp-overlay > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#vc-cmp-reject",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#vc-cmp-overlay > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#vc-cmp-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
