@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_fotobox-deluxe.de_m8j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fotobox-deluxe.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fotobox-deluxe\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cossd-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cossd-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cossd-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cossd-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cossd-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cossd-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cossd-banner > div:nth-child(4):not([id]) > button:nth-child(2)#cossd-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
