@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_burchfamilywines.com.au_n35",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://burchfamilywines.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?burchfamilywines\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice-consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-notice-consent__reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
