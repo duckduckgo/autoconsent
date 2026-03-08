@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_cannalin.de_7bl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cannalin.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cannalin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lcp-unique-cookie-notice > div:nth-child(2):not([id]) > button:nth-child(3)#lcp-btn-decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lcp-unique-cookie-notice > div:nth-child(2):not([id]) > button:nth-child(3)#lcp-btn-decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lcp-unique-cookie-notice > div:nth-child(2):not([id]) > button:nth-child(3)#lcp-btn-decline-cookies",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lcp-unique-cookie-notice > div:nth-child(2):not([id]) > button:nth-child(3)#lcp-btn-decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
