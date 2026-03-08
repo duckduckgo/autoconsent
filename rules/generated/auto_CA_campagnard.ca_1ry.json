@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_campagnard.ca_1ry",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://campagnard.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?campagnard\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#bt-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
