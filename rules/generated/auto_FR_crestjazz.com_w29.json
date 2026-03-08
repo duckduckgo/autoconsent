@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_crestjazz.com_w29",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://crestjazz.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?crestjazz\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#module-rgpd > div:nth-child(1)#module-rgpd__intro > div:not([id]) > button:nth-child(4)#module-rgpd__btn-minimal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#module-rgpd > div:nth-child(1)#module-rgpd__intro > div:not([id]) > button:nth-child(4)#module-rgpd__btn-minimal"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#module-rgpd > div:nth-child(1)#module-rgpd__intro > div:not([id]) > button:nth-child(4)#module-rgpd__btn-minimal",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#module-rgpd > div:nth-child(1)#module-rgpd__intro > div:not([id]) > button:nth-child(4)#module-rgpd__btn-minimal",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
