@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_fischer-automobile.de_2gy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fischer-automobile.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fischer-automobile\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > ul:not([id]) > li#eprivacy-consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4)#eprivacy-consent-button-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > ul:not([id]) > li#eprivacy-consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4)#eprivacy-consent-button-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > ul:not([id]) > li#eprivacy-consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4)#eprivacy-consent-button-necessary",
+            "comment": "NUR NOTWENDIGE COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > ul:not([id]) > li#eprivacy-consent > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(4)#eprivacy-consent-button-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
