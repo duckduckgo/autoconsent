@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_cinhub.vip_hlr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cinhub.vip/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cinhub\\.vip/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#gdprRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#gdprRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#gdprRejectAll",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#gdpr-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#gdprRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
