@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_de.ids-imaging.com_6tl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.ids-imaging.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.ids-imaging\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > header:nth-child(1)#header > div:not([id]) > div:not([id]) > div:nth-child(3)#privacycheck > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > header:nth-child(1)#header > div:not([id]) > div:not([id]) > div:nth-child(3)#privacycheck > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > header:nth-child(1)#header > div:not([id]) > div:not([id]) > div:nth-child(3)#privacycheck > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > header:nth-child(1)#header > div:not([id]) > div:not([id]) > div:nth-child(3)#privacycheck > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
