@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_alphaspel.se_9lf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://alphaspel.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alphaspel\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cc_modal_dialog > div:not([id]) > section:nth-child(1)#cc_section_quick_info > div:nth-child(3):not([id]) > button:nth-child(2)#cc_reject_all_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cc_modal_dialog > div:not([id]) > section:nth-child(1)#cc_section_quick_info > div:nth-child(3):not([id]) > button:nth-child(2)#cc_reject_all_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cc_modal_dialog > div:not([id]) > section:nth-child(1)#cc_section_quick_info > div:nth-child(3):not([id]) > button:nth-child(2)#cc_reject_all_cookies",
+            "comment": "Avvisa ej nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cc_modal_dialog > div:not([id]) > section:nth-child(1)#cc_section_quick_info > div:nth-child(3):not([id]) > button:nth-child(2)#cc_reject_all_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
