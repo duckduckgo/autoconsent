@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_deutscher-fenstershop.de_drh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://deutscher-fenstershop.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deutscher-fenstershop\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#rule_assept > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#rule_assept > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#rule_assept > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#rule_assept > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
