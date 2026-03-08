@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_cecotec.es_ebu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cecotec.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cecotec\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(8):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"btn-reject-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(8):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"btn-reject-cookies\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(8):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"btn-reject-cookies\"]",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(8):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])[data-testid=\"btn-reject-cookies\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
