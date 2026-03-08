@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_db.rising-gods.de_e5i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://db.rising-gods.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?db\\.rising-gods\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-overlay > div:nth-child(2)#banner > div:nth-child(2)#button-container > div#button-group > button:nth-child(2)#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-overlay > div:nth-child(2)#banner > div:nth-child(2)#button-container > div#button-group > button:nth-child(2)#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-overlay > div:nth-child(2)#banner > div:nth-child(2)#button-container > div#button-group > button:nth-child(2)#reject-all",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-overlay > div:nth-child(2)#banner > div:nth-child(2)#button-container > div#button-group > button:nth-child(2)#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
