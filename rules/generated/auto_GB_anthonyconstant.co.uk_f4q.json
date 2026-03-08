@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_anthonyconstant.co.uk_f4q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://anthonyconstant.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?anthonyconstant\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-e-128-fdaa-e-405-4529-9629-276-df-75-c-1560 > div#page-1575 > div:not([id]) > div:nth-child(8)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a > div#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-e-128-fdaa-e-405-4529-9629-276-df-75-c-1560 > div#page-1575 > div:not([id]) > div:nth-child(8)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a > div#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-e-128-fdaa-e-405-4529-9629-276-df-75-c-1560 > div#page-1575 > div:not([id]) > div:nth-child(8)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a > div#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-decline",
+            "comment": "Decline Non-Essential Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-e-128-fdaa-e-405-4529-9629-276-df-75-c-1560 > div#page-1575 > div:not([id]) > div:nth-child(8)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a > div#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\38 f5c6701-4545-40e5-b858-fdadafbeeb6a-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
