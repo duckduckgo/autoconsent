@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_cha.org.au_qav",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cha.org.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cha\\.org\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mfn-consent-mode > b:not([id]) > i:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mfn-consent-mode > b:not([id]) > i:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mfn-consent-mode > b:not([id]) > i:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mfn-consent-mode > b:not([id]) > i:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
