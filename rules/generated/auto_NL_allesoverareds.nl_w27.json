@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_allesoverareds.nl_w27",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://allesoverareds.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?allesoverareds\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieSettingsDialog > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieSettingsDialog > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieSettingsDialog > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieSettingsDialog > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
