@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_beton-guide.com_bqm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://beton-guide.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?beton-guide\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNotice > div:nth-child(3):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNotice > div:nth-child(3):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNotice > div:nth-child(3):not([id]) > span:nth-child(2):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNotice > div:nth-child(3):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
