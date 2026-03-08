@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_cap-markt.de_ypi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cap-markt.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cap-markt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#yn-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#yn-cookies__deny-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#yn-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#yn-cookies__deny-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#yn-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#yn-cookies__deny-all",
+            "comment": "ALLE ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#yn-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2)#yn-cookies__deny-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
