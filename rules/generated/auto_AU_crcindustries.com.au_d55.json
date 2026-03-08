@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_crcindustries.com.au_d55",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://crcindustries.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?crcindustries\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
