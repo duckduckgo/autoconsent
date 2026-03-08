@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_adk.de_vnn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://adk.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adk\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > adk-root:not([id]) > adk-cookie-banner:nth-child(1):not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > adk-root:not([id]) > adk-cookie-banner:nth-child(1):not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > adk-root:not([id]) > adk-cookie-banner:nth-child(1):not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Nicht notwendige Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > adk-root:not([id]) > adk-cookie-banner:nth-child(1):not([id]) > form:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
