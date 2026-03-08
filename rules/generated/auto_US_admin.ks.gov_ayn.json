@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_admin.ks.gov_ayn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://admin.ks.gov/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?admin\\.ks\\.gov/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mm-1 > div:nth-child(10)#cookie-consent-container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mm-1 > div:nth-child(10)#cookie-consent-container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mm-1 > div:nth-child(10)#cookie-consent-container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mm-1 > div:nth-child(10)#cookie-consent-container > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
