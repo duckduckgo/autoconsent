@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_coopuqam.com_8td",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://coopuqam.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?coopuqam\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header:not([id]) > div:nth-child(2)#p_p_id_HeaderApp_ > section:nth-child(2)#portlet_HeaderApp > div:not([id]) > div:not([id]) > div:not([id]) > div#HeaderApp > header:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header:not([id]) > div:nth-child(2)#p_p_id_HeaderApp_ > section:nth-child(2)#portlet_HeaderApp > div:not([id]) > div:not([id]) > div:not([id]) > div#HeaderApp > header:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:nth-child(2)#p_p_id_HeaderApp_ > section:nth-child(2)#portlet_HeaderApp > div:not([id]) > div:not([id]) > div:not([id]) > div#HeaderApp > header:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Nécessaires seulement"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:nth-child(2)#p_p_id_HeaderApp_ > section:nth-child(2)#portlet_HeaderApp > div:not([id]) > div:not([id]) > div:not([id]) > div#HeaderApp > header:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
