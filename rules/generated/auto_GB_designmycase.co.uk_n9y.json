@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_designmycase.co.uk_n9y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://designmycase.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?designmycase\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#footer-main > div:nth-child(8)#cookie-banner > button:nth-child(3)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#footer-main > div:nth-child(8)#cookie-banner > button:nth-child(3)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#footer-main > div:nth-child(8)#cookie-banner > button:nth-child(3)#decline-cookies",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#footer-main > div:nth-child(8)#cookie-banner > button:nth-child(3)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
