@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_equans.nl_9e4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://equans.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?equans\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieinfo-banner > div:nth-child(2)#c-right > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieinfo-banner > div:nth-child(2)#c-right > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieinfo-banner > div:nth-child(2)#c-right > a:nth-child(3):not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieinfo-banner > div:nth-child(2)#c-right > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
