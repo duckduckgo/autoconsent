@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_dokkandb.com_yyu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dokkandb.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dokkandb\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > app-cookie-banner:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > app-cookie-banner:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > app-cookie-banner:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "ONLY NECESSARY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > app-cookie-banner:nth-child(4):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
