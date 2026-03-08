@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_fhu.edu_ed8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fhu.edu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fhu\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:nth-child(3):not([id]) > button:nth-child(2)#cookieDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:nth-child(3):not([id]) > button:nth-child(2)#cookieDeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:nth-child(3):not([id]) > button:nth-child(2)#cookieDeny",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:nth-child(3):not([id]) > button:nth-child(2)#cookieDeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
