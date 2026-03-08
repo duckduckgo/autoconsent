@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_avecuncourtier.com_2m3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://avecuncourtier.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?avecuncourtier\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejecting-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejecting-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejecting-cookies",
+            "comment": "Rejeter tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejecting-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
