@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_adherent.asaf-afps.fr_d8i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://adherent.asaf-afps.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adherent\\.asaf-afps\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#main-wrapper > div#main > div:nth-child(3):not([id]) > main#content > section:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#block-asaf-afps-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#main-wrapper > div#main > div:nth-child(3):not([id]) > main#content > section:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#block-asaf-afps-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#main-wrapper > div#main > div:nth-child(3):not([id]) > main#content > section:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#block-asaf-afps-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#page-wrapper > div#page > div:nth-child(2)#main-wrapper > div#main > div:nth-child(3):not([id]) > main#content > section:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#block-asaf-afps-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
