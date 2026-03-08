@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_archives.aubervilliers.fr_224",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://archives.aubervilliers.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?archives\\.aubervilliers\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2) > div:nth-child(1)#banniere-cookie > div:nth-child(3):not([id]).cicb_boutons > button:nth-child(3):not([id]).bouton.refus"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2) > div:nth-child(1)#banniere-cookie > div:nth-child(3):not([id]).cicb_boutons > button:nth-child(3):not([id]).bouton.refus"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2) > div:nth-child(1)#banniere-cookie > div:nth-child(3):not([id]).cicb_boutons > button:nth-child(3):not([id]).bouton.refus",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2) > div:nth-child(1)#banniere-cookie > div:nth-child(3):not([id]).cicb_boutons > button:nth-child(3):not([id]).bouton.refus",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
