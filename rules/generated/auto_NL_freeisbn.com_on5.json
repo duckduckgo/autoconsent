@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_freeisbn.com_on5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://freeisbn.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?freeisbn\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
