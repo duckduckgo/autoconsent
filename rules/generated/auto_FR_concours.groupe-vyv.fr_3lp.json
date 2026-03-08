@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_concours.groupe-vyv.fr_3lp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://concours.groupe-vyv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?concours\\.groupe-vyv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > main#panel > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > main#panel > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > main#panel > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "comment": "JE REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > main#panel > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
