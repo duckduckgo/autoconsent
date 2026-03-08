@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_design.domstol.no_kyp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://design.domstol.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?design\\.domstol\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#content > div:not([id]) > div:nth-child(14)#zh-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#content > div:not([id]) > div:nth-child(14)#zh-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#content > div:not([id]) > div:nth-child(14)#zh-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#content > div:not([id]) > div:nth-child(14)#zh-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
