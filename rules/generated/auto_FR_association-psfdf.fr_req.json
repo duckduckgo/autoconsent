@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_association-psfdf.fr_req",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://association-psfdf.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?association-psfdf\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-refuse-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-refuse-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-refuse-cookies",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-refuse-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
