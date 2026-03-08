@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_auprotec.de_zga",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://auprotec.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auprotec\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#c4u_kaleidos_app > div:nth-child(3)#c4u_kaleidos_app_2 > div:nth-child(5)#cookie_banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_button_decline > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#c4u_kaleidos_app > div:nth-child(3)#c4u_kaleidos_app_2 > div:nth-child(5)#cookie_banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_button_decline > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#c4u_kaleidos_app > div:nth-child(3)#c4u_kaleidos_app_2 > div:nth-child(5)#cookie_banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_button_decline > span:not([id])",
+            "comment": "Nur essenzielle Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#c4u_kaleidos_app > div:nth-child(3)#c4u_kaleidos_app_2 > div:nth-child(5)#cookie_banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie_button_decline > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
