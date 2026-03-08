@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_eutraining.eu_nyw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eutraining.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eutraining\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#eutraining-cookibar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#popup-buttons > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#eutraining-cookibar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#popup-buttons > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#eutraining-cookibar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#popup-buttons > button:nth-child(1):not([id])",
+            "comment": "only necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#eutraining-cookibar > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1)#popup-buttons > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
