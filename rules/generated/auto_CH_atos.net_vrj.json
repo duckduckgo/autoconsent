@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_atos.net_vrj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://atos.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?atos\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#cp > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#cp > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#cp > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Decline all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#cp > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
