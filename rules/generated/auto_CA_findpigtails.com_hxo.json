@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_findpigtails.com_hxo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://findpigtails.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?findpigtails\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#findpigtails-cookie-prompt > div:not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a#findpigtails-cookie-prompt-accept-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#findpigtails-cookie-prompt > div:not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a#findpigtails-cookie-prompt-accept-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#findpigtails-cookie-prompt > div:not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a#findpigtails-cookie-prompt-accept-essential",
+            "comment": "Accept Essential Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#findpigtails-cookie-prompt > div:not([id]) > div:not([id]) > p:nth-child(4):not([id]) > a#findpigtails-cookie-prompt-accept-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
