@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_atruvia.de_shx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://atruvia.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?atruvia\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#elc-cookie-consent > div:not([id]) > form#elc-cookie-consent-form > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#elc-accept-technical-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#elc-cookie-consent > div:not([id]) > form#elc-cookie-consent-form > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#elc-accept-technical-link"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#elc-cookie-consent > div:not([id]) > form#elc-cookie-consent-form > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#elc-accept-technical-link",
+            "comment": "Nur erforderliche"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#elc-cookie-consent > div:not([id]) > form#elc-cookie-consent-form > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#elc-accept-technical-link",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
