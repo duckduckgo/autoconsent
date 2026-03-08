@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_eventbike.it_kpe",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eventbike.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eventbike\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#my-agile-privacy-notification-area > div:nth-child(3)#my-agile-privacy-notification-content > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#map-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#my-agile-privacy-notification-area > div:nth-child(3)#my-agile-privacy-notification-content > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#map-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#my-agile-privacy-notification-area > div:nth-child(3)#my-agile-privacy-notification-content > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#map-reject-button",
+            "comment": "Rifiuta"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#my-agile-privacy-notification-area > div:nth-child(3)#my-agile-privacy-notification-content > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#map-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
