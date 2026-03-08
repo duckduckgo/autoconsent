@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_doltonehouse.com.au_405",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://doltonehouse.com.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?doltonehouse\\.com\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > footer:nth-child(3)#colophon > div:not([id]) > div:nth-child(3)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-accept-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > footer:nth-child(3)#colophon > div:not([id]) > div:nth-child(3)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-accept-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > footer:nth-child(3)#colophon > div:not([id]) > div:nth-child(3)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-accept-required",
+            "comment": "ACCEPT REQUIRED"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > footer:nth-child(3)#colophon > div:not([id]) > div:nth-child(3)#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-accept-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
