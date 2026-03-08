@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_app.mon-producteur.ch_sdb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://app.mon-producteur.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?app\\.mon-producteur\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-gb-app0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-gb-app0 > div:not([id]) > div:not([id]) > ng-component:not([id]) > gb-cookie-consent-fast:nth-child(2):not([id]) > mat-dialog-actions:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-gb-app0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-gb-app0 > div:not([id]) > div:not([id]) > ng-component:not([id]) > gb-cookie-consent-fast:nth-child(2):not([id]) > mat-dialog-actions:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-gb-app0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-gb-app0 > div:not([id]) > div:not([id]) > ng-component:not([id]) > gb-cookie-consent-fast:nth-child(2):not([id]) > mat-dialog-actions:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#cdk-overlay-gb-app0 > mat-dialog-container:nth-child(2)#mat-mdc-dialog-gb-app0 > div:not([id]) > div:not([id]) > ng-component:not([id]) > gb-cookie-consent-fast:nth-child(2):not([id]) > mat-dialog-actions:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
