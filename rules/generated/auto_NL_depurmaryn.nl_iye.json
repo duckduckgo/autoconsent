@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_depurmaryn.nl_iye",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://depurmaryn.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?depurmaryn\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cookie-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cookie-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cookie-deny",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#cookie-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
