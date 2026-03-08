@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_acoustic-solid.com_040",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://acoustic-solid.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?acoustic-solid\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#a04b576b2-b2bb-4b1b-baf3-4c3d88523a84 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#a04b576b2-b2bb-4b1b-baf3-4c3d88523a84 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#a04b576b2-b2bb-4b1b-baf3-4c3d88523a84 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Weiter ohne Einwilligung"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#a04b576b2-b2bb-4b1b-baf3-4c3d88523a84 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
