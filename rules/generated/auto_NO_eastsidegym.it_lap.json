@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_eastsidegym.it_lap",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eastsidegym.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eastsidegym\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject",
+            "comment": "Rifiuta tutto"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cky-consent > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cky-btn-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
