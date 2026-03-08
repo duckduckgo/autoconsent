@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_ezel.ai_rly",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ezel.ai/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ezel\\.ai/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-all",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
