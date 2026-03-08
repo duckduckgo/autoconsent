@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_deingenieur.nl_kct",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://deingenieur.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deingenieur\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary",
+            "comment": "Alleen noodzakelijke"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
