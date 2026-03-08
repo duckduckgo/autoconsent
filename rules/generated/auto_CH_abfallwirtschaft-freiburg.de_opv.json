@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_abfallwirtschaft-freiburg.de_opv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://abfallwirtschaft-freiburg.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?abfallwirtschaft-freiburg\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#pro_cbox > div:nth-child(1)#cbox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ablehnen"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#pro_cbox > div:nth-child(1)#cbox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ablehnen"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#pro_cbox > div:nth-child(1)#cbox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ablehnen",
+            "comment": "Alles ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#pro_cbox > div:nth-child(1)#cbox > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ablehnen",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
