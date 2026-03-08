@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_andis.com_xw6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://andis.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?andis\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#andis-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(3)#cookie_DisableAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#andis-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(3)#cookie_DisableAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#andis-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(3)#cookie_DisableAll",
+            "comment": "Disable All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#andis-cookie-banner > div:nth-child(2):not([id]) > button:nth-child(3)#cookie_DisableAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
