@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_allstarlink.github.io_n5v",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://allstarlink.github.io/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?allstarlink\\.github\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
