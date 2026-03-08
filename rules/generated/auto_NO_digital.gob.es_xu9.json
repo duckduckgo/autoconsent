@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_digital.gob.es_xu9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://digital.gob.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?digital\\.gob\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div#container-afceb1c1a3 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-e39b06ce8e > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-48c51e00ee > div:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div#container-afceb1c1a3 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-e39b06ce8e > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-48c51e00ee > div:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div#container-afceb1c1a3 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-e39b06ce8e > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-48c51e00ee > div:not([id]) > span:not([id])",
+            "comment": "Rechazar todas las cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div#container-afceb1c1a3 > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-e39b06ce8e > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-48c51e00ee > div:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
