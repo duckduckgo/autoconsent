@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_arts-forains.com_t2j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arts-forains.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arts-forains\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fc2-banner > div:nth-child(4):not([id]) > button:nth-child(2)#decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fc2-banner > div:nth-child(4):not([id]) > button:nth-child(2)#decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fc2-banner > div:nth-child(4):not([id]) > button:nth-child(2)#decline",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fc2-banner > div:nth-child(4):not([id]) > button:nth-child(2)#decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
