@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_eaie2026.bnetwork.com_5wz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eaie2026.bnetwork.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eaie2026\\.bnetwork\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(1)#cookie-banner-message > span:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#optout-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(1)#cookie-banner-message > span:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#optout-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(1)#cookie-banner-message > span:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#optout-button",
+            "comment": "reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(1)#cookie-banner-message > span:nth-child(4):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#optout-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
