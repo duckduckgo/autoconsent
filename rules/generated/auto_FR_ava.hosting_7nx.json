@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ava.hosting_7nx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ava.hosting/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ava\\.hosting/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ava-gae-consent-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ava-gae-consent-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ava-gae-consent-decline",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ava-gae-consent-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

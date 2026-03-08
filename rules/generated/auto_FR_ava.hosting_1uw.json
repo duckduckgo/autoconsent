@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ava.hosting_1uw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ava.hosting/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ava\\.hosting/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ava-gae-consent-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ava-gae-consent-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ava-gae-consent-necessary",
+            "comment": "NECESSARY COOKIES ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ava-gae-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ava-gae-consent-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
