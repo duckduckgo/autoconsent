@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_chezmonpoissonnier.fr_fe9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://chezmonpoissonnier.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chezmonpoissonnier\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner-v2 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-v2-refuse-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner-v2 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-v2-refuse-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner-v2 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-v2-refuse-all",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner-v2 > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-v2-refuse-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
