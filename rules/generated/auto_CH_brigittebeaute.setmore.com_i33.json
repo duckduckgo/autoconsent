@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_brigittebeaute.setmore.com_i33",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://brigittebeaute.setmore.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?brigittebeaute\\.setmore\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div#brand-provider > div:nth-child(8):not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div#brand-provider > div:nth-child(8):not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div#brand-provider > div:nth-child(8):not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Uniquement nécessaires"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div#brand-provider > div:nth-child(8):not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
