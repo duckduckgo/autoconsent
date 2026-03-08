@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bonjourdrink.co_yd5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bonjourdrink.co/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bonjourdrink\\.co/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-section-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2)#cookie-banner-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-sections--27214543323463__custom_cookie_banner_6QgMPb"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-section-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2)#cookie-banner-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-sections--27214543323463__custom_cookie_banner_6QgMPb"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-section-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2)#cookie-banner-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-sections--27214543323463__custom_cookie_banner_6QgMPb",
+            "comment": "Rejeter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-section-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2)#cookie-banner-sections--27214543323463__custom_cookie_banner_6QgMPb > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject-sections--27214543323463__custom_cookie_banner_6QgMPb",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
