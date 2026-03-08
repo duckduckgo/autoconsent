@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_directory.hertfordshire.gov.uk_2xx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://directory.hertfordshire.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?directory\\.hertfordshire\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
