@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_askeul.com_hdj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://askeul.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?askeul\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bannerWrapper > div:nth-child(3):not([id]) > button:nth-child(1)#bannerRejectAllButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bannerWrapper > div:nth-child(3):not([id]) > button:nth-child(1)#bannerRejectAllButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bannerWrapper > div:nth-child(3):not([id]) > button:nth-child(1)#bannerRejectAllButton",
+            "comment": "Refuser Tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bannerWrapper > div:nth-child(3):not([id]) > button:nth-child(1)#bannerRejectAllButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
