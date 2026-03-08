@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_aprilia-parts.nl_ndw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aprilia-parts.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aprilia-parts\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]).cookie-box.py-2 > div:not([id]).text-center > div:nth-child(2):not([id]).cookie-btns > a:nth-child(2):not([id]).btn.btn-danger.btn-sm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]).cookie-box.py-2 > div:not([id]).text-center > div:nth-child(2):not([id]).cookie-btns > a:nth-child(2):not([id]).btn.btn-danger.btn-sm"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]).cookie-box.py-2 > div:not([id]).text-center > div:nth-child(2):not([id]).cookie-btns > a:nth-child(2):not([id]).btn.btn-danger.btn-sm",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]).cookie-box.py-2 > div:not([id]).text-center > div:nth-child(2):not([id]).cookie-btns > a:nth-child(2):not([id]).btn.btn-danger.btn-sm",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
