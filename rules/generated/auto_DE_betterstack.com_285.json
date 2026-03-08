@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "exists": "body > div:not([id]) > div:nth-child(32)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-deny"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "visible": "body > div:not([id]) > div:nth-child(32)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-deny"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
-            "comment": "Accept required"
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(32)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-deny",
+            "comment": "Deny"
         }
     ],
     "test": [
         {
-            "waitForVisible": "#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-accept-required",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(32)#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cookie-deny",
             "timeout": 1000,
             "check": "none"
         }
