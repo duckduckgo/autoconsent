@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_careers.abc.net.au_aao",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.abc.net.au/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.abc\\.net\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#implied_consent_footer > div:not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button#reject_performance_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#implied_consent_footer > div:not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button#reject_performance_cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#implied_consent_footer > div:not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button#reject_performance_cookies",
+            "comment": "ACCEPT ESSENTIAL ONLY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#implied_consent_footer > div:not([id]) > div:nth-child(3):not([id]) > ul:not([id]) > li:nth-child(1):not([id]) > button#reject_performance_cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
