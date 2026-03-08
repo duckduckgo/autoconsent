@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_beevital.com_0sh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://beevital.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?beevital\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapwrap > div:nth-child(4)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapwrap > div:nth-child(4)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapwrap > div:nth-child(4)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential",
+            "comment": "Only essentials"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapwrap > div:nth-child(4)#website_cookies_bar > div:not([id]) > div:not([id]) > div:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookies-consent-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
