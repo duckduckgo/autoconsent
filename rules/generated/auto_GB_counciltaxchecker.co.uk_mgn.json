@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_counciltaxchecker.co.uk_mgn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://counciltaxchecker.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?counciltaxchecker\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ctc-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#ctc-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ctc-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#ctc-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ctc-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#ctc-reject-all",
+            "comment": "Reject Non-Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ctc-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#ctc-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
