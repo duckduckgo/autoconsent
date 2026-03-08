@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_app.advcollective.com_p5m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://app.advcollective.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?app\\.advcollective\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]",
+            "comment": "Do not sell my personal information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id])[data-testid=\"banner-cookie-consent\"] > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])[data-testid=\"link-privacy-info\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
