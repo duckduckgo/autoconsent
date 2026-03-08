@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bgbasel.ch_7tb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bgbasel.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bgbasel\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-privacy-notice > span:nth-child(3)#cookie-privacy-notice-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-privacy-notice > span:nth-child(3)#cookie-privacy-notice-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-privacy-notice > span:nth-child(3)#cookie-privacy-notice-close",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-privacy-notice > span:nth-child(3)#cookie-privacy-notice-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
