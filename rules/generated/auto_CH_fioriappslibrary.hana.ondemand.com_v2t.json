@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fioriappslibrary.hana.ondemand.com_v2t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fioriappslibrary.hana.ondemand.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fioriappslibrary\\.hana\\.ondemand\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sap-ui-static > div:nth-child(7)#__dialog0 > footer:nth-child(4):not([id]) > div#__dialog0-footer > button:nth-child(3)#__button5"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sap-ui-static > div:nth-child(7)#__dialog0 > footer:nth-child(4):not([id]) > div#__dialog0-footer > button:nth-child(3)#__button5"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sap-ui-static > div:nth-child(7)#__dialog0 > footer:nth-child(4):not([id]) > div#__dialog0-footer > button:nth-child(3)#__button5",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sap-ui-static > div:nth-child(7)#__dialog0 > footer:nth-child(4):not([id]) > div#__dialog0-footer > button:nth-child(3)#__button5",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
