@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_cybercns.atlassian.net_jgf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cybercns.atlassian.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cybercns\\.atlassian\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#full-height-container > div:nth-child(2):not([id]) > div:nth-child(3)#confluence-ui > div:nth-child(7)#unsafe-design-system-page-layout-root[data-testid=\"page-layout-root\"] > div:nth-child(1)#AkBanner > div:nth-child(3):not([id]) > div:not([id])[data-testid=\"cookie-consent-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#full-height-container > div:nth-child(2):not([id]) > div:nth-child(3)#confluence-ui > div:nth-child(7)#unsafe-design-system-page-layout-root[data-testid=\"page-layout-root\"] > div:nth-child(1)#AkBanner > div:nth-child(3):not([id]) > div:not([id])[data-testid=\"cookie-consent-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#full-height-container > div:nth-child(2):not([id]) > div:nth-child(3)#confluence-ui > div:nth-child(7)#unsafe-design-system-page-layout-root[data-testid=\"page-layout-root\"] > div:nth-child(1)#AkBanner > div:nth-child(3):not([id]) > div:not([id])[data-testid=\"cookie-consent-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#full-height-container > div:nth-child(2):not([id]) > div:nth-child(3)#confluence-ui > div:nth-child(7)#unsafe-design-system-page-layout-root[data-testid=\"page-layout-root\"] > div:nth-child(1)#AkBanner > div:nth-child(3):not([id]) > div:not([id])[data-testid=\"cookie-consent-banner\"] > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
