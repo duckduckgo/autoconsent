@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_finds.org.uk_n7g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://finds.org.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?finds\\.org\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll",
+            "comment": "Reject all cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebot > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(4)#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
