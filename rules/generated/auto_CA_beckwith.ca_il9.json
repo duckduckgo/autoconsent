@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_beckwith.ca_il9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://beckwith.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?beckwith\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body[data-aos-easing=\"ease\"][data-aos-duration=\"\\34 00\"][data-aos-delay=\"\\30 \"] > div:not([id])[data-position=\"bottom-right\"] > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body[data-aos-easing=\"ease\"][data-aos-duration=\"\\34 00\"][data-aos-delay=\"\\30 \"] > div:not([id])[data-position=\"bottom-right\"] > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body[data-aos-easing=\"ease\"][data-aos-duration=\"\\34 00\"][data-aos-delay=\"\\30 \"] > div:not([id])[data-position=\"bottom-right\"] > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Accept Required Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body[data-aos-easing=\"ease\"][data-aos-duration=\"\\34 00\"][data-aos-delay=\"\\30 \"] > div:not([id])[data-position=\"bottom-right\"] > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
