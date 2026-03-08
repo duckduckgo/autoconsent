@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_circlesportswear.com_b2q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://circlesportswear.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?circlesportswear\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
