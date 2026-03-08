@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_buynumber.io_r0b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://buynumber.io/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?buynumber\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div#cookie-consent-banner-content > button:nth-child(3)#deny-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div#cookie-consent-banner-content > button:nth-child(3)#deny-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div#cookie-consent-banner-content > button:nth-child(3)#deny-cookies",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div#cookie-consent-banner-content > button:nth-child(3)#deny-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
