@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_fotogrijpink.nl_9k5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fotogrijpink.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fotogrijpink\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-prompt > button:nth-child(3)#cookie-prompt-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-prompt > button:nth-child(3)#cookie-prompt-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-prompt > button:nth-child(3)#cookie-prompt-refuse",
+            "comment": "Weiger optionele cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-prompt > button:nth-child(3)#cookie-prompt-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
