@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_boutique.airespace.defense.gouv.fr_rqp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://boutique.airespace.defense.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boutique\\.airespace\\.defense\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > main:nth-child(1)#body_wrapper > div#page_wrapper > footer:nth-child(12)#footer > div:nth-child(4)#footer-bottom > div:not([id]) > div#footer-bottom-container > div:not([id]) > div:not([id]) > aside:nth-child(2)#footer_bottom_left > div:nth-child(3)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > main:nth-child(1)#body_wrapper > div#page_wrapper > footer:nth-child(12)#footer > div:nth-child(4)#footer-bottom > div:not([id]) > div#footer-bottom-container > div:not([id]) > div:not([id]) > aside:nth-child(2)#footer_bottom_left > div:nth-child(3)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > main:nth-child(1)#body_wrapper > div#page_wrapper > footer:nth-child(12)#footer > div:nth-child(4)#footer-bottom > div:not([id]) > div#footer-bottom-container > div:not([id]) > div:not([id]) > aside:nth-child(2)#footer_bottom_left > div:nth-child(3)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#st-container > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > main:nth-child(1)#body_wrapper > div#page_wrapper > footer:nth-child(12)#footer > div:nth-child(4)#footer-bottom > div:not([id]) > div#footer-bottom-container > div:not([id]) > div:not([id]) > aside:nth-child(2)#footer_bottom_left > div:nth-child(3)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
