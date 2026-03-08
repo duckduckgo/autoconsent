@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_auto.news_tp7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://auto.news/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auto\\.news/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > mc-app-root:not([id]) > mc-cookie-warning:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > mc-button:nth-child(2):not([id]) > div:not([id]) > button:not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > mc-app-root:not([id]) > mc-cookie-warning:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > mc-button:nth-child(2):not([id]) > div:not([id]) > button:not([id]) > span:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > mc-app-root:not([id]) > mc-cookie-warning:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > mc-button:nth-child(2):not([id]) > div:not([id]) > button:not([id]) > span:nth-child(1):not([id])",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > mc-app-root:not([id]) > mc-cookie-warning:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > mc-button:nth-child(2):not([id]) > div:not([id]) > button:not([id]) > span:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
