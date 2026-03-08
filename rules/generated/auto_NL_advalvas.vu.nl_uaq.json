@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_advalvas.vu.nl_uaq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://advalvas.vu.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?advalvas\\.vu\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wps-cb > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wps-cb > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wps-cb > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Alleen noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wps-cb > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
