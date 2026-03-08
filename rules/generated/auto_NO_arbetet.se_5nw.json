@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_arbetet.se_5nw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arbetet.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arbetet\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-kyRCejtPlJ > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-AYEiqcZjtL > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-kyRCejtPlJ > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-AYEiqcZjtL > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-kyRCejtPlJ > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-AYEiqcZjtL > button:nth-child(2):not([id])",
+            "comment": "Godkänn endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-kyRCejtPlJ > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-AYEiqcZjtL > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
