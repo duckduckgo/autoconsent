@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_boutique.lavachequirit.com_rgk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://boutique.lavachequirit.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?boutique\\.lavachequirit\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cnilbanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cnilbanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cnilbanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cnilbanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
