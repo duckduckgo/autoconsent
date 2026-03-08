@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_afors.com_40m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.afors.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?afors\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner-container > div:nth-child(2):not([id]) > button:nth-child(2)#rejectAllBannerBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner-container > div:nth-child(2):not([id]) > button:nth-child(2)#rejectAllBannerBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner-container > div:nth-child(2):not([id]) > button:nth-child(2)#rejectAllBannerBtn",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner-container > div:nth-child(2):not([id]) > button:nth-child(2)#rejectAllBannerBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
