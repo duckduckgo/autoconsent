@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_e-ade.credit-agricole.fr_i4w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://e-ade.credit-agricole.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?e-ade\\.credit-agricole\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > button:nth-child(3)#popin_tc_privacy_btn_close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > button:nth-child(3)#popin_tc_privacy_btn_close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > button:nth-child(3)#popin_tc_privacy_btn_close",
+            "comment": "continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > button:nth-child(3)#popin_tc_privacy_btn_close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
