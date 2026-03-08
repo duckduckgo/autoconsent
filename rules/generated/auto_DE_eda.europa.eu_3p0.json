@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_eda.europa.eu_3p0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eda.europa.eu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eda\\.europa\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > a:nth-child(4)#cookieConsentNO"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > a:nth-child(4)#cookieConsentNO"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > a:nth-child(4)#cookieConsentNO",
+            "comment": "I refuse cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > a:nth-child(4)#cookieConsentNO",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
