@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_bpcalculator.co.uk_z0r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bpcalculator.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bpcalculator\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
