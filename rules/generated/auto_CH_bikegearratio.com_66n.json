@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bikegearratio.com_66n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bikegearratio.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bikegearratio\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
