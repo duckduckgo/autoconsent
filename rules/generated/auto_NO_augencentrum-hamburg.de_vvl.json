@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_augencentrum-hamburg.de_vvl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://augencentrum-hamburg.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?augencentrum-hamburg\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_bar > div:nth-child(3):not([id]) > button:nth-child(1)#myForm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_bar > div:nth-child(3):not([id]) > button:nth-child(1)#myForm"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_bar > div:nth-child(3):not([id]) > button:nth-child(1)#myForm",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_bar > div:nth-child(3):not([id]) > button:nth-child(1)#myForm",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
