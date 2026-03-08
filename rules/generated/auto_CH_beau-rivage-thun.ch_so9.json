@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_beau-rivage-thun.ch_so9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://beau-rivage-thun.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?beau-rivage-thun\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
