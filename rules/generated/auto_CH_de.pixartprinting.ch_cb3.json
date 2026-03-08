@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_de.pixartprinting.ch_cb3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.pixartprinting.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.pixartprinting\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
