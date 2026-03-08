@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_aim-schmerztherapie.de_8rh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aim-schmerztherapie.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aim-schmerztherapie\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hofff-consent-banner > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hofff-consent-banner > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hofff-consent-banner > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hofff-consent-banner > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
