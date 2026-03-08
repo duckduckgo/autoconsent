@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_epuractif.com_wne",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://epuractif.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?epuractif\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1)#cookie-consent-btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1)#cookie-consent-btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1)#cookie-consent-btn-reject-all",
+            "comment": "Refuser tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:nth-child(4):not([id]) > button:nth-child(1)#cookie-consent-btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
