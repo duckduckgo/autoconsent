@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_etd.hf.uio.no_tvr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://etd.hf.uio.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?etd\\.hf\\.uio\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#humit-consent-modal > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#humit-consent-modal > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#humit-consent-modal > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Required Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#humit-consent-modal > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
