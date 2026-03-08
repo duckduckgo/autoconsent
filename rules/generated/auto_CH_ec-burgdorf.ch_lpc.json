@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_ec-burgdorf.ch_lpc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ec-burgdorf.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ec-burgdorf\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#fg-website-necessary-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#fg-website-necessary-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#fg-website-necessary-cookie",
+            "comment": "Nur erforderliche Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#fg-website-necessary-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
