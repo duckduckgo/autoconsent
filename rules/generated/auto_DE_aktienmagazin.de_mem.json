@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_aktienmagazin.de_mem",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aktienmagazin.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aktienmagazin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#maintfcookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#maintfcookie-accept-none"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#maintfcookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#maintfcookie-accept-none"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#maintfcookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#maintfcookie-accept-none",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#maintfcookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#maintfcookie-accept-none",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
