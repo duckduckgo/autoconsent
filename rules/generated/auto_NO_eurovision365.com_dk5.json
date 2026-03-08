@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_eurovision365.com_dk5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eurovision365.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eurovision365\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-a-2024-dd-5-e-3-f-5-42-fa-a-4-be-8-a-2-cab-42-dd-59 > div#page-100908 > div:not([id]) > div:nth-child(8)#f29d6c67-28bf-41bd-976b-39c1498c914e > div#f29d6c67-28bf-41bd-976b-39c1498c914e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#f29d6c67-28bf-41bd-976b-39c1498c914e-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-a-2024-dd-5-e-3-f-5-42-fa-a-4-be-8-a-2-cab-42-dd-59 > div#page-100908 > div:not([id]) > div:nth-child(8)#f29d6c67-28bf-41bd-976b-39c1498c914e > div#f29d6c67-28bf-41bd-976b-39c1498c914e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#f29d6c67-28bf-41bd-976b-39c1498c914e-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-a-2024-dd-5-e-3-f-5-42-fa-a-4-be-8-a-2-cab-42-dd-59 > div#page-100908 > div:not([id]) > div:nth-child(8)#f29d6c67-28bf-41bd-976b-39c1498c914e > div#f29d6c67-28bf-41bd-976b-39c1498c914e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#f29d6c67-28bf-41bd-976b-39c1498c914e-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-a-2024-dd-5-e-3-f-5-42-fa-a-4-be-8-a-2-cab-42-dd-59 > div#page-100908 > div:not([id]) > div:nth-child(8)#f29d6c67-28bf-41bd-976b-39c1498c914e > div#f29d6c67-28bf-41bd-976b-39c1498c914e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#f29d6c67-28bf-41bd-976b-39c1498c914e-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
