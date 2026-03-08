@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_expeditie.vrijbuiter.nl_4em",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://expeditie.vrijbuiter.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?expeditie\\.vrijbuiter\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#CybotCookiebotDialogBodyButtonDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "comment": "weigeren."
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > span:nth-child(2)#CybotCookiebotDialogBodyButtonDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
