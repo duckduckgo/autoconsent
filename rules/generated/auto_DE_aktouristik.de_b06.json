@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_aktouristik.de_b06",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aktouristik.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aktouristik\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-notice > div:nth-child(1):not([id]) > a:nth-child(3)#cn-refuse-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-notice > div:nth-child(1):not([id]) > a:nth-child(3)#cn-refuse-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-notice > div:nth-child(1):not([id]) > a:nth-child(3)#cn-refuse-cookie",
+            "comment": "Nicht funktionale Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-notice > div:nth-child(1):not([id]) > a:nth-child(3)#cn-refuse-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
