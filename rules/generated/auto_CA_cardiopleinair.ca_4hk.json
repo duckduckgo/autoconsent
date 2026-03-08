@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_cardiopleinair.ca_4hk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cardiopleinair.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cardiopleinair\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookie-popup > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#refuse-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookie-popup > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#refuse-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cookie-popup > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#refuse-cookies",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookie-popup > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#refuse-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
