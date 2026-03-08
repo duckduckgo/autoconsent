@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_alfi-turbo.com_7mv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://alfi-turbo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alfi-turbo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > footer:nth-child(5)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(7)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > footer:nth-child(5)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(7)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > footer:nth-child(5)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(7)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "comment": "DENY ALL"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > footer:nth-child(5)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(7)#acb-banner > div:nth-child(2)#acb-action > button:nth-child(1)#acb-deny-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
