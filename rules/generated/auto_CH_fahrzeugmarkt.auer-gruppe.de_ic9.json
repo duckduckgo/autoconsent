@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fahrzeugmarkt.auer-gruppe.de_ic9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fahrzeugmarkt.auer-gruppe.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fahrzeugmarkt\\.auer-gruppe\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#body-container > div#search > div:not([id]) > div:nth-child(2)#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#body-container > div#search > div:not([id]) > div:nth-child(2)#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#body-container > div#search > div:not([id]) > div:nth-child(2)#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#body-container > div#search > div:not([id]) > div:nth-child(2)#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
