@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_destaatvan.overijssel.nl_1yj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://destaatvan.overijssel.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?destaatvan\\.overijssel\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btnCookiedissent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btnCookiedissent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btnCookiedissent",
+            "comment": "Alleen strikt noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#cookie-bar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btnCookiedissent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
