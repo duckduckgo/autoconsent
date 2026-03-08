@@ -1,6 +1,5 @@
 {
     "name": "auto_US_coupons.businessinsider.com_6xd",
-    "vendorUrl": "https://coupons.businessinsider.com/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+            "exists": "body > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+            "visible": "body > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
         }
     ],
     "optIn": [],
@@ -24,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "waitForThenClick": "body > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
             "comment": "Do Not Sell My Personal Information"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body:not([id]) > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "waitForVisible": "body > div#cmpbox > div:not([id]) > div:nth-child(1)#cmpboxcontent > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
             "timeout": 1000,
             "check": "none"
         }
