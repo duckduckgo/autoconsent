@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_courses.physics.illinois.edu_13l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://courses.physics.illinois.edu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?courses\\.physics\\.illinois\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
