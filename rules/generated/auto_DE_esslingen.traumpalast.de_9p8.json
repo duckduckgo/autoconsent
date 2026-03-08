@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_esslingen.traumpalast.de_9p8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://esslingen.traumpalast.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?esslingen\\.traumpalast\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookieconsent > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > span:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookieconsent > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > span:not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookieconsent > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > span:not([id]) > button:nth-child(1):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookieconsent > div:not([id]) > div:nth-child(3):not([id]) > p:nth-child(1):not([id]) > span:not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
