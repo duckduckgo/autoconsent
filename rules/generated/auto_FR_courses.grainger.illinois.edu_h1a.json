@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_courses.grainger.illinois.edu_h1a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://courses.grainger.illinois.edu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?courses\\.grainger\\.illinois\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_pc > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#_pc_0",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
