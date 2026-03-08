@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_agritechnordic.com_9sk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://agritechnordic.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?agritechnordic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-3-ec-57-e-27-6-ae-9-4-a-02-8-ceb-87721-f-6-d-9595 > div#page-35197 > div:not([id]) > div:nth-child(9)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e > div#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-3-ec-57-e-27-6-ae-9-4-a-02-8-ceb-87721-f-6-d-9595 > div#page-35197 > div:not([id]) > div:nth-child(9)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e > div#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-3-ec-57-e-27-6-ae-9-4-a-02-8-ceb-87721-f-6-d-9595 > div#page-35197 > div:not([id]) > div:nth-child(9)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e > div#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-3-ec-57-e-27-6-ae-9-4-a-02-8-ceb-87721-f-6-d-9595 > div#page-35197 > div:not([id]) > div:nth-child(9)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e > div#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\31 3f66059-62c0-4e74-a5f7-674ef3604f5e-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
