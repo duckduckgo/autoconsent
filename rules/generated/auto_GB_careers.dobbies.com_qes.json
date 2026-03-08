@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_careers.dobbies.com_qes",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.dobbies.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.dobbies\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:nth-child(1)#bottomBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:nth-child(1)#bottomBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(1)#bottomBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectCookies",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(1)#bottomBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnRejectCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
