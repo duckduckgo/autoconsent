@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_ctrader.com_mgt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ctrader.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ctrader\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2):not([id])[data-testid=\"cookie-banner\"] > div:not([id])[data-testid=\"scroll\"] > div:not([id]) > div:not([id])[data-testid=\"column\"] > div:nth-child(2):not([id])[data-testid=\"row\"] > div:nth-child(2):not([id])[data-testid=\"cell\"] > button:not([id])[data-testid=\"outlined-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2):not([id])[data-testid=\"cookie-banner\"] > div:not([id])[data-testid=\"scroll\"] > div:not([id]) > div:not([id])[data-testid=\"column\"] > div:nth-child(2):not([id])[data-testid=\"row\"] > div:nth-child(2):not([id])[data-testid=\"cell\"] > button:not([id])[data-testid=\"outlined-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2):not([id])[data-testid=\"cookie-banner\"] > div:not([id])[data-testid=\"scroll\"] > div:not([id]) > div:not([id])[data-testid=\"column\"] > div:nth-child(2):not([id])[data-testid=\"row\"] > div:nth-child(2):not([id])[data-testid=\"cell\"] > button:not([id])[data-testid=\"outlined-button\"]",
+            "comment": "Accept necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2):not([id])[data-testid=\"cookie-banner\"] > div:not([id])[data-testid=\"scroll\"] > div:not([id]) > div:not([id])[data-testid=\"column\"] > div:nth-child(2):not([id])[data-testid=\"row\"] > div:nth-child(2):not([id])[data-testid=\"cell\"] > button:not([id])[data-testid=\"outlined-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
