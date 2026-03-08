@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_der-warnemuender.de_pcb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://der-warnemuender.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?der-warnemuender\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-option-dialog > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-option-dialog > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-option-dialog > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])",
+            "comment": "NUR NOTWENDIGE COOKIES\nVERWENDEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-option-dialog > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
