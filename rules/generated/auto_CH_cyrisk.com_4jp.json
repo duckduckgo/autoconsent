@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_cyrisk.com_4jp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cyrisk.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cyrisk\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#cookieBanner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectAllBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#cookieBanner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectAllBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#cookieBanner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectAllBtn",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#cookieBanner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectAllBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
