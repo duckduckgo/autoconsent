@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_emmadenny.com_u9p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://emmadenny.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?emmadenny\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-c-478-e-9-f-5-5-bc-0-4-d-13-a-3-a-6-f-9-dd-415-cd-457 > div#page-47772 > div:not([id]) > div:nth-child(9)#c5066358-6329-4807-a4da-2d62a1f6e292 > div#c5066358-6329-4807-a4da-2d62a1f6e292-banner > div:nth-child(3):not([id]) > a:nth-child(1)#c5066358-6329-4807-a4da-2d62a1f6e292-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-c-478-e-9-f-5-5-bc-0-4-d-13-a-3-a-6-f-9-dd-415-cd-457 > div#page-47772 > div:not([id]) > div:nth-child(9)#c5066358-6329-4807-a4da-2d62a1f6e292 > div#c5066358-6329-4807-a4da-2d62a1f6e292-banner > div:nth-child(3):not([id]) > a:nth-child(1)#c5066358-6329-4807-a4da-2d62a1f6e292-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-c-478-e-9-f-5-5-bc-0-4-d-13-a-3-a-6-f-9-dd-415-cd-457 > div#page-47772 > div:not([id]) > div:nth-child(9)#c5066358-6329-4807-a4da-2d62a1f6e292 > div#c5066358-6329-4807-a4da-2d62a1f6e292-banner > div:nth-child(3):not([id]) > a:nth-child(1)#c5066358-6329-4807-a4da-2d62a1f6e292-decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-c-478-e-9-f-5-5-bc-0-4-d-13-a-3-a-6-f-9-dd-415-cd-457 > div#page-47772 > div:not([id]) > div:nth-child(9)#c5066358-6329-4807-a4da-2d62a1f6e292 > div#c5066358-6329-4807-a4da-2d62a1f6e292-banner > div:nth-child(3):not([id]) > a:nth-child(1)#c5066358-6329-4807-a4da-2d62a1f6e292-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
