@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_desecheo2026.com_p7o",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://desecheo2026.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?desecheo2026\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieadmin_reject_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieadmin_reject_button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieadmin_reject_button",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookieadmin_reject_button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
