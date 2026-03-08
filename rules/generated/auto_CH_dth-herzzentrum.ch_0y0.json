@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_dth-herzzentrum.ch_0y0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dth-herzzentrum.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dth-herzzentrum\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
