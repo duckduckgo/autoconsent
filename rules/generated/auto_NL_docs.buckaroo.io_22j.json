@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_docs.buckaroo.io_22j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://docs.buckaroo.io/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?docs\\.buckaroo\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieinfo-banner > div#c-left > div:nth-child(2)#c-content > div:nth-child(1)#c-cipane-1 > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieinfo-banner > div#c-left > div:nth-child(2)#c-content > div:nth-child(1)#c-cipane-1 > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieinfo-banner > div#c-left > div:nth-child(2)#c-content > div:nth-child(1)#c-cipane-1 > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieinfo-banner > div#c-left > div:nth-child(2)#c-content > div:nth-child(1)#c-cipane-1 > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
