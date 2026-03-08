@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_comercio.gob.es_t46",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://comercio.gob.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?comercio\\.gob\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieChoiceInfo > div:nth-child(2):not([id]) > button:nth-child(2)#RejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieChoiceInfo > div:nth-child(2):not([id]) > button:nth-child(2)#RejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieChoiceInfo > div:nth-child(2):not([id]) > button:nth-child(2)#RejectAll",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieChoiceInfo > div:nth-child(2):not([id]) > button:nth-child(2)#RejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
