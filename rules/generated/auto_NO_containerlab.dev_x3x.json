@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_containerlab.dev_x3x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://containerlab.dev/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?containerlab\\.dev/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
