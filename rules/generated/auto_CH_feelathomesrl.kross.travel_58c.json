@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_feelathomesrl.kross.travel_58c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://feelathomesrl.kross.travel/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?feelathomesrl\\.kross\\.travel/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
