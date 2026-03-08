@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_aides.dordogne.fr_s4j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aides.dordogne.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aides\\.dordogne\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrap_all > div:nth-child(2)#main > div:nth-child(4):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrap_all > div:nth-child(2)#main > div:nth-child(4):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrap_all > div:nth-child(2)#main > div:nth-child(4):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrap_all > div:nth-child(2)#main > div:nth-child(4):not([id]) > div:nth-child(6):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
