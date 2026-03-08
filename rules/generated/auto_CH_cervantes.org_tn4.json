@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_cervantes.org_tn4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cervantes.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cervantes\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(2)#main > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#block-ica-bootstrap-ic-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(2)#main > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#block-ica-bootstrap-ic-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(2)#main > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#block-ica-bootstrap-ic-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "PERMITIR SOLO «COOKIES» TÉCNICAS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(2)#main > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > section:nth-child(2)#block-ica-bootstrap-ic-cookiesui > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
