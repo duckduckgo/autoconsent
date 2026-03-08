@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_daquria.com_5pr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://daquria.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?daquria\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tzbfq-cookie-banner > button:nth-child(2)#tzbfq-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tzbfq-cookie-banner > button:nth-child(2)#tzbfq-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tzbfq-cookie-banner > button:nth-child(2)#tzbfq-cookie-decline",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tzbfq-cookie-banner > button:nth-child(2)#tzbfq-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
