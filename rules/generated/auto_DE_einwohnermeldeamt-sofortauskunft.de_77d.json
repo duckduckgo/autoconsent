@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_einwohnermeldeamt-sofortauskunft.de_77d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://einwohnermeldeamt-sofortauskunft.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?einwohnermeldeamt-sofortauskunft\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#coconRoot > div:nth-child(5)#coconAlertBig > button:nth-child(3)#coconAllDenied2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#coconRoot > div:nth-child(5)#coconAlertBig > button:nth-child(3)#coconAllDenied2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#coconRoot > div:nth-child(5)#coconAlertBig > button:nth-child(3)#coconAllDenied2",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#coconRoot > div:nth-child(5)#coconAlertBig > button:nth-child(3)#coconAllDenied2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
