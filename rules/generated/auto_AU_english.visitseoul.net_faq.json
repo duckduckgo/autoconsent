@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_english.visitseoul.net_faq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://english.visitseoul.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?english\\.visitseoul\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(4)#cookiePopup > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnCookieDisagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(4)#cookiePopup > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnCookieDisagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4)#cookiePopup > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnCookieDisagree",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4)#cookiePopup > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#btnCookieDisagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
