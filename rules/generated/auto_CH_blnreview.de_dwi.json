@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_blnreview.de_dwi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://blnreview.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?blnreview\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-modal > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#cookie-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
