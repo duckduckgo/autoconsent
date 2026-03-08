@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_domainname.shop_qxa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://domainname.shop/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?domainname\\.shop/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Necessary only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_consent > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
