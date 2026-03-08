@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.mytrainpal.com_03p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.mytrainpal.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.mytrainpal\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#tp-cookie-banner-ref > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#tp-cookie-banner-btn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#tp-cookie-banner-ref > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#tp-cookie-banner-btn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#tp-cookie-banner-ref > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#tp-cookie-banner-btn-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#tp-cookie-banner-ref > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#tp-cookie-banner-btn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
