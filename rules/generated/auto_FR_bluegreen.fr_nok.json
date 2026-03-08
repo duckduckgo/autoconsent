@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bluegreen.fr_nok",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bluegreen.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bluegreen\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(4):not([id]) > button:nth-child(1)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
