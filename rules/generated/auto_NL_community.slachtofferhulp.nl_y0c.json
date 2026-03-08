@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_community.slachtofferhulp.nl_y0c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://community.slachtofferhulp.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?community\\.slachtofferhulp\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cp-overlay > div:not([id]) > div:nth-child(2)#cp-options > span:nth-child(1)#cp-no > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cp-overlay > div:not([id]) > div:nth-child(2)#cp-options > span:nth-child(1)#cp-no > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cp-overlay > div:not([id]) > div:nth-child(2)#cp-options > span:nth-child(1)#cp-no > a:not([id])",
+            "comment": "Niet accepteren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cp-overlay > div:not([id]) > div:nth-child(2)#cp-options > span:nth-child(1)#cp-no > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
