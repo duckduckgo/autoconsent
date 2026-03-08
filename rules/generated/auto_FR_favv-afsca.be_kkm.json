@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_favv-afsca.be_kkm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://favv-afsca.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?favv-afsca\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fedconsent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fedconsent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fedconsent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])",
+            "comment": "Optionele cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fedconsent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > ul:nth-child(2):not([id]) > li:nth-child(3):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
