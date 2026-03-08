@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dormago.de_r1w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dormago.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dormago\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
