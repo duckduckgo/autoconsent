@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_flysupply.nl_4eh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://flysupply.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?flysupply\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > button:nth-child(4)#accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > button:nth-child(4)#accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > button:nth-child(4)#accept-necessary",
+            "comment": "Alleen functionele cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > button:nth-child(4)#accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
