@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_eclj.org_gy0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eclj.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eclj\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentContainer > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookieButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentContainer > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookieButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentContainer > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookieButton",
+            "comment": "I refuse analytics cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentContainer > div:nth-child(3):not([id]) > a:nth-child(1)#denyCookieButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
