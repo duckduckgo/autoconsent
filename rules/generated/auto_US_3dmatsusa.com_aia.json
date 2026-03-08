@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_3dmatsusa.com_aia",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://3dmatsusa.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?3dmatsusa\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#shopify-section-sections--17950972674208__cookie > modal-box:nth-child(2)#modal-sections--17950972674208__cookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#shopify-section-sections--17950972674208__cookie > modal-box:nth-child(2)#modal-sections--17950972674208__cookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#shopify-section-sections--17950972674208__cookie > modal-box:nth-child(2)#modal-sections--17950972674208__cookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "DECLINE ALL COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#shopify-section-sections--17950972674208__cookie > modal-box:nth-child(2)#modal-sections--17950972674208__cookie > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
