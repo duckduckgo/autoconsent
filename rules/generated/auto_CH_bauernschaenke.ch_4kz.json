@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bauernschaenke.ch_4kz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bauernschaenke.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bauernschaenke\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent_manager-background > div:nth-child(1)#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent_manager-background > div:nth-child(1)#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent_manager-background > div:nth-child(1)#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none",
+            "comment": "Only essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent_manager-background > div:nth-child(1)#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
