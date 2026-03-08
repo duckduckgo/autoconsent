@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_apotheekdirect.com_cth",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://apotheekdirect.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?apotheekdirect\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
