@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body.home.wp-singular.page-template.page-template-templates.page-template-template-home.page-template-templatestemplate-home-php.page.page-id-7.wp-custom-logo.wp-embed-responsive.wp-theme-twentytwentyone.wp-child-theme-focacceria.theme-foca.page-home.router-home.is-light-theme.singular > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary"
+            "exists": "body > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body.home.wp-singular.page-template.page-template-templates.page-template-template-home.page-template-templatestemplate-home-php.page.page-id-7.wp-custom-logo.wp-embed-responsive.wp-theme-twentytwentyone.wp-child-theme-focacceria.theme-foca.page-home.router-home.is-light-theme.singular > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary"
+            "visible": "body > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body.home.wp-singular.page-template.page-template-templates.page-template-template-home.page-template-templatestemplate-home-php.page.page-id-7.wp-custom-logo.wp-embed-responsive.wp-theme-twentytwentyone.wp-child-theme-focacceria.theme-foca.page-home.router-home.is-light-theme.singular > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary",
+            "waitForThenClick": "body > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary",
             "comment": "Notwendige Cookies akzeptieren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body.home.wp-singular.page-template.page-template-templates.page-template-template-home.page-template-templatestemplate-home-php.page.page-id-7.wp-custom-logo.wp-embed-responsive.wp-theme-twentytwentyone.wp-child-theme-focacceria.theme-foca.page-home.router-home.is-light-theme.singular > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary",
+            "waitForVisible": "body > div:not([id]).cookie-consent > div:not([id]).cookie-consent-row > div:nth-child(2):not([id]).cookie-consent-col-button > div:not([id]).cookie-consent-col-button-inner > div:nth-child(1):not([id]).cookie-consent-button.font-secondary",
             "timeout": 1000,
             "check": "none"
         }
