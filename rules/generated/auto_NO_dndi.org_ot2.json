@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_dndi.org_ot2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dndi.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dndi\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_96d00761-eda1-47a5-bc30-d957bce0707b > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-3c507f67-3941-467b-9a30-332ec5ea95c3 > div:nth-child(2)#ppms-fa413503-fcd6-422d-837f-14d3fce34627 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_96d00761-eda1-47a5-bc30-d957bce0707b > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-3c507f67-3941-467b-9a30-332ec5ea95c3 > div:nth-child(2)#ppms-fa413503-fcd6-422d-837f-14d3fce34627 > button:nth-child(2)#ppms_cm_reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_96d00761-eda1-47a5-bc30-d957bce0707b > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-3c507f67-3941-467b-9a30-332ec5ea95c3 > div:nth-child(2)#ppms-fa413503-fcd6-422d-837f-14d3fce34627 > button:nth-child(2)#ppms_cm_reject-all",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_96d00761-eda1-47a5-bc30-d957bce0707b > div#ppms_cm_popup_overlay > div:nth-child(2)#ppms_cm_popup_wrapper > div#ppms_cm_popup > div#ppms_cm_popup_main_id > div#ppms_cm_popup_responsive_wrapper_id > div:nth-child(2)#ppms-3c507f67-3941-467b-9a30-332ec5ea95c3 > div:nth-child(2)#ppms-fa413503-fcd6-422d-837f-14d3fce34627 > button:nth-child(2)#ppms_cm_reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
