@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_deblauwevogel.be_aj9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://deblauwevogel.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?deblauwevogel\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineOptionalCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineOptionalCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineOptionalCookies",
+            "comment": "Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineOptionalCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
