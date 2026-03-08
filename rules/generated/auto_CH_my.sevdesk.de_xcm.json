@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_my.sevdesk.de_xcm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://my.sevdesk.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auth\\.sevdesk\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > dialog:nth-child(1):not([id])[data-testid=\"consent-panel\"] > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > dialog:nth-child(1):not([id])[data-testid=\"consent-panel\"] > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > dialog:nth-child(1):not([id])[data-testid=\"consent-panel\"] > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > dialog:nth-child(1):not([id])[data-testid=\"consent-panel\"] > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
