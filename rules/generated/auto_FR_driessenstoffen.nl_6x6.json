@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_driessenstoffen.nl_6x6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://driessenstoffen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?driessenstoffen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > span#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(7):not([id]) > button:nth-child(3)#elc-decline-all-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > span#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(7):not([id]) > button:nth-child(3)#elc-decline-all-link"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > span#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(7):not([id]) > button:nth-child(3)#elc-decline-all-link",
+            "comment": "Weiger alles"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > span#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(7):not([id]) > button:nth-child(3)#elc-decline-all-link",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
