@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_alpakashop.de_9l6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://alpakashop.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alpakashop\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#shopify-section-sections--21824969998668__privacy-banner > privacy-banner:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#shopify-section-sections--21824969998668__privacy-banner > privacy-banner:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#shopify-section-sections--21824969998668__privacy-banner > privacy-banner:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Verweigern"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#shopify-section-sections--21824969998668__privacy-banner > privacy-banner:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
