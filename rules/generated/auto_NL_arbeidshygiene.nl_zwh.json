@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_arbeidshygiene.nl_zwh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arbeidshygiene.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arbeidshygiene\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#accept-necessary",
+            "comment": "Alleen Noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
