@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ecole-futee.com_pj5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ecole-futee.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ecole-futee\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"button-cookie-refuse\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"button-cookie-refuse\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"button-cookie-refuse\"]",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:nth-child(3)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"button-cookie-refuse\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
