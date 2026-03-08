@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_autobedrijfhobo.nl_vyx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://autobedrijfhobo.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autobedrijfhobo\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > form:nth-child(11)#cookie_form > div:nth-child(3)#cookiediv > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > form:nth-child(11)#cookie_form > div:nth-child(3)#cookiediv > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > form:nth-child(11)#cookie_form > div:nth-child(3)#cookiediv > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > form:nth-child(11)#cookie_form > div:nth-child(3)#cookiediv > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
