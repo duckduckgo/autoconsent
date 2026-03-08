@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_caesar-denhaag.nl_puc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://caesar-denhaag.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?caesar-denhaag\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > button:nth-child(3)#reject-cookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > button:nth-child(3)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
