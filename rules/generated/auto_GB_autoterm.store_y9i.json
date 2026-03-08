@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_autoterm.store_y9i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://autoterm.store/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autoterm\\.store/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-72-c-8564-f-259-f-48-e-2-a-710-56-b-68439-d-685 > div#page-369 > div:not([id]) > div:nth-child(23)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899 > div#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-72-c-8564-f-259-f-48-e-2-a-710-56-b-68439-d-685 > div#page-369 > div:not([id]) > div:nth-child(23)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899 > div#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-72-c-8564-f-259-f-48-e-2-a-710-56-b-68439-d-685 > div#page-369 > div:not([id]) > div:nth-child(23)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899 > div#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-72-c-8564-f-259-f-48-e-2-a-710-56-b-68439-d-685 > div#page-369 > div:not([id]) > div:nth-child(23)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899 > div#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\34 3aa99aa-c308-4aff-b90a-14dbc2b0b899-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
