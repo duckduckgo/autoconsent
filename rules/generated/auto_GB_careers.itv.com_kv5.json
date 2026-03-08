@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_careers.itv.com_kv5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.itv.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.itv\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#content > footer:nth-child(4):not([id]) > div:nth-child(3)#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#content > footer:nth-child(4):not([id]) > div:nth-child(3)#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#content > footer:nth-child(4):not([id]) > div:nth-child(3)#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all",
+            "comment": "Essential only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#content > footer:nth-child(4):not([id]) > div:nth-child(3)#cookie-notice-container > div:nth-child(1)#cookie-notice > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
