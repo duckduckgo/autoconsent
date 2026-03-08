@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_archives-etat-ge.ch_d6l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://archives-etat-ge.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?archives-etat-ge\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
