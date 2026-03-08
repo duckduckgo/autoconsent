@@ -1,6 +1,6 @@
 import generateCMPTests from '../../playwright/runner';
 generateCMPTests('auto_US_community.goodsam.com_0', ['https://community.goodsam.com/'], {
     testOptIn: false,
-    testSelfTest: false,
+    testSelfTest: true,
     onlyRegions: ['US'],
 });
