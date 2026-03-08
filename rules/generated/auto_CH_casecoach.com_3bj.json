@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_casecoach.com_3bj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://casecoach.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?casecoach\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > app-cookie-consent:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
