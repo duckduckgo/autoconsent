@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_andsafe.de_kww",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://andsafe.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?andsafe\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:nth-child(3):not([id]) > dialog:nth-child(4)#andsafeCookieManager > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"btnDeclineAll\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:nth-child(3):not([id]) > dialog:nth-child(4)#andsafeCookieManager > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"btnDeclineAll\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(3):not([id]) > dialog:nth-child(4)#andsafeCookieManager > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"btnDeclineAll\"]",
+            "comment": "alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(3):not([id]) > dialog:nth-child(4)#andsafeCookieManager > div:not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"btnDeclineAll\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
