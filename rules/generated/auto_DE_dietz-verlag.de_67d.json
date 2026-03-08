@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dietz-verlag.de_67d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dietz-verlag.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dietz-verlag\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebannerbg > div#cookie-management-banner > div:not([id]) > div:nth-child(7):not([id]) > a:nth-child(4)#cookieacceptessential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebannerbg > div#cookie-management-banner > div:not([id]) > div:nth-child(7):not([id]) > a:nth-child(4)#cookieacceptessential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebannerbg > div#cookie-management-banner > div:not([id]) > div:nth-child(7):not([id]) > a:nth-child(4)#cookieacceptessential",
+            "comment": "ALLES ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebannerbg > div#cookie-management-banner > div:not([id]) > div:nth-child(7):not([id]) > a:nth-child(4)#cookieacceptessential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
