@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_diagoriente.fr_78o",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://diagoriente.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?diagoriente\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
