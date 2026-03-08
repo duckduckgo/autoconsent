@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_e4s.center_lhn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://e4s.center/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?e4s\\.center/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-popup > div:nth-child(2):not([id]) > button:nth-child(4)#decline-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-popup > div:nth-child(2):not([id]) > button:nth-child(4)#decline-cookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-popup > div:nth-child(2):not([id]) > button:nth-child(4)#decline-cookie",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-popup > div:nth-child(2):not([id]) > button:nth-child(4)#decline-cookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
