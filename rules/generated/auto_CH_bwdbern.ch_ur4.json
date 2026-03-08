@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bwdbern.ch_ur4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bwdbern.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bwdbern\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#a3e3aa558-1475-4f3c-8f96-f87d3c4bd880 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#a3e3aa558-1475-4f3c-8f96-f87d3c4bd880 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#a3e3aa558-1475-4f3c-8f96-f87d3c4bd880 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Weiter ohne Einwilligung"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#a3e3aa558-1475-4f3c-8f96-f87d3c4bd880 > dialog:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
