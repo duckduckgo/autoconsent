@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_agenceenligne.vialis.net_z1m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://agenceenligne.vialis.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?agenceenligne\\.vialis\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#body > div:nth-child(4)#pageHeader > div:nth-child(4)#bandeauCookie > div:nth-child(3):not([id]) > div:not([id]) > span:not([id]) > a:nth-child(2)#accederPageChoixCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#body > div:nth-child(4)#pageHeader > div:nth-child(4)#bandeauCookie > div:nth-child(3):not([id]) > div:not([id]) > span:not([id]) > a:nth-child(2)#accederPageChoixCookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#body > div:nth-child(4)#pageHeader > div:nth-child(4)#bandeauCookie > div:nth-child(3):not([id]) > div:not([id]) > span:not([id]) > a:nth-child(2)#accederPageChoixCookie",
+            "comment": "tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#body > div:nth-child(4)#pageHeader > div:nth-child(4)#bandeauCookie > div:nth-child(3):not([id]) > div:not([id]) > span:not([id]) > a:nth-child(2)#accederPageChoixCookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
