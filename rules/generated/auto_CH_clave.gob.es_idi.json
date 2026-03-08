@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_clave.gob.es_idi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://clave.gob.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clave\\.gob\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div#container-e6509f9e3c > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-ffcf7a3c28 > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-3df9db503c > div:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div#container-e6509f9e3c > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-ffcf7a3c28 > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-3df9db503c > div:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div#container-e6509f9e3c > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-ffcf7a3c28 > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-3df9db503c > div:not([id]) > span:not([id])",
+            "comment": "Rechazar todas las cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div#container-e6509f9e3c > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#container-ffcf7a3c28 > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button#button-3df9db503c > div:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
