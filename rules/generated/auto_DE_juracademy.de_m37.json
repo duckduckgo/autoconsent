@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])"
+            "exists": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])"
+            "visible": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])",
+            "waitForThenClick": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])",
             "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])",
+            "waitForVisible": "body > div#root > div:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id]) > span:not([id]) > span:not([id])",
             "timeout": 1000,
             "check": "none"
         }
