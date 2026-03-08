@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_careers.caa.co.uk_x0n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.caa.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.caa\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject",
+            "comment": "Reject All Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
