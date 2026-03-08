@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fabialuzern.ch_37m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fabialuzern.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fabialuzern\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-reject-all",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
