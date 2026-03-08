@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dein-larp-shop.de_hiy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dein-larp-shop.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dein-larp-shop\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#et-cmp > div:nth-child(4)#et-cmp-frontend > div:nth-child(1)#et-modal-content > div#et-cmp-small-menu > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#et-declineAllButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#et-cmp > div:nth-child(4)#et-cmp-frontend > div:nth-child(1)#et-modal-content > div#et-cmp-small-menu > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#et-declineAllButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#et-cmp > div:nth-child(4)#et-cmp-frontend > div:nth-child(1)#et-modal-content > div#et-cmp-small-menu > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#et-declineAllButton",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#et-cmp > div:nth-child(4)#et-cmp-frontend > div:nth-child(1)#et-modal-content > div#et-cmp-small-menu > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5):not([id]) > button:nth-child(1)#et-declineAllButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
