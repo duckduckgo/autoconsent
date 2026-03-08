@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_ccmv.aecsouthall.co.uk_3o8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ccmv.aecsouthall.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ccmv\\.aecsouthall\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page-frame > div:nth-child(2)#_ac > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page-frame > div:nth-child(2)#_ac > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page-frame > div:nth-child(2)#_ac > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Decline all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page-frame > div:nth-child(2)#_ac > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
