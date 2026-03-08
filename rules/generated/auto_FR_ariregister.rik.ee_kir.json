@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ariregister.rik.ee_kir",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ariregister.rik.ee/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ariregister\\.rik\\.ee/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(11):not([id]) > div#cookie_explanation > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(11):not([id]) > div#cookie_explanation > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(11):not([id]) > div#cookie_explanation > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(11):not([id]) > div#cookie_explanation > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
