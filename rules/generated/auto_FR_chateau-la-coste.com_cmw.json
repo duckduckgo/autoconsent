@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_chateau-la-coste.com_cmw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://chateau-la-coste.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chateau-la-coste\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dataguardBanner > div:nth-child(3):not([id]) > button:nth-child(1)#btnBannerRefuseAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dataguardBanner > div:nth-child(3):not([id]) > button:nth-child(1)#btnBannerRefuseAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dataguardBanner > div:nth-child(3):not([id]) > button:nth-child(1)#btnBannerRefuseAll",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dataguardBanner > div:nth-child(3):not([id]) > button:nth-child(1)#btnBannerRefuseAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
