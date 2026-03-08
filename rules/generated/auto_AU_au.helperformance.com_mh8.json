@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_au.helperformance.com_mh8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://au.helperformance.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?au\\.helperformance\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bss-consent > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bss-consent > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bss-consent > button:nth-child(4):not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bss-consent > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
