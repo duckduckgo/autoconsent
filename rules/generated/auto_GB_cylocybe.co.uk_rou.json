@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_cylocybe.co.uk_rou",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cylocybe.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cylocybe\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-reject",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-cookie-modal > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#gdpr-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
