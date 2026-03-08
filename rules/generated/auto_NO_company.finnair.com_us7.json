@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_company.finnair.com_us7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://company.finnair.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?company\\.finnair\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#site-content > div:nth-child(3)#cm-placement-footer > section:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#site-content > div:nth-child(3)#cm-placement-footer > section:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#site-content > div:nth-child(3)#cm-placement-footer > section:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Use only necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#site-content > div:nth-child(3)#cm-placement-footer > section:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
