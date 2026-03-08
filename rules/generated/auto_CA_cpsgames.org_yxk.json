@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_cpsgames.org_yxk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cpsgames.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cpsgames\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(22)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(22)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(22)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(22)#cookieConsentBanner > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
