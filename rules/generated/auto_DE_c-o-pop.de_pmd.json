@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_c-o-pop.de_pmd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://c-o-pop.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?c-o-pop\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(1)#cookie-overlay > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#cookies-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(1)#cookie-overlay > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#cookies-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(1)#cookie-overlay > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#cookies-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(1)#cookie-overlay > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1)#cookies-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
