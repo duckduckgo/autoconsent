@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_baraluftvapen.se_31u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://baraluftvapen.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?baraluftvapen\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton",
+            "comment": "Tillåt bara nödvändiga cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
