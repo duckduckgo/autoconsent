@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_diergezondheid.nl_n7j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://diergezondheid.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?diergezondheid\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#it-eprivacy-root > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#it-eprivacy-banner-btn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#it-eprivacy-root > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#it-eprivacy-banner-btn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#it-eprivacy-root > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#it-eprivacy-banner-btn-decline",
+            "comment": "Alles afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#it-eprivacy-root > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#it-eprivacy-banner-btn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
