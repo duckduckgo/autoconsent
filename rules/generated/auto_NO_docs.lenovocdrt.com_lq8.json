@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_docs.lenovocdrt.com_lq8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://docs.lenovocdrt.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?docs\\.lenovocdrt\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__consent > aside:nth-child(2):not([id]) > form:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
