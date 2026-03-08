@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_en.chessbase.com_tpz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://en.chessbase.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.chessbase\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#askForCookiesBackground > div:nth-child(2):not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#askForCookiesBackground > div:nth-child(2):not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#askForCookiesBackground > div:nth-child(2):not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept",
+            "comment": "Reject\nall"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#askForCookiesBackground > div:nth-child(2):not([id]) > div:nth-child(1)#askForCookies > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id]) > button#customButtonAccept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
