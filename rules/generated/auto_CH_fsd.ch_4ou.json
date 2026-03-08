@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_fsd.ch_4ou",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fsd.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fsd\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gtm-consent-banner > div:not([id]) > div:nth-child(2)#gtm-consent-content > div:nth-child(1)#gtm-consent-summary > div:nth-child(2):not([id]) > button:nth-child(2)#gtm-consent-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gtm-consent-banner > div:not([id]) > div:nth-child(2)#gtm-consent-content > div:nth-child(1)#gtm-consent-summary > div:nth-child(2):not([id]) > button:nth-child(2)#gtm-consent-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gtm-consent-banner > div:not([id]) > div:nth-child(2)#gtm-consent-content > div:nth-child(1)#gtm-consent-summary > div:nth-child(2):not([id]) > button:nth-child(2)#gtm-consent-reject-all",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gtm-consent-banner > div:not([id]) > div:nth-child(2)#gtm-consent-content > div:nth-child(1)#gtm-consent-summary > div:nth-child(2):not([id]) > button:nth-child(2)#gtm-consent-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
