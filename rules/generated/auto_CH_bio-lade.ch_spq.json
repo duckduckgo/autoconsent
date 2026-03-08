@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bio-lade.ch_spq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bio-lade.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bio-lade\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#redim-cookiehint-bottom > div#redim-cookiehint > div:nth-child(2):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
