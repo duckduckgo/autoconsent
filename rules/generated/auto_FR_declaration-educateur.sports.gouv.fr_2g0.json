@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_declaration-educateur.sports.gouv.fr_2g0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://declaration-educateur.sports.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?declaration-educateur\\.sports\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > app-footer:nth-child(3):not([id]) > app-consent-banner:nth-child(2):not([id]) > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > app-footer:nth-child(3):not([id]) > app-consent-banner:nth-child(2):not([id]) > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > app-footer:nth-child(3):not([id]) > app-consent-banner:nth-child(2):not([id]) > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > app-footer:nth-child(3):not([id]) > app-consent-banner:nth-child(2):not([id]) > div:nth-child(1):not([id]) > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
