@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_aviapages.com_7y5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aviapages.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aviapages\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main#wrapper > div:nth-child(6)#user_consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main#wrapper > div:nth-child(6)#user_consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject_all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main#wrapper > div:nth-child(6)#user_consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject_all",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main#wrapper > div:nth-child(6)#user_consent > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject_all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
