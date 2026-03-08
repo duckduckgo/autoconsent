@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_forums.studentdoctor.net_ocs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://forums.studentdoctor.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?forums\\.studentdoctor\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > button:nth-child(2)#cReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > button:nth-child(2)#cReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > button:nth-child(2)#cReject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > button:nth-child(2)#cReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
