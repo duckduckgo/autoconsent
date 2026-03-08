@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_1space.eastsussex.gov.uk_u9z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://1space.eastsussex.gov.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?1space\\.eastsussex\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton",
+            "comment": "Reject optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#system-dialogs > div:nth-child(2)#js-cookie-banner-panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookiebanner-rejectionbutton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
