@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_bellroy.com_7my",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://bellroy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bellroy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
