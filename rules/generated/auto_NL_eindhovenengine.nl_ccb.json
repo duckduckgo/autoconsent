@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_eindhovenengine.nl_ccb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://eindhovenengine.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eindhovenengine\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiebanner-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiebanner-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiebanner-deny",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiebanner-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
