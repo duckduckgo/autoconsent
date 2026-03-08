@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_drolesdoiseaux.net_16x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://drolesdoiseaux.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?drolesdoiseaux\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-eu-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-eu-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-eu-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#cookies-eu-reject",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-eu-banner > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(1):not([id]) > button#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
