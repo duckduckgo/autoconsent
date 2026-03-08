@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_corporate.arcelormittal.com_550",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://corporate.arcelormittal.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?corporate\\.arcelormittal\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
