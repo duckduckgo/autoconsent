@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_campuscyber.fr_vs6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://campuscyber.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?campuscyber\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2)#decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2)#decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2)#decline",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fc2-banner > div:nth-child(3):not([id]) > button:nth-child(2)#decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
