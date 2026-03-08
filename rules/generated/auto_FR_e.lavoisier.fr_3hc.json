@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_e.lavoisier.fr_3hc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://e.lavoisier.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?e\\.lavoisier\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acceptance_of_cookies > div:not([id]) > a:nth-child(4)#refuse_cookies_notification",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
