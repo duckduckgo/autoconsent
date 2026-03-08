@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_espressorepairshop.co.uk_tsb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://espressorepairshop.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?espressorepairshop\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-7-c-06-a-613-7-b-89-41-dc-80-b-8-efbbccefb-8-a-5 > div#page-110592 > div:not([id]) > div:nth-child(9)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039 > div#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-7-c-06-a-613-7-b-89-41-dc-80-b-8-efbbccefb-8-a-5 > div#page-110592 > div:not([id]) > div:nth-child(9)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039 > div#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-7-c-06-a-613-7-b-89-41-dc-80-b-8-efbbccefb-8-a-5 > div#page-110592 > div:not([id]) > div:nth-child(9)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039 > div#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-7-c-06-a-613-7-b-89-41-dc-80-b-8-efbbccefb-8-a-5 > div#page-110592 > div:not([id]) > div:nth-child(9)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039 > div#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-banner > div:nth-child(3):not([id]) > a:nth-child(1)#\\30 f26ea33-2ea9-4f75-aeb8-2cbf4624a039-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
