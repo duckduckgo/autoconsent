@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_flirt.badische-zeitung.de_rv7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://flirt.badische-zeitung.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?flirt\\.badische-zeitung\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ccp-overlay > div#ccp-banner > div:nth-child(4):not([id]) > button:nth-child(2)#ccp-deny-all-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
