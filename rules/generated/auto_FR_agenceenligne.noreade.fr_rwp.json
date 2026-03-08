@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_agenceenligne.noreade.fr_rwp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://agenceenligne.noreade.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?agenceenligne\\.noreade\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapwrap > header:nth-child(1):not([id]) > div:nth-child(1)#bandeau-cookie > div:nth-child(2):not([id]) > div:nth-child(2)#cookies-buttons > a:nth-child(3)#cookies-authorize-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapwrap > header:nth-child(1):not([id]) > div:nth-child(1)#bandeau-cookie > div:nth-child(2):not([id]) > div:nth-child(2)#cookies-buttons > a:nth-child(3)#cookies-authorize-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapwrap > header:nth-child(1):not([id]) > div:nth-child(1)#bandeau-cookie > div:nth-child(2):not([id]) > div:nth-child(2)#cookies-buttons > a:nth-child(3)#cookies-authorize-necessary",
+            "comment": "Refuser les cookies non nécessaires"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapwrap > header:nth-child(1):not([id]) > div:nth-child(1)#bandeau-cookie > div:nth-child(2):not([id]) > div:nth-child(2)#cookies-buttons > a:nth-child(3)#cookies-authorize-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
