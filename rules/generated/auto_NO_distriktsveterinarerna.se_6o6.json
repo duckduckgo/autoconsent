@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_distriktsveterinarerna.se_6o6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://distriktsveterinarerna.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?distriktsveterinarerna\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sv_0yZlUtqP-4yXeW5Ngip2b > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sv_0yZlUtqP-4yXeW5Ngip2b > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sv_0yZlUtqP-4yXeW5Ngip2b > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Neka alla utom nödvändiga kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sv_0yZlUtqP-4yXeW5Ngip2b > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
