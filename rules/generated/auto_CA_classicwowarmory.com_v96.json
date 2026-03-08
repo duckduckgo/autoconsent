@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_classicwowarmory.com_v96",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://classicwowarmory.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?classicwowarmory\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
