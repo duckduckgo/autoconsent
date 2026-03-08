@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_careers.deloitte.ca_6b2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://careers.deloitte.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?careers\\.deloitte\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject",
+            "comment": "Reject All Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#outershell > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3)#reject-accept-cookiewrapper > button:nth-child(1)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
