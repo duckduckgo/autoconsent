@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_brasseriedeboerderij.nl_shs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://brasseriedeboerderij.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?brasseriedeboerderij\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#booom-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#booom-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#booom-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#booom-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#booom-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#booom-reject-all",
+            "comment": "Alles weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#booom-cookie-consent > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#booom-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
