@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_aau.archi.fr_f1u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://aau.archi.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aau\\.archi\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiechoice > p:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiechoice > p:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiechoice > p:nth-child(3):not([id]) > a:not([id])",
+            "comment": " Je refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiechoice > p:nth-child(3):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
