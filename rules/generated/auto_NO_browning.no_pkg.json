@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_browning.no_pkg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://browning.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?browning\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dwCookieBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3)#CookiesDeclineAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dwCookieBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3)#CookiesDeclineAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dwCookieBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3)#CookiesDeclineAll",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dwCookieBanner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(3)#CookiesDeclineAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
