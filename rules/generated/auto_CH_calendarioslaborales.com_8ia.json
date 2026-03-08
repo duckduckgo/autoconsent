@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_calendarioslaborales.com_8ia",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://calendarioslaborales.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?calendarioslaborales\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#btn-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
