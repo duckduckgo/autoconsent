@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_en.bensimon.com_90k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://en.bensimon.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.bensimon\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse",
+            "comment": "Proceed without agreeing"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#appContainer > div:nth-child(2)#cookiesLightbox > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#js_cookie_refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
