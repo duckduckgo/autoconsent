@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_analemma-water.nl_ytj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://analemma-water.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?analemma-water\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cstmcookiebar > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > button:nth-child(3)#deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cstmcookiebar > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > button:nth-child(3)#deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cstmcookiebar > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > button:nth-child(3)#deny",
+            "comment": "Alle cookies weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cstmcookiebar > div:not([id]) > div:not([id]) > div:nth-child(11):not([id]) > button:nth-child(3)#deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
