@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_diffus.de_fst",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://diffus.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?diffus\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#vue-wordpress-app > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#vue-wordpress-app > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#vue-wordpress-app > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#vue-wordpress-app > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
