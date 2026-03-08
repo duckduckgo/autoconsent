@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_cobfoundation.org_7tj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cobfoundation.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cobfoundation\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
