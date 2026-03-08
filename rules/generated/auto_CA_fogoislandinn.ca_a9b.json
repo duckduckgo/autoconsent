@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_fogoislandinn.ca_a9b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://fogoislandinn.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fogoislandinn\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer#brx-footer > div:nth-child(2)#cookie-consent-block > div#brxe-ipmmjy > div#brxe-zxurjf > div:nth-child(2)#brxe-mpatnp > a:nth-child(1)#consent-essential-only"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer#brx-footer > div:nth-child(2)#cookie-consent-block > div#brxe-ipmmjy > div#brxe-zxurjf > div:nth-child(2)#brxe-mpatnp > a:nth-child(1)#consent-essential-only"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer#brx-footer > div:nth-child(2)#cookie-consent-block > div#brxe-ipmmjy > div#brxe-zxurjf > div:nth-child(2)#brxe-mpatnp > a:nth-child(1)#consent-essential-only",
+            "comment": "Essential Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer#brx-footer > div:nth-child(2)#cookie-consent-block > div#brxe-ipmmjy > div#brxe-zxurjf > div:nth-child(2)#brxe-mpatnp > a:nth-child(1)#consent-essential-only",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
