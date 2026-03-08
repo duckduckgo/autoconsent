@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_amourmassage.co.uk_noa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://amourmassage.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amourmassage\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#top > nav:nth-child(1):not([id]) > div:nth-child(1)#cookies-eu-banner > button:nth-child(1)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#top > nav:nth-child(1):not([id]) > div:nth-child(1)#cookies-eu-banner > button:nth-child(1)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#top > nav:nth-child(1):not([id]) > div:nth-child(1)#cookies-eu-banner > button:nth-child(1)#cookies-eu-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#top > nav:nth-child(1):not([id]) > div:nth-child(1)#cookies-eu-banner > button:nth-child(1)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
