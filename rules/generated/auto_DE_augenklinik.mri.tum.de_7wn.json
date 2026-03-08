@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_augenklinik.mri.tum.de_7wn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://augenklinik.mri.tum.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?augenklinik\\.mri\\.tum\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES VERWEIGERN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > div#block-cookiesui > div:not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
