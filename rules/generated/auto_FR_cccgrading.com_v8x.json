@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cccgrading.com_v8x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cccgrading.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cccgrading\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#aw-thirds > div:nth-child(3)#aw-thirds-forced > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#aw-thirds > div:nth-child(3)#aw-thirds-forced > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#aw-thirds > div:nth-child(3)#aw-thirds-forced > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#aw-thirds > div:nth-child(3)#aw-thirds-forced > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
