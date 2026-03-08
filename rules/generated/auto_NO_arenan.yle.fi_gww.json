@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_arenan.yle.fi_gww",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://arenan.yle.fi/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arenan\\.yle\\.fi/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#yle-consent-sdk-container > div:not([id]) > aside:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#yle-consent-sdk-container > div:not([id]) > aside:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#yle-consent-sdk-container > div:not([id]) > aside:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Bara nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#yle-consent-sdk-container > div:not([id]) > aside:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
