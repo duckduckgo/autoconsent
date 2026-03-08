@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_france-chaleur-urbaine.beta.gouv.fr_6h9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://france-chaleur-urbaine.beta.gouv.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?france-chaleur-urbaine\\.beta\\.gouv\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "comment": "Tout refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2)#fr-consent-banner > ul:nth-child(3):not([id]) > li:nth-child(2):not([id]) > button#fr-consent-banner-button-refuse-app",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
