@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_sv-gresgen.de_zsv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sv-gresgen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sv-gresgen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#portuna_info > div:nth-child(2)#cookie-buttons-div > a:nth-child(3)#cc_btn_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#portuna_info > div:nth-child(2)#cookie-buttons-div > a:nth-child(3)#cc_btn_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#portuna_info > div:nth-child(2)#cookie-buttons-div > a:nth-child(3)#cc_btn_decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#portuna_info > div:nth-child(2)#cookie-buttons-div > a:nth-child(3)#cc_btn_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
