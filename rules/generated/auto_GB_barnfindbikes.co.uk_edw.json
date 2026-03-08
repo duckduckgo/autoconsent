@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_barnfindbikes.co.uk_edw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://barnfindbikes.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?barnfindbikes\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > a:nth-child(3)#wt-cli-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > a:nth-child(3)#wt-cli-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > a:nth-child(3)#wt-cli-reject-btn",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#cookie-law-info-bar > div:not([id]) > span:nth-child(2)#wt-cli-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > a:nth-child(3)#wt-cli-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
