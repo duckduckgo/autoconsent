@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_adelindistherme.de_abo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://adelindistherme.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adelindistherme\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dsV3Overlay > div#dsV3Dialog > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dsV3Overlay > div#dsV3Dialog > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dsV3Overlay > div#dsV3Dialog > div:nth-child(7):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Alle ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dsV3Overlay > div#dsV3Dialog > div:nth-child(7):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
