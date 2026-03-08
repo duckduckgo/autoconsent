@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_burgfestspiele-jagsthausen.de_ion",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://burgfestspiele-jagsthausen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?burgfestspiele-jagsthausen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#jsCookieAcceptNecessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#jsCookieAcceptNecessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#jsCookieAcceptNecessary",
+            "comment": "Nur Notwendige akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > article:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(2)#jsCookieAcceptNecessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
