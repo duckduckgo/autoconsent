@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_business.x.com_rcg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://business.x.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?business\\.x\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#twtr-spa-main > div:nth-child(1):not([id]) > main:nth-child(2)#main > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#twtr-spa-main > div:nth-child(1):not([id]) > main:nth-child(2)#main > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#twtr-spa-main > div:nth-child(1):not([id]) > main:nth-child(2)#main > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Refuse non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#twtr-spa-main > div:nth-child(1):not([id]) > main:nth-child(2)#main > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
