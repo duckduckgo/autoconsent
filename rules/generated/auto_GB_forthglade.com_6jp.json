@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_forthglade.com_6jp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://forthglade.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?forthglade\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNotice-v3 > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNotice-v3 > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNotice-v3 > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNotice-v3 > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
