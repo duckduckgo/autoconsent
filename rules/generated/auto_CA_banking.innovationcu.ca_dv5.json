@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_banking.innovationcu.ca_dv5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://banking.innovationcu.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?banking\\.innovationcu\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app:not([id]) > div:nth-child(4)#mainview > div:nth-child(2)#containerView > vc-loginmaster-uiview:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > vc-button#AdobeCookiePolicyDeclineButton > a#AdobeCookiePolicyDeclineButton_Anchor > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app:not([id]) > div:nth-child(4)#mainview > div:nth-child(2)#containerView > vc-loginmaster-uiview:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > vc-button#AdobeCookiePolicyDeclineButton > a#AdobeCookiePolicyDeclineButton_Anchor > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app:not([id]) > div:nth-child(4)#mainview > div:nth-child(2)#containerView > vc-loginmaster-uiview:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > vc-button#AdobeCookiePolicyDeclineButton > a#AdobeCookiePolicyDeclineButton_Anchor > span:not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app:not([id]) > div:nth-child(4)#mainview > div:nth-child(2)#containerView > vc-loginmaster-uiview:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > vc-button#AdobeCookiePolicyDeclineButton > a#AdobeCookiePolicyDeclineButton_Anchor > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
