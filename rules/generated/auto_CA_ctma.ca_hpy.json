@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_ctma.ca_hpy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ctma.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ctma\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#redim-cookiehint-modal > div#redim-cookiehint > div:nth-child(3):not([id]) > a:nth-child(2)#cookiehintsubmitno",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
