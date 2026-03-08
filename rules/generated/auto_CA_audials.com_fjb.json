@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_audials.com_fjb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://audials.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?audials\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > button:nth-child(3)#decline-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > button:nth-child(3)#decline-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > button:nth-child(3)#decline-btn",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > button:nth-child(3)#decline-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
