@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_devillearmory.fr_q5l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://devillearmory.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?devillearmory\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all-gdpr"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all-gdpr"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all-gdpr",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#reject-all-gdpr",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
