@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.bellroy.com_ssj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.bellroy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.bellroy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])",
+            "comment": "Fortfahren ohne zu akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > bellroy-cookie-dialog:not([id]) > dialog:nth-child(2)#cookie-dialog > div:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
