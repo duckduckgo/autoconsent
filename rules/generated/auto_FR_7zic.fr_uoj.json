@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_7zic.fr_uoj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://7zic.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?7zic\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
