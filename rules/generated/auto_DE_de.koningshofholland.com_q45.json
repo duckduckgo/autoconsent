@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_de.koningshofholland.com_q45",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://de.koningshofholland.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?de\\.koningshofholland\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#w3-cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#w3-cookie-consent-banner-button-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#w3-cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#w3-cookie-consent-banner-button-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#w3-cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#w3-cookie-consent-banner-button-decline",
+            "comment": "Verweigern"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#w3-cookie-consent-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#w3-cookie-consent-banner-button-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
