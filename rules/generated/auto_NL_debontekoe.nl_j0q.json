@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_debontekoe.nl_j0q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://debontekoe.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?debontekoe\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-section-sections--21118464721228__cookie-banner > cookie-banner:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-section-sections--21118464721228__cookie-banner > cookie-banner:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-section-sections--21118464721228__cookie-banner > cookie-banner:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "ALLES AFWIJZEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-section-sections--21118464721228__cookie-banner > cookie-banner:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
