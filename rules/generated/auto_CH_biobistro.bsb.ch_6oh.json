@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_biobistro.bsb.ch_6oh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://biobistro.bsb.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?biobistro\\.bsb\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnCookiesDismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnCookiesDismiss"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnCookiesDismiss",
+            "comment": "Cookies ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btnCookiesDismiss",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
