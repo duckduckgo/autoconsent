@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_atelie.art_jw8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://atelie.art/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?atelie\\.art/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(3):not([id])[data-testid=\"CookieNotifier\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(3):not([id])[data-testid=\"CookieNotifier\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(3):not([id])[data-testid=\"CookieNotifier\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(2):not([id]) > div:nth-child(3):not([id])[data-testid=\"CookieNotifier\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
