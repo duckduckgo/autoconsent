@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_baumann-eggimann.ch_flt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://baumann-eggimann.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?baumann-eggimann\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > button:nth-child(6)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > button:nth-child(6)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > button:nth-child(6)#btn-reject-all",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > button:nth-child(6)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
