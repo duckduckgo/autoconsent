@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_carnivoranorwegia.no_7lv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://carnivoranorwegia.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?carnivoranorwegia\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Accept essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
