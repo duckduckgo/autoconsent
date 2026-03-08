@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_en.belavia.by_5wx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://en.belavia.by/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?en\\.belavia\\.by/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_personal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_personal"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_personal",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-cookie > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuse_personal",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
