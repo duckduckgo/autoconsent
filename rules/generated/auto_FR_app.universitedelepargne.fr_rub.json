@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_app.universitedelepargne.fr_rub",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://app.universitedelepargne.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?app\\.universitedelepargne\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#rejectProtectionSettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#rejectProtectionSettings"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#rejectProtectionSettings",
+            "comment": "Rejeter tout"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#rejectProtectionSettings",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
