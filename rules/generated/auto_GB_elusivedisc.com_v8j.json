@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_elusivedisc.com_v8j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://elusivedisc.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?elusivedisc\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ed-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ed-r"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ed-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ed-r"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ed-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ed-r",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ed-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ed-r",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
