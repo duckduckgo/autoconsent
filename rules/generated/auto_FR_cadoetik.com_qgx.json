@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_cadoetik.com_qgx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cadoetik.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cadoetik\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-popin > div:not([id]) > div:nth-child(1)#cookie-defaults-popin > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#cookie-popin-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-popin > div:not([id]) > div:nth-child(1)#cookie-defaults-popin > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#cookie-popin-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-popin > div:not([id]) > div:nth-child(1)#cookie-defaults-popin > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#cookie-popin-refuse",
+            "comment": "CONTINUER SANS ACCEPTER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-popin > div:not([id]) > div:nth-child(1)#cookie-defaults-popin > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button#cookie-popin-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
