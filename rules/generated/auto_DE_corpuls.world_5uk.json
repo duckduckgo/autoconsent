@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_corpuls.world_5uk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://corpuls.world/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?corpuls\\.world/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(6)#cookieNoticeButtons > button:nth-child(1)#cookieNoticeDeclineCloser"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(6)#cookieNoticeButtons > button:nth-child(1)#cookieNoticeDeclineCloser"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(6)#cookieNoticeButtons > button:nth-child(1)#cookieNoticeDeclineCloser",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(6)#cookieNoticeButtons > button:nth-child(1)#cookieNoticeDeclineCloser",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
