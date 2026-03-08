@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_archives.avignon.fr_jzt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://archives.avignon.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?archives\\.avignon\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#conteneur > div:nth-child(15)#cookieNotice > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form1 > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#conteneur > div:nth-child(15)#cookieNotice > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form1 > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#conteneur > div:nth-child(15)#cookieNotice > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form1 > a:nth-child(2):not([id])",
+            "comment": "  Refuser  "
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#conteneur > div:nth-child(15)#cookieNotice > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form1 > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
