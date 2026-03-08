@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_charitea.com_qli",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://charitea.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?charitea\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#container > div:nth-child(5)#js-cookieConsent-wrapper > button:nth-child(3)#js-cookieConsent-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#container > div:nth-child(5)#js-cookieConsent-wrapper > button:nth-child(3)#js-cookieConsent-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#container > div:nth-child(5)#js-cookieConsent-wrapper > button:nth-child(3)#js-cookieConsent-refuse",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#container > div:nth-child(5)#js-cookieConsent-wrapper > button:nth-child(3)#js-cookieConsent-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
