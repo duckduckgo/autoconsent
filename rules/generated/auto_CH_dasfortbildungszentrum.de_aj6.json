@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_dasfortbildungszentrum.de_aj6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://dasfortbildungszentrum.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dasfortbildungszentrum\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent_manager-background > div#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent_manager-background > div#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent_manager-background > div#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent_manager-background > div#consent_manager-wrapper > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#consent_manager-accept-none",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
