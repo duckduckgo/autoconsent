@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_abenslag.nl_qmu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://abenslag.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?abenslag\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > form:nth-child(2)#cookie-consent-form > div:nth-child(2):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > form:nth-child(2)#cookie-consent-form > div:nth-child(2):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > form:nth-child(2)#cookie-consent-form > div:nth-child(2):not([id]) > button:nth-child(1)#reject-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > form:nth-child(2)#cookie-consent-form > div:nth-child(2):not([id]) > button:nth-child(1)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
