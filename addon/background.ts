@@ -87,7 +87,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
                 {
                     type: 'initResp',
                     rules,
-                    config: { ...autoconsentConfig, enabled: await isEnabledForDomain(senderDomain) },
+                    config: { ...autoconsentConfig, enabled: await isEnabledForDomain(senderDomain), disabledCmps: ['Complianz notice'] },
                 } as BackgroundMessage,
                 {
                     frameId,
