@@ -73,7 +73,15 @@ export default class SourcePoint extends AutoConsentCMPBase {
     }
 
     isManagerOpen() {
-        return location.pathname === '/privacy-manager/index.html' || location.pathname === '/ccpa_pm/index.html';
+        if (location.pathname === '/privacy-manager/index.html' || location.pathname === '/ccpa_pm/index.html') {
+            return true;
+        }
+        // US National PM is served at /us_pm/index.html, same as the initial notice.
+        // Distinguish the manager from the notice by the absence of the accept/continue button.
+        if (location.pathname === '/us_pm/index.html' && !document.querySelector('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL')) {
+            return true;
+        }
+        return false;
     }
 
     async optOut() {
@@ -113,17 +121,20 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         if (!this.isManagerOpen()) {
-            const actionable = await this.waitForVisible('.sp_choice_type_12,.sp_choice_type_13,[data-choice="1739968508799"]');
+            // Match manage/options buttons: explicit sp_choice_type_12 or generic [data-choice] links
+            // that aren't accept buttons (sp_choice_type_11, sp_choice_type_ACCEPT_ALL).
+            const manageSelector = '.sp_choice_type_12,[data-choice]:not([class*="sp_choice_type_"])';
+            const actionable = await this.waitForVisible(`${manageSelector},.sp_choice_type_13`);
             if (!actionable) {
                 return false;
             }
 
-            if (!this.elementExists('.sp_choice_type_12,[data-choice="1739968508799"]')) {
+            if (!this.elementExists(manageSelector)) {
                 // do not sell button
                 return await this.click('.sp_choice_type_13');
             }
 
-            await this.click('.sp_choice_type_12,[data-choice="1739968508799"]');
+            await this.click(manageSelector);
             // the page may navigate at this point but that's okay
             await waitFor(() => this.isManagerOpen(), 200, 100);
         }
