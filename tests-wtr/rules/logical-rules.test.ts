@@ -282,10 +282,7 @@ describe('AutoConsentCMP', () => {
         it('fails the sequence when not optional', async () => {
             domActionsMock.addStyle.returns(false);
             domActionsMock.cookieContains.returns(true);
-            const result = await cmp._runRulesSequentially([
-                { addStyle: 'overflow: auto', selector: 'body' },
-                { cookieContains: 'test' },
-            ]);
+            const result = await cmp._runRulesSequentially([{ addStyle: 'overflow: auto', selector: 'body' }, { cookieContains: 'test' }]);
             expect(result).to.equal(false);
             expect(domActionsMock.cookieContains.called).to.be.false;
         });
