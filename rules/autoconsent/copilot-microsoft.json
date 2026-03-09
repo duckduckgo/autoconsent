@@ -14,5 +14,5 @@
     "detectPopup": [{ "visible": "#cookie-banner" }],
     "optIn": [{ "waitForThenClick": "[data-testid='cookie-banner-accept-button']" }],
     "optOut": [{ "waitForThenClick": "[data-testid='cookie-banner-reject-button']" }],
-    "test": [{ "eval": "EVAL_MICROSOFT_2" }]
+    "test": [{ "cookieContains": "CMCCP=AD%3D0" }]
 }
