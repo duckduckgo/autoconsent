@@ -1,6 +1,25 @@
 import { parse as tldtsParse } from 'tldts-experimental';
+import { Config } from '../lib/types';
 import { normalizeConfig } from '../lib/utils';
 import { storageGet, storageSet } from './mv-compat';
+
+export function extensionDefaultConfig(storedConfig: Partial<Config> = {}): Config {
+    if (!storedConfig.enableHeuristicDetection) {
+        storedConfig.enableHeuristicDetection = true;
+    }
+    if (!storedConfig.logs) {
+        storedConfig.logs = {
+            lifecycle: true,
+            rulesteps: true,
+            detectionsteps: false,
+            evals: true,
+            errors: true,
+            messages: false,
+            waits: true,
+        };
+    }
+    return normalizeConfig(storedConfig);
+}
 
 export async function showOptOutStatus(
     tabId: number,
@@ -46,22 +65,7 @@ export async function showOptOutStatus(
 export async function initConfig() {
     const storedConfig = (await storageGet('config')) || {};
     console.log('storedConfig', storedConfig);
-    if (!storedConfig.enableHeuristicDetection) {
-        storedConfig.enableHeuristicDetection = true;
-    }
-    // Extension-specific defaults (differ from lib defaults)
-    if (!storedConfig.logs) {
-        storedConfig.logs = {
-            lifecycle: true,
-            rulesteps: true,
-            detectionsteps: false,
-            evals: true,
-            errors: true,
-            messages: false,
-            waits: true,
-        };
-    }
-    const updatedConfig = normalizeConfig(storedConfig);
+    const updatedConfig = extensionDefaultConfig(storedConfig);
     console.log('updated config', updatedConfig);
     await storageSet({
         config: updatedConfig,
