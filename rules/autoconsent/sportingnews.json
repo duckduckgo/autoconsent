@@ -1,0 +1,18 @@
+{
+    "name": "sportingnews",
+    "_metadata": {
+        "vendorUrl": "https://www.sportingnews.com"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?sportingnews\\.com"
+    },
+    "prehideSelectors": ["#onetrust-banner-sdk"],
+    "detectCmp": [{ "exists": "#onetrust-banner-sdk" }],
+    "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
+    "optIn": [{ "waitForThenClick": "#onetrust-accept-btn-handler" }],
+    "optOut": [{ "waitForThenClick": "#onetrust-reject-all-handler" }],
+    "test": [{ "cookieContains": "C0002%3A0" }]
+}
