@@ -46,8 +46,22 @@ export async function showOptOutStatus(
 export async function initConfig() {
     const storedConfig = (await storageGet('config')) || {};
     console.log('storedConfig', storedConfig);
+    if (!storedConfig.enableHeuristicDetection) {
+        storedConfig.enableHeuristicDetection = true;
+    }
+    // Extension-specific defaults (differ from lib defaults)
+    if (!storedConfig.logs) {
+        storedConfig.logs = {
+            lifecycle: true,
+            rulesteps: true,
+            detectionsteps: false,
+            evals: true,
+            errors: true,
+            messages: false,
+            waits: true,
+        };
+    }
     const updatedConfig = normalizeConfig(storedConfig);
-    updatedConfig.enableHeuristicDetection = true;
     console.log('updated config', updatedConfig);
     await storageSet({
         config: updatedConfig,
