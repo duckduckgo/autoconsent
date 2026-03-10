@@ -313,6 +313,10 @@ class CompactedCMPRule implements AutoConsentCMPRule {
         return { ...clonedStep };
     }
 
+    get minimumRuleStepVersion() {
+        return this.r[0];
+    }
+
     get name() {
         return this.r[1];
     }
