@@ -2,6 +2,7 @@
     "name": "transcend",
     "vendorUrl": "https://unknown",
     "cosmetic": true,
+    "minimumRuleStepVersion": 2,
     "prehideSelectors": ["#transcend-consent-manager"],
     "detectCmp": [
         {
@@ -20,7 +21,8 @@
     ],
     "optOut": [
         {
-            "hide": "#transcend-consent-manager"
+            "setStyle": "display: none !important; z-index: -1 !important; pointer-events: none !important;",
+            "selector": "#transcend-consent-manager"
         }
     ]
 }
