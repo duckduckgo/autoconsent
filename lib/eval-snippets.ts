@@ -211,17 +211,6 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
-    EVAL_CHANNEL4_TEST: () => {
-        const c = document.cookie.split(';').find((s) => s.trim().startsWith('C4_CC='));
-        if (!c) return false;
-        const val = JSON.parse(atob(c.split('=')[1]));
-        return (
-            val.consented === true &&
-            val.purposeSet.purposes
-                .filter((p) => p.id !== 'essential-information' && p.id !== 'statistics')
-                .every((p) => p.consentStatus === 'withdrawn')
-        );
-    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
