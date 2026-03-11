@@ -1,0 +1,26 @@
+{
+    "name": "channel4.com",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?channel4\\.com/"
+    },
+    "prehideSelectors": ["#cookie-consent-banner"],
+    "detectCmp": [{ "exists": "#cookie-consent-banner" }],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-banner .all4-cc-primary-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-banner .all4-cc-primary-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent-banner button[aria-label=\"Reject non-essential cookies and continue.\"]"
+        }
+    ],
+    "test": [{ "cookieContains": "C4_CC=eyJ2ZXJzaW9uIjoxLCJjb25zZW50ZWQiOnRydWUs" }]
+}
