@@ -48,14 +48,18 @@ export function isElementVisible(elem: HTMLElement): boolean {
     if (!elem) {
         return false;
     }
+
+    const css = window.getComputedStyle(elem);
+    if (css.display === 'none') return false;
+    if (css.visibility !== 'visible') return false;
+    if (css.opacity === '0') return false;
+    if (css.getPropertyValue('content-visibility') === 'hidden') return false;
+
     if (elem.offsetParent !== null) {
         return true;
-    } else {
-        const css = window.getComputedStyle(elem);
-        if (css.position === 'fixed' && css.display !== 'none') {
-            // fixed elements may be visible even if the parent is not
-            return true;
-        }
+    }
+    if (css.position === 'fixed') {
+        return true;
     }
     return false;
 }
