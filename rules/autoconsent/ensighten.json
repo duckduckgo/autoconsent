@@ -1,0 +1,24 @@
+{
+    "name": "Ensighten",
+    "prehideSelectors": ["#ensNotifyBanner", ".ensModal"],
+    "detectCmp": [{ "exists": "#ensNotifyBanner, .ensModal" }],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "visible": "#ensModalWrapper[style*=block]" }]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#ensCloseBanner,#modalAcceptButton,#ensAcceptAll,#bannerAcceptButton" }],
+    "optOut": [
+        { "wait": 500 },
+        {
+            "if": { "exists": "#ensRejectAll,#rejectAll,#ensRejectBanner,.rejectAll,#bannerRejectButton,#ensCloseBanner" },
+            "then": [{ "waitForThenClick": "#ensRejectAll,#rejectAll,#ensRejectBanner,.rejectAll,#bannerRejectButton,#ensCloseBanner" }],
+            "else": [
+                { "waitForThenClick": "#ensOpenModal,#modalOpenButton,#bannerOpenModal" },
+                { "waitFor": "#ensModalWrapper[style*=block]", "timeout": 1000 },
+                { "click": ".ensCheckbox:checked", "all": true },
+                { "waitForThenClick": "#ensSave,#modalSaveButton,#bannerSave" }
+            ]
+        }
+    ]
+}
