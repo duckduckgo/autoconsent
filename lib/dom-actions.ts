@@ -38,7 +38,6 @@ export class DomActions implements DomActionsProvider {
         const elem = this.elementSelector(selector);
         const results = new Array(elem.length);
         elem.forEach((e, i) => {
-            // check for display: none
             results[i] = isElementVisible(e);
         });
         if (check === 'none') {

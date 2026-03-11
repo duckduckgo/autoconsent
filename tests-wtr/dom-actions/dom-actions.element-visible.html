@@ -23,5 +23,44 @@
             <button>This one is visible</button>
             <button>This one too</button>
         </div>
+
+        <!-- hiding methods: individual elements hidden via different CSS techniques -->
+        <div id="hidden-display-none" style="display: none">Hidden via display:none</div>
+        <div id="hidden-visibility-hidden" style="visibility: hidden">Hidden via visibility:hidden</div>
+        <div id="hidden-visibility-collapse" style="visibility: collapse">Hidden via visibility:collapse</div>
+        <div id="hidden-opacity-zero" style="opacity: 0">Hidden via opacity:0</div>
+        <div id="hidden-content-visibility" style="content-visibility: hidden">Hidden via content-visibility:hidden</div>
+        <div id="visible-element">Fully visible element</div>
+
+        <!-- visibility:hidden on ancestor -->
+        <div style="visibility: hidden">
+            <div id="hidden-by-ancestor-visibility">Hidden by ancestor visibility:hidden</div>
+        </div>
+
+        <!-- fixed position + visibility:hidden -->
+        <div id="hidden-fixed-visibility" style="position: fixed; visibility: hidden; top: 0; left: 0">
+            Fixed but hidden via visibility:hidden
+        </div>
+
+        <!-- fixed position + display:none -->
+        <div id="hidden-fixed-display-none" style="position: fixed; display: none; top: 0; left: 0">Fixed but hidden via display:none</div>
+
+        <!-- fixed position and visible -->
+        <div id="visible-fixed" style="position: fixed; top: 0; right: 0">Fixed and visible</div>
+
+        <!-- visibility:hidden container with visibility:visible child -->
+        <div style="visibility: hidden">
+            <div id="visible-child-of-hidden" style="visibility: visible">Visible child of hidden parent</div>
+        </div>
+
+        <!-- opacity:0 on ancestor -->
+        <div style="opacity: 0">
+            <div id="hidden-by-ancestor-opacity">Hidden by ancestor opacity:0</div>
+        </div>
+
+        <!-- content-visibility:hidden on ancestor -->
+        <div style="content-visibility: hidden">
+            <div id="hidden-by-ancestor-content-visibility">Hidden by ancestor content-visibility:hidden</div>
+        </div>
     </body>
 </html>

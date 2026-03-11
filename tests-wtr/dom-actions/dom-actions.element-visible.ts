@@ -60,4 +60,58 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible(['#all-visible', 'button'], 'all')).to.be.true;
         });
     });
+
+    describe('hiding methods', () => {
+        it('should detect element hidden with display:none', () => {
+            expect(domActions.elementVisible('#hidden-display-none', 'any')).to.be.false;
+        });
+
+        it('should detect element hidden with visibility:hidden', () => {
+            expect(domActions.elementVisible('#hidden-visibility-hidden', 'any')).to.be.false;
+        });
+
+        it('should detect element hidden with visibility:collapse', () => {
+            expect(domActions.elementVisible('#hidden-visibility-collapse', 'any')).to.be.false;
+        });
+
+        it('should detect element hidden with opacity:0', () => {
+            expect(domActions.elementVisible('#hidden-opacity-zero', 'any')).to.be.false;
+        });
+
+        it('should detect element with content-visibility:hidden as visible (only content is hidden, element itself has a box)', () => {
+            expect(domActions.elementVisible('#hidden-content-visibility', 'any')).to.be.true;
+        });
+
+        it('should detect a fully visible element', () => {
+            expect(domActions.elementVisible('#visible-element', 'any')).to.be.true;
+        });
+
+        it('should detect element hidden by ancestor with visibility:hidden', () => {
+            expect(domActions.elementVisible('#hidden-by-ancestor-visibility', 'any')).to.be.false;
+        });
+
+        it('should detect fixed-position element hidden with visibility:hidden', () => {
+            expect(domActions.elementVisible('#hidden-fixed-visibility', 'any')).to.be.false;
+        });
+
+        it('should detect fixed-position element hidden with display:none', () => {
+            expect(domActions.elementVisible('#hidden-fixed-display-none', 'any')).to.be.false;
+        });
+
+        it('should detect a visible fixed-position element', () => {
+            expect(domActions.elementVisible('#visible-fixed', 'any')).to.be.true;
+        });
+
+        it('should detect a visible child inside a visibility:hidden parent', () => {
+            expect(domActions.elementVisible('#visible-child-of-hidden', 'any')).to.be.true;
+        });
+
+        it('should detect element hidden by ancestor with opacity:0', () => {
+            expect(domActions.elementVisible('#hidden-by-ancestor-opacity', 'any')).to.be.false;
+        });
+
+        it('should detect element hidden by ancestor with content-visibility:hidden', () => {
+            expect(domActions.elementVisible('#hidden-by-ancestor-content-visibility', 'any')).to.be.false;
+        });
+    });
 });
