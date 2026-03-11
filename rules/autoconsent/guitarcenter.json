@@ -1,0 +1,14 @@
+{
+    "name": "guitarcenter.com",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?guitarcenter\\.com/"
+    },
+    "prehideSelectors": [".cc-window.cc-banner.cc-type-opt-out"],
+    "detectCmp": [{ "exists": ".cc-window.cc-banner.cc-type-opt-out .cc-compliance" }],
+    "detectPopup": [{ "visible": ".cc-window.cc-banner.cc-type-opt-out", "check": "any" }],
+    "optIn": [{ "waitForThenClick": ".cc-btn.cc-dismiss" }],
+    "optOut": [{ "waitForThenClick": ".cc-btn.cc-deny" }],
+    "test": [{ "cookieContains": "guitarcenter_clarip_consent=0" }]
+}
