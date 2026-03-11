@@ -8,9 +8,8 @@
  */
 function replaceInString(string, searchRegex, replace) {
     if (!searchRegex.test(string)) {
-        const errorMsg = 'No match found in the string. Check both string and regex.';
-        console.log(errorMsg);
-        console.log(string);
+        const errorMsg = `No match found for ${searchRegex} in the string. Check both string and regex.`;
+        console.error(errorMsg);
         throw new Error(errorMsg);
     }
     return string.replaceAll(new RegExp(searchRegex.source, 'gi'), replace);

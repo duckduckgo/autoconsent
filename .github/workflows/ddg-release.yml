@@ -101,6 +101,10 @@ jobs:
               id: create-asana-tasks
               env:
                   ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
+                  PLATFORM_ANDROID: ${{ inputs.android }}
+                  PLATFORM_APPLE: ${{ inputs.apple || inputs.apple_embedded }}
+                  PLATFORM_WINDOWS: ${{ inputs.windows }}
+                  PLATFORM_EXTENSION: ${{ inputs.extension || inputs.apple_embedded }}
               run: |
                   JSON_STRING="$(node ./autoconsent/ci/asana-create-platform-release-tasks.js)"
                   echo "ASANA_OUTPUT=$JSON_STRING" >> $GITHUB_OUTPUT
@@ -326,9 +330,12 @@ jobs:
                   repository: duckduckgo/duckduckgo-privacy-extension
                   path: extension/
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v4
               with:
-                  node-version: current
+                  # this should match the node version in the extension CI, to avoid package.lock inconsistencies
+                  node-version: 22
+                  cache: 'npm'
+                  cache-dependency-path: extension/package-lock.json
             - name: Update extension autoconsent reference
               run: |
                   cd extension
