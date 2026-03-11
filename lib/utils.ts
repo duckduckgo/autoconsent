@@ -49,16 +49,22 @@ export function isElementVisible(elem: HTMLElement): boolean {
         return false;
     }
 
+    if (typeof elem.checkVisibility === 'function') {
+        return elem.checkVisibility({
+            checkVisibilityCSS: true,
+            checkOpacity: true,
+        });
+    }
+
+    // Fallback for browsers without checkVisibility
     const css = window.getComputedStyle(elem);
-    if (css.display === 'none') return false;
     if (css.visibility !== 'visible') return false;
     if (css.opacity === '0') return false;
-    if (css.getPropertyValue('content-visibility') === 'hidden') return false;
 
     if (elem.offsetParent !== null) {
         return true;
     }
-    if (css.position === 'fixed') {
+    if (css.position === 'fixed' && css.display !== 'none') {
         return true;
     }
     return false;
