@@ -196,6 +196,18 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.hide(selector, method);
     }
 
+    removeClass(selector: ElementSelector, className: string) {
+        return this.autoconsent.domActions.removeClass(selector, className);
+    }
+
+    setStyle(selector: ElementSelector, css: string) {
+        return this.autoconsent.domActions.setStyle(selector, css);
+    }
+
+    addStyle(selector: ElementSelector, css: string) {
+        return this.autoconsent.domActions.addStyle(selector, css);
+    }
+
     cookieContains(substring: string) {
         return this.autoconsent.domActions.cookieContains(substring);
     }
@@ -327,6 +339,15 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
         }
         if (rule.hide) {
             results.push(this.hide(rule.hide, rule.method));
+        }
+        if (rule.removeClass !== undefined) {
+            results.push(rule.selector ? this.removeClass(rule.selector, rule.removeClass) : false);
+        }
+        if (rule.setStyle !== undefined) {
+            results.push(rule.selector ? this.setStyle(rule.selector, rule.setStyle) : false);
+        }
+        if (rule.addStyle !== undefined) {
+            results.push(rule.selector ? this.addStyle(rule.selector, rule.addStyle) : false);
         }
         if (rule.cookieContains) {
             results.push(this.cookieContains(rule.cookieContains));

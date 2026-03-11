@@ -2,7 +2,7 @@ import { snippets } from '../lib/eval-snippets';
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from '../lib/messages';
 import { Config, RuleBundle } from '../lib/types';
 import { storageGet, storageRemove, storageSet } from './mv-compat';
-import { initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
+import { extensionDefaultConfig, initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
 import { consentomatic } from '../rules/consentomatic.json';
 import { filterCompactRules } from '../lib/encoding';
 
@@ -62,7 +62,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
     const frameId = sender.frameId;
     const senderUrl = sender.url || `${sender.origin}/`;
     const senderDomain = new URL(senderUrl).hostname;
-    const autoconsentConfig: Config = await storageGet('config');
+    const autoconsentConfig: Config = (await storageGet('config')) || extensionDefaultConfig();
     const logsConfig = autoconsentConfig.logs;
     if (logsConfig.lifecycle) {
         console.log('got config', autoconsentConfig);

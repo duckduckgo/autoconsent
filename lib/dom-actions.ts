@@ -91,6 +91,27 @@ export class DomActions implements DomActionsProvider {
         return hideElements(styleEl, selector, method);
     }
 
+    removeClass(selector: ElementSelector, className: string): boolean {
+        const elements = this.elementSelector(selector);
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[removeClass]', selector, className, elements);
+        elements.forEach((el) => el.classList.remove(className));
+        return elements.length > 0;
+    }
+
+    setStyle(selector: ElementSelector, css: string): boolean {
+        const elements = this.elementSelector(selector);
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[setStyle]', selector, css, elements);
+        elements.forEach((el) => (el.style.cssText = css));
+        return elements.length > 0;
+    }
+
+    addStyle(selector: ElementSelector, css: string): boolean {
+        const elements = this.elementSelector(selector);
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[addStyle]', selector, css, elements);
+        elements.forEach((el) => (el.style.cssText += '; ' + css));
+        return elements.length > 0;
+    }
+
     prehide(selector: string): boolean {
         const styleEl = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[prehide]', styleEl, location.href);

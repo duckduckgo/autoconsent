@@ -1,6 +1,8 @@
 import { snippets } from './eval-snippets';
 
-export const SUPPORTED_RULE_STEP_VERSION = 1;
+// 1 - the first version of the rule step format
+// 2 - added removeClass, setStyle, addStyle
+export const SUPPORTED_RULE_STEP_VERSION = 2;
 
 export type AutoConsentCMPRule = {
     readonly name: string;
@@ -47,7 +49,10 @@ export type AutoConsentRuleStep = { optional?: boolean; comment?: string } & Par
     Partial<IfRule> &
     Partial<AnyRule> &
     Partial<NegatedRule> &
-    Partial<CookieContainsRule>;
+    Partial<CookieContainsRule> &
+    Partial<RemoveClassRule> &
+    Partial<SetStyleRule> &
+    Partial<AddStyleRule>;
 
 export type NegatedRule = {
     negated: boolean;
@@ -113,4 +118,19 @@ export type IfRule = {
 
 export type AnyRule = {
     any: AutoConsentRuleStep[];
+};
+
+export type RemoveClassRule = {
+    removeClass: string;
+    selector: ElementSelector;
+};
+
+export type SetStyleRule = {
+    setStyle: string;
+    selector: ElementSelector;
+};
+
+export type AddStyleRule = {
+    addStyle: string;
+    selector: ElementSelector;
 };
