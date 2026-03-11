@@ -57,8 +57,8 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        if (this._shortcutButton) {
-            this._shortcutButton.click();
+        if (this.elementExists(shortcutOptOut)) {
+            this.click(shortcutOptOut);
             return true;
         }
 
