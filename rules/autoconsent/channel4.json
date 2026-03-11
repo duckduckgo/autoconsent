@@ -1,5 +1,8 @@
 {
     "name": "channel4.com",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?channel4\\.com/"
+    },
     "prehideSelectors": ["#cookie-consent-banner"],
     "detectCmp": [{ "exists": "#cookie-consent-banner" }],
     "detectPopup": [
