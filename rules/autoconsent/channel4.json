@@ -1,0 +1,21 @@
+{
+    "name": "channel4.com",
+    "prehideSelectors": ["#cookie-consent-banner"],
+    "detectCmp": [{ "exists": "#cookie-consent-banner" }],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-banner .all4-cc-primary-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-banner .all4-cc-primary-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent-banner button[aria-label=\"Reject non-essential cookies and continue.\"]"
+        }
+    ],
+    "test": [{ "eval": "EVAL_CHANNEL4_TEST" }]
+}
