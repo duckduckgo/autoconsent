@@ -1,12 +1,11 @@
 {
     "name": "bandcamp.com",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?bandcamp\\.com"
+        "urlPattern": "^https://([a-z0-9-]+\\.)?bandcamp\\.com"
     },
-    "prehideSelectors": [".dialog-container"],
     "detectCmp": [
         {
-            "exists": ".dialog-container .cookie-dialog-initial"
+            "exists": ".dialog-container"
         }
     ],
     "detectPopup": [
