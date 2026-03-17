@@ -22,5 +22,10 @@
         {
             "waitForThenClick": ".cookie-dialog-initial button.g-button.outline"
         }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_preferences=%7B%22allow%22%3A%5B%5D"
+        }
     ]
 }
