@@ -4,6 +4,9 @@
         "vendorUrl": "https://schoolhouse.com/"
     },
     "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?schoolhouse\\.com/"
+    },
     "prehideSelectors": ["body > div#__next > div#app > div:nth-child(7):not([id])"],
     "detectCmp": [
         {
