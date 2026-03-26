@@ -1,3 +1,15 @@
+# v14.64.0 (Tue Mar 24 2026)
+
+#### 🚀 Enhancement
+
+- add a Spanish reject pattern [#1211](https://github.com/duckduckgo/autoconsent/pull/1211) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.63.0 (Sat Mar 21 2026)
 
 #### 🚀 Enhancement
