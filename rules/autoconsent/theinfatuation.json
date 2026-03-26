@@ -6,8 +6,8 @@
         "urlPattern": "^https://(www\\.)?theinfatuation\\.com"
     },
     "prehideSelectors": ["#consent-banner"],
-    "detectCmp": [{ "exists": "#consent-banner, #onetrust-consent-sdk" }],
-    "detectPopup": [{ "waitForVisible": "#consent-banner", "timeout": 10000 }],
+    "detectCmp": [{ "exists": "#consent-banner button[data-testid='close-button']" }],
+    "detectPopup": [{ "visible": "#consent-banner button[data-testid='close-button']" }],
     "optIn": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
     "optOut": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
     "test": [{ "visible": "#consent-banner", "check": "none" }]
