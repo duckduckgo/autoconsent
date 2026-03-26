@@ -138,14 +138,17 @@ describe('AutoConsent.updateState', () => {
             autoconsent.updateState({ lifecycle: 'started' });
 
             const message = sendMessageStub.firstCall.args[0];
-            expect(message.url).to.be.a('string');
+            expect(message.url).to.equal(window.location.href);
         });
 
         it('should include mainFrame flag in report message', () => {
             autoconsent.updateState({ lifecycle: 'started' });
 
             const message = sendMessageStub.firstCall.args[0];
-            expect(message.mainFrame).to.be.a('boolean');
+            const expectedMainFrame =
+                window.top === window &&
+                (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
+            expect(message.mainFrame).to.equal(expectedMainFrame);
         });
 
         it('should include full state in report message', () => {

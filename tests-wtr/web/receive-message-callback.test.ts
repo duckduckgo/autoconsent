@@ -58,10 +58,9 @@ describe('AutoConsent.receiveMessageCallback', () => {
             expect(doOptInStub.calledOnce).to.be.true;
         });
 
-        it('should handle optIn even without foundCmp', async () => {
+        it('should set lifecycle to optInFailed when no CMP is found', async () => {
             await autoconsent.receiveMessageCallback({ type: 'optIn' });
 
-            // Should update lifecycle to runningOptIn
             expect(autoconsent.state.lifecycle).to.equal('optInFailed');
         });
     });
@@ -111,7 +110,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
 
     describe('initResp message', () => {
         it('should call initialize with config from message', async () => {
-            const initializeSpy = sinon.spy(autoconsent, 'initialize');
+            const initializeStub = sinon.stub(autoconsent, 'initialize');
             const newConfig = createTestConfig({ enabled: true });
 
             await autoconsent.receiveMessageCallback({
@@ -120,12 +119,12 @@ describe('AutoConsent.receiveMessageCallback', () => {
                 rules: null,
             });
 
-            expect(initializeSpy.calledOnce).to.be.true;
-            expect(initializeSpy.firstCall.args[0]).to.deep.include({ enabled: true });
+            expect(initializeStub.calledOnce).to.be.true;
+            expect(initializeStub.firstCall.args[0]).to.deep.include({ enabled: true });
         });
 
         it('should pass rules to initialize', async () => {
-            const initializeSpy = sinon.spy(autoconsent, 'initialize');
+            const initializeStub = sinon.stub(autoconsent, 'initialize');
             const rules = { autoconsent: [], consentomatic: {} };
 
             await autoconsent.receiveMessageCallback({
@@ -134,7 +133,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
                 rules,
             });
 
-            expect(initializeSpy.firstCall.args[1]).to.deep.equal(rules);
+            expect(initializeStub.firstCall.args[1]).to.deep.equal(rules);
         });
     });
 
