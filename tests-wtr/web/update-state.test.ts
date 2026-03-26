@@ -146,8 +146,7 @@ describe('AutoConsent.updateState', () => {
 
             const message = sendMessageStub.firstCall.args[0];
             const expectedMainFrame =
-                window.top === window &&
-                (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
+                window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
             expect(message.mainFrame).to.equal(expectedMainFrame);
         });
 
