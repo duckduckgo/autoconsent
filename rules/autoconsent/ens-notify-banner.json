@@ -1,7 +1,7 @@
 {
     "name": "Ensighten ensNotifyBanner",
     "prehideSelectors": ["#ensNotifyBanner"],
-    "detectCmp": [{ "exists": "#ensNotifyBanner" }],
+    "detectCmp": [{ "visible": "#ensNotifyBanner[style*=block]" }],
     "detectPopup": [{ "visible": "#ensNotifyBanner[style*=block]" }],
     "optIn": [{ "waitForThenClick": "#ensCloseBanner" }],
     "optOut": [

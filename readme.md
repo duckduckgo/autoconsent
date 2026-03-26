@@ -233,6 +233,35 @@ Wait for the specified number of milliseconds.
 ```
 Hide the elements matched by the selectors. `method` defines how elements are hidden: "display" sets `display: none`, "opacity" sets `opacity: 0`. Method is "display" by default. Note that only a single string CSS selector is supported here, not an array.
 
+### Remove class
+```javascript
+{
+  "removeClass": "class-name",
+  "selector": ElementSelector
+}
+```
+Remove the class named `class-name` from the elements matched by the `selector`.
+
+### Set style
+
+```javascript
+{
+  "setStyle": "style-string",
+  "selector": ElementSelector
+}
+```
+Set the inline style of the elements matched by the `selector`. `style-string` is a string of CSS properties and values.
+
+### Add style
+
+```javascript
+{
+  "addStyle": "style-string",
+  "selector": ElementSelector
+}
+```
+Append the inline style of the elements matched by the `selector`. `style-string` is a string of CSS properties and values. The style is appended to the existing inline style, separated by a semicolon.
+
 ### Cookie match
 ```javascript
 {

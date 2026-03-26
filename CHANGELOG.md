@@ -1,3 +1,167 @@
+# v14.64.0 (Tue Mar 24 2026)
+
+#### 🚀 Enhancement
+
+- add a Spanish reject pattern [#1211](https://github.com/duckduckgo/autoconsent/pull/1211) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.63.0 (Sat Mar 21 2026)
+
+#### 🚀 Enhancement
+
+- Sirdata rule cookie handling [#1187](https://github.com/duckduckgo/autoconsent/pull/1187) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- cosmetic rule for schoolhouse.com [#1140](https://github.com/duckduckgo/autoconsent/pull/1140) ([@muodov](https://github.com/muodov) [@cursoragent](https://github.com/cursoragent))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.62.0 (Fri Mar 20 2026)
+
+#### 🚀 Enhancement
+
+- Add bandcamp.com cookie consent rule [#1200](https://github.com/duckduckgo/autoconsent/pull/1200) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.61.0 (Thu Mar 19 2026)
+
+#### 🚀 Enhancement
+
+- Speculative fix for TrustArc raciness. [#1193](https://github.com/duckduckgo/autoconsent/pull/1193) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+- Prevent over-eager detection of ens-notify on british airways website [#1192](https://github.com/duckduckgo/autoconsent/pull/1192) ([@sammacbeth](https://github.com/sammacbeth))
+- Copilot cookie popup rule [#1185](https://github.com/duckduckgo/autoconsent/pull/1185) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Update EasyList Cookie to e2be5efe435a2dedbf46563db3022a8344d833c6 [#1158](https://github.com/duckduckgo/autoconsent/pull/1158) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Sourcepoint US fixes [#1184](https://github.com/duckduckgo/autoconsent/pull/1184) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Handle OneTrust one-click reject [#1163](https://github.com/duckduckgo/autoconsent/pull/1163) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Bump the dev-dependencies group across 1 directory with 15 updates [#1206](https://github.com/duckduckgo/autoconsent/pull/1206) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- CSS patching rule steps [#1186](https://github.com/duckduckgo/autoconsent/pull/1186) ([@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- CI: filter platform subtasks in DDG release flow [#1159](https://github.com/duckduckgo/autoconsent/pull/1159) ([@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.60.0 (Wed Mar 18 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1202](https://github.com/duckduckgo/autoconsent/pull/1202) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.59.0 (Wed Mar 11 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1188](https://github.com/duckduckgo/autoconsent/pull/1188) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.58.0 (Tue Mar 10 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1182](https://github.com/duckduckgo/autoconsent/pull/1182) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.57.0 (Sat Mar 07 2026)
+
+#### 🚀 Enhancement
+
+- Reverse consentmanager popup detection: visible elements first, then API [#1165](https://github.com/duckduckgo/autoconsent/pull/1165) ([@sammacbeth](https://github.com/sammacbeth))
+- Add quick click path for cookiebot. [#1164](https://github.com/duckduckgo/autoconsent/pull/1164) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.56.0 (Thu Feb 26 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1157](https://github.com/duckduckgo/autoconsent/pull/1157) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v14.55.1 (Wed Feb 25 2026)
+
+#### 🐛 Bug Fix
+
+- Add CI workflow for updating DDG extensions [#1154](https://github.com/duckduckgo/autoconsent/pull/1154) ([@muodov](https://github.com/muodov))
+- Revert "Bump tldts-experimental from 7.0.19 to 7.0.23" [#1156](https://github.com/duckduckgo/autoconsent/pull/1156) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.55.0 (Fri Feb 20 2026)
+
+#### 🚀 Enhancement
+
+- mitigate a race condition in tarteaucitron-deny [#1128](https://github.com/duckduckgo/autoconsent/pull/1128) ([@muodov](https://github.com/muodov))
+- Update EasyList Cookie to e97cf92272b9a6706202c70878b168693d4bd0e8 [#1106](https://github.com/duckduckgo/autoconsent/pull/1106) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Prevent exceptions in tumblr rule [#1150](https://github.com/duckduckgo/autoconsent/pull/1150) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.19 to 7.0.23 [#1147](https://github.com/duckduckgo/autoconsent/pull/1147) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Fix: baden-wuerttemberg.de rule [#1155](https://github.com/duckduckgo/autoconsent/pull/1155) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.54.0 (Fri Feb 13 2026)
 
 #### 🚀 Enhancement

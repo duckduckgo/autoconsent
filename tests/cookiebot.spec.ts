@@ -9,6 +9,7 @@ generateCMPTests(
         'https://tfl.gov.uk',
         // "https://www.ab-in-den-urlaub.de/", // often blocked by botwall
         'https://www.vatera.hu/',
+        'https://www.bax-shop.nl/',
     ],
     {
         skipRegions: ['US'],

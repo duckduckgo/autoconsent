@@ -2,7 +2,8 @@ const { readFileSync } = require('fs');
 const { join } = require('path');
 const { replaceAllInString } = require('./release-utils.js');
 const cwd = join(__dirname, '..');
-const filepath = (...path) => join(cwd, ...path);
+/** @param {...string} pathParts */
+const filepath = (...pathParts) => join(cwd, ...pathParts);
 
 /**
  * @typedef {{
@@ -11,7 +12,7 @@ const filepath = (...path) => join(cwd, ...path);
  *   releaseUrl: string,
  *   version: string
  * }} CreatePRTemplateData
- * @typedef {'android' | 'extensions' | 'apple' | 'windows'} ReleasePlatform
+ * @typedef {'android' | 'extension' | 'apple' | 'windows'} ReleasePlatform
  */
 
 const platform = /** @type {ReleasePlatform} */ (process.argv[2]);
@@ -41,7 +42,10 @@ function createPRTemplate(platform, data) {
     const versionRegex = /\[\[version]]/;
     const descriptionRegex = /\[\[description]]/;
 
-    const extraContent = '';
+    const extraContent =
+        platform === 'extension'
+            ? `<!-- THESE COMMENTS ARE USED BY CI, DON"T CHANGE THEM MANUALLY: --> <!-- apple_task_url: ${asanaOutput.apple?.taskUrl || ''} apple_task_gid: ${asanaOutput.apple?.taskGid || ''} -->`
+            : '';
 
     const asanaUrl = asanaOutput[platform]?.taskUrl;
 
