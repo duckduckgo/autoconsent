@@ -58,6 +58,35 @@ describe('RuleCompaction', () => {
         expect((originalLength - encodedLength) / encodedLength).to.be.greaterThan(0.75);
     });
 
+    it('decodeRules: preserves minimumRuleStepVersion through round trip', () => {
+        const rules: AutoConsentCMPRule[] = [
+            {
+                name: 'version_default',
+                detectCmp: [{ exists: '#cmp' }],
+                detectPopup: [{ visible: '#cmp' }],
+                optOut: [{ click: '#opt-out' }],
+                optIn: [],
+            },
+            {
+                name: 'version_2',
+                minimumRuleStepVersion: 2,
+                detectCmp: [{ exists: '#cmp2' }],
+                detectPopup: [{ visible: '#cmp2' }],
+                optOut: [{ setStyle: 'display: none', selector: '#cmp2' }],
+                optIn: [],
+            },
+        ];
+
+        const encoded = encodeRules(rules, null);
+        const decoded = decodeRules(encoded);
+
+        expect(decoded).to.have.length(2);
+        const decodedDefault = decoded.find((r) => r.name === 'version_default')!;
+        const decodedV2 = decoded.find((r) => r.name === 'version_2')!;
+        expect(decodedDefault.minimumRuleStepVersion).to.equal(1);
+        expect(decodedV2.minimumRuleStepVersion).to.equal(2);
+    });
+
     it('decodeRules: refuses to decode future formats', () => {
         expect(() => decodeRules({ v: 2, s: [], r: [] })).to.throw('Unsupported rule format.');
     });

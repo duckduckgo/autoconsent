@@ -27,6 +27,9 @@ export default class Cookiebot extends AutoConsentCMPBase {
     }
 
     async optOut() {
+        if (this.elementVisible('#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll')) {
+            return await this.click('#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll');
+        }
         await this.wait(500);
         let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
         await this.wait(1000); // prevent race conditions
