@@ -7,6 +7,7 @@ import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
 import compactRules from '../rules/compact-rules.json';
+import { autoconsent as fullRules } from '../rules/rules.json';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []
@@ -150,6 +151,10 @@ class TestRun {
             case 'init': {
                 const url = frame.url();
                 const mainFrame = frame.parentFrame() === null;
+                const rules =
+                    this.autoAction === 'optIn'
+                        ? { autoconsent: fullRules }
+                        : { compact: filterCompactRules(compactRules, { url, mainFrame }) };
                 await frame.evaluate(
                     `autoconsentReceiveMessage({ type: "initResp", config: ${JSON.stringify({
                         enabled: true,
@@ -159,7 +164,7 @@ class TestRun {
                         detectRetries: 20,
                         enableCosmeticRules: true,
                         visualTest: true,
-                    })}, rules: ${JSON.stringify({ compact: filterCompactRules(compactRules, { url, mainFrame }) })} })`,
+                    })}, rules: ${JSON.stringify(rules)} })`,
                 );
                 break;
             }

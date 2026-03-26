@@ -1,5 +1,6 @@
 import { snippets } from '../lib/eval-snippets';
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from '../lib/messages';
+import { AutoConsentCMPRule } from '../lib/rules';
 import { Config, RuleBundle } from '../lib/types';
 import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { extensionDefaultConfig, initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
@@ -18,6 +19,11 @@ async function loadRules() {
     const res = await fetch('./compact-rules.json');
     storageSet({
         rules: await res.json(),
+    });
+    const fullRes = await fetch('./rules.json');
+    const fullRules = await fullRes.json();
+    storageSet({
+        fullRules: fullRules.autoconsent,
     });
 }
 
@@ -76,12 +82,21 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             if (frameId === 0) {
                 await showOptOutStatus(tabId, 'idle');
             }
-            const rules: RuleBundle = {
-                autoconsent: [],
-                consentomatic,
-                compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
-            };
-            console.log('filtered rules:', rules.compact, JSON.stringify(rules.compact).length);
+            let rules: RuleBundle;
+            if (autoconsentConfig.autoAction === 'optIn') {
+                const fullRules: AutoConsentCMPRule[] = (await storageGet('fullRules')) || [];
+                rules = {
+                    autoconsent: fullRules,
+                    consentomatic,
+                };
+            } else {
+                rules = {
+                    autoconsent: [],
+                    consentomatic,
+                    compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
+                };
+            }
+            console.log('filtered rules:', rules.compact || rules.autoconsent?.length, JSON.stringify(rules).length);
             chrome.tabs.sendMessage(
                 tabId,
                 {
