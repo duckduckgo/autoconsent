@@ -549,6 +549,7 @@ const REJECT_PATTERNS_SPANISH = [
     'rechazar opcionales',
     'cookies estrictamente necesarias',
     'aceptar sólo necesarias',
+    'continuar sin aceptar',
     'denegar todo',
     'clear rechazar cookies',
     'configurar rechazar cookies',

@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_perkuptracking.aftership.com_vch",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://perkuptracking.aftership.com/1LSCYM0000QZ1A0?_sc_p=lid%3A6b94c66860c4f385ed243abdda741794%2Aseg%3Aaftership-tracking_out_for_delivery_to_customer-am_trace_id%3Dcd34b99b2d66061244e5c67c6294e765%2F0-section_id%3Dorder_tracking%2Amdm%3Asms"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?perkuptracking\\.aftership\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#amconsent-banner-sdk > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#amconsent-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#amconsent-banner-sdk > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#amconsent-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#amconsent-banner-sdk > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#amconsent-reject-all-handler",
+            "comment": "Reject non-essential cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#amconsent-banner-sdk > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#amconsent-reject-all-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

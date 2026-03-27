@@ -31,6 +31,18 @@ export default class Onetrust extends AutoConsentCMPBase {
             return await this.click('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies');
         }
 
+        if (this.elementVisible('.onetrust-close-btn-handler', 'any')) {
+            // Check if this close button is a 'continue without accepting' style button
+            // We look for specific keywords that indicate declining/rejecting, not just any text
+            // (buttons with text like "Confirm My Choices" or "Save and Accept" should NOT be clicked)
+            const closeBtn = document.querySelector<HTMLElement>('.onetrust-close-btn-handler');
+            const btnText = closeBtn?.textContent?.toLowerCase() || '';
+            const rejectPatterns = ['without', 'ohne', 'sans', 'sin ', 'zonder', 'senza', 'refuse', 'decline', 'reject', 'ablehnen'];
+            if (rejectPatterns.some((pattern) => btnText.includes(pattern))) {
+                return await this.click('.onetrust-close-btn-handler');
+            }
+        }
+
         if (this.elementExists('#onetrust-pc-btn-handler')) {
             // "show purposes" button inside a popup
             await this.click('#onetrust-pc-btn-handler');

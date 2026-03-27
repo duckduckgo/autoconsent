@@ -313,6 +313,10 @@ class CompactedCMPRule implements AutoConsentCMPRule {
         return { ...clonedStep };
     }
 
+    get minimumRuleStepVersion() {
+        return this.r[0];
+    }
+
     get name() {
         return this.r[1];
     }
@@ -376,6 +380,7 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
             optIn: rule.optIn,
             prehideSelectors: rule.prehideSelectors,
             cosmetic: rule.cosmetic,
+            minimumRuleStepVersion: rule.minimumRuleStepVersion,
         });
     };
     rules.forEach((rule) => {
@@ -410,6 +415,7 @@ export function deduplicateRules(rules: AutoConsentCMPRule[]) {
             optIn: rules[0].optIn,
             test: rules[0].test,
             cosmetic: rules[0].cosmetic,
+            minimumRuleStepVersion: rules[0].minimumRuleStepVersion,
         } as AutoConsentCMPRule);
     });
     return dedupedRules;

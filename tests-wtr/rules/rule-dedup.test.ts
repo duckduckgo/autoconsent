@@ -169,4 +169,58 @@ describe('deduplicateRules', () => {
         const deduped = deduplicateRules([]);
         expect(deduped).to.be.an('array').that.is.empty;
     });
+
+    it('preserves minimumRuleStepVersion in deduplicated rules', () => {
+        const rules: AutoConsentCMPRule[] = [
+            {
+                name: 'rule1',
+                detectCmp: [{ exists: '#selector1' }],
+                detectPopup: [{ visible: '#selector1' }],
+                optOut: [{ waitForThenClick: '#selector1' }],
+                optIn: [],
+                runContext: { urlPattern: 'a.com', main: true, frame: false },
+                minimumRuleStepVersion: 2,
+            },
+            {
+                name: 'rule2',
+                detectCmp: [{ exists: '#selector1' }],
+                detectPopup: [{ visible: '#selector1' }],
+                optOut: [{ waitForThenClick: '#selector1' }],
+                optIn: [],
+                runContext: { urlPattern: 'b.com', main: true, frame: false },
+                minimumRuleStepVersion: 2,
+            },
+        ];
+        const deduped = deduplicateRules(rules);
+        expect(deduped).to.have.length(1);
+        expect(deduped[0].minimumRuleStepVersion).to.equal(2);
+    });
+
+    it('does not deduplicate rules with different minimumRuleStepVersion', () => {
+        const rules: AutoConsentCMPRule[] = [
+            {
+                name: 'rule1',
+                detectCmp: [{ exists: '#selector1' }],
+                detectPopup: [{ visible: '#selector1' }],
+                optOut: [{ waitForThenClick: '#selector1' }],
+                optIn: [],
+                runContext: { urlPattern: 'a.com', main: true, frame: false },
+                minimumRuleStepVersion: 1,
+            },
+            {
+                name: 'rule2',
+                detectCmp: [{ exists: '#selector1' }],
+                detectPopup: [{ visible: '#selector1' }],
+                optOut: [{ waitForThenClick: '#selector1' }],
+                optIn: [],
+                runContext: { urlPattern: 'b.com', main: true, frame: false },
+                minimumRuleStepVersion: 2,
+            },
+        ];
+        const deduped = deduplicateRules(rules);
+        expect(deduped).to.have.length(2);
+        expect(deduped.map((r) => r.name))
+            .to.include('rule1')
+            .and.include('rule2');
+    });
 });
