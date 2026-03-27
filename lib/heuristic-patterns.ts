@@ -117,9 +117,10 @@ const REJECT_PATTERNS_ENGLISH = [
     // often used in CCPA
     /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*information\s*$/is,
 
+    'allow selection',
+    'disagree and close',
+
     // These are impactful, but look error-prone
-    // // e.g. "disagree"
-    // /^\s*(i)?\s*disagree\s*(and\s+close)?\s*$/i,
     // // e.g. "i do not agree"
     // /^\s*(i\s+)?do\s+not\s+agree\s*$/i,
 ];
@@ -134,6 +135,7 @@ const REJECT_PATTERNS_DUTCH = [
     'alleen noodzakelijk',
     'weiger',
     'weiger cookies',
+    'selectie toestaan',
     'doorgaan zonder te accepteren',
     'alleen functionele cookies',
     'alleen functioneel',
@@ -237,6 +239,8 @@ const REJECT_PATTERNS_FRENCH = [
     'tout refuser',
     'refuser',
     'refuser tous les cookies',
+    'non merci',
+    'interdire tous les cookies',
     'je refuse',
     'refuser tout',
     'tout rejeter',
@@ -325,6 +329,8 @@ const REJECT_PATTERNS_GERMAN = [
     'nur notwendige cookies',
     'nur essenzielle cookies akzeptieren',
     'nur notwendige cookies verwenden',
+    'nur technisch notwendige',
+    'nur essentielle cookies akzeptieren',
     'alles ablehnen',
     'nur notwendige',
     'alle cookies ablehnen',
