@@ -72,15 +72,19 @@ Code-based rules implement the `AutoCMP` interface: `detectCmp()`, `detectPopup(
 - **JSON:** Linear consent flows, DOM-based detection, single-path opt-out. JSON rules are preferable because they can be shipped in DuckDuckGo apps without a full app release.
 - **Code:** Multi-path branching, CMP JavaScript API calls, `Promise.race()` for competing UI states, complex state machines (e.g., Sourcepoint serving GDPR/CCPA/US National variants on different URL paths).
 
-### Selector Stability Tips
+### Selector Strategy
 
-When writing or reviewing selectors, watch out for:
+Prefer selectors in this order (most stable first):
 
-- **Dynamic IDs** from React Aria (`#react-aria*`), Radix (`#radix-\:*\:`), CSS Modules (`.sd-cmp-3cRQ2`) — these change between builds/sessions. Use stable attributes instead (`[data-testid]`, `[role]`, `[title]`).
-- **Full body class lists** (`body.home.wp-singular.page-template...`) — break on different pages of the same site. Simplify to semantically meaningful selectors.
-- **Invalid element names** — e.g. `btn` vs `button`.
+1. **Stable data attributes:** `[data-testid="cookie-reject"]`, `[data-action="sp-cc"]`, `[data-qa="allow-all-cookies"]`
+2. **Stable IDs:** `#sp-cc-accept`, `#cookie-banner` — but avoid dynamic IDs from React Aria (`#react-aria*`), Radix (`#radix-\:*\:`), or CSS Modules (`.sd-cmp-3cRQ2`), which change between builds/sessions.
+3. **Semantic class substrings:** `[class*="cookie-banner"]`, `[class*="reject"]` — avoid full body class lists (`body.home.wp-singular.page-template...`) which break across pages.
+4. **Structural CSS:** `#banner button.secondary` — avoid deep `nth-child` chains from generated rules.
+5. **XPath text matching (fallback):** `xpath///button[contains(., 'Reject')]` — use as a last resort since button text is language-specific and breaks across locales. Same caution applies to `aria-label` attributes, which are often localized.
+
+When writing or reviewing selectors, also watch out for:
 - **Hardcoded attribute values** that are site-specific — use generic selectors in code-based rules.
-- Prefer XPath `contains(., 'text')` for button text matching across languages.
+- **Over-qualified selectors** from generated rules — e.g. `div[id][name][role][aria-modal][tabindex][lang]` requiring every attribute to exist, or redundant `:nth-child(2)#some-id` where the ID alone suffices.
 
 ## Debugging and Fixing Rules
 
@@ -141,17 +145,18 @@ Use `if`/`then`/`else` for region-dependent or variant-dependent flows:
 
 1. Run `npm run create-rule` to scaffold the JSON + test spec.
 2. Fill in `detectCmp`, `detectPopup`, `optOut`, `optIn` with stable selectors.
-3. Add a `test` array — prefer `cookieContains` when the CMP stores consent in cookies. Use `eval` only as a last resort (can be affected by CSP).
+3. Add a `test` array — prefer `cookieContains` when the CMP stores consent in cookies.
+   - JSON rules can also use `{ "eval": "SNIPPET_NAME" }` steps to execute predefined JavaScript snippets from `lib/eval-snippets.ts`. Useful for calling CMP APIs (e.g., `window.Cookiebot`, `__cmp('getCMPData')`) in detection, opt-out, or test phases. Each snippet is a named function that returns a boolean. New snippets must be added to `lib/eval-snippets.ts` and referenced by name in the rule JSON.
 4. Run `npm run lint` and `npm run test:lib`.
 5. Test with Playwright: `npx playwright test tests/my-cmp.spec.ts --project webkit`.
 
 ### When Generated Rules Need Fixes
 
 Generated rules (`rules/generated/auto_XX_domain_hash.json`) are created by a crawler and often have:
-- Structural selectors with `nth-child` chains that break on layout changes
+- Deep `nth-child` chains that break on layout changes
 - Dynamic IDs from UI frameworks
 - Long body class lists
-- Invalid element names or selectors
+- Over-qualified selectors requiring many attributes simultaneously
 
 Fixes typically need to be applied across all region variants of the same domain (e.g., `auto_CH_kitbag.com_*.json`, `auto_DE_kitbag.com_*.json`). Search for the domain to find all related files.
 
@@ -234,7 +239,7 @@ If **no rule matched**: determine the CMP type. Check if the popup is from a kno
 2. Add or update the test spec in `tests/`
 3. Run `npm run lint` to validate
 4. Test locally: `npx playwright test tests/<cmp>.spec.ts --project webkit`
-5. Test in multiple regions if the CMP is region-dependent: `REGION=DE npx playwright test ...` and `REGION=US npx playwright test ...`
+5. Test in multiple regions if the CMP is region-dependent (requires both `REGION` and `PROXY_SERVER` — see [Testing Across Regions](#testing-across-regions))
 6. For cosmetic rules, verify no breakage (scrolling works, page is interactable)
 
 ## Regional Differences
@@ -251,12 +256,20 @@ Use `if`/`then`/`else` conditionals to handle different UIs within a single rule
 
 ### Testing Across Regions
 
-The `REGION` environment variable controls which region Playwright tests simulate:
+Two things are needed to test from a specific region:
+
+1. **`REGION` env var** — filters which test URLs to run (from `data/coverage.json`). This only controls test selection, it does **not** change where requests come from.
+2. **`PROXY_SERVER` env var** — routes browser traffic through a geographic proxy so sites see the correct region. Without a proxy, the site sees your real location regardless of `REGION`.
 
 ```bash
+# Local: only filters tests, requests come from your real location
 REGION=DE npx playwright test tests/sirdata.spec.ts --project webkit
-REGION=US npx playwright test tests/sirdata.spec.ts --project webkit
+
+# With proxy: tests are filtered AND requests are routed through the proxy
+REGION=DE PROXY_SERVER=socks5://proxy.example:1080 npx playwright test tests/sirdata.spec.ts --project webkit
 ```
+
+In CI, Jenkins loads region-specific `.env` files that set both `REGION` and `PROXY_SERVER` together.
 
 Test specs support `skipRegions` and `onlyRegions` to control when tests run:
 
