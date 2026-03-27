@@ -61,6 +61,12 @@ JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/`
 
 For the complete rule syntax reference (all step types, element selectors, conditionals, etc.), see [docs/rule-syntax.md](docs/rule-syntax.md).
 
+### prehideSelectors
+
+`prehideSelectors` inject CSS early (before the CMP is even detected) to prevent the cookie popup from flickering on screen. They use `opacity: 0` (not `display: none`) so the popup still occupies layout space and detection via `visible` checks still works. If opt-out doesn't start within 2 seconds, the elements are automatically unhidden to avoid permanently hiding page content.
+
+Keep prehideSelectors **narrow** — they are applied across all matching rules simultaneously, so an overly broad selector (e.g. `body`) could hide the entire page during the 2-second window.
+
 ### Code-Based Rules
 
 For CMPs requiring complex  non-linear logic, CMP API interaction, or complex multi-path flows, use a TypeScript class extending `AutoConsentCMPBase` in `lib/cmps/`. Examples: `sourcepoint-frame.ts`, `onetrust.ts`, `cookiebot.ts`, `consentmanager.ts`.
@@ -81,6 +87,7 @@ Prefer selectors in this order (most stable first):
 3. **Semantic class substrings:** `[class*="cookie-banner"]`, `[class*="reject"]` — avoid full body class lists (`body.home.wp-singular.page-template...`) which break across pages.
 4. **Structural CSS:** `#banner button.secondary` — avoid deep `nth-child` chains from generated rules.
 5. **XPath text matching (fallback):** `xpath///button[contains(., 'Reject')]` — use as a last resort since button text is language-specific and breaks across locales. Same caution applies to `aria-label` attributes, which are often localized.
+6. **Array selectors** for shadow DOM / iframe piercing: `["host-element", "button"]` finds `button` inside the shadow root of `host-element`. Each string in the array narrows the search scope — if an intermediate element has an open `shadowRoot`, the next selector runs inside it; if it's a same-origin iframe, the next selector runs inside its `contentDocument`. Use when a CMP renders inside shadow DOM or a same-origin iframe.
 
 When writing or reviewing selectors, also watch out for:
 - **Hardcoded attribute values** that are site-specific — use generic selectors in code-based rules.
