@@ -16,10 +16,15 @@ import { filterCompactRules } from '../lib/encoding';
 const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
+    // Compact rules are the default for optOut (the production path in DuckDuckGo browsers).
     const res = await fetch('./compact-rules.json');
     storageSet({
         rules: await res.json(),
     });
+    // Full rules from rules.json include optIn steps, which the compact format
+    // intentionally omits to save space. We need these for the test extension's
+    // optIn mode, since running optIn against compact rules silently succeeds
+    // with zero clicks (empty step array is vacuously true).
     const fullRes = await fetch('./rules.json');
     const fullRules = await fullRes.json();
     storageSet({
@@ -82,6 +87,10 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             if (frameId === 0) {
                 await showOptOutStatus(tabId, 'idle');
             }
+            // Choose which rule format to send based on the configured action.
+            // Compact rules omit optIn steps to save space, so optIn would silently
+            // no-op. For optIn, we send full rules (which include optIn steps) via the
+            // `autoconsent` field. For optOut (the default), we use compact rules.
             let rules: RuleBundle;
             if (autoconsentConfig.autoAction === 'optIn') {
                 const fullRules: AutoConsentCMPRule[] = (await storageGet('fullRules')) || [];

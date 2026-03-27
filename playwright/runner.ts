@@ -7,6 +7,8 @@ import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
 import compactRules from '../rules/compact-rules.json';
+// Full rules include optIn steps that compact rules intentionally omit.
+// We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
@@ -151,6 +153,7 @@ class TestRun {
             case 'init': {
                 const url = frame.url();
                 const mainFrame = frame.parentFrame() === null;
+                // Use full rules for optIn (compact rules omit optIn steps), compact rules for optOut.
                 const rules =
                     this.autoAction === 'optIn'
                         ? { autoconsent: fullRules }
