@@ -1,4 +1,5 @@
 import tseslint from 'typescript-eslint';
+// @ts-expect-error no type declarations available
 import ddgConfig from '@duckduckgo/eslint-config';
 import globals from 'globals';
 

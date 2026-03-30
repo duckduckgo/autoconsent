@@ -10,11 +10,12 @@ function createGenerator() {
             type: 'AutoConsentCMPRule',
         });
     } catch (e) {
-        console.error(e.diagnostic);
+        console.error(/** @type {any} */ (e).diagnostic);
         throw e;
     }
 }
 
+/** @param {any[] | null | undefined} errors */
 function formatErrors(errors) {
     if (!Array.isArray(errors)) {
         return '';

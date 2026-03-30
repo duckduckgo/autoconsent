@@ -5,8 +5,8 @@ import { getRandomID } from './random';
 class Deferred<T> {
     id: string;
     promise: Promise<T>;
-    resolve: (value?: T) => void;
-    reject: (reason?: any) => void;
+    resolve!: (value: T | PromiseLike<T>) => void;
+    reject!: (reason?: any) => void;
     timer: number;
 
     constructor(id: string, timeout = 1000) {
@@ -23,7 +23,7 @@ class Deferred<T> {
 
 type EvalState = {
     pending: Map<string, Deferred<boolean>>;
-    sendContentMessage: (message: ContentScriptMessage) => void;
+    sendContentMessage: ((message: ContentScriptMessage) => void) | null;
 };
 
 export const evalState: EvalState = {
@@ -33,7 +33,7 @@ export const evalState: EvalState = {
 
 export function requestEval(code: string, snippetId?: keyof typeof snippets): Promise<boolean> {
     const id = getRandomID();
-    evalState.sendContentMessage({
+    evalState.sendContentMessage!({
         type: 'eval',
         id,
         code,

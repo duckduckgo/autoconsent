@@ -29,7 +29,7 @@ export default class Uniconsent extends AutoConsentCMPBase {
 
     async optOut() {
         await this.waitForElement('.unic button', 1000);
-        document.querySelectorAll('.unic button').forEach((button: HTMLButtonElement) => {
+        document.querySelectorAll<HTMLButtonElement>('.unic button').forEach((button) => {
             const text = button.textContent;
             if (text.includes('Manage Options') || text.includes('Optionen verwalten')) {
                 button.click();
@@ -39,7 +39,7 @@ export default class Uniconsent extends AutoConsentCMPBase {
         if (await this.waitForElement('.unic input[type=checkbox]', 1000)) {
             await this.waitForElement('.unic button', 1000);
 
-            document.querySelectorAll('.unic input[type=checkbox]').forEach((c: HTMLInputElement) => {
+            document.querySelectorAll<HTMLInputElement>('.unic input[type=checkbox]').forEach((c) => {
                 if (c.checked) {
                     c.click();
                 }

@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+/** @param {string} manifestFile */
 function updateVersion(manifestFile) {
     const day = new Date();
     const version = `${day.getFullYear()}.${day.getMonth() + 1}.${day.getDate()}`;

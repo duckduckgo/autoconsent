@@ -1,10 +1,11 @@
 import { expect } from '@esm-bundle/chai';
 import { instantiateDomActions } from './utils';
+// @ts-expect-error sinon ESM bundle has no type declarations
 import sinon from 'sinon/pkg/sinon-esm.js';
 
 // must be run from dom-actions.wait-for-element.html
 describe('waitForElement', () => {
-    let clock;
+    let clock: any;
 
     beforeEach(() => {
         clock = sinon.useFakeTimers();
@@ -38,7 +39,7 @@ describe('waitForElement', () => {
             deferredElement.id = 'deferred';
             deferredElement.innerText = 'Deferred element appeared';
 
-            document.getElementById('target-for-delayed-element').appendChild(deferredElement);
+            document.getElementById('target-for-delayed-element')!.appendChild(deferredElement);
         }, 800);
 
         const result = await resultPromise;

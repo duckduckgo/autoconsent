@@ -147,10 +147,10 @@ async function slideAction(config: any) {
     let yDiff = dragTargetBounds.top - targetBounds.top;
     let xDiff = dragTargetBounds.left - targetBounds.left;
 
-    if (this.config.axis.toLowerCase() === "y") {
+    if (config.axis.toLowerCase() === "y") {
       xDiff = 0;
     }
-    if (this.config.axis.toLowerCase() === "x") {
+    if (config.axis.toLowerCase() === "x") {
       yDiff = 0;
     }
 
@@ -214,9 +214,9 @@ async function slideAction(config: any) {
       result.target
     );
     result.target.dispatchEvent(mouseDown);
-    await this.waitTimeout(10);
+    await waitTimeout(10);
     result.target.dispatchEvent(mouseMove);
-    await this.waitTimeout(10);
+    await waitTimeout(10);
     result.target.dispatchEvent(mouseUp);
   }
 }

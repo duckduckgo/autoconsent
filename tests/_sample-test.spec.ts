@@ -5,11 +5,11 @@ const region = (process.env.REGION || 'US').trim();
 const nSites = parseInt(process.env.NSITES || '1');
 
 Object.keys(coverageData).forEach((name) => {
-    if (!coverageData[name][region]) {
+    if (!(coverageData as Record<string, any>)[name][region]) {
         // no coverage in this region
         return;
     }
-    const siteList = coverageData[name][region].exampleSites.slice(0, nSites);
+    const siteList = (coverageData as Record<string, any>)[name][region].exampleSites.slice(0, nSites);
     generateCMPTests(name, siteList, {
         testOptIn: false,
     });

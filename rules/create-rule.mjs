@@ -7,7 +7,7 @@ import readline from 'readline';
 const rulesDir = path.dirname(fileURLToPath(import.meta.url));
 const testsDir = path.join(rulesDir, '../tests');
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
+const prompt = (/** @type {string} */ query) => new Promise((resolve) => rl.question(query, resolve));
 
 (async () => {
     const name = await prompt('New rule name: ');

@@ -5,8 +5,10 @@ import { test, expect, Page, Frame, TestInfo } from '@playwright/test';
 import { waitFor } from '../lib/utils';
 import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
-import { filterCompactRules } from '../lib/encoding';
-import compactRules from '../rules/compact-rules.json';
+import { filterCompactRules, IndexedCMPRuleset } from '../lib/encoding';
+import compactRulesJson from '../rules/compact-rules.json';
+
+const compactRules = compactRulesJson as unknown as IndexedCMPRuleset;
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []

@@ -2,9 +2,10 @@ const RandExp = require('randexp');
 const fs = require('fs');
 const compactRules = require('../rules/compact-rules.json');
 
+/** @type {[string, string][]} */
 const testUrlMap = [];
 
-compactRules.r.forEach((rule) => {
+compactRules.r.forEach((/** @type {any} */ rule) => {
     const urlPattern = rule[3];
     if (urlPattern.length === 0) {
         return;
@@ -13,7 +14,7 @@ compactRules.r.forEach((rule) => {
         const testUrl = new URL(RandExp.randexp(urlPattern)).href;
         testUrlMap.push([rule[1], testUrl]);
     } catch (error) {
-        console.log('Error generating URL for pattern:', urlPattern, error.input);
+        console.log('Error generating URL for pattern:', urlPattern, /** @type {any} */ (error).input);
     }
 });
 fs.writeFileSync('./tests-wtr/rules/cmp-test-urls.json', JSON.stringify(testUrlMap, null, 2));

@@ -18,12 +18,12 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         frame: false,
     };
 
-    _shortcutButton: HTMLElement;
+    _shortcutButton: HTMLElement | null;
     _optInDone: boolean;
 
     constructor(autoconsentInstance: AutoConsent) {
         super(autoconsentInstance);
-        this._shortcutButton = null; // indicates if the "reject all" button is detected
+        this._shortcutButton = null;
         this._optInDone = false;
     }
 
@@ -45,8 +45,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     async detectCmp() {
         const result = this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
         if (result) {
-            // additionally detect the opt-out button
-            this._shortcutButton = document.querySelector(shortcutOptOut);
+            this._shortcutButton = document.querySelector<HTMLElement>(shortcutOptOut);
         }
         return result;
     }

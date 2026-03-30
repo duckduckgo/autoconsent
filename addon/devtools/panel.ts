@@ -11,16 +11,15 @@ function sendBackgroundMessage(msg: DevtoolsMessage) {
 function getRowForInstance(instanceId: string) {
     const rowId = `instance-${instanceId}`;
     if (document.getElementById(rowId) !== null) {
-        // update existing row
-        const td = document.getElementById(rowId).querySelectorAll('td');
+        const td = document.getElementById(rowId)!.querySelectorAll('td');
         return td;
     } else {
-        const template: HTMLTemplateElement = document.querySelector('#row');
-        const table = document.querySelector('tbody');
+        const template = document.querySelector<HTMLTemplateElement>('#row')!;
+        const table = document.querySelector('tbody')!;
         const clone = template.content.cloneNode(true) as HTMLElement;
         const td = clone.querySelectorAll('td');
         table.appendChild(clone);
-        table.lastElementChild.id = rowId;
+        table.lastElementChild!.id = rowId;
         return td;
     }
 }
@@ -56,20 +55,20 @@ function reconnect(): chrome.runtime.Port {
     return backgroundPageConnection;
 }
 
-const clearStorageCheckbox: HTMLInputElement = document.querySelector('#clear-storage');
+const clearStorageCheckbox = document.querySelector<HTMLInputElement>('#clear-storage')!;
 
 const clearPanel = () => {
     const tbody = document.querySelector('tbody');
-    while (tbody.firstChild) {
+    while (tbody?.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
 };
-document.getElementById('clear').addEventListener('click', clearPanel);
+document.getElementById('clear')!.addEventListener('click', clearPanel);
 
-document.getElementById('reload').addEventListener('click', async () => {
+document.getElementById('reload')!.addEventListener('click', async () => {
     if (clearStorageCheckbox.checked) {
         const tab = await chrome.tabs.get(chrome.devtools.inspectedWindow.tabId);
-        const url = new URL(tab.url);
+        const url = new URL(tab.url!);
         await chrome.browsingData.remove(
             {
                 origins: [url.origin],
@@ -85,9 +84,9 @@ document.getElementById('reload').addEventListener('click', async () => {
     chrome.devtools.inspectedWindow.reload({});
 });
 
-document.getElementById('mode').addEventListener('change', async () => {
+document.getElementById('mode')!.addEventListener('change', async () => {
     const storedConfig = await storageGet('config');
-    let autoAction = document.querySelector('#mode > option:checked').getAttribute('data-autoaction');
+    let autoAction = document.querySelector('#mode > option:checked')!.getAttribute('data-autoaction');
     if (autoAction === 'null') {
         autoAction = null;
     }
@@ -97,13 +96,13 @@ document.getElementById('mode').addEventListener('change', async () => {
     });
 });
 
-document.getElementById('optin').addEventListener('click', () => {
+document.getElementById('optin')!.addEventListener('click', () => {
     chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, {
         type: 'optIn',
     });
 });
 
-document.getElementById('optout').addEventListener('click', () => {
+document.getElementById('optout')!.addEventListener('click', () => {
     chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, {
         type: 'optOut',
     });
@@ -125,7 +124,7 @@ function onConfigUpdated(config: Config) {
 
 chrome.storage.local.onChanged.addListener((changes) => {
     if (changes.config) {
-        onConfigUpdated(changes.config.newValue);
+        onConfigUpdated(changes.config.newValue as Config);
     }
 });
 

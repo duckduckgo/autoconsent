@@ -83,7 +83,7 @@ async function processDomainSpecificFilterList(listFileName) {
             }
 
             const tlDomain = getDomain(domain);
-            return domainMap.has(tlDomain);
+            return tlDomain && domainMap.has(tlDomain);
         });
 
         // If no domains meet cutoff, remove rule entirely. If one or more
@@ -124,7 +124,7 @@ async function loadTrancoList() {
         } while (!available);
 
         const listData = await fetch(download);
-        await finished(Readable.fromWeb(listData.body).pipe(fs.createWriteStream(csvLocation)));
+        await finished(Readable.fromWeb(/** @type {any} */ (listData.body)).pipe(fs.createWriteStream(csvLocation)));
     }
 
     if (typeof domainMap !== 'object') {
@@ -165,7 +165,7 @@ function convertAndWriteABP(JSONList, fileName) {
 
         stream.on('finish', () => {
             console.log(`ABP format list written to ${fileLocation}`);
-            resolve();
+            resolve(undefined);
         });
 
         stream.on('error', (err) => {

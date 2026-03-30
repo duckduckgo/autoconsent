@@ -3,9 +3,9 @@
  * which is licened under the MIT. 
  */
 export default class Tools {
-  static base: HTMLElement = null;
+  static base: HTMLElement | null = null;
 
-  static setBase(base: HTMLElement) {
+  static setBase(base: HTMLElement | null) {
     Tools.base = base;
   }
 

@@ -41,12 +41,12 @@ export default class Conversant extends AutoConsentCMPBase {
             (<HTMLElement>item.querySelector('.cmp-accordion-item-title')).click();
             await waitFor(() => !!item.querySelector('.cmp-accordion-item-content.cmp-active'), 10, 50);
             const content = item.querySelector('.cmp-accordion-item-content.cmp-active');
-            content
-                .querySelectorAll('.cmp-toggle-actions .cmp-toggle-deny:not(.cmp-toggle-deny--active)')
-                .forEach((e: HTMLElement) => e.click());
-            content
-                .querySelectorAll('.cmp-toggle-actions .cmp-toggle-checkbox:not(.cmp-toggle-checkbox--active)')
-                .forEach((e: HTMLElement) => e.click());
+            content!
+                .querySelectorAll<HTMLElement>('.cmp-toggle-actions .cmp-toggle-deny:not(.cmp-toggle-deny--active)')
+                .forEach((e) => e.click());
+            content!
+                .querySelectorAll<HTMLElement>('.cmp-toggle-actions .cmp-toggle-checkbox:not(.cmp-toggle-checkbox--active)')
+                .forEach((e) => e.click());
             // await waitFor(() => !item.querySelector('.cmp-toggle-deny--active,.cmp-toggle-checkbox--active'), 5, 50); // this may take a long time
         }
         await this.click('.cmp-main-button:not(.cmp-main-button--primary)');

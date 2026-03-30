@@ -80,8 +80,8 @@
     "ts-json-schema-generator": "^2.3.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
-    "typescript": "^5.1.6",
-    "typescript-eslint": "^8.12.2",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.57.2",
     "web-ext": "^10.0.0"
   },
   "repository": "duckduckgo/autoconsent",
@@ -89,6 +89,26 @@
     "plugins": [
       "npm"
     ]
+  },
+  "overrides": {
+    "typescript-eslint": {
+      "typescript": "$typescript"
+    },
+    "@typescript-eslint/parser": {
+      "typescript": "$typescript"
+    },
+    "@typescript-eslint/eslint-plugin": {
+      "typescript": "$typescript"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "typescript": "$typescript"
+    },
+    "@typescript-eslint/type-utils": {
+      "typescript": "$typescript"
+    },
+    "@typescript-eslint/utils": {
+      "typescript": "$typescript"
+    }
   },
   "dependencies": {
     "@ghostery/adblocker": "^2.0.4",

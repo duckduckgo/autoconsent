@@ -33,13 +33,13 @@ async function evalInTab(
             frameIds: [frameId],
         },
         world: 'MAIN',
-        func: snippets[snippetId],
+        func: snippets[snippetId!],
     });
 }
 
-async function getTabReports(tabId: number): Promise<{ [frameId: number]: ReportMessage }> {
+async function getTabReports(tabId: number): Promise<Record<number, ReportMessage>> {
     const storageKey = `reports-${tabId}`;
-    return (await chrome.storage.session.get(storageKey))[storageKey] || {};
+    return ((await chrome.storage.session.get(storageKey))[storageKey] || {}) as Record<number, ReportMessage>;
 }
 
 async function updateTabReports(tabId: number, frameId: number, msg: ReportMessage) {
@@ -168,7 +168,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             break;
         case 'report':
             if (sender.tab && openDevToolsPanels.has(sender.tab.id)) {
-                openDevToolsPanels.get(sender.tab.id).postMessage({
+                openDevToolsPanels.get(sender.tab.id)!.postMessage({
                     tabId: sender.tab.id,
                     frameId: sender.frameId,
                     ...msg,
@@ -191,14 +191,14 @@ chrome.runtime.onConnect.addListener(function (devToolsConnection) {
         if (tabId && instanceId) {
             devToolsConnection.onDisconnect.addListener(() => {
                 if (openDevToolsPanels.has(tabId)) {
-                    openDevToolsPanels.get(tabId).postMessage({
+                    openDevToolsPanels.get(tabId)!.postMessage({
                         type: 'instanceTerminated',
                         tabId,
                         instanceId,
                     });
                 }
                 // remove stored frame data
-                updateTabReports(tabId, devToolsConnection.sender.frameId, undefined);
+                updateTabReports(tabId, devToolsConnection.sender!.frameId!, undefined as unknown as ReportMessage);
             });
         }
     } else if (devToolsConnection.name === 'devtools-panel') {

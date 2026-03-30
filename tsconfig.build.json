@@ -4,6 +4,7 @@
         "declaration": true,
         "emitDeclarationOnly": true,
         "declarationDir": "./dist/types",
+        "rootDir": "./lib",
         "noCheck": true
     },
     "include": ["lib/web.ts", "lib/web-extra.ts"],

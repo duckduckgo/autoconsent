@@ -56,7 +56,7 @@ describe('waitForMutation', () => {
 
         // When
         const resultPromise = domActions.waitForMutation('#already-present', 10);
-        document.getElementById('already-present').innerText = 'foo';
+        document.getElementById('already-present')!.innerText = 'foo';
 
         // Then
         expect(await resultPromise).to.be.true;

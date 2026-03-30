@@ -20,8 +20,8 @@ const engineLength = serializedEngine.length;
 
 /**
  * Ensures the buffer is aligned to a 32-bit boundary by padding if necessary
- * @param {Buffer} originalBuffer
- * @returns {Buffer} - The aligned buffer
+ * @param {ArrayBufferLike} originalBuffer
+ * @returns {ArrayBufferLike} - The aligned buffer
  */
 
 function ensure32BitAlignment(originalBuffer) {

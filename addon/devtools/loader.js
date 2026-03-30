@@ -2,15 +2,18 @@ chrome.devtools.panels.create('Autoconsent', '/icons/cookie.png', '/devtools/pan
 
 if (chrome.devtools?.recorder) {
     class MyPlugin {
+        /** @param {any} recording */
         stringify(recording) {
             const autoconsentSteps = recording.steps
-                .filter((step) => ['click'].includes(step.type))
-                .map(({ selectors }) => this.convertStep(selectors));
+                .filter((/** @type {any} */ step) => ['click'].includes(step.type))
+                .map((/** @type {{ selectors: any }} */ { selectors }) => this.convertStep(selectors));
             return Promise.resolve(JSON.stringify(autoconsentSteps, undefined, 4));
         }
+        /** @param {any} step */
         stringifyStep(step) {
             return Promise.resolve(JSON.stringify(this.convertStep(step.selectors), undefined, 4));
         }
+        /** @param {(string | string[])[]} selectors */
         convertStep(selectors) {
             return {
                 any: selectors
@@ -31,9 +34,8 @@ if (chrome.devtools?.recorder) {
         }
 
         /**
-         *
          * @param {string | string[]} selector
-         * @returns
+         * @returns {boolean}
          */
         isSupportedSelector(selector) {
             const unsupportedPrefixes = ['aria/', 'pierce/', 'text/'];

@@ -1,8 +1,9 @@
 import { expect } from '@esm-bundle/chai';
-import { decodeRules, encodeRules, filterCompactRules } from '../../lib/encoding';
+import { decodeRules, encodeRules, filterCompactRules, IndexedCMPRuleset } from '../../lib/encoding';
 import testUrls from './cmp-test-urls.json';
-/** @type {IndexedCMPRuleset} */
-import compactRules from '../../rules/compact-rules.json';
+import compactRulesJson from '../../rules/compact-rules.json';
+
+const compactRules = compactRulesJson as unknown as IndexedCMPRuleset;
 
 describe('filterCompactRules', () => {
     const decodedRules = decodeRules(compactRules);
