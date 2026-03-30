@@ -1,5 +1,6 @@
 import { snippets } from '../lib/eval-snippets';
 import { BackgroundMessage, ContentScriptMessage, DevtoolsMessage, ReportMessage } from '../lib/messages';
+import { AutoConsentCMPRule } from '../lib/rules';
 import { Config, RuleBundle } from '../lib/types';
 import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { extensionDefaultConfig, initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
@@ -15,9 +16,19 @@ import { filterCompactRules } from '../lib/encoding';
 const openDevToolsPanels = new Map<number, chrome.runtime.Port>();
 
 async function loadRules() {
+    // Compact rules are the default for optOut (the production path in DuckDuckGo browsers).
     const res = await fetch('./compact-rules.json');
     storageSet({
         rules: await res.json(),
+    });
+    // Full rules from rules.json include optIn steps, which the compact format
+    // intentionally omits to save space. We need these for the test extension's
+    // optIn mode, since running optIn against compact rules silently succeeds
+    // with zero clicks (empty step array is vacuously true).
+    const fullRes = await fetch('./rules.json');
+    const fullRules = await fullRes.json();
+    storageSet({
+        fullRules: fullRules.autoconsent,
     });
 }
 
@@ -76,12 +87,25 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
             if (frameId === 0) {
                 await showOptOutStatus(tabId, 'idle');
             }
-            const rules: RuleBundle = {
-                autoconsent: [],
-                consentomatic,
-                compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
-            };
-            console.log('filtered rules:', rules.compact, JSON.stringify(rules.compact).length);
+            // Choose which rule format to send based on the configured action.
+            // Compact rules omit optIn steps to save space, so optIn would silently
+            // no-op. For optIn, we send full rules (which include optIn steps) via the
+            // `autoconsent` field. For optOut (the default), we use compact rules.
+            let rules: RuleBundle;
+            if (autoconsentConfig.autoAction === 'optIn') {
+                const fullRules: AutoConsentCMPRule[] = (await storageGet('fullRules')) || [];
+                rules = {
+                    autoconsent: fullRules,
+                    consentomatic,
+                };
+            } else {
+                rules = {
+                    autoconsent: [],
+                    consentomatic,
+                    compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
+                };
+            }
+            console.log('filtered rules:', rules.compact || rules.autoconsent?.length, JSON.stringify(rules).length);
             chrome.tabs.sendMessage(
                 tabId,
                 {

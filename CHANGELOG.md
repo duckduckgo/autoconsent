@@ -1,3 +1,53 @@
+# v14.66.0 (Sat Mar 28 2026)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group with 2 updates [#1099](https://github.com/duckduckgo/autoconsent/pull/1099) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 3d7c4396813e269c757e5e9851d80b7b5db622a0 [#1216](https://github.com/duckduckgo/autoconsent/pull/1216) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Add more "reject" patterns [#1218](https://github.com/duckduckgo/autoconsent/pull/1218) ([@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- Reorganize docs, add AGENTS.md [#1217](https://github.com/duckduckgo/autoconsent/pull/1217) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.65.0 (Fri Mar 27 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1197](https://github.com/duckduckgo/autoconsent/pull/1197) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Add unit tests for filterCMPs function [#1119](https://github.com/duckduckgo/autoconsent/pull/1119) ([@rafaelr-hub](https://github.com/rafaelr-hub) [@muodov](https://github.com/muodov) [@cursoragent](https://github.com/cursoragent) [@Ezhik-777](https://github.com/Ezhik-777))
+- Update EasyList Cookie to 08eda0755105bfe87bbc927b86f9db0c1fb85de1 [#1209](https://github.com/duckduckgo/autoconsent/pull/1209) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1210](https://github.com/duckduckgo/autoconsent/pull/1210) ([@daxtheduck](https://github.com/daxtheduck))
+- Theinfatuation.com cookie handling [#1198](https://github.com/duckduckgo/autoconsent/pull/1198) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Channel 4 cookie rule [#1195](https://github.com/duckduckgo/autoconsent/pull/1195) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.19 to 7.0.27 [#1213](https://github.com/duckduckgo/autoconsent/pull/1213) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 8
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- [@rafaelr-hub](https://github.com/rafaelr-hub)
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Evgenij Eliseew ([@Ezhik-777](https://github.com/Ezhik-777))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.64.0 (Tue Mar 24 2026)
 
 #### 🚀 Enhancement
