@@ -9,7 +9,7 @@ import { filterCompactRules } from '../lib/encoding';
 import compactRules from '../rules/compact-rules.json';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
-    ? []
+    ? ['autoconsentError']
     : ['optInResult', 'optOutResult', 'autoconsentDone', 'autoconsentError', 'selfTestResult'];
 const LOG_PAGE_LOGS = false;
 
@@ -159,6 +159,15 @@ class TestRun {
                         detectRetries: 20,
                         enableCosmeticRules: true,
                         visualTest: true,
+                        logs: {
+                            lifecycle: true,
+                            rulesteps: true,
+                            detectionsteps: false,
+                            waits: false,
+                            evals: false,
+                            errors: true,
+                            messages: false,
+                        },
                     })}, rules: ${JSON.stringify({ compact: filterCompactRules(compactRules, { url, mainFrame }) })} })`,
                 );
                 break;

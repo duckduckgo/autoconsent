@@ -310,6 +310,13 @@ export default class AutoConsent {
                 }
             } catch (e) {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
+                this.sendContentMessage({
+                    type: 'autoconsentError',
+                    details: {
+                        msg: 'error detecting CMP',
+                        details: `${cmp.name}: ${e.message}`,
+                    },
+                });
             }
         };
 
@@ -559,6 +566,13 @@ export default class AutoConsent {
         logsConfig.lifecycle && console.log('checking if popup is open...', cmp.name);
         const isOpen = await cmp.detectPopup().catch((e) => {
             logsConfig.errors && console.warn(`error detecting popup for ${cmp.name}`, e);
+            this.sendContentMessage({
+                type: 'autoconsentError',
+                details: {
+                    msg: 'error detecting popup',
+                    details: `${cmp.name}: ${e.message}`,
+                },
+            });
             return false;
         }); // ignore possible errors in one-time popup detection
         if (!isOpen && retries > 0) {
