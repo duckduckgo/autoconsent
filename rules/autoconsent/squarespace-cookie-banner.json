@@ -1,13 +1,6 @@
 {
-    "name": "auto_AU_urallawoolroom.com.au_3ng",
-    "vendorUrl": "https://www.urallawoolroom.com.au/",
-    "cosmetic": false,
-    "runContext": {
-        "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(www\\.)?urallawoolroom\\.com\\.au/"
-    },
-    "prehideSelectors": [],
+    "name": "squarespace-cookie-banner",
+    "prehideSelectors": [".cookie-banner-mount-point"],
     "detectCmp": [
         {
             "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
@@ -26,6 +19,13 @@
     "optOut": [
         {
             "waitForThenClick": ".cookie-banner-mount-point button.decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-banner-mount-point section[aria-label='Cookie banner']",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
