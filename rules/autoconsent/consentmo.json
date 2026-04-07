@@ -3,66 +3,42 @@
     "prehideSelectors": ["csm-cookie-consent"],
     "detectCmp": [
         {
-            "any": [
-                {
-                    "exists": ["csm-cookie-consent", ".csm-wrapper"]
-                },
-                {
-                    "exists": "#csm-wrapper"
-                }
-            ]
+            "exists": ["csm-cookie-consent", ".csm-wrapper"]
         }
     ],
     "detectPopup": [
         {
-            "any": [
-                {
-                    "visible": ["csm-cookie-consent", ".csm-wrapper .cc-window"]
-                },
-                {
-                    "visible": "#csm-wrapper .cc-window"
-                }
-            ]
+            "visible": ["csm-cookie-consent", ".csm-wrapper button"]
         }
     ],
     "optIn": [
         {
-            "any": [
-                {
-                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-window .accept-container button"]
-                },
-                {
-                    "waitForThenClick": "#csm-wrapper .cc-window .accept-container button"
-                }
-            ]
+            "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-allow"]
         }
     ],
     "optOut": [
         {
-            "any": [
+            "if": { "exists": ["csm-cookie-consent", ".csm-wrapper .cc-deny"] },
+            "then": [
                 {
-                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-window .reject-container button"]
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-settings"]
                 },
                 {
-                    "waitForThenClick": "#csm-wrapper .cc-window .reject-container button"
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
                 }
             ]
         }
     ],
     "test": [
         {
-            "any": [
-                {
-                    "waitForVisible": ["csm-cookie-consent", ".csm-wrapper .cc-window"],
-                    "timeout": 1000,
-                    "check": "none"
-                },
-                {
-                    "waitForVisible": "#csm-wrapper .cc-window",
-                    "timeout": 1000,
-                    "check": "none"
-                }
-            ]
+            "waitForVisible": ["csm-cookie-consent", ".csm-wrapper button"],
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
