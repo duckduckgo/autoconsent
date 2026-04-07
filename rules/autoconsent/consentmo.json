@@ -1,0 +1,68 @@
+{
+    "name": "consentmo",
+    "prehideSelectors": ["csm-cookie-consent"],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": ["csm-cookie-consent", ".csm-wrapper"]
+                },
+                {
+                    "exists": "#csm-wrapper"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": ["csm-cookie-consent", ".csm-wrapper .cc-window"]
+                },
+                {
+                    "visible": "#csm-wrapper .cc-window"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "any": [
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-window .accept-container button"]
+                },
+                {
+                    "waitForThenClick": "#csm-wrapper .cc-window .accept-container button"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "any": [
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-window .reject-container button"]
+                },
+                {
+                    "waitForThenClick": "#csm-wrapper .cc-window .reject-container button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "waitForVisible": ["csm-cookie-consent", ".csm-wrapper .cc-window"],
+                    "timeout": 1000,
+                    "check": "none"
+                },
+                {
+                    "waitForVisible": "#csm-wrapper .cc-window",
+                    "timeout": 1000,
+                    "check": "none"
+                }
+            ]
+        }
+    ]
+}
