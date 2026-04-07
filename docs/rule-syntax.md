@@ -22,9 +22,14 @@ Both JSON and class implementations have the following components:
    * `frame` - boolean, set to `true` if the rule should be executed in nested frames (default: `false`)
    * `urlPattern` - string, specifies a regular expression that should match the page URL (default: empty)
  * (optional) `test` - a list of actions to verify a successful opt-out. This is currently only used in Playwright tests.
+ * (optional) `minimumRuleStepVersion` - the minimum rule step version needed to execute this rule. Defaults to `1`. See [Rule Step Versioning](#rule-step-versioning).
 
 
-`detectCMP`, `detectPopup`, `optOut`, `optIn`, and `test` are defined as a set of checks or actions on the page. In the JSON syntax this is a list of `AutoConsentRuleStep` objects. For `detect` checks, we return true for the check if all steps return true. For opt in and out, we execute actions in order, exiting if one fails. The following checks/actions are supported:
+`detectCMP`, `detectPopup`, `optOut`, `optIn`, and `test` are defined as a set of checks or actions on the page. In the JSON syntax this is a list of `AutoConsentRuleStep` objects. For `detect` checks, we return true for the check if all steps return true. For opt in and out, we execute actions in order, exiting if one fails.
+
+**Important:** Do not use `wait` steps in `detectCmp` or `detectPopup` arrays. Detection must be fast and non-blocking -- the engine already retries detection automatically with its own timing. Adding `wait` steps to detection slows down detection of other rules.
+
+The following checks/actions are supported:
 
 ## Element selectors
 
@@ -240,3 +245,29 @@ new AutoConsent({
 ## Context filters
 
 By default, rules will be executed in all top-level documents. Some rules are designed for specific contexts (e.g. only nested iframes, or only specific URLs). This can be configured in `runContext` field (see [runContext](#rule-syntax-reference) above).
+
+## Rule Step Versioning
+
+New step types are occasionally added to the autoconsent engine (e.g. `removeClass`, `setStyle`, `addStyle` were added in version 2). Because rules can be shipped to clients independently of app releases, a rule that uses a newer step type could end up on a client that doesn't support it yet.
+
+The `minimumRuleStepVersion` field solves this: clients compare the rule's declared version against their own supported version (`SUPPORTED_RULE_STEP_VERSION` in `lib/rules.ts`) and silently skip rules they cannot execute.
+
+### Version history
+
+| Version | Step types added |
+|---------|-----------------|
+| 1 | All original step types (`exists`, `visible`, `waitFor`, `waitForVisible`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, `negated`) |
+| 2 | `removeClass`, `setStyle`, `addStyle` |
+
+### When to set it
+
+- If a rule only uses version-1 step types, omit the field (defaults to `1`).
+- If a rule uses `removeClass`, `setStyle`, or `addStyle`, set `"minimumRuleStepVersion": 2`.
+- When a future version introduces new step types, any rule using them must set `minimumRuleStepVersion` to the corresponding version number.
+
+### Adding new step types
+
+When introducing a new step type:
+1. Bump `SUPPORTED_RULE_STEP_VERSION` in `lib/rules.ts` and add a comment describing what was added.
+2. Add the new step type definition to the `AutoConsentRuleStep` union in the same file.
+3. Any rule using the new step type must set `minimumRuleStepVersion` to the new version number.

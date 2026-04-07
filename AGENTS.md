@@ -55,7 +55,8 @@ JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/`
   "detectPopup": [{ "visible": "#cookie-banner" }],
   "optIn": [{ "waitForThenClick": "#accept-all" }],
   "optOut": [{ "waitForThenClick": "#reject-all" }],
-  "test": [{ "cookieContains": "consent=rejected" }]
+  "test": [{ "cookieContains": "consent=rejected" }],
+  "minimumRuleStepVersion": 1
 }
 ```
 
@@ -66,6 +67,16 @@ For the complete rule syntax reference (all step types, element selectors, condi
 `prehideSelectors` inject CSS early (before the CMP is even detected) to prevent the cookie popup from flickering on screen. They use `opacity: 0` (not `display: none`) so the popup still occupies layout space and detection via `visible` checks still works. If opt-out doesn't start within 2 seconds, the elements are automatically unhidden to avoid permanently hiding page content.
 
 Keep prehideSelectors **narrow** — they are applied across all matching rules simultaneously, so an overly broad selector (e.g. `body`) could hide the entire page during the 2-second window.
+
+### minimumRuleStepVersion
+
+New step types are added to the autoconsent engine over time. `minimumRuleStepVersion` declares which version of the step format a rule requires. Clients that don't support the required version silently skip the rule, preventing failures on older app versions.
+
+**Version history:**
+- `1` (default) — all original step types (`exists`, `visible`, `waitFor`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, etc.)
+- `2` — added `removeClass`, `setStyle`, `addStyle`
+
+**When to set it:** Omit the field (or set to `1`) if the rule only uses original step types. Set to `2` if the rule uses `removeClass`, `setStyle`, or `addStyle`. When future versions add new step types, set accordingly.
 
 ### Code-Based Rules
 
@@ -97,16 +108,17 @@ When writing or reviewing selectors, also watch out for:
 
 ### Identifying Broken Rules
 
-1. **Playwright test failures** are the primary signal. Run the specific test:
+1. **Use a real browser** to investigate. A real browser in a computer-use subagent is **highly preferred** over Playwright or Puppeteer-based scripts — cookie popups often behave differently in headless/automated browsers.
+2. **Playwright test failures** are a secondary signal. Run the specific test:
    ```bash
    npx playwright test tests/sirdata.spec.ts --project webkit
    ```
-2. **Check test output** for which stage failed: `cmpDetected`, `popupFound`, `autoconsentDone`, `optOutResult`, `selfTestResult`.
-3. **Use the test extension** (`dist/addon-mv3/`) for manual debugging. Load it in Chrome, visit the site, and check the devtools panel for step-by-step logs.
+3. **Check test output** for which stage failed: `cmpDetected`, `popupFound`, `autoconsentDone`, `optOutResult`, `selfTestResult`.
+4. **Use the test extension** (`dist/addon-mv3/`) for manual debugging. Load it in Chrome, visit the site, and check the devtools panel for step-by-step logs.
 
 ### Common Failure Modes
 
-**Race conditions:** Consent popups load asynchronously. Use `waitFor` / `waitForThenClick` / `waitForVisible` instead of bare `exists` / `click`. Add `{ "wait": 500 }` before critical actions when the CMP has known async initialization. In code-based rules, use `Promise.race()` for multiple possible UI states.
+**Race conditions:** Consent popups load asynchronously. Use `waitFor` / `waitForThenClick` / `waitForVisible` instead of bare `exists` / `click`. Add `{ "wait": 500 }` before critical actions when the CMP has known async initialization. In code-based rules, use `Promise.race()` for multiple possible UI states. **Never** use `{ "wait": N }` in `detectCmp` or `detectPopup` — the engine handles retries internally.
 
 **Incorrect consent action selectors:** Generated rules sometimes target a privacy policy link instead of the reject button. Ensure `optOut` steps target an actual reject/decline button.
 
@@ -117,8 +129,11 @@ When writing or reviewing selectors, also watch out for:
 1. Read the existing rule to understand its current selectors and flow.
 2. Identify the broken step from test output or by inspecting the site.
 3. Edit the JSON file — apply the fix to every occurrence of the selector within the file (`detectCmp`, `detectPopup`, `optOut`, and `test` often use similar selectors).
-4. For generated rules, the same CMP may appear across multiple region files (`auto_CH_*.json`, `auto_DE_*.json`, etc.). Apply the fix to all affected files.
-5. Run `npm run lint` to validate.
+4. For site-specific rules, double-check if the popup is still site-specific. If not, consider if a generic rule is more appropriate.
+5. **Always update the corresponding test spec** in `tests/`. If no spec exists, create one.
+6. **Cross-check other rules** — search for the same selectors or CMP provider name across `rules/autoconsent/` and `rules/generated/` to find other rules that may need the same change.
+7. For generated rules, the same CMP may appear across multiple region files (`auto_CH_*.json`, `auto_DE_*.json`, etc.). Apply the fix to all affected files.
+8. Run `npm run lint` to validate.
 
 ### Fixing Code-Based Rules
 
@@ -151,11 +166,15 @@ Use `if`/`then`/`else` for region-dependent or variant-dependent flows:
 ## Adding New Rules
 
 1. Run `npm run create-rule` to scaffold the JSON + test spec.
-2. Fill in `detectCmp`, `detectPopup`, `optOut`, `optIn` with stable selectors.
-3. Add a `test` array — prefer `cookieContains` when the CMP stores consent in cookies.
+2. **Check if the popup is from a third-party CMP provider** (e.g. OneTrust, Cookiebot, Sourcepoint). If so, prefer extending or fixing the existing generic rule rather than creating a site-specific one.
+3. Fill in `detectCmp`, `detectPopup`, `optOut`, `optIn` with stable selectors. Do **not** use `{ "wait": N }` steps in `detectCmp` or `detectPopup` — detection must be fast and non-blocking (the engine retries automatically).
+4. Add a `test` array — prefer `cookieContains` when the CMP stores consent in cookies.
    - JSON rules can also use `{ "eval": "SNIPPET_NAME" }` steps to execute predefined JavaScript snippets from `lib/eval-snippets.ts`. Useful for calling CMP APIs (e.g., `window.Cookiebot`, `__cmp('getCMPData')`) in detection, opt-out, or test phases. Each snippet is a named function that returns a boolean. New snippets must be added to `lib/eval-snippets.ts` and referenced by name in the rule JSON.
-4. Run `npm run lint` and `npm run test:lib`.
-5. Test with Playwright: `npx playwright test tests/my-cmp.spec.ts --project webkit`.
+5. **Always create or update the corresponding test spec** in `tests/`.
+6. **Cross-check other rules** — search for the same selectors or CMP provider name across `rules/autoconsent/` and `rules/generated/` to see if other rules need the same change or already cover this CMP.
+7. Use `data/coverage.json` to find example sites for testing. It contains per-CMP, per-region URLs: `{ "CmpName": { "REGION": { "exampleSites": [...] } } }`.
+8. Run `npm run lint` and `npm run test:lib`.
+9. Test with Playwright: `npx playwright test tests/my-cmp.spec.ts --project webkit`.
 
 ### When Generated Rules Need Fixes
 
@@ -233,6 +252,8 @@ Load the bundled extension in Chrome (`dist/addon-mv3/` after `npm run prepublis
 If an **existing rule matched but failed**: identify the broken step from the logs, inspect the site to understand what changed (new selectors, different layout, region variant), and fix the rule.
 
 If **no rule matched**: determine the CMP type. Check if the popup is from a known CMP (OneTrust, Sourcepoint, Cookiebot, etc.) by inspecting the banner's HTML, class names, and script sources. If it's a known CMP, the existing rule may need updated detection selectors. If it's unknown, create a new rule.
+
+**Always check if the popup is from a third-party CMP provider.** If so, prefer creating or extending a generic rule rather than a site-specific one. Use `data/coverage.json` to find additional example sites for the same CMP to verify the rule works broadly.
 
 ### Step 3: Determine Rule Type
 
