@@ -3,7 +3,7 @@
     "prehideSelectors": [
         "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium"
     ],
-    "detectCmp": [{ "waitFor": "#didomi-host" }],
+    "detectCmp": [{ "visible": "#didomi-host" }],
     "detectPopup": [
         {
             "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner",
@@ -13,8 +13,8 @@
     "optIn": [{ "waitForThenClick": "#didomi-notice-agree-button" }],
     "optOut": [
         {
-            "if": { "exists": "#didomi-notice-disagree-button" },
-            "then": [{ "waitForThenClick": "#didomi-notice-disagree-button" }],
+            "if": { "exists": "#didomi-notice-disagree-button,.didomi-continue-without-agreeing" },
+            "then": [{ "waitForThenClick": "#didomi-notice-disagree-button,.didomi-continue-without-agreeing" }],
             "else": [{ "eval": "EVAL_DIDOMI_OPT_OUT" }]
         }
     ],
