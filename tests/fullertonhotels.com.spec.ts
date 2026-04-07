@@ -1,5 +1,5 @@
 import generateCMPTests from '../../playwright/runner';
-generateCMPTests('auto_AU_fullertonhotels.com_y46', ['https://www.fullertonhotels.com/'], {
+generateCMPTests('fullertonhotels.com', ['https://www.fullertonhotels.com/', 'https://marriottsalalahresort.com/'], {
     testOptIn: false,
     testSelfTest: false,
     onlyRegions: ['AU'],
