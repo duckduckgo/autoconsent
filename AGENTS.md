@@ -43,7 +43,7 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 
 ## Code Style
 
-- **Preserve existing comments.** Do not remove or rewrite JSDoc comments, TODO comments, or inline explanations when editing a function. If you restructure code around a comment, move the comment so it stays attached to the same logical block.
+- **Preserve existing comments.** Do not remove JSDoc comments, TODO comments, or inline explanations unless the related code is also being removed. Rewriting a comment to reflect updated logic is fine.
 
 ## Working with Rules
 
