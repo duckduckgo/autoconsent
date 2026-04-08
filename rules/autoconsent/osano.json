@@ -3,7 +3,7 @@
     "vendorUrl": "https://developers.osano.com/cmp/",
     "prehideSelectors": [".osano-cm-window,.osano-cm-dialog"],
     "detectCmp": [{ "exists": ".osano-cm-window" }],
-    "detectPopup": [{ "eval": "EVAL_OSANO_DETECT" }, { "visible": ".osano-cm-dialog:not(.osano-cm-dialog--hidden)" }],
+    "detectPopup": [{ "visible": ".osano-cm-dialog:not(.osano-cm-dialog--hidden)" }],
     "optIn": [
         {
             "waitForThenClick": ".osano-cm-accept-all,.osano-cm-accept",
