@@ -41,6 +41,10 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 | `npm run build-rules` | Rebuild `rules.json`, `consentomatic.json`, `compact-rules.json` |
 | `npm run create-rule` | Scaffold a new JSON rule + test spec |
 
+## Code Style
+
+- **Preserve existing comments.** Do not remove or rewrite JSDoc comments, TODO comments, or inline explanations when editing a function. If you restructure code around a comment, move the comment so it stays attached to the same logical block.
+
 ## Working with Rules
 
 ### JSON Rules

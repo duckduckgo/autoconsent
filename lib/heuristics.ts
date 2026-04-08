@@ -136,6 +136,10 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
     return false;
 }
 
+/**
+ * Heuristic to get all elements that look like "popups"
+ * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
+ */
 function getPopupLikeElements(): HTMLElement[] {
     const walker = document.createTreeWalker(
         document.documentElement,
