@@ -7,6 +7,7 @@ import {
     isDisabled,
     excludeContainers,
     getButtonData,
+    isDialogLikeElement,
 } from '../../lib/heuristics';
 
 describe('checkHeuristicPatterns', () => {
@@ -148,6 +149,48 @@ describe('isDisabled', () => {
         input.disabled = true;
 
         expect(isDisabled(input)).to.be.true;
+    });
+});
+
+describe('isDialogLikeElement', () => {
+    it('returns true for open dialog element', () => {
+        const dialog = document.createElement('dialog');
+        dialog.setAttribute('open', '');
+        expect(isDialogLikeElement(dialog)).to.be.true;
+    });
+
+    it('returns false for closed dialog element', () => {
+        const dialog = document.createElement('dialog');
+        expect(isDialogLikeElement(dialog)).to.be.false;
+    });
+
+    it('returns true for element with role="dialog"', () => {
+        const div = document.createElement('div');
+        div.setAttribute('role', 'dialog');
+        expect(isDialogLikeElement(div)).to.be.true;
+    });
+
+    it('returns true for element with aria-modal="true"', () => {
+        const div = document.createElement('div');
+        div.setAttribute('aria-modal', 'true');
+        expect(isDialogLikeElement(div)).to.be.true;
+    });
+
+    it('returns false for aria-modal="false"', () => {
+        const div = document.createElement('div');
+        div.setAttribute('aria-modal', 'false');
+        expect(isDialogLikeElement(div)).to.be.false;
+    });
+
+    it('returns false for plain div', () => {
+        const div = document.createElement('div');
+        expect(isDialogLikeElement(div)).to.be.false;
+    });
+
+    it('returns false for element with unrelated role', () => {
+        const div = document.createElement('div');
+        div.setAttribute('role', 'button');
+        expect(isDialogLikeElement(div)).to.be.false;
     });
 });
 
