@@ -1,8 +1,5 @@
 {
     "name": "gallup",
-    "runContext": {
-        "urlPattern": "^https://([a-z0-9-]+\\.)?gallup\\.com/"
-    },
     "prehideSelectors": ["[class*=\"gcb-modal-overlay\"]"],
     "detectCmp": [{ "exists": "[data-gcb-modal-show-prefs]" }],
     "detectPopup": [{ "visible": "[data-gcb-modal-show-prefs]" }],
