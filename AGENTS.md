@@ -355,3 +355,62 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 | Unit tests | `npm run test:lib` |
 | Single CMP E2E test | `npx playwright test tests/<cmp>.spec.ts --project webkit` |
 | Full E2E suite | `npm run test` |
+
+## Cursor Cloud specific instructions
+
+### Manual extension testing with Chromium
+
+Google Chrome (`google-chrome`) does **not** support `--load-extension` or `--disable-extensions-except` — it logs `--disable-extensions-except is not allowed in Google Chrome, ignoring` and silently drops the flags. You must use **Chromium** instead.
+
+The `chromium-browser` apt package on Ubuntu is a snap stub that requires snapd (unavailable in containers). Download a standalone Chromium build:
+
+```bash
+REVISION=$(curl -s https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/LAST_CHANGE)
+curl -sL "https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/${REVISION}/chrome-linux.zip" -o /tmp/chrome-linux.zip
+unzip -q /tmp/chrome-linux.zip -d /tmp/
+chmod +x /tmp/chrome-linux/chrome
+```
+
+Then launch with the extension:
+
+```bash
+DISPLAY=:1 /tmp/chrome-linux/chrome \
+  --user-data-dir=/tmp/chromium-profile \
+  --load-extension=/workspace/dist/addon-mv3 \
+  --disable-extensions-except=/workspace/dist/addon-mv3 \
+  --no-first-run --no-default-browser-check \
+  --remote-debugging-port=9222 --remote-allow-origins="*" \
+  "https://example.com/"
+```
+
+### Verifying cookies via CDP
+
+With `--remote-debugging-port=9222 --remote-allow-origins="*"`, you can verify cookies programmatically without GUI interaction:
+
+```bash
+pip install websocket-client -q
+python3 << 'EOF'
+import json, websocket, urllib.request
+targets = json.loads(urllib.request.urlopen("http://127.0.0.1:9222/json").read())
+ws_url = next(t['webSocketDebuggerUrl'] for t in targets if 'example.com' in t.get('url', ''))
+ws = websocket.create_connection(ws_url)
+ws.send(json.dumps({"id": 1, "method": "Runtime.evaluate", "params": {"expression": "document.cookie"}}))
+result = json.loads(ws.recv())
+print(result['result']['result']['value'])
+ws.close()
+EOF
+```
+
+### PublicWWW for cross-site CMP research
+
+Use [PublicWWW](https://publicwww.com/) to check if a CMP is used on more sites. An API key is available via the `PUBLICWWW_APIKEY` env var. Query syntax: https://publicwww.com/syntax.html
+
+```bash
+# Search for a CMP marker across all indexed sites (CSV export)
+curl -sL "https://publicwww.com/websites/%22search-term%22/?export=csvsnippetsu&key=$PUBLICWWW_APIKEY"
+
+# Search internal pages too
+curl -sL "https://publicwww.com/websites/depth%3Aall+%22search-term%22/?export=csvsnippetsu&key=$PUBLICWWW_APIKEY"
+```
+
+Use this to determine whether a new rule should be site-specific (with `runContext`) or generic. Search for distinctive CMP markers like script URLs, data attributes, or unique class name prefixes.
