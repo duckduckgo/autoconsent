@@ -2,25 +2,28 @@
     "name": "geni.com",
     "vendorUrl": "https://www.geni.com/",
     "cosmetic": true,
-    "prehideSelectors": [".cookie-notify-anchor"],
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?geni\\.com/"
+    },
+    "prehideSelectors": [".modal-cookie"],
     "detectCmp": [
         {
-            "exists": ".cookie-notify-anchor .cookie-notify"
+            "exists": ".modal-cookie"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-notify-anchor .cookie-notify"
+            "visible": ".modal-cookie"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookie-notify-anchor .cookie-notify button"
+            "waitForThenClick": ".modal-cookie #accept-all"
         }
     ],
     "optOut": [
         {
-            "hide": ".cookie-notify-anchor"
+            "hide": ".modal-cookie"
         }
     ]
 }
