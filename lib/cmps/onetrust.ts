@@ -26,9 +26,16 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        if (this.elementVisible('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies', 'any')) {
-            // 'reject all' shortcut
-            return await this.click('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies');
+        await this.wait(500);
+        // 'reject all' shortcuts
+        if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
+            return await this.click('#onetrust-reject-all-handler');
+        }
+        if (this.elementVisible('.ot-pc-refuse-all-handler', 'any')) {
+            return await this.click('.ot-pc-refuse-all-handler');
+        }
+        if (this.elementVisible('.js-reject-cookies', 'any')) {
+            return await this.click('.js-reject-cookies');
         }
 
         if (this.elementVisible('.onetrust-close-btn-handler', 'any')) {

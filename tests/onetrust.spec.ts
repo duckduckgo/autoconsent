@@ -6,6 +6,7 @@ generateCMPTests('Onetrust', [
     'https://www.okcupid.com/',
     'https://doodle.com/',
     'https://www.coca-cola.com/us/en',
+    'https://www.seur.com/es/index.html',
 ]);
 
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
