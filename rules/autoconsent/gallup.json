@@ -1,0 +1,9 @@
+{
+    "name": "gallup",
+    "prehideSelectors": ["[class*=\"gcb-modal-overlay\"]"],
+    "detectCmp": [{ "exists": "[data-gcb-modal-show-prefs]" }],
+    "detectPopup": [{ "visible": "[data-gcb-modal-show-prefs]" }],
+    "optOut": [{ "waitForThenClick": "[data-gcb-modal-show-prefs]" }, { "wait": 500 }, { "waitForThenClick": "[data-gcb-modal-save]" }],
+    "optIn": [{ "waitForThenClick": "[data-gcb-modal-accept]" }],
+    "test": [{ "cookieContains": "gcbcl=a3|m3" }]
+}

@@ -1,3 +1,55 @@
+# v14.70.0 (Sat Apr 11 2026)
+
+#### 🚀 Enhancement
+
+- Add autoconsent rule for Gallup cookie banner [#1251](https://github.com/duckduckgo/autoconsent/pull/1251) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.69.0 (Thu Apr 09 2026)
+
+#### 🚀 Enhancement
+
+- fix(hm.com): detect iOS cookie popup and add US opt-out flow [#1250](https://github.com/duckduckgo/autoconsent/pull/1250) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- Update docs and agent instructions [#1249](https://github.com/duckduckgo/autoconsent/pull/1249) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.68.0 (Wed Apr 08 2026)
+
+#### 🚀 Enhancement
+
+- fix(sparkasse): update immobilien.sparkasse.de rule for new CMP [#1246](https://github.com/duckduckgo/autoconsent/pull/1246) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add generic elsevier-pure rule for Elsevier Pure research portal cookie popups [#1226](https://github.com/duckduckgo/autoconsent/pull/1226) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix generated rule for flysaa.com [#1225](https://github.com/duckduckgo/autoconsent/pull/1225) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix rule for fullertonhotels.com [#1224](https://github.com/duckduckgo/autoconsent/pull/1224) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix CMP detection regressions for 10 sites [#1245](https://github.com/duckduckgo/autoconsent/pull/1245) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1242](https://github.com/duckduckgo/autoconsent/pull/1242) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.67.0 (Tue Mar 31 2026)
 
 #### 🚀 Enhancement
