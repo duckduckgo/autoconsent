@@ -5,25 +5,25 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?unicourt\\.com/"
     },
-    "prehideSelectors": [".cookie-notification"],
+    "prehideSelectors": [".cookie-banner"],
     "detectCmp": [
         {
-            "exists": ".cookie-notification"
+            "exists": ".cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-notification"
+            "visible": ".cookie-banner"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookie-notification button"
+            "waitForThenClick": ".cookie-banner .button"
         }
     ],
     "optOut": [
         {
-            "hide": ".cookie-notification"
+            "hide": ".cookie-banner"
         }
     ]
 }

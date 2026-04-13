@@ -10,19 +10,34 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div[id][class] > div:nth-child(3) > button:nth-child(1)"
+            "exists": ["#polaris-css-lockdown-container", ".polaris-consent-widget"]
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][class] > div:nth-child(3) > button:nth-child(1)"
+            "visible": ["#polaris-css-lockdown-container", ".polaris-consent-widget"]
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": ["#polaris-css-lockdown-container", ".polaris-consent-widget button.polaris-button"]
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][class] > div:nth-child(3) > button:nth-child(1)",
-            "text": "Reject"
+            "if": {
+                "exists": ["#polaris-css-lockdown-container", "[data-testid='oneClickOptOutLink']"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#polaris-css-lockdown-container", "[data-testid='oneClickOptOutLink']"]
+                }
+            ],
+            "else": [
+                {
+                    "hide": ["#polaris-css-lockdown-container", ".polaris-consent-widget"]
+                }
+            ]
         }
     ]
 }
