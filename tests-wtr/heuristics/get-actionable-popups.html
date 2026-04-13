@@ -20,6 +20,12 @@
                 position: sticky;
                 top: 0;
             }
+            .popup.dialog-pos {
+                position: absolute;
+            }
+            dialog.popup {
+                position: absolute;
+            }
         </style>
     </head>
     <body>
@@ -68,5 +74,23 @@
             <button>Settings</button>
             <button>Learn More</button>
         </div>
+
+        <div id="popup-role-dialog" class="popup dialog-pos" role="dialog">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+
+        <div id="popup-aria-modal" class="popup dialog-pos" aria-modal="true">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+
+        <dialog id="popup-dialog-element" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </dialog>
     </body>
 </html>

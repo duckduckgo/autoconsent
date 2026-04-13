@@ -1,0 +1,31 @@
+{
+    "name": "squarespace-cookie-banner",
+    "prehideSelectors": [".cookie-banner-mount-point"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-banner-mount-point section[aria-label='Cookie banner']",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

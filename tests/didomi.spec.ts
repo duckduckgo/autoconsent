@@ -1,16 +1,17 @@
 import generateCMPTests from '../playwright/runner';
 
 generateCMPTests(
-    'com_didomi.io',
+    'didomi',
     [
-        'https://www.ghacks.net/',
-        'https://www.20minutes.fr/',
+        'https://nothing.tech/',
         'https://www.planet.fr/',
         'http://www.allocine.fr/',
         'https://www.boursorama.com/',
+        'https://www.theoriginalshotels.com/en/hotels/la-villa-vicha',
+        'https://support.didomi.io/set-up-the-absence-of-interaction-as-a-cookie-denial',
     ],
     {
-        testOptIn: false,
+        testOptIn: true,
         testSelfTest: false,
         skipRegions: ['US'],
     },

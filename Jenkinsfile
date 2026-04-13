@@ -32,29 +32,15 @@ def getModifiedFiles() {
 }
 
 def getTestsToRun(modifiedFiles) {
-    def testsToRun = []
-
-    // Run any modified test files
-    for (file in modifiedFiles) {
-        if (file.startsWith("tests/") && file.endsWith(".spec.ts")) {
-            testsToRun.add(file)
-        }
+    def filesArg = modifiedFiles.findAll { it }.join(' ')
+    if (!filesArg) {
+        return []
     }
-
-    // Run the corresponding test file for any modified rule file
-    for (file in modifiedFiles) {
-        if (file.startsWith("rules/autoconsent/") && file.endsWith(".json")) {
-            def fileName = file.substring("rules/autoconsent/".length())
-            def baseName = fileName.substring(0, fileName.lastIndexOf(".json"))
-            def testFile = "tests/${baseName}.spec.ts"
-
-            if (fileExists(testFile) && !testsToRun.contains(testFile)) {
-                testsToRun.add(testFile)
-            }
-        }
-    }
-
-    return testsToRun
+    def result = sh(
+        script: "node scripts/get-tests-to-run.js ${filesArg}",
+        returnStdout: true,
+    ).trim()
+    return result ? result.split("\n").collect { it.trim() }.findAll { it } : []
 }
 
 pipeline {

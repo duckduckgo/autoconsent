@@ -1,0 +1,50 @@
+{
+    "name": "Ensighten",
+    "prehideSelectors": ["#ensNotifyBanner", ".ensModal"],
+    "detectCmp": [
+        {
+            "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "visible": "#ensModalWrapper[style*=block]" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "visible": "#ensModalWrapper[style*=block]" }]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#ensCloseBanner,#modalAcceptButton,#ensAcceptAll,#bannerAcceptButton" }],
+    "optOut": [
+        { "wait": 500 },
+        {
+            "if": { "visible": "#ensNotifyBanner[style*=block]" },
+            "then": [
+                {
+                    "if": {
+                        "visible": "#ensNotifyBanner #ensRejectAll,#ensNotifyBanner #rejectAll,#ensNotifyBanner #ensRejectBanner,#ensNotifyBanner .rejectAll,#ensNotifyBanner #bannerRejectButton,#ensNotifyBanner #ensRejectAds",
+                        "check": "any"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#ensNotifyBanner #ensRejectAll,#ensNotifyBanner #rejectAll,#ensNotifyBanner #ensRejectBanner,#ensNotifyBanner .rejectAll,#ensNotifyBanner #bannerRejectButton,#ensNotifyBanner #ensRejectAds"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": { "visible": "#ensOpenModal,#modalOpenButton,#bannerOpenModal", "check": "any" },
+                            "then": [
+                                { "waitForThenClick": "#ensOpenModal,#modalOpenButton,#bannerOpenModal" },
+                                { "waitFor": "#ensModalWrapper[style*=block]", "timeout": 1000 },
+                                { "click": ".ensCheckbox:checked:not(:disabled)", "all": true, "optional": true },
+                                { "waitForThenClick": "#ensSave,#modalSaveButton,#bannerSave" }
+                            ],
+                            "else": [{ "waitForThenClick": "#ensCloseBanner" }]
+                        }
+                    ]
+                }
+            ],
+            "else": [
+                { "click": ".ensCheckbox:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#ensSave,#modalSaveButton,#bannerSave" }
+            ]
+        }
+    ]
+}

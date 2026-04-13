@@ -201,4 +201,90 @@ describe('AutoConsentCMP', () => {
             expect(domActionsMock.click.calledWith('selector4')).to.be.true;
         });
     });
+
+    describe('"removeClass" rules', () => {
+        it('delegates to domActions.removeClass with selector and className', async () => {
+            domActionsMock.removeClass.returns(true);
+            const result = await cmp._runRulesSequentially([{ removeClass: 'no-scroll', selector: 'body' }]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.removeClass.calledWith('body', 'no-scroll')).to.be.true;
+        });
+
+        it('returns false when selector is missing', async () => {
+            domActionsMock.removeClass.returns(true);
+            const result = await cmp._runRulesSequentially([{ removeClass: 'no-scroll' }]);
+            expect(result).to.equal(false);
+            expect(domActionsMock.removeClass.called).to.be.false;
+        });
+
+        it('supports chained selectors', async () => {
+            domActionsMock.removeClass.returns(true);
+            const result = await cmp._runRulesSequentially([{ removeClass: 'freeze', selector: ['#host', 'body'] }]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.removeClass.calledWith(['#host', 'body'], 'freeze')).to.be.true;
+        });
+
+        it('can be negated', async () => {
+            domActionsMock.removeClass.returns(true);
+            const result = await cmp._runRulesSequentially([{ removeClass: 'no-scroll', selector: 'body', negated: true }]);
+            expect(result).to.equal(false);
+        });
+    });
+
+    describe('"setStyle" rules', () => {
+        it('delegates to domActions.setStyle with selector and css', async () => {
+            domActionsMock.setStyle.returns(true);
+            const result = await cmp._runRulesSequentially([{ setStyle: 'overflow: auto', selector: 'body' }]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.setStyle.calledWith('body', 'overflow: auto')).to.be.true;
+        });
+
+        it('returns false when selector is missing', async () => {
+            domActionsMock.setStyle.returns(true);
+            const result = await cmp._runRulesSequentially([{ setStyle: 'overflow: auto' }]);
+            expect(result).to.equal(false);
+            expect(domActionsMock.setStyle.called).to.be.false;
+        });
+
+        it('clears style with empty string', async () => {
+            domActionsMock.setStyle.returns(true);
+            const result = await cmp._runRulesSequentially([{ setStyle: '', selector: 'body' }]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.setStyle.calledWith('body', '')).to.be.true;
+        });
+    });
+
+    describe('"addStyle" rules', () => {
+        it('delegates to domActions.addStyle with selector and css', async () => {
+            domActionsMock.addStyle.returns(true);
+            const result = await cmp._runRulesSequentially([{ addStyle: 'overflow: auto', selector: 'html' }]);
+            expect(result).to.equal(true);
+            expect(domActionsMock.addStyle.calledWith('html', 'overflow: auto')).to.be.true;
+        });
+
+        it('returns false when selector is missing', async () => {
+            domActionsMock.addStyle.returns(true);
+            const result = await cmp._runRulesSequentially([{ addStyle: 'overflow: auto' }]);
+            expect(result).to.equal(false);
+            expect(domActionsMock.addStyle.called).to.be.false;
+        });
+
+        it('can be optional without failing the sequence', async () => {
+            domActionsMock.addStyle.returns(false);
+            domActionsMock.cookieContains.returns(true);
+            const result = await cmp._runRulesSequentially([
+                { addStyle: 'overflow: auto', selector: 'body', optional: true },
+                { cookieContains: 'test' },
+            ]);
+            expect(result).to.equal(true);
+        });
+
+        it('fails the sequence when not optional', async () => {
+            domActionsMock.addStyle.returns(false);
+            domActionsMock.cookieContains.returns(true);
+            const result = await cmp._runRulesSequentially([{ addStyle: 'overflow: auto', selector: 'body' }, { cookieContains: 'test' }]);
+            expect(result).to.equal(false);
+            expect(domActionsMock.cookieContains.called).to.be.false;
+        });
+    });
 });

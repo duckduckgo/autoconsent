@@ -7,22 +7,31 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?www2\\.hm\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["dialog.cookie-consent-popup"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn"
+            "exists": "dialog.cookie-consent-popup"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn"
+            "visible": "dialog.cookie-consent-popup"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#banner-accept-btn"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#banner-reject-btn",
-            "comment": "Only required cookies"
+            "if": { "exists": "#banner-reject-btn" },
+            "then": [{ "waitForThenClick": "#banner-reject-btn" }],
+            "else": [
+                { "waitForThenClick": "#banner-cookie-setting-btn" },
+                { "waitForVisible": "#settings-only-required-btn" },
+                { "waitForThenClick": "#settings-only-required-btn" }
+            ]
         }
     ]
 }
