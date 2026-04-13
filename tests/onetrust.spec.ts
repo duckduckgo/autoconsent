@@ -30,3 +30,7 @@ generateCMPTests(
 generateCMPTests('Onetrust', ['https://www.newyorker.com/', 'https://www.adobe.com/de/', 'https://about.gitlab.com'], {
     skipRegions: ['US'],
 });
+
+generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
+    skipRegions: ['US'],
+});

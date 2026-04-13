@@ -4,6 +4,19 @@
 export const snippets = {
     // code-based rules
     EVAL_0: () => console.log(1),
+    EVAL_DIDOMI_OPT_OUT: () => {
+        if (window.Didomi) {
+            window.Didomi.setUserDisagreeToAll();
+            return true;
+        }
+        return false;
+    },
+    EVAL_DIDOMI_TEST: () => {
+        if (window.Didomi) {
+            return window.Didomi.getUserConsentStatusForAll().purposes.disabled.length > 0;
+        }
+        return false;
+    },
     EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
     EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
@@ -127,8 +140,6 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
-    EVAL_MEDIAVINE_0: () =>
-        document.querySelectorAll('[data-name="mediavine-gdpr-cmp"] input[type=checkbox]').forEach((x) => x.checked && x.click()) || true,
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
@@ -158,7 +169,6 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
-    EVAL_REMARKABLE_TEST: () => !!localStorage.getItem('rmCookieConsent'),
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&

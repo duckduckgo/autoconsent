@@ -1,50 +1,29 @@
 {
     "name": "remarkable.com",
     "vendorUrl": "https://www.remarkable.com/",
-    "cosmetic": false,
+    "cosmetic": true,
     "runContext": {
         "urlPattern": "^https://(www\\.)?remarkable\\.com/"
     },
-    "prehideSelectors": [".overlay-cookies"],
+    "prehideSelectors": ["div:has(> button#cookieBar-button)"],
     "detectCmp": [
         {
-            "exists": ".overlay-cookies,#cookieBar-button"
+            "exists": "#cookieBar-button"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".overlay-cookies,#cookieBar-button"
+            "visible": "#cookieBar-button"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".overlay-cookies .ark-button--primary-neutral,#cookieBar-button"
+            "waitForThenClick": "#cookieBar-button"
         }
     ],
     "optOut": [
         {
-            "if": { "exists": "#cookieBar-button" },
-            "then": [
-                {
-                    "hide": "div:has(> button#cookieBar-button)"
-                }
-            ],
-            "else": [
-                {
-                    "waitForThenClick": ".overlay-cookies .ark-button--tertiary-neutral"
-                },
-                {
-                    "waitFor": ".overlay-cookies #cookie-group-control-necessary"
-                },
-                {
-                    "waitForThenClick": ".overlay-cookies .ark-button--secondary"
-                }
-            ]
-        }
-    ],
-    "test": [
-        {
-            "eval": "EVAL_REMARKABLE_TEST"
+            "hide": "div:has(> button#cookieBar-button)"
         }
     ]
 }

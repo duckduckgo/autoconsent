@@ -1,3 +1,203 @@
+# v14.70.0 (Sat Apr 11 2026)
+
+#### 🚀 Enhancement
+
+- Add autoconsent rule for Gallup cookie banner [#1251](https://github.com/duckduckgo/autoconsent/pull/1251) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.69.0 (Thu Apr 09 2026)
+
+#### 🚀 Enhancement
+
+- fix(hm.com): detect iOS cookie popup and add US opt-out flow [#1250](https://github.com/duckduckgo/autoconsent/pull/1250) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- Update docs and agent instructions [#1249](https://github.com/duckduckgo/autoconsent/pull/1249) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.68.0 (Wed Apr 08 2026)
+
+#### 🚀 Enhancement
+
+- fix(sparkasse): update immobilien.sparkasse.de rule for new CMP [#1246](https://github.com/duckduckgo/autoconsent/pull/1246) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add generic elsevier-pure rule for Elsevier Pure research portal cookie popups [#1226](https://github.com/duckduckgo/autoconsent/pull/1226) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix generated rule for flysaa.com [#1225](https://github.com/duckduckgo/autoconsent/pull/1225) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix rule for fullertonhotels.com [#1224](https://github.com/duckduckgo/autoconsent/pull/1224) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix CMP detection regressions for 10 sites [#1245](https://github.com/duckduckgo/autoconsent/pull/1245) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Coverage data update [#1242](https://github.com/duckduckgo/autoconsent/pull/1242) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.67.0 (Tue Mar 31 2026)
+
+#### 🚀 Enhancement
+
+- Merge ensighten rules [#1124](https://github.com/duckduckgo/autoconsent/pull/1124) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix optIn in test extension and Playwright runner by using full rules [#1219](https://github.com/duckduckgo/autoconsent/pull/1219) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add CLAUDE.md as symlink to AGENTS.md [#1220](https://github.com/duckduckgo/autoconsent/pull/1220) ([@cursoragent](https://github.com/cursoragent) [@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+
+---
+
+# v14.66.0 (Sat Mar 28 2026)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group with 2 updates [#1099](https://github.com/duckduckgo/autoconsent/pull/1099) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 3d7c4396813e269c757e5e9851d80b7b5db622a0 [#1216](https://github.com/duckduckgo/autoconsent/pull/1216) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Add more "reject" patterns [#1218](https://github.com/duckduckgo/autoconsent/pull/1218) ([@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- Reorganize docs, add AGENTS.md [#1217](https://github.com/duckduckgo/autoconsent/pull/1217) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.65.0 (Fri Mar 27 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1197](https://github.com/duckduckgo/autoconsent/pull/1197) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Add unit tests for filterCMPs function [#1119](https://github.com/duckduckgo/autoconsent/pull/1119) ([@rafaelr-hub](https://github.com/rafaelr-hub) [@muodov](https://github.com/muodov) [@cursoragent](https://github.com/cursoragent) [@Ezhik-777](https://github.com/Ezhik-777))
+- Update EasyList Cookie to 08eda0755105bfe87bbc927b86f9db0c1fb85de1 [#1209](https://github.com/duckduckgo/autoconsent/pull/1209) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1210](https://github.com/duckduckgo/autoconsent/pull/1210) ([@daxtheduck](https://github.com/daxtheduck))
+- Theinfatuation.com cookie handling [#1198](https://github.com/duckduckgo/autoconsent/pull/1198) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Channel 4 cookie rule [#1195](https://github.com/duckduckgo/autoconsent/pull/1195) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.19 to 7.0.27 [#1213](https://github.com/duckduckgo/autoconsent/pull/1213) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+
+#### Authors: 8
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- [@rafaelr-hub](https://github.com/rafaelr-hub)
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Evgenij Eliseew ([@Ezhik-777](https://github.com/Ezhik-777))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.64.0 (Tue Mar 24 2026)
+
+#### 🚀 Enhancement
+
+- add a Spanish reject pattern [#1211](https://github.com/duckduckgo/autoconsent/pull/1211) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.63.0 (Sat Mar 21 2026)
+
+#### 🚀 Enhancement
+
+- Sirdata rule cookie handling [#1187](https://github.com/duckduckgo/autoconsent/pull/1187) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- cosmetic rule for schoolhouse.com [#1140](https://github.com/duckduckgo/autoconsent/pull/1140) ([@muodov](https://github.com/muodov) [@cursoragent](https://github.com/cursoragent))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.62.0 (Fri Mar 20 2026)
+
+#### 🚀 Enhancement
+
+- Add bandcamp.com cookie consent rule [#1200](https://github.com/duckduckgo/autoconsent/pull/1200) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.61.0 (Thu Mar 19 2026)
+
+#### 🚀 Enhancement
+
+- Speculative fix for TrustArc raciness. [#1193](https://github.com/duckduckgo/autoconsent/pull/1193) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+- Prevent over-eager detection of ens-notify on british airways website [#1192](https://github.com/duckduckgo/autoconsent/pull/1192) ([@sammacbeth](https://github.com/sammacbeth))
+- Copilot cookie popup rule [#1185](https://github.com/duckduckgo/autoconsent/pull/1185) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Update EasyList Cookie to e2be5efe435a2dedbf46563db3022a8344d833c6 [#1158](https://github.com/duckduckgo/autoconsent/pull/1158) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Sourcepoint US fixes [#1184](https://github.com/duckduckgo/autoconsent/pull/1184) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Handle OneTrust one-click reject [#1163](https://github.com/duckduckgo/autoconsent/pull/1163) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Bump the dev-dependencies group across 1 directory with 15 updates [#1206](https://github.com/duckduckgo/autoconsent/pull/1206) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- CSS patching rule steps [#1186](https://github.com/duckduckgo/autoconsent/pull/1186) ([@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+
+#### 🐛 Bug Fix
+
+- CI: filter platform subtasks in DDG release flow [#1159](https://github.com/duckduckgo/autoconsent/pull/1159) ([@muodov](https://github.com/muodov))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.60.0 (Wed Mar 18 2026)
+
+#### 🚀 Enhancement
+
+- 🤖 Add autoconsent rules for 1 sites (0 need review) [#1202](https://github.com/duckduckgo/autoconsent/pull/1202) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v14.59.0 (Wed Mar 11 2026)
 
 #### 🚀 Enhancement

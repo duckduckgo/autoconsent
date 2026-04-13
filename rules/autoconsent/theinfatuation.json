@@ -1,0 +1,14 @@
+{
+    "name": "theinfatuation",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?theinfatuation\\.com"
+    },
+    "prehideSelectors": ["#consent-banner"],
+    "detectCmp": [{ "exists": "#consent-banner button[data-testid='close-button']" }],
+    "detectPopup": [{ "visible": "#consent-banner button[data-testid='close-button']" }],
+    "optIn": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
+    "optOut": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
+    "test": [{ "visible": "#consent-banner", "check": "none" }]
+}

@@ -1,0 +1,31 @@
+{
+    "name": "bandcamp.com",
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)?bandcamp\\.com"
+    },
+    "detectCmp": [
+        {
+            "exists": "body.enable-cookie-control"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-dialog-initial"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-dialog-initial button.g-button[type=\"submit\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-dialog-initial button.g-button.outline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_preferences=%7B%22allow%22%3A%5B%5D"
+        }
+    ]
+}

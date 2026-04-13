@@ -1,6 +1,6 @@
 {
     "name": "auto_AU_goodmoodprints.com_9fy",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "https://www.goodmoodprints.com/en-US"
     },
@@ -9,30 +9,30 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?goodmoodprints\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": [".MuiStack-root:has(a[href='/privacy']):has(button)"],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": ".MuiStack-root:has(a[href='/privacy']):has(button)"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": ".MuiStack-root:has(a[href='/privacy']):has(button)"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Got it')]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "comment": "Close"
+            "hide": ".MuiStack-root:has(a[href='/privacy']):has(button)"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": ".MuiStack-root:has(a[href='/privacy']):has(button)",
             "timeout": 1000,
             "check": "none"
         }
