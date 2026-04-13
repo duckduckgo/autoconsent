@@ -41,8 +41,8 @@ const autoconsentConfig = {
   isMainWorld: false,
   prehideTimeout: 2000,
   enableFilterList: false,
-  enableHeuristicDetection: false,
-  enableHeuristicAction: false,
+  enableHeuristicDetection: true,
+  enableHeuristicAction: true,
   logs: {
     lifecycle: false,
     rulesteps: false,
