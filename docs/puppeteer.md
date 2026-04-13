@@ -9,15 +9,13 @@ Puppeteer's `page.exposeFunction` and `page.evaluateOnNewDocument` bridge the ga
 
 ```javascript
 import puppeteer from 'puppeteer'
-import path from 'path'
 import fs from 'fs'
-import { createRequire } from 'module'
-
-const require = createRequire(import.meta.url)
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
 
 const autoconsentScript = fs.readFileSync(
-  path.resolve(
-    path.dirname(require.resolve('@duckduckgo/autoconsent')),
+  resolve(
+    dirname(fileURLToPath(import.meta.resolve('@duckduckgo/autoconsent'))),
     'autoconsent.playwright.js'
   ),
   'utf8'
@@ -26,7 +24,7 @@ const autoconsentScript = fs.readFileSync(
 // Load the rule bundles shipped with the package
 const rules = JSON.parse(
   fs.readFileSync(
-    require.resolve('@duckduckgo/autoconsent/rules/rules.json'),
+    fileURLToPath(import.meta.resolve('@duckduckgo/autoconsent/rules/rules.json')),
     'utf8'
   )
 )
