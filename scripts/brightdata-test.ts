@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import { chromium, Page, Frame, Browser, CDPSession } from '@playwright/test';
+import { chromium, Page, Browser, CDPSession } from '@playwright/test';
 import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction } from '../lib/types';
 import { IndexedCMPRuleset, filterCompactRules } from '../lib/encoding';
@@ -15,10 +15,13 @@ const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.
 
 const REGIONS: Record<string, string> = {
     'us-ny': '-country-us-state-ny',
-    'us-ca': '-country-us-state-ca',
+    'us-la': '-country-us-state-ca',
     de: '-country-de',
     fr: '-country-fr',
     gb: '-country-gb',
+    nl: '-country-nl',
+    ca: '-country-ca',
+    au: '-country-au',
 };
 
 type TestResult = {
@@ -58,11 +61,9 @@ class BrightDataTestRun {
     autoAction: AutoAction;
     received: ContentScriptMessage[] = [];
     screenshotCounter = 0;
-    selfTestFrame: Frame | null = null;
     screenshotsDir: string;
     screenshotPaths: string[] = [];
     cdpClient: CDPSession | null = null;
-    contextToFrame: Map<number, Frame> = new Map();
     loggedEvents: Set<string> = new Set();
 
     constructor(page: Page, url: string, region: string, autoAction: AutoAction, screenshotsDir: string) {
@@ -84,57 +85,33 @@ class BrightDataTestRun {
     async setupCDP(): Promise<void> {
         this.cdpClient = await this.page.context().newCDPSession(this.page);
 
-        // Add raw binding for message transport (works reliably over CDP, unlike exposeBinding)
+        await this.cdpClient.send('Page.enable');
+        await this.cdpClient.send('Runtime.enable');
+
+        // CDP Runtime.addBinding creates a global function that, when called, fires a
+        // Runtime.bindingCalled event. Playwright's exposeBinding doesn't work reliably
+        // with connectOverCDP, so we use the raw CDP binding instead.
         await this.cdpClient.send('Runtime.addBinding', { name: '_autoconsentTransport' });
 
-        // Inject wrapper that converts object calls to stringified transport calls.
-        // This runs before page scripts, enabling early CMP prehiding.
+        // Inject wrapper + content script at document start (before page scripts).
+        // This enables early CMP prehiding. Runs in every new document/frame.
         await this.cdpClient.send('Page.addScriptToEvaluateOnNewDocument', {
             source: `
                 window.autoconsentSendMessage = async function(msg) {
                     window._autoconsentTransport(JSON.stringify(msg));
                 };
+                ${contentScript}
             `,
         });
 
-        // Track execution contexts for frame identification
-        await this.cdpClient.send('Runtime.enable');
-        this.cdpClient.on('Runtime.executionContextCreated', (event) => {
-            const { id, auxData } = event.context;
-            if (auxData?.frameId) {
-                const frame = this.findFrameById(auxData.frameId);
-                if (frame) {
-                    this.contextToFrame.set(id, frame);
-                }
-            }
-        });
-
-        // Handle messages from page
+        // Handle messages from the content script
         this.cdpClient.on('Runtime.bindingCalled', (event) => {
             if (event.name === '_autoconsentTransport') {
-                this.handleMessage(event.payload, event.executionContextId).catch((e) => {
+                this.handleMessage(event.payload).catch((e) => {
                     console.error(`  [${this.region}] Error handling message:`, e.message);
                 });
             }
         });
-    }
-
-    findFrameById(frameId: string): Frame | null {
-        if (this.page.mainFrame().url() && frameId) {
-            for (const frame of this.page.frames()) {
-                // Playwright doesn't expose frame ID directly, but we can match by context
-                try {
-                    return frame;
-                } catch {
-                    continue;
-                }
-            }
-        }
-        return this.page.mainFrame();
-    }
-
-    getFrameForContext(contextId: number): Frame {
-        return this.contextToFrame.get(contextId) || this.page.mainFrame();
     }
 
     logOnce(key: string, message: string): void {
@@ -144,7 +121,7 @@ class BrightDataTestRun {
         }
     }
 
-    async handleMessage(payload: string, executionContextId: number): Promise<void> {
+    async handleMessage(payload: string): Promise<void> {
         let msg: ContentScriptMessage;
         try {
             msg = JSON.parse(payload);
@@ -153,16 +130,17 @@ class BrightDataTestRun {
         }
         this.received.push(msg);
 
-        const frame = this.getFrameForContext(executionContextId);
+        // For message responses, use the main frame since the content script runs there.
+        // frame.evaluate runs in the main world which has access to autoconsentReceiveMessage.
+        const frame = this.page.mainFrame();
 
         switch (msg.type) {
             case 'init': {
                 const url = frame.url() || this.url;
-                const mainFrame = frame === this.page.mainFrame();
                 const rules =
                     this.autoAction === 'optIn'
                         ? { autoconsent: fullRules }
-                        : { compact: filterCompactRules(compactRules, { url, mainFrame }) };
+                        : { compact: filterCompactRules(compactRules, { url, mainFrame: true }) };
                 const config = {
                     enabled: true,
                     autoAction: this.autoAction,
@@ -195,20 +173,15 @@ class BrightDataTestRun {
             case 'optOutResult': {
                 this.logOnce(`${msg.type}`, `  [${this.region}] ${msg.type}: ${msg.result}`);
                 await this.takeScreenshot(`${this.screenshotCounter++}-result`);
-                if (msg.scheduleSelfTest) {
-                    this.selfTestFrame = frame;
-                }
                 break;
             }
             case 'autoconsentDone': {
                 this.logOnce('autoconsentDone', `  [${this.region}] Done: ${msg.cmp} (cosmetic: ${msg.isCosmetic})`);
                 await this.takeScreenshot(`${this.screenshotCounter++}-done`);
-                if (this.selfTestFrame) {
-                    try {
-                        await this.selfTestFrame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
-                    } catch {
-                        // frame may have been detached
-                    }
+                try {
+                    await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+                } catch {
+                    // frame may have been detached
                 }
                 break;
             }
@@ -217,10 +190,16 @@ class BrightDataTestRun {
                 break;
             }
             case 'eval': {
+                // Eval snippets access page globals (e.g. window.Cookiebot)
+                let evalResult = false;
                 try {
-                    const result = await frame.evaluate(msg.code);
+                    evalResult = await frame.evaluate(msg.code);
+                } catch {
+                    evalResult = false;
+                }
+                try {
                     await frame.evaluate(
-                        `autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`,
+                        `autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(evalResult)} })`,
                     );
                 } catch {
                     // frame may have been detached
@@ -252,35 +231,24 @@ class BrightDataTestRun {
         };
 
         try {
-            this.page.on('console', (msg) => {
-                const text = msg.text();
-                if (text.includes('autoconsent') || text.includes('CMP')) {
-                    console.log(`    [${this.region}] page: ${text}`);
-                }
-            });
-
             await this.setupCDP();
 
             console.log(`  [${this.region}] Navigating to ${this.url}...`);
             await this.page.goto(this.url, { waitUntil: 'commit', timeout: 45000 });
-            console.log(`  [${this.region}] Page committed.`);
-
-            // Inject autoconsent content script into main frame
-            await this.injectContentScript(this.page);
-
-            // Inject into existing sub-frames
-            for (const frame of this.page.frames()) {
-                if (frame !== this.page.mainFrame()) {
-                    await this.injectContentScript(frame);
-                }
-            }
-
-            // Inject into new frames as they appear
-            this.page.on('framenavigated', (frame) => this.injectContentScript(frame));
-
             console.log(`  [${this.region}] Autoconsent injected. Waiting...`);
 
-            // Wait for autoconsent to complete (up to 45s)
+            // Also inject into frames that may have loaded before addScriptToEvaluateOnNewDocument
+            for (const f of this.page.frames()) {
+                try {
+                    await f.evaluate(contentScript);
+                } catch {
+                    // frame detached or cross-origin
+                }
+            }
+            this.page.on('framenavigated', (f) => {
+                f.evaluate(contentScript).catch(() => {});
+            });
+
             const completed = await this.waitForCompletion(45000);
 
             if (!completed && !this.received.some((m) => m.type === 'cmpDetected')) {
@@ -298,7 +266,6 @@ class BrightDataTestRun {
                 }
             }
 
-            // Collect results from received messages
             for (const msg of this.received) {
                 switch (msg.type) {
                     case 'cmpDetected':
@@ -323,7 +290,6 @@ class BrightDataTestRun {
                 }
             }
 
-            // Take final screenshot
             await this.takeScreenshot(`final`);
         } catch (e: any) {
             result.errors.push(e.message);
@@ -351,14 +317,6 @@ class BrightDataTestRun {
         return false;
     }
 
-    async injectContentScript(pageOrFrame: Page | Frame) {
-        try {
-            await pageOrFrame.evaluate(contentScript);
-        } catch {
-            // frame was detached or not ready
-        }
-    }
-
     async takeScreenshot(name: string) {
         try {
             const filename = `${this.domain}-${this.region}-${this.urlHash}-${name}.jpg`;
@@ -371,7 +329,7 @@ class BrightDataTestRun {
                 type: 'jpeg',
             });
             this.screenshotPaths.push(filepath);
-        } catch (e: any) {
+        } catch {
             // Screenshot failures are non-fatal
         }
     }
