@@ -1,0 +1,14 @@
+{
+    "name": "bynder.com",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?bynder\\.com/"
+    },
+    "prehideSelectors": ["#cookieconsent .container"],
+    "detectCmp": [{ "exists": "#cookieconsent" }],
+    "detectPopup": [{ "visible": "#cookieconsent .container" }],
+    "optOut": [{ "waitForThenClick": "#cookieconsent .rejectcookies" }],
+    "optIn": [{ "waitForThenClick": "#cookieconsent .allcookies" }],
+    "test": [{ "cookieContains": "CONSENTSHOWN=yes" }]
+}
