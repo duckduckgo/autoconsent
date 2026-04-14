@@ -13,6 +13,8 @@ const fullRules = (rulesJson as any).autoconsent;
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
 
+const ISOLATED_WORLD_NAME = 'autoconsent';
+
 const REGIONS: Record<string, string> = {
     'us-ny': '-country-us-state-ny',
     'us-la': '-country-us-state-ca',
@@ -88,13 +90,15 @@ class BrightDataTestRun {
         await this.cdpClient.send('Page.enable');
         await this.cdpClient.send('Runtime.enable');
 
-        // CDP Runtime.addBinding creates a global function that, when called, fires a
-        // Runtime.bindingCalled event. Playwright's exposeBinding doesn't work reliably
-        // with connectOverCDP, so we use the raw CDP binding instead.
+        // CDP Runtime.addBinding creates a global function that fires Runtime.bindingCalled events.
+        // Playwright's exposeBinding doesn't work reliably with connectOverCDP, so we use raw CDP.
+        // Global binding (no executionContextName) ensures it's available in all worlds.
         await this.cdpClient.send('Runtime.addBinding', { name: '_autoconsentTransport' });
 
-        // Inject wrapper + content script at document start (before page scripts).
-        // This enables early CMP prehiding. Runs in every new document/frame.
+        // Inject autoconsent into an isolated world. The isolated world shares the DOM with the
+        // main world but has a separate JS scope, matching how Chrome extensions isolate content
+        // scripts. Eval snippets that check page globals (e.g. window.Cookiebot) are explicitly
+        // routed to the main world via page.evaluate().
         await this.cdpClient.send('Page.addScriptToEvaluateOnNewDocument', {
             source: `
                 window.autoconsentSendMessage = async function(msg) {
@@ -102,15 +106,31 @@ class BrightDataTestRun {
                 };
                 ${contentScript}
             `,
+            worldName: ISOLATED_WORLD_NAME,
         });
 
-        // Handle messages from the content script
+        // Handle messages from the content script running in the isolated world.
+        // We use event.executionContextId to route responses back to the correct isolated
+        // world context — looking up contexts by frame ID is unreliable due to races between
+        // context creation events and binding calls.
         this.cdpClient.on('Runtime.bindingCalled', (event) => {
             if (event.name === '_autoconsentTransport') {
-                this.handleMessage(event.payload).catch((e) => {
+                this.handleMessage(event.payload, event.executionContextId).catch((e) => {
                     console.error(`  [${this.region}] Error handling message:`, e.message);
                 });
             }
+        });
+    }
+
+    /**
+     * Send a message back to the autoconsent content script in its isolated world.
+     */
+    async sendToIsolatedWorld(contextId: number, expression: string): Promise<void> {
+        await this.cdpClient!.send('Runtime.evaluate', {
+            expression,
+            contextId,
+            awaitPromise: true,
+            returnByValue: true,
         });
     }
 
@@ -121,7 +141,7 @@ class BrightDataTestRun {
         }
     }
 
-    async handleMessage(payload: string): Promise<void> {
+    async handleMessage(payload: string, contextId: number): Promise<void> {
         let msg: ContentScriptMessage;
         try {
             msg = JSON.parse(payload);
@@ -130,13 +150,9 @@ class BrightDataTestRun {
         }
         this.received.push(msg);
 
-        // For message responses, use the main frame since the content script runs there.
-        // frame.evaluate runs in the main world which has access to autoconsentReceiveMessage.
-        const frame = this.page.mainFrame();
-
         switch (msg.type) {
             case 'init': {
-                const url = frame.url() || this.url;
+                const url = this.page.url() || this.url;
                 const rules =
                     this.autoAction === 'optIn'
                         ? { autoconsent: fullRules }
@@ -151,11 +167,12 @@ class BrightDataTestRun {
                     visualTest: false,
                 };
                 try {
-                    await frame.evaluate(
+                    await this.sendToIsolatedWorld(
+                        contextId,
                         `autoconsentReceiveMessage({ type: "initResp", config: ${JSON.stringify(config)}, rules: ${JSON.stringify(rules)} })`,
                     );
                 } catch {
-                    // frame may have been detached
+                    // context may have been destroyed (e.g. page navigated)
                 }
                 break;
             }
@@ -179,9 +196,9 @@ class BrightDataTestRun {
                 this.logOnce('autoconsentDone', `  [${this.region}] Done: ${msg.cmp} (cosmetic: ${msg.isCosmetic})`);
                 await this.takeScreenshot(`${this.screenshotCounter++}-done`);
                 try {
-                    await frame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+                    await this.sendToIsolatedWorld(contextId, `autoconsentReceiveMessage({ type: "selfTest" })`);
                 } catch {
-                    // frame may have been detached
+                    // context may have been destroyed
                 }
                 break;
             }
@@ -190,19 +207,21 @@ class BrightDataTestRun {
                 break;
             }
             case 'eval': {
-                // Eval snippets access page globals (e.g. window.Cookiebot)
+                // Eval snippets check page globals (e.g. window.Cookiebot) and must run in the
+                // main world. page.evaluate() always executes in the main world.
                 let evalResult = false;
                 try {
-                    evalResult = await frame.evaluate(msg.code);
+                    evalResult = await this.page.evaluate(msg.code);
                 } catch {
                     evalResult = false;
                 }
                 try {
-                    await frame.evaluate(
+                    await this.sendToIsolatedWorld(
+                        contextId,
                         `autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(evalResult)} })`,
                     );
                 } catch {
-                    // frame may have been detached
+                    // context may have been destroyed
                 }
                 break;
             }
@@ -235,19 +254,7 @@ class BrightDataTestRun {
 
             console.log(`  [${this.region}] Navigating to ${this.url}...`);
             await this.page.goto(this.url, { waitUntil: 'commit', timeout: 45000 });
-            console.log(`  [${this.region}] Autoconsent injected. Waiting...`);
-
-            // Also inject into frames that may have loaded before addScriptToEvaluateOnNewDocument
-            for (const f of this.page.frames()) {
-                try {
-                    await f.evaluate(contentScript);
-                } catch {
-                    // frame detached or cross-origin
-                }
-            }
-            this.page.on('framenavigated', (f) => {
-                f.evaluate(contentScript).catch(() => {});
-            });
+            console.log(`  [${this.region}] Autoconsent injected (isolated world). Waiting...`);
 
             const completed = await this.waitForCompletion(45000);
 

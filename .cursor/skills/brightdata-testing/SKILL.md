@@ -128,6 +128,6 @@ Detailed JSON results are written to `test-results/brightdata/results.json`.
 ## Limitations
 
 - BrightData blocks certain site categories (e.g., gaming sites). If a test URL is blocked, you'll see a navigation error. Use an alternative URL for the same CMP.
-- The script injects autoconsent in the page's main world (not an isolated world). This matches how the Playwright test runner works but differs from the Chrome extension which uses content script isolation.
+- The script injects autoconsent in a CDP isolated world (matching how Chrome extensions isolate content scripts from page JS). Eval snippets that check page globals (e.g. `window.Cookiebot`) are explicitly routed to the main world.
 - Some sites may detect automated browsers and show different behavior. The script uses a standard Chrome user agent.
 - Each region test creates a new BrightData browser session, so tests run sequentially per region.
