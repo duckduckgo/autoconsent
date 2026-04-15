@@ -1,3 +1,8 @@
+---
+name: publicwww-search
+description: Searches website source code via PublicWWW API to determine if a cookie popup comes from a widely-used CMP provider or is site-specific. Use when identifying whether a popup is from a third-party CMP.
+---
+
 # PublicWWW Search
 
 Search the source code of websites to determine if a cookie consent popup comes from
@@ -54,22 +59,14 @@ When you find a cookie consent popup and need to determine if it's from a CMP:
 | 1-10 sites | Probably site-specific, or a very new CMP. Investigate further. |
 | 0 results | Try different selectors. PublicWWW only indexes server-rendered HTML, not JS-injected DOM. |
 
-## Example Queries
+## Example Query
 
-Search for a CMP's container ID:
+Search for a CMP's container ID (URL-encode the quoted phrase as `%22...%22`):
 ```bash
 curl -s "https://publicwww.com/websites/%22onetrust-banner-sdk%22/?export=csvu&key=PUBLICWWW_API_KEY" | wc -l
 ```
 
-Search for a CMP's script URL:
-```bash
-curl -s "https://publicwww.com/websites/%22cdn.cookielaw.org%22/?export=csvu&key=PUBLICWWW_API_KEY" | wc -l
-```
-
-Search for a unique class prefix:
-```bash
-curl -s "https://publicwww.com/websites/%22didomi-notice-agree-button%22/?export=csvu&key=PUBLICWWW_API_KEY" | wc -l
-```
+Use the same pattern for script URLs (`"cdn.cookielaw.org"`), class prefixes (`"didomi-notice-agree-button"`), or any distinctive string from the popup.
 
 ## Important Notes
 

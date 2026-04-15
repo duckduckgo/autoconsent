@@ -55,6 +55,10 @@ When investigating or fixing a cookie popup, start by **opening the site in a br
 
 Use the `publicwww-search` skill (`.agents/skills/publicwww-search.md`) to check if a popup comes from a third-party CMP provider.
 
+### CMP vs Site-Specific Rules
+
+**IMPORTANT: Always prefer writing a generic CMP rule over a site-specific rule.** A CMP (Consent Management Platform) is a third-party service (e.g. OneTrust, Cookiebot, Didomi) used by many websites — one rule covers thousands of sites. Check DOM class prefixes, script sources, and PublicWWW before assuming a popup is site-specific. Use `data/coverage.json` to find other sites using the same CMP for testing.
+
 ## Working with Rules
 
 ### JSON Rules
@@ -96,7 +100,7 @@ For CMPs requiring complex non-linear logic, CMP API interaction, or `Promise.ra
 
 ### Selector Strategy
 
-Prefer selectors that won't change between builds or locales. In priority order: stable data attributes (`[data-testid="..."]`) > stable IDs (`#cookie-banner`) > class substrings (`[class*="cookie-banner"]`) > structural CSS > XPath text matching (last resort, language-specific). Avoid CSS module hashes (`.sd-cmp-3cRQ2`), framework-generated IDs (`#react-aria*`, `#radix-\:*\:`), body class lists, and deep `nth-child` chains. See the `create-cmp-rule` skill for detailed examples and anti-patterns.
+Prefer selectors that won't change between builds or locales. In priority order: stable data attributes (`[data-testid="..."]`) > stable IDs (`#cookie-banner`) > class substrings (`[class*="cookie-banner"]`) > structural CSS > XPath text matching (last resort, language-specific). **IMPORTANT: Do NOT use CSS module hashes** — if a class name contains 4+ random-looking characters (e.g. `.sd-cmp-3cRQ2`, `.css-1a2b3c`), it's generated and will break. Also avoid framework-generated IDs (`#react-aria*`, `#radix-\:*\:`), body class lists, and deep `nth-child` chains. See the `create-cmp-rule` skill for detailed examples.
 
 ### Cosmetic Rules
 
@@ -114,64 +118,13 @@ Use `if`/`then`/`else` to handle regional variants within a single rule.
 
 ### Testing Across Regions
 
-- **`REGION` env var** — filters which test URLs to run (from `data/coverage.json`). Does not change where requests come from.
-- **`PROXY_SERVER` env var** — routes traffic through a geographic proxy.
-
-```bash
-REGION=DE npx playwright test tests/sirdata.spec.ts --project webkit
-REGION=DE PROXY_SERVER=socks5://proxy.example:1080 npx playwright test tests/sirdata.spec.ts --project webkit
-```
-
-Test specs support `skipRegions` and `onlyRegions`:
-
-```typescript
-generateCMPTests('Sirdata', ['https://gizmodo.com/'], {
-    skipRegions: ['US'],
-    onlyRegions: [],
-});
-```
-
-## PR Review Checklist
-
-### CI Pipeline
-
-Two CI systems run on PRs:
-
-1. **GitHub Actions** (`.github/workflows/checks.yml`): runs `npm run lint` and `npm run test:lib` on every push/PR. These must pass.
-2. **Jenkins**: runs Playwright E2E tests in 9 regions (US, GB, AU, CA, DE, FR, NL, CH, NO). Only tests for modified rule files and their corresponding test specs are run. Jenkins posts a PR comment with an artifact ZIP link and a link to the [review tool](https://zok.pw/autoconsent-review-tool/) for inspecting screenshots.
-
-### Reviewing New Rule PRs
-
-- [ ] `npm run lint` passes (ESLint + Prettier + schema validation)
-- [ ] JSON rule validates against schema (`npm run rule-syntax-check`)
-- [ ] A corresponding test spec exists in `tests/`
-- [ ] Test URLs are reachable and relevant
-- [ ] Selectors are stable (no dynamic IDs, no full body class lists, no CSS module hashes)
-- [ ] `optOut` targets an actual reject/decline button, not a privacy policy link
-- [ ] For generated rule fixes: all region variants are updated consistently
-
-### Reviewing Code-Based Rule PRs
-
-- [ ] Lint and unit tests pass
-- [ ] No hardcoded site-specific attribute values
-- [ ] Fallback paths exist for regional variants
-- [ ] Uses existing DOM helpers (`this.click()`, `this.waitForElement()`, etc.)
-
-### Handling Flaky E2E Tests
-
-E2E tests hit live sites and are inherently flaky due to site changes, regional differences, and network conditions. Before concluding a test is broken:
-
-- Check Jenkins screenshots in the review tool
-- If a test fails only in certain regions, consider adding `skipRegions`
-- Playwright is configured with retries (2 retries in CI)
-- Verify the site still has the same cookie consent popup by visiting it manually
+Use `REGION` env var to filter test URLs (from `data/coverage.json`). Use `PROXY_SERVER` to route traffic through a geographic proxy. Test specs support `skipRegions` and `onlyRegions` options.
 
 ## Verification
 
-| Step | Command |
-|------|---------|
-| Schema + formatting | `npm run lint` |
-| Rule syntax only | `npm run rule-syntax-check` |
-| Unit tests | `npm run test:lib` |
-| Single CMP E2E test | `npx playwright test tests/<cmp>.spec.ts` |
-| Full E2E suite | `npm run test` |
+After creating or modifying a rule:
+
+1. `npm run build-rules` — rebuild rules.json (required for extension and tests)
+2. `npm run rule-syntax-check` — validate rule JSON against schema
+3. Check the rule works in a browser with the extension loaded
+4. `npx playwright test tests/<name>.spec.ts` — run the E2E test
