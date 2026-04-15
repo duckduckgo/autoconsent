@@ -175,6 +175,11 @@ export const snippets = {
         });
         return true;
     },
+    EVAL_SIRDATA_TEST_DISMISSED: () => {
+        const root = document.querySelector('#sd-cmp');
+        if (!root) return true;
+        return !root.querySelector('.sd-cmp-4oXwF, .sd-cmp-wBgKb');
+    },
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(

@@ -1,0 +1,15 @@
+{
+    "name": "sirdata",
+    "_metadata": {
+        "vendorUrl": "https://www.sirdata.com/"
+    },
+    "prehideSelectors": ["#sd-cmp .sd-cmp-4oXwF", "#sd-cmp .sd-cmp-wBgKb"],
+    "detectCmp": [{ "visible": "#sd-cmp:has(.sd-cmp-wBgKb)" }],
+    "detectPopup": [{ "visible": "#sd-cmp .sd-cmp-4oXwF" }],
+    "optIn": [{ "waitForThenClick": "#sd-cmp [role=\"button\"][title=\"Close\"]" }],
+    "optOut": [
+        { "waitForThenClick": "#sd-cmp [role=\"button\"][title=\"Close\"]" },
+        { "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL", "optional": true }
+    ],
+    "test": [{ "eval": "EVAL_SIRDATA_TEST_DISMISSED" }]
+}
