@@ -1,0 +1,17 @@
+{
+    "name": "shopify-customer-privacy",
+    "_metadata": {
+        "vendorUrl": "https://help.shopify.com/en/manual/privacy-and-security/privacy/customer-privacy"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": ""
+    },
+    "prehideSelectors": ["#shopify-pc__banner"],
+    "detectCmp": [{ "exists": "#shopify-pc__banner" }],
+    "detectPopup": [{ "visible": "#shopify-pc__banner #shopify-pc__banner__btn-decline" }],
+    "optIn": [{ "waitForThenClick": "#shopify-pc__banner__btn-accept" }],
+    "optOut": [{ "waitForThenClick": "#shopify-pc__banner__btn-decline" }],
+    "test": [{ "visible": "#shopify-pc__banner", "check": "none" }]
+}
