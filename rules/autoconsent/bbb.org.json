@@ -7,40 +7,9 @@
         "urlPattern": "^https://(?:www\\.)?bbb\\.org/"
     },
     "prehideSelectors": ["iabbb-cookies-message"],
-    "detectCmp": [
-        {
-            "any": [
-                { "exists": "iabbb-cookies-message" },
-                { "exists": "main.manage-cookies-page form.stack input[name=\"marketing\"]" },
-                { "exists": "xpath///dialog//input[@name='marketing']" }
-            ]
-        }
-    ],
-    "detectPopup": [
-        {
-            "any": [
-                { "visible": "iabbb-cookies-message" },
-                { "visible": "main.manage-cookies-page form.stack" },
-                { "visible": "xpath///dialog//h2[contains(., 'Cookie Preferences')]" }
-            ]
-        }
-    ],
+    "detectCmp": [{ "exists": "iabbb-cookies-message" }],
+    "detectPopup": [{ "visible": "iabbb-cookies-message" }],
     "optIn": [{ "waitForThenClick": "iabbb-cookies-message button[name=\"allow-all\"]" }],
-    "optOut": [
-        {
-            "if": { "exists": "input[name=\"functional\"][value=\"false\"]" },
-            "then": [],
-            "else": [{ "waitForThenClick": "xpath///iabbb-cookies-message//button[contains(., 'Manage Cookies')]" }]
-        },
-        { "waitFor": "input[name=\"functional\"][value=\"false\"]" },
-        { "click": "input[name=\"functional\"][value=\"false\"]" },
-        { "click": "input[name=\"performance\"][value=\"false\"]" },
-        { "click": "input[name=\"marketing\"][value=\"false\"]" },
-        { "waitForThenClick": "xpath///button[contains(., 'Save Changes')]" }
-    ],
-    "test": [
-        { "cookieContains": "%22functional%22%3Afalse" },
-        { "cookieContains": "%22performance%22%3Afalse" },
-        { "cookieContains": "%22marketing%22%3Afalse" }
-    ]
+    "optOut": [{ "eval": "EVAL_BBB_ORG_COOKIE_OPTOUT" }, { "wait": 300 }, { "hide": "iabbb-cookies-message" }],
+    "test": [{ "eval": "EVAL_BBB_ORG_COOKIE_TEST" }]
 }
