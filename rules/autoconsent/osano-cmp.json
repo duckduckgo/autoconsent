@@ -3,11 +3,7 @@
     "_metadata": {
         "vendorUrl": "https://www.osano.com/cookie-consent/"
     },
-    "prehideSelectors": [
-        ".osano-cm-window",
-        ".osano-cm-dialog",
-        ".osano-cm-info-dialog"
-    ],
+    "prehideSelectors": [".osano-cm-window", ".osano-cm-dialog", ".osano-cm-info-dialog"],
     "detectCmp": [{ "exists": "script[src*=\"cmp.osano.com\"]" }],
     "detectPopup": [{ "visible": ".osano-cm-window" }],
     "optIn": [

@@ -11,12 +11,6 @@ const test = baseTest.extend({
     },
 });
 
-generateCMPTests(
-    'osano-cmp',
-    [
-        'https://www.weathertech.com/',
-        'https://www.bobsredmill.com/',
-        'https://www.bigagnes.com/',
-    ],
-    { playwrightTest: test },
-);
+generateCMPTests('osano-cmp', ['https://www.weathertech.com/', 'https://www.bobsredmill.com/', 'https://www.bigagnes.com/'], {
+    playwrightTest: test,
+});

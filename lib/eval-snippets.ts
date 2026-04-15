@@ -210,12 +210,7 @@ export const snippets = {
             return false;
         }
         const c = cm.getConsent();
-        return (
-            c.MARKETING === 'DENY' &&
-            c.PERSONALIZATION === 'DENY' &&
-            c.ANALYTICS === 'DENY' &&
-            c.ESSENTIAL === 'ACCEPT'
-        );
+        return c.MARKETING === 'DENY' && c.PERSONALIZATION === 'DENY' && c.ANALYTICS === 'DENY' && c.ESSENTIAL === 'ACCEPT';
     },
 };
 
