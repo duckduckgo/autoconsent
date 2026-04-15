@@ -356,62 +356,18 @@ Include notes for any region where the behavior differs from the majority (e.g. 
 
 If screenshots were captured during regional testing, reference them in the PR body so reviewers can inspect the popup state per region.
 
-## Creating Fix PRs
+### PR Labels
 
-When you have completed a fix and are ready to open a pull request, follow these guidelines.
+Apply exactly one of the following labels when creating the PR:
 
-### PR Title
+| Label | When to use |
+|-------|-------------|
+| `patch` | Fixing an existing rule (JSON or code-based) — selector updates, new fallback paths, generated rule fixes |
+| `minor` | Adding a new rule (new JSON file, new CMP class, or new `rules/generated/` entry) |
+| `documentation` | Changes only to documentation files (`AGENTS.md`, `CLAUDE.md`, `docs/`, `README.md`, etc.) |
+| `tests` | Changes only to test specs or test infrastructure (`tests/`, `tests-wtr/`, `playwright/`) |
 
-Name the PR after the **actual changes**, not the original prompt or reported site. The title should tell a reviewer what was changed at a glance.
-
-- If the fix is a new generic rule for a CMP → name after the CMP (e.g. "Add Axeptio CMP rule")
-- If the fix updates an existing rule → name after the rule and what changed (e.g. "Fix OneTrust opt-out selector for settings-panel variant")
-- If the fix touches multiple generated rules for the same CMP → name after the CMP (e.g. "Update Didomi detection across generated rules")
-- If the fix is a code-based CMP change → name after the CMP class and change (e.g. "Sourcepoint: add US National privacy manager path")
-
-**Do not** use the triggering website as the PR title. For example, if the prompt asked to fix `example-news.com` but the root cause was a broken Cookiebot rule, title the PR after Cookiebot, not `example-news.com`.
-
-### Task/Issue Links
-
-The PR template has a `Task/Issue URL:` field. Fill it in as follows:
-
-- If the prompt includes an **Asana link**, put it in the `Task/Issue URL:` field.
-- If the prompt includes a **GitHub issue link**, put it there as well.
-- If multiple links are provided, list them all.
-- If no external link was provided, leave the field blank — do not fabricate links.
-
-### PR Description
-
-Write a concise description in the `## Description:` section explaining:
-
-1. **What was broken** — which CMP, which stage failed (`detectCmp`, `detectPopup`, `optOut`, etc.), and on which site(s).
-2. **Root cause** — why it broke (selector changed, new CMP variant, region-specific behavior, etc.).
-3. **What was changed** — which files were modified and what the fix does.
-4. **Scope** — whether this is a site-specific rule, a generic CMP rule, or a code-based rule change. If a site-specific rule was converted to a generic one, note that.
-
-### Regional Testing Results
-
-**Always include the results of regional testing in the PR body**, under the `## Steps to test this PR:` section or in a dedicated `## Regional Testing Results` section. This is required for every rule change PR.
-
-Format the results as a table or list showing each tested region and the outcome:
-
-```markdown
-## Regional Testing Results
-
-| Region | Result | Notes |
-|--------|--------|-------|
-| us-ny  | NO CMP | No popup shown (expected) |
-| de     | PASS   | Opt-out successful, self-test passed |
-| fr     | PASS   | Opt-out successful, self-test passed |
-| gb     | PASS   | Opt-out successful, self-test passed |
-| nl     | PASS   | Opt-out successful, self-test passed |
-| ca     | NO CMP | No popup shown (expected) |
-| au     | PASS   | Opt-out successful, self-test passed |
-```
-
-Include notes for any region where the behavior differs from the majority (e.g. no popup shown, different UI variant, partial pass). If a region fails, explain whether the failure is a known issue, a flaky test, or a genuine problem that needs a `skipRegions` entry.
-
-If screenshots were captured during regional testing, reference them in the PR body so reviewers can inspect the popup state per region.
+If a PR spans multiple categories (e.g. a new rule plus a test spec), use the label for the primary change — `minor` for a new rule even though it includes a test file, `patch` for a rule fix even though it updates a test spec.
 
 ## PR Review Checklist
 
