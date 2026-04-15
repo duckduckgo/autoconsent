@@ -1,0 +1,23 @@
+{
+    "name": "sirdata",
+    "_metadata": {
+        "vendorUrl": "https://www.sirdata.com/"
+    },
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#sd-cmp .sd-cmp-wBgKb"],
+    "detectCmp": [{ "exists": "#sd-cmp" }],
+    "detectPopup": [{ "visible": "#sd-cmp .sd-cmp-wBgKb" }],
+    "optIn": [
+        { "waitFor": "#sd-cmp div[role=\"button\"][title=\"Close\"]" },
+        { "click": "#sd-cmp div[role=\"button\"][title=\"Close\"]" },
+        { "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL", "optional": true },
+        { "addStyle": "overflow: visible !important", "selector": "html", "optional": true }
+    ],
+    "optOut": [
+        { "waitFor": "#sd-cmp div[role=\"button\"][title=\"Close\"]" },
+        { "click": "#sd-cmp div[role=\"button\"][title=\"Close\"]" },
+        { "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL", "optional": true },
+        { "addStyle": "overflow: visible !important", "selector": "html", "optional": true }
+    ],
+    "test": [{ "waitForVisible": "#sd-cmp .sd-cmp-wBgKb", "check": "none" }]
+}
