@@ -104,7 +104,7 @@ const result = ctx.collectResult(url, 'de');
 
 ## Gotchas
 
-- **CAPTCHA solving is automatic** — BrightData auto-solves CAPTCHAs. After navigation, `testPage` calls `Captcha.solve` via CDP to block until the solver finishes (or no captcha is detected), preventing autoconsent from timing out while the solver is busy.
+- **CAPTCHA solving is automatic** — BrightData auto-solves CAPTCHAs. `testPage` listens for `Captcha.detected` / `Captcha.solveFinished` CDP events and blocks until the solver finishes when a captcha is present. Adds ~2s overhead on captcha-free pages (grace period for detection).
 - **Call injection before `page.goto`** — `addScriptToEvaluateOnNewDocument` only applies to future navigations.
 - **Don't use `page.exposeBinding`/`page.evaluate` for the message channel** over CDP — they run in Playwright's utility context where CDP bindings aren't callable. Use raw CDP (`Runtime.addBinding` + `Runtime.evaluate`) instead.
 - **Short-lived iframe contexts** produce `Cannot find context` errors on `Runtime.evaluate` responses — expected and harmless (suppressed by `.catch(() => {})`).

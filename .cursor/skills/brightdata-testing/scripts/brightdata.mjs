@@ -275,15 +275,27 @@ export async function testPage(page, url, regionKey, options = {}) {
     const startTime = Date.now();
 
     try {
+        // Listen for captcha events before navigation so we only block when
+        // the auto-solver actually kicks in — zero overhead on captcha-free pages.
+        const captchaClient = await page.context().newCDPSession(page);
+        let captchaDetected = false;
+        let captchaSolved = null;
+        const captchaSolvedPromise = new Promise((resolve) => {
+            captchaClient.on('Captcha.detected', () => { captchaDetected = true; });
+            captchaClient.on('Captcha.solveFinished', () => { captchaSolved = true; resolve(); });
+            captchaClient.on('Captcha.solveFailed', () => { captchaSolved = false; resolve(); });
+        });
+
         const ctx = await injectAutoconsent(page, options);
         await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
 
-        // Wait for BrightData's auto-captcha-solver to finish (if a captcha
-        // appeared). Returns immediately with "not_detected" when there is none.
-        try {
-            const captchaClient = await page.context().newCDPSession(page);
-            await captchaClient.send('Captcha.solve', { detectTimeout: 30000 });
-        } catch {}
+        // Brief wait for Captcha.detected event to arrive (fires ~1s after commit).
+        if (!captchaDetected) {
+            await new Promise((r) => setTimeout(r, 2000));
+        }
+        if (captchaDetected && captchaSolved === null) {
+            await Promise.race([captchaSolvedPromise, new Promise((r) => setTimeout(r, completionTimeout))]);
+        }
 
         const completed = await ctx.waitForCompletion(completionTimeout);
         if (completed && !ctx.hasMessage('selfTestResult')) {
