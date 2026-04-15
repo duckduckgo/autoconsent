@@ -88,70 +88,6 @@ const result = ctx.collectResult(url, 'de');
 | `screenshotsDir` | `test-results/brightdata` | Where to save screenshots |
 | `navigationTimeout` | `45000` | Navigation timeout (ms) |
 | `completionTimeout` | `45000` | Wait for autoconsent to finish (ms) |
-| `captcha` | `undefined` | CAPTCHA solver options (see below) |
-
-### CAPTCHA Solver
-
-BrightData browsers include an integrated CAPTCHA solver that auto-solves CAPTCHAs by default. The skill exposes this via custom CDP commands (`Captcha.setAutoSolve`, `Captcha.solve`).
-
-When `captcha` options are passed to `testUrl` / `testPage`, the solver is configured before navigation and `Captcha.solve` is called after navigation to wait for (or trigger) solving. The result is included in the `TestResult` as `captchaResult`.
-
-#### Captcha options
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `autoSolve` | `true` | Let BrightData auto-solve captchas after navigation |
-| `detectTimeout` | `30000` | How long (ms) the solver waits to detect a captcha |
-| `waitAfterNav` | `true` | Wait for captcha solving after `page.goto` in `testPage` |
-| `solverOptions` | `undefined` | Per-type config array (e.g. disable specific captcha types) |
-
-#### High-level usage (with `testUrl`)
-
-```javascript
-const result = await testUrl('https://site-with-captcha.com/', 'de', {
-    captcha: { detectTimeout: 15000 },
-});
-console.log(formatResult(result));
-// captchaResult.status: 'not_detected' | 'solve_finished' | 'solve_failed' | 'invalid' | 'error'
-```
-
-#### Mid-level usage (manual solve on an existing page)
-
-```javascript
-import { connectBrightData, injectAutoconsent, solveCaptcha } from './.cursor/skills/brightdata-testing/scripts/brightdata.mjs';
-
-const browser = await connectBrightData('de');
-const page = await browser.newPage();
-const cdpSession = await page.context().newCDPSession(page);
-const ctx = await injectAutoconsent(page);
-await page.goto('https://site-with-captcha.com/', { waitUntil: 'commit' });
-const captcha = await solveCaptcha(cdpSession, { detectTimeout: 20000 });
-console.log('Captcha status:', captcha.status);
-await ctx.waitForCompletion();
-await browser.close();
-```
-
-#### Disabling auto-solve or specific types
-
-```javascript
-import { configureCaptcha } from './.cursor/skills/brightdata-testing/scripts/brightdata.mjs';
-
-// Disable auto-solve entirely
-await configureCaptcha(cdpSession, false);
-
-// Disable only reCAPTCHA auto-solve
-await configureCaptcha(cdpSession, true, [{ type: 'usercaptcha', disabled: true }]);
-```
-
-#### CaptchaResult statuses
-
-| Status | Meaning |
-|--------|---------|
-| `solve_finished` | CAPTCHA was detected and solved successfully |
-| `not_detected` | No CAPTCHA found within `detectTimeout` |
-| `solve_failed` | CAPTCHA detected but solver failed (retry recommended) |
-| `invalid` | Something went wrong in the solver |
-| `error` | CDP command itself failed (network, session, etc.) |
 
 ## Regions
 
@@ -168,8 +104,7 @@ await configureCaptcha(cdpSession, true, [{ type: 'usercaptcha', disabled: true 
 
 ## Gotchas
 
-- **CAPTCHA auto-solve is on by default** — BrightData browsers solve CAPTCHAs automatically even without passing `captcha` options. Pass `captcha` options only when you need to wait for the result, adjust the detect timeout, or disable/configure specific solver types.
-- **`Captcha.solve` blocks until resolution** — it returns only after the captcha is solved, fails, or the detect timeout expires. Account for this in your overall timeout budget.
+- **CAPTCHA solving is automatic** — BrightData auto-solves CAPTCHAs. After navigation, `testPage` calls `Captcha.solve` via CDP to block until the solver finishes (or no captcha is detected), preventing autoconsent from timing out while the solver is busy.
 - **Call injection before `page.goto`** — `addScriptToEvaluateOnNewDocument` only applies to future navigations.
 - **Don't use `page.exposeBinding`/`page.evaluate` for the message channel** over CDP — they run in Playwright's utility context where CDP bindings aren't callable. Use raw CDP (`Runtime.addBinding` + `Runtime.evaluate`) instead.
 - **Short-lived iframe contexts** produce `Cannot find context` errors on `Runtime.evaluate` responses — expected and harmless (suppressed by `.catch(() => {})`).
