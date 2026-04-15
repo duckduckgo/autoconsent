@@ -168,6 +168,17 @@ export const snippets = {
             return rejectRe.test(t);
         };
         const scanOnce = () => {
+            const backdrop = document.querySelector('[data-ketch-backdrop="true"]');
+            if (backdrop instanceof HTMLElement) {
+                const cs = getComputedStyle(backdrop);
+                // Match prehide behavior: opacity may be 0 while the CMP is still present for detection.
+                if (cs.display !== 'none' && cs.visibility !== 'hidden') {
+                    const r = backdrop.getBoundingClientRect();
+                    if (r.width > 10 && r.height > 10) {
+                        return true;
+                    }
+                }
+            }
             let foundBannerChrome = false;
             walk(document, (node) => {
                 if (foundBannerChrome) return;
@@ -207,7 +218,18 @@ export const snippets = {
             });
             return found;
         };
-        const deadline = Date.now() + 2500;
+        if (scanOnce()) {
+            return true;
+        }
+        const host = location.hostname || '';
+        const onTimeCom = /(^|\.)time\.com$/i.test(host);
+        if (onTimeCom) {
+            const k = window.semaphore && window.semaphore.ketch;
+            if (k && typeof k.rejectAllConsent === 'function') {
+                return true;
+            }
+        }
+        const deadline = Date.now() + 2200;
         while (Date.now() < deadline) {
             if (scanOnce()) {
                 return true;
@@ -220,6 +242,24 @@ export const snippets = {
         return false;
     },
     EVAL_KETCH_OPT_OUT: () => {
+        const tryKetchApiReject = () => {
+            const deadline = Date.now() + 12000;
+            while (Date.now() < deadline) {
+                const k = window.semaphore && window.semaphore.ketch;
+                if (k && typeof k.rejectAllConsent === 'function') {
+                    k.rejectAllConsent(false);
+                    return true;
+                }
+                const spin = Date.now();
+                while (Date.now() - spin < 100) {
+                    /* wait for Ketch init */
+                }
+            }
+            return false;
+        };
+        if (tryKetchApiReject()) {
+            return true;
+        }
         const rejectRe =
             /\b(reject all|reject|decline all|decline|refuse all|refuse|deny all|deny|only necessary|necessary cookies only|use essential|essential only|alle ablehnen|alles ablehnen|tout refuser|refuser)\b/i;
         const manageRe =
@@ -298,6 +338,24 @@ export const snippets = {
         return tryReject(document);
     },
     EVAL_KETCH_OPT_IN: () => {
+        const tryKetchApiAccept = () => {
+            const deadline = Date.now() + 12000;
+            while (Date.now() < deadline) {
+                const k = window.semaphore && window.semaphore.ketch;
+                if (k && typeof k.acceptAllConsent === 'function') {
+                    k.acceptAllConsent(false);
+                    return true;
+                }
+                const spin = Date.now();
+                while (Date.now() - spin < 100) {
+                    /* wait for Ketch init */
+                }
+            }
+            return false;
+        };
+        if (tryKetchApiAccept()) {
+            return true;
+        }
         const acceptRe = /\b(accept all|accept|agree|allow all|allow|i agree|got it|ok|continue)\b/i;
         const collectElements = (root, acc) => {
             acc.push(root);
@@ -351,6 +409,9 @@ export const snippets = {
                 return true;
             }
             return keys.every((k) => {
+                if (k === 'essential_services') {
+                    return true;
+                }
                 const v = json[k];
                 return !v || v.status === 'denied' || v.status === 'opt_out';
             });

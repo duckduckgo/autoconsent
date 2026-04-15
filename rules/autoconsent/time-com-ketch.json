@@ -23,18 +23,10 @@
             "optional": true
         },
         {
-            "waitFor": "#ketch-consent-banner",
-            "timeout": 15000
-        },
-        {
             "eval": "EVAL_KETCH_OPT_OUT"
         }
     ],
     "optIn": [
-        {
-            "waitFor": "#ketch-consent-banner",
-            "timeout": 15000
-        },
         {
             "eval": "EVAL_KETCH_OPT_IN"
         }
