@@ -203,6 +203,22 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Shopify storefront privacy banner (`storefront-banner.js`): cookie may be HttpOnly; banner may stay in DOM hidden. */
+    EVAL_SHOPIFY_PRIVACY_BANNER_TEST: () => {
+        if (document.cookie.includes('_tracking_consent=')) return true;
+        const getConsent = window.Shopify?.customerPrivacy?.getTrackingConsent;
+        if (typeof getConsent === 'function') {
+            try {
+                const v = getConsent();
+                if (v === 'no') return true;
+            } catch {
+                /* fall through */
+            }
+        }
+        const el = document.getElementById('shopify-pc__banner');
+        if (!el) return true;
+        return window.getComputedStyle(el).display === 'none';
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
