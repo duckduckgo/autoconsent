@@ -1,0 +1,34 @@
+{
+    "name": "ring.com",
+    "_metadata": {
+        "vendorUrl": "https://ring.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://([a-z0-9-]+\\.)*ring\\.com/"
+    },
+    "prehideSelectors": [".consent-banner"],
+    "detectCmp": [{ "exists": "script#consent-script[src*=\"consent-manager\"]" }],
+    "detectPopup": [{ "visible": ".consent-banner .consent-banner-buttons" }],
+    "optIn": [{ "waitForThenClick": "button.consent--accept" }],
+    "optOut": [
+        { "waitForThenClick": "button.consent--manage" },
+        { "waitFor": ".consent-modal button.consent-save" },
+        {
+            "click": ".consent-bucket[data-bucket=analytics] input.consent-check:checked",
+            "optional": true
+        },
+        {
+            "click": ".consent-bucket[data-bucket=advertising] input.consent-check:checked",
+            "optional": true
+        },
+        {
+            "click": ".consent-bucket[data-bucket=essential] input.consent-check:not(:checked)",
+            "optional": true
+        },
+        { "waitForThenClick": "button.consent-save" },
+        { "waitForVisible": ".consent-banner", "check": "none" }
+    ],
+    "test": [{ "waitForVisible": ".consent-banner", "check": "none" }]
+}
