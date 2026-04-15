@@ -204,7 +204,23 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_OSANO_DETECT_CMP: () =>
-        !!document.querySelector('script[src*="cmp.osano.com"]') || (typeof window.Osano === 'function' && !!window.Osano),
+        !!document.querySelector(
+            'script[src*="cmp.osano.com"],script[src*="osano.js"],script[src*="/osano"],link[href*="osano"]',
+        ) ||
+        typeof window.Osano === 'function' ||
+        !!document.querySelector('.osano-cm-window'),
+    /** True when the Osano banner or dialog is visibly on screen (API may lag before Osano.cm exists). */
+    EVAL_OSANO_POPUP_OPEN: () => {
+        if (window.Osano?.cm?.dialogOpen) {
+            return true;
+        }
+        const w = document.querySelector('.osano-cm-window');
+        if (!w) {
+            return false;
+        }
+        const cs = window.getComputedStyle(w);
+        return cs.display !== 'none' && cs.visibility !== 'hidden' && cs.opacity !== '0';
+    },
     EVAL_OSANO_DIALOG_OPEN: () => !!(window.Osano && window.Osano.cm && window.Osano.cm.dialogOpen),
     EVAL_OSANO_UNCHECK_OPTIONAL_COOKIES: () => {
         const root = document.querySelector('.osano-cm-window');
@@ -230,6 +246,13 @@ export const snippets = {
     },
     /** Osano CMP: dismiss notice-style dialog (no reject / manage controls). */
     EVAL_OSANO_OPTOUT_CLOSE_ONLY: () => {
+        const deny = document.querySelector(
+            '.osano-cm-denyAll,.osano-cm-deny,button[class*="osano-cm-deny"],button[class*="osano-cm-reject"]',
+        );
+        if (deny) {
+            deny.click();
+            return true;
+        }
         const close = document.querySelector('button.osano-cm-dialog__close');
         if (close) {
             close.click();
@@ -278,6 +301,14 @@ export const snippets = {
     },
     /** Osano CMP: banner dismissed, or optional categories denied after manage flow. */
     EVAL_OSANO_TEST: () => {
+        const win = document.querySelector('.osano-cm-window');
+        if (win) {
+            const cs = window.getComputedStyle(win);
+            const visuallyHidden = cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0';
+            if (visuallyHidden) {
+                return true;
+            }
+        }
         if (!document.querySelector('.osano-cm-dialog')) {
             return true;
         }

@@ -3,27 +3,32 @@
     "_metadata": {
         "vendorUrl": "https://www.osano.com/"
     },
-    "prehideSelectors": [".osano-cm-window__dialog.osano-cm-dialog"],
-    "detectCmp": [{ "eval": "EVAL_OSANO_DETECT_CMP" }],
+    "prehideSelectors": [".osano-cm-window__dialog.osano-cm-dialog,.osano-cm-dialog:not(.osano-cm-dialog--hidden)"],
+    "detectCmp": [
+        {
+            "any": [{ "eval": "EVAL_OSANO_DETECT_CMP" }, { "exists": ".osano-cm-window" }]
+        }
+    ],
     "detectPopup": [
         {
             "any": [
+                { "eval": "EVAL_OSANO_POPUP_OPEN" },
+                { "eval": "EVAL_OSANO_DIALOG_OPEN" },
                 { "visible": ".osano-cm-window .osano-cm-button--type_deny" },
                 { "visible": ".osano-cm-window .osano-cm-button--type_accept" },
-                { "visible": ".osano-cm-window .osano-cm-manage" },
-                { "eval": "EVAL_OSANO_DIALOG_OPEN" }
+                { "visible": ".osano-cm-window .osano-cm-manage" }
             ]
         }
     ],
     "optOut": [
         {
             "if": {
-                "visible": ".osano-cm-window .osano-cm-button--type_deny,button[class*=\"osano-cm-deny\"],button[class*=\"osano-cm-reject\"]",
+                "visible": ".osano-cm-window .osano-cm-button--type_deny,button[class*=\"osano-cm-deny\"],button[class*=\"osano-cm-reject\"],.osano-cm-denyAll,.osano-cm-deny",
                 "check": "any"
             },
             "then": [
                 {
-                    "waitForThenClick": ".osano-cm-window .osano-cm-button--type_deny,button[class*=\"osano-cm-deny\"],button[class*=\"osano-cm-reject\"]"
+                    "waitForThenClick": ".osano-cm-window .osano-cm-button--type_deny,button[class*=\"osano-cm-deny\"],button[class*=\"osano-cm-reject\"],.osano-cm-denyAll,.osano-cm-deny"
                 }
             ],
             "else": [
