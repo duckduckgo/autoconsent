@@ -3,6 +3,7 @@
     "_metadata": {
         "vendorUrl": "https://transcend.io/"
     },
+    "prehideSelectors": ["#transcend-consent-manager"],
     "detectCmp": [{ "exists": "#transcend-consent-manager" }],
     "detectPopup": [{ "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"] }],
     "optIn": [{ "eval": "EVAL_TRANSCEND_ACCEPT" }],
