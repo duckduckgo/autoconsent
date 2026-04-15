@@ -28,21 +28,69 @@ The project must be built before running tests:
 npm run prepublish
 ```
 
-## Running the Test Script
+## Library API
 
-```bash
-npx ts-node --transpile-only scripts/brightdata-test.ts [options] <url> [url2] ...
+The utility functions are in `scripts/brightdata.ts` (relative to this skill folder). Import them in any TypeScript script using `ts-node --transpile-only`.
+
+### Quick usage — test a URL across regions
+
+```typescript
+import { testUrl, formatResult, REGIONS } from './.cursor/skills/brightdata-testing/scripts/brightdata';
+
+for (const region of Object.keys(REGIONS)) {
+    const result = await testUrl('https://www.wohnen.de/', region);
+    console.log(formatResult(result));
+}
 ```
 
-### Options
+### Functions
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--regions <list>` | Comma-separated region keys | All regions |
-| `--action <action>` | `optOut` or `optIn` | `optOut` |
-| `--screenshots <dir>` | Screenshot output directory | `test-results/brightdata` |
+#### `testUrl(url, region, options?): Promise<TestResult>`
 
-### Available Regions
+Highest-level function. Connects to BrightData, opens a page, navigates to the URL, injects autoconsent in an isolated world, waits for completion, takes a final screenshot, and closes the browser.
+
+```typescript
+const result = await testUrl('https://www.wohnen.de/', 'de');
+// result.cmpDetected === 'Cybotcookiebot'
+// result.optOutResult === true
+```
+
+#### `testPage(page, url, region, options?): Promise<TestResult>`
+
+Same as `testUrl` but takes an already-connected Playwright `Page`. Use when you want to manage the browser lifecycle yourself (e.g., reusing a connection, inspecting the page after the test).
+
+```typescript
+import { connectBrightData, testPage } from './.cursor/skills/brightdata-testing/scripts/brightdata';
+
+const browser = await connectBrightData('de');
+const page = await browser.newPage();
+const result = await testPage(page, 'https://www.wohnen.de/', 'de');
+// ... inspect page, take screenshots, etc.
+await browser.close();
+```
+
+#### `connectBrightData(region): Promise<Browser>`
+
+Connect to a BrightData remote browser for a specific region. Returns a Playwright `Browser` instance connected via CDP.
+
+#### `injectAutoconsent(page, options?): Promise<AutoconsentContext>`
+
+Low-level injection. Sets up CDP bindings and injects autoconsent into the page's isolated world. Call this **before** navigating to the target URL. Returns an `AutoconsentContext` for tracking messages.
+
+```typescript
+const ctx = await injectAutoconsent(page, { action: 'optOut' });
+await page.goto('https://www.wohnen.de/', { waitUntil: 'commit' });
+const completed = await ctx.waitForCompletion(45000);
+const result = ctx.collectResult('https://www.wohnen.de/', 'de');
+```
+
+#### `formatResult(result): string`
+
+Format a `TestResult` as a human-readable string with pass/fail status indicator.
+
+#### `REGIONS`
+
+Map of region keys to BrightData username suffixes:
 
 | Key | Location |
 |-----|----------|
@@ -55,79 +103,63 @@ npx ts-node --transpile-only scripts/brightdata-test.ts [options] <url> [url2] .
 | `ca` | Canada |
 | `au` | Australia |
 
-### Examples
+### AutoconsentContext
 
-Test a single URL across all regions:
-```bash
-npx ts-node --transpile-only scripts/brightdata-test.ts https://www.wohnen.de/
-```
+Returned by `injectAutoconsent()`. Provides:
 
-Test specific regions:
-```bash
-npx ts-node --transpile-only scripts/brightdata-test.ts --regions de,gb,us-ny https://www.wohnen.de/
-```
+- `received` — array of all `ContentScriptMessage` objects received
+- `hasMessage(type)` — check if a specific message type was received
+- `waitForCompletion(timeout)` — wait for `autoconsentDone` + `optOutResult`/`optInResult`
+- `waitForMessage(type, timeout)` — wait for a specific message type
+- `collectResult(url, region)` — collect messages into a `TestResult`
 
-Test opt-in flow:
-```bash
-npx ts-node --transpile-only scripts/brightdata-test.ts --action optIn --regions de https://www.wohnen.de/
+### TestOptions
+
+```typescript
+{
+    action: 'optOut' | 'optIn',        // default: 'optOut'
+    screenshotsDir: string,            // default: 'test-results/brightdata'
+    navigationTimeout: number,         // default: 45000
+    completionTimeout: number,         // default: 45000
+}
 ```
 
 ## Interpreting Results
 
-The script outputs structured results per URL per region:
+The `TestResult` type has these key fields:
 
-- **PASS**: CMP detected, popup found, opt-out/opt-in succeeded, self-test passed.
-- **PARTIAL**: CMP detected but opt-out didn't complete (indicates a broken rule).
-- **OPT-OUT FAILED**: Rule ran but opt-out returned false.
-- **NO CMP**: No cookie consent popup detected in this region (expected for some regions like US on EU-only CMPs).
+- **cmpDetected**: Name of the detected CMP, or null
+- **popupFound**: Whether the cookie popup was visible
+- **optOutResult**: Whether opt-out succeeded (true/false/null)
+- **selfTestResult**: Whether the post-opt-out self-test passed
+- **autoconsentDone**: Whether the full flow completed
+- **isCosmetic**: Whether the rule used CSS hiding instead of clicking
+- **errors**: Array of error messages
 
-### Key Messages
+`formatResult()` uses these status indicators:
 
-| Message | Meaning |
-|---------|---------|
-| `cmpDetected` | A CMP rule matched the page |
-| `popupFound` | The cookie popup is visible |
-| `optOutResult: true` | Opt-out buttons were clicked successfully |
-| `selfTestResult: true` | Post-opt-out verification passed |
-| `autoconsentDone` | Full autoconsent flow completed |
-
-### Screenshots
-
-Screenshots are saved at each lifecycle stage:
-- `*-cmpDetected.jpg` — when CMP is first detected
-- `*-popupFound.jpg` — when popup becomes visible
-- `*-result.jpg` — after opt-out/opt-in action
-- `*-done.jpg` — after autoconsent completes
-- `*-final.jpg` — final page state
-
-### JSON Results
-
-Detailed JSON results are written to `test-results/brightdata/results.json`.
+| Status | Meaning |
+|--------|---------|
+| ✅ PASS | CMP detected, opt-out succeeded |
+| ⚠️ PARTIAL | CMP detected but flow didn't complete |
+| ❌ OPT-OUT FAILED | Flow completed but opt-out returned false |
+| ⬚ NO CMP | No cookie consent popup detected |
 
 ## Testing Workflow for Rule Changes
 
-1. **Build the project** to include your rule changes:
-   ```bash
-   npm run prepublish
-   ```
+1. **Build** to include rule changes: `npm run prepublish`
+2. **Find test URLs** from `data/coverage.json` or the CMP's test spec in `tests/`
+3. **Run across all regions** using `testUrl()` in a script
+4. **Interpret**:
+   - All PASS: rule works everywhere
+   - Some NO CMP: expected for region-specific CMPs (e.g., EU-only)
+   - Any PARTIAL or FAILED: rule broken in that region — fix and re-test
+5. **Iterate**: fix, rebuild, re-test
 
-2. **Find test URLs**: Use `data/coverage.json` or the test spec in `tests/` for the CMP you're modifying. Prefer URLs from the CMP's test spec.
+## Technical Notes
 
-3. **Run across all regions**:
-   ```bash
-   npx ts-node --transpile-only scripts/brightdata-test.ts <url>
-   ```
-
-4. **Interpret results**:
-   - **All PASS**: Rule works across all regions.
-   - **Some NO CMP**: Expected if the CMP only shows in certain regions (e.g., EU-only). Verify this matches the CMP's expected behavior.
-   - **Any PARTIAL or FAILED**: Rule is broken in that region. Inspect screenshots and fix.
-
-5. **Iterate**: Fix the rule, rebuild (`npm run prepublish`), and re-test.
-
-## Limitations
-
-- BrightData blocks certain site categories (e.g., gaming sites). If a test URL is blocked, you'll see a navigation error. Use an alternative URL for the same CMP.
-- The script injects autoconsent in a CDP isolated world (matching how Chrome extensions isolate content scripts from page JS). Eval snippets that check page globals (e.g. `window.Cookiebot`) are explicitly routed to the main world.
-- Some sites may detect automated browsers and show different behavior. The script uses a standard Chrome user agent.
-- Each region test creates a new BrightData browser session, so tests run sequentially per region.
+- Autoconsent is injected into a **CDP isolated world** (matching Chrome extension content script isolation). Eval snippets that check page globals (e.g. `window.Cookiebot`) are routed to the main world via `page.evaluate()`.
+- `page.exposeBinding()` doesn't work with `connectOverCDP`. The script uses `Runtime.addBinding` (global) + `Page.addScriptToEvaluateOnNewDocument` (with `worldName`) instead.
+- `event.executionContextId` from `Runtime.bindingCalled` is used to route responses back to the correct isolated world context.
+- BrightData blocks certain site categories (e.g., gaming sites). If a test URL is blocked, use an alternative URL for the same CMP.
+- Each region test creates a new BrightData browser session.

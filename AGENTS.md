@@ -349,13 +349,7 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 
 ## Multi-Region Testing with BrightData
 
-All rule changes must be tested across geographic regions to handle GDPR/CCPA/regional popup variations. Use the `/brightdata-testing` skill for this. The skill describes how to run `scripts/brightdata-test.ts` against BrightData remote browsers from 8 regions (US-NY, US-LA, DE, FR, GB, NL, CA, AU).
-
-Quick start:
-```bash
-npm run prepublish
-npx ts-node --transpile-only scripts/brightdata-test.ts https://example.com/
-```
+All rule changes must be tested across geographic regions to handle GDPR/CCPA/regional popup variations. Use the `/brightdata-testing` skill for this. The skill provides a library of utility functions (`.cursor/skills/brightdata-testing/scripts/brightdata.ts`) for connecting to BrightData remote browsers and testing autoconsent across 8 regions (US-NY, US-LA, DE, FR, GB, NL, CA, AU).
 
 Requires `BRIGHTDATA_WEBACCESS_USER`, `BRIGHTDATA_WEBACCESS_PASSWORD`, and `BRIGHTDATA_WEBACCESS_HOST` environment variables.
 
@@ -366,5 +360,4 @@ Requires `BRIGHTDATA_WEBACCESS_USER`, `BRIGHTDATA_WEBACCESS_PASSWORD`, and `BRIG
 | Schema + formatting | `npm run lint` |
 | Unit tests | `npm run test:lib` |
 | Single CMP E2E test | `npx playwright test tests/<cmp>.spec.ts --project webkit` |
-| Multi-region test | `npx ts-node --transpile-only scripts/brightdata-test.ts <url>` |
 | Full E2E suite | `npm run test` |
