@@ -1,0 +1,28 @@
+{
+    "name": "bbb.org",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?bbb\\.org"
+    },
+    "prehideSelectors": ["iabbb-cookies-message"],
+    "detectCmp": [{ "exists": "iabbb-cookies-message" }],
+    "detectPopup": [{ "visible": "iabbb-cookies-message" }],
+    "optIn": [{ "waitForThenClick": "iabbb-cookies-message button[name=\"allow-all\"]" }],
+    "optOut": [
+        {
+            "if": { "exists": "iabbb-cookies-message .actions > a[href*=\"manage-cookies\"]" },
+            "then": [{ "waitForThenClick": "iabbb-cookies-message .actions > a[href*=\"manage-cookies\"]" }],
+            "else": [{ "waitForThenClick": "iabbb-cookies-message .actions > button:not([name=\"allow-all\"])" }]
+        },
+        { "waitFor": "input[name=\"functional\"][value=\"false\"]" },
+        { "waitForThenClick": "input[type=\"radio\"][name=\"functional\"][value=\"false\"]" },
+        { "waitForThenClick": "input[type=\"radio\"][name=\"performance\"][value=\"false\"]" },
+        { "waitForThenClick": "input[type=\"radio\"][name=\"marketing\"][value=\"false\"]" },
+        { "waitForThenClick": "xpath///button[contains(., 'Save Changes')]" }
+    ],
+    "test": [
+        { "wait": 1500 },
+        { "cookieContains": "%22marketing%22%3Afalse" },
+        { "cookieContains": "%22performance%22%3Afalse" },
+        { "cookieContains": "%22functional%22%3Afalse" }
+    ]
+}
