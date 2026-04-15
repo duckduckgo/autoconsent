@@ -185,7 +185,7 @@ export async function injectAutoconsent(page, options = {}) {
     async function waitForCompletion(timeout = 45000) {
         const start = Date.now();
         while (Date.now() - start < timeout) {
-            if (hasMessage('autoconsentDone') && (hasMessage('optOutResult') || hasMessage('optInResult'))) {
+            if (hasMessage('optOutResult') || hasMessage('optInResult')) {
                 return true;
             }
             if (Date.now() - start > 15000 && !hasMessage('cmpDetected')) {
@@ -354,10 +354,11 @@ export async function testUrl(url, regionKey, options = {}) {
  */
 export function formatResult(result) {
     const actionResult = result.optOutResult ?? result.optInResult;
+    const actionAttempted = result.optOutResult !== null || result.optInResult !== null;
     let status;
-    if (result.autoconsentDone && actionResult) status = 'PASS';
-    else if (result.cmpDetected && !result.autoconsentDone) status = 'PARTIAL';
-    else if (result.cmpDetected && result.autoconsentDone && !actionResult) status = 'ACTION FAILED';
+    if (actionAttempted && actionResult) status = 'PASS';
+    else if (actionAttempted && !actionResult) status = 'ACTION FAILED';
+    else if (result.cmpDetected) status = 'PARTIAL';
     else status = 'NO CMP';
 
     const parts = [
