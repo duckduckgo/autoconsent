@@ -4,6 +4,13 @@
     "detectCmp": [{ "exists": "#hs-banner-parent" }],
     "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
     "optIn": [{ "waitForThenClick": "#hs-eu-confirmation-button" }],
-    "optOut": [{ "waitForThenClick": "#hs-eu-decline-button" }],
+    "optOut": [
+        { "waitForThenClick": "#hs-eu-decline-button" },
+        {
+            "waitForVisible": "#hs-eu-cookie-confirmation",
+            "timeout": 3000,
+            "check": "none"
+        }
+    ],
     "test": [{ "eval": "EVAL_HUBSPOT_COOKIE_BANNER_TEST" }]
 }
