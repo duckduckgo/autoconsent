@@ -1,6 +1,9 @@
 {
     "name": "Osano",
-    "prehideSelectors": [".osano-cm-window"],
+    "_metadata": {
+        "vendorUrl": "https://www.osano.com/"
+    },
+    "prehideSelectors": [".osano-cm-window__dialog.osano-cm-dialog"],
     "detectCmp": [{ "eval": "EVAL_OSANO_DETECT_CMP" }],
     "detectPopup": [
         {
@@ -14,34 +17,56 @@
     ],
     "optOut": [
         {
-            "if": { "exists": ".osano-cm-window .osano-cm-button--type_deny" },
-            "then": [{ "waitForThenClick": ".osano-cm-window .osano-cm-button--type_deny" }],
+            "if": {
+                "visible": ".osano-cm-window .osano-cm-button--type_deny,button[class*=\"osano-cm-deny\"],button[class*=\"osano-cm-reject\"]",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".osano-cm-window .osano-cm-button--type_deny,button[class*=\"osano-cm-deny\"],button[class*=\"osano-cm-reject\"]"
+                }
+            ],
             "else": [
                 {
-                    "if": { "exists": ".osano-cm-window .osano-cm-manage" },
+                    "if": {
+                        "visible": ".osano-cm-window .osano-cm-manage,button.osano-cm-manage",
+                        "check": "any"
+                    },
                     "then": [
-                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage,button.osano-cm-manage" },
                         { "wait": 500 },
                         { "eval": "EVAL_OSANO_UNCHECK_OPTIONAL_COOKIES" },
-                        { "waitForThenClick": ".osano-cm-window .osano-cm-save" }
-                    ]
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-save,button.osano-cm-save" }
+                    ],
+                    "else": [{ "eval": "EVAL_OSANO_OPTOUT_CLOSE_ONLY" }]
                 }
             ]
         }
     ],
     "optIn": [
         {
-            "if": { "exists": ".osano-cm-window .osano-cm-button--type_accept" },
-            "then": [{ "waitForThenClick": ".osano-cm-window .osano-cm-button--type_accept" }],
+            "if": {
+                "visible": ".osano-cm-window .osano-cm-button--type_accept,button[class*=\"osano-cm-acceptAll\"],button[class*=\"osano-cm-accept\"]",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".osano-cm-window .osano-cm-button--type_accept,button[class*=\"osano-cm-acceptAll\"],button[class*=\"osano-cm-accept\"]"
+                }
+            ],
             "else": [
                 {
-                    "if": { "exists": ".osano-cm-window .osano-cm-manage" },
+                    "if": {
+                        "visible": ".osano-cm-window .osano-cm-manage,button.osano-cm-manage",
+                        "check": "any"
+                    },
                     "then": [
-                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage,button.osano-cm-manage" },
                         { "wait": 500 },
                         { "eval": "EVAL_OSANO_CHECK_OPTIONAL_COOKIES" },
-                        { "waitForThenClick": ".osano-cm-window .osano-cm-save" }
-                    ]
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-save,button.osano-cm-save" }
+                    ],
+                    "else": [{ "eval": "EVAL_OSANO_OPTIN" }]
                 }
             ]
         }

@@ -212,6 +212,9 @@ export const snippets = {
             return true;
         }
         root.querySelectorAll('input.osano-cm-toggle__input:checked:not(:disabled)').forEach((el) => el.click());
+        root.querySelectorAll(
+            '.osano-cm-info-dialog:not(.osano-cm-info-dialog--hidden) input.osano-cm-input[type="checkbox"]:checked:not(:disabled)',
+        ).forEach((el) => el.click());
         return true;
     },
     EVAL_OSANO_CHECK_OPTIONAL_COOKIES: () => {
@@ -220,20 +223,78 @@ export const snippets = {
             return true;
         }
         root.querySelectorAll('input.osano-cm-toggle__input:not(:checked):not(:disabled)').forEach((el) => el.click());
+        root.querySelectorAll(
+            '.osano-cm-info-dialog:not(.osano-cm-info-dialog--hidden) input.osano-cm-input[type="checkbox"]:not(:checked):not(:disabled)',
+        ).forEach((el) => el.click());
         return true;
     },
-    EVAL_OSANO_TEST: () => {
-        const cm = window.Osano && window.Osano.cm;
-        if (!cm || typeof cm.getConsent !== 'function') {
-            return false;
+    /** Osano CMP: dismiss notice-style dialog (no reject / manage controls). */
+    EVAL_OSANO_OPTOUT_CLOSE_ONLY: () => {
+        const close = document.querySelector('button.osano-cm-dialog__close');
+        if (close) {
+            close.click();
+            return true;
         }
-        const c = cm.getConsent();
-        return (
-            c.MARKETING === 'DENY' &&
-            c.ANALYTICS === 'DENY' &&
-            c.PERSONALIZATION === 'DENY' &&
-            (c.STORAGE === 'DENY' || c.STORAGE === 'ACCEPT')
-        );
+        const cm = window.Osano?.cm;
+        if (cm && typeof cm.hideDialog === 'function') {
+            cm.hideDialog();
+            return true;
+        }
+        return false;
+    },
+    /** Osano CMP: opt-in when the JSON rule has no matching accept/manage buttons (e.g. close-only notice). */
+    EVAL_OSANO_OPTIN: () => {
+        const accept = document.querySelector('button[class*="osano-cm-acceptAll"],button[class*="osano-cm-accept"]');
+        if (accept) {
+            accept.click();
+            return true;
+        }
+        const manage = document.querySelector('button.osano-cm-manage');
+        if (manage) {
+            manage.click();
+            const dialog = document.querySelector('.osano-cm-info-dialog:not(.osano-cm-info-dialog--hidden)');
+            if (!dialog) {
+                return false;
+            }
+            dialog.querySelectorAll('input.osano-cm-input[type="checkbox"]').forEach((inp) => {
+                if (!inp.checked && !inp.disabled) {
+                    inp.click();
+                }
+            });
+            dialog.querySelector('button.osano-cm-save')?.click();
+            return true;
+        }
+        const closeOnly = document.querySelector('button.osano-cm-dialog__close');
+        if (closeOnly) {
+            closeOnly.click();
+            return true;
+        }
+        const cmOnly = window.Osano?.cm;
+        if (cmOnly && typeof cmOnly.hideDialog === 'function') {
+            cmOnly.hideDialog();
+            return true;
+        }
+        return false;
+    },
+    /** Osano CMP: banner dismissed, or optional categories denied after manage flow. */
+    EVAL_OSANO_TEST: () => {
+        if (!document.querySelector('.osano-cm-dialog')) {
+            return true;
+        }
+        const cm = window.Osano?.cm;
+        if (cm?.dialogOpen === false) {
+            return true;
+        }
+        if (typeof cm?.getConsent === 'function') {
+            const c = cm.getConsent();
+            return (
+                c.MARKETING === 'DENY' &&
+                c.ANALYTICS === 'DENY' &&
+                c.PERSONALIZATION === 'DENY' &&
+                (c.STORAGE === 'DENY' || c.STORAGE === 'ACCEPT')
+            );
+        }
+        return false;
     },
 };
 
