@@ -278,10 +278,6 @@ export const snippets = {
         return false;
     },
     EVAL_ALASKAAIR_CC3_TEST: () => {
-        const root = document.documentElement;
-        if (root.classList.contains('show--consent') || root.classList.contains('show--preferences')) {
-            return false;
-        }
         const m = document.cookie.match(/(?:^|;\s*)cc_cookie=([^;]+)/);
         if (m) {
             try {
@@ -300,6 +296,10 @@ export const snippets = {
             } catch (_e) {
                 return false;
             }
+        }
+        const root = document.documentElement;
+        if (root.classList.contains('show--consent') || root.classList.contains('show--preferences')) {
+            return false;
         }
         if (typeof CookieConsent !== 'object' || typeof CookieConsent.getConfig !== 'function') {
             return true;

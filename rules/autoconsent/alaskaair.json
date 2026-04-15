@@ -10,14 +10,14 @@
     "prehideSelectors": ["#cc-main"],
     "detectCmp": [
         {
-            "any": [
-                { "exists": "script[src*='tags.tiqcdn.com/utag/alaska/'][src$='utag.js']" },
-                { "exists": "script[src*='//tags.tiqcdn.com/utag/alaska/'][src$='utag.js']" }
-            ]
+            "exists": "script[src*='tiqcdn.com/utag/alaska/']"
         }
     ],
     "detectPopup": [{ "eval": "EVAL_ALASKAAIR_CC3_POPUP" }],
-    "optIn": [{ "eval": "EVAL_ALASKAAIR_CC3_OPT_IN" }],
+    "optIn": [
+        { "waitForThenClick": "#cc-main button[data-role=\"all\"]", "optional": true, "timeout": 3000 },
+        { "eval": "EVAL_ALASKAAIR_CC3_OPT_IN" }
+    ],
     "optOut": [
         { "eval": "EVAL_ALASKAAIR_CC3_OPT_OUT" },
         {
