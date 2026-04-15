@@ -355,3 +355,12 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 | Unit tests | `npm run test:lib` |
 | Single CMP E2E test | `npx playwright test tests/<cmp>.spec.ts --project webkit` |
 | Full E2E suite | `npm run test` |
+
+## Cursor Cloud specific instructions
+
+- **Build before lint/test:** `npm ci` triggers the `prepublish` script automatically, which compiles the filterlist, builds rules, and bundles everything. No separate build step is needed after install.
+- **Playwright browsers:** After `npm ci`, run `npx playwright install --with-deps` to install browser binaries (WebKit, Chromium, Firefox) and their OS-level dependencies. This is required for both E2E tests (`npm run test`) and unit tests (`npm run test:lib`, which uses `@web/test-runner-playwright`).
+- **E2E tests hit live websites:** Playwright E2E tests navigate to real sites and are inherently flaky. "No CMP detected" failures are common when running without a geographic proxy (most cookie popups only appear in EU regions). Use `REGION` and `PROXY_SERVER` env vars for region-specific testing — see the "Testing Across Regions" section above.
+- **Unit tests are the reliable CI gate:** `npm run lint` and `npm run test:lib` are the two checks that GitHub Actions CI runs on every push/PR. These should always pass.
+- **No backend services required:** This is a client-side library with no databases, APIs, or Docker dependencies. The full dev environment is Node.js + npm dependencies + Playwright browsers.
+- **Watch mode:** `npm run watch` auto-rebuilds on changes to `lib/`, `addon/`, `rules/`. Use this during active development. It runs the full `prepublish` pipeline on each file change.
