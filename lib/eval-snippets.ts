@@ -204,34 +204,51 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     /**
-     * HubSpot compliance banner: __hs_cookie_cat_pref (e.g. 1:false_2:false_3:false for reject non-essential).
+     * HubSpot compliance banner: __hs_cookie_cat_pref encodes category toggles; format varies by locale.
+     * Fall back to DOM when the cookie is missing (e.g. async write) but the banner is dismissed.
      */
     EVAL_HUBSPOT_COOKIE_BANNER_TEST: () => {
         const raw = document.cookie
             .split(';')
             .map((c) => c.trim())
             .find((c) => c.startsWith('__hs_cookie_cat_pref='));
-        if (!raw) {
+        if (raw) {
+            let v = raw.split('=', 2)[1];
+            try {
+                v = decodeURIComponent(v);
+            } catch {
+                return false;
+            }
+            if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+                v = v.slice(1, -1);
+            }
+            const segments = v.split('_').filter(Boolean);
+            if (segments.length === 0) {
+                return false;
+            }
+            const lastToken = (s) => {
+                const i = s.lastIndexOf(':');
+                return i === -1 ? s : s.slice(i + 1);
+            };
+            const bools = segments.map((s) => lastToken(s).toLowerCase());
+            const falsy = bools.filter((b) => b === 'false' || b === '0' || b === 'no');
+            const truthy = bools.filter((b) => b === 'true' || b === '1' || b === 'yes');
+            if (falsy.length > 0 && truthy.length === 0) {
+                return true;
+            }
+        }
+        if (document.body.classList.contains('hs-banner--visible')) {
             return false;
         }
-        let v = raw.split('=', 2)[1];
-        try {
-            v = decodeURIComponent(v);
-        } catch {
-            return false;
+        const confirmation = document.getElementById('hs-eu-cookie-confirmation');
+        if (!confirmation) {
+            return true;
         }
-        if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
-            v = v.slice(1, -1);
+        const style = window.getComputedStyle(confirmation);
+        if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity) === 0) {
+            return true;
         }
-        const segments = v.split('_');
-        if (segments.length < 3) {
-            return false;
-        }
-        const lastToken = (s) => {
-            const i = s.lastIndexOf(':');
-            return i === -1 ? s : s.slice(i + 1);
-        };
-        return segments.slice(0, 3).every((s) => lastToken(s).toLowerCase() === 'false');
+        return confirmation.offsetParent === null;
     },
 };
 
