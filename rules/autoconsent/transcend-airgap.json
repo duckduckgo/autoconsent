@@ -1,0 +1,32 @@
+{
+    "name": "transcend-airgap",
+    "prehideSelectors": ["#transcend-consent-manager"],
+    "detectCmp": [{ "eval": "EVAL_TRANSCEND_AIRGAP_DETECT_CMP" }],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"], "check": "any" },
+                { "eval": "EVAL_TRANSCEND_AIRGAP_DETECT_POPUP" }
+            ]
+        }
+    ],
+    "optOut": [
+        { "wait": 500 },
+        {
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog button.button"],
+            "timeout": 20000
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": ["#transcend-consent-manager", "#consentManagerMainDialog"] },
+            "then": [
+                {
+                    "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog button.button"],
+                    "timeout": 20000
+                }
+            ]
+        }
+    ],
+    "test": [{ "wait": 500 }, { "eval": "EVAL_TRANSCEND_AIRGAP_TEST" }]
+}

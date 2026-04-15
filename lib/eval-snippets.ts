@@ -203,6 +203,24 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+
+    /** Transcend consent manager (airgap.js) — host + open shadow root */
+    EVAL_TRANSCEND_AIRGAP_DETECT_CMP: () => !!document.getElementById('transcend-consent-manager') || typeof window.airgap === 'object',
+    /** Main consent dialog is present inside the shadow root */
+    EVAL_TRANSCEND_AIRGAP_DETECT_POPUP: () => {
+        const host = document.getElementById('transcend-consent-manager');
+        const dlg = host?.shadowRoot?.querySelector('#consentManagerMainDialog[role="region"]');
+        return !!dlg;
+    },
+    /** Banner dismissed: dialog removed from shadow tree (Transcend replaces it after Close) */
+    EVAL_TRANSCEND_AIRGAP_TEST: () => {
+        const host = document.getElementById('transcend-consent-manager');
+        if (!host?.shadowRoot) {
+            return true;
+        }
+        const dlg = host.shadowRoot.querySelector('#consentManagerMainDialog[role="region"]');
+        return !dlg;
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
