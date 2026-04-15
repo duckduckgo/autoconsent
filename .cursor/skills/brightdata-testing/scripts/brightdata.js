@@ -196,9 +196,24 @@ async function injectAutoconsent(page, options = {}) {
                     autoAction: opts.action,
                     disabledCmps: [],
                     enablePrehide: true,
-                    detectRetries: 20,
                     enableCosmeticRules: true,
+                    enableGeneratedRules: true,
+                    detectRetries: 20,
+                    isMainWorld: false,
+                    prehideTimeout: 2000,
+                    enableFilterList: false,
+                    enableHeuristicDetection: true,
+                    enableHeuristicAction: true,
                     visualTest: false,
+                    logs: {
+                        lifecycle: true,
+                        rulesteps: false,
+                        detectionsteps: false,
+                        evals: false,
+                        errors: true,
+                        messages: false,
+                        waits: false,
+                    },
                 };
                 try {
                     await sendToIsolatedWorld(
