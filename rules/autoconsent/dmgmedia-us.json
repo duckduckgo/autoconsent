@@ -1,0 +1,12 @@
+{
+    "name": "dmgmedia-us",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dailymail\\.co\\.uk/ushome"
+    },
+    "prehideSelectors": [".mol-ads-cmp"],
+    "detectCmp": [{ "exists": ".mol-ads-cmp" }],
+    "detectPopup": [{ "exists": "form.mol-ads-cmp--banner button.mol-ads-cmp--btn-primary" }],
+    "optIn": [{ "waitForThenClick": "button.mol-ads-cmp--btn-primary" }],
+    "optOut": [{ "hide": ".mol-ads-cmp" }]
+}
