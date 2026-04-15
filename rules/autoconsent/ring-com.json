@@ -10,25 +10,14 @@
     },
     "prehideSelectors": [".consent-banner"],
     "detectCmp": [{ "exists": "script#consent-script[src*=\"consent-manager\"]" }],
-    "detectPopup": [{ "visible": ".consent-banner .consent-banner-buttons" }],
-    "optIn": [{ "waitForThenClick": "button.consent--accept" }],
+    "detectPopup": [{ "visible": "body.has-banner .consent-banner" }],
+    "optIn": [{ "waitForThenClick": "button.consent--accept", "timeout": 10000 }],
     "optOut": [
-        { "waitForThenClick": "button.consent--manage" },
-        { "waitFor": ".consent-modal button.consent-save" },
         {
-            "click": ".consent-bucket[data-bucket=analytics] input.consent-check:checked",
-            "optional": true
-        },
-        {
-            "click": ".consent-bucket[data-bucket=advertising] input.consent-check:checked",
-            "optional": true
-        },
-        {
-            "click": ".consent-bucket[data-bucket=essential] input.consent-check:not(:checked)",
-            "optional": true
-        },
-        { "waitForThenClick": "button.consent-save" },
-        { "waitForVisible": ".consent-banner", "check": "none" }
+            "if": { "exists": "button.consent--reject" },
+            "then": [{ "waitForThenClick": "button.consent--reject", "timeout": 10000 }],
+            "else": [{ "eval": "EVAL_RING_CONSENT_OPT_OUT" }]
+        }
     ],
-    "test": [{ "waitForVisible": ".consent-banner", "check": "none" }]
+    "test": [{ "eval": "EVAL_RING_CONSENT_TEST" }]
 }
