@@ -203,6 +203,60 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Ring.com: non-GDPR locales only show "Accept"; mirror rejectAll() by persisting minimal privacy cookies. */
+    EVAL_RING_OPTOUT_NON_GDPR: () => {
+        if (document.querySelector('button.consent--reject')) {
+            return false;
+        }
+        if (!window.frontendUtils || !window.frontendUtils.setCookie) {
+            return false;
+        }
+        const days = 390;
+        const exp = new Date();
+        exp.setDate(exp.getDate() + days);
+        let version = 12;
+        try {
+            const match = document.cookie.match(/privacy-cookie=([^;]+)/);
+            if (match) {
+                const parsed = JSON.parse(decodeURIComponent(match[1]));
+                if (parsed && typeof parsed.version === 'number') {
+                    version = parsed.version;
+                }
+            }
+        } catch {
+            /* keep default */
+        }
+        const value = {
+            version,
+            consentUrl: window.location.href,
+            consentDate: new Date().toUTCString(),
+        };
+        window.frontendUtils.setCookie('privacy-banner-clicked', true, exp);
+        window.frontendUtils.setCookie('privacy-banner', true, exp);
+        window.frontendUtils.setCookie('privacy-cookie', JSON.stringify(value), exp, { encode: false });
+        document.body.classList.remove('has-banner');
+        const banner = document.querySelector('.consent-banner');
+        if (banner) {
+            banner.remove();
+        }
+        return true;
+    },
+    EVAL_RING_PRIVACY_COOKIE_MINIMAL: () => {
+        try {
+            if (!document.cookie.includes('privacy-banner-clicked')) {
+                return false;
+            }
+            const match = document.cookie.match(/privacy-cookie=([^;]+)/);
+            if (!match) {
+                return false;
+            }
+            const val = JSON.parse(decodeURIComponent(match[1]));
+            const optional = Object.keys(val).filter((k) => !['version', 'consentUrl', 'consentDate'].includes(k));
+            return optional.length === 0;
+        } catch {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

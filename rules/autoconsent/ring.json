@@ -1,0 +1,44 @@
+{
+    "name": "ring",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?ring\\.com/"
+    },
+    "prehideSelectors": [".consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "script#consent-script[src*=\"consent-manager\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-banner .consent-banner-buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button.consent--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "button.consent--reject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "button.consent--reject"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_RING_OPTOUT_NON_GDPR"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_RING_PRIVACY_COOKIE_MINIMAL"
+        }
+    ]
+}
