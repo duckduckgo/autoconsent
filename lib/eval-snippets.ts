@@ -187,6 +187,116 @@ export const snippets = {
         // US Privacy String: ...[2] === 'Y' means the user opted out of sale (Sirdata / GPP USP v1)
         return value.length >= 3 && value[2] === 'Y';
     },
+    /** Sirdata / Consent Framework (#sd-cmp): prefer explicit reject; else dismiss notice (Close). */
+    EVAL_SIRDATA_OPTOUT: () => {
+        const root = document.getElementById('sd-cmp');
+        if (!root) {
+            return false;
+        }
+        const norm = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+        const rejectHints = [
+            'reject',
+            'refuse',
+            'decline',
+            'deny',
+            'only necessary',
+            'necessary only',
+            'only essential',
+            'essential only',
+            'continuer sans',
+            'tout refuser',
+            'alle ablehnen',
+            'nicht zustimmen',
+        ];
+        const candidates = root.querySelectorAll('button, [role="button"], a[role="button"], a.button');
+        for (const el of candidates) {
+            const t = norm(el.innerText || '');
+            if (!t) {
+                continue;
+            }
+            if (rejectHints.some((h) => t.includes(h))) {
+                el.click();
+                return true;
+            }
+        }
+        let closeBtn = root.querySelector('[role="button"][title="Close"]');
+        if (!closeBtn) {
+            root.querySelectorAll('[role="button"]').forEach((el) => {
+                const al = (el.getAttribute('aria-label') || '').trim().toLowerCase();
+                if (al === 'close' || al === 'fermer' || al === 'schließen') {
+                    closeBtn = el;
+                }
+            });
+        }
+        if (closeBtn) {
+            closeBtn.click();
+            return true;
+        }
+        return false;
+    },
+    EVAL_SIRDATA_OPTIN: () => {
+        const root = document.getElementById('sd-cmp');
+        if (!root) {
+            return false;
+        }
+        const norm = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+        const acceptHints = [
+            'accept all',
+            'allow all',
+            'agree',
+            'i agree',
+            'ok',
+            'got it',
+            'continue',
+            'tout accepter',
+            'alle akzeptieren',
+            'aceptar todo',
+            'accetta tutto',
+        ];
+        const candidates = root.querySelectorAll('button, [role="button"], a[role="button"], a.button');
+        for (const el of candidates) {
+            const t = norm(el.innerText || '');
+            if (!t) {
+                continue;
+            }
+            if (acceptHints.some((h) => t.includes(h))) {
+                el.click();
+                return true;
+            }
+        }
+        let closeBtn = root.querySelector('[role="button"][title="Close"]');
+        if (!closeBtn) {
+            root.querySelectorAll('[role="button"]').forEach((el) => {
+                const al = (el.getAttribute('aria-label') || '').trim().toLowerCase();
+                if (al === 'close' || al === 'fermer' || al === 'schließen') {
+                    closeBtn = el;
+                }
+            });
+        }
+        if (closeBtn) {
+            closeBtn.click();
+            return true;
+        }
+        return false;
+    },
+    EVAL_SIRDATA_TEST: () => {
+        const root = document.getElementById('sd-cmp');
+        if (!root) {
+            return true;
+        }
+        const overlay = root.querySelector('.sd-cmp-4oXwF');
+        if (overlay && getComputedStyle(overlay).display !== 'none') {
+            return false;
+        }
+        const dialogs = root.querySelectorAll('[role="dialog"]');
+        for (let i = 0; i < dialogs.length; i++) {
+            const d = dialogs[i];
+            if (getComputedStyle(d).display !== 'none' && d.offsetParent !== null) {
+                return false;
+            }
+        }
+        return true;
+    },
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(

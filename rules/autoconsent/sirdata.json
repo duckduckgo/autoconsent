@@ -1,14 +1,18 @@
 {
     "name": "sirdata",
-    "prehideSelectors": ["#sd-cmp"],
+    "prehideSelectors": ["#sd-cmp .sd-cmp-4oXwF", "#sd-cmp .sd-cmp-wBgKb"],
     "detectCmp": [
         {
-            "exists": "#sd-cmp"
+            "any": [
+                { "exists": "script[src*=\"cache.consentframework.com\"]" },
+                { "exists": "script[src*=\"consentframework.com\"]" },
+                { "exists": "#sd-cmp" }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#sd-cmp .sd-cmp-wBgKb"
+            "any": [{ "visible": "#sd-cmp .sd-cmp-4oXwF" }, { "visible": "#sd-cmp .sd-cmp-wBgKb" }]
         }
     ],
     "optIn": [
@@ -48,7 +52,21 @@
             ]
         },
         {
+            "eval": "EVAL_SIRDATA_OPTIN",
+            "optional": true
+        },
+        {
             "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL",
+            "optional": true
+        },
+        {
+            "addStyle": "overflow: auto !important",
+            "selector": "html",
+            "optional": true
+        },
+        {
+            "addStyle": "overflow: auto !important",
+            "selector": "body",
             "optional": true
         }
     ],
@@ -97,8 +115,7 @@
                             ],
                             "else": [
                                 {
-                                    "waitForThenClick": "#sd-cmp .sd-cmp-bS5Na",
-                                    "optional": true
+                                    "eval": "EVAL_SIRDATA_OPTOUT"
                                 }
                             ]
                         }
@@ -109,6 +126,16 @@
         {
             "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL",
             "optional": true
+        },
+        {
+            "addStyle": "overflow: auto !important",
+            "selector": "html",
+            "optional": true
+        },
+        {
+            "addStyle": "overflow: auto !important",
+            "selector": "body",
+            "optional": true
         }
     ],
     "test": [
@@ -118,10 +145,14 @@
                     "eval": "EVAL_SIRDATA_USP_OPT_OUT_TEST"
                 },
                 {
+                    "eval": "EVAL_SIRDATA_TEST"
+                },
+                {
                     "visible": "#sd-cmp .sd-cmp-wBgKb",
                     "negated": true
                 }
             ]
         }
-    ]
+    ],
+    "minimumRuleStepVersion": 2
 }
