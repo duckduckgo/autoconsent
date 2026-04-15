@@ -1,0 +1,48 @@
+{
+    "name": "hubspot-cookie-banner",
+    "_metadata": {
+        "vendorUrl": "https://www.hubspot.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#hs-banner-parent #hs-eu-cookie-confirmation"],
+    "detectCmp": [
+        {
+            "exists": "#hs-banner-parent #hs-eu-cookie-confirmation"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#hs-eu-cookie-confirmation"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#hs-eu-confirmation-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#hs-eu-decline-button"
+        },
+        {
+            "removeClass": "hs-modal-open",
+            "selector": "body",
+            "optional": true
+        },
+        {
+            "addStyle": "overflow: auto !important",
+            "selector": "body",
+            "optional": true
+        }
+    ],
+    "minimumRuleStepVersion": 2,
+    "test": [
+        {
+            "cookieContains": "__hs_cookie_cat_pref"
+        }
+    ]
+}
