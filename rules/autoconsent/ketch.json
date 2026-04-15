@@ -1,0 +1,12 @@
+{
+    "name": "Ketch",
+    "_metadata": {
+        "vendorUrl": "https://time.com/"
+    },
+    "prehideSelectors": ["#ketch-consent-banner"],
+    "detectCmp": [{ "eval": "EVAL_KETCH_DETECT_CMP" }],
+    "detectPopup": [{ "eval": "EVAL_KETCH_DETECT_POPUP" }],
+    "optOut": [{ "eval": "EVAL_KETCH_OPT_OUT" }],
+    "optIn": [{ "eval": "EVAL_KETCH_OPT_IN" }],
+    "test": [{ "eval": "EVAL_KETCH_TEST_OPT_OUT" }]
+}

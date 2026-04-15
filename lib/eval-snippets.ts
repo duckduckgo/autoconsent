@@ -203,6 +203,150 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+
+    EVAL_KETCH_DETECT_CMP: () =>
+        typeof window.ketch === 'function' &&
+        (document.documentElement.innerHTML.includes('global.ketchcdn.com') ||
+            document.documentElement.innerHTML.includes('ketchcdn.com/web/v3/config')),
+
+    EVAL_KETCH_DETECT_POPUP: () => {
+        const visible = (el) => {
+            if (!el) {
+                return false;
+            }
+            const s = getComputedStyle(el);
+            return (
+                s.display !== 'none' &&
+                s.visibility !== 'hidden' &&
+                parseFloat(s.opacity || '1') > 0 &&
+                el.getClientRects().length > 0
+            );
+        };
+        return ['ketch-consent-banner', 'ketch-purposes-modal', 'ketch-preferences-purposes-tab'].some((id) =>
+            visible(document.getElementById(id)),
+        );
+    },
+
+    EVAL_KETCH_OPT_OUT: () => {
+        const rejectBanner = () => {
+            const root = document.getElementById('ketch-consent-banner');
+            if (!root) {
+                return false;
+            }
+            const rejectRe = /^(reject all|ablehnen|alle ablehnen|refuser tout|tout refuser)$/i;
+            const btn = [...root.querySelectorAll('button')].find((b) => rejectRe.test((b.textContent || '').trim()));
+            if (btn) {
+                btn.click();
+                return true;
+            }
+            return false;
+        };
+        const rejectModal = () => {
+            const root = document.getElementById('ketch-purposes-modal');
+            if (!root) {
+                return false;
+            }
+            const buttons = [...root.querySelectorAll('button')];
+            const byText = (re) => buttons.find((b) => re.test((b.textContent || '').trim()));
+            const reject = byText(/^(reject all|ablehnen|alle ablehnen|refuser tout|tout refuser)$/i);
+            if (reject) {
+                reject.click();
+                return true;
+            }
+            return false;
+        };
+        const rejectPreferences = () => {
+            const root = document.getElementById('ketch-preferences-purposes-tab');
+            if (!root) {
+                return false;
+            }
+            const buttons = [...root.querySelectorAll('button')];
+            const reject = buttons.find((b) => /^(reject all|ablehnen|alle ablehnen|refuser tout|tout refuser)$/i.test((b.textContent || '').trim()));
+            if (reject) {
+                reject.click();
+                return true;
+            }
+            return false;
+        };
+        if (rejectBanner() || rejectModal() || rejectPreferences()) {
+            return true;
+        }
+        if (typeof window.ketch === 'function') {
+            window.ketch('rejectAllConsent', false);
+            return true;
+        }
+        return false;
+    },
+
+    EVAL_KETCH_OPT_IN: () => {
+        const acceptBanner = () => {
+            const root = document.getElementById('ketch-consent-banner');
+            if (!root) {
+                return false;
+            }
+            const acceptRe = /^(accept all|agree|confirm|zustimmen|alle akzeptieren|tout accepter)$/i;
+            const btn = [...root.querySelectorAll('button')].find((b) => acceptRe.test((b.textContent || '').trim()));
+            if (btn) {
+                btn.click();
+                return true;
+            }
+            return false;
+        };
+        if (acceptBanner()) {
+            return true;
+        }
+        if (typeof window.ketch === 'function') {
+            window.ketch('acceptAllConsent', false);
+            return true;
+        }
+        return false;
+    },
+
+    EVAL_KETCH_TEST_OPT_OUT: () => {
+        const m = document.cookie.match(/(?:^|;\s*)_ketch_consent_v1_=([^;]+)/);
+        if (!m) {
+            return false;
+        }
+        try {
+            const json = JSON.parse(atob(decodeURIComponent(m[1])));
+            const rows = [];
+            for (const v of Object.values(json)) {
+                if (!v || typeof v !== 'object' || !Array.isArray(v.canonicalPurposes)) {
+                    continue;
+                }
+                for (const c of v.canonicalPurposes) {
+                    rows.push({ c, status: v.status });
+                }
+            }
+            const relevant = rows.filter((r) => r.c === 'analytics' || r.c === 'behavioral_advertising');
+            return relevant.length > 0 && relevant.every((r) => r.status === 'denied');
+        } catch {
+            return false;
+        }
+    },
+
+    EVAL_KETCH_TEST_OPT_IN: () => {
+        const m = document.cookie.match(/(?:^|;\s*)_ketch_consent_v1_=([^;]+)/);
+        if (!m) {
+            return false;
+        }
+        try {
+            const json = JSON.parse(atob(decodeURIComponent(m[1])));
+            const rows = [];
+            for (const v of Object.values(json)) {
+                if (!v || typeof v !== 'object' || !Array.isArray(v.canonicalPurposes)) {
+                    continue;
+                }
+                for (const c of v.canonicalPurposes) {
+                    rows.push({ c, status: v.status });
+                }
+            }
+            const relevant = rows.filter((r) => r.c === 'analytics' || r.c === 'behavioral_advertising');
+            return relevant.length > 0 && relevant.every((r) => r.status === 'granted');
+        } catch {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
