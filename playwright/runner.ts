@@ -28,6 +28,8 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    /** Override default Playwright `test` (e.g. extended fixtures for Cloudflare). */
+    playwrightTest?: typeof test;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -38,6 +40,7 @@ const defaultOptions: TestOptions = {
     mobile: false,
     expectPopupOpen: true,
     expectedRuns: 1,
+    playwrightTest: undefined,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -328,9 +331,11 @@ class TestRun {
 }
 
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
-    test.describe(cmp, () => {
+    const { playwrightTest: pwTestOverride, ...restOverrides } = overrideOptions;
+    const pwTest = pwTestOverride ?? test;
+    pwTest.describe(cmp, () => {
         sites.forEach((url) => {
-            const finalOptions = { ...defaultOptions, ...overrideOptions };
+            const finalOptions = { ...defaultOptions, ...restOverrides };
             if (finalOptions.onlyRegions && finalOptions.onlyRegions.length > 0 && !finalOptions.onlyRegions.includes(testRegion)) {
                 return;
             }
@@ -344,21 +349,21 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
 
             if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
                 const testName = `${domain} ${urlHash} .${testRegion} noaction ${formFactor}`;
-                test(testName, async ({ page }, testInfo) => {
+                pwTest(testName, async ({ page }, testInfo) => {
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, null);
                     await testRun.run();
                 });
             }
             if (finalOptions.testOptIn) {
                 const testName = `${domain} ${urlHash} .${testRegion} optIn ${formFactor}`;
-                test(testName, async ({ page }, testInfo) => {
+                pwTest(testName, async ({ page }, testInfo) => {
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, 'optIn');
                     await testRun.run();
                 });
             }
             if (finalOptions.testOptOut) {
                 const testName = `${domain} ${urlHash} .${testRegion} optOut ${formFactor}`;
-                test(testName, async ({ page }, testInfo) => {
+                pwTest(testName, async ({ page }, testInfo) => {
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, 'optOut');
                     await testRun.run();
                 });
