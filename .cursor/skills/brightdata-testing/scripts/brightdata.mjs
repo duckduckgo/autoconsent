@@ -14,11 +14,27 @@
  */
 
 /**
+ * @typedef {Object} CaptchaOptions
+ * @property {boolean} [autoSolve=true] - Whether BrightData auto-solves captchas after navigation.
+ * @property {number} [detectTimeout=30000] - How long (ms) the solver waits to detect a captcha.
+ * @property {boolean} [waitAfterNav=true] - Wait for captcha solving after navigation in testPage.
+ * @property {Object[]} [solverOptions] - Per-type solver config passed to Captcha.setAutoSolve / Captcha.solve.
+ */
+
+/**
+ * @typedef {Object} CaptchaResult
+ * @property {'not_detected'|'solve_finished'|'solve_failed'|'invalid'|'skipped'|'error'} status
+ * @property {string} [type] - Detected captcha type (if any).
+ * @property {string} [error] - Error description on failure.
+ */
+
+/**
  * @typedef {Object} TestOptions
  * @property {'optOut'|'optIn'|null} [action='optOut']
  * @property {string} [screenshotsDir]
  * @property {number} [navigationTimeout=45000]
  * @property {number} [completionTimeout=45000]
+ * @property {CaptchaOptions} [captcha] - CAPTCHA solver options. Omit to use BrightData defaults (auto-solve on).
  */
 
 /**
@@ -36,6 +52,7 @@
  * @property {string[]} errors
  * @property {number} duration
  * @property {string[]} screenshotPaths
+ * @property {CaptchaResult} [captchaResult] - CAPTCHA solver result (if captcha solving was used).
  */
 
 /**
@@ -99,6 +116,65 @@ function buildWssEndpoint(regionKey) {
  */
 export async function connectBrightData(regionKey) {
     return chromium.connectOverCDP(buildWssEndpoint(regionKey), { timeout: 30000 });
+}
+
+/**
+ * Create a CDP session for CAPTCHA solver commands.
+ * Call BEFORE navigating to the target URL to configure auto-solve behavior.
+ * @param {Page} page
+ * @param {CaptchaOptions} [captchaOpts]
+ * @returns {Promise<import('playwright').CDPSession>}
+ */
+async function setupCaptchaCDP(page, captchaOpts = {}) {
+    const client = await page.context().newCDPSession(page);
+    const autoSolve = captchaOpts.autoSolve ?? true;
+    const params = { autoSolve };
+    if (captchaOpts.solverOptions) {
+        params.options = captchaOpts.solverOptions;
+    }
+    await client.send('Captcha.setAutoSolve', params);
+    return client;
+}
+
+/**
+ * Trigger a captcha solve and wait for the result.
+ * Use after navigation when auto-solve is enabled (to wait for it) or when
+ * auto-solve is disabled (to trigger a manual solve).
+ * @param {import('playwright').CDPSession} cdpSession - CDP session from setupCaptchaCDP or page.context().newCDPSession(page).
+ * @param {CaptchaOptions} [captchaOpts]
+ * @returns {Promise<CaptchaResult>}
+ */
+export async function solveCaptcha(cdpSession, captchaOpts = {}) {
+    const detectTimeout = captchaOpts.detectTimeout ?? 30000;
+    const params = { detectTimeout };
+    if (captchaOpts.solverOptions) {
+        params.options = captchaOpts.solverOptions;
+    }
+    try {
+        const result = await cdpSession.send('Captcha.solve', params);
+        return {
+            status: result.status,
+            type: result.type || undefined,
+            error: result.error || undefined,
+        };
+    } catch (e) {
+        return { status: 'error', error: e.message };
+    }
+}
+
+/**
+ * Configure auto-solve behavior on an existing CDP session.
+ * @param {import('playwright').CDPSession} cdpSession
+ * @param {boolean} autoSolve
+ * @param {Object[]} [solverOptions]
+ * @returns {Promise<void>}
+ */
+export async function configureCaptcha(cdpSession, autoSolve, solverOptions) {
+    const params = { autoSolve };
+    if (solverOptions) {
+        params.options = solverOptions;
+    }
+    await cdpSession.send('Captcha.setAutoSolve', params);
 }
 
 /**
@@ -275,8 +351,20 @@ export async function testPage(page, url, regionKey, options = {}) {
     const startTime = Date.now();
 
     try {
+        const captchaOpts = options.captcha;
+        let captchaCDP = null;
+        if (captchaOpts) {
+            captchaCDP = await setupCaptchaCDP(page, captchaOpts);
+        }
+
         const ctx = await injectAutoconsent(page, options);
         await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
+
+        let captchaResult = undefined;
+        const waitForCaptcha = captchaOpts?.waitAfterNav ?? !!captchaOpts;
+        if (waitForCaptcha && captchaCDP) {
+            captchaResult = await solveCaptcha(captchaCDP, captchaOpts);
+        }
 
         const completed = await ctx.waitForCompletion(completionTimeout);
         if (completed && !ctx.hasMessage('selfTestResult')) {
@@ -285,6 +373,9 @@ export async function testPage(page, url, regionKey, options = {}) {
 
         const result = ctx.collectResult(url, regionKey);
         result.duration = Date.now() - startTime;
+        if (captchaResult) {
+            result.captchaResult = captchaResult;
+        }
 
         if (!completed && !ctx.hasMessage('cmpDetected')) {
             result.errors.push('No CMP detected (site may not show a cookie banner in this region)');
@@ -377,6 +468,10 @@ export function formatResult(result) {
         `  Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | OptIn: ${result.optInResult} | SelfTest: ${result.selfTestResult}`,
         `  Done: ${result.autoconsentDone}${result.isCosmetic ? ' (cosmetic)' : ''} | ${result.duration}ms`,
     ];
+    if (result.captchaResult) {
+        const cr = result.captchaResult;
+        parts.push(`  Captcha: ${cr.status}${cr.type ? ` (${cr.type})` : ''}${cr.error ? ` — ${cr.error}` : ''}`);
+    }
     if (result.errors.length > 0) {
         parts.push(`  Errors: ${result.errors.join('; ')}`);
     }
