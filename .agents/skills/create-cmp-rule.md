@@ -1,3 +1,8 @@
+---
+name: create-cmp-rule
+description: Creates a new autoconsent JSON rule and test spec for a cookie consent popup. Use when no existing rule matches the popup (devtools console shows no CMP detected).
+---
+
 # Create CMP Rule
 
 Step-by-step workflow for creating a new autoconsent rule to handle a cookie consent
@@ -40,33 +45,14 @@ grep -rl "<keyword>" lib/cmps/
 
 ## Step 4: Identify the CMP Provider
 
-A **CMP (Consent Management Platform)** is a third-party service used by many
-websites to manage cookie consent (e.g. OneTrust, Cookiebot, Didomi, Sourcepoint).
-A single autoconsent rule for a CMP handles the popup on ALL sites using that CMP —
-one rule can cover thousands of sites.
+**Always prefer a generic CMP rule over a site-specific rule.** Check:
 
-A **site-specific rule** handles one website's custom popup. Only create a
-site-specific rule when the popup is truly custom to that one site.
+- **DOM class names/IDs:** Vendor prefixes like `onetrust-`, `didomi-`, `sp_choice_type_`, `cmp-`, `fc-`, `klaro-`, or container IDs like `#onetrust-banner-sdk`, `#didomi-host`, `#CybotCookiebotDialog`.
+- **Script sources:** CMP domains like `onetrust.com`, `didomi.io`, `cookiebot.com`.
+- **JS code:** Inspect click handlers for vendor names in variable/function names.
+- **PublicWWW:** Use the `publicwww-search` skill to check if selectors appear on many sites.
 
-**Always prefer writing a generic CMP rule over a site-specific rule.**
-
-### How to identify a CMP
-
-- **Inspect DOM class names:** Look for vendor prefixes like `onetrust-`, `didomi-`,
-  `sp_choice_type_`, `cmp-`, `fc-`, `klaro-`.
-- **Inspect container IDs:** `#onetrust-banner-sdk`, `#didomi-host`,
-  `#CybotCookiebotDialog`, `#usercentrics-root`.
-- **Check script sources:** Search the page source for CMP domains like
-  `onetrust.com`, `didomi.io`, `cookiebot.com`, `usercentrics.eu`.
-- **Check JS code:** Use DevTools to inspect click handlers on the popup buttons.
-  Look for vendor names in variable/function names, `node_modules/` or
-  `wp-content/plugins/` paths, or license comments.
-- **Search PublicWWW:** Use the `publicwww-search` skill to check if the popup's
-  selectors appear on many sites.
-
-If the popup is from a known CMP, check if a generic rule already exists in
-`rules/autoconsent/` or `lib/cmps/`. If it does, extend it rather than creating a
-new one.
+If the popup is from a known CMP, check if a rule already exists in `rules/autoconsent/` or `lib/cmps/`. Extend it rather than creating a new one.
 
 ## Step 5: Choose the Rule Type
 
@@ -98,24 +84,12 @@ section.
 Write the minimal rule first. Get the basic flow working before adding fallback
 paths, regional variants, or edge cases.
 
-### JSON rule structure
+### Key fields
 
-```json
-{
-  "name": "example-cmp",
-  "prehideSelectors": ["#cookie-banner"],
-  "detectCmp": [{ "exists": "#cookie-banner" }],
-  "detectPopup": [{ "visible": "#cookie-banner" }],
-  "optIn": [{ "waitForThenClick": "#accept-all" }],
-  "optOut": [{ "waitForThenClick": "#reject-all" }],
-  "test": [{ "cookieContains": "consent=rejected" }]
-}
-```
+See `AGENTS.md` for the basic JSON structure and `docs/rule-syntax.md` for the
+complete step type reference.
 
-See `docs/rule-syntax.md` for the complete reference of all step types (exists,
-visible, waitFor, waitForThenClick, click, hide, eval, if/then/else, any, etc.).
-
-**Key fields:**
+**Important:**
 - `detectCmp` / `detectPopup`: Must be fast. Do NOT use `{ "wait": N }` here — the
   engine retries automatically.
 - `prehideSelectors`: Injected early via CSS `opacity: 0` to prevent flicker. Keep
@@ -174,23 +148,6 @@ Using `removeClass`, `setStyle`, or `addStyle` requires `"minimumRuleStepVersion
 ## Examples
 
 These are real rules from the codebase. Use them as templates.
-
-### One-click reject (site-specific)
-
-From `rules/autoconsent/ah.nl.json`:
-```json
-{
-  "name": "ah.nl",
-  "runContext": {
-    "urlPattern": "^https?://(www\\.)?ah\\.nl/"
-  },
-  "prehideSelectors": [],
-  "detectCmp": [{ "exists": "#cookie-overlay" }],
-  "detectPopup": [{ "visible": "#cookie-overlay" }],
-  "optIn": [{ "waitForThenClick": "#accept-cookies" }],
-  "optOut": [{ "waitForThenClick": "#decline-cookies" }]
-}
-```
 
 ### Two-click: manage then save (site-specific)
 
@@ -294,18 +251,23 @@ For CMP rules, include multiple test URLs from different sites that use the CMP.
 
 ## Step 8: Test and Verify
 
-1. **Validate the rule schema:**
+1. **Build rules** (required before testing):
+   ```bash
+   npm run build-rules
+   ```
+
+2. **Validate the rule schema:**
    ```bash
    npm run rule-syntax-check
    ```
 
-2. **Check in a browser:** Load the site with the extension, confirm:
+3. **Check in a browser:** Load the site with the extension, confirm:
    - Popup is handled (dismissed or hidden)
    - Page scrolls normally
    - Interactive elements (buttons, links, forms) still work
    - `prehideSelectors` don't hide non-popup content
 
-3. **Run the Playwright test:**
+4. **Run the Playwright test:**
    ```bash
    npx playwright test tests/<name>.spec.ts
    ```
