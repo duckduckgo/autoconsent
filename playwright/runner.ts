@@ -28,6 +28,8 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    /** Runs after exposeBinding and before goto (e.g. addInitScript for bot-sensitive CMPs). */
+    beforeGoto?: (page: Page) => Promise<void>;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -93,6 +95,9 @@ class TestRun {
             });
 
         await this.page.exposeBinding('autoconsentSendMessage', this.messageCallback.bind(this));
+        if (this.options.beforeGoto) {
+            await this.options.beforeGoto(this.page);
+        }
         await this.page.goto(this.url, { waitUntil: 'commit' });
 
         await this.injectContentScripts();
