@@ -203,6 +203,20 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Osano CMP (cmp.osano.com): non-essential categories denied after save */
+    EVAL_OSANO_CMP_TEST: () => {
+        const cm = window.Osano?.cm;
+        if (!cm || typeof cm.getConsent !== 'function') {
+            return false;
+        }
+        const c = cm.getConsent();
+        return (
+            c.MARKETING === 'DENY' &&
+            c.PERSONALIZATION === 'DENY' &&
+            c.ANALYTICS === 'DENY' &&
+            c.ESSENTIAL === 'ACCEPT'
+        );
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

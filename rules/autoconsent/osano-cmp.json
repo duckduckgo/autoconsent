@@ -1,0 +1,71 @@
+{
+    "name": "osano-cmp",
+    "_metadata": {
+        "vendorUrl": "https://www.osano.com/cookie-consent/"
+    },
+    "prehideSelectors": [
+        ".osano-cm-window",
+        ".osano-cm-dialog",
+        ".osano-cm-info-dialog"
+    ],
+    "detectCmp": [{ "exists": "script[src*=\"cmp.osano.com\"]" }],
+    "detectPopup": [{ "visible": ".osano-cm-window" }],
+    "optIn": [
+        {
+            "if": { "visible": "button.osano-cm-manage" },
+            "then": [{ "waitForThenClick": "button.osano-cm-manage" }]
+        },
+        { "waitFor": "#osano-cm-drawer-toggle--category_MARKETING", "timeout": 15000 },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_MARKETING.osano-cm-input--checked", "negated": true },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_MARKETING" }]
+        },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_PERSONALIZATION.osano-cm-input--checked", "negated": true },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_PERSONALIZATION" }]
+        },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_ANALYTICS.osano-cm-input--checked", "negated": true },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_ANALYTICS" }]
+        },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_OPT_OUT.osano-cm-input--checked" },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_OPT_OUT" }]
+        },
+        { "waitForThenClick": "button.osano-cm-save" }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "button.osano-cm-manage" },
+            "then": [{ "waitForThenClick": "button.osano-cm-manage" }]
+        },
+        { "waitFor": "#osano-cm-drawer-toggle--category_MARKETING", "timeout": 15000 },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_MARKETING.osano-cm-input--checked" },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_MARKETING" }]
+        },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_PERSONALIZATION.osano-cm-input--checked" },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_PERSONALIZATION" }]
+        },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_ANALYTICS.osano-cm-input--checked" },
+            "then": [{ "click": "#osano-cm-drawer-toggle--category_ANALYTICS" }]
+        },
+        {
+            "if": { "exists": "#osano-cm-drawer-toggle--category_OPT_OUT" },
+            "then": [
+                {
+                    "if": {
+                        "exists": "#osano-cm-drawer-toggle--category_OPT_OUT.osano-cm-input--checked",
+                        "negated": true
+                    },
+                    "then": [{ "click": "#osano-cm-drawer-toggle--category_OPT_OUT" }]
+                }
+            ]
+        },
+        { "waitForThenClick": "button.osano-cm-save" }
+    ],
+    "test": [{ "eval": "EVAL_OSANO_CMP_TEST" }],
+    "comment": "Osano CMP (cmp.osano.com): cookie bar uses Manage Preferences; optional categories are toggles in Storage Preferences plus Save."
+}
