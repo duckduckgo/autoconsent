@@ -14,10 +14,7 @@
     ],
     "detectPopup": [
         {
-            "exists": "#ketch-consent-banner"
-        },
-        {
-            "eval": "EVAL_KETCH_POPUP_OPEN"
+            "eval": "EVAL_KETCH_DETECT_POPUP"
         }
     ],
     "optOut": [
@@ -48,7 +45,7 @@
             "optional": true
         },
         {
-            "eval": "EVAL_KETCH_TEST_DISMISSED"
+            "eval": "EVAL_KETCH_TEST"
         }
     ]
 }
