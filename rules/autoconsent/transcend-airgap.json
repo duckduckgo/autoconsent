@@ -11,6 +11,7 @@
         }
     ],
     "optOut": [
+        { "eval": "EVAL_TRANSCEND_OPT_OUT_API", "optional": true },
         { "wait": 500 },
         {
             "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog button.button"],
