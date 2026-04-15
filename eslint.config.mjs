@@ -8,7 +8,7 @@ const c = tseslint.config(
     ...ddgConfig,
 
     {
-        ignores: ['lib/consentomatic/**/*', 'dist/**/*'],
+        ignores: ['lib/consentomatic/**/*', 'dist/**/*', '.cursor/**/*'],
     },
 
     {
