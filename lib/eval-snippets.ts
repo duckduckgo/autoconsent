@@ -203,6 +203,38 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    EVAL_OSANO_DETECT_CMP: () =>
+        !!document.querySelector('script[src*="cmp.osano.com"]') || (typeof window.Osano === 'function' && !!window.Osano),
+    EVAL_OSANO_DIALOG_OPEN: () => !!(window.Osano && window.Osano.cm && window.Osano.cm.dialogOpen),
+    EVAL_OSANO_UNCHECK_OPTIONAL_COOKIES: () => {
+        const root = document.querySelector('.osano-cm-window');
+        if (!root) {
+            return true;
+        }
+        root.querySelectorAll('input.osano-cm-toggle__input:checked:not(:disabled)').forEach((el) => el.click());
+        return true;
+    },
+    EVAL_OSANO_CHECK_OPTIONAL_COOKIES: () => {
+        const root = document.querySelector('.osano-cm-window');
+        if (!root) {
+            return true;
+        }
+        root.querySelectorAll('input.osano-cm-toggle__input:not(:checked):not(:disabled)').forEach((el) => el.click());
+        return true;
+    },
+    EVAL_OSANO_TEST: () => {
+        const cm = window.Osano && window.Osano.cm;
+        if (!cm || typeof cm.getConsent !== 'function') {
+            return false;
+        }
+        const c = cm.getConsent();
+        return (
+            c.MARKETING === 'DENY' &&
+            c.ANALYTICS === 'DENY' &&
+            c.PERSONALIZATION === 'DENY' &&
+            (c.STORAGE === 'DENY' || c.STORAGE === 'ACCEPT')
+        );
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

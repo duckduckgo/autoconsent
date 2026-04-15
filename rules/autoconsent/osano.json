@@ -1,0 +1,50 @@
+{
+    "name": "Osano",
+    "prehideSelectors": [".osano-cm-window"],
+    "detectCmp": [{ "eval": "EVAL_OSANO_DETECT_CMP" }],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": ".osano-cm-window .osano-cm-button--type_deny" },
+                { "visible": ".osano-cm-window .osano-cm-button--type_accept" },
+                { "visible": ".osano-cm-window .osano-cm-manage" },
+                { "eval": "EVAL_OSANO_DIALOG_OPEN" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".osano-cm-window .osano-cm-button--type_deny" },
+            "then": [{ "waitForThenClick": ".osano-cm-window .osano-cm-button--type_deny" }],
+            "else": [
+                {
+                    "if": { "exists": ".osano-cm-window .osano-cm-manage" },
+                    "then": [
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+                        { "wait": 500 },
+                        { "eval": "EVAL_OSANO_UNCHECK_OPTIONAL_COOKIES" },
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-save" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": ".osano-cm-window .osano-cm-button--type_accept" },
+            "then": [{ "waitForThenClick": ".osano-cm-window .osano-cm-button--type_accept" }],
+            "else": [
+                {
+                    "if": { "exists": ".osano-cm-window .osano-cm-manage" },
+                    "then": [
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+                        { "wait": 500 },
+                        { "eval": "EVAL_OSANO_CHECK_OPTIONAL_COOKIES" },
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-save" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_OSANO_TEST" }]
+}
