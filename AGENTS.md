@@ -49,11 +49,11 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 
 When investigating or fixing a cookie popup, start by **opening the site in a browser** with the autoconsent extension (`dist/addon-mv3/`) loaded. Check the devtools console for autoconsent logs:
 
-- **"Found CMP: [name]" + opt-out failed** → an existing rule is broken. Follow the `fix-cmp-rule` skill (`.claude/skills/fix-cmp-rule.md`).
-- **No CMP detected** → no rule handles this popup. Follow the `create-cmp-rule` skill (`.claude/skills/create-cmp-rule.md`).
+- **"Found CMP: [name]" + opt-out failed** → an existing rule is broken. Follow the `fix-cmp-rule` skill (`.agents/skills/fix-cmp-rule.md`).
+- **No CMP detected** → no rule handles this popup. Follow the `create-cmp-rule` skill (`.agents/skills/create-cmp-rule.md`).
 - **"Found CMP: [name]" + success** → the rule works. Nothing to do.
 
-Use the `publicwww-search` skill (`.claude/skills/publicwww-search.md`) to check if a popup comes from a third-party CMP provider.
+Use the `publicwww-search` skill (`.agents/skills/publicwww-search.md`) to check if a popup comes from a third-party CMP provider.
 
 ## Working with Rules
 
