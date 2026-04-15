@@ -349,7 +349,7 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 
 ## Multi-Region Testing with BrightData
 
-All rule changes must be tested across geographic regions to handle GDPR/CCPA/regional popup variations. Use the `/brightdata-testing` skill for this. The skill provides a library of utility functions (`.cursor/skills/brightdata-testing/scripts/brightdata.ts`) for connecting to BrightData remote browsers and testing autoconsent across 8 regions (US-NY, US-LA, DE, FR, GB, NL, CA, AU).
+All rule changes must be tested across geographic regions to handle GDPR/CCPA/regional popup variations. Use the `/brightdata-testing` skill for this. The skill provides a library of utility functions (`.cursor/skills/brightdata-testing/scripts/brightdata.js`) for connecting to BrightData remote browsers and testing autoconsent across 8 regions (US-NY, US-LA, DE, FR, GB, NL, CA, AU).
 
 Requires `BRIGHTDATA_WEBACCESS_USER`, `BRIGHTDATA_WEBACCESS_PASSWORD`, and `BRIGHTDATA_WEBACCESS_HOST` environment variables.
 
