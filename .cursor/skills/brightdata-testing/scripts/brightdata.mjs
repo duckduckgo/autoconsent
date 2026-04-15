@@ -291,7 +291,7 @@ export async function testPage(page, url, regionKey, options = {}) {
 
         // Brief wait for Captcha.detected event to arrive (fires ~1s after commit).
         if (!captchaDetected) {
-            await new Promise((r) => setTimeout(r, 2000));
+            await new Promise((r) => setTimeout(r, 5000));
         }
         if (captchaDetected && captchaSolved === null) {
             await Promise.race([captchaSolvedPromise, new Promise((r) => setTimeout(r, completionTimeout))]);
