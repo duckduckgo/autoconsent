@@ -1,0 +1,35 @@
+{
+    "name": "alaskaair",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?alaskaair\\.com/"
+    },
+    "_metadata": {
+        "vendorUrl": "https://github.com/orestbida/cookieconsent"
+    },
+    "comment": "Tealium-loaded CookieConsent v3 (orestbida); US shows a single Dismiss bar, non-US opt-in with Refuse all / Manage preferences.",
+    "prehideSelectors": ["#cc-main"],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": "script[src*='tags.tiqcdn.com/utag/alaska/'][src$='utag.js']" },
+                { "exists": "script[src*='//tags.tiqcdn.com/utag/alaska/'][src$='utag.js']" }
+            ]
+        }
+    ],
+    "detectPopup": [{ "eval": "EVAL_ALASKAAIR_CC3_POPUP" }],
+    "optOut": [
+        {
+            "eval": "EVAL_ALASKAAIR_CC3_OPT_OUT"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_ALASKAAIR_CC3_OPT_IN"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_ALASKAAIR_CC3_TEST"
+        }
+    ]
+}

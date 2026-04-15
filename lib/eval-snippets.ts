@@ -203,6 +203,102 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+
+    /**
+     * Alaska Air loads orestbida CookieConsent v3 with hideFromBots; automated browsers never get #cc-main
+     * but the global API is still present — treat that as an open consent state so opt-out can run.
+     */
+    EVAL_ALASKAAIR_CC3_POPUP: () => {
+        if (typeof CookieConsent !== 'object' || typeof CookieConsent.getConfig !== 'function') {
+            return false;
+        }
+        const cfg = CookieConsent.getConfig();
+        if (!cfg) {
+            return false;
+        }
+        if (
+            document.documentElement.classList.contains('show--consent') ||
+            document.documentElement.classList.contains('show--preferences')
+        ) {
+            return true;
+        }
+        if (document.querySelector('#cc-main')) {
+            return true;
+        }
+        if (
+            cfg.hideFromBots === true &&
+            navigator.webdriver === true &&
+            typeof CookieConsent.validConsent === 'function' &&
+            CookieConsent.validConsent() === false
+        ) {
+            return true;
+        }
+        return false;
+    },
+    /** Alaska Air / Tealium CookieConsent v3: opt-out (US dismiss bar) or necessary-only (GDPR-style opt-in). */
+    EVAL_ALASKAAIR_CC3_OPT_OUT: () => {
+        if (typeof CookieConsent !== 'object') {
+            return false;
+        }
+        const cfg = typeof CookieConsent.getConfig === 'function' ? CookieConsent.getConfig() : null;
+        const mode = cfg && cfg.mode;
+        if (mode === 'opt-in' && typeof CookieConsent.acceptCategory === 'function') {
+            CookieConsent.acceptCategory([]);
+            return true;
+        }
+        if (typeof CookieConsent.hide === 'function') {
+            CookieConsent.hide();
+            return true;
+        }
+        return false;
+    },
+    EVAL_ALASKAAIR_CC3_OPT_IN: () => {
+        if (typeof CookieConsent !== 'object') {
+            return false;
+        }
+        const cfg = typeof CookieConsent.getConfig === 'function' ? CookieConsent.getConfig() : null;
+        const mode = cfg && cfg.mode;
+        if (mode === 'opt-in' && typeof CookieConsent.acceptCategory === 'function') {
+            CookieConsent.acceptCategory('all');
+            return true;
+        }
+        if (typeof CookieConsent.hide === 'function') {
+            CookieConsent.hide();
+            return true;
+        }
+        return false;
+    },
+    EVAL_ALASKAAIR_CC3_TEST: () => {
+        const root = document.documentElement;
+        if (root.classList.contains('show--consent') || root.classList.contains('show--preferences')) {
+            return false;
+        }
+        const m = document.cookie.match(/(?:^|;\s*)cc_cookie=([^;]+)/);
+        if (m) {
+            try {
+                const val = JSON.parse(decodeURIComponent(m[1]));
+                const cats = val.categories || [];
+                if (cats.indexOf('cc_analytics') !== -1 || cats.indexOf('cc_marketing') !== -1) {
+                    return false;
+                }
+            } catch (_e) {
+                return false;
+            }
+        }
+        if (typeof CookieConsent !== 'object' || typeof CookieConsent.getConfig !== 'function') {
+            return true;
+        }
+        const cfg = CookieConsent.getConfig();
+        if (!cfg || cfg.mode !== 'opt-in' || typeof CookieConsent.getUserPreferences !== 'function') {
+            return true;
+        }
+        const prefs = CookieConsent.getUserPreferences();
+        const accepted = prefs && prefs.acceptedCategories;
+        if (!accepted || !Array.isArray(accepted)) {
+            return false;
+        }
+        return accepted.indexOf('cc_analytics') === -1 && accepted.indexOf('cc_marketing') === -1;
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
