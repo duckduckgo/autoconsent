@@ -235,7 +235,7 @@ export const snippets = {
         }
         return false;
     },
-    /** Alaska Air / Tealium CookieConsent v3: opt-out (US dismiss bar) or necessary-only (GDPR-style opt-in). */
+    /** Alaska Air / Tealium CookieConsent v3: GDPR necessary-only, or minimal consent for US opt-out bar. */
     EVAL_ALASKAAIR_CC3_OPT_OUT: () => {
         if (typeof CookieConsent !== 'object') {
             return false;
@@ -246,6 +246,10 @@ export const snippets = {
             CookieConsent.acceptCategory([]);
             return true;
         }
+        if (typeof CookieConsent.acceptCategory === 'function') {
+            CookieConsent.acceptCategory('necessary');
+            return true;
+        }
         if (typeof CookieConsent.hide === 'function') {
             CookieConsent.hide();
             return true;
@@ -253,6 +257,11 @@ export const snippets = {
         return false;
     },
     EVAL_ALASKAAIR_CC3_OPT_IN: () => {
+        const btn = document.querySelector('#cc-main button[data-role="all"]');
+        if (btn) {
+            btn.click();
+            return true;
+        }
         if (typeof CookieConsent !== 'object') {
             return false;
         }
@@ -278,9 +287,16 @@ export const snippets = {
             try {
                 const val = JSON.parse(decodeURIComponent(m[1]));
                 const cats = val.categories || [];
+                if (!Array.isArray(cats)) {
+                    return false;
+                }
+                if (cats.length === 0 || (cats.length === 1 && cats[0] === 'necessary')) {
+                    return true;
+                }
                 if (cats.indexOf('cc_analytics') !== -1 || cats.indexOf('cc_marketing') !== -1) {
                     return false;
                 }
+                return true;
             } catch (_e) {
                 return false;
             }

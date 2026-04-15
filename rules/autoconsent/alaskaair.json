@@ -1,7 +1,7 @@
 {
     "name": "alaskaair",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?alaskaair\\.com/"
+        "urlPattern": "^https?://(www\\.)?alaskaair\\.com/"
     },
     "_metadata": {
         "vendorUrl": "https://github.com/orestbida/cookieconsent"
@@ -17,19 +17,19 @@
         }
     ],
     "detectPopup": [{ "eval": "EVAL_ALASKAAIR_CC3_POPUP" }],
+    "optIn": [{ "eval": "EVAL_ALASKAAIR_CC3_OPT_IN" }],
     "optOut": [
+        { "eval": "EVAL_ALASKAAIR_CC3_OPT_OUT" },
         {
-            "eval": "EVAL_ALASKAAIR_CC3_OPT_OUT"
+            "hide": "#cc-main",
+            "optional": true
+        },
+        {
+            "waitForVisible": "#cc-main",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
         }
     ],
-    "optIn": [
-        {
-            "eval": "EVAL_ALASKAAIR_CC3_OPT_IN"
-        }
-    ],
-    "test": [
-        {
-            "eval": "EVAL_ALASKAAIR_CC3_TEST"
-        }
-    ]
+    "test": [{ "eval": "EVAL_ALASKAAIR_CC3_TEST" }]
 }
