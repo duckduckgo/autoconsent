@@ -319,8 +319,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             results.push(this.elementVisible(rule.visible, rule.check));
         }
         if (rule.eval) {
-            const res = this.mainWorldEval(rule.eval);
-            results.push(res);
+            results.push(await this.mainWorldEval(rule.eval));
         }
         if (rule.waitFor) {
             results.push(this.waitForElement(rule.waitFor, rule.timeout));
