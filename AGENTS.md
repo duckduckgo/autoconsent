@@ -47,6 +47,8 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 
 ## Working with Rules
 
+> **Ignore `rules/filterlist.txt`.** The filterlist contains cosmetic CSS rules managed by a separate process. Agents should never read, edit, or reason about filterlist entries when creating, fixing, or cleaning up CMP rules.
+
 ### JSON Rules
 
 JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`.
