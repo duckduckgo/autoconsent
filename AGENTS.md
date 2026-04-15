@@ -190,6 +190,15 @@ Generated rules (`rules/generated/auto_XX_domain_hash.json`) are created by a cr
 
 Fixes typically need to be applied across all region variants of the same domain (e.g., `auto_CH_kitbag.com_*.json`, `auto_DE_kitbag.com_*.json`). Search for the domain to find all related files.
 
+### Cleaning Up Redundant Generated Rules
+
+When adding a new generic hand-maintained rule that covers a third-party CMP, **always search for and delete generated rules that the generic rule makes redundant.** Generated rules for the same CMP use fragile site-specific selectors that the generic rule replaces. Leaving them causes confusion and maintenance burden. Steps:
+
+1. Search `rules/generated/` for the CMP's identifiers (e.g. `grep -rl cookiesjsr rules/generated/`).
+2. Verify the generic rule works on a sample of those sites (use BrightData or Playwright).
+3. Delete the redundant generated rule files.
+4. Run `npm run lint` and `npm run test:lib` to confirm nothing breaks.
+
 ## Cosmetic Rules
 
 Cosmetic rules hide the cookie popup via CSS rather than clicking a reject button. They are marked with `"cosmetic": true` and use `hide` steps in their `optOut` array. Use cosmetic rules when a popup has no reject/decline button — only an "Accept" or "Close" option.
