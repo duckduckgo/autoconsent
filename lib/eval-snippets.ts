@@ -203,6 +203,36 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** BBB.org custom banner: set consent cookies (same values as POST /manage-cookies) and dismiss the host element. */
+    EVAL_BBB_ORG_OPT_OUT: () => {
+        const policy = encodeURIComponent(
+            JSON.stringify({
+                necessary: true,
+                functional: false,
+                performance: false,
+                marketing: false,
+            }),
+        );
+        const maxAgeYear = 60 * 60 * 24 * 365;
+        const maxAgeDay = 60 * 60 * 24;
+        document.cookie = `iabbb_cookies_policy=${policy}; path=/; domain=.bbb.org; max-age=${maxAgeYear}; SameSite=Lax`;
+        document.cookie = `iabbb_cookies_preferences_set=true; path=/; domain=.bbb.org; max-age=${maxAgeDay}; SameSite=Lax`;
+        document.querySelectorAll('iabbb-cookies-message').forEach((el) => el.remove());
+        return true;
+    },
+    EVAL_BBB_ORG_TEST: () => {
+        const part = document.cookie.split(';').find((c) => c.trim().startsWith('iabbb_cookies_policy='));
+        if (!part) {
+            return false;
+        }
+        const raw = part.split('=').slice(1).join('=');
+        try {
+            const j = JSON.parse(decodeURIComponent(raw));
+            return j.functional === false && j.performance === false && j.marketing === false;
+        } catch {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
