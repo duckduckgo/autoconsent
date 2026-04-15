@@ -1,0 +1,38 @@
+{
+    "name": "HubSpot EU cookie banner",
+    "_metadata": {
+        "vendorUrl": "https://www.hubspot.com/wt-assets/static-files/compliance/index.js"
+    },
+    "prehideSelectors": ["#hs-banner-parent #hs-eu-cookie-confirmation"],
+    "detectCmp": [
+        {
+            "exists": "#hs-banner-parent #hs-eu-cookie-confirmation"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#hs-banner-parent:not(.banner-visually-hidden) #hs-eu-cookie-confirmation"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#hs-eu-confirmation-button"
+        }
+    ],
+    "optOut": [
+        {
+            "optional": true,
+            "waitForThenClick": "#hs-modal-decline-all",
+            "timeout": 3000
+        },
+        {
+            "waitForThenClick": "#hs-eu-decline-button"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#hs-banner-parent #hs-eu-cookie-confirmation",
+            "check": "none"
+        }
+    ]
+}
