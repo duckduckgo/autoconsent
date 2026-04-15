@@ -281,9 +281,17 @@ export async function testPage(page, url, regionKey, options = {}) {
         let captchaDetected = false;
         let captchaSolved = null;
         const captchaSolvedPromise = new Promise((resolve) => {
-            captchaClient.on('Captcha.detected', () => { captchaDetected = true; });
-            captchaClient.on('Captcha.solveFinished', () => { captchaSolved = true; resolve(); });
-            captchaClient.on('Captcha.solveFailed', () => { captchaSolved = false; resolve(); });
+            captchaClient.on('Captcha.detected', () => {
+                captchaDetected = true;
+            });
+            captchaClient.on('Captcha.solveFinished', () => {
+                captchaSolved = true;
+                resolve();
+            });
+            captchaClient.on('Captcha.solveFailed', () => {
+                captchaSolved = false;
+                resolve();
+            });
         });
 
         const ctx = await injectAutoconsent(page, options);
