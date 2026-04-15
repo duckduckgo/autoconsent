@@ -204,9 +204,7 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_OSANO_DETECT_CMP: () =>
-        !!document.querySelector(
-            'script[src*="cmp.osano.com"],script[src*="osano.js"],script[src*="/osano"],link[href*="osano"]',
-        ) ||
+        !!document.querySelector('script[src*="cmp.osano.com"],script[src*="osano.js"],script[src*="/osano"],link[href*="osano"]') ||
         typeof window.Osano === 'function' ||
         !!document.querySelector('.osano-cm-window'),
     /** True when the Osano banner or dialog is visibly on screen (API may lag before Osano.cm exists). */
