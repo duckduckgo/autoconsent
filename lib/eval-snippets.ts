@@ -191,6 +191,27 @@ export const snippets = {
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
+    /** Transcend Airgap (consent manager in open shadow root under #transcend-consent-manager) */
+    EVAL_TRANSCEND_AIRGAP_DETECT: () => !!(window.airgap && typeof window.airgap.getConsent === 'function'),
+    EVAL_TRANSCEND_AIRGAP_TEST: () => {
+        const host = document.getElementById('transcend-consent-manager');
+        if (!host?.shadowRoot) {
+            return true;
+        }
+        const dlg = host.shadowRoot.querySelector('#consentManagerMainDialog');
+        if (!dlg) {
+            return true;
+        }
+        const rect = dlg.getBoundingClientRect();
+        const style = getComputedStyle(dlg);
+        const visible =
+            rect.width > 0 &&
+            rect.height > 0 &&
+            style.visibility !== 'hidden' &&
+            style.display !== 'none' &&
+            parseFloat(style.opacity || '1') > 0;
+        return !visible;
+    },
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',

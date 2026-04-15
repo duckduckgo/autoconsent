@@ -1,0 +1,40 @@
+{
+    "name": "transcend",
+    "_metadata": {
+        "vendorUrl": "https://transcend.io/"
+    },
+    "prehideSelectors": ["#transcend-consent-manager"],
+    "detectCmp": [
+        {
+            "exists": "#transcend-consent-manager"
+        },
+        {
+            "eval": "EVAL_TRANSCEND_AIRGAP_DETECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog", "button.button"],
+            "timeout": 15000
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog", "button.button"],
+            "timeout": 15000
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "eval": "EVAL_TRANSCEND_AIRGAP_TEST"
+        }
+    ]
+}
