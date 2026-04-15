@@ -1,0 +1,54 @@
+{
+    "name": "time-com-ketch",
+    "vendorUrl": "https://time.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?time\\.com/"
+    },
+    "prehideSelectors": ["#ketch-consent-banner", "[data-ketch-backdrop=\"true\"]"],
+    "detectCmp": [
+        {
+            "exists": "script[src*=\"ketchcdn.com/web/v3/config/time/time_com/boot.js\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": "#ketch-consent-banner"
+        },
+        {
+            "eval": "EVAL_KETCH_POPUP_OPEN"
+        }
+    ],
+    "optOut": [
+        {
+            "wait": 500,
+            "optional": true
+        },
+        {
+            "waitFor": "#ketch-consent-banner",
+            "timeout": 15000
+        },
+        {
+            "eval": "EVAL_KETCH_OPT_OUT"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": "#ketch-consent-banner",
+            "timeout": 15000
+        },
+        {
+            "eval": "EVAL_KETCH_OPT_IN"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500,
+            "optional": true
+        },
+        {
+            "eval": "EVAL_KETCH_TEST_DISMISSED"
+        }
+    ]
+}
