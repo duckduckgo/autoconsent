@@ -175,6 +175,18 @@ export const snippets = {
         });
         return true;
     },
+    EVAL_SIRDATA_USP_OPT_OUT_TEST: () => {
+        const raw = document.cookie
+            .split(';')
+            .map((c) => c.trim())
+            .find((c) => c.startsWith('usprivacy='));
+        if (!raw) {
+            return false;
+        }
+        const value = raw.split('=')[1] || '';
+        // US Privacy String: ...[2] === 'Y' means the user opted out of sale (Sirdata / GPP USP v1)
+        return value.length >= 3 && value[2] === 'Y';
+    },
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(

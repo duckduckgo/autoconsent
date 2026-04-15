@@ -1,0 +1,127 @@
+{
+    "name": "sirdata",
+    "prehideSelectors": ["#sd-cmp"],
+    "detectCmp": [
+        {
+            "exists": "#sd-cmp"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#sd-cmp .sd-cmp-wBgKb"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#sd-cmp .sd-cmp-mfn-G button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#sd-cmp .sd-cmp-mfn-G button"
+                },
+                {
+                    "wait": 300
+                }
+            ]
+        },
+        {
+            "if": {
+                "visible": "xpath///div[@id='sd-cmp']//button[.//span[contains(.,'Accept the sale')]]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "xpath///div[@id='sd-cmp']//button[.//span[contains(.,'Accept the sale')]]"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "xpath///div[@id='sd-cmp']//button[contains(.,'Accept all')]"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "xpath///div[@id='sd-cmp']//button[contains(.,'Accept all')]"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#sd-cmp .sd-cmp-mfn-G button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#sd-cmp .sd-cmp-mfn-G button"
+                },
+                {
+                    "wait": 300
+                }
+            ]
+        },
+        {
+            "if": {
+                "visible": "xpath///div[@id='sd-cmp']//button[.//span[contains(.,'Do not sell')]]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "xpath///div[@id='sd-cmp']//button[.//span[contains(.,'Do not sell')]]"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "xpath///div[@id='sd-cmp']//button[contains(.,'Reject')]"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "xpath///div[@id='sd-cmp']//button[contains(.,'Reject')]"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": {
+                                "visible": "xpath///div[@id='sd-cmp']//button[contains(.,'Decline')]"
+                            },
+                            "then": [
+                                {
+                                    "waitForThenClick": "xpath///div[@id='sd-cmp']//button[contains(.,'Decline')]"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "waitForThenClick": "#sd-cmp .sd-cmp-bS5Na",
+                                    "optional": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "eval": "EVAL_SIRDATA_USP_OPT_OUT_TEST"
+                },
+                {
+                    "visible": "#sd-cmp .sd-cmp-wBgKb",
+                    "negated": true
+                }
+            ]
+        }
+    ]
+}
