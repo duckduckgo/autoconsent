@@ -66,8 +66,8 @@ if (!window.autoconsentSendMessage) {
 `;
 
 export const REGIONS = {
-    'us-ny': '-country-us-state-ny',
-    'us-la': '-country-us-state-ca',
+    'us-newyork': '-country-us-city-newyork',
+    'us-losangeles': '-country-us-city-losangeles',
     de: '-country-de',
     fr: '-country-fr',
     gb: '-country-gb',
