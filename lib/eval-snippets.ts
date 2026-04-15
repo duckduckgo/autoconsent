@@ -257,8 +257,7 @@ export const snippets = {
         const optedInAnalytics =
             c.includes('analytics_optimizely') &&
             (c.includes('%22analytics_optimizely%22%3Atrue') || c.includes('"analytics_optimizely":true'));
-        const noAnalyticsConsent =
-            !c.includes('%22analytics_optimizely%22%3Atrue') && !c.includes('"analytics_optimizely":true');
+        const noAnalyticsConsent = !c.includes('%22analytics_optimizely%22%3Atrue') && !c.includes('"analytics_optimizely":true');
         return optedInAnalytics || noAnalyticsConsent;
     },
 };
