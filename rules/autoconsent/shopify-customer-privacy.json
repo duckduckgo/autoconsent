@@ -3,11 +3,6 @@
     "_metadata": {
         "vendorUrl": "https://help.shopify.com/en/manual/privacy-and-security/privacy/customer-privacy"
     },
-    "runContext": {
-        "main": true,
-        "frame": false,
-        "urlPattern": ""
-    },
     "prehideSelectors": ["#shopify-pc__banner"],
     "detectCmp": [{ "exists": "#shopify-pc__banner" }],
     "detectPopup": [{ "visible": "#shopify-pc__banner #shopify-pc__banner__btn-decline" }],
