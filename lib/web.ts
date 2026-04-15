@@ -554,16 +554,17 @@ export default class AutoConsent {
     }
 
     // TODO: use MutationObserver like in findCmp()
-    async waitForPopup(cmp: AutoCMP, retries = 10, interval = 500): Promise<boolean> {
+    async waitForPopup(cmp: AutoCMP, retries?: number, interval = 500): Promise<boolean> {
         const logsConfig = this.config.logs;
+        const maxRetries = retries ?? Math.max(10, this.config.detectRetries * 2);
         logsConfig.lifecycle && console.log('checking if popup is open...', cmp.name);
         const isOpen = await cmp.detectPopup().catch((e) => {
             logsConfig.errors && console.warn(`error detecting popup for ${cmp.name}`, e);
             return false;
         }); // ignore possible errors in one-time popup detection
-        if (!isOpen && retries > 0) {
+        if (!isOpen && maxRetries > 0) {
             await this.domActions.wait(interval);
-            return this.waitForPopup(cmp, retries - 1, interval);
+            return this.waitForPopup(cmp, maxRetries - 1, interval);
         }
         logsConfig.lifecycle && console.log(cmp.name, `popup is ${isOpen ? 'open' : 'not open'}`);
         return isOpen;
