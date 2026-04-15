@@ -1,0 +1,9 @@
+{
+    "name": "hubspot-cookie-banner",
+    "prehideSelectors": ["#hs-banner-parent"],
+    "detectCmp": [{ "exists": "#hs-banner-parent" }],
+    "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
+    "optIn": [{ "waitForThenClick": "#hs-eu-confirmation-button" }],
+    "optOut": [{ "waitForThenClick": "#hs-eu-decline-button" }],
+    "test": [{ "eval": "EVAL_HUBSPOT_COOKIE_BANNER_TEST" }]
+}

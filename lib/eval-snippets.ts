@@ -203,6 +203,36 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /**
+     * HubSpot compliance banner: __hs_cookie_cat_pref (e.g. 1:false_2:false_3:false for reject non-essential).
+     */
+    EVAL_HUBSPOT_COOKIE_BANNER_TEST: () => {
+        const raw = document.cookie
+            .split(';')
+            .map((c) => c.trim())
+            .find((c) => c.startsWith('__hs_cookie_cat_pref='));
+        if (!raw) {
+            return false;
+        }
+        let v = raw.split('=', 2)[1];
+        try {
+            v = decodeURIComponent(v);
+        } catch {
+            return false;
+        }
+        if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+            v = v.slice(1, -1);
+        }
+        const segments = v.split('_');
+        if (segments.length < 3) {
+            return false;
+        }
+        const lastToken = (s) => {
+            const i = s.lastIndexOf(':');
+            return i === -1 ? s : s.slice(i + 1);
+        };
+        return segments.slice(0, 3).every((s) => lastToken(s).toLowerCase() === 'false');
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
