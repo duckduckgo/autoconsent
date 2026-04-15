@@ -1,3 +1,8 @@
+---
+name: fix-cmp-rule
+description: Diagnoses and fixes a broken autoconsent rule when opt-out fails, selectors are outdated, or the CMP changed. Use when an existing rule is detected but fails (devtools console shows "Found CMP" with failure).
+---
+
 # Fix CMP Rule
 
 Step-by-step workflow for diagnosing and fixing a broken autoconsent rule.
