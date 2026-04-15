@@ -30,12 +30,12 @@ npm run prepublish
 
 ## Library API
 
-The utility functions are in `scripts/brightdata.ts` (relative to this skill folder). Import them in any TypeScript script using `ts-node --transpile-only`.
+The utility functions are in `scripts/brightdata.js` (relative to this skill folder). Require them in any Node.js script.
 
 ### Quick usage — test a URL across regions
 
-```typescript
-import { testUrl, formatResult, REGIONS } from './.cursor/skills/brightdata-testing/scripts/brightdata';
+```javascript
+const { testUrl, formatResult, REGIONS } = require('./.cursor/skills/brightdata-testing/scripts/brightdata');
 
 for (const region of Object.keys(REGIONS)) {
     const result = await testUrl('https://www.wohnen.de/', region);
@@ -49,7 +49,7 @@ for (const region of Object.keys(REGIONS)) {
 
 Highest-level function. Connects to BrightData, opens a page, navigates to the URL, injects autoconsent in an isolated world, waits for completion, takes a final screenshot, and closes the browser.
 
-```typescript
+```javascript
 const result = await testUrl('https://www.wohnen.de/', 'de');
 // result.cmpDetected === 'Cybotcookiebot'
 // result.optOutResult === true
@@ -59,8 +59,8 @@ const result = await testUrl('https://www.wohnen.de/', 'de');
 
 Same as `testUrl` but takes an already-connected Playwright `Page`. Use when you want to manage the browser lifecycle yourself (e.g., reusing a connection, inspecting the page after the test).
 
-```typescript
-import { connectBrightData, testPage } from './.cursor/skills/brightdata-testing/scripts/brightdata';
+```javascript
+const { connectBrightData, testPage } = require('./.cursor/skills/brightdata-testing/scripts/brightdata');
 
 const browser = await connectBrightData('de');
 const page = await browser.newPage();
@@ -77,7 +77,7 @@ Connect to a BrightData remote browser for a specific region. Returns a Playwrig
 
 Low-level injection. Sets up CDP bindings and injects autoconsent into the page's isolated world. Call this **before** navigating to the target URL. Returns an `AutoconsentContext` for tracking messages.
 
-```typescript
+```javascript
 const ctx = await injectAutoconsent(page, { action: 'optOut' });
 await page.goto('https://www.wohnen.de/', { waitUntil: 'commit' });
 const completed = await ctx.waitForCompletion(45000);
