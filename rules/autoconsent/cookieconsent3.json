@@ -20,7 +20,9 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cm__btn[data-role=necessary]"
+            "if": { "visible": ".cm__btn[data-role=necessary]" },
+            "then": [{ "waitForThenClick": ".cm__btn[data-role=necessary]" }],
+            "else": [{ "waitForThenClick": ".cm__btn[data-role=all]" }]
         }
     ],
     "test": [
