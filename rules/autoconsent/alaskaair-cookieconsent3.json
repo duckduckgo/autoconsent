@@ -1,0 +1,38 @@
+{
+    "name": "alaskaair-cookieconsent3",
+    "comment": "Alaska/Hawaiian use orestbida CookieConsent v3 via Tealium (tags.tiqcdn.com). The library may skip rendering for automated browsers while still exposing CookieConsent.acceptCategory — use eval for opt-in/out and popup detection when no visible banner.",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?(alaskaair|hawaiianairlines)\\.com/"
+    },
+    "detectCmp": [
+        {
+            "eval": "EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_DETECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#cc-main .cm-wrapper" }, { "eval": "EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_POPUP_OPEN" }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": ".cm__btn[data-role=all]" },
+            "then": [{ "waitForThenClick": ".cm__btn[data-role=all]" }],
+            "else": [{ "eval": "EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_OPTIN" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ".cm__btn[data-role=necessary]" },
+            "then": [{ "waitForThenClick": ".cm__btn[data-role=necessary]" }],
+            "else": [
+                {
+                    "if": { "visible": ".cm__btn[data-role=all]" },
+                    "then": [{ "waitForThenClick": ".cm__btn[data-role=all]" }],
+                    "else": [{ "eval": "EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_OPTOUT" }]
+                }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_TEST_OPTOUT" }]
+}

@@ -203,6 +203,64 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+
+    /** Tealium-hosted orestbida CookieConsent v3 on alaskaair.com / hawaiianairlines.com */
+    EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_DETECT: () =>
+        !!document.querySelector('script[src*="/libs/cookieconsent/"], script[src*="cookieconsent.umd.js"]'),
+    EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_POPUP_OPEN: () =>
+        typeof window.CookieConsent === 'object' &&
+        typeof window.CookieConsent.validConsent === 'function' &&
+        !window.CookieConsent.validConsent(),
+    EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_OPTOUT: () => {
+        if (typeof window.CookieConsent !== 'object' || typeof window.CookieConsent.acceptCategory !== 'function') {
+            return false;
+        }
+        try {
+            window.CookieConsent.acceptCategory('cc_necessary');
+            return true;
+        } catch (_e) {
+            return false;
+        }
+    },
+    EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_OPTIN: () => {
+        if (typeof window.CookieConsent !== 'object' || typeof window.CookieConsent.acceptCategory !== 'function') {
+            return false;
+        }
+        try {
+            window.CookieConsent.acceptCategory('all');
+            return true;
+        } catch (_e) {
+            return false;
+        }
+    },
+    EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_TEST_OPTOUT: () => {
+        try {
+            const m = document.cookie.match(/(?:^|;\s*)cc_cookie=([^;]+)/);
+            if (!m) {
+                return false;
+            }
+            const data = JSON.parse(decodeURIComponent(m[1]));
+            const cats = data.categories || [];
+            return !cats.includes('cc_analytics') && !cats.includes('cc_marketing');
+        } catch (_e) {
+            return false;
+        }
+    },
+    EVAL_ALASKA_TEALIUM_COOKIE_CONSENT3_TEST_OPTIN: () => {
+        if (typeof window.CookieConsent !== 'object' || typeof window.CookieConsent.getUserPreferences !== 'function') {
+            return false;
+        }
+        try {
+            const p = window.CookieConsent.getUserPreferences();
+            return (
+                p.acceptType === 'all' ||
+                (p.acceptedCategories || []).includes('cc_analytics') ||
+                (p.acceptedCategories || []).includes('cc_marketing')
+            );
+        } catch (_e) {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
