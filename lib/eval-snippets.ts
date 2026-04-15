@@ -203,6 +203,34 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Shopify storefront privacy banner: `_tracking_consent` encodes declined marketing (JSON v2.1, compact v3, or percent-encoded). */
+    EVAL_SHOPIFY_PRIVACY_BANNER_TEST: () => {
+        const m = document.cookie.match(/(?:^|;\s*)_tracking_consent=([^;]*)/);
+        if (!m) {
+            return false;
+        }
+        try {
+            let v = decodeURIComponent(m[1]);
+            if (v.startsWith('%')) {
+                try {
+                    v = decodeURIComponent(v);
+                } catch {
+                    return false;
+                }
+            }
+            if (v.startsWith('{')) {
+                const j = JSON.parse(v);
+                return j.marketing === false || j.marketing === 'false' || j.marketing === 0;
+            }
+            if (v.startsWith('3')) {
+                const head = v.slice(1).split('_')[0] || '';
+                return head.includes('m') && !head.includes('M');
+            }
+            return /"marketing"\s*:\s*false/.test(v) || /"marketing"\s*:\s*0/.test(v);
+        } catch {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
