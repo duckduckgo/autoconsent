@@ -1,0 +1,67 @@
+{
+    "name": "tealium-consent-manager-aginteractive",
+    "_metadata": {
+        "vendorUrl": "https://tags.tiqcdn.com/utag/aginteractive/main/prod/utag.js"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?(americangreetings\\.com|bluemountain\\.com|jacquielawson\\.com)/"
+    },
+    "prehideSelectors": ["#__tealiumGDPRecModal #privacy_manager"],
+    "detectCmp": [
+        {
+            "exists": "#__tealiumGDPRecModal #privacy_manager"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__tealiumGDPRecModal #privacy_manager"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#decline_cookies"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#accept_cookies"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_TEALIUM_CM_AGINTERACTIVE_OPTIN"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#decline_cookies"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#decline_cookies"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_TEALIUM_CM_AGINTERACTIVE_OPTOUT"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#__tealiumGDPRecModal",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_TEALIUM_CM_AGINTERACTIVE_TEST"
+        }
+    ]
+}

@@ -203,6 +203,56 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Tealium Consent Manager (aginteractive profile): US banner is a single "Ok" that opts in by default — opt out via API. */
+    EVAL_TEALIUM_CM_AGINTERACTIVE_OPTOUT: () => {
+        if (typeof utag === 'undefined' || !utag.gdpr || !utag.data) {
+            return false;
+        }
+        if (utag.data.is_us_ip !== 'True') {
+            return false;
+        }
+        utag.gdpr.setConsentValue(0);
+        utag.gdpr.setCookieValue('acceptPrompt', false);
+        utag.gdpr.setPreferencesValues({ 1: 0, 3: 0 });
+        if (typeof tSetCookie === 'function') {
+            tSetCookie('PMClkOK', '0');
+        }
+        const modal = document.getElementById('__tealiumGDPRecModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        return true;
+    },
+    EVAL_TEALIUM_CM_AGINTERACTIVE_OPTIN: () => {
+        if (typeof utag === 'undefined' || !utag.gdpr) {
+            return false;
+        }
+        utag.gdpr.setConsentValue(1);
+        utag.gdpr.setCookieValue('acceptPrompt', true);
+        utag.gdpr.setPreferencesValues({ 1: 1, 3: 1 });
+        if (typeof tSetCookie === 'function') {
+            tSetCookie('PMClkOK', '1');
+        }
+        const modal = document.getElementById('__tealiumGDPRecModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        return true;
+    },
+    EVAL_TEALIUM_CM_AGINTERACTIVE_TEST: () => {
+        const modal = document.getElementById('__tealiumGDPRecModal');
+        if (modal) {
+            const disp = modal.style.display || getComputedStyle(modal).display;
+            if (disp !== 'none') {
+                return false;
+            }
+        }
+        const interactive = document.querySelector('#decline_cookies, #gpc_button, #accept_cookies, #preferences_prompt_submit');
+        if (interactive && (interactive as HTMLElement).offsetParent !== null) {
+            return false;
+        }
+        return true;
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
