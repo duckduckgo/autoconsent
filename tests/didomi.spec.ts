@@ -16,3 +16,7 @@ generateCMPTests(
         skipRegions: ['US'],
     },
 );
+
+generateCMPTests('didomi', ['https://us.sandro-paris.com/en/womens/thanksgiving-event/see-all/'], {
+    testSelfTest: false,
+});
