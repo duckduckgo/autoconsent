@@ -1,0 +1,30 @@
+{
+    "name": "transcend-airgap",
+    "vendorUrl": "https://www.verizon.com/support/account-pin-faqs/",
+    "prehideSelectors": ["#transcend-consent-manager"],
+    "detectCmp": [
+        {
+            "exists": "#transcend-consent-manager"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog button.button"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog button.button"]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_TRANSCEND_AIRGAP_TEST"
+        }
+    ]
+}

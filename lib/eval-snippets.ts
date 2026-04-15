@@ -203,6 +203,36 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Transcend Airgap consent manager (open shadow root under `#transcend-consent-manager`) */
+    EVAL_TRANSCEND_AIRGAP_TEST: () => {
+        try {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (!key || !key.toLowerCase().includes('consent')) {
+                    continue;
+                }
+                const raw = localStorage.getItem(key);
+                if (!raw || raw[0] !== '{') {
+                    continue;
+                }
+                const parsed = JSON.parse(raw);
+                if (typeof parsed !== 'object' || parsed === null) {
+                    continue;
+                }
+                for (const v of Object.values(parsed)) {
+                    if (v && typeof v === 'object' && v.confirmed === true) {
+                        return true;
+                    }
+                    if (Array.isArray(v) && v.some((item) => item && item.confirmed === true)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
