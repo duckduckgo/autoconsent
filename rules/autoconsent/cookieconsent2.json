@@ -23,7 +23,9 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#s-rall-bn"
+            "if": { "exists": "#s-rall-bn" },
+            "then": [{ "waitForThenClick": "#s-rall-bn" }],
+            "else": [{ "waitForThenClick": "#c-s-bn" }, { "waitForThenClick": "#s-sv-bn" }]
         }
     ],
     "test": [
