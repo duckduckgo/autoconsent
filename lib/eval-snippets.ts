@@ -188,6 +188,15 @@ export const snippets = {
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
+    /** Tealium GDPR "explicit consent" notice (often only an OK button): deny non-essential categories via API. */
+    EVAL_TEALIUM_EXPLICIT_CONSENT_OPTOUT: () => {
+        if (window.utag && window.utag.gdpr && typeof window.utag.gdpr.setAllCategories === 'function') {
+            window.utag.gdpr.setAllCategories(false);
+            return true;
+        }
+        return false;
+    },
+    EVAL_TEALIUM_EXPLICIT_CONSENT_TEST: () => document.cookie.includes('consent:false'),
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',

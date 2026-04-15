@@ -1,0 +1,19 @@
+{
+    "name": "tealium-explicit-consent",
+    "vendorUrl": "https://www.tealium.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#__tealiumGDPRecModal"],
+    "detectCmp": [
+        {
+            "exists": "#__tealiumGDPRecModal #privacy_manager.explicit_consent button#accept_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__tealiumGDPRecModal #privacy_manager.explicit_consent button#accept_cookies"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#accept_cookies" }],
+    "optOut": [{ "eval": "EVAL_TEALIUM_EXPLICIT_CONSENT_OPTOUT" }, { "hide": "#__tealiumGDPRecModal" }],
+    "test": [{ "eval": "EVAL_TEALIUM_EXPLICIT_CONSENT_TEST" }]
+}
