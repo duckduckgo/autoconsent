@@ -199,6 +199,8 @@ export const snippets = {
             'refuse',
             'decline',
             'deny',
+            'do not sell',
+            "don't sell",
             'only necessary',
             'necessary only',
             'only essential',
@@ -241,6 +243,7 @@ export const snippets = {
         }
         const norm = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
         const acceptHints = [
+            'accept the sale',
             'accept all',
             'allow all',
             'agree',
