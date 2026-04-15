@@ -219,9 +219,7 @@ export const snippets = {
         }
         const textOf = (el) => (el.textContent || '').replace(/\s+/g, ' ').trim();
         const btns = [...sr.querySelectorAll('button')];
-        const acceptBtn = btns.find((b) =>
-            /\b(accept all|accept|agree|allow all|allow|save preferences|confirm)\b/i.test(textOf(b)),
-        );
+        const acceptBtn = btns.find((b) => /\b(accept all|accept|agree|allow all|allow|save preferences|confirm)\b/i.test(textOf(b)));
         if (acceptBtn) {
             acceptBtn.click();
             return true;
