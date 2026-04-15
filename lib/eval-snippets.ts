@@ -215,12 +215,7 @@ export const snippets = {
                 return false;
             }
             const s = getComputedStyle(el);
-            return (
-                s.display !== 'none' &&
-                s.visibility !== 'hidden' &&
-                parseFloat(s.opacity || '1') > 0 &&
-                el.getClientRects().length > 0
-            );
+            return s.display !== 'none' && s.visibility !== 'hidden' && parseFloat(s.opacity || '1') > 0 && el.getClientRects().length > 0;
         };
         return ['ketch-consent-banner', 'ketch-purposes-modal', 'ketch-preferences-purposes-tab'].some((id) =>
             visible(document.getElementById(id)),
@@ -261,7 +256,9 @@ export const snippets = {
                 return false;
             }
             const buttons = [...root.querySelectorAll('button')];
-            const reject = buttons.find((b) => /^(reject all|ablehnen|alle ablehnen|refuser tout|tout refuser)$/i.test((b.textContent || '').trim()));
+            const reject = buttons.find((b) =>
+                /^(reject all|ablehnen|alle ablehnen|refuser tout|tout refuser)$/i.test((b.textContent || '').trim()),
+            );
             if (reject) {
                 reject.click();
                 return true;
