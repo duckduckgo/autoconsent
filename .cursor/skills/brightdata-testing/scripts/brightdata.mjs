@@ -25,7 +25,8 @@
  * @typedef {Object} TestResult
  * @property {string} url
  * @property {string} region
- * @property {string|null} cmpDetected
+ * @property {string[]} cmpsDetected - All CMPs detected on the page.
+ * @property {string|null} cmpActedOn - The CMP that was actually opted out/in.
  * @property {boolean} popupFound
  * @property {boolean|null} optOutResult
  * @property {boolean|null} optInResult
@@ -209,7 +210,8 @@ export async function injectAutoconsent(page, options = {}) {
         const result = {
             url,
             region,
-            cmpDetected: null,
+            cmpsDetected: [],
+            cmpActedOn: null,
             popupFound: false,
             optOutResult: null,
             optInResult: null,
@@ -223,16 +225,18 @@ export async function injectAutoconsent(page, options = {}) {
         for (const msg of received) {
             switch (msg.type) {
                 case 'cmpDetected':
-                    result.cmpDetected = msg.cmp;
+                    result.cmpsDetected.push(msg.cmp);
                     break;
                 case 'popupFound':
                     result.popupFound = true;
                     break;
                 case 'optOutResult':
                     result.optOutResult = msg.result;
+                    result.cmpActedOn = msg.cmp;
                     break;
                 case 'optInResult':
                     result.optInResult = msg.result;
+                    result.cmpActedOn = msg.cmp;
                     break;
                 case 'selfTestResult':
                     result.selfTestResult = msg.result;
@@ -297,7 +301,8 @@ export async function testPage(page, url, regionKey, options = {}) {
         return {
             url,
             region: regionKey,
-            cmpDetected: null,
+            cmpsDetected: [],
+            cmpActedOn: null,
             popupFound: false,
             optOutResult: null,
             optInResult: null,
@@ -329,7 +334,8 @@ export async function testUrl(url, regionKey, options = {}) {
         return {
             url,
             region: regionKey,
-            cmpDetected: null,
+            cmpsDetected: [],
+            cmpActedOn: null,
             popupFound: false,
             optOutResult: null,
             optInResult: null,
@@ -358,12 +364,13 @@ export function formatResult(result) {
     let status;
     if (actionAttempted && actionResult) status = 'PASS';
     else if (actionAttempted && !actionResult) status = 'ACTION FAILED';
-    else if (result.cmpDetected) status = 'PARTIAL';
+    else if (result.cmpsDetected.length > 0) status = 'PARTIAL';
     else status = 'NO CMP';
 
     const parts = [
         `${status} [${result.region}] ${result.url}`,
-        `  CMP: ${result.cmpDetected || 'none'} | Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | OptIn: ${result.optInResult} | SelfTest: ${result.selfTestResult}`,
+        `  CMP: ${result.cmpActedOn || 'none'}${result.cmpsDetected.length > 1 ? ` (also detected: ${result.cmpsDetected.filter((c) => c !== result.cmpActedOn).join(', ')})` : ''}`,
+        `  Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | OptIn: ${result.optInResult} | SelfTest: ${result.selfTestResult}`,
         `  Done: ${result.autoconsentDone}${result.isCosmetic ? ' (cosmetic)' : ''} | ${result.duration}ms`,
     ];
     if (result.errors.length > 0) {
