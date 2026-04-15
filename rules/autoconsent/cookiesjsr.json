@@ -1,0 +1,15 @@
+{
+    "name": "cookiesjsr",
+    "prehideSelectors": ["#cookiesjsr"],
+    "detectCmp": [{ "exists": "#cookiesjsr" }],
+    "detectPopup": [{ "visible": "#cookiesjsr .cookiesjsr-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookiesjsr button.allcookies" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookiesjsr button.denyAll" },
+            "then": [{ "waitForThenClick": "#cookiesjsr button.denyAll" }],
+            "else": [{ "hide": "#cookiesjsr" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cookiesjsr=" }]
+}
