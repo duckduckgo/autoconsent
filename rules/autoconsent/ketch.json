@@ -1,0 +1,44 @@
+{
+    "name": "ketch",
+    "vendorUrl": "https://time.com/",
+    "prehideSelectors": ["#ketch-consent-banner", "[data-ketch-backdrop=\"true\"]", "#ketch-purposes-modal"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#ketch-consent-banner" }, { "exists": "#ketch-purposes-modal" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#ketch-consent-banner" }, { "visible": "#ketch-purposes-modal" }]
+        }
+    ],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "if": { "exists": "#ketch-banner-button-tertiary" },
+            "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary", "timeout": 5000 }],
+            "else": [
+                { "waitForThenClick": "#ketch-banner-button-secondary", "timeout": 5000 },
+                {
+                    "waitForThenClick": [
+                        "#ketch-purposes-modal",
+                        "xpath///button[contains(., 'Deny') or contains(., 'Reject All') or contains(., 'Reject all') or contains(., 'Reject') or contains(., 'Refuse') or contains(., 'Ablehnen') or contains(., 'Alle ablehnen') or contains(., 'Tout refuser') or contains(., 'Refuser tout') or contains(., 'Rifiuta')]"
+                    ],
+                    "timeout": 8000
+                },
+                {
+                    "waitForThenClick": [
+                        "#ketch-purposes-modal",
+                        "xpath///button[contains(., 'Confirm') or contains(., 'Save') or contains(., 'Speichern') or contains(., 'Continue') or contains(., 'Continuer')]"
+                    ],
+                    "timeout": 5000,
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#ketch-banner-button-primary", "timeout": 5000 }],
+    "test": [{ "cookieContains": "_ketch_consent_v1_=" }]
+}
