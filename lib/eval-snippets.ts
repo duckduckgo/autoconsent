@@ -202,6 +202,82 @@ export const snippets = {
     EVAL_USERCENTRICS_API_6: () => UC_UI.areAllConsentsAccepted() === false,
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
+    /** Transcend — opt in via API and/or accept-like control inside open shadow root (XPath cannot pierce shadow DOM) */
+    EVAL_TRANSCEND_ACCEPT: () => {
+        const ag = window.airgap;
+        if (ag && typeof ag.optIn === 'function') {
+            ag.optIn();
+        }
+        const host = document.querySelector('#transcend-consent-manager');
+        const sr = host?.shadowRoot;
+        if (!sr) {
+            return true;
+        }
+        const dialog = sr.querySelector('#consentManagerMainDialog');
+        if (!dialog) {
+            return true;
+        }
+        const textOf = (el) => (el.textContent || '').replace(/\s+/g, ' ').trim();
+        const btns = [...sr.querySelectorAll('button')];
+        const acceptBtn = btns.find((b) =>
+            /\b(accept all|accept|agree|allow all|allow|save preferences|confirm)\b/i.test(textOf(b)),
+        );
+        if (acceptBtn) {
+            acceptBtn.click();
+            return true;
+        }
+        const primary = sr.querySelector('button.button');
+        if (primary) {
+            primary.click();
+            return true;
+        }
+        return false;
+    },
+    /** Transcend Airgap (window.airgap / window.transcend) — best-effort API opt-out before DOM steps */
+    EVAL_TRANSCEND_OPT_OUT_API: () => {
+        let called = false;
+        const ag = window.airgap;
+        const tr = window.transcend;
+        if (ag && typeof ag.optOut === 'function') {
+            ag.optOut();
+            called = true;
+        }
+        if (tr && typeof tr.doNotSell === 'function') {
+            tr.doNotSell();
+            called = true;
+        }
+        if (tr && typeof tr.optOutNotice === 'function') {
+            tr.optOutNotice();
+            called = true;
+        }
+        return called;
+    },
+    /** Dismiss Transcend consent UI (hideConsentManager is often async — follow with wait + waitForVisible check none) */
+    EVAL_TRANSCEND_DISMISS: () => {
+        const tr = window.transcend;
+        if (tr && typeof tr.hideConsentManager === 'function') {
+            tr.hideConsentManager();
+        }
+        const host = document.querySelector('#transcend-consent-manager');
+        const sr = host?.shadowRoot;
+        const dialog = sr?.querySelector('#consentManagerMainDialog');
+        if (dialog) {
+            sr.querySelector('button.button')?.click();
+        }
+        return true;
+    },
+    /** After opt-out, banner should be gone; tcm-* cookie is set when Airgap ran */
+    EVAL_TRANSCEND_TEST: () => {
+        const host = document.querySelector('#transcend-consent-manager');
+        if (!host) {
+            return true;
+        }
+        const dialog = host.shadowRoot?.querySelector('#consentManagerMainDialog');
+        if (!dialog) {
+            return document.cookie.includes('tcm-');
+        }
+        return false;
+    },
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
 
     /** Transcend consent manager (airgap.js) — host + open shadow root */
