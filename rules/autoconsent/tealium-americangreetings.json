@@ -1,0 +1,22 @@
+{
+    "name": "tealium-americangreetings",
+    "_metadata": {
+        "vendorUrl": "https://www.americangreetings.com/"
+    },
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?americangreetings\\.com/"
+    },
+    "prehideSelectors": ["#__tealiumGDPRecModal"],
+    "detectCmp": [{ "exists": "#__tealiumGDPRecModal #privacy_manager" }],
+    "detectPopup": [{ "visible": "#__tealiumGDPRecModal #accept_cookies" }],
+    "optIn": [{ "waitForThenClick": "#__tealiumGDPRecModal #accept_cookies" }],
+    "optOut": [
+        {
+            "if": { "exists": "#__tealiumGDPRecModal #decline_cookies" },
+            "then": [{ "waitForThenClick": "#__tealiumGDPRecModal #decline_cookies" }],
+            "else": [{ "hide": "#__tealiumGDPRecModal" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#__tealiumGDPRecModal", "timeout": 1000, "check": "none" }]
+}
