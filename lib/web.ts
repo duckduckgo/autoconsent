@@ -336,9 +336,12 @@ export default class AutoConsent {
         if (foundCMPs.length === 0 && retries > 0) {
             // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
-            // rerunning the findCmp check
+            // rerunning the findCmp check. We use Promise.race so that a 500ms delay
+            // is the minimum wait, but we don't block forever if the mutation observer
+            // never fires (e.g. in isolated worlds where main-world DOM changes may
+            // not trigger the observer).
             try {
-                await Promise.all([this.domActions.wait(500), mutationObserver]);
+                await Promise.any([Promise.all([this.domActions.wait(500), mutationObserver]), this.domActions.wait(2000)]);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];

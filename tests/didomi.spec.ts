@@ -3,7 +3,7 @@ import generateCMPTests from '../playwright/runner';
 generateCMPTests(
     'didomi',
     [
-        'https://www.visitcalifornia.com/',
+        'https://nothing.tech/',
         'https://www.planet.fr/',
         'http://www.allocine.fr/',
         'https://www.boursorama.com/',
