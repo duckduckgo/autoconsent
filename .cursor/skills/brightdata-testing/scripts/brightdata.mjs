@@ -8,6 +8,43 @@
  * BRIGHTDATA_WEBACCESS_HOST.
  */
 
+/**
+ * @typedef {import('playwright').Page} Page
+ * @typedef {import('playwright').Browser} Browser
+ */
+
+/**
+ * @typedef {Object} TestOptions
+ * @property {'optOut'|'optIn'|null} [action='optOut']
+ * @property {string} [screenshotsDir]
+ * @property {number} [navigationTimeout=45000]
+ * @property {number} [completionTimeout=45000]
+ */
+
+/**
+ * @typedef {Object} TestResult
+ * @property {string} url
+ * @property {string} region
+ * @property {string|null} cmpDetected
+ * @property {boolean} popupFound
+ * @property {boolean|null} optOutResult
+ * @property {boolean|null} selfTestResult
+ * @property {boolean} autoconsentDone
+ * @property {boolean|null} isCosmetic
+ * @property {string[]} errors
+ * @property {number} duration
+ * @property {string[]} screenshotPaths
+ */
+
+/**
+ * @typedef {Object} AutoconsentContext
+ * @property {Object[]} received - All received messages.
+ * @property {(type: string) => boolean} hasMessage
+ * @property {(timeout?: number) => Promise<boolean>} waitForCompletion
+ * @property {(type: string, timeout?: number) => Promise<boolean>} waitForMessage
+ * @property {(url: string, region: string) => TestResult} collectResult
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -50,7 +87,11 @@ function buildWssEndpoint(regionKey) {
     return `wss://${user}${suffix}:${password}@${host}`;
 }
 
-/** Connect to a BrightData remote browser for a specific region. */
+/**
+ * Connect to a BrightData remote browser for a specific region.
+ * @param {string} regionKey
+ * @returns {Promise<Browser>}
+ */
 export async function connectBrightData(regionKey) {
     return chromium.connectOverCDP(buildWssEndpoint(regionKey), { timeout: 30000 });
 }
@@ -58,7 +99,9 @@ export async function connectBrightData(regionKey) {
 /**
  * Inject autoconsent into a page's isolated world via CDP.
  * Call BEFORE navigating to the target URL.
- * Returns an AutoconsentContext for tracking messages and collecting results.
+ * @param {Page} page
+ * @param {Partial<TestOptions>} [options]
+ * @returns {Promise<AutoconsentContext>}
  */
 export async function injectAutoconsent(page, options = {}) {
     const action = options.action ?? 'optOut';
@@ -92,7 +135,7 @@ export async function injectAutoconsent(page, options = {}) {
                 contextId,
                 awaitPromise: true,
             })
-            .catch(() => { });
+            .catch(() => {});
     }
 
     client.on('Runtime.bindingCalled', async ({ name, payload, executionContextId }) => {
@@ -113,7 +156,7 @@ export async function injectAutoconsent(page, options = {}) {
                 let result = false;
                 try {
                     result = await page.evaluate(msg.code);
-                } catch { }
+                } catch {}
                 await respondToContext(executionContextId, {
                     id: msg.id,
                     type: 'evalResp',
@@ -203,7 +246,11 @@ export async function injectAutoconsent(page, options = {}) {
 
 /**
  * Test a URL using an already-connected page.
- * Useful when you want to manage the browser lifecycle yourself.
+ * @param {Page} page
+ * @param {string} url
+ * @param {string} regionKey
+ * @param {Partial<TestOptions>} [options]
+ * @returns {Promise<TestResult>}
  */
 export async function testPage(page, url, regionKey, options = {}) {
     const navTimeout = options.navigationTimeout ?? 45000;
@@ -235,7 +282,7 @@ export async function testPage(page, url, regionKey, options = {}) {
             fs.mkdirSync(screenshotsDir, { recursive: true });
             await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
             result.screenshotPaths.push(filepath);
-        } catch { }
+        } catch {}
 
         return result;
     } catch (e) {
@@ -258,6 +305,10 @@ export async function testPage(page, url, regionKey, options = {}) {
 /**
  * High-level: test a URL in a specific region.
  * Connects to BrightData, injects autoconsent, waits for results, and closes.
+ * @param {string} url
+ * @param {string} regionKey
+ * @param {Partial<TestOptions>} [options]
+ * @returns {Promise<TestResult>}
  */
 export async function testUrl(url, regionKey, options = {}) {
     let browser = null;
@@ -282,11 +333,15 @@ export async function testUrl(url, regionKey, options = {}) {
     } finally {
         try {
             await browser?.close();
-        } catch { }
+        } catch {}
     }
 }
 
-/** Format a TestResult as a human-readable line. */
+/**
+ * Format a TestResult as a human-readable line.
+ * @param {TestResult} result
+ * @returns {string}
+ */
 export function formatResult(result) {
     let status;
     if (result.autoconsentDone && result.optOutResult) status = 'PASS';
