@@ -203,6 +203,65 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+
+    /** Alaska Air / Tealium orestbida CookieConsent v3 (site-specific; see alaskaair.com.json). */
+    EVAL_ALASKAAIR_COOKIE_CONSENT_DETECT_CMP: () =>
+        typeof window.CookieConsent === 'object' &&
+        window.CookieConsent !== null &&
+        typeof window.CookieConsent.getConfig === 'function' &&
+        typeof window.CookieConsent.acceptCategory === 'function' &&
+        /\.alaskaair\.com$/i.test(location.hostname || ''),
+
+    EVAL_ALASKAAIR_COOKIE_CONSENT_DETECT_POPUP: () => {
+        const CC = window.CookieConsent;
+        if (!CC || typeof CC.validConsent !== 'function') {
+            return false;
+        }
+        if (document.querySelector('#cc-main .cm-wrapper')) {
+            return true;
+        }
+        return !CC.validConsent();
+    },
+
+    EVAL_ALASKAAIR_COOKIE_CONSENT_OPTOUT: () => {
+        const CC = window.CookieConsent;
+        if (!CC || typeof CC.acceptCategory !== 'function' || typeof CC.getConfig !== 'function') {
+            return false;
+        }
+        try {
+            if (CC.getConfig().mode === 'opt-in') {
+                CC.acceptCategory(['cc_necessary']);
+            } else {
+                CC.acceptCategory([]);
+            }
+            return true;
+        } catch (_e) {
+            return false;
+        }
+    },
+
+    EVAL_ALASKAAIR_COOKIE_CONSENT_OPTIN: () => {
+        const CC = window.CookieConsent;
+        if (!CC || typeof CC.acceptCategory !== 'function' || typeof CC.getConfig !== 'function') {
+            return false;
+        }
+        try {
+            if (CC.getConfig().mode === 'opt-in') {
+                CC.acceptCategory(['cc_necessary', 'cc_analytics', 'cc_marketing']);
+            } else {
+                CC.acceptCategory([]);
+            }
+            return true;
+        } catch (_e) {
+            return false;
+        }
+    },
+
+    EVAL_ALASKAAIR_COOKIE_CONSENT_TEST: () =>
+        typeof window.CookieConsent === 'object' &&
+        window.CookieConsent !== null &&
+        typeof window.CookieConsent.validConsent === 'function' &&
+        window.CookieConsent.validConsent(),
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

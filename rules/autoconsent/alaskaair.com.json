@@ -1,0 +1,28 @@
+{
+    "name": "alaskaair.com",
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)*alaskaair\\.com/"
+    },
+    "prehideSelectors": ["#cc-main"],
+    "detectCmp": [{ "eval": "EVAL_ALASKAAIR_COOKIE_CONSENT_DETECT_CMP" }],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#cc-main .cm-wrapper" }, { "eval": "EVAL_ALASKAAIR_COOKIE_CONSENT_DETECT_POPUP" }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": "#cc-main .cm-wrapper .cm__btn[data-role=all]" },
+            "then": [{ "waitForThenClick": "#cc-main .cm-wrapper .cm__btn[data-role=all]" }],
+            "else": [{ "eval": "EVAL_ALASKAAIR_COOKIE_CONSENT_OPTIN" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#cc-main .cm-wrapper .cm__btn[data-role=necessary]" },
+            "then": [{ "waitForThenClick": "#cc-main .cm-wrapper .cm__btn[data-role=necessary]" }],
+            "else": [{ "eval": "EVAL_ALASKAAIR_COOKIE_CONSENT_OPTOUT" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cc_cookie=" }, { "eval": "EVAL_ALASKAAIR_COOKIE_CONSENT_TEST" }]
+}
