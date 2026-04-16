@@ -55,12 +55,15 @@ If the CMP already has an autoconsent rule, extend it rather than creating a new
 | Reject button visible | One-click: `waitForThenClick "#reject"` |
 | Settings then reject | Two-click (very common): click manage, then reject |
 | Settings, uncheck, save | Multi-step: use if/then/else |
-| Only accept/close | Cosmetic: `"cosmetic": true` with `hide` steps |
+| Only accept/close/dismiss (no reject) | Cosmetic: `"cosmetic": true` with `hide` steps |
 | CMP has JS API, no reject in DOM | Eval-based: `{ "eval": "SNIPPET_NAME" }` |
 | Complex async/iframe logic | Code-based (`lib/cmps/`) — rarely needed |
 
 Examine the popup carefully — scroll down (reject buttons are sometimes below the
 fold) and click settings/manage buttons to see what's behind them.
+
+If optOut and optIn would click the same element, or there is
+no reject/decline/refuse button at all, the rule MUST be cosmetic.
 
 ### 2d: Write the rule
 
@@ -74,13 +77,21 @@ Key constraints:
 - `detectCmp` / `detectPopup`: Must be fast. Do NOT use `{ "wait": N }` — the engine
   retries automatically.
 - `prehideSelectors`: Keep narrow — overly broad selectors hide the whole page.
+  Prehide injects `opacity: 0`, so any `visible`/`waitForVisible`/`detectPopup`
+  check on a prehidden element will fail. Never prehide elements you later need
+  to check visibility on.
 - `test`: Prefer `cookieContains` when the CMP stores consent in cookies.
 - Set `runContext.urlPattern` for site-specific rules.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
-- For popup inside shadow DOM or iframe, use
-  [chained selectors](reference.md#iframes-and-shadow-dom).
+- For popup inside shadow DOM or same-origin iframe, use
+  [chained selectors](reference.md#iframes-and-shadow-dom). For cross-origin
+  iframes, use a [frame-only rule](reference.md#cross-origin-iframes).
 - Follow [selector best practices](reference.md#selector-best-practices) — avoid
   generated class hashes and dynamic IDs.
+- Do not modify engine files (`lib/rules.ts`, `playwright/runner.ts`, etc.).
+  Work within existing rule syntax and test harness capabilities.
+- Do not include empty strings in `runContext` fields — they break compact
+  encoding round-trips. Omit fields instead.
 
 #### Eval snippets
 
@@ -144,6 +155,8 @@ Then go to **Step 4**.
 ```
 - [ ] Build rules: npm run build-rules
 - [ ] Validate schema: npm run rule-syntax-check
+- [ ] Unit tests: npm run test:lib (catches compaction round-trip failures)
+- [ ] Lint + format: npm run lint-fix
 - [ ] Browser check: popup handled, page scrolls, elements clickable, prehide not too broad
 - [ ] Playwright test: npx playwright test tests/<name>.spec.ts
 - [ ] For CMP rules: test on multiple sites using the CMP

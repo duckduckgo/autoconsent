@@ -48,10 +48,22 @@ in the array scopes into the previous match's `.shadowRoot` or `.contentDocument
 Single-string selectors cannot pierce — use arrays whenever the target is inside a
 shadow root or iframe.
 
-**Limitations:** Only open shadow DOM (`mode: 'open'`) and same-origin iframes.
-Cross-origin iframes are unreachable via chained selectors — use `runContext.frame`
-with a `urlPattern` to run a rule directly inside the iframe instead (see
-`sourcepoint-frame.ts`, `trustarc-frame.ts`).
+### Cross-origin iframes
+
+Chained selectors cannot pierce cross-origin iframes. **Check early:** if the
+iframe `src` domain differs from the page domain, it's cross-origin.
+
+Create a separate frame-only rule that runs inside the iframe:
+```json
+{
+  "name": "example-cmp-frame",
+  "runContext": { "main": false, "frame": true, "urlPattern": "^https://cmp\\.example\\.com/" },
+  "detectCmp": [{ "exists": ".cmp-banner" }],
+  ...
+}
+```
+
+See `sourcepoint-frame.ts`, `trustarc-frame.ts` for code-based examples.
 
 ## Quick Diagnosis
 
