@@ -1,0 +1,17 @@
+{
+    "name": "bbb.org",
+    "intermediate": true,
+    "runContext": {
+        "urlPattern": "^https://(?:www\\.)?bbb\\.org(?!/manage-cookies)"
+    },
+    "prehideSelectors": ["iabbb-cookies-message"],
+    "detectCmp": [{ "exists": "iabbb-cookies-message" }],
+    "detectPopup": [
+        {
+            "visible": "iabbb-cookies-message a[href*='/manage-cookies'], iabbb-cookies-message .actions button.bds-button-unstyled",
+            "check": "any"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "iabbb-cookies-message button[name='allow-all']" }],
+    "optOut": [{ "eval": "EVAL_BBB_ORG_OPTOUT_NAV" }]
+}

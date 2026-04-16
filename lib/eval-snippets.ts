@@ -77,6 +77,17 @@ export const snippets = {
     // declarative rules
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
+    /** BBB.org: navigate to cookie preferences. Defer with setTimeout so isolated-world eval can reply before unload. */
+    EVAL_BBB_ORG_OPTOUT_NAV: () => {
+        if (location.pathname === '/manage-cookies') {
+            return true;
+        }
+        const target = `${location.origin}/manage-cookies`;
+        setTimeout(() => {
+            location.assign(target);
+        }, 0);
+        return true;
+    },
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>
@@ -203,32 +214,6 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
-    /** Match server-side /manage-cookies POST: necessary on, optional categories off (XHR/fetch may not persist Set-Cookie in some browsers). */
-    EVAL_BBB_ORG_COOKIE_OPTOUT: () => {
-        try {
-            const v = encodeURIComponent(JSON.stringify({ necessary: true, functional: false, performance: false, marketing: false }));
-            const oneYear = 60 * 60 * 24 * 365;
-            const oneDay = 60 * 60 * 24;
-            document.cookie = `iabbb_cookies_policy=${v}; domain=.bbb.org; path=/; max-age=${oneYear}`;
-            document.cookie = `iabbb_cookies_preferences_set=true; domain=.bbb.org; path=/; max-age=${oneDay}`;
-            return true;
-        } catch (e) {
-            console.warn(e);
-            return false;
-        }
-    },
-    EVAL_BBB_ORG_COOKIE_TEST: () => {
-        const m = document.cookie.match(/iabbb_cookies_policy=([^;]+)/);
-        if (!m) {
-            return false;
-        }
-        try {
-            const o = JSON.parse(decodeURIComponent(m[1]));
-            return o.functional === false && o.performance === false && o.marketing === false;
-        } catch (e) {
-            return false;
-        }
-    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

@@ -1,0 +1,18 @@
+{
+    "name": "bbb.org",
+    "runContext": {
+        "urlPattern": "^https://(?:www\\.)?bbb\\.org/manage-cookies"
+    },
+    "detectCmp": [{ "exists": "main.manage-cookies-page" }],
+    "detectPopup": [{ "visible": "main.manage-cookies-page form.stack" }],
+    "optIn": [{ "waitForThenClick": "main.manage-cookies-page button[name='allow-all']" }],
+    "optOut": [
+        {
+            "click": "main.manage-cookies-page fieldset input[type=radio][value=false]:not(:checked)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "main.manage-cookies-page .cluster button.bds-button:not([name])" }
+    ],
+    "test": [{ "cookieContains": "%22marketing%22:false" }]
+}

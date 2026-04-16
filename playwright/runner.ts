@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { test, expect, Page, Frame, TestInfo } from '@playwright/test';
 import { waitFor } from '../lib/utils';
-import { ContentScriptMessage } from '../lib/messages';
+import { ContentScriptMessage, DoneMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
 import compactRules from '../rules/compact-rules.json';
@@ -227,6 +227,23 @@ class TestRun {
         return this.findReceivedMessages(msg).length > 0;
     }
 
+    /**
+     * Rules that share the same logical name (e.g. multi-stage flows with duplicate `name` in JSON)
+     * may emit `cmp` as `foo` on one navigation and `foo_+1` after deduplication. Treat those as equivalent
+     * for Playwright assertions when the test was configured for a single expected name.
+     */
+    cmpFromMessageMatchesExpected(messageCmp: string | undefined): boolean {
+        if (messageCmp === this.expectedCmp) {
+            return true;
+        }
+        const dedupTarget = deduplicatedRuleLookup.get(this.expectedCmp);
+        if (dedupTarget && messageCmp === dedupTarget) {
+            return true;
+        }
+        const stripDedupSuffix = (name: string) => name.replace(/_\+\d+$/, '');
+        return stripDedupSuffix(messageCmp || '') === stripDedupSuffix(this.expectedCmp);
+    }
+
     waitForMessage(msg: Partial<ContentScriptMessage>, maxTimes = 50, interval = 500) {
         return waitFor(() => this.isMessageReceived(msg), maxTimes, interval);
     }
@@ -288,13 +305,15 @@ class TestRun {
         if (this.options.expectPopupOpen) {
             // first long wait for autoconsentDone
             await this.assertMessageReceived(`autoconsentDone not received`, { type: 'autoconsentDone' }, true, 90, 500);
-            await this.assertMessageReceived(
-                `autoconsentDone received for unexpected CMP`,
-                { type: 'autoconsentDone', cmp: this.expectedCmp },
-                true,
+            await waitFor(
+                () => this.received.some((m) => m.type === 'autoconsentDone' && this.cmpFromMessageMatchesExpected((m as DoneMessage).cmp)),
                 90,
                 500,
             );
+            expect(
+                this.received.some((m) => m.type === 'autoconsentDone' && this.cmpFromMessageMatchesExpected((m as DoneMessage).cmp)),
+                `autoconsentDone received for unexpected CMP (expected ${this.expectedCmp})`,
+            ).toBe(true);
 
             await this.assertNoReloadLoop();
 
