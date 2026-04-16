@@ -154,7 +154,6 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
-    EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -169,17 +168,6 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
-    EVAL_SHOPIFY_TEST: () =>
-        document.cookie.includes('gdpr_cookie_consent=0') ||
-        (document.cookie.includes('_tracking_consent=') &&
-            JSON.parse(
-                decodeURIComponent(
-                    document.cookie
-                        .split(';')
-                        .find((s) => s.trim().startsWith('_tracking_consent'))
-                        .split('=')[1],
-                ),
-            ).purposes.a === false),
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
@@ -200,12 +188,40 @@ export const snippets = {
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
-    EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
-    EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,
-    EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(false) || true,
-    EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
-    EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
-    EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
+    /** Tealium GDPR "explicit consent" notice (often only an OK button): deny non-essential categories via API. */
+    EVAL_TEALIUM_EXPLICIT_CONSENT_OPTOUT: () => {
+        if (window.utag && window.utag.gdpr && typeof window.utag.gdpr.setAllCategories === 'function') {
+            window.utag.gdpr.setAllCategories(false);
+            return true;
+        }
+        return false;
+    },
+    EVAL_TEALIUM_EXPLICIT_CONSENT_TEST: () => document.cookie.includes('consent:false'),
+    /** Tealium GDPR consent (aginteractive profile): US traffic shows only "Ok" with no decline handler. */
+    EVAL_TEALIUM_CM_AGINTERACTIVE_OPTOUT: () => {
+        try {
+            const utag = window.utag;
+            if (!utag?.gdpr?.setConsentValue) {
+                return false;
+            }
+            utag.gdpr.setConsentValue(0);
+            if (typeof utag.gdpr.setCookieValue === 'function') {
+                utag.gdpr.setCookieValue('acceptPrompt', false);
+            }
+            if (typeof window.tSetCookie === 'function') {
+                window.tSetCookie('PMClkOK', '0');
+            }
+            const modal = document.getElementById('__tealiumGDPRecModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            return true;
+        } catch (e) {
+            console.warn(e);
+            return false;
+        }
+    },
+    EVAL_TEALIUM_CM_AGINTERACTIVE_TEST: () => document.cookie.includes('CONSENTMGR=') && document.cookie.includes('consent:false'),
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',

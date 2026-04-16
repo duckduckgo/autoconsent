@@ -1,0 +1,52 @@
+{
+    "name": "tealium-americangreetings",
+    "_metadata": {
+        "vendorUrl": "https://www.americangreetings.com/"
+    },
+    "cosmetic": false,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?(americangreetings|bluemountain|jacquielawson)\\.com/"
+    },
+    "prehideSelectors": ["#__tealiumGDPRecModal"],
+    "detectCmp": [
+        {
+            "exists": "#__tealiumGDPRecModal #privacy_manager.privacy_prompt"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__tealiumGDPRecModal #privacy_manager"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__tealiumGDPRecModal #accept_cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#__tealiumGDPRecModal #decline_cookies" },
+            "then": [
+                {
+                    "waitForThenClick": "#__tealiumGDPRecModal #decline_cookies"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_TEALIUM_CM_AGINTERACTIVE_OPTOUT"
+                }
+            ]
+        },
+        { "hide": "#__tealiumGDPRecModal", "optional": true },
+        { "removeClass": "__scroll-disabled", "selector": "body", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_TEALIUM_CM_AGINTERACTIVE_TEST"
+        }
+    ]
+}
