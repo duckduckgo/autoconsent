@@ -5,12 +5,12 @@
     "prehideSelectors": ["#__tealiumGDPRecModal"],
     "detectCmp": [
         {
-            "exists": "#__tealiumGDPRecModal #privacy_manager.explicit_consent button#accept_cookies"
+            "exists": "#__tealiumGDPRecModal #privacy_manager.explicit_consent:not(.privacy_prompt) button#accept_cookies"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#__tealiumGDPRecModal #privacy_manager.explicit_consent button#accept_cookies"
+            "visible": "#__tealiumGDPRecModal #privacy_manager.explicit_consent:not(.privacy_prompt) button#accept_cookies"
         }
     ],
     "optIn": [{ "waitForThenClick": "#accept_cookies" }],
