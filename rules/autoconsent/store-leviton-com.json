@@ -1,0 +1,24 @@
+{
+    "name": "store-leviton-com",
+    "_metadata": {
+        "vendorUrl": "https://store.leviton.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?store\\.leviton\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "section#shopify-pc__banner" }],
+    "detectPopup": [{ "visible": "#shopify-pc__banner__btn-decline" }],
+    "optIn": [{ "waitForThenClick": "#shopify-pc__banner__btn-accept" }],
+    "optOut": [{ "waitForThenClick": "#shopify-pc__banner__btn-decline" }],
+    "test": [
+        {
+            "waitForVisible": "section#shopify-pc__banner",
+            "timeout": 8000,
+            "check": "none"
+        }
+    ]
+}
