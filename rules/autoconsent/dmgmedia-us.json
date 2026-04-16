@@ -1,17 +1,35 @@
 {
     "name": "dmgmedia-us",
-    "cosmetic": true,
     "minimumRuleStepVersion": 2,
     "runContext": {
-        "urlPattern": "^https://(www\\.)?dailymail\\.(co\\.uk|com)/"
+        "urlPattern": "^https://(www\\.)?(dailymail\\.(co\\.uk|com)|metro\\.co\\.uk)/"
     },
-    "detectCmp": [{ "exists": ".mol-ads-cmp" }],
-    "detectPopup": [{ "exists": ".mol-ads-cmp" }],
-    "optIn": [{ "waitForThenClick": ".mol-ads-cmp--btn-primary" }],
-    "optOut": [
-        { "hide": ".mol-ads-cmp" },
-        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true },
-        { "addStyle": "overflow: auto !important", "selector": "html", "optional": true }
+    "prehideSelectors": ["#mol-ads-cmp-iframe"],
+    "detectCmp": [{ "exists": "div.mol-ads-cmp form.mol-ads-cmp--banner" }],
+    "detectPopup": [
+        {
+            "any": [
+                { "waitForVisible": "div.mol-ads-cmp button.mol-ads-cmp--btn-primary" },
+                { "waitForVisible": "div.mol-ads-ccpa--message > u > a" },
+                { "waitForVisible": ".mol-ads-cmp--modal-dialog" }
+            ]
+        }
     ],
-    "test": [{ "visible": ".mol-ads-cmp", "check": "none" }]
+    "optIn": [{ "waitForThenClick": "div.mol-ads-cmp button.mol-ads-cmp--btn-primary" }],
+    "optOut": [
+        {
+            "if": { "exists": "div.mol-ads-ccpa--message > u > a" },
+            "then": [
+                { "waitForThenClick": "div.mol-ads-ccpa--message > u > a" },
+                { "waitForVisible": ".mol-ads-cmp--modal-dialog" },
+                { "waitForThenClick": "a.mol-ads-cmp-footer-privacy" },
+                { "waitForThenClick": "button.mol-ads-cmp--btn-secondary" }
+            ],
+            "else": [
+                { "hide": "div.mol-ads-cmp" },
+                { "addStyle": "overflow: auto !important", "selector": "body", "optional": true },
+                { "addStyle": "overflow: auto !important", "selector": "html", "optional": true }
+            ]
+        }
+    ]
 }
