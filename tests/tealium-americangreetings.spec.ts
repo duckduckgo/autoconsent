@@ -1,3 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('tealium-americangreetings', ['https://www.americangreetings.com/']);
+generateCMPTests('tealium-americangreetings', ['https://www.americangreetings.com/', 'https://www.bluemountain.com/']);

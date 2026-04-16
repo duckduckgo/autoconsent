@@ -197,6 +197,31 @@ export const snippets = {
         return false;
     },
     EVAL_TEALIUM_EXPLICIT_CONSENT_TEST: () => document.cookie.includes('consent:false'),
+    /** Tealium GDPR consent (aginteractive profile): US traffic shows only "Ok" with no decline handler. */
+    EVAL_TEALIUM_CM_AGINTERACTIVE_OPTOUT: () => {
+        try {
+            const utag = window.utag;
+            if (!utag?.gdpr?.setConsentValue) {
+                return false;
+            }
+            utag.gdpr.setConsentValue(0);
+            if (typeof utag.gdpr.setCookieValue === 'function') {
+                utag.gdpr.setCookieValue('acceptPrompt', false);
+            }
+            if (typeof window.tSetCookie === 'function') {
+                window.tSetCookie('PMClkOK', '0');
+            }
+            const modal = document.getElementById('__tealiumGDPRecModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            return true;
+        } catch (e) {
+            console.warn(e);
+            return false;
+        }
+    },
+    EVAL_TEALIUM_CM_AGINTERACTIVE_TEST: () => document.cookie.includes('CONSENTMGR=') && document.cookie.includes('consent:false'),
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
