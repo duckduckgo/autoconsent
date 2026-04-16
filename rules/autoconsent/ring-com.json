@@ -8,16 +8,19 @@
         "frame": false,
         "urlPattern": "^https://([a-z0-9-]+\\.)*ring\\.com/"
     },
-    "prehideSelectors": [".consent-banner"],
+    "prehideSelectors": [],
     "detectCmp": [{ "exists": "script#consent-script[src*=\"consent-manager\"]" }],
-    "detectPopup": [{ "visible": "body.has-banner .consent-banner" }],
+    "detectPopup": [{ "visible": ".consent-banner" }],
     "optIn": [{ "waitForThenClick": "button.consent--accept", "timeout": 10000 }],
     "optOut": [
         {
-            "if": { "exists": "button.consent--reject" },
+            "if": { "visible": "button.consent--reject" },
             "then": [{ "waitForThenClick": "button.consent--reject", "timeout": 10000 }],
-            "else": [{ "eval": "EVAL_RING_CONSENT_OPT_OUT" }]
+            "else": [
+                { "waitForThenClick": "button.consent--manage", "timeout": 10000 },
+                { "waitForThenClick": "button.consent-save", "timeout": 10000 }
+            ]
         }
     ],
-    "test": [{ "eval": "EVAL_RING_CONSENT_TEST" }]
+    "test": [{ "cookieContains": "privacy-banner-clicked=true" }]
 }
