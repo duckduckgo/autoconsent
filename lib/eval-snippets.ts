@@ -154,7 +154,6 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
-    EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -169,17 +168,6 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
-    EVAL_SHOPIFY_TEST: () =>
-        document.cookie.includes('gdpr_cookie_consent=0') ||
-        (document.cookie.includes('_tracking_consent=') &&
-            JSON.parse(
-                decodeURIComponent(
-                    document.cookie
-                        .split(';')
-                        .find((s) => s.trim().startsWith('_tracking_consent'))
-                        .split('=')[1],
-                ),
-            ).purposes.a === false),
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
@@ -200,12 +188,6 @@ export const snippets = {
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
-    EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
-    EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,
-    EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(false) || true,
-    EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
-    EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
-    EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
@@ -221,6 +203,61 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /**
+     * HubSpot compliance banner: __hs_cookie_cat_pref encodes category toggles; format varies by locale.
+     * Fall back to DOM when the cookie is missing (e.g. async write) but the confirmation UI is dismissed.
+     * Do not rely on body.hs-banner--visible alone; HubSpot can leave that class set after the dialog is gone.
+     */
+    EVAL_HUBSPOT_COOKIE_BANNER_TEST: () => {
+        const parent = document.getElementById('hs-banner-parent');
+        if (parent?.classList.contains('banner-visually-hidden') || parent?.hasAttribute('hidden')) {
+            return true;
+        }
+        const confirmation = document.getElementById('hs-eu-cookie-confirmation');
+        if (!confirmation) {
+            return true;
+        }
+        if (confirmation.hasAttribute('hidden')) {
+            return true;
+        }
+        const style = window.getComputedStyle(confirmation);
+        if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity) === 0) {
+            return true;
+        }
+        const rect = confirmation.getBoundingClientRect();
+        if (rect.width <= 1 && rect.height <= 1) {
+            return true;
+        }
+        const raw = document.cookie
+            .split(';')
+            .map((c) => c.trim())
+            .find((c) => c.startsWith('__hs_cookie_cat_pref='));
+        if (raw) {
+            let v = raw.split('=', 2)[1];
+            try {
+                v = decodeURIComponent(v);
+            } catch {
+                return false;
+            }
+            if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+                v = v.slice(1, -1);
+            }
+            const segments = v.split('_').filter(Boolean);
+            if (segments.length === 0) {
+                return false;
+            }
+            const lastToken = (s) => {
+                const i = s.lastIndexOf(':');
+                return i === -1 ? s : s.slice(i + 1);
+            };
+            const bools = segments.map((s) => lastToken(s).toLowerCase());
+            // HubSpot encodes multiple categories; "necessary" may stay true while analytics/ads are false.
+            if (bools.some((b) => b === 'false' || b === '0' || b === 'no')) {
+                return true;
+            }
+        }
+        return false;
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

@@ -48,8 +48,15 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 
 ## Working with Cookie Popups
 
-**Use the `cmp-rule` skill** for creating or fixing rules — it covers diagnosis,
-CMP identification, rule writing, and testing.
+**Use the `cmp-rule` skill** (`.claude/skills/cmp-rule/SKILL.md` or `.agents/skills/cmp-rule/SKILL.md`) for creating or fixing rules — it covers diagnosis, CMP identification, rule writing, and testing.
+
+When investigating or fixing a cookie popup, start by **opening the site in a browser** with the autoconsent extension (`dist/addon-mv3/`) loaded. Check the devtools console for autoconsent logs:
+
+- **"Found CMP: [name]" + opt-out failed** → an existing rule is broken. Follow the `fix-cmp-rule` skill (`.agents/skills/fix-cmp-rule.md`).
+- **No CMP detected** → no rule handles this popup. Follow the `create-cmp-rule` skill (`.agents/skills/create-cmp-rule.md`).
+- **"Found CMP: [name]" + success** → the rule works. Nothing to do.
+
+Use the `publicwww-search` skill (`.agents/skills/publicwww-search.md` or `.claude/skills/publicwww-search/SKILL.md`) to check if a popup comes from a third-party CMP provider.
 
 ### CMP vs Site-Specific Rules
 
@@ -77,11 +84,16 @@ For the complete rule syntax reference (all step types, element selectors, condi
 
 ### prehideSelectors
 
-CSS selectors injected early (before CMP detection) as `opacity: 0` to prevent popup flicker. Auto-unhidden after 2 seconds if opt-out doesn't start. Keep selectors **narrow** — an overly broad selector (e.g. `body`) hides the entire page.
+CSS selectors injected early (before CMP detection) as `opacity: 0` to prevent popup flicker. Auto-unhidden after 2 seconds if opt-out doesn't start. Keep selectors **narrow** — an overly broad selector (e.g. `body`) hides the entire page. **Do not prehide elements used in `visible` detection** for the same rule, or `detectPopup` will fail.
 
 ### minimumRuleStepVersion
 
-Set to `2` if the rule uses `removeClass`, `setStyle`, or `addStyle`. Omit (defaults to `1`) otherwise. Clients that don't support the required version silently skip the rule.
+New step types are added to the autoconsent engine over time. `minimumRuleStepVersion` declares which version of the step format a rule requires. Clients that don't support the required version silently skip the rule, preventing failures on older app versions.
+
+- `1` (default) — all original step types (`exists`, `visible`, `waitFor`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, etc.)
+- `2` — added `removeClass`, `setStyle`, `addStyle`
+
+Omit the field (or set to `1`) if the rule only uses original step types. Set to `2` if the rule uses `removeClass`, `setStyle`, or `addStyle`.
 
 ### Code-Based Rules
 
@@ -89,11 +101,11 @@ For CMPs requiring complex non-linear logic, CMP API interaction, or `Promise.ra
 
 ### Selector Strategy
 
-Prefer selectors stable across builds and locales: data attributes (`[data-testid="..."]`) > stable IDs > class substrings (`[class*="..."]`) > structural CSS > XPath (last resort). **Do NOT use CSS module hashes** (4+ random chars like `.css-1a2b3c`) or framework-generated IDs.
+Prefer selectors stable across builds and locales: data attributes (`[data-testid="..."]`) > stable IDs > class substrings (`[class*="..."]`) > structural CSS > XPath (last resort). **Do NOT use CSS module hashes** (4+ random chars like `.css-1a2b3c`) or framework-generated IDs (`#react-aria*`, `#radix-\:*\:`). Avoid body class lists and deep `nth-child` chains.
 
 ### Cosmetic Rules
 
-Cosmetic rules hide the popup via CSS instead of clicking reject. Use when a popup has no reject/decline button (only accept/close). Set `"cosmetic": true` and use `hide` steps in `optOut`. Hiding can break scroll or overlay behavior — add fix steps after the `hide`.
+Cosmetic rules hide the popup via CSS instead of clicking reject. Use when a popup has no reject/decline button (only accept/close). Set `"cosmetic": true` and use `hide` steps in `optOut`. Hiding can break scroll or overlay behavior — add fix steps after the `hide`, or see the `create-cmp-rule` skill for breakage fix patterns.
 
 ## Regional Differences
 
@@ -113,7 +125,7 @@ Use `REGION` env var to filter test URLs (from `data/coverage.json`). Use `PROXY
 
 After creating or modifying a rule:
 
-1. `npm run build-rules` — rebuild rules.json (required for tests)
+1. `npm run build-rules` — rebuild rules.json (required for extension and tests)
 2. `npm run rule-syntax-check` — validate rule JSON against schema
 3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
 4. `npm run prepublish` — full build including extension bundle
