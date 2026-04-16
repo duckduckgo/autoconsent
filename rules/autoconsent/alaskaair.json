@@ -1,12 +1,14 @@
 {
     "name": "alaskaair",
+    "vendorUrl": "https://www.alaskaair.com/",
+    "prehideSelectors": ["#cc-main"],
     "runContext": {
         "urlPattern": "^https?://(www\\.)?alaskaair\\.com/"
     },
     "_metadata": {
         "vendorUrl": "https://github.com/orestbida/cookieconsent"
     },
-    "comment": "Tealium-loaded CookieConsent v3 (orestbida); US shows a single Dismiss bar, non-US opt-in with Refuse all / Manage preferences.",
+    "comment": "Tealium-loaded CookieConsent v3 (orestbida). Opt in/out use CookieConsent.acceptCategory — the bar can show one Dismiss button tied to data-role=all.",
     "detectCmp": [
         {
             "any": [
@@ -20,10 +22,7 @@
         }
     ],
     "detectPopup": [{ "eval": "EVAL_ALASKAAIR_CC3_POPUP" }],
-    "optIn": [
-        { "waitForThenClick": "#cc-main button[data-role=\"all\"]", "optional": true, "timeout": 3000 },
-        { "eval": "EVAL_ALASKAAIR_CC3_OPT_IN" }
-    ],
+    "optIn": [{ "eval": "EVAL_ALASKAAIR_CC3_OPT_IN" }],
     "optOut": [
         { "eval": "EVAL_ALASKAAIR_CC3_OPT_OUT" },
         {

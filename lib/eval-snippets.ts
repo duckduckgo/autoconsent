@@ -238,44 +238,65 @@ export const snippets = {
         }
         return false;
     },
-    /** Alaska Air / Tealium CookieConsent v3: GDPR necessary-only, or minimal consent for US opt-out bar. */
+    /** Alaska Air / Tealium CookieConsent v3: use category ids from ccConfig (cc_necessary, cc_analytics, cc_marketing). */
     EVAL_ALASKAAIR_CC3_OPT_OUT: () => {
-        if (typeof CookieConsent !== 'object') {
+        const CC = typeof CookieConsent === 'object' ? CookieConsent : null;
+        if (!CC) {
             return false;
         }
-        const cfg = typeof CookieConsent.getConfig === 'function' ? CookieConsent.getConfig() : null;
+        const cfg = typeof CC.getConfig === 'function' ? CC.getConfig() : null;
         const mode = cfg && cfg.mode;
-        if (mode === 'opt-in' && typeof CookieConsent.acceptCategory === 'function') {
-            CookieConsent.acceptCategory([]);
-            return true;
+        if (mode === 'opt-in' && typeof CC.acceptCategory === 'function') {
+            try {
+                CC.acceptCategory(['cc_necessary']);
+                return true;
+            } catch (_e) {
+                return false;
+            }
         }
-        if (typeof CookieConsent.acceptCategory === 'function') {
-            CookieConsent.acceptCategory('necessary');
-            return true;
+        if (typeof CC.acceptCategory === 'function') {
+            try {
+                CC.acceptCategory('necessary');
+                return true;
+            } catch (_e) {
+                /* fall through */
+            }
         }
-        if (typeof CookieConsent.hide === 'function') {
-            CookieConsent.hide();
+        if (typeof CC.hide === 'function') {
+            CC.hide();
             return true;
         }
         return false;
     },
     EVAL_ALASKAAIR_CC3_OPT_IN: () => {
+        const CC = typeof CookieConsent === 'object' ? CookieConsent : null;
+        if (!CC) {
+            return false;
+        }
+        const cfg = typeof CC.getConfig === 'function' ? CC.getConfig() : null;
+        if (cfg && cfg.mode === 'opt-in' && typeof CC.acceptCategory === 'function') {
+            try {
+                CC.acceptCategory(['cc_necessary', 'cc_analytics', 'cc_marketing']);
+                return true;
+            } catch (_e) {
+                return false;
+            }
+        }
         const btn = document.querySelector('#cc-main button[data-role="all"]');
         if (btn) {
             btn.click();
             return true;
         }
-        if (typeof CookieConsent !== 'object') {
-            return false;
+        if (typeof CC.acceptCategory === 'function') {
+            try {
+                CC.acceptCategory('all');
+                return true;
+            } catch (_e) {
+                /* fall through */
+            }
         }
-        const cfg = typeof CookieConsent.getConfig === 'function' ? CookieConsent.getConfig() : null;
-        const mode = cfg && cfg.mode;
-        if (mode === 'opt-in' && typeof CookieConsent.acceptCategory === 'function') {
-            CookieConsent.acceptCategory('all');
-            return true;
-        }
-        if (typeof CookieConsent.hide === 'function') {
-            CookieConsent.hide();
+        if (typeof CC.hide === 'function') {
+            CC.hide();
             return true;
         }
         return false;
@@ -289,7 +310,7 @@ export const snippets = {
                 if (!Array.isArray(cats)) {
                     return false;
                 }
-                if (cats.length === 0 || (cats.length === 1 && cats[0] === 'necessary')) {
+                if (cats.length === 1 && (cats[0] === 'cc_necessary' || cats[0] === 'necessary')) {
                     return true;
                 }
                 if (cats.indexOf('cc_analytics') !== -1 || cats.indexOf('cc_marketing') !== -1) {
