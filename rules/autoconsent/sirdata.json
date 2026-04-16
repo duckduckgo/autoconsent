@@ -88,43 +88,7 @@
             ]
         },
         {
-            "if": {
-                "visible": "xpath///div[@id='sd-cmp']//button[.//span[contains(.,'Do not sell')]]"
-            },
-            "then": [
-                {
-                    "waitForThenClick": "xpath///div[@id='sd-cmp']//button[.//span[contains(.,'Do not sell')]]"
-                }
-            ],
-            "else": [
-                {
-                    "if": {
-                        "visible": "xpath///div[@id='sd-cmp']//button[contains(.,'Reject')]"
-                    },
-                    "then": [
-                        {
-                            "waitForThenClick": "xpath///div[@id='sd-cmp']//button[contains(.,'Reject')]"
-                        }
-                    ],
-                    "else": [
-                        {
-                            "if": {
-                                "visible": "xpath///div[@id='sd-cmp']//button[contains(.,'Decline')]"
-                            },
-                            "then": [
-                                {
-                                    "waitForThenClick": "xpath///div[@id='sd-cmp']//button[contains(.,'Decline')]"
-                                }
-                            ],
-                            "else": [
-                                {
-                                    "eval": "EVAL_SIRDATA_OPTOUT"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "eval": "EVAL_SIRDATA_OPTOUT"
         },
         {
             "eval": "EVAL_SIRDATA_UNBLOCK_SCROLL",

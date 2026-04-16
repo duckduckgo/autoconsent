@@ -63,7 +63,7 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
 
         const snippetSrc = getFunctionBody(snippet);
         logsConfig.evals && console.log('async eval:', snippetId, snippetSrc);
-        return requestEval(snippetSrc, snippetId).catch((e) => {
+        return requestEval(snippetSrc, snippetId, this.autoconsent.config.evalRequestTimeoutMs).catch((e) => {
             logsConfig.evals && console.error('error evaluating rule', snippetId, e);
             return false;
         });

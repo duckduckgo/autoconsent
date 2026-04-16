@@ -79,6 +79,7 @@ export function normalizeConfig(providedConfig: any): Config {
         enableHeuristicDetection: false,
         enableHeuristicAction: false,
         detectRetries: 20,
+        evalRequestTimeoutMs: 1000,
         isMainWorld: false,
         prehideTimeout: 2000,
         enableFilterList: false,

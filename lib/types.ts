@@ -60,6 +60,8 @@ export type Config = {
     enableCosmeticRules: boolean;
     enableGeneratedRules: boolean;
     detectRetries: number;
+    /** Max wait (ms) for main-world eval round-trip when isMainWorld is false */
+    evalRequestTimeoutMs: number;
     isMainWorld: boolean;
     prehideTimeout: number;
     enableFilterList: boolean;

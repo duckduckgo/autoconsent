@@ -31,7 +31,7 @@ export const evalState: EvalState = {
     sendContentMessage: null,
 };
 
-export function requestEval(code: string, snippetId?: keyof typeof snippets): Promise<boolean> {
+export function requestEval(code: string, snippetId?: keyof typeof snippets, timeoutMs = 1000): Promise<boolean> {
     const id = getRandomID();
     evalState.sendContentMessage({
         type: 'eval',
@@ -39,7 +39,7 @@ export function requestEval(code: string, snippetId?: keyof typeof snippets): Pr
         code,
         snippetId,
     });
-    const deferred = new Deferred<boolean>(id);
+    const deferred = new Deferred<boolean>(id, timeoutMs);
     evalState.pending.set(deferred.id, deferred);
     return deferred.promise;
 }

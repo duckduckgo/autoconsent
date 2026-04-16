@@ -165,6 +165,7 @@ class TestRun {
                         disabledCmps: [],
                         enablePrehide: false,
                         detectRetries: 20,
+                        evalRequestTimeoutMs: 15000,
                         enableCosmeticRules: true,
                         visualTest: true,
                     })}, rules: ${JSON.stringify(rules)} })`,
