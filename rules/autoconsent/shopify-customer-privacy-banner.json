@@ -1,0 +1,12 @@
+{
+    "name": "shopify-customer-privacy-banner",
+    "_metadata": {
+        "vendorUrl": "https://shopify.dev/docs/api/customer-privacy"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#shopify-pc__banner" }],
+    "detectPopup": [{ "visible": "#shopify-pc__banner" }],
+    "optIn": [{ "waitForThenClick": "#shopify-pc__banner__btn-accept" }],
+    "optOut": [{ "waitForThenClick": "#shopify-pc__banner__btn-decline" }],
+    "test": [{ "waitForVisible": "#shopify-pc__banner", "timeout": 10000, "check": "none" }]
+}

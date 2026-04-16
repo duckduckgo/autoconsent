@@ -1,0 +1,31 @@
+{
+    "name": "shopify-customer-privacy",
+    "_metadata": {
+        "vendorUrl": "https://shopify.dev/docs/api/customer-privacy"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#shopify-pc__banner__btn-decline,#shopify-pc__banner__btn-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#shopify-pc__banner.shopify-pc__banner__dialog"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#shopify-pc__banner__btn-accept" }],
+    "optOut": [{ "waitForThenClick": "#shopify-pc__banner__btn-decline" }],
+    "test": [
+        {
+            "any": [
+                { "cookieContains": "_tracking_consent=" },
+                {
+                    "waitForVisible": "#shopify-pc__banner.shopify-pc__banner__dialog",
+                    "check": "none",
+                    "timeout": 3000
+                }
+            ]
+        }
+    ]
+}
