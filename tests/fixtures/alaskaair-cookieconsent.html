@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Alaska-style CookieConsent fixture</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.1.0/dist/cookieconsent.css" />
+    </head>
+    <body>
+        <p>Static fixture mirroring Alaska Air&rsquo;s Tealium CookieConsent v3 (opt-in, bar layout).</p>
+        <script src="https://tags.tiqcdn.com/libs/cookieconsent/v3.1.0/cookieconsent.umd.js"></script>
+        <script>
+            CookieConsent.run({
+                mode: 'opt-in',
+                autoShow: true,
+                hideFromBots: false,
+                disablePageInteraction: false,
+                manageScriptTags: false,
+                guiOptions: {
+                    consentModal: {
+                        layout: 'bar inline',
+                        position: 'bottom',
+                        flipButtons: false,
+                        equalWeightButtons: true,
+                    },
+                    preferencesModal: {
+                        layout: 'bar wide',
+                        position: 'right',
+                        flipButtons: false,
+                        equalWeightButtons: true,
+                    },
+                },
+                categories: {
+                    cc_necessary: { enabled: true, readOnly: true },
+                    cc_analytics: { enabled: false, readOnly: false },
+                    cc_marketing: { enabled: false, readOnly: false },
+                },
+                language: {
+                    default: 'en',
+                    translations: {
+                        en: {
+                            consentModal: {
+                                title: 'Cookie consent (fixture)',
+                                description: 'This page exists only to exercise the alaskaair-com autoconsent rule.',
+                                acceptAllBtn: 'Accept all',
+                                acceptNecessaryBtn: 'Refuse all',
+                                showPreferencesBtn: 'Manage preferences',
+                            },
+                        },
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -28,6 +28,8 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    /** Run before page.goto (e.g. route fixtures while keeping a real-site URL for urlPattern rules). */
+    preNavigate?: (page: Page) => Promise<void>;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -93,6 +95,9 @@ class TestRun {
             });
 
         await this.page.exposeBinding('autoconsentSendMessage', this.messageCallback.bind(this));
+        if (this.options.preNavigate) {
+            await this.options.preNavigate(this.page);
+        }
         await this.page.goto(this.url, { waitUntil: 'commit' });
 
         await this.injectContentScripts();
