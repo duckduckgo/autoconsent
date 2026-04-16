@@ -291,7 +291,7 @@ export const snippets = {
         }
         const dialog = host.shadowRoot?.querySelector('#consentManagerMainDialog');
         if (!dialog) {
-            return document.cookie.includes('tcm-');
+            return true;
         }
         return false;
     },
