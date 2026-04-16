@@ -1,0 +1,17 @@
+{
+    "name": "dmgmedia-us",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?dailymail\\.(co\\.uk|com)/"
+    },
+    "detectCmp": [{ "exists": ".mol-ads-cmp" }],
+    "detectPopup": [{ "exists": ".mol-ads-cmp" }],
+    "optIn": [{ "waitForThenClick": ".mol-ads-cmp--btn-primary" }],
+    "optOut": [
+        { "hide": ".mol-ads-cmp" },
+        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "html", "optional": true }
+    ],
+    "test": [{ "visible": ".mol-ads-cmp", "check": "none" }]
+}
