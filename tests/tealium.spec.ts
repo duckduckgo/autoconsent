@@ -7,6 +7,5 @@ generateCMPTests('Tealium', [
     'http://www.tui.com/',
     'http://www.minted.com/',
     'http://help.brother-usa.com/',
-    'http://www.americangreetings.com/',
     'http://www.hagerty.com/',
 ]);

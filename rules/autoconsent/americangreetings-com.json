@@ -1,0 +1,24 @@
+{
+    "name": "americangreetings.com",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?americangreetings\\.com/"
+    },
+    "prehideSelectors": ["#__tealiumGDPRecModal"],
+    "detectCmp": [{ "exists": "#__tealiumGDPRecModal #accept_cookies" }, { "eval": "EVAL_TEALIUM_0" }],
+    "detectPopup": [{ "visible": "#accept_cookies" }],
+    "optIn": [{ "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs" }, { "eval": "EVAL_TEALIUM_2" }],
+    "optOut": [
+        { "eval": "EVAL_TEALIUM_1" },
+        { "eval": "EVAL_TEALIUM_DONOTSELL" },
+        { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
+        { "removeClass": "__scroll-disabled", "selector": "body", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }
+    ],
+    "test": [
+        { "eval": "EVAL_TEALIUM_3" },
+        { "eval": "EVAL_TEALIUM_DONOTSELL_CHECK" },
+        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs", "check": "none" }
+    ]
+}
