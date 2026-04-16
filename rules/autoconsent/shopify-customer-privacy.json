@@ -19,12 +19,15 @@
     "test": [
         {
             "any": [
+                { "cookieContains": "gdpr_cookie_consent=0" },
                 { "cookieContains": "_tracking_consent=" },
                 {
                     "waitForVisible": "#shopify-pc__banner.shopify-pc__banner__dialog",
                     "check": "none",
                     "timeout": 3000
-                }
+                },
+                { "visible": "#shopify-pc__banner", "check": "none" },
+                { "exists": "#shopify-pc__banner", "negated": true }
             ]
         }
     ]
