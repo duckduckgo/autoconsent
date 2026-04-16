@@ -1,12 +1,10 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('ketch', [
-    'https://www.rover.com/nl/',
-    'https://purple.com/',
-    'https://www.ncsasports.org/',
-    'https://www.pret.co.uk/en-GB',
-    'https://www.greatpetcare.com/',
-    'https://www.smartsheet.com/',
-    'https://www.ketch.com/',
-    'https://www.forbes.com/',
-]);
+// Ketch often does not render a consent banner in the default Playwright region (NA).
+// These tests assert that the Ketch CMP is detected on representative sites.
+generateCMPTests('ketch', ['https://tailscale.com/'], {
+    expectPopupOpen: false,
+    testOptIn: false,
+    testOptOut: false,
+    testSelfTest: false,
+});

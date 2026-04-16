@@ -51,6 +51,14 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 **Use the `cmp-rule` skill** for creating or fixing rules — it covers diagnosis,
 CMP identification, rule writing, and testing.
 
+When investigating or fixing a cookie popup, start by **opening the site in a browser** with the autoconsent extension (`dist/addon-mv3/`) loaded. Check the devtools console for autoconsent logs:
+
+- **"Found CMP: [name]" + opt-out failed** → an existing rule is broken. Follow the `fix-cmp-rule` skill (`.agents/skills/fix-cmp-rule.md`).
+- **No CMP detected** → no rule handles this popup. Follow the `create-cmp-rule` skill (`.agents/skills/create-cmp-rule.md`).
+- **"Found CMP: [name]" + success** → the rule works. Nothing to do.
+
+Use the `publicwww-search` skill (`.agents/skills/publicwww-search.md`) to check if a popup comes from a third-party CMP provider.
+
 ### CMP vs Site-Specific Rules
 
 **Always prefer writing a generic CMP rule over a site-specific rule.** A CMP (Consent Management Platform) is a third-party service (e.g. OneTrust, Cookiebot, Didomi) used by many websites — one rule covers thousands of sites. Check DOM class prefixes, script sources, and PublicWWW before assuming a popup is site-specific. Use `data/coverage.json` to find other sites using the same CMP for testing.
@@ -81,7 +89,12 @@ CSS selectors injected early (before CMP detection) as `opacity: 0` to prevent p
 
 ### minimumRuleStepVersion
 
-Set to `2` if the rule uses `removeClass`, `setStyle`, or `addStyle`. Omit (defaults to `1`) otherwise. Clients that don't support the required version silently skip the rule.
+New step types are added to the autoconsent engine over time. `minimumRuleStepVersion` declares which version of the step format a rule requires. Clients that don't support the required version silently skip the rule, preventing failures on older app versions.
+
+- `1` (default) — all original step types (`exists`, `visible`, `waitFor`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, etc.)
+- `2` — added `removeClass`, `setStyle`, `addStyle`
+
+Omit the field (or set to `1`) if the rule only uses original step types. Set to `2` if the rule uses `removeClass`, `setStyle`, or `addStyle`.
 
 ### Code-Based Rules
 
@@ -89,11 +102,11 @@ For CMPs requiring complex non-linear logic, CMP API interaction, or `Promise.ra
 
 ### Selector Strategy
 
-Prefer selectors stable across builds and locales: data attributes (`[data-testid="..."]`) > stable IDs > class substrings (`[class*="..."]`) > structural CSS > XPath (last resort). **Do NOT use CSS module hashes** (4+ random chars like `.css-1a2b3c`) or framework-generated IDs.
+Prefer selectors that won't change between builds or locales. In priority order: stable data attributes (`[data-testid="..."]`) > stable IDs (`#cookie-banner`) > class substrings (`[class*="cookie-banner"]`) > structural CSS > XPath text matching (last resort, language-specific). **Do NOT use CSS module hashes** — if a class name contains 4+ random-looking characters (e.g. `.sd-cmp-3cRQ2`, `.css-1a2b3c`), it's generated and will break. Also avoid framework-generated IDs (`#react-aria*`, `#radix-\:*\:`), body class lists, and deep `nth-child` chains. See the `create-cmp-rule` skill for detailed examples.
 
 ### Cosmetic Rules
 
-Cosmetic rules hide the popup via CSS instead of clicking reject. Use when a popup has no reject/decline button (only accept/close). Set `"cosmetic": true` and use `hide` steps in `optOut`. Hiding can break scroll or overlay behavior — add fix steps after the `hide`.
+Cosmetic rules hide the popup via CSS instead of clicking reject. Use when a popup has no reject/decline button (only accept/close). Set `"cosmetic": true` and use `hide` steps in `optOut`. Hiding can break scroll or overlay behavior — see the `create-cmp-rule` skill for breakage fix patterns.
 
 ## Regional Differences
 
@@ -113,7 +126,7 @@ Use `REGION` env var to filter test URLs (from `data/coverage.json`). Use `PROXY
 
 After creating or modifying a rule:
 
-1. `npm run build-rules` — rebuild rules.json (required for tests)
+1. `npm run build-rules` — rebuild rules.json (required for extension and tests)
 2. `npm run rule-syntax-check` — validate rule JSON against schema
 3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
 4. `npm run prepublish` — full build including extension bundle

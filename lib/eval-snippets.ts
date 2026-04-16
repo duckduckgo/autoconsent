@@ -140,6 +140,319 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_KETCH_DETECT_CMP: () =>
+        typeof window.ketch === 'function' && [...document.scripts].some((s) => s.src && /ketchcdn\.com|ketchjs\.com/i.test(s.src)),
+    EVAL_KETCH_DETECT_POPUP: () => {
+        const rejectRe =
+            /\b(reject all|reject|decline all|decline|refuse all|refuse|deny all|deny|only necessary|necessary cookies only|use essential|essential only|alle ablehnen|alles ablehnen|tout refuser|refuser)\b/i;
+        const walk = (root, visit) => {
+            visit(root);
+            const tree = root.querySelectorAll('*');
+            for (let i = 0; i < tree.length; i++) {
+                const el = tree[i];
+                if (el.shadowRoot) walk(el.shadowRoot, visit);
+            }
+        };
+        const isPresentationalOpen = (el) => {
+            if (!(el instanceof HTMLElement)) return false;
+            const r = el.getBoundingClientRect();
+            return r.width >= 20 && r.height >= 20;
+        };
+        const visibleTextMatch = (el) => {
+            if (!(el instanceof HTMLElement)) return false;
+            const cs = getComputedStyle(el);
+            if (cs.visibility === 'hidden' || cs.display === 'none' || cs.opacity === '0') return false;
+            const r = el.getBoundingClientRect();
+            if (r.width < 2 || r.height < 2) return false;
+            const t = (el.textContent || '').trim();
+            return rejectRe.test(t);
+        };
+        const scanOnce = () => {
+            const backdrop = document.querySelector('[data-ketch-backdrop="true"]');
+            if (backdrop instanceof HTMLElement) {
+                const cs = getComputedStyle(backdrop);
+                // Match prehide behavior: opacity may be 0 while the CMP is still present for detection.
+                if (cs.display !== 'none' && cs.visibility !== 'hidden') {
+                    const r = backdrop.getBoundingClientRect();
+                    if (r.width > 10 && r.height > 10) {
+                        return true;
+                    }
+                }
+            }
+            let foundBannerChrome = false;
+            walk(document, (node) => {
+                if (foundBannerChrome) return;
+                if (!(node instanceof HTMLElement)) return;
+                const id = node.id || '';
+                if (
+                    id === 'ketch-consent-banner' ||
+                    id === 'ketch-purposes-modal' ||
+                    id === 'ketch-preferences-purposes-tab' ||
+                    id === 'ketch-preferences' ||
+                    id.startsWith('ketch-preferences-')
+                ) {
+                    if (isPresentationalOpen(node)) {
+                        foundBannerChrome = true;
+                    }
+                }
+            });
+            if (foundBannerChrome) {
+                return true;
+            }
+            let found = false;
+            walk(document, (node) => {
+                if (found) return;
+                if (!(node instanceof HTMLElement)) return;
+                const id = node.id || '';
+                if (
+                    id === 'ketch-consent-banner' ||
+                    id === 'ketch-purposes-modal' ||
+                    id === 'ketch-preferences-purposes-tab' ||
+                    id.startsWith('ketch-preferences')
+                ) {
+                    walk(node, (inner) => {
+                        if (found) return;
+                        if (inner instanceof HTMLElement && visibleTextMatch(inner)) found = true;
+                    });
+                }
+            });
+            return found;
+        };
+        if (scanOnce()) {
+            return true;
+        }
+        const deadline = Date.now() + 2200;
+        while (Date.now() < deadline) {
+            if (scanOnce()) {
+                return true;
+            }
+            const spin = Date.now();
+            while (Date.now() - spin < 200) {
+                /* wait for Ketch to render */
+            }
+        }
+        return false;
+    },
+    EVAL_KETCH_OPT_OUT: () => {
+        const tryKetchApiReject = () => {
+            if (typeof window.ketch === 'function') {
+                window.ketch('rejectAllConsent', false);
+                return true;
+            }
+            const deadline = Date.now() + 12000;
+            while (Date.now() < deadline) {
+                const k = window.semaphore && window.semaphore.ketch;
+                if (k && typeof k.rejectAllConsent === 'function') {
+                    k.rejectAllConsent(false);
+                    return true;
+                }
+                const spin = Date.now();
+                while (Date.now() - spin < 100) {
+                    /* wait for Ketch init */
+                }
+            }
+            return false;
+        };
+        if (tryKetchApiReject()) {
+            return true;
+        }
+        const rejectRe =
+            /\b(reject all|reject|decline all|decline|refuse all|refuse|deny all|deny|only necessary|necessary cookies only|use essential|essential only|alle ablehnen|alles ablehnen|tout refuser|refuser)\b/i;
+        const manageRe =
+            /\b(manage preferences|manage choices|cookie settings|privacy settings|preferences|customize|options|settings|purposes|zwecke|paramètres|configuración)\b/i;
+        const collectElements = (root, acc) => {
+            acc.push(root);
+            const tree = root.querySelectorAll('*');
+            for (let i = 0; i < tree.length; i++) {
+                const el = tree[i];
+                if (el.shadowRoot) collectElements(el.shadowRoot, acc);
+            }
+        };
+        const allUnder = (root) => {
+            const acc = [];
+            collectElements(root, acc);
+            return acc;
+        };
+        const isVisible = (el) => {
+            if (!(el instanceof HTMLElement)) return false;
+            const cs = getComputedStyle(el);
+            if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) === 0) return false;
+            const r = el.getBoundingClientRect();
+            return r.width >= 2 && r.height >= 2;
+        };
+        const clickFirst = (root, testFn) => {
+            for (const el of allUnder(root)) {
+                if (el instanceof HTMLElement && el.tagName === 'BUTTON' && isVisible(el) && testFn(el)) {
+                    el.click();
+                    return true;
+                }
+            }
+            return false;
+        };
+        const findKetchRoot = () => {
+            const ids = ['ketch-consent-banner', 'ketch-purposes-modal', 'ketch-preferences-purposes-tab', 'ketch-preferences'];
+            for (const id of ids) {
+                const el = document.getElementById(id);
+                if (el && isVisible(el)) return el;
+            }
+            return null;
+        };
+        const tryReject = (scope) => {
+            if (!scope) return false;
+            return clickFirst(scope, (btn) => rejectRe.test((btn.textContent || '').trim()));
+        };
+        const tryManage = (scope) => {
+            if (!scope) return false;
+            return clickFirst(scope, (btn) => manageRe.test((btn.textContent || '').trim()));
+        };
+        const deadline = Date.now() + 15000;
+        while (Date.now() < deadline) {
+            const root = findKetchRoot();
+            if (root) {
+                if (tryReject(document)) {
+                    return true;
+                }
+                if (tryManage(root)) {
+                    const innerDeadline = Date.now() + 10000;
+                    while (Date.now() < innerDeadline) {
+                        if (tryReject(document)) {
+                            return true;
+                        }
+                        const spinA = Date.now();
+                        while (Date.now() - spinA < 120) {
+                            /* wait for nested UI */
+                        }
+                    }
+                    return tryReject(document);
+                }
+            }
+            const spinB = Date.now();
+            while (Date.now() - spinB < 150) {
+                /* wait for Ketch to mount */
+            }
+        }
+        return tryReject(document);
+    },
+    EVAL_KETCH_OPT_IN: () => {
+        const tryKetchApiAccept = () => {
+            if (typeof window.ketch === 'function') {
+                window.ketch('acceptAllConsent', false);
+                return true;
+            }
+            const deadline = Date.now() + 12000;
+            while (Date.now() < deadline) {
+                const k = window.semaphore && window.semaphore.ketch;
+                if (k && typeof k.acceptAllConsent === 'function') {
+                    k.acceptAllConsent(false);
+                    return true;
+                }
+                const spin = Date.now();
+                while (Date.now() - spin < 100) {
+                    /* wait for Ketch init */
+                }
+            }
+            return false;
+        };
+        if (tryKetchApiAccept()) {
+            return true;
+        }
+        const acceptRe = /\b(accept all|accept|agree|allow all|allow|i agree|got it|ok|continue)\b/i;
+        const collectElements = (root, acc) => {
+            acc.push(root);
+            const tree = root.querySelectorAll('*');
+            for (let i = 0; i < tree.length; i++) {
+                const el = tree[i];
+                if (el.shadowRoot) collectElements(el.shadowRoot, acc);
+            }
+        };
+        const allUnder = (root) => {
+            const acc = [];
+            collectElements(root, acc);
+            return acc;
+        };
+        const isVisible = (el) => {
+            if (!(el instanceof HTMLElement)) return false;
+            const cs = getComputedStyle(el);
+            if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) === 0) return false;
+            const r = el.getBoundingClientRect();
+            return r.width >= 2 && r.height >= 2;
+        };
+        const findKetchRoot = () => {
+            const ids = ['ketch-consent-banner', 'ketch-purposes-modal', 'ketch-preferences'];
+            for (const id of ids) {
+                const el = document.getElementById(id);
+                if (el && isVisible(el)) return el;
+            }
+            return null;
+        };
+        const root = findKetchRoot();
+        if (!root) {
+            return false;
+        }
+        for (const el of allUnder(root)) {
+            if (el instanceof HTMLElement && el.tagName === 'BUTTON' && isVisible(el) && acceptRe.test((el.textContent || '').trim())) {
+                el.click();
+                return true;
+            }
+        }
+        return false;
+    },
+    EVAL_KETCH_TEST: () => {
+        const parseConsent = (raw) => {
+            if (!raw) {
+                return null;
+            }
+            try {
+                return JSON.parse(atob(raw));
+            } catch {
+                try {
+                    let decoded = raw;
+                    try {
+                        decoded = decodeURIComponent(raw);
+                    } catch {
+                        return null;
+                    }
+                    try {
+                        return JSON.parse(decoded);
+                    } catch {
+                        let b64 = decoded.replace(/-/g, '+').replace(/_/g, '/');
+                        while (b64.length % 4) {
+                            b64 += '=';
+                        }
+                        return JSON.parse(atob(b64));
+                    }
+                } catch {
+                    return null;
+                }
+            }
+        };
+        const isOptOutShape = (json) => {
+            if (!json || typeof json !== 'object') {
+                return false;
+            }
+            const keys = Object.keys(json);
+            if (keys.length === 0) {
+                return true;
+            }
+            return keys.every((k) => {
+                if (k === 'essential_services') {
+                    return true;
+                }
+                const v = json[k];
+                return !v || v.status === 'denied' || v.status === 'opt_out';
+            });
+        };
+        const fromLs = parseConsent(localStorage.getItem('_ketch_consent_v1_'));
+        if (fromLs) {
+            return isOptOutShape(fromLs);
+        }
+        const m = document.cookie.match(/(?:^|;\s*)_ketch_consent_v1_=([^;]+)/);
+        const fromCookie = m ? parseConsent(m[1]) : null;
+        if (fromCookie) {
+            return isOptOutShape(fromCookie);
+        }
+        return true;
+    },
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
@@ -154,7 +467,6 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
-    EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -169,17 +481,6 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
-    EVAL_SHOPIFY_TEST: () =>
-        document.cookie.includes('gdpr_cookie_consent=0') ||
-        (document.cookie.includes('_tracking_consent=') &&
-            JSON.parse(
-                decodeURIComponent(
-                    document.cookie
-                        .split(';')
-                        .find((s) => s.trim().startsWith('_tracking_consent'))
-                        .split('=')[1],
-                ),
-            ).purposes.a === false),
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
@@ -200,12 +501,6 @@ export const snippets = {
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
-    EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
-    EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,
-    EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(false) || true,
-    EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
-    EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
-    EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
@@ -222,24 +517,6 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
 
-    /** time.com: Ketch may apply consent without injecting #lanyard_root (cached consent). */
-    EVAL_KETCH_TIME_DETECT_CMP: () =>
-        typeof window.ketch === 'function' &&
-        !!document.querySelector('script[src*="ketchcdn.com"], script[src*="ketchjs.com"], script#merged-ketch-scripts'),
-    EVAL_KETCH_TIME_REJECT_ALL: () => {
-        if (typeof window.ketch !== 'function') {
-            return false;
-        }
-        window.ketch('rejectAllConsent', false);
-        return true;
-    },
-    EVAL_KETCH_TIME_ACCEPT_ALL: () => {
-        if (typeof window.ketch !== 'function') {
-            return false;
-        }
-        window.ketch('acceptAllConsent', false);
-        return true;
-    },
     EVAL_KETCH_TIME_TEST_OPT_OUT: () => {
         const m = document.cookie.match(/(?:^|;\s*)_ketch_consent_v1_=([^;]+)/);
         if (!m) {

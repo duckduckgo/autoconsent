@@ -11,6 +11,7 @@ import Conversant from './conversant';
 import Tiktok from './tiktok';
 import Tumblr from './tumblr-com';
 import Admiral from './admiral';
+import Ketch from './ketch';
 
 export const dynamicCMPs = [
     TrustArcTop,
@@ -26,4 +27,5 @@ export const dynamicCMPs = [
     Tiktok,
     Tumblr,
     Admiral,
+    Ketch,
 ];
