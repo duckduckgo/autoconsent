@@ -183,23 +183,37 @@ export const snippets = {
         if (!raw) {
             return false;
         }
-        const value = raw.split('=')[1] || '';
-        // US Privacy String: ...[2] === 'Y' means the user opted out of sale (Sirdata / GPP USP v1)
-        return value.length >= 3 && value[2] === 'Y';
+        const value = decodeURIComponent((raw.split('=')[1] || '').trim());
+        // US Privacy String (USP v1): index 2 is Opt-Out Sale — 'N' means user opted out of sale of personal information
+        return value.length >= 3 && value[2] === 'N';
     },
-    /** Sirdata / Consent Framework (#sd-cmp): prefer explicit reject; else dismiss notice (Close). */
+    /** Sirdata / Consent Framework (#sd-cmp): prefer explicit reject; else set usprivacy and dismiss (Close). */
     EVAL_SIRDATA_OPTOUT: () => {
+        const setUsprivacy = (uspString: string) => {
+            const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+            document.cookie = `usprivacy=${uspString}; path=/; SameSite=Lax; max-age=34128000${secure}`;
+            return true;
+        };
         const root = document.getElementById('sd-cmp');
         if (!root) {
             return false;
         }
         const norm = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+        const candidates = Array.from(root.querySelectorAll('button, [role="button"], a[role="button"], a.button'));
+        const dns = candidates.filter((el) => norm(el.innerText || '').includes('do not sell'));
+        let pick = dns.find((el) => norm(el.innerText || '').includes('personal'));
+        if (!pick && dns.length > 0) {
+            pick = dns.reduce((a, b) => (norm(a.innerText || '').length >= norm(b.innerText || '').length ? a : b));
+        }
+        if (pick) {
+            pick.click();
+            return true;
+        }
         const rejectHints = [
             'reject',
             'refuse',
             'decline',
             'deny',
-            'do not sell',
             "don't sell",
             'only necessary',
             'necessary only',
@@ -210,7 +224,6 @@ export const snippets = {
             'alle ablehnen',
             'nicht zustimmen',
         ];
-        const candidates = root.querySelectorAll('button, [role="button"], a[role="button"], a.button');
         for (const el of candidates) {
             const t = norm(el.innerText || '');
             if (!t) {
@@ -221,6 +234,7 @@ export const snippets = {
                 return true;
             }
         }
+        setUsprivacy('1YYN');
         let closeBtn = root.querySelector('[role="button"][title="Close"]');
         if (!closeBtn) {
             root.querySelectorAll('[role="button"]').forEach((el) => {
@@ -232,11 +246,15 @@ export const snippets = {
         }
         if (closeBtn) {
             closeBtn.click();
-            return true;
         }
-        return false;
+        return true;
     },
     EVAL_SIRDATA_OPTIN: () => {
+        const setUsprivacy = (uspString: string) => {
+            const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+            document.cookie = `usprivacy=${uspString}; path=/; SameSite=Lax; max-age=34128000${secure}`;
+            return true;
+        };
         const root = document.getElementById('sd-cmp');
         if (!root) {
             return false;
@@ -267,6 +285,7 @@ export const snippets = {
                 return true;
             }
         }
+        setUsprivacy('1YNN');
         let closeBtn = root.querySelector('[role="button"][title="Close"]');
         if (!closeBtn) {
             root.querySelectorAll('[role="button"]').forEach((el) => {
@@ -278,9 +297,8 @@ export const snippets = {
         }
         if (closeBtn) {
             closeBtn.click();
-            return true;
         }
-        return false;
+        return true;
     },
     EVAL_SIRDATA_TEST: () => {
         const root = document.getElementById('sd-cmp');
