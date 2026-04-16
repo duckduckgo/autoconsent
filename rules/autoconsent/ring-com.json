@@ -22,5 +22,13 @@
             ]
         }
     ],
-    "test": [{ "cookieContains": "privacy-banner-clicked=true" }]
+    "test": [
+        { "cookieContains": "privacy-banner-clicked=true" },
+        { "cookieContains": "privacy-cookie=" },
+        {
+            "waitForVisible": ".consent-banner,.consent-modal",
+            "check": "none",
+            "timeout": 15000
+        }
+    ]
 }
