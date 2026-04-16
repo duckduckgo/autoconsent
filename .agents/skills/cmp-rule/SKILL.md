@@ -1,6 +1,6 @@
 ---
 name: cmp-rule
-description: Creates or fixes autoconsent CMP rules for cookie consent popups. Use when a popup needs a new rule (no CMP detected) or an existing rule is broken (opt-out fails, selectors outdated, CMP changed).
+description: Creates or fixes autoconsent CMP rules for cookie consent popups. Use when a site has an unhandled popup (no CMP detected), an existing rule fails (opt-out broken, selectors outdated, CMP updated), or a user reports a cookie banner issue.
 ---
 
 # CMP Rule: Create or Fix
@@ -8,15 +8,13 @@ description: Creates or fixes autoconsent CMP rules for cookie consent popups. U
 ## Step 1: Diagnose
 
 Load the site with the autoconsent extension (`dist/addon-mv3/`) and check devtools
-console. Take a screenshot of the popup.
+console. **Take a screenshot** — a screenshot reliably shows whether a popup is present.
 
 | Console output | Action |
 |----------------|--------|
 | No CMP detected | **Create** — go to Step 2 |
 | "Found CMP: [name]" + `optOutResult: false` | **Fix** — go to Step 3 |
 | "Found CMP: [name]" + `optOutResult: true` | Rule works — nothing to do |
-
-Also run: `npx playwright test tests/<name>.spec.ts`
 
 ---
 
@@ -31,11 +29,24 @@ grep -rl "<selector-or-class>" rules/autoconsent/ lib/cmps/
 
 ### 2b: Identify the CMP provider
 
-**Always prefer a generic CMP rule over a site-specific rule.**
+**Prefer a generic CMP rule over a site-specific rule when possible.** One CMP rule can
+cover thousands of sites. If the popup is genuinely custom-built, a site-specific rule
+is the right call.
 
-Check DOM for vendor prefixes (`onetrust-`, `didomi-`, `sp_choice_type_`, `cmp-`,
-`fc-`, `klaro-`), script sources for CMP domains, and use the `publicwww-search` skill
-to check prevalence. If the CMP already has a rule, extend it.
+Investigation techniques (roughly in order of speed):
+
+1. **DOM inspection:** Check class names on popup elements for vendor prefixes
+   (`onetrust-`, `didomi-`, `sp_choice_type_`, `cmp-`, `fc-`, `klaro-`, `pd-`, etc.).
+2. **JS source analysis:** Inspect the popup buttons' click handlers or find the cookie
+   that stores consent and search for that cookie name in the page's scripts. Look for:
+   - Vendor names in variable/function names or `window` globals.
+   - Scripts in `node_modules/`, `vendor/`, or `wp-content/plugins/` paths.
+   - License comments with vendor URLs at the top of the script.
+3. **Cross-site prevalence:** Use the `publicwww-search` skill to search for distinctive
+   selectors, script URLs, or copy strings. If the same popup markup appears on many
+   sites, it's a CMP.
+
+If the CMP already has an autoconsent rule, extend it rather than creating a new one.
 
 ### 2c: Choose the rule type
 
@@ -56,7 +67,8 @@ fold) and click settings/manage buttons to see what's behind them.
 Run `npm run create-rule` to scaffold the JSON file and test spec.
 
 **Start simple.** Get the basic flow working before adding fallback paths or regional
-variants. For field and step type reference, see [docs/rule-syntax.md](../../../docs/rule-syntax.md).
+variants. See [examples](examples.md) for common patterns and
+[rule syntax](../../../docs/rule-syntax.md) for the full field/step reference.
 
 Key constraints:
 - `detectCmp` / `detectPopup`: Must be fast. Do NOT use `{ "wait": N }` — the engine
@@ -65,6 +77,10 @@ Key constraints:
 - `test`: Prefer `cookieContains` when the CMP stores consent in cookies.
 - Set `runContext.urlPattern` for site-specific rules.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
+- For popup inside shadow DOM or iframe, use
+  [chained selectors](reference.md#iframes-and-shadow-dom).
+- Follow [selector best practices](reference.md#selector-best-practices) — avoid
+  generated class hashes and dynamic IDs.
 
 #### Eval snippets
 
@@ -72,7 +88,8 @@ When the CMP has a JS API and no reject button in the DOM:
 
 1. Add a snippet to `lib/eval-snippets.ts` (must return truthy on success).
 2. Reference in the rule: `{ "eval": "EVAL_MYCMP_OPTOUT" }`.
-3. Prefer DOM-based steps when possible — eval is a last resort.
+
+Prefer DOM-based steps when possible — eval is a last resort.
 
 ### 2e: Create the test spec
 
@@ -87,14 +104,16 @@ generateCMPTests('<name>', [
 
 Options: `skipRegions`, `onlyRegions`, `testOptIn`, `testSelfTest`.
 
-For CMP rules, include test URLs from multiple sites. Use `data/coverage.json` to find
-them. Then go to **Step 4**.
+For CMP rules, include test URLs from multiple sites — use PublicWWW results from
+step 2b. Then go to **Step 4**.
 
 ---
 
 ## Step 3: Fix a Broken Rule
 
 ### Diagnose by failure stage
+
+See also [quick diagnosis table](reference.md#quick-diagnosis).
 
 | Failed stage | Common causes | Fix approach |
 |-------------|---------------|-------------|
@@ -109,12 +128,6 @@ them. Then go to **Step 4**.
 1. Read the rule and identify the broken step from logs/inspection.
 2. Update selectors in **all occurrences** — `detectCmp`, `detectPopup`, `optOut`, and
    `test` often share selectors.
-3. For CMP providers, check if other rules need the same fix:
-   ```bash
-   grep -rl "<old-selector>" rules/autoconsent/ rules/generated/
-   ```
-4. For generated rules (`rules/generated/auto_XX_domain_*.json`), fix all region
-   variants.
 
 **Adding fallback paths:** Use if/then/else for CMP variants (regional, A/B test,
 version). See [examples](examples.md#conditional--eval-fallback).
@@ -140,6 +153,6 @@ Then go to **Step 4**.
 
 ## Further reference
 
-- [Selector best practices and cosmetic breakage fixes](reference.md)
+- [Selector best practices](reference.md#selector-best-practices), [cosmetic breakage fixes](reference.md#cosmetic-breakage-fixes), [iframes/shadow DOM](reference.md#iframes-and-shadow-dom)
 - [Real rule examples](examples.md) (two-click, multi-step, conditional+eval, cosmetic)
 - [Complete rule syntax](../../../docs/rule-syntax.md) (all step types, conditionals, element selectors)
