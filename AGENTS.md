@@ -89,11 +89,11 @@ For CMPs requiring complex non-linear logic, CMP API interaction, or `Promise.ra
 
 ### Selector Strategy
 
-Prefer selectors stable across builds and locales: data attributes (`[data-testid="..."]`) > stable IDs > class substrings (`[class*="..."]`) > structural CSS > XPath (last resort). **Do NOT use CSS module hashes** (4+ random chars like `.css-1a2b3c`) or framework-generated IDs. See `.agents/skills/cmp-rule/reference.md` for examples and anti-patterns.
+Prefer selectors stable across builds and locales: data attributes (`[data-testid="..."]`) > stable IDs > class substrings (`[class*="..."]`) > structural CSS > XPath (last resort). **Do NOT use CSS module hashes** (4+ random chars like `.css-1a2b3c`) or framework-generated IDs.
 
 ### Cosmetic Rules
 
-Cosmetic rules hide the popup via CSS instead of clicking reject. Use when a popup has no reject/decline button (only accept/close). Set `"cosmetic": true` and use `hide` steps in `optOut`. Hiding can break scroll or overlay behavior — see `.agents/skills/cmp-rule/reference.md` for breakage fix patterns.
+Cosmetic rules hide the popup via CSS instead of clicking reject. Use when a popup has no reject/decline button (only accept/close). Set `"cosmetic": true` and use `hide` steps in `optOut`. Hiding can break scroll or overlay behavior — add fix steps after the `hide`.
 
 ## Regional Differences
 
