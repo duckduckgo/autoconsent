@@ -221,6 +221,79 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+
+    /** time.com: Ketch may apply consent without injecting #lanyard_root (cached consent). */
+    EVAL_KETCH_TIME_DETECT_CMP: () =>
+        typeof window.ketch === 'function' &&
+        !!document.querySelector('script[src*="ketchcdn.com"], script[src*="ketchjs.com"], script#merged-ketch-scripts'),
+    EVAL_KETCH_TIME_REJECT_ALL: () => {
+        if (typeof window.ketch !== 'function') {
+            return false;
+        }
+        window.ketch('rejectAllConsent', false);
+        return true;
+    },
+    EVAL_KETCH_TIME_ACCEPT_ALL: () => {
+        if (typeof window.ketch !== 'function') {
+            return false;
+        }
+        window.ketch('acceptAllConsent', false);
+        return true;
+    },
+    EVAL_KETCH_TIME_TEST_OPT_OUT: () => {
+        const m = document.cookie.match(/(?:^|;\s*)_ketch_consent_v1_=([^;]+)/);
+        if (!m) {
+            return false;
+        }
+        let raw = m[1];
+        try {
+            raw = decodeURIComponent(raw);
+        } catch {
+            return false;
+        }
+        let consent;
+        try {
+            consent = JSON.parse(raw);
+        } catch {
+            try {
+                let b64 = raw.replace(/-/g, '+').replace(/_/g, '/');
+                while (b64.length % 4) {
+                    b64 += '=';
+                }
+                consent = JSON.parse(atob(b64));
+            } catch {
+                return false;
+            }
+        }
+        return consent.analytics?.status === 'denied' && consent.behavioral_advertising?.status === 'denied';
+    },
+    EVAL_KETCH_TIME_TEST_OPT_IN: () => {
+        const m = document.cookie.match(/(?:^|;\s*)_ketch_consent_v1_=([^;]+)/);
+        if (!m) {
+            return false;
+        }
+        let raw = m[1];
+        try {
+            raw = decodeURIComponent(raw);
+        } catch {
+            return false;
+        }
+        let consent;
+        try {
+            consent = JSON.parse(raw);
+        } catch {
+            try {
+                let b64 = raw.replace(/-/g, '+').replace(/_/g, '/');
+                while (b64.length % 4) {
+                    b64 += '=';
+                }
+                consent = JSON.parse(atob(b64));
+            } catch {
+                return false;
+            }
+        }
+        return consent.analytics?.status === 'granted' && consent.behavioral_advertising?.status === 'granted';
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

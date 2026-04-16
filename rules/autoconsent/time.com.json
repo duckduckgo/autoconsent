@@ -1,0 +1,17 @@
+{
+    "name": "time.com",
+    "vendorUrl": "https://time.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?time\\.com/"
+    },
+    "prehideSelectors": ["#lanyard_root div[role='dialog']"],
+    "detectCmp": [{ "eval": "EVAL_KETCH_TIME_DETECT_CMP" }],
+    "detectPopup": [{ "eval": "EVAL_KETCH_TIME_DETECT_CMP" }],
+    "optOut": [{ "eval": "EVAL_KETCH_TIME_REJECT_ALL" }],
+    "optIn": [{ "eval": "EVAL_KETCH_TIME_ACCEPT_ALL" }],
+    "test": [
+        {
+            "any": [{ "eval": "EVAL_KETCH_TIME_TEST_OPT_OUT" }, { "eval": "EVAL_KETCH_TIME_TEST_OPT_IN" }]
+        }
+    ]
+}

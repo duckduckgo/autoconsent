@@ -1,7 +1,6 @@
 import generateCMPTests from '../playwright/runner';
 
 generateCMPTests('ketch', [
-    'https://time.com/',
     'https://www.rover.com/nl/',
     'https://purple.com/',
     'https://www.ncsasports.org/',
