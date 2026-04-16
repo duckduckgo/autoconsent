@@ -33,6 +33,26 @@ AFTER the `hide` step, marked `"optional": true`:
 
 Using `removeClass`, `setStyle`, or `addStyle` requires `"minimumRuleStepVersion": 2`.
 
+## Iframes and Shadow DOM
+
+### Chained selectors
+
+Array selectors pierce shadow DOM and same-origin iframes automatically. Each selector
+in the array scopes into the previous match's `.shadowRoot` or `.contentDocument`:
+
+```json
+["#shadow-host", "button.reject"]
+["#cmp-container iframe", ".opt-out-btn"]
+```
+
+Single-string selectors cannot pierce — use arrays whenever the target is inside a
+shadow root or iframe.
+
+**Limitations:** Only open shadow DOM (`mode: 'open'`) and same-origin iframes.
+Cross-origin iframes are unreachable via chained selectors — use `runContext.frame`
+with a `urlPattern` to run a rule directly inside the iframe instead (see
+`sourcepoint-frame.ts`, `trustarc-frame.ts`).
+
 ## Quick Diagnosis
 
 | Symptom | Likely cause | Fix |
