@@ -203,6 +203,18 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    /** Alaska Air (Tealium / orestbida CookieConsent v3): refuse optional categories when the API is available */
+    EVAL_ALASKAAIR_COOKIE_CONSENT_OPTOUT: () => {
+        if (typeof CookieConsent !== 'object' || typeof CookieConsent.acceptCategory !== 'function') {
+            return false;
+        }
+        try {
+            CookieConsent.acceptCategory([]);
+            return true;
+        } catch (_e) {
+            return false;
+        }
+    },
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

@@ -1,0 +1,46 @@
+{
+    "name": "alaskaair-com",
+    "vendorUrl": "https://www.alaskaair.com/",
+    "comment": "Tealium-loaded orestbida CookieConsent v3 (non-US opt-in shows Refuse all; API covers variants)",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?alaskaair\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "#cc-main"
+        }
+    ],
+    "detectPopup": [
+        {
+            "waitForVisible": "#cc-main .cm-wrapper",
+            "timeout": 20000
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cc-main .cm__btn[data-role=necessary]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cc-main .cm__btn[data-role=necessary]"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_ALASKAAIR_COOKIE_CONSENT_OPTOUT"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cc_cookie="
+        }
+    ]
+}
