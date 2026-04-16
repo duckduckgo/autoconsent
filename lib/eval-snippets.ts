@@ -205,7 +205,8 @@ export const snippets = {
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     /**
      * HubSpot compliance banner: __hs_cookie_cat_pref encodes category toggles; format varies by locale.
-     * Fall back to DOM when the cookie is missing (e.g. async write) but the banner is dismissed.
+     * Fall back to DOM when the cookie is missing (e.g. async write) but the confirmation UI is dismissed.
+     * Do not rely on body.hs-banner--visible alone; HubSpot can leave that class set after the dialog is gone.
      */
     EVAL_HUBSPOT_COOKIE_BANNER_TEST: () => {
         const raw = document.cookie
@@ -237,11 +238,11 @@ export const snippets = {
                 return true;
             }
         }
-        if (document.body.classList.contains('hs-banner--visible')) {
-            return false;
-        }
         const confirmation = document.getElementById('hs-eu-cookie-confirmation');
         if (!confirmation) {
+            return true;
+        }
+        if (confirmation.hasAttribute('hidden')) {
             return true;
         }
         const style = window.getComputedStyle(confirmation);
