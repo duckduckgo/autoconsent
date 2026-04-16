@@ -1,5 +1,6 @@
 {
     "name": "dmgmedia-us",
+    "cosmetic": true,
     "minimumRuleStepVersion": 2,
     "runContext": {
         "urlPattern": "^https://(www\\.)?(dailymail\\.(co\\.uk|com)|metro\\.co\\.uk)/"
@@ -9,6 +10,7 @@
     "detectPopup": [
         {
             "any": [
+                { "exists": "div.mol-ads-cmp form.mol-ads-cmp--banner" },
                 { "waitForVisible": "div.mol-ads-cmp button.mol-ads-cmp--btn-primary" },
                 { "waitForVisible": "div.mol-ads-ccpa--message > u > a" },
                 { "waitForVisible": ".mol-ads-cmp--modal-dialog" }
@@ -31,5 +33,6 @@
                 { "addStyle": "overflow: auto !important", "selector": "html", "optional": true }
             ]
         }
-    ]
+    ],
+    "test": [{ "visible": "div.mol-ads-cmp", "check": "none" }]
 }
