@@ -1,0 +1,34 @@
+{
+    "name": "ring.com",
+    "_metadata": {
+        "vendorUrl": "https://ring.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://([a-z0-9-]+\\.)?ring\\.com/"
+    },
+    "prehideSelectors": [".consent-banner", ".consent-modal"],
+    "detectCmp": [
+        {
+            "exists": "script#consent-script[src*=\"consent-manager\"]"
+        },
+        {
+            "exists": ".consent-banner"
+        }
+    ],
+    "detectPopup": [{ "visible": ".consent-banner" }],
+    "optIn": [{ "waitForThenClick": ".consent-banner .consent--accept" }],
+    "optOut": [
+        {
+            "if": { "exists": ".consent-banner .consent--reject" },
+            "then": [{ "waitForThenClick": ".consent-banner .consent--reject" }],
+            "else": [
+                { "waitForThenClick": ".consent-banner .consent--manage" },
+                { "waitForVisible": ".consent-modal .consent-save" },
+                { "waitForThenClick": ".consent-modal .consent-save" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "privacy-banner-clicked=true" }]
+}
