@@ -1,0 +1,19 @@
+{
+    "name": "americangreetings",
+    "vendorUrl": "https://www.americangreetings.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(americangreetings|jacquielawson|bluemountain)\\.com/"
+    },
+    "prehideSelectors": ["#__tealiumGDPRecModal", "#privacy_manager.privacy_prompt"],
+    "detectCmp": [{ "exists": "#privacy_manager.privacy_prompt" }],
+    "detectPopup": [{ "visible": "#privacy_manager.privacy_prompt #accept_cookies" }],
+    "optIn": [{ "waitForThenClick": "#privacy_manager.privacy_prompt #accept_cookies" }],
+    "optOut": [
+        {
+            "if": { "exists": "#privacy_manager.privacy_prompt #decline_cookies" },
+            "then": [{ "waitForThenClick": "#privacy_manager.privacy_prompt #decline_cookies" }],
+            "else": [{ "hide": "#__tealiumGDPRecModal, #privacy_manager.privacy_prompt" }]
+        }
+    ],
+    "test": [{ "visible": "#__tealiumGDPRecModal, #privacy_manager.privacy_prompt", "check": "none" }]
+}
