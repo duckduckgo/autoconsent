@@ -1,0 +1,30 @@
+{
+    "name": "alaskaair.com",
+    "vendorUrl": "https://www.alaskaair.com/",
+    "comment": "Alaska Air uses the orestbida/cookieconsent v3 library, but configured with only a 'Dismiss' button (no reject option), so the rule must be cosmetic.",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?alaskaair\\.com/"
+    },
+    "prehideSelectors": ["#cc-main"],
+    "detectCmp": [
+        {
+            "exists": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cc-main"
+        }
+    ]
+}
