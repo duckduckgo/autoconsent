@@ -1,0 +1,39 @@
+{
+    "name": "time.com",
+    "vendorUrl": "https://time.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?time\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///footer//button[contains(., 'Do Not Sell or Share My Personal Information')]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///footer//button[contains(., 'Do Not Sell or Share My Personal Information')]"
+        }
+    ],
+    "optIn": [
+        { "waitForThenClick": "xpath///footer//button[contains(., 'Do Not Sell or Share My Personal Information')]" },
+        { "waitFor": "#ketch-preferences" },
+        { "waitForThenClick": "#ketch-preferences-navigation-purposes-tab" },
+        { "waitForThenClick": "#ketch-preferences button[aria-label='Accept All']" },
+        { "waitForThenClick": "#ketch-preferences button[aria-label='Submit']" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "xpath///footer//button[contains(., 'Do Not Sell or Share My Personal Information')]" },
+        { "waitFor": "#ketch-preferences" },
+        { "waitForThenClick": "#ketch-preferences-navigation-purposes-tab" },
+        { "waitForThenClick": "#ketch-preferences button[aria-label='Reject All']" },
+        { "waitForThenClick": "#ketch-preferences button[aria-label='Submit']" }
+    ],
+    "test": [
+        {
+            "cookieContains": "usprivacy=1YYN"
+        }
+    ]
+}
