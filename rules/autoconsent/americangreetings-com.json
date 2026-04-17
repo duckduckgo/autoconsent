@@ -1,0 +1,12 @@
+{
+    "name": "americangreetings-com",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?americangreetings\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#__tealiumGDPRecModal #privacy_manager"],
+    "detectCmp": [{ "exists": "#__tealiumGDPRecModal #privacy_manager .pm-site-americangreetings" }],
+    "detectPopup": [{ "visible": "#__tealiumGDPRecModal #privacy_manager .pm-site-americangreetings" }],
+    "optIn": [{ "waitForThenClick": "#__tealiumGDPRecModal #privacy_manager #accept_cookies" }],
+    "optOut": [{ "hide": "#__tealiumGDPRecModal #privacy_manager" }]
+}
