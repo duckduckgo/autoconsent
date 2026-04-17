@@ -1,0 +1,9 @@
+{
+    "name": "hubspot",
+    "prehideSelectors": ["#hs-eu-cookie-confirmation"],
+    "detectCmp": [{ "exists": "#hs-eu-cookie-confirmation" }],
+    "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
+    "optIn": [{ "waitForThenClick": "#hs-eu-confirmation-button" }],
+    "optOut": [{ "waitForThenClick": "#hs-eu-decline-button" }],
+    "test": [{ "cookieContains": "__hs_cookie_cat_pref=1:false" }]
+}
