@@ -1,0 +1,27 @@
+{
+    "name": "weathertech.com",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?weathertech\\."
+    },
+    "prehideSelectors": [".osano-cm-window"],
+    "detectCmp": [{ "exists": ".osano-cm-window .osano-cm-dialog" }],
+    "detectPopup": [{ "visible": ".osano-cm-window .osano-cm-dialog" }],
+    "optIn": [{ "waitForThenClick": ".osano-cm-window .osano-cm-manage" }, { "waitForThenClick": ".osano-cm-info .osano-cm-save" }],
+    "optOut": [
+        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+        { "waitForVisible": ".osano-cm-info" },
+        {
+            "click": ".osano-cm-info input.osano-cm-input--checked:not(.osano-cm-input--disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".osano-cm-info input#osano-cm-drawer-toggle--category_OPT_OUT:not(.osano-cm-input--checked)",
+            "optional": true
+        },
+        { "waitForThenClick": ".osano-cm-info .osano-cm-save" }
+    ],
+    "test": [{ "exists": ".osano-cm-window .osano-cm-dialog--hidden" }]
+}
