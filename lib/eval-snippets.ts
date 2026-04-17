@@ -4,6 +4,19 @@
 export const snippets = {
     // code-based rules
     EVAL_0: () => console.log(1),
+    EVAL_DIDOMI_OPT_OUT: () => {
+        if (window.Didomi) {
+            window.Didomi.setUserDisagreeToAll();
+            return true;
+        }
+        return false;
+    },
+    EVAL_DIDOMI_TEST: () => {
+        if (window.Didomi) {
+            return window.Didomi.getUserConsentStatusForAll().purposes.disabled.length > 0;
+        }
+        return false;
+    },
     EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
     EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),

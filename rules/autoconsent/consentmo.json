@@ -1,0 +1,44 @@
+{
+    "name": "consentmo",
+    "prehideSelectors": ["csm-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ["csm-cookie-consent", ".csm-wrapper"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["csm-cookie-consent", ".csm-wrapper button"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-allow"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["csm-cookie-consent", ".csm-wrapper .cc-deny"] },
+            "then": [
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-settings"]
+                },
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["csm-cookie-consent", ".csm-wrapper button"],
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

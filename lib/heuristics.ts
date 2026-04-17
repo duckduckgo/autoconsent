@@ -126,6 +126,16 @@ function collectPotentialPopups(isFramed: boolean): PopupData[] {
     return potentialPopups;
 }
 
+export function isDialogLikeElement(node: HTMLElement): boolean {
+    if (node.tagName === 'DIALOG' && node.hasAttribute('open')) {
+        return true;
+    }
+    if (node.getAttribute('role') === 'dialog' || node.getAttribute('aria-modal') === 'true') {
+        return true;
+    }
+    return false;
+}
+
 /**
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
@@ -139,9 +149,14 @@ function getPopupLikeElements(): HTMLElement[] {
                 if (node.tagName === 'BODY') {
                     return NodeFilter.FILTER_SKIP;
                 }
-                const cssPosition = window.getComputedStyle(node).position;
-                if ((cssPosition === 'fixed' || cssPosition === 'sticky') && isElementVisible(node)) {
-                    return NodeFilter.FILTER_ACCEPT;
+                if (isElementVisible(node)) {
+                    const cssPosition = window.getComputedStyle(node).position;
+                    if (cssPosition === 'fixed' || cssPosition === 'sticky') {
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                    if (isDialogLikeElement(node)) {
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
                 }
                 return NodeFilter.FILTER_SKIP;
             },

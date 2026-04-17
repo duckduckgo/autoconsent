@@ -61,6 +61,10 @@ npm run watch
 
 This will rebuild the extension on every source file change. You still need to refresh the extension in the browser to see the changes.
 
+## Using with Puppeteer
+
+See [puppeteer.md](./docs/puppeteer.md) for a full integration guide.
+
 ## Rules
 
 The library's functionality is implemented as a set of rules that define how to manage consent on
