@@ -1,0 +1,34 @@
+{
+    "name": "alaskaair.com",
+    "_metadata": {
+        "vendorUrl": "https://www.alaskaair.com/"
+    },
+    "cosmetic": true,
+    "comment": "alaskaair.com uses orestbida cookieconsent v3 with only a single 'Dismiss' button (no reject option), so we hide the banner cosmetically. Site-specific overrides the generic cookieconsent3 rule, which would otherwise look for a non-existent [data-role=necessary] button.",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?alaskaair\\.com/"
+    },
+    "prehideSelectors": ["#cc-main"],
+    "detectCmp": [
+        {
+            "exists": "#cc-main"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cc-main .cm-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cc-main"
+        }
+    ]
+}
