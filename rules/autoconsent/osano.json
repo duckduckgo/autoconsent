@@ -1,0 +1,70 @@
+{
+    "name": "osano",
+    "_metadata": {
+        "vendorUrl": "https://www.osano.com/"
+    },
+    "prehideSelectors": [".osano-cm-window,.osano-cm-dialog"],
+    "detectCmp": [{ "exists": ".osano-cm-window" }],
+    "detectPopup": [
+        {
+            "visible": ".osano-cm-window .osano-cm-button--type_deny,.osano-cm-window .osano-cm-button--type_accept,.osano-cm-window .osano-cm-manage,.osano-cm-window .osano-cm-denyAll,.osano-cm-window .osano-cm-deny,.osano-cm-window .osano-cm-acceptAll,.osano-cm-window .osano-cm-accept,.osano-cm-window .osano-cm-close",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".osano-cm-window .osano-cm-acceptAll,.osano-cm-window .osano-cm-accept,.osano-cm-window .osano-cm-button--type_accept"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".osano-cm-window .osano-cm-acceptAll,.osano-cm-window .osano-cm-accept,.osano-cm-window .osano-cm-button--type_accept"
+                }
+            ],
+            "else": [
+                {
+                    "if": { "exists": ".osano-cm-window .osano-cm-manage" },
+                    "then": [
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-save" }
+                    ],
+                    "else": [{ "waitForThenClick": ".osano-cm-window .osano-cm-close", "optional": true }]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".osano-cm-window .osano-cm-denyAll,.osano-cm-window .osano-cm-deny,.osano-cm-window .osano-cm-button--type_deny"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".osano-cm-window .osano-cm-denyAll,.osano-cm-window .osano-cm-deny,.osano-cm-window .osano-cm-button--type_deny"
+                }
+            ],
+            "else": [
+                {
+                    "if": { "exists": ".osano-cm-window .osano-cm-manage" },
+                    "then": [
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-manage" },
+                        { "waitForVisible": ".osano-cm-window .osano-cm-toggle__input,.osano-cm-window .osano-cm-save", "check": "any" },
+                        {
+                            "click": ".osano-cm-window .osano-cm-toggle__input.osano-cm-input--checked:not(.osano-cm-input--disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": ".osano-cm-window .osano-cm-save" }
+                    ],
+                    "else": [{ "hide": ".osano-cm-window,.osano-cm-dialog" }]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": ".osano-cm-window .osano-cm-dialog:not(.osano-cm-dialog--hidden)",
+            "check": "none"
+        }
+    ]
+}
