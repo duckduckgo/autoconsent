@@ -1,0 +1,29 @@
+{
+    "name": "verizon.com",
+    "vendorUrl": "https://www.verizon.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?verizon\\.com/"
+    },
+    "prehideSelectors": ["#transcend-consent-manager"],
+    "detectCmp": [
+        {
+            "exists": "#transcend-consent-manager"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog button.button"]
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#transcend-consent-manager"
+        }
+    ]
+}
