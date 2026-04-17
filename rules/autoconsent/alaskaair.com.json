@@ -1,0 +1,34 @@
+{
+    "name": "alaskaair.com",
+    "vendorUrl": "https://www.alaskaair.com/",
+    "comment": "Alaska Airlines uses CookieConsent v3 (orestbida) configured with no categories - only a single 'Dismiss' button. The generic cookieconsent3 rule does not apply because there is no [data-role=necessary] reject button.",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?alaskaair\\.com/"
+    },
+    "prehideSelectors": ["#cc-main"],
+    "detectCmp": [
+        {
+            "exists": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cc-main .cm"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cc-main .cm__btn[data-role=all]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cc_cookie="
+        }
+    ]
+}
