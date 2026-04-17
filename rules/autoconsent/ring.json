@@ -1,0 +1,51 @@
+{
+    "name": "ring",
+    "vendorUrl": "https://ring.com",
+    "prehideSelectors": [".consent-banner"],
+    "detectCmp": [
+        {
+            "exists": ".consent-banner .consent-banner-copy"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-banner .consent-banner-copy"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-banner .consent--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".consent-banner .consent--reject" },
+            "then": [
+                {
+                    "waitForThenClick": ".consent-banner .consent--reject"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".consent-banner .consent--manage"
+                },
+                {
+                    "waitForVisible": ".consent-modal .consent-bucket"
+                },
+                {
+                    "click": ".consent-modal input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".consent-modal .consent-save"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "privacy-banner-clicked=true"
+        }
+    ]
+}
