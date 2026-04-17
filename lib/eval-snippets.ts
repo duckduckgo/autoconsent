@@ -70,6 +70,32 @@ export const snippets = {
         return false;
     },
     EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_OSANO_OPT_OUT: () => {
+        // Within the Osano preferences drawer, uncheck every non-essential
+        // consent toggle (clicking the label inverts the associated checkbox)
+        // and turn ON the OPT_OUT (Do Not Sell) toggle if present.
+        document
+            .querySelectorAll('label.osano-cm-list-item__toggle.osano-cm-toggle--checked:not(.osano-cm-toggle--disabled)')
+            .forEach((label) => label.click());
+        document
+            .querySelectorAll(
+                "label.osano-cm-list-item__toggle:not(.osano-cm-toggle--checked):not(.osano-cm-toggle--disabled)[for='osano-cm-drawer-toggle--category_OPT_OUT']",
+            )
+            .forEach((label) => label.click());
+        return true;
+    },
+    EVAL_OSANO_TEST: () => {
+        if (!window.Osano || typeof window.Osano.cm?.getConsent !== 'function') {
+            return false;
+        }
+        const consent = window.Osano.cm.getConsent();
+        // ESSENTIAL is always ACCEPT; OPT_OUT being ACCEPT signals user opted out.
+        // Every other category should be DENY for a successful opt-out.
+        return Object.entries(consent).every(([category, value]) => {
+            if (category === 'ESSENTIAL' || category === 'OPT_OUT') return true;
+            return value === 'DENY';
+        });
+    },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',

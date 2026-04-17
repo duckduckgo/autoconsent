@@ -1,0 +1,92 @@
+{
+    "name": "osano",
+    "_metadata": {
+        "vendorUrl": "https://www.osano.com/"
+    },
+    "prehideSelectors": [".osano-cm-window"],
+    "detectCmp": [
+        {
+            "exists": ".osano-cm-window"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".osano-cm-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".osano-cm-accept-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".osano-cm-accept-all"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ".osano-cm-accept"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ".osano-cm-accept"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ".osano-cm-manage"
+                        },
+                        {
+                            "waitForVisible": ".osano-cm-info-dialog .osano-cm-list-item__toggle",
+                            "timeout": 3000
+                        },
+                        {
+                            "waitForThenClick": ".osano-cm-save"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".osano-cm-denyAll, .osano-cm-deny-all, .osano-cm-deny"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".osano-cm-denyAll, .osano-cm-deny-all, .osano-cm-deny"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".osano-cm-manage"
+                },
+                {
+                    "waitForVisible": ".osano-cm-info-dialog .osano-cm-list-item__toggle",
+                    "timeout": 3000
+                },
+                {
+                    "eval": "EVAL_OSANO_OPT_OUT"
+                },
+                {
+                    "waitForThenClick": ".osano-cm-save"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "eval": "EVAL_OSANO_TEST"
+                },
+                {
+                    "cookieContains": "osano_consentmanager"
+                }
+            ]
+        }
+    ]
+}
