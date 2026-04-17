@@ -1,0 +1,31 @@
+{
+    "name": "hubspot-cookie-banner",
+    "minimumRuleStepVersion": 2,
+    "_metadata": {
+        "vendorUrl": "https://www.hubspot.com/wt-assets/static-files/compliance/index.js"
+    },
+    "detectCmp": [{ "exists": "#hs-eu-cookie-confirmation" }],
+    "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
+    "optIn": [{ "waitForThenClick": "#hs-eu-confirmation-button" }],
+    "optOut": [
+        {
+            "if": { "visible": "#hs-modal-decline-all" },
+            "then": [{ "waitForThenClick": "#hs-modal-decline-all" }],
+            "else": [{ "waitForThenClick": "#hs-eu-decline-button" }]
+        },
+        {
+            "waitForVisible": "#hs-eu-cookie-confirmation",
+            "timeout": 3000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "#hs-modal",
+            "timeout": 2000,
+            "check": "none",
+            "optional": true
+        },
+        { "removeClass": "hs-modal-open", "selector": "body", "optional": true },
+        { "removeClass": "hs-banner--visible", "selector": "body", "optional": true }
+    ],
+    "test": [{ "eval": "EVAL_HUBSPOT_COOKIE_BANNER_TEST" }]
+}
