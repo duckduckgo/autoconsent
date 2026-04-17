@@ -154,7 +154,6 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
-    EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
@@ -200,12 +199,6 @@ export const snippets = {
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
-    EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
-    EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,
-    EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(false) || true,
-    EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
-    EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
-    EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
