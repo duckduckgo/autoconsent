@@ -129,6 +129,14 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 return false;
             }
 
+            // If a one-click reject button (sp_choice_type_13) is present on the initial
+            // notice, prefer it over opening the manage flow. This avoids picking the
+            // wrong element when multiple sp_choice_type_12 buttons coexist on a notice
+            // (e.g. an informational link plus a separate "Manage settings" button).
+            if (this.elementVisible('.sp_choice_type_13', 'any')) {
+                return await this.click('.sp_choice_type_13');
+            }
+
             if (!this.elementExists(manageSelector)) {
                 // do not sell button
                 return await this.click('.sp_choice_type_13');
