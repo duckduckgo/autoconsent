@@ -151,5 +151,16 @@ describe('getActionablePopups', () => {
 
             expect(popups.length).to.equal(0);
         });
+
+        it('does not let a nested shadow-rooted widget cause the real popup to be dropped', () => {
+            showPopup('popup-with-nested-shadow');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].element.id).to.equal('popup-with-nested-shadow');
+            expect(popups[0].rejectButtons?.length).to.equal(1);
+            expect(popups[0].rejectButtons?.[0].text).to.equal('Reject All');
+        });
     });
 });

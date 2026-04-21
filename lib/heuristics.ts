@@ -161,6 +161,11 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
     return false;
 }
 
+function isPositionedLikePopup(node: HTMLElement): boolean {
+    const cssPosition = window.getComputedStyle(node).position;
+    return cssPosition === 'fixed' || cssPosition === 'sticky' || isDialogLikeElement(node);
+}
+
 /**
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
@@ -175,14 +180,13 @@ function getPopupLikeElements(): HTMLElement[] {
                     return NodeFilter.FILTER_SKIP;
                 }
                 if (isElementVisible(node)) {
-                    const cssPosition = window.getComputedStyle(node).position;
-                    if (cssPosition === 'fixed' || cssPosition === 'sticky') {
+                    if (isPositionedLikePopup(node)) {
                         return NodeFilter.FILTER_ACCEPT;
                     }
-                    if (isDialogLikeElement(node)) {
-                        return NodeFilter.FILTER_ACCEPT;
-                    }
-                    if (node.shadowRoot) {
+                    // Shadow-rooted hosts are accepted so web-component CMPs are detected.
+                    // Skip hosts nested inside a light-DOM popup candidate so excludeContainers
+                    // doesn't drop the real popup in favour of an unrelated inner widget.
+                    if (node.shadowRoot && !hasPopupLikeAncestor(node)) {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                 }
@@ -196,6 +200,17 @@ function getPopupLikeElements(): HTMLElement[] {
         found.push(node as HTMLElement);
     }
     return excludeContainers(found);
+}
+
+function hasPopupLikeAncestor(node: HTMLElement): boolean {
+    let parent = node.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+        if (isPositionedLikePopup(parent)) {
+            return true;
+        }
+        parent = parent.parentElement;
+    }
+    return false;
 }
 
 /**
