@@ -102,6 +102,11 @@
             <shadow-widget id="nested-shadow-widget"></shadow-widget>
         </div>
 
+        <!-- Shadow-rooted CMP wrapped inside a fixed-positioned container -->
+        <div id="popup-shadow-in-fixed-wrapper" class="popup">
+            <div class="shadow-cmp-slot"></div>
+        </div>
+
         <script>
             // Web-component based CMPs render their banner inside an open shadow root.
             // The host element itself may not have fixed/sticky/dialog positioning, so

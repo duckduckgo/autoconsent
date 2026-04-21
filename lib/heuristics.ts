@@ -161,56 +161,44 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
     return false;
 }
 
-function isPositionedLikePopup(node: HTMLElement): boolean {
-    const cssPosition = window.getComputedStyle(node).position;
-    return cssPosition === 'fixed' || cssPosition === 'sticky' || isDialogLikeElement(node);
-}
-
 /**
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
  */
 function getPopupLikeElements(): HTMLElement[] {
-    const walker = document.createTreeWalker(
-        document.documentElement,
-        NodeFilter.SHOW_ELEMENT, // visit only element nodes
-        {
-            acceptNode(node: HTMLElement) {
-                if (node.tagName === 'BODY') {
-                    return NodeFilter.FILTER_SKIP;
-                }
-                if (isElementVisible(node)) {
-                    if (isPositionedLikePopup(node)) {
-                        return NodeFilter.FILTER_ACCEPT;
-                    }
-                    // Shadow-rooted hosts are accepted so web-component CMPs are detected.
-                    // Skip hosts nested inside a light-DOM popup candidate so excludeContainers
-                    // doesn't drop the real popup in favour of an unrelated inner widget.
-                    if (node.shadowRoot && !hasPopupLikeAncestor(node)) {
-                        return NodeFilter.FILTER_ACCEPT;
-                    }
-                }
+    // Collected in two buckets so excludeContainers doesn't cross-cancel them:
+    // - geometry (fixed/sticky/dialog) describes an on-page overlay.
+    // - shadow (any element with an open shadowRoot) describes a web-component popup,
+    //   whose real content is invisible to a light-DOM ancestor. Keeping them separate
+    //   means a CMP wrapped in a fixed-positioned container stays detected (the shadow
+    //   host survives), and an unrelated shadow widget nested inside a real popup
+    //   doesn't cause the real popup to be dropped.
+    const geometry: HTMLElement[] = [];
+    const shadowHosts: HTMLElement[] = [];
+    const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_ELEMENT, {
+        acceptNode(node: HTMLElement) {
+            if (node.tagName === 'BODY' || !isElementVisible(node)) {
                 return NodeFilter.FILTER_SKIP;
-            },
+            }
+            const cssPosition = window.getComputedStyle(node).position;
+            if (cssPosition === 'fixed' || cssPosition === 'sticky' || isDialogLikeElement(node)) {
+                return NodeFilter.FILTER_ACCEPT;
+            }
+            if (node.shadowRoot) {
+                return NodeFilter.FILTER_ACCEPT;
+            }
+            return NodeFilter.FILTER_SKIP;
         },
-    );
-
-    const found = [];
+    });
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-        found.push(node as HTMLElement);
-    }
-    return excludeContainers(found);
-}
-
-function hasPopupLikeAncestor(node: HTMLElement): boolean {
-    let parent = node.parentElement;
-    while (parent && parent.tagName !== 'BODY') {
-        if (isPositionedLikePopup(parent)) {
-            return true;
+        const el = node as HTMLElement;
+        if (el.shadowRoot) {
+            shadowHosts.push(el);
+        } else {
+            geometry.push(el);
         }
-        parent = parent.parentElement;
     }
-    return false;
+    return [...excludeContainers(geometry), ...excludeContainers(shadowHosts)];
 }
 
 /**

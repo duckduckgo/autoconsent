@@ -162,5 +162,18 @@ describe('getActionablePopups', () => {
             expect(popups[0].rejectButtons?.length).to.equal(1);
             expect(popups[0].rejectButtons?.[0].text).to.equal('Reject All');
         });
+
+        it('finds a shadow-rooted CMP even when wrapped in a fixed-positioned container', () => {
+            const wrapper = document.getElementById('popup-shadow-in-fixed-wrapper')!;
+            wrapper.classList.add('visible');
+            wrapper.querySelector('.shadow-cmp-slot')!.innerHTML = '<shadow-cookie-popup></shadow-cookie-popup>';
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect((popups[0].element as HTMLElement).tagName).to.equal('SHADOW-COOKIE-POPUP');
+            expect(popups[0].rejectButtons?.length).to.equal(1);
+            expect(popups[0].rejectButtons?.[0].text).to.equal('Reject All');
+        });
     });
 });
