@@ -92,5 +92,60 @@
             <button>Accept All</button>
             <button>Reject All</button>
         </dialog>
+
+        <div id="shadow-popup-slot"></div>
+
+        <script>
+            // Web-component based CMPs render their banner inside an open shadow root.
+            // The host element itself may not have fixed/sticky/dialog positioning, so
+            // the heuristic must detect it via its shadowRoot.
+            class ShadowCookiePopup extends HTMLElement {
+                constructor() {
+                    super();
+                    const root = this.attachShadow({ mode: 'open' });
+                    root.innerHTML = `
+                        <style>:host { display: block; }</style>
+                        <div class="banner">
+                            <p>We use cookies to improve your experience.</p>
+                            <button data-action="accept-all">Accept All</button>
+                            <button data-action="reject-all">Reject All</button>
+                        </div>
+                    `;
+                }
+            }
+            customElements.define('shadow-cookie-popup', ShadowCookiePopup);
+
+            class ShadowNoCookieText extends HTMLElement {
+                constructor() {
+                    super();
+                    const root = this.attachShadow({ mode: 'open' });
+                    root.innerHTML = `
+                        <style>:host { display: block; }</style>
+                        <div>
+                            <p>Welcome! Subscribe to our newsletter.</p>
+                            <button>Subscribe</button>
+                            <button>No thanks</button>
+                        </div>
+                    `;
+                }
+            }
+            customElements.define('shadow-no-cookie-text', ShadowNoCookieText);
+
+            class ShadowCookieNoReject extends HTMLElement {
+                constructor() {
+                    super();
+                    const root = this.attachShadow({ mode: 'open' });
+                    root.innerHTML = `
+                        <style>:host { display: block; }</style>
+                        <div>
+                            <p>We use cookies to improve your experience.</p>
+                            <button>Accept All</button>
+                            <button>Settings</button>
+                        </div>
+                    `;
+                }
+            }
+            customElements.define('shadow-cookie-no-reject', ShadowCookieNoReject);
+        </script>
     </body>
 </html>

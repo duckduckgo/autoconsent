@@ -114,9 +114,10 @@ function collectPotentialPopups(isFramed: boolean): PopupData[] {
 
     // for each potential popup, get the buttons
     for (const el of elements) {
-        if (el.innerText) {
+        const text = getPopupText(el);
+        if (text) {
             potentialPopups.push({
-                text: el.innerText,
+                text,
                 element: el,
                 buttons: getButtonData(el),
             });
@@ -124,6 +125,30 @@ function collectPotentialPopups(isFramed: boolean): PopupData[] {
     }
 
     return potentialPopups;
+}
+
+/**
+ * Return the visible text of a popup candidate, piercing an open shadow root when the
+ * host has no light-DOM text (common for web-component based CMPs). Skips <style> and
+ * <script> children so their source text doesn't leak into heuristic matching.
+ */
+function getPopupText(el: HTMLElement): string {
+    if (el.innerText) {
+        return el.innerText;
+    }
+    if (el.shadowRoot) {
+        const parts: string[] = [];
+        for (const child of Array.from(el.shadowRoot.children) as HTMLElement[]) {
+            if (child.tagName === 'STYLE' || child.tagName === 'SCRIPT') continue;
+            // innerText is layout-aware and approximates what a user would see.
+            const text = child.innerText;
+            if (text) parts.push(text);
+        }
+        if (parts.length > 0) {
+            return parts.join('\n');
+        }
+    }
+    return '';
 }
 
 export function isDialogLikeElement(node: HTMLElement): boolean {
@@ -139,6 +164,14 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
 /**
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
+ *
+ * Web-component based CMPs (custom elements with an open shadow root) are picked up
+ * via the shadowRoot branch. Downstream `DETECT_PATTERNS` / `REJECT_PATTERNS` filters
+ * drop non-CMP shadow hosts, so we intentionally don't require the host to also be
+ * fixed/sticky/dialog-like. We don't descend *into* the shadow root because its
+ * internal "popup-like" elements would be ancestors of the host in the flat tree but
+ * Element.contains() does not cross shadow boundaries, so excludeContainers() can't
+ * dedupe them.
  */
 function getPopupLikeElements(): HTMLElement[] {
     const walker = document.createTreeWalker(
@@ -155,6 +188,9 @@ function getPopupLikeElements(): HTMLElement[] {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                     if (isDialogLikeElement(node)) {
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                    if (node.shadowRoot) {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                 }
@@ -190,7 +226,22 @@ export function getButtonData(el: HTMLElement): ButtonData[] {
 }
 
 function getButtonLikeElements(el: HTMLElement): HTMLElement[] {
-    return Array.from(el.querySelectorAll(BUTTON_LIKE_ELEMENT_SELECTOR));
+    const result: HTMLElement[] = Array.from(el.querySelectorAll(BUTTON_LIKE_ELEMENT_SELECTOR));
+    // Pierce open shadow roots so web-component CMPs expose their buttons.
+    const hosts = Array.from(el.querySelectorAll<HTMLElement>('*')).filter((n) => n.shadowRoot);
+    if (el.shadowRoot) {
+        hosts.unshift(el);
+    }
+    for (const host of hosts) {
+        const root = host.shadowRoot;
+        if (!root) continue;
+        result.push(...Array.from(root.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR)));
+        const nestedHosts = Array.from(root.querySelectorAll<HTMLElement>('*')).filter((n) => n.shadowRoot);
+        for (const nested of nestedHosts) {
+            result.push(...getButtonLikeElements(nested));
+        }
+    }
+    return result;
 }
 
 export function isDisabled(el: HTMLElement): boolean {

@@ -116,4 +116,40 @@ describe('getActionablePopups', () => {
             expect(popups[0].otherButtons?.length).to.equal(3);
         });
     });
+
+    describe('shadow DOM', () => {
+        const slot = document.getElementById('shadow-popup-slot')!;
+
+        afterEach(() => {
+            slot.innerHTML = '';
+        });
+
+        it('finds cookie popup rendered inside an open shadow root', () => {
+            slot.innerHTML = '<shadow-cookie-popup></shadow-cookie-popup>';
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].rejectButtons?.length).to.equal(1);
+            expect(popups[0].rejectButtons?.[0].text).to.equal('Reject All');
+            expect(popups[0].otherButtons?.length).to.equal(1);
+            expect(popups[0].otherButtons?.[0].text).to.equal('Accept All');
+        });
+
+        it('ignores shadow-rooted popup without cookie-related text', () => {
+            slot.innerHTML = '<shadow-no-cookie-text></shadow-no-cookie-text>';
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(0);
+        });
+
+        it('ignores shadow-rooted cookie popup without a reject button', () => {
+            slot.innerHTML = '<shadow-cookie-no-reject></shadow-cookie-no-reject>';
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(0);
+        });
+    });
 });
