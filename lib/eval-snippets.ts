@@ -76,6 +76,15 @@ export const snippets = {
 
     // declarative rules
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
+    EVAL_DARKOUNITY_TEST: () => {
+        const raw = localStorage.getItem('darkounity-cookie-consent');
+        if (!raw) return false;
+        try {
+            return JSON.parse(raw).analytics === false;
+        } catch {
+            return false;
+        }
+    },
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),

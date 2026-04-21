@@ -1,0 +1,33 @@
+{
+    "name": "darkounity",
+    "vendorUrl": "https://darkounity.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?darkounity\\.com/"
+    },
+    "prehideSelectors": ["gdpr-consent-popup"],
+    "detectCmp": [
+        {
+            "exists": "gdpr-consent-popup"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "gdpr-consent-popup[open=\"true\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["gdpr-consent-popup", "[data-action=\"accept-all\"]"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["gdpr-consent-popup", "[data-action=\"necessary-only\"]"]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_DARKOUNITY_TEST"
+        }
+    ]
+}
