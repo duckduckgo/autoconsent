@@ -164,14 +164,6 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
 /**
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
- *
- * Web-component based CMPs (custom elements with an open shadow root) are picked up
- * via the shadowRoot branch. Downstream `DETECT_PATTERNS` / `REJECT_PATTERNS` filters
- * drop non-CMP shadow hosts, so we intentionally don't require the host to also be
- * fixed/sticky/dialog-like. We don't descend *into* the shadow root because its
- * internal "popup-like" elements would be ancestors of the host in the flat tree but
- * Element.contains() does not cross shadow boundaries, so excludeContainers() can't
- * dedupe them.
  */
 function getPopupLikeElements(): HTMLElement[] {
     const walker = document.createTreeWalker(
@@ -226,20 +218,9 @@ export function getButtonData(el: HTMLElement): ButtonData[] {
 }
 
 function getButtonLikeElements(el: HTMLElement): HTMLElement[] {
-    const result: HTMLElement[] = Array.from(el.querySelectorAll(BUTTON_LIKE_ELEMENT_SELECTOR));
-    // Pierce open shadow roots so web-component CMPs expose their buttons.
-    const hosts = Array.from(el.querySelectorAll<HTMLElement>('*')).filter((n) => n.shadowRoot);
+    const result = Array.from(el.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR));
     if (el.shadowRoot) {
-        hosts.unshift(el);
-    }
-    for (const host of hosts) {
-        const root = host.shadowRoot;
-        if (!root) continue;
-        result.push(...Array.from(root.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR)));
-        const nestedHosts = Array.from(root.querySelectorAll<HTMLElement>('*')).filter((n) => n.shadowRoot);
-        for (const nested of nestedHosts) {
-            result.push(...getButtonLikeElements(nested));
-        }
+        result.push(...Array.from(el.shadowRoot.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR)));
     }
     return result;
 }
