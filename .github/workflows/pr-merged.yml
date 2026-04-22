@@ -1,14 +1,16 @@
 name: 'PR Merged Actions'
 
 on:
-    pull_request_target:
+    pull_request:
         types:
             - closed
 
 jobs:
     process-asana-tasks:
+        permissions:
+            contents: read
         runs-on: ubuntu-latest
-        if: github.event.pull_request.merged == true
+        if: github.event.pull_request.merged == true && github.event.pull_request.head.repo.full_name == github.repository
         steps:
             - name: Find Asana task ID(s)
               id: find-tasks
