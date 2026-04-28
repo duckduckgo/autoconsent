@@ -69,7 +69,14 @@ export const snippets = {
         }
         return false;
     },
-    EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_ONETRUST_1: () =>
+        window.OnetrustActiveGroups.split(',')
+            // OnetrustActiveGroups contains top-level categories alongside
+            // host (H...) / vendor (V...) / stack (STACK...) sub-entries that
+            // are tied to whichever category is enabled. We only want to
+            // count enabled top-level categories — at most the "strictly
+            // necessary" one should remain after a successful opt-out.
+            .filter((s) => s.length > 0 && !/^(H|V|STACK)/i.test(s)).length <= 1,
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
