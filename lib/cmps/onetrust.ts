@@ -18,7 +18,12 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('#onetrust-banner-sdk,#onetrust-pc-sdk');
+        // Require visibility, not just existence: OneTrust SDK creates
+        // #onetrust-pc-sdk early and keeps it hidden via .ot-hide. If we
+        // matched on existence alone, we'd "detect" the CMP before the
+        // banner is rendered, causing detectPopup to time out and the
+        // heuristic fallback to be skipped on slow-loading sites.
+        return this.elementVisible('#onetrust-banner-sdk,#onetrust-pc-sdk', 'any');
     }
 
     async detectPopup() {
