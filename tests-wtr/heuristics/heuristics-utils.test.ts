@@ -75,6 +75,15 @@ describe('isRejectButton', () => {
         expect(isRejectButton('let us Reject All cookies', [/reject all/gi], [/let us/gi])).to.be.false;
     });
 
+    it('matches "except strictly necessary" qualifier', () => {
+        // OneTrust on apnews.com labels the reject button "I Reject All (except Strictly Necessary)"
+        expect(isRejectButton('I Reject All (except Strictly Necessary)')).to.be.true;
+        expect(isRejectButton('Reject All (except Strictly Necessary)')).to.be.true;
+        expect(isRejectButton('Reject All (except Necessary)')).to.be.true;
+        expect(isRejectButton('Deny All (except Strictly Essential)')).to.be.true;
+        expect(isRejectButton('I Reject All except necessary')).to.be.true;
+    });
+
     it('returns false for empty string', () => {
         expect(isRejectButton('')).to.be.false;
     });
