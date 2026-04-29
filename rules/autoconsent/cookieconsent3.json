@@ -10,17 +10,28 @@
     ],
     "detectPopup": [
         {
-            "visible": "#cc-main .cm-wrapper"
+            "visible": "#cc-main .cm-wrapper, #cc-main .pm-wrapper",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cm__btn[data-role=all]"
+            "if": { "exists": "#cc-main .cm-wrapper .cm__btn[data-role=all]" },
+            "then": [{ "waitForThenClick": "#cc-main .cm-wrapper .cm__btn[data-role=all]" }],
+            "else": [
+                { "click": "#cc-main .cm-wrapper .cm__btn[data-role=show]", "optional": true },
+                { "waitForThenClick": "#cc-main .pm-wrapper .pm__btn[data-role=all]" }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cm__btn[data-role=necessary]"
+            "if": { "exists": "#cc-main .cm-wrapper .cm__btn[data-role=necessary]" },
+            "then": [{ "waitForThenClick": "#cc-main .cm-wrapper .cm__btn[data-role=necessary]" }],
+            "else": [
+                { "click": "#cc-main .cm-wrapper .cm__btn[data-role=show]", "optional": true },
+                { "waitForThenClick": "#cc-main .pm-wrapper .pm__btn[data-role=necessary]" }
+            ]
         }
     ],
     "test": [
