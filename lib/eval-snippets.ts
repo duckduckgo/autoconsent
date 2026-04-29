@@ -12,10 +12,10 @@ export const snippets = {
         return false;
     },
     EVAL_DIDOMI_TEST: () => {
-        if (window.Didomi) {
-            return window.Didomi.getUserConsentStatusForAll().purposes.disabled.length > 0;
-        }
-        return false;
+        // getCurrentUserStatus() works under both GDPR and CCPA/CPRA, unlike the legacy
+        // getUserConsentStatusForAll() which returns empty arrays in CCPA/CPRA mode.
+        const purposes = window.Didomi?.getCurrentUserStatus?.()?.purposes;
+        return !!purposes && Object.values(purposes).some((p) => !p.enabled);
     },
     EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
     EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
