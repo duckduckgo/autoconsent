@@ -108,15 +108,15 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         // sometimes there's a "Save and Exit" / "Essential cookies" button.
-        // The PM iframe loads progressively, so wait briefly for the button to appear before
-        // deciding which branch to take. Without this wait, the SE branch is skipped on slow
-        // PM frames (e.g. theguardian.com global CMP) and we fall through to a different
-        // flow that doesn't handle the toggles in this UI variant.
-        await this.waitForVisible('.sp_choice_type_SE', 3000, 'any');
+        // The PM iframe loads progressively (notice button → SE button → toggle controls),
+        // so wait for it to render before deciding which branch to take. Without this wait,
+        // the SE branch is skipped on slow PM frames (e.g. theguardian.com global CMP) and
+        // we fall through to a different flow that doesn't handle the toggles in this UI variant.
+        await this.waitForVisible('.sp_choice_type_SE', 10000, 'any');
         if (this.elementVisible('.sp_choice_type_SE', 'any')) {
             // The toggles render asynchronously after the SE button. Wait for any known
             // toggle markup to appear so we can flip it off before saving.
-            await this.waitForElement('.pm-switch,.pm-toggle', 5000);
+            await this.waitForElement('.pm-switch,.pm-toggle', 10000);
             // click the "Do Not Sell" toggle if it exists
             await this.click(
                 [
