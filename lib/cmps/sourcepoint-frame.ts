@@ -107,8 +107,16 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return await this.click('.priv-save-btn');
         }
 
-        // sometimes there's a "Save and Exit" / "Essential cookies" button
+        // sometimes there's a "Save and Exit" / "Essential cookies" button.
+        // The PM iframe loads progressively, so wait briefly for the button to appear before
+        // deciding which branch to take. Without this wait, the SE branch is skipped on slow
+        // PM frames (e.g. theguardian.com global CMP) and we fall through to a different
+        // flow that doesn't handle the toggles in this UI variant.
+        await this.waitForVisible('.sp_choice_type_SE', 3000, 'any');
         if (this.elementVisible('.sp_choice_type_SE', 'any')) {
+            // The toggles render asynchronously after the SE button. Wait for any known
+            // toggle markup to appear so we can flip it off before saving.
+            await this.waitForElement('.pm-switch,.pm-toggle', 5000);
             // click the "Do Not Sell" toggle if it exists
             await this.click(
                 [
@@ -117,6 +125,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 ],
                 false,
             );
+            // Some Sourcepoint US/global CMP variants use a `.pm-toggle` button (role=switch)
+            // with two inner spans (.off / .on). Clicking the parent button does not flip the
+            // state — we have to click the .off child to disable it. Click all enabled toggles.
+            await this.click('.pm-toggle[aria-checked=true] .off', true);
             return await this.click('.sp_choice_type_SE');
         }
 
