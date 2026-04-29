@@ -10,7 +10,7 @@
     ],
     "detectPopup": [
         {
-            "visible": "#cm"
+            "exists": "html.show--consent #cm"
         },
         {
             "exists": "#s-all-bn"
