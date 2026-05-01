@@ -31,7 +31,7 @@ If any check fails, fix the issue and re-run before proceeding.
 ### JSON rule PRs
 
 - [ ] Test spec exists in `tests/` with reachable URLs
-- [ ] Selectors are stable (no CSS module hashes, dynamic IDs, or framework-generated IDs — see `cmp-rule` skill for selector guidance)
+- [ ] Selectors are stable (no CSS module hashes, dynamic IDs, or framework-generated IDs)
 - [ ] `optOut` targets a reject/decline button, not a privacy policy link or close button
 - [ ] `prehideSelectors` are narrow (no `body` or full-page selectors)
 - [ ] `minimumRuleStepVersion: 2` if rule uses `removeClass`, `setStyle`, or `addStyle`
