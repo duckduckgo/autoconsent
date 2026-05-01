@@ -5,7 +5,8 @@ description: Test autoconsent rules across geographic regions using BrightData r
 
 # BrightData Regional Testing
 
-**All rule changes must be tested across geographic regions** to catch GDPR/CCPA/regional popup variations. Use this skill to run autoconsent against real remote browsers in multiple regions.
+**All rule changes must be tested across geographic regions** to catch GDPR/CCPA/regional popup variations. This skill provides a JS library to run autoconsent against real remote browsers in multiple regions.
+> Important! Autoconsent results can have false positives. When testing, always inspect the screenshots and confirm that opt-out was successful.
 
 ## Prerequisites
 
