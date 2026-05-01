@@ -10,4 +10,5 @@ generateCMPTests('ketch', [
     'https://www.smartsheet.com/',
     'https://www.ketch.com/',
     'https://www.forbes.com/',
+    'https://shift.com/state-of-browsing/',
 ]);

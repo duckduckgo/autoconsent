@@ -36,8 +36,21 @@
             },
             "then": [
                 {
-                    "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]",
-                    "comment": "can be either settings or reject button"
+                    "if": {
+                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary",
+                            "comment": "can be either settings or reject button"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#ketch-banner-button-primary",
+                            "comment": "Notice-only banner (e.g. CCPA disclosure with no opt-out button); dismiss by clicking the primary acknowledgment button"
+                        }
+                    ]
                 }
             ]
         },
