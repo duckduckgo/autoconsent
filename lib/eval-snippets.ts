@@ -14,8 +14,12 @@ export const snippets = {
     EVAL_DIDOMI_TEST: () => {
         // getCurrentUserStatus() works under both GDPR and CCPA/CPRA, unlike the legacy
         // getUserConsentStatusForAll() which returns empty arrays in CCPA/CPRA mode.
+        // Falls back to the legacy API for older Didomi SDK versions.
         const purposes = window.Didomi?.getCurrentUserStatus?.()?.purposes;
-        return !!purposes && Object.values(purposes).some((p) => !p.enabled);
+        if (purposes) {
+            return Object.values(purposes).some((p) => !p.enabled);
+        }
+        return window.Didomi?.getUserConsentStatusForAll?.().purposes.disabled.length > 0;
     },
     EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
     EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
