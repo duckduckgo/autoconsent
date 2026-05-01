@@ -93,8 +93,8 @@ const result = ctx.collectResult(url, 'de');
 
 | Key | Location |
 |-----|----------|
-| `us-ny` | United States (New York) |
-| `us-la` | United States (Los Angeles) |
+| `us-newyork` | United States (New York) |
+| `us-losangeles` | United States (Los Angeles) |
 | `de` | Germany |
 | `fr` | France |
 | `gb` | United Kingdom |
