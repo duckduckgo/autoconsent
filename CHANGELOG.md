@@ -1,3 +1,86 @@
+# v14.75.0 (Thu Apr 23 2026)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group across 1 directory with 2 updates [#1221](https://github.com/duckduckgo/autoconsent/pull/1221) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
+# v14.74.0 (Wed Apr 22 2026)
+
+#### 🚀 Enhancement
+
+- Fix Sourcepoint opt-out on carwow.co.uk [#1318](https://github.com/duckduckgo/autoconsent/pull/1318) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.73.0 (Sat Apr 18 2026)
+
+#### 🚀 Enhancement
+
+- Remove redundant generated rules [#1227](https://github.com/duckduckgo/autoconsent/pull/1227) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.72.0 (Fri Apr 17 2026)
+
+#### 🚀 Enhancement
+
+- cookieconsent2: add fallback opt-out for sites without reject-all button [#1289](https://github.com/duckduckgo/autoconsent/pull/1289) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- docs: improve Puppeteer integration guide [#1253](https://github.com/duckduckgo/autoconsent/pull/1253) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.71.0 (Tue Apr 14 2026)
+
+#### 🚀 Enhancement
+
+- fix: update rule selectors for goodmoodprints.com, supremecourt.uk, musicnotes.com, degussa-goldhandel.ch; add generic squarespace-cookie-banner and consentmo rules [#1248](https://github.com/duckduckgo/autoconsent/pull/1248) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Replace Didomi consent-o-matic rule with native autoconsent JSON rule [#1247](https://github.com/duckduckgo/autoconsent/pull/1247) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.27 to 7.0.28 [#1243](https://github.com/duckduckgo/autoconsent/pull/1243) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 📝 Documentation
+
+- docs: add puppeteer tutorial [#1152](https://github.com/duckduckgo/autoconsent/pull/1152) ([@Kikobeats](https://github.com/Kikobeats) [@muodov](https://github.com/muodov))
+
+#### 🧪 Tests
+
+- Fix test runner to detect code-based rule changes and generated rules [#1204](https://github.com/duckduckgo/autoconsent/pull/1204) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Jose Francisco 'Kiko' Verdú Gambín ([@Kikobeats](https://github.com/Kikobeats))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.70.0 (Sat Apr 11 2026)
 
 #### 🚀 Enhancement

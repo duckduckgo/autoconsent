@@ -1,2 +1,0 @@
-import generateCMPTests from '../../playwright/runner';
-generateCMPTests('auto_CH_auto-doc.ch_p4m', ['https://www.auto-doc.ch/'], { testOptIn: false, testSelfTest: true, onlyRegions: ['CH'] });

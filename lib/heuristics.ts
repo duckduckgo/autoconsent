@@ -178,7 +178,7 @@ export function getButtonData(el: HTMLElement): ButtonData[] {
         (b) =>
             isElementVisible(b) &&
             !isDisabled(b) &&
-            (b.innerText.trim() ||
+            (b.innerText?.trim() ||
                 // <input> values do not appear in innerText
                 (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) && b.value?.trim())),
     );
