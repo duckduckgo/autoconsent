@@ -19,7 +19,8 @@ export const snippets = {
         if (purposes) {
             return Object.values(purposes).some((p) => !p.enabled);
         }
-        return window.Didomi?.getUserConsentStatusForAll?.().purposes.disabled.length > 0;
+        const disabled = window.Didomi?.getUserConsentStatusForAll?.()?.purposes?.disabled;
+        return Array.isArray(disabled) && disabled.length > 0;
     },
     EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
     EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
