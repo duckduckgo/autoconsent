@@ -109,7 +109,7 @@ shadow root or same-origin iframe.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
-- `prehideSelectors` should be narrow. CSS selectors injected early (before CMP detection) as `opacity: 0` to prevent popup flicker. An overly broad selector (e.g. `body`) could hide the entire page.
+- **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
 - Prefer `cookieContains` in `test` when the CMP stores consent in cookies.
