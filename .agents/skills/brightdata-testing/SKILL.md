@@ -41,7 +41,7 @@ The library is at [scripts/brightdata.mjs](scripts/brightdata.mjs). Three levels
 Connects to BrightData, opens a page, navigates, injects autoconsent, waits for completion, screenshots, and closes. Returns a `TestResult`.
 
 ```javascript
-import { testUrl, formatResult, REGIONS } from './.cursor/skills/brightdata-testing/scripts/brightdata.mjs';
+import { testUrl, formatResult, REGIONS } from './.agents/skills/brightdata-testing/scripts/brightdata.mjs';
 
 for (const region of Object.keys(REGIONS)) {
     const result = await testUrl('https://www.wohnen.de/', region);
@@ -54,7 +54,7 @@ for (const region of Object.keys(REGIONS)) {
 Same but takes an already-connected Playwright `Page`. Use when managing the browser lifecycle yourself.
 
 ```javascript
-import { connectBrightData, testPage } from './.cursor/skills/brightdata-testing/scripts/brightdata.mjs';
+import { connectBrightData, testPage } from './.agents/skills/brightdata-testing/scripts/brightdata.mjs';
 
 const browser = await connectBrightData('de');
 const page = await browser.newPage();
