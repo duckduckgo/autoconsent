@@ -7,6 +7,7 @@ generateCMPTests('Onetrust', [
     'https://doodle.com/',
     'https://www.coca-cola.com/us/en',
     'https://www.seur.com/es/index.html',
+    'https://satsuite.collegeboard.org/sat/dates-deadlines',
 ]);
 
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
