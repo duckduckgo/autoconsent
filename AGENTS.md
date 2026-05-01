@@ -107,7 +107,7 @@ Use `if`/`then`/`else` to handle regional variants within a single rule.
 
 ### Testing Across Regions
 
-**All rule changes should be tested across geographic regions** to catch GDPR/CCPA/regional popup variations. Use the `brightdata-testing` skill (`.cursor/skills/brightdata-testing/SKILL.md`) to test from real geographic locations via remote browsers.
+**All rule changes should be tested across geographic regions** to catch GDPR/CCPA/regional popup variations. Use the `brightdata-testing` skill (`.agents/skills/brightdata-testing/SKILL.md`) to test from real geographic locations via remote browsers.
 
 In CI, Jenkins tests each PR across 9 regions using geographic proxies (`REGION` + `PROXY_SERVER` env vars loaded from `.env` files). Test specs support `skipRegions` and `onlyRegions` options.
 
