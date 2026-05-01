@@ -21,17 +21,17 @@ generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.c
     skipRegions: ['US'],
 });
 
-generateCMPTests(
-    'Onetrust',
-    ['https://arstechnica.com/', 'https://www.nvidia.com/', 'https://bitbucket.org/', 'https://www.atlassian.com/'],
-    {
-        skipRegions: ['US', 'GB'],
-    },
-);
+generateCMPTests('Onetrust', ['https://www.nvidia.com/', 'https://bitbucket.org/', 'https://www.atlassian.com/'], {
+    skipRegions: ['US', 'GB'],
+});
 
-generateCMPTests('Onetrust', ['https://www.newyorker.com/', 'https://www.adobe.com/de/', 'https://about.gitlab.com'], {
+// arstechnica.com migrated from Onetrust to Fides — covered by tests/fides.spec.ts.
+
+generateCMPTests('Onetrust', ['https://www.adobe.com/de/', 'https://about.gitlab.com'], {
     skipRegions: ['US'],
 });
+
+// newyorker.com migrated from Onetrust to Fides — covered by tests/fides.spec.ts.
 
 generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
     skipRegions: ['US'],
@@ -43,12 +43,7 @@ generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
 // See lib/cmps/onetrust.ts for the variant detection.
 generateCMPTests(
     'Onetrust',
-    [
-        'https://www.columbia.com/c/mens-insulated-puffer-jackets/',
-        'https://www.mountainhardwear.com/',
-        'https://www.prana.com/',
-        'https://www.sorel.com/',
-    ],
+    ['https://www.columbia.com/', 'https://www.mountainhardwear.com/', 'https://www.prana.com/', 'https://www.sorel.com/'],
     {
         onlyRegions: ['US'],
         testOptIn: false,
