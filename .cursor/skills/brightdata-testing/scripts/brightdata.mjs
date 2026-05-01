@@ -189,6 +189,10 @@ export async function injectAutoconsent(page, options = {}) {
             if (hasMessage('optOutResult') || hasMessage('optInResult')) {
                 return true;
             }
+            // detection-only mode (action: null): no action result will arrive
+            if (!action && hasMessage('popupFound')) {
+                return true;
+            }
             if (Date.now() - start > 15000 && !hasMessage('cmpDetected')) {
                 return false;
             }
