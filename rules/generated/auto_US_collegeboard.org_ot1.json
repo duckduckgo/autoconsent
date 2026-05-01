@@ -18,7 +18,15 @@
     ],
     "detectPopup": [
         {
-            "eval": "EVAL_ONETRUST_API_NEEDS_OPTOUT"
+            "any": [
+                {
+                    "eval": "EVAL_ONETRUST_API_NEEDS_OPTOUT"
+                },
+                {
+                    "visible": "#onetrust-banner-sdk",
+                    "check": "any"
+                }
+            ]
         }
     ],
     "optIn": [
@@ -28,7 +36,20 @@
     ],
     "optOut": [
         {
-            "eval": "EVAL_ONETRUST_API_OPTOUT"
+            "if": {
+                "visible": "#onetrust-reject-all-handler",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#onetrust-reject-all-handler"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_ONETRUST_API_OPTOUT"
+                }
+            ]
         }
     ],
     "test": [
