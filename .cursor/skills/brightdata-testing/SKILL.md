@@ -78,7 +78,7 @@ await ctx.waitForCompletion(45000);
 const result = ctx.collectResult(url, 'de');
 ```
 
-`formatResult()` produces a one-line status per result: PASS, PARTIAL, OPT-OUT FAILED, or NO CMP (expected for region-specific CMPs tested from a non-target region).
+`formatResult()` produces a one-line status per result: PASS, PARTIAL, ACTION FAILED, or NO CMP (expected for region-specific CMPs tested from a non-target region).
 
 ### Options
 
