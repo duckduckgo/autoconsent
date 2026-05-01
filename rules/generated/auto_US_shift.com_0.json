@@ -1,0 +1,69 @@
+{
+    "name": "auto_US_shift.com_0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://shift.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?shift\\.com/"
+    },
+    "prehideSelectors": ["#shift-terms-banner-blue"],
+    "detectCmp": [
+        {
+            "exists": "#shift-terms-banner-blue"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#shift-terms-banner-blue"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#shift-ok-blue",
+            "comment": "Acknowledge the updated terms and privacy policy notice"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#shift-ok-blue",
+            "comment": "Acknowledge the updated terms and privacy policy notice"
+        },
+        {
+            "if": {
+                "exists": "#lanyard_root [aria-describedby=banner-description]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]",
+                    "optional": true,
+                    "comment": "Click Ketch banner reject/preferences button"
+                },
+                {
+                    "waitFor": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences",
+                    "timeout": 1000,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton]",
+                    "optional": true,
+                    "comment": "Reject all in Ketch preferences modal"
+                },
+                {
+                    "click": "#lanyard_root button[class*=confirmButton],#lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton]",
+                    "optional": true,
+                    "comment": "Confirm Ketch preferences"
+                }
+            ]
+        }
+    ]
+}
