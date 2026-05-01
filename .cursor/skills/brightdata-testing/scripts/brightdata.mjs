@@ -28,6 +28,7 @@
  * @property {string|null} cmpDetected
  * @property {boolean} popupFound
  * @property {boolean|null} optOutResult
+ * @property {boolean|null} optInResult
  * @property {boolean|null} selfTestResult
  * @property {boolean} autoconsentDone
  * @property {boolean|null} isCosmetic
@@ -83,7 +84,10 @@ function buildWssEndpoint(regionKey) {
             'Missing BrightData credentials. Set BRIGHTDATA_WEBACCESS_USER, BRIGHTDATA_WEBACCESS_PASSWORD, BRIGHTDATA_WEBACCESS_HOST.',
         );
     }
-    const suffix = REGIONS[regionKey] || '';
+    const suffix = REGIONS[regionKey];
+    if (suffix === undefined) {
+        throw new Error(`Unknown region "${regionKey}". Valid regions: ${Object.keys(REGIONS).join(', ')}`);
+    }
     return `wss://${user}${suffix}:${password}@${host}`;
 }
 
@@ -208,6 +212,7 @@ export async function injectAutoconsent(page, options = {}) {
             cmpDetected: null,
             popupFound: false,
             optOutResult: null,
+            optInResult: null,
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
@@ -225,6 +230,9 @@ export async function injectAutoconsent(page, options = {}) {
                     break;
                 case 'optOutResult':
                     result.optOutResult = msg.result;
+                    break;
+                case 'optInResult':
+                    result.optInResult = msg.result;
                     break;
                 case 'selfTestResult':
                     result.selfTestResult = msg.result;
@@ -292,6 +300,7 @@ export async function testPage(page, url, regionKey, options = {}) {
             cmpDetected: null,
             popupFound: false,
             optOutResult: null,
+            optInResult: null,
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
@@ -323,6 +332,7 @@ export async function testUrl(url, regionKey, options = {}) {
             cmpDetected: null,
             popupFound: false,
             optOutResult: null,
+            optInResult: null,
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
@@ -343,15 +353,16 @@ export async function testUrl(url, regionKey, options = {}) {
  * @returns {string}
  */
 export function formatResult(result) {
+    const actionResult = result.optOutResult ?? result.optInResult;
     let status;
-    if (result.autoconsentDone && result.optOutResult) status = 'PASS';
+    if (result.autoconsentDone && actionResult) status = 'PASS';
     else if (result.cmpDetected && !result.autoconsentDone) status = 'PARTIAL';
-    else if (result.cmpDetected && result.autoconsentDone && !result.optOutResult) status = 'OPT-OUT FAILED';
+    else if (result.cmpDetected && result.autoconsentDone && !actionResult) status = 'ACTION FAILED';
     else status = 'NO CMP';
 
     const parts = [
         `${status} [${result.region}] ${result.url}`,
-        `  CMP: ${result.cmpDetected || 'none'} | Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | SelfTest: ${result.selfTestResult}`,
+        `  CMP: ${result.cmpDetected || 'none'} | Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | OptIn: ${result.optInResult} | SelfTest: ${result.selfTestResult}`,
         `  Done: ${result.autoconsentDone}${result.isCosmetic ? ' (cosmetic)' : ''} | ${result.duration}ms`,
     ];
     if (result.errors.length > 0) {
