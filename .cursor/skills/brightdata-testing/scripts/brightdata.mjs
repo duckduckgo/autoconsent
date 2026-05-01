@@ -1,0 +1,306 @@
+/**
+ * BrightData remote browser utilities for multi-region autoconsent testing.
+ *
+ * Connects to BrightData CDP browsers, injects autoconsent into an isolated
+ * world, and evaluates opt-out/opt-in flows across geographic regions.
+ *
+ * Requires env vars: BRIGHTDATA_WEBACCESS_USER, BRIGHTDATA_WEBACCESS_PASSWORD,
+ * BRIGHTDATA_WEBACCESS_HOST.
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { chromium } from 'playwright';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.resolve(__dirname, '../../../..');
+
+const contentScript = fs.readFileSync(path.join(projectRoot, 'dist/autoconsent.playwright.js'), 'utf8');
+const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8'));
+const fullRules = rulesJson.autoconsent;
+
+const bindingWrapper = `
+if (!window.autoconsentSendMessage) {
+    window.autoconsentSendMessage = (msg) => _acSend(JSON.stringify(msg));
+}
+`;
+
+export const REGIONS = {
+    'us-ny': '-country-us-state-ny',
+    'us-la': '-country-us-state-ca',
+    de: '-country-de',
+    fr: '-country-fr',
+    gb: '-country-gb',
+    nl: '-country-nl',
+    ca: '-country-ca',
+    au: '-country-au',
+};
+
+function buildWssEndpoint(regionKey) {
+    const user = process.env.BRIGHTDATA_WEBACCESS_USER;
+    const password = process.env.BRIGHTDATA_WEBACCESS_PASSWORD;
+    const host = process.env.BRIGHTDATA_WEBACCESS_HOST;
+    if (!user || !password || !host) {
+        throw new Error(
+            'Missing BrightData credentials. Set BRIGHTDATA_WEBACCESS_USER, BRIGHTDATA_WEBACCESS_PASSWORD, BRIGHTDATA_WEBACCESS_HOST.',
+        );
+    }
+    const suffix = REGIONS[regionKey] || '';
+    return `wss://${user}${suffix}:${password}@${host}`;
+}
+
+/** Connect to a BrightData remote browser for a specific region. */
+export async function connectBrightData(regionKey) {
+    return chromium.connectOverCDP(buildWssEndpoint(regionKey), { timeout: 30000 });
+}
+
+/**
+ * Inject autoconsent into a page's isolated world via CDP.
+ * Call BEFORE navigating to the target URL.
+ * Returns an AutoconsentContext for tracking messages and collecting results.
+ */
+export async function injectAutoconsent(page, options = {}) {
+    const action = options.action ?? 'optOut';
+    const received = [];
+    const client = await page.context().newCDPSession(page);
+
+    await client.send('Runtime.enable');
+    await client.send('Runtime.addBinding', { name: '_acSend' });
+    await client.send('Page.addScriptToEvaluateOnNewDocument', {
+        source: bindingWrapper + '\n' + contentScript,
+        worldName: 'autoconsent',
+    });
+
+    const config = {
+        enabled: true,
+        autoAction: action,
+        disabledCmps: [],
+        enablePrehide: true,
+        detectRetries: 20,
+        enableCosmeticRules: true,
+        enableGeneratedRules: true,
+        enableHeuristicDetection: true,
+        enableHeuristicAction: true,
+        logs: { lifecycle: true, rulesteps: false, detectionsteps: false, evals: false, errors: true },
+    };
+
+    function respondToContext(contextId, message) {
+        return client
+            .send('Runtime.evaluate', {
+                expression: `autoconsentReceiveMessage(${JSON.stringify(message)})`,
+                contextId,
+                awaitPromise: true,
+            })
+            .catch(() => { });
+    }
+
+    client.on('Runtime.bindingCalled', async ({ name, payload, executionContextId }) => {
+        if (name !== '_acSend') return;
+        const msg = JSON.parse(payload);
+        received.push(msg);
+
+        switch (msg.type) {
+            case 'init':
+                await respondToContext(executionContextId, {
+                    type: 'initResp',
+                    config,
+                    rules: { autoconsent: fullRules },
+                });
+                break;
+            case 'eval': {
+                // Eval in main world so page globals (e.g. window.Cookiebot) are accessible
+                let result = false;
+                try {
+                    result = await page.evaluate(msg.code);
+                } catch { }
+                await respondToContext(executionContextId, {
+                    id: msg.id,
+                    type: 'evalResp',
+                    result,
+                });
+                break;
+            }
+            case 'autoconsentDone':
+                // Trigger self-test after opt-out completes
+                await respondToContext(executionContextId, { type: 'selfTest' });
+                break;
+            case 'autoconsentError':
+                console.error('autoconsent error:', msg.details);
+                break;
+        }
+    });
+
+    function hasMessage(type) {
+        return received.some((m) => m.type === type);
+    }
+
+    async function waitForCompletion(timeout = 45000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            if (hasMessage('autoconsentDone') && (hasMessage('optOutResult') || hasMessage('optInResult'))) {
+                return true;
+            }
+            if (Date.now() - start > 15000 && !hasMessage('cmpDetected')) {
+                return false;
+            }
+            await new Promise((r) => setTimeout(r, 500));
+        }
+        return false;
+    }
+
+    async function waitForMessage(type, timeout = 30000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            if (hasMessage(type)) return true;
+            await new Promise((r) => setTimeout(r, 500));
+        }
+        return false;
+    }
+
+    function collectResult(url, region) {
+        const result = {
+            url,
+            region,
+            cmpDetected: null,
+            popupFound: false,
+            optOutResult: null,
+            selfTestResult: null,
+            autoconsentDone: false,
+            isCosmetic: null,
+            errors: [],
+            duration: 0,
+            screenshotPaths: [],
+        };
+        for (const msg of received) {
+            switch (msg.type) {
+                case 'cmpDetected':
+                    result.cmpDetected = msg.cmp;
+                    break;
+                case 'popupFound':
+                    result.popupFound = true;
+                    break;
+                case 'optOutResult':
+                    result.optOutResult = msg.result;
+                    break;
+                case 'selfTestResult':
+                    result.selfTestResult = msg.result;
+                    break;
+                case 'autoconsentDone':
+                    result.autoconsentDone = true;
+                    result.isCosmetic = msg.isCosmetic;
+                    break;
+                case 'autoconsentError':
+                    result.errors.push(msg.details?.msg || JSON.stringify(msg.details));
+                    break;
+            }
+        }
+        return result;
+    }
+
+    return { received, hasMessage, waitForCompletion, waitForMessage, collectResult };
+}
+
+/**
+ * Test a URL using an already-connected page.
+ * Useful when you want to manage the browser lifecycle yourself.
+ */
+export async function testPage(page, url, regionKey, options = {}) {
+    const navTimeout = options.navigationTimeout ?? 45000;
+    const completionTimeout = options.completionTimeout ?? 45000;
+    const screenshotsDir = options.screenshotsDir ?? path.join(projectRoot, 'test-results/brightdata');
+    const startTime = Date.now();
+
+    try {
+        const ctx = await injectAutoconsent(page, options);
+        await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
+
+        const completed = await ctx.waitForCompletion(completionTimeout);
+        if (completed && !ctx.hasMessage('selfTestResult')) {
+            await ctx.waitForMessage('selfTestResult', 10000);
+        }
+
+        const result = ctx.collectResult(url, regionKey);
+        result.duration = Date.now() - startTime;
+
+        if (!completed && !ctx.hasMessage('cmpDetected')) {
+            result.errors.push('No CMP detected (site may not show a cookie banner in this region)');
+        } else if (!completed) {
+            result.errors.push('Timed out waiting for autoconsent to complete');
+        }
+
+        try {
+            const domain = new URL(url).hostname;
+            const filepath = path.join(screenshotsDir, `${domain}-${regionKey}-final.jpg`);
+            fs.mkdirSync(screenshotsDir, { recursive: true });
+            await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
+            result.screenshotPaths.push(filepath);
+        } catch { }
+
+        return result;
+    } catch (e) {
+        return {
+            url,
+            region: regionKey,
+            cmpDetected: null,
+            popupFound: false,
+            optOutResult: null,
+            selfTestResult: null,
+            autoconsentDone: false,
+            isCosmetic: null,
+            errors: [e.message],
+            duration: Date.now() - startTime,
+            screenshotPaths: [],
+        };
+    }
+}
+
+/**
+ * High-level: test a URL in a specific region.
+ * Connects to BrightData, injects autoconsent, waits for results, and closes.
+ */
+export async function testUrl(url, regionKey, options = {}) {
+    let browser = null;
+    try {
+        browser = await connectBrightData(regionKey);
+        const page = await browser.newPage();
+        return await testPage(page, url, regionKey, options);
+    } catch (e) {
+        return {
+            url,
+            region: regionKey,
+            cmpDetected: null,
+            popupFound: false,
+            optOutResult: null,
+            selfTestResult: null,
+            autoconsentDone: false,
+            isCosmetic: null,
+            errors: [e.message],
+            duration: 0,
+            screenshotPaths: [],
+        };
+    } finally {
+        try {
+            await browser?.close();
+        } catch { }
+    }
+}
+
+/** Format a TestResult as a human-readable line. */
+export function formatResult(result) {
+    let status;
+    if (result.autoconsentDone && result.optOutResult) status = 'PASS';
+    else if (result.cmpDetected && !result.autoconsentDone) status = 'PARTIAL';
+    else if (result.cmpDetected && result.autoconsentDone && !result.optOutResult) status = 'OPT-OUT FAILED';
+    else status = 'NO CMP';
+
+    const parts = [
+        `${status} [${result.region}] ${result.url}`,
+        `  CMP: ${result.cmpDetected || 'none'} | Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | SelfTest: ${result.selfTestResult}`,
+        `  Done: ${result.autoconsentDone}${result.isCosmetic ? ' (cosmetic)' : ''} | ${result.duration}ms`,
+    ];
+    if (result.errors.length > 0) {
+        parts.push(`  Errors: ${result.errors.join('; ')}`);
+    }
+    return parts.join('\n');
+}
