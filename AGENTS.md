@@ -347,6 +347,12 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 - Playwright is configured with retries (2 retries in CI)
 - Verify the site still has the same cookie consent popup by visiting it manually
 
+## CMP Discovery with PublicWWW
+
+Use the `/publicwww-search` skill to search website source code for CMP-specific identifiers. This helps determine if a cookie popup is from a shared third-party CMP (warranting a generic rule) or is site-specific. It also helps find additional test URLs for existing rules and region-specific test sites.
+
+Requires `PUBLICWWW_KEY` environment variable.
+
 ## Verification
 
 | Step | Command |
