@@ -1,5 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import Autoconsent from '../../lib/web';
+import Onetrust from '../../lib/cmps/onetrust';
 
 describe('Autoconsent.findCmp', () => {
     let autoconsent: Autoconsent;
@@ -60,6 +61,12 @@ describe('Autoconsent.findCmp', () => {
                 optIn: [],
                 optOut: [],
             });
+            const found = await autoconsent.findCmp(0);
+            expect(found).to.have.length(0);
+        });
+
+        it('does not match Onetrust for a hidden preference center without a banner', async () => {
+            autoconsent.rules.push(new Onetrust(autoconsent));
             const found = await autoconsent.findCmp(0);
             expect(found).to.have.length(0);
         });
