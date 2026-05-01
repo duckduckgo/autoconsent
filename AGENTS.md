@@ -247,7 +247,7 @@ When investigating a site where cookie popup handling is broken or missing:
 
 ### Step 1: Check Current State
 
-Load the bundled extension in Chrome (`dist/addon-mv3/` after `npm run prepublish`), visit the site, and check the devtools panel for autoconsent logs. Determine whether:
+Load the bundled extension in Chromium (`dist/addon-mv3/` after `npm run prepublish`), visit the site, and check the devtools panel for autoconsent logs. Determine whether:
 - An existing rule matched but failed (which stage? `detectCmp`, `detectPopup`, `optOut`?)
 - No rule matched at all
 
@@ -288,22 +288,9 @@ Use `if`/`then`/`else` conditionals to handle different UIs within a single rule
 
 ### Testing Across Regions
 
-Two things are needed to test from a specific region:
+**All rule changes must be tested across geographic regions** to catch GDPR/CCPA/regional popup variations. Use the [BrightData testing skill](.cursor/skills/brightdata-testing/SKILL.md) to test from real geographic locations via remote browsers.
 
-1. **`REGION` env var** — filters which test URLs to run (from `data/coverage.json`). This only controls test selection, it does **not** change where requests come from.
-2. **`PROXY_SERVER` env var** — routes browser traffic through a geographic proxy so sites see the correct region. Without a proxy, the site sees your real location regardless of `REGION`.
-
-```bash
-# Local: only filters tests, requests come from your real location
-REGION=DE npx playwright test tests/sirdata.spec.ts --project webkit
-
-# With proxy: tests are filtered AND requests are routed through the proxy
-REGION=DE PROXY_SERVER=socks5://proxy.example:1080 npx playwright test tests/sirdata.spec.ts --project webkit
-```
-
-In CI, Jenkins loads region-specific `.env` files that set both `REGION` and `PROXY_SERVER` together.
-
-Test specs support `skipRegions` and `onlyRegions` to control when tests run:
+In CI, Jenkins tests each PR across 9 regions using geographic proxies (`REGION` + `PROXY_SERVER` env vars loaded from `.env` files). Test specs support `skipRegions` and `onlyRegions`:
 
 ```typescript
 generateCMPTests('Sirdata', ['https://gizmodo.com/'], {
