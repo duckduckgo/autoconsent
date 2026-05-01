@@ -28,7 +28,7 @@
         {
             "waitForThenClick": [
                 "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button]:not([id])",
-                "xpath///span[contains(., ' ohne ') or contains(., 'without')]"
+                "xpath///span[contains(., ' ohne ') or contains(., 'without') or contains(., 'Ablehnen')]"
             ]
         }
     ],

@@ -60,11 +60,6 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        // if the user has already opted out, let's not close the window
-        if (await this.mainWorldEval('EVAL_TRUSTARC_FRAME_TEST')) {
-            return true;
-        }
-
         // When Tags are being controlled through a tag managment system, the window will not call the vendors' opt-out
         let timeout = 3000;
         if (await this.mainWorldEval('EVAL_TRUSTARC_FRAME_GTM')) {
@@ -74,7 +69,7 @@ export default class TrustArcFrame extends AutoConsentCMPBase {
         await waitFor(() => document.readyState === 'complete', 20, 100);
         await this.waitForElement('.mainContent[aria-hidden=false]', timeout);
 
-        if (await this.click('.rejectAll')) {
+        if (await this.click('.rejectAll,.declineAllButtonLower', true)) {
             return true;
         }
 

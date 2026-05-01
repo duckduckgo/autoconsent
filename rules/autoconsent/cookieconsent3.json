@@ -20,7 +20,20 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cm__btn[data-role=necessary]"
+            "if": { "exists": ".cm__btn[data-role=necessary]" },
+            "then": [
+                {
+                    "waitForThenClick": ".cm__btn[data-role=necessary]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cm__btn[data-role=show]"
+                },
+                {
+                    "waitForThenClick": "#cc-main .pm__btn[data-role=necessary]"
+                }
+            ]
         }
     ],
     "test": [

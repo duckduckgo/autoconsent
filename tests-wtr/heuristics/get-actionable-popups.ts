@@ -67,6 +67,42 @@ describe('getActionablePopups', () => {
 
             expect(popups.length).to.equal(0);
         });
+
+        it('finds popup with role="dialog"', () => {
+            showPopup('popup-role-dialog');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+        });
+
+        it('finds popup with aria-modal="true"', () => {
+            showPopup('popup-aria-modal');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+        });
+
+        it('finds open <dialog> element', () => {
+            const dialog = document.getElementById('popup-dialog-element') as HTMLDialogElement;
+            dialog.show();
+            dialog.classList.add('visible');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            dialog.close();
+        });
+
+        it('ignores closed <dialog> element', () => {
+            const dialog = document.getElementById('popup-dialog-element') as HTMLDialogElement;
+            dialog.classList.add('visible');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(0);
+        });
     });
 
     describe('button classification', () => {
