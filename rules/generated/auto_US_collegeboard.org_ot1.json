@@ -1,0 +1,39 @@
+{
+    "name": "auto_US_collegeboard.org_ot1",
+    "comment": "satsuite.collegeboard.org (and related collegeboard.org subdomains) use OneTrust but silently opt US visitors into all groups without showing the cookie banner. We drive the opt-out through OneTrust's public API so the user's choice is honored even when no banner is rendered.",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://satsuite.collegeboard.org/sat/dates-deadlines"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://([a-z0-9-]+\\.)*collegeboard\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "eval": "EVAL_ONETRUST_API_DETECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "eval": "EVAL_ONETRUST_API_NEEDS_OPTOUT"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_ONETRUST_API_OPTIN"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_ONETRUST_API_OPTOUT"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_ONETRUST_API_TEST"
+        }
+    ]
+}

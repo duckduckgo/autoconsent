@@ -70,6 +70,25 @@ export const snippets = {
         return false;
     },
     EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    // OneTrust public-API helpers, used for sites that silently opt users in without
+    // showing a banner (e.g. satsuite.collegeboard.org under CCPA). Driving consent
+    // through OneTrust.RejectAll/AllowAll lets us honor the user's privacy choice
+    // even when the visible banner is suppressed.
+    EVAL_ONETRUST_API_DETECT: () => typeof window.OneTrust === 'object' && typeof window.OneTrust.RejectAll === 'function',
+    EVAL_ONETRUST_API_NEEDS_OPTOUT: () =>
+        typeof window.OnetrustActiveGroups === 'string' &&
+        window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0 && s !== 'C0001').length > 0,
+    EVAL_ONETRUST_API_OPTOUT: () => {
+        window.OneTrust.RejectAll();
+        return true;
+    },
+    EVAL_ONETRUST_API_OPTIN: () => {
+        window.OneTrust.AllowAll();
+        return true;
+    },
+    EVAL_ONETRUST_API_TEST: () =>
+        typeof window.OnetrustActiveGroups === 'string' &&
+        window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0 && s !== 'C0001').length === 0,
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
