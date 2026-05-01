@@ -48,17 +48,12 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 
 ## Working with Cookie Popups
 
-When investigating or fixing a cookie popup, start by **opening the site in a browser** with the autoconsent extension (`dist/addon-mv3/`) loaded. Check the devtools console for autoconsent logs:
-
-- **"Found CMP: [name]" + opt-out failed** → an existing rule is broken. Follow the `cmp-rule` skill (`.agents/skills/cmp-rule/SKILL.md`).
-- **No CMP detected** → no rule handles this popup. Follow the `cmp-rule` skill (`.agents/skills/cmp-rule/SKILL.md`).
-- **"Found CMP: [name]" + success** → the rule works. Nothing to do.
-
-Use the `publicwww-search` skill (`.cursor/skills/publicwww-search/SKILL.md`) to check if a popup comes from a third-party CMP provider. Requires the `PUBLICWWW_KEY` env var.
+**Use the `cmp-rule` skill** for creating or fixing rules — it covers diagnosis,
+CMP identification, rule writing, and testing.
 
 ### CMP vs Site-Specific Rules
 
-**IMPORTANT: Always prefer writing a generic CMP rule over a site-specific rule.** A CMP (Consent Management Platform) is a third-party service (e.g. OneTrust, Cookiebot, Didomi) used by many websites — one rule covers thousands of sites. Check DOM class prefixes, script sources, and PublicWWW before assuming a popup is site-specific. Use `data/coverage.json` to find other sites using the same CMP for testing.
+**Always prefer writing a generic CMP rule over a site-specific rule.** A CMP (Consent Management Platform) is a third-party service (e.g. OneTrust, Cookiebot, Didomi) used by many websites — one rule covers thousands of sites. Check DOM class prefixes, script sources, and PublicWWW before assuming a popup is site-specific. Use `data/coverage.json` to find other sites using the same CMP for testing.
 
 ## Working with Rules
 
