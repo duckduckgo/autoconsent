@@ -4,6 +4,11 @@
 export const snippets = {
     // code-based rules
     EVAL_0: () => console.log(1),
+    EVAL_DIDOMI_DETECT: () =>
+        // The Didomi SDK loads asynchronously via a small loader script that defines
+        // these globals before the heavy SDK injects #didomi-host. Detect via the
+        // loader's globals so detection wins the race with slow SDK loads.
+        typeof window.didomiConfig !== 'undefined' || typeof window.didomiOnReady !== 'undefined' || typeof window.Didomi !== 'undefined',
     EVAL_DIDOMI_OPT_OUT: () => {
         if (window.Didomi) {
             window.Didomi.setUserDisagreeToAll();

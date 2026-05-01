@@ -3,11 +3,16 @@
     "prehideSelectors": [
         "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium"
     ],
-    "detectCmp": [{ "visible": "#didomi-host" }],
+    "detectCmp": [
+        {
+            "any": [{ "eval": "EVAL_DIDOMI_DETECT" }, { "visible": "#didomi-host" }]
+        }
+    ],
     "detectPopup": [
         {
-            "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner",
-            "check": "any"
+            "waitForVisible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner",
+            "check": "any",
+            "timeout": 30000
         }
     ],
     "optIn": [{ "waitForThenClick": "#didomi-notice-agree-button" }],
