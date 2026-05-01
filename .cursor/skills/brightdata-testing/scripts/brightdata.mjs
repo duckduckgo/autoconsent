@@ -109,7 +109,7 @@ export async function connectBrightData(regionKey) {
  * @returns {Promise<AutoconsentContext>}
  */
 export async function injectAutoconsent(page, options = {}) {
-    const action = options.action ?? 'optOut';
+    const action = 'action' in options ? options.action : 'optOut';
     const received = [];
     const client = await page.context().newCDPSession(page);
 
