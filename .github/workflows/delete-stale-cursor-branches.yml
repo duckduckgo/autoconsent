@@ -1,12 +1,8 @@
-name: Archive stale cursor branches
+name: Delete stale cursor branches
 
-# Archives `cursor/*` branches whose tip commit has not been touched for a
-# configurable number of days. "Archiving" means creating a lightweight tag
-# under `archive/<branch>-<shortsha>` so the commits are preserved, and then
-# deleting the branch from the remote.
-#
-# Branches that have an open pull request (in any state other than `closed`
-# / `merged`) are always skipped, regardless of age.
+# Deletes `cursor/*` branches whose tip commit has not been touched for a
+# configurable number of days. Branches with an open pull request are
+# always skipped.
 
 on:
     schedule:
@@ -20,7 +16,7 @@ on:
                 default: '30'
                 type: string
             dry_run:
-                description: 'If true, only log what would be archived without making changes.'
+                description: 'If true, only log what would be deleted without making changes.'
                 required: false
                 default: 'true'
                 type: choice
@@ -33,29 +29,18 @@ permissions:
     pull-requests: read
 
 concurrency:
-    group: archive-stale-cursor-branches
+    group: delete-stale-cursor-branches
     cancel-in-progress: false
 
 jobs:
-    archive:
-        name: Archive stale cursor/* branches
+    delete:
+        name: Delete stale cursor/* branches
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout (full history)
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-
-            - name: Configure git identity
-              run: |
-                  git config user.name "github-actions[bot]"
-                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-            - name: Archive stale branches
-              uses: actions/github-script@v7
+            - uses: actions/github-script@v7
               env:
                   STALE_DAYS: ${{ inputs.stale_days || '30' }}
-                  DRY_RUN: ${{ inputs.dry_run || 'true' }}
+                  DRY_RUN: ${{ inputs.dry_run || 'false' }}
               with:
                   script: |
                       const staleDays = parseInt(process.env.STALE_DAYS, 10);
@@ -65,20 +50,14 @@ jobs:
                       core.info(`Stale threshold: ${staleDays} days (cutoff ${new Date(cutoff).toISOString()})`);
                       core.info(`Dry run: ${dryRun}`);
 
-                      // List all branches matching `cursor/*` via the REST API.
-                      // We rely on the API rather than `git branch -r` because
-                      // the API gives us the commit timestamp directly.
                       const branches = await github.paginate(github.rest.repos.listBranches, {
                           owner: context.repo.owner,
                           repo: context.repo.repo,
                           per_page: 100,
                       });
-
                       const cursorBranches = branches.filter((b) => b.name.startsWith('cursor/'));
                       core.info(`Found ${cursorBranches.length} cursor/* branches.`);
 
-                      // Collect open PR head refs so we never archive a
-                      // branch with an open PR.
                       const openPRs = await github.paginate(github.rest.pulls.list, {
                           owner: context.repo.owner,
                           repo: context.repo.repo,
@@ -87,7 +66,7 @@ jobs:
                       });
                       const openPRHeads = new Set(openPRs.map((pr) => pr.head.ref));
 
-                      const archived = [];
+                      const deleted = [];
                       const skipped = [];
 
                       for (const branch of cursorBranches) {
@@ -98,7 +77,6 @@ jobs:
                               continue;
                           }
 
-                          // Fetch commit details to learn the author/committer date.
                           const { data: commitData } = await github.rest.repos.getCommit({
                               owner: context.repo.owner,
                               repo: context.repo.repo,
@@ -113,33 +91,10 @@ jobs:
                               continue;
                           }
 
-                          const shortSha = commit.sha.slice(0, 7);
-                          const tagName = `archive/${name}-${shortSha}`;
-
                           if (dryRun) {
-                              core.info(`[dry-run] would archive ${name}@${shortSha} as tag ${tagName}`);
-                              archived.push({ name, sha: commit.sha, tag: tagName, dryRun: true });
+                              core.info(`[dry-run] would delete ${name}@${commit.sha.slice(0, 7)}`);
+                              deleted.push({ name, sha: commit.sha, dryRun: true });
                               continue;
-                          }
-
-                          try {
-                              // Create the archive tag pointing at the branch tip.
-                              // Using a lightweight tag (refs/tags/...) keeps the
-                              // commits reachable so they're not garbage collected.
-                              await github.rest.git.createRef({
-                                  owner: context.repo.owner,
-                                  repo: context.repo.repo,
-                                  ref: `refs/tags/${tagName}`,
-                                  sha: commit.sha,
-                              });
-                          } catch (err) {
-                              if (err.status === 422) {
-                                  core.warning(`Tag ${tagName} already exists; continuing to delete branch.`);
-                              } else {
-                                  core.error(`Failed to create tag ${tagName}: ${err.message}`);
-                                  skipped.push({ name, reason: `tag creation failed: ${err.message}` });
-                                  continue;
-                              }
                           }
 
                           try {
@@ -148,35 +103,30 @@ jobs:
                                   repo: context.repo.repo,
                                   ref: `heads/${name}`,
                               });
-                              archived.push({ name, sha: commit.sha, tag: tagName });
-                              core.info(`Archived ${name}@${shortSha} as tag ${tagName}.`);
+                              deleted.push({ name, sha: commit.sha });
+                              core.info(`Deleted ${name}@${commit.sha.slice(0, 7)}.`);
                           } catch (err) {
-                              core.error(`Failed to delete branch ${name}: ${err.message}`);
-                              skipped.push({ name, reason: `branch deletion failed: ${err.message}` });
+                              core.error(`Failed to delete ${name}: ${err.message}`);
+                              skipped.push({ name, reason: `delete failed: ${err.message}` });
                           }
                       }
 
-                      // Build a job summary so the action is easy to audit.
                       const summary = core.summary
-                          .addHeading('Archive stale cursor/* branches')
+                          .addHeading('Delete stale cursor/* branches')
                           .addRaw(`Stale threshold: **${staleDays} days**`).addEOL()
                           .addRaw(`Dry run: **${dryRun}**`).addEOL();
 
-                      if (archived.length > 0) {
-                          summary.addHeading(
-                              `${dryRun ? 'Would archive' : 'Archived'} (${archived.length})`,
-                              2,
-                          );
+                      if (deleted.length > 0) {
+                          summary.addHeading(`${dryRun ? 'Would delete' : 'Deleted'} (${deleted.length})`, 2);
                           summary.addTable([
                               [
                                   { data: 'Branch', header: true },
                                   { data: 'SHA', header: true },
-                                  { data: 'Archive tag', header: true },
                               ],
-                              ...archived.map((a) => [a.name, a.sha.slice(0, 7), a.tag]),
+                              ...deleted.map((d) => [d.name, d.sha.slice(0, 7)]),
                           ]);
                       } else {
-                          summary.addRaw('No stale branches to archive.').addEOL();
+                          summary.addRaw('No stale branches to delete.').addEOL();
                       }
 
                       if (skipped.length > 0) {
