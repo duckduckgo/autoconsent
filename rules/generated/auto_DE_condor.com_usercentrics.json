@@ -2,7 +2,7 @@
     "name": "auto_DE_condor.com_usercentrics",
     "_metadata": {
         "vendorUrl": "https://www.condor.com/de/flug-vorbereiten/check-in/vorabend-check-in.jsp",
-        "comment": "Site-specific override for Usercentrics on condor.com. The generic usercentrics-api rule fails here because UC_UI.denyAllConsents() blocks synchronously for ~4s (Condor configures ~70 services), causing the eval to time out. Clicking the shadow-DOM deny button is much faster and avoids the breakage where the body keeps the 'overflowHidden' class."
+        "comment": "Site-specific override for Usercentrics on condor.com. The generic usercentrics-api rule fails here because UC_UI.denyAllConsents() blocks synchronously for ~4s (Condor configures ~70 services), causing the eval to time out and leaving the body element with the 'overflowHidden' class that Usercentrics adds while the banner is showing. Click the shadow-DOM buttons directly instead — same effect, much faster, and works for both the GDPR (EU, deny-all button) and CCPA (US, OK + do-not-sell toggle) variants of the banner."
     },
     "runContext": {
         "main": true,
@@ -11,27 +11,55 @@
     },
     "detectCmp": [
         {
-            "exists": ["#usercentrics-root", "[data-testid=\"uc-app-container\"]"]
+            "exists": "#usercentrics-root"
         }
     ],
     "detectPopup": [
         {
-            "visible": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"]
+            "visible": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"], [data-testid=\"uc-ccpa-button\"]"],
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-accept-all-button\"]"]
+            "if": {
+                "exists": ["#usercentrics-root", "[data-testid=\"uc-accept-all-button\"]"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-accept-all-button\"]"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-ccpa-button\"]"]
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"]
+            "if": {
+                "exists": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-ccpa-wall-toggle\"]"]
+                },
+                {
+                    "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-ccpa-button\"]"]
+                }
+            ]
         }
     ],
     "test": [
         {
-            "waitForVisible": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"],
+            "waitForVisible": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"], [data-testid=\"uc-ccpa-button\"]"],
             "timeout": 2000,
             "check": "none"
         }
