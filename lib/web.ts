@@ -386,25 +386,32 @@ export default class AutoConsent {
 
     /**
      * Detect if any of the CMPs has a popup open. Returns a list of CMPs with open popups.
+     *
+     * Avoids `Promise.any` and `Promise.allSettled` because some pages
+     * (e.g. Squarespace via Zone.js) replace `window.Promise` with a
+     * polyfill that does not implement those methods.
      */
     async detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => Promise<unknown>) {
-        const tasks = cmps.map((cmp) => this.detectPopup(cmp));
-
-        await Promise.any(tasks)
-            .then((cmp) => {
-                this.detectHeuristics();
-                onFirstPopupAppears(cmp);
-            })
-            .catch(() => {});
-
-        const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
+        let firstPopupHandled = false;
 
-        for (const result of results) {
-            if (result.status === 'fulfilled') {
-                popups.push(result.value);
-            }
-        }
+        const tasks = cmps.map((cmp) =>
+            this.detectPopup(cmp).then(
+                (foundCmp) => {
+                    popups.push(foundCmp);
+                    if (!firstPopupHandled) {
+                        firstPopupHandled = true;
+                        this.detectHeuristics();
+                        onFirstPopupAppears(foundCmp);
+                    }
+                },
+                () => {
+                    // ignore rejections; only fulfilled detections count
+                },
+            ),
+        );
+
+        await Promise.all(tasks);
 
         return popups;
     }
