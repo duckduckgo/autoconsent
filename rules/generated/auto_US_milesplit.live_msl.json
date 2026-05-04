@@ -1,0 +1,48 @@
+{
+    "name": "auto_US_milesplit.live_msl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://milesplit.live/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://([^.]+\\.)?milesplit\\.live/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".osano-cm-window"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".osano-cm-dialog:not(.osano-cm-dialog--hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".osano-cm-accept-all,.osano-cm-accept",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".osano-cm-denyAll,.osano-cm-deny" },
+            "then": [{ "click": ".osano-cm-denyAll,.osano-cm-deny" }],
+            "else": [
+                {
+                    "waitForThenClick": ".osano-cm-dialog__close",
+                    "comment": "Mobile/CCPA notice has only a close button; click it instead of hiding via CSS to avoid breaking the page"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".osano-cm-dialog:not(.osano-cm-dialog--hidden)",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
