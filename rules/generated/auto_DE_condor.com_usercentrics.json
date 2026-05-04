@@ -1,0 +1,39 @@
+{
+    "name": "auto_DE_condor.com_usercentrics",
+    "_metadata": {
+        "vendorUrl": "https://www.condor.com/de/flug-vorbereiten/check-in/vorabend-check-in.jsp",
+        "comment": "Site-specific override for Usercentrics on condor.com. The generic usercentrics-api rule fails here because UC_UI.denyAllConsents() blocks synchronously for ~4s (Condor configures ~70 services), causing the eval to time out. Clicking the shadow-DOM deny button is much faster and avoids the breakage where the body keeps the 'overflowHidden' class."
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?condor\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": ["#usercentrics-root", "[data-testid=\"uc-app-container\"]"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-accept-all-button\"]"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#usercentrics-root", "[data-testid=\"uc-deny-all-button\"]"],
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
