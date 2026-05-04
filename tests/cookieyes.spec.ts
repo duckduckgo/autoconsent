@@ -7,4 +7,7 @@ generateCMPTests('cookieyes', [
     'https://ttinteractive.com/',
     'https://www.chronofhorse.com/',
     'https://nl.flaminfitness.com/products/30l-tactical-backpack',
+    // Squarespace site that loads Zone.js, which replaces window.Promise with
+    // a polyfill missing Promise.any/allSettled — regression test for that.
+    'https://renaissancephilanthropy.org/',
 ]);
