@@ -1,0 +1,25 @@
+{
+    "name": "kickstarter-com",
+    "vendorUrl": "https://www.kickstarter.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kickstarter\\.com/"
+    },
+    "prehideSelectors": ["#react-consent-modal"],
+    "detectCmp": [{ "exists": "#react-consent-modal button.ksr-button" }],
+    "detectPopup": [{ "visible": "#react-consent-modal button.ksr-button" }],
+    "optIn": [
+        {
+            "waitForThenClick": "#react-consent-modal button.ksr-button.ml1",
+            "comment": "Accept all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#react-consent-modal button.ksr-button.mr1",
+            "comment": "Confirm — by default only Essential is checked, so this rejects all non-essential purposes"
+        }
+    ],
+    "test": [{ "cookieContains": "%22confirmed%22%3Atrue" }]
+}
