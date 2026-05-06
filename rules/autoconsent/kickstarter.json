@@ -1,0 +1,34 @@
+{
+    "name": "kickstarter.com",
+    "vendorUrl": "https://www.kickstarter.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kickstarter\\.com/"
+    },
+    "prehideSelectors": ["#react-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": "#react-consent-modal .flex.flex-column"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#react-consent-modal .flex.flex-column"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#react-consent-modal .flex.flex-row.justify-between button:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#react-consent-modal .flex.flex-row.justify-between button:first-child"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#react-consent-modal .flex.flex-column",
+            "check": "none"
+        }
+    ]
+}

@@ -12,7 +12,7 @@ generateCMPTests('TrustArc-top', ['https://www.garmin.com/de-DE/'], {
     skipRegions: ['US'],
 });
 
-generateCMPTests('TrustArc-frame', ['https://www.wish.com/'], {
+generateCMPTests('TrustArc-frame', ['https://www.wish.com/', 'https://www.usa.philips.com/'], {
     testOptOut: true,
     testSelfTest: false,
     testOptIn: false, // opt-in works, but is triggered by the top frame
