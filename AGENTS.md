@@ -141,6 +141,12 @@ The following techniques can help identify a generic CMP:
    selectors, script URLs, or copy strings. If the same popup markup appears on many
    sites, it's a CMP.
 
+## CMP Discovery with PublicWWW
+
+Use the `/publicwww-search` skill to search website source code for CMP-specific identifiers. This helps determine if a cookie popup is from a shared third-party CMP (warranting a generic rule) or is site-specific. It also helps find additional test URLs for existing rules and region-specific test sites.
+
+Requires `PUBLICWWW_KEY` environment variable.
+
 ## Verification
 
 After creating or modifying a rule:
