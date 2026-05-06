@@ -74,6 +74,7 @@ export const REGIONS = {
     nl: '-country-nl',
     ca: '-country-ca',
     au: '-country-au',
+    jp: '-country-jp',
 };
 
 function buildWssEndpoint(regionKey) {
