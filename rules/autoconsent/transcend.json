@@ -6,7 +6,7 @@
     "prehideSelectors": ["#transcend-consent-manager"],
     "detectCmp": [
         {
-            "exists": "#transcend-consent-manager"
+            "exists": ["#transcend-consent-manager", "*"]
         }
     ],
     "detectPopup": [
