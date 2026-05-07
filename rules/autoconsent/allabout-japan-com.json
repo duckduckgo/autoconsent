@@ -5,7 +5,10 @@
         "urlPattern": "^https?://(www\\.)?allabout-japan\\.com/"
     },
     "prehideSelectors": [".cookie-message"],
-    "detectCmp": [{ "exists": ".cookie-message > .cookie-content > button.cookie-agree" }],
+    "detectCmp": [
+        { "exists": ".cookie-message > .cookie-content > button.cookie-agree" },
+        { "waitForVisible": ".fc-consent-root", "timeout": 2500, "negated": true }
+    ],
     "detectPopup": [{ "visible": ".cookie-message" }],
     "optIn": [{ "waitForThenClick": ".cookie-message button.cookie-agree" }],
     "optOut": [{ "hide": ".cookie-message" }]
