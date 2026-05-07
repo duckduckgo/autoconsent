@@ -1,11 +1,11 @@
 {
     "name": "ga-cookie-opt-in",
     "vendorUrl": "https://tokorozawa-sakuratown.com/",
-    "comment": "Custom Japanese cookie opt-in template (ga_cookie_opt_in localStorage flag, e.g. tokorozawa-sakuratown.com and other KADOKAWA / Japanese sites). Acceptance is implicit on navigation per the popup copy and there is no reject button, so opt-out is cosmetic. Google Analytics is gated on the same localStorage flag, so simply hiding the banner without setting it leaves analytics disabled.",
+    "comment": "Custom Japanese cookie opt-in template (ga_cookie_opt_in localStorage flag, e.g. tokorozawa-sakuratown.com and other KADOKAWA / Japanese sites). The inner markup of #cookie-pop-bn varies (e.g. button.accept, or <a onclick=acceptClick()>) and is loaded asynchronously via XHR on window.load, so detectPopup matches the outer container and the agree button is targeted by the shared acceptClick() handler. Acceptance is implicit on navigation per the popup copy and there is no reject button, so opt-out is cosmetic. Google Analytics is gated on the same localStorage flag, so simply hiding the banner without setting it leaves analytics disabled.",
     "cosmetic": true,
     "prehideSelectors": ["#cookie-pop-bn.cookie-pop"],
     "detectCmp": [{ "exists": "#cookie-pop-bn.cookie-pop" }],
-    "detectPopup": [{ "visible": "#cookie-pop-bn.cookie-pop .accept" }],
-    "optIn": [{ "waitForThenClick": "#cookie-pop-bn.cookie-pop .accept" }],
+    "detectPopup": [{ "visible": "#cookie-pop-bn.cookie-pop" }],
+    "optIn": [{ "waitForThenClick": "#cookie-pop-bn.cookie-pop [onclick*=\"acceptClick\"]" }],
     "optOut": [{ "hide": "#cookie-pop-bn.cookie-pop" }]
 }
