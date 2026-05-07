@@ -32,3 +32,15 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// Sites that show a Sourcepoint "consent or pay" paywall (sp_choice_type_9).
+// The rule is expected to detect the CMP but bail on detectPopup so we don't
+// click the wrong button. These sites need a site-level exception in
+// duckduckgo/privacy-configuration to fully suppress autoconsent.
+generateCMPTests('Sourcepoint-frame', ['https://www.mumsnet.com/'], {
+    onlyRegions: ['GB'],
+    expectPopupOpen: false,
+    testOptIn: false,
+    testOptOut: false,
+    testSelfTest: false,
+});
