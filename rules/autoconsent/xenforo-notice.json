@@ -1,0 +1,33 @@
+{
+    "name": "xenforo-notice",
+    "_metadata": {
+        "vendorUrl": "https://xenforo.com/"
+    },
+    "comment": "XenForo's built-in dismissible cookie notice. Targets the bottom_fixer notice that contains cookie-related text and clicks its dismiss link, which removes the notice and sets the xf_notice_dismiss cookie.",
+    "prehideSelectors": [".js-notices.notices--bottom_fixer"],
+    "detectCmp": [
+        {
+            "exists": "xpath///*[contains(@class, 'js-notices') and contains(@class, 'notices--bottom_fixer')]//li[contains(@class, 'js-notice')][contains(., 'cookie') or contains(., 'Cookie') or contains(., 'COOKIE')]//*[contains(@class, 'js-noticeDismiss') or contains(@class, 'notice-dismiss')]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///*[contains(@class, 'js-notices') and contains(@class, 'notices--bottom_fixer')]//li[contains(@class, 'js-notice')][contains(., 'cookie') or contains(., 'Cookie') or contains(., 'COOKIE')]"
+        }
+    ],
+    "optIn": [
+        {
+            "hide": ".js-notices.notices--bottom_fixer"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "xpath///*[contains(@class, 'js-notices') and contains(@class, 'notices--bottom_fixer')]//li[contains(@class, 'js-notice')][contains(., 'cookie') or contains(., 'Cookie') or contains(., 'COOKIE')]//*[contains(@class, 'js-noticeDismiss') or contains(@class, 'notice-dismiss')]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "xf_notice_dismiss"
+        }
+    ]
+}
