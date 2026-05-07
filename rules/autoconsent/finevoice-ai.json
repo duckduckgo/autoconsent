@@ -1,0 +1,29 @@
+{
+    "name": "finevoice.ai",
+    "vendorUrl": "https://finevoice.ai/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://([^/]+\\.)?(finevoice\\.ai|finevoice\\.fineshare\\.com)/"
+    },
+    "prehideSelectors": [".agreecookie-container"],
+    "detectCmp": [
+        {
+            "exists": ".agreecookie-container .cookie-box"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".agreecookie-container .cookie-box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".agreecookie-container .cookie-box button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".agreecookie-container"
+        }
+    ]
+}
