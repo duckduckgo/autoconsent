@@ -1,0 +1,12 @@
+{
+    "name": "allabout-japan.com",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?allabout-japan\\.com/"
+    },
+    "prehideSelectors": [".cookie-message"],
+    "detectCmp": [{ "exists": ".cookie-message > .cookie-content > button.cookie-agree" }],
+    "detectPopup": [{ "visible": ".cookie-message" }],
+    "optIn": [{ "waitForThenClick": ".cookie-message button.cookie-agree" }],
+    "optOut": [{ "hide": ".cookie-message" }]
+}
