@@ -1,0 +1,16 @@
+{
+    "name": "ecbeing-cookie-policy",
+    "_metadata": {
+        "vendorUrl": "https://www.ecbeing.net/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieBox > .block-cookie-consent"],
+    "detectCmp": [{ "exists": "#cookieBox > .block-cookie-consent #consentButton.block-cookie-consent--btn" }],
+    "detectPopup": [{ "visible": "#cookieBox > .block-cookie-consent" }],
+    "optIn": [{ "click": "#consentButton.block-cookie-consent--btn" }],
+    "optOut": [{ "hide": "#cookieBox > .block-cookie-consent" }],
+    "test": [
+        { "visible": "#cookieBox > .block-cookie-consent", "check": "none" },
+        { "cookieContains": "cookieconsent=0", "negated": true }
+    ]
+}
