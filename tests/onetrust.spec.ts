@@ -55,3 +55,15 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// Implied-consent OneTrust variant: the banner only offers "Accept Cookies" and
+// "Cookie Settings" (no Reject), and the preference center only contains
+// "Always Active" categories (Strictly Necessary + CCPA Sale of Personal Data).
+// All consent groups are silently set to 1 by default before the user interacts,
+// and clicking "Confirm My Choices" or even calling OneTrust.RejectAll() leaves
+// them set. We can still cleanly dismiss the banner via the standard
+// Cookie Settings → Confirm My Choices flow, so we keep regression coverage but
+// skip the self-test (real opt-out is impossible on this site).
+generateCMPTests('Onetrust', ['https://www.unleash.ai/'], {
+    testSelfTest: false,
+});
