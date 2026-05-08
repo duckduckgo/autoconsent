@@ -22,18 +22,20 @@ Environment variables (available as Cursor Cloud Agent secrets):
 ## Architecture
 
 ```
-Node.js (handler)          CDP binding          Isolated world per frame
-─────────────────    ←──  _acSend(JSON)   ←──  autoconsentSendMessage(msg)
+Node.js (handler)          poll @ 50ms          Isolated world per frame
+─────────────────    ←──  __acOutbox      ←──  autoconsentSendMessage(msg)
                      ──→  Runtime.evaluate ──→  autoconsentReceiveMessage(msg)
 
-                     ←──  _oxyCaptcha(type) ←─  window 'message' listener (main world)
+                     ←──  __oxyCaptcha    ←──  window 'message' listener (main world)
 ```
 
-- `Runtime.addBinding` creates `_acSend` and `_oxyCaptcha` in all execution contexts.
-- `Page.addScriptToEvaluateOnNewDocument` with `worldName: 'autoconsent'` injects autoconsent into an isolated world per frame, before page scripts run.
-- A second `addScriptToEvaluateOnNewDocument` (no `worldName` = main world) installs a `window.addEventListener('message', ...)` that forwards Oxylabs captcha events to `_oxyCaptcha`.
+- `Page.addScriptToEvaluateOnNewDocument` with `worldName: 'autoconsent'` injects autoconsent into an isolated world per frame, before page scripts run. The injected wrapper rebinds `window.autoconsentSendMessage` to push messages onto `globalThis.__acOutbox`.
+- A second `addScriptToEvaluateOnNewDocument` (no `worldName` = main world) installs a `window.addEventListener('message', ...)` that pushes Oxylabs `oxylabs-captcha-solve-*` events onto `globalThis.__oxyCaptcha`.
+- The Node side tracks per-frame execution contexts via `Runtime.executionContextCreated`/`Destroyed`/`Cleared` and polls each one's outbox every 50 ms by running a drain expression via `Runtime.evaluate({ contextId, ... })`.
+- Responses from Node back to autoconsent (`initResp`, `evalResp`, `selfTest`) are sent via `Runtime.evaluate({ contextId })` against the same isolated context that produced the message.
 - `eval` messages are routed to the **main world** via `page.evaluate()` so page globals (e.g. `window.Cookiebot`) are accessible.
 - `selfTest` is triggered automatically after `autoconsentDone`.
+- The polling timer is `unref`'d so Node can exit cleanly once the test completes.
 
 ## API
 
@@ -115,7 +117,8 @@ Region selection uses Oxylabs query-string params (`?p_cc=`, `?p_city=`) per the
 
 ## Gotchas
 
-- **CAPTCHA events arrive via `window.postMessage`, not CDP.** A bridge is injected into the main world before navigation that forwards Oxylabs `oxylabs-captcha-solve-start|end|error` messages to a `_oxyCaptcha` CDP binding. `testPage` waits up to 5s after navigation for a `solve-start`; if one arrives it blocks until `solve-end`/`solve-error` (capped at `completionTimeout`). Adds ~5s overhead on captcha-free pages.
+- **`Runtime.addBinding` does not work on Oxylabs** — bindings register on the Node side but never reach the page. We work around this with an in-page array queue per execution context. If you need to add new CDP calls in this skill, verify it works with a standalone script first.
+- **CAPTCHA events arrive via `window.postMessage`, not CDP.** A bridge is injected into the main world before navigation that forwards Oxylabs `oxylabs-captcha-solve-start|end|error` messages to `globalThis.__oxyCaptcha`. `testPage` waits up to 5s after navigation for a `solve-start`; if one arrives it blocks until `solve-end`/`solve-error` (capped at `completionTimeout`). Adds ~5s overhead on captcha-free pages.
 - **`device: 'tablet'` is Chrome-only** per [Oxylabs docs](https://developers.oxylabs.io/products/headless-browser/features/device-type). Other browsers will silently fall back / fail.
 - **Call injection before `page.goto`** — `addScriptToEvaluateOnNewDocument` only applies to future navigations.
 - **Don't use `page.exposeBinding`/`page.evaluate` for the message channel** over CDP — they run in Playwright's utility context where CDP bindings aren't callable. Use raw CDP (`Runtime.addBinding` + `Runtime.evaluate`) instead.

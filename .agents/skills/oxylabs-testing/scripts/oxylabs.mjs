@@ -64,20 +64,39 @@ const contentScript = fs.readFileSync(path.join(projectRoot, 'dist/autoconsent.p
 const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8'));
 const fullRules = rulesJson.autoconsent;
 
+// Oxylabs Unblocker silently strips Runtime.addBinding, so we cannot use
+// CDP bindings to ferry messages from the page back to Node. Instead, the
+// autoconsent isolated world pushes messages onto an in-world array, and the
+// Node side polls and drains it via Runtime.evaluate({ contextId }).
+// Page.addScriptToEvaluateOnNewDocument and Runtime.evaluate are both honored.
 const bindingWrapper = `
+if (!globalThis.__acOutbox) globalThis.__acOutbox = [];
 if (!window.autoconsentSendMessage) {
-    window.autoconsentSendMessage = (msg) => _acSend(JSON.stringify(msg));
+    window.autoconsentSendMessage = (msg) => { globalThis.__acOutbox.push(msg); };
 }
 `;
 
-// Bridge Oxylabs captcha events (window.postMessage) onto a CDP binding so
-// the Node-side handler can observe solver progress without polling the page.
+// Captcha events (window.postMessage from Oxylabs runtime) are buffered in the
+// main world and drained the same way as the autoconsent outbox.
 const captchaBridgeScript = `
+if (!globalThis.__oxyCaptcha) globalThis.__oxyCaptcha = [];
 window.addEventListener("message", (e) => {
     if (!e || !e.data || e.data.source !== "oxylabs-runtime") return;
-    try { _oxyCaptcha(e.data.type); } catch {}
+    globalThis.__oxyCaptcha.push(e.data.type);
 });
 `;
+
+const POLL_INTERVAL_MS = 50;
+
+// Drain expression: returns null when the outbox is empty (cheap), JSON-encoded
+// array of messages otherwise. JSON-encoding lets us avoid re-deserialization
+// surprises with returnByValue on complex objects.
+const DRAIN_EXPRESSION = (varName) => `(() => {
+    const q = globalThis.${varName};
+    if (!q || q.length === 0) return null;
+    const out = q.splice(0);
+    return JSON.stringify(out);
+})()`;
 
 export const REGIONS = {
     'us-newyork': { p_cc: 'US', p_city: 'new_york' },
@@ -143,8 +162,7 @@ export async function injectAutoconsent(page, options = {}) {
     const client = await page.context().newCDPSession(page);
 
     await client.send('Runtime.enable');
-    await client.send('Runtime.addBinding', { name: '_acSend' });
-    await client.send('Runtime.addBinding', { name: '_oxyCaptcha' });
+    await client.send('Page.enable');
     await client.send('Page.addScriptToEvaluateOnNewDocument', {
         source: bindingWrapper + '\n' + contentScript,
         worldName: 'autoconsent',
@@ -176,35 +194,32 @@ export async function injectAutoconsent(page, options = {}) {
             .catch(() => {});
     }
 
+    /** @type {{ detected: boolean, solved: boolean|null }} */
     const captcha = { detected: false, solved: null };
     let resolveCaptcha;
     const captchaPromise = new Promise((resolve) => {
         resolveCaptcha = resolve;
     });
 
-    client.on('Runtime.bindingCalled', async ({ name, payload, executionContextId }) => {
-        if (name === '_oxyCaptcha') {
-            // payload is the raw event.data.type string
-            if (payload === 'oxylabs-captcha-solve-start') {
-                captcha.detected = true;
-            } else if (payload === 'oxylabs-captcha-solve-end') {
-                captcha.detected = true;
-                captcha.solved = true;
-                resolveCaptcha();
-            } else if (payload === 'oxylabs-captcha-solve-error') {
-                captcha.detected = true;
-                captcha.solved = false;
-                resolveCaptcha();
-            }
-            return;
+    function handleCaptchaEvent(type) {
+        if (type === 'oxylabs-captcha-solve-start') {
+            captcha.detected = true;
+        } else if (type === 'oxylabs-captcha-solve-end') {
+            captcha.detected = true;
+            captcha.solved = true;
+            resolveCaptcha();
+        } else if (type === 'oxylabs-captcha-solve-error') {
+            captcha.detected = true;
+            captcha.solved = false;
+            resolveCaptcha();
         }
-        if (name !== '_acSend') return;
-        const msg = JSON.parse(payload);
-        received.push(msg);
+    }
 
+    async function handleAcMessage(msg, contextId) {
+        received.push(msg);
         switch (msg.type) {
             case 'init':
-                await respondToContext(executionContextId, {
+                await respondToContext(contextId, {
                     type: 'initResp',
                     config,
                     rules: { autoconsent: fullRules },
@@ -216,7 +231,7 @@ export async function injectAutoconsent(page, options = {}) {
                 try {
                     result = await page.evaluate(msg.code);
                 } catch {}
-                await respondToContext(executionContextId, {
+                await respondToContext(contextId, {
                     id: msg.id,
                     type: 'evalResp',
                     result,
@@ -225,13 +240,82 @@ export async function injectAutoconsent(page, options = {}) {
             }
             case 'autoconsentDone':
                 // Trigger self-test after opt-out completes
-                await respondToContext(executionContextId, { type: 'selfTest' });
+                await respondToContext(contextId, { type: 'selfTest' });
                 break;
             case 'autoconsentError':
                 console.error('autoconsent error:', msg.details);
                 break;
         }
+    }
+
+    // Track contexts so we know which ones to drain. The autoconsent isolated
+    // world is created per-frame on every navigation; the main world is the
+    // default context. Both are scoped per frame.
+    const isolatedContexts = new Map(); // contextId -> frameId
+    const mainContexts = new Map();
+    client.on('Runtime.executionContextCreated', ({ context }) => {
+        const frameId = context.auxData?.frameId;
+        if (!frameId) return;
+        if (context.name === 'autoconsent') {
+            isolatedContexts.set(context.id, frameId);
+        } else if (context.auxData?.isDefault) {
+            mainContexts.set(context.id, frameId);
+        }
     });
+    client.on('Runtime.executionContextDestroyed', ({ executionContextId }) => {
+        isolatedContexts.delete(executionContextId);
+        mainContexts.delete(executionContextId);
+    });
+    client.on('Runtime.executionContextsCleared', () => {
+        isolatedContexts.clear();
+        mainContexts.clear();
+    });
+
+    let stopped = false;
+    page.on('close', () => {
+        stopped = true;
+    });
+
+    async function drainOutbox(contextId, varName) {
+        try {
+            const r = await client.send('Runtime.evaluate', {
+                contextId,
+                expression: DRAIN_EXPRESSION(varName),
+                returnByValue: true,
+            });
+            const value = r?.result?.value;
+            if (value == null) return [];
+            return JSON.parse(value);
+        } catch {
+            // Context may have been destroyed mid-call (navigation); ignore.
+            return [];
+        }
+    }
+
+    async function pollOnce() {
+        for (const contextId of [...isolatedContexts.keys()]) {
+            const msgs = await drainOutbox(contextId, '__acOutbox');
+            for (const msg of msgs) {
+                await handleAcMessage(msg, contextId);
+            }
+        }
+        for (const contextId of [...mainContexts.keys()]) {
+            const types = await drainOutbox(contextId, '__oxyCaptcha');
+            for (const type of types) handleCaptchaEvent(type);
+        }
+    }
+
+    (async function pollLoop() {
+        while (!stopped) {
+            try {
+                await pollOnce();
+            } catch {}
+            await new Promise((r) => {
+                const t = setTimeout(r, POLL_INTERVAL_MS);
+                t.unref?.();
+            });
+        }
+    })();
 
     function hasMessage(type) {
         return received.some((m) => m.type === type);
