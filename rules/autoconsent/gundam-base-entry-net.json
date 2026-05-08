@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "xpath///button[normalize-space()='[クッキー設定]']"
+            "exists": "xpath///button[normalize-space()='[クッキー設定]' or normalize-space()='[Cookie Settings]']"
         }
     ],
     "detectPopup": [
         {
-            "visible": "xpath///button[normalize-space()='[クッキー設定]']"
+            "visible": "xpath///button[normalize-space()='[クッキー設定]' or normalize-space()='[Cookie Settings]']"
         }
     ],
     "optIn": [
@@ -24,10 +24,10 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///button[normalize-space()='[クッキー設定]']"
+            "waitForThenClick": "xpath///button[normalize-space()='[クッキー設定]' or normalize-space()='[Cookie Settings]']"
         },
         {
-            "waitForThenClick": "xpath///button[normalize-space()='保存']"
+            "waitForThenClick": "xpath///*[@role='dialog']//button[normalize-space()='保存' or normalize-space()='Save']"
         }
     ],
     "test": [
