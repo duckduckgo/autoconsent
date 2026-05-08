@@ -1,0 +1,38 @@
+{
+    "name": "gundam-base-entry-net",
+    "vendorUrl": "https://www.gundam-base-entry.net/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gundam-base-entry\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///button[normalize-space()='[クッキー設定]']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///button[normalize-space()='[クッキー設定]']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='OK']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='[クッキー設定]']"
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='保存']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsent=true"
+        }
+    ]
+}
