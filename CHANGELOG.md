@@ -1,3 +1,16 @@
+# v14.78.0 (Fri May 08 2026)
+
+#### 🚀 Enhancement
+
+- Improve agent context: restructure skills, slim AGENTS.md [#1319](https://github.com/duckduckgo/autoconsent/pull/1319) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.77.1 (Thu May 07 2026)
 
 #### 🐛 Bug Fix
