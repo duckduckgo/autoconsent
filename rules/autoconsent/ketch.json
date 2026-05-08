@@ -53,8 +53,28 @@
             },
             "then": [
                 {
-                    "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]",
-                    "comment": "can be either settings or reject button"
+                    "if": {
+                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]",
+                            "comment": "can be either settings or reject button"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": {
+                                "exists": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child"
+                            },
+                            "then": [
+                                {
+                                    "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child",
+                                    "comment": "Disclosure-only banner (e.g. US/CCPA notice with a single 'I understand'/'OK' acknowledge button and no reject option). Clicking the lone button dismisses the notice; consent state is already determined by Ketch's jurisdiction defaults."
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
