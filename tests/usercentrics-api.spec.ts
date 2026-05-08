@@ -10,6 +10,7 @@ generateCMPTests(
         'https://www.kia.com/us/en',
         'https://www.sportscheck.com/filialen/dortmund/',
         'https://www.idealo.de/',
+        'https://www.zalando.co.uk/',
     ],
     {
         skipRegions: ['US', 'GB', 'FR'],
