@@ -113,7 +113,10 @@ function buildWssEndpoint(regionKey, opts = {}) {
     for (const arg of opts.bargs ?? []) {
         params.append('bargs', arg);
     }
-    return `wss://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}/?${params.toString()}`;
+    // user/password are interpolated raw — Oxylabs expects literal characters in
+    // userinfo (e.g. '+' must NOT be percent-encoded), matching their Python/JS
+    // SDK examples. If your credentials contain ':' or '@', escape upstream.
+    return `wss://${user}:${password}@${host}/?${params.toString()}`;
 }
 
 /**
