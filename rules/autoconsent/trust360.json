@@ -2,7 +2,7 @@
     "name": "trust360",
     "vendorUrl": "https://privtech.co.jp/service/trust360/",
     "prehideSelectors": [".T360_Banner_Container", ".T360PurposeOverviewBanner", ".T360Dialog"],
-    "detectCmp": [{ "exists": "#trust360-script-id" }],
+    "detectCmp": [{ "exists": "#trust360-script-id" }, { "exists": ".T360_Banner_Container" }],
     "detectPopup": [{ "visible": ".T360_Banner_Container" }],
     "optIn": [{ "waitForThenClick": ".T360_Banner_Accept", "all": true }],
     "optOut": [
