@@ -1,0 +1,44 @@
+{
+    "name": "yuntrack",
+    "_metadata": {
+        "vendorUrl": "https://www.yuntrack.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?yuntrack\\.com/"
+    },
+    "prehideSelectors": [".cookies-box"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-box .cookies-btn-customize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-box .cookies-btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-box .cookies-btn-customize"
+        },
+        {
+            "waitForVisible": ".manage-consent-preferences-dialog, .el-dialog__wrapper:not([style*=\"display: none\"]) .el-dialog"
+        },
+        {
+            "waitForThenClick": ".manage-consent-preferences-dialog .van-dialog__confirm, .el-dialog__wrapper:not([style*=\"display: none\"]) .el-dialog .el-button--primary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "yuntrackAccept=agree"
+        }
+    ]
+}
