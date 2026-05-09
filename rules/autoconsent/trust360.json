@@ -1,0 +1,25 @@
+{
+    "name": "trust360",
+    "vendorUrl": "https://privtech.co.jp/service/trust360/",
+    "prehideSelectors": [".T360_Banner_Container", ".T360PurposeOverviewBanner", ".T360Dialog"],
+    "detectCmp": [{ "exists": "#trust360-script-id" }],
+    "detectPopup": [{ "visible": ".T360_Banner_Container" }],
+    "optIn": [{ "waitForThenClick": ".T360_Banner_Accept", "all": true }],
+    "optOut": [
+        {
+            "if": { "exists": ".T360_Banner_Reject" },
+            "then": [{ "waitForThenClick": ".T360_Banner_Reject", "all": true }],
+            "else": [
+                { "waitForThenClick": ".T360_Banner_Settings", "all": true },
+                { "waitFor": ".T360PurposeDialog .T360PurposeDialog_Content_Checkbox" },
+                {
+                    "click": ".T360PurposeDialog .T360PurposeDialog_Content_Checkbox:checked",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".T360_PurposeDialog_DecidedButton", "all": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%22marketing%22%3A0" }]
+}
