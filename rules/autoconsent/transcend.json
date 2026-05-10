@@ -1,17 +1,17 @@
 {
     "name": "transcend",
-    "vendorUrl": "https://unknown",
+    "vendorUrl": "https://transcend.io",
     "cosmetic": true,
     "minimumRuleStepVersion": 2,
-    "prehideSelectors": ["#transcend-consent-manager"],
+    "prehideSelectors": ["#transcend-consent-manager", "#transcend-consent-manager-tcf-ui"],
     "detectCmp": [
         {
-            "exists": "#transcend-consent-manager"
+            "exists": "#transcend-consent-manager, #transcend-consent-manager-tcf-ui"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#transcend-consent-manager"
+            "visible": "#transcend-consent-manager, #transcend-consent-manager-tcf-ui"
         }
     ],
     "optIn": [
@@ -21,8 +21,7 @@
     ],
     "optOut": [
         {
-            "setStyle": "display: none !important; z-index: -1 !important; pointer-events: none !important;",
-            "selector": "#transcend-consent-manager"
+            "hide": "#transcend-consent-manager, #transcend-consent-manager-tcf-ui"
         }
     ]
 }
