@@ -429,8 +429,18 @@ export async function testPage(page, url, regionKey, options = {}) {
         }
 
         const completed = await ctx.waitForCompletion(completionTimeout);
+        // The rule's `test` step (e.g. waitForVisible with check: 'none') can
+        // poll for up to 10s on its own before reporting back. Wait longer than
+        // that here so we don't race autoconsent's internal timeout and take a
+        // screenshot while the close animation/network round-trip is still in
+        // flight (which would produce `selfTestResult: null` + a misleading
+        // screenshot with the banner still visible).
         if (completed && !ctx.hasMessage('selfTestResult')) {
-            await ctx.waitForMessage('selfTestResult', 10000);
+            await ctx.waitForMessage('selfTestResult', 20000);
+        }
+        // Brief settle to let close animations finish before screenshotting.
+        if (completed) {
+            await page.waitForTimeout(500);
         }
 
         const result = ctx.collectResult(url, regionKey);
