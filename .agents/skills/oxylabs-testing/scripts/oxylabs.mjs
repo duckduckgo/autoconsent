@@ -429,18 +429,36 @@ export async function testPage(page, url, regionKey, options = {}) {
         }
 
         const completed = await ctx.waitForCompletion(completionTimeout);
-        // The rule's `test` step (e.g. waitForVisible with check: 'none') can
-        // poll for up to 10s on its own before reporting back. Wait longer than
-        // that here so we don't race autoconsent's internal timeout and take a
-        // screenshot while the close animation/network round-trip is still in
-        // flight (which would produce `selfTestResult: null` + a misleading
-        // screenshot with the banner still visible).
-        if (completed && !ctx.hasMessage('selfTestResult')) {
-            await ctx.waitForMessage('selfTestResult', 20000);
+        // `autoconsentDone` is the rule's "everything is finished" signal — by
+        // the time it's on the wire the optOut/optIn flow has fully completed
+        // and any subsequent `selfTest` is just verification. Gate the
+        // screenshot on this rather than on `selfTestResult` so the captured
+        // frame reflects the state the rule itself produced.
+        if (completed && !ctx.hasMessage('autoconsentDone')) {
+            await ctx.waitForMessage('autoconsentDone', 5000);
         }
-        // Brief settle to let close animations finish before screenshotting.
-        if (completed) {
-            await page.waitForTimeout(500);
+
+        const screenshotPath = (() => {
+            try {
+                const domain = new URL(url).hostname;
+                const filepath = path.join(screenshotsDir, `${domain}-${regionKey}-final.jpg`);
+                fs.mkdirSync(screenshotsDir, { recursive: true });
+                return filepath;
+            } catch {
+                return null;
+            }
+        })();
+        if (screenshotPath) {
+            try {
+                await page.screenshot({ path: screenshotPath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
+            } catch {}
+        }
+
+        // Drain `selfTestResult` for reporting; this doesn't gate the
+        // screenshot. If autoconsentDone fires but selfTest fails or never
+        // reports, that's surfaced in the result, not hidden by waiting.
+        if (completed && !ctx.hasMessage('selfTestResult')) {
+            await ctx.waitForMessage('selfTestResult', 10000);
         }
 
         const result = ctx.collectResult(url, regionKey);
@@ -452,13 +470,9 @@ export async function testPage(page, url, regionKey, options = {}) {
             result.errors.push('Timed out waiting for autoconsent to complete');
         }
 
-        try {
-            const domain = new URL(url).hostname;
-            const filepath = path.join(screenshotsDir, `${domain}-${regionKey}-final.jpg`);
-            fs.mkdirSync(screenshotsDir, { recursive: true });
-            await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
-            result.screenshotPaths.push(filepath);
-        } catch {}
+        if (screenshotPath) {
+            result.screenshotPaths.push(screenshotPath);
+        }
 
         return result;
     } catch (e) {
