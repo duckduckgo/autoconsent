@@ -1,0 +1,17 @@
+{
+    "name": "figma-consent",
+    "_metadata": {
+        "vendorUrl": "https://consent.figma.com/"
+    },
+    "prehideSelectors": ["iframe#fig-consent-iframe", "iframe[src*=\"consent.figma.com\"]"],
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://consent\\.figma\\.com/"
+    },
+    "detectCmp": [{ "exists": "[role=\"alertdialog\"][aria-label=\"Cookie Consent\"]" }],
+    "detectPopup": [{ "visible": "[role=\"alertdialog\"][aria-label=\"Cookie Consent\"]" }],
+    "optIn": [{ "waitForThenClick": "xpath///button[normalize-space(.)=\"Allow all cookies\"]" }],
+    "optOut": [{ "waitForThenClick": "xpath///button[normalize-space(.)=\"Do not allow cookies\"]" }],
+    "test": [{ "cookieContains": "f-pref=%7B%22t%22%3A%22explicit%22%2C%22f%22%3Afalse" }]
+}
