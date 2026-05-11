@@ -5,7 +5,7 @@ description: Test autoconsent rules across geographic regions using Oxylabs Unbl
 
 # Oxylabs Regional Testing
 
-**All rule changes must be tested across geographic regions** to catch GDPR/CCPA/regional popup variations. This skill provides a JS library to run autoconsent against real remote browsers in multiple regions via [Oxylabs Unblocker Headless Browser](https://developers.oxylabs.io/products/headless-browser/chrome).
+**All rule changes must be tested across ALL supported geographic regions** to catch regional popup variations. This skill provides a JS library to run autoconsent against real remote browsers in multiple regions via [Oxylabs Unblocker Headless Browser](https://developers.oxylabs.io/products/headless-browser/chrome).
 > Important! Autoconsent results can have false positives. When testing, always inspect the screenshots and confirm that opt-out was successful.
 
 ## Prerequisites
