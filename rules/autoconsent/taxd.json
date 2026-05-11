@@ -1,0 +1,33 @@
+{
+    "name": "taxd-co-uk",
+    "vendorUrl": "https://www.taxd.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?taxd\\.co\\.uk/"
+    },
+    "prehideSelectors": ["[class*=\"CookieConsent-module-scss-module\"][class*=\"overlay\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"CookieConsent-module-scss-module\"][class*=\"overlay\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"CookieConsent-module-scss-module\"][class*=\"overlay\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "a[class*=\"CookieConsent-module-scss-module\"][class*=\"button\"].primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "a[class*=\"CookieConsent-module-scss-module\"][class*=\"secondary\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CookieConsent="
+        }
+    ]
+}
