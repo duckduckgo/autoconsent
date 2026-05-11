@@ -1,0 +1,44 @@
+{
+    "name": "volvocars-com",
+    "_metadata": {
+        "vendorUrl": "https://www.volvocars.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://([a-z0-9-]+\\.)?volvocars\\.com/"
+    },
+    "prehideSelectors": ["cookie-banner#cookie-banner-host"],
+    "detectCmp": [
+        {
+            "exists": ["cookie-banner#cookie-banner-host", "#dialog_cookie_consent"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["cookie-banner#cookie-banner-host", "#dialog_cookie_consent"]
+        }
+    ],
+    "optIn": [
+        { "wait": 500 },
+        {
+            "waitForThenClick": ["cookie-banner#cookie-banner-host", "#onetrust-accept-btn-handler"]
+        }
+    ],
+    "optOut": [
+        { "wait": 500 },
+        {
+            "waitForThenClick": ["cookie-banner#cookie-banner-host", "#onetrust-reject-all-handler"]
+        },
+        {
+            "waitForVisible": ["cookie-banner#cookie-banner-host", "#dialog_cookie_consent"],
+            "check": "none",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "groups=C1%3A1%2CC3%3A0"
+        }
+    ]
+}
