@@ -1,3 +1,70 @@
+# v14.78.0 (Fri May 08 2026)
+
+#### 🚀 Enhancement
+
+- Improve agent context: restructure skills, slim AGENTS.md [#1319](https://github.com/duckduckgo/autoconsent/pull/1319) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.77.1 (Thu May 07 2026)
+
+#### 🐛 Bug Fix
+
+- Add PublicWWW source code search agent skill for CMP discovery [#1277](https://github.com/duckduckgo/autoconsent/pull/1277) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.77.0 (Tue May 05 2026)
+
+#### 🚀 Enhancement
+
+- Add rule for Kickstarter custom consent modal [#1330](https://github.com/duckduckgo/autoconsent/pull/1330) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.76.0 (Sat May 02 2026)
+
+#### 🚀 Enhancement
+
+- Fix heuristic reject pattern for `I Reject All (except Strictly Necessary)` (apnews.com) [#1328](https://github.com/duckduckgo/autoconsent/pull/1328) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix delayed OneTrust banner detection on College Board [#1327](https://github.com/duckduckgo/autoconsent/pull/1327) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 494f972bab536fd436e26145c94bc3d1bb91380b [#1228](https://github.com/duckduckgo/autoconsent/pull/1228) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix Didomi selfTest under CCPA/CPRA (newrepublic.com) [#1324](https://github.com/duckduckgo/autoconsent/pull/1324) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Tweak Onetrust and Trustarc [#1252](https://github.com/duckduckgo/autoconsent/pull/1252) ([@muodov](https://github.com/muodov))
+- Onetrust: handle CCPA notice-only banner variant (columbia.com) [#1325](https://github.com/duckduckgo/autoconsent/pull/1325) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix cookieconsent3 opt-out on testsieger.de (open preferences modal when no inline reject button) [#1322](https://github.com/duckduckgo/autoconsent/pull/1322) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix cookieconsent2 false-positive blocking didomi opt-out on Evite [#1323](https://github.com/duckduckgo/autoconsent/pull/1323) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Make Didomi popup detection robust on nothing.tech [#1326](https://github.com/duckduckgo/autoconsent/pull/1326) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Bump the adblocker group with 2 updates [#1320](https://github.com/duckduckgo/autoconsent/pull/1320) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.75.0 (Thu Apr 23 2026)
 
 #### 🚀 Enhancement
