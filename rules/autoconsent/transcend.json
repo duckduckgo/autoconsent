@@ -2,6 +2,7 @@
     "name": "transcend",
     "vendorUrl": "https://transcend.io",
     "cosmetic": true,
+    "minimumRuleStepVersion": 2,
     "prehideSelectors": ["#transcend-consent-manager", "#transcend-consent-manager-tcf-ui"],
     "detectCmp": [
         {
@@ -11,9 +12,6 @@
     "detectPopup": [
         {
             "visible": "#transcend-consent-manager, #transcend-consent-manager-tcf-ui"
-        },
-        {
-            "eval": "EVAL_TRANSCEND_POPUP_SHOWN"
         }
     ],
     "optIn": [
