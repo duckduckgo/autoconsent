@@ -11,6 +11,9 @@
     "detectPopup": [
         {
             "visible": "#transcend-consent-manager, #transcend-consent-manager-tcf-ui"
+        },
+        {
+            "eval": "EVAL_TRANSCEND_POPUP_SHOWN"
         }
     ],
     "optIn": [
