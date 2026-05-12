@@ -76,16 +76,9 @@ export const snippets = {
     },
     EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
     EVAL_TRANSCEND_POPUP_SHOWN: () => {
-        // Transcend exposes a getViewState() that returns 'Hidden' when no
-        // consent prompt is rendered, and a named view (e.g. 'TCF_EU',
-        // 'PrivacyPolicyNotice', 'AcceptOrRejectAllOrMoreChoices') when the
-        // popup is actually being shown. Sites that load the Transcend SDK
-        // only for backend consent management (without a Transcend-rendered
-        // popup, e.g. theordinary.com) stay on 'Hidden' permanently, so
-        // gating detectPopup on this avoids false positives. During init
-        // getViewState can transiently return a non-string; require a string
-        // so we keep retrying until the SDK has settled.
-        const vs = window.transcend && typeof window.transcend.getViewState === 'function' ? window.transcend.getViewState() : null;
+        // 'Hidden' = SDK loaded but no popup rendered (filters out backend-only sites).
+        // Non-string = transient init state, keep retrying.
+        const vs = window.transcend?.getViewState?.();
         return typeof vs === 'string' && vs !== 'Hidden';
     },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
