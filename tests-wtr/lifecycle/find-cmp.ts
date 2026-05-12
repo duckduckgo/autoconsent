@@ -208,7 +208,7 @@ describe('Autoconsent.findCmp', () => {
                 const lateCmp = document.createElement('div');
                 lateCmp.id = 'late-ketch-cmp';
                 document.body.appendChild(lateCmp);
-            });
+            }, 100);
 
             const found = await autoconsent.findCmp(1);
 
