@@ -429,13 +429,17 @@ export async function testPage(page, url, regionKey, options = {}) {
         }
 
         const completed = await ctx.waitForCompletion(completionTimeout);
-        // `autoconsentDone` is the rule's "everything is finished" signal — by
-        // the time it's on the wire the optOut/optIn flow has fully completed
-        // and any subsequent `selfTest` is just verification. Gate the
-        // screenshot on this rather than on `selfTestResult` so the captured
-        // frame reflects the state the rule itself produced.
+        // `autoconsentDone` is the rule's "everything is finished" signal,
+        // emitted right after `optOutResult`/`optInResult`. The subsequent
+        // `selfTest` round trip is just verification and is irrelevant for
+        // screenshot timing. However, the page's own close animation /
+        // teardown can still be in flight at the moment `autoconsentDone`
+        // fires, so we wait a short settle window before capturing the frame.
         if (completed && !ctx.hasMessage('autoconsentDone')) {
             await ctx.waitForMessage('autoconsentDone', 5000);
+        }
+        if (completed) {
+            await page.waitForTimeout(1500);
         }
 
         const screenshotPath = (() => {
