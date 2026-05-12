@@ -429,40 +429,14 @@ export async function testPage(page, url, regionKey, options = {}) {
         }
 
         const completed = await ctx.waitForCompletion(completionTimeout);
-        // `autoconsentDone` is the rule's "everything is finished" signal,
-        // emitted right after `optOutResult`/`optInResult`. The subsequent
-        // `selfTest` round trip is just verification and is irrelevant for
-        // screenshot timing. However, the page's own close animation /
-        // teardown can still be in flight at the moment `autoconsentDone`
-        // fires, so we wait a short settle window before capturing the frame.
-        if (completed && !ctx.hasMessage('autoconsentDone')) {
-            await ctx.waitForMessage('autoconsentDone', 5000);
-        }
-        if (completed) {
-            await page.waitForTimeout(1500);
-        }
-
-        const screenshotPath = (() => {
-            try {
-                const domain = new URL(url).hostname;
-                const filepath = path.join(screenshotsDir, `${domain}-${regionKey}-final.jpg`);
-                fs.mkdirSync(screenshotsDir, { recursive: true });
-                return filepath;
-            } catch {
-                return null;
-            }
-        })();
-        if (screenshotPath) {
-            try {
-                await page.screenshot({ path: screenshotPath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
-            } catch {}
-        }
-
-        // Drain `selfTestResult` for reporting; this doesn't gate the
-        // screenshot. If autoconsentDone fires but selfTest fails or never
-        // reports, that's surfaced in the result, not hidden by waiting.
         if (completed && !ctx.hasMessage('selfTestResult')) {
             await ctx.waitForMessage('selfTestResult', 10000);
+        }
+        // Brief settle after the rule (and its verification) has finished, to
+        // outlast the page's own close animation / DOM teardown which can
+        // still be in flight when the screenshot is taken.
+        if (completed) {
+            await page.waitForTimeout(1500);
         }
 
         const result = ctx.collectResult(url, regionKey);
@@ -474,9 +448,13 @@ export async function testPage(page, url, regionKey, options = {}) {
             result.errors.push('Timed out waiting for autoconsent to complete');
         }
 
-        if (screenshotPath) {
-            result.screenshotPaths.push(screenshotPath);
-        }
+        try {
+            const domain = new URL(url).hostname;
+            const filepath = path.join(screenshotsDir, `${domain}-${regionKey}-final.jpg`);
+            fs.mkdirSync(screenshotsDir, { recursive: true });
+            await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
+            result.screenshotPaths.push(filepath);
+        } catch {}
 
         return result;
     } catch (e) {
