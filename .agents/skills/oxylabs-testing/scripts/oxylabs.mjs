@@ -432,6 +432,12 @@ export async function testPage(page, url, regionKey, options = {}) {
         if (completed && !ctx.hasMessage('selfTestResult')) {
             await ctx.waitForMessage('selfTestResult', 10000);
         }
+        // Brief settle after the rule (and its verification) has finished, to
+        // outlast the page's own close animation / DOM teardown which can
+        // still be in flight when the screenshot is taken.
+        if (completed) {
+            await page.waitForTimeout(1500);
+        }
 
         const result = ctx.collectResult(url, regionKey);
         result.duration = Date.now() - startTime;
