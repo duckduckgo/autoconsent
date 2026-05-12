@@ -8,6 +8,7 @@ generateCMPTests(
         'https://mgemi.com/products/the-felize-saddle-suede',
         'https://eu.blackdiamondequipment.com/',
         'https://www.directdoors.com/',
+        'https://paireyewear.com/collections/all-frames',
     ],
     {
         skipRegions: ['US'],
