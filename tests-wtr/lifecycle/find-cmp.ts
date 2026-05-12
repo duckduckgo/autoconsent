@@ -159,6 +159,7 @@ describe('Autoconsent.findCmp', () => {
                 autoAction: null,
                 enableHeuristicAction: true,
             });
+            autoconsent.rules = [];
         });
 
         afterEach(() => {
