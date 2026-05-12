@@ -1,3 +1,17 @@
+# v14.79.0 (Tue May 12 2026)
+
+#### 🚀 Enhancement
+
+- Add volvocars-com rule [#1337](https://github.com/duckduckgo/autoconsent/pull/1337) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add hearst-us cosmetic rule covering Hearst US magazine sites [#1336](https://github.com/duckduckgo/autoconsent/pull/1336) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.78.0 (Fri May 08 2026)
 
 #### 🚀 Enhancement
