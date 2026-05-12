@@ -10,6 +10,8 @@ generateCMPTests(
         'https://www.kia.com/us/en',
         'https://www.sportscheck.com/filialen/dortmund/',
         'https://www.idealo.de/',
+        'https://www.condor.com/de/flug-vorbereiten/check-in/vorabend-check-in.jsp', // many-vendor setup; eval-only optOut timed out before the fix
+        'https://www.cewe.de/',
     ],
     {
         skipRegions: ['US', 'GB', 'FR'],

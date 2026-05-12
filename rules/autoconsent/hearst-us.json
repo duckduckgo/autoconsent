@@ -1,0 +1,38 @@
+{
+    "name": "hearst-us",
+    "vendorUrl": "https://www.hearst.com/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?(menshealth|womenshealthmag|cosmopolitan|esquire|elle|elledecor|harpersbazaar|goodhousekeeping|popularmechanics|caranddriver|delish|veranda|roadandtrack|bestproducts|countryliving|housebeautiful|bicycling|biography|pitchfork|prevention|runnersworld|thepioneerwoman|townandcountrymag)\\.com/"
+    },
+    "prehideSelectors": ["div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]"],
+    "detectCmp": [
+        {
+            "exists": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"] button[aria-label^=\"Close Privacy Disclosure\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]",
+            "check": "none"
+        }
+    ]
+}
