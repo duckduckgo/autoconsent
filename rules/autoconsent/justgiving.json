@@ -2,7 +2,7 @@
     "name": "justgiving.com",
     "vendorUrl": "https://www.justgiving.com/",
     "runContext": {
-        "urlPattern": "^https://([a-z0-9-]+\\.)*justgiving\\.com/"
+        "urlPattern": "^https://(?:[a-z0-9-]+\\.)?justgiving\\.com/"
     },
     "prehideSelectors": ["#cookiebanner-popup"],
     "detectCmp": [
