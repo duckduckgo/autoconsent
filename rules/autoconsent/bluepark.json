@@ -33,8 +33,9 @@
     ],
     "test": [
         {
-            "visible": "#cookie_banner",
-            "check": "none"
+            "waitForVisible": "#cookie_banner",
+            "check": "none",
+            "timeout": 2000
         }
     ]
 }
