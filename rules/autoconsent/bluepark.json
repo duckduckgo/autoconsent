@@ -1,0 +1,40 @@
+{
+    "name": "bluepark",
+    "vendorUrl": "https://www.bluepark.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "intermediate": false,
+    "prehideSelectors": ["#cookie_banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_banner #cookie_accept"
+        },
+        {
+            "exists": "#cookie_banner #cookie_essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_banner #cookie_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_banner #cookie_essential"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie_banner",
+            "check": "none"
+        }
+    ]
+}
