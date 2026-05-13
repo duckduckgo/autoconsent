@@ -1,3 +1,21 @@
+# v14.80.0 (Wed May 13 2026)
+
+#### 🚀 Enhancement
+
+- Bump some outdated dependencies [#1344](https://github.com/duckduckgo/autoconsent/pull/1344) ([@muodov](https://github.com/muodov))
+- Bump the adblocker group across 1 directory with 2 updates [#1333](https://github.com/duckduckgo/autoconsent/pull/1333) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Fix Tealium scroll lock on bank.marksandspencer.com [#1332](https://github.com/duckduckgo/autoconsent/pull/1332) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix usercentrics-api optOut breakage on slow consent flows (condor.com) [#1338](https://github.com/duckduckgo/autoconsent/pull/1338) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix Ketch popup handling on yumearth.com (redesigned banner/modal DOM) [#1329](https://github.com/duckduckgo/autoconsent/pull/1329) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.79.0 (Tue May 12 2026)
 
 #### 🚀 Enhancement
