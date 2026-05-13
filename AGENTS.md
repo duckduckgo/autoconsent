@@ -106,9 +106,11 @@ shadow root or same-origin iframe.
 - When verifying a rule, **look at the screenshots** on top of the API results — sometimes a rule reports success, but the popup is not actually handled - a screenshot will detect this.
 - **Paywalls do not need to be handled.** If the website presents the choice to pay or agree to cookies, the correct solution is to disable the feature on that site, so no code changes required in this case.
 - If the pop-up has an explicit "reject"-like button, you should first consider why HEURISTIC rule didn't handle it. A fix to the heuristic rule is always preferred to a new rule, as long as it doesn't cause potential false-positives on other sites.
+- **Watch out for race conditions**. A common pitfall is that a rule starts clicking before JS handlers are ready. If you detect this, add an appropriate wait step before the click, preferably based on a specific DOM state. Unconditional `wait` is a LAST RESORT because it leads to a poor UX.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
+- Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
