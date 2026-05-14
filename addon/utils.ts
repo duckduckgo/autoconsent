@@ -7,6 +7,12 @@ export function extensionDefaultConfig(storedConfig: Partial<Config> = {}): Conf
     if (!storedConfig.enableHeuristicDetection) {
         storedConfig.enableHeuristicDetection = true;
     }
+    if (!storedConfig.enablePopupMutationObserver) {
+        storedConfig.enablePopupMutationObserver = true;
+    }
+    if (!storedConfig.enableHeuristicAction) {
+        storedConfig.enableHeuristicAction = true;
+    }
     if (!storedConfig.logs) {
         storedConfig.logs = {
             lifecycle: true,
