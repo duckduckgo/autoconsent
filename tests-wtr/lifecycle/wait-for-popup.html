@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./wait-for-popup');
+            });
+        </script>
+        <div id="page-content">
+            <p>Test page for waitForPopup tests</p>
+        </div>
+    </body>
+</html>
