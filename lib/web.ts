@@ -557,19 +557,26 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         logsConfig.lifecycle && console.log('checking if popup is open...', cmp.name);
 
-        const mutationObserver = this.domActions.waitForMutation('html', 10000);
-        mutationObserver.catch(() => {});
+        let mutationObserver: Promise<boolean> | null = null;
+        if (this.config.enablePopupMutationObserver) {
+            mutationObserver = this.domActions.waitForMutation('html', 10000);
+            mutationObserver.catch(() => {});
+        }
 
         const isOpen = await cmp.detectPopup().catch((e) => {
             logsConfig.errors && console.warn(`error detecting popup for ${cmp.name}`, e);
             return false;
         });
         if (!isOpen && retries > 0) {
-            try {
-                await Promise.all([this.domActions.wait(interval), mutationObserver]);
-            } catch (e) {
-                logsConfig.lifecycle && console.log(cmp.name, 'popup detection timed out waiting for DOM mutation');
-                return false;
+            if (mutationObserver) {
+                try {
+                    await Promise.all([this.domActions.wait(interval), mutationObserver]);
+                } catch (e) {
+                    logsConfig.lifecycle && console.log(cmp.name, 'popup detection timed out waiting for DOM mutation');
+                    return false;
+                }
+            } else {
+                await this.domActions.wait(interval);
             }
             return this.waitForPopup(cmp, retries - 1, interval);
         }
