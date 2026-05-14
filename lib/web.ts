@@ -573,7 +573,6 @@ export default class AutoConsent {
                     await Promise.all([this.domActions.wait(interval), mutationObserver]);
                 } catch (e) {
                     logsConfig.lifecycle && console.log(cmp.name, 'popup detection timed out waiting for DOM mutation');
-                    return false;
                 }
             } else {
                 await this.domActions.wait(interval);
