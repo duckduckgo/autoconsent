@@ -188,5 +188,27 @@ describe('Autoconsent.waitForPopup', () => {
             expect(result).to.be.false;
             expect(callCount).to.equal(1);
         });
+
+        it('should continue retrying after mutation observer timeout', async () => {
+            // Override waitForMutation to use a very short timeout so it rejects quickly
+            const originalWaitForMutation = autoconsent.domActions.waitForMutation.bind(autoconsent.domActions);
+            autoconsent.domActions.waitForMutation = (selector, _timeout?) => {
+                return originalWaitForMutation(selector, 10);
+            };
+
+            let callCount = 0;
+            const cmp = createMockCmp(() => {
+                callCount++;
+                // popup appears on the 3rd attempt (after 2 mutation timeouts)
+                return Promise.resolve(callCount >= 3);
+            });
+
+            const result = await autoconsent.waitForPopup(cmp, 5, 50);
+
+            autoconsent.domActions.waitForMutation = originalWaitForMutation;
+
+            expect(result).to.be.true;
+            expect(callCount).to.equal(3);
+        });
     });
 });
