@@ -1,7 +1,7 @@
 {
     "name": "facebook",
     "runContext": {
-        "urlPattern": "^https://([a-z0-9-]+\\.)?facebook\\.com/"
+        "urlPattern": "^https://(www\\.)?facebook\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
