@@ -1,3 +1,21 @@
+# v14.81.0 (Thu May 14 2026)
+
+#### 🚀 Enhancement
+
+- Add justgiving.com cookie popup rule [#1347](https://github.com/duckduckgo/autoconsent/pull/1347) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add edpb-edps rule for EDPB/EDPS cookie banner [#1346](https://github.com/duckduckgo/autoconsent/pull/1346) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- AI harness tweaks [#1348](https://github.com/duckduckgo/autoconsent/pull/1348) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.80.0 (Wed May 13 2026)
 
 #### 🚀 Enhancement
