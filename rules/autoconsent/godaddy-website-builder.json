@@ -2,15 +2,15 @@
     "name": "godaddy-website-builder",
     "vendorUrl": "https://www.godaddy.com/websites/website-builder",
     "cosmetic": false,
-    "prehideSelectors": ["[data-aid='FOOTER_COOKIE_BANNER_RENDERED'][style*='translateY']"],
+    "prehideSelectors": ["[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"],
     "detectCmp": [
         {
-            "exists": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED'][style*='translateY']"
+            "exists": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED'][style*='translateY']"
+            "visible": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"
         }
     ],
     "optIn": [
@@ -35,7 +35,7 @@
     ],
     "test": [
         {
-            "visible": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED'][style*='translateY']",
+            "visible": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']",
             "check": "none"
         }
     ]
