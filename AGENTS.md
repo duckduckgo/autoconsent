@@ -107,6 +107,7 @@ shadow root or same-origin iframe.
 - **Paywalls do not need to be handled.** If the website presents the choice to pay or agree to cookies, the correct solution is to disable the feature on that site, so no code changes required in this case.
 - If the pop-up has an explicit "reject"-like button, you should first consider why HEURISTIC rule didn't handle it. A fix to the heuristic rule is always preferred to a new rule, as long as it doesn't cause potential false-positives on other sites.
 - **Watch out for race conditions**. A common pitfall is that a rule starts clicking before JS handlers are ready. If you detect this, add an appropriate wait step before the click, preferably based on a specific DOM state. Unconditional `wait` is a LAST RESORT because it leads to a poor UX.
+- **Watch out for false positive detections**. Always verify that the rule does NOT match after the popup is dismissed and the page is reloaded. Over-detection can lead to reload loops.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
@@ -157,4 +158,5 @@ After creating or modifying a rule:
 2. `npm run rule-syntax-check` — validate rule JSON against schema
 3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
 4. `npm run prepublish` — full build including extension bundle
-5. Check the rule works across geographic regions using available regional-testing tooling.
+5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
+6. Check the rule works across geographic regions using available regional-testing tooling.
