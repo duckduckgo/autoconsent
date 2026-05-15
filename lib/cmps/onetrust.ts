@@ -18,7 +18,7 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('#onetrust-banner-sdk,#onetrust-pc-sdk');
+        return this.elementExists('#onetrust-banner-sdk') || this.elementVisible('#onetrust-pc-sdk', 'any');
     }
 
     async detectPopup() {
@@ -26,9 +26,16 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        if (this.elementVisible('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies', 'any')) {
-            // 'reject all' shortcut
-            return await this.click('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies');
+        await this.wait(500);
+        // 'reject all' shortcuts
+        if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
+            return await this.click('#onetrust-reject-all-handler');
+        }
+        if (this.elementVisible('.ot-pc-refuse-all-handler', 'any')) {
+            return await this.click('.ot-pc-refuse-all-handler');
+        }
+        if (this.elementVisible('.js-reject-cookies', 'any')) {
+            return await this.click('.js-reject-cookies');
         }
 
         if (this.elementVisible('.onetrust-close-btn-handler', 'any')) {
@@ -39,6 +46,20 @@ export default class Onetrust extends AutoConsentCMPBase {
             const btnText = closeBtn?.textContent?.toLowerCase() || '';
             const rejectPatterns = ['without', 'ohne', 'sans', 'sin ', 'zonder', 'senza', 'refuse', 'decline', 'reject', 'ablehnen'];
             if (rejectPatterns.some((pattern) => btnText.includes(pattern))) {
+                return await this.click('.onetrust-close-btn-handler');
+            }
+
+            // CCPA notice-only variant: the banner has the `ot-close-btn-link` class and
+            // contains only a Close button (no Accept, Reject, or Settings). There's no
+            // real opt-out path in the DOM, so we click Close to dismiss.
+            // See e.g. columbia.com (US/CCPA region).
+            const banner = document.getElementById('onetrust-banner-sdk');
+            const isCloseOnlyNotice =
+                banner?.classList.contains('ot-close-btn-link') &&
+                !this.elementExists(
+                    '#onetrust-accept-btn-handler,#onetrust-reject-all-handler,#onetrust-pc-btn-handler,.ot-sdk-show-settings,button.js-cookie-settings',
+                );
+            if (isCloseOnlyNotice) {
                 return await this.click('.onetrust-close-btn-handler');
             }
         }

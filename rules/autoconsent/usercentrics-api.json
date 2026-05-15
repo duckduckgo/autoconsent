@@ -27,6 +27,19 @@
         }
     ],
     "optIn": [{ "eval": "EVAL_USERCENTRICS_API_3" }, { "eval": "EVAL_USERCENTRICS_API_1" }, { "eval": "EVAL_USERCENTRICS_API_5" }],
-    "optOut": [{ "eval": "EVAL_USERCENTRICS_API_1" }, { "eval": "EVAL_USERCENTRICS_API_2" }],
+    "optOut": [
+        {
+            "if": { "exists": ["#usercentrics-root", "[data-testid=uc-deny-all-button]"] },
+            "then": [{ "click": ["#usercentrics-root", "[data-testid=uc-deny-all-button]"] }],
+            "else": [
+                {
+                    "if": { "exists": ["#usercentrics-cmp-ui", "[data-action-type=deny]"] },
+                    "then": [{ "click": ["#usercentrics-cmp-ui", "[data-action-type=deny]"] }],
+                    "else": [{ "eval": "EVAL_USERCENTRICS_API_1" }, { "eval": "EVAL_USERCENTRICS_API_2" }]
+                }
+            ]
+        },
+        { "removeClass": "overflowHidden", "selector": "body", "optional": true }
+    ],
     "test": [{ "eval": "EVAL_USERCENTRICS_API_6" }]
 }

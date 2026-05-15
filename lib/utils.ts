@@ -88,6 +88,7 @@ export function normalizeConfig(providedConfig: any): Config {
         enableGeneratedRules: true,
         enableHeuristicDetection: false,
         enableHeuristicAction: false,
+        enablePopupMutationObserver: false,
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,
