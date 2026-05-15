@@ -1,3 +1,16 @@
+# v14.82.0 (Fri May 15 2026)
+
+#### 🚀 Enhancement
+
+- Add facebook-mobile rule for m.facebook.com [#1351](https://github.com/duckduckgo/autoconsent/pull/1351) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.81.0 (Thu May 14 2026)
 
 #### 🚀 Enhancement
