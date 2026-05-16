@@ -1,3 +1,17 @@
+# v14.83.0 (Sat May 16 2026)
+
+#### 🚀 Enhancement
+
+- Add a hint about reload loops [#1352](https://github.com/duckduckgo/autoconsent/pull/1352) ([@muodov](https://github.com/muodov))
+- Use MutationObserver in waitForPopup to avoid premature timeout [#1207](https://github.com/duckduckgo/autoconsent/pull/1207) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.82.0 (Fri May 15 2026)
 
 #### 🚀 Enhancement
