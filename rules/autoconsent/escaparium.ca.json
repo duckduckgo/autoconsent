@@ -1,0 +1,35 @@
+{
+    "name": "escaparium.ca",
+    "vendorUrl": "https://www.escaparium.ca/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?escaparium\\.ca/"
+    },
+    "detectCmp": [
+        {
+            "exists": "div#klaro"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class,'pointer-events-none')]//button[normalize-space()='Accept all' or normalize-space()='Tout accepter']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='Accept all' or normalize-space()='Tout accepter']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='Customize' or normalize-space()='Personnaliser']"
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='Decline' or normalize-space()='Refuser']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "escaparium_cookie_consent_decided=1"
+        }
+    ]
+}
