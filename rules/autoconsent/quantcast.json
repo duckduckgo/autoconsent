@@ -8,71 +8,99 @@
     ],
     "detectPopup": [
         {
-            "visible": "#qc-cmp2-ui"
+            "any": [{ "visible": "#qc-cmp2-ui" }, { "visible": "#qc-cmp2-usp" }]
         }
     ],
     "optOut": [
         {
             "if": {
-                "exists": "#disagree-btn"
+                "exists": "#qc-cmp2-usp"
             },
             "then": [
                 {
-                    "click": "#disagree-btn"
+                    "click": "#qc-cmp2-usp .qc-cmp2-scrollable-section button.qc-cmp2-toggle[aria-checked=\"false\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#qc-cmp2-usp .qc-cmp2-expandable-list button.qc-cmp2-toggle[aria-checked=\"true\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-usp button[mode=\"primary\"]",
+                    "timeout": 5000
+                },
+                {
+                    "waitForThenClick": "button[aria-label=\"Close success modal\"]",
+                    "timeout": 5000,
+                    "optional": true
                 }
             ],
             "else": [
                 {
-                    "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
-                    "timeout": 2000
-                },
-                {
                     "if": {
-                        "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                        "exists": "#disagree-btn"
                     },
                     "then": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                            "click": "#disagree-btn"
                         }
                     ],
                     "else": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
-                        },
-                        {
-                            "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
-                        },
-                        {
-                            "click": ".qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
-                            "all": true,
-                            "optional": true
-                        },
-                        {
-                            "click": [
-                                ".qc-cmp2-main",
-                                "xpath///button[contains(., 'REJECT ALL') or contains(., 'ALLE VERWERPEN') or contains(., 'ΑΠΟΡΡΙΠΤΩ ΤΑ ΠΑΝΤΑ') or contains(., 'RESPINGERE TOTALĂ') or contains(., 'ALLE ABLEHNEN') or contains(., 'ODRZUCENIE') or contains(., 'BLOQUEAR TODO') or contains(., 'REJEITAR TODOS') or contains(., 'RIFIUTA TUTTO') or contains(., 'TOUT REFUSER') or contains(., 'ОТКЛОНИТЬ ВСЕХ')]"
-                            ],
-                            "optional": true
-                        },
-                        {
-                            "wait": 500
+                            "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
+                            "timeout": 2000
                         },
                         {
                             "if": {
-                                "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
                             },
                             "then": [
                                 {
-                                    "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
                                 }
                             ],
                             "else": [
                                 {
-                                    "waitForThenClick": [
+                                    "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                                },
+                                {
+                                    "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
+                                },
+                                {
+                                    "click": ".qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "click": [
                                         ".qc-cmp2-main",
-                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                        "xpath///button[contains(., 'REJECT ALL') or contains(., 'ALLE VERWERPEN') or contains(., 'ΑΠΟΡΡΙΠΤΩ ΤΑ ΠΑΝΤΑ') or contains(., 'RESPINGERE TOTALĂ') or contains(., 'ALLE ABLEHNEN') or contains(., 'ODRZUCENIE') or contains(., 'BLOQUEAR TODO') or contains(., 'REJEITAR TODOS') or contains(., 'RIFIUTA TUTTO') or contains(., 'TOUT REFUSER') or contains(., 'ОТКЛОНИТЬ ВСЕХ')]"
                                     ],
-                                    "timeout": 5000
+                                    "optional": true
+                                },
+                                {
+                                    "wait": 500
+                                },
+                                {
+                                    "if": {
+                                        "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                        }
+                                    ],
+                                    "else": [
+                                        {
+                                            "waitForThenClick": [
+                                                ".qc-cmp2-main",
+                                                "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                            ],
+                                            "timeout": 5000
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -83,7 +111,35 @@
     ],
     "optIn": [
         {
-            "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"]"
+            "if": {
+                "exists": "#qc-cmp2-usp"
+            },
+            "then": [
+                {
+                    "click": "#qc-cmp2-usp .qc-cmp2-scrollable-section button.qc-cmp2-toggle[aria-checked=\"true\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#qc-cmp2-usp .qc-cmp2-expandable-list button.qc-cmp2-toggle[aria-checked=\"false\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-usp button[mode=\"primary\"]",
+                    "timeout": 5000
+                },
+                {
+                    "waitForThenClick": "button[aria-label=\"Close success modal\"]",
+                    "timeout": 5000,
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"]"
+                }
+            ]
         }
     ]
 }

@@ -20,3 +20,9 @@ generateCMPTests('com_quantcast2', ['https://www.fandom.com/'], {
     testSelfTest: false,
     skipRegions: ['US'],
 });
+
+// USP/MSPA variant of InMobi (Quantcast) Choice CMP.
+generateCMPTests('quantcast', ['https://secretldn.com/'], {
+    onlyRegions: ['US'],
+    testSelfTest: false,
+});
