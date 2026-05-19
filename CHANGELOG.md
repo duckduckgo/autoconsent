@@ -1,3 +1,16 @@
+# v14.84.0 (Tue May 19 2026)
+
+#### 🚀 Enhancement
+
+- Add escaparium.ca site-specific rule [#1354](https://github.com/duckduckgo/autoconsent/pull/1354) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.83.0 (Sat May 16 2026)
 
 #### 🚀 Enhancement
