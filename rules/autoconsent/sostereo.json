@@ -1,0 +1,21 @@
+{
+    "name": "sostereo.com",
+    "vendorUrl": "https://sostereo.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?sostereo\\.com/"
+    },
+    "prehideSelectors": ["app-cookie-consent"],
+    "detectCmp": [{ "exists": "app-cookie-consent" }],
+    "detectPopup": [{ "visible": "app-cookie-consent" }],
+    "optIn": [{ "waitForThenClick": "app-cookie-consent app-btn button" }],
+    "optOut": [
+        { "waitForThenClick": "app-cookie-consent button.underline" },
+        { "waitFor": "app-cookie-consent ui-switch button.switch" },
+        {
+            "click": "app-cookie-consent ui-switch button.switch.checked:not(.disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "app-cookie-consent app-btn button" }
+    ]
+}
