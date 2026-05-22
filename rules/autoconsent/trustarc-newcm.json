@@ -1,0 +1,30 @@
+{
+    "name": "TrustArc-newcm",
+    "vendorUrl": "https://trustarc.com/",
+    "prehideSelectors": [".truste_popframe.trustarc_newcm_container"],
+    "detectCmp": [
+        {
+            "exists": [".truste_popframe.trustarc_newcm_container", "a.required, a.call"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [".truste_popframe.trustarc_newcm_container", "a.required, a.call"],
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.call"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.required"]
+        }
+    ],
+    "test": [
+        { "cookieContains": "cmapi_cookie_privacy=permit 1" },
+        { "cookieContains": "cmapi_cookie_privacy=permit 1,2", "negated": true }
+    ]
+}
