@@ -24,8 +24,7 @@
         }
     ],
     "test": [
-        {
-            "cookieContains": "cmapi_cookie_privacy=permit 1"
-        }
+        { "cookieContains": "cmapi_cookie_privacy=permit 1" },
+        { "cookieContains": "cmapi_cookie_privacy=permit 1,2", "negated": true }
     ]
 }
