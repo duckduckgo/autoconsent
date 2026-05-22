@@ -1,6 +1,11 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/', 'https://news.sky.com/', 'https://www.economist.com/']);
+generateCMPTests('Sourcepoint-frame', [
+    'https://www.theguardian.com/',
+    'https://news.sky.com/',
+    'https://www.economist.com/',
+    'https://www.carwow.co.uk/',
+]);
 
 generateCMPTests(
     'Sourcepoint-frame',

@@ -1,3 +1,256 @@
+# v14.84.1 (Fri May 22 2026)
+
+#### 🐛 Bug Fix
+
+- Fix tesco.com cookie popup race condition [#1357](https://github.com/duckduckgo/autoconsent/pull/1357) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.84.0 (Tue May 19 2026)
+
+#### 🚀 Enhancement
+
+- Add escaparium.ca site-specific rule [#1354](https://github.com/duckduckgo/autoconsent/pull/1354) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.83.0 (Sat May 16 2026)
+
+#### 🚀 Enhancement
+
+- Add a hint about reload loops [#1352](https://github.com/duckduckgo/autoconsent/pull/1352) ([@muodov](https://github.com/muodov))
+- Use MutationObserver in waitForPopup to avoid premature timeout [#1207](https://github.com/duckduckgo/autoconsent/pull/1207) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.82.0 (Fri May 15 2026)
+
+#### 🚀 Enhancement
+
+- Add facebook-mobile rule for m.facebook.com [#1351](https://github.com/duckduckgo/autoconsent/pull/1351) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.81.0 (Thu May 14 2026)
+
+#### 🚀 Enhancement
+
+- Add justgiving.com cookie popup rule [#1347](https://github.com/duckduckgo/autoconsent/pull/1347) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add edpb-edps rule for EDPB/EDPS cookie banner [#1346](https://github.com/duckduckgo/autoconsent/pull/1346) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- AI harness tweaks [#1348](https://github.com/duckduckgo/autoconsent/pull/1348) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.80.0 (Wed May 13 2026)
+
+#### 🚀 Enhancement
+
+- Bump some outdated dependencies [#1344](https://github.com/duckduckgo/autoconsent/pull/1344) ([@muodov](https://github.com/muodov))
+- Bump the adblocker group across 1 directory with 2 updates [#1333](https://github.com/duckduckgo/autoconsent/pull/1333) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Fix Tealium scroll lock on bank.marksandspencer.com [#1332](https://github.com/duckduckgo/autoconsent/pull/1332) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix usercentrics-api optOut breakage on slow consent flows (condor.com) [#1338](https://github.com/duckduckgo/autoconsent/pull/1338) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix Ketch popup handling on yumearth.com (redesigned banner/modal DOM) [#1329](https://github.com/duckduckgo/autoconsent/pull/1329) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.79.0 (Tue May 12 2026)
+
+#### 🚀 Enhancement
+
+- Add volvocars-com rule [#1337](https://github.com/duckduckgo/autoconsent/pull/1337) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add hearst-us cosmetic rule covering Hearst US magazine sites [#1336](https://github.com/duckduckgo/autoconsent/pull/1336) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.78.0 (Fri May 08 2026)
+
+#### 🚀 Enhancement
+
+- Improve agent context: restructure skills, slim AGENTS.md [#1319](https://github.com/duckduckgo/autoconsent/pull/1319) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.77.1 (Thu May 07 2026)
+
+#### 🐛 Bug Fix
+
+- Add PublicWWW source code search agent skill for CMP discovery [#1277](https://github.com/duckduckgo/autoconsent/pull/1277) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.77.0 (Tue May 05 2026)
+
+#### 🚀 Enhancement
+
+- Add rule for Kickstarter custom consent modal [#1330](https://github.com/duckduckgo/autoconsent/pull/1330) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.76.0 (Sat May 02 2026)
+
+#### 🚀 Enhancement
+
+- Fix heuristic reject pattern for `I Reject All (except Strictly Necessary)` (apnews.com) [#1328](https://github.com/duckduckgo/autoconsent/pull/1328) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix delayed OneTrust banner detection on College Board [#1327](https://github.com/duckduckgo/autoconsent/pull/1327) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Update EasyList Cookie to 494f972bab536fd436e26145c94bc3d1bb91380b [#1228](https://github.com/duckduckgo/autoconsent/pull/1228) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
+- Fix Didomi selfTest under CCPA/CPRA (newrepublic.com) [#1324](https://github.com/duckduckgo/autoconsent/pull/1324) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Tweak Onetrust and Trustarc [#1252](https://github.com/duckduckgo/autoconsent/pull/1252) ([@muodov](https://github.com/muodov))
+- Onetrust: handle CCPA notice-only banner variant (columbia.com) [#1325](https://github.com/duckduckgo/autoconsent/pull/1325) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix cookieconsent3 opt-out on testsieger.de (open preferences modal when no inline reject button) [#1322](https://github.com/duckduckgo/autoconsent/pull/1322) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix cookieconsent2 false-positive blocking didomi opt-out on Evite [#1323](https://github.com/duckduckgo/autoconsent/pull/1323) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Make Didomi popup detection robust on nothing.tech [#1326](https://github.com/duckduckgo/autoconsent/pull/1326) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Bump the adblocker group with 2 updates [#1320](https://github.com/duckduckgo/autoconsent/pull/1320) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@github-actions[bot]](https://github.com/github-actions[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.75.0 (Thu Apr 23 2026)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group across 1 directory with 2 updates [#1221](https://github.com/duckduckgo/autoconsent/pull/1221) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
+# v14.74.0 (Wed Apr 22 2026)
+
+#### 🚀 Enhancement
+
+- Fix Sourcepoint opt-out on carwow.co.uk [#1318](https://github.com/duckduckgo/autoconsent/pull/1318) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.73.0 (Sat Apr 18 2026)
+
+#### 🚀 Enhancement
+
+- Remove redundant generated rules [#1227](https://github.com/duckduckgo/autoconsent/pull/1227) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.72.0 (Fri Apr 17 2026)
+
+#### 🚀 Enhancement
+
+- cookieconsent2: add fallback opt-out for sites without reject-all button [#1289](https://github.com/duckduckgo/autoconsent/pull/1289) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- docs: improve Puppeteer integration guide [#1253](https://github.com/duckduckgo/autoconsent/pull/1253) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.71.0 (Tue Apr 14 2026)
+
+#### 🚀 Enhancement
+
+- fix: update rule selectors for goodmoodprints.com, supremecourt.uk, musicnotes.com, degussa-goldhandel.ch; add generic squarespace-cookie-banner and consentmo rules [#1248](https://github.com/duckduckgo/autoconsent/pull/1248) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Replace Didomi consent-o-matic rule with native autoconsent JSON rule [#1247](https://github.com/duckduckgo/autoconsent/pull/1247) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Bump tldts-experimental from 7.0.27 to 7.0.28 [#1243](https://github.com/duckduckgo/autoconsent/pull/1243) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 📝 Documentation
+
+- docs: add puppeteer tutorial [#1152](https://github.com/duckduckgo/autoconsent/pull/1152) ([@Kikobeats](https://github.com/Kikobeats) [@muodov](https://github.com/muodov))
+
+#### 🧪 Tests
+
+- Fix test runner to detect code-based rule changes and generated rules [#1204](https://github.com/duckduckgo/autoconsent/pull/1204) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Jose Francisco 'Kiko' Verdú Gambín ([@Kikobeats](https://github.com/Kikobeats))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.70.0 (Sat Apr 11 2026)
 
 #### 🚀 Enhancement

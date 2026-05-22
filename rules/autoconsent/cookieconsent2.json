@@ -10,7 +10,7 @@
     ],
     "detectPopup": [
         {
-            "visible": "#cm"
+            "exists": "html.show--consent #cm"
         },
         {
             "exists": "#s-all-bn"
@@ -23,7 +23,9 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#s-rall-bn"
+            "if": { "exists": "#s-rall-bn" },
+            "then": [{ "waitForThenClick": "#s-rall-bn" }],
+            "else": [{ "waitForThenClick": "#c-s-bn" }, { "wait": 500 }, { "waitForThenClick": "#s-sv-bn" }]
         }
     ],
     "test": [

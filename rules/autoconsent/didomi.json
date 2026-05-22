@@ -3,10 +3,10 @@
     "prehideSelectors": [
         "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium"
     ],
-    "detectCmp": [{ "visible": "#didomi-host" }],
+    "detectCmp": [{ "exists": "#didomi-host" }],
     "detectPopup": [
         {
-            "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner",
+            "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner, #didomi-host:not(:empty)",
             "check": "any"
         }
     ],
