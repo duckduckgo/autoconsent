@@ -1,3 +1,16 @@
+# v14.84.1 (Fri May 22 2026)
+
+#### 🐛 Bug Fix
+
+- Fix tesco.com cookie popup race condition [#1357](https://github.com/duckduckgo/autoconsent/pull/1357) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.84.0 (Tue May 19 2026)
 
 #### 🚀 Enhancement
