@@ -347,18 +347,41 @@ BUT if the non-cosmetic rule is site-specific and the cosmetic rule is generic:
 ### Goal
 
 Ensure that a CMP that passes `detectCmp` but fails `detectPopup` does not prevent
-other rules from being tried.
+other rules from being tried — while respecting priority so that a fast lower-priority
+rule (especially heuristic) does not pre-empt a higher-priority rule that needs more
+time.
 
-### Approach: Stage Fallthrough on Popup Failure
+### The speed asymmetry problem
 
-Rather than merging `detectCmp` and `detectPopup` into a single phase (which would make
-the detection cascade much slower, since `waitForPopup` involves up to 5 seconds of
-retries per CMP), the proposed change keeps the two-phase structure but adds
-**fallthrough logic**: if all detected CMPs in a stage fail popup detection, continue to
-the next stage.
+Rule types have dramatically different detection speeds:
 
-This is a more surgical change that preserves the performance characteristics of the
-current design while fixing the blocking problem.
+| Rule type | `detectCmp()` speed | `detectPopup()` speed | Total |
+|-----------|--------------------|-----------------------|-------|
+| **Site-specific / Generic** (declarative) | Instant (DOM check) | `waitForPopup`: up to 10 retries × 500ms = **~5s** | ~5s worst case |
+| **Heuristic** | Instant (synchronous DOM walk + text matching via `getActionablePopups()`) | Instant (`this.popups.length > 0`, data already computed in `detectCmp`) | **< 50ms** |
+
+The heuristic rule's `detectCmp()` does a full synchronous DOM scan — walking all
+fixed/sticky/dialog elements, checking text against consent patterns, and classifying
+reject buttons. Its `detectPopup()` then simply checks whether `this.popups` is
+non-empty. Both phases complete in a single synchronous pass.
+
+This means: in any concurrent design, the heuristic will almost always win the race
+against declarative rules whose popup is still loading. A naive fallthrough that tries
+stages sequentially but quickly would let the heuristic pre-empt a higher-priority rule
+that just needs a few hundred more milliseconds.
+
+### Approach: Concurrent Detection with Priority Gates
+
+The proposed design runs all stages' popup detection **concurrently** for maximum speed,
+but resolves results through a **priority-gated drain**: a higher-priority stage must
+fully settle (or a minimum grace period must elapse) before a lower-priority result is
+accepted.
+
+This gives us:
+- **No blocking**: a CMP-detected-but-no-popup stage doesn't block lower stages
+- **Priority respect**: heuristic doesn't pre-empt a generic rule that's still loading
+- **Performance**: all popup detection runs in parallel, total time ≈ max(stage times)
+  rather than sum(stage times)
 
 ### Current Flow (simplified)
 
@@ -381,31 +404,47 @@ _start():
 
 ```
 _start():
+  # Phase 1: detectCmp for ALL stages (fast, parallel)
+  stageResults = []
   for stage in [site-specific, generic, heuristic]:
-    detected = runDetectCmp(stage.rules)
-    if detected.length == 0:
-      continue                 ← no CMP in this stage, try next
+    detected = runDetectCmp(stage.rules)    ← instant, no waits
+    stageResults.push({ stage, detected })
 
-    static, cosmetic = split(detected)
-    popups = detectPopups(static)
-    if popups.length == 0:
-      popups = detectPopups(cosmetic)
+  # Phase 2: start popup detection for ALL detected CMPs concurrently
+  for each stageResult with detected CMPs:
+    stageResult.popupTask = detectPopups(stageResult.detected)   ← started NOW
+
+  # Phase 3: resolve in priority order with grace periods
+  for each stageResult (highest priority first):
+    if stageResult has no detected CMPs:
+      continue                               ← skip instantly, no delay
+
+    popups = await stageResult.popupTask     ← may already be resolved
     if popups.length > 0:
       handlePopup(first)
-      return                   ← success, stop
-    else:
-      continue                 ← CMP detected but no popup — try next stage
+      cancel remaining lower-priority tasks
+      return                                 ← success
+
+    # This stage's CMP was detected but no popup shown.
+    # Ensure minimum grace period has elapsed before accepting
+    # a lower-priority result:
+    await ensureMinElapsed(stageResult.minGracePeriod)
+    continue                                 ← fall through to next stage
 ```
 
-### Detailed Design
+### Detailed Design (Recommended)
 
-#### Option A: Move stage loop into `_start()` (Recommended)
-
-Merge the `findCmp()` stage loop with the popup detection logic in `_start()`. This
-eliminates the separation between the two phases for cross-stage purposes while keeping
-them separate within a single stage (which is the correct behavior).
+#### Core: `_start()` with concurrent popup detection and priority drain
 
 ```typescript
+type StageResult = {
+  name: string;
+  detected: AutoCMP[];
+  popupTask: Promise<AutoCMP[]> | null;
+  handleResult: boolean;
+  minGracePeriod: number; // ms before accepting a lower-priority result
+};
+
 async _start() {
   const logsConfig = this.config.logs;
   logsConfig.lifecycle && console.log(`Detecting CMPs on ${window.location.href}`);
@@ -428,56 +467,317 @@ async _start() {
       ? [new AutoConsentHeuristicCMP(this)]
       : [];
 
-  const stages: [string, AutoCMP[]][] = [
-    ['site-specific', siteSpecificRules],
-    ['generic', genericRules],
-    ['heuristic', heuristicRules],
+  const stages: StageResult[] = [
+    { name: 'site-specific', detected: [], popupTask: null, handleResult: false,
+      minGracePeriod: 0 },      // highest priority — no grace period
+    { name: 'generic',       detected: [], popupTask: null, handleResult: false,
+      minGracePeriod: 0 },      // checked after site-specific settles
+    { name: 'heuristic',     detected: [], popupTask: null, handleResult: false,
+      minGracePeriod: 2000 },   // must wait for higher-priority stages
+  ];
+  const ruleGroups = [siteSpecificRules, genericRules, heuristicRules];
+
+  const startTime = Date.now();
+
+  // === Phase 1: detectCmp for all stages (fast, parallel) ===
+  await Promise.all(ruleGroups.map(async (rules, i) => {
+    stages[i].detected = await this.runDetectCmpForGroup(rules);
+  }));
+
+  this.updateState({
+    detectedCmps: stages.flatMap(s => s.detected.map(c => c.name)),
+  });
+
+  const anyDetected = stages.some(s => s.detected.length > 0);
+  if (!anyDetected) {
+    // No CMP detected in any stage on this attempt — enter retry loop
+    return this.retryOrGiveUp(stages, ruleGroups, startTime);
+  }
+
+  this.updateState({ lifecycle: 'cmpDetected' });
+
+  // === Phase 2: start popup detection for ALL detected CMPs concurrently ===
+  for (const stage of stages) {
+    if (stage.detected.length > 0) {
+      stage.popupTask = this.detectPopupsForStage(stage.detected);
+    }
+  }
+
+  // === Phase 3: resolve in priority order with grace periods ===
+  for (const stage of stages) {
+    if (!stage.popupTask) continue;
+
+    const popups = await stage.popupTask;
+    if (popups.length > 0) {
+      // This stage found a popup — handle it
+      logsConfig.lifecycle &&
+        console.log(`${stage.name}: popup found, handling`);
+      return this.handlePopup(popups[0]);
+    }
+
+    // Stage had CMP but no popup. Enforce grace period before proceeding.
+    const elapsed = Date.now() - startTime;
+    const remaining = stage.minGracePeriod - elapsed;
+    if (remaining > 0) {
+      logsConfig.lifecycle &&
+        console.log(`${stage.name}: no popup, waiting ${remaining}ms grace period`);
+      await this.domActions.wait(remaining);
+    }
+
+    logsConfig.lifecycle &&
+      console.log(`${stage.name}: CMP detected but no popup, trying next stage`);
+  }
+
+  // All stages exhausted — retry or give up
+  return this.retryOrGiveUp(stages, ruleGroups, startTime);
+}
+```
+
+#### The grace period mechanism
+
+The `minGracePeriod` field on each stage controls how long higher-priority stages are
+given to resolve before a lower-priority result is accepted.
+
+The timing works as follows:
+
+```
+Timeline example:
+  t=0ms     detectCmp() for ALL stages runs (fast, parallel)
+            → generic detects OneTrust (element exists)
+            → heuristic detects a popup (instant DOM scan)
+
+  t=0ms     Phase 2: start waitForPopup() for both concurrently
+            → heuristic popup resolves immediately (< 50ms)
+            → generic starts waitForPopup retries
+
+  Phase 3 (priority drain):
+  t=0ms     Check site-specific: no CMPs detected → skip (no delay)
+  t=0ms     Check generic: popupTask still pending...
+  t=800ms   generic popup found! → handle it, done.
+            (heuristic result is discarded)
+
+  OR:
+  t=0ms     Check site-specific: skip
+  t=0ms     Check generic: popupTask pending...
+  t=5000ms  generic popup NOT found (all retries exhausted)
+            Grace period for generic stage: 0ms (already elapsed)
+  t=5000ms  Check heuristic: popup was found at t=50ms, result ready
+            → handle heuristic, done.
+
+  OR (the critical race scenario):
+  t=0ms     Check site-specific: skip
+  t=0ms     Check generic: no CMPs detected → skip (no delay)
+            BUT heuristic has minGracePeriod=2000ms
+            Elapsed = ~0ms, remaining = 2000ms
+  t=0ms     Check... wait, generic had no CMPs so no grace needed.
+            Check heuristic: minGracePeriod is on heuristic itself.
+```
+
+Actually, the grace period semantics need refinement. The grace period should mean:
+"don't accept results from this stage until at least N ms have passed since detection
+started" — this gives higher-priority stages time to resolve even when the current
+stage resolves instantly.
+
+Revised logic for Phase 3:
+
+```typescript
+  // === Phase 3: resolve in priority order with grace periods ===
+  for (const stage of stages) {
+    if (!stage.popupTask) continue;
+
+    // Enforce this stage's grace period BEFORE checking its result.
+    // This gives higher-priority stages (whose popupTasks are being
+    // awaited above us) time to resolve.
+    const elapsed = Date.now() - startTime;
+    const remaining = stage.minGracePeriod - elapsed;
+    if (remaining > 0) {
+      logsConfig.lifecycle &&
+        console.log(`Waiting ${remaining}ms before accepting ${stage.name} results`);
+      await this.domActions.wait(remaining);
+    }
+
+    const popups = await stage.popupTask;
+    if (popups.length > 0) {
+      return this.handlePopup(popups[0]);
+    }
+
+    logsConfig.lifecycle &&
+      console.log(`${stage.name}: CMP detected but no popup, trying next stage`);
+  }
+```
+
+Wait — this doesn't work either, because we're draining sequentially. By the time we
+reach the heuristic stage, we've already awaited all higher-priority stages' results.
+The grace period is only useful if we skip the higher-priority await. Let me think about
+this differently.
+
+The real design should be:
+
+```
+Phase 3 (correct priority drain):
+
+  for each stage (highest priority first):
+    if stage has no popupTask → continue (no delay)
+
+    result = await stage.popupTask    ← BLOCKS here until this stage settles
+    if result has popups → handle it, done
+
+    # This stage failed. No grace period needed because we already
+    # spent real time waiting for this stage's popup retries.
+    continue
+```
+
+**The natural blocking of `await stage.popupTask` IS the grace period.** When we await
+the generic stage's popup detection (which takes up to 5 seconds of retries), the
+heuristic's result — which resolved instantly — just sits there waiting. It's only
+checked after generic exhausts its retries. That's exactly the desired behavior.
+
+The `minGracePeriod` is only needed for stages that have **no detected CMPs** — where
+the await would skip instantly — to still ensure a minimum delay before accepting a
+lower-priority result. This handles the edge case where no CMP is detected in site-
+specific/generic stages (instant skip) but heuristic resolves immediately.
+
+```
+Scenario: no CMP in site-specific or generic, heuristic finds popup instantly
+
+Without grace period:
+  t=0ms  Check site-specific: no CMPs → skip
+  t=0ms  Check generic: no CMPs → skip
+  t=0ms  Check heuristic: popup found → handle immediately
+  Total: ~0ms  ← This is actually CORRECT! No competing rules existed.
+
+Scenario: generic CMP detected (slow popup), heuristic finds popup instantly
+
+Without grace period:
+  t=0ms     Check site-specific: no CMPs → skip
+  t=0ms     Check generic: await popupTask...
+  t=5000ms  Generic popup not found (retries exhausted)
+  t=5000ms  Check heuristic: popup found → handle
+  Total: ~5s  ← Correct, but slow.
+
+With concurrent approach:
+  t=0ms     Generic popup detection starts (concurrent)
+  t=0ms     Heuristic popup detection starts (concurrent, resolves instantly)
+  t=0ms     Priority drain: await generic popupTask...
+  t=5000ms  Generic failed → check heuristic (already resolved) → handle
+  Total: ~5s  ← Same wall time, but correct priority.
+```
+
+So actually, the concurrent approach **already preserves priority** through the
+sequential drain — no explicit grace period needed for the normal case. The wall-clock
+time is dominated by the highest-priority stage that has detected CMPs.
+
+However, there's a subtlety the `minGracePeriod` addresses: **when `detectCmp` itself
+might produce different results on retry.** Consider:
+
+```
+Attempt 1, t=0ms:
+  site-specific detectCmp: false (CMP script hasn't loaded yet)
+  generic detectCmp: false
+  heuristic detectCmp: true (popup HTML is in initial page load)
+
+Without any grace: heuristic handles immediately.
+But at t=500ms, generic detectCmp would return true (script loaded).
+```
+
+The `minGracePeriod` on the heuristic stage addresses this: even when no higher-priority
+CMP is detected on the first attempt, we wait before accepting the heuristic result to
+give higher-priority rules a chance to appear on a retry.
+
+#### Final design: concurrent detection with retry-aware priority drain
+
+```typescript
+async _start() {
+  const logsConfig = this.config.logs;
+  logsConfig.lifecycle && console.log(`Detecting CMPs on ${window.location.href}`);
+  this.updateState({ lifecycle: 'started' });
+
+  const { siteSpecificRules, genericRules, heuristicRules } =
+    this.categorizeRules();
+
+  const stageConfigs = [
+    { name: 'site-specific', rules: siteSpecificRules, minGracePeriod: 0 },
+    { name: 'generic',       rules: genericRules,       minGracePeriod: 0 },
+    { name: 'heuristic',     rules: heuristicRules,     minGracePeriod: 1500 },
   ];
 
-  let result = false;
+  const mutationObserver = this.domActions.waitForMutation('html');
+  mutationObserver.catch(() => {});
 
   for (let attempt = 0; attempt <= this.config.detectRetries; attempt++) {
     this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
+    const attemptStart = Date.now();
 
-    for (const [stageName, ruleGroup] of stages) {
-      if (ruleGroup.length === 0) continue;
+    // Phase 1: detectCmp for ALL stages (fast, parallel)
+    const stageResults = await Promise.all(
+      stageConfigs.map(async (cfg) => ({
+        ...cfg,
+        detected: await this.runDetectCmpForGroup(cfg.rules),
+      }))
+    );
 
-      // Phase 1: detectCmp (fast, no waits)
-      const foundCMPs = await this.runDetectCmpForGroup(ruleGroup);
-      if (foundCMPs.length === 0) continue;
+    this.detectHeuristics();
+    this.updateState({
+      detectedCmps: stageResults.flatMap(s => s.detected.map(c => c.name)),
+    });
 
-      this.updateState({
-        lifecycle: 'cmpDetected',
-        detectedCmps: foundCMPs.map(c => c.name),
-      });
+    // Phase 2: start popup detection concurrently for all stages with CMPs
+    const popupTasks = stageResults.map((stage) =>
+      stage.detected.length > 0
+        ? this.detectPopupsForStage(stage.detected)
+        : null
+    );
 
-      // Phase 2: detectPopup (with retries)
-      const staticCmps = foundCMPs.filter(c => !c.isCosmetic);
-      const cosmeticCmps = foundCMPs.filter(c => c.isCosmetic);
+    const anyDetected = popupTasks.some(t => t !== null);
 
-      let foundPopups = await this.detectPopups(staticCmps, async (cmp) => {
-        result = await this.handlePopup(cmp);
-      });
-      if (foundPopups.length === 0) {
-        foundPopups = await this.detectPopups(cosmeticCmps, async (cmp) => {
-          result = await this.handlePopup(cmp);
-        });
+    if (anyDetected) {
+      this.updateState({ lifecycle: 'cmpDetected' });
+
+      // Phase 3: priority drain — await stages in order
+      for (let i = 0; i < stageResults.length; i++) {
+        const stage = stageResults[i];
+        const task = popupTasks[i];
+        if (!task) continue;
+
+        const popups = await task;  // blocks until this stage fully settles
+        if (popups.length > 0) {
+          return this.handlePopup(popups[0]);
+        }
+
+        logsConfig.lifecycle &&
+          console.log(`${stage.name}: CMP detected but no popup`);
       }
 
-      if (foundPopups.length > 0) {
-        // Success — popup found and handled
-        return result;
-      }
-
-      // CMP detected but no popup — FALL THROUGH to next stage
-      logsConfig.lifecycle &&
-        console.log(`${stageName}: CMP detected but no popup, trying next stage`);
+      // All stages with CMPs failed popup detection.
+      // Before falling to heuristic (if it wasn't already tried above),
+      // or before retrying, check if any stage's grace period demands
+      // we wait longer.
+      //
+      // In practice, this path means: a CMP was detected somewhere but
+      // no popup appeared. We'll retry on the next attempt.
     }
 
-    // No stage produced a popup on this attempt — retry if allowed
+    // Enforce minimum grace period for the lowest-priority stage that
+    // has pending results. This prevents premature acceptance on the
+    // NEXT attempt's heuristic check.
+    const elapsed = Date.now() - attemptStart;
+    const maxGrace = Math.max(
+      ...stageConfigs
+        .filter((_, i) => !popupTasks[i]) // stages with no CMPs this round
+        .map(s => s.minGracePeriod)
+    );
+    const graceRemaining = maxGrace - elapsed;
+
+    // Retry: wait for DOM changes before next attempt
     if (attempt < this.config.detectRetries) {
-      await this.domActions.wait(500);
-      // optionally wait for DOM mutation too
+      const retryDelay = Math.max(500, graceRemaining);
+      try {
+        await Promise.all([this.domActions.wait(retryDelay), mutationObserver]);
+      } catch (e) {
+        break;
+      }
+      mutationObserver = this.domActions.waitForMutation('html');
+      mutationObserver.catch(() => {});
     }
   }
 
@@ -490,48 +790,202 @@ async _start() {
 }
 ```
 
-#### Option B: Keep `findCmp()` but add fallthrough (Alternative)
+#### Helper: `detectPopupsForStage`
 
-Modify `findCmp()` to return results **per stage**, then let `_start()` try each stage's
-results for popup detection before moving to the next.
+Runs popup detection for a set of CMPs (static first, then cosmetic fallback) without
+triggering `handlePopup` — returns the list of CMPs with open popups so the caller can
+decide when to act.
 
 ```typescript
-async findCmpByStage(retries: number): Promise<[string, AutoCMP[]][]> {
-  // Returns: array of [stageName, detectedCMPs] for stages that had matches
-  // Caller iterates and checks popup detection per stage
+async detectPopupsForStage(cmps: AutoCMP[]): Promise<AutoCMP[]> {
+  const staticCmps = cmps.filter(c => !c.isCosmetic);
+  const cosmeticCmps = cmps.filter(c => c.isCosmetic);
+
+  let popups = await this.waitForPopupsSettled(staticCmps);
+  if (popups.length === 0 && cosmeticCmps.length > 0) {
+    popups = await this.waitForPopupsSettled(cosmeticCmps);
+  }
+  return popups;
+}
+
+async waitForPopupsSettled(cmps: AutoCMP[]): Promise<AutoCMP[]> {
+  const tasks = cmps.map((cmp) =>
+    this.waitForPopup(cmp)
+      .then((found) => (found ? cmp : null))
+      .catch(() => null)
+  );
+  const results = await Promise.allSettled(tasks);
+  return results
+    .filter((r): r is PromiseFulfilledResult<AutoCMP> =>
+      r.status === 'fulfilled' && r.value !== null)
+    .map(r => r.value);
 }
 ```
 
-This is less clean because it splits the control flow across two methods, but it
-minimizes the diff from the current implementation.
+#### Helper: `categorizeRules`
+
+Extracted from `findCmp()` for reuse:
+
+```typescript
+categorizeRules() {
+  const isTop = isTopFrame();
+  const siteSpecificRules: AutoCMP[] = [];
+  const genericRules: AutoCMP[] = [];
+  this.rules.forEach((cmp) => {
+    if (cmp.checkFrameContext(isTop)) {
+      if (cmp.hasMatchingUrlPattern()) {
+        siteSpecificRules.push(cmp);
+      } else if (!cmp.runContext.urlPattern) {
+        genericRules.push(cmp);
+      }
+    }
+  });
+  const heuristicRules: AutoCMP[] =
+    isTop && this.config.enableHeuristicAction
+      ? [new AutoConsentHeuristicCMP(this)]
+      : [];
+
+  return { siteSpecificRules, genericRules, heuristicRules };
+}
+```
+
+#### Why the priority drain works without explicit inter-stage delays
+
+Consider the key scenarios:
+
+**Scenario A: Generic CMP detected (slow popup) + heuristic (instant)**
+```
+t=0ms     Phase 1: generic detectCmp ✓, heuristic detectCmp ✓
+t=0ms     Phase 2: start waitForPopup(generic) AND heuristic popupTask
+          heuristic resolves at t≈50ms. Generic retries until t≈5000ms.
+Phase 3 drain:
+  t=0ms   site-specific: no task → skip
+  t=0ms   generic: await popupTask... (blocks for ~5s)
+  t=5000ms generic popup not found → continue
+  t=5000ms heuristic: await popupTask (already resolved at t=50ms) → found!
+  → handle heuristic. Total: ~5s.
+```
+The heuristic waited the full 5 seconds of generic retries — priority respected.
+
+**Scenario B: No CMP in generic + heuristic (instant)**
+```
+t=0ms     Phase 1: generic detectCmp ✗, heuristic detectCmp ✓
+t=0ms     Phase 2: only heuristic has a popupTask
+Phase 3 drain:
+  t=0ms   site-specific: skip
+  t=0ms   generic: no task → skip
+  t=0ms   heuristic: await popupTask → found!
+  → handle heuristic immediately. Total: ~0ms.
+```
+No competing rules — heuristic should win fast. But should it? What if generic's CMP
+element appears at t=500ms? This is where `minGracePeriod` on the retry loop matters.
+
+**Scenario B with grace period:**
+```
+Attempt 0, t=0ms:
+  Phase 1: generic ✗, heuristic ✓
+  Phase 3: heuristic found popup
+  BUT: grace period for heuristic = 1500ms, elapsed = 50ms
+  → should we enforce grace here?
+```
+
+This is the design choice. Two valid options:
+
+**Option 1: Enforce grace period before accepting heuristic result.** If generic had no
+CMPs this round, we delay accepting the heuristic result by `minGracePeriod`, then
+re-check whether generic has appeared:
+
+```typescript
+// In Phase 3, before accepting a stage's result:
+const elapsed = Date.now() - attemptStart;
+if (stage.minGracePeriod > 0 && elapsed < stage.minGracePeriod) {
+  // Higher-priority stages had no CMPs — but they might appear soon.
+  // Wait, then re-run detectCmp for higher-priority stages.
+  await this.domActions.wait(stage.minGracePeriod - elapsed);
+  const recheck = await this.recheckHigherPriorityStages(stageConfigs, i);
+  if (recheck) {
+    // A higher-priority stage now has a CMP — restart the drain
+    continue outerLoop;
+  }
+}
+```
+
+**Option 2 (simpler, recommended): Let the retry loop handle it.** On the first
+attempt, if only heuristic detects anything, its grace period inflates the retry delay.
+On the next attempt, generic might now have its CMP element. The priority drain on the
+second attempt would then correctly prefer generic.
+
+This is simpler and consistent with the existing retry model. The retry loop already
+waits 500ms + DOM mutation between attempts; the grace period just ensures the first few
+retries aren't cut short:
+
+```typescript
+// In the retry section at the bottom of the attempt loop:
+if (attempt < this.config.detectRetries) {
+  const elapsed = Date.now() - attemptStart;
+  const pendingGrace = stageConfigs
+    .filter((cfg, i) => popupTasks[i] !== null) // stages that had CMPs
+    .reduce((max, cfg) => Math.max(max, cfg.minGracePeriod), 0);
+  const retryDelay = Math.max(500, pendingGrace - elapsed);
+  await this.domActions.wait(retryDelay);
+}
+```
+
+If heuristic found a popup on attempt 0 (at t=50ms), the retry delay becomes
+`max(500, 1500 - 50) = 1450ms`. On attempt 1, generic's CMP element might now exist,
+and its popup detection would take priority in the drain.
+
+If no higher-priority CMP appears after the grace period, the heuristic result is
+accepted on the next attempt. This adds at most one retry's delay (~1.5s) for the
+heuristic case — an acceptable tradeoff for correctness.
+
+### Grace period configuration
+
+| Stage | `minGracePeriod` | Rationale |
+|-------|-----------------|-----------|
+| site-specific | 0ms | Highest priority — accepted immediately |
+| generic | 0ms | Only deferred by site-specific's popup retries (natural drain) |
+| heuristic | 1500ms | Must wait for site-specific/generic CMP elements to appear. Covers typical lazy-load delays without excessive waiting. |
+
+The 1500ms value for heuristic is a starting point. It should be tuned based on
+real-world data about how long CMP scripts typically take to inject their DOM elements
+after page load. It can be exposed as a config option if needed:
+
+```typescript
+type Config = {
+  // ... existing fields ...
+  heuristicGracePeriod: number; // ms to wait before accepting heuristic over
+                                // absent higher-priority rules (default: 1500)
+};
+```
 
 ### Behavioral Changes
 
 | Scenario | Before | After |
 |----------|--------|-------|
-| Site-specific CMP detected, no popup; generic CMP has popup | **Blocked** — generic never tried | **Fixed** — falls through to generic |
-| Generic CMP detected, no popup; heuristic would catch it | **Blocked** — heuristic never tried | **Fixed** — falls through to heuristic |
-| Site-specific CMP detected with popup | Works (stops at stage 1) | Same — stops at stage 1 |
+| Site-specific CMP detected, no popup; generic CMP has popup | **Blocked** — generic never tried | **Fixed** — generic popup found concurrently, accepted after site-specific settles |
+| Generic CMP detected, no popup; heuristic would catch it | **Blocked** — heuristic never tried | **Fixed** — heuristic popup found concurrently, accepted after generic settles |
+| Generic CMP slow to load; heuristic matches instantly | N/A (heuristic blocked) | **Correct** — heuristic waits for grace period, then generic appears on retry |
+| No CMP in any stage; heuristic matches | N/A (heuristic blocked by generic) | **Correct** — heuristic waits grace period, no higher-priority CMP appears, accepted |
+| Site-specific CMP detected with popup | Works (stops at stage 1) | Same — stops at site-specific in drain |
 | Two generic CMPs, one has popup | Works (parallel within stage) | Same — parallel within stage |
-| Retry starvation (early detect, late popup) | **Blocked** — retries stop | **Fixed** — retries continue per-stage |
 
 ### Performance Implications
 
-**Worst case:** A site-specific rule detects CMP but popup never shows. Currently the
-engine spends ~5s on `waitForPopup` before giving up entirely. With the proposed change,
-it would then proceed to generic rules (another ~5s if a CMP is detected there too). In
-the absolute worst case (CMP detected in every stage, popup in none), detection time
-increases from ~5s to ~15s.
+**Common case (single CMP, popup visible):** Zero overhead. The CMP is detected in
+Phase 1, its popup is found in Phase 2, and the priority drain accepts it immediately.
 
-**Mitigation:** The `waitForPopup` timeout per rule is already capped (10 retries *
-500ms = 5s). The extra time is only spent when a CMP **is** detected (DOM elements
-exist) but the popup doesn't show — a relatively uncommon scenario. For the common case
-(CMP detected + popup visible), there is zero performance impact because the flow stops
-at the first successful stage, same as today.
+**Fallthrough case (CMP detected, no popup):** Instead of the current ~5s timeout
+followed by giving up, the engine continues to the next stage. Since all stages' popup
+detection runs concurrently, the total wall time is approximately
+`max(stage_settle_times)` rather than `sum(stage_settle_times)`. In the worst case
+(CMP detected in every stage, popup in none), total time is still ~5s (the longest
+`waitForPopup` duration), not ~15s.
 
-**Optimization opportunity:** When falling through to the next stage, the timeout for
-`waitForPopup` could be reduced (e.g., from 10 retries to 5) since we already know the
-previous stage's popup didn't appear promptly.
+**Heuristic grace period:** Adds at most ~1.5s in the specific case where only the
+heuristic finds a match and no higher-priority CMP is present. This is acceptable
+because the heuristic is a last resort, and the delay ensures we don't miss a
+higher-priority rule whose DOM elements are still loading.
 
 ### Migration Risk
 
@@ -539,21 +993,35 @@ previous stage's popup didn't appear promptly.
   the behavior is identical.
 - **Low risk for the fallthrough case:** The new behavior is strictly better — it tries
   more rules instead of giving up.
+- **Heuristic timing:** The grace period adds a small delay for heuristic-only matches.
+  Monitor for user-perceived latency in regions where heuristic is the only match.
 - **Edge case to watch:** If a page has two real CMPs (e.g., one in an iframe, one in
   main frame), the stage ordering now matters more. But this is already handled by
   `runContext` frame filtering.
+
+### Key change to `detectPopups`
+
+The current `detectPopups()` method calls `onFirstPopupAppears(cmp)` (which triggers
+`handlePopup`) as a side effect inside `Promise.any`. In the new design, handling must
+be deferred until the priority drain decides which stage wins. The new
+`detectPopupsForStage()` helper returns popup results without side effects; the caller
+in `_start()` calls `handlePopup()` explicitly after priority resolution.
 
 ### Files to Modify
 
 | File | Change |
 |------|--------|
-| `lib/web.ts` | Restructure `_start()` and `findCmp()` to implement stage fallthrough |
-| `lib/web.ts` | Update state management (`detectedCmps`, `findCmpAttempts`) for new loop structure |
-| (tests) | Add test cases for cross-stage fallthrough scenarios |
+| `lib/web.ts` | Restructure `_start()`: concurrent Phase 1/2, priority drain Phase 3 |
+| `lib/web.ts` | Add `detectPopupsForStage()`, `waitForPopupsSettled()`, `categorizeRules()` helpers |
+| `lib/web.ts` | Deprecate or refactor `findCmp()` (logic absorbed into `_start()`) |
+| `lib/web.ts` | Refactor `detectPopups()` to separate detection from handling |
+| `lib/web.ts` | Update state management for new loop structure |
+| `lib/types.ts` | (Optional) Add `heuristicGracePeriod` to `Config` |
+| (tests) | Add test cases for: cross-stage fallthrough, heuristic grace period, concurrent popup detection |
 
 ### What NOT to change
 
-- `detectPopups()` / `waitForPopup()` — internal retry logic is fine as-is
+- `waitForPopup()` — internal retry logic is fine as-is
 - `handlePopup()` / `doOptOut()` / `doOptIn()` — action logic is unrelated
 - Rule evaluation (`evaluateRuleStep`, `_runRulesSequentially`) — no change needed
 - `filterCMPs()` / `parseDeclarativeRules()` — rule loading is unrelated
