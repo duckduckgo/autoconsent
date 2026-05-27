@@ -1,3 +1,16 @@
+# v14.85.0 (Wed May 27 2026)
+
+#### 🚀 Enhancement
+
+- Add lucozade.com rule for custom cookie popup [#1364](https://github.com/duckduckgo/autoconsent/pull/1364) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.84.2 (Sat May 23 2026)
 
 #### 🐛 Bug Fix
