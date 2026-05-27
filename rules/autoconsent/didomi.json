@@ -3,7 +3,14 @@
     "prehideSelectors": [
         "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium"
     ],
-    "detectCmp": [{ "exists": "#didomi-host" }],
+    "detectCmp": [
+        { "exists": "#didomi-host" },
+        {
+            "comment": "Avoid detecting Prisa Media's custom 'pay or accept' cookiewall (e.g. elpais.com), which loads Didomi but renders its own popup that we cannot dismiss without forcing a choice.",
+            "exists": ".pmConsentWall",
+            "negated": true
+        }
+    ],
     "detectPopup": [
         {
             "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner, #didomi-host:not(:empty)",
