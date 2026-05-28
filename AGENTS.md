@@ -150,6 +150,17 @@ Use the `/publicwww-search` skill to search website source code for CMP-specific
 
 Requires `PUBLICWWW_KEY` environment variable.
 
+## Checking for Existing Site Exceptions in `privacy-configuration`
+
+Some sites have autoconsent disabled entirely via the `duckduckgo/privacy-configuration` repo. Before investigating a reported popup, check whether an exception already exists for the domain in:
+
+- `features/autoconsent.json`
+- `overrides/{android,ios,macos,windows,extension}-override.json` and any files under `overrides/browsers/`
+
+**Do NOT rely on `gh search code` for this lookup.** GitHub's code search index has a per-file size limit and `features/autoconsent.json` is excluded — searches for the domain there silently return zero hits even when an exception exists.
+
+Instead, fetch the file directly and grep locally, and/or list PRs by title.
+
 ## Verification
 
 After creating or modifying a rule:
