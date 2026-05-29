@@ -150,6 +150,35 @@ Use the `/publicwww-search` skill to search website source code for CMP-specific
 
 Requires `PUBLICWWW_KEY` environment variable.
 
+## Checking for Existing Site Exceptions in `privacy-configuration`
+
+Some sites have autoconsent disabled entirely via the `duckduckgo/privacy-configuration` repo. Before investigating a reported popup, check whether an exception already exists for the domain in:
+
+- `features/autoconsent.json`
+- `overrides/{android,ios,macos,windows,extension}-override.json` and any files under `overrides/browsers/`
+
+**Do NOT rely on `gh search code` for this lookup.** GitHub's code search index has a per-file size limit (~384 KB) and `features/autoconsent.json` (~930 KB) is excluded — searches for the domain there silently return zero hits even when an exception exists.
+
+Instead, fetch the file directly and grep locally, and/or list PRs by title:
+
+```bash
+# Fetch and grep features/autoconsent.json
+gh api repos/duckduckgo/privacy-configuration/contents/features/autoconsent.json \
+  --jq '.content' | base64 -d | grep -B1 -A2 '"example.com"'
+
+# Check each platform override
+for f in android ios macos windows extension; do
+  echo "=== $f ==="
+  gh api repos/duckduckgo/privacy-configuration/contents/overrides/${f}-override.json \
+    --jq '.content' | base64 -d | grep -B1 -A2 '"example.com"' || echo "no match"
+done
+
+# Cross-check by PR title (covers in-flight or recently merged exceptions)
+gh pr list --repo duckduckgo/privacy-configuration --search "example.com" --state all
+```
+
+If an exception exists, the reported popup is already opted out of autoconsent and no rule change is needed — report the linked PR and its referenced Asana task instead.
+
 ## Verification
 
 After creating or modifying a rule:
