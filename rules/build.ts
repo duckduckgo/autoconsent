@@ -4,6 +4,7 @@ import path from 'path';
 import https from 'https';
 import { encodeRules, deduplicateRules } from '../lib/encoding';
 import { AutoConsentCMPRule } from '../lib/rules';
+import { buildRuleIndex } from './rule-index-builder';
 
 export const rulesDir = __dirname;
 
@@ -61,6 +62,9 @@ export async function buildConsentOMaticRules() {
 
     fs.writeFile(path.join(rulesDir, 'rules.json'), stringify({ autoconsent }), () => console.log('Written rules.json'));
     fs.writeFile(path.join(rulesDir, 'consentomatic.json'), stringify({ consentomatic }), () => console.log('Written consentomatic.json'));
+    fs.writeFile(path.join(rulesDir, 'rule-index.json'), stringify(buildRuleIndex(autoconsent, consentomatic)), () =>
+        console.log('Written rule-index.json'),
+    );
     fs.writeFile(compactRulesPath, stringify(encodeRules(autoconsent, existingCompactRules)), () =>
         console.log('Written compact-rules.json'),
     );

@@ -26,8 +26,10 @@ cp -r addon/icons dist/addon-mv3/
 cp -r addon/icons dist/addon-firefox/
 cp rules/rules.json dist/addon-mv3/
 cp rules/compact-rules.json dist/addon-mv3/
+cp rules/rule-index.json dist/addon-mv3/
 cp rules/rules.json dist/addon-firefox/
 cp rules/compact-rules.json dist/addon-firefox/
+cp rules/rule-index.json dist/addon-firefox/
 cp addon/popup.html dist/addon-mv3/
 cp addon/popup.html dist/addon-firefox/
 cp -r addon/devtools dist/addon-mv3/
