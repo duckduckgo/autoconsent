@@ -14,7 +14,13 @@
         {
             "if": { "exists": ".osano-cm-denyAll,.osano-cm-deny" },
             "then": [{ "click": ".osano-cm-denyAll,.osano-cm-deny" }],
-            "else": [{ "hide": ".osano-cm-window,.osano-cm-dialog" }]
+            "else": [
+                {
+                    "if": { "visible": ".osano-cm-dialog--type_bar .osano-cm-dialog__close" },
+                    "then": [{ "click": ".osano-cm-dialog--type_bar .osano-cm-dialog__close" }],
+                    "else": [{ "hide": ".osano-cm-window,.osano-cm-dialog" }]
+                }
+            ]
         }
     ]
 }

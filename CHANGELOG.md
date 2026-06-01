@@ -1,3 +1,46 @@
+# v14.85.0 (Wed May 27 2026)
+
+#### 🚀 Enhancement
+
+- Add lucozade.com rule for custom cookie popup [#1364](https://github.com/duckduckgo/autoconsent/pull/1364) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.84.2 (Sat May 23 2026)
+
+#### 🐛 Bug Fix
+
+- Add trybe cookie consent rule for try.be sites [#1203](https://github.com/duckduckgo/autoconsent/pull/1203) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
+- Add rule for eltax.lta.go.jp payment portal cookie popup [#1361](https://github.com/duckduckgo/autoconsent/pull/1361) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Add sostereo.com rule [#1360](https://github.com/duckduckgo/autoconsent/pull/1360) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Add TrustArc-newcm rule for new shadow-DOM consent format [#1359](https://github.com/duckduckgo/autoconsent/pull/1359) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.84.1 (Fri May 22 2026)
+
+#### 🐛 Bug Fix
+
+- Fix tesco.com cookie popup race condition [#1357](https://github.com/duckduckgo/autoconsent/pull/1357) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.84.0 (Tue May 19 2026)
 
 #### 🚀 Enhancement

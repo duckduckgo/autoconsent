@@ -1,0 +1,33 @@
+{
+    "name": "lucozade.com",
+    "vendorUrl": "https://lucozade.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?lucozade\\.com/"
+    },
+    "prehideSelectors": ["#cookiePopup", ".cookie-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#cookiePopup"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiePopup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiePopup .acceptCookie"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiePopup .reject-cookie"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_site_acceptance=0"
+        }
+    ]
+}
