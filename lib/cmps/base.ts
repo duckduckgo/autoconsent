@@ -4,7 +4,7 @@ import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
 import { highlightNode, isElementVisible, isTopFrame, unhighlightNode } from '../utils';
-import { getActionablePopups } from '../heuristics';
+import { HeuristicPopupIndex } from '../heuristic-popup-index';
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -419,9 +419,11 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
 export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     popups: PopupData[] = [];
+    private popupIndex: HeuristicPopupIndex;
 
-    constructor(autoconsentInstance: AutoConsent) {
+    constructor(autoconsentInstance: AutoConsent, popupIndex: HeuristicPopupIndex) {
         super(autoconsentInstance);
+        this.popupIndex = popupIndex;
         this.name = 'HEURISTIC';
         this.runContext = {
             main: true,
@@ -441,8 +443,8 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         return false;
     }
 
-    detectCmp(): Promise<boolean> {
-        this.popups = getActionablePopups();
+    async detectCmp(): Promise<boolean> {
+        this.popups = await this.popupIndex.getActionablePopups();
         if (this.popups.length > 0) {
             return Promise.resolve(true);
         }

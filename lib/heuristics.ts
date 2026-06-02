@@ -20,28 +20,6 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
-export function getActionablePopups(): PopupData[] {
-    const popups = getPotentialPopups();
-    const result = popups.reduce((acc, popup) => {
-        const popupText = popup.text?.trim();
-        if (popupText) {
-            const { patterns } = checkHeuristicPatterns(popupText);
-            if (patterns.length > 0) {
-                const { rejectButtons, otherButtons } = classifyButtons(popup.buttons);
-                if (rejectButtons.length > 0) {
-                    acc.push({
-                        ...popup,
-                        rejectButtons,
-                        otherButtons,
-                    });
-                }
-            }
-        }
-        return acc;
-    }, [] as PopupData[]);
-    return result;
-}
-
 export function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; otherButtons: ButtonData[] } {
     const rejectButtons = [];
     const otherButtons = [];
@@ -88,44 +66,6 @@ export function cleanButtonText(buttonText: string): string {
     return result;
 }
 
-function getPotentialPopups() {
-    const isFramed = !isTopFrame();
-    // do not inspect frames that are more than one level deep
-    if (isFramed && window.parent && window.parent !== window.top) {
-        return [];
-    }
-
-    return collectPotentialPopups(isFramed);
-}
-
-function collectPotentialPopups(isFramed: boolean): PopupData[] {
-    let elements = [];
-    if (!isFramed) {
-        elements = getPopupLikeElements();
-    } else {
-        // for iframes, just take the whole document
-        const doc = document.body || document.documentElement;
-        if (doc && isElementVisible(doc) && doc.innerText) {
-            elements.push(doc);
-        }
-    }
-
-    const potentialPopups: PopupData[] = [];
-
-    // for each potential popup, get the buttons
-    for (const el of elements) {
-        if (el.innerText) {
-            potentialPopups.push({
-                text: el.innerText,
-                element: el,
-                buttons: getButtonData(el),
-            });
-        }
-    }
-
-    return potentialPopups;
-}
-
 export function isDialogLikeElement(node: HTMLElement): boolean {
     if (node.tagName === 'DIALOG' && node.hasAttribute('open')) {
         return true;
@@ -134,40 +74,6 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
         return true;
     }
     return false;
-}
-
-/**
- * Heuristic to get all elements that look like "popups"
- * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
- */
-function getPopupLikeElements(): HTMLElement[] {
-    const walker = document.createTreeWalker(
-        document.documentElement,
-        NodeFilter.SHOW_ELEMENT, // visit only element nodes
-        {
-            acceptNode(node: HTMLElement) {
-                if (node.tagName === 'BODY') {
-                    return NodeFilter.FILTER_SKIP;
-                }
-                if (isElementVisible(node)) {
-                    const cssPosition = window.getComputedStyle(node).position;
-                    if (cssPosition === 'fixed' || cssPosition === 'sticky') {
-                        return NodeFilter.FILTER_ACCEPT;
-                    }
-                    if (isDialogLikeElement(node)) {
-                        return NodeFilter.FILTER_ACCEPT;
-                    }
-                }
-                return NodeFilter.FILTER_SKIP;
-            },
-        },
-    );
-
-    const found = [];
-    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-        found.push(node as HTMLElement);
-    }
-    return excludeContainers(found);
 }
 
 /**
@@ -219,3 +125,40 @@ export function excludeContainers(elements: HTMLElement[]): HTMLElement[] {
     }
     return results;
 }
+
+/**
+ * Run heuristic popup detection in iframes (no incremental index; heuristic CMP does not run there).
+ */
+export async function getActionablePopupsInFrame(): Promise<PopupData[]> {
+    const isFramed = !isTopFrame();
+    if (isFramed && window.parent && window.parent !== window.top) {
+        return [];
+    }
+    if (isFramed) {
+        const doc = document.body || document.documentElement;
+        if (!doc || !isElementVisible(doc) || !doc.innerText) {
+            return [];
+        }
+        const potential = {
+            text: doc.innerText,
+            element: doc,
+            buttons: getButtonData(doc),
+        };
+        const popupText = potential.text?.trim();
+        if (!popupText) {
+            return [];
+        }
+        const { patterns } = checkHeuristicPatterns(popupText);
+        if (patterns.length === 0) {
+            return [];
+        }
+        const { rejectButtons, otherButtons } = classifyButtons(potential.buttons);
+        if (rejectButtons.length === 0) {
+            return [];
+        }
+        return [{ ...potential, rejectButtons, otherButtons }];
+    }
+    return [];
+}
+
+export { HeuristicPopupIndex } from './heuristic-popup-index';

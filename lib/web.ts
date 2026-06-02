@@ -10,6 +10,7 @@ import { DomActions } from './dom-actions';
 import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
+import { HeuristicPopupIndex } from './heuristic-popup-index';
 import { decodeRules } from './encoding';
 
 // Re-export types and functions for external use
@@ -29,6 +30,31 @@ export function filterCMPs(rules: AutoCMP[], config: Config) {
         );
     });
 }
+
+export type DetectionBenchmarkStage = {
+    ms: number;
+    ruleCount: number;
+    foundCount?: number;
+};
+
+export type RuleDetectionTiming = {
+    name: string;
+    ms: number;
+    matched: boolean;
+};
+
+export type DetectionBenchmarkResult = {
+    documentInnerTextLength: number;
+    stages: {
+        siteSpecific: DetectionBenchmarkStage;
+        generic: DetectionBenchmarkStage;
+        heuristicCmp: DetectionBenchmarkStage;
+        heuristicPatterns: DetectionBenchmarkStage & { patternCount: number };
+        fullFindCmp: DetectionBenchmarkStage;
+    };
+    genericRuleTimings: RuleDetectionTiming[];
+    slowestGenericRules: RuleDetectionTiming[];
+};
 
 export default class AutoConsent {
     id = getRandomID();
@@ -267,87 +293,95 @@ export default class AutoConsent {
         return result;
     }
 
-    async findCmp(retries: number): Promise<AutoCMP[]> {
+    async findCmp(retries: number, heuristicPopupIndex?: HeuristicPopupIndex): Promise<AutoCMP[]> {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
         const foundCMPs: AutoCMP[] = [];
         const isTop = isTopFrame();
+        const ownsPopupIndex = !heuristicPopupIndex && isTop && this.config.enableHeuristicAction && this.config.detectRetries - retries > 0;
+        const popupIndex = heuristicPopupIndex ?? (ownsPopupIndex ? new HeuristicPopupIndex() : undefined);
 
-        // refilter relevant rules for this context
-        const siteSpecificRules: AutoCMP[] = [];
-        const genericRules: AutoCMP[] = [];
-        this.rules.forEach((cmp) => {
-            // first filter out rules that don't run in this frame-type.
-            if (cmp.checkFrameContext(isTop)) {
-                // Pull out any rule that has a urlPattern that matches here to be prioritized.
-                const isSiteSpecific = !!cmp.runContext.urlPattern;
-                if (cmp.hasMatchingUrlPattern()) {
-                    siteSpecificRules.push(cmp);
-                } else if (!isSiteSpecific) {
-                    genericRules.push(cmp);
+        try {
+            // refilter relevant rules for this context
+            const siteSpecificRules: AutoCMP[] = [];
+            const genericRules: AutoCMP[] = [];
+            this.rules.forEach((cmp) => {
+                // first filter out rules that don't run in this frame-type.
+                if (cmp.checkFrameContext(isTop)) {
+                    // Pull out any rule that has a urlPattern that matches here to be prioritized.
+                    const isSiteSpecific = !!cmp.runContext.urlPattern;
+                    if (cmp.hasMatchingUrlPattern()) {
+                        siteSpecificRules.push(cmp);
+                    } else if (!isSiteSpecific) {
+                        genericRules.push(cmp);
+                    }
+                }
+            });
+            // heuristic CMP is only run in the top frame and only if heuristic action is enabled
+            const heuristicRules = popupIndex ? [new AutoConsentHeuristicCMP(this, popupIndex)] : [];
+
+            const rulesPriorityStages: [string, AutoCMP[]][] = [
+                ['site-specific', siteSpecificRules],
+                ['generic', genericRules],
+                ['heuristic', heuristicRules],
+            ];
+            const runDetectCmp = async (cmp: AutoCMP) => {
+                try {
+                    const result = await cmp.detectCmp();
+                    if (result) {
+                        logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
+                        this.sendContentMessage({
+                            type: 'cmpDetected',
+                            url: location.href,
+                            cmp: cmp.name,
+                        }); // notify the browser
+                        foundCMPs.push(cmp);
+                    }
+                } catch (e) {
+                    logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
+                }
+            };
+
+            const mutationObserver = this.domActions.waitForMutation('html');
+            mutationObserver.catch(() => {}); // ensure promise rejection is caught
+
+            for (const [stageName, ruleGroup] of rulesPriorityStages) {
+                logsConfig.lifecycle &&
+                    ruleGroup.length > 0 &&
+                    console.log(
+                        `Trying ${stageName} rules`,
+                        ruleGroup.map((r) => r.name),
+                    );
+                await Promise.all(ruleGroup.map(runDetectCmp));
+
+                // exit early if we already found a CMP
+                if (foundCMPs.length > 0) {
+                    break;
                 }
             }
-        });
-        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
-        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
 
-        const rulesPriorityStages: [string, AutoCMP[]][] = [
-            ['site-specific', siteSpecificRules],
-            ['generic', genericRules],
-            ['heuristic', heuristicRules],
-        ];
-        const runDetectCmp = async (cmp: AutoCMP) => {
-            try {
-                const result = await cmp.detectCmp();
-                if (result) {
-                    logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
-                    this.sendContentMessage({
-                        type: 'cmpDetected',
-                        url: location.href,
-                        cmp: cmp.name,
-                    }); // notify the browser
-                    foundCMPs.push(cmp);
+            this.detectHeuristics(); // run heuristics after trying rules
+
+            if (foundCMPs.length === 0 && retries > 0) {
+                // if we didn't find a CMP, try again
+                // We wait 500ms, and also for some kind of dom mutation to happen before
+                // rerunning the findCmp check
+                try {
+                    await Promise.all([this.domActions.wait(500), mutationObserver]);
+                } catch (e) {
+                    // timeout waiting for mutation - break out of detection
+                    return [];
                 }
-            } catch (e) {
-                logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
+
+                return this.findCmp(retries - 1, popupIndex);
             }
-        };
 
-        const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => {}); // ensure promise rejection is caught
-
-        for (const [stageName, ruleGroup] of rulesPriorityStages) {
-            logsConfig.lifecycle &&
-                ruleGroup.length > 0 &&
-                console.log(
-                    `Trying ${stageName} rules`,
-                    ruleGroup.map((r) => r.name),
-                );
-            await Promise.all(ruleGroup.map(runDetectCmp));
-
-            // exit early if we already found a CMP
-            if (foundCMPs.length > 0) {
-                break;
+            return foundCMPs;
+        } finally {
+            if (ownsPopupIndex) {
+                popupIndex?.disableObserver();
             }
         }
-
-        this.detectHeuristics(); // run heuristics after trying rules
-
-        if (foundCMPs.length === 0 && retries > 0) {
-            // if we didn't find a CMP, try again
-            // We wait 500ms, and also for some kind of dom mutation to happen before
-            // rerunning the findCmp check
-            try {
-                await Promise.all([this.domActions.wait(500), mutationObserver]);
-            } catch (e) {
-                // timeout waiting for mutation - break out of detection
-                return [];
-            }
-
-            return this.findCmp(retries - 1);
-        }
-
-        return foundCMPs;
     }
 
     detectHeuristics() {
@@ -361,6 +395,105 @@ export default class AutoConsent {
                 this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
             }
         }
+    }
+
+    /**
+     * Measure CMP detection cost by stage. Mirrors findCmp() grouping for performance analysis.
+     */
+    async benchmarkDetection(): Promise<DetectionBenchmarkResult> {
+        const isTop = isTopFrame();
+        const innerTextLength = document.documentElement?.innerText?.length || 0;
+
+        const siteSpecificRules: AutoCMP[] = [];
+        const genericRules: AutoCMP[] = [];
+        this.rules.forEach((cmp) => {
+            if (cmp.checkFrameContext(isTop)) {
+                const isSiteSpecific = !!cmp.runContext.urlPattern;
+                if (cmp.hasMatchingUrlPattern()) {
+                    siteSpecificRules.push(cmp);
+                } else if (!isSiteSpecific) {
+                    genericRules.push(cmp);
+                }
+            }
+        });
+        const popupIndex = isTop && this.config.enableHeuristicAction ? new HeuristicPopupIndex() : undefined;
+        const heuristicRules = popupIndex ? [new AutoConsentHeuristicCMP(this, popupIndex)] : [];
+
+        const timeStage = async (rules: AutoCMP[]): Promise<DetectionBenchmarkStage> => {
+            const start = performance.now();
+            let foundCount = 0;
+            await Promise.all(
+                rules.map(async (cmp) => {
+                    try {
+                        if (await cmp.detectCmp()) {
+                            foundCount++;
+                        }
+                    } catch {
+                        // ignore detection errors during benchmarking
+                    }
+                }),
+            );
+            return { ms: performance.now() - start, ruleCount: rules.length, foundCount };
+        };
+
+        const siteSpecific = await timeStage(siteSpecificRules);
+
+        const genericStart = performance.now();
+        const genericRuleTimings: RuleDetectionTiming[] = [];
+        let genericFoundCount = 0;
+        await Promise.all(
+            genericRules.map(async (cmp) => {
+                const ruleStart = performance.now();
+                let matched = false;
+                try {
+                    matched = await cmp.detectCmp();
+                    if (matched) {
+                        genericFoundCount++;
+                    }
+                } catch {
+                    // ignore detection errors during benchmarking
+                }
+                genericRuleTimings.push({ name: cmp.name, ms: performance.now() - ruleStart, matched });
+            }),
+        );
+        const generic: DetectionBenchmarkStage = {
+            ms: performance.now() - genericStart,
+            ruleCount: genericRules.length,
+            foundCount: genericFoundCount,
+        };
+
+        const heuristicCmp = await timeStage(heuristicRules);
+
+        const heuristicPatternsStart = performance.now();
+        let patternCount = 0;
+        if (this.config.enableHeuristicDetection) {
+            const { patterns } = checkHeuristicPatterns(document.documentElement?.innerText || '');
+            patternCount = patterns.length;
+        }
+        const heuristicPatterns = {
+            ms: performance.now() - heuristicPatternsStart,
+            ruleCount: 0,
+            patternCount,
+        };
+
+        const fullStart = performance.now();
+        const fullResult = await this.findCmp(0);
+        const fullFindCmp: DetectionBenchmarkStage = {
+            ms: performance.now() - fullStart,
+            ruleCount: this.rules.length,
+            foundCount: fullResult.length,
+        };
+
+        const slowestGenericRules = [...genericRuleTimings].sort((a, b) => b.ms - a.ms).slice(0, 10);
+
+        popupIndex?.disableObserver();
+
+        return {
+            documentInnerTextLength: innerTextLength,
+            stages: { siteSpecific, generic, heuristicCmp, heuristicPatterns, fullFindCmp },
+            genericRuleTimings,
+            slowestGenericRules,
+        };
     }
 
     /**
