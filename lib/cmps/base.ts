@@ -441,7 +441,9 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         return false;
     }
 
-    detectCmp(): Promise<boolean> {
+    async detectCmp(): Promise<boolean> {
+        // wait for one tick to deprioritize heavy DOM operations
+        await new Promise((resolve) => setTimeout(resolve, 0));
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorStart');
         this.popups = getActionablePopups();
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');

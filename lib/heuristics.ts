@@ -162,10 +162,15 @@ function getPopupLikeElements(): HTMLElement[] {
             },
         },
     );
-
+    const startTime = performance.now();
     const found = [];
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         found.push(node as HTMLElement);
+        // exit after 10ms to avoid blocking the main thread
+        if (performance.now() - startTime > 10) {
+            console.log('heuristic timeout');
+            break;
+        }
     }
     return excludeContainers(found);
 }

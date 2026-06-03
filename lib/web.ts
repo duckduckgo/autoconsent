@@ -294,8 +294,8 @@ export default class AutoConsent {
                 }
             }
         });
-        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
-        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled and retries is odd
+        const heuristicRules = isTop && this.config.enableHeuristicAction && retries % 2 === 1 ? [new AutoConsentHeuristicCMP(this)] : [];
 
         const rulesPriorityStages: [string, AutoCMP[]][] = [
             ['site-specific', siteSpecificRules],
