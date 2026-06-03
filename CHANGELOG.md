@@ -1,3 +1,24 @@
+# v14.86.0 (Wed Jun 03 2026)
+
+#### 🚀 Enhancement
+
+- Add tagconcierge rule for the Tag Concierge consent banner [#1376](https://github.com/duckduckgo/autoconsent/pull/1376) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- osano: click close button on bar-type (permissive) popups [#1368](https://github.com/duckduckgo/autoconsent/pull/1368) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### 🐛 Bug Fix
+
+- Document a caveat for config search [#1367](https://github.com/duckduckgo/autoconsent/pull/1367) ([@muodov](https://github.com/muodov))
+- Coverage data update [#1353](https://github.com/duckduckgo/autoconsent/pull/1353) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.85.0 (Wed May 27 2026)
 
 #### 🚀 Enhancement
