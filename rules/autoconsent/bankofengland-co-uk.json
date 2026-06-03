@@ -1,0 +1,14 @@
+{
+    "name": "bankofengland.co.uk",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?bankofengland\\.co\\.uk/"
+    },
+    "prehideSelectors": [".cookie-notice"],
+    "detectCmp": [{ "exists": ".cookie-notice .cookie__button[data-cookie=\"necessary\"]" }],
+    "detectPopup": [{ "visible": ".cookie-notice.is-visible" }],
+    "optIn": [{ "waitForThenClick": ".cookie-notice .cookie__button[data-cookie=\"analytics\"]" }],
+    "optOut": [{ "waitForThenClick": ".cookie-notice .cookie__button[data-cookie=\"necessary\"]" }],
+    "test": [{ "cookieContains": "boeconsent=necessary" }]
+}
