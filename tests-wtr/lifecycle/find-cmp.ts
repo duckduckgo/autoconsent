@@ -156,7 +156,7 @@ describe('Autoconsent.findCmp', () => {
                 optIn: [],
                 optOut: [],
             });
-            const found = await autoconsent.findCmp(0);
+            const found = await autoconsent.findCmp(1);
 
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('HEURISTIC');
