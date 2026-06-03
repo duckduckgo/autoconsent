@@ -25,6 +25,11 @@
     "optOut": [
         {
             "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_essential"
+        },
+        {
+            "waitForThenClick": "#cookie_consent_min_wrapper #close_minimized_banner",
+            "comment": "dismiss the 'Some features may not be available...' minimized banner that appears after opting out",
+            "optional": true
         }
     ],
     "test": [
