@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_independer.nl_ind",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://www.independer.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?independer\\.nl/"
+    },
+    "prehideSelectors": [".ind-cbar[data-testid=\"ind-cbar\"]"],
+    "detectCmp": [
+        {
+            "exists": ".ind-cbar[data-testid=\"ind-cbar\"] button[save-cookie][data-value=\"0\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ind-cbar[data-testid=\"ind-cbar\"] button[save-cookie][data-value=\"0\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ind-cbar[data-testid=\"ind-cbar\"] button[save-cookie][data-value=\"1\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".ind-cbar[data-testid=\"ind-cbar\"] button[save-cookie][data-value=\"0\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".ind-cbar[data-testid=\"ind-cbar\"]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
