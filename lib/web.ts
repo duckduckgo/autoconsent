@@ -351,8 +351,12 @@ export default class AutoConsent {
             // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
+            const waitFor: Promise<boolean>[] = [this.domActions.wait(500)];
+            if (retries !== this.config.detectRetries) {
+                waitFor.push(mutationObserver);
+            }
             try {
-                await Promise.all([this.domActions.wait(500), mutationObserver]);
+                await Promise.all(waitFor);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];

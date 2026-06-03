@@ -4,6 +4,7 @@ import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const TEXT_LIMIT = 100000;
+const POPUP_SEARCH_MAX_TIME = 10;
 
 export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
     allText = allText.slice(0, TEXT_LIMIT);
@@ -141,6 +142,7 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
  */
 function getPopupLikeElements(): HTMLElement[] {
+    const startTime = performance.now();
     const walker = document.createTreeWalker(
         document.documentElement,
         NodeFilter.SHOW_ELEMENT, // visit only element nodes
@@ -158,19 +160,17 @@ function getPopupLikeElements(): HTMLElement[] {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                 }
+                // start rejecting after 5ms to avoid blocking the main thread
+                if (performance.now() - startTime > POPUP_SEARCH_MAX_TIME) {
+                    return NodeFilter.FILTER_REJECT;
+                }
                 return NodeFilter.FILTER_SKIP;
             },
         },
     );
-    const startTime = performance.now();
     const found = [];
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         found.push(node as HTMLElement);
-        // exit after 10ms to avoid blocking the main thread
-        if (performance.now() - startTime > 10) {
-            console.log('heuristic timeout');
-            break;
-        }
     }
     return excludeContainers(found);
 }
