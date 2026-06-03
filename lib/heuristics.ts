@@ -6,16 +6,25 @@ const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="
 const TEXT_LIMIT = 100000;
 const POPUP_SEARCH_MAX_TIME = 100;
 
-export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
+export function checkHeuristicPatterns(
+    allText: string,
+    detectPatterns = DETECT_PATTERNS,
+    { includeSnippets = true, allMatches = true } = {},
+) {
     allText = allText.slice(0, TEXT_LIMIT);
     const patterns = [];
     const snippets = [];
 
     for (const p of detectPatterns) {
-        const matches = allText?.match(p);
+        const matches = includeSnippets ? allText?.match(p) : p.test(allText);
         if (matches) {
             patterns.push(p.toString());
-            snippets.push(...matches.map((m) => m.substring(0, 200)));
+            if (includeSnippets) {
+                snippets.push(...(matches as RegExpMatchArray).map((m) => m.substring(0, 200)));
+            }
+            if (!allMatches) {
+                break;
+            }
         }
     }
     return { patterns, snippets };
@@ -26,7 +35,7 @@ export function getActionablePopups(): PopupData[] {
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
-            const { patterns } = checkHeuristicPatterns(popupText);
+            const { patterns } = checkHeuristicPatterns(popupText, DETECT_PATTERNS, { includeSnippets: false, allMatches: false });
             if (patterns.length > 0) {
                 const { rejectButtons, otherButtons } = classifyButtons(popup.buttons);
                 if (rejectButtons.length > 0) {

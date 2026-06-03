@@ -11,6 +11,7 @@ import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
+import { DETECT_PATTERNS } from './heuristic-patterns';
 
 // Re-export types and functions for external use
 export { snippets as evalSnippets } from './eval-snippets';
@@ -371,7 +372,11 @@ export default class AutoConsent {
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
             this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsStart');
-            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
+            // Unless extended logging is enabled, we don't need to include snippets and all matches
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '', DETECT_PATTERNS, {
+                includeSnippets: this.config.logs.lifecycle || false,
+                allMatches: this.config.logs.lifecycle || false,
+            });
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))
