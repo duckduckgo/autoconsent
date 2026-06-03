@@ -6,10 +6,10 @@
     "prehideSelectors": ["#cookie_consent_wrapper, #cookie_consent_min_wrapper, #manage_cookie_consent_modal"],
     "detectCmp": [
         {
-            "exists": "#cookie_consent_wrapper:not(.hideConsent) #consent_manage_btn"
+            "exists": "#cookie_consent_wrapper:not(.hideConsent)"
         },
         {
-            "exists": "#manage_cookie_consent_modal #modal_consent_accept_essential"
+            "exists": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential"
         }
     ],
     "detectPopup": [
@@ -19,16 +19,16 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_all"
+            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_all, #manage_cookie_consent_modal #modal_consent_accept_all"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_essential"
+            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential"
         },
         {
             "waitForThenClick": "#cookie_consent_min_wrapper #close_minimized_banner",
-            "comment": "dismiss the 'Some features may not be available...' minimized banner that appears after opting out",
+            "comment": "dismiss the 'Some features may not be available...' minimized banner that may appear after opting out",
             "optional": true
         }
     ],
