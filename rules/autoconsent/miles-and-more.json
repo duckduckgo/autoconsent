@@ -1,0 +1,36 @@
+{
+    "name": "miles-and-more",
+    "vendorUrl": "https://www.miles-and-more.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?miles-and-more\\.com/"
+    },
+    "prehideSelectors": ["dialog.cookieconsent__dialog"],
+    "detectCmp": [
+        {
+            "exists": ".cookieconsent__base[data-component=\"cookieconsent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookieconsent__buttonAcceptNecessary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookieconsent__buttonAcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": ".cookieconsent__buttonAcceptNecessary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent_choice="
+        }
+    ]
+}
