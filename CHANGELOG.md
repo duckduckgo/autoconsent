@@ -1,3 +1,16 @@
+# v14.89.0 (Thu Jun 04 2026)
+
+#### 🚀 Enhancement
+
+- Add independer.nl rule for custom cookie banner [#1379](https://github.com/duckduckgo/autoconsent/pull/1379) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.86.0 (Wed Jun 03 2026)
 
 #### 🚀 Enhancement
