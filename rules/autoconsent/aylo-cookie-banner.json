@@ -15,6 +15,10 @@
     "detectPopup": [
         {
             "visible": "#cookie_consent_wrapper:not(.hideConsent)"
+        },
+        {
+            "visible": "#age_disclaimer_window,#ageDisclaimerWrapper",
+            "check": "none"
         }
     ],
     "optIn": [
@@ -24,7 +28,8 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential"
+            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential",
+            "all": true
         },
         {
             "waitForThenClick": "#cookie_consent_min_wrapper #close_minimized_banner",
