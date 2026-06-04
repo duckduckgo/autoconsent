@@ -3,7 +3,15 @@
     "prehideSelectors": ["#js-consent-banner"],
     "detectCmp": [{ "exists": "#js-consent-banner #js-cookie-reject-button" }],
     "detectPopup": [{ "visible": "#js-consent-banner #js-cookie-reject-button" }],
-    "optIn": [{ "waitForThenClick": "#js-consent-banner #js-cookie-accept-button" }],
-    "optOut": [{ "waitForThenClick": "#js-consent-banner #js-cookie-reject-button" }],
+    "optIn": [
+        { "waitForThenClick": "#js-consent-banner #js-cookie-accept-button" },
+        { "waitForVisible": "#js-consent-banner #js-cookie-dismiss-button", "timeout": 5000, "optional": true },
+        { "click": "#js-consent-banner #js-cookie-dismiss-button", "optional": true }
+    ],
+    "optOut": [
+        { "waitForThenClick": "#js-consent-banner #js-cookie-reject-button" },
+        { "waitForVisible": "#js-consent-banner #js-cookie-dismiss-button", "timeout": 5000, "optional": true },
+        { "click": "#js-consent-banner #js-cookie-dismiss-button", "optional": true }
+    ],
     "test": [{ "cookieContains": "cookie-consent=" }]
 }
