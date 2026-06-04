@@ -1,0 +1,25 @@
+{
+    "name": "aytm",
+    "vendorUrl": "https://aytm.com/",
+    "prehideSelectors": ["#cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent[style*=\"max-height\"] #cookie-status-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent[style*=\"max-height\"] #cookie-status-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent[style*=\"max-height\"] #cookie-status-agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent[style*=\"max-height\"] #cookie-status-reject"
+        }
+    ]
+}
