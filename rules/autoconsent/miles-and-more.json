@@ -22,6 +22,9 @@
     ],
     "optOut": [
         {
+            "wait": 500
+        },
+        {
             "waitForThenClick": ".cookieconsent__buttonAcceptNecessary"
         }
     ],
