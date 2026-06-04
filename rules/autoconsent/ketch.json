@@ -40,11 +40,11 @@
     ],
     "optOut": [
         {
-            "comment": "If the banner has a direct Reject All button (newer Ketch DOM), click it and we're done.",
+            "comment": "If the banner has a direct Reject button (newer Ketch DOM), click it and we're done. The reject button can occupy any slot (primary/secondary/tertiary) depending on the site's Ketch configuration — e.g. tertiary 'Reject All' on yumearth.com/ketch.com, but secondary 'Reject Optional Cookies' on pbs.org — so we identify it by aria-label rather than by ID. Clicking tertiary unconditionally previously opened the Cookie Settings/preferences modal on sites where tertiary is not the reject button, leaving the rule stuck.",
             "if": {
-                "exists": "#ketch-banner-button-tertiary"
+                "exists": "#ketch-banner button[aria-label*=Reject]"
             },
-            "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary" }]
+            "then": [{ "waitForThenClick": "#ketch-banner button[aria-label*=Reject]" }]
         },
         {
             "comment": "Older banner variant exposed via aria-describedby=banner-description: open settings/reject (same button class)",
