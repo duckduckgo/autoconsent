@@ -103,10 +103,7 @@ export default class AutoConsent {
         if (config.enableFilterList) {
             this.initializeFilterList();
         }
-        this.config.performanceLoggingEnabled && performance.mark('filterCMPsStart');
         this.rules = filterCMPs(this.rules, normalizedConfig);
-        this.config.performanceLoggingEnabled && performance.mark('filterCMPsEnd');
-        this.config.performanceLoggingEnabled && performance.measure('filterCMPs', 'filterCMPsStart', 'filterCMPsEnd');
 
         if (this.shouldPrehide) {
             if (document.documentElement) {
@@ -216,6 +213,9 @@ export default class AutoConsent {
         this.updateState({ lifecycle: 'started' });
         const foundCmps = await this.findCmp(this.config.detectRetries);
         this.updateState({ detectedCmps: foundCmps.map((c) => c.name) });
+        if (this.config.performanceLoggingEnabled) {
+            this.updateState({ performance: this.measurePerformance() });
+        }
         if (foundCmps.length === 0) {
             logsConfig.lifecycle && console.log('no CMP found', location.href);
             if (this.shouldPrehide) {
@@ -223,9 +223,6 @@ export default class AutoConsent {
             }
 
             return this.filterListFallback();
-        }
-        if (this.config.performanceLoggingEnabled) {
-            this.updateState({ performance: this.measurePerformance() });
         }
 
         this.updateState({ lifecycle: 'cmpDetected' });
@@ -695,12 +692,12 @@ export default class AutoConsent {
 
     measurePerformance() {
         return {
-            filterCMPs: performance.getEntriesByName('filterCMPs').map((m) => m.duration),
             detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
             heuristicDetector: performance.getEntriesByName('heuristicDetector').map((m) => m.duration),
             findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
             findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
             findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
+            parseDeclarativeRules: performance.getEntriesByName('parseDeclarativeRules').map((m) => m.duration),
         };
     }
 
