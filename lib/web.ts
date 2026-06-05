@@ -694,20 +694,6 @@ export default class AutoConsent {
     }
 
     measurePerformance() {
-        // const cmpPerformance: Record<string, number> = performance
-        //     .getEntriesByType('measure')
-        //     .filter((m) => m.name.startsWith('detectCmp_'))
-        //     .reduce((acc, m) => {
-        //         const k = m.name.slice(10);
-        //         if (!acc[k]) {
-        //             acc[k] = 0;
-        //         }
-        //         acc[k] += m.duration;
-        //         return acc;
-        //     }, Object.create(null));
-        // const slowestRules = Object.entries(cmpPerformance)
-        //     .sort((a, b) => b[1] - a[1])
-        //     .slice(0, 10);
         return {
             filterCMPs: performance.getEntriesByName('filterCMPs').map((m) => m.duration),
             detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
@@ -715,7 +701,21 @@ export default class AutoConsent {
             findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
             findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
             findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
-            // slowestRules: slowestRules.map(([name, duration]) => ({ name, duration })),
         };
+    }
+
+    measureDetailedRulePerformance() {
+        const cmpPerformance: Record<string, number> = performance
+            .getEntriesByType('measure')
+            .filter((m) => m.name.startsWith('detectCmp_'))
+            .reduce((acc, m) => {
+                const k = m.name.slice(10);
+                if (!acc[k]) {
+                    acc[k] = 0;
+                }
+                acc[k] += m.duration;
+                return acc;
+            }, Object.create(null));
+        return cmpPerformance;
     }
 }
