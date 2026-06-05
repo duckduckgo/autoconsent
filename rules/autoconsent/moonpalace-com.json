@@ -1,0 +1,15 @@
+{
+    "name": "moonpalace.com",
+    "_metadata": {
+        "vendorUrl": "https://www.moonpalace.com/"
+    },
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?moonpalace\\.com/"
+    },
+    "prehideSelectors": ["#cookie-consent .cc-window", ".banner-shadow"],
+    "detectCmp": [{ "exists": "#cookie-consent .cc-window" }],
+    "detectPopup": [{ "visible": "#cookie-consent .cc-window" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent .cc-compliance .cc-btn" }],
+    "optOut": [{ "hide": "#cookie-consent" }, { "hide": ".banner-shadow", "optional": true }]
+}
