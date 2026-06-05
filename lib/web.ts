@@ -242,6 +242,7 @@ export default class AutoConsent {
             const results = {
                 filterCMPs: performance.getEntriesByName('filterCMPs').map((m) => m.duration),
                 detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
+                heuristicDetector: performance.getEntriesByName('heuristicDetector').map((m) => m.duration),
                 findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
                 findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
                 findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
