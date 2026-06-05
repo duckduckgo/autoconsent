@@ -5,4 +5,5 @@ generateCMPTests('burpee.com', [
     'https://www.knfilters.com/',
     'https://www.mossberg.com/',
     'https://www.hobbies.co.uk',
+    'https://www.lucrin.com/',
 ]);

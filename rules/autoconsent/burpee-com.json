@@ -12,7 +12,22 @@
                 { "click": "#notice-cookie-block input:checked", "all": true },
                 { "click": "#btn-cookie-save" }
             ],
-            "else": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+            "else": [
+                {
+                    "if": { "exists": "#btn-manage-cookie-save-preferences" },
+                    "then": [
+                        { "waitForThenClick": "#btn-manage-cookie" },
+                        { "waitForVisible": "#cookie-text-popup" },
+                        { "click": "#cookie-text-popup input[type=\"checkbox\"]:checked", "all": true, "optional": true },
+                        { "waitForThenClick": "#btn-manage-cookie-save-preferences" }
+                    ],
+                    "else": [
+                        {
+                            "hide": "#html-body #notice-cookie-block, #notice-cookie, body :is(div.fixed.inset-0:has(> #notice-cookie-block))"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
