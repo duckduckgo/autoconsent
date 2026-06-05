@@ -1,6 +1,9 @@
 {
     "name": "aytm",
     "vendorUrl": "https://aytm.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.|)?aytm\\.com/"
+    },
     "prehideSelectors": ["#cookie-consent"],
     "detectCmp": [
         {
