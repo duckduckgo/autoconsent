@@ -160,7 +160,7 @@ function getPopupLikeElements(): HTMLElement[] {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                 }
-                // start rejecting after 5ms to avoid blocking the main thread
+                // start rejecting after POPUP_SEARCH_MAX_TIME to avoid blocking the main thread
                 if (performance.now() - startTime > POPUP_SEARCH_MAX_TIME) {
                     return NodeFilter.FILTER_REJECT;
                 }
