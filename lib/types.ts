@@ -76,6 +76,7 @@ export type Config = {
         messages: boolean;
         waits: boolean;
     };
+    performanceLoggingEnabled: boolean;
 };
 
 export type LifecycleState =

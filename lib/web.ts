@@ -103,8 +103,10 @@ export default class AutoConsent {
         if (config.enableFilterList) {
             this.initializeFilterList();
         }
-
+        this.config.performanceLoggingEnabled && performance.mark('filterCMPsStart');
         this.rules = filterCMPs(this.rules, normalizedConfig);
+        this.config.performanceLoggingEnabled && performance.mark('filterCMPsEnd');
+        this.config.performanceLoggingEnabled && performance.measure('filterCMPs', 'filterCMPsStart', 'filterCMPsEnd');
 
         if (this.shouldPrehide) {
             if (document.documentElement) {
@@ -166,6 +168,7 @@ export default class AutoConsent {
     }
 
     parseDeclarativeRules(declarativeRules: RuleBundle) {
+        this.config.performanceLoggingEnabled && performance.mark('parseDeclarativeRulesStart');
         if (declarativeRules.consentomatic) {
             for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
                 this.addConsentomaticCMP(name, rule);
@@ -186,6 +189,9 @@ export default class AutoConsent {
                 this.config.logs.errors && console.error(e);
             }
         }
+        this.config.performanceLoggingEnabled && performance.mark('parseDeclarativeRulesEnd');
+        this.config.performanceLoggingEnabled &&
+            performance.measure('parseDeclarativeRules', 'parseDeclarativeRulesStart', 'parseDeclarativeRulesEnd');
     }
 
     addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
@@ -217,6 +223,31 @@ export default class AutoConsent {
             }
 
             return this.filterListFallback();
+        }
+        if (this.config.performanceLoggingEnabled) {
+            const cmpPerformance: Record<string, number> = performance
+                .getEntriesByType('measure')
+                .filter((m) => m.name.startsWith('detectCmp_'))
+                .reduce((acc, m) => {
+                    const k = m.name.slice(10);
+                    if (!acc[k]) {
+                        acc[k] = 0;
+                    }
+                    acc[k] += m.duration;
+                    return acc;
+                }, Object.create(null));
+            const slowestRules = Object.entries(cmpPerformance)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+            const results = {
+                filterCMPs: performance.getEntriesByName('filterCMPs').map((m) => m.duration),
+                detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
+                findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
+                findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
+                findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
+                slowestRules: slowestRules.map(([name, duration]) => ({ name, duration })),
+            };
+            console.log('[performance]', results);
         }
 
         this.updateState({ lifecycle: 'cmpDetected' });
@@ -298,7 +329,11 @@ export default class AutoConsent {
         ];
         const runDetectCmp = async (cmp: AutoCMP) => {
             try {
+                this.config.performanceLoggingEnabled && performance.mark(`detectCmp_${cmp.name}`);
                 const result = await cmp.detectCmp();
+                this.config.performanceLoggingEnabled && performance.mark(`detectCmpEnd_${cmp.name}`);
+                this.config.performanceLoggingEnabled &&
+                    performance.measure(`detectCmp_${cmp.name}`, `detectCmp_${cmp.name}`, `detectCmpEnd_${cmp.name}`);
                 if (result) {
                     logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
                     this.sendContentMessage({
@@ -323,7 +358,11 @@ export default class AutoConsent {
                     `Trying ${stageName} rules`,
                     ruleGroup.map((r) => r.name),
                 );
+            this.config.performanceLoggingEnabled && performance.mark(`findCmpStage_${stageName}`);
             await Promise.all(ruleGroup.map(runDetectCmp));
+            this.config.performanceLoggingEnabled && performance.mark(`findCmpStageEnd_${stageName}`);
+            this.config.performanceLoggingEnabled &&
+                performance.measure(`findCmp_${stageName}`, `findCmpStage_${stageName}`, `findCmpStageEnd_${stageName}`);
 
             // exit early if we already found a CMP
             if (foundCMPs.length > 0) {
@@ -352,6 +391,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
+            this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsStart');
             const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
             if (
                 patterns.length > 0 &&
@@ -360,6 +400,9 @@ export default class AutoConsent {
                 this.config.logs.lifecycle && console.log('Heuristic patterns found', patterns, snippets);
                 this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
             }
+            this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsEnd');
+            this.config.performanceLoggingEnabled &&
+                performance.measure('detectHeuristics', 'detectHeuristicsStart', 'detectHeuristicsEnd');
         }
     }
 
