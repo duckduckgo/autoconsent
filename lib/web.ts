@@ -168,7 +168,8 @@ export default class AutoConsent {
     }
 
     parseDeclarativeRules(declarativeRules: RuleBundle) {
-        this.config.performanceLoggingEnabled && performance.mark('parseDeclarativeRulesStart');
+        const perfEnabled = this.#config?.performanceLoggingEnabled;
+        perfEnabled && performance.mark('parseDeclarativeRulesStart');
         if (declarativeRules.consentomatic) {
             for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
                 this.addConsentomaticCMP(name, rule);
@@ -186,12 +187,11 @@ export default class AutoConsent {
                 const rules = decodeRules(declarativeRules.compact);
                 rules.forEach(this.addDeclarativeCMP.bind(this));
             } catch (e) {
-                this.config.logs.errors && console.error(e);
+                this.#config?.logs.errors && console.error(e);
             }
         }
-        this.config.performanceLoggingEnabled && performance.mark('parseDeclarativeRulesEnd');
-        this.config.performanceLoggingEnabled &&
-            performance.measure('parseDeclarativeRules', 'parseDeclarativeRulesStart', 'parseDeclarativeRulesEnd');
+        perfEnabled && performance.mark('parseDeclarativeRulesEnd');
+        perfEnabled && performance.measure('parseDeclarativeRules', 'parseDeclarativeRulesStart', 'parseDeclarativeRulesEnd');
     }
 
     addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
