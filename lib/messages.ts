@@ -1,7 +1,7 @@
 import { snippets } from './eval-snippets';
 import { Config, ConsentState, RuleBundle } from './types';
 
-export type BackgroundMessage = InitResponseMessage | EvalResponseMessage | OptOutMessage | OptInMessage | SelfTestMessage;
+export type BackgroundMessage = InitResponseMessage | EvalResponseMessage | OptOutMessage | OptInMessage | SelfTestMessage | MeasurePerformanceMessage;
 
 export type ContentScriptMessage =
     | InitMessage
@@ -129,4 +129,8 @@ export type InstanceTerminatedMessage = {
 export type DevtoolsInitMessage = {
     type: 'init';
     tabId: number;
+};
+
+export type MeasurePerformanceMessage = {
+    type: 'measurePerformance';
 };

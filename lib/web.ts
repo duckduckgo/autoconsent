@@ -225,30 +225,7 @@ export default class AutoConsent {
             return this.filterListFallback();
         }
         if (this.config.performanceLoggingEnabled) {
-            const cmpPerformance: Record<string, number> = performance
-                .getEntriesByType('measure')
-                .filter((m) => m.name.startsWith('detectCmp_'))
-                .reduce((acc, m) => {
-                    const k = m.name.slice(10);
-                    if (!acc[k]) {
-                        acc[k] = 0;
-                    }
-                    acc[k] += m.duration;
-                    return acc;
-                }, Object.create(null));
-            const slowestRules = Object.entries(cmpPerformance)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10);
-            const results = {
-                filterCMPs: performance.getEntriesByName('filterCMPs').map((m) => m.duration),
-                detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
-                heuristicDetector: performance.getEntriesByName('heuristicDetector').map((m) => m.duration),
-                findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
-                findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
-                findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
-                slowestRules: slowestRules.map(([name, duration]) => ({ name, duration })),
-            };
-            console.log('[performance]', results);
+            this.updateState({ performance: this.measurePerformance() });
         }
 
         this.updateState({ lifecycle: 'cmpDetected' });
@@ -350,7 +327,7 @@ export default class AutoConsent {
         };
 
         const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => {}); // ensure promise rejection is caught
+        mutationObserver.catch(() => { }); // ensure promise rejection is caught
 
         for (const [stageName, ruleGroup] of rulesPriorityStages) {
             logsConfig.lifecycle &&
@@ -439,7 +416,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => {});
+            .catch(() => { });
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
@@ -604,7 +581,7 @@ export default class AutoConsent {
         let mutationObserver: Promise<boolean> | null = null;
         if (this.config.enablePopupMutationObserver) {
             mutationObserver = this.domActions.waitForMutation('html', 10000);
-            mutationObserver.catch(() => {});
+            mutationObserver.catch(() => { });
         }
 
         const isOpen = await cmp.detectPopup().catch((e) => {
@@ -710,6 +687,35 @@ export default class AutoConsent {
             case 'evalResp':
                 resolveEval(message.id, message.result);
                 break;
+            case 'measurePerformance':
+                this.updateState({ performance: this.measurePerformance() });
+                break;
         }
+    }
+
+    measurePerformance() {
+        // const cmpPerformance: Record<string, number> = performance
+        //     .getEntriesByType('measure')
+        //     .filter((m) => m.name.startsWith('detectCmp_'))
+        //     .reduce((acc, m) => {
+        //         const k = m.name.slice(10);
+        //         if (!acc[k]) {
+        //             acc[k] = 0;
+        //         }
+        //         acc[k] += m.duration;
+        //         return acc;
+        //     }, Object.create(null));
+        // const slowestRules = Object.entries(cmpPerformance)
+        //     .sort((a, b) => b[1] - a[1])
+        //     .slice(0, 10);
+        return {
+            filterCMPs: performance.getEntriesByName('filterCMPs').map((m) => m.duration),
+            detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
+            heuristicDetector: performance.getEntriesByName('heuristicDetector').map((m) => m.duration),
+            findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
+            findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
+            findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
+            // slowestRules: slowestRules.map(([name, duration]) => ({ name, duration })),
+        };
     }
 }
