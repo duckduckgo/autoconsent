@@ -327,7 +327,7 @@ export default class AutoConsent {
         };
 
         const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => { }); // ensure promise rejection is caught
+        mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
         for (const [stageName, ruleGroup] of rulesPriorityStages) {
             logsConfig.lifecycle &&
@@ -416,7 +416,7 @@ export default class AutoConsent {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
             })
-            .catch(() => { });
+            .catch(() => {});
 
         const results = await Promise.allSettled(tasks);
         const popups: AutoCMP[] = [];
@@ -581,7 +581,7 @@ export default class AutoConsent {
         let mutationObserver: Promise<boolean> | null = null;
         if (this.config.enablePopupMutationObserver) {
             mutationObserver = this.domActions.waitForMutation('html', 10000);
-            mutationObserver.catch(() => { });
+            mutationObserver.catch(() => {});
         }
 
         const isOpen = await cmp.detectPopup().catch((e) => {

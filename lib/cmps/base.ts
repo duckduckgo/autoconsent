@@ -445,7 +445,8 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorStart');
         this.popups = getActionablePopups();
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');
-        this.autoconsent.config.performanceLoggingEnabled && performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
+        this.autoconsent.config.performanceLoggingEnabled &&
+            performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
         if (this.popups.length > 0) {
             return Promise.resolve(true);
         }
