@@ -1,3 +1,19 @@
+# v14.90.0 (Fri Jun 05 2026)
+
+#### 🚀 Enhancement
+
+- Add police-uk autoconsent rule [#1373](https://github.com/duckduckgo/autoconsent/pull/1373) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- Add rule for Miles & More cookie consent popup [#1375](https://github.com/duckduckgo/autoconsent/pull/1375) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@cursor[bot]](https://github.com/cursor[bot]))
+- Add aylo-cookie-banner rule for redtube/youporn/tube8 cookie consent [#1382](https://github.com/duckduckgo/autoconsent/pull/1382) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.89.0 (Thu Jun 04 2026)
 
 #### 🚀 Enhancement
