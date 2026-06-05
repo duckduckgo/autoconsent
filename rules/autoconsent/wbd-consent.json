@@ -1,0 +1,11 @@
+{
+    "name": "wbd-consent",
+    "vendorUrl": "https://www.hbomax.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#modal-test-id-consent-modal", "[class*=\"Dialogstyles__StyledOverlay\"]"],
+    "detectCmp": [{ "exists": "#modal-test-id-consent-modal" }],
+    "detectPopup": [{ "visible": "#modal-test-id-consent-modal" }],
+    "optIn": [{ "waitForThenClick": ["#modal-test-id-consent-modal", "button.btn--privacy-primary"] }],
+    "optOut": [{ "hide": "#modal-test-id-consent-modal, [class*=\"Dialogstyles__StyledOverlay\"]" }],
+    "test": [{ "visible": "#modal-test-id-consent-modal", "check": "none" }]
+}
