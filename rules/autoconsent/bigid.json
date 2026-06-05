@@ -1,0 +1,30 @@
+{
+    "name": "bigid",
+    "vendorUrl": "https://bigid.com/",
+    "prehideSelectors": ["#bigidcmp-banner-widget"],
+    "detectCmp": [
+        {
+            "exists": ["#bigidcmp-banner-widget", "#cmp-reject-all"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#bigidcmp-banner-widget", "#cmp-reject-all"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-reject-all"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "preferences=false"
+        }
+    ]
+}
