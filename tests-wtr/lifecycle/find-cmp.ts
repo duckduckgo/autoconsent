@@ -2,6 +2,22 @@ import { expect } from '@esm-bundle/chai';
 import Autoconsent from '../../lib/web';
 import Onetrust from '../../lib/cmps/onetrust';
 
+function ensureHeuristicPopup() {
+    if (document.getElementById('heuristic-popup')) {
+        return;
+    }
+
+    const popup = document.createElement('div');
+    popup.id = 'heuristic-popup';
+    popup.setAttribute('style', 'position: fixed; top: 0; left: 0; width: 300px; height: 200px; background: white');
+    popup.innerHTML = `
+        <p>We use cookies to improve your experience.</p>
+        <button>Accept All</button>
+        <button>Reject All</button>
+    `;
+    document.body.appendChild(popup);
+}
+
 describe('Autoconsent.findCmp', () => {
     let autoconsent: Autoconsent;
 
@@ -137,15 +153,18 @@ describe('Autoconsent.findCmp', () => {
 
     describe('enableHeuristicAction = true', () => {
         beforeEach(() => {
+            ensureHeuristicPopup();
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
                 autoAction: null,
                 enableHeuristicAction: true,
             });
+            autoconsent.rules = [];
         });
 
         afterEach(() => {
             document.getElementById('heuristic-popup')?.remove();
+            document.getElementById('late-ketch-cmp')?.remove();
         });
 
         it('returns heuristic CMP when no declarative rules match', async () => {
@@ -175,6 +194,27 @@ describe('Autoconsent.findCmp', () => {
 
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('test');
+        });
+
+        it('retries declarative rules once before falling back to heuristic CMP', async () => {
+            autoconsent.addDeclarativeCMP({
+                name: 'late-ketch',
+                detectCmp: [{ exists: '#late-ketch-cmp' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
+
+            setTimeout(() => {
+                const lateCmp = document.createElement('div');
+                lateCmp.id = 'late-ketch-cmp';
+                document.body.appendChild(lateCmp);
+            }, 100);
+
+            const found = await autoconsent.findCmp(1);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('late-ketch');
         });
     });
 });

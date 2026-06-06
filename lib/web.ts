@@ -267,10 +267,9 @@ export default class AutoConsent {
         return result;
     }
 
-    async findCmp(retries: number): Promise<AutoCMP[]> {
+    async findCmp(retries: number, deferHeuristicFallback = true): Promise<AutoCMP[]> {
         const logsConfig = this.config.logs;
         this.updateState({ findCmpAttempts: this.state.findCmpAttempts + 1 });
-        const foundCMPs: AutoCMP[] = [];
         const isTop = isTopFrame();
 
         // refilter relevant rules for this context
@@ -291,21 +290,25 @@ export default class AutoConsent {
         // heuristic CMP is only run in the top frame and only if heuristic action is enabled
         const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
 
-        const rulesPriorityStages: [string, AutoCMP[]][] = [
+        const declarativeRulesPriorityStages: [string, AutoCMP[]][] = [
             ['site-specific', siteSpecificRules],
             ['generic', genericRules],
-            ['heuristic', heuristicRules],
         ];
-        const runDetectCmp = async (cmp: AutoCMP) => {
+        const reportDetectedCmp = (cmp: AutoCMP) => {
+            logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
+            this.sendContentMessage({
+                type: 'cmpDetected',
+                url: location.href,
+                cmp: cmp.name,
+            }); // notify the browser
+        };
+        const runDetectCmp = async (cmp: AutoCMP, foundCMPs: AutoCMP[], reportDetection = true) => {
             try {
                 const result = await cmp.detectCmp();
                 if (result) {
-                    logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
-                    this.sendContentMessage({
-                        type: 'cmpDetected',
-                        url: location.href,
-                        cmp: cmp.name,
-                    }); // notify the browser
+                    if (reportDetection) {
+                        reportDetectedCmp(cmp);
+                    }
                     foundCMPs.push(cmp);
                 }
             } catch (e) {
@@ -316,24 +319,43 @@ export default class AutoConsent {
         const mutationObserver = this.domActions.waitForMutation('html');
         mutationObserver.catch(() => {}); // ensure promise rejection is caught
 
-        for (const [stageName, ruleGroup] of rulesPriorityStages) {
+        for (const [stageName, ruleGroup] of declarativeRulesPriorityStages) {
             logsConfig.lifecycle &&
                 ruleGroup.length > 0 &&
                 console.log(
                     `Trying ${stageName} rules`,
                     ruleGroup.map((r) => r.name),
                 );
-            await Promise.all(ruleGroup.map(runDetectCmp));
+            const foundInStage: AutoCMP[] = [];
+            await Promise.all(ruleGroup.map((cmp) => runDetectCmp(cmp, foundInStage)));
 
             // exit early if we already found a CMP
-            if (foundCMPs.length > 0) {
-                break;
+            if (foundInStage.length > 0) {
+                this.detectHeuristics(); // run heuristics after trying rules
+                return ruleGroup.filter((cmp) => foundInStage.includes(cmp));
             }
         }
 
         this.detectHeuristics(); // run heuristics after trying rules
 
-        if (foundCMPs.length === 0 && retries > 0) {
+        const foundHeuristicCMPs: AutoCMP[] = [];
+        for (const heuristicRule of heuristicRules) {
+            logsConfig.lifecycle && console.log('Trying heuristic rules', [heuristicRule.name]);
+            await runDetectCmp(heuristicRule, foundHeuristicCMPs, false);
+        }
+
+        if (foundHeuristicCMPs.length > 0) {
+            if (deferHeuristicFallback && retries > 0) {
+                logsConfig.lifecycle && console.log('HEURISTIC matched; retrying declarative rules before using fallback');
+                await this.domActions.wait(500);
+                return this.findCmp(0, false);
+            }
+
+            foundHeuristicCMPs.forEach(reportDetectedCmp);
+            return foundHeuristicCMPs;
+        }
+
+        if (retries > 0) {
             // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
@@ -344,10 +366,10 @@ export default class AutoConsent {
                 return [];
             }
 
-            return this.findCmp(retries - 1);
+            return this.findCmp(retries - 1, deferHeuristicFallback);
         }
 
-        return foundCMPs;
+        return [];
     }
 
     detectHeuristics() {
