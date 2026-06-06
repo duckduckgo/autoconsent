@@ -1,3 +1,16 @@
+# v14.91.0 (Sat Jun 06 2026)
+
+#### 🚀 Enhancement
+
+- Add aytm.com rule for custom cookie banner [#1384](https://github.com/duckduckgo/autoconsent/pull/1384) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.90.0 (Fri Jun 05 2026)
 
 #### 🚀 Enhancement
