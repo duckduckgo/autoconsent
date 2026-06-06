@@ -1,0 +1,21 @@
+{
+    "name": "luckywp-cookie-notice",
+    "vendorUrl": "https://wordpress.org/plugins/luckywp-cookie-notice-gdpr/",
+    "prehideSelectors": [".js-lwpcngNotice"],
+    "detectCmp": [{ "exists": ".js-lwpcngNotice" }],
+    "detectPopup": [{ "visible": ".js-lwpcngNotice" }],
+    "optIn": [{ "waitForThenClick": ".js-lwpcngNotice .js-lwpcngAccept" }],
+    "optOut": [
+        {
+            "if": { "exists": ".js-lwpcngNotice .js-lwpcngReject" },
+            "then": [{ "click": ".js-lwpcngNotice .js-lwpcngReject" }],
+            "else": [{ "hide": ".js-lwpcngNotice" }]
+        }
+    ],
+    "test": [
+        {
+            "if": { "exists": ".js-lwpcngNotice .js-lwpcngReject" },
+            "then": [{ "cookieContains": "lwpcngStatus=" }]
+        }
+    ]
+}
