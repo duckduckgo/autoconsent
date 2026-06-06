@@ -11,33 +11,52 @@ import {
 } from '../../lib/heuristics';
 
 describe('checkHeuristicPatterns', () => {
-    it('detects cookie-related text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('We use cookies here', [/we use cookies/gi]);
+    const optionPermutations = [
+        { includeSnippets: true, allMatches: true },
+        { includeSnippets: true, allMatches: false },
+        { includeSnippets: false, allMatches: true },
+        { includeSnippets: false, allMatches: false },
+    ] as const;
 
-        expect(patterns.length).to.be.greaterThan(0);
-        expect(snippets.length).to.be.greaterThan(0);
-    });
+    for (const options of optionPermutations) {
+        const label = `includeSnippets=${options.includeSnippets}, allMatches=${options.allMatches}`;
 
-    it('returns empty arrays for unrelated text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', [/we use cookies/gi]);
+        it(`detects cookie-related text (${label})`, () => {
+            const { patterns, snippets } = checkHeuristicPatterns('We use cookies here', [/we use cookies/gi], options);
 
-        expect(patterns).to.have.length(0);
-        expect(snippets).to.have.length(0);
-    });
+            expect(patterns.length).to.be.greaterThan(0);
+            if (options.includeSnippets) {
+                expect(snippets.length).to.be.greaterThan(0);
+            } else {
+                expect(snippets).to.have.length(0);
+            }
+        });
 
-    it('returns empty arrays for empty text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('', [/we use cookies/gi]);
+        it(`returns empty arrays for unrelated text (${label})`, () => {
+            const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', [/we use cookies/gi], options);
 
-        expect(patterns).to.have.length(0);
-        expect(snippets).to.have.length(0);
-    });
+            expect(patterns).to.have.length(0);
+            expect(snippets).to.have.length(0);
+        });
 
-    it('does not match after the text limit', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('X'.repeat(100000) + 'We use cookies here', [/we use cookies/gi]);
+        it(`returns empty arrays for empty text (${label})`, () => {
+            const { patterns, snippets } = checkHeuristicPatterns('', [/we use cookies/gi], options);
 
-        expect(patterns).to.have.length(0);
-        expect(snippets).to.have.length(0);
-    });
+            expect(patterns).to.have.length(0);
+            expect(snippets).to.have.length(0);
+        });
+
+        it(`does not match after the text limit (${label})`, () => {
+            const { patterns, snippets } = checkHeuristicPatterns(
+                'X'.repeat(100000) + 'We use cookies here',
+                [/we use cookies/gi],
+                options,
+            );
+
+            expect(patterns).to.have.length(0);
+            expect(snippets).to.have.length(0);
+        });
+    }
 });
 
 describe('cleanButtonText', () => {
