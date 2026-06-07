@@ -1,0 +1,35 @@
+{
+    "name": "pdimagearchive.org",
+    "_metadata": {
+        "vendorUrl": "https://pdimagearchive.org/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?pdimagearchive\\.org/"
+    },
+    "prehideSelectors": [".cookies-modal"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-modal button.decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-modal button.accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-modal button.decline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent=declined"
+        }
+    ]
+}
