@@ -4,7 +4,7 @@ import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const TEXT_LIMIT = 100000;
-const POPUP_SEARCH_MAX_TIME = 10;
+const POPUP_SEARCH_MAX_TIME = 100;
 
 export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
     allText = allText.slice(0, TEXT_LIMIT);
