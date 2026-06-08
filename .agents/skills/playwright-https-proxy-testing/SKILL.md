@@ -17,25 +17,42 @@ Build the autoconsent assets before running rule tests:
 npm run prepublish
 ```
 
-Provide proxy details through environment variables or Cursor secrets:
+Proxy credentials are provided through environment variables or Cursor secrets, one complete proxy per region. Use a consistent region key in each variable name:
 
 ```bash
-export AC_PROXY_HOST="example.proxy.duckduckgo.com"
-export AC_PROXY_PORT="443"
-export AC_PROXY_USER="..."
-export AC_PROXY_PASSWORD="..."
+export AC_PROXY_US_HOST="us.example.proxy.duckduckgo.com"
+export AC_PROXY_US_PORT="443"
+export AC_PROXY_US_USER="..."
+export AC_PROXY_US_PASSWORD="..."
+
+export AC_PROXY_DE_HOST="de.example.proxy.duckduckgo.com"
+export AC_PROXY_DE_PORT="443"
+export AC_PROXY_DE_USER="..."
+export AC_PROXY_DE_PASSWORD="..."
 ```
 
 ## Proxy Configuration
 
-Use the HTTPS scheme in `server`, and pass credentials separately as `username` and `password`:
+Use the HTTPS scheme in `server`, and pass credentials separately as `username` and `password`. This helper builds the Playwright proxy object for a requested region:
 
 ```javascript
-const proxy = {
-    server: `https://${process.env.AC_PROXY_HOST}:${process.env.AC_PROXY_PORT || '443'}`,
-    username: process.env.AC_PROXY_USER,
-    password: process.env.AC_PROXY_PASSWORD,
-};
+function proxyFromEnv(regionKey) {
+    const prefix = `AC_PROXY_${regionKey.toUpperCase()}`;
+    const host = process.env[`${prefix}_HOST`];
+    const port = process.env[`${prefix}_PORT`] || '443';
+    const username = process.env[`${prefix}_USER`];
+    const password = process.env[`${prefix}_PASSWORD`];
+
+    if (!host || !username || !password) {
+        throw new Error(`Missing proxy environment variables for region ${regionKey}`);
+    }
+
+    return {
+        server: `https://${host}:${port}`,
+        username,
+        password,
+    };
+}
 ```
 
 Do not do this:
@@ -55,13 +72,20 @@ Use a small script to confirm that the proxy authenticates and changes browser e
 ```javascript
 import { chromium } from 'playwright';
 
+const region = process.env.AC_PROXY_REGION || 'us';
+
+function proxyFromEnv(regionKey) {
+    const prefix = `AC_PROXY_${regionKey.toUpperCase()}`;
+    return {
+        server: `https://${process.env[`${prefix}_HOST`]}:${process.env[`${prefix}_PORT`] || '443'}`,
+        username: process.env[`${prefix}_USER`],
+        password: process.env[`${prefix}_PASSWORD`],
+    };
+}
+
 const browser = await chromium.launch({
     headless: true,
-    proxy: {
-        server: `https://${process.env.AC_PROXY_HOST}:${process.env.AC_PROXY_PORT || '443'}`,
-        username: process.env.AC_PROXY_USER,
-        password: process.env.AC_PROXY_PASSWORD,
-    },
+    proxy: proxyFromEnv(region),
 });
 
 const page = await browser.newPage();
@@ -74,18 +98,32 @@ If the proxy rejects the connection, first check that `server` starts with `http
 
 ## Playwright Test Runner
 
-For a single region, set `use.proxy` in a temporary or local-only Playwright config:
+For a single region, set `use.proxy` in a temporary or local-only Playwright config and select the region with `AC_PROXY_REGION`:
 
 ```typescript
 import { defineConfig } from '@playwright/test';
 
+function proxyFromEnv(regionKey: string) {
+    const prefix = `AC_PROXY_${regionKey.toUpperCase()}`;
+    const host = process.env[`${prefix}_HOST`];
+    const port = process.env[`${prefix}_PORT`] || '443';
+    const username = process.env[`${prefix}_USER`];
+    const password = process.env[`${prefix}_PASSWORD`];
+
+    if (!host || !username || !password) {
+        throw new Error(`Missing proxy environment variables for region ${regionKey}`);
+    }
+
+    return {
+        server: `https://${host}:${port}`,
+        username,
+        password,
+    };
+}
+
 export default defineConfig({
     use: {
-        proxy: {
-            server: `https://${process.env.AC_PROXY_HOST}:${process.env.AC_PROXY_PORT || '443'}`,
-            username: process.env.AC_PROXY_USER,
-            password: process.env.AC_PROXY_PASSWORD,
-        },
+        proxy: proxyFromEnv(process.env.AC_PROXY_REGION || 'us'),
     },
 });
 ```
@@ -100,27 +138,35 @@ For ad hoc checks, prefer a temporary script over changing the repo's default `p
 
 ## Multiple Regions
 
-Represent each region as host/port metadata, and create a fresh browser context or browser for each region. A fresh browser per region avoids proxy state, cookies, cache, and DNS reuse crossing regional boundaries.
+Represent each region by the environment variable prefix for that region, and create a fresh browser context or browser for each region. A fresh browser per region avoids proxy state, cookies, cache, and DNS reuse crossing regional boundaries.
 
 ```javascript
 import { chromium } from 'playwright';
 
-const REGIONAL_PROXIES = {
-    us: { host: process.env.AC_PROXY_US_HOST, port: process.env.AC_PROXY_US_PORT || '443' },
-    de: { host: process.env.AC_PROXY_DE_HOST, port: process.env.AC_PROXY_DE_PORT || '443' },
-    fr: { host: process.env.AC_PROXY_FR_HOST, port: process.env.AC_PROXY_FR_PORT || '443' },
-};
+const REGIONS = ['us', 'de', 'fr'];
 
-for (const [region, proxyTarget] of Object.entries(REGIONAL_PROXIES)) {
-    if (!proxyTarget.host) continue;
+function proxyFromEnv(regionKey) {
+    const prefix = `AC_PROXY_${regionKey.toUpperCase()}`;
+    const host = process.env[`${prefix}_HOST`];
+    const port = process.env[`${prefix}_PORT`] || '443';
+    const username = process.env[`${prefix}_USER`];
+    const password = process.env[`${prefix}_PASSWORD`];
 
+    if (!host || !username || !password) {
+        throw new Error(`Missing proxy environment variables for region ${regionKey}`);
+    }
+
+    return {
+        server: `https://${host}:${port}`,
+        username,
+        password,
+    };
+}
+
+for (const region of REGIONS) {
     const browser = await chromium.launch({
         headless: true,
-        proxy: {
-            server: `https://${proxyTarget.host}:${proxyTarget.port}`,
-            username: process.env.AC_PROXY_USER,
-            password: process.env.AC_PROXY_PASSWORD,
-        },
+        proxy: proxyFromEnv(region),
     });
 
     const page = await browser.newPage();
@@ -133,7 +179,7 @@ for (const [region, proxyTarget] of Object.entries(REGIONAL_PROXIES)) {
 ## Autoconsent Rule Workflow
 
 1. Run `npm run build-rules` after changing rule JSON.
-2. Sanity-check the proxy with a neutral IP/geo endpoint.
+2. Sanity-check each regional proxy with a neutral IP/geo endpoint.
 3. Run the target Playwright spec through the proxy for each relevant region.
 4. Inspect screenshots, not just the API result. A rule can report success while the popup remains visible.
 5. Reload after dismissal and confirm the same rule does not keep matching, unless the rule is cosmetic-only.
@@ -144,6 +190,7 @@ for (const [region, proxyTarget] of Object.entries(REGIONAL_PROXIES)) {
 - HTTPS proxy server URLs need the `https://` scheme. `http://` and `socks://` can route differently and may not exercise the intended regional proxy.
 - Use `proxy.username` and `proxy.password` so Playwright handles `Proxy-Authorization`.
 - Do not pass proxy credentials via `--proxy-server`, URL userinfo, or environment variables that third-party tooling logs automatically.
+- Treat each region as its own authenticated proxy. Do not assume credentials are shared between regions.
 - Prefer Chrome/Chromium for initial proxy debugging because proxy errors are usually clearer there.
 - Some sites localize by account, cookies, Accept-Language, or browser geolocation in addition to IP. Clear state between regions and only add locale/geolocation settings intentionally.
 - A proxy can authenticate successfully while the target site blocks the proxy's egress IP. Verify with more than one test URL before concluding the Playwright proxy setup is broken.
