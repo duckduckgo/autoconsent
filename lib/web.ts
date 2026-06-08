@@ -691,13 +691,14 @@ export default class AutoConsent {
     }
 
     measurePerformance() {
+        const getRoundedPerformanceEntries = (name: string) => performance.getEntriesByName(name).map((m) => Number(m.duration.toFixed(3)));
         return {
-            detectHeuristics: performance.getEntriesByName('detectHeuristics').map((m) => m.duration),
-            heuristicDetector: performance.getEntriesByName('heuristicDetector').map((m) => m.duration),
-            findCmpSiteSpecific: performance.getEntriesByName('findCmp_site-specific').map((m) => m.duration),
-            findCmpGeneric: performance.getEntriesByName('findCmp_generic').map((m) => m.duration),
-            findCmpHeuristic: performance.getEntriesByName('findCmp_heuristic').map((m) => m.duration),
-            parseDeclarativeRules: performance.getEntriesByName('parseDeclarativeRules').map((m) => m.duration),
+            detectHeuristics: getRoundedPerformanceEntries('detectHeuristics'),
+            heuristicDetector: getRoundedPerformanceEntries('heuristicDetector'),
+            findCmpSiteSpecific: getRoundedPerformanceEntries('findCmp_site-specific'),
+            findCmpGeneric: getRoundedPerformanceEntries('findCmp_generic'),
+            findCmpHeuristic: getRoundedPerformanceEntries('findCmp_heuristic'),
+            parseDeclarativeRules: getRoundedPerformanceEntries('parseDeclarativeRules'),
         };
     }
 
