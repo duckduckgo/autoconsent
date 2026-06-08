@@ -1,5 +1,5 @@
 ---
-name: playwright-https-proxy-testing
+name: proxy-testing
 description: Test autoconsent rules across geographic regions with HTTPS regional proxies in Playwright. Use when verifying region-dependent CMP behavior with standard Playwright browsers and proxy authentication.
 ---
 
@@ -37,7 +37,7 @@ export REGIONAL_PROXY_PASSWORD="..."
 The library's `buildProxyConfig(regionKey)` helper returns Playwright's native proxy object. It uses the HTTPS scheme in `server`, hardcodes port `443`, and passes credentials separately as `username` and `password`:
 
 ```javascript
-import { buildProxyConfig } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { buildProxyConfig } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const proxy = buildProxyConfig('us');
 ```
@@ -59,7 +59,7 @@ const proxy = {
 Launches a local Playwright browser through the selected regional proxy, opens a page, injects autoconsent, navigates, waits for completion, screenshots, and closes. Returns a `TestResult`.
 
 ```javascript
-import { testUrl, formatResult } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { testUrl, formatResult } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const result = await testUrl('https://www.wohnen.de/', 'de');
 console.log(formatResult(result));
@@ -68,7 +68,7 @@ console.log(formatResult(result));
 Test one URL across multiple regions:
 
 ```javascript
-import { testRegions, formatResult } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { testRegions, formatResult } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const results = await testRegions('https://www.wohnen.de/', ['us', 'de', 'fr']);
 for (const result of results) {
@@ -81,7 +81,7 @@ for (const result of results) {
 Same autoconsent workflow, but takes an existing Playwright `Page`. Use this when managing the browser lifecycle yourself.
 
 ```javascript
-import { launchRegionalProxyBrowser, testPage } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { launchRegionalProxyBrowser, testPage } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const browser = await launchRegionalProxyBrowser('de');
 const page = await browser.newPage();
@@ -103,7 +103,7 @@ Sets up Playwright bindings and init scripts. Call before `page.goto()`. Returns
 import {
     injectAutoconsent,
     launchRegionalProxyBrowser,
-} from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+} from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const browser = await launchRegionalProxyBrowser('de');
 const page = await browser.newPage();
@@ -133,7 +133,7 @@ await browser.close();
 Use a small script to confirm that the proxy authenticates and changes browser egress before testing a CMP rule:
 
 ```javascript
-import { launchRegionalProxyBrowser } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { launchRegionalProxyBrowser } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const region = process.env.REGIONAL_PROXY_REGION || 'us';
 const browser = await launchRegionalProxyBrowser(region);
@@ -152,7 +152,7 @@ For a single region, set `use.proxy` in a temporary or local-only Playwright con
 
 ```typescript
 import { defineConfig } from '@playwright/test';
-import { buildProxyConfig } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { buildProxyConfig } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 export default defineConfig({
     use: {
@@ -174,7 +174,7 @@ For ad hoc checks, prefer a temporary script over changing the repo's default `p
 Represent each region with a `REGIONAL_PROXY_ENDPOINT_<REGION>` variable, and create a fresh browser context or browser for each region. A fresh browser per region avoids proxy state, cookies, cache, and DNS reuse crossing regional boundaries.
 
 ```javascript
-import { launchRegionalProxyBrowser } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+import { launchRegionalProxyBrowser } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
 const REGIONS = ['us', 'de', 'fr'];
 
