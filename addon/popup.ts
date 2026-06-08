@@ -20,6 +20,8 @@ async function init() {
     const heuristicActionOffRadio = document.querySelector('input#heuristic-action-off') as HTMLInputElement;
     const visualTestOnRadio = document.querySelector('input#visual-test-on') as HTMLInputElement;
     const visualTestOffRadio = document.querySelector('input#visual-test-off') as HTMLInputElement;
+    const popupMutationOnRadio = document.querySelector('input#popup-mutation-on') as HTMLInputElement;
+    const popupMutationOffRadio = document.querySelector('input#popup-mutation-off') as HTMLInputElement;
     const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
     const logsLifecycleCheckbox = document.querySelector('input#logs-lifecycle') as HTMLInputElement;
     const logsRulestepsCheckbox = document.querySelector('input#logs-rulesteps') as HTMLInputElement;
@@ -116,6 +118,12 @@ async function init() {
         visualTestOffRadio.checked = true;
     }
 
+    if (autoconsentConfig.enablePopupMutationObserver) {
+        popupMutationOnRadio.checked = true;
+    } else {
+        popupMutationOffRadio.checked = true;
+    }
+
     // set form event listeners
 
     enabledCheckbox.addEventListener('change', async () => {
@@ -175,6 +183,13 @@ async function init() {
     }
     visualTestOnRadio.addEventListener('change', visualTestChange);
     visualTestOffRadio.addEventListener('change', visualTestChange);
+
+    function popupMutationChange() {
+        autoconsentConfig.enablePopupMutationObserver = popupMutationOnRadio.checked;
+        storageSet({ config: autoconsentConfig });
+    }
+    popupMutationOnRadio.addEventListener('change', popupMutationChange);
+    popupMutationOffRadio.addEventListener('change', popupMutationChange);
 
     function updateLogsConfig() {
         autoconsentConfig.logs = {

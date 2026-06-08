@@ -1,0 +1,12 @@
+{
+    "name": "eltax-lta-go-jp",
+    "vendorUrl": "https://portal.payment.eltax.lta.go.jp/",
+    "runContext": {
+        "urlPattern": "^https://(?:[^/]+\\.)?eltax\\.lta\\.go\\.jp/"
+    },
+    "prehideSelectors": [".modal:has(> .modal-content > .cookie-consent)"],
+    "detectCmp": [{ "exists": ".cookie-consent #cookieDisagree" }],
+    "detectPopup": [{ "visible": ".cookie-consent #cookieDisagree" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent #cookieAgree" }],
+    "optOut": [{ "waitForThenClick": ".cookie-consent #cookieDisagree" }]
+}

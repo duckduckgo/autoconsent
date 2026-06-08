@@ -65,6 +65,7 @@ export type Config = {
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
     enableHeuristicAction: boolean;
+    enablePopupMutationObserver: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;

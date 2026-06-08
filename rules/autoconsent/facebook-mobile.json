@@ -1,0 +1,17 @@
+{
+    "name": "facebook-mobile",
+    "runContext": {
+        "urlPattern": "^https://(m|mbasic)\\.facebook\\.com/"
+    },
+    "prehideSelectors": ["[data-testid=\"cookie-policy-manage-dialog\"]"],
+    "detectCmp": [{ "exists": "[data-testid=\"cookie-policy-manage-dialog\"]" }],
+    "detectPopup": [{ "visible": "[data-testid=\"cookie-policy-manage-dialog\"]" }],
+    "optIn": [
+        { "waitForThenClick": "[data-testid=\"cookie-policy-manage-dialog-accept-button\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-policy-manage-dialog\"]", "check": "none" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "[data-testid=\"cookie-policy-manage-dialog-decline-button\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-policy-manage-dialog\"]", "check": "none" }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "justgiving.com",
+    "vendorUrl": "https://www.justgiving.com/",
+    "runContext": {
+        "urlPattern": "^https://(?:[a-z0-9-]+\\.)?justgiving\\.com/"
+    },
+    "prehideSelectors": ["#cookiebanner-popup"],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "#cookiebanner-popup"
+                },
+                {
+                    "exists": "#jg-chrome-header"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebanner-popup"
+        },
+        {
+            "exists": "#cookiebanner-popup #accept-essential-Cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebanner-popup #accept-all-Cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebanner-popup #accept-essential-Cookies"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "necessary:true%2Cpreferences:false"
+        }
+    ]
+}

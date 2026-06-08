@@ -1,0 +1,35 @@
+{
+    "name": "edpb-edps",
+    "_metadata": {
+        "vendorUrl": "https://www.edpb.europa.eu/"
+    },
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?(edpb|edps)\\.europa\\.eu/"
+    },
+    "prehideSelectors": ["#edp-cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": "#edp-cookies-banner .edp-cookies-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#edp-cookies-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#edp-cookies-banner .edp-cookies-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#edp-cookies-banner .edp-cookies-refuse"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "edp_cookie_agree=0"
+        }
+    ]
+}

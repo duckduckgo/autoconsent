@@ -5,7 +5,15 @@ import { storageGet, storageSet } from './mv-compat';
 
 export function extensionDefaultConfig(storedConfig: Partial<Config> = {}): Config {
     if (!storedConfig.enableHeuristicDetection) {
+        // heuristic detection must be true for test extension to work
         storedConfig.enableHeuristicDetection = true;
+    }
+    // these defaults are different from the library defaults
+    if (storedConfig.enablePopupMutationObserver === undefined) {
+        storedConfig.enablePopupMutationObserver = true;
+    }
+    if (storedConfig.enableHeuristicAction === undefined) {
+        storedConfig.enableHeuristicAction = true;
     }
     if (!storedConfig.logs) {
         storedConfig.logs = {
