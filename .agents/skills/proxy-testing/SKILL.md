@@ -5,7 +5,7 @@ description: Test autoconsent rules across geographic regions with HTTPS proxies
 
 # Proxy Testing
 
-Use this skill to test autoconsent behavior from specific regions through HTTPS proxies. It launches local Playwright browsers with a regional proxy; it does not connect to remote CDP browsers like the Oxylabs skill.
+Use this skill to test autoconsent behavior from specific regions through HTTPS proxies. It launches local Playwright browsers with a regional proxy selected by environment variables.
 
 The reusable library lives at [scripts/regional-proxy.mjs](scripts/regional-proxy.mjs). Prefer it over writing one-off proxy and autoconsent injection code.
 
