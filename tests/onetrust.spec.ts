@@ -8,6 +8,7 @@ generateCMPTests('Onetrust', [
     'https://www.coca-cola.com/us/en',
     'https://www.seur.com/es/index.html',
     'https://satsuite.collegeboard.org/sat/dates-deadlines',
+    'https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/dmr-effect-on-drag-reduction-of-a-streamlined-body-measured-by-magnetic-suspension-and-balance-system/0E3FF950CCC66DEFCBA3D3DCD36CE2B6',
 ]);
 
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
