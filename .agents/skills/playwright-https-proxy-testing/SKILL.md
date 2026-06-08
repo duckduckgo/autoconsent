@@ -9,6 +9,8 @@ Use this skill when testing autoconsent behavior from specific regions through a
 
 Always use Playwright's built-in proxy authentication object. Do not embed credentials in the proxy URL, command line, screenshots, logs, or checked-in source.
 
+This skill provides a JS library at [scripts/regional-proxy.mjs](scripts/regional-proxy.mjs). Prefer the library for ad hoc regional testing instead of rewriting proxy and autoconsent injection boilerplate.
+
 ## Prerequisites
 
 Build the autoconsent assets before running rule tests:
@@ -32,24 +34,12 @@ export REGIONAL_PROXY_PASSWORD="..."
 
 ## Proxy Configuration
 
-Use the HTTPS scheme in `server`, and pass credentials separately as `username` and `password`. This helper builds the Playwright proxy object for a requested region:
+The library's `buildProxyConfig(regionKey)` helper returns Playwright's native proxy object. It uses the HTTPS scheme in `server`, hardcodes port `443`, and passes credentials separately as `username` and `password`:
 
 ```javascript
-function proxyFromEnv(regionKey) {
-    const endpoint = process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
-    const username = process.env.REGIONAL_PROXY_USERNAME;
-    const password = process.env.REGIONAL_PROXY_PASSWORD;
+import { buildProxyConfig } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
 
-    if (!endpoint || !username || !password) {
-        throw new Error(`Missing proxy environment variables for region ${regionKey}`);
-    }
-
-    return {
-        server: `https://${endpoint}:443`,
-        username,
-        password,
-    };
-}
+const proxy = buildProxyConfig('us');
 ```
 
 Do not do this:
@@ -62,27 +52,91 @@ const proxy = {
 };
 ```
 
+## API
+
+### `testUrl(url, regionKey, options?)` — highest level
+
+Launches a local Playwright browser through the selected regional proxy, opens a page, injects autoconsent, navigates, waits for completion, screenshots, and closes. Returns a `TestResult`.
+
+```javascript
+import { testUrl, formatResult } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+
+const result = await testUrl('https://www.wohnen.de/', 'de');
+console.log(formatResult(result));
+```
+
+Test one URL across multiple regions:
+
+```javascript
+import { testRegions, formatResult } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+
+const results = await testRegions('https://www.wohnen.de/', ['us', 'de', 'fr']);
+for (const result of results) {
+    console.log(formatResult(result));
+}
+```
+
+### `testPage(page, url, regionKey, options?)` — mid level
+
+Same autoconsent workflow, but takes an existing Playwright `Page`. Use this when managing the browser lifecycle yourself.
+
+```javascript
+import { launchRegionalProxyBrowser, testPage } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+
+const browser = await launchRegionalProxyBrowser('de');
+const page = await browser.newPage();
+const result = await testPage(page, 'https://www.wohnen.de/', 'de');
+await browser.close();
+```
+
+### `injectAutoconsent(page, options?)` — low level
+
+Sets up Playwright bindings and init scripts. Call before `page.goto()`. Returns an `AutoconsentContext`:
+
+- `received` — array of all autoconsent messages
+- `hasMessage(type)` — check if a message type was received
+- `waitForCompletion(timeout?)` — wait for opt-in/opt-out/detection completion
+- `waitForMessage(type, timeout?)` — wait for a specific message type
+- `collectResult(url, region)` — aggregate messages into a `TestResult`
+
+```javascript
+import {
+    injectAutoconsent,
+    launchRegionalProxyBrowser,
+} from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
+
+const browser = await launchRegionalProxyBrowser('de');
+const page = await browser.newPage();
+const ctx = await injectAutoconsent(page, { action: 'optOut' });
+await page.goto('https://www.wohnen.de/', { waitUntil: 'commit' });
+await ctx.waitForCompletion(45000);
+const result = ctx.collectResult('https://www.wohnen.de/', 'de');
+await browser.close();
+```
+
+### Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `action` | `'optOut'` | `'optOut'`, `'optIn'`, or `null` |
+| `screenshotsDir` | `test-results/regional-proxy` | Where to save final screenshots |
+| `navigationTimeout` | `45000` | Navigation timeout (ms) |
+| `completionTimeout` | `45000` | Wait for autoconsent to finish (ms) |
+| `browserName` | `'chromium'` | `'chromium'`, `'firefox'`, or `'webkit'` |
+| `headless` | `true` | Launch browser headless |
+| `launchOptions` | `{}` | Extra Playwright launch options; proxy is supplied by the library |
+
+`formatResult(result)` produces a one-line status per result: PASS, PARTIAL, ACTION FAILED, or NO CMP.
+
 ## One-off Browser Check
 
 Use a small script to confirm that the proxy authenticates and changes browser egress before testing a CMP rule:
 
 ```javascript
-import { chromium } from 'playwright';
+import { launchRegionalProxyBrowser } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
 
 const region = process.env.REGIONAL_PROXY_REGION || 'us';
-
-function proxyFromEnv(regionKey) {
-    return {
-        server: `https://${process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`]}:443`,
-        username: process.env.REGIONAL_PROXY_USERNAME,
-        password: process.env.REGIONAL_PROXY_PASSWORD,
-    };
-}
-
-const browser = await chromium.launch({
-    headless: true,
-    proxy: proxyFromEnv(region),
-});
+const browser = await launchRegionalProxyBrowser(region);
 
 const page = await browser.newPage();
 await page.goto('https://api.ipify.org?format=json', { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -98,26 +152,11 @@ For a single region, set `use.proxy` in a temporary or local-only Playwright con
 
 ```typescript
 import { defineConfig } from '@playwright/test';
-
-function proxyFromEnv(regionKey: string) {
-    const endpoint = process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
-    const username = process.env.REGIONAL_PROXY_USERNAME;
-    const password = process.env.REGIONAL_PROXY_PASSWORD;
-
-    if (!endpoint || !username || !password) {
-        throw new Error(`Missing proxy environment variables for region ${regionKey}`);
-    }
-
-    return {
-        server: `https://${endpoint}:443`,
-        username,
-        password,
-    };
-}
+import { buildProxyConfig } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
 
 export default defineConfig({
     use: {
-        proxy: proxyFromEnv(process.env.REGIONAL_PROXY_REGION || 'us'),
+        proxy: buildProxyConfig(process.env.REGIONAL_PROXY_REGION || 'us'),
     },
 });
 ```
@@ -135,31 +174,12 @@ For ad hoc checks, prefer a temporary script over changing the repo's default `p
 Represent each region with a `REGIONAL_PROXY_ENDPOINT_<REGION>` variable, and create a fresh browser context or browser for each region. A fresh browser per region avoids proxy state, cookies, cache, and DNS reuse crossing regional boundaries.
 
 ```javascript
-import { chromium } from 'playwright';
+import { launchRegionalProxyBrowser } from './.agents/skills/playwright-https-proxy-testing/scripts/regional-proxy.mjs';
 
 const REGIONS = ['us', 'de', 'fr'];
 
-function proxyFromEnv(regionKey) {
-    const endpoint = process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
-    const username = process.env.REGIONAL_PROXY_USERNAME;
-    const password = process.env.REGIONAL_PROXY_PASSWORD;
-
-    if (!endpoint || !username || !password) {
-        throw new Error(`Missing proxy environment variables for region ${regionKey}`);
-    }
-
-    return {
-        server: `https://${endpoint}:443`,
-        username,
-        password,
-    };
-}
-
 for (const region of REGIONS) {
-    const browser = await chromium.launch({
-        headless: true,
-        proxy: proxyFromEnv(region),
-    });
+    const browser = await launchRegionalProxyBrowser(region);
 
     const page = await browser.newPage();
     await page.goto('https://example.com/', { waitUntil: 'domcontentloaded' });
@@ -181,6 +201,7 @@ for (const region of REGIONS) {
 
 - HTTPS proxy server URLs need the `https://` scheme. `http://` and `socks://` can route differently and may not exercise the intended regional proxy.
 - Use `proxy.username` and `proxy.password` so Playwright handles `Proxy-Authorization`.
+- Call `injectAutoconsent(page)` before `page.goto()` so the init script is installed before page scripts run.
 - Do not pass proxy credentials via `--proxy-server`, URL userinfo, or environment variables that third-party tooling logs automatically.
 - Region endpoints are separate, but `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD` are shared across regions.
 - Prefer Chrome/Chromium for initial proxy debugging because proxy errors are usually clearer there.
