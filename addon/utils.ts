@@ -26,6 +26,9 @@ export function extensionDefaultConfig(storedConfig: Partial<Config> = {}): Conf
             waits: true,
         };
     }
+    if (storedConfig.performanceLoggingEnabled === undefined) {
+        storedConfig.performanceLoggingEnabled = true;
+    }
     return normalizeConfig(storedConfig);
 }
 

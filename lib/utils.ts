@@ -93,6 +93,7 @@ export function normalizeConfig(providedConfig: any): Config {
             messages: false,
             waits: false,
         },
+        performanceLoggingEnabled: false,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries
