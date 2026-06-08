@@ -20,15 +20,15 @@ npm run prepublish
 Proxy endpoints are provided through environment variables or Cursor secrets, one endpoint per region. Credentials are shared across all regions:
 
 ```bash
-export PROXY_ENDPOINT_US="us.example.proxy.duckduckgo.com"
-export PROXY_ENDPOINT_DE="de.example.proxy.duckduckgo.com"
-export PROXY_ENDPOINT_FR="fr.example.proxy.duckduckgo.com"
+export REGIONAL_PROXY_ENDPOINT_US="us.example.proxy.duckduckgo.com"
+export REGIONAL_PROXY_ENDPOINT_DE="de.example.proxy.duckduckgo.com"
+export REGIONAL_PROXY_ENDPOINT_FR="fr.example.proxy.duckduckgo.com"
 
-export PROXY_USERNAME="..."
-export PROXY_PASSWORD="..."
+export REGIONAL_PROXY_USERNAME="..."
+export REGIONAL_PROXY_PASSWORD="..."
 ```
 
-`PROXY_ENDPOINT_<REGION>` values should be hostnames, without a scheme, credentials, or port. The Playwright proxy helper adds `https://` and port `443`.
+`REGIONAL_PROXY_ENDPOINT_<REGION>` values should be hostnames, without a scheme, credentials, or port. The Playwright proxy helper adds `https://` and port `443`.
 
 ## Proxy Configuration
 
@@ -36,9 +36,9 @@ Use the HTTPS scheme in `server`, and pass credentials separately as `username` 
 
 ```javascript
 function proxyFromEnv(regionKey) {
-    const endpoint = process.env[`PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
-    const username = process.env.PROXY_USERNAME;
-    const password = process.env.PROXY_PASSWORD;
+    const endpoint = process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
+    const username = process.env.REGIONAL_PROXY_USERNAME;
+    const password = process.env.REGIONAL_PROXY_PASSWORD;
 
     if (!endpoint || !username || !password) {
         throw new Error(`Missing proxy environment variables for region ${regionKey}`);
@@ -69,13 +69,13 @@ Use a small script to confirm that the proxy authenticates and changes browser e
 ```javascript
 import { chromium } from 'playwright';
 
-const region = process.env.PROXY_REGION || 'us';
+const region = process.env.REGIONAL_PROXY_REGION || 'us';
 
 function proxyFromEnv(regionKey) {
     return {
-        server: `https://${process.env[`PROXY_ENDPOINT_${regionKey.toUpperCase()}`]}:443`,
-        username: process.env.PROXY_USERNAME,
-        password: process.env.PROXY_PASSWORD,
+        server: `https://${process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`]}:443`,
+        username: process.env.REGIONAL_PROXY_USERNAME,
+        password: process.env.REGIONAL_PROXY_PASSWORD,
     };
 }
 
@@ -94,15 +94,15 @@ If the proxy rejects the connection, first check that `server` starts with `http
 
 ## Playwright Test Runner
 
-For a single region, set `use.proxy` in a temporary or local-only Playwright config and select the region with `PROXY_REGION`:
+For a single region, set `use.proxy` in a temporary or local-only Playwright config and select the region with `REGIONAL_PROXY_REGION`:
 
 ```typescript
 import { defineConfig } from '@playwright/test';
 
 function proxyFromEnv(regionKey: string) {
-    const endpoint = process.env[`PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
-    const username = process.env.PROXY_USERNAME;
-    const password = process.env.PROXY_PASSWORD;
+    const endpoint = process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
+    const username = process.env.REGIONAL_PROXY_USERNAME;
+    const password = process.env.REGIONAL_PROXY_PASSWORD;
 
     if (!endpoint || !username || !password) {
         throw new Error(`Missing proxy environment variables for region ${regionKey}`);
@@ -117,7 +117,7 @@ function proxyFromEnv(regionKey: string) {
 
 export default defineConfig({
     use: {
-        proxy: proxyFromEnv(process.env.PROXY_REGION || 'us'),
+        proxy: proxyFromEnv(process.env.REGIONAL_PROXY_REGION || 'us'),
     },
 });
 ```
@@ -132,7 +132,7 @@ For ad hoc checks, prefer a temporary script over changing the repo's default `p
 
 ## Multiple Regions
 
-Represent each region with a `PROXY_ENDPOINT_<REGION>` variable, and create a fresh browser context or browser for each region. A fresh browser per region avoids proxy state, cookies, cache, and DNS reuse crossing regional boundaries.
+Represent each region with a `REGIONAL_PROXY_ENDPOINT_<REGION>` variable, and create a fresh browser context or browser for each region. A fresh browser per region avoids proxy state, cookies, cache, and DNS reuse crossing regional boundaries.
 
 ```javascript
 import { chromium } from 'playwright';
@@ -140,9 +140,9 @@ import { chromium } from 'playwright';
 const REGIONS = ['us', 'de', 'fr'];
 
 function proxyFromEnv(regionKey) {
-    const endpoint = process.env[`PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
-    const username = process.env.PROXY_USERNAME;
-    const password = process.env.PROXY_PASSWORD;
+    const endpoint = process.env[`REGIONAL_PROXY_ENDPOINT_${regionKey.toUpperCase()}`];
+    const username = process.env.REGIONAL_PROXY_USERNAME;
+    const password = process.env.REGIONAL_PROXY_PASSWORD;
 
     if (!endpoint || !username || !password) {
         throw new Error(`Missing proxy environment variables for region ${regionKey}`);
@@ -182,7 +182,7 @@ for (const region of REGIONS) {
 - HTTPS proxy server URLs need the `https://` scheme. `http://` and `socks://` can route differently and may not exercise the intended regional proxy.
 - Use `proxy.username` and `proxy.password` so Playwright handles `Proxy-Authorization`.
 - Do not pass proxy credentials via `--proxy-server`, URL userinfo, or environment variables that third-party tooling logs automatically.
-- Region endpoints are separate, but `PROXY_USERNAME` and `PROXY_PASSWORD` are shared across regions.
+- Region endpoints are separate, but `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD` are shared across regions.
 - Prefer Chrome/Chromium for initial proxy debugging because proxy errors are usually clearer there.
 - Some sites localize by account, cookies, Accept-Language, or browser geolocation in addition to IP. Clear state between regions and only add locale/geolocation settings intentionally.
 - A proxy can authenticate successfully while the target site blocks the proxy's egress IP. Verify with more than one test URL before concluding the Playwright proxy setup is broken.
