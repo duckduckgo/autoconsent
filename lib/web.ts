@@ -304,11 +304,7 @@ export default class AutoConsent {
         ];
         const runDetectCmp = async (cmp: AutoCMP) => {
             try {
-                this.config.performanceLoggingEnabled && performance.mark(`detectCmp_${cmp.name}`);
                 const result = await cmp.detectCmp();
-                this.config.performanceLoggingEnabled && performance.mark(`detectCmpEnd_${cmp.name}`);
-                this.config.performanceLoggingEnabled &&
-                    performance.measure(`detectCmp_${cmp.name}`, `detectCmp_${cmp.name}`, `detectCmpEnd_${cmp.name}`);
                 if (result) {
                     logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
                     this.sendContentMessage({
@@ -700,20 +696,5 @@ export default class AutoConsent {
             findCmpHeuristic: getRoundedPerformanceEntries('findCmp_heuristic'),
             parseDeclarativeRules: getRoundedPerformanceEntries('parseDeclarativeRules'),
         };
-    }
-
-    measureDetailedRulePerformance() {
-        const cmpPerformance: Record<string, number> = performance
-            .getEntriesByType('measure')
-            .filter((m) => m.name.startsWith('detectCmp_'))
-            .reduce((acc, m) => {
-                const k = m.name.slice(10);
-                if (!acc[k]) {
-                    acc[k] = 0;
-                }
-                acc[k] += m.duration;
-                return acc;
-            }, Object.create(null));
-        return cmpPerformance;
     }
 }
