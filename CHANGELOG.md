@@ -1,3 +1,21 @@
+# v14.92.0 (Tue Jun 09 2026)
+
+#### 🚀 Enhancement
+
+- Add vivenu rule for the cookie banner used on vivenu-powered shops [#1386](https://github.com/duckduckgo/autoconsent/pull/1386) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add flag to enable measurement of detectCMP phase [#1385](https://github.com/duckduckgo/autoconsent/pull/1385) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.91.0 (Sat Jun 06 2026)
 
 #### 🚀 Enhancement
