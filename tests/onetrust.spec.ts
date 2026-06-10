@@ -33,6 +33,12 @@ generateCMPTests('Onetrust', ['https://www.newyorker.com/', 'https://www.adobe.c
     skipRegions: ['US'],
 });
 
+// booking.com uses OneTrust with standard selectors. In the US the SDK applies implicit
+// consent for non-GDPR regions, so no banner is shown there.
+generateCMPTests('Onetrust', ['https://www.booking.com/'], {
+    skipRegions: ['US'],
+});
+
 generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
     skipRegions: ['US'],
 });
