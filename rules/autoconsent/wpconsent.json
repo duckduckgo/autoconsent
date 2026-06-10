@@ -1,0 +1,43 @@
+{
+    "name": "wpconsent",
+    "vendorUrl": "https://wpconsent.com/",
+    "prehideSelectors": ["#wpconsent-root"],
+    "detectCmp": [
+        {
+            "exists": ["#wpconsent-container", "#wpconsent-banner-holder"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#wpconsent-container", "#wpconsent-banner-holder.wpconsent-banner-visible"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#wpconsent-container", "#wpconsent-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ["#wpconsent-container", "#wpconsent-cancel-all"] },
+            "then": [
+                {
+                    "waitForThenClick": ["#wpconsent-container", "#wpconsent-cancel-all"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["#wpconsent-container", "#wpconsent-preferences-all"]
+                },
+                {
+                    "waitForThenClick": ["#wpconsent-container", ".wpconsent-save-preferences"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "wpconsent_preferences"
+        }
+    ]
+}
