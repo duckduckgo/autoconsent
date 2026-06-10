@@ -32,3 +32,10 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// gocompare.com only shows a Sourcepoint banner to GDPR-applicable visitors,
+// and is fronted by Imperva bot protection that blocks crawler traffic from
+// other regions, so restrict the test to GB.
+generateCMPTests('Sourcepoint-frame', ['https://www.gocompare.com/'], {
+    onlyRegions: ['GB'],
+});
