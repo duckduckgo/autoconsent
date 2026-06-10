@@ -18,4 +18,8 @@ generateCMPTests('ketch', [
     'https://www.altec.com/',
     'https://www.akro-mils.com/',
     'https://www.ascensus.com/',
+    // Banner with "Manage Cookie Settings" + "Accept All Cookies" only (no
+    // direct reject); preferences modal has per-purpose toggles and a
+    // "Save Settings" button but no "Reject All".
+    'https://my.equifax.ca/login',
 ]);
