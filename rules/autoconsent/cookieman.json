@@ -1,0 +1,10 @@
+{
+    "name": "cookieman",
+    "vendorUrl": "https://github.com/dmind-gmbh/extension-cookieman",
+    "prehideSelectors": ["#cookieman-modal"],
+    "detectCmp": [{ "exists": "#cookieman-modal[data-cookieman-settings]" }],
+    "detectPopup": [{ "visible": "#cookieman-modal" }],
+    "optIn": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-all]" }],
+    "optOut": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-none]" }],
+    "test": [{ "waitForVisible": "#cookieman-modal", "timeout": 1000, "check": "none" }]
+}
