@@ -1,0 +1,30 @@
+{
+    "name": "msm-cookie-consent",
+    "vendorUrl": "https://www.moneysupermarket.com/",
+    "comment": "MSM (Moneysupermarket Group) cookie consent library used on moneysupermarket.com, moneysavingexpert.com and related properties.",
+    "detectCmp": [
+        {
+            "exists": "dialog[aria-label=\"Cookie Notification\"] #banner-reject, dialog[data-testid=\"accept-our-cookies-dialog\"] #banner-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog[aria-label=\"Cookie Notification\"] #banner-reject, dialog[data-testid=\"accept-our-cookies-dialog\"] #banner-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#banner-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#banner-reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ckmsm"
+        }
+    ]
+}
