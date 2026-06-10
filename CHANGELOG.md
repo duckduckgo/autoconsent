@@ -1,3 +1,15 @@
+# v14.93.0 (Wed Jun 10 2026)
+
+#### 🚀 Enhancement
+
+- Disable per-rule performance measurement [#1389](https://github.com/duckduckgo/autoconsent/pull/1389) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.92.0 (Tue Jun 09 2026)
 
 #### 🚀 Enhancement
