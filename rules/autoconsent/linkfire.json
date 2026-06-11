@@ -1,0 +1,36 @@
+{
+    "name": "linkfire",
+    "_metadata": {
+        "vendorUrl": "https://www.linkfire.com/"
+    },
+    "prehideSelectors": [".lnk-c-modal", ".lnk-c-implied-consent", ".lnk-c-takeover", ".lnk-c-notification", ".lnk-c-banner"],
+    "detectCmp": [
+        {
+            "exists": "#linkfire-consent-data"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".lnk-c-modal, .lnk-c-implied-consent.is-active, .lnk-c-takeover.is-active",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "[data-test='consent-modal-accept-button']" },
+            "then": [{ "waitForThenClick": "[data-test='consent-modal-accept-button']" }],
+            "else": [{ "waitForThenClick": ".lnk-c-implied-consent__actions .lnk-c-btn" }]
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".lnk-c-modal .lnk-c-footnote__button, .lnk-c-implied-consent .lnk-c-link-btn" },
+        { "waitForVisible": ".lnk-c-takeover.is-active" },
+        { "waitForThenClick": ".lnk-c-takeover input[type='radio'][value='false']", "all": true },
+        { "waitForThenClick": ".lnk-c-takeover .lnk-c-panel__actions button" }
+    ],
+    "test": [
+        {
+            "cookieContains": "LF_performance="
+        }
+    ]
+}
