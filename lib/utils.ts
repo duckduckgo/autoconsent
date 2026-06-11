@@ -94,6 +94,7 @@ export function normalizeConfig(providedConfig: any): Config {
             waits: false,
         },
         performanceLoggingEnabled: false,
+        heuristicPopupSearchTimeout: 100,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries
