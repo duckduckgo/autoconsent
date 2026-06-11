@@ -1,0 +1,36 @@
+{
+    "name": "posthog.com",
+    "_metadata": {
+        "vendorUrl": "https://posthog.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?posthog\\.com/"
+    },
+    "prehideSelectors": ["[data-radix-toast-viewport] li:has(img[src*='EU/images/ursula'])"],
+    "detectCmp": [
+        {
+            "exists": "[data-radix-toast-viewport] li[data-state='open']:has(img[src*='EU/images/ursula'])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-radix-toast-viewport] li[data-state='open']:has(img[src*='EU/images/ursula'])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-radix-toast-viewport] li[data-state='open']:has(img[src*='EU/images/ursula']) button[data-radix-toast-announce-alt='Close']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-radix-toast-viewport] li[data-state='open']:has(img[src*='EU/images/ursula']) button[data-radix-toast-announce-alt='Close']"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-radix-toast-viewport] li[data-state='open']:has(img[src*='EU/images/ursula'])",
+            "check": "none"
+        }
+    ]
+}
