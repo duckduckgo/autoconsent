@@ -9,6 +9,7 @@ generateCMPTests(
         'https://www.boursorama.com/',
         'https://www.theoriginalshotels.com/en/hotels/la-villa-vicha',
         'https://support.didomi.io/set-up-the-absence-of-interaction-as-a-cookie-denial',
+        'https://www.leboncoin.fr/',
     ],
     {
         testOptIn: true,
