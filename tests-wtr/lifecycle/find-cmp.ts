@@ -156,6 +156,8 @@ describe('Autoconsent.findCmp', () => {
                 optIn: [],
                 optOut: [],
             });
+            // force findCmpAttempts to 1 so heuristic CMP is run on the first attempt
+            autoconsent.state.findCmpAttempts = 1;
             const found = await autoconsent.findCmp(1);
 
             expect(found).to.have.length(1);
