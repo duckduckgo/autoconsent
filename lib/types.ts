@@ -77,6 +77,7 @@ export type Config = {
         waits: boolean;
     };
     performanceLoggingEnabled: boolean;
+    heuristicPopupSearchTimeout: number;
 };
 
 export type LifecycleState =

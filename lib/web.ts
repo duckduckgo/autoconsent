@@ -294,8 +294,9 @@ export default class AutoConsent {
                 }
             }
         });
-        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
-        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled and retries is odd
+        const heuristicRules =
+            isTop && this.config.enableHeuristicAction && this.state.findCmpAttempts % 2 === 0 ? [new AutoConsentHeuristicCMP(this)] : [];
 
         const rulesPriorityStages: [string, AutoCMP[]][] = [
             ['site-specific', siteSpecificRules],
@@ -347,8 +348,12 @@ export default class AutoConsent {
             // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
+            const waitFor: Promise<boolean>[] = [this.domActions.wait(500)];
+            if (this.state.findCmpAttempts > 1) {
+                waitFor.push(mutationObserver);
+            }
             try {
-                await Promise.all([this.domActions.wait(500), mutationObserver]);
+                await Promise.all(waitFor);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];

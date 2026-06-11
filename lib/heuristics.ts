@@ -4,6 +4,7 @@ import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const TEXT_LIMIT = 100000;
+const POPUP_SEARCH_MAX_TIME = 100;
 
 export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
     allText = allText.slice(0, TEXT_LIMIT);
@@ -20,8 +21,8 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
-export function getActionablePopups(): PopupData[] {
-    const popups = getPotentialPopups();
+export function getActionablePopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+    const popups = getPotentialPopups(timeout);
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
@@ -88,20 +89,20 @@ export function cleanButtonText(buttonText: string): string {
     return result;
 }
 
-function getPotentialPopups() {
+function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME) {
     const isFramed = !isTopFrame();
     // do not inspect frames that are more than one level deep
     if (isFramed && window.parent && window.parent !== window.top) {
         return [];
     }
 
-    return collectPotentialPopups(isFramed);
+    return collectPotentialPopups(isFramed, timeout);
 }
 
-function collectPotentialPopups(isFramed: boolean): PopupData[] {
+function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     let elements = [];
     if (!isFramed) {
-        elements = getPopupLikeElements();
+        elements = getPopupLikeElements(timeout);
     } else {
         // for iframes, just take the whole document
         const doc = document.body || document.documentElement;
@@ -140,7 +141,8 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
  */
-function getPopupLikeElements(): HTMLElement[] {
+function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
+    const startTime = performance.now();
     const walker = document.createTreeWalker(
         document.documentElement,
         NodeFilter.SHOW_ELEMENT, // visit only element nodes
@@ -158,11 +160,14 @@ function getPopupLikeElements(): HTMLElement[] {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                 }
+                // start rejecting after POPUP_SEARCH_MAX_TIME to avoid blocking the main thread
+                if (performance.now() - startTime > timeout) {
+                    return NodeFilter.FILTER_REJECT;
+                }
                 return NodeFilter.FILTER_SKIP;
             },
         },
     );
-
     const found = [];
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         found.push(node as HTMLElement);
