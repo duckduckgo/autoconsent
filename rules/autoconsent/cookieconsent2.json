@@ -1,31 +1,42 @@
 {
     "name": "cookieconsent2",
     "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
-    "comment": "supports v2.x.x of the library",
-    "prehideSelectors": ["#cc--main"],
+    "comment": "supports v2.x.x of the library, including legacy v2.0-v2.3 deployments and forks (e.g. Storeden) that retain the older #cm_primary_btn / #cs_save__btn IDs",
+    "prehideSelectors": ["#cc--main", "#cc_div"],
     "detectCmp": [
         {
-            "exists": "#cc--main"
+            "any": [{ "exists": "#cc--main" }, { "exists": "#cc_div" }]
         }
     ],
     "detectPopup": [
         {
             "exists": "html.show--consent #cm"
-        },
-        {
-            "exists": "#s-all-bn"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#s-all-bn"
+            "if": { "exists": "#s-all-bn" },
+            "then": [{ "waitForThenClick": "#s-all-bn" }],
+            "else": [{ "waitForThenClick": "#cm_primary_btn" }]
         }
     ],
     "optOut": [
         {
             "if": { "exists": "#s-rall-bn" },
             "then": [{ "waitForThenClick": "#s-rall-bn" }],
-            "else": [{ "waitForThenClick": "#c-s-bn" }, { "wait": 500 }, { "waitForThenClick": "#s-sv-bn" }]
+            "else": [
+                {
+                    "if": { "exists": "#c-s-bn" },
+                    "then": [{ "waitForThenClick": "#c-s-bn" }, { "wait": 500 }, { "waitForThenClick": "#s-sv-bn" }],
+                    "else": [
+                        { "waitForThenClick": "#cm_secondary_btn" },
+                        {
+                            "if": { "exists": "html.show--consent" },
+                            "then": [{ "waitForVisible": "#cs_save__btn", "timeout": 2000 }, { "click": "#cs_save__btn" }]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
