@@ -117,6 +117,7 @@ export type ConsentState = {
 export interface ButtonData {
     text: string;
     element: HTMLElement;
+    regexClassification?: 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
 }
 
 export interface PopupData {
