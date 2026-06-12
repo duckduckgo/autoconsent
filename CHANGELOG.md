@@ -1,3 +1,15 @@
+# v14.94.0 (Fri Jun 12 2026)
+
+#### 🚀 Enhancement
+
+- Improve heuristic detection performance [#1381](https://github.com/duckduckgo/autoconsent/pull/1381) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.93.0 (Wed Jun 10 2026)
 
 #### 🚀 Enhancement
