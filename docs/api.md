@@ -27,7 +27,6 @@ const consent = new AutoConsent( // make sure not to leak anything to the page g
     },
     { // optionally, pass JSON rules
         autoconsent: [ ... ],
-        consentomatic: [ ... ],
     }
 );
 
