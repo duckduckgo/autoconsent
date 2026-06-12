@@ -1,0 +1,26 @@
+{
+    "name": "cookie-notice-base",
+    "vendorUrl": "https://unknown",
+    "cosmetic": true,
+    "prehideSelectors": [".cookie-notice-base.opt-1"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-notice-base.opt-1 .cookie-notice-content"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-notice-base.opt-1"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-notice-base.opt-1 .toggle-exit"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-notice-base.opt-1"
+        }
+    ]
+}
