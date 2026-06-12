@@ -1,0 +1,29 @@
+{
+    "name": "scmp.com",
+    "vendorUrl": "https://www.scmp.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?scmp\\.com/"
+    },
+    "prehideSelectors": ["[data-qa=\"GDPRBanner-Container\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-qa=\"GDPRBanner-Container\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-qa=\"GDPRBanner-Container\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-qa=\"GDPRBanner-Button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[data-qa=\"GDPRBanner-Container\"]"
+        }
+    ]
+}
