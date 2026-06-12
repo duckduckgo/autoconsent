@@ -1,0 +1,41 @@
+{
+    "name": "appconsent",
+    "vendorUrl": "https://www.sfbx.io/",
+    "cosmetic": false,
+    "prehideSelectors": ["div#appconsent"],
+    "detectCmp": [
+        {
+            "exists": "div#appconsent > iframe"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["div#appconsent > iframe", "[class*=\"button__acceptAll\"]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["div#appconsent > iframe", "[class*=\"button__acceptAll\"]"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["div#appconsent > iframe", "[class*=\"button__skip\"]"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["div#appconsent > iframe", "[class*=\"button__skip\"]"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["div#appconsent > iframe", "[class*=\"button__openPrivacyCenter\"]"]
+                },
+                {
+                    "waitForThenClick": ["div#appconsent > iframe", "[class*=\"button__refuseAll\"]"]
+                }
+            ]
+        }
+    ]
+}
