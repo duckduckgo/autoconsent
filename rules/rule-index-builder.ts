@@ -28,19 +28,14 @@ function buildCodeBasedRuleMetadata(): DynamicCMPMetadata[] {
     }));
 }
 
-export function buildRuleIndex(rules: AutoConsentCMPRule[], consentomatic: Record<string, object>): RuleIndexEntry[] {
+export function buildRuleIndex(rules: AutoConsentCMPRule[]): RuleIndexEntry[] {
     const codeBasedRules: RuleIndexEntry[] = buildCodeBasedRuleMetadata().map((rule) => ({
         name: rule.name,
         section: 'code',
     }));
-    const consentomaticRules: RuleIndexEntry[] = Object.keys(consentomatic).map((name) => ({
-        name: `com_${name}`,
-        section: 'consentomatic',
-    }));
 
     return [
         ...codeBasedRules,
-        ...consentomaticRules,
         ...rules.map((rule) => {
             const entry: RuleIndexEntry = {
                 name: rule.name,

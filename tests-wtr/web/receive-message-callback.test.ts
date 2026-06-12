@@ -124,7 +124,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
 
         it('should pass rules to initialize', async () => {
             const initializeStub = sinon.stub(autoconsent, 'initialize');
-            const rules = { autoconsent: [], consentomatic: {} };
+            const rules = { autoconsent: [] };
 
             await autoconsent.receiveMessageCallback({
                 type: 'initResp',
