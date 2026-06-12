@@ -54,11 +54,11 @@
             "then": [
                 {
                     "if": {
-                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]"
+                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
                     },
                     "then": [
                         {
-                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]",
+                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary",
                             "comment": "can be either settings or reject button"
                         }
                     ],
@@ -84,16 +84,31 @@
             "optional": true
         },
         {
-            "comment": "Preferences/purposes modal is open: click Reject All then Confirm.",
+            "comment": "Preferences/purposes modal is open: prefer Reject All then Confirm; otherwise (e.g. US/CCPA variant with only per-purpose toggles) uncheck every enabled switch and save.",
             "if": {
                 "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
             },
             "then": [
                 {
-                    "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                    "if": {
+                        "exists": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "comment": "Fallback for jurisdictions where the modal has no 'Reject All': toggle off each currently-enabled purpose switch.",
+                            "click": "#lanyard_root input[type=checkbox][role=switch][aria-checked=true]:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        }
+                    ]
                 },
                 {
-                    "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm']"
+                    "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm'], #ketch-modal button[aria-label='Save Settings'], #ketch-purposes-modal button[aria-label='Save Settings']"
                 }
             ]
         }
