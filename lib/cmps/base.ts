@@ -501,13 +501,18 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         return false;
     }
 
-    optOut(): Promise<boolean> {
-        // use only the first found popup candidate
+    getTargetButton() {
         const [level, popup] = this.popups[0];
         const buttons = [...(popup.rejectButtons || []), ...(popup.otherButtons || [])];
         const targetButtonType =
             level === PopupHandlingModes.Reject ? 'reject' : level === PopupHandlingModes.Tier1 ? 'acknowledge' : 'accept';
         const button = buttons.find((button) => button.regexClassification === targetButtonType);
+        return button;
+    }
+
+    optOut(): Promise<boolean> {
+        // use only the first found popup candidate
+        const button = this.getTargetButton();
         if (button) {
             return this.clickElement(button.element);
         }
@@ -524,7 +529,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     }
 
     async test(): Promise<boolean> {
-        const button = this.popups[0][1].rejectButtons?.[0];
+        const button = this.getTargetButton();
         if (button) {
             await this.wait(500);
             return !isElementVisible(button.element);
