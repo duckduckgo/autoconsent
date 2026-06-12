@@ -455,7 +455,6 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
             ])
             .filter(([mode]) => mode !== PopupHandlingModes.None && mode <= this.mode)
             .sort((a, b) => a[0] - b[0]);
-        console.log('xxxs', this.popups);
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');
         this.autoconsent.config.performanceLoggingEnabled &&
             performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
@@ -470,17 +469,8 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     classifyPopup(buttons: ButtonData[]): PopupHandlingMode {
         const { reject, settings, accept, acknowledge } = buttons.reduce(
             (acc, button) => {
-                if (button.regexClassification === 'reject') {
-                    acc.reject++;
-                }
-                if (button.regexClassification === 'settings') {
-                    acc.settings++;
-                }
-                if (button.regexClassification === 'acknowledge') {
-                    acc.acknowledge++;
-                }
-                if (button.regexClassification === 'accept') {
-                    acc.accept++;
+                if (button.regexClassification && button.regexClassification !== 'other') {
+                    acc[button.regexClassification]++;
                 }
                 return acc;
             },
