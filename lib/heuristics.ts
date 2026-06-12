@@ -1,5 +1,12 @@
-import { DETECT_PATTERNS, NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './heuristic-patterns';
-import { ButtonData, PopupData } from './types';
+import {
+    ACCEPT_PATTERNS,
+    ACKNOWLEDGE_PATTERNS,
+    DETECT_PATTERNS,
+    NEVER_MATCH_PATTERNS,
+    REJECT_PATTERNS,
+    SETTINGS_PATTERNS,
+} from './heuristic-patterns';
+import { ButtonData, ButtonRegexClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
@@ -29,13 +36,11 @@ export function getActionablePopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[
             const { patterns } = checkHeuristicPatterns(popupText);
             if (patterns.length > 0) {
                 const { rejectButtons, otherButtons } = classifyButtons(popup.buttons);
-                if (rejectButtons.length > 0) {
-                    acc.push({
-                        ...popup,
-                        rejectButtons,
-                        otherButtons,
-                    });
-                }
+                acc.push({
+                    ...popup,
+                    rejectButtons,
+                    otherButtons,
+                });
             }
         }
         return acc;
@@ -47,7 +52,8 @@ export function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonD
     const rejectButtons = [];
     const otherButtons = [];
     for (const button of buttons) {
-        if (isRejectButton(button.text)) {
+        button.regexClassification = classifyButtonTextRegex(button.text);
+        if (button.regexClassification === 'reject') {
             rejectButtons.push(button);
         } else {
             otherButtons.push(button);
@@ -60,13 +66,23 @@ export function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonD
 }
 
 export function isRejectButton(buttonText: string, rejectPatterns = REJECT_PATTERNS, neverMatchPatterns = NEVER_MATCH_PATTERNS): boolean {
+    return testButtonMatches(buttonText, rejectPatterns, neverMatchPatterns);
+}
+
+/**
+ * @param {string} buttonText
+ * @param {Array<string|RegExp>} matchPatterns
+ * @param {Array<string|RegExp>} neverMatchPatterns
+ * @returns {boolean}
+ */
+function testButtonMatches(buttonText: string, matchPatterns: (string | RegExp)[], neverMatchPatterns: (string | RegExp)[]): boolean {
     if (!buttonText) {
         return false;
     }
     const cleanedButtonText = cleanButtonText(buttonText);
     return (
-        !neverMatchPatterns.some((p) => p.test(cleanedButtonText)) &&
-        rejectPatterns.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText)
+        !neverMatchPatterns.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText) &&
+        matchPatterns.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText)
     );
 }
 
@@ -87,6 +103,22 @@ export function cleanButtonText(buttonText: string): string {
     // strip whitespace around the text
     result = result.trim();
     return result;
+}
+
+function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
+    if (isRejectButton(buttonText)) {
+        return 'reject';
+    }
+    if (testButtonMatches(buttonText, SETTINGS_PATTERNS, NEVER_MATCH_PATTERNS)) {
+        return 'settings';
+    }
+    if (testButtonMatches(buttonText, ACCEPT_PATTERNS, NEVER_MATCH_PATTERNS)) {
+        return 'accept';
+    }
+    if (testButtonMatches(buttonText, ACKNOWLEDGE_PATTERNS, NEVER_MATCH_PATTERNS)) {
+        return 'acknowledge';
+    }
+    return 'other';
 }
 
 function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME) {

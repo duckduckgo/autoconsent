@@ -161,7 +161,7 @@ describe('Autoconsent.findCmp', () => {
             const found = await autoconsent.findCmp(1);
 
             expect(found).to.have.length(1);
-            expect(found[0].name).to.equal('HEURISTIC');
+            expect(found[0].name).to.equal('HEURISTIC-TIER0');
         });
 
         it('prefers declarative rules over heuristic CMP', async () => {
