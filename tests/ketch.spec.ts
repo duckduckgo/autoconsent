@@ -22,4 +22,5 @@ generateCMPTests('ketch', [
     // direct reject); preferences modal has per-purpose toggles and a
     // "Save Settings" button but no "Reject All".
     'https://my.equifax.ca/login',
+    'https://www.pbs.org/newshour/economy/tomatoes-become-latest-symbol-of-americas-affordability-squeeze',
 ]);
