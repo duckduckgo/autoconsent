@@ -78,6 +78,7 @@ export type Config = {
     };
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
+    heuristicMode: PopupHandlingMode;
 };
 
 export type LifecycleState =
@@ -114,10 +115,12 @@ export type ConsentState = {
     performance?: Record<string, number[]>;
 };
 
+export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
+
 export interface ButtonData {
     text: string;
     element: HTMLElement;
-    regexClassification?: 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
+    regexClassification?: ButtonRegexClassification;
 }
 
 export interface PopupData {
@@ -127,3 +130,11 @@ export interface PopupData {
     rejectButtons?: ButtonData[];
     otherButtons?: ButtonData[];
 }
+
+export const PopupHandlingModes = {
+    None: -1,
+    Reject: 0,
+    Tier1: 1,
+    Tier2: 2,
+} as const;
+export type PopupHandlingMode = (typeof PopupHandlingModes)[keyof typeof PopupHandlingModes];

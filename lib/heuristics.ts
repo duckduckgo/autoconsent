@@ -1,5 +1,12 @@
-import { ACCEPT_PATTERNS, ACKNOWLEDGE_PATTERNS, DETECT_PATTERNS, NEVER_MATCH_PATTERNS, REJECT_PATTERNS, SETTINGS_PATTERNS } from './heuristic-patterns';
-import { ButtonData, PopupData } from './types';
+import {
+    ACCEPT_PATTERNS,
+    ACKNOWLEDGE_PATTERNS,
+    DETECT_PATTERNS,
+    NEVER_MATCH_PATTERNS,
+    REJECT_PATTERNS,
+    SETTINGS_PATTERNS,
+} from './heuristic-patterns';
+import { ButtonData, ButtonRegexClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
@@ -98,7 +105,7 @@ export function cleanButtonText(buttonText: string): string {
     return result;
 }
 
-function classifyButtonTextRegex(buttonText: string): 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other' {
+function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
     if (isRejectButton(buttonText)) {
         return 'reject';
     }
@@ -113,7 +120,6 @@ function classifyButtonTextRegex(buttonText: string): 'reject' | 'settings' | 'a
     }
     return 'other';
 }
-
 
 function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME) {
     const isFramed = !isTopFrame();
