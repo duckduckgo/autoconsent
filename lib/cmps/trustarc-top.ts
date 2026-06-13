@@ -18,7 +18,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         frame: false,
     };
 
-    _shortcutButton: HTMLElement;
+    _shortcutButton: HTMLElement | null;
     _optInDone: boolean;
 
     constructor(autoconsentInstance: AutoConsent) {
