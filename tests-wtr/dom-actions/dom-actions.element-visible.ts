@@ -60,4 +60,16 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible(['#all-visible', 'button'], 'all')).to.be.true;
         });
     });
+
+    describe('fixed elements parked outside the viewport', () => {
+        it('treats a fixed element rendered below the viewport as not visible', () => {
+            expect(domActions.elementVisible('#fixed-parked-below', 'any')).to.be.false;
+        });
+        it('treats a fixed element rendered to the right of the viewport as not visible', () => {
+            expect(domActions.elementVisible('#fixed-parked-right', 'any')).to.be.false;
+        });
+        it('treats a fixed element inside the viewport as visible', () => {
+            expect(domActions.elementVisible('#fixed-onscreen', 'any')).to.be.true;
+        });
+    });
 });
