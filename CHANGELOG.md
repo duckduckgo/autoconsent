@@ -1,3 +1,24 @@
+# v14.95.0 (Sat Jun 13 2026)
+
+#### 🚀 Enhancement
+
+- Fix AWS Shortbread opt-out by using the new Decline button [#1394](https://github.com/duckduckgo/autoconsent/pull/1394) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Add yachtclubgames.com rule for custom cookie popup [#1370](https://github.com/duckduckgo/autoconsent/pull/1370) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### 🐛 Bug Fix
+
+- didomi: avoid premature popup detection on aria-hidden hosts [#1392](https://github.com/duckduckgo/autoconsent/pull/1392) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Coverage data update [#1366](https://github.com/duckduckgo/autoconsent/pull/1366) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.94.0 (Fri Jun 12 2026)
 
 #### 🚀 Enhancement
