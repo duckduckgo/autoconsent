@@ -8,6 +8,7 @@ import {
     excludeContainers,
     getButtonData,
     isDialogLikeElement,
+    isExcludedPopup,
 } from '../../lib/heuristics';
 
 describe('checkHeuristicPatterns', () => {
@@ -37,6 +38,43 @@ describe('checkHeuristicPatterns', () => {
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
+    });
+});
+
+describe('isExcludedPopup', () => {
+    it('flags doublelist-style age verification popups', () => {
+        // Real-world text from the doublelist.com age gate (M4M listings page)
+        const text =
+            'Age verification & content rules This section may contain adult oriented material of a graphic and sexual nature, ' +
+            'and could be viewed objectionable to some persons. This material is INTENDED ONLY FOR PERSONS OVER 18 YEARS OF AGE. ' +
+            'This site uses cookies for logins, ads and other normal site function. I accept I reject';
+        expect(isExcludedPopup(text)).to.be.true;
+    });
+
+    it('flags popups headed "Age verification"', () => {
+        expect(isExcludedPopup('Age verification\nYou must confirm your age to continue.')).to.be.true;
+    });
+
+    it('flags "must be 18 or older" disclaimers', () => {
+        expect(isExcludedPopup('You must be 18 years or older to enter this site.')).to.be.true;
+    });
+
+    it('flags "I am 18+" age gates', () => {
+        expect(isExcludedPopup('Confirm your age to continue. I am 18+ I am under 18')).to.be.true;
+    });
+
+    it('flags adult-content disclaimers', () => {
+        expect(isExcludedPopup('This website contains adult oriented material. Please confirm to enter.')).to.be.true;
+        expect(isExcludedPopup('Adult-only website. You must be 21 or older to enter.')).to.be.true;
+        expect(isExcludedPopup('Adult website ahead.')).to.be.true;
+    });
+
+    it('does not flag a normal cookie consent popup', () => {
+        expect(isExcludedPopup('We use cookies to enhance your experience. Accept All Reject All')).to.be.false;
+    });
+
+    it('does not flag empty strings', () => {
+        expect(isExcludedPopup('')).to.be.false;
     });
 });
 

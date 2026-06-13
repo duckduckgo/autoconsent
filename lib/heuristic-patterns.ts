@@ -715,3 +715,26 @@ export const NEVER_MATCH_PATTERNS = [
     /sostienici/is,
     /suscribir/is,
 ];
+
+// Popup-text patterns that exclude a popup from heuristic handling, even if it
+// matches a cookie pattern and exposes a reject-style button. Targets age gates
+// and adult-content disclaimers whose "reject" button leads to a dead end.
+export const POPUP_EXCLUDE_PATTERNS = [
+    // "Age verification", "age confirmation", "age check", "age gate"
+    /age\s+(?:verification|confirmation|check|gate|restriction)/i,
+
+    // "INTENDED ONLY FOR PERSONS OVER 18 YEARS OF AGE", "must be over 18", "at least 18 years"
+    /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
+
+    // "18 years of age", "18+ years old", "21 years or older"
+    /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
+
+    // "I am 18+", "I am over 18", "I'm 21 or older"
+    /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
+
+    // "you must be 18", "you must be at least 18 years old"
+    /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
+
+    // "adult oriented material", "adult content", "adult-only material/website"
+    /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
+];
