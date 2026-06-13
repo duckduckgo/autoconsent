@@ -11,6 +11,18 @@
         "*://*/*"
       ],
       "js": [
+        "gpc.bundle.js"
+      ],
+      "match_origin_as_fallback": true,
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
         "content.bundle.js"
       ],
       "match_origin_as_fallback": true,
@@ -24,11 +36,21 @@
   "permissions": [
     "cookies",
     "tabs",
+    "declarativeNetRequest",
     "scripting",
     "storage",
     "webNavigation",
     "browsingData"
   ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "gpc",
+        "enabled": true,
+        "path": "gpc-rules.json"
+      }
+    ]
+  },
   "action": {
     "browser_style": true,
     "default_title": "Autoconsent",

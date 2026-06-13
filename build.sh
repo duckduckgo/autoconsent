@@ -15,6 +15,7 @@ npx tsc -p tsconfig.build.json
 # Extension
 $ESBUILD addon/background.ts --outfile=dist/addon-mv3/background.bundle.js
 $ESBUILD addon/content.ts --outfile=dist/addon-mv3/content.bundle.js
+$ESBUILD addon/gpc.ts --outfile=dist/addon-mv3/gpc.bundle.js
 $ESBUILD addon/popup.ts --outfile=dist/addon-mv3/popup.bundle.js
 $ESBUILD addon/devtools/panel.ts --outfile=dist/addon-mv3/devtools/panel.js
 
@@ -27,6 +28,8 @@ cp rules/rules.json dist/addon-mv3/
 cp rules/compact-rules.json dist/addon-mv3/
 cp rules/rules.json dist/addon-firefox/
 cp rules/compact-rules.json dist/addon-firefox/
+cp addon/gpc-rules.json dist/addon-mv3/
+cp addon/gpc-rules.json dist/addon-firefox/
 cp addon/popup.html dist/addon-mv3/
 cp addon/popup.html dist/addon-firefox/
 cp -r addon/devtools dist/addon-mv3/
