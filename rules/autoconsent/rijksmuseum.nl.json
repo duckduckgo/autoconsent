@@ -1,0 +1,38 @@
+{
+    "name": "rijksmuseum.nl",
+    "_metadata": {
+        "vendorUrl": "https://www.rijksmuseum.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rijksmuseum\\.nl/"
+    },
+    "prehideSelectors": [".cookie-consent-bar-overlay"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent-bar-overlay"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent-bar-overlay"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent-bar-overlay .cookie-consent-bar .button-secondary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent-bar-overlay .cookie-consent-bar button.link"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "rmis_gdpr_accepted=0"
+        }
+    ]
+}
