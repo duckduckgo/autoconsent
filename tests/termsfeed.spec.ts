@@ -4,4 +4,5 @@ generateCMPTests('termsfeed', [
     'https://ftbwiki.org/Feed_The_Beast_Wiki',
     'https://inspirationaladventures.com/',
     'http://www.campingplatz-suche.com/',
+    'https://grovemade.com/product/wood-standing-desk/',
 ]);
