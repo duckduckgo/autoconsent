@@ -1,0 +1,39 @@
+{
+    "name": "posthog",
+    "vendorUrl": "https://posthog.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?posthog\\.com"
+    },
+    "detectCmp": [
+        {
+            "exists": "xpath///li[contains(@class,'ToastRoot')]//div[normalize-space(text())='Legally-required cookie banner']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///li[contains(@class,'ToastRoot') and @data-state='open']//div[normalize-space(text())='Legally-required cookie banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "xpath///li[contains(@class,'ToastRoot') and .//div[normalize-space(text())='Legally-required cookie banner']]",
+                "button[class*='grid-area:_action']"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "xpath///li[contains(@class,'ToastRoot') and .//div[normalize-space(text())='Legally-required cookie banner']]",
+                "button[class*='grid-area:_action']"
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "xpath///li[contains(@class,'ToastRoot') and @data-state='open']//div[normalize-space(text())='Legally-required cookie banner']",
+            "check": "none"
+        }
+    ]
+}
