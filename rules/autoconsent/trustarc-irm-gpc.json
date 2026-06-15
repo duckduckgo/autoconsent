@@ -1,0 +1,10 @@
+{
+    "name": "trustarc-irm-gpc",
+    "vendorUrl": "https://trustarc.com/",
+    "prehideSelectors": ["#ta-gpc-container"],
+    "detectCmp": [{ "exists": "#gpcBannerIgnoreBtn" }],
+    "detectPopup": [{ "visible": "#gpcBannerIgnoreBtn" }],
+    "optIn": [{ "waitForThenClick": "#gpcBannerIgnoreBtn" }],
+    "optOut": [{ "waitForThenClick": "#gpcBannerIgnoreBtn" }],
+    "test": [{ "cookieContains": "trustarc_gpc_has_submitted_form=ignored" }]
+}
