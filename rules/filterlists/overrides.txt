@@ -2,3 +2,5 @@
 @@||duckduckgo.com^$elemhide
 ! domain-level exceptions above are not working with the adblocker library
 privacy-test-pages.site,first-party.example###privacy-test-page-cmp-test-banner-filterlist
+! MSN's new "Microsoft Cares About Your Privacy" (MSCMP) banner shown in EU; will be picked up by the next EasyList Cookie sync, mirrored here to handle it sooner.
+msn.com###mscmp-banner-container
