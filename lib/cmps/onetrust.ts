@@ -28,14 +28,24 @@ export default class Onetrust extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         // 'reject all' shortcuts
+        // After clicking, wait for the banner to be hidden. On some OneTrust templates
+        // (e.g. play.fifa.com) the dismissal animation takes a couple of seconds, so
+        // returning immediately would result in autoconsent reporting "done" while the
+        // banner is still visible to the user.
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
-            return await this.click('#onetrust-reject-all-handler');
+            const result = await this.click('#onetrust-reject-all-handler');
+            await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
+            return result;
         }
         if (this.elementVisible('.ot-pc-refuse-all-handler', 'any')) {
-            return await this.click('.ot-pc-refuse-all-handler');
+            const result = await this.click('.ot-pc-refuse-all-handler');
+            await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
+            return result;
         }
         if (this.elementVisible('.js-reject-cookies', 'any')) {
-            return await this.click('.js-reject-cookies');
+            const result = await this.click('.js-reject-cookies');
+            await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
+            return result;
         }
 
         if (this.elementVisible('.onetrust-close-btn-handler', 'any')) {

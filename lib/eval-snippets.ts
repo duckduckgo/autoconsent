@@ -74,7 +74,14 @@ export const snippets = {
         }
         return false;
     },
-    EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_ONETRUST_1: () => {
+        // After opting out, only the strict-necessary group should remain active.
+        // Some OneTrust templates (e.g. play.fifa.com) include pre-approved host/vendor IDs
+        // (Hxxx, Vxxx) alongside actual consent group IDs in OnetrustActiveGroups. We only
+        // want to count consent groups, not hosts, when verifying the opt-out succeeded.
+        if (typeof window.OnetrustActiveGroups !== 'string') return false;
+        return window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0 && !/^[HV]\d+$/.test(s)).length <= 1;
+    },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
