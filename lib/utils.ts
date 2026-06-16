@@ -95,7 +95,7 @@ export function normalizeConfig(providedConfig: any): Config {
         },
         performanceLoggingEnabled: false,
         heuristicPopupSearchTimeout: 100,
-        heuristicMode: PopupHandlingModes.Tier2,
+        heuristicMode: PopupHandlingModes.Reject,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries
