@@ -436,7 +436,14 @@ async function injectIntoIsolatedWorld(page, createMessageHandler) {
         try {
             await attachToSession(client);
         } catch {
-            // The OOPIF may navigate or detach while we are wiring up its session.
+            // Wiring up the session failed (e.g. the OOPIF navigated/detached). Detach the
+            // half-initialized session before unmarking, otherwise a retry would open a second
+            // session for the same frame, leaving duplicate listeners and possible double injection.
+            try {
+                await client.detach();
+            } catch {
+                // The session may already be gone.
+            }
             attachedFrames.delete(frame);
         }
     }
