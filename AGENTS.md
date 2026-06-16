@@ -171,3 +171,24 @@ After creating or modifying a rule:
 4. `npm run prepublish` — full build including extension bundle
 5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
 6. Check the rule works across geographic regions using available regional-testing tooling.
+
+## Cursor Cloud specific instructions
+
+The startup update script runs `npm ci` (which also triggers the `prepublish` build) and
+`npx playwright install --with-deps`, so dependencies, the `dist/` build, and browsers are
+already in place when an agent starts. Re-run `npm run prepublish` after editing `lib/`,
+`addon/`, or rules to refresh `dist/` (the Playwright harness loads `dist/autoconsent.playwright.js`).
+
+- **`npm run test:lib` (Web Test Runner) is the reliable test suite in this environment.** It
+  runs the real engine against mock CMPs in a local headless browser with no external
+  network, and is the best way to validate engine/lifecycle changes here.
+- **`npm run test` (Playwright E2E) hits real public websites and is geo-region dependent.**
+  Many specs only show a popup under EU/GDPR; from the cloud VM's default region a site often
+  renders no CMP (e.g. `theverge` reports "no CMP detected"), so these specs fail without
+  regional routing. Set `PROXY_SERVER` (consumed by `playwright.config.ts`) and `REGION` to
+  test a specific region. Treat E2E failures here as likely environmental unless reproduced
+  with the correct region/proxy.
+- To sanity-check the engine end to end without external sites, serve a small HTML page
+  containing markup that matches a rule (e.g. the `cc_banner` rule's `.cc_banner-wrapper`),
+  load `dist/autoconsent.playwright.js`, and drive it with the same message protocol as
+  `playwright/runner.ts` (`init` -> `initResp` with rules + `autoAction`, answering `eval`).
