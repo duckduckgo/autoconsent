@@ -73,15 +73,23 @@ export default defineConfig({
 
 ## API
 
-- `testUrl(url, regionKey, options?)`
-- `testRegions(url, regions?, options?)`
-- `testPage(page, url, regionKey, options?)`
-- `injectAutoconsent(page, options?)` — call before `page.goto()`
-- `buildProxyConfig(regionKey)`
-- `launchRegionalProxyBrowser(regionKey, options?)`
-- `formatResult(result)`
+- `testUrl(url, regionKey, options?)` — test one URL in a single region; launches a proxied browser, runs autoconsent, returns a `TestResult`.
+- `testRegions(url, regions?, options?)` — test one URL across several regions (defaults to all supported regions), a fresh browser per region; returns `TestResult[]`.
+- `testPage(page, url, regionKey, options?)` — run a full test on a page you created yourself (you own the browser/context); returns a `TestResult`.
+- `injectAutoconsent(page, options?)` — set up isolated-world injection; call before `page.goto()`. Returns a context (`received`, `hasMessage`, `waitForCompletion`, `waitForMessage`, `collectResult`).
+- `buildProxyConfig(regionKey)` — build the Playwright `{ server, username, password }` proxy object for a region from its env vars.
+- `launchRegionalProxyBrowser(regionKey, options?)` — launch a Chromium browser routed through the region's proxy.
+- `formatResult(result)` — format a `TestResult` as a human-readable summary line.
 
-Options: `action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`, `headless`, `launchOptions`.
+Options (all optional):
+
+- `action` — `'optOut'` (default), `'optIn'`, or `null` to only detect (no opt-out/opt-in performed).
+- `screenshotsDir` — directory for the final screenshots (default: `test-results/regional-proxy`).
+- `navigationTimeout` — `page.goto` timeout in ms (default `45000`).
+- `completionTimeout` — max wait for autoconsent to finish opt-out/opt-in in ms (default `45000`).
+- `detectionTimeout` — max wait for `cmpDetected` before giving up (default: `completionTimeout`).
+- `headless` — run Chromium headless (default `true`).
+- `launchOptions` — extra options merged into `chromium.launch()` (e.g. `args`); the regional `proxy` is always applied on top.
 
 ## Smoke Test
 
