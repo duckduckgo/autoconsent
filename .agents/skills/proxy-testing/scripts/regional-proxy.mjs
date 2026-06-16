@@ -24,6 +24,7 @@
  * @property {string} [screenshotsDir]
  * @property {number} [navigationTimeout=45000]
  * @property {number} [completionTimeout=45000]
+ * @property {number} [detectionTimeout] - How long to wait for `cmpDetected` before giving up. Defaults to `completionTimeout`.
  * @property {boolean} [headless=true]
  * @property {LaunchOptions} [launchOptions]
  */
@@ -49,7 +50,7 @@
  * @typedef {Object} AutoconsentContext
  * @property {Object[]} received - All received autoconsent messages.
  * @property {(type: string) => boolean} hasMessage
- * @property {(timeout?: number) => Promise<boolean>} waitForCompletion
+ * @property {(timeout?: number, detectionTimeout?: number) => Promise<boolean>} waitForCompletion
  * @property {(type: string, timeout?: number) => Promise<boolean>} waitForMessage
  * @property {(url: string, region: string) => TestResult} collectResult
  */
@@ -210,7 +211,7 @@ export async function injectAutoconsent(page, options = {}) {
         return received.some((m) => m.type === type);
     }
 
-    async function waitForCompletion(timeout = 45000) {
+    async function waitForCompletion(timeout = 45000, detectionTimeout = timeout) {
         const start = Date.now();
         while (Date.now() - start < timeout) {
             if (hasMessage('optOutResult') || hasMessage('optInResult')) {
@@ -220,7 +221,10 @@ export async function injectAutoconsent(page, options = {}) {
             if (!action && hasMessage('popupFound')) {
                 return true;
             }
-            if (Date.now() - start > 15000 && !hasMessage('cmpDetected')) {
+            // Bail out early only if no CMP was detected within the detection window. This defaults
+            // to the full timeout, so slow regional pages that detect late are not abandoned (which
+            // would otherwise yield a false "No CMP detected" and end before opt-out can finish).
+            if (Date.now() - start > detectionTimeout && !hasMessage('cmpDetected')) {
                 return false;
             }
             await new Promise((r) => setTimeout(r, 500));
@@ -447,6 +451,7 @@ async function injectIntoIsolatedWorld(page, createMessageHandler) {
 export async function testPage(page, url, regionKey, options = {}) {
     const navTimeout = options.navigationTimeout ?? 45000;
     const completionTimeout = options.completionTimeout ?? 45000;
+    const detectionTimeout = options.detectionTimeout ?? completionTimeout;
     const screenshotsDir = options.screenshotsDir ?? path.join(projectRoot, 'test-results/regional-proxy');
     const startTime = Date.now();
 
@@ -454,7 +459,7 @@ export async function testPage(page, url, regionKey, options = {}) {
         const ctx = await injectAutoconsent(page, options);
         await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
 
-        const completed = await ctx.waitForCompletion(completionTimeout);
+        const completed = await ctx.waitForCompletion(completionTimeout, detectionTimeout);
         if (completed && !ctx.hasMessage('selfTestResult')) {
             await ctx.waitForMessage('selfTestResult', 10000);
         }

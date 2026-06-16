@@ -81,7 +81,7 @@ export default defineConfig({
 - `launchRegionalProxyBrowser(regionKey, options?)`
 - `formatResult(result)`
 
-Options: `action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `headless`, `launchOptions`.
+Options: `action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`, `headless`, `launchOptions`.
 
 ## Smoke Test
 
