@@ -1,6 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import Autoconsent from '../../lib/web';
 import Onetrust from '../../lib/cmps/onetrust';
+import { PopupHandlingModes } from '../../lib/types';
 
 describe('Autoconsent.findCmp', () => {
     let autoconsent: Autoconsent;
@@ -145,7 +146,12 @@ describe('Autoconsent.findCmp', () => {
         });
 
         afterEach(() => {
-            document.getElementById('heuristic-popup')?.remove();
+            const heuristicPopup = document.getElementById('heuristic-popup');
+            if (heuristicPopup) {
+                heuristicPopup.style.display = '';
+            }
+            document.getElementById('heuristic-popup-acknowledge-only')!.style.display = 'none';
+            document.getElementById('heuristic-popup-accept-only')!.style.display = 'none';
         });
 
         it('returns heuristic CMP when no declarative rules match', async () => {
@@ -177,6 +183,42 @@ describe('Autoconsent.findCmp', () => {
 
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('test');
+        });
+
+        it('returns HEURISTIC-TIER1 for acknowledge-only popup when mode is Tier1', async () => {
+            document.getElementById('heuristic-popup')!.style.display = 'none';
+            document.getElementById('heuristic-popup-acknowledge-only')!.style.display = 'block';
+
+            autoconsent = new Autoconsent((msg) => Promise.resolve(), {
+                enabled: false,
+                autoAction: null,
+                enableHeuristicAction: true,
+                heuristicMode: PopupHandlingModes.Tier1,
+            });
+            autoconsent.state.findCmpAttempts = 1;
+
+            const found = await autoconsent.findCmp(1);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('HEURISTIC-TIER1');
+        });
+
+        it('returns HEURISTIC-TIER2 for accept-only popup when mode is Tier2', async () => {
+            document.getElementById('heuristic-popup')!.style.display = 'none';
+            document.getElementById('heuristic-popup-accept-only')!.style.display = 'block';
+
+            autoconsent = new Autoconsent((msg) => Promise.resolve(), {
+                enabled: false,
+                autoAction: null,
+                enableHeuristicAction: true,
+                heuristicMode: PopupHandlingModes.Tier2,
+            });
+            autoconsent.state.findCmpAttempts = 1;
+
+            const found = await autoconsent.findCmp(1);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('HEURISTIC-TIER2');
         });
     });
 });

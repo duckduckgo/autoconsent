@@ -130,6 +130,63 @@ describe('classifyButtons', () => {
         expect(rejectButtons).to.have.length(2);
         expect(otherButtons).to.have.length(0);
     });
+
+    it('sets regexClassification on all buttons', () => {
+        const buttons = [
+            { text: 'Accept All', element: document.createElement('button') },
+            { text: 'Reject All', element: document.createElement('button') },
+            { text: 'Settings', element: document.createElement('button') },
+        ];
+
+        classifyButtons(buttons);
+
+        expect(buttons.every((b) => b.regexClassification)).to.be.true;
+    });
+
+    it('classifies accept buttons into otherButtons', () => {
+        const buttons = [{ text: 'Accept All', element: document.createElement('button') }];
+
+        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+
+        expect(rejectButtons).to.have.length(0);
+        expect(otherButtons).to.have.length(1);
+        expect(otherButtons[0].regexClassification).to.equal('accept');
+    });
+
+    it('classifies acknowledge buttons into otherButtons', () => {
+        const buttons = [
+            { text: 'OK', element: document.createElement('button') },
+            { text: 'I understand', element: document.createElement('button') },
+        ];
+
+        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+
+        expect(rejectButtons).to.have.length(0);
+        expect(otherButtons).to.have.length(2);
+        expect(otherButtons.every((b) => b.regexClassification === 'acknowledge')).to.be.true;
+    });
+
+    it('classifies settings buttons into otherButtons', () => {
+        const buttons = [
+            { text: 'Settings', element: document.createElement('button') },
+            { text: 'Cookie preferences', element: document.createElement('button') },
+        ];
+
+        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+
+        expect(rejectButtons).to.have.length(0);
+        expect(otherButtons).to.have.length(2);
+        expect(otherButtons.every((b) => b.regexClassification === 'settings')).to.be.true;
+    });
+
+    it('classifies reject buttons with regexClassification', () => {
+        const buttons = [{ text: 'Reject All', element: document.createElement('button') }];
+
+        const { rejectButtons } = classifyButtons(buttons);
+
+        expect(rejectButtons).to.have.length(1);
+        expect(rejectButtons[0].regexClassification).to.equal('reject');
+    });
 });
 
 describe('isDisabled', () => {

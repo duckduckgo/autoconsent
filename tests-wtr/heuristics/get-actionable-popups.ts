@@ -34,12 +34,46 @@ describe('getActionablePopups', () => {
             expect(popups.length).to.equal(0);
         });
 
-        it('ignores popup without reject button', () => {
+        it('finds popup with cookie text even without reject button', () => {
             showPopup('popup-no-reject');
 
             const popups = getActionablePopups();
 
-            expect(popups.length).to.equal(0);
+            expect(popups.length).to.equal(1);
+            expect(popups[0].rejectButtons).to.have.length(0);
+            expect(popups[0].otherButtons?.map((b) => b.regexClassification)).to.include('accept');
+            expect(popups[0].otherButtons?.map((b) => b.regexClassification)).to.include('settings');
+        });
+    });
+
+    describe('tier button candidates', () => {
+        it('finds accept-only popup with no reject buttons', () => {
+            showPopup('popup-accept-only');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].rejectButtons).to.have.length(0);
+            expect(popups[0].otherButtons?.filter((b) => b.regexClassification === 'accept')).to.have.length(1);
+        });
+
+        it('finds acknowledge-only popup with no reject buttons', () => {
+            showPopup('popup-acknowledge-only');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].rejectButtons).to.have.length(0);
+            expect(popups[0].otherButtons?.filter((b) => b.regexClassification === 'acknowledge')).to.have.length(1);
+        });
+
+        it('finds popup with multiple reject buttons', () => {
+            showPopup('popup-multiple-reject');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].rejectButtons).to.have.length(2);
         });
     });
 
