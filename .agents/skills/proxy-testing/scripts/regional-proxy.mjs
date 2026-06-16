@@ -422,17 +422,22 @@ async function injectIntoIsolatedWorld(page, createMessageHandler) {
     const attachedFrames = new WeakSet();
     async function attachToOopif(/** @type {import('playwright').Frame} */ frame) {
         if (!frame.parentFrame() || attachedFrames.has(frame)) return;
+        // Mark synchronously (before any await) so concurrent frameattached/framenavigated events
+        // can't open duplicate sessions for the same frame. Unmark on failure so a later event retries.
+        attachedFrames.add(frame);
         let client;
         try {
             client = await page.context().newCDPSession(frame);
         } catch {
+            // In-process frame (already covered by the page session) or the frame detached.
+            attachedFrames.delete(frame);
             return;
         }
-        attachedFrames.add(frame);
         try {
             await attachToSession(client);
         } catch {
             // The OOPIF may navigate or detach while we are wiring up its session.
+            attachedFrames.delete(frame);
         }
     }
     page.on('frameattached', attachToOopif);
