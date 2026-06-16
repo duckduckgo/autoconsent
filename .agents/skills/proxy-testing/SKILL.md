@@ -81,7 +81,7 @@ export default defineConfig({
 - `launchRegionalProxyBrowser(regionKey, options?)`
 - `formatResult(result)`
 
-Options: `action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `browserName`, `headless`, `launchOptions`.
+Options: `action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `headless`, `launchOptions`.
 
 ## Smoke Test
 
@@ -109,5 +109,6 @@ await browser.close();
 - Use Playwright's proxy auth object: `{ server, username, password }`.
 - Never embed proxy credentials in URLs, command lines, logs, traces, or source.
 - Call `injectAutoconsent(page)` before `page.goto()` so the init script is installed before page scripts run.
+- The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.

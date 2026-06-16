@@ -1,8 +1,10 @@
 /**
  * Playwright HTTPS regional proxy utilities for multi-region autoconsent testing.
  *
- * Launches local Playwright browsers with an HTTPS proxy selected by region,
- * injects autoconsent, and evaluates opt-out/opt-in flows.
+ * Launches a local Chromium browser with an HTTPS proxy selected by region, injects
+ * autoconsent into an isolated world (via CDP), and evaluates opt-out/opt-in flows.
+ * Chromium only - isolated worlds are reached through CDP, which Playwright exposes for
+ * Chromium alone.
  *
  * Requires env vars:
  * - REGIONAL_PROXY_<REGION> (REGION is the uppercased two-letter region code)
@@ -22,7 +24,6 @@
  * @property {string} [screenshotsDir]
  * @property {number} [navigationTimeout=45000]
  * @property {number} [completionTimeout=45000]
- * @property {'chromium'|'firefox'|'webkit'} [browserName='chromium']
  * @property {boolean} [headless=true]
  * @property {LaunchOptions} [launchOptions]
  */
@@ -53,10 +54,23 @@
  * @property {(url: string, region: string) => TestResult} collectResult
  */
 
+/**
+ * Per-CDP-session primitives the message handler uses. There is one session for the page
+ * plus one per out-of-process iframe; each supplies a pair bound to its own contexts.
+ * `frameRef` is the CDP frameId the message arrived from.
+ * @typedef {Object} MessageTransport
+ * @property {(frameRef: string, message: object) => Promise<void>} sendToContentScript
+ * @property {(frameRef: string, code: string) => Promise<any>} evalInMainWorld
+ */
+
+/**
+ * @typedef {(transport: MessageTransport) => (msg: any, frameRef: string) => Promise<void>} MessageHandlerFactory
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { chromium, firefox, webkit } from 'playwright';
+import { chromium } from 'playwright';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '../../../..');
@@ -66,12 +80,6 @@ const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules
 const fullRules = rulesJson.autoconsent;
 
 export const DEFAULT_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no', 'it', 'es', 'pl', 'se', 'dk', 'jp'];
-
-const BROWSERS = {
-    chromium,
-    firefox,
-    webkit,
-};
 
 /**
  * Build the Playwright proxy object for a region.
@@ -111,13 +119,7 @@ export function buildProxyConfig(regionKey, env = process.env) {
  * @returns {Promise<Browser>}
  */
 export async function launchRegionalProxyBrowser(regionKey, options = {}) {
-    const browserName = options.browserName ?? 'chromium';
-    const browserType = BROWSERS[browserName];
-    if (!browserType) {
-        throw new Error(`Unknown browser "${browserName}". Valid browsers: ${Object.keys(BROWSERS).join(', ')}`);
-    }
-
-    return browserType.launch({
+    return chromium.launch({
         headless: options.headless ?? true,
         ...(options.launchOptions ?? {}),
         proxy: buildProxyConfig(regionKey),
@@ -126,15 +128,17 @@ export async function launchRegionalProxyBrowser(regionKey, options = {}) {
 
 /**
  * Inject autoconsent into a page. Call before navigating to the target URL.
+ *
+ * The content script runs in an isolated world (via CDP) while `eval` snippets execute in
+ * the page's main world, mirroring the browser extension. Chromium only.
  * @param {Page} page
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<AutoconsentContext>}
  */
 export async function injectAutoconsent(page, options = {}) {
     const action = 'action' in options ? options.action : 'optOut';
+    /** @type {any[]} */
     const received = [];
-    let selfTestFrame = null;
-
     const config = {
         enabled: true,
         autoAction: action,
@@ -145,56 +149,64 @@ export async function injectAutoconsent(page, options = {}) {
         enableGeneratedRules: true,
         enableHeuristicDetection: true,
         enableHeuristicAction: true,
+        // The engine runs in the isolated world; eval snippets are forwarded to the main world.
+        isMainWorld: false,
         logs: { lifecycle: true, rulesteps: true, detectionsteps: false, evals: false, errors: true },
     };
 
-    async function sendToFrame(frame, message) {
-        try {
-            await frame.evaluate(`autoconsentReceiveMessage(${JSON.stringify(message)})`);
-        } catch {
-            // A frame may navigate or detach while autoconsent is responding.
-        }
-    }
+    // Remembers which frame (and its transport's sender) asked for a self test, so the
+    // follow-up `selfTest` message is routed back to the same content-script context even
+    // when several frames/CDP sessions are involved.
+    /** @type {{ send: MessageTransport['sendToContentScript'], frameRef: any } | null} */
+    let selfTestTarget = null;
 
-    await page.exposeBinding('autoconsentSendMessage', async ({ frame }, msg) => {
-        received.push(msg);
-        switch (msg.type) {
-            case 'init':
-                await sendToFrame(frame, {
-                    type: 'initResp',
-                    config,
-                    rules: { autoconsent: fullRules },
-                });
-                break;
-            case 'eval': {
-                let result = false;
-                try {
-                    result = await frame.evaluate(msg.code);
-                } catch {}
-                await sendToFrame(frame, {
-                    id: msg.id,
-                    type: 'evalResp',
-                    result,
-                });
-                break;
-            }
-            case 'optOutResult':
-            case 'optInResult':
-                if (msg.scheduleSelfTest) {
-                    selfTestFrame = frame;
+    // The transport-agnostic message handler. A transport supplies two primitives:
+    //   sendToContentScript(frameRef, message) - deliver to autoconsentReceiveMessage in the content-script world
+    //   evalInMainWorld(frameRef, code)        - run an eval snippet in the frame's MAIN world
+    // This split mirrors the browser extension: the engine lives in an isolated world,
+    // while `eval` snippets execute in the page's main world.
+    /** @type {MessageHandlerFactory} */
+    const createMessageHandler = ({ sendToContentScript, evalInMainWorld }) => {
+        return async function handleMessage(msg, frameRef) {
+            received.push(msg);
+            switch (msg.type) {
+                case 'init':
+                    await sendToContentScript(frameRef, { type: 'initResp', config, rules: { autoconsent: fullRules } });
+                    break;
+                case 'eval': {
+                    let result = false;
+                    try {
+                        result = await evalInMainWorld(frameRef, msg.code);
+                    } catch {}
+                    await sendToContentScript(frameRef, { id: msg.id, type: 'evalResp', result });
+                    break;
                 }
-                break;
-            case 'autoconsentDone':
-                await sendToFrame(selfTestFrame ?? frame, { type: 'selfTest' });
-                break;
-            case 'autoconsentError':
-                console.error('autoconsent error:', msg.details);
-                break;
-        }
-    });
-    await page.addInitScript(contentScript);
+                case 'optOutResult':
+                case 'optInResult':
+                    if (msg.scheduleSelfTest) {
+                        selfTestTarget = { send: sendToContentScript, frameRef };
+                    }
+                    break;
+                case 'autoconsentDone': {
+                    const target = selfTestTarget ?? { send: sendToContentScript, frameRef };
+                    await target.send(target.frameRef, { type: 'selfTest' });
+                    break;
+                }
+                case 'autoconsentError':
+                    console.error('autoconsent error:', msg.details);
+                    break;
+            }
+        };
+    };
 
-    function hasMessage(type) {
+    // Isolated-world injection requires CDP, which Playwright exposes for Chromium only.
+    const browserName = page.context().browser()?.browserType().name();
+    if (browserName && browserName !== 'chromium') {
+        throw new Error(`regional-proxy supports Chromium only (got "${browserName}").`);
+    }
+    await injectIntoIsolatedWorld(page, createMessageHandler);
+
+    function hasMessage(/** @type {string} */ type) {
         return received.some((m) => m.type === type);
     }
 
@@ -216,7 +228,7 @@ export async function injectAutoconsent(page, options = {}) {
         return false;
     }
 
-    async function waitForMessage(type, timeout = 30000) {
+    async function waitForMessage(/** @type {string} */ type, timeout = 30000) {
         const start = Date.now();
         while (Date.now() - start < timeout) {
             if (hasMessage(type)) return true;
@@ -225,7 +237,8 @@ export async function injectAutoconsent(page, options = {}) {
         return false;
     }
 
-    function collectResult(url, region) {
+    function collectResult(/** @type {string} */ url, /** @type {string} */ region) {
+        /** @type {TestResult} */
         const result = {
             url,
             region,
@@ -273,6 +286,125 @@ export async function injectAutoconsent(page, options = {}) {
     }
 
     return { received, hasMessage, waitForCompletion, waitForMessage, collectResult };
+}
+
+/**
+ * Isolated-world injection via CDP (Chromium only). The content script runs in a dedicated
+ * world named `autoconsent`; it talks to Node through a CDP binding, and `eval` snippets are
+ * executed in each frame's MAIN world - matching how the browser extension behaves.
+ * @param {Page} page
+ * @param {MessageHandlerFactory} createMessageHandler
+ */
+async function injectIntoIsolatedWorld(page, createMessageHandler) {
+    const WORLD_NAME = 'autoconsent';
+    const BINDING_NAME = 'autoconsentSendMessageBinding';
+    // CDP bindings accept a single string argument, so wrap the raw binding in the
+    // `window.autoconsentSendMessage(object)` shape the content script expects. The binding
+    // is resolved lazily at call time, after CDP has installed it into the isolated world.
+    const isolatedSource = `window.autoconsentSendMessage = (m) => { window.${BINDING_NAME}(JSON.stringify(m)); return Promise.resolve(); };\n${contentScript}`;
+
+    const attachedFrames = new WeakSet();
+
+    async function attachToSession(/** @type {any} */ client) {
+        // frameId -> { main, isolated } unique execution-context ids
+        const frameContexts = new Map();
+        // numeric executionContextId -> frameId, for routing Runtime.bindingCalled events
+        const frameByContextId = new Map();
+
+        const handle = createMessageHandler({
+            sendToContentScript: async (frameId, message) => {
+                const uniqueContextId = frameContexts.get(frameId)?.isolated;
+                if (!uniqueContextId) return;
+                try {
+                    await client.send('Runtime.evaluate', {
+                        expression: `autoconsentReceiveMessage(${JSON.stringify(message)})`,
+                        uniqueContextId,
+                        awaitPromise: true,
+                        // Some pages' CSP would otherwise block evaluating in the isolated world.
+                        allowUnsafeEvalBlockedByCSP: true,
+                    });
+                } catch {
+                    // The context may be gone if the frame navigated or detached.
+                }
+            },
+            evalInMainWorld: async (frameId, code) => {
+                const uniqueContextId = frameContexts.get(frameId)?.main;
+                if (!uniqueContextId) return false;
+                const { result, exceptionDetails } = await client.send('Runtime.evaluate', {
+                    expression: code,
+                    uniqueContextId,
+                    returnByValue: true,
+                    awaitPromise: true,
+                    // Eval snippets must run even when the page's CSP disallows eval.
+                    allowUnsafeEvalBlockedByCSP: true,
+                });
+                return exceptionDetails ? false : (result?.value ?? false);
+            },
+        });
+
+        client.on('Runtime.executionContextCreated', (/** @type {any} */ event) => {
+            const { context } = event;
+            const frameId = context.auxData?.frameId;
+            if (!frameId) return;
+            const entry = frameContexts.get(frameId) ?? {};
+            if (context.name === WORLD_NAME) {
+                entry.isolated = context.uniqueId;
+            } else if (context.auxData?.isDefault) {
+                entry.main = context.uniqueId;
+            }
+            frameContexts.set(frameId, entry);
+            frameByContextId.set(context.id, frameId);
+        });
+        client.on('Runtime.executionContextDestroyed', (/** @type {any} */ event) => {
+            frameByContextId.delete(event.executionContextId);
+        });
+        client.on('Runtime.executionContextsCleared', () => {
+            frameByContextId.clear();
+            frameContexts.clear();
+        });
+        client.on('Runtime.bindingCalled', (/** @type {any} */ event) => {
+            const { name, payload, executionContextId } = event;
+            if (name !== BINDING_NAME) return;
+            const frameId = frameByContextId.get(executionContextId);
+            if (!frameId) return;
+            let msg;
+            try {
+                msg = JSON.parse(payload);
+            } catch {
+                return;
+            }
+            handle(msg, frameId);
+        });
+
+        await client.send('Runtime.enable');
+        await client.send('Page.enable');
+        await client.send('Runtime.addBinding', { name: BINDING_NAME, executionContextName: WORLD_NAME });
+        await client.send('Page.addScriptToEvaluateOnNewDocument', { source: isolatedSource, worldName: WORLD_NAME, runImmediately: true });
+    }
+
+    // The page session covers the main frame and all same-process (in-process) iframes.
+    await attachToSession(await page.context().newCDPSession(page));
+
+    // Out-of-process iframes (OOPIFs) are separate CDP targets, so each needs its own session.
+    // newCDPSession throws for in-process frames, which are already handled above.
+    async function attachToOopif(/** @type {import('playwright').Frame} */ frame) {
+        if (!frame.parentFrame() || attachedFrames.has(frame)) return;
+        let client;
+        try {
+            client = await page.context().newCDPSession(frame);
+        } catch {
+            return;
+        }
+        attachedFrames.add(frame);
+        try {
+            await attachToSession(client);
+        } catch {
+            // The OOPIF may navigate or detach while we are wiring up its session.
+        }
+    }
+    page.on('frameattached', attachToOopif);
+    page.on('framenavigated', attachToOopif);
+    await Promise.all(page.frames().map(attachToOopif));
 }
 
 /**
@@ -331,7 +463,7 @@ export async function testPage(page, url, regionKey, options = {}) {
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
-            errors: [e.message],
+            errors: [e instanceof Error ? e.message : String(e)],
             duration: Date.now() - startTime,
             screenshotPaths: [],
         };
@@ -365,7 +497,7 @@ export async function testUrl(url, regionKey, options = {}) {
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
-            errors: [e.message],
+            errors: [e instanceof Error ? e.message : String(e)],
             duration: 0,
             screenshotPaths: [],
         };
