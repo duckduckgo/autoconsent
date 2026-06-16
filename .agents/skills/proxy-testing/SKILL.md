@@ -1,28 +1,25 @@
 ---
 name: proxy-testing
-description: Test autoconsent rules across geographic regions with HTTPS proxies in Playwright. Use when verifying region-dependent CMP behavior or running regional browser checks with shared proxy credentials.
+description: Test autoconsent via regional proxies in Playwright. Use when verifying rule changes across regions (US, EU, UK, etc.), or investigating region-dependent CMP behavior.
 ---
 
 # Proxy Testing
 
-Use this skill to test autoconsent behavior from specific regions through HTTPS proxies. It launches local Playwright browsers with a regional proxy selected by environment variables.
+All rule changes must be tested across ALL supported geographic regions to catch regional popup variations. This skill provides a JS library to run autoconsent via regional proxies in Playwright.
 
-Library: [scripts/regional-proxy.mjs](scripts/regional-proxy.mjs). Prefer it over writing custom proxy/autoconsent boilerplate.
+Important! Autoconsent results can have false positives. When testing, always inspect the screenshots and confirm that opt-out was successful.
 
 ## Prerequisites
 
 ```bash
-npm run prepublish
+npm run prepublish # builds dist/autoconsent.playwright.js and rules/rules.json
 ```
 
-```bash
-export REGIONAL_PROXY_ENDPOINT_US="us.example.proxy.duckduckgo.com"
-export REGIONAL_PROXY_ENDPOINT_DE="de.example.proxy.duckduckgo.com"
-export REGIONAL_PROXY_ENDPOINT_FR="fr.example.proxy.duckduckgo.com"
+Environment variables:
 
-export REGIONAL_PROXY_USERNAME="..."
-export REGIONAL_PROXY_PASSWORD="..."
-```
+- `REGIONAL_PROXY_<TWO_LETTER_REGION_CODE>` (for example, `REGIONAL_PROXY_US`, `REGIONAL_PROXY_GB`, `REGIONAL_PROXY_AU`, etc.) - the domain endpoint
+- `REGIONAL_PROXY_USERNAME`
+- `REGIONAL_PROXY_PASSWORD`
 
 - Endpoints must be bare hostnames: no scheme, credentials, or port.
 - The library adds `https://` and port `443`.
@@ -69,7 +66,7 @@ import { buildProxyConfig } from './.agents/skills/proxy-testing/scripts/regiona
 
 export default defineConfig({
     use: {
-        proxy: buildProxyConfig(process.env.REGIONAL_PROXY_REGION || 'us'),
+        proxy: buildProxyConfig('us'),
     },
 });
 ```
@@ -91,8 +88,7 @@ Options: `action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `
 ```javascript
 import { launchRegionalProxyBrowser } from './.agents/skills/proxy-testing/scripts/regional-proxy.mjs';
 
-const region = process.env.REGIONAL_PROXY_REGION || 'us';
-const browser = await launchRegionalProxyBrowser(region);
+const browser = await launchRegionalProxyBrowser('us');
 
 const page = await browser.newPage();
 await page.goto('https://api.ipify.org?format=json', { waitUntil: 'domcontentloaded', timeout: 30000 });

@@ -5,7 +5,7 @@
  * injects autoconsent, and evaluates opt-out/opt-in flows.
  *
  * Requires env vars:
- * - REGIONAL_PROXY_ENDPOINT_<REGION>
+ * - REGIONAL_PROXY_<REGION> (REGION is the uppercased two-letter region code)
  * - REGIONAL_PROXY_USERNAME
  * - REGIONAL_PROXY_PASSWORD
  */
@@ -65,7 +65,7 @@ const contentScript = fs.readFileSync(path.join(projectRoot, 'dist/autoconsent.p
 const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8'));
 const fullRules = rulesJson.autoconsent;
 
-export const DEFAULT_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no'];
+export const DEFAULT_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no', 'it', 'es', 'pl', 'se', 'dk', 'jp'];
 
 const BROWSERS = {
     chromium,
@@ -74,36 +74,26 @@ const BROWSERS = {
 };
 
 /**
- * Convert a region key to its environment variable suffix.
- * @param {string} regionKey
- * @returns {string}
- */
-export function regionEnvSuffix(regionKey) {
-    return regionKey.toUpperCase().replace(/[^A-Z0-9]/g, '_');
-}
-
-/**
  * Build the Playwright proxy object for a region.
- * @param {string} regionKey
+ * @param {string} regionKey - Two-letter region code (e.g. 'us', 'gb').
  * @param {NodeJS.ProcessEnv} [env]
  * @returns {{ server: string, username: string, password: string }}
  */
 export function buildProxyConfig(regionKey, env = process.env) {
-    const suffix = regionEnvSuffix(regionKey);
-    const endpoint = env[`REGIONAL_PROXY_ENDPOINT_${suffix}`];
+    const envVar = `REGIONAL_PROXY_${regionKey.toUpperCase()}`;
+    const endpoint = env[envVar];
     const username = env.REGIONAL_PROXY_USERNAME;
     const password = env.REGIONAL_PROXY_PASSWORD;
 
     if (!endpoint || !username || !password) {
         throw new Error(
             `Missing proxy environment variables for region "${regionKey}". ` +
-                `Expected REGIONAL_PROXY_ENDPOINT_${suffix}, REGIONAL_PROXY_USERNAME, and REGIONAL_PROXY_PASSWORD.`,
+                `Expected ${envVar}, REGIONAL_PROXY_USERNAME, and REGIONAL_PROXY_PASSWORD.`,
         );
     }
     if (endpoint.includes('://') || endpoint.includes('@') || /:\d+$/.test(endpoint)) {
         throw new Error(
-            `REGIONAL_PROXY_ENDPOINT_${suffix} should be a bare hostname without scheme, credentials, or port. ` +
-                'The library adds https:// and port 443.',
+            `${envVar} should be a bare hostname without scheme, credentials, or port. ` + 'The library adds https:// and port 443.',
         );
     }
 
@@ -155,7 +145,7 @@ export async function injectAutoconsent(page, options = {}) {
         enableGeneratedRules: true,
         enableHeuristicDetection: true,
         enableHeuristicAction: true,
-        logs: { lifecycle: true, rulesteps: false, detectionsteps: false, evals: false, errors: true },
+        logs: { lifecycle: true, rulesteps: true, detectionsteps: false, evals: false, errors: true },
     };
 
     async function sendToFrame(frame, message) {
