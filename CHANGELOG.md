@@ -243,7 +243,6 @@
 #### 🚀 Enhancement
 
 - Bump some outdated dependencies [#1344](https://github.com/duckduckgo/autoconsent/pull/1344) ([@muodov](https://github.com/muodov))
-- Bump the adblocker group across 1 directory with 2 updates [#1333](https://github.com/duckduckgo/autoconsent/pull/1333) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Fix Tealium scroll lock on bank.marksandspencer.com [#1332](https://github.com/duckduckgo/autoconsent/pull/1332) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
 - Fix usercentrics-api optOut breakage on slow consent flows (condor.com) [#1338](https://github.com/duckduckgo/autoconsent/pull/1338) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
 - Fix Ketch popup handling on yumearth.com (redesigned banner/modal DOM) [#1329](https://github.com/duckduckgo/autoconsent/pull/1329) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
@@ -324,7 +323,6 @@
 #### 🐛 Bug Fix
 
 - Make Didomi popup detection robust on nothing.tech [#1326](https://github.com/duckduckgo/autoconsent/pull/1326) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
-- Bump the adblocker group with 2 updates [#1320](https://github.com/duckduckgo/autoconsent/pull/1320) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 5
 
@@ -340,7 +338,6 @@
 
 #### 🚀 Enhancement
 
-- Bump the adblocker group across 1 directory with 2 updates [#1221](https://github.com/duckduckgo/autoconsent/pull/1221) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 1
 
@@ -494,7 +491,6 @@
 
 #### 🚀 Enhancement
 
-- Bump the adblocker group with 2 updates [#1099](https://github.com/duckduckgo/autoconsent/pull/1099) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 - Add more "reject" patterns [#1218](https://github.com/duckduckgo/autoconsent/pull/1218) ([@muodov](https://github.com/muodov))
 
 #### 📝 Documentation
@@ -925,7 +921,6 @@
 #### 🐛 Bug Fix
 
 - Bump tldts-experimental from 7.0.18 to 7.0.19 [#1091](https://github.com/duckduckgo/autoconsent/pull/1091) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump the adblocker group with 2 updates [#1078](https://github.com/duckduckgo/autoconsent/pull/1078) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 3
 
@@ -1014,7 +1009,6 @@
 
 #### 🐛 Bug Fix
 
-- Bump the adblocker group with 2 updates [#927](https://github.com/duckduckgo/autoconsent/pull/927) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 
 #### Authors: 2
 
@@ -1316,7 +1310,6 @@
 - 🤖 Add autoconsent rules for 1 sites (1 need review) [#942](https://github.com/duckduckgo/autoconsent/pull/942) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#944](https://github.com/duckduckgo/autoconsent/pull/944) ([@daxtheduck](https://github.com/daxtheduck))
 - 🤖 Add autoconsent rules for 1 sites (1 need review) [#943](https://github.com/duckduckgo/autoconsent/pull/943) ([@daxtheduck](https://github.com/daxtheduck))
-- Better tree-shaking of adblocker library [#939](https://github.com/duckduckgo/autoconsent/pull/939) ([@muodov](https://github.com/muodov))
 
 #### 🐛 Bug Fix
 
@@ -1619,7 +1612,6 @@
 
 #### 🐛 Bug Fix
 
-- Bump the adblocker group with 2 updates [#838](https://github.com/duckduckgo/autoconsent/pull/838) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Fix rule for nos.nl [#847](https://github.com/duckduckgo/autoconsent/pull/847) ([@muodov](https://github.com/muodov))
 - extend google-standalone to youtube [#845](https://github.com/duckduckgo/autoconsent/pull/845) ([@muodov](https://github.com/muodov))
 - expand imdb rule to the mobile site [#843](https://github.com/duckduckgo/autoconsent/pull/843) ([@muodov](https://github.com/muodov))
@@ -1659,7 +1651,6 @@
 
 #### 🚀 Enhancement
 
-- Bump the adblocker group with 2 updates [#832](https://github.com/duckduckgo/autoconsent/pull/832) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Add autoconsent rules for 158 sites [#821](https://github.com/duckduckgo/autoconsent/pull/821) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
 
 #### 🐛 Bug Fix
