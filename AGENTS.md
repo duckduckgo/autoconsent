@@ -60,7 +60,7 @@ CMPs behave differently by region:
 
 Use `if`/`then`/`else` to handle regional variants within a single rule.
 
-**All rule changes MUST be tested across geographic regions** to catch regional popup variations. Test from real geographic locations using available regional-testing tooling (e.g. proxy-based remote browsers).
+**All rule changes MUST be tested across geographic regions** to catch regional popup variations. Test from real geographic locations using available regional testing tooling (e.g. `proxy-testing` skill).
 
 ### Generic vs Site-Specific Rules
 
@@ -102,7 +102,7 @@ Single-string selectors cannot pierce — use arrays whenever the target is insi
 shadow root or same-origin iframe.
 
 ### General Guidelines and Gotchas
-- **Regional testing is mandatory** for any rule change — CMPs behave differently under GDPR (EU), CCPA (US), and other jurisdictions. Run the rule against different regions using available regional-testing tooling before considering the change done.
+- **Regional testing is mandatory** for any rule change — CMPs behave differently under GDPR (EU), CCPA (US), and other jurisdictions. Run the rule against different regions using available regional testing tooling before considering the change done.
 - When verifying a rule, **look at the screenshots** on top of the API results — sometimes a rule reports success, but the popup is not actually handled - a screenshot will detect this.
 - **Paywalls do not need to be handled.** If the website presents the choice to pay or agree to cookies, the correct solution is to disable the feature on that site, so no code changes required in this case.
 - If the pop-up has an explicit "reject"-like button, you should first consider why HEURISTIC rule didn't handle it. A fix to the heuristic rule is always preferred to a new rule, as long as it doesn't cause potential false-positives on other sites.
@@ -170,4 +170,4 @@ After creating or modifying a rule:
 3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
 4. `npm run prepublish` — full build including extension bundle
 5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
-6. Check the rule works across geographic regions using available regional-testing tooling.
+6. Check the rule works across geographic regions using available regional testing tooling.
