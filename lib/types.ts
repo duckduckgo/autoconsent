@@ -133,8 +133,8 @@ export interface PopupData {
 
 export const PopupHandlingModes = {
     None: -1,
-    Reject: 0,
-    Tier1: 1,
-    Tier2: 2,
+    Reject: 1,
+    Tier1: 2,
+    Tier2: 3,
 } as const;
 export type PopupHandlingMode = (typeof PopupHandlingModes)[keyof typeof PopupHandlingModes];
