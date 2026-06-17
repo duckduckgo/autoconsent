@@ -507,6 +507,9 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         const targetButtonType =
             level === PopupHandlingModes.Reject ? 'reject' : level === PopupHandlingModes.Tier1 ? 'acknowledge' : 'accept';
         const button = buttons.find((button) => button.regexClassification === targetButtonType);
+        if (!button) {
+            this.autoconsent.config.logs.errors && console.warn(`Heuristic found no button to click at ${targetButtonType}`, this.popups);
+        }
         return button;
     }
 
@@ -516,7 +519,6 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         if (button) {
             return this.clickElement(button.element);
         }
-        this.autoconsent.config.logs.errors && console.warn(`Heuristic found no button to click at ${targetButtonType}`, this.popups);
         return Promise.resolve(false);
     }
 
