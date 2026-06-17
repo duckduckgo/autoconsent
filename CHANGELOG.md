@@ -315,7 +315,6 @@
 
 - Fix heuristic reject pattern for `I Reject All (except Strictly Necessary)` (apnews.com) [#1328](https://github.com/duckduckgo/autoconsent/pull/1328) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
 - Fix delayed OneTrust banner detection on College Board [#1327](https://github.com/duckduckgo/autoconsent/pull/1327) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
-- Update EasyList Cookie to 494f972bab536fd436e26145c94bc3d1bb91380b [#1228](https://github.com/duckduckgo/autoconsent/pull/1228) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Fix Didomi selfTest under CCPA/CPRA (newrepublic.com) [#1324](https://github.com/duckduckgo/autoconsent/pull/1324) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
 - Tweak Onetrust and Trustarc [#1252](https://github.com/duckduckgo/autoconsent/pull/1252) ([@muodov](https://github.com/muodov))
 - Onetrust: handle CCPA notice-only banner variant (columbia.com) [#1325](https://github.com/duckduckgo/autoconsent/pull/1325) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
@@ -496,7 +495,6 @@
 #### 🚀 Enhancement
 
 - Bump the adblocker group with 2 updates [#1099](https://github.com/duckduckgo/autoconsent/pull/1099) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
-- Update EasyList Cookie to 3d7c4396813e269c757e5e9851d80b7b5db622a0 [#1216](https://github.com/duckduckgo/autoconsent/pull/1216) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Add more "reject" patterns [#1218](https://github.com/duckduckgo/autoconsent/pull/1218) ([@muodov](https://github.com/muodov))
 
 #### 📝 Documentation
@@ -519,7 +517,6 @@
 
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1197](https://github.com/duckduckgo/autoconsent/pull/1197) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
 - Add unit tests for filterCMPs function [#1119](https://github.com/duckduckgo/autoconsent/pull/1119) ([@rafaelr-hub](https://github.com/rafaelr-hub) [@muodov](https://github.com/muodov) [@cursoragent](https://github.com/cursoragent) [@Ezhik-777](https://github.com/Ezhik-777))
-- Update EasyList Cookie to 08eda0755105bfe87bbc927b86f9db0c1fb85de1 [#1209](https://github.com/duckduckgo/autoconsent/pull/1209) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1210](https://github.com/duckduckgo/autoconsent/pull/1210) ([@daxtheduck](https://github.com/daxtheduck))
 - Theinfatuation.com cookie handling [#1198](https://github.com/duckduckgo/autoconsent/pull/1198) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@sammacbeth](https://github.com/sammacbeth))
 - Channel 4 cookie rule [#1195](https://github.com/duckduckgo/autoconsent/pull/1195) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
@@ -588,7 +585,6 @@
 - Speculative fix for TrustArc raciness. [#1193](https://github.com/duckduckgo/autoconsent/pull/1193) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
 - Prevent over-eager detection of ens-notify on british airways website [#1192](https://github.com/duckduckgo/autoconsent/pull/1192) ([@sammacbeth](https://github.com/sammacbeth))
 - Copilot cookie popup rule [#1185](https://github.com/duckduckgo/autoconsent/pull/1185) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
-- Update EasyList Cookie to e2be5efe435a2dedbf46563db3022a8344d833c6 [#1158](https://github.com/duckduckgo/autoconsent/pull/1158) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Sourcepoint US fixes [#1184](https://github.com/duckduckgo/autoconsent/pull/1184) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
 - Handle OneTrust one-click reject [#1163](https://github.com/duckduckgo/autoconsent/pull/1163) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
 - Bump the dev-dependencies group across 1 directory with 15 updates [#1206](https://github.com/duckduckgo/autoconsent/pull/1206) ([@dependabot[bot]](https://github.com/dependabot[bot]))
@@ -688,7 +684,6 @@
 #### 🚀 Enhancement
 
 - mitigate a race condition in tarteaucitron-deny [#1128](https://github.com/duckduckgo/autoconsent/pull/1128) ([@muodov](https://github.com/muodov))
-- Update EasyList Cookie to e97cf92272b9a6706202c70878b168693d4bd0e8 [#1106](https://github.com/duckduckgo/autoconsent/pull/1106) ([@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Prevent exceptions in tumblr rule [#1150](https://github.com/duckduckgo/autoconsent/pull/1150) ([@muodov](https://github.com/muodov))
 
 #### 🐛 Bug Fix
@@ -895,7 +890,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 22991206f866d0ce43d4e342b1ccb0a81dd3a312 [#1048](https://github.com/duckduckgo/autoconsent/pull/1048) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1096](https://github.com/duckduckgo/autoconsent/pull/1096) ([@daxtheduck](https://github.com/daxtheduck))
 
 #### Authors: 3
@@ -1086,7 +1080,6 @@
 #### 🚀 Enhancement
 
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1047](https://github.com/duckduckgo/autoconsent/pull/1047) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
-- Update EasyList Cookie to 1667026bc3fd895fdb107ab947615e657a975531 [#931](https://github.com/duckduckgo/autoconsent/pull/931) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1046](https://github.com/duckduckgo/autoconsent/pull/1046) ([@daxtheduck](https://github.com/daxtheduck))
 - Report the number of clicks and total opt-out time [#1039](https://github.com/duckduckgo/autoconsent/pull/1039) ([@muodov](https://github.com/muodov))
 
@@ -1429,7 +1422,6 @@
 #### 🚀 Enhancement
 
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#921](https://github.com/duckduckgo/autoconsent/pull/921) ([@daxtheduck](https://github.com/daxtheduck))
-- Update EasyList Cookie to d0018b618e733641797d796649354c05c9278edb [#900](https://github.com/duckduckgo/autoconsent/pull/900) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -1621,7 +1613,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to c620f1f1950adc8d8f709d80f60593ad8cb59ec3 [#848](https://github.com/duckduckgo/autoconsent/pull/848) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Bump the dev-dependencies group with 5 updates [#839](https://github.com/duckduckgo/autoconsent/pull/839) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Add rule for shein.com [#844](https://github.com/duckduckgo/autoconsent/pull/844) ([@muodov](https://github.com/muodov))
 - [test] Add autoconsent rules for https://arthurbanana.com/arthur-banana/ [#846](https://github.com/duckduckgo/autoconsent/pull/846) ([@daxtheduck](https://github.com/daxtheduck))
@@ -1647,7 +1638,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to e7935b07845c1e76822103bcbf0676a3a147d67c [#836](https://github.com/duckduckgo/autoconsent/pull/836) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Add rule for app.discuss.io [#833](https://github.com/duckduckgo/autoconsent/pull/833) ([@muodov](https://github.com/muodov))
 - Add autoconsent rules for 1 sites [#834](https://github.com/duckduckgo/autoconsent/pull/834) ([@daxtheduck](https://github.com/daxtheduck))
 
@@ -1695,7 +1685,6 @@
 - Support reject button in moove [#825](https://github.com/duckduckgo/autoconsent/pull/825) ([@muodov](https://github.com/muodov))
 - Fix outdated rules [#827](https://github.com/duckduckgo/autoconsent/pull/827) ([@muodov](https://github.com/muodov))
 - Add rule for cloudflare's CMP [#824](https://github.com/duckduckgo/autoconsent/pull/824) ([@muodov](https://github.com/muodov))
-- Update EasyList Cookie to f1abae853dc0a78b829121feef19ca8cd30e031d [#815](https://github.com/duckduckgo/autoconsent/pull/815) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -1806,7 +1795,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 83f2073ea4b9c66c3c6b1b9034f2164034b1a515 [#782](https://github.com/duckduckgo/autoconsent/pull/782) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Remove 'hide' step from eu-cookie-compliance-banner [#784](https://github.com/duckduckgo/autoconsent/pull/784) ([@noisysocks](https://github.com/noisysocks))
 - Update cookie-law-info rule to hide .cli-popup-overlay [#785](https://github.com/duckduckgo/autoconsent/pull/785) ([@noisysocks](https://github.com/noisysocks))
 
@@ -1822,13 +1810,11 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 9fba285e18d0dc14f2ee64142b56e76a59b58649 [#777](https://github.com/duckduckgo/autoconsent/pull/777) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Visual test mode [#756](https://github.com/duckduckgo/autoconsent/pull/756) ([@muodov](https://github.com/muodov))
 - Bump @ghostery/adblocker-content from 2.5.2 to 2.6.1 [#754](https://github.com/duckduckgo/autoconsent/pull/754) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 - Bump @ghostery/adblocker from 2.5.2 to 2.6.1 [#753](https://github.com/duckduckgo/autoconsent/pull/753) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 - Bump the dev-dependencies group across 1 directory with 7 updates [#763](https://github.com/duckduckgo/autoconsent/pull/763) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 - Add cookiehub CMP [#778](https://github.com/duckduckgo/autoconsent/pull/778) ([@noisysocks](https://github.com/noisysocks))
-- Update EasyList Cookie to 0b4c698c6cf070415d7dcda1b8eabe9d6cb5fa99 [#752](https://github.com/duckduckgo/autoconsent/pull/752) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -1892,10 +1878,8 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 2f58b73d955695278fb506b785926f67ee2785f9 [#745](https://github.com/duckduckgo/autoconsent/pull/745) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Bump the dev-dependencies group across 1 directory with 6 updates [#739](https://github.com/duckduckgo/autoconsent/pull/739) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Add support for FastCMP and iframe piercing [#744](https://github.com/duckduckgo/autoconsent/pull/744) ([@muodov](https://github.com/muodov))
-- Update EasyList Cookie to eed61600bcc040dd99171437652da1884d43dfcb [#737](https://github.com/duckduckgo/autoconsent/pull/737) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -1945,7 +1929,6 @@
 - Prioritize checking of site-specific rules in detection phase. [#720](https://github.com/duckduckgo/autoconsent/pull/720) ([@sammacbeth](https://github.com/sammacbeth))
 - Run detection phase sequentially per CMP. [#719](https://github.com/duckduckgo/autoconsent/pull/719) ([@sammacbeth](https://github.com/sammacbeth))
 - Fix rule for openai [#723](https://github.com/duckduckgo/autoconsent/pull/723) ([@muodov](https://github.com/muodov))
-- Update EasyList Cookie to 39338825841d682f464b10b174ea835000e30c0f [#722](https://github.com/duckduckgo/autoconsent/pull/722) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -1964,10 +1947,8 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to e1d6329233498d8cb5a5fe473e516475ee3da6e8 [#713](https://github.com/duckduckgo/autoconsent/pull/713) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Bump the dev-dependencies group across 1 directory with 5 updates [#715](https://github.com/duckduckgo/autoconsent/pull/715) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Add rule for nos.nl [#712](https://github.com/duckduckgo/autoconsent/pull/712) ([@noisysocks](https://github.com/noisysocks))
-- Update EasyList Cookie to 54998140e5d5e212ead7be504a42fe3afb8cfdc6 [#708](https://github.com/duckduckgo/autoconsent/pull/708) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -1995,7 +1976,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 43935b4bf6a715553ae4d2ccc628462fad8188f2 [#704](https://github.com/duckduckgo/autoconsent/pull/704) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Fix rule for bbb.org [#678](https://github.com/duckduckgo/autoconsent/pull/678) ([@muodov](https://github.com/muodov))
 
 #### 🐛 Bug Fix
@@ -2018,7 +1998,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 9232b2df4b9314504bc835d2aaf3fb72c3aa872a [#700](https://github.com/duckduckgo/autoconsent/pull/700) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Update deepl rule to match new markup [#695](https://github.com/duckduckgo/autoconsent/pull/695) ([@noisysocks](https://github.com/noisysocks) [@muodov](https://github.com/muodov))
 - Add rule for caranddriver.com [#696](https://github.com/duckduckgo/autoconsent/pull/696) ([@noisysocks](https://github.com/noisysocks))
 - Add AdOpt CMP [#697](https://github.com/duckduckgo/autoconsent/pull/697) ([@noisysocks](https://github.com/noisysocks))
@@ -2041,7 +2020,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to b6ba5e180e756441787c7415b894e2ade23a758f [#692](https://github.com/duckduckgo/autoconsent/pull/692) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Fix sourcepoint rule for US version of ft.com [#693](https://github.com/duckduckgo/autoconsent/pull/693) ([@muodov](https://github.com/muodov))
 - More site-specific rules [#676](https://github.com/duckduckgo/autoconsent/pull/676) ([@muodov](https://github.com/muodov))
 - Fix a race condition with self-test in test extension [#690](https://github.com/duckduckgo/autoconsent/pull/690) ([@muodov](https://github.com/muodov))
@@ -2071,7 +2049,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 0f2116100a57d0ec74666508d405fc4da80f1f9d [#685](https://github.com/duckduckgo/autoconsent/pull/685) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Several site-specific rules [#673](https://github.com/duckduckgo/autoconsent/pull/673) ([@muodov](https://github.com/muodov))
 - add rule for fedex.com [#669](https://github.com/duckduckgo/autoconsent/pull/669) ([@muodov](https://github.com/muodov))
 - Rule batch [#684](https://github.com/duckduckgo/autoconsent/pull/684) ([@muodov](https://github.com/muodov))
@@ -2107,7 +2084,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 1f078adcab61d59e006a1b16847c07bcede57ea3 [#664](https://github.com/duckduckgo/autoconsent/pull/664) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - add rule for tplink sites [#662](https://github.com/duckduckgo/autoconsent/pull/662) ([@muodov](https://github.com/muodov))
 - Add rule for synology sites [#661](https://github.com/duckduckgo/autoconsent/pull/661) ([@muodov](https://github.com/muodov))
 - add rule for wix.com [#666](https://github.com/duckduckgo/autoconsent/pull/666) ([@muodov](https://github.com/muodov))
@@ -2143,7 +2119,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 021d8018ab06e861b47cb0c6f2eae756f27c05de [#643](https://github.com/duckduckgo/autoconsent/pull/643) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -2173,7 +2148,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 7c1f69a77b0ee7c97112fba6f7394d11edcf3877 [#638](https://github.com/duckduckgo/autoconsent/pull/638) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Add site specific rule for bbc.com [#637](https://github.com/duckduckgo/autoconsent/pull/637) ([@noisysocks](https://github.com/noisysocks))
 - Bump the dev-dependencies group across 1 directory with 6 updates [#634](https://github.com/duckduckgo/autoconsent/pull/634) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
@@ -2199,7 +2173,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 7eba802a2208dd322d820a2aad7a256377c3afec [#630](https://github.com/duckduckgo/autoconsent/pull/630) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -2221,7 +2194,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 71afe4eb4e86bb49fac1a7d5e53a10373081336e [#618](https://github.com/duckduckgo/autoconsent/pull/618) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Improve Termly rule [#619](https://github.com/duckduckgo/autoconsent/pull/619) ([@muodov](https://github.com/muodov))
 - Bump the dev-dependencies group across 1 directory with 5 updates [#621](https://github.com/duckduckgo/autoconsent/pull/621) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Add rule for Shopify Customer Privacy CMP [#616](https://github.com/duckduckgo/autoconsent/pull/616) ([@noisysocks](https://github.com/noisysocks))
@@ -2260,7 +2232,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to c9d3f97eb2e68f73a6648dcc76e607be41ed952c [#600](https://github.com/duckduckgo/autoconsent/pull/600) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Fix sourcepoint on the US version of theguardian.com [#598](https://github.com/duckduckgo/autoconsent/pull/598) ([@muodov](https://github.com/muodov))
 - Cleaning up tests: 1-as [#597](https://github.com/duckduckgo/autoconsent/pull/597) ([@sammacbeth](https://github.com/sammacbeth))
 - Add consent-manager rule [#542](https://github.com/duckduckgo/autoconsent/pull/542) ([@sammacbeth](https://github.com/sammacbeth))
@@ -2298,8 +2269,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to dd9fb5774b073ef64b28d515e3814e70e7211d0e [#588](https://github.com/duckduckgo/autoconsent/pull/588) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
-- Update EasyList Cookie to f686424e0b6048c5c8934a389933a0fed837aaf6 [#580](https://github.com/duckduckgo/autoconsent/pull/580) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Bump the dev-dependencies group across 1 directory with 6 updates [#582](https://github.com/duckduckgo/autoconsent/pull/582) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - feat: readly.com [#583](https://github.com/duckduckgo/autoconsent/pull/583) ([@seia-soto](https://github.com/seia-soto))
 
@@ -2330,7 +2299,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to b0774541b1f941a5c0ed2d62b1ab75a8235e2e5b [#577](https://github.com/duckduckgo/autoconsent/pull/577) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Export eval snippets [#572](https://github.com/duckduckgo/autoconsent/pull/572) ([@muodov](https://github.com/muodov))
 - Bump the dev-dependencies group across 1 directory with 6 updates [#566](https://github.com/duckduckgo/autoconsent/pull/566) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
@@ -2347,7 +2315,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 2063c2ed880d0bd63019fb98192ca753e6e68044 [#569](https://github.com/duckduckgo/autoconsent/pull/569) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Bump @ghostery/adblocker from 2.0.4 to 2.3.0 [#565](https://github.com/duckduckgo/autoconsent/pull/565) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @ghostery/adblocker-content from 2.0.4 to 2.3.0 [#563](https://github.com/duckduckgo/autoconsent/pull/563) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Allow adblocker module to be tree-shaked for builds without a bundled filterlist [#567](https://github.com/duckduckgo/autoconsent/pull/567) ([@sammacbeth](https://github.com/sammacbeth))
@@ -2377,7 +2344,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 3684b7f8a35e3dc59fcfbfeb1ca270eec1ddde31 [#558](https://github.com/duckduckgo/autoconsent/pull/558) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### Authors: 2
 
@@ -2390,7 +2356,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 683577e4ba3f1454aed77ea23cde7308356a0be3 [#551](https://github.com/duckduckgo/autoconsent/pull/551) ([@sammacbeth](https://github.com/sammacbeth) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### 🐛 Bug Fix
 
@@ -2411,7 +2376,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 71bf77b47b6c0ab286d2e210ba2b2640e63434ae [#546](https://github.com/duckduckgo/autoconsent/pull/546) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Improve Civic rule [#524](https://github.com/duckduckgo/autoconsent/pull/524) ([@muodov](https://github.com/muodov))
 - Add a rule for skyscanner [#537](https://github.com/duckduckgo/autoconsent/pull/537) ([@muodov](https://github.com/muodov))
 
@@ -2423,7 +2387,6 @@
 - Fix tealium on eurostar.com [#544](https://github.com/duckduckgo/autoconsent/pull/544) ([@sammacbeth](https://github.com/sammacbeth))
 - Bump tldts-experimental from 6.1.60 to 6.1.61 [#534](https://github.com/duckduckgo/autoconsent/pull/534) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump the dev-dependencies group with 3 updates [#533](https://github.com/duckduckgo/autoconsent/pull/533) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Tweak easylist update schedule to fit app release schedule [#535](https://github.com/duckduckgo/autoconsent/pull/535) ([@muodov](https://github.com/muodov))
 
 #### 🧪 Tests
 
@@ -2442,7 +2405,6 @@
 
 #### 🚀 Enhancement
 
-- Update EasyList Cookie to 4061c37b19f3992043ed817d82b3e171c4e8cc6c [#532](https://github.com/duckduckgo/autoconsent/pull/532) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
 
 #### Authors: 2
 
@@ -2481,7 +2443,6 @@
 
 #### 🚀 Enhancement
 
-- Do not bundle network allowlist rules from easylist [#527](https://github.com/duckduckgo/autoconsent/pull/527) ([@muodov](https://github.com/muodov))
 - Bump typescript-eslint from 8.13.0 to 8.14.0 in the dev-dependencies group [#525](https://github.com/duckduckgo/autoconsent/pull/525) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🐛 Bug Fix
@@ -2508,7 +2469,6 @@
 - Fix a rule for pornhub [#520](https://github.com/duckduckgo/autoconsent/pull/520) ([@muodov](https://github.com/muodov))
 - fix trustarc popup detection [#519](https://github.com/duckduckgo/autoconsent/pull/519) ([@muodov](https://github.com/muodov))
 - Add rule for tesco.com [#508](https://github.com/duckduckgo/autoconsent/pull/508) ([@muodov](https://github.com/muodov))
-- Update EasyList Cookie to 3e2a625d9b08717134a6a0b6b39b73de3e7c792b [#522](https://github.com/duckduckgo/autoconsent/pull/522) ([@muodov](https://github.com/muodov) [@github-actions[bot]](https://github.com/github-actions[bot]))
 - Bump the dev-dependencies group across 1 directory with 7 updates [#515](https://github.com/duckduckgo/autoconsent/pull/515) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🐛 Bug Fix
