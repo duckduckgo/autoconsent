@@ -9,11 +9,6 @@
       "import": "./dist/autoconsent.esm.js",
       "require": "./dist/autoconsent.cjs.js"
     },
-    "./extra": {
-      "types": "./dist/types/web-extra.d.ts",
-      "import": "./dist/autoconsent.extra.esm.js",
-      "require": "./dist/autoconsent.extra.cjs.js"
-    },
     "./rules/rules.json": "./rules/rules.json",
     "./rules/consentomatic.json": "./rules/consentomatic.json",
     "./rules/compact-rules.json": "./rules/compact-rules.json"
@@ -87,8 +82,6 @@
     ]
   },
   "dependencies": {
-    "@ghostery/adblocker": "^2.0.4",
-    "@ghostery/adblocker-content": "^2.0.4",
-    "tldts-experimental": "^7.0.4"
+    "tldts-experimental": "^7.4.3"
   }
 }

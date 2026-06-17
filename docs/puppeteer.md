@@ -40,7 +40,6 @@ const autoconsentConfig = {
   detectRetries: 20,
   isMainWorld: false,
   prehideTimeout: 2000,
-  enableFilterList: false,
   enableHeuristicDetection: true,
   enableHeuristicAction: true,
   logs: {
@@ -144,7 +143,6 @@ Key options:
 | `enableCosmeticRules` | boolean | — | Enable rules that hide popups via CSS |
 | `enableGeneratedRules` | boolean | — | Include auto-generated rules |
 | `detectRetries` | number | — | How many times to retry CMP detection |
-| `enableFilterList` | boolean | — | Enable ABP/uBO cosmetic filter support (requires the `/extra` build) |
 
 ## Rules
 

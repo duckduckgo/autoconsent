@@ -62,7 +62,6 @@ export type Config = {
     detectRetries: number;
     isMainWorld: boolean;
     prehideTimeout: number;
-    enableFilterList: boolean;
     enableHeuristicDetection: boolean;
     enableHeuristicAction: boolean;
     enablePopupMutationObserver: boolean;
@@ -86,7 +85,6 @@ export type LifecycleState =
     | 'waitingForInitResponse'
     | 'started'
     | 'nothingDetected'
-    | 'cosmeticFiltersDetected'
     | 'cmpDetected'
     | 'openPopupDetected'
     | 'runningOptOut'
@@ -98,8 +96,6 @@ export type LifecycleState =
     | 'done';
 
 export type ConsentState = {
-    cosmeticFiltersOn: boolean; // true if cosmetic filter rules are currently applied.
-    filterListReported: boolean; // true if the cosmetic filter list has been reported to the user.
     lifecycle: LifecycleState; // What point in the autoconsent lifecycle this script is at.
     prehideOn: boolean; // If the script is currently hiding preHide elements.
     findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.

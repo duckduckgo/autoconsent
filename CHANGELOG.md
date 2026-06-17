@@ -1811,8 +1811,6 @@
 #### 🚀 Enhancement
 
 - Visual test mode [#756](https://github.com/duckduckgo/autoconsent/pull/756) ([@muodov](https://github.com/muodov))
-- Bump @ghostery/adblocker-content from 2.5.2 to 2.6.1 [#754](https://github.com/duckduckgo/autoconsent/pull/754) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
-- Bump @ghostery/adblocker from 2.5.2 to 2.6.1 [#753](https://github.com/duckduckgo/autoconsent/pull/753) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 - Bump the dev-dependencies group across 1 directory with 7 updates [#763](https://github.com/duckduckgo/autoconsent/pull/763) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
 - Add cookiehub CMP [#778](https://github.com/duckduckgo/autoconsent/pull/778) ([@noisysocks](https://github.com/noisysocks))
 
@@ -1883,8 +1881,6 @@
 
 #### 🐛 Bug Fix
 
-- Bump @ghostery/adblocker from 2.5.1 to 2.5.2 [#732](https://github.com/duckduckgo/autoconsent/pull/732) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @ghostery/adblocker-content from 2.5.1 to 2.5.2 [#733](https://github.com/duckduckgo/autoconsent/pull/733) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump tldts-experimental from 7.0.4 to 7.0.7 [#740](https://github.com/duckduckgo/autoconsent/pull/740) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Prevent OneTrust from being detected as site-specific [#738](https://github.com/duckduckgo/autoconsent/pull/738) ([@muodov](https://github.com/muodov))
 - Fix: Mutation observer race condition during rule detection [#741](https://github.com/duckduckgo/autoconsent/pull/741) ([@sammacbeth](https://github.com/sammacbeth))
@@ -1910,8 +1906,6 @@
 - Fix: Exclude rules from detection if they have a urlPattern and it does not match. [#736](https://github.com/duckduckgo/autoconsent/pull/736) ([@sammacbeth](https://github.com/sammacbeth))
 - Make detection logs toggleable [#730](https://github.com/duckduckgo/autoconsent/pull/730) ([@muodov](https://github.com/muodov))
 - Bump action-asana-sync to v11 [#731](https://github.com/duckduckgo/autoconsent/pull/731) ([@sammacbeth](https://github.com/sammacbeth))
-- Bump @ghostery/adblocker-content from 2.5.0 to 2.5.1 [#725](https://github.com/duckduckgo/autoconsent/pull/725) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @ghostery/adblocker from 2.5.0 to 2.5.1 [#724](https://github.com/duckduckgo/autoconsent/pull/724) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 3
 
@@ -2025,8 +2019,6 @@
 - Fix a race condition with self-test in test extension [#690](https://github.com/duckduckgo/autoconsent/pull/690) ([@muodov](https://github.com/muodov))
 - add rule for web.de [#691](https://github.com/duckduckgo/autoconsent/pull/691) ([@muodov](https://github.com/muodov))
 - Bump the dev-dependencies group across 1 directory with 12 updates [#689](https://github.com/duckduckgo/autoconsent/pull/689) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
-- Bump @ghostery/adblocker-content from 2.3.1 to 2.5.0 [#607](https://github.com/duckduckgo/autoconsent/pull/607) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @ghostery/adblocker from 2.3.1 to 2.5.0 [#608](https://github.com/duckduckgo/autoconsent/pull/608) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - support no-reject Osano popups [#683](https://github.com/duckduckgo/autoconsent/pull/683) ([@muodov](https://github.com/muodov))
 - Add rule for ok.ru [#665](https://github.com/duckduckgo/autoconsent/pull/665) ([@muodov](https://github.com/muodov))
 - Automatically restore element focus after the opt-in/opt-out [#687](https://github.com/duckduckgo/autoconsent/pull/687) ([@muodov](https://github.com/muodov))
@@ -2250,7 +2242,6 @@
 
 #### 🚀 Enhancement
 
-- Reduce filter list size by using domain popularity, updating encoding, and removing unapplicable rules [#592](https://github.com/duckduckgo/autoconsent/pull/592) ([@dharb](https://github.com/dharb) [@muodov](https://github.com/muodov))
 
 #### 🧪 Tests
 
@@ -2274,10 +2265,7 @@
 
 #### 🐛 Bug Fix
 
-- Fix an exception in the test extension when filterlist is disabled [#584](https://github.com/duckduckgo/autoconsent/pull/584) ([@muodov](https://github.com/muodov))
 - Bump tldts-experimental from 6.1.66 to 6.1.70 [#581](https://github.com/duckduckgo/autoconsent/pull/581) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @ghostery/adblocker from 2.3.0 to 2.3.1 [#576](https://github.com/duckduckgo/autoconsent/pull/576) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @ghostery/adblocker-content from 2.3.0 to 2.3.1 [#575](https://github.com/duckduckgo/autoconsent/pull/575) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🧪 Tests
 
@@ -2315,9 +2303,6 @@
 
 #### 🚀 Enhancement
 
-- Bump @ghostery/adblocker from 2.0.4 to 2.3.0 [#565](https://github.com/duckduckgo/autoconsent/pull/565) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @ghostery/adblocker-content from 2.0.4 to 2.3.0 [#563](https://github.com/duckduckgo/autoconsent/pull/563) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Allow adblocker module to be tree-shaked for builds without a bundled filterlist [#567](https://github.com/duckduckgo/autoconsent/pull/567) ([@sammacbeth](https://github.com/sammacbeth))
 - Add optional heuristic pattern detection [#555](https://github.com/duckduckgo/autoconsent/pull/555) ([@muodov](https://github.com/muodov))
 
 #### 🐛 Bug Fix
@@ -2328,7 +2313,6 @@
 
 #### 🧪 Tests
 
-- Add a fake filterlist rule for testing [#562](https://github.com/duckduckgo/autoconsent/pull/562) ([@muodov](https://github.com/muodov))
 
 #### Authors: 5
 
@@ -2372,7 +2356,6 @@
 
 #### 💥 Breaking Change
 
-- Report filterlist early [#538](https://github.com/duckduckgo/autoconsent/pull/538) ([@muodov](https://github.com/muodov))
 
 #### 🚀 Enhancement
 
@@ -2492,7 +2475,6 @@
 
 #### 💥 Breaking Change
 
-- Support cosmetic filterlists [#466](https://github.com/duckduckgo/autoconsent/pull/466) ([@muodov](https://github.com/muodov))
 
 #### 🐛 Bug Fix
 

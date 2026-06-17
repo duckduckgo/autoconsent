@@ -4,8 +4,6 @@ set -ex
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
 $ESBUILD --format=iife --target=es2021 playwright/content.ts --outfile=dist/autoconsent.playwright.js
-$ESBUILD --format=esm --target=es2021 lib/web-extra.ts --outfile=dist/autoconsent.extra.esm.js
-$ESBUILD --format=cjs --target=es2021 --platform=node lib/web-extra.ts --outfile=dist/autoconsent.extra.cjs.js
 $ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 
