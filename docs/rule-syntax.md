@@ -226,7 +226,7 @@ Sometimes the opt-out process requires actions that span across multiple pages o
 Some rules do not interact with the page, and only hide the cookie pop-ups with CSS. These rules are marked with the `cosmetic: true` flag. They are useful for pop-ups that do not provide a Reject button. Cosmetic rules can be disabled with the `enableCosmeticRules` config option.
 
 ### Filterlist
-Autoconsent supports cosmetic filters in common ABP/uBO format. For performance reasons, they need to be bundled at build time.
+Autoconsent supports cosmetic filters in common ABP/uBO format in the "extra" version of the library.
 Note that by default filterlist rules are not included, as this significantly increases the resulting bundle size. To use filterlist rules, you need to explicitly import the "extra" version of the library (`@duckduckgo/autoconsent/extra`), and set the `enableFilterlist` config option to `true`.
 
 ```javascript
