@@ -30,6 +30,13 @@ export default class Cookiebot extends AutoConsentCMPBase {
         if (this.elementVisible('#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll')) {
             return await this.click('#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll');
         }
+        // Some sites (e.g. customized Cookiebot templates) use the simpler decline
+        // button id without the "LevelOptin" infix. Clicking it triggers the
+        // Cookiebot decline flow AND dismisses any custom popup overlay rendered
+        // by the site, which `Cookiebot.hide()` alone does not.
+        if (this.elementVisible('#CybotCookiebotDialogBodyButtonDecline')) {
+            return await this.click('#CybotCookiebotDialogBodyButtonDecline');
+        }
         await this.wait(500);
         let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
         await this.wait(1000); // prevent race conditions
