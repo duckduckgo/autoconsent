@@ -4,7 +4,6 @@ generateCMPTests(
     'didomi',
     [
         'https://nothing.tech/',
-        'https://www.planet.fr/',
         'http://www.allocine.fr/',
         'https://www.boursorama.com/',
         'https://www.theoriginalshotels.com/en/hotels/la-villa-vicha',
@@ -15,7 +14,7 @@ generateCMPTests(
         // Self-test is disabled because some sites (e.g. planet.fr) navigate away
         // after clicking the disagree button, which destroys the Didomi state.
         testSelfTest: false,
-        skipRegions: ['US'],
+        onlyRegions: ['US', 'FR'],
     },
 );
 

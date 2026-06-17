@@ -76,6 +76,8 @@ export type Config = {
         messages: boolean;
         waits: boolean;
     };
+    performanceLoggingEnabled: boolean;
+    heuristicPopupSearchTimeout: number;
 };
 
 export type LifecycleState =
@@ -109,6 +111,7 @@ export type ConsentState = {
     clicks: number; // Number of clicks the script has made.
     startTime: number; // The time the script started.
     endTime: number; // The time the script ended.
+    performance?: Record<string, number[]>;
 };
 
 export interface ButtonData {

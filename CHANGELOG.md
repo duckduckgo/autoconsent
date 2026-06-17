@@ -1,3 +1,79 @@
+# v14.95.1 (Wed Jun 17 2026)
+
+#### 🐛 Bug Fix
+
+- Preserve JSONC comments when bundling autoconsent config rules [#1395](https://github.com/duckduckgo/autoconsent/pull/1395) ([@cursoragent](https://github.com/cursoragent) [@jonathanKingston](https://github.com/jonathanKingston))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Jonathan Kingston ([@jonathanKingston](https://github.com/jonathanKingston))
+
+---
+
+# v14.95.0 (Sat Jun 13 2026)
+
+#### 🚀 Enhancement
+
+- Fix AWS Shortbread opt-out by using the new Decline button [#1394](https://github.com/duckduckgo/autoconsent/pull/1394) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Add yachtclubgames.com rule for custom cookie popup [#1370](https://github.com/duckduckgo/autoconsent/pull/1370) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### 🐛 Bug Fix
+
+- didomi: avoid premature popup detection on aria-hidden hosts [#1392](https://github.com/duckduckgo/autoconsent/pull/1392) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Coverage data update [#1366](https://github.com/duckduckgo/autoconsent/pull/1366) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.94.0 (Fri Jun 12 2026)
+
+#### 🚀 Enhancement
+
+- Improve heuristic detection performance [#1381](https://github.com/duckduckgo/autoconsent/pull/1381) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.93.0 (Wed Jun 10 2026)
+
+#### 🚀 Enhancement
+
+- Disable per-rule performance measurement [#1389](https://github.com/duckduckgo/autoconsent/pull/1389) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.92.0 (Tue Jun 09 2026)
+
+#### 🚀 Enhancement
+
+- Add vivenu rule for the cookie banner used on vivenu-powered shops [#1386](https://github.com/duckduckgo/autoconsent/pull/1386) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Add flag to enable measurement of detectCMP phase [#1385](https://github.com/duckduckgo/autoconsent/pull/1385) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.91.0 (Sat Jun 06 2026)
 
 #### 🚀 Enhancement
