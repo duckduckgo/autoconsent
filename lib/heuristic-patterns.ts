@@ -742,7 +742,7 @@ export const SETTINGS_PATTERNS = [
     /privacy choices/is,
     /(privacy|cookie|custom) settings/is,
     /cookies? (settings|preferences|setting)/is,
-    /(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,   
+    /(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
     'cookie consent options',
     'privacy controls',
     'show purposes',
