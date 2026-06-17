@@ -1,3 +1,16 @@
+# v14.95.1 (Wed Jun 17 2026)
+
+#### 🐛 Bug Fix
+
+- Preserve JSONC comments when bundling autoconsent config rules [#1395](https://github.com/duckduckgo/autoconsent/pull/1395) ([@cursoragent](https://github.com/cursoragent) [@jonathanKingston](https://github.com/jonathanKingston))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Jonathan Kingston ([@jonathanKingston](https://github.com/jonathanKingston))
+
+---
+
 # v14.95.0 (Sat Jun 13 2026)
 
 #### 🚀 Enhancement
