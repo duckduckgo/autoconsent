@@ -60,7 +60,7 @@ CMPs behave differently by region:
 
 Use `if`/`then`/`else` to handle regional variants within a single rule.
 
-**All rule changes MUST be tested across geographic regions** to catch regional popup variations. Test from real geographic locations using available regional testing tooling (e.g. `proxy-testing` skill).
+**All rule changes MUST be tested across ALL supported geographic regions** to catch regional popup variations. Test from real geographic locations using available regional testing tooling (e.g. `proxy-testing` skill).
 
 ### Generic vs Site-Specific Rules
 
@@ -170,4 +170,4 @@ After creating or modifying a rule:
 3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
 4. `npm run prepublish` — full build including extension bundle
 5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
-6. Check the rule works across geographic regions using available regional testing tooling.
+6. Check the rule works across all supported geographic regions using available regional testing tooling.
