@@ -127,8 +127,7 @@ export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    rejectButtons?: ButtonData[];
-    otherButtons?: ButtonData[];
+    regexClassification?: PopupHandlingMode;
 }
 
 /**

@@ -418,7 +418,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 }
 
 export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
-    popups: [PopupHandlingMode, PopupData][] = [];
+    popups: PopupData[] = [];
     mode: PopupHandlingMode;
 
     constructor(autoconsentInstance: AutoConsent, mode: PopupHandlingMode = PopupHandlingModes.Reject) {
@@ -449,46 +449,17 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorStart');
         // popups filtered by mode and sorted so a popup with reject will always win.
         this.popups = getActionablePopups(this.autoconsent.config.heuristicPopupSearchTimeout)
-            .map((popup): [PopupHandlingMode, PopupData] => [
-                this.classifyPopup([...(popup.rejectButtons || []), ...(popup.otherButtons || [])]),
-                popup,
-            ])
-            .filter(([mode]) => mode !== PopupHandlingModes.None && mode <= this.mode)
-            .sort((a, b) => a[0] - b[0]);
+            .filter((popup) => popup.regexClassification !== undefined && popup.regexClassification !== PopupHandlingModes.None && popup.regexClassification <= this.mode)
+            .sort((a, b) => (a.regexClassification ?? 0) - (b.regexClassification ?? 0));
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');
         this.autoconsent.config.performanceLoggingEnabled &&
             performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
 
         if (this.popups.length > 0) {
-            this.name = `HEURISTIC-TIER${this.popups[0][0]}`;
+            this.name = `HEURISTIC-TIER${this.popups[0].regexClassification}`;
             return Promise.resolve(true);
         }
         return Promise.resolve(false);
-    }
-
-    classifyPopup(buttons: ButtonData[]): PopupHandlingMode {
-        const { reject, settings, accept, acknowledge } = buttons.reduce(
-            (acc, button) => {
-                if (button.regexClassification && button.regexClassification !== 'other') {
-                    acc[button.regexClassification]++;
-                }
-                return acc;
-            },
-            { reject: 0, settings: 0, accept: 0, acknowledge: 0 },
-        );
-        if (reject > 0) {
-            return reject === 1 ? PopupHandlingModes.Reject : PopupHandlingModes.None;
-        }
-        if (settings > 0) {
-            return PopupHandlingModes.None;
-        }
-        if (acknowledge > 0) {
-            return acknowledge === 1 ? PopupHandlingModes.Tier1 : PopupHandlingModes.None;
-        }
-        if (accept > 0) {
-            return accept === 1 ? PopupHandlingModes.Tier2 : PopupHandlingModes.None;
-        }
-        return PopupHandlingModes.None;
     }
 
     async detectPopup() {
@@ -502,8 +473,9 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     }
 
     getTargetButton() {
-        const [level, popup] = this.popups[0];
-        const buttons = [...(popup.rejectButtons || []), ...(popup.otherButtons || [])];
+        const popup = this.popups[0];
+        const level = popup.regexClassification;
+        const buttons = popup.buttons;
         const targetButtonType =
             level === PopupHandlingModes.Reject ? 'reject' : level === PopupHandlingModes.Tier1 ? 'acknowledge' : 'accept';
         return buttons.find((button) => button.regexClassification === targetButtonType);
