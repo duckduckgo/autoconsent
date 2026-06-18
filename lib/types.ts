@@ -78,7 +78,7 @@ export type Config = {
     };
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
-    heuristicMode: PopupHandlingMode;
+    heuristicMode: PopupHandlingMode; // controls the behavior of the heuristic popup detection. Has no effect if enableHeuristicDetection is false.
 };
 
 export type LifecycleState =
@@ -131,6 +131,13 @@ export interface PopupData {
     otherButtons?: ButtonData[];
 }
 
+/**
+ * Controls the behavior of the heuristic popup detection.
+ *  - Reject: Will click the reject button on a popup if it exists.
+ *  - Tier1: Will also click the acknowledge button on a popup if it exists, and no Reject button exists.
+ *  - Tier2: Will also click the accept button on a popup if it exists, and no Reject or Acknowledge button exists.
+ *  - None: Disabled
+ */
 export const PopupHandlingModes = {
     None: -1,
     Reject: 0,
