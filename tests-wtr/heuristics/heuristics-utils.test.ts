@@ -2,13 +2,22 @@ import { expect } from '@esm-bundle/chai';
 import {
     checkHeuristicPatterns,
     cleanButtonText,
-    isRejectButton,
+    classifyButtonTextRegex,
     classifyButtons,
     isDisabled,
     excludeContainers,
     getButtonData,
     isDialogLikeElement,
 } from '../../lib/heuristics';
+import { ButtonData } from '../../lib/types';
+
+function rejectButtons(buttons: ButtonData[]) {
+    return buttons.filter((b) => b.regexClassification === 'reject');
+}
+
+function nonRejectButtons(buttons: ButtonData[]) {
+    return buttons.filter((b) => b.regexClassification !== 'reject');
+}
 
 describe('checkHeuristicPatterns', () => {
     it('detects cookie-related text', () => {
@@ -66,73 +75,75 @@ describe('cleanButtonText', () => {
     });
 });
 
-describe('isRejectButton', () => {
+describe('classifyButtonTextRegex', () => {
     it('matches reject patterns', () => {
-        expect(isRejectButton('let us Reject All cookies', [/reject all/gi])).to.be.true;
+        expect(classifyButtonTextRegex('Reject All')).to.equal('reject');
     });
 
     it('does not match never match patterns', () => {
-        expect(isRejectButton('let us Reject All cookies', [/reject all/gi], [/let us/gi])).to.be.false;
+        expect(classifyButtonTextRegex('reject and pay')).to.equal('other');
     });
 
     it('matches "except strictly necessary" qualifier', () => {
         // OneTrust on apnews.com labels the reject button "I Reject All (except Strictly Necessary)"
-        expect(isRejectButton('I Reject All (except Strictly Necessary)')).to.be.true;
-        expect(isRejectButton('Reject All (except Strictly Necessary)')).to.be.true;
-        expect(isRejectButton('Reject All (except Necessary)')).to.be.true;
-        expect(isRejectButton('Deny All (except Strictly Essential)')).to.be.true;
-        expect(isRejectButton('I Reject All except necessary')).to.be.true;
+        expect(classifyButtonTextRegex('I Reject All (except Strictly Necessary)')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reject All (except Strictly Necessary)')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reject All (except Necessary)')).to.equal('reject');
+        expect(classifyButtonTextRegex('Deny All (except Strictly Essential)')).to.equal('reject');
+        expect(classifyButtonTextRegex('I Reject All except necessary')).to.equal('reject');
     });
 
-    it('returns false for empty string', () => {
-        expect(isRejectButton('')).to.be.false;
+    it('returns other for empty string', () => {
+        expect(classifyButtonTextRegex('')).to.equal('other');
     });
 
-    it('supports exact strings', () => {
-        expect(isRejectButton('let us reject all', ['let us reject all'])).to.be.true;
+    it('supports exact string patterns', () => {
+        expect(classifyButtonTextRegex('no')).to.equal('reject');
     });
 
-    it('does not match substrings in case of exact strings', () => {
-        expect(isRejectButton('let us reject all', ['reject'])).to.be.false;
+    it('does not match partial exact string patterns', () => {
+        expect(classifyButtonTextRegex('no problem')).to.equal('other');
     });
 });
 
 describe('classifyButtons', () => {
     it('separates reject buttons from other buttons', () => {
-        const buttons = [
+        const buttons: ButtonData[] = [
             { text: 'Accept All', element: document.createElement('button') },
             { text: 'Reject All', element: document.createElement('button') },
             { text: 'Settings', element: document.createElement('button') },
         ];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(1);
-        expect(rejectButtons[0].text).to.equal('Reject All');
-        expect(otherButtons).to.have.length(2);
+        expect(rejectButtons(buttons)).to.have.length(1);
+        expect(rejectButtons(buttons)[0].text).to.equal('Reject All');
+        expect(nonRejectButtons(buttons)).to.have.length(2);
     });
 
-    it('returns empty arrays for empty input', () => {
-        const { rejectButtons, otherButtons } = classifyButtons([]);
+    it('handles empty input', () => {
+        const buttons: ButtonData[] = [];
 
-        expect(rejectButtons).to.have.length(0);
-        expect(otherButtons).to.have.length(0);
+        classifyButtons(buttons);
+
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(nonRejectButtons(buttons)).to.have.length(0);
     });
 
     it('handles multiple reject buttons', () => {
-        const buttons = [
+        const buttons: ButtonData[] = [
             { text: 'Reject All', element: document.createElement('button') },
             { text: 'Deny', element: document.createElement('button') },
         ];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(2);
-        expect(otherButtons).to.have.length(0);
+        expect(rejectButtons(buttons)).to.have.length(2);
+        expect(nonRejectButtons(buttons)).to.have.length(0);
     });
 
     it('sets regexClassification on all buttons', () => {
-        const buttons = [
+        const buttons: ButtonData[] = [
             { text: 'Accept All', element: document.createElement('button') },
             { text: 'Reject All', element: document.createElement('button') },
             { text: 'Settings', element: document.createElement('button') },
@@ -143,49 +154,49 @@ describe('classifyButtons', () => {
         expect(buttons.every((b) => b.regexClassification)).to.be.true;
     });
 
-    it('classifies accept buttons into otherButtons', () => {
-        const buttons = [{ text: 'Accept All', element: document.createElement('button') }];
+    it('classifies accept buttons', () => {
+        const buttons: ButtonData[] = [{ text: 'Accept All', element: document.createElement('button') }];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(0);
-        expect(otherButtons).to.have.length(1);
-        expect(otherButtons[0].regexClassification).to.equal('accept');
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(buttons).to.have.length(1);
+        expect(buttons[0].regexClassification).to.equal('accept');
     });
 
-    it('classifies acknowledge buttons into otherButtons', () => {
-        const buttons = [
+    it('classifies acknowledge buttons', () => {
+        const buttons: ButtonData[] = [
             { text: 'OK', element: document.createElement('button') },
             { text: 'I understand', element: document.createElement('button') },
         ];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(0);
-        expect(otherButtons).to.have.length(2);
-        expect(otherButtons.every((b) => b.regexClassification === 'acknowledge')).to.be.true;
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(buttons).to.have.length(2);
+        expect(buttons.every((b) => b.regexClassification === 'acknowledge')).to.be.true;
     });
 
-    it('classifies settings buttons into otherButtons', () => {
-        const buttons = [
+    it('classifies settings buttons', () => {
+        const buttons: ButtonData[] = [
             { text: 'Settings', element: document.createElement('button') },
             { text: 'Cookie preferences', element: document.createElement('button') },
         ];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(0);
-        expect(otherButtons).to.have.length(2);
-        expect(otherButtons.every((b) => b.regexClassification === 'settings')).to.be.true;
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(buttons).to.have.length(2);
+        expect(buttons.every((b) => b.regexClassification === 'settings')).to.be.true;
     });
 
     it('classifies reject buttons with regexClassification', () => {
-        const buttons = [{ text: 'Reject All', element: document.createElement('button') }];
+        const buttons: ButtonData[] = [{ text: 'Reject All', element: document.createElement('button') }];
 
-        const { rejectButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(1);
-        expect(rejectButtons[0].regexClassification).to.equal('reject');
+        expect(rejectButtons(buttons)).to.have.length(1);
+        expect(rejectButtons(buttons)[0].regexClassification).to.equal('reject');
     });
 });
 

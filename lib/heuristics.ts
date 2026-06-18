@@ -78,10 +78,6 @@ function classifyPopup(buttons: ButtonData[]): PopupHandlingMode {
     return PopupHandlingModes.None;
 }
 
-export function isRejectButton(buttonText: string, rejectPatterns = REJECT_PATTERNS, neverMatchPatterns = NEVER_MATCH_PATTERNS): boolean {
-    return testButtonMatches(buttonText, rejectPatterns, neverMatchPatterns);
-}
-
 /**
  * @param {string} buttonText
  * @param {Array<string|RegExp>} matchPatterns
@@ -118,8 +114,8 @@ export function cleanButtonText(buttonText: string): string {
     return result;
 }
 
-function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
-    if (isRejectButton(buttonText)) {
+export function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
+    if (testButtonMatches(buttonText, REJECT_PATTERNS, NEVER_MATCH_PATTERNS)) {
         return 'reject';
     }
     if (testButtonMatches(buttonText, SETTINGS_PATTERNS, NEVER_MATCH_PATTERNS)) {
