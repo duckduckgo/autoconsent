@@ -1,4 +1,4 @@
-import { AutoCMP, ButtonData, DomActionsProvider, PopupData, PopupHandlingMode, PopupHandlingModes } from '../types';
+import { AutoCMP, DomActionsProvider, PopupData, PopupHandlingMode, PopupHandlingModes } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
@@ -449,7 +449,12 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorStart');
         // popups filtered by mode and sorted so a popup with reject will always win.
         this.popups = getActionablePopups(this.autoconsent.config.heuristicPopupSearchTimeout)
-            .filter((popup) => popup.regexClassification !== undefined && popup.regexClassification !== PopupHandlingModes.None && popup.regexClassification <= this.mode)
+            .filter(
+                (popup) =>
+                    popup.regexClassification !== undefined &&
+                    popup.regexClassification !== PopupHandlingModes.None &&
+                    popup.regexClassification <= this.mode,
+            )
             .sort((a, b) => (a.regexClassification ?? 0) - (b.regexClassification ?? 0));
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');
         this.autoconsent.config.performanceLoggingEnabled &&
