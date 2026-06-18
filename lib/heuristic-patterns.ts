@@ -115,7 +115,7 @@ const REJECT_PATTERNS_ENGLISH = [
 
     // e.g. "do not sell or share my personal information", "do not sell my personal information"
     // often used in CCPA
-    /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*information\s*$/is,
+    /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*infor(mation)?\s*$/is,
 
     'allow selection',
     'disagree and close',
@@ -128,8 +128,6 @@ const REJECT_PATTERNS_ENGLISH = [
     'no',
     /^no,? thanks$/is,
     /^opt[ -]out$/is,
-    'accept optional cookies',
-    'do not sell or share my personal info',
 ];
 
 const REJECT_PATTERNS_DUTCH = [
@@ -757,7 +755,6 @@ export const ACCEPT_PATTERNS = [
     /^(i )?agree$/is,
     'continue with all',
     'accept and continue',
-    'confirm my choices',
     /accept all above/is,
     /^(accept|agree) and close/is,
     'accept continue',
@@ -766,6 +763,7 @@ export const ACCEPT_PATTERNS = [
     'close and accept',
     /accept all$/is,
     'im ok with that',
+    'accept optional cookies',
 
     /^alle (cookies )?akzeptieren$/is,
 ];
@@ -782,4 +780,5 @@ export const ACKNOWLEDGE_PATTERNS = [
     'acknowledge',
     /^close (banner|cookie notification)$/is,
     /understood$/is,
+    'confirm my choices',
 ];
