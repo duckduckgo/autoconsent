@@ -108,7 +108,7 @@ await browser.close();
 
 1. Run `npm run build-rules` after changing rule JSON.
 2. Smoke-test each regional proxy.
-3. Test relevant regions.
+3. Test in ALL supported regions.
 4. Inspect screenshots, not just API results.
 5. Reload after dismissal and confirm the rule does not keep matching, unless cosmetic-only.
 
