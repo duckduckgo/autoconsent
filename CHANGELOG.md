@@ -1,3 +1,19 @@
+# v14.96.0 (Thu Jun 18 2026)
+
+#### 🚀 Enhancement
+
+- Prompt AI to test in all regions [#1398](https://github.com/duckduckgo/autoconsent/pull/1398) ([@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.0.30 to 7.4.3 [#1396](https://github.com/duckduckgo/autoconsent/pull/1396) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add Playwright HTTPS proxy testing skill [#1387](https://github.com/duckduckgo/autoconsent/pull/1387) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.95.1 (Wed Jun 17 2026)
 
 #### 🐛 Bug Fix
