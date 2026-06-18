@@ -115,7 +115,7 @@ const REJECT_PATTERNS_ENGLISH = [
 
     // e.g. "do not sell or share my personal information", "do not sell my personal information"
     // often used in CCPA
-    /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*infor(mation)?\s*$/is,
+    /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*info(rmation)?\s*$/is,
 
     'allow selection',
     'disagree and close',
