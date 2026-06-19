@@ -73,12 +73,14 @@ describe('getActionablePopups', () => {
             expect(popups[0].buttons.filter((b) => b.regexClassification === 'acknowledge')).to.have.length(1);
         });
 
-        it('ignores popup with multiple reject buttons', () => {
+        it('finds popup with multiple reject buttons', () => {
             showPopup('popup-multiple-reject');
 
             const popups = getActionablePopups(PopupHandlingModes.Tier2);
 
-            expect(popups.length).to.equal(0);
+            expect(popups.length).to.equal(1);
+            expect(popups[0].regexClassification).to.equal(PopupHandlingModes.Reject);
+            expect(rejectButtons(popups[0].buttons)).to.have.length(2);
         });
     });
 

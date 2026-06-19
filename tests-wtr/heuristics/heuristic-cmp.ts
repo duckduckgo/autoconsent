@@ -73,14 +73,15 @@ describe('AutoConsentHeuristicCMP', () => {
             expect(detected).to.be.false;
         });
 
-        it('does not detect popup with multiple reject buttons', async () => {
+        it('detects popup with multiple reject buttons as HEURISTIC-TIER0', async () => {
             const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
             const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
             showPopup('popup-multiple-reject');
 
             const detected = await cmp.detectCmp();
 
-            expect(detected).to.be.false;
+            expect(detected).to.be.true;
+            expect(cmp.name).to.equal('HEURISTIC-TIER0');
         });
 
         it('prefers reject popup when reject and accept popups are visible', async () => {

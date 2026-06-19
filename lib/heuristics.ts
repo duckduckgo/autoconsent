@@ -28,10 +28,7 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
-export function getActionablePopups(
-    mode: PopupHandlingMode = PopupHandlingModes.Reject,
-    timeout = POPUP_SEARCH_MAX_TIME,
-): PopupData[] {
+export function getActionablePopups(mode: PopupHandlingMode = PopupHandlingModes.Reject, timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     const popups = getPotentialPopups(timeout);
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
