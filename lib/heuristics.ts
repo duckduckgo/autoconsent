@@ -81,7 +81,7 @@ function classifyPopup(buttons: ButtonData[]): PopupHandlingMode {
         return PopupHandlingModes.None;
     }
     if (acknowledge > 0) {
-        return acknowledge === 1 ? PopupHandlingModes.Tier1 : PopupHandlingModes.None;
+        return PopupHandlingModes.Tier1;
     }
     if (accept > 0) {
         return accept === 1 ? PopupHandlingModes.Tier2 : PopupHandlingModes.None;
