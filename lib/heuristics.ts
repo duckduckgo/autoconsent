@@ -1,4 +1,4 @@
-import { DETECT_PATTERNS, NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './heuristic-patterns';
+import { DETECT_PATTERNS, NEVER_MATCH_PATTERNS, POPUP_EXCLUDE_PATTERNS, REJECT_PATTERNS } from './heuristic-patterns';
 import { ButtonData, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
@@ -26,6 +26,11 @@ export function getActionablePopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
+            // Skip age gates / adult-content disclaimers whose reject button
+            // leads to a dead-end page (e.g. doublelist.com).
+            if (isExcludedPopup(popupText)) {
+                return acc;
+            }
             const { patterns } = checkHeuristicPatterns(popupText);
             if (patterns.length > 0) {
                 const { rejectButtons, otherButtons } = classifyButtons(popup.buttons);
@@ -41,6 +46,14 @@ export function getActionablePopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[
         return acc;
     }, [] as PopupData[]);
     return result;
+}
+
+export function isExcludedPopup(popupText: string, excludePatterns = POPUP_EXCLUDE_PATTERNS): boolean {
+    if (!popupText) {
+        return false;
+    }
+    const truncated = popupText.slice(0, TEXT_LIMIT);
+    return excludePatterns.some((p) => p.test(truncated));
 }
 
 export function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; otherButtons: ButtonData[] } {
