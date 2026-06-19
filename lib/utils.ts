@@ -1,5 +1,5 @@
 import { HideMethod } from './rules';
-import { Config } from './types';
+import { Config, PopupHandlingModes } from './types';
 
 // get or create a style container for CSS overrides
 export function getStyleElement(styleOverrideElementId = 'autoconsent-css-rules'): HTMLStyleElement {
@@ -95,6 +95,7 @@ export function normalizeConfig(providedConfig: any): Config {
         },
         performanceLoggingEnabled: false,
         heuristicPopupSearchTimeout: 100,
+        heuristicMode: PopupHandlingModes.Reject,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries

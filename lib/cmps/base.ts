@@ -1,4 +1,4 @@
-import { AutoCMP, DomActionsProvider, PopupData } from '../types';
+import { AutoCMP, DomActionsProvider, PopupData, PopupHandlingMode, PopupHandlingModes } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
@@ -419,14 +419,16 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
 export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     popups: PopupData[] = [];
+    mode: PopupHandlingMode;
 
-    constructor(autoconsentInstance: AutoConsent) {
+    constructor(autoconsentInstance: AutoConsent, mode: PopupHandlingMode = PopupHandlingModes.Reject) {
         super(autoconsentInstance);
         this.name = 'HEURISTIC';
         this.runContext = {
             main: true,
             frame: false, // do not run in iframes for security reasons
         } as RunContext;
+        this.mode = mode;
     }
 
     get hasSelfTest(): boolean {
@@ -445,11 +447,13 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         // wait for one tick to deprioritize heavy DOM operations
         await new Promise((resolve) => setTimeout(resolve, 0));
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorStart');
-        this.popups = getActionablePopups(this.autoconsent.config.heuristicPopupSearchTimeout);
+        this.popups = getActionablePopups(this.mode, this.autoconsent.config.heuristicPopupSearchTimeout);
         this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');
         this.autoconsent.config.performanceLoggingEnabled &&
             performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
+
         if (this.popups.length > 0) {
+            this.name = `HEURISTIC-TIER${this.popups[0].regexClassification}`;
             return Promise.resolve(true);
         }
         return Promise.resolve(false);
@@ -457,17 +461,26 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
 
     async detectPopup() {
         if (this.popups.length > 0) {
-            if (this.popups.length > 1 || (this.popups[0].rejectButtons && this.popups[0].rejectButtons.length > 1)) {
-                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple reject buttons');
+            if (this.popups.length > 1) {
+                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple popups');
             }
             return true;
         }
         return false;
     }
 
+    getTargetButton() {
+        const popup = this.popups[0];
+        const level = popup.regexClassification;
+        const buttons = popup.buttons;
+        const targetButtonType =
+            level === PopupHandlingModes.Reject ? 'reject' : level === PopupHandlingModes.Tier1 ? 'acknowledge' : 'accept';
+        return buttons.find((button) => button.regexClassification === targetButtonType);
+    }
+
     optOut(): Promise<boolean> {
         // use only the first found popup candidate
-        const button = this.popups[0]?.rejectButtons?.[0];
+        const button = this.getTargetButton();
         if (button) {
             return this.clickElement(button.element);
         }
@@ -483,7 +496,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     }
 
     async test(): Promise<boolean> {
-        const button = this.popups[0].rejectButtons?.[0];
+        const button = this.getTargetButton();
         if (button) {
             await this.wait(500);
             return !isElementVisible(button.element);
