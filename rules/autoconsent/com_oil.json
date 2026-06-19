@@ -1,0 +1,23 @@
+{
+    "name": "com_oil",
+    "_metadata": {
+        "vendorUrl": "https://github.com/as-ideas/oil"
+    },
+    "prehideSelectors": [".as-oil-content-overlay"],
+    "detectCmp": [{ "exists": ".as-oil-content-overlay" }],
+    "detectPopup": [{ "visible": ".as-oil-content-overlay" }],
+    "optIn": [{ "waitForThenClick": ".as-js-optin" }],
+    "optOut": [
+        {
+            "if": { "exists": ".as-js-only-essentials" },
+            "then": [{ "waitForThenClick": ".as-js-only-essentials" }],
+            "else": [
+                { "waitForThenClick": ".as-js-advanced-settings" },
+                { "waitFor": ".as-oil-cpc__category-container, .as-oil-cpc__purpose-container" },
+                { "click": ".as-js-btn-deactivate-all", "optional": true },
+                { "waitForThenClick": ".as-js-optin" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "oil_data=" }]
+}
