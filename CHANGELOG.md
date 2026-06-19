@@ -1,3 +1,16 @@
+# v14.97.0 (Fri Jun 19 2026)
+
+#### 🚀 Enhancement
+
+- Extend bbc.com rule to cover bbc.co.uk [#1400](https://github.com/duckduckgo/autoconsent/pull/1400) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.96.0 (Thu Jun 18 2026)
 
 #### 🚀 Enhancement
