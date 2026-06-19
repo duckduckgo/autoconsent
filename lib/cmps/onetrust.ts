@@ -27,7 +27,20 @@ export default class Onetrust extends AutoConsentCMPBase {
 
     async optOut() {
         await this.wait(500);
-        // 'reject all' shortcuts
+
+        // Prefer the OneTrust JS API when available. On some sites (e.g. people.com)
+        // OneTrust renders the banner DOM before attaching its click handlers, so an
+        // early DOM click is a no-op. Calling OneTrust.RejectAll() bypasses the
+        // handler-attach race entirely. Poll briefly to let the SDK finish loading.
+        if (this.elementVisible('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies', 'any')) {
+            const apiCalled = await waitFor(() => this.mainWorldEval('EVAL_ONETRUST_REJECT_ALL_API'), 12, 250);
+            if (apiCalled) {
+                await this.waitForVisible('#onetrust-banner-sdk,#onetrust-pc-sdk', 5000, 'none');
+                return true;
+            }
+        }
+
+        // 'reject all' shortcuts (fallback when the JS API is not exposed)
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
             return await this.click('#onetrust-reject-all-handler');
         }
