@@ -1,0 +1,23 @@
+{
+    "vendorUrl": "https://datasign.jp/",
+    "name": "webtru",
+    "prehideSelectors": ["#datasign_cmp__host"],
+    "detectCmp": [{ "exists": "#datasign_cmp__host" }],
+    "detectPopup": [{ "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"] }],
+    "optOut": [
+        {
+            "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary [class*=\"dialogCloseButton\"]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary button[class*=\"dialogButtonTheme\"]"]
+        }
+    ],
+    "test": [
+        {
+            "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"],
+            "check": "none"
+        }
+    ]
+}
