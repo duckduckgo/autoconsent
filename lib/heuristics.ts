@@ -28,7 +28,10 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
-export function getActionablePopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+export function getActionablePopups(
+    mode: PopupHandlingMode = PopupHandlingModes.Reject,
+    timeout = POPUP_SEARCH_MAX_TIME,
+): PopupData[] {
     const popups = getPotentialPopups(timeout);
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
@@ -44,7 +47,15 @@ export function getActionablePopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[
         }
         return acc;
     }, [] as PopupData[]);
-    return result;
+    // popups filtered by mode and sorted so a popup with reject will always win.
+    return result
+        .filter(
+            (popup) =>
+                popup.regexClassification !== undefined &&
+                popup.regexClassification !== PopupHandlingModes.None &&
+                popup.regexClassification <= mode,
+        )
+        .sort((a, b) => (a.regexClassification ?? 0) - (b.regexClassification ?? 0));
 }
 
 export function classifyButtons(buttons: ButtonData[]) {

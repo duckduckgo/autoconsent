@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import { getActionablePopups } from '../../lib/heuristics';
-import { ButtonData } from '../../lib/types';
+import { ButtonData, PopupHandlingModes } from '../../lib/types';
 
 function rejectButtons(buttons: ButtonData[]) {
     return buttons.filter((b) => b.regexClassification === 'reject');
@@ -43,15 +43,12 @@ describe('getActionablePopups', () => {
             expect(popups.length).to.equal(0);
         });
 
-        it('finds popup with cookie text even without reject button', () => {
+        it('ignores popup with accept and settings buttons', () => {
             showPopup('popup-no-reject');
 
-            const popups = getActionablePopups();
+            const popups = getActionablePopups(PopupHandlingModes.Tier2);
 
-            expect(popups.length).to.equal(1);
-            expect(rejectButtons(popups[0].buttons)).to.have.length(0);
-            expect(popups[0].buttons.map((b) => b.regexClassification)).to.include('accept');
-            expect(popups[0].buttons.map((b) => b.regexClassification)).to.include('settings');
+            expect(popups.length).to.equal(0);
         });
     });
 
@@ -59,7 +56,7 @@ describe('getActionablePopups', () => {
         it('finds accept-only popup with no reject buttons', () => {
             showPopup('popup-accept-only');
 
-            const popups = getActionablePopups();
+            const popups = getActionablePopups(PopupHandlingModes.Tier2);
 
             expect(popups.length).to.equal(1);
             expect(rejectButtons(popups[0].buttons)).to.have.length(0);
@@ -69,20 +66,57 @@ describe('getActionablePopups', () => {
         it('finds acknowledge-only popup with no reject buttons', () => {
             showPopup('popup-acknowledge-only');
 
-            const popups = getActionablePopups();
+            const popups = getActionablePopups(PopupHandlingModes.Tier2);
 
             expect(popups.length).to.equal(1);
             expect(rejectButtons(popups[0].buttons)).to.have.length(0);
             expect(popups[0].buttons.filter((b) => b.regexClassification === 'acknowledge')).to.have.length(1);
         });
 
-        it('finds popup with multiple reject buttons', () => {
+        it('ignores popup with multiple reject buttons', () => {
             showPopup('popup-multiple-reject');
 
-            const popups = getActionablePopups();
+            const popups = getActionablePopups(PopupHandlingModes.Tier2);
+
+            expect(popups.length).to.equal(0);
+        });
+    });
+
+    describe('mode filtering', () => {
+        it('does not return accept-only popup when mode is Reject', () => {
+            showPopup('popup-accept-only');
+
+            const popups = getActionablePopups(PopupHandlingModes.Reject);
+
+            expect(popups.length).to.equal(0);
+        });
+
+        it('returns acknowledge-only popup when mode is Tier1', () => {
+            showPopup('popup-acknowledge-only');
+
+            const popups = getActionablePopups(PopupHandlingModes.Tier1);
 
             expect(popups.length).to.equal(1);
-            expect(rejectButtons(popups[0].buttons)).to.have.length(2);
+            expect(popups[0].regexClassification).to.equal(PopupHandlingModes.Tier1);
+        });
+
+        it('does not return accept-only popup when mode is Tier1', () => {
+            showPopup('popup-accept-only');
+
+            const popups = getActionablePopups(PopupHandlingModes.Tier1);
+
+            expect(popups.length).to.equal(0);
+        });
+
+        it('prefers reject popup when reject and accept popups are visible', () => {
+            showPopup('popup-reject-all');
+            showPopup('popup-accept-only');
+
+            const popups = getActionablePopups(PopupHandlingModes.Tier2);
+
+            expect(popups.length).to.equal(2);
+            expect(popups[0].regexClassification).to.equal(PopupHandlingModes.Reject);
+            expect(popups[1].regexClassification).to.equal(PopupHandlingModes.Tier2);
         });
     });
 
