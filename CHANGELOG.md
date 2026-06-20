@@ -1,3 +1,21 @@
+# v15.0.0 (Sat Jun 20 2026)
+
+#### 💥 Breaking Change
+
+- Handle non-reject buttons in heuristic mode [#1390](https://github.com/duckduckgo/autoconsent/pull/1390) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🚀 Enhancement
+
+- Extend twitch.tv rule to cover m.twitch.tv subdomain [#1402](https://github.com/duckduckgo/autoconsent/pull/1402) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.97.0 (Fri Jun 19 2026)
 
 #### 🚀 Enhancement
