@@ -1,0 +1,21 @@
+{
+    "name": "clickhouse.com",
+    "runContext": {
+        "urlPattern": "^https://clickhouse\\.com/"
+    },
+    "prehideSelectors": [".cc-window[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-window[aria-describedby=\"cookieconsent:desc\"]" }],
+    "detectPopup": [{ "visible": ".cc-window[aria-describedby=\"cookieconsent:desc\"]" }],
+    "optIn": [
+        {
+            "any": [{ "click": ".cc-allow" }, { "click": ".cc-accept-all" }, { "click": ".cc-dismiss" }]
+        }
+    ],
+    "optOut": [
+        { "click": ".cc-dismiss" },
+        {
+            "if": { "exists": "iframe[src*=\"matrix_wall\"]" },
+            "then": [{ "waitForThenClick": ["iframe[src*=\"matrix_wall\"]", ".cc-dismiss"], "timeout": 10000, "optional": true }]
+        }
+    ]
+}
