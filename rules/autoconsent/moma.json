@@ -1,0 +1,38 @@
+{
+    "name": "moma.org",
+    "vendorUrl": "https://www.moma.org/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://([^/]+\\.)?moma\\.org/"
+    },
+    "prehideSelectors": ["iframe#cookie-warning", "[data-cookie-warning]"],
+    "detectCmp": [
+        {
+            "exists": "iframe#cookie-warning, [data-cookie-warning]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "iframe#cookie-warning, [data-cookie-warning]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "hide": "iframe#cookie-warning, [data-cookie-warning]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "iframe#cookie-warning, [data-cookie-warning]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "iframe#cookie-warning, [data-cookie-warning]",
+            "check": "none"
+        }
+    ]
+}
