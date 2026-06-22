@@ -189,8 +189,23 @@
             </details>
 
             <div class="rule-section">
-                <input type="checkbox" id="heuristic-action" name="heuristic-action" />
-                <label for="heuristic-action">Handle unknown popups (heuristic rule)</label>
+                <input type="radio" id="heuristic-off" name="heuristic-mode" value="off" checked />
+                <label for="heuristic-off">Off</label>
+            </div>
+
+            <div>
+                <input type="radio" id="heuristic-reject" name="heuristic-mode" value="reject" />
+                <label for="heuristic-reject">Reject when possible</label>
+            </div>
+
+            <div>
+                <input type="radio" id="heuristic-tier1" name="heuristic-mode" value="tier1" />
+                <label for="heuristic-tier1">Acknowledge if no reject (tier 1)</label>
+            </div>
+
+            <div>
+                <input type="radio" id="heuristic-tier2" name="heuristic-mode" value="tier2" />
+                <label for="heuristic-tier2">Accept if no reject or acknowledge (tier 2)</label>
             </div>
         </fieldset>
 

@@ -33,7 +33,10 @@ async function init() {
     const cosmeticOffRadio = document.querySelector('input#cosmetic-off') as HTMLInputElement;
     const generatedOnRadio = document.querySelector('input#generated-on') as HTMLInputElement;
     const generatedOffRadio = document.querySelector('input#generated-off') as HTMLInputElement;
-    const heuristicActionCheckbox = document.querySelector('input#heuristic-action') as HTMLInputElement;
+    const heuristicOffRadio = document.querySelector('input#heuristic-off') as HTMLInputElement;
+    const heuristicRejectRadio = document.querySelector('input#heuristic-reject') as HTMLInputElement;
+    const heuristicTier1Radio = document.querySelector('input#heuristic-tier1') as HTMLInputElement;
+    const heuristicTier2Radio = document.querySelector('input#heuristic-tier2') as HTMLInputElement;
     const visualTestOnRadio = document.querySelector('input#visual-test-on') as HTMLInputElement;
     const visualTestOffRadio = document.querySelector('input#visual-test-off') as HTMLInputElement;
     const popupMutationOnRadio = document.querySelector('input#popup-mutation-on') as HTMLInputElement;
@@ -164,7 +167,15 @@ async function init() {
         generatedOffRadio.checked = true;
     }
 
-    heuristicActionCheckbox.checked = autoconsentConfig.enableHeuristicAction;
+    if (autoconsentConfig.heuristicMode === 'reject') {
+        heuristicRejectRadio.checked = true;
+    } else if (autoconsentConfig.heuristicMode === 'tier1') {
+        heuristicTier1Radio.checked = true;
+    } else if (autoconsentConfig.heuristicMode === 'tier2') {
+        heuristicTier2Radio.checked = true;
+    } else {
+        heuristicOffRadio.checked = true;
+    }
 
     if (autoconsentConfig.visualTest) {
         visualTestOnRadio.checked = true;
@@ -224,11 +235,22 @@ async function init() {
     generatedOnRadio.addEventListener('change', generatedChange);
     generatedOffRadio.addEventListener('change', generatedChange);
 
-    function heuristicActionChange() {
-        autoconsentConfig.enableHeuristicAction = heuristicActionCheckbox.checked;
+    function heuristicModeChange() {
+        if (heuristicRejectRadio.checked) {
+            autoconsentConfig.heuristicMode = 'reject';
+        } else if (heuristicTier1Radio.checked) {
+            autoconsentConfig.heuristicMode = 'tier1';
+        } else if (heuristicTier2Radio.checked) {
+            autoconsentConfig.heuristicMode = 'tier2';
+        } else {
+            autoconsentConfig.heuristicMode = 'off';
+        }
         storageSet({ config: autoconsentConfig });
     }
-    heuristicActionCheckbox.addEventListener('change', heuristicActionChange);
+    heuristicOffRadio.addEventListener('change', heuristicModeChange);
+    heuristicRejectRadio.addEventListener('change', heuristicModeChange);
+    heuristicTier1Radio.addEventListener('change', heuristicModeChange);
+    heuristicTier2Radio.addEventListener('change', heuristicModeChange);
 
     function visualTestChange() {
         autoconsentConfig.visualTest = visualTestOnRadio.checked;
