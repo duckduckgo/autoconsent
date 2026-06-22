@@ -88,6 +88,48 @@ export const DETECT_PATTERNS = [
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
     /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
     /wijs alles af/gi,
+
+    // Spanish (ES)
+    // we use cookies
+    /(usamos|utilizar?|utilizamos|utilizamos|usiamo)( (tanto|las))? .?cookies?\b/gi,
+    // we use cookies
+    /utilitzem galetes/gi,
+    // own and third-party cookies
+    /cookies propias y de/gi,
+    // we and our partners/providers ... cookies
+    /nosotros y nuestros( \d+)? (socios|proveedores).{0,180} cookies/gi,
+    // We use third-party services
+    /utilizamos servicios de terceros/i,
+    // This store asks you to accept cookies
+    /esta tienda te pide que aceptes cookies/i,
+    // Cookies are used to provide you with a better experience on our website
+    /las cookies se utilizan para brindarle una mejor experiencia en nuestro sitio web/i,
+    // Use of cookies
+    /uso de cookies/i,
+    // store information on a device and/or access it
+    /almacenar la información en un dispositivo y\/?o acceder a ella/i,
+    // About cookies on this site
+    /acerca de las cookies en este sitio/i,
+    // Our website and partner companies use cookies
+    /nuestro[s]? sitio web y las empresas asociadas utilizan cookies/i,
+    // This website uses/serves cookies
+    /est[ea] (sitio|página|web)( web)?( también)? (usa|utiliza|requiere del uso de|se sirven|emplea) cookies?/i,
+    // technical cookies are necessary for our website to work
+    /cookies técnicas son necesarias para que nuestra página web pueda funcionar/i,
+    // authorize ... and its partners to use trackers
+    /autoriza a .{0,100} a usar rastreadores/i,
+    // processes information about your visit using cookies
+    /procesa información sobre su visita utilizando cookies/i,
+    // own and third-party cookies (Catalan)
+    /cookies pròpies i de tercers/gi,
+    // information about the cookies used
+    /información acerca de las cookies utilizadas/gi,
+    // we collect and store data from you and your device
+    /recopilamos y almacenamos datos de usted y de su dispositivo/gi,
+    // we use technologies such as cookies
+    /utilizamos tecnolog[ií]as como las cookies/i,
+    // uses Google cookies
+    /\busa cookies de google\b/i,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -607,6 +649,68 @@ const REJECT_PATTERNS_SPANISH = [
     'permitir solo cookies técnicas',
     'usar solo cookies técnicas',
     'aceptar solo las esenciales',
+    // continue without accepting
+    /^continuar sin aceptar/is,
+    // reject
+    'no aceptar',
+    // reject all
+    'rexeitar todas',
+    // do not consent
+    'no consentir',
+    // reject (Basque)
+    'ukatu',
+    // reject all (Basque)
+    /^denak? baztertu|ukatu guztiak$/is,
+    // no, thanks
+    'no, gracias',
+    // revoke consent
+    'revocar consentimiento',
+    // reject
+    'rebutjar',
+    // reject all
+    'rebutja-ho tot',
+    // reject cookies
+    'rexeitar cookies',
+    // only first-party cookies
+    'sólo cookies propias',
+    // accept only necessary cookies
+    'aceptar solo cookies necesarias',
+    // reject them
+    'rebutja-les',
+    // reject cookies
+    'rebutjar cookies',
+    // reject
+    'rechazo',
+    // reject all
+    'rebutjar tot',
+    // do not allow
+    'no permitir',
+    // only necessary cookies
+    'sólo las cookies necesarias',
+    // reject all
+    'rebutja-les totes',
+    // accept necessary
+    'aceptar necesarias',
+    // no, thanks
+    'no, gràcies',
+    // Refuse and close
+    'refusar i tancar',
+    // no thanks
+    'no gracias',
+    // Reject all cookies
+    'rechazar todas cookies',
+    // Click here to disable optional cookies
+    'pulsa aquí para desactivar las cookies opcionales',
+    // reject all
+    'rebutjar-les totes',
+    // reject all
+    'rebutjar totes',
+    // reject cookies
+    'ukatu cookieak',
+    // Reject all
+    'ukatu dena',
+    // Reject all
+    'guztiak ukatu',
 ];
 
 const REJECT_PATTERNS_SWEDISH = [
@@ -719,6 +823,16 @@ export const NEVER_MATCH_PATTERNS = [
     /iscrivere/is,
     /sostienici/is,
     /suscribir/is,
+
+    // Spanish (ES)
+    // reject and pay
+    /rechazar y pagar/is,
+    // reject and subscribe
+    /rechazar y suscribirse/is,
+    // subscribe
+    /^suscríbete$/is,
+    // I reject and subscribe
+    /^rechazo y me suscribo$/i,
 ];
 
 export const SETTINGS_PATTERNS = [
@@ -746,6 +860,105 @@ export const SETTINGS_PATTERNS = [
     'show purposes',
     // German
     'einstellungen',
+
+    // Spanish (ES)
+    /^(configurar|configuración|administrar)$/is,
+    // personalise
+    'personalizar',
+    // more options
+    'más opciones',
+    // manage options
+    'gestionar opciones',
+    // manage/view/set preferences
+    /^(gestionar|ver|establecer) preferencias$/is,
+    // manage cookies
+    'gestionar cookies',
+    // preferences
+    'preferencias',
+    // show purposes
+    'mostrar los propósitos',
+    // settings (Basque)
+    /^(konfigurazioa|konfiguratu)$/is,
+    // show details
+    'mostrar detalles',
+    // details
+    'detalles',
+    // settings
+    'ajustes',
+    // cookie settings
+    'ajustes de cookies',
+    // cookie preferences
+    'preferencias de cookies',
+    // manage my preferences
+    'gestionar mis preferencias',
+    // cookie management
+    'gestión cookies',
+    // Privacy settings
+    'datenschutzeinstellungen',
+    // settings
+    'réglages',
+    // manage cookies
+    'gestionar las cookies',
+    // configure
+    'configura',
+    // manage
+    'gestionar',
+    // manage your preferences
+    'gestiona tus preferencias',
+    // set your choices
+    'paramétrer vos choix',
+    // settings
+    'instellingen',
+    // Personalize my choices
+    'personalize my choices',
+    // Privacy settings
+    'privatsphäre einstellungen',
+    // select individual purposes
+    'seleccionar fines individuales',
+    // adjust cookies
+    'ajustar cookies',
+    // view preferences
+    'veure preferències',
+    // no, adjust
+    'no, ajustar',
+    // cookie management
+    'gestión de cookies',
+    // cookie settings
+    'configuración de cookies',
+    // set cookies
+    'configurar cookies',
+    // customize cookies
+    'personalizar cookies',
+    // set preferences
+    'configurar preferencias',
+    // cookie settings
+    'configuración de las cookies',
+    // manage settings
+    'gestionar configuración',
+    // cookie settings
+    'configuración cookies',
+    // manage cookie settings
+    'gestionar la configuración de cookies',
+    // cookie and service settings
+    'configuración de cookies y servicios',
+    // customize my preferences
+    'personalizar mis preferencias',
+    // my preferences
+    'mis preferencias',
+    // cookie settings
+    'configuración de cookie',
+    // edit cookie settings
+    'editar la configuración de cookies',
+    // manage cookies
+    'administrar cookies',
+    // Personalize
+    'personnaliser',
+    // configure
+    'tune configurar',
+    // set my preferences
+    'configurar mis preferencias',
+    // customize
+    'personalitza',
 ];
 
 export const ACCEPT_PATTERNS = [
@@ -766,6 +979,79 @@ export const ACCEPT_PATTERNS = [
     'accept optional cookies',
 
     /^alle (cookies )?akzeptieren$/is,
+
+    // Spanish (ES)
+    // accept
+    /^acc?ept(ar|o)( cookies)?$/is,
+    // accept all
+    'permitir todas las cookies',
+    // accept all
+    /^(acc?eptar?|permitir) tod(o|as)$/is,
+    // accept
+    /^(accetta|aceptar las cookies|accepta)$/is,
+    // accept and close
+    'aceptar y cerrar',
+    // accept and continue
+    /^aceptar y (continuar|seguir|navegar)( gratis)?$/is,
+    // accept for free
+    'aceptar gratis',
+    // accept all
+    'accetta tutti i cookie',
+    // accept all (Basque)
+    /^denak? onartu$/is,
+    // consent to all
+    /consentir todo/is,
+    // accept all
+    'accepta-les totes',
+    // accept all cookies
+    'accepta totes les cookies',
+    // allow all cookies
+    'permetre totes les cookies',
+    // consent
+    'consentir',
+    // Accept all
+    'tout accepter',
+    // allow
+    'permitir',
+    // Accept
+    'accepter',
+    // Accept
+    'akzeptieren',
+    // accept all
+    'accepta-ho tot',
+    // accept all
+    'acceptar tot',
+    'de acuerdo',
+    // agree and close
+    'de acuerdo y cerrar',
+    // I agree
+    'estoy de acuerdo',
+    // Accept and close
+    'acceptar i tancar',
+    // yes, I agree
+    'sí, estoy de acuerdo',
+    // allow them all
+    'permitirlas todas',
+    // ok, I accept them
+    'ok, las acepto',
+    // Allow all
+    'permet-les totes',
+    // accept all
+    /^acept(o|ar) todas las cookies$/is,
+    // accept
+    'onartu',
+    // accept all
+    'aceptar cookies opcionales',
+    // Accept
+    'aceitar',
+    // yes, I accept
+    'sí, acepto',
+    // Accept and continue browsing
+    'aceptar y seguir navegando',
+    // Accept cookies
+    'acceptar galetes',
+    // Allow cookies
+    'permitir cookies',
 ];
 
 export const ACKNOWLEDGE_PATTERNS = [
@@ -781,4 +1067,40 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^close (banner|cookie notification)$/is,
     /understood$/is,
     'confirm my choices',
+
+    // Spanish (ES)
+    // understood
+    'entendido',
+    // ok
+    'dacord',
+    // close
+    'cerca',
+    // close
+    'cerrar',
+    // continue
+    'continuar',
+    // next
+    'siguiente',
+    // go to main content
+    'ir al contenido principal',
+    // understood!
+    'entendido!',
+    // understood!
+    '¡entendido!',
+    // I understand
+    'lo entiendo',
+    // ok
+    'vale',
+    // save preferences
+    'guardar preferencias',
+    // save selection
+    'guardar selección',
+    // allow selection
+    'permitir la selección',
+    // accept selection
+    'aceptar selección',
+    // continue
+    'seguir',
+    // Confirm
+    'confirmar',
 ];
