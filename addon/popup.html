@@ -23,6 +23,52 @@
                 cursor: pointer;
                 border-radius: 2px;
             }
+
+            .rule-section {
+                margin: 0.5em 0;
+            }
+
+            .rule-search {
+                box-sizing: border-box;
+                margin: 0.5em 0;
+                width: 100%;
+            }
+
+            .rule-actions {
+                display: flex;
+                gap: 0.5em;
+                margin: 0.5em 0;
+            }
+
+            .rule-actions button {
+                flex: 1;
+            }
+
+            .rule-list {
+                border: 1px solid #ddd;
+                max-height: 12em;
+                overflow-y: auto;
+                padding: 0.25em;
+            }
+
+            .rule-row {
+                display: block;
+                overflow: hidden;
+                padding: 0.15em 0;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .rule-list-status {
+                color: #666;
+                font-size: 0.9em;
+                margin: 0.25em 0;
+            }
+
+            .rule-count-disabled {
+                color: #b00020;
+                font-weight: bold;
+            }
         </style>
     </head>
 
@@ -96,16 +142,55 @@
         </fieldset>
 
         <fieldset>
-            <legend>Handle unknown popups (beta)</legend>
+            <legend>Rules</legend>
 
-            <div>
-                <input type="radio" id="heuristic-action-on" name="heuristic-action" value="true" />
-                <label for="heuristic-action-on">On</label>
-            </div>
+            <details class="rule-section" id="generated-rules-section">
+                <summary>Generated rules <span id="generated-rules-count"></span></summary>
+                <input class="rule-search" type="search" id="generated-rules-search" placeholder="Search generated rules" />
+                <div class="rule-actions">
+                    <button id="generated-rules-enable-all">Enable all</button>
+                    <button id="generated-rules-disable-all">Disable all</button>
+                </div>
+                <div class="rule-list-status" id="generated-rules-status"></div>
+                <div class="rule-list" id="generated-rules-list"></div>
+            </details>
 
-            <div>
-                <input type="radio" id="heuristic-action-off" name="heuristic-action" value="false" checked />
-                <label for="heuristic-action-off">Off</label>
+            <details class="rule-section" id="generic-rules-section">
+                <summary>Generic rules <span id="generic-rules-count"></span></summary>
+                <input class="rule-search" type="search" id="generic-rules-search" placeholder="Search generic rules" />
+                <div class="rule-actions">
+                    <button id="generic-rules-enable-all">Enable all</button>
+                    <button id="generic-rules-disable-all">Disable all</button>
+                </div>
+                <div class="rule-list-status" id="generic-rules-status"></div>
+                <div class="rule-list" id="generic-rules-list"></div>
+            </details>
+
+            <details class="rule-section" id="code-rules-section">
+                <summary>Code-based rules <span id="code-rules-count"></span></summary>
+                <input class="rule-search" type="search" id="code-rules-search" placeholder="Search code-based rules" />
+                <div class="rule-actions">
+                    <button id="code-rules-enable-all">Enable all</button>
+                    <button id="code-rules-disable-all">Disable all</button>
+                </div>
+                <div class="rule-list-status" id="code-rules-status"></div>
+                <div class="rule-list" id="code-rules-list"></div>
+            </details>
+
+            <details class="rule-section" id="consentomatic-rules-section">
+                <summary>Consent-O-Matic rules <span id="consentomatic-rules-count"></span></summary>
+                <input class="rule-search" type="search" id="consentomatic-rules-search" placeholder="Search Consent-O-Matic rules" />
+                <div class="rule-actions">
+                    <button id="consentomatic-rules-enable-all">Enable all</button>
+                    <button id="consentomatic-rules-disable-all">Disable all</button>
+                </div>
+                <div class="rule-list-status" id="consentomatic-rules-status"></div>
+                <div class="rule-list" id="consentomatic-rules-list"></div>
+            </details>
+
+            <div class="rule-section">
+                <input type="checkbox" id="heuristic-action" name="heuristic-action" />
+                <label for="heuristic-action">Handle unknown popups (heuristic rule)</label>
             </div>
         </fieldset>
 
