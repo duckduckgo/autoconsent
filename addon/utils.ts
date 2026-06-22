@@ -12,8 +12,8 @@ export function extensionDefaultConfig(storedConfig: Partial<Config> = {}): Conf
     if (storedConfig.enablePopupMutationObserver === undefined) {
         storedConfig.enablePopupMutationObserver = true;
     }
-    if (storedConfig.enableHeuristicAction === undefined) {
-        storedConfig.enableHeuristicAction = true;
+    if (storedConfig.heuristicMode === undefined) {
+        storedConfig.heuristicMode = 'tier1';
     }
     if (!storedConfig.logs) {
         storedConfig.logs = {

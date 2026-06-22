@@ -1,5 +1,5 @@
 import { HideMethod } from './rules';
-import { Config, PopupHandlingModes } from './types';
+import { Config } from './types';
 
 // get or create a style container for CSS overrides
 export function getStyleElement(styleOverrideElementId = 'autoconsent-css-rules'): HTMLStyleElement {
@@ -77,7 +77,6 @@ export function normalizeConfig(providedConfig: any): Config {
         enableCosmeticRules: true,
         enableGeneratedRules: true,
         enableHeuristicDetection: false,
-        enableHeuristicAction: false,
         enablePopupMutationObserver: false,
         detectRetries: 20,
         isMainWorld: false,
@@ -95,7 +94,7 @@ export function normalizeConfig(providedConfig: any): Config {
         },
         performanceLoggingEnabled: false,
         heuristicPopupSearchTimeout: 100,
-        heuristicMode: PopupHandlingModes.Reject,
+        heuristicMode: '1', // heuristic enabled in reject-only mode
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries

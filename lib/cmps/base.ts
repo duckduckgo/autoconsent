@@ -1,4 +1,4 @@
-import { AutoCMP, DomActionsProvider, PopupData, PopupHandlingMode, PopupHandlingModes } from '../types';
+import { AutoCMP, DomActionsProvider, HeuristicLevel, PopupData } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
@@ -419,9 +419,9 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
 export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     popups: PopupData[] = [];
-    mode: PopupHandlingMode;
+    mode: HeuristicLevel;
 
-    constructor(autoconsentInstance: AutoConsent, mode: PopupHandlingMode = PopupHandlingModes.Reject) {
+    constructor(autoconsentInstance: AutoConsent, mode: HeuristicLevel = '1') {
         super(autoconsentInstance);
         this.name = 'HEURISTIC';
         this.runContext = {
@@ -453,7 +453,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
             performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
 
         if (this.popups.length > 0) {
-            this.name = `HEURISTIC-TIER${this.popups[0].regexClassification}`;
+            this.name = `HEURISTIC-${this.popups[0].regexClassification?.toUpperCase()}`;
             return Promise.resolve(true);
         }
         return Promise.resolve(false);
@@ -473,8 +473,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         const popup = this.popups[0];
         const level = popup.regexClassification;
         const buttons = popup.buttons;
-        const targetButtonType =
-            level === PopupHandlingModes.Reject ? 'reject' : level === PopupHandlingModes.Tier1 ? 'acknowledge' : 'accept';
+        const targetButtonType = level === 'reject' ? 'reject' : level === 'tier1' ? 'acknowledge' : 'accept';
         return buttons.find((button) => button.regexClassification === targetButtonType);
     }
 

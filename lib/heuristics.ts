@@ -6,7 +6,7 @@ import {
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
-import { ButtonData, ButtonRegexClassification, PopupData, PopupHandlingMode, PopupHandlingModes } from './types';
+import { ButtonData, ButtonRegexClassification, HeuristicLevel, PopupClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
@@ -28,7 +28,12 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
-export function getActionablePopups(mode: PopupHandlingMode = PopupHandlingModes.Reject, timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+export function getActionablePopups(mode: HeuristicLevel = '1', timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+    const acceptedLevels: PopupClassification[] =
+        mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
+    if (acceptedLevels.length === 0) {
+        return [];
+    }
     const popups = getPotentialPopups(timeout);
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
@@ -49,10 +54,10 @@ export function getActionablePopups(mode: PopupHandlingMode = PopupHandlingModes
         .filter(
             (popup) =>
                 popup.regexClassification !== undefined &&
-                popup.regexClassification !== PopupHandlingModes.None &&
-                popup.regexClassification <= mode,
+                popup.regexClassification !== 'none' &&
+                acceptedLevels.includes(popup.regexClassification),
         )
-        .sort((a, b) => (a.regexClassification ?? 0) - (b.regexClassification ?? 0));
+        .sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
 }
 
 export function classifyButtons(buttons: ButtonData[]) {
@@ -61,7 +66,7 @@ export function classifyButtons(buttons: ButtonData[]) {
     }
 }
 
-function classifyPopup(buttons: ButtonData[]): PopupHandlingMode {
+function classifyPopup(buttons: ButtonData[]): PopupClassification {
     const { reject, settings, accept, acknowledge } = buttons.reduce(
         (acc, button) => {
             if (button.regexClassification && button.regexClassification !== 'other') {
@@ -72,18 +77,18 @@ function classifyPopup(buttons: ButtonData[]): PopupHandlingMode {
         { reject: 0, settings: 0, accept: 0, acknowledge: 0 },
     );
     if (reject > 0) {
-        return PopupHandlingModes.Reject;
+        return 'reject';
     }
     if (settings > 0) {
-        return PopupHandlingModes.None;
+        return 'none';
     }
     if (acknowledge > 0) {
-        return PopupHandlingModes.Tier1;
+        return 'tier1';
     }
     if (accept > 0) {
-        return accept === 1 ? PopupHandlingModes.Tier2 : PopupHandlingModes.None;
+        return accept === 1 ? 'tier2' : 'none';
     }
-    return PopupHandlingModes.None;
+    return 'none';
 }
 
 /**
