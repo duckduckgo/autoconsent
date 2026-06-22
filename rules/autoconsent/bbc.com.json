@@ -1,7 +1,7 @@
 {
     "name": "bbc.com",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?bbc\\.com"
+        "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)"
     },
     "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]"],
     "detectCmp": [

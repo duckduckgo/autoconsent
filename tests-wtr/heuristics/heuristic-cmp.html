@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <style>
+            .popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 300px;
+                height: 200px;
+                background: white;
+                display: none;
+            }
+            .popup.visible {
+                display: block;
+            }
+            .popup.tier-preference-accept {
+                top: 0;
+                left: 320px;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./heuristic-cmp');
+            });
+        </script>
+
+        <div id="popup-reject" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
+        </div>
+
+        <div id="popup-acknowledge-only" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>OK</button>
+        </div>
+
+        <div id="popup-accept-only" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+        </div>
+
+        <div id="popup-accept-settings" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Settings</button>
+        </div>
+
+        <div id="popup-multiple-reject" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Reject All</button>
+            <button>Deny</button>
+        </div>
+
+        <div id="popup-tier-preference-reject" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Reject All</button>
+        </div>
+
+        <div id="popup-tier-preference-accept" class="popup tier-preference-accept">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+        </div>
+    </body>
+</html>

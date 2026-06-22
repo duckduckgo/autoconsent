@@ -5,8 +5,8 @@ import { getRandomID } from './random';
 class Deferred<T> {
     id: string;
     promise: Promise<T>;
-    resolve: (value?: T) => void;
-    reject: (reason?: any) => void;
+    resolve!: (value: T) => void;
+    reject!: (reason?: unknown) => void;
     timer: number;
 
     constructor(id: string, timeout = 1000) {
@@ -23,7 +23,7 @@ class Deferred<T> {
 
 type EvalState = {
     pending: Map<string, Deferred<boolean>>;
-    sendContentMessage: (message: ContentScriptMessage) => void;
+    sendContentMessage: ((message: ContentScriptMessage) => void) | null;
 };
 
 export const evalState: EvalState = {
@@ -32,6 +32,9 @@ export const evalState: EvalState = {
 };
 
 export function requestEval(code: string, snippetId?: keyof typeof snippets): Promise<boolean> {
+    if (!evalState.sendContentMessage) {
+        return Promise.reject(new Error('AutoConsent is not initialized yet'));
+    }
     const id = getRandomID();
     evalState.sendContentMessage({
         type: 'eval',

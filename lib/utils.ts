@@ -1,5 +1,5 @@
 import { HideMethod } from './rules';
-import { Config } from './types';
+import { Config, PopupHandlingModes } from './types';
 
 // get or create a style container for CSS overrides
 export function getStyleElement(styleOverrideElementId = 'autoconsent-css-rules'): HTMLStyleElement {
@@ -94,6 +94,7 @@ export function normalizeConfig(providedConfig: any): Config {
         },
         performanceLoggingEnabled: false,
         heuristicPopupSearchTimeout: 100,
+        heuristicMode: PopupHandlingModes.Reject,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries
@@ -115,13 +116,18 @@ export function scheduleWhenIdle(callback: () => void, timeout = 500) {
     }
 }
 
+type HighlightedHTMLElement = HTMLElement & {
+    __oldStyles?: string;
+};
+
 export function highlightNode(node: HTMLElement) {
+    const highlightedNode = node as HighlightedHTMLElement;
     if (!node.style) return;
-    if (node.__oldStyles !== undefined) {
+    if (highlightedNode.__oldStyles !== undefined) {
         return; // already highlighted
     }
     if (node.hasAttribute('style')) {
-        node.__oldStyles = node.style.cssText;
+        highlightedNode.__oldStyles = node.style.cssText;
     }
     node.style.animation = 'pulsate .5s infinite';
     node.style.outline = 'solid red';
@@ -152,10 +158,11 @@ export function highlightNode(node: HTMLElement) {
 }
 
 export function unhighlightNode(node: HTMLElement) {
+    const highlightedNode = node as HighlightedHTMLElement;
     if (!node.style || !node.hasAttribute('style')) return;
-    if (node.__oldStyles !== undefined) {
-        node.style.cssText = node.__oldStyles;
-        delete node.__oldStyles;
+    if (highlightedNode.__oldStyles !== undefined) {
+        node.style.cssText = highlightedNode.__oldStyles;
+        delete highlightedNode.__oldStyles;
     } else {
         node.removeAttribute('style');
     }

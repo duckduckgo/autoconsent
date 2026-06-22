@@ -4,6 +4,7 @@ set -ex
 ESBUILD="node_modules/.bin/esbuild --bundle"
 
 $ESBUILD --format=iife --target=es2021 playwright/content.ts --outfile=dist/autoconsent.playwright.js
+$ESBUILD --format=iife --target=es2021 standalone/content.ts --outfile=dist/autoconsent.standalone.js
 $ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.js
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 
@@ -23,8 +24,10 @@ cp -r addon/icons dist/addon-mv3/
 cp -r addon/icons dist/addon-firefox/
 cp rules/rules.json dist/addon-mv3/
 cp rules/compact-rules.json dist/addon-mv3/
+cp rules/rule-index.json dist/addon-mv3/
 cp rules/rules.json dist/addon-firefox/
 cp rules/compact-rules.json dist/addon-firefox/
+cp rules/rule-index.json dist/addon-firefox/
 cp addon/popup.html dist/addon-mv3/
 cp addon/popup.html dist/addon-firefox/
 cp -r addon/devtools dist/addon-mv3/

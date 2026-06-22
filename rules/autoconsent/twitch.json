@@ -1,7 +1,7 @@
 {
     "name": "twitch.tv",
     "runContext": {
-        "urlPattern": "^https?://(www\\.)?twitch\\.tv"
+        "urlPattern": "^https?://([\\w-]+\\.)?twitch\\.tv"
     },
     "prehideSelectors": [
         "div:has(> .consent-banner .consent-banner__content--gdpr-v2),.ReactModalPortal:has([data-a-target=consent-modal-save])"
