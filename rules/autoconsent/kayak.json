@@ -1,0 +1,39 @@
+{
+    "name": "kayak",
+    "vendorUrl": "https://www.kayak.com/",
+    "runContext": {
+        "urlPattern": "^https://([\\w-]+\\.)?kayak\\."
+    },
+    "prehideSelectors": ["[class*=\"cmp2-direct-wrapper\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"cmp2-direct-content\"]"
+        },
+        {
+            "exists": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button:first-of-type"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button:last-of-type"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "kyk_tcf="
+        }
+    ]
+}
