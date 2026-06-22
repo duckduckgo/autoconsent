@@ -55,3 +55,13 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// CCPA banner with "Accept All" + "Cookies Settings" but no explicit "Reject All".
+// The site also reloads the page when consent changes via the preference center,
+// disrupting the DOM-based toggle-and-save flow. The rule opts out via the
+// OneTrust.RejectAll() API, which avoids the reload trigger.
+generateCMPTests('Onetrust', ['https://www.papajohns.com/'], {
+    onlyRegions: ['US'],
+    testOptIn: false,
+    testSelfTest: false,
+});

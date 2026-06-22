@@ -64,6 +64,15 @@ export default class Onetrust extends AutoConsentCMPBase {
             }
         }
 
+        // No DOM-based reject button is available (typical for CCPA banners that only
+        // expose "Accept All" + "Cookies Settings"). Try the public OneTrust API before
+        // falling back to the preference-center toggle flow: it's faster and avoids
+        // triggering site code that reloads the page on consent changes (e.g. papajohns.com).
+        if (await this.mainWorldEval('EVAL_ONETRUST_REJECTALL')) {
+            await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
+            return true;
+        }
+
         if (this.elementExists('#onetrust-pc-btn-handler')) {
             // "show purposes" button inside a popup
             await this.click('#onetrust-pc-btn-handler');

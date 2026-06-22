@@ -75,6 +75,20 @@ export const snippets = {
         return false;
     },
     EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_ONETRUST_REJECTALL: () => {
+        // Public OneTrust API; faster and more reliable than the preference-center
+        // toggle flow, and avoids triggering site code that reloads the page on
+        // consent changes (e.g. papajohns.com).
+        if (typeof window.OneTrust?.RejectAll === 'function') {
+            try {
+                window.OneTrust.RejectAll();
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        return false;
+    },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
