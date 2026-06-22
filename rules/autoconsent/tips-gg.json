@@ -1,0 +1,31 @@
+{
+    "name": "tips.gg",
+    "vendorUrl": "https://tips.gg/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tips\\.gg/"
+    },
+    "prehideSelectors": [".cookies-popup"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-popup .policy-info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-popup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-popup a.confirm"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookies-popup"
+        }
+    ]
+}
