@@ -1,0 +1,15 @@
+{
+    "name": "cookieconsent-classic",
+    "vendorUrl": "https://github.com/osano/cookieconsent",
+    "comment": "Legacy Insites/Osano cookieconsent (cc-window). Modern Osano CMP and Complianz/Pandectes wrappers are handled by their own rules.",
+    "prehideSelectors": [".cc-window:not(.cc-invisible)"],
+    "detectCmp": [
+        { "exists": ".cc-window:not(.cc-invisible) .cc-btn.cc-deny" },
+        { "exists": "#pandectes-banner", "negated": true },
+        { "exists": ".cc-window.cc-type-opt-out", "negated": true }
+    ],
+    "detectPopup": [{ "visible": ".cc-window:not(.cc-invisible)" }],
+    "optIn": [{ "waitForThenClick": ".cc-window .cc-btn.cc-allow:not([href]), .cc-window .cc-btn.cc-dismiss:not([href])" }],
+    "optOut": [{ "waitForThenClick": ".cc-window .cc-btn.cc-deny" }],
+    "test": [{ "cookieContains": "cookieconsent_status=deny" }]
+}
