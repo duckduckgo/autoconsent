@@ -28,7 +28,7 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
-export function getActionablePopups(mode: HeuristicLevel = '1', timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     const acceptedLevels: PopupClassification[] =
         mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
     if (acceptedLevels.length === 0) {

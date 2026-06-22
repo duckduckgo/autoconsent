@@ -10,7 +10,7 @@ describe('Autoconsent.findCmp', () => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false, // bypass initialization
                 autoAction: null,
-                heuristicMode: '0',
+                heuristicMode: 'off',
             });
         });
 
@@ -140,7 +140,7 @@ describe('Autoconsent.findCmp', () => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
                 autoAction: null,
-                heuristicMode: '1',
+                heuristicMode: 'reject',
             });
         });
 

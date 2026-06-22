@@ -421,7 +421,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     popups: PopupData[] = [];
     mode: HeuristicLevel;
 
-    constructor(autoconsentInstance: AutoConsent, mode: HeuristicLevel = '1') {
+    constructor(autoconsentInstance: AutoConsent, mode: HeuristicLevel = 'reject') {
         super(autoconsentInstance);
         this.name = 'HEURISTIC';
         this.runContext = {

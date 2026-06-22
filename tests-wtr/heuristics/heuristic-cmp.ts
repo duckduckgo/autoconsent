@@ -97,8 +97,8 @@ describe('AutoConsentHeuristicCMP', () => {
 
     describe('heuristicMode cap', () => {
         it('does not detect accept-only popup when mode is Reject', async () => {
-            const autoconsent = createAutoconsent('1');
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, '1');
+            const autoconsent = createAutoconsent('reject');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'reject');
             showPopup('popup-accept-only');
 
             const detected = await cmp.detectCmp();
