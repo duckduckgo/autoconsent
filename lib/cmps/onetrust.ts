@@ -121,15 +121,18 @@ export default class Onetrust extends AutoConsentCMPBase {
 
         const tabs = this.getLegacyOptanonOptionalTabs();
         for (const tab of tabs) {
-            await this.clickElement(tab);
+            tab.click();
             await this.wait(200);
             await this.disableVisibleLegacyOptanonToggles();
         }
 
         await this.disableVisibleLegacyOptanonToggles();
-        await this.waitForElement('.optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle', 2000);
-        await this.click('.optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle');
-        await this.waitForVisible('.optanon-alert-box-wrapper', 5000, 'none');
+        const saveButton = this.getLegacyOptanonSaveButton();
+        if (!saveButton) {
+            return false;
+        }
+        saveButton.click();
+        await this.wait(500);
         return true;
     }
 
@@ -153,9 +156,15 @@ export default class Onetrust extends AutoConsentCMPBase {
         ).filter((input) => !input.disabled && this.isVisibleElement(input));
 
         for (const input of checkedInputs) {
-            await this.clickElement(input);
+            input.click();
             await this.wait(100);
         }
+    }
+
+    getLegacyOptanonSaveButton() {
+        return Array.from(
+            document.querySelectorAll<HTMLElement>('.optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle'),
+        ).find((button) => this.isVisibleElement(button));
     }
 
     isOptionalLegacyOptanonCategory(element: HTMLElement) {
