@@ -51,11 +51,7 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
     }, [] as PopupData[]);
     // popups filtered by mode and sorted so a popup with reject will always win.
     return result
-        .filter(
-            (popup) =>
-                popup.regexClassification !== undefined &&
-                acceptedLevels.includes(popup.regexClassification),
-        )
+        .filter((popup) => popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification))
         .sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
 }
 
