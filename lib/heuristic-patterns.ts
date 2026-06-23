@@ -648,7 +648,6 @@ const REJECT_PATTERNS_SPANISH = [
     'aceptar las obligatorias',
     'permitir solo cookies técnicas',
     'cookies técnicas',
-    'permitir solo cookies técnicas',
     'usar solo cookies técnicas',
     'aceptar solo las esenciales',
     'no aceptar',
