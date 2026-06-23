@@ -1,5 +1,5 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('nos.nl', ['https://nos.nl/'], {
+generateCMPTests('npo-ccm', ['https://nos.nl/', 'https://www.powned.tv/'], {
     testSelfTest: false,
 });
