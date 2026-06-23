@@ -14,11 +14,20 @@
                     "waitForThenClick": ".optanon-alert-box-wrapper .optanon-toggle-display,a[onclick*='OneTrust.ToggleInfoDisplay()'],a[onclick*='Optanon.ToggleInfoDisplay()']"
                 },
                 { "waitForVisible": "#optanon-popup-wrapper", "timeout": 2000 },
-                { "click": "#Performance-Cookies,#optanon-menu .menu-item-performance,.optanon-menu .menu-item-performance", "optional": true },
+                {
+                    "click": "#Performance-Cookies,#optanon-menu .menu-item-performance,.optanon-menu .menu-item-performance",
+                    "optional": true
+                },
                 { "click": "#optanon-popup-body-right input[type=checkbox]:checked", "optional": true },
-                { "click": "#Functional-Cookies,#optanon-menu .menu-item-functional,.optanon-menu .menu-item-functional", "optional": true },
+                {
+                    "click": "#Functional-Cookies,#optanon-menu .menu-item-functional,.optanon-menu .menu-item-functional",
+                    "optional": true
+                },
                 { "click": "#optanon-popup-body-right input[type=checkbox]:checked", "optional": true },
-                { "click": "#Targeting-Cookies,#optanon-menu .menu-item-advertising,.optanon-menu .menu-item-advertising", "optional": true },
+                {
+                    "click": "#Targeting-Cookies,#optanon-menu .menu-item-advertising,.optanon-menu .menu-item-advertising",
+                    "optional": true
+                },
                 { "click": "#optanon-popup-body-right input[type=checkbox]:checked", "optional": true },
                 { "waitForThenClick": ".optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle" }
             ]
