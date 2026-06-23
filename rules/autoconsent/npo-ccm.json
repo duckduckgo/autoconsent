@@ -1,0 +1,39 @@
+{
+    "name": "npo-ccm",
+    "prehideSelectors": ["ccm-notification"],
+    "detectCmp": [
+        {
+            "exists": "ccm-notification"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["ccm-notification", "#ccm_notification"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["ccm-notification", ".ccm_btn--accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["ccm-notification", ".ccm_btn--save"] },
+            "then": [
+                {
+                    "click": ["ccm-notification", "input[type=\"radio\"][value=\"false\"]"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ["ccm-notification", ".ccm_btn--save:not(.ccm_btn_disabled)"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["ccm-notification", "#ccm_close"]
+                }
+            ]
+        }
+    ]
+}
