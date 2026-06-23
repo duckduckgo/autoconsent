@@ -1142,7 +1142,6 @@ export const ACKNOWLEDGE_PATTERNS = [
     // Spanish (ES)
     'entendido',
     'dacord',
-    'cerca',
     'cerrar',
     'continuar',
     'siguiente',
