@@ -1,9 +1,6 @@
 {
-    "name": "onet.pl",
-    "vendorUrl": "https://www.onet.pl/",
-    "runContext": {
-        "urlPattern": "^https?://(www\\.)?onet\\.pl/"
-    },
+    "name": "dreamlab-cmp",
+    "vendorUrl": "https://cmp.dreamlab.pl/",
     "prehideSelectors": [".cmp-popup_popup"],
     "detectCmp": [{ "exists": ".cmp-app_gdpr" }],
     "detectPopup": [{ "visible": ".cmp-popup_popup" }],
