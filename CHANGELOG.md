@@ -1,3 +1,23 @@
+# v16.0.0 (Tue Jun 23 2026)
+
+#### 💥 Breaking Change
+
+- Drop support for consent-o-matic rules [#1393](https://github.com/duckduckgo/autoconsent/pull/1393) ([@sammacbeth](https://github.com/sammacbeth))
+- Remove EasyList and filterlist support [#1399](https://github.com/duckduckgo/autoconsent/pull/1399) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Change heuristicMode parameter to a string and update handling. [#1403](https://github.com/duckduckgo/autoconsent/pull/1403) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🚀 Enhancement
+
+- Add autoconsent rule for DreamLab CMP [#1409](https://github.com/duckduckgo/autoconsent/pull/1409) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v15.1.0 (Tue Jun 23 2026)
 
 #### 🚀 Enhancement
