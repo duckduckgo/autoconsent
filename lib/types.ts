@@ -133,8 +133,8 @@ export interface PopupData {
  * The user setting for autoconsent and heuristic detection.
  *  - off: Heuristic detection is disabled.
  *  - reject: Heuristic detection is enabled, and will click the reject button on a popup if it exists.
- *  - tier1: Heuristic detection is enabled, and will click the acknowledge button on a popup if it exists, and no Reject button exists.
- *  - tier2: Heuristic detection is enabled, and will click the accept button on a popup if it exists, and no Reject or Acknowledge button exists.
+ *  - tier1: Heuristic detection is enabled, and will click the acknowledge button on a popup if it exists, and no Reject or Settings button exists.
+ *  - tier2: Heuristic detection is enabled, and will click the accept button on a popup if it exists, and no Reject, Acknowledge, or Settings button exists.
  */
 export type HeuristicLevel = 'off' | 'reject' | 'tier1' | 'tier2';
 export type PopupClassification = 'none' | 'reject' | 'tier1' | 'tier2';
