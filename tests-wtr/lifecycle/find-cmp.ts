@@ -1,7 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import Autoconsent from '../../lib/web';
 import Onetrust from '../../lib/cmps/onetrust';
-import { PopupHandlingModes } from '../../lib/types';
 
 describe('Autoconsent.findCmp', () => {
     let autoconsent: Autoconsent;
@@ -11,7 +10,7 @@ describe('Autoconsent.findCmp', () => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false, // bypass initialization
                 autoAction: null,
-                enableHeuristicAction: false,
+                heuristicMode: 'off',
             });
         });
 
@@ -141,7 +140,7 @@ describe('Autoconsent.findCmp', () => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
                 autoAction: null,
-                enableHeuristicAction: true,
+                heuristicMode: 'reject',
             });
         });
 
@@ -167,7 +166,7 @@ describe('Autoconsent.findCmp', () => {
             const found = await autoconsent.findCmp(1);
 
             expect(found).to.have.length(1);
-            expect(found[0].name).to.equal('HEURISTIC-TIER0');
+            expect(found[0].name).to.equal('HEURISTIC-REJECT');
         });
 
         it('prefers declarative rules over heuristic CMP', async () => {
@@ -192,8 +191,7 @@ describe('Autoconsent.findCmp', () => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
                 autoAction: null,
-                enableHeuristicAction: true,
-                heuristicMode: PopupHandlingModes.Tier1,
+                heuristicMode: 'tier1',
             });
             autoconsent.state.findCmpAttempts = 1;
 
@@ -210,8 +208,7 @@ describe('Autoconsent.findCmp', () => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
                 autoAction: null,
-                enableHeuristicAction: true,
-                heuristicMode: PopupHandlingModes.Tier2,
+                heuristicMode: 'tier2',
             });
             autoconsent.state.findCmpAttempts = 1;
 

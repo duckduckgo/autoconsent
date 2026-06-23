@@ -296,7 +296,7 @@ export default class AutoConsent {
         });
         // heuristic CMP is only run in the top frame and only if heuristic action is enabled and retries is odd
         const heuristicRules =
-            isTop && this.config.enableHeuristicAction && this.state.findCmpAttempts % 2 === 0
+            isTop && this.config.heuristicMode !== 'off' && this.state.findCmpAttempts % 2 === 0
                 ? [new AutoConsentHeuristicCMP(this, this.config.heuristicMode)]
                 : [];
 
