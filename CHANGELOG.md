@@ -1,3 +1,15 @@
+# v15.1.0 (Tue Jun 23 2026)
+
+#### 🚀 Enhancement
+
+- Test extension improvements [#1372](https://github.com/duckduckgo/autoconsent/pull/1372) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v15.0.0 (Sat Jun 20 2026)
 
 #### 💥 Breaking Change
