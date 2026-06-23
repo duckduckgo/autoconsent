@@ -2,18 +2,7 @@ const fs = require('fs');
 const https = require('https');
 
 const RELEASE_IMPACT_LABELS = ['major', 'minor', 'patch', 'skip-release'];
-const CATEGORY_LABELS = [
-    'rules',
-    'bug',
-    'enhancement',
-    'performance',
-    'dependencies',
-    'ci',
-    'ai',
-    'documentation',
-    'tests',
-    'internal',
-];
+const CATEGORY_LABELS = ['rules', 'bug', 'enhancement', 'performance', 'dependencies', 'ci', 'ai', 'documentation', 'tests', 'internal'];
 const COMMENT_MARKER = '<!-- autoconsent-release-label-check -->';
 
 function parseArgs(argv) {
@@ -81,31 +70,21 @@ function uniqueLabels(labels) {
 
 function validateLabels(labels) {
     const currentLabels = uniqueLabels(labels);
-    const releaseImpactLabels = currentLabels.filter((label) =>
-        RELEASE_IMPACT_LABELS.includes(label)
-    );
+    const releaseImpactLabels = currentLabels.filter((label) => RELEASE_IMPACT_LABELS.includes(label));
     const categoryLabels = currentLabels.filter((label) => CATEGORY_LABELS.includes(label));
     const errors = [];
 
     if (releaseImpactLabels.length === 0) {
-        errors.push(
-            `Add exactly one release impact label: ${RELEASE_IMPACT_LABELS.join(', ')}.`
-        );
+        errors.push(`Add exactly one release impact label: ${RELEASE_IMPACT_LABELS.join(', ')}.`);
     } else if (releaseImpactLabels.length > 1) {
-        errors.push(
-            `Keep exactly one release impact label; found ${releaseImpactLabels.join(', ')}.`
-        );
+        errors.push(`Keep exactly one release impact label; found ${releaseImpactLabels.join(', ')}.`);
     }
 
     if (!releaseImpactLabels.includes('skip-release')) {
         if (categoryLabels.length === 0) {
-            errors.push(
-                `Add exactly one release-note category label: ${CATEGORY_LABELS.join(', ')}.`
-            );
+            errors.push(`Add exactly one release-note category label: ${CATEGORY_LABELS.join(', ')}.`);
         } else if (categoryLabels.length > 1) {
-            errors.push(
-                `Keep exactly one release-note category label; found ${categoryLabels.join(', ')}.`
-            );
+            errors.push(`Keep exactly one release-note category label; found ${categoryLabels.join(', ')}.`);
         }
     }
 
