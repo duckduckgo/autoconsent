@@ -1,0 +1,36 @@
+{
+    "name": "annapurnainteractive.com",
+    "vendorUrl": "https://annapurnainteractive.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?annapurnainteractive\\.com/"
+    },
+    "prehideSelectors": ["[aria-label='Cookie Consent']"],
+    "detectCmp": [
+        {
+            "exists": "[aria-label='Cookie Consent'] a[href*='/legal/privacy-policy']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[aria-label='Cookie Consent'] a[href*='/legal/privacy-policy']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[aria-label='Cookie Consent'] button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[aria-label='Cookie Consent'] button"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "globalCookieConsent=granted"
+        }
+    ]
+}
