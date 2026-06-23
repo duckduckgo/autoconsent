@@ -115,14 +115,19 @@ const REJECT_PATTERNS_ENGLISH = [
 
     // e.g. "do not sell or share my personal information", "do not sell my personal information"
     // often used in CCPA
-    /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*information\s*$/is,
+    /^\s*do\s+not\s+sell(\s+or\s+share)?\s*my\s*personal\s*info(rmation)?\s*$/is,
 
     'allow selection',
     'disagree and close',
 
     // These are impactful, but look error-prone
+    // // e.g. "disagree"
+    /^(i)?\s*disagree\s*(and\s+close)?$/i,
     // // e.g. "i do not agree"
     // /^\s*(i\s+)?do\s+not\s+agree\s*$/i,
+    'no',
+    /^no,? thanks$/is,
+    /^opt[ -]out$/is,
 ];
 
 const REJECT_PATTERNS_DUTCH = [
@@ -714,4 +719,66 @@ export const NEVER_MATCH_PATTERNS = [
     /iscrivere/is,
     /sostienici/is,
     /suscribir/is,
+];
+
+export const SETTINGS_PATTERNS = [
+    'settings',
+    'preferences',
+    /customi(s|z)e/is,
+    'show details',
+    'more options',
+    /(manage|configure) (my|your) (preferences|choices|cookies)/is,
+    'manage choices',
+    /(cookie )?preference center/is,
+    'change settings',
+    'configure',
+    'change my preferences',
+    'cookie manager',
+    'cookie preference',
+    'let me choose',
+    'cookieconsent preferences',
+    /privacy choices/is,
+    /(privacy|cookie|custom) settings/is,
+    /cookies? (settings|preferences|setting)/is,
+    /(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
+    'cookie consent options',
+    'privacy controls',
+    'show purposes',
+    // German
+    'einstellungen',
+];
+
+export const ACCEPT_PATTERNS = [
+    /^(accept|allow)( all)?( cookies)?$/is,
+    /i (accept|allow)( all)?/is,
+    'yes',
+    /^(i )?agree$/is,
+    'continue with all',
+    'accept and continue',
+    /accept all above/is,
+    /^(accept|agree) and close/is,
+    'accept continue',
+    'agree proceed',
+    'allow and continue',
+    'close and accept',
+    /accept all$/is,
+    'im ok with that',
+    'accept optional cookies',
+
+    /^alle (cookies )?akzeptieren$/is,
+];
+
+export const ACKNOWLEDGE_PATTERNS = [
+    'ok',
+    'close',
+    'continue',
+    'x',
+    /^got it!?$/,
+    'i understand',
+    'dismiss',
+    'okay',
+    'acknowledge',
+    /^close (banner|cookie notification)$/is,
+    /understood$/is,
+    'confirm my choices',
 ];

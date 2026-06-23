@@ -1,0 +1,35 @@
+{
+    "name": "yachtclubgames.com",
+    "vendorUrl": "https://www.yachtclubgames.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?yachtclubgames\\.com/"
+    },
+    "prehideSelectors": ["div.cookie.flex.flex-wrap"],
+    "detectCmp": [
+        {
+            "exists": "div.cookie.flex.flex-wrap"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.cookie.flex.flex-wrap"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'cookie')]//button[normalize-space()='Accept']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'cookie')]//button[normalize-space()='Deny']"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div.cookie.flex.flex-wrap",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

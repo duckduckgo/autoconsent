@@ -11,14 +11,13 @@ Autoconsent is meant to be used in browser apps and extensions. [DuckDuckGo brow
 To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` class in a content script (running in isolated page context), and implement some configuration hooks in a background script. See [this document](docs/api.md) for more details on internal APIs and data flows.
 
 ```javascript
-import AutoConsent from '@duckduckgo/autoconsent'; // or '@duckduckgo/autoconsent/extra' for the version with filterlists
+import AutoConsent from '@duckduckgo/autoconsent';
 import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
-import { consentomatic } from '@duckduckgo/autoconsent/rules/consentomatic.json'
 
 const autoconsent = new AutoConsent(
     chrome.runtime.sendMessage, // provide a callback to send messages to the background script
     null, // optionally provide a config object here if you don't want to implement a background script
-    { autoconsent, consentomatic },
+    { autoconsent },
 );
 
 // connect the message receiver callback to handle messages from the background script
@@ -76,13 +75,11 @@ that are installed on multiple sites. Each CMP ruleset defines:
  * Steps to specify an 'opt-in' or 'opt-out' consent for the CMP.
  * Optionally, a test if the consent was correctly applied.
 
-There are currently three ways of implementing a CMP:
+There are currently two ways of implementing a CMP:
 
  1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
  1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
  rulesets allow.
- 3. As a [Consent-O-Matic](https://github.com/cavi-au/Consent-O-Matic) rule. The `ConsentOMaticCMP` class implements
- compability with rules written for the Consent-O-Matic extension.
 
 For more details on rule types, see [Rule Syntax Reference](docs/rule-syntax.md).
 

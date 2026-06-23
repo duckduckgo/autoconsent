@@ -8,11 +8,9 @@ test-results/
 rules/rules.*
 rules/consentomatic.json
 rules/compact-rules.json
+rules/rule-index.json
 lib/**/*.js
 addon/*.js
 .vscode/
 .env
 .DS_Store
-rules/filterlists/easylist_*.txt
-lib/filterlist-engine.ts
-data/top-1m.csv

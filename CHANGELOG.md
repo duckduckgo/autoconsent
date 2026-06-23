@@ -1,3 +1,108 @@
+# v15.1.0 (Tue Jun 23 2026)
+
+#### 🚀 Enhancement
+
+- Test extension improvements [#1372](https://github.com/duckduckgo/autoconsent/pull/1372) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v15.0.0 (Sat Jun 20 2026)
+
+#### 💥 Breaking Change
+
+- Handle non-reject buttons in heuristic mode [#1390](https://github.com/duckduckgo/autoconsent/pull/1390) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🚀 Enhancement
+
+- Extend twitch.tv rule to cover m.twitch.tv subdomain [#1402](https://github.com/duckduckgo/autoconsent/pull/1402) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.97.0 (Fri Jun 19 2026)
+
+#### 🚀 Enhancement
+
+- Extend bbc.com rule to cover bbc.co.uk [#1400](https://github.com/duckduckgo/autoconsent/pull/1400) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.96.0 (Thu Jun 18 2026)
+
+#### 🚀 Enhancement
+
+- Prompt AI to test in all regions [#1398](https://github.com/duckduckgo/autoconsent/pull/1398) ([@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.0.30 to 7.4.3 [#1396](https://github.com/duckduckgo/autoconsent/pull/1396) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Add Playwright HTTPS proxy testing skill [#1387](https://github.com/duckduckgo/autoconsent/pull/1387) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.95.1 (Wed Jun 17 2026)
+
+#### 🐛 Bug Fix
+
+- Preserve JSONC comments when bundling autoconsent config rules [#1395](https://github.com/duckduckgo/autoconsent/pull/1395) ([@cursoragent](https://github.com/cursoragent) [@jonathanKingston](https://github.com/jonathanKingston))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Jonathan Kingston ([@jonathanKingston](https://github.com/jonathanKingston))
+
+---
+
+# v14.95.0 (Sat Jun 13 2026)
+
+#### 🚀 Enhancement
+
+- Fix AWS Shortbread opt-out by using the new Decline button [#1394](https://github.com/duckduckgo/autoconsent/pull/1394) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Add yachtclubgames.com rule for custom cookie popup [#1370](https://github.com/duckduckgo/autoconsent/pull/1370) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### 🐛 Bug Fix
+
+- didomi: avoid premature popup detection on aria-hidden hosts [#1392](https://github.com/duckduckgo/autoconsent/pull/1392) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Coverage data update [#1366](https://github.com/duckduckgo/autoconsent/pull/1366) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v14.94.0 (Fri Jun 12 2026)
+
+#### 🚀 Enhancement
+
+- Improve heuristic detection performance [#1381](https://github.com/duckduckgo/autoconsent/pull/1381) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.93.0 (Wed Jun 10 2026)
 
 #### 🚀 Enhancement
