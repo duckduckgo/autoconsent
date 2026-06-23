@@ -1,0 +1,30 @@
+{
+    "name": "cookie-notice-wp",
+    "vendorUrl": "https://wordpress.org/plugins/cookie-notice/",
+    "prehideSelectors": ["#cookie-notice.cookie-notice-visible"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-notice #cn-refuse-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-notice.cookie-notice-visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-notice #cn-accept-cookie"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-notice #cn-refuse-cookie"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_notice_accepted=false"
+        }
+    ]
+}
