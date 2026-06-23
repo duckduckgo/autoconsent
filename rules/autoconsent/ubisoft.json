@@ -1,0 +1,32 @@
+{
+    "name": "ubisoft",
+    "_metadata": {
+        "vendorUrl": "https://www.ubisoft.com/"
+    },
+    "prehideSelectors": ["#privacy_modal"],
+    "detectCmp": [
+        {
+            "exists": "#privacy_modal #privacy__modal__close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#privacy_modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#privacy_modal #privacy__modal__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#privacy_modal #privacy__modal__close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "UBI_PRIVACY_POLICY_ACCEPTED=false"
+        }
+    ]
+}
