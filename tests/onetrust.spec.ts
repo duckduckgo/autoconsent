@@ -10,6 +10,9 @@ generateCMPTests('Onetrust', [
     'https://satsuite.collegeboard.org/sat/dates-deadlines',
 ]);
 
+// Legacy Optanon markup previously covered by Consent-O-Matic's com_optanon rule.
+generateCMPTests('Onetrust', ['https://www.allianzdirect.de/', 'https://www.thenude.com/']);
+
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
     testOptIn: false,
 });
