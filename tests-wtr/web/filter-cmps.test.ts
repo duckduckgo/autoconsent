@@ -40,7 +40,6 @@ function createTestConfig(overrides: Partial<Config> = {}): Config {
         detectRetries: 5,
         isMainWorld: false,
         prehideTimeout: 2000,
-        enableFilterList: false,
         enableHeuristicDetection: false,
         enableHeuristicAction: false,
         visualTest: false,

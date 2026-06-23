@@ -11,7 +11,7 @@ Autoconsent is meant to be used in browser apps and extensions. [DuckDuckGo brow
 To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` class in a content script (running in isolated page context), and implement some configuration hooks in a background script. See [this document](docs/api.md) for more details on internal APIs and data flows.
 
 ```javascript
-import AutoConsent from '@duckduckgo/autoconsent'; // or '@duckduckgo/autoconsent/extra' for the version with filterlists
+import AutoConsent from '@duckduckgo/autoconsent';
 import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
 import { consentomatic } from '@duckduckgo/autoconsent/rules/consentomatic.json'
 

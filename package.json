@@ -9,11 +9,6 @@
       "import": "./dist/autoconsent.esm.js",
       "require": "./dist/autoconsent.cjs.js"
     },
-    "./extra": {
-      "types": "./dist/types/web-extra.d.ts",
-      "import": "./dist/autoconsent.extra.esm.js",
-      "require": "./dist/autoconsent.extra.cjs.js"
-    },
     "./rules/rules.json": "./rules/rules.json",
     "./rules/consentomatic.json": "./rules/consentomatic.json",
     "./rules/compact-rules.json": "./rules/compact-rules.json"
@@ -27,7 +22,7 @@
     "lint-fix": "eslint . --fix && prettier . --write && npm run rule-syntax-check",
     "bundle": "./build.sh",
     "rule-syntax-check": "node scripts/validate-json-rules.js",
-    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/generated\" \"rules/filterlist.txt\" --ignore 'lib/filterlist-engine.ts' -c \"npm run prepublish\"",
+    "watch": "npm run prepublish && chokidar \"lib\" \"addon\" \"rules/autoconsent\" \"rules/generated\" -c \"npm run prepublish\"",
     "create-rule": "node rules/create-rule.mjs",
     "test": "playwright test",
     "test:webkit": "playwright test --project webkit",
@@ -35,14 +30,10 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
-    "fetch-easylist": "scripts/fetch-easylist.sh",
-    "rebuild-filterlist": "node scripts/rebuild-filterlist.mjs",
-    "update-easylist": "npm run fetch-easylist && npm run rebuild-filterlist",
-    "compile-filterlist": "node scripts/compile-filterlist.mjs",
     "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",
-    "prepublish": "npm run compile-filterlist && npm run build-rules && npm run bundle",
+    "prepublish": "npm run build-rules && npm run bundle",
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
@@ -68,7 +59,6 @@
     "bulma": "^1.0.2",
     "chai": "^6.0.1",
     "chokidar-cli": "^3.0.0",
-    "csv-parse": "^6.0.0",
     "esbuild": "^0.28.0",
     "eslint": "^10.0.3",
     "globals": "^17.4.0",
@@ -92,8 +82,6 @@
     ]
   },
   "dependencies": {
-    "@ghostery/adblocker": "^2.0.4",
-    "@ghostery/adblocker-content": "^2.0.4",
-    "tldts-experimental": "^7.0.4"
+    "tldts-experimental": "^7.4.3"
   }
 }

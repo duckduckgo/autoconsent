@@ -53,10 +53,6 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
-            - name: Compile filterlist
-              run: |
-                  npm run compile-filterlist
-
             - name: Set Git identity
               run: |
                   git config --global user.email "dax@duckduckgo.com"

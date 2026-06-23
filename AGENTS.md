@@ -25,7 +25,7 @@ docs/                 Reference documentation (rule syntax, internal API)
 
 ```bash
 npm ci
-npm run prepublish    # full build: compile filterlist, build rules, bundle
+npm run prepublish    # full build: build rules and bundle
 npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 ```
 

@@ -17,7 +17,6 @@ function createTestConfig(overrides: Partial<Config> = {}): Config {
         detectRetries: 0,
         isMainWorld: false,
         prehideTimeout: 2000,
-        enableFilterList: false,
         enableHeuristicDetection: false,
         enableHeuristicAction: false,
         visualTest: false,
@@ -87,10 +86,9 @@ describe('AutoConsent.updateState', () => {
         });
 
         it('should update boolean properties', () => {
-            autoconsent.updateState({ prehideOn: true, cosmeticFiltersOn: true });
+            autoconsent.updateState({ prehideOn: true });
 
             expect(autoconsent.state.prehideOn).to.be.true;
-            expect(autoconsent.state.cosmeticFiltersOn).to.be.true;
         });
 
         it('should update numeric properties', () => {
