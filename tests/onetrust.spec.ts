@@ -10,15 +10,6 @@ generateCMPTests('Onetrust', [
     'https://satsuite.collegeboard.org/sat/dates-deadlines',
 ]);
 
-// Legacy Optanon markup previously covered by Consent-O-Matic's com_optanon rule.
-generateCMPTests('Onetrust', ['https://www.allianzdirect.de/']);
-
-// Legacy Optanon disables the parent categories and dismisses the popup, but this
-// site does not reliably answer the post-dismissal self-test message.
-generateCMPTests('Onetrust', ['https://www.thenude.com/'], {
-    testSelfTest: false,
-});
-
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
     testOptIn: false,
 });

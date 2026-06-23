@@ -3,9 +3,7 @@ import AutoConsentCMPBase from './base';
 
 export default class Onetrust extends AutoConsentCMPBase {
     name = 'Onetrust';
-    prehideSelectors = [
-        '#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner,.optanon-alert-box-wrapper,#optanon-popup-bg,#optanon-popup-wrapper',
-    ];
+    prehideSelectors = ['#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner'];
 
     get hasSelfTest(): boolean {
         return true;
@@ -20,25 +18,15 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return (
-            this.elementExists('#onetrust-banner-sdk,.optanon-alert-box-wrapper,#optanon-menu,.optanon-menu') ||
-            this.elementVisible('#onetrust-pc-sdk,#optanon-popup-wrapper', 'any')
-        );
+        return this.elementExists('#onetrust-banner-sdk') || this.elementVisible('#onetrust-pc-sdk', 'any');
     }
 
     async detectPopup() {
-        return this.elementVisible('#onetrust-banner-sdk,#onetrust-pc-sdk,.optanon-alert-box-wrapper,#optanon-popup-wrapper', 'any');
+        return this.elementVisible('#onetrust-banner-sdk,#onetrust-pc-sdk', 'any');
     }
 
     async optOut() {
         await this.wait(500);
-        if (this.elementExists('.optanon-alert-box-wrapper,#optanon-menu,.optanon-menu')) {
-            const legacyResult = await this.optOutLegacyOptanon();
-            if (legacyResult) {
-                return true;
-            }
-        }
-
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
             return await this.click('#onetrust-reject-all-handler');
@@ -98,98 +86,10 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optIn() {
-        return await this.click('#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies,.optanon-allow-all');
+        return await this.click('#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies');
     }
 
     async test() {
         return await waitFor(() => this.mainWorldEval('EVAL_ONETRUST_1'), 10, 500);
-    }
-
-    async optOutLegacyOptanon() {
-        if (this.elementVisible('.optanon-reject-all', 'any')) {
-            return await this.click('.optanon-reject-all');
-        }
-
-        const openSettingsSelector =
-            ".optanon-alert-box-wrapper .optanon-toggle-display,a[onclick*='OneTrust.ToggleInfoDisplay()'],a[onclick*='Optanon.ToggleInfoDisplay()'],.optanon-alert-box-wrapper .cookie-settings-button";
-        if (!this.elementExists(openSettingsSelector)) {
-            return false;
-        }
-
-        await this.click(openSettingsSelector);
-        await this.waitForVisible('#optanon-popup-wrapper,#optanon-popup-bg', 2000, 'any');
-
-        const tabs = this.getLegacyOptanonOptionalTabs();
-        for (const tab of tabs) {
-            tab.click();
-            await this.wait(200);
-            await this.disableVisibleLegacyOptanonToggles();
-        }
-
-        await this.disableVisibleLegacyOptanonToggles();
-        const saveButton = this.getLegacyOptanonSaveButton();
-        if (!saveButton) {
-            return false;
-        }
-        saveButton.click();
-        await this.wait(500);
-        return true;
-    }
-
-    getLegacyOptanonOptionalTabs() {
-        const tabSelectors = [
-            '#optanon button[role="tab"]',
-            '#optanon-menu [class*="menu-item-"]',
-            '.optanon-menu [class*="menu-item-"]',
-            '#optanon .preference-menu-item',
-        ].join(',');
-        return Array.from(document.querySelectorAll<HTMLElement>(tabSelectors)).filter(
-            (tab) => this.isVisibleElement(tab) && this.isOptionalLegacyOptanonCategory(tab),
-        );
-    }
-
-    async disableVisibleLegacyOptanonToggles() {
-        const checkedInputs = Array.from(
-            document.querySelectorAll<HTMLInputElement>(
-                '#optanon-popup-body-right input[type="checkbox"]:checked,#optanon input.optanon-status:checked,#optanon input.optanon-status-checkbox:checked',
-            ),
-        ).filter((input) => !input.disabled && this.isVisibleElement(input));
-
-        for (const input of checkedInputs) {
-            input.click();
-            await this.wait(100);
-        }
-    }
-
-    getLegacyOptanonSaveButton() {
-        return Array.from(
-            document.querySelectorAll<HTMLElement>(
-                '.optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle',
-            ),
-        ).find((button) => this.isVisibleElement(button));
-    }
-
-    isOptionalLegacyOptanonCategory(element: HTMLElement) {
-        const text = element.textContent?.toLowerCase().replace(/\s+/g, ' ').trim() || '';
-        if (
-            /performance|functional|targeting|advertising|marketing|social|analytics|analytical|measurement|personalisation|personalization|recommended|unclassified|leistung|funktion|analyse|werbung|soziale/.test(
-                text,
-            )
-        ) {
-            return true;
-        }
-        return (
-            /\bcookies?\b/.test(text) &&
-            !/strictly necessary|necessary|required|privacy|datenschutz|erforderlich|more information|weitere/.test(text)
-        );
-    }
-
-    isVisibleElement(element: HTMLElement) {
-        const style = getComputedStyle(element);
-        return (
-            style.visibility !== 'hidden' &&
-            style.display !== 'none' &&
-            !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)
-        );
     }
 }

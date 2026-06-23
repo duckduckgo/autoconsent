@@ -1,0 +1,28 @@
+{
+    "name": "com_optanon",
+    "vendorUrl": "https://www.onetrust.com/",
+    "prehideSelectors": [".optanon-alert-box-wrapper,#optanon-popup-bg,#optanon-popup-wrapper"],
+    "detectCmp": [{ "exists": ".optanon-alert-box-wrapper" }],
+    "detectPopup": [{ "visible": ".optanon-alert-box-wrapper" }],
+    "optIn": [{ "waitForThenClick": ".optanon-allow-all" }],
+    "optOut": [
+        {
+            "if": { "exists": ".optanon-reject-all" },
+            "then": [{ "waitForThenClick": ".optanon-reject-all" }],
+            "else": [
+                {
+                    "waitForThenClick": ".optanon-alert-box-wrapper .optanon-toggle-display,a[onclick*='OneTrust.ToggleInfoDisplay()'],a[onclick*='Optanon.ToggleInfoDisplay()']"
+                },
+                { "waitForVisible": "#optanon-popup-wrapper", "timeout": 2000 },
+                { "click": "#Performance-Cookies,#optanon-menu .menu-item-performance,.optanon-menu .menu-item-performance", "optional": true },
+                { "click": "#optanon-popup-body-right input[type=checkbox]:checked", "optional": true },
+                { "click": "#Functional-Cookies,#optanon-menu .menu-item-functional,.optanon-menu .menu-item-functional", "optional": true },
+                { "click": "#optanon-popup-body-right input[type=checkbox]:checked", "optional": true },
+                { "click": "#Targeting-Cookies,#optanon-menu .menu-item-advertising,.optanon-menu .menu-item-advertising", "optional": true },
+                { "click": "#optanon-popup-body-right input[type=checkbox]:checked", "optional": true },
+                { "waitForThenClick": ".optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "OptanonConsent=" }, { "cookieContains": "2%3A0" }]
+}
