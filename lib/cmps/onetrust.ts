@@ -163,7 +163,9 @@ export default class Onetrust extends AutoConsentCMPBase {
 
     getLegacyOptanonSaveButton() {
         return Array.from(
-            document.querySelectorAll<HTMLElement>('.optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle'),
+            document.querySelectorAll<HTMLElement>(
+                '.optanon-save-settings-button button,.optanon-save-settings-button .optanon-white-button-middle',
+            ),
         ).find((button) => this.isVisibleElement(button));
     }
 
@@ -176,11 +178,18 @@ export default class Onetrust extends AutoConsentCMPBase {
         ) {
             return true;
         }
-        return /\bcookies?\b/.test(text) && !/strictly necessary|necessary|required|privacy|datenschutz|erforderlich|more information|weitere/.test(text);
+        return (
+            /\bcookies?\b/.test(text) &&
+            !/strictly necessary|necessary|required|privacy|datenschutz|erforderlich|more information|weitere/.test(text)
+        );
     }
 
     isVisibleElement(element: HTMLElement) {
         const style = getComputedStyle(element);
-        return style.visibility !== 'hidden' && style.display !== 'none' && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+        return (
+            style.visibility !== 'hidden' &&
+            style.display !== 'none' &&
+            !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)
+        );
     }
 }
