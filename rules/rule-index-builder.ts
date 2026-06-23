@@ -2,7 +2,7 @@ import { dynamicCMPs } from '../lib/cmps/all';
 import { AutoConsentCMPRule } from '../lib/rules';
 import AutoConsent from '../lib/web';
 
-export type RuleIndexSection = 'generated' | 'generic' | 'code' | 'consentomatic';
+export type RuleIndexSection = 'generated' | 'generic' | 'code';
 
 // Lightweight popup manifest entry. This is only for listing/toggling rules;
 // execution still uses rules.json, compact-rules.json, code CMPs, and Consent-O-Matic bundles.
