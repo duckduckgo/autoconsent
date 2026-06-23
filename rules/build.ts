@@ -28,50 +28,6 @@ export async function buildAutoconsentRules(): Promise<AutoConsentCMPRule[]> {
     return deduplicateRules([...normalRules, ...generatedRules]);
 }
 
-<<<<<<< HEAD
-export async function buildConsentOMaticRules() {
-    // fetch ConsentOMatic rule set and merge with our custom rules
-    const consentOMaticCommit = '7d7fd2bd6bf2b662350b0eaeca74db6eba155efe';
-    const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
-    const consentOMaticInclude = ['oil', 'optanon', 'quantcast2', 'wordpressgdpr'];
-    const comRules: Record<string, object> = {};
-    const allComRules: Record<string, object> = await new Promise((resolve) => {
-        https.get(consentOMaticUrl, (res) => {
-            res.setEncoding('utf-8');
-            let content = '';
-            res.on('data', (data) => (content += data));
-            res.on('end', () => resolve(JSON.parse(content)));
-        });
-    });
-    consentOMaticInclude.forEach((name) => {
-        comRules[name] = allComRules[name];
-    });
-    return comRules;
-}
-
-||||||| parent of 144c41937 (Drop support for consent-o-matic rules)
-export async function buildConsentOMaticRules() {
-    // fetch ConsentOMatic rule set and merge with our custom rules
-    const consentOMaticCommit = '7d7fd2bd6bf2b662350b0eaeca74db6eba155efe';
-    const consentOMaticUrl = `https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/${consentOMaticCommit}/Rules.json`;
-    const consentOMaticInclude = ['oil', 'optanon', 'quantcast2', 'springer', 'wordpressgdpr'];
-    const comRules: Record<string, object> = {};
-    const allComRules: Record<string, object> = await new Promise((resolve) => {
-        https.get(consentOMaticUrl, (res) => {
-            res.setEncoding('utf-8');
-            let content = '';
-            res.on('data', (data) => (content += data));
-            res.on('end', () => resolve(JSON.parse(content)));
-        });
-    });
-    consentOMaticInclude.forEach((name) => {
-        comRules[name] = allComRules[name];
-    });
-    return comRules;
-}
-
-=======
->>>>>>> 144c41937 (Drop support for consent-o-matic rules)
 (async () => {
     const stringify = (rules: object) => JSON.stringify(rules);
     const autoconsent = await buildAutoconsentRules();

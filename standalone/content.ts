@@ -3,7 +3,6 @@ import { filterCompactRules, type IndexedCMPRuleset } from '../lib/encoding';
 import { BackgroundMessage, ContentScriptMessage } from '../lib/messages';
 import { Config, RuleBundle } from '../lib/types';
 import compactRules from '../rules/compact-rules.json';
-import { consentomatic } from '../rules/consentomatic.json';
 
 declare global {
     interface Window {
@@ -22,7 +21,6 @@ function isMainFrame() {
 function buildRules(): RuleBundle {
     return {
         autoconsent: [],
-        consentomatic,
         compact: filterCompactRules(compactRules as IndexedCMPRuleset, {
             url: window.location.href,
             mainFrame: isMainFrame(),
