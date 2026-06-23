@@ -655,7 +655,7 @@ const REJECT_PATTERNS_SPANISH = [
     'rexeitar todas',
     'no consentir',
     'ukatu',
-    /^denak? baztertu|ukatu guztiak$/,
+    /^(denak? baztertu|ukatu guztiak)$/,
     'no, gracias',
     'revocar consentimiento',
     'rebutjar',
