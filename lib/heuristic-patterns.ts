@@ -90,139 +90,75 @@ export const DETECT_PATTERNS = [
     /wijs alles af/gi,
 
     // Spanish (ES)
-    // we use cookies
     /(usamos|utilizar?|utilizamos|utilizamos|usiamo)( (tanto|las))? .?cookies?\b/gi,
-    // we use cookies
     /utilitzem galetes/gi,
-    // own and third-party cookies
     /cookies propias y de/gi,
-    // we and our partners/providers ... cookies
     /nosotros y nuestros( \d+)? (socios|proveedores).{0,180} cookies/gi,
-    // We use third-party services
     /utilizamos servicios de terceros/i,
-    // This store asks you to accept cookies
     /esta tienda te pide que aceptes cookies/i,
-    // Cookies are used to provide you with a better experience on our website
     /las cookies se utilizan para brindarle una mejor experiencia en nuestro sitio web/i,
-    // Use of cookies
     /uso de cookies/i,
-    // store information on a device and/or access it
     /almacenar la información en un dispositivo y\/?o acceder a ella/i,
-    // About cookies on this site
     /acerca de las cookies en este sitio/i,
-    // Our website and partner companies use cookies
     /nuestro[s]? sitio web y las empresas asociadas utilizan cookies/i,
-    // This website uses/serves cookies
     /est[ea] (sitio|página|web)( web)?( también)? (usa|utiliza|requiere del uso de|se sirven|emplea) cookies?/i,
-    // technical cookies are necessary for our website to work
     /cookies técnicas son necesarias para que nuestra página web pueda funcionar/i,
-    // authorize ... and its partners to use trackers
     /autoriza a .{0,100} a usar rastreadores/i,
-    // processes information about your visit using cookies
     /procesa información sobre su visita utilizando cookies/i,
-    // own and third-party cookies (Catalan)
     /cookies pròpies i de tercers/gi,
-    // information about the cookies used
     /información acerca de las cookies utilizadas/gi,
-    // we collect and store data from you and your device
     /recopilamos y almacenamos datos de usted y de su dispositivo/gi,
-    // we use technologies such as cookies
     /utilizamos tecnolog[ií]as como las cookies/i,
-    // uses Google cookies
     /\busa cookies de google\b/i,
 
     // Polish (PL)
-    // uses cookies
     /korzysta z plików cookies?/gi,
     /strona.{0,50} używa ciasteczek .?cookies/gi,
-    // We use cookies
     /(używamy|stosujemy|stosuje) plik(i|ów) cookie/i,
-    // We use cookies
     /używamy cookies/i,
     /wykorzystujemy pliki cookie/gi,
-    // we use cookies
     /korzystamy z plików cookie/i,
     /używamy ciasteczek/gi,
     /serwis (używa|korzysta z|stosuje) plik[ió]w? cookies?/gi,
-    // we use technical (necessary) and analytical (optional) cookies
     /wykorzystują .{0,100}cookie/gi,
-    // consent to using precise geolocation and identification data
     /zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację/gi,
-    // This site uses cookies
     /wykorzyst(uje|ywane)( są)? pliki cookies?/gi,
-    // we access and store information on your device
     /uzyskujemy dostęp i przechowujemy informacje na urządzeniu/gi,
-    // Store information on a device or access it
     /przechowywanie informacji na urządzeniu lub dostęp do nich/i,
-    // Together with our 1,711 partners, we use cookies
     /wraz z naszymi \d+ partnerami używamy plików typu\s*.?cookies?.?/i,
-    // The purposes of processing your data by IAB Trusted Partners and the other Trusted Partners are as follows
     /zaufanych partnerów iab.{0,50} oraz pozostałych zaufanych partnerów/gi,
-    // we access information on your device
     /uzyskujemy dostęp do informacji na twoim urządzeniu/i,
-    // we use technologies such as cookies
     /korzystamy z technologii, takich jak pliki cookie/gi,
-    // store and access information on your devices
     /przechowywać i uzyskiwać dostęp do informacji na twoich urządzeniach/gi,
-    // We use technologies such as cookies
     /używamy technologii takich jak pliki cookie/gi,
-    // We store our own cookies and our partners' cookies on your device
     /zapisujemy w twoim urządzeniu pliki cookies własne oraz naszych partnerów/i,
-    // We process cookies, store information on the device, and process personal data or browsing data
     /przetwarzamy pliki cookies[\s\S]{0,80}przechowujemy informacje na urządzeniu/i,
-    // We and our partners process information about users, their devices and online behavior using technologies such as cookies
     /my i nasi partnerzy przetwarzamy informacje na temat użytkowników, ich urządzeń i zachowań w sieci korzystając z technologii, takich jak ciasteczka/i,
-    // using cookies ... we and our partners
     /za pomocą plików cookies.{0,100} my lub nasi partnerzy/gi,
-    // information stored using cookies
     /informacji zapisanych za pomocą plików cookies/gi,
-    // this page uses cookies
     /ta strona (wykorzystuje|używa|korzysta z) plik[ió]w? cookie/gi,
-    // Our services use information stored in cookies
     /nasze serwisy używają informacji zapisanych w plikach cookies/i,
-    // Using this website means you consent to the use of cookies.
     /korzystanie z tej witryny oznacza wyrażenie zgody na wykorzystanie plików cookies/i,
-    // By clicking the “Accept all cookies” button you consent to the use of cookies (or other similar technologies) from us or our partners
     /akceptuj[ęe]? wszystkie pliki cookie|ustawienia prywatności|odrzucenie wszystkich/i,
-    // Some cookies are necessary for our site to function properly
     /do poprawnego działania naszej strony niezbędne są niektóre pliki cookies/i,
-    // This site uses cookies.
     /ta strona używa ciasteczek/i,
-    // We use only anonymous cookies
     /używamy tylko anonimowych plików cookie/i,
-    // We use our own cookies and third-party cookies
     /używamy własnych plików cookie i plików cookie stron trzecich/i,
-    // We use cookies technology to store and/or access information on a device
     /korzystamy z technologii cookies/i,
-    // Can we use cookies
     /możemy używać ciasteczek\b/i,
-    // Our site uses cookies
     /nasza strona używa ciasteczek/i,
-    // We use necessary, preference, analytical and marketing cookies.
     /używamy niezbędnych plików cookies, cookies preferencji, analitycznych oraz marketingowych/i,
-    // Our website uses cookies
     /nasza witryna używa plików cookie/i,
-    // This site uses cookies
     /ta strona korzysta z ciasteczek/i,
-    // storing cookies on your device
     /przechowywanie plików cookie na swoim urządzeniu/i,
-    // asks the user to accept cookies
     /zwraca się do użytkownika z prośbą o zaakceptowanie plików cookie/i,
-    // The website uses cookies or similar technologies
     /strona używa plików cookies lub podobnych technologii/i,
-    // our own cookies and those of our partners
     /pliki cookie własne oraz naszych partnerów/i,
-    // together with our partners we process data in order to provide
     /wraz z naszymi partnerami przetwarzamy dane w celu zapewnienia/i,
-    // uses cookie technology
     /\bwykorzystuje technolog(?:i[ęe]|ię) plik[ió]w? cookie/i,
-    // we process your personal data using cookies
     /w tych celach przetwarzamy Twoje dane osobowe zebrane z wykorzystaniem cookies/i,
-    // our site collects and processes personal data
     /nasza strona gromadzi i przetwarza dane osobowe/i,
-    // this website uses its own cookies
     /ta witryna korzysta z własnych plików cookie/i,
-    // Necessary cookies
     /niezbędne pliki cookie(?:.*niezb(?:ę|e)dne dla funkcjonowania strony)?/i,
 ];
 
@@ -722,6 +658,7 @@ const REJECT_PATTERNS_SPANISH = [
     'declinar',
     'aceptar solo las cookies esenciales',
     'necesarias',
+    'aceptar cookies opcionales',
     'aceptar solo lo necesario',
     'solo funcionales',
     'declinar y cerrar',
@@ -742,67 +679,36 @@ const REJECT_PATTERNS_SPANISH = [
     'permitir solo cookies técnicas',
     'usar solo cookies técnicas',
     'aceptar solo las esenciales',
-    // continue without accepting
     /^continuar sin aceptar/is,
-    // reject
     'no aceptar',
-    // reject all
     'rexeitar todas',
-    // do not consent
     'no consentir',
-    // reject (Basque)
     'ukatu',
-    // reject all (Basque)
     /^denak? baztertu|ukatu guztiak$/is,
-    // no, thanks
     'no, gracias',
-    // revoke consent
     'revocar consentimiento',
-    // reject
     'rebutjar',
-    // reject all
     'rebutja-ho tot',
-    // reject cookies
     'rexeitar cookies',
-    // only first-party cookies
     'sólo cookies propias',
-    // accept only necessary cookies
     'aceptar solo cookies necesarias',
-    // reject them
     'rebutja-les',
-    // reject cookies
     'rebutjar cookies',
-    // reject
     'rechazo',
-    // reject all
     'rebutjar tot',
-    // do not allow
     'no permitir',
-    // only necessary cookies
     'sólo las cookies necesarias',
-    // reject all
     'rebutja-les totes',
-    // accept necessary
     'aceptar necesarias',
-    // no, thanks
     'no, gràcies',
-    // Refuse and close
     'refusar i tancar',
-    // no thanks
     'no gracias',
-    // Reject all cookies
     'rechazar todas cookies',
-    // Click here to disable optional cookies
     'pulsa aquí para desactivar las cookies opcionales',
-    // reject all
     'rebutjar-les totes',
-    // reject all
     'rebutjar totes',
-    // reject cookies
     'ukatu cookieak',
-    // Reject all
     'ukatu dena',
-    // Reject all
     'guztiak ukatu',
 ];
 
@@ -892,93 +798,49 @@ const REJECT_PATTERNS_SWEDISH = [
 ];
 
 const REJECT_PATTERNS_POLISH = [
-    // reject all
     /(odrzuć|odrzucenie|odrzucam) (wszystkie|wszystko|wszystkich)/is,
-    // decline
     'odrzuć',
-    // decline
     'odmów',
-    // decline
     'odmowa',
-    // decline and learn more
     'odrzucam i chcę dowiedzieć się więcej',
-    // accept only necessary
     /^(zaakceptuj )?tylko niezbędne$/is,
-    // reject optional
     'odrzuć opcjonalne',
-    // disagree
     'nie zgadzam się',
-    // I do not consent
     'nie wyrażam zgody',
-    // I reject
     'odrzucam',
-    // continue without accepting
     'kontynuuj bez akceptacji',
-    // no, thank you
     'nie, dziękuję',
-    // I decline
     'odmawiam',
-    // use only necessary cookies
     'korzystaj wyłącznie z niezbędnych plików cookie',
-    // reject
     'odrzucać',
-    // functional cookies (required)
     /^funkcjonalne pliki cookie \(wymagane\)$/is,
-    // reject cookies
     'odrzuć pliki cookie',
-    // required only
     'tylko wymagane',
-    // necessary
     'niezbędne',
-    // accept necessary
     'akceptuj niezbędne',
-    // I do not accept
     'nie akceptuję',
-    // continue without accepting
     'kontynuuj bez akceptowania',
-    // Accept only required
     'akceptuj tylko wymagane',
-    // I opt out
     'rezygnuję',
-    // continue without consent
     'kontynuuj bez wyrażania zgody',
-    // Only required cookies
     'tylko wymagane pliki cookie',
-    // I confirm required
     'potwierdzam wymagane',
-    // I accept required
     'akceptuję wymagane',
-    // do not allow
     'nie zezwalaj',
-    // Allow only necessary
     'zezwól tylko na niezbędne',
-    // Accept necessary
     'zaakceptuj niezbędne',
-    // I do not confirm
     'nie potwierdzam',
-    // Allow necessary
     'zezwól na niezbędne',
-    // Accept only necessary cookies
     'принимать только необходимые файлы cookie',
-    // only strictly necessary
     'tylko bezwzględnie konieczne',
-    // reject non-essential
     'odrzuć nieistotne',
-    // accept required
     'akceptuj wymagane',
-    // continue without accepting optional cookies
     'kontynuuj bez akceptowania opcjonalnych cookie',
-    // no
     'nie',
-    // Reject unnecessary
     'odrzuć niewymagane',
-    // Reject cookies
     'tolak cookie',
-    // reject
     'reddet',
-    // do not consent and close
     'nie wyrażaj zgody i zamknij',
-    // accept required
     'zaakceptuj wymagane',
 ];
 
@@ -1010,17 +872,12 @@ export const NEVER_MATCH_PATTERNS = [
     /suscribir/is,
 
     // Spanish (ES)
-    // reject and pay
     /rechazar y pagar/is,
-    // reject and subscribe
     /rechazar y suscribirse/is,
-    // subscribe
     /^suscríbete$/is,
-    // I reject and subscribe
     /^rechazo y me suscribo$/i,
 
     // Polish (PL)
-    // subscribe
     /^subskrybuj/i,
 ];
 
@@ -1052,214 +909,111 @@ export const SETTINGS_PATTERNS = [
 
     // Spanish (ES)
     /^(configurar|configuración|administrar)$/is,
-    // personalise
     'personalizar',
-    // more options
     'más opciones',
-    // manage options
     'gestionar opciones',
-    // manage/view/set preferences
     /^(gestionar|ver|establecer) preferencias$/is,
-    // manage cookies
     'gestionar cookies',
-    // preferences
     'preferencias',
-    // show purposes
     'mostrar los propósitos',
-    // settings (Basque)
     /^(konfigurazioa|konfiguratu)$/is,
-    // show details
     'mostrar detalles',
-    // details
     'detalles',
-    // settings
     'ajustes',
-    // cookie settings
     'ajustes de cookies',
-    // cookie preferences
     'preferencias de cookies',
-    // manage my preferences
     'gestionar mis preferencias',
-    // cookie management
     'gestión cookies',
-    // Privacy settings
     'datenschutzeinstellungen',
-    // settings
     'réglages',
-    // manage cookies
     'gestionar las cookies',
-    // configure
     'configura',
-    // manage
     'gestionar',
-    // manage your preferences
     'gestiona tus preferencias',
-    // set your choices
     'paramétrer vos choix',
-    // settings
     'instellingen',
-    // Personalize my choices
     'personalize my choices',
-    // Privacy settings
     'privatsphäre einstellungen',
-    // select individual purposes
     'seleccionar fines individuales',
-    // adjust cookies
     'ajustar cookies',
-    // view preferences
     'veure preferències',
-    // no, adjust
     'no, ajustar',
-    // cookie management
     'gestión de cookies',
-    // cookie settings
     'configuración de cookies',
-    // set cookies
     'configurar cookies',
-    // customize cookies
     'personalizar cookies',
-    // set preferences
     'configurar preferencias',
-    // cookie settings
     'configuración de las cookies',
-    // manage settings
     'gestionar configuración',
-    // cookie settings
     'configuración cookies',
-    // manage cookie settings
     'gestionar la configuración de cookies',
-    // cookie and service settings
     'configuración de cookies y servicios',
-    // customize my preferences
     'personalizar mis preferencias',
-    // my preferences
     'mis preferencias',
-    // cookie settings
     'configuración de cookie',
-    // edit cookie settings
     'editar la configuración de cookies',
-    // manage cookies
     'administrar cookies',
-    // Personalize
     'personnaliser',
-    // configure
     'tune configurar',
-    // set my preferences
     'configurar mis preferencias',
-    // customize
     'personalitza',
 
     // Polish (PL)
-    // advanced settings
     'ustawień zaawansowanych',
-    // customise
     /^(dostosuj|spersonalizuj|chcę dostosować|dostosuj zgody)$/is,
-    // preferences
     /^(preferencje|zarządzaj preferencjami)$/is,
-    // more options
     /więcej opcji/is,
-    // manage cookies
     /^(zarządzaj cookies|zarządzaj plikami cookie)$/is,
-    // show purposes
     /pokaż cele/is,
-    // Configure
     'skonfiguruj',
-    // View preferences
     'zobacz preferencje',
-    // customize cookies
     'dostosuj pliki cookie',
-    // go to privacy settings
     'przejdź do ustawień prywatności',
-    // Manage cookie preferences
     'zarządzaj preferencjami plików cookie',
-    // Manage consents
     'zarządzaj zgodami',
-    // Consent settings
     'konfiguracja zgód',
-    // Go to settings
     'przejdź do ustawień',
-    // Personalize cookies
     'personalizuj pliki cookie',
-    // Configure cookies
     'настроить файлы cookie',
-    // manage cookie consents
     'zarządzaj zgodami dotyczącymi plików cookies',
-    // go to cookie settings.
     /^przejdź do ustawień plików cookies\.$/is,
-    // customize my cookies
     'dostosuj moje pliki cookie',
-    // customize
     '️ dostosuj',
-    // manage cookies and learn more
     'zarządzaj plikami cookie i dowiedz się więcej',
-    // manage cookies
     'zarządzaj plikami cookies',
-    // personalize my choices
     'spersonalizuj moje wybory',
-    // customize my choices
     'dostosuj moje wybory',
-    // change your preferences
     'zmień swoje preferencje',
-    // Change consents
     'zmień zgody',
-    // Set your choices
     'ustaw swoje wybory',
-    // customize choices
     'dostosuj wybory',
-    // Show details
     'pokaż szczegóły',
-    // Let me choose
     'pozwól mi wybrać',
     /^(ustawienia|zmień ustawienia|zarządzaj opcjami)$/is,
-    // Cookie settings
     'ustawienia plików cookie',
-    // Advanced settings
     'ustawienia zaawansowane',
-    // Cookie settings
     'ustawienia cookies',
-    // Cookie settings
     'ustawieniach plików cookie',
-    // Cookie settings
     'ustawienia plików cookies',
-    // Manage settings
     'zarządzaj ustawieniami',
-    // Customize settings
     'dostosuj ustawienia',
-    // Manage my settings
     'zarządzaj moimi ustawieniami',
-    // I'm changing settings
     'zmieniam ustawienia',
-    // Customize selection
     'dostosuj wybór',
-    // Privacy settings
     'ustawienia prywatności',
-    // Preference settings
     'ustawienia preferencji',
-    // I change consents
     'zmieniam zgody',
-    // Edit settings
     'edytuj ustawienia',
-    // Cookie settings
     'ustawienia cookie',
-    // Cookie preferences
     'preferencje cookies',
-    // Choose individual purposes
     'wybierz poszczególne cele',
-    // More settings
     'więcej ustawień',
-    // Change settings
     'zmiana ustawień',
-    // Let me choose
     'pozwól mi wybrać pozwól mi wybrać',
-    // Preference management
     'zarządzanie preferencjami',
-    // Set preferences
     'ustaw preferencje',
-    // Detailed settings
     'podrobné nastavení',
-    // Cookie settings
     'ustawienia ciasteczek',
-    // Manage
     'zarządzaj',
 ];
 
@@ -1283,178 +1037,93 @@ export const ACCEPT_PATTERNS = [
     /^alle (cookies )?akzeptieren$/is,
 
     // Spanish (ES)
-    // accept
     /^acc?ept(ar|o)( cookies)?$/is,
-    // accept all
     'permitir todas las cookies',
-    // accept all
     /^(acc?eptar?|permitir) tod(o|as)$/is,
-    // accept
     /^(accetta|aceptar las cookies|accepta)$/is,
-    // accept and close
     'aceptar y cerrar',
-    // accept and continue
     /^aceptar y (continuar|seguir|navegar)( gratis)?$/is,
-    // accept for free
     'aceptar gratis',
-    // accept all
     'accetta tutti i cookie',
-    // accept all (Basque)
     /^denak? onartu$/is,
-    // consent to all
     /consentir todo/is,
-    // accept all
     'accepta-les totes',
-    // accept all cookies
     'accepta totes les cookies',
-    // allow all cookies
     'permetre totes les cookies',
-    // consent
     'consentir',
-    // Accept all
     'tout accepter',
-    // allow
     'permitir',
-    // Accept
     'accepter',
-    // Accept
     'akzeptieren',
-    // accept all
     'accepta-ho tot',
-    // accept all
     'acceptar tot',
     'de acuerdo',
-    // agree and close
     'de acuerdo y cerrar',
-    // I agree
     'estoy de acuerdo',
-    // Accept and close
     'acceptar i tancar',
-    // yes, I agree
     'sí, estoy de acuerdo',
-    // allow them all
     'permitirlas todas',
-    // ok, I accept them
     'ok, las acepto',
-    // Allow all
     'permet-les totes',
-    // accept all
     /^acept(o|ar) todas las cookies$/is,
-    // accept
     'onartu',
-    // accept all
     'aceptar cookies opcionales',
-    // Accept
     'aceitar',
-    // yes, I accept
     'sí, acepto',
-    // Accept and continue browsing
     'aceptar y seguir navegando',
-    // Accept cookies
     'acceptar galetes',
-    // Allow cookies
     'permitir cookies',
 
     // Polish (PL)
-    // accept
     /^(akceptuję|akceptuj|zaakceptuj)$/is,
-    // consent
     'zgoda',
-    // accept all
     /^(akceptuję wszystkie|zaakceptuj zgody)$/is,
-    // proceed to site/service
     'przejdź do serwisu',
-    // accept and proceed
     'akceptuję i przechodzę do serwisu',
-    // I agree
     'zgadzam się',
-    // allow all
     'akceptuj wszystkie',
-    // allow all
     'akceptuj wszystko',
-    // allow all
     'zezwól na wszystkie',
-    // accept all
     'akceptuje wszystkie',
-    // consent to all
     'zgoda na wszystkie',
-    // accept and close
     'zaakceptuj i zamknij',
-    // accept cookies
     'akceptuj pliki cookie',
-    // I confirm all
     'potwierdzam wszystkie',
-    // ok, I agree
     'ok, zgadzam się',
-    // I consent
     'wyrażam zgodę',
-    // Allow
     'zezwól',
-    // Accept, continue
     'akzeptieren weiter',
-    // I accept!
     'akceptuję!',
-    // I accept all cookies
     'akceptuję wszystkie cookies',
-    // I confirm
     'potwierdzam',
-    // accept
     'accepteren',
-    // I accept all
     'akceptuję wszystko',
-    // I accept all and use services
     'akceptuję wszystkie i korzystam z usług',
-    // I accept all cookies
     'akceptuję wszystkie pliki cookies',
-    // I accept
     'akceptuje',
-    // accept cookies
     'akceptuj cookies',
-    // accept all cookies
     'принять все файлы cookie',
-    // consent to everything
     'wyraź zgodę na wszystko',
-    // I accept all cookies
     'akceptuję wszystkie pliki cookie',
-    // accept cookies
     'check akceptuję pliki cookies',
-    // accepts cookies
     'akceptuje ciasteczka',
-    // enable all cookies
     'włącz wszystkie ciasteczka',
-    // accept cookies
     'zaakceptuj pliki cookies',
-    // I consent to all
     'wyrażam zgodę na wszystkie',
-    // accept cookies
     'zaakceptuj pliki cookie',
-    // allow all
     'zezwolenie na wszystkie',
-    // yes, I agree to all cookies
     'tak, zgadzam się na wszystkie pliki cookie',
-    // accepting cookies
     'akceptowanie plików cookie',
-    // accept and close
     'akceptuj i zamknij',
-    // Accept and continue
     'akzeptieren und weiter',
-    // yes
     'tak',
-    // Accept
     'принять',
-    // I agree
     'souhlasím',
-    // accept all
     'zaakceptuj wszystkie',
-    // accept all cookies
     'akceptuj wszystkie pliki cookie',
-    // accept all
     'zaakceptuj wszystko',
-    // Accept and continue
     'zaakceptuj i kontynuuj',
-    // accept
     'kabul et',
-    // Accept
     'annehmen',
 ];
 
@@ -1473,78 +1142,42 @@ export const ACKNOWLEDGE_PATTERNS = [
     'confirm my choices',
 
     // Spanish (ES)
-    // understood
     'entendido',
-    // ok
     'dacord',
-    // close
     'cerca',
-    // close
     'cerrar',
-    // continue
     'continuar',
-    // next
     'siguiente',
-    // go to main content
     'ir al contenido principal',
-    // understood!
     'entendido!',
-    // understood!
     '¡entendido!',
-    // I understand
     'lo entiendo',
-    // ok
     'vale',
-    // save preferences
     'guardar preferencias',
-    // save selection
     'guardar selección',
-    // allow selection
     'permitir la selección',
-    // accept selection
     'aceptar selección',
-    // continue
     'seguir',
-    // Confirm
     'confirmar',
 
     // Polish (PL)
-    // accept selection
     /zezwól na wybór/is,
-    // understood
     'rozumiem',
-    // OK
     'w porządku',
-    // close
     'zamknij',
-    // close cookie information
     /zamknij informację o plikach cookies/is,
-    // understood!
     'rozumiem!',
-    // i understand, don't show again
     'rozumiem, nie pokazuj więcej',
-    // OK, I understand
     'ok, rozumiem',
-    // accept selected
     'akceptuj wybrane',
-    // okay!
     'w porządku!',
-    // ok, i understand
     'ok, zrozumiałem',
-    // ok, i understand
     'ok rozumiem',
-    // ok, i understand!
     'ok, rozumiem!',
-    // Accept selected
     'zaakceptuj wybrane',
-    // got it
     'понятно',
-    // confirm
     'potwierdź',
-    // I confirm selected
     'potwierdzam wybrane',
-    // Allow selected
     'zezwól na wybrane',
-    // Consent to selected
     'zgoda na wybrane',
 ];
