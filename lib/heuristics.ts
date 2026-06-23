@@ -54,7 +54,6 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
         .filter(
             (popup) =>
                 popup.regexClassification !== undefined &&
-                popup.regexClassification !== 'none' &&
                 acceptedLevels.includes(popup.regexClassification),
         )
         .sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
