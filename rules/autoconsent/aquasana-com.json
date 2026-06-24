@@ -10,6 +10,7 @@
             "then": [{ "click": "#consent-tracking .btn-all" }],
             "else": [{ "click": "#consent-tracking .affirm.btn" }]
         },
+        { "waitForVisible": "#consent-tracking", "check": "none", "timeout": 3000, "optional": true },
         { "removeClass": "modal-open", "selector": "html", "optional": true },
         { "removeClass": "modal-open", "selector": "body", "optional": true }
     ],
@@ -25,6 +26,7 @@
                 }
             ]
         },
+        { "waitForVisible": "#consent-tracking", "check": "none", "timeout": 3000, "optional": true },
         { "removeClass": "modal-open", "selector": "html", "optional": true },
         { "removeClass": "modal-open", "selector": "body", "optional": true }
     ]
