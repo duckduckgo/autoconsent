@@ -55,3 +55,10 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// CCPA privacy-center variant: opening "Your Privacy Choices" shows an
+// "Opt-Out Request Honored" state and a hidden C0007 opt-out switch.
+generateCMPTests('Onetrust', ['https://order.sweetgreen.com/'], {
+    onlyRegions: ['US'],
+    testOptIn: false,
+});

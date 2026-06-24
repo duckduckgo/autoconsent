@@ -74,7 +74,16 @@ export const snippets = {
         }
         return false;
     },
-    EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_ONETRUST_1: () => {
+        const onlyRequiredGroups =
+            typeof window.OnetrustActiveGroups === 'string' &&
+            window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1;
+        const consentSdk = document.getElementById('onetrust-consent-sdk');
+        const optOutRequestHonored =
+            consentSdk?.textContent?.toLowerCase().includes('opt-out request honored') &&
+            !consentSdk.querySelector('input.category-switch-handler:checked,.js-editor-toggle-state:checked');
+        return onlyRequiredGroups || optOutRequestHonored;
+    },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',

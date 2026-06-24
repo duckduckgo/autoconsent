@@ -25,6 +25,15 @@ export default class Onetrust extends AutoConsentCMPBase {
         return this.elementVisible('#onetrust-banner-sdk,#onetrust-pc-sdk', 'any');
     }
 
+    isOptOutRequestHonored() {
+        const consentSdk = document.getElementById('onetrust-consent-sdk');
+        const text = consentSdk?.textContent?.toLowerCase() || '';
+        return (
+            text.includes('opt-out request honored') &&
+            !this.elementExists('#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked')
+        );
+    }
+
     async optOut() {
         await this.wait(500);
         // 'reject all' shortcuts
@@ -77,8 +86,17 @@ export default class Onetrust extends AutoConsentCMPBase {
         await this.click('#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked', true); // optional step
 
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
+        const optOutRequestHonored = this.isOptOutRequestHonored();
         await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
-        await this.click('.save-preference-btn-handler,.js-consent-save');
+        const saveResult = await this.click('.save-preference-btn-handler,.js-consent-save');
+
+        // Some CCPA privacy centers (e.g. Sweetgreen) already show an honored
+        // opt-out state after toggling. Their save action can recreate the app
+        // document before the banner visibility wait resolves, so report success
+        // once the honored state has been reached and save was clicked.
+        if (optOutRequestHonored) {
+            return saveResult;
+        }
 
         // popup doesn't disappear immediately
         await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
