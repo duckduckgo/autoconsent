@@ -19,7 +19,7 @@
         {
             "waitForThenClick": [
                 "[role=\"dialog\"][aria-labelledby=\"modal-title-cookieDisclaimerModal\"]",
-                "xpath///button[contains(., 'Accept and continue')]"
+                "xpath///button[contains(., 'Accept and continue') or contains(., 'Accept cookies')]"
             ]
         }
     ],
