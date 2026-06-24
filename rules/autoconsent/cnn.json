@@ -1,7 +1,6 @@
 {
     "name": "cnn",
     "vendorUrl": "https://www.cnn.com/",
-    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
@@ -28,15 +27,7 @@
     ],
     "optOut": [
         {
-            "hide": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"] > a[role=\"button\"][href=\"#\"])"
-        },
-        { "setStyle": "", "selector": "body", "optional": true }
-    ],
-    "test": [
-        {
-            "visible": "xpath///body/div[@aria-hidden=\"true\"][div[@role=\"dialog\" and @aria-modal=\"true\"]/h2[normalize-space()=\"Legal Terms and Privacy\"]]",
-            "check": "none"
+            "waitForThenClick": "xpath///body/div[@aria-hidden=\"true\"]/div[@role=\"dialog\" and @aria-modal=\"true\"]/a[@role=\"button\" and normalize-space()=\"Agree\"]"
         }
-    ],
-    "minimumRuleStepVersion": 2
+    ]
 }
