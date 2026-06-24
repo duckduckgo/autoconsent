@@ -7,17 +7,36 @@
         "frame": false,
         "urlPattern": "^https://(www\\.)?cnn\\.com/"
     },
-    "prehideSelectors": ["body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])"],
+    "prehideSelectors": [
+        "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"] > a[role=\"button\"][href=\"#\"])"
+    ],
     "detectCmp": [
         { "exists": "iframe[name=\"_usrConWBD\"]" },
-        { "exists": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])" }
+        {
+            "exists": "xpath///body/div[@aria-hidden=\"true\"][div[@role=\"dialog\" and @aria-modal=\"true\"]/h2[normalize-space()=\"Legal Terms and Privacy\"]]"
+        }
     ],
-    "detectPopup": [{ "visible": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])" }],
-    "optIn": [{ "waitForThenClick": "body > div[aria-hidden=\"true\"] > div[role=\"dialog\"][aria-modal=\"true\"] a[role=\"button\"]" }],
+    "detectPopup": [
+        {
+            "visible": "xpath///body/div[@aria-hidden=\"true\"][div[@role=\"dialog\" and @aria-modal=\"true\"]/h2[normalize-space()=\"Legal Terms and Privacy\"]]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///body/div[@aria-hidden=\"true\"]/div[@role=\"dialog\" and @aria-modal=\"true\"]/a[@role=\"button\" and normalize-space()=\"Agree\"]"
+        }
+    ],
     "optOut": [
-        { "hide": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])" },
+        {
+            "hide": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"] > a[role=\"button\"][href=\"#\"])"
+        },
         { "setStyle": "", "selector": "body", "optional": true }
     ],
-    "test": [{ "visible": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])", "check": "none" }],
+    "test": [
+        {
+            "visible": "xpath///body/div[@aria-hidden=\"true\"][div[@role=\"dialog\" and @aria-modal=\"true\"]/h2[normalize-space()=\"Legal Terms and Privacy\"]]",
+            "check": "none"
+        }
+    ],
     "minimumRuleStepVersion": 2
 }
