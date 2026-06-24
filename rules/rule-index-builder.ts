@@ -2,7 +2,7 @@ import { dynamicCMPs } from '../lib/cmps/all';
 import { AutoConsentCMPRule } from '../lib/rules';
 import AutoConsent from '../lib/web';
 
-export type RuleIndexSection = 'generated' | 'generic' | 'code' | 'consentomatic';
+export type RuleIndexSection = 'generated' | 'generic' | 'code';
 
 // Lightweight popup manifest entry. This is only for listing/toggling rules;
 // execution still uses rules.json, compact-rules.json, code CMPs, and Consent-O-Matic bundles.
@@ -28,19 +28,14 @@ function buildCodeBasedRuleMetadata(): DynamicCMPMetadata[] {
     }));
 }
 
-export function buildRuleIndex(rules: AutoConsentCMPRule[], consentomatic: Record<string, object>): RuleIndexEntry[] {
+export function buildRuleIndex(rules: AutoConsentCMPRule[]): RuleIndexEntry[] {
     const codeBasedRules: RuleIndexEntry[] = buildCodeBasedRuleMetadata().map((rule) => ({
         name: rule.name,
         section: 'code',
     }));
-    const consentomaticRules: RuleIndexEntry[] = Object.keys(consentomatic).map((name) => ({
-        name: `com_${name}`,
-        section: 'consentomatic',
-    }));
 
     return [
         ...codeBasedRules,
-        ...consentomaticRules,
         ...rules.map((rule) => {
             const entry: RuleIndexEntry = {
                 name: rule.name,

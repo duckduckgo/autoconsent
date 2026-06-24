@@ -79,15 +79,6 @@ async function init() {
             status: document.querySelector('#code-rules-status') as HTMLDivElement,
             list: document.querySelector('#code-rules-list') as HTMLDivElement,
         },
-        consentomatic: {
-            details: document.querySelector('#consentomatic-rules-section') as HTMLDetailsElement,
-            count: document.querySelector('#consentomatic-rules-count') as HTMLSpanElement,
-            search: document.querySelector('#consentomatic-rules-search') as HTMLInputElement,
-            enableAll: document.querySelector('#consentomatic-rules-enable-all') as HTMLButtonElement,
-            disableAll: document.querySelector('#consentomatic-rules-disable-all') as HTMLButtonElement,
-            status: document.querySelector('#consentomatic-rules-status') as HTMLDivElement,
-            list: document.querySelector('#consentomatic-rules-list') as HTMLDivElement,
-        },
     };
     let ruleIndexPromise: Promise<RuleIndexEntry[]> | null = null;
     let ruleIndex: RuleIndexEntry[] | null = null;

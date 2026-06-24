@@ -4,7 +4,6 @@ import { AutoConsentCMPRule } from '../lib/rules';
 import { Config, RuleBundle } from '../lib/types';
 import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { extensionDefaultConfig, initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
-import { consentomatic } from '../rules/consentomatic.json';
 import { filterCompactRules } from '../lib/encoding';
 
 /**
@@ -96,12 +95,10 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
                 const fullRules: AutoConsentCMPRule[] = (await storageGet('fullRules')) || [];
                 rules = {
                     autoconsent: fullRules,
-                    consentomatic,
                 };
             } else {
                 rules = {
                     autoconsent: [],
-                    consentomatic,
                     compact: filterCompactRules(await storageGet('rules'), { url: senderUrl, mainFrame: frameId === 0 }),
                 };
             }
