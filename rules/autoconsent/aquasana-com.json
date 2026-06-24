@@ -6,7 +6,9 @@
     "detectPopup": [{ "exists": "#consent-tracking" }],
     "optIn": [
         {
-            "waitForThenClick": "#consent-tracking .affirm.btn"
+            "if": { "exists": "#consent-tracking .btn-all" },
+            "then": [{ "click": "#consent-tracking .btn-all" }],
+            "else": [{ "click": "#consent-tracking .affirm.btn" }]
         },
         { "removeClass": "modal-open", "selector": "html", "optional": true },
         { "removeClass": "modal-open", "selector": "body", "optional": true }
@@ -15,7 +17,13 @@
         {
             "if": { "exists": "#consent-tracking .decline.btn" },
             "then": [{ "click": "#consent-tracking .decline.btn" }],
-            "else": [{ "hide": "#consent-tracking" }]
+            "else": [
+                {
+                    "if": { "exists": "#consent-tracking .btn-necessary" },
+                    "then": [{ "click": "#consent-tracking .btn-necessary" }],
+                    "else": [{ "hide": "#consent-tracking" }]
+                }
+            ]
         },
         { "removeClass": "modal-open", "selector": "html", "optional": true },
         { "removeClass": "modal-open", "selector": "body", "optional": true }
