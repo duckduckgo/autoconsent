@@ -12,7 +12,9 @@
         },
         { "waitForVisible": "#consent-tracking", "check": "none", "timeout": 3000, "optional": true },
         { "removeClass": "modal-open", "selector": "html", "optional": true },
-        { "removeClass": "modal-open", "selector": "body", "optional": true }
+        { "removeClass": "modal-open", "selector": "body", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "html", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }
     ],
     "optOut": [
         {
@@ -28,6 +30,8 @@
         },
         { "waitForVisible": "#consent-tracking", "check": "none", "timeout": 3000, "optional": true },
         { "removeClass": "modal-open", "selector": "html", "optional": true },
-        { "removeClass": "modal-open", "selector": "body", "optional": true }
+        { "removeClass": "modal-open", "selector": "body", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "html", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }
     ]
 }
