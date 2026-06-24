@@ -1,0 +1,39 @@
+{
+    "name": "schroders",
+    "vendorUrl": "https://www.schroders.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?(cazenovecapital|schroders)\\.com/"
+    },
+    "prehideSelectors": ["[role=\"dialog\"][aria-labelledby=\"modal-title-cookieDisclaimerModal\"]"],
+    "detectCmp": [
+        {
+            "exists": "[role=\"dialog\"][aria-labelledby=\"modal-title-cookieDisclaimerModal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=\"dialog\"][aria-labelledby=\"modal-title-cookieDisclaimerModal\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "[role=\"dialog\"][aria-labelledby=\"modal-title-cookieDisclaimerModal\"]",
+                "xpath///button[contains(., 'Accept and continue')]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "[role=\"dialog\"][aria-labelledby=\"modal-title-cookieDisclaimerModal\"]",
+                "xpath///button[contains(., 'Reject all')]"
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent%3Afalse"
+        }
+    ]
+}
