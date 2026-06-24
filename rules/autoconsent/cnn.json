@@ -1,0 +1,23 @@
+{
+    "name": "cnn",
+    "vendorUrl": "https://www.cnn.com/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?cnn\\.com/"
+    },
+    "prehideSelectors": ["body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])"],
+    "detectCmp": [
+        { "exists": "iframe[name=\"_usrConWBD\"]" },
+        { "exists": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])" }
+    ],
+    "detectPopup": [{ "visible": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])" }],
+    "optIn": [{ "waitForThenClick": "body > div[aria-hidden=\"true\"] > div[role=\"dialog\"][aria-modal=\"true\"] a[role=\"button\"]" }],
+    "optOut": [
+        { "hide": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])" },
+        { "setStyle": "", "selector": "body", "optional": true }
+    ],
+    "test": [{ "visible": "body > div[aria-hidden=\"true\"]:has(> div[role=\"dialog\"][aria-modal=\"true\"])", "check": "none" }],
+    "minimumRuleStepVersion": 2
+}
