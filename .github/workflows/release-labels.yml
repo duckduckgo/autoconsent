@@ -16,6 +16,10 @@ permissions:
     issues: write
     pull-requests: write
 
+concurrency:
+    group: release-labels-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
 jobs:
     release-labels:
         runs-on: ubuntu-latest
@@ -27,7 +31,6 @@ jobs:
                   ${{
                     github.event.action == 'opened' ||
                     github.event.action == 'reopened' ||
-                    github.event.action == 'synchronize' ||
                     github.event.action == 'ready_for_review'
                   }}
               uses: actions/labeler@v6
