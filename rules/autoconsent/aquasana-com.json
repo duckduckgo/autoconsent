@@ -1,18 +1,23 @@
 {
     "name": "aquasana.com",
+    "minimumRuleStepVersion": 2,
     "prehideSelectors": ["#consent-tracking"],
     "detectCmp": [{ "exists": "#consent-tracking" }],
     "detectPopup": [{ "exists": "#consent-tracking" }],
     "optIn": [
         {
             "waitForThenClick": "#consent-tracking .affirm.btn"
-        }
+        },
+        { "removeClass": "modal-open", "selector": "html", "optional": true },
+        { "removeClass": "modal-open", "selector": "body", "optional": true }
     ],
     "optOut": [
         {
             "if": { "exists": "#consent-tracking .decline.btn" },
             "then": [{ "click": "#consent-tracking .decline.btn" }],
             "else": [{ "hide": "#consent-tracking" }]
-        }
+        },
+        { "removeClass": "modal-open", "selector": "html", "optional": true },
+        { "removeClass": "modal-open", "selector": "body", "optional": true }
     ]
 }
