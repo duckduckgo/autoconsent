@@ -1,8 +1,20 @@
 const fs = require('fs');
 const https = require('https');
 
-const RELEASE_IMPACT_LABELS = ['major', 'minor', 'patch', 'skip-release'];
-const CATEGORY_LABELS = ['rules', 'bug', 'enhancement', 'performance', 'dependencies', 'ci', 'ai', 'documentation', 'tests', 'internal'];
+const RELEASE_IMPACT_LABELS = ['major', 'minor', 'patch'];
+const CATEGORY_LABELS = [
+    'rules',
+    'bug',
+    'enhancement',
+    'performance',
+    'dependencies',
+    'ci',
+    'ai',
+    'documentation',
+    'tests',
+    'internal',
+    'other',
+];
 const COMMENT_MARKER = '<!-- autoconsent-release-label-check -->';
 
 function parseArgs(argv) {
@@ -80,12 +92,10 @@ function validateLabels(labels) {
         errors.push(`Keep exactly one release impact label; found ${releaseImpactLabels.join(', ')}.`);
     }
 
-    if (!releaseImpactLabels.includes('skip-release')) {
-        if (categoryLabels.length === 0) {
-            errors.push(`Add exactly one release-note category label: ${CATEGORY_LABELS.join(', ')}.`);
-        } else if (categoryLabels.length > 1) {
-            errors.push(`Keep exactly one release-note category label; found ${categoryLabels.join(', ')}.`);
-        }
+    if (categoryLabels.length === 0) {
+        errors.push(`Add exactly one release-note category label: ${CATEGORY_LABELS.join(', ')}.`);
+    } else if (categoryLabels.length > 1) {
+        errors.push(`Keep exactly one release-note category label; found ${categoryLabels.join(', ')}.`);
     }
 
     return {
@@ -125,7 +135,7 @@ ${result.errors.map((error) => `- ${error}`).join('\n')}
 
 Required labels:
 - One release impact label: ${formatLabels(RELEASE_IMPACT_LABELS)}
-- One release-note category label unless using \`skip-release\`: ${formatLabels(CATEGORY_LABELS)}
+- One release-note category label: ${formatLabels(CATEGORY_LABELS)}
 
 See [docs/release-notes.md](https://github.com/duckduckgo/autoconsent/blob/main/docs/release-notes.md) for examples.`;
 }

@@ -6,7 +6,8 @@ appear in release notes needs two release-related decisions before merge:
 1. Exactly one release impact label.
 2. Exactly one primary release-note category label.
 
-Use `skip-release` only when a PR should not create or appear in a release.
+Use `other` as the category for changes that should appear in release notes but
+do not fit another category.
 
 ## Release impact labels
 
@@ -17,11 +18,10 @@ Choose exactly one:
 | `major` | The change is breaking for consumers or downstream app integration. |
 | `minor` | The change adds new behavior, rule coverage, or capabilities. |
 | `patch` | The change fixes existing behavior or makes a non-breaking maintenance update. |
-| `skip-release` | The change should not appear in release notes or trigger a release. |
 
 ## Release-note category labels
 
-Choose exactly one category unless the PR has `skip-release`:
+Choose exactly one category:
 
 | Label | Use when |
 | --- | --- |
@@ -35,6 +35,7 @@ Choose exactly one category unless the PR has `skip-release`:
 | `documentation` | Documentation-only changes. |
 | `tests` | Changing test harnesses, fixtures, or test infrastructure. Do not use this for ordinary tests added with feature or rule work. |
 | `internal` | Internal-only maintenance that does not fit the categories above. |
+| `other` | Changes that should appear in release notes but do not fit another category. |
 
 ## Common examples
 
@@ -47,8 +48,9 @@ Choose exactly one category unless the PR has `skip-release`:
 | CI workflow or release script update | `patch`, `ci` |
 | Dependency update | `patch`, `dependencies` |
 | Agent skill or instruction update | `patch`, `ai` |
-| Documentation-only update | `patch` or `skip-release`, `documentation` |
+| Documentation-only update | `patch`, `documentation` |
 | Test runner, fixture, or harness update | `patch`, `tests` |
+| Miscellaneous repo maintenance | `patch`, `other` |
 
 If a PR spans multiple categories, choose the category that best describes the
 user-visible release note. Mention secondary details in the PR description.

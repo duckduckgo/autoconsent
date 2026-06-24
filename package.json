@@ -100,12 +100,6 @@
         "color": "#870048"
       },
       {
-        "name": "skip-release",
-        "description": "Preserve the current version when merged",
-        "releaseType": "skip",
-        "color": "#bf5416"
-      },
-      {
         "name": "release",
         "description": "Create a release when this PR is merged",
         "releaseType": "release",
@@ -180,6 +174,13 @@
         "description": "Changes only affect internal implementation details",
         "releaseType": "none",
         "color": "#696969"
+      },
+      {
+        "name": "other",
+        "changelogTitle": "Other",
+        "description": "Changes that should appear in release notes but do not fit another category",
+        "releaseType": "none",
+        "color": "#ededed"
       }
     ],
     "plugins": [
