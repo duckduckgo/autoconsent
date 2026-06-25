@@ -903,6 +903,7 @@ export const NEVER_MATCH_PATTERNS = [
     /^accede gratis con cookies publicitarias$/,
     /pagar/,
     /suscríbete/,
+    /sin cookies.{0,10}euro/,
 
     // Polish (PL)
     /subskrybuj/,
