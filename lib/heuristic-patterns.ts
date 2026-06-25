@@ -1203,14 +1203,13 @@ export const ACKNOWLEDGE_PATTERNS = [
     'confirm my choices',
 
     // Spanish (ES)
-    /^.?( lo)?entendido.?$/s,
+    /^.?( lo)?(entendido|entiendo).?$/s,
     'aceptar seleccionadas',
     'aceptar selección',
     'cerrar',
     'confirmar',
     'continuar',
     'dacord',
-    'entendido',
     'guardar configuración',
     'guardar preferencias',
     'guardar selección',
