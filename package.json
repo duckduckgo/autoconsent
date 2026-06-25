@@ -37,13 +37,14 @@
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
     "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts",
-    "check-pr-release-labels": "node scripts/check-pr-release-labels.js"
+    "check-pr-release-labels": "ts-node scripts/check-pr-release-labels.ts"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
   "devDependencies": {
     "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#v0.1.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@octokit/rest": "^22.0.1",
     "@playwright/test": "^1.17.1",
     "@types/chai": "^5.0.0",
     "@types/chrome": "^0.1.0",

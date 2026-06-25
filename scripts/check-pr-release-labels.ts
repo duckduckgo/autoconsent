@@ -1,7 +1,7 @@
-const fs = require('fs');
-const https = require('https');
+import fs from 'fs';
+import { Octokit } from '@octokit/rest';
 
-const RELEASE_IMPACT_LABELS = ['major', 'minor', 'patch'];
+const RELEASE_IMPACT_LABELS = ['major', 'minor', 'patch'] as const;
 const CATEGORY_LABELS = [
     'rules',
     'bug',
@@ -14,11 +14,44 @@ const CATEGORY_LABELS = [
     'tests',
     'internal',
     'other',
-];
+] as const;
 const COMMENT_MARKER = '<!-- autoconsent-release-label-check -->';
 
-function parseArgs(argv) {
-    const args = {};
+type LabelName = (typeof RELEASE_IMPACT_LABELS)[number] | (typeof CATEGORY_LABELS)[number];
+
+interface Args {
+    event?: string;
+    fetchCurrentLabels?: boolean;
+    jsonOutput?: string;
+    labels?: string[];
+}
+
+interface PullRequestLabel {
+    name: string;
+}
+
+interface PullRequest {
+    labels?: Array<string | PullRequestLabel>;
+    number: number;
+}
+
+interface PullRequestEvent {
+    pull_request?: PullRequest;
+    labels?: Array<string | PullRequestLabel>;
+    number?: number;
+}
+
+interface ValidationResult {
+    ok: boolean;
+    labels: string[];
+    releaseImpactLabels: string[];
+    categoryLabels: string[];
+    errors: string[];
+    comment?: string;
+}
+
+function parseArgs(argv: string[]): Args {
+    const args: Args = {};
 
     for (let i = 2; i < argv.length; i += 1) {
         const arg = argv[i];
@@ -42,31 +75,31 @@ function parseArgs(argv) {
     return args;
 }
 
-function readJson(filePath) {
+function readJson(filePath: string): unknown {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-function readEvent(eventPath) {
+function readEvent(eventPath?: string): PullRequestEvent {
     if (!eventPath) {
         return {};
     }
 
-    return readJson(eventPath);
+    return readJson(eventPath) as PullRequestEvent;
 }
 
-function getPullRequest(event) {
+function getPullRequest(event: PullRequestEvent): PullRequest | undefined {
     if (event.pull_request) {
         return event.pull_request;
     }
 
     if (event.number && event.labels) {
-        return event;
+        return event as PullRequest;
     }
 
     return undefined;
 }
 
-function getLabelsFromPullRequest(pullRequest) {
+function getLabelsFromPullRequest(pullRequest: Pick<PullRequest, 'labels'>): string[] {
     return (pullRequest.labels || []).map((label) => {
         if (typeof label === 'string') {
             return label;
@@ -76,15 +109,19 @@ function getLabelsFromPullRequest(pullRequest) {
     });
 }
 
-function uniqueLabels(labels) {
+function uniqueLabels(labels: string[]): string[] {
     return [...new Set(labels)].sort((a, b) => a.localeCompare(b));
 }
 
-function validateLabels(labels) {
+function isKnownLabel(labelSet: readonly LabelName[], label: string): boolean {
+    return labelSet.some((knownLabel) => knownLabel === label);
+}
+
+export function validateLabels(labels: string[]): ValidationResult {
     const currentLabels = uniqueLabels(labels);
-    const releaseImpactLabels = currentLabels.filter((label) => RELEASE_IMPACT_LABELS.includes(label));
-    const categoryLabels = currentLabels.filter((label) => CATEGORY_LABELS.includes(label));
-    const errors = [];
+    const releaseImpactLabels = currentLabels.filter((label) => isKnownLabel(RELEASE_IMPACT_LABELS, label));
+    const categoryLabels = currentLabels.filter((label) => isKnownLabel(CATEGORY_LABELS, label));
+    const errors: string[] = [];
 
     if (releaseImpactLabels.length === 0) {
         errors.push(`Add exactly one release impact label: ${RELEASE_IMPACT_LABELS.join(', ')}.`);
@@ -107,7 +144,7 @@ function validateLabels(labels) {
     };
 }
 
-function formatLabels(labels) {
+function formatLabels(labels: readonly string[]): string {
     if (labels.length === 0) {
         return '_none_';
     }
@@ -115,7 +152,7 @@ function formatLabels(labels) {
     return labels.map((label) => `\`${label}\``).join(', ');
 }
 
-function formatComment(result) {
+function formatComment(result: ValidationResult): string {
     if (result.ok) {
         return `${COMMENT_MARKER}
 ### Release label check resolved
@@ -140,56 +177,40 @@ Required labels:
 See [docs/release-notes.md](https://github.com/duckduckgo/autoconsent/blob/main/docs/release-notes.md) for examples.`;
 }
 
-function requestJson(url, token) {
-    return new Promise((resolve, reject) => {
-        const headers = {
-            Accept: 'application/vnd.github+json',
-            'User-Agent': 'autoconsent-release-label-check',
-            'X-GitHub-Api-Version': '2022-11-28',
-        };
+function getRepositoryParts(repository: string): { owner: string; repo: string } {
+    const [owner, repo] = repository.split('/');
 
-        if (token) {
-            headers.Authorization = `Bearer ${token}`;
-        }
+    if (!owner || !repo) {
+        throw new Error(`Invalid GITHUB_REPOSITORY value: ${repository}`);
+    }
 
-        https
-            .get(url, { headers }, (response) => {
-                let body = '';
-
-                response.setEncoding('utf8');
-                response.on('data', (chunk) => {
-                    body += chunk;
-                });
-                response.on('end', () => {
-                    if (response.statusCode < 200 || response.statusCode >= 300) {
-                        reject(new Error(`GitHub API request failed: ${response.statusCode} ${body}`));
-                        return;
-                    }
-
-                    resolve(JSON.parse(body));
-                });
-            })
-            .on('error', reject);
-    });
+    return { owner, repo };
 }
 
-async function fetchCurrentLabels(event) {
+async function fetchCurrentLabels(event: PullRequestEvent): Promise<string[]> {
     const pullRequest = getPullRequest(event);
     const repository = process.env.GITHUB_REPOSITORY;
-    const token = process.env.GITHUB_TOKEN;
 
     if (!pullRequest || !repository) {
         throw new Error('Cannot fetch current labels without a pull request event and repository.');
     }
 
-    const apiUrl = process.env.GITHUB_API_URL || 'https://api.github.com';
-    const url = `${apiUrl}/repos/${repository}/issues/${pullRequest.number}/labels?per_page=100`;
-    const labels = await requestJson(url, token);
+    const { owner, repo } = getRepositoryParts(repository);
+    const octokit = new Octokit({
+        auth: process.env.GITHUB_TOKEN,
+        baseUrl: process.env.GITHUB_API_URL || 'https://api.github.com',
+    });
+    const labels = await octokit.paginate(octokit.rest.issues.listLabelsOnIssue, {
+        owner,
+        repo,
+        issue_number: pullRequest.number,
+        per_page: 100,
+    });
 
-    return getLabelsFromPullRequest({ labels });
+    return labels.map((label) => label.name);
 }
 
-async function main() {
+async function main(): Promise<void> {
     const args = parseArgs(process.argv);
     const eventPath = args.event || process.env.GITHUB_EVENT_PATH;
     const event = readEvent(eventPath);
@@ -208,7 +229,7 @@ async function main() {
         throw new Error('No pull request labels found to validate.');
     }
 
-    const result = validateLabels(labels);
+    const result: ValidationResult = validateLabels(labels);
     result.comment = formatComment(result);
 
     if (args.jsonOutput) {
@@ -225,14 +246,10 @@ async function main() {
 }
 
 if (require.main === module) {
-    main().catch((error) => {
-        console.error(error.message);
+    main().catch((error: unknown) => {
+        console.error(error instanceof Error ? error.message : error);
         process.exit(1);
     });
 }
 
-module.exports = {
-    CATEGORY_LABELS,
-    RELEASE_IMPACT_LABELS,
-    validateLabels,
-};
+export { CATEGORY_LABELS, RELEASE_IMPACT_LABELS };
