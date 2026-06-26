@@ -1,3 +1,16 @@
+# v16.1.0 (Fri Jun 26 2026)
+
+#### CI / Release Automation
+
+- Revamp release note labeling [#1410](https://github.com/duckduckgo/autoconsent/pull/1410) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.0.0 (Tue Jun 23 2026)
 
 #### 💥 Breaking Change
