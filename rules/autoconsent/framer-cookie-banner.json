@@ -1,0 +1,41 @@
+{
+    "name": "framer-cookie-banner",
+    "vendorUrl": "https://www.framer.com/academy/lessons/cookie-banner-component",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".--framer-cookie-banner-container"],
+    "detectCmp": [
+        {
+            "exists": ".--framer-cookie-banner-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".--framer-cookie-banner-container"
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "#__framer-cookie-component-button-accept" },
+            "then": [{ "waitForThenClick": "#__framer-cookie-component-button-accept" }],
+            "else": [{ "waitForThenClick": "#__framer-cookie-component-button-dismiss" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#__framer-cookie-component-button-reject" },
+            "then": [{ "waitForThenClick": "#__framer-cookie-component-button-reject" }],
+            "else": [{ "waitForThenClick": "#__framer-cookie-component-button-dismiss" }]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".--framer-cookie-banner-container",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
