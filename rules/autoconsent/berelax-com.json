@@ -1,0 +1,15 @@
+{
+    "name": "berelax-com",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?berelax\\.com"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["section.cookie:has(.cookie__title)"],
+    "detectCmp": [{ "exists": "section.cookie .cookie__title" }],
+    "detectPopup": [{ "visible": "section.cookie.show" }],
+    "optIn": [{ "waitForThenClick": "section.cookie.show .button" }],
+    "optOut": [{ "hide": "section.cookie" }],
+    "test": [{ "visible": "section.cookie.show", "check": "none" }]
+}
