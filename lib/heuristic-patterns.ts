@@ -91,7 +91,7 @@ export const DETECT_PATTERNS = [
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/i,
-    /(usamos|utilizar?|utilizamos|usiamo)( (tanto|las))?.{0,20}cookie/gi,
+    /(usamos|utilizar?|utilizamos)( (tanto|las))?.{0,20}cookie/gi,
     /\b(hacemos|hace) uso de cookies\b/i,
     /\busa cookies de google\b/i,
     /acepta.{0,80} uso de cookies/i,
@@ -997,7 +997,6 @@ export const SETTINGS_PATTERNS = [
     'configurarlas',
     'detalles',
     'editar la configuración de cookies',
-    'gerenciar cookies',
     'gestiona tus preferencias',
     'gestionar configuración de privacidad',
     /^gestionar ?(las?|mis)? ?(configuración|preferencias)?(( de)? cookies?)?$/,
@@ -1022,10 +1021,8 @@ export const SETTINGS_PATTERNS = [
     'preferencias de privacidad',
     'preferencias',
     'quiero configurarlas',
-    /^quiero elegir\.\.\.$/,
     'saber más y personalizar',
     'seleccionar fines individuales',
-    'tune configurar',
 
     // Catalan (CA)
     'configura-les',
@@ -1037,6 +1034,9 @@ export const SETTINGS_PATTERNS = [
 
     // Basque (EU)
     /^(konfigurazioa|konfiguratu)$/,
+
+    // Portuguese (PT)
+    'gerenciar cookies',
 
     // French (FR)
     'paramétrage des cookies',
@@ -1138,14 +1138,14 @@ export const ACCEPT_PATTERNS = [
     /^alle (cookies )?akzeptieren$/is,
 
     // Spanish (ES)
-    /^(acc?eptar?|permitir) tod(o|as)$/,
-    /^(accetta|aceptar las cookies|accepta)$/,
-    /^acc?ept(ar|o)( cookies)?$/,
+    /^(aceptar?|permitir) tod(o|as)$/,
+    /^acept(ar|o)( cookies)?$/,
     /^acept(o|ar) todas las cookies$/,
     'acepta cookies',
     'acepta',
     'aceptar cookies opcionales',
     'aceptar gratis',
+    'aceptar las cookies',
     'aceptar todas cookies',
     'aceptar todas y cerrar',
     'aceptar todas y continuar',
@@ -1164,12 +1164,14 @@ export const ACCEPT_PATTERNS = [
     'permitir todas las cookies',
     'permitir',
     'permitirlas todas',
-    'sí, acepto todas las cookies',
-    'sí, acepto',
-    'sí, estoy de acuerdo',
+    /^s[íi], acepto todas las cookies$/,
+    /^s[íi], acepto$/,
+    /^s[íi], estoy de acuerdo$/,
     'x aceptar y cerrar',
 
     // Catalan (CA)
+    /^accept(ar|o)( cookies)?$/,
+    'accepta',
     'accepta totes les cookies',
     'accepta-ho tot',
     'accepta-les totes',
