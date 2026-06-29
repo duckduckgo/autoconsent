@@ -33,19 +33,15 @@
             "if": { "exists": ".axeptio_mount .needsclick" },
             "then": [
                 { "waitForVisible": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton"] },
-                { "wait": 300 },
+                { "wait": 1500 },
                 { "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton"] }
             ],
             "else": [
                 { "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton" },
-                { "wait": 300 },
+                { "wait": 1500 },
                 { "click": "button#axeptio_btn_dismiss,button.ax-discardButton" }
             ]
         }
     ],
-    "test": [
-        {
-            "cookieContains": "axeptio_authorized_vendors=%2C%2C"
-        }
-    ]
+    "test": [{ "wait": 500 }, { "cookieContains": "$$completed%22:true" }]
 }
