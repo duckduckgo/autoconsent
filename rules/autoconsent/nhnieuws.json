@@ -7,26 +7,23 @@
     "prehideSelectors": ["[class*=ConsentManager]"],
     "detectCmp": [
         {
-            "exists": "[class*=ConsentManager]"
+            "exists": "[class*=ConsentManager_cookieBar]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[class*=ConsentManager]"
+            "visible": "[class*=ConsentManager_cookieBar]",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[class*=ConsentManager_continue]"
+            "waitForThenClick": "xpath///button[contains(@class, \"ConsentManager_cookieBarButton\") and contains(., \"accepteren\")]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[class*=ConsentManager_row] input[type=radio][id$=no]",
-            "all": true
-        },
-        {
-            "waitForThenClick": "[class*=ConsentManager_continue]"
+            "waitForThenClick": "xpath///button[contains(@class, \"ConsentManager_cookieBarButton\") and contains(., \"weigeren\")]"
         }
     ],
     "test": [
