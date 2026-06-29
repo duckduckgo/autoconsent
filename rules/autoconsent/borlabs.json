@@ -22,18 +22,18 @@
             "then": [{ "click": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]" }],
             "else": [
                 {
-                    "click": "a[data-cookie-individual]"
+                    "waitForThenClick": "a[data-cookie-individual],#CookieBoxPreferencesButton,.brlbs-cmpnt-btn-preferences"
                 },
                 {
-                    "waitForVisible": ".cookie-preference"
+                    "waitForVisible": ".cookie-preference,.brlbs-cmpnt-dialog-details"
                 },
                 {
-                    "click": "input[data-borlabs-cookie-checkbox]:checked",
+                    "click": "input[data-borlabs-cookie-checkbox]:checked,input.brlbs-cmpnt-checkbox:checked:not(:disabled)",
                     "all": true,
                     "optional": true
                 },
                 {
-                    "click": "#CookiePrefSave"
+                    "waitForThenClick": "#CookiePrefSave,#CookieBoxSaveButton,.brlbs-btn-save"
                 },
                 {
                     "wait": 500
