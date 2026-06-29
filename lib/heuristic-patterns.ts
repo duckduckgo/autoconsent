@@ -159,6 +159,9 @@ export const DETECT_PATTERNS = [
 
     // Russian (RU)
     /мы используем файлы cookie и аналогичные технологии/i,
+
+    // Italian (IT)
+    /usiamo.{0,20}cookie/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -1116,6 +1119,9 @@ export const SETTINGS_PATTERNS = [
     // Russian (RU)
     'настроить файлы cookie',
     'настройки',
+
+    // Italian (IT)
+    'personalizza cookie',
 ];
 
 export const ACCEPT_PATTERNS = [
@@ -1258,6 +1264,10 @@ export const ACCEPT_PATTERNS = [
 
     // Turkish (TR)
     'kabul et',
+
+    // Italian (IT)
+    'accetta',
+    'accetta tutti i cookie',
 ];
 
 export const ACKNOWLEDGE_PATTERNS = [
