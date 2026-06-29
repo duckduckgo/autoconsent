@@ -1,0 +1,38 @@
+{
+    "name": "vensas-de",
+    "_metadata": {
+        "vendorUrl": "https://vensas.de/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vensas\\.de/"
+    },
+    "prehideSelectors": ["div.fixed.bottom-0.left-0.right-0.z-50.brand-divider"],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.bottom-0.left-0.right-0.z-50.brand-divider button.brand-btn-secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.bottom-0.left-0.right-0.z-50.brand-divider button.brand-btn-secondary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.bottom-0.left-0.right-0.z-50.brand-divider button.brand-btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.fixed.bottom-0.left-0.right-0.z-50.brand-divider button.brand-btn-secondary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "mtm_consent_removed="
+        }
+    ]
+}
