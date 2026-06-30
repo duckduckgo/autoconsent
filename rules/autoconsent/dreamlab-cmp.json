@@ -1,0 +1,13 @@
+{
+    "name": "dreamlab-cmp",
+    "vendorUrl": "https://cmp.dreamlab.pl/",
+    "prehideSelectors": [".cmp-popup_popup"],
+    "detectCmp": [{ "exists": ".cmp-app_gdpr" }],
+    "detectPopup": [{ "visible": ".cmp-popup_popup" }],
+    "optIn": [{ "waitForThenClick": ".cmp-popup_popup .cmp-intro_acceptAll" }],
+    "optOut": [
+        { "waitForThenClick": ".cmp-popup_popup .cmp-intro_rejectAll" },
+        { "waitForThenClick": ".cmp-popup_popup .cmp-details_rejectAll" }
+    ],
+    "test": [{ "cookieContains": "lpubconsent=" }]
+}

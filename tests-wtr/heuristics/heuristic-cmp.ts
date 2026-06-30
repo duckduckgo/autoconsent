@@ -1,15 +1,14 @@
 import { expect } from '@esm-bundle/chai';
 import Autoconsent from '../../lib/web';
 import { AutoConsentHeuristicCMP } from '../../lib/cmps/base';
-import { PopupHandlingMode, PopupHandlingModes } from '../../lib/types';
+import { HeuristicLevel } from '../../lib/types';
 
 // must be run from heuristic-cmp.html
 describe('AutoConsentHeuristicCMP', () => {
-    function createAutoconsent(heuristicMode: PopupHandlingMode) {
+    function createAutoconsent(heuristicMode: HeuristicLevel) {
         return new Autoconsent(() => Promise.resolve(), {
             enabled: false,
             autoAction: null,
-            enableHeuristicAction: true,
             heuristicMode,
         });
     }
@@ -30,20 +29,20 @@ describe('AutoConsentHeuristicCMP', () => {
     });
 
     describe('detectCmp', () => {
-        it('detects reject popup as HEURISTIC-TIER0', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+        it('detects reject popup as HEURISTIC-REJECT', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-reject');
 
             const detected = await cmp.detectCmp();
 
             expect(detected).to.be.true;
-            expect(cmp.name).to.equal('HEURISTIC-TIER0');
+            expect(cmp.name).to.equal('HEURISTIC-REJECT');
         });
 
         it('detects acknowledge-only popup as HEURISTIC-TIER1', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-acknowledge-only');
 
             const detected = await cmp.detectCmp();
@@ -53,8 +52,8 @@ describe('AutoConsentHeuristicCMP', () => {
         });
 
         it('detects accept-only popup as HEURISTIC-TIER2', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-accept-only');
 
             const detected = await cmp.detectCmp();
@@ -64,8 +63,8 @@ describe('AutoConsentHeuristicCMP', () => {
         });
 
         it('does not detect popup with accept and settings buttons', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-accept-settings');
 
             const detected = await cmp.detectCmp();
@@ -73,33 +72,33 @@ describe('AutoConsentHeuristicCMP', () => {
             expect(detected).to.be.false;
         });
 
-        it('detects popup with multiple reject buttons as HEURISTIC-TIER0', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+        it('detects popup with multiple reject buttons as HEURISTIC-REJECT', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-multiple-reject');
 
             const detected = await cmp.detectCmp();
 
             expect(detected).to.be.true;
-            expect(cmp.name).to.equal('HEURISTIC-TIER0');
+            expect(cmp.name).to.equal('HEURISTIC-REJECT');
         });
 
         it('prefers reject popup when reject and accept popups are visible', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-tier-preference-reject', 'popup-tier-preference-accept');
 
             const detected = await cmp.detectCmp();
 
             expect(detected).to.be.true;
-            expect(cmp.name).to.equal('HEURISTIC-TIER0');
+            expect(cmp.name).to.equal('HEURISTIC-REJECT');
         });
     });
 
     describe('heuristicMode cap', () => {
         it('does not detect accept-only popup when mode is Reject', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Reject);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Reject);
+            const autoconsent = createAutoconsent('reject');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'reject');
             showPopup('popup-accept-only');
 
             const detected = await cmp.detectCmp();
@@ -108,8 +107,8 @@ describe('AutoConsentHeuristicCMP', () => {
         });
 
         it('detects acknowledge-only popup when mode is Tier1', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier1);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier1);
+            const autoconsent = createAutoconsent('tier1');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier1');
             showPopup('popup-acknowledge-only');
 
             const detected = await cmp.detectCmp();
@@ -119,8 +118,8 @@ describe('AutoConsentHeuristicCMP', () => {
         });
 
         it('does not detect accept-only popup when mode is Tier1', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier1);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier1);
+            const autoconsent = createAutoconsent('tier1');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier1');
             showPopup('popup-accept-only');
 
             const detected = await cmp.detectCmp();
@@ -130,9 +129,9 @@ describe('AutoConsentHeuristicCMP', () => {
     });
 
     describe('optOut', () => {
-        it('clicks the reject button for TIER0 popup', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+        it('clicks the reject button for REJECT popup', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-reject');
             await cmp.detectCmp();
 
@@ -146,8 +145,8 @@ describe('AutoConsentHeuristicCMP', () => {
         });
 
         it('clicks the acknowledge button for TIER1 popup', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-acknowledge-only');
             await cmp.detectCmp();
 
@@ -161,8 +160,8 @@ describe('AutoConsentHeuristicCMP', () => {
         });
 
         it('clicks the accept button for TIER2 popup', async () => {
-            const autoconsent = createAutoconsent(PopupHandlingModes.Tier2);
-            const cmp = new AutoConsentHeuristicCMP(autoconsent, PopupHandlingModes.Tier2);
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-accept-only');
             await cmp.detectCmp();
 

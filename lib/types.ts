@@ -1,5 +1,4 @@
 import { ContentScriptMessage } from './messages';
-import { ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from './rules';
 import { CompactCMPRuleset } from './encoding';
 
@@ -47,7 +46,6 @@ export interface DomActionsProvider {
 export type RuleBundle = {
     autoconsent: AutoConsentCMPRule[];
     compact?: CompactCMPRuleset;
-    consentomatic?: { [name: string]: ConsentOMaticConfig };
 };
 
 export type AutoAction = 'optOut' | 'optIn' | null;
@@ -62,9 +60,7 @@ export type Config = {
     detectRetries: number;
     isMainWorld: boolean;
     prehideTimeout: number;
-    enableFilterList: boolean;
     enableHeuristicDetection: boolean;
-    enableHeuristicAction: boolean;
     enablePopupMutationObserver: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
@@ -78,7 +74,7 @@ export type Config = {
     };
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
-    heuristicMode: PopupHandlingMode; // controls the behavior of the heuristic popup detection. Has no effect if enableHeuristicDetection is false.
+    heuristicMode: HeuristicLevel; // controls the behavior of the heuristic popup detection.
 };
 
 export type LifecycleState =
@@ -87,7 +83,6 @@ export type LifecycleState =
     | 'waitingForInitResponse'
     | 'started'
     | 'nothingDetected'
-    | 'cosmeticFiltersDetected'
     | 'cmpDetected'
     | 'openPopupDetected'
     | 'runningOptOut'
@@ -99,8 +94,6 @@ export type LifecycleState =
     | 'done';
 
 export type ConsentState = {
-    cosmeticFiltersOn: boolean; // true if cosmetic filter rules are currently applied.
-    filterListReported: boolean; // true if the cosmetic filter list has been reported to the user.
     lifecycle: LifecycleState; // What point in the autoconsent lifecycle this script is at.
     prehideOn: boolean; // If the script is currently hiding preHide elements.
     findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.
@@ -127,20 +120,15 @@ export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    regexClassification?: PopupHandlingMode;
+    regexClassification?: PopupClassification;
 }
 
 /**
- * Controls the behavior of the heuristic popup detection.
- *  - Reject: Will click the reject button on a popup if it exists.
- *  - Tier1: Will also click the acknowledge button on a popup if it exists, and no Reject button exists.
- *  - Tier2: Will also click the accept button on a popup if it exists, and no Reject or Acknowledge button exists.
- *  - None: Disabled
+ * The user setting for autoconsent and heuristic detection.
+ *  - off: Heuristic detection is disabled.
+ *  - reject: Heuristic detection is enabled, and will click the reject button on a popup if it exists.
+ *  - tier1: Heuristic detection is enabled, and will click the acknowledge button on a popup if it exists, and no Reject or Settings button exists.
+ *  - tier2: Heuristic detection is enabled, and will click the accept button on a popup if it exists, and no Reject, Acknowledge, or Settings button exists.
  */
-export const PopupHandlingModes = {
-    None: -1,
-    Reject: 0,
-    Tier1: 1,
-    Tier2: 2,
-} as const;
-export type PopupHandlingMode = (typeof PopupHandlingModes)[keyof typeof PopupHandlingModes];
+export type HeuristicLevel = 'off' | 'reject' | 'tier1' | 'tier2';
+export type PopupClassification = 'none' | 'reject' | 'tier1' | 'tier2';

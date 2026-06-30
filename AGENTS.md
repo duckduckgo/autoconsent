@@ -11,7 +11,7 @@ lib/rules.ts      Type definitions for AutoConsentCMPRule and rule steps
 lib/eval-snippets.ts  Eval snippets for main-world JS execution
 rules/autoconsent/    Hand-maintained JSON rules
 rules/generated/      Crawler-generated JSON rules (auto_XX_domain_hash.json)
-rules/build.ts        Merges all rules into rules.json, consentomatic.json, compact-rules.json
+rules/build.ts        Merges all rules into rules.json, compact-rules.json
 data/                 Coverage data (coverage.json) and site lists
 tests/                Playwright E2E test specs (one per CMP)
 tests-wtr/            Web Test Runner unit tests for DOM actions and rule logic
@@ -25,7 +25,7 @@ docs/                 Reference documentation (rule syntax, internal API)
 
 ```bash
 npm ci
-npm run prepublish    # full build: compile filterlist, build rules, bundle
+npm run prepublish    # full build: build rules and bundle
 npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 ```
 
@@ -39,7 +39,7 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 | `npm run test` | All Playwright E2E tests |
 | `npm run test:webkit` | Playwright tests in WebKit only |
 | `npm run test:chrome` | Playwright tests in Chrome only |
-| `npm run build-rules` | Rebuild `rules.json`, `consentomatic.json`, `compact-rules.json` |
+| `npm run build-rules` | Rebuild `rules.json`, `compact-rules.json` |
 | `npm run create-rule` | Scaffold a new JSON rule + test spec |
 
 ## Code Style

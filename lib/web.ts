@@ -1,5 +1,4 @@
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
-import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule, SUPPORTED_RULE_STEP_VERSION } from './rules';
 import { BackgroundMessage, InitMessage } from './messages';
 import { evalState, resolveEval } from './eval-handler';
@@ -8,7 +7,6 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
-import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
 
@@ -36,8 +34,6 @@ export default class AutoConsent {
     #config?: Config;
     foundCmp?: AutoCMP;
     state: ConsentState = {
-        cosmeticFiltersOn: false,
-        filterListReported: false,
         lifecycle: 'loading',
         prehideOn: false,
         findCmpAttempts: 0,
@@ -51,9 +47,7 @@ export default class AutoConsent {
         endTime: 0,
     };
     domActions: DomActions;
-    filtersEngine?: FiltersEngine;
     sendContentMessage: MessageSender;
-    protected cosmeticStyleSheet?: CSSStyleSheet;
     protected focusedElement?: HTMLElement;
 
     constructor(sendContentMessage: MessageSender, config: Partial<Config> | null = null, declarativeRules: RuleBundle | null = null) {
@@ -100,9 +94,6 @@ export default class AutoConsent {
             this.parseDeclarativeRules(declarativeRules);
         }
 
-        if (config.enableFilterList) {
-            this.initializeFilterList();
-        }
         this.rules = filterCMPs(this.rules, normalizedConfig);
 
         if (this.shouldPrehide) {
@@ -129,10 +120,6 @@ export default class AutoConsent {
             this.start();
         }
         this.updateState({ lifecycle: 'initialized' });
-    }
-
-    initializeFilterList() {
-        // no-op by default
     }
 
     get shouldPrehide() {
@@ -167,11 +154,6 @@ export default class AutoConsent {
     parseDeclarativeRules(declarativeRules: RuleBundle) {
         const perfEnabled = this.#config?.performanceLoggingEnabled;
         perfEnabled && performance.mark('parseDeclarativeRulesStart');
-        if (declarativeRules.consentomatic) {
-            for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
-                this.addConsentomaticCMP(name, rule);
-            }
-        }
 
         if (declarativeRules.autoconsent) {
             declarativeRules.autoconsent.forEach((ruleset) => {
@@ -198,10 +180,6 @@ export default class AutoConsent {
         }
     }
 
-    addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
-        this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
-    }
-
     // start the detection process, possibly with a delay
     start() {
         scheduleWhenIdle(() => this._start());
@@ -222,7 +200,8 @@ export default class AutoConsent {
                 this.undoPrehide();
             }
 
-            return this.filterListFallback();
+            this.updateState({ lifecycle: 'nothingDetected' });
+            return false;
         }
 
         this.updateState({ lifecycle: 'cmpDetected' });
@@ -296,7 +275,7 @@ export default class AutoConsent {
         });
         // heuristic CMP is only run in the top frame and only if heuristic action is enabled and retries is odd
         const heuristicRules =
-            isTop && this.config.enableHeuristicAction && this.state.findCmpAttempts % 2 === 0
+            isTop && this.config.heuristicMode !== 'off' && this.state.findCmpAttempts % 2 === 0
                 ? [new AutoConsentHeuristicCMP(this, this.config.heuristicMode)]
                 : [];
 
@@ -436,11 +415,6 @@ export default class AutoConsent {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
-        if (this.state.cosmeticFiltersOn) {
-            // cancel cosmetic filters if we have a rule for this popup
-            this.undoCosmetics();
-        }
-
         this.foundCmp = cmp;
 
         if (this.config.autoAction === 'optOut') {
@@ -629,30 +603,6 @@ export default class AutoConsent {
     undoPrehide(): void {
         this.updateState({ prehideOn: false });
         this.domActions.undoPrehide();
-    }
-
-    undoCosmetics() {
-        // no-op by default
-    }
-
-    reportFilterlist() {
-        this.sendContentMessage({
-            type: 'cmpDetected',
-            url: location.href,
-            cmp: 'filterList',
-        });
-        this.sendContentMessage({
-            type: 'popupFound',
-            cmp: 'filterList',
-            url: location.href,
-        });
-        this.updateState({ filterListReported: true });
-    }
-
-    filterListFallback() {
-        // no-op by default
-        this.updateState({ lifecycle: 'nothingDetected' });
-        return false;
     }
 
     updateState(change: Partial<ConsentState>) {
