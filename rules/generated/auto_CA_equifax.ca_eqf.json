@@ -1,0 +1,41 @@
+{
+    "name": "auto_CA_equifax.ca_eqf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "https://my.equifax.ca/login",
+        "comment": "Equifax Canada deploys Ketch CMP without a Reject All button on the banner or in the preferences modal. The generic ketch rule clicks the secondary button to open the preferences modal, then fails to find a reject button and leaves the user stuck inside the unclosable modal. This rule overrides the generic ketch flow on equifax.ca by toggling off non-essential consent switches and clicking Save Settings."
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://([^./]+\\.)?equifax\\.ca/"
+    },
+    "prehideSelectors": ["#ketch-consent-banner", "#ketch-banner", "#ketch-modal", "#ketch-purposes-modal"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#ketch-consent-banner" }, { "exists": "#ketch-banner" }, { "exists": "#ketch-modal" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#ketch-consent-banner" }, { "visible": "#ketch-banner" }, { "visible": "#ketch-modal" }]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#ketch-banner-button-primary" }],
+    "optOut": [
+        { "waitForThenClick": "#ketch-banner-button-secondary" },
+        {
+            "waitForVisible": "#ketch-purposes-modal input[role=switch]",
+            "timeout": 5000,
+            "check": "any"
+        },
+        {
+            "click": "#ketch-purposes-modal input[role=switch][aria-checked=\"true\"]:not([disabled])",
+            "all": true,
+            "optional": true,
+            "comment": "Toggle off every currently-enabled, non-required switch. Strictly Necessary is disabled and is skipped. In regions where Ketch defaults all switches to off (e.g. EEA/UK under GDPR), there is nothing to toggle and we skip straight to Save Settings."
+        },
+        { "waitForThenClick": "#ketch-purposes-modal button[aria-label=\"Save Settings\"]" }
+    ],
+    "test": [{ "cookieContains": "_ketch_consent_v1_" }]
+}
