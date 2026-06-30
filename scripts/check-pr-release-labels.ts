@@ -124,13 +124,13 @@ export function validateLabels(labels: string[]): ValidationResult {
     const errors: string[] = [];
 
     if (versionLabels.length === 0) {
-        errors.push(`Add exactly one version label: ${VERSION_LABELS.join(', ')}.`);
+        errors.push('Add exactly one version label with the `version:` prefix.');
     } else if (versionLabels.length > 1) {
         errors.push(`Keep exactly one version label; found ${versionLabels.join(', ')}.`);
     }
 
     if (categoryLabels.length === 0) {
-        errors.push(`Add exactly one release-note category label: ${CATEGORY_LABELS.join(', ')}.`);
+        errors.push('Add exactly one release-note category label with the `category:` prefix.');
     } else if (categoryLabels.length > 1) {
         errors.push(`Keep exactly one release-note category label; found ${categoryLabels.join(', ')}.`);
     }
@@ -171,8 +171,8 @@ Problems:
 ${result.errors.map((error) => `- ${error}`).join('\n')}
 
 Required labels:
-- One version label: ${formatLabels(VERSION_LABELS)}
-- One release-note category label: ${formatLabels(CATEGORY_LABELS)}
+- One version label using the \`version:\` prefix, for example \`version: patch\`
+- One release-note category label using the \`category:\` prefix, for example \`category: rules\`
 
 See [docs/release-notes.md](https://github.com/duckduckgo/autoconsent/blob/main/docs/release-notes.md) for examples.`;
 }
