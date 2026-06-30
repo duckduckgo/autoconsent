@@ -55,7 +55,7 @@ if (!window.autoconsentReceiveMessage) {
     const config: Partial<Config> = {
         isMainWorld: true,
         enableHeuristicDetection: true,
-        enableHeuristicAction: true,
+        heuristicMode: 'tier2',
         enablePopupMutationObserver: false,
         logs: {
             lifecycle: true,
