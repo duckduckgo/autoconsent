@@ -5,8 +5,8 @@ Task/Issue URL:
 <!--
 Don't forget to label the PR.
 
-Impact: choose one of `major`, `minor`, or `patch`.
-Category: choose one of `rules`, `bug`, `enhancement`, `performance`, `dependencies`, `ci`, `ai`, `documentation`, `tests`, `internal`, or `other`.
+Version: choose one of `version: major`, `version: minor`, or `version: patch`.
+Category: choose one of `category: rules`, `category: bug`, `category: enhancement`, `category: performance`, `category: dependencies`, `category: ci`, `category: ai`, `category: documentation`, `category: tests`, `category: internal`, or `category: other`.
 Details: https://github.com/duckduckgo/autoconsent/blob/main/docs/release-notes.md
 -->
 

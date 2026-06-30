@@ -1,23 +1,23 @@
 import fs from 'fs';
 import { Octokit } from '@octokit/rest';
 
-const RELEASE_IMPACT_LABELS = ['major', 'minor', 'patch'] as const;
+const VERSION_LABELS = ['version: major', 'version: minor', 'version: patch'] as const;
 const CATEGORY_LABELS = [
-    'rules',
-    'bug',
-    'enhancement',
-    'performance',
-    'dependencies',
-    'ci',
-    'ai',
-    'documentation',
-    'tests',
-    'internal',
-    'other',
+    'category: rules',
+    'category: bug',
+    'category: enhancement',
+    'category: performance',
+    'category: dependencies',
+    'category: ci',
+    'category: ai',
+    'category: documentation',
+    'category: tests',
+    'category: internal',
+    'category: other',
 ] as const;
 const COMMENT_MARKER = '<!-- autoconsent-release-label-check -->';
 
-type LabelName = (typeof RELEASE_IMPACT_LABELS)[number] | (typeof CATEGORY_LABELS)[number];
+type LabelName = (typeof VERSION_LABELS)[number] | (typeof CATEGORY_LABELS)[number];
 
 interface Args {
     event?: string;
@@ -44,7 +44,7 @@ interface PullRequestEvent {
 interface ValidationResult {
     ok: boolean;
     labels: string[];
-    releaseImpactLabels: string[];
+    versionLabels: string[];
     categoryLabels: string[];
     errors: string[];
     comment?: string;
@@ -119,14 +119,14 @@ function isKnownLabel(labelSet: readonly LabelName[], label: string): boolean {
 
 export function validateLabels(labels: string[]): ValidationResult {
     const currentLabels = uniqueLabels(labels);
-    const releaseImpactLabels = currentLabels.filter((label) => isKnownLabel(RELEASE_IMPACT_LABELS, label));
+    const versionLabels = currentLabels.filter((label) => isKnownLabel(VERSION_LABELS, label));
     const categoryLabels = currentLabels.filter((label) => isKnownLabel(CATEGORY_LABELS, label));
     const errors: string[] = [];
 
-    if (releaseImpactLabels.length === 0) {
-        errors.push(`Add exactly one release impact label: ${RELEASE_IMPACT_LABELS.join(', ')}.`);
-    } else if (releaseImpactLabels.length > 1) {
-        errors.push(`Keep exactly one release impact label; found ${releaseImpactLabels.join(', ')}.`);
+    if (versionLabels.length === 0) {
+        errors.push(`Add exactly one version label: ${VERSION_LABELS.join(', ')}.`);
+    } else if (versionLabels.length > 1) {
+        errors.push(`Keep exactly one version label; found ${versionLabels.join(', ')}.`);
     }
 
     if (categoryLabels.length === 0) {
@@ -138,7 +138,7 @@ export function validateLabels(labels: string[]): ValidationResult {
     return {
         ok: errors.length === 0,
         labels: currentLabels,
-        releaseImpactLabels,
+        versionLabels,
         categoryLabels,
         errors,
     };
@@ -171,7 +171,7 @@ Problems:
 ${result.errors.map((error) => `- ${error}`).join('\n')}
 
 Required labels:
-- One release impact label: ${formatLabels(RELEASE_IMPACT_LABELS)}
+- One version label: ${formatLabels(VERSION_LABELS)}
 - One release-note category label: ${formatLabels(CATEGORY_LABELS)}
 
 See [docs/release-notes.md](https://github.com/duckduckgo/autoconsent/blob/main/docs/release-notes.md) for examples.`;
@@ -252,4 +252,4 @@ if (require.main === module) {
     });
 }
 
-export { CATEGORY_LABELS, RELEASE_IMPACT_LABELS };
+export { CATEGORY_LABELS, VERSION_LABELS };

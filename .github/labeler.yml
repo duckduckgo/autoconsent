@@ -1,35 +1,35 @@
-ai:
+'category: ai':
     - changed-files:
           - any-glob-to-any-file:
                 - '.agents/**'
                 - 'AGENTS.md'
                 - 'CLAUDE.md'
 
-ci:
+'category: ci':
     - changed-files:
           - any-glob-to-any-file:
                 - '.github/**'
                 - 'ci/**'
                 - 'scripts/**'
 
-dependencies:
+'category: dependencies':
     - changed-files:
           - any-glob-to-any-file:
                 - 'package.json'
                 - 'package-lock.json'
 
-documentation:
+'category: documentation':
     - changed-files:
           - any-glob-to-any-file:
                 - 'docs/**'
 
-rules:
+'category: rules':
     - changed-files:
           - any-glob-to-any-file:
                 - 'rules/**'
                 - 'tests/**/*.spec.ts'
 
-tests:
+'category: tests':
     - changed-files:
           - any-glob-to-any-file:
                 - 'playwright/**'

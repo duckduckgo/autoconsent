@@ -81,19 +81,19 @@
     "noDefaultLabels": true,
     "labels": [
       {
-        "name": "major",
+        "name": "version: major",
         "description": "Increment the major version when merged",
         "releaseType": "major",
         "color": "#C5000B"
       },
       {
-        "name": "minor",
+        "name": "version: minor",
         "description": "Increment the minor version when merged",
         "releaseType": "minor",
         "color": "#F1A60E"
       },
       {
-        "name": "patch",
+        "name": "version: patch",
         "description": "Increment the patch version when merged",
         "releaseType": "patch",
         "default": true,
@@ -106,77 +106,77 @@
         "color": "#007f70"
       },
       {
-        "name": "rules",
+        "name": "category: rules",
         "changelogTitle": "Rules",
         "description": "Autoconsent rule additions, updates, and generated rule changes",
         "releaseType": "none",
         "color": "#bfdadc"
       },
       {
-        "name": "bug",
+        "name": "category: bug",
         "changelogTitle": "Bug Fixes",
         "description": "Something isn't working",
         "releaseType": "none",
         "color": "#d73a4a"
       },
       {
-        "name": "enhancement",
+        "name": "category: enhancement",
         "changelogTitle": "Enhancements",
         "description": "New feature or request",
         "releaseType": "none",
         "color": "#a2eeef"
       },
       {
-        "name": "performance",
+        "name": "category: performance",
         "changelogTitle": "Performance",
         "description": "Improve performance of an existing feature",
         "releaseType": "none",
         "color": "#f4b2d8"
       },
       {
-        "name": "dependencies",
+        "name": "category: dependencies",
         "changelogTitle": "Dependencies",
         "description": "Update one or more dependencies version",
         "releaseType": "none",
         "color": "#8732bc"
       },
       {
-        "name": "ci",
+        "name": "category: ci",
         "changelogTitle": "CI / Release Automation",
         "description": "Automation scripts and release infrastructure",
         "releaseType": "none",
         "color": "#2612BF"
       },
       {
-        "name": "ai",
+        "name": "category: ai",
         "changelogTitle": "AI / Agent Workflow",
         "description": "Changes to agent workflows and skills",
         "releaseType": "none",
         "color": "#df4f06"
       },
       {
-        "name": "documentation",
+        "name": "category: documentation",
         "changelogTitle": "Documentation",
         "description": "Changes only affect the documentation",
         "releaseType": "none",
         "color": "#cfd3d7"
       },
       {
-        "name": "tests",
+        "name": "category: tests",
         "changelogTitle": "Test Infrastructure",
         "description": "Changes to test harnesses, fixtures, or test infrastructure",
         "releaseType": "none",
         "color": "#ffd3cc"
       },
       {
-        "name": "internal",
+        "name": "category: internal",
         "changelogTitle": "Internal",
         "description": "Changes only affect internal implementation details",
         "releaseType": "none",
         "color": "#696969"
       },
       {
-        "name": "other",
+        "name": "category: other",
         "changelogTitle": "Other",
         "description": "Changes that should appear in release notes but do not fit another category",
         "releaseType": "none",
