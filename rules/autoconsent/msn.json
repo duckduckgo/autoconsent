@@ -1,0 +1,18 @@
+{
+    "name": "msn",
+    "_metadata": {
+        "vendorUrl": "https://www.msn.com"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?msn\\.com/"
+    },
+    "prehideSelectors": ["#cmp-banner-sdk", ".cmp-sdk-container"],
+    "detectCmp": [{ "exists": "#cmp-banner-sdk" }],
+    "detectPopup": [{ "visible": "#cmp-banner-sdk" }],
+    "optIn": [{ "waitForThenClick": "#cmp-accept-btn-handler" }],
+    "optOut": [{ "waitForThenClick": "#cmp-reject-all-handler" }],
+    "test": [{ "cookieContains": "OptanonAlertBoxClosed" }]
+}
