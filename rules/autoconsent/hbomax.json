@@ -1,0 +1,38 @@
+{
+    "name": "hbomax",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?hbomax\\.com/"
+    },
+    "prehideSelectors": [
+        "#modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"], #__next > div:has(+ #modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"])"
+    ],
+    "detectCmp": [
+        {
+            "exists": "#modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"] .btn--privacy-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"], #__next > div:has(+ #modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"])"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#modal-test-id-consent-modal[aria-label=\"PRIVACY Modal\"]",
+            "check": "none"
+        }
+    ]
+}
