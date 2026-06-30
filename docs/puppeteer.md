@@ -41,7 +41,7 @@ const autoconsentConfig = {
   isMainWorld: false,
   prehideTimeout: 2000,
   enableHeuristicDetection: true,
-  enableHeuristicAction: true,
+  heuristicMode: 'tier2',
   logs: {
     lifecycle: false,
     rulesteps: false,

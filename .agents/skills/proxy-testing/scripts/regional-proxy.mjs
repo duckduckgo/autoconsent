@@ -55,6 +55,8 @@
  * @property {(url: string, region: string) => TestResult} collectResult
  */
 
+/** @typedef {import('../../../../lib/types').Config} Config */
+
 /**
  * Primitives the message handler uses to talk to a specific frame's content script.
  * `frameRef` is the isolated world's execution-context uniqueId the message arrived from;
@@ -140,6 +142,7 @@ export async function injectAutoconsent(page, options = {}) {
     const action = 'action' in options ? options.action : 'optOut';
     /** @type {any[]} */
     const received = [];
+    /** @type {Partial<Config>} */
     const config = {
         enabled: true,
         autoAction: action,
@@ -149,7 +152,7 @@ export async function injectAutoconsent(page, options = {}) {
         enableCosmeticRules: true,
         enableGeneratedRules: true,
         enableHeuristicDetection: true,
-        enableHeuristicAction: true,
+        heuristicMode: 'tier2',
         // The engine runs in the isolated world; eval snippets are forwarded to the main world.
         isMainWorld: false,
         logs: { lifecycle: true, rulesteps: true, detectionsteps: false, evals: false, errors: true },
