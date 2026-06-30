@@ -11,6 +11,10 @@ generateCMPTests('ketch', [
     'https://www.ketch.com/',
     'https://www.forbes.com/',
     'https://yumearth.com/products/variety-pack-30ct',
+    // Banner where the direct reject button occupies the *secondary* slot
+    // ('Reject Optional Cookies') and tertiary is 'Cookie Settings' — make
+    // sure the rule identifies reject by aria-label, not by ID slot.
+    'https://www.pbs.org/newshour/economy/tomatoes-become-latest-symbol-of-americas-affordability-squeeze',
     // Disclosure-only banner variant (US/CCPA): the standard banner ships with
     // a single acknowledge button (e.g. "I understand"/"Learn more") and no
     // reject option — consent is decided by Ketch's jurisdiction defaults.
