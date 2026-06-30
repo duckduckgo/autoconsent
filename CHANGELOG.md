@@ -1,3 +1,18 @@
+# v16.2.0 (Tue Jun 30 2026)
+
+#### Rules
+
+- Update nhnieuws rule for redesigned consent popup [#1412](https://github.com/duckduckgo/autoconsent/pull/1412) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add heuristic patterns for Spanish and Polish [#1404](https://github.com/duckduckgo/autoconsent/pull/1404) ([@GuiltyDolphin](https://github.com/GuiltyDolphin) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Ben Moon ([@GuiltyDolphin](https://github.com/GuiltyDolphin))
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.1.0 (Fri Jun 26 2026)
 
 #### CI / Release Automation
