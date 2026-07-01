@@ -363,13 +363,14 @@ export default class AutoConsent {
     shouldSkipBroadDetection(): boolean {
         const limit = this.config.maxDocumentElements;
         this.config.performanceLoggingEnabled && performance.mark('documentSizeCheckStart');
-        const documentTooLarge = limit > 0 && document.getElementsByTagName('*').length > limit;
+        const documentElementCount = document.getElementsByTagName('*').length;
+        const documentTooLarge = limit > 0 && documentElementCount > limit;
         this.config.performanceLoggingEnabled && performance.mark('documentSizeCheckEnd');
         this.config.performanceLoggingEnabled && performance.measure('documentSizeCheck', 'documentSizeCheckStart', 'documentSizeCheckEnd');
 
         if (documentTooLarge) {
             const errorDetails = {
-                msg: `Document too large: ${limit}`,
+                msg: `Document too large: ${documentElementCount} > ${limit}`,
                 reason: 'documentTooLarge',
                 limit,
                 url: location.href,
