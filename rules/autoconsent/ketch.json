@@ -40,44 +40,64 @@
     ],
     "optOut": [
         {
-            "comment": "Prefer a direct reject-style button in the banner (any Ketch DOM variant). Ketch's primary/secondary/tertiary ids reflect visual hierarchy, not role, so match on aria-label instead: covers 'Reject All', 'Reject Optional Cookies', etc.",
+            "comment": "Banner phase: pick exactly one action to dismiss the banner (or open the preferences modal). Wrapped in a nested if/else chain so a successful direct-reject click does NOT also run the tertiary / banner-description branches — on layouts like PBS where #ketch-banner-button-tertiary is 'Cookie Settings' that would re-open preferences after opt-out.",
             "if": {
                 "exists": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
             },
-            "then": [{ "waitForThenClick": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]" }]
-        },
-        {
-            "comment": "Legacy fallback: some Ketch banners expose the direct reject button as #ketch-banner-button-tertiary without an aria-label prefix match.",
-            "if": {
-                "exists": "#ketch-banner-button-tertiary"
-            },
-            "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary" }]
-        },
-        {
-            "comment": "Older banner variant exposed via aria-describedby=banner-description: open settings/reject (same button class)",
-            "if": {
-                "exists": "#lanyard_root [aria-describedby=banner-description]"
-            },
             "then": [
                 {
+                    "comment": "Prefer a direct reject-style button in the banner or preferences modal (any Ketch DOM variant). Ketch's primary/secondary/tertiary ids reflect visual hierarchy, not role, so match on aria-label instead: covers 'Reject All', 'Reject Optional Cookies', etc.",
+                    "waitForThenClick": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
+                },
+                {
+                    "comment": "Some Ketch variants show the preferences modal directly (no banner phase) and treat Reject All as 'toggle all off' — the choice is not saved until Confirm/Save is clicked. If the modal is still visible, submit it. Selectors mirror the modal-handling step below.",
                     "if": {
-                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
+                        "visible": "#lanyard_root [aria-describedby=preference-description], #lanyard_root [aria-describedby=modal-description], #ketch-modal, #ketch-purposes-modal, #ketch-preferences"
                     },
                     "then": [
                         {
-                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary",
-                            "comment": "can be either settings or reject button"
+                            "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm'], #ketch-modal button[aria-label='Save Settings'], #ketch-purposes-modal button[aria-label='Save Settings']"
                         }
-                    ],
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "comment": "Legacy fallback: some Ketch banners expose the direct reject button as #ketch-banner-button-tertiary without an aria-label prefix match.",
+                    "if": {
+                        "exists": "#ketch-banner-button-tertiary"
+                    },
+                    "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary" }],
                     "else": [
                         {
+                            "comment": "Older banner variant exposed via aria-describedby=banner-description: open settings/reject (same button class). The preferences modal is handled by the trailing step below.",
                             "if": {
-                                "exists": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child"
+                                "exists": "#lanyard_root [aria-describedby=banner-description]"
                             },
                             "then": [
                                 {
-                                    "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child",
-                                    "comment": "Disclosure-only banner (e.g. US/CCPA notice with a single 'I understand'/'OK' acknowledge button and no reject option). Clicking the lone button dismisses the notice; consent state is already determined by Ketch's jurisdiction defaults."
+                                    "if": {
+                                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
+                                    },
+                                    "then": [
+                                        {
+                                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary",
+                                            "comment": "can be either settings or reject button"
+                                        }
+                                    ],
+                                    "else": [
+                                        {
+                                            "if": {
+                                                "exists": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child"
+                                            },
+                                            "then": [
+                                                {
+                                                    "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child",
+                                                    "comment": "Disclosure-only banner (e.g. US/CCPA notice with a single 'I understand'/'OK' acknowledge button and no reject option). Clicking the lone button dismisses the notice; consent state is already determined by Ketch's jurisdiction defaults."
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -91,7 +111,7 @@
             "optional": true
         },
         {
-            "comment": "Preferences/purposes modal is open: prefer Reject All then Confirm; otherwise (e.g. US/CCPA variant with only per-purpose toggles) uncheck every enabled switch and save.",
+            "comment": "Preferences/purposes modal is open (typically after opening settings from the banner): prefer Reject All then Confirm; otherwise (e.g. US/CCPA variant with only per-purpose toggles) uncheck every enabled switch and save. Skipped if the banner phase already dismissed everything.",
             "if": {
                 "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
             },
