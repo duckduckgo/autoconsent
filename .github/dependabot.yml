@@ -5,7 +5,7 @@ updates:
       schedule:
           interval: 'weekly'
       labels:
-          - 'dependencies'
+          - 'category: dependencies'
       groups:
           dev-dependencies:
               dependency-type: 'development'

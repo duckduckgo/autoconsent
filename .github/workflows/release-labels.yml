@@ -1,0 +1,110 @@
+name: Release Labels
+
+on:
+    pull_request_target:
+        types:
+            - opened
+            - reopened
+            - synchronize
+            - ready_for_review
+            - labeled
+            - unlabeled
+            - edited
+
+permissions:
+    contents: read
+    issues: write
+    pull-requests: write
+
+concurrency:
+    group: release-labels-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
+jobs:
+    release-labels:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Apply path-based labels
+              if: >-
+                  ${{
+                    github.event.action == 'opened' ||
+                    github.event.action == 'reopened' ||
+                    github.event.action == 'ready_for_review'
+                  }}
+              uses: actions/labeler@v6
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  sync-labels: false
+
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: lts/*
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci --ignore-scripts
+
+            - name: Check release labels
+              id: check_release_labels
+              continue-on-error: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  npm run check-pr-release-labels -- \
+                    --fetch-current-labels \
+                    --json-output "$RUNNER_TEMP/release-label-check.json"
+
+            - name: Comment on release label issues
+              if: always()
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const fs = require('fs');
+
+                      const resultPath = `${process.env.RUNNER_TEMP}/release-label-check.json`;
+
+                      if (!fs.existsSync(resultPath)) {
+                          return;
+                      }
+
+                      const marker = '<!-- autoconsent-release-label-check -->';
+                      const result = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
+                      const { owner, repo } = context.repo;
+                      const issue_number = context.payload.pull_request.number;
+                      const { data: comments } = await github.rest.issues.listComments({
+                          owner,
+                          repo,
+                          issue_number,
+                          per_page: 100,
+                      });
+                      const existingComment = comments.find(
+                          (comment) => comment.user.type === 'Bot' && comment.body?.includes(marker)
+                      );
+
+                      if (!existingComment && result.ok) {
+                          return;
+                      }
+
+                      if (existingComment) {
+                          await github.rest.issues.updateComment({
+                              owner,
+                              repo,
+                              comment_id: existingComment.id,
+                              body: result.comment,
+                          });
+                          return;
+                      }
+
+                      await github.rest.issues.createComment({
+                          owner,
+                          repo,
+                          issue_number,
+                          body: result.comment,
+                      });
+
+            - name: Fail on release label issues
+              if: steps.check_release_labels.outcome == 'failure'
+              run: exit 1

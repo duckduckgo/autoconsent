@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "15.1.0",
+  "version": "16.3.0",
   "description": "",
   "types": "./dist/types/web.d.ts",
   "exports": {
@@ -36,13 +36,15 @@
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
-    "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts"
+    "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts",
+    "check-pr-release-labels": "ts-node scripts/check-pr-release-labels.ts"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
   "devDependencies": {
     "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#v0.1.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@octokit/rest": "^22.0.1",
     "@playwright/test": "^1.17.1",
     "@types/chai": "^5.0.0",
     "@types/chrome": "^0.1.0",
@@ -76,6 +78,111 @@
   },
   "repository": "duckduckgo/autoconsent",
   "auto": {
+    "noDefaultLabels": true,
+    "labels": [
+      {
+        "name": "version: major",
+        "description": "Increment the major version when merged",
+        "releaseType": "major",
+        "color": "#C5000B"
+      },
+      {
+        "name": "version: minor",
+        "description": "Increment the minor version when merged",
+        "releaseType": "minor",
+        "color": "#F1A60E"
+      },
+      {
+        "name": "version: patch",
+        "description": "Increment the patch version when merged",
+        "releaseType": "patch",
+        "default": true,
+        "color": "#870048"
+      },
+      {
+        "name": "release",
+        "description": "Create a release when this PR is merged",
+        "releaseType": "release",
+        "color": "#007f70"
+      },
+      {
+        "name": "category: rules",
+        "changelogTitle": "Rules",
+        "description": "Autoconsent rule additions, updates, and generated rule changes",
+        "releaseType": "none",
+        "color": "#bfdadc"
+      },
+      {
+        "name": "category: bug",
+        "changelogTitle": "Bug Fixes",
+        "description": "Something isn't working",
+        "releaseType": "none",
+        "color": "#d73a4a"
+      },
+      {
+        "name": "category: enhancement",
+        "changelogTitle": "Enhancements",
+        "description": "New feature or request",
+        "releaseType": "none",
+        "color": "#a2eeef"
+      },
+      {
+        "name": "category: performance",
+        "changelogTitle": "Performance",
+        "description": "Improve performance of an existing feature",
+        "releaseType": "none",
+        "color": "#f4b2d8"
+      },
+      {
+        "name": "category: dependencies",
+        "changelogTitle": "Dependencies",
+        "description": "Update one or more dependencies version",
+        "releaseType": "none",
+        "color": "#8732bc"
+      },
+      {
+        "name": "category: ci",
+        "changelogTitle": "CI / Release Automation",
+        "description": "Automation scripts and release infrastructure",
+        "releaseType": "none",
+        "color": "#2612BF"
+      },
+      {
+        "name": "category: ai",
+        "changelogTitle": "AI / Agent Workflow",
+        "description": "Changes to agent workflows and skills",
+        "releaseType": "none",
+        "color": "#df4f06"
+      },
+      {
+        "name": "category: documentation",
+        "changelogTitle": "Documentation",
+        "description": "Changes only affect the documentation",
+        "releaseType": "none",
+        "color": "#cfd3d7"
+      },
+      {
+        "name": "category: tests",
+        "changelogTitle": "Test Infrastructure",
+        "description": "Changes to test harnesses, fixtures, or test infrastructure",
+        "releaseType": "none",
+        "color": "#ffd3cc"
+      },
+      {
+        "name": "category: internal",
+        "changelogTitle": "Internal",
+        "description": "Changes only affect internal implementation details",
+        "releaseType": "none",
+        "color": "#696969"
+      },
+      {
+        "name": "category: other",
+        "changelogTitle": "Other",
+        "description": "Changes that should appear in release notes but do not fit another category",
+        "releaseType": "none",
+        "color": "#ededed"
+      }
+    ],
     "plugins": [
       "npm"
     ]

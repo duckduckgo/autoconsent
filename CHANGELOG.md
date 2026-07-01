@@ -1,3 +1,72 @@
+# v16.3.0 (Wed Jul 01 2026)
+
+#### Rules
+
+- Remove theverge rule [#1416](https://github.com/duckduckgo/autoconsent/pull/1416) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Prefix release note labels [#1415](https://github.com/duckduckgo/autoconsent/pull/1415) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Clean up some outdated config parameters [#1414](https://github.com/duckduckgo/autoconsent/pull/1414) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.2.0 (Tue Jun 30 2026)
+
+#### Rules
+
+- Update nhnieuws rule for redesigned consent popup [#1412](https://github.com/duckduckgo/autoconsent/pull/1412) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add heuristic patterns for Spanish and Polish [#1404](https://github.com/duckduckgo/autoconsent/pull/1404) ([@GuiltyDolphin](https://github.com/GuiltyDolphin) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Ben Moon ([@GuiltyDolphin](https://github.com/GuiltyDolphin))
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.1.0 (Fri Jun 26 2026)
+
+#### CI / Release Automation
+
+- Revamp release note labeling [#1410](https://github.com/duckduckgo/autoconsent/pull/1410) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.0.0 (Tue Jun 23 2026)
+
+#### 💥 Breaking Change
+
+- Drop support for consent-o-matic rules [#1393](https://github.com/duckduckgo/autoconsent/pull/1393) ([@sammacbeth](https://github.com/sammacbeth))
+- Remove EasyList and filterlist support [#1399](https://github.com/duckduckgo/autoconsent/pull/1399) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Change heuristicMode parameter to a string and update handling. [#1403](https://github.com/duckduckgo/autoconsent/pull/1403) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### 🚀 Enhancement
+
+- Add autoconsent rule for DreamLab CMP [#1409](https://github.com/duckduckgo/autoconsent/pull/1409) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v15.1.0 (Tue Jun 23 2026)
 
 #### 🚀 Enhancement

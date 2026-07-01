@@ -1,0 +1,36 @@
+'category: ai':
+    - changed-files:
+          - any-glob-to-any-file:
+                - '.agents/**'
+                - 'AGENTS.md'
+                - 'CLAUDE.md'
+
+'category: ci':
+    - changed-files:
+          - any-glob-to-any-file:
+                - '.github/**'
+                - 'ci/**'
+                - 'scripts/**'
+
+'category: dependencies':
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'package.json'
+                - 'package-lock.json'
+
+'category: documentation':
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'docs/**'
+
+'category: rules':
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'rules/**'
+                - 'tests/**/*.spec.ts'
+
+'category: tests':
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'playwright/**'
+                - 'web-test-runner.config.mjs'

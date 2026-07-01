@@ -5,7 +5,7 @@ import Onetrust from '../../lib/cmps/onetrust';
 describe('Autoconsent.findCmp', () => {
     let autoconsent: Autoconsent;
 
-    describe('enableHeuristicAction = false', () => {
+    describe('heuristicMode = off', () => {
         beforeEach(() => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false, // bypass initialization
@@ -135,7 +135,7 @@ describe('Autoconsent.findCmp', () => {
         });
     });
 
-    describe('enableHeuristicAction = true', () => {
+    describe('heuristicMode = reject', () => {
         beforeEach(() => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
