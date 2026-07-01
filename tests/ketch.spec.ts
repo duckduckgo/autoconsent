@@ -23,6 +23,10 @@ generateCMPTests(
         // direct reject); preferences modal has per-purpose toggles and a
         // "Save Settings" button but no "Reject All".
         'https://my.equifax.ca/login',
+        // 3-button banner where the direct reject (aria-label="Reject
+        // Optional Cookies") is #ketch-banner-button-secondary while
+        // #ketch-banner-button-tertiary is "Cookie Settings" — verifies we
+        // prefer the aria-label-based direct reject over id-position guesses.
         'https://www.pbs.org/newshour/economy/tomatoes-become-latest-symbol-of-americas-affordability-squeeze',
     ],
     {

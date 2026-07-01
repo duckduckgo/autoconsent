@@ -40,7 +40,14 @@
     ],
     "optOut": [
         {
-            "comment": "If the banner has a direct Reject All button (newer Ketch DOM), click it and we're done.",
+            "comment": "Prefer a direct reject-style button in the banner (any Ketch DOM variant). Ketch's primary/secondary/tertiary ids reflect visual hierarchy, not role, so match on aria-label instead: covers 'Reject All', 'Reject Optional Cookies', etc.",
+            "if": {
+                "exists": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
+            },
+            "then": [{ "waitForThenClick": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]" }]
+        },
+        {
+            "comment": "Legacy fallback: some Ketch banners expose the direct reject button as #ketch-banner-button-tertiary without an aria-label prefix match.",
             "if": {
                 "exists": "#ketch-banner-button-tertiary"
             },
