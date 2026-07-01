@@ -1,0 +1,44 @@
+{
+    "name": "pikpak",
+    "vendorUrl": "https://mypikpak.com/",
+    "runContext": {
+        "urlPattern": "^https://([^/]+\\.)?(mypikpak|filepax|pikpakse|pikpax|pickpackapp)\\.(com|net)"
+    },
+    "prehideSelectors": [".cookie-wrapper .cookie-tip"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-wrapper .cookie-tip__container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-wrapper .cookie-tip__text"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-wrapper .cookie-tip__button button.el-button--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-wrapper .cookie-tip__button > .button"
+        },
+        {
+            "waitForVisible": ".el-dialog.cookie-dialog"
+        },
+        {
+            "click": ".el-dialog.cookie-dialog .el-switch.is-checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".el-dialog.cookie-dialog .el-dialog__footer button.el-button--primary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "allow_analysis=%22false%22"
+        }
+    ]
+}
