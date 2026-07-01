@@ -40,17 +40,16 @@
     ],
     "optOut": [
         {
-            "comment": "Banner phase: nested if/else so exactly one action runs. Ketch's primary/secondary/tertiary ids reflect visual hierarchy, not role, so a successful aria-label reject must not fall through to tertiary (which is 'Cookie Settings' on some layouts, e.g. PBS).",
+            "comment": "Banner phase: pick one banner action.",
             "if": {
                 "exists": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
             },
             "then": [
                 {
-                    "comment": "Direct reject-style button, matched by aria-label prefix ('Reject All', 'Reject Optional Cookies', etc.).",
                     "waitForThenClick": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
                 },
                 {
-                    "comment": "Some variants show the preferences modal directly and treat Reject All as 'toggle all off'. If the modal is still visible, submit it.",
+                    "comment": "Submit if the preferences modal is still open (Reject All only toggled switches).",
                     "if": {
                         "visible": "#lanyard_root [aria-describedby=preference-description], #lanyard_root [aria-describedby=modal-description], #ketch-modal, #ketch-purposes-modal, #ketch-preferences"
                     },
@@ -63,14 +62,14 @@
             ],
             "else": [
                 {
-                    "comment": "Legacy fallback: reject button without matching aria-label, exposed as #ketch-banner-button-tertiary.",
+                    "comment": "Reject button without aria-label match.",
                     "if": {
                         "exists": "#ketch-banner-button-tertiary"
                     },
                     "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary" }],
                     "else": [
                         {
-                            "comment": "Older banner (aria-describedby=banner-description): click secondary to open settings, or dismiss single-button disclosure. Preferences modal handled by the trailing step.",
+                            "comment": "Open settings from banner, or dismiss disclosure-only banner.",
                             "if": {
                                 "exists": "#lanyard_root [aria-describedby=banner-description]"
                             },
@@ -81,8 +80,7 @@
                                     },
                                     "then": [
                                         {
-                                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary",
-                                            "comment": "settings or reject button"
+                                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
                                         }
                                     ],
                                     "else": [
@@ -92,8 +90,7 @@
                                             },
                                             "then": [
                                                 {
-                                                    "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child",
-                                                    "comment": "Disclosure-only banner (US/CCPA acknowledge): consent is set by jurisdiction defaults."
+                                                    "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child"
                                                 }
                                             ]
                                         }
@@ -111,7 +108,7 @@
             "optional": true
         },
         {
-            "comment": "Preferences modal open (typically after opening settings from the banner): prefer Reject All, else uncheck every enabled toggle; then confirm/save.",
+            "comment": "Preferences modal handling.",
             "if": {
                 "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
             },
@@ -127,7 +124,7 @@
                     ],
                     "else": [
                         {
-                            "comment": "No 'Reject All' in this jurisdiction (e.g. US/CCPA per-purpose toggles): flip off each enabled switch.",
+                            "comment": "No Reject All: uncheck every enabled purpose switch.",
                             "click": "#lanyard_root input[type=checkbox][role=switch][aria-checked=true]:not(:disabled)",
                             "all": true,
                             "optional": true
