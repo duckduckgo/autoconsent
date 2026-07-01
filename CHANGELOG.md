@@ -1,3 +1,24 @@
+# v16.3.0 (Wed Jul 01 2026)
+
+#### Rules
+
+- Remove theverge rule [#1416](https://github.com/duckduckgo/autoconsent/pull/1416) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Prefix release note labels [#1415](https://github.com/duckduckgo/autoconsent/pull/1415) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Clean up some outdated config parameters [#1414](https://github.com/duckduckgo/autoconsent/pull/1414) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.2.0 (Tue Jun 30 2026)
 
 #### Rules
