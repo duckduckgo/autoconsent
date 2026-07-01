@@ -1,4 +1,4 @@
-import { BackgroundDevtoolsMessage, DevtoolsMessage } from '../../lib/messages';
+import { BackgroundDevtoolsMessage, BackgroundMessage, DevtoolsMessage } from '../../lib/messages';
 import { Config } from '../../lib/types';
 import { storageGet, storageSet } from '../mv-compat';
 
@@ -25,6 +25,16 @@ function getRowForInstance(instanceId: string) {
     }
 }
 
+function formatPerformance(performance?: Record<string, number[]>) {
+    if (!performance) {
+        return '';
+    }
+    return Object.entries(performance)
+        .filter(([, values]) => values.length > 0)
+        .map(([name, values]) => `${name}: ${values.map((value) => `${value}ms`).join(', ')}`)
+        .join('\n');
+}
+
 function reconnect(): chrome.runtime.Port {
     backgroundPageConnection = chrome.runtime.connect({
         name: 'devtools-panel',
@@ -44,6 +54,7 @@ function reconnect(): chrome.runtime.Port {
             td[4].innerText = `${message.state.findCmpAttempts}`;
             td[5].innerText = message.state.detectedCmps.join(', ');
             td[6].innerText = message.state.detectedPopups.join(', ');
+            td[7].innerText = formatPerformance(message.state.performance);
         } else if (message.type === 'instanceTerminated') {
             document.getElementById(`instance-${message.instanceId}`)?.classList.add('dead');
         }
@@ -83,6 +94,12 @@ document.getElementById('reload').addEventListener('click', async () => {
     }
     clearPanel();
     chrome.devtools.inspectedWindow.reload({});
+});
+
+document.getElementById('measure-performance').addEventListener('click', () => {
+    chrome.tabs.sendMessage(chrome.devtools.inspectedWindow.tabId, {
+        type: 'measurePerformance',
+    } as BackgroundMessage);
 });
 
 document.getElementById('mode').addEventListener('change', async () => {
