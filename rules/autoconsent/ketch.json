@@ -40,17 +40,17 @@
     ],
     "optOut": [
         {
-            "comment": "Banner phase: pick exactly one action to dismiss the banner (or open the preferences modal). Wrapped in a nested if/else chain so a successful direct-reject click does NOT also run the tertiary / banner-description branches — on layouts like PBS where #ketch-banner-button-tertiary is 'Cookie Settings' that would re-open preferences after opt-out.",
+            "comment": "Banner phase: nested if/else so exactly one action runs. Ketch's primary/secondary/tertiary ids reflect visual hierarchy, not role, so a successful aria-label reject must not fall through to tertiary (which is 'Cookie Settings' on some layouts, e.g. PBS).",
             "if": {
                 "exists": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
             },
             "then": [
                 {
-                    "comment": "Prefer a direct reject-style button in the banner or preferences modal (any Ketch DOM variant). Ketch's primary/secondary/tertiary ids reflect visual hierarchy, not role, so match on aria-label instead: covers 'Reject All', 'Reject Optional Cookies', etc.",
+                    "comment": "Direct reject-style button, matched by aria-label prefix ('Reject All', 'Reject Optional Cookies', etc.).",
                     "waitForThenClick": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
                 },
                 {
-                    "comment": "Some Ketch variants show the preferences modal directly (no banner phase) and treat Reject All as 'toggle all off' — the choice is not saved until Confirm/Save is clicked. If the modal is still visible, submit it. Selectors mirror the modal-handling step below.",
+                    "comment": "Some variants show the preferences modal directly and treat Reject All as 'toggle all off'. If the modal is still visible, submit it.",
                     "if": {
                         "visible": "#lanyard_root [aria-describedby=preference-description], #lanyard_root [aria-describedby=modal-description], #ketch-modal, #ketch-purposes-modal, #ketch-preferences"
                     },
@@ -63,14 +63,14 @@
             ],
             "else": [
                 {
-                    "comment": "Legacy fallback: some Ketch banners expose the direct reject button as #ketch-banner-button-tertiary without an aria-label prefix match.",
+                    "comment": "Legacy fallback: reject button without matching aria-label, exposed as #ketch-banner-button-tertiary.",
                     "if": {
                         "exists": "#ketch-banner-button-tertiary"
                     },
                     "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary" }],
                     "else": [
                         {
-                            "comment": "Older banner variant exposed via aria-describedby=banner-description: open settings/reject (same button class). The preferences modal is handled by the trailing step below.",
+                            "comment": "Older banner (aria-describedby=banner-description): click secondary to open settings, or dismiss single-button disclosure. Preferences modal handled by the trailing step.",
                             "if": {
                                 "exists": "#lanyard_root [aria-describedby=banner-description]"
                             },
@@ -82,7 +82,7 @@
                                     "then": [
                                         {
                                             "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary",
-                                            "comment": "can be either settings or reject button"
+                                            "comment": "settings or reject button"
                                         }
                                     ],
                                     "else": [
@@ -93,7 +93,7 @@
                                             "then": [
                                                 {
                                                     "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child",
-                                                    "comment": "Disclosure-only banner (e.g. US/CCPA notice with a single 'I understand'/'OK' acknowledge button and no reject option). Clicking the lone button dismisses the notice; consent state is already determined by Ketch's jurisdiction defaults."
+                                                    "comment": "Disclosure-only banner (US/CCPA acknowledge): consent is set by jurisdiction defaults."
                                                 }
                                             ]
                                         }
@@ -111,7 +111,7 @@
             "optional": true
         },
         {
-            "comment": "Preferences/purposes modal is open (typically after opening settings from the banner): prefer Reject All then Confirm; otherwise (e.g. US/CCPA variant with only per-purpose toggles) uncheck every enabled switch and save. Skipped if the banner phase already dismissed everything.",
+            "comment": "Preferences modal open (typically after opening settings from the banner): prefer Reject All, else uncheck every enabled toggle; then confirm/save.",
             "if": {
                 "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
             },
@@ -127,7 +127,7 @@
                     ],
                     "else": [
                         {
-                            "comment": "Fallback for jurisdictions where the modal has no 'Reject All': toggle off each currently-enabled purpose switch.",
+                            "comment": "No 'Reject All' in this jurisdiction (e.g. US/CCPA per-purpose toggles): flip off each enabled switch.",
                             "click": "#lanyard_root input[type=checkbox][role=switch][aria-checked=true]:not(:disabled)",
                             "all": true,
                             "optional": true
