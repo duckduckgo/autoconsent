@@ -17,6 +17,7 @@
                     },
                     "then": [
                         { "click": "#moove_gdpr_cookie_info_bar .change-settings-button" },
+                        { "eval": "EVAL_MOOVE_1" },
                         { "waitForVisible": "#moove_gdpr_cookie_modal" },
                         { "eval": "EVAL_MOOVE_0" },
                         { "click": ".moove-gdpr-modal-save-settings" }

@@ -158,6 +158,23 @@ export const snippets = {
         document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach((i) => {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
+    // Newer Moove versions render the settings modal as a <dialog> element inside a
+    // .gdpr_lightbox wrapper. The wrapper opens (dark backdrop) but the dialog itself
+    // stays hidden because the [open] attribute is never set, so the modal is unreachable
+    // and the opt-out flow gets stuck with a full-page dark overlay. Force the dialog
+    // open so the flow can continue.
+    EVAL_MOOVE_1: () => {
+        const dialog = document.getElementById('moove_gdpr_cookie_modal') as HTMLDialogElement | null;
+        if (dialog && dialog.tagName === 'DIALOG' && !dialog.hasAttribute('open')) {
+            try {
+                if (typeof dialog.showModal === 'function') dialog.showModal();
+                else dialog.setAttribute('open', '');
+            } catch (_e) {
+                dialog.setAttribute('open', '');
+            }
+        }
+        return true;
+    },
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
