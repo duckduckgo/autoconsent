@@ -301,10 +301,21 @@ export default class AutoConsent {
             }
         };
 
-        const mutationObserver = this.domActions.waitForMutation('html');
-        mutationObserver.catch(() => {}); // ensure promise rejection is caught
+        let mutationObserver: Promise<boolean> | null = null;
+        let skipBroadDetection = false;
 
         for (const [stageName, ruleGroup] of rulesPriorityStages) {
+            if (stageName !== 'site-specific') {
+                if (this.shouldSkipBroadDetection()) {
+                    skipBroadDetection = true;
+                    break;
+                }
+                if (!mutationObserver) {
+                    mutationObserver = this.domActions.waitForMutation('html');
+                    mutationObserver.catch(() => {}); // ensure promise rejection is caught
+                }
+            }
+
             logsConfig.lifecycle &&
                 ruleGroup.length > 0 &&
                 console.log(
@@ -324,13 +335,16 @@ export default class AutoConsent {
         }
 
         this.detectHeuristics(); // run heuristics after trying rules
+        if (skipBroadDetection) {
+            return foundCMPs;
+        }
 
         if (foundCMPs.length === 0 && retries > 0) {
             // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             const waitFor: Promise<boolean>[] = [this.domActions.wait(500)];
-            if (this.state.findCmpAttempts > 1) {
+            if (this.state.findCmpAttempts > 1 && mutationObserver) {
                 waitFor.push(mutationObserver);
             }
             try {
@@ -344,6 +358,34 @@ export default class AutoConsent {
         }
 
         return foundCMPs;
+    }
+
+    shouldSkipBroadDetection(): boolean {
+        const limit = this.config.maxDocumentElements;
+        this.config.performanceLoggingEnabled && performance.mark('documentSizeCheckStart');
+        const documentTooLarge = limit > 0 && document.getElementsByTagName('*').length > limit;
+        this.config.performanceLoggingEnabled && performance.mark('documentSizeCheckEnd');
+        this.config.performanceLoggingEnabled && performance.measure('documentSizeCheck', 'documentSizeCheckStart', 'documentSizeCheckEnd');
+
+        if (documentTooLarge) {
+            const errorDetails = {
+                msg: `Document too large: ${limit}`,
+                reason: 'documentTooLarge',
+                limit,
+                url: location.href,
+            };
+            this.config.logs.lifecycle &&
+                console.log(errorDetails.msg, {
+                    limit,
+                    url: location.href,
+                });
+            this.sendContentMessage({
+                type: 'autoconsentError',
+                details: errorDetails,
+            });
+        }
+
+        return documentTooLarge;
     }
 
     detectHeuristics() {
@@ -652,6 +694,7 @@ export default class AutoConsent {
             findCmpGeneric: getRoundedPerformanceEntries('findCmp_generic'),
             findCmpHeuristic: getRoundedPerformanceEntries('findCmp_heuristic'),
             parseDeclarativeRules: getRoundedPerformanceEntries('parseDeclarativeRules'),
+            documentSizeCheck: getRoundedPerformanceEntries('documentSizeCheck'),
         };
     }
 }
