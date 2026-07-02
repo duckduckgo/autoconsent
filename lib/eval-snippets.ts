@@ -75,6 +75,12 @@ export const snippets = {
         return false;
     },
     EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_TRANSCEND_POPUP_SHOWN: () => {
+        // 'Hidden' = SDK loaded but no popup rendered (filters out backend-only sites).
+        // Non-string = transient init state, keep retrying.
+        const vs = window.transcend?.getViewState?.();
+        return typeof vs === 'string' && vs !== 'Hidden';
+    },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
