@@ -36,11 +36,24 @@ export class DomActions implements DomActionsProvider {
 
     elementVisible(selector: ElementSelector, check: VisibilityCheck = 'all'): boolean {
         const elem = this.elementSelector(selector);
+
+        // Temporarily disable prehide stylesheet so that elements hidden by
+        // autoconsent's own prehide (opacity: 0) are still detected as visible.
+        const prehideStyle = document.querySelector('style#autoconsent-prehide') as HTMLStyleElement | null;
+        const prehideDisabled = prehideStyle?.sheet && !prehideStyle.sheet.disabled;
+        if (prehideDisabled) {
+            prehideStyle.sheet!.disabled = true;
+        }
+
         const results = new Array(elem.length);
         elem.forEach((e, i) => {
-            // check for display: none
             results[i] = isElementVisible(e);
         });
+
+        if (prehideDisabled) {
+            prehideStyle!.sheet!.disabled = false;
+        }
+
         if (check === 'none') {
             return results.every((r) => !r);
         } else if (results.length === 0) {
