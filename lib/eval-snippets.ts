@@ -104,6 +104,24 @@ export const snippets = {
         return true;
     },
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
+    EVAL_COMPLIANZ_NO_OTHER_POPUP: () => {
+        if (document.readyState !== 'complete') {
+            return false;
+        }
+        const selector =
+            ':is([role="dialog"], [aria-modal="true"], dialog[open], [class*="dialog"], [class*="modal"], [class*="overlay"]):not(#cmplz-cookiebanner-container):not(#cmplz-cookiebanner-container *)';
+        const isVisible = (elem) => {
+            if (!elem) {
+                return false;
+            }
+            if (elem.offsetParent !== null) {
+                return true;
+            }
+            const css = window.getComputedStyle(elem);
+            return css.position === 'fixed' && css.display !== 'none';
+        };
+        return !Array.from(document.querySelectorAll(selector)).some(isVisible);
+    },
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
             document.cookie
