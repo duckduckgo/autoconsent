@@ -1,9 +1,6 @@
 {
     "name": "pikpak",
     "vendorUrl": "https://mypikpak.com/",
-    "runContext": {
-        "urlPattern": "^https://([^/]+\\.)?(mypikpak|filepax|pikpakse|pikpax|pickpackapp)\\.(com|net)"
-    },
     "prehideSelectors": [".cookie-wrapper .cookie-tip"],
     "detectCmp": [
         {
