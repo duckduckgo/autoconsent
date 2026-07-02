@@ -35,7 +35,14 @@
     ],
     "test": [
         {
-            "cookieContains": "allow_analysis=%22false%22"
+            "any": [
+                {
+                    "cookieContains": "allow_analysis=%22false%22"
+                },
+                {
+                    "cookieContains": "allow_analysis=false"
+                }
+            ]
         }
     ]
 }
