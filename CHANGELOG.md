@@ -1,3 +1,23 @@
+# v16.4.0 (Thu Jul 02 2026)
+
+#### Rules
+
+- ketch: handle US/CCPA preferences modal with no Reject All [#1391](https://github.com/duckduckgo/autoconsent/pull/1391) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+- Add msn.com cookie banner rule [#1418](https://github.com/duckduckgo/autoconsent/pull/1418) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Test Infrastructure
+
+- add performance measuremenet button to devtools [#1417](https://github.com/duckduckgo/autoconsent/pull/1417) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.3.0 (Wed Jul 01 2026)
 
 #### Rules
