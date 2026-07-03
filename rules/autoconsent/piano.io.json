@@ -1,0 +1,15 @@
+{
+    "name": "piano.io",
+    "_metadata": {
+        "vendorUrl": "https://piano.io/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://buy(-\\w+)?\\.piano\\.io/checkout/template/"
+    },
+    "detectCmp": [{ "exists": "[data-close-button][external-event=\"cookie-close-inline\"]" }],
+    "detectPopup": [{ "visible": "[data-close-button][external-event=\"cookie-close-inline\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-acceptance-button][external-event=\"cookie-accept-inline\"]" }],
+    "optOut": [{ "waitForThenClick": "[data-close-button][external-event=\"cookie-close-inline\"]" }]
+}
