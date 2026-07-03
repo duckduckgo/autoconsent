@@ -1,3 +1,16 @@
+# v16.5.0 (Fri Jul 03 2026)
+
+#### Rules
+
+- Add pikpak cookie consent rule [#1420](https://github.com/duckduckgo/autoconsent/pull/1420) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.4.0 (Thu Jul 02 2026)
 
 #### Rules
