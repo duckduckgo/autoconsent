@@ -5,11 +5,10 @@
     },
     "runContext": {
         "main": false,
-        "frame": true,
-        "urlPattern": "^https://buy(-\\w+)?\\.piano\\.io/checkout/template/"
+        "frame": true
     },
-    "detectCmp": [{ "exists": "[data-close-button][external-event=\"cookie-close-inline\"]" }],
-    "detectPopup": [{ "visible": "[data-close-button][external-event=\"cookie-close-inline\"]" }],
-    "optIn": [{ "waitForThenClick": "[data-acceptance-button][external-event=\"cookie-accept-inline\"]" }],
-    "optOut": [{ "waitForThenClick": "[data-close-button][external-event=\"cookie-close-inline\"]" }]
+    "detectCmp": [{ "exists": "#piano-cookie_banner" }],
+    "detectPopup": [{ "visible": "#piano-cookie_banner" }],
+    "optIn": [{ "waitForThenClick": "#piano-cookie_banner [data-acceptance-button]" }],
+    "optOut": [{ "waitForThenClick": "#piano-cookie_banner [data-close-button]" }]
 }
