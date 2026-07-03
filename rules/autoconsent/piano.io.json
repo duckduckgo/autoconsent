@@ -1,0 +1,14 @@
+{
+    "name": "piano.io",
+    "_metadata": {
+        "vendorUrl": "https://piano.io/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true
+    },
+    "detectCmp": [{ "exists": "#piano-cookie_banner" }],
+    "detectPopup": [{ "visible": "#piano-cookie_banner" }],
+    "optIn": [{ "waitForThenClick": "#piano-cookie_banner [data-acceptance-button]" }],
+    "optOut": [{ "waitForThenClick": "#piano-cookie_banner [data-close-button]" }]
+}
