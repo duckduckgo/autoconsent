@@ -1,3 +1,16 @@
+# v16.6.0 (Sat Jul 04 2026)
+
+#### Rules
+
+- Add piano.io cookie banner rule [#1421](https://github.com/duckduckgo/autoconsent/pull/1421) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.5.0 (Fri Jul 03 2026)
 
 #### Rules
