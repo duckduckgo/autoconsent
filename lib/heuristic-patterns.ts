@@ -26,12 +26,8 @@ export const DETECT_PATTERNS = [
 
     // FR
     /utilisons.{0,100}des.{0,100}cookies/gi,
-    /nous.{0,100}utilisons.{0,100}des/gi,
     /des.{0,100}cookies.{0,100}pour/gi,
-    /des.{0,100}informations.{0,100}sur/gi,
     /retirer.{0,100}votre.{0,100}consentement/gi,
-    /accéder.{0,100}à.{0,100}des/gi,
-    /à.{0,100}des.{0,100}informations/gi,
     /et.{0,100}nos.{0,100}partenaires/gi,
     /publicités.{0,100}et.{0,100}du.{0,100}contenu/gi,
     /utilise.{0,100}des.{0,100}cookies/gi,
