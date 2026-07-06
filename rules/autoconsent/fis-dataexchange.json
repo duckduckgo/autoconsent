@@ -1,0 +1,33 @@
+{
+    "name": "fis-dataexchange",
+    "vendorUrl": "https://services.dataexchange.fiscloudservices.com/",
+    "runContext": {
+        "urlPattern": "^https://services\\.dataexchange\\.fiscloudservices\\.com/"
+    },
+    "prehideSelectors": [".dx-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".dx-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".dx-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".dx-cookie-banner .dx-cookie-banner-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".dx-cookie-banner .dx-cookie-banner-close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CookiePolicy=OK"
+        }
+    ]
+}
