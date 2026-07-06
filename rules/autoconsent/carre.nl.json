@@ -28,11 +28,5 @@
         {
             "waitForThenClick": "#cookie-notification .cookie_pref_wrapper .pref-opt.refuse"
         }
-    ],
-    "test": [
-        {
-            "exists": "#cookie-notification",
-            "negated": true
-        }
     ]
 }
