@@ -7,7 +7,6 @@ export const DETECT_PATTERNS = [
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
     /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi,
-    /by clicking.{0,100}(?:accept|agree|allow)/gi,
     /we (?:use|serve)(?: optional)? cookies/gi,
     /we are using cookies/gi,
     /use of cookies/gi,
@@ -95,7 +94,6 @@ export const DETECT_PATTERNS = [
     /\b(hacemos|hace) uso de cookies\b/i,
     /\busa cookies de google\b/i,
     /acepta.{0,80} uso de cookies/i,
-    /al hacer clic.{0,80}aceptar/i,
     /al utilizar nuestro sitio web.{0,80}cookie/i,
     /almacenar la información en un dispositivo y\/?o acceder a ella/i,
     /cookie.{0,30} utiliza/i,
@@ -105,7 +103,6 @@ export const DETECT_PATTERNS = [
     /navegando.{0,100}cookie/i,
     /nosotros y nuestros( \d+)? (socios|proveedores).{0,180} cookies/gi,
     /recopilamos y almacenamos datos de usted y de su dispositivo/gi,
-    /si haces? clic.{0,20}acept/i,
     /utilizamos tecnolog[ií]as como las cookies/i,
 
     // Polish (PL)
