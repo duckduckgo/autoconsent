@@ -1,0 +1,13 @@
+{
+    "name": "wesleyan.edu",
+    "runContext": {
+        "urlPattern": "^https?://([^/]+\\.)?wesleyan\\.edu/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-law"],
+    "detectCmp": [{ "exists": "#cookie-law button.accept" }],
+    "detectPopup": [{ "visible": "#cookie-law" }],
+    "optIn": [{ "waitForThenClick": "#cookie-law button.accept" }],
+    "optOut": [{ "hide": "#cookie-law" }],
+    "test": [{ "visible": "#cookie-law", "check": "none" }]
+}
