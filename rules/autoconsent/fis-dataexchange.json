@@ -2,7 +2,7 @@
     "name": "fis-dataexchange",
     "vendorUrl": "https://services.dataexchange.fiscloudservices.com/",
     "runContext": {
-        "urlPattern": "^https://services\\.dataexchange\\.fiscloudservices\\.com/"
+        "urlPattern": "^https://services\\.dataexchange(-[a-z]+)?\\.fiscloudservices\\.com/"
     },
     "prehideSelectors": [".dx-cookie-banner"],
     "detectCmp": [
