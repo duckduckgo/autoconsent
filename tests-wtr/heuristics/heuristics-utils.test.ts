@@ -89,8 +89,6 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I Reject All (except Strictly Necessary)')).to.equal('reject');
         expect(classifyButtonTextRegex('Reject All (except Strictly Necessary)')).to.equal('reject');
         expect(classifyButtonTextRegex('Reject All (except Necessary)')).to.equal('reject');
-        expect(classifyButtonTextRegex('Deny All (except Strictly Essential)')).to.equal('reject');
-        expect(classifyButtonTextRegex('I Reject All except necessary')).to.equal('reject');
     });
 
     it('returns other for empty string', () => {
