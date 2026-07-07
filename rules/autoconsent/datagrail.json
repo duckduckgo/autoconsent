@@ -1,0 +1,48 @@
+{
+    "name": "datagrail",
+    "_metadata": {
+        "vendorUrl": "https://www.datagrail.io/"
+    },
+    "prehideSelectors": [".dg-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": ".dg-consent-banner"
+        },
+        {
+            "exists": [".dg-consent-banner", ".dg-app"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".dg-consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".dg-consent-banner", "button.dg-button.accept_all"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": [".dg-consent-banner", "button.dg-button.reject_all"] },
+            "then": [
+                {
+                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.open_layer"]
+                },
+                {
+                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all, button.dg-button.essential_only"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "datagrail_consent"
+        }
+    ]
+}
