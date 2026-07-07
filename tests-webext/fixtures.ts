@@ -9,7 +9,9 @@ export const test = base.extend<{
     context: BrowserContext;
     extensionId: string;
 }>({
-    context: async (_fixtures, use) => {
+    // Playwright requires an object destructuring pattern for fixture dependencies.
+    // eslint-disable-next-line no-empty-pattern
+    context: async ({}, use) => {
         if (!fs.existsSync(path.join(pathToExtension, 'manifest.json'))) {
             throw new Error('Bundled MV3 extension not found. Run `npm run prepublish` before webext tests.');
         }
