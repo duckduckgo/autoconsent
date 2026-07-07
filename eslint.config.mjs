@@ -59,7 +59,7 @@ const c = tseslint.config(
     },
 
     {
-        files: ['tests/**/*', 'tests-wtr/**/*'],
+        files: ['tests/**/*', 'tests-wtr/**/*', 'tests-webext/**/*'],
         languageOptions: {
             globals: {
                 ...globals.jasmine,

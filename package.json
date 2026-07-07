@@ -27,6 +27,7 @@
     "test:webkit": "playwright test --project webkit",
     "test:firefox": "playwright test --project firefox",
     "test:chrome": "playwright test --project chrome",
+    "test:webext": "playwright test --config tests-webext/playwright.config.ts",
     "test:lib": "web-test-runner",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
     "build-rules": "ts-node rules/build.ts",
