@@ -29,6 +29,5 @@ jobs:
                   cache: 'npm'
             - run: npm ci
             - run: npx playwright install chromium
-            - run: npm run prepublish
             - run: npm run test:lib
             - run: npm run test:webext
