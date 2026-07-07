@@ -8,7 +8,7 @@
     "prehideSelectors": ["adc-cookie-banner"],
     "detectCmp": [
         {
-            "exists": "adc-cookie-banner"
+            "exists": ["adc-cookie-banner", "#cookie-banner"]
         }
     ],
     "detectPopup": [
