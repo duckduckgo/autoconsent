@@ -682,7 +682,7 @@ export const ACCEPT_PATTERNS = [
     'de acordo',
 
     // French (FR)
-    /^accepter (tout|tous les cookies)$/,
+    /^accepter (tout|tous les cookies|fermer)$/,
 
     // German (DE)
     /^(alles akzeptieren|alle zulassen|auswahl erlauben|cookies zulassen|einverstanden|einwilligung|zustimmen|zustimmung)$/,
