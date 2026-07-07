@@ -2,6 +2,7 @@ import { test as base, chromium, type BrowserContext } from '@playwright/test';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { getExtensionId } from './helpers';
 
 const pathToExtension = path.join(__dirname, '../dist/addon-mv3');
 
@@ -31,11 +32,7 @@ export const test = base.extend<{
         await context.close();
     },
     extensionId: async ({ context }, use) => {
-        let [serviceWorker] = context.serviceWorkers();
-        if (!serviceWorker) {
-            serviceWorker = await context.waitForEvent('serviceworker');
-        }
-        const extensionId = serviceWorker.url().split('/')[2];
+        const extensionId = await getExtensionId(context);
         await use(extensionId);
     },
 });
