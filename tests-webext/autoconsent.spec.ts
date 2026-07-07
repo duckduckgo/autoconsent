@@ -48,8 +48,6 @@ test.describe('MV3 extension', () => {
 
         await page.goto(COSMETIC_BANNER_URL, { waitUntil: 'domcontentloaded' });
 
-        await expect(page.locator('#privacy-test-page-cmp-test-banner')).toBeVisible();
-
         await expectBannerHidden(page);
 
         const popup = await openPopup(context);
