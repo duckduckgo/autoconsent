@@ -1,3 +1,17 @@
+# v16.7.0 (Tue Jul 07 2026)
+
+#### Rules
+
+- Fix lineagrafica cosmetic rule to hide overlay/modal class variants [#1423](https://github.com/duckduckgo/autoconsent/pull/1423) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- Add carre.nl cookie banner rule [#1422](https://github.com/duckduckgo/autoconsent/pull/1422) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.6.0 (Sat Jul 04 2026)
 
 #### Rules
