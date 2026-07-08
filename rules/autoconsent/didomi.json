@@ -6,7 +6,7 @@
     "detectCmp": [{ "exists": "#didomi-host" }],
     "detectPopup": [
         {
-            "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner, #didomi-host:not(:empty)",
+            "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner, #didomi-host:not([aria-hidden=\"true\"]):not(:empty)",
             "check": "any"
         }
     ],

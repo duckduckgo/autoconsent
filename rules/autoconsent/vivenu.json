@@ -1,0 +1,31 @@
+{
+    "name": "vivenu",
+    "vendorUrl": "https://vivenu.com",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-slot=\"dialog-content\"] a[href*=\"vivenu.com/dataprivacy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-slot=\"dialog-content\"] a[href*=\"vivenu.com/dataprivacy\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-slot=\"dialog-content\"]:has(a[href*=\"vivenu.com/dataprivacy\"]) button:nth-of-type(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-slot=\"dialog-content\"]:has(a[href*=\"vivenu.com/dataprivacy\"]) button:nth-of-type(2)"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-slot=\"dialog-content\"] a[href*=\"vivenu.com/dataprivacy\"]",
+            "check": "none"
+        }
+    ]
+}

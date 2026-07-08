@@ -6,15 +6,20 @@
         "main": true
     },
     "intermediate": false,
-    "prehideSelectors": ["#lanyard_root div[role='dialog']"],
+    "prehideSelectors": ["#lanyard_root div[role='dialog']", "#ketch-banner", "#ketch-modal"],
     "detectCmp": [
         {
-            "exists": "#lanyard_root div[role='dialog']"
+            "any": [
+                { "exists": "#lanyard_root div[role='dialog']" },
+                { "exists": "#ketch-banner" },
+                { "exists": "#ketch-modal" },
+                { "exists": "#lanyard_root [class*='ketch-fixed']" }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#lanyard_root div[role='dialog']"
+            "any": [{ "visible": "#lanyard_root div[role='dialog']" }, { "visible": "#ketch-banner" }, { "visible": "#ketch-modal" }]
         }
     ],
     "optIn": [
@@ -26,34 +31,108 @@
                 { "waitForThenClick": "#lanyard_root div[class*=buttons] > :nth-child(2)" },
                 { "click": "#lanyard_root button[class='confirmButton']" }
             ],
-            "else": [{ "waitForThenClick": "#lanyard_root div[class*=buttons] > :nth-child(2)" }]
+            "else": [
+                {
+                    "waitForThenClick": "#ketch-banner-button-primary, #lanyard_root div[class*=buttons] > :nth-child(2)"
+                }
+            ]
         }
     ],
     "optOut": [
         {
+            "comment": "Banner phase: pick one banner action.",
             "if": {
-                "exists": "#lanyard_root [aria-describedby=banner-description]"
+                "exists": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
             },
             "then": [
                 {
-                    "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary]",
-                    "comment": "can be either settings or reject button"
+                    "waitForThenClick": "#lanyard_root button[aria-label^='Reject' i], #ketch-banner button[aria-label^='Reject' i]"
+                },
+                {
+                    "comment": "Submit if the preferences modal is still open (Reject All only toggled switches).",
+                    "if": {
+                        "visible": "#lanyard_root [aria-describedby=preference-description], #lanyard_root [aria-describedby=modal-description], #ketch-modal, #ketch-purposes-modal, #ketch-preferences"
+                    },
+                    "then": [
+                        {
+                            "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm'], #ketch-modal button[aria-label='Save Settings'], #ketch-purposes-modal button[aria-label='Save Settings']"
+                        }
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "comment": "Reject button without aria-label match.",
+                    "if": {
+                        "exists": "#ketch-banner-button-tertiary"
+                    },
+                    "then": [{ "waitForThenClick": "#ketch-banner-button-tertiary" }],
+                    "else": [
+                        {
+                            "comment": "Open settings from banner, or dismiss disclosure-only banner.",
+                            "if": {
+                                "exists": "#lanyard_root [aria-describedby=banner-description]"
+                            },
+                            "then": [
+                                {
+                                    "if": {
+                                        "exists": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
+                                    },
+                                    "then": [
+                                        {
+                                            "waitForThenClick": "#lanyard_root div[class*=buttons] > button[class*=secondaryButton], #lanyard_root button[class*=buttons-secondary], #ketch-banner-button-secondary"
+                                        }
+                                    ],
+                                    "else": [
+                                        {
+                                            "if": {
+                                                "exists": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child"
+                                            },
+                                            "then": [
+                                                {
+                                                    "click": "#lanyard_root [id^='ketch-banner-buttons-container'] > button:only-child"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
         {
-            "waitFor": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences",
+            "waitFor": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal",
             "timeout": 1000,
             "optional": true
         },
         {
+            "comment": "Preferences modal handling.",
             "if": {
-                "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences"
+                "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
             },
             "then": [
-                { "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton]" },
                 {
-                    "click": "#lanyard_root button[class*=confirmButton],#lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton]"
+                    "if": {
+                        "exists": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "comment": "No Reject All: uncheck every enabled purpose switch.",
+                            "click": "#lanyard_root input[type=checkbox][role=switch][aria-checked=true]:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        }
+                    ]
+                },
+                {
+                    "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm'], #ketch-modal button[aria-label='Save Settings'], #ketch-purposes-modal button[aria-label='Save Settings']"
                 }
             ]
         }

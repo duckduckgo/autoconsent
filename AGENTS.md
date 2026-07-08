@@ -11,7 +11,7 @@ lib/rules.ts      Type definitions for AutoConsentCMPRule and rule steps
 lib/eval-snippets.ts  Eval snippets for main-world JS execution
 rules/autoconsent/    Hand-maintained JSON rules
 rules/generated/      Crawler-generated JSON rules (auto_XX_domain_hash.json)
-rules/build.ts        Merges all rules into rules.json, consentomatic.json, compact-rules.json
+rules/build.ts        Merges all rules into rules.json, compact-rules.json
 data/                 Coverage data (coverage.json) and site lists
 tests/                Playwright E2E test specs (one per CMP)
 tests-wtr/            Web Test Runner unit tests for DOM actions and rule logic
@@ -25,7 +25,7 @@ docs/                 Reference documentation (rule syntax, internal API)
 
 ```bash
 npm ci
-npm run prepublish    # full build: compile filterlist, build rules, bundle
+npm run prepublish    # full build: build rules and bundle
 npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 ```
 
@@ -39,7 +39,7 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 | `npm run test` | All Playwright E2E tests |
 | `npm run test:webkit` | Playwright tests in WebKit only |
 | `npm run test:chrome` | Playwright tests in Chrome only |
-| `npm run build-rules` | Rebuild `rules.json`, `consentomatic.json`, `compact-rules.json` |
+| `npm run build-rules` | Rebuild `rules.json`, `compact-rules.json` |
 | `npm run create-rule` | Scaffold a new JSON rule + test spec |
 
 ## Code Style
@@ -60,7 +60,7 @@ CMPs behave differently by region:
 
 Use `if`/`then`/`else` to handle regional variants within a single rule.
 
-**All rule changes MUST be tested across geographic regions** to catch regional popup variations. Test from real geographic locations using available regional-testing tooling (e.g. proxy-based remote browsers).
+**All rule changes MUST be tested across ALL supported geographic regions** to catch regional popup variations. Test from real geographic locations using available regional testing tooling (e.g. `proxy-testing` skill).
 
 ### Generic vs Site-Specific Rules
 
@@ -102,13 +102,16 @@ Single-string selectors cannot pierce — use arrays whenever the target is insi
 shadow root or same-origin iframe.
 
 ### General Guidelines and Gotchas
-- **Regional testing is mandatory** for any rule change — CMPs behave differently under GDPR (EU), CCPA (US), and other jurisdictions. Run the rule against different regions using available regional-testing tooling before considering the change done.
+- **Regional testing is mandatory** for any rule change — CMPs behave differently under GDPR (EU), CCPA (US), and other jurisdictions. Run the rule against different regions using available regional testing tooling before considering the change done.
 - When verifying a rule, **look at the screenshots** on top of the API results — sometimes a rule reports success, but the popup is not actually handled - a screenshot will detect this.
 - **Paywalls do not need to be handled.** If the website presents the choice to pay or agree to cookies, the correct solution is to disable the feature on that site, so no code changes required in this case.
 - If the pop-up has an explicit "reject"-like button, you should first consider why HEURISTIC rule didn't handle it. A fix to the heuristic rule is always preferred to a new rule, as long as it doesn't cause potential false-positives on other sites.
+- **Watch out for race conditions**. A common pitfall is that a rule starts clicking before JS handlers are ready. If you detect this, add an appropriate wait step before the click, preferably based on a specific DOM state. Unconditional `wait` is a LAST RESORT because it leads to a poor UX.
+- **Watch out for false positive detections**. Always verify that the rule does NOT match after the popup is dismissed and the page is reloaded. Over-detection can lead to reload loops.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
+- Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
@@ -147,6 +150,17 @@ Use the `/publicwww-search` skill to search website source code for CMP-specific
 
 Requires `PUBLICWWW_KEY` environment variable.
 
+## Checking for Existing Site Exceptions in `privacy-configuration`
+
+Some sites have autoconsent disabled entirely via the `duckduckgo/privacy-configuration` repo. Before investigating a reported popup, check whether an exception already exists for the domain in:
+
+- `features/autoconsent.json`
+- `overrides/{android,ios,macos,windows,extension}-override.json` and any files under `overrides/browsers/`
+
+**Do NOT rely on `gh search code` for this lookup.** GitHub's code search index has a per-file size limit and `features/autoconsent.json` is excluded — searches for the domain there silently return zero hits even when an exception exists.
+
+Instead, fetch the file directly and grep locally, and/or list PRs by title.
+
 ## Verification
 
 After creating or modifying a rule:
@@ -155,4 +169,5 @@ After creating or modifying a rule:
 2. `npm run rule-syntax-check` — validate rule JSON against schema
 3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
 4. `npm run prepublish` — full build including extension bundle
-5. Check the rule works across geographic regions using available regional-testing tooling.
+5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
+6. Check the rule works across all supported geographic regions using available regional testing tooling.

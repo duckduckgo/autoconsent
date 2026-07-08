@@ -1,0 +1,21 @@
+{
+    "name": "tagconcierge",
+    "_metadata": {
+        "vendorUrl": "https://tagconcierge.com/consent-mode-banner-cookie-consent-management"
+    },
+    "prehideSelectors": ["#consent-banner-main"],
+    "detectCmp": [{ "exists": "#consent-banner-main" }],
+    "detectPopup": [{ "visible": "#consent-banner-modal" }],
+    "optIn": [{ "waitForThenClick": "#consent-banner-modal a[href=\"#accept\"]" }],
+    "optOut": [
+        {
+            "if": { "visible": "#consent-banner-modal a[href=\"#reject\"]" },
+            "then": [{ "click": "#consent-banner-modal a[href=\"#reject\"]" }],
+            "else": [
+                { "waitForThenClick": "#consent-banner-modal a[href=\"#settings\"]" },
+                { "waitForThenClick": "#consent-banner-settings a[href=\"#reject\"]" }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#consent-banner-main", "check": "none" }]
+}

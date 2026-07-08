@@ -40,9 +40,8 @@ const autoconsentConfig = {
   detectRetries: 20,
   isMainWorld: false,
   prehideTimeout: 2000,
-  enableFilterList: false,
   enableHeuristicDetection: true,
-  enableHeuristicAction: true,
+  heuristicMode: 'tier2',
   logs: {
     lifecycle: false,
     rulesteps: false,
@@ -144,13 +143,12 @@ Key options:
 | `enableCosmeticRules` | boolean | — | Enable rules that hide popups via CSS |
 | `enableGeneratedRules` | boolean | — | Include auto-generated rules |
 | `detectRetries` | number | — | How many times to retry CMP detection |
-| `enableFilterList` | boolean | — | Enable ABP/uBO cosmetic filter support (requires the `/extra` build) |
 
 ## Rules
 
 The `initResp` message **must** include a `rules` object. Without rules, no CMPs will be detected. The package ships pre-built rule bundles:
 
-- `@duckduckgo/autoconsent/rules/rules.json` — full rules (includes `autoconsent` and `consentomatic` arrays)
+- `@duckduckgo/autoconsent/rules/rules.json` — full rules (includes `autoconsent` array)
 - `@duckduckgo/autoconsent/rules/compact-rules.json` — compact encoding for opt-out only (smaller payload)
 
 Load either file and pass it as the `rules` field in the `initResp` message.

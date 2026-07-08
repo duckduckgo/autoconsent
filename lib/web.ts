@@ -1,5 +1,4 @@
 import { MessageSender, AutoCMP, RuleBundle, Config, ConsentState } from './types';
-import { ConsentOMaticCMP, ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule, SUPPORTED_RULE_STEP_VERSION } from './rules';
 import { BackgroundMessage, InitMessage } from './messages';
 import { evalState, resolveEval } from './eval-handler';
@@ -8,7 +7,6 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
-import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
 
@@ -36,8 +34,6 @@ export default class AutoConsent {
     #config?: Config;
     foundCmp?: AutoCMP;
     state: ConsentState = {
-        cosmeticFiltersOn: false,
-        filterListReported: false,
         lifecycle: 'loading',
         prehideOn: false,
         findCmpAttempts: 0,
@@ -51,9 +47,7 @@ export default class AutoConsent {
         endTime: 0,
     };
     domActions: DomActions;
-    filtersEngine?: FiltersEngine;
     sendContentMessage: MessageSender;
-    protected cosmeticStyleSheet?: CSSStyleSheet;
     protected focusedElement?: HTMLElement;
 
     constructor(sendContentMessage: MessageSender, config: Partial<Config> | null = null, declarativeRules: RuleBundle | null = null) {
@@ -100,10 +94,6 @@ export default class AutoConsent {
             this.parseDeclarativeRules(declarativeRules);
         }
 
-        if (config.enableFilterList) {
-            this.initializeFilterList();
-        }
-
         this.rules = filterCMPs(this.rules, normalizedConfig);
 
         if (this.shouldPrehide) {
@@ -130,10 +120,6 @@ export default class AutoConsent {
             this.start();
         }
         this.updateState({ lifecycle: 'initialized' });
-    }
-
-    initializeFilterList() {
-        // no-op by default
     }
 
     get shouldPrehide() {
@@ -166,11 +152,8 @@ export default class AutoConsent {
     }
 
     parseDeclarativeRules(declarativeRules: RuleBundle) {
-        if (declarativeRules.consentomatic) {
-            for (const [name, rule] of Object.entries(declarativeRules.consentomatic)) {
-                this.addConsentomaticCMP(name, rule);
-            }
-        }
+        const perfEnabled = this.#config?.performanceLoggingEnabled;
+        perfEnabled && performance.mark('parseDeclarativeRulesStart');
 
         if (declarativeRules.autoconsent) {
             declarativeRules.autoconsent.forEach((ruleset) => {
@@ -183,9 +166,11 @@ export default class AutoConsent {
                 const rules = decodeRules(declarativeRules.compact);
                 rules.forEach(this.addDeclarativeCMP.bind(this));
             } catch (e) {
-                this.config.logs.errors && console.error(e);
+                this.#config?.logs.errors && console.error(e);
             }
         }
+        perfEnabled && performance.mark('parseDeclarativeRulesEnd');
+        perfEnabled && performance.measure('parseDeclarativeRules', 'parseDeclarativeRulesStart', 'parseDeclarativeRulesEnd');
     }
 
     addDeclarativeCMP(ruleset: AutoConsentCMPRule) {
@@ -193,10 +178,6 @@ export default class AutoConsent {
         if ((ruleset.minimumRuleStepVersion || 1) <= SUPPORTED_RULE_STEP_VERSION) {
             this.rules.push(new AutoConsentCMP(ruleset, this));
         }
-    }
-
-    addConsentomaticCMP(name: string, config: ConsentOMaticConfig) {
-        this.rules.push(new ConsentOMaticCMP(`com_${name}`, config));
     }
 
     // start the detection process, possibly with a delay
@@ -210,13 +191,17 @@ export default class AutoConsent {
         this.updateState({ lifecycle: 'started' });
         const foundCmps = await this.findCmp(this.config.detectRetries);
         this.updateState({ detectedCmps: foundCmps.map((c) => c.name) });
+        if (this.config.performanceLoggingEnabled) {
+            this.updateState({ performance: this.measurePerformance() });
+        }
         if (foundCmps.length === 0) {
             logsConfig.lifecycle && console.log('no CMP found', location.href);
             if (this.shouldPrehide) {
                 this.undoPrehide();
             }
 
-            return this.filterListFallback();
+            this.updateState({ lifecycle: 'nothingDetected' });
+            return false;
         }
 
         this.updateState({ lifecycle: 'cmpDetected' });
@@ -288,8 +273,11 @@ export default class AutoConsent {
                 }
             }
         });
-        // heuristic CMP is only run in the top frame and only if heuristic action is enabled
-        const heuristicRules = isTop && this.config.enableHeuristicAction ? [new AutoConsentHeuristicCMP(this)] : [];
+        // heuristic CMP is only run in the top frame and only if heuristic action is enabled and retries is odd
+        const heuristicRules =
+            isTop && this.config.heuristicMode !== 'off' && this.state.findCmpAttempts % 2 === 0
+                ? [new AutoConsentHeuristicCMP(this, this.config.heuristicMode)]
+                : [];
 
         const rulesPriorityStages: [string, AutoCMP[]][] = [
             ['site-specific', siteSpecificRules],
@@ -323,7 +311,11 @@ export default class AutoConsent {
                     `Trying ${stageName} rules`,
                     ruleGroup.map((r) => r.name),
                 );
+            this.config.performanceLoggingEnabled && performance.mark(`findCmpStage_${stageName}`);
             await Promise.all(ruleGroup.map(runDetectCmp));
+            this.config.performanceLoggingEnabled && performance.mark(`findCmpStageEnd_${stageName}`);
+            this.config.performanceLoggingEnabled &&
+                performance.measure(`findCmp_${stageName}`, `findCmpStage_${stageName}`, `findCmpStageEnd_${stageName}`);
 
             // exit early if we already found a CMP
             if (foundCMPs.length > 0) {
@@ -337,8 +329,12 @@ export default class AutoConsent {
             // if we didn't find a CMP, try again
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
+            const waitFor: Promise<boolean>[] = [this.domActions.wait(500)];
+            if (this.state.findCmpAttempts > 1) {
+                waitFor.push(mutationObserver);
+            }
             try {
-                await Promise.all([this.domActions.wait(500), mutationObserver]);
+                await Promise.all(waitFor);
             } catch (e) {
                 // timeout waiting for mutation - break out of detection
                 return [];
@@ -352,6 +348,7 @@ export default class AutoConsent {
 
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
+            this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsStart');
             const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
             if (
                 patterns.length > 0 &&
@@ -360,6 +357,9 @@ export default class AutoConsent {
                 this.config.logs.lifecycle && console.log('Heuristic patterns found', patterns, snippets);
                 this.updateState({ heuristicPatterns: patterns, heuristicSnippets: snippets }); // we don't care about previously found patterns
             }
+            this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsEnd');
+            this.config.performanceLoggingEnabled &&
+                performance.measure('detectHeuristics', 'detectHeuristicsStart', 'detectHeuristicsEnd');
         }
     }
 
@@ -415,11 +415,6 @@ export default class AutoConsent {
             // prehide might have timeouted by this time, apply it again
             this.prehideElements();
         }
-        if (this.state.cosmeticFiltersOn) {
-            // cancel cosmetic filters if we have a rule for this popup
-            this.undoCosmetics();
-        }
-
         this.foundCmp = cmp;
 
         if (this.config.autoAction === 'optOut') {
@@ -553,16 +548,30 @@ export default class AutoConsent {
         return selfTestResult;
     }
 
-    // TODO: use MutationObserver like in findCmp()
     async waitForPopup(cmp: AutoCMP, retries = 10, interval = 500): Promise<boolean> {
         const logsConfig = this.config.logs;
         logsConfig.lifecycle && console.log('checking if popup is open...', cmp.name);
+
+        let mutationObserver: Promise<boolean> | null = null;
+        if (this.config.enablePopupMutationObserver) {
+            mutationObserver = this.domActions.waitForMutation('html', 10000);
+            mutationObserver.catch(() => {});
+        }
+
         const isOpen = await cmp.detectPopup().catch((e) => {
             logsConfig.errors && console.warn(`error detecting popup for ${cmp.name}`, e);
             return false;
-        }); // ignore possible errors in one-time popup detection
+        });
         if (!isOpen && retries > 0) {
-            await this.domActions.wait(interval);
+            if (mutationObserver) {
+                try {
+                    await Promise.all([this.domActions.wait(interval), mutationObserver]);
+                } catch (e) {
+                    logsConfig.lifecycle && console.log(cmp.name, 'popup detection timed out waiting for DOM mutation');
+                }
+            } else {
+                await this.domActions.wait(interval);
+            }
             return this.waitForPopup(cmp, retries - 1, interval);
         }
         logsConfig.lifecycle && console.log(cmp.name, `popup is ${isOpen ? 'open' : 'not open'}`);
@@ -594,30 +603,6 @@ export default class AutoConsent {
     undoPrehide(): void {
         this.updateState({ prehideOn: false });
         this.domActions.undoPrehide();
-    }
-
-    undoCosmetics() {
-        // no-op by default
-    }
-
-    reportFilterlist() {
-        this.sendContentMessage({
-            type: 'cmpDetected',
-            url: location.href,
-            cmp: 'filterList',
-        });
-        this.sendContentMessage({
-            type: 'popupFound',
-            cmp: 'filterList',
-            url: location.href,
-        });
-        this.updateState({ filterListReported: true });
-    }
-
-    filterListFallback() {
-        // no-op by default
-        this.updateState({ lifecycle: 'nothingDetected' });
-        return false;
     }
 
     updateState(change: Partial<ConsentState>) {
@@ -652,6 +637,21 @@ export default class AutoConsent {
             case 'evalResp':
                 resolveEval(message.id, message.result);
                 break;
+            case 'measurePerformance':
+                this.updateState({ performance: this.measurePerformance() });
+                break;
         }
+    }
+
+    measurePerformance() {
+        const getRoundedPerformanceEntries = (name: string) => performance.getEntriesByName(name).map((m) => Number(m.duration.toFixed(3)));
+        return {
+            detectHeuristics: getRoundedPerformanceEntries('detectHeuristics'),
+            heuristicDetector: getRoundedPerformanceEntries('heuristicDetector'),
+            findCmpSiteSpecific: getRoundedPerformanceEntries('findCmp_site-specific'),
+            findCmpGeneric: getRoundedPerformanceEntries('findCmp_generic'),
+            findCmpHeuristic: getRoundedPerformanceEntries('findCmp_heuristic'),
+            parseDeclarativeRules: getRoundedPerformanceEntries('parseDeclarativeRules'),
+        };
     }
 }

@@ -1,0 +1,90 @@
+{
+    "name": "datagrail",
+    "_metadata": {
+        "vendorUrl": "https://www.datagrail.io/"
+    },
+    "prehideSelectors": [".dg-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": ".dg-consent-banner"
+        },
+        {
+            "exists": [".dg-consent-banner", ".dg-app"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".dg-consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".dg-consent-banner", "button.dg-button.accept_all"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": [".dg-consent-banner", "button.dg-button.reject_all, button.dg-button.accept_some"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all, button.dg-button.accept_some"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": [".dg-consent-banner", ".dg-browser-signal-notice"]
+                    },
+                    "then": [
+                        {
+                            "if": {
+                                "exists": [".dg-consent-banner", "button.dg-button.open_layer"]
+                            },
+                            "then": [
+                                {
+                                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.open_layer"]
+                                },
+                                {
+                                    "waitForThenClick": [
+                                        ".dg-consent-banner",
+                                        "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only, button.dg-button.custom"
+                                    ]
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "waitForThenClick": [".dg-consent-banner", "button.dg-header-close"]
+                                }
+                            ]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": [".dg-consent-banner", "button.dg-button.open_layer"]
+                        },
+                        {
+                            "waitForThenClick": [
+                                ".dg-consent-banner",
+                                "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "datagrail_consent"
+                },
+                {
+                    "exists": [".dg-consent-banner", ".dg-browser-signal-notice"]
+                }
+            ]
+        }
+    ]
+}

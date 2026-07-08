@@ -18,9 +18,8 @@ function createTestConfig(overrides: Partial<Config> = {}): Config {
         detectRetries: 0,
         isMainWorld: false,
         prehideTimeout: 2000,
-        enableFilterList: false,
         enableHeuristicDetection: false,
-        enableHeuristicAction: false,
+        heuristicMode: 'off',
         visualTest: false,
         logs: {
             lifecycle: false,
