@@ -1,3 +1,16 @@
+# v16.8.1 (Wed Jul 08 2026)
+
+#### Bug Fixes
+
+- Fix aliexpress opt-out and unblock detection on Polish pages [#1430](https://github.com/duckduckgo/autoconsent/pull/1430) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.8.0 (Wed Jul 08 2026)
 
 #### Rules
