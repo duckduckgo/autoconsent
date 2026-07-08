@@ -1,9 +1,9 @@
 import {
     ACCEPT_PATTERNS,
     ACKNOWLEDGE_PATTERNS,
+    BUTTON_NEVER_MATCH_PATTERNS,
+    DETECT_NEVER_MATCH_PATTERNS,
     DETECT_PATTERNS,
-    NEVER_MATCH_PATTERNS,
-    POPUP_EXCLUDE_PATTERNS,
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
@@ -74,7 +74,7 @@ export function classifyButtons(buttons: ButtonData[]) {
     }
 }
 
-export function isExcludedPopup(popupText: string, excludePatterns = POPUP_EXCLUDE_PATTERNS): boolean {
+export function isExcludedPopup(popupText: string, excludePatterns = DETECT_NEVER_MATCH_PATTERNS): boolean {
     if (!popupText) {
         return false;
     }
@@ -144,16 +144,16 @@ export function cleanButtonText(buttonText: string): string {
 }
 
 export function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
-    if (testButtonMatches(buttonText, REJECT_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, REJECT_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'reject';
     }
-    if (testButtonMatches(buttonText, SETTINGS_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, SETTINGS_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'settings';
     }
-    if (testButtonMatches(buttonText, ACCEPT_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, ACCEPT_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'accept';
     }
-    if (testButtonMatches(buttonText, ACKNOWLEDGE_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, ACKNOWLEDGE_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'acknowledge';
     }
     return 'other';
