@@ -1,3 +1,22 @@
+# v16.8.0 (Wed Jul 08 2026)
+
+#### Rules
+
+- Update button patterns [#1424](https://github.com/duckduckgo/autoconsent/pull/1424) ([@sammacbeth](https://github.com/sammacbeth))
+- Tighten heuristic patterns [#1425](https://github.com/duckduckgo/autoconsent/pull/1425) ([@muodov](https://github.com/muodov))
+
+#### Dependencies
+
+- Bump tldts-experimental from 7.4.3 to 7.4.6 [#1426](https://github.com/duckduckgo/autoconsent/pull/1426) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.7.0 (Tue Jul 07 2026)
 
 #### Rules
