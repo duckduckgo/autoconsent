@@ -418,6 +418,30 @@ export const NEVER_MATCH_PATTERNS = [
     /subskrybuj/,
 ];
 
+// Popup-text patterns that exclude a popup from heuristic handling, even if it
+// matches a cookie pattern and exposes a reject-style button. Targets age gates
+// and adult-content disclaimers whose "reject" button leads to a dead end
+// (e.g. doublelist.com's age-verification modal).
+export const POPUP_EXCLUDE_PATTERNS = [
+    // "Age verification", "age confirmation", "age check", "age gate", "age restriction"
+    /age\s+(?:verification|confirmation|check|gate|restriction)/i,
+
+    // "over 18 years", "above 18 years", "at least 18 years", "older than 21", "18+"
+    /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
+
+    // "18 years of age", "18+ years old", "21 years or older"
+    /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
+
+    // "I am 18+", "I am over 18", "I'm 21 or older"
+    /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
+
+    // "you must be 18", "users must be at least 21", "visitors must be over 18"
+    /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
+
+    // "adult oriented material", "adult content", "adult-only website"
+    /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
+];
+
 export const SETTINGS_PATTERNS = [
     // Multilingual "open customization" patterns: a customization verb next to a
     // cookie/preference/settings/options/details/purposes noun (both word orders).

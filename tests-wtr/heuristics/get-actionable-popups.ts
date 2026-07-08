@@ -50,6 +50,14 @@ describe('getActionablePopups', () => {
 
             expect(popups.length).to.equal(0);
         });
+
+        it('ignores age-verification popup that incidentally mentions cookies', () => {
+            showPopup('popup-age-gate');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(0);
+        });
     });
 
     describe('tier button candidates', () => {
