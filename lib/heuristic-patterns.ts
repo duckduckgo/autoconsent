@@ -418,28 +418,19 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
     /subskrybuj/,
 ];
 
-// Popup-text patterns that suppress heuristic detection: when any of these
-// match a popup's body text, the popup is skipped even if it matches a cookie
-// DETECT_PATTERN and exposes a reject-style button. Targets age gates and
-// adult-content disclaimers whose "reject" button leads to a dead end
-// (e.g. doublelist.com's age-verification modal).
+// Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
 export const DETECT_NEVER_MATCH_PATTERNS = [
-    // "Age verification", "age confirmation", "age check", "age gate", "age restriction"
+    // e.g. "age verification", "age confirmation", "age check", "age gate", "age restriction"
     /age\s+(?:verification|confirmation|check|gate|restriction)/i,
-
-    // "over 18 years", "above 18 years", "at least 18 years", "older than 21", "18+"
+    // e.g. "over 18 years", "at least 21 years", "older than 21", "18+"
     /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
-
-    // "18 years of age", "18+ years old", "21 years or older"
+    // e.g. "18 years of age", "18+ years old", "21 years or older"
     /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
-
-    // "I am 18+", "I am over 18", "I'm 21 or older"
+    // e.g. "I am 18+", "I am over 18", "I'm 21 or older"
     /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
-
-    // "you must be 18", "users must be at least 21", "visitors must be over 18"
+    // e.g. "you must be 18", "users must be at least 21", "visitors must be over 18"
     /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
-
-    // "adult oriented material", "adult content", "adult-only website"
+    // e.g. "adult oriented material", "adult content", "adult-only website"
     /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
 ];
 

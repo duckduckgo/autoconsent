@@ -45,9 +45,6 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
-            // Skip age gates / adult-content disclaimers whose reject-style
-            // button leads to a dead-end page (e.g. doublelist.com), even
-            // when they incidentally mention cookies.
             if (isExcludedPopup(popupText)) {
                 return acc;
             }
