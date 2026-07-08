@@ -419,6 +419,7 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
 ];
 
 // Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
+// Applied only to popup-scoped text (via getActionablePopups); NOT applied to full-document detection, where these terms produce too many false positives.
 export const DETECT_NEVER_MATCH_PATTERNS = [
     // e.g. "age verification", "age confirmation", "age check", "age gate", "age restriction"
     /age\s+(?:verification|confirmation|check|gate|restriction)/i,
