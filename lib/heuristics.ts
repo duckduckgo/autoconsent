@@ -22,7 +22,13 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
         const matches = allText?.match(p);
         if (matches) {
             patterns.push(p.toString());
-            snippets.push(...matches.map((m) => m.substring(0, 200)));
+            // When a non-global regex has capture groups, `String.prototype.match`
+            // returns undefined entries for optional groups that did not match.
+            for (const m of matches) {
+                if (typeof m === 'string') {
+                    snippets.push(m.substring(0, 200));
+                }
+            }
         }
     }
     return { patterns, snippets };
