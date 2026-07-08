@@ -24,10 +24,12 @@
     ],
     "optOut": [
         {
-            "if": { "exists": [".dg-consent-banner", "button.dg-button.reject_all"] },
+            "if": {
+                "exists": [".dg-consent-banner", "button.dg-button.reject_all, button.dg-button.accept_some"]
+            },
             "then": [
                 {
-                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all"]
+                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all, button.dg-button.accept_some"]
                 }
             ],
             "else": [
@@ -35,7 +37,10 @@
                     "waitForThenClick": [".dg-consent-banner", "button.dg-button.open_layer"]
                 },
                 {
-                    "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all, button.dg-button.essential_only"]
+                    "waitForThenClick": [
+                        ".dg-consent-banner",
+                        "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only"
+                    ]
                 }
             ]
         }
