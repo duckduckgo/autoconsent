@@ -174,6 +174,15 @@ export default class SourcePoint extends AutoConsentCMPBase {
         } catch (e) {
             logsConfig.errors && console.warn(e);
         }
+        // "Global CMP" / US National privacy manager flavor: consent is expressed
+        // via .pm-toggle role=switch buttons inside .categories-container, and the
+        // save action is .sp_choice_type_SE ("Save and close"). Toggle every switch
+        // off before saving.
+        if (this.elementVisible('.sp_choice_type_SE', 'any')) {
+            await this.click('.pm-toggle[aria-checked=true]', true);
+            return await this.click('.sp_choice_type_SE');
+        }
+
         // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
         return await this.click('.sp_choice_type_SAVE_AND_EXIT');
     }
