@@ -59,6 +59,14 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     async optOut() {
         if (this.elementExists(shortcutOptOut)) {
             this.click(shortcutOptOut);
+            // Permanently hide the banner container. TrustArc's own opacity-transition-based
+            // dismissal can be broken by autoconsent's prehide (which also sets opacity: 0):
+            // when opacity is already 0, the "opacity: 0" set by TrustArc doesn't trigger a
+            // transitionend event, and TrustArc never gets to set `display: none`. The result
+            // is an invisible full-viewport overlay (#truste-consent-track, z-index max,
+            // pointer-events: auto) that intercepts clicks on the underlying page - as
+            // reported on admiral.com.
+            hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
             return true;
         }
 
