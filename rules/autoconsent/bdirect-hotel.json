@@ -1,0 +1,9 @@
+{
+    "name": "bdirect-hotel",
+    "prehideSelectors": ["#overlay-policy"],
+    "detectCmp": [{ "exists": "#overlay-policy #policy_pop_close" }],
+    "detectPopup": [{ "visible": "#overlay-policy" }],
+    "optIn": [{ "waitForThenClick": "#policy_pop_close" }],
+    "optOut": [{ "waitForThenClick": "#policy_pop_close" }],
+    "test": [{ "cookieContains": "showpopuppolicy=No" }]
+}
