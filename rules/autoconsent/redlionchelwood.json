@@ -1,0 +1,12 @@
+{
+    "name": "redlionchelwood.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?redlionchelwood\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookiescript_injected", "#overlay"],
+    "detectCmp": [{ "exists": "#cookiescript_injected" }],
+    "detectPopup": [{ "visible": "#cookiescript_injected" }],
+    "optOut": [{ "waitForThenClick": "#cookiescript_reject" }],
+    "optIn": [{ "waitForThenClick": "#cookiescript_accept" }],
+    "test": [{ "cookieContains": "CookieScriptConsent" }]
+}
