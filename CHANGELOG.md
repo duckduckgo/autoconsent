@@ -1,3 +1,16 @@
+# v16.10.0 (Sat Jul 11 2026)
+
+#### Rules
+
+- Add rule for abetterrouteplanner.com [#1433](https://github.com/duckduckgo/autoconsent/pull/1433) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.9.0 (Thu Jul 09 2026)
 
 #### Rules
