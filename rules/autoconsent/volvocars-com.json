@@ -11,7 +11,7 @@
     "prehideSelectors": ["cookie-banner#cookie-banner-host"],
     "detectCmp": [
         {
-            "exists": ["cookie-banner#cookie-banner-host", "#dialog_cookie_consent"]
+            "exists": "cookie-banner#cookie-banner-host"
         }
     ],
     "detectPopup": [
