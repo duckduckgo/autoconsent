@@ -1,0 +1,12 @@
+{
+    "name": "kayak",
+    "runContext": {
+        "urlPattern": "\\.kayak\\."
+    },
+    "prehideSelectors": ["[role=\"dialog\"][aria-modal=\"true\"]:has(.P4zO-submit-buttons)"],
+    "detectCmp": [{ "exists": ".P4zO-submit-buttons" }],
+    "detectPopup": [{ "visible": ".P4zO-submit-buttons" }],
+    "optIn": [{ "waitForThenClick": ".P4zO-submit-buttons > button:nth-of-type(1)" }],
+    "optOut": [{ "waitForThenClick": ".P4zO-submit-buttons > button:last-of-type" }],
+    "test": [{ "visible": ".P4zO-submit-buttons", "check": "none" }]
+}
