@@ -70,6 +70,9 @@ export const DETECT_PATTERNS = [
     /nur funktionale cookies akzeptieren/gi,
     /optionale ablehnen/gi,
     /zustimmung verweigern/gi,
+    // "Cookies oder verwandte/vergleichbare/analoge Technologien" (IAB TCF German phrasing;
+    // "und ähnliche Technologien" is already covered above)
+    /cookies?.{0,20}(oder|und).{0,20}(verwandte|vergleichbare|analoge).{0,30}technologien/gi,
 
     // NL
     /gebruik.{0,100}van.{0,100}cookies/gi,
@@ -155,6 +158,12 @@ export const DETECT_PATTERNS = [
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
+    // "cookie o/e tecnologie simili/analoghe/affini/equivalenti/correlate"
+    // (IAB TCF Italian phrasing, analog to English "cookies and/or similar technologies")
+    /cookies?.{0,20}(o|e).{0,20}tecnologie.{0,20}(simili|analoghe|affini|equivalenti|correlate)/gi,
+    // "memorizzare e/o accedere alle informazioni/al dispositivo"
+    // (IAB TCF Italian storage-and-access phrasing)
+    /memorizzare.{0,20}e\/o.{0,20}accedere.{0,50}(informazioni|dispositivo)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
