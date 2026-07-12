@@ -1,0 +1,38 @@
+{
+    "name": "kayak",
+    "_metadata": {
+        "vendorUrl": "https://www.kayak.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(www\\.)?(kayak|momondo)\\."
+    },
+    "prehideSelectors": ["[role=\"dialog\"][aria-modal=\"true\"]:has([class*=\"submit-buttons\"])"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"cmp2-direct-wrapper\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button:first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"] [class*=\"submit-buttons\"] > button:last-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent=v2"
+        }
+    ]
+}
