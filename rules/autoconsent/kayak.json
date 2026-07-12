@@ -32,6 +32,10 @@
     ],
     "test": [
         {
+            "comment": "the consent record POST is async and may not have finished immediately after the click",
+            "wait": 2000
+        },
+        {
             "cookieContains": "consent=v2"
         }
     ]
