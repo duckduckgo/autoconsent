@@ -1,0 +1,35 @@
+{
+    "name": "kayak",
+    "vendorUrl": "https://www.kayak.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?kayak\\."
+    },
+    "prehideSelectors": ["[role=\"dialog\"][aria-modal=\"true\"].c-ulo-mod-visible"],
+    "detectCmp": [
+        {
+            "exists": "[role=\"dialog\"][aria-modal=\"true\"].c-ulo-mod-visible"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=\"dialog\"][aria-modal=\"true\"].c-ulo-mod-visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"].c-ulo-mod-visible .P4zO-submit-buttons button.RxNS-mod-variant-solid"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"].c-ulo-mod-visible .P4zO-submit-buttons button.RxNS-mod-variant-outline:last-child",
+            "timeout": 10000
+        }
+    ],
+    "test": [
+        {
+            "visible": "[role=\"dialog\"][aria-modal=\"true\"].c-ulo-mod-visible",
+            "check": "none"
+        }
+    ]
+}
