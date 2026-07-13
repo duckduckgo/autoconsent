@@ -59,11 +59,12 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     async optOut() {
         if (this.elementExists(shortcutOptOut)) {
             this.click(shortcutOptOut);
-            // Some TrustArc integrations (e.g. admiral.com) rely on a `transitionend`
-            // callback to remove the banner overlay. Prehiding the overlay sets its opacity
-            // to 0 upfront, so TrustArc's opacity transition never fires and the fixed-
-            // position overlay is left in the DOM, blocking clicks on the underlying page.
-            // Hide it explicitly as a fallback (harmless when TrustArc dismisses it itself).
+            // Some TrustArc integrations (e.g. admiral.com, diamond.co.uk, elephant.co.uk)
+            // rely on a `transitionend` callback to remove the banner overlay. Prehiding the
+            // overlay sets its opacity to 0 upfront, so TrustArc's opacity transition never
+            // fires and the fixed, full-viewport overlay is left in the DOM, silently
+            // blocking clicks on the underlying page. Hide it explicitly as a fallback
+            // (harmless when TrustArc dismisses it itself).
             hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
             setTimeout(() => {
                 getStyleElement().remove();
