@@ -1,0 +1,62 @@
+{
+    "name": "407etr",
+    "vendorUrl": "https://www.407etr.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?407etr\\.com/"
+    },
+    "prehideSelectors": ["body > main > div:has(> div > p > a[href$=\"/privacy-notice\"])"],
+    "detectCmp": [
+        {
+            "exists": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"]) > div > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"]) > div > button",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"]) > div > button:nth-of-type(2)",
+            "comment": "Okay"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"]) > div > button:nth-of-type(1)",
+            "comment": "Decline"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "if": {
+                "exists": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"])"
+            },
+            "then": [
+                {
+                    "wait": 500,
+                    "comment": "On slow devices the React re-render can take ~1s; wait then re-click if the banner is still there"
+                },
+                {
+                    "click": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"]) > div > button:nth-of-type(1)",
+                    "optional": true,
+                    "comment": "Retry Decline"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"])",
+            "timeout": 3000,
+            "check": "none",
+            "comment": "Ensure the banner is really removed before reporting success"
+        }
+    ],
+    "test": [
+        {
+            "exists": "body > main > div:has(> div > p > a[href$=\"/privacy-notice\"])",
+            "negated": true
+        }
+    ]
+}
