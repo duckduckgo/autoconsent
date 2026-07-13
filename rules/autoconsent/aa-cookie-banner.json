@@ -1,7 +1,6 @@
 {
     "name": "aa-cookie-banner",
     "vendorUrl": "https://www.aa.com/",
-    "cosmetic": true,
     "runContext": {
         "urlPattern": "^https://(www\\.)?(aa|envoyair|psaairlines)\\.com/"
     },
@@ -23,13 +22,12 @@
     ],
     "optOut": [
         {
-            "hide": "adc-cookie-banner"
+            "waitForThenClick": ["adc-cookie-banner", "#toast-dismiss-button"]
         }
     ],
     "test": [
         {
-            "visible": "adc-cookie-banner",
-            "check": "none"
+            "cookieContains": "cookie_banner=closed"
         }
     ]
 }
