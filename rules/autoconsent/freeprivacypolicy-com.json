@@ -1,0 +1,31 @@
+{
+    "name": "freeprivacypolicy.com",
+    "vendorUrl": "https://www.freeprivacypolicy.com/free-cookie-consent/",
+    "prehideSelectors": ["#freeprivacypolicy-com---nb", "#freeprivacypolicy-com---preferences-center"],
+    "detectCmp": [{ "exists": "#freeprivacypolicy-com---nb" }],
+    "detectPopup": [{ "visible": "#freeprivacypolicy-com---nb" }],
+    "optIn": [{ "waitForThenClick": "#freeprivacypolicy-com---nb .cc-nb-okagree" }],
+    "optOut": [
+        {
+            "if": { "exists": "#freeprivacypolicy-com---nb .cc-nb-reject" },
+            "then": [{ "waitForThenClick": "#freeprivacypolicy-com---nb .cc-nb-reject" }],
+            "else": [
+                {
+                    "if": { "exists": "#freeprivacypolicy-com---nb .cc-nb-changep" },
+                    "then": [
+                        { "waitForThenClick": "#freeprivacypolicy-com---nb .cc-nb-changep" },
+                        { "waitForVisible": "#freeprivacypolicy-com---preferences-center" },
+                        {
+                            "click": "#freeprivacypolicy-com---preferences-center input[type=checkbox]:not([disabled]):checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "#freeprivacypolicy-com---preferences-center .cc-cp-foot-save" }
+                    ],
+                    "else": [{ "hide": "#freeprivacypolicy-com---nb" }]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookie_consent_user_accepted=true" }]
+}
