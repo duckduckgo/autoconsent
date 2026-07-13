@@ -1,0 +1,33 @@
+{
+    "name": "aa-cookie-banner",
+    "vendorUrl": "https://www.aa.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?(aa|envoyair|psaairlines)\\.com/"
+    },
+    "prehideSelectors": ["adc-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ["adc-cookie-banner", "#cookie-banner"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["adc-cookie-banner", "#cookie-banner"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["adc-cookie-banner", "#toast-dismiss-button"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["adc-cookie-banner", "#toast-dismiss-button"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_banner=closed"
+        }
+    ]
+}
