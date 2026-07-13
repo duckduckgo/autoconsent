@@ -1,0 +1,35 @@
+{
+    "name": "techbeat-jp",
+    "_metadata": {
+        "vendorUrl": "https://join.techbeat.jp/"
+    },
+    "runContext": {
+        "urlPattern": "^https://join\\.techbeat\\.jp/"
+    },
+    "prehideSelectors": [".cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent .cookie-button__decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent .cookie-button__decline"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent .cookie-button__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent .cookie-button__decline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-consent={\"accept\":false}"
+        }
+    ]
+}
