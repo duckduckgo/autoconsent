@@ -1,3 +1,29 @@
+# v16.10.0 (Sat Jul 11 2026)
+
+#### Rules
+
+- Add rule for abetterrouteplanner.com [#1433](https://github.com/duckduckgo/autoconsent/pull/1433) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.9.0 (Thu Jul 09 2026)
+
+#### Rules
+
+- Add rule for DataGrail consent banner (fixes topps.com) [#1429](https://github.com/duckduckgo/autoconsent/pull/1429) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.8.1 (Wed Jul 08 2026)
 
 #### Bug Fixes
