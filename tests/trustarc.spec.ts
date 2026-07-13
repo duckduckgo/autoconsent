@@ -12,13 +12,17 @@ generateCMPTests('TrustArc-top', ['https://www.garmin.com/de-DE/'], {
     skipRegions: ['US'],
 });
 
-// Regression: this Admiral integration relies on a transitionend callback to remove the
-// banner overlay, which never fires when prehide sets opacity to 0 up front.
-generateCMPTests('TrustArc-top', ['https://login.admiral.com/myaccount/login/'], {
-    testOptOut: true,
-    testSelfTest: false,
-    skipRegions: ['US'],
-});
+// Regression: these Admiral Group integrations rely on a transitionend callback to remove
+// the banner overlay, which never fires when prehide sets opacity to 0 up front.
+generateCMPTests(
+    'TrustArc-top',
+    ['https://login.admiral.com/myaccount/login/', 'https://www.diamond.co.uk/', 'https://www.elephant.co.uk/'],
+    {
+        testOptOut: true,
+        testSelfTest: false,
+        skipRegions: ['US'],
+    },
+);
 
 generateCMPTests('TrustArc-frame', ['https://www.wish.com/', 'https://www.usa.philips.com/'], {
     testOptOut: true,
