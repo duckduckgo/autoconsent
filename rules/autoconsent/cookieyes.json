@@ -23,7 +23,23 @@
                             "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
                         }
                     ],
-                    "else": [{ "hide": ".cky-consent-container,.cky-overlay,.cky-consent-bar-expand" }]
+                    "else": [
+                        {
+                            "if": { "exists": ".cky-consent-container [data-cky-tag=donotsell-button]" },
+                            "then": [
+                                { "click": ".cky-consent-container [data-cky-tag=donotsell-button]" },
+                                { "waitFor": ".cky-modal-open [data-cky-tag=optout-option-toggle]" },
+                                {
+                                    "click": ".cky-modal-open [data-cky-tag=optout-option-toggle]:not(:checked)",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                { "waitForThenClick": ".cky-modal-open [data-cky-tag=optout-confirm-button]" },
+                                { "hide": ".cky-consent-container,.cky-overlay,.cky-modal", "optional": true }
+                            ],
+                            "else": [{ "hide": ".cky-consent-container,.cky-overlay,.cky-consent-bar-expand" }]
+                        }
+                    ]
                 }
             ]
         }

@@ -7,4 +7,5 @@ generateCMPTests('cookieyes', [
     'https://ttinteractive.com/',
     'https://www.chronofhorse.com/',
     'https://nl.flaminfitness.com/products/30l-tactical-backpack',
+    'https://whitney.org/visit',
 ]);
