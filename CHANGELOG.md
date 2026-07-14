@@ -1,3 +1,16 @@
+# v16.11.0 (Tue Jul 14 2026)
+
+#### Rules
+
+- Add aa-cookie-banner rule for American Airlines properties [#1434](https://github.com/duckduckgo/autoconsent/pull/1434) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.10.0 (Sat Jul 11 2026)
 
 #### Rules
