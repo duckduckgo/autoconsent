@@ -1,5 +1,6 @@
 {
     "name": "Complianz optin",
+    "runContext": { "main": true, "frame": true },
     "prehideSelectors": [".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"],
     "detectCmp": [{ "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
     "detectPopup": [{ "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
@@ -21,7 +22,7 @@
                         { "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
                         { "click": ".cc-settings-view .cc-btn-accept-selected" }
                     ],
-                    "else": [{ "click": ".cc-dismiss" }]
+                    "else": [{ "click": ".cc-dismiss" }, { "hide": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }]
                 }
             ]
         }
