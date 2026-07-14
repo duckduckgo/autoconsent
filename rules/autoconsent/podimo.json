@@ -1,0 +1,22 @@
+{
+    "name": "podimo",
+    "vendorUrl": "https://podimo.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?podimo\\.com/"
+    },
+    "prehideSelectors": ["[data-testid^=cookie-consent-bar]"],
+    "detectCmp": [{ "exists": "[data-testid^=cookie-consent-bar]" }],
+    "detectPopup": [{ "visible": "[data-testid^=cookie-consent-bar]", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "[data-testid^=accept-all-cookies-button]" }],
+    "optOut": [
+        { "waitForThenClick": "[data-testid^=manage-cookies-button]" },
+        { "waitFor": "[data-testid=cookie-consent-modal]" },
+        {
+            "click": "[data-testid=cookie-consent-modal] input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "[data-testid=cookie-consent-save-button]" }
+    ],
+    "test": [{ "cookieContains": "pmo_c_acc=true" }]
+}
