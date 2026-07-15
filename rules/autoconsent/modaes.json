@@ -1,0 +1,14 @@
+{
+    "name": "modaes",
+    "_metadata": {
+        "vendorUrl": "https://www.modaes.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?modaes\\.com/"
+    },
+    "prehideSelectors": ["#cookies-consent-wrapper"],
+    "detectCmp": [{ "exists": "#cookies-consent-wrapper button[onclick*=\"_COOKIE.rejectAll\"]" }],
+    "detectPopup": [{ "visible": "#cookies-consent-wrapper" }],
+    "optIn": [{ "waitForThenClick": "#cookies-consent-wrapper .basic button.accept" }],
+    "optOut": [{ "waitForThenClick": "#cookies-consent-wrapper .basic button.reject" }]
+}
