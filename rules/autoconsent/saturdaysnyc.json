@@ -1,0 +1,33 @@
+{
+    "name": "saturdaysnyc",
+    "vendorUrl": "https://www.saturdaysnyc.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?saturdaysnyc\\.com/"
+    },
+    "prehideSelectors": ["#popup-notice"],
+    "detectCmp": [
+        {
+            "exists": "#popup-notice.visible"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#popup-notice.visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#popup-notice .popup__actions a"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#popup-notice .popup__close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "saturdaysnyc-notice=1"
+        }
+    ]
+}
