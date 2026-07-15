@@ -1,7 +1,6 @@
 {
     "name": "hearst-us",
     "vendorUrl": "https://www.hearst.com/",
-    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
@@ -25,6 +24,9 @@
         }
     ],
     "optOut": [
+        {
+            "waitForThenClick": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"] button[aria-label^=\"Close Privacy Disclosure\"]"
+        },
         {
             "hide": "div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]"
         }
