@@ -17,14 +17,22 @@
                     },
                     "then": [
                         { "click": "#moove_gdpr_cookie_info_bar .change-settings-button" },
-                        { "waitForVisible": "#moove_gdpr_cookie_modal" },
-                        { "eval": "EVAL_MOOVE_0" },
-                        { "click": ".moove-gdpr-modal-save-settings" }
+                        { "waitForVisible": "#moove_gdpr_cookie_modal", "timeout": 3000, "optional": true },
+                        {
+                            "if": { "visible": "#moove_gdpr_cookie_modal" },
+                            "then": [{ "eval": "EVAL_MOOVE_0" }, { "click": ".moove-gdpr-modal-save-settings" }],
+                            "else": [
+                                { "hide": "#moove_gdpr_cookie_info_bar" },
+                                { "hide": ".gdpr_lightbox", "optional": true },
+                                { "removeClass": "moove_gdpr_overflow", "selector": "body", "optional": true }
+                            ]
+                        }
                     ],
                     "else": [{ "hide": "#moove_gdpr_cookie_info_bar" }]
                 }
             ]
         }
     ],
+    "minimumRuleStepVersion": 2,
     "test": [{ "visible": "#moove_gdpr_cookie_info_bar", "check": "none" }]
 }
