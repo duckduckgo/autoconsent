@@ -1,0 +1,62 @@
+{
+    "name": "cbinsights",
+    "vendorUrl": "https://www.cbinsights.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?cbinsights\\.com/"
+    },
+    "prehideSelectors": ["[data-test=\"cookie-banner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-test=\"cookie-banner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test=\"cookie-banner\"]"
+        }
+    ],
+    "optIn": [
+        { "wait": 2000 },
+        {
+            "waitForThenClick": "xpath///*[@data-test=\"cookie-banner\"]//button[normalize-space()=\"I ACCEPT\"]",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": { "visible": "[data-test=\"cookie-banner\"]" },
+            "then": [
+                { "wait": 2500 },
+                {
+                    "waitForThenClick": "xpath///*[@data-test=\"cookie-banner\"]//button[normalize-space()=\"I ACCEPT\"]",
+                    "timeout": 2000,
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        { "wait": 2000 },
+        {
+            "waitForThenClick": "xpath///*[@data-test=\"cookie-banner\"]//button[normalize-space()=\"I DO NOT ACCEPT\"]",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": { "visible": "[data-test=\"cookie-banner\"]" },
+            "then": [
+                { "wait": 2500 },
+                {
+                    "waitForThenClick": "xpath///*[@data-test=\"cookie-banner\"]//button[normalize-space()=\"I DO NOT ACCEPT\"]",
+                    "timeout": 2000,
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-test=\"cookie-banner\"]",
+            "check": "none"
+        }
+    ]
+}
