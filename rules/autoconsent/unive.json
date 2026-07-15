@@ -1,0 +1,13 @@
+{
+    "name": "unive",
+    "vendorUrl": "https://www.unive.nl/",
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)?unive\\.nl/"
+    },
+    "prehideSelectors": ["#__tealiumGDPRcpPrefs"],
+    "detectCmp": [{ "exists": "#consent-container #no-consent-popup-close-modal" }],
+    "detectPopup": [{ "visible": "#consent-container" }],
+    "optIn": [{ "waitForThenClick": "#consent-popup-close-modal" }],
+    "optOut": [{ "waitForThenClick": "#no-consent-popup-close-modal" }],
+    "test": [{ "cookieContains": "consent:false" }]
+}
