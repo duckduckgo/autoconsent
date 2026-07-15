@@ -12,12 +12,13 @@
     ],
     "detectPopup": [
         {
-            "visible": "#gdpr-new-container,#voyager-gdpr > div"
+            "visible": "#gdpr-new-container,#voyager-gdpr > div",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#gdpr-new-container .btn-accept,#voyager-gdpr > div > div > button:nth-child(1)"
+            "waitForThenClick": "#gdpr-new-container button:last-of-type,#voyager-gdpr > div > div > button:nth-child(1)"
         }
     ],
     "optOut": [
@@ -30,18 +31,24 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": "#gdpr-new-container .btn-more"
-                },
-                {
-                    "waitFor": "#gdpr-new-container .gdpr-dialog-switcher"
-                },
-                {
-                    "click": "#gdpr-new-container .switcher-on",
-                    "all": true,
-                    "optional": true
-                },
-                {
-                    "click": "#gdpr-new-container .btn-save"
+                    "if": { "exists": "#gdpr-new-container button:nth-of-type(3)" },
+                    "then": [
+                        {
+                            "waitForThenClick": "#gdpr-new-container button:nth-of-type(2)"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#gdpr-new-container button:first-of-type"
+                        },
+                        {
+                            "waitForVisible": "#voyager-gdpr-2025",
+                            "timeout": 5000
+                        },
+                        {
+                            "waitForThenClick": "#voyager-gdpr-2025 button:last-of-type"
+                        }
+                    ]
                 }
             ]
         }

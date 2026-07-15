@@ -1,0 +1,32 @@
+{
+    "name": "carre.nl",
+    "_metadata": {
+        "vendorUrl": "https://carre.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?carre\\.nl/"
+    },
+    "prehideSelectors": ["#cookie-notification"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-notification .cookie_pref_wrapper .pref-opt.refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-notification .cookie_pref_wrapper .pref-opt.btn--red"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-notification .cookie_pref_wrapper .pref-opt.refuse"
+        }
+    ]
+}

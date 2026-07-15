@@ -1,3 +1,134 @@
+# v16.11.0 (Tue Jul 14 2026)
+
+#### Rules
+
+- Add aa-cookie-banner rule for American Airlines properties [#1434](https://github.com/duckduckgo/autoconsent/pull/1434) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.10.0 (Sat Jul 11 2026)
+
+#### Rules
+
+- Add rule for abetterrouteplanner.com [#1433](https://github.com/duckduckgo/autoconsent/pull/1433) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.9.0 (Thu Jul 09 2026)
+
+#### Rules
+
+- Add rule for DataGrail consent banner (fixes topps.com) [#1429](https://github.com/duckduckgo/autoconsent/pull/1429) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.8.1 (Wed Jul 08 2026)
+
+#### Bug Fixes
+
+- Fix aliexpress opt-out and unblock detection on Polish pages [#1430](https://github.com/duckduckgo/autoconsent/pull/1430) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.8.0 (Wed Jul 08 2026)
+
+#### Rules
+
+- Update button patterns [#1424](https://github.com/duckduckgo/autoconsent/pull/1424) ([@sammacbeth](https://github.com/sammacbeth))
+- Tighten heuristic patterns [#1425](https://github.com/duckduckgo/autoconsent/pull/1425) ([@muodov](https://github.com/muodov))
+
+#### Dependencies
+
+- Bump tldts-experimental from 7.4.3 to 7.4.6 [#1426](https://github.com/duckduckgo/autoconsent/pull/1426) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.7.0 (Tue Jul 07 2026)
+
+#### Rules
+
+- Fix lineagrafica cosmetic rule to hide overlay/modal class variants [#1423](https://github.com/duckduckgo/autoconsent/pull/1423) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- Add carre.nl cookie banner rule [#1422](https://github.com/duckduckgo/autoconsent/pull/1422) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.6.0 (Sat Jul 04 2026)
+
+#### Rules
+
+- Add piano.io cookie banner rule [#1421](https://github.com/duckduckgo/autoconsent/pull/1421) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.5.0 (Fri Jul 03 2026)
+
+#### Rules
+
+- Add pikpak cookie consent rule [#1420](https://github.com/duckduckgo/autoconsent/pull/1420) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
+# v16.4.0 (Thu Jul 02 2026)
+
+#### Rules
+
+- ketch: handle US/CCPA preferences modal with no Reject All [#1391](https://github.com/duckduckgo/autoconsent/pull/1391) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@muodov](https://github.com/muodov))
+- Add msn.com cookie banner rule [#1418](https://github.com/duckduckgo/autoconsent/pull/1418) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Test Infrastructure
+
+- add performance measuremenet button to devtools [#1417](https://github.com/duckduckgo/autoconsent/pull/1417) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.3.0 (Wed Jul 01 2026)
 
 #### Rules

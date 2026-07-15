@@ -1,0 +1,33 @@
+{
+    "name": "abetterrouteplanner",
+    "vendorUrl": "https://abetterrouteplanner.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?abetterrouteplanner\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookies_reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookies_reject\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookies_ok_all\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookies_reject\"]"
+        }
+    ],
+    "test": [
+        {
+            "exists": "[data-testid=\"cookies_reject\"]",
+            "negated": true
+        }
+    ]
+}
