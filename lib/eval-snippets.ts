@@ -144,7 +144,7 @@ export const snippets = {
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
         }) || true,
-    EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-s?\d+=/),
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
