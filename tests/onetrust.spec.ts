@@ -55,3 +55,12 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// Notice-only banner variant without the `ot-close-btn-link` class. The only
+// actionable control is Close, and there is no real opt-in or self-test flow.
+generateCMPTests('Onetrust', ['https://www.bestbuy.ca/en-ca'], {
+    onlyRegions: ['US', 'GB', 'AU', 'CA', 'DE', 'FR', 'NL', 'CH', 'NO', 'IT', 'ES', 'PL', 'SE', 'DK', 'JP'],
+    mobile: true,
+    testOptIn: false,
+    testSelfTest: false,
+});
