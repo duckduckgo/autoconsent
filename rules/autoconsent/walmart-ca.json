@@ -1,0 +1,29 @@
+{
+    "name": "walmart-ca",
+    "vendorUrl": "https://www.walmart.ca/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://www\\.walmart\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///section[@role='banner'][.//span[normalize-space()='Your data, your choice']]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///section[@role='banner'][.//span[normalize-space()='Your data, your choice']]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///section[@role='banner'][.//span[normalize-space()='Your data, your choice']]//button[normalize-space()='Close']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///section[@role='banner'][.//span[normalize-space()='Your data, your choice']]//button[normalize-space()='Close']"
+        }
+    ]
+}
