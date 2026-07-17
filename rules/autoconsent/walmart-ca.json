@@ -1,0 +1,56 @@
+{
+    "name": "walmart-ca",
+    "vendorUrl": "https://www.walmart.ca/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?walmart\\.ca/"
+    },
+    "detectCmp": [
+        {
+            "exists": "xpath///section[@role='banner' and .//h2[contains(normalize-space(.), 'Your data, your choice')]]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///section[@role='banner' and .//h2[contains(normalize-space(.), 'Your data, your choice')]]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "xpath///section[@role='banner' and .//h2[contains(normalize-space(.), 'Your data, your choice')]]",
+                "xpath/.//button[normalize-space(.)='Close' or @aria-label='close button']"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and .//*[contains(normalize-space(.), 'Robot or human?')]]//button[@aria-label='Close dialogue']",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": [
+                "xpath///section[@role='banner' and .//h2[contains(normalize-space(.), 'Your data, your choice')]]",
+                "xpath/.//button[contains(normalize-space(.), 'Manage cookie settings')]"
+            ]
+        },
+        {
+            "waitFor": "#personalizationCookies"
+        },
+        {
+            "click": "#personalizationCookies"
+        },
+        {
+            "click": "#advertisingCookies"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and .//*[contains(normalize-space(.), 'Manage cookie settings')]]//button[contains(normalize-space(.), 'Save settings') or @aria-label='Save settings button']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "uxcon=enforce=false&p13n=false&ads=false"
+        }
+    ]
+}
