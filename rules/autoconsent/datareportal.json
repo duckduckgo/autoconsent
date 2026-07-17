@@ -1,0 +1,147 @@
+{
+    "name": "datareportal",
+    "prehideSelectors": [".cookie-banner-mount-point", "#qc-cmp2-ui", ".qc-cmp-cleanslate"],
+    "runContext": {
+        "urlPattern": "^https?://datareportal\\.com/"
+    },
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+                },
+                {
+                    "exists": "#qc-cmp2-ui"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+                },
+                {
+                    "visible": "#qc-cmp2-ui"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.decline",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "waitForVisible": "#qc-cmp2-ui",
+            "timeout": 4000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "#qc-cmp2-ui"
+            },
+            "then": [
+                {
+                    "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
+                    "timeout": 2000
+                },
+                {
+                    "if": {
+                        "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                    },
+                    "then": [
+                        {
+                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                        },
+                        {
+                            "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
+                        },
+                        {
+                            "click": ".qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": [
+                                "#qc-cmp2-ui",
+                                "xpath///button[contains(., 'REJECT ALL') or contains(., 'ALLE VERWERPEN') or contains(., 'ΑΠΟΡΡΙΠΤΩ ΤΑ ΠΑΝΤΑ') or contains(., 'RESPINGERE TOTALĂ') or contains(., 'ALLE ABLEHNEN') or contains(., 'ODRZUCENIE') or contains(., 'BLOQUEAR TODO') or contains(., 'REJEITAR TODOS') or contains(., 'RIFIUTA TUTTO') or contains(., 'TOUT REFUSER') or contains(., 'ОТКЛОНИТЬ ВСЕХ')]"
+                            ],
+                            "optional": true
+                        },
+                        {
+                            "wait": 500
+                        },
+                        {
+                            "if": {
+                                "visible": "#qc-cmp2-ui"
+                            },
+                            "then": [
+                                {
+                                    "if": {
+                                        "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                        }
+                                    ],
+                                    "else": [
+                                        {
+                                            "waitForThenClick": [
+                                                "#qc-cmp2-ui",
+                                                "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                            ],
+                                            "timeout": 5000
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.accept",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "waitForVisible": "#qc-cmp2-ui",
+            "timeout": 4000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "#qc-cmp2-ui"
+            },
+            "then": [
+                {
+                    "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-banner-mount-point section[aria-label='Cookie banner']",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "#qc-cmp2-ui",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
