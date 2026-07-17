@@ -17,12 +17,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookie-notice [data-test=accept], .cookie-notice button.owid-btn--solid-dark-blue.cookie-notice__button"
+            "waitForThenClick": ".cookie-notice button.owid-btn--solid-dark-blue.cookie-notice__button"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cookie-notice [data-test=reject], .cookie-notice button.owid-btn--outline-dark-blue.cookie-notice__button"
+            "waitForThenClick": ".cookie-notice button.owid-btn--outline-dark-blue.cookie-notice__button"
         }
     ]
 }
