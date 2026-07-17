@@ -1,7 +1,7 @@
 {
     "name": "reddit.com",
     "runContext": {
-        "urlPattern": "^https://www\\.reddit\\.com/"
+        "urlPattern": "^https://(www|old)\\.reddit\\.com/"
     },
     "prehideSelectors": ["[bundlename=reddit_cookie_banner]"],
     "detectCmp": [
