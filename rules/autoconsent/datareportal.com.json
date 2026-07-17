@@ -1,0 +1,64 @@
+{
+    "name": "datareportal.com",
+    "vendorUrl": "https://datareportal.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?datareportal\\.com/"
+    },
+    "prehideSelectors": [".cookie-banner-mount-point", ".fc-consent-root,.fc-dialog-container,.fc-dialog-overlay,.fc-dialog-content"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner-mount-point"
+        },
+        {
+            "cookieContains": "ss_marketingCookiesAllowed",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.accept"
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='AGREE']",
+            "timeout": 15000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.decline"
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='MORE OPTIONS']",
+            "timeout": 15000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='REJECT ALL']",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='SAVE & EXIT']",
+            "timeout": 5000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-banner-mount-point section[aria-label='Cookie banner']",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "waitForVisible": "xpath///button[normalize-space()='MORE OPTIONS' or normalize-space()='REJECT ALL' or normalize-space()='SAVE & EXIT']",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
