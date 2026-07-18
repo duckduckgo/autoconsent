@@ -1,3 +1,17 @@
+# v16.12.0 (Sat Jul 18 2026)
+
+#### Rules
+
+- Cover old Reddit consent banner [#1440](https://github.com/duckduckgo/autoconsent/pull/1440) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- Fix Our World in Data cookie button selectors [#1439](https://github.com/duckduckgo/autoconsent/pull/1439) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 2
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+
+---
+
 # v16.11.0 (Tue Jul 14 2026)
 
 #### Rules
