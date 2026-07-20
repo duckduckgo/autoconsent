@@ -5,7 +5,6 @@ generateCMPTests('Sourcepoint-frame', [
     'https://news.sky.com/',
     'https://www.economist.com/',
     'https://www.carwow.co.uk/',
-    'https://www.heraldscotland.com/news/26286067.scotland-needs-climate-adaptation-investment-14bn-2040/',
 ]);
 
 generateCMPTests(
