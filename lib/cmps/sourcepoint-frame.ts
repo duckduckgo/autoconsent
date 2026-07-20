@@ -1,5 +1,5 @@
 import { RunContext } from '../rules';
-import { isElementVisible, waitFor } from '../utils';
+import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class SourcePoint extends AutoConsentCMPBase {
@@ -121,14 +121,6 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         if (!this.isManagerOpen()) {
-            const explicitRejectButton = Array.from(document.querySelectorAll<HTMLElement>('.sp_choice_type_12')).find((el) => {
-                const text = `${el.innerText || el.textContent || ''} ${el.getAttribute('aria-label') || ''}`;
-                return isElementVisible(el) && /\b(reject|decline|deny|refuse)\b/i.test(text);
-            });
-            if (explicitRejectButton) {
-                return await this.clickElement(explicitRejectButton);
-            }
-
             // Match manage/options buttons: explicit sp_choice_type_12 or generic [data-choice] links
             // that aren't accept buttons (sp_choice_type_11, sp_choice_type_ACCEPT_ALL).
             const manageSelector = '.sp_choice_type_12,[data-choice]:not([class*="sp_choice_type_"])';
