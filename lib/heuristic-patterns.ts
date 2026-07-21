@@ -160,7 +160,7 @@ export const DETECT_PATTERNS = [
 const REJECT_PATTERNS_ENGLISH = [
     // e.g. "reject", "reject all", "reject all cookies", "deny all", "refuse cookies", "decline",
     // "reject non-essential cookies", "reject unnecessary cookies", "reject all but necessary", "reject all and close"
-    // note that "reject and subscribe" and "reject and pay" are excluded via NEVER_MATCH_PATTERNS
+    // note that "reject and subscribe" and "reject and pay" are excluded via BUTTON_NEVER_MATCH_PATTERNS
     /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies)?\s*(and\s+close)?\s*$/is,
 
     // e.g. "i do not accept", "do not accept cookies"
@@ -224,7 +224,7 @@ const REJECT_PATTERNS_DUTCH = [
 
 const REJECT_PATTERNS_FRENCH = [
     // refuser / rejeter / interdire / décliner (reject verbs, any position)
-    // "refuser et s'abonner" / "refuser et payer" are excluded via NEVER_MATCH_PATTERNS
+    // "refuser et s'abonner" / "refuser et payer" are excluded via BUTTON_NEVER_MATCH_PATTERNS
     /(^|\s)(refus|rejet|rejeter|interdire|interdis|déclin|declin)/is,
 
     // only necessary / essential / technical / functional
@@ -298,7 +298,7 @@ const REJECT_PATTERNS_BRAZILIAN_PORTUGUESE = [
 
 const REJECT_PATTERNS_SPANISH = [
     // rechazar / denegar / declinar / negar (reject verbs, any position)
-    // "rechazar y pagar" / "rechazar y suscribirse" are excluded via NEVER_MATCH_PATTERNS
+    // "rechazar y pagar" / "rechazar y suscribirse" are excluded via BUTTON_NEVER_MATCH_PATTERNS
     /(^|\s)(rechaz|recház|deneg|negar|declin)/is,
 
     // accept/allow/use (only) necessary / essential / technical / functional / own
@@ -394,7 +394,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_INDONESIAN,
 ];
 
-export const NEVER_MATCH_PATTERNS = [
+export const BUTTON_NEVER_MATCH_PATTERNS = [
     /pay|subscribe/is,
     /abonneer/is,
     /abonnier/is,
@@ -416,6 +416,23 @@ export const NEVER_MATCH_PATTERNS = [
 
     // Polish (PL)
     /subskrybuj/,
+];
+
+// Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
+// Applied only to popup-scoped text (via getActionablePopups); NOT applied to full-document detection, where these terms produce too many false positives.
+export const DETECT_NEVER_MATCH_PATTERNS = [
+    // e.g. "age verification", "age confirmation", "age check", "age gate", "age restriction"
+    /age\s+(?:verification|confirmation|check|gate|restriction)/i,
+    // e.g. "over 18 years", "at least 21 years", "older than 21", "18+"
+    /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
+    // e.g. "18 years of age", "18+ years old", "21 years or older"
+    /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
+    // e.g. "I am 18+", "I am over 18", "I'm 21 or older"
+    /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
+    // e.g. "you must be 18", "users must be at least 21", "visitors must be over 18"
+    /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
+    // e.g. "adult oriented material", "adult content", "adult-only website"
+    /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
 ];
 
 export const SETTINGS_PATTERNS = [

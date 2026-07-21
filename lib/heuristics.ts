@@ -1,8 +1,9 @@
 import {
     ACCEPT_PATTERNS,
     ACKNOWLEDGE_PATTERNS,
+    BUTTON_NEVER_MATCH_PATTERNS,
+    DETECT_NEVER_MATCH_PATTERNS,
     DETECT_PATTERNS,
-    NEVER_MATCH_PATTERNS,
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
@@ -44,6 +45,9 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
+            if (isExcludedPopup(popupText)) {
+                return acc;
+            }
             const { patterns } = checkHeuristicPatterns(popupText);
             if (patterns.length > 0) {
                 classifyButtons(popup.buttons);
@@ -65,6 +69,14 @@ export function classifyButtons(buttons: ButtonData[]) {
     for (const button of buttons) {
         button.regexClassification = classifyButtonTextRegex(button.text);
     }
+}
+
+export function isExcludedPopup(popupText: string, excludePatterns = DETECT_NEVER_MATCH_PATTERNS): boolean {
+    if (!popupText) {
+        return false;
+    }
+    const truncated = popupText.slice(0, TEXT_LIMIT);
+    return excludePatterns.some((p) => p.test(truncated));
 }
 
 function classifyPopup(buttons: ButtonData[]): PopupClassification {
@@ -129,16 +141,16 @@ export function cleanButtonText(buttonText: string): string {
 }
 
 export function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
-    if (testButtonMatches(buttonText, REJECT_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, REJECT_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'reject';
     }
-    if (testButtonMatches(buttonText, SETTINGS_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, SETTINGS_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'settings';
     }
-    if (testButtonMatches(buttonText, ACCEPT_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, ACCEPT_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'accept';
     }
-    if (testButtonMatches(buttonText, ACKNOWLEDGE_PATTERNS, NEVER_MATCH_PATTERNS)) {
+    if (testButtonMatches(buttonText, ACKNOWLEDGE_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS)) {
         return 'acknowledge';
     }
     return 'other';
