@@ -2,8 +2,28 @@
     "name": "xnxx-com",
     "cosmetic": true,
     "prehideSelectors": ["#cookies-use-alert"],
-    "detectCmp": [{ "exists": "#cookies-use-alert" }],
-    "detectPopup": [{ "visible": "#cookies-use-alert" }],
-    "optIn": [{ "click": "#cookies-use-alert .close" }],
-    "optOut": [{ "hide": "#cookies-use-alert" }]
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#cookies-use-alert" }, { "exists": ".disclaimer-opened #disclaimer-cookies" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#cookies-use-alert" }, { "visible": ".disclaimer-opened #disclaimer-cookies" }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": ".disclaimer-opened #disclaimer-cookies" },
+            "then": [{ "waitForThenClick": "#disclaimer-accept_cookies" }],
+            "else": [{ "click": "#cookies-use-alert .close" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ".disclaimer-opened #disclaimer-cookies" },
+            "then": [{ "waitForThenClick": "#disclaimer-reject_cookies" }],
+            "else": [{ "hide": "#cookies-use-alert" }]
+        }
+    ]
 }
