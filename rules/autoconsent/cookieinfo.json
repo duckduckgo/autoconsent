@@ -1,0 +1,11 @@
+{
+    "name": "cookieinfo",
+    "vendorUrl": "https://cookieinfoscript.com/",
+    "cosmetic": true,
+    "prehideSelectors": [".cookieinfo"],
+    "detectCmp": [{ "exists": ".cookieinfo" }],
+    "detectPopup": [{ "visible": ".cookieinfo" }],
+    "optOut": [{ "waitForThenClick": ".cookieinfo-close" }],
+    "optIn": [{ "waitForThenClick": ".cookieinfo-close" }],
+    "test": [{ "cookieContains": "we-love-cookies=1" }]
+}
