@@ -1,3 +1,18 @@
+# v16.13.0 (Wed Jul 22 2026)
+
+#### Rules
+
+- Skip age-verification popups in heuristic CMP detection (doublelist.com fix) [#1432](https://github.com/duckduckgo/autoconsent/pull/1432) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@cursor[bot]](https://github.com/cursor[bot]))
+- Add unive.nl cookie banner rule [#1438](https://github.com/duckduckgo/autoconsent/pull/1438) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### Authors: 3
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.12.0 (Sat Jul 18 2026)
 
 #### Rules
