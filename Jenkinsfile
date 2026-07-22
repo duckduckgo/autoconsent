@@ -51,16 +51,6 @@ pipeline {
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
     }
     stages {
-        stage('Prepare Node') {
-            steps {
-                sh "fnm install"
-                script {
-                    def nodeBin = sh(returnStdout: true, script: "fnm exec -- node -e 'console.log(require(\"path\").dirname(process.execPath))'").trim()
-                    env.PATH = "${nodeBin}:${env.PATH}"
-                }
-            }
-        }
-
         stage('Checkout') {
             when {
                 expression {
@@ -72,6 +62,16 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
                     extensions: [[$class: 'LocalBranch']],
                     userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'autoconsent-rw', url: 'https://github.com/duckduckgo/autoconsent.git']]])
+            }
+        }
+
+        stage('Prepare Node') {
+            steps {
+                sh "fnm install"
+                script {
+                    def nodeBin = sh(returnStdout: true, script: "fnm exec -- node -e 'console.log(require(\"path\").dirname(process.execPath))'").trim()
+                    env.PATH = "${nodeBin}:${env.PATH}"
+                }
             }
         }
 
