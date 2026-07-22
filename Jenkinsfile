@@ -44,16 +44,11 @@ def getTestsToRun(modifiedFiles) {
 }
 
 pipeline {
-    agent { label 'autoconsent-crawler' }
+    agent { label 'autoconsent-crawler-noble' }
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
-    }
-    environment {
-        NODENV_VERSION = "20.12.1"
-        NODENV_ROOT = "/opt/nodeenv"
-        PATH = "/opt/nodenv/shims:/opt/nodenv/bin:$PATH"
     }
     stages {
         stage('Checkout') {
@@ -67,6 +62,16 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
                     extensions: [[$class: 'LocalBranch']],
                     userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'autoconsent-rw', url: 'https://github.com/duckduckgo/autoconsent.git']]])
+            }
+        }
+
+        stage('Prepare Node') {
+            steps {
+                sh "fnm install"
+                script {
+                    def nodeBin = sh(returnStdout: true, script: "fnm exec -- node -e 'console.log(require(\"path\").dirname(process.execPath))'").trim()
+                    env.PATH = "${nodeBin}:${env.PATH}"
+                }
             }
         }
 
