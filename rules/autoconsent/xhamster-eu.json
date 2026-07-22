@@ -3,9 +3,12 @@
     "runContext": {
         "urlPattern": "^https://(\\w+\\.)?xhamster\\d?\\.com"
     },
-    "prehideSelectors": ["[class*=modal]"],
-    "detectCmp": [{ "exists": "[class*=modal] a[href*='/cookie-policy']" }],
-    "detectPopup": [{ "visible": "[class*=modal] a[href*='/cookie-policy']" }],
-    "optIn": [{ "waitForThenClick": "[class*=modal]:has(a[href*='/cookie-policy']) button:nth-child(3)" }],
-    "optOut": [{ "waitForThenClick": "[class*=modal]:has(a[href*='/cookie-policy']) button:nth-child(2)" }]
+    "prehideSelectors": ["[data-role=\"cookies-modal\"]"],
+    "detectCmp": [{ "exists": "[data-role=\"cookies-modal\"] [data-opt-hydration=\"cookies-dialog-eu\"]" }],
+    "detectPopup": [{ "visible": "[data-role=\"cookies-modal\"] [data-opt-hydration=\"cookies-dialog-eu\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-role=\"cookies-modal\"] [class*=experimentalButtons] button:nth-of-type(1)" }],
+    "optOut": [
+        { "waitForThenClick": "[data-role=\"cookies-modal\"] [class*=experimentalButtons] button:nth-of-type(2)" },
+        { "hide": "[data-role=\"cookies-modal\"] [class*=container]", "optional": true }
+    ]
 }
