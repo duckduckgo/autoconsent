@@ -4,18 +4,12 @@
     "prehideSelectors": ["#cookies-use-alert"],
     "detectCmp": [
         {
-            "any": [
-                { "exists": "#cookies-use-alert" },
-                { "exists": ".disclaimer-opened #disclaimer-cookies" }
-            ]
+            "any": [{ "exists": "#cookies-use-alert" }, { "exists": ".disclaimer-opened #disclaimer-cookies" }]
         }
     ],
     "detectPopup": [
         {
-            "any": [
-                { "visible": "#cookies-use-alert" },
-                { "visible": ".disclaimer-opened #disclaimer-cookies" }
-            ]
+            "any": [{ "visible": "#cookies-use-alert" }, { "visible": ".disclaimer-opened #disclaimer-cookies" }]
         }
     ],
     "optIn": [
