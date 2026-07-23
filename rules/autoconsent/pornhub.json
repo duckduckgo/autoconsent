@@ -4,16 +4,15 @@
         "urlPattern": "^https://(www\\.)?pornhub\\.com/"
     },
     "cosmetic": false,
-    "prehideSelectors": ["#cookieBanner #cookieBannerContent", "#cookieBanner.cbShort"],
+    "prehideSelectors": ["#cookieBanner #cookieBannerContent"],
     "detectCmp": [
         {
-            "exists": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner .cbCloseButton"
+            "exists": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner .cbCloseButton",
-            "check": "any"
+            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
         }
     ],
     "optIn": [
@@ -23,37 +22,27 @@
     ],
     "optOut": [
         {
-            "if": { "exists": "#cookieBanner .cbCloseButton" },
+            "if": {
+                "exists": "#globalCookieBanner .js-customizeGlobalCookies"
+            },
             "then": [
                 {
-                    "click": "#cookieBanner .cbCloseButton"
+                    "waitForThenClick": "#globalCookieBanner .js-customizeGlobalCookies"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#cookieBanner [data-label=accept_essential]"
+            },
+            "then": [
+                {
+                    "click": "#cookieBanner [data-label=accept_essential]"
                 }
             ],
             "else": [
                 {
-                    "if": {
-                        "exists": "#globalCookieBanner .js-customizeGlobalCookies"
-                    },
-                    "then": [
-                        {
-                            "waitForThenClick": "#globalCookieBanner .js-customizeGlobalCookies"
-                        }
-                    ]
-                },
-                {
-                    "if": {
-                        "exists": "#cookieBanner [data-label=accept_essential]"
-                    },
-                    "then": [
-                        {
-                            "click": "#cookieBanner [data-label=accept_essential]"
-                        }
-                    ],
-                    "else": [
-                        {
-                            "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
-                        }
-                    ]
+                    "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
                 }
             ]
         }
