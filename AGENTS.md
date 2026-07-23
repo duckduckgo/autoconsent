@@ -171,3 +171,12 @@ After creating or modifying a rule:
 4. `npm run prepublish` — full build including extension bundle
 5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
 6. Check the rule works across all supported geographic regions using available regional testing tooling.
+
+## Cursor Cloud specific instructions
+
+Environment is already bootstrapped by the startup update script (`npm ci` + `npx playwright install`). Standard commands live in "Quick Start"/"Verification" above and in `package.json` scripts. Non-obvious caveats:
+
+- **Node version:** The VM's default `node` is v22.x (from `/exec-daemon`, early in `PATH`), not the v20.12.1 pinned in `.node-version`. v22 builds, lints, and tests fine — don't waste time forcing v20 via `nvm` (the `/exec-daemon` shim shadows it anyway).
+- **E2E tests hit live external sites**, so results depend on the VM's egress IP (effectively a US datacenter). Sites may show a different/no popup or block datacenter IPs, causing "no CMP detected" failures that are environmental, not rule bugs. For region-accurate runs, set `REGION=...` and route through a proxy (see the `proxy-testing` skill / `PROXY_SERVER`). A globally-reliable smoke test is `REGION=US npx playwright test tests/sourcepoint.spec.ts --project chrome -g theguardian`.
+- **Tests require a build first:** run `npm run prepublish` (or `npm run build-rules`) before Playwright/`test:lib`, since the harness reads `dist/` and `rules/rules.json`. `npm ci` already triggers a `prepublish` build.
+- E2E screenshots are written to `test-results/screenshots/` — check them to confirm a popup was actually handled (a passing report alone can be misleading).
