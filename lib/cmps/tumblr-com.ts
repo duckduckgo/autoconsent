@@ -5,6 +5,7 @@ export default class Tumblr extends AutoConsentCMPBase {
     name = 'tumblr-com';
     runContext = {
         urlPattern: '^https://(www\\.)?tumblr\\.com/',
+        frame: true,
     };
 
     get hasSelfTest(): boolean {
@@ -20,18 +21,23 @@ export default class Tumblr extends AutoConsentCMPBase {
     }
 
     get prehideSelectors(): string[] {
-        return ['#cmp-app-container'];
+        return ['#cmp-app-container', '.gdpr-banner'];
     }
 
     async detectCmp() {
-        return this.elementExists('#cmp-app-container');
+        return this.elementExists('#cmp-app-container') || this.elementExists('.gdpr-banner');
     }
 
     async detectPopup() {
-        return this.elementVisible('#cmp-app-container', 'any');
+        return this.elementVisible('#cmp-app-container', 'any') || this.elementVisible('.gdpr-banner', 'any');
     }
 
     async optOut() {
+        const dismissButton: HTMLAnchorElement | null = document.querySelector('.gdpr-banner .accept-button');
+        if (dismissButton) {
+            return this.clickElement(dismissButton);
+        }
+
         let iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
         let settingsButton: HTMLElement | null | undefined = iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
         if (!settingsButton) {
@@ -58,6 +64,11 @@ export default class Tumblr extends AutoConsentCMPBase {
     }
 
     async optIn() {
+        const dismissButton: HTMLAnchorElement | null = document.querySelector('.gdpr-banner .accept-button');
+        if (dismissButton) {
+            return this.clickElement(dismissButton);
+        }
+
         const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
         const acceptButton: HTMLButtonElement | null | undefined =
             iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
