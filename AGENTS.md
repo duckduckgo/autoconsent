@@ -171,3 +171,13 @@ After creating or modifying a rule:
 4. `npm run prepublish` — full build including extension bundle
 5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
 6. Check the rule works across all supported geographic regions using available regional testing tooling.
+
+## Cursor Cloud specific instructions
+
+Standard commands live in the Quick Start / Verification sections above and in `package.json`. Notes below are only the non-obvious cloud caveats.
+
+- **Node version:** The VM's default `node` is v22 (matches GitHub CI's `lts/*`), which is what lint, unit tests, build, and Playwright all run on here. The `.node-version` pin (20.12.1) is only used by the Jenkins crawler via `fnm` — you do NOT need to switch Node for local dev, and `/exec-daemon/node` (v22) stays ahead of any nvm/fnm Node on `PATH` anyway.
+- **`npm ci` also builds:** the legacy `prepublish` script runs during install, so `npm ci` produces `dist/` and `rules/rules.json` (both gitignored, required by Playwright E2E). After editing rule JSON re-run `npm run build-rules`; after editing `lib/` re-run `npm run prepublish` (or use `npm run watch`).
+- **Playwright E2E hits LIVE sites and is region-dependent.** This VM egresses from the US (AWS), so only CMPs with US coverage reliably show a popup; EU/GDPR-only banners will report "no CMP detected" without a regional proxy. For a quick US smoke test against a specific site use the sample harness, e.g. `REGION=US NSITES=1 npx playwright test tests/_sample-test.spec.ts --project chrome --grep "husqvarna"`. Screenshots land in `test-results/screenshots/`.
+- **Regional proxy is NOT configured.** The `proxy-testing` skill needs `REGIONAL_PROXY_<CC>`, `REGIONAL_PROXY_USERNAME`, and `REGIONAL_PROXY_PASSWORD` secrets, which are absent — add them to test non-US regions. `PUBLICWWW_API_KEY` (for the `publicwww-search` skill) IS set.
+- **Playwright browsers** are installed via the startup update script (`npx playwright install`). If a fresh pod is missing system libraries, run `npx playwright install --with-deps` (uses apt/sudo).
