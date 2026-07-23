@@ -1,3 +1,23 @@
+# v16.14.0 (Thu Jul 23 2026)
+
+#### Rules
+
+- Fix xhamster EU cookie modal rule [#1446](https://github.com/duckduckgo/autoconsent/pull/1446) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- Handle xnxx disclaimer cookie modal [#1444](https://github.com/duckduckgo/autoconsent/pull/1444) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+- Add Interia autoconsent rule [#1445](https://github.com/duckduckgo/autoconsent/pull/1445) ([@cursoragent](https://github.com/cursoragent) [@cursor[bot]](https://github.com/cursor[bot]))
+
+#### CI / Release Automation
+
+- Migrate Jenkinsfile to Ubuntu 24.04 (Noble) node; introduce .node-version [#1448](https://github.com/duckduckgo/autoconsent/pull/1448) ([@pkoraca](https://github.com/pkoraca))
+
+#### Authors: 3
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Petar Koraca ([@pkoraca](https://github.com/pkoraca))
+
+---
+
 # v16.13.0 (Wed Jul 22 2026)
 
 #### Rules
