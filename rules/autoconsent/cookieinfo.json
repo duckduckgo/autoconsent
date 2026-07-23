@@ -2,7 +2,7 @@
     "name": "cookieinfo",
     "vendorUrl": "https://cookieinfoscript.com/",
     "cosmetic": true,
-    "prehideSelectors": [".cookieinfo"],
+    "prehideSelectors": [".cookieinfo", ".deleteme"],
     "detectCmp": [{ "exists": ".cookieinfo" }],
     "detectPopup": [{ "visible": ".cookieinfo" }],
     "optOut": [{ "waitForThenClick": ".cookieinfo-close" }],
