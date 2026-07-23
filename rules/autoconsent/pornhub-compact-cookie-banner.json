@@ -1,0 +1,28 @@
+{
+    "name": "pornhub-compact-cookie-banner",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?pornhub\\.com/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": ["#cookieBanner.cbShort"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBanner.cbShort .cbCloseButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBanner.cbShort .cbCloseButton"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "#cookieBanner.cbShort .cbCloseButton"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#cookieBanner.cbShort .cbCloseButton"
+        }
+    ]
+}
