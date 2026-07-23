@@ -45,6 +45,11 @@
                     "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
                 }
             ]
+        },
+        {
+            "waitForThenClick": "#cookieBanner .cbCloseButton",
+            "comment": "dismiss the minimized banner shown after accepting essential cookies",
+            "optional": true
         }
     ]
 }
