@@ -1,11 +1,12 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('Sourcepoint-frame', [
-    'https://www.theguardian.com/',
-    'https://news.sky.com/',
-    'https://www.economist.com/',
-    'https://www.carwow.co.uk/',
-]);
+generateCMPTests('Sourcepoint-frame', ['https://news.sky.com/', 'https://www.economist.com/', 'https://www.carwow.co.uk/']);
+
+// The Guardian serves a "consent or pay" wall in the EU/EEA and UK (handled by the
+// theguardian.com cosmetic rule); only the remaining regions get a free-reject popup.
+generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
+    skipRegions: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'PL', 'SE', 'NO', 'DK', 'CH'],
+});
 
 generateCMPTests(
     'Sourcepoint-frame',
