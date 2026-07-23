@@ -64,7 +64,8 @@ Use `if`/`then`/`else` to handle regional variants within a single rule.
 
 ### Generic vs Site-Specific Rules
 
-**Always prefer writing a generic CMP rule over a site-specific rule.** One CMP rule can cover multiple sites. See "Identifying a Consent Management Platform" below for common techniques. If the popup is genuinely custom-built, a site-specific rule is the right call.
+Site-specific rules are rules scoped to specific sites with a `urlPattern`. Rules without a urlPattern are called generic.
+**Always prefer writing a generic CMP rule over a site-specific rule.** One CMP rule can cover multiple sites. See "Identifying a Consent Management Platform" below for common techniques. If the popup is custom-built, but applies to multiple sibling sites, use a generic rule. If the rule is unlikely to be useful for other sites, a site-specific rule is the right call.
 
 ### JSON Rules vs Code-based rules
 
@@ -102,21 +103,33 @@ Single-string selectors cannot pierce — use arrays whenever the target is insi
 shadow root or same-origin iframe.
 
 ### General Guidelines and Gotchas
-- **Regional testing is mandatory** for any rule change — CMPs behave differently under GDPR (EU), CCPA (US), and other jurisdictions. Run the rule against different regions using available regional testing tooling before considering the change done.
-- When verifying a rule, **look at the screenshots** on top of the API results — sometimes a rule reports success, but the popup is not actually handled - a screenshot will detect this.
 - **Paywalls do not need to be handled.** If the website presents the choice to pay or agree to cookies, the correct solution is to disable the feature on that site, so no code changes required in this case.
-- If the pop-up has an explicit "reject"-like button, you should first consider why HEURISTIC rule didn't handle it. A fix to the heuristic rule is always preferred to a new rule, as long as it doesn't cause potential false-positives on other sites.
-- **Watch out for race conditions**. A common pitfall is that a rule starts clicking before JS handlers are ready. If you detect this, add an appropriate wait step before the click, preferably based on a specific DOM state. Unconditional `wait` is a LAST RESORT because it leads to a poor UX.
-- **Watch out for false positive detections**. Always verify that the rule does NOT match after the popup is dismissed and the page is reloaded. Over-detection can lead to reload loops.
-- **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
-- If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
-- Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead.
+- Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead. In most cases, a simple "^https?://(\w+\.)?domain\.com/" is sufficient.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
+- If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
 - Prefer `cookieContains` in `test` when the CMP stores consent in cookies.
 - Use `npm run create-rule` to scaffold a new rule and a spec file.
+- Code comments: keep them brief (max one line), explain why not what, no references to specific sites in library code
+
+### Updating existing rules
+- If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.
+- After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) using available regional testing tooling. Inspect both API results and screenshots.
+- if a site-specific rule is obsolete (the site switched CMP in ALL regions), propose removal.
+- if a popup does not provide an opt-out button, `optOut` _may_ click "dismiss"/"acknowledge" instead. Check with the existing heuristic patterns in /lib/heuristic-patterns.ts for reference.
+- do not keep outdated selectors in changed rules, unless they are actually used in some conditions
+- If the pop-up has an explicit "reject"-like button, you should first consider why HEURISTIC rule didn't handle it. A fix to the heuristic rule is always preferred to a new rule, as long as it doesn't cause potential false-positives on other sites.
+
+### Verification guidelines
+- **Regional testing is mandatory** for any rule change — CMPs behave differently under GDPR (EU), CCPA (US), and other jurisdictions. Run the rule against different regions using available regional testing tooling before considering the change done.
+- When verifying a rule, **look at the screenshots** on top of the API results — sometimes a rule reports success, but the popup is not actually handled - a screenshot will detect this.
+- **Watch out for race conditions**. A common pitfall is that a rule starts clicking before JS handlers are ready. If you detect this, add an appropriate wait step before the click, preferably based on a specific DOM state. Unconditional `wait` is a LAST RESORT because it leads to a poor UX.
+- **Watch out for false positive detections**. Always verify that the rule does NOT match after the popup is dismissed and the page is reloaded. Over-detection can lead to reload loops.
+- **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
+- Generic rules without a urlPattern MUST have at least two sites in the spec file.
+- If the popup comes in different DOM structures, cover all of them in the spec file.
 
 ### Fixing breakage in cosmetic rules
 When using `hide`, the CMP may lock scrolling or add overlays. Add fixes AFTER the `hide` step, marked `"optional": true`:
