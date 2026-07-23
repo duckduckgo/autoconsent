@@ -12,7 +12,8 @@
     ],
     "detectPopup": [
         {
-            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner .cbCloseButton"
+            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner .cbCloseButton",
+            "check": "any"
         }
     ],
     "optIn": [
