@@ -4,15 +4,15 @@
         "urlPattern": "^https://(www\\.)?pornhub\\.com/"
     },
     "cosmetic": false,
-    "prehideSelectors": ["#cookieBanner #cookieBannerContent"],
+    "prehideSelectors": ["#cookieBanner #cookieBannerContent", "#cookieBanner.cbShort"],
     "detectCmp": [
         {
-            "exists": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
+            "exists": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner .cbCloseButton"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
+            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner .cbCloseButton"
         }
     ],
     "optIn": [
@@ -22,34 +22,39 @@
     ],
     "optOut": [
         {
-            "if": {
-                "exists": "#globalCookieBanner .js-customizeGlobalCookies"
-            },
+            "if": { "exists": "#cookieBanner .cbCloseButton" },
             "then": [
                 {
-                    "waitForThenClick": "#globalCookieBanner .js-customizeGlobalCookies"
-                }
-            ]
-        },
-        {
-            "if": {
-                "exists": "#cookieBanner [data-label=accept_essential]"
-            },
-            "then": [
-                {
-                    "click": "#cookieBanner [data-label=accept_essential]"
+                    "click": "#cookieBanner .cbCloseButton"
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
+                    "if": {
+                        "exists": "#globalCookieBanner .js-customizeGlobalCookies"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#globalCookieBanner .js-customizeGlobalCookies"
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "exists": "#cookieBanner [data-label=accept_essential]"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookieBanner [data-label=accept_essential]"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
+                        }
+                    ]
                 }
             ]
-        },
-        {
-            "waitForThenClick": "#cookieBanner .cbCloseButton",
-            "comment": "dismiss the minimized banner shown after accepting essential cookies",
-            "optional": true
         }
     ]
 }
