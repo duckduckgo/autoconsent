@@ -38,12 +38,25 @@ export default class Tumblr extends AutoConsentCMPBase {
             return this.clickElement(dismissButton);
         }
 
+        await waitFor(
+            () => {
+                const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
+                return !!iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
+            },
+            10,
+            500,
+        );
+
         let iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
         let settingsButton: HTMLElement | null | undefined = iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
         if (!settingsButton) {
             return false;
         }
         settingsButton.click();
+        if (/decline|reject/i.test(settingsButton.textContent || '')) {
+            return true;
+        }
+
         await waitFor(
             () => {
                 const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
@@ -68,6 +81,15 @@ export default class Tumblr extends AutoConsentCMPBase {
         if (dismissButton) {
             return this.clickElement(dismissButton);
         }
+
+        await waitFor(
+            () => {
+                const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
+                return !!iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
+            },
+            10,
+            500,
+        );
 
         const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
         const acceptButton: HTMLButtonElement | null | undefined =
