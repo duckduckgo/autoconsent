@@ -1,0 +1,21 @@
+{
+    "name": "theguardian.com",
+    "vendorUrl": "https://www.theguardian.com/",
+    "comment": "Sourcepoint 'consent or pay' wall shown in the EU/EEA (message 1482251) and UK (message 1482252), where the only reject option requires a paid subscription. The container id embeds the Sourcepoint message id, so we target the pay-wall variants specifically to avoid clashing with the free-reject Sourcepoint popup used in other regions (handled by Sourcepoint-frame). Brittle: message ids may change if the campaign is reconfigured.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?theguardian\\.com/",
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']"],
+    "detectCmp": [{ "exists": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" }],
+    "detectPopup": [{ "visible": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" }],
+    "optIn": [],
+    "optOut": [
+        { "hide": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" },
+        { "removeClass": "sp-message-open", "selector": "html", "optional": true }
+    ],
+    "test": [{ "visible": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']", "check": "none" }]
+}
