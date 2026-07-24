@@ -7,6 +7,6 @@
     "prehideSelectors": ["div.cookie-bar"],
     "detectCmp": [{ "exists": "div.cookie-bar" }],
     "detectPopup": [{ "visible": "div.cookie-bar" }],
-    "optIn": [{ "click": "div.cookie-bar__manage > a" }],
+    "optIn": [{ "hide": "div.cookie-bar" }],
     "optOut": [{ "hide": "div.cookie-bar" }]
 }
