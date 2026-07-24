@@ -9,7 +9,6 @@ import Klaro from './klaro';
 import Uniconsent from './uniconsent';
 import Conversant from './conversant';
 import Tiktok from './tiktok';
-import Tumblr from './tumblr-com';
 import Admiral from './admiral';
 
 export const dynamicCMPs = [
@@ -24,6 +23,5 @@ export const dynamicCMPs = [
     Uniconsent,
     Conversant,
     Tiktok,
-    Tumblr,
     Admiral,
 ];
