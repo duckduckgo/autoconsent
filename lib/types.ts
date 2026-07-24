@@ -75,6 +75,7 @@ export type Config = {
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
     heuristicMode: HeuristicLevel; // controls the behavior of the heuristic popup detection.
+    maxDocumentElements: number; // skip non-site-specific detection when the document is larger than this, 0 disables the check.
 };
 
 export type LifecycleState =
