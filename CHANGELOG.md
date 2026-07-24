@@ -1,3 +1,22 @@
+# v16.15.0 (Fri Jul 24 2026)
+
+#### Rules
+
+- Dismiss Pornhub minimized cookie banner [#1452](https://github.com/duckduckgo/autoconsent/pull/1452) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Rule update: cookieinfo [#1449](https://github.com/duckduckgo/autoconsent/pull/1449) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- Update AI rules [#1447](https://github.com/duckduckgo/autoconsent/pull/1447) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.14.0 (Thu Jul 23 2026)
 
 #### Rules
