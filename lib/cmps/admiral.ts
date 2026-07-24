@@ -3,6 +3,39 @@ import AutoConsentCMPBase from './base';
 export default class Admiral extends AutoConsentCMPBase {
     name = 'Admiral';
 
+    private readonly consentCardSelector = 'div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]';
+
+    private getVrmNotice() {
+        return Array.from(document.querySelectorAll<HTMLElement>('body > div')).find((element) => {
+            const text = element.innerText || '';
+            const rect = element.getBoundingClientRect();
+            const style = getComputedStyle(element);
+
+            return (
+                style.position === 'fixed' &&
+                rect.width > 0 &&
+                rect.height > 0 &&
+                text.includes('Your Privacy') &&
+                text.includes('VRM') &&
+                text.includes('Admiral')
+            );
+        });
+    }
+
+    private isVisibleElement(element: HTMLElement) {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+
+        return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+    }
+
+    private getVrmCloseButton() {
+        const notice = this.getVrmNotice();
+        const closeButton = notice?.querySelector<HTMLElement>('button[aria-label="Close"]');
+
+        return closeButton && this.isVisibleElement(closeButton) ? closeButton : null;
+    }
+
     get hasSelfTest(): boolean {
         return false;
     }
@@ -16,14 +49,11 @@ export default class Admiral extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]');
+        return (await this.elementExists(this.consentCardSelector)) || Boolean(this.getVrmNotice());
     }
 
     async detectPopup() {
-        return this.elementVisible(
-            'div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]',
-            'any',
-        );
+        return (await this.elementVisible(this.consentCardSelector, 'any')) || Boolean(this.getVrmNotice());
     }
 
     async optOut() {
@@ -32,6 +62,11 @@ export default class Admiral extends AutoConsentCMPBase {
 
         if (await this.waitForElement(rejectAllSelector, 500)) {
             return await this.click(rejectAllSelector);
+        }
+
+        const vrmCloseButton = this.getVrmCloseButton();
+        if (vrmCloseButton) {
+            return await this.clickElement(vrmCloseButton);
         }
 
         const purposesButtonSelector =
