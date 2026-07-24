@@ -1,5 +1,8 @@
-import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
+
+const iframeSecondaryButton = ['#cmp-app-container iframe', '.cmp-components-button.is-secondary'];
+const iframePrimaryButton = ['#cmp-app-container iframe', '.cmp-components-button.is-primary'];
+const iframePreferencesInput = ['#cmp-app-container iframe', '.cmp__dialog input'];
 
 export default class Tumblr extends AutoConsentCMPBase {
     name = 'tumblr-com';
@@ -38,42 +41,24 @@ export default class Tumblr extends AutoConsentCMPBase {
             return this.clickElement(dismissButton);
         }
 
-        await waitFor(
-            () => {
-                const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-                return !!iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
-            },
-            10,
-            500,
-        );
+        await this.waitForElement(iframeSecondaryButton, 5000);
 
-        let iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-        let settingsButton: HTMLElement | null | undefined = iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
+        const settingsButton = this.elementSelector(iframeSecondaryButton)[0];
         if (!settingsButton) {
             return false;
         }
-        settingsButton.click();
-        if (/decline|reject/i.test(settingsButton.textContent || '')) {
+        const isDirectDecline = /decline|reject/i.test(settingsButton.textContent || '');
+        if (!(await this.click(iframeSecondaryButton))) {
+            return false;
+        }
+        if (isDirectDecline) {
             return true;
         }
 
-        await waitFor(
-            () => {
-                const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-                return !!iframe?.contentDocument?.querySelector('.cmp__dialog input');
-            },
-            5,
-            500,
-        );
+        await this.waitForElement(iframePreferencesInput, 2500);
 
         // it's a different button now
-        iframe = document.querySelector('#cmp-app-container iframe');
-        settingsButton = iframe?.contentDocument?.querySelector('.cmp-components-button.is-secondary');
-        if (!settingsButton) {
-            return false;
-        }
-        settingsButton.click();
-        return true;
+        return this.click(iframeSecondaryButton);
     }
 
     async optIn() {
@@ -82,22 +67,6 @@ export default class Tumblr extends AutoConsentCMPBase {
             return this.clickElement(dismissButton);
         }
 
-        await waitFor(
-            () => {
-                const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-                return !!iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
-            },
-            10,
-            500,
-        );
-
-        const iframe: HTMLIFrameElement | null = document.querySelector('#cmp-app-container iframe');
-        const acceptButton: HTMLButtonElement | null | undefined =
-            iframe?.contentDocument?.querySelector('.cmp-components-button.is-primary');
-        if (acceptButton) {
-            acceptButton.click();
-            return true;
-        }
-        return false;
+        return this.waitForThenClick(iframePrimaryButton, 5000);
     }
 }
