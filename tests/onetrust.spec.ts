@@ -10,6 +10,12 @@ generateCMPTests('Onetrust', [
     'https://satsuite.collegeboard.org/sat/dates-deadlines',
 ]);
 
+generateCMPTests('Onetrust', ['https://www.trustpilot.com/'], {
+    onlyRegions: ['US'],
+    testOptIn: false,
+    testSelfTest: false,
+});
+
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
     testOptIn: false,
 });

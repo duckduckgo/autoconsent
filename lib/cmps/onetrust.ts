@@ -74,14 +74,11 @@ export default class Onetrust extends AutoConsentCMPBase {
 
         await this.waitForElement('#onetrust-consent-sdk', 2000);
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-        await this.click('#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked', true); // optional step
+        await this.disableCheckedCategorySwitches();
 
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
         await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
         await this.click('.save-preference-btn-handler,.js-consent-save');
-
-        // popup doesn't disappear immediately
-        await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
         return true;
     }
 
@@ -91,5 +88,26 @@ export default class Onetrust extends AutoConsentCMPBase {
 
     async test() {
         return await waitFor(() => this.mainWorldEval('EVAL_ONETRUST_1'), 10, 500);
+    }
+
+    private async disableCheckedCategorySwitches() {
+        const selector = '#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked';
+        const checkedSwitches = Array.from(document.querySelectorAll<HTMLInputElement>(selector));
+        if (checkedSwitches.length === 0) {
+            return;
+        }
+
+        let clickedLabel = false;
+        for (const input of checkedSwitches) {
+            const label = input.labels?.[0];
+            if (label instanceof HTMLElement) {
+                await this.clickElement(label);
+                clickedLabel = true;
+            }
+        }
+
+        if (!clickedLabel) {
+            await this.click(selector, true);
+        }
     }
 }
