@@ -3,7 +3,8 @@ import AutoConsentCMPBase from './base';
 export default class Admiral extends AutoConsentCMPBase {
     name = 'Admiral';
 
-    private readonly consentCardSelector = 'div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]';
+    private readonly consentCardSelector =
+        'div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]';
 
     private getVrmNotice() {
         return Array.from(document.querySelectorAll<HTMLElement>('body > div')).find((element) => {
