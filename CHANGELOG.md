@@ -1,3 +1,18 @@
+# v16.16.0 (Sat Jul 25 2026)
+
+#### Rules
+
+- Fix Pandectes mobile settings timing [#1458](https://github.com/duckduckgo/autoconsent/pull/1458) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Rule update: Admiral [#1456](https://github.com/duckduckgo/autoconsent/pull/1456) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.15.0 (Fri Jul 24 2026)
 
 #### Rules
