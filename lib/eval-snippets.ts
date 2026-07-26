@@ -211,6 +211,9 @@ export const snippets = {
     EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
     EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
+    EVAL_TOHO_ONE_TEST: () =>
+        localStorage.getItem('CookieOptInAccepted') === 'true' &&
+        ['true', 'false'].includes(localStorage.getItem('CookiePerformanceAccepted')),
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
