@@ -1,0 +1,43 @@
+{
+    "name": "appconsent",
+    "vendorUrl": "https://appconsent.io/",
+    "prehideSelectors": ["#appconsent"],
+    "detectCmp": [
+        {
+            "exists": "#appconsent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#appconsent iframe", "button.button__acceptAll"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#appconsent iframe", "button.button__acceptAll"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ["#appconsent iframe", "button.button__refuseAll"] },
+            "then": [{ "waitForThenClick": ["#appconsent iframe", "button.button__refuseAll"] }],
+            "else": [
+                {
+                    "if": { "visible": ["#appconsent iframe", "button.button__skip"] },
+                    "then": [{ "waitForThenClick": ["#appconsent iframe", "button.button__skip"] }],
+                    "else": [
+                        { "waitForThenClick": ["#appconsent iframe", "button.button__openPrivacyCenter"] },
+                        { "waitForThenClick": ["#appconsent iframe", ".button__refuseAll"] },
+                        { "waitForThenClick": ["#appconsent iframe", "button.button__save"] }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "#appconsent iframe",
+            "check": "none"
+        }
+    ]
+}
