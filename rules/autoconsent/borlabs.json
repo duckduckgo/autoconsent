@@ -18,8 +18,8 @@
     ],
     "optOut": [
         {
-            "if": { "exists": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]" },
-            "then": [{ "click": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]" }],
+            "if": { "exists": "button[data-borlabs-cookie-actions=\"close-button\"],.brlbs-btn-accept-only-essential,a[data-cookie-refuse]" },
+            "then": [{ "click": "button[data-borlabs-cookie-actions=\"close-button\"],.brlbs-btn-accept-only-essential,a[data-cookie-refuse]" }],
             "else": [
                 {
                     "click": "a[data-cookie-individual]"
