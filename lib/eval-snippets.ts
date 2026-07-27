@@ -84,22 +84,15 @@ export const snippets = {
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
-    EVAL_BORLABS_0: () => {
-        const cookie = document.cookie.split(';').find((c) => c.indexOf('borlabs-cookie') !== -1);
-        if (!cookie) {
-            return false;
-        }
-        const { consents } = JSON.parse(decodeURIComponent(cookie.split('=', 2)[1]));
-        if (!consents) {
-            return false;
-        }
-        if (consents.v3 || Object.values(consents).some(Array.isArray)) {
-            return Object.entries(consents).every(
-                ([groupId, services]) => groupId === 'essential' || !Array.isArray(services) || services.length === 0,
-            );
-        }
-        return !consents.statistics;
-    },
+    EVAL_BORLABS_0: () =>
+        !JSON.parse(
+            decodeURIComponent(
+                document.cookie
+                    .split(';')
+                    .find((c) => c.indexOf('borlabs-cookie') !== -1)
+                    .split('=', 2)[1],
+            ),
+        ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
