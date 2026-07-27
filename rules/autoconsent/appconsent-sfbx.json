@@ -1,0 +1,18 @@
+{
+    "name": "appconsent-sfbx",
+    "_metadata": {
+        "vendorUrl": "https://sfbx.io/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": ""
+    },
+    "prehideSelectors": ["#appconsent"],
+    "detectCmp": [{ "exists": "#appconsent" }],
+    "detectPopup": [{ "visible": "#appconsent" }],
+    "optIn": [{ "waitForThenClick": ["#appconsent iframe", "button.button__acceptAll"] }],
+    "optOut": [{ "waitForThenClick": ["#appconsent iframe", "button.button__skip"] }],
+    "test": [{ "exists": "#appconsent", "negated": true }]
+}
