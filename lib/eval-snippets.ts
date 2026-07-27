@@ -112,24 +112,6 @@ export const snippets = {
             return true;
         }
     },
-    EVAL_BORLABS_OPT_OUT_V3: () => {
-        const borlabsCookie = (window as any).BorlabsCookie;
-        const serviceGroups = borlabsCookie?.ServiceGroups?.serviceGroups || {};
-        const services = borlabsCookie?.Services?.services || {};
-        const essentialServices =
-            serviceGroups.essential?.serviceIds ||
-            Object.values(services)
-                .filter((service: any) => service.serviceGroupId === 'essential')
-                .map((service: any) => service.id);
-        if (!borlabsCookie?.Consents?.save || essentialServices.length === 0) {
-            return false;
-        }
-        borlabsCookie.Consents.save({ essential: essentialServices });
-        document.querySelector('#BorlabsCookieBox')?.remove();
-        document.documentElement.classList.remove('brlbs-cmpnt--active');
-        document.body.classList.remove('brlbs-cmpnt--active');
-        return true;
-    },
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
