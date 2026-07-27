@@ -1,0 +1,13 @@
+{
+    "name": "bleacherreport",
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?bleacherreport\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["[id=\"id/ltp\"]"],
+    "detectCmp": [{ "exists": "[id=\"id/ltp\"] button" }],
+    "detectPopup": [{ "visible": "[id=\"id/ltp\"] button" }],
+    "optIn": [{ "click": "[id=\"id/ltp\"] button" }],
+    "optOut": [{ "hide": "[id=\"id/ltp\"]" }, { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }]
+}
