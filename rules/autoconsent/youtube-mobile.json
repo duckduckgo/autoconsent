@@ -7,7 +7,7 @@
         {
             "any": [
                 {
-                    "waitForThenClick": "xpath//ytm-consent-bump-v2-renderer//*[self::button or self::a][contains(translate(normalize-space(.), \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"accept all\") or contains(translate(@aria-label, \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"accept all\")]",
+                    "waitForThenClick": "xpath///ytm-consent-bump-v2-renderer//*[self::button or self::a][contains(translate(normalize-space(.), \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"accept all\") or contains(translate(@aria-label, \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"accept all\")]",
                     "timeout": 2000
                 },
                 {
@@ -21,7 +21,7 @@
         {
             "any": [
                 {
-                    "waitForThenClick": "xpath//ytm-consent-bump-v2-renderer//*[self::button or self::a][contains(translate(normalize-space(.), \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"reject all\") or contains(translate(@aria-label, \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"reject all\")]",
+                    "waitForThenClick": "xpath///ytm-consent-bump-v2-renderer//*[self::button or self::a][contains(translate(normalize-space(.), \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"reject all\") or contains(translate(@aria-label, \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\", \"abcdefghijklmnopqrstuvwxyz\"), \"reject all\")]",
                     "timeout": 2000
                 },
                 {
