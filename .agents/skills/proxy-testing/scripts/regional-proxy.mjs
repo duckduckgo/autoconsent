@@ -82,7 +82,14 @@ const contentScript = fs.readFileSync(path.join(projectRoot, 'dist/autoconsent.p
 const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8'));
 const fullRules = rulesJson.autoconsent;
 
-export const DEFAULT_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no', 'it', 'es', 'pl', 'se', 'dk', 'jp'];
+/** All supported proxy regions. */
+export const ALL_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no', 'it', 'es', 'pl', 'se', 'dk', 'jp'];
+
+/** Core pass: default verification set (CCPA, UK GDPR, EEA GDPR). Add the reported region when not already covered. */
+export const CORE_REGIONS = ['us', 'gb', 'de'];
+
+/** Expanded pass: escalation set covering all non-GDPR regimes plus GDPR representatives. */
+export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca', 'jp'];
 
 /**
  * Build the Playwright proxy object for a region.
@@ -560,11 +567,11 @@ export async function testUrl(url, regionKey, options = {}) {
 /**
  * Test one URL across several regions.
  * @param {string} url
- * @param {string[]} [regions]
+ * @param {string[]} [regions] Defaults to the core pass; pass EXPANDED_REGIONS or ALL_REGIONS to widen.
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<TestResult[]>}
  */
-export async function testRegions(url, regions = DEFAULT_REGIONS, options = {}) {
+export async function testRegions(url, regions = CORE_REGIONS, options = {}) {
     const results = [];
     for (const region of regions) {
         results.push(await testUrl(url, region, options));
