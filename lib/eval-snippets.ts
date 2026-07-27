@@ -100,18 +100,6 @@ export const snippets = {
         }
         return !consents.statistics;
     },
-    EVAL_BORLABS_NEEDS_CONSENT: () => {
-        const cookie = document.cookie.split(';').find((c) => c.indexOf('borlabs-cookie') !== -1);
-        if (!cookie) {
-            return true;
-        }
-        try {
-            const { consents } = JSON.parse(decodeURIComponent(cookie.split('=', 2)[1]));
-            return !consents || Object.keys(consents).length === 0;
-        } catch {
-            return true;
-        }
-    },
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
