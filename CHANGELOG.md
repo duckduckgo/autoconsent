@@ -1,3 +1,18 @@
+# v16.17.0 (Tue Jul 28 2026)
+
+#### Rules
+
+- make youtube-mobile more reliable [#1460](https://github.com/duckduckgo/autoconsent/pull/1460) ([@muodov](https://github.com/muodov))
+- Dismiss The Guardian "consent or pay" wall in EU/UK via cosmetic rule [#1455](https://github.com/duckduckgo/autoconsent/pull/1455) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.16.0 (Sat Jul 25 2026)
 
 #### Rules
