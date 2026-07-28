@@ -1,0 +1,60 @@
+{
+    "name": "pw-consent",
+    "prehideSelectors": ["#js-pw-consent-wrapper"],
+    "detectCmp": [
+        {
+            "visible": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-rejectAllButton\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-rejectAllButton\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-acceptAllButton\"]"
+        },
+        {
+            "wait": 1000
+        },
+        {
+            "if": {
+                "visible": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-acceptAllButton\"]"
+            },
+            "then": [
+                {
+                    "click": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-acceptAllButton\"]",
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-rejectAllButton\"]"
+        },
+        {
+            "wait": 1000
+        },
+        {
+            "if": {
+                "visible": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-rejectAllButton\"]"
+            },
+            "then": [
+                {
+                    "click": "#js-pw-consent-wrapper [data-ta-id=\"pw-consent-rejectAllButton\"]",
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ppms_privacy_custom={\"consents\":"
+        },
+        {
+            "cookieContains": "\"status\":0"
+        }
+    ]
+}
