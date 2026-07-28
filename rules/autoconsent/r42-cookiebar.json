@@ -1,0 +1,31 @@
+{
+    "name": "r42-cookiebar",
+    "prehideSelectors": ["dialog#r42CookieBar"],
+    "detectCmp": [
+        {
+            "exists": "dialog#r42CookieBar button.cw-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#r42CookieBar[open] button.cw-deny"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog#r42CookieBar button.cw-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog#r42CookieBar button.cw-deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "dialog#r42CookieBar button.cw-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
