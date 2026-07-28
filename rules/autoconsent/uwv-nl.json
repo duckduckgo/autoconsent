@@ -1,0 +1,46 @@
+{
+    "name": "uwv.nl",
+    "_metadata": {
+        "vendorUrl": "https://www.uwv.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(?:[^/]+\\.)?uwv\\.nl/"
+    },
+    "prehideSelectors": ["#js-pw-consent-wrapper bgl-modal[active]"],
+    "detectCmp": [
+        {
+            "exists": "#js-pw-consent-wrapper [data-ta-id='pw-consent-rejectAllButton']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#js-pw-consent-wrapper bgl-modal[active]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#js-pw-consent-wrapper [data-ta-id='pw-consent-acceptAllButton']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#js-pw-consent-wrapper [data-ta-id='pw-consent-rejectAllButton']"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#js-pw-consent-wrapper bgl-modal[active]",
+            "check": "none",
+            "timeout": 3000
+        },
+        {
+            "wait": 3000
+        },
+        {
+            "cookieContains": "ppms_privacy_custom="
+        }
+    ]
+}
