@@ -1,0 +1,20 @@
+{
+    "name": "trustpilot.com",
+    "prehideSelectors": ["#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter"],
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?trustpilot\\.com/"
+    },
+    "detectCmp": [{ "exists": "#onetrust-banner-sdk" }],
+    "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
+    "optIn": [{ "waitForThenClick": "#onetrust-accept-btn-handler" }],
+    "optOut": [
+        { "waitForThenClick": "#onetrust-pc-btn-handler" },
+        { "waitFor": "#onetrust-consent-sdk input.category-switch-handler:checked" },
+        {
+            "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
+            "all": true
+        },
+        { "waitForThenClick": ".save-preference-btn-handler" }
+    ],
+    "test": [{ "cookieContains": "groups=C0001%3A1%2CC0002%3A0%2CC0003%3A0%2CC0004%3A0" }]
+}
