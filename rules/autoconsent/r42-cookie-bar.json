@@ -1,0 +1,32 @@
+{
+    "name": "r42-cookie-bar",
+    "vendorUrl": "https://r42group.com/",
+    "prehideSelectors": ["#r42CookieBar.cw-dialog"],
+    "detectCmp": [
+        {
+            "exists": "#r42CookieBar.cw-dialog .cw-deny[value=\"popup_decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#r42CookieBar.cw-dialog .cw-deny[value=\"popup_decline\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#r42CookieBar.cw-dialog .cw-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#r42CookieBar.cw-dialog .cw-deny[value=\"popup_decline\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#r42CookieBar.cw-dialog",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
