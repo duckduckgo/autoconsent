@@ -14,10 +14,6 @@
             "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
             "all": true
         },
-        { "waitForThenClick": ".save-preference-btn-handler" },
-        {
-            "waitForVisible": "#onetrust-banner-sdk,#onetrust-pc-sdk",
-            "check": "none"
-        }
+        { "waitForThenClick": ".save-preference-btn-handler" }
     ]
 }
