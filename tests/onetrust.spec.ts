@@ -59,3 +59,9 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+generateCMPTests('Onetrust', ['https://trustpilot.com/'], {
+    onlyRegions: ['US'],
+    testOptIn: false,
+    testSelfTest: false,
+});
