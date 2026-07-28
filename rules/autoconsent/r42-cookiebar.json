@@ -1,0 +1,35 @@
+{
+    "name": "r42-cookiebar",
+    "_metadata": {
+        "vendorUrl": "https://r42.nl/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": ["dialog#r42CookieBar"],
+    "detectCmp": [
+        {
+            "exists": "dialog#r42CookieBar button.cw-deny[value=\"popup_decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#r42CookieBar button.cw-deny[value=\"popup_decline\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog#r42CookieBar button.cw-accept[value=\"popup_accept\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog#r42CookieBar button.cw-deny[value=\"popup_decline\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "dialog#r42CookieBar button.cw-deny[value=\"popup_decline\"]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
