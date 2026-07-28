@@ -1,0 +1,36 @@
+{
+    "name": "abn-age-gate",
+    "_metadata": {
+        "vendorUrl": "https://transjizz.com/loriqaq/age-by-nosotros/assets/js/age.js"
+    },
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?(transjizz|punishworld|darknessporn|xanimu|iamsissy|familyporner|freepublicporn|cockdude|lesbosland)\\.com/"
+    },
+    "prehideSelectors": ["#abn-age-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#abn-age-overlay #abn-age-allow"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#abn-age-overlay #abn-age-allow"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#abn-age-overlay #abn-age-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#abn-age-overlay #abn-age-allow"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#abn-age-overlay",
+            "check": "none"
+        }
+    ]
+}
