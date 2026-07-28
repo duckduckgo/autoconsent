@@ -4,15 +4,21 @@
         "urlPattern": "^https://(www\\.)?pornhub\\.com/"
     },
     "cosmetic": false,
-    "prehideSelectors": ["#cookieBanner #cookieBannerContent"],
+    "prehideSelectors": ["#cookieBanner #cookieBannerContent", "#cookieBanner.cbShort"],
     "detectCmp": [
         {
-            "exists": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
+            "cookieContains": "cookieConsent=2",
+            "negated": true
+        },
+        {
+            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner.cbShort",
+            "check": "any"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner"
+            "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner.cbShort .cbCloseButton",
+            "check": "any"
         }
     ],
     "optIn": [
@@ -21,6 +27,16 @@
         }
     ],
     "optOut": [
+        {
+            "if": {
+                "visible": "#cookieBanner.cbShort .cbCloseButton"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookieBanner.cbShort .cbCloseButton"
+                }
+            ]
+        },
         {
             "if": {
                 "exists": "#globalCookieBanner .js-customizeGlobalCookies"
@@ -43,6 +59,18 @@
             "else": [
                 {
                     "waitForThenClick": "#cookieBanner button.cbSecondaryCTA"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "cookieConsent=2"
+                },
+                {
+                    "cookieContains": "cookieBannerState"
                 }
             ]
         }
