@@ -1,5 +1,4 @@
 import TrustArcTop from './trustarc-top';
-import TrustArcFrame from './trustarc-frame';
 import CookieBot from './cookiebot';
 import SourcePointFrame from './sourcepoint-frame';
 import ConsentManager from './consentmanager';
@@ -14,7 +13,6 @@ import Admiral from './admiral';
 
 export const dynamicCMPs = [
     TrustArcTop,
-    TrustArcFrame,
     CookieBot,
     SourcePointFrame,
     ConsentManager,
