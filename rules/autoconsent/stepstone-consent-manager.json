@@ -1,0 +1,34 @@
+{
+    "name": "stepstone-consent-manager",
+    "prehideSelectors": ["#GDPRConsentManagerContainer"],
+    "detectCmp": [
+        {
+            "exists": "#GDPRConsentManagerContainer #ccmgt_explicit_preferences"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#GDPRConsentManagerContainer #ccmgt_explicit_preferences"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_explicit_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_explicit_preferences"
+        },
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_preferences_reject",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "visible": "#GDPRConsentManagerContainer #ccmgt_explicit_preferences",
+            "negated": true
+        }
+    ]
+}
