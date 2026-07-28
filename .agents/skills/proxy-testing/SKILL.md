@@ -4,8 +4,19 @@ description: Test autoconsent via regional proxies in Playwright. Use when verif
 ---
 
 # Proxy Testing
+This skill provides a JS library to run autoconsent via regional proxies in Playwright.
 
-All rule changes must be tested across ALL supported geographic regions to catch regional popup variations. This skill provides a JS library to run autoconsent via regional proxies in Playwright.
+Rule changes are verified with a two-level regional policy.
+The **core region set** (default for detection, iteration, and verification) covers `us` (CCPA), `gb` (UK GDPR), `de` (EEA GDPR), plus the reported region from the task when specified (if the reported region is not a supported proxy region, use the closest supported one, e.g. `es` for `pt`). Iterate in the single most relevant region; run the full core set once when the fix is stable.
+
+Escalate to the **expanded set** (`us`, `gb`, `de`, `fr`, `nl`, `pl`, `au`, `ca`, `jp`) if any of these is true:
+- core results diverge
+- the rule contains region-dependent logic
+- the fix relies on language-specific or brittle structural selectors
+- the change touches a widely-used generic rule (as final pre-PR validation)
+- a non-core region named in the report behaves differently.
+
+The remaining GDPR/EEA regions (`ch`, `no`, `it`, `es`, `se`, `dk`) are optional even in an expanded pass: test them only when named in the report or clearly relevant (e.g. the site's ccTLD).
 
 Important! Autoconsent results can have false positives. When testing, always inspect the screenshots and confirm that opt-out was successful.
 
@@ -74,7 +85,10 @@ export default defineConfig({
 ## API
 
 - `testUrl(url, regionKey, options?)` — test one URL in a single region; launches a proxied browser, runs autoconsent, returns a `TestResult`.
-- `testRegions(url, regions?, options?)` — test one URL across several regions (defaults to all supported regions), a fresh browser per region; returns `TestResult[]`.
+- `testRegions(url, regions?, options?)` — test one URL across several regions (defaults to `CORE_REGIONS`), a fresh browser per region; returns `TestResult[]`. Remember to include the reported region when not already covered.
+- `CORE_REGIONS` — the core region set (default); add the reported region when not already covered.
+- `EXPANDED_REGIONS` — the expanded region set used on escalation.
+- `ALL_REGIONS` — all supported regions.
 - `testPage(page, url, regionKey, options?)` — run a full test on a page you created yourself (you own the browser/context); returns a `TestResult`.
 - `injectAutoconsent(page, options?)` — set up isolated-world injection; call before `page.goto()`. Returns a context (`received`, `hasMessage`, `waitForCompletion`, `waitForMessage`, `collectResult`).
 - `buildProxyConfig(regionKey)` — build the Playwright `{ server, username, password }` proxy object for a region from its env vars.
@@ -108,7 +122,7 @@ await browser.close();
 
 1. Run `npm run build-rules` after changing rule JSON.
 2. Smoke-test each regional proxy.
-3. Test in ALL supported regions.
+3. Verify on the core region set (`us`, `gb`, `de` + reported region); escalate to the expanded set per the policy above.
 4. Inspect screenshots, not just API results.
 5. Reload after dismissal and confirm the rule does not keep matching, unless cosmetic-only.
 
