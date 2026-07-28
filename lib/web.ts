@@ -32,6 +32,7 @@ export default class AutoConsent {
     id = getRandomID();
     rules: AutoCMP[] = [];
     #config?: Config;
+    #pageshowListenerAdded = false;
     foundCmp?: AutoCMP;
     state: ConsentState = {
         lifecycle: 'loading',
@@ -119,7 +120,36 @@ export default class AutoConsent {
         } else {
             this.start();
         }
+        this.registerPageShowListener();
         this.updateState({ lifecycle: 'initialized' });
+    }
+
+    registerPageShowListener() {
+        if (this.#pageshowListenerAdded) {
+            return;
+        }
+        this.#pageshowListenerAdded = true;
+        window.addEventListener('pageshow', (event: PageTransitionEvent) => {
+            if (event.persisted) {
+                this.handleBFCacheRestore();
+            }
+        });
+    }
+
+    handleBFCacheRestore() {
+        if (!this.#config?.enabled) {
+            return;
+        }
+        if (this.state.lifecycle === 'done' && this.foundCmp?.isCosmetic) {
+            const logsConfig = this.config.logs;
+            logsConfig.lifecycle &&
+                console.log('bfcache restore: re-applying cosmetic opt-out', this.foundCmp.name, location.href);
+            scheduleWhenIdle(async () => {
+                if (this.foundCmp) {
+                    await this.foundCmp.optOut();
+                }
+            });
+        }
     }
 
     get shouldPrehide() {

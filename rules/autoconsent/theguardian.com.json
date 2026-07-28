@@ -11,11 +11,20 @@
     },
     "prehideSelectors": ["div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']"],
     "detectCmp": [{ "exists": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" }],
-    "detectPopup": [{ "visible": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" }],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" },
+                { "exists": "html.sp-message-open" }
+            ]
+        }
+    ],
     "optIn": [],
     "optOut": [
         { "hide": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" },
-        { "removeClass": "sp-message-open", "selector": "html", "optional": true }
+        { "removeClass": "sp-message-open", "selector": "html", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "html", "optional": true },
+        { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }
     ],
     "test": [{ "visible": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']", "check": "none" }]
 }
