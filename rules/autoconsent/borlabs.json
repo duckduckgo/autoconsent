@@ -18,25 +18,56 @@
     ],
     "optOut": [
         {
-            "if": { "exists": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]" },
-            "then": [{ "click": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]" }],
+            "if": {
+                "exists": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]"
+            },
+            "then": [
+                {
+                    "click": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]"
+                }
+            ],
             "else": [
                 {
-                    "click": "a[data-cookie-individual]"
-                },
-                {
-                    "waitForVisible": ".cookie-preference"
-                },
-                {
-                    "click": "input[data-borlabs-cookie-checkbox]:checked",
-                    "all": true,
-                    "optional": true
-                },
-                {
-                    "click": "#CookiePrefSave"
-                },
-                {
-                    "wait": 500
+                    "if": { "exists": ".brlbs-btn-save,#CookieBoxSaveButton" },
+                    "then": [
+                        {
+                            "click": ".brlbs-btn-save,#CookieBoxSaveButton"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": { "exists": ".brlbs-cmpnt-close-button[data-borlabs-cookie-actions=\"close-button\"]" },
+                            "then": [
+                                {
+                                    "click": ".brlbs-cmpnt-close-button[data-borlabs-cookie-actions=\"close-button\"]"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "if": { "exists": "a[data-cookie-individual]" },
+                                    "then": [
+                                        {
+                                            "click": "a[data-cookie-individual]"
+                                        },
+                                        {
+                                            "waitForVisible": ".cookie-preference"
+                                        },
+                                        {
+                                            "click": "input[data-borlabs-cookie-checkbox]:checked",
+                                            "all": true,
+                                            "optional": true
+                                        },
+                                        {
+                                            "click": "#CookiePrefSave"
+                                        },
+                                        {
+                                            "wait": 500
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
