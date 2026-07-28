@@ -1,0 +1,35 @@
+{
+    "name": "stepstone-de",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?stepstone\\.de/"
+    },
+    "prehideSelectors": ["#GDPRConsentManagerContainer #explicit_consent", "#GDPRConsentManagerContainer #consent-preferences"],
+    "detectCmp": [
+        {
+            "exists": "#GDPRConsentManagerContainer #explicit_consent #ccmgt_explicit_preferences"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#GDPRConsentManagerContainer #explicit_consent #ccmgt_explicit_preferences"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #explicit_consent #ccmgt_explicit_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #explicit_consent #ccmgt_explicit_preferences"
+        },
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #consent-preferences #ccmgt_preferences_reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CONSENTMGR="
+        }
+    ]
+}
