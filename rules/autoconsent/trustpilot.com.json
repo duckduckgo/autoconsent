@@ -8,12 +8,18 @@
     "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
     "optIn": [{ "waitForThenClick": "#onetrust-accept-btn-handler" }],
     "optOut": [
-        { "waitForThenClick": "#onetrust-pc-btn-handler" },
-        { "waitFor": "#onetrust-consent-sdk input.category-switch-handler:checked" },
         {
-            "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
-            "all": true
-        },
-        { "waitForThenClick": ".save-preference-btn-handler" }
+            "if": { "visible": "#onetrust-reject-all-handler" },
+            "then": [{ "click": "#onetrust-reject-all-handler" }],
+            "else": [
+                { "waitForThenClick": "#onetrust-pc-btn-handler" },
+                { "waitFor": "#onetrust-consent-sdk input.category-switch-handler:checked" },
+                {
+                    "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
+                    "all": true
+                },
+                { "waitForThenClick": ".save-preference-btn-handler" }
+            ]
+        }
     ]
 }
