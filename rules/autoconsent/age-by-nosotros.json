@@ -1,0 +1,30 @@
+{
+    "name": "age-by-nosotros",
+    "vendorUrl": "https://wordpress.org/plugins/age-by-nosotros/",
+    "prehideSelectors": ["#abn-age-overlay.abn-age-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#abn-age-js-before, script[src*=\"/age-by-nosotros/\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#abn-age-overlay.is-visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#abn-age-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#abn-age-allow"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "age-allow-"
+        }
+    ]
+}
