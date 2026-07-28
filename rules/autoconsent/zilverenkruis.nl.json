@@ -1,0 +1,38 @@
+{
+    "name": "zilverenkruis.nl",
+    "_metadata": {
+        "vendorUrl": "https://www.zilverenkruis.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zilverenkruis\\.nl/"
+    },
+    "prehideSelectors": ["#r42CookieBar"],
+    "detectCmp": [
+        {
+            "exists": "#r42CookieBar .cw-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#r42CookieBar[open]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#r42CookieBar .cw-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#r42CookieBar .cw-deny"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#r42CookieBar",
+            "check": "none"
+        }
+    ]
+}
