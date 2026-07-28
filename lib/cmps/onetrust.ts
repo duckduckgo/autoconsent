@@ -27,6 +27,11 @@ export default class Onetrust extends AutoConsentCMPBase {
 
     async optOut() {
         await this.wait(500);
+        const isNoticeWithPreferences =
+            this.elementExists('#onetrust-pc-btn-handler') &&
+            this.elementExists('#onetrust-accept-btn-handler') &&
+            !this.elementExists('#onetrust-reject-all-handler,.ot-pc-refuse-all-handler,.js-reject-cookies') &&
+            /^(got it|ok|okay|close)$/i.test(document.getElementById('onetrust-accept-btn-handler')?.textContent?.trim() || '');
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
             return await this.click('#onetrust-reject-all-handler');
@@ -72,12 +77,21 @@ export default class Onetrust extends AutoConsentCMPBase {
             await this.click('.ot-sdk-show-settings,button.js-cookie-settings');
         }
 
-        await this.waitForElement('#onetrust-consent-sdk', 2000);
+        const popupSelector = '#onetrust-banner-sdk,#onetrust-pc-sdk,.js-consent-banner';
+        if (!(await this.waitForVisible('#onetrust-consent-sdk,#onetrust-pc-sdk,.js-consent-banner', 5000, 'any'))) {
+            return !this.elementVisible(popupSelector, 'any');
+        }
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
         await this.click('#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked', true); // optional step
 
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-        await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
+        if (!(await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000))) {
+            return !this.elementVisible(popupSelector, 'any');
+        }
+        if (isNoticeWithPreferences) {
+            this.click('.save-preference-btn-handler,.js-consent-save');
+            return true;
+        }
         await this.click('.save-preference-btn-handler,.js-consent-save');
 
         // popup doesn't disappear immediately
