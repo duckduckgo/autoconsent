@@ -1,4 +1,4 @@
-import { waitFor } from '../utils';
+import { isElementVisible, waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Onetrust extends AutoConsentCMPBase {
@@ -74,14 +74,23 @@ export default class Onetrust extends AutoConsentCMPBase {
 
         await this.waitForElement('#onetrust-consent-sdk', 2000);
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-        await this.click('#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked', true); // optional step
+        const checkedSwitches = Array.from(
+            document.querySelectorAll<HTMLElement>(
+                '#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked',
+            ),
+        ).filter(isElementVisible);
+        checkedSwitches.forEach((switchElement) => switchElement.click());
 
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-        await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
-        await this.click('.save-preference-btn-handler,.js-consent-save');
+        await this.waitForVisible('.save-preference-btn-handler,.js-consent-save', 2000, 'any');
+        const saveButton = Array.from(document.querySelectorAll<HTMLElement>('.save-preference-btn-handler,.js-consent-save')).find(
+            isElementVisible,
+        );
+        if (!saveButton) {
+            return false;
+        }
+        await this.clickElement(saveButton);
 
-        // popup doesn't disappear immediately
-        await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
         return true;
     }
 

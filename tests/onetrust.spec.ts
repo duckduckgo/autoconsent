@@ -14,6 +14,11 @@ generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.c
     testOptIn: false,
 });
 
+generateCMPTests('Onetrust', ['https://trustpilot.com/'], {
+    testOptIn: false,
+    testSelfTest: false,
+});
+
 // opt-in is not necessary in the US on this sites
 generateCMPTests('Onetrust', ['https://mailchimp.com/', 'https://www.accenture.com/', 'https://www.zoom.us'], {
     testOptIn: true,
