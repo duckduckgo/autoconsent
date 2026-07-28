@@ -1,0 +1,35 @@
+{
+    "name": "stepstone-consent-manager",
+    "vendorUrl": "https://www.stepstone.com/",
+    "prehideSelectors": ["#GDPRConsentManagerContainer"],
+    "detectCmp": [
+        {
+            "exists": "#GDPRConsentManagerContainer [data-atx-component=\"cookieConsent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#GDPRConsentManagerContainer [role=\"dialog\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_explicit_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_explicit_preferences"
+        },
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_preferences_reject",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CONSENTMGR="
+        }
+    ]
+}
