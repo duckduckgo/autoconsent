@@ -7,10 +7,6 @@
     "prehideSelectors": ["#cookieBanner #cookieBannerContent", "#cookieBanner.cbShort"],
     "detectCmp": [
         {
-            "cookieContains": "cookieConsent=2",
-            "negated": true
-        },
-        {
             "visible": "#cookieBanner #cookieBannerContent, #globalCookieBanner, #cookieBanner.cbShort",
             "check": "any"
         }
