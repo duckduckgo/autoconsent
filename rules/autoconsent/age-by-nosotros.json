@@ -1,0 +1,33 @@
+{
+    "name": "age-by-nosotros",
+    "vendorUrl": "https://unknown",
+    "runContext": {
+        "urlPattern": "^https?://([^/]+\\.)?(transjizz|punishworld|darknessporn|xanimu|iamsissy|familyporner|freepublicporn|cockdude|lesbosland)\\.com/"
+    },
+    "prehideSelectors": ["#abn-age-overlay"],
+    "detectCmp": [
+        {
+            "visible": "#abn-age-overlay[role=\"dialog\"] #abn-age-allow"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#abn-age-overlay.is-visible #abn-age-allow"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#abn-age-overlay #abn-age-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#abn-age-overlay #abn-age-allow"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "age-allow-"
+        }
+    ]
+}
