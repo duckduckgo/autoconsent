@@ -26,6 +26,12 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optOut() {
+        const optOutLock = 'data-autoconsent-onetrust-optout';
+        if (document.documentElement.hasAttribute(optOutLock)) {
+            return true;
+        }
+        document.documentElement.setAttribute(optOutLock, 'true');
+
         await this.wait(500);
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
@@ -74,15 +80,27 @@ export default class Onetrust extends AutoConsentCMPBase {
 
         await this.waitForElement('#onetrust-consent-sdk', 2000);
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
-        await this.click('#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked', true); // optional step
+        const seenCategoryIds = new Set<string>();
+        const checkedCategoryInputs = Array.from(
+            document.querySelectorAll<HTMLInputElement>(
+                '#onetrust-consent-sdk input.category-switch-handler:checked,.js-editor-toggle-state:checked',
+            ),
+        );
+        for (const input of checkedCategoryInputs) {
+            const categoryId = input.dataset.optanongroupid || input.id || input.name;
+            if (seenCategoryIds.has(categoryId)) {
+                continue;
+            }
+            seenCategoryIds.add(categoryId);
+            const label = Array.from(document.querySelectorAll<HTMLLabelElement>('label')).find(
+                (candidate) => candidate.htmlFor === input.id,
+            );
+            await this.clickElement(label || input);
+        }
 
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
         await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
-        await this.click('.save-preference-btn-handler,.js-consent-save');
-
-        // popup doesn't disappear immediately
-        await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
-        return true;
+        return await this.click('.save-preference-btn-handler,.js-consent-save');
     }
 
     async optIn() {
