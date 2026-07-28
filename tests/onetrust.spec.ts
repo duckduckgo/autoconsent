@@ -33,6 +33,12 @@ generateCMPTests('Onetrust', ['https://www.newyorker.com/', 'https://www.adobe.c
     skipRegions: ['US'],
 });
 
+generateCMPTests('Onetrust', ['https://trustpilot.com/'], {
+    onlyRegions: ['US'],
+    testOptIn: false,
+    testSelfTest: false,
+});
+
 generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
     skipRegions: ['US'],
 });

@@ -74,7 +74,19 @@ export const snippets = {
         }
         return false;
     },
-    EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
+    EVAL_ONETRUST_1: () => {
+        const activeGroups = window.OnetrustActiveGroups?.split(',').filter((s) => s.length > 0);
+        if (activeGroups && activeGroups.length <= 1) {
+            return true;
+        }
+
+        const optanonConsent = document.cookie
+            .split(';')
+            .map((c) => c.trim())
+            .find((c) => c.startsWith('OptanonConsent='));
+        const groups = decodeURIComponent(optanonConsent || '').match(/(?:^|&)groups=([^&]+)/)?.[1];
+        return !!groups && groups.split(',').filter((group) => !group.endsWith(':0')).length <= 1;
+    },
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
