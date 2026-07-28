@@ -80,9 +80,12 @@ export default class Onetrust extends AutoConsentCMPBase {
         await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
         await this.click('.save-preference-btn-handler,.js-consent-save');
 
-        // popup doesn't disappear immediately
-        await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
-        return true;
+        // Some notice variants remove the banner only after OneTrust writes the saved state.
+        return await waitFor(
+            () => this.elementVisible('#onetrust-banner-sdk', 'none') || this.cookieContains('OptanonAlertBoxClosed='),
+            25,
+            200,
+        );
     }
 
     async optIn() {
