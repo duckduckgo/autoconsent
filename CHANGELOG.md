@@ -1,3 +1,23 @@
+# v16.18.0 (Wed Jul 29 2026)
+
+#### Rules
+
+- Fix Pornhub reload loop by merging compact cookie banner rule [#1463](https://github.com/duckduckgo/autoconsent/pull/1463) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Fix stale cmp rules [#1459](https://github.com/duckduckgo/autoconsent/pull/1459) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix borlabs rule [#1462](https://github.com/duckduckgo/autoconsent/pull/1462) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### AI / Agent Workflow
+
+- Introduce test region sets [#1461](https://github.com/duckduckgo/autoconsent/pull/1461) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.17.0 (Tue Jul 28 2026)
 
 #### Rules
