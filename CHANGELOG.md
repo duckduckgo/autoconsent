@@ -1,3 +1,15 @@
+# v16.18.1 (Wed Jul 29 2026)
+
+#### Rules
+
+- Revert "Fix Pornhub reload loop by merging compact cookie banner rule" [#1465](https://github.com/duckduckgo/autoconsent/pull/1465) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.18.0 (Wed Jul 29 2026)
 
 #### Rules
