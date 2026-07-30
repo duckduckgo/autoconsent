@@ -152,6 +152,10 @@ describe('classifyButtonTextRegex', () => {
     it('does not match partial exact string patterns', () => {
         expect(classifyButtonTextRegex('no problem')).to.equal('other');
     });
+
+    it('does not treat revoke links as reject buttons', () => {
+        expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
+    });
 });
 
 describe('classifyButtons', () => {
