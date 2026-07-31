@@ -1,0 +1,53 @@
+{
+    "name": "gmx-permission",
+    "vendorUrl": "https://www.gmx.com",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://plus\\.gmx\\.com/lt\\?"
+    },
+    "prehideSelectors": ["#overlay.cmp"],
+    "detectCmp": [
+        {
+            "exists": "#overlay.cmp"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#overlay[role=dialog]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#save-all-conditionally, #save-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#edit-purpose-settings"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#edit-purpose-settings"
+                },
+                {
+                    "waitForVisible": "#save-purpose-settings"
+                },
+                {
+                    "waitForThenClick": "#save-purpose-settings"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#save-purpose-settings"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ui_cid=OPTOUT"
+        }
+    ]
+}
