@@ -1,3 +1,27 @@
+# v16.19.0 (Fri Jul 31 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on gmx.com [#1468](https://github.com/duckduckgo/autoconsent/pull/1468) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: simyo-nl [#1469](https://github.com/duckduckgo/autoconsent/pull/1469) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: [m8-ab] [e2e test] [m8] unknowncmp:bbb.org — bbb.org #1 [#1467](https://github.com/duckduckgo/autoconsent/pull/1467) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Bug Fixes
+
+- Avoid heuristic reject on German revoke links [#1466](https://github.com/duckduckgo/autoconsent/pull/1466) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Documentation
+
+- Coverage data update [#1457](https://github.com/duckduckgo/autoconsent/pull/1457) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.18.1 (Wed Jul 29 2026)
 
 #### Rules
