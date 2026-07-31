@@ -25,22 +25,34 @@
     "optOut": [
         {
             "if": {
-                "exists": "#edit-purpose-settings"
+                "exists": "#deny"
             },
             "then": [
                 {
-                    "waitForThenClick": "#edit-purpose-settings"
-                },
-                {
-                    "waitForVisible": "#save-purpose-settings"
-                },
-                {
-                    "waitForThenClick": "#save-purpose-settings"
+                    "waitForThenClick": "#deny"
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": "#save-purpose-settings"
+                    "if": {
+                        "exists": "#edit-purpose-settings"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#edit-purpose-settings"
+                        },
+                        {
+                            "waitForVisible": "#save-purpose-settings"
+                        },
+                        {
+                            "waitForThenClick": "#save-purpose-settings"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#save-purpose-settings"
+                        }
+                    ]
                 }
             ]
         }
