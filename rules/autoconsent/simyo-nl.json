@@ -1,0 +1,35 @@
+{
+    "name": "simyo-nl",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?simyo\\.nl/"
+    },
+    "prehideSelectors": ["[data-testid=\"cookie-wall\"]"],
+    "detectCmp": [
+        {
+            "visible": "[data-testid=\"cookie-wall\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-wall\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-wall\"] [data-testid=\"cookie-accept-action\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-wall\"] .cookie-bar__footer button[data-id=\"0\"]",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "acceptCookies=0"
+        }
+    ]
+}
