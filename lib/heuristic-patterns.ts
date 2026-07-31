@@ -257,7 +257,6 @@ const REJECT_PATTERNS_GERMAN = [
     'nicht zustimmen',
     'nicht einverstanden',
     'ich lehne ab',
-    'widerrufen',
     'mit erforderlichen einstellungen fortfahren',
     'mit erforderlichen cookies fortfahren',
     'mit notwendigen fortfahren',
