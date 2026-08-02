@@ -4,6 +4,7 @@
     "prehideSelectors": [".box-cookie"],
     "detectCmp": [{ "exists": ".box-cookie .box-cookie__inner" }],
     "detectPopup": [{ "visible": ".box-cookie .box-cookie__inner" }],
+    "optIn": [{ "waitForThenClick": ".box-cookie .btn-normal.is-small" }],
     "optOut": [{ "waitForThenClick": ".box-cookie .btn-normal.is-small" }],
     "test": [{ "cookieContains": "disney_cc=ok" }]
 }
