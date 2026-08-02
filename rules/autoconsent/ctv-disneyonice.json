@@ -1,0 +1,9 @@
+{
+    "name": "ctv-disneyonice",
+    "urlPattern": "^https://www\\.ctv\\.co\\.jp/disneyonice(?:/|[?#]|$)",
+    "prehideSelectors": [".box-cookie"],
+    "detectCmp": [{ "exists": ".box-cookie .box-cookie__inner" }],
+    "detectPopup": [{ "visible": ".box-cookie .box-cookie__inner" }],
+    "optOut": [{ "waitForThenClick": ".box-cookie .btn-normal.is-small" }],
+    "test": [{ "cookieContains": "disney_cc=ok" }]
+}
