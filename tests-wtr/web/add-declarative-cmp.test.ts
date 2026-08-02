@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import AutoConsent from '../../lib/web';
 import { Config } from '../../lib/types';
 import { AutoConsentCMPRule } from '../../lib/rules';
-import AutoConsentCMP from '../../lib/cmps/base';
+import { AutoConsentCMP } from '../../lib/cmps/base';
 
 /**
  * Creates a minimal Config object for testing
