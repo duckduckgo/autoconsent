@@ -1,6 +1,8 @@
 {
     "name": "ctv-disneyonice",
-    "urlPattern": "^https://www\\.ctv\\.co\\.jp/disneyonice(?:/|[?#]|$)",
+    "runContext": {
+        "urlPattern": "^https://www\\.ctv\\.co\\.jp/disneyonice(?:/|[?#]|$)"
+    },
     "prehideSelectors": [".box-cookie"],
     "detectCmp": [{ "exists": ".box-cookie .box-cookie__inner" }],
     "detectPopup": [{ "visible": ".box-cookie .box-cookie__inner" }],
