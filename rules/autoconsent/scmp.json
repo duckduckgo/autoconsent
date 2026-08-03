@@ -19,7 +19,7 @@
     "optIn": [
         {
             "waitForVisible": ".fc-consent-root .fc-dialog-container",
-            "timeout": 4000,
+            "timeout": 1000,
             "optional": true
         },
         {
