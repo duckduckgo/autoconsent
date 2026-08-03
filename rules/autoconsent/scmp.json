@@ -18,13 +18,13 @@
     ],
     "optIn": [
         {
-            "waitForVisible": ".fc-dialog-container",
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
             "timeout": 4000,
             "optional": true
         },
         {
             "if": {
-                "visible": ".fc-dialog-container"
+                "visible": ".fc-consent-root .fc-dialog-container"
             },
             "then": [
                 {
@@ -38,13 +38,13 @@
     ],
     "optOut": [
         {
-            "waitForVisible": ".fc-dialog-container",
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
             "timeout": 4000,
             "optional": true
         },
         {
             "if": {
-                "visible": ".fc-dialog-container"
+                "visible": ".fc-consent-root .fc-dialog-container"
             },
             "then": [
                 {
