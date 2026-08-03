@@ -18,10 +18,49 @@
     ],
     "optIn": [
         {
+            "waitForVisible": ".fc-dialog-container",
+            "timeout": 4000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ".fc-dialog-container"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-consent"
+                }
+            ]
+        },
+        {
             "waitForThenClick": "[data-qa=\"GDPRBanner-Button\"]"
         }
     ],
     "optOut": [
+        {
+            "waitForVisible": ".fc-dialog-container",
+            "timeout": 4000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ".fc-dialog-container"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fc-confirm-choices",
+                    "optional": true
+                }
+            ]
+        },
         {
             "hide": "[data-qa=\"GDPRBanner-Container\"]"
         }
