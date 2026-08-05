@@ -65,7 +65,7 @@
                     },
                     "then": [
                         {
-                            "wait": 4000
+                            "wait": 8000
                         },
                         {
                             "waitForThenClick": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
