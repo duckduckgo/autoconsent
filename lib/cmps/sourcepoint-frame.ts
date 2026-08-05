@@ -137,11 +137,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         if (!this.isManagerOpen()) {
             if (
                 this.isGlobalCmpNotice() &&
-                this.elementVisible('.sp_choice_type_11', 'any') &&
-                !this.elementVisible(
-                    '.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_SE,.sp_choice_type_SAVE_AND_EXIT,.sp_choice_type_REJECT_ALL',
-                    'any',
-                ) &&
+                !this.elementVisible('.sp_choice_type_13,.sp_choice_type_REJECT_ALL', 'any') &&
                 (await this.clickContinueNotice())
             ) {
                 return true;
