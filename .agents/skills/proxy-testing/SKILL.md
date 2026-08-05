@@ -93,6 +93,8 @@ export default defineConfig({
 - `injectAutoconsent(page, options?)` — set up isolated-world injection; call before `page.goto()`. Returns a context (`received`, `hasMessage`, `waitForCompletion`, `waitForMessage`, `collectResult`).
 - `buildProxyConfig(regionKey)` — build the Playwright `{ server, username, password }` proxy object for a region from its env vars.
 - `launchRegionalProxyBrowser(regionKey, options?)` — launch a Chromium browser routed through the region's proxy.
+- `launchRegionalProxyBrowserViaRelay(regionKey, options?)` — like `launchRegionalProxyBrowser`, but through a local relay that repairs an incomplete TLS chain on the region host. Use only when you hit the certificate-chain symptom below.
+- `startRegionalProxyRelay(regionKey, env?)` — start the relay directly; returns `{ port, close() }`. `launchRegionalProxyBrowserViaRelay` calls this for you.
 - `formatResult(result)` — format a `TestResult` as a human-readable summary line.
 
 Options (all optional):
@@ -134,3 +136,4 @@ await browser.close();
 - The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
+- **Certificate-chain errors from a regional proxy** (`ERR_PROXY_CERTIFICATE_INVALID` when connecting directly, or `ERR_TUNNEL_CONNECTION_FAILED` / `UNABLE_TO_VERIFY_LEAF_SIGNATURE` when connecting through a relay in strict mode) mean the region host isn't sending its TLS intermediate certificate — confirmed for `dew.socks.duckduckgo.com` (region `de`): its chain is leaf-only, issuer `Let's Encrypt E7`, no intermediate. This is not a gateway/egress block (no `403`/`proxy_ip_not_allowed`; the CONNECT tunnel to the region host succeeds fine) and not something a plain retry fixes. Swap `launchRegionalProxyBrowser` for `launchRegionalProxyBrowserViaRelay` — it fetches the missing intermediate from the leaf certificate's own AIA URL and verifies against it plus Node's trusted roots, so the chain is completed rather than skipped. **Never fix this by disabling certificate verification** (e.g. `rejectUnauthorized: false`) — that was tested and confirmed to "work" only by exposing the proxy credentials (sent in the CONNECT's `Proxy-Authorization` header) to any on-path interceptor on that hop.
