@@ -127,27 +127,33 @@ export function buildProxyConfig(regionKey, env = process.env) {
 
 /**
  * Launch a local Playwright browser through the HTTPS proxy for a region.
+ *
+ * Routes through a local relay (`startRegionalProxyRelay`) rather than pointing Chromium's
+ * `proxy` directly at the region host, because some region hosts (e.g. `dew.socks.duckduckgo.com`,
+ * region `de`) don't send their TLS intermediate certificate - a direct connection then fails
+ * with `ERR_PROXY_CERTIFICATE_INVALID`. The relay transparently repairs an incomplete chain
+ * when it hits one; hosts with a complete chain pay only the added local loopback hop.
  * @param {string} regionKey
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<Browser>}
  */
 export async function launchRegionalProxyBrowser(regionKey, options = {}) {
-    return chromium.launch({
+    const relay = await startRegionalProxyRelay(regionKey);
+    const browser = await chromium.launch({
         headless: options.headless ?? true,
         ...(options.launchOptions ?? {}),
-        proxy: buildProxyConfig(regionKey),
+        proxy: { server: `http://127.0.0.1:${relay.port}` },
     });
+    browser.on('disconnected', relay.close);
+    return browser;
 }
-
-/** host -> extra CA PEM needed to complete its chain, or null if the chain is already complete. */
-const chainRepairCache = new Map();
 
 function derToPem(der) {
     const lines = der.toString('base64').match(/.{1,64}/g) ?? [];
     return `-----BEGIN CERTIFICATE-----\n${lines.join('\n')}\n-----END CERTIFICATE-----\n`;
 }
 
-function fetchAiaIntermediate(aiaUrl) {
+async function fetchAiaIntermediate(aiaUrl) {
     return new Promise((resolve, reject) => {
         http.get(aiaUrl, (res) => {
             if (res.statusCode !== 200) {
@@ -164,6 +170,26 @@ function fetchAiaIntermediate(aiaUrl) {
 }
 
 /**
+ * Read a `CONNECT` response off a socket: resolves once the status line + headers are in,
+ * rejects if the status isn't 200.
+ * @param {net.Socket} socket
+ * @returns {Promise<void>}
+ */
+function readConnectResponse(socket) {
+    return new Promise((resolve, reject) => {
+        let buf = '';
+        const onData = (d) => {
+            buf += d.toString('latin1');
+            if (!buf.includes('\r\n\r\n')) return;
+            socket.removeListener('data', onData);
+            if (/^HTTP\/1\.[01] 200/.test(buf)) resolve();
+            else reject(new Error(`CONNECT failed: ${buf.split('\r\n')[0]}`));
+        };
+        socket.on('data', onData);
+    });
+}
+
+/**
  * Open a raw (unencrypted) socket to host:port, tunneling through $HTTPS_PROXY via CONNECT
  * when it's set (needed inside the CCR sandbox, where direct egress to arbitrary hosts may
  * be blocked), otherwise connecting to the host directly.
@@ -171,7 +197,7 @@ function fetchAiaIntermediate(aiaUrl) {
  * @param {number} [port]
  * @returns {Promise<net.Socket>}
  */
-function connectRaw(host, port = 443) {
+async function connectRaw(host, port = 443) {
     const gateway = process.env.HTTPS_PROXY || process.env.https_proxy;
     if (!gateway) {
         return new Promise((resolve, reject) => {
@@ -181,76 +207,90 @@ function connectRaw(host, port = 443) {
         });
     }
     const { hostname, port: gatewayPort, protocol } = new URL(gateway);
-    return new Promise((resolve, reject) => {
-        const sock = net.connect(Number(gatewayPort) || (protocol === 'https:' ? 443 : 80), hostname, () => {
-            sock.write(`CONNECT ${host}:${port} HTTP/1.1\r\nHost: ${host}:${port}\r\n\r\n`);
+    const sock = await new Promise((resolve, reject) => {
+        const s = net.connect(Number(gatewayPort) || (protocol === 'https:' ? 443 : 80), hostname, () => {
+            s.write(`CONNECT ${host}:${port} HTTP/1.1\r\nHost: ${host}:${port}\r\n\r\n`);
         });
-        let buf = '';
-        const onData = (d) => {
-            buf += d.toString('latin1');
-            if (!buf.includes('\r\n\r\n')) return;
-            sock.removeListener('data', onData);
-            if (!/^HTTP\/1\.[01] 200/.test(buf)) {
-                sock.destroy();
-                reject(new Error(`Gateway CONNECT to ${host}:${port} failed: ${buf.split('\r\n')[0]}`));
-                return;
-            }
-            resolve(sock);
-        };
-        sock.on('data', onData);
-        sock.once('error', reject);
+        s.once('error', reject);
+        resolve(s);
+    });
+    try {
+        await readConnectResponse(sock);
+    } catch (e) {
+        sock.destroy();
+        throw new Error(`Gateway CONNECT to ${host}:${port} failed: ${e.message}`);
+    }
+    return sock;
+}
+
+function tlsConnect(opts) {
+    return new Promise((resolve, reject) => {
+        const socket = tls.connect(opts, () => resolve(socket));
+        socket.once('error', reject);
     });
 }
 
 /**
- * Check whether host's certificate chain is complete, without ever trusting an unverified
- * connection for real traffic: the probe connection is used only to read the untrusted
- * leaf's own AIA extension (a public pointer to its issuer), never to send credentials.
- * Cached per host per process since the answer doesn't change between calls.
+ * Read a host's AIA "CA Issuers" URL off its own (untrusted) leaf certificate and fetch the
+ * intermediate it points to. This connection is used only to read that public pointer, never
+ * to send credentials or real traffic.
  * @param {string} host
- * @returns {Promise<string|null>} PEM of the missing intermediate, or null if none is needed.
+ * @returns {Promise<string|null>} PEM of the intermediate, or null if it can't be found.
  */
-async function getChainRepairCa(host) {
-    if (chainRepairCache.has(host)) return chainRepairCache.get(host);
-    const result = await new Promise((resolve) => {
-        connectRaw(host)
-            .then((rawSocket) => {
-                const probe = tls.connect({ socket: rawSocket, servername: host, rejectUnauthorized: false }, () => {
-                    if (probe.authorized) {
-                        probe.end();
-                        resolve(null);
-                        return;
-                    }
-                    const authorizationError = probe.authorizationError;
-                    const aia = probe.getPeerCertificate()?.infoAccess?.['CA Issuers - URI']?.[0];
-                    probe.destroy();
-                    if (authorizationError !== 'UNABLE_TO_VERIFY_LEAF_SIGNATURE' || !aia) {
-                        resolve(null);
-                        return;
-                    }
-                    fetchAiaIntermediate(aia)
-                        .then(resolve)
-                        .catch(() => resolve(null));
-                });
-                probe.on('error', () => resolve(null));
-            })
-            .catch(() => resolve(null));
+async function discoverMissingIntermediate(host) {
+    const rawSocket = await connectRaw(host);
+    return new Promise((resolve) => {
+        const probe = tls.connect({ socket: rawSocket, servername: host, rejectUnauthorized: false }, () => {
+            const aia = probe.getPeerCertificate()?.infoAccess?.['CA Issuers - URI']?.[0];
+            probe.destroy();
+            if (!aia) {
+                resolve(null);
+                return;
+            }
+            fetchAiaIntermediate(aia)
+                .then(resolve)
+                .catch(() => resolve(null));
+        });
+        probe.once('error', () => resolve(null));
     });
-    chainRepairCache.set(host, result);
-    return result;
+}
+
+/** host -> extra CA PEM needed to complete its chain, once discovered. */
+const chainRepairCache = new Map();
+
+/**
+ * Open a fully-verified TLS connection to a regional proxy host - `rejectUnauthorized` stays
+ * `true` throughout, so the proxy credentials sent over it are never exposed to an unverified
+ * connection. If the host's own chain turns out to be incomplete (missing intermediate - e.g.
+ * `dew.socks.duckduckgo.com`), fetches the intermediate via AIA and retries once, caching the
+ * result so later calls for the same host complete the chain on their first attempt.
+ * @param {string} host
+ * @returns {Promise<tls.TLSSocket>}
+ */
+async function connectRegionalProxyTls(host) {
+    const cachedCa = chainRepairCache.get(host);
+    const tlsOpts = { socket: await connectRaw(host), servername: host, rejectUnauthorized: true };
+    if (cachedCa) tlsOpts.ca = [cachedCa, ...tls.rootCertificates];
+    try {
+        return await tlsConnect(tlsOpts);
+    } catch (e) {
+        if (cachedCa || e.code !== 'UNABLE_TO_VERIFY_LEAF_SIGNATURE') throw e;
+        const intermediatePem = await discoverMissingIntermediate(host);
+        if (!intermediatePem) throw e;
+        chainRepairCache.set(host, intermediatePem);
+        return tlsConnect({
+            socket: await connectRaw(host),
+            servername: host,
+            rejectUnauthorized: true,
+            ca: [intermediatePem, ...tls.rootCertificates],
+        });
+    }
 }
 
 /**
  * Start a local CONNECT-chaining relay for a region's proxy. Chromium points its `proxy` at
- * this relay instead of at the region host directly.
- *
- * Use this only when the region host's own TLS chain is incomplete - symptoms are
- * `ERR_PROXY_CERTIFICATE_INVALID` (connecting directly) or `ERR_TUNNEL_CONNECTION_FAILED` /
- * `UNABLE_TO_VERIFY_LEAF_SIGNATURE` (connecting through this relay in strict mode), meaning
- * the server isn't sending its intermediate certificate. The relay completes the chain by
- * fetching the missing intermediate from the leaf certificate's own AIA URL and verifies
- * against it plus Node's trusted roots - `rejectUnauthorized` stays `true` throughout, so the
- * proxy credentials in the CONNECT tunnel are never sent over an unverified connection.
+ * this relay instead of at the region host directly, so `connectRegionalProxyTls` can repair
+ * an incomplete TLS chain on the region host transparently - see its docs for how.
  * @param {string} regionKey
  * @param {NodeJS.ProcessEnv} [env]
  * @returns {Promise<{ port: number, close: () => void }>}
@@ -268,28 +308,12 @@ export async function startRegionalProxyRelay(regionKey, env = process.env) {
     server.on('connect', async (req, clientSocket) => {
         clientSocket.on('error', () => {});
         try {
-            const extraCa = await getChainRepairCa(host);
-            const rawSocket = await connectRaw(host);
-            const tlsOpts = { socket: rawSocket, servername: host, rejectUnauthorized: true };
-            if (extraCa) tlsOpts.ca = [extraCa, ...tls.rootCertificates];
-            const tlsSocket = tls.connect(tlsOpts, () => {
-                tlsSocket.write(`CONNECT ${req.url} HTTP/1.1\r\nHost: ${req.url}\r\nProxy-Authorization: Basic ${auth}\r\n\r\n`);
-                let buf = '';
-                const onData = (d) => {
-                    buf += d.toString('latin1');
-                    if (!buf.includes('\r\n\r\n')) return;
-                    tlsSocket.removeListener('data', onData);
-                    if (!/^HTTP\/1\.[01] 200/.test(buf)) {
-                        clientSocket.end('HTTP/1.1 502 Bad Gateway\r\n\r\n');
-                        return;
-                    }
-                    clientSocket.write('HTTP/1.1 200 Connection Established\r\n\r\n');
-                    tlsSocket.pipe(clientSocket);
-                    clientSocket.pipe(tlsSocket);
-                };
-                tlsSocket.on('data', onData);
-            });
-            tlsSocket.on('error', () => clientSocket.end('HTTP/1.1 502 Bad Gateway\r\n\r\n'));
+            const tlsSocket = await connectRegionalProxyTls(host);
+            tlsSocket.write(`CONNECT ${req.url} HTTP/1.1\r\nHost: ${req.url}\r\nProxy-Authorization: Basic ${auth}\r\n\r\n`);
+            await readConnectResponse(tlsSocket);
+            clientSocket.write('HTTP/1.1 200 Connection Established\r\n\r\n');
+            tlsSocket.pipe(clientSocket);
+            clientSocket.pipe(tlsSocket);
         } catch {
             clientSocket.end('HTTP/1.1 502 Bad Gateway\r\n\r\n');
         }
@@ -300,25 +324,6 @@ export async function startRegionalProxyRelay(regionKey, env = process.env) {
         port: server.address().port,
         close: () => server.close(),
     };
-}
-
-/**
- * Like `launchRegionalProxyBrowser`, but routes Chromium through a local relay
- * (`startRegionalProxyRelay`) that repairs an incomplete TLS chain on the region host. See
- * `startRegionalProxyRelay` for the symptoms that call for this instead of the direct launcher.
- * @param {string} regionKey
- * @param {Partial<TestOptions>} [options]
- * @returns {Promise<Browser>}
- */
-export async function launchRegionalProxyBrowserViaRelay(regionKey, options = {}) {
-    const relay = await startRegionalProxyRelay(regionKey);
-    const browser = await chromium.launch({
-        headless: options.headless ?? true,
-        ...(options.launchOptions ?? {}),
-        proxy: { server: `http://127.0.0.1:${relay.port}` },
-    });
-    browser.on('disconnected', relay.close);
-    return browser;
 }
 
 /**
