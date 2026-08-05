@@ -74,6 +74,9 @@
                     },
                     "then": [
                         {
+                            "wait": 4000
+                        },
+                        {
                             "waitForThenClick": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
                         }
                     ],
