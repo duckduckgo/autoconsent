@@ -84,20 +84,6 @@ export default class SourcePoint extends AutoConsentCMPBase {
         return false;
     }
 
-    isGlobalCmpNotice() {
-        const url = new URL(location.href);
-        return url.pathname === '/us_pm/index.html' && url.searchParams.get('is_global_cmp_notice') === 'true';
-    }
-
-    async clickContinueNotice() {
-        const buttons = Array.from(document.querySelectorAll<HTMLElement>('.sp_choice_type_11'));
-        const button = buttons.find((el) => /^continue$/i.test(el.textContent?.trim() ?? ''));
-        if (!button) {
-            return false;
-        }
-        return await this.clickElement(button);
-    }
-
     async optOut() {
         // FIXME: ideally we want to wait until the outer frame is ready, but it's tricky in cross-origin frames
         await this.wait(500);
@@ -135,18 +121,6 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         if (!this.isManagerOpen()) {
-            if (
-                this.isGlobalCmpNotice() &&
-                this.elementVisible('.sp_choice_type_11', 'any') &&
-                !this.elementVisible(
-                    '.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_SE,.sp_choice_type_SAVE_AND_EXIT,.sp_choice_type_REJECT_ALL',
-                    'any',
-                ) &&
-                (await this.clickContinueNotice())
-            ) {
-                return true;
-            }
-
             // Match manage/options buttons: explicit sp_choice_type_12 or generic [data-choice] links
             // that aren't accept buttons (sp_choice_type_11, sp_choice_type_ACCEPT_ALL).
             const manageSelector = '.sp_choice_type_12,[data-choice]:not([class*="sp_choice_type_"])';
