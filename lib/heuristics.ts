@@ -239,7 +239,8 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         found.push(node as HTMLElement);
     }
-    return excludeContainers(found);
+    // Empty positioned children should not displace a contentful popup container.
+    return excludeContainers(found.filter((element) => element.innerText?.trim()));
 }
 
 /**
