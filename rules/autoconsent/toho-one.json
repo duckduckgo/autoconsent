@@ -4,7 +4,6 @@
     "runContext": {
         "urlPattern": "^https?://www\\.toho-one\\.com/"
     },
-    "prehideSelectors": [".fixed.bottom-0:has(a[href=\"https://www.toho.co.jp/company/cookie-policy\"])"],
     "detectCmp": [
         {
             "exists": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック') and .//button[normalize-space()='Cookieの設定']]"
@@ -37,10 +36,9 @@
     ],
     "test": [
         {
-            "wait": 500
-        },
-        {
-            "eval": "EVAL_TOHO_ONE_TEST"
+            "waitForVisible": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック') and .//button[normalize-space()='Cookieの設定']]",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
