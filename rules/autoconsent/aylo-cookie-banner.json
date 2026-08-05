@@ -21,7 +21,14 @@
             "check": "none"
         },
         {
-            "exists": "script[src*='/default-default.js']"
+            "any": [
+                {
+                    "visible": "#cookie_consent_wrapper.non_cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                },
+                {
+                    "eval": "EVAL_AYLO_COOKIE_MANAGER_READY"
+                }
+            ]
         }
     ],
     "optIn": [
@@ -57,6 +64,9 @@
                         "visible": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
                     },
                     "then": [
+                        {
+                            "wait": 8000
+                        },
                         {
                             "waitForThenClick": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
                         }
