@@ -1,0 +1,44 @@
+{
+    "name": "toho-one.com",
+    "vendorUrl": "https://www.toho-one.com/",
+    "runContext": {
+        "urlPattern": "^https?://www\\.toho-one\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック') and .//button[normalize-space()='Cookieの設定']]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック') and .//button[normalize-space()='Cookieの設定']]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック')]//button[normalize-space()='すべてのCookieを受け入れる']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック')]//button[normalize-space()='Cookieの設定']"
+        },
+        {
+            "waitFor": "input[type=checkbox]:checked:not(:disabled)"
+        },
+        {
+            "click": "input[type=checkbox]:checked:not(:disabled)",
+            "all": true
+        },
+        {
+            "waitForThenClick": "xpath///button[normalize-space()='設定を保存する']"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック') and .//button[normalize-space()='Cookieの設定']]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
