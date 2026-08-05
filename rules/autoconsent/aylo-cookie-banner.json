@@ -109,7 +109,14 @@
     ],
     "test": [
         {
-            "cookieContains": "cookieConsent="
+            "any": [
+                {
+                    "cookieContains": "cookieConsent=1"
+                },
+                {
+                    "cookieContains": "cookieConsent=5"
+                }
+            ]
         }
     ]
 }
