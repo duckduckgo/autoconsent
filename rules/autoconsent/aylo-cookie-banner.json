@@ -23,10 +23,16 @@
     ],
     "optIn": [
         {
+            "wait": 2000
+        },
+        {
             "waitForThenClick": "#cookie_consent_wrapper #consent_accept_all, #manage_cookie_consent_modal #modal_consent_accept_all"
         }
     ],
     "optOut": [
+        {
+            "wait": 2000
+        },
         {
             "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential",
             "all": true
