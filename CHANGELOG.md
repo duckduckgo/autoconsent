@@ -1,3 +1,16 @@
+# v16.20.0 (Wed Aug 05 2026)
+
+#### Rules
+
+- Rule update: scmp [#1471](https://github.com/duckduckgo/autoconsent/pull/1471) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.19.0 (Fri Jul 31 2026)
 
 #### Rules
