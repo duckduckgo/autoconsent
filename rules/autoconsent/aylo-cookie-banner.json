@@ -21,14 +21,7 @@
             "check": "none"
         },
         {
-            "any": [
-                {
-                    "exists": "#userLoginModal"
-                },
-                {
-                    "exists": "script[src*='default-redtube_logged_out.js']"
-                }
-            ]
+            "exists": "script[src*='/default-default.js']"
         }
     ],
     "optIn": [
