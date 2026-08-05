@@ -69,7 +69,19 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_essential"
+                    "if": {
+                        "visible": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_essential"
+                        }
+                    ]
                 }
             ]
         },
@@ -94,7 +106,7 @@
     ],
     "test": [
         {
-            "cookieContains": "cookieConsent=1"
+            "cookieContains": "cookieConsent="
         }
     ]
 }
