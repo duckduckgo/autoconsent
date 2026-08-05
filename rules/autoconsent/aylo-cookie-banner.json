@@ -19,17 +19,65 @@
         {
             "visible": "#age_disclaimer_window,#ageDisclaimerWrapper",
             "check": "none"
+        },
+        {
+            "any": [
+                {
+                    "visible": "#cookie_consent_wrapper.non_cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                },
+                {
+                    "eval": "EVAL_AYLO_COOKIE_MANAGER_READY"
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_all, #manage_cookie_consent_modal #modal_consent_accept_all"
+            "if": {
+                "visible": "#cookie_consent_wrapper #consent_accept_all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie_consent_wrapper #consent_accept_all"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_all"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential",
-            "all": true
+            "if": {
+                "visible": "#cookie_consent_wrapper #consent_accept_essential"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                    },
+                    "then": [
+                        {
+                            "wait": 8000
+                        },
+                        {
+                            "waitForThenClick": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_essential"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "waitForThenClick": "#cookie_consent_min_wrapper #close_minimized_banner",
@@ -39,7 +87,14 @@
     ],
     "test": [
         {
-            "cookieContains": "cookieConsent=1"
+            "any": [
+                {
+                    "cookieContains": "cookieConsent=1"
+                },
+                {
+                    "cookieContains": "cookieConsent=5"
+                }
+            ]
         }
     ]
 }
