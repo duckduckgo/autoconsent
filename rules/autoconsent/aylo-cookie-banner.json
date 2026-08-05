@@ -21,7 +21,14 @@
             "check": "none"
         },
         {
-            "eval": "EVAL_AYLO_COOKIE_MANAGER_READY"
+            "any": [
+                {
+                    "visible": "#cookie_consent_wrapper.non_cookie_consent_wrapper #js_cookieBannerCloseBtn"
+                },
+                {
+                    "eval": "EVAL_AYLO_COOKIE_MANAGER_READY"
+                }
+            ]
         }
     ],
     "optIn": [
@@ -57,6 +64,9 @@
                         "visible": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
                     },
                     "then": [
+                        {
+                            "wait": 4000
+                        },
                         {
                             "waitForThenClick": "#cookie_consent_wrapper #js_cookieBannerCloseBtn"
                         }
