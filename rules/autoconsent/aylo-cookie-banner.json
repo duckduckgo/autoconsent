@@ -28,8 +28,25 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential, #manage_cookie_consent_modal #modal_consent_accept_essential",
-            "all": true
+            "if": { "exists": "#cookie_consent_wrapper #consent_accept_essential" },
+            "then": [
+                {
+                    "waitForVisible": "#cookie_consent_wrapper[aria-modal=\"true\"]",
+                    "timeout": 4000,
+                    "optional": true,
+                    "comment": "the banner sets aria-modal once its click handlers are attached; wait briefly so the click is not lost, but proceed anyway on variants that never set it"
+                },
+                {
+                    "waitForThenClick": "#cookie_consent_wrapper #consent_accept_essential",
+                    "all": true
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#manage_cookie_consent_modal #modal_consent_accept_essential",
+                    "all": true
+                }
+            ]
         },
         {
             "waitForThenClick": "#cookie_consent_min_wrapper #close_minimized_banner",
