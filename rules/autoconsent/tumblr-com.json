@@ -1,0 +1,49 @@
+{
+    "name": "tumblr-com",
+    "prehideSelectors": ["#cmp-app-container", ".gdpr-banner"],
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?tumblr\\.com/",
+        "frame": true
+    },
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#cmp-app-container" }, { "exists": ".gdpr-banner" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": "#cmp-app-container", "check": "any" },
+                { "visible": ".gdpr-banner", "check": "any" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".gdpr-banner .accept-button"
+            },
+            "then": [{ "click": ".gdpr-banner .accept-button" }],
+            "else": [
+                {
+                    "waitForThenClick": ["#cmp-app-container iframe", ".cmp-components-button.is-secondary"],
+                    "timeout": 5000
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".gdpr-banner .accept-button"
+            },
+            "then": [{ "click": ".gdpr-banner .accept-button" }],
+            "else": [
+                {
+                    "waitForThenClick": ["#cmp-app-container iframe", ".cmp-components-button.is-primary"],
+                    "timeout": 5000
+                }
+            ]
+        }
+    ]
+}
