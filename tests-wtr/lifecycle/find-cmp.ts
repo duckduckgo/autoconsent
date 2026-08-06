@@ -1,6 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import Autoconsent from '../../lib/web';
 import Onetrust from '../../lib/cmps/onetrust';
+import { ContentScriptMessage } from '../../lib/messages';
 
 describe('Autoconsent.findCmp', () => {
     let autoconsent: Autoconsent;
@@ -133,6 +134,114 @@ describe('Autoconsent.findCmp', () => {
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('runContextRule');
         });
+
+        it('skips generic detection when the document exceeds the element limit', async () => {
+            const messages: ContentScriptMessage[] = [];
+            autoconsent = new Autoconsent(
+                (msg) => {
+                    messages.push(msg);
+                    return Promise.resolve();
+                },
+                {
+                    enabled: false,
+                    autoAction: null,
+                    heuristicMode: 'off',
+                    maxDocumentElements: 1,
+                },
+            );
+            autoconsent.addDeclarativeCMP({
+                name: 'genericRule',
+                detectCmp: [{ exists: '#privacy-test-page-cmp-test' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
+
+            const found = await autoconsent.findCmp(0);
+            const error = messages.find((message) => message.type === 'autoconsentError');
+
+            expect(found).to.have.length(0);
+            expect(error?.details.reason).to.equal('documentTooLarge');
+        });
+
+        it('still runs heuristic text detection when the document exceeds the element limit', async () => {
+            autoconsent = new Autoconsent((msg) => Promise.resolve(), {
+                enabled: false,
+                autoAction: null,
+                enableHeuristicDetection: true,
+                heuristicMode: 'off',
+                maxDocumentElements: 1,
+            });
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(0);
+            expect(autoconsent.state.heuristicPatterns).not.to.have.length(0);
+        });
+
+        it('still runs matching site-specific rules when the document exceeds the element limit', async () => {
+            autoconsent = new Autoconsent((msg) => Promise.resolve(), {
+                enabled: false,
+                autoAction: null,
+                heuristicMode: 'off',
+                maxDocumentElements: 1,
+            });
+            autoconsent.addDeclarativeCMP({
+                name: 'siteSpecificRule',
+                runContext: { urlPattern: '^http://localhost' },
+                detectCmp: [{ exists: '#privacy-test-page-cmp-test' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('siteSpecificRule');
+        });
+
+        it('runs generic detection when the document is below the element limit', async () => {
+            autoconsent = new Autoconsent((msg) => Promise.resolve(), {
+                enabled: false,
+                autoAction: null,
+                heuristicMode: 'off',
+                maxDocumentElements: document.getElementsByTagName('*').length + 1,
+            });
+            autoconsent.addDeclarativeCMP({
+                name: 'genericRule',
+                detectCmp: [{ exists: '#privacy-test-page-cmp-test' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('genericRule');
+        });
+
+        it('runs generic detection when the element limit is disabled', async () => {
+            autoconsent = new Autoconsent((msg) => Promise.resolve(), {
+                enabled: false,
+                autoAction: null,
+                heuristicMode: 'off',
+                maxDocumentElements: 0,
+            });
+            autoconsent.addDeclarativeCMP({
+                name: 'genericRule',
+                detectCmp: [{ exists: '#privacy-test-page-cmp-test' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('genericRule');
+        });
     });
 
     describe('heuristicMode = reject', () => {
@@ -167,6 +276,30 @@ describe('Autoconsent.findCmp', () => {
 
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('HEURISTIC-REJECT');
+        });
+
+        it('skips heuristic detection when the document exceeds the element limit', async () => {
+            const messages: ContentScriptMessage[] = [];
+            autoconsent = new Autoconsent(
+                (msg) => {
+                    messages.push(msg);
+                    return Promise.resolve();
+                },
+                {
+                    enabled: false,
+                    autoAction: null,
+                    heuristicMode: 'reject',
+                    maxDocumentElements: 1,
+                },
+            );
+            // force findCmpAttempts to 1 so heuristic CMP would be run on the first attempt
+            autoconsent.state.findCmpAttempts = 1;
+
+            const found = await autoconsent.findCmp(1);
+            const error = messages.find((message) => message.type === 'autoconsentError');
+
+            expect(found).to.have.length(0);
+            expect(error?.details.reason).to.equal('documentTooLarge');
         });
 
         it('prefers declarative rules over heuristic CMP', async () => {
