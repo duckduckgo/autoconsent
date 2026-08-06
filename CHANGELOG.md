@@ -1,3 +1,15 @@
+# v16.20.1 (Thu Aug 06 2026)
+
+#### Rules
+
+- Remove incorrect cosmetic flag from scmp rule [#1473](https://github.com/duckduckgo/autoconsent/pull/1473) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.20.0 (Wed Aug 05 2026)
 
 #### Rules
