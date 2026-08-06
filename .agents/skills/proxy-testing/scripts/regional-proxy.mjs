@@ -133,6 +133,10 @@ export function buildProxyConfig(regionKey, env = process.env) {
  * region `de`) don't send their TLS intermediate certificate - a direct connection then fails
  * with `ERR_PROXY_CERTIFICATE_INVALID`. The relay transparently repairs an incomplete chain
  * when it hits one; hosts with a complete chain pay only the added local loopback hop.
+ *
+ * That symptom was diagnosed in a Claude Cloud (CCR sandbox) session - other environments
+ * (normal desktop/CI network stacks) may never hit it. The relay only does repair work once it
+ * actually observes the failure, so it's harmless to leave in place everywhere.
  * @param {string} regionKey
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<Browser>}
