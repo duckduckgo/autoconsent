@@ -140,6 +140,23 @@ export const snippets = {
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
+    EVAL_HOMEDEPOT_OPT_OUT: () => {
+        const groups = 'C0001:0,C0002:0,C0003:0,C0004:1,C0005:0';
+        const value = `datetimestamp=${encodeURIComponent(new Date().toISOString())}&groups=${encodeURIComponent(groups)}`;
+        const maxAge = 36525 * 24 * 60 * 60;
+        const domains = [window.location.hostname, window.location.hostname.split('.').slice(-2).join('.')];
+
+        localStorage.setItem('HDPrivacyOptOut', 'On');
+        for (const domain of new Set(domains)) {
+            document.cookie = `OptOutOnRequest=${value}; max-age=${maxAge}; path=/; domain=${domain}`;
+        }
+
+        return true;
+    },
+    EVAL_HOMEDEPOT_TEST: () =>
+        localStorage.getItem('HDPrivacyOptOut') === 'On' &&
+        document.cookie.includes('OptOutOnRequest=') &&
+        document.cookie.includes('C0001%3A0%2CC0002%3A0%2CC0003%3A0%2CC0004%3A1%2CC0005%3A0'),
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();

@@ -1,0 +1,29 @@
+{
+    "name": "homedepot",
+    "vendorUrl": "https://www.homedepot.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?homedepot\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "script[src*=\"/global-privacy-control/\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "eval": "EVAL_HOMEDEPOT_TEST",
+            "negated": true
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_HOMEDEPOT_OPT_OUT"
+        }
+    ],
+    "optIn": [],
+    "test": [
+        {
+            "eval": "EVAL_HOMEDEPOT_TEST"
+        }
+    ]
+}
