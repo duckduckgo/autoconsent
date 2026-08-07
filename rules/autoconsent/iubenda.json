@@ -2,7 +2,7 @@
     "name": "iubenda",
     "prehideSelectors": ["#iubenda-cs-banner"],
     "detectCmp": [{ "exists": "#iubenda-cs-banner" }],
-    "detectPopup": [{ "visible": ".iubenda-cs-accept-btn" }],
+    "detectPopup": [{ "visible": "#iubenda-cs-banner" }],
     "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
     "optOut": [
         {
