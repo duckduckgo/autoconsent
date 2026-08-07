@@ -10,13 +10,26 @@
             "then": [{ "click": ".iubenda-cs-reject-btn" }],
             "else": [
                 {
-                    "waitForThenClick": ".iubenda-cs-customize-btn"
-                },
-                {
-                    "waitForThenClick": ".iub-btn-reject"
-                },
-                {
-                    "waitForThenClick": "#iubFooterBtn"
+                    "if": { "exists": "#rti-privacy-open-modal-btn-id" },
+                    "then": [
+                        {
+                            "waitForThenClick": "#rti-privacy-open-modal-btn-id"
+                        },
+                        {
+                            "waitForThenClick": "#rti-privacy-close-btn-id"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ".iubenda-cs-customize-btn"
+                        },
+                        {
+                            "waitForThenClick": ".iub-btn-reject"
+                        },
+                        {
+                            "waitForThenClick": "#iubFooterBtn"
+                        }
+                    ]
                 }
             ]
         }
