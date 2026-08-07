@@ -22,11 +22,24 @@ export const snippets = {
         const disabled = window.Didomi?.getUserConsentStatusForAll?.()?.purposes?.disabled;
         return Array.isArray(disabled) && disabled.length > 0;
     },
-    EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
-    EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
+    EVAL_CONSENTMANAGER_1: () => {
+        const cmpData = window.__cmp?.('getCMPData');
+        return !!cmpData && typeof cmpData === 'object';
+    },
+    EVAL_CONSENTMANAGER_2: () => window.__cmp?.('consentStatus')?.userChoiceExists === false,
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
+    EVAL_CONSENTMANAGER_NCMP_REJECT: () => {
+        if (typeof window.__npcmp !== 'function') return false;
+        window.__npcmp('reject');
+        return true;
+    },
+    EVAL_CONSENTMANAGER_NCMP_ACCEPT: () => {
+        if (typeof window.__npcmp !== 'function') return false;
+        window.__npcmp('save');
+        return true;
+    },
     EVAL_COOKIEBOT_1: () => !!window.Cookiebot,
     EVAL_COOKIEBOT_2: () => !window.Cookiebot.hasResponse && window.Cookiebot.dialog?.visible === true,
     EVAL_COOKIEBOT_3: () => window.Cookiebot.withdraw() || true,

@@ -5,11 +5,12 @@ import AutoConsentCMPBase from './base';
 export default class ConsentManager extends AutoConsentCMPBase {
     name = 'consentmanager.net';
 
-    prehideSelectors = ['#cmpbox,#cmpbox2'];
+    prehideSelectors = ['#cmpbox,#cmpbox2,#ncmp__tool .ncmp__banner'];
     apiAvailable = false;
+    ncmpAvailable = false;
 
     get hasSelfTest(): boolean {
-        return this.apiAvailable;
+        return this.apiAvailable || this.ncmpAvailable;
     }
 
     get isIntermediate(): boolean {
@@ -21,6 +22,11 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
+        this.ncmpAvailable = this.elementExists('#ncmp__tool .ncmp__banner.ncmp__active');
+        if (this.ncmpAvailable) {
+            return true;
+        }
+
         this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
         if (!this.apiAvailable) {
             return this.elementExists('#cmpbox');
@@ -30,6 +36,10 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
+        if (this.ncmpAvailable) {
+            return this.elementVisible('#ncmp__tool .ncmp__banner.ncmp__active', 'any');
+        }
+
         if (this.elementVisible('#cmpbox .cmpmore', 'any')) {
             return true;
         } else if (this.apiAvailable) {
@@ -43,6 +53,17 @@ export default class ConsentManager extends AutoConsentCMPBase {
 
     async optOut() {
         await this.wait(500);
+        if (this.ncmpAvailable || this.elementExists('#ncmp__tool .ncmp__banner')) {
+            if (await this.mainWorldEval('EVAL_CONSENTMANAGER_NCMP_REJECT')) {
+                return true;
+            }
+
+            if (!this.elementExists('button[onclick*="reject"].ncmp__btn-danger')) {
+                await this.waitForThenClick('button[onclick*="showModal"].ncmp__btn-border', 5000);
+            }
+            return await this.waitForThenClick('button[onclick*="reject"].ncmp__btn-danger', 5000);
+        }
+
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
         }
@@ -67,6 +88,14 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async optIn() {
+        if (this.ncmpAvailable || this.elementExists('#ncmp__tool .ncmp__banner')) {
+            if (await this.mainWorldEval('EVAL_CONSENTMANAGER_NCMP_ACCEPT')) {
+                return true;
+            }
+
+            return await this.waitForThenClick('button[onclick*="save"].ncmp__btn', 5000);
+        }
+
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
         }
@@ -74,6 +103,10 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async test() {
+        if (this.ncmpAvailable) {
+            return this.cookieContains('ncmp=');
+        }
+
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_5');
         }
