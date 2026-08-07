@@ -78,11 +78,8 @@ export default class Onetrust extends AutoConsentCMPBase {
 
         await this.wait(1000); // ideally we want to wait for popup visivility, but it's tricky on e.g. stackoverflow.com
         await this.waitForElement('.save-preference-btn-handler,.js-consent-save', 2000);
-        await this.click('.save-preference-btn-handler,.js-consent-save');
-
-        // popup doesn't disappear immediately
-        await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
-        return true;
+        // Some OneTrust installs reload immediately after saving, so return before the context is torn down.
+        return await this.click('.save-preference-btn-handler,.js-consent-save');
     }
 
     async optIn() {

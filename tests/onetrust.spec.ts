@@ -59,3 +59,9 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// Save preferences can reload the page immediately after the click.
+generateCMPTests('Onetrust', ['https://stores.homedepot.ca/'], {
+    onlyRegions: ['CA'],
+    testOptIn: false,
+});
