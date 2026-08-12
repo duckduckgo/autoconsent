@@ -145,6 +145,7 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
