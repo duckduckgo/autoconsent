@@ -1,0 +1,8 @@
+{
+    "name": "cookie-banner-element",
+    "prehideSelectors": ["cookie-banner-element#ckb"],
+    "detectCmp": [{ "exists": "cookie-banner-element#ckb" }],
+    "detectPopup": [{ "visible": ["cookie-banner-element#ckb", "#ckb[role=\"dialog\"]"] }],
+    "optIn": [{ "waitForThenClick": ["cookie-banner-element#ckb", "#cky"] }],
+    "optOut": [{ "waitForThenClick": ["cookie-banner-element#ckb", "#ckn"] }]
+}
