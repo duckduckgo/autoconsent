@@ -71,6 +71,32 @@ describe('Autoconsent.findCmp', () => {
             expect(found).to.have.length(0);
         });
 
+        it('matches Onetrust custom banners that expose visible OneTrust controls', async () => {
+            const banner = document.createElement('div');
+            banner.innerHTML = '<button id="onetrust-pc-btn-handler">Manage Preferences</button><button id="onetrust-reject-all-handler">Reject All</button>';
+            document.body.appendChild(banner);
+            autoconsent.rules.push(new Onetrust(autoconsent));
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('Onetrust');
+            banner.remove();
+        });
+
+        it('does not match Onetrust for hidden custom banner controls', async () => {
+            const banner = document.createElement('div');
+            banner.style.display = 'none';
+            banner.innerHTML = '<button id="onetrust-pc-btn-handler">Manage Preferences</button><button id="onetrust-reject-all-handler">Reject All</button>';
+            document.body.appendChild(banner);
+            autoconsent.rules.push(new Onetrust(autoconsent));
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(0);
+            banner.remove();
+        });
+
         it('does not return a rule if the runContext does not match: frame-only rule', async () => {
             autoconsent.addDeclarativeCMP({
                 name: 'runContextRule',

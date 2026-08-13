@@ -18,11 +18,15 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('#onetrust-banner-sdk') || this.elementVisible('#onetrust-pc-sdk', 'any');
+        return this.elementExists('#onetrust-banner-sdk') || this.elementVisible('#onetrust-pc-sdk', 'any') || this.hasVisibleBannerControls();
     }
 
     async detectPopup() {
-        return this.elementVisible('#onetrust-banner-sdk,#onetrust-pc-sdk', 'any');
+        return this.elementVisible('#onetrust-banner-sdk,#onetrust-pc-sdk', 'any') || this.hasVisibleBannerControls();
+    }
+
+    private hasVisibleBannerControls() {
+        return this.elementVisible('#onetrust-reject-all-handler,#onetrust-accept-btn-handler,#onetrust-pc-btn-handler', 'any');
     }
 
     async optOut() {
