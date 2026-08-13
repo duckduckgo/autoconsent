@@ -24,10 +24,16 @@
             "waitForThenClick": "xpath///div[contains(@class, 'fixed') and contains(., 'Cookieをブロック')]//button[normalize-space()='Cookieの設定']"
         },
         {
-            "waitFor": "input[type=checkbox]:checked:not(:disabled)"
+            "waitFor": [
+                "xpath///div[contains(@class, 'fixed') and .//button[normalize-space()='設定を保存する']]",
+                "input[type=checkbox]:checked:not(:disabled)"
+            ]
         },
         {
-            "click": "input[type=checkbox]:checked:not(:disabled)",
+            "click": [
+                "xpath///div[contains(@class, 'fixed') and .//button[normalize-space()='設定を保存する']]",
+                "input[type=checkbox]:checked:not(:disabled)"
+            ],
             "all": true
         },
         {
