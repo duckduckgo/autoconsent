@@ -1,36 +1,29 @@
 {
     "name": "AppConsent",
-    "prehideSelectors": ["iframe[title='Consent window']", "iframe[srcdoc*='frame-root']"],
+    "prehideSelectors": ["iframe[title='Consent window']"],
     "detectCmp": [
         {
-            "exists": "script[src*='cdn.appconsent.io'][src*='core.bundle.js']"
+            "exists": "script[src*='cdn.appconsent.io/tcf2-clear/'][src*='core.bundle.js']"
         }
     ],
     "detectPopup": [
         {
-            "visible": "iframe[title='Consent window'], iframe[srcdoc*='frame-root']"
+            "visible": "iframe[title='Consent window']"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["iframe[title='Consent window'], iframe[srcdoc*='frame-root']", ".button__acceptAll"]
+            "waitForThenClick": ["iframe[title='Consent window']", ".button__acceptAll"]
         }
     ],
     "optOut": [
         {
-            "any": [
-                {
-                    "waitForThenClick": ["iframe[title='Consent window'], iframe[srcdoc*='frame-root']", ".button__skip"]
-                },
-                {
-                    "waitForThenClick": ["iframe[title='Consent window'], iframe[srcdoc*='frame-root']", ".button__refuseAll"]
-                }
-            ]
+            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
         }
     ],
     "test": [
         {
-            "waitForVisible": "iframe[title='Consent window'], iframe[srcdoc*='frame-root']",
+            "waitForVisible": "iframe[title='Consent window']",
             "timeout": 1000,
             "check": "none"
         }
