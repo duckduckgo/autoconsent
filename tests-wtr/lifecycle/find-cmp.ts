@@ -75,7 +75,8 @@ describe('Autoconsent.findCmp', () => {
         it('matches Onetrust custom banners that expose visible OneTrust controls', async () => {
             const banner = document.createElement('div');
             banner.dataset.testOnetrustCustomBanner = '';
-            banner.innerHTML = '<button id="onetrust-pc-btn-handler">Manage Preferences</button><button id="onetrust-reject-all-handler">Reject All</button>';
+            banner.innerHTML =
+                '<button id="onetrust-pc-btn-handler">Manage Preferences</button><button id="onetrust-reject-all-handler">Reject All</button>';
             document.body.appendChild(banner);
 
             try {
@@ -92,7 +93,8 @@ describe('Autoconsent.findCmp', () => {
             const banner = document.createElement('div');
             banner.dataset.testOnetrustCustomBanner = '';
             banner.style.display = 'none';
-            banner.innerHTML = '<button id="onetrust-pc-btn-handler">Manage Preferences</button><button id="onetrust-reject-all-handler">Reject All</button>';
+            banner.innerHTML =
+                '<button id="onetrust-pc-btn-handler">Manage Preferences</button><button id="onetrust-reject-all-handler">Reject All</button>';
             document.body.appendChild(banner);
 
             try {
