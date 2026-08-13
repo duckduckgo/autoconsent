@@ -12,5 +12,5 @@
             "waitForThenClick": ".analyticOptInContainer p.opt-in__text-item:not([hidden]):has(a[aria-controls]) a:last-of-type"
         }
     ],
-    "test": [{ "eval": "EVAL_EVIUM_DE_TEST" }]
+    "test": [{ "wait": 500 }, { "eval": "EVAL_EVIUM_DE_TEST" }]
 }
