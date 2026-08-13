@@ -137,6 +137,7 @@ export const snippets = {
             toggle.checked = false;
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
+    EVAL_EVIUM_DE_TEST: () => localStorage.getItem('tracking-state-v2') === 'deny',
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,

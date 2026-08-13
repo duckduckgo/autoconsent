@@ -1,0 +1,16 @@
+{
+    "name": "evium-de",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?evium\\.de/"
+    },
+    "prehideSelectors": [".analyticOptInContainer"],
+    "detectCmp": [{ "exists": ".analyticOptInContainer common-tracking-optin" }],
+    "detectPopup": [{ "visible": ".analyticOptInContainer mat-bottom-sheet-container" }],
+    "optIn": [{ "waitForThenClick": ".analyticOptInContainer button[matbutton=\"elevated\"]" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".analyticOptInContainer p.opt-in__text-item:not([hidden]):has(a[aria-controls]) a:last-of-type"
+        }
+    ],
+    "test": [{ "eval": "EVAL_EVIUM_DE_TEST" }]
+}
