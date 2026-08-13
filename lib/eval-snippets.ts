@@ -99,12 +99,15 @@ export const snippets = {
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
     EVAL_COOKIE_LAW_INFO_0: () => {
-        if (CLI.disableAllCookies) CLI.disableAllCookies();
-        if (CLI.reject_close) CLI.reject_close();
+        if (window.CLI?.disableAllCookies) window.CLI.disableAllCookies();
+        if (window.CLI?.reject_close) window.CLI.reject_close();
+        if (!window.CLI && typeof window.cli_show_cookiebar === 'function') {
+            document.cookie = 'viewed_cookie_policy=yes; path=/; max-age=31536000';
+        }
         document.body.classList.remove('cli-barmodal-open');
         return true;
     },
-    EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
+    EVAL_COOKIE_LAW_INFO_DETECT: () => !!(window.CLI || window.cli_show_cookiebar),
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
             document.cookie

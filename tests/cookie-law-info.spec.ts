@@ -8,3 +8,9 @@ generateCMPTests('cookie-law-info', [
     'https://www.sbid.org/',
     'https://diroots.com/revit-plugins/renumber-revit-elements-using-a-prefix-a-suffix-and-a-multiplier-with-reordering/',
 ]);
+
+generateCMPTests('cookie-law-info', ['https://brunaboinne.admit-one.eu/'], {
+    testOptIn: false,
+    testSelfTest: false,
+    onlyRegions: ['DE'],
+});
