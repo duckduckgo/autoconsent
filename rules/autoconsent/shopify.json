@@ -2,25 +2,76 @@
     "name": "shopify",
     "vendorUrl": "https://shopify.dev/docs/api/customer-privacy",
     "cosmetic": false,
-    "prehideSelectors": ["#shopify-pc__banner"],
+    "prehideSelectors": ["#shopify-pc__banner", "#polaris-css-lockdown-container"],
     "detectCmp": [
         {
-            "exists": "#shopify-pc__banner"
+            "any": [
+                {
+                    "exists": "#shopify-pc__banner"
+                },
+                {
+                    "exists": ["#polaris-css-lockdown-container", "#polaris-consent-widgets"]
+                }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#shopify-pc__banner"
+            "any": [
+                {
+                    "visible": "#shopify-pc__banner"
+                },
+                {
+                    "visible": ["#polaris-css-lockdown-container", "[role=\"region\"][aria-label=\"Cookie consent\"]"]
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#shopify-pc__banner__btn-accept"
+            "if": {
+                "exists": [
+                    "#polaris-css-lockdown-container",
+                    "[role=\"region\"][aria-label=\"Cookie consent\"] .polaris-consent-widget__actions button:last-child"
+                ]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#polaris-css-lockdown-container",
+                        "[role=\"region\"][aria-label=\"Cookie consent\"] .polaris-consent-widget__actions button:last-child"
+                    ],
+                    "timeout": 5000
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#shopify-pc__banner__btn-accept"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#shopify-pc__banner__btn-decline"
+            "if": {
+                "exists": ["#polaris-css-lockdown-container", "[data-polaris-one-click-opt-out=\"true\"]"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#polaris-css-lockdown-container", "[data-polaris-one-click-opt-out=\"true\"]"],
+                    "timeout": 5000
+                },
+                {
+                    "waitForThenClick": ["#polaris-css-lockdown-container", "[data-testid=\"oneClickOptOutClose\"]"],
+                    "timeout": 5000,
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#shopify-pc__banner__btn-decline"
+                }
+            ]
         }
     ],
     "test": [

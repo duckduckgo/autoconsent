@@ -175,9 +175,21 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
-    EVAL_SHOPIFY_TEST: () =>
-        document.cookie.includes('gdpr_cookie_consent=0') ||
-        (document.cookie.includes('_tracking_consent=') &&
+    EVAL_SHOPIFY_TEST: () => {
+        if (document.cookie.includes('gdpr_cookie_consent=0')) return true;
+        if (document.cookie.includes('polaris_consent_settings=')) {
+            const settings = JSON.parse(
+                decodeURIComponent(
+                    document.cookie
+                        .split(';')
+                        .find((s) => s.trim().startsWith('polaris_consent_settings'))
+                        .split('=')[1],
+                ),
+            );
+            if (settings.adsPermitted === false) return true;
+        }
+        return (
+            document.cookie.includes('_tracking_consent=') &&
             JSON.parse(
                 decodeURIComponent(
                     document.cookie
@@ -185,7 +197,9 @@ export const snippets = {
                         .find((s) => s.trim().startsWith('_tracking_consent'))
                         .split('=')[1],
                 ),
-            ).purposes.a === false),
+            ).purposes.a === false
+        );
+    },
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
