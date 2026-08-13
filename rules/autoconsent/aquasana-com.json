@@ -1,8 +1,8 @@
 {
     "name": "aquasana.com",
     "prehideSelectors": ["#consent-tracking"],
-    "detectCmp": [{ "exists": "#consent-tracking" }],
-    "detectPopup": [{ "exists": "#consent-tracking" }],
+    "detectCmp": [{ "exists": "#consent-tracking .affirm.btn, #consent-tracking .decline.btn" }],
+    "detectPopup": [{ "visible": "#consent-tracking .affirm.btn, #consent-tracking .decline.btn" }],
     "optIn": [
         {
             "waitForThenClick": "#consent-tracking .affirm.btn"
