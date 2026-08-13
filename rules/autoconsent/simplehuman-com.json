@@ -1,0 +1,33 @@
+{
+    "name": "simplehuman-com",
+    "vendorUrl": "https://www.simplehuman.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?simplehuman\\.com/"
+    },
+    "prehideSelectors": ["custom-cookie-consent#cookieBubble.banner-show"],
+    "detectCmp": [
+        {
+            "exists": "custom-cookie-consent#cookieBubble #configureBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "custom-cookie-consent#cookieBubble.banner-show #configureBtn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "custom-cookie-consent#cookieBubble #cookieBubbleAcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "custom-cookie-consent#cookieBubble #configureBtn"
+        },
+        {
+            "waitForThenClick": ".custom-cookie-modal #acceptNecessaryBtn"
+        }
+    ]
+}
