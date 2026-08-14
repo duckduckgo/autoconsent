@@ -1,3 +1,32 @@
+# v16.21.0 (Fri Aug 14 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Bump action-asana-sync ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Rules
+
+- Rule update: ibanez [#1486](https://github.com/duckduckgo/autoconsent/pull/1486) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fever [#1487](https://github.com/duckduckgo/autoconsent/pull/1487) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-banner-element [#1488](https://github.com/duckduckgo/autoconsent/pull/1488) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: simplehuman-com [#1489](https://github.com/duckduckgo/autoconsent/pull/1489) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie pop-up displayed: TOHO-ONE [#1477](https://github.com/duckduckgo/autoconsent/pull/1477) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl cluster #54: youporn.com (aylo-cookie-banner|inert, 13 sites) [#1474](https://github.com/duckduckgo/autoconsent/pull/1474) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tohotheater-jp [#1476](https://github.com/duckduckgo/autoconsent/pull/1476) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on ctv.co.jp [#1478](https://github.com/duckduckgo/autoconsent/pull/1478) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Documentation
+
+- Coverage data update [#1480](https://github.com/duckduckgo/autoconsent/pull/1480) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.20.1 (Thu Aug 06 2026)
 
 #### Rules
