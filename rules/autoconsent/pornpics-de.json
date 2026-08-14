@@ -1,0 +1,13 @@
+{
+    "name": "pornpics.de",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?pornpics\\.de/"
+    },
+    "detectCmp": [{ "exists": "#cookie-form" }],
+    "detectPopup": [{ "visible": "#cookie-form" }],
+    "optIn": [{ "waitForThenClick": "#cookie-form .accept" }],
+    "optOut": [{ "waitForThenClick": "#cookie-form .reject" }],
+    "test": [
+        { "cookieContains": "_cookieNoticeSettings=%7B%22performance%22%3Afalse%2C%22targeting%22%3Afalse%2C%22analytic%22%3Afalse%7D" }
+    ]
+}
