@@ -1,0 +1,17 @@
+{
+    "name": "appconsent",
+    "prehideSelectors": ["iframe[style*=\"2147483647\"]"],
+    "detectCmp": [{ "exists": "script[src*=\"appconsent.io/tcf2/\"]" }],
+    "detectPopup": [{ "visible": ["iframe[style*=\"2147483647\"]", ".banner"] }],
+    "optIn": [{ "waitForThenClick": ["iframe[style*=\"2147483647\"]", ".button__acceptAll:not(.button__save)"] }],
+    "optOut": [
+        {
+            "if": { "exists": ["iframe[style*=\"2147483647\"]", ".button__skip"] },
+            "then": [{ "waitForThenClick": ["iframe[style*=\"2147483647\"]", ".button__skip"] }],
+            "else": [
+                { "waitForThenClick": ["iframe[style*=\"2147483647\"]", ".button__openPrivacyCenter"] },
+                { "waitForThenClick": ["iframe[style*=\"2147483647\"]", ".button__refuseAll"] }
+            ]
+        }
+    ]
+}
