@@ -1,3 +1,20 @@
+# v16.22.0 (Sat Aug 15 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #222: pornpics.de [#1485](https://github.com/duckduckgo/autoconsent/pull/1485) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Don't agree button on takahashikougei.com [#1483](https://github.com/duckduckgo/autoconsent/pull/1483) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl cluster #415: landmarkcinemas.com (consentmanager.net|inert, 14 sites) [#1482](https://github.com/duckduckgo/autoconsent/pull/1482) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1635: darty.com [#1481](https://github.com/duckduckgo/autoconsent/pull/1481) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.21.0 (Fri Aug 14 2026)
 
 #### ⚠️ Pushed to `main`
