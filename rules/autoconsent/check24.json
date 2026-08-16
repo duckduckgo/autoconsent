@@ -1,0 +1,30 @@
+{
+    "name": "check24",
+    "prehideSelectors": [".c24-cookie-consent-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".c24-cookie-consent-wrapper .c24-cookie-consent-functional"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".c24-cookie-consent-notice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c24-cookie-consent-notice .c24-cookie-consent-button:not(.c24-cookie-consent-button-secondary)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c24-cookie-consent-wrapper .c24-cookie-consent-functional"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".c24-cookie-consent-wrapper",
+            "check": "none"
+        }
+    ]
+}
