@@ -24,34 +24,10 @@
     ],
     "optOut": [
         {
-            "if": {
-                "exists": ["#polaris-css-lockdown-container", "xpath//button[normalize-space()='Decline']"]
-            },
-            "then": [
-                {
-                    "waitForThenClick": ["#polaris-css-lockdown-container", "xpath//button[normalize-space()='Decline']"],
-                    "timeout": 5000
-                }
-            ],
-            "else": [
-                {
-                    "if": {
-                        "exists": ["#polaris-css-lockdown-container", "[data-polaris-one-click-opt-out=\"true\"]"]
-                    },
-                    "then": [
-                        {
-                            "waitForThenClick": ["#polaris-css-lockdown-container", "[data-polaris-one-click-opt-out=\"true\"]"],
-                            "timeout": 5000
-                        }
-                    ],
-                    "else": [
-                        {
-                            "waitForThenClick": ["#polaris-css-lockdown-container", "[data-testid=\"oneClickOptOutLink\"]"],
-                            "timeout": 5000
-                        }
-                    ]
-                }
-            ]
+            "wait": 1000
+        },
+        {
+            "eval": "EVAL_SHOPIFY_POLARIS_OPT_OUT"
         },
         {
             "waitForThenClick": ["#polaris-css-lockdown-container", "[data-testid=\"oneClickOptOutClose\"]"],
@@ -61,7 +37,7 @@
     ],
     "test": [
         {
-            "eval": "EVAL_SHOPIFY_TEST"
+            "eval": "EVAL_SHOPIFY_POLARIS_TEST"
         }
     ]
 }
