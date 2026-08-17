@@ -10,17 +10,20 @@
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-dialog-initial"
+            "visible": ["page-footer, #page-footer", ".cookie-dialog-initial"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookie-dialog-initial button.g-button[type=\"submit\"]"
+            "waitForThenClick": ["page-footer, #page-footer", ".cookie-dialog-initial button.g-button[type=\"submit\"]"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cookie-dialog-initial button.g-button.outline"
+            "waitForThenClick": ["page-footer, #page-footer", ".cookie-dialog-initial button.g-button.outline"]
+        },
+        {
+            "wait": 500
         }
     ],
     "test": [
