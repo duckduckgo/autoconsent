@@ -2,7 +2,7 @@
     "name": "iubenda",
     "prehideSelectors": ["#iubenda-cs-banner"],
     "detectCmp": [{ "exists": "#iubenda-cs-banner" }],
-    "detectPopup": [{ "visible": "#iubenda-cs-banner" }],
+    "detectPopup": [{ "visible": ".iubenda-cs-accept-btn" }],
     "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
     "optOut": [
         {
@@ -10,26 +10,13 @@
             "then": [{ "click": ".iubenda-cs-reject-btn" }],
             "else": [
                 {
-                    "if": { "exists": "#rti-privacy-open-modal-btn-id" },
-                    "then": [
-                        {
-                            "waitForThenClick": "#rti-privacy-open-modal-btn-id"
-                        },
-                        {
-                            "waitForThenClick": "#rti-privacy-close-btn-id"
-                        }
-                    ],
-                    "else": [
-                        {
-                            "waitForThenClick": ".iubenda-cs-customize-btn"
-                        },
-                        {
-                            "waitForThenClick": ".iub-btn-reject"
-                        },
-                        {
-                            "waitForThenClick": "#iubFooterBtn"
-                        }
-                    ]
+                    "waitForThenClick": ".iubenda-cs-customize-btn"
+                },
+                {
+                    "waitForThenClick": ".iub-btn-reject"
+                },
+                {
+                    "waitForThenClick": "#iubFooterBtn"
                 }
             ]
         }

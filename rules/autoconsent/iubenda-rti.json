@@ -1,0 +1,20 @@
+{
+    "name": "iubenda-rti",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://([\\w-]+\\.)?(mediaset\\.it|meteo\\.it|wittytv\\.it|today\\.it|milanotoday\\.it|romatoday\\.it|padovaoggi\\.it|bolognatoday\\.it|torinotoday\\.it|genovatoday\\.it|trevisotoday\\.it)/"
+    },
+    "prehideSelectors": ["#iubenda-cs-banner"],
+    "detectCmp": [{ "exists": "#rti-privacy-open-modal-btn-id" }],
+    "detectPopup": [{ "visible": "#rti-privacy-open-modal-btn-id" }],
+    "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
+    "optOut": [
+        {
+            "waitForThenClick": "#rti-privacy-open-modal-btn-id"
+        },
+        {
+            "waitForThenClick": "#rti-privacy-close-btn-id"
+        }
+    ]
+}
