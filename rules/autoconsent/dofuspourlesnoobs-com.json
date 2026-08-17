@@ -1,0 +1,54 @@
+{
+    "name": "dofuspourlesnoobs.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dofuspourlesnoobs\\.com/"
+    },
+    "prehideSelectors": ["iframe[title='Consent window']", "#askagain"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "script[src*='cdn.appconsent.io/tcf2-clear/'][src*='core.bundle.js']" }, { "exists": "#askagain" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#askagain" }, { "waitForVisible": "iframe[title='Consent window']", "timeout": 60000 }]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["iframe[title='Consent window']", ".button__acceptAll"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "iframe[title='Consent window']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll, .button__skip"]
+                },
+                {
+                    "waitForVisible": "#askagain",
+                    "optional": true
+                },
+                {
+                    "hide": "#askagain",
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "hide": "#askagain"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "iframe[title='Consent window'], #askagain",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
