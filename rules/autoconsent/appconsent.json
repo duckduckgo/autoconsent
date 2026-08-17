@@ -18,7 +18,7 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
+            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll, .button__skip"]
         }
     ],
     "test": [
