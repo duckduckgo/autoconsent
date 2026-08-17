@@ -3,7 +3,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://([\\w-]+\\.)?(mediaset\\.it|meteo\\.it|wittytv\\.it|today\\.it|milanotoday\\.it|romatoday\\.it|padovaoggi\\.it|bolognatoday\\.it|torinotoday\\.it|genovatoday\\.it|trevisotoday\\.it)/"
+        "urlPattern": "^https?://([\\w-]+\\.)*(mediaset\\.it|meteo\\.it|wittytv\\.it|today\\.it|milanotoday\\.it|romatoday\\.it|padovaoggi\\.it|bolognatoday\\.it|torinotoday\\.it|genovatoday\\.it|trevisotoday\\.it)/"
     },
     "prehideSelectors": ["#iubenda-cs-banner"],
     "detectCmp": [{ "exists": "#rti-privacy-open-modal-btn-id" }],
