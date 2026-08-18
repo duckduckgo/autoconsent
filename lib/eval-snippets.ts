@@ -91,6 +91,55 @@ export const snippets = {
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
+    EVAL_VUFIND_ACCEPT_ALL: () => {
+        const config = window.VuFind?.cookie?.getConsentConfig?.();
+        const cookieName = config?.cookieName || 'cc_cookie';
+        const cookieExpirationDays = config?.cookieExpirationDays || 182;
+        const now = new Date().toISOString();
+        const value = JSON.stringify({
+            categories: config?.categoryConfig ? Object.keys(config.categoryConfig) : ['essential'],
+            revision: config?.revision || 0,
+            lastConsentTimestamp: now,
+            consentTimestamp: now,
+            consentId: window.crypto?.randomUUID?.() || `${Date.now()}`,
+            expirationTime: Date.now() + cookieExpirationDays * 24 * 60 * 60 * 1000,
+            languageCode: document.documentElement.lang || navigator.language?.slice(0, 2) || 'en',
+        });
+        if (window.VuFind?.cookie?.set) {
+            window.VuFind.cookie.set(cookieName, value);
+        } else {
+            document.cookie = `${cookieName}=${encodeURIComponent(value)}; path=/; max-age=${cookieExpirationDays * 24 * 60 * 60}; SameSite=Lax`;
+        }
+        document.querySelector('.cookie-consent-wrapper')?.remove();
+        window.VuFind.emit?.('cookie-consent-done');
+        return true;
+    },
+    EVAL_VUFIND_ACCEPT_ESSENTIAL: () => {
+        const config = window.VuFind?.cookie?.getConsentConfig?.();
+        const cookieName = config?.cookieName || 'cc_cookie';
+        const cookieExpirationDays = config?.cookieExpirationDays || 182;
+        const now = new Date().toISOString();
+        const categories = Object.entries(config?.categoryConfig || { essential: { Essential: true } })
+            .filter(([, categoryConfig]) => categoryConfig.Essential)
+            .map(([category]) => category);
+        const value = JSON.stringify({
+            categories: categories.length > 0 ? categories : ['essential'],
+            revision: config?.revision || 0,
+            lastConsentTimestamp: now,
+            consentTimestamp: now,
+            consentId: window.crypto?.randomUUID?.() || `${Date.now()}`,
+            expirationTime: Date.now() + cookieExpirationDays * 24 * 60 * 60 * 1000,
+            languageCode: document.documentElement.lang || navigator.language?.slice(0, 2) || 'en',
+        });
+        if (window.VuFind?.cookie?.set) {
+            window.VuFind.cookie.set(cookieName, value);
+        } else {
+            document.cookie = `${cookieName}=${encodeURIComponent(value)}; path=/; max-age=${cookieExpirationDays * 24 * 60 * 60}; SameSite=Lax`;
+        }
+        document.querySelector('.cookie-consent-wrapper')?.remove();
+        window.VuFind.emit?.('cookie-consent-done');
+        return true;
+    },
 
     // declarative rules
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),

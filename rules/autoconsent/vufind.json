@@ -1,0 +1,31 @@
+{
+    "name": "vufind",
+    "vendorUrl": "https://vufind.org/",
+    "prehideSelectors": [".cookie-consent-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent.js-cookie-consent .js-accept-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent.js-cookie-consent.js-loaded"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": ".cookie-consent.js-cookie-consent .js-accept-all"
+        },
+        {
+            "eval": "EVAL_VUFIND_ACCEPT_ALL"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": ".cookie-consent.js-cookie-consent .js-accept-essential"
+        },
+        {
+            "eval": "EVAL_VUFIND_ACCEPT_ESSENTIAL"
+        }
+    ]
+}
