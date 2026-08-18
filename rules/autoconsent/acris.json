@@ -25,14 +25,26 @@
     ],
     "optOut": [
         {
-            "waitForVisible": "#ccAcceptOnlyFunctional",
+            "waitForVisible": "#ccAcceptButton,#ccAcceptOnlyFunctional",
             "check": "any"
         },
         {
             "wait": 500
         },
         {
-            "waitForThenClick": "#ccAcceptOnlyFunctional"
+            "if": {
+                "exists": "#ccAcceptButton"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#ccAcceptButton"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#ccAcceptOnlyFunctional"
+                }
+            ]
         }
     ]
 }
