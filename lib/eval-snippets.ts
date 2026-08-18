@@ -97,6 +97,17 @@ export const snippets = {
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
+    EVAL_BCFERRIES_OPT_OUT: () => {
+        const currentValue = document.cookie.match(/(?:^|;\s*)cPref=(\d+)/)?.[1] || '0';
+        if (Number(currentValue) > 1100) {
+            window._paq?.push(['forgetConsentGiven']);
+        }
+        window._paq?.push(['trackEvent', 'cPref', '1000']);
+        document.cookie = 'cPref=1000; path=/; SameSite=Lax; Secure';
+        const note = document.getElementById('note');
+        if (note) note.style.display = 'none';
+        return true;
+    },
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>
         !JSON.parse(

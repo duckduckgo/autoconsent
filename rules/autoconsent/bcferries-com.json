@@ -1,0 +1,12 @@
+{
+    "name": "bcferries.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bcferries\\.com/"
+    },
+    "prehideSelectors": ["#note"],
+    "detectCmp": [{ "exists": "#note #cPrefToggle" }],
+    "detectPopup": [{ "visible": "#note #cPrefToggle" }],
+    "optIn": [{ "waitForThenClick": "#note #cAccept" }],
+    "optOut": [{ "eval": "EVAL_BCFERRIES_OPT_OUT" }],
+    "test": [{ "cookieContains": "cPref=1000" }]
+}
