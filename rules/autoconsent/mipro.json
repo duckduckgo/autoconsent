@@ -1,0 +1,37 @@
+{
+    "name": "mipro",
+    "vendorUrl": "https://www.mipro.com.tw/",
+    "runContext": {
+        "urlPattern": "^https://www\\.mipro\\.com\\.tw/"
+    },
+    "prehideSelectors": [".cookie-modal.open"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-modal .cookie-block"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-modal.open .cookie-block"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-modal.open .btnText.simple-btn.agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-modal.open .btnText.simple-btn.cancel"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "visible": ".cookie-modal.open .cookie-block",
+            "negated": true
+        }
+    ]
+}
