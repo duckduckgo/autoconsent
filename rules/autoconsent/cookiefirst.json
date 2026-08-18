@@ -2,7 +2,12 @@
     "name": "cookiefirst.com",
     "prehideSelectors": ["#cookiefirst-root,.cookiefirst-root,[aria-labelledby=cookie-preference-panel-title]"],
     "detectCmp": [{ "exists": "#cookiefirst-root,.cookiefirst-root" }],
-    "detectPopup": [{ "visible": "#cookiefirst-root,.cookiefirst-root" }],
+    "detectPopup": [
+        {
+            "visible": "#cookiefirst-root button[data-cookiefirst-action],.cookiefirst-root button[data-cookiefirst-action],#btnAcceptAllCookies,#btnRejectAllCookies,#btnAdjustSettings,[aria-labelledby=cookie-preference-panel-title] button",
+            "check": "any"
+        }
+    ],
     "optIn": [
         {
             "any": [{ "click": "button[data-cookiefirst-action=accept]" }, { "click": "#btnAcceptAllCookies" }]
