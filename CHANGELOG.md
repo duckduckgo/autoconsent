@@ -1,3 +1,18 @@
+# v16.23.0 (Tue Aug 18 2026)
+
+#### Rules
+
+- Rule update: check24 [#1494](https://github.com/duckduckgo/autoconsent/pull/1494) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uwv-nl [#1493](https://github.com/duckduckgo/autoconsent/pull/1493) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Proactive CPM check: paypal.com [#1491](https://github.com/duckduckgo/autoconsent/pull/1491) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.22.0 (Sat Aug 15 2026)
 
 #### Rules
