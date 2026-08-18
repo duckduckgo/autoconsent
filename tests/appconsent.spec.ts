@@ -5,3 +5,10 @@ generateCMPTests('AppConsent', ['https://magasin.darty.com/'], {
     testOptOut: true,
     onlyRegions: ['US', 'FR'],
 });
+
+generateCMPTests('AppConsent', ['https://www.pagesjaunes.fr/'], {
+    testOptIn: false,
+    testOptOut: true,
+    onlyRegions: ['GB'],
+    mobile: true,
+});

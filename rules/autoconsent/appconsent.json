@@ -1,6 +1,6 @@
 {
     "name": "AppConsent",
-    "prehideSelectors": ["iframe[title='Consent window']"],
+    "prehideSelectors": ["iframe[title*='onsent']"],
     "detectCmp": [
         {
             "exists": "script[src*='cdn.appconsent.io/tcf2-clear/'][src*='core.bundle.js']"
@@ -8,22 +8,22 @@
     ],
     "detectPopup": [
         {
-            "visible": "iframe[title='Consent window']"
+            "visible": "iframe[title*='onsent']"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__acceptAll"]
+            "waitForThenClick": ["iframe[title*='onsent']", ".button__acceptAll"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
+            "waitForThenClick": ["iframe[title*='onsent']", ".button__refuseAll, .button__skip"]
         }
     ],
     "test": [
         {
-            "waitForVisible": "iframe[title='Consent window']",
+            "waitForVisible": "iframe[title*='onsent']",
             "timeout": 1000,
             "check": "none"
         }
