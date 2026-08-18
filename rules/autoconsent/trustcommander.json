@@ -1,0 +1,38 @@
+{
+    "name": "TrustCommander",
+    "cosmetic": false,
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#tc-privacy-wrapper .tc-privacy-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#tc-privacy-wrapper .tc-privacy-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "#tc-privacy-wrapper",
+                "xpath///button[contains(., 'Tout accepter') or contains(., 'Accepter') or contains(., 'Autoriser') or contains(., 'Accept all') or contains(., 'Allow all') or contains(., 'Alle akzeptieren')]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "#tc-privacy-wrapper",
+                "xpath///button[contains(., 'Continuer sans accepter') or contains(., 'Ne pas accepter') or contains(., 'Tout refuser') or contains(., 'Refuser') or contains(., 'refuser') or contains(., 'Do not accept') or contains(., 'Reject') or contains(., 'Decline') or contains(., 'Alle ablehnen') or contains(., 'ablehnen') or contains(., 'Nicht akzeptieren') or contains(., 'erforderlichen Cookies fortfahren')]"
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#tc-privacy-wrapper .tc-privacy-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
