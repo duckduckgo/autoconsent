@@ -1,0 +1,33 @@
+{
+    "name": "ceneo-pl",
+    "prehideSelectors": ["#js_cookie-consent-banner"],
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ceneo\\.pl/"
+    },
+    "detectCmp": [
+        {
+            "exists": "#js_cookie-consent-banner.cookie-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#js_cookie-consent-banner [data-role=\"reject-rodo\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#js_cookie-consent-banner [data-role=\"accept-consent\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#js_cookie-consent-banner [data-role=\"reject-rodo\"]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#js_cookie-consent-banner",
+            "check": "none"
+        }
+    ]
+}
