@@ -1,0 +1,29 @@
+{
+    "name": "walmart-ca",
+    "vendorUrl": "https://www.walmart.ca/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?walmart\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#third-party-cookie-detection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "hide": "section[role=\"banner\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"]), div[role=\"dialog\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"])"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "section[role=\"banner\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"]), div[role=\"dialog\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"])"
+        }
+    ]
+}
