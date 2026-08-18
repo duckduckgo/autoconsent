@@ -29,7 +29,7 @@
                 {
                     "if": { "visible": ".ccc-reject-button" },
                     "then": [{ "waitForThenClick": ".ccc-reject-button" }],
-                    "else": [{ "waitForThenClick": "#ccc-dismiss-button" }]
+                    "else": [{ "waitForThenClick": "#ccc-dismiss-button,#ccc-close" }]
                 }
             ]
         }
