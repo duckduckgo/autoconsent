@@ -84,6 +84,11 @@ export default class SourcePoint extends AutoConsentCMPBase {
         return false;
     }
 
+    isUsNatNotice() {
+        const url = new URL(location.href);
+        return url.pathname === '/us_pm/index.html' && url.searchParams.get('is_usnat_notice') === 'true';
+    }
+
     async optOut() {
         // FIXME: ideally we want to wait until the outer frame is ready, but it's tricky in cross-origin frames
         await this.wait(500);
@@ -105,6 +110,10 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 t.click();
             }
             return await this.click('.priv-save-btn');
+        }
+
+        if (this.isUsNatNotice() && !this.isManagerOpen()) {
+            return await this.click('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL');
         }
 
         // sometimes there's a "Save and Exit" / "Essential cookies" button
@@ -163,7 +172,13 @@ export default class SourcePoint extends AutoConsentCMPBase {
 
             if (path === 0) {
                 await this.waitForVisible(rejectSelector1);
-                return await this.click(rejectSelector1);
+                if (!(await this.click(rejectSelector1))) {
+                    return false;
+                }
+                if (await this.waitForVisible('.sp_choice_type_SAVE_AND_EXIT', 1000, 'any')) {
+                    return await this.click('.sp_choice_type_SAVE_AND_EXIT');
+                }
+                return true;
             } else if (path === 1) {
                 await this.click(rejectSelector2);
             } else if (path === 2) {

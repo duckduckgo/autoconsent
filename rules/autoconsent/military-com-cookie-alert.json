@@ -1,0 +1,13 @@
+{
+    "name": "military-com-cookie-alert",
+    "runContext": {
+        "urlPattern": "^https?://jobs\\.military\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#cookiesAlertMsg"],
+    "detectCmp": [{ "exists": "#cookiesAlertMsg" }],
+    "detectPopup": [{ "visible": "#cookiesAlertMsg" }],
+    "optIn": [{ "click": "#cookies_alert_btn" }],
+    "optOut": [{ "hide": "#cookiesAlertMsg" }],
+    "test": [{ "visible": "#cookiesAlertMsg", "check": "none" }]
+}
