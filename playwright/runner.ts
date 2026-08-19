@@ -28,6 +28,7 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    skipProjects?: string[];
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -38,6 +39,7 @@ const defaultOptions: TestOptions = {
     mobile: false,
     expectPopupOpen: true,
     expectedRuns: 1,
+    skipProjects: [],
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -345,6 +347,7 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
             if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
                 const testName = `${domain} ${urlHash} .${testRegion} noaction ${formFactor}`;
                 test(testName, async ({ page }, testInfo) => {
+                    if (finalOptions.skipProjects?.includes(testInfo.project.name)) test.skip();
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, null);
                     await testRun.run();
                 });
@@ -352,6 +355,7 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
             if (finalOptions.testOptIn) {
                 const testName = `${domain} ${urlHash} .${testRegion} optIn ${formFactor}`;
                 test(testName, async ({ page }, testInfo) => {
+                    if (finalOptions.skipProjects?.includes(testInfo.project.name)) test.skip();
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, 'optIn');
                     await testRun.run();
                 });
@@ -359,6 +363,7 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
             if (finalOptions.testOptOut) {
                 const testName = `${domain} ${urlHash} .${testRegion} optOut ${formFactor}`;
                 test(testName, async ({ page }, testInfo) => {
+                    if (finalOptions.skipProjects?.includes(testInfo.project.name)) test.skip();
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, 'optOut');
                     await testRun.run();
                 });

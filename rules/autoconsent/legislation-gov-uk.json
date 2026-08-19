@@ -1,0 +1,22 @@
+{
+    "name": "legislation-gov-uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?legislation\\.gov\\.uk/"
+    },
+    "prehideSelectors": [".cookie-preferences-banner"],
+    "detectCmp": [{ "exists": ".cookie-preferences-banner" }],
+    "detectPopup": [{ "visible": ".cookie-preferences-banner .reject-all-cookies" }],
+    "optIn": [
+        { "waitForThenClick": ".cookie-preferences-banner .accept-all-cookies" },
+        { "waitForThenClick": ".cookie-preferences-banner .dismiss-banner" }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".cookie-preferences-banner .reject-all-cookies" },
+        { "waitForThenClick": ".cookie-preferences-banner .dismiss-banner" }
+    ],
+    "test": [
+        { "cookieContains": "accepted_cookie_policy" },
+        { "cookieContains": "%22analytics%22%3Afalse" },
+        { "cookieContains": "%22settings%22%3Afalse" }
+    ]
+}
