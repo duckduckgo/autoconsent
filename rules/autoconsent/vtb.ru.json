@@ -1,0 +1,33 @@
+{
+    "name": "vtb.ru",
+    "vendorUrl": "https://www.vtb.ru/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?vtb\\.ru/"
+    },
+    "prehideSelectors": ["[data-component-name=\"cookies\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-component-name=\"cookies\"] [data-ym-cookie-button=\"true\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-component-name=\"cookies\"] [data-ym-cookie-button=\"true\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-component-name=\"cookies\"] [data-ym-cookie-button=\"true\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-component-name=\"cookies\"] [data-ym-cookie-button=\"true\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "is_cookie_accepted=true"
+        }
+    ]
+}
