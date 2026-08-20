@@ -7,34 +7,33 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https://(www\\.)?chatgpt\\.com/"
+        "urlPattern": "^https?://(\\w+\\.)?chatgpt\\.com/"
     },
-    "prehideSelectors": [],
+    "comment": "Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better.",
+    "prehideSelectors": ["dialog[data-cookie-consent]:has(form[data-privacy-consent-form])"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "dialog[data-cookie-consent] form[data-privacy-consent-form] input[name=\"action\"][value=\"reject\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "dialog[data-cookie-consent]:has(form[data-privacy-consent-form])"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "waitForThenClick": "dialog[data-cookie-consent] form[data-privacy-consent-form]:has(input[name=\"action\"][value=\"accept\"]) button[type=\"submit\"]"
         }
     ],
     "optOut": [
-        { "wait": 500 },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Reject non-essential"
+            "waitForThenClick": "dialog[data-cookie-consent] form[data-privacy-consent-form]:has(input[name=\"action\"][value=\"reject\"]) button[type=\"submit\"]"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "dialog[data-cookie-consent]",
             "timeout": 1000,
             "check": "none"
         }
