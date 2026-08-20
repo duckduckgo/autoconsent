@@ -9,34 +9,27 @@
         "frame": false,
         "urlPattern": "^https://(www\\.)?chatgpt\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"])"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"])"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "waitForThenClick": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"]) button.btn-primary"
         }
     ],
     "optOut": [
-        { "wait": 500 },
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForThenClick": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"]) button.btn-secondary",
             "comment": "Reject non-essential"
         }
     ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": [{ "cookieContains": "oai-allow-ne=false" }]
 }
