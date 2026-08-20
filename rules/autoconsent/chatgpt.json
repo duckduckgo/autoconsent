@@ -9,25 +9,25 @@
         "frame": false,
         "urlPattern": "^https://(www\\.)?chatgpt\\.com/"
     },
-    "prehideSelectors": ["div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"])"],
+    "prehideSelectors": ["div[role=\"dialog\"]:has(a[href*=\"cookie-policy\"])"],
     "detectCmp": [
         {
-            "exists": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"])"
+            "exists": "div[role=\"dialog\"]:has(a[href*=\"cookie-policy\"])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"])"
+            "visible": "div[role=\"dialog\"]:has(a[href*=\"cookie-policy\"])"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"]) button.btn-primary"
+            "waitForThenClick": "div[role=\"dialog\"]:has(a[href*=\"cookie-policy\"]) button.btn-primary"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "div[role=\"dialog\"]:has(> div a[href*=\"cookie-policy\"]) button.btn-secondary",
+            "waitForThenClick": "div[role=\"dialog\"]:has(a[href*=\"cookie-policy\"]) button.btn-secondary",
             "comment": "Reject non-essential"
         }
     ],
