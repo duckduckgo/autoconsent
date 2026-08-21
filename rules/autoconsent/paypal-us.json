@@ -27,16 +27,17 @@
                             "else": [
                                 { "waitForVisible": ".privacy-sheet-content #formContent" },
                                 {
-                                    "click": "#formContent .cookiepref-11m2iee-checkbox_base input:checked",
+                                    "click": "#formContent input[type='checkbox']:checked",
                                     "all": true,
                                     "optional": true
                                 },
-                                { "click": ".cookieAction.saveCookie,.confirmCookie #submitCookiesBtn" }
+                                { "click": ".cookieAction #submitCookiesBtn" }
                             ]
                         }
                     ]
                 }
             ]
         }
-    ]
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "type%3Dexplicit" }]
 }
