@@ -182,6 +182,16 @@ describe('getActionablePopups', () => {
             dialog.close();
         });
 
+        it('finds dialog whose text and buttons live in separate sticky children', () => {
+            showPopup('popup-sticky-sections');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].regexClassification).to.equal('reject');
+            expect(rejectButtons(popups[0].buttons)).to.have.length(1);
+        });
+
         it('ignores closed <dialog> element', () => {
             const dialog = document.getElementById('popup-dialog-element') as HTMLDialogElement;
             dialog.classList.add('visible');

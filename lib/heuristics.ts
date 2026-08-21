@@ -239,7 +239,11 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         found.push(node as HTMLElement);
     }
-    return excludeContainers(found);
+    // Dialog-like elements survive container exclusion: modals often place the consent text and the
+    // buttons in separate sticky children, and neither child on its own matches a detection pattern.
+    const innermost = excludeContainers(found);
+    const dialogs = found.filter((node) => isDialogLikeElement(node) && !innermost.includes(node));
+    return [...innermost, ...dialogs];
 }
 
 /**
