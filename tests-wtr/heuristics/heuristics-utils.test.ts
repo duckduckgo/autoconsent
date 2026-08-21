@@ -49,6 +49,18 @@ describe('checkHeuristicPatterns', () => {
         expect(snippets).to.have.length(0);
     });
 
+    it('detects "we use <qualifiers> cookies" with the default patterns', () => {
+        const { patterns } = checkHeuristicPatterns('We use marketing, analytical and functional cookies as well as similar technologies');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
+    it('does not join "we use" and "cookies" across a sentence boundary', () => {
+        const { patterns } = checkHeuristicPatterns('We use your address to ship orders. Recipes are baked with cookies.');
+
+        expect(patterns).to.have.length(0);
+    });
+
     it('handles non-global regex with optional capture groups without throwing', () => {
         // Regex from heuristic-patterns.ts (Polish) that has optional capture groups and
         // no `g` flag. `String.prototype.match` returns `undefined` entries for optional
