@@ -1,10 +1,10 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('twitter', ['https://mobile.twitter.com/', 'https://twitter.com/'], {
+generateCMPTests('twitter', ['https://x.com/'], {
     skipRegions: ['US'],
 });
 
-generateCMPTests('twitter', ['https://mobile.twitter.com/', 'https://twitter.com/'], {
+generateCMPTests('twitter', ['https://x.com/'], {
     skipRegions: ['US'],
     mobile: true,
 });
