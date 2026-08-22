@@ -3,30 +3,22 @@
     "runContext": {
         "urlPattern": "^https://([a-z0-9-]+\\.)?(twitter|x)\\.com/"
     },
-    "prehideSelectors": ["[data-testid=\"BottomBar\"]"],
-    "detectCmp": [
-        {
-            "exists": "body > div#react-root > div:not([id]) > div:not([id]) > div:nth-child(1)#layers > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id])[data-testid=BottomBar] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div#react-root > div:not([id]) > div:not([id]) > div:nth-child(1)#layers > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id])[data-testid=BottomBar] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
-        }
-    ],
+    "prehideSelectors": ["body > div[role=region][aria-label]:has(> div:last-child > button:first-child + button:last-child)"],
+    "detectCmp": [{ "exists": "body > div[role=region][aria-label]:has(> div:last-child > button:first-child + button:last-child)" }],
+    "detectPopup": [{ "visible": "body > div[role=region][aria-label]:has(> div:last-child > button:first-child + button:last-child)" }],
     "optIn": [
         {
-            "waitForThenClick": "[data-testid=\"BottomBar\"] > div:has(>div:first-child>div:last-child>button[role=button]>span) > div:last-child > button[role=button]:first-child"
+            "waitForThenClick": "body > div[role=region][aria-label]:has(> div:last-child > button:first-child + button:last-child) > div:last-child > button:first-child"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "body > div#react-root > div:not([id]) > div:not([id]) > div:nth-child(1)#layers > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id])[data-testid=BottomBar] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "waitForThenClick": "body > div[role=region][aria-label]:has(> div:last-child > button:first-child + button:last-child) > div:last-child > button:last-child"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#react-root > div:not([id]) > div:not([id]) > div:nth-child(1)#layers > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id])[data-testid=BottomBar] > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": "body > div[role=region][aria-label]:has(> div:last-child > button:first-child + button:last-child)",
             "timeout": 1000,
             "check": "none"
         }

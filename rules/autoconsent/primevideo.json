@@ -1,0 +1,31 @@
+{
+    "name": "primevideo.com",
+    "vendorUrl": "https://www.primevideo.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?primevideo\\.com/"
+    },
+    "prehideSelectors": [".DVWebNode-conditional-site-wide-wrapper:has([data-testid=critical-notification] a[href*=\"privacyprefs\"])"],
+    "detectCmp": [
+        { "exists": ".DVWebNode-conditional-site-wide-wrapper [data-testid=critical-notification]:has(a[href*=\"privacyprefs\"])" }
+    ],
+    "detectPopup": [
+        { "visible": ".DVWebNode-conditional-site-wide-wrapper [data-testid=critical-notification]:has(a[href*=\"privacyprefs\"])" }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=critical-notification]:has(a[href*=\"privacyprefs\"]) button[data-testid=critical-notification-v2-button-0]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=critical-notification]:has(a[href*=\"privacyprefs\"]) button[data-testid=critical-notification-v2-button-1]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".DVWebNode-conditional-site-wide-wrapper [data-testid=critical-notification]:has(a[href*=\"privacyprefs\"])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
