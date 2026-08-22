@@ -17,10 +17,6 @@
             "visible": "#cookie_consent_wrapper:not(.hideConsent)"
         },
         {
-            "visible": "#age_disclaimer_window,#ageDisclaimerWrapper",
-            "check": "none"
-        },
-        {
             "any": [
                 {
                     "visible": "#cookie_consent_wrapper.non_cookie_consent_wrapper #js_cookieBannerCloseBtn"
