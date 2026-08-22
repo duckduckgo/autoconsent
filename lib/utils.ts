@@ -53,8 +53,13 @@ export function isElementVisible(elem: HTMLElement): boolean {
     } else {
         const css = window.getComputedStyle(elem);
         if (css.position === 'fixed' && css.display !== 'none') {
-            // fixed elements may be visible even if the parent is not
-            return true;
+            // Fixed elements may be visible even if the parent is not. But sites
+            // sometimes leave fixed banners parked offscreen (e.g. below the
+            // viewport, with no transform set) instead of removing them from
+            // the DOM after dismissal — verify that the element actually
+            // intersects the viewport before treating it as visible.
+            const r = elem.getBoundingClientRect();
+            return r.bottom > 0 && r.right > 0 && r.top < window.innerHeight && r.left < window.innerWidth;
         }
     }
     return false;
