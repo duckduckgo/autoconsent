@@ -6,6 +6,10 @@
  * Chromium only - isolated worlds are reached through CDP, which Playwright exposes for
  * Chromium alone.
  *
+ * Browsers run headed by default: headless Chromium is trivially fingerprintable
+ * (`HeadlessChrome` UA, no plugins, no `window.chrome`) and is blocked by many botwalls.
+ * A virtual display is started automatically when the environment has none.
+ *
  * Requires env vars:
  * - REGIONAL_PROXY_<REGION> (REGION is the uppercased two-letter region code)
  * - REGIONAL_PROXY_USERNAME
@@ -25,7 +29,7 @@
  * @property {number} [navigationTimeout=45000]
  * @property {number} [completionTimeout=45000]
  * @property {number} [detectionTimeout] - How long to wait for `cmpDetected` before giving up. Defaults to `completionTimeout`.
- * @property {boolean} [headless=true]
+ * @property {boolean} [headless=false] - Headless is more botwall-prone; only set it for sites that don't care.
  * @property {LaunchOptions} [launchOptions]
  */
 
@@ -41,6 +45,7 @@
  * @property {boolean|null} selfTestResult
  * @property {boolean} autoconsentDone
  * @property {boolean|null} isCosmetic
+ * @property {string|null} botwall - Description of the botwall signals seen, or null if the page looks normal.
  * @property {string[]} errors
  * @property {number} duration
  * @property {string[]} screenshotPaths
@@ -72,6 +77,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
 
@@ -122,16 +128,115 @@ export function buildProxyConfig(regionKey, env = process.env) {
     };
 }
 
+const XVFB_SCREEN = '1920x1080x24';
+
+/** Memoized display resolution, so all browsers in one process share a single virtual display. */
+/** @type {Promise<string|null>|null} */
+let displayPromise = null;
+
+function localDisplaySocket(/** @type {string} */ display) {
+    // Only ":N[.S]" and "[unix|localhost]:N[.S]" are served by a local socket we can stat.
+    const match = /^(?:unix|localhost)?:(\d+)(?:\.\d+)?$/.exec(display);
+    return match ? `/tmp/.X11-unix/X${match[1]}` : null;
+}
+
+/**
+ * Start an Xvfb server on a free display number.
+ * @returns {Promise<string|null>} The display string, or null if Xvfb is unavailable.
+ */
+async function startXvfb() {
+    for (let displayNumber = 99; displayNumber < 110; displayNumber++) {
+        const display = `:${displayNumber}`;
+        const socket = `/tmp/.X11-unix/X${displayNumber}`;
+        if (fs.existsSync(socket)) continue;
+
+        const child = spawn('Xvfb', [display, '-screen', '0', XVFB_SCREEN, '-nolisten', 'tcp'], { stdio: 'ignore' });
+        // Don't hold the event loop open, but do take the server down with us.
+        child.unref();
+        process.on('exit', () => child.kill());
+
+        /** @type {Error|null} */
+        let spawnError = null;
+        let exited = false;
+        child.on('error', (e) => {
+            spawnError = e;
+        });
+        child.on('exit', () => {
+            exited = true;
+        });
+
+        const deadline = Date.now() + 10000;
+        while (Date.now() < deadline) {
+            if (spawnError) return null; // Xvfb is not installed.
+            if (exited) break; // Display number was taken by another process; try the next one.
+            if (fs.existsSync(socket)) return display;
+            await new Promise((r) => setTimeout(r, 100));
+        }
+        child.kill();
+    }
+    return null;
+}
+
+/**
+ * Resolve a usable X display for headed browsers, starting Xvfb if the environment has none.
+ * @returns {Promise<string|null>} The display string, or null if no display could be provided.
+ */
+export function ensureDisplay() {
+    if (!displayPromise) {
+        displayPromise = (async () => {
+            const existing = process.env.DISPLAY;
+            if (existing) {
+                const socket = localDisplaySocket(existing);
+                // Remote displays can't be verified locally, so trust an explicit setting.
+                if (!socket || fs.existsSync(socket)) return existing;
+            }
+            return startXvfb();
+        })();
+    }
+    return displayPromise;
+}
+
+let headlessFallbackWarned = false;
+
 /**
  * Launch a local Playwright browser through the HTTPS proxy for a region.
+ *
+ * Headed by default (see module docs). Pass `launchOptions.channel = 'chrome'` to use a locally
+ * installed Google Chrome, which reports real Chrome branding in UA-CH.
  * @param {string} regionKey
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<Browser>}
  */
 export async function launchRegionalProxyBrowser(regionKey, options = {}) {
+    const launchOptions = options.launchOptions ?? {};
+    let headless = options.headless ?? false;
+    let display = null;
+
+    if (!headless) {
+        display = await ensureDisplay();
+        if (!display) {
+            if (!headlessFallbackWarned) {
+                headlessFallbackWarned = true;
+                console.warn('No X display available and Xvfb could not be started; falling back to headless. Expect more botwall blocks.');
+            }
+            headless = true;
+        }
+    }
+
+    const args = [...(launchOptions.args ?? [])];
+    // Without this, navigator.webdriver stays true even in headed mode.
+    if (!args.some((arg) => arg.startsWith('--disable-blink-features'))) {
+        args.push('--disable-blink-features=AutomationControlled');
+    }
+
+    /** @type {Record<string, any>|undefined} */
+    const env = display ? { ...process.env, ...launchOptions.env, DISPLAY: display } : launchOptions.env;
+
     return chromium.launch({
-        headless: options.headless ?? true,
-        ...(options.launchOptions ?? {}),
+        ...launchOptions,
+        headless,
+        args,
+        env,
         proxy: buildProxyConfig(regionKey),
     });
 }
@@ -264,6 +369,7 @@ export async function injectAutoconsent(page, options = {}) {
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
+            botwall: null,
             errors: [],
             duration: 0,
             screenshotPaths: [],
@@ -462,6 +568,53 @@ async function injectIntoIsolatedWorld(page, createMessageHandler) {
     await Promise.all(page.frames().map(attachToOopif));
 }
 
+const BOTWALL_TITLE_PATTERN =
+    /just a moment|attention required|access denied|access to this page has been denied|checking your browser|verify (?:you are|yourself)|are you a (?:robot|human)|pardon our interruption|security check|blocked/i;
+
+/** Interstitials from the big anti-bot vendors: Cloudflare, DataDome, PerimeterX/HUMAN, Akamai, Imperva. */
+const BOTWALL_SELECTORS = [
+    '#challenge-running',
+    '#challenge-form',
+    '#cf-challenge-running',
+    'iframe[src*="captcha-delivery.com"]',
+    'iframe[src*="challenges.cloudflare.com"]',
+    '[id^="px-captcha"]',
+    '#px-block-form',
+    'iframe[title*="human" i]',
+];
+
+/**
+ * Look for signs that a botwall replaced the page. Advisory only: a blocked page yields
+ * "no CMP detected", which is easily mistaken for a region that shows no banner.
+ * @param {Page} page
+ * @param {number|null} documentStatus - Status of the most recent main-frame document response.
+ * @returns {Promise<string|null>}
+ */
+async function detectBotwall(page, documentStatus) {
+    const signals = [];
+    if (documentStatus !== null && documentStatus >= 400) {
+        signals.push(`HTTP ${documentStatus}`);
+    }
+    try {
+        const domSignals = await page.evaluate((selectors) => {
+            const found = [];
+            const title = document.title;
+            if (title) found.push(`title "${title.slice(0, 60)}"`);
+            for (const selector of selectors) {
+                if (document.querySelector(selector)) found.push(`element ${selector}`);
+            }
+            return found;
+        }, BOTWALL_SELECTORS);
+        for (const signal of domSignals) {
+            if (signal.startsWith('title ') && !BOTWALL_TITLE_PATTERN.test(signal)) continue;
+            signals.push(signal);
+        }
+    } catch {
+        // The page may have navigated or closed.
+    }
+    return signals.length > 0 ? signals.join(', ') : null;
+}
+
 /**
  * Test a URL using an already-created Playwright page.
  * @param {Page} page
@@ -479,6 +632,20 @@ export async function testPage(page, url, regionKey, options = {}) {
 
     try {
         const ctx = await injectAutoconsent(page, options);
+
+        // Botwall interstitials often redirect or reload, so keep the latest document status.
+        /** @type {number|null} */
+        let documentStatus = null;
+        page.on('response', (response) => {
+            try {
+                if (response.frame() === page.mainFrame() && response.request().resourceType() === 'document') {
+                    documentStatus = response.status();
+                }
+            } catch {
+                // The frame may be detached.
+            }
+        });
+
         await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
 
         const completed = await ctx.waitForCompletion(completionTimeout, detectionTimeout);
@@ -491,9 +658,14 @@ export async function testPage(page, url, regionKey, options = {}) {
 
         const result = ctx.collectResult(url, regionKey);
         result.duration = Date.now() - startTime;
+        result.botwall = await detectBotwall(page, documentStatus);
 
         if (!completed && !ctx.hasMessage('cmpDetected')) {
-            result.errors.push('No CMP detected (site may not show a cookie banner in this region)');
+            result.errors.push(
+                result.botwall
+                    ? `No CMP detected, but the page looks like a botwall block (${result.botwall})`
+                    : 'No CMP detected (site may not show a cookie banner in this region)',
+            );
         } else if (!completed) {
             result.errors.push('Timed out waiting for autoconsent to complete');
         }
@@ -519,6 +691,7 @@ export async function testPage(page, url, regionKey, options = {}) {
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
+            botwall: null,
             errors: [e instanceof Error ? e.message : String(e)],
             duration: Date.now() - startTime,
             screenshotPaths: [],
@@ -553,6 +726,7 @@ export async function testUrl(url, regionKey, options = {}) {
             selfTestResult: null,
             autoconsentDone: false,
             isCosmetic: null,
+            botwall: null,
             errors: [e instanceof Error ? e.message : String(e)],
             duration: 0,
             screenshotPaths: [],
@@ -591,6 +765,7 @@ export function formatResult(result) {
     if (actionAttempted && actionResult) status = 'PASS';
     else if (actionAttempted && !actionResult) status = 'ACTION FAILED';
     else if (result.cmpsDetected.length > 0) status = 'PARTIAL';
+    else if (result.botwall) status = 'BOTWALL?';
     else status = 'NO CMP';
 
     const parts = [
@@ -599,6 +774,9 @@ export function formatResult(result) {
         `  Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | OptIn: ${result.optInResult} | SelfTest: ${result.selfTestResult}`,
         `  Done: ${result.autoconsentDone}${result.isCosmetic ? ' (cosmetic)' : ''} | ${result.duration}ms`,
     ];
+    if (result.botwall) {
+        parts.push(`  Botwall signals: ${result.botwall}`);
+    }
     if (result.errors.length > 0) {
         parts.push(`  Errors: ${result.errors.join('; ')}`);
     }
