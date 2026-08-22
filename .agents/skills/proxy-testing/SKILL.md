@@ -122,7 +122,8 @@ DataDome, and PerimeterX interstitials that block headless runs.
 
 A blocked page produces "no CMP detected", which is easy to misread as "this region shows no banner",
 so every result carries a `botwall` field describing the signals found (blocking status code,
-challenge titles, known vendor challenge elements). `formatResult` reports those runs as `BOTWALL?`.
+challenge titles, known vendor challenge elements). `formatResult` appends `+BOTWALL?` to the status
+of any run that hit those signals without completing an action.
 
 If a site is still blocked:
 
@@ -167,4 +168,4 @@ await browser.close();
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
 - Headed browsers all share one display in a process. Windows overlap, which is harmless, but keep runs sequential when in doubt.
-- A `BOTWALL?` result says nothing about the rule. Do not record it as a regional difference.
+- A `+BOTWALL?` result says nothing about the rule. Do not record it as a regional difference.

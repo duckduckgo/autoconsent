@@ -130,8 +130,10 @@ export function buildProxyConfig(regionKey, env = process.env) {
 
 const XVFB_SCREEN = '1920x1080x24';
 
-/** Memoized display resolution, so all browsers in one process share a single virtual display. */
-/** @type {Promise<string|null>|null} */
+/**
+ * Memoized display resolution, so all browsers in one process share a single virtual display.
+ * @type {Promise<string|null>|null}
+ */
 let displayPromise = null;
 
 function localDisplaySocket(/** @type {string} */ display) {
@@ -151,9 +153,8 @@ async function startXvfb() {
         if (fs.existsSync(socket)) continue;
 
         const child = spawn('Xvfb', [display, '-screen', '0', XVFB_SCREEN, '-nolisten', 'tcp'], { stdio: 'ignore' });
-        // Don't hold the event loop open, but do take the server down with us.
+        // The server must not hold the event loop open.
         child.unref();
-        process.on('exit', () => child.kill());
 
         /** @type {Error|null} */
         let spawnError = null;
@@ -169,7 +170,10 @@ async function startXvfb() {
         while (Date.now() < deadline) {
             if (spawnError) return null; // Xvfb is not installed.
             if (exited) break; // Display number was taken by another process; try the next one.
-            if (fs.existsSync(socket)) return display;
+            if (fs.existsSync(socket)) {
+                process.on('exit', () => child.kill());
+                return display;
+            }
             await new Promise((r) => setTimeout(r, 100));
         }
         child.kill();
@@ -765,12 +769,14 @@ export function formatResult(result) {
     if (actionAttempted && actionResult) status = 'PASS';
     else if (actionAttempted && !actionResult) status = 'ACTION FAILED';
     else if (result.cmpsDetected.length > 0) status = 'PARTIAL';
-    else if (result.botwall) status = 'BOTWALL?';
     else status = 'NO CMP';
+    // A successful action means the page was reachable, so ignore botwall signals in that case.
+    if (result.botwall && !(actionAttempted && actionResult)) status += ' +BOTWALL?';
 
+    const otherCmps = result.cmpsDetected.filter((cmp) => cmp !== result.cmpActedOn);
     const parts = [
         `${status} [${result.region}] ${result.url}`,
-        `  CMP: ${result.cmpActedOn || 'none'}${result.cmpsDetected.length > 1 ? ` (also detected: ${result.cmpsDetected.filter((c) => c !== result.cmpActedOn).join(', ')})` : ''}`,
+        `  CMP: ${result.cmpActedOn || 'none'}${otherCmps.length > 0 ? ` (${result.cmpActedOn ? 'also ' : ''}detected: ${otherCmps.join(', ')})` : ''}`,
         `  Popup: ${result.popupFound} | OptOut: ${result.optOutResult} | OptIn: ${result.optInResult} | SelfTest: ${result.selfTestResult}`,
         `  Done: ${result.autoconsentDone}${result.isCosmetic ? ' (cosmetic)' : ''} | ${result.duration}ms`,
     ];
