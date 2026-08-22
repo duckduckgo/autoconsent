@@ -94,6 +94,7 @@ export function normalizeConfig(providedConfig: any): Config {
         performanceLoggingEnabled: false,
         heuristicPopupSearchTimeout: 100,
         heuristicMode: 'off', // heuristic disabled by default
+        maxDocumentElements: 100000,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries
