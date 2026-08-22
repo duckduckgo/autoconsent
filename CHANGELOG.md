@@ -1,3 +1,16 @@
+# v16.24.0 (Sat Aug 22 2026)
+
+#### Rules
+
+- Rule update: Cookie prompt on chatgpt.com [#1500](https://github.com/duckduckgo/autoconsent/pull/1500) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.23.0 (Tue Aug 18 2026)
 
 #### Rules
