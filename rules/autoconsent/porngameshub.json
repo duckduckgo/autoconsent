@@ -1,0 +1,33 @@
+{
+    "name": "porngameshub",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?porngameshub\\.com/"
+    },
+    "comment": "notice-only cookie banner without a reject option; the heuristic skips it because of the adult-content disclaimer in the same banner",
+    "prehideSelectors": ["aside[aria-label='Cookie Notification']"],
+    "detectCmp": [
+        {
+            "exists": "aside[aria-label='Cookie Notification'] button[aria-label='Accept Cookies']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "aside[aria-label='Cookie Notification']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "aside[aria-label='Cookie Notification'] button[aria-label='Accept Cookies']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "aside[aria-label='Cookie Notification'] button[aria-label='Accept Cookies']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdpr_consent="
+        }
+    ]
+}
