@@ -26,6 +26,13 @@
             dialog.popup {
                 position: absolute;
             }
+            .backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
         </style>
     </head>
     <body>
@@ -107,6 +114,13 @@
             <p>We use cookies to improve your experience.</p>
             <button>Reject All</button>
             <button>Deny</button>
+        </div>
+
+        <div id="popup-nested-backdrop" class="popup">
+            <div class="backdrop"></div>
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <button>Reject All</button>
         </div>
 
         <div id="popup-age-gate" class="popup" role="dialog">

@@ -237,7 +237,12 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
     );
     const found = [];
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-        found.push(node as HTMLElement);
+        const el = node as HTMLElement;
+        // Banners often wrap a text-less fixed backdrop; keeping it here would make
+        // excludeContainers discard the banner itself.
+        if (el.innerText?.trim()) {
+            found.push(el);
+        }
     }
     return excludeContainers(found);
 }

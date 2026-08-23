@@ -171,6 +171,16 @@ describe('getActionablePopups', () => {
             expect(popups.length).to.equal(1);
         });
 
+        it('finds popup wrapping a text-less fixed backdrop', () => {
+            showPopup('popup-nested-backdrop');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].element.id).to.equal('popup-nested-backdrop');
+            expect(rejectButtons(popups[0].buttons)).to.have.length(1);
+        });
+
         it('finds open <dialog> element', () => {
             const dialog = document.getElementById('popup-dialog-element') as HTMLDialogElement;
             dialog.show();
