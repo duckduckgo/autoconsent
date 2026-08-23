@@ -24,7 +24,7 @@
                     "if": {
                         "exists": "#btnRejectAllCookies"
                     },
-                    "then": [{ "wait": 2500 }, { "click": "#btnRejectAllCookies" }, { "wait": 1500 }],
+                    "then": [{ "wait": 1500 }, { "click": "#btnRejectAllCookies" }, { "wait": 1500 }],
                     "else": [
                         {
                             "if": {
