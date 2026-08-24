@@ -23,9 +23,5 @@
             "waitForThenClick": "#gdpr-banner-accept"
         }
     ],
-    "optOut": [
-        {
-            "waitForThenClick": "#gdpr-banner-decline"
-        }
-    ]
+    "optOut": [{ "waitForVisible": "#gdpr-banner-decline" }, { "waitForThenClick": "#gdpr-banner-decline" }]
 }
