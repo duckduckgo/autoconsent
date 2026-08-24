@@ -1,0 +1,9 @@
+{
+    "name": "gemini.google.com",
+    "prehideSelectors": ["[data-test-id=\"cookie-banner-body\"]"],
+    "detectCmp": [{ "exists": "cookie-banner [data-test-id=\"cookie-banner-body\"] [data-test-id=\"reject-button\"]" }],
+    "detectPopup": [{ "visible": "[data-test-id=\"cookie-banner-body\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-test-id=\"cookie-banner-body\"] [data-test-id=\"accept-button\"]" }],
+    "optOut": [{ "waitForThenClick": "[data-test-id=\"cookie-banner-body\"] [data-test-id=\"reject-button\"]" }],
+    "test": []
+}
