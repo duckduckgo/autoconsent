@@ -1,0 +1,124 @@
+{
+    "name": "ellera-cookie-consent",
+    "_metadata": {
+        "vendorUrl": "https://plugins.craftcms.com/cookie-consent"
+    },
+    "prehideSelectors": ["#elc-cookie-consent-container", "#elc-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "#elc-cookie-consent #elc-cookie-consent-form"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#elc-cookie-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "#elc-detail-link",
+            "optional": true
+        },
+        {
+            "waitFor": "#elc-cookie-consent.elc-fullwidth",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#elc-cookie-consent.elc-small"
+            },
+            "then": [
+                {
+                    "click": "#elc-detail-link",
+                    "optional": true
+                },
+                {
+                    "waitFor": "#elc-cookie-consent.elc-fullwidth",
+                    "timeout": 5000,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#elc-accept-all-link"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#elc-accept-all-link"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#elc-accept-link"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#elc-detail-link",
+            "optional": true
+        },
+        {
+            "waitFor": "#elc-cookie-consent.elc-fullwidth",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#elc-cookie-consent.elc-small"
+            },
+            "then": [
+                {
+                    "click": "#elc-detail-link",
+                    "optional": true
+                },
+                {
+                    "waitFor": "#elc-cookie-consent.elc-fullwidth",
+                    "timeout": 5000,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#elc-decline-link"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#elc-decline-link"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#elc-cookie-consent-form input[type=checkbox]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "visible": "#elc-save-link"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#elc-save-link"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#elc-accept-link"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "#elc-cookie-consent",
+            "negated": true
+        }
+    ]
+}
