@@ -1,7 +1,7 @@
 {
     "name": "pornpics.de",
     "runContext": {
-        "urlPattern": "^https?://(www\\.)?pornpics\\.de/"
+        "urlPattern": "^https?://(www\\.)?pornpics\\.(com|de)/"
     },
     "detectCmp": [{ "exists": "#cookie-form" }],
     "detectPopup": [{ "visible": "#cookie-form" }],
