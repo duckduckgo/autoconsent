@@ -9,7 +9,8 @@
     "optIn": [{ "waitForThenClick": "[data-role=\"cookies-modal\"] [class*=experimentalButtons] button:nth-of-type(1)" }],
     "optOut": [
         { "waitForVisible": "[data-role=\"cookies-modal\"] [class*=experimentalButtons] button:nth-of-type(2)" },
-        { "waitForThenClick": "[data-role=\"cookies-modal\"] [class*=experimentalButtons] button:nth-of-type(2)" },
+        { "wait": 500 },
+        { "click": "[data-role=\"cookies-modal\"] [class*=experimentalButtons] button:nth-of-type(2)" },
         { "hide": "[data-role=\"cookies-modal\"] [class*=container]", "optional": true }
     ]
 }
