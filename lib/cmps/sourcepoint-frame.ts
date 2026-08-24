@@ -2,6 +2,10 @@ import { RunContext } from '../rules';
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
+const ACCEPT_BUTTONS = '.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_Accept';
+// Explicit sp_choice_type_12 or generic [data-choice] links that aren't accept buttons.
+const MANAGE_BUTTONS = '.sp_choice_type_12,[data-choice]:not([class*="sp_choice_type_"])';
+
 export default class SourcePoint extends AutoConsentCMPBase {
     name = 'Sourcepoint-frame';
     prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay", '#sp_privacy_manager_container'];
@@ -53,21 +57,16 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return await this.waitForElement('.priv-save-btn', 2000);
         }
         // check for the paywall button, and bail if it exists to prevent broken opt out
-        await this.waitForElement(
-            '.sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT',
-            2000,
-        );
+        await this.waitForElement(`${ACCEPT_BUTTONS},.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_SAVE_AND_EXIT,.pm-us`, 2000);
         return !this.elementExists('.sp_choice_type_9');
     }
 
     async optIn() {
-        await this.waitForElement('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL', 2000);
-        if (await this.click('.sp_choice_type_11')) {
-            return true;
-        }
-
-        if (await this.click('.sp_choice_type_ACCEPT_ALL')) {
-            return true;
+        await this.waitForElement(ACCEPT_BUTTONS, 2000);
+        for (const selector of ['.sp_choice_type_11', '.sp_choice_type_ACCEPT_ALL', '.sp_choice_type_Accept']) {
+            if (await this.click(selector)) {
+                return true;
+            }
         }
         return false;
     }
@@ -78,8 +77,45 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
         // US National PM is served at /us_pm/index.html, same as the initial notice.
         // Distinguish the manager from the notice by the absence of the accept/continue button.
-        if (location.pathname === '/us_pm/index.html' && !document.querySelector('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL')) {
+        if (location.pathname === '/us_pm/index.html' && !this.elementExists(ACCEPT_BUTTONS)) {
             return true;
+        }
+        return false;
+    }
+
+    // The US National notice opens its privacy manager in a sibling frame, so this frame
+    // cannot see the manager and must stop after clicking through.
+    isUsNatNotice(): boolean {
+        return location.pathname === '/us_pm/index.html' && this.elementExists(ACCEPT_BUTTONS);
+    }
+
+    // The US National manager renders "Off/On" toggles whose polarity depends on the label:
+    // "do not sell"-style toggles must be turned on, permission-style toggles turned off.
+    async optOutUsNatManager(): Promise<boolean> {
+        await this.waitForElement('.pm-us .pm-toggle', 2000);
+        const toggles = Array.from(document.querySelectorAll('.pm-us .pm-toggle') as NodeListOf<HTMLElement>).map((toggle) => {
+            const label = toggle.getAttribute('aria-label') || toggle.closest('.switch-container')?.textContent || '';
+            return { toggle, expectedState: /\bdo not\b|\bdon'?t\b|\bopt[-\s]?out\b/i.test(label) };
+        });
+        const isSettled = () =>
+            toggles.every(({ toggle, expectedState }) => (toggle.getAttribute('aria-checked') === 'true') === expectedState);
+        for (const { toggle, expectedState } of toggles) {
+            if ((toggle.getAttribute('aria-checked') === 'true') !== expectedState) {
+                // the click handler sits on the inner "Off"/"On" labels, not on the button itself
+                toggle.querySelector<HTMLElement>(expectedState ? '.on' : '.off')?.click();
+            }
+        }
+        await waitFor(isSettled, 10, 100);
+
+        // Some sites customize the save button and drop its sp_choice_type_ class.
+        for (const selector of [
+            '.sp_choice_type_SE',
+            '.sp_choice_type_SAVE_AND_EXIT',
+            '.bottom-row .message-button:not([class*="sp_choice_type_"])',
+        ]) {
+            if (await this.click(selector)) {
+                return true;
+            }
         }
         return false;
     }
@@ -107,6 +143,17 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return await this.click('.priv-save-btn');
         }
 
+        if (this.elementExists('.pm-us')) {
+            return await this.optOutUsNatManager();
+        }
+
+        if (this.isUsNatNotice()) {
+            if (this.elementVisible('.sp_choice_type_13', 'any')) {
+                return await this.click('.sp_choice_type_13');
+            }
+            return await this.click(MANAGE_BUTTONS);
+        }
+
         // sometimes there's a "Save and Exit" / "Essential cookies" button
         if (this.elementVisible('.sp_choice_type_SE', 'any')) {
             // click the "Do Not Sell" toggle if it exists
@@ -121,10 +168,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         if (!this.isManagerOpen()) {
-            // Match manage/options buttons: explicit sp_choice_type_12 or generic [data-choice] links
-            // that aren't accept buttons (sp_choice_type_11, sp_choice_type_ACCEPT_ALL).
-            const manageSelector = '.sp_choice_type_12,[data-choice]:not([class*="sp_choice_type_"])';
-            const actionable = await this.waitForVisible(`${manageSelector},.sp_choice_type_13`);
+            const actionable = await this.waitForVisible(`${MANAGE_BUTTONS},.sp_choice_type_13`);
             if (!actionable) {
                 return false;
             }
@@ -138,7 +182,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 return await this.click('.sp_choice_type_13');
             }
 
-            await this.click(manageSelector);
+            await this.click(MANAGE_BUTTONS);
             // the page may navigate at this point but that's okay
             await waitFor(() => this.isManagerOpen(), 200, 100);
         }

@@ -8,6 +8,14 @@ generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
     skipRegions: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'PL', 'SE', 'NO', 'DK', 'CH'],
 });
 
+// US National notices render their privacy manager in a sibling frame, and the manager
+// uses "Off/On" toggles instead of the GDPR reject/save buttons.
+generateCMPTests('Sourcepoint-frame', ['https://news.bloomberglaw.com/', 'https://www.abc15.com/', 'https://www.refinery29.com/'], {
+    onlyRegions: ['US'],
+    // the notice frame and the privacy manager frame each complete their own run
+    expectedRuns: 2,
+});
+
 generateCMPTests(
     'Sourcepoint-frame',
     [
