@@ -10,11 +10,20 @@ generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
 
 // US National notices render their privacy manager in a sibling frame, and the manager
 // uses "Off/On" toggles instead of the GDPR reject/save buttons.
-generateCMPTests('Sourcepoint-frame', ['https://news.bloomberglaw.com/', 'https://www.abc15.com/', 'https://www.refinery29.com/'], {
-    onlyRegions: ['US'],
-    // the notice frame and the privacy manager frame each complete their own run
-    expectedRuns: 2,
-});
+// Bloomberg only renders the notice reliably on article pages, not on the front page.
+generateCMPTests(
+    'Sourcepoint-frame',
+    [
+        'https://news.bloomberglaw.com/bankruptcy-law/google-aims-to-boost-ai-with-purchase-of-spirit-airlines-data',
+        'https://www.abc15.com/',
+        'https://www.refinery29.com/',
+    ],
+    {
+        onlyRegions: ['US'],
+        // the notice frame and the privacy manager frame each complete their own run
+        expectedRuns: 2,
+    },
+);
 
 generateCMPTests(
     'Sourcepoint-frame',
