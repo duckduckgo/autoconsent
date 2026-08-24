@@ -1,0 +1,21 @@
+{
+    "name": "kingrecords-co-jp",
+    "vendorUrl": "https://www.kingrecords.co.jp/",
+    "runContext": {
+        "urlPattern": "^https?://(?:[^/]+\\.)?kingrecords\\.co\\.jp/"
+    },
+    "prehideSelectors": [".cookie:has(.cookie__inner .cookie__button)"],
+    "detectCmp": [{ "exists": ".cookie > .cookie__inner > .cookie__button > a" }],
+    "detectPopup": [{ "visible": ".cookie > .cookie__inner > .cookie__button > a" }],
+    "optIn": [
+        { "waitFor": "#loader.is--show", "timeout": 10000, "optional": true },
+        { "waitForThenClick": ".cookie > .cookie__inner > .cookie__button > a" }
+    ],
+    "optOut": [
+        { "waitFor": "#loader.is--show", "timeout": 10000, "optional": true },
+        { "waitForThenClick": ".cookie > .cookie__inner > .cookie__button > a" },
+        { "if": { "visible": ".cookie" }, "then": [{ "wait": 1000 }, { "click": ".cookie > .cookie__inner > .cookie__button > a" }] },
+        { "waitForVisible": ".cookie", "check": "none", "timeout": 5000 }
+    ],
+    "test": [{ "cookieContains": "cookiesubmit=1" }]
+}
