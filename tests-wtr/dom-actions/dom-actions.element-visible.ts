@@ -60,4 +60,13 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible(['#all-visible', 'button'], 'all')).to.be.true;
         });
     });
+
+    describe('fixed-position elements', () => {
+        it('should return false for a fixed element inside a display:none parent', () => {
+            expect(domActions.elementVisible(['#fixed-in-hidden-parent', 'button'], 'any')).to.be.false;
+        });
+        it('should return true for a rendered fixed element without dimensions', () => {
+            expect(domActions.elementVisible(['#fixed-zero-size', 'button'], 'any')).to.be.true;
+        });
+    });
 });

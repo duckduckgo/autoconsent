@@ -53,8 +53,9 @@ export function isElementVisible(elem: HTMLElement): boolean {
     } else {
         const css = window.getComputedStyle(elem);
         if (css.position === 'fixed' && css.display !== 'none') {
-            // fixed elements may be visible even if the parent is not
-            return true;
+            // fixed elements may be visible even if the parent is not, unless an ancestor is
+            // display:none, in which case the element is not rendered and has no client rects
+            return elem.getClientRects().length > 0;
         }
     }
     return false;
