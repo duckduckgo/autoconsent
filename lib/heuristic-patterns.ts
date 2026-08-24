@@ -163,8 +163,8 @@ const REJECT_PATTERNS_ENGLISH = [
     // note that "reject and subscribe" and "reject and pay" are excluded via BUTTON_NEVER_MATCH_PATTERNS
     /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies)?\s*(and\s+close)?\s*$/is,
 
-    // e.g. "i do not accept", "do not accept cookies"
-    /^\s*(i\s+)?do\s+not\s+accept\s*(cookies)?\s*$/is,
+    // e.g. "i do not accept", "do not accept cookies", "i do not accept the use of cookies"
+    /^\s*(no,?\s*)?(i\s+)?do\s+not\s+accept\s*(the\s+use\s+of\s+)?(any\s+)?(cookies)?\s*$/is,
 
     // e.g. "continue without accepting", "continue without agreeing", "continue without agreeing →"
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
