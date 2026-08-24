@@ -1,0 +1,10 @@
+{
+    "name": "gemini.google.com",
+    "urlPattern": "^https://gemini\\.google\\.com/",
+    "prehideSelectors": [".cookie-banner-dialog-pane"],
+    "detectCmp": [{ "exists": "[data-test-id=\"cookie-banner-body\"] [data-test-id=\"reject-button\"]" }],
+    "detectPopup": [{ "visible": "[data-test-id=\"cookie-banner-body\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-test-id=\"cookie-banner-body\"] [data-test-id=\"accept-button\"]" }],
+    "optOut": [{ "waitForThenClick": "[data-test-id=\"cookie-banner-body\"] [data-test-id=\"reject-button\"]" }],
+    "test": []
+}
