@@ -1,0 +1,77 @@
+{
+    "name": "adidas-glass",
+    "vendorUrl": "https://www.adidas.com",
+    "prehideSelectors": ["div[class*=\"cookie-consent-modal\"]"],
+    "detectCmp": [
+        {
+            "exists": "div[data-mf-id=\"cookie-consent-mf\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class*=\"cookie-consent-modal\"]"
+        },
+        {
+            "any": [
+                { "exists": "[data-auto-id^=\"glass-gdpr-default-consent\"]" },
+                { "exists": "[data-auto-id^=\"glass-gdpr-consent-options\"]" },
+                { "exists": "[data-auto-id^=\"glass-gdpr-gpc-notice\"]" }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-auto-id=\"glass-gdpr-default-consent-accept-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[data-auto-id=\"glass-gdpr-gpc-notice-dismiss-button\"]" },
+            "then": [
+                {
+                    "waitForThenClick": "[data-auto-id=\"glass-gdpr-gpc-notice-dismiss-button\"]"
+                }
+            ],
+            "else": [
+                {
+                    "if": { "exists": "[data-auto-id^=\"glass-gdpr-default-consent-reject-button\"]" },
+                    "then": [
+                        {
+                            "waitForThenClick": "[data-auto-id^=\"glass-gdpr-default-consent-reject-button\"]"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "[data-auto-id=\"glass-gdpr-default-consent-manage-button\"]"
+                        },
+                        {
+                            "waitFor": "[data-auto-id=\"glass-gdpr-consent-checkbox-group\"]"
+                        },
+                        {
+                            "if": {
+                                "exists": "[data-auto-id^=\"glass-gdpr-consent-checkbox-group__option-\"]:not([data-auto-id$=\"-0\"]) .gl-checkbox--checked"
+                            },
+                            "then": [
+                                {
+                                    "click": "[data-auto-id=\"glass-gdpr-consent-checkbox-group__option-0\"] > div"
+                                }
+                            ]
+                        },
+                        {
+                            "waitForThenClick": "[data-auto-id=\"glass-gdpr-consent-options-save-button\"]"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "waitForVisible": "div[class*=\"cookie-consent-modal\"]",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "notice_preferences="
+        }
+    ]
+}
