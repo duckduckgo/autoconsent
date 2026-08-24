@@ -1,7 +1,7 @@
 {
     "name": "twitch.tv",
     "runContext": {
-        "urlPattern": "^https?://([\\w-]+\\.)?twitch\\.tv"
+        "urlPattern": "^https?://([\\w-]+\\.)?twitch\\.tv/"
     },
     "prehideSelectors": ["[data-a-target=\"consent-banner\"],.ReactModalPortal:has([data-a-target=consent-modal-save])"],
     "detectCmp": [{ "exists": "[data-a-target=\"consent-banner\"]" }],
