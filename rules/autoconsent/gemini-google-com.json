@@ -3,7 +3,7 @@
     "prehideSelectors": ["[data-test-id=\"cookie-banner-body\"]"],
     "detectCmp": [
         {
-            "exists": "script#bard-initial-data[data-payload*=\"consent.google.com/save\"][data-payload*=\"gemini.google.com/app\"]"
+            "exists": "cookie-banner [data-test-id=\"cookie-banner-body\"] a[href^=\"https://policies.google.com/technologies/cookies\"]"
         },
         { "exists": "cookie-banner [data-test-id=\"cookie-banner-body\"] [data-test-id=\"reject-button\"]" }
     ],
