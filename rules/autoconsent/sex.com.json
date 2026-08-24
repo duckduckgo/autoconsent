@@ -1,0 +1,45 @@
+{
+    "name": "sex.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?sex\\.com/"
+    },
+    "prehideSelectors": ["[class*=\"cookie-consent-required\"]"],
+    "detectCmp": [
+        {
+            "comment": "the flag is cleared once consent is stored, so it prevents re-detecting the leftover markup",
+            "exists": "html[data-cookie-consent-required] [data-testid=\"accept-all-cookie-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"accept-all-cookie-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "comment": "the modal is server-rendered, buttons only respond once the dialog is hydrated and locks scrolling",
+            "waitFor": "body[data-scroll-locked]"
+        },
+        {
+            "waitForThenClick": "[data-testid=\"accept-all-cookie-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the modal is server-rendered, buttons only respond once the dialog is hydrated and locks scrolling",
+            "waitFor": "body[data-scroll-locked]"
+        },
+        {
+            "comment": "optional categories default to off, so confirming the defaults rejects them",
+            "waitForThenClick": "[data-testid=\"customize-cookie-button\"]"
+        },
+        {
+            "waitForThenClick": "[data-testid=\"confirm-settings-cookie-button\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3Afalse"
+        }
+    ]
+}
