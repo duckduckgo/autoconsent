@@ -7,7 +7,20 @@
     "optOut": [
         {
             "if": { "exists": ".iubenda-cs-reject-btn" },
-            "then": [{ "click": ".iubenda-cs-reject-btn" }],
+            "then": [
+                { "click": ".iubenda-cs-reject-btn" },
+                { "waitForVisible": ".iubenda-cs-counter", "timeout": 500, "optional": true },
+                {
+                    "if": { "visible": ".iubenda-cs-counter" },
+                    "then": [{ "click": ".iubenda-cs-reject-btn" }, { "wait": 300 }],
+                    "optional": true
+                },
+                {
+                    "if": { "visible": ".iubenda-cs-counter" },
+                    "then": [{ "click": ".iubenda-cs-reject-btn" }],
+                    "optional": true
+                }
+            ],
             "else": [
                 {
                     "waitForThenClick": ".iubenda-cs-customize-btn"

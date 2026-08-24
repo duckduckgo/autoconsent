@@ -7,3 +7,10 @@ generateCMPTests(
         skipRegions: ['AU'],
     },
 );
+
+// Uses the "press again to continue" reject counter, and reloads on consent, which tears
+// down the content script before the self test can run.
+generateCMPTests('iubenda', ['https://borromees.com/'], {
+    skipRegions: ['AU'],
+    testSelfTest: false,
+});
