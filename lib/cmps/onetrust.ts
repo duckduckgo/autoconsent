@@ -18,7 +18,9 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('#onetrust-banner-sdk') || this.elementVisible('#onetrust-pc-sdk', 'any');
+        // Some sites load the SDK with its container kept hidden, so no banner is ever shown.
+        // Detecting it then would block other rules from handling the popup that is shown.
+        return this.elementVisible('#onetrust-banner-sdk', 'any') || this.elementVisible('#onetrust-pc-sdk', 'any');
     }
 
     async detectPopup() {
