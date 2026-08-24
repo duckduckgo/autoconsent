@@ -1,3 +1,16 @@
+# v16.26.0 (Mon Aug 24 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on sqe.sra.org.uk [#1505](https://github.com/duckduckgo/autoconsent/pull/1505) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.25.0 (Sun Aug 23 2026)
 
 #### Rules
