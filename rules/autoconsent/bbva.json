@@ -1,0 +1,12 @@
+{
+    "name": "bbva",
+    "prehideSelectors": [".cookiesgdpr__base:has(.cookiesgdpr__rejectbtn)"],
+    "detectCmp": [{ "exists": ".cookiesgdpr__base .cookiesgdpr__rejectbtn" }],
+    "detectPopup": [{ "visible": ".cookiesgdpr__base .cookiesgdpr__rejectbtn" }],
+    "optIn": [{ "waitForThenClick": ".cookiesgdpr__base .cookiesgdpr__acceptbtn" }],
+    "optOut": [
+        { "waitForThenClick": ".cookiesgdpr__base .cookiesgdpr__rejectbtn" },
+        { "waitForVisible": ".cookiesgdpr__base .cookiesgdpr__wrapper", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "\"analitica\":false" }]
+}
