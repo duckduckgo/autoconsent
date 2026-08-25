@@ -1,3 +1,27 @@
+# v16.27.0 (Tue Aug 25 2026)
+
+#### Rules
+
+- Rule update: CPM feedback: justwatch.com [#1514](https://github.com/duckduckgo/autoconsent/pull/1514) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Rule fix for Site Breakage: paypal.com (2026-08-15) [#1506](https://github.com/duckduckgo/autoconsent/pull/1506) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kingrecords-co-jp [#1507](https://github.com/duckduckgo/autoconsent/pull/1507) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sex.com [#1508](https://github.com/duckduckgo/autoconsent/pull/1508) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (ase) CPM magic report: www.ecb.europa.eu [#1509](https://github.com/duckduckgo/autoconsent/pull/1509) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_android (eun) CPM magic report: www.thefoxandpheasant.com [#1510](https://github.com/duckduckgo/autoconsent/pull/1510) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #37: pornpics.com [#1511](https://github.com/duckduckgo/autoconsent/pull/1511) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on gemini.google.com [#1513](https://github.com/duckduckgo/autoconsent/pull/1513) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- massage xhamster rule [#1512](https://github.com/duckduckgo/autoconsent/pull/1512) ([@muodov](https://github.com/muodov))
+- Rule update: rule34-xxx [#1496](https://github.com/duckduckgo/autoconsent/pull/1496) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on twitch.tv [#1504](https://github.com/duckduckgo/autoconsent/pull/1504) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.26.0 (Mon Aug 24 2026)
 
 #### Rules
