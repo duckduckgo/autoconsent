@@ -180,12 +180,12 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.waitForVisible(selector, timeout, check);
     }
 
-    async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+    async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean, retries?: number, retryInterval?: number) {
         if (this.autoconsent.config.visualTest) {
             await this.highlightElements(this.elementSelector(selector), all);
         }
         this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
-        return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
+        return this.autoconsent.domActions.waitForThenClick(selector, timeout, all, retries, retryInterval);
     }
 
     wait(ms: number) {
@@ -336,7 +336,7 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             results.push(this.click(rule.click, rule.all));
         }
         if (rule.waitForThenClick) {
-            results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
+            results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all, rule.retry, rule.retryInterval));
         }
         if (rule.wait) {
             results.push(this.wait(rule.wait));

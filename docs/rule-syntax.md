@@ -103,10 +103,21 @@ Click on an element returned by `selector`. If `all` is `true`, all matching ele
 {
   "waitForThenClick": ElementSelector,
   "timeout": 1000,
-  "all": true | false
+  "all": true | false,
+  "retry": 0,
+  "retryInterval": 300
 }
 ```
 Combines `waitFor` and `click`.
+
+`retry` is the number of extra click attempts if the element is still visible after the click, `0` by
+default. It works around CMPs that insert a button before its click handler is attached.
+Between attempts the step waits up to `retryInterval` ms (300 by default) for the element to
+disappear, and stops retrying as soon as it does. Prefer this over an unconditional `wait` before the
+click: nothing is added to the step's duration when the first click works.
+
+**Only use `retry` on elements that are expected to go away** once the click is handled — a button that
+stays visible (e.g. a toggle) would be clicked repeatedly.
 
 ## Unconditional wait
 ```javascript

@@ -29,7 +29,13 @@ export interface DomActionsProvider {
     elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
     waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;
     waitForVisible(selector: ElementSelector, timeout?: number, check?: VisibilityCheck): Promise<boolean>;
-    waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean): Promise<boolean>;
+    waitForThenClick(
+        selector: ElementSelector,
+        timeout?: number,
+        all?: boolean,
+        retries?: number,
+        retryInterval?: number,
+    ): Promise<boolean>;
     wait(ms: number): Promise<true>;
     hide(selector: string, method: HideMethod): boolean;
     removeClass(selector: ElementSelector, className: string): boolean;
