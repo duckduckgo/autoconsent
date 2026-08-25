@@ -10,7 +10,7 @@ generateCMPTests(
         // "https://www.ab-in-den-urlaub.de/", // often blocked by botwall
         'https://www.vatera.hu/',
         'https://www.bax-shop.nl/',
-        // Dialogs whose only decline button is CybotCookiebotDialogBodyButtonDecline
+        // Dialogs whose only decline control is CybotCookiebotDialogBodyButtonDecline
         'https://www.drukwerkdeal.nl/',
         'https://www.freelance.de/',
         'https://www.printdeal.be/',
