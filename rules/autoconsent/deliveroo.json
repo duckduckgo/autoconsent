@@ -1,0 +1,15 @@
+{
+    "name": "deliveroo",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?deliveroo\\."
+    },
+    "prehideSelectors": ["div[role=\"dialog\"][class*=\"CustomCookieBanner\"]"],
+    "detectCmp": [{ "exists": "div[role=\"dialog\"][class*=\"CustomCookieBanner\"]" }],
+    "detectPopup": [{ "visible": "div[role=\"dialog\"][class*=\"CustomCookieBanner\"]" }],
+    "optIn": [{ "waitForThenClick": "#onetrust-consent-sdk #accept-recommended-btn-handler" }],
+    "optOut": [
+        { "waitForThenClick": "#onetrust-consent-sdk .ot-pc-refuse-all-handler" },
+        { "waitForVisible": "div[role=\"dialog\"][class*=\"CustomCookieBanner\"]", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "OptanonAlertBoxClosed" }]
+}
