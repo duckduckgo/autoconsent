@@ -21,11 +21,45 @@
     "optIn": [
         {
             "waitForThenClick": "#gdpr-banner-accept"
+        },
+        {
+            "waitForVisible": "#gdpr-banner",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "#gdpr-banner"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#gdpr-banner-accept",
+                    "timeout": 2000
+                }
+            ]
         }
     ],
     "optOut": [
         {
             "waitForThenClick": "#gdpr-banner-decline"
+        },
+        {
+            "waitForVisible": "#gdpr-banner",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "#gdpr-banner"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#gdpr-banner-decline",
+                    "timeout": 2000
+                }
+            ]
         }
     ]
 }
