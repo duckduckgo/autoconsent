@@ -1,0 +1,16 @@
+{
+    "name": "bloomberg-us",
+    "vendorUrl": "https://www.bloomberg.com/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?bloomberg\\.com/"
+    },
+    "prehideSelectors": ["div:has(> div > button#cmp-consent-button)"],
+    "detectCmp": [{ "exists": "button#cmp-consent-button" }],
+    "detectPopup": [{ "visible": "button#cmp-consent-button" }],
+    "optIn": [{ "click": "button#cmp-consent-button" }],
+    "optOut": [{ "hide": "div:has(> div > button#cmp-consent-button)" }],
+    "test": [{ "visible": "button#cmp-consent-button", "check": "none" }]
+}
