@@ -1,7 +1,7 @@
 {
     "name": "deliveroo",
     "runContext": {
-        "urlPattern": "^https?://(\\w+\\.)?deliveroo\\."
+        "urlPattern": "^https?://(\\w+\\.)?deliveroo\\.(co\\.uk|\\w+)/"
     },
     "prehideSelectors": ["div[role=\"dialog\"][class*=\"CustomCookieBanner\"]"],
     "detectCmp": [{ "exists": "div[role=\"dialog\"][class*=\"CustomCookieBanner\"]" }],
