@@ -109,7 +109,7 @@ shadow root or same-origin iframe.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
 - If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
-- Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`.
+- Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`; set `minimumRuleStepVersion: 3` if using `stylesheet`.
 - Prefer `cookieContains` in `test` when the CMP stores consent in cookies.
 - Use `npm run create-rule` to scaffold a new rule and a spec file.
 - Code comments: keep them brief (max one line), explain why not what, no references to specific sites in library code

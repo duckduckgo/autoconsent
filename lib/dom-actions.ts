@@ -1,6 +1,6 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from './rules';
 import { DomActionsProvider } from './types';
-import { getStyleElement, hideElements, isElementVisible, waitFor } from './utils';
+import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor } from './utils';
 import AutoConsent from './web';
 
 export class DomActions implements DomActionsProvider {
@@ -89,6 +89,12 @@ export class DomActions implements DomActionsProvider {
         this.autoconsentInstance.config.logs.rulesteps && console.log('[hide]', selector);
         const styleEl = getStyleElement();
         return hideElements(styleEl, selector, method);
+    }
+
+    stylesheet(cssRule: string, stylesheetId?: string): boolean {
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[stylesheet]', cssRule, stylesheetId);
+        const styleEl = getStyleElement();
+        return appendStylesheetRule(styleEl, cssRule, stylesheetId);
     }
 
     removeClass(selector: ElementSelector, className: string): boolean {
