@@ -1,0 +1,13 @@
+{
+    "name": "amazon-pay",
+    "vendorUrl": "https://pay.amazon.com/",
+    "runContext": {
+        "urlPattern": "^https?://pay\\.amazon\\."
+    },
+    "prehideSelectors": [".cookie-menu.js-cookie-banner"],
+    "detectCmp": [{ "exists": ".cookie-menu.js-cookie-banner .js-cookie-banner-close" }],
+    "detectPopup": [{ "visible": ".cookie-menu.js-cookie-banner" }],
+    "optIn": [{ "click": ".cookie-menu.js-cookie-banner .js-cookie-banner-close" }],
+    "optOut": [{ "click": ".cookie-menu.js-cookie-banner .js-cookie-banner-close" }],
+    "test": [{ "cookieContains": "apaycnst-mktg=true" }]
+}
