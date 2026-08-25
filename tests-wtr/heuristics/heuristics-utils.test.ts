@@ -226,12 +226,13 @@ describe('classifyButtons', () => {
         const buttons: ButtonData[] = [
             { text: 'OK', element: document.createElement('button') },
             { text: 'I understand', element: document.createElement('button') },
+            { text: 'I agree, dismiss this banner', element: document.createElement('button') },
         ];
 
         classifyButtons(buttons);
 
         expect(rejectButtons(buttons)).to.have.length(0);
-        expect(buttons).to.have.length(2);
+        expect(buttons).to.have.length(3);
         expect(buttons.every((b) => b.regexClassification === 'acknowledge')).to.be.true;
     });
 
