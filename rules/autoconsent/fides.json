@@ -38,7 +38,7 @@
                     "click": "#fides-banner .fides-manage-preferences-button"
                 },
                 {
-                    "waitForThenClick": ".fides-reject-all-button"
+                    "waitForThenClick": "#fides-modal .fides-reject-all-button:not([disabled])"
                 }
             ]
         }
