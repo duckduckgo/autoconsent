@@ -1,0 +1,33 @@
+{
+    "name": "bibliotheek-nl",
+    "_metadata": {
+        "vendorUrl": "https://www.bibliotheek.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(?:www\\.)?(?:onlinebibliotheek|bibliotheek)\\.nl/"
+    },
+    "prehideSelectors": [".modalwindow-container.bar .modalwindow"],
+    "detectCmp": [
+        {
+            "exists": "#bibliotheek-nl-page"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".modalwindow-container.bar .modalwindow"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".modalwindow-container.bar .modalwindow button.button.primary.ok"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".modalwindow-container.bar .modalwindow button.button.primary.notok"
+        }
+    ]
+}
