@@ -1,3 +1,22 @@
+# v16.29.0 (Wed Aug 26 2026)
+
+#### Rules
+
+- Rule update: ecbeing [#1521](https://github.com/duckduckgo/autoconsent/pull/1521) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stright [#1522](https://github.com/duckduckgo/autoconsent/pull/1522) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Add optional retry in waitForThenClick [#1519](https://github.com/duckduckgo/autoconsent/pull/1519) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.28.0 (Wed Aug 26 2026)
 
 #### Rules
