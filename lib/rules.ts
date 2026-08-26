@@ -99,6 +99,16 @@ export type WaitForThenClickRule = {
     waitForThenClick: ElementSelector;
     timeout?: number;
     all?: boolean;
+    /**
+     * Number of additional click attempts if the element is still visible after the first click.
+     * Defaults to 0 (no retries). Only use this on elements that are expected to disappear once the
+     * click is handled, otherwise the extra clicks are wasted (or harmful).
+     */
+    retry?: number;
+    /**
+     * How long to wait (in ms) for the element to disappear before clicking it again.
+     */
+    retryInterval?: number;
 };
 
 export type WaitRule = {
