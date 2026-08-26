@@ -15,14 +15,26 @@
     "optIn": [
         {
             "if": { "visible": ".disclaimer-opened #disclaimer-cookies" },
-            "then": [{ "waitForThenClick": "#disclaimer-accept_cookies" }],
+            "then": [
+                {
+                    "if": { "exists": "#disclaimer-accept_cookies" },
+                    "then": [{ "waitForThenClick": "#disclaimer-accept_cookies" }],
+                    "else": [{ "waitForThenClick": "#disclaimer_message .disclaimer-enter-btn" }]
+                }
+            ],
             "else": [{ "click": "#cookies-use-alert .close" }]
         }
     ],
     "optOut": [
         {
             "if": { "visible": ".disclaimer-opened #disclaimer-cookies" },
-            "then": [{ "waitForThenClick": "#disclaimer-reject_cookies" }],
+            "then": [
+                {
+                    "if": { "exists": "#disclaimer-reject_cookies" },
+                    "then": [{ "waitForThenClick": "#disclaimer-reject_cookies" }],
+                    "else": [{ "waitForThenClick": "#disclaimer_message .disclaimer-enter-btn" }]
+                }
+            ],
             "else": [{ "hide": "#cookies-use-alert" }]
         }
     ]
