@@ -1,0 +1,37 @@
+{
+    "name": "r42-cookiebar",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#r42CookieBar"],
+    "detectCmp": [
+        {
+            "exists": "#r42CookieBar .cw-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#r42CookieBar[open] .cw-deny"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#r42CookieBar .cw-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#r42CookieBar .cw-deny",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#r42CookieBar .cw-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
