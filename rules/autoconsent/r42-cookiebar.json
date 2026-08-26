@@ -3,8 +3,7 @@
     "cosmetic": false,
     "runContext": {
         "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(www\\.)?(zilverenkruis|centraalbeheer|fbto|averoachmea)\\.nl/"
+        "frame": false
     },
     "prehideSelectors": ["#r42CookieBar"],
     "detectCmp": [
