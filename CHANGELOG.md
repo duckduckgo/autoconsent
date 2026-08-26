@@ -1,3 +1,24 @@
+# v16.28.0 (Wed Aug 26 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on alexjoneslive.com [#1517](https://github.com/duckduckgo/autoconsent/pull/1517) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: popup on deliveroo.co.uk [#1520](https://github.com/duckduckgo/autoconsent/pull/1520) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bbva [#1515](https://github.com/duckduckgo/autoconsent/pull/1515) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie Popup on pay.amazon.co.jp [#1518](https://github.com/duckduckgo/autoconsent/pull/1518) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup shown on ebay.com [#1516](https://github.com/duckduckgo/autoconsent/pull/1516) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Fix Guardian scroll lock after back navigation [#1464](https://github.com/duckduckgo/autoconsent/pull/1464) ([@cursoragent](https://github.com/cursoragent) [@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- Claude ([@claude](https://github.com/claude))
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.27.0 (Tue Aug 25 2026)
 
 #### Rules
