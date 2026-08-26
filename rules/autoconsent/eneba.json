@@ -1,0 +1,65 @@
+{
+    "name": "eneba",
+    "vendorUrl": "https://www.eneba.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?eneba\\.com/"
+    },
+    "prehideSelectors": ["#app > div:has(p > a[href^=\"https://business.safety.google/privacy\"])"],
+    "detectCmp": [
+        {
+            "exists": "#app > div:has(p > a[href^=\"https://business.safety.google/privacy\"])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#app > div:has(p > a[href^=\"https://business.safety.google/privacy\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#app > div:has(p > a[href^=\"https://business.safety.google/privacy\"]) button:first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#app > div:has(p > a[href^=\"https://business.safety.google/privacy\"]) button:last-child"
+        },
+        {
+            "waitForVisible": "form:has(input#STATISTIC) button[type=\"submit\"]",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "comment": "the banner may be clicked before React attaches its handlers, so retry opening the preferences modal",
+            "if": {
+                "visible": "form:has(input#STATISTIC) button[type=\"submit\"]"
+            },
+            "then": [
+                {
+                    "wait": 1
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#app > div:has(p > a[href^=\"https://business.safety.google/privacy\"]) button:last-child"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "form:has(input#STATISTIC) button[type=\"submit\"]"
+        },
+        {
+            "click": "form:has(input#STATISTIC) input[type=\"checkbox\"]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "form:has(input#STATISTIC) button[type=\"submit\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cconsent=1000"
+        }
+    ]
+}
