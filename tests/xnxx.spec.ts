@@ -1,6 +1,7 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('xnxx-com', ['https://www.xnxx.com/', 'https://www.pornorama.com/'], {
+// the disclaimer is only shown without a preceding age gate in the UK
+generateCMPTests('xnxx-com', ['https://www.xnxx.com/'], {
     onlyRegions: ['GB'],
 });
 
