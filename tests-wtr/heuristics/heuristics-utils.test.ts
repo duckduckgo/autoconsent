@@ -4,6 +4,7 @@ import {
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
+    getActionablePopups,
     isDisabled,
     excludeContainers,
     getButtonData,
@@ -59,6 +60,15 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets.length).to.be.greaterThan(0);
         expect(snippets.every((s) => typeof s === 'string')).to.be.true;
+    });
+
+    it('detects website cookie experience notices', () => {
+        const { patterns, snippets } = checkHeuristicPatterns(
+            'The Algonquin College website uses cookies to enhance your browsing experience.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
 });
 
@@ -153,6 +163,16 @@ describe('classifyButtonTextRegex', () => {
 
     it('supports exact string patterns', () => {
         expect(classifyButtonTextRegex('no')).to.equal('reject');
+    });
+
+    it('classifies essential-only buttons as reject choices', () => {
+        expect(classifyButtonTextRegex('Essential Only')).to.equal('reject');
+        expect(classifyButtonTextRegex('Only use essential cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Only accept necessary cookies')).to.equal('reject');
+    });
+
+    it('does not classify bare essential category labels as reject choices', () => {
+        expect(classifyButtonTextRegex('Essential')).to.equal('other');
     });
 
     it('does not match partial exact string patterns', () => {
@@ -365,6 +385,34 @@ describe('excludeContainers', () => {
 
         expect(result).to.have.length(1);
         expect(result[0]).to.equal(inner);
+    });
+});
+
+describe('getActionablePopups', () => {
+    let container: HTMLDivElement;
+
+    beforeEach(() => {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+    });
+
+    afterEach(() => {
+        container.remove();
+    });
+
+    it('keeps text-bearing popups that contain decorative sticky children', () => {
+        container.innerHTML = `
+            <div style="position: fixed; display: block;">
+                <p>This website uses cookies to enhance your browsing experience.</p>
+                <div style="position: sticky;"></div>
+                <button>Essential Only</button>
+            </div>
+        `;
+
+        const popups = getActionablePopups('tier2');
+
+        expect(popups).to.have.length(1);
+        expect(popups[0].regexClassification).to.equal('reject');
     });
 });
 

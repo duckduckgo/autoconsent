@@ -10,6 +10,7 @@ export const DETECT_PATTERNS = [
     /we (?:use|serve)(?: optional)? cookies/gi,
     /we are using cookies/gi,
     /use of cookies/gi,
+    /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
     /cookies (?:and|or) .{0,100} technologies/gi,
     /such as cookies/gi,
@@ -171,8 +172,9 @@ const REJECT_PATTERNS_ENGLISH = [
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
     // "allow necessary cookies continue", "use essential cookies only", "functional only", "i confirm necessary"
-    // note that a necessary/essential/functional word is required
-    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)?\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(only\s+)?(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s+only\s*$/is,
 
     // e.g. "do not sell or share my personal information", "opt out of sale ..." (CCPA)
     /do\s+not\s+sell|opt\s+out\s+of\s+sale/is,
