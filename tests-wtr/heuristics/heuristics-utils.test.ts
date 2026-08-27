@@ -207,6 +207,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Подробные настройки')).to.equal('settings');
     });
 
+    it('does not treat Russian policy links as settings buttons', () => {
+        expect(classifyButtonTextRegex('Подробнее')).to.equal('other');
+        expect(classifyButtonTextRegex('Подробнее о cookie')).to.equal('other');
+        expect(classifyButtonTextRegex('Подробнее о файлах cookie')).to.equal('other');
+        expect(classifyButtonTextRegex('Политика конфиденциальности')).to.equal('other');
+    });
+
     it('matches Russian acknowledge buttons', () => {
         expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');
