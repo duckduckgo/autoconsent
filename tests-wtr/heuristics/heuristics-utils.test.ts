@@ -72,6 +72,31 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Russian popups', () => {
+    it('detects Russian cookie notices', () => {
+        const texts = [
+            'Мы используем файлы cookie для улучшения работы сайта. Правила сайта используют технологии cookie.',
+            'Этот сайт использует cookie, чтобы вам было удобнее',
+            'Продолжая работу с сайтом, вы соглашаетесь с использованием файлов cookie',
+            'Мы используем куки, чтобы сайт работал лучше',
+            'Этот сайт использует куки-файлы',
+            'Сайт использует технологии куки. Продолжая, вы принимаете обработку файлов куки',
+            'Мы применяем файлы cookie, чтобы предложить вам лучший сервис',
+            'Сайт собирает cookie для аналитики',
+            'Сохраняем куки на вашем устройстве',
+            'На сайте установлены cookie-файлы',
+            'Оставаясь на сайте, вы соглашаетесь с политикой в отношении файлов cookie',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Russian text', () => {
+        expect(checkHeuristicPatterns('Дешевые авиабилеты онлайн и бронирование отелей').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -177,6 +202,68 @@ describe('classifyButtonTextRegex', () => {
 
     it('does not match partial exact string patterns', () => {
         expect(classifyButtonTextRegex('no problem')).to.equal('other');
+    });
+
+    it('matches Russian reject buttons', () => {
+        expect(classifyButtonTextRegex('Отклонить всё')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отклонить все файлы cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отказаться')).to.equal('reject');
+        expect(classifyButtonTextRegex('Только необходимые')).to.equal('reject');
+        expect(classifyButtonTextRegex('Принимать только необходимые файлы cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Только необходимые куки')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отклонить куки')).to.equal('reject');
+        expect(classifyButtonTextRegex('Не принимаю')).to.equal('reject');
+    });
+
+    it('matches Russian settings buttons', () => {
+        expect(classifyButtonTextRegex('Настроить')).to.equal('settings');
+        expect(classifyButtonTextRegex('Настройки')).to.equal('settings');
+        expect(classifyButtonTextRegex('Настроить файлы cookie')).to.equal('settings');
+        expect(classifyButtonTextRegex('Настройки куки')).to.equal('settings');
+        expect(classifyButtonTextRegex('Параметры конфиденциальности')).to.equal('settings');
+        expect(classifyButtonTextRegex('Мои предпочтения')).to.equal('settings');
+        expect(classifyButtonTextRegex('Управление файлами cookie')).to.equal('settings');
+        expect(classifyButtonTextRegex('Изменить настройки')).to.equal('settings');
+        expect(classifyButtonTextRegex('Подробные настройки')).to.equal('settings');
+    });
+
+    it('does not treat Russian policy links as settings buttons', () => {
+        expect(classifyButtonTextRegex('Подробнее')).to.equal('other');
+        expect(classifyButtonTextRegex('Подробнее о cookie')).to.equal('other');
+        expect(classifyButtonTextRegex('Подробнее о файлах cookie')).to.equal('other');
+        expect(classifyButtonTextRegex('Политика конфиденциальности')).to.equal('other');
+    });
+
+    it('matches Russian acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Хорошо')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Закрыть')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Закрыть уведомление о cookie')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Больше не показывать')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
+    });
+
+    it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
+        expect(classifyButtonTextRegex('Подтвердить')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Подтверждаю')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Подтверждаю выбор')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Подтвердить мой выбор')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Сохранить настройки')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Сохранить выбор')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
+    });
+
+    it('does not treat Russian subscription buttons as reject', () => {
+        expect(classifyButtonTextRegex('Отказаться от подписки')).to.equal('other');
+    });
+
+    it('matches Russian accept buttons', () => {
+        expect(classifyButtonTextRegex('Принять всё')).to.equal('accept');
+        expect(classifyButtonTextRegex('Принять все файлы cookie')).to.equal('accept');
+        expect(classifyButtonTextRegex('Разрешить куки')).to.equal('accept');
+        expect(classifyButtonTextRegex('Принять куки-файлы')).to.equal('accept');
+        expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
     });
 
     it('does not treat revoke links as reject buttons', () => {
