@@ -151,7 +151,12 @@ export const DETECT_PATTERNS = [
     /este portal emprega cookies propias ou de terceiros con fins analíticos/gi,
 
     // Russian (RU)
-    /мы используем файлы cookie и аналогичные технологии/gi,
+    // e.g. "мы используем файлы cookie", "сайт использует cookie", "используются технологии cookie"
+    // note: \w does not match Cyrillic, so these use explicit character ranges
+    /использу[а-яё]*.{0,40}(?:файл[а-яё]*\s+)?cookie/gi,
+    /cookie.{0,40}использу[а-яё]*/gi,
+    /(?:использовани[а-яё]*|обработк[а-яё]*|хранени[а-яё]*).{0,20}(?:файлов\s+)?cookie/gi,
+    /технологи[а-яё]*\s+cookie/gi,
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
@@ -364,7 +369,16 @@ const REJECT_PATTERNS_POLISH = [
     /^funkcjonalne pliki cookie \(wymagane\)$/,
 ];
 
-const REJECT_PATTERNS_RUSSIAN = ['принимать только необходимые файлы cookie'];
+const REJECT_PATTERNS_RUSSIAN = [
+    // отклонить / отказаться / запретить (reject verbs); \w does not match Cyrillic
+    /(^|\s)(отклон[а-яё]*|отказ[а-яё]*|откаж[а-яё]*|запрет[а-яё]*|запрещ[а-яё]*)/is,
+
+    // "только необходимые (файлы cookie)" / "принять только необходимые"
+    /^\s*(принять\s+|принима[а-яё]+\s+|разрешить\s+|использовать\s+|оставить\s+)?(только|лишь)\s+(строго\s+)?(необходим[а-яё]+|нужн[а-яё]+|обязательн[а-яё]+|техническ[а-яё]+|функциональн[а-яё]+)(\s+файл[а-яё]*)?(\s+cookie)?\s*$/is,
+
+    // refusals: "не принимаю", "не согласен", "не соглашаюсь", "нет, спасибо"
+    /^\s*(не\s+(принима[а-яё]+|соглас[а-яё]+|разреша[а-яё]+|хочу)|нет(,?\s+спасибо)?)\s*$/is,
+];
 
 const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
@@ -415,6 +429,9 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
 
     // Polish (PL)
     /subskrybuj/,
+
+    // Russian (RU): paywall/subscription wording, e.g. "отказаться от подписки", "оплатить"
+    /подписатьс|подписк|оплатит|оплачива/is,
 ];
 
 // Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
@@ -748,6 +765,8 @@ export const ACCEPT_PATTERNS = [
     'zgoda na wybrane',
 
     // Russian (RU)
+    // e.g. "принять всё", "принять все файлы cookie", "я согласен", "разрешить все"
+    /^\s*(да,?\s+)?(я\s+)?(принять|принима[а-яё]+|соглас[а-яё]+|разрешить|разреша[а-яё]+|подтверждаю)(\s+(вс[её]|все файлы cookie|все cookie|cookie|выбранные|выбор))?\s*$/is,
     'принять все файлы cookie',
     'принять',
 
