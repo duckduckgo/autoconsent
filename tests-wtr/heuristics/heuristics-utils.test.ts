@@ -68,6 +68,9 @@ describe('checkHeuristicPatterns with Russian popups', () => {
             'Мы используем файлы cookie для улучшения работы сайта. Правила сайта используют технологии cookie.',
             'Этот сайт использует cookie, чтобы вам было удобнее',
             'Продолжая работу с сайтом, вы соглашаетесь с использованием файлов cookie',
+            'Мы используем куки, чтобы сайт работал лучше',
+            'Этот сайт использует куки-файлы',
+            'Сайт использует технологии куки. Продолжая, вы принимаете обработку файлов куки',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -182,6 +185,8 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Отказаться')).to.equal('reject');
         expect(classifyButtonTextRegex('Только необходимые')).to.equal('reject');
         expect(classifyButtonTextRegex('Принимать только необходимые файлы cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Только необходимые куки')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отклонить куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Не принимаю')).to.equal('reject');
     });
 
@@ -192,6 +197,8 @@ describe('classifyButtonTextRegex', () => {
     it('matches Russian accept buttons', () => {
         expect(classifyButtonTextRegex('Принять всё')).to.equal('accept');
         expect(classifyButtonTextRegex('Принять все файлы cookie')).to.equal('accept');
+        expect(classifyButtonTextRegex('Разрешить куки')).to.equal('accept');
+        expect(classifyButtonTextRegex('Принять куки-файлы')).to.equal('accept');
         expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
     });
 

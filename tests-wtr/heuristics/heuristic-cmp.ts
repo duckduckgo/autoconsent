@@ -40,6 +40,18 @@ describe('AutoConsentHeuristicCMP', () => {
             expect(cmp.name).to.equal('HEURISTIC-REJECT');
         });
 
+        it('detects a Russian popup using the Cyrillic word for cookies', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
+            showPopup('popup-reject-russian-cookie-word');
+
+            const detected = await cmp.detectCmp();
+
+            expect(detected).to.be.true;
+            expect(cmp.name).to.equal('HEURISTIC-REJECT');
+            expect(cmp.getTargetButton()?.text).to.equal('Отклонить всё');
+        });
+
         it('detects acknowledge-only popup as HEURISTIC-TIER1', async () => {
             const autoconsent = createAutoconsent('tier2');
             const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
