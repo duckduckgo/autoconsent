@@ -52,6 +52,28 @@ describe('AutoConsentHeuristicCMP', () => {
             expect(cmp.getTargetButton()?.text).to.equal('Отклонить всё');
         });
 
+        it('detects a Russian acknowledge-only popup as HEURISTIC-TIER1', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
+            showPopup('popup-acknowledge-only-russian');
+
+            const detected = await cmp.detectCmp();
+
+            expect(detected).to.be.true;
+            expect(cmp.name).to.equal('HEURISTIC-TIER1');
+            expect(cmp.getTargetButton()?.text).to.equal('Понятно');
+        });
+
+        it('does not detect a Russian popup with accept and settings buttons', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
+            showPopup('popup-accept-settings-russian');
+
+            const detected = await cmp.detectCmp();
+
+            expect(detected).to.be.false;
+        });
+
         it('detects acknowledge-only popup as HEURISTIC-TIER1', async () => {
             const autoconsent = createAutoconsent('tier2');
             const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
