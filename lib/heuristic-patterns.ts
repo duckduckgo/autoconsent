@@ -172,7 +172,7 @@ const REJECT_PATTERNS_ENGLISH = [
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
     // "allow necessary cookies continue", "use essential cookies only", "functional only", "i confirm necessary"
-    /^\s*(i\s+)?(want\s+to\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s+only\s*$/is,
 
