@@ -31,8 +31,7 @@
             "retryInterval": 500
         },
         {
-            "waitForThenClick": "xpath///button[contains(., 'Save settings') or contains(., 'Enregistrer les paramètres')]",
-            "optional": true
+            "waitForThenClick": "xpath///button[contains(., 'Save settings') or contains(., 'Enregistrer les paramètres')]"
         },
         {
             "waitForVisible": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]",
