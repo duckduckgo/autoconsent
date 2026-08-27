@@ -32,7 +32,9 @@
         },
         {
             "waitForThenClick": "xpath///button[contains(., 'Save settings') or contains(., 'Enregistrer les paramètres')]"
-        },
+        }
+    ],
+    "test": [
         {
             "waitForVisible": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]",
             "check": "none",
