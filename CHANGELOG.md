@@ -1,3 +1,18 @@
+# v16.30.0 (Thu Aug 27 2026)
+
+#### Rules
+
+- Rule update: bankmillennium.pl [#1497](https://github.com/duckduckgo/autoconsent/pull/1497) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bibliotheek-nl [#1498](https://github.com/duckduckgo/autoconsent/pull/1498) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: r42-cookiebar [#1499](https://github.com/duckduckgo/autoconsent/pull/1499) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.29.0 (Wed Aug 26 2026)
 
 #### Rules
