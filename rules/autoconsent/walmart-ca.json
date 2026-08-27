@@ -26,10 +26,9 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "button[data-dca-intent=\"open\"][role=\"link\"]"
-        },
-        {
-            "wait": 2000
+            "waitForThenClick": "button[data-dca-intent=\"open\"][role=\"link\"]",
+            "retry": 5,
+            "retryInterval": 500
         },
         {
             "waitForThenClick": "xpath///button[contains(., 'Save settings') or contains(., 'Enregistrer les paramètres')]",
