@@ -18,7 +18,7 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": "xpath///button[contains(., 'Manage cookie settings')]"
+            "waitForThenClick": "button[data-dca-intent=\"open\"][role=\"link\"]"
         },
         {
             "waitForThenClick": "button[aria-label=\"acceptAll button\"]"
@@ -26,13 +26,19 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///button[contains(., 'Manage cookie settings')]"
+            "waitForThenClick": "button[data-dca-intent=\"open\"][role=\"link\"]"
         },
         {
             "wait": 2000
         },
         {
-            "waitForThenClick": "button[aria-label=\"Save settings button\"]"
+            "waitForThenClick": "xpath///button[contains(., 'Save settings') or contains(., 'Enregistrer les paramètres')]",
+            "optional": true
+        },
+        {
+            "waitForVisible": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]",
+            "check": "none",
+            "timeout": 5000
         }
     ]
 }
