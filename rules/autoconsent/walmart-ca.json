@@ -1,14 +1,14 @@
 {
     "name": "walmart-ca",
     "vendorUrl": "https://www.walmart.ca/",
-    "cosmetic": true,
+    "cosmetic": false,
     "runContext": {
         "urlPattern": "^https?://(www\\.)?walmart\\.ca/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "#third-party-cookie-detection"
+            "exists": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]"
         }
     ],
     "detectPopup": [
@@ -18,12 +18,21 @@
     ],
     "optIn": [
         {
-            "hide": "section[role=\"banner\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"]), div[role=\"dialog\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"])"
+            "waitForThenClick": "xpath///button[contains(., 'Manage cookie settings')]"
+        },
+        {
+            "waitForThenClick": "button[aria-label=\"acceptAll button\"]"
         }
     ],
     "optOut": [
         {
-            "hide": "section[role=\"banner\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"]), div[role=\"dialog\"]:has(a[href=\"https://www.walmartcanada.ca/cookie-notice\"])"
+            "waitForThenClick": "xpath///button[contains(., 'Manage cookie settings')]"
+        },
+        {
+            "wait": 2000
+        },
+        {
+            "waitForThenClick": "button[aria-label=\"Save settings button\"]"
         }
     ]
 }
