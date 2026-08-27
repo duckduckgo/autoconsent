@@ -49,6 +49,14 @@ describe('checkHeuristicPatterns', () => {
         expect(snippets).to.have.length(0);
     });
 
+    it('detects analytics-only consent banners that never mention cookies', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'Help us improve Mundo with analytics? See Privacy. Decline analytics Accept analytics',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
     it('handles non-global regex with optional capture groups without throwing', () => {
         // Regex from heuristic-patterns.ts (Polish) that has optional capture groups and
         // no `g` flag. `String.prototype.match` returns `undefined` entries for optional
