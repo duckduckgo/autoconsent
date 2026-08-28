@@ -1,3 +1,29 @@
+# v16.31.0 (Fri Aug 28 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Update asana-sync.yml ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Rules
+
+- Add some Russian heuristic patterns [#1526](https://github.com/duckduckgo/autoconsent/pull/1526) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #28: walmart.ca [#1524](https://github.com/duckduckgo/autoconsent/pull/1524) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xnxx.com (manual entry) [#1525](https://github.com/duckduckgo/autoconsent/pull/1525) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: auto_CA_algonquincollege.com_o8v [#1495](https://github.com/duckduckgo/autoconsent/pull/1495) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: regression on www.wohnen.de [#1523](https://github.com/duckduckgo/autoconsent/pull/1523) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Internal
+
+- Fix heuristic popup candidate pruning [#1475](https://github.com/duckduckgo/autoconsent/pull/1475) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.30.0 (Thu Aug 27 2026)
 
 #### Rules
