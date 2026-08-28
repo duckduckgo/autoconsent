@@ -1,0 +1,34 @@
+{
+    "name": "doordash-storefront",
+    "vendorUrl": "https://www.doordash.com/",
+    "prehideSelectors": ["[data-testid=\"cookie-banner\"][class*=\"cookie-banner-styles__StyledCookieBanner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookie-banner\"][class*=\"cookie-banner-styles__StyledCookieBanner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-banner\"][class*=\"cookie-banner-styles__StyledCookieBanner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-banner\"] button[kind=\"BUTTON/TERTIARY\"]",
+            "retry": 15,
+            "retryInterval": 300
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-banner\"] button[kind=\"BUTTON/FLAT_SECONDARY\"]",
+            "retry": 15,
+            "retryInterval": 300
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_tracking_enabled"
+        }
+    ]
+}
