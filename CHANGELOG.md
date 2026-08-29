@@ -1,3 +1,16 @@
+# v16.32.0 (Sat Aug 29 2026)
+
+#### Rules
+
+- Rule update: doordash-storefront [#1527](https://github.com/duckduckgo/autoconsent/pull/1527) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.31.0 (Fri Aug 28 2026)
 
 #### ⚠️ Pushed to `main`
