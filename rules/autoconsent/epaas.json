@@ -1,0 +1,19 @@
+{
+    "name": "epaas",
+    "prehideSelectors": ["epaas-consent-drawer-shell"],
+    "detectCmp": [{ "exists": "epaas-consent-drawer-shell" }],
+    "detectPopup": [{ "visible": ["epaas-consent-drawer-shell", "section.consentDrawer"] }],
+    "optIn": [{ "waitForThenClick": ["epaas-consent-drawer-shell", "button.accept-button"] }],
+    "optOut": [
+        {
+            "if": { "exists": ["epaas-consent-drawer-shell", "button.reject-button"] },
+            "then": [{ "waitForThenClick": ["epaas-consent-drawer-shell", "button.reject-button"] }],
+            "else": [
+                { "waitForThenClick": ["epaas-consent-drawer-shell", "button.personalize-button"] },
+                { "waitFor": ["epaas-consent-drawer-shell", "epaas-policy-page-shell"] },
+                { "waitForThenClick": ["epaas-consent-drawer-shell", "button.save-button"] }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%22advertising%22%3A0" }]
+}
