@@ -5,7 +5,7 @@
     "detectPopup": [{ "visible": "#cookie-law-info-bar" }],
     "optIn": [
         {
-            "click": "[data-cli_action=\"accept\"]"
+            "any": [{ "click": "[data-cli_action=\"accept\"]" }, { "click": "#cookie_action_close_header" }]
         }
     ],
     "optOut": [

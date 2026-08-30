@@ -112,12 +112,14 @@ export const snippets = {
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
     EVAL_COOKIE_LAW_INFO_0: () => {
-        if (CLI.disableAllCookies) CLI.disableAllCookies();
-        if (CLI.reject_close) CLI.reject_close();
+        // Legacy versions of the plugin have no CLI object, so hiding the bar is the only available opt-out.
+        if (window.CLI?.disableAllCookies) window.CLI.disableAllCookies();
+        if (window.CLI?.reject_close) window.CLI.reject_close();
         document.body.classList.remove('cli-barmodal-open');
         return true;
     },
-    EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
+    // `cli_show_cookiebar` is the entry point of legacy versions, which do not define CLI.
+    EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI || typeof window.cli_show_cookiebar === 'function',
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
             document.cookie
