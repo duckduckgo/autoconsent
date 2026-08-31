@@ -1,0 +1,12 @@
+{
+    "name": "cads-cookie-banner",
+    "prehideSelectors": [".js-cookie-banner"],
+    "detectCmp": [{ "visible": ".js-cookie-banner #js-cookie-banner__button-reject" }],
+    "detectPopup": [{ "visible": ".js-cookie-banner__selection-container" }],
+    "optIn": [{ "waitForThenClick": ".js-cookie-banner #js-cookie-banner__button-accept" }],
+    "optOut": [
+        { "waitForThenClick": ".js-cookie-banner #js-cookie-banner__button-reject" },
+        { "waitForThenClick": ".js-cookie-banner #js-cookie-banner__button-hide", "optional": true }
+    ],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse" }]
+}
