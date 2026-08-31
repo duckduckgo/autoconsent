@@ -1,0 +1,77 @@
+{
+    "name": "cookiesdirective",
+    "_metadata": {
+        "vendorUrl": "https://mobirise.com/"
+    },
+    "comment": "Mobirise cookies-alert plugin, based on the cookiesDirective library. Only the implied-consent and reject-button variants are covered; the blocking accept-only variant offers no opt-out. Click handlers are attached after a slide-in animation, hence the retries.",
+    "prehideSelectors": ["#cookiesdirective"],
+    "detectCmp": [
+        {
+            "exists": "#cookiesdirective"
+        },
+        {
+            "any": [
+                {
+                    "exists": "#explicitreject"
+                },
+                {
+                    "exists": "#impliedsubmit"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiesdirective"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#explicitsubmit"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#explicitsubmit",
+                    "retry": 6,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#impliedsubmit",
+                    "retry": 6,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#explicitreject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#explicitreject",
+                    "retry": 6,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#impliedsubmit",
+                    "retry": 6,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookiesdirective",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}
