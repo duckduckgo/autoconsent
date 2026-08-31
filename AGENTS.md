@@ -113,7 +113,7 @@ shadow root or same-origin iframe.
 - **Paywalls do not need to be handled, and should not be mitigated.** If the site presents a choice to pay or agree to cookies, do not write a rule, do not click through, and do not add a site exception (unless autoconsent is causing breakage).
 - **Never click TIER2 buttons in the `optOut` rule.** TIER2 is the heuristic classification for a popup whose only actionable button is a single Accept (`classifyPopup` in `lib/heuristics.ts`). Clicking that button from a JSON rule is an opt-in disguised as a fix. If the popup has no reject, dismiss, or acknowledge control, do not "handle" it by accepting.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
-- Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead. In most cases, a simple "^https?://(\w+\.)?domain\.com/" is sufficient.
+- Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead. In most cases, a simple "^https?://(\w+\.)?domain\.com/" is sufficient. Always end the pattern at the hostname boundary with a trailing `/`.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
 - If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
