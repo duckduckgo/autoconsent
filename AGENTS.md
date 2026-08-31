@@ -47,6 +47,12 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 
 ## Working with autoconsent rules
 
+### Scope: what autoconsent handles
+
+Only cookie/consent/privacy/GDPR/tracking-consent dialogs are in scope. Age-verification gates (e.g. "I am 18+" / "Enter" adult-content confirmations), login walls, paywalls, newsletter and app-install prompts, and other non-consent overlays are **out of scope**. Do not write a rule or a site exception that dismisses them, and do not treat clicking through such a gate as the fix.
+
+An out-of-scope overlay often sits in front of a real consent popup. Click through it yourself while investigating — that is the way to find out whether a consent dialog is behind it — and write the rule against the consent dialog you uncover. Only conclude that the report is out of scope once you have looked behind the gate.
+
 ### Rule syntax
 For the complete rule syntax reference (all step types, element selectors, conditionals, etc.), see [docs/rule-syntax.md](docs/rule-syntax.md).
 
