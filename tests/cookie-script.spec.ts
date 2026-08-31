@@ -1,5 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('cookie-script', ['https://arzt-auskunft.de'], {
-    skipRegions: ['US', 'FR', 'GB'],
-});
+generateCMPTests('cookie-script', ['https://www.english-heritage.org.uk/', 'https://www.thamesclippers.com/', 'https://www.fluentu.com/']);
