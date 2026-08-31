@@ -1,7 +1,7 @@
 {
     "name": "cookie-script",
     "vendorUrl": "https://cookie-script.com/",
-    "prehideSelectors": ["#cookiescript_injected"],
+    "prehideSelectors": ["#cookiescript_injected_wrapper", "#cookiescript_injected"],
     "detectCmp": [{ "exists": "#cookiescript_injected" }],
     "detectPopup": [{ "visible": "#cookiescript_injected" }],
     "optOut": [
