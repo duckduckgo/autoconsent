@@ -135,13 +135,15 @@ shadow root or same-origin iframe.
 - **Mobile policy**: by default test desktop across the current set's regions, plus one mobile sanity check in the region where the popup reproduces. If the mobile sanity check differs from desktop (different popup, rule, or outcome), expand mobile across the current set's regions. If the original report is from a mobile OS, test both desktop and mobile from the start.
 - When verifying a rule, **look at the screenshots** on top of the API results — sometimes a rule reports success, but the popup is not actually handled - a screenshot will detect this.
 - **Handling timing and DOM races.** A common pitfall is clicking before the site's JS handlers are ready. Prefer a state-based wait (`waitForVisible`, `waitForThenClick`) over an unconditional `wait`, and cap any unconditional `wait` at 1s — unconditional waits are a last resort because they hurt UX. When a click lands before handlers are attached, use `retry` / `retryInterval` on `waitForThenClick` (see `lib/rules.ts` and [docs/rule-syntax.md](docs/rule-syntax.md)) rather than padding a wait. `retry` only suits elements expected to **disappear** once the click is handled; extra clicks on a persistent control (e.g. a toggle) are wasted or harmful.
-- **Watch out for false positive detections**. Always verify that the rule does NOT match after the popup is dismissed and the page is reloaded. Over-detection can lead to reload loops.
+- **Watch out for false positive detections**. Verify that the rule does NOT match after the popup is dismissed and the page is reloaded. A cosmetic rule is the exception: it stores no consent state, so it matches every load by design — there the thing to rule out is the repeated handling making the page reload. Over-detection can lead to reload loops.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - Generic rules without a urlPattern MUST have at least two sites in the spec file.
 - If the popup comes in different DOM structures, cover all of them in the spec file.
 
-### Fixing breakage in cosmetic rules
-**Prefer a non-cosmetic rule.** A cosmetic (`hide`) rule is a last resort when there is no reject/dismiss path. If cosmetic is unavoidable, verify that hiding the element does not break the page (layout, scrolling, overlays, click-blocking) and **report that evidence**. Cosmetic rule without breakage-check evidence is incomplete.
+### Breakage in cosmetic rules
+**Prefer a non-cosmetic rule.** A cosmetic (`hide`) rule is a last resort when there is no reject/dismiss path. If cosmetic is unavoidable, verify that hiding the element does not break the page and **report that evidence**. Cosmetic rule without breakage-check evidence is incomplete.
+
+Check each breakage type separately and report a verdict on each, rather than a general "looks fine": **leftover overlay** (a banner remnant or backdrop still covering the page), **blocked scrolling** (a scroll or overflow lock left on html/body or the dialog), **blocked interaction** (clicks or taps not reaching the page), and **reload loop** (the rule still matching after the popup is dismissed and the page is reloaded).
 
 When using `hide`, the CMP may lock scrolling or add overlays. Add fixes AFTER the `hide` step, marked `"optional": true`:
 
