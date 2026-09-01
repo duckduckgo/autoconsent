@@ -181,6 +181,12 @@
         "description": "Changes that should appear in release notes but do not fit another category",
         "releaseType": "none",
         "color": "#ededed"
+      },
+      {
+        "name": "code-update-needed",
+        "description": "Changes the autoconsent library code, so consuming browsers need a version update",
+        "releaseType": "none",
+        "color": "#fbca04"
       }
     ],
     "plugins": [

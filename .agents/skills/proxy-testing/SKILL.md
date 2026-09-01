@@ -134,3 +134,4 @@ await browser.close();
 - The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
+- Some sites block proxy traffic outright (captcha, 403, endless challenge page). If every region's proxy is blocked for a site, retest it over a direct connection and state explicitly in the report that the result is unproxied. If direct access is blocked too, ask the triager for the popup's HTML pasted from their own browser as a last resort, and note that the rule was written from pasted markup rather than a live run.
