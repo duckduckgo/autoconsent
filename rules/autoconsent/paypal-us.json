@@ -1,42 +1,15 @@
 {
     "name": "paypal-us",
-    "prehideSelectors": ["#ccpaCookieContent_wrapper, article.ppvx_modal--overpanel, #cookiePrefsModal"],
-    "detectCmp": [{ "exists": "#ccpaCookieBanner, .privacy-sheet-content, #cookiePrefsModal" }],
-    "detectPopup": [{ "visible": "#ccpaCookieBanner, .privacy-sheet-content, #cookiePrefsModal" }],
+    "prehideSelectors": ["#ccpaCookieContent_wrapper"],
+    "detectCmp": [{ "exists": "#ccpaCookieBanner" }],
+    "detectPopup": [{ "visible": "#ccpaCookieBanner" }],
     "optIn": [{ "click": "#acceptAllButton" }],
     "optOut": [
         {
             "if": { "exists": "#bannerDeclineButton" },
             "then": [{ "click": "#bannerDeclineButton" }],
-            "else": [
-                {
-                    "if": { "exists": "a#manageCookiesLink" },
-                    "then": [{ "click": "a#manageCookiesLink" }],
-                    "else": [
-                        {
-                            "if": { "exists": "#cookiePrefsModal" },
-                            "then": [
-                                { "waitForVisible": "#cookiePrefsModal #submitCookiesBtn, .confirmCookie #submitCookiesBtn" },
-                                {
-                                    "click": "#cookiePrefsModal input[type='checkbox']:checked",
-                                    "all": true,
-                                    "optional": true
-                                },
-                                { "click": "#cookiePrefsModal #submitCookiesBtn, .confirmCookie #submitCookiesBtn" }
-                            ],
-                            "else": [
-                                { "waitForVisible": ".privacy-sheet-content #formContent" },
-                                {
-                                    "click": "#formContent input[type='checkbox']:checked",
-                                    "all": true,
-                                    "optional": true
-                                },
-                                { "click": ".cookieAction #submitCookiesBtn" }
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "comment": "Without a decline button the only way out is the banner's link to the cookie preferences page, which paypal-cookieprefs submits after the navigation.",
+            "else": [{ "click": "a#manageCookiesLink" }]
         }
     ],
     "test": [{ "wait": 1000 }, { "cookieContains": "type%3Dexplicit" }]
