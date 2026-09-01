@@ -10,8 +10,8 @@
             "then": [{ "click": "#bannerDeclineButton" }],
             "else": [
                 {
-                    "if": { "exists": "a#manageCookiesLink" },
-                    "then": [{ "click": "a#manageCookiesLink" }],
+                    "if": { "exists": "#ccpaCookieBanner #bannerCloseButton" },
+                    "then": [{ "waitForThenClick": "#ccpaCookieBanner #bannerCloseButton", "retry": 5, "retryInterval": 500 }],
                     "else": [
                         {
                             "if": { "exists": "#cookiePrefsModal" },
@@ -39,5 +39,9 @@
             ]
         }
     ],
-    "test": [{ "wait": 1000 }, { "cookieContains": "type%3Dexplicit" }]
+    "test": [
+        { "wait": 1000 },
+        { "cookieContains": "T%3D0" },
+        { "visible": "#ccpaCookieBanner, .privacy-sheet-content, #cookiePrefsModal", "check": "none" }
+    ]
 }
