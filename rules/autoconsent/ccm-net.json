@@ -1,0 +1,34 @@
+{
+    "name": "ccm-net",
+    "vendorUrl": "https://www.ccm.net/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?ccm\\.net/"
+    },
+    "prehideSelectors": ["iframe[srcdoc*='frame-root']", ".incentive-banner"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "script[src*='cdn.appconsent.io/tcf2/'][src*='core.bundle.js']" }, { "exists": ".incentive-banner" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "iframe[srcdoc*='frame-root']" }, { "visible": ".incentive-banner" }]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["iframe[srcdoc*='frame-root']", ".button__acceptAll"],
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".incentive-banner"
+        },
+        {
+            "if": { "visible": "iframe[srcdoc*='frame-root']" },
+            "then": [{ "waitForThenClick": ["iframe[srcdoc*='frame-root']", ".button__skip"] }]
+        }
+    ]
+}
