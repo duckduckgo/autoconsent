@@ -1,3 +1,21 @@
+# v16.33.0 (Tue Sep 01 2026)
+
+#### Rules
+
+- Rule update: CPM feedback: paypal.com [#1532](https://github.com/duckduckgo/autoconsent/pull/1532) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- Agent tweaks [#1530](https://github.com/duckduckgo/autoconsent/pull/1530) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.32.0 (Sat Aug 29 2026)
 
 #### Rules
