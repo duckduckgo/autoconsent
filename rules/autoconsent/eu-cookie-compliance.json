@@ -9,7 +9,28 @@
     ],
     "optOut": [
         {
-            "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+            "if": { "exists": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary" },
+            "then": [
+                {
+                    "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#eu-cookie-compliance-categories input[name=\"cookie-categories\"]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "if": { "exists": ".eu-cookie-compliance-save-preferences-button" },
+                    "then": [{ "click": ".eu-cookie-compliance-save-preferences-button" }],
+                    "else": [
+                        {
+                            "click": ".eu-cookie-compliance-banner .eu-cookie-compliance-reject-button, #eu-cookie-compliance-categories .agree-button"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
