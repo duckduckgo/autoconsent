@@ -1,0 +1,50 @@
+{
+    "name": "glassesusa",
+    "vendorUrl": "https://www.glassesusa.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?glassesusa\\.com/"
+    },
+    "prehideSelectors": ["#react-root > div[class*='banner_']", "main > div:has(> div > div > p > a[href='/privacy-policy'])"],
+    "detectCmp": [
+        {
+            "exists": "p:has(> a[href='/privacy-policy']) > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "p:has(> a[href='/privacy-policy']) > button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class*='continueBtn_'] button, div:has(> p > a[href='/privacy-policy']) > button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "div[class*='crossContainer_'] button[aria-label='close']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "div[class*='crossContainer_'] button[aria-label='close']",
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "div:has(> p > a[href='/privacy-policy']) > button",
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "p:has(> a[href='/privacy-policy']) > button",
+            "check": "none"
+        }
+    ]
+}
