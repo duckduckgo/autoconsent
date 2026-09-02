@@ -1,0 +1,24 @@
+{
+    "name": "aviva-cookie-bar",
+    "vendorUrl": "https://www.avivasolutions.nl/",
+    "prehideSelectors": [".cookie-bar"],
+    "detectCmp": [{ "exists": ".cookie-bar input[type=\"radio\"][value=\"Functional\"]" }],
+    "detectPopup": [
+        {
+            "visible": ".cookie-bar.open, .cookie-bar.show-cookie-bar, dialog.cookie-bar[open]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-bar .js-accept-all, .cookie-bar .js--cookie-button-all, .cookie-bar__buttons button.without-preferences"
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".cookie-bar .js-change-preferences", "optional": true },
+        { "waitForThenClick": ".cookie-bar input[type=\"radio\"][value=\"Functional\"]" },
+        {
+            "waitForThenClick": ".cookie-bar .js-save-preferences, .cookie-bar .js--cookie-button, .cookie-bar__buttons button.with-preferences[type=\"submit\"]:not([formaction])"
+        }
+    ]
+}
