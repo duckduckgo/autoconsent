@@ -1,3 +1,17 @@
+# v16.34.0 (Wed Sep 02 2026)
+
+#### Rules
+
+- Rule update: ccm-net [#1529](https://github.com/duckduckgo/autoconsent/pull/1529) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: epaas [#1528](https://github.com/duckduckgo/autoconsent/pull/1528) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.33.0 (Tue Sep 01 2026)
 
 #### Rules
