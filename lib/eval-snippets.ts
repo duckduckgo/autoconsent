@@ -200,6 +200,16 @@ export const snippets = {
                         .split('=')[1],
                 ),
             ).purposes.a === false),
+    // Shopware binds the cookie bar's deny handler to touchstart on touch devices, so a plain click is ignored there.
+    EVAL_SHOPWARE_DENY: () => {
+        const button = document.querySelector('.cookie-permission-container[data-cookie-permission] .js-cookie-permission-button');
+        if (!button) {
+            return false;
+        }
+        button.dispatchEvent(new Event('touchstart', { cancelable: true }));
+        button.click();
+        return true;
+    },
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {

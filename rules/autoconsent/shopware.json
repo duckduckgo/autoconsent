@@ -1,0 +1,17 @@
+{
+    "name": "shopware",
+    "_metadata": {
+        "vendorUrl": "https://www.shopware.com/"
+    },
+    "prehideSelectors": [".cookie-permission-container"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-permission-container[data-cookie-permission] .js-cookie-permission-button",
+            "comment": "the deny button is optional in the storefront config; without it there is nothing to opt out with"
+        }
+    ],
+    "detectPopup": [{ "visible": ".cookie-permission-container[data-cookie-permission]" }],
+    "optIn": [{ "waitForThenClick": ".js-cookie-accept-all-button button" }],
+    "optOut": [{ "eval": "EVAL_SHOPWARE_DENY" }],
+    "test": [{ "cookieContains": "cookie-preference=1" }]
+}
