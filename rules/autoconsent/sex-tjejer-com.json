@@ -1,0 +1,12 @@
+{
+    "name": "sex-tjejer.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?sex-tjejer\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["div:has(> a.btn-success.pull-right):has(+ #innercontent)"],
+    "detectCmp": [{ "exists": "div:has(> a.btn-success.pull-right):has(+ #innercontent)" }],
+    "detectPopup": [{ "visible": "div:has(> a.btn-success.pull-right):has(+ #innercontent)" }],
+    "optIn": [{ "waitForThenClick": "div:has(+ #innercontent) > a.btn-success.pull-right" }],
+    "optOut": [{ "hide": "div:has(> a.btn-success.pull-right):has(+ #innercontent)" }]
+}
