@@ -1,0 +1,13 @@
+{
+    "name": "cookie-preferences-banner",
+    "prehideSelectors": [".cookie-preferences-banner"],
+    "detectCmp": [{ "exists": ".cookie-preferences-banner .cookie-actions .reject-all-cookies" }],
+    "detectPopup": [{ "visible": ".cookie-preferences-banner" }],
+    "optIn": [{ "waitForThenClick": ".cookie-preferences-banner .accept-all-cookies" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-preferences-banner .reject-all-cookies" },
+        { "waitForThenClick": ".cookie-preferences-banner .dismiss-banner", "timeout": 1000, "optional": true },
+        { "waitForVisible": ".cookie-preferences-banner", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "visible": ".cookie-preferences-banner .reject-all-cookies", "check": "none" }]
+}
