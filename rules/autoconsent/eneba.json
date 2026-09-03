@@ -1,0 +1,20 @@
+{
+    "name": "eneba",
+    "comment": "The banner only offers 'Accept all' and 'Customize', so opting out goes through the preferences modal: uncheck the optional categories and submit.",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?eneba\\.com/" },
+    "_metadata": { "vendorUrl": "https://www.eneba.com/" },
+    "prehideSelectors": ["#app > div:has(a[href^=\"https://business.safety.google/privacy\"])"],
+    "detectCmp": [{ "exists": "#app > div:has(a[href^=\"https://business.safety.google/privacy\"]) button" }],
+    "detectPopup": [{ "visible": "#app > div:has(a[href^=\"https://business.safety.google/privacy\"])" }],
+    "optIn": [{ "waitForThenClick": ["#app > div:has(a[href^=\"https://business.safety.google/privacy\"])", "button:nth-of-type(1)"] }],
+    "optOut": [
+        { "waitForThenClick": ["#app > div:has(a[href^=\"https://business.safety.google/privacy\"])", "button:nth-of-type(2)"] },
+        { "waitForVisible": ".ReactModal__Content form button[type=\"submit\"]" },
+        { "click": "#PREFERENCE:checked, #STATISTIC:checked, #MARKETING:checked", "all": true, "optional": true },
+        { "waitForThenClick": ".ReactModal__Content form button[type=\"submit\"]" }
+    ],
+    "test": [
+        { "comment": "the consent cookie is written shortly after the form is submitted", "wait": 1000 },
+        { "cookieContains": "cconsent=" }
+    ]
+}
