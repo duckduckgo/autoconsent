@@ -1,0 +1,38 @@
+{
+    "name": "go-e.com",
+    "_metadata": {
+        "vendorUrl": "https://go-e.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?go-e\\.com/"
+    },
+    "prehideSelectors": ["#cookiebanner"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebanner #cookieform button[onclick*=\"sendForm(1\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebanner #allowAllGeneral"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebanner #cookieform button[onclick*=\"sendForm(1\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"cookie_marketing\":\"false\""
+        }
+    ]
+}
