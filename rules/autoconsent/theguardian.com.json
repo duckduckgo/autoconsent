@@ -1,9 +1,9 @@
 {
     "name": "theguardian.com",
     "vendorUrl": "https://www.theguardian.com/",
-    "comment": "Sourcepoint 'consent or pay' wall shown in the EU/EEA (message 1482251) and UK (message 1482252), where the only reject option requires a paid subscription. The container id embeds the Sourcepoint message id, so we target the pay-wall variants specifically to avoid clashing with the free-reject Sourcepoint popup used in other regions (handled by Sourcepoint-frame). Brittle: message ids may change if the campaign is reconfigured.",
+    "comment": "Sourcepoint 'consent or pay' wall shown in the EU/EEA (message 1482251) and UK (message 1482252), where the only reject option requires a paid subscription. The container id embeds the Sourcepoint message id, so we target the pay-wall variants specifically to avoid clashing with the free-reject Sourcepoint popup used in other regions (handled by Sourcepoint-frame). Brittle: message ids may change if the campaign is reconfigured. Sourcepoint locks scrolling with '.sp-message-open body { overflow: hidden; position: fixed }', so we override those properties inline on body: the class is re-applied by Sourcepoint (including on bfcache restore), and inline styles survive both without needing a newer rule step version.",
     "cosmetic": true,
-    "minimumRuleStepVersion": 3,
+    "minimumRuleStepVersion": 2,
     "runContext": {
         "urlPattern": "^https?://(\\w+\\.)?theguardian\\.com/",
         "main": true,
@@ -23,8 +23,9 @@
     "optOut": [
         { "hide": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']" },
         {
-            "stylesheet": "html.sp-message-open body { position: static !important; top: auto !important; width: auto !important; overflow: auto !important; }",
-            "stylesheetId": "theguardian-scroll-unlock"
+            "addStyle": "position: static !important; top: auto !important; left: auto !important; right: auto !important; width: auto !important; overflow: visible !important",
+            "selector": "body",
+            "optional": true
         }
     ],
     "test": [{ "visible": "div[id='sp_message_container_1482251'],div[id='sp_message_container_1482252']", "check": "none" }]
