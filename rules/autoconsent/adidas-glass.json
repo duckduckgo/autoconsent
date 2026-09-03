@@ -1,0 +1,37 @@
+{
+    "name": "adidas-glass",
+    "vendorUrl": "https://www.adidas.com/",
+    "prehideSelectors": [".cookie-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent-modal [data-auto-id^='glass-gdpr-']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent-modal [data-auto-id^='glass-gdpr-']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-auto-id='glass-gdpr-default-consent-accept-button']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-auto-id='glass-gdpr-gpc-notice-dismiss-button']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "[data-auto-id='glass-gdpr-gpc-notice-dismiss-button']"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-auto-id='glass-gdpr-default-consent-reject-button'], [data-auto-id='glass-gdpr-default-consent-reject-button-central']"
+                }
+            ]
+        }
+    ]
+}
