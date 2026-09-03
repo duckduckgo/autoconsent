@@ -1,0 +1,46 @@
+{
+    "name": "spiegel-gruppe",
+    "vendorUrl": "https://www.spiegel.de/",
+    "comment": "SPIEGEL Gruppe titles share a Sourcepoint 'consent or pay' wall whose only alternative to consenting is a paid subscription: rejecting the mandatory purposes in the privacy manager leaves the save button disabled. Scoped to the wall's message ids (spiegel.de 1426772, manager-magazin.de 1426766, 11freunde.de 1426763), which are embedded in the container element id, so a free-reject notice would still be left to Sourcepoint-frame. Brittle: the ids change if a campaign is reconfigured.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 3,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(spiegel|manager-magazin|11freunde)\\.de/",
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [
+        "div[id='sp_message_container_1426772'],div[id='sp_message_container_1426766'],div[id='sp_message_container_1426763']"
+    ],
+    "detectCmp": [
+        {
+            "exists": "div[id='sp_message_container_1426772'],div[id='sp_message_container_1426766'],div[id='sp_message_container_1426763']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "div[id='sp_message_container_1426772'],div[id='sp_message_container_1426766'],div[id='sp_message_container_1426763']"
+                },
+                { "exists": "html.sp-message-open" }
+            ]
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "hide": "div[id='sp_message_container_1426772'],div[id='sp_message_container_1426766'],div[id='sp_message_container_1426763']"
+        },
+        {
+            "stylesheet": "html.sp-message-open { height: auto !important; width: auto !important; } html.sp-message-open body { position: static !important; overflow: auto !important; top: auto !important; left: auto !important; right: auto !important; }",
+            "stylesheetId": "spiegel-gruppe-scroll-unlock"
+        }
+    ],
+    "test": [
+        {
+            "visible": "div[id='sp_message_container_1426772'],div[id='sp_message_container_1426766'],div[id='sp_message_container_1426763']",
+            "check": "none"
+        }
+    ]
+}
