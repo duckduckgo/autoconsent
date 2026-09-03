@@ -1,0 +1,84 @@
+{
+    "name": "lacoccinelle.net",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?lacoccinelle\\.net/"
+    },
+    "prehideSelectors": ["#qc-cmp2-main,#qc-cmp2-container"],
+    "detectCmp": [
+        {
+            "exists": "#qc-cmp2-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#qc-cmp2-ui"
+                },
+                {
+                    "visible": "#qc-cmp2-usp"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "#qc-cmp2-usp"
+            },
+            "then": [
+                {
+                    "click": "#qc-cmp2-usp .qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-usp button[mode=\"primary\"]"
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-mspa-success-modal-button-footer-container button",
+                    "timeout": 3000,
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#accept-btn"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#qc-cmp2-usp"
+            },
+            "then": [
+                {
+                    "click": "#qc-cmp2-usp .qc-cmp2-toggle-switch > button[aria-checked=\"false\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-usp button[mode=\"primary\"]"
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-mspa-success-modal-button-footer-container button",
+                    "timeout": 3000,
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#qc-cmp2-ui .qc-cmp2-link-inline"
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-ui .qc-cmp2-home-button"
+                },
+                {
+                    "waitForThenClick": "#reject-all-btn"
+                }
+            ]
+        }
+    ]
+}
