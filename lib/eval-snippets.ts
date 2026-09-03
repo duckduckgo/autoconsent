@@ -227,6 +227,42 @@ export const snippets = {
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
     EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
+    EVAL_TRUSTCOMMANDER_DETECT: () => typeof window.tC?.privacy?.optoutAll === 'function',
+    // The banner buttons have per-deployment ids and positions, so the CMP's own banner
+    // click handler is invoked instead; it saves consent (including IAB TCF) and closes the banner.
+    EVAL_TRUSTCOMMANDER_OPT_OUT: () => {
+        const privacy = window.tC?.privacy;
+        if (typeof privacy?.clickBanner === 'function') {
+            privacy.clickBanner('optout');
+            return true;
+        }
+        if (typeof privacy?.optoutAll === 'function') {
+            privacy.optoutAll('banner_button');
+            privacy.closeBanner?.();
+            return true;
+        }
+        return false;
+    },
+    // The consent cookie name is configurable per site; cookieData[0] is "1" when everything is refused.
+    EVAL_TRUSTCOMMANDER_TEST: () => {
+        const privacy = window.tC?.privacy;
+        if (!privacy) return false;
+        privacy.init?.();
+        return String(privacy.cookieData?.[0]) === '1';
+    },
+    EVAL_TRUSTCOMMANDER_OPT_IN: () => {
+        const privacy = window.tC?.privacy;
+        if (typeof privacy?.clickBanner === 'function') {
+            privacy.clickBanner('optin');
+            return true;
+        }
+        if (typeof privacy?.optinAll === 'function') {
+            privacy.optinAll('banner_button');
+            privacy.closeBanner?.();
+            return true;
+        }
+        return false;
+    },
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,

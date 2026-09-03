@@ -1,0 +1,12 @@
+{
+    "name": "trustcommander",
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [{ "exists": "#popin_tc_privacy,#footer_tc_privacy" }, { "eval": "EVAL_TRUSTCOMMANDER_DETECT" }],
+    "detectPopup": [{ "visible": "#popin_tc_privacy,#footer_tc_privacy", "check": "any" }],
+    "optIn": [{ "eval": "EVAL_TRUSTCOMMANDER_OPT_IN" }],
+    "optOut": [
+        { "eval": "EVAL_TRUSTCOMMANDER_OPT_OUT" },
+        { "waitForVisible": "#popin_tc_privacy,#footer_tc_privacy", "timeout": 2000, "check": "none" }
+    ],
+    "test": [{ "eval": "EVAL_TRUSTCOMMANDER_TEST" }]
+}
