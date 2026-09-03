@@ -1,3 +1,18 @@
+# v16.35.0 (Thu Sep 03 2026)
+
+#### Rules
+
+- Rule update: postnl [#1536](https://github.com/duckduckgo/autoconsent/pull/1536) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: coolblue popup [#1537](https://github.com/duckduckgo/autoconsent/pull/1537) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_android (eun) CPM magic report: m.twitch.tv [#1535](https://github.com/duckduckgo/autoconsent/pull/1535) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.34.0 (Wed Sep 02 2026)
 
 #### Rules
