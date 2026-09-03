@@ -82,6 +82,13 @@ export default class AutoConsent {
     }
 
     initialize(config: Partial<Config>, declarativeRules: RuleBundle | null) {
+        if (this.#config) {
+            // Platforms that reply to `init` without addressing a specific document (e.g. WebView's
+            // evaluateJavascript) can deliver a stale reply here. Re-initializing would duplicate the
+            // rules and run a second, concurrent opt-out pass over the same popup.
+            this.#config.logs.errors && console.warn('autoconsent is already initialized, ignoring init response');
+            return;
+        }
         const normalizedConfig = normalizeConfig(config);
         normalizedConfig.logs.lifecycle && console.log('autoconsent init', window.location.href);
         this.#config = normalizedConfig;
