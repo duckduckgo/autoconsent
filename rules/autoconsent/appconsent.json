@@ -1,6 +1,6 @@
 {
     "name": "AppConsent",
-    "prehideSelectors": ["iframe[title='Consent window']"],
+    "prehideSelectors": ["iframe[srcdoc*='appconsent.io/tcf2-clear']"],
     "detectCmp": [
         {
             "exists": "script[src*='cdn.appconsent.io/tcf2-clear/'][src*='core.bundle.js']"
@@ -8,22 +8,45 @@
     ],
     "detectPopup": [
         {
-            "visible": "iframe[title='Consent window']"
+            "visible": "iframe[srcdoc*='appconsent.io/tcf2-clear']"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__acceptAll"]
+            "waitForThenClick": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__acceptAll"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
+            "waitForVisible": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__acceptAll"]
+        },
+        {
+            "if": { "exists": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__refuseAll"] },
+            "then": [
+                {
+                    "waitForThenClick": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__refuseAll"]
+                }
+            ],
+            "else": [
+                {
+                    "if": { "exists": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__skip"] },
+                    "then": [
+                        {
+                            "waitForThenClick": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__skip"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ["iframe[srcdoc*='appconsent.io/tcf2-clear']", ".button__close"]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
         {
-            "waitForVisible": "iframe[title='Consent window']",
+            "waitForVisible": "iframe[srcdoc*='appconsent.io/tcf2-clear']",
             "timeout": 1000,
             "check": "none"
         }
