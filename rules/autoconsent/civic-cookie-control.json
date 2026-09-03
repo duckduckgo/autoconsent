@@ -11,17 +11,11 @@
             "else": [
                 {
                     "if": {
-                        "exists": [
-                            "#ccc #ccc-notify .ccc-notify-buttons",
-                            "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences') or contains(., 'Einstellungen️')]"
-                        ]
+                        "exists": "#ccc #ccc-notify .ccc-notify-buttons button.ccc-notify-button:not(.ccc-accept-button):not(.ccc-reject-button)"
                     },
                     "then": [
                         {
-                            "waitForThenClick": [
-                                "#ccc #ccc-notify .ccc-notify-buttons",
-                                "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences') or contains(., 'Einstellungen️')]"
-                            ]
+                            "waitForThenClick": "#ccc #ccc-notify .ccc-notify-buttons button.ccc-notify-button:not(.ccc-accept-button):not(.ccc-reject-button)"
                         },
                         { "waitForVisible": "#ccc-module" }
                     ]
@@ -29,7 +23,7 @@
                 {
                     "if": { "visible": ".ccc-reject-button" },
                     "then": [{ "waitForThenClick": ".ccc-reject-button" }],
-                    "else": [{ "waitForThenClick": "#ccc-dismiss-button" }]
+                    "else": [{ "waitForThenClick": "#ccc-dismiss-button,#ccc-close" }]
                 }
             ]
         }
