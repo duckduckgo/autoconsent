@@ -4,6 +4,8 @@ generateCMPTests('Sourcepoint-frame', ['https://news.sky.com/', 'https://www.eco
 
 // The Guardian serves a "consent or pay" wall in the EU/EEA and UK (handled by the
 // theguardian.com cosmetic rule); only the remaining regions get a free-reject popup.
+// Outside the EEA it also covers the US National privacy manager, which saves with
+// "Save and close" instead of a reject-all button.
 generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
     skipRegions: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'PL', 'SE', 'NO', 'DK', 'CH'],
 });

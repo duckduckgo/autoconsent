@@ -117,7 +117,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 ],
                 false,
             );
-            return await this.click('.sp_choice_type_SE');
+            return await this.saveAndClose();
         }
 
         if (!this.isManagerOpen()) {
@@ -175,6 +175,18 @@ export default class SourcePoint extends AutoConsentCMPBase {
             logsConfig.errors && console.warn(e);
         }
         // TODO: race condition: if the reject button was clicked, the popup disappears very quickly, so the background script may not receive a success report.
-        return await this.click('.sp_choice_type_SAVE_AND_EXIT');
+        if (await this.click('.sp_choice_type_SAVE_AND_EXIT')) {
+            return true;
+        }
+
+        // The US National privacy manager has no reject-all button and saves with "Save and close".
+        return await this.saveAndClose();
+    }
+
+    // "Save and close" only persists what the switches say, so any remaining opt-in switch
+    // has to be turned off first, otherwise saving would store consent instead of a rejection.
+    async saveAndClose(): Promise<boolean> {
+        await this.click('.pm-toggle[aria-checked=true] .off', true);
+        return await this.click('.sp_choice_type_SE');
     }
 }
