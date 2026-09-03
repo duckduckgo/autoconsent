@@ -1,0 +1,37 @@
+{
+    "name": "3dwarehouse-sketchup",
+    "comment": "The site suppresses its own OneTrust banner with `#onetrust-consent-sdk { display: none }` and shows a notice whose only control is Agree. The OneTrust banner is still rendered and wired up, so its Reject All handler is the real opt-out path. That CSS lands late often enough for the OneTrust banner to flash first, so this rule claims both variants to keep the generic Onetrust rule from handling one of them and leaving the notice behind.",
+    "runContext": {
+        "urlPattern": "^https?://3dwarehouse\\.sketchup\\.com/"
+    },
+    "prehideSelectors": ["[data-cy=\"cookie-consent\"]"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "[data-cy=\"cookie-consent\"] [data-cy=\"cookie-consent__button\"]" }, { "exists": "#onetrust-banner-sdk" }]
+        }
+    ],
+    "detectPopup": [{ "any": [{ "visible": "[data-cy=\"cookie-consent\"]" }, { "visible": "#onetrust-banner-sdk" }] }],
+    "optIn": [
+        { "waitForThenClick": "#onetrust-accept-btn-handler", "timeout": 5000, "optional": true },
+        { "waitForThenClick": "[data-cy=\"cookie-consent__button\"]", "timeout": 5000 }
+    ],
+    "optOut": [
+        {
+            "comment": "A stylesheet rule, so it also covers the notice when it renders after this step.",
+            "hide": "[data-cy=\"cookie-consent\"]"
+        },
+        {
+            "comment": "Absent once OneTrust has a stored choice, while the site notice keeps reappearing.",
+            "waitForThenClick": "#onetrust-reject-all-handler",
+            "timeout": 5000,
+            "optional": true
+        }
+    ],
+    "test": [
+        { "comment": "OneTrust writes its cookies asynchronously after the click.", "wait": 1000 },
+        { "cookieContains": "OptanonAlertBoxClosed" }
+    ],
+    "_metadata": {
+        "vendorUrl": "https://3dwarehouse.sketchup.com/"
+    }
+}
