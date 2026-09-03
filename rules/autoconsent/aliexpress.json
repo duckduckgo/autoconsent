@@ -4,21 +4,21 @@
     "runContext": {
         "urlPattern": "^https://([a-z]*\\.)?aliexpress\\.com/"
     },
-    "prehideSelectors": ["#gdpr-new-container"],
+    "prehideSelectors": ["#gdpr-new-container", "#voyager-gdpr-2025"],
     "detectCmp": [
         {
-            "exists": "#gdpr-new-container,#voyager-gdpr > div"
+            "exists": "#gdpr-new-container,#voyager-gdpr > div,#voyager-gdpr-2025 > div > div > button"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#gdpr-new-container,#voyager-gdpr > div",
+            "visible": "#gdpr-new-container,#voyager-gdpr > div,#voyager-gdpr-2025 > div > div > button",
             "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#gdpr-new-container button:last-of-type,#voyager-gdpr > div > div > button:nth-child(1)"
+            "waitForThenClick": "#gdpr-new-container button:last-of-type,#voyager-gdpr > div > div > button:nth-child(1),#voyager-gdpr-2025 > div > div > button:first-child"
         }
     ],
     "optOut": [
@@ -31,22 +31,49 @@
             ],
             "else": [
                 {
-                    "if": { "exists": "#gdpr-new-container button:nth-of-type(3)" },
+                    "if": { "exists": "#gdpr-new-container" },
                     "then": [
                         {
-                            "waitForThenClick": "#gdpr-new-container button:nth-of-type(2)"
+                            "if": { "exists": "#gdpr-new-container button:nth-of-type(3)" },
+                            "then": [
+                                {
+                                    "waitForThenClick": "#gdpr-new-container button:nth-of-type(2)"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "waitForThenClick": "#gdpr-new-container button:first-of-type"
+                                },
+                                {
+                                    "waitForVisible": "#voyager-gdpr-2025",
+                                    "timeout": 5000
+                                },
+                                {
+                                    "waitForThenClick": "#voyager-gdpr-2025 button:last-of-type"
+                                }
+                            ]
                         }
                     ],
                     "else": [
                         {
-                            "waitForThenClick": "#gdpr-new-container button:first-of-type"
-                        },
-                        {
-                            "waitForVisible": "#voyager-gdpr-2025",
-                            "timeout": 5000
-                        },
-                        {
-                            "waitForThenClick": "#voyager-gdpr-2025 button:last-of-type"
+                            "if": { "exists": "#voyager-gdpr-2025 > div > div > button:nth-child(3)" },
+                            "then": [
+                                {
+                                    "waitForThenClick": "#voyager-gdpr-2025 > div > div > button:nth-child(2)"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "waitForThenClick": "#voyager-gdpr-2025 > div > div > button:last-child"
+                                },
+                                {
+                                    "waitForVisible": "#voyager-gdpr-2025 > div > div > div > button:last-child",
+                                    "timeout": 5000
+                                },
+                                {
+                                    "waitForThenClick": "#voyager-gdpr-2025 > div > div > div > button:last-child"
+                                }
+                            ]
                         }
                     ]
                 }
