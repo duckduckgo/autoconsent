@@ -1,0 +1,9 @@
+{
+    "name": "citizens-advice-cookie-preferences",
+    "prehideSelectors": [".cookie-banner.js-cookie-banner"],
+    "detectCmp": [{ "exists": ".js-cookie-banner #js-cookie-banner__button-reject" }],
+    "detectPopup": [{ "visible": ".js-cookie-banner #js-cookie-banner__button-reject" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-banner__button-accept" }, { "waitForThenClick": "#js-cookie-banner__button-hide" }],
+    "optOut": [{ "waitForThenClick": "#js-cookie-banner__button-reject" }, { "waitForThenClick": "#js-cookie-banner__button-hide" }],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse" }]
+}
