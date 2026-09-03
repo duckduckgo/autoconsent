@@ -1,0 +1,14 @@
+{
+    "name": "bleacherreport",
+    "vendorUrl": "https://bleacherreport.com/",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bleacherreport\\.com/"
+    },
+    "prehideSelectors": ["[id=\"id/ltp\"]"],
+    "detectCmp": [{ "exists": "[id=\"id/ltp/banner/button\"]" }],
+    "detectPopup": [{ "visible": "[id=\"id/ltp/banner\"]" }],
+    "optIn": [{ "waitForThenClick": "[id=\"id/ltp/banner/button\"]" }],
+    "optOut": [{ "hide": "[id=\"id/ltp\"]" }, { "addStyle": "overflow: auto !important", "selector": "body", "optional": true }]
+}
