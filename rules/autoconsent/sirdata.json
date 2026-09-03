@@ -4,12 +4,12 @@
     "prehideSelectors": ["#sd-cmp"],
     "detectCmp": [
         {
-            "exists": "#sd-cmp"
+            "exists": "#sd-cmp [role=\"dialog\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#sd-cmp"
+            "visible": "#sd-cmp [role=\"dialog\"]"
         }
     ],
     "optIn": [
