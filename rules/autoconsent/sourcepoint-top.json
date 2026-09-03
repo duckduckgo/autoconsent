@@ -1,0 +1,22 @@
+{
+    "name": "sourcepoint-top",
+    "vendorUrl": "https://www.sourcepoint.com/",
+    "comment": "Top-frame companion to Sourcepoint-frame. The message UI lives in a cross-origin iframe, so the top frame cannot tell a normal notice from a 'consent or pay' wall that Sourcepoint-frame has to bail on. This rule hides the message container and undoes the scroll lock regardless, using visibility rather than display so the iframe keeps its layout and Sourcepoint-frame can still complete a real rejection underneath.",
+    "minimumRuleStepVersion": 3,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["div[id^='sp_message_container_']"],
+    "detectCmp": [{ "exists": "div[id^='sp_message_container_']" }],
+    "detectPopup": [{ "visible": "div[id^='sp_message_container_']" }],
+    "optIn": [],
+    "optOut": [
+        {
+            "stylesheet": "div[id^='sp_message_container_'] { visibility: hidden !important; }",
+            "stylesheetId": "sourcepoint-top-hide"
+        },
+        { "removeClass": "sp-message-open", "selector": "html", "optional": true }
+    ],
+    "test": [{ "exists": "html.sp-message-open", "check": "none" }]
+}
