@@ -1,0 +1,9 @@
+{
+    "name": "ceneo-cookie-consent",
+    "prehideSelectors": ["#js_cookie-consent-banner"],
+    "detectCmp": [{ "exists": "#js_cookie-consent-banner .js_cookie-consent-necessary" }],
+    "detectPopup": [{ "visible": "#js_cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": "#js_cookie-consent-banner .js_cookie-consent-agree" }],
+    "optOut": [{ "waitForThenClick": "#js_cookie-consent-banner .js_cookie-consent-necessary" }],
+    "test": [{ "waitForVisible": "#js_cookie-consent-banner", "check": "none", "timeout": 5000 }]
+}
