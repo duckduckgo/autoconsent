@@ -9,13 +9,47 @@
     ],
     "optOut": [
         {
-            "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+            "if": {
+                "exists": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-banner .eu-cookie-compliance-reject-button"
+            },
+            "then": [
+                {
+                    "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-banner .eu-cookie-compliance-reject-button"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "Category banners persist whatever is ticked, so untick everything the visitor is allowed to change first",
+                    "click": "#eu-cookie-compliance-categories input[name=\"cookie-categories\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "if": { "exists": ".eu-cookie-compliance-save-preferences-button" },
+                    "then": [{ "click": ".eu-cookie-compliance-save-preferences-button" }],
+                    "else": [
+                        {
+                            "comment": "Without a save button the agree button is the only way to store the now empty selection, so bail out unless there was something to deselect",
+                            "exists": "#eu-cookie-compliance-categories input[name=\"cookie-categories\"]"
+                        },
+                        { "click": ".eu-cookie-compliance-banner--categories .agree-button" }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
         {
-            "cookieContains": "cookie-agreed=2",
-            "negated": true
+            "any": [
+                {
+                    "cookieContains": "cookie-agreed=2",
+                    "negated": true
+                },
+                {
+                    "comment": "Saved category preferences also count as an opt-out: only the ticked categories are stored",
+                    "cookieContains": "cookie-agreed-categories"
+                }
+            ]
         }
     ]
 }

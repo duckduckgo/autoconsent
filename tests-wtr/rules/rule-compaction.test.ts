@@ -35,6 +35,9 @@ describe('RuleCompaction', () => {
                 if (step.else) {
                     step.else = step.else.map(stripCommentFromStep);
                 }
+                if (step.any) {
+                    step.any = step.any.map(stripCommentFromStep);
+                }
                 return step;
             };
             const stripComments = (steps: AutoConsentRuleStep[]) => steps.map(stripCommentFromStep);
