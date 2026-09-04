@@ -69,8 +69,9 @@ export function isElementVisible(elem: HTMLElement): boolean {
     } else {
         const css = window.getComputedStyle(elem);
         if (css.position === 'fixed' && css.display !== 'none') {
-            // fixed elements may be visible even if the parent is not
-            return true;
+            // fixed elements may be visible even if the parent is not, but an element inside a
+            // display:none subtree generates no boxes at all, so it has no client rects.
+            return elem.getClientRects().length > 0;
         }
     }
     return false;

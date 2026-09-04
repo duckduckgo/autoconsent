@@ -91,6 +91,17 @@ describe('getActionablePopups', () => {
             expect(popups[0].regexClassification).to.equal('tier2');
         });
 
+        it('ignores a fixed child inside a display:none subtree, keeping its container', () => {
+            showPopup('popup-with-unrendered-fixed-child');
+
+            const popups = getActionablePopups('tier2');
+
+            expect(popups).to.have.length(1);
+            expect(popups[0].element.id).to.equal('popup-with-unrendered-fixed-child');
+            expect(popups[0].regexClassification).to.equal('reject');
+            expect(rejectButtons(popups[0].buttons)[0].text).to.equal('Disagree');
+        });
+
         it('finds acknowledge-only popup with no reject buttons', () => {
             showPopup('popup-acknowledge-only');
 
