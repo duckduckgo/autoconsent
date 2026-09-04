@@ -1,8 +1,8 @@
 {
-    "name": "fullertonhotels.com",
+    "name": "secureprivacy",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.fullertonhotels.com/"
+        "vendorUrl": "https://secureprivacy.ai/"
     },
     "runContext": {
         "main": true,
@@ -16,7 +16,7 @@
     ],
     "detectPopup": [
         {
-            "visible": ["#ifrmCookieBanner", "#sp-decline"]
+            "visible": "#ifrmCookieBanner"
         }
     ],
     "optIn": [
@@ -30,7 +30,7 @@
         },
         {
             "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
-            "comment": "Decline"
+            "comment": "Decline. Some configurations only render Accept, but the hidden Decline button still stores a rejection."
         }
     ],
     "test": []
