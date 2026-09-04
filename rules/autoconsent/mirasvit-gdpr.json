@@ -33,7 +33,7 @@
                     ]
                 },
                 {
-                    "waitForVisible": "[data-mst-gdpr-settings-apply],.mst-gdpr__cookie-settings--success-btn,[x-data=initGdprSettingsModal] [x-on\\:click=save]",
+                    "waitForVisible": "[data-mst-gdpr-settings-apply],.mst-gdpr__cookie-settings--success-btn,[x-on\\:click=save]",
                     "check": "any",
                     "timeout": 5000
                 },
@@ -47,7 +47,7 @@
                     "any": [
                         { "click": "[data-mst-gdpr-settings-apply]" },
                         { "click": ".mst-gdpr__cookie-settings--success-btn" },
-                        { "click": "[x-data=initGdprSettingsModal] [x-on\\:click=save]" }
+                        { "click": "[x-on\\:click=save]" }
                     ]
                 }
             ]
