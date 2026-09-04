@@ -8,7 +8,7 @@
         "main": true,
         "frame": false
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#ifrmCookieBanner"],
     "detectCmp": [
         {
             "exists": ["#ifrmCookieBanner", "#sp-decline"]
