@@ -1,0 +1,15 @@
+{
+    "name": "enzuzo",
+    "prehideSelectors": ["#ez-cookie-notification"],
+    "detectCmp": [{ "exists": "#ez-cookie-notification" }],
+    "detectPopup": [{ "visible": "#ez-cookie-notification" }],
+    "optIn": [{ "waitForThenClick": "#ez-cookie-notification__accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#ez-cookie-notification__decline" },
+            "then": [{ "waitForThenClick": "#ez-cookie-notification__decline" }],
+            "else": [{ "waitForThenClick": "#close-notification" }]
+        }
+    ],
+    "test": [{ "visible": "#ez-cookie-notification", "negated": true }]
+}
