@@ -3,7 +3,7 @@
     "prehideSelectors": [".cookie-banner-mount-point"],
     "detectCmp": [
         {
-            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner'] button.decline"
         }
     ],
     "detectPopup": [
