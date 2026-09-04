@@ -1,0 +1,9 @@
+{
+    "name": "cookiebot.be",
+    "prehideSelectors": ["#cbPopupWrap.cb-popup--open"],
+    "detectCmp": [{ "exists": "#cbPopupWrap #cbRefuseTrigger" }],
+    "detectPopup": [{ "visible": "#cbPopupWrap.cb-popup--open" }],
+    "optIn": [{ "waitForThenClick": "#cbPopupWrap #cbAcceptTrigger" }],
+    "optOut": [{ "waitForThenClick": "#cbPopupWrap #cbRefuseTrigger" }],
+    "test": [{ "cookieContains": "cbDataAccepted=1" }]
+}
