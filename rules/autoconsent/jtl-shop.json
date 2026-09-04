@@ -1,0 +1,54 @@
+{
+    "name": "jtl-shop",
+    "prehideSelectors": ["#consent-manager #consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#consent-manager #consent-banner"
+        },
+        {
+            "exists": "#consent-banner-btn-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-manager #consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-banner-btn-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#consent-banner-btn-close"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#consent-banner-btn-close"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#consent-banner-btn-settings"
+                },
+                {
+                    "waitForThenClick": "#consent-settings input.consent-input:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#consent-accept-banner-btn-close"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#consent-manager #consent-banner",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}
