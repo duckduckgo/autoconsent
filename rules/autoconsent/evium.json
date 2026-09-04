@@ -1,0 +1,34 @@
+{
+    "name": "evium.de",
+    "vendorUrl": "https://www.evium.de/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?evium\\.de/"
+    },
+    "prehideSelectors": [".cdk-overlay-popover:has(.analyticOptInContainer)"],
+    "detectCmp": [
+        {
+            "exists": ".analyticOptInContainer common-tracking-optin"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".analyticOptInContainer common-tracking-optin"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "common-tracking-optin button[matbutton='elevated']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "common-tracking-optin p:has(> a[aria-controls]) a:not([aria-controls])"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".analyticOptInContainer common-tracking-optin",
+            "check": "none"
+        }
+    ]
+}
