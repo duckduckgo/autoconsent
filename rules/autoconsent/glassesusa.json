@@ -1,0 +1,42 @@
+{
+    "name": "glassesusa",
+    "vendorUrl": "https://www.glassesusa.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?glassesusa\\.com/"
+    },
+    "prehideSelectors": ["div[class^=\"banner_\"]:has(div[class^=\"crossContainer_\"])"],
+    "detectCmp": [
+        {
+            "exists": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"continueBtn_\"] button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[class^=\"banner_\"] p[class^=\"text_\"] button"
+        },
+        {
+            "waitForThenClick": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
+            "timeout": 15000
+        },
+        {
+            "waitForVisible": "#onetrust-pc-sdk",
+            "check": "none",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button",
+            "timeout": 5000
+        }
+    ]
+}
