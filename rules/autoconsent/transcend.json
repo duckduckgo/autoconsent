@@ -1,6 +1,6 @@
 {
     "name": "transcend",
-    "vendorUrl": "https://unknown",
+    "vendorUrl": "https://transcend.io/",
     "cosmetic": true,
     "minimumRuleStepVersion": 2,
     "prehideSelectors": ["#transcend-consent-manager"],
@@ -16,11 +16,76 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog .inner-container button"]
+            "comment": "most deployments use a closed shadow root, where nothing inside the dialog can be reached",
+            "waitFor": ["#transcend-consent-manager", "*"],
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": ["#transcend-consent-manager", "*"]
+            },
+            "then": [
+                {
+                    "comment": "the dialog is rendered a few seconds after its host element",
+                    "waitFor": ["#transcend-consent-manager", "#consentManagerMainDialog"],
+                    "timeout": 10000,
+                    "optional": true
+                },
+                {
+                    "comment": "in the accept-or-reject views the accept-all button is the one that is not initially focused",
+                    "waitForThenClick": [
+                        "#transcend-consent-manager",
+                        "#consentManagerMainDialog .accept-or-reject-all-button-row button:not([data-initialfocus]):not(.button-as-hyperlink)"
+                    ],
+                    "timeout": 500,
+                    "optional": true
+                },
+                {
+                    "comment": "the remaining views only offer a single acknowledge button",
+                    "if": {
+                        "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog .inner-container button"]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "optOut": [
         {
+            "comment": "most deployments use a closed shadow root, where nothing inside the dialog can be reached",
+            "waitFor": ["#transcend-consent-manager", "*"],
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": ["#transcend-consent-manager", "*"]
+            },
+            "then": [
+                {
+                    "comment": "the dialog is rendered a few seconds after its host element",
+                    "waitFor": ["#transcend-consent-manager", "#consentManagerMainDialog"],
+                    "timeout": 10000,
+                    "optional": true
+                },
+                {
+                    "comment": "in the accept-or-reject views the initially focused button is the reject-all one",
+                    "waitForThenClick": [
+                        "#transcend-consent-manager",
+                        "#consentManagerMainDialog .accept-or-reject-all-button-row button[data-initialfocus=\"true\"]"
+                    ],
+                    "timeout": 500,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "comment": "hiding is all that is left for closed shadow roots and for views without a reject-all button",
             "setStyle": "display: none !important; z-index: -1 !important; pointer-events: none !important;",
             "selector": "#transcend-consent-manager"
         }
