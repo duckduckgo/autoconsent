@@ -1,0 +1,41 @@
+{
+    "name": "pubfactory",
+    "vendorUrl": "https://www.pubfactory.net/",
+    "prehideSelectors": [".european-union-cookies-agreement"],
+    "detectCmp": [
+        {
+            "exists": ".european-union-cookies-agreement [data-testid=\"cookieBannerDismiss\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".european-union-cookies-agreement"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": "body[data-page-initialized=\"true\"]"
+        },
+        {
+            "waitForThenClick": ".european-union-cookies-agreement [data-testid=\"cookieBannerDismiss\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the dismiss link only updates the banner zone once the platform has bound its handlers, otherwise the click navigates to the raw endpoint",
+            "waitFor": "body[data-page-initialized=\"true\"]"
+        },
+        {
+            "waitForThenClick": ".european-union-cookies-agreement [data-testid=\"cookieBannerDismiss\"]"
+        }
+    ],
+    "test": [
+        {
+            "comment": "the cookie is set by the zone update response, which lands shortly after the click",
+            "wait": 500
+        },
+        {
+            "cookieContains": "EUCookieOff=t"
+        }
+    ]
+}
