@@ -72,6 +72,27 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
+describe('checkHeuristicPatterns with analytics-only popups', () => {
+    it('detects consent notices that mention analytics instead of cookies', () => {
+        const texts = [
+            'Help us improve Mundo with analytics? See Privacy. Decline analytics Accept analytics',
+            'We would like to measure how the site is used. Reject analytics Allow analytics',
+            'Turn off analytics',
+            'Disable optional analytics',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect analytics product wording without a reject verb', () => {
+        const texts = ['Enable analytics for your workspace', 'Analytics dashboard', 'Product analytics made simple'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
