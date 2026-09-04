@@ -3,10 +3,10 @@
     "vendorUrl": "https://github.com/kovarp/jquery.cookieBar",
     "prehideSelectors": [".cookie-bar"],
     "cosmetic": true,
-    "detectCmp": [{ "exists": ".cookie-bar .cookie-bar__message,.cookie-bar .cookie-bar__buttons" }],
+    "detectCmp": [{ "exists": ".cookie-bar .cookie-bar__inner .cookie-bar__message,.cookie-bar .cookie-bar__inner .cookie-bar__buttons" }],
     "detectPopup": [
         {
-            "visible": ".cookie-bar .cookie-bar__message,.cookie-bar .cookie-bar__buttons",
+            "visible": ".cookie-bar .cookie-bar__inner .cookie-bar__message,.cookie-bar .cookie-bar__inner .cookie-bar__buttons",
             "check": "any"
         }
     ],
@@ -14,7 +14,7 @@
     "optOut": [{ "hide": ".cookie-bar" }],
     "test": [
         {
-            "visible": ".cookie-bar .cookie-bar__message,.cookie-bar .cookie-bar__buttons",
+            "visible": ".cookie-bar .cookie-bar__inner .cookie-bar__message,.cookie-bar .cookie-bar__inner .cookie-bar__buttons",
             "check": "none"
         },
         {

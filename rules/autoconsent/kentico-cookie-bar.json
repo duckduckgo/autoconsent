@@ -1,0 +1,12 @@
+{
+    "name": "kentico-cookie-bar",
+    "prehideSelectors": [".cookie-bar.js-cookie-bar"],
+    "detectCmp": [{ "exists": ".cookie-bar.js-cookie-bar .js-cookie-options input[value=\"Functional\"]" }],
+    "detectPopup": [{ "visible": ".cookie-bar.js-cookie-bar" }],
+    "optIn": [{ "waitForThenClick": ".cookie-bar.js-cookie-bar .js-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-bar.js-cookie-bar .js-cookie-options input[value=\"Functional\"]" },
+        { "waitForThenClick": ".cookie-bar.js-cookie-bar .js-save-preferences" }
+    ],
+    "test": [{ "visible": ".cookie-bar.js-cookie-bar", "check": "none" }]
+}
