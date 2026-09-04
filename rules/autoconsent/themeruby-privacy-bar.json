@@ -1,0 +1,32 @@
+{
+    "name": "themeruby-privacy-bar",
+    "vendorUrl": "https://themeruby.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#rb-privacy.privacy-bar"],
+    "detectCmp": [
+        {
+            "exists": "#rb-privacy.privacy-bar .privacy-dismiss-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#rb-privacy.privacy-bar.activated"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#rb-privacy.privacy-bar .privacy-dismiss-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#rb-privacy.privacy-bar"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#rb-privacy.privacy-bar",
+            "check": "none"
+        }
+    ]
+}
