@@ -1,0 +1,18 @@
+{
+    "name": "eagerly-tools-cookie",
+    "prehideSelectors": ["#eagerly-tools-cookie", "#eagerly-tools-cookie-overlay"],
+    "detectCmp": [{ "exists": "#eagerly-tools-cookie .js-btn-ok" }],
+    "detectPopup": [{ "visible": "#eagerly-tools-cookie.active" }],
+    "optIn": [{ "waitForThenClick": "#eagerly-tools-cookie .js-btn-accept-all" }],
+    "optOut": [
+        {
+            "comment": "the banner has no reject button, so uncheck the pre-selected optional categories first",
+            "waitForThenClick": "#eagerly-tools-cookie .js-cookie-fb-scroller .js-cookie-checkbox-group:not(.disabled) input:checked",
+            "all": true,
+            "timeout": 2000,
+            "optional": true
+        },
+        { "comment": "\"accept selection\" saves whatever is still checked", "waitForThenClick": "#eagerly-tools-cookie .js-btn-ok" },
+        { "waitForVisible": "#eagerly-tools-cookie.active", "check": "none", "timeout": 5000 }
+    ]
+}
