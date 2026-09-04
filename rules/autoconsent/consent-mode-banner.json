@@ -1,0 +1,37 @@
+{
+    "name": "consent-mode-banner",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "intermediate": false,
+    "prehideSelectors": ["#cookie-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-banner #btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-banner #btn-reject-all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-banner #btn-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent-banner #btn-reject-all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-consent-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
