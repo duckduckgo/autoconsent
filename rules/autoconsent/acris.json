@@ -1,6 +1,6 @@
 {
     "name": "acris",
-    "prehideSelectors": ["div.acris-cookie-consent"],
+    "prehideSelectors": ["div.acris-cookie-consent", "div.acris-cookie-consent ~ .modal-backdrop"],
     "detectCmp": [
         {
             "exists": "[data-acris-cookie-consent]"
@@ -25,14 +25,39 @@
     ],
     "optOut": [
         {
-            "waitForVisible": "#ccAcceptOnlyFunctional",
-            "check": "any"
-        },
-        {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "#ccAcceptOnlyFunctional"
+            "if": {
+                "exists": "#ccAcceptOnlyFunctional"
+            },
+            "then": [
+                {
+                    "waitForVisible": "#ccAcceptOnlyFunctional",
+                    "check": "any"
+                },
+                {
+                    "wait": 500
+                },
+                {
+                    "waitForThenClick": "#ccAcceptOnlyFunctional"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "Some shops omit the reject-all button; opt-in toggles default to off, so saving the selection is the opt-out.",
+                    "click": "input.cookie-setting--switch--group:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForVisible": "#ccAcceptButton",
+                    "check": "any"
+                },
+                {
+                    "wait": 500
+                },
+                {
+                    "waitForThenClick": "#ccAcceptButton"
+                }
+            ]
         }
     ]
 }
