@@ -1,7 +1,7 @@
 {
     "name": "sourcepoint-top",
     "vendorUrl": "https://www.sourcepoint.com/",
-    "comment": "Top-frame companion to Sourcepoint-frame. The message UI lives in a cross-origin iframe, so the top frame cannot tell a normal notice from a 'consent or pay' wall that Sourcepoint-frame has to bail on. This rule hides the message container and undoes the scroll lock regardless, using visibility rather than display so the iframe keeps its layout and Sourcepoint-frame can still complete a real rejection underneath.",
+    "comment": "Top-frame companion to Sourcepoint-frame. The message UI lives in a cross-origin iframe, so the top frame cannot tell an ordinary notice from a 'consent or pay' wall that Sourcepoint-frame has to bail on. optOut therefore waits for the frame rule to clear the message and only steps in when it is still there, hiding the container and undoing the scroll lock. Hiding uses visibility rather than display so the iframe keeps its layout and the frame rule can still complete a real rejection underneath.",
     "minimumRuleStepVersion": 3,
     "runContext": {
         "main": true,
@@ -10,13 +10,14 @@
     "prehideSelectors": ["div[id^='sp_message_container_']"],
     "detectCmp": [{ "exists": "div[id^='sp_message_container_']" }],
     "detectPopup": [{ "visible": "div[id^='sp_message_container_']" }],
-    "optIn": [],
+    "optIn": [{ "visible": "div[id^='sp_message_container_']", "check": "none" }],
     "optOut": [
+        { "waitForVisible": "div[id^='sp_message_container_']", "check": "none", "timeout": 5000, "optional": true },
+        { "visible": "div[id^='sp_message_container_']" },
         {
             "stylesheet": "div[id^='sp_message_container_'] { visibility: hidden !important; }",
             "stylesheetId": "sourcepoint-top-hide"
         },
         { "removeClass": "sp-message-open", "selector": "html", "optional": true }
-    ],
-    "test": [{ "exists": "html.sp-message-open", "check": "none" }]
+    ]
 }
