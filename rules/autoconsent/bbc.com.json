@@ -1,27 +1,65 @@
 {
     "name": "bbc.com",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)"
+        "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)/"
     },
-    "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]"],
+    "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]", "#bbccookies-prompt"],
     "detectCmp": [
         {
-            "exists": "#consent-banner-title"
+            "any": [
+                {
+                    "exists": "#consent-banner-title"
+                },
+                {
+                    "exists": "#bbccookies-prompt"
+                }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#consent-banner-title"
+            "any": [
+                {
+                    "visible": "#consent-banner-title"
+                },
+                {
+                    "visible": "#bbccookies-prompt"
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "button[data-testid=\"accept-button\"]"
+            "if": {
+                "exists": "#bbccookies-prompt"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#bbccookies-accept-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "button[data-testid=\"accept-button\"]"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "button[data-testid=\"reject-button\"]"
+            "if": {
+                "exists": "#bbccookies-prompt"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#bbccookies-reject-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "button[data-testid=\"reject-button\"]"
+                }
+            ]
         }
     ],
     "test": [
