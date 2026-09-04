@@ -1,0 +1,29 @@
+{
+    "name": "mirasvit-gdpr",
+    "prehideSelectors": [".mst-gdpr__cookie-bar-wrapper"],
+    "detectCmp": [{ "exists": ".mst-gdpr__cookie-bar [data-trigger-settings]" }],
+    "detectPopup": [
+        { "visible": ".mst-gdpr__cookie-bar-wrapper" },
+        { "visible": ".mst-gdpr__cookie-bar [data-trigger-settings]", "check": "any" }
+    ],
+    "optIn": [{ "waitForThenClick": ".mst-gdpr__cookie-bar [data-trigger-settings=\"agree\"]" }],
+    "optOut": [
+        {
+            "if": { "exists": ".mst-gdpr__cookie-bar [data-trigger-settings=\"decline\"]" },
+            "then": [
+                {
+                    "waitForThenClick": ".mst-gdpr__cookie-bar [data-trigger-settings=\"decline\"]",
+                    "retry": 5,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                { "waitForThenClick": ".mst-gdpr__cookie-bar [data-trigger-settings=\"trigger\"]" },
+                { "waitForVisible": ".mst-gdpr__cookie-settings--success-btn", "timeout": 5000 },
+                { "click": "input.checkbox[data-group-id]:checked:not([disabled])", "all": true, "optional": true },
+                { "waitForThenClick": ".mst-gdpr__cookie-settings--success-btn" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "gdpr_cookie_consent=" }]
+}
