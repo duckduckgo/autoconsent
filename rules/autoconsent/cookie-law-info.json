@@ -1,7 +1,15 @@
 {
     "name": "cookie-law-info",
     "prehideSelectors": ["#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay"],
-    "detectCmp": [{ "exists": "#cookie-law-info-bar" }, { "eval": "EVAL_COOKIE_LAW_INFO_DETECT" }],
+    "detectCmp": [
+        { "exists": "#cookie-law-info-bar" },
+        {
+            "any": [
+                { "eval": "EVAL_COOKIE_LAW_INFO_DETECT" },
+                { "comment": "legacy plugin versions expose no CLI object", "exists": "#cookie-law-info-bar .cli-plugin-main-button" }
+            ]
+        }
+    ],
     "detectPopup": [{ "visible": "#cookie-law-info-bar" }],
     "optIn": [
         {
@@ -13,7 +21,9 @@
             "hide": "#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay"
         },
         {
-            "eval": "EVAL_COOKIE_LAW_INFO_0"
+            "comment": "legacy plugin versions have no CLI object, and no consent state to reject",
+            "eval": "EVAL_COOKIE_LAW_INFO_0",
+            "optional": true
         }
     ],
     "test": [
