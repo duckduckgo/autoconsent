@@ -40,6 +40,10 @@
     ],
     "test": [
         {
+            "comment": "the site writes the cookie a moment after the click",
+            "wait": 1000
+        },
+        {
             "cookieContains": "is_privacy_policy_shown=true"
         }
     ]
