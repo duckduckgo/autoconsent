@@ -1,0 +1,10 @@
+{
+    "name": "agolde.com",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?agolde\\.com/" },
+    "prehideSelectors": ["#ccpa-notice.is-open"],
+    "detectCmp": [{ "exists": "#ccpa-notice .micromodal__content" }],
+    "detectPopup": [{ "visible": "#ccpa-notice.is-open .modal__container" }],
+    "optIn": [{ "waitForThenClick": "#ccpa-notice .micromodal__content > button:last-of-type" }],
+    "optOut": [{ "waitForThenClick": "#ccpa-notice .micromodal__content > button:first-of-type" }],
+    "test": [{ "cookieContains": "has_seen_ccpa_notice=true" }]
+}
