@@ -1,0 +1,33 @@
+{
+    "name": "datasign-webtru",
+    "vendorUrl": "https://datasign.jp/",
+    "prehideSelectors": ["#datasign_cmp__host"],
+    "detectCmp": [{ "exists": "#datasign_cmp__host" }],
+    "detectPopup": [{ "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary[class*='dialogIsVisible']"] }],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "#datasign_cmp__host",
+                "[class*='dialogButtons']:not(:has(#datasign_cmp__reject-all-button)) button:nth-of-type(2)"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__reject-all-button"] },
+            "then": [{ "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__reject-all-button"] }],
+            "else": [
+                {
+                    "if": { "exists": ["#datasign_cmp__host", "[class*='dialogButtons']:has(button:nth-of-type(2))"] },
+                    "then": [{ "waitForThenClick": ["#datasign_cmp__host", "[class*='dialogButtons'] button:nth-of-type(1)"] }],
+                    "else": [{ "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary a[aria-label='Close']"] }]
+                }
+            ]
+        },
+        {
+            "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary[class*='dialogIsVisible']"],
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}
