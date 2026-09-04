@@ -1,0 +1,46 @@
+{
+    "name": "complyauto",
+    "vendorUrl": "https://complyauto.com/",
+    "prehideSelectors": [".ca-banner-wrap", ".ca-gpc-banner-wrap"],
+    "detectCmp": [
+        {
+            "exists": ".ca-banner-wrap, .ca-gpc-banner-wrap"
+        },
+        {
+            "exists": "button.ca-secondary-button-first, button.ca-gpc-close-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ca-banner-wrap, .ca-gpc-banner-wrap",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button.ca-primary-button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "button.ca-gpc-close-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "button.ca-gpc-close-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "button.ca-secondary-button-first"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"hasInteractedWithBanner\":true"
+        }
+    ]
+}
