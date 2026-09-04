@@ -13,3 +13,6 @@ generateCMPTests(
         skipRegions: ['US'],
     },
 );
+
+// CCPA flavor: the banner offers "Do not sell or share" instead of "Reject".
+generateCMPTests('consentmo', ['https://fahertybrand.com/pages/native-partnerships']);

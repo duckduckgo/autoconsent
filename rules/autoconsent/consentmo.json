@@ -8,36 +8,67 @@
     ],
     "detectPopup": [
         {
-            "visible": ["csm-cookie-consent", ".csm-wrapper button"]
+            "visible": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type], .csm-wrapper button"],
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-allow"]
-        }
-    ],
-    "optOut": [
-        {
-            "if": { "exists": ["csm-cookie-consent", ".csm-wrapper .cc-deny"] },
+            "if": { "exists": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='accept']"] },
             "then": [
                 {
-                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='accept']"]
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-settings"]
-                },
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-allow"]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='reject']"] },
+            "then": [
                 {
-                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='reject']"]
+                }
+            ],
+            "else": [
+                {
+                    "if": { "exists": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='do_not_sell']"] },
+                    "then": [
+                        {
+                            "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='do_not_sell']"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": { "exists": ["csm-cookie-consent", ".csm-wrapper .cc-deny"] },
+                            "then": [
+                                {
+                                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-settings"]
+                                },
+                                {
+                                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-deny"]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
     ],
     "test": [
         {
-            "waitForVisible": ["csm-cookie-consent", ".csm-wrapper button"],
-            "timeout": 1000,
+            "waitForVisible": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type], .csm-wrapper button"],
+            "timeout": 5000,
             "check": "none"
         }
     ]
