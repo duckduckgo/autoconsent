@@ -1,0 +1,18 @@
+{
+    "name": "meteored",
+    "prehideSelectors": [".cmp_gdpr"],
+    "detectCmp": [{ "exists": ".cmp_gdpr #gdpr #btn-gdpr-accept" }],
+    "detectPopup": [{ "visible": ".cmp_gdpr #gdpr" }],
+    "optIn": [{ "waitForThenClick": ".cmp_gdpr #gdpr #btn-gdpr-accept", "retry": 10, "retryInterval": 500 }],
+    "optOut": [
+        {
+            "if": { "exists": ".cmp_gdpr #gdpr #btn-gdpr-reject" },
+            "then": [{ "waitForThenClick": ".cmp_gdpr #gdpr #btn-gdpr-reject", "retry": 10, "retryInterval": 500 }],
+            "else": [
+                { "waitForThenClick": ".cmp_gdpr #gdpr #btn-gdpr-configure" },
+                { "waitForThenClick": ".cmp_gdpr .cmp > .footer button.bt-izq-m", "retry": 10, "retryInterval": 500 }
+            ]
+        }
+    ],
+    "test": [{ "visible": ".cmp_gdpr", "check": "none" }]
+}
