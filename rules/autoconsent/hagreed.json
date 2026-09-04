@@ -1,0 +1,30 @@
+{
+    "name": "hagreed",
+    "vendorUrl": "https://www.hagreed.com/",
+    "prehideSelectors": ["#hagreed", ".hagreed_minify"],
+    "detectCmp": [
+        {
+            "exists": ".hagreed-validate[data-type=\"decline_all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".hagreed-validate[data-type=\"decline_all\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".hagreed-validate[data-type=\"accept_all\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".hagreed-validate[data-type=\"decline_all\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "hagreedCookies=[]"
+        }
+    ]
+}
