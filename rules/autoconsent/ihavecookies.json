@@ -1,0 +1,34 @@
+{
+    "name": "ihavecookies",
+    "prehideSelectors": ["#gdpr-cookie-message"],
+    "detectCmp": [
+        { "exists": "#gdpr-cookie-message #gdpr-cookie-accept" },
+        {
+            "any": [
+                { "exists": "#gdpr-cookie-message #gdpr-cookie-advanced" },
+                { "exists": "#gdpr-cookie-message #gdpr-cookie-decline" },
+                { "exists": "#gdpr-cookie-message #gdpr-cookie-rejectall" }
+            ]
+        }
+    ],
+    "detectPopup": [{ "visible": "#gdpr-cookie-message" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#gdpr-cookie-message #gdpr-cookie-decline" },
+            "then": [{ "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-decline" }],
+            "else": [
+                {
+                    "if": { "exists": "#gdpr-cookie-message #gdpr-cookie-rejectall" },
+                    "then": [{ "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-rejectall" }],
+                    "else": [
+                        { "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-advanced" },
+                        { "waitForVisible": "#gdpr-cookie-types" },
+                        { "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-accept" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookieControl=" }]
+}
