@@ -1,0 +1,33 @@
+{
+    "name": "trustcommander",
+    "vendorUrl": "https://www.commandersact.com/en/products/trustcommander/",
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#footer_tc_privacy #footer_tc_privacy_button_2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#footer_tc_privacy_button_2"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#footer_tc_privacy_button_3"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#footer_tc_privacy_button_2",
+            "comment": "TrustCommander always numbers the refuse button _2 and the accept-all button _3"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#footer_tc_privacy",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
