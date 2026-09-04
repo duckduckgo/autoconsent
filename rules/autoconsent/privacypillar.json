@@ -1,0 +1,16 @@
+{
+    "name": "privacypillar",
+    "prehideSelectors": ["aside[class*=\"azpp-cookie-consent\"]"],
+    "detectCmp": [{ "exists": ["aside[class*=\"azpp-cookie-consent\"]", ".az-main"] }],
+    "detectPopup": [{ "visible": ["aside[class*=\"azpp-cookie-consent\"]", ".banner-main"] }],
+    "optIn": [{ "waitForThenClick": ["aside[class*=\"azpp-cookie-consent\"]", ".button-group button:last-child"] }],
+    "optOut": [
+        {
+            "comment": "The banner renders [Privacy Settings, Deny All, Accept All]; the deny button is optional, so only act when all three are present.",
+            "waitForVisible": ["aside[class*=\"azpp-cookie-consent\"]", ".button-group button:nth-child(3)"],
+            "timeout": 2000
+        },
+        { "waitForThenClick": ["aside[class*=\"azpp-cookie-consent\"]", ".button-group button:nth-child(2)"] }
+    ],
+    "test": [{ "visible": ["aside[class*=\"azpp-cookie-consent\"]", ".banner-main"], "check": "none" }]
+}
