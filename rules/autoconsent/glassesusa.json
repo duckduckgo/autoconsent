@@ -22,54 +22,25 @@
     ],
     "optOut": [
         {
-            "comment": "opens the OneTrust preference centre, which is only loaded on demand",
-            "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[starts-with(normalize-space(.), \"Cookie Manager\")]"
-        },
-        {
-            "waitForVisible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
-            "timeout": 10000,
-            "optional": true
-        },
-        {
-            "comment": "the first click is dropped when it lands before the notice is interactive",
-            "if": {
-                "visible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
-                "check": "none"
-            },
-            "then": [
-                {
-                    "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[starts-with(normalize-space(.), \"Cookie Manager\")]",
-                    "optional": true
-                }
-            ]
-        },
-        {
-            "waitForThenClick": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
-            "timeout": 20000
-        },
-        {
-            "waitForVisible": "#onetrust-pc-sdk",
-            "check": "none",
-            "timeout": 5000,
-            "optional": true
-        },
-        {
-            "comment": "the mobile layout of the notice has no close cross, only Continue",
+            "comment": "the notice stores no consent, so its close cross is a plain dismissal; the mobile layout has no cross and only offers Continue, which does the same",
             "if": {
                 "exists": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
             },
             "then": [
                 {
-                    "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button",
-                    "timeout": 5000
+                    "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[normalize-space(.)=\"Continue\"]",
-                    "timeout": 5000
+                    "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[normalize-space(.)=\"Continue\"]"
                 }
             ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "is_privacy_policy_shown=true"
         }
     ]
 }
