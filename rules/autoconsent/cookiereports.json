@@ -1,0 +1,9 @@
+{
+    "name": "cookiereports",
+    "prehideSelectors": ["#CookieReportsPanel"],
+    "detectCmp": [{ "exists": "#CookieReportsBanner .wscrOk2" }],
+    "detectPopup": [{ "visible": "#CookieReportsBanner .wscrOk2" }],
+    "optIn": [{ "waitForThenClick": "#CookieReportsBanner .wscrOk" }],
+    "optOut": [{ "waitForThenClick": "#CookieReportsBanner .wscrOk2" }],
+    "test": [{ "cookieContains": "wscrCookieConsent" }, { "cookieContains": "consent=explicit" }]
+}
