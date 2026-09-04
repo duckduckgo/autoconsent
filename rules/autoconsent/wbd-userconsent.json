@@ -1,0 +1,56 @@
+{
+    "name": "wbd-userconsent",
+    "_metadata": {
+        "manuallyReviewUpdates": true,
+        "vendorUrl": "https://www.wbdprivacy.com/"
+    },
+    "prehideSelectors": [
+        "#wbd-ltp-overlay",
+        "html[class*='userconsent-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true']"
+    ],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": "#wbd-ltp-overlay .wbd-ltp-btn" },
+                {
+                    "exists": "html[class*='userconsent-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true'] a[role='button']"
+                }
+            ]
+        },
+        { "exists": ".ot-sdk-show-settings, a.uclink" }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#wbd-ltp-overlay .wbd-ltp-box, html[class*='userconsent-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true']",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#wbd-ltp-overlay .wbd-ltp-btn, html[class*='userconsent-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true'] a[role='button']"
+        }
+    ],
+    "optOut": [
+        { "waitFor": "#onetrust-consent-sdk .save-preference-btn-handler", "timeout": 10000 },
+        {
+            "if": { "exists": ".ot-sdk-show-settings" },
+            "then": [{ "waitForThenClick": ".ot-sdk-show-settings", "timeout": 2000 }],
+            "else": [{ "waitForThenClick": "a.uclink", "timeout": 2000 }]
+        },
+        { "waitForVisible": "#onetrust-pc-sdk", "timeout": 5000 },
+        { "click": "#onetrust-consent-sdk input.category-switch-handler:checked", "all": true, "optional": true },
+        { "waitForThenClick": ".save-preference-btn-handler", "timeout": 3000 },
+        { "waitForVisible": "#onetrust-pc-sdk", "check": "none", "timeout": 5000 },
+        {
+            "waitForThenClick": "#wbd-ltp-overlay .wbd-ltp-btn, html[class*='userconsent-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true'] a[role='button']",
+            "timeout": 3000
+        },
+        {
+            "waitForVisible": "#wbd-ltp-overlay .wbd-ltp-box, html[class*='userconsent-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true']",
+            "check": "none",
+            "timeout": 5000,
+            "optional": true
+        }
+    ],
+    "test": [{ "cookieContains": "OptanonAlertBoxClosed" }]
+}
