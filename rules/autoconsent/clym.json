@@ -1,0 +1,16 @@
+{
+    "name": "clym",
+    "prehideSelectors": [".clym-widget.clym-widget-notice"],
+    "detectCmp": [{ "exists": "#clym-widget-styles" }],
+    "detectPopup": [{ "visible": ".clym-widget.clym-widget-notice .clym-widget-actions" }],
+    "optIn": [{ "waitForThenClick": ".clym-widget.clym-widget-notice button[aria-label=\"Accept\"]" }],
+    "optOut": [
+        {
+            "comment": "Regions without a reject option only get a dismissable notice",
+            "if": { "exists": ".clym-widget.clym-widget-notice button[aria-label=\"Reject\"]" },
+            "then": [{ "waitForThenClick": ".clym-widget.clym-widget-notice button[aria-label=\"Reject\"]" }],
+            "else": [{ "waitForThenClick": ".clym-widget.clym-widget-notice button[aria-label=\"Close\"]" }]
+        }
+    ],
+    "test": [{ "waitForVisible": ".clym-widget.clym-widget-notice", "timeout": 5000, "check": "none" }]
+}
