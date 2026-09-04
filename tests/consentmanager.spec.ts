@@ -8,6 +8,10 @@ generateCMPTests(
         'https://www.history.de/',
         'https://www.consentmanager.net/',
         'https://www.thermador.com/us/',
+        // banner rendered in a shadow root
+        'https://correctiv.org/',
+        'https://www.adcell.de/',
+        'https://xn--grn-ioaaa.de/',
     ],
     {
         skipRegions: ['US', 'GB'],

@@ -30,6 +30,11 @@ export const snippets = {
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
+    // Closes the banner UI, which setConsent leaves open when it renders after the API call.
+    EVAL_CONSENTMANAGER_6: () => {
+        window.__cmp?.('close');
+        return true;
+    },
     EVAL_CONSENTMANAGER_NCMP_REJECT: () => {
         if (typeof window.__npcmp !== 'function') return false;
         window.__npcmp('reject');
