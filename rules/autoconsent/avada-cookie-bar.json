@@ -1,0 +1,36 @@
+{
+    "name": "avada-cookie-bar",
+    "prehideSelectors": ["#Avada-CookiesBar"],
+    "detectCmp": [
+        {
+            "exists": "#Avada-CookiesBar .Avada-CookiesBar_Container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#Avada-CookiesBar .Avada-CookiesBar_BtnAgree"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#Avada-CookiesBar .Avada-CookiesBar_BtnAgree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#Avada-CookiesBar .Avada-CookiesBar_BtnDeny"
+        },
+        {
+            "waitForThenClick": "#Avada-CookiesBar .Avada-CookiesBar-Preferences__PopUp .Avada-CookiesBar_BtnDeny",
+            "timeout": 1000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#Avada-CookiesBar .Avada-CookiesBar_BtnAgree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
