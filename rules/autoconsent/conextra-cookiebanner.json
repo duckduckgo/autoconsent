@@ -1,0 +1,19 @@
+{
+    "name": "conextra-cookiebanner",
+    "prehideSelectors": ["#cookiebanner"],
+    "detectCmp": [
+        { "exists": "#cookiebanner form#cookieform .chooseCookies" },
+        { "exists": "#cookiebanner form#cookieform button[onclick^=\"sendForm(1\"]" }
+    ],
+    "detectPopup": [{ "visible": "#cookiebanner form#cookieform .chooseCookies" }],
+    "optIn": [{ "waitForThenClick": "#cookiebanner form#cookieform button[onclick^=\"sendForm(2\"]" }],
+    "optOut": [
+        {
+            "comment": "\"Allow selection\" submits the toggles as-is, so clear any non-essential category that is on by default",
+            "if": { "exists": "#cookieform .chooseCookies input[type=\"checkbox\"]:checked:not(#cookie_essenzial)" },
+            "then": [{ "click": "#cookieform .chooseCookies input[type=\"checkbox\"]:checked:not(#cookie_essenzial)", "all": true }]
+        },
+        { "waitForThenClick": "#cookiebanner form#cookieform button[onclick^=\"sendForm(1\"]" }
+    ],
+    "test": [{ "cookieContains": "\"cookie_statistic\":\"false\"" }]
+}
