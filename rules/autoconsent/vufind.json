@@ -1,0 +1,38 @@
+{
+    "name": "vufind",
+    "vendorUrl": "https://vufind.org/",
+    "comment": "Cookie consent overlay built into VuFind, used by library discovery portals such as Finna",
+    "prehideSelectors": [".cookie-consent-wrapper > .cookie-consent.js-cookie-consent"],
+    "detectCmp": [
+        {
+            "comment": "the class names on their own are common, so the whole VuFind container structure is matched",
+            "exists": ".cookie-consent-wrapper > .cookie-consent.js-cookie-consent > .cookie-consent__overlay"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-consent .cookie-consent__buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "comment": "the click handlers are attached on window load, so a click can land too early",
+            "waitForThenClick": ".js-cookie-consent .js-accept-all",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the click handlers are attached on window load, so a click can land too early",
+            "waitForThenClick": ".js-cookie-consent .js-accept-essential",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cc_cookie="
+        }
+    ]
+}
