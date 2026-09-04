@@ -1,11 +1,11 @@
 {
     "name": "cookie-law-info",
     "prehideSelectors": ["#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay"],
-    "detectCmp": [{ "exists": "#cookie-law-info-bar" }, { "eval": "EVAL_COOKIE_LAW_INFO_DETECT" }],
+    "detectCmp": [{ "exists": "#cookie-law-info-bar" }],
     "detectPopup": [{ "visible": "#cookie-law-info-bar" }],
     "optIn": [
         {
-            "click": "[data-cli_action=\"accept\"]"
+            "click": "[data-cli_action=\"accept\"], #cookie_action_close_header"
         }
     ],
     "optOut": [
@@ -13,7 +13,9 @@
             "hide": "#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay"
         },
         {
-            "eval": "EVAL_COOKIE_LAW_INFO_0"
+            "comment": "legacy plugin versions (<=1.5.x) have no CLI API and no reject option, so hiding is the only option there",
+            "eval": "EVAL_COOKIE_LAW_INFO_0",
+            "optional": true
         }
     ],
     "test": [
