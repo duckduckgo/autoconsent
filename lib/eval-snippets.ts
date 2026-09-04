@@ -96,6 +96,26 @@ export const snippets = {
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
+    EVAL_AVIA_COOKIE_CONSENT_REFUSE: () => {
+        const button = document.querySelector('.avia-cookie-consent-button.avia-cookie-hide-notification');
+        if (!button) {
+            return false;
+        }
+        // The refuse button is guarded by a native confirm() prompt; blanking its message skips it.
+        if (window.AviaPrivacyCookieAdditionalData) {
+            window.AviaPrivacyCookieAdditionalData.cookie_refuse_button_alert = '';
+        }
+        button.click();
+        return true;
+    },
+    EVAL_AVIA_COOKIE_CONSENT_TEST: () => {
+        try {
+            return !!sessionStorage.getItem('aviaCookieRefused');
+        } catch {
+            // Enfold falls back to hiding the bar without storing anything when storage is unavailable.
+            return document.documentElement.classList.contains('av-cookies-session-refused');
+        }
+    },
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>

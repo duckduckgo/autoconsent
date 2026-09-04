@@ -1,0 +1,12 @@
+{
+    "name": "avia-cookie-consent",
+    "prehideSelectors": [".avia-cookie-consent"],
+    "detectCmp": [{ "exists": ".avia-cookie-consent" }, { "exists": ".avia-cookie-consent-button.avia-cookie-hide-notification" }],
+    "detectPopup": [{ "visible": ".avia-cookie-consent" }],
+    "optIn": [{ "waitForThenClick": ".avia-cookie-consent .avia-cookie-consent-button.avia-cookie-close-bar" }],
+    "optOut": [
+        { "eval": "EVAL_AVIA_COOKIE_CONSENT_REFUSE" },
+        { "waitFor": ".avia-cookie-consent.cookiebar-hidden", "timeout": 5000, "optional": true }
+    ],
+    "test": [{ "eval": "EVAL_AVIA_COOKIE_CONSENT_TEST" }]
+}
