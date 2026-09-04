@@ -2,7 +2,7 @@
     "name": "mirasvit-gdpr",
     "prehideSelectors": ["#gdprCookieBar", "#gdprCookieBarOverlay", ".mst-gdpr__cookie-bar-wrapper", ".mst-gdpr__cookie-bar-overlay"],
     "detectCmp": [{ "exists": ".mst-gdpr__cookie-bar .mst-gdpr__buttons" }],
-    "detectPopup": [{ "visible": ".mst-gdpr__cookie-bar", "check": "any" }],
+    "detectPopup": [{ "visible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons", "check": "any" }],
     "optIn": [
         {
             "any": [
@@ -13,7 +13,10 @@
     ],
     "optOut": [
         {
-            "if": { "exists": ".mst-gdpr__buttons [data-trigger-settings=decline],.mst-gdpr__buttons button[\\@click=handleDecline]" },
+            "if": {
+                "visible": ".mst-gdpr__buttons [data-trigger-settings=decline],.mst-gdpr__buttons button[\\@click=handleDecline]",
+                "check": "any"
+            },
             "then": [
                 {
                     "any": [
@@ -30,14 +33,14 @@
                     ]
                 },
                 {
-                    "waitForVisible": "[data-mst-gdpr-settings-modal],.mst-gdpr__cookie-settings--cookie-modal-settings,[x-data=initGdprSettingsModal] .cookie-group-container",
+                    "waitForVisible": "[data-mst-gdpr-settings-apply],.mst-gdpr__cookie-settings--success-btn,[x-data=initGdprSettingsModal] [x-on\\:click=save]",
                     "check": "any",
-                    "timeout": 3000
+                    "timeout": 5000
                 },
                 {
                     "waitForThenClick": "input.checkbox[data-group-id]:not([disabled]):checked",
                     "all": true,
-                    "timeout": 3000,
+                    "timeout": 2000,
                     "optional": true
                 },
                 {
@@ -49,7 +52,7 @@
                 }
             ]
         },
-        { "waitForVisible": ".mst-gdpr__cookie-bar", "check": "none", "timeout": 3000 }
+        { "waitForVisible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons", "check": "none", "timeout": 10000 }
     ],
-    "test": [{ "cookieContains": "gdpr_cookie_consent=" }, { "visible": ".mst-gdpr__cookie-bar", "check": "none" }]
+    "test": [{ "cookieContains": "gdpr_cookie_consent=" }, { "visible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons", "check": "none" }]
 }
