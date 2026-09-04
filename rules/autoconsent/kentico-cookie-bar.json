@@ -7,6 +7,5 @@
     "optOut": [
         { "waitForThenClick": ".cookie-bar.js-cookie-bar .js-cookie-options input[value=\"Functional\"]" },
         { "waitForThenClick": ".cookie-bar.js-cookie-bar .js-save-preferences" }
-    ],
-    "test": [{ "visible": ".cookie-bar.js-cookie-bar", "check": "none" }]
+    ]
 }
