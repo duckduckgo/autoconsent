@@ -1,16 +1,16 @@
 {
     "name": "termsfeed",
     "vendorUrl": "https://termsfeed.com",
-    "comment": "v4.x.x",
-    "prehideSelectors": [".termsfeed-com---nb"],
+    "comment": "v4.x.x, including the freeprivacypolicy.com white label of the same library",
+    "prehideSelectors": [".termsfeed-com---nb,.freeprivacypolicy-com---nb"],
     "detectCmp": [
         {
-            "exists": ".termsfeed-com---nb"
+            "exists": ".termsfeed-com---nb,.freeprivacypolicy-com---nb"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".termsfeed-com---nb"
+            "visible": ".termsfeed-com---nb,.freeprivacypolicy-com---nb"
         }
     ],
     "optIn": [
