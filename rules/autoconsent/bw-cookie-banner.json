@@ -1,0 +1,30 @@
+{
+    "name": "bw-cookie-banner",
+    "vendorUrl": "https://wwws.airfrance.fr/",
+    "prehideSelectors": ["#bw-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#bw-cookie-banner #bw-cookie-banner-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#bw-cookie-banner-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#bw-cookie-banner #accept_cookies_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#bw-cookie-banner #decline_cookies_btn"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "bw_cookie_banner="
+        }
+    ]
+}
