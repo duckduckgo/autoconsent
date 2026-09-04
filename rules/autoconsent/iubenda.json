@@ -7,7 +7,16 @@
     "optOut": [
         {
             "if": { "exists": ".iubenda-cs-reject-btn" },
-            "then": [{ "click": ".iubenda-cs-reject-btn" }],
+            "comment": "When the banner content overflows, iubenda asks for a second press to confirm. `retry` covers that for a visible reject button; the guarded click below covers the variants where it is hidden and only reachable programmatically, so `retry` sees it as already gone.",
+            "then": [
+                { "waitForThenClick": ".iubenda-cs-reject-btn", "retry": 3, "retryInterval": 500 },
+                { "waitForVisible": "#iubenda-cs-banner", "check": "none", "timeout": 1000, "optional": true },
+                {
+                    "if": { "visible": "#iubenda-cs-banner" },
+                    "then": [{ "waitForThenClick": ".iubenda-cs-reject-btn", "timeout": 500, "optional": true }],
+                    "optional": true
+                }
+            ],
             "else": [
                 {
                     "waitForThenClick": ".iubenda-cs-customize-btn"
