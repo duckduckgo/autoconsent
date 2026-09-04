@@ -1,0 +1,42 @@
+{
+    "name": "orejime",
+    "_metadata": {
+        "vendorUrl": "https://github.com/empreinte-digitale/orejime"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".orejime-Notice", ".orejime-Banner", ".orejime-ModalOverlay", ".orejime-ModalWrapper"],
+    "detectCmp": [{ "exists": ".orejime-Notice, .orejime-Banner, .orejime-Modal" }],
+    "detectPopup": [{ "visible": ".orejime-Notice, .orejime-Banner, .orejime-Modal", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": ".orejime-Notice-saveButton, .orejime-Banner-saveButton" },
+            "then": [{ "waitForThenClick": ".orejime-Notice-saveButton, .orejime-Banner-saveButton" }],
+            "else": [
+                { "waitForThenClick": ".orejime-AppToggles-enableAll, .orejime-PurposeToggles-enableAll", "optional": true },
+                { "waitForThenClick": ".orejime-Modal-saveButton" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".orejime-Notice-declineButton, .orejime-Banner-declineButton" },
+            "then": [{ "waitForThenClick": ".orejime-Notice-declineButton, .orejime-Banner-declineButton" }],
+            "else": [
+                { "waitForThenClick": ".orejime-Notice-learnMoreButton, .orejime-Banner-learnMoreButton", "optional": true },
+                { "waitForVisible": ".orejime-Modal", "timeout": 2000 },
+                { "waitForThenClick": ".orejime-AppToggles-disableAll, .orejime-PurposeToggles-disableAll", "optional": true },
+                {
+                    "click": ".orejime-AppItem-input:checked:not([disabled]), .orejime-Purpose-input:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".orejime-Modal-saveButton" }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": ".orejime-Notice, .orejime-Banner, .orejime-Modal", "timeout": 3000, "check": "none" }]
+}
