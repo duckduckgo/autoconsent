@@ -1,0 +1,9 @@
+{
+    "name": "infomaniak-rgpd",
+    "prehideSelectors": ["module-rgpd-component"],
+    "detectCmp": [{ "exists": "module-rgpd-component" }],
+    "detectPopup": [{ "visible": ["module-rgpd-component", ".modal module-rgpd-body-component .buttons"] }],
+    "optIn": [{ "waitForThenClick": ["module-rgpd-component", ".modal module-rgpd-body-component .buttons > button:nth-of-type(1)"] }],
+    "optOut": [{ "waitForThenClick": ["module-rgpd-component", ".modal module-rgpd-body-component .buttons > button:nth-of-type(2)"] }],
+    "test": [{ "cookieContains": "cookieConsent=consent_1" }]
+}
