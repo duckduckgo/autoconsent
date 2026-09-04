@@ -41,8 +41,18 @@ export default class ConsentManager extends AutoConsentCMPBase {
         return false;
     }
 
+    // The banner markup can be inserted long before the CMP decides to render it. Consent set
+    // through the API in that window is honoured, but the CMP still renders the banner
+    // afterwards, so wait for it to show up before acting on it.
+    async waitForBanner() {
+        if (this.elementExists('#cmpbox') && !this.elementVisible('#cmpbox .cmpmore', 'any')) {
+            await this.waitForVisible('#cmpbox .cmpmore', 4000, 'any');
+        }
+    }
+
     async optOut() {
         await this.wait(500);
+        await this.waitForBanner();
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
         }
@@ -67,6 +77,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async optIn() {
+        await this.waitForBanner();
         if (this.apiAvailable) {
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
         }

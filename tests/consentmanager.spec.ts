@@ -13,3 +13,8 @@ generateCMPTests(
         skipRegions: ['US', 'GB'],
     },
 );
+
+// US-only site whose banner is rendered a few seconds after the CMP API becomes available.
+generateCMPTests('consentmanager.net', ['https://www.schluter.com/schluter-us/en_US/'], {
+    onlyRegions: ['US'],
+});
