@@ -1,0 +1,9 @@
+{
+    "name": "abebooks",
+    "prehideSelectors": ["#gdpr-banner-component.abe-gdpr-banner"],
+    "detectCmp": [{ "exists": "#gdpr-banner-component.abe-gdpr-banner #gdpr-banner-component-decline-btn" }],
+    "detectPopup": [{ "visible": "#gdpr-banner-component.abe-gdpr-banner" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-banner-component-consent-btn" }],
+    "optOut": [{ "waitForThenClick": "#gdpr-banner-component-decline-btn" }],
+    "test": [{ "cookieContains": "abeconsent=%221%3A1%2C2%3A0%2C3%3A0%2C4%3A0%22" }]
+}
