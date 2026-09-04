@@ -1,0 +1,32 @@
+{
+    "name": "ellera-cookie-consent",
+    "prehideSelectors": ["#elc-cookie-consent"],
+    "detectCmp": [{ "exists": "#elc-cookie-consent #elc-cookie-consent-form" }],
+    "detectPopup": [{ "visible": "#elc-cookie-consent" }],
+    "optIn": [
+        {
+            "if": { "exists": "#elc-accept-all-link" },
+            "then": [{ "waitForThenClick": "#elc-accept-all-link" }],
+            "else": [{ "waitForThenClick": "#elc-accept-link" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#elc-decline-link" },
+            "then": [{ "waitForThenClick": "#elc-decline-link" }],
+            "else": [
+                {
+                    "click": "#elc-cookie-consent-form input[type=\"checkbox\"]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "if": { "exists": "#elc-save-link" },
+                    "then": [{ "waitForThenClick": "#elc-save-link" }],
+                    "else": [{ "waitForThenClick": "#elc-accept-link" }]
+                }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#elc-cookie-consent", "check": "none" }]
+}
