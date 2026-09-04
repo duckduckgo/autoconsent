@@ -1,0 +1,49 @@
+{
+    "name": "planthealthportal.defra.gov.uk",
+    "vendorUrl": "https://planthealthportal.defra.gov.uk/",
+    "runContext": {
+        "urlPattern": "^https?://planthealthportal\\.defra\\.gov\\.uk/"
+    },
+    "prehideSelectors": [".cookies-container"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-container .mainCookieArea"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-container .mainCookieArea"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-container .accept-all-cookies-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".cookies-container .accept-necessary-only-btn"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookies-container .accept-necessary-only-btn"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookies-container .accept-hide-message-btn"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".cookies-accepted-container #closeStatusPopUp",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_website_cookie_essentialCookies=essentialCookies"
+        }
+    ]
+}
