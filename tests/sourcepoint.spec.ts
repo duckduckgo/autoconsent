@@ -6,7 +6,11 @@ import generateCMPTests from '../playwright/runner';
 // per page is expected here rather than a sign of a reload loop.
 const bothRulesComplete = { expectedRuns: 2 };
 
-generateCMPTests('Sourcepoint-frame', ['https://news.sky.com/', 'https://www.economist.com/', 'https://www.carwow.co.uk/'], bothRulesComplete);
+generateCMPTests(
+    'Sourcepoint-frame',
+    ['https://news.sky.com/', 'https://www.economist.com/', 'https://www.carwow.co.uk/'],
+    bothRulesComplete,
+);
 
 // The Guardian serves a "consent or pay" wall in the EU/EEA and UK, where Sourcepoint-frame
 // bails and only sourcepoint-top acts; the remaining regions get a free-reject popup.
