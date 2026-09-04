@@ -8,6 +8,11 @@ generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
     skipRegions: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'PL', 'SE', 'NO', 'DK', 'CH'],
 });
 
+// US National notice ("Continue" / "Options") and its privacy manager, only served in the US
+generateCMPTests('Sourcepoint-frame', ['https://news.bloomberglaw.com/', 'https://news.bloombergtax.com/', 'https://news.bgov.com/'], {
+    onlyRegions: ['US'],
+});
+
 generateCMPTests(
     'Sourcepoint-frame',
     [

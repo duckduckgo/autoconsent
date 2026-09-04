@@ -2,6 +2,10 @@ import { RunContext } from '../rules';
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
+// Accept/continue buttons across the message variants. Their presence marks a notice
+// rather than an already-open privacy manager.
+const ACCEPT_SELECTORS = '.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_Accept';
+
 export default class SourcePoint extends AutoConsentCMPBase {
     name = 'Sourcepoint-frame';
     prehideSelectors = ["div[id^='sp_message_container_'],.message-overlay", '#sp_privacy_manager_container'];
@@ -53,20 +57,21 @@ export default class SourcePoint extends AutoConsentCMPBase {
             return await this.waitForElement('.priv-save-btn', 2000);
         }
         // check for the paywall button, and bail if it exists to prevent broken opt out
-        await this.waitForElement(
-            '.sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT',
-            2000,
-        );
+        await this.waitForElement(`${ACCEPT_SELECTORS},.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_SAVE_AND_EXIT`, 2000);
         return !this.elementExists('.sp_choice_type_9');
     }
 
     async optIn() {
-        await this.waitForElement('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL', 2000);
+        await this.waitForElement(ACCEPT_SELECTORS, 2000);
         if (await this.click('.sp_choice_type_11')) {
             return true;
         }
 
         if (await this.click('.sp_choice_type_ACCEPT_ALL')) {
+            return true;
+        }
+
+        if (await this.click('.sp_choice_type_Accept')) {
             return true;
         }
         return false;
@@ -78,7 +83,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
         // US National PM is served at /us_pm/index.html, same as the initial notice.
         // Distinguish the manager from the notice by the absence of the accept/continue button.
-        if (location.pathname === '/us_pm/index.html' && !document.querySelector('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL')) {
+        if (location.pathname === '/us_pm/index.html' && !document.querySelector(ACCEPT_SELECTORS)) {
             return true;
         }
         return false;
@@ -144,6 +149,16 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
 
         await this.waitForElement('.type-modal', 20000);
+
+        // US National manager: every switch is an opt-out, and the save button carries no sp_choice_type class
+        if (this.elementExists('#privacy-manager-us .pm-us')) {
+            await this.click('#privacy-manager-us .pm-us .pm-toggle[aria-checked=false]', true);
+            if (this.elementExists('.sp_choice_type_SAVE_AND_EXIT')) {
+                return await this.click('.sp_choice_type_SAVE_AND_EXIT');
+            }
+            return await this.click('#privacy-manager-us .bottom-row .message-button');
+        }
+
         if (this.elementExists('[role=tablist]')) {
             await this.waitForElement('[role=tablist] [role=tab]', 10000);
         }
