@@ -189,6 +189,50 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
+    // Older Shopware storefronts bind their cookie bar handlers to `touchstart` instead of `click` on
+    // touch devices, so a plain click step is ignored there. Only one of the two is ever bound, so both
+    // are dispatched. The handler sits either on the wrapper or on the button inside it depending on the
+    // theme; dispatching on the innermost button covers both.
+    EVAL_SHOPWARE_ACTIVATE_DENY: () => {
+        const el = document.querySelector('.cookie-permission-container .js-cookie-permission-button');
+        if (!el) return false;
+        const target = el.querySelector('button') || el;
+        target.dispatchEvent(new Event('touchstart', { bubbles: true }));
+        target.click();
+        return true;
+    },
+    EVAL_SHOPWARE_ACTIVATE_CONFIGURE: () => {
+        const el = document.querySelector('.cookie-permission-container .js-cookie-configuration-button');
+        if (!el) return false;
+        const target = el.querySelector('button') || el;
+        target.dispatchEvent(new Event('touchstart', { bubbles: true }));
+        target.click();
+        return true;
+    },
+    EVAL_SHOPWARE_ACTIVATE_ACCEPT_ALL: () => {
+        const el = document.querySelector('.cookie-permission-container .js-cookie-accept-all-button');
+        if (!el) return false;
+        const target = el.querySelector('button') || el;
+        target.dispatchEvent(new Event('touchstart', { bubbles: true }));
+        target.click();
+        return true;
+    },
+    EVAL_SHOPWARE_ACTIVATE_OFFCANVAS_SUBMIT: () => {
+        const el = document.querySelector('.offcanvas .js-offcanvas-cookie-submit');
+        if (!el) return false;
+        const target = el.querySelector('button') || el;
+        target.dispatchEvent(new Event('touchstart', { bubbles: true }));
+        target.click();
+        return true;
+    },
+    EVAL_SHOPWARE_ACTIVATE_OFFCANVAS_ACCEPT_ALL: () => {
+        const el = document.querySelector('.offcanvas .js-offcanvas-cookie-accept-all');
+        if (!el) return false;
+        const target = el.querySelector('button') || el;
+        target.dispatchEvent(new Event('touchstart', { bubbles: true }));
+        target.click();
+        return true;
+    },
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&

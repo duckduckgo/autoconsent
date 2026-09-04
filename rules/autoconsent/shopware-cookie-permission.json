@@ -1,0 +1,66 @@
+{
+    "name": "shopware-cookie-permission",
+    "prehideSelectors": [".cookie-permission-container"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-permission-container [class*='js-cookie-']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-permission-container"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": ".cookie-permission-container .js-cookie-accept-all-button"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_SHOPWARE_ACTIVATE_ACCEPT_ALL"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_SHOPWARE_ACTIVATE_CONFIGURE"
+                },
+                {
+                    "waitForVisible": ".offcanvas .js-offcanvas-cookie-accept-all"
+                },
+                {
+                    "eval": "EVAL_SHOPWARE_ACTIVATE_OFFCANVAS_ACCEPT_ALL"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".cookie-permission-container .js-cookie-permission-button"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_SHOPWARE_ACTIVATE_DENY"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "Some shops hide the decline button; saving the configuration keeps only the required cookies, which are preselected",
+                    "eval": "EVAL_SHOPWARE_ACTIVATE_CONFIGURE"
+                },
+                {
+                    "waitForVisible": ".offcanvas .js-offcanvas-cookie-submit"
+                },
+                {
+                    "eval": "EVAL_SHOPWARE_ACTIVATE_OFFCANVAS_SUBMIT"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-preference=1"
+        }
+    ]
+}
