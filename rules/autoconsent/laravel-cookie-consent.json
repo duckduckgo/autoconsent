@@ -1,0 +1,65 @@
+{
+    "name": "laravel-cookie-consent",
+    "vendorUrl": "https://github.com/statikbe/laravel-cookie-consent",
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": [".js-lcc-modal", ".js-lcc-backdrop"],
+    "detectCmp": [
+        {
+            "exists": ".js-lcc-modal-alert"
+        },
+        {
+            "exists": ".js-lcc-modal-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-lcc-modal-alert"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-lcc-modal-alert .js-lcc-accept"
+        },
+        {
+            "setStyle": "display: none",
+            "selector": ".js-lcc-backdrop",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".js-lcc-modal-alert .js-lcc-essentials"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".js-lcc-modal-alert .js-lcc-essentials"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "every settings toggle shares one delegated handler, so any of them opens the settings modal - sites that customise the alert modal may not have one inside it",
+                    "waitForThenClick": ".js-lcc-settings-toggle"
+                },
+                {
+                    "waitForVisible": ".js-lcc-modal-settings"
+                },
+                {
+                    "waitForThenClick": ".js-lcc-modal-settings .js-lcc-settings-save"
+                }
+            ]
+        },
+        {
+            "comment": "prehiding the backdrop suppresses its fade-out transition, so its transitionend handler never restores display: none",
+            "setStyle": "display: none",
+            "selector": ".js-lcc-backdrop",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "visible": ".js-lcc-modal",
+            "check": "none"
+        }
+    ]
+}
