@@ -1,0 +1,37 @@
+{
+    "name": "bcferries.com",
+    "_metadata": {
+        "vendorUrl": "https://www.bcferries.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bcferries\\.com/"
+    },
+    "prehideSelectors": ["#note .cpref"],
+    "detectCmp": [
+        {
+            "exists": "#note .cpref #cPrefToggle"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#note .cpref"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cAccept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cPrefToggle"
+        },
+        {
+            "waitForThenClick": "#cPrefModal label[for=\"tab-4r\"]"
+        },
+        {
+            "waitForThenClick": "#cPrefSave"
+        }
+    ],
+    "comment": "Saving preferences triggers the site's own location.reload(), so a cookieContains self-test races with the navigation and is omitted."
+}
