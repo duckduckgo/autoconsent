@@ -1,3 +1,16 @@
+# v16.36.0 (Fri Sep 04 2026)
+
+#### Rules
+
+- Rule update: mensaje-cookies [#1533](https://github.com/duckduckgo/autoconsent/pull/1533) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.35.0 (Thu Sep 03 2026)
 
 #### Rules
