@@ -158,7 +158,8 @@ export const snippets = {
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
         }) || true,
-    EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    // Site ids are not always numeric. Dashes are excluded to skip the sibling `-granular`/`-uspr` cookies, which are also set without consent.
+    EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-[^=;\-\s]+=/),
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
