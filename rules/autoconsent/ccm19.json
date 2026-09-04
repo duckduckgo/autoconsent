@@ -1,0 +1,16 @@
+{
+    "name": "ccm19",
+    "vendorUrl": "https://www.ccm19.de/",
+    "prehideSelectors": ["#ccm-widget"],
+    "detectCmp": [{ "exists": "#ccm-widget" }],
+    "detectPopup": [{ "visible": "#ccm-widget.ccm-show" }],
+    "optIn": [{ "waitForThenClick": "#ccm-widget .ccm--save-settings" }],
+    "optOut": [
+        {
+            "if": { "exists": "#ccm-widget .ccm--decline-cookies" },
+            "then": [{ "waitForThenClick": "#ccm-widget .ccm--decline-cookies" }],
+            "else": [{ "waitForThenClick": "#ccm-widget .ccm-dismiss-button" }]
+        }
+    ],
+    "test": [{ "visible": "#ccm-widget.ccm-show", "check": "none" }]
+}
