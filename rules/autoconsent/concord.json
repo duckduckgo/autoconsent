@@ -1,0 +1,41 @@
+{
+    "name": "concord",
+    "_metadata": { "vendorUrl": "https://www.concord.tech/" },
+    "prehideSelectors": ["#cd-outer-hab"],
+    "detectCmp": [{ "exists": "#cd-outer-hab" }],
+    "detectPopup": [{ "visible": ["#cd-outer-hab", ".cd-consent-banner"] }],
+    "optIn": [{ "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-accept-all-button\"]"] }],
+    "optOut": [
+        {
+            "if": { "exists": ["#cd-outer-hab", "[data-testid=\"cd-deny-all-button\"]"] },
+            "then": [{ "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-deny-all-button\"]"] }],
+            "else": [
+                {
+                    "comment": "US-style notice has no reject button, so reject through the privacy center instead",
+                    "if": { "exists": ["#cd-outer-hab", "[data-testid=\"cd-customize-button\"]"] },
+                    "then": [
+                        { "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-customize-button\"]"] },
+                        { "waitForVisible": ["#cd-outer-hab", "[data-testid=\"cd-confirm-choices-button\"]"] },
+                        { "click": ["#cd-outer-hab", "[data-testid=\"cd-switch-analytics\"][data-state=\"checked\"]"], "optional": true },
+                        { "click": ["#cd-outer-hab", "[data-testid=\"cd-switch-functional\"][data-state=\"checked\"]"], "optional": true },
+                        { "click": ["#cd-outer-hab", "[data-testid=\"cd-switch-marketing\"][data-state=\"checked\"]"], "optional": true },
+                        {
+                            "click": ["#cd-outer-hab", "[data-testid=\"cd-switch-unclassified\"][data-state=\"checked\"]"],
+                            "optional": true
+                        },
+                        {
+                            "click": ["#cd-outer-hab", "[data-testid=\"cd-switch-do_not_sell\"][data-state=\"unchecked\"]"],
+                            "optional": true
+                        },
+                        {
+                            "click": ["#cd-outer-hab", "[data-testid=\"cd-switch-limit_pii_use\"][data-state=\"unchecked\"]"],
+                            "optional": true
+                        },
+                        { "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-confirm-choices-button\"]"] }
+                    ],
+                    "else": [{ "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-close-button\"]"] }]
+                }
+            ]
+        }
+    ]
+}
