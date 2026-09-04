@@ -180,10 +180,11 @@ const REJECT_PATTERNS_ENGLISH = [
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
-    // "allow necessary cookies continue", "use essential cookies only", "functional only", "i confirm necessary"
-    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
-    /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
-    /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s+only\s*$/is,
+    // "allow necessary cookies continue", "use essential cookies only", "functional only", "i confirm necessary",
+    // "allow technical cookies only"
+    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal|technical)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal|technical)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal|technical)\s*(cookies)?\s+only\s*$/is,
 
     // e.g. "do not sell or share my personal information", "opt out of sale ..." (CCPA)
     /do\s+not\s+sell|opt\s+out\s+of\s+sale/is,
