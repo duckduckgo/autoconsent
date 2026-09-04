@@ -1,7 +1,9 @@
 import generateCMPTests from '../playwright/runner';
 
 generateCMPTests('termsfeed', [
-    'https://ftbwiki.org/Feed_The_Beast_Wiki',
     'https://inspirationaladventures.com/',
-    'http://www.campingplatz-suche.com/',
+    'https://concretecaptain.com/',
+    // freeprivacypolicy.com rebuild of the same widget
+    'https://guitarapp.com/',
+    'https://www.allnet-flatrate.net/',
 ]);

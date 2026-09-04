@@ -1,16 +1,16 @@
 {
     "name": "termsfeed",
     "vendorUrl": "https://termsfeed.com",
-    "comment": "v4.x.x",
-    "prehideSelectors": [".termsfeed-com---nb"],
+    "comment": "v4.x.x. The same widget is rebranded per generator domain (termsfeed.com, freeprivacypolicy.com, privacypolicies.com), which only changes the wrapper's id/class prefix.",
+    "prehideSelectors": ["div[id$=\"---nb\"]"],
     "detectCmp": [
         {
-            "exists": ".termsfeed-com---nb"
+            "exists": "div[id$=\"---nb\"] .cc-nb-main-container"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".termsfeed-com---nb"
+            "visible": "div[id$=\"---nb\"] .cc-nb-main-container"
         }
     ],
     "optIn": [
