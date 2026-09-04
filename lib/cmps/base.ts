@@ -3,8 +3,14 @@ import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, R
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
 import { getFunctionBody, snippets } from '../eval-snippets';
-import { highlightNode, isElementVisible, isTopFrame, unhighlightNode } from '../utils';
+import { highlightNode, isElementVisible, isTopFrame, unhighlightNode, waitFor } from '../utils';
 import { getActionablePopups } from '../heuristics';
+
+// How many times the heuristic opt-out click is repeated while the target button stays visible.
+const HEURISTIC_CLICK_RETRIES = 1;
+// How long to wait for the button to disappear before clicking again.
+const HEURISTIC_CLICK_RETRY_INTERVAL = 500;
+const HEURISTIC_CLICK_POLL_INTERVAL = 50;
 
 export async function success(action: Promise<boolean>): Promise<boolean> {
     const result = await action;
@@ -484,13 +490,25 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         return buttons.find((button) => button.regexClassification === targetButtonType);
     }
 
-    optOut(): Promise<boolean> {
+    async optOut(): Promise<boolean> {
         // use only the first found popup candidate
         const button = this.getTargetButton();
-        if (button) {
-            return this.clickElement(button.element);
+        if (!button) {
+            return false;
         }
-        return Promise.resolve(false);
+        let clicked = await this.clickElement(button.element);
+        // Heuristics can act on a popup the moment it appears, before its click handler is
+        // attached, and that first click is silently dropped. A button that is still visible
+        // means the click was lost, so we repeat it.
+        for (let attempt = 0; clicked && attempt < HEURISTIC_CLICK_RETRIES; attempt++) {
+            const pollTimes = Math.ceil(HEURISTIC_CLICK_RETRY_INTERVAL / HEURISTIC_CLICK_POLL_INTERVAL);
+            const isGone = await waitFor(() => !isElementVisible(button.element), pollTimes, HEURISTIC_CLICK_POLL_INTERVAL);
+            if (isGone) {
+                break;
+            }
+            clicked = await this.clickElement(button.element);
+        }
+        return clicked;
     }
 
     optIn(): Promise<boolean> {

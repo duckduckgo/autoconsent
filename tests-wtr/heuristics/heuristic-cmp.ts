@@ -163,16 +163,26 @@ describe('AutoConsentHeuristicCMP', () => {
     });
 
     describe('optOut', () => {
+        // Hides the popup on click, like a CMP whose handler is already attached.
+        function hideOnClick(popupId: string) {
+            const popup = document.getElementById(popupId);
+            const handler = () => popup?.classList.remove('visible');
+            popup?.addEventListener('click', handler);
+            return () => popup?.removeEventListener('click', handler);
+        }
+
         it('clicks the reject button for REJECT popup', async () => {
             const autoconsent = createAutoconsent('tier2');
             const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-reject');
+            const cleanup = hideOnClick('popup-reject');
             await cmp.detectCmp();
 
             const target = cmp.getTargetButton();
             expect(target?.regexClassification).to.equal('reject');
 
             const result = await cmp.optOut();
+            cleanup();
 
             expect(result).to.be.true;
             expect(autoconsent.state.clicks).to.equal(1);
@@ -182,12 +192,14 @@ describe('AutoConsentHeuristicCMP', () => {
             const autoconsent = createAutoconsent('tier2');
             const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-acknowledge-only');
+            const cleanup = hideOnClick('popup-acknowledge-only');
             await cmp.detectCmp();
 
             const target = cmp.getTargetButton();
             expect(target?.regexClassification).to.equal('acknowledge');
 
             const result = await cmp.optOut();
+            cleanup();
 
             expect(result).to.be.true;
             expect(autoconsent.state.clicks).to.equal(1);
@@ -197,15 +209,29 @@ describe('AutoConsentHeuristicCMP', () => {
             const autoconsent = createAutoconsent('tier2');
             const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
             showPopup('popup-accept-only');
+            const cleanup = hideOnClick('popup-accept-only');
             await cmp.detectCmp();
 
             const target = cmp.getTargetButton();
             expect(target?.regexClassification).to.equal('accept');
 
             const result = await cmp.optOut();
+            cleanup();
 
             expect(result).to.be.true;
             expect(autoconsent.state.clicks).to.equal(1);
+        });
+
+        it('repeats the click when the popup stays visible', async () => {
+            const autoconsent = createAutoconsent('tier2');
+            const cmp = new AutoConsentHeuristicCMP(autoconsent, 'tier2');
+            showPopup('popup-reject');
+            await cmp.detectCmp();
+
+            const result = await cmp.optOut();
+
+            expect(result).to.be.true;
+            expect(autoconsent.state.clicks).to.equal(2);
         });
     });
 });
