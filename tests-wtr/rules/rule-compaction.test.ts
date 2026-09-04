@@ -29,6 +29,9 @@ describe('RuleCompaction', () => {
                 if (step.if) {
                     step.if = stripCommentFromStep(step.if);
                 }
+                if (step.any) {
+                    step.any = step.any.map(stripCommentFromStep);
+                }
                 if (step.then) {
                     step.then = step.then.map(stripCommentFromStep);
                 }
