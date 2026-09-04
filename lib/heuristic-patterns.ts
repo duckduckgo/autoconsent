@@ -799,6 +799,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     // "understood" / "got it" / "that's ok" (multilingual)
     /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
 
+    // "I agree, dismiss this banner": a notice-only banner whose sole button dismisses it without storing consent
+    /^(i )?agree,? dismiss this banner$/is,
+
     // confirm
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
 

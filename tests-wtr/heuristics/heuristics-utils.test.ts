@@ -244,6 +244,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
     });
 
+    it('treats a dismiss-this-banner button as acknowledge rather than accept', () => {
+        expect(classifyButtonTextRegex('I agree, dismiss this banner')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Agree, dismiss this banner')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('I agree')).to.equal('accept');
+        expect(classifyButtonTextRegex('I agree, accept all cookies')).to.equal('other');
+    });
+
     it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
         expect(classifyButtonTextRegex('Подтвердить')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Подтверждаю')).to.equal('acknowledge');
