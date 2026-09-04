@@ -1,0 +1,29 @@
+{
+    "name": "truendo",
+    "prehideSelectors": [".truendo_container .tru_cookie-dialog_wrapper", ".truendo_container .tru_overlay"],
+    "detectCmp": [{ "exists": ".truendo_container" }],
+    "detectPopup": [
+        {
+            "visible": ".truendo_container .tru_cookie-dialog_d,.truendo_container .tru_cookie-dialog_1,.truendo_container .tru_cookie-dialog_2_3,.truendo_container .tru_cookie-dialog_tcf,.truendo_container .tru_iw",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#tru_accept_btn,[data-cy=banner-ack-btn],[data-testid=banner-ack-btn],[data-cy=btn-acc],.tru_cookie-dialog_2_3 .tru_cookie-dialog_ok,.tru_cookie-dialog_1 .tru_cookie-dialog_ok"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#tru_deselect_btn,[data-testid=banner-nec-only-btn],.truendo_container .tru_bnr-close-btn" },
+            "then": [{ "waitForThenClick": "#tru_deselect_btn,[data-testid=banner-nec-only-btn],.truendo_container .tru_bnr-close-btn" }],
+            "else": [
+                {
+                    "waitForThenClick": "#tru_options_btn,[data-cy=banner-options-btn],[data-testid=banner-options-btn],[data-cy=optionsBtn],[data-cy=btn-opt],.truendo_container [class*=tru_cookie-d-min],.tru_cookie-dialog_accept-only a[href='']"
+                },
+                { "waitForThenClick": "[data-cy=action-button-necessary],.tru_btn_ok--necessary" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%22ack%22%3Atrue" }]
+}
