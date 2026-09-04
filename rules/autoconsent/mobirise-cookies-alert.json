@@ -1,0 +1,24 @@
+{
+    "name": "mobirise-cookies-alert",
+    "vendorUrl": "https://mobirise.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookiesdirective", "#cookie-dialog"],
+    "detectCmp": [{ "exists": "#cookiesdirective" }, { "exists": "#impliedsubmit, #explicitsubmit" }],
+    "detectPopup": [
+        { "visible": "#impliedsubmit, #explicitsubmit", "check": "any" },
+        {
+            "comment": "an opaque backdrop means the whole page is gated behind consent, and hiding the notice would leave an unstyled, unusable page",
+            "exists": "body > div[style*=\"z-index: 1050\"]",
+            "negated": true
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#explicitsubmit, #impliedsubmit" }],
+    "optOut": [
+        {
+            "if": { "exists": "#explicitreject" },
+            "then": [{ "waitForThenClick": "#explicitreject", "retry": 5, "retryInterval": 500 }],
+            "else": [{ "hide": "#cookiesdirective, #cookie-dialog" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#impliedsubmit, #explicitsubmit", "check": "none" }]
+}
