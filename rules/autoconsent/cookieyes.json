@@ -3,27 +3,55 @@
     "prehideSelectors": [".cky-overlay,.cky-consent-container"],
     "detectCmp": [{ "exists": ".cky-consent-container" }],
     "detectPopup": [{ "visible": ".cky-consent-container" }],
-    "optIn": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=accept-button]" }],
+    "optIn": [
+        {
+            "if": { "exists": ".cky-consent-container [data-cky-tag=accept-button]" },
+            "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=accept-button]" }],
+            "else": [
+                {
+                    "if": { "exists": ".cky-consent-container [data-cky-tag=donotsell-button]" },
+                    "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=close-button]" }]
+                }
+            ]
+        }
+    ],
     "optOut": [
         {
             "if": { "exists": ".cky-consent-container [data-cky-tag=reject-button]" },
             "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=reject-button]" }],
             "else": [
                 {
-                    "if": { "exists": ".cky-consent-container [data-cky-tag=settings-button]" },
+                    "if": { "exists": ".cky-consent-container [data-cky-tag=donotsell-button]" },
                     "then": [
-                        { "click": ".cky-consent-container [data-cky-tag=settings-button]" },
-                        { "waitFor": ".cky-modal-open input[type=checkbox],.cky-consent-bar-expand input[type=checkbox]" },
+                        { "waitForThenClick": ".cky-consent-container [data-cky-tag=donotsell-button]" },
+                        { "waitFor": ".cky-modal [data-cky-tag=optout-option-toggle]" },
                         {
-                            "click": ".cky-modal-open input[type=checkbox]:checked,.cky-consent-bar-expand input[type=checkbox]:checked",
+                            "click": ".cky-modal [data-cky-tag=optout-option-toggle]:not(:checked)",
                             "all": true,
                             "optional": true
                         },
-                        {
-                            "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
-                        }
+                        { "waitForThenClick": ".cky-modal [data-cky-tag=optout-confirm-button]" },
+                        { "waitForVisible": ".cky-modal [data-cky-tag=optout-success]", "optional": true },
+                        { "waitForThenClick": ".cky-modal [data-cky-tag=optout-close]", "optional": true }
                     ],
-                    "else": [{ "hide": ".cky-consent-container,.cky-overlay,.cky-consent-bar-expand" }]
+                    "else": [
+                        {
+                            "if": { "exists": ".cky-consent-container [data-cky-tag=settings-button]" },
+                            "then": [
+                                { "click": ".cky-consent-container [data-cky-tag=settings-button]" },
+                                { "waitFor": ".cky-modal-open input[type=checkbox],.cky-consent-bar-expand input[type=checkbox]" },
+                                {
+                                    "click": ".cky-modal-open input[type=checkbox]:checked,.cky-consent-bar-expand input[type=checkbox]:checked",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
+                                }
+                            ],
+                            "else": [{ "hide": ".cky-consent-container,.cky-overlay,.cky-consent-bar-expand" }]
+                        }
+                    ]
                 }
             ]
         }
