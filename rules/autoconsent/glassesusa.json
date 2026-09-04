@@ -7,26 +7,45 @@
     "prehideSelectors": ["div[class^=\"banner_\"]:has(div[class^=\"crossContainer_\"])"],
     "detectCmp": [
         {
-            "exists": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
+            "exists": "xpath///*[text()=\"Your privacy matters\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
+            "visible": "xpath///*[text()=\"Your privacy matters\"]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"continueBtn_\"] button"
+            "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[normalize-space(.)=\"Continue\"]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "div[class^=\"banner_\"] p[class^=\"text_\"] button"
+            "comment": "opens the OneTrust preference centre, which is only loaded on demand",
+            "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[starts-with(normalize-space(.), \"Cookie Manager\")]"
+        },
+        {
+            "waitForVisible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
+            "timeout": 10000,
+            "optional": true
+        },
+        {
+            "comment": "the first click is dropped when it lands before the notice is interactive",
+            "if": {
+                "visible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
+                "check": "none"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[starts-with(normalize-space(.), \"Cookie Manager\")]",
+                    "optional": true
+                }
+            ]
         },
         {
             "waitForThenClick": "#onetrust-pc-sdk .ot-pc-refuse-all-handler",
-            "timeout": 15000
+            "timeout": 20000
         },
         {
             "waitForVisible": "#onetrust-pc-sdk",
@@ -35,8 +54,22 @@
             "optional": true
         },
         {
-            "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button",
-            "timeout": 5000
+            "comment": "the mobile layout of the notice has no close cross, only Continue",
+            "if": {
+                "exists": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "div[class^=\"banner_\"] div[class^=\"crossContainer_\"] button",
+                    "timeout": 5000
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "xpath///div[.//*[text()=\"Your privacy matters\"]]//button[normalize-space(.)=\"Continue\"]",
+                    "timeout": 5000
+                }
+            ]
         }
     ]
 }
