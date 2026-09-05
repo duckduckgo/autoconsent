@@ -155,6 +155,16 @@ describe('cleanButtonText', () => {
         expect(cleanButtonText('Reject\n\nAll')).to.equal('reject all');
     });
 
+    it('collapses a label repeated for hover animations', () => {
+        expect(cleanButtonText('Deny all\nDeny all')).to.equal('deny all');
+        expect(cleanButtonText('Reject')).to.equal('reject');
+    });
+
+    it('keeps labels that only look repeated', () => {
+        expect(cleanButtonText('Accept all cookies')).to.equal('accept all cookies');
+        expect(cleanButtonText('no no thanks')).to.equal('no no thanks');
+    });
+
     it('handles empty string', () => {
         expect(cleanButtonText('')).to.equal('');
     });

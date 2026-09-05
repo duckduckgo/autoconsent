@@ -137,7 +137,21 @@ export function cleanButtonText(buttonText: string): string {
     result = result.replace(/\s+/g, ' ');
     // strip whitespace around the text
     result = result.trim();
+    // some buttons repeat their label in an off-screen copy for hover animations
+    result = collapseRepeatedLabel(result);
     return result;
+}
+
+/**
+ * Collapse a label that consists of the same text twice, e.g. "deny all deny all" -> "deny all".
+ */
+function collapseRepeatedLabel(text: string): string {
+    const middle = (text.length - 1) / 2;
+    if (!Number.isInteger(middle) || middle === 0 || text[middle] !== ' ') {
+        return text;
+    }
+    const first = text.slice(0, middle);
+    return first === text.slice(middle + 1) ? first : text;
 }
 
 export function classifyButtonTextRegex(buttonText: string): ButtonRegexClassification {
