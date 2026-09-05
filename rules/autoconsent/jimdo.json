@@ -1,0 +1,33 @@
+{
+    "name": "jimdo",
+    "_metadata": {
+        "vendorUrl": "https://www.jimdo.com/"
+    },
+    "prehideSelectors": ["div:has(> div[data-nosnippet='true'] [data-gi-selector='accept-all-cookies'])"],
+    "detectCmp": [
+        {
+            "exists": "[data-gi-selector='accept-all-cookies']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-gi-selector='accept-all-cookies']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-gi-selector='accept-all-cookies'] a"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-gi-selector='reject-all-cookies'] a"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-gi-selector='accept-all-cookies']",
+            "check": "none"
+        }
+    ]
+}
