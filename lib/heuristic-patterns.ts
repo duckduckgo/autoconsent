@@ -63,6 +63,10 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    // e.g. "dass wir diese Cookies setzen", "wir möchten Cookies setzen"
+    /cookies.{0,30}(?:setzen|gesetzt)/gi,
+    // compound cookie categories, e.g. "Werbe- und Tracking-Cookies", "Marketing- oder Analyse-Cookies"
+    /(?:werbe|tracking|marketing|analyse|statistik)-\s?(?:und|oder|bzw\.?)\s?(?:werbe|tracking|marketing|analyse|statistik)-?cookies/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,

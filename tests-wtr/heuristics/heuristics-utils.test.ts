@@ -72,6 +72,33 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects notices about setting cookies', () => {
+        const texts = [
+            'Durch die Nutzung unserer Webseite erklären Sie sich damit einverstanden, dass wir diese Cookies setzen.',
+            'Wir möchten Cookies setzen, um unser Angebot zu verbessern',
+            'Auf dieser Seite werden Cookies gesetzt',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('detects compound cookie category names', () => {
+        const texts = [
+            'Hardwareluxx setzt keine externen Werbe- und Tracking-Cookies ein.',
+            'Wir nutzen Marketing- oder Analyse-Cookies nur mit Ihrer Einwilligung',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Günstige Flüge online buchen und Hotels vergleichen').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
