@@ -1,0 +1,8 @@
+{
+    "name": "socialfunders",
+    "prehideSelectors": ["#cookie_modal"],
+    "detectCmp": [{ "exists": "#cookie_modal #id_cookies_necessary" }, { "exists": "#cookie_modal #id_cookies_all" }],
+    "detectPopup": [{ "visible": "#cookie_modal" }],
+    "optIn": [{ "waitForThenClick": "#cookie_modal #id_cookies_all" }],
+    "optOut": [{ "waitForThenClick": "#cookie_modal #id_cookies_necessary" }]
+}
