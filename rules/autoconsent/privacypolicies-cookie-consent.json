@@ -1,0 +1,19 @@
+{
+    "name": "privacypolicies-cookie-consent",
+    "prehideSelectors": [".cookieconsent-popup", ".cookieconsent-dialog", ".cookieconsent-overlay"],
+    "detectCmp": [
+        { "exists": ".cookieconsent-popup .cookieconsent-button-wrap" },
+        { "exists": ".cookieconsent-dialog .cookieconsent-level-changer" }
+    ],
+    "detectPopup": [{ "visible": ".cookieconsent-popup" }],
+    "optIn": [{ "waitForThenClick": ".cookieconsent-popup .cookieconsent-button-wrap .ui-icon-close" }],
+    "optOut": [
+        { "waitForThenClick": ".cookieconsent-popup .cookieconsent-button-wrap .ui-icon-wrench" },
+        { "waitForVisible": ".cookieconsent-dialog .cookieconsent-level-changer" },
+        {
+            "if": { "exists": ".cookieconsent-dialog .cookieconsent-level-changer > a:nth-of-type(2).activated" },
+            "then": [{ "click": ".cookieconsent-dialog .cookieconsent-level-changer > a" }]
+        },
+        { "waitForThenClick": ".cookieconsent-dialog-close-btn, .cookieconsent-dialog .cookieconsent-dialog-close" }
+    ]
+}
