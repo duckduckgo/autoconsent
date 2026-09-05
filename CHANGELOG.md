@@ -1,3 +1,24 @@
+# v16.37.0 (Sat Sep 05 2026)
+
+#### Rules
+
+- Rule update: mirasvit-gdpr [#1545](https://github.com/duckduckgo/autoconsent/pull/1545) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bbc.com [#1544](https://github.com/duckduckgo/autoconsent/pull/1544) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tlc-direct [#1543](https://github.com/duckduckgo/autoconsent/pull/1543) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aquasana.com [#1542](https://github.com/duckduckgo/autoconsent/pull/1542) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mipro.com.tw [#1541](https://github.com/duckduckgo/autoconsent/pull/1541) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bcferries.com [#1539](https://github.com/duckduckgo/autoconsent/pull/1539) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: as-adventure [#1540](https://github.com/duckduckgo/autoconsent/pull/1540) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xe.com [#1538](https://github.com/duckduckgo/autoconsent/pull/1538) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.36.0 (Fri Sep 04 2026)
 
 #### Rules
