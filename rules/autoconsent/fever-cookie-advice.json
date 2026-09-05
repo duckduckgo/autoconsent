@@ -1,0 +1,51 @@
+{
+    "name": "fever-cookie-advice",
+    "vendorUrl": "https://feverup.com/",
+    "prehideSelectors": ["#cookie-advice.fv-cookie-advice"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-advice.fv-cookie-advice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-advice.fv-cookie-advice"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#cookie-advice [data-testid=\"accept-cookies-button\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie-advice [data-testid=\"accept-cookies-button\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookie-advice .fv-cookie-advice__close"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-advice .fv-cookie-advice__message a:not([href]), #cookie-advice .fv-cookie-advice__message button"
+        },
+        {
+            "waitForVisible": ".fv-cookies-management"
+        },
+        {
+            "waitForThenClick": ":is(fv-cookies-management-sheet, .modal-content):has(.fv-cookies-management) button[class*=\"--primary\"]"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "fever_cookies_configuration"
+        }
+    ]
+}
