@@ -159,6 +159,7 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_KALMANFILTER_TEST: () => JSON.parse(localStorage.getItem('simple_cookie_consent')).value.analytics_storage === 'denied',
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))

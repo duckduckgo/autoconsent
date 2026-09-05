@@ -1,0 +1,34 @@
+{
+    "name": "kalmanfilter",
+    "vendorUrl": "https://www.kalmanfilter.net/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kalmanfilter\\.net/"
+    },
+    "prehideSelectors": ["#simple-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#simple-cookie-banner #btn-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#simple-cookie-banner #btn-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#simple-cookie-banner #btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#simple-cookie-banner #btn-reject"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_KALMANFILTER_TEST"
+        }
+    ]
+}
