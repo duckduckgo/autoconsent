@@ -17,6 +17,7 @@ export const DETECT_PATTERNS = [
     /read more about.{0,100}cookies/gi,
     /consent to.{0,100}cookies/gi,
     /we and our partners.{0,100}cookies/gi,
+    /and (?:its|their) partners use.{0,100}cookies/gi,
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
@@ -63,6 +64,7 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    /und (?:seine|ihre)[nr]?.{0,20}partner.{0,100}cookies/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -165,6 +167,7 @@ export const DETECT_PATTERNS = [
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
+    /utilizz(?:a|ano|iamo).{0,40}cookie/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [

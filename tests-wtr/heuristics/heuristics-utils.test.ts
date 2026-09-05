@@ -70,6 +70,21 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects third-party notices that name the site operator instead of "we"', () => {
+        const texts = [
+            'To achieve these legitimate objectives, Artprice and its partners use functional, analytics, social media Cookies cookies to provide you with a relevant navigation.',
+            'Um diese legitimen Ziele zu erreichen, verwenden Artprice und seine Partner operative und analytische Cookies, und Cookies für soziale Netzwerke.',
+            'Perciò Artprice e i suoi partner utilizzano i cookies funzionali, analitici e social media cookies per fornire una navigazione coerente.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated text about business partners', () => {
+        expect(checkHeuristicPatterns('The company and its partners use recycled paper for all packaging').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with Russian popups', () => {
