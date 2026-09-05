@@ -1,0 +1,11 @@
+{
+    "name": "wp-gdpr-consent",
+    "vendorUrl": "https://github.com/10up/wp-gdpr-consent",
+    "cosmetic": true,
+    "prehideSelectors": ["#GDPRConsentBar.gdprconsent-container"],
+    "detectCmp": [{ "exists": "#GDPRConsentBar.gdprconsent-container [data-gdpr-accept]" }],
+    "detectPopup": [{ "visible": "#GDPRConsentBar.gdprconsent-container" }],
+    "optIn": [{ "waitForThenClick": "#GDPRConsentBar.gdprconsent-container [data-gdpr-accept]" }],
+    "optOut": [{ "hide": "#GDPRConsentBar.gdprconsent-container" }],
+    "test": [{ "cookieContains": "gdpr-consent=consent", "negated": true }]
+}
