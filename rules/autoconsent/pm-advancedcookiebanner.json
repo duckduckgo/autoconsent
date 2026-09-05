@@ -1,0 +1,9 @@
+{
+    "name": "pm-advancedcookiebanner",
+    "prehideSelectors": ["#acb-banner"],
+    "detectCmp": [{ "exists": "#acb-banner #acb-deny-all-button" }],
+    "detectPopup": [{ "visible": "#acb-banner" }],
+    "optIn": [{ "waitForThenClick": "#acb-banner #acb-accept-all-button" }],
+    "optOut": [{ "waitForThenClick": "#acb-banner #acb-deny-all-button" }],
+    "test": [{ "waitForVisible": "#acb-banner", "timeout": 3000, "check": "none" }]
+}
