@@ -1,0 +1,8 @@
+{
+    "name": "idxrcookies",
+    "prehideSelectors": ["body > #idxrcookies"],
+    "detectCmp": [{ "exists": "body > #idxrcookies #idxrcookiesKO" }],
+    "detectPopup": [{ "visible": "body > #idxrcookies #idxrcookiesKO" }],
+    "optIn": [{ "waitForThenClick": "body > #idxrcookies #idxrcookiesOK" }],
+    "optOut": [{ "waitForThenClick": "body > #idxrcookies #idxrcookiesKO" }]
+}
