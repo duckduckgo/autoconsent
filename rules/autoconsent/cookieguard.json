@@ -1,0 +1,22 @@
+{
+    "name": "cookieguard",
+    "vendorUrl": "http://cookieguard.eu/",
+    "prehideSelectors": ["#cookieGuardMsg"],
+    "detectCmp": [{ "exists": "#cookieGuardMsg" }],
+    "detectPopup": [{ "visible": "#cookieGuardMsg" }],
+    "optIn": [
+        {
+            "if": { "exists": "#authoriseCookies" },
+            "then": [{ "waitForThenClick": "#authoriseCookies" }],
+            "else": [{ "waitForThenClick": "#cookieGuardOkay" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#denyCookies" },
+            "then": [{ "waitForThenClick": "#denyCookies" }],
+            "else": [{ "waitForThenClick": "#cookieGuardOkay" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cookieguard_initialised=1" }]
+}
