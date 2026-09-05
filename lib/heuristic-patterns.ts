@@ -169,9 +169,10 @@ export const DETECT_PATTERNS = [
 
 const REJECT_PATTERNS_ENGLISH = [
     // e.g. "reject", "reject all", "reject all cookies", "deny all", "refuse cookies", "decline",
-    // "reject non-essential cookies", "reject unnecessary cookies", "reject all but necessary", "reject all and close"
+    // "reject non-essential cookies", "reject unnecessary cookies", "reject all but necessary", "reject all and close",
+    // "reject & continue" (the ampersand is stripped by cleanButtonText)
     // note that "reject and subscribe" and "reject and pay" are excluded via BUTTON_NEVER_MATCH_PATTERNS
-    /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies)?\s*(and\s+close)?\s*$/is,
+    /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies)?\s*((and\s+)?(close|continue|proceed))?\s*$/is,
 
     // e.g. "i do not accept", "do not accept cookies", "i do not accept the use of cookies"
     /^\s*(no,?\s*)?(i\s+)?do\s+not\s+accept\s*(the\s+use\s+of\s+)?(any\s+)?(cookies)?\s*$/is,

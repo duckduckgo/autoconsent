@@ -176,6 +176,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Reject All (except Necessary)')).to.equal('reject');
     });
 
+    it('matches reject buttons with a trailing continue/proceed', () => {
+        expect(classifyButtonTextRegex('Reject & Continue')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reject all and continue')).to.equal('reject');
+        expect(classifyButtonTextRegex('Decline and proceed')).to.equal('reject');
+    });
+
     it('matches "do not accept" variants', () => {
         expect(classifyButtonTextRegex('I do not accept')).to.equal('reject');
         expect(classifyButtonTextRegex('Do not accept cookies')).to.equal('reject');
