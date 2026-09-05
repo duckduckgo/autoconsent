@@ -1,0 +1,18 @@
+{
+    "name": "autodoc",
+    "detectCmp": [{ "exists": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"disallow_all_cookies\"]" }],
+    "detectPopup": [
+        { "visible": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"disallow_all_cookies\"]" }
+    ],
+    "optIn": [
+        { "waitForThenClick": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"allow_all_cookies\"]" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"disallow_all_cookies\"]" }
+    ],
+    "prehideSelectors": ["div[data-popup-cookies][data-terms-cookies-popup-common]"],
+    "test": [
+        { "wait": 2000, "comment": "rejecting submits a form and reloads the page" },
+        { "cookieContains": "all_marketing_cookies=denied" }
+    ]
+}
