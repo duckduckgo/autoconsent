@@ -1,0 +1,16 @@
+{
+    "name": "ti-consent",
+    "prehideSelectors": ["#tiGDPRecModal"],
+    "detectCmp": [{ "exists": "#tiGDPRecModal #consent_prompt_submit" }],
+    "detectPopup": [{ "visible": "#tiGDPRecModal .privacy_prompt" }],
+    "optIn": [{ "waitForThenClick": "#consent_prompt_submit" }],
+    "optOut": [
+        { "waitForThenClick": "#consent_pref_center" },
+        {
+            "comment": "the preference center loads lazily and defaults every category to off, so saving it rejects all",
+            "waitForThenClick": "#preferences_prompt_submit",
+            "timeout": 15000
+        }
+    ],
+    "test": [{ "cookieContains": "c3:0" }]
+}
