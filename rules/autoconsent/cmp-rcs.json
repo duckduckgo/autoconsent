@@ -1,0 +1,33 @@
+{
+    "name": "cmp-rcs",
+    "vendorUrl": "https://www.rcsmediagroup.it/",
+    "prehideSelectors": ["#_evh-ric:has(#btn_donotaccept)"],
+    "detectCmp": [
+        {
+            "exists": "#_evh-ric #cpmt_container"
+        },
+        {
+            "exists": "#_evh-ric #btn_donotaccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#_evh-ric #btn_donotaccept"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#_evh-ric #AcceptButton"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#_evh-ric #btn_donotaccept"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__cpmtAccept=false"
+        }
+    ]
+}
