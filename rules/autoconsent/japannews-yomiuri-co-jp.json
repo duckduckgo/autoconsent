@@ -1,0 +1,68 @@
+{
+    "name": "japannews.yomiuri.co.jp",
+    "_metadata": {
+        "vendorUrl": "https://japannews.yomiuri.co.jp/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://japannews\\.yomiuri\\.co\\.jp/"
+    },
+    "prehideSelectors": ["#consentModal"],
+    "detectCmp": [
+        {
+            "exists": "#consentModal #consentMessage button[onclick*=\"setConsent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consentModal #consentMessage"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": ".fc-consent-root .fc-dialog-container"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-consent"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#consentModal #consentMessage button[onclick*=\"pv: true\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".fc-consent-root .fc-dialog-container"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fc-confirm-choices",
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#consentModal #consentMessage button[onclick*=\"pv: false\"]"
+        },
+        {
+            "hide": "#consentModal"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_pc_gdprchk=0"
+        }
+    ],
+    "comment": "The site also loads Funding Choices, which is handled inline because only one CMP is acted on per page. Rejecting swaps the dialog body for a dead-end notice that keeps covering the page, so the modal is hidden after the opt-out click. The buttons carry no id or class, hence the onclick selectors, which also fail closed if the two buttons are ever swapped."
+}
