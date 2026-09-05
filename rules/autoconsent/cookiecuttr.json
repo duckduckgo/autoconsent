@@ -14,7 +14,9 @@
     ],
     "detectPopup": [
         {
-            "visible": ".cc-cookies .cc-cookie-accept"
+            "visible": ".cc-cookies .cc-cookie-accept",
+            "check": "any",
+            "comment": "some integrations render a second, hidden .cc-cookies bar for the declined state"
         }
     ],
     "optIn": [
@@ -35,6 +37,11 @@
                     "hide": ".cc-cookies"
                 }
             ]
+        },
+        {
+            "click": "#cookies_declinedbar .js-pp-cookie-hide-decline",
+            "optional": true,
+            "comment": "dismisses the follow-up bar that some integrations show once cookies are declined"
         }
     ]
 }
