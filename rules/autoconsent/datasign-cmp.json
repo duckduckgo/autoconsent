@@ -1,0 +1,82 @@
+{
+    "name": "datasign-cmp",
+    "prehideSelectors": ["#datasign_cmp__host"],
+    "detectCmp": [{ "exists": "#datasign_cmp__host" }],
+    "detectPopup": [{ "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"] }],
+    "optIn": [
+        {
+            "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary [aria-controls=\"datasign_cmp__cmp_content\"]"] },
+            "then": [
+                {
+                    "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"] },
+                    "then": [
+                        {
+                            "waitForThenClick": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_summary [aria-controls=\"datasign_cmp__cmp_content\"]"
+                            ]
+                        },
+                        { "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"] },
+                        {
+                            "click": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_content input[type=\"checkbox\"]:not(:checked):not(:disabled)"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"] }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_summary .datasign__dialogCloseButton--index-module"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "else": [
+                { "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary .datasign__dialogCloseButton--index-module"] }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "The CPRA dialog has no link into the settings panel; its config button opts out directly instead.",
+            "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary [aria-controls=\"datasign_cmp__cmp_content\"]"] },
+            "then": [
+                {
+                    "comment": "Notice-mode settings panels are informational and have no apply button, so there is nothing to reject.",
+                    "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"] },
+                    "then": [
+                        {
+                            "waitForThenClick": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_summary [aria-controls=\"datasign_cmp__cmp_content\"]"
+                            ]
+                        },
+                        { "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"] },
+                        {
+                            "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_content input[type=\"checkbox\"]:checked:not(:disabled)"],
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"] }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_summary .datasign__dialogCloseButton--index-module"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "else": [{ "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__config-button"] }]
+        }
+    ],
+    "test": [{ "eval": "EVAL_DATASIGN_CMP_TEST" }]
+}

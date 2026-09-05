@@ -145,6 +145,15 @@ export const snippets = {
             .forEach((i) => i.getAttribute('aria-checked') === 'true' && i.click()) || true,
     EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
+    EVAL_DATASIGN_CMP_TEST: () => {
+        const entry = Object.entries(localStorage).find(([k]) => k.startsWith('co.datasign.cmp.configuration.') && k.endsWith('.user'));
+        if (!entry) return false;
+        const stored = JSON.parse(entry[1]);
+        // `consentAt` is only written once the user submits a choice.
+        if (!stored?.consentAt) return false;
+        // reason 20 marks a service the user consented to; 40 is rejected and 60 strictly necessary.
+        return Object.values(stored?.cspObject?.userConfiguration?.services || {}).every((s) => !(s.permitted && s.reason === 20));
+    },
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;
