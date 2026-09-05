@@ -1,0 +1,39 @@
+{
+    "name": "micado",
+    "prehideSelectors": ["#mco-consent", ".mco-consent"],
+    "detectCmp": [{ "exists": ".mco-consent" }],
+    "detectPopup": [{ "visible": ".mco-consent" }],
+    "optIn": [
+        {
+            "if": { "exists": ".mco-consent [class*=\"__button-confirm\"]" },
+            "then": [{ "waitForThenClick": ".mco-consent [class*=\"__button-confirm\"]" }],
+            "else": [
+                {
+                    "if": { "exists": ".mco-consent .mco-consent-button-accept-all" },
+                    "then": [{ "waitForThenClick": ".mco-consent .mco-consent-button-accept-all" }],
+                    "else": [{ "waitForThenClick": ".mco-consent button.mco-button--contained" }]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".mco-consent [class*=\"__button-decline\"]" },
+            "then": [{ "waitForThenClick": ".mco-consent [class*=\"__button-decline\"]" }],
+            "else": [
+                {
+                    "if": { "exists": ".mco-consent .mco-consent-button-necessary" },
+                    "then": [{ "waitForThenClick": ".mco-consent .mco-consent-button-necessary" }],
+                    "else": [
+                        {
+                            "if": { "exists": ".mco-consent button.mco-button--contained" },
+                            "then": [{ "waitForThenClick": ".mco-consent button.mco-button--outlined" }]
+                        }
+                    ]
+                }
+            ]
+        },
+        { "waitForVisible": ".mco-consent", "check": "none", "timeout": 10000 }
+    ],
+    "test": [{ "cookieContains": "\"acceptedAll\":false" }]
+}
