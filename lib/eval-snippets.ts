@@ -173,6 +173,9 @@ export const snippets = {
         document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach((i) => {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
+    // Two generations of the same consent component store the choice under different keys.
+    EVAL_NDL_TEST: () =>
+        localStorage.getItem('cookieAllowLevel') === 'core' || JSON.parse(localStorage.getItem('privacy-setting') || '{}').level === 'core',
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>

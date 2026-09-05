@@ -1,0 +1,49 @@
+{
+    "name": "ndl-go-jp",
+    "vendorUrl": "https://www.ndl.go.jp/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?ndl\\.go\\.jp/"
+    },
+    "prehideSelectors": [".privacy-confirmation"],
+    "detectCmp": [
+        {
+            "exists": ".privacy-confirmation"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy-confirmation"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy-confirmation [data-cy=accept-all-button], .privacy-confirmation [data-cy=privacy-accept-all]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".privacy-confirmation [data-cy=accept-core-button]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".privacy-confirmation [data-cy=accept-core-button]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".privacy-confirmation .pc-buttons button.ui-parts-button-fill:not([data-cy=privacy-accept-all])"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".privacy-confirmation",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_NDL_TEST"
+        }
+    ]
+}
