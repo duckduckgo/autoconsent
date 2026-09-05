@@ -1,0 +1,9 @@
+{
+    "name": "godaddy-privacy-widget",
+    "prehideSelectors": ["#gtm_privacy"],
+    "detectCmp": [{ "exists": ["#gtm_privacy", "#privacy_widget"] }],
+    "detectPopup": [{ "visible": ["#gtm_privacy", "#privacy_widget"] }],
+    "optIn": [{ "waitForThenClick": ["#gtm_privacy", "#pw_accept"] }],
+    "optOut": [{ "waitForThenClick": ["#gtm_privacy", "#pw_decline"] }],
+    "test": [{ "cookieContains": "pwinteraction=" }]
+}
