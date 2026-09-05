@@ -1,0 +1,9 @@
+{
+    "name": "trust360",
+    "prehideSelectors": [".Trust360"],
+    "detectCmp": [{ "exists": ".Trust360" }],
+    "detectPopup": [{ "visible": ".Trust360 .T360Banner" }],
+    "optIn": [{ "waitForThenClick": ".Trust360 .T360Banner_Accept" }],
+    "optOut": [{ "waitForThenClick": ".Trust360 .T360Banner_Reject" }],
+    "test": [{ "cookieContains": "%22accepted%22%3A0" }]
+}
