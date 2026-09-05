@@ -1,0 +1,9 @@
+{
+    "vendorUrl": "https://home.passle.net/cookie-policy/",
+    "name": "passle-cookie-control",
+    "prehideSelectors": ["#cookie-control .cookie-control_widget"],
+    "detectCmp": [{ "exists": "#cookie-control .cookie-control_widget" }],
+    "detectPopup": [{ "visible": "#cookie-control .cookie-control_widget" }],
+    "optIn": [{ "waitForThenClick": "#cookie-control .cookie-control--accept" }],
+    "optOut": [{ "waitForThenClick": "#cookie-control .cookie-control--decline" }]
+}
