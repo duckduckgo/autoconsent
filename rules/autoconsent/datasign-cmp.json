@@ -1,0 +1,68 @@
+{
+    "name": "datasign-cmp",
+    "vendorUrl": "https://webtru.io/",
+    "prehideSelectors": ["#datasign_cmp__host"],
+    "detectCmp": [{ "exists": "#datasign_cmp__host" }],
+    "detectPopup": [{ "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"] }],
+    "optIn": [
+        {
+            "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary button[class*=\"whiteDialogButtonTheme\"]"] },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#datasign_cmp__host",
+                        "#datasign_cmp__cmp_summary button[class*=\"whiteDialogButtonTheme\"]:last-of-type"
+                    ]
+                }
+            ],
+            "else": [{ "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary button:last-of-type"] }]
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "Consent and configure-all dialogs put reject/deny first and accept second, both with the same class.",
+            "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary button[class*=\"whiteDialogButtonTheme\"]"] },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#datasign_cmp__host",
+                        "#datasign_cmp__cmp_summary button[class*=\"whiteDialogButtonTheme\"]:first-of-type"
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "if": { "exists": ["#datasign_cmp__host", "#datasign_cmp__config-button"] },
+                    "then": [
+                        {
+                            "comment": "Rejects everything outright under CPRA, otherwise opens the per-category settings modal.",
+                            "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__config-button"]
+                        },
+                        {
+                            "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"],
+                            "timeout": 5000,
+                            "optional": true
+                        },
+                        {
+                            "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_content input[type=\"checkbox\"]:checked:not([disabled])"],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"],
+                            "timeout": 2000,
+                            "optional": true
+                        }
+                    ],
+                    "else": [
+                        {
+                            "comment": "Notice-only dialogs offer no reject; dismiss instead of accepting.",
+                            "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary a[class*=\"dialogCloseButton\"]"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"], "check": "none" }]
+}
