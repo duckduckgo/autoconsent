@@ -1,0 +1,48 @@
+{
+    "name": "mango",
+    "vendorUrl": "https://shop.mango.com/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?mango\\.com/"
+    },
+    "prehideSelectors": ["dialog#cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": "dialog#cookies-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#cookies-banner [class*=\"CookiesNotice-module\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog#cookies-banner [id=\"cookies.button.acceptAll\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog#cookies-banner [class*=\"CookiesFooter-module\"] button:first-child:not([id=\"cookies.button.acceptAll\"])",
+            "timeout": 5000,
+            "retry": 10,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "dialog#cookies-banner [class*=\"buttonsWrapper\"] button",
+            "check": "any",
+            "timeout": 5000
+        },
+        {
+            "waitForThenClick": "dialog#cookies-banner [class*=\"buttonsWrapper\"] button:not(:first-child):not(:last-child)",
+            "timeout": 5000,
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "visible": "dialog#cookies-banner",
+            "check": "none"
+        }
+    ]
+}
