@@ -1,0 +1,37 @@
+{
+    "name": "store2000",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?store2000\\.fr/"
+    },
+    "prehideSelectors": ["div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"])"],
+    "detectCmp": [
+        {
+            "exists": "div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"]) button[class*=\"bg-primary\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"]) button[class*=\"border-slate-300\"]"
+        },
+        {
+            "comment": "the dialog stays in the DOM with opacity 0 and still swallows clicks until the next page load",
+            "hide": "div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"])"
+        }
+    ],
+    "test": [
+        {
+            "visible": "div[class*=\"z-[9999]\"]:has(> div a[href*=\"politique-de-cookies\"])",
+            "check": "none"
+        }
+    ]
+}
