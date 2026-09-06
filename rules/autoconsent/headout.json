@@ -1,0 +1,12 @@
+{
+    "name": "headout",
+    "prehideSelectors": ["[class*=\"ConsentFixedWrapper\"]"],
+    "detectCmp": [{ "exists": "[class*=\"ConsentFixedWrapper\"] [class*=\"ActionContainer\"]" }],
+    "detectPopup": [{ "eval": "EVAL_HEADOUT_DETECT_POPUP" }],
+    "optIn": [{ "waitForThenClick": "[class*=\"ConsentFixedWrapper\"] [class*=\"ActionButton\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[class*=\"ConsentFixedWrapper\"] [class*=\"CancelButton\"]" },
+        { "waitForThenClick": ".consent-drawer [class*=\"CancelButton\"]" }
+    ],
+    "test": [{ "cookieContains": "consent-state=denied" }]
+}

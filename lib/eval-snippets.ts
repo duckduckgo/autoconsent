@@ -154,6 +154,11 @@ export const snippets = {
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
+    // the banner stays in the DOM once dismissed, and is only hidden with `visibility`, which built-in visibility checks ignore
+    EVAL_HEADOUT_DETECT_POPUP: () => {
+        const banner = document.querySelector('[class*="ConsentFixedWrapper"]');
+        return !!banner && getComputedStyle(banner).visibility !== 'hidden';
+    },
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
