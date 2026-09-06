@@ -1,0 +1,61 @@
+{
+    "name": "module-privacy",
+    "prehideSelectors": [".privacyArea", "#modulePrivacy.show"],
+    "detectCmp": [
+        {
+            "exists": ".privacyArea .privacyTrigger.acceptAll"
+        },
+        {
+            "exists": "#modulePrivacy .privacyTrigger.acceptCustom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacyArea:not(.check)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacyArea .privacyTrigger.acceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "The consent handlers are attached by a deferred script, so clicks land only once it has run. Opening the settings modal is the readiness signal, and it is also where some variants sync the category toggles.",
+            "waitForThenClick": "body:not(:has(#modulePrivacy.show)) .privacyArea .openModule",
+            "timeout": 3000,
+            "retry": 10,
+            "retryInterval": 500,
+            "optional": true
+        },
+        {
+            "waitFor": "#modulePrivacy.show",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "comment": "Some variants pre-check the optional categories, so clear them before confirming.",
+            "if": {
+                "exists": "#modulePrivacy input[type=\"checkbox\"]:checked"
+            },
+            "then": [
+                {
+                    "click": "#modulePrivacy input[type=\"checkbox\"]:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "comment": "Only confirm while every optional category is off, so a late toggle sync can never turn this into an opt-in.",
+            "waitForThenClick": "body:has(.privacyArea:not(.check)):not(:has(#modulePrivacy input[type=\"checkbox\"]:checked)) #modulePrivacy .privacyTrigger.acceptCustom",
+            "timeout": 3000,
+            "retry": 15,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "privacy={\"necessary\":\"ok\"}"
+        }
+    ]
+}
