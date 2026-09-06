@@ -1,0 +1,72 @@
+{
+    "name": "truevault-polaris",
+    "vendorUrl": "https://www.truevault.com/",
+    "prehideSelectors": ["#polaris-css-lockdown-container"],
+    "detectCmp": [
+        {
+            "exists": ["#polaris-css-lockdown-container", "#polaris-consent-widgets .polaris-consent-widget"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#polaris-css-lockdown-container", "#polaris-consent-widgets .polaris-consent-widget"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#polaris-css-lockdown-container", ".polaris-consent-widget__actions button.polaris-button:last-child"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#polaris-css-lockdown-container", ".polaris-consent-widget[class*='banner-informational']"]
+            },
+            "then": [
+                {
+                    "comment": "informational notice: the only control dismisses it without changing any consent state",
+                    "waitForThenClick": [
+                        "#polaris-css-lockdown-container",
+                        ".polaris-consent-widget[class*='banner-informational'] .polaris-consent-widget__actions button.polaris-button"
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "comment": "the last action is always accept; the one before it is 'reject all' when offered, otherwise 'manage'",
+                    "waitForThenClick": [
+                        "#polaris-css-lockdown-container",
+                        ".polaris-consent-widget__actions button.polaris-button:nth-last-child(2)"
+                    ]
+                },
+                {
+                    "if": {
+                        "exists": ["#polaris-css-lockdown-container", ".polaris-preferences-widget"]
+                    },
+                    "then": [
+                        {
+                            "waitForVisible": ["#polaris-css-lockdown-container", ".polaris-preferences-widget__save_button"]
+                        },
+                        {
+                            "comment": "each row's click target toggles one purpose, so only rows that are still on are matched",
+                            "click": [
+                                "#polaris-css-lockdown-container",
+                                ".polaris-preferences-widget [class*='toggle_row_container']:has(input[type='checkbox']:checked:not([disabled])) [class*='click_target']"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["#polaris-css-lockdown-container", ".polaris-preferences-widget__save_button"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"implicit\":false"
+        }
+    ]
+}
