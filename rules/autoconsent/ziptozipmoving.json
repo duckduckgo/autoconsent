@@ -1,0 +1,15 @@
+{
+    "name": "ziptozipmoving.com",
+    "prehideSelectors": [".cookies.main-class"],
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?ziptozipmoving\\.com/" },
+    "detectCmp": [{ "exists": ".cookies.main-class .cookies-container button.accept-btn" }],
+    "detectPopup": [{ "visible": ".cookies.main-class .cookies-container button.accept-btn" }],
+    "optIn": [{ "waitForThenClick": ".cookies.main-class .cookies-container button.accept-btn" }],
+    "optOut": [
+        { "waitForThenClick": ".cookies.main-class .cookies-container button.customize-btn" },
+        { "waitForVisible": ".cookies.main-class .cookies-hidden .cookies-col__switch" },
+        { "waitForThenClick": ".cookies.main-class .cookies-hidden .el-switch:not(.is-disabled) .el-switch__core", "all": true },
+        { "waitForThenClick": ".cookies.main-class .cookies-hidden button.accept-btn" }
+    ],
+    "comment": "Saving the preferences reloads the page, so a selfTest cannot observe the resulting validCookies cookie."
+}
