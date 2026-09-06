@@ -802,6 +802,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     // confirm
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
 
+    // confirm the current selection, e.g. "Confirm choices", "Confirm my selection"
+    /^confirm (my |your |the )?(choices?|selections?)[ !.]*$/is,
+
     // neutral "continue" without accept/reject wording
     /^(continuer|doorgaan|ga verder)$/is,
 
@@ -811,7 +814,6 @@ export const ACKNOWLEDGE_PATTERNS = [
     'acknowledge',
     /^close (banner|cookie notification)$/is,
     /understood$/is,
-    'confirm my choices',
 
     // French (FR)
     'accepter fermer',

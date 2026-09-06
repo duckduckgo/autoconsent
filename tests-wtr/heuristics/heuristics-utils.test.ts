@@ -234,6 +234,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Политика конфиденциальности')).to.equal('other');
     });
 
+    it('matches confirm-selection buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Confirm choices')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Confirm my choices')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Confirm your selection')).to.equal('acknowledge');
+    });
+
     it('matches Russian acknowledge buttons', () => {
         expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');
