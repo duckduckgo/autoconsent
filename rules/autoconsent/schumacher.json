@@ -1,0 +1,14 @@
+{
+    "name": "schumacher.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?f?schumacher\\.com/"
+    },
+    "detectCmp": [{ "exists": "xpath///h1[contains(text(), 'Your Privacy Matters to Us')]" }],
+    "detectPopup": [{ "visible": "xpath///h1[contains(text(), 'Your Privacy Matters to Us')]" }],
+    "optIn": [{ "waitForThenClick": "xpath///button[normalize-space(.)='Accept All']", "timeout": 3000 }],
+    "optOut": [
+        { "waitForThenClick": "xpath///button[normalize-space(.)='MANAGE PREFERENCES']", "timeout": 3000 },
+        { "waitForThenClick": "xpath///button[normalize-space(.)='Save Preferences']", "timeout": 3000 }
+    ],
+    "test": [{ "cookieContains": "\"functional\":false" }]
+}
