@@ -28,6 +28,7 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    interactWithPage: boolean;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -38,6 +39,7 @@ const defaultOptions: TestOptions = {
     mobile: false,
     expectPopupOpen: true,
     expectedRuns: 1,
+    interactWithPage: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -97,6 +99,10 @@ class TestRun {
 
         await this.injectContentScripts();
 
+        if (this.options.interactWithPage) {
+            this.keepInteracting();
+        }
+
         try {
             await this.runAssertions();
         } catch (e) {
@@ -120,6 +126,24 @@ class TestRun {
                 // ignore this screenshot errors
             }
             throw e;
+        }
+    }
+
+    /**
+     * Some popups only appear after the visitor interacts with the page. The interaction has to be
+     * repeated because it is ignored until the page has attached its own listeners.
+     */
+    async keepInteracting(attempts = 10, interval = 1500) {
+        for (let i = 0; i < attempts; i++) {
+            if (this.isMessageReceived({ type: 'popupFound' })) {
+                return;
+            }
+            try {
+                await this.page.keyboard.press('Tab');
+            } catch {
+                return; // page is closed, the test is over
+            }
+            await new Promise((resolve) => setTimeout(resolve, interval));
         }
     }
 
