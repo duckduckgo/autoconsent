@@ -1,0 +1,30 @@
+{
+    "name": "user-consent-widget",
+    "prehideSelectors": ["#user-consent .page", "#user-consent .backing"],
+    "detectCmp": [{ "exists": "#user-consent .page.main .controls button.acceptall" }],
+    "detectPopup": [{ "visible": "#user-consent .page.main" }],
+    "optIn": [{ "waitForThenClick": "#user-consent .page.main .controls button.acceptall" }],
+    "optOut": [
+        {
+            "if": { "visible": "#user-consent .page.main button.rejectall" },
+            "then": [{ "waitForThenClick": "#user-consent .page.main button.rejectall" }],
+            "else": [
+                { "waitForThenClick": "#user-consent .page.main .controls button.manage" },
+                { "waitForVisible": "#user-consent .page.secondary" },
+                {
+                    "if": { "visible": "#user-consent .page.secondary .controls button.rejectall" },
+                    "then": [{ "waitForThenClick": "#user-consent .page.secondary .controls button.rejectall" }],
+                    "else": [
+                        {
+                            "click": "#user-consent .page.secondary .toggles input[type=checkbox]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "#user-consent .page.secondary .controls button.save" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#user-consent .page", "check": "none" }]
+}
