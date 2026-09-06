@@ -1,0 +1,66 @@
+{
+    "name": "plentyone-cookiebar",
+    "vendorUrl": "https://plentyone.com/",
+    "cosmetic": false,
+    "prehideSelectors": [".cookie-bar[data-cookie-bar]", ".ccklayer"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-bar[data-cookie-bar] [data-cb=\"acceptAll\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-bar[data-cookie-bar] [data-cb=\"acceptAll\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-bar[data-cookie-bar] [data-cb=\"acceptAll\"]",
+            "all": true
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".cookie-bar[data-cookie-bar] [data-cb=\"declineAll\"]",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-bar[data-cookie-bar] [data-cb=\"declineAll\"]",
+                    "all": true,
+                    "comment": "Alle ablehnen"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": ".cookie-bar[data-cookie-bar] [data-cb=\"saveNecessary\"]",
+                        "check": "any"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ".cookie-bar[data-cookie-bar] [data-cb=\"saveNecessary\"]",
+                            "all": true,
+                            "comment": "Nur Notwendige akzeptieren"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ".cookie-bar[data-cookie-bar] [data-cb=\"save\"]",
+                            "all": true,
+                            "comment": "Save with the default (opted-out) toggles"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookie-bar[data-cookie-bar] [data-cb=\"acceptAll\"]",
+            "check": "none"
+        }
+    ]
+}
