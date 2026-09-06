@@ -1,0 +1,40 @@
+{
+    "name": "uft-cookie-notice",
+    "vendorUrl": "https://fribourg.ch/",
+    "prehideSelectors": ["#politique_confidentialite"],
+    "detectCmp": [
+        {
+            "exists": "#politique_confidentialite #cookies_settings[data-target=\"#cookie_settings\"]"
+        },
+        {
+            "exists": "#cookie_settings .grants input[name=\"cookie_grants[]\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#politique_confidentialite"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#politique_confidentialite #cookies_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_settings .actions .refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#politique_confidentialite",
+            "check": "none"
+        },
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "UFT_cookie_notice_accepted=%5B%5D"
+        }
+    ]
+}
