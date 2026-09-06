@@ -2,29 +2,75 @@
     "name": "wix",
     "vendorUrl": "https://www.wix.com/",
     "cosmetic": false,
-    "prehideSelectors": [],
+    "prehideSelectors": ["[data-comp-type=cookie-banner-root-uou],[data-comp-type=cookie-banner-modal-uou]"],
     "detectCmp": [
         {
-            "exists": "[data-comp-type=cookie-banner-root-wix],[data-hook=ccsu-banner-wrapper]"
+            "exists": "[data-comp-type=cookie-banner-root-wix],[data-comp-type=cookie-banner-root-uou],[data-hook=ccsu-banner-wrapper]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-comp-type=cookie-banner-root-wix],[data-hook=ccsu-banner-wrapper]"
+            "visible": "[data-comp-type=cookie-banner-root-wix],[data-comp-type=cookie-banner-root-uou],[data-hook=ccsu-banner-wrapper]"
         }
     ],
     "optIn": [
         {
-            "if": { "exists": "[data-hook=ccsu-banner-accept]" },
-            "then": [{ "click": "[data-hook=ccsu-banner-accept]" }],
-            "else": [{ "click": "[data-hook=ccsu-banner-decline]" }]
+            "if": { "exists": "[data-hook=consent-banner-apply-button]" },
+            "then": [{ "waitForThenClick": "[data-hook=consent-banner-apply-button]" }],
+            "else": [
+                {
+                    "if": { "exists": "[data-hook=ccsu-banner-accept]" },
+                    "then": [{ "click": "[data-hook=ccsu-banner-accept]" }],
+                    "else": [{ "click": "[data-hook=ccsu-banner-decline]" }]
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "if": { "exists": "[data-hook=ccsu-banner-decline-all]" },
-            "then": [{ "click": "[data-hook=ccsu-banner-decline-all]" }],
-            "else": [{ "hide": "[data-hook=ccsu-banner-wrapper]" }]
+            "if": { "exists": "[data-hook=consent-banner-decline-all-button]" },
+            "then": [{ "waitForThenClick": "[data-hook=consent-banner-decline-all-button]", "retry": 4, "retryInterval": 500 }],
+            "else": [
+                {
+                    "if": { "exists": "[data-hook=consent-banner-settings-button]" },
+                    "then": [
+                        { "waitForThenClick": "[data-hook=consent-banner-settings-button]" },
+                        {
+                            "comment": "the dialog applies a body scroll lock ~1s after opening; saving earlier leaves the lock behind",
+                            "wait": 1000
+                        },
+                        { "waitForVisible": "[data-hook=consent-banner-settings-save-button]", "timeout": 3000 },
+                        {
+                            "comment": "categories default to off, but a site can pre-enable them",
+                            "click": "[data-hook=consent-banner-section-toggle-input]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "[data-hook=consent-banner-settings-save-button]" },
+                        {
+                            "comment": "the banner can outlive its own save click until hydration finishes",
+                            "waitForVisible": "[data-comp-type=cookie-banner-root-uou]",
+                            "check": "none",
+                            "timeout": 2000,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "[data-hook=consent-banner-close-button]", "timeout": 500, "optional": true }
+                    ],
+                    "else": [
+                        {
+                            "if": { "exists": "[data-hook=ccsu-banner-decline-all]" },
+                            "then": [{ "click": "[data-hook=ccsu-banner-decline-all]" }],
+                            "else": [
+                                {
+                                    "if": { "exists": "[data-hook=consent-banner-close-button]" },
+                                    "then": [{ "waitForThenClick": "[data-hook=consent-banner-close-button]" }],
+                                    "else": [{ "hide": "[data-hook=ccsu-banner-wrapper]" }]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
