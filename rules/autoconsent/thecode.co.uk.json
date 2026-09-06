@@ -1,0 +1,47 @@
+{
+    "name": "thecode.co.uk",
+    "vendorUrl": "https://www.thecode.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(thecode\\.co\\.uk|lovethesales\\.com)/"
+    },
+    "prehideSelectors": [".cookie-popups__container"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-popups__container .cookie-popups__first-consent-popup"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-popups__container.show"
+        },
+        {
+            "visible": ".cookie-popups__first-consent-popup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test-id=\"cookie-popup-set-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-test-id=\"cookie-manage-settings-button\"]"
+        },
+        {
+            "waitForVisible": "[data-test-id=\"cookie-save-preferences-button\"]"
+        },
+        {
+            "if": {
+                "exists": ".cookie-popups__advertising-toggle:checked"
+            },
+            "then": [
+                {
+                    "click": "[data-test-id=\"cookie-advertising-slider\"]"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "[data-test-id=\"cookie-save-preferences-button\"]"
+        }
+    ]
+}
