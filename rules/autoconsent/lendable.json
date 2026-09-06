@@ -1,0 +1,39 @@
+{
+    "name": "lendable",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?lendable\\.co\\.uk/"
+    },
+    "prehideSelectors": ["[class*=\"CookiesBanner_cookies-banner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"CookiesBanner_cookies-banner\"] [class*=\"CookiesBanner_buttons\"] button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"CookiesBanner_cookies-banner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"CookiesBanner_buttons\"] button:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"CookiesBanner_buttons\"] button:first-child"
+        },
+        {
+            "waitForThenClick": "[role=\"dialog\"] [class*=\"_actions_\"] button:first-child"
+        },
+        {
+            "waitForVisible": "[class*=\"CookiesBanner_cookies-banner\"]",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}
