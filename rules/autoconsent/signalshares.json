@@ -1,0 +1,12 @@
+{
+    "name": "signalshares",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?signalshares\\.com/"
+    },
+    "prehideSelectors": [".modal[modal-render] data-sp-modal"],
+    "detectCmp": [{ "exists": ".modal[modal-render] input[name=\"rejectCookies\"]" }],
+    "detectPopup": [{ "visible": ".modal[modal-render] input[name=\"rejectCookies\"]", "check": "any" }],
+    "optIn": [{ "waitForThenClick": ".modal[modal-render] input[name=\"agreeCookies\"]" }],
+    "optOut": [{ "waitForThenClick": ".modal[modal-render] input[name=\"rejectCookies\"]", "all": true }],
+    "test": [{ "cookieContains": "cookie-consent=denied" }]
+}
