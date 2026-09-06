@@ -1,0 +1,9 @@
+{
+    "name": "rdc-concents",
+    "prehideSelectors": ["#concentBanner", "#concentPopup"],
+    "detectCmp": [{ "exists": "#concentBanner .rdc-save-preferences, #concentPopup .rdc-save-preferences" }],
+    "detectPopup": [{ "visible": "#concentBanner .rdc-save-preferences, #concentPopup .rdc-save-preferences" }],
+    "optIn": [{ "waitForThenClick": "#concentBanner .acceptConcentButton, #concentPopup .acceptConcentButton" }],
+    "optOut": [{ "waitForThenClick": "#concentBanner .rdc-save-preferences, #concentPopup .rdc-save-preferences" }],
+    "test": [{ "exists": "#concentBanner, #concentPopup", "negated": true }]
+}
