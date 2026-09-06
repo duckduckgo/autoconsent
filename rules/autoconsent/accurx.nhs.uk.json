@@ -1,0 +1,11 @@
+{
+    "name": "accurx.nhs.uk",
+    "runContext": {
+        "urlPattern": "^https?://accurx\\.nhs\\.uk/"
+    },
+    "detectCmp": [{ "exists": "xpath///h2[text()='Cookies on this website']" }],
+    "detectPopup": [{ "visible": "xpath///h2[text()='Cookies on this website']" }],
+    "optIn": [{ "waitForThenClick": "xpath///button[contains(., 'Yes, I agree')]" }],
+    "optOut": [{ "waitForThenClick": "xpath///button[contains(., 'do not use analytics cookies')]" }],
+    "test": [{ "exists": "xpath///h2[text()='Cookies on this website']", "negated": true }]
+}
