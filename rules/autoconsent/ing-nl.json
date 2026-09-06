@@ -1,0 +1,51 @@
+{
+    "name": "ing-nl",
+    "detectCmp": [
+        {
+            "exists": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "#global-cookie-preference",
+                "cookie-preference-main"
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "#global-cookie-preference",
+                "cookie-preference-main",
+                "ing-button[data-testid=\"reject\"]"
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "#global-cookie-preference",
+                "cookie-preference-main",
+                "ing-button[data-testid=\"accept\"]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "#global-cookie-preference",
+                "cookie-preference-main",
+                "ing-button[data-testid=\"reject\"]"
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "COOKIE_PREF=ANL_0" }]
+}
