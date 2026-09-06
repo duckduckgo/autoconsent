@@ -3,32 +3,69 @@
     "vendorUrl": "https://opera.com",
     "cosmetic": false,
     "runContext": {
-        "urlPattern": "^https?://(www\\.|)?opera\\.com/"
+        "urlPattern": "^https?://(\\w+\\.)?(opera\\.com|operaneon\\.com)/"
     },
     "prehideSelectors": ["#cookie-consent"],
     "detectCmp": [
         {
-            "exists": "#cookie-consent .cookie-all__btn"
+            "any": [
+                { "exists": "#cookie-consent .cookie-all__btn" },
+                {
+                    "comment": "the newer panel is in the DOM from the start, but only revealed on the first user interaction",
+                    "visible": "[data-testid=\"cookie-consent\"] .marketing_option_switch"
+                }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-consent .cookie-all__btn"
+            "any": [
+                { "visible": "#cookie-consent .cookie-all__btn" },
+                { "visible": "[data-testid=\"cookie-consent\"] .marketing_option_switch" }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookie-consent .cookie-all__btn"
+            "if": { "exists": "[data-testid=\"cookie-consent\"] .marketing_option_switch" },
+            "then": [{ "waitForThenClick": "[data-testid=\"cookie-consent\"] button[class*=\"Consent_button\"]" }],
+            "else": [{ "waitForThenClick": "#cookie-consent .cookie-all__btn" }]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookie-consent .cookie-consent__switch.active:not(.always_on)",
-            "all": true,
-            "timeout": 500,
-            "optional": true
-        },
-        { "waitForThenClick": "#cookie-consent .cookie-selection__btn" }
+            "if": { "exists": "[data-testid=\"cookie-consent\"] .marketing_option_switch" },
+            "then": [
+                {
+                    "waitForThenClick": "[data-testid=\"cookie-consent\"] .marketing_option_switch[class*=\"Consent_active\"], [data-testid=\"cookie-consent\"] .analytics_option_switch[class*=\"Consent_active\"]",
+                    "all": true,
+                    "timeout": 500,
+                    "optional": true
+                },
+                {
+                    "comment": "\"Accept selection\" saves the switches as they are, which is opt-out while the optional ones are off",
+                    "waitForThenClick": "[data-testid=\"cookie-consent\"] div[class*=\"Consent_button\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookie-consent .cookie-consent__switch.active:not(.always_on)",
+                    "all": true,
+                    "timeout": 500,
+                    "optional": true
+                },
+                { "waitForThenClick": "#cookie-consent .cookie-selection__btn" }
+            ]
+        }
     ],
-    "test": [{ "cookieContains": "cookie_consent_essential=true" }, { "cookieContains": "cookie_consent_marketing=true", "negated": true }]
+    "test": [
+        {
+            "if": { "exists": "[data-testid=\"cookie-consent\"] .marketing_option_switch" },
+            "then": [{ "eval": "EVAL_OPERA_CONSENT_TEST" }],
+            "else": [
+                { "cookieContains": "cookie_consent_essential=true" },
+                { "cookieContains": "cookie_consent_marketing=true", "negated": true }
+            ]
+        }
+    ]
 }
