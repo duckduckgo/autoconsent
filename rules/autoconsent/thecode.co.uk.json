@@ -43,5 +43,10 @@
         {
             "waitForThenClick": "[data-test-id=\"cookie-save-preferences-button\"]"
         }
+    ],
+    "test": [
+        {
+            "cookieContains": "lts-cookie-consent="
+        }
     ]
 }
