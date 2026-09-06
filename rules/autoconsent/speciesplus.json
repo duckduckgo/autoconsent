@@ -1,0 +1,13 @@
+{
+    "name": "speciesplus.net",
+    "vendorUrl": "https://www.speciesplus.net/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?speciesplus\\.net/"
+    },
+    "prehideSelectors": ["#cookie-consent-message"],
+    "detectCmp": [{ "exists": "#cookie-consent-message #cookie-consent-reject" }],
+    "detectPopup": [{ "visible": "#cookie-consent-message" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent-accept" }],
+    "optOut": [{ "waitForThenClick": "#cookie-consent-reject" }],
+    "test": [{ "cookieContains": "cookieconsent_status=0" }]
+}
