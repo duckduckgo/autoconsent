@@ -73,6 +73,21 @@ describe('click', () => {
         expect(clickCounter2).to.equal(1);
     });
 
+    it('clicks an svg element, which has no native click()', async () => {
+        const domActions = instantiateDomActions();
+        let svgClickCounter = 0;
+
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.id = 'close-icon';
+        document.body.appendChild(svg);
+        svg.addEventListener('click', () => {
+            svgClickCounter++;
+        });
+
+        expect(await domActions.click('#close-icon')).true;
+        expect(svgClickCounter).to.equal(1);
+    });
+
     it('clicks an open shadow dom element', async () => {
         const domActions = instantiateDomActions();
         let clickCounterShadowRoot = 0;

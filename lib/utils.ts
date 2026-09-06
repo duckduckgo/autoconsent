@@ -76,6 +76,15 @@ export function isElementVisible(elem: HTMLElement): boolean {
     return false;
 }
 
+// `click()` is only defined on HTMLElement, so SVG controls (a common close button) need a synthetic event.
+export function clickDomElement(elem: HTMLElement) {
+    if (typeof elem.click === 'function') {
+        elem.click();
+        return;
+    }
+    elem.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: elem.ownerDocument?.defaultView || window }));
+}
+
 export function copyObject(data: any) {
     // @ts-expect-error - globalThis.structuredClone may be undefined
     if (globalThis.structuredClone) {

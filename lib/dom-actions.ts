@@ -1,6 +1,6 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from './rules';
 import { DomActionsProvider } from './types';
-import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor } from './utils';
+import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor, clickDomElement } from './utils';
 import AutoConsent from './web';
 
 // Default for the `retryInterval` option of `waitForThenClick`.
@@ -16,7 +16,7 @@ export class DomActions implements DomActionsProvider {
             return false;
         }
         this.autoconsentInstance.config.logs.rulesteps && console.log('[clickElement]', element);
-        element.click();
+        clickDomElement(element);
         return true;
     }
 
@@ -26,9 +26,9 @@ export class DomActions implements DomActionsProvider {
 
         if (elements.length > 0) {
             if (all) {
-                elements.forEach((e) => e.click());
+                elements.forEach((e) => clickDomElement(e));
             } else {
-                elements[0].click();
+                clickDomElement(elements[0]);
             }
         }
         return elements.length > 0;
