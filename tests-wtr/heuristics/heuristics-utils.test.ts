@@ -589,6 +589,16 @@ describe('getButtonData', () => {
         expect(buttons[0].text).to.equal('Has Text');
     });
 
+    it('keeps a button that wraps a button-like icon', () => {
+        container.innerHTML =
+            '<button class="button"><svg class="button__icon"></svg>Reject All</button>' +
+            '<button class="button"><svg class="button__icon"></svg>Accept All</button>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons.map((b) => b.text)).to.have.members(['Reject All', 'Accept All']);
+    });
+
     it('returns empty array if no buttons found', () => {
         container.innerHTML = '<div>No buttons here</div>';
 

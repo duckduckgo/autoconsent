@@ -247,13 +247,17 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
  * Serialize all actionable buttons on the page
  */
 export function getButtonData(el: HTMLElement): ButtonData[] {
-    const actionableButtons = excludeContainers(getButtonLikeElements(el)).filter(
-        (b) =>
-            isElementVisible(b) &&
-            !isDisabled(b) &&
-            (b.innerText?.trim() ||
-                // <input> values do not appear in innerText
-                (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) && b.value?.trim())),
+    // Filter before excluding containers, otherwise a decorative candidate (e.g. an icon with a
+    // "button" class) makes its real button look like a container and drops it.
+    const actionableButtons = excludeContainers(
+        getButtonLikeElements(el).filter(
+            (b) =>
+                isElementVisible(b) &&
+                !isDisabled(b) &&
+                (b.innerText?.trim() ||
+                    // <input> values do not appear in innerText
+                    (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) && b.value?.trim())),
+        ),
     );
 
     return actionableButtons.map((b) => ({
