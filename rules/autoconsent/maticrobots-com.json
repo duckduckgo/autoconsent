@@ -1,0 +1,17 @@
+{
+    "name": "maticrobots-com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?maticrobots\\.com/"
+    },
+    "prehideSelectors": ["section[aria-label=\"Cookie preferences\"]"],
+    "detectCmp": [{ "exists": "section[aria-label=\"Cookie preferences\"]" }],
+    "detectPopup": [{ "visible": "section[aria-label=\"Cookie preferences\"]" }],
+    "optIn": [{ "waitForThenClick": "xpath///section[@aria-label=\"Cookie preferences\"]//button[normalize-space()=\"Accept All\"]" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///section[@aria-label=\"Cookie preferences\"]//button[normalize-space()=\"Cookie Settings\"]" },
+        { "waitForVisible": "div[role=\"dialog\"][aria-labelledby=\"consent-settings-title\"]" },
+        { "waitForThenClick": "xpath///label[contains(., \"Necessary and functional cookies\")]//input[@name=\"cookie-tier\"]" },
+        { "waitForThenClick": "div[role=\"dialog\"][aria-labelledby=\"consent-settings-title\"] button:not([aria-label])" }
+    ],
+    "test": [{ "cookieContains": "matic_consent=v1.a0.m0" }]
+}
