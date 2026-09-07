@@ -9,7 +9,7 @@
         "frame": false,
         "urlPattern": "^https?://(\\w+\\.)?chatgpt\\.com/"
     },
-    "comment": "Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better.",
+    "comment": "test Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better.",
     "prehideSelectors": ["dialog[data-cookie-consent]:has(form[data-privacy-consent-form])"],
     "detectCmp": [
         {
