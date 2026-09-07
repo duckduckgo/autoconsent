@@ -1,0 +1,27 @@
+{
+    "name": "elsevier",
+    "vendorUrl": "https://www.elsevier.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?elsevier\\.com/"
+    },
+    "prehideSelectors": ["[data-testid='cookie-banner']"],
+    "detectCmp": [{ "exists": "[data-testid='cookie-banner'] [data-testid='accept-all-cookies-button']" }],
+    "detectPopup": [{ "visible": "[data-testid='cookie-banner'] [data-testid='accept-all-cookies-button']" }],
+    "optIn": [{ "waitForThenClick": "[data-testid='cookie-banner'] [data-testid='accept-all-cookies-button']" }],
+    "optOut": [
+        {
+            "if": { "exists": "[data-testid='cookie-banner'] [data-testid='reject-all-cookies-button']" },
+            "then": [{ "waitForThenClick": "[data-testid='cookie-banner'] [data-testid='reject-all-cookies-button']" }],
+            "else": [
+                { "waitForThenClick": "[data-testid='cookie-banner'] [data-testid='cookie-settings-button']" },
+                { "waitForVisible": "#onetrust-pc-sdk .save-preference-btn-handler", "timeout": 10000 },
+                { "click": "#onetrust-pc-sdk input.category-switch-handler:checked", "all": true, "optional": true },
+                { "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler" }
+            ]
+        }
+    ],
+    "test": [
+        { "waitForVisible": "[data-testid='cookie-banner']", "timeout": 15000, "check": "none" },
+        { "cookieContains": "OptanonAlertBoxClosed" }
+    ]
+}
