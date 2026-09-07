@@ -24,22 +24,29 @@
     "optIn": [
         {
             "if": { "exists": ".axeptio_mount .needsclick" },
-            "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_acceptAll"] }],
-            "else": [{ "click": "button#axeptio_btn_acceptAll" }]
+            "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_acceptAll,button#axeptio_btn_acceptAllAndNext"] }],
+            "else": [{ "click": "button#axeptio_btn_acceptAll,button#axeptio_btn_acceptAllAndNext" }]
         }
     ],
     "optOut": [
         {
             "if": { "exists": ".axeptio_mount .needsclick" },
             "then": [
-                { "waitForVisible": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton"] },
+                {
+                    "waitForVisible": [
+                        ".axeptio_mount .needsclick",
+                        "button#axeptio_btn_dismiss,button.ax-discardButton,button#axeptio_btn_close"
+                    ]
+                },
                 { "wait": 300 },
-                { "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton"] }
+                {
+                    "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton,button#axeptio_btn_close"]
+                }
             ],
             "else": [
-                { "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton" },
+                { "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton,button#axeptio_btn_close" },
                 { "wait": 300 },
-                { "click": "button#axeptio_btn_dismiss,button.ax-discardButton" }
+                { "click": "button#axeptio_btn_dismiss,button.ax-discardButton,button#axeptio_btn_close" }
             ]
         }
     ],
