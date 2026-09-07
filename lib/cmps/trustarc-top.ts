@@ -9,6 +9,9 @@ const shortcutOptIn = '#truste-consent-button';
 const popupContent = '#truste-consent-content';
 const bannerOverlay = '#trustarc-banner-overlay';
 const bannerContainer = '#truste-consent-track';
+const newCmContainer = '.truste_popframe.trustarc_newcm_container';
+const newCmOptOut = 'button.declineAllButtonLower';
+const newCmConfirmClose = 'button.close';
 
 export default class TrustArcTop extends AutoConsentCMPBase {
     name = 'TrustArc-top';
@@ -20,11 +23,13 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     _shortcutButton: HTMLElement | null;
     _optInDone: boolean;
+    _newCmHandled: boolean;
 
     constructor(autoconsentInstance: AutoConsent) {
         super(autoconsentInstance);
         this._shortcutButton = null; // indicates if the "reject all" button is detected
         this._optInDone = false;
+        this._newCmHandled = false;
     }
 
     get hasSelfTest(): boolean {
@@ -32,7 +37,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     }
 
     get isIntermediate(): boolean {
-        if (this._optInDone) {
+        if (this._optInDone || this._newCmHandled) {
             return false;
         }
         return !this._shortcutButton;
@@ -66,11 +71,30 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
         await this.click(cookieSettingsButton);
 
+        // The current preference manager lives in a shadow root in the top frame, so no frame rule can pick it up.
+        this._newCmHandled = await this.declineInNewCmPreferences();
+
         // schedule cleanup
         setTimeout(() => {
             getStyleElement().remove();
         }, 10000);
 
+        return true;
+    }
+
+    /**
+     * Declines everything in the shadow-DOM preference manager that opens from the banner's
+     * "cookie settings" button, and dismisses the confirmation panel it leaves behind.
+     */
+    async declineInNewCmPreferences(): Promise<boolean> {
+        // The container is hidden while we operate, so wait for existence rather than visibility.
+        if (!(await this.waitForElement([newCmContainer, newCmOptOut], 5000))) {
+            return false;
+        }
+        if (!(await this.waitForThenClick([newCmContainer, newCmOptOut]))) {
+            return false;
+        }
+        await this.waitForThenClick([newCmContainer, newCmConfirmClose], 5000);
         return true;
     }
 
