@@ -17,6 +17,7 @@ const POPUP_SEARCH_MAX_TIME = 100;
 export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
     allText = allText.slice(0, TEXT_LIMIT);
     const patterns = [];
+    // test
     const snippets = [];
 
     for (const p of detectPatterns) {
