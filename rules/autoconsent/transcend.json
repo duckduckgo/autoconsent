@@ -3,15 +3,15 @@
     "vendorUrl": "https://unknown",
     "cosmetic": true,
     "minimumRuleStepVersion": 2,
-    "prehideSelectors": ["#transcend-consent-manager"],
+    "prehideSelectors": ["#transcend-consent-manager", "#costco-consent-manager"],
     "detectCmp": [
         {
-            "exists": "#transcend-consent-manager"
+            "any": [{ "exists": "#transcend-consent-manager" }, { "exists": "#costco-consent-manager [name=\"Costco Consent Banner\"]" }]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#transcend-consent-manager"
+            "any": [{ "visible": "#transcend-consent-manager" }, { "visible": "#costco-consent-manager [name=\"Costco Consent Banner\"]" }]
         }
     ],
     "optIn": [
@@ -22,7 +22,7 @@
     "optOut": [
         {
             "setStyle": "display: none !important; z-index: -1 !important; pointer-events: none !important;",
-            "selector": "#transcend-consent-manager"
+            "selector": "#transcend-consent-manager, #costco-consent-manager"
         }
     ]
 }
