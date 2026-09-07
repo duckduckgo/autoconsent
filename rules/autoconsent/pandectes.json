@@ -15,18 +15,22 @@
     "optIn": [
         {
             "waitForThenClick": "#pandectes-banner .cc-allow"
-        }
+        },
+        { "hide": "#pandectes-banner", "optional": true }
     ],
     "optOut": [
         {
             "if": { "visible": "#pandectes-banner .cc-deny" },
-            "then": [{ "click": "#pandectes-banner .cc-deny" }],
+            "then": [{ "waitForThenClick": "#pandectes-banner .cc-deny" }],
             "else": [
-                { "click": "#pandectes-banner .cc-settings" },
-                { "waitForThenClick": ".pd-cp-ui-rejectAll" },
+                { "waitForThenClick": "#pandectes-banner .cc-settings" },
+                { "waitForVisible": ".pd-cp-ui-rejectAll" },
+                { "click": ".pd-cp-ui-rejectAll" },
+                { "waitForVisible": ".pd-cp-ui-save" },
                 { "click": ".pd-cp-ui-save" }
             ]
-        }
+        },
+        { "hide": "#pandectes-banner", "optional": true }
     ],
     "test": [{ "wait": 500 }, { "eval": "EVAL_PANDECTES_TEST" }]
 }

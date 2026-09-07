@@ -6,6 +6,7 @@
         "urlPattern": "^https://([a-z]*\\.)?postnl\\.nl/"
     },
     "prehideSelectors": ["pnl-cookie-wall-widget"],
+    "minimumRuleStepVersion": 2,
     "detectCmp": [
         {
             "exists": "pnl-cookie-wall-widget"
@@ -13,17 +14,41 @@
     ],
     "detectPopup": [
         {
-            "visible": "pnl-cookie-wall-widget"
+            "visible": ["pnl-cookie-wall-widget", ".pnl-cookie-wall"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["pnl-cookie-wall-widget", "button.pci-button--primary"]
+            "waitForThenClick": ["pnl-cookie-wall-widget", ".cookie-overview__footer button.stamp-button--variant-primary"]
+        },
+        {
+            "waitForVisible": ["pnl-cookie-wall-widget", ".pnl-cookie-wall"],
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "comment": "the wall locks and dims body via inline styles, and sometimes fails to restore them",
+            "setStyle": "",
+            "selector": "body",
+            "optional": true
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["pnl-cookie-wall-widget", "button.pci-button--secondary"]
+            "waitForThenClick": ["pnl-cookie-wall-widget", ".cookie-overview__footer button.stamp-button--variant-secondary:last-child"]
+        },
+        {
+            "waitForVisible": ["pnl-cookie-wall-widget", ".pnl-cookie-wall"],
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "comment": "the wall locks and dims body via inline styles, and sometimes fails to restore them",
+            "setStyle": "",
+            "selector": "body",
+            "optional": true
         }
     ],
     "test": [

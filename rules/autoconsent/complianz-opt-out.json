@@ -27,6 +27,12 @@
     ],
     "optOut": [
         {
+            "comment": "the popup markup exists before the library opens it; clicking too early gets undone by the pending open",
+            "waitFor": "[aria-describedby=\"cookieconsent:desc\"].cc-type-opt-out:not(.cc-invisible)",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
             "if": {
                 "exists": ".cc-deny"
             },

@@ -1,0 +1,14 @@
+{
+    "name": "mco-consent",
+    "prehideSelectors": [
+        ".mco-consent-pop-up",
+        ".mco-consent-slide-up",
+        ".mco-consent-slide-up__backdrop",
+        ".mco-overlay:has(.mco-consent)"
+    ],
+    "detectCmp": [{ "exists": "#mco-consent" }],
+    "detectPopup": [{ "visible": "[class*=\"mco-consent-\"][class*=\"__button-decline\"]" }],
+    "optIn": [{ "waitForThenClick": "[class*=\"mco-consent-\"][class*=\"__button-confirm\"]" }],
+    "optOut": [{ "waitForThenClick": "[class*=\"mco-consent-\"][class*=\"__button-decline\"]" }],
+    "test": [{ "cookieContains": "\"acceptedAll\":false" }]
+}

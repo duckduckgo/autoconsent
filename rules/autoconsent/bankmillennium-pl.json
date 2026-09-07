@@ -1,0 +1,26 @@
+{
+    "name": "bankmillennium.pl",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bankmillennium\\.pl/"
+    },
+    "prehideSelectors": ["#cookie_modal_placeholder dialog.bm-modal--cookie"],
+    "detectCmp": [{ "exists": "#cookie_modal_placeholder dialog.bm-modal--cookie" }],
+    "detectPopup": [{ "visible": "#cookie_modal_placeholder dialog.bm-modal--cookie" }],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "#cookie_modal_placeholder dialog.bm-modal--cookie",
+                "xpath///button[contains(normalize-space(.), 'Potwierd')]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "#cookie_modal_placeholder dialog.bm-modal--cookie",
+                "xpath///button[contains(normalize-space(.), 'Odrzu')]"
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "Analytics_consent=2" }, { "cookieContains": "Marketing_consent=2" }]
+}

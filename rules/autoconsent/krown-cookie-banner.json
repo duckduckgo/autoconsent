@@ -1,0 +1,34 @@
+{
+    "name": "krown-cookie-banner",
+    "vendorUrl": "https://krownthemes.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["modal-box[data-options*=\"cookies\"] .modal-object--cookie"],
+    "detectCmp": [
+        {
+            "exists": ".modal-object--cookie [data-js-cookies-decline]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".modal-object--cookie [data-js-cookies-decline]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".modal-object--cookie [data-js-cookies-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".modal-object--cookie [data-js-cookies-decline]"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "eval": "EVAL_KROWN_COOKIE_BANNER_TEST"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "coolblue",
+    "_metadata": {
+        "vendorUrl": "https://www.coolblue.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["dialog:has(#cookie-banner-2025-form)"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner-2025-form"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[form=\"cookie-banner-2025-form\"][name=\"accept_cookie\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button[form=\"cookie-banner-2025-form\"][name=\"accept_cookie\"][value=\"all_categories\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "Submits the banner with only the pre-checked strictly necessary categories",
+            "waitForThenClick": "button[form=\"cookie-banner-2025-form\"][name=\"accept_cookie\"][value=\"selection\"]"
+        }
+    ]
+}

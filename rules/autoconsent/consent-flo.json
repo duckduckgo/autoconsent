@@ -1,0 +1,24 @@
+{
+    "name": "consent-flo",
+    "prehideSelectors": ["._flo-consent-root"],
+    "detectCmp": [{ "exists": "._flo-consent-root ._flo-consent-modal-contextual ._flo-consent-button--accept-selected" }],
+    "detectPopup": [{ "visible": "._flo-consent-root ._flo-consent-modal:not(._flo-consent-modal-contextual)" }],
+    "optIn": [{ "waitForThenClick": "._flo-consent-modal:not(._flo-consent-modal-contextual) ._flo-consent-button--accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "._flo-consent-modal:not(._flo-consent-modal-contextual) ._flo-consent-button--reject" },
+            "then": [{ "waitForThenClick": "._flo-consent-modal:not(._flo-consent-modal-contextual) ._flo-consent-button--reject" }],
+            "else": [
+                { "waitForThenClick": "._flo-consent-button--settings" },
+                { "waitForVisible": "._flo-consent-modal-contextual ._flo-consent-button--accept-selected" },
+                {
+                    "click": "._flo-consent-modal-contextual ._flo-consent-checkbox:checked:not(._flo-consent-checkbox--necessary)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": "._flo-consent-modal-contextual ._flo-consent-button--accept-selected" }
+            ]
+        }
+    ],
+    "test": [{ "exists": "._flo-consent-root._flo-consent-hide" }]
+}

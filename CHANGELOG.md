@@ -1,3 +1,456 @@
+# v16.38.0 (Sun Sep 06 2026)
+
+#### Rules
+
+- Rule update: fever-cookie-advice [#1558](https://github.com/duckduckgo/autoconsent/pull/1558) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: workday [#1557](https://github.com/duckduckgo/autoconsent/pull/1557) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mco-consent [#1556](https://github.com/duckduckgo/autoconsent/pull/1556) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: socialfunders [#1555](https://github.com/duckduckgo/autoconsent/pull/1555) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: drouot-rgpd [#1554](https://github.com/duckduckgo/autoconsent/pull/1554) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: idxrcookies [#1553](https://github.com/duckduckgo/autoconsent/pull/1553) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consent-flo [#1552](https://github.com/duckduckgo/autoconsent/pull/1552) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiebot.be [#1551](https://github.com/duckduckgo/autoconsent/pull/1551) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: setupad [#1550](https://github.com/duckduckgo/autoconsent/pull/1550) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mkdocs-material [#1549](https://github.com/duckduckgo/autoconsent/pull/1549) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: infomaniak-rgpd [#1548](https://github.com/duckduckgo/autoconsent/pull/1548) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieyes [#1547](https://github.com/duckduckgo/autoconsent/pull/1547) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.37.0 (Sat Sep 05 2026)
+
+#### Rules
+
+- Rule update: mirasvit-gdpr [#1545](https://github.com/duckduckgo/autoconsent/pull/1545) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bbc.com [#1544](https://github.com/duckduckgo/autoconsent/pull/1544) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tlc-direct [#1543](https://github.com/duckduckgo/autoconsent/pull/1543) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aquasana.com [#1542](https://github.com/duckduckgo/autoconsent/pull/1542) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mipro.com.tw [#1541](https://github.com/duckduckgo/autoconsent/pull/1541) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bcferries.com [#1539](https://github.com/duckduckgo/autoconsent/pull/1539) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: as-adventure [#1540](https://github.com/duckduckgo/autoconsent/pull/1540) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xe.com [#1538](https://github.com/duckduckgo/autoconsent/pull/1538) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.36.0 (Fri Sep 04 2026)
+
+#### Rules
+
+- Rule update: mensaje-cookies [#1533](https://github.com/duckduckgo/autoconsent/pull/1533) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.35.0 (Thu Sep 03 2026)
+
+#### Rules
+
+- Rule update: postnl [#1536](https://github.com/duckduckgo/autoconsent/pull/1536) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: coolblue popup [#1537](https://github.com/duckduckgo/autoconsent/pull/1537) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_android (eun) CPM magic report: m.twitch.tv [#1535](https://github.com/duckduckgo/autoconsent/pull/1535) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.34.0 (Wed Sep 02 2026)
+
+#### Rules
+
+- Rule update: ccm-net [#1529](https://github.com/duckduckgo/autoconsent/pull/1529) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: epaas [#1528](https://github.com/duckduckgo/autoconsent/pull/1528) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.33.0 (Tue Sep 01 2026)
+
+#### Rules
+
+- Rule update: CPM feedback: paypal.com [#1532](https://github.com/duckduckgo/autoconsent/pull/1532) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- Agent tweaks [#1530](https://github.com/duckduckgo/autoconsent/pull/1530) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.32.0 (Sat Aug 29 2026)
+
+#### Rules
+
+- Rule update: doordash-storefront [#1527](https://github.com/duckduckgo/autoconsent/pull/1527) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.31.0 (Fri Aug 28 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Update asana-sync.yml ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Rules
+
+- Add some Russian heuristic patterns [#1526](https://github.com/duckduckgo/autoconsent/pull/1526) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #28: walmart.ca [#1524](https://github.com/duckduckgo/autoconsent/pull/1524) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xnxx.com (manual entry) [#1525](https://github.com/duckduckgo/autoconsent/pull/1525) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: auto_CA_algonquincollege.com_o8v [#1495](https://github.com/duckduckgo/autoconsent/pull/1495) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: regression on www.wohnen.de [#1523](https://github.com/duckduckgo/autoconsent/pull/1523) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Internal
+
+- Fix heuristic popup candidate pruning [#1475](https://github.com/duckduckgo/autoconsent/pull/1475) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.30.0 (Thu Aug 27 2026)
+
+#### Rules
+
+- Rule update: bankmillennium.pl [#1497](https://github.com/duckduckgo/autoconsent/pull/1497) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bibliotheek-nl [#1498](https://github.com/duckduckgo/autoconsent/pull/1498) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: r42-cookiebar [#1499](https://github.com/duckduckgo/autoconsent/pull/1499) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.29.0 (Wed Aug 26 2026)
+
+#### Rules
+
+- Rule update: ecbeing [#1521](https://github.com/duckduckgo/autoconsent/pull/1521) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stright [#1522](https://github.com/duckduckgo/autoconsent/pull/1522) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Add optional retry in waitForThenClick [#1519](https://github.com/duckduckgo/autoconsent/pull/1519) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.28.0 (Wed Aug 26 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on alexjoneslive.com [#1517](https://github.com/duckduckgo/autoconsent/pull/1517) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: popup on deliveroo.co.uk [#1520](https://github.com/duckduckgo/autoconsent/pull/1520) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bbva [#1515](https://github.com/duckduckgo/autoconsent/pull/1515) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie Popup on pay.amazon.co.jp [#1518](https://github.com/duckduckgo/autoconsent/pull/1518) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup shown on ebay.com [#1516](https://github.com/duckduckgo/autoconsent/pull/1516) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Fix Guardian scroll lock after back navigation [#1464](https://github.com/duckduckgo/autoconsent/pull/1464) ([@cursoragent](https://github.com/cursoragent) [@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 5
+
+- Claude ([@claude](https://github.com/claude))
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.27.0 (Tue Aug 25 2026)
+
+#### Rules
+
+- Rule update: CPM feedback: justwatch.com [#1514](https://github.com/duckduckgo/autoconsent/pull/1514) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Rule fix for Site Breakage: paypal.com (2026-08-15) [#1506](https://github.com/duckduckgo/autoconsent/pull/1506) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kingrecords-co-jp [#1507](https://github.com/duckduckgo/autoconsent/pull/1507) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sex.com [#1508](https://github.com/duckduckgo/autoconsent/pull/1508) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (ase) CPM magic report: www.ecb.europa.eu [#1509](https://github.com/duckduckgo/autoconsent/pull/1509) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_android (eun) CPM magic report: www.thefoxandpheasant.com [#1510](https://github.com/duckduckgo/autoconsent/pull/1510) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #37: pornpics.com [#1511](https://github.com/duckduckgo/autoconsent/pull/1511) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on gemini.google.com [#1513](https://github.com/duckduckgo/autoconsent/pull/1513) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- massage xhamster rule [#1512](https://github.com/duckduckgo/autoconsent/pull/1512) ([@muodov](https://github.com/muodov))
+- Rule update: rule34-xxx [#1496](https://github.com/duckduckgo/autoconsent/pull/1496) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on twitch.tv [#1504](https://github.com/duckduckgo/autoconsent/pull/1504) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.26.0 (Mon Aug 24 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on sqe.sra.org.uk [#1505](https://github.com/duckduckgo/autoconsent/pull/1505) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.25.0 (Sun Aug 23 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on youporn.com [#1503](https://github.com/duckduckgo/autoconsent/pull/1503) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.24.0 (Sat Aug 22 2026)
+
+#### Rules
+
+- Rule update: Cookie prompt on chatgpt.com [#1500](https://github.com/duckduckgo/autoconsent/pull/1500) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.23.0 (Tue Aug 18 2026)
+
+#### Rules
+
+- Rule update: check24 [#1494](https://github.com/duckduckgo/autoconsent/pull/1494) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uwv-nl [#1493](https://github.com/duckduckgo/autoconsent/pull/1493) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Proactive CPM check: paypal.com [#1491](https://github.com/duckduckgo/autoconsent/pull/1491) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.22.0 (Sat Aug 15 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #222: pornpics.de [#1485](https://github.com/duckduckgo/autoconsent/pull/1485) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Don't agree button on takahashikougei.com [#1483](https://github.com/duckduckgo/autoconsent/pull/1483) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl cluster #415: landmarkcinemas.com (consentmanager.net|inert, 14 sites) [#1482](https://github.com/duckduckgo/autoconsent/pull/1482) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1635: darty.com [#1481](https://github.com/duckduckgo/autoconsent/pull/1481) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.21.0 (Fri Aug 14 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Bump action-asana-sync ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Rules
+
+- Rule update: ibanez [#1486](https://github.com/duckduckgo/autoconsent/pull/1486) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fever [#1487](https://github.com/duckduckgo/autoconsent/pull/1487) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-banner-element [#1488](https://github.com/duckduckgo/autoconsent/pull/1488) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: simplehuman-com [#1489](https://github.com/duckduckgo/autoconsent/pull/1489) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie pop-up displayed: TOHO-ONE [#1477](https://github.com/duckduckgo/autoconsent/pull/1477) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl cluster #54: youporn.com (aylo-cookie-banner|inert, 13 sites) [#1474](https://github.com/duckduckgo/autoconsent/pull/1474) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tohotheater-jp [#1476](https://github.com/duckduckgo/autoconsent/pull/1476) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on ctv.co.jp [#1478](https://github.com/duckduckgo/autoconsent/pull/1478) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Documentation
+
+- Coverage data update [#1480](https://github.com/duckduckgo/autoconsent/pull/1480) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.20.1 (Thu Aug 06 2026)
+
+#### Rules
+
+- Remove incorrect cosmetic flag from scmp rule [#1473](https://github.com/duckduckgo/autoconsent/pull/1473) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.20.0 (Wed Aug 05 2026)
+
+#### Rules
+
+- Rule update: scmp [#1471](https://github.com/duckduckgo/autoconsent/pull/1471) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.19.0 (Fri Jul 31 2026)
+
+#### Rules
+
+- Rule update: Cookie popup on gmx.com [#1468](https://github.com/duckduckgo/autoconsent/pull/1468) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: simyo-nl [#1469](https://github.com/duckduckgo/autoconsent/pull/1469) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: [m8-ab] [e2e test] [m8] unknowncmp:bbb.org — bbb.org #1 [#1467](https://github.com/duckduckgo/autoconsent/pull/1467) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Bug Fixes
+
+- Avoid heuristic reject on German revoke links [#1466](https://github.com/duckduckgo/autoconsent/pull/1466) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Documentation
+
+- Coverage data update [#1457](https://github.com/duckduckgo/autoconsent/pull/1457) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.18.1 (Wed Jul 29 2026)
+
+#### Rules
+
+- Revert "Fix Pornhub reload loop by merging compact cookie banner rule" [#1465](https://github.com/duckduckgo/autoconsent/pull/1465) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 1
+
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.18.0 (Wed Jul 29 2026)
+
+#### Rules
+
+- Fix Pornhub reload loop by merging compact cookie banner rule [#1463](https://github.com/duckduckgo/autoconsent/pull/1463) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- Fix stale cmp rules [#1459](https://github.com/duckduckgo/autoconsent/pull/1459) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Fix borlabs rule [#1462](https://github.com/duckduckgo/autoconsent/pull/1462) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### AI / Agent Workflow
+
+- Introduce test region sets [#1461](https://github.com/duckduckgo/autoconsent/pull/1461) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.17.0 (Tue Jul 28 2026)
+
+#### Rules
+
+- make youtube-mobile more reliable [#1460](https://github.com/duckduckgo/autoconsent/pull/1460) ([@muodov](https://github.com/muodov))
+- Dismiss The Guardian "consent or pay" wall in EU/UK via cosmetic rule [#1455](https://github.com/duckduckgo/autoconsent/pull/1455) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.16.0 (Sat Jul 25 2026)
+
+#### Rules
+
+- Fix Pandectes mobile settings timing [#1458](https://github.com/duckduckgo/autoconsent/pull/1458) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Rule update: Admiral [#1456](https://github.com/duckduckgo/autoconsent/pull/1456) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.15.0 (Fri Jul 24 2026)
+
+#### Rules
+
+- Dismiss Pornhub minimized cookie banner [#1452](https://github.com/duckduckgo/autoconsent/pull/1452) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Rule update: cookieinfo [#1449](https://github.com/duckduckgo/autoconsent/pull/1449) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- Update AI rules [#1447](https://github.com/duckduckgo/autoconsent/pull/1447) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.14.0 (Thu Jul 23 2026)
 
 #### Rules

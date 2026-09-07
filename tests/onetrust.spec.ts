@@ -37,6 +37,10 @@ generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
     skipRegions: ['US'],
 });
 
+generateCMPTests('Onetrust', ['https://www.jdsports.co.uk/'], {
+    onlyRegions: ['GB'],
+});
+
 // CCPA notice-only banner variant: only a "Close" button, no Accept/Reject/Settings.
 // Only appears in the US (CCPA). The rule clicks Close to dismiss the banner; opt-in
 // and self-test don't apply (no real consent state to flip).

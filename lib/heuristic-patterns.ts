@@ -10,6 +10,7 @@ export const DETECT_PATTERNS = [
     /we (?:use|serve)(?: optional)? cookies/gi,
     /we are using cookies/gi,
     /use of cookies/gi,
+    /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
     /cookies (?:and|or) .{0,100} technologies/gi,
     /such as cookies/gi,
@@ -151,7 +152,16 @@ export const DETECT_PATTERNS = [
     /este portal emprega cookies propias ou de terceiros con fins analíticos/gi,
 
     // Russian (RU)
-    /мы используем файлы cookie и аналогичные технологии/gi,
+    // e.g. "мы используем файлы cookie", "сайт использует куки", "используются технологии cookie"
+    // note: \w does not match Cyrillic, so these use explicit character ranges
+    /использу[а-яё]*.{0,40}(?:файл[а-яё]*[\s-]+)?(?:cookie|куки)/gi,
+    /(?:cookie|куки).{0,40}использу[а-яё]*/gi,
+    /(?:использовани[а-яё]*|обработк[а-яё]*|хранени[а-яё]*).{0,20}(?:файл(?:ов|ы)[\s-]+)?(?:cookie|куки)/gi,
+    /технологи[а-яё]*\s+(?:cookie|куки)/gi,
+    // e.g. "сайт собирает cookie", "мы применяем файлы cookie", "сохраняем куки на вашем устройстве"
+    /(?:собира[а-яё]*|сбор|применя[а-яё]*|сохраня[а-яё]*|размеща[а-яё]*|устанавлива[а-яё]*).{0,30}(?:файл[а-яё]*[\s-]+)?(?:cookie|куки)/gi,
+    // "файлы cookie" / "cookie-файлы" / "куки-файлы" in any phrasing
+    /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
@@ -163,16 +173,17 @@ const REJECT_PATTERNS_ENGLISH = [
     // note that "reject and subscribe" and "reject and pay" are excluded via BUTTON_NEVER_MATCH_PATTERNS
     /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies)?\s*(and\s+close)?\s*$/is,
 
-    // e.g. "i do not accept", "do not accept cookies"
-    /^\s*(i\s+)?do\s+not\s+accept\s*(cookies)?\s*$/is,
+    // e.g. "i do not accept", "do not accept cookies", "i do not accept the use of cookies"
+    /^\s*(no,?\s*)?(i\s+)?do\s+not\s+accept\s*(the\s+use\s+of\s+)?(any\s+)?(cookies)?\s*$/is,
 
     // e.g. "continue without accepting", "continue without agreeing", "continue without agreeing →"
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
     // "allow necessary cookies continue", "use essential cookies only", "functional only", "i confirm necessary"
-    // note that a necessary/essential/functional word is required
-    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)?\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(only\s+)?(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s+only\s*$/is,
 
     // e.g. "do not sell or share my personal information", "opt out of sale ..." (CCPA)
     /do\s+not\s+sell|opt\s+out\s+of\s+sale/is,
@@ -248,7 +259,7 @@ const REJECT_PATTERNS_GERMAN = [
     /^\s*(nur|ausschließlich|lediglich|weiter\s+mit|mit|akzeptiere?n?|unbedingt|es\s+werden\s+nur)?\s*(technisch\s+)?(notwendige?[nrs]?|essenzielle?[nrs]?|essentielle?[nrs]?|erforderliche?[nrs]?|funktionale?[nrs]?|funktionelle?[nrs]?|wesentliche?[nrs]?)\s*(cookies?|technologien|funktionscookies|dienste)?\s*(akzeptieren|erlauben|zulassen|verwenden|annehmen|setzen|speichern|zustimmen|auswählen)?\.?\s*$/is,
 
     // continue without consent
-    /(^|\s)(ohne\s+(einwilligung|zustimmung|einverständnis|annahme)|(weiter|fortfahren)\s+ohne)/is,
+    /(^|\s)(ohne\s+(zu\s+)?(einwilligung|zustimmung|einverständnis|annahme|annehmen|akzeptanz|akzeptieren)|(weiter|fortfahren)\s+ohne)/is,
 
     // negations / refusals not covered by the regexes above
     'nein, danke',
@@ -257,7 +268,6 @@ const REJECT_PATTERNS_GERMAN = [
     'nicht zustimmen',
     'nicht einverstanden',
     'ich lehne ab',
-    'widerrufen',
     'mit erforderlichen einstellungen fortfahren',
     'mit erforderlichen cookies fortfahren',
     'mit notwendigen fortfahren',
@@ -365,7 +375,16 @@ const REJECT_PATTERNS_POLISH = [
     /^funkcjonalne pliki cookie \(wymagane\)$/,
 ];
 
-const REJECT_PATTERNS_RUSSIAN = ['принимать только необходимые файлы cookie'];
+const REJECT_PATTERNS_RUSSIAN = [
+    // отклонить / отказаться / запретить (reject verbs); \w does not match Cyrillic
+    /(^|\s)(отклон[а-яё]*|отказ[а-яё]*|откаж[а-яё]*|запрет[а-яё]*|запрещ[а-яё]*)/is,
+
+    // "только необходимые (файлы cookie)" / "принять только необходимые куки"
+    /^\s*(принять\s+|принима[а-яё]+\s+|разрешить\s+|использовать\s+|оставить\s+)?(только|лишь)\s+(строго\s+)?(необходим[а-яё]+|нужн[а-яё]+|обязательн[а-яё]+|техническ[а-яё]+|функциональн[а-яё]+)(\s+файл[а-яё]*)?([\s-]+(cookie|куки)([\s-]+файл[а-яё]*)?)?\s*$/is,
+
+    // refusals: "не принимаю", "не согласен", "не соглашаюсь", "нет, спасибо"
+    /^\s*(не\s+(принима[а-яё]+|соглас[а-яё]+|разреша[а-яё]+|хочу)|нет(,?\s+спасибо)?)\s*$/is,
+];
 
 const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
@@ -416,6 +435,9 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
 
     // Polish (PL)
     /subskrybuj/,
+
+    // Russian (RU): paywall/subscription wording, e.g. "отказаться от подписки", "оплатить"
+    /подписатьс|подписк|оплатит|оплачива/is,
 ];
 
 // Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
@@ -596,8 +618,12 @@ export const SETTINGS_PATTERNS = [
     'zobacz preferencje',
 
     // Russian (RU)
-    'настроить файлы cookie',
-    'настройки',
+    // e.g. "настроить", "настройки куки", "параметры конфиденциальности"; \w does not match Cyrillic
+    /^\s*((мои|моими|свои|своими)\s+)?(настро[а-яё]+|парамет[а-яё]+|предпочтени[а-яё]+)([\s-]+(мои|моими|свои|своими|файл[а-яё]*|cookie|куки[а-яё]*|конфиденциальност[а-яё]*|согласи[а-яё]*|приватност[а-яё]*))*\s*$/is,
+    // e.g. "управление файлами cookie", "изменить настройки", "выбрать категории"
+    // "подробн" is deliberately excluded: it would also match the "подробнее о cookie" policy link
+    /^\s*(управл[а-яё]+|измен[а-яё]+|выбрать|персонализ[а-яё]+|расширенн[а-яё]+|индивидуальн[а-яё]+)[\s-]+.{0,20}(настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|категори[а-яё]*|файл[а-яё]*|cookie|куки[а-яё]*|согласи[а-яё]*|конфиденциальност[а-яё]*)\s*$/is,
+    'подробные настройки',
 
     // Italian (IT)
     'personalizza cookie',
@@ -749,7 +775,9 @@ export const ACCEPT_PATTERNS = [
     'zgoda na wybrane',
 
     // Russian (RU)
-    'принять все файлы cookie',
+    // e.g. "принять всё", "принять все файлы cookie", "разрешить куки", "я согласен"
+    // confirm/save wording (подтвердить, сохранить) is acknowledge, not accept
+    /^\s*(да,?\s+)?(я\s+)?(принять|принима[а-яё]+|соглас[а-яё]+|разрешить|разреша[а-яё]+)(\s+(вс[её]|(все\s+)?(файлы[\s-]+)?(cookie|куки)([\s-]+файл[а-яё]*)?|выбранные|выбор))?\s*$/is,
     'принять',
 
     // Turkish (TR)
@@ -821,5 +849,13 @@ export const ACKNOWLEDGE_PATTERNS = [
     'zapisz i zamknij',
 
     // Russian (RU)
-    'понятно',
+    // e.g. "понятно", "всё понятно", "хорошо", "ясно"; \w does not match Cyrillic
+    /^\s*(хорошо|ясно|(вс[её]\s+)?(понятно|понял[аи]?))[!.]*\s*$/is,
+    // e.g. "закрыть", "закрыть уведомление о cookie"
+    /^\s*закрыть([\s-]+(это|эту|баннер|уведомлени[а-яё]*|окно|сообщени[а-яё]*|плашк[а-яё]*|информаци[а-яё]*)){0,2}([\s-]+(о|об)[\s-]+(cookie|куки[а-яё]*|файл[а-яё]*[\s-]+cookie))?\s*$/is,
+    // e.g. "больше не показывать", "не показывать снова"
+    /^\s*(больше\s+не\s+показывать|не\s+показывать(\s+(снова|больше|это\s+сообщение))?)\s*$/is,
+    // e.g. "подтвердить", "подтверждаю выбор", "сохранить настройки", "сохранить и закрыть"
+    /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
+    'продолжить',
 ];

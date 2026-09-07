@@ -98,6 +98,21 @@
             <button>Accept All</button>
         </div>
 
+        <div id="popup-accept-with-empty-fixed-child" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <div style="position: fixed"></div>
+        </div>
+
+        <div id="popup-with-contentful-fixed-child" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Reject All</button>
+            <div id="contentful-fixed-child" style="position: fixed">
+                <p>We use cookies to improve your experience.</p>
+                <button>Accept All</button>
+            </div>
+        </div>
+
         <div id="popup-acknowledge-only" class="popup">
             <p>We use cookies to improve your experience.</p>
             <button>OK</button>

@@ -103,10 +103,21 @@ Click on an element returned by `selector`. If `all` is `true`, all matching ele
 {
   "waitForThenClick": ElementSelector,
   "timeout": 1000,
-  "all": true | false
+  "all": true | false,
+  "retry": 0,
+  "retryInterval": 300
 }
 ```
 Combines `waitFor` and `click`.
+
+`retry` is the number of extra click attempts if the element is still visible after the click, `0` by
+default. It works around CMPs that insert a button before its click handler is attached.
+Between attempts the step waits up to `retryInterval` ms (300 by default) for the element to
+disappear, and stops retrying as soon as it does. Prefer this over an unconditional `wait` before the
+click: nothing is added to the step's duration when the first click works.
+
+**Only use `retry` on elements that are expected to go away** once the click is handled — a button that
+stays visible (e.g. a toggle) would be clicked repeatedly.
 
 ## Unconditional wait
 ```javascript
@@ -153,6 +164,18 @@ Set the inline style of the elements matched by the `selector`. `style-string` i
 }
 ```
 Append the inline style of the elements matched by the `selector`. `style-string` is a string of CSS properties and values. The style is appended to the existing inline style, separated by a semicolon.
+
+## Stylesheet
+
+```javascript
+{
+  "stylesheet": "css-rule-string",
+  "stylesheetId": "unique-marker"
+}
+```
+Append a CSS rule (e.g. `".overlay { display: none !important; }"`) to the style element injected by autoconsent. Unlike `setStyle`/`addStyle`, which modify inline styles of currently matched elements, an appended stylesheet rule keeps applying to elements matched later — useful when the page re-adds classes or inline styles after the opt-out (e.g. scroll locks reapplied on back/forward navigation).
+
+The optional `stylesheetId` is a marker used to prevent duplicate inserts when the rule runs multiple times; if omitted, the CSS rule text itself is used for deduplication.
 
 ## Cookie match
 ```javascript
@@ -241,11 +264,13 @@ The `minimumRuleStepVersion` field solves this: clients compare the rule's decla
 |---------|-----------------|
 | 1 | All original step types (`exists`, `visible`, `waitFor`, `waitForVisible`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, `negated`) |
 | 2 | `removeClass`, `setStyle`, `addStyle` |
+| 3 | `stylesheet` |
 
 ### When to set it
 
 - If a rule only uses version-1 step types, omit the field (defaults to `1`).
 - If a rule uses `removeClass`, `setStyle`, or `addStyle`, set `"minimumRuleStepVersion": 2`.
+- If a rule uses `stylesheet`, set `"minimumRuleStepVersion": 3`.
 - When a future version introduces new step types, any rule using them must set `minimumRuleStepVersion` to the corresponding version number.
 
 ### Adding new step types

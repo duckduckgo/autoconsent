@@ -7,7 +7,7 @@
     "optOut": [
         { "click": ".consent-banner__actions button.basic-button.secondary" },
         { "waitForThenClick": ".consent-modal__footer button.basic-button.secondary" },
-        { "waitForThenClick": ".consent-modal ion-content > div > a:nth-child(9)" },
+        { "waitForThenClick": ".consent-modal .base-modal__body a", "all": true },
         { "click": "label.consent-switch input[type=checkbox]:checked", "all": true, "optional": true },
         { "waitForVisible": ".consent-modal__footer button.basic-button.primary" },
         { "click": ".consent-modal__footer button.basic-button.primary" }

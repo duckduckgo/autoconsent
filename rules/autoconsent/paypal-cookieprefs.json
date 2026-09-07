@@ -1,0 +1,29 @@
+{
+    "name": "paypal-cookieprefs",
+    "comment": "Cookie preferences page (.privacy-sheet-content on desktop, #cookiePrefsModal on mobile). Only automate it when we got here from the banner's \"Manage your cookies\" link, which appends a query string; a user who opens the page themselves lands on it without one and must be left free to edit their own preferences.",
+    "runContext": { "urlPattern": "^https://www\\.paypal\\.com/myaccount/privacy/cookiePrefs\\?" },
+    "prehideSelectors": ["#cookiePrefsModal, .privacy-sheet-content"],
+    "detectCmp": [{ "exists": "#cookiePrefsModal #formContent, .privacy-sheet-content #formContent" }],
+    "detectPopup": [{ "visible": "#cookiePrefsModal #formContent, .privacy-sheet-content #formContent" }],
+    "optIn": [
+        {
+            "click": "#formContent input[type='checkbox']:not(:checked)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookieAction #submitCookiesBtn", "timeout": 15000 }
+    ],
+    "optOut": [
+        {
+            "click": "#formContent input[type='checkbox']:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "comment": "In \"manage\" mode the submit button is present but its sticky bar stays hidden, so wait for existence rather than visibility.",
+            "waitForThenClick": ".cookieAction #submitCookiesBtn",
+            "timeout": 15000
+        }
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "type%3Dexplicit" }]
+}

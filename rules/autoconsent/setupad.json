@@ -1,0 +1,57 @@
+{
+    "name": "setupad",
+    "vendorUrl": "https://setupad.com/cmp/",
+    "prehideSelectors": [".stpd_cmp_wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".stpd_cmp_wrapper .stpd_cmp_form"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".stpd_cmp_wrapper .stpd_cmp_form"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".stpd_cmp_wrapper .stpd_cta_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".stpd_cmp_wrapper .stpd_flexed_btns button[type=\"submit\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".stpd_cmp_wrapper .stpd_flexed_btns button[type=\"submit\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".stpd_cmp_wrapper .stpd_flexed_btns button[type=\"button\"]:not(.withdraw_consent)"
+                },
+                {
+                    "waitForVisible": ".stpd_cmp_wrapper .stpd_purposes_list"
+                },
+                {
+                    "click": ".stpd_cmp_wrapper input[type=\"checkbox\"]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".stpd_cmp_wrapper .stpd_flexed_btns button[type=\"submit\"]"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".stpd_cmp_wrapper",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "euconsent-v2="
+        }
+    ]
+}

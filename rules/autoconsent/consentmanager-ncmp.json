@@ -1,0 +1,34 @@
+{
+    "name": "consentmanager-ncmp",
+    "vendorUrl": "https://www.consentmanager.net/",
+    "prehideSelectors": ["#ncmp__tool .ncmp__banner"],
+    "detectCmp": [
+        {
+            "exists": "#ncmp__tool .ncmp__banner.ncmp__active"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ncmp__tool .ncmp__banner.ncmp__active",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_CONSENTMANAGER_NCMP_ACCEPT"
+        }
+    ],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "eval": "EVAL_CONSENTMANAGER_NCMP_REJECT"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ncmp="
+        }
+    ]
+}

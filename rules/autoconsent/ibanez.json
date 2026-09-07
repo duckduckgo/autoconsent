@@ -1,0 +1,13 @@
+{
+    "name": "ibanez",
+    "vendorUrl": "https://www.ibanez.com/",
+    "runContext": {
+        "urlPattern": "^https?://www\\.ibanez\\.com/"
+    },
+    "prehideSelectors": ["#header-gdpr"],
+    "detectCmp": [{ "exists": "#header-gdpr #header-gdpr-in-btn button" }],
+    "detectPopup": [{ "visible": "#header-gdpr.is-active" }],
+    "optOut": [{ "waitForThenClick": "#header-gdpr #header-gdpr-in-btn button" }],
+    "optIn": [{ "waitForThenClick": "#header-gdpr #header-gdpr-in-btn button" }],
+    "test": [{ "cookieContains": "gdprCookieData=ok" }]
+}

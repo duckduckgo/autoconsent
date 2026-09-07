@@ -1,0 +1,29 @@
+{
+    "name": "stright",
+    "prehideSelectors": ["#controlled_banner-cookie_consent-consent_banner", "#controlled_banner-cookie_consent-privacy_setting_banner"],
+    "detectCmp": [{ "exists": "#controlled_banner-cookie_consent-consent_banner" }],
+    "detectPopup": [{ "visible": "#controlled_banner-cookie_consent-consent_banner" }],
+    "optIn": [{ "waitForThenClick": "#controlled_submit-cookie_consent-consent_banner-accept_all" }],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#controlled_banner-cookie_consent-consent_banner [data-search-key-button=reject_all_text]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#controlled_banner-cookie_consent-consent_banner [data-search-key-button=reject_all_text]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#controlled_submit-cookie_consent-consent_banner-privacy_setting_banner_link"
+                },
+                {
+                    "waitForThenClick": "#controlled_banner-cookie_consent-privacy_setting_banner [data-search-key-button=reject_all_text]"
+                }
+            ]
+        },
+        { "waitForVisible": "#controlled_banner-cookie_consent-consent_banner", "check": "none" }
+    ],
+    "test": [{ "visible": "#controlled_banner-cookie_consent-consent_banner", "check": "none" }]
+}

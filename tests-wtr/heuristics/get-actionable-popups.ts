@@ -71,6 +71,26 @@ describe('getActionablePopups', () => {
             expect(popups[0].buttons.filter((b) => b.regexClassification === 'accept')).to.have.length(1);
         });
 
+        it('keeps a contentful popup containing an empty fixed child', () => {
+            showPopup('popup-accept-with-empty-fixed-child');
+
+            const popups = getActionablePopups('tier2');
+
+            expect(popups).to.have.length(1);
+            expect(popups[0].element.id).to.equal('popup-accept-with-empty-fixed-child');
+            expect(popups[0].regexClassification).to.equal('tier2');
+        });
+
+        it('prefers a contentful fixed child over its contentful container', () => {
+            showPopup('popup-with-contentful-fixed-child');
+
+            const popups = getActionablePopups('tier2');
+
+            expect(popups).to.have.length(1);
+            expect(popups[0].element.id).to.equal('contentful-fixed-child');
+            expect(popups[0].regexClassification).to.equal('tier2');
+        });
+
         it('finds acknowledge-only popup with no reject buttons', () => {
             showPopup('popup-acknowledge-only');
 

@@ -1,0 +1,41 @@
+{
+    "name": "vmock",
+    "vendorUrl": "https://www.vmock.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?vmock\\.com/"
+    },
+    "prehideSelectors": [".cookie-policy-modal", ".manage-cookies-modal"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-policy-modal .cookie-policy-details button.manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-policy-modal .cookie-policy-details button.manage"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-policy-modal .cookie-policy-details button.accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-policy-modal .cookie-policy-details button.manage"
+        },
+        {
+            "waitForThenClick": ".manage-cookies-modal .manage-cookies-footer button.btn-outline-primary"
+        },
+        {
+            "waitForVisible": ".manage-cookies-modal",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22:false"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('xvideos', [
-    // 'https://www.xvideos.com/' // pop-up appears only after choosing the region
-]);
+generateCMPTests('xvideos', ['https://www.xvideos.com/'], {
+    onlyRegions: ['GB'],
+});

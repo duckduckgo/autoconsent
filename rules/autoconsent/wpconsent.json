@@ -1,0 +1,30 @@
+{
+    "name": "WPConsent",
+    "vendorUrl": "https://wordpress.org/plugins/wpconsent-cookies-banner-privacy-suite/",
+    "prehideSelectors": ["#wpconsent-root"],
+    "detectCmp": [
+        {
+            "exists": "#wpconsent-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#wpconsent-container", "#wpconsent-banner-holder.wpconsent-banner-visible"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#wpconsent-container", "#wpconsent-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#wpconsent-container", "#wpconsent-cancel-all"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "wpconsent_preferences="
+        }
+    ]
+}

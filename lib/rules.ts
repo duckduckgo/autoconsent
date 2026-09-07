@@ -2,7 +2,8 @@ import { snippets } from './eval-snippets';
 
 // 1 - the first version of the rule step format
 // 2 - added removeClass, setStyle, addStyle
-export const SUPPORTED_RULE_STEP_VERSION = 2;
+// 3 - added stylesheet
+export const SUPPORTED_RULE_STEP_VERSION = 3;
 
 export type AutoConsentCMPRule = {
     readonly name: string;
@@ -52,7 +53,8 @@ export type AutoConsentRuleStep = { optional?: boolean; comment?: string } & Par
     Partial<CookieContainsRule> &
     Partial<RemoveClassRule> &
     Partial<SetStyleRule> &
-    Partial<AddStyleRule>;
+    Partial<AddStyleRule> &
+    Partial<StylesheetRule>;
 
 export type NegatedRule = {
     negated: boolean;
@@ -97,6 +99,16 @@ export type WaitForThenClickRule = {
     waitForThenClick: ElementSelector;
     timeout?: number;
     all?: boolean;
+    /**
+     * Number of additional click attempts if the element is still visible after the first click.
+     * Defaults to 0 (no retries). Only use this on elements that are expected to disappear once the
+     * click is handled, otherwise the extra clicks are wasted (or harmful).
+     */
+    retry?: number;
+    /**
+     * How long to wait (in ms) for the element to disappear before clicking it again.
+     */
+    retryInterval?: number;
 };
 
 export type WaitRule = {
@@ -133,4 +145,9 @@ export type SetStyleRule = {
 export type AddStyleRule = {
     addStyle: string;
     selector: ElementSelector;
+};
+
+export type StylesheetRule = {
+    stylesheet: string;
+    stylesheetId?: string;
 };

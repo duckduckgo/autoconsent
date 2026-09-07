@@ -1,0 +1,30 @@
+{
+    "name": "workday",
+    "vendorUrl": "https://www.workday.com/",
+    "prehideSelectors": ["[data-automation-id=\"legalNotice\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-automation-id=\"legalNoticeDeclineButton\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-automation-id=\"legalNotice\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-automation-id=\"legalNoticeAcceptButton\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-automation-id=\"legalNoticeDeclineButton\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "enablePrivacyTracking=false"
+        }
+    ]
+}

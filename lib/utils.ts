@@ -32,6 +32,22 @@ export function hideElements(styleEl: HTMLStyleElement, selector: string, method
     return false;
 }
 
+// append a stylesheet rule once; marker is used to avoid duplicate inserts on re-runs
+export function appendStylesheetRule(styleEl: HTMLStyleElement, cssRule: string, marker?: string): boolean {
+    if (!(styleEl instanceof HTMLStyleElement) || cssRule.length === 0) {
+        return false;
+    }
+    const markerComment = marker ? `/* autoconsent:${marker} */` : '';
+    if (markerComment && styleEl.innerText.includes(markerComment)) {
+        return true;
+    }
+    if (!markerComment && styleEl.innerText.includes(cssRule.trim())) {
+        return true;
+    }
+    styleEl.innerText += `${markerComment}${markerComment ? ' ' : ''}${cssRule} `;
+    return true;
+}
+
 export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTimes: number, interval: number): Promise<boolean> {
     const result = await predicate();
     if (!result && maxTimes > 0) {

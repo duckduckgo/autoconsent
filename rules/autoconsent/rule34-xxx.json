@@ -1,0 +1,12 @@
+{
+    "name": "rule34-xxx",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?rule34\\.xxx/"
+    },
+    "prehideSelectors": ["#gdprconsent.gdprcontainer"],
+    "detectCmp": [{ "exists": "#gdprconsent.gdprcontainer" }],
+    "detectPopup": [{ "visible": "#gdprconsent.gdprcontainer" }],
+    "optIn": [{ "waitForThenClick": "#gdprconsent .gdprbutton button" }],
+    "optOut": [{ "waitForThenClick": "#gdprconsent .gdprbutton a" }],
+    "test": [{ "cookieContains": "gdpr-consent=0" }]
+}

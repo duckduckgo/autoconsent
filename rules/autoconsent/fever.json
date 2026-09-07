@@ -1,0 +1,42 @@
+{
+    "name": "fever",
+    "prehideSelectors": ["astro-island[component-url*=\"CookiesBanner\"] .cookies"],
+    "detectCmp": [
+        {
+            "exists": "astro-island[component-url*=\"CookiesBanner\"] .cookies button.cookies__buttons--settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "astro-island[component-url*=\"CookiesBanner\"] .cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "astro-island[component-url*=\"CookiesBanner\"] .cookies button.cookies__buttons--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "astro-island[component-url*=\"CookiesBanner\"] .cookies button.cookies__buttons--settings"
+        },
+        {
+            "if": {
+                "exists": "astro-island[component-url*=\"CookiesBanner\"] .cookies input[name=\"targeting\"]:checked"
+            },
+            "then": [
+                {
+                    "click": "astro-island[component-url*=\"CookiesBanner\"] .cookies input[name=\"targeting\"]"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "astro-island[component-url*=\"CookiesBanner\"] .cookies button.cookies__buttons--accept"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiesPreferences=[%22necessary%22]"
+        }
+    ]
+}

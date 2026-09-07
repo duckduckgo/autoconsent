@@ -1,0 +1,20 @@
+{
+    "name": "tohotheater-jp",
+    "vendorUrl": "https://www.tohotheater.jp/",
+    "runContext": {
+        "urlPattern": "^https?://(?:[^/]+\\.)?tohotheater\\.jp/"
+    },
+    "prehideSelectors": [".optIn"],
+    "detectCmp": [{ "exists": ".optIn .js-optin-cookie-settings" }],
+    "detectPopup": [{ "visible": ".optIn" }],
+    "optIn": [{ "waitForThenClick": ".optIn .js-optin-accept-all-cookies" }],
+    "optOut": [
+        { "waitForThenClick": ".optIn .js-optin-cookie-settings" },
+        { "waitForThenClick": "label[for=\"TAB-02\"]" },
+        { "waitForThenClick": "label[for=\"TAB-02\"] + .tab-content .toggleSwitch__circle" },
+        { "waitForThenClick": "label[for=\"TAB-03\"]" },
+        { "waitForThenClick": "label[for=\"TAB-03\"] + .tab-content .toggleSwitch__circle" },
+        { "waitForThenClick": ".js-modal-save-settings" }
+    ],
+    "test": [{ "cookieContains": "__performanceCookieFlag__=0" }, { "cookieContains": "__targetingCookieFlag__=0" }]
+}

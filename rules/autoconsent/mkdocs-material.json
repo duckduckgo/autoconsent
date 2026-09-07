@@ -1,0 +1,30 @@
+{
+    "name": "mkdocs-material",
+    "vendorUrl": "https://squidfunk.github.io/mkdocs-material/setup/ensuring-data-privacy/",
+    "prehideSelectors": ["#__consent .md-consent__inner", "#__consent .md-consent__overlay"],
+    "detectCmp": [
+        {
+            "exists": "#__consent form[name='consent'] .md-consent__settings input[type='checkbox']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__consent:not([hidden]) .md-consent__inner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__consent .md-consent__controls button.md-button--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#__consent .md-consent__settings input[type='checkbox']:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#__consent .md-consent__controls button.md-button--primary"
+        }
+    ]
+}

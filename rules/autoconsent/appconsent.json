@@ -1,0 +1,31 @@
+{
+    "name": "AppConsent",
+    "prehideSelectors": ["iframe[title='Consent window']"],
+    "detectCmp": [
+        {
+            "exists": "script[src*='cdn.appconsent.io/tcf2-clear/'][src*='core.bundle.js']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "iframe[title='Consent window']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["iframe[title='Consent window']", ".button__acceptAll"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "iframe[title='Consent window']",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

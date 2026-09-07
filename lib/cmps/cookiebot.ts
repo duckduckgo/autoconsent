@@ -34,6 +34,10 @@ export default class Cookiebot extends AutoConsentCMPBase {
         let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
         await this.wait(1000); // prevent race conditions
         res = res && (await this.mainWorldEval('EVAL_COOKIEBOT_4')); // hide
+        // Custom dialog templates reuse Cookiebot button ids but aren't closed by Cookiebot.hide().
+        if (this.elementVisible('#CybotCookiebotDialogBodyButtonDecline')) {
+            return await this.click('#CybotCookiebotDialogBodyButtonDecline');
+        }
         return res;
     }
 

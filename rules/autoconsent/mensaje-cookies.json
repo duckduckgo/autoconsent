@@ -1,0 +1,24 @@
+{
+    "name": "mensaje-cookies",
+    "prehideSelectors": ["#mensajeCookies", "#divConfigCookies"],
+    "detectCmp": [
+        { "exists": "#mensajeCookies .cajaCookies #btnAcceptAll" },
+        {
+            "any": [{ "exists": "#mensajeCookies #btnAcceptNoAllCookies" }, { "exists": "#divConfigCookies #btnAcceptNoCookies" }]
+        }
+    ],
+    "detectPopup": [{ "visible": "#mensajeCookies .cajaCookies" }],
+    "optIn": [{ "waitForThenClick": "#mensajeCookies #btnAcceptAll" }],
+    "optOut": [
+        {
+            "if": { "exists": "#mensajeCookies #btnAcceptNoAllCookies" },
+            "then": [{ "waitForThenClick": "#mensajeCookies #btnAcceptNoAllCookies" }],
+            "else": [
+                { "waitForThenClick": "#mensajeCookies #btnConfigCookies" },
+                { "waitForThenClick": "#divConfigCookies #btnAcceptNoCookies" }
+            ]
+        },
+        { "waitForVisible": "#mensajeCookies .cajaCookies", "check": "none", "timeout": 3000 }
+    ],
+    "test": [{ "visible": "#mensajeCookies .cajaCookies", "check": "none" }]
+}
