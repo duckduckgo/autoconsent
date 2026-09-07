@@ -1,8 +1,15 @@
 {
     "name": "mediamarkt.de",
-    "prehideSelectors": ["div[aria-labelledby=pwa-consent-layer-title]", "div[class^=StyledConsentLayerWrapper-]"],
+    "prehideSelectors": ["div[aria-labelledby^=pwa-consent-layer-title]", "div[class^=StyledConsentLayerWrapper-]"],
     "detectCmp": [{ "exists": "div[aria-labelledby^=pwa-consent-layer-title]" }],
     "detectPopup": [{ "exists": "div[aria-labelledby^=pwa-consent-layer-title]" }],
-    "optOut": [{ "click": "button[data-test^=pwa-consent-layer-deny-all]" }],
-    "optIn": [{ "click": "button[data-test^=pwa-consent-layer-accept-all" }]
+    "optOut": [
+        {
+            "if": { "exists": "button[data-test^=pwa-consent-layer-deny-all]" },
+            "then": [{ "waitForThenClick": "button[data-test^=pwa-consent-layer-deny-all]" }],
+            "comment": "some locales omit deny-all; saving the defaults there rejects all optional categories",
+            "else": [{ "waitForThenClick": "button[data-test^=pwa-consent-layer-save-settings]" }]
+        }
+    ],
+    "optIn": [{ "click": "button[data-test^=pwa-consent-layer-accept-all]" }]
 }
