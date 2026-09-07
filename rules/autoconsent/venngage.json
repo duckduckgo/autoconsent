@@ -1,0 +1,38 @@
+{
+    "name": "venngage.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?venngage\\.com/"
+    },
+    "prehideSelectors": [".gdpr_container", ".gdpr_modal_container"],
+    "detectCmp": [
+        {
+            "exists": ".gdpr .gdpr_manage_cookies_button"
+        },
+        {
+            "visible": ".gdpr .gdpr_container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".gdpr .gdpr_container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".gdpr .gdpr_accept_cookies_button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".gdpr .gdpr_manage_cookies_button"
+        },
+        {
+            "waitForThenClick": ".gdpr_modal .gdpr_modal_button_reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "vg_consent={\"functionality\":false,\"performance\":false,\"targeting\":false}"
+        }
+    ]
+}
