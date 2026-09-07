@@ -13,5 +13,5 @@
         { "waitForThenClick": "xpath///label[contains(., \"Necessary and functional cookies\")]//input[@name=\"cookie-tier\"]" },
         { "waitForThenClick": "div[role=\"dialog\"][aria-labelledby=\"consent-settings-title\"] button:not([aria-label])" }
     ],
-    "test": [{ "cookieContains": "matic_consent=v1.a0.m0" }]
+    "comment": "No self-test: saving the settings reloads the page, so the check would always run in a fresh context. Opt-out stores matic_consent=v1.a0.m0."
 }
