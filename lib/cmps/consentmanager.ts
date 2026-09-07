@@ -1,5 +1,8 @@
 import AutoConsentCMPBase from './base';
 
+const REJECT_BUTTON = '#cmpbox .cmpboxbtnno';
+const LEFTOVER_POPUP_TIMEOUT = 4000;
+
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
 export default class ConsentManager extends AutoConsentCMPBase {
@@ -44,7 +47,11 @@ export default class ConsentManager extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         if (this.apiAvailable) {
-            return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            const apiResult = await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            if (apiResult) {
+                await this.dismissLeftoverPopup();
+            }
+            return apiResult;
         }
 
         if (await this.click('.cmpboxbtnno')) {
@@ -64,6 +71,17 @@ export default class ConsentManager extends AutoConsentCMPBase {
 
         this.hide('#cmpwrapper,#cmpbox', 'display');
         return true;
+    }
+
+    /**
+     * The JS API saves the rejection, but when the call lands before the CMP has rendered its popup,
+     * the popup still shows up afterwards with the choice already stored. Dismiss it through its own
+     * reject button; prehide keeps it invisible while we wait for it.
+     */
+    async dismissLeftoverPopup() {
+        if (await this.waitForVisible(REJECT_BUTTON, LEFTOVER_POPUP_TIMEOUT, 'any')) {
+            await this.click(REJECT_BUTTON);
+        }
     }
 
     async optIn() {
