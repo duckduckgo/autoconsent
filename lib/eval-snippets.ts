@@ -231,6 +231,7 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    EVAL_U_COOKIE_MODAL_TEST: () => !!localStorage.getItem('cookies-accept')?.includes('"allow":false'),
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),

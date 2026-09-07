@@ -1,0 +1,36 @@
+{
+    "name": "u-cookie-modal",
+    "cosmetic": false,
+    "prehideSelectors": [".u-dialog-overlay:has(.u-cookie-modal__intro)"],
+    "detectCmp": [
+        {
+            "exists": ".u-cookie-modal__intro"
+        },
+        {
+            "exists": "[data-attr=\"btn-reject-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-attr=\"btn-reject-cookies\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-attr=\"btn-accept-cookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-attr=\"btn-reject-cookies\"]"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "eval": "EVAL_U_COOKIE_MODAL_TEST"
+        }
+    ]
+}
