@@ -1,0 +1,27 @@
+{
+    "name": "tri-table-stacked",
+    "vendorUrl": "https://tri-table.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(shinden\\.pl|kreskowki\\.tv)/"
+    },
+    "prehideSelectors": ["#cookie-bar", "[class^=\"app_gdpr--\"] > div"],
+    "detectCmp": [{ "exists": "#cookie-bar .cb-enable,[class^=\"app_gdpr--\"] button" }],
+    "detectPopup": [{ "visible": "#cookie-bar,[class^=\"app_gdpr--\"] button", "check": "any" }],
+    "optIn": [
+        { "waitForThenClick": "#cookie-bar .cb-enable", "optional": true },
+        { "waitForThenClick": "[class^=\"app_gdpr--\"] button:last-child", "timeout": 5000, "optional": true }
+    ],
+    "optOut": [
+        { "hide": "#cookie-bar", "optional": true },
+        { "waitForVisible": "[class^=\"app_gdpr--\"] button", "check": "any", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": "[class^=\"app_gdpr--\"] button", "check": "any" },
+            "then": [
+                { "waitForThenClick": "[class^=\"app_gdpr--\"] button:first-child" },
+                { "waitForVisible": "[class^=\"app_gdpr--\"] input[type=\"checkbox\"]" },
+                { "waitForThenClick": "[class^=\"app_gdpr--\"] button:nth-child(2)" }
+            ]
+        }
+    ],
+    "test": [{ "visible": "[class^=\"app_gdpr--\"] button", "check": "none" }]
+}
