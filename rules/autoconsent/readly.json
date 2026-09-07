@@ -1,40 +1,49 @@
 {
     "name": "readly",
     "runContext": {
-        "urlPattern": "^https://([a-z0-9-]+\\.)?readly\\.com/"
+        "urlPattern": "^https://([a-z0-9-]+\\.)?readly\\.(com|co)/"
     },
-    "prehideSelectors": [".DialogHandlerContainer.visible:has(.cookie-dialog)"],
+    "prehideSelectors": [".DialogHandlerContainer.visible:has(.cookie-dialog)", "#cookiesStrip:has([data-testid='accept-cookies'])"],
     "detectCmp": [
         {
-            "exists": ".DialogHandlerContainer.visible:has(.cookie-dialog)"
+            "exists": ".DialogHandlerContainer.visible:has(.cookie-dialog), #cookiesStrip:has([data-testid='accept-cookies'])"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".DialogHandlerContainer.visible:has(.cookie-dialog)"
+            "visible": ".DialogHandlerContainer.visible:has(.cookie-dialog), #cookiesStrip:has([data-testid='accept-cookies'])",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "span.cookie-option-large+div+div>button.gui-button"
+            "if": { "exists": "#cookiesStrip [data-testid='accept-cookies']" },
+            "then": [{ "waitForThenClick": "#cookiesStrip [data-testid='accept-cookies']" }],
+            "else": [{ "waitForThenClick": "span.cookie-option-large+div+div>button.gui-button" }]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "span.cookie-option-large>div>span.link-no-decoration.gui-text"
-        },
-        {
-            "if": { "exists": ".cookie-dialog form .CookieConsentOption input[type='checkbox']:not([name='permanent']):checked" },
-            "then": [
+            "if": { "exists": "#cookiesStrip [data-testid='skip-cookies']" },
+            "then": [{ "waitForThenClick": "#cookiesStrip [data-testid='skip-cookies']" }],
+            "else": [
                 {
-                    "waitForThenClick": ".cookie-dialog form .CookieConsentOption input[type='checkbox']:not([name='permanent']):checked",
-                    "all": true
+                    "waitForThenClick": "span.cookie-option-large>div>span.link-no-decoration.gui-text"
+                },
+                {
+                    "if": { "exists": ".cookie-dialog form .CookieConsentOption input[type='checkbox']:not([name='permanent']):checked" },
+                    "then": [
+                        {
+                            "waitForThenClick": ".cookie-dialog form .CookieConsentOption input[type='checkbox']:not([name='permanent']):checked",
+                            "all": true
+                        }
+                    ],
+                    "else": []
+                },
+                {
+                    "waitForThenClick": ".cookie-dialog button[type='submit']"
                 }
-            ],
-            "else": []
-        },
-        {
-            "waitForThenClick": ".cookie-dialog button[type='submit']"
+            ]
         }
     ]
 }

@@ -182,6 +182,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
+    it('matches German continue-without-accepting variants', () => {
+        expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
+        expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
     it('returns other for empty string', () => {
         expect(classifyButtonTextRegex('')).to.equal('other');
     });
