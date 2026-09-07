@@ -29,7 +29,8 @@
         },
         {
             "waitForVisible": ".manage-cookies-modal",
-            "negated": true
+            "timeout": 2000,
+            "check": "none"
         }
     ],
     "test": [
