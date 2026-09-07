@@ -1,0 +1,46 @@
+{
+    "name": "kiwico",
+    "vendorUrl": "https://www.kiwico.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kiwico\\.com/"
+    },
+    "prehideSelectors": ["#ccpa-request-consent"],
+    "detectCmp": [
+        {
+            "exists": "#ccpa-request-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ccpa-request-consent.ccpa-banner--visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ccpa-request-consent .accept button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ccpa-request-consent .settings button"
+        },
+        {
+            "waitForVisible": ".ReactModalPortal .modal__footer .footer-buttons"
+        },
+        {
+            "waitForThenClick": ".ReactModalPortal .modal__footer .footer-buttons button[class*=\"--filled\"]"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "hide": "#ccpa-request-consent",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_KIWICO_TEST"
+        }
+    ]
+}
