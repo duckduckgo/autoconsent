@@ -48,10 +48,8 @@
                             "optional": true
                         },
                         {
-                            "click": [
-                                ".qc-cmp2-main",
-                                "xpath///button[contains(., 'REJECT ALL') or contains(., 'ALLE VERWERPEN') or contains(., 'ΑΠΟΡΡΙΠΤΩ ΤΑ ΠΑΝΤΑ') or contains(., 'RESPINGERE TOTALĂ') or contains(., 'ALLE ABLEHNEN') or contains(., 'ODRZUCENIE') or contains(., 'BLOQUEAR TODO') or contains(., 'REJEITAR TODOS') or contains(., 'RIFIUTA TUTTO') or contains(., 'TOUT REFUSER') or contains(., 'ОТКЛОНИТЬ ВСЕХ')]"
-                            ],
+                            "waitForThenClick": "#reject-all-btn",
+                            "timeout": 2000,
                             "optional": true
                         },
                         {
@@ -59,20 +57,24 @@
                         },
                         {
                             "if": {
-                                "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                "visible": "#qc-cmp2-ui"
                             },
                             "then": [
                                 {
-                                    "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
-                                }
-                            ],
-                            "else": [
-                                {
-                                    "waitForThenClick": [
-                                        ".qc-cmp2-main",
-                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                    "if": {
+                                        "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                        }
                                     ],
-                                    "timeout": 5000
+                                    "else": [
+                                        {
+                                            "waitForThenClick": "#save-and-exit",
+                                            "timeout": 5000
+                                        }
+                                    ]
                                 }
                             ]
                         }
