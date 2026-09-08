@@ -44,7 +44,13 @@ export default class ConsentManager extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         if (this.apiAvailable) {
-            return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            const popupRendered = this.elementVisible('#cmpbox .cmpmore', 'any');
+            const result = await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            // on slow pages the dialog can render after the API call, and then it needs opting out again to close
+            if (!popupRendered && (await this.waitForVisible('#cmpbox .cmpmore', 3000, 'any'))) {
+                await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            }
+            return result;
         }
 
         if (await this.click('.cmpboxbtnno')) {
