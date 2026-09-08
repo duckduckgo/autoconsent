@@ -1,3 +1,29 @@
+# v16.39.0 (Tue Sep 08 2026)
+
+#### Rules
+
+- Rule update: maticrobots-com [#1570](https://github.com/duckduckgo/autoconsent/pull/1570) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Handle Tumblr consent iframe on custom domains [#1454](https://github.com/duckduckgo/autoconsent/pull/1454) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@cursor[bot]](https://github.com/cursor[bot]))
+- Rule update: pandectes [#1569](https://github.com/duckduckgo/autoconsent/pull/1569) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vmock [#1567](https://github.com/duckduckgo/autoconsent/pull/1567) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rdc-concents [#1566](https://github.com/duckduckgo/autoconsent/pull/1566) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hometogo [#1565](https://github.com/duckduckgo/autoconsent/pull/1565) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lendable [#1564](https://github.com/duckduckgo/autoconsent/pull/1564) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: epidemicsound.com [#1563](https://github.com/duckduckgo/autoconsent/pull/1563) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: readly [#1562](https://github.com/duckduckgo/autoconsent/pull/1562) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: godaddy-privacy-widget [#1561](https://github.com/duckduckgo/autoconsent/pull/1561) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: venngage.com [#1560](https://github.com/duckduckgo/autoconsent/pull/1560) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rug-nl [#1559](https://github.com/duckduckgo/autoconsent/pull/1559) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 4
+
+- [@cursor[bot]](https://github.com/cursor[bot])
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.38.0 (Sun Sep 06 2026)
 
 #### Rules
