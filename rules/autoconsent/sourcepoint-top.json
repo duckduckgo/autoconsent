@@ -1,0 +1,25 @@
+{
+    "name": "sourcepoint-top",
+    "vendorUrl": "https://www.sourcepoint.com/",
+    "comment": "Top-frame companion to Sourcepoint-frame. The message UI lives in a cross-origin iframe, so the top frame cannot tell an ordinary notice from a 'consent or pay' wall that Sourcepoint-frame has to bail on; hide it either way and undo the scroll lock. Hiding uses visibility rather than display so the iframe keeps its layout and the frame rule can still complete a real rejection underneath, with z-index and pointer-events mirroring the built-in hide step. The scroll lock is undone twice over: removeClass restores each site's own layout in the normal case, and the stylesheet neutralises the lock declarations if Sourcepoint re-adds the class later (it does so on pageshow after a back/forward restore, which autoconsent does not re-run for).",
+    "minimumRuleStepVersion": 3,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["div[id^='sp_message_container_']"],
+    "detectCmp": [{ "exists": "div[id^='sp_message_container_']" }],
+    "detectPopup": [{ "visible": "div[id^='sp_message_container_']" }],
+    "optIn": [{ "visible": "div[id^='sp_message_container_']", "check": "none" }],
+    "optOut": [
+        {
+            "stylesheet": "div[id^='sp_message_container_'] { visibility: hidden !important; z-index: -1 !important; pointer-events: none !important; }",
+            "stylesheetId": "sourcepoint-top-hide"
+        },
+        {
+            "stylesheet": "html.sp-message-open { height: auto !important; width: auto !important; } html.sp-message-open body { position: relative !important; overflow: auto !important; margin-top: 0 !important; top: auto !important; left: auto !important; right: auto !important; }",
+            "stylesheetId": "sourcepoint-top-scroll-unlock"
+        },
+        { "removeClass": "sp-message-open", "selector": "html", "optional": true }
+    ]
+}
