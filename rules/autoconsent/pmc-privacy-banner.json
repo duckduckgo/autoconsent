@@ -1,0 +1,37 @@
+{
+    "name": "pmc-privacy-banner",
+    "comment": "Dismiss-only privacy notice on PMC/Vox Media sites. Scoped to the opt-out (CCPA-style) consent regime via the site's own _vm_consent_type cookie: in opt-in regions these sites also show a OneTrust banner, which is the consent dialog that must be handled instead.",
+    "_metadata": {
+        "vendorUrl": "https://www.pmc.com/"
+    },
+    "prehideSelectors": [".duet--navigation--pmc-privacy-banner"],
+    "detectCmp": [
+        {
+            "exists": ".duet--navigation--pmc-privacy-banner"
+        },
+        {
+            "cookieContains": "_vm_consent_type=opt-out"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".duet--navigation--pmc-privacy-banner button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".duet--navigation--pmc-privacy-banner button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".duet--navigation--pmc-privacy-banner button"
+        }
+    ],
+    "test": [
+        {
+            "exists": ".duet--navigation--pmc-privacy-banner",
+            "negated": true
+        }
+    ]
+}
