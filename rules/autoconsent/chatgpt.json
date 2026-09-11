@@ -9,8 +9,8 @@
         "frame": false,
         "urlPattern": "^https?://(\\w+\\.)?chatgpt\\.com/"
     },
-    "comment": "Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better.",
-    "prehideSelectors": ["dialog[data-cookie-consent]:has(form[data-privacy-consent-form])"],
+    "comment": "Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better. Narrow viewports open the same dialog with showModal(); prehiding it by opacity would leave the page inert behind an invisible modal, so only the non-modal banner is prehidden.",
+    "prehideSelectors": ["dialog[data-cookie-consent]:not(:modal):has(form[data-privacy-consent-form])"],
     "detectCmp": [
         {
             "exists": "dialog[data-cookie-consent] form[data-privacy-consent-form] input[name=\"action\"][value=\"reject\"]"
