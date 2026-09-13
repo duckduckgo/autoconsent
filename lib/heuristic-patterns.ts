@@ -165,6 +165,15 @@ export const DETECT_PATTERNS = [
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
+
+    // Japanese (JA)
+    // Japanese has no word boundaries, so these require a cookie term next to a usage/consent
+    // term to avoid matching the unrelated meaning of "クッキー" (biscuit).
+    // e.g. "クッキーを使用しています", "Cookieの利用について", "クッキーの使用にご同意"
+    /(?:クッキー|cookie)[^。]{0,20}(?:の|を|は)(?:使用|利用|取得|保存)/gi,
+    /(?:クッキー|cookie)[^。]{0,20}(?:使用|利用)(?:に(?:ご)?同意|について)/gi,
+    // e.g. "当社ホームページでは...クッキーを使用", "本サイトではCookieを利用します"
+    /(?:当|本|この)(?:社|サイト|ページ|ウェブサイト|webサイト|ホームページ)[^。]{0,60}(?:クッキー|cookie)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -390,6 +399,17 @@ const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
+const REJECT_PATTERNS_JAPANESE = [
+    // e.g. "拒否", "すべて拒否", "拒否する", "Cookieを拒否します"
+    /^(?:すべて|全て|全部)?(?:の)?(?:クッキー|cookie)?(?:を|は)?(?:すべて|全て)?(?:拒否|辞退)(?:する|します)?$/i,
+
+    // e.g. "同意しない", "同意せずに続行"
+    /^同意(?:しない|せずに(?:続行|閉じる))(?:で)?(?:続ける)?$/,
+
+    // e.g. "必要なクッキーのみ", "必須Cookieのみ許可する"
+    /^(?:必要|必須)(?:な)?(?:クッキー|cookie)?のみ(?:を)?(?:許可|使用|受け入れる|同意)?(?:する)?$/i,
+];
+
 /**
  * @type {Array<string|RegExp>}
  */
@@ -411,6 +431,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_RUSSIAN,
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
+    ...REJECT_PATTERNS_JAPANESE,
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [
@@ -858,4 +879,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "подтвердить", "подтверждаю выбор", "сохранить настройки", "сохранить и закрыть"
     /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
     'продолжить',
+
+    // Japanese (JA)
+    // e.g. "閉じる", "× 閉じる" (the ✕/× characters are stripped by cleanButtonText)
+    /^(?:閉じる|とじる|閉じます)$/,
+    /^(?:了解|承知)(?:しました|です)?$/,
 ];

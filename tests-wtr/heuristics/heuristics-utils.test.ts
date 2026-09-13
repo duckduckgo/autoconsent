@@ -97,6 +97,32 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Japanese popups', () => {
+    it('detects Japanese cookie notices', () => {
+        const texts = [
+            '当社ホームページでは、ユーザーの皆様の利便性向上のためクッキーを使用しています。',
+            '当ホームページの閲覧を続行した場合は、クッキーの使用にご同意いただいたものとみなさせていただきます。',
+            '当サイトではCookieを利用してサービスを提供しています。',
+            'Cookieの利用について詳しくはプライバシーポリシーをご覧ください。',
+            'このウェブサイトはクッキーを保存します。',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Japanese text', () => {
+        const texts = [
+            '会社案内・事業紹介・投資家情報・サステナビリティ',
+            'クッキーとビスケットの手作りレシピを紹介します',
+            '当サイトの新着情報をお届けします',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -271,6 +297,25 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Разрешить куки')).to.equal('accept');
         expect(classifyButtonTextRegex('Принять куки-файлы')).to.equal('accept');
         expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
+    });
+
+    it('matches Japanese reject buttons', () => {
+        const texts = ['拒否', '拒否する', 'すべて拒否', 'Cookieを拒否する', '同意しない', '同意せずに続行', '必要なクッキーのみ'];
+        for (const text of texts) {
+            expect(classifyButtonTextRegex(text), text).to.equal('reject');
+        }
+    });
+
+    it('matches Japanese close buttons as acknowledge', () => {
+        for (const text of ['閉じる', '× 閉じる', '✕閉じる', '了解しました']) {
+            expect(classifyButtonTextRegex(text), text).to.equal('acknowledge');
+        }
+    });
+
+    it('does not classify Japanese consent buttons as reject or acknowledge', () => {
+        for (const text of ['同意する', 'すべて同意', '同意して閉じる']) {
+            expect(classifyButtonTextRegex(text), text).to.equal('other');
+        }
     });
 
     it('does not treat revoke links as reject buttons', () => {
