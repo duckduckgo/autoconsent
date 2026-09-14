@@ -199,6 +199,10 @@ const REJECT_PATTERNS_ENGLISH = [
 
     'no',
     /^no,? thank(s| you)$/is,
+
+    // e.g. "no cookies", "no cookies, thanks"
+    /^\s*no,?\s+cookies(,?\s+(thanks|thank you|please))?\s*$/is,
+
     /^opt[ -]out$/is,
     'dont enable',
     'withdraw consent',

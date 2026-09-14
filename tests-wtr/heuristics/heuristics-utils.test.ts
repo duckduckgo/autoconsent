@@ -211,6 +211,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('no problem')).to.equal('other');
     });
 
+    it('matches "no cookies" refusals', () => {
+        expect(classifyButtonTextRegex('No cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('No cookies, thanks')).to.equal('reject');
+        expect(classifyButtonTextRegex('No cookies for me')).to.equal('other');
+    });
+
     it('matches Russian reject buttons', () => {
         expect(classifyButtonTextRegex('Отклонить всё')).to.equal('reject');
         expect(classifyButtonTextRegex('Отклонить все файлы cookie')).to.equal('reject');
