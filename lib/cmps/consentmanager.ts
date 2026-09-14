@@ -1,4 +1,11 @@
+import { ElementSelector } from '../rules';
+import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
+
+// The consent layer is rendered either in the light DOM, or inside #cmpwrapper's shadow root.
+const POPUP_SELECTORS: ElementSelector[] = ['#cmpbox .cmpmore', ['#cmpwrapper', '#cmpbox .cmpmore']];
+// How long to watch for a consent layer that renders after the API call.
+const LATE_POPUP_TIMEOUT = 8000;
 
 // Note: JS API is also available:
 // https://help.consentmanager.net/books/cmp/page/javascript-api
@@ -20,6 +27,15 @@ export default class ConsentManager extends AutoConsentCMPBase {
         return false;
     }
 
+    isPopupVisible(): boolean {
+        return POPUP_SELECTORS.some((selector) => this.elementVisible(selector, 'any'));
+    }
+
+    waitForPopupVisible(timeout = LATE_POPUP_TIMEOUT): Promise<boolean> {
+        const interval = 200;
+        return waitFor(() => this.isPopupVisible(), Math.ceil(timeout / interval), interval);
+    }
+
     async detectCmp() {
         this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
         if (!this.apiAvailable) {
@@ -30,7 +46,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
-        if (this.elementVisible('#cmpbox .cmpmore', 'any')) {
+        if (this.isPopupVisible()) {
             return true;
         } else if (this.apiAvailable) {
             // wait before making this check because early in the page lifecycle this may incorrectly return
@@ -44,7 +60,15 @@ export default class ConsentManager extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         if (this.apiAvailable) {
-            return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            // The API reports "no user choice yet" before the consent layer is rendered, so the
+            // call below can land early: it stores the choice, but the layer still shows up
+            // afterwards and stays on screen. Re-apply the choice to close it in that case.
+            const popupWasVisible = this.isPopupVisible();
+            const result = await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            if (!popupWasVisible && (await this.waitForPopupVisible())) {
+                return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
+            }
+            return result;
         }
 
         if (await this.click('.cmpboxbtnno')) {
