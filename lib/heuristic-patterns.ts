@@ -9,6 +9,8 @@ export const DETECT_PATTERNS = [
     /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi,
     /we (?:use|serve)(?: optional)? cookies/gi,
     /we are using cookies/gi,
+    /\b(?:uses|using) cookies\b/gi,
+    /a cookie is a small text file/gi,
     /use of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
@@ -199,6 +201,7 @@ const REJECT_PATTERNS_ENGLISH = [
 
     'no',
     /^no,? thank(s| you)$/is,
+    /^no,? rather not$/is,
     /^opt[ -]out$/is,
     'dont enable',
     'withdraw consent',
@@ -264,6 +267,7 @@ const REJECT_PATTERNS_GERMAN = [
     // negations / refusals not covered by the regexes above
     'nein, danke',
     'nein, bitte nicht',
+    'nein, lieber nicht',
     'nein, ich stimme nicht zu',
     'nicht zustimmen',
     'nicht einverstanden',
