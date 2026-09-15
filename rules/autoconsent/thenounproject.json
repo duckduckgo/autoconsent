@@ -1,0 +1,17 @@
+{
+    "name": "thenounproject.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?thenounproject\\.com/"
+    },
+    "prehideSelectors": ["[data-callback=\"accounts/hide-banner/CookiesBanner\"]"],
+    "detectCmp": [{ "exists": "[data-callback=\"accounts/hide-banner/CookiesBanner\"]" }],
+    "detectPopup": [{ "visible": "[data-callback=\"accounts/hide-banner/CookiesBanner\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button:not([class*=\"ManageLink\"])" }],
+    "optOut": [
+        { "waitForThenClick": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button[class*=\"ManageLink\"]" },
+        { "waitForVisible": "[class*=\"ModalContainer\"] [data-testid=\"modal-body-content\"]" },
+        { "click": "[class*=\"ModalContainer\"] input[type=\"checkbox\"][aria-disabled=\"false\"]", "all": true },
+        { "waitForThenClick": "[class*=\"ModalContainer\"] [data-testid=\"modal-body-content\"] button" }
+    ],
+    "test": [{ "cookieContains": "%22advertising%22%3Afalse" }]
+}
