@@ -1,0 +1,44 @@
+{
+    "name": "elsevier",
+    "prehideSelectors": ["[data-testid='cookie-banner']", "div:has(> div > div > div > [data-testid='cookie-settings-button'])"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid='accept-all-cookies-button']"
+        },
+        {
+            "exists": "[data-testid='cookie-settings-button']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid='cookie-settings-button']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid='accept-all-cookies-button']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid='cookie-settings-button']"
+        },
+        {
+            "waitForVisible": ".save-preference-btn-handler",
+            "timeout": 10000
+        },
+        {
+            "click": "#onetrust-consent-sdk input.category-switch-handler:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".save-preference-btn-handler"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_ONETRUST_1"
+        }
+    ]
+}
