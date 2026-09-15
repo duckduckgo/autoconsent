@@ -1,0 +1,42 @@
+{
+    "name": "godaddy-website-builder",
+    "vendorUrl": "https://www.godaddy.com/websites/website-builder",
+    "cosmetic": false,
+    "prehideSelectors": ["[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"],
+    "detectCmp": [
+        {
+            "exists": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-aid='FOOTER_COOKIE_CLOSE_RENDERED']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[data-aid='FOOTER_COOKIE_DECLINE_RENDERED']" },
+            "then": [
+                {
+                    "waitForThenClick": "[data-aid='FOOTER_COOKIE_DECLINE_RENDERED']"
+                }
+            ],
+            "else": [
+                {
+                    "hide": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-aid='FOOTER_COOKIE_BANNER_RENDERED']",
+            "check": "none"
+        }
+    ]
+}
