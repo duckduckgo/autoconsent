@@ -4,7 +4,7 @@
     "runContext": {
         "main": false,
         "frame": true,
-        "urlPattern": "^https://plus\\.gmx\\.com/lt(?:[?#]|$)"
+        "urlPattern": "^https://plus\\.(gmx|mail)\\.com/lt(?:[?#]|$)"
     },
     "prehideSelectors": ["#overlay.cmp"],
     "detectCmp": [
