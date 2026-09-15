@@ -11,7 +11,7 @@
             },
             "then": [
                 {
-                    "waitForVisible": "#usercentrics-cmp-ui",
+                    "waitForVisible": ["#usercentrics-cmp-ui", ".cmp-wrapper, #uc-main-dialog:not(.privacyButton)"],
                     "timeout": 2000
                 }
             ],
