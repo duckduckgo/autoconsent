@@ -42,6 +42,7 @@ async function init() {
     const popupMutationOnRadio = document.querySelector('input#popup-mutation-on') as HTMLInputElement;
     const popupMutationOffRadio = document.querySelector('input#popup-mutation-off') as HTMLInputElement;
     const retriesInput = document.querySelector('input#retries') as HTMLInputElement;
+    const maxDocumentElementsInput = document.querySelector('input#max-document-elements') as HTMLInputElement;
     const logsLifecycleCheckbox = document.querySelector('input#logs-lifecycle') as HTMLInputElement;
     const logsRulestepsCheckbox = document.querySelector('input#logs-rulesteps') as HTMLInputElement;
     const logsDetectionstepsCheckbox = document.querySelector('input#logs-detectionsteps') as HTMLInputElement;
@@ -132,6 +133,7 @@ async function init() {
     logsErrorsCheckbox.checked = autoconsentConfig.logs.errors;
     logsMessagesCheckbox.checked = autoconsentConfig.logs.messages;
     retriesInput.value = autoconsentConfig.detectRetries.toString();
+    maxDocumentElementsInput.value = autoconsentConfig.maxDocumentElements.toString();
     if (autoconsentConfig.autoAction === 'optIn') {
         optInRadio.checked = true;
     } else if (autoconsentConfig.autoAction === 'optOut') {
@@ -188,6 +190,11 @@ async function init() {
 
     retriesInput.addEventListener('change', () => {
         autoconsentConfig.detectRetries = parseInt(retriesInput.value, 10);
+        storageSet({ config: autoconsentConfig });
+    });
+
+    maxDocumentElementsInput.addEventListener('change', () => {
+        autoconsentConfig.maxDocumentElements = parseInt(maxDocumentElementsInput.value, 10);
         storageSet({ config: autoconsentConfig });
     });
 
