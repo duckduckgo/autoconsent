@@ -1,0 +1,17 @@
+{
+    "name": "dotdash-meredith",
+    "vendorUrl": "https://www.dotdashmeredith.com/",
+    "prehideSelectors": ["#onetrust-banner-sdk", ".onetrust-pc-dark-filter"],
+    "runContext": {
+        "main": true,
+        "urlPattern": "^https?://([^/]+\\.)?(aboutespanol|agriculture|allrecipes|bhg|brides|byrdie|dailypaws|ew|foodandwine|health|instyle|investopedia|lifewire|liquor|liveabout|marthastewart|midwestliving|mydomaine|parents|people|realsimple|seriouseats|shape|simplyrecipes|southernliving|thespruce|thesprucecrafts|thespruceeats|thoughtco|travelandleisure|treehugger|tripsavvy|verywellfit|verywellhealth|verywellmind)\\.com/"
+    },
+    "detectCmp": [{ "exists": "#onetrust-banner-sdk.otFlat" }, { "exists": ".ot-pref-trigger" }],
+    "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
+    "optIn": [{ "waitForThenClick": "#onetrust-accept-btn-handler" }],
+    "optOut": [
+        { "waitForThenClick": ".onetrust-close-btn-handler" },
+        { "waitForVisible": "#onetrust-banner-sdk", "check": "none", "timeout": 10000 }
+    ],
+    "test": [{ "cookieContains": "OptanonAlertBoxClosed" }]
+}
