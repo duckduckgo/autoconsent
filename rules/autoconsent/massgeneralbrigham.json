@@ -1,0 +1,35 @@
+{
+    "name": "massgeneralbrigham",
+    "vendorUrl": "https://www.massgeneralbrigham.org/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?massgeneralbrigham\\.org/"
+    },
+    "prehideSelectors": [".cookie-banner[data-block-name=\"cookie-banner\"]"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner[data-block-name=\"cookie-banner\"] .alert-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner[data-block-name=\"cookie-banner\"] .alert-close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner[data-block-name=\"cookie-banner\"] .alert-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner[data-block-name=\"cookie-banner\"] .alert-close"
+        }
+    ],
+    "test": [
+        {
+            "exists": ".cookie-banner[data-block-name=\"cookie-banner\"]",
+            "negated": true
+        }
+    ]
+}
