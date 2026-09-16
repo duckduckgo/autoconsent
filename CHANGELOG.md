@@ -1,3 +1,18 @@
+# v16.40.0 (Wed Sep 16 2026)
+
+#### Rules
+
+- Rule update: massgeneralbrigham [#1574](https://github.com/duckduckgo/autoconsent/pull/1574) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: scmp [#1573](https://github.com/duckduckgo/autoconsent/pull/1573) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rspb.org.uk [#1571](https://github.com/duckduckgo/autoconsent/pull/1571) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.39.0 (Tue Sep 08 2026)
 
 #### Rules
