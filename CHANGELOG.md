@@ -1,3 +1,16 @@
+# v16.41.0 (Tue Sep 22 2026)
+
+#### Rules
+
+- Sourcepoint hiding rule [#1546](https://github.com/duckduckgo/autoconsent/pull/1546) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.40.0 (Wed Sep 16 2026)
 
 #### Rules
