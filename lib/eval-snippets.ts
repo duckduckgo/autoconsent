@@ -150,6 +150,19 @@ export const snippets = {
             toggle.checked = false;
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
+    EVAL_EXPRESSIONENGINE_DECLINE: () => {
+        // The banner's only button submits the consent form with every category pre-set to "y",
+        // so opting out means flipping the hidden inputs to "n" before that button is clicked.
+        const form = document.querySelector('form input[type="hidden"][name^="ee:cookies_"]')?.form;
+        const categories = form?.querySelectorAll('input[type="hidden"][name^="ee:cookies_"]');
+        if (!form || !form.querySelector('input[name="ACT"]') || !categories?.length) {
+            return false;
+        }
+        categories.forEach((input) => {
+            input.value = 'n';
+        });
+        return true;
+    },
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,

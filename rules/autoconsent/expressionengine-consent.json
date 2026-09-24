@@ -1,0 +1,10 @@
+{
+    "name": "expressionengine-consent",
+    "detectCmp": [{ "exists": "form input[name=\"ACT\"]" }, { "exists": "form input[type=\"hidden\"][name^=\"ee:cookies_\"]" }],
+    "detectPopup": [{ "visible": "form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"]) :is(button, input[type=\"submit\"])" }],
+    "optIn": [{ "waitForThenClick": "form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"]) :is(button, input[type=\"submit\"])" }],
+    "optOut": [
+        { "eval": "EVAL_EXPRESSIONENGINE_DECLINE" },
+        { "waitForThenClick": "form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"]) :is(button, input[type=\"submit\"])" }
+    ]
+}
