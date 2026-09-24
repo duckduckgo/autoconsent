@@ -26,15 +26,12 @@ Important! Autoconsent results can have false positives. When testing, always in
 npm run prepublish # builds dist/autoconsent.playwright.js and rules/rules.json
 ```
 
-Environment variables:
+Environment variables support two proxy modes:
 
-- `REGIONAL_PROXY_<TWO_LETTER_REGION_CODE>` (for example, `REGIONAL_PROXY_US`, `REGIONAL_PROXY_GB`, `REGIONAL_PROXY_AU`, etc.) - the domain endpoint
-- `REGIONAL_PROXY_USERNAME`
-- `REGIONAL_PROXY_PASSWORD`
+- Complete proxy URL: set each `REGIONAL_PROXY_<TWO_LETTER_REGION_CODE>` to an `http://`, `https://`, or `socks5://` URL. Credentials are not required. Example: `socks5://usc-socks-tr-cluster.duckduckgo.com:80`.
+- Authenticated HTTPS proxy: set each `REGIONAL_PROXY_<TWO_LETTER_REGION_CODE>` to a bare hostname, plus shared `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD`. The library adds `https://` and port `443`.
 
-- Endpoints must be bare hostnames: no scheme, credentials, or port.
-- The library adds `https://` and port `443`.
-- Credentials are shared across regions.
+Never embed credentials in a proxy URL.
 
 ## Usage
 
@@ -91,7 +88,7 @@ export default defineConfig({
 - `ALL_REGIONS` — all supported regions.
 - `testPage(page, url, regionKey, options?)` — run a full test on a page you created yourself (you own the browser/context); returns a `TestResult`.
 - `injectAutoconsent(page, options?)` — set up isolated-world injection; call before `page.goto()`. Returns a context (`received`, `hasMessage`, `waitForCompletion`, `waitForMessage`, `collectResult`).
-- `buildProxyConfig(regionKey)` — build the Playwright `{ server, username, password }` proxy object for a region from its env vars.
+- `buildProxyConfig(regionKey)` — build the Playwright proxy object for a region from its env vars; returns `{ server }` for complete URLs or `{ server, username, password }` for bare authenticated HTTPS hosts.
 - `launchRegionalProxyBrowser(regionKey, options?)` — launch a Chromium browser routed through the region's proxy.
 - `formatResult(result)` — format a `TestResult` as a human-readable summary line.
 

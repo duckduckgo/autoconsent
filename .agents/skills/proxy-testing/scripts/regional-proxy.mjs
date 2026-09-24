@@ -1,5 +1,5 @@
 /**
- * Playwright HTTPS regional proxy utilities for multi-region autoconsent testing.
+ * Playwright regional proxy utilities for multi-region autoconsent testing.
  *
  * Launches a local Chromium browser with an HTTPS proxy selected by region, injects
  * autoconsent into an isolated world (via CDP), and evaluates opt-out/opt-in flows.
@@ -8,8 +8,7 @@
  *
  * Requires env vars:
  * - REGIONAL_PROXY_<REGION> (REGION is the uppercased two-letter region code)
- * - REGIONAL_PROXY_USERNAME
- * - REGIONAL_PROXY_PASSWORD
+ * - REGIONAL_PROXY_USERNAME and REGIONAL_PROXY_PASSWORD for bare HTTPS proxy hostnames
  */
 
 /**
@@ -95,7 +94,7 @@ export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca',
  * Build the Playwright proxy object for a region.
  * @param {string} regionKey - Two-letter region code (e.g. 'us', 'gb').
  * @param {NodeJS.ProcessEnv} [env]
- * @returns {{ server: string, username: string, password: string }}
+ * @returns {{ server: string, username?: string, password?: string }}
  */
 export function buildProxyConfig(regionKey, env = process.env) {
     const envVar = `REGIONAL_PROXY_${regionKey.toUpperCase()}`;
@@ -103,15 +102,26 @@ export function buildProxyConfig(regionKey, env = process.env) {
     const username = env.REGIONAL_PROXY_USERNAME;
     const password = env.REGIONAL_PROXY_PASSWORD;
 
-    if (!endpoint || !username || !password) {
-        throw new Error(
-            `Missing proxy environment variables for region "${regionKey}". ` +
-                `Expected ${envVar}, REGIONAL_PROXY_USERNAME, and REGIONAL_PROXY_PASSWORD.`,
-        );
+    if (!endpoint) {
+        throw new Error(`Missing proxy environment variable for region "${regionKey}". Expected ${envVar}.`);
     }
-    if (endpoint.includes('://') || endpoint.includes('@') || /:\d+$/.test(endpoint)) {
+    if (endpoint.includes('://')) {
+        const parsed = new URL(endpoint);
+        if (!['http:', 'https:', 'socks5:'].includes(parsed.protocol)) {
+            throw new Error(`${envVar} has unsupported proxy protocol "${parsed.protocol}".`);
+        }
+        if (parsed.username || parsed.password) {
+            throw new Error(`${envVar} must not contain embedded proxy credentials.`);
+        }
+        return { server: endpoint };
+    }
+    if (endpoint.includes('@') || /:\d+$/.test(endpoint)) {
+        throw new Error(`${envVar} should be a bare hostname or a complete proxy URL without embedded credentials.`);
+    }
+    if (!username || !password) {
         throw new Error(
-            `${envVar} should be a bare hostname without scheme, credentials, or port. ` + 'The library adds https:// and port 443.',
+            `Missing proxy credentials for region "${regionKey}". ` +
+                `Expected REGIONAL_PROXY_USERNAME and REGIONAL_PROXY_PASSWORD with bare hostname ${envVar}.`,
         );
     }
 
