@@ -1,14 +1,14 @@
 /**
  * Playwright regional proxy utilities for multi-region autoconsent testing.
  *
- * Launches a local Chromium browser with an HTTPS proxy selected by region, injects
+ * Launches a local Chromium browser with a proxy selected by region, injects
  * autoconsent into an isolated world (via CDP), and evaluates opt-out/opt-in flows.
  * Chromium only - isolated worlds are reached through CDP, which Playwright exposes for
  * Chromium alone.
  *
  * Requires env vars:
- * - REGIONAL_PROXY_<REGION> (REGION is the uppercased two-letter region code)
- * - REGIONAL_PROXY_USERNAME and REGIONAL_PROXY_PASSWORD for bare HTTPS proxy hostnames
+ * - REGIONAL_PROXY_<REGION> (REGION is the uppercased two-letter region code): a complete proxy URL
+ * - REGIONAL_PROXY_USERNAME and REGIONAL_PROXY_PASSWORD (optional, used for https:// proxies only)
  */
 
 /**
@@ -105,35 +105,25 @@ export function buildProxyConfig(regionKey, env = process.env) {
     if (!endpoint) {
         throw new Error(`Missing proxy environment variable for region "${regionKey}". Expected ${envVar}.`);
     }
-    if (endpoint.includes('://')) {
-        const parsed = new URL(endpoint);
-        if (!['http:', 'https:', 'socks5:'].includes(parsed.protocol)) {
-            throw new Error(`${envVar} has unsupported proxy protocol "${parsed.protocol}".`);
-        }
-        if (parsed.username || parsed.password) {
-            throw new Error(`${envVar} must not contain embedded proxy credentials.`);
-        }
-        return { server: endpoint };
+    if (!endpoint.includes('://')) {
+        throw new Error(`${envVar} must be a complete proxy URL (http://, https://, or socks5://).`);
     }
-    if (endpoint.includes('@') || /:\d+$/.test(endpoint)) {
-        throw new Error(`${envVar} should be a bare hostname or a complete proxy URL without embedded credentials.`);
+    const parsed = new URL(endpoint);
+    if (!['http:', 'https:', 'socks5:'].includes(parsed.protocol)) {
+        throw new Error(`${envVar} has unsupported proxy protocol "${parsed.protocol}".`);
     }
-    if (!username || !password) {
-        throw new Error(
-            `Missing proxy credentials for region "${regionKey}". ` +
-                `Expected REGIONAL_PROXY_USERNAME and REGIONAL_PROXY_PASSWORD with bare hostname ${envVar}.`,
-        );
+    if (parsed.username || parsed.password) {
+        throw new Error(`${envVar} must not contain embedded proxy credentials.`);
     }
-
-    return {
-        server: `https://${endpoint}:443`,
-        username,
-        password,
-    };
+    // Credentials are only used for HTTPS proxies; Chromium cannot authenticate to SOCKS proxies.
+    if (parsed.protocol === 'https:' && username && password) {
+        return { server: endpoint, username, password };
+    }
+    return { server: endpoint };
 }
 
 /**
- * Launch a local Playwright browser through the HTTPS proxy for a region.
+ * Launch a local Playwright browser through the proxy for a region.
  * @param {string} regionKey
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<Browser>}
