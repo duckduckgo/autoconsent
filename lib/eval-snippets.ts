@@ -150,6 +150,37 @@ export const snippets = {
             toggle.checked = false;
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
+    EVAL_EXPRESSIONENGINE_DECLINE: () => {
+        const form = document.querySelector('form:has(input[type="hidden"][name^="ee:cookies_"])');
+        if (!form) {
+            return false;
+        }
+        // the banner only ships an "accept all" form, so re-post it with every consent withheld.
+        // submitting the form itself would reload the page, so it is sent in the background instead.
+        const body = new URLSearchParams(new FormData(form));
+        for (const key of [...body.keys()]) {
+            if (key.startsWith('ee:cookies_')) {
+                body.set(key, 'n');
+            }
+        }
+        fetch(form.action, {
+            method: 'POST',
+            body,
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        });
+        // depending on the template the banner is either the form or a positioned wrapper around it
+        let banner = form;
+        for (let el = form; el && el !== document.body; el = el.parentElement) {
+            const position = getComputedStyle(el).position;
+            if (position === 'fixed' || position === 'sticky') {
+                banner = el;
+                break;
+            }
+        }
+        banner.style.setProperty('display', 'none', 'important');
+        return true;
+    },
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,

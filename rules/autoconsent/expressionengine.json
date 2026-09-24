@@ -1,0 +1,22 @@
+{
+    "name": "expressionengine",
+    "detectCmp": [{ "exists": "form input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]" }],
+    "detectPopup": [
+        {
+            "visible": "form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]) button, form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]) input[type=\"submit\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]) button, form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]) input[type=\"submit\"]"
+        }
+    ],
+    "optOut": [{ "eval": "EVAL_EXPRESSIONENGINE_DECLINE" }],
+    "test": [
+        {
+            "visible": "form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]) button, form:has(input[type=\"hidden\"][name^=\"ee:cookies_\"][value=\"y\"]) input[type=\"submit\"]",
+            "check": "none"
+        }
+    ]
+}
