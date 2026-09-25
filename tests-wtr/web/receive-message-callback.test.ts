@@ -18,7 +18,11 @@ function createTestConfig(overrides: Partial<Config> = {}): Config {
         isMainWorld: false,
         prehideTimeout: 2000,
         enableHeuristicDetection: false,
+        enablePopupMutationObserver: false,
+        performanceLoggingEnabled: false,
+        heuristicPopupSearchTimeout: 100,
         heuristicMode: 'off',
+        maxDocumentElements: 100000,
         visualTest: false,
         logs: {
             lifecycle: false,
