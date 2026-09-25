@@ -1,3 +1,22 @@
+# v16.42.0 (Fri Sep 25 2026)
+
+#### Rules
+
+- Rule update: CPM crawl cluster #90: mediaset.it (iubenda|inert, 13 sites) [#1484](https://github.com/duckduckgo/autoconsent/pull/1484) ([@cursoragent](https://github.com/cursoragent) [@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- update proxy skill to support internal access [#1577](https://github.com/duckduckgo/autoconsent/pull/1577) ([@ladamski](https://github.com/ladamski) [@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Lucas Adamski ([@ladamski](https://github.com/ladamski))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.41.0 (Tue Sep 22 2026)
 
 #### Rules
