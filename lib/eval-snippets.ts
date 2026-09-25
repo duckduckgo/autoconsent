@@ -160,6 +160,22 @@ export const snippets = {
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
+    EVAL_KK_DK_RELEASE_INERT: () => {
+        const wrapper = document.querySelector('.dialog-off-canvas-main-canvas');
+        if (!wrapper) {
+            return false;
+        }
+        const release = () => wrapper.removeAttribute('inert');
+        // the site re-applies `inert` while the dismissed banner animates away, so keep clearing it until it settles
+        const observer = new MutationObserver(release);
+        observer.observe(wrapper, { attributes: true, attributeFilter: ['inert'] });
+        setTimeout(() => {
+            observer.disconnect();
+            release();
+        }, 3000);
+        release();
+        return true;
+    },
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]

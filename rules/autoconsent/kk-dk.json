@@ -1,0 +1,37 @@
+{
+    "name": "kk.dk",
+    "vendorUrl": "https://www.kk.dk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kk\\.dk/"
+    },
+    "comment": "EU Cookie Compliance with a custom module that marks the page wrapper `inert` while the banner is open, and fails to clear it when the banner is dismissed during its opening animation",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body.eu-cookie-compliance-popup-open .eu-cookie-compliance-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".eu-cookie-compliance-banner .eu-cookie-compliance-save-preferences-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".eu-cookie-compliance-banner .agree-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".eu-cookie-compliance-banner .eu-cookie-compliance-save-preferences-button"
+        },
+        {
+            "eval": "EVAL_KK_DK_RELEASE_INERT"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-agreed-categories=[\"necessary\"]"
+        }
+    ]
+}
