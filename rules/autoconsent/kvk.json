@@ -1,0 +1,47 @@
+{
+    "name": "kvk",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?kvk\\.nl/"
+    },
+    "prehideSelectors": ["dialog:has(form[data-ui-test-class=\"cookie-modal\"])", "dialog[aria-labelledby=\"cookie-consent\"]"],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": "form[data-ui-test-class=\"cookie-modal\"] [data-ui-test-class=\"necessary-button\"]" },
+                { "exists": "#cookie-consent [data-ui-test-class=\"toestemming\"]" }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": "form[data-ui-test-class=\"cookie-modal\"] [data-ui-test-class=\"necessary-button\"]" },
+                { "visible": "#cookie-consent [data-ui-test-class=\"toestemming\"]" }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "form[data-ui-test-class=\"cookie-modal\"]" },
+            "then": [{ "waitForThenClick": "form[data-ui-test-class=\"cookie-modal\"] [data-ui-test-class=\"accept-all-button\"]" }],
+            "else": [
+                { "waitForThenClick": "#cookie-consent input[data-ui-test-class=\"De beste ervaring\"]" },
+                { "waitForThenClick": "#cookie-consent [data-ui-test-class=\"toestemming\"]" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "form[data-ui-test-class=\"cookie-modal\"]" },
+            "then": [{ "waitForThenClick": "form[data-ui-test-class=\"cookie-modal\"] [data-ui-test-class=\"necessary-button\"]" }],
+            "else": [
+                {
+                    "waitForThenClick": "#cookie-consent input[data-ui-test-class=\"Functioneel\"]",
+                    "comment": "lowest consent level; re-asserted in case a higher level is pre-selected"
+                },
+                { "waitForThenClick": "#cookie-consent [data-ui-test-class=\"toestemming\"]" }
+            ]
+        }
+    ],
+    "test": [{ "any": [{ "cookieContains": "allowTrackingCookiesKvK=0" }, { "cookieContains": "cookieLevelCodeKVK=0001" }] }]
+}
