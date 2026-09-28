@@ -207,6 +207,26 @@ export const snippets = {
         });
         return true;
     },
+    EVAL_SOURCEPOINT_RESTORE_SCROLL: () => {
+        // Sourcepoint scrolls back to this saved position when it unlocks; we unlock instead, so restore and clear it
+        const root = document.documentElement;
+        const saved = root.dataset.previousScrollY;
+        if (saved && saved !== 'null') {
+            root.dataset.previousScrollY = 'null';
+            const y = -parseInt(saved, 10);
+            if (y > 0 && window.scrollY === 0) {
+                const behavior = root.style.scrollBehavior;
+                root.style.scrollBehavior = 'auto';
+                window.scrollTo(0, y);
+                root.style.scrollBehavior = behavior;
+            }
+        }
+        // Sourcepoint re-locks after a bfcache restore, which autoconsent does not re-run for
+        window.addEventListener('pagehide', () => {
+            if (root.dataset.previousScrollY) root.dataset.previousScrollY = 'null';
+        });
+        return true;
+    },
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(
