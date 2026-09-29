@@ -1,3 +1,19 @@
+# v16.43.0 (Tue Sep 29 2026)
+
+#### Rules
+
+- Fix Sourcepoint scroll position restoration on back navigation [#1578](https://github.com/duckduckgo/autoconsent/pull/1578) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Add Claude Code user settings template for agent skill env vars [#1579](https://github.com/duckduckgo/autoconsent/pull/1579) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.42.0 (Fri Sep 25 2026)
 
 #### Rules
