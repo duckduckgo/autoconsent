@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "es2021",
+        "lib": ["es2021", "es2022.error", "dom", "dom.iterable", "dom.asynciterable", "webworker.importscripts", "scripthost"],
         "allowJs": true,
         "checkJs": true,
         "resolveJsonModule": true,

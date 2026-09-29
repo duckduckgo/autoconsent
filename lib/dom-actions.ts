@@ -178,7 +178,7 @@ export class DomActions implements DomActionsProvider {
         if (selector.startsWith('xpath/')) {
             const xpath = selector.slice(6);
             const result = document.evaluate(xpath, parent, null, XPathResult.ANY_TYPE, null);
-            let node: Node | null = null;
+            let node: Node | null;
             const elements: HTMLElement[] = [];
             while ((node = result.iterateNext())) {
                 elements.push(node as HTMLElement);
