@@ -66,7 +66,7 @@ Returns true if the given selector matches one or more elements.
   "check": "any" | "all" | "none"
 }
 ```
-Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all` (default), every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic: only elements with `display: none` (on the element or a parent) count as hidden. Elements hidden with `opacity` count as visible, so that prehiding does not affect this check.
+Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all` (default), every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic. Prehiding does not affect this check.
 
 ## Wait for element
 

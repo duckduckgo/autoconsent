@@ -125,7 +125,6 @@ shadow root or same-origin iframe.
 ### Rule step traps
 
 - **For "not visible", use `check: "none"`, never `negated`.** `negated` only inverts the final result. `waitForVisible` + `negated` does not wait for the element to disappear: it fails at once while the element is visible. `visible` + `negated` is true when one match is visible and another is hidden.
-- **Only `display: none` counts as hidden.** `visibility: hidden`, `opacity: 0`, zero size and off-screen elements count as visible. This is intentional, so that prehidden elements (hidden with `opacity`) still count as visible.
 - **Array selectors search only inside the first match.** `["iframe", "button"]` searches only the first `iframe` on the page.
 - **`cookieContains` is a plain substring match.** `consent=1` also matches `myconsent=10`. It cannot see `HttpOnly` cookies.
 - **`setStyle` replaces the full inline style.** Use `addStyle` to keep the other inline styles.
