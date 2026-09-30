@@ -1,3 +1,15 @@
+# v16.43.1 (Wed Sep 30 2026)
+
+#### Dependencies
+
+- Upgrade @duckduckgo/eslint-config to v0.3.0 (ESLint 10) [#1581](https://github.com/duckduckgo/autoconsent/pull/1581) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.43.0 (Tue Sep 29 2026)
 
 #### Rules
