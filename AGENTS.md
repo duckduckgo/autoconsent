@@ -122,6 +122,15 @@ shadow root or same-origin iframe.
 - Use `npm run create-rule` to scaffold a new rule and a spec file.
 - Code comments: keep them brief (max one line), explain why not what, no references to specific sites in library code
 
+### Rule step traps
+
+- **For "not visible", use `check: "none"`, never `negated`.** `negated` only inverts the final result. `waitForVisible` + `negated` does not wait for the element to disappear: it fails at once while the element is visible. `visible` + `negated` is true when one match is visible and another is hidden.
+- **Only `display: none` counts as hidden.** `visibility: hidden`, `opacity: 0`, zero size and off-screen elements count as visible. This is intentional, so that prehidden elements (hidden with `opacity`) still count as visible.
+- **Array selectors search only inside the first match.** `["iframe", "button"]` searches only the first `iframe` on the page.
+- **`cookieContains` is a plain substring match.** `consent=1` also matches `myconsent=10`. It cannot see `HttpOnly` cookies.
+- **`setStyle` replaces the full inline style.** Use `addStyle` to keep the other inline styles.
+- **`npm run rule-syntax-check` does not check `rules/generated/`.** Check generated rules against the schema yourself.
+
 ### Updating existing rules
 - **For site-specific popups, prefer a heuristic-pattern fix over a new rule, and check whether a rule is needed at all.** If the popup is unique to a site (not a shared CMP) and already has a reject, dismiss, or acknowledge button that the heuristic should match, extend `lib/heuristic-patterns.ts` instead of adding a `urlPattern`-scoped JSON rule. Do not use a heuristic fix in place of a generic CMP rule. A heuristic change must not cause false positives on other sites.
 - If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.

@@ -66,7 +66,7 @@ Returns true if the given selector matches one or more elements.
   "check": "any" | "all" | "none"
 }
 ```
-Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all` (default), every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic.
+Returns true if elements matched by ElementSelector are currently visible on the page. If `check` is `all` (default), every element must be visible. If `check` is `none`, no element should be visible. Visibility check is a CSS-based heuristic: only elements with `display: none` (on the element or a parent) count as hidden. Elements hidden with `opacity` count as visible, so that prehiding does not affect this check.
 
 ## Wait for element
 
@@ -87,7 +87,7 @@ Waits until `selector` exists in the page. After `timeout` ms the step fails.
   "check": "any" | "all" | "none"
 }
 ```
-Waits until element is visible in the page. After `timeout` ms the step fails.
+Waits until element is visible in the page. After `timeout` ms the step fails. To wait until an element is not visible, use `check: "none"`, not `negated`.
 
 ## Click an element
 ```javascript
@@ -183,7 +183,7 @@ The optional `stylesheetId` is a marker used to prevent duplicate inserts when t
   "cookieContains": "substring"
 }
 ```
-Checks if the substring is present in the document.cookie string.
+Checks if the substring is present in the document.cookie string. `HttpOnly` cookies are not in this string.
 
 ## Eval
 
@@ -234,7 +234,7 @@ Evaluates a list of steps in order. If any return true (success), then the step 
 }
 ```
 
-If `negated` is true, the result will be inverted. For example, `{ "exists": ".my-class", "negated": true }` will return true if `.my-class` does not exist.
+If `negated` is true, the result will be inverted. For example, `{ "exists": ".my-class", "negated": true }` will return true if `.my-class` does not exist. The result is inverted after the step is complete, so `negated` does not change what a waiting step waits for.
 
 ## Optional actions
 
