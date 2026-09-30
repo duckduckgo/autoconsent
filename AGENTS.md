@@ -76,7 +76,7 @@ Site-specific rules are rules scoped to specific sites with a `urlPattern`. Rule
 
 ### JSON Rules vs Code-based rules
 
-JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`.
+JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale.
 
 ```json
 {
@@ -121,6 +121,14 @@ shadow root or same-origin iframe.
 - Prefer `cookieContains` in `test` when the CMP stores consent in cookies.
 - Use `npm run create-rule` to scaffold a new rule and a spec file.
 - Code comments: keep them brief (max one line), explain why not what, no references to specific sites in library code
+
+### Rule step traps
+
+- **For "not visible", use `check: "none"`, never `negated`.** `negated` only inverts the final result. `waitForVisible` + `negated` does not wait for the element to disappear: it fails at once while the element is visible. `visible` + `negated` is true when one match is visible and another is hidden.
+- **Array selectors search only inside the first match.** `["iframe", "button"]` searches only the first `iframe` on the page.
+- **`cookieContains` is a plain substring match.** `consent=1` also matches `myconsent=10`. It cannot see `HttpOnly` cookies.
+- **`setStyle` replaces the full inline style.** Use `addStyle` to keep the other inline styles.
+- **`npm run rule-syntax-check` does not check `rules/generated/`.** Check generated rules against the schema yourself.
 
 ### Updating existing rules
 - **For site-specific popups, prefer a heuristic-pattern fix over a new rule, and check whether a rule is needed at all.** If the popup is unique to a site (not a shared CMP) and already has a reject, dismiss, or acknowledge button that the heuristic should match, extend `lib/heuristic-patterns.ts` instead of adding a `urlPattern`-scoped JSON rule. Do not use a heuristic fix in place of a generic CMP rule. A heuristic change must not cause false positives on other sites.
