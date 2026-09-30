@@ -60,6 +60,15 @@ npm run watch
 
 This will rebuild the extension on every source file change. You still need to refresh the extension in the browser to see the changes.
 
+### CPM pixel by site rank
+
+The extension models the CPM summary pixel, split by a site rank bucket. It sends nothing: it logs each pixel in the background console and shows it in the popup.
+
+- The bucket is `top` if the page's registrable domain is in `addon/top-sites.json`, and `other` if not. The lookup happens on the device, and the pixel has only the bucket and the event counts. It has no URL, domain, or rule name.
+- Only two buckets are allowed. More buckets need a new privacy triage.
+- `addon/top-sites.json` is a sample list of 100 popular sites. Replace it with the real crawl list before you use the numbers.
+- The summary fires 2 minutes after the first event, with one pixel for each bucket that has events.
+
 ## Using with Puppeteer
 
 See [puppeteer.md](./docs/puppeteer.md) for a full integration guide.

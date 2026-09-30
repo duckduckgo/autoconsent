@@ -5,6 +5,8 @@ import { Config } from '../lib/types';
 import type { RuleIndexEntry, RuleIndexSection } from '../rules/rule-index-builder';
 import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { initConfig, isEnabledForDomain, setIsEnabledForDomain, showOptOutStatus } from './utils';
+import { CpmPixelState, FIRED_PIXELS_KEY, PIXEL_STATE_KEY } from './cpm-pixels';
+import { getSiteRankBucket } from './site-rank';
 
 type RuleSection = RuleIndexSection;
 
@@ -94,6 +96,11 @@ async function init() {
     }
     const currentDomain = new URL(currentTab.url).hostname;
     currentSite.textContent = currentDomain;
+    (document.querySelector('#site-rank-bucket') as HTMLElement).textContent = getSiteRankBucket(currentTab.url);
+    const pixelStorage = await chrome.storage.session.get([PIXEL_STATE_KEY, FIRED_PIXELS_KEY]);
+    const pendingPixels = (pixelStorage[PIXEL_STATE_KEY] as CpmPixelState | undefined)?.counts || {};
+    (document.querySelector('#pending-pixels') as HTMLPreElement).textContent = JSON.stringify(pendingPixels, null, 2);
+    (document.querySelector('#fired-pixels') as HTMLPreElement).textContent = JSON.stringify(pixelStorage[FIRED_PIXELS_KEY] || [], null, 2);
     const tabId = currentTab.id;
     const detectedKey = `detected${tabId}`;
     console.log('detectedKey', detectedKey);

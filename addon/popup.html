@@ -69,6 +69,12 @@
                 color: #b00020;
                 font-weight: bold;
             }
+
+            .pixel-log {
+                font-size: 0.8em;
+                max-height: 12em;
+                overflow: auto;
+            }
         </style>
     </head>
 
@@ -260,6 +266,19 @@
                 <input type="checkbox" id="logs-messages" name="logs-messages" checked />
                 <label for="logs-messages">Internal messages</label>
             </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>CPM pixel by site rank (not sent)</legend>
+            <div>Site rank bucket: <b id="site-rank-bucket"></b></div>
+            <details>
+                <summary>Pending summary</summary>
+                <pre class="pixel-log" id="pending-pixels"></pre>
+            </details>
+            <details>
+                <summary>Fired pixels</summary>
+                <pre class="pixel-log" id="fired-pixels"></pre>
+            </details>
         </fieldset>
 
         <fieldset>

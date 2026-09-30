@@ -5,6 +5,7 @@ import { Config, RuleBundle } from '../lib/types';
 import { storageGet, storageRemove, storageSet } from './mv-compat';
 import { extensionDefaultConfig, initConfig, isEnabledForDomain, showOptOutStatus } from './utils';
 import { filterCompactRules } from '../lib/encoding';
+import { firePixelEvents, fireSummaryPixels, getPixelEvents, SUMMARY_ALARM_NAME } from './cpm-pixels';
 
 /**
  * Mapping of tabIds to Port connections to open devtools panels.
@@ -67,11 +68,20 @@ chrome.tabs.onRemoved.addListener((tabId: number) => {
     storageRemove(`detected${tabId}`);
 });
 
+chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm.name === SUMMARY_ALARM_NAME) {
+        fireSummaryPixels();
+    }
+});
+
 chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: any) => {
     const tabId = sender.tab.id;
     const frameId = sender.frameId;
     const senderUrl = sender.url || `${sender.origin}/`;
     const senderDomain = new URL(senderUrl).hostname;
+    // the site rank bucket comes from the top-level page, also for messages from iframes
+    const pixelSiteUrl = sender.tab.url || senderUrl;
+    firePixelEvents(pixelSiteUrl, getPixelEvents(msg, frameId === 0), msg.type === 'report' ? msg.instanceId : undefined);
     const autoconsentConfig: Config = (await storageGet('config')) || extensionDefaultConfig();
     const logsConfig = autoconsentConfig.logs;
     if (logsConfig.lifecycle) {
@@ -83,8 +93,12 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
 
     switch (msg.type) {
         case 'init': {
+            const enabled = await isEnabledForDomain(senderDomain);
             if (frameId === 0) {
                 await showOptOutStatus(tabId, 'idle');
+                if (enabled) {
+                    firePixelEvents(pixelSiteUrl, ['init']);
+                }
             }
             // Choose which rule format to send based on the configured action.
             // Compact rules omit optIn steps to save space, so optIn would silently
@@ -108,7 +122,7 @@ chrome.runtime.onMessage.addListener(async (msg: ContentScriptMessage, sender: a
                 {
                     type: 'initResp',
                     rules,
-                    config: { ...autoconsentConfig, enabled: await isEnabledForDomain(senderDomain) },
+                    config: { ...autoconsentConfig, enabled },
                 } as BackgroundMessage,
                 {
                     frameId,
