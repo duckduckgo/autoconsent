@@ -1,3 +1,21 @@
+# v16.43.2 (Thu Oct 01 2026)
+
+#### AI / Agent Workflow
+
+- Document rule step traps for agents [#1582](https://github.com/duckduckgo/autoconsent/pull/1582) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Other
+
+- Coverage data update [#1575](https://github.com/duckduckgo/autoconsent/pull/1575) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.43.1 (Wed Sep 30 2026)
 
 #### Dependencies
