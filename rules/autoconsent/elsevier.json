@@ -1,0 +1,69 @@
+{
+    "name": "elsevier",
+    "vendorUrl": "https://www.elsevier.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?elsevier\\.(com|support)/"
+    },
+    "prehideSelectors": ["[data-testid=\"cookie-banner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookie-banner\"] [data-testid=\"cookie-settings-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-banner\"] [data-testid=\"cookie-settings-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"accept-all-cookies-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-testid=\"reject-all-cookies-button\"]"
+            },
+            "then": [
+                {
+                    "comment": "the banner is rendered before React attaches its click handler, so a lost first click needs a retry",
+                    "waitForThenClick": "[data-testid=\"reject-all-cookies-button\"]",
+                    "retry": 3,
+                    "retryInterval": 1000
+                }
+            ],
+            "else": [
+                {
+                    "comment": "no reject button on the banner: open the OneTrust preference center it controls and reject there",
+                    "waitForThenClick": "[data-testid=\"cookie-settings-button\"]",
+                    "retry": 3,
+                    "retryInterval": 1000
+                },
+                {
+                    "waitForVisible": "#onetrust-pc-sdk",
+                    "timeout": 10000
+                },
+                {
+                    "waitForThenClick": "#onetrust-pc-sdk input.category-switch-handler:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler",
+                    "timeout": 5000
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[data-testid=\"cookie-banner\"]",
+            "check": "none",
+            "timeout": 10000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed"
+        }
+    ]
+}
