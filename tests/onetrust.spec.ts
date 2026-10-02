@@ -59,3 +59,10 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// People Inc. (ex-Dotdash Meredith) sites ship the banner markup before the OneTrust SDK has
+// attached its handlers, so the first 'Reject All' click can be dropped. No banner in the US.
+// people.com reports the same flavor but blocks automated access, so it is not listed here.
+generateCMPTests('Onetrust', ['https://www.allrecipes.com/', 'https://www.investopedia.com/'], {
+    skipRegions: ['US'],
+});

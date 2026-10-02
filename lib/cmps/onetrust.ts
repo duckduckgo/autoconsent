@@ -1,6 +1,11 @@
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
+// A handled click can take ~3s to clear the banner, so keep the interval above that: a slow
+// dismissal must not be mistaken for a lost click, which would cost an extra click per retry.
+const REJECT_ALL_RETRY_INTERVAL = 4000;
+const REJECT_ALL_RETRIES = 2;
+
 export default class Onetrust extends AutoConsentCMPBase {
     name = 'Onetrust';
     prehideSelectors = ['#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner'];
@@ -29,13 +34,13 @@ export default class Onetrust extends AutoConsentCMPBase {
         await this.wait(500);
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
-            return await this.click('#onetrust-reject-all-handler');
+            return await this.clickRejectAll('#onetrust-reject-all-handler');
         }
         if (this.elementVisible('.ot-pc-refuse-all-handler', 'any')) {
-            return await this.click('.ot-pc-refuse-all-handler');
+            return await this.clickRejectAll('.ot-pc-refuse-all-handler');
         }
         if (this.elementVisible('.js-reject-cookies', 'any')) {
-            return await this.click('.js-reject-cookies');
+            return await this.clickRejectAll('.js-reject-cookies');
         }
 
         if (this.elementVisible('.onetrust-close-btn-handler', 'any')) {
@@ -83,6 +88,13 @@ export default class Onetrust extends AutoConsentCMPBase {
         // popup doesn't disappear immediately
         await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
         return true;
+    }
+
+    // Some deployments render the banner markup before the OneTrust SDK has attached its click
+    // handlers, so an early click is silently dropped and the banner stays up. Retry while the
+    // button is still visible: a handled click always takes the banner away.
+    private clickRejectAll(selector: string) {
+        return this.waitForThenClick(selector, 0, false, REJECT_ALL_RETRIES, REJECT_ALL_RETRY_INTERVAL);
     }
 
     async optIn() {
