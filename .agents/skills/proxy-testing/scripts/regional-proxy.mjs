@@ -39,7 +39,6 @@ import {
     projectRoot,
     runTest,
 } from '../../../lib/regional-testing/harness.mjs';
-import { injectWithBindings } from '../../../lib/regional-testing/transports.mjs';
 
 export { ALL_REGIONS, CORE_REGIONS, EXPANDED_REGIONS, formatResult } from '../../../lib/regional-testing/harness.mjs';
 
@@ -99,7 +98,7 @@ export async function launchRegionalProxyBrowser(regionKey, options = {}) {
  * @returns {Promise<AutoconsentContext>}
  */
 export async function injectAutoconsent(page, options = {}) {
-    return injectThrough(page, options, { transport: injectWithBindings, provider: 'regional-proxy' });
+    return injectThrough(page, options, 'regional-proxy');
 }
 
 /** @type {Provider} */

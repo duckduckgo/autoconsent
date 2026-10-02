@@ -85,26 +85,14 @@ Any two-letter country code maps to `?p_cc=` (e.g. `de` → `p_cc=DE`), per the 
 
 ## Architecture
 
-Shared code lives in [.agents/lib/regional-testing/](../../lib/regional-testing/): the harness (config, message handling, waits, results, block detection, screenshots) and two CDP transports. This skill only adds the Oxylabs connection, the captcha wait, and the transport choice.
+Injection and result collection are shared with `proxy-testing` in [.agents/lib/regional-testing/harness.mjs](../../lib/regional-testing/harness.mjs): autoconsent runs in an isolated world of every frame (including out-of-process iframes) and talks to Node over CDP bindings, and `eval` snippets run in the page's main world. This skill only adds the Oxylabs connection and the captcha handling.
 
-```
-Node.js (handler)          poll @ 50ms          Isolated world per frame
-─────────────────    ←──  __acOutbox      ←──  autoconsentSendMessage(msg)
-                     ──→  Runtime.evaluate ──→  autoconsentReceiveMessage(msg)
-
-                     ←──  __oxyCaptcha    ←──  window 'message' listener (main world)
-```
-
-- `Page.addScriptToEvaluateOnNewDocument` with `worldName: 'autoconsent'` injects autoconsent into an isolated world per frame, before page scripts run. The injected wrapper rebinds `window.autoconsentSendMessage` to push messages onto `globalThis.__acOutbox`.
-- A second `addScriptToEvaluateOnNewDocument` (no `worldName` = main world) installs a `window.addEventListener('message', ...)` that pushes Oxylabs `oxylabs-captcha-*` events onto `globalThis.__oxyCaptcha`.
-- Node tracks per-frame execution contexts and drains every outbox in parallel every 50 ms with `Runtime.evaluate({ contextId })`. Replies go back the same way. `eval` snippets run in the main world of the frame that sent them.
+With `solveCaptcha: true`, an init script listens for the Oxylabs runtime's `window` messages and forwards captcha events to Node through a page binding (`page.exposeBinding`).
 
 ## Gotchas
 
-- **`Runtime.addBinding` does not work on Oxylabs** — bindings register on the Node side but never reach the page. That is why this skill uses the polling transport. If you add new CDP calls, verify them against Oxylabs with a standalone script first.
-- **Out-of-process iframes are not attached as separate CDP sessions**, unlike in `proxy-testing`. Cross-site CMP iframes (e.g. Sourcepoint on `cdn.privacy-mgmt.com`) were covered in local tests, but this is unverified on Oxylabs' browsers: if a frame-based CMP is only detected in the top frame, suspect this.
 - **CAPTCHA events arrive via `window.postMessage`, not CDP.** With `solveCaptcha: true`, `testPage` waits up to 5s after navigation for `oxylabs-captcha-start`. If one arrives, it blocks until `oxylabs-captcha-end` or `oxylabs-captcha-error`, capped at 60s (Oxylabs' documented solve time). That adds ~5s on captcha-free pages. The older `oxylabs-captcha-solve-*` names are still accepted.
 - **Limits:** 100 concurrent sessions and 10 new sessions per second per account.
-- **Call injection before `page.goto`** — `addScriptToEvaluateOnNewDocument` only applies to future navigations.
+- **Call injection before `page.goto`**, so autoconsent is in place before page scripts run.
 - **Oxylabs blocks certain site categories** (e.g. government sites), and some sites block Oxylabs too: check the screenshots. Use alternative URLs for the same CMP, or retest as described in the `proxy-testing` gotchas.
 - **Each region test creates a new browser session** — there's no session reuse across regions.

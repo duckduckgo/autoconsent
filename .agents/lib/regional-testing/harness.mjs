@@ -1,20 +1,29 @@
 /**
  * Provider-agnostic harness for regional autoconsent testing in Playwright (Chromium only).
  *
- * Injects autoconsent into an isolated world of every frame (through one of the transports in
- * `transports.mjs`), answers its messages the way the browser extension does, waits for the
- * opt-out/opt-in flow, and screenshots the result. Provider modules
- * (`proxy-testing`, `oxylabs-testing` skills) supply the browser and pick the transport.
+ * Injects autoconsent into an isolated world of every frame (via CDP), answers its messages the
+ * way the browser extension does, waits for the opt-out/opt-in flow, and screenshots the result.
+ * Provider modules (`proxy-testing`, `oxylabs-testing` skills) supply the browser.
  */
 
 /**
  * @typedef {import('playwright').Page} Page
- * @typedef {import('./transports.mjs').Transport} Transport
- * @typedef {import('./transports.mjs').MessageTransport} MessageTransport
- * @typedef {import('./transports.mjs').MessageHandlerFactory} MessageHandlerFactory
  */
 
 /** @typedef {import('../../../lib/types.js').Config} Config */
+
+/**
+ * Primitives the message handler uses to talk to a specific frame's content script.
+ * `frameRef` is the isolated world's execution-context uniqueId the message arrived from;
+ * the transport resolves it to the owning CDP session and the matching page-world context.
+ * @typedef {Object} MessageTransport
+ * @property {(frameRef: string, message: object) => Promise<void>} sendToContentScript
+ * @property {(frameRef: string, code: string) => Promise<any>} evalInMainWorld
+ */
+
+/**
+ * @typedef {(transport: MessageTransport) => (msg: any, frameRef: string) => Promise<void>} MessageHandlerFactory
+ */
 
 /**
  * @typedef {'regional-proxy'|'oxylabs'} ProviderName
@@ -86,24 +95,17 @@ export const CORE_REGIONS = ['us', 'gb', 'de'];
 /** Expanded pass: escalation set covering all non-GDPR regimes plus GDPR representatives. */
 export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca', 'jp'];
 
-/** @param {number} ms */
-const sleep = (ms) =>
-    new Promise((r) => {
-        const t = setTimeout(r, ms);
-        t.unref?.();
-    });
-
 /**
- * Inject autoconsent into a page through the given transport. Call before navigating to the target URL.
+ * Inject autoconsent into a page. Call before navigating to the target URL.
  *
- * The content script runs in an isolated world while `eval` snippets execute in the page's main
- * world, mirroring the browser extension. Chromium only.
+ * The content script runs in an isolated world (via CDP) while `eval` snippets execute in
+ * the page's main world, mirroring the browser extension. Chromium only.
  * @param {Page} page
  * @param {Partial<TestOptions>} options
- * @param {{ transport: Transport, provider: ProviderName }} using
+ * @param {ProviderName} provider - Recorded in the collected TestResult.
  * @returns {Promise<AutoconsentContext>}
  */
-export async function injectAutoconsent(page, options, { transport, provider }) {
+export async function injectAutoconsent(page, options, provider) {
     const action = 'action' in options ? options.action : 'optOut';
     /** @type {any[]} */
     const received = [];
@@ -173,7 +175,7 @@ export async function injectAutoconsent(page, options, { transport, provider }) 
     if (browserName && browserName !== 'chromium') {
         throw new Error(`Regional testing supports Chromium only (got "${browserName}").`);
     }
-    await transport(page, contentScript, createMessageHandler);
+    await injectIntoIsolatedWorld(page, createMessageHandler);
 
     function hasMessage(/** @type {string} */ type) {
         return received.some((m) => m.type === type);
@@ -195,7 +197,7 @@ export async function injectAutoconsent(page, options, { transport, provider }) 
             if (Date.now() - start > detectionTimeout && !hasMessage('cmpDetected')) {
                 return false;
             }
-            await sleep(500);
+            await new Promise((r) => setTimeout(r, 500));
         }
         return false;
     }
@@ -204,7 +206,7 @@ export async function injectAutoconsent(page, options, { transport, provider }) 
         const start = Date.now();
         while (Date.now() - start < timeout) {
             if (hasMessage(type)) return true;
-            await sleep(500);
+            await new Promise((r) => setTimeout(r, 500));
         }
         return false;
     }
@@ -243,6 +245,166 @@ export async function injectAutoconsent(page, options, { transport, provider }) 
     }
 
     return { received, hasMessage, waitForCompletion, waitForMessage, collectResult };
+}
+
+/**
+ * Isolated-world injection via CDP (Chromium only). For each frame we create a dedicated isolated
+ * world via `Page.createIsolatedWorld`, then inject the content script there and bridge messages
+ * over a per-context CDP binding.
+ *
+ * @param {Page} page
+ * @param {MessageHandlerFactory} createMessageHandler
+ */
+async function injectIntoIsolatedWorld(page, createMessageHandler) {
+    // Isolated world name: `<prefix><pageWorldUniqueId><separator><frameId>`. Encoding the page-world
+    // uniqueId lets us later run eval snippets in that frame's main world.
+    const WORLD_PREFIX = 'autoconsent_iw_';
+    const WORLD_SEPARATOR = '_frame_';
+    const BINDING_PREFIX = 'autoconsentSendMessage_';
+
+    /** @type {Map<string, string>} isolated-world uniqueId -> page (main) world uniqueId */
+    const isolated2pageWorld = new Map();
+    /** @type {Map<string, any>} isolated-world uniqueId -> CDP session that owns it */
+    const sessionByContext = new Map();
+    /** @type {Map<string, string>} binding name -> isolated-world uniqueId */
+    const contextByBinding = new Map();
+
+    const handle = createMessageHandler({
+        sendToContentScript: async (isolatedUniqueId, message) => {
+            const client = sessionByContext.get(isolatedUniqueId);
+            if (!client) return;
+            try {
+                await client.send('Runtime.evaluate', {
+                    expression: `autoconsentReceiveMessage(${JSON.stringify(message)})`,
+                    uniqueContextId: isolatedUniqueId,
+                    awaitPromise: true,
+                    // Some pages' CSP would otherwise block evaluating in the isolated world.
+                    allowUnsafeEvalBlockedByCSP: true,
+                });
+            } catch {
+                // The context may be gone if the frame navigated or detached.
+            }
+        },
+        evalInMainWorld: async (isolatedUniqueId, code) => {
+            const client = sessionByContext.get(isolatedUniqueId);
+            const pageWorldUniqueId = isolated2pageWorld.get(isolatedUniqueId);
+            if (!client || !pageWorldUniqueId) return false;
+            const { result, exceptionDetails } = await client.send('Runtime.evaluate', {
+                expression: code,
+                uniqueContextId: pageWorldUniqueId,
+                returnByValue: true,
+                awaitPromise: true,
+                // Eval snippets must run even when the page's CSP disallows eval.
+                allowUnsafeEvalBlockedByCSP: true,
+            });
+            return exceptionDetails ? false : (result?.value ?? false);
+        },
+    });
+
+    async function attachToSession(/** @type {any} */ client) {
+        client.on('Runtime.executionContextCreated', async (/** @type {any} */ event) => {
+            const { context } = event;
+            const frameId = context.auxData?.frameId;
+
+            // Our isolated world finished initializing: wire up its binding and content script.
+            if (context.auxData?.type === 'isolated' && typeof context.name === 'string' && context.name.startsWith(WORLD_PREFIX)) {
+                const separatorIndex = context.name.indexOf(WORLD_SEPARATOR);
+                const pageWorldUniqueId = context.name.slice(WORLD_PREFIX.length, separatorIndex);
+                const intendedFrameId = context.name.slice(separatorIndex + WORLD_SEPARATOR.length);
+                // Chromium may create the named world in other frames too; keep only the one we asked for.
+                if (intendedFrameId !== frameId) return;
+
+                isolated2pageWorld.set(context.uniqueId, pageWorldUniqueId);
+                sessionByContext.set(context.uniqueId, client);
+
+                const bindingName = `${BINDING_PREFIX}${context.uniqueId.replace(/\W/g, '_')}`;
+                contextByBinding.set(bindingName, context.uniqueId);
+                try {
+                    await client.send('Runtime.addBinding', { name: bindingName, executionContextName: context.name });
+                    // CDP bindings take a single string arg, so wrap it in the shape the content script expects.
+                    await client.send('Runtime.evaluate', {
+                        expression: `window.autoconsentSendMessage = (m) => { window.${bindingName}(JSON.stringify(m)); return Promise.resolve(); };\n${contentScript}`,
+                        uniqueContextId: context.uniqueId,
+                        allowUnsafeEvalBlockedByCSP: true,
+                    });
+                } catch {
+                    // The frame may have navigated or detached before we finished wiring it up.
+                }
+                return;
+            }
+
+            // A regular page (main) world: request an isolated world for it, tagged with its id.
+            if (!frameId || context.auxData?.type !== 'default' || !context.origin || context.origin === '://') return;
+            try {
+                await client.send('Page.createIsolatedWorld', {
+                    frameId,
+                    worldName: `${WORLD_PREFIX}${context.uniqueId}${WORLD_SEPARATOR}${frameId}`,
+                });
+            } catch {
+                // The frame may have navigated or detached.
+            }
+        });
+
+        client.on('Runtime.executionContextDestroyed', (/** @type {any} */ event) => {
+            const uniqueId = event.executionContextUniqueId;
+            if (!uniqueId) return;
+            isolated2pageWorld.delete(uniqueId);
+            sessionByContext.delete(uniqueId);
+        });
+
+        client.on('Runtime.bindingCalled', (/** @type {any} */ event) => {
+            const isolatedUniqueId = contextByBinding.get(event.name);
+            if (!isolatedUniqueId) return;
+            let msg;
+            try {
+                msg = JSON.parse(event.payload);
+            } catch {
+                return;
+            }
+            handle(msg, isolatedUniqueId);
+        });
+
+        // Page must be enabled before createIsolatedWorld; Runtime.enable replays existing contexts.
+        await client.send('Page.enable');
+        await client.send('Runtime.enable');
+    }
+
+    // The page session covers the main frame and all same-process (in-process) iframes.
+    await attachToSession(await page.context().newCDPSession(page));
+
+    // Out-of-process iframes (OOPIFs) are separate CDP targets, so each needs its own session.
+    // newCDPSession throws for in-process frames, which are already handled above.
+    const attachedFrames = new WeakSet();
+    async function attachToOopif(/** @type {import('playwright').Frame} */ frame) {
+        if (!frame.parentFrame() || attachedFrames.has(frame)) return;
+        // Mark synchronously (before any await) so concurrent frameattached/framenavigated events
+        // can't open duplicate sessions for the same frame. Unmark on failure so a later event retries.
+        attachedFrames.add(frame);
+        let client;
+        try {
+            client = await page.context().newCDPSession(frame);
+        } catch {
+            // In-process frame (already covered by the page session) or the frame detached.
+            attachedFrames.delete(frame);
+            return;
+        }
+        try {
+            await attachToSession(client);
+        } catch {
+            // Wiring up the session failed (e.g. the OOPIF navigated/detached). Detach the
+            // half-initialized session before unmarking, otherwise a retry would open a second
+            // session for the same frame, leaving duplicate listeners and possible double injection.
+            try {
+                await client.detach();
+            } catch {
+                // The session may already be gone.
+            }
+            attachedFrames.delete(frame);
+        }
+    }
+    page.on('frameattached', attachToOopif);
+    page.on('framenavigated', attachToOopif);
+    await Promise.all(page.frames().map(attachToOopif));
 }
 
 /**

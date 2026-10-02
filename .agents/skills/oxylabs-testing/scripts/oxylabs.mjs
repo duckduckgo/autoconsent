@@ -48,7 +48,6 @@ import {
     projectRoot,
     runTest,
 } from '../../../lib/regional-testing/harness.mjs';
-import { injectWithPolling } from '../../../lib/regional-testing/transports.mjs';
 
 export { ALL_REGIONS, CORE_REGIONS, EXPANDED_REGIONS, formatResult } from '../../../lib/regional-testing/harness.mjs';
 
@@ -153,10 +152,9 @@ export async function connectOxylabs(regionKey, opts = {}) {
     }
 }
 
-// Captcha events (window.postMessage from the Oxylabs runtime) are buffered in the main world and
-// drained the same way as the autoconsent outbox.
-// See https://developers.oxylabs.io/products/agent-browser/captcha-handling
-const CAPTCHA_QUEUE = '__oxyCaptcha';
+// Captcha events arrive as window messages from the Oxylabs runtime and are forwarded to Node
+// through a page binding. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
+const CAPTCHA_BINDING = '__oxylabsCaptchaEvent';
 // The `-solve-` variants are the names the earlier Unblocker browser used; `-solve-end` is also documented as current.
 const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
 const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
@@ -164,15 +162,34 @@ const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-er
 // Oxylabs' documented wait for a captcha to be solved.
 const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
 const captchaBridgeScript = `
-if (!globalThis.${CAPTCHA_QUEUE}) globalThis.${CAPTCHA_QUEUE} = [];
 window.addEventListener("message", (e) => {
-    if (!e || !e.data || e.data.source !== "oxylabs-runtime") return;
-    globalThis.${CAPTCHA_QUEUE}.push(e.data.type);
+    if (e?.data?.source === "oxylabs-runtime" && typeof window.${CAPTCHA_BINDING} === "function") {
+        window.${CAPTCHA_BINDING}(e.data.type);
+    }
 });
 `;
 
 /**
- * Inject autoconsent into a page's isolated world via CDP, plus a main-world bridge that forwards
+ * Latest captcha handler per page: a page binding can only be registered once, so a second test on
+ * the same page reuses it.
+ * @type {WeakMap<Page, (type: string) => void>}
+ */
+const captchaHandlers = new WeakMap();
+
+/**
+ * @param {Page} page
+ * @param {(type: string) => void} handler
+ */
+async function forwardCaptchaEvents(page, handler) {
+    const registered = captchaHandlers.has(page);
+    captchaHandlers.set(page, handler);
+    if (registered) return;
+    await page.exposeBinding(CAPTCHA_BINDING, (_source, type) => captchaHandlers.get(page)?.(type));
+    await page.addInitScript(captchaBridgeScript);
+}
+
+/**
+ * Inject autoconsent into a page's isolated world via CDP and, with `solveCaptcha`, forward
  * Oxylabs captcha events to the Node side. Call BEFORE navigating to the target URL.
  * @param {Page} page
  * @param {Partial<TestOptions>} [options]
@@ -202,13 +219,10 @@ export async function injectAutoconsent(page, options = {}) {
         }
     }
 
-    const ctx = await injectThrough(page, options, {
-        provider: 'oxylabs',
-        transport: (p, script, createMessageHandler) =>
-            injectWithPolling(p, script, createMessageHandler, {
-                mainWorldQueue: { script: captchaBridgeScript, varName: CAPTCHA_QUEUE, onItem: handleCaptchaEvent },
-            }),
-    });
+    const ctx = await injectThrough(page, options, 'oxylabs');
+    if (options.solveCaptcha) {
+        await forwardCaptchaEvents(page, handleCaptchaEvent);
+    }
     return { ...ctx, captcha, captchaPromise };
 }
 
