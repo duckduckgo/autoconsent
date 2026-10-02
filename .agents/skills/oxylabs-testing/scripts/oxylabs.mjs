@@ -152,26 +152,29 @@ export async function connectOxylabs(regionKey, opts = {}) {
     }
 }
 
-// Captcha events arrive as window messages from the Oxylabs runtime and are forwarded to Node
-// through a page binding. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
-const CAPTCHA_BINDING = '__oxylabsCaptchaEvent';
-// The `-solve-` variants are the names the earlier Unblocker browser used; `-solve-end` is also documented as current.
+// Captcha events arrive as window messages from the Oxylabs runtime. A main-world init script queues
+// them and Node polls the queue: Agent Browser drops main-world CDP bindings, so page.exposeBinding
+// can't deliver them. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
+const CAPTCHA_QUEUE = '__oxyCaptcha';
+const CAPTCHA_POLL_INTERVAL_MS = 250;
+// Agent Browser sends `oxylabs-captcha-solve-start`; the docs list `-start`, `-end`, `-solve-end` and `-error`.
 const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
 const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
 const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-error'];
-// Oxylabs' documented wait for a captcha to be solved.
+// The wait used in Oxylabs' captcha-handling example.
 const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
 const captchaBridgeScript = `
+if (!globalThis.${CAPTCHA_QUEUE}) globalThis.${CAPTCHA_QUEUE} = [];
 window.addEventListener("message", (e) => {
-    if (e?.data?.source === "oxylabs-runtime" && typeof window.${CAPTCHA_BINDING} === "function") {
-        window.${CAPTCHA_BINDING}(e.data.type);
-    }
+    if (e?.data?.source === "oxylabs-runtime") globalThis.${CAPTCHA_QUEUE}.push(e.data.type);
 });
 `;
 
+const sleep = (/** @type {number} */ ms) => new Promise((r) => setTimeout(r, ms).unref?.());
+
 /**
- * Latest captcha handler per page: a page binding can only be registered once, so a second test on
- * the same page reuses it.
+ * Latest captcha handler per page: the bridge is installed once per page, so a second test on the
+ * same page reuses it.
  * @type {WeakMap<Page, (type: string) => void>}
  */
 const captchaHandlers = new WeakMap();
@@ -184,8 +187,24 @@ async function forwardCaptchaEvents(page, handler) {
     const registered = captchaHandlers.has(page);
     captchaHandlers.set(page, handler);
     if (registered) return;
-    await page.exposeBinding(CAPTCHA_BINDING, (_source, type) => captchaHandlers.get(page)?.(type));
     await page.addInitScript(captchaBridgeScript);
+    void pollCaptchaQueue(page);
+}
+
+/**
+ * Drain the page's captcha queue into the current handler until the page closes.
+ * @param {Page} page
+ */
+async function pollCaptchaQueue(page) {
+    while (!page.isClosed()) {
+        try {
+            const types = await page.evaluate((name) => /** @type {any} */ (globalThis)[name]?.splice(0) ?? [], CAPTCHA_QUEUE);
+            for (const type of types) captchaHandlers.get(page)?.(type);
+        } catch {
+            // The page is navigating or closed.
+        }
+        await sleep(CAPTCHA_POLL_INTERVAL_MS);
+    }
 }
 
 /**
@@ -237,7 +256,6 @@ export async function injectAutoconsent(page, options = {}) {
  */
 async function waitForCaptcha(page, ctx, options) {
     if (!options.solveCaptcha) return;
-    const sleep = (/** @type {number} */ ms) => new Promise((r) => setTimeout(r, ms).unref?.());
     if (!ctx.captcha.detected) {
         await sleep(5000);
     }
