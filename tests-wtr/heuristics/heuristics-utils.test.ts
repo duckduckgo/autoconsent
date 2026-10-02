@@ -182,6 +182,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
+    it('matches CCPA "do not sell/share" variants', () => {
+        expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
+    });
+
     it('matches German continue-without-accepting variants', () => {
         expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
