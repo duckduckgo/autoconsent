@@ -9,4 +9,6 @@ generateCMPTests('Tealium', [
     'http://help.brother-usa.com/',
     'http://www.americangreetings.com/',
     'http://www.hagerty.com/',
+    'https://www.about.hsbc.pl/pl-pl/hsbc-service-delivery',
+    'https://www.hsbc.com/',
 ]);
