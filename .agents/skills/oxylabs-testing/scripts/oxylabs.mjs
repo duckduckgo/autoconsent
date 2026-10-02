@@ -36,7 +36,7 @@
  * @typedef {AutoconsentContext & {
  *   captcha: { detected: boolean, solved: boolean|null },
  *   captchaPromise: Promise<void>,
- * }} OxylabsAutoconsentContext - `captcha` reflects the Oxylabs solver state; `captchaPromise` resolves when solving ends (success or error).
+ * }} OxylabsAutoconsentContext - `captcha` reflects the Oxylabs solver state; `captchaPromise` resolves when solving ends (success or error). With `solveCaptcha`, `waitForCompletion` pauses while a captcha is being solved.
  */
 
 import path from 'path';
@@ -160,7 +160,7 @@ const CAPTCHA_MESSAGE = 'oxylabsCaptcha';
 const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
 const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
 const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-error'];
-// The wait used in Oxylabs' captcha-handling example.
+// Longest a test pauses for solving, counted from the first start event: the wait in Oxylabs' example.
 const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
 const captchaListenerScript = `
 window.addEventListener("message", (e) => {
@@ -187,19 +187,30 @@ export async function injectAutoconsent(page, options = {}) {
         resolveCaptcha = resolve;
     });
 
+    let solving = false;
+    /** @type {number|null} */
+    let firstStartAt = null;
+
     function handleCaptchaEvent(/** @type {string} */ type) {
         if (CAPTCHA_START_EVENTS.includes(type)) {
             captcha.detected = true;
+            solving = true;
+            firstStartAt ??= Date.now();
         } else if (CAPTCHA_END_EVENTS.includes(type)) {
             captcha.detected = true;
             captcha.solved = true;
+            solving = false;
             resolveCaptcha();
         } else if (CAPTCHA_ERROR_EVENTS.includes(type)) {
             captcha.detected = true;
             captcha.solved = false;
+            solving = false;
             resolveCaptcha();
         }
     }
+
+    // Oxylabs gives no deadline for a start event, so autoconsent's wait pauses whenever one arrives.
+    const isSolving = () => solving && firstStartAt !== null && Date.now() - firstStartAt < CAPTCHA_SOLVE_TIMEOUT_MS;
 
     /** @type {import('../../../lib/regional-testing/harness.mjs').IsolatedWorldExtension} */
     const captchaListener = {
@@ -209,27 +220,12 @@ export async function injectAutoconsent(page, options = {}) {
         },
     };
     const ctx = await injectThrough(page, options, 'oxylabs', options.solveCaptcha ? captchaListener : {});
-    return { ...ctx, captcha, captchaPromise };
-}
-
-/**
- * Brief wait for the captcha solver to declare itself before deciding whether to block. Oxylabs
- * sends a "captcha-start" message via window.postMessage shortly after the page commits if a
- * captcha is detected; if no message arrives within the grace period, assume there's no captcha
- * and proceed. Skipped unless captcha solving is on.
- * @param {Page} page
- * @param {OxylabsAutoconsentContext} ctx
- * @param {Partial<TestOptions>} options
- */
-async function waitForCaptcha(page, ctx, options) {
-    if (!options.solveCaptcha) return;
-    const sleep = (/** @type {number} */ ms) => new Promise((r) => setTimeout(r, ms).unref?.());
-    if (!ctx.captcha.detected) {
-        await sleep(5000);
-    }
-    if (ctx.captcha.detected && ctx.captcha.solved === null) {
-        await Promise.race([ctx.captchaPromise, sleep(CAPTCHA_SOLVE_TIMEOUT_MS)]);
-    }
+    return {
+        ...ctx,
+        waitForCompletion: (timeout, detectionTimeout) => ctx.waitForCompletion(timeout, detectionTimeout, isSolving),
+        captcha,
+        captchaPromise,
+    };
 }
 
 /** @type {Provider} */
@@ -238,7 +234,6 @@ const provider = {
     defaultScreenshotsDir: path.join(projectRoot, 'test-results/oxylabs'),
     screenshotTag: 'oxylabs',
     inject: injectAutoconsent,
-    afterNavigation: waitForCaptcha,
 };
 
 /**

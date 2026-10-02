@@ -60,7 +60,7 @@
  * @typedef {Object} AutoconsentContext
  * @property {Object[]} received - All received autoconsent messages.
  * @property {(type: string) => boolean} hasMessage
- * @property {(timeout?: number, detectionTimeout?: number) => Promise<boolean>} waitForCompletion
+ * @property {(timeout?: number, detectionTimeout?: number, isPaused?: () => boolean) => Promise<boolean>} waitForCompletion - While `isPaused()` is true, neither timeout runs down.
  * @property {(type: string, timeout?: number) => Promise<boolean>} waitForMessage
  * @property {(url: string, region: string) => TestResult} collectResult
  */
@@ -191,8 +191,8 @@ export async function injectAutoconsent(page, options, provider, extension = {})
         return received.some((m) => m.type === type);
     }
 
-    async function waitForCompletion(timeout = 45000, detectionTimeout = timeout) {
-        const start = Date.now();
+    async function waitForCompletion(timeout = 45000, detectionTimeout = timeout, isPaused = () => false) {
+        let start = Date.now();
         while (Date.now() - start < timeout) {
             if (hasMessage('optOutResult') || hasMessage('optInResult')) {
                 return true;
@@ -207,7 +207,9 @@ export async function injectAutoconsent(page, options, provider, extension = {})
             if (Date.now() - start > detectionTimeout && !hasMessage('cmpDetected')) {
                 return false;
             }
+            const before = Date.now();
             await new Promise((r) => setTimeout(r, 500));
+            if (isPaused()) start += Date.now() - before;
         }
         return false;
     }
