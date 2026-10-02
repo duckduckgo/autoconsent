@@ -9,8 +9,8 @@
         "frame": false,
         "urlPattern": "^https?://(\\w+\\.)?chatgpt\\.com/"
     },
-    "comment": "Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better.",
-    "prehideSelectors": ["dialog[data-cookie-consent]:has(form[data-privacy-consent-form])"],
+    "comment": "Covers the server-rendered consent dialog. Once the app hydrates it swaps in a banner whose buttons are only distinguishable by text, which the heuristic rule handles better. Below 48rem the site reopens the dialog with showModal() and marks it aria-modal, so prehiding it would leave the page inert with nothing visible to dismiss.",
+    "prehideSelectors": ["dialog[data-cookie-consent]:not([aria-modal]):has(form[data-privacy-consent-form])"],
     "detectCmp": [
         {
             "exists": "dialog[data-cookie-consent] form[data-privacy-consent-form] input[name=\"action\"][value=\"reject\"]"
