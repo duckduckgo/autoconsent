@@ -152,60 +152,23 @@ export async function connectOxylabs(regionKey, opts = {}) {
     }
 }
 
-// Captcha events arrive as window messages from the Oxylabs runtime. A main-world init script queues
-// them and Node polls the queue: Agent Browser drops main-world CDP bindings, so page.exposeBinding
-// can't deliver them. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
-const CAPTCHA_QUEUE = '__oxyCaptcha';
-const CAPTCHA_POLL_INTERVAL_MS = 250;
+// Captcha events arrive as window messages from the Oxylabs runtime. A listener in autoconsent's
+// isolated world forwards them over its CDP binding: Agent Browser drops main-world bindings, so
+// page.exposeBinding can't deliver them. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
+const CAPTCHA_MESSAGE = 'oxylabsCaptcha';
 // Agent Browser sends `oxylabs-captcha-solve-start`; the docs list `-start`, `-end`, `-solve-end` and `-error`.
 const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
 const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
 const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-error'];
 // The wait used in Oxylabs' captcha-handling example.
 const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
-const captchaBridgeScript = `
-if (!globalThis.${CAPTCHA_QUEUE}) globalThis.${CAPTCHA_QUEUE} = [];
+const captchaListenerScript = `
 window.addEventListener("message", (e) => {
-    if (e?.data?.source === "oxylabs-runtime") globalThis.${CAPTCHA_QUEUE}.push(e.data.type);
+    if (e?.data?.source === "oxylabs-runtime" && typeof e.data.type === "string") {
+        window.autoconsentSendMessage({ type: "${CAPTCHA_MESSAGE}", event: e.data.type });
+    }
 });
 `;
-
-const sleep = (/** @type {number} */ ms) => new Promise((r) => setTimeout(r, ms).unref?.());
-
-/**
- * Latest captcha handler per page: the bridge is installed once per page, so a second test on the
- * same page reuses it.
- * @type {WeakMap<Page, (type: string) => void>}
- */
-const captchaHandlers = new WeakMap();
-
-/**
- * @param {Page} page
- * @param {(type: string) => void} handler
- */
-async function forwardCaptchaEvents(page, handler) {
-    const registered = captchaHandlers.has(page);
-    captchaHandlers.set(page, handler);
-    if (registered) return;
-    await page.addInitScript(captchaBridgeScript);
-    void pollCaptchaQueue(page);
-}
-
-/**
- * Drain the page's captcha queue into the current handler until the page closes.
- * @param {Page} page
- */
-async function pollCaptchaQueue(page) {
-    while (!page.isClosed()) {
-        try {
-            const types = await page.evaluate((name) => /** @type {any} */ (globalThis)[name]?.splice(0) ?? [], CAPTCHA_QUEUE);
-            for (const type of types) captchaHandlers.get(page)?.(type);
-        } catch {
-            // The page is navigating or closed.
-        }
-        await sleep(CAPTCHA_POLL_INTERVAL_MS);
-    }
-}
 
 /**
  * Inject autoconsent into a page's isolated world via CDP and, with `solveCaptcha`, forward
@@ -238,10 +201,14 @@ export async function injectAutoconsent(page, options = {}) {
         }
     }
 
-    const ctx = await injectThrough(page, options, 'oxylabs');
-    if (options.solveCaptcha) {
-        await forwardCaptchaEvents(page, handleCaptchaEvent);
-    }
+    /** @type {import('../../../lib/regional-testing/harness.mjs').IsolatedWorldExtension} */
+    const captchaListener = {
+        script: captchaListenerScript,
+        onMessage: (msg) => {
+            if (msg?.type === CAPTCHA_MESSAGE) handleCaptchaEvent(msg.event);
+        },
+    };
+    const ctx = await injectThrough(page, options, 'oxylabs', options.solveCaptcha ? captchaListener : {});
     return { ...ctx, captcha, captchaPromise };
 }
 
@@ -256,6 +223,7 @@ export async function injectAutoconsent(page, options = {}) {
  */
 async function waitForCaptcha(page, ctx, options) {
     if (!options.solveCaptcha) return;
+    const sleep = (/** @type {number} */ ms) => new Promise((r) => setTimeout(r, ms).unref?.());
     if (!ctx.captcha.detected) {
         await sleep(5000);
     }

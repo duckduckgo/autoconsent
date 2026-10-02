@@ -87,12 +87,12 @@ Any two-letter country code maps to `?p_cc=` (e.g. `de` → `p_cc=DE`), per the 
 
 Injection and result collection are shared with `proxy-testing` in [.agents/lib/regional-testing/harness.mjs](../../lib/regional-testing/harness.mjs): autoconsent runs in an isolated world of every frame (including out-of-process iframes) and talks to Node over CDP bindings, and `eval` snippets run in the page's main world. This skill only adds the Oxylabs connection and the captcha handling.
 
-With `solveCaptcha: true`, an init script queues the Oxylabs runtime's captcha `window` messages in the page's main world, and Node polls the queue every 250 ms.
+With `solveCaptcha: true`, a listener in autoconsent's isolated world forwards the Oxylabs runtime's captcha `window` messages to Node over the same CDP binding, so they arrive even if the page navigates right after.
 
 ## Gotchas
 
 - **CAPTCHA events arrive via `window.postMessage`, not CDP.** With `solveCaptcha: true`, `testPage` waits up to 5s after navigation for a start event. Agent Browser sends `oxylabs-captcha-solve-start` with a `captchaType` (e.g. `turnstile`); the documented `oxylabs-captcha-start` is accepted too. If one arrives, it blocks until `oxylabs-captcha-end`, `oxylabs-captcha-solve-end` or `oxylabs-captcha-error`, capped at 60s (the timeout in Oxylabs' example). That adds ~5s on captcha-free pages. Hard blocks without a captcha (e.g. DataDome "Access is temporarily restricted", Akamai "Access denied") send no events, so solving doesn't help there.
-- **Main-world CDP bindings don't work on Agent Browser.** `page.exposeBinding`, and `Runtime.addBinding` without `executionContextName`, never reach the page. Bindings scoped to an isolated world (what the harness uses) work. To get data out of the main world, queue it there and poll with `page.evaluate`.
+- **Main-world CDP bindings don't work on Agent Browser.** `page.exposeBinding`, and `Runtime.addBinding` without `executionContextName`, never reach the page. Bindings scoped to an isolated world (what the harness uses) work, and `window` messages reach isolated-world listeners, so listen there.
 - **Limits:** 100 concurrent sessions and 10 new sessions per second per account.
 - **Call injection before `page.goto`**, so autoconsent is in place before page scripts run.
 - **Oxylabs blocks certain site categories** (e.g. government sites), and some sites block Oxylabs too: check the screenshots. Use alternative URLs for the same CMP, or retest as described in the `proxy-testing` gotchas.
