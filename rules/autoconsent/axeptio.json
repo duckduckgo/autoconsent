@@ -3,7 +3,14 @@
     "prehideSelectors": [".axeptio_widget,.axeptio_mount"],
     "detectCmp": [
         {
-            "exists": ".axeptio_widget,.axeptio_mount"
+            "any": [
+                {
+                    "exists": ".axeptio_widget,.axeptio-widget--open"
+                },
+                {
+                    "exists": [".axeptio_mount .needsclick", ".axeptio_widget"]
+                }
+            ]
         }
     ],
     "detectPopup": [

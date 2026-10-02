@@ -6,4 +6,6 @@ generateCMPTests('axeptio', [
     'https://mistral.ai/news/le-chat-dives-deep',
     'https://lahalledesgourmets.com/pages/angelina',
     'https://www.narbonneaccessoires.fr/fr-fr/',
+    'https://www.americanvintage-store.com/us/en/',
+    'https://www.winamp.com/',
 ]);
