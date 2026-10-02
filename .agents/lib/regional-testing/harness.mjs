@@ -60,7 +60,7 @@
  * @typedef {Object} AutoconsentContext
  * @property {Object[]} received - All received autoconsent messages.
  * @property {(type: string) => boolean} hasMessage
- * @property {(timeout?: number, detectionTimeout?: number) => Promise<boolean>} waitForCompletion
+ * @property {(timeout?: number, detectionTimeout?: number, isPaused?: () => boolean) => Promise<boolean>} waitForCompletion - While `isPaused()` is true, neither timeout runs down.
  * @property {(type: string, timeout?: number) => Promise<boolean>} waitForMessage
  * @property {(url: string, region: string) => TestResult} collectResult
  */
@@ -73,6 +73,14 @@
  * @property {string} [screenshotTag] - Added to screenshot file names so providers sharing a directory don't overwrite each other.
  * @property {(page: Page, options: Partial<TestOptions>) => Promise<AutoconsentContext>} inject
  * @property {(page: Page, ctx: any, options: Partial<TestOptions>) => Promise<void>} [afterNavigation] - Runs after the page commits, before waiting for autoconsent.
+ */
+
+/**
+ * Provider code for the isolated world. Its messages go through the same binding as autoconsent's,
+ * so they reach Node even if the page navigates right after.
+ * @typedef {Object} IsolatedWorldExtension
+ * @property {string} [script] - Runs after the content script; reports to Node with `window.autoconsentSendMessage(msg)`.
+ * @property {(msg: any) => void} [onMessage] - Called with every message from the isolated world.
  */
 
 import fs from 'fs';
@@ -103,9 +111,10 @@ export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca',
  * @param {Page} page
  * @param {Partial<TestOptions>} options
  * @param {ProviderName} provider - Recorded in the collected TestResult.
+ * @param {IsolatedWorldExtension} [extension] - Provider code that runs next to the content script.
  * @returns {Promise<AutoconsentContext>}
  */
-export async function injectAutoconsent(page, options, provider) {
+export async function injectAutoconsent(page, options, provider, extension = {}) {
     const action = 'action' in options ? options.action : 'optOut';
     /** @type {any[]} */
     const received = [];
@@ -140,6 +149,7 @@ export async function injectAutoconsent(page, options, provider) {
     const createMessageHandler = ({ sendToContentScript, evalInMainWorld }) => {
         return async function handleMessage(msg, frameRef) {
             received.push(msg);
+            extension.onMessage?.(msg);
             switch (msg.type) {
                 case 'init':
                     await sendToContentScript(frameRef, { type: 'initResp', config, rules: { autoconsent: fullRules } });
@@ -175,14 +185,14 @@ export async function injectAutoconsent(page, options, provider) {
     if (browserName && browserName !== 'chromium') {
         throw new Error(`Regional testing supports Chromium only (got "${browserName}").`);
     }
-    await injectIntoIsolatedWorld(page, createMessageHandler);
+    await injectIntoIsolatedWorld(page, createMessageHandler, extension.script ?? '');
 
     function hasMessage(/** @type {string} */ type) {
         return received.some((m) => m.type === type);
     }
 
-    async function waitForCompletion(timeout = 45000, detectionTimeout = timeout) {
-        const start = Date.now();
+    async function waitForCompletion(timeout = 45000, detectionTimeout = timeout, isPaused = () => false) {
+        let start = Date.now();
         while (Date.now() - start < timeout) {
             if (hasMessage('optOutResult') || hasMessage('optInResult')) {
                 return true;
@@ -197,7 +207,9 @@ export async function injectAutoconsent(page, options, provider) {
             if (Date.now() - start > detectionTimeout && !hasMessage('cmpDetected')) {
                 return false;
             }
+            const before = Date.now();
             await new Promise((r) => setTimeout(r, 500));
+            if (isPaused()) start += Date.now() - before;
         }
         return false;
     }
@@ -254,8 +266,9 @@ export async function injectAutoconsent(page, options, provider) {
  *
  * @param {Page} page
  * @param {MessageHandlerFactory} createMessageHandler
+ * @param {string} extraScript - Runs in each isolated world after the content script.
  */
-async function injectIntoIsolatedWorld(page, createMessageHandler) {
+async function injectIntoIsolatedWorld(page, createMessageHandler, extraScript) {
     // Isolated world name: `<prefix><pageWorldUniqueId><separator><frameId>`. Encoding the page-world
     // uniqueId lets us later run eval snippets in that frame's main world.
     const WORLD_PREFIX = 'autoconsent_iw_';
@@ -323,7 +336,7 @@ async function injectIntoIsolatedWorld(page, createMessageHandler) {
                     await client.send('Runtime.addBinding', { name: bindingName, executionContextName: context.name });
                     // CDP bindings take a single string arg, so wrap it in the shape the content script expects.
                     await client.send('Runtime.evaluate', {
-                        expression: `window.autoconsentSendMessage = (m) => { window.${bindingName}(JSON.stringify(m)); return Promise.resolve(); };\n${contentScript}`,
+                        expression: `window.autoconsentSendMessage = (m) => { window.${bindingName}(JSON.stringify(m)); return Promise.resolve(); };\n${contentScript}\n${extraScript}`,
                         uniqueContextId: context.uniqueId,
                         allowUnsafeEvalBlockedByCSP: true,
                     });

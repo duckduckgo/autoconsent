@@ -36,7 +36,7 @@
  * @typedef {AutoconsentContext & {
  *   captcha: { detected: boolean, solved: boolean|null },
  *   captchaPromise: Promise<void>,
- * }} OxylabsAutoconsentContext - `captcha` reflects the Oxylabs solver state; `captchaPromise` resolves when solving ends (success or error).
+ * }} OxylabsAutoconsentContext - `captcha` reflects the Oxylabs solver state; `captchaPromise` resolves when solving ends (success or error). With `solveCaptcha`, `waitForCompletion` pauses while a captcha is being solved.
  */
 
 import path from 'path';
@@ -152,41 +152,23 @@ export async function connectOxylabs(regionKey, opts = {}) {
     }
 }
 
-// Captcha events arrive as window messages from the Oxylabs runtime and are forwarded to Node
-// through a page binding. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
-const CAPTCHA_BINDING = '__oxylabsCaptchaEvent';
-// The `-solve-` variants are the names the earlier Unblocker browser used; `-solve-end` is also documented as current.
+// Captcha events arrive as window messages from the Oxylabs runtime. A listener in autoconsent's
+// isolated world forwards them over its CDP binding: Agent Browser drops main-world bindings, so
+// page.exposeBinding can't deliver them. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
+const CAPTCHA_MESSAGE = 'oxylabsCaptcha';
+// Agent Browser sends `oxylabs-captcha-solve-start`; the docs list `-start`, `-end`, `-solve-end` and `-error`.
 const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
 const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
 const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-error'];
-// Oxylabs' documented wait for a captcha to be solved.
+// Longest a test pauses for solving, counted from the first start event: the wait in Oxylabs' example.
 const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
-const captchaBridgeScript = `
+const captchaListenerScript = `
 window.addEventListener("message", (e) => {
-    if (e?.data?.source === "oxylabs-runtime" && typeof window.${CAPTCHA_BINDING} === "function") {
-        window.${CAPTCHA_BINDING}(e.data.type);
+    if (e?.data?.source === "oxylabs-runtime" && typeof e.data.type === "string") {
+        window.autoconsentSendMessage({ type: "${CAPTCHA_MESSAGE}", event: e.data.type });
     }
 });
 `;
-
-/**
- * Latest captcha handler per page: a page binding can only be registered once, so a second test on
- * the same page reuses it.
- * @type {WeakMap<Page, (type: string) => void>}
- */
-const captchaHandlers = new WeakMap();
-
-/**
- * @param {Page} page
- * @param {(type: string) => void} handler
- */
-async function forwardCaptchaEvents(page, handler) {
-    const registered = captchaHandlers.has(page);
-    captchaHandlers.set(page, handler);
-    if (registered) return;
-    await page.exposeBinding(CAPTCHA_BINDING, (_source, type) => captchaHandlers.get(page)?.(type));
-    await page.addInitScript(captchaBridgeScript);
-}
 
 /**
  * Inject autoconsent into a page's isolated world via CDP and, with `solveCaptcha`, forward
@@ -205,45 +187,45 @@ export async function injectAutoconsent(page, options = {}) {
         resolveCaptcha = resolve;
     });
 
+    let solving = false;
+    /** @type {number|null} */
+    let firstStartAt = null;
+
     function handleCaptchaEvent(/** @type {string} */ type) {
         if (CAPTCHA_START_EVENTS.includes(type)) {
             captcha.detected = true;
+            solving = true;
+            firstStartAt ??= Date.now();
         } else if (CAPTCHA_END_EVENTS.includes(type)) {
             captcha.detected = true;
             captcha.solved = true;
+            solving = false;
             resolveCaptcha();
         } else if (CAPTCHA_ERROR_EVENTS.includes(type)) {
             captcha.detected = true;
             captcha.solved = false;
+            solving = false;
             resolveCaptcha();
         }
     }
 
-    const ctx = await injectThrough(page, options, 'oxylabs');
-    if (options.solveCaptcha) {
-        await forwardCaptchaEvents(page, handleCaptchaEvent);
-    }
-    return { ...ctx, captcha, captchaPromise };
-}
+    // Oxylabs gives no deadline for a start event, so autoconsent's wait pauses whenever one arrives.
+    const isSolving = () => solving && firstStartAt !== null && Date.now() - firstStartAt < CAPTCHA_SOLVE_TIMEOUT_MS;
 
-/**
- * Brief wait for the captcha solver to declare itself before deciding whether to block. Oxylabs
- * sends a "captcha-start" message via window.postMessage shortly after the page commits if a
- * captcha is detected; if no message arrives within the grace period, assume there's no captcha
- * and proceed. Skipped unless captcha solving is on.
- * @param {Page} page
- * @param {OxylabsAutoconsentContext} ctx
- * @param {Partial<TestOptions>} options
- */
-async function waitForCaptcha(page, ctx, options) {
-    if (!options.solveCaptcha) return;
-    const sleep = (/** @type {number} */ ms) => new Promise((r) => setTimeout(r, ms).unref?.());
-    if (!ctx.captcha.detected) {
-        await sleep(5000);
-    }
-    if (ctx.captcha.detected && ctx.captcha.solved === null) {
-        await Promise.race([ctx.captchaPromise, sleep(CAPTCHA_SOLVE_TIMEOUT_MS)]);
-    }
+    /** @type {import('../../../lib/regional-testing/harness.mjs').IsolatedWorldExtension} */
+    const captchaListener = {
+        script: captchaListenerScript,
+        onMessage: (msg) => {
+            if (msg?.type === CAPTCHA_MESSAGE) handleCaptchaEvent(msg.event);
+        },
+    };
+    const ctx = await injectThrough(page, options, 'oxylabs', options.solveCaptcha ? captchaListener : {});
+    return {
+        ...ctx,
+        waitForCompletion: (timeout, detectionTimeout) => ctx.waitForCompletion(timeout, detectionTimeout, isSolving),
+        captcha,
+        captchaPromise,
+    };
 }
 
 /** @type {Provider} */
@@ -252,7 +234,6 @@ const provider = {
     defaultScreenshotsDir: path.join(projectRoot, 'test-results/oxylabs'),
     screenshotTag: 'oxylabs',
     inject: injectAutoconsent,
-    afterNavigation: waitForCaptcha,
 };
 
 /**
