@@ -66,7 +66,7 @@ CMPs behave differently by region:
 
 Use `if`/`then`/`else` to handle regional variants within a single rule.
 
-**Test all rule changes across the core region set** — US, GB, DE, plus the reported region from the task (or the closest supported proxy region, e.g. ES for PT) — using the `proxy-testing` skill. Escalate to the expanded set according to the skill's policy.
+**Test all rule changes across the core region set** — US, GB, DE, plus the reported region from the task (or the closest supported proxy region, e.g. ES for PT) — using the `proxy-testing` skill. Escalate to the expanded set according to the skill's policy. If a site shows our proxies a bot wall, retest those regions with the `oxylabs-testing` skill.
 
 ### Generic vs Site-Specific Rules
 
