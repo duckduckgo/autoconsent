@@ -10,17 +10,48 @@
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-dialog-initial"
+            "any": [
+                {
+                    "visible": ".cookie-dialog-initial"
+                },
+                {
+                    "visible": ["page-footer", ".cookie-dialog-initial"]
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookie-dialog-initial button.g-button[type=\"submit\"]"
+            "if": {
+                "exists": ".cookie-dialog-initial"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-dialog-initial button.g-button[type=\"submit\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["page-footer", ".cookie-dialog-initial button.g-button[type=\"submit\"]"]
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cookie-dialog-initial button.g-button.outline"
+            "if": {
+                "exists": ".cookie-dialog-initial"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-dialog-initial button.g-button.outline"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["page-footer", ".cookie-dialog-initial button.g-button.outline"]
+                }
+            ]
         }
     ],
     "test": [
