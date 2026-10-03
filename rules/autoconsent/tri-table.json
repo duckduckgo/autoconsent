@@ -1,0 +1,14 @@
+{
+    "name": "tri-table",
+    "vendorUrl": "https://tri-table.com/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[class^=\"app_gdpr--\"] button" }],
+    "detectPopup": [{ "visible": "[class^=\"app_gdpr--\"] button" }],
+    "optIn": [{ "waitForThenClick": "[class^=\"app_gdpr--\"] div > button:last-of-type:nth-of-type(2)" }],
+    "optOut": [
+        { "waitForThenClick": "[class^=\"app_gdpr--\"] div > button:first-of-type:nth-last-of-type(2)", "retry": 2, "retryInterval": 500 },
+        { "waitForThenClick": "[class^=\"app_gdpr--\"] div > button:nth-of-type(2):nth-last-of-type(2)" },
+        { "waitForVisible": "[class^=\"app_gdpr--\"] button", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "tt_cons_addtl=" }]
+}

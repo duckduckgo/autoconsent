@@ -1,0 +1,34 @@
+{
+    "name": "shinden.pl",
+    "vendorUrl": "https://shinden.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?shinden\\.pl/"
+    },
+    "prehideSelectors": ["#cookie-bar"],
+    "detectCmp": [{ "exists": "#cookie-bar .cb-enable,[class^=\"app_gdpr--\"] button" }],
+    "detectPopup": [{ "visible": "#cookie-bar .cb-enable,[class^=\"app_gdpr--\"] button", "check": "any" }],
+    "optIn": [
+        { "click": "#cookie-bar .cb-enable", "optional": true },
+        { "waitForVisible": "[class^=\"app_gdpr--\"] button", "timeout": 10000, "optional": true },
+        {
+            "if": { "visible": "[class^=\"app_gdpr--\"] button" },
+            "then": [{ "waitForThenClick": "[class^=\"app_gdpr--\"] div > button:last-of-type:nth-of-type(2)" }]
+        }
+    ],
+    "optOut": [
+        { "hide": "#cookie-bar" },
+        { "waitForVisible": "[class^=\"app_gdpr--\"] button", "timeout": 10000, "optional": true },
+        {
+            "if": { "visible": "[class^=\"app_gdpr--\"] button" },
+            "then": [
+                {
+                    "waitForThenClick": "[class^=\"app_gdpr--\"] div > button:first-of-type:nth-last-of-type(2)",
+                    "retry": 2,
+                    "retryInterval": 500
+                },
+                { "waitForThenClick": "[class^=\"app_gdpr--\"] div > button:nth-of-type(2):nth-last-of-type(2)" },
+                { "waitForVisible": "[class^=\"app_gdpr--\"] button", "check": "none" }
+            ]
+        }
+    ]
+}
