@@ -159,6 +159,13 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_IUBENDA_2: () => {
+        const match = document.cookie.match(/_iub_cs-s?\d+=([^;]+)/);
+        if (!match) return false;
+        const purposes = JSON.parse(decodeURIComponent(match[1])).purposes || {};
+        // purpose 1 is strictly necessary and always granted
+        return Object.entries(purposes).every(([id, granted]) => id === '1' || granted === false);
+    },
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))

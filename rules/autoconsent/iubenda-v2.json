@@ -1,0 +1,38 @@
+{
+    "name": "iubenda-v2",
+    "prehideSelectors": ["tb-banner-wrapper"],
+    "detectCmp": [{ "exists": ["tb-banner-wrapper", "tb-banner-footer"] }],
+    "detectPopup": [{ "visible": ["tb-banner-wrapper", ".tb-banner-wrapper"] }],
+    "optIn": [
+        {
+            "waitForThenClick": ["tb-banner-wrapper", "tb-banner-footer", "tb-action-button:last-of-type", "button.accept-button"],
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["tb-banner-wrapper", "tb-banner-footer", "tb-action-button:first-of-type", "button.reject-button"] },
+            "then": [
+                {
+                    "waitForThenClick": ["tb-banner-wrapper", "tb-banner-footer", "tb-action-button:first-of-type", "button.reject-button"],
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": [
+                        "tb-banner-wrapper",
+                        "tb-banner-footer",
+                        "tb-action-button:nth-of-type(2)",
+                        "button.reject-button"
+                    ],
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_IUBENDA_2" }]
+}
