@@ -1,0 +1,44 @@
+{
+    "name": "ziptozipmoving",
+    "vendorUrl": "https://ziptozipmoving.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?ziptozipmoving\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookies.main-class .customize-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies.main-class .customize-btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies.main-class .cookies-container .accept-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies.main-class .cookies-container .customize-btn"
+        },
+        {
+            "waitForVisible": ".cookies.main-class .cookies-hidden .el-switch"
+        },
+        {
+            "click": ".cookies-hidden .el-switch.is-checked:not(.is-disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookies.main-class .cookies-hidden .accept-btn"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "validCookies=general--"
+        }
+    ]
+}
