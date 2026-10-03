@@ -111,6 +111,9 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
+    // the close icon is an SVG, which has no click() method
+    EVAL_COOKIE_POPUP_CLOSE: () =>
+        document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_COOKIE_LAW_INFO_0: () => {
         if (CLI.disableAllCookies) CLI.disableAllCookies();
         if (CLI.reject_close) CLI.reject_close();
