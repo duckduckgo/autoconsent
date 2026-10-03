@@ -4,7 +4,7 @@
     "prehideSelectors": [".fs-cc-components,[fs-cc=banner]"],
     "detectCmp": [
         {
-            "visible": ".fs-cc-components,[fs-cc=banner]"
+            "any": [{ "visible": ".fs-cc-components,[fs-cc=banner]" }, { "exists": "script[src*=\"@finsweet/cookie-consent\"]" }]
         }
     ],
     "detectPopup": [
