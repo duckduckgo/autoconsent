@@ -18,7 +18,30 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cookie-banner-mount-point button.decline"
+            "if": {
+                "exists": ".cookie-banner-mount-point button.decline"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-banner-mount-point button.decline"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookie-banner-mount-point button.manage"
+                },
+                {
+                    "waitForVisible": ".cookie-banner-manager .manage-cookies-overlay"
+                },
+                {
+                    "click": ".cookie-banner-manager .manage-cookies-overlay label.sqs-toggle--on input",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".cookie-banner-manager .manage-cookies-overlay button.save"
+                }
+            ]
         }
     ],
     "test": [
