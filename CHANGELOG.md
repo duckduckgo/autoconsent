@@ -1,3 +1,32 @@
+# v16.44.0 (Sat Oct 03 2026)
+
+#### Rules
+
+- Rule update: lacoccinelle [#1592](https://github.com/duckduckgo/autoconsent/pull/1592) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: elsevier [#1591](https://github.com/duckduckgo/autoconsent/pull/1591) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cpm fail nytimes.com [#1590](https://github.com/duckduckgo/autoconsent/pull/1590) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chatgpt [#1589](https://github.com/duckduckgo/autoconsent/pull/1589) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bandcamp.com [#1585](https://github.com/duckduckgo/autoconsent/pull/1585) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: woo-commerce-com [#1584](https://github.com/duckduckgo/autoconsent/pull/1584) ([@muodov](https://github.com/muodov))
+
+#### Dependencies
+
+- Bump tldts-experimental from 7.4.6 to 7.4.16 [#1580](https://github.com/duckduckgo/autoconsent/pull/1580) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Upgrade Playwright to 1.63.0 [#1588](https://github.com/duckduckgo/autoconsent/pull/1588) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Fix Oxylabs captcha events on Agent Browser [#1595](https://github.com/duckduckgo/autoconsent/pull/1595) ([@muodov](https://github.com/muodov))
+- Add Headless Browser support [#1593](https://github.com/duckduckgo/autoconsent/pull/1593) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.43.2 (Thu Oct 01 2026)
 
 #### AI / Agent Workflow
