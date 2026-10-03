@@ -10,4 +10,6 @@ generateCMPTests('cookieyes', [
     // CCPA "Do Not Share My Personal Information" variant (US visitors only)
     'https://www.quantamagazine.org/at-17-hannah-cairo-solved-a-major-math-mystery-20250801/',
     'https://taxfoundation.org/',
+    // classic bar variant with preference center that renders no category toggles
+    'https://www.langoly.com/french-learning-apps/',
 ]);
