@@ -1,0 +1,83 @@
+{
+    "name": "datasign",
+    "vendorUrl": "https://datasign.jp/",
+    "cosmetic": false,
+    "detectCmp": [
+        {
+            "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary[class*=\"datasign__dialogIsVisible\"]"]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": [
+                    "#datasign_cmp__host",
+                    "#datasign_cmp__cmp_summary [class*=\"datasign__dialogButtons\"] button:nth-of-type(2):last-of-type:not([id])"
+                ]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#datasign_cmp__host",
+                        "#datasign_cmp__cmp_summary [class*=\"datasign__dialogButtons\"] button:last-of-type"
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary [class*=\"datasign__dialogCloseButton\"]"]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#datasign_cmp__host", "#datasign_cmp__reject-all-button"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#datasign_cmp__host", "#datasign_cmp__reject-all-button"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": [
+                            "#datasign_cmp__host",
+                            "#datasign_cmp__cmp_summary [class*=\"datasign__dialogButtons\"] button:nth-of-type(2):last-of-type:not([id])"
+                        ]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_summary [class*=\"datasign__dialogButtons\"] button:first-of-type"
+                            ]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": [
+                                "#datasign_cmp__host",
+                                "#datasign_cmp__cmp_summary [class*=\"datasign__dialogCloseButton\"]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary[class*=\"datasign__dialogIsVisible\"]"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
