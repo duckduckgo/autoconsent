@@ -1,3 +1,16 @@
+# v16.45.0 (Sun Oct 04 2026)
+
+#### Dependencies
+
+- Upgrade dev dependencies and use Node 24.21.0 (latest LTS) everywhere [#1596](https://github.com/duckduckgo/autoconsent/pull/1596) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Claude ([@claude](https://github.com/claude))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.44.0 (Sat Oct 03 2026)
 
 #### Rules
