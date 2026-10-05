@@ -32,6 +32,18 @@ In some environments (e.g. browser extensions), it's useful to access [eval snip
 import { evalSnippets } from '@duckduckgo/autoconsent';
 ```
 
+### Heuristics
+
+The heuristic popup and button classification is available on its own, without DOM dependencies, so it can run in Node (e.g. to post-process crawl data):
+
+```javascript
+import { checkHeuristicPatterns, classifyButtonTextRegex, classifyButtons, classifyPopup } from '@duckduckgo/autoconsent/heuristics';
+
+classifyButtonTextRegex('Reject all'); // 'reject'
+```
+
+For page-injected scripts, `@duckduckgo/autoconsent/heuristics-dom` resolves to a self-contained script that exposes `globalThis.autoconsentHeuristics.getPotentialPopups(timeout)` and `getButtonData(element)`, the same popup and button discovery autoconsent uses in the page.
+
 ## Browser extension
 
 Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all [DuckDuckGo apps](https://duckduckgo.com/app), but you can build it yourself and use for testing.

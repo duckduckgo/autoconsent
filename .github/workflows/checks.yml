@@ -29,3 +29,4 @@ jobs:
                   cache: 'npm'
             - run: npm ci
             - run: npm run test:lib
+            - run: npm run test:heuristics-node

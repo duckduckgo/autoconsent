@@ -9,6 +9,12 @@
       "import": "./dist/autoconsent.esm.js",
       "require": "./dist/autoconsent.cjs.js"
     },
+    "./heuristics": {
+      "types": "./dist/types/heuristic-classify.d.ts",
+      "import": "./dist/heuristics.mjs",
+      "require": "./dist/heuristics.cjs.js"
+    },
+    "./heuristics-dom": "./dist/autoconsent.heuristics-dom.js",
     "./rules/rules.json": "./rules/rules.json",
     "./rules/compact-rules.json": "./rules/compact-rules.json"
   },
@@ -28,6 +34,7 @@
     "test:firefox": "playwright test --project firefox",
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
+    "test:heuristics-node": "node scripts/check-heuristics-node.mjs",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
     "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",
