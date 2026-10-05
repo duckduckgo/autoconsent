@@ -28,6 +28,7 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    gpc: boolean;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -38,6 +39,7 @@ const defaultOptions: TestOptions = {
     mobile: false,
     expectPopupOpen: true,
     expectedRuns: 1,
+    gpc: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -93,6 +95,9 @@ class TestRun {
             });
 
         await this.page.exposeBinding('autoconsentSendMessage', this.messageCallback.bind(this));
+        if (this.options.gpc) {
+            await this.enableGpc();
+        }
         await this.page.goto(this.url, { waitUntil: 'commit' });
 
         await this.injectContentScripts();
@@ -121,6 +126,14 @@ class TestRun {
             }
             throw e;
         }
+    }
+
+    // emulate a browser that sends the Global Privacy Control signal
+    async enableGpc() {
+        await this.page.setExtraHTTPHeaders({ 'Sec-GPC': '1' });
+        await this.page.addInitScript(() => {
+            Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true, configurable: true });
+        });
     }
 
     async injectContentScript(pageOrFrame: Page | Frame) {
