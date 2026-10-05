@@ -36,6 +36,7 @@
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
+    "benchmark-buttons": "ts-node scripts/benchmark-button-classification.ts",
     "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts",
     "check-pr-release-labels": "ts-node scripts/check-pr-release-labels.ts"
   },

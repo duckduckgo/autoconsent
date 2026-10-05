@@ -41,6 +41,7 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 | `npm run test:chrome` | Playwright tests in Chrome only |
 | `npm run build-rules` | Rebuild `rules.json`, `compact-rules.json` |
 | `npm run create-rule` | Scaffold a new JSON rule + test spec |
+| `npm run benchmark-buttons` | Score heuristic button classification against labelled button texts |
 
 ## Code Style
 - **Preserve existing comments.** Do not remove JSDoc comments, TODO comments, or inline explanations unless the related code is also being removed. Rewriting a comment to reflect updated logic is fine.
@@ -135,6 +136,7 @@ shadow root or same-origin iframe.
 - If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.
 - After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) across the expanded set. Inspect both API results AND screenshots.
 - **When adding or fixing a rule for a site, remove stale site-specific rules covering the same site.** If a site-specific rule is obsolete in all regions (the site switched CMP), remove it rather than leaving it alongside the new or updated rule.
+- **Heuristic pattern changes must keep the labelled button benchmark green.** `lib/heuristic-patterns.ts` is the source of truth for heuristic patterns; downstream projects (e.g. tracker-radar-collector) should import them rather than keep copies. `tests-wtr/heuristics/button-classification-accuracy.test.ts` checks `classifyButtonTextRegex` against `tests-wtr/heuristics/fixtures/labelled-button-texts.csv` (no false positives, >90% weighted accuracy per label). Use `npm run benchmark-buttons` to see what a change gains or loses. New labelled rows come from the tracker-radar-collector post-processing scripts (`collect-popup-button-texts.js`, `label-button-texts.js`). Fix a mislabelled row in the CSV rather than bending patterns to fit it.
 - if a popup does not provide an opt-out button, `optOut` _may_ click "dismiss"/"acknowledge" instead. Check with the existing heuristic patterns in /lib/heuristic-patterns.ts for reference. Do **not** click a TIER2 (single Accept) button — see General Guidelines.
 - do not keep outdated selectors in changed rules, unless they are actually used in some conditions
 

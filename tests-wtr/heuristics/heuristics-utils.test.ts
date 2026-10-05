@@ -201,6 +201,7 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Essential Only')).to.equal('reject');
         expect(classifyButtonTextRegex('Only use essential cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Only accept necessary cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Essential only cookies')).to.equal('reject');
     });
 
     it('does not classify bare essential category labels as reject choices', () => {
@@ -275,6 +276,12 @@ describe('classifyButtonTextRegex', () => {
 
     it('does not treat revoke links as reject buttons', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
+    });
+
+    it('classifies bare German accept-close buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Akzeptieren & Schließen')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Akzeptieren und schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Alle akzeptieren schließen')).to.equal('accept');
     });
 });
 
