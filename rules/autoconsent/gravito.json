@@ -1,44 +1,51 @@
 {
     "name": "gravito",
     "vendorUrl": "https://www.gravito.net/cmp/",
-    "prehideSelectors": [".gravitoCMP-background-overlay"],
+    "prehideSelectors": ["#gravitoCMPRoot .gravitoCMP-opaque-container"],
     "detectCmp": [
         {
-            "exists": ".gravitoCMP-background-overlay"
+            "exists": "#gravitoCMPRoot .gravitoCMP-opaque-container"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".gravitoCMP-background-overlay"
+            "visible": "#gravitoCMP-tab-container-id #gravitoTCFCMP-layer1-settings"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#modalConfirmBtn.gravitoCMP-button"
+            "waitForThenClick": "#gravitoTCFCMP-layer1-accept-all"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#modalSettingBtn.gravitoCMP-button"
+            "if": {
+                "visible": "#gravitoTCFCMP-layer1-reject-all"
+            },
+            "then": [
+                {
+                    "click": "#gravitoTCFCMP-layer1-reject-all"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#gravitoTCFCMP-layer1-settings"
+                },
+                {
+                    "waitForThenClick": "#gravitoTCFCMP-layer2-reject-all"
+                }
+            ]
         },
         {
-            "waitFor": "#allRejectBtn"
-        },
-        {
-            "waitFor": ".gravitoCMP-content-section"
-        },
-        {
-            "click": ".gravitoCMP-content input[type=checkbox]:checked",
-            "all": true,
+            "waitForVisible": "#gravitoCMP-tab-container-id",
+            "check": "none",
+            "timeout": 3000,
             "optional": true
-        },
-        {
-            "waitForThenClick": "#allRejectBtn"
         }
     ],
     "test": [
         {
-            "cookieContains": "gravitoData"
+            "cookieContains": "gravitoData="
         }
     ]
 }
