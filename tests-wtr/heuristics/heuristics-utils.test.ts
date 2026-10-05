@@ -68,6 +68,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
     });
 
+    it('detects third-party tracking tool notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'Welcome! We use third-party tools to collect information about you as you enjoy our site.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
     it('detects website cookie experience notices', () => {
         const { patterns, snippets } = checkHeuristicPatterns(
             'The Algonquin College website uses cookies to enhance your browsing experience.',
