@@ -278,10 +278,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
     });
 
-    it('classifies bare German accept-close buttons as acknowledge', () => {
-        expect(classifyButtonTextRegex('Akzeptieren & Schließen')).to.equal('acknowledge');
+    it('classifies accept-and-close buttons as accept', () => {
+        expect(classifyButtonTextRegex('Akzeptieren & Schließen')).to.equal('accept');
         expect(classifyButtonTextRegex('Akzeptieren und schließen')).to.equal('accept');
-        expect(classifyButtonTextRegex('Alle akzeptieren schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Zustimmen schliessen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
     });
 });
 
