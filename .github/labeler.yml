@@ -36,7 +36,7 @@
                 - 'web-test-runner.config.mjs'
 
 # Not a release-note category: exactly one 'category:' label is required per PR.
-'code-update-needed':
+'needs-code-update':
     - changed-files:
           - any-glob-to-any-file:
                 - 'lib/**/*.ts'
