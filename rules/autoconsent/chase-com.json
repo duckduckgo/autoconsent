@@ -1,0 +1,33 @@
+{
+    "name": "chase-com",
+    "vendorUrl": "https://www.chase.com/",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?chase\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".consent-banner .consent-close-icon-wrapper"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-banner .consent-close-icon-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-banner .consent-close-icon-wrapper"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".consent-banner .consent-close-icon-wrapper"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cbc=true"
+        }
+    ]
+}
