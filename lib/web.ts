@@ -274,10 +274,9 @@ export default class AutoConsent {
             }
         });
         // heuristic CMP is only run in the top frame and only if heuristic action is enabled and retries is odd
+        const heuristicEnabled = isTop && this.config.heuristicMode !== 'off';
         const heuristicRules =
-            isTop && this.config.heuristicMode !== 'off' && this.state.findCmpAttempts % 2 === 0
-                ? [new AutoConsentHeuristicCMP(this, this.config.heuristicMode)]
-                : [];
+            heuristicEnabled && this.state.findCmpAttempts % 2 === 0 ? [new AutoConsentHeuristicCMP(this, this.config.heuristicMode)] : [];
 
         const rulesPriorityStages: [string, AutoCMP[]][] = [
             ['site-specific', siteSpecificRules],
@@ -330,7 +329,9 @@ export default class AutoConsent {
             // We wait 500ms, and also for some kind of dom mutation to happen before
             // rerunning the findCmp check
             const waitFor: Promise<boolean>[] = [this.domActions.wait(500)];
-            if (this.state.findCmpAttempts > 1) {
+            // a skipped heuristic has not seen the current DOM yet, so the next attempt must not wait for another mutation
+            const heuristicSkipped = heuristicEnabled && heuristicRules.length === 0;
+            if (this.state.findCmpAttempts > 1 && !heuristicSkipped) {
                 waitFor.push(mutationObserver);
             }
             try {
