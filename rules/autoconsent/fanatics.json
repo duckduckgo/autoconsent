@@ -1,0 +1,9 @@
+{
+    "name": "fanatics",
+    "prehideSelectors": [".aspire-banner.marketing-cookies-banner"],
+    "detectCmp": [{ "exists": ".aspire-banner.marketing-cookies-banner" }],
+    "detectPopup": [{ "visible": ".aspire-banner.marketing-cookies-banner" }],
+    "optOut": [{ "waitForThenClick": "[data-trk-id=\"reject-marketing-cookies\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-trk-id=\"accept-marketing-cookies\"]" }],
+    "test": [{ "cookieContains": "mktck=false" }]
+}
