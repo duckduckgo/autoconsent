@@ -14,7 +14,6 @@
       "import": "./dist/heuristics.mjs",
       "require": "./dist/heuristics.cjs.js"
     },
-    "./heuristics-dom": "./dist/autoconsent.heuristics-dom.js",
     "./rules/rules.json": "./rules/rules.json",
     "./rules/compact-rules.json": "./rules/compact-rules.json"
   },
@@ -23,7 +22,7 @@
   },
   "scripts": {
     "clean": "rm -r dist",
-    "lint": "eslint . && prettier . --check && npm run rule-syntax-check",
+    "lint": "eslint . && prettier . --check && npm run rule-syntax-check && tsc -p tsconfig.heuristics.json",
     "lint-fix": "eslint . --fix && prettier . --write && npm run rule-syntax-check",
     "bundle": "./build.sh",
     "rule-syntax-check": "node scripts/validate-json-rules.js",
@@ -34,7 +33,6 @@
     "test:firefox": "playwright test --project firefox",
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
-    "test:heuristics-node": "node scripts/check-heuristics-node.mjs",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
     "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",

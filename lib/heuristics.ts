@@ -2,8 +2,6 @@ import { checkHeuristicPatterns, classifyButtons, classifyPopup, isExcludedPopup
 import { ButtonData, HeuristicLevel, PopupClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
-export * from './heuristic-classify';
-
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const POPUP_SEARCH_MAX_TIME = 100;
 

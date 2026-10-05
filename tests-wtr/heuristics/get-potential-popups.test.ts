@@ -1,12 +1,7 @@
 import { expect } from '@esm-bundle/chai';
-import '../../lib/heuristic-dom-bundle';
-import type { getButtonData, getPotentialPopups } from '../../lib/heuristics';
+import { getPotentialPopups } from '../../lib/heuristics';
 
-const { autoconsentHeuristics } = globalThis as unknown as {
-    autoconsentHeuristics: { getPotentialPopups: typeof getPotentialPopups; getButtonData: typeof getButtonData };
-};
-
-describe('heuristic-dom-bundle', () => {
+describe('getPotentialPopups', () => {
     let container: HTMLDivElement;
 
     beforeEach(() => {
@@ -18,7 +13,7 @@ describe('heuristic-dom-bundle', () => {
         container.remove();
     });
 
-    it('exposes popup and button discovery on a global', () => {
+    it('returns positioned popups with their buttons', () => {
         container.innerHTML = `
             <div id="popup" style="position: fixed; bottom: 0;">
                 <p>We use cookies.</p>
@@ -26,10 +21,8 @@ describe('heuristic-dom-bundle', () => {
                 <button>Accept all</button>
             </div>
         `;
-        const popups = autoconsentHeuristics.getPotentialPopups(1000);
-        const popup = popups.find((p) => p.element.id === 'popup');
+        const popup = getPotentialPopups(1000).find((p) => p.element.id === 'popup');
         expect(popup).to.exist;
         expect(popup!.buttons.map((b) => b.text).sort()).to.deep.equal(['Accept all', 'Reject all']);
-        expect(autoconsentHeuristics.getButtonData(container).length).to.equal(2);
     });
 });

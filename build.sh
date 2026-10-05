@@ -9,7 +9,6 @@ $ESBUILD --format=esm --target=es2021 lib/web.ts --outfile=dist/autoconsent.esm.
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/web.ts --outfile=dist/autoconsent.cjs.js
 $ESBUILD --format=esm --target=es2021 lib/heuristic-classify.ts --outfile=dist/heuristics.mjs
 $ESBUILD --format=cjs --target=es2021 --platform=node lib/heuristic-classify.ts --outfile=dist/heuristics.cjs.js
-$ESBUILD --format=iife --target=es2021 lib/heuristic-dom-bundle.ts --outfile=dist/autoconsent.heuristics-dom.js
 
 # Generate type declarations for consumers
 npx tsc -p tsconfig.build.json

@@ -11,10 +11,10 @@ import {
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
-import type { ButtonRegexClassification, PopupClassification } from './types';
-
 export * from './heuristic-patterns';
-export type { ButtonRegexClassification, PopupClassification } from './types';
+
+export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
+export type PopupClassification = 'none' | 'reject' | 'tier1' | 'tier2';
 
 export type ClassifiableButton = {
     text: string;

@@ -42,7 +42,7 @@ import { checkHeuristicPatterns, classifyButtonTextRegex, classifyButtons, class
 classifyButtonTextRegex('Reject all'); // 'reject'
 ```
 
-For page-injected scripts, `@duckduckgo/autoconsent/heuristics-dom` resolves to a self-contained script that exposes `globalThis.autoconsentHeuristics.getPotentialPopups(timeout)` and `getButtonData(element)`, the same popup and button discovery autoconsent uses in the page.
+`dist/autoconsent.playwright.js` also exposes `window.autoconsentHeuristics.getPotentialPopups(timeout)` and `getButtonData(element)`, so other scripts injected into the same world can reuse autoconsent's popup and button discovery.
 
 ## Browser extension
 
