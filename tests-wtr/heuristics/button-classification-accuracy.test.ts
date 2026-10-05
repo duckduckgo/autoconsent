@@ -17,7 +17,7 @@ describe('classifyButtonTextRegex against labelled button texts', () => {
     let benchmarks: LabelBenchmark[];
 
     before(async () => {
-        const response = await fetch(new URL('./fixtures/labelled-button-texts.csv', import.meta.url));
+        const response = await fetch('/tests-wtr/heuristics/fixtures/labelled-button-texts.csv');
         const rows = parseButtonTextCsv(await response.text());
         expect(rows.length).to.be.greaterThan(0, 'expected labelled rows in the CSV');
         benchmarks = buildLabelBenchmarks(classifyRows(rows, classifyButtonTextRegex));
