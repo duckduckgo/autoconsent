@@ -4,9 +4,9 @@
  */
 import { ButtonRegexClassification } from '../../lib/types';
 
-export const VALID_LABELS: readonly ButtonRegexClassification[] = ['settings', 'accept', 'reject', 'acknowledge', 'other'];
+const VALID_LABELS: readonly ButtonRegexClassification[] = ['settings', 'accept', 'reject', 'acknowledge', 'other'];
 
-export const BENCHMARK_LABELS: readonly ButtonRegexClassification[] = ['settings', 'accept', 'reject', 'acknowledge'];
+export const BENCHMARK_LABELS = VALID_LABELS.filter((label) => label !== 'other');
 
 export type ButtonTextRow = {
     buttonText: string;
@@ -24,14 +24,7 @@ export type LabelBenchmark = {
     weightedSupport: number;
     rowCorrect: number;
     weightedCorrect: number;
-    rowCorrectRate: number | null;
-    weightedCorrectRate: number | null;
-    rowFalsePositives: number;
     weightedFalsePositives: number;
-    rowFalsePositiveRate: number | null;
-    weightedFalsePositiveRate: number | null;
-    rowMissed: number;
-    weightedMissed: number;
     falsePositiveExamples: ClassifiedButtonTextRow[];
     missedExamples: ClassifiedButtonTextRow[];
 };
@@ -124,40 +117,29 @@ function byOccurence(a: ButtonTextRow, b: ButtonTextRow): number {
 }
 
 /**
- * Per-label precision/recall style stats. Rows labelled 'other' are excluded, matching the original collector benchmark.
+ * Per-label stats, in BENCHMARK_LABELS order. Rows labelled 'other' are excluded, matching the original collector benchmark.
  */
-export function buildBenchmarkByLabel(results: ClassifiedButtonTextRow[]): Record<string, LabelBenchmark> {
+export function buildLabelBenchmarks(results: ClassifiedButtonTextRow[]): LabelBenchmark[] {
     const benchmarkResults = results.filter((r) => r.label !== 'other');
-    const rowTotal = benchmarkResults.length;
-    const weightedTotal = sumOccurences(benchmarkResults);
-
-    const byLabel: Record<string, LabelBenchmark> = {};
-    for (const label of BENCHMARK_LABELS) {
+    return BENCHMARK_LABELS.map((label) => {
         const support = benchmarkResults.filter((r) => r.label === label);
         const correct = support.filter((r) => r.predicted === label);
-        const missed = support.filter((r) => r.predicted !== label);
         const falsePositives = benchmarkResults.filter((r) => r.predicted === label && r.label !== label);
-        const rowSupport = support.length;
-        const weightedSupport = sumOccurences(support);
-        byLabel[label] = {
+        return {
             label,
-            rowSupport,
-            weightedSupport,
+            rowSupport: support.length,
+            weightedSupport: sumOccurences(support),
             rowCorrect: correct.length,
             weightedCorrect: sumOccurences(correct),
-            rowCorrectRate: rowSupport === 0 ? null : correct.length / rowSupport,
-            weightedCorrectRate: weightedSupport === 0 ? null : sumOccurences(correct) / weightedSupport,
-            rowFalsePositives: falsePositives.length,
             weightedFalsePositives: sumOccurences(falsePositives),
-            rowFalsePositiveRate: rowTotal === 0 ? null : falsePositives.length / rowTotal,
-            weightedFalsePositiveRate: weightedTotal === 0 ? null : sumOccurences(falsePositives) / weightedTotal,
-            rowMissed: missed.length,
-            weightedMissed: sumOccurences(missed),
             falsePositiveExamples: falsePositives.sort(byOccurence),
-            missedExamples: missed.sort(byOccurence),
+            missedExamples: support.filter((r) => r.predicted !== label).sort(byOccurence),
         };
-    }
-    return byLabel;
+    });
+}
+
+export function pct(numerator: number, denominator: number): string {
+    return denominator === 0 ? 'n/a' : `${((numerator / denominator) * 100).toFixed(1)}%`;
 }
 
 export function formatExample(row: ClassifiedButtonTextRow): string {

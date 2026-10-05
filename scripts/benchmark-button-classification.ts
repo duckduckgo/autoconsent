@@ -7,12 +7,12 @@ import path from 'path';
 import { Command } from 'commander';
 import { classifyButtonTextRegex } from '../lib/heuristics';
 import {
-    BENCHMARK_LABELS,
-    buildBenchmarkByLabel,
+    buildLabelBenchmarks,
     classifyRows,
     formatExample,
     LabelBenchmark,
     parseButtonTextCsv,
+    pct,
 } from '../tests-wtr/heuristics/button-text-benchmark';
 
 const DEFAULT_CSV_PATH = path.join(__dirname, '../tests-wtr/heuristics/fixtures/labelled-button-texts.csv');
@@ -22,23 +22,18 @@ const program = new Command();
 program
     .description('Benchmark classifyButtonTextRegex against labelled button texts (exact label match, occurrence-weighted)')
     .option('-i, --input <path>', 'path to labelled button text CSV', DEFAULT_CSV_PATH)
-    .option('-o, --output <path>', 'path to write benchmark results JSON')
     .option('--top <n>', 'number of failure examples to print per label', (v) => parseInt(v, 10), TOP_FAILURES)
     .parse(process.argv);
 
-const opts = program.opts<{ input: string; output?: string; top: number }>();
-
-function pct(rate: number | null): string {
-    return rate === null ? 'n/a' : `${(rate * 100).toFixed(1)}%`;
-}
+const opts = program.opts<{ input: string; top: number }>();
 
 function printLabelBenchmark(b: LabelBenchmark) {
     console.log(`\n  ${b.label}`);
     console.log(
-        `    correctly labelled: ${b.rowCorrect}/${b.rowSupport} rows (${pct(b.rowCorrectRate)}), ${b.weightedCorrect}/${b.weightedSupport} weighted (${pct(b.weightedCorrectRate)})`,
+        `    correctly labelled: ${b.rowCorrect}/${b.rowSupport} rows (${pct(b.rowCorrect, b.rowSupport)}), ${b.weightedCorrect}/${b.weightedSupport} weighted (${pct(b.weightedCorrect, b.weightedSupport)})`,
     );
     console.log(
-        `    false positives (predicted ${b.label}, labelled otherwise): ${b.rowFalsePositives} rows (${pct(b.rowFalsePositiveRate)}), ${b.weightedFalsePositives} weighted (${pct(b.weightedFalsePositiveRate)})`,
+        `    false positives (predicted ${b.label}, labelled otherwise): ${b.falsePositiveExamples.length} rows, ${b.weightedFalsePositives} weighted`,
     );
     for (const [title, examples] of [
         ['top false positives', b.falsePositiveExamples],
@@ -59,23 +54,18 @@ function main() {
         process.exit(1);
     }
 
-    const byLabel = buildBenchmarkByLabel(classifyRows(rows, classifyButtonTextRegex));
-    const benchmarks = BENCHMARK_LABELS.map((label) => byLabel[label]).filter((b) => b.rowSupport > 0);
-    const total = (key: keyof LabelBenchmark) => benchmarks.reduce((sum, b) => sum + (b[key] as number), 0);
+    const benchmarks = buildLabelBenchmarks(classifyRows(rows, classifyButtonTextRegex));
+    const total = (key: 'rowSupport' | 'weightedSupport' | 'rowCorrect' | 'weightedCorrect' | 'weightedFalsePositives') =>
+        benchmarks.reduce((sum, b) => sum + b[key], 0);
 
     console.log(`Input: ${inputPath} (${rows.length} labelled rows)`);
     console.log('\nclassifyButtonTextRegex benchmark (excluding other)');
     console.log(
-        `  correctly labelled: ${total('rowCorrect')}/${total('rowSupport')} rows, ${total('weightedCorrect')}/${total('weightedSupport')} weighted (${pct(total('weightedCorrect') / total('weightedSupport'))})`,
+        `  correctly labelled: ${total('rowCorrect')}/${total('rowSupport')} rows, ${total('weightedCorrect')}/${total('weightedSupport')} weighted (${pct(total('weightedCorrect'), total('weightedSupport'))})`,
     );
     console.log(`  false positives (weighted): ${total('weightedFalsePositives')}`);
-    console.log(`  missed (weighted): ${total('weightedMissed')}`);
+    console.log(`  missed (weighted): ${total('weightedSupport') - total('weightedCorrect')}`);
     benchmarks.forEach(printLabelBenchmark);
-
-    if (opts.output) {
-        fs.writeFileSync(opts.output, `${JSON.stringify({ input: inputPath, classifier: 'classifyButtonTextRegex', byLabel }, null, 2)}\n`);
-        console.log(`\nWrote benchmark results to ${opts.output}`);
-    }
 }
 
 main();
