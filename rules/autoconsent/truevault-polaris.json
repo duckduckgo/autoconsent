@@ -1,0 +1,63 @@
+{
+    "name": "truevault-polaris",
+    "vendorUrl": "https://www.truevault.com/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["#polaris-css-lockdown-container", "#polaris-consent-widgets .polaris-consent-widget"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#polaris-css-lockdown-container", "#polaris-consent-widgets .polaris-consent-widget"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#polaris-css-lockdown-container", ".polaris-consent-widget__actions button:last-child"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#polaris-css-lockdown-container", ".polaris-consent-widget__actions button:nth-child(2):not(:last-child)"]
+            },
+            "then": [
+                {
+                    "click": ["#polaris-css-lockdown-container", ".polaris-consent-widget__actions button:nth-child(2):not(:last-child)"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["#polaris-css-lockdown-container", ".polaris-consent-widget__actions button:first-child"]
+                },
+                {
+                    "waitFor": ["#polaris-css-lockdown-container", ".polaris-preferences-widget__save_button"],
+                    "timeout": 2000
+                },
+                {
+                    "click": [
+                        "#polaris-css-lockdown-container",
+                        ".polaris-preferences-widget input[type=checkbox]:checked:not([disabled])"
+                    ],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ["#polaris-css-lockdown-container", ".polaris-preferences-widget__save_button"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#polaris-css-lockdown-container", "#polaris-consent-widgets .polaris-consent-widget"],
+            "check": "none",
+            "timeout": 2000
+        },
+        {
+            "cookieContains": "\"adsPermitted\":false"
+        }
+    ]
+}
