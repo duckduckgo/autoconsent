@@ -13,14 +13,7 @@ export type CompactRuleStep = {
 
 export type CompactCMPRuleStep = AutoConsentRuleStep & Partial<CompactRuleStep>;
 type CompactableRuleStepKey =
-    | 'exists'
-    | 'visible'
-    | 'waitForThenClick'
-    | 'click'
-    | 'waitFor'
-    | 'waitForVisible'
-    | 'hide'
-    | 'cookieContains';
+    'exists' | 'visible' | 'waitForThenClick' | 'click' | 'waitFor' | 'waitForVisible' | 'hide' | 'cookieContains';
 type CompactNullableBoolean = 0 | 1 | 2;
 
 export type CompactCMPRule = [

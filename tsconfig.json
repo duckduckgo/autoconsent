@@ -9,7 +9,8 @@
         "noImplicitAny": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
-        "module": "NodeNext"
+        "module": "NodeNext",
+        "types": ["node", "chrome", "mocha"]
     },
     "exclude": ["node_modules/*", "dist/*"]
 }
