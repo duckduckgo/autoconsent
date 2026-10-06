@@ -1,0 +1,9 @@
+{
+    "name": "ee-cookie-notice",
+    "vendorUrl": "https://docs.expressionengine.com/latest/add-ons/consent/overview.html",
+    "prehideSelectors": [".cookieNoticeWrapper:has(#cookieConsentFormDecline)"],
+    "detectCmp": [{ "exists": ".cookieNoticeWrapper #cookieConsentFormDecline" }],
+    "detectPopup": [{ "visible": ".cookieNoticeWrapper #cookieConsentFormDecline" }],
+    "optIn": [{ "waitForThenClick": ".cookieNoticeWrapper #cookieConsentFormAccept button" }],
+    "optOut": [{ "waitForThenClick": ".cookieNoticeWrapper #cookieConsentFormDecline button" }]
+}

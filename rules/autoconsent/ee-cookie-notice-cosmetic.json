@@ -1,0 +1,13 @@
+{
+    "name": "ee-cookie-notice-cosmetic",
+    "vendorUrl": "https://docs.expressionengine.com/latest/add-ons/consent/overview.html",
+    "cosmetic": true,
+    "prehideSelectors": [".cookieNoticeWrapper:has(#cookieConsentFormAccept)"],
+    "detectCmp": [
+        { "exists": ".cookieNoticeWrapper #cookieConsentFormAccept" },
+        { "exists": ".cookieNoticeWrapper #cookieConsentFormDecline", "negated": true }
+    ],
+    "detectPopup": [{ "visible": ".cookieNoticeWrapper #cookieConsentFormAccept" }],
+    "optIn": [{ "waitForThenClick": ".cookieNoticeWrapper #cookieConsentFormAccept button" }],
+    "optOut": [{ "hide": ".cookieNoticeWrapper:has(#cookieConsentFormAccept)" }]
+}
