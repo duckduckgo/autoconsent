@@ -1,0 +1,10 @@
+{
+    "name": "jpmorgan-chase",
+    "vendorUrl": "https://www.jpmorganchase.com/",
+    "prehideSelectors": [".consent-banner:has(.consent-close-icon-wrapper)"],
+    "detectCmp": [{ "exists": ".consent-banner a.consent-close-icon-wrapper[data-pt-name=\"consent-closed\"]" }],
+    "detectPopup": [{ "visible": ".consent-banner a.consent-close-icon-wrapper[data-pt-name=\"consent-closed\"]" }],
+    "optIn": [{ "waitForThenClick": ".consent-banner a.consent-close-icon-wrapper[data-pt-name=\"consent-closed\"]" }],
+    "optOut": [{ "waitForThenClick": ".consent-banner a.consent-close-icon-wrapper[data-pt-name=\"consent-closed\"]" }],
+    "test": [{ "cookieContains": "cbc=true" }]
+}
