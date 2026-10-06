@@ -1,0 +1,44 @@
+{
+    "name": "dalecarnegie",
+    "vendorUrl": "https://www.dalecarnegie.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?dalecarnegie\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"PrivacyBar_gdprAgreement\"] [class*=\"PrivacyBar_managePrefsBtn\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"PrivacyBar_gdprAgreement\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"PrivacyBar_gdprAgreement\"] [class*=\"PrivacyBar_allowBtn\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"PrivacyBar_gdprAgreement\"] [class*=\"PrivacyBar_managePrefsBtn\"]"
+        },
+        {
+            "waitForVisible": "[class*=\"CookieManagementModal_confirmBtn\"]"
+        },
+        {
+            "click": "[class*=\"CookieManagementModal_dropdownHeader\"] [class*=\"SwitchButton_toggleSwitch\"] input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "[class*=\"CookieManagementModal_confirmBtn\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22targeting%22:false"
+        }
+    ]
+}
