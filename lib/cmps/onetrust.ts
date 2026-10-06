@@ -27,6 +27,8 @@ export default class Onetrust extends AutoConsentCMPBase {
 
     async optOut() {
         await this.wait(500);
+        // some sites pre-render the banner markup before the SDK loads; clicks do nothing until the SDK injects its styles
+        await this.waitForElement('#onetrust-style', 10000);
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
             return await this.click('#onetrust-reject-all-handler');
@@ -86,6 +88,7 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optIn() {
+        await this.waitForElement('#onetrust-style', 10000);
         return await this.click('#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies');
     }
 
