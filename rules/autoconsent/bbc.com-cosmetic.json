@@ -1,0 +1,32 @@
+{
+    "name": "bbc.com-cosmetic",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)/"
+    },
+    "prehideSelectors": ["#bbccookies-prompt"],
+    "detectCmp": [
+        {
+            "exists": "#bbccookies-continue-button"
+        },
+        {
+            "exists": "#bbccookies-reject-button",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#bbccookies-prompt"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#bbccookies-continue-button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".bbccookies-banner"
+        }
+    ]
+}
