@@ -1,3 +1,26 @@
+# v16.46.0 (Tue Oct 06 2026)
+
+#### Rules
+
+- Handle GPC flyout from Securiti [#1612](https://github.com/duckduckgo/autoconsent/pull/1612) ([@muodov](https://github.com/muodov))
+- Add rule for the LEGO.com consent modal [#1613](https://github.com/duckduckgo/autoconsent/pull/1613) ([@muodov](https://github.com/muodov))
+- Rule update: Cookie popup on fanatics sites [#1594](https://github.com/duckduckgo/autoconsent/pull/1594) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: https://openrouter.ai/ [#1608](https://github.com/duckduckgo/autoconsent/pull/1608) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiez [#1597](https://github.com/duckduckgo/autoconsent/pull/1597) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: cookieyes [#1598](https://github.com/duckduckgo/autoconsent/pull/1598) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: squarespace-cookie-banner [#1599](https://github.com/duckduckgo/autoconsent/pull/1599) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: speciesplus.net [#1600](https://github.com/duckduckgo/autoconsent/pull/1600) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: privacy-area [#1601](https://github.com/duckduckgo/autoconsent/pull/1601) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ziptozipmoving [#1602](https://github.com/duckduckgo/autoconsent/pull/1602) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cuvva.com [#1603](https://github.com/duckduckgo/autoconsent/pull/1603) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.45.0 (Sun Oct 04 2026)
 
 #### Dependencies
