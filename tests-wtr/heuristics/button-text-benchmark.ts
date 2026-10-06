@@ -2,6 +2,8 @@
  * Helpers for scoring the button classifier against labelled-button-texts.csv.
  * Shared by the WTR accuracy test and scripts/benchmark-button-classification.ts, so must not use Node or DOM APIs.
  */
+// browser ESM build, so the same import works in WTR and in Node
+import { parse } from 'csv-parse/browser/esm/sync';
 import { ButtonRegexClassification } from '../../lib/types';
 
 const VALID_LABELS: readonly ButtonRegexClassification[] = ['settings', 'accept', 'reject', 'acknowledge', 'other'];
@@ -30,69 +32,22 @@ export type LabelBenchmark = {
 };
 
 /**
- * Minimal RFC 4180 parser: quoted fields, escaped quotes ("") and newlines inside quotes.
- */
-function parseCsvRecords(content: string): string[][] {
-    const records: string[][] = [];
-    let record: string[] = [];
-    let field = '';
-    let inQuotes = false;
-    for (let i = 0; i < content.length; i++) {
-        const char = content[i];
-        if (inQuotes) {
-            if (char === '"' && content[i + 1] === '"') {
-                field += '"';
-                i++;
-            } else if (char === '"') {
-                inQuotes = false;
-            } else {
-                field += char;
-            }
-        } else if (char === '"') {
-            inQuotes = true;
-        } else if (char === ',') {
-            record.push(field);
-            field = '';
-        } else if (char === '\n' || char === '\r') {
-            if (char === '\r' && content[i + 1] === '\n') {
-                i++;
-            }
-            record.push(field);
-            records.push(record);
-            record = [];
-            field = '';
-        } else {
-            field += char;
-        }
-    }
-    if (field || record.length > 0) {
-        record.push(field);
-        records.push(record);
-    }
-    return records.filter((r) => r.some((f) => f.trim()));
-}
-
-/**
  * Parse labelled-button-texts.csv (columns: button_text, occurences, label), keeping only rows with a valid label.
+ * Options match the reader in tracker-radar-collector, which also writes this file.
  */
 export function parseButtonTextCsv(content: string): ButtonTextRow[] {
-    const [header, ...records] = parseCsvRecords(content);
-    if (!header) {
-        return [];
-    }
-    const columns = header.map((h) => h.trim());
-    const textIdx = columns.indexOf('button_text');
-    const occurencesIdx = columns.indexOf('occurences');
-    const labelIdx = columns.indexOf('label');
-    if (textIdx === -1 || occurencesIdx === -1 || labelIdx === -1) {
-        throw new Error(`unexpected CSV header: ${header.join(',')}`);
-    }
+    const records: Record<string, string>[] = parse(content, {
+        columns: true,
+        skip_empty_lines: true,
+        relax_column_count: true,
+        trim: true,
+    });
 
     const rows: ButtonTextRow[] = [];
     for (const record of records) {
-        const buttonText = record[textIdx]?.trim();
-        const occurences = Number.parseInt(record[occurencesIdx], 10);
-        const label = record[labelIdx]?.trim().toLowerCase() as ButtonRegexClassification;
+        const buttonText = record.button_text;
+        const occurences = Number.parseInt(record.occurences, 10);
+        const label = record.label?.toLowerCase() as ButtonRegexClassification;
         if (!buttonText || Number.isNaN(occurences) || !VALID_LABELS.includes(label)) {
             continue;
         }
