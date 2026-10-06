@@ -4,7 +4,7 @@
  */
 import fs from 'fs';
 import path from 'path';
-import { Command } from 'commander';
+import { parseArgs } from 'util';
 import { classifyButtonTextRegex } from '../lib/heuristics';
 import {
     buildLabelBenchmarks,
@@ -17,15 +17,26 @@ import {
 
 const DEFAULT_CSV_PATH = path.join(__dirname, '../tests-wtr/heuristics/fixtures/labelled-button-texts.csv');
 const TOP_FAILURES = 25;
+const USAGE = `Usage: npm run benchmark-buttons -- [--input <path>] [--top <n>]
 
-const program = new Command();
-program
-    .description('Benchmark classifyButtonTextRegex against labelled button texts (exact label match, occurrence-weighted)')
-    .option('-i, --input <path>', 'path to labelled button text CSV', DEFAULT_CSV_PATH)
-    .option('--top <n>', 'number of failure examples to print per label', (v) => parseInt(v, 10), TOP_FAILURES)
-    .parse(process.argv);
+Benchmark classifyButtonTextRegex against labelled button texts (exact label match, occurrence-weighted).
 
-const opts = program.opts<{ input: string; top: number }>();
+  -i, --input <path>  path to labelled button text CSV (default: ${path.relative(process.cwd(), DEFAULT_CSV_PATH)})
+  --top <n>           number of failure examples to print per label (default: ${TOP_FAILURES})
+  -h, --help          show this help`;
+
+const { values } = parseArgs({
+    options: {
+        input: { type: 'string', short: 'i', default: DEFAULT_CSV_PATH },
+        top: { type: 'string', default: String(TOP_FAILURES) },
+        help: { type: 'boolean', short: 'h' },
+    },
+});
+if (values.help) {
+    console.log(USAGE);
+    process.exit(0);
+}
+const opts = { input: values.input, top: parseInt(values.top, 10) };
 
 function printLabelBenchmark(b: LabelBenchmark) {
     console.log(`\n  ${b.label}`);
