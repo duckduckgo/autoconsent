@@ -1,10 +1,10 @@
 /**
- * Helpers for scoring the button classifier against labelled-button-texts.csv.
+ * Helpers for scoring the button classifier against data/labelled-button-texts.csv.
  * Shared by the WTR accuracy test and scripts/benchmark-button-classification.ts, so must not use Node or DOM APIs.
  */
 // browser ESM build, so the same import works in WTR and in Node
 import { parse } from 'csv-parse/browser/esm/sync';
-import { ButtonRegexClassification } from '../../lib/types';
+import { ButtonRegexClassification } from '../lib/types';
 
 const VALID_LABELS: readonly ButtonRegexClassification[] = ['settings', 'accept', 'reject', 'acknowledge', 'other'];
 

@@ -6,16 +6,9 @@ import fs from 'fs';
 import path from 'path';
 import { parseArgs } from 'util';
 import { classifyButtonTextRegex } from '../lib/heuristics';
-import {
-    buildLabelBenchmarks,
-    classifyRows,
-    formatExample,
-    LabelBenchmark,
-    parseButtonTextCsv,
-    pct,
-} from '../tests-wtr/heuristics/button-text-benchmark';
+import { buildLabelBenchmarks, classifyRows, formatExample, LabelBenchmark, parseButtonTextCsv, pct } from './button-text-benchmark';
 
-const DEFAULT_CSV_PATH = path.join(__dirname, '../tests-wtr/heuristics/fixtures/labelled-button-texts.csv');
+const DEFAULT_CSV_PATH = path.join(__dirname, '../data/labelled-button-texts.csv');
 const TOP_FAILURES = 25;
 const USAGE = `Usage: npm run benchmark-buttons -- [--input <path>] [--top <n>]
 

@@ -8,7 +8,7 @@ import {
     LabelBenchmark,
     parseButtonTextCsv,
     pct,
-} from './button-text-benchmark';
+} from '../../scripts/button-text-benchmark';
 
 // Minimum occurrence-weighted accuracy required per label.
 const MIN_WEIGHTED_ACCURACY = 0.9;
@@ -17,7 +17,7 @@ describe('classifyButtonTextRegex against labelled button texts', () => {
     let benchmarks: LabelBenchmark[];
 
     before(async () => {
-        const response = await fetch('/tests-wtr/heuristics/fixtures/labelled-button-texts.csv');
+        const response = await fetch('/data/labelled-button-texts.csv');
         const rows = parseButtonTextCsv(await response.text());
         expect(rows.length).to.be.greaterThan(0, 'expected labelled rows in the CSV');
         benchmarks = buildLabelBenchmarks(classifyRows(rows, classifyButtonTextRegex));
