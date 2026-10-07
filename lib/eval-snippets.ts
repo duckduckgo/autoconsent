@@ -118,6 +118,7 @@ export const snippets = {
         return true;
     },
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
+    EVAL_COOKIE_LAW_INFO_LEGACY_DETECT: () => typeof window.cli_show_cookiebar === 'function',
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
             document.cookie
