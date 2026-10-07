@@ -1,3 +1,31 @@
+# v16.47.0 (Wed Oct 07 2026)
+
+#### Rules
+
+- Rule update: controlgame [#1616](https://github.com/duckduckgo/autoconsent/pull/1616) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dalecarnegie [#1617](https://github.com/duckduckgo/autoconsent/pull/1617) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jpmorgan-chase [#1615](https://github.com/duckduckgo/autoconsent/pull/1615) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Bug Fixes
+
+- Don't wait for a DOM mutation after an attempt that skipped the heuristic [#1611](https://github.com/duckduckgo/autoconsent/pull/1611) ([@muodov](https://github.com/muodov))
+
+#### Dependencies
+
+- Upgrade TypeScript to 6 and add a 7-day Dependabot cooldown [#1607](https://github.com/duckduckgo/autoconsent/pull/1607) ([@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Use needs-code-update label and stop label events from cancelling the labeler [#1609](https://github.com/duckduckgo/autoconsent/pull/1609) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.46.0 (Tue Oct 06 2026)
 
 #### Rules
