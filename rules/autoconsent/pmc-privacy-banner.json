@@ -1,21 +1,9 @@
 {
     "name": "pmc-privacy-banner",
-    "comment": "Notice-only banner that renders before the site's OneTrust dialog. Detection waits for OneTrust to settle, so the OneTrust rule keeps priority in regions where it shows a dialog of its own.",
     "prehideSelectors": ["aside[aria-labelledby=\"pmc-privacy-banner-heading\"]"],
-    "detectCmp": [
-        { "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" },
-        { "exists": "#onetrust-consent-sdk" },
-        { "visible": "#onetrust-banner-sdk", "check": "none" }
-    ],
+    "detectCmp": [{ "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
     "detectPopup": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
     "optIn": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
-    "optOut": [
-        { "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" },
-        {
-            "comment": "safety net for the rare case where the OneTrust dialog shows up after this rule was picked",
-            "if": { "exists": "#onetrust-reject-all-handler" },
-            "then": [{ "waitForThenClick": "#onetrust-reject-all-handler", "timeout": 3000 }]
-        }
-    ],
+    "optOut": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
     "test": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]", "check": "none" }]
 }
