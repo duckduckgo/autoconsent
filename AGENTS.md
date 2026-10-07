@@ -154,6 +154,8 @@ shadow root or same-origin iframe.
 
 Check each breakage type separately and report a verdict on each, rather than a general "looks fine": **leftover overlay** (a banner remnant or backdrop still covering the page), **blocked scrolling** (a scroll or overflow lock left on html/body or the dialog), **blocked interaction** (clicks or taps not reaching the page), and **reload loop** (the rule still matching after the popup is dismissed and the page is reloaded).
 
+**Check a generic cosmetic rule on every site it applies to, not only the reported one.** A rule without a `urlPattern` hides elements on every site with that CMP, and each site can break differently. Run the breakage check on all known sites (the spec file, `data/coverage.json`, and the publicwww sites you tested), and report the verdicts for each site.
+
 When using `hide`, the CMP may lock scrolling or add overlays. Add fixes AFTER the `hide` step, marked `"optional": true`:
 
 | Problem | Fix |
