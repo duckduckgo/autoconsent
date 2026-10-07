@@ -6,13 +6,19 @@
     "optIn": [{ "waitForThenClick": "#btn-cookie-allow" }],
     "optOut": [
         {
-            "if": { "exists": "#btn-cookie-manage" },
-            "then": [
-                { "waitForThenClick": "#btn-cookie-manage" },
-                { "click": "#notice-cookie-block input:checked", "all": true },
-                { "click": "#btn-cookie-save" }
-            ],
-            "else": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+            "if": { "exists": "#notice-cookie-block #btn-cookie-decline" },
+            "then": [{ "waitForThenClick": "#notice-cookie-block #btn-cookie-decline" }],
+            "else": [
+                {
+                    "if": { "exists": "#btn-cookie-manage" },
+                    "then": [
+                        { "waitForThenClick": "#btn-cookie-manage" },
+                        { "click": "#notice-cookie-block input:checked", "all": true },
+                        { "click": "#btn-cookie-save" }
+                    ],
+                    "else": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+                }
+            ]
         }
     ]
 }
