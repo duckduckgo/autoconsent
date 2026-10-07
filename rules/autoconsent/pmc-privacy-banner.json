@@ -1,0 +1,9 @@
+{
+    "name": "pmc-privacy-banner",
+    "prehideSelectors": ["aside[aria-labelledby=\"pmc-privacy-banner-heading\"]"],
+    "detectCmp": [{ "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
+    "detectPopup": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
+    "optIn": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
+    "optOut": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
+    "test": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]", "check": "none" }]
+}
