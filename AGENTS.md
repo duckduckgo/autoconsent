@@ -147,6 +147,7 @@ shadow root or same-origin iframe.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - Generic rules without a urlPattern MUST have at least two sites in the spec file.
 - If the popup comes in different DOM structures, cover all of them in the spec file.
+- **Keep spec URLs current.** When a site in a spec file no longer uses the rule's CMP (it switched CMPs or dropped its banner), replace it with a site that does, found in `data/coverage.json` or with the `publicwww-search` skill, and check the new site like any other. Do not just delete it: generic rules still need two sites. First check every region the spec runs in; if the popup only stopped showing in some of them, adjust `onlyRegions` or `skipRegions` instead. For a site-specific rule, the site no longer using the CMP means the rule itself may be stale (see Updating existing rules).
 
 ### Breakage in cosmetic rules
 **Prefer a non-cosmetic rule.** A cosmetic (`hide`) rule is a last resort when there is no reject/dismiss path. If cosmetic is unavoidable, verify that hiding the element does not break the page and **report that evidence**. Cosmetic rule without breakage-check evidence is incomplete.
