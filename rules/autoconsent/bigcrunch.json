@@ -1,0 +1,39 @@
+{
+    "name": "bigcrunch",
+    "vendorUrl": "https://www.bigcrunch.com/",
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#bc-cmp-host", "#bc-cmp-host-auto"],
+    "detectCmp": [
+        {
+            "exists": ["#bc-cmp-host, #bc-cmp-host-auto", "#bc-cmp-banner"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#bc-cmp-host, #bc-cmp-host-auto", "#bc-cmp-banner-container:not([style*=\"display: none\"]) #bc-cmp-banner"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#bc-cmp-host, #bc-cmp-host-auto", "#bc-cmp-banner [data-action=accept-all]"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#bc-cmp-host, #bc-cmp-host-auto", "#bc-cmp-banner [data-action=reject-all]"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": [
+                "#bc-cmp-host, #bc-cmp-host-auto",
+                "#bc-cmp-banner-container:not([style*=\"display: none\"]) #bc-cmp-banner"
+            ],
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
