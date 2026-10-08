@@ -23,14 +23,18 @@ describe('classifyButtonTextRegex against labelled button texts', () => {
         benchmarks = buildLabelBenchmarks(classifyRows(rows, classifyButtonTextRegex));
     });
 
-    BENCHMARK_LABELS.forEach((label, i) => {
+    const benchmarkFor = (label: string) => benchmarks.find((b) => b.label === label)!;
+
+    BENCHMARK_LABELS.forEach((label) => {
+        // includes rows labelled 'other', e.g. withdraw-consent or policy links that must not be clicked
         it(`never predicts "${label}" for a button labelled differently`, () => {
-            const examples = benchmarks[i].falsePositiveExamples.slice(0, 10).map(formatExample).join('\n      ');
-            expect(benchmarks[i].falsePositiveExamples.length).to.equal(0, `false positives for "${label}":\n      ${examples}\n`);
+            const { falsePositiveExamples } = benchmarkFor(label);
+            const examples = falsePositiveExamples.slice(0, 10).map(formatExample).join('\n      ');
+            expect(falsePositiveExamples.length).to.equal(0, `false positives for "${label}":\n      ${examples}\n`);
         });
 
         it(`classifies >${MIN_WEIGHTED_ACCURACY * 100}% of weighted "${label}" buttons correctly`, () => {
-            const { weightedCorrect, weightedSupport } = benchmarks[i];
+            const { weightedCorrect, weightedSupport } = benchmarkFor(label);
             expect(weightedSupport).to.be.greaterThan(0, `expected labelled rows for "${label}"`);
             expect(weightedCorrect / weightedSupport).to.be.greaterThan(
                 MIN_WEIGHTED_ACCURACY,
