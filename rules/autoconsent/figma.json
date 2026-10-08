@@ -1,0 +1,62 @@
+{
+    "name": "figma",
+    "vendorUrl": "https://www.figma.com/",
+    "runContext": {
+        "main": true,
+        "frame": true,
+        "urlPattern": "^https://(www|consent)\\.figma\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div[role=alertdialog] > div:nth-child(2) > button .btn-text, div[role=alertdialog] > button:nth-child(2) .btn-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=alertdialog] > div:nth-child(2) > button .btn-text, div[role=alertdialog] > button:nth-child(2) .btn-text"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "div[role=alertdialog] > div:nth-child(2) > button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "div[role=alertdialog] > div:nth-child(2) > button:first-child"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "div[role=alertdialog] > button:last-child"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "div[role=alertdialog] > div:nth-child(2) > button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "div[role=alertdialog] > div:nth-child(2) > button:last-child"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "div[role=alertdialog] > button:nth-child(2)"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "pref=%7B%22t%22%3A%22"
+        },
+        {
+            "cookieContains": "%22m%22%3Afalse%7D"
+        }
+    ]
+}
