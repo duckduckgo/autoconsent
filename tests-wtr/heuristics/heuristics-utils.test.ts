@@ -92,6 +92,7 @@ describe('checkHeuristicPatterns with Russian popups', () => {
             'Сохраняем куки на вашем устройстве',
             'На сайте установлены cookie-файлы',
             'Оставаясь на сайте, вы соглашаетесь с политикой в отношении файлов cookie',
+            'Сайт обрабатывает пользовательские данные с использованием файлов, сохраняемых в браузере пользователя, в соответствии с Условиями.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
