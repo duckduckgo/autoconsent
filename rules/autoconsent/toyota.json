@@ -9,27 +9,38 @@
     "prehideSelectors": ["#cookie-banner.visible"],
     "detectCmp": [
         {
-            "exists": "#cookie-banner.visible .cookie-banner__container .cookie-banner__accept"
+            "exists": "#cookie-banner .cookie-banner__container [data-cookie-preferences-button]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-banner.visible .cookie-banner__container .cookie-banner__accept"
+            "visible": "#cookie-banner.visible .cookie-banner__container"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookie-banner.visible .cookie-banner__container .cookie-banner__accept"
+            "waitForThenClick": "#cookie-banner.visible .cookie-banner__dismiss"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookie-banner.visible .cookie-banner__container .cookie-banner__reject"
+            "waitForThenClick": "#cookie-banner.visible [data-cookie-preferences-button]"
+        },
+        {
+            "waitForVisible": "#ensModalWrapper #ensSave"
+        },
+        {
+            "click": "#ensModalWrapper .ensCheckbox:checked:not(:disabled):not(#EssentialCookiesSlide)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#ensModalWrapper #ensSave"
         }
     ],
     "test": [
         {
-            "cookieContains": "TOYOTANATIONAL_ENSIGHTEN_PRIVACY_TargetingCookies"
+            "cookieContains": "ENSIGHTEN_PRIVACY_TargetingCookies=0"
         }
     ]
 }
