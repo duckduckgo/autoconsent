@@ -10,13 +10,19 @@
             "then": [{ "click": ".iubenda-cs-reject-btn" }],
             "else": [
                 {
-                    "waitForThenClick": ".iubenda-cs-customize-btn"
-                },
-                {
-                    "waitForThenClick": ".iub-btn-reject"
-                },
-                {
-                    "waitForThenClick": "#iubFooterBtn"
+                    "if": { "exists": ".iubenda-cs-customize-btn" },
+                    "then": [
+                        {
+                            "waitForThenClick": ".iubenda-cs-customize-btn"
+                        },
+                        {
+                            "waitForThenClick": ".iub-btn-reject"
+                        },
+                        {
+                            "waitForThenClick": "#iubFooterBtn"
+                        }
+                    ],
+                    "else": [{ "hide": "#iubenda-cs-banner" }]
                 }
             ]
         }
