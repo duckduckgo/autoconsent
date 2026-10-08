@@ -9,12 +9,13 @@
     ],
     "detectPopup": [
         {
-            "visible": "#sd-cmp"
+            "visible": "#sd-cmp [role='dialog']",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#sd-cmp .sd-cmp-3cRQ2"
+            "waitForThenClick": "xpath/(//div[@id='sd-cmp']//span[@data-sd-override='choiceButtons'])[last()]"
         }
     ],
     "optOut": [
