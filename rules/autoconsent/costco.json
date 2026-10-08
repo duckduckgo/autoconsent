@@ -1,0 +1,27 @@
+{
+    "name": "costco",
+    "vendorUrl": "https://www.costco.ca/",
+    "cosmetic": true,
+    "comment": "The banner runs on Transcend airgap, whose setConsent() rejects consent changes unless the click event is trusted (isTrusted), so scripted clicks can't save an opt-out.",
+    "prehideSelectors": ["#costco-consent-manager [data-testid=\"Popup\"]"],
+    "detectCmp": [
+        {
+            "exists": "#costco-consent-manager [data-testid=\"Popup\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#costco-consent-manager [data-testid=\"Popup\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#costco-consent-manager [data-testid=\"Popup\"] button.MuiButton-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#costco-consent-manager"
+        }
+    ]
+}
