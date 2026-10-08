@@ -9,5 +9,7 @@ generateCMPTests('datagrail', [
     'https://www.getmyperks.com/',
     // dg-bottom position variant
     'https://kindthread.com/',
+    // dg-left, direct reject_all button ("Accept Required Only" label)
+    'https://developer.hashicorp.com/',
     // 'https://www.topps.com/', // cloudflare botwall
 ]);
