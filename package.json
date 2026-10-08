@@ -36,6 +36,7 @@
     "launch:firefox": "web-ext run -s dist/addon-firefox",
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
+    "benchmark-buttons": "ts-node scripts/benchmark-button-classification.ts",
     "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts",
     "check-pr-release-labels": "ts-node scripts/check-pr-release-labels.ts"
   },
@@ -59,6 +60,7 @@
     "bulma": "^1.0.2",
     "chai": "^6.0.1",
     "chokidar-cli": "^3.0.0",
+    "csv-parse": "^6.2.1",
     "esbuild": "^0.28.0",
     "eslint": "^10.0.3",
     "globals": "^17.4.0",

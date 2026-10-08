@@ -180,10 +180,10 @@ const REJECT_PATTERNS_ENGLISH = [
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
-    // "allow necessary cookies continue", "use essential cookies only", "functional only", "i confirm necessary"
+    // "allow necessary cookies continue", "use essential cookies only", "functional only", "essential only cookies", "i confirm necessary"
     /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
-    /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s+only\s*$/is,
+    /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s+((cookies\s+)?only|only\s+cookies)\s*$/is,
 
     // e.g. "do not sell or share my personal information", "opt out of sale ..." (CCPA)
     /do\s+not\s+sell|opt\s+out\s+of\s+sale/is,
@@ -645,13 +645,13 @@ export const ACCEPT_PATTERNS = [
     /^continue (and accept|using cookies|with (all|recommended cookies|cookies))$/is,
 
     // DE accept verbs
-    /^(alle[sn]?\s+|allem\s+|ich\s+|cookies\s+|ausgewählte\s+|webanalyse\s+)?(cookies?\s+)?(akzeptieren|annehmen|zustimmen|zulassen|erlauben|einwilligen|aktivieren|auswählen)(\s+(und\s+)?(weiter|schließen))?\s*$/is,
+    /^(alle[sn]?\s+|allem\s+|ich\s+|cookies\s+|ausgewählte\s+|webanalyse\s+)?(cookies?\s+)?(akzeptieren|annehmen|zustimmen|zulassen|erlauben|einwilligen|aktivieren|auswählen)(\s+(und\s+)?(weiter|schlie(ß|ss)en))?\s*$/is,
     /^((meine\s+)?auswahl|alle)\s+(bestätigen|akzeptieren|auswählen)$/is,
     /^(alle[nm]?\s+)?(zustimmen|einverstanden|einwilligung|zustimmung)$/is,
     /^ich (bin einverstanden|akzeptiere( alle)?|stimme zu)$/is,
 
     // NL accept verbs
-    /^(ja,?\s+)?(alle[s]?\s+|ik\s+)?(cookies?\s+)?(accepteer|accepteren|toestaan|aanvaard|aanvaarden|ga akkoord|akkoord)(\s+(en\s+(sluiten|doorgaan|verdergaan)|cookies|alle))?\s*$/is,
+    /^(ja,?\s+)?(alle[s]?\s+|ik\s+)?(cookies?\s+)?(accepteer|accepteren|toestaan|aanvaard|aanvaarden|ga akkoord|akkoord)(\s+((en\s+)?sluiten|en\s+(doorgaan|verdergaan)|cookies|alle))?\s*$/is,
     /^(selectie (accepteren|toestaan)|accepteer (selectie|alle)|alle (toestaan|accepteren|aanvaarden)|ja, (dat is prima|prima|alles toestaan|accepteren|ik accepteer cookies|ik ga akkoord)|is goed)$/is,
 
     // FR accept verbs
@@ -813,11 +813,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     /understood$/is,
     'confirm my choices',
 
-    // French (FR)
-    'accepter fermer',
-
     // German (DE)
-    'akzeptieren schließen',
     'speichern schließen',
 
     // Spanish (ES)
