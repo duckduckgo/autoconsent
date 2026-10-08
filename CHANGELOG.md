@@ -1,3 +1,23 @@
+# v16.48.0 (Thu Oct 08 2026)
+
+#### Rules
+
+- Rule update: Tealium [#1626](https://github.com/duckduckgo/autoconsent/pull/1626) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: pmc-privacy-banner [#1621](https://github.com/duckduckgo/autoconsent/pull/1621) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Click Decline in the burpee.com rule when the banner has one [#1619](https://github.com/duckduckgo/autoconsent/pull/1619) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Check generic cosmetic rules for breakage on every site [#1634](https://github.com/duckduckgo/autoconsent/pull/1634) ([@muodov](https://github.com/muodov))
+- Tell agents to keep spec URLs current [#1624](https://github.com/duckduckgo/autoconsent/pull/1624) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.47.0 (Wed Oct 07 2026)
 
 #### Rules
