@@ -59,3 +59,9 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// Notice-only banner with an icon Close button, shown in all regions.
+generateCMPTests('Onetrust', ['https://www.bestbuy.ca/en-ca'], {
+    testOptIn: false,
+    testSelfTest: false,
+});
