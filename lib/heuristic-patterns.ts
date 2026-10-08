@@ -186,7 +186,8 @@ const REJECT_PATTERNS_ENGLISH = [
     /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s+((cookies\s+)?only|only\s+cookies)\s*$/is,
 
     // e.g. "do not sell or share my personal information", "opt out of sale ..." (CCPA)
-    /do\s+not\s+sell|opt\s+out\s+of\s+sale/is,
+    // "do not sell page" is a link; "do not sellcookie settings" is two concatenated buttons
+    /do\s+not\s+sell(?!\s*(page|cookie settings))|opt\s+out\s+of\s+sale/is,
 
     // e.g. "opt-out of sale/share or targeted advertising", "opt-out of advertising/social media cookies"
     /^opt[ -]?out of /is,
@@ -235,10 +236,11 @@ const REJECT_PATTERNS_DUTCH = [
 const REJECT_PATTERNS_FRENCH = [
     // refuser / rejeter / interdire / décliner (reject verbs, any position)
     // "refuser et s'abonner" / "refuser et payer" are excluded via BUTTON_NEVER_MATCH_PATTERNS
-    /(^|\s)(refus|rejet|rejeter|interdire|interdis|déclin|declin)/is,
+    // skip English prose such as "cookies that you can refuse"
+    /^(?!.*\bcan refuse\b)(.*\s)?(refus|rejet|rejeter|interdire|interdis|déclin|declin)/is,
 
     // only necessary / essential / technical / functional
-    /(uniquement|seulement|indispensable|strictement nécessaire|que les cookies\s+(nécessaires|techniques|essentiels|indispensables|fonctionnels))/is,
+    /^(?=.*(cookie|nécessaire|essentiel|techni|requis|obligatoire|fonctionnel|indispensable|sdk)).*(uniquement|seulement|indispensable|strictement nécessaire|que les cookies\s+(nécessaires|techniques|essentiels|indispensables|fonctionnels))/is,
 
     // continue/proceed without accepting; refuse everything; disable purposes
     /(sans accepter|ne pas accepter|je naccepte rien|je désactive)/is,
@@ -413,6 +415,9 @@ export const REJECT_PATTERNS = [
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [
+    // text of several concatenated buttons, or popup body text rather than a button
+    /accept all.*reject all|reject all.*accept all/is,
+    /^.{300,}$/s,
     /pay|subscribe/is,
     /abonneer/is,
     /abonnier/is,
@@ -460,9 +465,11 @@ export const SETTINGS_PATTERNS = [
     // Multilingual "open customization" patterns: a customization verb next to a
     // cookie/preference/settings/options/details/purposes noun (both word orders).
     // The negative lookahead avoids policy links and save/confirm/accept phrases (those are accept/acknowledge/other).
-    /^(?!.*\b(policy|policies|notice|statement|impressum|richtlinie|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)\b.{0,20}(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b/is,
-    /^(?!.*\b(policy|policies|notice|statement|impressum|richtlinie|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b.{0,15}(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)\b/is,
+    /^(?!.*\b(policy|policies|notice|statement|impressum|\w*richtlinie\w*|\w*erklärung|page|beschrijving|privacy$|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|einstellen|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)\b.{0,20}(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b/is,
+    /^(?!.*\b(policy|policies|notice|statement|impressum|\w*richtlinie\w*|\w*erklärung|page|beschrijving|privacy$|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b(.{0,14}\W)?(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|einstellen|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)\b/is,
 
+    // settings noun + cookies, e.g. "paramètres des cookies", "ajustes de cookies", "instellingen voor cookies en diensten"
+    /^(paramètres|préférences|réglages|ajustes|opciones|elección|preferencias|instellingen)( (de|des|les|voor|van))? cookies( (et des|en|y) (services|diensten|servicios))?$/is,
     'settings',
     'preferences',
     /customi(s|z)e/is,
@@ -476,8 +483,8 @@ export const SETTINGS_PATTERNS = [
     'cookieconsent preferences',
     /privacy choices/is,
     /^(privacy|cookie|custom) settings$/is,
-    /^cookies? (settings|preferences|setting)$/is,
-    /(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
+    /^cookies? (settings|preferences|setting)(?!.*\bdo not\b)/is,
+    /^(?!.*\bpolic(y|ies)\b).*(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
     'cookie consent options',
     'privacy controls',
     // German
@@ -668,7 +675,7 @@ export const ACCEPT_PATTERNS = [
     'yes',
     /accept all above/is,
     'close and accept',
-    /accept all$/is,
+    /(^|\s)accept all$/is,
     'im ok with that',
 
     // Spanish (ES)
@@ -696,6 +703,8 @@ export const ACCEPT_PATTERNS = [
     'accepta',
     'accepta totes les cookies',
     'accepta-ho tot',
+    // FR/CA "d'accord" / "d'acord"
+    /^dac?cord( fermer)?$/is,
     'accepta-les totes',
     'acceptar galetes',
     'acceptar i tancar',
@@ -744,7 +753,6 @@ export const ACCEPT_PATTERNS = [
     'akceptuję!',
     'ok, zgadzam się',
     'potwierdzam wszystkie',
-    'przejdź do serwisu',
     'tak',
     'tak, zgadzam się na wszystkie pliki cookie',
     'tak, zgadzam się',
@@ -826,9 +834,6 @@ export const ACKNOWLEDGE_PATTERNS = [
     'seguir',
     'vale',
     '¡vamos!',
-
-    // Catalan (CA)
-    'dacord',
 
     // Polish (PL)
     'kontynuuj',

@@ -25,7 +25,7 @@ These patterns decide what autoconsent clicks in users' browsers, and tracker-ra
 
 Stop when all three are met:
 
-1. **Zero false positives** (occurrence-weighted total across labels)
+1. **Zero false positives** (occurrence-weighted total across labels, including rows labelled `other` predicted as a button type)
 2. **Per-label weighted coverage > 90%** for each of `settings`, `accept`, `reject`, and `acknowledge` (`other` is excluded from optimization)
 3. **Pattern consolidation**: merge literal clusters into regexes where safe; dedupe exact duplicates
 
@@ -115,7 +115,7 @@ When fixing false positives, search `lib/heuristic-patterns.ts` for the literal 
 Before adding pattern `P` for label `L`:
 
 1. Apply `cleanButtonText` when matching (same as runtime).
-2. Scan the labelled CSV: if `P` would match a row where `label !== L`, that is a collision. Include rows labelled `other`: the benchmark does not count those as false positives, but autoconsent would still click them.
+2. Scan the labelled CSV: if `P` would match a row where `label !== L`, that is a collision. This includes rows labelled `other`, which the benchmark counts as false positives.
 3. If a high-occurrence collision exists, narrow `P` or skip it.
 4. String patterns match the exact cleaned text; regex patterns use `.test(cleanedText)`.
 
