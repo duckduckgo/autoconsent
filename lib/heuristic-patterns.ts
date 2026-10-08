@@ -201,7 +201,6 @@ const REJECT_PATTERNS_ENGLISH = [
     /^no,? thank(s| you)$/is,
     /^opt[ -]out$/is,
     'dont enable',
-    'withdraw consent',
     'i do not agree',
 ];
 
@@ -318,7 +317,7 @@ const REJECT_PATTERNS_SPANISH = [
     /^(no,?\s+)?(solo|sólo|només)\s+(usar\s+|las?\s+|los\s+|lo\s+)?.{0,20}(necesari|esencial|estrictamente)/is,
 
     // refusals / opt-outs
-    /^(no acept|no consentir|no permitir|no estoy de acuerdo|no,? gracias|sin consentimiento|revocar consentimiento|continuar sin aceptar|prefiero rechazarlas|descartar todas)/is,
+    /^(no acept|no consentir|no permitir|no estoy de acuerdo|no,? gracias|sin consentimiento|continuar sin aceptar|prefiero rechazarlas|descartar todas)/is,
 
     'acceptar només les necessàries',
     'només sutilitzen cookies quan és necessari',
