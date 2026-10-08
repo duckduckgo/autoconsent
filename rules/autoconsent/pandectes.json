@@ -1,7 +1,7 @@
 {
     "name": "pandectes",
     "vendorUrl": "https://pandectes.io/",
-    "prehideSelectors": ["#pandectes-banner"],
+    "prehideSelectors": ["#pandectes-banner", "pandectes-cmp"],
     "detectCmp": [
         {
             "any": [{ "exists": "#pandectes-banner" }, { "exists": ["pandectes-cmp", "dialog.notice"] }]
