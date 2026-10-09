@@ -1,5 +1,4 @@
 import generateCMPTests from '../playwright/runner';
-// Temporary change to trigger Jenkins E2E for the Oxylabs pass; revert before merge.
 
 generateCMPTests(
     'Cybotcookiebot',
@@ -30,6 +29,7 @@ generateCMPTests(
         'https://www.dezeen.com/',
         'https://www.l3harris.com/',
         'https://www.gog.com/',
+        'https://www.timeshighereducation.com/',
     ],
     {},
 );
