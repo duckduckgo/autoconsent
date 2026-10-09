@@ -2,7 +2,7 @@
     "name": "fullertonhotels.com",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.fullertonhotels.com/"
+        "vendorUrl": "https://secureprivacy.ai/"
     },
     "runContext": {
         "main": true,
@@ -16,7 +16,8 @@
     ],
     "detectPopup": [
         {
-            "visible": ["#ifrmCookieBanner", "#sp-decline"]
+            "visible": ["#ifrmCookieBanner", "#sp-accept, #sp-decline"],
+            "check": "any"
         }
     ],
     "optIn": [
@@ -29,8 +30,11 @@
             "wait": 500
         },
         {
-            "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
-            "comment": "Decline"
+            "waitFor": ["#ifrmCookieBanner", "#sp-decline"]
+        },
+        {
+            "click": ["#ifrmCookieBanner", "#sp-decline"],
+            "comment": "Decline is hidden in notice-only variants, but clicking it still records a rejection"
         }
     ],
     "test": []
