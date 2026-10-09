@@ -1,0 +1,9 @@
+{
+    "name": "kaspersky-cookies-notification",
+    "prehideSelectors": [".gdprPopup:has(> .gdprPopupContainer > .gdprButton)"],
+    "cosmetic": true,
+    "detectCmp": [{ "exists": "script#kasp-cookie-alert-js" }, { "exists": ".gdprPopup > .gdprPopupContainer > .gdprButton" }],
+    "detectPopup": [{ "visible": ".gdprPopup > .gdprPopupContainer > .gdprButton" }],
+    "optIn": [{ "waitForThenClick": ".gdprPopup .gdprButton" }],
+    "optOut": [{ "hide": ".gdprPopup" }]
+}
