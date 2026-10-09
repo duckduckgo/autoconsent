@@ -154,6 +154,13 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // the refuse button otherwise shows a blocking window.confirm() and aborts if dismissed
+    EVAL_ENFOLD_DISABLE_REFUSE_ALERT: () => {
+        if (window.AviaPrivacyCookieAdditionalData) {
+            window.AviaPrivacyCookieAdditionalData.cookie_refuse_button_alert = '';
+        }
+        return true;
+    },
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
