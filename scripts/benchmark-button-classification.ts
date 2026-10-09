@@ -50,6 +50,18 @@ function printLabelBenchmark(b: LabelBenchmark) {
     }
 }
 
+function printOtherBenchmark(b: LabelBenchmark) {
+    console.log(`\n  ${b.label}`);
+    console.log(
+        `    correctly labelled: ${b.rowCorrect}/${b.rowSupport} rows (${pct(b.rowCorrect, b.rowSupport)}), ${b.weightedCorrect}/${b.weightedSupport} weighted (${pct(b.weightedCorrect, b.weightedSupport)})`,
+    );
+    // false positives for 'other' are missed buttons, already listed under each button label
+    console.log(`    top misclassified (labelled other, predicted a button type):${b.missedExamples.length === 0 ? ' (none)' : ''}`);
+    for (const example of b.missedExamples.slice(0, opts.top)) {
+        console.log(`      ${formatExample(example)}`);
+    }
+}
+
 function main() {
     const inputPath = path.resolve(opts.input);
     const rows = parseButtonTextCsv(fs.readFileSync(inputPath, 'utf8'));
@@ -58,18 +70,21 @@ function main() {
         process.exit(1);
     }
 
-    const benchmarks = buildLabelBenchmarks(classifyRows(rows, classifyButtonTextRegex));
+    const allBenchmarks = buildLabelBenchmarks(classifyRows(rows, classifyButtonTextRegex));
+    const benchmarks = allBenchmarks.filter((b) => b.label !== 'other');
+    const otherBenchmark = allBenchmarks.find((b) => b.label === 'other')!;
     const total = (key: 'rowSupport' | 'weightedSupport' | 'rowCorrect' | 'weightedCorrect' | 'weightedFalsePositives') =>
         benchmarks.reduce((sum, b) => sum + b[key], 0);
 
     console.log(`Input: ${inputPath} (${rows.length} labelled rows)`);
-    console.log('\nclassifyButtonTextRegex benchmark (excluding other)');
+    console.log('\nclassifyButtonTextRegex benchmark (button labels; false positives include rows labelled other)');
     console.log(
         `  correctly labelled: ${total('rowCorrect')}/${total('rowSupport')} rows, ${total('weightedCorrect')}/${total('weightedSupport')} weighted (${pct(total('weightedCorrect'), total('weightedSupport'))})`,
     );
     console.log(`  false positives (weighted): ${total('weightedFalsePositives')}`);
     console.log(`  missed (weighted): ${total('weightedSupport') - total('weightedCorrect')}`);
     benchmarks.forEach(printLabelBenchmark);
+    printOtherBenchmark(otherBenchmark);
 }
 
 main();
