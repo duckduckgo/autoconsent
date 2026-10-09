@@ -18,38 +18,17 @@ permissions:
 
 jobs:
     # No concurrency group here: a 'labeled' event right after 'opened' must not cancel this job.
+    # Only on 'opened': a later run would re-add category labels that the author replaced.
     path-labels:
-        if: >-
-            ${{
-              github.event.action == 'opened' ||
-              github.event.action == 'reopened' ||
-              github.event.action == 'ready_for_review'
-            }}
+        if: ${{ github.event.action == 'opened' }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-
-            # A PR opened with a category label keeps it: only the other path-based
-            # labels apply. Labels are read from the API, since ones added right
-            # after the PR was opened are missing from the event payload.
-            - name: Choose labeler configuration
-              id: labeler_config
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  PR_NUMBER: ${{ github.event.pull_request.number }}
-              run: |
-                  config=.github/labeler.yml
-                  if gh pr view "$PR_NUMBER" -R "$GITHUB_REPOSITORY" --json labels --jq '.labels[].name' | grep -q '^category: '; then
-                      config="$RUNNER_TEMP/labeler.yml"
-                      yq 'with_entries(select(.key | test("^category: ") | not))' .github/labeler.yml >"$config"
-                  fi
-                  echo "path=$config" >>"$GITHUB_OUTPUT"
 
             - name: Apply path-based labels
               uses: actions/labeler@v6
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
-                  configuration-path: ${{ steps.labeler_config.outputs.path }}
                   sync-labels: false
 
     release-labels:
