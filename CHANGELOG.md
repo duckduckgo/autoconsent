@@ -1,3 +1,39 @@
+# v16.49.0 (Fri Oct 09 2026)
+
+#### Rules
+
+- Rule update: ddg_mac_desktop (use) CPM magic report: us.select-sport.com [#1645](https://github.com/duckduckgo/autoconsent/pull/1645) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: evium.de [#1643](https://github.com/duckduckgo/autoconsent/pull/1643) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pandectes [#1641](https://github.com/duckduckgo/autoconsent/pull/1641) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ensembleartsphilly [#1618](https://github.com/duckduckgo/autoconsent/pull/1618) ([@daxtheduck](https://github.com/daxtheduck))
+- Add button classification benchmarking suite [#1604](https://github.com/duckduckgo/autoconsent/pull/1604) ([@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+- Rule update: costco.ca cookie prompt not handled [#1639](https://github.com/duckduckgo/autoconsent/pull/1639) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: ddg_mac_desktop (use) CPM magic report: www.mcgeeandco.com [#1637](https://github.com/duckduckgo/autoconsent/pull/1637) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (ase) CPM magic report: www.ctgt.ai [#1636](https://github.com/duckduckgo/autoconsent/pull/1636) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM feedback: shinden.pl [#1635](https://github.com/duckduckgo/autoconsent/pull/1635) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on jfe-holdings.co.jp (Datasign CMP) [#1633](https://github.com/duckduckgo/autoconsent/pull/1633) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on www.jclewislincoln.com [#1632](https://github.com/duckduckgo/autoconsent/pull/1632) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on catflooringaccessories.com [#1631](https://github.com/duckduckgo/autoconsent/pull/1631) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on technologylaw.fkks.com (Passle CMP) [#1630](https://github.com/duckduckgo/autoconsent/pull/1630) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: goaexperience.co.uk (Cookieconsent CMP) [#1629](https://github.com/duckduckgo/autoconsent/pull/1629) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (ase) CPM magic report: www.poconopoolandspallc.com [#1628](https://github.com/duckduckgo/autoconsent/pull/1628) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie consent not dismissed on https://www.yogurtland.com/ (no-reject version of Iubenda) [#1625](https://github.com/duckduckgo/autoconsent/pull/1625) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on goorin.com [#1623](https://github.com/duckduckgo/autoconsent/pull/1623) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: https://www.headphonecheck.com/ (Borlabs CMP, Easylist breakage) [#1622](https://github.com/duckduckgo/autoconsent/pull/1622) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- oxylabs-testing: note what happens over the new-session limit [#1640](https://github.com/duckduckgo/autoconsent/pull/1640) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.48.0 (Thu Oct 08 2026)
 
 #### Rules
