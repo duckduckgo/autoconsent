@@ -33,7 +33,7 @@
  */
 
 import path from 'path';
-import { connectOxylabs, redactCredentials } from '../../../../playwright/oxylabs.mjs';
+import { connectOxylabs, createCaptchaTracker, redactCredentials } from '../../../../playwright/oxylabs.mjs';
 import {
     CORE_REGIONS,
     emptyResult,
@@ -61,79 +61,23 @@ function redactResult(result) {
     return result;
 }
 
-// Captcha events arrive as window messages from the Oxylabs runtime. A listener in autoconsent's
-// isolated world forwards them over its CDP binding: Agent Browser drops main-world bindings, so
-// page.exposeBinding can't deliver them. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
-const CAPTCHA_MESSAGE = 'oxylabsCaptcha';
-// Agent Browser sends `oxylabs-captcha-solve-start`; the docs list `-start`, `-end`, `-solve-end` and `-error`.
-const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
-const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
-const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-error'];
-// Longest a test pauses for solving, counted from the first start event: the wait in Oxylabs' example.
-const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
-const captchaListenerScript = `
-window.addEventListener("message", (e) => {
-    if (e?.data?.source === "oxylabs-runtime" && typeof e.data.type === "string") {
-        window.autoconsentSendMessage({ type: "${CAPTCHA_MESSAGE}", event: e.data.type });
-    }
-});
-`;
-
 /**
- * Inject autoconsent into a page's isolated world via CDP and, with `solveCaptcha`, forward
+ * Inject autoconsent into a page's isolated world via CDP and, unless `solveCaptcha` is false, forward
  * Oxylabs captcha events to the Node side. Call BEFORE navigating to the target URL.
  * @param {Page} page
  * @param {Partial<TestOptions>} [options]
  * @returns {Promise<OxylabsAutoconsentContext>}
  */
 export async function injectAutoconsent(page, options = {}) {
-    /** @type {{ detected: boolean, solved: boolean|null }} */
-    const captcha = { detected: false, solved: null };
-    /** @type {() => void} */
-    let resolveCaptcha = () => {};
-    /** @type {Promise<void>} */
-    const captchaPromise = new Promise((resolve) => {
-        resolveCaptcha = resolve;
-    });
-
-    let solving = false;
-    /** @type {number|null} */
-    let firstStartAt = null;
-
-    function handleCaptchaEvent(/** @type {string} */ type) {
-        if (CAPTCHA_START_EVENTS.includes(type)) {
-            captcha.detected = true;
-            solving = true;
-            firstStartAt ??= Date.now();
-        } else if (CAPTCHA_END_EVENTS.includes(type)) {
-            captcha.detected = true;
-            captcha.solved = true;
-            solving = false;
-            resolveCaptcha();
-        } else if (CAPTCHA_ERROR_EVENTS.includes(type)) {
-            captcha.detected = true;
-            captcha.solved = false;
-            solving = false;
-            resolveCaptcha();
-        }
-    }
-
-    // Oxylabs gives no deadline for a start event, so autoconsent's wait pauses whenever one arrives.
-    const isSolving = () => solving && firstStartAt !== null && Date.now() - firstStartAt < CAPTCHA_SOLVE_TIMEOUT_MS;
-
+    const tracker = createCaptchaTracker();
     /** @type {import('../../../lib/regional-testing/harness.mjs').IsolatedWorldExtension} */
-    const captchaListener = {
-        script: captchaListenerScript,
-        onMessage: (msg) => {
-            if (msg?.type === CAPTCHA_MESSAGE) handleCaptchaEvent(msg.event);
-        },
-    };
-    const ctx = await injectThrough(page, options, 'oxylabs', options.solveCaptcha ? captchaListener : {});
+    const captchaListener = { script: tracker.script, onMessage: tracker.handleMessage };
+    const ctx = await injectThrough(page, options, 'oxylabs', (options.solveCaptcha ?? true) ? captchaListener : {});
     return {
         ...ctx,
-        waitForCompletion: (timeout, detectionTimeout) => ctx.waitForCompletion(timeout, detectionTimeout, isSolving),
-        captcha,
-        captchaPromise,
+        waitForCompletion: (timeout, detectionTimeout) => ctx.waitForCompletion(timeout, detectionTimeout, tracker.isSolving),
+        captcha: tracker.state,
+        captchaPromise: tracker.done,
     };
 }
 

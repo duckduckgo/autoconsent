@@ -2,7 +2,6 @@ import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { test as base, expect, Page, Frame, TestInfo, Response } from '@playwright/test';
-import { waitFor } from '../lib/utils';
 import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
@@ -11,7 +10,7 @@ import compactRules from '../rules/compact-rules.json';
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
 import { injectIntoIsolatedWorld } from './isolated-world.mjs';
-import { connectOxylabs } from './oxylabs.mjs';
+import { connectOxylabs, createCaptchaTracker } from './oxylabs.mjs';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []
@@ -110,6 +109,8 @@ class TestRun {
     received: ContentScriptMessage[] = [];
     screenshotCounter = 0;
     selfTestTarget: ContentScriptTarget | null = null;
+    // Oxylabs solves captchas on the page; waits pause while it does.
+    captcha = useOxylabs ? createCaptchaTracker() : null;
 
     constructor(page: Page, testInfo: TestInfo, url: string, expectedCmp: string, options: TestOptions, autoAction: AutoAction | null) {
         this.page = page;
@@ -143,13 +144,18 @@ class TestRun {
         if (useIsolatedWorld) {
             await injectIntoIsolatedWorld(
                 this.page,
-                (transport) => (msg, frameRef) =>
-                    this.messageCallback(msg, {
+                (transport) => async (msg, frameRef) => {
+                    if (this.captcha?.handleMessage(msg)) {
+                        return;
+                    }
+                    await this.messageCallback(msg, {
                         send: (message) => transport.sendToContentScript(frameRef, message),
                         evalInMainWorld: (code) => transport.evalInMainWorld(frameRef, code),
                         isMainFrame: transport.isMainFrame(frameRef),
-                    }),
+                    });
+                },
                 contentScript,
+                this.captcha?.script,
             );
         } else {
             await this.page.exposeBinding('autoconsentSendMessage', ({ frame }, msg: ContentScriptMessage) =>
@@ -340,8 +346,19 @@ class TestRun {
         return this.findReceivedMessages(msg).length > 0;
     }
 
-    waitForMessage(msg: Partial<ContentScriptMessage>, maxTimes = 50, interval = 500) {
-        return waitFor(() => this.isMessageReceived(msg), maxTimes, interval);
+    async waitForMessage(msg: Partial<ContentScriptMessage>, maxTimes = 50, interval = 500) {
+        let attempts = 0;
+        while (!this.isMessageReceived(msg)) {
+            if (attempts >= maxTimes) {
+                return false;
+            }
+            await new Promise((resolve) => setTimeout(resolve, interval));
+            // time spent waiting for the captcha solver doesn't count
+            if (!this.captcha?.isSolving()) {
+                attempts++;
+            }
+        }
+        return true;
     }
 
     async assertMessageReceived(

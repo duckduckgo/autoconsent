@@ -18,7 +18,7 @@
 /**
  * @typedef {Object} OxylabsBrowserOptions
  * @property {OxylabsDevice} [device] - Oxylabs ?p_device= value. Oxylabs defaults to 'desktop'.
- * @property {boolean} [solveCaptcha=false] - Send ?solve_captcha=true: let Oxylabs solve captchas on the page. Needs the feature enabled on the account.
+ * @property {boolean} [solveCaptcha=true] - Send ?solve_captcha=true: let Oxylabs solve captchas on the page.
  */
 
 import { chromium } from '@playwright/test';
@@ -76,7 +76,7 @@ export function buildOxylabsEndpoint(regionKey, opts = {}, env = process.env) {
         params.set('p_device', opts.device);
     }
     // Accounts without captcha solving get HTTP 400 for this param, so only send it when asked.
-    if (opts.solveCaptcha) {
+    if (opts.solveCaptcha ?? true) {
         params.set('solve_captcha', 'true');
     }
     // user/password are interpolated raw — Oxylabs expects literal characters in
@@ -110,8 +110,87 @@ export async function connectOxylabs(regionKey, opts = {}) {
     } catch (e) {
         // The first line has the cause; the call log after it repeats the endpoint URL.
         const message = redactCredentials((e instanceof Error ? e.message : String(e)).split('\n')[0]);
-        const hint = opts.solveCaptcha && message.includes('400') ? ' (is captcha solving enabled for this Oxylabs account?)' : '';
+        const hint =
+            (opts.solveCaptcha ?? true) && message.includes('400') ? ' (is captcha solving enabled for this Oxylabs account?)' : '';
         // eslint-disable-next-line preserve-caught-error -- the original error carries the credentials
         throw new Error(message + hint);
     }
+}
+
+// Captcha events arrive as window messages from the Oxylabs runtime. A listener in autoconsent's
+// isolated world forwards them over its CDP binding: Agent Browser drops main-world bindings, so
+// page.exposeBinding can't deliver them. See https://developers.oxylabs.io/products/agent-browser/captcha-handling
+const CAPTCHA_MESSAGE = 'oxylabsCaptcha';
+// Agent Browser sends `oxylabs-captcha-solve-start`; the docs list `-start`, `-end`, `-solve-end` and `-error`.
+const CAPTCHA_START_EVENTS = ['oxylabs-captcha-start', 'oxylabs-captcha-solve-start'];
+const CAPTCHA_END_EVENTS = ['oxylabs-captcha-end', 'oxylabs-captcha-solve-end'];
+const CAPTCHA_ERROR_EVENTS = ['oxylabs-captcha-error', 'oxylabs-captcha-solve-error'];
+// Longest a test pauses for solving, counted from the first start event: the wait in Oxylabs' example.
+const CAPTCHA_SOLVE_TIMEOUT_MS = 60000;
+const captchaListenerScript = `
+window.addEventListener("message", (e) => {
+    if (e?.data?.source === "oxylabs-runtime" && typeof e.data.type === "string") {
+        window.autoconsentSendMessage({ type: "${CAPTCHA_MESSAGE}", event: e.data.type });
+    }
+});
+`;
+
+/**
+ * Tracks the Oxylabs captcha solver for one page. Run `script` in each isolated world next to the
+ * content script and pass every message from it to `handleMessage`.
+ * @typedef {Object} CaptchaTracker
+ * @property {{ detected: boolean, solved: boolean|null }} state - The solver state.
+ * @property {Promise<void>} done - Resolves when solving ends (success or error).
+ * @property {() => boolean} isSolving - Whether waits should pause for the solver.
+ * @property {string} script
+ * @property {(msg: any) => boolean} handleMessage - Returns true for a captcha event.
+ */
+
+/**
+ * @returns {CaptchaTracker}
+ */
+export function createCaptchaTracker() {
+    /** @type {{ detected: boolean, solved: boolean|null }} */
+    const state = { detected: false, solved: null };
+    /** @type {() => void} */
+    let resolveDone = () => {};
+    /** @type {Promise<void>} */
+    const done = new Promise((resolve) => {
+        resolveDone = resolve;
+    });
+
+    let solving = false;
+    /** @type {number|null} */
+    let firstStartAt = null;
+
+    function handleCaptchaEvent(/** @type {string} */ type) {
+        if (CAPTCHA_START_EVENTS.includes(type)) {
+            state.detected = true;
+            solving = true;
+            firstStartAt ??= Date.now();
+        } else if (CAPTCHA_END_EVENTS.includes(type)) {
+            state.detected = true;
+            state.solved = true;
+            solving = false;
+            resolveDone();
+        } else if (CAPTCHA_ERROR_EVENTS.includes(type)) {
+            state.detected = true;
+            state.solved = false;
+            solving = false;
+            resolveDone();
+        }
+    }
+
+    return {
+        state,
+        done,
+        // Oxylabs gives no deadline for a start event, so waits pause whenever one arrives.
+        isSolving: () => solving && firstStartAt !== null && Date.now() - firstStartAt < CAPTCHA_SOLVE_TIMEOUT_MS,
+        script: captchaListenerScript,
+        handleMessage: (msg) => {
+            if (msg?.type !== CAPTCHA_MESSAGE) return false;
+            handleCaptchaEvent(msg.event);
+            return true;
+        },
+    };
 }

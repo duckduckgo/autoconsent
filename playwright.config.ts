@@ -5,8 +5,8 @@ const proxy = process.env.PROXY_SERVER ? { server: process.env.PROXY_SERVER } : 
 const config: PlaywrightTestConfig = {
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
-    // Remote Oxylabs sessions take longer to connect and load pages.
-    timeout: process.env.OXYLABS === '1' ? 90000 : undefined,
+    // Remote Oxylabs sessions load pages more slowly and may wait up to 60s for the captcha solver.
+    timeout: process.env.OXYLABS === '1' ? 150000 : undefined,
     testDir: 'tests',
     use: {
         trace: 'off',
