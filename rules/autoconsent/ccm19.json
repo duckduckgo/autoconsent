@@ -1,0 +1,19 @@
+{
+    "name": "ccm19",
+    "vendorUrl": "https://www.ccm19.de/",
+    "prehideSelectors": ["#ccm-widget.ccm-modal"],
+    "detectCmp": [{ "exists": "#ccm-widget.ccm-modal" }],
+    "detectPopup": [{ "visible": "#ccm-widget.ccm-show" }],
+    "optIn": [{ "waitForThenClick": "#ccm-widget .ccm--save-settings[data-full-consent='true']" }],
+    "optOut": [
+        {
+            "if": { "exists": "#ccm-widget .ccm--decline-cookies" },
+            "then": [{ "waitForThenClick": "#ccm-widget .ccm--decline-cookies" }],
+            "else": [
+                { "waitForThenClick": "#ccm-widget [data-ccm-modal='ccm-control-panel']" },
+                { "waitForThenClick": "#ccm-control-panel .ccm--save-settings:not([data-full-consent='true'])" }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": "#ccm-widget.ccm-show", "timeout": 1000, "check": "none" }]
+}
