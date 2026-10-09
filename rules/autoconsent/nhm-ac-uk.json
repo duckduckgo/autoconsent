@@ -1,0 +1,13 @@
+{
+    "name": "nhm-ac-uk",
+    "vendorUrl": "https://www.nhm.ac.uk/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?nhm\\.ac\\.uk/"
+    },
+    "prehideSelectors": ["[data-show-cookie-banner=\"true\"]", "[data-show-cookie-banner-overlay=\"true\"]"],
+    "detectCmp": [{ "exists": "[data-show-cookie-banner=\"true\"]" }],
+    "detectPopup": [{ "visible": "[data-show-cookie-banner=\"true\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-show-cookie-banner=\"true\"] button[type=submit]" }],
+    "optOut": [{ "hide": "[data-show-cookie-banner=\"true\"]" }, { "hide": "[data-show-cookie-banner-overlay=\"true\"]", "optional": true }]
+}
