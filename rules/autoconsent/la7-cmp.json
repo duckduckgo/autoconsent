@@ -1,0 +1,30 @@
+{
+    "name": "la7-cmp",
+    "vendorUrl": "https://www.la7.it/",
+    "prehideSelectors": ["#_evh-ric"],
+    "detectCmp": [
+        {
+            "exists": "#_evh-ric #btn_donotaccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#_evh-ric #btn_donotaccept"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#_evh-ric #AcceptButton"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#_evh-ric #btn_donotaccept"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__cpmtAccept=false"
+        }
+    ]
+}
