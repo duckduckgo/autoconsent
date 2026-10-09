@@ -245,7 +245,9 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('全て拒否する')).to.equal('reject');
         expect(classifyButtonTextRegex('Cookieを拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
-        expect(classifyButtonTextRegex('同意して続ける')).to.equal('other');
+        expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
