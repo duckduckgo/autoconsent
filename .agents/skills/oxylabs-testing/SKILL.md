@@ -85,7 +85,7 @@ Any two-letter country code maps to `?p_cc=` (e.g. `de` → `p_cc=DE`), per the 
 
 ## Architecture
 
-Injection and result collection are shared with `proxy-testing` in [.agents/lib/regional-testing/harness.mjs](../../lib/regional-testing/harness.mjs): autoconsent runs in an isolated world of every frame (including out-of-process iframes) and talks to Node over CDP bindings, and `eval` snippets run in the page's main world. This skill only adds the Oxylabs connection and the captcha handling.
+Injection and result collection are shared with `proxy-testing` in [.agents/lib/regional-testing/harness.mjs](../../lib/regional-testing/harness.mjs): autoconsent runs in an isolated world of every frame (including out-of-process iframes) and talks to Node over CDP bindings, and `eval` snippets run in the page's main world. The isolated-world transport itself is [playwright/isolated-world.mjs](../../../playwright/isolated-world.mjs), which the Playwright E2E runner also uses for Chromium. This skill only adds the Oxylabs connection and the captcha handling.
 
 With `solveCaptcha: true`, a listener in autoconsent's isolated world forwards the Oxylabs runtime's captcha `window` messages to Node over the same CDP binding, so they arrive even if the page navigates right after.
 

@@ -10,6 +10,7 @@ import compactRules from '../rules/compact-rules.json';
 // Full rules include optIn steps that compact rules intentionally omit.
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
+import { injectIntoIsolatedWorld } from './isolated-world.mjs';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []
@@ -30,6 +31,13 @@ type TestOptions = {
     expectedRuns: number;
     gpc: boolean;
 };
+// A frame's content script, reached through either the isolated-world transport or a main-world Frame.
+type ContentScriptTarget = {
+    send: (message: object) => Promise<unknown>;
+    evalInMainWorld: (code: string) => Promise<unknown>;
+    isMainFrame: boolean;
+};
+
 const defaultOptions: TestOptions = {
     testOptOut: true,
     testOptIn: true,
@@ -65,7 +73,7 @@ class TestRun {
     formFactor: string;
     received: ContentScriptMessage[] = [];
     screenshotCounter = 0;
-    selfTestFrame: Frame | null = null;
+    selfTestTarget: ContentScriptTarget | null = null;
 
     constructor(page: Page, testInfo: TestInfo, url: string, expectedCmp: string, options: TestOptions, autoAction: AutoAction | null) {
         this.page = page;
@@ -94,13 +102,36 @@ class TestRun {
                 console.log(`    page log:`, msg.text());
             });
 
-        await this.page.exposeBinding('autoconsentSendMessage', this.messageCallback.bind(this));
+        // Chromium runs the content script in an isolated world like the extension; other browsers have no CDP for that.
+        const useIsolatedWorld = this.page.context().browser()?.browserType().name() === 'chromium';
+        if (useIsolatedWorld) {
+            await injectIntoIsolatedWorld(
+                this.page,
+                (transport) => (msg, frameRef) =>
+                    this.messageCallback(msg, {
+                        send: (message) => transport.sendToContentScript(frameRef, message),
+                        evalInMainWorld: (code) => transport.evalInMainWorld(frameRef, code),
+                        isMainFrame: transport.isMainFrame(frameRef),
+                    }),
+                contentScript,
+            );
+        } else {
+            await this.page.exposeBinding('autoconsentSendMessage', ({ frame }, msg: ContentScriptMessage) =>
+                this.messageCallback(msg, {
+                    send: (message) => frame.evaluate(`autoconsentReceiveMessage(${JSON.stringify(message)})`),
+                    evalInMainWorld: (code) => frame.evaluate(code),
+                    isMainFrame: frame.parentFrame() === null,
+                }),
+            );
+        }
         if (this.options.gpc) {
             await this.enableGpc();
         }
         await this.page.goto(this.url, { waitUntil: 'commit' });
 
-        await this.injectContentScripts();
+        if (!useIsolatedWorld) {
+            await this.injectContentScripts();
+        }
 
         try {
             await this.runAssertions();
@@ -159,20 +190,19 @@ class TestRun {
         }
     }
 
-    async messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
+    async messageCallback(msg: ContentScriptMessage, target: ContentScriptTarget) {
         LOG_MESSAGES.includes(msg.type) && console.log(msg);
         this.received.push(msg);
         switch (msg.type) {
             case 'init': {
-                const url = frame.url();
-                const mainFrame = frame.parentFrame() === null;
                 // Use full rules for optIn (compact rules omit optIn steps), compact rules for optOut.
                 const rules =
                     this.autoAction === 'optIn'
                         ? { autoconsent: fullRules }
-                        : { compact: filterCompactRules(compactRules, { url, mainFrame }) };
-                await frame.evaluate(
-                    `autoconsentReceiveMessage({ type: "initResp", config: ${JSON.stringify({
+                        : { compact: filterCompactRules(compactRules, { url: msg.url, mainFrame: target.isMainFrame }) };
+                await target.send({
+                    type: 'initResp',
+                    config: {
                         enabled: true,
                         autoAction: this.autoAction,
                         disabledCmps: [],
@@ -180,8 +210,9 @@ class TestRun {
                         detectRetries: 20,
                         enableCosmeticRules: true,
                         visualTest: true,
-                    })}, rules: ${JSON.stringify(rules)} })`,
-                );
+                    },
+                    rules,
+                });
                 break;
             }
             case 'cmpDetected': {
@@ -196,20 +227,25 @@ class TestRun {
             case 'optOutResult': {
                 await this.takeScreenshot(`${this.screenshotCounter++}-result`);
                 if (msg.scheduleSelfTest) {
-                    this.selfTestFrame = frame;
+                    this.selfTestTarget = target;
                 }
                 break;
             }
             case 'autoconsentDone': {
                 await this.takeScreenshot(`${this.screenshotCounter++}-done`);
-                if (this.selfTestFrame && this.options.testSelfTest) {
-                    await this.selfTestFrame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+                if (this.selfTestTarget && this.options.testSelfTest) {
+                    await this.selfTestTarget.send({ type: 'selfTest' });
                 }
                 break;
             }
             case 'eval': {
-                const result = await frame.evaluate(msg.code);
-                await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
+                let result: unknown = false;
+                try {
+                    result = await target.evalInMainWorld(msg.code);
+                } catch {
+                    // the frame may have navigated or detached
+                }
+                await target.send({ id: msg.id, type: 'evalResp', result });
                 break;
             }
             case 'visualDelay': {
@@ -320,7 +356,7 @@ class TestRun {
                 await this.assertMessageReceived(`optInResult not received`, { type: 'optInResult' }, true, 1, 300);
                 await this.assertMessageReceived(`optInResult received, but failed`, { type: 'optInResult', result: true }, true, 1, 300);
             }
-            if (this.options.testSelfTest && this.selfTestFrame) {
+            if (this.options.testSelfTest && this.selfTestTarget) {
                 await this.assertMessageReceived(`selfTestResult not received`, { type: 'selfTestResult' }, true, 1, 300);
                 await this.assertMessageReceived(
                     `selfTestResult received, but failed`,
