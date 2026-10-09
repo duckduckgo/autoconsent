@@ -1,0 +1,9 @@
+{
+    "name": "complyauto",
+    "prehideSelectors": [".ca-banner-root"],
+    "detectCmp": [{ "exists": "#ca-consent-root .ca-banner-root" }],
+    "detectPopup": [{ "visible": "#ca-consent-root .ca-banner-root" }],
+    "optIn": [{ "waitForThenClick": ".ca-banner-root .ca-primary-button" }],
+    "optOut": [{ "waitForThenClick": ".ca-banner-root .ca-secondary-button-first" }],
+    "test": [{ "eval": "EVAL_COMPLYAUTO_TEST" }]
+}

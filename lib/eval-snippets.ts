@@ -111,6 +111,10 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
+    EVAL_COMPLYAUTO_TEST: () => {
+        const consent = JSON.parse(localStorage.getItem('caconsentcookie'));
+        return consent.hasInteractedWithBanner && consent.categories.targeting === false;
+    },
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
