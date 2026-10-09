@@ -18,6 +18,11 @@
     ],
     "optOut": [
         {
+            "waitFor": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse],.brlbs-btn-save,#CookieBoxSaveButton,.brlbs-cmpnt-close-button[data-borlabs-cookie-actions=\"close-button\"],a[data-cookie-individual]",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
             "if": {
                 "exists": ".brlbs-btn-accept-only-essential,a[data-cookie-refuse]"
             },

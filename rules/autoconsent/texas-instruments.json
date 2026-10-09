@@ -1,0 +1,17 @@
+{
+    "name": "texas-instruments",
+    "prehideSelectors": ["#tiGDPRecModal,#tiGDPRcpPrefs"],
+    "detectCmp": [{ "exists": "#tiGDPRecModal #consent_pref_center" }],
+    "detectPopup": [{ "visible": "#tiGDPRecModal .privacy_prompt" }],
+    "optOut": [
+        { "click": "#consent_pref_center" },
+        { "waitForVisible": "#tiGDPRcpPrefs .privacy_prompt" },
+        {
+            "if": { "exists": "#tiGDPRcpPrefs input.cookie-custom-checkbox:checked" },
+            "then": [{ "click": "#tiGDPRcpPrefs input.cookie-custom-checkbox:checked", "all": true }]
+        },
+        { "waitForThenClick": "#preferences_prompt_submit" }
+    ],
+    "optIn": [{ "waitForThenClick": "#consent_prompt_submit" }],
+    "test": [{ "cookieContains": "c1:0%7Cc3:0%7Cc6:0%7Cc7:0" }]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "controlgame",
+    "vendorUrl": "https://controlgame.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?controlgame\\.com/"
+    },
+    "detectCmp": [{ "exists": "[data-consent-button][data-value=accept_partial]" }],
+    "detectPopup": [{ "visible": "[data-consent-button][data-value=accept_partial]" }],
+    "optIn": [{ "waitForThenClick": "[data-consent-button][data-value=accept_all]", "retry": 10, "retryInterval": 500 }],
+    "optOut": [{ "waitForThenClick": "[data-consent-button][data-value=accept_partial]", "retry": 10, "retryInterval": 500 }],
+    "test": [{ "cookieContains": "advertisement:no" }]
+}

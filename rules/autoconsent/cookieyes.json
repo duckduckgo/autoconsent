@@ -39,7 +39,9 @@
                             "if": { "exists": ".cky-consent-container [data-cky-tag=settings-button]" },
                             "then": [
                                 { "click": ".cky-consent-container [data-cky-tag=settings-button]" },
-                                { "waitFor": ".cky-modal-open input[type=checkbox],.cky-consent-bar-expand input[type=checkbox]" },
+                                {
+                                    "waitFor": ".cky-modal-open input[type=checkbox],.cky-consent-bar-expand input[type=checkbox],.cky-modal-open [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
+                                },
                                 {
                                     "click": ".cky-modal-open input[type=checkbox]:checked,.cky-consent-bar-expand input[type=checkbox]:checked",
                                     "all": true,

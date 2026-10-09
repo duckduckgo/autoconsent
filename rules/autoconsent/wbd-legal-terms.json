@@ -1,0 +1,32 @@
+{
+    "name": "wbd-legal-terms",
+    "vendorUrl": "https://www.wbd.com/",
+    "comment": "Terms-and-cookies notice with only an Agree button. It is a modal <dialog>, so hiding it with CSS leaves the page inert; close it without submitting the form instead.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "detectCmp": [
+        {
+            "exists": "dialog#ltp-dialog"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#ltp-dialog[open]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ltp-submit-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_WBD_LTP_CLOSE"
+        },
+        {
+            "removeClass": "is-NoScroll",
+            "selector": "body",
+            "optional": true
+        }
+    ]
+}

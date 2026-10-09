@@ -4,7 +4,9 @@ description: Test autoconsent via regional proxies in Playwright. Use when verif
 ---
 
 # Proxy Testing
-This skill provides a JS library to run autoconsent via regional proxies in Playwright.
+This skill provides a JS library to run autoconsent via regional proxies in Playwright. It is the default for regional testing.
+
+Oxylabs remote browsers are available too, through the `oxylabs-testing` skill. They get past most bot walls (captchas, challenge pages, "access denied" pages) that some sites show to our proxies, but they cost money per session, so use them only for the regions where our proxies don't get you the real site.
 
 Rule changes are verified with a two-level regional policy.
 The **core region set** (default for detection, iteration, and verification) covers `us` (CCPA), `gb` (UK GDPR), `de` (EEA GDPR), plus the reported region from the task when specified (if the reported region is not a supported proxy region, use the closest supported one, e.g. `es` for `pt`). Iterate in the single most relevant region; run the full core set once when the fix is stable.
@@ -131,4 +133,5 @@ await browser.close();
 - The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
-- Some sites block proxy traffic outright (captcha, 403, endless challenge page). If every region's proxy is blocked for a site, retest it over a direct connection and state explicitly in the report that the result is unproxied. If direct access is blocked too, ask the triager for the popup's HTML pasted from their own browser as a last resort, and note that the rule was written from pasted markup rather than a live run.
+- Some sites block proxy traffic outright (captcha, 403, endless challenge page). Retest the affected regions with the `oxylabs-testing` skill, and say in the report which regions were tested through Oxylabs. If Oxylabs is blocked too or not available, retest over a direct connection and state explicitly in the report that the result is unproxied. If direct access is blocked too, ask the triager for the popup's HTML pasted from their own browser as a last resort, and note that the rule was written from pasted markup rather than a live run.
+- The harness shared with `oxylabs-testing` lives in `.agents/lib/regional-testing/`; change shared behavior there.

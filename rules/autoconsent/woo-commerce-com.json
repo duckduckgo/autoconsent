@@ -1,19 +1,36 @@
 {
     "name": "woo-commerce-com",
+    "comment": "The banner renders its buttons disabled until it is ready, and clicks before that are ignored, so every click waits for :not([disabled]).",
     "prehideSelectors": [".wccom-comp-privacy-banner .wccom-privacy-banner"],
     "detectCmp": [{ "exists": ".wccom-comp-privacy-banner .wccom-privacy-banner" }],
-    "detectPopup": [{ "exists": ".wccom-comp-privacy-banner .wccom-privacy-banner" }],
-    "optIn": [{ "click": ".wccom-privacy-banner__content-buttons button.is-primary" }],
+    "detectPopup": [{ "visible": ".wccom-comp-privacy-banner .wccom-privacy-banner" }],
+    "optIn": [{ "waitForThenClick": ".wccom-privacy-banner__content-buttons button.is-style-primary:not([disabled])" }],
     "optOut": [
         {
-            "click": ".wccom-privacy-banner__content-buttons button.is-secondary"
-        },
-        {
-            "waitForThenClick": "input[type=checkbox][checked]:not([disabled])",
-            "all": true
-        },
-        {
-            "click": "div.wccom-modal__footer > button"
+            "comment": "'Reject all' is only offered in some regions: it is the secondary button followed by another secondary ('Customize')",
+            "if": { "exists": ".wccom-privacy-banner__content-buttons button.is-style-secondary:has(+ button.is-style-secondary)" },
+            "then": [
+                {
+                    "waitForThenClick": ".wccom-privacy-banner__content-buttons button.is-style-secondary:not([disabled]):has(+ button.is-style-secondary)"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".wccom-privacy-banner__content-buttons button.is-style-secondary:not([disabled]):has(+ button.is-style-primary)"
+                },
+                {
+                    "waitForVisible": ".wccom-modal__footer button.is-style-primary"
+                },
+                {
+                    "click": ".wccom-customize-privacy-checkbox input[type=checkbox]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".wccom-modal__footer button.is-style-primary:not([disabled])"
+                }
+            ]
         }
-    ]
+    ],
+    "test": [{ "cookieContains": "wccom_cookie_consent_analytics=denied" }]
 }

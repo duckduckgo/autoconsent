@@ -1,0 +1,33 @@
+{
+    "name": "bricklink",
+    "vendorUrl": "https://www.bricklink.com/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?bricklink\\.com/"
+    },
+    "prehideSelectors": [".blp-necessary-cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": ".blp-necessary-cookies-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".blp-necessary-cookies-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".blp-necessary-cookies-banner__button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".blp-necessary-cookies-banner__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "has-dismissed-necessary-cookies-banner=true"
+        }
+    ]
+}

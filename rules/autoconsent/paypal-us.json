@@ -7,9 +7,9 @@
     "optOut": [
         {
             "if": { "exists": "#bannerDeclineButton" },
-            "then": [{ "click": "#bannerDeclineButton" }],
-            "comment": "Without a decline button the only way out is the banner's link to the cookie preferences page, which paypal-cookieprefs submits after the navigation.",
-            "else": [{ "click": "a#manageCookiesLink" }]
+            "then": [{ "waitForThenClick": "#bannerDeclineButton", "retry": 10, "retryInterval": 500 }],
+            "comment": "Without a decline button the only way out is the cookie preferences page, and the choice made there does not always stick, so the banner keeps coming back. Hide it instead.",
+            "else": [{ "hide": "#ccpaCookieBanner" }]
         }
     ],
     "test": [{ "wait": 1000 }, { "cookieContains": "type%3Dexplicit" }]

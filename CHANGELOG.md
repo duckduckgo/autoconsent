@@ -1,3 +1,198 @@
+# v16.49.0 (Fri Oct 09 2026)
+
+#### Rules
+
+- Rule update: ddg_mac_desktop (use) CPM magic report: us.select-sport.com [#1645](https://github.com/duckduckgo/autoconsent/pull/1645) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: evium.de [#1643](https://github.com/duckduckgo/autoconsent/pull/1643) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pandectes [#1641](https://github.com/duckduckgo/autoconsent/pull/1641) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ensembleartsphilly [#1618](https://github.com/duckduckgo/autoconsent/pull/1618) ([@daxtheduck](https://github.com/daxtheduck))
+- Add button classification benchmarking suite [#1604](https://github.com/duckduckgo/autoconsent/pull/1604) ([@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+- Rule update: costco.ca cookie prompt not handled [#1639](https://github.com/duckduckgo/autoconsent/pull/1639) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: ddg_mac_desktop (use) CPM magic report: www.mcgeeandco.com [#1637](https://github.com/duckduckgo/autoconsent/pull/1637) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (ase) CPM magic report: www.ctgt.ai [#1636](https://github.com/duckduckgo/autoconsent/pull/1636) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM feedback: shinden.pl [#1635](https://github.com/duckduckgo/autoconsent/pull/1635) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on jfe-holdings.co.jp (Datasign CMP) [#1633](https://github.com/duckduckgo/autoconsent/pull/1633) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on www.jclewislincoln.com [#1632](https://github.com/duckduckgo/autoconsent/pull/1632) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on catflooringaccessories.com [#1631](https://github.com/duckduckgo/autoconsent/pull/1631) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on technologylaw.fkks.com (Passle CMP) [#1630](https://github.com/duckduckgo/autoconsent/pull/1630) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: goaexperience.co.uk (Cookieconsent CMP) [#1629](https://github.com/duckduckgo/autoconsent/pull/1629) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (ase) CPM magic report: www.poconopoolandspallc.com [#1628](https://github.com/duckduckgo/autoconsent/pull/1628) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie consent not dismissed on https://www.yogurtland.com/ (no-reject version of Iubenda) [#1625](https://github.com/duckduckgo/autoconsent/pull/1625) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on goorin.com [#1623](https://github.com/duckduckgo/autoconsent/pull/1623) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: https://www.headphonecheck.com/ (Borlabs CMP, Easylist breakage) [#1622](https://github.com/duckduckgo/autoconsent/pull/1622) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- oxylabs-testing: note what happens over the new-session limit [#1640](https://github.com/duckduckgo/autoconsent/pull/1640) ([@muodov](https://github.com/muodov))
+
+#### Authors: 4
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.48.0 (Thu Oct 08 2026)
+
+#### Rules
+
+- Rule update: Tealium [#1626](https://github.com/duckduckgo/autoconsent/pull/1626) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: pmc-privacy-banner [#1621](https://github.com/duckduckgo/autoconsent/pull/1621) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Click Decline in the burpee.com rule when the banner has one [#1619](https://github.com/duckduckgo/autoconsent/pull/1619) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Check generic cosmetic rules for breakage on every site [#1634](https://github.com/duckduckgo/autoconsent/pull/1634) ([@muodov](https://github.com/muodov))
+- Tell agents to keep spec URLs current [#1624](https://github.com/duckduckgo/autoconsent/pull/1624) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.47.0 (Wed Oct 07 2026)
+
+#### Rules
+
+- Rule update: controlgame [#1616](https://github.com/duckduckgo/autoconsent/pull/1616) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dalecarnegie [#1617](https://github.com/duckduckgo/autoconsent/pull/1617) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jpmorgan-chase [#1615](https://github.com/duckduckgo/autoconsent/pull/1615) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Bug Fixes
+
+- Don't wait for a DOM mutation after an attempt that skipped the heuristic [#1611](https://github.com/duckduckgo/autoconsent/pull/1611) ([@muodov](https://github.com/muodov))
+
+#### Dependencies
+
+- Upgrade TypeScript to 6 and add a 7-day Dependabot cooldown [#1607](https://github.com/duckduckgo/autoconsent/pull/1607) ([@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Use needs-code-update label and stop label events from cancelling the labeler [#1609](https://github.com/duckduckgo/autoconsent/pull/1609) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.46.0 (Tue Oct 06 2026)
+
+#### Rules
+
+- Handle GPC flyout from Securiti [#1612](https://github.com/duckduckgo/autoconsent/pull/1612) ([@muodov](https://github.com/muodov))
+- Add rule for the LEGO.com consent modal [#1613](https://github.com/duckduckgo/autoconsent/pull/1613) ([@muodov](https://github.com/muodov))
+- Rule update: Cookie popup on fanatics sites [#1594](https://github.com/duckduckgo/autoconsent/pull/1594) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: https://openrouter.ai/ [#1608](https://github.com/duckduckgo/autoconsent/pull/1608) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiez [#1597](https://github.com/duckduckgo/autoconsent/pull/1597) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: cookieyes [#1598](https://github.com/duckduckgo/autoconsent/pull/1598) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: squarespace-cookie-banner [#1599](https://github.com/duckduckgo/autoconsent/pull/1599) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: speciesplus.net [#1600](https://github.com/duckduckgo/autoconsent/pull/1600) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: privacy-area [#1601](https://github.com/duckduckgo/autoconsent/pull/1601) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ziptozipmoving [#1602](https://github.com/duckduckgo/autoconsent/pull/1602) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cuvva.com [#1603](https://github.com/duckduckgo/autoconsent/pull/1603) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.45.0 (Sun Oct 04 2026)
+
+#### Dependencies
+
+- Upgrade dev dependencies and use Node 24.21.0 (latest LTS) everywhere [#1596](https://github.com/duckduckgo/autoconsent/pull/1596) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Claude ([@claude](https://github.com/claude))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.44.0 (Sat Oct 03 2026)
+
+#### Rules
+
+- Rule update: lacoccinelle [#1592](https://github.com/duckduckgo/autoconsent/pull/1592) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: elsevier [#1591](https://github.com/duckduckgo/autoconsent/pull/1591) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cpm fail nytimes.com [#1590](https://github.com/duckduckgo/autoconsent/pull/1590) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chatgpt [#1589](https://github.com/duckduckgo/autoconsent/pull/1589) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bandcamp.com [#1585](https://github.com/duckduckgo/autoconsent/pull/1585) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: woo-commerce-com [#1584](https://github.com/duckduckgo/autoconsent/pull/1584) ([@muodov](https://github.com/muodov))
+
+#### Dependencies
+
+- Bump tldts-experimental from 7.4.6 to 7.4.16 [#1580](https://github.com/duckduckgo/autoconsent/pull/1580) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@muodov](https://github.com/muodov))
+- Upgrade Playwright to 1.63.0 [#1588](https://github.com/duckduckgo/autoconsent/pull/1588) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Fix Oxylabs captcha events on Agent Browser [#1595](https://github.com/duckduckgo/autoconsent/pull/1595) ([@muodov](https://github.com/muodov))
+- Add Headless Browser support [#1593](https://github.com/duckduckgo/autoconsent/pull/1593) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.43.2 (Thu Oct 01 2026)
+
+#### AI / Agent Workflow
+
+- Document rule step traps for agents [#1582](https://github.com/duckduckgo/autoconsent/pull/1582) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Other
+
+- Coverage data update [#1575](https://github.com/duckduckgo/autoconsent/pull/1575) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 3
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.43.1 (Wed Sep 30 2026)
+
+#### Dependencies
+
+- Upgrade @duckduckgo/eslint-config to v0.3.0 (ESLint 10) [#1581](https://github.com/duckduckgo/autoconsent/pull/1581) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.43.0 (Tue Sep 29 2026)
+
+#### Rules
+
+- Fix Sourcepoint scroll position restoration on back navigation [#1578](https://github.com/duckduckgo/autoconsent/pull/1578) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Add Claude Code user settings template for agent skill env vars [#1579](https://github.com/duckduckgo/autoconsent/pull/1579) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.42.0 (Fri Sep 25 2026)
 
 #### Rules

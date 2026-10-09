@@ -1,0 +1,85 @@
+{
+    "name": "datasign",
+    "vendorUrl": "https://datasign.jp/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#datasign_cmp__host"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_content input[type=checkbox]:not([disabled])"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#datasign_cmp__host",
+                        "#datasign_cmp__config-button, #datasign_cmp__cmp_summary [aria-controls=datasign_cmp__cmp_content]"
+                    ]
+                },
+                {
+                    "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"]
+                },
+                {
+                    "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_content input[type=checkbox]:not(:checked):not([disabled])"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary .datasign__dialogCloseButton--index-module"]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#datasign_cmp__host", "#datasign_cmp__cmp_content input[type=checkbox]:not([disabled])"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "#datasign_cmp__host",
+                        "#datasign_cmp__config-button, #datasign_cmp__cmp_summary [aria-controls=datasign_cmp__cmp_content]"
+                    ]
+                },
+                {
+                    "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"]
+                },
+                {
+                    "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_content input[type=checkbox]:checked:not([disabled])"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_content_apply-button"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary .datasign__dialogCloseButton--index-module"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#datasign_cmp__host", "#datasign_cmp__cmp_summary"],
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

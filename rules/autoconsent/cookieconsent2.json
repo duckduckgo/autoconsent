@@ -25,7 +25,12 @@
         {
             "if": { "exists": "#s-rall-bn" },
             "then": [{ "waitForThenClick": "#s-rall-bn" }],
-            "else": [{ "waitForThenClick": "#c-s-bn" }, { "wait": 500 }, { "waitForThenClick": "#s-sv-bn" }]
+            "else": [
+                { "waitForThenClick": "#c-s-bn" },
+                { "wait": 500 },
+                { "click": "#s-bl input.c-tgl:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#s-sv-bn" }
+            ]
         }
     ],
     "test": [

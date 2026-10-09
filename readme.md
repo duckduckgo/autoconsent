@@ -83,6 +83,16 @@ There are currently two ways of implementing a CMP:
 
 For more details on rule types, see [Rule Syntax Reference](docs/rule-syntax.md).
 
+## AI agent setup
+
+The agent skills in `.agents/skills/` need a few environment variables.
+
+1. Copy the contents from [`.claude/user-settings.json.TEMPLATE`](.claude/user-settings.json.TEMPLATE) to your user settings (e.g. `~/.claude/settings.json`), in addition to your existing config. If your settings already have an `env` block, merge the entries into it: a second `env` key would silently override the first.
+2. Replace the values in the template. Proxy values must be complete URLs with an `http://`, `https://`, or `socks5://` scheme, and without embedded credentials. `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD` are optional: they are only used for `https://` proxies, so remove them if your proxies don't need authentication. `OXYLABS_USER` and `OXYLABS_PASSWORD` are optional too: they enable the `oxylabs-testing` skill for sites that show our proxies a bot wall, so remove them if you don't have an Oxylabs account.
+3. Start a new Claude Code session: settings are only read at startup.
+
+For other agents or plain shell use, `export` the same variables in your shell profile instead.
+
 ## License
 
 MPLv2.

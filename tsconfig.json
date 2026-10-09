@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "es2021",
+        "lib": ["es2021", "es2022.error", "dom", "dom.iterable", "dom.asynciterable", "webworker.importscripts", "scripthost"],
         "allowJs": true,
         "checkJs": true,
         "resolveJsonModule": true,
@@ -8,7 +9,8 @@
         "noImplicitAny": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
-        "module": "NodeNext"
+        "module": "NodeNext",
+        "types": ["node", "chrome", "mocha"]
     },
     "exclude": ["node_modules/*", "dist/*"]
 }

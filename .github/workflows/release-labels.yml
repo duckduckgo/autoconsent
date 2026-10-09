@@ -16,32 +16,36 @@ permissions:
     issues: write
     pull-requests: write
 
-concurrency:
-    group: release-labels-${{ github.event.pull_request.number }}
-    cancel-in-progress: true
-
 jobs:
-    release-labels:
+    # No concurrency group here: a 'labeled' event right after 'opened' must not cancel this job.
+    # Only on 'opened': a later run would re-add category labels that the author replaced.
+    path-labels:
+        if: ${{ github.event.action == 'opened' }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
 
             - name: Apply path-based labels
-              if: >-
-                  ${{
-                    github.event.action == 'opened' ||
-                    github.event.action == 'reopened' ||
-                    github.event.action == 'ready_for_review'
-                  }}
               uses: actions/labeler@v6
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   sync-labels: false
 
+    release-labels:
+        needs: path-labels
+        # Run when path-labels is skipped or fails, so the label check still happens.
+        if: ${{ !cancelled() }}
+        runs-on: ubuntu-latest
+        concurrency:
+            group: release-labels-${{ github.event.pull_request.number }}
+            cancel-in-progress: true
+        steps:
+            - uses: actions/checkout@v4
+
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: lts/*
+                  node-version-file: .node-version
                   cache: 'npm'
 
             - name: Install dependencies

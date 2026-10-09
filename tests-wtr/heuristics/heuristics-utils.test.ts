@@ -62,6 +62,12 @@ describe('checkHeuristicPatterns', () => {
         expect(snippets.every((s) => typeof s === 'string')).to.be.true;
     });
 
+    it('detects essential cookie notices', () => {
+        const { patterns } = checkHeuristicPatterns('We use essential cookies for site functionality and optional cookies for analytics.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
     it('detects website cookie experience notices', () => {
         const { patterns, snippets } = checkHeuristicPatterns(
             'The Algonquin College website uses cookies to enhance your browsing experience.',
@@ -115,6 +121,23 @@ describe('checkHeuristicPatterns with Russian popups', () => {
 
     it('does not detect unrelated Russian text', () => {
         expect(checkHeuristicPatterns('Дешевые авиабилеты онлайн и бронирование отелей').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Japanese popups', () => {
+    it('detects Japanese cookie notices', () => {
+        const texts = [
+            '当サイトはサービス改善のためCookieを使用しています。',
+            '当ウェブサイトではクッキーを利用しています',
+            'このサイトはクッキー（Cookie）を使用しています',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Japanese text', () => {
+        expect(checkHeuristicPatterns('全国の旧車イベント情報を集約しています').patterns).to.have.length(0);
     });
 });
 
@@ -203,6 +226,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
+    it('matches CCPA "do not sell/share" variants', () => {
+        expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
+    });
+
     it('matches German continue-without-accepting variants', () => {
         expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
@@ -222,6 +251,7 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Essential Only')).to.equal('reject');
         expect(classifyButtonTextRegex('Only use essential cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Only accept necessary cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Essential only cookies')).to.equal('reject');
     });
 
     it('does not classify bare essential category labels as reject choices', () => {
@@ -241,6 +271,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Только необходимые куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Отклонить куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Не принимаю')).to.equal('reject');
+    });
+
+    it('matches Japanese reject buttons', () => {
+        expect(classifyButtonTextRegex('拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('全て拒否する')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookieを拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
@@ -296,6 +337,14 @@ describe('classifyButtonTextRegex', () => {
 
     it('does not treat revoke links as reject buttons', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
+    });
+
+    it('classifies accept-and-close buttons as accept', () => {
+        expect(classifyButtonTextRegex('Akzeptieren & Schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Akzeptieren und schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Zustimmen schliessen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
     });
 });
 

@@ -41,6 +41,7 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 | `npm run test:chrome` | Playwright tests in Chrome only |
 | `npm run build-rules` | Rebuild `rules.json`, `compact-rules.json` |
 | `npm run create-rule` | Scaffold a new JSON rule + test spec |
+| `npm run benchmark-buttons` | Score heuristic button classification against labelled button texts |
 
 ## Code Style
 - **Preserve existing comments.** Do not remove JSDoc comments, TODO comments, or inline explanations unless the related code is also being removed. Rewriting a comment to reflect updated logic is fine.
@@ -66,7 +67,7 @@ CMPs behave differently by region:
 
 Use `if`/`then`/`else` to handle regional variants within a single rule.
 
-**Test all rule changes across the core region set** — US, GB, DE, plus the reported region from the task (or the closest supported proxy region, e.g. ES for PT) — using the `proxy-testing` skill. Escalate to the expanded set according to the skill's policy.
+**Test all rule changes across the core region set** — US, GB, DE, plus the reported region from the task (or the closest supported proxy region, e.g. ES for PT) — using the `proxy-testing` skill. Escalate to the expanded set according to the skill's policy. If a site shows our proxies a bot wall, retest those regions with the `oxylabs-testing` skill.
 
 ### Generic vs Site-Specific Rules
 
@@ -76,7 +77,7 @@ Site-specific rules are rules scoped to specific sites with a `urlPattern`. Rule
 
 ### JSON Rules vs Code-based rules
 
-JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`.
+JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale.
 
 ```json
 {
@@ -122,11 +123,20 @@ shadow root or same-origin iframe.
 - Use `npm run create-rule` to scaffold a new rule and a spec file.
 - Code comments: keep them brief (max one line), explain why not what, no references to specific sites in library code
 
+### Rule step traps
+
+- **For "not visible", use `check: "none"`, never `negated`.** `negated` only inverts the final result. `waitForVisible` + `negated` does not wait for the element to disappear: it fails at once while the element is visible. `visible` + `negated` is true when one match is visible and another is hidden.
+- **Array selectors search only inside the first match.** `["iframe", "button"]` searches only the first `iframe` on the page.
+- **`cookieContains` is a plain substring match.** `consent=1` also matches `myconsent=10`. It cannot see `HttpOnly` cookies.
+- **`setStyle` replaces the full inline style.** Use `addStyle` to keep the other inline styles.
+- **`npm run rule-syntax-check` does not check `rules/generated/`.** Check generated rules against the schema yourself.
+
 ### Updating existing rules
 - **For site-specific popups, prefer a heuristic-pattern fix over a new rule, and check whether a rule is needed at all.** If the popup is unique to a site (not a shared CMP) and already has a reject, dismiss, or acknowledge button that the heuristic should match, extend `lib/heuristic-patterns.ts` instead of adding a `urlPattern`-scoped JSON rule. Do not use a heuristic fix in place of a generic CMP rule. A heuristic change must not cause false positives on other sites.
 - If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.
 - After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) across the expanded set. Inspect both API results AND screenshots.
 - **When adding or fixing a rule for a site, remove stale site-specific rules covering the same site.** If a site-specific rule is obsolete in all regions (the site switched CMP), remove it rather than leaving it alongside the new or updated rule.
+- **Heuristic pattern changes must keep the labelled button benchmark green.** `lib/heuristic-patterns.ts` is the source of truth for heuristic patterns; downstream projects (e.g. tracker-radar-collector) should import them rather than keep copies. `tests-wtr/heuristics/button-classification-accuracy.test.ts` checks `classifyButtonTextRegex` against `data/labelled-button-texts.csv` (no false positives, >90% weighted accuracy per label). Use `npm run benchmark-buttons` to see what a change gains or loses, and the `optimize-button-patterns` skill to tune patterns against it. New labelled rows come from the tracker-radar-collector post-processing scripts (`collect-popup-button-texts.js`, `label-button-texts.js`). Fix a mislabelled row in the CSV rather than bending patterns to fit it.
 - if a popup does not provide an opt-out button, `optOut` _may_ click "dismiss"/"acknowledge" instead. Check with the existing heuristic patterns in /lib/heuristic-patterns.ts for reference. Do **not** click a TIER2 (single Accept) button — see General Guidelines.
 - do not keep outdated selectors in changed rules, unless they are actually used in some conditions
 
@@ -139,11 +149,14 @@ shadow root or same-origin iframe.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - Generic rules without a urlPattern MUST have at least two sites in the spec file.
 - If the popup comes in different DOM structures, cover all of them in the spec file.
+- **Keep spec URLs current.** When a site in a spec file no longer uses the rule's CMP (it switched CMPs or dropped its banner), replace it with a site that does, found in `data/coverage.json` or with the `publicwww-search` skill, and check the new site like any other. Do not just delete it: generic rules still need two sites. First check every region the spec runs in; if the popup only stopped showing in some of them, adjust `onlyRegions` or `skipRegions` instead. For a site-specific rule, the site no longer using the CMP means the rule itself may be stale (see Updating existing rules).
 
 ### Breakage in cosmetic rules
 **Prefer a non-cosmetic rule.** A cosmetic (`hide`) rule is a last resort when there is no reject/dismiss path. If cosmetic is unavoidable, verify that hiding the element does not break the page and **report that evidence**. Cosmetic rule without breakage-check evidence is incomplete.
 
 Check each breakage type separately and report a verdict on each, rather than a general "looks fine": **leftover overlay** (a banner remnant or backdrop still covering the page), **blocked scrolling** (a scroll or overflow lock left on html/body or the dialog), **blocked interaction** (clicks or taps not reaching the page), and **reload loop** (the rule still matching after the popup is dismissed and the page is reloaded).
+
+**Check a generic cosmetic rule on every site it applies to, not only the reported one.** A rule without a `urlPattern` hides elements on every site with that CMP, and each site can break differently. Run the breakage check on all known sites (the spec file, `data/coverage.json`, and the publicwww sites you tested), and report the verdicts for each site.
 
 When using `hide`, the CMP may lock scrolling or add overlays. Add fixes AFTER the `hide` step, marked `"optional": true`:
 

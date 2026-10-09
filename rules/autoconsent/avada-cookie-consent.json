@@ -1,0 +1,43 @@
+{
+    "name": "avada-cookie-consent",
+    "vendorUrl": "https://apps.shopify.com/avada-cookie-bar",
+    "prehideSelectors": [".Avada-CookiesBar__OuterWrapper .Avada-CookiesBar_Container"],
+    "detectCmp": [
+        {
+            "exists": ".Avada-CookiesBar__OuterWrapper .Avada-CookiesBar_BtnDeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".Avada-CookiesBar__OuterWrapper .Avada-CookiesBar_BtnDeny",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".Avada-CookiesBar__OuterWrapper .Avada-CookiesBar_BtnAgree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".Avada-CookiesBar__OuterWrapper .Avada-CookiesBar_BtnDeny"
+        },
+        {
+            "any": [
+                {
+                    "waitForVisible": ".Avada-CookiesBar__OuterWrapper .Avada-CookiesBar_Container",
+                    "check": "none",
+                    "timeout": 1000
+                },
+                {
+                    "waitForThenClick": ".Avada-CookiesBar-Preferences__PopUp .Avada-CookiesBar_BtnDeny"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"analytics\":false,\"marketing\":false"
+        }
+    ]
+}
