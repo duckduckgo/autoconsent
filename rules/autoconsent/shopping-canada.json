@@ -1,0 +1,14 @@
+{
+    "name": "shopping-canada",
+    "vendorUrl": "https://www.shopping-canada.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?shopping-canada\\.com/"
+    },
+    "prehideSelectors": ["#cookie-law-info-bar"],
+    "detectCmp": [{ "visible": "#cookie-law-info-bar" }],
+    "detectPopup": [{ "visible": "#cookie-law-info-bar" }],
+    "optIn": [{ "click": "#cookie_action_close_header" }],
+    "optOut": [{ "hide": "#cookie-law-info-bar" }],
+    "test": [{ "visible": "#cookie-law-info-bar", "check": "none" }]
+}

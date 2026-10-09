@@ -29,6 +29,7 @@ type TestOptions = {
     expectPopupOpen: boolean;
     expectedRuns: number;
     gpc: boolean;
+    simulateInteraction: boolean;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -40,6 +41,7 @@ const defaultOptions: TestOptions = {
     expectPopupOpen: true,
     expectedRuns: 1,
     gpc: false,
+    simulateInteraction: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -102,6 +104,10 @@ class TestRun {
 
         await this.injectContentScripts();
 
+        if (this.options.simulateInteraction) {
+            await this.simulateInteraction();
+        }
+
         try {
             await this.runAssertions();
         } catch (e) {
@@ -125,6 +131,14 @@ class TestRun {
                 // ignore this screenshot errors
             }
             throw e;
+        }
+    }
+
+    // some sites only render the popup after the first user interaction; repeat in case of interstitial reloads
+    async simulateInteraction() {
+        for (let i = 1; i <= 5; i++) {
+            await this.page.mouse.move(100 * i, 100 * i);
+            await this.page.waitForTimeout(1000);
         }
     }
 
