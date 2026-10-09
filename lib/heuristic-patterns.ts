@@ -165,6 +165,10 @@ export const DETECT_PATTERNS = [
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
+
+    // Japanese (JA)
+    // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
+    /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -390,6 +394,13 @@ const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
+const REJECT_PATTERNS_JAPANESE = [
+    // e.g. "拒否", "すべて拒否", "全て拒否する", "cookieを拒否"
+    /^(すべて|全て)?\s?(の)?(cookie|クッキー)?\s?(を)?拒否(する)?$/i,
+    '同意しない',
+    '同意しません',
+];
+
 /**
  * @type {Array<string|RegExp>}
  */
@@ -411,6 +422,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_RUSSIAN,
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
+    ...REJECT_PATTERNS_JAPANESE,
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [

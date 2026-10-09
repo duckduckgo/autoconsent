@@ -103,6 +103,23 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Japanese popups', () => {
+    it('detects Japanese cookie notices', () => {
+        const texts = [
+            '当サイトはサービス改善のためCookieを使用しています。',
+            '当ウェブサイトではクッキーを利用しています',
+            'このサイトはクッキー（Cookie）を使用しています',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Japanese text', () => {
+        expect(checkHeuristicPatterns('全国の旧車イベント情報を集約しています').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -227,6 +244,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Только необходимые куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Отклонить куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Не принимаю')).to.equal('reject');
+    });
+
+    it('matches Japanese reject buttons', () => {
+        expect(classifyButtonTextRegex('拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('全て拒否する')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookieを拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
