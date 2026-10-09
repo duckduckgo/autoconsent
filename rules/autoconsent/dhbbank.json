@@ -1,0 +1,13 @@
+{
+    "name": "dhbbank",
+    "vendorUrl": "https://www.dhbbank.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dhbbank\\.(com|nl|be|de)/"
+    },
+    "prehideSelectors": ["dialog.js-cookie-bar"],
+    "detectCmp": [{ "exists": "dialog.js-cookie-bar .js-reject-all" }],
+    "detectPopup": [{ "visible": "dialog.js-cookie-bar .js-reject-all" }],
+    "optIn": [{ "waitForThenClick": "dialog.js-cookie-bar .js-accept-all" }],
+    "optOut": [{ "waitForThenClick": "dialog.js-cookie-bar .js-reject-all" }],
+    "test": [{ "waitForVisible": "dialog.js-cookie-bar", "check": "none", "timeout": 3000 }, { "cookieContains": "CookieLevel=Functional" }]
+}
