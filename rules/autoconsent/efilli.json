@@ -1,0 +1,12 @@
+{
+    "name": "efilli",
+    "prehideSelectors": ["efilli-layout-dynamic"],
+    "detectCmp": [{ "exists": "efilli-layout-dynamic" }],
+    "detectPopup": [{ "visible": ["efilli-layout-dynamic", "[efl-consent-not-saved]"], "check": "any" }],
+    "optIn": [{ "eval": "EVAL_EFILLI_OPT_IN" }],
+    "optOut": [
+        { "eval": "EVAL_EFILLI_OPT_OUT" },
+        { "waitForVisible": ["efilli-layout-dynamic", "[efl-consent-not-saved]"], "check": "none", "timeout": 5000 }
+    ],
+    "test": [{ "eval": "EVAL_EFILLI_TEST" }]
+}
