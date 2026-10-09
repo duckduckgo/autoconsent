@@ -23,5 +23,20 @@
             <button>This one is visible</button>
             <button>This one too</button>
         </div>
+
+        <!--
+            Fixed banners that GoDaddy/Websites+Marketing-style site builders
+            leave parked in the DOM after dismissal: position: fixed, display:
+            block, but rendered far outside the viewport. Treat as not visible.
+        -->
+        <div id="fixed-parked-below" style="position: fixed; left: 0; top: 9999px; width: 300px; height: 200px; background: white">
+            <button>Decline</button>
+        </div>
+        <div id="fixed-parked-right" style="position: fixed; left: 9999px; top: 0; width: 300px; height: 200px; background: white">
+            <button>Decline</button>
+        </div>
+        <div id="fixed-onscreen" style="position: fixed; left: 0; bottom: 0; width: 300px; height: 200px; background: white">
+            <button>Decline</button>
+        </div>
     </body>
 </html>
