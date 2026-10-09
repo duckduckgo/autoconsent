@@ -15,6 +15,29 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
     }
 }
 
+// Rerun the tests that the local pass listed as blocked by a bot wall, one Oxylabs session at a time.
+def runOxylabsTests(candidatesFile, testFiles) {
+    def junitFile = "results-${env.REGION}-oxylabs.xml"
+    try {
+        timeout(60) {
+            def testFilesArg = testFiles.join(' ')
+            withCredentials([usernamePassword(credentialsId: 'autoconsent-oxylabs', usernameVariable: 'OXYLABS_USER', passwordVariable: 'OXYLABS_PASSWORD')]) {
+                sh """
+                    OXYLABS=1 OXYLABS_CANDIDATES=${candidatesFile} PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project chrome --workers 1 --retries 1 --reporter=junit,line || true
+                """
+            }
+        }
+    } catch (e) {
+        // e.g. missing credentials: keep the local results instead of failing the build
+        echo "Oxylabs pass failed: ${e}"
+    } finally {
+        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, allowEmptyResults: true, testResults: junitFile
+        archiveArtifacts artifacts: "test-results/screenshots/oxylabs/**/*.jpg", fingerprint: true, allowEmptyArchive: true
+        archiveArtifacts artifacts: junitFile, fingerprint: true, allowEmptyArchive: true
+        return summary
+    }
+}
+
 def withEnvFile(envfile, Closure cb) {
     def props = readProperties(file: envfile)
     withEnv(props.collect{ entry -> "${entry.key}=${entry.value}" }) {
@@ -119,9 +142,20 @@ pipeline {
                         ]
                         for (testEnv in testEnvs) {
                             withEnvFile(testEnv) {
-                                def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
+                                def candidatesFile = "${env.WORKSPACE}/oxylabs-candidates-${env.REGION}.txt"
+                                sh "rm -f '${candidatesFile}'"
+                                def summary
+                                withEnv(["OXYLABS_CANDIDATES=${candidatesFile}"]) {
+                                    summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
+                                }
                                 testsFailed += summary.failCount
                                 testsTotal += summary.totalCount
+                                // Oxylabs browsers are Chromium only
+                                if (params.BROWSER == 'chrome' && fileExists(candidatesFile)) {
+                                    def oxylabsSummary = runOxylabsTests(candidatesFile, testsToRun)
+                                    // a test that passes on Oxylabs no longer counts as failed
+                                    testsFailed -= oxylabsSummary.passCount
+                                }
                             }
                         }
                     }
