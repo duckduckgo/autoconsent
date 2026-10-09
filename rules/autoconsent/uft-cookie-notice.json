@@ -1,0 +1,15 @@
+{
+    "name": "uft-cookie-notice",
+    "vendorUrl": "https://unknown",
+    "intermediate": false,
+    "prehideSelectors": ["#politique_confidentialite"],
+    "detectCmp": [{ "exists": "#politique_confidentialite #cookies_settings" }],
+    "detectPopup": [{ "visible": "#politique_confidentialite" }],
+    "optIn": [{ "waitForThenClick": "#politique_confidentialite #cookies_accept" }],
+    "optOut": [
+        { "click": "#politique_confidentialite #cookies_settings" },
+        { "waitForThenClick": "#cookie_settings a.refuse" },
+        { "waitForVisible": "#politique_confidentialite", "check": "none" }
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "UFT_cookie_notice_accepted=%5B%5D" }]
+}
