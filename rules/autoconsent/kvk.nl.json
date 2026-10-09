@@ -1,0 +1,71 @@
+{
+    "name": "kvk.nl",
+    "vendorUrl": "https://www.kvk.nl/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?kvk\\.nl/"
+    },
+    "prehideSelectors": ["section#cookie-consent[data-ui-test-class=\"cookieconsent\"]", "form[data-ui-test-class=\"cookie-modal\"]"],
+    "detectCmp": [
+        {
+            "exists": "section#cookie-consent[data-ui-test-class=\"cookieconsent\"], form[data-ui-test-class=\"cookie-modal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section#cookie-consent[data-ui-test-class=\"cookieconsent\"], form[data-ui-test-class=\"cookie-modal\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "form[data-ui-test-class=\"cookie-modal\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "form[data-ui-test-class=\"cookie-modal\"] button[data-ui-test-class=\"accept-all-button\"]"
+                }
+            ],
+            "else": [
+                {
+                    "click": "section#cookie-consent input[type=\"radio\"][data-ui-test-class=\"De beste ervaring\"]"
+                },
+                {
+                    "waitForThenClick": "section#cookie-consent button[data-ui-test-class=\"toestemming\"]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "form[data-ui-test-class=\"cookie-modal\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "form[data-ui-test-class=\"cookie-modal\"] button[data-ui-test-class=\"necessary-button\"]"
+                }
+            ],
+            "else": [
+                {
+                    "click": "section#cookie-consent input[type=\"radio\"][data-ui-test-class=\"Functioneel\"]"
+                },
+                {
+                    "waitForThenClick": "section#cookie-consent button[data-ui-test-class=\"toestemming\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "cookieLevelCodeKVK=0001"
+                },
+                {
+                    "cookieContains": "allowTrackingCookiesKvK=0"
+                }
+            ]
+        }
+    ]
+}
