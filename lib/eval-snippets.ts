@@ -267,6 +267,7 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
