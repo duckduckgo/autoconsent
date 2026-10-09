@@ -59,20 +59,27 @@
                         },
                         {
                             "if": {
-                                "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                "visible": "#qc-cmp2-ui"
                             },
                             "then": [
                                 {
-                                    "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
-                                }
-                            ],
-                            "else": [
-                                {
-                                    "waitForThenClick": [
-                                        ".qc-cmp2-main",
-                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                    "if": {
+                                        "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                        }
                                     ],
-                                    "timeout": 5000
+                                    "else": [
+                                        {
+                                            "waitForThenClick": [
+                                                ".qc-cmp2-main",
+                                                "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                            ],
+                                            "timeout": 5000
+                                        }
+                                    ]
                                 }
                             ]
                         }
