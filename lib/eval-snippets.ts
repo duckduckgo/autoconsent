@@ -111,6 +111,13 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
+    // some sites hide the native banner with visibility:hidden and render their own dialog
+    EVAL_COMMANDERS_ACT_DETECT_POPUP: () =>
+        getComputedStyle(document.querySelector('#tc-privacy-wrapper > [id$="_tc_privacy"]')).visibility !== 'hidden',
+    // reject/accept button IDs vary per site, so call the handler the banner buttons use
+    EVAL_COMMANDERS_ACT_OPTOUT: () => window.tC.privacy.clickBanner('optout') || true,
+    EVAL_COMMANDERS_ACT_OPTIN: () => window.tC.privacy.clickBanner('optin') || true,
+    EVAL_COMMANDERS_ACT_TEST: () => window.tC.privacy.cookieData?.[0] === '1',
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
