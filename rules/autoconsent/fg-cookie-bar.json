@@ -1,0 +1,34 @@
+{
+    "name": "fg-cookie-bar",
+    "vendorUrl": "https://www.fg.cz/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookie-bar > .cookie-bar__content > .cookie-bar__buttons > [data-testid='cookie-bar-essentials'], .cookie-bar > .cookie-bar__content > .cookie-bar__buttons > button.btn > .btn__content"
+        }
+    ],
+    "detectPopup": [{ "visible": ".cookie-bar:not(.cookie-bar--hidden) > .cookie-bar__content > .cookie-bar__buttons" }],
+    "optIn": [
+        {
+            "if": { "exists": ".cookie-bar [data-testid='cookie-bar-accept-all']" },
+            "then": [{ "waitForThenClick": ".cookie-bar [data-testid='cookie-bar-accept-all']" }],
+            "else": [{ "waitForThenClick": ".cookie-bar > .cookie-bar__content > .cookie-bar__buttons > button:nth-child(1)" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".cookie-bar [data-testid='cookie-bar-essentials']" },
+            "then": [{ "waitForThenClick": ".cookie-bar [data-testid='cookie-bar-essentials']" }],
+            "else": [{ "waitForThenClick": ".cookie-bar > .cookie-bar__content > .cookie-bar__buttons > button:nth-child(2)" }]
+        },
+        {
+            "waitForVisible": ".cookie-bar:not(.cookie-bar--hidden) > .cookie-bar__content > .cookie-bar__buttons",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        { "visible": ".cookie-bar:not(.cookie-bar--hidden) > .cookie-bar__content > .cookie-bar__buttons", "check": "none" },
+        { "cookieContains": "fg-cookie-consent=" }
+    ]
+}
