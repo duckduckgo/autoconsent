@@ -26,8 +26,20 @@ export const snippets = {
         const cmpData = window.__cmp?.('getCMPData');
         return !!cmpData && typeof cmpData === 'object';
     },
-    EVAL_CONSENTMANAGER_2: () => window.__cmp?.('consentStatus')?.userChoiceExists === false,
-    EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
+    EVAL_CONSENTMANAGER_2: () => {
+        const status = window.cmpmngr?.getCMPStatus?.();
+        if (status === 'stub' || status === 'loading') return false;
+        return window.__cmp?.('consentStatus')?.userChoiceExists === false;
+    },
+    EVAL_CONSENTMANAGER_3: () => {
+        const behavior = window.cmpmngr?.behavior;
+        if (behavior) {
+            // a postponed layer (countdown or mouse move) is shown even after consent is set
+            behavior.countdownshowattached = false;
+            behavior.moveattached = false;
+        }
+        return __cmp('setConsent', 0);
+    },
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
     EVAL_CONSENTMANAGER_NCMP_REJECT: () => {
