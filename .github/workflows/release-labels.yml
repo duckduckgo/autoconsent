@@ -18,13 +18,9 @@ permissions:
 
 jobs:
     # No concurrency group here: a 'labeled' event right after 'opened' must not cancel this job.
+    # Only on 'opened': a later run would re-add category labels that the author replaced.
     path-labels:
-        if: >-
-            ${{
-              github.event.action == 'opened' ||
-              github.event.action == 'reopened' ||
-              github.event.action == 'ready_for_review'
-            }}
+        if: ${{ github.event.action == 'opened' }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
