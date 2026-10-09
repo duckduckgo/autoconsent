@@ -189,8 +189,8 @@ const REJECT_PATTERNS_ENGLISH = [
     /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s+((cookies\s+)?only|only\s+cookies)\s*$/is,
 
-    // e.g. "do not sell or share my personal information", "opt out of sale ..." (CCPA)
-    /do\s+not\s+sell|opt\s+out\s+of\s+sale/is,
+    // e.g. "do not sell or share my personal information", "do not share my personal information", "opt out of sale ..." (CCPA)
+    /do\s+not\s+sell|do\s+not\s+share\s+my\s+(personal\s+)?(information|info|data)|opt\s+out\s+of\s+sale/is,
 
     // e.g. "opt-out of sale/share or targeted advertising", "opt-out of advertising/social media cookies"
     /^opt[ -]?out of /is,
