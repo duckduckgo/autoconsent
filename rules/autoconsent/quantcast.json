@@ -8,71 +8,119 @@
     ],
     "detectPopup": [
         {
-            "visible": "#qc-cmp2-ui"
+            "comment": "#qc-cmp2-ui is the GDPR dialog, #qc-cmp2-usp the US 'Do Not Process My Personal Information' (USP/MSPA) dialog",
+            "visible": "#qc-cmp2-ui,#qc-cmp2-usp"
         }
     ],
     "optOut": [
         {
+            "comment": "US dialog: opt out with the toggles, then confirm",
             "if": {
-                "exists": "#disagree-btn"
+                "exists": "#qc-cmp2-usp"
             },
             "then": [
                 {
-                    "click": "#disagree-btn"
+                    "waitFor": "#qc-cmp2-usp .qc-cmp2-toggle-switch",
+                    "timeout": 2000,
+                    "optional": true
+                },
+                {
+                    "comment": "each toggle reads 'I want to opt-out of ...', so switching them on is the opt-out",
+                    "click": "#qc-cmp2-usp .qc-cmp2-toggle-switch > button[aria-checked=\"false\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-usp .qc-usp-ui-form-content button[mode=\"primary\"]",
+                    "timeout": 2000
+                },
+                {
+                    "comment": "confirming opens a success modal that stays until it's closed",
+                    "waitForThenClick": "#qc-cmp2-mspa-success-modal button",
+                    "timeout": 2000,
+                    "optional": true
                 }
             ],
             "else": [
                 {
-                    "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
-                    "timeout": 2000
-                },
-                {
+                    "comment": "match the reject button even while it's disabled: falling through to the branch below would click it too early",
                     "if": {
-                        "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                        "exists": "#disagree-btn"
                     },
                     "then": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                            "comment": "the reject button renders disabled with a loader, and clicks on it are dropped until it's enabled",
+                            "waitForThenClick": "#disagree-btn:not([disabled])",
+                            "timeout": 5000
                         }
                     ],
                     "else": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                            "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
+                            "timeout": 2000
                         },
                         {
-                            "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
-                        },
-                        {
-                            "click": ".qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
-                            "all": true,
-                            "optional": true
-                        },
-                        {
-                            "click": [
-                                ".qc-cmp2-main",
-                                "xpath///button[contains(., 'REJECT ALL') or contains(., 'ALLE VERWERPEN') or contains(., 'ΑΠΟΡΡΙΠΤΩ ΤΑ ΠΑΝΤΑ') or contains(., 'RESPINGERE TOTALĂ') or contains(., 'ALLE ABLEHNEN') or contains(., 'ODRZUCENIE') or contains(., 'BLOQUEAR TODO') or contains(., 'REJEITAR TODOS') or contains(., 'RIFIUTA TUTTO') or contains(., 'TOUT REFUSER') or contains(., 'ОТКЛОНИТЬ ВСЕХ')]"
-                            ],
-                            "optional": true
-                        },
-                        {
-                            "wait": 500
-                        },
-                        {
+                            "comment": "without #disagree-btn, a secondary button in second place rejects; otherwise reject from the 'more options' screen",
                             "if": {
-                                "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
                             },
                             "then": [
                                 {
-                                    "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
                                 }
                             ],
                             "else": [
                                 {
-                                    "waitForThenClick": [
+                                    "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                                },
+                                {
+                                    "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
+                                },
+                                {
+                                    "comment": "turn off the purposes that are switched on by default",
+                                    "click": ".qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "comment": "'Reject all' has a localized label",
+                                    "click": [
                                         ".qc-cmp2-main",
-                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                        "xpath///button[contains(., 'REJECT ALL') or contains(., 'ALLE VERWERPEN') or contains(., 'ΑΠΟΡΡΙΠΤΩ ΤΑ ΠΑΝΤΑ') or contains(., 'RESPINGERE TOTALĂ') or contains(., 'ALLE ABLEHNEN') or contains(., 'ODRZUCENIE') or contains(., 'BLOQUEAR TODO') or contains(., 'REJEITAR TODOS') or contains(., 'RIFIUTA TUTTO') or contains(., 'TOUT REFUSER') or contains(., 'ОТКЛОНИТЬ ВСЕХ')]"
                                     ],
-                                    "timeout": 5000
+                                    "optional": true
+                                },
+                                {
+                                    "comment": "'Reject all' can save and close the dialog on its own; let it finish before the visibility check",
+                                    "wait": 500
+                                },
+                                {
+                                    "comment": "only save if 'Reject all' left the dialog open",
+                                    "if": {
+                                        "visible": "#qc-cmp2-ui"
+                                    },
+                                    "then": [
+                                        {
+                                            "comment": "'Save & Exit' is the primary button in the desktop layout; otherwise match its localized label",
+                                            "if": {
+                                                "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                            },
+                                            "then": [
+                                                {
+                                                    "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                                }
+                                            ],
+                                            "else": [
+                                                {
+                                                    "waitForThenClick": [
+                                                        ".qc-cmp2-main",
+                                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                                    ],
+                                                    "timeout": 5000
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
