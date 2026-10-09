@@ -1,0 +1,110 @@
+{
+    "name": "concord",
+    "vendorUrl": "https://www.concord.tech/",
+    "prehideSelectors": ["#cd-outer-hab"],
+    "detectCmp": [
+        {
+            "exists": ["#cd-outer-hab", "#cd-hab"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#cd-outer-hab", "[data-testid=\"cd-accept-all-button\"]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-accept-all-button\"]"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#cd-outer-hab", "[data-testid=\"cd-deny-all-button\"]"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-deny-all-button\"]"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["#cd-outer-hab", "[data-testid=\"cd-customize-button\"]"]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ["#cd-outer-hab", "[data-testid=\"cd-customize-button\"]"]
+                        },
+                        {
+                            "waitForVisible": ["#cd-outer-hab", "[data-testid=\"cd-confirm-choices-button\"]"]
+                        },
+                        {
+                            "click": [
+                                "#cd-outer-hab",
+                                "[data-testid=\"cd-switch-do_not_sell\"][aria-checked=\"false\"], [data-testid=\"cd-switch-limit_pii_use\"][aria-checked=\"false\"]"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": [
+                                "#cd-outer-hab",
+                                "[data-testid^=\"cd-switch-\"][aria-checked=\"true\"]:not([data-testid=\"cd-switch-do_not_sell\"]):not([data-testid=\"cd-switch-limit_pii_use\"])"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": ["#cd-outer-hab", "[data-testid=\"cd-confirm-choices-button\"]"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": ["#cd-outer-hab", "[data-testid=\"cd-do-not-sell-switch\"][aria-checked=\"false\"]"]
+                        },
+                        {
+                            "waitForVisible": ["#cd-outer-hab", "[data-testid=\"cd-do-not-sell-switch\"][aria-checked=\"true\"]"]
+                        },
+                        {
+                            "if": {
+                                "exists": ["#cd-outer-hab", "[data-testid=\"cd-close-button\"]"]
+                            },
+                            "then": [
+                                {
+                                    "click": ["#cd-outer-hab", "[data-testid=\"cd-close-button\"]"]
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "comment": "without a customize button, the accept button saves the do-not-sell choice",
+                                    "click": ["#cd-outer-hab", "[data-testid=\"cd-accept-all-button\"]"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "waitForVisible": ["#cd-outer-hab", "[data-testid=\"cd-accept-all-button\"]"],
+            "check": "none",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "wait": 2000
+        },
+        {
+            "cookieContains": "concord-allow-state-"
+        },
+        {
+            "cookieContains": "\"marketing\":false"
+        },
+        {
+            "cookieContains": "\"defaults\":true",
+            "negated": true
+        }
+    ]
+}
