@@ -1,0 +1,26 @@
+{
+    "name": "transcend-tcf",
+    "vendorUrl": "https://transcend.io/",
+    "cosmetic": true,
+    "comment": "The TCF UI renders in a closed shadow root and airgap only accepts consent from trusted clicks, so the popup can only be hidden.",
+    "prehideSelectors": ["#transcend-consent-manager-tcf-ui"],
+    "detectCmp": [
+        {
+            "exists": "#transcend-consent-manager-tcf-ui"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#transcend-consent-manager-tcf-ui"
+        },
+        {
+            "eval": "EVAL_TRANSCEND_TCF_UNCONFIRMED"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "hide": "#transcend-consent-manager-tcf-ui"
+        }
+    ]
+}
