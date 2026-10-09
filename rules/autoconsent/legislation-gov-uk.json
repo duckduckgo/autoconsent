@@ -1,0 +1,43 @@
+{
+    "name": "legislation-gov-uk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?legislation\\.gov\\.uk/"
+    },
+    "prehideSelectors": [".cookie-preferences-banner"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-preferences-banner .reject-all-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-preferences-banner .reject-all-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-preferences-banner .accept-all-cookies"
+        },
+        {
+            "waitForThenClick": ".cookie-preferences-banner .dismiss-banner",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-preferences-banner .reject-all-cookies"
+        },
+        {
+            "comment": "a confirmation banner replaces the dialog after the choice",
+            "waitForThenClick": ".cookie-preferences-banner .dismiss-banner",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analytics%22%3Afalse"
+        }
+    ]
+}
