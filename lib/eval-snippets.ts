@@ -254,6 +254,12 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    // older SDKs without closeBanner() leave their overlay behind, so they are not supported
+    EVAL_TRUSTCOMMANDER_0: () => typeof window.tC?.privacy?.closeBanner === 'function',
+    EVAL_TRUSTCOMMANDER_OPT_OUT: () => window.tC.privacy.setOptoutAll() || window.tC.privacy.closeBanner() || true,
+    EVAL_TRUSTCOMMANDER_OPT_IN: () => window.tC.privacy.setOptinAll() || window.tC.privacy.closeBanner() || true,
+    // the site's own reject button may keep essential categories opted in
+    EVAL_TRUSTCOMMANDER_TEST: () => window.tC.privacy.cookieData?.length > 0 && window.tC.privacy.getOptoutCategories?.().length > 0,
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),

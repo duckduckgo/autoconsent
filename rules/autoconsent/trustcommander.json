@@ -1,0 +1,28 @@
+{
+    "name": "trustcommander",
+    "vendorUrl": "https://www.commandersact.com/en/solutions/cmp/",
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#tc-privacy-wrapper > .tc-privacy-banner"],
+    "detectCmp": [{ "exists": "#tc-privacy-wrapper > .tc-privacy-banner" }, { "eval": "EVAL_TRUSTCOMMANDER_0" }],
+    "detectPopup": [{ "visible": "#tc-privacy-wrapper > .tc-privacy-banner" }],
+    "optIn": [
+        {
+            "if": { "exists": "#tc-privacy-wrapper button[aria-label='Accept proposed privacy settings']" },
+            "then": [{ "click": "#tc-privacy-wrapper button[aria-label='Accept proposed privacy settings']" }],
+            "else": [{ "eval": "EVAL_TRUSTCOMMANDER_OPT_IN" }]
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "Button order and labels are configured per site; only accessible templates label the reject button.",
+            "if": { "exists": "#tc-privacy-wrapper button[aria-label='Reject proposed privacy settings']" },
+            "then": [{ "click": "#tc-privacy-wrapper button[aria-label='Reject proposed privacy settings']" }],
+            "else": [{ "eval": "EVAL_TRUSTCOMMANDER_OPT_OUT" }]
+        },
+        { "waitForVisible": "#tc-privacy-wrapper > .tc-privacy-banner", "timeout": 2000, "check": "none" }
+    ],
+    "test": [{ "eval": "EVAL_TRUSTCOMMANDER_TEST" }]
+}
