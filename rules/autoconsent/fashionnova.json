@@ -1,0 +1,49 @@
+{
+    "name": "fashionnova",
+    "vendorUrl": "https://www.fashionnova.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?fashionnova\\.com/"
+    },
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"])", "#transcend-consent-manager"],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": "#transcend-consent-manager" },
+                { "exists": "div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"]) button.btn-secondary" }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": "div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"]) button.btn-secondary" },
+                { "eval": "EVAL_TRANSCEND_POPUP_SHOWN" }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"]) button.btn-secondary" },
+            "then": [{ "waitForThenClick": "div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"]) button.btn-secondary" }],
+            "else": [{ "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog .inner-container button"] }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"]) button.btn-secondary" },
+            "then": [{ "waitForThenClick": "div.fixed.bottom-0:has(> span a[href=\"/pages/privacy-policy\"]) button.btn-secondary" }],
+            "else": [
+                {
+                    "setStyle": "display: none !important; z-index: -1 !important; pointer-events: none !important;",
+                    "selector": "#transcend-consent-manager"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "transcend-cookie-us=Accepted" }, { "visible": "#transcend-consent-manager", "check": "none" }]
+        }
+    ]
+}
