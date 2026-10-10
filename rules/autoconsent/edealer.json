@@ -1,0 +1,36 @@
+{
+    "name": "edealer",
+    "vendorUrl": "https://www.edealer.ca/",
+    "comment": "Some eDealer sites also load the OEM's Transcend banner (closed shadow root, no scriptable opt-out). Only one rule runs per page, so hide it here as the cosmetic transcend rule would.",
+    "minimumRuleStepVersion": 3,
+    "prehideSelectors": [".cookie-notice-base"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-notice-base .toggle-exit"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-notice-base .cookie-notice-content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-notice-base.slide-in .toggle-exit"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-notice-base.slide-in .toggle-exit"
+        },
+        {
+            "stylesheet": "#transcend-consent-manager { display: none !important; z-index: -1 !important; pointer-events: none !important; }",
+            "stylesheetId": "edealer-transcend-hide"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_notice_closed=true"
+        }
+    ]
+}
