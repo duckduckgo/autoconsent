@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { classifyButtonTextRegex } from '../../lib/heuristics';
+import { classifyButtonTextRegex } from '../../lib/heuristic-classify';
 import {
     BENCHMARK_LABELS,
     buildLabelBenchmarks,

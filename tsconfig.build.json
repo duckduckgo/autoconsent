@@ -7,6 +7,6 @@
         "rootDir": "./lib",
         "noCheck": true
     },
-    "include": ["lib/web.ts"],
+    "include": ["lib/web.ts", "lib/heuristic-classify.ts"],
     "exclude": []
 }

@@ -4,13 +4,9 @@ import {
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
-    getActionablePopups,
-    isDisabled,
-    excludeContainers,
-    getButtonData,
-    isDialogLikeElement,
     isExcludedPopup,
-} from '../../lib/heuristics';
+} from '../../lib/heuristic-classify';
+import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
 function rejectButtons(buttons: ButtonData[]) {
