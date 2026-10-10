@@ -1,0 +1,24 @@
+{
+    "name": "backloggd",
+    "vendorUrl": "https://backloggd.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?backloggd\\.com/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner .cookie-banner-deny" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-banner .cookie-banner-deny" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 10000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "ne_cookies_consent=false" }]
+}
