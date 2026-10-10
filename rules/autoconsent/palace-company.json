@@ -1,0 +1,13 @@
+{
+    "name": "palace-company",
+    "vendorUrl": "https://www.palaceresorts.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?(moonpalace|palaceresorts|leblancsparesorts|baglionihotels)\\.com/"
+    },
+    "prehideSelectors": ["#cookie-consent", "#cookie-consent ~ .banner-shadow"],
+    "detectCmp": [{ "exists": "#cookie-consent .cc-window[aria-describedby=\"cookieconsent:desc\"]" }],
+    "detectPopup": [{ "visible": "#cookie-consent .cc-window[aria-describedby=\"cookieconsent:desc\"]" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent .cc-window .cc-dismiss" }],
+    "optOut": [{ "hide": "#cookie-consent, #cookie-consent ~ .banner-shadow" }]
+}
