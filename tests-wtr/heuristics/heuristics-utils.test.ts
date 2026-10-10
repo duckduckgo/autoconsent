@@ -76,6 +76,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Italian cookie notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'KAYAK e i suoi partner intendono utilizzare i cookie o tecnologie simili per memorizzare e/o accedere alle informazioni sul tuo dispositivo.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
