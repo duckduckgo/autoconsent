@@ -1,3 +1,44 @@
+# v16.50.0 (Sat Oct 10 2026)
+
+#### Rules
+
+- Rule update: ddg_android (eun) CPM magic report: openrouter.ai [#1646](https://github.com/duckduckgo/autoconsent/pull/1646) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: ddg_android (usc) CPM magic report: hiring.amazon.ca [#1647](https://github.com/duckduckgo/autoconsent/pull/1647) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (use) CPM magic report: www.foodnetwork.com [#1649](https://github.com/duckduckgo/autoconsent/pull/1649) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bigcrunch [#1655](https://github.com/duckduckgo/autoconsent/pull/1655) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: avada-cookie-consent [#1670](https://github.com/duckduckgo/autoconsent/pull/1670) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ceneo [#1660](https://github.com/duckduckgo/autoconsent/pull/1660) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: axeptio [#1658](https://github.com/duckduckgo/autoconsent/pull/1658) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dhbbank [#1669](https://github.com/duckduckgo/autoconsent/pull/1669) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: laravel-cookie-consent [#1668](https://github.com/duckduckgo/autoconsent/pull/1668) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mackeeper [#1666](https://github.com/duckduckgo/autoconsent/pull/1666) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fera-cookies [#1665](https://github.com/duckduckgo/autoconsent/pull/1665) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uft-cookie-notice [#1664](https://github.com/duckduckgo/autoconsent/pull/1664) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ndl-go-jp [#1663](https://github.com/duckduckgo/autoconsent/pull/1663) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: la7-cmp [#1662](https://github.com/duckduckgo/autoconsent/pull/1662) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: thenounproject [#1661](https://github.com/duckduckgo/autoconsent/pull/1661) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bricklink [#1659](https://github.com/duckduckgo/autoconsent/pull/1659) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: texas-instruments [#1657](https://github.com/duckduckgo/autoconsent/pull/1657) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: legislation-gov-uk [#1656](https://github.com/duckduckgo/autoconsent/pull/1656) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: toyota [#1654](https://github.com/duckduckgo/autoconsent/pull/1654) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: [E2E test] bryantpark.org fix path [#1651](https://github.com/duckduckgo/autoconsent/pull/1651) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on www.thegrandyork.co.uk [#1650](https://github.com/duckduckgo/autoconsent/pull/1650) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie prompt not dismissed for erewhon.com [#1644](https://github.com/duckduckgo/autoconsent/pull/1644) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie Popup on vaquerogengage.com [#1620](https://github.com/duckduckgo/autoconsent/pull/1620) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- paypal: hide the no-Decline banner, retry the Decline click [#1652](https://github.com/duckduckgo/autoconsent/pull/1652) ([@muodov](https://github.com/muodov))
+- Rule update: conjointly [#1648](https://github.com/duckduckgo/autoconsent/pull/1648) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### CI / Release Automation
+
+- Apply path-based labels only when a PR is opened [#1671](https://github.com/duckduckgo/autoconsent/pull/1671) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.49.0 (Fri Oct 09 2026)
 
 #### Rules
