@@ -2,11 +2,45 @@
     "name": "funding-choices",
     "prehideSelectors": [".fc-consent-root,.fc-dialog-container,.fc-dialog-overlay,.fc-dialog-content"],
     "detectCmp": [{ "exists": ".fc-consent-root" }],
-    "detectPopup": [{ "exists": ".fc-dialog-container" }],
+    "detectPopup": [
+        {
+            "if": { "exists": ".fc-consent-root .fc-li-only-placeholder" },
+            "then": [{ "exists": ["body > div[style*=\"animation-delay\"]", ".fc-li-only-message .fc-navigate-to-data-preferences"] }],
+            "else": [
+                {
+                    "if": { "exists": ".fc-consent-root .fc-soft-cmp-placeholder" },
+                    "then": [{ "exists": ".fc-soft-cmp-cta-manage-options" }],
+                    "else": [{ "exists": ".fc-dialog-container" }]
+                }
+            ]
+        }
+    ],
     "optOut": [
-        { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+        {
+            "if": { "exists": ".fc-consent-root .fc-li-only-placeholder" },
+            "then": [
+                { "click": ["body > div[style*=\"animation-delay\"]", ".fc-li-only-message .fc-navigate-to-data-preferences"] },
+                { "waitForVisible": ".fc-data-preferences-dialog" }
+            ],
+            "else": [
+                {
+                    "if": { "exists": ".fc-consent-root .fc-soft-cmp-placeholder" },
+                    "then": [{ "click": ".fc-soft-cmp-cta-manage-options" }, { "waitForVisible": ".fc-data-preferences-dialog" }],
+                    "else": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+                }
+            ]
+        },
         { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
         { "click": ".fc-confirm-choices", "optional": true }
     ],
-    "optIn": [{ "click": ".fc-cta-consent" }]
+    "optIn": [
+        {
+            "if": { "exists": ".fc-consent-root .fc-li-only-placeholder" },
+            "then": [
+                { "click": ["body > div[style*=\"animation-delay\"]", ".fc-li-only-message .fc-navigate-to-data-preferences"] },
+                { "waitForThenClick": ".fc-data-preferences-accept-all" }
+            ],
+            "else": [{ "click": ".fc-cta-consent,.fc-soft-cmp-cta-consent" }]
+        }
+    ]
 }
