@@ -1,0 +1,22 @@
+{
+    "name": "avvio",
+    "vendorUrl": "https://www.avvio.com/",
+    "prehideSelectors": ["#ACClayerBackground"],
+    "detectCmp": [{ "exists": "#ACClayerBackground #ACCsmallCookieLayer" }],
+    "detectPopup": [{ "visible": "#ACCsmallCookieLayer, #ACCtabedCookieLayer", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "#ACCsmallCookieLayer a[href*='consentGivenSmall']" }],
+    "optOut": [
+        {
+            "if": { "visible": "#ACCsmallCookieLayer" },
+            "then": [{ "waitForThenClick": "#ACCsmallCookieLayer .kkACCButtonLearnMore" }]
+        },
+        { "waitForVisible": "#ACCdetailsSaveButton" },
+        {
+            "if": { "exists": "#ACCtabedCookieLayer .kkACCSwitchLabel input:checked" },
+            "then": [{ "click": "#ACCtabedCookieLayer .kkACCSwitchLabel:has(input:checked)", "all": true }]
+        },
+        { "click": "#ACCdetailsSaveButton" },
+        { "waitForVisible": "#ACClayerBackground", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "=1000," }]
+}
