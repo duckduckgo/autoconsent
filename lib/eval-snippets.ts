@@ -257,6 +257,8 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    // the TCF UI renders in a closed shadow root, so its visibility can only be read from the API
+    EVAL_TRANSCEND_TCF_DETECT: () => window.transcend?.getViewState?.() === 'TCF_EU',
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
