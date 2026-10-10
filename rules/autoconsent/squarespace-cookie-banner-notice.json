@@ -1,0 +1,25 @@
+{
+    "name": "squarespace-cookie-banner-notice",
+    "cosmetic": true,
+    "prehideSelectors": [".cookie-banner-mount-point"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']:has(button.accept):not(:has(button.decline, button.manage))"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-banner-mount-point"
+        }
+    ]
+}
