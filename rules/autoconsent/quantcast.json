@@ -9,6 +9,11 @@
     "detectPopup": [
         {
             "visible": "#qc-cmp2-ui"
+        },
+        {
+            "comment": "Bail on the 'reject and pay' variant: rejecting leads to a paywall prompt. The script loads before the pay button is injected.",
+            "exists": "script[src*=\"/privacy-plus\"], #qc-cmp2-ui .pp-pay",
+            "negated": true
         }
     ],
     "optOut": [
