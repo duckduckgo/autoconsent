@@ -5,3 +5,9 @@ generateCMPTests('AppConsent', ['https://magasin.darty.com/'], {
     testOptOut: true,
     onlyRegions: ['US', 'FR'],
 });
+
+generateCMPTests('AppConsent', ['https://www.sportsmole.co.uk/', 'https://www.bestwordlist.com/'], {
+    testOptIn: false,
+    testOptOut: true,
+    onlyRegions: ['GB', 'US'],
+});

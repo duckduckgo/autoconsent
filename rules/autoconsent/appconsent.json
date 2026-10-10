@@ -18,7 +18,22 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
+            "waitForVisible": ["iframe[title='Consent window']", ".button__skip, .button__refuseAll"]
+        },
+        {
+            "if": {
+                "exists": ["iframe[title='Consent window']", ".button__refuseAll"]
+            },
+            "then": [
+                {
+                    "click": ["iframe[title='Consent window']", ".button__refuseAll"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["iframe[title='Consent window']", ".button__skip"]
+                }
+            ]
         }
     ],
     "test": [
