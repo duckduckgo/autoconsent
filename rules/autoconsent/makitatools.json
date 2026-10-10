@@ -1,0 +1,41 @@
+{
+    "name": "makitatools",
+    "vendorUrl": "https://www.makitatools.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?makitatools\\.com/"
+    },
+    "prehideSelectors": [".makita-footer-warning"],
+    "detectCmp": [
+        {
+            "exists": ".makita-footer-warning"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".makita-footer-warning"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".makita-footer-warning a[data-post*='allowcookie=true']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".makita-footer-warning .js-makita-modal[data-src*='privacysettings']"
+        },
+        {
+            "waitForThenClick": ".about-cookies a[data-post*='allowcookie=false']"
+        },
+        {
+            "waitForVisible": ".makita-footer-warning",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".makita-footer-warning",
+            "check": "none"
+        }
+    ]
+}
