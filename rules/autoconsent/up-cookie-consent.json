@@ -1,0 +1,20 @@
+{
+    "name": "up-cookie-consent",
+    "prehideSelectors": [".upcc-cookie-widget"],
+    "detectCmp": [{ "exists": ".upcc-cookie-widget" }],
+    "detectPopup": [{ "visible": ".upcc-cookie-widget" }],
+    "optIn": [{ "waitForThenClick": ".upcc-cookie-widget .upcc-cookie-accept", "retry": 10, "retryInterval": 1000 }],
+    "optOut": [
+        {
+            "if": { "visible": ".upcc-cookie-widget .upcc-cookie-reject-all" },
+            "then": [{ "waitForThenClick": ".upcc-cookie-widget .upcc-cookie-reject-all", "retry": 10, "retryInterval": 1000 }],
+            "else": [
+                { "waitForThenClick": ".upcc-cookie-widget .js-upcc-view-upcc-cookie-options", "retry": 10, "retryInterval": 1000 },
+                { "waitForVisible": ".upcc-cookie-modal-container .upcc-cookie-reject-all" },
+                { "waitForThenClick": ".upcc-cookie-modal-container .upcc-cookie-reject-all", "retry": 10, "retryInterval": 1000 }
+            ]
+        },
+        { "waitForVisible": ".upcc-cookie-widget", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "up-cookie-consent-options=[\"strictly_necessary\"]" }]
+}
