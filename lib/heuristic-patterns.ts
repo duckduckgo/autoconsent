@@ -9,6 +9,7 @@ export const DETECT_PATTERNS = [
     /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi,
     // a single qualifier is common: "optional", "essential", "necessary", "analytics", ...
     /we (?:use|serve)(?: \w+)? cookies/gi,
+    /we use(?: \w+)? cookie files/gi,
     /we are using cookies/gi,
     /use of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,

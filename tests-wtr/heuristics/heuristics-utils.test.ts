@@ -92,6 +92,12 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
         }
     });
 
+    it('detects "we use cookie files" notices', () => {
+        const text =
+            'We use cookie files to provide users personalized content, additional functions, and to perform the website traffic analysis.';
+        expect(checkHeuristicPatterns(text).patterns.length).to.be.greaterThan(0);
+    });
+
     it('does not match when "cookies" is further away', () => {
         expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
             0,
