@@ -9,7 +9,19 @@
     ],
     "optOut": [
         {
-            "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+            "if": {
+                "exists": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+            },
+            "then": [
+                {
+                    "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+                }
+            ],
+            "else": [
+                {
+                    "hide": "#sliding-popup, .eu-cookie-compliance-banner"
+                }
+            ]
         }
     ],
     "test": [
