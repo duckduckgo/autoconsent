@@ -163,6 +163,14 @@ describe('isExcludedPopup', () => {
         expect(isExcludedPopup('Confirm your age to continue. I am 18+ I am under 18')).to.be.true;
     });
 
+    it('flags "21+ years of age" age gates', () => {
+        const text =
+            'Are you 21+ years of age? Verify your age and dig deeper into the Finnish Long Drink. ' +
+            'We wanted to let you know that we use cookies to improve your browsing experience. ' +
+            'By using this site, you agree to our updated Policy and our Terms of Use. Yes No';
+        expect(isExcludedPopup(text)).to.be.true;
+    });
+
     it('flags adult-content disclaimers', () => {
         expect(isExcludedPopup('This website contains adult oriented material. Please confirm to enter.')).to.be.true;
         expect(isExcludedPopup('Adult-only website. You must be 21 or older to enter.')).to.be.true;

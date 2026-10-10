@@ -460,8 +460,8 @@ export const DETECT_NEVER_MATCH_PATTERNS = [
     /age\s+(?:verification|confirmation|check|gate|restriction)/i,
     // e.g. "over 18 years", "at least 21 years", "older than 21", "18+"
     /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
-    // e.g. "18 years of age", "18+ years old", "21 years or older"
-    /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
+    // e.g. "18 years of age", "21+ years of age", "21 years or older"
+    /(?:18|21)\s*(?:\+\s*years?|\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
     // e.g. "I am 18+", "I am over 18", "I'm 21 or older"
     /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
     // e.g. "you must be 18", "users must be at least 21", "visitors must be over 18"
