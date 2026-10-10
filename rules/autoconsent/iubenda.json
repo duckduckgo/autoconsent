@@ -7,7 +7,7 @@
     "optOut": [
         {
             "if": { "exists": ".iubenda-cs-reject-btn" },
-            "then": [{ "click": ".iubenda-cs-reject-btn" }],
+            "then": [{ "waitForThenClick": ".iubenda-cs-reject-btn", "retry": 2, "retryInterval": 500 }],
             "else": [
                 {
                     "if": { "exists": ".iubenda-cs-customize-btn" },
