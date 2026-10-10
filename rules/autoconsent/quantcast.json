@@ -23,21 +23,21 @@
             ],
             "else": [
                 {
-                    "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
+                    "waitFor": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]",
                     "timeout": 2000
                 },
                 {
                     "if": {
-                        "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                        "exists": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(2)"
                     },
                     "then": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                            "click": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(2)"
                         }
                     ],
                     "else": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                            "click": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(1)"
                         },
                         {
                             "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
@@ -55,24 +55,34 @@
                             "optional": true
                         },
                         {
-                            "wait": 500
+                            "waitForVisible": "#qc-cmp2-ui",
+                            "check": "none",
+                            "timeout": 1000,
+                            "optional": true
                         },
                         {
                             "if": {
-                                "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                "visible": "#qc-cmp2-ui"
                             },
                             "then": [
                                 {
-                                    "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
-                                }
-                            ],
-                            "else": [
-                                {
-                                    "waitForThenClick": [
-                                        ".qc-cmp2-main",
-                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                    "if": {
+                                        "exists": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".qc-cmp2-buttons-desktop > button[mode=primary]"
+                                        }
                                     ],
-                                    "timeout": 5000
+                                    "else": [
+                                        {
+                                            "waitForThenClick": [
+                                                ".qc-cmp2-main",
+                                                "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                            ],
+                                            "timeout": 5000
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -83,7 +93,7 @@
     ],
     "optIn": [
         {
-            "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"]"
+            "click": ".qc-cmp2-summary-buttons button[mode=\"primary\"]"
         }
     ]
 }

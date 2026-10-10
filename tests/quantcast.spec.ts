@@ -3,14 +3,14 @@ import generateCMPTests from '../playwright/runner';
 generateCMPTests(
     'quantcast',
     [
-        'https://www.cyclingnews.com/',
-        'https://www.techradar.com/',
-        'https://www.anandtech.com/',
-        'https://www.livescience.com',
-        'https://www.gamesradar.com',
-        'https://time.is/',
+        'https://www.geogebra.org/',
+        'https://routenplaner24.net/',
+        'https://ffxiv.consolegameswiki.com/',
+        'https://www.quotev.com/',
+        'https://www.tide-forecast.com/',
+        'https://www.miniplay.com/',
     ],
     {
-        skipRegions: ['US', 'GB', 'FR'],
+        skipRegions: ['US'],
     },
 );
