@@ -1,0 +1,67 @@
+{
+    "name": "nuxt-cookie-control",
+    "_metadata": {
+        "vendorUrl": "https://github.com/dargmuesli/nuxt-cookie-control"
+    },
+    "prehideSelectors": [".cookieControl__Bar"],
+    "detectCmp": [{ "exists": ".cookieControl__Bar .cookieControl__BarButtons" }],
+    "detectPopup": [{ "visible": ".cookieControl__Bar .cookieControl__BarButtons" }],
+    "optIn": [
+        {
+            "if": { "exists": "#__layout" },
+            "then": [{ "click": ".cookieControl__BarButtons > button:last-child" }],
+            "else": [{ "click": ".cookieControl__BarButtons > button:first-child" }]
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "Nuxt 2 sites (#__layout) use v1 bar order [decline], manage, accept; Nuxt 3 sites use accept, [decline], manage",
+            "if": { "exists": ".cookieControl__BarButtons > button:nth-child(3)" },
+            "then": [
+                {
+                    "waitForThenClick": "#__layout .cookieControl__BarButtons > button:first-child, .cookieControl__BarButtons:not(#__layout *) > button:nth-child(2)",
+                    "retry": 5,
+                    "retryInterval": 1000
+                }
+            ],
+            "else": [
+                {
+                    "comment": "the bar is server-rendered, so clicks before hydration are dropped",
+                    "click": "#__layout .cookieControl__BarButtons > button:first-child, .cookieControl__BarButtons:not(#__layout *) > button:last-child"
+                },
+                { "waitForVisible": ".cookieControl__ModalButtons", "timeout": 1500, "optional": true },
+                {
+                    "if": { "exists": ".cookieControl__ModalButtons" },
+                    "then": [],
+                    "else": [
+                        {
+                            "click": "#__layout .cookieControl__BarButtons > button:first-child, .cookieControl__BarButtons:not(#__layout *) > button:last-child"
+                        },
+                        { "waitForVisible": ".cookieControl__ModalButtons", "timeout": 1500, "optional": true }
+                    ]
+                },
+                {
+                    "if": { "exists": ".cookieControl__ModalButtons" },
+                    "then": [],
+                    "else": [
+                        {
+                            "click": "#__layout .cookieControl__BarButtons > button:first-child, .cookieControl__BarButtons:not(#__layout *) > button:last-child"
+                        }
+                    ]
+                },
+                { "waitForVisible": ".cookieControl__ModalButtons", "timeout": 3000 },
+                {
+                    "comment": "v1 (Nuxt 2) checkboxes can show preselected cookies that are not enabled, so clicking them would opt in",
+                    "click": ".cookieControl__ModalInputWrapper:not(#__layout *) input[type=\"checkbox\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "comment": "'Decline all' does not store consent in some versions, so save with optional cookies unchecked",
+                    "click": ".cookieControl__ModalButtons > button:first-child"
+                }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": ".cookieControl__Bar", "check": "none", "timeout": 3000 }]
+}
