@@ -1,0 +1,31 @@
+{
+    "name": "bluepark",
+    "prehideSelectors": ["#cookie_banner:has(#cookie_essential)"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_banner #cookie_buttons #cookie_essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_banner #cookie_essential"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_banner #cookie_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_banner #cookie_essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie_banner",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}
