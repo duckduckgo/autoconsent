@@ -1,0 +1,21 @@
+{
+    "name": "web-rewind.com",
+    "vendorUrl": "https://web-rewind.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?web-rewind\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".cookie-banner .btn-accept-selected" }],
+    "detectPopup": [{ "visible": ".cookie-banner .btn-accept-selected" }],
+    "optIn": [{ "waitForThenClick": ".cookie-banner .btn-accept-all" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner .toggle-switch[aria-pressed='true']",
+            "all": true,
+            "timeout": 500,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookie-banner .btn-accept-selected" }
+    ]
+}
