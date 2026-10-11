@@ -817,6 +817,8 @@ export const ACKNOWLEDGE_PATTERNS = [
 
     // neutral "continue" without accept/reject wording
     /^(continuer|doorgaan|ga verder)$/is,
+    // e.g. "continue browsing", "continue to browse the site"
+    /^continue (to )?brows(e|ing)( (the|our) (site|website))?$/is,
 
     'continue',
     'x',
