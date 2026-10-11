@@ -1,0 +1,10 @@
+{
+    "name": "madden-tempest",
+    "vendorUrl": "https://www.maddenmedia.com/",
+    "cosmetic": true,
+    "prehideSelectors": [".msg--ribbon[data-cookie-consent]"],
+    "detectCmp": [{ "exists": ".msg--ribbon[data-cookie-consent] [data-cookie-consent-close]" }],
+    "detectPopup": [{ "visible": ".msg--ribbon[data-cookie-consent]" }],
+    "optIn": [{ "waitForThenClick": ".msg--ribbon[data-cookie-consent] [data-cookie-consent-close]" }],
+    "optOut": [{ "hide": ".msg--ribbon[data-cookie-consent]" }]
+}
