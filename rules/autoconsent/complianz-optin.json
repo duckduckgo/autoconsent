@@ -10,18 +10,30 @@
     ],
     "optOut": [
         {
-            "if": { "visible": ".cc-deny" },
-            "then": [{ "click": ".cc-deny" }],
+            "if": {
+                "exists": ".cc-window .cc-checkboxes-container:has(input.cc-cookie-checkbox):not(:has(input.cc-cookie-checkbox:checked:not([readonly])))"
+            },
+            "then": [{ "waitForThenClick": ".cc-window .cc-allow" }],
             "else": [
                 {
-                    "if": { "visible": ".cc-settings" },
-                    "then": [
-                        { "waitForThenClick": ".cc-settings" },
-                        { "waitForVisible": ".cc-settings-view" },
-                        { "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
-                        { "click": ".cc-settings-view .cc-btn-accept-selected" }
-                    ],
-                    "else": [{ "click": ".cc-dismiss" }]
+                    "if": { "visible": ".cc-deny" },
+                    "then": [{ "click": ".cc-deny" }],
+                    "else": [
+                        {
+                            "if": { "visible": ".cc-settings" },
+                            "then": [
+                                { "waitForThenClick": ".cc-settings" },
+                                { "waitForVisible": ".cc-settings-view" },
+                                {
+                                    "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                { "click": ".cc-settings-view .cc-btn-accept-selected" }
+                            ],
+                            "else": [{ "click": ".cc-dismiss" }]
+                        }
+                    ]
                 }
             ]
         }
