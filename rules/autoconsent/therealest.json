@@ -4,9 +4,7 @@
     "runContext": {
         "urlPattern": "^https?://([a-z0-9-]+\\.)?therealest\\.com/"
     },
-    "prehideSelectors": [
-        "[role=dialog][aria-labelledby=cookie-banner-title]"
-    ],
+    "prehideSelectors": ["[role=dialog][aria-labelledby=cookie-banner-title]"],
     "detectCmp": [
         {
             "exists": "[role=dialog][aria-labelledby=cookie-banner-title]"
