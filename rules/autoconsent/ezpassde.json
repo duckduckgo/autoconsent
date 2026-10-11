@@ -1,0 +1,19 @@
+{
+    "name": "ezpassde",
+    "vendorUrl": "https://acct.ezpassde.com/",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?ezpassde\\.com/"
+    },
+    "prehideSelectors": [".cc-window.cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-window.cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"] .cc-deny" }],
+    "detectPopup": [{ "visible": ".cc-window.cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
+    "optIn": [
+        { "waitForThenClick": ".cc-window .cc-allow" },
+        { "hide": ".cc-window", "comment": "prehide blocks the fade-out transition that removes the overlay" }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".cc-window .cc-deny", "comment": "deny button is hidden with CSS but still works" },
+        { "hide": ".cc-window", "comment": "prehide blocks the fade-out transition that removes the overlay" }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_status=deny" }]
+}
