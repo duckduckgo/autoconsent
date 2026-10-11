@@ -76,6 +76,13 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects consent withdrawal notices', () => {
+        expect(
+            checkHeuristicPatterns('No tracking will occur without your consent. You can revoke your consent at any time.').patterns,
+        ).to.have.length(1);
+        expect(checkHeuristicPatterns('Du kannst deine Einwilligung jederzeit widerrufen.').patterns).to.have.length(1);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {

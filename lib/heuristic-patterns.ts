@@ -17,6 +17,7 @@ export const DETECT_PATTERNS = [
     /such as cookies/gi,
     /read more about.{0,100}cookies/gi,
     /consent to.{0,100}cookies/gi,
+    /(?:revoke|withdraw) your consent at any time/gi,
     /we and our partners.{0,100}cookies/gi,
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
@@ -64,6 +65,7 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    /einwilligung jederzeit widerrufen/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
