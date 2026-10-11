@@ -1,0 +1,26 @@
+{
+    "name": "indy-systems",
+    "vendorUrl": "https://indy.systems/",
+    "cosmetic": true,
+    "prehideSelectors": [".q-notifications .q-notification:has(a[href=\"/cookie-policy\"])"],
+    "detectCmp": [
+        {
+            "exists": ".q-notifications .q-notification a[href=\"/cookie-policy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".q-notifications .q-notification:has(a[href=\"/cookie-policy\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".q-notifications .q-notification:has(a[href=\"/cookie-policy\"]) .q-notification__actions button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".q-notifications .q-notification:has(a[href=\"/cookie-policy\"])"
+        }
+    ]
+}
