@@ -51,6 +51,7 @@ export const DETECT_PATTERNS = [
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
     /nécessaires uniquement/gi,
+    /(?:en continuant.{0,100}(?:cookie|confidentialité))|(?:(?:cookie|confidentialité).{0,100}en continuant)/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
@@ -64,6 +65,7 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    /(?:durch die weitere nutzung.{0,100}(?:cookie|datenschutz))|(?:(?:cookie|datenschutz).{0,100}durch die weitere nutzung)/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -77,6 +79,7 @@ export const DETECT_PATTERNS = [
     /gebruik.{0,100}van.{0,100}cookies/gi,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
+    /(?:te blijven gebruiken.{0,100}(?:cookie|privacy))|(?:(?:cookie|privacy).{0,100}te blijven gebruiken)/gi,
 
     /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
     /alleen.{0,100}noodzakelijke?\b/gi,

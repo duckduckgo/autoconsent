@@ -76,6 +76,23 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "by continuing" notices in German, French and Dutch', () => {
+        const de = checkHeuristicPatterns(
+            'Cookies werden für Messungen, Werbung und Optimierung verwendet. Durch die weitere Nutzung unserer Website stimmen Sie unserer Datenschutzrichtlinie zu.',
+        );
+        const fr = checkHeuristicPatterns(
+            "Des cookies sont utilisés à des fins de mesure, de publicité et d'optimisation. En continuant à utiliser notre site, vous acceptez notre politique de confidentialité.",
+        );
+
+        const nl = checkHeuristicPatterns(
+            'Cookies worden gebruikt voor metingen, advertenties en optimalisatie. Door onze site te blijven gebruiken, gaat u akkoord met ons privacybeleid.',
+        );
+
+        expect(de.patterns.length).to.be.greaterThan(0);
+        expect(fr.patterns.length).to.be.greaterThan(0);
+        expect(nl.patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
