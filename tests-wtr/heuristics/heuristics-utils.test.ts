@@ -76,6 +76,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "accept or reject cookies" notices', () => {
+        const { snippets } = checkHeuristicPatterns(
+            'LoveAntiques uses cookies to improve your browsing experience. You can choose to accept or reject cookies.',
+        );
+
+        expect(snippets).to.include('accept or reject cookies');
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
