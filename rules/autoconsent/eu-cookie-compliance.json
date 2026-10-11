@@ -1,6 +1,9 @@
 {
     "name": "eu-cookie-compliance-banner",
-    "detectCmp": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
+    "detectCmp": [
+        { "exists": "body.eu-cookie-compliance-popup-open" },
+        { "exists": ".eu-cookie-compliance-banner--default", "negated": true }
+    ],
     "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
     "optIn": [
         {
