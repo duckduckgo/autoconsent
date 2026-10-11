@@ -25,3 +25,6 @@ generateCMPTests(
 generateCMPTests('pandectes', ['https://asmc.de/', 'https://crossrope.com/'], {
     testOptIn: false,
 });
+
+// info-only notice variant: "Ok" acknowledge button, no decline or preferences
+generateCMPTests('pandectes', ['https://modani.com/', 'https://www.fleetfeet.com/']);

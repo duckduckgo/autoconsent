@@ -17,7 +17,7 @@
             "if": { "exists": "#pandectes-banner" },
             "then": [
                 {
-                    "waitForThenClick": "#pandectes-banner .cc-allow"
+                    "waitForThenClick": "#pandectes-banner .cc-allow, #pandectes-banner .cc-type-info .cc-dismiss"
                 },
                 { "hide": "#pandectes-banner", "optional": true }
             ],
@@ -32,11 +32,17 @@
                     "if": { "visible": "#pandectes-banner .cc-deny" },
                     "then": [{ "waitForThenClick": "#pandectes-banner .cc-deny" }],
                     "else": [
-                        { "waitForThenClick": "#pandectes-banner .cc-settings" },
-                        { "waitForVisible": ".pd-cp-ui-rejectAll" },
-                        { "click": ".pd-cp-ui-rejectAll" },
-                        { "waitForVisible": ".pd-cp-ui-save" },
-                        { "click": ".pd-cp-ui-save" }
+                        {
+                            "if": { "exists": "#pandectes-banner .cc-type-info" },
+                            "then": [{ "waitForThenClick": "#pandectes-banner .cc-dismiss" }],
+                            "else": [
+                                { "waitForThenClick": "#pandectes-banner .cc-settings" },
+                                { "waitForVisible": ".pd-cp-ui-rejectAll" },
+                                { "click": ".pd-cp-ui-rejectAll" },
+                                { "waitForVisible": ".pd-cp-ui-save" },
+                                { "click": ".pd-cp-ui-save" }
+                            ]
+                        }
                     ]
                 },
                 { "hide": "#pandectes-banner", "optional": true }
@@ -65,5 +71,12 @@
             ]
         }
     ],
-    "test": [{ "wait": 500 }, { "eval": "EVAL_PANDECTES_TEST" }]
+    "test": [
+        { "wait": 500 },
+        {
+            "if": { "exists": "#pandectes-banner .cc-type-info" },
+            "then": [{ "exists": "#pandectes-banner.cc-invisible" }],
+            "else": [{ "eval": "EVAL_PANDECTES_TEST" }]
+        }
+    ]
 }
