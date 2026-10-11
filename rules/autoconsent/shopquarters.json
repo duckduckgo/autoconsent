@@ -1,0 +1,41 @@
+{
+    "name": "shopquarters",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?shopquarters\\.com/"
+    },
+    "prehideSelectors": ["#shopify-pc__banner"],
+    "detectCmp": [
+        {
+            "exists": "aside[x-data=\"cookieConsent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#shopify-pc__banner, aside[x-data=\"cookieConsent\"] > div.opacity-100",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#shopify-pc__banner__btn-accept",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "aside[x-data=\"cookieConsent\"] button[title=\"Accept\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "theme banner only offers Accept",
+            "hide": "aside[x-data=\"cookieConsent\"]"
+        },
+        {
+            "comment": "Shopify banner is shown only in some regions, together with the theme banner",
+            "waitForThenClick": "#shopify-pc__banner__btn-decline",
+            "timeout": 2000,
+            "optional": true
+        }
+    ]
+}
