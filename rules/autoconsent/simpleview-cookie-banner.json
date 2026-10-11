@@ -1,0 +1,26 @@
+{
+    "name": "simpleview-cookie-banner",
+    "vendorUrl": "https://www.simpleviewinc.com/",
+    "cosmetic": true,
+    "prehideSelectors": [".contentRender_name_plugins_common_cookie_banner"],
+    "detectCmp": [
+        {
+            "exists": ".contentRender_name_plugins_common_cookie_banner :is(dialog.cookie-banner, .cookie-banner-wrapper):not(.hide)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".contentRender_name_plugins_common_cookie_banner :is(dialog.cookie-banner, .cookie-banner-wrapper):not(.hide)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".contentRender_name_plugins_common_cookie_banner [data-sv-close-banner]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".contentRender_name_plugins_common_cookie_banner"
+        }
+    ]
+}
