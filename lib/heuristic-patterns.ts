@@ -12,6 +12,8 @@ export const DETECT_PATTERNS = [
     /we are using cookies/gi,
     /use of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,
+    /uses cookies to ensure you get the best experience/gi,
+    /we have cookies/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
     /cookies (?:and|or) .{0,100} technologies/gi,
     /such as cookies/gi,

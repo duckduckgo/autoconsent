@@ -76,6 +76,22 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "uses cookies to ensure you get the best experience" notices', () => {
+        const { patterns, snippets } = checkHeuristicPatterns(
+            'We have cookies! Acme uses cookies to ensure you get the best experience on our website.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets).to.include('uses cookies to ensure you get the best experience');
+    });
+
+    it('detects short "we have cookies" notices', () => {
+        const { patterns, snippets } = checkHeuristicPatterns('We have cookies! Read our privacy policy');
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets).to.include('We have cookies');
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
