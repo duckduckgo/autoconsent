@@ -1,0 +1,29 @@
+{
+    "name": "wildling-com",
+    "vendorUrl": "https://wildling.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?wildling\\.com/"
+    },
+    "prehideSelectors": [".shopify-section.cookies:has(.accept-cookies)"],
+    "detectCmp": [
+        {
+            "exists": ".shopify-section.cookies .accept-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".shopify-section.cookies .accept-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".shopify-section.cookies .accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".shopify-section.cookies:has(.accept-cookies)"
+        }
+    ]
+}
