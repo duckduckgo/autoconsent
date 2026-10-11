@@ -1,0 +1,30 @@
+{
+    "name": "worldbank",
+    "vendorUrl": "https://www.worldbank.org/",
+    "prehideSelectors": ["#cookieconsentpopup.lp__cookie_tooltip"],
+    "detectCmp": [
+        {
+            "exists": "#cookieconsentpopup.lp__cookie_tooltip"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieconsentpopup.lp__cookie_tooltip"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieconsentpopup .accept-consent"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieconsentpopup .accept-consent"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent_cookie=1"
+        }
+    ]
+}
