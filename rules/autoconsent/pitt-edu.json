@@ -1,0 +1,12 @@
+{
+    "name": "pitt-edu",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?pitt\\.edu/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieMessage[data-cookie-boundary]"],
+    "detectCmp": [{ "exists": "#cookieMessage[data-cookie-boundary]" }],
+    "detectPopup": [{ "visible": "#cookieMessage[data-cookie-boundary]" }],
+    "optIn": [{ "waitForThenClick": "#cookieMessage [data-cookie-acceptance]" }],
+    "optOut": [{ "hide": "#cookieMessage[data-cookie-boundary]" }]
+}
