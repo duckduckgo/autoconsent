@@ -1,0 +1,39 @@
+{
+    "name": "cornerstone-brands",
+    "vendorUrl": "https://www.ballarddesigns.com/",
+    "prehideSelectors": [".c-tray .c-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".c-tray .c-cookie-banner .c-cookie-banner__close-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".c-tray .c-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c-tray .c-cookie-banner .c-cookie-banner__close-button"
+        },
+        {
+            "hide": ".gdprCookieBanner",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c-tray .c-cookie-banner .c-cookie-banner__close-button"
+        },
+        {
+            "hide": ".gdprCookieBanner",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "visible": ".c-tray .c-cookie-banner",
+            "check": "none"
+        }
+    ]
+}
