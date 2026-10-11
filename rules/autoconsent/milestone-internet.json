@@ -1,0 +1,32 @@
+{
+    "name": "milestone-internet",
+    "vendorUrl": "https://www.milestoneinternet.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#msCookieBanner"],
+    "detectCmp": [
+        {
+            "exists": "#msCookieBanner.msCookieBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#msCookieBanner.msCookieBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#msCookieBanner button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#msCookieBanner"
+        },
+        {
+            "removeClass": "pushItDown",
+            "selector": ".pushItDown",
+            "optional": true
+        }
+    ],
+    "minimumRuleStepVersion": 2
+}
