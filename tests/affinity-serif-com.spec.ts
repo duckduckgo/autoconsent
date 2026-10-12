@@ -1,3 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('affinity.serif.com', ['https://affinity.serif.com/en-us/photo/']);
+generateCMPTests('affinity.serif.com', ['https://store.serif.com/en-gb/sign-in/']);
