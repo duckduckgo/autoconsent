@@ -30,6 +30,8 @@ export const snippets = {
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
+    // pay-or-consent: contentpass SDK or consentmanager's own PUR mode
+    EVAL_CONSENTMANAGER_PUR: () => !!window.CPObject || window.__cmp?.('getCMPData')?.purModeActive === true,
     EVAL_CONSENTMANAGER_NCMP_REJECT: () => {
         if (typeof window.__npcmp !== 'function') return false;
         window.__npcmp('reject');

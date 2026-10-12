@@ -21,6 +21,10 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
+        // pay-or-consent walls must not be handled
+        if (await this.mainWorldEval('EVAL_CONSENTMANAGER_PUR')) {
+            return false;
+        }
         this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
         if (!this.apiAvailable) {
             return this.elementExists('#cmpbox');
@@ -36,6 +40,9 @@ export default class ConsentManager extends AutoConsentCMPBase {
             // wait before making this check because early in the page lifecycle this may incorrectly return
             // true, causing an opt-out when it is not needed.
             await this.wait(500);
+            if (await this.mainWorldEval('EVAL_CONSENTMANAGER_PUR')) {
+                return false;
+            }
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_2');
         }
         return false;
