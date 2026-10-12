@@ -14,3 +14,6 @@ generateCMPTests(
         skipRegions: ['US'],
     },
 );
+
+// accept-only notice variant, handled cosmetically
+generateCMPTests('squarespace-cookie-banner', ['https://www.blueprincegame.com/', 'https://www.treelinereview.com/']);

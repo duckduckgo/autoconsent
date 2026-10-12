@@ -28,18 +28,30 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": ".cookie-banner-mount-point button.manage"
-                },
-                {
-                    "waitForVisible": ".cookie-banner-manager .manage-cookies-overlay"
-                },
-                {
-                    "click": ".cookie-banner-manager .manage-cookies-overlay label.sqs-toggle--on input",
-                    "all": true,
-                    "optional": true
-                },
-                {
-                    "waitForThenClick": ".cookie-banner-manager .manage-cookies-overlay button.save"
+                    "if": {
+                        "exists": ".cookie-banner-mount-point button.manage"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ".cookie-banner-mount-point button.manage"
+                        },
+                        {
+                            "waitForVisible": ".cookie-banner-manager .manage-cookies-overlay"
+                        },
+                        {
+                            "click": ".cookie-banner-manager .manage-cookies-overlay label.sqs-toggle--on input",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ".cookie-banner-manager .manage-cookies-overlay button.save"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "hide": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+                        }
+                    ]
                 }
             ]
         }
