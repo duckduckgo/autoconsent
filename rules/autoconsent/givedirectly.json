@@ -1,0 +1,36 @@
+{
+    "name": "givedirectly",
+    "vendorUrl": "https://www.givedirectly.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?givedirectly\\.org/"
+    },
+    "prehideSelectors": [".push-banner-consent"],
+    "detectCmp": [
+        {
+            "exists": ".push-banner-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".push-banner-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".push-banner-consent button.close",
+            "retry": 3
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".push-banner-consent button.close",
+            "retry": 3
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".push-banner-consent",
+            "check": "none"
+        }
+    ]
+}
