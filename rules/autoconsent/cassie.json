@@ -6,25 +6,26 @@
         "main": true,
         "frame": false
     },
-    "prehideSelectors": [".cassie-cookie-module"],
+    "prehideSelectors": [".cassie-cookie-module", "#cassie_cookie_module"],
     "detectCmp": [
         {
-            "exists": ".cassie-pre-banner"
+            "exists": ".cassie-pre-banner, #cassie_pre_banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cassie_pre_banner_text"
+            "visible": "#cassie_pre_banner_text, #cassie_pre_banner__text",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cassie-accept-all"
+            "waitForThenClick": ".cassie-accept-all, #cassie_accept_all_pre_banner"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cassie-reject-all"
+            "waitForThenClick": ".cassie-reject-all, #cassie_reject_all_pre_banner"
         }
     ]
 }
