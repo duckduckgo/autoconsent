@@ -1,0 +1,71 @@
+{
+    "name": "shopware",
+    "_metadata": {
+        "vendorUrl": "https://www.shopware.com/"
+    },
+    "prehideSelectors": [".cookie-permission-container[data-cookie-permission]"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-permission-container[data-cookie-permission] .js-cookie-configuration-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-permission-container[data-cookie-permission]"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".cookie-permission-container .js-cookie-accept-all-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-permission-container .js-cookie-accept-all-button button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookie-permission-container .js-cookie-configuration-button button"
+                },
+                {
+                    "waitForThenClick": ".js-offcanvas-cookie-accept-all"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cookie-permission-container .js-cookie-permission-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-permission-container .js-cookie-permission-button button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookie-permission-container .js-cookie-configuration-button button"
+                },
+                {
+                    "waitForThenClick": ".js-offcanvas-cookie-submit"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-permission-container[data-cookie-permission]",
+            "timeout": 2000,
+            "check": "none"
+        },
+        {
+            "wait": 500,
+            "comment": "consent cookie is written asynchronously after saving"
+        },
+        {
+            "cookieContains": "cookie-preference=1"
+        }
+    ]
+}
