@@ -4,10 +4,18 @@
     "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
     "optIn": [
         {
+            "if": { "exists": ".mdmn-cookie-compliance" },
+            "then": [{ "waitFor": ".mdmn-cookie-compliance__overlay", "timeout": 2000, "optional": true }]
+        },
+        {
             "click": ".eu-cookie-compliance-banner .agree-button, .eu-cookie-compliance-banner .accept-all"
         }
     ],
     "optOut": [
+        {
+            "if": { "exists": ".mdmn-cookie-compliance" },
+            "then": [{ "waitFor": ".mdmn-cookie-compliance__overlay", "timeout": 2000, "optional": true }]
+        },
         {
             "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
         }
