@@ -11,4 +11,6 @@ generateCMPTests('burpee.com', [
     // Allow button only: the banner is hidden
     'https://www.oxfordproducts.com/',
     'https://www.testequipmentdepot.com/',
+    // Allow button only, with a body class scroll lock and backdrop
+    'https://www.leonpaul.com/',
 ]);

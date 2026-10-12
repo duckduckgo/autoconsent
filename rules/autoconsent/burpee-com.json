@@ -1,5 +1,6 @@
 {
     "name": "burpee.com",
+    "minimumRuleStepVersion": 2,
     "prehideSelectors": [".cookie-modal", "#notice-cookie-block"],
     "detectCmp": [{ "exists": "#notice-cookie-block" }],
     "detectPopup": [{ "visible": "#html-body #notice-cookie-block" }],
@@ -16,7 +17,10 @@
                         { "click": "#notice-cookie-block input:checked", "all": true },
                         { "click": "#btn-cookie-save" }
                     ],
-                    "else": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+                    "else": [
+                        { "hide": "#html-body #notice-cookie-block, #notice-cookie" },
+                        { "removeClass": "cookie-notification-active", "selector": "body", "optional": true }
+                    ]
                 }
             ]
         }
