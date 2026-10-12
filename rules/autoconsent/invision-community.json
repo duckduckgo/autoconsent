@@ -1,0 +1,25 @@
+{
+    "name": "invision-community",
+    "vendorUrl": "https://invisioncommunity.com/",
+    "prehideSelectors": ["#elGuestTerms[data-role=\"cookieConsentBar\"]"],
+    "detectCmp": [
+        {
+            "exists": "#elGuestTerms[data-role=\"cookieConsentBar\"] button[name=\"status\"][value=\"0\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#elGuestTerms[data-role=\"cookieConsentBar\"] button[name=\"status\"][value=\"0\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#elGuestTerms[data-role=\"cookieConsentBar\"] button[name=\"status\"][value=\"1\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#elGuestTerms[data-role=\"cookieConsentBar\"] button[name=\"status\"][value=\"0\"]"
+        }
+    ]
+}
