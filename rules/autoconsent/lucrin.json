@@ -1,0 +1,18 @@
+{
+    "name": "lucrin",
+    "vendorUrl": "https://www.lucrin.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lucrin\\.(com|com\\.au|co\\.uk|ca|ch|de|es|fr|it)/"
+    },
+    "prehideSelectors": ["div:has(> #notice-cookie-block)", "[data-dialog-ref-name=\"cookie-text-popup\"]"],
+    "detectCmp": [{ "exists": "#notice-cookie-block #btn-manage-cookie" }],
+    "detectPopup": [{ "visible": "#notice-cookie-block" }],
+    "optIn": [{ "waitForThenClick": "#notice-cookie-block #btn-cookie-allow" }],
+    "optOut": [
+        { "waitForThenClick": "#notice-cookie-block #btn-manage-cookie" },
+        { "waitForVisible": "#btn-manage-cookie-save-preferences" },
+        { "click": "#cookie-text-popup input[type=\"checkbox\"]:checked", "all": true, "optional": true },
+        { "waitForThenClick": "#btn-manage-cookie-save-preferences" }
+    ],
+    "test": [{ "cookieContains": "%22marketing%22%3Afalse%2C%22analytic%22%3Afalse" }]
+}
