@@ -1,7 +1,7 @@
 {
     "name": "gov.uk",
     "detectCmp": [{ "exists": ".govuk-cookie-banner__message" }],
-    "detectPopup": [{ "exists": ".govuk-cookie-banner__message .govuk-button" }],
+    "detectPopup": [{ "visible": ".govuk-cookie-banner__message .govuk-button", "check": "any" }],
     "optIn": [{ "click": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Accept')] | //a[contains(., 'Accept')]"] }],
     "optOut": [
         {
