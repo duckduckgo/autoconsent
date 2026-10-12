@@ -1,0 +1,27 @@
+{
+    "name": "cookiesjsr",
+    "_metadata": { "vendorUrl": "https://github.com/jfeltkamp/cookiesjsr" },
+    "prehideSelectors": [".cookiesjsr-banner.active"],
+    "detectCmp": [{ "exists": ".cookiesjsr-banner" }],
+    "detectPopup": [{ "visible": ".cookiesjsr-banner.active" }],
+    "optIn": [{ "waitForThenClick": ".cookiesjsr-banner.active .allowAll" }],
+    "optOut": [
+        {
+            "if": { "visible": ".cookiesjsr-banner.active .denyAll" },
+            "then": [{ "click": ".cookiesjsr-banner.active .denyAll" }],
+            "else": [
+                { "waitForThenClick": ".cookiesjsr-banner.active .cookiesjsr-settings" },
+                { "waitForVisible": ".cookiesjsr-layer" },
+                {
+                    "if": { "visible": ".cookiesjsr-layer .denyAll" },
+                    "then": [{ "click": ".cookiesjsr-layer .denyAll" }],
+                    "else": [
+                        { "click": ".cookiesjsr-layer .cookiesjsr-switch.active input", "all": true, "optional": true },
+                        { "waitForThenClick": ".cookiesjsr-layer .save" }
+                    ]
+                }
+            ]
+        },
+        { "waitForVisible": ".cookiesjsr-banner.active", "timeout": 2000, "check": "none" }
+    ]
+}
