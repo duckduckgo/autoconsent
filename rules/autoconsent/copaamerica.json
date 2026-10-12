@@ -1,0 +1,29 @@
+{
+    "name": "copaamerica",
+    "vendorUrl": "https://copaamerica.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?copaamerica\\.com/"
+    },
+    "prehideSelectors": ["div.fixed.z-50.rounded-xl:has(> p > a[href*=\"privac\"]):has(> button.button-primary)"],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.z-50.rounded-xl:has(> p > a[href*=\"privac\"]):has(> button.button-primary)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.z-50.rounded-xl:has(> p > a[href*=\"privac\"]):has(> button.button-primary)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.z-50.rounded-xl:has(> p > a[href*=\"privac\"]) > button.button-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div.fixed.z-50.rounded-xl:has(> p > a[href*=\"privac\"]):has(> button.button-primary)"
+        }
+    ]
+}
