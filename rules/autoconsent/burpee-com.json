@@ -2,7 +2,10 @@
     "name": "burpee.com",
     "minimumRuleStepVersion": 2,
     "prehideSelectors": [".cookie-modal", "#notice-cookie-block"],
-    "detectCmp": [{ "exists": "#notice-cookie-block" }],
+    "detectCmp": [
+        { "exists": "#notice-cookie-block" },
+        { "any": [{ "visible": "#notice-cookie-block" }, { "cookieContains": "user_allowed_save_cookie=", "negated": true }] }
+    ],
     "detectPopup": [{ "visible": "#html-body #notice-cookie-block" }],
     "optIn": [{ "waitForThenClick": "#btn-cookie-allow" }],
     "optOut": [
