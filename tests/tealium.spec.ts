@@ -11,4 +11,7 @@ generateCMPTests('Tealium', [
     'https://www.nito.no/',
     'https://www.about.hsbc.pl/pl-pl/hsbc-service-delivery',
     'https://www.hsbc.com/',
+    'https://www.telekom.de/',
+    'https://www.telekom.com/',
+    'https://www.t-systems.com/',
 ]);
