@@ -11,3 +11,6 @@ generateCMPTests('axeptio', [
 generateCMPTests('axeptio', ['https://mistral.ai/pricing', 'https://mistral.ai/news/le-chat-dives-deep'], {
     testOptIn: false,
 });
+
+// Widget opens after a configured delay
+generateCMPTests('axeptio', ['https://www.memo-de-vie.org/qui-sommes-nous', 'https://simmons.fr/', 'https://www.lyoncapitale.fr/']);
