@@ -23,7 +23,7 @@
             ],
             "else": [
                 {
-                    "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
+                    "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"], #qc-cmp2-ui #more-options-btn",
                     "timeout": 2000
                 },
                 {
@@ -37,7 +37,7 @@
                     ],
                     "else": [
                         {
-                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                            "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1), #qc-cmp2-ui #more-options-btn"
                         },
                         {
                             "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
@@ -68,11 +68,18 @@
                             ],
                             "else": [
                                 {
-                                    "waitForThenClick": [
-                                        ".qc-cmp2-main",
-                                        "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
-                                    ],
-                                    "timeout": 5000
+                                    "if": {
+                                        "visible": "#qc-cmp2-ui"
+                                    },
+                                    "then": [
+                                        {
+                                            "waitForThenClick": [
+                                                ".qc-cmp2-main",
+                                                "xpath///button[contains(.,'SAVE & EXIT') or contains(.,'SALVA ED ESCI') or contains(.,'GUARDAR Y SALIR') or contains(.,'SPEICHERN & VERLASSEN')"
+                                            ],
+                                            "timeout": 5000
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -83,7 +90,7 @@
     ],
     "optIn": [
         {
-            "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"]"
+            "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"], #qc-cmp2-ui #accept-btn"
         }
     ]
 }
