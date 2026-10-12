@@ -1,0 +1,13 @@
+{
+    "name": "rutjes",
+    "vendorUrl": "https://www.rutjespaardenboxen.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?rutjes(paardenboxen\\.nl|pferdeboxen\\.de)/"
+    },
+    "prehideSelectors": ["#cookiebanner"],
+    "detectCmp": [{ "exists": "script[src*='consent.cookiebot.com/uc.js']" }],
+    "detectPopup": [{ "visible": "#cookiebanner #DeclineAll" }],
+    "optIn": [{ "waitForThenClick": "#cookiebanner #AcceptAll" }],
+    "optOut": [{ "waitForThenClick": "#cookiebanner #DeclineAll" }],
+    "test": [{ "wait": 500 }, { "cookieContains": "statistics:false%2Cmarketing:false" }]
+}
