@@ -46,32 +46,108 @@ export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[]
 }
 
 function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
-    let elements = [];
-    if (!isFramed) {
-        elements = getPopupLikeElements(timeout);
-    } else {
+    if (isFramed) {
         // for iframes, just take the whole document
-        const doc = document.body || document.documentElement;
-        if (doc && isElementVisible(doc) && doc.innerText) {
-            elements.push(doc);
-        }
+        const frameElement = getFramePopupElement(document);
+        const popup = frameElement && toPopupData(frameElement);
+        return popup ? [popup] : [];
     }
 
     const potentialPopups: PopupData[] = [];
+    const expanded: HTMLElement[] = [];
+    for (const el of getPopupLikeElements(timeout)) {
+        const popup = toPopupData(el);
+        if (!popup) {
+            continue;
+        }
+        const root = expandPopupFragment(popup);
+        if (potentialPopups.some((p) => p.element === root.element)) {
+            continue;
+        }
+        if (root !== popup) {
+            expanded.push(root.element);
+        }
+        potentialPopups.push(root);
+    }
+    // a fragment expanded to its popup root replaces any other candidates inside that root
+    return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+}
 
-    // for each potential popup, get the buttons
-    for (const el of elements) {
+function toPopupData(el: HTMLElement): PopupData | null {
+    const text = getElementText(el);
+    if (!text) {
+        return null;
+    }
+    return {
+        text,
+        element: el,
+        buttons: getButtonData(el),
+    };
+}
+
+const MAX_FRAGMENT_EXPANSION_DEPTH = 6;
+
+function looksLikeConsentPopup(text: string, buttons: ButtonData[]): boolean {
+    return buttons.length > 0 && !isOnlyButtonText(text, buttons) && checkHeuristicPatterns(text).patterns.length > 0;
+}
+
+// a bar of buttons can match detect patterns ("accept all"), but lacks the popup text needed to classify it
+function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
+    let rest = text;
+    for (const button of buttons) {
+        rest = rest.replace(button.text, '');
+    }
+    return rest.replace(/\s+/g, '').length < 10;
+}
+
+/**
+ * A positioned candidate is often only part of a popup, such as a sticky button bar or heading.
+ * If it does not look like a consent popup on its own, use the nearest ancestor that does.
+ */
+export function expandPopupFragment(popup: PopupData): PopupData {
+    if (looksLikeConsentPopup(popup.text, popup.buttons)) {
+        return popup;
+    }
+    let el = getComposedParent(popup.element);
+    for (let depth = 0; el && depth < MAX_FRAGMENT_EXPANSION_DEPTH; depth++, el = getComposedParent(el)) {
+        // stop before reaching page-level containers, whose text includes unrelated page copy
+        if (el === document.body || el === document.documentElement || el.getBoundingClientRect().height > window.innerHeight) {
+            break;
+        }
         const text = getElementText(el);
-        if (text) {
-            potentialPopups.push({
-                text,
-                element: el,
-                buttons: getButtonData(el),
-            });
+        if (!text || checkHeuristicPatterns(text).patterns.length === 0) {
+            continue;
+        }
+        const buttons = getButtonData(el);
+        if (buttons.length > 0 && !isOnlyButtonText(text, buttons)) {
+            return { text, element: el, buttons };
         }
     }
+    return popup;
+}
 
-    return potentialPopups;
+function getComposedParent(el: HTMLElement): HTMLElement | null {
+    if (el.parentElement) {
+        return el.parentElement;
+    }
+    const parent = el.parentNode;
+    return parent instanceof ShadowRoot && parent.host instanceof HTMLElement ? parent.host : null;
+}
+
+/**
+ * The whole document of a frame, if it is rendered and has text. The body can have zero height when all of its
+ * content is positioned, so only check visibility styles, not size.
+ */
+export function getFramePopupElement(doc: Document): HTMLElement | null {
+    const el = doc.body || doc.documentElement;
+    const win = doc.defaultView;
+    if (!el || !win || win.innerWidth === 0 || win.innerHeight === 0) {
+        return null;
+    }
+    if (typeof el.checkVisibility === 'function' && !el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) {
+        return null;
+    }
+    return getElementText(el).trim() ? el : null;
 }
 
 /**

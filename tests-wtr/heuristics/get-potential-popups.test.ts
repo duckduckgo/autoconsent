@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { getActionablePopups, getPotentialPopups } from '../../lib/heuristics';
+import { getActionablePopups, getFramePopupElement, getPotentialPopups } from '../../lib/heuristics';
 
 const BANNER = `
     <p>We use cookies.</p>
@@ -136,5 +136,170 @@ describe('getPotentialPopups', () => {
             const ids = getPotentialPopups(1000).map((p) => p.element.id);
             expect(ids).not.to.include('panel');
         });
+    });
+
+    describe('popup fragments', () => {
+        it('expands a sticky button bar to the banner that contains it', () => {
+            container.innerHTML = `
+                <div id="banner" style="position: fixed; bottom: 0;">
+                    <p>We use cookies.</p>
+                    <div id="button-bar" style="position: sticky; bottom: 0;">
+                        <button>Reject all</button>
+                        <button>Accept all</button>
+                    </div>
+                </div>
+            `;
+            const popups = getPotentialPopups(1000);
+            const ids = popups.map((p) => p.element.id);
+            expect(ids).to.include('banner');
+            expect(ids).not.to.include('button-bar');
+            const banner = popups.find((p) => p.element.id === 'banner')!;
+            expect(banner.text).to.contain('We use cookies.');
+            expect(banner.buttons).to.have.length(2);
+        });
+
+        it('expands a fixed button bar to an ancestor that is not positioned', () => {
+            container.innerHTML = `
+                <div id="banner">
+                    <p>We use cookies.</p>
+                    <div id="button-bar" style="position: fixed; bottom: 0;">
+                        <button>Reject all</button>
+                        <button>Accept all</button>
+                    </div>
+                </div>
+            `;
+            const ids = getPotentialPopups(1000).map((p) => p.element.id);
+            expect(ids).to.include('banner');
+            expect(ids).not.to.include('button-bar');
+        });
+
+        it('expands a sticky heading with no buttons to its dialog', () => {
+            container.innerHTML = `
+                <div id="dialog" role="dialog" style="position: absolute; top: 0; height: 300px; overflow: auto;">
+                    <header id="heading" style="position: sticky; top: 0;">Cookie settings</header>
+                    <p>We use cookies.</p>
+                    <button>Reject all</button>
+                    <button>Accept all</button>
+                </div>
+            `;
+            const ids = getPotentialPopups(1000).map((p) => p.element.id);
+            expect(ids).to.include('dialog');
+            expect(ids).not.to.include('heading');
+        });
+
+        it('returns one popup when several fragments expand to the same banner', () => {
+            container.innerHTML = `
+                <div id="banner">
+                    <p>We use cookies.</p>
+                    <div style="position: fixed; top: 0;"><button>Close</button></div>
+                    <div style="position: fixed; bottom: 0;"><button>Reject all</button><button>Accept all</button></div>
+                </div>
+            `;
+            const popups = getPotentialPopups(1000).filter((p) => container.contains(p.element));
+            expect(popups.map((p) => p.element.id)).to.deep.equal(['banner']);
+        });
+
+        it('keeps a fragment when no ancestor looks like a consent popup', () => {
+            container.innerHTML = `
+                <div id="wrapper">
+                    <p>Sign up for our newsletter.</p>
+                    <div id="bar" style="position: fixed; bottom: 0;"><button>Subscribe</button></div>
+                </div>
+            `;
+            const ids = getPotentialPopups(1000).map((p) => p.element.id);
+            expect(ids).to.include('bar');
+            expect(ids).not.to.include('wrapper');
+        });
+
+        it('does not expand into a container taller than the viewport', () => {
+            container.innerHTML = `
+                <div id="page" style="height: 3000px;">
+                    <nav id="nav" style="position: fixed; top: 0;"><a href="#">Home</a><a href="#">About</a></nav>
+                    <footer>We use cookies to improve this site.</footer>
+                </div>
+            `;
+            const ids = getPotentialPopups(1000).map((p) => p.element.id);
+            expect(ids).to.include('nav');
+            expect(ids).not.to.include('page');
+        });
+
+        it('expands a fragment inside a shadow root', () => {
+            container.innerHTML = '<div id="host"></div>';
+            attachShadow(
+                container.querySelector('#host')!,
+                `<div id="banner"><p>We use cookies.</p><div id="button-bar" style="position: fixed; bottom: 0;"><button>Reject all</button><button>Accept all</button></div></div>`,
+            );
+            const ids = getPotentialPopups(1000).map((p) => p.element.id);
+            expect(ids).to.include('banner');
+            expect(ids).not.to.include('button-bar');
+        });
+
+        it('makes an expanded popup actionable', () => {
+            container.innerHTML = `
+                <div id="banner" style="position: fixed; bottom: 0;">
+                    <p>We use cookies.</p>
+                    <div style="position: sticky; bottom: 0;"><button>Reject all</button><button>Accept all</button></div>
+                </div>
+            `;
+            const popup = getActionablePopups('reject', 1000).find((p) => p.element.id === 'banner');
+            expect(popup).to.exist;
+            expect(popup!.regexClassification).to.equal('reject');
+        });
+
+        it('expands a button bar into an age gate so that the gate is excluded', () => {
+            container.innerHTML = `
+                <div role="dialog" style="position: absolute; top: 0;">
+                    <h2>Age verification</h2>
+                    <p>This website contains adult material and is only accessible to persons over 18 years of age. This site uses cookies.</p>
+                    <div style="position: sticky; bottom: 0;"><button>Accept all</button></div>
+                </div>
+            `;
+            const popups = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            expect(popups).to.have.length(0);
+        });
+    });
+});
+
+describe('getFramePopupElement', () => {
+    let iframe: HTMLIFrameElement;
+
+    async function loadFrame(html: string, style = 'width: 400px; height: 300px;') {
+        iframe = document.createElement('iframe');
+        iframe.setAttribute('style', style);
+        const loaded = new Promise((resolve) => iframe.addEventListener('load', resolve, { once: true }));
+        iframe.srcdoc = html;
+        document.body.appendChild(iframe);
+        await loaded;
+        return iframe.contentDocument!;
+    }
+
+    afterEach(() => {
+        iframe?.remove();
+    });
+
+    it('returns the body of a frame with text', async () => {
+        const doc = await loadFrame(`<body>${BANNER}</body>`);
+        expect(getFramePopupElement(doc)).to.equal(doc.body);
+    });
+
+    it('returns the body when all frame content is positioned', async () => {
+        const doc = await loadFrame(`<body><div style="position: fixed; bottom: 0;">${BANNER}</div></body>`);
+        expect(doc.body.getBoundingClientRect().height).to.equal(0);
+        expect(getFramePopupElement(doc)).to.equal(doc.body);
+    });
+
+    it('ignores a frame without text', async () => {
+        const doc = await loadFrame('<body><div></div></body>');
+        expect(getFramePopupElement(doc)).to.be.null;
+    });
+
+    it('ignores a frame with a hidden body', async () => {
+        const doc = await loadFrame(`<body style="visibility: hidden">${BANNER}</body>`);
+        expect(getFramePopupElement(doc)).to.be.null;
+    });
+
+    it('ignores a frame that is not rendered', async () => {
+        const doc = await loadFrame(`<body>${BANNER}</body>`, 'display: none;');
+        expect(getFramePopupElement(doc)).to.be.null;
     });
 });
