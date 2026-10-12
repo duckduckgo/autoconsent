@@ -156,6 +156,20 @@ export const snippets = {
             toggle.checked = false;
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
+    // declined (0 / "denied"), or agreed to fewer than all configured categories
+    EVAL_EU_COOKIE_COMPLIANCE_TEST: () => {
+        const getCookie = (name) => document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))?.[1];
+        const agreed = getCookie('cookie-agreed');
+        if (agreed !== '1' && agreed !== '2') {
+            return !!agreed;
+        }
+        const allCategories = (window.drupalSettings || window.Drupal?.settings)?.eu_cookie_compliance?.cookie_categories;
+        const agreedCategories = getCookie('cookie-agreed-categories');
+        if (!Array.isArray(allCategories) || !agreedCategories) {
+            return false;
+        }
+        return JSON.parse(decodeURIComponent(agreedCategories)).length < allCategories.length;
+    },
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
