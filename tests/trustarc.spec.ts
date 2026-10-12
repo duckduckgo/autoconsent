@@ -11,3 +11,9 @@ generateCMPTests('TrustArc-top', ['https://www.garmin.com/de-DE/'], {
     testSelfTest: false,
     skipRegions: ['US'],
 });
+
+generateCMPTests('TrustArc-top', ['https://us.store.bambulab.com/'], {
+    testOptOut: true,
+    testSelfTest: false,
+    onlyRegions: ['US'],
+});

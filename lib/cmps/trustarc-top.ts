@@ -9,6 +9,8 @@ const shortcutOptIn = '#truste-consent-button';
 const popupContent = '#truste-consent-content';
 const bannerOverlay = '#trustarc-banner-overlay';
 const bannerContainer = '#truste-consent-track';
+// preference center opened by the settings button renders into a shadow root
+const settingsOptOut = ['.truste_popframe.trustarc_newcm_container', '.trustarc-declineall-btn, a.required'];
 
 export default class TrustArcTop extends AutoConsentCMPBase {
     name = 'TrustArc-top';
@@ -18,12 +20,12 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         frame: false,
     };
 
-    _shortcutButton: HTMLElement | null;
+    _optOutDone: boolean;
     _optInDone: boolean;
 
     constructor(autoconsentInstance: AutoConsent) {
         super(autoconsentInstance);
-        this._shortcutButton = null; // indicates if the "reject all" button is detected
+        this._optOutDone = false; // indicates if a "reject all" button was clicked
         this._optInDone = false;
     }
 
@@ -35,7 +37,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         if (this._optInDone) {
             return false;
         }
-        return !this._shortcutButton;
+        return !this._optOutDone;
     }
 
     get isCosmetic(): boolean {
@@ -43,12 +45,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        const result = this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
-        if (result) {
-            // additionally detect the opt-out button
-            this._shortcutButton = document.querySelector(shortcutOptOut);
-        }
-        return result;
+        return this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
     }
 
     async detectPopup() {
@@ -58,13 +55,24 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     async optOut() {
         if (this.elementExists(shortcutOptOut)) {
-            this.click(shortcutOptOut);
-            return true;
+            const shortcutVisible = this.elementVisible(shortcutOptOut, 'any');
+            this._optOutDone = true;
+            await this.click(shortcutOptOut);
+            // a hidden reject button is not always wired up; when it is, the banner is dismissed synchronously
+            if (shortcutVisible || !this.elementExists(`${bannerContainer}.ta-show`)) {
+                return true;
+            }
+            this._optOutDone = false;
         }
 
         // hide elements permanently, so user doesn't see the popup
         hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
         await this.click(cookieSettingsButton);
+
+        if (await this.waitForElement(settingsOptOut, 5000)) {
+            this._optOutDone = true;
+            await this.click(settingsOptOut);
+        }
 
         // schedule cleanup
         setTimeout(() => {
