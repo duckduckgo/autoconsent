@@ -15,6 +15,7 @@ generateCMPTests(
         'https://wetnwildbeauty.com/',
         'https://www.yakima.com/',
         'https://us.select-sport.com/collections/soccer-balls-training-series',
+        'https://schoolhouse.com/',
     ],
     {
         testOptIn: false,
