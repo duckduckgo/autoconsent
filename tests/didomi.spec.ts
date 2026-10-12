@@ -26,3 +26,11 @@ generateCMPTests('didomi', ['https://newrepublic.com/article/162247/andreas-malm
     testSelfTest: true,
     onlyRegions: ['US'],
 });
+
+// Publisher wrapper (#acceptationCMPWall) that only unlocks the page on Didomi UI click events,
+// so the rule rejects via the preferences screen instead of the JS API.
+generateCMPTests('didomi', ['https://en.as.com/', 'https://cadenaser.com/'], {
+    testOptIn: true,
+    testSelfTest: true,
+    onlyRegions: ['US'],
+});
