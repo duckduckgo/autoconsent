@@ -1,6 +1,7 @@
 import { ContentScriptMessage } from './messages';
 import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from './rules';
 import { CompactCMPRuleset } from './encoding';
+import type { ButtonRegexClassification, ClassifiableButton, PopupClassification } from './heuristic-classify';
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -114,12 +115,10 @@ export type ConsentState = {
     performance?: Record<string, number[]>;
 };
 
-export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
+export type { ButtonRegexClassification, PopupClassification };
 
-export interface ButtonData {
-    text: string;
+export interface ButtonData extends ClassifiableButton {
     element: HTMLElement;
-    regexClassification?: ButtonRegexClassification;
 }
 
 export interface PopupData {
@@ -137,4 +136,3 @@ export interface PopupData {
  *  - tier2: Heuristic detection is enabled, and will click the accept button on a popup if it exists, and no Reject, Acknowledge, or Settings button exists.
  */
 export type HeuristicLevel = 'off' | 'reject' | 'tier1' | 'tier2';
-export type PopupClassification = 'none' | 'reject' | 'tier1' | 'tier2';

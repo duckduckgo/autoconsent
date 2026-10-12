@@ -5,7 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parseArgs } from 'util';
-import { classifyButtonTextRegex } from '../lib/heuristics';
+import { classifyButtonTextRegex } from '../lib/heuristic-classify';
 import { buildLabelBenchmarks, classifyRows, formatExample, LabelBenchmark, parseButtonTextCsv, pct } from './button-text-benchmark';
 
 const DEFAULT_CSV_PATH = path.join(__dirname, '../data/labelled-button-texts.csv');

@@ -13,7 +13,7 @@ disable-model-invocation: true
 
 Improve the button patterns in `lib/heuristic-patterns.ts` so `classifyButtonTextRegex` matches the labelled dataset in `data/labelled-button-texts.csv`.
 
-These patterns decide what autoconsent clicks in users' browsers, and tracker-radar-collector imports them for crawl post-processing. A pattern that moves a button between labels changes which heuristic tier handles its popup (see `classifyPopup`): an `acknowledge` button is clicked in tier1, an `accept` button only in tier2. Keep that in mind when a fix moves text between `ACCEPT_PATTERNS` and `ACKNOWLEDGE_PATTERNS`.
+These patterns decide what autoconsent clicks in users' browsers, and tracker-radar-collector imports them for crawl post-processing. A pattern that moves a button between labels changes which heuristic tier handles its popup (see `classifyPopup` in `lib/heuristic-classify.ts`): an `acknowledge` button is clicked in tier1, an `accept` button only in tier2. Keep that in mind when a fix moves text between `ACCEPT_PATTERNS` and `ACKNOWLEDGE_PATTERNS`.
 
 ## Prerequisites
 
@@ -90,7 +90,7 @@ Run `npm run test:lib` and `npm run lint`, then report using the output template
 
 ## Pattern authoring rules
 
-- Edit the button lists in `lib/heuristic-patterns.ts` only. Do not change `DETECT_PATTERNS`/`DETECT_NEVER_MATCH_PATTERNS` or the classification code in `lib/heuristics.ts` as part of this loop.
+- Edit the button lists in `lib/heuristic-patterns.ts` only. Do not change `DETECT_PATTERNS`/`DETECT_NEVER_MATCH_PATTERNS` or the classification code in `lib/heuristic-classify.ts` as part of this loop.
 - Classification order: **reject → settings → accept → acknowledge → other** (see `classifyButtonTextRegex`). Patterns are matched against `cleanButtonText` output (lowercased, punctuation and emoji stripped, whitespace collapsed).
 - Essential/necessary-only phrases → **reject**, even when "accept" appears.
 - `allow` / `permit` + selection → **accept**; `customize` / `manage` / show details → **settings**.
