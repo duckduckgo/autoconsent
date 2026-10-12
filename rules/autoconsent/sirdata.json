@@ -9,12 +9,12 @@
     ],
     "detectPopup": [
         {
-            "visible": "#sd-cmp"
+            "visible": "#sd-cmp #sd-cmp-dialog-main"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#sd-cmp .sd-cmp-3cRQ2"
+            "waitForThenClick": "#sd-cmp-dialog-main [data-sd-override='choiceButtons']"
         }
     ],
     "optOut": [
