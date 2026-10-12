@@ -64,11 +64,13 @@ export default class Onetrust extends AutoConsentCMPBase {
             }
         }
 
+        let scrollPosition: number | null = null;
         if (this.elementExists('#onetrust-pc-btn-handler')) {
             // "show purposes" button inside a popup
             await this.click('#onetrust-pc-btn-handler');
         } else {
             // otherwise look for a generic "show settings" button
+            scrollPosition = window.scrollY;
             await this.click('.ot-sdk-show-settings,button.js-cookie-settings');
         }
 
@@ -82,6 +84,14 @@ export default class Onetrust extends AutoConsentCMPBase {
 
         // popup doesn't disappear immediately
         await this.waitForVisible('#onetrust-banner-sdk', 5000, 'none');
+
+        if (scrollPosition !== null) {
+            // OneTrust returns focus to the settings link on close, which can scroll the page to the footer
+            await waitFor(() => !!document.activeElement?.matches('.ot-sdk-show-settings,button.js-cookie-settings'), 10, 100);
+            if (window.scrollY !== scrollPosition) {
+                window.scrollTo({ top: scrollPosition, behavior: 'instant' });
+            }
+        }
         return true;
     }
 
