@@ -1,0 +1,31 @@
+{
+    "name": "bike24",
+    "vendorUrl": "https://www.bike24.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bike24\\.[a-z]+/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookie-consent-decline-optional-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-consent-decline-optional-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-consent-accept-all-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-consent-decline-optional-button\"]"
+        }
+    ]
+}
