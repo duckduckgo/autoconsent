@@ -1,8 +1,8 @@
 {
     "name": "click.io",
-    "prehideSelectors": ["#cl-consent"],
-    "detectCmp": [{ "exists": "#cl-consent" }],
-    "detectPopup": [{ "visible": "#cl-consent" }],
+    "prehideSelectors": ["#cl-consent:not(.cl-consent-ext-pw, .cl-consent-cl-pw)"],
+    "detectCmp": [{ "exists": "#cl-consent:not(.cl-consent-ext-pw, .cl-consent-cl-pw)", "comment": "skip pay-or-consent variants" }],
+    "detectPopup": [{ "visible": "#cl-consent:not(.cl-consent-ext-pw, .cl-consent-cl-pw)" }],
     "optIn": [{ "waitForThenClick": "#cl-consent [data-role=\"b_agree\"]" }],
     "optOut": [
         { "waitFor": "#cl-consent [data-role=\"b_options\"]" },
