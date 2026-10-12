@@ -1,0 +1,40 @@
+{
+    "name": "gundam-base-entry",
+    "vendorUrl": "https://www.gundam-base-entry.net/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?gundam-base-entry\\.net/"
+    },
+    "prehideSelectors": ["div.fixed.inset-0.drop-shadow-2xl"],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.inset-0.drop-shadow-2xl button[aria-haspopup=\"dialog\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.inset-0.drop-shadow-2xl button[aria-haspopup=\"dialog\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.inset-0.drop-shadow-2xl button.text-lg"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.fixed.inset-0.drop-shadow-2xl button[aria-haspopup=\"dialog\"]"
+        },
+        {
+            "waitForThenClick": "div[role=\"dialog\"] button[type=\"submit\"]"
+        },
+        {
+            "waitForVisible": "div.fixed.inset-0.drop-shadow-2xl",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsent=true"
+        }
+    ]
+}
