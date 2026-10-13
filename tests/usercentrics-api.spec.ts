@@ -12,6 +12,8 @@ generateCMPTests(
         'https://www.idealo.de/',
         'https://www.condor.com/de/flug-vorbereiten/check-in/vorabend-check-in.jsp', // many-vendor setup; eval-only optOut timed out before the fix
         'https://www.cewe.de/',
+        'https://www.feide.no/',
+        'https://www.fluege.de/',
     ],
     {
         skipRegions: ['US', 'GB', 'FR'],
