@@ -5,4 +5,5 @@ generateCMPTests('pmc-privacy-banner', [
     'https://www.eater.com/',
     'https://www.sbnation.com/',
     'https://punchdrink.com/',
+    'https://philly.eater.com/pop-ups/54719/eater-bang-bang-philly-dinner-2026',
 ]);

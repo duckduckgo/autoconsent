@@ -1,9 +1,151 @@
 {
     "name": "pmc-privacy-banner",
     "prehideSelectors": ["aside[aria-labelledby=\"pmc-privacy-banner-heading\"]"],
-    "detectCmp": [{ "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
-    "detectPopup": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
-    "optIn": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
-    "optOut": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
-    "test": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]", "check": "none" }]
+    "detectCmp": [
+        {
+            "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button"
+        },
+        {
+            "if": {
+                "exists": "script[src*=\"cdn.cookielaw.org\"]"
+            },
+            "then": [
+                {
+                    "waitFor": "#onetrust-consent-sdk",
+                    "timeout": 10000,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "exists": "#onetrust-banner-sdk"
+                    },
+                    "then": [
+                        {
+                            "waitForVisible": "#onetrust-banner-sdk",
+                            "timeout": 3000,
+                            "optional": true
+                        },
+                        {
+                            "if": {
+                                "visible": "#onetrust-banner-sdk #onetrust-accept-btn-handler"
+                            },
+                            "then": [
+                                {
+                                    "click": "#onetrust-accept-btn-handler"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button"
+        },
+        {
+            "if": {
+                "exists": "script[src*=\"cdn.cookielaw.org\"]"
+            },
+            "then": [
+                {
+                    "waitFor": "#onetrust-consent-sdk",
+                    "timeout": 10000,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "exists": "#onetrust-banner-sdk"
+                    },
+                    "then": [
+                        {
+                            "waitForVisible": "#onetrust-banner-sdk",
+                            "timeout": 3000,
+                            "optional": true
+                        },
+                        {
+                            "if": {
+                                "visible": "#onetrust-banner-sdk #onetrust-reject-all-handler"
+                            },
+                            "then": [
+                                {
+                                    "click": "#onetrust-reject-all-handler"
+                                },
+                                {
+                                    "waitForVisible": "#onetrust-banner-sdk",
+                                    "timeout": 3000,
+                                    "check": "none",
+                                    "optional": true
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "if": {
+                                        "visible": "#onetrust-banner-sdk #onetrust-pc-btn-handler"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": "#onetrust-pc-btn-handler"
+                                        },
+                                        {
+                                            "waitForVisible": "#onetrust-pc-sdk",
+                                            "timeout": 3000
+                                        },
+                                        {
+                                            "if": {
+                                                "visible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler"
+                                            },
+                                            "then": [
+                                                {
+                                                    "click": "#onetrust-pc-sdk .ot-pc-refuse-all-handler"
+                                                }
+                                            ],
+                                            "else": [
+                                                {
+                                                    "click": "#onetrust-pc-sdk input.category-switch-handler:checked",
+                                                    "all": true,
+                                                    "optional": true
+                                                },
+                                                {
+                                                    "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler",
+                                                    "timeout": 2000
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "waitForVisible": "#onetrust-pc-sdk",
+                                            "timeout": 3000,
+                                            "check": "none",
+                                            "optional": true
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]",
+            "check": "none"
+        },
+        {
+            "visible": "#onetrust-banner-sdk",
+            "check": "none"
+        }
+    ]
 }
