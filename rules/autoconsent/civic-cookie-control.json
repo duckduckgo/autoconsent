@@ -11,17 +11,11 @@
             "else": [
                 {
                     "if": {
-                        "exists": [
-                            "#ccc #ccc-notify .ccc-notify-buttons",
-                            "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences') or contains(., 'Einstellungen️')]"
-                        ]
+                        "exists": "#ccc #ccc-notify .ccc-notify-buttons button.ccc-notify-button:not([id])"
                     },
                     "then": [
                         {
-                            "waitForThenClick": [
-                                "#ccc #ccc-notify .ccc-notify-buttons",
-                                "xpath///button[contains(., 'Settings') or contains(., 'Cookie Preferences') or contains(., 'Einstellungen️')]"
-                            ]
+                            "waitForThenClick": "#ccc #ccc-notify .ccc-notify-buttons button.ccc-notify-button:not([id])"
                         },
                         { "waitForVisible": "#ccc-module" }
                     ]
