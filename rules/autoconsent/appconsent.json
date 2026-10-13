@@ -1,6 +1,6 @@
 {
     "name": "AppConsent",
-    "prehideSelectors": ["iframe[title='Consent window']"],
+    "prehideSelectors": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']"],
     "detectCmp": [
         {
             "exists": "script[src*='cdn.appconsent.io/tcf2-clear/'][src*='core.bundle.js']"
@@ -8,22 +8,37 @@
     ],
     "detectPopup": [
         {
-            "visible": "iframe[title='Consent window']"
+            "visible": "iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__acceptAll"]
+            "waitForThenClick": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__acceptAll"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["iframe[title='Consent window']", ".button__refuseAll"]
+            "waitFor": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__skip, .button__refuseAll"]
+        },
+        {
+            "if": {
+                "exists": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__skip"]
+            },
+            "then": [
+                {
+                    "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__skip"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll"]
+                }
+            ]
         }
     ],
     "test": [
         {
-            "waitForVisible": "iframe[title='Consent window']",
+            "waitForVisible": "iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']",
             "timeout": 1000,
             "check": "none"
         }
