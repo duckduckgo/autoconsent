@@ -37,6 +37,24 @@ describe('click', () => {
         expect(clickCounter2).to.equal(1);
     });
 
+    it('lets the page handle each click before the next one when all=true', async () => {
+        const domActions = instantiateDomActions();
+        let firstClickHandled = false;
+        let firstClickHandledBeforeSecond = false;
+        const onFirst = () => setTimeout(() => (firstClickHandled = true), 0);
+        const onSecond = () => (firstClickHandledBeforeSecond = firstClickHandled);
+        document.querySelector('#first > button')?.addEventListener('click', onFirst);
+        document.querySelector('#second > button')?.addEventListener('click', onSecond);
+
+        try {
+            expect(await domActions.click('button', true)).true;
+            expect(firstClickHandledBeforeSecond).true;
+        } finally {
+            document.querySelector('#first > button')?.removeEventListener('click', onFirst);
+            document.querySelector('#second > button')?.removeEventListener('click', onSecond);
+        }
+    });
+
     it('clicks only first one upon multiple matches when all=false', async () => {
         const domActions = instantiateDomActions();
 
