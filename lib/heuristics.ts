@@ -53,14 +53,15 @@ function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TI
         return popup ? [popup] : [];
     }
 
+    const { elements, shadowHosts } = getPopupLikeElements(timeout);
     const potentialPopups: PopupData[] = [];
     const expanded: HTMLElement[] = [];
-    for (const el of getPopupLikeElements(timeout)) {
-        const popup = toPopupData(el);
+    for (const el of elements) {
+        const popup = toPopupData(el, shadowHosts);
         if (!popup) {
             continue;
         }
-        const root = expandPopupFragment(popup);
+        const root = expandPopupFragment(popup, shadowHosts);
         if (potentialPopups.some((p) => p.element === root.element)) {
             continue;
         }
@@ -73,7 +74,7 @@ function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TI
     return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
 }
 
-function toPopupData(el: HTMLElement): PopupData | null {
+function toPopupData(el: HTMLElement, shadowHosts?: HTMLElement[]): PopupData | null {
     const text = getElementText(el);
     if (!text) {
         return null;
@@ -81,14 +82,18 @@ function toPopupData(el: HTMLElement): PopupData | null {
     return {
         text,
         element: el,
-        buttons: getButtonData(el),
+        buttons: getButtonData(el, shadowHosts),
     };
 }
 
 const MAX_FRAGMENT_EXPANSION_DEPTH = 6;
 
-function looksLikeConsentPopup(text: string, buttons: ButtonData[]): boolean {
-    return buttons.length > 0 && !isOnlyButtonText(text, buttons) && checkHeuristicPatterns(text).patterns.length > 0;
+function hasPopupText(text: string): boolean {
+    return checkHeuristicPatterns(text).patterns.length > 0;
+}
+
+function hasPopupButtons(text: string, buttons: ButtonData[]): boolean {
+    return buttons.length > 0 && !isOnlyButtonText(text, buttons);
 }
 
 // a bar of buttons can match detect patterns ("accept all"), but lacks the popup text needed to classify it
@@ -104,8 +109,8 @@ function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
  * A positioned candidate is often only part of a popup, such as a sticky button bar or heading.
  * If it does not look like a consent popup on its own, use the nearest ancestor that does.
  */
-export function expandPopupFragment(popup: PopupData): PopupData {
-    if (looksLikeConsentPopup(popup.text, popup.buttons)) {
+function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): PopupData {
+    if (hasPopupButtons(popup.text, popup.buttons) && hasPopupText(popup.text)) {
         return popup;
     }
     let el = getComposedParent(popup.element);
@@ -114,12 +119,13 @@ export function expandPopupFragment(popup: PopupData): PopupData {
         if (el === document.body || el === document.documentElement || el.getBoundingClientRect().height > window.innerHeight) {
             break;
         }
+        // check the text first: it is cheaper than collecting buttons
         const text = getElementText(el);
-        if (!text || checkHeuristicPatterns(text).patterns.length === 0) {
+        if (!text || !hasPopupText(text)) {
             continue;
         }
-        const buttons = getButtonData(el);
-        if (buttons.length > 0 && !isOnlyButtonText(text, buttons)) {
+        const buttons = getButtonData(el, shadowHosts);
+        if (hasPopupButtons(text, buttons)) {
             return { text, element: el, buttons };
         }
     }
@@ -141,29 +147,28 @@ function getComposedParent(el: HTMLElement): HTMLElement | null {
 export function getFramePopupElement(doc: Document): HTMLElement | null {
     const el = doc.body || doc.documentElement;
     const win = doc.defaultView;
-    if (!el || !win || win.innerWidth === 0 || win.innerHeight === 0) {
-        return null;
-    }
-    if (typeof el.checkVisibility === 'function' && !el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) {
+    if (!el || !win || win.innerWidth === 0 || win.innerHeight === 0 || !isStyleVisible(el)) {
         return null;
     }
     return getElementText(el).trim() ? el : null;
 }
 
+// catches elements hidden by an ancestor's opacity or visibility; checkVisibility is not available in older browsers
+function isStyleVisible(el: HTMLElement): boolean {
+    return typeof el.checkVisibility !== 'function' || el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true });
+}
+
 /**
  * Rendered text of an element, including the content of its own open shadow root.
  */
-export function getElementText(el: HTMLElement): string {
+function getElementText(el: HTMLElement): string {
     const text = el.innerText || '';
     if (!el.shadowRoot) {
         return text;
     }
     // innerText of a shadow host does not include its shadow content
-    const shadowText = Array.from(el.shadowRoot.children)
-        .map((child) => (isRenderedTextElement(child) ? getElementText(child) : ''))
-        .filter((t) => t.trim())
-        .join('\n');
-    return [text, shadowText].filter((t) => t.trim()).join('\n');
+    const shadowTexts = Array.from(el.shadowRoot.children, (child) => (isRenderedTextElement(child) ? getElementText(child) : ''));
+    return [text, ...shadowTexts].filter((t) => t.trim()).join('\n');
 }
 
 // innerText of an element that is not rendered falls back to textContent, which would leak hidden text
@@ -178,7 +183,7 @@ function isRenderedTextElement(el: Element): el is HTMLElement {
 /**
  * Like Node.contains, but also looks through shadow root boundaries.
  */
-export function composedContains(container: Node, node: Node): boolean {
+function composedContains(container: Node, node: Node): boolean {
     if (container.contains(node)) {
         return true;
     }
@@ -196,12 +201,8 @@ export function composedContains(container: Node, node: Node): boolean {
  * Stricter visibility check for popup candidates: catches panels hidden by an ancestor's opacity or visibility,
  * and elements outside the viewport, which isElementVisible lets through.
  */
-export function isPopupCandidateVisible(el: HTMLElement): boolean {
-    if (!isElementVisible(el)) {
-        return false;
-    }
-    // checkVisibility is not available in older browsers
-    if (typeof el.checkVisibility === 'function' && !el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) {
+function isPopupCandidateVisible(el: HTMLElement): boolean {
+    if (!isElementVisible(el) || !isStyleVisible(el)) {
         return false;
     }
     const rect = el.getBoundingClientRect();
@@ -229,9 +230,10 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
  */
-function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
+function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): { elements: HTMLElement[]; shadowHosts: HTMLElement[] } {
     const startTime = performance.now();
     const found: HTMLElement[] = [];
+    const shadowHosts: HTMLElement[] = [];
     // open shadow roots are walked after the tree that hosts them
     const roots: Node[] = [document.documentElement];
     for (let i = 0; i < roots.length; i++) {
@@ -244,19 +246,18 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
             {
                 acceptNode(node: HTMLElement) {
                     if (node.shadowRoot) {
+                        shadowHosts.push(node);
                         roots.push(node.shadowRoot);
                     }
                     if (node.tagName === 'BODY') {
                         return NodeFilter.FILTER_SKIP;
                     }
-                    if (isElementVisible(node)) {
-                        const cssPosition = window.getComputedStyle(node).position;
-                        if (
-                            (cssPosition === 'fixed' || cssPosition === 'sticky' || isDialogLikeElement(node)) &&
-                            isPopupCandidateVisible(node)
-                        ) {
-                            return NodeFilter.FILTER_ACCEPT;
-                        }
+                    const cssPosition = window.getComputedStyle(node).position;
+                    if (
+                        (cssPosition === 'fixed' || cssPosition === 'sticky' || isDialogLikeElement(node)) &&
+                        isPopupCandidateVisible(node)
+                    ) {
+                        return NodeFilter.FILTER_ACCEPT;
                     }
                     // start rejecting after POPUP_SEARCH_MAX_TIME to avoid blocking the main thread
                     if (performance.now() - startTime > timeout) {
@@ -271,40 +272,51 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
         }
     }
     // Empty positioned children should not displace a contentful popup container.
-    return excludeContainers(found.filter((element) => getElementText(element).trim()));
+    return { elements: excludeContainers(found.filter((element) => getElementText(element).trim())), shadowHosts };
 }
 
 /**
  * Serialize all actionable buttons on the page
+ * @param shadowHosts open shadow hosts on the page, if already known; otherwise they are searched for under el
  */
-export function getButtonData(el: HTMLElement): ButtonData[] {
-    const actionableButtons = excludeContainers(getButtonLikeElements(el)).filter(
-        (b) =>
-            isElementVisible(b) &&
-            !isDisabled(b) &&
-            (getElementText(b).trim() ||
-                // <input> values do not appear in innerText
-                (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) && b.value?.trim())),
-    );
-
-    return actionableButtons.map((b) => ({
-        text: (getElementText(b) || b.textContent || '').trim() || (b as HTMLInputElement).value?.trim() || '',
-        element: b,
-    }));
-}
-
-function getButtonLikeElements(root: HTMLElement | ShadowRoot): HTMLElement[] {
-    const buttons = Array.from(root.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR));
-    const hosts = root instanceof HTMLElement && root.shadowRoot ? [root] : [];
-    for (const el of root.querySelectorAll('*')) {
-        if (el.shadowRoot) {
-            hosts.push(el as HTMLElement);
+export function getButtonData(el: HTMLElement, shadowHosts?: HTMLElement[]): ButtonData[] {
+    const buttons: ButtonData[] = [];
+    for (const b of excludeContainers(getButtonLikeElements(el, shadowHosts))) {
+        if (!isElementVisible(b) || isDisabled(b)) {
+            continue;
+        }
+        const text =
+            getElementText(b).trim() ||
+            // <input> values do not appear in innerText
+            (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) ? b.value?.trim() : '');
+        if (text) {
+            buttons.push({ text, element: b });
         }
     }
-    for (const host of hosts) {
-        buttons.push(...getButtonLikeElements(host.shadowRoot!));
+    return buttons;
+}
+
+function getButtonLikeElements(el: HTMLElement, shadowHosts = findShadowHosts(el)): HTMLElement[] {
+    const buttons = Array.from(el.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR));
+    for (const host of shadowHosts) {
+        if (composedContains(el, host)) {
+            buttons.push(...host.shadowRoot!.querySelectorAll<HTMLElement>(BUTTON_LIKE_ELEMENT_SELECTOR));
+        }
     }
     return buttons;
+}
+
+// all open shadow hosts at or under root, including those nested in other shadow roots
+function findShadowHosts(root: HTMLElement | ShadowRoot): HTMLElement[] {
+    const hosts: HTMLElement[] = [];
+    const candidates =
+        root instanceof HTMLElement ? [root, ...root.querySelectorAll<HTMLElement>('*')] : root.querySelectorAll<HTMLElement>('*');
+    for (const el of candidates) {
+        if (el.shadowRoot) {
+            hosts.push(el, ...findShadowHosts(el.shadowRoot));
+        }
+    }
+    return hosts;
 }
 
 export function isDisabled(el: HTMLElement): boolean {
