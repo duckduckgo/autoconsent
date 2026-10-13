@@ -165,6 +165,22 @@ describe('isExcludedPopup', () => {
         expect(isExcludedPopup('Adult website ahead.')).to.be.true;
     });
 
+    it('flags investor eligibility disclaimers', () => {
+        expect(
+            isExcludedPopup(
+                'By continuing you are confirming you have read and understood the legal information below and consent to the use of cookies on this site. ' +
+                    'This website is for persons who qualify as Professional Clients or Eligible Counterparties under the FCA rules only. I agree I disagree',
+            ),
+        ).to.be.true;
+        expect(isExcludedPopup('The website is not suitable for retail clients. I agree I disagree')).to.be.true;
+        expect(
+            isExcludedPopup(
+                'By clicking “Accept”, you confirm that you are an institutional investor in the United Kingdom. Accept I disagree',
+            ),
+        ).to.be.true;
+        expect(isExcludedPopup('By clicking “Accept”, you confirm that you are a financial intermediary. Accept I disagree')).to.be.true;
+    });
+
     it('does not flag a normal cookie consent popup', () => {
         expect(isExcludedPopup('We use cookies to enhance your experience. Accept All Reject All')).to.be.false;
     });

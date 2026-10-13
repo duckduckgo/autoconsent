@@ -472,6 +472,10 @@ export const DETECT_NEVER_MATCH_PATTERNS = [
     /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
     // e.g. "adult oriented material", "adult content", "adult-only website"
     /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
+    // investor eligibility gates, e.g. "Professional Clients or Eligible Counterparties", "not suitable for retail clients"
+    /eligible\s+counterpart(?:y|ies)|not\s+(?:suitable|intended)\s+for\s+retail\s+(?:clients|investors)/i,
+    // e.g. "you confirm that you are an institutional investor", "I confirm I am a financial intermediary"
+    /confirm\w*\s+(?:that\s+)?(?:you\s+are|i\s+am)\s+an?\s+(?:(?:professional|institutional|qualified|accredited|sophisticated)\s+(?:investor|client)|financial\s+(?:intermediary|advis[eo]r))/i,
 ];
 
 export const SETTINGS_PATTERNS = [
