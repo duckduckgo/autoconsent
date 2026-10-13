@@ -1,6 +1,7 @@
 import { PlaywrightTestConfig, devices } from '@playwright/test';
 
-const proxy = process.env.PROXY_SERVER ? { server: process.env.PROXY_SERVER } : undefined;
+// Oxylabs sessions bring their own regional proxy and reject contexts that set another one.
+const proxy = process.env.PROXY_SERVER && process.env.OXYLABS !== '1' ? { server: process.env.PROXY_SERVER } : undefined;
 
 const config: PlaywrightTestConfig = {
     forbidOnly: !!process.env.CI,
