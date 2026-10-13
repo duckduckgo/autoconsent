@@ -8,9 +8,12 @@ generateCMPTests(
         'https://www.miniplay.com/',
         'https://www.geogebra.org/',
         'https://www.gamepressure.com/',
+        'https://ffxiv.consolegameswiki.com/',
+        'https://www.quotev.com/',
+        'https://www.tide-forecast.com/',
     ],
     {
-        skipRegions: ['US', 'GB', 'FR'],
+        skipRegions: ['US'],
     },
 );
 

@@ -56,22 +56,22 @@
                     ],
                     "else": [
                         {
-                            "waitFor": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]",
+                            "waitFor": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]",
                             "timeout": 2000
                         },
                         {
                             "comment": "without #disagree-btn, a secondary button in second place rejects; otherwise reject from the 'more options' screen",
                             "if": {
-                                "exists": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                                "exists": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(2)"
                             },
                             "then": [
                                 {
-                                    "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(2)"
+                                    "click": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(2)"
                                 }
                             ],
                             "else": [
                                 {
-                                    "click": ".qc-cmp2-summary-buttons > button[mode=\"secondary\"]:nth-of-type(1)"
+                                    "click": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(1)"
                                 },
                                 {
                                     "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
@@ -91,8 +91,11 @@
                                     "optional": true
                                 },
                                 {
-                                    "comment": "'Reject all' can save and close the dialog on its own; let it finish before the visibility check",
-                                    "wait": 500
+                                    "comment": "'Reject all' can save and close the dialog on its own; give it up to 1s to close before the visibility check",
+                                    "waitForVisible": "#qc-cmp2-ui",
+                                    "check": "none",
+                                    "timeout": 1000,
+                                    "optional": true
                                 },
                                 {
                                     "comment": "only save if 'Reject all' left the dialog open",
@@ -131,7 +134,7 @@
     ],
     "optIn": [
         {
-            "click": ".qc-cmp2-summary-buttons > button[mode=\"primary\"]"
+            "click": ".qc-cmp2-summary-buttons button[mode=\"primary\"]"
         }
     ]
 }
