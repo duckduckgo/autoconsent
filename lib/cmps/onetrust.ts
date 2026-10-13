@@ -26,6 +26,8 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optOut() {
+        // some sites server-render the banner: clicks are dropped until the SDK initializes and injects its styles
+        await this.waitForElement('#onetrust-style', 10000);
         await this.wait(500);
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {

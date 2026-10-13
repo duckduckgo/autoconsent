@@ -33,6 +33,11 @@ generateCMPTests('Onetrust', ['https://www.newyorker.com/', 'https://www.adobe.c
     skipRegions: ['US'],
 });
 
+// Server-rendered banner: the reject button is clickable before the SDK attaches its handlers.
+generateCMPTests('Onetrust', ['https://people.com/', 'https://www.allrecipes.com/', 'https://www.investopedia.com/'], {
+    skipRegions: ['US'],
+});
+
 generateCMPTests('Onetrust', ['https://eu.icebreaker.com/de-de?country=DE'], {
     skipRegions: ['US'],
 });
