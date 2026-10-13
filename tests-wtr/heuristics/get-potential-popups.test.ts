@@ -123,6 +123,7 @@ describe('getPotentialPopups', () => {
 
     describe('visibility', () => {
         const hiddenCases: Record<string, string> = {
+            'an ancestor with display none': `<div style="display: none">${fixedBanner('panel')}</div>`,
             'an ancestor with opacity 0': `<div style="opacity: 0">${fixedBanner('panel')}</div>`,
             'an ancestor with visibility hidden': `<div style="visibility: hidden">${fixedBanner('panel')}</div>`,
             'an ancestor with opacity 0 (dialog-like)': `<div style="opacity: 0"><div id="panel" role="dialog">${BANNER}</div></div>`,

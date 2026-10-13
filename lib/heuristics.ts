@@ -252,7 +252,12 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): { elements: HTML
                     if (node.tagName === 'BODY') {
                         return NodeFilter.FILTER_SKIP;
                     }
-                    const cssPosition = window.getComputedStyle(node).position;
+                    const style = window.getComputedStyle(node);
+                    // nothing under display: none can be visible, and styling hidden subtrees is slow
+                    if (style.display === 'none') {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    const cssPosition = style.position;
                     if (
                         (cssPosition === 'fixed' || cssPosition === 'sticky' || isDialogLikeElement(node)) &&
                         isPopupCandidateVisible(node)
