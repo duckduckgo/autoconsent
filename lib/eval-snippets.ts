@@ -191,6 +191,7 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).status === 'deny',
+    EVAL_POSTHOG_TEST: () => localStorage.getItem('cookie_consent') === 'acknowledged',
     EVAL_POVR_GOBACK: () => window.history.back() || true,
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
