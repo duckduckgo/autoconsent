@@ -148,6 +148,11 @@ export const snippets = {
             .forEach((i) => i.getAttribute('aria-checked') === 'true' && i.click()) || true,
     EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
+    // the deny handler listens for touchstart on touch devices, which click() does not fire
+    EVAL_DUTCHDROPS_CONSENT_TOUCH_DENY: () =>
+        document
+            .querySelector('.cookie-permission-container .js-cookie-permission-button')
+            .dispatchEvent(new Event('touchstart', { bubbles: true, cancelable: true })) || true,
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,

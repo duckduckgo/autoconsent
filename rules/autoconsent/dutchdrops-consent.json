@@ -1,0 +1,45 @@
+{
+    "name": "dutchdrops-consent",
+    "prehideSelectors": [".cookie-permission-container[data-cookie-permission]"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-permission-container[data-cookie-permission] .js-cookie-permission-button a.c-button-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-permission-container[data-cookie-permission]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-permission-container .js-cookie-accept-all-button button"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "click the wrapper, not the link: the link navigates away when the click handler is not attached",
+            "click": ".cookie-permission-container .js-cookie-permission-button"
+        },
+        {
+            "if": {
+                "visible": ".cookie-permission-container[data-cookie-permission]"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_DUTCHDROPS_CONSENT_TOUCH_DENY"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".cookie-permission-container[data-cookie-permission]",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-preference=1"
+        }
+    ]
+}
