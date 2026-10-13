@@ -1,0 +1,19 @@
+{
+    "name": "zoocity",
+    "vendorUrl": "https://www.zoocity.hr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zoocity\\.(hr|si)/"
+    },
+    "prehideSelectors": ["#notice-cookie-block", "#cookie-overlay"],
+    "detectCmp": [{ "exists": "#notice-cookie-block #btn-cookie-settings-save" }],
+    "detectPopup": [{ "visible": "#notice-cookie-block" }],
+    "optIn": [{ "waitForVisible": "#notice-cookie-block #btn-cookie-all-allow" }, { "eval": "EVAL_ZOOCITY_1" }],
+    "optOut": [
+        { "waitForVisible": "#notice-cookie-block #btn-cookie-settings" },
+        { "click": "#cookie-settings input:checked:not(:disabled)", "all": true, "optional": true },
+        { "eval": "EVAL_ZOOCITY_0" }
+    ]
+}

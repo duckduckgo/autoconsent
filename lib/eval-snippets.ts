@@ -268,6 +268,19 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    // handlers listen to touchstart on touch devices and reload the page, so dispatch after the eval returns
+    EVAL_ZOOCITY_0: () =>
+        !!setTimeout(() =>
+            ['touchstart', 'click'].forEach((type) =>
+                document.querySelector('#btn-cookie-settings-save').dispatchEvent(new Event(type, { bubbles: true })),
+            ),
+        ),
+    EVAL_ZOOCITY_1: () =>
+        !!setTimeout(() =>
+            ['touchstart', 'click'].forEach((type) =>
+                document.querySelector('#btn-cookie-all-allow').dispatchEvent(new Event(type, { bubbles: true })),
+            ),
+        ),
 };
 
 export function getFunctionBody(snippetFunc: () => any) {
