@@ -10,6 +10,10 @@
     "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
     "optOut": [
         {
+            "if": { "exists": "#iubenda-cs-banner.iubenda-cs-overlay" },
+            "then": [{ "waitFor": "html[style*=\"hidden\"]", "timeout": 1000, "optional": true }]
+        },
+        {
             "if": { "exists": ".iubenda-cs-reject-btn" },
             "then": [{ "click": ".iubenda-cs-reject-btn" }],
             "else": [

@@ -14,3 +14,8 @@ generateCMPTests('iubenda', ['https://www.yogurtland.com/', 'https://www.greenpl
 generateCMPTests('iubenda', ['https://newatlas.com/', 'https://plan.io/'], {
     skipRegions: ['US', 'AU'],
 });
+
+// banner with background overlay that locks page scrolling until it is closed
+generateCMPTests('iubenda', ['https://www.isfo.it/'], {
+    skipRegions: ['AU'],
+});
