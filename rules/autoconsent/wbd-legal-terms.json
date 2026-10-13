@@ -1,32 +1,63 @@
 {
     "name": "wbd-legal-terms",
     "vendorUrl": "https://www.wbd.com/",
-    "comment": "Terms-and-cookies notice with only an Agree button. It is a modal <dialog>, so hiding it with CSS leaves the page inert; close it without submitting the form instead.",
+    "comment": "Terms-and-cookies notice with only an Agree button. The <dialog> flavour leaves the page inert if hidden with CSS, so close it without submitting the form. The inline-styled flavour marks the rest of the page inert and re-applies the body scroll lock on resize, so hide it, clear inert and override the lock with a stylesheet.",
     "cosmetic": true,
-    "minimumRuleStepVersion": 2,
+    "minimumRuleStepVersion": 3,
     "detectCmp": [
         {
-            "exists": "dialog#ltp-dialog"
+            "exists": "dialog#ltp-dialog, html[class*='userconsent-cntry-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true']"
         }
     ],
     "detectPopup": [
         {
-            "visible": "dialog#ltp-dialog[open]"
+            "visible": "dialog#ltp-dialog[open], html[class*='userconsent-cntry-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true']"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#ltp-submit-btn"
+            "if": {
+                "exists": "dialog#ltp-dialog"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#ltp-submit-btn"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "html[class*='userconsent-cntry-'] > body > div[aria-hidden='true'] > div[role='dialog'][aria-modal='true'] > a[role='button']"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "eval": "EVAL_WBD_LTP_CLOSE"
-        },
-        {
-            "removeClass": "is-NoScroll",
-            "selector": "body",
-            "optional": true
+            "if": {
+                "exists": "dialog#ltp-dialog"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_WBD_LTP_CLOSE"
+                },
+                {
+                    "removeClass": "is-NoScroll",
+                    "selector": "body",
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "hide": "html[class*='userconsent-cntry-'] > body > div[aria-hidden='true']:has(> div[role='dialog'][aria-modal='true'])"
+                },
+                {
+                    "eval": "EVAL_WBD_TERMS_UNINERT"
+                },
+                {
+                    "stylesheet": "html[class*='userconsent-cntry-'] > body[style*='position: fixed'][style*='overflow: hidden'] { position: static !important; overflow: visible !important; max-height: none !important; max-width: none !important; height: auto !important; width: auto !important; }",
+                    "stylesheetId": "wbd-legal-terms-scroll-unlock"
+                }
+            ]
         }
     ]
 }

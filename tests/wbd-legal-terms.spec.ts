@@ -8,6 +8,8 @@ generateCMPTests(
         'https://www.golfdigest.com/',
         'https://www.tlc.com/',
         'https://www.discovery.com/',
+        'https://www.cnn.com/',
+        'https://www.cnn.com/cnn-underscored/fashion/best-colorful-sneakers',
     ],
     {
         // shown only in some US states
