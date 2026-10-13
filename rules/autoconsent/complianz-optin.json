@@ -2,7 +2,10 @@
     "name": "Complianz optin",
     "prehideSelectors": [".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"],
     "detectCmp": [{ "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
-    "detectPopup": [{ "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
+    "detectPopup": [
+        { "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" },
+        { "eval": "EVAL_COMPLIANZ_OPTIN_NOT_DECLINED" }
+    ],
     "optIn": [
         {
             "any": [{ "click": ".cc-accept-all" }, { "click": ".cc-allow" }, { "click": ".cc-dismiss" }]
