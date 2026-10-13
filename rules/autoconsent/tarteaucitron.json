@@ -4,7 +4,8 @@
     "detectCmp": [{ "exists": "#tarteaucitronRoot" }],
     "detectPopup": [
         {
-            "visible": "#tarteaucitronCloseAlert"
+            "visible": "#tarteaucitronCloseAlert",
+            "check": "any"
         },
         {
             "exists": "#tarteaucitronAllDenied2",
@@ -28,7 +29,9 @@
     ],
     "test": [
         {
-            "eval": "EVAL_TARTEAUCITRON_2"
+            "if": { "exists": ".dsgvoaio-checkbox" },
+            "then": [{ "visible": "#tarteaucitronAlertBig", "check": "none" }],
+            "else": [{ "eval": "EVAL_TARTEAUCITRON_2" }]
         }
     ]
 }
