@@ -1,0 +1,17 @@
+{
+    "name": "eagerly-tools-cookie",
+    "vendorUrl": "https://www.eagerly.nl/",
+    "prehideSelectors": ["#eagerly-tools-cookie.first", "#eagerly-tools-cookie-overlay.first"],
+    "detectCmp": [{ "exists": "#eagerly-tools-cookie .cookie-fb-content" }],
+    "detectPopup": [{ "visible": "#eagerly-tools-cookie.active .cookie-fb-content" }],
+    "optIn": [{ "waitForThenClick": "#eagerly-tools-cookie .js-btn-accept-all" }],
+    "optOut": [
+        {
+            "click": "#eagerly-tools-cookie .js-cookie-checkbox-group input:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#eagerly-tools-cookie .js-btn-ok" }
+    ],
+    "test": [{ "eval": "EVAL_EAGERLY_TOOLS_COOKIE_0" }]
+}
