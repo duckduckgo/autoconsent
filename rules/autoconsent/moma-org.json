@@ -1,0 +1,29 @@
+{
+    "name": "moma-org",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://www\\.moma\\.org/cookie-warning"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-cookie-warning]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-cookie-warning]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-cookie-warning-close]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-cookie-warning-close]"
+        }
+    ]
+}
