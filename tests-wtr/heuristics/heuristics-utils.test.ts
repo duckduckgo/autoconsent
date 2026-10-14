@@ -95,6 +95,24 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects "Durch die Nutzung unserer Webseite" cookie notices', () => {
+        const texts = [
+            'Durch die Nutzung unserer Webseite erklären Sie sich damit einverstanden, dass wir diese Cookies setzen.',
+            'Durch die Nutzung dieser Website stimmen Sie der Verwendung von Cookies zu.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Durch die Nutzung unserer Webseite finden Sie schnell die neuesten Tests.').patterns).to.have.length(
+            0,
+        );
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
