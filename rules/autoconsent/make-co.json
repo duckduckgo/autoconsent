@@ -1,0 +1,17 @@
+{
+    "name": "make-co",
+    "vendorUrl": "https://make.co/",
+    "prehideSelectors": ["#cookie-footer"],
+    "detectCmp": [{ "exists": "#cookie-footer #cookie-analytics-only" }, { "visible": "#cookie-footer" }],
+    "detectPopup": [{ "visible": "#cookie-footer" }],
+    "optIn": [{ "waitForThenClick": "#cookie-footer #cookie-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-footer #cookie-configure" },
+        { "waitForVisible": "#cookie-dialog" },
+        { "if": { "exists": "#analyticsCookies:checked" }, "then": [{ "click": "#analyticsCookies" }] },
+        { "if": { "exists": "#nonNeccessaryCookies:checked" }, "then": [{ "click": "#nonNeccessaryCookies" }] },
+        { "click": "#cookie-dialog button.universal-btn" },
+        { "waitForVisible": "#cookie-dialog", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookielawinfo-checkbox-non-necessary=no" }, { "cookieContains": "cookielawinfo-checkbox-analytics=no" }]
+}
