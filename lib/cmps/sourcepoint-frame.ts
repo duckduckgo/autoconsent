@@ -1,3 +1,4 @@
+import { BUTTON_NEVER_MATCH_PATTERNS } from '../heuristic-patterns';
 import { RunContext } from '../rules';
 import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
@@ -57,7 +58,15 @@ export default class SourcePoint extends AutoConsentCMPBase {
             '.sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT',
             2000,
         );
-        return !this.elementExists('.sp_choice_type_9');
+        return !this.elementExists('.sp_choice_type_9') && !this.hasPaidReject();
+    }
+
+    // "consent or pay" walls can also put the subscription offer on the reject (type 13) button
+    hasPaidReject() {
+        return Array.from(document.querySelectorAll('.sp_choice_type_13')).some((el) => {
+            const text = el.textContent ?? '';
+            return /\d\s*[€$£]|[€$£]\s*\d/.test(text) || BUTTON_NEVER_MATCH_PATTERNS.some((p) => p.test(text));
+        });
     }
 
     async optIn() {

@@ -11,6 +11,9 @@ generateCMPTests(
         'https://11freunde.de/',
         'https://www.sueddeutsche.de/',
         'https://www.transfermarkt.com/',
+        // Prisma Media: the paid offer sits on the reject (type 13) button
+        'https://www.passeportsante.net/',
+        'https://www.femmeactuelle.fr/',
     ],
     {
         testOptIn: false,
