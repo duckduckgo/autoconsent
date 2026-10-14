@@ -1,0 +1,33 @@
+{
+    "name": "headout",
+    "vendorUrl": "https://www.headout.com/",
+    "prehideSelectors": ["[class*=\"styles__ConsentFixedWrapper\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"styles__ConsentFixedWrapper\"] button[class*=\"styles__CancelButton\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "eval": "EVAL_HEADOUT_DETECT_POPUP"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"styles__ConsentFixedWrapper\"] button[class*=\"styles__ActionButton\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"styles__ConsentFixedWrapper\"] button[class*=\"styles__CancelButton\"]"
+        },
+        {
+            "waitForThenClick": "[class*=\"styles__PopupButtonsContainer\"] button[class*=\"styles__CancelButton\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent-state=denied"
+        }
+    ]
+}
