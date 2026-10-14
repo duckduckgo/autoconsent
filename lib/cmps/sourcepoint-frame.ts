@@ -92,19 +92,28 @@ export default class SourcePoint extends AutoConsentCMPBase {
     }
 
     /**
-     * Set US National PM toggles to the opt-out position. "Do not sell or share" style toggles opt out when on,
-     * all others (e.g. "Allow personalized advertising") opt out when off.
+     * Set US National PM switches to the opt-out position. "Do not sell or share" style switches opt out when on,
+     * all others (e.g. "Allow personalized advertising", "Targeted Advertising Cookies") opt out when off.
      */
     setUsPmToggles() {
-        const toggles = document.querySelectorAll('.pm-toggle[role=switch]') as NodeListOf<HTMLElement>;
+        const toggles = document.querySelectorAll(
+            '.pm-toggle[role=switch], .switch-container > .pm-switch[role=switch]',
+        ) as NodeListOf<HTMLElement>;
         for (const toggle of toggles) {
+            // the ccpa-stack UI is reversed and handled separately
+            if (toggle.closest('.ccpa-stack')) {
+                continue;
+            }
             const label =
                 toggle.getAttribute('aria-label') || toggle.closest('.switch-container')?.querySelector('.name')?.textContent || '';
+            if (/required|necessary|essential/i.test(label)) {
+                continue;
+            }
             const optOutWhenOn = /\b(do not|don't)\b|opt[- ]?out/i.test(label);
             if ((toggle.getAttribute('aria-checked') === 'true') !== optOutWhenOn) {
-                // the click handlers sit on the "on"/"off" labels, not on the switch itself
-                const target = toggle.querySelector(optOutWhenOn ? '.on' : '.off') as HTMLElement | null;
-                (target || toggle).click();
+                // pm-toggle handlers sit on the "on"/"off" labels, pm-switch ones on the slider
+                const target = toggle.querySelector(optOutWhenOn ? '.on' : '.off') || toggle.querySelector('.slider');
+                ((target as HTMLElement | null) || toggle).click();
             }
         }
     }

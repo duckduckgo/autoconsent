@@ -19,9 +19,9 @@ generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
     skipRegions: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'PL', 'SE', 'NO', 'DK', 'CH'],
 });
 
-// US National notices with a "Do not sell or share" (refinery29) or "Allow personalized advertising" (fox13now)
-// toggle in the privacy manager.
-generateCMPTests('Sourcepoint-frame', ['https://www.refinery29.com/', 'https://www.fox13now.com/'], {
+// US National notices whose privacy manager has a "Do not sell or share" (refinery29), "Allow personalized
+// advertising" (fox13now) or per-category (myfitnesspal) switch.
+generateCMPTests('Sourcepoint-frame', ['https://www.refinery29.com/', 'https://www.fox13now.com/', 'https://www.myfitnesspal.com/'], {
     ...bothRulesComplete,
     onlyRegions: ['US'],
 });
