@@ -133,7 +133,7 @@ shadow root or same-origin iframe.
 
 ### Updating existing rules
 - **For site-specific popups, prefer a heuristic-pattern fix over a new rule, and check whether a rule is needed at all.** If the popup is unique to a site (not a shared CMP) and already has a reject, dismiss, or acknowledge button that the heuristic should match, extend `lib/heuristic-patterns.ts` instead of adding a `urlPattern`-scoped JSON rule. Do not use a heuristic fix in place of a generic CMP rule. A heuristic change must not cause false positives on other sites.
-- **When the heuristic already handles the popup, test every region before concluding that no fix is needed.**
+- **When the heuristic already handles the popup, test every supported region (`ALL_REGIONS` in the `proxy-testing` skill), not just the core set, before concluding that no fix is needed.**
 - If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.
 - After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) across the expanded set. Inspect both API results AND screenshots.
 - **When adding or fixing a rule for a site, remove stale site-specific rules covering the same site.** If a site-specific rule is obsolete in all regions (the site switched CMP), remove it rather than leaving it alongside the new or updated rule.
