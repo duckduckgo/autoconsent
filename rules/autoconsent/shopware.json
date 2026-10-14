@@ -42,9 +42,21 @@
             "then": [
                 {
                     "waitForThenClick": ".cookie-permission-container .js-cookie-permission-button button"
+                },
+                {
+                    "waitForVisible": ".cookie-permission-container[data-cookie-permission]",
+                    "check": "none",
+                    "timeout": 1000,
+                    "optional": true,
+                    "comment": "on touch devices the deny button listens for touchstart only, so the click may be ignored"
                 }
-            ],
-            "else": [
+            ]
+        },
+        {
+            "if": {
+                "visible": ".cookie-permission-container[data-cookie-permission]"
+            },
+            "then": [
                 {
                     "waitForThenClick": ".cookie-permission-container .js-cookie-configuration-button button"
                 },
