@@ -252,6 +252,8 @@ export const snippets = {
     EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
     EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
+    // 0 means no stored decision; otherwise the user reopened the prompt themselves
+    EVAL_TEALIUM_NO_DECISION: () => utag.gdpr.getConsentState() === 0,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
