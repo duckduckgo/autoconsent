@@ -1,3 +1,4 @@
+import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 // Note: JS API is also available:
@@ -44,6 +45,8 @@ export default class ConsentManager extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         if (this.apiAvailable) {
+            // delayed-display configs still open the box if consent is set before it is shown
+            await waitFor(() => this.elementVisible('#cmpbox', 'any') || this.elementVisible(['#cmpwrapper', '#cmpbox'], 'any'), 25, 200);
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
         }
 
