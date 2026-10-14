@@ -1,0 +1,29 @@
+{
+    "name": "sex-tjejer-com",
+    "vendorUrl": "https://sex-tjejer.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?sex-tjejer\\.com/"
+    },
+    "prehideSelectors": ["#superwrapper > div:has(> a.btn-success.pull-right):has(a[href=\"/wiki/cookies\"])"],
+    "detectCmp": [
+        {
+            "exists": "#superwrapper > div:has(> a.btn-success.pull-right):has(a[href=\"/wiki/cookies\"])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#superwrapper > div:has(> a.btn-success.pull-right):has(a[href=\"/wiki/cookies\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#superwrapper > div:has(a[href=\"/wiki/cookies\"]) > a.btn-success.pull-right"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#superwrapper > div:has(> a.btn-success.pull-right):has(a[href=\"/wiki/cookies\"])"
+        }
+    ]
+}
