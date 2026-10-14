@@ -72,6 +72,16 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects cookie consent asked as a question', () => {
+        const texts = [
+            'Please can I use cookies to see how the site is used and which of my ads work? Privacy',
+            'May we use cookies to improve your experience?',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {

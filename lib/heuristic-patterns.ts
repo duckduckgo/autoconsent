@@ -10,6 +10,8 @@ export const DETECT_PATTERNS = [
     // a single qualifier is common: "optional", "essential", "necessary", "analytics", ...
     /we (?:use|serve)(?: \w+)? cookies/gi,
     /we are using cookies/gi,
+    // consent asked as a question, e.g. "Please can I use cookies to see how the site is used?"
+    /(?:can|may) (?:i|we) use cookies/gi,
     /use of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
