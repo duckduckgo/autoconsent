@@ -1,0 +1,35 @@
+{
+    "name": "presspage",
+    "vendorUrl": "https://www.presspage.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookie_bar.cc-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_bar.cc-cookies .js-pp-cookie-control.cc-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_bar.cc-cookies .js-pp-cookie-control.cc-cookie-decline"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_bar.cc-cookies .js-pp-cookie-control.cc-cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_bar.cc-cookies .js-pp-cookie-control.cc-cookie-decline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_control=declined"
+        }
+    ]
+}
