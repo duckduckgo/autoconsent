@@ -1,6 +1,6 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from './rules';
 import { DomActionsProvider } from './types';
-import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor } from './utils';
+import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, isPrehideRule, waitFor } from './utils';
 import AutoConsent from './web';
 
 // Default for the `retryInterval` option of `waitForThenClick`.
@@ -156,6 +156,18 @@ export class DomActions implements DomActionsProvider {
         const existingElement = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[undoprehide]', existingElement, location.href);
 
+        // Pages may insert their own rules into the first <style> in the document, which can be ours: keep those.
+        const sheet = existingElement.sheet;
+        const rules = sheet ? Array.from(sheet.cssRules) : [];
+        if (sheet && rules.some((rule) => !isPrehideRule(rule))) {
+            for (let i = rules.length - 1; i >= 0; i--) {
+                if (isPrehideRule(rules[i])) {
+                    sheet.deleteRule(i);
+                }
+            }
+            existingElement.removeAttribute('id');
+            return;
+        }
         existingElement.remove();
     }
 

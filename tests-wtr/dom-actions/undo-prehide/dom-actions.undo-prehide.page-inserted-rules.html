@@ -1,0 +1,24 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./dom-actions.undo-prehide.page-inserted-rules');
+            });
+        </script>
+        <style id="autoconsent-prehide">
+            #cookie-banner {
+                opacity: 0 !important;
+                z-index: -1 !important;
+                pointer-events: none !important;
+            }
+        </style>
+        <style>
+            input {
+                opacity: 0;
+            }
+        </style>
+        <input id="field" />
+    </body>
+</html>

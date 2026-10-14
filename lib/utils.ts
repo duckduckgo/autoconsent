@@ -21,6 +21,17 @@ export function getHidingStyle(method: HideMethod) {
     return `${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important;`;
 }
 
+// matches rules written by hideElements() with the 'opacity' method
+export function isPrehideRule(rule: CSSRule): boolean {
+    const style = (rule as CSSStyleRule).style;
+    return (
+        !!style &&
+        style.getPropertyValue('opacity') === '0' &&
+        style.getPropertyPriority('opacity') === 'important' &&
+        style.getPropertyValue('pointer-events') === 'none'
+    );
+}
+
 // hide elements with a CSS rule
 export function hideElements(styleEl: HTMLStyleElement, selector: string, method: HideMethod = 'display'): boolean {
     const rule = `${selector} { ${getHidingStyle(method)} } `;
