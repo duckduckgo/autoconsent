@@ -72,6 +72,12 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "<organisation> uses cookies" notices', () => {
+        const { patterns } = checkHeuristicPatterns('The Rijksmuseum uses cookies. A cookie is a small text file.');
+
+        expect(patterns).to.include('/\\buses cookies\\b/gi');
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
@@ -233,6 +239,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
+    it('matches "rather not" refusals', () => {
+        expect(classifyButtonTextRegex('No, rather not')).to.equal('reject');
+        expect(classifyButtonTextRegex('Rather not')).to.equal('reject');
     });
 
     it('returns other for empty string', () => {

@@ -10,6 +10,8 @@ export const DETECT_PATTERNS = [
     // a single qualifier is common: "optional", "essential", "necessary", "analytics", ...
     /we (?:use|serve)(?: \w+)? cookies/gi,
     /we are using cookies/gi,
+    // e.g. "The Museum uses cookies."
+    /\buses cookies\b/gi,
     /use of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
@@ -205,6 +207,8 @@ const REJECT_PATTERNS_ENGLISH = [
 
     'no',
     /^no,? thank(s| you)$/is,
+    // e.g. "rather not", "no, rather not"
+    /^(no,?\s+)?rather not$/is,
     /^opt[ -]out$/is,
     'dont enable',
     'i do not agree',
