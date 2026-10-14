@@ -1,0 +1,29 @@
+{
+    "name": "finna",
+    "vendorUrl": "https://finna.fi/",
+    "prehideSelectors": [".js-cookie-consent:has(.cookie-consent__accept-essential)"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-consent .cookie-consent__accept-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-consent .cookie-consent__accept-essential"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-consent .cookie-consent__accept-all",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-consent .cookie-consent__accept-essential",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "accurx",
+    "runContext": {
+        "urlPattern": "^https://(accurx\\.nhs\\.uk|patient\\.accurx\\.com)/"
+    },
+    "prehideSelectors": ["#__next > div:has(> p > a[href*='cookie-policy'])"],
+    "detectCmp": [{ "exists": "xpath///div[@id='__next']/div[h2[normalize-space(.)='Cookies on this website']]" }],
+    "detectPopup": [{ "visible": "xpath///div[@id='__next']/div[h2[normalize-space(.)='Cookies on this website']]" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@id='__next']/div[h2[normalize-space(.)='Cookies on this website']]//button[contains(., 'Yes, I agree')]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@id='__next']/div[h2[normalize-space(.)='Cookies on this website']]//button[contains(., 'do not use analytics cookies')]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[@id='__next']/div[h2[normalize-space(.)='Cookies on this website']]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
