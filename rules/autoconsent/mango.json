@@ -1,0 +1,56 @@
+{
+    "name": "mango",
+    "vendorUrl": "https://shop.mango.com/",
+    "runContext": {
+        "urlPattern": "^https://(shop\\.mango|www\\.mangooutlet)\\.com/"
+    },
+    "prehideSelectors": ["#cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-banner [class*=\"CookiesFooter-module\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-banner [class*=\"CookiesFooter-module\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-banner [id=\"cookies.button.acceptAll\"]",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookies-banner [class*=\"CookiesFooter-module\"] > button:nth-child(2):not([id])"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookies-banner [class*=\"CookiesFooter-module\"] > button:nth-child(2):not([id])",
+                    "retry": 5,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookies-banner [class*=\"CookiesFooter-module\"] > button:first-child:not([id])",
+                    "retry": 5,
+                    "retryInterval": 500
+                },
+                {
+                    "waitForThenClick": "#cookies-banner [class*=\"CookiesSettings-module\"][class*=\"buttonsWrapper\"] > button:nth-child(2)",
+                    "retry": 5,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"targeting\":\"DENIED\""
+        }
+    ]
+}
