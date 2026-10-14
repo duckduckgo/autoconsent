@@ -20,6 +20,17 @@
             },
             "then": [
                 {
+                    "waitFor": "#qc-cmp2-usp .qc-cmp2-list-item-header,#qc-cmp2-usp .qc-cmp2-toggle-switch",
+                    "timeout": 2000,
+                    "optional": true
+                },
+                {
+                    "comment": "some sites render the opt-out list collapsed, without toggles until it's expanded",
+                    "click": "#qc-cmp2-usp .qc-cmp2-list-item:not(:has(.qc-cmp2-toggle-switch)) > .qc-cmp2-list-item-header",
+                    "all": true,
+                    "optional": true
+                },
+                {
                     "waitFor": "#qc-cmp2-usp .qc-cmp2-toggle-switch",
                     "timeout": 2000,
                     "optional": true
