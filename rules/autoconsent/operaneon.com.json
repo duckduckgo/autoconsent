@@ -1,0 +1,25 @@
+{
+    "name": "operaneon.com",
+    "vendorUrl": "https://www.operaneon.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?operaneon\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "visible": "[data-operaneon-consent]:not([hidden]) [data-operaneon-consent-action=\"accept-selection\"]" }],
+    "detectPopup": [{ "visible": "[data-operaneon-consent]:not([hidden])" }],
+    "optIn": [{ "waitForThenClick": "[data-operaneon-consent] [data-operaneon-consent-action=\"accept-all\"]" }],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-operaneon-consent] [data-operaneon-consent-toggle][aria-pressed=\"true\"]",
+            "all": true,
+            "timeout": 500,
+            "optional": true
+        },
+        { "waitForThenClick": "[data-operaneon-consent] [data-operaneon-consent-action=\"accept-selection\"]" }
+    ],
+    "test": [
+        { "exists": "[data-operaneon-consent]:not([hidden])", "negated": true },
+        { "exists": "[data-operaneon-consent] [data-operaneon-consent-toggle][aria-pressed=\"true\"]", "negated": true }
+    ]
+}

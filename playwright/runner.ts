@@ -29,6 +29,7 @@ type TestOptions = {
     expectPopupOpen: boolean;
     expectedRuns: number;
     gpc: boolean;
+    simulateInteraction: boolean;
 };
 const defaultOptions: TestOptions = {
     testOptOut: true,
@@ -40,6 +41,7 @@ const defaultOptions: TestOptions = {
     expectPopupOpen: true,
     expectedRuns: 1,
     gpc: false,
+    simulateInteraction: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -101,6 +103,13 @@ class TestRun {
         await this.page.goto(this.url, { waitUntil: 'commit' });
 
         await this.injectContentScripts();
+
+        if (this.options.simulateInteraction) {
+            // some popups are only revealed on the first user interaction (e.g. scroll)
+            await this.page.waitForLoadState('load').catch(() => {});
+            await this.page.waitForTimeout(3000);
+            await this.page.evaluate(() => window.scrollBy(0, 500));
+        }
 
         try {
             await this.runAssertions();
