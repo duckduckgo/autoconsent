@@ -662,6 +662,18 @@ describe('getButtonData', () => {
         expect(buttons[0].text).to.equal('Has Text');
     });
 
+    it('keeps buttons that contain textless button-like icons', () => {
+        container.innerHTML =
+            '<div class="popup__button-wrapper">' +
+            '<button class="button"><svg class="button__icon"></svg>Accept all cookies</button>' +
+            '<button class="button"><svg class="button__icon"></svg>Continue with essential cookies</button>' +
+            '</div>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons.map((b) => b.text)).to.deep.equal(['Continue with essential cookies', 'Accept all cookies']);
+    });
+
     it('returns empty array if no buttons found', () => {
         container.innerHTML = '<div>No buttons here</div>';
 
