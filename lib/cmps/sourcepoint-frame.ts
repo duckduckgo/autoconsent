@@ -138,7 +138,8 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 return await this.click('.sp_choice_type_13');
             }
 
-            await this.click(manageSelector);
+            // Generic [data-choice] links can include unrelated links (e.g. a vendor list) that precede the manage button.
+            await this.click(this.elementVisible('.sp_choice_type_12', 'any') ? '.sp_choice_type_12' : manageSelector);
             // the page may navigate at this point but that's okay
             await waitFor(() => this.isManagerOpen(), 200, 100);
         }

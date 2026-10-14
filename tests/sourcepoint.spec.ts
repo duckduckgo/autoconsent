@@ -12,6 +12,10 @@ generateCMPTests(
     bothRulesComplete,
 );
 
+// The notice has a [data-choice] vendor-list link ahead of the "Settings or Reject" button,
+// and the privacy manager opens in a separate iframe.
+generateCMPTests('Sourcepoint-frame', ['https://www.techbook-magazine.com/', 'https://www.fitbook-magazine.com/'], bothRulesComplete);
+
 // The Guardian serves a "consent or pay" wall in the EU/EEA and UK, where Sourcepoint-frame
 // bails and only sourcepoint-top acts; the remaining regions get a free-reject popup.
 generateCMPTests('Sourcepoint-frame', ['https://www.theguardian.com/'], {
