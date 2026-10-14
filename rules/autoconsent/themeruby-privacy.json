@@ -1,0 +1,10 @@
+{
+    "name": "themeruby-privacy",
+    "vendorUrl": "https://themeruby.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#rb-privacy"],
+    "detectCmp": [{ "exists": "#rb-privacy" }],
+    "detectPopup": [{ "visible": "#rb-privacy" }],
+    "optIn": [{ "waitForThenClick": "#rb-privacy #privacy-trigger" }],
+    "optOut": [{ "hide": "#rb-privacy" }]
+}
