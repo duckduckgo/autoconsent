@@ -61,12 +61,16 @@ export default class SourcePoint extends AutoConsentCMPBase {
     }
 
     async optIn() {
-        await this.waitForElement('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL', 2000);
+        await this.waitForElement('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_Accept', 2000);
         if (await this.click('.sp_choice_type_11')) {
             return true;
         }
 
         if (await this.click('.sp_choice_type_ACCEPT_ALL')) {
+            return true;
+        }
+
+        if (await this.click('.sp_choice_type_Accept')) {
             return true;
         }
         return false;
@@ -78,10 +82,31 @@ export default class SourcePoint extends AutoConsentCMPBase {
         }
         // US National PM is served at /us_pm/index.html, same as the initial notice.
         // Distinguish the manager from the notice by the absence of the accept/continue button.
-        if (location.pathname === '/us_pm/index.html' && !document.querySelector('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL')) {
+        if (
+            location.pathname === '/us_pm/index.html' &&
+            !document.querySelector('.sp_choice_type_11,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_Accept')
+        ) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Set US National PM toggles to the opt-out position. "Do not sell or share" style toggles opt out when on,
+     * all others (e.g. "Allow personalized advertising") opt out when off.
+     */
+    setUsPmToggles() {
+        const toggles = document.querySelectorAll('.pm-toggle[role=switch]') as NodeListOf<HTMLElement>;
+        for (const toggle of toggles) {
+            const label =
+                toggle.getAttribute('aria-label') || toggle.closest('.switch-container')?.querySelector('.name')?.textContent || '';
+            const optOutWhenOn = /\b(do not|don't)\b|opt[- ]?out/i.test(label);
+            if ((toggle.getAttribute('aria-checked') === 'true') !== optOutWhenOn) {
+                // the click handlers sit on the "on"/"off" labels, not on the switch itself
+                const target = toggle.querySelector(optOutWhenOn ? '.on' : '.off') as HTMLElement | null;
+                (target || toggle).click();
+            }
+        }
     }
 
     async optOut() {
@@ -117,6 +142,7 @@ export default class SourcePoint extends AutoConsentCMPBase {
                 ],
                 false,
             );
+            this.setUsPmToggles();
             return await this.click('.sp_choice_type_SE');
         }
 
