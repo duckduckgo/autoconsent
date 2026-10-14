@@ -1,0 +1,41 @@
+{
+    "name": "blinkist",
+    "vendorUrl": "https://www.blinkist.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?blinkist\\.com/"
+    },
+    "prehideSelectors": ["[data-testid=\"cookieConsentModal\"]"],
+    "detectCmp": [
+        {
+            "exists": "astro-island[component-export=\"CookieConsentModal\"], [data-testid=\"cookieConsentModal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookieConsentModal\"] [data-testid=\"allow-all-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookieConsentModal\"] [data-testid=\"allow-all-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookieConsentModal\"] [data-testid=\"allow-all-button\"] ~ button:last-child"
+        },
+        {
+            "waitForVisible": "[data-testid=\"cookieConsentModal\"]",
+            "check": "none",
+            "timeout": 3000
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "marketing:false"
+        }
+    ]
+}
