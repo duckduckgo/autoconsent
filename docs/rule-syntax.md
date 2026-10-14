@@ -96,7 +96,7 @@ Waits until element is visible in the page. After `timeout` ms the step fails. T
   "all": true | false,
 }
 ```
-Click on an element returned by `selector`. If `all` is `true`, all matching elements are clicked. If `all` is `false`, only the first returned value is clicked.
+Click on an element returned by `selector`. If `all` is `true`, all matching elements are clicked one by one, letting the page handle each click before the next one (back-to-back clicks can lose state updates, e.g. on toggle switches). If `all` is `false`, only the first returned value is clicked.
 
 ## Wait for then click
 ```javascript

@@ -6,11 +6,17 @@
     "optOut": [
         { "eval": "EVAL_TEALIUM_1" },
         { "eval": "EVAL_TEALIUM_DONOTSELL" },
-        { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
         {
-            "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent",
-            "timeout": 1000,
-            "optional": true
+            "if": { "exists": "#__tealiumGDPRecModal #rejectAll" },
+            "then": [{ "waitForThenClick": "#__tealiumGDPRecModal #rejectAll" }],
+            "else": [
+                { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
+                {
+                    "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent",
+                    "timeout": 1000,
+                    "optional": true
+                }
+            ]
         }
     ],
     "optIn": [{ "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs" }, { "eval": "EVAL_TEALIUM_2" }],

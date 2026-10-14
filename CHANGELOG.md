@@ -1,3 +1,34 @@
+# v16.52.0 (Wed Oct 14 2026)
+
+#### Rules
+
+- Rule update: quantcast [#1701](https://github.com/duckduckgo/autoconsent/pull/1701) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Tealium [#1757](https://github.com/duckduckgo/autoconsent/pull/1757) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lta [#1759](https://github.com/duckduckgo/autoconsent/pull/1759) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pigu [#1760](https://github.com/duckduckgo/autoconsent/pull/1760) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: community.screwfix.com [#1756](https://github.com/duckduckgo/autoconsent/pull/1756) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: la-becanerie [#1761](https://github.com/duckduckgo/autoconsent/pull/1761) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mizuno.com [#1758](https://github.com/duckduckgo/autoconsent/pull/1758) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Rule update: quantcast + make click step with all:true async [#1627](https://github.com/duckduckgo/autoconsent/pull/1627) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Remove unused Dockerfile; match extension Node in release job [#1754](https://github.com/duckduckgo/autoconsent/pull/1754) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Test every region before relying on the heuristic [#1773](https://github.com/duckduckgo/autoconsent/pull/1773) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.51.0 (Tue Oct 13 2026)
 
 #### Rules
