@@ -1,0 +1,37 @@
+{
+    "name": "jtl-shop",
+    "vendorUrl": "https://www.jtl-software.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#consent-manager #consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#consent-manager #consent-banner-btn-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-manager #consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-banner-btn-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consent-banner-btn-close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#consent-manager #consent-banner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
