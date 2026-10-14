@@ -7,11 +7,23 @@
             "any": [{ "visible": ".iubenda-cs-accept-btn" }, { "visible": "#iubenda-cs-banner .iubenda-ccpa-opt-out" }]
         }
     ],
-    "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
+    "optIn": [
+        {
+            "if": { "exists": "#iubenda-cs-banner.iubenda-cs-fix-height" },
+            "then": [{ "waitForThenClick": ".iubenda-cs-accept-btn", "retry": 5, "retryInterval": 500 }],
+            "else": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }]
+        }
+    ],
     "optOut": [
         {
             "if": { "exists": ".iubenda-cs-reject-btn" },
-            "then": [{ "click": ".iubenda-cs-reject-btn" }],
+            "then": [
+                {
+                    "if": { "exists": "#iubenda-cs-banner.iubenda-cs-fix-height" },
+                    "then": [{ "waitForThenClick": ".iubenda-cs-reject-btn", "retry": 5, "retryInterval": 500 }],
+                    "else": [{ "click": ".iubenda-cs-reject-btn" }]
+                }
+            ],
             "else": [
                 {
                     "if": { "exists": ".iubenda-cs-customize-btn" },

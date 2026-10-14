@@ -12,5 +12,18 @@ generateCMPTests('iubenda', ['https://www.yogurtland.com/', 'https://www.greenpl
 
 // "Do Not Sell" CCPA notice in California, GDPR banner in Europe
 generateCMPTests('iubenda', ['https://newatlas.com/', 'https://plan.io/'], {
-    skipRegions: ['US', 'AU'],
+    skipRegions: ['US', 'AU', 'CA', 'JP'],
+});
+
+// on small screens the banner text must be scrolled through: the first click only scrolls and shows a "press again" counter
+generateCMPTests('iubenda', ['https://docs.arduino.cc/'], {
+    skipRegions: ['AU'],
+    mobile: true,
+});
+
+// same, but the site reloads after consent, so the self-test result is never received
+generateCMPTests('iubenda', ['https://borromees.com/'], {
+    skipRegions: ['AU'],
+    mobile: true,
+    testSelfTest: false,
 });
