@@ -8,6 +8,11 @@
         {
             "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner, #didomi-host:not([aria-hidden=\"true\"]):not(:empty)",
             "check": "any"
+        },
+        { "exists": "#didomi-host .didomi-custom-subscribe-link", "negated": true },
+        {
+            "exists": "xpath///*[@id='didomi-notice-disagree-button'][contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'abonn') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'abbon') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'subscri') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'suscri')]",
+            "negated": true
         }
     ],
     "optIn": [{ "waitForThenClick": "#didomi-notice-agree-button" }],

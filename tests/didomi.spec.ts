@@ -26,3 +26,12 @@ generateCMPTests('didomi', ['https://newrepublic.com/article/162247/andreas-malm
     testSelfTest: true,
     onlyRegions: ['US'],
 });
+
+// Pay-or-consent walls: Didomi is detected, but the rule must not handle the popup,
+// so the user can choose between subscribing and consenting.
+generateCMPTests('didomi', ['https://www.rugbyrama.fr/', 'https://www.ladepeche.fr/', 'https://www.20minutes.fr/'], {
+    expectPopupOpen: false,
+    testOptIn: false,
+    testSelfTest: false,
+    onlyRegions: ['FR'],
+});
