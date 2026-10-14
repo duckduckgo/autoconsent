@@ -8,6 +8,8 @@ generateCMPTests(
         'https://www.golfdigest.com/',
         'https://www.tlc.com/',
         'https://www.discovery.com/',
+        'https://bleacherreport.com/',
+        'https://bleacherreport.com/nba',
     ],
     {
         // shown only in some US states
