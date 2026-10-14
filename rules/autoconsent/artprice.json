@@ -1,0 +1,33 @@
+{
+    "name": "artprice",
+    "vendorUrl": "https://www.artprice.com/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z]+\\.)?artprice\\.com/"
+    },
+    "prehideSelectors": [".CookieConsentOverlay"],
+    "detectCmp": [
+        {
+            "exists": ".CookieConsentOverlay .sln-reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".CookieConsentOverlay .sln-reject-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".CookieConsentOverlay .sln-accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".CookieConsentOverlay .sln-reject-cookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3A%22rejected%22"
+        }
+    ]
+}
