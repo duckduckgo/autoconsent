@@ -198,6 +198,20 @@ describe('cleanButtonText', () => {
     it('handles empty string', () => {
         expect(cleanButtonText('')).to.equal('');
     });
+
+    it('collapses a label duplicated for hover animations', () => {
+        expect(cleanButtonText('Deny all\nDeny all')).to.equal('deny all');
+        expect(cleanButtonText('Reject Reject')).to.equal('reject');
+        expect(cleanButtonText('Reject all Accept all')).to.equal('reject all accept all');
+        expect(cleanButtonText('no no no')).to.equal('no no no');
+    });
+});
+
+describe('classifyButtonTextRegex with duplicated labels', () => {
+    it('classifies labels rendered twice', () => {
+        expect(classifyButtonTextRegex('Deny all\nDeny all')).to.equal('reject');
+        expect(classifyButtonTextRegex('Allow all\nAllow all')).to.equal('accept');
+    });
 });
 
 describe('classifyButtonTextRegex', () => {
