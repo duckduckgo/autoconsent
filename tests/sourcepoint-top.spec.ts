@@ -11,6 +11,10 @@ generateCMPTests(
         'https://11freunde.de/',
         'https://www.sueddeutsche.de/',
         'https://www.transfermarkt.com/',
+        // Prisma Media: the reject button leads to a paid subscription
+        'https://www.geo.fr/',
+        'https://www.femmeactuelle.fr/',
+        'https://www.capital.fr/',
     ],
     {
         testOptIn: false,

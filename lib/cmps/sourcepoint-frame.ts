@@ -57,7 +57,12 @@ export default class SourcePoint extends AutoConsentCMPBase {
             '.sp_choice_type_11,.sp_choice_type_12,.sp_choice_type_13,.sp_choice_type_ACCEPT_ALL,.sp_choice_type_SAVE_AND_EXIT',
             2000,
         );
-        return !this.elementExists('.sp_choice_type_9');
+        return !this.elementExists('.sp_choice_type_9') && !this.hasPaidRejectButton();
+    }
+
+    // some sites wire the reject choice to a paid subscription, signalled by a price in the button
+    hasPaidRejectButton() {
+        return Array.from(document.querySelectorAll('.sp_choice_type_13')).some((el) => /\d\s*[€£$]|[€£$]\s*\d/.test(el.textContent || ''));
     }
 
     async optIn() {
