@@ -1,0 +1,39 @@
+{
+    "name": "framer-cookie-banner",
+    "prehideSelectors": ["[class*=\"--framer-cookie-banner-container\"]"],
+    "detectCmp": [{ "exists": "[class*=\"--framer-cookie-banner-container\"]" }],
+    "detectPopup": [{ "visible": "[class*=\"--framer-cookie-banner-container\"]" }],
+    "optIn": [
+        {
+            "if": { "exists": "#__framer-cookie-component-button-accept" },
+            "then": [{ "waitForThenClick": "#__framer-cookie-component-button-accept" }],
+            "else": [{ "waitForThenClick": "#__framer-cookie-component-button-dismiss" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#__framer-cookie-component-button-reject" },
+            "then": [{ "waitForThenClick": "#__framer-cookie-component-button-reject" }],
+            "else": [
+                {
+                    "if": { "exists": "#__framer-cookie-component-button-customize" },
+                    "then": [
+                        { "waitForThenClick": "#__framer-cookie-component-button-customize" },
+                        {
+                            "waitForVisible": "[class*=\"--framer-cookie-banner-container\"] button[aria-label^=\"Toggle for\"]",
+                            "timeout": 2000
+                        },
+                        {
+                            "click": "[class*=\"--framer-cookie-banner-container\"] button[aria-label^=\"Toggle for\"][aria-label$=\"is enabled\"]",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "#__framer-cookie-component-button-accept" }
+                    ],
+                    "else": [{ "waitForThenClick": "#__framer-cookie-component-button-dismiss" }]
+                }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": "[class*=\"--framer-cookie-banner-container\"]", "check": "none", "timeout": 2000 }]
+}
