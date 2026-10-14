@@ -1,0 +1,36 @@
+{
+    "name": "insta360",
+    "vendorUrl": "https://www.insta360.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?insta360\\.com/"
+    },
+    "prehideSelectors": ["#__next > div[class*='index_banner__']"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#__next > div[class*='index_banner__']" }, { "exists": "script[src*='consent.cookiebot.com/uc.js']" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__next > div[class*='index_banner__'] div[class*='index_wrapperRight__'] button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__next > div[class*='index_banner__'] div[class*='index_wrapperRight__'] button:nth-of-type(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#__next > div[class*='index_banner__'] div[class*='index_wrapperRight__'] button:nth-of-type(2)"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "marketing:false"
+        }
+    ]
+}
