@@ -262,14 +262,13 @@ class TestRun {
             // ignore timeout errors
         }
         await this.page.waitForTimeout(3000); // capture potential reloads
-        // check that popupFound messages are unique
-        const popupFoundMessages = this.findReceivedMessages({ type: 'popupFound' });
-        for (let i = 0; i < popupFoundMessages.length; i++) {
-            for (let j = i + 1; j < popupFoundMessages.length; j++) {
-                expect(popupFoundMessages[i], `Possible reload loop: found multiple identical popupFound messages`).not.toEqual(
-                    popupFoundMessages[j],
-                );
-            }
+        // check that popupFound messages are unique (or repeat at most expectedRuns times, for flows that reload the page once)
+        const popupFoundMessages = this.findReceivedMessages({ type: 'popupFound' }).map((msg) => JSON.stringify(msg));
+        for (const msg of new Set(popupFoundMessages)) {
+            expect(
+                popupFoundMessages.filter((m) => m === msg).length,
+                `Possible reload loop: found multiple identical popupFound messages`,
+            ).toBeLessThanOrEqual(this.options.expectedRuns);
         }
 
         if (this.options.expectPopupOpen) {

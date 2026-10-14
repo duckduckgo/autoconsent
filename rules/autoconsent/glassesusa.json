@@ -1,0 +1,35 @@
+{
+    "name": "glassesusa",
+    "vendorUrl": "https://www.glassesusa.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?glassesusa\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "xpath///div[*/*[text()='Your privacy matters']]" }],
+    "detectPopup": [{ "visible": "xpath///div[*/*[text()='Your privacy matters']]" }],
+    "optIn": [{ "waitForThenClick": "xpath///div[*/*[text()='Your privacy matters']]//button[normalize-space(.)='Continue']" }],
+    "optOut": [
+        {
+            "if": { "exists": "script[src*=\"otSDKStub\"]" },
+            "then": [
+                { "waitForVisible": "#onetrust-pc-sdk", "timeout": 5000, "optional": true },
+                { "waitForThenClick": "#onetrust-pc-sdk .ot-pc-refuse-all-handler" },
+                { "waitForVisible": "#onetrust-pc-sdk", "check": "none" },
+                {
+                    "if": { "exists": "xpath///div[*/*[text()='Your privacy matters']]//button[@aria-label='close']" },
+                    "then": [{ "click": "xpath///div[*/*[text()='Your privacy matters']]//button[@aria-label='close']" }],
+                    "else": [{ "click": "xpath///div[*/*[text()='Your privacy matters']]//button[normalize-space(.)='Continue']" }]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "xpath///div[*/*[text()='Your privacy matters']]//button[starts-with(normalize-space(.), 'Cookie Manager')]",
+                    "retry": 10,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "C0004%3A0" }]
+}
