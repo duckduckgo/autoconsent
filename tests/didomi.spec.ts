@@ -26,3 +26,12 @@ generateCMPTests('didomi', ['https://newrepublic.com/article/162247/andreas-malm
     testSelfTest: true,
     onlyRegions: ['US'],
 });
+
+// "Consent or pay" notices where the disagree button is a paid or subscription option: the rule must leave them to the user.
+generateCMPTests('didomi', ['https://www.elconfidencial.com/', 'https://www.20minutes.fr/', 'https://www.publico.es/'], {
+    expectPopupOpen: false,
+    testOptIn: false,
+    testOptOut: false,
+    testSelfTest: false,
+    onlyRegions: ['FR'],
+});
