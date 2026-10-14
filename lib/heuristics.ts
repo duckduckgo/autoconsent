@@ -153,9 +153,10 @@ export function getFramePopupElement(doc: Document): HTMLElement | null {
     return getElementText(el).trim() ? el : null;
 }
 
-// catches elements hidden by an ancestor's opacity or visibility; checkVisibility is not available in older browsers
+// catches elements hidden by an ancestor's visibility; checkVisibility is not available in older browsers.
+// Opacity is not checked: prehide hides popups with opacity: 0, and they must stay detectable.
 function isStyleVisible(el: HTMLElement): boolean {
-    return typeof el.checkVisibility !== 'function' || el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true });
+    return typeof el.checkVisibility !== 'function' || el.checkVisibility({ checkVisibilityCSS: true });
 }
 
 /**
@@ -198,22 +199,20 @@ function composedContains(container: Node, node: Node): boolean {
 }
 
 /**
- * Stricter visibility check for popup candidates: catches panels hidden by an ancestor's opacity or visibility,
+ * Stricter visibility check for popup candidates: catches panels hidden by an ancestor's visibility,
  * and elements outside the viewport, which isElementVisible lets through.
  */
 function isPopupCandidateVisible(el: HTMLElement): boolean {
-    if (!isElementVisible(el) || !isStyleVisible(el)) {
-        return false;
-    }
+    return isElementVisible(el) && isStyleVisible(el) && isOnScreen(el);
+}
+
+// A zero-size wrapper can still show its content: then any child that is on screen counts, unless the wrapper clips it.
+function isOnScreen(el: Element): boolean {
     const rect = el.getBoundingClientRect();
-    return (
-        rect.width > 0 &&
-        rect.height > 0 &&
-        rect.bottom > 0 &&
-        rect.right > 0 &&
-        rect.top < window.innerHeight &&
-        rect.left < window.innerWidth
-    );
+    if (rect.width === 0 || rect.height === 0) {
+        return window.getComputedStyle(el).overflow === 'visible' && Array.from(el.children).some((child) => isOnScreen(child));
+    }
+    return rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
 }
 
 export function isDialogLikeElement(node: HTMLElement): boolean {

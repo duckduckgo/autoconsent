@@ -124,11 +124,11 @@ describe('getPotentialPopups', () => {
     describe('visibility', () => {
         const hiddenCases: Record<string, string> = {
             'an ancestor with display none': `<div style="display: none">${fixedBanner('panel')}</div>`,
-            'an ancestor with opacity 0': `<div style="opacity: 0">${fixedBanner('panel')}</div>`,
             'an ancestor with visibility hidden': `<div style="visibility: hidden">${fixedBanner('panel')}</div>`,
-            'an ancestor with opacity 0 (dialog-like)': `<div style="opacity: 0"><div id="panel" role="dialog">${BANNER}</div></div>`,
+            'an ancestor with visibility hidden (dialog-like)': `<div style="visibility: hidden"><div id="panel" role="dialog">${BANNER}</div></div>`,
             'a position outside the viewport': `<div id="panel" style="position: fixed; top: -2000px;">${BANNER}</div>`,
             'zero size': `<div id="panel" style="position: fixed; bottom: 0; width: 0; height: 0; overflow: hidden;">${BANNER}</div>`,
+            'a zero-size wrapper whose content is outside the viewport': `<div id="panel" style="position: fixed; top: 0; height: 0;"><div style="position: relative; top: -2000px;">${BANNER}</div></div>`,
         };
         for (const [name, html] of Object.entries(hiddenCases)) {
             it(`ignores a positioned panel hidden by ${name}`, () => {
@@ -138,8 +138,25 @@ describe('getPotentialPopups', () => {
         }
 
         it('ignores a hidden panel inside a shadow root', () => {
-            shadowHost('opacity: 0', fixedBanner('panel'));
+            shadowHost('visibility: hidden', fixedBanner('panel'));
             expect(popupIds()).not.to.include('panel');
+        });
+
+        it('finds a popup hidden with opacity 0, as prehide does', () => {
+            const style = document.createElement('style');
+            style.textContent = '#panel { opacity: 0 !important; z-index: -1 !important; pointer-events: none !important; }';
+            document.head.appendChild(style);
+            try {
+                container.innerHTML = fixedBanner('panel');
+                expect(popupIds()).to.include('panel');
+            } finally {
+                style.remove();
+            }
+        });
+
+        it('finds a popup in a zero-size positioned wrapper whose content is on screen', () => {
+            container.innerHTML = `<div id="panel" style="position: fixed; bottom: 0; left: 0; right: 0; height: 0;"><div style="position: absolute; bottom: 0;">${BANNER}</div></div>`;
+            expect(popupIds()).to.include('panel');
         });
     });
 
