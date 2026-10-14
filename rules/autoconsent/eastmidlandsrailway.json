@@ -1,0 +1,13 @@
+{
+    "name": "eastmidlandsrailway",
+    "vendorUrl": "https://www.eastmidlandsrailway.co.uk/",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?eastmidlandsrailway\\.co\\.uk/"
+    },
+    "prehideSelectors": [".my-cookie-wrapper"],
+    "detectCmp": [{ "exists": ".my-cookie-wrapper .cc-compliance .cc-reject-all" }],
+    "detectPopup": [{ "visible": ".my-cookie-wrapper:not(.cc-invisible) .cc-compliance .cc-reject-all" }],
+    "optIn": [{ "waitForThenClick": ".my-cookie-wrapper:not(.cc-invisible) .cc-compliance .cc-dismiss" }],
+    "optOut": [{ "waitForThenClick": ".my-cookie-wrapper:not(.cc-invisible) .cc-compliance .cc-reject-all" }],
+    "test": [{ "cookieContains": "cookieconsent_dismissed1=reject_all" }]
+}
