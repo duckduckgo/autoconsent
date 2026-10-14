@@ -829,6 +829,8 @@ export const ACKNOWLEDGE_PATTERNS = [
     'x',
     /^got it!?$/,
     'acknowledge',
+    // notice-only banner with no choice, e.g. EMBL-EBI sites
+    'i agree, dismiss this banner',
     /^close (banner|cookie notification)$/is,
     /understood$/is,
     'confirm my choices',
