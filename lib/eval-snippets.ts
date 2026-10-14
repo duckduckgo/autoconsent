@@ -26,7 +26,11 @@ export const snippets = {
         const cmpData = window.__cmp?.('getCMPData');
         return !!cmpData && typeof cmpData === 'object';
     },
-    EVAL_CONSENTMANAGER_2: () => window.__cmp?.('consentStatus')?.userChoiceExists === false,
+    EVAL_CONSENTMANAGER_2: () => {
+        // consent set while the CMP is still loading gets overwritten when the layer renders
+        const status = window.cmpmngr?.getCMPStatus?.();
+        return status !== 'stub' && status !== 'loading' && window.__cmp?.('consentStatus')?.userChoiceExists === false;
+    },
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
