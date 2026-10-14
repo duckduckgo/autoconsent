@@ -1,0 +1,64 @@
+{
+    "name": "ubisoft.com",
+    "vendorUrl": "https://www.ubisoft.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ubisoft\\.com/"
+    },
+    "prehideSelectors": ["#privacy_modal", "#footer_tc_privacy"],
+    "detectCmp": [
+        {
+            "exists": "#privacy__modal__close, #footer_tc_privacy #privacy__links__center"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#privacy__modal__close, #footer_tc_privacy",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#privacy__modal__accept"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#privacy__modal__accept"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#footer_tc_privacy_button"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#privacy__modal__close"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#privacy__modal__close"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#footer_tc_privacy #privacy__links__center"
+                },
+                {
+                    "waitForThenClick": "#privacy_options #options_tc_privacy_button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "UBI_PRIVACY_POLICY_VIEWED=true"
+        },
+        {
+            "cookieContains": "UBI_PRIVACY_ADS_OPTOUT=true"
+        }
+    ]
+}
