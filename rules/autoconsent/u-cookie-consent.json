@@ -1,0 +1,9 @@
+{
+    "name": "u-cookie-consent",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".u-cookie-actions [data-attr=\"btn-reject-cookies\"]" }],
+    "detectPopup": [{ "visible": ".u-cookie-actions [data-attr=\"btn-reject-cookies\"]" }],
+    "optIn": [{ "waitForThenClick": ".u-cookie-actions [data-attr=\"btn-accept-cookies\"]" }],
+    "optOut": [{ "waitForThenClick": ".u-cookie-actions [data-attr=\"btn-reject-cookies\"]" }],
+    "test": [{ "waitForVisible": ".u-cookie-actions", "check": "none", "timeout": 2000 }]
+}
