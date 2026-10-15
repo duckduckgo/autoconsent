@@ -1,0 +1,32 @@
+{
+    "name": "cookie-consent-reject-btn",
+    "prehideSelectors": ["#cookieConsent.cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsent.cookie-consent #rejectCookies.reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "comment": "the hidden banner is only translated offscreen, so check the class that slides it in",
+            "visible": "#cookieConsent.cookie-consent.active, #cookieConsent.cookie-consent.show",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsent #acceptCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieConsent #rejectCookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookieConsent.cookie-consent.active, #cookieConsent.cookie-consent.show",
+            "check": "none"
+        }
+    ]
+}
