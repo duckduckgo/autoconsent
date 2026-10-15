@@ -181,6 +181,9 @@ const REJECT_PATTERNS_ENGLISH = [
     // e.g. "i do not accept", "do not accept cookies", "i do not accept the use of cookies"
     /^\s*(no,?\s*)?(i\s+)?do\s+not\s+accept\s*(the\s+use\s+of\s+)?(any\s+)?(cookies)?\s*$/is,
 
+    // e.g. "do not allow cookies", "dont allow", "do not allow any cookies"
+    /^\s*(i\s+)?(do\s+not|dont)\s+allow\s*(any\s+)?(cookies)?\s*$/is,
+
     // e.g. "continue without accepting", "continue without agreeing", "continue without agreeing →"
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
 

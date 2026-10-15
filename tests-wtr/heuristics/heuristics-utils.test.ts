@@ -222,6 +222,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
+    it('matches "do not allow" variants', () => {
+        expect(classifyButtonTextRegex('Do not allow cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex("Don't allow")).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not allow any cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Allow all cookies')).to.equal('accept');
+    });
+
     it('matches CCPA "do not sell/share" variants', () => {
         expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
         expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
