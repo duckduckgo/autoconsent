@@ -1,0 +1,72 @@
+{
+    "name": "tti-cookie-popup",
+    "_metadata": {
+        "vendorUrl": "https://www.ttigroup.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "#cookie-onetrust-show-info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-onetrust-show-info"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-onetrust-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookie-onetrust-only-necessary"
+            },
+            "then": [
+                {
+                    "click": "#cookie-onetrust-only-necessary"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cookie-onetrust-show-info"
+                },
+                {
+                    "waitForVisible": "#onetrust-pc-sdk",
+                    "timeout": 10000
+                },
+                {
+                    "if": {
+                        "visible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler"
+                    },
+                    "then": [
+                        {
+                            "click": "#onetrust-pc-sdk .ot-pc-refuse-all-handler"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#onetrust-pc-sdk input.category-switch-handler:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#cookie-onetrust-show-info",
+            "timeout": 10000,
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed"
+        }
+    ]
+}
