@@ -35,12 +35,17 @@ export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[]
         return popup ? [popup] : [];
     }
     const deadline = performance.now() + timeout;
-    const { popups, shadowHosts } = collectPositionedPopups(deadline);
-    return [...popups, ...findPopupsByHitTest(popups, shadowHosts, deadline)];
+    // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
+    const hitTestPopups = findPopupsByHitTest(deadline);
+    const popups = collectPositionedPopups(deadline);
+    // where both searches found the same popup, keep the walk's candidate
+    const overlapsWalk = (h: PopupData) =>
+        popups.some((p) => composedContains(p.element, h.element) || composedContains(h.element, p.element));
+    return [...popups, ...hitTestPopups.filter((h) => !overlapsWalk(h))];
 }
 
 // fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
-function collectPositionedPopups(deadline: number): { popups: PopupData[]; shadowHosts: HTMLElement[] } {
+function collectPositionedPopups(deadline: number): PopupData[] {
     const { elements, shadowHosts } = getPopupLikeElements(deadline);
     const potentialPopups: PopupData[] = [];
     const expanded: HTMLElement[] = [];
@@ -60,8 +65,7 @@ function collectPositionedPopups(deadline: number): { popups: PopupData[]; shado
         potentialPopups.push(root);
     }
     // a fragment expanded to its popup root replaces any other candidates inside that root
-    const popups = potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
-    return { popups, shadowHosts };
+    return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
 }
 
 const HIT_TEST_COLUMNS = [0.1, 0.5, 0.9];
@@ -72,17 +76,16 @@ const HIT_TEST_EDGE_ROWS = [30, 90, 150];
  * Popups that are not fixed, sticky or dialog-like (for example banners in the normal page flow) are not found by
  * the DOM walk. Hit-test points across the viewport and climb from the topmost element at each point instead.
  */
-function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], deadline: number): PopupData[] {
-    const covered = known.map((p) => p.element);
+function findPopupsByHitTest(deadline: number): PopupData[] {
     const visited = new Set<Element>();
     const found: PopupData[] = [];
-    // stop where an earlier climb already went, and at known popups
+    // stop where an earlier climb already went, and at popups already found
     const shouldStop = (el: HTMLElement) => {
         if (visited.has(el)) {
             return true;
         }
         visited.add(el);
-        return covered.some((c) => composedContains(c, el) || composedContains(el, c));
+        return found.some((p) => composedContains(p.element, el) || composedContains(el, p.element));
     };
     withoutPrehide(() => {
         for (const y of getHitTestRows()) {
@@ -91,10 +94,9 @@ function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], dea
                     return;
                 }
                 const hit = closestHTMLElement(deepElementFromPoint(column * window.innerWidth, y));
-                const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, (el) => toPopupRoot(el, shadowHosts, true), shouldStop);
+                const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, (el) => toPopupRoot(el, undefined, true), shouldStop);
                 if (popup) {
                     found.push(popup);
-                    covered.push(popup.element);
                 }
             }
         }
