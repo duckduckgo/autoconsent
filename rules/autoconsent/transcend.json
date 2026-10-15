@@ -12,6 +12,9 @@
     "detectPopup": [
         {
             "visible": "#transcend-consent-manager"
+        },
+        {
+            "eval": "EVAL_TRANSCEND_POPUP_SHOWN"
         }
     ],
     "optIn": [

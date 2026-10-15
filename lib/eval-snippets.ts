@@ -257,6 +257,18 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    // the container is always present, even when the UI is not shown
+    EVAL_TRANSCEND_POPUP_SHOWN: () => {
+        const viewState = window.transcend?.getViewState?.();
+        if (typeof viewState !== 'string') {
+            return false; // UI not loaded yet
+        }
+        if (viewState === 'Hidden') {
+            // the prompt may still open on page load, unless auto-prompting is disabled
+            return document.readyState !== 'complete' && !document.querySelector('script[data-prompt="0"][src*="airgap"]');
+        }
+        return !['Closed', 'Collapsed'].includes(viewState);
+    },
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
