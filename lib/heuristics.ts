@@ -8,22 +8,26 @@ const POPUP_SEARCH_MAX_TIME = 100;
 export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     const acceptedLevels: PopupClassification[] =
         mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
-    const popups = getPotentialPopups(timeout).filter((popup) => {
+    const isActionable = (popup: PopupData) => {
         const popupText = popup.text?.trim();
         if (!popupText || isExcludedPopup(popupText) || !hasHeuristicPatterns(popupText)) {
             return false;
         }
         popup.regexClassification = classifyPopup(popup.buttons);
         return popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification);
-    });
+    };
+    // nothing found by the walk can beat a popup with reject
+    const hasRejectPopup = (popups: PopupData[]) => popups.some((p) => isActionable(p) && p.regexClassification === 'reject');
+    const popups = getPotentialPopups(timeout, hasRejectPopup).filter(isActionable);
     // a popup with reject will always win
     return popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
 }
 
 /**
  * @param timeout time budget for the whole search, in ms
+ * @param isEnough skip the DOM walk when this accepts the hit-test results
  */
-export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, isEnough?: (hitTestPopups: PopupData[]) => boolean): PopupData[] {
     if (!isTopFrame()) {
         // do not inspect frames that are more than one level deep
         if (window.parent && window.parent !== window.top) {
@@ -37,6 +41,9 @@ export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[]
     const deadline = performance.now() + timeout;
     // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
     const hitTestPopups = findPopupsByHitTest(deadline);
+    if (isEnough?.(hitTestPopups)) {
+        return hitTestPopups;
+    }
     const popups = collectPositionedPopups(deadline);
     // where both searches found the same popup, keep the walk's candidate
     return [...popups, ...hitTestPopups.filter((h) => !popups.some((p) => composedOverlaps(p.element, h.element)))];

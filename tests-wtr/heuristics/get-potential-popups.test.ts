@@ -362,6 +362,17 @@ describe('getPotentialPopups', () => {
             ]);
         });
 
+        it('skips the DOM walk when hit-testing finds a popup with reject', () => {
+            // pointer-events: none keeps the fixed popup out of hit-testing, so only the walk could find it
+            container.innerHTML = `
+                ${IN_FLOW_BANNER}
+                <div id="fixed" style="position: fixed; bottom: 0; pointer-events: none;"><p>We use cookies.</p><button>Reject all</button></div>
+            `;
+            const actionable = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            expect(actionable.map((p) => p.element.id)).to.deep.equal(['banner']);
+            expect(popupIds()).to.include.members(['banner', 'fixed']);
+        });
+
         it('finds an in-flow banner inside a shadow root', () => {
             shadowHost('', IN_FLOW_BANNER);
             expect(popupIds()).to.include('banner');
