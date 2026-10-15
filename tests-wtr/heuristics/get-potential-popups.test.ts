@@ -195,6 +195,22 @@ describe('getPotentialPopups', () => {
             expect(ids).not.to.include('button-bar');
         });
 
+        it('expands past text whose only buttons are policy links', () => {
+            container.innerHTML = `
+                <div id="banner">
+                    <div id="banner-text">
+                        <h2 style="position: sticky; top: 0;">Cookie settings</h2>
+                        <p>We use cookies. Read our <a href="#">Privacy Policy</a>.</p>
+                    </div>
+                    <button>Reject all</button>
+                    <button>Accept all</button>
+                </div>
+            `;
+            const ids = popupIds();
+            expect(ids).to.include('banner');
+            expect(ids).not.to.include('banner-text');
+        });
+
         it('expands a sticky heading with no buttons to its dialog', () => {
             container.innerHTML = `
                 <div id="dialog" role="dialog" style="position: absolute; top: 0; height: 300px; overflow: auto;">

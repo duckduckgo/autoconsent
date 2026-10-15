@@ -85,8 +85,7 @@ function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], dea
         visited.add(el);
         return covered.some((c) => composedContains(c, el) || composedContains(el, c));
     };
-    // any page element can be hit, so unlike positioned candidates, require a button the heuristics recognise
-    const toHitPopup = (el: HTMLElement) => (hasTextEntry(el) ? null : toPopupRoot(el, shadowHosts, true));
+    const toHitPopup = (el: HTMLElement) => (hasTextEntry(el) ? null : toPopupRoot(el, shadowHosts));
     withoutPrehide(() => {
         for (const y of getHitTestRows()) {
             for (const column of HIT_TEST_COLUMNS) {
@@ -169,14 +168,9 @@ function hasPopupText(text: string): boolean {
     return checkHeuristicPatterns(text).patterns.length > 0;
 }
 
-// consent text, and buttons beyond their labels; optionally at least one button the heuristics recognise
-function isPopupRoot(text: string, buttons: ButtonData[], requireKnownButton: boolean): boolean {
-    return (
-        buttons.length > 0 &&
-        hasPopupText(text) &&
-        !isOnlyButtonText(text, buttons) &&
-        (!requireKnownButton || buttons.some((b) => classifyButtonTextRegex(b.text) !== 'other'))
-    );
+// consent text, buttons beyond their labels, and at least one button the heuristics recognise (not just policy links)
+function isPopupRoot(text: string, buttons: ButtonData[]): boolean {
+    return hasPopupText(text) && !isOnlyButtonText(text, buttons) && buttons.some((b) => classifyButtonTextRegex(b.text) !== 'other');
 }
 
 // a bar of buttons can match detect patterns ("accept all"), but lacks the popup text needed to classify it
@@ -188,14 +182,14 @@ function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
     return rest.replace(/\s+/g, '').length < 10;
 }
 
-function toPopupRoot(el: HTMLElement, shadowHosts: HTMLElement[] | undefined, requireKnownButton: boolean): PopupData | null {
+function toPopupRoot(el: HTMLElement, shadowHosts?: HTMLElement[]): PopupData | null {
     // check the text first: it is cheaper than collecting buttons
     const text = getElementText(el);
     if (!text || !hasPopupText(text)) {
         return null;
     }
     const buttons = getButtonData(el, shadowHosts);
-    return isPopupRoot(text, buttons, requireKnownButton) ? { text, element: el, buttons } : null;
+    return isPopupRoot(text, buttons) ? { text, element: el, buttons } : null;
 }
 
 // Bounds how far a climb reaches. The page-level stop in climbToPopup is the main guard against false positives;
@@ -231,11 +225,11 @@ function climbToPopup(
  * If it does not look like a consent popup on its own, use the nearest ancestor that does.
  */
 function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): PopupData {
-    if (isPopupRoot(popup.text, popup.buttons, false)) {
+    if (isPopupRoot(popup.text, popup.buttons)) {
         return popup;
     }
     const parent = getComposedParent(popup.element);
-    return climbToPopup(parent, (el) => toPopupRoot(el, shadowHosts, false)) ?? popup;
+    return climbToPopup(parent, (el) => toPopupRoot(el, shadowHosts)) ?? popup;
 }
 
 function getComposedParent(el: HTMLElement): HTMLElement | null {
