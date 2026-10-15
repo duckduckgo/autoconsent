@@ -1,8 +1,6 @@
 import { HideMethod } from './rules';
 import { Config } from './types';
 
-export const PREHIDE_STYLE_ID = 'autoconsent-prehide';
-
 // get or create a style container for CSS overrides
 export function getStyleElement(styleOverrideElementId = 'autoconsent-css-rules'): HTMLStyleElement {
     const styleSelector = `style#${styleOverrideElementId}`;

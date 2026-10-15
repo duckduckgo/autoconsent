@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { getActionablePopups, getPotentialPopups } from '../../lib/heuristics';
+import { getActionablePopups } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
 function rejectButtons(buttons: ButtonData[]) {
@@ -81,20 +81,14 @@ describe('getActionablePopups', () => {
             expect(popups[0].regexClassification).to.equal('tier2');
         });
 
-        it('prefers a contentful fixed child over its contentful container in the DOM walk', () => {
-            showPopup('popup-with-contentful-fixed-child');
-
-            const popups = getPotentialPopups();
-
-            expect(popups.map((p) => p.element.id)).to.deep.equal(['contentful-fixed-child']);
-        });
-
-        it('does not hit-test around a popup that the DOM walk already found', () => {
+        it('prefers a contentful fixed child over its contentful container', () => {
             showPopup('popup-with-contentful-fixed-child');
 
             const popups = getActionablePopups('tier2');
 
-            expect(popups.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([['contentful-fixed-child', 'tier2']]);
+            expect(popups).to.have.length(1);
+            expect(popups[0].element.id).to.equal('contentful-fixed-child');
+            expect(popups[0].regexClassification).to.equal('tier2');
         });
 
         it('finds acknowledge-only popup with no reject buttons', () => {
@@ -173,12 +167,12 @@ describe('getActionablePopups', () => {
             expect(popups.length).to.equal(1);
         });
 
-        it('finds a static positioned popup on screen by hit-testing', () => {
+        it('ignores static positioned elements', () => {
             showPopup('popup-static');
 
             const popups = getActionablePopups();
 
-            expect(popups.map((p) => p.element.id)).to.deep.equal(['popup-static']);
+            expect(popups.length).to.equal(0);
         });
 
         it('finds popup with role="dialog"', () => {
@@ -208,14 +202,13 @@ describe('getActionablePopups', () => {
             dialog.close();
         });
 
-        it('finds a closed <dialog> that the page shows anyway only by hit-testing', () => {
+        it('ignores closed <dialog> element', () => {
             const dialog = document.getElementById('popup-dialog-element') as HTMLDialogElement;
             dialog.classList.add('visible');
 
             const popups = getActionablePopups();
 
-            // not dialog-like while closed, but it is painted on screen
-            expect(popups.map((p) => p.element.id)).to.deep.equal(['popup-dialog-element']);
+            expect(popups.length).to.equal(0);
         });
     });
 

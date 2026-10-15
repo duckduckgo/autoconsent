@@ -1,6 +1,6 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from './rules';
 import { DomActionsProvider } from './types';
-import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor, PREHIDE_STYLE_ID } from './utils';
+import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor } from './utils';
 import AutoConsent from './web';
 
 // Default for the `retryInterval` option of `waitForThenClick`.
@@ -147,13 +147,13 @@ export class DomActions implements DomActionsProvider {
     }
 
     prehide(selector: string): boolean {
-        const styleEl = getStyleElement(PREHIDE_STYLE_ID);
+        const styleEl = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[prehide]', styleEl, location.href);
         return hideElements(styleEl, selector, 'opacity');
     }
 
     undoPrehide(): void {
-        const existingElement = getStyleElement(PREHIDE_STYLE_ID);
+        const existingElement = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[undoprehide]', existingElement, location.href);
 
         existingElement.remove();
