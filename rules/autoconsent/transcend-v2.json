@@ -1,0 +1,31 @@
+{
+    "name": "transcend-v2",
+    "vendorUrl": "https://transcend.io/",
+    "comment": "airgap ignores untrusted clicks, so the choice is not persisted and the banner shows again on the next load. Hiding is not an option: the modal dialog keeps the page inert.",
+    "prehideSelectors": ["#transcend-shadow-root"],
+    "detectCmp": [
+        {
+            "exists": ["#transcend-shadow-root", "dialog[data-layer=banner] #RejectAllAndClose"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#transcend-shadow-root", "dialog[data-layer=banner] #RejectAllAndClose"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#transcend-shadow-root", "dialog[data-layer=banner] #AcceptAllAndClose"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#transcend-shadow-root", "dialog[data-layer=banner] #RejectAllAndClose"]
+        },
+        {
+            "waitForVisible": ["#transcend-shadow-root", "dialog"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
