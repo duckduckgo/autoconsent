@@ -45,6 +45,8 @@ export async function injectIntoIsolatedWorld(page, createMessageHandler, conten
     const sessionByContext = new Map();
     /** @type {Map<string, string>} binding name -> isolated-world uniqueId */
     const contextByBinding = new Map();
+    /** @type {Map<string, string>} isolated-world uniqueId -> binding name */
+    const bindingByContext = new Map();
     /** @type {Map<string, string>} isolated-world uniqueId -> CDP frame id */
     const frameByContext = new Map();
     /** @type {Map<string, string>} CDP frame id -> uniqueId of the frame's current page (main) world */
@@ -108,6 +110,7 @@ export async function injectIntoIsolatedWorld(page, createMessageHandler, conten
 
                 const bindingName = `${BINDING_PREFIX}${context.uniqueId.replace(/\W/g, '_')}`;
                 contextByBinding.set(bindingName, context.uniqueId);
+                bindingByContext.set(context.uniqueId, bindingName);
                 try {
                     await client.send('Runtime.addBinding', { name: bindingName, executionContextName: context.name });
                     // CDP bindings take a single string arg, so wrap it in the shape the content script expects.
@@ -142,6 +145,13 @@ export async function injectIntoIsolatedWorld(page, createMessageHandler, conten
             isolated2pageWorld.delete(uniqueId);
             sessionByContext.delete(uniqueId);
             frameByContext.delete(uniqueId);
+            const bindingName = bindingByContext.get(uniqueId);
+            if (bindingName) {
+                bindingByContext.delete(uniqueId);
+                contextByBinding.delete(bindingName);
+                // Each document gets its own binding, so drop the old one with its context.
+                client.send('Runtime.removeBinding', { name: bindingName }).catch(() => {});
+            }
         });
 
         client.on('Runtime.bindingCalled', (/** @type {any} */ event) => {
@@ -165,6 +175,10 @@ export async function injectIntoIsolatedWorld(page, createMessageHandler, conten
     pageSession = await page.context().newCDPSession(page);
     const { frameTree } = await pageSession.send('Page.getFrameTree');
     mainFrameId = frameTree.frame.id;
+    // Follow the top frame if Chromium replaces it (e.g. on prerender activation).
+    pageSession.on('Page.frameNavigated', (/** @type {any} */ event) => {
+        if (!event.frame.parentId) mainFrameId = event.frame.id;
+    });
     await attachToSession(pageSession);
 
     // Out-of-process iframes (OOPIFs) are separate CDP targets, so each needs its own session.
