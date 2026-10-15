@@ -89,13 +89,12 @@ describe('getActionablePopups', () => {
             expect(popups.map((p) => p.element.id)).to.deep.equal(['contentful-fixed-child']);
         });
 
-        it('acts on the container with reject when hit-testing finds it first', () => {
+        it('does not hit-test around a popup that the DOM walk already found', () => {
             showPopup('popup-with-contentful-fixed-child');
 
             const popups = getActionablePopups('tier2');
 
-            expect(popups[0].element.id).to.equal('popup-with-contentful-fixed-child');
-            expect(popups[0].regexClassification).to.equal('reject');
+            expect(popups.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([['contentful-fixed-child', 'tier2']]);
         });
 
         it('finds acknowledge-only popup with no reject buttons', () => {
