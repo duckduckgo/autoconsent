@@ -35,7 +35,7 @@
             ],
             "else": [
                 {
-                    "click": "#__cmp_body .manageLink"
+                    "waitForThenClick": "#__cmp_body .manageLink"
                 },
                 {
                     "waitForThenClick": "#__cmp_body .rejectLink"
