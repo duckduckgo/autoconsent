@@ -1,5 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import { getActionablePopups, getButtonData, getFramePopupElement, getPotentialPopups } from '../../lib/heuristics';
+import { getHidingStyle, PREHIDE_STYLE_ID } from '../../lib/utils';
 
 const BANNER = `
     <p>We use cookies.</p>
@@ -9,6 +10,15 @@ const BANNER = `
 
 function fixedBanner(id: string): string {
     return `<div id="${id}" style="position: fixed; bottom: 0;">${BANNER}</div>`;
+}
+
+// hides the selector the way prehide does; pass PREHIDE_STYLE_ID as id to make it the prehide stylesheet
+function addPrehideStyle(selector: string, id = ''): HTMLStyleElement {
+    const style = document.createElement('style');
+    style.id = id;
+    style.textContent = `${selector} { ${getHidingStyle('opacity')} }`;
+    document.head.appendChild(style);
+    return style;
 }
 
 function attachShadow(host: HTMLElement, html: string): ShadowRoot {
@@ -143,9 +153,7 @@ describe('getPotentialPopups', () => {
         });
 
         it('finds a popup hidden with opacity 0, as prehide does', () => {
-            const style = document.createElement('style');
-            style.textContent = '#panel { opacity: 0 !important; z-index: -1 !important; pointer-events: none !important; }';
-            document.head.appendChild(style);
+            const style = addPrehideStyle('#panel');
             try {
                 container.innerHTML = fixedBanner('panel');
                 expect(popupIds()).to.include('panel');
@@ -344,10 +352,7 @@ describe('getPotentialPopups', () => {
         });
 
         it('finds an in-flow banner hidden by prehide', () => {
-            const style = document.createElement('style');
-            style.id = 'autoconsent-prehide';
-            style.textContent = '#banner { opacity: 0 !important; z-index: -1 !important; pointer-events: none !important; }';
-            document.head.appendChild(style);
+            const style = addPrehideStyle('#banner', PREHIDE_STYLE_ID);
             try {
                 container.innerHTML = IN_FLOW_BANNER;
                 expect(popupIds()).to.include('banner');
