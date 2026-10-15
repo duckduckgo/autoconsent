@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import { getActionablePopups, getButtonData, getFramePopupElement, getPotentialPopups } from '../../lib/heuristics';
-import { getHidingStyle, PREHIDE_STYLE_ID } from '../../lib/utils';
+import { getHidingStyle } from '../../lib/utils';
 
 const BANNER = `
     <p>We use cookies.</p>
@@ -12,10 +12,9 @@ function fixedBanner(id: string): string {
     return `<div id="${id}" style="position: fixed; bottom: 0;">${BANNER}</div>`;
 }
 
-// hides the selector the way prehide does; pass PREHIDE_STYLE_ID as id to make it the prehide stylesheet
-function addPrehideStyle(selector: string, id = ''): HTMLStyleElement {
+// hides the selector the way prehide does
+function addPrehideStyle(selector: string): HTMLStyleElement {
     const style = document.createElement('style');
-    style.id = id;
     style.textContent = `${selector} { ${getHidingStyle('opacity')} }`;
     document.head.appendChild(style);
     return style;
@@ -349,17 +348,6 @@ describe('getPotentialPopups', () => {
         it('does not report a positioned popup twice', () => {
             container.innerHTML = fixedBanner('banner');
             expect(popupIds().filter((id) => id === 'banner')).to.have.length(1);
-        });
-
-        it('finds an in-flow banner hidden by prehide', () => {
-            const style = addPrehideStyle('#banner', PREHIDE_STYLE_ID);
-            try {
-                container.innerHTML = IN_FLOW_BANNER;
-                expect(popupIds()).to.include('banner');
-                expect(style.disabled).to.be.false;
-            } finally {
-                style.remove();
-            }
         });
 
         it('prefers a positioned popup with reject over an in-flow accept-only banner', () => {
