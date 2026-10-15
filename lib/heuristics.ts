@@ -1,6 +1,6 @@
 import { classifyButtons, classifyPopup, hasHeuristicPatterns, isExcludedPopup } from './heuristic-classify';
 import { ButtonData, HeuristicLevel, PopupClassification, PopupData } from './types';
-import { isElementVisible, isTopFrame } from './utils';
+import { isElementVisible, isTopFrame, PREHIDE_STYLE_ID } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const POPUP_SEARCH_MAX_TIME = 100;
@@ -35,7 +35,12 @@ export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[]
         return popup ? [popup] : [];
     }
     const deadline = performance.now() + timeout;
-    // fixed, sticky and dialog-like elements, with fragments expanded to their popup root
+    const { popups, shadowHosts } = collectPositionedPopups(deadline);
+    return [...popups, ...findPopupsByHitTest(popups, shadowHosts, deadline)];
+}
+
+// fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
+function collectPositionedPopups(deadline: number): { popups: PopupData[]; shadowHosts: HTMLElement[] } {
     const { elements, shadowHosts } = getPopupLikeElements(deadline);
     const potentialPopups: PopupData[] = [];
     const expanded: HTMLElement[] = [];
@@ -55,7 +60,95 @@ export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[]
         potentialPopups.push(root);
     }
     // a fragment expanded to its popup root replaces any other candidates inside that root
-    return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+    const popups = potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+    return { popups, shadowHosts };
+}
+
+const HIT_TEST_COLUMNS = [0.1, 0.5, 0.9];
+// banners sit along the top and bottom edges and modals in the middle
+const HIT_TEST_EDGE_ROWS = [30, 90, 150];
+
+/**
+ * Popups that are not fixed, sticky or dialog-like (for example banners in the normal page flow) are not found by
+ * the DOM walk. Hit-test points across the viewport and climb from the topmost element at each point instead.
+ */
+function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], deadline: number): PopupData[] {
+    const covered = known.map((p) => p.element);
+    const visited = new Set<Element>();
+    const found: PopupData[] = [];
+    // stop where an earlier climb already went, and at known popups
+    const shouldStop = (el: HTMLElement) => {
+        if (visited.has(el)) {
+            return true;
+        }
+        visited.add(el);
+        return covered.some((c) => composedContains(c, el) || composedContains(el, c));
+    };
+    withoutPrehide(() => {
+        for (const y of getHitTestRows()) {
+            for (const column of HIT_TEST_COLUMNS) {
+                if (performance.now() > deadline) {
+                    return;
+                }
+                const hit = closestHTMLElement(deepElementFromPoint(column * window.innerWidth, y));
+                const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, (el) => toPopupRoot(el, shadowHosts, true), shouldStop);
+                if (popup) {
+                    found.push(popup);
+                    covered.push(popup.element);
+                }
+            }
+        }
+    });
+    return found;
+}
+
+function getHitTestRows(): number[] {
+    const height = window.innerHeight;
+    const rows = [...HIT_TEST_EDGE_ROWS, height / 2, ...HIT_TEST_EDGE_ROWS.map((y) => height - y)];
+    return [...new Set(rows)].filter((y) => y >= 0 && y < height);
+}
+
+const TEXT_ENTRY_SELECTOR =
+    'textarea, input:not([type]), input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="tel"], input[type="number"], input[type="url"]';
+
+// precaution, not yet seen in crawls: login, search and sign-up forms can carry consent wording and a "Continue" button
+function hasTextEntry(el: HTMLElement): boolean {
+    return el.querySelector(TEXT_ENTRY_SELECTOR) !== null;
+}
+
+function deepElementFromPoint(x: number, y: number): Element | null {
+    let el = document.elementFromPoint(x, y);
+    while (el?.shadowRoot) {
+        const inner = el.shadowRoot.elementFromPoint(x, y);
+        if (!inner || inner === el) {
+            break;
+        }
+        el = inner;
+    }
+    return el;
+}
+
+function closestHTMLElement(el: Element | null): HTMLElement | null {
+    while (el && !(el instanceof HTMLElement)) {
+        el = el.parentElement;
+    }
+    return el;
+}
+
+// prehide sets pointer-events: none, which hit-testing skips; the change is not painted within this synchronous task
+function withoutPrehide(fn: () => void) {
+    const style = document.getElementById(PREHIDE_STYLE_ID);
+    const suspend = style instanceof HTMLStyleElement && !style.disabled;
+    if (suspend) {
+        style.disabled = true;
+    }
+    try {
+        fn();
+    } finally {
+        if (suspend) {
+            style.disabled = false;
+        }
+    }
 }
 
 function toPopupData(el: HTMLElement, shadowHosts?: HTMLElement[], text = getElementText(el)): PopupData | null {
@@ -81,9 +174,51 @@ function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
     return rest.replace(/\s+/g, '').length < 10;
 }
 
-// Bounds how far expansion climbs. The stop at page-level containers is the main guard against false positives;
-// this limit only keeps the search cheap on deep trees.
+/**
+ * The element as a popup, if it has consent text and popup buttons.
+ * @param excludeTextEntry reject elements with text fields, for candidates that can be any page element
+ */
+function toPopupRoot(el: HTMLElement, shadowHosts: HTMLElement[] | undefined, excludeTextEntry = false): PopupData | null {
+    // check the text first: it is cheaper than collecting buttons
+    const text = getElementText(el);
+    if (!text || !hasHeuristicPatterns(text) || (excludeTextEntry && hasTextEntry(el))) {
+        return null;
+    }
+    const popup = toPopupData(el, shadowHosts, text);
+    return popup && hasPopupButtons(text, popup.buttons) ? popup : null;
+}
+
+// Bound how far climbs reach. The page-level stop in climbToPopup is the main guard against false positives;
+// these limits only keep the search cheap on deep trees.
 const MAX_FRAGMENT_EXPANSION_DEPTH = 6;
+const MAX_HIT_TEST_CLIMB_DEPTH = 8;
+
+/**
+ * Climb from el through up to maxDepth composed ancestors, and return the first popup that toPopup accepts.
+ */
+function climbToPopup(
+    el: HTMLElement | null,
+    maxDepth: number,
+    toPopup: (el: HTMLElement) => PopupData | null,
+    shouldStop?: (el: HTMLElement) => boolean,
+): PopupData | null {
+    for (let depth = 0; el && depth < maxDepth; depth++, el = getComposedParent(el)) {
+        // stop before reaching page-level containers, whose text includes unrelated page copy
+        if (
+            shouldStop?.(el) ||
+            el === document.body ||
+            el === document.documentElement ||
+            el.getBoundingClientRect().height > window.innerHeight
+        ) {
+            return null;
+        }
+        const popup = toPopup(el);
+        if (popup) {
+            return popup;
+        }
+    }
+    return null;
+}
 
 /**
  * A positioned candidate is often only part of a popup, such as a sticky button bar or heading.
@@ -93,23 +228,8 @@ function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): Pop
     if (hasHeuristicPatterns(popup.text) && hasPopupButtons(popup.text, popup.buttons)) {
         return popup;
     }
-    let el = getComposedParent(popup.element);
-    for (let depth = 0; el && depth < MAX_FRAGMENT_EXPANSION_DEPTH; depth++, el = getComposedParent(el)) {
-        // stop before reaching page-level containers, whose text includes unrelated page copy
-        if (el === document.body || el === document.documentElement || el.getBoundingClientRect().height > window.innerHeight) {
-            break;
-        }
-        // check the text first: it is cheaper than collecting buttons
-        const text = getElementText(el);
-        if (!text || !hasHeuristicPatterns(text)) {
-            continue;
-        }
-        const root = toPopupData(el, shadowHosts, text);
-        if (root && hasPopupButtons(text, root.buttons)) {
-            return root;
-        }
-    }
-    return popup;
+    const parent = getComposedParent(popup.element);
+    return climbToPopup(parent, MAX_FRAGMENT_EXPANSION_DEPTH, (el) => toPopupRoot(el, shadowHosts)) ?? popup;
 }
 
 function getComposedParent(el: HTMLElement): HTMLElement | null {
@@ -207,7 +327,7 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
 
 /**
  * Heuristic to get all elements that look like "popups"
- * TODO: popups in the normal page flow are only found when part of them is fixed, sticky or dialog-like
+ * Popups that are not positioned are found by hit-testing instead (findPopupsByHitTest).
  */
 function getPopupLikeElements(deadline: number): { elements: HTMLElement[]; shadowHosts: HTMLElement[] } {
     const found: HTMLElement[] = [];
