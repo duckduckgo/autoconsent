@@ -299,6 +299,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Политика конфиденциальности')).to.equal('other');
     });
 
+    it('does not treat links to privacy documents as settings buttons', () => {
+        expect(classifyButtonTextRegex('Learn how to manage your preferences on our Privacy page')).to.equal('other');
+        expect(classifyButtonTextRegex('Manage your cookies in our privacy notice')).to.equal('other');
+        expect(classifyButtonTextRegex('Manage your preferences')).to.equal('settings');
+        expect(classifyButtonTextRegex('Manage cookie settings')).to.equal('settings');
+    });
+
     it('matches Russian acknowledge buttons', () => {
         expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');

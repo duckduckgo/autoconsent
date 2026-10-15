@@ -487,7 +487,7 @@ export const SETTINGS_PATTERNS = [
     'preferences',
     /customi(s|z)e/is,
     'more options',
-    /(manage|configure) (my|your) (preferences|choices|cookies)/is,
+    /^(?!.*\b(polic(y|ies)|notice|statement|privacy page)\b).*(manage|configure) (my|your) (preferences|choices|cookies)/is,
     /(cookie )?preference center/is,
     'configure',
     'cookie manager',
@@ -497,7 +497,7 @@ export const SETTINGS_PATTERNS = [
     /privacy choices/is,
     /^(privacy|cookie|custom) settings$/is,
     /^cookies? (settings|preferences|setting)(?!.*\bdo not\b)/is,
-    /^(?!.*\bpolic(y|ies)\b).*(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
+    /^(?!.*\b(polic(y|ies)|notice|statement|privacy page)\b).*(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
     'cookie consent options',
     'privacy controls',
     // German
