@@ -1,0 +1,35 @@
+{
+    "name": "u-cookie-dialog",
+    "prehideSelectors": [".u-cookie-frame"],
+    "detectCmp": [
+        {
+            "exists": ".u-cookie-frame [data-attr=btn-reject-cookies]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".u-cookie-frame [data-attr=btn-reject-cookies]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".u-cookie-frame [data-attr=btn-accept-cookies]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".u-cookie-frame [data-attr=btn-reject-cookies]"
+        },
+        {
+            "waitForVisible": ".u-cookie-frame",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_U_COOKIE_DIALOG_TEST"
+        }
+    ]
+}
