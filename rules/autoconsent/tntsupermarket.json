@@ -1,0 +1,46 @@
+{
+    "name": "tntsupermarket",
+    "vendorUrl": "https://www.tntsupermarket.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tntsupermarket\\.com/"
+    },
+    "prehideSelectors": ["div[class^='cookie-root-']"],
+    "detectCmp": [
+        {
+            "exists": "div[class^='cookie-root-'] button[class^='cookie-ok-']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class^='cookie-root-'] button[class^='cookie-ok-']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class^='cookie-root-'] [class^='cookie-actions-'] > button:not([class])"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[class^='cookie-root-'] button[class^='cookie-ok-']"
+        },
+        {
+            "waitForVisible": "[class*='cookie-cookieDialog-'] button[class^='cookie-confirm-']",
+            "timeout": 5000
+        },
+        {
+            "click": "[class*='cookie-cookieDialog-'] button.ant-switch[aria-checked='true']",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[class*='cookie-cookieDialog-'] button[class^='cookie-confirm-']"
+        },
+        {
+            "waitForVisible": "[class*='cookie-cookieDialog-']",
+            "check": "none",
+            "timeout": 5000,
+            "optional": true
+        }
+    ]
+}
