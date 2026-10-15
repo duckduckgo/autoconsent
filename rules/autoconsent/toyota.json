@@ -24,6 +24,10 @@
     ],
     "optOut": [
         {
+            "waitFor": "#ensModalWrapper",
+            "timeout": 5000
+        },
+        {
             "waitForThenClick": "#cookie-banner.visible [data-cookie-preferences-button]"
         },
         {
