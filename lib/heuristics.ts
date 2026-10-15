@@ -16,37 +16,50 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
         popup.regexClassification = classifyPopup(popup.buttons);
         return popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification);
     };
-    // nothing found by the walk can beat a popup with reject
-    const hasRejectPopup = (popups: PopupData[]) => popups.some((p) => isActionable(p) && p.regexClassification === 'reject');
-    const popups = getPotentialPopups(timeout, hasRejectPopup).filter(isActionable);
     // a popup with reject will always win
-    return popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
+    const sortByClassification = (popups: PopupData[]) =>
+        popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
+    if (!isTopFrame()) {
+        return sortByClassification(getFramePopups().filter(isActionable));
+    }
+    const deadline = performance.now() + timeout;
+    const hitTestPopups = findPopupsByHitTest(deadline).filter(isActionable);
+    // the walk cannot find a better popup than one with reject
+    if (hitTestPopups.some((p) => p.regexClassification === 'reject')) {
+        return sortByClassification(hitTestPopups);
+    }
+    const walkPopups = collectPositionedPopups(deadline);
+    return sortByClassification([...walkPopups.filter(isActionable), ...withoutWalkOverlaps(hitTestPopups, walkPopups)]);
 }
 
 /**
  * @param timeout time budget for the whole search, in ms
- * @param isEnough skip the DOM walk when this accepts the hit-test results
  */
-export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, isEnough?: (hitTestPopups: PopupData[]) => boolean): PopupData[] {
+export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     if (!isTopFrame()) {
-        // do not inspect frames that are more than one level deep
-        if (window.parent && window.parent !== window.top) {
-            return [];
-        }
-        // for iframes, just take the whole document
-        const frameElement = getFramePopupElement(document);
-        const popup = frameElement && toPopupData(frameElement);
-        return popup ? [popup] : [];
+        return getFramePopups();
     }
     const deadline = performance.now() + timeout;
     // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
     const hitTestPopups = findPopupsByHitTest(deadline);
-    if (isEnough?.(hitTestPopups)) {
-        return hitTestPopups;
+    const walkPopups = collectPositionedPopups(deadline);
+    return [...walkPopups, ...withoutWalkOverlaps(hitTestPopups, walkPopups)];
+}
+
+// where both searches found the same popup, keep the walk's candidate
+function withoutWalkOverlaps(hitTestPopups: PopupData[], walkPopups: PopupData[]): PopupData[] {
+    return hitTestPopups.filter((h) => !walkPopups.some((p) => composedOverlaps(p.element, h.element)));
+}
+
+function getFramePopups(): PopupData[] {
+    // do not inspect frames that are more than one level deep
+    if (window.parent && window.parent !== window.top) {
+        return [];
     }
-    const popups = collectPositionedPopups(deadline);
-    // where both searches found the same popup, keep the walk's candidate
-    return [...popups, ...hitTestPopups.filter((h) => !popups.some((p) => composedOverlaps(p.element, h.element)))];
+    // for iframes, just take the whole document
+    const frameElement = getFramePopupElement(document);
+    const popup = frameElement && toPopupData(frameElement);
+    return popup ? [popup] : [];
 }
 
 // fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
