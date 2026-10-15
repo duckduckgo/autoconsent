@@ -11,7 +11,7 @@ describe('undoPrehide', () => {
         domActions = instantiateDomActions();
     });
 
-    it('creates style element if it did not previously exist and immediately removes it', () => {
+    it('does not create style element if it did not previously exist', () => {
         // Given
         expect(document.querySelector('style#autoconsent-prehide')).to.be.null; // check that style element does not yet exist
 
@@ -19,6 +19,6 @@ describe('undoPrehide', () => {
         domActions.undoPrehide();
 
         // Then
-        expect(document.querySelector('style#autoconsent-prehide')).to.be.null; // check that style element again does not exist (in fact, it was created for a bit and then removed immediately)
+        expect(document.querySelector('style#autoconsent-prehide')).to.be.null; // check that style element still does not exist
     });
 });

@@ -153,10 +153,13 @@ export class DomActions implements DomActionsProvider {
     }
 
     undoPrehide(): void {
-        const existingElement = getStyleElement('autoconsent-prehide');
+        const existingElement = document.querySelector('style#autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[undoprehide]', existingElement, location.href);
 
-        existingElement.remove();
+        // empty rather than remove: frameworks tracking <head> nodes (e.g. Blazor) break when the node is detached
+        if (existingElement) {
+            existingElement.textContent = '';
+        }
     }
 
     async createOrUpdateStyleSheet(cssText: string, styleSheet?: CSSStyleSheet) {

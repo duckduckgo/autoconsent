@@ -11,6 +11,10 @@
 The element is hardcoded here to prevent coupling to prehide() implementation,
 however we might want to opt for the coupling as prehide() and undoPrehide() are logical counterparts.
 -->
-        <style id="autoconsent-prehide"></style>
+        <style id="autoconsent-prehide">
+            #nonexistent {
+                opacity: 0 !important;
+            }
+        </style>
     </body>
 </html>
