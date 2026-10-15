@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { getActionablePopups } from '../../lib/heuristics';
+import { getActionablePopups, getPotentialPopups } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
 function rejectButtons(buttons: ButtonData[]) {
@@ -81,14 +81,21 @@ describe('getActionablePopups', () => {
             expect(popups[0].regexClassification).to.equal('tier2');
         });
 
-        it('prefers a contentful fixed child over its contentful container', () => {
+        it('prefers a contentful fixed child over its contentful container in the DOM walk', () => {
+            showPopup('popup-with-contentful-fixed-child');
+
+            const popups = getPotentialPopups();
+
+            expect(popups.map((p) => p.element.id)).to.deep.equal(['contentful-fixed-child']);
+        });
+
+        it('acts on the container with reject when hit-testing finds it first', () => {
             showPopup('popup-with-contentful-fixed-child');
 
             const popups = getActionablePopups('tier2');
 
-            expect(popups).to.have.length(1);
-            expect(popups[0].element.id).to.equal('contentful-fixed-child');
-            expect(popups[0].regexClassification).to.equal('tier2');
+            expect(popups[0].element.id).to.equal('popup-with-contentful-fixed-child');
+            expect(popups[0].regexClassification).to.equal('reject');
         });
 
         it('finds acknowledge-only popup with no reject buttons', () => {

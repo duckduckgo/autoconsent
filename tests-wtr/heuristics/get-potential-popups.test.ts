@@ -341,6 +341,18 @@ describe('getPotentialPopups', () => {
             }
         });
 
+        it('prefers a positioned popup with reject over an in-flow accept-only banner', () => {
+            container.innerHTML = `
+                <div id="inflow"><p>We use cookies to improve your experience.</p><button>Accept all</button></div>
+                <div id="fixed" style="position: fixed; bottom: 0;"><p>We use cookies.</p><button>Reject all</button><button>Accept all</button></div>
+            `;
+            const popups = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            expect(popups.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([
+                ['fixed', 'reject'],
+                ['inflow', 'tier2'],
+            ]);
+        });
+
         it('finds an in-flow banner inside a shadow root', () => {
             shadowHost('', IN_FLOW_BANNER);
             expect(popupIds()).to.include('banner');

@@ -11,7 +11,22 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
     if (acceptedLevels.length === 0) {
         return [];
     }
-    const popups = getPotentialPopups(timeout);
+    if (!isTopFrame()) {
+        return toActionablePopups(getPotentialPopups(timeout), acceptedLevels);
+    }
+    // hit-testing finds most on-screen popups and is cheaper than walking the DOM, so try it first
+    const hitTestPopups = toActionablePopups(findPopupsByHitTest([], undefined, timeout), acceptedLevels);
+    // a popup with reject always wins, so the DOM walk cannot find a better one
+    if (hitTestPopups.some((popup) => popup.regexClassification === 'reject')) {
+        return hitTestPopups;
+    }
+    const positionedPopups = toActionablePopups(collectPositionedPopups(timeout).popups, acceptedLevels).filter(
+        (popup) => !hitTestPopups.some((p) => p.element === popup.element),
+    );
+    return sortByClassification([...hitTestPopups, ...positionedPopups]);
+}
+
+function toActionablePopups(popups: PopupData[], acceptedLevels: PopupClassification[]): PopupData[] {
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
@@ -30,9 +45,13 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
         return acc;
     }, [] as PopupData[]);
     // popups filtered by mode and sorted so a popup with reject will always win.
-    return result
-        .filter((popup) => popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification))
-        .sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
+    return sortByClassification(
+        result.filter((popup) => popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification)),
+    );
+}
+
+function sortByClassification(popups: PopupData[]): PopupData[] {
+    return popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
 }
 
 export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
@@ -53,6 +72,12 @@ function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TI
         return popup ? [popup] : [];
     }
 
+    const { popups, shadowHosts } = collectPositionedPopups(timeout);
+    return [...popups, ...findPopupsByHitTest(popups, shadowHosts, timeout)];
+}
+
+// fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
+function collectPositionedPopups(timeout = POPUP_SEARCH_MAX_TIME): { popups: PopupData[]; shadowHosts: HTMLElement[] } {
     const { elements, shadowHosts } = getPopupLikeElements(timeout);
     const potentialPopups: PopupData[] = [];
     const expanded: HTMLElement[] = [];
@@ -71,25 +96,26 @@ function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TI
         potentialPopups.push(root);
     }
     // a fragment expanded to its popup root replaces any other candidates inside that root
-    const positioned = potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
-    return [...positioned, ...findPopupsByHitTest(positioned, shadowHosts, timeout)];
+    const popups = potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+    return { popups, shadowHosts };
 }
 
 const HIT_TEST_COLUMNS = [0.1, 0.5, 0.9];
-const HIT_TEST_ROW_STEP = 60;
+// banners sit along the top and bottom edges and modals in the middle
+const HIT_TEST_EDGE_ROWS = [30, 90, 150];
 const MAX_HIT_TEST_CLIMB_DEPTH = 8;
 
 /**
  * Popups that are not fixed, sticky or dialog-like (for example banners in the normal page flow) are not found by
  * the DOM walk. Hit-test points across the viewport and climb from the topmost element at each point instead.
  */
-function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+function findPopupsByHitTest(known: PopupData[], shadowHosts?: HTMLElement[], timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     const deadline = performance.now() + timeout;
     const covered = known.map((p) => p.element);
     const visited = new Set<Element>();
     const found: PopupData[] = [];
     withoutPrehide(() => {
-        for (let y = HIT_TEST_ROW_STEP / 2; y < window.innerHeight; y += HIT_TEST_ROW_STEP) {
+        for (const y of getHitTestRows()) {
             for (const column of HIT_TEST_COLUMNS) {
                 if (performance.now() > deadline) {
                     return;
@@ -121,6 +147,12 @@ function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], tim
         }
     });
     return found;
+}
+
+function getHitTestRows(): number[] {
+    const height = window.innerHeight;
+    const rows = [...HIT_TEST_EDGE_ROWS, height / 2, ...HIT_TEST_EDGE_ROWS.map((y) => height - y)];
+    return [...new Set(rows)].filter((y) => y >= 0 && y < height);
 }
 
 const TEXT_ENTRY_SELECTOR =
@@ -435,20 +467,15 @@ export function isDisabled(el: HTMLElement): boolean {
  * Leave only elements that do not contain any other elements
  */
 export function excludeContainers(elements: HTMLElement[]): HTMLElement[] {
-    const results = [];
-    if (elements.length > 0) {
-        for (let i = elements.length - 1; i >= 0; i--) {
-            let container = false;
-            for (let j = 0; j < elements.length; j++) {
-                if (i !== j && composedContains(elements[i], elements[j])) {
-                    container = true;
-                    break;
-                }
-            }
-            if (!container) {
-                results.push(elements[i]);
+    // mark every element that is an ancestor of another one, instead of comparing all pairs
+    const candidates = new Set<Node>(elements);
+    const containers = new Set<Node>();
+    for (const el of elements) {
+        for (let node = el.parentNode; node; node = node.parentNode || (node instanceof ShadowRoot ? node.host : null)) {
+            if (candidates.has(node)) {
+                containers.add(node);
             }
         }
     }
-    return results;
+    return elements.filter((el) => !containers.has(el)).reverse();
 }
