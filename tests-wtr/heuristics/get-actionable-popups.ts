@@ -167,12 +167,12 @@ describe('getActionablePopups', () => {
             expect(popups.length).to.equal(1);
         });
 
-        it('ignores static positioned elements', () => {
+        it('finds a static positioned popup on screen by hit-testing', () => {
             showPopup('popup-static');
 
             const popups = getActionablePopups();
 
-            expect(popups.length).to.equal(0);
+            expect(popups.map((p) => p.element.id)).to.deep.equal(['popup-static']);
         });
 
         it('finds popup with role="dialog"', () => {
@@ -202,13 +202,14 @@ describe('getActionablePopups', () => {
             dialog.close();
         });
 
-        it('ignores closed <dialog> element', () => {
+        it('finds a closed <dialog> that the page shows anyway only by hit-testing', () => {
             const dialog = document.getElementById('popup-dialog-element') as HTMLDialogElement;
             dialog.classList.add('visible');
 
             const popups = getActionablePopups();
 
-            expect(popups.length).to.equal(0);
+            // not dialog-like while closed, but it is painted on screen
+            expect(popups.map((p) => p.element.id)).to.deep.equal(['popup-dialog-element']);
         });
     });
 

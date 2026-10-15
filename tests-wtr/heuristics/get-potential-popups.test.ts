@@ -279,6 +279,73 @@ describe('getPotentialPopups', () => {
             expect(popups).to.have.length(0);
         });
     });
+    describe('banners in the normal page flow', () => {
+        const IN_FLOW_BANNER = `
+            <div id="banner">
+                <p>We use cookies to improve your experience. Read our <a href="#">Privacy Policy</a>.</p>
+                <button>Reject all</button>
+                <button>Accept all</button>
+            </div>
+        `;
+
+        it('finds a banner at the top of the page that is not positioned', () => {
+            container.innerHTML = IN_FLOW_BANNER;
+            expect(popupIds()).to.include('banner');
+        });
+
+        it('makes an in-flow banner actionable', () => {
+            container.innerHTML = IN_FLOW_BANNER;
+            const popup = getActionablePopups('reject', 1000).find((p) => p.element.id === 'banner');
+            expect(popup).to.exist;
+            expect(popup!.regexClassification).to.equal('reject');
+        });
+
+        it('ignores an in-flow banner below the fold', () => {
+            container.innerHTML = `<div style="height: 3000px"></div>${IN_FLOW_BANNER}`;
+            expect(popupIds()).not.to.include('banner');
+        });
+
+        it('ignores page copy about cookies without consent buttons', () => {
+            container.innerHTML =
+                '<div id="copy"><p>We use cookies on this site.</p><a href="#">Privacy Policy</a> <a href="#">Contact</a></div>';
+            expect(popupIds()).not.to.include('copy');
+        });
+
+        it('ignores a login form with consent wording', () => {
+            container.innerHTML = `
+                <form id="login">
+                    <input type="email" placeholder="Email">
+                    <p>By continuing, you agree to our Terms and acknowledge our Privacy Policy and use of cookies.</p>
+                    <button>Continue</button>
+                </form>
+            `;
+            expect(popupIds()).not.to.include('login');
+        });
+
+        it('does not report a positioned popup twice', () => {
+            container.innerHTML = fixedBanner('banner');
+            expect(popupIds().filter((id) => id === 'banner')).to.have.length(1);
+        });
+
+        it('finds an in-flow banner hidden by prehide', () => {
+            const style = document.createElement('style');
+            style.id = 'autoconsent-prehide';
+            style.textContent = '#banner { opacity: 0 !important; z-index: -1 !important; pointer-events: none !important; }';
+            document.head.appendChild(style);
+            try {
+                container.innerHTML = IN_FLOW_BANNER;
+                expect(popupIds()).to.include('banner');
+                expect(style.disabled).to.be.false;
+            } finally {
+                style.remove();
+            }
+        });
+
+        it('finds an in-flow banner inside a shadow root', () => {
+            shadowHost('', IN_FLOW_BANNER);
+            expect(popupIds()).to.include('banner');
+        });
+    });
 });
 
 describe('getFramePopupElement', () => {

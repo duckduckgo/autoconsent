@@ -1,4 +1,4 @@
-import { checkHeuristicPatterns, classifyButtons, classifyPopup, isExcludedPopup } from './heuristic-classify';
+import { checkHeuristicPatterns, classifyButtons, classifyButtonTextRegex, classifyPopup, isExcludedPopup } from './heuristic-classify';
 import { ButtonData, HeuristicLevel, PopupClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
@@ -71,7 +71,110 @@ function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TI
         potentialPopups.push(root);
     }
     // a fragment expanded to its popup root replaces any other candidates inside that root
-    return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+    const positioned = potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+    return [...positioned, ...findPopupsByHitTest(positioned, shadowHosts, timeout)];
+}
+
+const HIT_TEST_COLUMNS = [0.1, 0.5, 0.9];
+const HIT_TEST_ROW_STEP = 60;
+const MAX_HIT_TEST_CLIMB_DEPTH = 8;
+
+/**
+ * Popups that are not fixed, sticky or dialog-like (for example banners in the normal page flow) are not found by
+ * the DOM walk. Hit-test points across the viewport and climb from the topmost element at each point instead.
+ */
+function findPopupsByHitTest(known: PopupData[], shadowHosts: HTMLElement[], timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+    const deadline = performance.now() + timeout;
+    const covered = known.map((p) => p.element);
+    const visited = new Set<Element>();
+    const found: PopupData[] = [];
+    withoutPrehide(() => {
+        for (let y = HIT_TEST_ROW_STEP / 2; y < window.innerHeight; y += HIT_TEST_ROW_STEP) {
+            for (const column of HIT_TEST_COLUMNS) {
+                if (performance.now() > deadline) {
+                    return;
+                }
+                let el = closestHTMLElement(deepElementFromPoint(column * window.innerWidth, y));
+                for (let depth = 0; el && depth < MAX_HIT_TEST_CLIMB_DEPTH; depth++, el = getComposedParent(el)) {
+                    // stop where an earlier climb already went, and before page-level containers
+                    if (
+                        visited.has(el) ||
+                        el === document.body ||
+                        el === document.documentElement ||
+                        el.getBoundingClientRect().height > window.innerHeight
+                    ) {
+                        break;
+                    }
+                    visited.add(el);
+                    const target = el;
+                    if (covered.some((c) => composedContains(c, target) || composedContains(target, c))) {
+                        break;
+                    }
+                    const popup = toConsentPopup(el, shadowHosts);
+                    if (popup) {
+                        found.push(popup);
+                        covered.push(el);
+                        break;
+                    }
+                }
+            }
+        }
+    });
+    return found;
+}
+
+const TEXT_ENTRY_SELECTOR =
+    'textarea, input:not([type]), input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="tel"], input[type="number"], input[type="url"]';
+
+// unlike positioned candidates, any page element can be hit, so require consent text and a button the heuristics recognise
+function toConsentPopup(el: HTMLElement, shadowHosts?: HTMLElement[]): PopupData | null {
+    // login, search and sign-up forms can carry consent wording and a "Continue" button
+    if (el.querySelector(TEXT_ENTRY_SELECTOR)) {
+        return null;
+    }
+    const text = getElementText(el);
+    if (!text || !hasPopupText(text)) {
+        return null;
+    }
+    const buttons = getButtonData(el, shadowHosts);
+    if (!hasPopupButtons(text, buttons) || !buttons.some((b) => classifyButtonTextRegex(b.text) !== 'other')) {
+        return null;
+    }
+    return { text, element: el, buttons };
+}
+
+function deepElementFromPoint(x: number, y: number): Element | null {
+    let el = document.elementFromPoint(x, y);
+    while (el?.shadowRoot) {
+        const inner = el.shadowRoot.elementFromPoint(x, y);
+        if (!inner || inner === el) {
+            break;
+        }
+        el = inner;
+    }
+    return el;
+}
+
+function closestHTMLElement(el: Element | null): HTMLElement | null {
+    while (el && !(el instanceof HTMLElement)) {
+        el = el.parentElement;
+    }
+    return el;
+}
+
+// prehide sets pointer-events: none, which hit-testing skips; the change is not painted within this synchronous task
+function withoutPrehide(fn: () => void) {
+    const style = document.getElementById('autoconsent-prehide');
+    if (!(style instanceof HTMLStyleElement) || style.disabled) {
+        fn();
+        return;
+    }
+    style.disabled = true;
+    try {
+        fn();
+    } finally {
+        style.disabled = false;
+    }
 }
 
 function toPopupData(el: HTMLElement, shadowHosts?: HTMLElement[]): PopupData | null {
