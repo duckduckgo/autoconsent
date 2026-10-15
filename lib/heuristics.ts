@@ -1,6 +1,6 @@
 import { classifyButtons, classifyPopup, hasHeuristicPatterns, isExcludedPopup } from './heuristic-classify';
 import { ButtonData, HeuristicLevel, PopupClassification, PopupData } from './types';
-import { isElementVisible, isTopFrame, PREHIDE_STYLE_ID } from './utils';
+import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const POPUP_SEARCH_MAX_TIME = 100;
@@ -39,9 +39,7 @@ export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[]
     const hitTestPopups = findPopupsByHitTest(deadline);
     const popups = collectPositionedPopups(deadline);
     // where both searches found the same popup, keep the walk's candidate
-    const overlapsWalk = (h: PopupData) =>
-        popups.some((p) => composedContains(p.element, h.element) || composedContains(h.element, p.element));
-    return [...popups, ...hitTestPopups.filter((h) => !overlapsWalk(h))];
+    return [...popups, ...hitTestPopups.filter((h) => !popups.some((p) => composedOverlaps(p.element, h.element)))];
 }
 
 // fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
@@ -75,6 +73,7 @@ const HIT_TEST_EDGE_ROWS = [30, 90, 150];
 /**
  * Popups that are not fixed, sticky or dialog-like (for example banners in the normal page flow) are not found by
  * the DOM walk. Hit-test points across the viewport and climb from the topmost element at each point instead.
+ * Prehide sets pointer-events: none, so a prehidden popup is only hit once prehide is lifted.
  */
 function findPopupsByHitTest(deadline: number): PopupData[] {
     const visited = new Set<Element>();
@@ -85,22 +84,22 @@ function findPopupsByHitTest(deadline: number): PopupData[] {
             return true;
         }
         visited.add(el);
-        return found.some((p) => composedContains(p.element, el) || composedContains(el, p.element));
+        return found.some((p) => composedOverlaps(p.element, el));
     };
-    withoutPrehide(() => {
-        for (const y of getHitTestRows()) {
-            for (const column of HIT_TEST_COLUMNS) {
-                if (performance.now() > deadline) {
-                    return;
-                }
-                const hit = closestHTMLElement(deepElementFromPoint(column * window.innerWidth, y));
-                const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, (el) => toPopupRoot(el, undefined, true), shouldStop);
-                if (popup) {
-                    found.push(popup);
-                }
+    // any page element can be hit, so leave out forms
+    const toPopup = (el: HTMLElement) => (el.querySelector(TEXT_ENTRY_SELECTOR) ? null : toPopupRoot(el));
+    for (const y of getHitTestRows()) {
+        for (const column of HIT_TEST_COLUMNS) {
+            if (performance.now() > deadline) {
+                return found;
+            }
+            const hit = closestHTMLElement(deepElementFromPoint(column * window.innerWidth, y));
+            const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, toPopup, shouldStop);
+            if (popup) {
+                found.push(popup);
             }
         }
-    });
+    }
     return found;
 }
 
@@ -110,13 +109,9 @@ function getHitTestRows(): number[] {
     return [...new Set(rows)].filter((y) => y >= 0 && y < height);
 }
 
+// precaution, not yet seen in crawls: login, search and sign-up forms can carry consent wording and a "Continue" button
 const TEXT_ENTRY_SELECTOR =
     'textarea, input:not([type]), input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="tel"], input[type="number"], input[type="url"]';
-
-// precaution, not yet seen in crawls: login, search and sign-up forms can carry consent wording and a "Continue" button
-function hasTextEntry(el: HTMLElement): boolean {
-    return el.querySelector(TEXT_ENTRY_SELECTOR) !== null;
-}
 
 function deepElementFromPoint(x: number, y: number): Element | null {
     let el = document.elementFromPoint(x, y);
@@ -135,22 +130,6 @@ function closestHTMLElement(el: Element | null): HTMLElement | null {
         el = el.parentElement;
     }
     return el;
-}
-
-// prehide sets pointer-events: none, which hit-testing skips; the change is not painted within this synchronous task
-function withoutPrehide(fn: () => void) {
-    const style = document.getElementById(PREHIDE_STYLE_ID);
-    const suspend = style instanceof HTMLStyleElement && !style.disabled;
-    if (suspend) {
-        style.disabled = true;
-    }
-    try {
-        fn();
-    } finally {
-        if (suspend) {
-            style.disabled = false;
-        }
-    }
 }
 
 function toPopupData(el: HTMLElement, shadowHosts?: HTMLElement[], text = getElementText(el)): PopupData | null {
@@ -178,12 +157,11 @@ function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
 
 /**
  * The element as a popup, if it has consent text and popup buttons.
- * @param excludeTextEntry reject elements with text fields, for candidates that can be any page element
  */
-function toPopupRoot(el: HTMLElement, shadowHosts: HTMLElement[] | undefined, excludeTextEntry = false): PopupData | null {
+function toPopupRoot(el: HTMLElement, shadowHosts?: HTMLElement[]): PopupData | null {
     // check the text first: it is cheaper than collecting buttons
     const text = getElementText(el);
-    if (!text || !hasHeuristicPatterns(text) || (excludeTextEntry && hasTextEntry(el))) {
+    if (!text || !hasHeuristicPatterns(text)) {
         return null;
     }
     const popup = toPopupData(el, shadowHosts, text);
@@ -227,6 +205,7 @@ function climbToPopup(
  * If it does not look like a consent popup on its own, use the nearest ancestor that does.
  */
 function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): PopupData {
+    // the same acceptance check as toPopupRoot, on the buttons already collected
     if (hasHeuristicPatterns(popup.text) && hasPopupButtons(popup.text, popup.buttons)) {
         return popup;
     }
@@ -286,6 +265,11 @@ function isRenderedTextElement(el: Element): el is HTMLElement {
 /**
  * Like Node.contains, but also looks through shadow root boundaries.
  */
+// either element contains the other, across shadow roots
+function composedOverlaps(a: Node, b: Node): boolean {
+    return composedContains(a, b) || composedContains(b, a);
+}
+
 function composedContains(container: Node, node: Node): boolean {
     if (container.contains(node)) {
         return true;
