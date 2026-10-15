@@ -64,6 +64,8 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    // inverted word order, e.g. "Mit deiner Erlaubnis verwenden wir Cookies"
+    /(?:verwenden|nutzen) wir.{0,100}cookies/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -76,6 +78,8 @@ export const DETECT_PATTERNS = [
     // NL
     /gebruik.{0,100}van.{0,100}cookies/gi,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
+    // inverted word order, e.g. "Met je toestemming gebruiken we cookies"
+    /gebruiken (?:we|wij) cookies/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
 
     /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
@@ -165,7 +169,7 @@ export const DETECT_PATTERNS = [
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
 
     // Italian (IT)
-    /usiamo.{0,20}cookie/gi,
+    /(?:usiamo|utilizziamo).{0,20}cookie/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"

@@ -120,6 +120,19 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with inverted word order', () => {
+    it('detects German, Dutch and Italian cookie notices', () => {
+        const texts = [
+            'Mit deiner Erlaubnis verwenden wir Cookies für Personalisierung, Messung und Werbung.',
+            'Met je toestemming gebruiken we cookies voor personalisatie, meting en advertenties.',
+            'Con il tuo consenso utilizziamo i cookie per la personalizzazione, la misurazione e la pubblicità.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
