@@ -130,7 +130,12 @@ jobs:
                   previous="$(git describe --tags --abbrev=0 "$TAG^")"
                   needed=false
                   for sha in $(git rev-list "$previous..$TAG"); do
-                      labels="$(gh api "repos/$GITHUB_REPOSITORY/commits/$sha/pulls" --jq '.[].labels[].name')"
+                      # Fail open: an unneeded propagation only updates the open app PRs.
+                      labels="$(gh api "repos/$GITHUB_REPOSITORY/commits/$sha/pulls" --jq '.[].labels[].name')" || {
+                          echo "Could not read the PRs for $sha; propagating to be safe."
+                          needed=true
+                          continue
+                      }
                       if grep -qx 'needs-code-update' <<< "$labels"; then
                           echo "$sha is from a PR labelled needs-code-update."
                           needed=true
