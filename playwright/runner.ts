@@ -24,8 +24,13 @@ const useOxylabs = process.env.OXYLABS === '1';
 // Local runs list the tests that failed on a bot wall here; Oxylabs runs only define the listed tests.
 const oxylabsCandidatesFile = process.env.OXYLABS_CANDIDATES;
 const oxylabsCandidates = useOxylabs && oxylabsCandidatesFile ? readOxylabsCandidates(oxylabsCandidatesFile) : null;
+const recordOxylabsCandidates = !useOxylabs && !!oxylabsCandidatesFile;
 // Pages load slower through remote Oxylabs sessions, so detection gets a longer window there.
 const detectionSlowdown = useOxylabs ? 2 : 1;
+// Status codes that bot protection answers with; other errors (404, 5xx) point to a stale spec URL instead.
+const BOT_WALL_STATUSES = [401, 403, 429, 503];
+// Navigation errors of a dead or misconfigured site rather than a blocked one.
+const DEAD_SITE_ERRORS = /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_FAILED|ERR_CONNECTION_REFUSED|ERR_ADDRESS_UNREACHABLE|ERR_CERT_/;
 // Page titles of common bot-protection challenge and block pages.
 const BOT_WALL_TITLE =
     /just a moment|attention required|client challenge|access denied|access to this page has been denied|pardon our interruption|request unsuccessful|are you a robot|verify you are human|security check|captcha/i;
@@ -46,6 +51,11 @@ const test = useOxylabs
       })
     : base;
 test.describe.configure({ mode: 'parallel' });
+
+// The CMP name keeps tests for the same site in different specs apart.
+function oxylabsCandidateKey(cmp: string, testName: string) {
+    return `${cmp} › ${testName}`;
+}
 
 function readOxylabsCandidates(file: string) {
     try {
@@ -100,6 +110,7 @@ class TestRun {
     page: Page;
     testInfo: TestInfo;
     url: string;
+    cmp: string;
     expectedCmp: string;
     options: TestOptions;
     autoAction: AutoAction | null;
@@ -109,6 +120,7 @@ class TestRun {
     received: ContentScriptMessage[] = [];
     screenshotCounter = 0;
     selfTestTarget: ContentScriptTarget | null = null;
+    response: Response | null = null;
     // Oxylabs solves captchas on the page; waits pause while it does.
     captcha = useOxylabs ? createCaptchaTracker() : null;
 
@@ -116,6 +128,7 @@ class TestRun {
         this.page = page;
         this.testInfo = testInfo;
         this.url = url;
+        this.cmp = expectedCmp;
         // if a rule was deduplicated, update the expectation to the new deduplicate rule name
         if (deduplicatedRuleLookup.has(expectedCmp)) {
             this.expectedCmp = deduplicatedRuleLookup.get(expectedCmp)!;
@@ -169,9 +182,8 @@ class TestRun {
         if (this.options.gpc) {
             await this.enableGpc();
         }
-        let response: Response | null = null;
         try {
-            response = await this.page.goto(this.url, { waitUntil: 'commit' });
+            this.response = await this.page.goto(this.url, { waitUntil: 'commit' });
 
             if (!useIsolatedWorld) {
                 await this.injectContentScripts();
@@ -199,30 +211,32 @@ class TestRun {
             } catch (e) {
                 // ignore this screenshot errors
             }
-            await this.recordOxylabsCandidate(e, response);
             throw e;
         }
     }
 
-    // On the last attempt, list a test that hit a bot wall so the Oxylabs pass can rerun it.
-    async recordOxylabsCandidate(error: unknown, response: Response | null) {
-        if (useOxylabs || !oxylabsCandidatesFile || this.testInfo.retry < this.testInfo.project.retries) {
+    // On the last attempt, list a failed test that hit a bot wall so the Oxylabs pass can rerun it.
+    // Called from afterEach, which also runs when the test times out before reaching its own catch.
+    async recordOxylabsCandidate() {
+        const { status, retry, project, error } = this.testInfo;
+        if (status === 'passed' || status === 'skipped' || status === 'interrupted' || retry < project.retries) {
             return;
         }
-        if (await this.looksBlocked(error, response)) {
-            fs.appendFileSync(oxylabsCandidatesFile, `${this.testInfo.title}\n`);
+        if (await this.looksBlocked(error?.message ?? '')) {
+            fs.appendFileSync(oxylabsCandidatesFile!, `${oxylabsCandidateKey(this.cmp, this.testInfo.title)}\n`);
         }
     }
 
-    // The page never loaded, or the site served an error or challenge page instead of the content.
-    async looksBlocked(error: unknown, response: Response | null) {
-        if (!response) {
-            return true;
+    // The site served a bot wall instead of its content: the page never loaded (other than a dead host),
+    // or nothing was detected on a bot-wall status code or a challenge page.
+    async looksBlocked(errorMessage: string) {
+        if (!this.response) {
+            return !DEAD_SITE_ERRORS.test(errorMessage);
         }
-        if (!(error instanceof Error) || !error.message.startsWith('no CMP detected')) {
+        if (this.isMessageReceived({ type: 'cmpDetected' })) {
             return false;
         }
-        if (response.status() >= 400) {
+        if (BOT_WALL_STATUSES.includes(this.response.status())) {
             return true;
         }
         const title = await this.page.title().catch(() => '');
@@ -457,8 +471,19 @@ class TestRun {
     }
 }
 
+// Runs by test id, for the afterEach hook that records Oxylabs candidates.
+const testRuns = new Map<string, TestRun>();
+
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
     test.describe(cmp, () => {
+        if (recordOxylabsCandidates) {
+            // eslint-disable-next-line no-empty-pattern
+            test.afterEach(async ({}, testInfo) => {
+                const testRun = testRuns.get(testInfo.testId);
+                testRuns.delete(testInfo.testId);
+                await testRun?.recordOxylabsCandidate();
+            });
+        }
         sites.forEach((url) => {
             const finalOptions = { ...defaultOptions, ...overrideOptions };
             if (finalOptions.onlyRegions && finalOptions.onlyRegions.length > 0 && !finalOptions.onlyRegions.includes(testRegion)) {
@@ -474,11 +499,14 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
 
             const defineTest = (label: string, autoAction: AutoAction | null) => {
                 const testName = `${domain} ${urlHash} .${testRegion} ${label} ${formFactor}`;
-                if (oxylabsCandidates && !oxylabsCandidates.has(testName)) {
+                if (oxylabsCandidates && !oxylabsCandidates.has(oxylabsCandidateKey(cmp, testName))) {
                     return;
                 }
                 test(testName, async ({ page }, testInfo) => {
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, autoAction);
+                    if (recordOxylabsCandidates) {
+                        testRuns.set(testInfo.testId, testRun);
+                    }
                     await testRun.run();
                 });
             };

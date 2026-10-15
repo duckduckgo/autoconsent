@@ -19,11 +19,12 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
 def runOxylabsTests(candidatesFile, testFiles) {
     def junitFile = "results-${env.REGION}-oxylabs.xml"
     try {
+        // Playwright's --global-timeout ends the run first, so it still writes the JUnit XML
         timeout(60) {
             def testFilesArg = testFiles.join(' ')
             withCredentials([usernamePassword(credentialsId: 'autoconsent-oxylabs', usernameVariable: 'OXYLABS_USER', passwordVariable: 'OXYLABS_PASSWORD')]) {
                 sh """
-                    OXYLABS=1 OXYLABS_CANDIDATES=${candidatesFile} PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project chrome --workers 1 --retries 1 --reporter=junit,line || true
+                    OXYLABS=1 OXYLABS_CANDIDATES=${candidatesFile} PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project chrome --workers 1 --retries 1 --global-timeout 3300000 --reporter=junit,line || true
                 """
             }
         }
