@@ -3,13 +3,11 @@
     "prehideSelectors": [".privacy-consent--backdrop", ".privacy-consent--modal"],
     "detectCmp": [{ "exists": ".privacy-consent--modal" }],
     "detectPopup": [{ "visible": ".privacy-consent--modal" }],
-    "optIn": [{ "click": "#selectAll" }],
-    "optOut": [
+    "optIn": [{ "waitForThenClick": ".privacy-consent--modal [data-testid=confirm-all]" }],
+    "optOut": [{ "waitForThenClick": ".privacy-consent--modal [data-testid=confirm-selection]" }],
+    "test": [
         {
-            "click": ".footer-config-link"
-        },
-        {
-            "click": "#confirmSelection"
+            "cookieContains": "PRIVACY_CONSENT=eyJ0ZWNobmljYWwiOnRydWUsInN0YXRpc3RpY3MiOmZhbHNlLCJtYXJrZXRpbmciOmZhbHNlLCJwYXJ0bmVyc2hpcHMiOmZhbHNl"
         }
     ]
 }
