@@ -1,0 +1,33 @@
+{
+    "name": "trustcommander",
+    "vendorUrl": "https://www.commandersact.com/en/solutions/trustcommander/",
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#tc-privacy-wrapper"
+        },
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_DETECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#tc-privacy-wrapper > [id$='tc_privacy']"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_OPT_IN"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_OPT_OUT"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_TEST"
+        }
+    ]
+}

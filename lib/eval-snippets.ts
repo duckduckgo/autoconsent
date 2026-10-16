@@ -257,6 +257,11 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    EVAL_TRUSTCOMMANDER_DETECT: () => typeof window.tC?.privacy?.clickBanner === 'function',
+    // banner button ids differ per template, so trigger the banner's own opt-out handler
+    EVAL_TRUSTCOMMANDER_OPT_OUT: () => tC.privacy.clickBanner('optout') || true,
+    EVAL_TRUSTCOMMANDER_OPT_IN: () => tC.privacy.clickBanner('optin') || true,
+    EVAL_TRUSTCOMMANDER_TEST: () => tC.privacy.getOptoutCategories().length > 0,
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
