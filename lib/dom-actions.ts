@@ -240,7 +240,8 @@ export class DomActions implements DomActionsProvider {
                 observer.disconnect();
                 resolve(true);
             });
-            observer.observe(node[0], {
+            // observe the document for the root element, so that replacing it (e.g. via document.open()) counts as a mutation
+            observer.observe(node[0] === document.documentElement ? document : node[0], {
                 subtree: true,
                 childList: true,
                 attributes: true,
