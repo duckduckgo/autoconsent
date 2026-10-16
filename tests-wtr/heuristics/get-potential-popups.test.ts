@@ -384,6 +384,42 @@ describe('getPotentialPopups', () => {
             expect(popupIds(true)).to.include('banner');
         });
     });
+
+    describe('hit-test grid and hit points', () => {
+        const GRID = { columns: [0.25, 0.75], edgeRows: [40] };
+        const columnXs = GRID.columns.map((c) => Math.round(c * window.innerWidth));
+
+        function findGridPopup(id: string) {
+            return getPotentialPopups(1000, true, GRID).find((p) => p.element.id === id);
+        }
+
+        it('records every grid point that reached an in-flow banner', () => {
+            container.innerHTML = `<div id="banner" style="padding: 60px 0;">${BANNER}</div>`;
+            const popup = findGridPopup('banner');
+            expect(popup?.source).to.equal('hitTest');
+            expect(popup!.hitPoints).to.deep.equal(columnXs.map((x) => [x, 40]));
+        });
+
+        it('keeps the walk candidate of a positioned popup, with its hit points', () => {
+            container.innerHTML = `<div id="fixed" style="position: fixed; bottom: 0; left: 0; right: 0; padding: 30px 0;">${BANNER}</div>`;
+            const popup = findGridPopup('fixed');
+            expect(popup?.source).to.equal('walk');
+            const bottomRow = Math.round(window.innerHeight - 40);
+            expect(popup!.hitPoints).to.deep.equal(columnXs.map((x) => [x, bottomRow]));
+        });
+
+        it('leaves out hit points of a positioned popup that is not hit-tested', () => {
+            container.innerHTML = fixedBanner('fixed');
+            const popup = getPotentialPopups(1000).find((p) => p.element.id === 'fixed');
+            expect(popup?.source).to.equal('walk');
+            expect(popup!.hitPoints).to.be.undefined;
+        });
+
+        it('only tests the points of the grid it is given', () => {
+            container.innerHTML = `<div id="banner" style="padding: 60px 0;">${BANNER}</div>`;
+            expect(getPotentialPopups(1000, true, { columns: [0.5], edgeRows: [] }).map((p) => p.element.id)).not.to.include('banner');
+        });
+    });
 });
 
 describe('getFramePopupElement', () => {

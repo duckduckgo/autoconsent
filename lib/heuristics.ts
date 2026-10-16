@@ -1,5 +1,5 @@
 import { classifyButtons, classifyPopup, hasHeuristicPatterns, isExcludedPopup } from './heuristic-classify';
-import { ButtonData, HeuristicLevel, PopupClassification, PopupData } from './types';
+import { ButtonData, HeuristicLevel, HitTestGrid, PopupClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
@@ -27,33 +27,40 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
         return sortByClassification(getFramePopups().filter(isActionable));
     }
     const deadline = performance.now() + timeout;
-    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline).filter(isActionable) : [];
+    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline, DEFAULT_HIT_TEST_GRID).filter(isActionable) : [];
     // the walk cannot find a better popup than one with reject
     if (hitTestPopups.some((p) => p.regexClassification === 'reject')) {
         return sortByClassification(hitTestPopups);
     }
     const walkPopups = collectPositionedPopups(deadline);
-    return sortByClassification([...walkPopups.filter(isActionable), ...withoutWalkOverlaps(hitTestPopups, walkPopups)]);
+    return sortByClassification([...walkPopups.filter(isActionable), ...mergeWalkOverlaps(hitTestPopups, walkPopups)]);
 }
 
 /**
  * @param timeout time budget for the whole search, in ms
  * @param hitTest also hit-test the viewport for popups the DOM walk cannot find
+ * @param hitTestGrid points to hit-test, if not the default grid
  */
-export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, hitTest = false): PopupData[] {
+export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, hitTest = false, hitTestGrid = DEFAULT_HIT_TEST_GRID): PopupData[] {
     if (!isTopFrame()) {
         return getFramePopups();
     }
     const deadline = performance.now() + timeout;
     // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
-    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline) : [];
+    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline, hitTestGrid) : [];
     const walkPopups = collectPositionedPopups(deadline);
-    return [...walkPopups, ...withoutWalkOverlaps(hitTestPopups, walkPopups)];
+    return [...walkPopups, ...mergeWalkOverlaps(hitTestPopups, walkPopups)];
 }
 
-// where both searches found the same popup, keep the walk's candidate
-function withoutWalkOverlaps(hitTestPopups: PopupData[], walkPopups: PopupData[]): PopupData[] {
-    return hitTestPopups.filter((h) => !walkPopups.some((p) => composedOverlaps(p.element, h.element)));
+// where both searches found the same popup, keep the walk's candidate, with the hit points of the hit-test one
+function mergeWalkOverlaps(hitTestPopups: PopupData[], walkPopups: PopupData[]): PopupData[] {
+    return hitTestPopups.filter((h) => {
+        const walkPopup = walkPopups.find((p) => composedOverlaps(p.element, h.element));
+        if (walkPopup) {
+            walkPopup.hitPoints = [...(walkPopup.hitPoints ?? []), ...(h.hitPoints ?? [])];
+        }
+        return !walkPopup;
+    });
 }
 
 function getFramePopups(): PopupData[] {
@@ -64,7 +71,7 @@ function getFramePopups(): PopupData[] {
     // for iframes, just take the whole document
     const frameElement = getFramePopupElement(document);
     const popup = frameElement && toPopupData(frameElement);
-    return popup ? [popup] : [];
+    return popup ? [{ ...popup, source: 'frame' }] : [];
 }
 
 // fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
@@ -85,52 +92,73 @@ function collectPositionedPopups(deadline: number): PopupData[] {
         if (root !== popup) {
             expanded.push(root.element);
         }
+        root.source = 'walk';
         potentialPopups.push(root);
     }
     // a fragment expanded to its popup root replaces any other candidates inside that root
     return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
 }
 
-const HIT_TEST_COLUMNS = [0.1, 0.5, 0.9];
-// banners sit along the top and bottom edges and modals in the middle
-const HIT_TEST_EDGE_ROWS = [30, 90, 150];
+const DEFAULT_HIT_TEST_GRID: HitTestGrid = {
+    columns: [0.1, 0.5, 0.9],
+    // banners sit along the top and bottom edges and modals in the middle
+    edgeRows: [30, 90, 150],
+};
 
 /**
  * Popups that are not fixed, sticky or dialog-like (for example banners in the normal page flow) are not found by
  * the DOM walk. Hit-test points across the viewport and climb from the topmost element at each point instead.
  * Prehide sets pointer-events: none, so a prehidden popup is only hit once prehide is lifted.
  */
-function findPopupsByHitTest(deadline: number): PopupData[] {
-    const visited = new Set<Element>();
+function findPopupsByHitTest(deadline: number, grid: HitTestGrid): PopupData[] {
+    // the popup that each climbed element leads to, or null if its climb found none
+    const climbed = new Map<Element, PopupData | null>();
     const found: PopupData[] = [];
-    // stop where an earlier climb already went, and at popups already found
-    const shouldStop = (el: HTMLElement) => {
-        if (visited.has(el)) {
-            return true;
-        }
-        visited.add(el);
-        return found.some((p) => composedOverlaps(p.element, el));
-    };
     // any page element can be hit, so leave out forms
     const toPopup = (el: HTMLElement) => (el.querySelector(TEXT_ENTRY_SELECTOR) ? null : toPopupRoot(el));
-    for (const y of getHitTestRows()) {
-        for (const column of HIT_TEST_COLUMNS) {
+    for (const y of getHitTestRows(grid)) {
+        for (const column of grid.columns) {
             if (performance.now() > deadline) {
                 return found;
             }
-            const hit = closestHTMLElement(deepElementFromPoint(column * window.innerWidth, y));
+            const x = Math.round(column * window.innerWidth);
+            const path: HTMLElement[] = [];
+            const reached: { popup: PopupData | null } = { popup: null };
+            // stop where an earlier climb already went, and at popups already found
+            const shouldStop = (el: HTMLElement) => {
+                if (climbed.has(el)) {
+                    reached.popup = climbed.get(el) ?? null;
+                    return true;
+                }
+                // the climb went inside a popup already found, or reached one of its ancestors
+                const overlapped = found.find((p) => composedOverlaps(p.element, el));
+                if (overlapped) {
+                    reached.popup = composedContains(overlapped.element, el) ? overlapped : null;
+                    return true;
+                }
+                path.push(el);
+                return false;
+            };
+            const hit = closestHTMLElement(deepElementFromPoint(x, y));
             const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, toPopup, shouldStop);
             if (popup) {
+                popup.source = 'hitTest';
+                popup.hitPoints = [];
                 found.push(popup);
+                reached.popup = popup;
             }
+            for (const el of path) {
+                climbed.set(el, reached.popup);
+            }
+            reached.popup?.hitPoints?.push([x, y]);
         }
     }
     return found;
 }
 
-function getHitTestRows(): number[] {
+function getHitTestRows(grid: HitTestGrid): number[] {
     const height = window.innerHeight;
-    const rows = [...HIT_TEST_EDGE_ROWS, height / 2, ...HIT_TEST_EDGE_ROWS.map((y) => height - y)];
+    const rows = [...grid.edgeRows, height / 2, ...grid.edgeRows.map((y) => height - y)].map((y) => Math.round(y));
     return [...new Set(rows)].filter((y) => y >= 0 && y < height);
 }
 
