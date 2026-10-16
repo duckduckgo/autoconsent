@@ -4,7 +4,7 @@
     "prehideSelectors": [".fs-cc-components,[fs-cc=banner]"],
     "detectCmp": [
         {
-            "any": [{ "visible": ".fs-cc-components,[fs-cc=banner]" }, { "exists": "script[src*=\"@finsweet/cookie-consent\"]" }]
+            "visible": ".fs-cc-components,[fs-cc=banner]"
         }
     ],
     "detectPopup": [
@@ -12,7 +12,8 @@
             "visible": ".fs-cc-components,[fs-cc=banner]"
         },
         {
-            "visible": ".fs-cc-components,[fs-cc=banner] [fs-cc=allow]"
+            "visible": "[fs-cc=banner] [fs-cc=allow],[fs-cc=banner] [fs-cc=deny],[fs-cc=banner] [fs-cc=close]",
+            "check": "any"
         }
     ],
     "optIn": [
@@ -22,16 +23,31 @@
     ],
     "optOut": [
         {
-            "if": { "exists": "[fs-cc=banner] [fs-cc=deny]" },
+            "if": { "exists": "script[fs-cc-mode=informational]" },
             "then": [
-                { "wait": 500 },
                 {
-                    "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+                    "comment": "in informational mode closing the banner accepts all, so deny via the hidden preferences form and hide the banner",
+                    "if": { "exists": "[fs-cc=preferences] [fs-cc=deny]" },
+                    "then": [{ "click": "[fs-cc=preferences] [fs-cc=deny]" }]
+                },
+                {
+                    "hide": "[fs-cc=banner]"
                 }
             ],
             "else": [
                 {
-                    "hide": "[fs-cc=banner]"
+                    "if": { "exists": "[fs-cc=banner] [fs-cc=deny]" },
+                    "then": [
+                        { "wait": 500 },
+                        {
+                            "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "hide": "[fs-cc=banner]"
+                        }
+                    ]
                 }
             ]
         }
