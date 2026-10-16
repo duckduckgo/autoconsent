@@ -33,3 +33,11 @@ generateCMPTests(
         onlyRegions: ['US', 'DE'],
     },
 );
+
+// Page reloads ~1s after the direct reject click (forbes.com does too), so the
+// opt-out must finish without waiting for a preferences modal. The reload races
+// the self-test, so it is skipped here.
+generateCMPTests('ketch', ['https://www.arbys.com/'], {
+    onlyRegions: ['US', 'DE'],
+    testSelfTest: false,
+});

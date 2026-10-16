@@ -99,40 +99,40 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "waitFor": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal",
-            "timeout": 1000,
-            "optional": true
-        },
-        {
-            "comment": "Preferences modal handling.",
-            "if": {
-                "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
-            },
-            "then": [
+                },
                 {
+                    "waitFor": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal",
+                    "timeout": 1000,
+                    "optional": true
+                },
+                {
+                    "comment": "Preferences modal handling.",
                     "if": {
-                        "exists": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                        "exists": "#lanyard_root [aria-describedby=preference-description],#lanyard_root [aria-describedby=modal-description], #ketch-preferences, #ketch-purposes-modal"
                     },
                     "then": [
                         {
-                            "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
-                        }
-                    ],
-                    "else": [
+                            "if": {
+                                "exists": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                            },
+                            "then": [
+                                {
+                                    "waitForThenClick": "#lanyard_root button[class*=rejectButton], #lanyard_root button[class*=rejectAllButton], #ketch-modal button[aria-label='Reject All'], #ketch-purposes-modal button[aria-label='Reject All']"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "comment": "No Reject All: uncheck every enabled purpose switch.",
+                                    "click": "#lanyard_root input[type=checkbox][role=switch][aria-checked=true]:not(:disabled)",
+                                    "all": true,
+                                    "optional": true
+                                }
+                            ]
+                        },
                         {
-                            "comment": "No Reject All: uncheck every enabled purpose switch.",
-                            "click": "#lanyard_root input[type=checkbox][role=switch][aria-checked=true]:not(:disabled)",
-                            "all": true,
-                            "optional": true
+                            "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm'], #ketch-modal button[aria-label='Save Settings'], #ketch-purposes-modal button[aria-label='Save Settings']"
                         }
                     ]
-                },
-                {
-                    "click": "#lanyard_root button[class*=confirmButton], #lanyard_root div[class*=actions_] > button:nth-child(1), #lanyard_root button[class*=actionButton], #ketch-modal button[aria-label='Confirm'], #ketch-purposes-modal button[aria-label='Confirm'], #ketch-modal button[aria-label='Save Settings'], #ketch-purposes-modal button[aria-label='Save Settings']"
                 }
             ]
         }
