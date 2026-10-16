@@ -1,0 +1,37 @@
+{
+    "name": "truecaller",
+    "vendorUrl": "https://www.truecaller.com/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://cookies\\.truecaller\\.com/consent/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#consent #btn-accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#btn-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#btn-accept-necessary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#consent-dialog",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
