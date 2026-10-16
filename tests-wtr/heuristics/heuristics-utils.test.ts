@@ -120,6 +120,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Användning av valfria cookies. Cookies hjälper oss att anpassa din upplevelse.',
+            'Vi använder cookies för att säkerställa kvaliteten på våra tjänster.',
+            'Den här webbplatsen använder kakor',
+            'Vi och våra partners använder nödvändiga och valfria cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Välkommen till ett roligare sparande i aktier och fonder').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
