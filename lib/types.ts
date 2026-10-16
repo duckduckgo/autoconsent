@@ -127,6 +127,19 @@ export interface PopupData {
     element: HTMLElement;
     buttons: ButtonData[];
     regexClassification?: PopupClassification;
+    // which search found the popup: the DOM walk, the viewport hit test, or the whole document of a frame
+    source?: 'walk' | 'hitTest' | 'frame';
+    // viewport points ([x, y] in CSS px) whose hit test reached this popup
+    hitPoints?: [number, number][];
+}
+
+/**
+ * Points to hit-test: columns are fractions of the viewport width, and rows are distances in px from both the top
+ * and the bottom edge. The middle row of the viewport is always tested.
+ */
+export interface HitTestGrid {
+    columns: number[];
+    edgeRows: number[];
 }
 
 /**
