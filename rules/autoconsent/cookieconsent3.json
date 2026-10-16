@@ -2,6 +2,7 @@
     "name": "cookieconsent3",
     "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
     "comment": "supports v3.x.x of the library",
+    "minimumRuleStepVersion": 2,
     "prehideSelectors": ["#cc-main"],
     "detectCmp": [
         {
@@ -15,12 +16,14 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cm__btn[data-role=all]"
+            "waitForThenClick": ".cm__btn[data-role=all], #cc-main .cm [data-cc=accept-all]"
         }
     ],
     "optOut": [
         {
-            "if": { "exists": ".cm__btn[data-role=necessary]" },
+            "if": {
+                "exists": ".cm__btn[data-role=necessary]"
+            },
             "then": [
                 {
                     "waitForThenClick": ".cm__btn[data-role=necessary]"
@@ -28,10 +31,48 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": ".cm__btn[data-role=show]"
-                },
-                {
-                    "waitForThenClick": "#cc-main .pm__btn[data-role=necessary]"
+                    "if": {
+                        "exists": "#cc-main .cm [data-role=show], #cc-main .cm [data-cc=show-preferencesModal]"
+                    },
+                    "then": [
+                        {
+                            "click": "#cc-main .cm [data-role=show], #cc-main .cm [data-cc=show-preferencesModal]"
+                        },
+                        {
+                            "waitFor": "#cc-main .pm__btn",
+                            "timeout": 2000
+                        },
+                        {
+                            "if": {
+                                "exists": "#cc-main .pm__btn[data-role=necessary]"
+                            },
+                            "then": [
+                                {
+                                    "click": "#cc-main .pm__btn[data-role=necessary]"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "click": "#cc-main .section__toggle:checked:not(:disabled)",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "waitForThenClick": "#cc-main .pm__btn[data-role=save]"
+                                }
+                            ]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "hide": "#cc-main"
+                        },
+                        {
+                            "removeClass": "disable--interaction",
+                            "selector": "html",
+                            "optional": true
+                        }
+                    ]
                 }
             ]
         }
