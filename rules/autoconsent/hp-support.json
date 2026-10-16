@@ -1,0 +1,77 @@
+{
+    "name": "hp-support",
+    "vendorUrl": "https://support.hp.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://support\\.hp\\.com/"
+    },
+    "prehideSelectors": ["#onetrust-banner-sdk"],
+    "detectCmp": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": "#onetrust-banner-sdk",
+            "timeout": 20000
+        },
+        {
+            "waitForThenClick": "#onetrust-accept-btn-handler"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "OneTrust is injected by a tag manager after page load, often past the generic detection window",
+            "waitForVisible": "#onetrust-banner-sdk",
+            "timeout": 20000
+        },
+        {
+            "wait": 500
+        },
+        {
+            "if": {
+                "exists": "#onetrust-reject-all-handler"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#onetrust-reject-all-handler"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#onetrust-pc-btn-handler"
+                },
+                {
+                    "waitForVisible": "#onetrust-pc-sdk",
+                    "timeout": 5000
+                },
+                {
+                    "click": "#onetrust-pc-sdk input.category-switch-handler:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler"
+                },
+                {
+                    "waitForVisible": "#onetrust-banner-sdk",
+                    "timeout": 5000,
+                    "check": "none"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_ONETRUST_1"
+        }
+    ]
+}
