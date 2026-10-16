@@ -5,7 +5,11 @@ import { isElementVisible, isTopFrame } from './utils';
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const POPUP_SEARCH_MAX_TIME = 100;
 
-export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+/**
+ * @param timeout time budget for the whole search, in ms
+ * @param hitTest also hit-test the viewport for popups the DOM walk cannot find
+ */
+export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME, hitTest = false): PopupData[] {
     const acceptedLevels: PopupClassification[] =
         mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
     const isActionable = (popup: PopupData) => {
@@ -23,7 +27,7 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
         return sortByClassification(getFramePopups().filter(isActionable));
     }
     const deadline = performance.now() + timeout;
-    const hitTestPopups = findPopupsByHitTest(deadline).filter(isActionable);
+    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline).filter(isActionable) : [];
     // the walk cannot find a better popup than one with reject
     if (hitTestPopups.some((p) => p.regexClassification === 'reject')) {
         return sortByClassification(hitTestPopups);
@@ -34,14 +38,15 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
 
 /**
  * @param timeout time budget for the whole search, in ms
+ * @param hitTest also hit-test the viewport for popups the DOM walk cannot find
  */
-export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, hitTest = false): PopupData[] {
     if (!isTopFrame()) {
         return getFramePopups();
     }
     const deadline = performance.now() + timeout;
     // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
-    const hitTestPopups = findPopupsByHitTest(deadline);
+    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline) : [];
     const walkPopups = collectPositionedPopups(deadline);
     return [...walkPopups, ...withoutWalkOverlaps(hitTestPopups, walkPopups)];
 }
@@ -333,7 +338,7 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
 
 /**
  * Heuristic to get all elements that look like "popups"
- * Popups that are not positioned are found by hit-testing instead (findPopupsByHitTest).
+ * Popups that are not positioned are found by hit-testing instead, when enabled (findPopupsByHitTest).
  */
 function getPopupLikeElements(deadline: number): { elements: HTMLElement[]; shadowHosts: HTMLElement[] } {
     const found: HTMLElement[] = [];
