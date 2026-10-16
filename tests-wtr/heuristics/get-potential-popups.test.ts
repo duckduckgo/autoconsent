@@ -44,8 +44,8 @@ describe('getPotentialPopups', () => {
         return attachShadow(container.querySelector('#host')!, html);
     }
 
-    function popupIds(): string[] {
-        return getPotentialPopups(1000).map((p) => p.element.id);
+    function popupIds(hitTest = false): string[] {
+        return getPotentialPopups(1000, hitTest).map((p) => p.element.id);
     }
 
     function findPopup(id: string) {
@@ -311,27 +311,33 @@ describe('getPotentialPopups', () => {
             </div>
         `;
 
+        it('only hit-tests when asked to', () => {
+            container.innerHTML = IN_FLOW_BANNER;
+            expect(popupIds()).not.to.include('banner');
+            expect(getActionablePopups('reject', 1000).filter((p) => container.contains(p.element))).to.have.length(0);
+        });
+
         it('finds a banner at the top of the page that is not positioned', () => {
             container.innerHTML = IN_FLOW_BANNER;
-            expect(popupIds()).to.include('banner');
+            expect(popupIds(true)).to.include('banner');
         });
 
         it('makes an in-flow banner actionable', () => {
             container.innerHTML = IN_FLOW_BANNER;
-            const popup = getActionablePopups('reject', 1000).find((p) => p.element.id === 'banner');
+            const popup = getActionablePopups('reject', 1000, true).find((p) => p.element.id === 'banner');
             expect(popup).to.exist;
             expect(popup!.regexClassification).to.equal('reject');
         });
 
         it('ignores an in-flow banner below the fold', () => {
             container.innerHTML = `<div style="height: 3000px"></div>${IN_FLOW_BANNER}`;
-            expect(popupIds()).not.to.include('banner');
+            expect(popupIds(true)).not.to.include('banner');
         });
 
         it('ignores page copy about cookies without consent buttons', () => {
             container.innerHTML =
                 '<div id="copy"><p>We use cookies on this site.</p><a href="#">Privacy Policy</a> <a href="#">Contact</a></div>';
-            expect(popupIds()).not.to.include('copy');
+            expect(popupIds(true)).not.to.include('copy');
         });
 
         it('ignores a login form with consent wording', () => {
@@ -342,12 +348,12 @@ describe('getPotentialPopups', () => {
                     <button>Continue</button>
                 </form>
             `;
-            expect(popupIds()).not.to.include('login');
+            expect(popupIds(true)).not.to.include('login');
         });
 
         it('does not report a positioned popup twice', () => {
             container.innerHTML = fixedBanner('banner');
-            expect(popupIds().filter((id) => id === 'banner')).to.have.length(1);
+            expect(popupIds(true).filter((id) => id === 'banner')).to.have.length(1);
         });
 
         it('prefers a positioned popup with reject over an in-flow accept-only banner', () => {
@@ -355,7 +361,7 @@ describe('getPotentialPopups', () => {
                 <div id="inflow"><p>We use cookies to improve your experience.</p><button>Accept all</button></div>
                 <div id="fixed" style="position: fixed; bottom: 0;"><p>We use cookies.</p><button>Reject all</button><button>Accept all</button></div>
             `;
-            const popups = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            const popups = getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element));
             expect(popups.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([
                 ['fixed', 'reject'],
                 ['inflow', 'tier2'],
@@ -368,14 +374,14 @@ describe('getPotentialPopups', () => {
                 ${IN_FLOW_BANNER}
                 <div id="fixed" style="position: fixed; bottom: 0; pointer-events: none;"><p>We use cookies.</p><button>Reject all</button></div>
             `;
-            const actionable = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            const actionable = getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element));
             expect(actionable.map((p) => p.element.id)).to.deep.equal(['banner']);
-            expect(popupIds()).to.include.members(['banner', 'fixed']);
+            expect(popupIds(true)).to.include.members(['banner', 'fixed']);
         });
 
         it('finds an in-flow banner inside a shadow root', () => {
             shadowHost('', IN_FLOW_BANNER);
-            expect(popupIds()).to.include('banner');
+            expect(popupIds(true)).to.include('banner');
         });
     });
 });

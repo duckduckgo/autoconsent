@@ -5,11 +5,12 @@ import { HeuristicLevel } from '../../lib/types';
 
 // must be run from heuristic-cmp.html
 describe('AutoConsentHeuristicCMP', () => {
-    function createAutoconsent(heuristicMode: HeuristicLevel) {
+    function createAutoconsent(heuristicMode: HeuristicLevel, enableHeuristicHitTest = false) {
         return new Autoconsent(() => Promise.resolve(), {
             enabled: false,
             autoAction: null,
             heuristicMode,
+            enableHeuristicHitTest,
         });
     }
 
@@ -38,6 +39,20 @@ describe('AutoConsentHeuristicCMP', () => {
 
             expect(detected).to.be.true;
             expect(cmp.name).to.equal('HEURISTIC-REJECT');
+        });
+
+        it('hit-tests for an in-flow banner only when enableHeuristicHitTest is set', async () => {
+            const banner = document.createElement('div');
+            banner.innerHTML = '<p>We use cookies to improve your experience.</p><button>Reject all</button><button>Accept all</button>';
+            document.body.prepend(banner);
+            try {
+                expect(await new AutoConsentHeuristicCMP(createAutoconsent('tier2'), 'tier2').detectCmp()).to.be.false;
+                const cmp = new AutoConsentHeuristicCMP(createAutoconsent('tier2', true), 'tier2');
+                expect(await cmp.detectCmp()).to.be.true;
+                expect(cmp.name).to.equal('HEURISTIC-REJECT');
+            } finally {
+                banner.remove();
+            }
         });
 
         it('detects a Russian popup using the Cyrillic word for cookies', async () => {
