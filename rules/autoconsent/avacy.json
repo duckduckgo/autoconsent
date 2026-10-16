@@ -1,0 +1,16 @@
+{
+    "name": "avacy",
+    "vendorUrl": "https://avacy.eu/",
+    "prehideSelectors": ["#as-oil-first-layer"],
+    "detectCmp": [{ "exists": ".as-oil #as-oil-first-layer" }],
+    "detectPopup": [{ "visible": "#as-oil-first-layer" }],
+    "optIn": [{ "waitForThenClick": "#as-oil-first-layer .as-js-optin" }],
+    "optOut": [
+        {
+            "if": { "exists": "#as-oil-first-layer .as-js-reject-all" },
+            "then": [{ "waitForThenClick": "#as-oil-first-layer .as-js-reject-all" }],
+            "else": [{ "waitForThenClick": "#as-oil-first-layer .as-js-close-banner" }]
+        }
+    ],
+    "test": [{ "cookieContains": "oil_data=" }, { "cookieContains": "%22c%22:1", "negated": true }]
+}
