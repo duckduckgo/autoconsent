@@ -95,6 +95,20 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German inverted word order', () => {
+    it('detects "verwenden wir cookies" notices', () => {
+        const texts = [
+            // bergzeit.de
+            'Für Deine schönste Bergzeit... … verwenden wir Cookies. So können wir unsere Services für Dich optimieren.',
+            'Auf unserer Seite nutzen wir Cookies',
+            'Deshalb setzen wir technische Cookies ein',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
