@@ -25,6 +25,14 @@ describe('checkHeuristicPatterns', () => {
         expect(snippets.length).to.be.greaterThan(0);
     });
 
+    it('detects German "our website ... cookies" notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
     it('returns empty arrays for unrelated text', () => {
         const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', [/we use cookies/gi]);
 
