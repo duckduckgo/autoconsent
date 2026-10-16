@@ -6,8 +6,7 @@
     "cosmetic": false,
     "runContext": {
         "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(?:www\\.)?uwv\\.nl/"
+        "frame": false
     },
     "prehideSelectors": ["#js-pw-consent-wrapper bgl-modal[test-id='cookie-modal']"],
     "detectCmp": [
