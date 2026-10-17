@@ -137,6 +137,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Usiamo i cookie per migliorare il sito',
+            'Utilizziamo i cookie per migliorare la tua esperienza con noi.',
+            'Utilizziamo cookie tecnici e di terze parti',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Utilizziamo solo ingredienti freschi e locali').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
