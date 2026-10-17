@@ -120,6 +120,25 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            // unicredit.it
+            'Consenso all’uso dei cookie Questo Sito utilizza Cookie tecnici, Cookie analytics e Cookie di profilazione',
+            'Questo sito utilizza cookie per migliorare la tua esperienza',
+            'Utilizziamo i cookie tecnici e di profilazione',
+            'Cliccando accetti l’utilizzo dei cookie',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Questo sito utilizza materiali riciclati per le spedizioni').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
