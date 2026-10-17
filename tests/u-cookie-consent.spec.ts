@@ -6,4 +6,7 @@ generateCMPTests('u-cookie-consent', [
     'https://jizztube.tv/',
     'https://hotsexvideos.tv/',
     'https://www.veryladyboy.com/',
+    'https://porno.fm/',
+    'https://www.trannytube.tv/',
+    'https://gayporn.com/',
 ]);
