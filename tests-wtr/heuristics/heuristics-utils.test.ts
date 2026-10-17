@@ -72,6 +72,15 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Italian "utilizza cookie" notices', () => {
+        for (const text of [
+            'Questo sito utilizza cookie essenziali, sia proprietari che di terzi',
+            'Utilizziamo i cookie per migliorare la tua esperienza',
+        ]) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
