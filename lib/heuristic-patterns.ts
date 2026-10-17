@@ -166,6 +166,9 @@ export const DETECT_PATTERNS = [
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
+    /utilizziamo.{0,20}cookie/gi,
+    // e.g. "questo sito utilizza cookie tecnici", "il nostro sito web usa i cookie"
+    /(?:questo|il nostro) sito.{0,20}(?:utilizza|usa).{0,20}cookie/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
