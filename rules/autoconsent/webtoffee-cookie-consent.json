@@ -1,0 +1,61 @@
+{
+    "name": "webtoffee-cookie-consent",
+    "prehideSelectors": [".wcc-overlay,.wcc-consent-container"],
+    "detectCmp": [{ "exists": ".wcc-consent-container" }],
+    "detectPopup": [{ "visible": ".wcc-consent-container" }],
+    "optIn": [
+        {
+            "if": { "exists": ".wcc-consent-container [data-tag=accept-button]" },
+            "then": [{ "waitForThenClick": ".wcc-consent-container [data-tag=accept-button]" }],
+            "else": [
+                {
+                    "if": { "exists": ".wcc-consent-container [data-tag=donotsell-button]" },
+                    "then": [{ "waitForThenClick": ".wcc-consent-container [data-tag=close-button]" }]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".wcc-consent-container [data-tag=reject-button]" },
+            "then": [{ "waitForThenClick": ".wcc-consent-container [data-tag=reject-button]" }],
+            "else": [
+                {
+                    "if": { "exists": ".wcc-consent-container [data-tag=donotsell-button]" },
+                    "then": [
+                        { "waitForThenClick": ".wcc-consent-container [data-tag=donotsell-button]" },
+                        { "waitFor": ".wcc-modal [data-tag=optout-option-toggle]" },
+                        {
+                            "click": ".wcc-modal [data-tag=optout-option-toggle]:not(:checked)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": ".wcc-modal [data-tag=optout-confirm-button]" },
+                        { "waitForThenClick": ".wcc-modal [data-tag=optout-close]", "optional": true }
+                    ],
+                    "else": [
+                        {
+                            "if": { "exists": ".wcc-consent-container [data-tag=settings-button]" },
+                            "then": [
+                                { "click": ".wcc-consent-container [data-tag=settings-button]" },
+                                {
+                                    "waitFor": ".wcc-modal-open input[type=checkbox],.wcc-consent-bar-expand input[type=checkbox],.wcc-modal-open [data-tag=detail-save-button],.wcc-consent-bar-expand [data-tag=detail-save-button]"
+                                },
+                                {
+                                    "click": ".wcc-modal-open input[type=checkbox]:checked:not(:disabled),.wcc-consent-bar-expand input[type=checkbox]:checked:not(:disabled)",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "waitForThenClick": ".wcc-modal [data-tag=detail-save-button],.wcc-consent-bar-expand [data-tag=detail-save-button]"
+                                }
+                            ],
+                            "else": [{ "hide": ".wcc-consent-container,.wcc-overlay" }]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "action:yes" }, { "cookieContains": "advertisement:no" }]
+}
