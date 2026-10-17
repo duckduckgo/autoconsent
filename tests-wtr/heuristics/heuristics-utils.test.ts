@@ -120,6 +120,22 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch "plaatsen" cookie notices', () => {
+        const texts = [
+            'Wij plaatsen functionele cookies om deze website goed te laten werken.',
+            'We vragen uw toestemming voor het plaatsen van analytische cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Wij plaatsen uw bestelling binnen twee werkdagen.').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
