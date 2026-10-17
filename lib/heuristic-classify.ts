@@ -44,6 +44,12 @@ export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_
     return { patterns, snippets };
 }
 
+// same result as checking checkHeuristicPatterns() for patterns, but stops at the first match
+export function hasHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS): boolean {
+    const text = allText.slice(0, TEXT_LIMIT);
+    return detectPatterns.some((p) => text.search(p) !== -1);
+}
+
 export function classifyButtons(buttons: ClassifiableButton[]) {
     for (const button of buttons) {
         button.regexClassification = classifyButtonTextRegex(button.text);
