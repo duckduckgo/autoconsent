@@ -1,0 +1,9 @@
+{
+    "name": "gsb-cookie-banner",
+    "prehideSelectors": [".bhh-cookie-banner"],
+    "detectCmp": [{ "exists": ".bhh-cookie-banner .bhh-cookie-banner__btn--close, .cookie-banner .cookie-banner__btn--close" }],
+    "detectPopup": [{ "visible": ".bhh-cookie-banner__btn--close, .cookie-banner__btn--close", "check": "any" }],
+    "optIn": [{ "waitForThenClick": ".bhh-cookie-banner__btn--all, .cookie-banner__btn--all" }],
+    "optOut": [{ "waitForThenClick": ".bhh-cookie-banner__btn--close, .cookie-banner__btn--close" }],
+    "test": [{ "cookieContains": "cookie-allow-tracking=0" }]
+}
