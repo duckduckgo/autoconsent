@@ -95,6 +95,22 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects German cookie notices using "benutzen"', () => {
+        const texts = [
+            'Diese Webseite benutzt Cookies, um den bestmöglichen Service zu bieten.',
+            'Wir benutzen Cookies, um unsere Website zu verbessern.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Benutzen Sie die Suche, um Jobs in Ihrer Nähe zu finden.').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
