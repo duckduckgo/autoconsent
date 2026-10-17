@@ -1,0 +1,15 @@
+{
+    "name": "txxx-network",
+    "prehideSelectors": [".cookies-policy-block:has(> .cookies-policy-block-text)"],
+    "detectCmp": [{ "exists": ".cookies-policy-block > .cookies-policy-block-text" }],
+    "detectPopup": [{ "visible": ".cookies-policy-block:has(> .cookies-policy-block-text)" }],
+    "optIn": [{ "waitForThenClick": ".cookies-policy-block:has(> .cookies-policy-block-text) > button" }],
+    "optOut": [{ "waitForThenClick": ".cookies-policy-block:has(> .cookies-policy-block-text) > button" }],
+    "test": [
+        {
+            "waitForVisible": ".cookies-policy-block:has(> .cookies-policy-block-text)",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
