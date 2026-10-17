@@ -1,0 +1,30 @@
+{
+    "name": "aspnet-cookieinfo",
+    "cosmetic": false,
+    "prehideSelectors": ["#divCookieInfo"],
+    "detectCmp": [
+        {
+            "exists": "#divCookieInfo #ctl00_CookieInfo_btnLinkNO"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#divCookieInfo"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#divCookieInfo #ctl00_CookieInfo_btnLink"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#divCookieInfo #ctl00_CookieInfo_btnLinkNO"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": " - OFF - "
+        }
+    ]
+}
