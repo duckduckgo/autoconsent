@@ -74,6 +74,24 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
+describe('checkHeuristicPatterns in Swedish', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // sj.se
+            'Vi använder cookies Vissa cookies är nödvändiga för att sj.se ska fungera, både tekniskt och visuellt.',
+            'Webbplatsen använder kakor för att förbättra din upplevelse',
+            'Dessutom använder vi också cookies för annonsanpassning',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder förnybar el i alla våra tåg').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     it('detects "we use <qualifier> cookies" notices', () => {
         const texts = [

@@ -170,6 +170,12 @@ export const DETECT_PATTERNS = [
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
     /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,
+
+    // Swedish (SV)
+    // e.g. "Vi använder cookies", "webbplatsen använder kakor", "använder vi också cookies"
+    // note: \w does not match å/ä/ö, so the optional qualifier uses \S
+    /(?:vi|webbplatsen|sajten|sidan)\s+använder(?:\s+\S+)?\s+(?:cookies|kakor)/gi,
+    /använder vi(?:\s+\S+)?\s+(?:cookies|kakor)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
