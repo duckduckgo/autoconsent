@@ -137,6 +137,15 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch notices offering only default cookies', () => {
+        const text =
+            'Welke cookies mogen we opslaan? Cookies helpen om onze website goed te laten werken. ' +
+            'Alles accepteren Keuze opslaan Alleen standaard cookies';
+        expect(checkHeuristicPatterns(text).patterns.length).to.be.greaterThan(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)

@@ -83,7 +83,7 @@ export const DETECT_PATTERNS = [
     /cookies weigeren/gi,
     /weiger.{0,100}(?:cookies|alles)/gi,
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
-    /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
+    /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële|standaard).{0,100}cookies/gi,
     /wijs alles af/gi,
 
     // Spanish (ES)
