@@ -1,3 +1,15 @@
+# v16.55.0 (Sat Oct 17 2026)
+
+#### Rules
+
+- Rule update: pornhub.com [#1853](https://github.com/duckduckgo/autoconsent/pull/1853) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.54.0 (Fri Oct 16 2026)
 
 #### Rules
