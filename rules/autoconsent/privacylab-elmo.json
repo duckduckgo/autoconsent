@@ -1,0 +1,33 @@
+{
+    "name": "privacylab-elmo",
+    "vendorUrl": "https://www.privacylab.it/",
+    "prehideSelectors": [".c-cookie-banner-main.c-consent-window"],
+    "detectCmp": [
+        {
+            "exists": ".c-cookie-banner .c-cookie-banner-main.c-consent-window"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".c-cookie-banner-main.c-consent-window[style*=\"visibility: visible\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c-cookie-banner-main #banner-accept-btn-1"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c-cookie-banner-main .c-cookie-banner-header-refuse-btn"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "elmo_vc={\"purposes\":[\"necessary\"]"
+        }
+    ]
+}
