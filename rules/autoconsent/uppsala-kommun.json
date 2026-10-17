@@ -1,0 +1,33 @@
+{
+    "name": "uppsala-kommun",
+    "vendorUrl": "https://www.uppsala.se/",
+    "cosmetic": false,
+    "detectCmp": [
+        {
+            "exists": ".cookiealert #button-cookie-confirm-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiealert button[name=AcceptNecessaryCookies], .cookiealert #button-cookie-accept-necessary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiealert button[name=AcceptAllCookies], .cookiealert #button-cookie-accept-all"
+        },
+        {
+            "waitForThenClick": ".cookiealert #button-cookie-confirm-close",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookiealert button[name=AcceptNecessaryCookies], .cookiealert #button-cookie-accept-necessary"
+        },
+        {
+            "waitForThenClick": ".cookiealert #button-cookie-confirm-close",
+            "optional": true
+        }
+    ]
+}
