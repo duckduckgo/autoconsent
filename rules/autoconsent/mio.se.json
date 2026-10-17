@@ -1,0 +1,16 @@
+{
+    "name": "mio.se",
+    "vendorUrl": "https://www.mio.se/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mio\\.se/"
+    },
+    "prehideSelectors": ["[data-testid=\"cookieBanner\"]"],
+    "detectCmp": [{ "exists": "[data-testid=\"cookieBanner\"] [data-testid=\"onlyNecessaryCookies\"]" }],
+    "detectPopup": [{ "visible": "[data-testid=\"cookieBanner\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=\"cookieBanner\"] [data-testid=\"acceptAllCookies\"]" }],
+    "optOut": [{ "waitForThenClick": "[data-testid=\"cookieBanner\"] [data-testid=\"onlyNecessaryCookies\"]" }],
+    "test": [{ "cookieContains": "%22analyticsCookies%22:false" }]
+}
