@@ -137,6 +137,24 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // skandia.se
+            'Kakor för en bättre upplevelse Med kakor (cookies) kan vi erbjuda dig säker inloggning. Godkänn nödvändiga kakor Godkänn alla kakor',
+            'Vi använder kakor för att förbättra din upplevelse',
+            'Webbplatsen använder cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Tjänstepension, försäkring och bank för privatpersoner och företag').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
