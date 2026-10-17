@@ -1,0 +1,25 @@
+{
+    "name": "first-visit-cookie-notice-cosmetic",
+    "cosmetic": true,
+    "prehideSelectors": ["div.first-visit#first-visit"],
+    "detectCmp": [
+        {
+            "exists": "div.first-visit#first-visit a.js-first"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.first-visit#first-visit"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.first-visit#first-visit a.js-first"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div.first-visit#first-visit"
+        }
+    ]
+}
