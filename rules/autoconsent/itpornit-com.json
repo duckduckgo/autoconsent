@@ -1,0 +1,13 @@
+{
+    "name": "itpornit.com",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?itpornit\\.com/"
+    },
+    "prehideSelectors": ["#first-visit"],
+    "detectCmp": [{ "exists": "#first-visit .js-first" }],
+    "detectPopup": [{ "visible": "#first-visit" }],
+    "optIn": [{ "waitForThenClick": "#first-visit .js-first" }],
+    "optOut": [{ "hide": "#first-visit" }],
+    "test": [{ "visible": "#first-visit", "check": "none" }]
+}
