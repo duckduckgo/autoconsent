@@ -95,6 +95,20 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // sverigesradio.se
+            'Cookieinställningar Vi använder nödvändiga kakor för att webbplatsen ska fungera samt analyskakor för att förbättra den.',
+            'Den här webbplatsen använder cookies',
+            'Vi använder kakor för att ge dig en bättre upplevelse',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
