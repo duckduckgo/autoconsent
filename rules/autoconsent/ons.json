@@ -1,0 +1,69 @@
+{
+    "name": "ons",
+    "_metadata": {
+        "vendorUrl": "https://service-manual.ons.gov.uk/design-system/components/cookies-banner"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "detectCmp": [
+        {
+            "exists": "#global-cookie-message.cookies-banner:not(.cookies-banner--hidden) .cookies-banner__button:not(.cookies-banner__button--accept) > button, .ons-cookies-banner .ons-js-reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#global-cookie-message.cookies-banner:not(.cookies-banner--hidden) .cookies-banner__button:not(.cookies-banner__button--accept) > button, .ons-cookies-banner .ons-js-reject-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#global-cookie-message.cookies-banner:not(.cookies-banner--hidden) .js-accept-cookies"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_ONS_1"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#global-cookie-message.cookies-banner:not(.cookies-banner--hidden) .cookies-banner__button--accept > button, .ons-cookies-banner .ons-js-accept-cookies"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#global-cookie-message.cookies-banner:not(.cookies-banner--hidden) .js-reject-cookies"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_ONS_0"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#global-cookie-message.cookies-banner:not(.cookies-banner--hidden) .cookies-banner__button:not(.cookies-banner__button--accept) > button, .ons-cookies-banner .ons-js-reject-cookies"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#global-cookie-message .cookies-banner__button--hide, .ons-cookies-banner .ons-js-hide-button",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "click": "#global-cookie-message .cookies-banner__button--hide, .ons-cookies-banner .ons-js-hide-button",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "'usage':false"
+        }
+    ]
+}

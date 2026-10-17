@@ -180,6 +180,19 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
+    EVAL_ONS_0: () => {
+        // the submit handler reads the pressed button from document.activeElement
+        const button = document.querySelector('#global-cookie-message .js-reject-cookies') as HTMLElement;
+        button.focus();
+        button.click();
+        return true;
+    },
+    EVAL_ONS_1: () => {
+        const button = document.querySelector('#global-cookie-message .js-accept-cookies') as HTMLElement;
+        button.focus();
+        button.click();
+        return true;
+    },
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
