@@ -72,6 +72,12 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects French implied consent notices', () => {
+        const { patterns } = checkHeuristicPatterns('En naviguant sur ce site, vous acceptez les cookies pour améliorer votre expérience.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
