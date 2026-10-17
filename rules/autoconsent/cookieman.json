@@ -1,0 +1,14 @@
+{
+    "name": "cookieman",
+    "_metadata": { "vendorUrl": "https://extensions.typo3.org/extension/cookieman" },
+    "runContext": { "main": true, "frame": false },
+    "prehideSelectors": ["#cookieman-modal"],
+    "detectCmp": [{ "exists": "#cookieman-modal [data-cookieman-accept-none]" }],
+    "detectPopup": [{ "visible": "#cookieman-modal [data-cookieman-accept-none]" }],
+    "optIn": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-all]" }],
+    "optOut": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-none]", "retry": 3, "retryInterval": 500 }],
+    "test": [
+        { "cookieContains": "CookieConsent=" },
+        { "waitForVisible": "#cookieman-modal [data-cookieman-accept-none]", "timeout": 2000, "check": "none" }
+    ]
+}
