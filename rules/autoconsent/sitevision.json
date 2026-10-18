@@ -1,0 +1,63 @@
+{
+    "name": "sitevision",
+    "vendorUrl": "https://www.sitevision.se/",
+    "prehideSelectors": [".sv-cookie-consent-banner", "dialog.sv-cookie-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": ".sv-cookie-consent-banner, dialog.sv-cookie-consent-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".sv-cookie-consent-banner, dialog.sv-cookie-consent-modal[open]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ":is(.sv-cookie-consent-banner, dialog.sv-cookie-consent-modal) form:has(> input[type='hidden'][name='analytics']) button[type='submit']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ":is(.sv-cookie-consent-banner, dialog.sv-cookie-consent-modal) form:has(> input[type='hidden'][name='necessary']) button[type='submit']"
+            },
+            "then": [
+                {
+                    "click": ":is(.sv-cookie-consent-banner, dialog.sv-cookie-consent-modal) form:has(> input[type='hidden'][name='necessary']) button[type='submit']"
+                }
+            ],
+            "else": [
+                {
+                    "click": "dialog.sv-cookie-consent-modal .env-dialog__controls > button[type='button']"
+                },
+                {
+                    "waitForVisible": "dialog.sv-cookie-consent-modal form.env-form input[type='checkbox']",
+                    "check": "any"
+                },
+                {
+                    "if": {
+                        "exists": "dialog.sv-cookie-consent-modal form.env-form input[type='checkbox']:checked:not([disabled])"
+                    },
+                    "then": [
+                        {
+                            "click": "dialog.sv-cookie-consent-modal form.env-form input[type='checkbox']:checked:not([disabled])",
+                            "all": true
+                        }
+                    ]
+                },
+                {
+                    "click": "dialog.sv-cookie-consent-modal button[type='submit'][form]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".sv-cookie-consent-banner, dialog.sv-cookie-consent-modal[open]",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}
