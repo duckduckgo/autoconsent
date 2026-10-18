@@ -74,6 +74,18 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German "website uses cookies" notices', () => {
+    it('detects "Webseite benutzt Cookies" notices', () => {
+        const texts = [
+            'Diese Webseite benutzt Cookies, um den bestmöglichen Service zu bieten.',
+            'Unsere Website nutzt Cookies, um Ihnen ein besseres Erlebnis zu bieten.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     it('detects "we use <qualifier> cookies" notices', () => {
         const texts = [

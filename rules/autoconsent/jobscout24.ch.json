@@ -1,0 +1,57 @@
+{
+    "name": "jobscout24.ch",
+    "_metadata": {
+        "vendorUrl": "https://www.jobscout24.ch/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jobscout24\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-overview .cookie-show-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-overview .cookie-show-settings"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-overview .cookie-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent-overview .cookie-show-settings",
+            "retry": 5,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "#cookie-consent-settings"
+        },
+        {
+            "if": {
+                "exists": "#cookie-consent-settings .consent-choice:not(.disabled) .consent-check.selected, #cookie-consent-settings input[type=checkbox]:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-consent-settings .consent-choice:not(.disabled) .consent-check.selected, #cookie-consent-settings input[type=checkbox]:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-consent-settings .cookie-accept-selection"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "JS24_CONSENT=sn|1"
+        }
+    ]
+}
