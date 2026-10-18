@@ -95,6 +95,26 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with French popups', () => {
+    it('detects "on utilise <qualifier> cookies" notices', () => {
+        const texts = [
+            // revizly.fr
+            "🍪 On utilise quelques cookies pour voir ce qui t'aide vraiment à réviser",
+            'Nous utilisons certains cookies pour mesurer l’audience',
+            'On utilise des cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match when "cookies" is further away', () => {
+        expect(
+            checkHeuristicPatterns('On utilise du beurre dans nos cookies', [/\b(?:on|nous) utilis(?:e|ons)(?: \S+)? cookies/gi]).patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [

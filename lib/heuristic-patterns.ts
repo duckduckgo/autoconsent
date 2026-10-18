@@ -51,6 +51,8 @@ export const DETECT_PATTERNS = [
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
     /nécessaires uniquement/gi,
+    // a single qualifier is common: "quelques", "des", "certains", ...
+    /\b(?:on|nous) utilis(?:e|ons)(?: \S+)? cookies/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
