@@ -1,7 +1,38 @@
 {
     "name": "eu-cookie-compliance-banner",
-    "detectCmp": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
-    "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "body.eu-cookie-compliance-popup-open"
+                },
+                {
+                    "exists": "#sliding-popup .eu-cookie-compliance-banner-info"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "if": {
+                "exists": "body.eu-cookie-compliance-popup-open"
+            },
+            "then": [
+                {
+                    "exists": "body.eu-cookie-compliance-popup-open"
+                }
+            ],
+            "else": [
+                {
+                    "visible": "#sliding-popup .eu-cookie-compliance-banner-info"
+                },
+                {
+                    "cookieContains": "cookie-agreed=",
+                    "negated": true
+                }
+            ]
+        }
+    ],
     "optIn": [
         {
             "click": ".eu-cookie-compliance-banner .agree-button, .eu-cookie-compliance-banner .accept-all"
