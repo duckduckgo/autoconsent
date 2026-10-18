@@ -13,9 +13,28 @@
             "then": [{ "click": "#consent-banner-modal a[href=\"#reject\"]" }],
             "else": [
                 { "waitForThenClick": "#consent-banner-modal a[href=\"#settings\"]" },
-                { "waitForThenClick": "#consent-banner-settings a[href=\"#reject\"]" }
+                { "waitForVisible": "#consent-banner-settings" },
+                {
+                    "if": { "exists": "#consent-banner-settings a[href=\"#reject\"]" },
+                    "then": [{ "click": "#consent-banner-settings a[href=\"#reject\"]" }],
+                    "else": [
+                        {
+                            "click": "#consent-banner-settings input[type=\"checkbox\"]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "#consent-banner-settings a[href=\"#save\"]" }
+                    ]
+                }
             ]
         }
     ],
-    "test": [{ "visible": "#consent-banner-main", "check": "none" }]
+    "test": [
+        {
+            "any": [
+                { "visible": "#consent-banner-main", "check": "none" },
+                { "visible": "#consent-banner-modal, #consent-banner-settings", "check": "none" }
+            ]
+        }
+    ]
 }
