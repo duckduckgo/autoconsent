@@ -1,0 +1,33 @@
+{
+    "name": "txxx-network-cookie-notice",
+    "vendorUrl": "https://txxx.com/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ":is(.header__cookie:has(> [class^='header__cookie-']), .cookie-notify:has(> .text), .cookies-policy-block:has(> .cookies-policy-block-text)) > button.btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ":is(.header__cookie, .cookie-notify, .cookies-policy-block):has(> button.btn)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ":is(.header__cookie, .cookie-notify, .cookies-policy-block) > button.btn"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only banner: OK is the only control and acknowledges it",
+            "waitForThenClick": ":is(.header__cookie, .cookie-notify, .cookies-policy-block) > button.btn"
+        },
+        {
+            "waitForVisible": ":is(.header__cookie, .cookie-notify, .cookies-policy-block):has(> button.btn)",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ]
+}
