@@ -137,6 +137,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Danish popups', () => {
+    it('detects Danish cookie notices', () => {
+        const texts = [
+            'Nyidanmark.dk bruger cookies til statistik og optimering af indhold.',
+            'Vi anvender cookies for at forbedre din oplevelse',
+            'Denne hjemmeside benytter cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Danish text', () => {
+        expect(checkHeuristicPatterns('Du vil ansøge om at besøge, bo eller arbejde i Danmark').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -233,6 +250,14 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
+    it('matches Danish reject variants', () => {
+        expect(classifyButtonTextRegex('Du kan sige nej tak til statistik')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nej tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Accepter kun nødvendige cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tak')).to.not.equal('reject');
     });
 
     it('returns other for empty string', () => {
