@@ -1,0 +1,38 @@
+{
+    "name": "r42-consent-iframe",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["#consent_iframe", ".stsp__cookie-container #declineButton"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent_iframe"
+        },
+        {
+            "visible": ["#consent_iframe", ".stsp__cookie-container #declineButton"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#consent_iframe", ".stsp__cookie-container #st_popup_acceptButton"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#consent_iframe", ".stsp__cookie-container #declineButton"],
+            "comment": "Alleen functioneel / Alleen noodzakelijk"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_svs=%7B%22v%22%3A1%2C%22c%22%3A%7B%221%22%3Atrue%2C%222%22%3Afalse%2C%223%22%3Afalse"
+        }
+    ]
+}
