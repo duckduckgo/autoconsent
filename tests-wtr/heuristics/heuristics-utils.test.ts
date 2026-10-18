@@ -120,6 +120,22 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects German cookie notices', () => {
+        const texts = [
+            'Wir setzen Cookies ein, um Ihnen die Nutzung unserer Webseite zu erleichtern.',
+            'Wir setzen auf unserer Website Cookies ein.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Wir setzen uns für frische Produkte aus der Region ein.').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [

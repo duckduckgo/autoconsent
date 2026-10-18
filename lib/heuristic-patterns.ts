@@ -60,6 +60,7 @@ export const DETECT_PATTERNS = [
     /cookies.{0,100}und.{0,100}andere/gi,
     /verwendung.{0,100}von.{0,100}cookies/gi,
     /wir.{0,100}nutzen.{0,100}cookies/gi,
+    /wir.{0,100}setzen.{0,100}cookies/gi,
     /verwendet.{0,100}cookies/gi,
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
