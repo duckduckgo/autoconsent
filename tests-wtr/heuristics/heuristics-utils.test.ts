@@ -120,6 +120,23 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Vi använder oss av kakor (cookies) för att vår webbplats ska fungera bra för dig.',
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Webbplatsen använder kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder smart teknik för idrottsföreningar').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
