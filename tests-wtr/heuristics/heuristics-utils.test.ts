@@ -120,6 +120,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Vi använder nödvändiga cookies för att vår app ska fungera som den ska.',
+            'Vi använder kakor för att förbättra din upplevelse',
+            'Denna webbplats använder cookies',
+            'Genom att fortsätta godkänner du användningen av kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder bara ekologiska råvaror när vi bakar våra kakor').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
