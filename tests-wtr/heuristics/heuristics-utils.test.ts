@@ -72,6 +72,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "we and our <qualifier> partners" cookie notices', () => {
+        const { snippets } = checkHeuristicPatterns(
+            'We and our advertising partners use cookies for ad measurement, personalised ads and analytics.',
+        );
+
+        expect(snippets).to.include('We and our advertising partners use cookies');
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {

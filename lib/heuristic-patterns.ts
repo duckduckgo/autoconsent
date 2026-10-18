@@ -17,7 +17,7 @@ export const DETECT_PATTERNS = [
     /such as cookies/gi,
     /read more about.{0,100}cookies/gi,
     /consent to.{0,100}cookies/gi,
-    /we and our partners.{0,100}cookies/gi,
+    /we and our (?:\w+ )?partners.{0,100}cookies/gi,
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
