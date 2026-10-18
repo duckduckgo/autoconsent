@@ -72,6 +72,12 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "uses cookies to provide" notices', () => {
+        const { patterns } = checkHeuristicPatterns("Queen's University uses cookies to provide the best possible online experience.");
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
