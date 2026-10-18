@@ -170,6 +170,14 @@ export const DETECT_PATTERNS = [
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
     /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,
+
+    // Swedish (SV)
+    // e.g. "vi använder cookies", "webbplatsen använder nödvändiga kakor", "användning av cookies"
+    /(?:vi|webbplatsen|webbsidan|sajten|sidan) använder (?:\S+ )?(?:cookies|kakor)/gi,
+    /användning(?:en)? av (?:cookies|kakor)/gi,
+    /(?:dess|våra) partners.{0,100}(?:cookies|kakor)/gi,
+    // IAB TCF purpose 1
+    /lagra och\/eller (?:få åtkomst till|komma åt) information/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [

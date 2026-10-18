@@ -137,6 +137,25 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'momondo och dess partners vill använda cookies eller liknande teknik för att lagra och/eller komma åt information på och om din enhet',
+            'Lagra och/eller få åtkomst till information på en enhet',
+            'Vi använder cookies för att förbättra din upplevelse.',
+            'Webbplatsen använder nödvändiga kakor.',
+            'Läs mer om vår användning av cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Sök och jämför billiga flyg online').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
