@@ -72,6 +72,13 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "<brand> uses cookies. To know more" notices', () => {
+        const { patterns, snippets } = checkHeuristicPatterns('Upornia uses cookies. To know more, read our Cookies policy\nOk');
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets).to.include('uses cookies. To know more');
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
