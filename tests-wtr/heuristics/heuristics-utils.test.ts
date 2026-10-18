@@ -95,6 +95,25 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Vi använder nödvändiga kakor för att webbplatsen ska fungera',
+            'Vi använder oss av cookies',
+            'Webbplatsen använder cookies för statistik',
+            'Genom att surfa vidare godkänner du användningen av kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder bara originaldelar till din bil').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
