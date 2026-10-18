@@ -1,0 +1,13 @@
+{
+    "name": "swissquote",
+    "vendorUrl": "https://www.swissquote.ch/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?swissquote\\.ch/"
+    },
+    "prehideSelectors": [".SecuritiesConsentManagementPlugin-ConsentForm"],
+    "detectCmp": [{ "exists": ".SecuritiesConsentManagementPlugin-ConsentForm" }],
+    "detectPopup": [{ "visible": ".SecuritiesConsentManagementPlugin-ConsentForm" }],
+    "optIn": [{ "waitForThenClick": ".SecuritiesConsentManagementPlugin-ConsentForm__controls__allow-all" }],
+    "optOut": [{ "waitForThenClick": ".SecuritiesConsentManagementPlugin-ConsentForm__controls__allow-necessary" }],
+    "test": [{ "eval": "EVAL_SWISSQUOTE_TEST" }]
+}
