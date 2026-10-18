@@ -1,0 +1,26 @@
+{
+    "name": "askas",
+    "_metadata": {
+        "vendorUrl": "https://www.askas.se/"
+    },
+    "prehideSelectors": ["#cookie_consent"],
+    "detectCmp": [{ "exists": "#cookie_consent #cookie_consent_manage_rec, #cookie_consent #cookie_consent_manager_confirm" }],
+    "detectPopup": [{ "visible": "#cookie_consent" }],
+    "optIn": [{ "waitForThenClick": "#cookie_consent #cookie_consent_manage_rec, #cookie_consent #cookie_consent_manager_accept" }],
+    "optOut": [
+        {
+            "if": { "visible": "#cookie_consent .cookie_consent_manager_accept_req", "check": "any" },
+            "then": [{ "waitForThenClick": "#cookie_consent .cookie_consent_manager_accept_req" }],
+            "else": [
+                {
+                    "if": { "visible": "#cookie_consent #cookie_consent_manage" },
+                    "then": [{ "click": "#cookie_consent #cookie_consent_manage" }]
+                },
+                { "waitForVisible": "#cookie_consent_manager" },
+                { "click": "#cookie_consent_manager input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#cookie_consent_manager_confirm" }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_ASKAS_TEST" }]
+}
