@@ -137,6 +137,26 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            // cinemap.it
+            "Questo sito utilizza cookie tecnici necessari al funzionamento e cookie analitici (Google Analytics) per migliorare l'esperienza di navigazione.",
+            'Questo sito web utilizza i cookie per migliorare la tua esperienza',
+            'Il nostro sito usa cookie di terze parti',
+            'Utilizziamo i cookie per personalizzare contenuti e annunci',
+            'Usiamo cookie tecnici e analitici',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Questo sito aggrega gli orari di tutti i cinema, città per città').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
