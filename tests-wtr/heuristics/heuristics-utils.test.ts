@@ -137,6 +137,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Vi använder oss av cookies för att anpassa och förbättra din upplevelse på vår webbplats.',
+            'Vi använder cookies för att ge dig en bättre upplevelse',
+            'Den här webbplatsen använder kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder vår kunskap för att hjälpa dig med ditt bolån').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
