@@ -101,6 +101,15 @@ describe('getActionablePopups', () => {
             expect(popups[0].buttons.filter((b) => b.regexClassification === 'acknowledge')).to.have.length(1);
         });
 
+        it('finds Italian acknowledge-only popup', () => {
+            showPopup('popup-acknowledge-italian');
+
+            const popups = getActionablePopups('tier1');
+
+            expect(popups.length).to.equal(1);
+            expect(popups[0].regexClassification).to.equal('tier1');
+        });
+
         it('finds popup with multiple reject buttons', () => {
             showPopup('popup-multiple-reject');
 
