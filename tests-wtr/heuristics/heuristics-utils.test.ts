@@ -120,6 +120,19 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Polish popups', () => {
+    it('detects Polish cookie notices with quotation marks', () => {
+        const texts = [
+            'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
+            'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
+            'Ta strona wykorzystuje pliki cookie.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
