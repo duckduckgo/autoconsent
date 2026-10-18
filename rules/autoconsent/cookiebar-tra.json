@@ -1,0 +1,15 @@
+{
+    "name": "cookiebar-tra",
+    "vendorUrl": "https://www.fascicolosanitario.gov.it/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookiebar-tra"],
+    "detectCmp": [{ "exists": "#cookiebar-tra #cb-RejectAll" }],
+    "detectPopup": [{ "visible": "#cookiebar-tra #cb-RejectAll" }],
+    "optIn": [{ "waitForThenClick": "#cookiebar-tra #cb-AcceptAll" }],
+    "optOut": [{ "waitForThenClick": "#cookiebar-tra #cb-RejectAll" }],
+    "test": [{ "waitForVisible": "#cookiebar-tra #cb-RejectAll", "check": "none", "timeout": 1000 }]
+}
