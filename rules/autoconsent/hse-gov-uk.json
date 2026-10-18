@@ -1,0 +1,33 @@
+{
+    "name": "hse-gov-uk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?hse\\.gov\\.uk/"
+    },
+    "prehideSelectors": [".hse-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".hse-cookie-banner #rejectAllCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".hse-cookie-banner #rejectAllCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".hse-cookie-banner #acceptAllCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the page reloads after the click and shows a confirmation, handled by hse-gov-uk-confirmation",
+            "waitForThenClick": ".hse-cookie-banner #rejectAllCookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_status=rejected"
+        }
+    ]
+}
