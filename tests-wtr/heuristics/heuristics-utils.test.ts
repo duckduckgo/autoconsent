@@ -74,6 +74,25 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'momondo och dess partners vill använda cookies eller liknande teknik för att lagra och/eller komma åt information',
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Den här webbplatsen använder kakor',
+            'Vi tillåter också användning av cookies från tredje part',
+            'Godkänn alla Avvisa alla',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Sök och jämför billiga flyg online. Vart vill du resa?').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     it('detects "we use <qualifier> cookies" notices', () => {
         const texts = [
