@@ -137,6 +137,24 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Questo sito utilizza cookie tecnici e di terze parti',
+            'Utilizziamo i cookie per migliorare la tua esperienza',
+            'La navigazione comporta la ricezione di cookie tecnici e, previo tuo consenso, di cookie di profilazione',
+            'Selezionando il tasto "Rifiuta tutti", proseguirai la navigazione',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Le ultime notizie su fisco, tasse e dichiarazione dei redditi').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
