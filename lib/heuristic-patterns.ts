@@ -167,6 +167,11 @@ export const DETECT_PATTERNS = [
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
 
+    // Swedish (SV)
+    // e.g. "Vi använder nödvändiga kakor", "Den här webbplatsen använder cookies", "På webbplatsen används kakor"
+    /använd(?:er|s|a)?.{0,60}(?:kakor|cookies)/gi,
+    /(?:kakor|cookies).{0,60}används/gi,
+
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
     /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,

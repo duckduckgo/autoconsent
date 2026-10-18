@@ -137,6 +137,27 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // konsumentverket.se
+            'Om kakor (Cookies)\nVi använder nödvändiga kakor för att webbplatsen ska fungera bra för dig. Samtycker du till detta?',
+            'Den här webbplatsen använder cookies för att förbättra din upplevelse.',
+            'På den här webbplatsen används kakor.',
+            'Kakor används för att webbplatsen ska fungera.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(
+            checkHeuristicPatterns('Vi gör konsumenternas vardag bättre. Använd vår söktjänst för att hitta svar.').patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
