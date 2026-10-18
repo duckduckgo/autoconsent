@@ -120,6 +120,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Questo sito utilizza cookie essenziali, sia proprietari che di terzi, per permetterti di utilizzare tutte le sue funzionalità',
+            'Il nostro sito web usa i cookie tecnici',
+            'Utilizziamo i cookie per migliorare la tua esperienza',
+            'Usiamo cookie di terze parti',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Questo sito utilizza materiali riciclati per le confezioni').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
