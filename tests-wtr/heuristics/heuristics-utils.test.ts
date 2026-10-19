@@ -82,6 +82,8 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
             'We use optional cookies to measure traffic',
             'We use analytics cookies and similar technologies',
             'We serve necessary cookies only',
+            // singular "cookie"
+            'We use a cookie to remember you are 18+ and keep your preferences on this device.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -92,6 +94,10 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
         expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
             0,
         );
+    });
+
+    it('does not match words starting with "cookie"', () => {
+        expect(checkHeuristicPatterns('We use cookiecutter templates').patterns).to.have.length(0);
     });
 });
 
