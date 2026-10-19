@@ -137,6 +137,24 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Den här webbplatsen använder kakor',
+            'När du accepterar cookies från våra partner kan det innebära att data överförs till länder utanför EU.',
+            'Genom att fortsätta godkänner du att vi sparar kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Välkommen till Göteborg, den vänliga staden på Sveriges västkust').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
