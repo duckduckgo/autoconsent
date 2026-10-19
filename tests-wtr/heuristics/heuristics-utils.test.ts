@@ -82,6 +82,7 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
             'We use optional cookies to measure traffic',
             'We use analytics cookies and similar technologies',
             'We serve necessary cookies only',
+            'We use Google Analytics cookies to understand which pages and tools are useful.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -89,9 +90,9 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 
     it('does not match when "cookies" is further away', () => {
-        expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
-            0,
-        );
+        expect(
+            checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+){0,2} cookies/gi]).patterns,
+        ).to.have.length(0);
     });
 });
 
