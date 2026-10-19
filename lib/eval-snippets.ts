@@ -146,6 +146,25 @@ export const snippets = {
         document
             .querySelectorAll('button[data-cookiefirst-accent-color=true][role=checkbox]:not([disabled])')
             .forEach((i) => i.getAttribute('aria-checked') === 'true' && i.click()) || true,
+    // banner button actions are configured per site, so set consent levels via the public API
+    EVAL_COOKIEREPORTS_OPT_OUT: () => {
+        const cr = window._cookiereports;
+        if (!cr?.saveConsent) return false;
+        cr.saveConsent({ 1: true, 2: false, 3: false, 4: false, 5: false });
+        cr.hideBanner();
+        // some sites navigate on the consent event, so let the eval return first
+        setTimeout(() => cr.processConsent('banner', { trigger: 'ok' }), 0);
+        return true;
+    },
+    EVAL_COOKIEREPORTS_OPT_IN: () => {
+        const cr = window._cookiereports;
+        if (!cr?.saveConsent) return false;
+        cr.saveConsent({ 1: true, 2: true, 3: true, 4: true, 5: true });
+        cr.hideBanner();
+        // some sites navigate on the consent event, so let the eval return first
+        setTimeout(() => cr.processConsent('banner', { trigger: 'ok' }), 0);
+        return true;
+    },
     EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
