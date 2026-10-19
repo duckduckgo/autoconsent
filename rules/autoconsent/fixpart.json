@@ -1,0 +1,12 @@
+{
+    "name": "fixpart",
+    "prehideSelectors": [".fp-cookie-modal"],
+    "detectCmp": [{ "exists": ".fp-cookie-modal .cookiebar" }],
+    "detectPopup": [{ "visible": ".fp-cookie-modal .cookiebar" }],
+    "optIn": [{ "waitForThenClick": ".fp-cookie-modal .cookiebar__buttons .cookie-accept" }],
+    "optOut": [
+        { "waitForThenClick": ".fp-cookie-modal .cookiebar a.cookie-essentials" },
+        { "waitForVisible": ".fp-cookie-modal", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=essentials" }]
+}
