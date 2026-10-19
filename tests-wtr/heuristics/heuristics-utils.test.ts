@@ -120,6 +120,25 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Välj nedan vilka cookies du tillåter oss att använda. Acceptera alla Endast nödvändiga',
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Vi använder nödvändiga kakor på den här sidan',
+            'Webbplatsen använder cookies',
+            'Godkänn alla Bara nödvändiga',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Se din flyttanmälan digitalt och enkelt här.').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
