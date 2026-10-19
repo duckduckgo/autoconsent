@@ -120,6 +120,25 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // konsumentvalet.se
+            'Cookies på Konsumentvalet Vi använder cookies för att sajten ska fungera och – om du tillåter – för anonym statistik',
+            'Webbplatsen använder kakor för att förbättra din upplevelse',
+            'Vi använder nödvändiga cookies och analyscookies',
+            'Genom att fortsätta godkänner du användningen av cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi testar och jämför tusentals svenska produkter').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
