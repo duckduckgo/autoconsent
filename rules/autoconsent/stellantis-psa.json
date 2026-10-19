@@ -1,0 +1,50 @@
+{
+    "name": "stellantis-psa",
+    "vendorUrl": "https://www.stellantis.com/",
+    "prehideSelectors": ["#_psaihm_main_div", "#_psaihm_overlay"],
+    "detectCmp": [
+        {
+            "exists": "#_psaihm_main_div #_psaihm_id_accept_all_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#_psaihm_main_div #_psaihm_id_accept_all_btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#_psaihm_id_accept_all_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#_psaihm_refuse_all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#_psaihm_refuse_all"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#_psaihm_continue_without_accepting"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#_psaihm_main_div",
+            "check": "none",
+            "timeout": 3000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_psac_gdpr_consent_given=1"
+        },
+        {
+            "cookieContains": "_psac_gdpr_consent_purposes=;"
+        }
+    ]
+}
