@@ -72,6 +72,16 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
+            'Webbplatsen använder kakor för att förbättra din upplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
