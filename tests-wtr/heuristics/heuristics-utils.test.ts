@@ -95,6 +95,23 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with analytics notices', () => {
+    it('detects "we use <qualifier> analytics" notices without the word cookie', () => {
+        const texts = [
+            'We use privacy-friendly analytics to see which health guides are most useful. No ads, no profiling.',
+            'We use Google Analytics to understand how visitors use our site.',
+            'We use analytics for measuring traffic',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated analytics text', () => {
+        expect(checkHeuristicPatterns('We use data analytics tools in our consulting work').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
