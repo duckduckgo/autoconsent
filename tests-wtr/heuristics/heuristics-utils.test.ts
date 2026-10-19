@@ -120,6 +120,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'På du.se använder vi kakor (cookies) för att ge dig en bra upplevelse på vår webbplats.',
+            'Vi använder kakor för att förbättra webbplatsen',
+            'Webbplatsen använder nödvändiga cookies',
+            'Den här sajten använder sig av kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder mjöl och socker när vi bakar').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
