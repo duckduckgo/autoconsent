@@ -120,6 +120,22 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian consent notices', () => {
+        const texts = [
+            'Usiamo Google Analytics per capire come viene usato il sito. Li attiviamo solo con il tuo consenso.',
+            'Non installiamo cookie di profilazione senza il vostro consenso.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Ingegnere informatico a Palermo: consulenza e sviluppo software').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
