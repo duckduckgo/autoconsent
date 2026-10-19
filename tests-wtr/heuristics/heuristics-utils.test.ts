@@ -72,6 +72,17 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // gavle.se
+            'Kakor på gavle.se Vi använder nödvändiga kakor (cookies) för att webbplatsen ska fungera.',
+            'Webbplatsen använder cookies för att förbättra din upplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
