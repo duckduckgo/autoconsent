@@ -120,6 +120,23 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Questo sito utilizza cookie tecnici necessari per la fruizione dei contenuti.',
+            'Utilizziamo i cookie per migliorare la tua esperienza.',
+            'Cliccando "Accetta" acconsenti all\'uso dei cookie.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Aiutiamo le buone idee a diventare grandi').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
