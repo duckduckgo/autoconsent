@@ -1,0 +1,35 @@
+{
+    "name": "wp-cookie-bar",
+    "vendorUrl": "https://wordpress.org/plugins/cookie-bar/",
+    "prehideSelectors": ["#eu-cookie-bar"],
+    "cosmetic": true,
+    "detectCmp": [{ "visible": "#eu-cookie-bar #euCookieAcceptWP" }],
+    "detectPopup": [{ "visible": "#eu-cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "#euCookieAcceptWP" }],
+    "optOut": [
+        { "hide": "#eu-cookie-bar" },
+        {
+            "if": { "exists": "script[src*='adsbygoogle.js'],script[src*='fundingchoicesmessages.google.com']" },
+            "then": [
+                {
+                    "waitFor": ".fc-dialog-container .fc-cta-do-not-consent,.fc-dialog-container .fc-cta-manage-options",
+                    "timeout": 5000,
+                    "optional": true
+                },
+                {
+                    "if": { "exists": ".fc-dialog-container .fc-cta-do-not-consent,.fc-dialog-container .fc-cta-manage-options" },
+                    "then": [
+                        { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                        {
+                            "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "click": ".fc-confirm-choices", "optional": true }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#eu-cookie-bar", "check": "none" }]
+}
