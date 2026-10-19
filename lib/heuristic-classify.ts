@@ -31,7 +31,7 @@ const TEXT_LIMIT = 100000;
 const DEFAULT_WINDOW = 150;
 
 type CompiledNegative = ContextNegative & { hits: (context: string) => boolean; applies: Set<string> | null };
-type CompiledPattern = { id: string; pattern: RegExp; input?: HeuristicInput; literals: string[] };
+type CompiledPattern = { id: string; pattern: RegExp; global: RegExp; input?: HeuristicInput; literals: string[] };
 type CompiledPatterns = { detect: CompiledPattern[]; literals: ReturnType<typeof literalIndex> };
 
 // a regex without the global and sticky flags, so `test` keeps no state between calls
@@ -39,13 +39,15 @@ const stateless = (re: RegExp) => new RegExp(re.source, re.flags.replace(/[gy]/g
 
 const compiledPatterns = new WeakMap<DetectPattern[], CompiledPatterns>();
 const compiledNegatives = new WeakMap<ContextNegative[], CompiledNegative[]>();
+const compiledNeverMatch = new WeakMap<NeverMatchPattern[], { pattern: RegExp; unless: RegExp | null }[]>();
 
 function compilePatterns(detectPatterns: DetectPattern[]): CompiledPatterns {
     let compiled = compiledPatterns.get(detectPatterns);
     if (!compiled) {
         const detect = detectPatterns.map((p) => {
             const { pattern, input } = p instanceof RegExp ? { pattern: p, input: undefined } : p;
-            return { id: pattern.toString(), pattern, input, literals: requiredLiterals(pattern) };
+            const global = pattern.flags.includes('g') ? pattern : new RegExp(pattern.source, `${pattern.flags}g`);
+            return { id: pattern.toString(), pattern, global, input, literals: requiredLiterals(pattern) };
         });
         compiled = { detect, literals: literalIndex(detect.flatMap((d) => d.literals)) };
         compiledPatterns.set(detectPatterns, compiled);
@@ -115,8 +117,8 @@ export function checkHeuristicPatterns(
             continue;
         }
         if (d.literals.length) {
-            present ??= compiled.literals.present(allText.toLowerCase());
-            if (!d.literals.some((l) => present?.has(l))) {
+            const found = (present ??= compiled.literals.present(allText.toLowerCase()));
+            if (!d.literals.some((l) => found.has(l))) {
                 continue;
             }
         }
@@ -126,10 +128,10 @@ export function checkHeuristicPatterns(
         }
         const own = applicable.filter((n) => !n.applies || n.applies.has(d.id));
         if (own.length) {
-            const all = new RegExp(d.pattern.source, d.pattern.flags.includes('g') ? d.pattern.flags : `${d.pattern.flags}g`);
             const dropped = new Set<string>();
             let kept = false;
-            for (const m of allText.matchAll(all)) {
+            // matchAll clones the regex, so the shared global copy keeps no state
+            for (const m of allText.matchAll(d.global)) {
                 const start = m.index ?? 0;
                 const hit = own.find((n) => n.hits(negativeContext(allText, start, start + m[0].length, n)));
                 if (!hit) {
@@ -165,11 +167,17 @@ export function isExcludedPopup(popupText: string, excludePatterns: NeverMatchPa
     if (!popupText) {
         return false;
     }
+    let compiled = compiledNeverMatch.get(excludePatterns);
+    if (!compiled) {
+        compiled = excludePatterns.map((p) =>
+            p instanceof RegExp
+                ? { pattern: stateless(p), unless: null }
+                : { pattern: stateless(p.pattern), unless: p.unless ? stateless(p.unless) : null },
+        );
+        compiledNeverMatch.set(excludePatterns, compiled);
+    }
     const truncated = popupText.slice(0, TEXT_LIMIT);
-    return excludePatterns.some((p) => {
-        const { pattern, unless } = p instanceof RegExp ? { pattern: p, unless: undefined } : p;
-        return stateless(pattern).test(truncated) && !(unless && stateless(unless).test(truncated));
-    });
+    return compiled.some(({ pattern, unless }) => pattern.test(truncated) && !(unless && unless.test(truncated)));
 }
 
 export function classifyPopup(buttons: ClassifiableButton[]): PopupClassification {

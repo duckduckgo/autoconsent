@@ -4,6 +4,15 @@
  * without changing any result.
  */
 
+/** The index of the `]` closing the character class that opens at `open`, skipping escapes. */
+function classEnd(src: string, open: number): number {
+    let i = open + 1;
+    while (i < src.length && src[i] !== ']') {
+        i += src[i] === '\\' ? 2 : 1;
+    }
+    return i;
+}
+
 /** The index of the `)` closing the group that opens at `open`, skipping escapes and classes. */
 function groupEnd(src: string, open: number): number {
     let depth = 0;
@@ -12,9 +21,7 @@ function groupEnd(src: string, open: number): number {
         if (c === '\\') {
             i++;
         } else if (c === '[') {
-            while (i < src.length && src[i] !== ']') {
-                i += src[i] === '\\' ? 2 : 1;
-            }
+            i = classEnd(src, i);
         } else if (c === '(') {
             depth++;
         } else if (c === ')' && --depth === 0) {
@@ -33,9 +40,7 @@ function alternatives(src: string): string[] {
         if (c === '\\') {
             i++;
         } else if (c === '[') {
-            while (i < src.length && src[i] !== ']') {
-                i += src[i] === '\\' ? 2 : 1;
-            }
+            i = classEnd(src, i);
         } else if (c === '(') {
             i = groupEnd(src, i);
         } else if (c === '|') {
@@ -102,12 +107,8 @@ function literalsOf(src: string): string[] {
                 i = quantifier(i + 2).next;
             }
         } else if (c === '[') {
-            let j = i + 1;
-            while (j < src.length && src[j] !== ']') {
-                j += src[j] === '\\' ? 2 : 1;
-            }
             end();
-            i = quantifier(j + 1).next;
+            i = quantifier(classEnd(src, i) + 1).next;
         } else if (c === '(') {
             end();
             const close = groupEnd(src, i);
