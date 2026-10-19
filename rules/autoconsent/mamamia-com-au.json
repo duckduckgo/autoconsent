@@ -1,0 +1,36 @@
+{
+    "name": "mamamia-com-au",
+    "vendorUrl": "https://www.mamamia.com.au/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mamamia\\.com\\.au/"
+    },
+    "prehideSelectors": [".consent-banner"],
+    "detectCmp": [{ "exists": ".consent-banner,.fc-dialog-container" }],
+    "detectPopup": [{ "any": [{ "visible": ".consent-banner" }, { "exists": ".fc-dialog-container" }] }],
+    "optIn": [
+        {
+            "if": { "exists": ".fc-dialog-container" },
+            "then": [{ "click": ".fc-cta-consent" }, { "waitForVisible": ".consent-banner", "timeout": 5000, "optional": true }]
+        },
+        {
+            "if": { "exists": ".consent-banner" },
+            "then": [{ "waitForThenClick": ".consent-banner button" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true },
+                { "waitForVisible": ".consent-banner", "timeout": 5000, "optional": true }
+            ]
+        },
+        {
+            "if": { "exists": ".consent-banner" },
+            "then": [{ "waitForThenClick": ".consent-banner button" }]
+        }
+    ],
+    "test": [{ "waitForVisible": ".consent-banner,.fc-dialog-container", "check": "none", "timeout": 2000 }]
+}
