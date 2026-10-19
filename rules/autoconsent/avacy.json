@@ -1,0 +1,15 @@
+{
+    "name": "avacy",
+    "vendorUrl": "https://avacy.eu/",
+    "prehideSelectors": [".as-oil", ".AvacyBanner"],
+    "detectCmp": [{ "exists": ".as-oil, .AvacyBanner" }],
+    "detectPopup": [{ "visible": ".as-oil, .AvacyBanner", "check": "any" }],
+    "optIn": [{ "waitForThenClick": ".as-oil .as-js-optin, .AvacyBanner .as-js-optin, .AvacyBanner .as-js-accept-all" }],
+    "optOut": [
+        {
+            "if": { "visible": ".as-oil .as-js-reject-all, .AvacyBanner .as-js-reject-all", "check": "any" },
+            "then": [{ "waitForThenClick": ".as-oil .as-js-reject-all, .AvacyBanner .as-js-reject-all" }],
+            "else": [{ "waitForThenClick": ".as-oil .as-js-close-banner, .AvacyBanner .as-js-close-banner" }]
+        }
+    ]
+}

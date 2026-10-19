@@ -1,0 +1,32 @@
+{
+    "name": "musti",
+    "vendorUrl": "https://www.mustigroup.com/",
+    "prehideSelectors": ["#cookie_consent_wrapper #cookie_consent.privacy_headsup"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_consent_wrapper #submit_privacy_consent1"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_consent_wrapper #cookie_consent.privacy_headsup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_consent #submit_privacy_consent3"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_consent #cookie_only_necessary2"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie_consent_wrapper #cookie_consent.privacy_headsup",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

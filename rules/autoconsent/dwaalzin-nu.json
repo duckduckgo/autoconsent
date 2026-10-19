@@ -1,0 +1,13 @@
+{
+    "name": "dwaalzin.nu",
+    "vendorUrl": "https://dwaalzin.nu/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dwaalzin\\.nu/"
+    },
+    "prehideSelectors": [".cc-type-info[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "detectPopup": [{ "visible": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "optIn": [{ "waitForThenClick": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "optOut": [{ "waitForThenClick": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "test": [{ "cookieContains": "cookieconsent_status=dismiss" }]
+}

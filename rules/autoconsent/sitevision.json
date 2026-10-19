@@ -1,0 +1,14 @@
+{
+    "name": "sitevision",
+    "vendorUrl": "https://www.sitevision.se/",
+    "prehideSelectors": [".sv-cookie-consent-banner"],
+    "detectCmp": [{ "exists": ".sv-cookie-consent-banner" }],
+    "detectPopup": [{ "visible": ".sv-cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": ".sv-cookie-consent-banner form:has(input[name=\"analytics\"]) button[type=\"submit\"]" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".sv-cookie-consent-banner form:has(input[name=\"necessary\"]):not(:has(input[name=\"analytics\"])) button[type=\"submit\"]"
+        }
+    ],
+    "test": [{ "waitForVisible": ".sv-cookie-consent-banner", "check": "none", "timeout": 2000 }]
+}

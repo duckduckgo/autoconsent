@@ -1,0 +1,57 @@
+{
+    "name": "eset",
+    "vendorUrl": "https://www.eset.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookiebar[data-cookie-name=\"eset_cookie-bar\"]"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebar[data-cookie-name=\"eset_cookie-bar\"] #cc-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebar[data-cookie-name=\"eset_cookie-bar\"] #cc-accept"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebar #cc-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookiebar #cc-decline"
+            },
+            "then": [
+                {
+                    "click": "#cookiebar #cc-decline"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cookiebar #cc-manage"
+                },
+                {
+                    "waitForVisible": "#cookiebar #cc-accept2"
+                },
+                {
+                    "click": "#cookiebar .cc-category input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#cookiebar #cc-accept2"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "wait": 2000
+        },
+        {
+            "cookieContains": "\"marketing\":0"
+        }
+    ]
+}

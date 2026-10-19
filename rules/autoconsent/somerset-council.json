@@ -1,0 +1,16 @@
+{
+    "name": "somerset-council",
+    "_metadata": {
+        "vendorUrl": "https://www.somerset.gov.uk/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "detectCmp": [{ "exists": ".cookies-banner .cookies-banner__button-group .cookies-banner__reject" }],
+    "detectPopup": [{ "visible": ".cookies-banner .cookies-banner__reject" }],
+    "optIn": [{ "waitForThenClick": ".cookies-banner .cookies-banner__accept" }],
+    "optOut": [{ "waitForThenClick": ".cookies-banner .cookies-banner__reject" }],
+    "test": [{ "cookieContains": "_SC_analytics=reject" }]
+}

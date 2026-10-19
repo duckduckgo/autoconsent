@@ -1,0 +1,9 @@
+{
+    "name": "cookie-bar-frame",
+    "prehideSelectors": ["#cookie-bar"],
+    "detectCmp": [{ "exists": "#cookie-bar .cookie-bar-frame #decline" }],
+    "detectPopup": [{ "visible": "#cookie-bar .cookie-bar-frame" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar .cookie-bar-frame #accept-all" }],
+    "optOut": [{ "waitForThenClick": "#cookie-bar .cookie-bar-frame #decline" }],
+    "test": [{ "cookieContains": "cookies-state=decline" }]
+}

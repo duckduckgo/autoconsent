@@ -1,0 +1,31 @@
+{
+    "name": "txxx-network",
+    "vendorUrl": "https://txxx.com/",
+    "cosmetic": false,
+    "detectCmp": [
+        {
+            "exists": ".cookie-notify:has(a[href*=\"cookies_policy\"]) > button.btn, .cookies-policy-block:has(a[href*=\"cookies_policy\"]) > button.btn, .header__cookie:has(a[href*=\"cookies_policy\"]) > button.btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-notify:has(a[href*=\"cookies_policy\"]) > button.btn, .cookies-policy-block:has(a[href*=\"cookies_policy\"]) > button.btn, .header__cookie:has(a[href*=\"cookies_policy\"]) > button.btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-notify:has(a[href*=\"cookies_policy\"]) > button.btn, .cookies-policy-block:has(a[href*=\"cookies_policy\"]) > button.btn, .header__cookie:has(a[href*=\"cookies_policy\"]) > button.btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-notify:has(a[href*=\"cookies_policy\"]) > button.btn, .cookies-policy-block:has(a[href*=\"cookies_policy\"]) > button.btn, .header__cookie:has(a[href*=\"cookies_policy\"]) > button.btn"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookie-notify:has(a[href*=\"cookies_policy\"]) > button.btn, .cookies-policy-block:has(a[href*=\"cookies_policy\"]) > button.btn, .header__cookie:has(a[href*=\"cookies_policy\"]) > button.btn",
+            "check": "none"
+        }
+    ]
+}

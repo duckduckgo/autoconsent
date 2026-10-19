@@ -1,7 +1,7 @@
 {
     "name": "pornhub.com",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?pornhub\\.com/"
+        "urlPattern": "^https://(\\w+\\.)?pornhub\\.com/"
     },
     "cosmetic": false,
     "prehideSelectors": ["#cookieBanner #cookieBannerContent"],

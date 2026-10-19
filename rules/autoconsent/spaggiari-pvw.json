@@ -1,0 +1,31 @@
+{
+    "name": "spaggiari-pvw",
+    "vendorUrl": "https://www.spaggiari.eu/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".cookiebar:has(.cookiebar-ko)"],
+    "detectCmp": [
+        {
+            "exists": ".cookiebar .cookiebar-buttons .cookiebar-ko"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiebar .cookiebar-buttons .cookiebar-ko"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiebar .cookiebar-buttons .cookiebar-ok"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookiebar .cookiebar-buttons .cookiebar-ko",
+            "comment": "Rifiuta tutti"
+        }
+    ]
+}

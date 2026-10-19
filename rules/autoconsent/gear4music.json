@@ -1,0 +1,42 @@
+{
+    "name": "gear4music",
+    "vendorUrl": "https://www.gear4music.com/",
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookieConsentWidgetDiv .cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsentWidgetDiv #banner-cookie-consent-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsentWidgetDiv .cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#banner-cookie-consent-eu-allow-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#banner-cookie-consent-reject-all"
+        },
+        {
+            "waitForVisible": "#cookieConsentWidgetDiv .cookie-banner",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "g4m_cookie_consent=CONSENT_ESSENTIAL"
+        }
+    ]
+}

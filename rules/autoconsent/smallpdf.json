@@ -1,0 +1,44 @@
+{
+    "name": "smallpdf",
+    "vendorUrl": "https://smallpdf.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?smallpdf\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#app > div:has(> div:last-child > button:first-child + button:last-child)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#app > div:has(> div:last-child > button:first-child + button:last-child)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#app > div:not(:has(input[role=switch])) > div:last-child > button:first-child:has(+ button:last-child)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#app > div:not(:has(input[role=switch])) > div:last-child > button:last-child:not(:first-child)"
+        },
+        {
+            "waitForVisible": "#app > div:has(input[role=switch]) > div:last-child > button:first-child"
+        },
+        {
+            "click": "#app > div:has(input[role=switch]) input[role=switch][aria-checked=true]:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#app > div:has(input[role=switch]) > div:last-child > button:first-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_s.cookie_consent=marketing=0:analytics=0"
+        }
+    ]
+}
