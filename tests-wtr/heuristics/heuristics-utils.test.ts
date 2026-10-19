@@ -120,6 +120,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Questo sito utilizza cookie tecnici e analytics, necessari al suo funzionamento',
+            'Questo sito web utilizza i cookie per migliorare la tua esperienza',
+            'Il nostro sito fa uso di cookie di terze parti',
+            'Utilizziamo i cookie per personalizzare i contenuti',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Questo sito utilizza materiale informativo sui farmaci').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
