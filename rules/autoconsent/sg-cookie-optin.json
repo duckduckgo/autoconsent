@@ -1,0 +1,29 @@
+{
+    "name": "sg-cookie-optin",
+    "vendorUrl": "https://www.sgalinski.de/typo3-produkte-webentwicklung/sgalinski-cookie-optin/",
+    "prehideSelectors": ["#SgCookieOptin"],
+    "detectCmp": [{ "exists": "#SgCookieOptin" }],
+    "detectPopup": [{ "visible": "#SgCookieOptin .sg-cookie-optin-box" }],
+    "optIn": [
+        {
+            "waitForThenClick": "#SgCookieOptin .sg-cookie-optin-box-button-accept-all, #SgCookieOptin .sg-cookie-optin-banner-button-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#SgCookieOptin .sg-cookie-optin-box-button-accept-essential, #SgCookieOptin .sg-cookie-optin-banner-button-accept-essential"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#SgCookieOptin .sg-cookie-optin-box-button-accept-essential, #SgCookieOptin .sg-cookie-optin-banner-button-accept-essential"
+                }
+            ],
+            "else": [
+                { "click": "#SgCookieOptin input.sg-cookie-optin-checkbox:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#SgCookieOptin .sg-cookie-optin-box-button-accept-specific" }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_SG_COOKIE_OPTIN_TEST" }]
+}

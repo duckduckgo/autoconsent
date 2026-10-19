@@ -207,6 +207,7 @@ export const snippets = {
                 ),
             ).purposes.a === false),
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
+    EVAL_SG_COOKIE_OPTIN_TEST: () => /(^|;\s*)cookie_optin\w*=essential:1(\|[^:;|]+:0)*(;|$)/.test(document.cookie),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
             if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls);
