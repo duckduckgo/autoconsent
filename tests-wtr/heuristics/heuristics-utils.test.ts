@@ -72,6 +72,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Google Analytics cookie notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'We use Google Analytics to count page views and monthly active users. It sets a cookie and, when you are signed in, records your account id.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
