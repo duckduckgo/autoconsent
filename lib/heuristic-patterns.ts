@@ -1,16 +1,48 @@
+/** Which text a detect pattern or context negative applies to: a popup element's text, or a whole page's text. */
+export type HeuristicInput = 'popup' | 'page';
+/** A detect pattern, optionally limited to one input. */
+export type DetectPattern = RegExp | { pattern: RegExp; input: HeuristicInput };
+/** A never-match pattern excludes a popup when it matches, unless `unless` also matches. */
+export type NeverMatchPattern = RegExp | { pattern: RegExp; unless?: RegExp };
+/**
+ * Drops a single detect pattern match when its context matches `pattern` and not `unless` (with only `unless`, when the
+ * context lacks it). The context is `window` chars either side of the match, or its line and `lines` lines either side
+ * ([before, after] counts each side); the default is 150 chars. `appliesTo` limits it to some detect patterns.
+ */
+export type ContextNegative = {
+    name: string;
+    pattern?: RegExp;
+    unless?: RegExp;
+    window?: number;
+    lines?: number | [number, number];
+    input?: HeuristicInput;
+    appliesTo?: RegExp[];
+};
+
+// detect patterns that context negatives refer to
+const BY_CONTINUING_PRIVACY = /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi;
+const ACCEPT_ALL = /accept all/gi;
+const USE_OF_COOKIES = /use of cookies/gi;
+const UTILISATION_DES_COOKIES = /utilisation.{0,100}des.{0,100}cookies/gi;
+const ACCEPTEZ_UTILISATION = /acceptez.{0,100}l.{0,100}utilisation/gi;
+const VERWENDUNG_VON_COOKIES = /verwendung.{0,100}von.{0,100}cookies/gi;
+const DE_COOKIE_VERB =
+    /\b(?:nutzen|nutzt|verwenden|verwendet|setzen|setzt|benutzen|benutzt|speichert|platzieren)\b(?: \S+){0,4} cookies\b/gi;
+const GEBRUIK_VAN_COOKIES = /gebruik.{0,100}van.{0,100}cookies/gi;
+
 // TODO: check for false positive detections per pattern
 // these patterns are matched against popup-like elements or full document text to detect unknown cookie popups
-export const DETECT_PATTERNS = [
+export const DETECT_PATTERNS: DetectPattern[] = [
     /accept cookies/gi,
-    /accept all/gi,
+    ACCEPT_ALL,
     /reject all/gi,
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
-    /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi,
+    BY_CONTINUING_PRIVACY,
     // a single qualifier is common: "optional", "essential", "necessary", "analytics", ...
     /we (?:use|serve)(?: \w+)? cookies/gi,
     /we are using cookies/gi,
-    /use of cookies/gi,
+    USE_OF_COOKIES,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
     /cookies (?:and|or) .{0,100} technologies/gi,
@@ -21,6 +53,33 @@ export const DETECT_PATTERNS = [
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
+    // TCF wording: "store and/or access information", "and our partners ask for your consent", "we and our N partners"
+    /\b(?:store|stores|storing) and\/or access(?:ing)? information\b/gi,
+    /\band our partners ask for your consent\b/gi,
+    /\bwe and (?:our|up to) (?:\d+ )?(?:partners|vendors)\b/gi,
+    // a partner count, in each language: "our 186 partners", "unseren 107 Partnern", "nuestros 1064 socios"
+    /\b(?:our|unseren|onze|nos|nuestros|i nostri) \d{2,4} (?:partners|partnern|partner|partenaires|socios|vendors|fornitori)\b/gi,
+    /\b\d{2,4} iab[- ]partner/gi,
+    // "technologies like cookies", in each language
+    /\btechnolog(?:ies|ien|ieën|ías|ie) (?:like|such as|wie|zoals|como(?: las)?|telles que(?: les)?|come(?: i)?) cookies?\b/gi,
+    /\buses (?:\S+ ){0,2}cookies\b/gi,
+    /\b(?:like|want) to (?:use|set) (?:\S+ ){0,2}cookies\b/gi,
+    /\b(?:optional|additional|non-essential) cookies\b/gi,
+    /\bstoring of cookies\b|\bplaced cookies\b/gi,
+    /\b(?:store|stores) and access (?:data|information) on your device\b|\baccess and store (?:data|information) on your device\b/gi,
+    /\bwe use (?:\S+ ){1,4}cookies\b/gi,
+    // US privacy notices: opt-out sentences, not the footer link labels
+    /\byou (?:can|may) opt[- ]out of (?:the |this )?(?:sale|sharing|use|selling)\b/gi,
+    /\b(?:if you wish to|to) opt[- ]out of the sale\b/gi,
+    /\bthis website or its third[- ]party tools (?:process|use)\b/gi,
+    /["“]?(?:share|sell)["”]? or ["“]?(?:sell|share)["”]? (?:your )?(?:personal )?information\b/gi,
+    /\bresidents have (?:certain )?rights with regard to the sale\b/gi,
+    /\bwe use technologies (?:on this website )?(?:that may )?(?:to )?collect\b/gi,
+    // pay-or-consent walls
+    /\bcontinue reading with advertising\b|\b(?:with|mit) (?:advertising|werbung) (?:and|und) tracking\b/gi,
+    /\bconsent and continue\b/gi,
+    // preference centres are often in the page but hidden, so popup text only
+    { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -38,27 +97,33 @@ export const DETECT_PATTERNS = [
     /consentement.{0,100}à.{0,100}tout.{0,100}moment/gi,
     /votre.{0,100}consentement/gi,
     /accepter.{0,100}tout/gi,
-    /utilisation.{0,100}des.{0,100}cookies/gi,
+    UTILISATION_DES_COOKIES,
     /cookies.{0,100}ou.{0,100}technologies/gi,
-    /acceptez.{0,100}l.{0,100}utilisation/gi,
+    ACCEPTEZ_UTILISATION,
     /continuer sans accepter/gi,
     /tout refuser/gi,
     /(?:refuser|rejeter) tous les cookies/gi,
-    /je refuse/gi,
+    // not "je refuse d'…" in a headline
+    /je refuse(?! d['’e])/gi,
     /refuser et continuer/gi,
     /refuser les cookies/gi,
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
     /nécessaires uniquement/gi,
+    /\b(?:stocker|stockons) et\/ou (?:accéder|accédons)\b/gi,
+    /\bnos partenaires demandent votre consentement\b/gi,
+    /\bconsentez à l.utilisation (?:de |des )?cookies\b|\bdépôt (?:de|des) cookies\b/gi,
+    /\bles cookies nous permettent\b|\bnos partenaires et nous(?:-mêmes)?\b/gi,
+    /\baccepter (?:&|et) fermer\b/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
     /wir.{0,100}und.{0,100}unsere.{0,100}partner/gi,
-    /zugriff.{0,100}auf.{0,100}informationen.{0,100}auf/gi,
+    /zugriff auf informationen auf/gi,
     /inhalte.{0,100}messung.{0,100}von.{0,100}werbeleistung.{0,100}und/gi,
     /cookies.{0,100}und.{0,100}andere/gi,
-    /verwendung.{0,100}von.{0,100}cookies/gi,
+    VERWENDUNG_VON_COOKIES,
     /wir.{0,100}nutzen.{0,100}cookies/gi,
     /verwendet.{0,100}cookies/gi,
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
@@ -72,9 +137,21 @@ export const DETECT_PATTERNS = [
     /nur funktionale cookies akzeptieren/gi,
     /optionale ablehnen/gi,
     /zustimmung verweigern/gi,
+    /\bspeichern und\/oder (?:zugreifen|abrufen)\b/gi,
+    /\bunsere partner bitten um ihre zustimmung\b/gi,
+    DE_COOKIE_VERB,
+    /\b(?:werden|wird) (?:\S+ ){0,3}cookies (?:verwendet|eingesetzt|gesetzt|genutzt)\b/gi,
+    /\bcookies? zum einsatz\b|\beinsatz von cookies\b/gi,
+    /\beinverstanden\b.{0,60}\bcookies\b|\bcookies\b.{0,80}\beinverstanden\b/gi,
+    /\b(?:alle|alles) (?:cookies |optionalen \S+ )?(?:akzeptieren|zulassen|erlauben|zustimmen)\b/gi,
+    /\bzustimmen und weiter\b|\bweiter,? ohne zu (?:akzeptieren|zustimmen)\b/gi,
+    /\b(?:einwilligung|zustimmung) (?:zu|zur|in die) (?:\S+ )?cookies\b|\bcookie-(?:zustimmung|einwilligung)\b/gi,
+    /\btracking-technologien\b/gi,
+    /\bakzeptier\w* (?:du |sie )?(?:die )?verwendung (?:\S+ )?cookies\b/gi,
+    /\bmit werbetracking weiterlesen\b|\bweiter mit werbung\b|\bcon tracking e annunci\b/gi,
 
     // NL
-    /gebruik.{0,100}van.{0,100}cookies/gi,
+    GEBRUIK_VAN_COOKIES,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
 
@@ -85,6 +162,13 @@ export const DETECT_PATTERNS = [
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
     /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
     /wijs alles af/gi,
+    /\b(?:op te slaan en\/of te (?:raadplegen|openen|lezen)|opslaan en\/of (?:openen|raadplegen|lezen)|slaan informatie\b.{0,60}\bop en\/of)\b/gi,
+    /\bonze partners vragen om (?:jouw|uw|je) toestemming\b/gi,
+    /\bwij en onze (?:\d+ )?partners\b/gi,
+    /\b(?:gebruiken|gebruikt|plaatsen|plaatst)\b(?: \S+){0,3} cookies\b/gi,
+    /\baccepteer (?:alles|alle cookies)\b/gi,
+    // Dutch words only: "tracking cookies" and "marketing cookies" are also English prose and footer links
+    /\b(?:analytische|functionele|essentiële|noodzakelijke) cookies\b/gi,
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
@@ -102,6 +186,15 @@ export const DETECT_PATTERNS = [
     /nosotros y nuestros( \d+)? (socios|proveedores).{0,180} cookies/gi,
     /recopilamos y almacenamos datos de usted y de su dispositivo/gi,
     /utilizamos tecnolog[ií]as como las cookies/gi,
+    /\b(?:almacenar|almacenamos) y\/o (?:acceder|accedemos)\b/gi,
+    /\bnuestros socios solicitan su consentimiento\b/gi,
+    /\b(?:tanto nosotros como|nosotros y) nuestros (?:\d+ )?socios\b/gi,
+    /\b(?:aceptar|rechazar) todas\b|\bcontinuar sin aceptar\b|\bsolo las necesarias\b/gi,
+    /\bacept\w* (?:\S+ ){0,3}uso de (?:las )?cookies\b/gi,
+    /\bcookies (?:técnicas|analíticas|propias|de terceros|opcionales|necesarias)\b/gi,
+    /\blas cookies nos (?:ayudan|permiten)\b/gi,
+    /\b(?:instalamos|empleamos)\b(?: \S+){0,4} cookies\b/gi,
+    /\bacept(?:a|ar|as)? (?:el uso de |las )?(?:\S+ )?cookies\b|\bnecesitamos usar cookies\b/gi,
 
     // Polish (PL)
     // examples:
@@ -136,6 +229,7 @@ export const DETECT_PATTERNS = [
     /este lloc web utilitza només cookies tècniques necessàries per al seu funcionament/gi,
     /utilitza cookies tècniques,\s*de personalització i anàlisi/gi,
     /utilitzem cookies i altres tecnologies/gi,
+    /\b(?:utilitz\w*|fa servir|fem servir|usem)\b(?: \S+){0,3} (?:cookies|galetes)\b/gi,
 
     // Basque (EU)
     /cookie propio eta hirugarrenenak helburu teknikoarekin erabiltzen ditu/gi,
@@ -166,6 +260,19 @@ export const DETECT_PATTERNS = [
 
     // Italian (IT)
     /usiamo.{0,20}cookie/gi,
+    /\b(?:utilizziamo|usiamo|impieghiamo|installiamo)\b(?: \S+){0,3} cookies?\b/gi,
+    /\b(?:utilizza|utilizzano|usa|usano|impiega|installa|fa uso di)\b(?: \S+){0,3} cookies?\b/gi,
+    /\bcookies? (?:tecnici|di profilazione|di terze parti|analitici|statistici|di marketing)\b/gi,
+    /\b(?:acconsent|accett)\w*\b.{0,40}\b(?:uso|utilizzo|installazione)\b.{0,15}\bcookies?\b/gi,
+    /\b(?:continuando|proseguendo)(?: la| nella)? navigazione\b.{0,80}\b(?:accett|acconsent)\w*/gi,
+    /\b(?:accetta|accetto|accettare|rifiuta|rifiuto|rifiutare)(?: tutti| tutto)\b/gi,
+    /\b(?:continua|prosegui|chiudi) senza accettare\b/gi,
+    /\brifiuta e abbonati\b/gi,
+    /\bconsenso (?:all.(?:uso|utilizzo) (?:dei |di )?)?cookies?\b/gi,
+    /\bnoi e (?:i nostri|il nostro) (?:\d+ )?(?:partner|fornitori)\b/gi,
+    /\b(?:insieme ai|con i) nostri (?:\d+ )?partner\b/gi,
+    /\bterze parti selezionate\b/gi,
+    /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
@@ -459,19 +566,111 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
 
 // Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
 // Applied only to popup-scoped text (via getActionablePopups); NOT applied to full-document detection, where these terms produce too many false positives.
-export const DETECT_NEVER_MATCH_PATTERNS = [
-    // e.g. "age verification", "age confirmation", "age check", "age gate", "age restriction"
-    /age\s+(?:verification|confirmation|check|gate|restriction)/i,
-    // e.g. "over 18 years", "at least 21 years", "older than 21", "18+"
-    /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
-    // e.g. "18 years of age", "18+ years old", "21 years or older"
-    /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
-    // e.g. "I am 18+", "I am over 18", "I'm 21 or older"
-    /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
-    // e.g. "you must be 18", "users must be at least 21", "visitors must be over 18"
-    /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
-    // e.g. "adult oriented material", "adult content", "adult-only website"
-    /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
+// a cookie choice or dismiss control, or consent dialog wording, in the core languages
+const CONSENT_CHOICE = new RegExp(
+    [
+        '\\b(?:accept|reject|decline|refuse|deny|allow|manage|customi[sz]e)\\b[^\\n]{0,25}\\bcookies?\\b',
+        '\\b(?:accept|reject|decline|deny|allow|refuse) all\\b',
+        '\\bcookies? (?:notice|settings|preferences|banner)\\b',
+        '\\b(?:alle )?(?:cookies )?(?:akzeptieren|ablehnen|erlauben|zulassen)\\b',
+        '\\b(?:alles |alle cookies )?(?:accepteren|accepteer|weigeren|weiger|afwijzen|toestaan)\\b',
+        '\\b(?:tout )?(?:accepter|refuser)\\b',
+        '\\b(?:aceptar|rechazar)(?: todas?)?\\b',
+        '\\b(?:accetta|rifiuta)(?: tutti)?\\b',
+        // purposes and vendors as a button or heading line: some consent dialogs ask "under 18?"
+        '^[^\\n]{0,40}\\b(?:purposes|finalités|propósitos|zwecke|doeleinden|finalità|vendors|fournisseurs|proveedores|leveranciers|fornitori)\\b[^\\n]{0,10}$',
+        '\\b(?:legitimate (?:business )?interest|intérêt légitime|interés legítimo|berechtigtes interesse|gerechtvaardigd belang|legittimo interesse)\\b',
+        '\\b(?:we|nous|wir|wij|noi|nosotros) (?:and|et|und|en|e|y) (?:our|nos|unsere|onze|i nostri|nuestros) (?:\\d+ )?(?:partners|partenaires|partner|socios)\\b',
+    ].join('|'),
+    'im',
+);
+
+// an age limit, an adults-only statement or an age check, in the core languages
+const AGE_WORDING = new RegExp(
+    [
+        '\\b(?:over|above|at least|older than|minimum(?: age of)?)\\s*(?:18|21|eighteen)\\b',
+        '\\b(?:18|21)\\s*(?:\\+|years?(?: of age| old)?|yo|or older|or over)\\b',
+        "\\b(?:i'?m|i am) (?:over |at least )?(?:18|21)\\b",
+        '\\bage (?:verification|confirmation|check|gate|restriction)\\b',
+        '\\b(?:adults? only|adult[\\s-](?:oriented|content|material|website)|legal age|age of majority|not a minor|minors)\\b',
+        '\\b(?:18|21) jahre\\b',
+        '\\balters(?:beschränkung|bestätigung|verifikation|prüfung|kontrolle)',
+        '\\b(?:volljährig|für erwachsene|minderjährige)\\b',
+        '\\b(?:18|21) jaar\\b',
+        '\\b(?:volwassenen|meerderjarig|minderjarigen|leeftijdsverificatie)\\b',
+        '\\b(?:18|21) ans\\b',
+        '\\b(?:pour adultes|âge légal|vérification de l.âge|mineurs)\\b',
+        '\\b(?:18|21) años\\b',
+        '\\b(?:mayor(?:es)? de edad|menores de edad|para adultos|verificación de edad)\\b',
+        '\\b(?:18|21) anni\\b',
+        '\\b(?:maggiorenne|minorenni|per adulti|verifica dell.età)\\b',
+    ].join('|'),
+    'i',
+);
+
+// a dismiss or consent button on its own line, as innerText keeps it
+const DISMISS_LINE =
+    /^\s*(?:(?:yes,? )?(?:i )?(?:ok(?:ay)?|accept|agree|allow|decline|deny|reject|refuse|understand|acknowledge(?: the use of cookies)?|got it|understood)(?: all)?(?:,? (?:and|&) (?:continue|close))?(?: non-essential)?|close|dismiss|akzeptieren|zustimmen|verstanden|einverstanden|ablehnen|accepteren|akkoord|weigeren|accepter|j.accepte|d.accord|refuser|fermer|aceptar|acepto|rechazar|entendido|accetto|accetta|rifiuta|ho capito|chiudi)\s*[!.]?\s*$/im;
+// a dismiss button at the end of a notice's line, or a close control
+const DISMISS_END = /[.!?]\s+(?:ok(?:ay)?|got it|i agree|accept)\s*!?\s*$|\[\s*[x×]\s*\]|^\s*[x×✕]\s*$/im;
+const NOTICE_CONTROL = new RegExp(`${CONSENT_CHOICE.source}|${DISMISS_LINE.source}|${DISMISS_END.source}`, 'im');
+// an age gate's leave button on its own line
+const LEAVE_LINE =
+    /^\s*(?:leave|exit|leave (?:the )?(?:site|website|now)|no,? (?:leave|take me away|exit)|i am under 18|verlassen|seite verlassen|quitter|sortir|salir|abandonar(?: el sitio)?|esci|uscire|verlaten)\s*[!.]?\s*$/im;
+// a consent control and no leave button: an age gate's "OK" next to "Leave" confirms the age, not cookies
+const consentNotAgeGate = (control: RegExp) =>
+    new RegExp(`(?<![\\s\\S])(?![\\s\\S]*(?:${LEAVE_LINE.source}))[\\s\\S]*?(?:${control.source})`, 'im');
+// consent vocabulary beyond "privacy", for patterns that also match terms of use and login text
+const CONSENT_WORDS =
+    /cookie|consent|track|partner|personali[sz]|advertis|analytic|privacy (?:options|choices|settings|rights)|do not sell|opt[- ]out/i;
+
+// popups with their own age confirmation are age gates, not cookie popups, even when they mention cookies
+export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [{ pattern: AGE_WORDING, unless: consentNotAgeGate(CONSENT_CHOICE) }];
+
+// drop single matches whose context shows the text isn't a consent notice
+export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
+    // page text next to an age gate, unless a consent control is there too
+    { name: 'age-gate', pattern: AGE_WORDING, unless: consentNotAgeGate(NOTICE_CONTROL), lines: [4, 5], input: 'page' },
+    // terms of use need cookie or consent wording; a privacy-policy-only notice needs that or a button
+    {
+        name: 'terms-without-consent',
+        pattern: /\bterms\b|\bconditions\b/i,
+        unless: CONSENT_WORDS,
+        window: 150,
+        appliesTo: [BY_CONTINUING_PRIVACY],
+    },
+    {
+        name: 'privacy-without-control',
+        unless: new RegExp(`${CONSENT_WORDS.source}|${DISMISS_LINE.source}`, 'im'),
+        window: 150,
+        appliesTo: [BY_CONTINUING_PRIVACY],
+    },
+    // a cookie policy link among short footer link lines
+    {
+        name: 'footer-link',
+        pattern: /^[^.!?:\n]{0,60}\n[\s]*\n?[^.!?:\s][^.!?:\n]{0,59}(?:\n|$)/,
+        unless: NOTICE_CONTROL,
+        lines: [0, 2],
+        input: 'page',
+        appliesTo: [USE_OF_COOKIES, VERWENDUNG_VON_COOKIES, UTILISATION_DES_COOKIES, GEBRUIK_VAN_COOKIES],
+    },
+    // "accept all" in prose; case-sensitive since button labels run together in innerText
+    {
+        name: 'accept-all-prose',
+        pattern: /\baccept all [a-z]|\baccept All[a-z]/,
+        unless: /accept all (?:cookies|and|&)/i,
+        window: 15,
+        appliesTo: [ACCEPT_ALL],
+    },
+    {
+        name: 'acceptez-terms',
+        pattern: /conditions (?:générales )?d.utilisation|\bcgu\b/i,
+        unless: /cookie|témoin|traceur|partenaire/i,
+        window: 150,
+        appliesTo: [ACCEPTEZ_UTILISATION],
+    },
+    // the same sentence is also a footer line with only a "learn more" link
+    { name: 'de-cookie-verb-needs-control', unless: NOTICE_CONTROL, lines: [1, 6], input: 'page', appliesTo: [DE_COOKIE_VERB] },
 ];
 
 export const SETTINGS_PATTERNS = [

@@ -18,7 +18,7 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
             if (isExcludedPopup(popupText)) {
                 return acc;
             }
-            const { patterns } = checkHeuristicPatterns(popupText);
+            const { patterns } = checkHeuristicPatterns(popupText, undefined, { input: 'popup' });
             if (patterns.length > 0) {
                 classifyButtons(popup.buttons);
                 popup.regexClassification = classifyPopup(popup.buttons);

@@ -6,11 +6,17 @@ import {
     ACCEPT_PATTERNS,
     ACKNOWLEDGE_PATTERNS,
     BUTTON_NEVER_MATCH_PATTERNS,
+    ContextNegative,
+    DETECT_CONTEXT_NEGATIVES,
     DETECT_NEVER_MATCH_PATTERNS,
     DETECT_PATTERNS,
+    DetectPattern,
+    HeuristicInput,
+    NeverMatchPattern,
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
+import { literalIndex, requiredLiterals } from './heuristic-prefilter';
 export * from './heuristic-patterns';
 
 export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
@@ -22,26 +28,131 @@ export type ClassifiableButton = {
 };
 
 const TEXT_LIMIT = 100000;
+const DEFAULT_WINDOW = 150;
 
-export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
-    allText = allText.slice(0, TEXT_LIMIT);
+type CompiledNegative = ContextNegative & { hits: (context: string) => boolean; applies: Set<string> | null };
+type CompiledPattern = { id: string; pattern: RegExp; input?: HeuristicInput; literals: string[] };
+type CompiledPatterns = { detect: CompiledPattern[]; literals: ReturnType<typeof literalIndex> };
+
+// a regex without the global and sticky flags, so `test` keeps no state between calls
+const stateless = (re: RegExp) => new RegExp(re.source, re.flags.replace(/[gy]/g, ''));
+
+const compiledPatterns = new WeakMap<DetectPattern[], CompiledPatterns>();
+const compiledNegatives = new WeakMap<ContextNegative[], CompiledNegative[]>();
+
+function compilePatterns(detectPatterns: DetectPattern[]): CompiledPatterns {
+    let compiled = compiledPatterns.get(detectPatterns);
+    if (!compiled) {
+        const detect = detectPatterns.map((p) => {
+            const { pattern, input } = p instanceof RegExp ? { pattern: p, input: undefined } : p;
+            return { id: pattern.toString(), pattern, input, literals: requiredLiterals(pattern) };
+        });
+        compiled = { detect, literals: literalIndex(detect.flatMap((d) => d.literals)) };
+        compiledPatterns.set(detectPatterns, compiled);
+    }
+    return compiled;
+}
+
+function compileNegatives(negatives: ContextNegative[]): CompiledNegative[] {
+    let compiled = compiledNegatives.get(negatives);
+    if (!compiled) {
+        compiled = negatives.map((n) => {
+            const pattern = n.pattern ? stateless(n.pattern) : null;
+            const unless = n.unless ? stateless(n.unless) : null;
+            return {
+                ...n,
+                hits: (context: string) => (!pattern || pattern.test(context)) && !(unless && unless.test(context)),
+                applies: n.appliesTo ? new Set(n.appliesTo.map(String)) : null,
+            };
+        });
+        compiledNegatives.set(negatives, compiled);
+    }
+    return compiled;
+}
+
+/** The text around a match that a context negative is tested on. */
+export function negativeContext(text: string, start: number, end: number, negative: ContextNegative): string {
+    if (negative.lines === undefined) {
+        const w = negative.window ?? DEFAULT_WINDOW;
+        return text.slice(Math.max(0, start - w), end + w);
+    }
+    const lineEnd = (i: number) => {
+        const next = text.indexOf('\n', i);
+        return next === -1 ? text.length : next;
+    };
+    const [before, after] = Array.isArray(negative.lines) ? negative.lines : [negative.lines, negative.lines];
+    let from = start > 0 ? text.lastIndexOf('\n', start - 1) + 1 : 0;
+    let to = lineEnd(end);
+    for (let i = 0; i < before; i++) {
+        from = from >= 2 ? text.lastIndexOf('\n', from - 2) + 1 : 0;
+    }
+    for (let i = 0; i < after; i++) {
+        to = to < text.length ? lineEnd(to + 1) : to;
+    }
+    return text.slice(from, to);
+}
+
+/**
+ * Matches the detect patterns against a text. `input` says what the text is: a popup element's text or a whole page's;
+ * patterns and context negatives scoped to the other input are skipped (without it, only unscoped ones apply). A
+ * pattern counts if one of its matches survives the context negatives; `suppressed` lists those that didn't.
+ */
+export function checkHeuristicPatterns(
+    allText: string,
+    detectPatterns: DetectPattern[] = DETECT_PATTERNS,
+    { input, negatives = DETECT_CONTEXT_NEGATIVES }: { input?: HeuristicInput; negatives?: ContextNegative[] } = {},
+) {
+    allText = (allText || '').slice(0, TEXT_LIMIT);
     const patterns = [];
     const snippets = [];
+    const suppressed: { pattern: string; negative: string }[] = [];
+    const compiled = compilePatterns(detectPatterns);
+    const applicable = compileNegatives(negatives).filter((n) => !n.input || n.input === input);
+    let present: Set<string> | undefined;
 
-    for (const p of detectPatterns) {
-        const matches = allText?.match(p);
-        if (matches) {
-            patterns.push(p.toString());
-            // When a non-global regex has capture groups, `String.prototype.match`
-            // returns undefined entries for optional groups that did not match.
-            for (const m of matches) {
-                if (typeof m === 'string') {
-                    snippets.push(m.substring(0, 200));
+    for (const d of compiled.detect) {
+        if (d.input && d.input !== input) {
+            continue;
+        }
+        if (d.literals.length) {
+            present ??= compiled.literals.present(allText.toLowerCase());
+            if (!d.literals.some((l) => present?.has(l))) {
+                continue;
+            }
+        }
+        const matches = allText.match(d.pattern);
+        if (!matches) {
+            continue;
+        }
+        const own = applicable.filter((n) => !n.applies || n.applies.has(d.id));
+        if (own.length) {
+            const all = new RegExp(d.pattern.source, d.pattern.flags.includes('g') ? d.pattern.flags : `${d.pattern.flags}g`);
+            const dropped = new Set<string>();
+            let kept = false;
+            for (const m of allText.matchAll(all)) {
+                const start = m.index ?? 0;
+                const hit = own.find((n) => n.hits(negativeContext(allText, start, start + m[0].length, n)));
+                if (!hit) {
+                    kept = true;
+                    break;
                 }
+                dropped.add(hit.name);
+            }
+            if (!kept) {
+                dropped.forEach((negative) => suppressed.push({ pattern: d.id, negative }));
+                continue;
+            }
+        }
+        patterns.push(d.id);
+        // When a non-global regex has capture groups, `String.prototype.match`
+        // returns undefined entries for optional groups that did not match.
+        for (const m of matches) {
+            if (typeof m === 'string') {
+                snippets.push(m.substring(0, 200));
             }
         }
     }
-    return { patterns, snippets };
+    return { patterns, snippets, suppressed };
 }
 
 export function classifyButtons(buttons: ClassifiableButton[]) {
@@ -50,12 +161,15 @@ export function classifyButtons(buttons: ClassifiableButton[]) {
     }
 }
 
-export function isExcludedPopup(popupText: string, excludePatterns = DETECT_NEVER_MATCH_PATTERNS): boolean {
+export function isExcludedPopup(popupText: string, excludePatterns: NeverMatchPattern[] = DETECT_NEVER_MATCH_PATTERNS): boolean {
     if (!popupText) {
         return false;
     }
     const truncated = popupText.slice(0, TEXT_LIMIT);
-    return excludePatterns.some((p) => p.test(truncated));
+    return excludePatterns.some((p) => {
+        const { pattern, unless } = p instanceof RegExp ? { pattern: p, unless: undefined } : p;
+        return stateless(pattern).test(truncated) && !(unless && stateless(unless).test(truncated));
+    });
 }
 
 export function classifyPopup(buttons: ClassifiableButton[]): PopupClassification {
