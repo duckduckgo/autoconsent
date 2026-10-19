@@ -64,6 +64,7 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    /(?:nutzen|verwenden|setzen) wir.{0,50}cookies/gi, // inverted word order: "Für ... nutzen wir Cookies"
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -77,6 +78,7 @@ export const DETECT_PATTERNS = [
     /gebruik.{0,100}van.{0,100}cookies/gi,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
+    /(?:we|wij) gebruiken cookies voor/gi,
 
     /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
     /alleen.{0,100}noodzakelijke?\b/gi,
