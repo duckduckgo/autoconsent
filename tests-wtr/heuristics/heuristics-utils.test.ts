@@ -277,6 +277,17 @@ describe('isExcludedPopup', () => {
             .false;
     });
 
+    it('does not flag a passive age statement whose notice has its own cookie or close control', () => {
+        expect(isExcludedPopup('We use cookies.\nBy using this site you confirm you are over 18.\nCustomise\nAccept')).to.be.false;
+        expect(isExcludedPopup('Nur für Erwachsene über 18 Jahre.\nWir verwenden Cookies.\nCookies verwalten\nAkzeptieren')).to.be.false;
+        expect(isExcludedPopup('You must be of legal age to enter.\nThis site uses cookies.\nClose this popup')).to.be.false;
+    });
+
+    it('flags an age gate with its own leave button even when it offers cookie settings', () => {
+        expect(isExcludedPopup('Solo para mayores de edad.\nEntrar\nNo, abandonar sitio\nConfigurar cookies')).to.be.true;
+        expect(isExcludedPopup('Alleen voor 18 jaar of ouder.\nIk ben 18+\nIk ben onder 18\nMeer opties')).to.be.true;
+    });
+
     it('flags an age gate whose OK sits next to a leave button', () => {
         expect(isExcludedPopup('You must be over 18. We use cookies. Accept all\nOK\nLeave')).to.be.true;
     });

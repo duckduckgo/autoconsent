@@ -614,35 +614,48 @@ const DISMISS_LINE =
 // a dismiss button at the end of a notice's line, or a close control
 const DISMISS_END = /[.!?]\s+(?:ok(?:ay)?|got it|i agree|accept)\s*!?\s*$|\[\s*[x×]\s*\]|^\s*[x×✕]\s*$/im;
 const NOTICE_CONTROL = new RegExp(`${CONSENT_CHOICE.source}|${DISMISS_LINE.source}|${DISMISS_END.source}`, 'im');
-// an age gate's leave button on its own line
+// an age gate's leave button on its own line, or "I am under 18" in the core languages
 const LEAVE_LINE =
-    /^\s*(?:leave|exit|leave (?:the )?(?:site|website|now)|no,? (?:leave|take me away|exit)|i am under 18|verlassen|seite verlassen|quitter|sortir|salir|abandonar(?: el sitio)?|esci|uscire|verlaten)\s*[!.]?\s*$/im;
+    /^\s*(?:(?:no,? )?(?:i )?(?:want to )?(?:leave|exit|verlassen|quitter|sortir|salir|abandonar|esci|uscire|verlaten)\b[^\n]{0,30}|no,? take me away|(?:seite|hier) verlassen|(?:i am|i'm|ich bin|ik ben|je suis|soy|sono) (?:under|unter|onder|jonger dan|menor de(?: edad)?|minorenne|mineur)\b[^\n]{0,10})\s*[!.]?\s*$/im;
 // a consent control and no leave button: an age gate's "OK" next to "Leave" confirms the age, not cookies
 const consentNotAgeGate = (control: RegExp) =>
     new RegExp(`(?<![\\s\\S])(?![\\s\\S]*(?:${LEAVE_LINE.source}))[\\s\\S]*?(?:${control.source})`, 'im');
+// a notice's own control: manage or configure cookies, a bare settings button line, or "close this popup"
+const NOTICE_OWN_CONTROL = new RegExp(
+    [
+        '\\bcookies? verwalten\\b|\\bcookie-?(?:einstellungen|präferenzen)\\b|\\beinstellungen verwalten\\b',
+        '\\bconfigura(?:r|ción de)(?: las)? cookies\\b|\\bgestionar(?: las)? cookies\\b|\\bpersonalizar(?: las)? cookies\\b',
+        '\\bparam[ée]trer(?: les)? cookies\\b|\\bparam[èe]tres(?: des)? cookies\\b|\\bg[ée]rer(?: les)? cookies\\b|\\bpersonnaliser(?: les)? cookies\\b',
+        '\\bgestisci(?: i)? cookie|\\bimpostazioni(?: dei| sui)? cookie|\\bpersonalizza(?: i)? cookie',
+        '\\bcookie-?instellingen\\b|\\bcookies? beheren\\b|\\bvoorkeuren (?:beheren|aanpassen)\\b',
+        '^\\s*(?:customi[sz]e|personnaliser|paramétrer|personalizar|configurar|personalizza|anpassen|aanpassen|meer opties|more options|weitere optionen|plus d.options|más opciones|altre opzioni|manage (?:options|preferences|choices))\\s*$',
+        '^\\s*close (?:this|the) (?:popup|banner|notice|message)\\s*$',
+    ].join('|'),
+    'im',
+);
+// the age-gate exclusions' unless: a consent or notice control, and no leave button (an age gate keeps its own confirmation)
+const ageGateUnless = (control: RegExp) => consentNotAgeGate(new RegExp(`${control.source}|${NOTICE_OWN_CONTROL.source}`, 'im'));
 // consent vocabulary beyond "privacy", for patterns that also match terms of use and login text
 const CONSENT_WORDS =
     /cookie|consent|track|partner|personali[sz]|advertis|analytic|privacy (?:options|choices|settings|rights)|do not sell|opt[- ]out/i;
 
 // popups with their own age confirmation are age gates, not cookie popups, even when they mention cookies
-export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [{ pattern: AGE_WORDING, unless: consentNotAgeGate(CONSENT_CHOICE) }];
+export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [{ pattern: AGE_WORDING, unless: ageGateUnless(CONSENT_CHOICE) }];
 
 // drop single matches whose context shows the text isn't a consent notice
 export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
     // page text next to an age gate, unless a consent control is there too
-    { name: 'age-gate', pattern: AGE_WORDING, unless: consentNotAgeGate(NOTICE_CONTROL), lines: [4, 5], input: 'page' },
+    { name: 'age-gate', pattern: AGE_WORDING, unless: ageGateUnless(NOTICE_CONTROL), lines: [4, 5], input: 'page' },
     // terms of use need cookie or consent wording; a privacy-policy-only notice needs that or a button
     {
         name: 'terms-without-consent',
         pattern: /\bterms\b|\bconditions\b/i,
         unless: CONSENT_WORDS,
-        window: 150,
         appliesTo: [BY_CONTINUING_PRIVACY],
     },
     {
         name: 'privacy-without-control',
         unless: new RegExp(`${CONSENT_WORDS.source}|${DISMISS_LINE.source}`, 'im'),
-        window: 150,
         appliesTo: [BY_CONTINUING_PRIVACY],
     },
     // a cookie policy link among short footer link lines
@@ -666,7 +679,6 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         name: 'acceptez-terms',
         pattern: /conditions (?:générales )?d.utilisation|\bcgu\b/i,
         unless: /cookie|témoin|traceur|partenaire/i,
-        window: 150,
         appliesTo: [ACCEPTEZ_UTILISATION],
     },
     // the same sentence is also a footer line with only a "learn more" link
