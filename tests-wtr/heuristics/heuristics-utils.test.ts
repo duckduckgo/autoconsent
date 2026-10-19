@@ -8,7 +8,8 @@ import {
     negativeContext,
     DETECT_PATTERNS,
 } from '../../lib/heuristic-classify';
-import { requiredLiterals } from '../../lib/heuristic-prefilter';
+import { literalIndexSource, requiredLiterals } from '../../lib/heuristic-prefilter';
+import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from '../../lib/heuristic-literals';
 import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
@@ -207,6 +208,16 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
 });
 
 describe('requiredLiterals', () => {
+    it('matches the generated table for the built-in patterns (run npm run build-heuristic-literals if not)', () => {
+        const expected: Record<string, string[]> = {};
+        for (const p of DETECT_PATTERNS) {
+            const pattern = p instanceof RegExp ? p : p.pattern;
+            expected[pattern.toString()] = requiredLiterals(pattern);
+        }
+        expect(DETECT_PATTERN_LITERALS).to.deep.equal(expected);
+        expect(DETECT_LITERAL_INDEX).to.deep.equal(literalIndexSource(Object.values(expected).flat()));
+    });
+
     it('finds literals every match contains', () => {
         expect(requiredLiterals(/accept all/gi)).to.deep.equal(['accept all']);
         expect(requiredLiterals(/\b(?:our|unseren) \d{2,4} (?:partners|partnern)\b/gi)).to.deep.equal(['partners', 'partnern']);
