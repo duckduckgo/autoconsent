@@ -1,0 +1,30 @@
+{
+    "name": "arto",
+    "cosmetic": false,
+    "prehideSelectors": [".Dialog:has(.ConsentManager)"],
+    "detectCmp": [
+        {
+            "exists": ".ConsentManager[data-controller~='consent-manager']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ConsentManager button[data-action*='consent-manager#denyAll']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ConsentManager button[data-action*='consent-manager#allowAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".ConsentManager button[data-action*='consent-manager#denyAll']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "arto-consent=signature"
+        }
+    ]
+}
