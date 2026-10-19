@@ -95,6 +95,24 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with a cookie question', () => {
+    it('detects "allow <qualifier> cookies?" questions', () => {
+        const texts = [
+            'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
+            'Allow cookies? We use them to measure traffic.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match statements without a question', () => {
+        expect(
+            checkHeuristicPatterns('Please allow cookies in your browser settings', [/allow (?:\w+ )?cookies\?/gi]).patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
