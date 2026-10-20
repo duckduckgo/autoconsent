@@ -95,6 +95,14 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects "Cookies oder andere" notices', () => {
+        const text =
+            'Wenn du auf „Einverstanden“ klickst, verarbeiten wir deine Daten und speichern Informationen (z. B. durch Cookies oder andere Identifikatoren) auf deinem Endgerät.';
+        expect(checkHeuristicPatterns(text).patterns.length).to.be.greaterThan(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
