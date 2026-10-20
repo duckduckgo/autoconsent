@@ -1,0 +1,48 @@
+{
+    "name": "xfree",
+    "vendorUrl": "https://www.xfree.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?xfree\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".x-popup--adult .adult-container .cookies-preferences__button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".x-popup--adult .adult-container .cookies-preferences__button"
+        },
+        {
+            "visible": "ageverif-checker",
+            "check": "none"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".x-popup--adult .adult-container #x-popup-primary-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".x-popup--adult .adult-container .cookies-preferences__button a",
+            "retry": 15,
+            "retryInterval": 1000
+        },
+        {
+            "waitForThenClick": ".x-popup--adult .cookies-preferences .x-button--muted"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".x-popup--adult",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "cookieContains": "preference=necessary"
+        }
+    ]
+}
