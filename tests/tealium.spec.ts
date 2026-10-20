@@ -14,4 +14,5 @@ generateCMPTests('Tealium', [
     'https://www.telekom.de/',
     'https://www.telekom.com/',
     'https://www.t-systems.com/',
+    'https://www.mainova.de/',
 ]);
