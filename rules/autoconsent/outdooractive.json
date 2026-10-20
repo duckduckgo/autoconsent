@@ -1,0 +1,41 @@
+{
+    "name": "outdooractive",
+    "vendorUrl": "https://www.outdooractive.com/",
+    "prehideSelectors": [".oax_cookie_consent_modal"],
+    "detectCmp": [
+        {
+            "exists": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary, script[src*='/oax_head.js'], script[src*='/oam_head.js']",
+            "comment": "the loader script exists before the popup renders, so heuristics do not click it too early"
+        }
+    ],
+    "detectPopup": [{ "visible": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary" }],
+    "optIn": [{ "waitForThenClick": ".oax_cookie_consent_modal .oax-cookie-consent-select-all" }],
+    "optOut": [
+        { "waitForThenClick": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary", "retry": 10, "retryInterval": 500 },
+        {
+            "waitFor": "script[src*='/tag/js/gpt.js']",
+            "timeout": 2000,
+            "optional": true,
+            "comment": "Google ads load even after rejecting and trigger a Funding Choices dialog"
+        },
+        {
+            "if": { "exists": "script[src*='/tag/js/gpt.js']" },
+            "then": [
+                { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 10000, "optional": true },
+                {
+                    "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+                    "then": [
+                        { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                        {
+                            "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": ".fc-confirm-choices", "timeout": 2000, "optional": true }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%22categories%22%3A%5B%22required%22%5D" }]
+}
