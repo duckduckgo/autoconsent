@@ -1,3 +1,30 @@
+# v16.57.0 (Tue Oct 20 2026)
+
+#### Rules
+
+- Rule update: yle-consent-sdk [#1928](https://github.com/duckduckgo/autoconsent/pull/1928) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ford-dse [#1927](https://github.com/duckduckgo/autoconsent/pull/1927) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: groupama.fr [#1926](https://github.com/duckduckgo/autoconsent/pull/1926) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stellantis-psa [#1925](https://github.com/duckduckgo/autoconsent/pull/1925) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: liferay-cookies-banner [#1924](https://github.com/duckduckgo/autoconsent/pull/1924) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: django-gdpr-cookie-consent [#1923](https://github.com/duckduckgo/autoconsent/pull/1923) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieyes-legacy [#1922](https://github.com/duckduckgo/autoconsent/pull/1922) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bundesarchiv-cookiebanner [#1921](https://github.com/duckduckgo/autoconsent/pull/1921) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: profiler-dk [#1920](https://github.com/duckduckgo/autoconsent/pull/1920) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rcs-cpmt [#1919](https://github.com/duckduckgo/autoconsent/pull/1919) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: elektro-material-ch [#1917](https://github.com/duckduckgo/autoconsent/pull/1917) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: arto [#1916](https://github.com/duckduckgo/autoconsent/pull/1916) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: abebooks [#1915](https://github.com/duckduckgo/autoconsent/pull/1915) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fixpart [#1914](https://github.com/duckduckgo/autoconsent/pull/1914) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kolibri-cookie-widget [#1913](https://github.com/duckduckgo/autoconsent/pull/1913) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: warning-cookie-notice [#1888](https://github.com/duckduckgo/autoconsent/pull/1888) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.56.0 (Mon Oct 19 2026)
 
 #### Rules
