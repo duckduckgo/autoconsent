@@ -1,0 +1,18 @@
+{
+    "name": "hmgroup-turbocookie",
+    "prehideSelectors": [".cookie-consent-popup"],
+    "detectCmp": [{ "exists": ".cookie-consent-popup #banner-accept-btn" }],
+    "detectPopup": [{ "visible": ".cookie-consent-popup" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-popup #banner-accept-btn" }],
+    "optOut": [
+        {
+            "if": { "exists": ".cookie-consent-popup #banner-reject-btn" },
+            "then": [{ "waitForThenClick": ".cookie-consent-popup #banner-reject-btn" }],
+            "else": [
+                { "waitForThenClick": ".cookie-consent-popup #banner-cookie-setting-btn" },
+                { "waitForThenClick": ".settings-page #settings-only-required-btn" }
+            ]
+        }
+    ],
+    "test": [{ "wait": 500 }, { "cookieContains": "groups=C0001:1,C0002:0,C0003:0,C0004:0" }]
+}
