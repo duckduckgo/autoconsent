@@ -1,0 +1,13 @@
+{
+    "name": "bom.gov.au",
+    "vendorUrl": "https://www.bom.gov.au/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bom\\.gov\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[data-testid=C75-alerts] .alert-bar a[href$='/privacy']" }],
+    "detectPopup": [{ "visible": "[data-testid=C75-alerts] .alert-bar a[href$='/privacy']" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=C75-alerts] .alert-bar:has(a[href$='/privacy']) button" }],
+    "optOut": [{ "waitForThenClick": "[data-testid=C75-alerts] .alert-bar:has(a[href$='/privacy']) button" }],
+    "test": [{ "waitForVisible": "[data-testid=C75-alerts] .alert-bar a[href$='/privacy']", "check": "none", "timeout": 2000 }]
+}
