@@ -120,6 +120,23 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            "Il Portale utilizza cookie tecnici in forma anonima, per migliorare l'esperienza di navigazione",
+            'Questo sito utilizza i cookie per migliorare la tua esperienza',
+            'Utilizziamo cookie tecnici e di profilazione',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Il Portale utilizza il servizio di ricerca per i corsi di laurea').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
