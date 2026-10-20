@@ -137,6 +137,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Questo sito utilizza cookie tecnici e di profilazione.',
+            'Utilizziamo i cookie per migliorare la tua esperienza.',
+            "iFixit utilizza tecnologie di tracciamento per migliorare le funzionalità del sito. Accetti l'uso dei cookie e l'Informativa sulla privacy.",
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Il negozio utilizza solo ingredienti freschi per i suoi biscotti.').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
