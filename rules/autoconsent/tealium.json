@@ -12,7 +12,7 @@
             "else": [
                 { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
                 {
-                    "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent",
+                    "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent,#deny_full_submit_1",
                     "timeout": 1000,
                     "optional": true
                 }
