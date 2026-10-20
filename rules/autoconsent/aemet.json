@@ -1,0 +1,35 @@
+{
+    "name": "aemet",
+    "vendorUrl": "https://www.aemet.es/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?aemet\\.es/"
+    },
+    "prehideSelectors": ["#popup_cookies"],
+    "detectCmp": [
+        {
+            "exists": "#popup_cookies .boton_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#popup_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#popup_cookies .boton_cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#popup_cookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#popup_cookies",
+            "check": "none"
+        }
+    ]
+}
