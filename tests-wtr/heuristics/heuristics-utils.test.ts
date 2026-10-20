@@ -72,6 +72,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Dutch cookie experience notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
