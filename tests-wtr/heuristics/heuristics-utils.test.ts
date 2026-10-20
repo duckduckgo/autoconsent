@@ -137,6 +137,24 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            "Questo sito NON utilizza alcun cookie di profilazione. Se vuoi saperne di più leggi l'informativa estesa sull'uso dei cookie.",
+            'Questo sito web utilizza i cookie per migliorare la tua esperienza.',
+            'Utilizziamo i cookie per personalizzare i contenuti.',
+            "Proseguendo la navigazione acconsenti all'utilizzo dei cookie.",
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(checkHeuristicPatterns('Questo sito offre servizi sanitari online ai cittadini').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
