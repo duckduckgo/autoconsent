@@ -1,0 +1,31 @@
+{
+    "name": "swedbank-cookie-banner",
+    "vendorUrl": "https://www.swedbank.se/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#component-cookie-banner #cookie-banner-accept-essentials"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#component-cookie-banner #cookie-banner-accept-essentials"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#component-cookie-banner #cookie-banner-initial-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#component-cookie-banner #cookie-banner-accept-essentials"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "COOKIE_CONSENT=functi-0%7Cmarket-0"
+        }
+    ]
+}
