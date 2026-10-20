@@ -116,6 +116,8 @@ export const snippets = {
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_COOKIE_LAW_INFO_0: () => {
         if (CLI.disableAllCookies) CLI.disableAllCookies();
+        // a reload on reject would abort the opt-out flow before it reports a result
+        if (CLI.settings) CLI.settings.reject_close_reload = false;
         if (CLI.reject_close) CLI.reject_close();
         document.body.classList.remove('cli-barmodal-open');
         return true;
