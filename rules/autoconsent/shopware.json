@@ -7,6 +7,10 @@
     "detectCmp": [
         {
             "exists": ".cookie-permission-container[data-cookie-permission] .js-cookie-configuration-button"
+        },
+        {
+            "visible": ".cookie-permission-container[data-cookie-permission]",
+            "comment": "sites using a third-party CMP keep the native banner hidden"
         }
     ],
     "detectPopup": [

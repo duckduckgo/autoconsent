@@ -6,7 +6,9 @@ generateCMPTests(
         // 'https://www.phaseone.com/', // appears only on user iteraction
         'https://www.georgjensen.com/',
         'https://www.power.no/',
-        'https://www.yourhearing.com/',
+        // Shopware stores with the native Shopware banner hidden
+        'https://www.webapoteket.dk/',
+        'https://www.lifeextensioneurope.nl/',
     ],
     {},
 );
