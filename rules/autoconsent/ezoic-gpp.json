@@ -1,0 +1,17 @@
+{
+    "name": "ezoic-gpp",
+    "prehideSelectors": ["#ezgpp-modal-overlay"],
+    "detectCmp": [{ "exists": "#ez-ccpa-reject-all" }],
+    "detectPopup": [{ "visible": "#ez-ccpa-reject-all" }, { "eval": "EVAL_EZOIC_GPP_NOT_OPTED_OUT" }],
+    "optIn": [{ "waitForThenClick": "#ez-ccpa-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#ez-ccpa-reject-all" },
+        { "waitFor": "#ezgpp-toggle1" },
+        {
+            "if": { "exists": "#ezgpp-toggle1:not(:checked)" },
+            "then": [{ "click": "label[for=ezgpp-toggle1]" }]
+        },
+        { "waitForThenClick": "#ezgpp-save-settings" }
+    ],
+    "test": [{ "eval": "EVAL_EZOIC_GPP_OPTED_OUT" }]
+}

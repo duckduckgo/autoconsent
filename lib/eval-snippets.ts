@@ -157,6 +157,21 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // the US notice stays on the page after a choice, so detect the stored GPP state instead (SaleOptOut: 1 = opted out)
+    EVAL_EZOIC_GPP_NOT_OPTED_OUT: () => {
+        let result = false;
+        window.__gpp('ping', (data) => {
+            result = data?.cmpStatus === 'loaded' && !Object.values(data.parsedSections || {}).some((s) => s?.SaleOptOut === 1);
+        });
+        return result;
+    },
+    EVAL_EZOIC_GPP_OPTED_OUT: () => {
+        let result = false;
+        window.__gpp('ping', (data) => {
+            result = Object.values(data?.parsedSections || {}).some((s) => s?.SaleOptOut === 1);
+        });
+        return result;
+    },
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
