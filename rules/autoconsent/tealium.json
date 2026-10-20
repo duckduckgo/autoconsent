@@ -7,8 +7,10 @@
         { "eval": "EVAL_TEALIUM_1" },
         { "eval": "EVAL_TEALIUM_DONOTSELL" },
         {
-            "if": { "exists": "#__tealiumGDPRecModal #rejectAll" },
-            "then": [{ "waitForThenClick": "#__tealiumGDPRecModal #rejectAll" }],
+            "if": { "exists": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" },
+            "then": [
+                { "waitForThenClick": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" }
+            ],
             "else": [
                 { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
                 {
@@ -23,6 +25,6 @@
     "test": [
         { "eval": "EVAL_TEALIUM_3" },
         { "eval": "EVAL_TEALIUM_DONOTSELL_CHECK" },
-        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs", "check": "none" }
+        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs > *", "check": "none" }
     ]
 }

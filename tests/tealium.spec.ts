@@ -15,3 +15,8 @@ generateCMPTests('Tealium', [
     'https://www.telekom.com/',
     'https://www.t-systems.com/',
 ]);
+
+// preferences prompt variant; the popup shows inconsistently to US visitors
+generateCMPTests('Tealium', ['https://www.keurig.ca/'], {
+    skipRegions: ['US'],
+});
