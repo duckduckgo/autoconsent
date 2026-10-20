@@ -1,0 +1,23 @@
+{
+    "name": "tinder",
+    "vendorUrl": "https://tinder.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tinder\\.com/"
+    },
+    "prehideSelectors": ["div[role=alertdialog][data-nosnippet][aria-describedby]"],
+    "detectCmp": [{ "exists": "div[role=alertdialog][data-nosnippet][aria-describedby]" }],
+    "detectPopup": [{ "visible": "div[role=alertdialog][data-nosnippet][aria-describedby]" }],
+    "optIn": [
+        { "waitForThenClick": "div[role=alertdialog][data-nosnippet][aria-describedby] > div > div:last-child > div:last-child > button" },
+        {
+            "waitForThenClick": "div[role=dialog][data-nosnippet][aria-labelledby] > div > div:last-of-type > div > div:nth-child(1) > button"
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": "div[role=alertdialog][data-nosnippet][aria-describedby] > div > div:last-child > div:last-child > button" },
+        {
+            "waitForThenClick": "div[role=dialog][data-nosnippet][aria-labelledby] > div > div:last-of-type > div > div:nth-child(2) > button"
+        }
+    ],
+    "test": [{ "waitForVisible": "div[role=alertdialog][data-nosnippet][aria-describedby]", "check": "none", "timeout": 2000 }]
+}
