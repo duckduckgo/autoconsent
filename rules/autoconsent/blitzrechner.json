@@ -1,0 +1,16 @@
+{
+    "name": "blitzrechner",
+    "vendorUrl": "https://www.blitzrechner.de/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?blitzrechner\\.de/"
+    },
+    "prehideSelectors": [".sygnal24-gdpr-modal-wrap"],
+    "detectCmp": [{ "exists": ".sygnal24-gdpr-modal-wrap" }],
+    "detectPopup": [{ "visible": ".sygnal24-gdpr-modal-wrap .sygnal24-gdpr-modal" }],
+    "optIn": [{ "waitForThenClick": ".sygnal24-gdpr-modal-wrap .sygnal24-gdpr-acceptAll" }],
+    "optOut": [
+        { "click": ".sygnal24-gdpr-modal-wrap .sygnal24-gdpr-options input:checked:not([disabled])", "all": true, "optional": true },
+        { "waitForThenClick": ".sygnal24-gdpr-modal-wrap .sygnal24-gdpr-accept-choice" }
+    ],
+    "test": [{ "cookieContains": "gdpr-consent=[\"necessary\"]" }]
+}
