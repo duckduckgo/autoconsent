@@ -1,0 +1,52 @@
+{
+    "name": "grupa-rmf",
+    "vendorUrl": "https://www.rmf.fm/",
+    "cosmetic": false,
+    "prehideSelectors": ["#gr-consent-layer-area"],
+    "detectCmp": [
+        {
+            "exists": "#gr-consent-layer #gr-btn-more-options"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gr-consent-layer-content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gr-btn-agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gr-btn-more-options"
+        },
+        {
+            "waitForThenClick": "#gr-btn-legitimate-partners"
+        },
+        {
+            "waitForVisible": "#toggleLegitimateCheckbox"
+        },
+        {
+            "if": {
+                "exists": "#toggleLegitimateCheckbox:not(:checked)"
+            },
+            "then": [
+                {
+                    "click": "#toggleLegitimateCheckbox"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#gr-btn-save-exit-primary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#gr-consent-layer-content",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
