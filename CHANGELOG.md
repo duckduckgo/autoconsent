@@ -1,3 +1,33 @@
+# v16.58.0 (Wed Oct 21 2026)
+
+#### Rules
+
+- Rule update: soteshop [#1949](https://github.com/duckduckgo/autoconsent/pull/1949) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: daikin [#1948](https://github.com/duckduckgo/autoconsent/pull/1948) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tinder [#1947](https://github.com/duckduckgo/autoconsent/pull/1947) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bleau-cookiecontrol [#1946](https://github.com/duckduckgo/autoconsent/pull/1946) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sc-cookie-banner [#1945](https://github.com/duckduckgo/autoconsent/pull/1945) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mega.io [#1944](https://github.com/duckduckgo/autoconsent/pull/1944) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieconsent2 [#1943](https://github.com/duckduckgo/autoconsent/pull/1943) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pubtech [#1942](https://github.com/duckduckgo/autoconsent/pull/1942) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bakeca [#1941](https://github.com/duckduckgo/autoconsent/pull/1941) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rabobank [#1940](https://github.com/duckduckgo/autoconsent/pull/1940) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chomikuj [#1939](https://github.com/duckduckgo/autoconsent/pull/1939) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: librus [#1938](https://github.com/duckduckgo/autoconsent/pull/1938) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gobiernodecanarias [#1937](https://github.com/duckduckgo/autoconsent/pull/1937) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aemet [#1936](https://github.com/duckduckgo/autoconsent/pull/1936) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: educamadrid [#1935](https://github.com/duckduckgo/autoconsent/pull/1935) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vd-ch [#1934](https://github.com/duckduckgo/autoconsent/pull/1934) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Tealium [#1933](https://github.com/duckduckgo/autoconsent/pull/1933) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Tealium [#1932](https://github.com/duckduckgo/autoconsent/pull/1932) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: costco [#1929](https://github.com/duckduckgo/autoconsent/pull/1929) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.57.0 (Tue Oct 20 2026)
 
 #### Rules
