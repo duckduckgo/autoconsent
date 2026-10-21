@@ -1,0 +1,14 @@
+{
+    "name": "shouldianswer",
+    "vendorUrl": "https://www.shouldianswer.com/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["footer.pageFooter #cookieBanner.cookieBanner"],
+    "detectCmp": [{ "exists": "footer.pageFooter #cookieBanner.cookieBanner" }],
+    "detectPopup": [{ "visible": "footer.pageFooter #cookieBanner.cookieBanner.visible" }],
+    "optIn": [{ "hide": "footer.pageFooter #cookieBanner.cookieBanner" }],
+    "optOut": [{ "hide": "footer.pageFooter #cookieBanner.cookieBanner" }]
+}
