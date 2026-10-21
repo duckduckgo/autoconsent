@@ -5,7 +5,7 @@
     "prehideSelectors": ["#consent-manager"],
     "detectCmp": [
         {
-            "exists": "#consent-manager"
+            "exists": "#consent-manager:has(button):not(:has(button[title=\"Close\"][aria-label=\"Close\"]))"
         },
         {
             "eval": "EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT"

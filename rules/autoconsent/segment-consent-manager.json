@@ -1,0 +1,78 @@
+{
+    "name": "segment-consent-manager",
+    "vendorUrl": "https://github.com/segmentio/consent-manager",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"])"
+        },
+        {
+            "eval": "EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > button[title=\"Close\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > div > button:nth-child(2)"
+            },
+            "then": [
+                {
+                    "click": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > div > button:nth-child(1)"
+                }
+            ],
+            "else": [
+                {
+                    "click": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > div > p > button[type=\"button\"]"
+                },
+                {
+                    "waitForVisible": "section[role=\"dialog\"] form input[type=\"radio\"][value=\"true\"]"
+                },
+                {
+                    "click": "section[role=\"dialog\"] form input[type=\"radio\"][value=\"true\"]",
+                    "all": true
+                },
+                {
+                    "click": "section[role=\"dialog\"] form button[type=\"submit\"]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > div > button:nth-child(2)"
+            },
+            "then": [
+                {
+                    "click": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > div > button:nth-child(2)"
+                }
+            ],
+            "else": [
+                {
+                    "click": "div:has(> div > p + p > button[type=\"button\"]):has(> button[type=\"button\"][title=\"Close\"][aria-label=\"Close\"]) > div > p > button[type=\"button\"]"
+                },
+                {
+                    "waitForVisible": "section[role=\"dialog\"] form input[type=\"radio\"][value=\"false\"]"
+                },
+                {
+                    "click": "section[role=\"dialog\"] form input[type=\"radio\"][value=\"false\"]",
+                    "all": true
+                },
+                {
+                    "click": "section[role=\"dialog\"] form button[type=\"submit\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketingAndAnalytics%22:false"
+        }
+    ]
+}
