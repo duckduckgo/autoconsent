@@ -1,0 +1,10 @@
+{
+    "name": "thomsonlocal.com",
+    "runContext": { "urlPattern": "^https?://(www\\.)?thomsonlocal\\.com/" },
+    "prehideSelectors": ["#cookie-notification"],
+    "detectCmp": [{ "exists": "#cookie-notification #accept-cookie" }],
+    "detectPopup": [{ "visible": "#cookie-notification:not(.hide)" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notification #accept-cookie" }],
+    "optOut": [{ "waitForThenClick": "#cookie-notification #accept-cookie" }],
+    "test": [{ "cookieContains": "cookies-accepted=true" }]
+}
