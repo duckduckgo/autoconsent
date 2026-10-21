@@ -1,0 +1,18 @@
+{
+    "name": "remove-cookie-notice",
+    "prehideSelectors": ["#cookie:has(a.remove_cookie[onclick*=\"/cookie/close\"])"],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[@id='cookie']//a[contains(@class,'remove_cookie') and contains(@onclick,'/cookie/close') and (normalize-space(.)='OK' or normalize-space(.)='x' or normalize-space(.)='×')]"
+        }
+    ],
+    "detectPopup": [{ "visible": "#cookie a.remove_cookie[onclick*=\"/cookie/close\"]" }],
+    "optIn": [{ "waitForThenClick": "#cookie a.remove_cookie[onclick*=\"/cookie/close\"]" }],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@id='cookie']//a[contains(@class,'remove_cookie') and contains(@onclick,'/cookie/close') and (normalize-space(.)='OK' or normalize-space(.)='x' or normalize-space(.)='×')]"
+        },
+        { "waitForVisible": "#cookie", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "visible": "#cookie", "check": "none" }]
+}
