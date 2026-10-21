@@ -823,7 +823,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
 
     // neutral "continue" without accept/reject wording
-    /^(continuer|doorgaan|ga verder)$/is,
+    /^(continuer|poursuivre|doorgaan|ga verder)$/is,
 
     'continue',
     'x',
