@@ -280,6 +280,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
     });
 
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('確認')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('確認しました')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('了解')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('確認して閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex(' 確認して閉じる ')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('同意して閉じる')).not.to.equal('acknowledge');
+        expect(classifyButtonTextRegex('確認して同意する')).not.to.equal('acknowledge');
+    });
+
     it('matches Russian settings buttons', () => {
         expect(classifyButtonTextRegex('Настроить')).to.equal('settings');
         expect(classifyButtonTextRegex('Настройки')).to.equal('settings');
