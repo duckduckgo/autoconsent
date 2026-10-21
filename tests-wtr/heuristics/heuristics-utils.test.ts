@@ -662,6 +662,17 @@ describe('getButtonData', () => {
         expect(buttons[0].text).to.equal('Has Text');
     });
 
+    it('does not let empty button-like children displace the button', () => {
+        container.innerHTML =
+            '<button class="group/button"><span aria-hidden="true" class="absolute group-hover/button:bg-hover"></span><span>Reject all</span></button>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons).to.have.length(1);
+        expect(buttons[0].text).to.equal('Reject all');
+        expect(buttons[0].element.tagName).to.equal('BUTTON');
+    });
+
     it('returns empty array if no buttons found', () => {
         container.innerHTML = '<div>No buttons here</div>';
 
