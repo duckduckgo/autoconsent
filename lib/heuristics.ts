@@ -126,14 +126,15 @@ function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
  * Serialize all actionable buttons on the page
  */
 export function getButtonData(el: HTMLElement): ButtonData[] {
-    const actionableButtons = excludeContainers(getButtonLikeElements(el)).filter(
+    // Empty or hidden button-like children (e.g. icon or loader wrappers) should not displace their labelled parent button.
+    const labelledElements = getButtonLikeElements(el).filter(
         (b) =>
             isElementVisible(b) &&
-            !isDisabled(b) &&
             (b.innerText?.trim() ||
                 // <input> values do not appear in innerText
                 (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) && b.value?.trim())),
     );
+    const actionableButtons = excludeContainers(labelledElements).filter((b) => !isDisabled(b));
 
     return actionableButtons.map((b) => ({
         text: (b.innerText || b.textContent || '').trim() || (b as HTMLInputElement).value?.trim() || '',

@@ -662,6 +662,33 @@ describe('getButtonData', () => {
         expect(buttons[0].text).to.equal('Has Text');
     });
 
+    it('keeps a labelled button whose only button-like child is empty', () => {
+        container.innerHTML = '<button class="btn"><div class="button_loaderWrapper"></div>Reject</button>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons).to.have.length(1);
+        expect(buttons[0].text).to.equal('Reject');
+        expect(buttons[0].element.tagName).to.equal('BUTTON');
+    });
+
+    it('prefers the innermost labelled button-like element', () => {
+        container.innerHTML = '<div class="buttons"><button>Reject</button></div>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons).to.have.length(1);
+        expect(buttons[0].element.tagName).to.equal('BUTTON');
+    });
+
+    it('does not fall back to a container when the inner button is disabled', () => {
+        container.innerHTML = '<div class="buttons"><button disabled>Reject</button></div>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons).to.have.length(0);
+    });
+
     it('returns empty array if no buttons found', () => {
         container.innerHTML = '<div>No buttons here</div>';
 
