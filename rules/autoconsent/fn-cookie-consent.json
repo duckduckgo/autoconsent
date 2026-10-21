@@ -1,0 +1,23 @@
+{
+    "name": "fn-cookie-consent",
+    "vendorUrl": "https://github.com/fatalnetwork/symfony-cookie-consent-bundle",
+    "prehideSelectors": ["#cookieconsent.fn-cookie-consent"],
+    "detectCmp": [{ "exists": ".fn-cookie-consent form.fn-cookie-consent__form" }],
+    "detectPopup": [{ "visible": ".fn-cookie-consent form.fn-cookie-consent__form" }],
+    "optIn": [{ "waitForThenClick": ".fn-cookie-consent__form .fn-cookie-consent__btn[name$='[use_all_cookies]']" }],
+    "optOut": [
+        {
+            "if": { "exists": ".fn-cookie-consent__form .fn-cookie-consent__btn[name$='[use_only_functional_cookies]']" },
+            "then": [{ "waitForThenClick": ".fn-cookie-consent__form .fn-cookie-consent__btn[name$='[use_only_functional_cookies]']" }],
+            "else": [
+                {
+                    "click": ".fn-cookie-consent__form .fn-cookie-consent__category input[type=checkbox]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".fn-cookie-consent__form .fn-cookie-consent__btn[name$='[save]']" }
+            ]
+        },
+        { "waitForVisible": ".fn-cookie-consent form.fn-cookie-consent__form", "check": "none", "timeout": 3000, "optional": true }
+    ]
+}
