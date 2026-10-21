@@ -1,0 +1,44 @@
+{
+    "name": "merito.pl",
+    "vendorUrl": "https://www.merito.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?merito\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "dialog.consent-dialog .consent-settings .consent-category input[data-category]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog.consent-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog.consent-dialog .consent-wrapper > .consent-buttons > .consent-button:not(.consent-button-secondary)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog.consent-dialog .consent-wrapper > .consent-buttons > .consent-button-secondary"
+        },
+        {
+            "waitForVisible": "dialog.consent-dialog .consent-settings.active"
+        },
+        {
+            "click": "dialog.consent-dialog .consent-category input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "dialog.consent-dialog .consent-settings .consent-buttons > .consent-button:not(.consent-button-secondary)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22ad_storage%22%3A%22denied%22"
+        }
+    ]
+}
