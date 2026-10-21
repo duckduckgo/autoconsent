@@ -1,0 +1,15 @@
+{
+    "name": "machines4u.com.au",
+    "comment": "Notice-only banner whose single control is the close button.",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?machines4u\\.com\\.au/"
+    },
+    "prehideSelectors": ["#consent-banner.consent-banner"],
+    "detectCmp": [{ "exists": "#consent-banner.consent-banner > button.consent-close" }],
+    "detectPopup": [{ "visible": "#consent-banner.consent-banner > button.consent-close" }],
+    "optIn": [{ "waitForThenClick": "#consent-banner > button.consent-close" }],
+    "optOut": [{ "waitForThenClick": "#consent-banner > button.consent-close" }],
+    "test": [{ "cookieContains": "consent_banner_dismissed=true" }]
+}
