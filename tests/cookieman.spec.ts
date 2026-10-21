@@ -7,4 +7,5 @@ generateCMPTests('cookieman', [
     'https://www.hs-niederrhein.de/',
     'https://www.foodwatch.org/',
     'https://www.wu.ac.at/',
+    'https://www.warta.pl/',
 ]);
