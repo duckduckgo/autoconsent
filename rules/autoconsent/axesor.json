@@ -1,0 +1,13 @@
+{
+    "name": "axesor",
+    "vendorUrl": "https://www.axesor.es/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?axesor\\.es/"
+    },
+    "prehideSelectors": ["#popup-cookies"],
+    "detectCmp": [{ "exists": "#popup-cookies .cancelar-popup" }],
+    "detectPopup": [{ "visible": "#popup-cookies .cancelar-popup" }],
+    "optIn": [{ "waitForThenClick": "#popup-cookies .aceptar-popup" }],
+    "optOut": [{ "waitForThenClick": "#popup-cookies .cancelar-popup" }],
+    "test": [{ "cookieContains": "disclaimerCookies=12=false&14=false&15=false" }]
+}
