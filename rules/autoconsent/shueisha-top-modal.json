@@ -1,0 +1,31 @@
+{
+    "name": "shueisha-top-modal",
+    "prehideSelectors": [".js-top-modal-window-container"],
+    "detectCmp": [
+        {
+            "exists": ".js-top-modal-window-container .js-top-modal-content a.modal-link[href*=\"privacy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-top-modal-window-container .js-top-modal-content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-top-modal-content button.close-modal.js-top-modal-close-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-top-modal-content button.close-modal.js-top-modal-close-button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".js-top-modal-window-container .js-top-modal-content",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
