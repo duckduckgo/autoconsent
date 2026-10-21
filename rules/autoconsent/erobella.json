@@ -1,0 +1,32 @@
+{
+    "name": "erobella",
+    "vendorUrl": "https://erobella.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?erobella\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookie-banner [e2e-id=adjust-cookie-settings]" }],
+    "detectPopup": [
+        { "visible": "#cookie-banner [e2e-id=adjust-cookie-settings]" },
+        { "cookieContains": "erob_consent=", "negated": true }
+    ],
+    "optIn": [
+        { "waitForThenClick": "#cookie-banner [e2e-id=adjust-cookie-settings]" },
+        { "waitForThenClick": "#cookie-banner .manage-cookies > div > button" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "#cookie-banner [e2e-id=adjust-cookie-settings]" },
+        { "waitFor": "#cookie-banner #functional" },
+        {
+            "if": { "exists": "#cookie-banner #functional:checked" },
+            "then": [{ "click": "#cookie-banner #functional" }],
+            "else": [{ "click": "#cookie-banner #functional" }, { "wait": 200 }, { "click": "#cookie-banner #functional" }]
+        },
+        {
+            "if": { "exists": "#cookie-banner #marketing:checked" },
+            "then": [{ "click": "#cookie-banner #marketing" }]
+        },
+        { "waitForThenClick": "#cookie-banner [e2e-id=secondary-cookie-save-btn]:not([disabled])" }
+    ],
+    "test": [{ "cookieContains": "erob_consent=functional:false|marketing:false" }]
+}
