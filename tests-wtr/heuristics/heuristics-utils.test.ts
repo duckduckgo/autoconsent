@@ -319,6 +319,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
     });
 
+    it('matches Polish hide buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Ukryj')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ukryj szczegóły')).to.equal('other');
+    });
+
     it('does not treat Russian subscription buttons as reject', () => {
         expect(classifyButtonTextRegex('Отказаться от подписки')).to.equal('other');
     });
