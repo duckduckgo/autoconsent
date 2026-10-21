@@ -1,0 +1,65 @@
+{
+    "name": "eboxx",
+    "vendorUrl": "https://xoo.cc/",
+    "prehideSelectors": [".app-message.namespace-cookie-consent", ".app-message.namespace-cookie-policy"],
+    "detectCmp": [
+        {
+            "exists": ".app-message.namespace-cookie-consent #ccc-form, .app-message.namespace-cookie-policy button.closeable"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".app-message.namespace-cookie-consent, .app-message.namespace-cookie-policy"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".app-message.namespace-cookie-consent #ccc-form"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#ccc-form button[name=confirm][value=all]",
+                    "retry": 2
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".app-message.namespace-cookie-policy button.closeable",
+                    "retry": 3
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".app-message.namespace-cookie-consent #ccc-form"
+            },
+            "then": [
+                {
+                    "click": "#ccc-form input[name=cookie_categories]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#ccc-form button[name=confirm][value=selected]",
+                    "retry": 2
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".app-message.namespace-cookie-policy button.closeable",
+                    "retry": 3
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".app-message.namespace-cookie-consent, .app-message.namespace-cookie-policy",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

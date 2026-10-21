@@ -835,6 +835,8 @@ export const ACKNOWLEDGE_PATTERNS = [
 
     // German (DE)
     'speichern schließen',
+    // e.g. "ausblenden", "Ok. Ausblenden.", "Hinweis ausblenden"
+    /^(ok[ .!,]*)?(hinweis )?ausblenden[ .!]*$/is,
 
     // Spanish (ES)
     /^.?( lo)?(entendido|entiendo).?$/s,

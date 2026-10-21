@@ -309,6 +309,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
     });
 
+    it('matches German hide buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Ausblenden')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ok. Ausblenden.')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Hinweis ausblenden')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Details ausblenden')).not.to.equal('acknowledge');
+    });
+
     it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
         expect(classifyButtonTextRegex('Подтвердить')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Подтверждаю')).to.equal('acknowledge');
