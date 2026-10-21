@@ -1,0 +1,34 @@
+{
+    "name": "animatetimes",
+    "vendorUrl": "https://www.animatetimes.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?animatetimes\\.com/"
+    },
+    "prehideSelectors": ["#cookie-agreement"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-agreement"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-agreement"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-agreement .agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-agreement .dismiss"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie-agreement",
+            "check": "none"
+        }
+    ]
+}
