@@ -1,0 +1,10 @@
+{
+    "name": "commanders-act",
+    "vendorUrl": "https://www.commandersact.com/",
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [{ "exists": "#tc-privacy-wrapper" }, { "eval": "EVAL_COMMANDERS_ACT_DETECT" }],
+    "detectPopup": [{ "visible": "#footer_tc_privacy,#popin_tc_privacy,#header_tc_privacy" }],
+    "optIn": [{ "eval": "EVAL_COMMANDERS_ACT_OPT_IN" }],
+    "optOut": [{ "eval": "EVAL_COMMANDERS_ACT_OPT_OUT" }],
+    "test": [{ "visible": "#tc-privacy-wrapper", "check": "none" }, { "eval": "EVAL_COMMANDERS_ACT_TEST" }]
+}

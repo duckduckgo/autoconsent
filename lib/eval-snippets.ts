@@ -22,6 +22,10 @@ export const snippets = {
         const disabled = window.Didomi?.getUserConsentStatusForAll?.()?.purposes?.disabled;
         return Array.isArray(disabled) && disabled.length > 0;
     },
+    EVAL_COMMANDERS_ACT_DETECT: () => typeof window.tC?.privacy?.clickBanner === 'function',
+    EVAL_COMMANDERS_ACT_OPT_OUT: () => tC.privacy.clickBanner('optout') || true,
+    EVAL_COMMANDERS_ACT_OPT_IN: () => tC.privacy.clickBanner('optin') || true,
+    EVAL_COMMANDERS_ACT_TEST: () => tC.privacy.getOptinCategories().length === 0,
     EVAL_CONSENTMANAGER_1: () => {
         const cmpData = window.__cmp?.('getCMPData');
         return !!cmpData && typeof cmpData === 'object';
