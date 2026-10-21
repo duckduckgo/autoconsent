@@ -1,0 +1,42 @@
+{
+    "name": "trustcommander-privacy-center",
+    "_metadata": {
+        "vendorUrl": "https://www.commandersact.com/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://cdn\\.trustcommander\\.net/privacy-center/"
+    },
+    "detectCmp": [{ "exists": "#privacy-cat-modal .modal-footer .buttons-container > button.btn-primary" }],
+    "detectPopup": [
+        { "visible": "#privacy-cat-modal .modal-footer .buttons-container > button.btn-primary" },
+        { "exists": "#privacy-cat-modal .category-container" }
+    ],
+    "optIn": [{ "waitForThenClick": "#privacy-cat-modal .accept-all", "retry": 3, "retryInterval": 500 }],
+    "optOut": [
+        {
+            "if": { "visible": "#privacy-cat-modal .refuse-all" },
+            "then": [{ "waitForThenClick": "#privacy-cat-modal .refuse-all", "retry": 3, "retryInterval": 500 }],
+            "else": [
+                {
+                    "click": "#privacy-cat-modal .btn-toggle.btn-toggle-on, #privacy-cat-modal .btn-toggle.default-neutral, #privacy-cat-modal input.tc-checkbox-native:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#privacy-cat-modal .modal-footer .buttons-container > button.btn-primary",
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#privacy-cat-modal .modal-footer .buttons-container > button.btn-primary",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
