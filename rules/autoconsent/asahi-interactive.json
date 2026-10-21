@@ -1,0 +1,30 @@
+{
+    "name": "asahi-interactive",
+    "vendorUrl": "https://aiasahi.jp/cookie/",
+    "prehideSelectors": ["#gdpr_area"],
+    "detectCmp": [
+        {
+            "exists": "#gdpr_area .gdpr_area_inner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr_area"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr_area .gdpr_btn_agree, #gdpr_area #gdpr_btn_agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr_area .gdpr_btn_agree, #gdpr_area #gdpr_btn_agree"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "is_gdpr_agree=1"
+        }
+    ]
+}
