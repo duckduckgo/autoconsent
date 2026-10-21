@@ -229,6 +229,9 @@ const REJECT_PATTERNS_DUTCH = [
     // "nee" refusals (but not "nee, sluiten" → acknowledge)
     /^nee(,?\s+(bedankt|dank je|dankje|liever niet|liever geen cookies|geen persoonlijke cookies|geen cookies.*|weigeren?))?$/is,
 
+    // "(nee,) ik wil geen (optimale/extra/...) cookies"
+    /^(nee,?\s+)?ik wil geen\s+(\S+\s+)?cookies$/is,
+
     'niet accepteren',
     'niet akkoord',
     'ik ga niet akkoord',

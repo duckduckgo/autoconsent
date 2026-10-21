@@ -235,6 +235,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
     });
 
+    it('matches Dutch "ik wil geen cookies" refusals', () => {
+        expect(classifyButtonTextRegex('Nee, ik wil geen optimale cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ik wil geen cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja, ik accepteer optimale cookies')).not.to.equal('reject');
+    });
+
     it('returns other for empty string', () => {
         expect(classifyButtonTextRegex('')).to.equal('other');
     });
