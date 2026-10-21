@@ -1,0 +1,13 @@
+{
+    "name": "synergy-net-au",
+    "vendorUrl": "https://www.synergy.net.au/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?synergy\\.net\\.au/"
+    },
+    "prehideSelectors": ["#cookie.alert--cookie"],
+    "detectCmp": [{ "exists": "#cookie.alert--cookie" }],
+    "detectPopup": [{ "visible": "#cookie.alert--cookie.alert--active" }],
+    "optIn": [{ "waitForThenClick": "#cookie.alert--cookie button.alert-close" }],
+    "optOut": [{ "waitForThenClick": "#cookie.alert--cookie button.alert-close" }],
+    "test": [{ "cookieContains": "synergy.alert.cookie=true" }]
+}
