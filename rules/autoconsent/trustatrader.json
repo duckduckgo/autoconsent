@@ -1,0 +1,10 @@
+{
+    "name": "trustatrader",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?trustatrader\\.com/" },
+    "prehideSelectors": ["div.cookie[data-cookie-consent]"],
+    "detectCmp": [{ "exists": "div.cookie[data-cookie-consent] [data-cookie-consent-btn=\"decline\"]" }],
+    "detectPopup": [{ "visible": "div.cookie[data-cookie-consent]" }],
+    "optIn": [{ "waitForThenClick": "div.cookie[data-cookie-consent] [data-cookie-consent-btn=\"accept\"]" }],
+    "optOut": [{ "waitForThenClick": "div.cookie[data-cookie-consent] [data-cookie-consent-btn=\"decline\"]" }],
+    "test": [{ "cookieContains": "cookie_consent=declined" }]
+}
