@@ -75,6 +75,7 @@
     "prettier": "3.9.10",
     "randexp": "^0.5.3",
     "sinon": "^22.0.0",
+    "tldts-experimental": "^7.4.3",
     "ts-json-schema-generator": "^2.3.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
@@ -198,8 +199,5 @@
     "plugins": [
       "npm"
     ]
-  },
-  "dependencies": {
-    "tldts-experimental": "^7.4.3"
   }
 }
