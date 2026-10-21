@@ -1,0 +1,31 @@
+{
+    "name": "erli.pl",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?erli\\.pl/"
+    },
+    "detectCmp": [{ "exists": "xpath///div[h5[contains(., 'Ustawienia prywatności i cookies')]]" }],
+    "detectPopup": [{ "visible": "xpath///div[h5[contains(., 'Ustawienia prywatności i cookies')]]" }],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "xpath///div[h5[contains(., 'Ustawienia prywatności i cookies')]]",
+                "xpath/.//button[contains(., 'Zgadzam się')]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "xpath///div[h5[contains(., 'Ustawienia prywatności i cookies')]]",
+                "xpath/.//button[contains(., 'Zmień ustawienia')]"
+            ]
+        },
+        {
+            "waitForThenClick": [
+                "xpath///div[h5[contains(., 'Ustawienia prywatności i cookies')]]",
+                "xpath/.//button[contains(., 'Zezwól na wybrane')]"
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_ERLI_TEST" }]
+}
