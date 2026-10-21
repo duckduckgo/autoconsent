@@ -1,0 +1,21 @@
+{
+    "name": "brainsum-cookieconsent",
+    "vendorUrl": "https://github.com/brainsum/cookieconsent",
+    "prehideSelectors": ["#cconsent-bar", "#cconsent-modal"],
+    "detectCmp": [{ "exists": "#cconsent-bar .ccb__edit" }, { "exists": "#ccm__footer__consent-modal-submit" }],
+    "detectPopup": [{ "visible": "#cconsent-bar:not(.ccb--hidden) .ccb__edit" }],
+    "optIn": [{ "waitForThenClick": "#cconsent-bar .consent-give" }],
+    "optOut": [
+        { "waitForThenClick": "#cconsent-bar .ccb__edit" },
+        { "waitForVisible": "#cconsent-modal.ccm--visible" },
+        { "click": "#cconsent-modal .ccm__switch-group[aria-checked=true]", "all": true, "optional": true },
+        { "click": "#cconsent-modal .ccm__switch input:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#ccm__footer__consent-modal-submit" }
+    ],
+    "test": [
+        { "wait": 1000 },
+        { "waitForVisible": "#cconsent-bar:not(.ccb--hidden)", "check": "none", "timeout": 2000 },
+        { "cookieContains": "cconsent=" },
+        { "cookieContains": "\"wanted\":false" }
+    ]
+}
