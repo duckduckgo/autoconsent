@@ -1,0 +1,45 @@
+{
+    "name": "renaud-bray",
+    "vendorUrl": "https://www.renaud-bray.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?renaud-bray\\.com/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner .cookie-banner-preferences-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner .cookie-banner-agree-to-all-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner .cookie-banner-preferences-btn"
+        },
+        {
+            "waitForVisible": "#cookie-consent-detail"
+        },
+        {
+            "if": {
+                "exists": "#cookie-consent-detail input[type=checkbox]:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-consent-detail input[type=checkbox]:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-consent-detail .modal-content-agree-to-preference-btn"
+        }
+    ]
+}
