@@ -1,5 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import { getActionablePopups, getButtonData, getFramePopupElement, getPotentialPopups } from '../../lib/heuristics';
+import { PopupData } from '../../lib/types';
 import { getHidingStyle } from '../../lib/utils';
 
 const BANNER = `
@@ -50,6 +51,10 @@ describe('getPotentialPopups', () => {
 
     function findPopup(id: string) {
         return getPotentialPopups(1000).find((p) => p.element.id === id);
+    }
+
+    function inContainer(popups: PopupData[]): PopupData[] {
+        return popups.filter((p) => container.contains(p.element));
     }
 
     it('returns positioned popups with their buttons', () => {
@@ -240,7 +245,7 @@ describe('getPotentialPopups', () => {
                     <div style="position: fixed; bottom: 0;"><button>Reject all</button><button>Accept all</button></div>
                 </div>
             `;
-            const popups = getPotentialPopups(1000).filter((p) => container.contains(p.element));
+            const popups = inContainer(getPotentialPopups(1000));
             expect(popups.map((p) => p.element.id)).to.deep.equal(['banner']);
         });
 
@@ -298,7 +303,7 @@ describe('getPotentialPopups', () => {
                     <div style="position: sticky; bottom: 0;"><button>Accept all</button></div>
                 </div>
             `;
-            const popups = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            const popups = inContainer(getActionablePopups('tier2', 1000));
             expect(popups).to.have.length(0);
         });
     });
@@ -314,7 +319,7 @@ describe('getPotentialPopups', () => {
         it('only hit-tests when asked to', () => {
             container.innerHTML = IN_FLOW_BANNER;
             expect(popupIds()).not.to.include('banner');
-            expect(getActionablePopups('reject', 1000).filter((p) => container.contains(p.element))).to.have.length(0);
+            expect(inContainer(getActionablePopups('reject', 1000))).to.have.length(0);
         });
 
         it('finds a banner at the top of the page that is not positioned', () => {
@@ -361,7 +366,7 @@ describe('getPotentialPopups', () => {
                 <div id="inflow"><p>We use cookies to improve your experience.</p><button>Accept all</button></div>
                 <div id="fixed" style="position: fixed; bottom: 0;"><p>We use cookies.</p><button>Reject all</button><button>Accept all</button></div>
             `;
-            const popups = getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element));
+            const popups = inContainer(getActionablePopups('tier2', 1000, true));
             expect(popups.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([
                 ['fixed', 'reject'],
                 ['inflow', 'tier2'],
@@ -374,7 +379,7 @@ describe('getPotentialPopups', () => {
                 ${IN_FLOW_BANNER}
                 <div id="fixed" style="position: fixed; bottom: 0; pointer-events: none;"><p>We use cookies.</p><button>Reject all</button></div>
             `;
-            const actionable = getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element));
+            const actionable = inContainer(getActionablePopups('tier2', 1000, true));
             expect(actionable.map((p) => p.element.id)).to.deep.equal(['banner']);
             expect(popupIds(true)).to.include.members(['banner', 'fixed']);
         });
@@ -396,7 +401,7 @@ describe('getPotentialPopups', () => {
             it('keeps a consent popup found by hit-testing next to the walk candidate', () => {
                 // the top grid row hits the banner, so hit-testing finds the banner rather than the wrapper
                 container.innerHTML = ageGateWrapper(true);
-                const popups = getPotentialPopups(1000, true).filter((p) => container.contains(p.element));
+                const popups = inContainer(getPotentialPopups(1000, true));
                 expect(popups.map((p) => [p.element.id, p.source])).to.deep.equal([
                     ['wrapper', 'walk'],
                     ['banner', 'hitTest'],
@@ -407,35 +412,18 @@ describe('getPotentialPopups', () => {
 
             it('makes the consent popup found by hit-testing actionable', () => {
                 container.innerHTML = ageGateWrapper(true);
-                const actionable = getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element));
+                const actionable = inContainer(getActionablePopups('tier2', 1000, true));
                 expect(actionable.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([['banner', 'tier2']]);
             });
 
             it('reports the wrapper once when hit-testing also reaches it', () => {
                 // the top grid row hits the age gate text, so the climb reaches the wrapper
                 container.innerHTML = ageGateWrapper(false);
-                const popups = getPotentialPopups(1000, true).filter((p) => container.contains(p.element));
+                const popups = inContainer(getPotentialPopups(1000, true));
                 expect(popups.map((p) => [p.element.id, p.source])).to.deep.equal([['wrapper', 'walk']]);
                 expect(popups[0].hitPoints).not.to.be.empty;
-                expect(getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element))).to.be.empty;
+                expect(inContainer(getActionablePopups('tier2', 1000, true))).to.be.empty;
             });
-        });
-
-        it('skips the DOM walk when skipWalk returns true for the hit-test popups', () => {
-            // pointer-events: none keeps the fixed popup out of hit-testing, so only the walk could find it
-            container.innerHTML = `
-                ${IN_FLOW_BANNER}
-                <div id="fixed" style="position: fixed; bottom: 0; pointer-events: none;"><p>We use cookies.</p><button>Reject all</button></div>
-            `;
-            const seen: string[][] = [];
-            const skipWalk = (popups: ReturnType<typeof getPotentialPopups>) => {
-                seen.push(popups.map((p) => p.element.id));
-                return true;
-            };
-            const ids = getPotentialPopups(1000, true, undefined, skipWalk).map((p) => p.element.id);
-            expect(seen).to.deep.equal([ids]);
-            expect(ids).to.include('banner');
-            expect(ids).not.to.include('fixed');
         });
     });
 
@@ -498,7 +486,7 @@ describe('getPotentialPopups', () => {
             container.innerHTML = `<div id="banner" style="height: 100px; overflow: hidden;">${BANNER}</div>`;
             try {
                 expect(container.querySelector('#banner')!.getBoundingClientRect().top).to.equal(100);
-                expect(getPotentialPopups(1000, true).filter((p) => container.contains(p.element))).to.have.length(0);
+                expect(inContainer(getPotentialPopups(1000, true))).to.have.length(0);
                 const withRow150 = getPotentialPopups(1000, true, { columns: [0.1, 0.5, 0.9], edgeRows: [30, 90, 150] });
                 expect(withRow150.map((p) => p.element.id)).to.include('banner');
             } finally {

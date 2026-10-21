@@ -126,7 +126,8 @@ export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    regexClassification?: PopupClassification;
+    // from the buttons alone; whether the popup text is consent text is checked separately
+    regexClassification: PopupClassification;
     // which search found the popup: the DOM walk, the viewport hit test, or the whole document of a frame
     source?: 'walk' | 'hitTest' | 'frame';
     // viewport points ([x, y] in CSS px) whose hit test reached this popup

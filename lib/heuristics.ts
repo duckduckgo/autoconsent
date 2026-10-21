@@ -20,12 +20,12 @@ const ACCEPTED_LEVELS: Record<HeuristicLevel, PopupClassification[]> = {
  */
 export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME, hitTest = false): PopupData[] {
     const acceptedLevels = ACCEPTED_LEVELS[mode];
-    const isActionable = (popup: PopupData) => isConsentPopup(popup) && acceptedLevels.includes(popup.regexClassification!);
+    const isActionable = (popup: PopupData) => acceptedLevels.includes(popup.regexClassification) && isConsentPopup(popup);
     // the walk cannot find a better popup than one with reject
-    const hasRejectPopup = (popups: PopupData[]) => popups.some((p) => isActionable(p) && p.regexClassification === 'reject');
-    const popups = getPotentialPopups(timeout, hitTest, DEFAULT_HIT_TEST_GRID, hasRejectPopup).filter(isActionable);
+    const hasRejectPopup = (popups: PopupData[]) => popups.some((p) => p.regexClassification === 'reject' && isActionable(p));
+    const popups = searchPopups(timeout, hitTest, DEFAULT_HIT_TEST_GRID, hasRejectPopup).filter(isActionable);
     // a popup with reject will always win
-    return popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
+    return popups.sort((a, b) => (a.regexClassification > b.regexClassification ? 1 : -1));
 }
 
 /**
@@ -33,43 +33,48 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
  * @param timeout time budget for the whole search, in ms
  * @param hitTest also hit-test the viewport for popups the DOM walk cannot find
  * @param hitTestGrid points to hit-test, if not the default grid
+ */
+export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, hitTest = false, hitTestGrid = DEFAULT_HIT_TEST_GRID): PopupData[] {
+    return searchPopups(timeout, hitTest, hitTestGrid);
+}
+
+/**
  * @param skipWalk skip the DOM walk when this returns true for the popups found by hit-testing
  */
-export function getPotentialPopups(
-    timeout = POPUP_SEARCH_MAX_TIME,
-    hitTest = false,
-    hitTestGrid = DEFAULT_HIT_TEST_GRID,
+function searchPopups(
+    timeout: number,
+    hitTest: boolean,
+    hitTestGrid: HitTestGrid,
     skipWalk?: (hitTestPopups: PopupData[]) => boolean,
 ): PopupData[] {
     if (!isTopFrame()) {
-        return labelPopups(getFramePopups());
+        return getFramePopups();
     }
     const deadline = performance.now() + timeout;
     // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
-    const hitTestPopups = hitTest ? labelPopups(findPopupsByHitTest(deadline, hitTestGrid)) : [];
+    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline, hitTestGrid) : [];
     if (skipWalk?.(hitTestPopups)) {
         return hitTestPopups;
     }
-    const walkPopups = labelPopups(collectPositionedPopups(deadline));
+    const walkPopups = collectPositionedPopups(deadline);
     return [...walkPopups, ...mergeWalkOverlaps(hitTestPopups, walkPopups)];
 }
 
-function labelPopups(popups: PopupData[]): PopupData[] {
-    for (const popup of popups) {
-        popup.regexClassification = classifyPopup(popup.buttons);
-    }
-    return popups;
-}
+// isConsentPopup scans the popup text with many patterns, and the search asks for the same popup more than once
+const consentPopups = new WeakMap<PopupData, boolean>();
 
 // a consent popup the heuristic rule could act on in some mode
 function isConsentPopup(popup: PopupData): boolean {
-    const popupText = popup.text?.trim();
-    return (
-        !!popupText &&
-        !isExcludedPopup(popupText) &&
-        hasHeuristicPatterns(popupText) &&
-        ACCEPTED_LEVELS.tier2.includes(popup.regexClassification!)
-    );
+    if (!ACCEPTED_LEVELS.tier2.includes(popup.regexClassification)) {
+        return false;
+    }
+    let result = consentPopups.get(popup);
+    if (result === undefined) {
+        const popupText = popup.text.trim();
+        result = !!popupText && !isExcludedPopup(popupText) && hasHeuristicPatterns(popupText);
+        consentPopups.set(popup, result);
+    }
+    return result;
 }
 
 /**
@@ -78,10 +83,10 @@ function isConsentPopup(popup: PopupData): boolean {
  */
 function mergeWalkOverlaps(hitTestPopups: PopupData[], walkPopups: PopupData[]): PopupData[] {
     return hitTestPopups.filter((h) => {
-        const keepBoth = (p: PopupData) => isConsentPopup(h) && !isConsentPopup(p);
-        const walkPopup = walkPopups.find((p) => composedOverlaps(p.element, h.element) && !keepBoth(p));
+        const hitIsConsent = isConsentPopup(h);
+        const walkPopup = walkPopups.find((p) => composedOverlaps(p.element, h.element) && (!hitIsConsent || isConsentPopup(p)));
         if (walkPopup) {
-            walkPopup.hitPoints = [...(walkPopup.hitPoints ?? []), ...(h.hitPoints ?? [])];
+            (walkPopup.hitPoints ??= []).push(...(h.hitPoints ?? []));
         }
         return !walkPopup;
     });
@@ -95,7 +100,11 @@ function getFramePopups(): PopupData[] {
     // for iframes, just take the whole document
     const frameElement = getFramePopupElement(document);
     const popup = frameElement && toPopupData(frameElement);
-    return popup ? [{ ...popup, source: 'frame' }] : [];
+    if (!popup) {
+        return [];
+    }
+    popup.source = 'frame';
+    return [popup];
 }
 
 // fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
@@ -147,17 +156,18 @@ function findPopupsByHitTest(deadline: number, grid: HitTestGrid): PopupData[] {
             }
             const x = Math.round(column * window.innerWidth);
             const path: HTMLElement[] = [];
-            const reached: { popup: PopupData | null } = { popup: null };
+            // the cast stops TypeScript narrowing to null, as only the shouldStop closure assigns it before use
+            let reached = null as PopupData | null;
             // stop where an earlier climb already went, and at popups already found
             const shouldStop = (el: HTMLElement) => {
                 if (climbed.has(el)) {
-                    reached.popup = climbed.get(el) ?? null;
+                    reached = climbed.get(el) ?? null;
                     return true;
                 }
                 // the climb went inside a popup already found, or reached one of its ancestors
                 const overlapped = found.find((p) => composedOverlaps(p.element, el));
                 if (overlapped) {
-                    reached.popup = composedContains(overlapped.element, el) ? overlapped : null;
+                    reached = composedContains(overlapped.element, el) ? overlapped : null;
                     return true;
                 }
                 path.push(el);
@@ -167,14 +177,15 @@ function findPopupsByHitTest(deadline: number, grid: HitTestGrid): PopupData[] {
             const popup = climbToPopup(hit, MAX_HIT_TEST_CLIMB_DEPTH, toPopup, shouldStop);
             if (popup) {
                 popup.source = 'hitTest';
-                popup.hitPoints = [];
                 found.push(popup);
-                reached.popup = popup;
+                reached = popup;
             }
             for (const el of path) {
-                climbed.set(el, reached.popup);
+                climbed.set(el, reached);
             }
-            reached.popup?.hitPoints?.push([x, y]);
+            if (reached) {
+                (reached.hitPoints ??= []).push([x, y]);
+            }
         }
     }
     return found;
@@ -215,7 +226,7 @@ function toPopupData(el: HTMLElement, shadowHosts?: HTMLElement[], text = getEle
     }
     const buttons = getButtonData(el, shadowHosts);
     classifyButtons(buttons);
-    return { text, element: el, buttons };
+    return { text, element: el, buttons, regexClassification: classifyPopup(buttons) };
 }
 
 // buttons beyond their labels, and at least one button the heuristics recognise (not just policy links)
