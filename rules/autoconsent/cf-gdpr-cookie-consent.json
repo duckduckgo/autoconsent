@@ -1,0 +1,23 @@
+{
+    "name": "cf-gdpr-cookie-consent",
+    "vendorUrl": "https://cyberfolks.pl/",
+    "prehideSelectors": [".cfGdprCookieConsentPopup"],
+    "detectCmp": [{ "exists": ".cfGdprCookieConsentPopup #cfGdprCookieConsentPopupSettings" }],
+    "detectPopup": [{ "visible": ".cfGdprCookieConsentPopup #cfGdprCookieConsentPopupSettings" }],
+    "optIn": [{ "waitForThenClick": ".cfGdprCookieConsentPopup #cfGdprCookieConsentPopupAccept" }],
+    "optOut": [
+        { "waitForThenClick": ".cfGdprCookieConsentPopup #cfGdprCookieConsentPopupSettings" },
+        { "waitForVisible": ".cfGdprCookieConsentPopup #cfGdprCookieConsentPopupSaveSettings" },
+        {
+            "if": { "exists": ".cfGdprCookieConsentPopup__settings input[type=checkbox]:checked" },
+            "then": [{ "click": ".cfGdprCookieConsentPopup__settings input[type=checkbox]:checked", "all": true }]
+        },
+        { "click": ".cfGdprCookieConsentPopup #cfGdprCookieConsentPopupSaveSettings" },
+        { "waitForVisible": ".cfGdprCookieConsentPopup", "check": "none" }
+    ],
+    "test": [
+        { "cookieContains": "CF_GDPR_COOKIE_CONSENT_PERFORMANCE=0" },
+        { "cookieContains": "CF_GDPR_COOKIE_CONSENT_SOCIAL=0" },
+        { "cookieContains": "CF_GDPR_COOKIE_CONSENT_MARKETING=0" }
+    ]
+}
