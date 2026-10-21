@@ -95,6 +95,25 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            'Vi på Kjell & Company önskar att ge dig en unik kundupplevelse och för att kunna göra detta använder vi cookies.',
+            'Genom att trycka "Acceptera alla" godkänner du användandet av sådana cookies.',
+            'Webbplatsen använder kakor för att förbättra din upplevelse',
+            'Vi använder nödvändiga cookies för att sidan ska fungera',
+            'Du kan när som helst ändra ditt samtycke till användningen av kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder bara de bästa ingredienserna i våra kakor och bullar').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
