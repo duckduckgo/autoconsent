@@ -242,6 +242,8 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).preference_state === 2,
+    EVAL_SWISSCARD_TEST: () =>
+        Object.entries(JSON.parse(localStorage.getItem('sc-privacy-settings'))).every(([k, v]) => k === 'cc1' || v !== 'enabled'),
     EVAL_TAKEALOT_0: () => document.body.classList.remove('freeze') || (document.body.style = '') || true,
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,

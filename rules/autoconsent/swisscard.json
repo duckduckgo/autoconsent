@@ -1,0 +1,26 @@
+{
+    "name": "swisscard",
+    "vendorUrl": "https://www.swisscard.ch/",
+    "prehideSelectors": [".m-cookie-layer"],
+    "detectCmp": [{ "exists": ".m-cookie-layer .js-m-cookie-layer__manage-button" }],
+    "detectPopup": [{ "visible": ".m-cookie-layer.state-m-cookie-layer--visible" }],
+    "optIn": [{ "waitForThenClick": ".m-cookie-layer .js-m-cookie-layer__accept-button" }],
+    "optOut": [
+        { "waitForThenClick": ".m-cookie-layer .js-m-cookie-layer__manage-button" },
+        { "waitForVisible": ".o-overlay--privacy-settings .js-cms-privacy-settings__save" },
+        {
+            "click": ".o-overlay--privacy-settings .js-cms-privacy-settings__item-switcher[aria-checked=\"true\"]",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForVisible": ".o-overlay--privacy-settings .js-cms-privacy-settings__item-switcher[aria-checked=\"true\"]",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        },
+        { "click": ".o-overlay--privacy-settings .js-cms-privacy-settings__save" },
+        { "waitForVisible": ".o-overlay--privacy-settings", "check": "none" }
+    ],
+    "test": [{ "eval": "EVAL_SWISSCARD_TEST" }]
+}
