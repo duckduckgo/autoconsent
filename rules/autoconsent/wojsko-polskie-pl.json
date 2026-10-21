@@ -1,0 +1,28 @@
+{
+    "name": "wojsko-polskie-pl",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?wojsko-polskie\\.pl/"
+    },
+    "prehideSelectors": ["#cookiePolicy:has(#cookiePolicyClose)"],
+    "detectCmp": [
+        {
+            "exists": "#cookiePolicy #cookiePolicyWrap #cookiePolicyClose"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiePolicy:has(#cookiePolicyClose)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiePolicy #cookiePolicyClose"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookiePolicy:has(#cookiePolicyClose)"
+        }
+    ]
+}
