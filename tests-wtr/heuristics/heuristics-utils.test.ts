@@ -195,6 +195,13 @@ describe('cleanButtonText', () => {
         expect(cleanButtonText('Reject\n\nAll')).to.equal('reject all');
     });
 
+    it('collapses a label repeated by a screen-reader copy', () => {
+        expect(cleanButtonText('Nie\nNie')).to.equal('nie');
+        expect(cleanButtonText('Reject all Reject all')).to.equal('reject all');
+        expect(cleanButtonText('Tak\nZgoda')).to.equal('tak zgoda');
+        expect(cleanButtonText('Reject all reject')).to.equal('reject all reject');
+    });
+
     it('handles empty string', () => {
         expect(cleanButtonText('')).to.equal('');
     });

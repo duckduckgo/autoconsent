@@ -116,6 +116,8 @@ export function cleanButtonText(buttonText: string): string {
     result = result.replace(/\s+/g, ' ');
     // strip whitespace around the text
     result = result.trim();
+    // collapse a label repeated twice, e.g. by a visually hidden screen-reader copy
+    result = result.replace(/^(.+) \1$/, '$1');
     return result;
 }
 
