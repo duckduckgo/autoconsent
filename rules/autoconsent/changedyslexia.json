@@ -1,0 +1,42 @@
+{
+    "name": "changedyslexia",
+    "vendorUrl": "https://www.changedyslexia.org/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?changedyslexia\\.org/"
+    },
+    "prehideSelectors": ["#modalCookie", "#cookiesPreferencesModal"],
+    "detectCmp": [
+        {
+            "exists": "#modalCookie #allCookiesAcceptedBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#modalCookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#allCookiesAcceptedBtn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#modalCookie [data-target='#cookiesPreferencesModal']"
+        },
+        {
+            "waitForVisible": "#cookiesPreferencesModal .modal-footer button[data-dismiss='modal']"
+        },
+        {
+            "waitForThenClick": "#cookiesPreferencesModal .modal-footer button[data-dismiss='modal']",
+            "retry": 5,
+            "retryInterval": 400
+        },
+        {
+            "waitForVisible": "#cookiesPreferencesModal",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
