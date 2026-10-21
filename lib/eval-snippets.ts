@@ -93,6 +93,24 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
+    // in the combined age/cookie dialog, every button also confirms the age, so store the choice and reload into the age-only dialog
+    EVAL_AM_CONSENT_REJECT: () => {
+        const value = `${window.AMConsent.version}.001`;
+        document.cookie = `tw_consent=${value}; Path=/; Max-Age=15552000; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
+        const stored = document.cookie.split('; ').filter((c) => c.startsWith('tw_consent='));
+        if (stored.length !== 1 || stored[0] !== `tw_consent=${value}`) return false;
+        setTimeout(() => location.reload(), 100);
+        return true;
+    },
+    EVAL_AM_CONSENT_ACCEPT: () => {
+        const value = `${window.AMConsent.version}.111`;
+        document.cookie = `tw_consent=${value}; Path=/; Max-Age=15552000; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
+        const stored = document.cookie.split('; ').filter((c) => c.startsWith('tw_consent='));
+        if (stored.length !== 1 || stored[0] !== `tw_consent=${value}`) return false;
+        setTimeout(() => location.reload(), 100);
+        return true;
+    },
+    EVAL_AM_CONSENT_TEST: () => /(^|; )tw_consent=[^;]+\.001(;|$)/.test(document.cookie),
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),

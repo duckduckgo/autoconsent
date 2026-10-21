@@ -1,0 +1,23 @@
+{
+    "name": "am-consent",
+    "_metadata": {
+        "vendorUrl": "https://www.twinks.tube/"
+    },
+    "detectCmp": [{ "exists": "[data-am-consent-panel] [data-am-reject]" }],
+    "detectPopup": [{ "visible": "[data-am-consent-panel] [data-am-reject]" }],
+    "optOut": [
+        {
+            "if": { "exists": "[data-am-consent-panel][data-mode=\"cookies\"]" },
+            "then": [{ "waitForThenClick": "[data-am-consent-panel] [data-am-reject]" }],
+            "else": [{ "eval": "EVAL_AM_CONSENT_REJECT" }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "[data-am-consent-panel][data-mode=\"cookies\"]" },
+            "then": [{ "waitForThenClick": "[data-am-consent-panel] [data-am-accept]" }],
+            "else": [{ "eval": "EVAL_AM_CONSENT_ACCEPT" }]
+        }
+    ],
+    "test": [{ "eval": "EVAL_AM_CONSENT_TEST" }]
+}
