@@ -1,0 +1,13 @@
+{
+    "name": "msa.fr",
+    "vendorUrl": "https://www.msa.fr/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?msa\\.fr/"
+    },
+    "prehideSelectors": ["#consent-cookies"],
+    "detectCmp": [{ "exists": "#consent-cookies #accept-consent-cookies" }],
+    "detectPopup": [{ "visible": "#consent-cookies" }],
+    "optIn": [{ "waitForThenClick": "#accept-consent-cookies" }],
+    "optOut": [{ "hide": "#consent-cookies" }]
+}
