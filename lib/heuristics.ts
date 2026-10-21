@@ -5,57 +5,81 @@ import { isElementVisible, isTopFrame } from './utils';
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const POPUP_SEARCH_MAX_TIME = 100;
 
+// popup classifications the heuristic rule can act on, by heuristic mode
+const ACCEPTED_LEVELS: Record<HeuristicLevel, PopupClassification[]> = {
+    off: [],
+    reject: ['reject'],
+    tier1: ['reject', 'tier1'],
+    tier2: ['reject', 'tier1', 'tier2'],
+};
+
 /**
+ * Popups the heuristic rule can act on in this mode, sorted so that a popup with reject comes first.
  * @param timeout time budget for the whole search, in ms
  * @param hitTest also hit-test the viewport for popups the DOM walk cannot find
  */
 export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME, hitTest = false): PopupData[] {
-    const acceptedLevels: PopupClassification[] =
-        mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
-    const isActionable = (popup: PopupData) => {
-        const popupText = popup.text?.trim();
-        if (!popupText || isExcludedPopup(popupText) || !hasHeuristicPatterns(popupText)) {
-            return false;
-        }
-        popup.regexClassification = classifyPopup(popup.buttons);
-        return popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification);
-    };
-    // a popup with reject will always win
-    const sortByClassification = (popups: PopupData[]) =>
-        popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
-    if (!isTopFrame()) {
-        return sortByClassification(getFramePopups().filter(isActionable));
-    }
-    const deadline = performance.now() + timeout;
-    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline, DEFAULT_HIT_TEST_GRID).filter(isActionable) : [];
+    const acceptedLevels = ACCEPTED_LEVELS[mode];
+    const isActionable = (popup: PopupData) => isConsentPopup(popup) && acceptedLevels.includes(popup.regexClassification!);
     // the walk cannot find a better popup than one with reject
-    if (hitTestPopups.some((p) => p.regexClassification === 'reject')) {
-        return sortByClassification(hitTestPopups);
-    }
-    const walkPopups = collectPositionedPopups(deadline);
-    return sortByClassification([...walkPopups.filter(isActionable), ...mergeWalkOverlaps(hitTestPopups, walkPopups)]);
+    const hasRejectPopup = (popups: PopupData[]) => popups.some((p) => isActionable(p) && p.regexClassification === 'reject');
+    const popups = getPotentialPopups(timeout, hitTest, DEFAULT_HIT_TEST_GRID, hasRejectPopup).filter(isActionable);
+    // a popup with reject will always win
+    return popups.sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
 }
 
 /**
+ * Popup candidates, each labelled with a regexClassification from its buttons.
  * @param timeout time budget for the whole search, in ms
  * @param hitTest also hit-test the viewport for popups the DOM walk cannot find
  * @param hitTestGrid points to hit-test, if not the default grid
+ * @param skipWalk skip the DOM walk when this returns true for the popups found by hit-testing
  */
-export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME, hitTest = false, hitTestGrid = DEFAULT_HIT_TEST_GRID): PopupData[] {
+export function getPotentialPopups(
+    timeout = POPUP_SEARCH_MAX_TIME,
+    hitTest = false,
+    hitTestGrid = DEFAULT_HIT_TEST_GRID,
+    skipWalk?: (hitTestPopups: PopupData[]) => boolean,
+): PopupData[] {
     if (!isTopFrame()) {
-        return getFramePopups();
+        return labelPopups(getFramePopups());
     }
     const deadline = performance.now() + timeout;
     // hit-test first: it takes a few ms, while on large pages the walk can use the whole budget
-    const hitTestPopups = hitTest ? findPopupsByHitTest(deadline, hitTestGrid) : [];
-    const walkPopups = collectPositionedPopups(deadline);
+    const hitTestPopups = hitTest ? labelPopups(findPopupsByHitTest(deadline, hitTestGrid)) : [];
+    if (skipWalk?.(hitTestPopups)) {
+        return hitTestPopups;
+    }
+    const walkPopups = labelPopups(collectPositionedPopups(deadline));
     return [...walkPopups, ...mergeWalkOverlaps(hitTestPopups, walkPopups)];
 }
 
-// where both searches found the same popup, keep the walk's candidate, with the hit points of the hit-test one
+function labelPopups(popups: PopupData[]): PopupData[] {
+    for (const popup of popups) {
+        popup.regexClassification = classifyPopup(popup.buttons);
+    }
+    return popups;
+}
+
+// a consent popup the heuristic rule could act on in some mode
+function isConsentPopup(popup: PopupData): boolean {
+    const popupText = popup.text?.trim();
+    return (
+        !!popupText &&
+        !isExcludedPopup(popupText) &&
+        hasHeuristicPatterns(popupText) &&
+        ACCEPTED_LEVELS.tier2.includes(popup.regexClassification!)
+    );
+}
+
+/**
+ * Where both searches found the same popup, keep the walk's candidate, with the hit points of the hit-test one.
+ * Keep both when only the hit-test one is a consent popup, such as a banner inside a wrapper that also holds an age gate.
+ */
 function mergeWalkOverlaps(hitTestPopups: PopupData[], walkPopups: PopupData[]): PopupData[] {
     return hitTestPopups.filter((h) => {
-        const walkPopup = walkPopups.find((p) => composedOverlaps(p.element, h.element));
+        const keepBoth = (p: PopupData) => isConsentPopup(h) && !isConsentPopup(p);
+        const walkPopup = walkPopups.find((p) => composedOverlaps(p.element, h.element) && !keepBoth(p));
         if (walkPopup) {
             walkPopup.hitPoints = [...(walkPopup.hitPoints ?? []), ...(h.hitPoints ?? [])];
         }

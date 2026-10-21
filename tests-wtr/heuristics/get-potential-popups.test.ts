@@ -383,6 +383,80 @@ describe('getPotentialPopups', () => {
             shadowHost('', IN_FLOW_BANNER);
             expect(popupIds(true)).to.include('banner');
         });
+
+        describe('inside a walk candidate that is not a consent popup', () => {
+            // the fixed wrapper is found by the walk, but its age gate text excludes it
+            function ageGateWrapper(bannerFirst: boolean): string {
+                const banner =
+                    '<div id="banner"><p>We use cookies to improve your experience on our website.</p><button>Accept all</button></div>';
+                const ageGate = '<p>You must be over 18 years old to enter.</p>';
+                return `<div id="wrapper" style="position: fixed; top: 0; left: 0; right: 0;">${bannerFirst ? banner + ageGate : ageGate + banner}</div>`;
+            }
+
+            it('keeps a consent popup found by hit-testing next to the walk candidate', () => {
+                // the top grid row hits the banner, so hit-testing finds the banner rather than the wrapper
+                container.innerHTML = ageGateWrapper(true);
+                const popups = getPotentialPopups(1000, true).filter((p) => container.contains(p.element));
+                expect(popups.map((p) => [p.element.id, p.source])).to.deep.equal([
+                    ['wrapper', 'walk'],
+                    ['banner', 'hitTest'],
+                ]);
+                expect(popups[0].hitPoints).to.be.undefined;
+                expect(popups[1].hitPoints).not.to.be.empty;
+            });
+
+            it('makes the consent popup found by hit-testing actionable', () => {
+                container.innerHTML = ageGateWrapper(true);
+                const actionable = getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element));
+                expect(actionable.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([['banner', 'tier2']]);
+            });
+
+            it('reports the wrapper once when hit-testing also reaches it', () => {
+                // the top grid row hits the age gate text, so the climb reaches the wrapper
+                container.innerHTML = ageGateWrapper(false);
+                const popups = getPotentialPopups(1000, true).filter((p) => container.contains(p.element));
+                expect(popups.map((p) => [p.element.id, p.source])).to.deep.equal([['wrapper', 'walk']]);
+                expect(popups[0].hitPoints).not.to.be.empty;
+                expect(getActionablePopups('tier2', 1000, true).filter((p) => container.contains(p.element))).to.be.empty;
+            });
+        });
+
+        it('skips the DOM walk when skipWalk returns true for the hit-test popups', () => {
+            // pointer-events: none keeps the fixed popup out of hit-testing, so only the walk could find it
+            container.innerHTML = `
+                ${IN_FLOW_BANNER}
+                <div id="fixed" style="position: fixed; bottom: 0; pointer-events: none;"><p>We use cookies.</p><button>Reject all</button></div>
+            `;
+            const seen: string[][] = [];
+            const skipWalk = (popups: ReturnType<typeof getPotentialPopups>) => {
+                seen.push(popups.map((p) => p.element.id));
+                return true;
+            };
+            const ids = getPotentialPopups(1000, true, undefined, skipWalk).map((p) => p.element.id);
+            expect(seen).to.deep.equal([ids]);
+            expect(ids).to.include('banner');
+            expect(ids).not.to.include('fixed');
+        });
+    });
+
+    describe('labels', () => {
+        it('labels every potential popup with a classification from its buttons', () => {
+            container.innerHTML = fixedBanner('consent');
+            // outside the container, so that the walk does not expand it to the container that holds the consent banner
+            const chat = document.createElement('div');
+            chat.innerHTML = '<div id="chat" style="position: fixed; top: 0;"><p>Chat with us</p><button>Start chat</button></div>';
+            document.body.appendChild(chat);
+            try {
+                const labels = Object.fromEntries(
+                    getPotentialPopups(1000)
+                        .filter((p) => container.contains(p.element) || chat.contains(p.element))
+                        .map((p) => [p.element.id, p.regexClassification]),
+                );
+                expect(labels).to.deep.equal({ consent: 'reject', chat: 'none' });
+            } finally {
+                chat.remove();
+            }
+        });
     });
 
     describe('hit-test grid and hit points', () => {
