@@ -101,8 +101,8 @@ function collectPositionedPopups(deadline: number): PopupData[] {
 
 const DEFAULT_HIT_TEST_GRID: HitTestGrid = {
     columns: [0.1, 0.5, 0.9],
-    // banners sit along the top and bottom edges and modals in the middle
-    edgeRows: [30, 90, 150],
+    // banners sit along the top and bottom edges and modals in the middle; rows 150px in added almost nothing in crawls
+    edgeRows: [30, 90],
 };
 
 /**

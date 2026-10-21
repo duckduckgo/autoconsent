@@ -415,6 +415,24 @@ describe('getPotentialPopups', () => {
             expect(popup!.hitPoints).to.be.undefined;
         });
 
+        it('tests rows 30 and 90px from the edges by default', () => {
+            // the banner lies between 100 and 200px from the top; the spacer is outside the container, so climbs from it stop at body
+            const spacer = document.createElement('div');
+            spacer.style.height = '100px';
+            document.body.insertBefore(spacer, document.body.firstChild);
+            document.body.style.margin = '0';
+            container.innerHTML = `<div id="banner" style="height: 100px; overflow: hidden;">${BANNER}</div>`;
+            try {
+                expect(container.querySelector('#banner')!.getBoundingClientRect().top).to.equal(100);
+                expect(getPotentialPopups(1000, true).filter((p) => container.contains(p.element))).to.have.length(0);
+                const withRow150 = getPotentialPopups(1000, true, { columns: [0.1, 0.5, 0.9], edgeRows: [30, 90, 150] });
+                expect(withRow150.map((p) => p.element.id)).to.include('banner');
+            } finally {
+                spacer.remove();
+                document.body.style.margin = '';
+            }
+        });
+
         it('only tests the points of the grid it is given', () => {
             container.innerHTML = `<div id="banner" style="padding: 60px 0;">${BANNER}</div>`;
             expect(getPotentialPopups(1000, true, { columns: [0.5], edgeRows: [] }).map((p) => p.element.id)).not.to.include('banner');
