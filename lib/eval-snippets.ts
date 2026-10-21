@@ -192,6 +192,27 @@ export const snippets = {
             ),
         ).status === 'deny',
     EVAL_POVR_GOBACK: () => window.history.back() || true,
+    // the banner has no reject button: mirror the "disable all cookies" handler from the cookie policy page
+    EVAL_PSB_OPT_OUT: () => {
+        const site = window.iClient?.options?.Site;
+        if (!site) {
+            return false;
+        }
+        [
+            'Administration',
+            'Analytics',
+            'AnalyticsGoogle',
+            'AnalyticsFacebook',
+            'Marketing',
+            'MarketingGoogle',
+            'MarketingFacebook',
+        ].forEach((c) => {
+            document.cookie = `_Psb${site}${c}=false; path=/; max-age=31536000`;
+        });
+        localStorage.setItem('CookiesAcceptedv2', 'true');
+        return true;
+    },
+    EVAL_PSB_TEST: () => document.cookie.includes(`_Psb${window.iClient?.options?.Site}Marketing=false`),
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),

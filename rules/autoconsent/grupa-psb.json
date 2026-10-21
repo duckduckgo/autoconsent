@@ -1,0 +1,14 @@
+{
+    "name": "grupa-psb",
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#js_CookiesHeader"],
+    "detectCmp": [{ "exists": "#js_CookiesHeader #js_CookiesAccept" }],
+    "detectPopup": [{ "visible": "#js_CookiesHeader.active" }],
+    "optIn": [{ "waitForThenClick": "#js_CookiesAccept" }],
+    "optOut": [
+        { "eval": "EVAL_PSB_OPT_OUT" },
+        { "hide": "#js_CookiesHeader, .cookies-glass" },
+        { "removeClass": "cookies-glass-overlay", "selector": "body", "optional": true }
+    ],
+    "test": [{ "eval": "EVAL_PSB_TEST" }]
+}
