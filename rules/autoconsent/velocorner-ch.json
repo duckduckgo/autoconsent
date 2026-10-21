@@ -1,0 +1,20 @@
+{
+    "name": "velocorner.ch",
+    "runContext": { "urlPattern": "^https?://(www\\.)?velocorner\\.ch/" },
+    "prehideSelectors": [".no-js-cookie-consent-banner"],
+    "detectCmp": [{ "exists": ".no-js-cookie-consent-banner button.button--outline-blue" }],
+    "detectPopup": [{ "visible": ".no-js-cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": ".no-js-cookie-consent-banner button.button--blue" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".no-js-cookie-consent-banner:not(:has(button[role=checkbox])) button.button--outline-blue",
+            "retry": 10,
+            "retryInterval": 500
+        },
+        { "waitForVisible": ".no-js-cookie-consent-banner button[role=checkbox]", "check": "any" },
+        { "click": ".no-js-cookie-consent-banner button[role=checkbox][aria-checked=true]", "all": true, "optional": true },
+        { "waitForThenClick": ".no-js-cookie-consent-banner button.button--outline-blue" },
+        { "waitForVisible": ".no-js-cookie-consent-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookie-confirmation=1" }]
+}
