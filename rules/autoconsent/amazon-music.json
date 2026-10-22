@@ -1,0 +1,13 @@
+{
+    "name": "amazon-music",
+    "vendorUrl": "https://music.amazon.com/",
+    "runContext": {
+        "urlPattern": "^https?://music\\.amazon\\.[a-z.]+/"
+    },
+    "prehideSelectors": ["#banner"],
+    "detectCmp": [{ "exists": "#banner #bannerFooter music-button" }],
+    "detectPopup": [{ "visible": "#banner #bannerFooter" }],
+    "optIn": [{ "waitForThenClick": ["#bannerFooter music-button[variant=solid]", "button"] }],
+    "optOut": [{ "waitForThenClick": ["#bannerFooter music-button[variant=outline]", "button"] }],
+    "test": [{ "waitForVisible": "#banner #bannerFooter", "check": "none", "timeout": 2000 }]
+}
