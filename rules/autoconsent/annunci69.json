@@ -1,0 +1,19 @@
+{
+    "name": "annunci69.it",
+    "vendorUrl": "https://www.annunci69.it/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?annunci69\\.it/"
+    },
+    "prehideSelectors": ["#a69-cookie-banner"],
+    "detectCmp": [{ "exists": "#a69-cookie-banner #a69-cookie-manage" }],
+    "detectPopup": [{ "visible": "#a69-cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#a69-cookie-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#a69-cookie-manage" },
+        { "waitForVisible": "#a69-cookie-modal" },
+        { "click": "#a69-cookie-analytics:checked", "optional": true },
+        { "click": "#a69-cookie-save" },
+        { "waitForVisible": "#a69-cookie-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "a69_cookie_preferences=%7B%22analytics%22%3Afalse" }]
+}
