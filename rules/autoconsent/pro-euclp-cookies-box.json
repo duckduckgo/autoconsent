@@ -1,0 +1,31 @@
+{
+    "name": "pro-euclp-cookies-box",
+    "cosmetic": true,
+    "prehideSelectors": ["#pro_euclp_cookies_box"],
+    "detectCmp": [
+        {
+            "exists": "#pro_euclp_cookies_box .pro_euclp_accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#pro_euclp_cookies_box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#pro_euclp_cookies_box .pro_euclp_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#pro_euclp_cookies_box"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#pro_euclp_cookies_box",
+            "check": "none"
+        }
+    ]
+}
