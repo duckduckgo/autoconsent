@@ -30,6 +30,10 @@ export default class Cookiebot extends AutoConsentCMPBase {
         if (this.elementVisible('#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll')) {
             return await this.click('#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll');
         }
+        // Some custom templates add their own overlay that only their decline button removes.
+        if (this.elementVisible('#DeclineAll')) {
+            return await this.click('#DeclineAll');
+        }
         await this.wait(500);
         let res = await this.mainWorldEval('EVAL_COOKIEBOT_3'); // withdraw
         await this.wait(1000); // prevent race conditions

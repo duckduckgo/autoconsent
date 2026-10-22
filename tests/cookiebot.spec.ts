@@ -29,6 +29,10 @@ generateCMPTests(
         'https://www.dezeen.com/',
         'https://www.l3harris.com/',
         'https://www.gog.com/',
+        // Custom templates with their own #DeclineAll button and page overlay
+        'https://pvcvoordeel.nl/',
+        'https://haxo.nl/',
+        'https://www.elektramat.nl/',
     ],
     {},
 );
