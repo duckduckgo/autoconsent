@@ -1,0 +1,13 @@
+{
+    "name": "nordnet",
+    "vendorUrl": "https://www.nordnet.no/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?nordnet\\.(no|se|dk|fi)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[role=dialog] #cookie-accept-all-secondary" }],
+    "detectPopup": [{ "visible": "[role=dialog] #cookie-accept-all-secondary" }],
+    "optIn": [{ "waitForThenClick": "[role=dialog] #cookie-accept-all-secondary" }],
+    "optOut": [{ "waitForThenClick": "[role=dialog] #cookie-accept-all-secondary ~ button" }],
+    "test": [{ "cookieContains": "consent_cookie=necessary" }]
+}
