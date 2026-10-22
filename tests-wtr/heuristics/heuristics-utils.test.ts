@@ -137,6 +137,22 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Danish popups', () => {
+    it('detects Danish cookie notices', () => {
+        const texts = [
+            'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
+            'Vi bruger cookies for at give dig den bedste oplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Danish text', () => {
+        expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -278,6 +294,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Danish reject buttons', () => {
+        expect(classifyButtonTextRegex('Nej tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nej, tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
