@@ -35,7 +35,7 @@
             },
             "then": [
                 {
-                    "waitForThenClick": "#bbccookies-accept-button"
+                    "waitForThenClick": "#bbccookies-accept-button, #bbccookies-continue-button"
                 }
             ],
             "else": [
@@ -52,7 +52,19 @@
             },
             "then": [
                 {
-                    "waitForThenClick": "#bbccookies-reject-button"
+                    "if": {
+                        "exists": "#bbccookies-reject-button"
+                    },
+                    "then": [
+                        {
+                            "click": "#bbccookies-reject-button"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "hide": "#bbccookies"
+                        }
+                    ]
                 }
             ],
             "else": [
@@ -63,6 +75,9 @@
         }
     ],
     "test": [
+        {
+            "wait": 1000
+        },
         {
             "cookieContains": "ckns_explicit=1"
         }
