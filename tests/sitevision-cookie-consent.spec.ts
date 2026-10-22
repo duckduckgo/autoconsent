@@ -11,6 +11,7 @@ generateCMPTests(
         // no "necessary only" button, opt-out goes through the settings view
         'https://www.su.se/',
         'https://www.huddinge.se/',
+        'https://www.sh.se/',
     ],
     {
         testSelfTest: false,
