@@ -1,0 +1,45 @@
+{
+    "name": "pubfactory",
+    "vendorUrl": "https://www.pubfactory.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#euCookiesZone .european-union-cookies-agreement"],
+    "detectCmp": [
+        {
+            "exists": "#euCookiesZone .european-union-cookies-agreement"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#euCookiesZone .european-union-cookies-agreement"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": "body[data-page-initialized=true]",
+            "timeout": 20000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#euCookiesZone [data-testid=cookieBannerDismiss]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": "body[data-page-initialized=true]",
+            "timeout": 20000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#euCookiesZone [data-testid=cookieBannerDismiss]"
+        },
+        {
+            "waitForVisible": "#euCookiesZone .european-union-cookies-agreement",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "EUCookieOff=t"
+        }
+    ]
+}
