@@ -1,0 +1,29 @@
+{
+    "name": "spermidinelife-us",
+    "vendorUrl": "https://spermidinelife.us/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?spermidinelife\\.us/"
+    },
+    "prehideSelectors": [".plug-gdpr-wrapper.js-gdpr-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".plug-gdpr-wrapper.js-gdpr-wrapper .js-gdpr-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".plug-gdpr-wrapper--show.js-gdpr-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".plug-gdpr-wrapper.js-gdpr-wrapper .js-gdpr-button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".plug-gdpr-wrapper.js-gdpr-wrapper"
+        }
+    ]
+}

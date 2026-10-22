@@ -1,3 +1,9 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('webflow', ['https://olark.com/', 'https://www.nexaas.com/', 'https://www.rupahealth.com/', 'https://www.hk.co/']);
+generateCMPTests('webflow', [
+    'https://www.ctgt.ai/research/distillation-censorship-transfer',
+    'https://www.dock.io/',
+    'https://www.talkabroad.com/',
+    'https://www.pocoyo.com/',
+    'https://www.storypark.com/',
+]);

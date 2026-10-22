@@ -1,0 +1,42 @@
+{
+    "name": "as-adventure",
+    "prehideSelectors": [
+        "dialog[data-testid=\"cookie-message-modal\"]",
+        "[data-testid=\"cookie-message-bottom-sheet\"]",
+        "[data-testid=\"cookie-message-bottom-sheet-overlay\"]"
+    ],
+    "detectCmp": [
+        {
+            "exists": "dialog[data-testid=\"cookie-message-modal\"] button[data-testid=\"decline-all-cookies\"], [data-testid=\"cookie-message-bottom-sheet\"] button[data-testid=\"decline-all-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog[data-testid=\"cookie-message-modal\"], [data-testid=\"cookie-message-bottom-sheet\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog[data-testid=\"cookie-message-modal\"] button[data-testid=\"accept-all-cookies\"], [data-testid=\"cookie-message-bottom-sheet\"] button[data-testid=\"accept-all-cookies\"]",
+            "all": true,
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog[data-testid=\"cookie-message-modal\"] button[data-testid=\"decline-all-cookies\"], [data-testid=\"cookie-message-bottom-sheet\"] button[data-testid=\"decline-all-cookies\"]",
+            "all": true,
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "dialog[data-testid=\"cookie-message-modal\"], [data-testid=\"cookie-message-bottom-sheet\"]",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

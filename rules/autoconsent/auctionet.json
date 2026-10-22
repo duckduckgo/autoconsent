@@ -1,0 +1,39 @@
+{
+    "name": "auctionet",
+    "vendorUrl": "https://auctionet.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?auctionet\\.(com|se)/"
+    },
+    "prehideSelectors": ["form.test-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "form.test-cookie-consent [data-cookie-consent-target=\"screen1\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "form.test-cookie-consent [data-cookie-consent-target=\"screen1\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "form.test-cookie-consent [data-cookie-consent-target=\"screen1\"] [data-action=\"cookie-consent#acceptAll\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "form.test-cookie-consent [data-action=\"cookie-consent#showSettings\"]"
+        },
+        {
+            "waitForThenClick": "form.test-cookie-consent [data-cookie-consent-target=\"screen2\"] [data-action=\"cookie-consent#rejectAll\"]"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "%22ad_storage%22%3Afalse"
+        }
+    ]
+}

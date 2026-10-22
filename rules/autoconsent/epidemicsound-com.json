@@ -1,0 +1,19 @@
+{
+    "name": "epidemicsound.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?epidemicsound\\.com/"
+    },
+    "prehideSelectors": ["#es-cookie-banner"],
+    "detectCmp": [{ "exists": "#es-cookie-banner #es-consent-settings-btn" }],
+    "detectPopup": [{ "visible": "#es-consent-settings-btn" }],
+    "optIn": [{ "waitForThenClick": "#es-consent-accept-btn" }],
+    "optOut": [
+        { "waitFor": "#onetrust-pc-sdk .save-preference-btn-handler" },
+        { "waitForThenClick": "#es-consent-settings-btn" },
+        { "waitForVisible": "#onetrust-pc-sdk" },
+        { "click": "#onetrust-consent-sdk input.category-switch-handler:checked", "all": true, "optional": true },
+        { "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler" },
+        { "waitForVisible": "#es-consent-settings-btn", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "OptanonAlertBoxClosed" }]
+}

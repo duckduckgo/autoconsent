@@ -1,0 +1,17 @@
+{
+    "name": "store2000.fr",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?store2000\\.fr/"
+    },
+    "prehideSelectors": ["div.fixed.inset-0:has(.lucide-cookie)"],
+    "detectCmp": [{ "exists": "div.fixed.inset-0:has(.lucide-cookie)" }],
+    "detectPopup": [{ "visible": "div.fixed.inset-0:has(.lucide-cookie)" }],
+    "optIn": [
+        { "waitForThenClick": "xpath///div[contains(@class, 'inset-0')]//button[contains(., 'Accepter tous')]" },
+        { "hide": "div.fixed.inset-0:has(.lucide-cookie)" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "xpath///div[contains(@class, 'inset-0')]//button[contains(., 'Refuser tous')]" },
+        { "hide": "div.fixed.inset-0:has(.lucide-cookie)" }
+    ]
+}

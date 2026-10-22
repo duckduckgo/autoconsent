@@ -1,0 +1,30 @@
+{
+    "name": "fixpart",
+    "vendorUrl": "https://fixpart.nl/",
+    "prehideSelectors": [".fp-cookie-modal"],
+    "detectCmp": [
+        {
+            "exists": ".fp-cookie-modal .cookie-essentials"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".fp-cookie-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".fp-cookie-modal button.cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".fp-cookie-modal a.cookie-essentials"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent=essentials"
+        }
+    ]
+}

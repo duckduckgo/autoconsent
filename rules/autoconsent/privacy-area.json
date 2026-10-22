@@ -1,0 +1,56 @@
+{
+    "name": "privacy-area",
+    "vendorUrl": "https://www.yccable.com/",
+    "cosmetic": false,
+    "prehideSelectors": [".privacyArea"],
+    "detectCmp": [
+        {
+            "exists": ".privacyArea .privacyTrigger.acceptAll"
+        },
+        {
+            "exists": "#modulePrivacy .privacyTrigger.acceptCustom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacyArea"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacyArea .privacyTrigger.acceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".privacyArea .privacyTrigger.rejectOptional"
+            },
+            "then": [
+                {
+                    "click": ".privacyArea .privacyTrigger.rejectOptional"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#modulePrivacy input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#modulePrivacy .privacyTrigger.acceptCustom"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".privacyArea",
+            "check": "none",
+            "timeout": 3000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "privacy={\"necessary\":\"ok\"}"
+        }
+    ]
+}

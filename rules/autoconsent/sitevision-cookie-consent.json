@@ -1,0 +1,48 @@
+{
+    "name": "sitevision-cookie-consent",
+    "vendorUrl": "https://www.sitevision.se/",
+    "prehideSelectors": [".sv-cookie-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": ".sv-cookie-consent-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".sv-cookie-consent-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".sv-cookie-consent-modal form:has(input[name=analytics]) button[type=submit]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".sv-cookie-consent-modal form:has(input[name=necessary]):not(:has(input[name=analytics])) button[type=submit]"
+            },
+            "then": [
+                {
+                    "click": ".sv-cookie-consent-modal form:has(input[name=necessary]):not(:has(input[name=analytics])) button[type=submit]"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".sv-cookie-consent-modal .env-dialog__controls > button[type=button]"
+                },
+                {
+                    "waitForVisible": ".sv-cookie-consent-modal button[type=submit][form]"
+                },
+                {
+                    "click": ".sv-cookie-consent-modal form input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".sv-cookie-consent-modal button[type=submit][form]"
+                }
+            ]
+        }
+    ]
+}

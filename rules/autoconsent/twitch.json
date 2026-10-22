@@ -17,14 +17,19 @@
         {
             "if": { "exists": "[data-a-target=\"consent-banner-accept\"]" },
             "then": [
-                { "click": "[data-a-target=\"consent-banner\"] button:not([data-a-target])" },
+                {
+                    "waitForThenClick": "[data-a-target=\"consent-banner\"] button:not([data-a-target])",
+                    "retry": 3,
+                    "retryInterval": 1000
+                },
                 { "waitForVisible": "[data-a-target=\"consent-banner\"]", "check": "none" }
             ],
             "else": [
-                { "click": "button[data-a-target=\"consent-banner-manage-preferences\"]" },
-                { "waitFor": "input[type=checkbox][data-a-target=tw-checkbox]" },
+                { "waitForThenClick": "button[data-a-target=\"consent-banner-manage-preferences\"]" },
+                { "waitFor": "input[type=checkbox][data-a-target=tw-checkbox]:not([disabled])" },
                 {
                     "click": "input[type=checkbox][data-a-target=tw-checkbox]:not(:checked):not([disabled])",
+                    "all": true,
                     "optional": true
                 },
                 { "waitForThenClick": "[data-a-target=consent-modal-save]" },

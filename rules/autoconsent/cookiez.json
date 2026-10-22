@@ -1,0 +1,9 @@
+{
+    "name": "cookiez",
+    "prehideSelectors": [".elementor-popup-modal:has(.cookiez-footer)"],
+    "detectCmp": [{ "exists": ".cookiez-footer [data-cookiez-action]" }],
+    "detectPopup": [{ "visible": ".cookiez-footer [data-cookiez-action=\"deny-all\"]" }],
+    "optIn": [{ "waitForThenClick": ".cookiez-footer [data-cookiez-action=\"accept-all\"]" }],
+    "optOut": [{ "waitForThenClick": ".cookiez-footer [data-cookiez-action=\"deny-all\"]" }],
+    "test": [{ "wait": 1000 }, { "cookieContains": "%22analytics%22%3Afalse" }]
+}

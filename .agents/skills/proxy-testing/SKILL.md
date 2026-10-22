@@ -4,7 +4,9 @@ description: Test autoconsent via regional proxies in Playwright. Use when verif
 ---
 
 # Proxy Testing
-This skill provides a JS library to run autoconsent via regional proxies in Playwright.
+This skill provides a JS library to run autoconsent via regional proxies in Playwright. It is the default for regional testing.
+
+Oxylabs remote browsers are available too, through the `oxylabs-testing` skill. They get past most bot walls (captchas, challenge pages, "access denied" pages) that some sites show to our proxies, but they cost money per session, so use them only for the regions where our proxies don't get you the real site.
 
 Rule changes are verified with a two-level regional policy.
 The **core region set** (default for detection, iteration, and verification) covers `us` (CCPA), `gb` (UK GDPR), `de` (EEA GDPR), plus the reported region from the task when specified (if the reported region is not a supported proxy region, use the closest supported one, e.g. `es` for `pt`). Iterate in the single most relevant region; run the full core set once when the fix is stable.
@@ -28,13 +30,10 @@ npm run prepublish # builds dist/autoconsent.playwright.js and rules/rules.json
 
 Environment variables:
 
-- `REGIONAL_PROXY_<TWO_LETTER_REGION_CODE>` (for example, `REGIONAL_PROXY_US`, `REGIONAL_PROXY_GB`, `REGIONAL_PROXY_AU`, etc.) - the domain endpoint
-- `REGIONAL_PROXY_USERNAME`
-- `REGIONAL_PROXY_PASSWORD`
+- `REGIONAL_PROXY_<TWO_LETTER_REGION_CODE>` (for example, `REGIONAL_PROXY_US`, `REGIONAL_PROXY_GB`, `REGIONAL_PROXY_AU`, etc.) - a complete proxy URL with an `http://`, `https://`, or `socks5://` scheme. Examples: `socks5://usc-socks-tr-cluster.duckduckgo.com:80`, `https://proxy.example.com:443`.
+- `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD` (optional) - shared credentials, passed to Playwright for `https://` proxies only. They are ignored for `http://` and `socks5://` proxies.
 
-- Endpoints must be bare hostnames: no scheme, credentials, or port.
-- The library adds `https://` and port `443`.
-- Credentials are shared across regions.
+Never embed credentials in a proxy URL.
 
 ## Usage
 
@@ -91,7 +90,7 @@ export default defineConfig({
 - `ALL_REGIONS` — all supported regions.
 - `testPage(page, url, regionKey, options?)` — run a full test on a page you created yourself (you own the browser/context); returns a `TestResult`.
 - `injectAutoconsent(page, options?)` — set up isolated-world injection; call before `page.goto()`. Returns a context (`received`, `hasMessage`, `waitForCompletion`, `waitForMessage`, `collectResult`).
-- `buildProxyConfig(regionKey)` — build the Playwright `{ server, username, password }` proxy object for a region from its env vars.
+- `buildProxyConfig(regionKey)` — build the Playwright proxy object for a region from its env vars; returns `{ server, username, password }` for `https://` proxies when credentials are set, otherwise `{ server }`.
 - `launchRegionalProxyBrowser(regionKey, options?)` — launch a Chromium browser routed through the region's proxy.
 - `formatResult(result)` — format a `TestResult` as a human-readable summary line.
 
@@ -128,9 +127,11 @@ await browser.close();
 
 ## Gotchas
 
-- Use Playwright's proxy auth object: `{ server, username, password }`.
+- HTTPS proxy credentials go in Playwright's proxy auth object (`{ server, username, password }`); Chromium cannot authenticate to SOCKS proxies.
 - Never embed proxy credentials in URLs, command lines, logs, traces, or source.
 - Call `injectAutoconsent(page)` before `page.goto()` so the init script is installed before page scripts run.
 - The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
+- Some sites block proxy traffic outright (captcha, 403, endless challenge page). Retest the affected regions with the `oxylabs-testing` skill, and say in the report which regions were tested through Oxylabs. If Oxylabs is blocked too or not available, retest over a direct connection and state explicitly in the report that the result is unproxied. If direct access is blocked too, ask the triager for the popup's HTML pasted from their own browser as a last resort, and note that the rule was written from pasted markup rather than a live run.
+- The harness shared with `oxylabs-testing` lives in `.agents/lib/regional-testing/`; change shared behavior there.

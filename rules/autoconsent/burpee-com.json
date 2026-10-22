@@ -1,18 +1,40 @@
 {
     "name": "burpee.com",
+    "minimumRuleStepVersion": 2,
     "prehideSelectors": [".cookie-modal", "#notice-cookie-block"],
-    "detectCmp": [{ "exists": "#notice-cookie-block" }],
+    "detectCmp": [{ "exists": "#notice-cookie-block" }, { "exists": "#notice-cookie-block #cm-selectSpecific", "negated": true }],
     "detectPopup": [{ "visible": "#html-body #notice-cookie-block" }],
-    "optIn": [{ "waitForThenClick": "#btn-cookie-allow" }],
+    "optIn": [
+        {
+            "if": { "exists": "#notice-cookie-block button[\\@click^='acceptAll']" },
+            "then": [{ "waitForThenClick": "#notice-cookie-block button[\\@click^='acceptAll']" }],
+            "else": [{ "waitForThenClick": "#btn-cookie-allow" }]
+        }
+    ],
     "optOut": [
         {
-            "if": { "exists": "#btn-cookie-manage" },
-            "then": [
-                { "waitForThenClick": "#btn-cookie-manage" },
-                { "click": "#notice-cookie-block input:checked", "all": true },
-                { "click": "#btn-cookie-save" }
-            ],
-            "else": [{ "hide": "#html-body #notice-cookie-block, #notice-cookie" }]
+            "if": { "exists": "#notice-cookie-block #btn-cookie-decline" },
+            "then": [{ "waitForThenClick": "#notice-cookie-block #btn-cookie-decline" }],
+            "else": [
+                {
+                    "if": { "exists": "#notice-cookie-block button[\\@click^='rejectAll']" },
+                    "then": [{ "waitForThenClick": "#notice-cookie-block button[\\@click^='rejectAll']" }],
+                    "else": [
+                        {
+                            "if": { "exists": "#btn-cookie-manage" },
+                            "then": [
+                                { "waitForThenClick": "#btn-cookie-manage" },
+                                { "click": "#notice-cookie-block input:checked", "all": true },
+                                { "click": "#btn-cookie-save" }
+                            ],
+                            "else": [
+                                { "hide": "#html-body #notice-cookie-block, #notice-cookie" },
+                                { "removeClass": "cookie-notification-active", "selector": "body", "optional": true }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

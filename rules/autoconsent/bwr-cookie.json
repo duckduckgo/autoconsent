@@ -1,0 +1,13 @@
+{
+    "name": "bwr-cookie",
+    "prehideSelectors": [".bwr-cookie.js-cookie"],
+    "detectCmp": [{ "exists": ".bwr-cookie.js-cookie .js-cookie-trigger" }],
+    "detectPopup": [{ "visible": ".bwr-cookie.js-cookie .bwr-cookie__buttons" }],
+    "optIn": [{ "waitForThenClick": ".bwr-cookie.js-cookie .js-cookie-trigger-all" }],
+    "optOut": [
+        { "click": ".bwr-cookie.js-cookie input[data-cookie-option]:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": ".bwr-cookie.js-cookie .js-cookie-trigger" },
+        { "waitForVisible": ".bwr-cookie.js-cookie", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "ZnVuY3Rpb25hbCI6ZmFsc2UsInBlcnNvbmFsaXphdGlvbiI6ZmFsc2V9" }]
+}

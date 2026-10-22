@@ -1,0 +1,33 @@
+{
+    "name": "evium.de",
+    "vendorUrl": "https://www.evium.de/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?evium\\.de/"
+    },
+    "prehideSelectors": ["common-tracking-optin"],
+    "detectCmp": [
+        {
+            "exists": "common-tracking-optin"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "common-tracking-optin"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "common-tracking-optin button.mdc-button--raised"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "common-tracking-optin p.opt-in__text-item:nth-of-type(2) > a:last-of-type"
+        },
+        {
+            "waitForVisible": "common-tracking-optin",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

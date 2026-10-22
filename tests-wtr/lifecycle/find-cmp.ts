@@ -217,5 +217,18 @@ describe('Autoconsent.findCmp', () => {
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('HEURISTIC-TIER2');
         });
+
+        it('does not wait for a DOM mutation after an attempt that skipped the heuristic', async function () {
+            this.timeout(10000);
+            // the next attempt is odd, so it skips the heuristic; the popup is already shown and the page stays quiet
+            autoconsent.state.findCmpAttempts = 2;
+
+            const timeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
+            const found = await Promise.race([autoconsent.findCmp(1), timeout]);
+
+            expect(found, 'detection is stuck waiting for a DOM mutation').to.not.equal(null);
+            expect(found).to.have.length(1);
+            expect(found![0].name).to.equal('HEURISTIC-REJECT');
+        });
     });
 });

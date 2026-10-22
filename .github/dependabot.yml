@@ -4,6 +4,12 @@ updates:
       directory: '/' # Location of package manifests
       schedule:
           interval: 'weekly'
+      cooldown:
+          default-days: 7
+      ignore:
+          # typescript-eslint and ts-node do not support TypeScript 7 yet.
+          - dependency-name: 'typescript'
+            versions: ['>=7']
       labels:
           - 'category: dependencies'
       groups:

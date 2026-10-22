@@ -4,8 +4,9 @@
         "declaration": true,
         "emitDeclarationOnly": true,
         "declarationDir": "./dist/types",
+        "rootDir": "./lib",
         "noCheck": true
     },
-    "include": ["lib/web.ts"],
+    "include": ["lib/web.ts", "lib/heuristic-classify.ts"],
     "exclude": []
 }

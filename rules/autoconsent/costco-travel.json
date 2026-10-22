@@ -1,0 +1,44 @@
+{
+    "name": "costco-travel",
+    "vendorUrl": "https://www.costcotravel.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#gdprMessage button.gdpr-review"
+        },
+        {
+            "exists": "[id^=div-transcend-cookie]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdprMessage"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdprMessage button.gdpr-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdprMessage button.gdpr-review"
+        },
+        {
+            "waitForVisible": "#btn-transcend-cookie-confirm, #btn-transcend-save"
+        },
+        {
+            "click": "#analyticsNo:not(:checked), #functionalNo:not(:checked), #targetingNo:not(:checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#analyticsCookieCheckbox:checked, #preferenceCookieCheckbox:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#btn-transcend-cookie-confirm, #btn-transcend-save"
+        }
+    ]
+}

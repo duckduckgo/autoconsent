@@ -12,6 +12,10 @@
             "visible": "#fides-overlay-wrapper #fides-banner"
         },
         {
+            "visible": "#fides-overlay-wrapper .fides-banner-hidden",
+            "check": "none"
+        },
+        {
             "eval": "EVAL_FIDES_DETECT_POPUP"
         }
     ],
@@ -30,7 +34,9 @@
             },
             "then": [
                 {
-                    "click": "#fides-banner .fides-reject-all-button"
+                    "waitForThenClick": ".fides-banner:not(.fides-banner-hidden) .fides-reject-all-button",
+                    "retry": 5,
+                    "retryInterval": 500
                 }
             ],
             "else": [
@@ -38,7 +44,9 @@
                     "click": "#fides-banner .fides-manage-preferences-button"
                 },
                 {
-                    "waitForThenClick": ".fides-reject-all-button"
+                    "waitForThenClick": ".fides-modal-content .fides-reject-all-button",
+                    "retry": 5,
+                    "retryInterval": 500
                 }
             ]
         }

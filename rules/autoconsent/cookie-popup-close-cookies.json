@@ -1,0 +1,37 @@
+{
+    "name": "cookie-popup-close-cookies",
+    "prehideSelectors": ["#cookie-popup"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-popup #close-cookies"
+        },
+        {
+            "exists": "#cookie-popup #view-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": "#cookie-popup:not([class*=\"invisible\"]) #close-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-popup #accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_COOKIE_POPUP_CLOSE"
+        },
+        {
+            "waitFor": "#cookie-popup[class*=\"invisible\"]",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "acceptedAnalytics=granted",
+            "negated": true
+        }
+    ]
+}

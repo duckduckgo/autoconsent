@@ -1,0 +1,61 @@
+{
+    "name": "thenounproject",
+    "vendorUrl": "https://thenounproject.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?thenounproject\\.com/"
+    },
+    "prehideSelectors": ["[data-callback=\"accounts/hide-banner/CookiesBanner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button[class*=\"ManageLink\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button[class*=\"ManageLink\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button:not([class*=\"ManageLink\"])"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button[class*=\"ManageLink\"]"
+        },
+        {
+            "any": [
+                {
+                    "waitForVisible": "[data-testid=\"modal-body-content\"] [class*=\"IndividualBox\"] input[type=\"checkbox\"]",
+                    "timeout": 2000,
+                    "check": "any"
+                },
+                {
+                    "click": "[data-callback=\"accounts/hide-banner/CookiesBanner\"] button[class*=\"ManageLink\"]"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[data-testid=\"modal-body-content\"] [class*=\"IndividualBox\"] input[type=\"checkbox\"]",
+            "check": "any"
+        },
+        {
+            "click": "[data-testid=\"modal-body-content\"] [class*=\"IndividualBox\"] input[type=\"checkbox\"][aria-disabled=\"false\"]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-testid=\"modal-body-content\"] [class*=\"Footer\"] button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3Afalse"
+        },
+        {
+            "cookieContains": "%22advertising%22%3Afalse"
+        }
+    ]
+}

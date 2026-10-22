@@ -1,0 +1,9 @@
+{
+    "name": "infomaniak-rgpd",
+    "prehideSelectors": ["module-rgpd-component"],
+    "detectCmp": [{ "exists": "module-rgpd-component" }],
+    "detectPopup": [{ "visible": ["module-rgpd-component", ".modal"] }],
+    "optIn": [{ "waitForThenClick": ["module-rgpd-component", ".buttons > button:nth-of-type(1)"] }],
+    "optOut": [{ "waitForThenClick": ["module-rgpd-component", ".buttons > button:nth-of-type(2)"], "retry": 3 }],
+    "test": [{ "cookieContains": "cookieConsent=consent_1" }]
+}

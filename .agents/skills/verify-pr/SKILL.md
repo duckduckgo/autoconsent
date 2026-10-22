@@ -47,7 +47,7 @@ If any check fails, fix the issue and re-run before proceeding.
 
 **GitHub Actions** (`.github/workflows/checks.yml`): Runs `lint` and `test:lib`. Must pass.
 
-**Jenkins**: Runs Playwright E2E in 9 regions (US, GB, AU, CA, DE, FR, NL, CH, NO) for modified rules only. Posts a PR comment with artifact ZIP and [review tool](https://zok.pw/autoconsent-review-tool/) link for inspecting screenshots.
+**Jenkins**: Runs Playwright E2E in 9 regions (US, GB, AU, CA, DE, FR, NL, CH, NO) for modified rules only. On Chrome, tests that fail on a bot wall (navigation error, or no CMP on an error or challenge page) are rerun in an Oxylabs browser in the same region, which solves captchas, with one retry (`results-<REGION>-oxylabs.xml`, screenshots under `screenshots/oxylabs/`); a pass there counts as a pass. Posts a PR comment with artifact ZIP and [review tool](https://zok.pw/autoconsent-review-tool/) link for inspecting screenshots.
 
 ### Flaky E2E failures
 

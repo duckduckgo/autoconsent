@@ -1,0 +1,22 @@
+{
+    "name": "securiti-gpc-flyout",
+    "prehideSelectors": [".f-cmp-flyout-wrapper .f-gpc-banner"],
+    "detectCmp": [{ "exists": ".f-cmp-flyout-wrapper .f-gpc-banner .f-banner-close-btn" }],
+    "detectPopup": [
+        { "visible": ".f-cmp-flyout-wrapper .f-gpc-banner" },
+        {
+            "comment": "some sites show the cookie banner next to the flyout; leave it to the cookieconsent rules",
+            "exists": ".cc-window",
+            "negated": true
+        }
+    ],
+    "optIn": [{ "waitForThenClick": ".f-gpc-banner .f-banner-close-btn", "retry": 2 }],
+    "optOut": [
+        {
+            "comment": "the close handler is attached shortly after the flyout is inserted",
+            "waitForThenClick": ".f-gpc-banner .f-banner-close-btn",
+            "retry": 2
+        }
+    ],
+    "test": [{ "visible": ".f-gpc-banner", "check": "none" }]
+}

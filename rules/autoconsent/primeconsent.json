@@ -1,0 +1,39 @@
+{
+    "name": "primeconsent",
+    "_metadata": {
+        "vendorUrl": "https://privacypillar.com/"
+    },
+    "prehideSelectors": [".azpp-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": [".azpp-cookie-consent", ".banner-main"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [".azpp-cookie-consent", ".banner-main .button-group > button"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".azpp-cookie-consent", ".banner-main .button-group > button:last-of-type"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [".azpp-cookie-consent", ".banner-main .button-group > button:nth-of-type(2):nth-last-of-type(2)"]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "\"status\":\"reject_all\""
+                },
+                {
+                    "cookieContains": "\"status\":\"do_not_sell\""
+                }
+            ]
+        }
+    ]
+}

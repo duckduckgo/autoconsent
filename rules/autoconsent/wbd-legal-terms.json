@@ -1,0 +1,50 @@
+{
+    "name": "wbd-legal-terms",
+    "vendorUrl": "https://www.wbd.com/",
+    "comment": "Terms-and-cookies notice with only an Agree button. The <dialog> variant is modal, so hiding it with CSS leaves the page inert; close it without submitting the form instead. The MUI modal variant cannot be dismissed, so it is hidden.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "detectCmp": [
+        {
+            "exists": "dialog#ltp-dialog, [id=\"id/ltp\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#ltp-dialog[open], [id=\"id/ltp/banner\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ltp-submit-btn, [id=\"id/ltp/banner/button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "dialog#ltp-dialog"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_WBD_LTP_CLOSE"
+                },
+                {
+                    "removeClass": "is-NoScroll",
+                    "selector": "body",
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "hide": "[id=\"id/ltp\"]"
+                },
+                {
+                    "addStyle": "overflow: auto !important",
+                    "selector": "body",
+                    "optional": true
+                }
+            ]
+        }
+    ]
+}

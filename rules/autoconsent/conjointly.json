@@ -1,0 +1,43 @@
+{
+    "name": "conjointly",
+    "vendorUrl": "https://conjointly.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?conjointly\\.com/"
+    },
+    "prehideSelectors": [".cookie-prompt-container"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-prompt-container #custom-cookie-banner-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-prompt-container #custom-cookie-banner-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-prompt-container .confirm-all-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cookie-prompt-container #analytic-cookie:checked"
+            },
+            "then": [
+                {
+                    "click": ".cookie-prompt-container #analytic-cookie"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".cookie-prompt-container .confirm-cookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_policy=false"
+        }
+    ]
+}

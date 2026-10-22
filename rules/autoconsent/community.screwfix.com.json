@@ -1,0 +1,23 @@
+{
+    "name": "community.screwfix.com",
+    "vendorUrl": "https://trustarc.com/",
+    "comment": "TrustArc banner whose custom CSS adds a full-page #consent-banner::before backdrop that is not removed when the banner closes, leaving the page dimmed and unclickable.",
+    "minimumRuleStepVersion": 3,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://community\\.screwfix\\.com/"
+    },
+    "prehideSelectors": ["#consent-banner"],
+    "detectCmp": [{ "exists": "#consent-banner #truste-consent-track" }],
+    "detectPopup": [{ "visible": "#consent-banner #truste-consent-track" }],
+    "optIn": [
+        { "waitForThenClick": "#truste-consent-button" },
+        { "stylesheet": "#consent-banner::before { display: none !important; }", "stylesheetId": "screwfix-backdrop" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "#truste-consent-required" },
+        { "stylesheet": "#consent-banner::before { display: none !important; }", "stylesheetId": "screwfix-backdrop" }
+    ],
+    "test": [{ "cookieContains": "cmapi_cookie_privacy=permit_1_required" }]
+}

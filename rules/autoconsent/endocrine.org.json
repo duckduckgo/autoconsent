@@ -1,0 +1,35 @@
+{
+    "name": "endocrine.org",
+    "vendorUrl": "https://www.endocrine.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?endocrine\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#gdprBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdprBanner .js-close-btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdprBanner .js-accept-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdprBanner .js-close-btn"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#gdprBanner",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

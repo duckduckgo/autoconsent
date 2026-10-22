@@ -1,0 +1,31 @@
+{
+    "name": "guesty",
+    "vendorUrl": "https://www.guesty.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#guesty-be-root .cookies__block"],
+    "detectCmp": [
+        {
+            "exists": "#guesty-be-root"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#guesty-be-root .cookies__block"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#guesty-be-root .cookies__block .cookies__btn--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#guesty-be-root .cookies__block .cookies__btn--decline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiePolicyAccepted=0"
+        }
+    ]
+}

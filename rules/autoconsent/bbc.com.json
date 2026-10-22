@@ -1,30 +1,71 @@
 {
     "name": "bbc.com",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)"
+        "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)/"
     },
-    "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]"],
+    "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]", "#bbccookies-prompt:has(#bbccookies-reject-button)"],
     "detectCmp": [
         {
-            "exists": "#consent-banner-title"
+            "any": [
+                {
+                    "exists": "#consent-banner-title"
+                },
+                {
+                    "exists": "#bbccookies-reject-button"
+                }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#consent-banner-title"
+            "any": [
+                {
+                    "visible": "#consent-banner-title"
+                },
+                {
+                    "visible": "#bbccookies-reject-button"
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "button[data-testid=\"accept-button\"]"
+            "if": {
+                "exists": "#bbccookies-accept-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#bbccookies-accept-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "button[data-testid=\"accept-button\"]"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "button[data-testid=\"reject-button\"]"
+            "if": {
+                "exists": "#bbccookies-reject-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#bbccookies-reject-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "button[data-testid=\"reject-button\"]"
+                }
+            ]
         }
     ],
     "test": [
+        {
+            "wait": 500
+        },
         {
             "cookieContains": "ckns_explicit=1"
         }

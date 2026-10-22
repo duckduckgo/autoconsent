@@ -1,0 +1,45 @@
+{
+    "name": "laravel-cookie-consent",
+    "vendorUrl": "https://github.com/statikbe/laravel-cookie-consent",
+    "prehideSelectors": [".lcc-modal.js-lcc-modal-alert"],
+    "detectCmp": [
+        {
+            "exists": ".lcc-modal.js-lcc-modal-alert"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".lcc-modal.js-lcc-modal-alert"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".lcc-modal.js-lcc-modal-alert .js-lcc-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".lcc-modal.js-lcc-modal-alert .js-lcc-settings-toggle"
+        },
+        {
+            "waitForVisible": ".lcc-modal.js-lcc-modal-settings"
+        },
+        {
+            "click": ".lcc-modal.js-lcc-modal-settings input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".lcc-modal.js-lcc-modal-settings .js-lcc-settings-save"
+        },
+        {
+            "waitForVisible": ".lcc-modal.js-lcc-modal-alert",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__cookie_consent=false"
+        }
+    ]
+}

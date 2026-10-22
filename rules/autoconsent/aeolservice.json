@@ -1,0 +1,39 @@
+{
+    "name": "aeolservice",
+    "vendorUrl": "https://cloud.aeolservice.es/",
+    "runContext": {
+        "urlPattern": "^https?://cloud\\.aeolservice\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookies_consent_div"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#popup_content.cookies_consent_div .config_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#popup_content.cookies_consent_div .explanation .aceptar_cokies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#popup_content.cookies_consent_div .config_cookies"
+        },
+        {
+            "waitForVisible": "#popup_content #configurar_cookies"
+        },
+        {
+            "click": "#popup_content .cookie_button:not(.cookies_tecnicas) input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#popup_content .not_explanation.aceptar_cokies"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "mackeeper",
+    "vendorUrl": "https://mackeeper.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mackeeper\\.com/"
+    },
+    "prehideSelectors": [".js-gdpr-banner-top-hide"],
+    "detectCmp": [
+        {
+            "exists": ".js-gdpr-banner .js-gdpr-banner-top-hide"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-gdpr-banner .js-gdpr-banner-top-hide"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-gdpr-banner-top-hide .js-gdpr-banner-agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-gdpr-banner-top-hide .js-gdpr-banner-disagree"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_banner=false"
+        }
+    ]
+}

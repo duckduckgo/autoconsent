@@ -1,0 +1,12 @@
+{
+    "name": "opalcollection-com",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?opalcollection\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": [".cookie-popup"],
+    "detectCmp": [{ "visible": ".cookie-popup .cookie-popup__button" }],
+    "detectPopup": [{ "visible": ".cookie-popup" }],
+    "optIn": [{ "waitForThenClick": ".cookie-popup .cookie-popup__button" }],
+    "optOut": [{ "hide": ".cookie-popup" }]
+}

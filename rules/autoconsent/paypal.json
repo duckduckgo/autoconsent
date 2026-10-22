@@ -6,8 +6,11 @@
     "optIn": [{ "click": "#acceptAllButton" }],
     "optOut": [
         {
-            "waitForThenClick": "#bannerDeclineButton"
+            "comment": "The banner renders before its click handler is attached, and early clicks are ignored.",
+            "waitForThenClick": "#bannerDeclineButton",
+            "retry": 10,
+            "retryInterval": 500
         }
     ],
-    "test": [{ "wait": 500 }, { "cookieContains": "cookie_prefs" }]
+    "test": [{ "wait": 500 }, { "cookieContains": "type%3Dexplicit" }]
 }

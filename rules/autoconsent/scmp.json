@@ -7,18 +7,21 @@
     "prehideSelectors": ["[data-qa=\"GDPRBanner-Container\"]"],
     "detectCmp": [
         {
-            "exists": "[data-qa=\"GDPRBanner-Container\"] [data-qa=\"GDPRBanner-Button\"]"
+            "any": [{ "exists": "[data-qa=\"GDPRBanner-Container\"] [data-qa=\"GDPRBanner-Button\"]" }, { "exists": ".fc-consent-root" }]
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-qa=\"GDPRBanner-Container\"] [data-qa=\"GDPRBanner-Button\"]"
+            "any": [
+                { "visible": "[data-qa=\"GDPRBanner-Container\"] [data-qa=\"GDPRBanner-Button\"]" },
+                { "visible": ".fc-consent-root .fc-dialog-container" }
+            ]
         }
     ],
     "optIn": [
         {
             "waitForVisible": ".fc-consent-root .fc-dialog-container",
-            "timeout": 1000,
+            "timeout": 4000,
             "optional": true
         },
         {
@@ -59,6 +62,11 @@
                     "optional": true
                 }
             ]
+        },
+        {
+            "waitForVisible": "[data-qa=\"GDPRBanner-Container\"] [data-qa=\"GDPRBanner-Button\"]",
+            "timeout": 3000,
+            "optional": true
         },
         {
             "hide": "[data-qa=\"GDPRBanner-Container\"]"

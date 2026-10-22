@@ -1,0 +1,35 @@
+{
+    "name": "nederlandseloterij",
+    "vendorUrl": "https://www.nederlandseloterij.nl/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?nederlandseloterij\\.nl/"
+    },
+    "prehideSelectors": ["dialog[data-test=\"common-consent\"]", "#nlportal-cookie-consent .modal"],
+    "detectCmp": [
+        {
+            "exists": "dialog[data-test=\"common-consent\"] [data-test=\"consent-reject-all\"], #nlportal-cookie-consent .cookie-consent-modal-static-buttons > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog[data-test=\"common-consent\"] [data-test=\"consent-reject-all\"], #nlportal-cookie-consent .cookie-consent-modal-static-buttons > button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog[data-test=\"common-consent\"] [data-test=\"consent-accept-all\"], #nlportal-cookie-consent .cookie-consent-modal-static-buttons > button.button-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog[data-test=\"common-consent\"] [data-test=\"consent-reject-all\"], #nlportal-cookie-consent .cookie-consent-modal-static-buttons > button:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "dialog[data-test=\"common-consent\"], #nlportal-cookie-consent .cookie-consent-modal-static-buttons",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

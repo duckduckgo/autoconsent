@@ -1,0 +1,9 @@
+{
+    "name": "drouot-rgpd",
+    "prehideSelectors": ["#rgpd-popup", "#rgpd-custom-popup"],
+    "detectCmp": [{ "exists": "#rgpd-popup #rgpd-continue-without-accepting" }],
+    "detectPopup": [{ "visible": "#rgpd-popup" }],
+    "optIn": [{ "waitForThenClick": "#rgpd-popup .rgpd-buttons button:last-child" }],
+    "optOut": [{ "waitForThenClick": "#rgpd-continue-without-accepting" }],
+    "test": [{ "cookieContains": "consentLevel=none" }]
+}

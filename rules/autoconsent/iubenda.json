@@ -2,7 +2,11 @@
     "name": "iubenda",
     "prehideSelectors": ["#iubenda-cs-banner"],
     "detectCmp": [{ "exists": "#iubenda-cs-banner" }],
-    "detectPopup": [{ "visible": ".iubenda-cs-accept-btn" }],
+    "detectPopup": [
+        {
+            "any": [{ "visible": ".iubenda-cs-accept-btn" }, { "visible": "#iubenda-cs-banner .iubenda-ccpa-opt-out" }]
+        }
+    ],
     "optIn": [{ "waitForThenClick": ".iubenda-cs-accept-btn" }],
     "optOut": [
         {
@@ -10,16 +14,40 @@
             "then": [{ "click": ".iubenda-cs-reject-btn" }],
             "else": [
                 {
-                    "waitForThenClick": ".iubenda-cs-customize-btn"
-                },
-                {
-                    "waitForThenClick": ".iub-btn-reject"
-                },
-                {
-                    "waitForThenClick": "#iubFooterBtn"
+                    "if": { "exists": ".iubenda-cs-customize-btn" },
+                    "then": [
+                        {
+                            "waitForThenClick": ".iubenda-cs-customize-btn"
+                        },
+                        {
+                            "waitForThenClick": ".iub-btn-reject"
+                        },
+                        {
+                            "waitForThenClick": "#iubFooterBtn"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": { "exists": "#iubenda-cs-banner .iubenda-ccpa-opt-out" },
+                            "then": [
+                                {
+                                    "click": "#iubenda-cs-banner .iubenda-ccpa-opt-out"
+                                },
+                                {
+                                    "waitForThenClick": "#iubenda-alert .iubenda-button-confirm"
+                                },
+                                {
+                                    "waitForThenClick": "#iubenda-cs-banner .iubenda-cs-close-btn",
+                                    "timeout": 2000,
+                                    "optional": true
+                                }
+                            ],
+                            "else": [{ "hide": "#iubenda-cs-banner" }]
+                        }
+                    ]
                 }
             ]
         }
     ],
-    "test": [{ "eval": "EVAL_IUBENDA_1" }]
+    "test": [{ "any": [{ "eval": "EVAL_IUBENDA_1" }, { "cookieContains": "uspString%22%3A%221YY-" }] }]
 }

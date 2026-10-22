@@ -1,0 +1,33 @@
+{
+    "name": "rug-nl",
+    "_metadata": {
+        "vendorUrl": "https://www.rug.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?rug\\.nl/"
+    },
+    "prehideSelectors": ["#ConsentBar"],
+    "detectCmp": [
+        {
+            "exists": "#ConsentBar [data-js--cookie=\"cookies-accept-functional\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ConsentBar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ConsentBar [data-js--cookie=\"cookies-accept-all\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ConsentBar [data-js--cookie=\"cookies-accept-functional\"]"
+        }
+    ]
+}

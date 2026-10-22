@@ -5,7 +5,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https://(www\\.)?(menshealth|womenshealthmag|cosmopolitan|esquire|elle|elledecor|harpersbazaar|goodhousekeeping|popularmechanics|caranddriver|delish|veranda|roadandtrack|bestproducts|countryliving|housebeautiful|bicycling|biography|pitchfork|prevention|runnersworld|thepioneerwoman|townandcountrymag)\\.com/"
+        "urlPattern": "^https://(www\\.)?(menshealth|womenshealthmag|cosmopolitan|esquire|elle|elledecor|harpersbazaar|goodhousekeeping|popularmechanics|caranddriver|delish|veranda|roadandtrack|bestproducts|countryliving|housebeautiful|bicycling|biography|pitchfork|prevention|runnersworld|thepioneerwoman|townandcountrymag|seventeen|oprahdaily|womansday|redbookmag|autoweek)\\.com/"
     },
     "prehideSelectors": ["div[role=\"dialog\"][aria-label^=\"Privacy Disclosure\"]"],
     "detectCmp": [

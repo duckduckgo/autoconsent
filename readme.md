@@ -32,6 +32,18 @@ In some environments (e.g. browser extensions), it's useful to access [eval snip
 import { evalSnippets } from '@duckduckgo/autoconsent';
 ```
 
+### Heuristics
+
+The heuristic popup and button classification is available on its own, without DOM dependencies, so it can run in Node (e.g. to post-process crawl data):
+
+```javascript
+import { checkHeuristicPatterns, classifyButtonTextRegex, classifyButtons, classifyPopup } from '@duckduckgo/autoconsent/heuristics';
+
+classifyButtonTextRegex('Reject all'); // 'reject'
+```
+
+`dist/autoconsent.playwright.js` also exposes `window.autoconsentHeuristics.getPotentialPopups(timeout)` and `getButtonData(element)`, so other scripts injected into the same world can reuse autoconsent's popup and button discovery.
+
 ## Browser extension
 
 Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all [DuckDuckGo apps](https://duckduckgo.com/app), but you can build it yourself and use for testing.
@@ -82,6 +94,16 @@ There are currently two ways of implementing a CMP:
  rulesets allow.
 
 For more details on rule types, see [Rule Syntax Reference](docs/rule-syntax.md).
+
+## AI agent setup
+
+The agent skills in `.agents/skills/` need a few environment variables.
+
+1. Copy the contents from [`.claude/user-settings.json.TEMPLATE`](.claude/user-settings.json.TEMPLATE) to your user settings (e.g. `~/.claude/settings.json`), in addition to your existing config. If your settings already have an `env` block, merge the entries into it: a second `env` key would silently override the first.
+2. Replace the values in the template. Proxy values must be complete URLs with an `http://`, `https://`, or `socks5://` scheme, and without embedded credentials. `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD` are optional: they are only used for `https://` proxies, so remove them if your proxies don't need authentication. `OXYLABS_USER` and `OXYLABS_PASSWORD` are optional too: they enable the `oxylabs-testing` skill for sites that show our proxies a bot wall, so remove them if you don't have an Oxylabs account.
+3. Start a new Claude Code session: settings are only read at startup.
+
+For other agents or plain shell use, `export` the same variables in your shell profile instead.
 
 ## License
 

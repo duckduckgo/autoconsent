@@ -1,0 +1,49 @@
+{
+    "name": "pizzapilgrims.co.uk",
+    "vendorUrl": "https://www.pizzapilgrims.co.uk/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pizzapilgrims\\.co\\.uk/"
+    },
+    "prehideSelectors": [".cookie-bg"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-bg .cookie-inner .cookie-btn--accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-bg .cookie-inner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-bg .cookie-btn-wrapper .cookie-btn--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-bg .personalise-btn"
+        },
+        {
+            "waitForVisible": ".cookie-bg form .cookie-list"
+        },
+        {
+            "click": ".cookie-bg form .cookie-item input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".cookie-bg form button[type=submit]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdpr-ga=false"
+        },
+        {
+            "cookieContains": "gdpr-fbp=false"
+        }
+    ]
+}

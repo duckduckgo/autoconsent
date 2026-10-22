@@ -4,7 +4,13 @@ This folder contains statistics gathered from running crawls with autoconsent ac
 The crawler uses [tracker-radar-collector](https://github.com/duckduckgo/tracker-radar-collector/) to crawl a list of the top 10k sites for US, DE and GB regions.
 The results report how many sites in this list the rule triggered for, and some error counts.
 
+## Labelled button texts
+
+`labelled-button-texts.csv` holds cookie popup button texts collected from crawls (`button_text`, normalized with `cleanButtonText`), the number of sites each appeared on (`occurences`), and a `label`: `settings`, `accept`, `reject`, `acknowledge` or `other`.
+It is produced by the [tracker-radar-collector](https://github.com/duckduckgo/tracker-radar-collector/) post-processing scripts (`collect-popup-button-texts.js`, then `label-button-texts.js`), and is used by `npm run benchmark-buttons` and `tests-wtr/heuristics/button-classification-accuracy.test.ts` to measure heuristic button classification.
+
 ## Data format
+
 
 In `coverage.json` the data is included as a JSON object. Keys correspond to rule names and contain stats for `US`, `DE` and `GB` regions, where applicable.
 The stats contain the following keys:

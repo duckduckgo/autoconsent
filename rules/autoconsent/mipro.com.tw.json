@@ -1,0 +1,10 @@
+{
+    "name": "mipro.com.tw",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?mipro\\.com\\.tw/" },
+    "prehideSelectors": [".cookie-modal.open"],
+    "detectCmp": [{ "exists": ".cookie-modal.open .cookie-box" }],
+    "detectPopup": [{ "visible": ".cookie-modal.open .btn-box .simple-btn.cancel" }],
+    "optIn": [{ "waitForThenClick": ".cookie-modal.open .btn-box .simple-btn.agree" }],
+    "optOut": [{ "waitForThenClick": ".cookie-modal.open .btn-box .simple-btn.cancel" }],
+    "test": [{ "exists": ".cookie-modal.open", "negated": true }]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "lego",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lego\\.com/"
+    },
+    "prehideSelectors": ["[class*=\"ConsentModal_consent-modal__modal-overlay\"]"],
+    "detectCmp": [{ "exists": "[data-test=\"cookie-necessary-button\"]" }],
+    "detectPopup": [{ "visible": "[data-test=\"cookie-necessary-button\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[data-test=\"cookie-necessary-button\"]" },
+        {
+            "any": [{ "cookieContains": "AGE_GATE=" }, { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "timeout": 1000 }],
+            "optional": true
+        },
+        {
+            "if": { "visible": "[data-test=\"age-gate-overlay\"]" },
+            "then": [
+                { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "check": "none", "timeout": 30000 },
+                { "waitForThenClick": "[data-test=\"cookie-necessary-button\"]", "timeout": 5000 }
+            ],
+            "optional": true
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "[data-test=\"cookie-accept-all\"]" }],
+    "test": [{ "cookieContains": "%22key%22%3A%22analytics%22%2C%22value%22%3Afalse" }]
+}

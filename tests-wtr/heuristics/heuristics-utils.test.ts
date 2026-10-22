@@ -4,13 +4,9 @@ import {
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
-    getActionablePopups,
-    isDisabled,
-    excludeContainers,
-    getButtonData,
-    isDialogLikeElement,
     isExcludedPopup,
-} from '../../lib/heuristics';
+} from '../../lib/heuristic-classify';
+import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
 function rejectButtons(buttons: ButtonData[]) {
@@ -62,6 +58,12 @@ describe('checkHeuristicPatterns', () => {
         expect(snippets.every((s) => typeof s === 'string')).to.be.true;
     });
 
+    it('detects essential cookie notices', () => {
+        const { patterns } = checkHeuristicPatterns('We use essential cookies for site functionality and optional cookies for analytics.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
     it('detects website cookie experience notices', () => {
         const { patterns, snippets } = checkHeuristicPatterns(
             'The Algonquin College website uses cookies to enhance your browsing experience.',
@@ -69,6 +71,27 @@ describe('checkHeuristicPatterns', () => {
 
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
+    });
+});
+
+describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
+    it('detects "we use <qualifier> cookies" notices', () => {
+        const texts = [
+            // openrouter.ai
+            'Cookie Preferences We use essential cookies for site functionality and optional cookies for analytics.',
+            'We use optional cookies to measure traffic',
+            'We use analytics cookies and similar technologies',
+            'We serve necessary cookies only',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match when "cookies" is further away', () => {
+        expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
+            0,
+        );
     });
 });
 
@@ -94,6 +117,80 @@ describe('checkHeuristicPatterns with Russian popups', () => {
 
     it('does not detect unrelated Russian text', () => {
         expect(checkHeuristicPatterns('Дешевые авиабилеты онлайн и бронирование отелей').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Qualcuno ha detto… cookie? Noi e i nostri partner utilizziamo i cookie per fornirti un servizio migliore',
+            'Utilizziamo cookie tecnici e di profilazione',
+            'Questo sito utilizza i cookie per migliorare la tua esperienza',
+            'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
+            'Archiviare e/o accedere a informazioni su un dispositivo',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(
+            checkHeuristicPatterns(
+                'Noi e i nostri partner commerciali utilizziamo materiali riciclati. Il sito usa la tecnologia più moderna.',
+            ).patterns,
+        ).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // svtplay.se
+            'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Webbplatsen använder kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Japanese popups', () => {
+    it('detects Japanese cookie notices', () => {
+        const texts = [
+            '当サイトはサービス改善のためCookieを使用しています。',
+            '当ウェブサイトではクッキーを利用しています',
+            'このサイトはクッキー（Cookie）を使用しています',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Japanese text', () => {
+        expect(checkHeuristicPatterns('全国の旧車イベント情報を集約しています').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Danish popups', () => {
+    it('detects Danish cookie notices', () => {
+        const texts = [
+            'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
+            'Vi bruger cookies for at give dig den bedste oplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Danish text', () => {
+        expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
     });
 });
 
@@ -182,6 +279,19 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
+    it('matches CCPA "do not sell/share" variants', () => {
+        expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
+    });
+
+    it('matches German continue-without-accepting variants', () => {
+        expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
+        expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
     it('returns other for empty string', () => {
         expect(classifyButtonTextRegex('')).to.equal('other');
     });
@@ -194,6 +304,7 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Essential Only')).to.equal('reject');
         expect(classifyButtonTextRegex('Only use essential cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Only accept necessary cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Essential only cookies')).to.equal('reject');
     });
 
     it('does not classify bare essential category labels as reject choices', () => {
@@ -213,6 +324,28 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Только необходимые куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Отклонить куки')).to.equal('reject');
         expect(classifyButtonTextRegex('Не принимаю')).to.equal('reject');
+    });
+
+    it('matches Japanese reject buttons', () => {
+        expect(classifyButtonTextRegex('拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('全て拒否する')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookieを拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Danish reject buttons', () => {
+        expect(classifyButtonTextRegex('Nej tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nej, tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
@@ -268,6 +401,14 @@ describe('classifyButtonTextRegex', () => {
 
     it('does not treat revoke links as reject buttons', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
+    });
+
+    it('classifies accept-and-close buttons as accept', () => {
+        expect(classifyButtonTextRegex('Akzeptieren & Schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Akzeptieren und schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Zustimmen schliessen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
     });
 });
 
@@ -472,6 +613,36 @@ describe('excludeContainers', () => {
 
         expect(result).to.have.length(1);
         expect(result[0]).to.equal(inner);
+    });
+    it('excludes a shadow host that contains another element in its shadow root', () => {
+        const host = document.createElement('div');
+        const inner = document.createElement('button');
+        host.attachShadow({ mode: 'open' }).appendChild(inner);
+
+        const result = excludeContainers([host, inner]);
+
+        expect(result).to.deep.equal([inner]);
+    });
+
+    it('keeps the reversed input order', () => {
+        const parent = document.createElement('div');
+        const a = document.createElement('button');
+        const b = document.createElement('button');
+        const c = document.createElement('button');
+        parent.append(a, b, c);
+
+        expect(excludeContainers([parent, a, b, c])).to.deep.equal([c, b, a]);
+    });
+
+    it('handles thousands of elements quickly', () => {
+        const parent = document.createElement('nav');
+        const links = Array.from({ length: 5000 }, () => parent.appendChild(document.createElement('a')));
+
+        const start = performance.now();
+        const result = excludeContainers([parent, ...links]);
+
+        expect(result).to.have.length(5000);
+        expect(performance.now() - start).to.be.below(200);
     });
 });
 

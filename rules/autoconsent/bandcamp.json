@@ -10,20 +10,59 @@
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-dialog-initial"
+            "any": [
+                {
+                    "visible": ".cookie-dialog-initial"
+                },
+                {
+                    "visible": ["menu-bar", ".cookie-dialog-initial"]
+                },
+                {
+                    "visible": ["page-footer", ".cookie-dialog-initial"]
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookie-dialog-initial button.g-button[type=\"submit\"]"
+            "any": [
+                {
+                    "waitForThenClick": ".cookie-dialog-initial button.g-button[type=\"submit\"]",
+                    "timeout": 500
+                },
+                {
+                    "waitForThenClick": ["menu-bar", ".cookie-dialog-initial button.g-button[type=\"submit\"]"],
+                    "timeout": 500
+                },
+                {
+                    "waitForThenClick": ["page-footer", ".cookie-dialog-initial button.g-button[type=\"submit\"]"],
+                    "timeout": 500
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cookie-dialog-initial button.g-button.outline"
+            "any": [
+                {
+                    "waitForThenClick": ".cookie-dialog-initial button.g-button.outline",
+                    "timeout": 500
+                },
+                {
+                    "waitForThenClick": ["menu-bar", ".cookie-dialog-initial button.g-button.outline"],
+                    "timeout": 500
+                },
+                {
+                    "waitForThenClick": ["page-footer", ".cookie-dialog-initial button.g-button.outline"],
+                    "timeout": 500
+                }
+            ]
         }
     ],
     "test": [
+        {
+            "wait": 500
+        },
         {
             "cookieContains": "cookie_preferences=%7B%22allow%22%3A%5B%5D"
         }

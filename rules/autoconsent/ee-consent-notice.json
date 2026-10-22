@@ -1,0 +1,40 @@
+{
+    "name": "ee-consent-notice",
+    "vendorUrl": "https://docs.expressionengine.com/latest/add-ons/consent.html",
+    "prehideSelectors": [".cookieNoticeWrapper"],
+    "detectCmp": [
+        {
+            "exists": ".cookieNoticeWrapper #cookieConsentFormAccept input[name^='ee:cookies_']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookieNoticeWrapper #cookieConsentFormAccept"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookieNoticeWrapper #cookieConsentFormAccept button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cookieNoticeWrapper #cookieConsentFormDecline button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookieNoticeWrapper #cookieConsentFormDecline button"
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_EE_CONSENT_DECLINE_0"
+                },
+                {
+                    "waitForThenClick": ".cookieNoticeWrapper #cookieConsentFormAccept button"
+                }
+            ]
+        }
+    ]
+}

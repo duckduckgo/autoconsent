@@ -1,0 +1,32 @@
+{
+    "name": "tumblr-custom-domain-gdpr-banner",
+    "cosmetic": true,
+    "prehideSelectors": ["iframe.tmblr-iframe--gdpr-banner"],
+    "detectCmp": [
+        {
+            "exists": "iframe.tmblr-iframe--gdpr-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "iframe.tmblr-iframe--gdpr-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "iframe.tmblr-iframe--gdpr-banner",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "iframe.tmblr-iframe--gdpr-banner"
+        }
+    ],
+    "test": [
+        {
+            "visible": "iframe.tmblr-iframe--gdpr-banner",
+            "check": "none"
+        }
+    ]
+}

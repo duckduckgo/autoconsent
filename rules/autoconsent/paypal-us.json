@@ -1,42 +1,15 @@
 {
     "name": "paypal-us",
-    "prehideSelectors": ["#ccpaCookieContent_wrapper, article.ppvx_modal--overpanel, #cookiePrefsModal"],
-    "detectCmp": [{ "exists": "#ccpaCookieBanner, .privacy-sheet-content, #cookiePrefsModal" }],
-    "detectPopup": [{ "visible": "#ccpaCookieBanner, .privacy-sheet-content, #cookiePrefsModal" }],
+    "prehideSelectors": ["#ccpaCookieContent_wrapper"],
+    "detectCmp": [{ "exists": "#ccpaCookieBanner" }],
+    "detectPopup": [{ "visible": "#ccpaCookieBanner" }],
     "optIn": [{ "click": "#acceptAllButton" }],
     "optOut": [
         {
             "if": { "exists": "#bannerDeclineButton" },
-            "then": [{ "click": "#bannerDeclineButton" }],
-            "else": [
-                {
-                    "if": { "exists": "a#manageCookiesLink" },
-                    "then": [{ "click": "a#manageCookiesLink" }],
-                    "else": [
-                        {
-                            "if": { "exists": "#cookiePrefsModal" },
-                            "then": [
-                                { "waitForVisible": "#cookiePrefsModal #submitCookiesBtn, .confirmCookie #submitCookiesBtn" },
-                                {
-                                    "click": "#cookiePrefsModal input[type='checkbox']:checked",
-                                    "all": true,
-                                    "optional": true
-                                },
-                                { "click": "#cookiePrefsModal #submitCookiesBtn, .confirmCookie #submitCookiesBtn" }
-                            ],
-                            "else": [
-                                { "waitForVisible": ".privacy-sheet-content #formContent" },
-                                {
-                                    "click": "#formContent input[type='checkbox']:checked",
-                                    "all": true,
-                                    "optional": true
-                                },
-                                { "click": ".cookieAction #submitCookiesBtn" }
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "then": [{ "waitForThenClick": "#bannerDeclineButton", "retry": 10, "retryInterval": 500 }],
+            "comment": "Without a decline button the only way out is the cookie preferences page, and the choice made there does not always stick, so the banner keeps coming back. Hide it instead.",
+            "else": [{ "hide": "#ccpaCookieBanner" }]
         }
     ],
     "test": [{ "wait": 1000 }, { "cookieContains": "type%3Dexplicit" }]

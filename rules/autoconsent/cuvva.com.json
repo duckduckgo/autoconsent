@@ -1,0 +1,55 @@
+{
+    "name": "cuvva.com",
+    "vendorUrl": "https://www.cuvva.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?cuvva\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cuvva-app-injection-site button[data-testid=\"accept-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cuvva-app-injection-site button[data-testid=\"accept-cookies\"]"
+        },
+        {
+            "cookieContains": "cuvva.app.website.cookie-policy.consent.v2=",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cuvva-app-injection-site button[data-testid=\"accept-cookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cuvva-app-injection-site button[aria-label=\"Reject all\"]",
+            "retry": 10,
+            "retryInterval": 500
+        },
+        {
+            "wait": 500
+        },
+        {
+            "if": {
+                "visible": "#cuvva-app-injection-site button[aria-label=\"Reject all\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cuvva-app-injection-site button[aria-label=\"Reject all\"]",
+                    "retry": 10,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cuvva.app.website.cookie-policy.consent.v2={%22preferences%22:{%22functional%22:true%2C%22analytics%22:false%2C%22marketing%22:false"
+        }
+    ]
+}

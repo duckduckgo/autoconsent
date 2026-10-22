@@ -1,0 +1,108 @@
+{
+    "name": "thenude",
+    "_metadata": {
+        "vendorUrl": "https://www.thenude.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thenude\\.com/"
+    },
+    "prehideSelectors": [".optanon-alert-box-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".optanon-alert-box-wrapper"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".optanon-alert-box-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".optanon-alert-box-wrapper .optanon-allow-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".optanon-alert-box-wrapper .optanon-toggle-display"
+        },
+        {
+            "waitForVisible": "#optanon-popup-wrapper"
+        },
+        {
+            "if": {
+                "exists": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+            },
+            "then": [
+                {
+                    "click": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+                },
+                {
+                    "waitForThenClick": "#optanon-popup-more-info-bar .optanon-status-editable .optanon-status-on label",
+                    "timeout": 1000
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+            },
+            "then": [
+                {
+                    "click": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+                },
+                {
+                    "waitForThenClick": "#optanon-popup-more-info-bar .optanon-status-editable .optanon-status-on label",
+                    "timeout": 1000
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+            },
+            "then": [
+                {
+                    "click": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+                },
+                {
+                    "waitForThenClick": "#optanon-popup-more-info-bar .optanon-status-editable .optanon-status-on label",
+                    "timeout": 1000
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+            },
+            "then": [
+                {
+                    "click": "#optanon-menu li.menu-item-on:is(.menu-item-performance,.menu-item-functional,.menu-item-advertising,.menu-item-social) button"
+                },
+                {
+                    "waitForThenClick": "#optanon-popup-more-info-bar .optanon-status-editable .optanon-status-on label",
+                    "timeout": 1000
+                }
+            ]
+        },
+        {
+            "click": "#optanon-popup-bottom .optanon-save-settings-button button"
+        },
+        {
+            "waitForVisible": ".optanon-alert-box-wrapper",
+            "check": "none",
+            "timeout": 3000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed"
+        },
+        {
+            "cookieContains": "%2C2%3A0%2C3%3A0%2C4%3A0"
+        }
+    ]
+}

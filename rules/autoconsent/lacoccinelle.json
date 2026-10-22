@@ -1,0 +1,97 @@
+{
+    "name": "lacoccinelle",
+    "vendorUrl": "https://www.lacoccinelle.net/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?lacoccinelle\\.net/"
+    },
+    "prehideSelectors": ["#qc-cmp2-container"],
+    "detectCmp": [
+        {
+            "exists": "#qc-cmp2-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#qc-cmp2-ui, #qc-cmp2-usp",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#qc-cmp2-usp"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#qc-cmp2-usp .qc-usp-close-icon"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#accept-btn"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#qc-cmp2-usp"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#qc-cmp2-usp .qc-cmp2-toggle-switch > button[aria-checked=\"false\"]",
+                    "all": true,
+                    "retry": 3
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-usp .qc-usp-ui-content button[mode=\"primary\"]"
+                },
+                {
+                    "waitForThenClick": "#qc-cmp2-mspa-success-modal-button-footer-container button",
+                    "timeout": 5000,
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "comment": "the \"more options\" button is repurposed as a paid offer, the partner list is the only free reject path",
+                    "waitForThenClick": "#qc-cmp2-container button.qc-cmp2-link-inline"
+                },
+                {
+                    "waitForThenClick": "#reject-all-btn"
+                },
+                {
+                    "comment": "outside the EEA the choice is not saved automatically",
+                    "waitForVisible": "#qc-cmp2-ui",
+                    "check": "none",
+                    "timeout": 1500,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "visible": "#save-and-exit",
+                        "check": "any"
+                    },
+                    "then": [
+                        {
+                            "click": "#save-and-exit",
+                            "all": true
+                        },
+                        {
+                            "waitForVisible": "#qc-cmp2-ui",
+                            "check": "none",
+                            "timeout": 5000
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "#qc-cmp2-ui, #qc-cmp2-usp",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "ensembleartsphilly",
+    "vendorUrl": "https://www.ensembleartsphilly.org/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ensembleartsphilly\\.org/"
+    },
+    "prehideSelectors": [".global-cookie.js-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".global-cookie.js-cookie-banner .global-cookie__button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".global-cookie.js-cookie-banner:not(.global-cookie__hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".global-cookie.js-cookie-banner .global-cookie__button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".global-cookie.js-cookie-banner .global-cookie__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_consent_banner_read=true"
+        }
+    ]
+}

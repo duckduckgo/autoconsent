@@ -1,0 +1,31 @@
+{
+    "name": "tumblr-com",
+    "prehideSelectors": ["#cmp-app-container"],
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?tumblr\\.com/",
+        "frame": true
+    },
+    "detectCmp": [
+        {
+            "exists": "#cmp-app-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cmp-app-container",
+            "check": "any"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#cmp-app-container iframe", ".cmp-components-button.is-secondary"],
+            "timeout": 5000
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#cmp-app-container iframe", ".cmp-components-button.is-primary"],
+            "timeout": 5000
+        }
+    ]
+}

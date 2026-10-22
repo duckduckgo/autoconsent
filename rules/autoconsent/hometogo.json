@@ -1,0 +1,18 @@
+{
+    "name": "hometogo",
+    "prehideSelectors": ["[data-test=\"cookie-consent-notification\"]"],
+    "detectCmp": [{ "exists": "[data-test=\"cookie-consent-notification\"] [data-test=\"accept-button\"]" }],
+    "detectPopup": [{ "visible": "[data-test=\"cookie-consent-notification\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-test=\"cookie-consent-notification\"] [data-test=\"accept-button\"]" }],
+    "optOut": [
+        {
+            "if": { "exists": "[data-test=\"cookie-consent-notification\"] [data-test=\"dismiss-button\"]" },
+            "then": [{ "waitForThenClick": "[data-test=\"cookie-consent-notification\"] [data-test=\"dismiss-button\"]" }],
+            "else": [
+                { "waitForThenClick": "[data-test=\"cookie-consent-notification\"] [data-test=\"settings-button\"]" },
+                { "waitForThenClick": "[data-test=\"cookie-consent-modal\"] [data-test=\"accept-button\"]" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=" }]
+}

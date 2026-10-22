@@ -111,6 +111,9 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
+    // the close icon is an SVG, which has no click() method
+    EVAL_COOKIE_POPUP_CLOSE: () =>
+        document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_COOKIE_LAW_INFO_0: () => {
         if (CLI.disableAllCookies) CLI.disableAllCookies();
         if (CLI.reject_close) CLI.reject_close();
@@ -145,6 +148,30 @@ export const snippets = {
             .forEach((i) => i.getAttribute('aria-checked') === 'true' && i.click()) || true,
     EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
+    // banner button order and meaning are configurable per site, so set the consent levels through the public API
+    EVAL_COOKIEREPORTS_OPT_OUT: () => {
+        const cr = window._cookiereports;
+        if (typeof cr?.saveConsent !== 'function') return false;
+        cr.saveConsent({ 1: true, 2: false, 3: false, 4: false, 5: false });
+        cr.processConsent('banner', { trigger: 'ok' });
+        cr.hideBanner();
+        return true;
+    },
+    EVAL_COOKIEREPORTS_OPT_IN: () => {
+        const cr = window._cookiereports;
+        if (typeof cr?.saveConsent !== 'function') return false;
+        cr.saveConsent({ 1: true, 2: true, 3: true, 4: true, 5: true });
+        cr.processConsent('banner', { trigger: 'ok' });
+        cr.hideBanner();
+        return true;
+    },
+    EVAL_COOKIEREPORTS_TEST: () => {
+        const levels = window._cookiereports?.loadConsent?.();
+        return !!levels && Object.keys(levels).length > 0 && Object.values(levels).every((v) => !v);
+    },
+    // turn the single-button form into a decline submission, same fields as the CMP's own decline form
+    EVAL_EE_CONSENT_DECLINE_0: () =>
+        document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;
@@ -207,6 +234,26 @@ export const snippets = {
         });
         return true;
     },
+    EVAL_SOURCEPOINT_RESTORE_SCROLL: () => {
+        // Sourcepoint scrolls back to this saved position when it unlocks; we unlock instead, so restore and clear it
+        const root = document.documentElement;
+        const saved = root.dataset.previousScrollY;
+        if (saved && saved !== 'null') {
+            root.dataset.previousScrollY = 'null';
+            const y = -parseInt(saved, 10);
+            if (y > 0 && window.scrollY === 0) {
+                const behavior = root.style.scrollBehavior;
+                root.style.scrollBehavior = 'auto';
+                window.scrollTo(0, y);
+                root.style.scrollBehavior = behavior;
+            }
+        }
+        // Sourcepoint re-locks after a bfcache restore, which autoconsent does not re-run for
+        window.addEventListener('pagehide', () => {
+            if (root.dataset.previousScrollY) root.dataset.previousScrollY = 'null';
+        });
+        return true;
+    },
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(
@@ -241,6 +288,7 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
+    EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

@@ -1,0 +1,33 @@
+{
+    "name": "bdirect-booking-engine",
+    "vendorUrl": "https://unknown",
+    "intermediate": false,
+    "prehideSelectors": ["#overlay-policy"],
+    "detectCmp": [
+        {
+            "exists": "#overlay-policy #policy_pop_close .fa-times-circle"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#overlay-policy #policy_pop_close .fa-times-circle"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#overlay-policy #policy_pop_close",
+            "retry": 2
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#overlay-policy #policy_pop_close",
+            "retry": 2
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "showpopuppolicy=No"
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+{
+    "name": "fera-cookies",
+    "prehideSelectors": [".cookies-container:has(.accept-necessary-only-btn)"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-container .cookies-banner-non-essential .accept-necessary-only-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-container"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": ".cookies-container .accept-all-cookies-btn"
+            },
+            "then": [
+                {
+                    "click": ".cookies-container .accept-all-cookies-btn"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookies-container .accept-hide-message-btn"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".cookies-accepted-container #closeStatusPopUp",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".cookies-container .accept-necessary-only-btn"
+            },
+            "then": [
+                {
+                    "click": ".cookies-container .accept-necessary-only-btn"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookies-container .accept-hide-message-btn"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".cookies-accepted-container #closeStatusPopUp",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_website_cookie_essentialCookies=essentialCookies"
+        },
+        {
+            "cookieContains": "_website_cookie_usageCookies=",
+            "negated": true
+        }
+    ]
+}

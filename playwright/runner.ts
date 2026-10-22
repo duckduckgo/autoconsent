@@ -1,8 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import { test, expect, Page, Frame, TestInfo } from '@playwright/test';
-import { waitFor } from '../lib/utils';
+import { test as base, expect, Page, Frame, TestInfo, Response } from '@playwright/test';
 import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
@@ -10,6 +9,8 @@ import compactRules from '../rules/compact-rules.json';
 // Full rules include optIn steps that compact rules intentionally omit.
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
+import { injectIntoIsolatedWorld } from './isolated-world.mjs';
+import { connectOxylabs, createCaptchaTracker } from './oxylabs.mjs';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
     ? []
@@ -17,7 +18,52 @@ const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
 const LOG_PAGE_LOGS = false;
 
 const testRegion = (process.env.REGION || 'NA').trim();
+
+// OXYLABS=1 runs each test in a fresh Oxylabs Agent Browser session in REGION instead of a local browser.
+const useOxylabs = process.env.OXYLABS === '1';
+// Local runs list the tests that failed on a bot wall here; Oxylabs runs only define the listed tests.
+const oxylabsCandidatesFile = process.env.OXYLABS_CANDIDATES;
+const oxylabsCandidates = useOxylabs && oxylabsCandidatesFile ? readOxylabsCandidates(oxylabsCandidatesFile) : null;
+const recordOxylabsCandidates = !useOxylabs && !!oxylabsCandidatesFile;
+// Pages load slower through remote Oxylabs sessions, so detection gets a longer window there.
+const detectionSlowdown = useOxylabs ? 2 : 1;
+// Status codes that bot protection answers with; other errors (404, 5xx) point to a stale spec URL instead.
+const BOT_WALL_STATUSES = [401, 403, 429, 503];
+// Navigation errors of a dead or misconfigured site rather than a blocked one.
+const DEAD_SITE_ERRORS = /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_FAILED|ERR_CONNECTION_REFUSED|ERR_ADDRESS_UNREACHABLE|ERR_CERT_/;
+// Page titles of common bot-protection challenge and block pages.
+const BOT_WALL_TITLE =
+    /just a moment|attention required|client challenge|access denied|access to this page has been denied|pardon our interruption|request unsuccessful|are you a robot|verify you are human|security check|captcha/i;
+
+const test = useOxylabs
+    ? base.extend({
+          page: async ({ browserName }, use) => {
+              if (browserName !== 'chromium') {
+                  throw new Error('Oxylabs runs need a Chromium project');
+              }
+              const browser = await connectOxylabs(testRegion.toLowerCase());
+              try {
+                  await use(await browser.newPage());
+              } finally {
+                  await browser.close().catch(() => {});
+              }
+          },
+      })
+    : base;
 test.describe.configure({ mode: 'parallel' });
+
+// The CMP name keeps tests for the same site in different specs apart.
+function oxylabsCandidateKey(cmp: string, testName: string) {
+    return `${cmp} › ${testName}`;
+}
+
+function readOxylabsCandidates(file: string) {
+    try {
+        return new Set(fs.readFileSync(file, 'utf8').split('\n').filter(Boolean));
+    } catch {
+        return new Set<string>();
+    }
+}
 
 type TestOptions = {
     testOptOut: boolean;
@@ -28,7 +74,15 @@ type TestOptions = {
     mobile: boolean;
     expectPopupOpen: boolean;
     expectedRuns: number;
+    gpc: boolean;
 };
+// A frame's content script, reached through either the isolated-world transport or a main-world Frame.
+type ContentScriptTarget = {
+    send: (message: object) => Promise<unknown>;
+    evalInMainWorld: (code: string) => Promise<unknown>;
+    isMainFrame: boolean;
+};
+
 const defaultOptions: TestOptions = {
     testOptOut: true,
     testOptIn: true,
@@ -38,10 +92,11 @@ const defaultOptions: TestOptions = {
     mobile: false,
     expectPopupOpen: true,
     expectedRuns: 1,
+    gpc: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
-const screenshotsDir = path.join(__dirname, '../test-results/screenshots');
+const screenshotsDir = path.join(__dirname, '../test-results/screenshots', useOxylabs ? 'oxylabs' : '');
 const deduplicatedRuleLookup = (
     JSON.parse(fs.readFileSync(path.join(__dirname, '../rules/rules.json'), 'utf-8')) as RuleBundle
 ).autoconsent.reduce((acc, rule) => {
@@ -55,6 +110,7 @@ class TestRun {
     page: Page;
     testInfo: TestInfo;
     url: string;
+    cmp: string;
     expectedCmp: string;
     options: TestOptions;
     autoAction: AutoAction | null;
@@ -63,12 +119,16 @@ class TestRun {
     formFactor: string;
     received: ContentScriptMessage[] = [];
     screenshotCounter = 0;
-    selfTestFrame: Frame | null = null;
+    selfTestTarget: ContentScriptTarget | null = null;
+    response: Response | null = null;
+    // Oxylabs solves captchas on the page; waits pause while it does.
+    captcha = useOxylabs ? createCaptchaTracker() : null;
 
     constructor(page: Page, testInfo: TestInfo, url: string, expectedCmp: string, options: TestOptions, autoAction: AutoAction | null) {
         this.page = page;
         this.testInfo = testInfo;
         this.url = url;
+        this.cmp = expectedCmp;
         // if a rule was deduplicated, update the expectation to the new deduplicate rule name
         if (deduplicatedRuleLookup.has(expectedCmp)) {
             this.expectedCmp = deduplicatedRuleLookup.get(expectedCmp)!;
@@ -92,12 +152,43 @@ class TestRun {
                 console.log(`    page log:`, msg.text());
             });
 
-        await this.page.exposeBinding('autoconsentSendMessage', this.messageCallback.bind(this));
-        await this.page.goto(this.url, { waitUntil: 'commit' });
-
-        await this.injectContentScripts();
-
+        // Chromium runs the content script in an isolated world like the extension; other browsers have no CDP for that.
+        const useIsolatedWorld = this.page.context().browser()?.browserType().name() === 'chromium';
+        if (useIsolatedWorld) {
+            await injectIntoIsolatedWorld(
+                this.page,
+                (transport) => async (msg, frameRef) => {
+                    if (this.captcha?.handleMessage(msg)) {
+                        return;
+                    }
+                    await this.messageCallback(msg, {
+                        send: (message) => transport.sendToContentScript(frameRef, message),
+                        evalInMainWorld: (code) => transport.evalInMainWorld(frameRef, code),
+                        isMainFrame: transport.isMainFrame(frameRef),
+                    });
+                },
+                contentScript,
+                this.captcha?.script,
+            );
+        } else {
+            await this.page.exposeBinding('autoconsentSendMessage', ({ frame }, msg: ContentScriptMessage) =>
+                this.messageCallback(msg, {
+                    send: (message) => frame.evaluate(`autoconsentReceiveMessage(${JSON.stringify(message)})`),
+                    evalInMainWorld: (code) => frame.evaluate(code),
+                    isMainFrame: frame.parentFrame() === null,
+                }),
+            );
+        }
+        if (this.options.gpc) {
+            await this.enableGpc();
+        }
         try {
+            this.response = await this.page.goto(this.url, { waitUntil: 'commit' });
+
+            if (!useIsolatedWorld) {
+                await this.injectContentScripts();
+            }
+
             await this.runAssertions();
         } catch (e) {
             if (e instanceof Error) {
@@ -110,6 +201,7 @@ class TestRun {
                     formFactor: this.formFactor,
                     testName: this.testInfo.title,
                     retry: this.testInfo.retry,
+                    provider: useOxylabs ? 'oxylabs' : 'local',
                 };
                 // log the full url in the error message, this will be parsed by the review tool
                 console.error(`Autoconsent test failed on ${this.url} failure stats: ${JSON.stringify(failureStats)}`);
@@ -121,6 +213,42 @@ class TestRun {
             }
             throw e;
         }
+    }
+
+    // On the last attempt, list a failed test that hit a bot wall so the Oxylabs pass can rerun it.
+    // Called from afterEach, which also runs when the test times out before reaching its own catch.
+    async recordOxylabsCandidate() {
+        const { status, retry, project, error } = this.testInfo;
+        if (status === 'passed' || status === 'skipped' || status === 'interrupted' || retry < project.retries) {
+            return;
+        }
+        if (await this.looksBlocked(error?.message ?? '')) {
+            fs.appendFileSync(oxylabsCandidatesFile!, `${oxylabsCandidateKey(this.cmp, this.testInfo.title)}\n`);
+        }
+    }
+
+    // The site served a bot wall instead of its content: the page never loaded (other than a dead host),
+    // or nothing was detected on a bot-wall status code or a challenge page.
+    async looksBlocked(errorMessage: string) {
+        if (!this.response) {
+            return !DEAD_SITE_ERRORS.test(errorMessage);
+        }
+        if (this.isMessageReceived({ type: 'cmpDetected' })) {
+            return false;
+        }
+        if (BOT_WALL_STATUSES.includes(this.response.status())) {
+            return true;
+        }
+        const title = await this.page.title().catch(() => '');
+        return BOT_WALL_TITLE.test(title);
+    }
+
+    // emulate a browser that sends the Global Privacy Control signal
+    async enableGpc() {
+        await this.page.setExtraHTTPHeaders({ 'Sec-GPC': '1' });
+        await this.page.addInitScript(() => {
+            Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true, configurable: true });
+        });
     }
 
     async injectContentScript(pageOrFrame: Page | Frame) {
@@ -146,29 +274,29 @@ class TestRun {
         }
     }
 
-    async messageCallback({ frame }: { frame: Frame }, msg: ContentScriptMessage) {
+    async messageCallback(msg: ContentScriptMessage, target: ContentScriptTarget) {
         LOG_MESSAGES.includes(msg.type) && console.log(msg);
         this.received.push(msg);
         switch (msg.type) {
             case 'init': {
-                const url = frame.url();
-                const mainFrame = frame.parentFrame() === null;
                 // Use full rules for optIn (compact rules omit optIn steps), compact rules for optOut.
                 const rules =
                     this.autoAction === 'optIn'
                         ? { autoconsent: fullRules }
-                        : { compact: filterCompactRules(compactRules, { url, mainFrame }) };
-                await frame.evaluate(
-                    `autoconsentReceiveMessage({ type: "initResp", config: ${JSON.stringify({
+                        : { compact: filterCompactRules(compactRules, { url: msg.url, mainFrame: target.isMainFrame }) };
+                await target.send({
+                    type: 'initResp',
+                    config: {
                         enabled: true,
                         autoAction: this.autoAction,
                         disabledCmps: [],
                         enablePrehide: false,
-                        detectRetries: 20,
+                        detectRetries: 20 * detectionSlowdown,
                         enableCosmeticRules: true,
                         visualTest: true,
-                    })}, rules: ${JSON.stringify(rules)} })`,
-                );
+                    },
+                    rules,
+                });
                 break;
             }
             case 'cmpDetected': {
@@ -183,20 +311,25 @@ class TestRun {
             case 'optOutResult': {
                 await this.takeScreenshot(`${this.screenshotCounter++}-result`);
                 if (msg.scheduleSelfTest) {
-                    this.selfTestFrame = frame;
+                    this.selfTestTarget = target;
                 }
                 break;
             }
             case 'autoconsentDone': {
                 await this.takeScreenshot(`${this.screenshotCounter++}-done`);
-                if (this.selfTestFrame && this.options.testSelfTest) {
-                    await this.selfTestFrame.evaluate(`autoconsentReceiveMessage({ type: "selfTest" })`);
+                if (this.selfTestTarget && this.options.testSelfTest) {
+                    await this.selfTestTarget.send({ type: 'selfTest' });
                 }
                 break;
             }
             case 'eval': {
-                const result = await frame.evaluate(msg.code);
-                await frame.evaluate(`autoconsentReceiveMessage({ id: "${msg.id}", type: "evalResp", result: ${JSON.stringify(result)} })`);
+                let result: unknown = false;
+                try {
+                    result = await target.evalInMainWorld(msg.code);
+                } catch {
+                    // the frame may have navigated or detached
+                }
+                await target.send({ id: msg.id, type: 'evalResp', result });
                 break;
             }
             case 'visualDelay': {
@@ -227,8 +360,19 @@ class TestRun {
         return this.findReceivedMessages(msg).length > 0;
     }
 
-    waitForMessage(msg: Partial<ContentScriptMessage>, maxTimes = 50, interval = 500) {
-        return waitFor(() => this.isMessageReceived(msg), maxTimes, interval);
+    async waitForMessage(msg: Partial<ContentScriptMessage>, maxTimes = 50, interval = 500) {
+        let attempts = 0;
+        while (!this.isMessageReceived(msg)) {
+            if (attempts >= maxTimes) {
+                return false;
+            }
+            await new Promise((resolve) => setTimeout(resolve, interval));
+            // time spent waiting for the captcha solver doesn't count
+            if (!this.captcha?.isSolving()) {
+                attempts++;
+            }
+        }
+        return true;
     }
 
     async assertMessageReceived(
@@ -269,7 +413,7 @@ class TestRun {
     }
 
     async runAssertions() {
-        await this.assertMessageReceived(`no CMP detected`, { type: 'cmpDetected' });
+        await this.assertMessageReceived(`no CMP detected`, { type: 'cmpDetected' }, true, 50 * detectionSlowdown);
 
         const expectedCmpDetected: Partial<ContentScriptMessage> = { type: 'cmpDetected', cmp: this.expectedCmp };
         await this.assertMessageReceived(`detected a wrong CMP`, expectedCmpDetected);
@@ -307,7 +451,7 @@ class TestRun {
                 await this.assertMessageReceived(`optInResult not received`, { type: 'optInResult' }, true, 1, 300);
                 await this.assertMessageReceived(`optInResult received, but failed`, { type: 'optInResult', result: true }, true, 1, 300);
             }
-            if (this.options.testSelfTest && this.selfTestFrame) {
+            if (this.options.testSelfTest && this.selfTestTarget) {
                 await this.assertMessageReceived(`selfTestResult not received`, { type: 'selfTestResult' }, true, 1, 300);
                 await this.assertMessageReceived(
                     `selfTestResult received, but failed`,
@@ -327,8 +471,19 @@ class TestRun {
     }
 }
 
+// Runs by test id, for the afterEach hook that records Oxylabs candidates.
+const testRuns = new Map<string, TestRun>();
+
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
     test.describe(cmp, () => {
+        if (recordOxylabsCandidates) {
+            // eslint-disable-next-line no-empty-pattern
+            test.afterEach(async ({}, testInfo) => {
+                const testRun = testRuns.get(testInfo.testId);
+                testRuns.delete(testInfo.testId);
+                await testRun?.recordOxylabsCandidate();
+            });
+        }
         sites.forEach((url) => {
             const finalOptions = { ...defaultOptions, ...overrideOptions };
             if (finalOptions.onlyRegions && finalOptions.onlyRegions.length > 0 && !finalOptions.onlyRegions.includes(testRegion)) {
@@ -342,26 +497,28 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
             const urlHash = crypto.createHash('md5').update(url).digest('hex').slice(0, 4);
             const formFactor = finalOptions.mobile ? 'mobile' : 'desktop';
 
-            if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
-                const testName = `${domain} ${urlHash} .${testRegion} noaction ${formFactor}`;
+            const defineTest = (label: string, autoAction: AutoAction | null) => {
+                const testName = `${domain} ${urlHash} .${testRegion} ${label} ${formFactor}`;
+                if (oxylabsCandidates && !oxylabsCandidates.has(oxylabsCandidateKey(cmp, testName))) {
+                    return;
+                }
                 test(testName, async ({ page }, testInfo) => {
-                    const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, null);
+                    const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, autoAction);
+                    if (recordOxylabsCandidates) {
+                        testRuns.set(testInfo.testId, testRun);
+                    }
                     await testRun.run();
                 });
+            };
+
+            if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
+                defineTest('noaction', null);
             }
             if (finalOptions.testOptIn) {
-                const testName = `${domain} ${urlHash} .${testRegion} optIn ${formFactor}`;
-                test(testName, async ({ page }, testInfo) => {
-                    const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, 'optIn');
-                    await testRun.run();
-                });
+                defineTest('optIn', 'optIn');
             }
             if (finalOptions.testOptOut) {
-                const testName = `${domain} ${urlHash} .${testRegion} optOut ${formFactor}`;
-                test(testName, async ({ page }, testInfo) => {
-                    const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, 'optOut');
-                    await testRun.run();
-                });
+                defineTest('optOut', 'optOut');
             }
         });
     });

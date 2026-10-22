@@ -1,0 +1,35 @@
+{
+    "name": "ign.es",
+    "vendorUrl": "https://www.ign.es/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ign\\.es/"
+    },
+    "prehideSelectors": ["#capa_galleta"],
+    "detectCmp": [
+        {
+            "exists": "#capa_galleta #acepto_galleta"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#capa_galleta"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acepto_galleta"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#capa_galleta"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#capa_galleta",
+            "check": "none"
+        }
+    ]
+}

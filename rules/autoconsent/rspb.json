@@ -1,0 +1,42 @@
+{
+    "name": "rspb.org.uk",
+    "vendorUrl": "https://www.rspb.org.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(\\w+\\.)?rspb\\.org\\.uk/"
+    },
+    "prehideSelectors": ["rspb-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "rspb-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "rspb-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "rspb-cookie-banner .buttons button.btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "rspb-cookie-banner .buttons button.btn-light"
+        },
+        {
+            "waitForVisible": "rspb-cookie-banner [data-testid=\"options\"]"
+        },
+        {
+            "waitForThenClick": "rspb-cookie-banner button[label=\"Save settings\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "RSPB.AllowMarketingCookies=No"
+        }
+    ]
+}

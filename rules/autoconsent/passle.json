@@ -1,0 +1,32 @@
+{
+    "name": "passle",
+    "prehideSelectors": ["#passle-cookie-control-container #cookie-control"],
+    "detectCmp": [
+        {
+            "exists": "#passle-cookie-control-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#passle-cookie-control-container.cookie-control_state--open #cookie-control"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-control .cookie-control--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-control .cookie-control--decline"
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "passleCookieControl={%22Accepted%22:false"
+        }
+    ]
+}
