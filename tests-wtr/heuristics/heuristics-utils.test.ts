@@ -126,6 +126,7 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
             '当サイトはサービス改善のためCookieを使用しています。',
             '当ウェブサイトではクッキーを利用しています',
             'このサイトはクッキー（Cookie）を使用しています',
+            '広告を配信すること等を目的に、Cookie等の「インフォマティブデータ」を利用しています。',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -278,6 +279,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('確認する')).to.equal('other');
     });
 
     it('matches Russian settings buttons', () => {
