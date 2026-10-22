@@ -72,7 +72,7 @@ function hasPopupButtons(text: string, buttons: ButtonData[]): boolean {
     return !isOnlyButtonText(text, buttons) && buttons.some((b) => b.regexClassification !== 'other');
 }
 
-// a bar of buttons can match detect patterns ("accept all"), but lacks the popup text needed to classify it
+// detect patterns include button wording, so a bare button bar matches; expand it so exclusions and crawl text see the whole popup
 function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
     let rest = text;
     for (const button of buttons) {
@@ -207,7 +207,7 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
 
 /**
  * Heuristic to get all elements that look like "popups"
- * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
+ * TODO: popups in the normal page flow are only found when part of them is fixed, sticky or dialog-like
  */
 function getPopupLikeElements(deadline: number): { elements: HTMLElement[]; shadowHosts: HTMLElement[] } {
     const found: HTMLElement[] = [];
