@@ -128,6 +128,23 @@ export const snippets = {
                 .find((c) => c.trim().startsWith('CookieLevel'))
                 .split('=')[1],
         ).social === false,
+    // banner button roles differ per site config, so use the CMP API
+    EVAL_COOKIEREPORTS_OPT_IN: () => {
+        window._cookiereports.saveConsent({ 1: true, 2: true, 3: true, 4: true, 5: true });
+        window._cookiereports.processConsent('banner', { trigger: 'ok' });
+        window._cookiereports.hideBanner();
+        return true;
+    },
+    EVAL_COOKIEREPORTS_OPT_OUT: () => {
+        window._cookiereports.saveConsent({ 1: true, 2: false, 3: false, 4: false, 5: false });
+        window._cookiereports.processConsent('banner', { trigger: 'ok' });
+        window._cookiereports.hideBanner();
+        return true;
+    },
+    EVAL_COOKIEREPORTS_TEST: () => {
+        const levels = window._cookiereports.loadConsent();
+        return Object.keys(levels).length > 0 && Object.values(levels).every((v) => v === false);
+    },
     EVAL_COOKIEALERT_0: () => document.querySelector('body').removeAttribute('style') || true,
     EVAL_COOKIEALERT_1: () => document.querySelector('body').removeAttribute('style') || true,
     EVAL_COOKIEALERT_2: () => window.CookieConsent.declined === true,
