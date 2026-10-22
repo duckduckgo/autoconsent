@@ -1,0 +1,13 @@
+{
+    "name": "lantmateriet",
+    "vendorUrl": "https://www.lantmateriet.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lantmateriet\\.se/"
+    },
+    "prehideSelectors": ["#js-cookie-section"],
+    "detectCmp": [{ "exists": "#js-cookie-section #js-cookie-consent-deny" }],
+    "detectPopup": [{ "visible": "#js-cookie-section.show" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-section #js-cookie-consent-agree" }],
+    "optOut": [{ "waitForThenClick": "#js-cookie-section #js-cookie-consent-deny" }],
+    "test": [{ "cookieContains": "cookieConsent=false" }]
+}
