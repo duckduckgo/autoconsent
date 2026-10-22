@@ -1,0 +1,10 @@
+{
+    "name": "cookiereports",
+    "vendorUrl": "https://www.cookiereports.com/",
+    "prehideSelectors": ["#CookieReportsBanner", "#CookieReportsOverlay"],
+    "detectCmp": [{ "exists": "#CookieReportsPanel #CookieReportsBanner" }],
+    "detectPopup": [{ "visible": "#CookieReportsBanner" }],
+    "optIn": [{ "eval": "EVAL_COOKIEREPORTS_OPT_IN" }],
+    "optOut": [{ "eval": "EVAL_COOKIEREPORTS_OPT_OUT" }],
+    "test": [{ "eval": "EVAL_COOKIEREPORTS_TEST" }]
+}
