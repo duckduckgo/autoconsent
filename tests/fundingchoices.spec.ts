@@ -7,3 +7,8 @@ generateCMPTests(
         skipRegions: ['US', 'GB'],
     },
 );
+
+// Also loads Cookiebot, which never shows its own dialog there
+generateCMPTests('funding-choices', ['https://polszczyzna.pl/'], {
+    onlyRegions: ['GB', 'FR', 'NL', 'PL'],
+});

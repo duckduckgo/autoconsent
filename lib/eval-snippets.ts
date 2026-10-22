@@ -40,7 +40,8 @@ export const snippets = {
         window.__npcmp('save');
         return true;
     },
-    EVAL_COOKIEBOT_1: () => !!window.Cookiebot,
+    // the dialog stays null when Cookiebot is loaded but not authorized to show a banner
+    EVAL_COOKIEBOT_1: () => !!window.Cookiebot && (!!window.Cookiebot.dialog || !!document.getElementById('CybotCookiebotDialog')),
     EVAL_COOKIEBOT_2: () => !window.Cookiebot.hasResponse && window.Cookiebot.dialog?.visible === true,
     EVAL_COOKIEBOT_3: () => window.Cookiebot.withdraw() || true,
     EVAL_COOKIEBOT_4: () => window.Cookiebot.hide() || true,
