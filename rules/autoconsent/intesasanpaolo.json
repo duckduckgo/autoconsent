@@ -1,0 +1,37 @@
+{
+    "name": "intesasanpaolo",
+    "vendorUrl": "https://www.intesasanpaolo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?intesasanpaolo\\.com/"
+    },
+    "prehideSelectors": [".js-cookie-message"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-message #cookie-chiudi"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-message #cookie-chiudi"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-message button.cookie-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-message #cookie-chiudi"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ISP_Cookie=1.1"
+        },
+        {
+            "cookieContains": "IntesaSanpaoloTracciatura=1",
+            "negated": true
+        }
+    ]
+}

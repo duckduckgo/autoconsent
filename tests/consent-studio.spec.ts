@@ -7,4 +7,9 @@ generateCMPTests('consent-studio', [
     'https://www.moooi.com/',
     'https://www.dentonet.pl/',
     'https://www.budgetcam.nl/',
+    'https://www.jeanscentre.nl/',
+    'https://www.eddierockets.ie/',
+    'https://www.msmode.nl/',
+    'https://www.nji.nl/',
+    'https://www.mondiaen.nl/',
 ]);

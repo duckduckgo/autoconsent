@@ -1,0 +1,36 @@
+{
+    "name": "att",
+    "vendorUrl": "https://www.att.com/",
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)*att\\.com/"
+    },
+    "prehideSelectors": ["#gpc-banner-container"],
+    "detectCmp": [
+        {
+            "exists": ["#gpc-banner-container", "#declineSave"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#gpc-banner-container", "#declineSave"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#gpc-banner-container", "#acceptAccept"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#gpc-banner-container", "#declineSave"]
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "\"consent\":\"d\""
+        }
+    ]
+}

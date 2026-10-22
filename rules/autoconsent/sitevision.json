@@ -7,7 +7,24 @@
     "optIn": [{ "waitForThenClick": ".sv-cookie-consent-banner form:has(input[name=\"analytics\"]) button[type=\"submit\"]" }],
     "optOut": [
         {
-            "waitForThenClick": ".sv-cookie-consent-banner form:has(input[name=\"necessary\"]):not(:has(input[name=\"analytics\"])) button[type=\"submit\"]"
+            "if": {
+                "exists": ".sv-cookie-consent-banner form:has(input[name=\"necessary\"]):not(:has(input[name=\"analytics\"])) button[type=\"submit\"]"
+            },
+            "then": [
+                {
+                    "click": ".sv-cookie-consent-banner form:has(input[name=\"necessary\"]):not(:has(input[name=\"analytics\"])) button[type=\"submit\"]"
+                }
+            ],
+            "else": [
+                { "click": ".sv-cookie-consent-banner button[type=\"button\"]" },
+                { "waitForVisible": ".sv-cookie-consent-banner button[type=\"submit\"][form]" },
+                {
+                    "click": ".sv-cookie-consent-banner form input[type=\"checkbox\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".sv-cookie-consent-banner button[type=\"submit\"][form]" }
+            ]
         }
     ],
     "test": [{ "waitForVisible": ".sv-cookie-consent-banner", "check": "none", "timeout": 2000 }]
