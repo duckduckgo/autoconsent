@@ -1,0 +1,33 @@
+{
+    "name": "bynder",
+    "vendorUrl": "https://www.bynder.com/",
+    "prehideSelectors": ["#cookieconsent"],
+    "detectCmp": [
+        {
+            "exists": "#cookieconsent .cookiechoices .rejectcookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieconsent .cookiechoices .rejectcookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieconsent .cookiechoices .allcookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieconsent .cookiechoices .rejectcookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ANALYTICALCONSENT=0"
+        },
+        {
+            "cookieContains": "MARKETINGCONSENT=0"
+        }
+    ]
+}

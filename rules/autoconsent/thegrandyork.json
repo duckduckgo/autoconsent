@@ -1,0 +1,46 @@
+{
+    "name": "thegrandyork",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?thegrandyork\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#user-consent"],
+    "detectCmp": [
+        {
+            "exists": "#user-consent .page.main button.manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#user-consent .page.main"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#user-consent .page.main button.acceptall"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#user-consent .page.main button.manage"
+        },
+        {
+            "waitForVisible": "#user-consent .page.secondary"
+        },
+        {
+            "click": "#user-consent .page.secondary input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#user-consent .page.secondary button.save"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "\"marketing\":\"denied\""
+        }
+    ]
+}

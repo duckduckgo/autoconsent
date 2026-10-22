@@ -1,0 +1,13 @@
+{
+    "name": "capitalone-ca",
+    "vendorUrl": "https://www.capitalone.ca/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?capitalone\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#privacy-banner-lh .lh-close-button" }],
+    "detectPopup": [{ "visible": "#privacy-banner-lh .lh-close-button" }],
+    "optIn": [{ "waitForThenClick": "#privacy-banner-lh .lh-close-button" }],
+    "optOut": [{ "waitForThenClick": "#privacy-banner-lh .lh-close-button" }],
+    "test": [{ "cookieContains": "lh-warning-test=manual-no" }]
+}

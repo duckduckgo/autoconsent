@@ -1,0 +1,19 @@
+{
+    "name": "stepstone-ccm",
+    "vendorUrl": "https://www.stepstone.com/",
+    "comment": "StepStone group consent manager (Tealium-backed), used across its job boards",
+    "prehideSelectors": ["#GDPRConsentManagerContainer"],
+    "detectCmp": [{ "exists": "#GDPRConsentManagerContainer [data-atx-component='cookieConsent']" }],
+    "detectPopup": [{ "visible": "#GDPRConsentManagerContainer #explicit_consent" }],
+    "optIn": [{ "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_explicit_accept" }],
+    "optOut": [
+        { "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_explicit_preferences" },
+        {
+            "waitForThenClick": "#GDPRConsentManagerContainer #ccmgt_preferences_reject",
+            "timeout": 2000,
+            "optional": true,
+            "comment": "some locales open a preferences layer (all purposes unchecked) instead of rejecting directly"
+        }
+    ],
+    "test": [{ "cookieContains": "CONSENTMGR=c1:0%7Cc2:0%7Cc3:0" }]
+}

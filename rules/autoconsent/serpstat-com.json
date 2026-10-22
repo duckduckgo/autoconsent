@@ -1,0 +1,13 @@
+{
+    "name": "serpstat-com",
+    "vendorUrl": "https://serpstat.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?serpstat\\.com/"
+    },
+    "prehideSelectors": [".cookie-consent[data-cookieconsent], .gdpr-tab"],
+    "detectCmp": [{ "exists": ".cookie-consent[data-cookieconsent], .gdpr-tab #gdpr_tab_content" }],
+    "detectPopup": [{ "visible": ".cookie-consent[data-cookieconsent], .gdpr-tab #gdpr_tab_content" }],
+    "optIn": [{ "waitForThenClick": "button[data-acceptcookies], #gdpr_tab_content .gdpr_form button[type=submit]" }],
+    "optOut": [{ "hide": ".cookie-consent[data-cookieconsent], .gdpr-tab" }]
+}

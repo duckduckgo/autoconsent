@@ -1,0 +1,45 @@
+{
+    "name": "rakshaos",
+    "cosmetic": false,
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#raksha-consent-banner", "#raksha-consent-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#raksha-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#raksha-consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#raksha-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#raksha-decline"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#raksha-decline"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#raksha-manage"
+                },
+                {
+                    "waitForThenClick": "#raksha-btn-reject"
+                },
+                {
+                    "addStyle": "display: none !important",
+                    "selector": "#raksha-consent-banner"
+                }
+            ]
+        }
+    ]
+}

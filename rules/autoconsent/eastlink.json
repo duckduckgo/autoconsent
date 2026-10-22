@@ -1,0 +1,66 @@
+{
+    "name": "eastlink",
+    "vendorUrl": "https://www.eastlink.ca/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?eastlink\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookiePopup [data-trigger=launchCookieDetails]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": "#cookiesModal [data-trigger=saveCookiePrefs]"
+        },
+        {
+            "cookieContains": "cookiePrefs=",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": "#cookiePopup",
+            "timeout": 10000
+        },
+        {
+            "waitForThenClick": "#cookiePopup [data-trigger=acceptAllCookiePrefs]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "#cookiePopup",
+            "timeout": 10000
+        },
+        {
+            "click": "#cookiePopup [data-trigger=launchCookieDetails]"
+        },
+        {
+            "waitForVisible": "#cookiesModal"
+        },
+        {
+            "if": {
+                "exists": "#cookiesModal #functionalCookies:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookiesModal #functionalCookies"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#cookiesModal #advertisingCookies:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookiesModal #advertisingCookies"
+                }
+            ]
+        },
+        {
+            "click": "#cookiesModal [data-trigger=saveCookiePrefs]"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "name": "wirtualna-polska",
+    "prehideSelectors": ["div[role=dialog][aria-label='Plansza informacyjna WP']"],
+    "detectCmp": [
+        {
+            "exists": [
+                "div[role=dialog][aria-label='Plansza informacyjna WP']",
+                "xpath/.//button[normalize-space(.)='Ustawienia zaawansowane']"
+            ]
+        }
+    ],
+    "detectPopup": [{ "visible": "div[role=dialog][aria-label='Plansza informacyjna WP']" }],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "div[role=dialog][aria-label='Plansza informacyjna WP']",
+                "xpath/.//button[starts-with(normalize-space(.), 'Akceptuję')]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "div[role=dialog][aria-label='Plansza informacyjna WP']",
+                "xpath/.//button[normalize-space(.)='Ustawienia zaawansowane']"
+            ]
+        },
+        {
+            "waitForThenClick": ["div[role=dialog][aria-label='Plansza informacyjna WP']", "xpath/.//button[normalize-space(.)='Zapisz']"]
+        },
+        {
+            "waitForVisible": "div[role=dialog][aria-label='Plansza informacyjna WP']",
+            "check": "none",
+            "timeout": 5000,
+            "optional": true
+        }
+    ]
+}

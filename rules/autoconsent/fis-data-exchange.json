@@ -1,0 +1,13 @@
+{
+    "name": "fis-data-exchange",
+    "vendorUrl": "https://www.fisglobal.com/",
+    "runContext": {
+        "urlPattern": "^https://services\\.dataexchange\\.fiscloudservices\\.com/"
+    },
+    "prehideSelectors": [".dx-cookie-banner:has(.dx-cookie-banner-close)"],
+    "detectCmp": [{ "exists": ".dx-cookie-banner .dx-cookie-banner-close" }],
+    "detectPopup": [{ "visible": ".dx-cookie-banner .dx-cookie-banner-close" }],
+    "optIn": [{ "waitForThenClick": ".dx-cookie-banner .dx-cookie-banner-close" }],
+    "optOut": [{ "waitForThenClick": ".dx-cookie-banner .dx-cookie-banner-close" }],
+    "test": [{ "cookieContains": "CookiePolicy=OK" }]
+}

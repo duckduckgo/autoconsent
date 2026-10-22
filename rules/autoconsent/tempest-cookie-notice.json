@@ -1,0 +1,9 @@
+{
+    "name": "tempest-cookie-notice",
+    "cosmetic": true,
+    "prehideSelectors": ["div[data-cookie-consent]:has(> button[data-cookie-consent-close])"],
+    "detectCmp": [{ "exists": "div[data-cookie-consent] > button[data-cookie-consent-close]" }],
+    "detectPopup": [{ "visible": "div[data-cookie-consent]:has(> button[data-cookie-consent-close])" }],
+    "optIn": [{ "waitForThenClick": "div[data-cookie-consent] > button[data-cookie-consent-close]" }],
+    "optOut": [{ "hide": "div[data-cookie-consent]:has(> button[data-cookie-consent-close])" }]
+}

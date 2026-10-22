@@ -1,0 +1,75 @@
+{
+    "name": "bigid",
+    "_metadata": {
+        "vendorUrl": "https://bigid.com/"
+    },
+    "prehideSelectors": ["#bigidcmp-banner-widget"],
+    "detectCmp": [
+        {
+            "exists": "#bigidcmp-banner-widget"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#bigidcmp-banner-widget", "#cmp-accept-all"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#bigidcmp-banner-widget", "#cmp-reject-all"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-reject-all"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["#bigidcmp-banner-widget", "#cmp-custom-permissions"]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-custom-permissions"]
+                        },
+                        {
+                            "waitForVisible": ["#bigidcmp-banner-widget", "#cmp-submit"]
+                        },
+                        {
+                            "comment": "aria-checked is always false; the knob position marks enabled toggles",
+                            "click": [
+                                "#bigidcmp-banner-widget",
+                                "button[role=\"switch\"]:not([disabled]) > span[class*=\"translate-x-[1.1rem]\"]"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-submit"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "comment": "notice-only layout: dismiss with the close icon",
+                            "waitForThenClick": ["#bigidcmp-banner-widget", "div[tabindex=\"0\"]:has(> svg #times-solid)"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "bigidcmp-consent-"
+        },
+        {
+            "cookieContains": "marketing=false"
+        }
+    ]
+}

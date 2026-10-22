@@ -1,0 +1,16 @@
+{
+    "name": "amazon-hiring",
+    "vendorUrl": "https://hiring.amazon.com/",
+    "detectCmp": [{ "exists": "[data-test-id=\"consentModal\"] [data-test-id=\"consentBtn\"]" }],
+    "detectPopup": [{ "visible": "[data-test-id=\"consentModal\"] [data-test-id=\"consentBtn\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-test-id=\"consentModal\"] [data-test-id=\"consentBtn\"]" }],
+    "optOut": [
+        { "click": "[data-test-id=\"consentModal\"] button[aria-label=\"Continue without accepting cookies\"]" },
+        { "waitForVisible": "[data-test-id=\"consentModal\"] [data-test-id=\"consentBtn\"]", "check": "none", "timeout": 2000 },
+        {
+            "if": { "exists": "[data-test-id=\"consentModal\"] button[aria-label=\"Close cookie consent card popup\"]" },
+            "then": [{ "click": "[data-test-id=\"consentModal\"] button[aria-label=\"Close cookie consent card popup\"]" }]
+        },
+        { "waitForVisible": "[data-test-id=\"consentModal\"]", "check": "none", "timeout": 2000 }
+    ]
+}

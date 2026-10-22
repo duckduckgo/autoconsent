@@ -1,0 +1,17 @@
+{
+    "name": "zurich-cookies-notification-banner",
+    "_metadata": {
+        "vendorUrl": "https://www.zurich.ch/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".c-cookies-notification-banner"],
+    "detectCmp": [{ "exists": ".c-cookies-notification-banner .c-notification-banner__close-button button" }],
+    "detectPopup": [{ "visible": ".c-cookies-notification-banner .c-notification-banner--open" }],
+    "optIn": [{ "waitForThenClick": ".c-cookies-notification-banner .c-notification-banner__close-button button" }],
+    "optOut": [{ "waitForThenClick": ".c-cookies-notification-banner .c-notification-banner__close-button button" }],
+    "test": [{ "cookieContains": "_acceptCookies=true" }]
+}

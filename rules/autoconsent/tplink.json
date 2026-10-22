@@ -2,35 +2,83 @@
     "name": "tplink",
     "vendorUrl": "https://www.tp-link.com",
     "cosmetic": false,
-    "prehideSelectors": [".tp-dialog.cookie-dialog"],
+    "prehideSelectors": [".tp-dialog.cookie-dialog", ".tp-cookie-banner"],
     "detectCmp": [
         {
-            "exists": ".tp-dialog.cookie-dialog"
+            "exists": ".tp-dialog.cookie-dialog, :not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".tp-dialog.cookie-dialog button"
+            "any": [
+                {
+                    "visible": ".tp-dialog.cookie-dialog button"
+                },
+                {
+                    "visible": ":not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog"
+                }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".tp-dialog-box .tp-cookie-accept-all"
+            "if": {
+                "visible": ":not(.tp-cookie-banner-tpl) > .tp-cookie-banner .tp-cookie-accept-all"
+            },
+            "then": [
+                {
+                    "click": ":not(.tp-cookie-banner-tpl) > .tp-cookie-banner .tp-cookie-accept-all"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".tp-dialog-box .tp-cookie-accept-all"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "click": ".tp-dialog-box .checkbox.clickable:not(.checked)",
-            "all": true,
-            "optional": true
+            "if": {
+                "visible": ":not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog"
+            },
+            "then": [
+                {
+                    "click": ":not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog"
+                }
+            ]
         },
         {
-            "waitForThenClick": ".tp-dialog-box .tp-cookie-save"
+            "waitForVisible": ".tp-dialog.cookie-dialog .tp-dialog-box"
+        },
+        {
+            "if": {
+                "exists": ".tp-dialog-box .tp-cookie-opt-out"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".tp-dialog-box .tp-cookie-opt-out"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".tp-dialog-box .checkbox.clickable.checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".tp-dialog-box .tp-cookie-save"
+                }
+            ]
         }
     ],
     "test": [
         {
-            "cookieContains": "tp_privacy_base"
+            "cookieContains": "_privacy_banner=1"
+        },
+        {
+            "negated": true,
+            "cookieContains": "_privacy_marketing=1"
         }
     ]
 }

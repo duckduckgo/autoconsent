@@ -6,17 +6,25 @@
     "optOut": [
         { "eval": "EVAL_TEALIUM_1" },
         { "eval": "EVAL_TEALIUM_DONOTSELL" },
-        { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
         {
-            "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent",
-            "timeout": 1000,
-            "optional": true
+            "if": { "exists": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" },
+            "then": [
+                { "waitForThenClick": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" }
+            ],
+            "else": [
+                { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
+                {
+                    "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent,#deny_full_submit_1",
+                    "timeout": 1000,
+                    "optional": true
+                }
+            ]
         }
     ],
     "optIn": [{ "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs" }, { "eval": "EVAL_TEALIUM_2" }],
     "test": [
         { "eval": "EVAL_TEALIUM_3" },
         { "eval": "EVAL_TEALIUM_DONOTSELL_CHECK" },
-        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs", "check": "none" }
+        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs > *", "check": "none" }
     ]
 }

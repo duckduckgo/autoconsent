@@ -1,0 +1,34 @@
+{
+    "name": "abcacupuncture1",
+    "vendorUrl": "https://abcacupuncture1.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?abcacupuncture1\\.com/"
+    },
+    "prehideSelectors": [".cky-overlay,.cky-consent-container"],
+    "detectCmp": [{ "any": [{ "exists": ".cky-consent-container" }, { "exists": ".fc-consent-root" }] }],
+    "detectPopup": [{ "any": [{ "visible": ".cky-consent-container" }, { "visible": ".fc-consent-root .fc-dialog-container" }] }],
+    "optIn": [
+        { "click": ".fc-consent-root .fc-cta-consent", "optional": true },
+        { "waitForThenClick": ".cky-consent-container [data-cky-tag=accept-button]", "timeout": 2000, "optional": true }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ".cky-consent-container [data-cky-tag=reject-button]" },
+            "then": [{ "click": ".cky-consent-container [data-cky-tag=reject-button]" }]
+        },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 4000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        },
+        {
+            "if": { "visible": ".cky-consent-container [data-cky-tag=reject-button]" },
+            "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=reject-button]" }]
+        }
+    ],
+    "test": [{ "cookieContains": "advertisement:no" }]
+}

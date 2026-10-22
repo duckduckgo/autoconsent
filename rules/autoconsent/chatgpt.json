@@ -13,7 +13,7 @@
     "prehideSelectors": ["dialog[data-cookie-consent]:not([aria-modal]):has(form[data-privacy-consent-form])"],
     "detectCmp": [
         {
-            "exists": "dialog[data-cookie-consent] form[data-privacy-consent-form] input[name=\"action\"][value=\"reject\"]"
+            "exists": "dialog[data-cookie-consent] form[data-privacy-consent-form] button[name=\"action\"][value=\"reject\"]"
         }
     ],
     "detectPopup": [
@@ -23,12 +23,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": "dialog[data-cookie-consent] form[data-privacy-consent-form]:has(input[name=\"action\"][value=\"accept\"]) button[type=\"submit\"]"
+            "waitForThenClick": "dialog[data-cookie-consent] form[data-privacy-consent-form] button[name=\"action\"][value=\"accept\"]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "dialog[data-cookie-consent] form[data-privacy-consent-form]:has(input[name=\"action\"][value=\"reject\"]) button[type=\"submit\"]"
+            "waitForThenClick": "dialog[data-cookie-consent] form[data-privacy-consent-form] button[name=\"action\"][value=\"reject\"]"
         }
     ],
     "test": [

@@ -4,13 +4,9 @@ import {
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
-    getActionablePopups,
-    isDisabled,
-    excludeContainers,
-    getButtonData,
-    isDialogLikeElement,
     isExcludedPopup,
-} from '../../lib/heuristics';
+} from '../../lib/heuristic-classify';
+import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
 function rejectButtons(buttons: ButtonData[]) {
@@ -75,6 +71,27 @@ describe('checkHeuristicPatterns', () => {
 
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
+    });
+});
+
+describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
+    it('detects "we use <qualifier> cookies" notices', () => {
+        const texts = [
+            // openrouter.ai
+            'Cookie Preferences We use essential cookies for site functionality and optional cookies for analytics.',
+            'We use optional cookies to measure traffic',
+            'We use analytics cookies and similar technologies',
+            'We serve necessary cookies only',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match when "cookies" is further away', () => {
+        expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
+            0,
+        );
     });
 });
 
@@ -203,6 +220,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept')).to.equal('reject');
         expect(classifyButtonTextRegex('Do not accept cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
+    });
+
+    it('matches CCPA "do not sell/share" variants', () => {
+        expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
     });
 
     it('matches German continue-without-accepting variants', () => {

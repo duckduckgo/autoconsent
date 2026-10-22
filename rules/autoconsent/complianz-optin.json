@@ -21,7 +21,17 @@
                         { "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
                         { "click": ".cc-settings-view .cc-btn-accept-selected" }
                     ],
-                    "else": [{ "click": ".cc-dismiss" }]
+                    "else": [
+                        {
+                            "if": { "exists": ".cc-dismiss" },
+                            "then": [{ "click": ".cc-dismiss" }],
+                            "else": [
+                                { "click": ".cmp-pref-link" },
+                                { "waitForThenClick": ".cmp-body [id*=rejectAll]" },
+                                { "waitForThenClick": ".cmp-body .cmp-save-btn" }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

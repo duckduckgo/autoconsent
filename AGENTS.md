@@ -112,7 +112,7 @@ shadow root or same-origin iframe.
 
 ### General Guidelines and Gotchas
 - **Paywalls do not need to be handled, and should not be mitigated.** If the site presents a choice to pay or agree to cookies, do not write a rule, do not click through, and do not add a site exception (unless autoconsent is causing breakage).
-- **Never click TIER2 buttons in the `optOut` rule.** TIER2 is the heuristic classification for a popup whose only actionable button is a single Accept (`classifyPopup` in `lib/heuristics.ts`). Clicking that button from a JSON rule is an opt-in disguised as a fix. If the popup has no reject, dismiss, or acknowledge control, do not "handle" it by accepting.
+- **Never click TIER2 buttons in the `optOut` rule.** TIER2 is the heuristic classification for a popup whose only actionable button is a single Accept (`classifyPopup` in `lib/heuristic-classify.ts`). Clicking that button from a JSON rule is an opt-in disguised as a fix. If the popup has no reject, dismiss, or acknowledge control, do not "handle" it by accepting.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
 - Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead. In most cases, a simple "^https?://(\w+\.)?domain\.com/" is sufficient. Always end the pattern at the hostname boundary with a trailing `/`.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
@@ -133,6 +133,7 @@ shadow root or same-origin iframe.
 
 ### Updating existing rules
 - **For site-specific popups, prefer a heuristic-pattern fix over a new rule, and check whether a rule is needed at all.** If the popup is unique to a site (not a shared CMP) and already has a reject, dismiss, or acknowledge button that the heuristic should match, extend `lib/heuristic-patterns.ts` instead of adding a `urlPattern`-scoped JSON rule. Do not use a heuristic fix in place of a generic CMP rule. A heuristic change must not cause false positives on other sites.
+- **When the heuristic already handles the popup, test every supported region (`ALL_REGIONS` in the `proxy-testing` skill), not just the core set, before concluding that no fix is needed.**
 - If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.
 - After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) across the expanded set. Inspect both API results AND screenshots.
 - **When adding or fixing a rule for a site, remove stale site-specific rules covering the same site.** If a site-specific rule is obsolete in all regions (the site switched CMP), remove it rather than leaving it alongside the new or updated rule.

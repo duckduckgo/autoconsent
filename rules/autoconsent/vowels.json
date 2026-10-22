@@ -1,0 +1,13 @@
+{
+    "name": "vowels",
+    "vendorUrl": "https://vowels.net/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?vowels\\.(net|jp)/"
+    },
+    "prehideSelectors": [".footer-signup:has(consent-scheduler > .cookie-consent-js:not(.hidden))"],
+    "detectCmp": [{ "exists": "consent-scheduler > .cookie-consent-js" }],
+    "detectPopup": [{ "visible": ".footer-signup.active consent-scheduler > .cookie-consent-js:not(.hidden)" }],
+    "optIn": [{ "waitForThenClick": "consent-scheduler .cookie-consent-button-js" }],
+    "optOut": [{ "hide": ".footer-signup:has(consent-scheduler > .cookie-consent-js:not(.hidden))" }]
+}

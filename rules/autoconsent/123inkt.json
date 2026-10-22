@@ -1,0 +1,9 @@
+{
+    "name": "123inkt",
+    "vendorUrl": "https://www.123inkt.nl/",
+    "prehideSelectors": [".c-simple-popup:has(.c-cookie-popup)"],
+    "detectCmp": [{ "exists": ".c-cookie-popup [data-role=refuse-cookies]" }],
+    "detectPopup": [{ "visible": ".c-cookie-popup", "check": "any" }],
+    "optIn": [{ "waitForThenClick": ".c-cookie-popup [data-role=accept-cookies]" }],
+    "optOut": [{ "waitForThenClick": ".c-cookie-popup [data-role=refuse-cookies]" }]
+}

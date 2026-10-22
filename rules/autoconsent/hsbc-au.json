@@ -1,0 +1,35 @@
+{
+    "name": "hsbc-au",
+    "vendorUrl": "https://www.hsbc.com.au/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?hsbc\\.com\\.au/"
+    },
+    "prehideSelectors": [".notification-banner:has(a[href*=\"/cookie-policy/\"])"],
+    "detectCmp": [
+        {
+            "exists": ".notification-banner a[href*=\"/cookie-policy/\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".notification-banner a[href*=\"/cookie-policy/\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".notification-banner:has(a[href*=\"/cookie-policy/\"]) button.close-notification-banner"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".notification-banner:has(a[href*=\"/cookie-policy/\"]) button.close-notification-banner"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".notification-banner a[href*=\"/cookie-policy/\"]",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

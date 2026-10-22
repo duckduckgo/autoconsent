@@ -1,0 +1,41 @@
+{
+    "name": "duda-cookie-notification",
+    "vendorUrl": "https://www.duda.co/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "intermediate": false,
+    "prehideSelectors": ["#d-notification-bar[data-rule-type=\"notification\"]:not([data-rule])"],
+    "detectCmp": [
+        {
+            "exists": "#d-notification-bar[data-rule-type=\"notification\"]:not([data-rule]) .notification-dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".showing-message--shown > #d-notification-bar[data-rule-type=\"notification\"][data-visible]:not([data-rule])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".showing-message--shown > #d-notification-bar:not([data-rule]) .notification-dismiss",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".showing-message--shown > #d-notification-bar:not([data-rule]) .notification-dismiss",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "visible": ".showing-message--shown > #d-notification-bar:not([data-rule])",
+            "check": "none"
+        }
+    ]
+}

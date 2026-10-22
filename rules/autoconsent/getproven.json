@@ -1,0 +1,33 @@
+{
+    "name": "getproven",
+    "vendorUrl": "https://www.getproven.com/",
+    "comment": "Privacy consent modal on GetProven perk portals with only an 'I Agree' button, so it is hidden instead.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": [".cdk-global-overlay-wrapper:has(pf-confirm-mat-modal a[href*='getproven.com/privacy'])"],
+    "detectCmp": [
+        {
+            "exists": "pf-confirm-mat-modal a[href*='getproven.com/privacy']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "pf-confirm-mat-modal a[href*='getproven.com/privacy']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "pf-confirm-mat-modal .actions button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cdk-global-overlay-wrapper:has(pf-confirm-mat-modal a[href*='getproven.com/privacy'])"
+        },
+        {
+            "removeClass": "cdk-global-scrollblock",
+            "selector": "html",
+            "optional": true
+        }
+    ]
+}

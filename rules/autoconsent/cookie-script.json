@@ -10,8 +10,29 @@
             "then": [{ "wait": 100 }, { "click": "#cookiescript_reject" }],
             "else": [
                 { "click": "#cookiescript_manage" },
-                { "waitForVisible": ".cookiescript_fsd_main" },
-                { "waitForThenClick": "#cookiescript_reject" }
+                { "waitForVisible": ".cookiescript_fsd_main, #cookiescript_save", "timeout": 3000, "optional": true },
+                {
+                    "if": { "exists": ".cookiescript_fsd_main" },
+                    "then": [{ "waitForThenClick": "#cookiescript_reject" }],
+                    "else": [
+                        {
+                            "if": { "visible": "#cookiescript_save" },
+                            "then": [
+                                {
+                                    "if": { "exists": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled)" },
+                                    "then": [
+                                        {
+                                            "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled)",
+                                            "all": true
+                                        }
+                                    ]
+                                },
+                                { "waitForThenClick": "#cookiescript_save", "retry": 6, "retryInterval": 1000 }
+                            ],
+                            "else": [{ "click": "#cookiescript_close" }]
+                        }
+                    ]
+                }
             ]
         }
     ],
