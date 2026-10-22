@@ -1,0 +1,14 @@
+{
+    "name": "de-volksbank",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookieconsent.cookie-overlay .cookie-buttons #cookie-deny" }],
+    "detectPopup": [
+        {
+            "comment": "the closed banner stays in the DOM with visibility: hidden, which the visible check ignores",
+            "exists": "#cookieconsent.cookie-overlay[style*=\"visibility: visible\"] #cookie-deny"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#cookieconsent.cookie-overlay #cookie-accept" }],
+    "optOut": [{ "waitForThenClick": "#cookieconsent.cookie-overlay #cookie-deny" }],
+    "test": [{ "cookieContains": "CLC_GDPR=AB%3A" }]
+}
