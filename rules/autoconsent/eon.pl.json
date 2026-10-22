@@ -1,0 +1,18 @@
+{
+    "name": "eon.pl",
+    "vendorUrl": "https://eon.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?eon\\.pl/"
+    },
+    "prehideSelectors": ["#clb.clb-container"],
+    "detectCmp": [{ "exists": "#clb.clb-container #moreSettings" }],
+    "detectPopup": [{ "visible": "#clb.clb-container" }],
+    "optIn": [{ "waitForThenClick": "#clb #acceptCookies" }],
+    "optOut": [
+        { "waitForThenClick": "#clb #moreSettings" },
+        { "waitForVisible": "#clb #clb-panel-2" },
+        { "click": "#clb #switch2[data-active=true]", "optional": true },
+        { "click": "#clb #saveSettings" }
+    ],
+    "test": [{ "cookieContains": "dws01-level=1" }]
+}
