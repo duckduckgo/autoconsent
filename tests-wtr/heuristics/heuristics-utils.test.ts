@@ -126,6 +126,7 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
             '当サイトはサービス改善のためCookieを使用しています。',
             '当ウェブサイトではクッキーを利用しています',
             'このサイトはクッキー（Cookie）を使用しています',
+            'ウェブサイトの利便性向上や広告配信などのため、お客様の閲覧履歴や端末情報などを外部サービスで利用しています。',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -134,6 +135,7 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
 
     it('does not detect unrelated Japanese text', () => {
         expect(checkHeuristicPatterns('全国の旧車イベント情報を集約しています').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('利用者情報の外部送信について').patterns).to.have.length(0);
     });
 });
 
@@ -307,6 +309,10 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Закрыть уведомление о cookie')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Больше не показывать')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
+    });
+
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
     });
 
     it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
