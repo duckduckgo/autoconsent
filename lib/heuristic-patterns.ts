@@ -165,7 +165,11 @@ export const DETECT_PATTERNS = [
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
 
     // Italian (IT)
-    /usiamo.{0,20}cookie/gi,
+    // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
+    /(?:usiamo|utilizziamo).{0,20}cookie/gi,
+    /sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi,
+    /noi e i nostri.{0,20}partner.{0,100}cookie/gi,
+    /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
@@ -806,6 +810,7 @@ export const ACCEPT_PATTERNS = [
     // Italian (IT)
     'accetta',
     'accetta tutti i cookie',
+    'accetto tutti i cookie',
 ];
 
 export const ACKNOWLEDGE_PATTERNS = [

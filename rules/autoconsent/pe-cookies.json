@@ -1,0 +1,30 @@
+{
+    "name": "pe-cookies",
+    "vendorUrl": "https://www.francetravail.fr/",
+    "prehideSelectors": ["pe-cookies"],
+    "detectCmp": [
+        {
+            "exists": ["pe-cookies", "#pecookies-continue-btn"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["pe-cookies", ".pecookies__modal"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["pe-cookies", "#pecookies-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["pe-cookies", "#pecookies-continue-btn"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "TC_PRIVACY=1%40"
+        }
+    ]
+}

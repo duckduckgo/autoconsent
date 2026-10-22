@@ -1,0 +1,39 @@
+{
+    "name": "mainichi",
+    "vendorUrl": "https://mainichi.jp/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mainichi\\.jp/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".popuppanel4 a[href*=\"/info/cookie/\"]"
+        },
+        {
+            "exists": ".fc-consent-root",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".popuppanel4 a[href*=\"/info/cookie/\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".popuppanel4 .js-popupclose"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".popuppanel4 .js-popupclose"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".popuppanel4",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

@@ -1,29 +1,41 @@
 {
     "name": "consent-studio",
     "vendorUrl": "https://consent.studio/",
-    "prehideSelectors": [".consent-studio .cookie-banner"],
-    "detectCmp": [{ "exists": ".consent-studio .cookie-banner" }],
-    "detectPopup": [{ "visible": ".consent-studio .cookie-banner:not(.is--hidden)" }],
-    "optIn": [{ "waitForThenClick": ".consent-studio .cookie-banner [data-cs-button=accept_all]" }],
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".consent-studio .cookie-banner", ".consent-studio .consent-banner"],
+    "detectCmp": [{ "exists": ".consent-studio [cs-role=consent-banner]" }],
+    "detectPopup": [{ "visible": ".consent-studio [cs-role=consent-banner]" }],
+    "optIn": [{ "waitForThenClick": ".consent-studio [cs-role=consent-banner] [data-cs-button=accept_all]" }],
     "optOut": [
         {
-            "if": { "visible": ".consent-studio .cookie-banner [data-cs-button=reject_all]" },
-            "then": [{ "click": ".consent-studio .cookie-banner [data-cs-button=reject_all]" }],
+            "if": { "visible": ".consent-studio [cs-role=consent-banner] [data-cs-button=reject_all]" },
+            "then": [{ "click": ".consent-studio [cs-role=consent-banner] [data-cs-button=reject_all]" }],
             "else": [
                 {
-                    "if": { "visible": ".consent-studio .cookie-banner .is--close-button[cs-consent=reject]" },
-                    "then": [{ "click": ".consent-studio .cookie-banner .is--close-button[cs-consent=reject]" }],
+                    "if": { "visible": ".consent-studio [cs-role=consent-banner] [cs-consent=reject]", "check": "any" },
+                    "then": [{ "click": ".consent-studio [cs-role=consent-banner] [cs-consent=reject]" }],
                     "else": [
                         {
-                            "click": ".consent-studio .cookie-banner .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])",
-                            "all": true,
-                            "optional": true
+                            "if": {
+                                "exists": ".consent-studio [cs-role=consent-banner] .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])"
+                            },
+                            "then": [
+                                {
+                                    "click": ".consent-studio [cs-role=consent-banner] .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])",
+                                    "all": true
+                                }
+                            ]
                         },
-                        { "click": ".consent-studio .cookie-banner [data-cs-button=save]" }
+                        { "waitForThenClick": ".consent-studio [cs-role=consent-banner] [data-cs-button=save]" }
                     ]
                 }
             ]
-        }
+        },
+        { "waitForVisible": ".consent-studio [cs-role=consent-banner]", "check": "none" }
     ],
     "test": [{ "wait": 500 }, { "cookieContains": "consent-studio__storage=[%22functional%22]" }]
 }

@@ -120,6 +120,29 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Qualcuno ha detto… cookie? Noi e i nostri partner utilizziamo i cookie per fornirti un servizio migliore',
+            'Utilizziamo cookie tecnici e di profilazione',
+            'Questo sito utilizza i cookie per migliorare la tua esperienza',
+            'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
+            'Archiviare e/o accedere a informazioni su un dispositivo',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(
+            checkHeuristicPatterns(
+                'Noi e i nostri partner commerciali utilizziamo materiali riciclati. Il sito usa la tecnologia più moderna.',
+            ).patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
@@ -545,6 +568,36 @@ describe('excludeContainers', () => {
 
         expect(result).to.have.length(1);
         expect(result[0]).to.equal(inner);
+    });
+    it('excludes a shadow host that contains another element in its shadow root', () => {
+        const host = document.createElement('div');
+        const inner = document.createElement('button');
+        host.attachShadow({ mode: 'open' }).appendChild(inner);
+
+        const result = excludeContainers([host, inner]);
+
+        expect(result).to.deep.equal([inner]);
+    });
+
+    it('keeps the reversed input order', () => {
+        const parent = document.createElement('div');
+        const a = document.createElement('button');
+        const b = document.createElement('button');
+        const c = document.createElement('button');
+        parent.append(a, b, c);
+
+        expect(excludeContainers([parent, a, b, c])).to.deep.equal([c, b, a]);
+    });
+
+    it('handles thousands of elements quickly', () => {
+        const parent = document.createElement('nav');
+        const links = Array.from({ length: 5000 }, () => parent.appendChild(document.createElement('a')));
+
+        const start = performance.now();
+        const result = excludeContainers([parent, ...links]);
+
+        expect(result).to.have.length(5000);
+        expect(performance.now() - start).to.be.below(200);
     });
 });
 
