@@ -546,6 +546,36 @@ describe('excludeContainers', () => {
         expect(result).to.have.length(1);
         expect(result[0]).to.equal(inner);
     });
+    it('excludes a shadow host that contains another element in its shadow root', () => {
+        const host = document.createElement('div');
+        const inner = document.createElement('button');
+        host.attachShadow({ mode: 'open' }).appendChild(inner);
+
+        const result = excludeContainers([host, inner]);
+
+        expect(result).to.deep.equal([inner]);
+    });
+
+    it('keeps the reversed input order', () => {
+        const parent = document.createElement('div');
+        const a = document.createElement('button');
+        const b = document.createElement('button');
+        const c = document.createElement('button');
+        parent.append(a, b, c);
+
+        expect(excludeContainers([parent, a, b, c])).to.deep.equal([c, b, a]);
+    });
+
+    it('handles thousands of elements quickly', () => {
+        const parent = document.createElement('nav');
+        const links = Array.from({ length: 5000 }, () => parent.appendChild(document.createElement('a')));
+
+        const start = performance.now();
+        const result = excludeContainers([parent, ...links]);
+
+        expect(result).to.have.length(5000);
+        expect(performance.now() - start).to.be.below(200);
+    });
 });
 
 describe('getActionablePopups', () => {
