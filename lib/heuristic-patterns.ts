@@ -182,6 +182,9 @@ export const DETECT_PATTERNS = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /bruger cookies/gi,
+    // Norwegian (NO)
+    // e.g. "ved å bruke siden godkjenner du vår personvernerklæring", "ved å fortsette samtykker du til bruk av informasjonskapsler"
+    /ved å (?:bruke|fortsette).{0,100}(?:godkjenner|godtar|aksepterer|samtykker).{0,100}(?:informasjonskapsler|cookies|personvern)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -896,4 +899,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "подтвердить", "подтверждаю выбор", "сохранить настройки", "сохранить и закрыть"
     /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
     'продолжить',
+    // Norwegian (NO)
+    // e.g. "forstått!", "ok, jeg forstår", "skjønner"
+    /^(ok,?\s+)?(forstått|jeg forstår|skjønner)[ !.]*$/is,
 ];

@@ -194,6 +194,22 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian "by using the site you accept" notices', () => {
+        const texts = [
+            'Ved å bruke siden godkjenner du vår personvernerklæring.',
+            'Ved å fortsette å bruke nettstedet samtykker du til bruk av informasjonskapsler.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Ved å bruke kalkulatoren kan du regne ut lånet ditt').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -385,6 +401,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить настройки')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Сохранить выбор')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
+    });
+
+    it('matches Norwegian acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Forstått!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ok, jeg forstår')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Skjønner')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Les mer')).to.equal('other');
     });
 
     it('does not treat Russian subscription buttons as reject', () => {
