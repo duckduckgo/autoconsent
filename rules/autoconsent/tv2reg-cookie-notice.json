@@ -1,0 +1,39 @@
+{
+    "name": "tv2reg-cookie-notice",
+    "prehideSelectors": ["[x-data^='cookieNotice('] > .fixed"],
+    "detectCmp": [
+        {
+            "exists": "[x-data^='cookieNotice('][x-data*='tv2reg_cookie_consent']"
+        },
+        {
+            "exists": "[x-data^='cookieNotice('] button[\\@click='acceptNecessary'], [x-data^='cookieNotice('] button[x-on\\:click='acceptNecessary']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[x-data^='cookieNotice('] button[\\@click='acceptNecessary'], [x-data^='cookieNotice('] button[x-on\\:click='acceptNecessary']",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[x-data^='cookieNotice('] button[x-on\\:click='acceptAll'], [x-data^='cookieNotice('] button[\\@click='acceptAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[x-data^='cookieNotice('] button[\\@click='acceptNecessary'], [x-data^='cookieNotice('] button[x-on\\:click='acceptNecessary']"
+        },
+        {
+            "waitForVisible": "[x-data^='cookieNotice('] button[\\@click='acceptNecessary'], [x-data^='cookieNotice('] button[x-on\\:click='acceptNecessary']",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"handle\":\"marketing\",\"value\":false"
+        }
+    ]
+}
