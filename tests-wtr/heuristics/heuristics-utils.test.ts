@@ -9,7 +9,8 @@ import {
     negativeContext,
     DETECT_PATTERNS,
 } from '../../lib/heuristic-classify';
-import { literalIndexSource, requiredLiterals } from '../../lib/heuristic-prefilter';
+import { literalIndexSource } from '../../lib/heuristic-prefilter';
+import { requiredLiterals } from '../../scripts/required-literals';
 import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from '../../lib/heuristic-literals';
 import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
@@ -291,6 +292,13 @@ describe('requiredLiterals', () => {
             const expected = plain.filter((p) => t.match(p)).map(String);
             expect(checkHeuristicPatterns(t, plain, { negatives: [] }).patterns).to.deep.equal(expected);
         }
+    });
+
+    it('never skips a custom pattern, which has no generated literals', () => {
+        expect(DETECT_PATTERN_LITERALS['/zorblax consent/gi']).to.equal(undefined);
+        expect(checkHeuristicPatterns('Zorblax consent', [/zorblax consent/gi], { negatives: [] }).patterns).to.deep.equal([
+            '/zorblax consent/gi',
+        ]);
     });
 });
 

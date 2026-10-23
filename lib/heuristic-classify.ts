@@ -17,7 +17,7 @@ import {
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
 import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from './heuristic-literals';
-import { literalIndex, literalIndexFrom, requiredLiterals } from './heuristic-prefilter';
+import { literalIndex, literalIndexFrom } from './heuristic-prefilter';
 export * from './heuristic-patterns';
 
 export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
@@ -49,8 +49,8 @@ function compilePatterns(detectPatterns: DetectPattern[]): CompiledPatterns {
             const { pattern, input } = p instanceof RegExp ? { pattern: p, input: undefined } : p;
             const global = pattern.flags.includes('g') ? pattern : new RegExp(pattern.source, `${pattern.flags}g`);
             const id = pattern.toString();
-            // the built-in patterns' literals are generated at build time, since parsing every source costs page load time
-            return { id, pattern, global, input, literals: DETECT_PATTERN_LITERALS[id] ?? requiredLiterals(pattern) };
+            // prefilter literals come from the generated table only; a pattern without an entry is never skipped
+            return { id, pattern, global, input, literals: DETECT_PATTERN_LITERALS[id] ?? [] };
         });
         const literals =
             detectPatterns === DETECT_PATTERNS ? literalIndexFrom(DETECT_LITERAL_INDEX) : literalIndex(detect.flatMap((d) => d.literals));
