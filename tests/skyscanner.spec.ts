@@ -1,3 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('skyscanner', ['https://www.skyscanner.nl/', 'https://www.skyscanner.de/']);
+generateCMPTests('skyscanner', ['https://www.skyscanner.nl/', 'https://www.skyscanner.de/', 'https://www.skyscanner.pl/']);

@@ -7,28 +7,28 @@
         "frame": false,
         "urlPattern": "^https://(www\\.)?skyscanner[\\.a-z]+/"
     },
-    "prehideSelectors": [".cookie-banner-wrapper"],
+    "prehideSelectors": [".consent-banner-wrapper"],
     "detectCmp": [
         {
-            "exists": "#cookieBannerContent"
+            "exists": "#consentBannerContent"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieBannerContent"
+            "visible": "#consentBannerContent"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[data-tracking-element-id=cookie_banner_accept_all]"
+            "waitForThenClick": "[data-testid=consentBannerAcceptAll]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[data-tracking-element-id=cookie_banner_essential_only]"
+            "waitForThenClick": "[data-testid=consentBannerRejectAll]"
         },
         {
-            "waitForVisible": "#cookieBannerContent",
+            "waitForVisible": "#consentBannerContent",
             "check": "none"
         }
     ],
