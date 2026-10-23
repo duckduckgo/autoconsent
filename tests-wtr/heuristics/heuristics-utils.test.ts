@@ -377,6 +377,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
     });
 
+    it('matches Italian close buttons as acknowledge, but not close-and-accept', () => {
+        expect(classifyButtonTextRegex('Chiudi')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('CHIUDI')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Chiudi e accetta')).to.equal('other');
+        expect(classifyButtonTextRegex('Rifiuta e chiudi')).to.equal('reject');
+    });
+
     it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
         expect(classifyButtonTextRegex('Подтвердить')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Подтверждаю')).to.equal('acknowledge');
