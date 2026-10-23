@@ -1,0 +1,13 @@
+{
+    "name": "scb.se",
+    "vendorUrl": "https://www.scb.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?scb\\.se/"
+    },
+    "prehideSelectors": ["#kakrutan"],
+    "detectCmp": [{ "exists": "#kakrutan scb-button[value='inget']" }],
+    "detectPopup": [{ "visible": "#kakrutan" }],
+    "optIn": [{ "waitForThenClick": ["#kakrutan scb-button[value='allt']", "button"] }],
+    "optOut": [{ "waitForThenClick": ["#kakrutan scb-button[value='inget']", "button"] }],
+    "test": [{ "visible": "#kakrutan", "check": "none" }]
+}
