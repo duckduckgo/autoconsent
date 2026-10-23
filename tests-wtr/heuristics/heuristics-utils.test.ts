@@ -194,6 +194,25 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            // ruter.no
+            'Vi bruker informasjonskapsler',
+            'Våre nettsider bruker informasjonskapsler (cookies) til sikkerhet og analyse.',
+            'Våre nettsider benytter informasjonskapsler (cookies) til sikkerhet og analyse.',
+            'Vi bruker cookies for å gi deg en bedre opplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker elektriske busser i hele Oslo').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
