@@ -180,8 +180,8 @@ export const DETECT_PATTERNS = [
     /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,
 
     // Danish (DA)
-    // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
-    /bruger cookies/gi,
+    // e.g. "vi bruger cookies", "ønsker at bruge cookies", "vi anvender cookies", "brug af cookies"
+    /(?:bruge?r?|anvende?r?|brug af) cookies/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [

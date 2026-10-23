@@ -183,6 +183,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            'momondo og dets partnere ønsker at bruge cookies eller tilsvarende teknologier til at gemme oplysninger.',
+            'Vi anvender cookies til statistik og markedsføring.',
+            'Læs mere om vores brug af cookies.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
