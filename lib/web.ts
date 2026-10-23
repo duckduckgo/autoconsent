@@ -350,7 +350,7 @@ export default class AutoConsent {
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
             this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsStart');
-            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '', undefined, { input: 'page' });
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '', 'page');
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))

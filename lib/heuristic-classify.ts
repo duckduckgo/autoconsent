@@ -103,30 +103,23 @@ export function negativeContext(text: string, start: number, end: number, negati
  * Matches the detect patterns against a text. `input` says what the text is: a popup element's text or a whole page's;
  * patterns and context negatives scoped to the other input are skipped (without it, only unscoped ones apply). A
  * pattern counts if one of its matches survives the context negatives; `suppressed` lists those that didn't.
+ * `patterns` and `negatives` replace the built-in lists.
  */
-export function checkHeuristicPatterns(
-    allText: string,
-    detectPatterns: DetectPattern[] = DETECT_PATTERNS,
-    options: HeuristicPatternOptions = {},
-) {
-    return matchHeuristicPatterns(allText, detectPatterns, options, false);
+export function checkHeuristicPatterns(allText: string, input?: HeuristicInput, options: HeuristicPatternOptions = {}) {
+    return matchHeuristicPatterns(allText, input, options, false);
 }
 
 // same result as checking checkHeuristicPatterns() for patterns, but stops at the first match
-export function hasHeuristicPatterns(
-    allText: string,
-    detectPatterns: DetectPattern[] = DETECT_PATTERNS,
-    options: HeuristicPatternOptions = {},
-): boolean {
-    return matchHeuristicPatterns(allText, detectPatterns, options, true).patterns.length > 0;
+export function hasHeuristicPatterns(allText: string, input?: HeuristicInput, options: HeuristicPatternOptions = {}): boolean {
+    return matchHeuristicPatterns(allText, input, options, true).patterns.length > 0;
 }
 
-type HeuristicPatternOptions = { input?: HeuristicInput; negatives?: ContextNegative[] };
+export type HeuristicPatternOptions = { patterns?: DetectPattern[]; negatives?: ContextNegative[] };
 
 function matchHeuristicPatterns(
     allText: string,
-    detectPatterns: DetectPattern[],
-    { input, negatives = DETECT_CONTEXT_NEGATIVES }: HeuristicPatternOptions,
+    input: HeuristicInput | undefined,
+    { patterns: detectPatterns = DETECT_PATTERNS, negatives = DETECT_CONTEXT_NEGATIVES }: HeuristicPatternOptions,
     firstOnly: boolean,
 ) {
     allText = (allText || '').slice(0, TEXT_LIMIT);

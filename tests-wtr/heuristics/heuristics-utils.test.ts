@@ -25,28 +25,30 @@ function nonRejectButtons(buttons: ButtonData[]) {
 
 describe('checkHeuristicPatterns', () => {
     it('detects cookie-related text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('We use cookies here', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('We use cookies here', undefined, { patterns: [/we use cookies/gi] });
 
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets.length).to.be.greaterThan(0);
     });
 
     it('returns empty arrays for unrelated text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', undefined, { patterns: [/we use cookies/gi] });
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
     });
 
     it('returns empty arrays for empty text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('', undefined, { patterns: [/we use cookies/gi] });
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
     });
 
     it('does not match after the text limit', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('X'.repeat(100000) + 'We use cookies here', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('X'.repeat(100000) + 'We use cookies here', undefined, {
+            patterns: [/we use cookies/gi],
+        });
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
@@ -57,7 +59,9 @@ describe('checkHeuristicPatterns', () => {
         // no `g` flag. `String.prototype.match` returns `undefined` entries for optional
         // groups that did not match, which used to crash the caller with a TypeError.
         const pattern = /(używamy|stosujemy)( są)?.{0,20} plik(i|ów|ach) cookie/i;
-        const { patterns, snippets } = checkHeuristicPatterns('Używamy plików cookie i innych technologii', [pattern]);
+        const { patterns, snippets } = checkHeuristicPatterns('Używamy plików cookie i innych technologii', undefined, {
+            patterns: [pattern],
+        });
 
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets.length).to.be.greaterThan(0);
@@ -95,9 +99,10 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 
     it('does not match when "cookies" is further away', () => {
-        expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
-            0,
-        );
+        expect(
+            checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, { patterns: [/we use(?: \w+)? cookies/gi] })
+                .patterns,
+        ).to.have.length(0);
     });
 });
 
@@ -187,66 +192,60 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
-        expect(checkHeuristicPatterns('Accept all', patterns, { input: 'popup' }).patterns).to.have.length(1);
-        expect(checkHeuristicPatterns('Accept all', patterns, { input: 'page' }).patterns).to.have.length(0);
-        expect(checkHeuristicPatterns('Accept all', patterns).patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Accept all', 'popup', { patterns }).patterns).to.have.length(1);
+        expect(checkHeuristicPatterns('Accept all', 'page', { patterns }).patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Accept all', undefined, { patterns }).patterns).to.have.length(0);
     });
 
     it('drops a match whose context hits a negative, and keeps the text if another match survives', () => {
         const negatives = [{ name: 'footer', pattern: /^[^.\n]{0,60}\n[^.\n]{0,60}$/, lines: [0, 1] as [number, number] }];
         const footer = 'Contact\nUse of cookies\nImprint';
-        const dropped = checkHeuristicPatterns(footer, [/use of cookies/gi], { input: 'page', negatives });
+        const dropped = checkHeuristicPatterns(footer, 'page', { patterns: [/use of cookies/gi], negatives });
         expect(dropped.patterns).to.have.length(0);
         expect(dropped.suppressed).to.deep.equal([{ pattern: '/use of cookies/gi', negative: 'footer' }]);
         const both = `We ask for your consent to the use of cookies on this site. Accept or reject.\n\n${footer}`;
-        expect(checkHeuristicPatterns(both, [/use of cookies/gi], { input: 'page', negatives }).patterns).to.have.length(1);
+        expect(checkHeuristicPatterns(both, 'page', { patterns: [/use of cookies/gi], negatives }).patterns).to.have.length(1);
     });
 
     it('keeps a match when the negative unless wording is present', () => {
         const negatives = [{ name: 'terms', pattern: /\bterms\b/i, unless: /cookie/i, window: 80 }];
-        expect(checkHeuristicPatterns('By continuing you accept our terms.', [/by continuing/gi], { negatives }).patterns).to.have.length(
-            0,
-        );
         expect(
-            checkHeuristicPatterns('By continuing you accept our terms and cookies.', [/by continuing/gi], { negatives }).patterns,
+            checkHeuristicPatterns('By continuing you accept our terms.', undefined, { patterns: [/by continuing/gi], negatives }).patterns,
+        ).to.have.length(0);
+        expect(
+            checkHeuristicPatterns('By continuing you accept our terms and cookies.', undefined, {
+                patterns: [/by continuing/gi],
+                negatives,
+            }).patterns,
         ).to.have.length(1);
     });
 
     it('does not count "accept all" in prose', () => {
-        expect(checkHeuristicPatterns('We accept all major credit cards.', undefined, { input: 'page' }).patterns).to.not.include(
-            '/accept all/gi',
-        );
-        expect(checkHeuristicPatterns('Cookies help us.\nAccept all\nReject all', undefined, { input: 'popup' }).patterns).to.include(
-            '/accept all/gi',
-        );
+        expect(checkHeuristicPatterns('We accept all major credit cards.', 'page').patterns).to.not.include('/accept all/gi');
+        expect(checkHeuristicPatterns('Cookies help us.\nAccept all\nReject all', 'popup').patterns).to.include('/accept all/gi');
     });
 
     it('drops page matches next to an age gate with a leave button, not next to a consent control', () => {
         const gate = 'Adults only. You must be over 18 to enter.\nThis site uses cookies.\n\nOK\nLeave';
-        expect(checkHeuristicPatterns(gate, undefined, { input: 'page' }).patterns).to.have.length(0);
+        expect(checkHeuristicPatterns(gate, 'page').patterns).to.have.length(0);
         const banner = 'Adults only. You must be over 18 to enter.\nThis site uses cookies.\n\nAccept all\nReject all';
-        expect(checkHeuristicPatterns(banner, undefined, { input: 'page' }).patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(banner, 'page').patterns.length).to.be.greaterThan(0);
     });
 
     it('detects Italian, Dutch and German cookie notices', () => {
+        expect(checkHeuristicPatterns('Questo sito utilizza cookie tecnici. Accetta tutti', 'popup').patterns.length).to.be.greaterThan(0);
         expect(
-            checkHeuristicPatterns('Questo sito utilizza cookie tecnici. Accetta tutti', undefined, { input: 'popup' }).patterns.length,
+            checkHeuristicPatterns('Wij en onze partners slaan informatie op en/of lezen deze.', 'popup').patterns.length,
         ).to.be.greaterThan(0);
-        expect(
-            checkHeuristicPatterns('Wij en onze partners slaan informatie op en/of lezen deze.', undefined, { input: 'popup' }).patterns
-                .length,
-        ).to.be.greaterThan(0);
-        expect(
-            checkHeuristicPatterns('Auf dieser Seite werden Cookies verwendet.', undefined, { input: 'popup' }).patterns.length,
-        ).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Auf dieser Seite werden Cookies verwendet.', 'popup').patterns.length).to.be.greaterThan(0);
     });
 
     it('hasHeuristicPatterns agrees with checkHeuristicPatterns on inputs and negatives', () => {
         const texts = ['We accept all major credit cards.', 'Cookies help us.\nAccept all\nReject all', 'Contact\nUse of cookies\nImprint'];
         for (const text of texts) {
             for (const input of ['popup', 'page'] as const) {
-                const expected = checkHeuristicPatterns(text, undefined, { input }).patterns.length > 0;
-                expect(hasHeuristicPatterns(text, undefined, { input }), `${input}: ${text}`).to.equal(expected);
+                const expected = checkHeuristicPatterns(text, input).patterns.length > 0;
+                expect(hasHeuristicPatterns(text, input), `${input}: ${text}`).to.equal(expected);
             }
         }
     });
@@ -290,15 +289,15 @@ describe('requiredLiterals', () => {
         const texts = ['ACCEPT ALL COOKIES', 'We use analytics Cookies', 'nothing here', 'Tout refuser', 'Utilizziamo i cookie', ''];
         for (const t of texts) {
             const expected = plain.filter((p) => t.match(p)).map(String);
-            expect(checkHeuristicPatterns(t, plain, { negatives: [] }).patterns).to.deep.equal(expected);
+            expect(checkHeuristicPatterns(t, undefined, { patterns: plain, negatives: [] }).patterns).to.deep.equal(expected);
         }
     });
 
     it('never skips a custom pattern, which has no generated literals', () => {
         expect(DETECT_PATTERN_LITERALS['/zorblax consent/gi']).to.equal(undefined);
-        expect(checkHeuristicPatterns('Zorblax consent', [/zorblax consent/gi], { negatives: [] }).patterns).to.deep.equal([
-            '/zorblax consent/gi',
-        ]);
+        expect(
+            checkHeuristicPatterns('Zorblax consent', undefined, { patterns: [/zorblax consent/gi], negatives: [] }).patterns,
+        ).to.deep.equal(['/zorblax consent/gi']);
     });
 });
 
