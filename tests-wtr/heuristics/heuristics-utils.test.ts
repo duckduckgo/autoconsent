@@ -109,6 +109,7 @@ describe('checkHeuristicPatterns with Russian popups', () => {
             'Сохраняем куки на вашем устройстве',
             'На сайте установлены cookie-файлы',
             'Оставаясь на сайте, вы соглашаетесь с политикой в отношении файлов cookie',
+            'Обрабатываем cookie, чтобы сделать сайт удобнее. Продолжая использовать сайт, вы соглашаетесь на их обработку.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -368,6 +369,8 @@ describe('classifyButtonTextRegex', () => {
     });
 
     it('matches Russian acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Ок')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Окей')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Хорошо')).to.equal('acknowledge');
