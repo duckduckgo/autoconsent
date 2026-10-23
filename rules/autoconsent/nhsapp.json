@@ -1,0 +1,10 @@
+{
+    "name": "nhsapp",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?nhsapp\\.service\\.nhs\\.uk/" },
+    "prehideSelectors": ["#cookie-banner.nhsuk-cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner [data-qa=\"cookie-banner-close\"]" }],
+    "detectPopup": [{ "visible": "#cookie-banner [data-qa=\"cookie-banner\"]" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner [data-qa=\"cookie-banner-close\"]" }],
+    "optOut": [{ "waitForThenClick": "#cookie-banner [data-qa=\"cookie-banner-close\"]" }],
+    "test": [{ "waitForVisible": "#cookie-banner [data-qa=\"cookie-banner\"]", "timeout": 1000, "check": "none" }]
+}
