@@ -219,7 +219,9 @@ const REJECT_PATTERNS_ENGLISH = [
     /^no,? thank(s| you)$/is,
     /^opt[ -]out$/is,
     'dont enable',
-    'i do not agree',
+
+    // e.g. "i do not agree", "no, i do not agree", "do not consent"
+    /^(no,?\s+)?(i\s+)?(do\s+not|dont)\s+(agree|consent)$/is,
 ];
 
 const REJECT_PATTERNS_DUTCH = [
@@ -357,6 +359,9 @@ const REJECT_PATTERNS_SWEDISH = [
     /fortsätt utan att (acceptera|godkänna)/is,
 
     /strikt nödvändig/is,
+
+    // refusals: "nej, jag samtycker inte", "jag godkänner inte"
+    /^(nej,?\s+)?(jag\s+)?(samtycker|godkänner|accepterar)\s+inte(\s+till)?(\s+(cookies|kakor))?\.?$/is,
 
     'tillåt inte cookies',
     'jag accepterar endast grundläggande kakor',

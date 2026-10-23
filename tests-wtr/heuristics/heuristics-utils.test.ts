@@ -279,6 +279,19 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
+    it('matches "do not agree/consent" variants', () => {
+        expect(classifyButtonTextRegex('I do not agree')).to.equal('reject');
+        expect(classifyButtonTextRegex('No, I do not agree')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not consent')).to.equal('reject');
+        expect(classifyButtonTextRegex('Yes, I agree')).to.equal('accept');
+    });
+
+    it('matches Swedish "samtycker inte" refusals', () => {
+        expect(classifyButtonTextRegex('Nej, jag samtycker inte')).to.equal('reject');
+        expect(classifyButtonTextRegex('Jag godkänner inte')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja, jag samtycker')).to.not.equal('reject');
+    });
+
     it('matches CCPA "do not sell/share" variants', () => {
         expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
         expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
