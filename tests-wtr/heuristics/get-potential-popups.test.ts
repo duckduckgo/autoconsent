@@ -1,5 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import { getActionablePopups, getButtonData, getFramePopupElement, getPotentialPopups } from '../../lib/heuristics';
+import { PopupData } from '../../lib/types';
 import { getHidingStyle } from '../../lib/utils';
 
 const BANNER = `
@@ -44,12 +45,16 @@ describe('getPotentialPopups', () => {
         return attachShadow(container.querySelector('#host')!, html);
     }
 
-    function popupIds(): string[] {
-        return getPotentialPopups(1000).map((p) => p.element.id);
+    function popupIds(hitTest = false): string[] {
+        return getPotentialPopups(1000, hitTest).map((p) => p.element.id);
     }
 
     function findPopup(id: string) {
         return getPotentialPopups(1000).find((p) => p.element.id === id);
+    }
+
+    function inContainer(popups: PopupData[]): PopupData[] {
+        return popups.filter((p) => container.contains(p.element));
     }
 
     it('returns positioned popups with their buttons', () => {
@@ -240,7 +245,7 @@ describe('getPotentialPopups', () => {
                     <div style="position: fixed; bottom: 0;"><button>Reject all</button><button>Accept all</button></div>
                 </div>
             `;
-            const popups = getPotentialPopups(1000).filter((p) => container.contains(p.element));
+            const popups = inContainer(getPotentialPopups(1000));
             expect(popups.map((p) => p.element.id)).to.deep.equal(['banner']);
         });
 
@@ -298,8 +303,201 @@ describe('getPotentialPopups', () => {
                     <div style="position: sticky; bottom: 0;"><button>Accept all</button></div>
                 </div>
             `;
-            const popups = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));
+            const popups = inContainer(getActionablePopups('tier2', 1000));
             expect(popups).to.have.length(0);
+        });
+    });
+    describe('banners in the normal page flow', () => {
+        const IN_FLOW_BANNER = `
+            <div id="banner">
+                <p>We use cookies to improve your experience. Read our <a href="#">Privacy Policy</a>.</p>
+                <button>Reject all</button>
+                <button>Accept all</button>
+            </div>
+        `;
+
+        it('only hit-tests when asked to', () => {
+            container.innerHTML = IN_FLOW_BANNER;
+            expect(popupIds()).not.to.include('banner');
+            expect(inContainer(getActionablePopups('reject', 1000))).to.have.length(0);
+        });
+
+        it('finds a banner at the top of the page that is not positioned', () => {
+            container.innerHTML = IN_FLOW_BANNER;
+            expect(popupIds(true)).to.include('banner');
+        });
+
+        it('makes an in-flow banner actionable', () => {
+            container.innerHTML = IN_FLOW_BANNER;
+            const popup = getActionablePopups('reject', 1000, true).find((p) => p.element.id === 'banner');
+            expect(popup).to.exist;
+            expect(popup!.regexClassification).to.equal('reject');
+        });
+
+        it('ignores an in-flow banner below the fold', () => {
+            container.innerHTML = `<div style="height: 3000px"></div>${IN_FLOW_BANNER}`;
+            expect(popupIds(true)).not.to.include('banner');
+        });
+
+        it('ignores page copy about cookies without consent buttons', () => {
+            container.innerHTML =
+                '<div id="copy"><p>We use cookies on this site.</p><a href="#">Privacy Policy</a> <a href="#">Contact</a></div>';
+            expect(popupIds(true)).not.to.include('copy');
+        });
+
+        it('ignores a login form with consent wording', () => {
+            container.innerHTML = `
+                <form id="login">
+                    <input type="email" placeholder="Email">
+                    <p>By continuing, you agree to our Terms and acknowledge our Privacy Policy and use of cookies.</p>
+                    <button>Continue</button>
+                </form>
+            `;
+            expect(popupIds(true)).not.to.include('login');
+        });
+
+        it('does not report a positioned popup twice', () => {
+            container.innerHTML = fixedBanner('banner');
+            expect(popupIds(true).filter((id) => id === 'banner')).to.have.length(1);
+        });
+
+        it('prefers a positioned popup with reject over an in-flow accept-only banner', () => {
+            container.innerHTML = `
+                <div id="inflow"><p>We use cookies to improve your experience.</p><button>Accept all</button></div>
+                <div id="fixed" style="position: fixed; bottom: 0;"><p>We use cookies.</p><button>Reject all</button><button>Accept all</button></div>
+            `;
+            const popups = inContainer(getActionablePopups('tier2', 1000, true));
+            expect(popups.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([
+                ['fixed', 'reject'],
+                ['inflow', 'tier2'],
+            ]);
+        });
+
+        it('skips the DOM walk when hit-testing finds a popup with reject', () => {
+            // pointer-events: none keeps the fixed popup out of hit-testing, so only the walk could find it
+            container.innerHTML = `
+                ${IN_FLOW_BANNER}
+                <div id="fixed" style="position: fixed; bottom: 0; pointer-events: none;"><p>We use cookies.</p><button>Reject all</button></div>
+            `;
+            const actionable = inContainer(getActionablePopups('tier2', 1000, true));
+            expect(actionable.map((p) => p.element.id)).to.deep.equal(['banner']);
+            expect(popupIds(true)).to.include.members(['banner', 'fixed']);
+        });
+
+        it('finds an in-flow banner inside a shadow root', () => {
+            shadowHost('', IN_FLOW_BANNER);
+            expect(popupIds(true)).to.include('banner');
+        });
+
+        describe('inside a walk candidate that is not a consent popup', () => {
+            // the fixed wrapper is found by the walk, but its age gate text excludes it
+            function ageGateWrapper(bannerFirst: boolean): string {
+                const banner =
+                    '<div id="banner"><p>We use cookies to improve your experience on our website.</p><button>Accept all</button></div>';
+                const ageGate = '<p>You must be over 18 years old to enter.</p>';
+                return `<div id="wrapper" style="position: fixed; top: 0; left: 0; right: 0;">${bannerFirst ? banner + ageGate : ageGate + banner}</div>`;
+            }
+
+            it('keeps a consent popup found by hit-testing next to the walk candidate', () => {
+                // the top grid row hits the banner, so hit-testing finds the banner rather than the wrapper
+                container.innerHTML = ageGateWrapper(true);
+                const popups = inContainer(getPotentialPopups(1000, true));
+                expect(popups.map((p) => [p.element.id, p.source])).to.deep.equal([
+                    ['wrapper', 'walk'],
+                    ['banner', 'hitTest'],
+                ]);
+                expect(popups[0].hitPoints).to.be.undefined;
+                expect(popups[1].hitPoints).not.to.be.empty;
+            });
+
+            it('makes the consent popup found by hit-testing actionable', () => {
+                container.innerHTML = ageGateWrapper(true);
+                const actionable = inContainer(getActionablePopups('tier2', 1000, true));
+                expect(actionable.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([['banner', 'tier2']]);
+            });
+
+            it('reports the wrapper once when hit-testing also reaches it', () => {
+                // the top grid row hits the age gate text, so the climb reaches the wrapper
+                container.innerHTML = ageGateWrapper(false);
+                const popups = inContainer(getPotentialPopups(1000, true));
+                expect(popups.map((p) => [p.element.id, p.source])).to.deep.equal([['wrapper', 'walk']]);
+                expect(popups[0].hitPoints).not.to.be.empty;
+                expect(inContainer(getActionablePopups('tier2', 1000, true))).to.be.empty;
+            });
+        });
+    });
+
+    describe('labels', () => {
+        it('labels every potential popup with a classification from its buttons', () => {
+            container.innerHTML = fixedBanner('consent');
+            // outside the container, so that the walk does not expand it to the container that holds the consent banner
+            const chat = document.createElement('div');
+            chat.innerHTML = '<div id="chat" style="position: fixed; top: 0;"><p>Chat with us</p><button>Start chat</button></div>';
+            document.body.appendChild(chat);
+            try {
+                const labels = Object.fromEntries(
+                    getPotentialPopups(1000)
+                        .filter((p) => container.contains(p.element) || chat.contains(p.element))
+                        .map((p) => [p.element.id, p.regexClassification]),
+                );
+                expect(labels).to.deep.equal({ consent: 'reject', chat: 'none' });
+            } finally {
+                chat.remove();
+            }
+        });
+    });
+
+    describe('hit-test grid and hit points', () => {
+        const GRID = { columns: [0.25, 0.75], edgeRows: [40] };
+        const columnXs = GRID.columns.map((c) => Math.round(c * window.innerWidth));
+
+        function findGridPopup(id: string) {
+            return getPotentialPopups(1000, true, GRID).find((p) => p.element.id === id);
+        }
+
+        it('records every grid point that reached an in-flow banner', () => {
+            container.innerHTML = `<div id="banner" style="padding: 60px 0;">${BANNER}</div>`;
+            const popup = findGridPopup('banner');
+            expect(popup?.source).to.equal('hitTest');
+            expect(popup!.hitPoints).to.deep.equal(columnXs.map((x) => [x, 40]));
+        });
+
+        it('keeps the walk candidate of a positioned popup, with its hit points', () => {
+            container.innerHTML = `<div id="fixed" style="position: fixed; bottom: 0; left: 0; right: 0; padding: 30px 0;">${BANNER}</div>`;
+            const popup = findGridPopup('fixed');
+            expect(popup?.source).to.equal('walk');
+            const bottomRow = Math.round(window.innerHeight - 40);
+            expect(popup!.hitPoints).to.deep.equal(columnXs.map((x) => [x, bottomRow]));
+        });
+
+        it('leaves out hit points of a positioned popup that is not hit-tested', () => {
+            container.innerHTML = fixedBanner('fixed');
+            const popup = getPotentialPopups(1000).find((p) => p.element.id === 'fixed');
+            expect(popup?.source).to.equal('walk');
+            expect(popup!.hitPoints).to.be.undefined;
+        });
+
+        it('tests rows 30 and 90px from the edges by default', () => {
+            // the banner lies between 100 and 200px from the top; the spacer is outside the container, so climbs from it stop at body
+            const spacer = document.createElement('div');
+            spacer.style.height = '100px';
+            document.body.insertBefore(spacer, document.body.firstChild);
+            document.body.style.margin = '0';
+            container.innerHTML = `<div id="banner" style="height: 100px; overflow: hidden;">${BANNER}</div>`;
+            try {
+                expect(container.querySelector('#banner')!.getBoundingClientRect().top).to.equal(100);
+                expect(inContainer(getPotentialPopups(1000, true))).to.have.length(0);
+                const withRow150 = getPotentialPopups(1000, true, { columns: [0.1, 0.5, 0.9], edgeRows: [30, 90, 150] });
+                expect(withRow150.map((p) => p.element.id)).to.include('banner');
+            } finally {
+                spacer.remove();
+                document.body.style.margin = '';
+            }
+        });
+
+        it('only tests the points of the grid it is given', () => {
+            container.innerHTML = `<div id="banner" style="padding: 60px 0;">${BANNER}</div>`;
+            expect(getPotentialPopups(1000, true, { columns: [0.5], edgeRows: [] }).map((p) => p.element.id)).not.to.include('banner');
         });
     });
 });
