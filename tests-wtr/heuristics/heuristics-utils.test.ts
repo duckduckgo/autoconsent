@@ -194,6 +194,22 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            'Dette nettstedet bruker informasjonskapsler.',
+            'Vi benytter informasjonskapsler (cookies) for å forbedre nettstedet.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Les mer om studier og forskning ved universitetet').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -346,6 +362,16 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
+    });
+
+    it('matches Norwegian reject buttons', () => {
+        expect(classifyButtonTextRegex('Avslå')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avslå alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avvis alle informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta alle')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Bidra til statistikken')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
