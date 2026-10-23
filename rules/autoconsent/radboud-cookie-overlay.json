@@ -1,0 +1,30 @@
+{
+    "name": "radboud-cookie-overlay",
+    "vendorUrl": "https://www.radboudumc.nl/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-component=RADCookieOverlay] .CookieOverlay"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-component=RADCookieOverlay] .CookieOverlay_Buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-component=RADCookieOverlay] .CookieOverlay_Buttons > .Btn-Accent"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-component=RADCookieOverlay] .CookieOverlay_ButtonGroup > button:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie=False"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "bringatrailer",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bringatrailer\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "#banner-terms-dismiss"
+        },
+        {
+            "cookieContains": "\"haveConsent\":true"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#banner-terms"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#banner-terms-dismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#banner-terms-dismiss"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "dismissedTermsNotice"
+        }
+    ]
+}

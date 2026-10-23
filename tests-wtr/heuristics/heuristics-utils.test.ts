@@ -1,6 +1,7 @@
 import { expect } from '@esm-bundle/chai';
 import {
     checkHeuristicPatterns,
+    hasHeuristicPatterns,
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
@@ -124,6 +125,47 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Qualcuno ha detto… cookie? Noi e i nostri partner utilizziamo i cookie per fornirti un servizio migliore',
+            'Utilizziamo cookie tecnici e di profilazione',
+            'Questo sito utilizza i cookie per migliorare la tua esperienza',
+            'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
+            'Archiviare e/o accedere a informazioni su un dispositivo',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(
+            checkHeuristicPatterns(
+                'Noi e i nostri partner commerciali utilizziamo materiali riciclati. Il sito usa la tecnologia più moderna.',
+            ).patterns,
+        ).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // svtplay.se
+            'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Webbplatsen använder kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Japanese popups', () => {
     it('detects Japanese cookie notices', () => {
         const texts = [
@@ -198,6 +240,16 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
         ).to.be.greaterThan(0);
     });
 
+    it('hasHeuristicPatterns agrees with checkHeuristicPatterns on inputs and negatives', () => {
+        const texts = ['We accept all major credit cards.', 'Cookies help us.\nAccept all\nReject all', 'Contact\nUse of cookies\nImprint'];
+        for (const text of texts) {
+            for (const input of ['popup', 'page'] as const) {
+                const expected = checkHeuristicPatterns(text, undefined, { input }).patterns.length > 0;
+                expect(hasHeuristicPatterns(text, undefined, { input }), `${input}: ${text}`).to.equal(expected);
+            }
+        }
+    });
+
     it('takes the line or neighbouring lines as the context', () => {
         const text = 'one\ntwo\nthree four\nfive\nsix';
         const at = text.indexOf('four');
@@ -239,6 +291,22 @@ describe('requiredLiterals', () => {
             const expected = plain.filter((p) => t.match(p)).map(String);
             expect(checkHeuristicPatterns(t, plain, { negatives: [] }).patterns).to.deep.equal(expected);
         }
+    });
+});
+
+describe('checkHeuristicPatterns with Danish popups', () => {
+    it('detects Danish cookie notices', () => {
+        const texts = [
+            'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
+            'Vi bruger cookies for at give dig den bedste oplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Danish text', () => {
+        expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
     });
 });
 
@@ -426,6 +494,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Danish reject buttons', () => {
+        expect(classifyButtonTextRegex('Nej tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nej, tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
@@ -693,6 +772,36 @@ describe('excludeContainers', () => {
 
         expect(result).to.have.length(1);
         expect(result[0]).to.equal(inner);
+    });
+    it('excludes a shadow host that contains another element in its shadow root', () => {
+        const host = document.createElement('div');
+        const inner = document.createElement('button');
+        host.attachShadow({ mode: 'open' }).appendChild(inner);
+
+        const result = excludeContainers([host, inner]);
+
+        expect(result).to.deep.equal([inner]);
+    });
+
+    it('keeps the reversed input order', () => {
+        const parent = document.createElement('div');
+        const a = document.createElement('button');
+        const b = document.createElement('button');
+        const c = document.createElement('button');
+        parent.append(a, b, c);
+
+        expect(excludeContainers([parent, a, b, c])).to.deep.equal([c, b, a]);
+    });
+
+    it('handles thousands of elements quickly', () => {
+        const parent = document.createElement('nav');
+        const links = Array.from({ length: 5000 }, () => parent.appendChild(document.createElement('a')));
+
+        const start = performance.now();
+        const result = excludeContainers([parent, ...links]);
+
+        expect(result).to.have.length(5000);
+        expect(performance.now() - start).to.be.below(200);
     });
 });
 

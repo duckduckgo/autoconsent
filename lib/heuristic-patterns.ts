@@ -259,7 +259,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
 
     // Italian (IT)
-    /usiamo.{0,20}cookie/gi,
+    // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
+    /(?:usiamo|utilizziamo).{0,20}cookie/gi,
+    /sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi,
+    /noi e i nostri.{0,20}partner.{0,100}cookie/gi,
     /\b(?:utilizziamo|usiamo|impieghiamo|installiamo)\b(?: \S+){0,3} cookies?\b/gi,
     /\b(?:utilizza|utilizzano|usa|usano|impiega|installa|fa uso di)\b(?: \S+){0,3} cookies?\b/gi,
     /\bcookies? (?:tecnici|di profilazione|di terze parti|analitici|statistici|di marketing)\b/gi,
@@ -269,14 +272,21 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:continua|prosegui|chiudi) senza accettare\b/gi,
     /\brifiuta e abbonati\b/gi,
     /\bconsenso (?:all.(?:uso|utilizzo) (?:dei |di )?)?cookies?\b/gi,
-    /\bnoi e (?:i nostri|il nostro) (?:\d+ )?(?:partner|fornitori)\b/gi,
     /\b(?:insieme ai|con i) nostri (?:\d+ )?partner\b/gi,
     /\bterze parti selezionate\b/gi,
     /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
 
+    // Swedish (SV)
+    // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
+    /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
     /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,
+
+    // Danish (DA)
+    // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
+    /bruger cookies/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -457,6 +467,17 @@ const REJECT_PATTERNS_SWEDISH = [
     'jag accepterar endast grundläggande kakor',
 ];
 
+const REJECT_PATTERNS_DANISH = [
+    // afvis / afvis alle / afvis alle cookies (reject verbs)
+    /(^|\s)afvis/is,
+
+    // (accept/allow) only necessary cookies
+    /^(accepter\s+|tillad\s+)?(kun|udelukkende)\s+(strengt\s+)?nødvendige( cookies)?$/is,
+
+    // "nej tak" (no thanks)
+    /^nej(,?\s+tak)?$/is,
+];
+
 const REJECT_PATTERNS_CATALAN = [/(^|\s)rebutj/is, 'no accepto', 'no, gràcies'];
 
 const REJECT_PATTERNS_GALICIAN = [/(^|\s)rexeitar/is];
@@ -522,6 +543,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_BRAZILIAN_PORTUGUESE,
     ...REJECT_PATTERNS_SPANISH,
     ...REJECT_PATTERNS_SWEDISH,
+    ...REJECT_PATTERNS_DANISH,
     ...REJECT_PATTERNS_CATALAN,
     ...REJECT_PATTERNS_GALICIAN,
     ...REJECT_PATTERNS_BASQUE,
@@ -1025,6 +1047,7 @@ export const ACCEPT_PATTERNS = [
     // Italian (IT)
     'accetta',
     'accetta tutti i cookie',
+    'accetto tutti i cookie',
 ];
 
 export const ACKNOWLEDGE_PATTERNS = [

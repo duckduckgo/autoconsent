@@ -17,6 +17,19 @@ export default class Onetrust extends AutoConsentCMPBase {
         return false;
     }
 
+    // Some sites pre-render the banner before the SDK loads, and clicks before then may be lost.
+    // Sites that copy the markup without the SDK never get #onetrust-style, so only wait when the page loads the SDK.
+    async waitForSdk() {
+        if (this.elementExists('#onetrust-style')) {
+            return;
+        }
+        const sdkRef = /cookielaw\.org|otSDKStub|otBannerSdk/;
+        const sdkExpected = Array.from(document.scripts).some((s) => sdkRef.test(s.src) || (!s.src && sdkRef.test(s.textContent || '')));
+        if (sdkExpected) {
+            await this.waitForElement('#onetrust-style', 10000);
+        }
+    }
+
     async detectCmp() {
         return this.elementExists('#onetrust-banner-sdk') || this.elementVisible('#onetrust-pc-sdk', 'any');
     }
@@ -27,6 +40,7 @@ export default class Onetrust extends AutoConsentCMPBase {
 
     async optOut() {
         await this.wait(500);
+        await this.waitForSdk();
         // 'reject all' shortcuts
         if (this.elementVisible('#onetrust-reject-all-handler', 'any')) {
             return await this.click('#onetrust-reject-all-handler');
@@ -86,6 +100,7 @@ export default class Onetrust extends AutoConsentCMPBase {
     }
 
     async optIn() {
+        await this.waitForSdk();
         return await this.click('#onetrust-accept-btn-handler,#accept-recommended-btn-handler,.js-accept-cookies');
     }
 

@@ -1,0 +1,10 @@
+{
+    "name": "sedlak-gdpr-cookie",
+    "vendorUrl": "https://sedlak.pl/",
+    "prehideSelectors": ["#gdpr-cookie"],
+    "detectCmp": [{ "exists": "#gdpr-cookie .js-allow-required" }],
+    "detectPopup": [{ "visible": "#gdpr-cookie .js-allow-required" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-cookie .js-allow-all" }],
+    "optOut": [{ "waitForThenClick": "#gdpr-cookie .js-allow-required" }],
+    "test": [{ "cookieContains": "gdpr-cookie=eyJwcmVmZXJlbmNlIjpmYWxzZSwic3RhdGlzdGljIjpmYWxzZSwibWFya2V0aW5nIjpmYWxzZX0" }]
+}

@@ -1,0 +1,18 @@
+{
+    "name": "gays-cruising",
+    "vendorUrl": "https://www.gays-cruising.com/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?gays-cruising\\.com/"
+    },
+    "prehideSelectors": ["#modalCookies"],
+    "detectCmp": [{ "exists": "#modalCookies #ck_marketing" }],
+    "detectPopup": [{ "visible": "#modalCookies" }],
+    "optIn": [{ "waitForThenClick": "#modalCookies a[data-action=\"aceptar\"]" }],
+    "optOut": [
+        { "waitForThenClick": "#modalCookies a[data-action=\"preferencias\"]" },
+        { "waitForVisible": "#modalCookies .preferencias" },
+        { "click": "#modalCookies .preferencias input[type=checkbox]:checked:not([disabled])", "all": true, "optional": true },
+        { "click": "#modalCookies a[data-action=\"aceptar\"]" }
+    ],
+    "test": [{ "cookieContains": "gc-cookie=%7B%22estadisticas%22%3A0%2C%22marketing%22%3A0%7D" }]
+}

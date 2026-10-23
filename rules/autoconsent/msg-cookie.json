@@ -1,0 +1,9 @@
+{
+    "name": "msg-cookie",
+    "cosmetic": true,
+    "prehideSelectors": ["#msg-cookie:has(#hide-msg-cookie)"],
+    "detectCmp": [{ "exists": "#msg-cookie #hide-msg-cookie" }],
+    "detectPopup": [{ "visible": "#msg-cookie #hide-msg-cookie" }],
+    "optIn": [{ "waitForThenClick": "#msg-cookie #hide-msg-cookie" }],
+    "optOut": [{ "hide": "#msg-cookie" }]
+}

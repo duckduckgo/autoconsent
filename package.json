@@ -1,6 +1,6 @@
 {
   "name": "@duckduckgo/autoconsent",
-  "version": "16.52.0",
+  "version": "16.60.0",
   "description": "",
   "types": "./dist/types/web.d.ts",
   "exports": {
@@ -49,7 +49,7 @@
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
   "devDependencies": {
-    "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#v0.3.1",
+    "@duckduckgo/eslint-config": "github:duckduckgo/eslint-config#v0.4.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@octokit/rest": "^22.0.1",
     "@playwright/test": "^1.63.0",
@@ -66,16 +66,17 @@
     "bulma": "^1.0.2",
     "chai": "^6.0.1",
     "chokidar-cli": "^3.0.0",
-    "csv-parse": "^6.2.1",
+    "csv-parse": "^7.0.3",
     "esbuild": "^0.28.0",
     "eslint": "^10.0.3",
     "globals": "^17.4.0",
     "jsonc-parser": "^3.3.1",
     "markdown-it": "^15.0.2",
     "mocha": "^12.0.3",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "randexp": "^0.5.3",
     "sinon": "^22.0.0",
+    "tldts-experimental": "^7.4.3",
     "ts-json-schema-generator": "^2.3.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
@@ -199,8 +200,5 @@
     "plugins": [
       "npm"
     ]
-  },
-  "dependencies": {
-    "tldts-experimental": "^7.4.3"
   }
 }

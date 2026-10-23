@@ -1,0 +1,33 @@
+{
+    "name": "sl-se",
+    "vendorUrl": "https://sl.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sl\\.se/"
+    },
+    "prehideSelectors": ["[data-test-id=cookie-consent-banner]"],
+    "detectCmp": [
+        {
+            "exists": "[data-test-id=cookie-consent-banner] #accept-necessary-cookies-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test-id=cookie-consent-banner] #accept-necessary-cookies-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test-id=cookie-consent-banner] #accept-all-cookies-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-test-id=cookie-consent-banner] #accept-necessary-cookies-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-accept-necessary=accepted"
+        }
+    ]
+}

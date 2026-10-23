@@ -1,0 +1,12 @@
+{
+    "name": "ford-dse",
+    "prehideSelectors": [".dse-cookie-disclaimer"],
+    "detectCmp": [{ "exists": ".dse-cookie-disclaimer .cta-decline-cookies" }],
+    "detectPopup": [{ "visible": ".dse-cookie-disclaimer.cookie-visible:not(.cookie-hidden) .cta-decline-cookies" }],
+    "optIn": [{ "waitForThenClick": ".dse-cookie-disclaimer .cta-accept-cookies" }, { "waitFor": ".dse-cookie-disclaimer.cookie-hidden" }],
+    "optOut": [
+        { "waitForThenClick": ".dse-cookie-disclaimer .cta-decline-cookies" },
+        { "waitFor": ".dse-cookie-disclaimer.cookie-hidden" }
+    ],
+    "test": [{ "cookieContains": "%22targeting%22%3Afalse" }]
+}

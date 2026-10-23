@@ -7,12 +7,14 @@
         { "eval": "EVAL_TEALIUM_1" },
         { "eval": "EVAL_TEALIUM_DONOTSELL" },
         {
-            "if": { "exists": "#__tealiumGDPRecModal #rejectAll" },
-            "then": [{ "waitForThenClick": "#__tealiumGDPRecModal #rejectAll" }],
+            "if": { "exists": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" },
+            "then": [
+                { "waitForThenClick": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" }
+            ],
             "else": [
                 { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },
                 {
-                    "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent",
+                    "waitForThenClick": "#cm-acceptNone,.js-accept-essential-cookies,#continueWithoutAccepting,#no_consent,#consent_prompt_decline,#teal-decline-consent,#deny_full_submit_1",
                     "timeout": 1000,
                     "optional": true
                 }
@@ -23,6 +25,6 @@
     "test": [
         { "eval": "EVAL_TEALIUM_3" },
         { "eval": "EVAL_TEALIUM_DONOTSELL_CHECK" },
-        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs", "check": "none" }
+        { "visible": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs > *", "check": "none" }
     ]
 }

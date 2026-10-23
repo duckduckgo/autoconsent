@@ -31,19 +31,35 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-custom-permissions"]
-                },
-                {
-                    "waitForVisible": ["#bigidcmp-banner-widget", "#cmp-submit"]
-                },
-                {
-                    "comment": "aria-checked is always false; the knob position marks enabled toggles",
-                    "click": ["#bigidcmp-banner-widget", "button[role=\"switch\"]:not([disabled]) > span[class*=\"translate-x-[1.1rem]\"]"],
-                    "all": true,
-                    "optional": true
-                },
-                {
-                    "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-submit"]
+                    "if": {
+                        "exists": ["#bigidcmp-banner-widget", "#cmp-custom-permissions"]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-custom-permissions"]
+                        },
+                        {
+                            "waitForVisible": ["#bigidcmp-banner-widget", "#cmp-submit"]
+                        },
+                        {
+                            "comment": "aria-checked is always false; the knob position marks enabled toggles",
+                            "click": [
+                                "#bigidcmp-banner-widget",
+                                "button[role=\"switch\"]:not([disabled]) > span[class*=\"translate-x-[1.1rem]\"]"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["#bigidcmp-banner-widget", "#cmp-submit"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "comment": "notice-only layout: dismiss with the close icon",
+                            "waitForThenClick": ["#bigidcmp-banner-widget", "div[tabindex=\"0\"]:has(> svg #times-solid)"]
+                        }
+                    ]
                 }
             ]
         }

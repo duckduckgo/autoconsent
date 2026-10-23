@@ -259,7 +259,9 @@ export const DETECT_PATTERN_LITERALS: Record<string, string[]> = {
     '/(?:собира[а-яё]*|сбор|применя[а-яё]*|сохраня[а-яё]*|размеща[а-яё]*|устанавлива[а-яё]*).{0,30}(?:файл[а-яё]*[\\s-]+)?(?:cookie|куки)/gi':
         ['cookie', 'куки'],
     '/(?:файл[а-яё]*[\\s-]+(?:cookie|куки)|(?:cookie|куки)[\\s-]+файл[а-яё]*)/gi': [],
-    '/usiamo.{0,20}cookie/gi': ['usiamo'],
+    '/(?:usiamo|utilizziamo).{0,20}cookie/gi': ['usiamo', 'utilizziamo'],
+    '/sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi': ['cookie'],
+    '/noi e i nostri.{0,20}partner.{0,100}cookie/gi': ['noi e i nostri'],
     '/\\b(?:utilizziamo|usiamo|impieghiamo|installiamo)\\b(?: \\S+){0,3} cookies?\\b/gi': [' cookie'],
     '/\\b(?:utilizza|utilizzano|usa|usano|impiega|installa|fa uso di)\\b(?: \\S+){0,3} cookies?\\b/gi': [' cookie'],
     '/\\bcookies? (?:tecnici|di profilazione|di terze parti|analitici|statistici|di marketing)\\b/gi': [
@@ -283,7 +285,6 @@ export const DETECT_PATTERN_LITERALS: Record<string, string[]> = {
     '/\\b(?:continua|prosegui|chiudi) senza accettare\\b/gi': [' senza accettare'],
     '/\\brifiuta e abbonati\\b/gi': ['rifiuta e abbonati'],
     '/\\bconsenso (?:all.(?:uso|utilizzo) (?:dei |di )?)?cookies?\\b/gi': ['consenso '],
-    '/\\bnoi e (?:i nostri|il nostro) (?:\\d+ )?(?:partner|fornitori)\\b/gi': ['i nostri', 'il nostro'],
     '/\\b(?:insieme ai|con i) nostri (?:\\d+ )?partner\\b/gi': [' nostri '],
     '/\\bterze parti selezionate\\b/gi': ['terze parti selezionate'],
     '/\\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\\/o (?:accedere|accediamo)\\b/gi': [
@@ -292,7 +293,9 @@ export const DETECT_PATTERN_LITERALS: Record<string, string[]> = {
         'memorizzare',
         'memorizziamo',
     ],
+    '/(?:vi|webbplatsen|webbplats|sajten|sidan)\\s+använder.{0,60}(?:cookies|kakor)/gi': ['använder'],
     '/(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi': ['cookie', 'クッキー'],
+    '/bruger cookies/gi': ['bruger cookies'],
 };
 
 // The literal index over them (see literalIndexSource in heuristic-prefilter.ts).
@@ -397,7 +400,9 @@ export const DETECT_LITERAL_INDEX = {
         'son necesarias',
         ' plików cookie',
         'używamy plików',
+        'noi e i nostri',
         'di terze parti',
+        'bruger cookies',
         ' technologies',
         'non-essential',
         'consentez à l',
@@ -432,6 +437,7 @@ export const DETECT_LITERAL_INDEX = {
         'functioneel',
         'analytische',
         'almacenamos',
+        'utilizziamo',
         'memorizzare',
         'accept all',
         'reject all',
@@ -473,7 +479,6 @@ export const DETECT_LITERAL_INDEX = {
         'accettare',
         'rifiutare',
         'consenso ',
-        'il nostro',
         ' cookies',
         'partners',
         'partnern',
@@ -489,8 +494,8 @@ export const DETECT_LITERAL_INDEX = {
         ' utiliza',
         'rechazar',
         'использу',
-        'i nostri',
         ' nostri ',
+        'använder',
         'cookies',
         'we and ',
         'partner',
@@ -523,5 +528,5 @@ export const DETECT_LITERAL_INDEX = {
         'куки',
         'クッキー',
     ],
-    source: '(?=(pliki cookies i pokrewne im technologie umożliwiają poprawne działanie strony i pomagają nam dostosować ofertę do twoich potrzeb|zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację|este lloc web utilitza només cookies tècniques necessàries per al seu funcionament|webgune honek cookie propioak eta hirugarrenen cookie-fitxategiak erabiltzen ditu|cookie propioak eta hirugarrenenak helburu teknikoarekin erabiltzen ditu|este portal emprega cookies propias ou de terceiros con fins analíticos|cookie propio eta hirugarrenenak helburu teknikoarekin erabiltzen ditu|przechowywać i uzyskiwać dostęp do informacji na twoich urządzeniach|cele przetwarzania twoich danych przez zaufanych partnerów iab|recopilamos y almacenamos datos de usted y de su dispositivo|cookie propioak eta hirugarrenen cookieak erabiltzen ditugu|przechowywanie informacji na urządzeniu lub dostęp do nich|uzyskujemy dostęp i przechowujemy informacje na urządzeniu| bazkideek cookieak eta identifikadoreak erabiltzen ditugu|website uses cookies to enhance your browsing experience|personalised ads and content, ad and content measurement|únicament utilitza galetes pròpies amb finalitat tècnica|korzystamy z technologii, takich jak pliki cookie|przechowywanie plików cookie na swoim urządzeniu|store or retrieve information on your browser|stockées dans votre navigateur ou récupérées|nos partenaires demandent votre consentement|almacenar la información en un dispositivo y|je désactive les finalités non essentielles|nuestros socios solicitan su consentimiento|unsere partner bitten um ihre zustimmung|web orri honek cookieak erabiltzen ditu|utilitzem cookies i altres tecnologies|and our partners ask for your consent|nur funktionale cookies akzeptieren|norberaren eta hirugarrenen cookie|continue reading with advertising|store and\\/or access information|ta strona korzysta z ciasteczek|rights with regard to the sale|cookies essentiels uniquement|zugriff auf informationen auf|mit werbetracking weiterlesen|al utilizar nuestro sitio web|cookies pròpies i de tercers|de personalització i anàlisi|les cookies nous permettent|empregamos cookies propias|this website or its third|onze partners vragen om |necesitamos usar cookies|za pomocą plików cookies|cookieak erabiltzen ditu|continuer sans accepter|nos partenaires et nous|terze parti selezionate|only necessary cookies|nécessaires uniquement|con tracking e annunci|niektóre pliki cookies|seulement nécessaires|zustimmung verweigern|tracking-technologien|usa cookies de google|continuar sin aceptar|we are using cookies|we use technologies |consent and continue|refuser et continuer|zustimmen und weiter|cookies propias y de|we and our partners|refuser les cookies|speichern und\\/oder |einsatz von cookies|nosotros y nuestros|utilizamos tecnolog|tanto nosotros como|solo las necesarias|storing of cookies|optionale ablehnen|weiter mit werbung|ak erabiltzen ditu|rifiuta e abbonati|access and store | tous les cookies|utilitzem galetes|cookies weigeren|doorgaan zonder |las cookies nos | senza accettare|such as cookies|read more about| on your device|out of the sale| uso de cookies|di profilazione|accept cookies|use of cookies| and\\/or access|placed cookies|son necesarias| plików cookie|używamy plików|di terze parti| technologies|non-essential|consentez à l|werbeleistung|erforderliche|einverstanden|vergelijkbare|noodzakelijke|wijs alles af|wykorzystują |consentement|technologies|tout refuser|technologien|einwilligung| zum einsatz|noodzakelijk|wij en onze |przetwarzamy|di marketing| navigazione|memorizziamo|information|partenaires|utilisation|zusätzliche|essenzielle|funktionale|akzeptieren|verwendung |functionele|functioneel|analytische|almacenamos|memorizzare|accept all|reject all|consent to|additional|publicités|verwendung|notwendige|zustimmung|essentiële|accepteer |nosotros y|instalamos|korzystamy|używa plik|statistici|archiviare|archiviamo|fornitori|technolog| tracking|utilisons|utilisent|je refuse|accepter |verwenden|verwendet|zustimmen| ohne zu |gebruiken|verwerpen|optionele|navegando|almacenar|empleamos|технологи|analitici|acconsent|accettare|rifiutare|consenso |il nostro| cookies|partners|partnern|optional|accepter|stockons|ablehnen|cookies |zulassen|erlauben|afwijzen|weigeren| utiliza|rechazar|использу|i nostri| nostri |cookies|we and |partner|vendors|we use |out of |utilise|stocker|auswahl|gebruik| contin| cookie|aceptar|uso de |używamy|dzięki | używa |galetes|tecnici|accetta|accetto|rifiuta|rifiuto|socios|weiger|cookie|używać|usiamo|accett|куки|クッキー))',
+    source: '(?=(pliki cookies i pokrewne im technologie umożliwiają poprawne działanie strony i pomagają nam dostosować ofertę do twoich potrzeb|zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację|este lloc web utilitza només cookies tècniques necessàries per al seu funcionament|webgune honek cookie propioak eta hirugarrenen cookie-fitxategiak erabiltzen ditu|cookie propioak eta hirugarrenenak helburu teknikoarekin erabiltzen ditu|este portal emprega cookies propias ou de terceiros con fins analíticos|cookie propio eta hirugarrenenak helburu teknikoarekin erabiltzen ditu|przechowywać i uzyskiwać dostęp do informacji na twoich urządzeniach|cele przetwarzania twoich danych przez zaufanych partnerów iab|recopilamos y almacenamos datos de usted y de su dispositivo|cookie propioak eta hirugarrenen cookieak erabiltzen ditugu|przechowywanie informacji na urządzeniu lub dostęp do nich|uzyskujemy dostęp i przechowujemy informacje na urządzeniu| bazkideek cookieak eta identifikadoreak erabiltzen ditugu|website uses cookies to enhance your browsing experience|personalised ads and content, ad and content measurement|únicament utilitza galetes pròpies amb finalitat tècnica|korzystamy z technologii, takich jak pliki cookie|przechowywanie plików cookie na swoim urządzeniu|store or retrieve information on your browser|stockées dans votre navigateur ou récupérées|nos partenaires demandent votre consentement|almacenar la información en un dispositivo y|je désactive les finalités non essentielles|nuestros socios solicitan su consentimiento|unsere partner bitten um ihre zustimmung|web orri honek cookieak erabiltzen ditu|utilitzem cookies i altres tecnologies|and our partners ask for your consent|nur funktionale cookies akzeptieren|norberaren eta hirugarrenen cookie|continue reading with advertising|store and\\/or access information|ta strona korzysta z ciasteczek|rights with regard to the sale|cookies essentiels uniquement|zugriff auf informationen auf|mit werbetracking weiterlesen|al utilizar nuestro sitio web|cookies pròpies i de tercers|de personalització i anàlisi|les cookies nous permettent|empregamos cookies propias|this website or its third|onze partners vragen om |necesitamos usar cookies|za pomocą plików cookies|cookieak erabiltzen ditu|continuer sans accepter|nos partenaires et nous|terze parti selezionate|only necessary cookies|nécessaires uniquement|con tracking e annunci|niektóre pliki cookies|seulement nécessaires|zustimmung verweigern|tracking-technologien|usa cookies de google|continuar sin aceptar|we are using cookies|we use technologies |consent and continue|refuser et continuer|zustimmen und weiter|cookies propias y de|we and our partners|refuser les cookies|speichern und\\/oder |einsatz von cookies|nosotros y nuestros|utilizamos tecnolog|tanto nosotros como|solo las necesarias|storing of cookies|optionale ablehnen|weiter mit werbung|ak erabiltzen ditu|rifiuta e abbonati|access and store | tous les cookies|utilitzem galetes|cookies weigeren|doorgaan zonder |las cookies nos | senza accettare|such as cookies|read more about| on your device|out of the sale| uso de cookies|di profilazione|accept cookies|use of cookies| and\\/or access|placed cookies|son necesarias| plików cookie|używamy plików|noi e i nostri|di terze parti|bruger cookies| technologies|non-essential|consentez à l|werbeleistung|erforderliche|einverstanden|vergelijkbare|noodzakelijke|wijs alles af|wykorzystują |consentement|technologies|tout refuser|technologien|einwilligung| zum einsatz|noodzakelijk|wij en onze |przetwarzamy|di marketing| navigazione|memorizziamo|information|partenaires|utilisation|zusätzliche|essenzielle|funktionale|akzeptieren|verwendung |functionele|functioneel|analytische|almacenamos|utilizziamo|memorizzare|accept all|reject all|consent to|additional|publicités|verwendung|notwendige|zustimmung|essentiële|accepteer |nosotros y|instalamos|korzystamy|używa plik|statistici|archiviare|archiviamo|fornitori|technolog| tracking|utilisons|utilisent|je refuse|accepter |verwenden|verwendet|zustimmen| ohne zu |gebruiken|verwerpen|optionele|navegando|almacenar|empleamos|технологи|analitici|acconsent|accettare|rifiutare|consenso | cookies|partners|partnern|optional|accepter|stockons|ablehnen|cookies |zulassen|erlauben|afwijzen|weigeren| utiliza|rechazar|использу| nostri |använder|cookies|we and |partner|vendors|we use |out of |utilise|stocker|auswahl|gebruik| contin| cookie|aceptar|uso de |używamy|dzięki | używa |galetes|tecnici|accetta|accetto|rifiuta|rifiuto|socios|weiger|cookie|używać|usiamo|accett|куки|クッキー))',
 };

@@ -107,7 +107,27 @@ export function negativeContext(text: string, start: number, end: number, negati
 export function checkHeuristicPatterns(
     allText: string,
     detectPatterns: DetectPattern[] = DETECT_PATTERNS,
-    { input, negatives = DETECT_CONTEXT_NEGATIVES }: { input?: HeuristicInput; negatives?: ContextNegative[] } = {},
+    options: HeuristicPatternOptions = {},
+) {
+    return matchHeuristicPatterns(allText, detectPatterns, options, false);
+}
+
+// same result as checking checkHeuristicPatterns() for patterns, but stops at the first match
+export function hasHeuristicPatterns(
+    allText: string,
+    detectPatterns: DetectPattern[] = DETECT_PATTERNS,
+    options: HeuristicPatternOptions = {},
+): boolean {
+    return matchHeuristicPatterns(allText, detectPatterns, options, true).patterns.length > 0;
+}
+
+type HeuristicPatternOptions = { input?: HeuristicInput; negatives?: ContextNegative[] };
+
+function matchHeuristicPatterns(
+    allText: string,
+    detectPatterns: DetectPattern[],
+    { input, negatives = DETECT_CONTEXT_NEGATIVES }: HeuristicPatternOptions,
+    firstOnly: boolean,
 ) {
     allText = (allText || '').slice(0, TEXT_LIMIT);
     const patterns = [];
@@ -157,6 +177,9 @@ export function checkHeuristicPatterns(
             if (typeof m === 'string') {
                 snippets.push(m.substring(0, 200));
             }
+        }
+        if (firstOnly) {
+            break;
         }
     }
     return { patterns, snippets, suppressed };

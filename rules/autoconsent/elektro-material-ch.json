@@ -1,0 +1,13 @@
+{
+    "name": "elektro-material-ch",
+    "cosmetic": true,
+    "vendorUrl": "https://elektro-material.ch/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?elektro-material\\.ch/"
+    },
+    "prehideSelectors": [".cookie-bar__wrapper:has(.cookie-bar__message--top)"],
+    "detectCmp": [{ "exists": ".cookie-bar__wrapper .cookie-bar__message--top" }],
+    "detectPopup": [{ "visible": ".cookie-bar__wrapper .cookie-bar__container" }],
+    "optIn": [{ "waitForThenClick": ".cookie-bar__wrapper button.cookie-bar__button" }],
+    "optOut": [{ "hide": ".cookie-bar__wrapper:has(.cookie-bar__message--top)" }]
+}

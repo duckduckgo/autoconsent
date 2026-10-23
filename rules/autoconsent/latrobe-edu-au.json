@@ -1,0 +1,22 @@
+{
+    "name": "latrobe.edu.au",
+    "comment": "Notice with only an 'Allow Cookies' button, so it is hidden. The site's CSS keyed on body.gdpr-on and #gdpr siblings would otherwise offset the sticky header and the search button.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 3,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?latrobe\\.edu\\.au/"
+    },
+    "prehideSelectors": ["#gdpr"],
+    "detectCmp": [{ "exists": "#gdpr #gdpr-button" }],
+    "detectPopup": [{ "visible": "#gdpr" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-button" }],
+    "optOut": [
+        { "hide": "#gdpr" },
+        {
+            "stylesheet": "body.gdpr-on #header { top: 0 !important; } body.vi #header #gdpr ~ #global-search-button, body.vi #header #gdpr ~ #global-search-button + label { top: 1.25rem; bottom: auto; }",
+            "stylesheetId": "latrobe-gdpr-layout"
+        }
+    ]
+}

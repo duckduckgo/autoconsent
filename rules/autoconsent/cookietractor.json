@@ -1,0 +1,37 @@
+{
+    "name": "cookietractor",
+    "vendorUrl": "https://www.cookietractor.se/",
+    "prehideSelectors": ["#CookieConsent dialog.cookie-popup"],
+    "detectCmp": [
+        {
+            "exists": "#CookieConsent dialog.cookie-popup #cc-b-custom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#CookieConsent dialog.cookie-popup #cc-b-custom"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#CookieConsent #cc-b-acceptall"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#CookieConsent .actions input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#CookieConsent #cc-b-custom"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#CookieConsent dialog.cookie-popup #cc-b-custom",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

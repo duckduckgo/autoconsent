@@ -77,7 +77,7 @@ Site-specific rules are rules scoped to specific sites with a `urlPattern`. Rule
 
 ### JSON Rules vs Code-based rules
 
-JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale.
+JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale. Before removing any rule, test every site in its spec with the rule removed, in the core regions and every region the spec runs in, and confirm that another rule or the heuristic handles each one, or that the site no longer shows the popup.
 
 ```json
 {
@@ -133,7 +133,7 @@ shadow root or same-origin iframe.
 
 ### Updating existing rules
 - **For site-specific popups, prefer a heuristic-pattern fix over a new rule, and check whether a rule is needed at all.** If the popup is unique to a site (not a shared CMP) and already has a reject, dismiss, or acknowledge button that the heuristic should match, extend `lib/heuristic-patterns.ts` instead of adding a `urlPattern`-scoped JSON rule. Do not use a heuristic fix in place of a generic CMP rule. A heuristic change must not cause false positives on other sites.
-- **When the heuristic already handles the popup, test every region before concluding that no fix is needed.**
+- **When the heuristic already handles the popup, test every supported region (`ALL_REGIONS` in the `proxy-testing` skill), not just the core set, before concluding that no fix is needed.**
 - If an existing generic rule fails on a specific site: first look for other sites with the same failure (spec sites, data/coverage.json, publicwww). If the issue applies to more sites, update the generic rule; if the issue is truly site-specific, prefer making a site-specific rule or a config exception. Never change a generic rule to fix a site-specific implementation problem.
 - After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) across the expanded set. Inspect both API results AND screenshots.
 - **When adding or fixing a rule for a site, remove stale site-specific rules covering the same site.** If a site-specific rule is obsolete in all regions (the site switched CMP), remove it rather than leaving it alongside the new or updated rule.

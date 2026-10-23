@@ -1,0 +1,34 @@
+{
+    "name": "groupama.fr",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?groupama\\.fr/"
+    },
+    "prehideSelectors": ["#perfModal"],
+    "detectCmp": [
+        {
+            "exists": "#perfModal #refuseCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#perfModal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#perfModal #acceptCookies:not(.perfModal__btn__frozen)",
+            "timeout": 10000
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#perfModal #refuseCookies:not(.perfModal__btn__frozen)",
+            "timeout": 10000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed="
+        }
+    ]
+}

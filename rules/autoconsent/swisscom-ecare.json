@@ -1,0 +1,31 @@
+{
+    "name": "swisscom-ecare",
+    "prehideSelectors": [".js-consent-modal"],
+    "detectCmp": [{ "exists": ".js-consent-modal #validate_cookie_btn, .js-consent-modal #validate_cookie_foreign_btn" }],
+    "detectPopup": [{ "visible": ".js-consent-modal .modal-content" }],
+    "optIn": [
+        {
+            "if": { "visible": ".js-consent-modal #validate_cookie_foreign_btn" },
+            "then": [{ "waitForThenClick": ".js-consent-modal #validate_cookie_foreign_btn", "retry": 3, "retryInterval": 500 }],
+            "else": [{ "waitForThenClick": ".js-consent-modal #validate_cookie_btn", "retry": 3, "retryInterval": 500 }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ".js-consent-modal #validate_cookie_foreign_btn" },
+            "then": [{ "waitForThenClick": ".js-consent-modal #validate_cookie_foreign_btn", "retry": 3, "retryInterval": 500 }],
+            "else": [
+                { "click": ".js-consent-modal #unfold_cookie_btn" },
+                { "waitForVisible": ".js-consent-modal .cookie-selection" },
+                {
+                    "click": ".js-consent-modal .cookie-selection input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".js-consent-modal #validate_cookie_btn", "retry": 3, "retryInterval": 500 }
+            ]
+        },
+        { "waitForVisible": ".js-consent-modal .modal-content", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "_gtm_consent_prod=" }]
+}

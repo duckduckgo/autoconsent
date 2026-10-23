@@ -1,0 +1,70 @@
+{
+    "name": "avada-privacy-bar",
+    "vendorUrl": "https://avada.com/",
+    "prehideSelectors": [".fusion-privacy-bar"],
+    "detectCmp": [
+        {
+            "exists": ".fusion-privacy-bar .fusion-privacy-bar-reject, .fusion-privacy-bar .fusion-privacy-choices input[type=\"checkbox\"]:not(:disabled)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".fusion-privacy-bar",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".fusion-privacy-bar .fusion-privacy-bar-accept-all"
+            },
+            "then": [
+                {
+                    "click": ".fusion-privacy-bar .fusion-privacy-bar-accept-all"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".fusion-privacy-bar .fusion-privacy-choices input[type=\"checkbox\"]:not(:checked):not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fusion-privacy-bar .fusion-privacy-bar-acceptance",
+                    "all": true
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".fusion-privacy-bar .fusion-privacy-bar-reject"
+            },
+            "then": [
+                {
+                    "click": ".fusion-privacy-bar .fusion-privacy-bar-reject",
+                    "all": true
+                }
+            ],
+            "else": [
+                {
+                    "click": ".fusion-privacy-bar .fusion-privacy-choices input[type=\"checkbox\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fusion-privacy-bar .fusion-privacy-bar-acceptance",
+                    "all": true
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".fusion-privacy-bar",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}

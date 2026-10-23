@@ -1,0 +1,45 @@
+{
+    "name": "service2school",
+    "vendorUrl": "https://service2school.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?service2school\\.org/"
+    },
+    "prehideSelectors": [".cookie-banner-mount-point", "#hs-eu-cookie-confirmation"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner'] button.accept"
+        },
+        {
+            "cookieContains": "__hs_opt_out=",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.accept"
+        },
+        {
+            "waitForThenClick": "#hs-eu-confirmation-button",
+            "timeout": 5000
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-banner-mount-point"
+        },
+        {
+            "waitForThenClick": "#hs-eu-decline-button",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__hs_opt_out=yes"
+        }
+    ]
+}

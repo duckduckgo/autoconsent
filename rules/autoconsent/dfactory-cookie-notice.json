@@ -1,0 +1,16 @@
+{
+    "name": "dfactory-cookie-notice",
+    "vendorUrl": "https://wordpress.org/plugins/cookie-notice/",
+    "prehideSelectors": ["#cookie-notice"],
+    "detectCmp": [{ "exists": "#cookie-notice :is(#cn-refuse-cookie, #cn-close-notice)" }],
+    "detectPopup": [{ "visible": "#cookie-notice.cookie-notice-visible #cn-notice-buttons" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice #cn-accept-cookie" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-notice #cn-refuse-cookie" },
+            "then": [{ "waitForThenClick": "#cookie-notice #cn-refuse-cookie" }],
+            "else": [{ "waitForThenClick": "#cookie-notice #cn-close-notice" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cookie_notice_accepted=false" }]
+}
