@@ -1,0 +1,10 @@
+{
+    "name": "gobasic",
+    "vendorUrl": "https://www.gopublic.dk/",
+    "prehideSelectors": [".cookie-banner[data-available-cookies]"],
+    "detectCmp": [{ "exists": ".cookie-banner[data-available-cookies] .reject-cookies" }],
+    "detectPopup": [{ "visible": ".cookie-banner[data-available-cookies] .reject-cookies" }],
+    "optIn": [{ "waitForThenClick": ".cookie-banner[data-available-cookies] .accept-cookies" }],
+    "optOut": [{ "waitForThenClick": ".cookie-banner[data-available-cookies] .reject-cookies" }],
+    "test": [{ "cookieContains": "CookieConsent=[]" }]
+}
