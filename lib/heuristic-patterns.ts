@@ -639,8 +639,16 @@ const ageGateUnless = (control: RegExp) => consentNotAgeGate(new RegExp(`${contr
 const CONSENT_WORDS =
     /cookie|consent|track|partner|personali[sz]|advertis|analytic|privacy (?:options|choices|settings|rights)|do not sell|opt[- ]out/i;
 
-// popups with their own age confirmation are age gates, not cookie popups, even when they mention cookies
-export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [{ pattern: AGE_WORDING, unless: ageGateUnless(CONSENT_CHOICE) }];
+// license and terms clauses that cookie notices never contain, so a popup with them is a legal agreement
+const LEGAL_AGREEMENT =
+    /\b(?:end[- ]user licen[cs]e agreement|licen[cs]e agreement|limitation of liability|governing law|indemnif\w*|hereunder|disclaimers? of warrant\w*|warrant(?:y|ies) of merchantability)\b/i;
+
+export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [
+    // popups with their own age confirmation are age gates, not cookie popups, even when they mention cookies
+    { pattern: AGE_WORDING, unless: ageGateUnless(CONSENT_CHOICE) },
+    // a license or terms agreement may mention cookies, and its decline button must not be clicked as a cookie reject
+    LEGAL_AGREEMENT,
+];
 
 // drop single matches whose context shows the text isn't a consent notice
 export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [

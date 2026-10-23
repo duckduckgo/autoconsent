@@ -302,6 +302,24 @@ describe('isExcludedPopup', () => {
     it('flags an age gate whose OK sits next to a leave button', () => {
         expect(isExcludedPopup('You must be over 18. We use cookies. Accept all\nOK\nLeave')).to.be.true;
     });
+
+    it('flags a license agreement that mentions cookies', () => {
+        const agreement =
+            'Our End-User License Agreement has changed. Please read and accept it to keep using the software.\n' +
+            'Privacy. Our websites may use cookies; you can reject the use of cookies in your browser settings.\n' +
+            'Limitation of Liability. To the extent permitted by law, the vendor is not liable for indirect damages.\n' +
+            'Governing Law. This agreement is governed by the laws of the vendor’s country.\n' +
+            'Accept\nDecline';
+        expect(isExcludedPopup(agreement)).to.be.true;
+    });
+
+    it('does not flag a consent dialog that uses legal wording in passing', () => {
+        expect(
+            isExcludedPopup(
+                'We and our partners use cookies and other technologies (together hereinafter: "Cookies") to store and/or access device information.\nAccept all\nReject all',
+            ),
+        ).to.be.false;
+    });
 });
 
 describe('cleanButtonText', () => {
