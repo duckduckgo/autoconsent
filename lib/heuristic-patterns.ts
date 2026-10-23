@@ -886,6 +886,10 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^zamknij informację o( plikach)? cookies$/,
     'zapisz i zamknij',
 
+    // Italian (IT)
+    'continua',
+    'ho capito',
+
     // Russian (RU)
     // e.g. "понятно", "всё понятно", "хорошо", "ясно"; \w does not match Cyrillic
     /^\s*(хорошо|ясно|(вс[её]\s+)?(понятно|понял[аи]?))[!.]*\s*$/is,

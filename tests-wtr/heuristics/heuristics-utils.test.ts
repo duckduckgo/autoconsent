@@ -387,6 +387,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
     });
 
+    it('matches Italian acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Continua')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ho capito')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Continua senza accettare')).to.equal('reject');
+        expect(classifyButtonTextRegex('Accetta e continua')).to.not.equal('acknowledge');
+    });
+
     it('does not treat Russian subscription buttons as reject', () => {
         expect(classifyButtonTextRegex('Отказаться от подписки')).to.equal('other');
     });
