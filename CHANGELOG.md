@@ -1,3 +1,27 @@
+# v16.61.0 (Sat Oct 24 2026)
+
+#### Rules
+
+- Rule update: studentapan [#2107](https://github.com/duckduckgo/autoconsent/pull/2107) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: AppConsent [#2108](https://github.com/duckduckgo/autoconsent/pull/2108) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: scb.se [#2095](https://github.com/duckduckgo/autoconsent/pull/2095) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: newsbreak, remove auto_US_newsbreak.com_0 [#2096](https://github.com/duckduckgo/autoconsent/pull/2096) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fastweb-cookie-center [#2097](https://github.com/duckduckgo/autoconsent/pull/2097) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gobasic [#2098](https://github.com/duckduckgo/autoconsent/pull/2098) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: com-consent-layer [#2099](https://github.com/duckduckgo/autoconsent/pull/2099) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: airbnb, remove auto_CH_airbnb.de_83z [#2100](https://github.com/duckduckgo/autoconsent/pull/2100) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: futurabolzano.it [#2101](https://github.com/duckduckgo/autoconsent/pull/2101) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: livsmedelsverket [#2102](https://github.com/duckduckgo/autoconsent/pull/2102) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tv2reg-cookie-notice [#2104](https://github.com/duckduckgo/autoconsent/pull/2104) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nhsapp [#2105](https://github.com/duckduckgo/autoconsent/pull/2105) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sas, remove auto_AU_flysas.com_r1s [#2106](https://github.com/duckduckgo/autoconsent/pull/2106) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
 # v16.60.0 (Fri Oct 23 2026)
 
 #### Rules
