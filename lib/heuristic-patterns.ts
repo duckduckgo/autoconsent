@@ -873,6 +873,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     'vale',
     '¡vamos!',
 
+    // Catalan (CA)
+    /^(ho )?(entenc|entès|entesos)[ !.]*$/s,
+
     // Polish (PL)
     'kontynuuj',
     'ok, zrozumiałem',
