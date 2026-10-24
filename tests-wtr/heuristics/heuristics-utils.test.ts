@@ -183,6 +183,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            'På merkur.dk bruges cookies, som er nødvendige for, at hjemmesiden fungerer.',
+            'Udover de nødvendige cookies bruger vi også cookies til at indsamle statistik.',
+            'Denne hjemmeside anvender cookies til statistik.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
