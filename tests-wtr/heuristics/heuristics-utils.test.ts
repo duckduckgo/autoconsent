@@ -1,11 +1,17 @@
 import { expect } from '@esm-bundle/chai';
 import {
     checkHeuristicPatterns,
+    hasHeuristicPatterns,
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
     isExcludedPopup,
+    negativeContext,
+    DETECT_PATTERNS,
 } from '../../lib/heuristic-classify';
+import { literalIndexSource } from '../../lib/heuristic-prefilter';
+import { requiredLiterals } from '../../scripts/required-literals';
+import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from '../../lib/heuristic-literals';
 import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
@@ -19,28 +25,30 @@ function nonRejectButtons(buttons: ButtonData[]) {
 
 describe('checkHeuristicPatterns', () => {
     it('detects cookie-related text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('We use cookies here', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('We use cookies here', undefined, { patterns: [/we use cookies/gi] });
 
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets.length).to.be.greaterThan(0);
     });
 
     it('returns empty arrays for unrelated text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('Welcome to our website', undefined, { patterns: [/we use cookies/gi] });
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
     });
 
     it('returns empty arrays for empty text', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('', undefined, { patterns: [/we use cookies/gi] });
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
     });
 
     it('does not match after the text limit', () => {
-        const { patterns, snippets } = checkHeuristicPatterns('X'.repeat(100000) + 'We use cookies here', [/we use cookies/gi]);
+        const { patterns, snippets } = checkHeuristicPatterns('X'.repeat(100000) + 'We use cookies here', undefined, {
+            patterns: [/we use cookies/gi],
+        });
 
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
@@ -51,7 +59,9 @@ describe('checkHeuristicPatterns', () => {
         // no `g` flag. `String.prototype.match` returns `undefined` entries for optional
         // groups that did not match, which used to crash the caller with a TypeError.
         const pattern = /(używamy|stosujemy)( są)?.{0,20} plik(i|ów|ach) cookie/i;
-        const { patterns, snippets } = checkHeuristicPatterns('Używamy plików cookie i innych technologii', [pattern]);
+        const { patterns, snippets } = checkHeuristicPatterns('Używamy plików cookie i innych technologii', undefined, {
+            patterns: [pattern],
+        });
 
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets.length).to.be.greaterThan(0);
@@ -89,9 +99,10 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 
     it('does not match when "cookies" is further away', () => {
-        expect(checkHeuristicPatterns('We use the best chocolate in our cookies', [/we use(?: \w+)? cookies/gi]).patterns).to.have.length(
-            0,
-        );
+        expect(
+            checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, { patterns: [/we use(?: \w+)? cookies/gi] })
+                .patterns,
+        ).to.have.length(0);
     });
 });
 
@@ -178,6 +189,118 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with inputs and context negatives', () => {
+    it('runs patterns scoped to an input on that input only', () => {
+        const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
+        expect(checkHeuristicPatterns('Accept all', 'popup', { patterns }).patterns).to.have.length(1);
+        expect(checkHeuristicPatterns('Accept all', 'page', { patterns }).patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Accept all', undefined, { patterns }).patterns).to.have.length(0);
+    });
+
+    it('drops a match whose context hits a negative, and keeps the text if another match survives', () => {
+        const negatives = [{ name: 'footer', pattern: /^[^.\n]{0,60}\n[^.\n]{0,60}$/, lines: [0, 1] as [number, number] }];
+        const footer = 'Contact\nUse of cookies\nImprint';
+        const dropped = checkHeuristicPatterns(footer, 'page', { patterns: [/use of cookies/gi], negatives });
+        expect(dropped.patterns).to.have.length(0);
+        expect(dropped.suppressed).to.deep.equal([{ pattern: '/use of cookies/gi', negative: 'footer' }]);
+        const both = `We ask for your consent to the use of cookies on this site. Accept or reject.\n\n${footer}`;
+        expect(checkHeuristicPatterns(both, 'page', { patterns: [/use of cookies/gi], negatives }).patterns).to.have.length(1);
+    });
+
+    it('keeps a match when the negative unless wording is present', () => {
+        const negatives = [{ name: 'terms', pattern: /\bterms\b/i, unless: /cookie/i, window: 80 }];
+        expect(
+            checkHeuristicPatterns('By continuing you accept our terms.', undefined, { patterns: [/by continuing/gi], negatives }).patterns,
+        ).to.have.length(0);
+        expect(
+            checkHeuristicPatterns('By continuing you accept our terms and cookies.', undefined, {
+                patterns: [/by continuing/gi],
+                negatives,
+            }).patterns,
+        ).to.have.length(1);
+    });
+
+    it('does not count "accept all" in prose', () => {
+        expect(checkHeuristicPatterns('We accept all major credit cards.', 'page').patterns).to.not.include('/accept all/gi');
+        expect(checkHeuristicPatterns('Cookies help us.\nAccept all\nReject all', 'popup').patterns).to.include('/accept all/gi');
+    });
+
+    it('drops page matches next to an age gate with a leave button, not next to a consent control', () => {
+        const gate = 'Adults only. You must be over 18 to enter.\nThis site uses cookies.\n\nOK\nLeave';
+        expect(checkHeuristicPatterns(gate, 'page').patterns).to.have.length(0);
+        const banner = 'Adults only. You must be over 18 to enter.\nThis site uses cookies.\n\nAccept all\nReject all';
+        expect(checkHeuristicPatterns(banner, 'page').patterns.length).to.be.greaterThan(0);
+    });
+
+    it('detects Italian, Dutch and German cookie notices', () => {
+        expect(checkHeuristicPatterns('Questo sito utilizza cookie tecnici. Accetta tutti', 'popup').patterns.length).to.be.greaterThan(0);
+        expect(
+            checkHeuristicPatterns('Wij en onze partners slaan informatie op en/of lezen deze.', 'popup').patterns.length,
+        ).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Auf dieser Seite werden Cookies verwendet.', 'popup').patterns.length).to.be.greaterThan(0);
+    });
+
+    it('hasHeuristicPatterns agrees with checkHeuristicPatterns on inputs and negatives', () => {
+        const texts = ['We accept all major credit cards.', 'Cookies help us.\nAccept all\nReject all', 'Contact\nUse of cookies\nImprint'];
+        for (const text of texts) {
+            for (const input of ['popup', 'page'] as const) {
+                const expected = checkHeuristicPatterns(text, input).patterns.length > 0;
+                expect(hasHeuristicPatterns(text, input), `${input}: ${text}`).to.equal(expected);
+            }
+        }
+    });
+
+    it('takes the line or neighbouring lines as the context', () => {
+        const text = 'one\ntwo\nthree four\nfive\nsix';
+        const at = text.indexOf('four');
+        expect(negativeContext(text, at, at + 4, { name: 'n', lines: 0 })).to.equal('three four');
+        expect(negativeContext(text, at, at + 4, { name: 'n', lines: [1, 0] })).to.equal('two\nthree four');
+        expect(negativeContext(text, at, at + 4, { name: 'n', window: 3 })).to.equal('ee four\nfi');
+    });
+});
+
+describe('requiredLiterals', () => {
+    it('matches the generated table for the built-in patterns (run npm run build-heuristic-literals if not)', () => {
+        const expected: Record<string, string[]> = {};
+        for (const p of DETECT_PATTERNS) {
+            const pattern = p instanceof RegExp ? p : p.pattern;
+            expected[pattern.toString()] = requiredLiterals(pattern);
+        }
+        expect(DETECT_PATTERN_LITERALS).to.deep.equal(expected);
+        expect(DETECT_LITERAL_INDEX).to.deep.equal(literalIndexSource(Object.values(expected).flat()));
+    });
+
+    it('finds literals every match contains', () => {
+        expect(requiredLiterals(/accept all/gi)).to.deep.equal(['accept all']);
+        expect(requiredLiterals(/\b(?:our|unseren) \d{2,4} (?:partners|partnern)\b/gi)).to.deep.equal(['partners', 'partnern']);
+        expect(requiredLiterals(/\bcookies? zum einsatz\b|\beinsatz von cookies\b/gi)).to.deep.equal([
+            ' zum einsatz',
+            'einsatz von cookies',
+        ]);
+    });
+
+    it('finds none when a part is optional or unknown', () => {
+        expect(requiredLiterals(/(?:cookie)?/gi)).to.deep.equal([]);
+        expect(requiredLiterals(/by continuing|\bab\b/gi)).to.deep.equal([]);
+    });
+
+    it('does not change results: the same patterns match as without the prefilter', () => {
+        const plain = DETECT_PATTERNS.filter((p): p is RegExp => p instanceof RegExp);
+        const texts = ['ACCEPT ALL COOKIES', 'We use analytics Cookies', 'nothing here', 'Tout refuser', 'Utilizziamo i cookie', ''];
+        for (const t of texts) {
+            const expected = plain.filter((p) => t.match(p)).map(String);
+            expect(checkHeuristicPatterns(t, undefined, { patterns: plain, negatives: [] }).patterns).to.deep.equal(expected);
+        }
+    });
+
+    it('never skips a custom pattern, which has no generated literals', () => {
+        expect(DETECT_PATTERN_LITERALS['/zorblax consent/gi']).to.equal(undefined);
+        expect(
+            checkHeuristicPatterns('Zorblax consent', undefined, { patterns: [/zorblax consent/gi], negatives: [] }).patterns,
+        ).to.deep.equal(['/zorblax consent/gi']);
+    });
+});
+
 describe('checkHeuristicPatterns with Danish popups', () => {
     it('detects Danish cookie notices', () => {
         const texts = [
@@ -228,6 +351,49 @@ describe('isExcludedPopup', () => {
 
     it('does not flag empty strings', () => {
         expect(isExcludedPopup('')).to.be.false;
+    });
+
+    it('flags age gates in other languages', () => {
+        expect(isExcludedPopup('Diese Website ist nur für Erwachsene. Du musst mindestens 18 Jahre alt sein.')).to.be.true;
+        expect(isExcludedPopup('Sitio solo para mayores de edad. Debes tener más de 18 años.')).to.be.true;
+    });
+
+    it('does not flag a cookie banner that states an age in passing', () => {
+        expect(isExcludedPopup('By using this site you confirm you are over 18. We use cookies. Accept cookies Reject cookies')).to.be
+            .false;
+    });
+
+    it('does not flag a passive age statement whose notice has its own cookie or close control', () => {
+        expect(isExcludedPopup('We use cookies.\nBy using this site you confirm you are over 18.\nCustomise\nAccept')).to.be.false;
+        expect(isExcludedPopup('Nur für Erwachsene über 18 Jahre.\nWir verwenden Cookies.\nCookies verwalten\nAkzeptieren')).to.be.false;
+        expect(isExcludedPopup('You must be of legal age to enter.\nThis site uses cookies.\nClose this popup')).to.be.false;
+    });
+
+    it('flags an age gate with its own leave button even when it offers cookie settings', () => {
+        expect(isExcludedPopup('Solo para mayores de edad.\nEntrar\nNo, abandonar sitio\nConfigurar cookies')).to.be.true;
+        expect(isExcludedPopup('Alleen voor 18 jaar of ouder.\nIk ben 18+\nIk ben onder 18\nMeer opties')).to.be.true;
+    });
+
+    it('flags an age gate whose OK sits next to a leave button', () => {
+        expect(isExcludedPopup('You must be over 18. We use cookies. Accept all\nOK\nLeave')).to.be.true;
+    });
+
+    it('flags a license agreement that mentions cookies', () => {
+        const agreement =
+            'Our End-User License Agreement has changed. Please read and accept it to keep using the software.\n' +
+            'Privacy. Our websites may use cookies; you can reject the use of cookies in your browser settings.\n' +
+            'Limitation of Liability. To the extent permitted by law, the vendor is not liable for indirect damages.\n' +
+            'Governing Law. This agreement is governed by the laws of the vendor’s country.\n' +
+            'Accept\nDecline';
+        expect(isExcludedPopup(agreement)).to.be.true;
+    });
+
+    it('does not flag a consent dialog that uses legal wording in passing', () => {
+        expect(
+            isExcludedPopup(
+                'We and our partners use cookies and other technologies (together hereinafter: "Cookies") to store and/or access device information.\nAccept all\nReject all',
+            ),
+        ).to.be.false;
     });
 });
 

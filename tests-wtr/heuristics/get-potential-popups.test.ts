@@ -295,7 +295,7 @@ describe('getPotentialPopups', () => {
                 <div role="dialog" style="position: absolute; top: 0;">
                     <h2>Age verification</h2>
                     <p>This website contains adult material and is only accessible to persons over 18 years of age. This site uses cookies.</p>
-                    <div style="position: sticky; bottom: 0;"><button>Accept all</button></div>
+                    <div style="position: sticky; bottom: 0;"><div><button>Accept all</button></div><div><button>Leave</button></div></div>
                 </div>
             `;
             const popups = getActionablePopups('tier2', 1000).filter((p) => container.contains(p.element));

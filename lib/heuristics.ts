@@ -10,7 +10,7 @@ export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = P
         mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
     const popups = getPotentialPopups(timeout).filter((popup) => {
         const popupText = popup.text?.trim();
-        if (!popupText || isExcludedPopup(popupText) || !hasHeuristicPatterns(popupText)) {
+        if (!popupText || isExcludedPopup(popupText) || !hasHeuristicPatterns(popupText, 'popup')) {
             return false;
         }
         popup.regexClassification = classifyPopup(popup.buttons);
@@ -90,7 +90,7 @@ const MAX_FRAGMENT_EXPANSION_DEPTH = 6;
  * If it does not look like a consent popup on its own, use the nearest ancestor that does.
  */
 function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): PopupData {
-    if (hasHeuristicPatterns(popup.text) && hasPopupButtons(popup.text, popup.buttons)) {
+    if (hasHeuristicPatterns(popup.text, 'popup') && hasPopupButtons(popup.text, popup.buttons)) {
         return popup;
     }
     let el = getComposedParent(popup.element);
@@ -101,7 +101,7 @@ function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): Pop
         }
         // check the text first: it is cheaper than collecting buttons
         const text = getElementText(el);
-        if (!text || !hasHeuristicPatterns(text)) {
+        if (!text || !hasHeuristicPatterns(text, 'popup')) {
             continue;
         }
         const root = toPopupData(el, shadowHosts, text);
