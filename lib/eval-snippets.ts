@@ -201,6 +201,7 @@ export const snippets = {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
+    EVAL_NORGESKART_TEST: () => localStorage.getItem('cookie_consent') === 'denied',
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
