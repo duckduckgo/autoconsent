@@ -1,0 +1,33 @@
+{
+    "name": "ministero-giustizia-it",
+    "vendorUrl": "https://www.giustizia.it/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookie-container.cookie-container-wrapper"],
+    "detectCmp": [{ "exists": "#cookie-container #accetta-cookie .cookie-container-checkboxes" }],
+    "detectPopup": [{ "visible": "#cookie-container #accetta-cookie" }],
+    "optIn": [
+        {
+            "click": "#cookie-container .cookie-container-checkboxes input[type=checkbox]:not(:checked):not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#cookie-container .save-preferences .accept" }
+    ],
+    "optOut": [
+        {
+            "click": "#cookie-container .cookie-container-checkboxes input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#cookie-container .save-preferences .accept" }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "acconsenti-cookie=1" }, { "cookieContains": "cookie-consent=1" }]
+        }
+    ]
+}
