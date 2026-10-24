@@ -76,6 +76,8 @@ export const DETECT_PATTERNS = [
     // NL
     /gebruik.{0,100}van.{0,100}cookies/gi,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
+    // "(onze) partners gebruiken cookies", "wij gebruiken functionele cookies"
+    /(?:we|wij|partners) gebruiken(?: \w+)? cookies/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
 
     /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,

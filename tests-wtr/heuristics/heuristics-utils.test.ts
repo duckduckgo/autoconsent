@@ -178,6 +178,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch cookie notices', () => {
+        const texts = [
+            'Zonneplan en partners gebruiken cookies zodat onze site soepel blijft werken.',
+            'Wij gebruiken functionele cookies.',
+            'We gebruiken cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Wij gebruiken alleen groene stroom van onze partners').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Danish popups', () => {
     it('detects Danish cookie notices', () => {
         const texts = [
