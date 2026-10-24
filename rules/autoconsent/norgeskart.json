@@ -3,9 +3,15 @@
     "_metadata": { "vendorUrl": "https://norgeskart.no/" },
     "runContext": { "urlPattern": "^https?://(www\\.)?norgeskart\\.no/" },
     "prehideSelectors": ["#root .chakra-stack:has(> h4.chakra-heading + p + .chakra-stack > button.chakra-button + button.chakra-button)"],
-    "detectCmp": [{ "exists": "#root .chakra-stack:has(> h4.chakra-heading + p + .chakra-stack > button.chakra-button + button.chakra-button)" }],
-    "detectPopup": [{ "visible": "#root .chakra-stack:has(> h4.chakra-heading + p + .chakra-stack > button.chakra-button + button.chakra-button)" }],
+    "detectCmp": [
+        { "exists": "#root .chakra-stack:has(> h4.chakra-heading + p + .chakra-stack > button.chakra-button + button.chakra-button)" }
+    ],
+    "detectPopup": [
+        { "visible": "#root .chakra-stack:has(> h4.chakra-heading + p + .chakra-stack > button.chakra-button + button.chakra-button)" }
+    ],
     "optIn": [{ "waitForThenClick": "#root .chakra-stack:has(> h4.chakra-heading + p) > .chakra-stack > button.chakra-button:last-child" }],
-    "optOut": [{ "waitForThenClick": "#root .chakra-stack:has(> h4.chakra-heading + p) > .chakra-stack > button.chakra-button:first-child" }],
+    "optOut": [
+        { "waitForThenClick": "#root .chakra-stack:has(> h4.chakra-heading + p) > .chakra-stack > button.chakra-button:first-child" }
+    ],
     "test": [{ "eval": "EVAL_NORGESKART_TEST" }]
 }
