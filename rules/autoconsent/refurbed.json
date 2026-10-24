@@ -1,0 +1,10 @@
+{
+    "name": "refurbed",
+    "vendorUrl": "https://www.refurbed.com/",
+    "prehideSelectors": ["#cookiebanner:has([data-test=cookie-modal])"],
+    "detectCmp": [{ "exists": "#cookiebanner [data-test=cookie-modal] #acceptNecessaryCookiesBtn" }],
+    "detectPopup": [{ "visible": "#cookiebanner [data-test=cookie-modal]" }],
+    "optIn": [{ "waitForThenClick": "#cookiebanner #acceptAllCookiesBtn" }],
+    "optOut": [{ "waitForThenClick": "#cookiebanner #acceptNecessaryCookiesBtn" }],
+    "test": [{ "cookieContains": "refbConsent=" }, { "cookieContains": "%22consent_date%22:%22%22", "negated": true }]
+}
