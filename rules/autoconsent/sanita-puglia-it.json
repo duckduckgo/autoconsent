@@ -1,0 +1,40 @@
+{
+    "name": "sanita-puglia-it",
+    "vendorUrl": "https://sanita.puglia.it/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?sanita\\.puglia\\.it/"
+    },
+    "prehideSelectors": ["#cookiebar"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebar #cookiebar-accept-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebar #cookiebar-accept-all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebar-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebar .cookiebar-btn[data-target='#cookiebar-preferences']"
+        },
+        {
+            "waitForThenClick": "#cookiebar-preferences #cookie-reject-all",
+            "comment": "Rifiuta tutto"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-agreed-categories=[\"technical\"]"
+        }
+    ]
+}
