@@ -1,0 +1,16 @@
+{
+    "name": "ing-pl",
+    "vendorUrl": "https://www.ing.pl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://login\\.ingbank\\.pl/"
+    },
+    "prehideSelectors": ["#cookie-banner-region"],
+    "detectCmp": [{ "exists": ["cookie-banner", "ing-dialog"] }],
+    "detectPopup": [{ "visible": ["cookie-banner", "ing-dialog", "[role=dialog]"] }],
+    "optIn": [{ "waitForThenClick": ["cookie-banner", "ing-button.cookie-banner-btn[slot=next]"] }],
+    "optOut": [{ "waitForThenClick": ["cookie-banner", "ing-button.cookie-banner-btn[slot=back]"] }],
+    "test": [{ "waitForVisible": ["cookie-banner", "ing-dialog", "[role=dialog]"], "check": "none", "timeout": 2000 }]
+}
