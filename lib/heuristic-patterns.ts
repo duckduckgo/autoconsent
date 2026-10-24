@@ -168,6 +168,7 @@ export const DETECT_PATTERNS = [
     // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
     /(?:usiamo|utilizziamo).{0,20}cookie/gi,
     /sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi,
+    /(?:fa|facciamo) uso (?:di|dei) cookie/gi,
     /noi e i nostri.{0,20}partner.{0,100}cookie/gi,
     /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
 
@@ -896,4 +897,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "подтвердить", "подтверждаю выбор", "сохранить настройки", "сохранить и закрыть"
     /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
     'продолжить',
+
+    // Italian (IT)
+    /^chiudi( (il |l)?(banner|avviso|messaggio|informativa))?\.?$/is,
 ];

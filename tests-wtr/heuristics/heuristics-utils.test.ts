@@ -128,6 +128,7 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             'Questo sito utilizza i cookie per migliorare la tua esperienza',
             'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
             'Archiviare e/o accedere a informazioni su un dispositivo',
+            "Questo sito fa uso di cookie, anche di terze parti. Continuando la navigazione se ne accetta l'utilizzo.",
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -375,6 +376,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Закрыть уведомление о cookie')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Больше не показывать')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
+    });
+
+    it('matches Italian close buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Chiudi')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Chiudi il banner')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Accetta e chiudi')).to.not.equal('acknowledge');
+        expect(classifyButtonTextRegex('Rifiuta e chiudi')).to.equal('reject');
     });
 
     it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
