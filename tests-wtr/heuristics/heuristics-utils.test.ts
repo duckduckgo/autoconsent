@@ -183,6 +183,8 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            'Realkredit Danmarks brug af cookies og behandling af personoplysninger',
+            'Du kan læse mere om brugen af cookies og om vores behandling af personoplysninger.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -344,6 +346,8 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Afvis cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Kun nødvendige')).to.equal('reject');
         expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('OK til nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('OK til alle')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
     });

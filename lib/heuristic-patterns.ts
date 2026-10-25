@@ -182,6 +182,8 @@ export const DETECT_PATTERNS = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /bruger cookies/gi,
+    // e.g. "brug af cookies", "læs mere om brugen af cookies"
+    /brug(?:en)? af cookies/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -368,6 +370,9 @@ const REJECT_PATTERNS_DANISH = [
 
     // (accept/allow) only necessary cookies
     /^(accepter\s+|tillad\s+)?(kun|udelukkende)\s+(strengt\s+)?nødvendige( cookies)?$/is,
+
+    // "ok til (kun) nødvendige" (ok to necessary only)
+    /^ok til\s+(kun\s+)?(strengt\s+)?nødvendige( cookies)?$/is,
 
     // "nej tak" (no thanks)
     /^nej(,?\s+tak)?$/is,
