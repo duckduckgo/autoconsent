@@ -1,0 +1,50 @@
+{
+    "name": "bootstrap-cookie-consent-settings",
+    "prehideSelectors": ["#bcb-modal", "#bccs-modal", "#bootstrapCookieConsentSettingsModal"],
+    "detectCmp": [
+        {
+            "exists": "#bcb-buttonAgree, #bccs-buttonAgree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#bcb-modal, #bccs-modal, #bootstrapCookieConsentSettingsModal",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "#bcb-buttonAgree, #bccs-buttonAgree"
+        }
+    ],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "if": {
+                "exists": "#bcb-buttonDoNotAgree, #bccs-buttonDoNotAgree"
+            },
+            "then": [
+                {
+                    "click": "#bcb-buttonDoNotAgree, #bccs-buttonDoNotAgree"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#bcb-options input[type=checkbox]:checked:not(:disabled), #bccs-options input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#bcb-buttonSave, #bccs-buttonSave"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-consent-settings="
+        }
+    ]
+}
