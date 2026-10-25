@@ -1,0 +1,29 @@
+{
+    "name": "teknikdelar",
+    "vendorUrl": "https://www.teknikdelar.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(teknikdelar\\.se|teknikkdeler\\.no|teknikdele\\.dk|tekniikkaosat\\.fi)/"
+    },
+    "prehideSelectors": [".cookie-alert"],
+    "detectCmp": [{ "exists": ".cookie-alert .inner-cookie-alert .consent-actions" }],
+    "detectPopup": [{ "visible": ".cookie-alert .inner-cookie-alert .consent-actions" }],
+    "optIn": [
+        {
+            "if": { "exists": ".cookie-alert-v2" },
+            "then": [{ "waitForThenClick": ".cookie-alert-v2 .consent-actions button:first-of-type" }],
+            "else": [{ "waitForThenClick": ".cookie-alert .consent-actions .btn-primary" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".cookie-alert-v2" },
+            "then": [{ "waitForThenClick": ".cookie-alert-v2 .consent-actions button:nth-of-type(2)" }],
+            "else": [
+                { "waitForThenClick": ".cookie-alert .consent-actions .btn-outline-light" },
+                { "waitForVisible": ".cookie-alert .consent-settings" },
+                { "click": ".cookie-alert .consent-settings input:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": ".cookie-alert .consent-settings button[type=submit]" }
+            ]
+        }
+    ]
+}
