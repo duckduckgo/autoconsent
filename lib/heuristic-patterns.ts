@@ -163,6 +163,8 @@ export const DETECT_PATTERNS = [
     /(?:собира[а-яё]*|сбор|применя[а-яё]*|сохраня[а-яё]*|размеща[а-яё]*|устанавлива[а-яё]*).{0,30}(?:файл[а-яё]*[\s-]+)?(?:cookie|куки)/gi,
     // "файлы cookie" / "cookie-файлы" / "куки-файлы" in any phrasing
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
+    // e.g. "пользуясь сайтом, вы принимаете политику куки", "вы соглашаетесь с политикой cookie"
+    /(?:пользуясь|принима[а-яё]*|соглаша[а-яё]*)\s.{0,40}(?:cookie|куки)/gi,
 
     // Italian (IT)
     // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
