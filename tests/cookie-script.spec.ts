@@ -7,4 +7,8 @@ generateCMPTests('cookie-script', [
     'https://www.fairlawns.co.uk/',
     'https://www.aktionspreis.de/',
     'https://ikalender.org/',
+    // new banner layout without #cookiescript_injected
+    'https://mitsdu.dk/',
+    'https://n8n.io/',
+    'https://hearthis.at/',
 ]);
