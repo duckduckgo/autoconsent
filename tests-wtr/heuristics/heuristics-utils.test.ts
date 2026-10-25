@@ -194,6 +194,24 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch cookie notices', () => {
+        const texts = [
+            // groene.nl
+            'Groene.nl gebruikt cookies om het websitegebruik geanonimiseerd te analyseren en noodzakelijke functionaliteiten zoals inloggen mogelijk te maken.',
+            'Deze website gebruikt functionele cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Deze bakker gebruikt roomboter in alle koekjes').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Deze site gebruikt geen cookies').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)

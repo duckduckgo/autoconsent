@@ -77,6 +77,8 @@ export const DETECT_PATTERNS = [
     /gebruik.{0,100}van.{0,100}cookies/gi,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
+    // "<site> gebruikt (functionele) cookies"
+    /gebruikt(?! geen)(?: \w+)? cookies/gi,
 
     /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
     /alleen.{0,100}noodzakelijke?\b/gi,
