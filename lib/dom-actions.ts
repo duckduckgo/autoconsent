@@ -240,7 +240,9 @@ export class DomActions implements DomActionsProvider {
                 observer.disconnect();
                 resolve(true);
             });
-            observer.observe(node[0], {
+            // observe the document when watching <html>, so that document.open() replacing it does not detach the observer
+            const target = node[0] === document.documentElement ? document : node[0];
+            observer.observe(target, {
                 subtree: true,
                 childList: true,
                 attributes: true,

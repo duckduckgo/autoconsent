@@ -16,6 +16,24 @@ describe('waitForMutation', () => {
         expect(await resultPromise).to.be.true;
     });
 
+    it('should resolve if the html element is replaced', async () => {
+        // Given
+        const domActions = instantiateDomActions();
+        const originalHtml = document.documentElement;
+        const replacementHtml = document.createElement('html');
+
+        // When
+        const resultPromise = domActions.waitForMutation('html', 100);
+        document.replaceChild(replacementHtml, originalHtml);
+
+        // Then
+        try {
+            expect(await resultPromise).to.be.true;
+        } finally {
+            document.replaceChild(originalHtml, replacementHtml);
+        }
+    });
+
     it('should throw if the dom does not change by timeout', async () => {
         // Given
         const domActions = instantiateDomActions();

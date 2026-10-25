@@ -4,9 +4,18 @@
     "detectCmp": [{ "exists": ".fc-consent-root" }],
     "detectPopup": [{ "exists": ".fc-dialog-container" }],
     "optOut": [
-        { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
-        { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
-        { "click": ".fc-confirm-choices", "optional": true }
+        {
+            "if": { "exists": ".fc-li-only-placeholder" },
+            "then": [
+                { "click": ".fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-data-preferences-dialog .fc-confirm-choices" }
+            ],
+            "else": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
     ],
     "optIn": [{ "click": ".fc-cta-consent" }]
 }
