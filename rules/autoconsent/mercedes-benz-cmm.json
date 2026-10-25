@@ -1,0 +1,10 @@
+{
+    "name": "mercedes-benz-cmm",
+    "_metadata": { "vendorUrl": "https://www.mercedes-benz.com/" },
+    "prehideSelectors": ["cmm-cookie-banner"],
+    "detectCmp": [{ "exists": ["cmm-cookie-banner", ".cmm-cookie-banner__wrapper"] }],
+    "detectPopup": [{ "visible": ["cmm-cookie-banner", ".cmm-cookie-banner__wrapper.visible"] }],
+    "optIn": [{ "waitForThenClick": ["cmm-cookie-banner", "[data-test=handle-accept-all-button]"] }],
+    "optOut": [{ "waitForThenClick": ["cmm-cookie-banner", "[data-test=handle-deny-button]"] }],
+    "test": [{ "waitForVisible": ["cmm-cookie-banner", ".cmm-cookie-banner__wrapper.visible"], "check": "none", "timeout": 2000 }]
+}
