@@ -1,0 +1,25 @@
+{
+    "name": "jobbsafari",
+    "vendorUrl": "https://jobbsafari.se/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?jobbsafari\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "div[role=dialog] form:has(a[href=\"/compliance\"]) button[type=submit]" }],
+    "detectPopup": [{ "visible": "div[role=dialog] form:has(a[href=\"/compliance\"])" }],
+    "optIn": [{ "waitForThenClick": "div[role=dialog] form:has(a[href=\"/compliance\"]) button[type=submit]" }],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role=dialog] form:has(a[href=\"/compliance\"]) button[type=button]",
+            "retry": 5,
+            "retryInterval": 500
+        },
+        { "waitFor": "div[role=dialog] form #cookie-consent-marketing", "timeout": 3000 },
+        { "click": "div[role=dialog] form #cookie-consent-preferences:checked", "optional": true },
+        { "click": "div[role=dialog] form #cookie-consent-statistics:checked", "optional": true },
+        { "click": "div[role=dialog] form #cookie-consent-marketing:checked", "optional": true },
+        { "waitForThenClick": "div[role=dialog] form:has(#cookie-consent-marketing) button[type=submit]" }
+    ],
+    "test": [{ "eval": "EVAL_JOBBSAFARI_TEST" }]
+}
