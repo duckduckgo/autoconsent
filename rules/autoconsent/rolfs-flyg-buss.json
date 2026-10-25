@@ -1,0 +1,14 @@
+{
+    "name": "rolfs-flyg-buss",
+    "vendorUrl": "https://www.rolfsbuss.se/",
+    "prehideSelectors": ["#cookieConsentModal.cookie-consent-overlay"],
+    "detectCmp": [{ "exists": "#cookieConsentModal.cookie-consent-overlay [data-cookie-save]" }],
+    "detectPopup": [{ "visible": "#cookieConsentModal.cookie-consent-overlay" }],
+    "optIn": [{ "waitForThenClick": "#cookieConsentModal [data-cookie-accept-all]" }],
+    "optOut": [
+        { "click": "#cookieConsentModal input[type=checkbox]:checked", "all": true, "optional": true },
+        { "waitForThenClick": "#cookieConsentModal [data-cookie-save]" },
+        { "waitForVisible": "#cookieConsentModal", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "visible": "#cookieConsentModal", "check": "none" }]
+}

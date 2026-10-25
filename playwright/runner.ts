@@ -75,6 +75,7 @@ type TestOptions = {
     expectPopupOpen: boolean;
     expectedRuns: number;
     gpc: boolean;
+    hideWebdriver: boolean;
 };
 // A frame's content script, reached through either the isolated-world transport or a main-world Frame.
 type ContentScriptTarget = {
@@ -93,6 +94,7 @@ const defaultOptions: TestOptions = {
     expectPopupOpen: true,
     expectedRuns: 1,
     gpc: false,
+    hideWebdriver: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -182,6 +184,9 @@ class TestRun {
         if (this.options.gpc) {
             await this.enableGpc();
         }
+        if (this.options.hideWebdriver) {
+            await this.hideWebdriver();
+        }
         try {
             this.response = await this.page.goto(this.url, { waitUntil: 'commit' });
 
@@ -248,6 +253,13 @@ class TestRun {
         await this.page.setExtraHTTPHeaders({ 'Sec-GPC': '1' });
         await this.page.addInitScript(() => {
             Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true, configurable: true });
+        });
+    }
+
+    // some sites suppress their consent popup when navigator.webdriver is set
+    async hideWebdriver() {
+        await this.page.addInitScript(() => {
+            Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false, configurable: true });
         });
     }
 
