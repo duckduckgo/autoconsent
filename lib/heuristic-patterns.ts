@@ -182,6 +182,11 @@ export const DETECT_PATTERNS = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /bruger cookies/gi,
+
+    // Norwegian (NO)
+    // e.g. "vi bruker informasjonskapsler", "nettstedet benytter cookies", "bruk av informasjonskapsler"
+    /(?:bruker|benytter)(?: \w+)? (?:informasjonskapsl[ae]r|cookies)/gi,
+    /bruk av (?:informasjonskapsl[ae]r|cookies)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -373,6 +378,17 @@ const REJECT_PATTERNS_DANISH = [
     /^nej(,?\s+tak)?$/is,
 ];
 
+const REJECT_PATTERNS_NORWEGIAN = [
+    // avvis / avvis alle / avslå (reject verbs)
+    /(^|\s)(avvis|avslå)/is,
+
+    // (accept/allow/use) only necessary cookies
+    /^(godta\s+|aksepter\s+|tillat\s+|bruk\s+)?(bare|kun)\s+(strengt\s+)?nødvendige( informasjonskapsl[ae]r| cookies)?$/is,
+
+    // "nei takk" (no thanks)
+    /^nei(,?\s+takk)?$/is,
+];
+
 const REJECT_PATTERNS_CATALAN = [/(^|\s)rebutj/is, 'no accepto', 'no, gràcies'];
 
 const REJECT_PATTERNS_GALICIAN = [/(^|\s)rexeitar/is];
@@ -439,6 +455,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_SPANISH,
     ...REJECT_PATTERNS_SWEDISH,
     ...REJECT_PATTERNS_DANISH,
+    ...REJECT_PATTERNS_NORWEGIAN,
     ...REJECT_PATTERNS_CATALAN,
     ...REJECT_PATTERNS_GALICIAN,
     ...REJECT_PATTERNS_BASQUE,
