@@ -1,0 +1,42 @@
+{
+    "name": "bulletin-nu",
+    "vendorUrl": "https://bulletin.nu/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bulletin\\.nu/"
+    },
+    "prehideSelectors": ["[class*='cookie-message-mobile_container']"],
+    "detectCmp": [{ "exists": "[class*='cookie-message-mobile_container'] [class*='cookie-message-mobile_dismissButton']" }],
+    "detectPopup": [{ "visible": "[class*='cookie-message-mobile_container']" }],
+    "optIn": [
+        {
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
+            "timeout": 8000,
+            "optional": true
+        },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [{ "click": ".fc-cta-consent" }]
+        },
+        { "waitForThenClick": "[class*='cookie-message-mobile_dismissButton']" }
+    ],
+    "optOut": [
+        { "hide": "[class*='cookie-message-mobile_container']" },
+        {
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
+            "timeout": 8000,
+            "optional": true
+        },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ]
+}
