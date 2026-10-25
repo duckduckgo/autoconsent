@@ -1,0 +1,39 @@
+{
+    "name": "sfanytime",
+    "vendorUrl": "https://www.sfanytime.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(sfanytime\\.com|blockbuster\\.dk)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#__next > div.fixed:has(a[href$='/cookies']) button.bg-cta"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__next > div.fixed:has(a[href$='/cookies']) button.bg-cta"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__next > div.fixed:has(a[href$='/cookies']) button.bg-cta"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#__next > div.fixed:has(a[href$='/cookies']) button.bg-transparent"
+        },
+        {
+            "waitForVisible": "dialog[open] input[name^='cookiesetting.']"
+        },
+        {
+            "waitForThenClick": "dialog[open]:has(input[name^='cookiesetting.']) > div > div:last-child > button"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_SFANYTIME_TEST"
+        }
+    ]
+}
