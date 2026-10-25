@@ -174,6 +174,8 @@ export const DETECT_PATTERNS = [
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
     /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // e.g. "samtycke till kakor"
+    /samtycke till (?:cookies|kakor)/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
@@ -357,6 +359,9 @@ const REJECT_PATTERNS_SWEDISH = [
     /fortsätt utan att (acceptera|godkänna)/is,
 
     /strikt nödvändig/is,
+
+    // e.g. "nej, jag samtycker inte"
+    /^(nej,?\s+)?(jag\s+)?samtycker inte/is,
 
     'tillåt inte cookies',
     'jag accepterar endast grundläggande kakor',

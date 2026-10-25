@@ -150,6 +150,7 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
             'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
             'Vi använder cookies för att förbättra din upplevelse',
             'Webbplatsen använder kakor',
+            'Samtycke till kakor',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -158,6 +159,7 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
 
     it('does not detect unrelated Swedish text', () => {
         expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Vi vill använda pannkakor i receptet').patterns).to.have.length(0);
     });
 });
 
@@ -290,6 +292,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
+    it('matches Swedish "do not consent" variants', () => {
+        expect(classifyButtonTextRegex('Nej, jag samtycker inte')).to.equal('reject');
+        expect(classifyButtonTextRegex('Jag samtycker inte')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja, jag samtycker')).to.equal('other');
     });
 
     it('returns other for empty string', () => {
