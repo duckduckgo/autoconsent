@@ -1,0 +1,21 @@
+{
+    "name": "bankid",
+    "vendorUrl": "https://www.bankid.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bankid\\.com/"
+    },
+    "prehideSelectors": ["[data-testid=CookieBanner]"],
+    "detectCmp": [{ "exists": "[data-testid=CookieBanner]" }],
+    "detectPopup": [{ "visible": "[data-testid=CookieBanner]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=CookieBanner] button.btn-tertiary" }],
+    "optOut": [
+        { "waitForThenClick": "[data-testid=CookieBanner] button.underline" },
+        { "waitForVisible": "[data-testid=CookieModal]" },
+        {
+            "if": { "exists": "[data-testid=CookieModal] input[type=checkbox]:checked" },
+            "then": [{ "click": "[data-testid=CookieModal] input[type=checkbox]:checked" }]
+        },
+        { "waitForThenClick": "[data-testid=CookieModal] button.btn-tertiary" }
+    ],
+    "test": [{ "cookieContains": "mtm_consent_removed" }]
+}
