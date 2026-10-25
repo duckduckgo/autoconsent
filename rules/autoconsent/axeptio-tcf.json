@@ -1,0 +1,24 @@
+{
+    "name": "axeptio-tcf",
+    "prehideSelectors": ["body > [style*='--ax-primary-color']"],
+    "detectCmp": [
+        {
+            "exists": ["body > [style*='--ax-primary-color']", "#axeptio_btn_acceptAll"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["body > [style*='--ax-primary-color']", ".modal.show #axeptio_btn_acceptAll"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["body > [style*='--ax-primary-color']", "#axeptio_btn_acceptAll"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["body > [style*='--ax-primary-color']", "#axeptio_btn_dismiss,.modal-continue a"]
+        }
+    ]
+}
