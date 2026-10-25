@@ -1,0 +1,17 @@
+{
+    "name": "smartweb",
+    "_metadata": {
+        "vendorUrl": "https://www.smartweb.dk/"
+    },
+    "prehideSelectors": [".w-cookie"],
+    "detectCmp": [{ "exists": ".w-cookie form[data-group='w-cookie-form'] button[name='accept_all']" }],
+    "detectPopup": [{ "visible": ".w-cookie form[data-group='w-cookie-form']" }],
+    "optIn": [{ "waitForThenClick": ".w-cookie button[name='accept_all']" }],
+    "optOut": [
+        {
+            "if": { "exists": ".w-cookie input[type='checkbox']:not([disabled]):checked" },
+            "then": [{ "click": ".w-cookie input[type='checkbox']:not([disabled]):checked", "all": true }]
+        },
+        { "waitForThenClick": ".w-cookie button[name='accept']" }
+    ]
+}
