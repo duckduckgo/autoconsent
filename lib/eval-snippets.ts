@@ -170,6 +170,9 @@ export const snippets = {
         return !!levels && Object.keys(levels).length > 0 && Object.values(levels).every((v) => !v);
     },
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
+    EVAL_EDNIA_TEST: () =>
+        localStorage.getItem('cookiePromptV2') === '"responded"' &&
+        Object.values(JSON.parse(localStorage.getItem('cookieComplianceV2'))).every((v) => v === false),
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
     EVAL_ETSY_0: () =>

@@ -1,0 +1,28 @@
+{
+    "name": "ednia.se",
+    "vendorUrl": "https://ednia.se/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ednia\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": "xpath///div[@role='dialog' or @role='alertdialog'][.//button[normalize-space(.)='Inställningar för cookies']]" }
+    ],
+    "detectPopup": [
+        { "visible": "xpath///div[@role='dialog' or @role='alertdialog'][.//button[normalize-space(.)='Inställningar för cookies']]" }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' or @role='alertdialog'][.//button[normalize-space(.)='Inställningar för cookies']]//button[normalize-space(.)='Acceptera alla cookies']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' or @role='alertdialog']//button[normalize-space(.)='Inställningar för cookies']"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' or @role='alertdialog'][.//h3[normalize-space(.)='Inställningar för cookies']]//button[normalize-space(.)='Spara inställningar']"
+        }
+    ],
+    "test": [{ "eval": "EVAL_EDNIA_TEST" }]
+}
