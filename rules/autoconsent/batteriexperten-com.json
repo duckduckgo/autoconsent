@@ -1,0 +1,22 @@
+{
+    "name": "batteriexperten.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?batteriexperten\\.com/"
+    },
+    "prehideSelectors": [".cookie-alert[role=\"dialog\"]"],
+    "detectCmp": [{ "exists": ".cookie-alert[role=\"dialog\"] .consent-actions" }],
+    "detectPopup": [{ "visible": ".cookie-alert[role=\"dialog\"] .consent-actions" }],
+    "optIn": [{ "waitForThenClick": ".cookie-alert[role=\"dialog\"] .consent-actions button.btn-success" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-alert[role=\"dialog\"] .consent-actions button.btn-outline-light" },
+        { "waitForVisible": ".cookie-alert[role=\"dialog\"] .consent-settings" },
+        {
+            "click": ".cookie-alert[role=\"dialog\"] .consent-settings input[type=\"checkbox\"]:not([disabled]):checked",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookie-alert[role=\"dialog\"] .consent-settings button[type=\"submit\"]" },
+        { "waitForVisible": ".cookie-alert[role=\"dialog\"]", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "__consent=1" }]
+}
