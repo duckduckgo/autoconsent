@@ -115,12 +115,13 @@ export const snippets = {
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_COOKIE_LAW_INFO_0: () => {
-        if (CLI.disableAllCookies) CLI.disableAllCookies();
-        if (CLI.reject_close) CLI.reject_close();
+        // legacy plugin versions have no CLI global
+        window.CLI?.disableAllCookies?.();
+        window.CLI?.reject_close?.();
         document.body.classList.remove('cli-barmodal-open');
         return true;
     },
-    EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
+    EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI || typeof window.cli_show_cookiebar === 'function',
     EVAL_COOKIE_MANAGER_POPUP_0: () =>
         JSON.parse(
             document.cookie

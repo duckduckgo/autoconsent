@@ -8,3 +8,6 @@ generateCMPTests('cookie-law-info', [
     'https://www.sbid.org/',
     'https://diroots.com/revit-plugins/renumber-revit-elements-using-a-prefix-a-suffix-and-a-multiplier-with-reordering/',
 ]);
+
+// legacy plugin version without the CLI global
+generateCMPTests('cookie-law-info', ['https://www.uniroma3.it/', 'https://www.getrix.it/']);
