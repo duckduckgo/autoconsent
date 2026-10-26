@@ -1,0 +1,19 @@
+{
+    "name": "games247-cookie-script",
+    "vendorUrl": "https://cookie-script.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?247[a-z]+\\.(com|org)/"
+    },
+    "prehideSelectors": ["#cookiescript_injected"],
+    "detectCmp": [{ "exists": "#site-script[data-game-type]" }, { "exists": "#cookiescript_injected" }],
+    "detectPopup": [
+        {
+            "visible": "#cookiescript_injected_wrapper",
+            "comment": "the site hides the banner on load and re-shows it 3s later; rejecting before the re-show leaves it on screen"
+        },
+        { "visible": "html:not(.hideCMPBanner) #cookiescript_injected" }
+    ],
+    "optOut": [{ "waitForThenClick": "#cookiescript_reject" }],
+    "optIn": [{ "waitForThenClick": "#cookiescript_accept" }],
+    "test": [{ "cookieContains": "\"action\":\"reject\"" }]
+}

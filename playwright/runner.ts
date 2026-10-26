@@ -75,6 +75,7 @@ type TestOptions = {
     expectPopupOpen: boolean;
     expectedRuns: number;
     gpc: boolean;
+    simulateUserInput: boolean;
 };
 // A frame's content script, reached through either the isolated-world transport or a main-world Frame.
 type ContentScriptTarget = {
@@ -93,6 +94,7 @@ const defaultOptions: TestOptions = {
     expectPopupOpen: true,
     expectedRuns: 1,
     gpc: false,
+    simulateUserInput: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -189,6 +191,10 @@ class TestRun {
                 await this.injectContentScripts();
             }
 
+            if (this.options.simulateUserInput) {
+                await this.simulateUserInput();
+            }
+
             await this.runAssertions();
         } catch (e) {
             if (e instanceof Error) {
@@ -241,6 +247,12 @@ class TestRun {
         }
         const title = await this.page.title().catch(() => '');
         return BOT_WALL_TITLE.test(title);
+    }
+
+    // some sites load their CMP only after the first user interaction
+    async simulateUserInput() {
+        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.evaluate(() => document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true })));
     }
 
     // emulate a browser that sends the Global Privacy Control signal
