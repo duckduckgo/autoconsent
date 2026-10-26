@@ -1,0 +1,85 @@
+{
+    "name": "skekraft.se",
+    "vendorUrl": "https://www.skekraft.se/",
+    "comment": "Opting out navigates to the cookie settings page and back, so a cookieContains self-test races with the navigation and is omitted.",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?skekraft\\.se/"
+    },
+    "prehideSelectors": ["#c-info"],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "#c-info #cookie-consent-form"
+                },
+                {
+                    "exists": "#cookie-consent input.cookie-no"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "comment": "the banner is server-rendered as shown and only hidden by script once the consent cookie is read",
+            "cookieContains": "cookieconsent=",
+            "negated": true
+        },
+        {
+            "if": {
+                "exists": "#c-info #cookie-consent-form"
+            },
+            "then": [
+                {
+                    "visible": "#c-info #cookie-consent-form"
+                }
+            ],
+            "else": [
+                {
+                    "exists": "#cookie-consent input.cookie-no"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#cookie-consent input.cookie-ok"
+            },
+            "then": [
+                {
+                    "click": "#cookie-consent input.cookie-ok"
+                },
+                {
+                    "click": "#cookie-consent button[type=submit]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#c-info #cookie-consent-ok"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie-consent input.cookie-no"
+            },
+            "then": [
+                {
+                    "click": "#cookie-consent input.cookie-no"
+                },
+                {
+                    "click": "#cookie-consent button[type=submit]"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "the reject option is only offered on the cookie settings page",
+                    "waitForThenClick": "#c-info a[href*=\"cookiesettings\"]"
+                }
+            ]
+        }
+    ]
+}
