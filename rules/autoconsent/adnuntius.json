@@ -1,0 +1,31 @@
+{
+    "name": "adnuntius",
+    "vendorUrl": "https://adnuntius.com/",
+    "prehideSelectors": [".adn-window.adn-message"],
+    "detectCmp": [
+        {
+            "exists": ".adn-window.adn-message .adn-footer button[onclick*='saveAll(false)']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".adn-window.adn-message"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".adn-window.adn-message .adn-footer button[onclick*='saveAll(true)']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".adn-window.adn-message .adn-footer button[onclick*='saveAll(false)']"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".adn-window.adn-message",
+            "check": "none"
+        }
+    ]
+}
