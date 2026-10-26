@@ -1,0 +1,10 @@
+{
+    "name": "bosch-dock-privacy-settings",
+    "vendorUrl": "https://www.bosch.com/",
+    "prehideSelectors": ["dock-privacy-settings"],
+    "detectCmp": [{ "exists": "dock-privacy-settings" }],
+    "detectPopup": [{ "visible": ["dock-privacy-settings", "#decline-all-modal-dialog button"] }],
+    "optIn": [{ "waitForThenClick": ["dock-privacy-settings", "#save-all-modal-dialog button"] }],
+    "optOut": [{ "waitForThenClick": ["dock-privacy-settings", "#decline-all-modal-dialog button"] }],
+    "test": [{ "waitForVisible": ["dock-privacy-settings", "#decline-all-modal-dialog button"], "timeout": 1000, "check": "none" }]
+}
