@@ -81,7 +81,7 @@ export type Config = {
     };
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
-    enableHeuristicHitTest: boolean; // also hit-test the viewport for popups that are not fixed, sticky or dialog-like
+    enableHeuristicHitTest: boolean; // hit-test the viewport before the DOM walk, to find popups the walk misses (e.g. not fixed, sticky or dialog-like)
     heuristicMode: HeuristicLevel; // controls the behavior of the heuristic popup detection.
 };
 

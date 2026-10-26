@@ -425,6 +425,39 @@ describe('getPotentialPopups', () => {
                 expect(inContainer(getActionablePopups('tier2', 1000, true))).to.be.empty;
             });
         });
+
+        it('keeps a banner with reject found by hit-testing next to its accept-only fragment found by the walk', () => {
+            // the walk keeps the fixed bar, an accept-only fragment that passes on its own; hit-testing the reject button reaches the banner
+            container.innerHTML = `
+                <div id="banner" style="position: fixed; bottom: 0; left: 0; right: 0; height: 200px;">
+                    <div id="bar" style="position: fixed; bottom: 120px; left: 0; right: 0; height: 40px;"><span>We use cookies to improve your experience.</span><button>Accept all</button></div>
+                    <button style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;">Reject all</button>
+                </div>
+            `;
+            const popups = inContainer(getPotentialPopups(1000, true));
+            expect(popups.map((p) => [p.element.id, p.source, p.regexClassification])).to.deep.equal([
+                ['bar', 'walk', 'tier2'],
+                ['banner', 'hitTest', 'reject'],
+            ]);
+            const actionable = inContainer(getActionablePopups('tier2', 1000, true));
+            expect(actionable.map((p) => p.element.id)).to.deep.equal(['banner']);
+        });
+    });
+
+    describe('order', () => {
+        it('sorts actionable popups by classification, and keeps search order within one', () => {
+            container.innerHTML = `
+                <div id="accept1" style="position: fixed; top: 0;"><p>We use cookies on this website.</p><button>Accept all</button></div>
+                <div id="ok" style="position: fixed; top: 100px;"><p>We use cookies on this website.</p><button>OK</button></div>
+                <div id="accept2" style="position: fixed; top: 200px;"><p>We use cookies on this website.</p><button>Accept all</button></div>
+            `;
+            const searchOrder = inContainer(getPotentialPopups(1000))
+                .filter((p) => p.regexClassification === 'tier2')
+                .map((p) => p.element.id);
+            expect(searchOrder).to.have.members(['accept1', 'accept2']);
+            const popups = inContainer(getActionablePopups('tier2', 1000));
+            expect(popups.map((p) => p.element.id)).to.deep.equal(['ok', ...searchOrder]);
+        });
     });
 
     describe('labels', () => {
