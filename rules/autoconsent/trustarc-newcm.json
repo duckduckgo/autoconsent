@@ -4,23 +4,23 @@
     "prehideSelectors": [".truste_popframe.trustarc_newcm_container"],
     "detectCmp": [
         {
-            "exists": [".truste_popframe.trustarc_newcm_container", "a.required, a.call"]
+            "exists": [".truste_popframe.trustarc_newcm_container", "a.required, a.call, button.required, button.call"]
         }
     ],
     "detectPopup": [
         {
-            "visible": [".truste_popframe.trustarc_newcm_container", "a.required, a.call"],
+            "visible": [".truste_popframe.trustarc_newcm_container", "a.required, a.call, button.required, button.call"],
             "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.call"]
+            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.call, button.call"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.required"]
+            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.required, button.required"]
         }
     ],
     "test": [
