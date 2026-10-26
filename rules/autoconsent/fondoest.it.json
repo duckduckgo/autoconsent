@@ -1,0 +1,16 @@
+{
+    "name": "fondoest.it",
+    "vendorUrl": "https://unknown",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fondoest\\.it/"
+    },
+    "prehideSelectors": ["#cookie-mask"],
+    "detectCmp": [{ "exists": "#cookie-mask #cookieContainer" }],
+    "detectPopup": [{ "visible": "#cookieContainer #btn-cookie-accept-edit" }],
+    "optIn": [{ "waitForThenClick": "#cookier-page-1 #btn-cookie-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieContainer #btn-cookie-accept-edit" },
+        { "waitForThenClick": "#cookier-page-2 #btn-cookie-accept-nothing" }
+    ],
+    "test": [{ "cookieContains": "cookie_accepted={\"nothing\": 1}" }]
+}
