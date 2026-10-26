@@ -95,6 +95,23 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German verb-final clauses', () => {
+    it('detects German cookie notices with the verb at the end', () => {
+        const texts = [
+            'Mit der Nutzung unserer Dienste erklären Sie sich damit einverstanden, dass wir Cookies verwenden.',
+            'Wir weisen darauf hin, dass wir technische Cookies einsetzen.',
+            'Indem wir Cookies nutzen, verbessern wir Ihr Erlebnis.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Wir backen Cookies nach Omas Rezept und verwenden nur Butter.').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
