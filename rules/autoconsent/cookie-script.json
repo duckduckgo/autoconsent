@@ -1,9 +1,9 @@
 {
     "name": "cookie-script",
     "vendorUrl": "https://cookie-script.com/",
-    "prehideSelectors": ["#cookiescript_injected"],
-    "detectCmp": [{ "exists": "#cookiescript_injected" }],
-    "detectPopup": [{ "visible": "#cookiescript_injected" }],
+    "prehideSelectors": ["#cookiescript_injected", ".cookiescript_banner_container [role=dialog]"],
+    "detectCmp": [{ "exists": "#cookiescript_injected, .cookiescript_banner_container" }],
+    "detectPopup": [{ "visible": "#cookiescript_injected, .cookiescript_banner_container [role=dialog]" }],
     "optOut": [
         {
             "if": { "exists": "#cookiescript_reject" },
@@ -19,17 +19,19 @@
                             "if": { "visible": "#cookiescript_save" },
                             "then": [
                                 {
-                                    "if": { "exists": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled)" },
+                                    "if": {
+                                        "exists": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)"
+                                    },
                                     "then": [
                                         {
-                                            "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled)",
+                                            "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)",
                                             "all": true
                                         }
                                     ]
                                 },
                                 { "waitForThenClick": "#cookiescript_save", "retry": 6, "retryInterval": 1000 }
                             ],
-                            "else": [{ "click": "#cookiescript_close" }]
+                            "else": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }]
                         }
                     ]
                 }
