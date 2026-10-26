@@ -1,0 +1,15 @@
+{
+    "name": "bank-norwegian",
+    "vendorUrl": "https://www.banknorwegian.se/",
+    "cosmetic": false,
+    "prehideSelectors": ["[data-component=\"BNDialog\"]:has([data-uit=\"show-details\"])"],
+    "detectCmp": [{ "exists": "[data-component=\"BNDialog\"] [data-uit=\"show-details\"]" }],
+    "detectPopup": [{ "visible": "[data-component=\"BNDialog\"] [data-uit=\"show-details\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-component=\"BNDialog\"] [data-uit=\"accept-all\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[data-component=\"BNDialog\"] [data-uit=\"show-details\"]" },
+        { "waitFor": "[data-component=\"BNDialog\"] [data-uit=\"store-changes\"]" },
+        { "click": "[data-component=\"BNDialog\"] input[role=\"switch\"]:checked", "all": true, "optional": true },
+        { "waitForThenClick": "[data-component=\"BNDialog\"] [data-uit=\"store-changes\"]" }
+    ]
+}
