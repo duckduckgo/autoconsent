@@ -1,0 +1,17 @@
+{
+    "name": "mathsisfun",
+    "vendorUrl": "https://www.mathsisfun.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mathsisfun\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": "#cookOK > .btn" },
+        { "eval": "EVAL_FUNDING_CHOICES_SETTLED" },
+        { "exists": ".fc-consent-root", "negated": true }
+    ],
+    "detectPopup": [{ "visible": "#cookOK > .btn" }],
+    "optIn": [{ "waitForThenClick": "#cookOK > .btn" }],
+    "optOut": [{ "waitForThenClick": "#cookOK > .btn" }],
+    "test": [{ "visible": "#cookOK", "check": "none" }]
+}
