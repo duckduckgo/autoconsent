@@ -1,0 +1,42 @@
+{
+    "name": "ecoprivacy",
+    "vendorUrl": "https://www.ecocerved.it/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://ecoprivacy\\.ecocerved\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".ecoPrivacyMain .ecoPrivacyButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ecoPrivacyMain .ecoPrivacyButton"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": ".ecoPrivacyMain .ecoPrivacyButton:not([disabled])"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": ".ecoPrivacyMain .ecoPrivacyButton"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": ".ecoPrivacyMain .ecoPrivacyButton:not([disabled])"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": ".ecoPrivacyMain .ecoPrivacyButton"
+        }
+    ]
+}
