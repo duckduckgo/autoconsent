@@ -1,0 +1,21 @@
+{
+    "name": "idoctors.it",
+    "vendorUrl": "https://www.idoctors.it/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?idoctors\\.it/"
+    },
+    "prehideSelectors": ["#modal-cookies", "#modal-cookies-options"],
+    "detectCmp": [{ "exists": "#modal-cookies" }],
+    "detectPopup": [{ "visible": "#modal-cookies" }],
+    "optIn": [{ "waitForThenClick": "#modal-cookies #cookies-accetta-tutti" }],
+    "optOut": [
+        { "waitForThenClick": "#modal-cookies .cookies-settings-link" },
+        { "waitForVisible": "#modal-cookies-options" },
+        {
+            "if": { "exists": "#cookieMarketingSwitch:checked" },
+            "then": [{ "click": "#cookieMarketingSwitch" }]
+        },
+        { "waitForThenClick": "#modal-cookies-options a[href*='confermaImpostazioni']", "retry": 3, "retryInterval": 500 }
+    ],
+    "test": [{ "cookieContains": "\"marketing\":false" }]
+}
