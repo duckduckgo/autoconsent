@@ -1,0 +1,25 @@
+{
+    "name": "nojazz",
+    "vendorUrl": "https://www.webads.nl/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://nojazz\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#consentui #buttons .btn.amber" }],
+    "detectPopup": [{ "visible": "#consentui #buttons .btn.amber" }],
+    "optIn": [{ "waitForThenClick": "#consentui #buttons .btn.green" }],
+    "optOut": [
+        {
+            "if": { "visible": "#consentui #buttons .btn.red" },
+            "then": [{ "click": "#consentui #buttons .btn.red" }],
+            "else": [
+                { "click": "#consentui #buttons .btn.amber" },
+                { "waitFor": "#consentui.screen_2 #filters" },
+                { "click": "#consentui #filters input[type=checkbox]:checked", "all": true, "optional": true },
+                { "waitForThenClick": "#consentui.screen_2 #buttons .btn.green" }
+            ]
+        }
+    ]
+}
