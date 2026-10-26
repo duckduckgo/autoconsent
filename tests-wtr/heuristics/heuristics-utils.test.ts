@@ -399,6 +399,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
     });
 
+    it('matches Italian close buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Chiudi')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Accetta e chiudi')).to.not.equal('acknowledge');
+        expect(classifyButtonTextRegex('Rifiuta e chiudi')).to.equal('reject');
+    });
+
     it('does not treat revoke links as reject buttons', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
     });
