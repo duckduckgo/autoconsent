@@ -170,6 +170,8 @@ export const DETECT_PATTERNS = [
     /sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi,
     /noi e i nostri.{0,20}partner.{0,100}cookie/gi,
     /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
+    // implied consent, e.g. "proseguendo la navigazione accetti l'uso dei cookie"
+    /(?:proseguendo|continuando)(?: con)? la navigazione.{0,100}cookie/gi,
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"

@@ -128,6 +128,8 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             'Questo sito utilizza i cookie per migliorare la tua esperienza',
             'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
             'Archiviare e/o accedere a informazioni su un dispositivo',
+            'Proseguendo la navigazione - senza modificare le impostazioni del browser - accetti di ricevere tutti i cookie',
+            "Continuando con la navigazione acconsenti all'uso dei cookie",
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -139,6 +141,9 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             checkHeuristicPatterns(
                 'Noi e i nostri partner commerciali utilizziamo materiali riciclati. Il sito usa la tecnologia più moderna.',
             ).patterns,
+        ).to.have.length(0);
+        expect(
+            checkHeuristicPatterns('Proseguendo la navigazione troverai le ultime notizie sui servizi offerti ai cittadini.').patterns,
         ).to.have.length(0);
     });
 });
