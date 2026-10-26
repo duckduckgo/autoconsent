@@ -1,0 +1,59 @@
+{
+    "name": "Uniconsent",
+    "prehideSelectors": ["#uniccmp"],
+    "detectCmp": [
+        {
+            "exists": ["#uniccmp", ".unic"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#uniccmp", ".unic .unic-box,.unic .unic-bar,.unic .unic-modal"],
+            "check": "any"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "US notice bar",
+            "if": {
+                "visible": ["#uniccmp", ".unic .unic-opt-out-data-button"],
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": ["#uniccmp", ".unic .unic-opt-out-data-button"]
+                }
+            ],
+            "else": [
+                {
+                    "comment": "most sites only show Reject All after Manage Options",
+                    "if": {
+                        "visible": ["#uniccmp", ".unic .unic-reject-all-button"],
+                        "check": "any"
+                    },
+                    "then": [],
+                    "else": [
+                        {
+                            "waitForThenClick": ["#uniccmp", ".unic .unic-manage-options-button"]
+                        }
+                    ]
+                },
+                {
+                    "waitForThenClick": ["#uniccmp", ".unic .unic-reject-all-button"]
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#uniccmp", ".unic .unic-agree-all-button"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#uniccmp", ".unic .unic-box,.unic .unic-bar,.unic .unic-modal"],
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
