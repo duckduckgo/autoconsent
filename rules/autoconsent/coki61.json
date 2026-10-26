@@ -1,0 +1,29 @@
+{
+    "name": "coki61",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#coki61 .cok_but1"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#coki61"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#coki61 .cok_but2"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#coki61 .cok_but1"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "coki61=2"
+        }
+    ]
+}
