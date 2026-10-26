@@ -1,0 +1,16 @@
+{
+    "name": "emr-ch",
+    "vendorUrl": "https://emr.ch/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(emr|emfeedback)\\.ch/"
+    },
+    "prehideSelectors": ["#consent-cookie-modal"],
+    "detectCmp": [{ "exists": "#consent-cookie-modal #cookie-selection-button" }],
+    "detectPopup": [{ "visible": "#consent-cookie-modal" }],
+    "optIn": [{ "waitForThenClick": "#consent-cookie-modal #cookie-all-button", "retry": 3, "retryInterval": 500 }],
+    "optOut": [
+        { "click": "#consent-cookie-modal input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#consent-cookie-modal #cookie-selection-button", "retry": 3, "retryInterval": 500 }
+    ],
+    "test": [{ "cookieContains": "EMR-CookieConsent-Advertising=0" }]
+}
