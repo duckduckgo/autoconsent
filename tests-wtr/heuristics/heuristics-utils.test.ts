@@ -150,6 +150,7 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
             'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
             'Vi använder cookies för att förbättra din upplevelse',
             'Webbplatsen använder kakor',
+            'På denna webbplats används endast nödvändiga kakor för att webbplatsen ska fungera.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -385,6 +386,10 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить настройки')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Сохранить выбор')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
+    });
+
+    it('matches Swedish acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
     });
 
     it('does not treat Russian subscription buttons as reject', () => {
