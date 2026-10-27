@@ -1,0 +1,36 @@
+{
+    "name": "valostore",
+    "vendorUrl": "https://www.valostore.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?valostore\\.(se|no|fi|dk|de|com)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div[role=presentation][aria-labelledby=cookie-consent-title]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=presentation][aria-labelledby=cookie-consent-title]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=presentation][aria-labelledby=cookie-consent-title] button.MuiButton-contained"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role=presentation][aria-labelledby=cookie-consent-title] button.MuiLink-button"
+        },
+        {
+            "waitForThenClick": "div[role=presentation][aria-labelledby=cookie-consent-title] button.MuiButton-outlined:last-child"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_VALOSTORE_TEST"
+        }
+    ]
+}
