@@ -46,7 +46,12 @@ export const snippets = {
     EVAL_COOKIEBOT_4: () => window.Cookiebot.hide() || true,
     EVAL_COOKIEBOT_5: () => window.Cookiebot.declined === true,
     EVAL_KLARO_1: () => {
-        const config = globalThis.klaroConfig || (globalThis.klaro?.getManager && globalThis.klaro.getManager().config);
+        let config = globalThis.klaroConfig;
+        try {
+            config = config || (globalThis.klaro?.getManager && globalThis.klaro.getManager().config);
+        } catch (e) {
+            // the default manager throws when the config was not exposed globally
+        }
         if (!config) {
             // with no klaro globals, we can't test on this page
             return true;

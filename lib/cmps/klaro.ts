@@ -47,6 +47,11 @@ export default class Klaro extends AutoConsentCMPBase {
             return true;
         }
 
+        // without a global config the JS API fails, so open the settings from the notice
+        if (!this.elementExists('.klaro .cm-modal') && (await this.click('.klaro .cm-btn-lern-more,.klaro .cn-learn-more'))) {
+            await this.waitForElement('.klaro .cm-modal', 2000);
+        }
+
         await this.click(
             '.cm-purpose:not(.cm-toggle-all) > input:not(.half-checked,.required,.only-required),.cm-purpose:not(.cm-toggle-all) > div > input:not(.half-checked,.required,.only-required)',
             true,
@@ -60,7 +65,9 @@ export default class Klaro extends AutoConsentCMPBase {
         }
         if (this.settingsOpen) {
             await this.click('.cm-purpose:not(.cm-toggle-all) > input.half-checked', true);
-            return await this.click('.cm-btn-accept');
+            if (await this.click('.cm-btn-accept')) {
+                return true;
+            }
         }
         return await this.click('.klaro .cookie-notice .cm-btn-success');
     }
