@@ -195,6 +195,25 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            // sparebank1.no
+            'Dette er et dialogvindu der du kan velge hvilke informasjonskapsler du ønsker å aksepterer fra oss. Bruk av informasjonskapsler',
+            'Vi bruker informasjonskapsler for å gi deg en bedre opplevelse.',
+            'Nettstedet benytter cookies til statistikk.',
+            'Vi nyttar informasjonskapslar på nettsidene våre.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker norske råvarer i alle bakervarene våre').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
