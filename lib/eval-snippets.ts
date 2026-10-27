@@ -172,6 +172,11 @@ export const snippets = {
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
+    EVAL_ENSIGHTEN_GATEWAY_READY: () => typeof window.Bootstrapper?.gateway?.getActiveEnvironment === 'function',
+    // the Ensighten notice is only rendered on window load, so check its config before it appears
+    EVAL_ENSIGHTEN_NOTICE_PENDING: () =>
+        window.Bootstrapper?.gateway?.getActiveEnvironment?.()?.enablePrivacyNotice === true &&
+        !/_ENSIGHTEN_PRIVACY_BANNER_VIEWED=1/.test(document.cookie),
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;

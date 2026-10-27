@@ -1,0 +1,22 @@
+{
+    "name": "jal.co.jp",
+    "comment": "Ensighten renders the notice only on window load, which can outlast CMP detection on this site",
+    "runContext": { "urlPattern": "^https?://(www\\.)?jal\\.co\\.jp/" },
+    "prehideSelectors": ["#ensNotifyBanner"],
+    "detectCmp": [{ "exists": "script[src*=\"nexus.ensighten.com/uw-jal/\"]" }, { "eval": "EVAL_ENSIGHTEN_GATEWAY_READY" }],
+    "detectPopup": [{ "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "eval": "EVAL_ENSIGHTEN_NOTICE_PENDING" }] }],
+    "optIn": [
+        { "waitForVisible": "#ensNotifyBanner", "timeout": 60000 },
+        { "waitForThenClick": "#ensNotifyBanner #ensAcceptAll,#ensNotifyBanner #ensCloseBanner" }
+    ],
+    "optOut": [
+        { "waitForVisible": "#ensNotifyBanner", "timeout": 60000 },
+        {
+            "if": { "visible": "#ensNotifyBanner #ensRejectAll" },
+            "then": [{ "waitForThenClick": "#ensNotifyBanner #ensRejectAll" }],
+            "else": [{ "waitForThenClick": "#ensNotifyBanner #ensCloseBanner" }]
+        },
+        { "waitForVisible": "#ensNotifyBanner", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "_ENSIGHTEN_PRIVACY_BANNER_VIEWED=1" }]
+}
