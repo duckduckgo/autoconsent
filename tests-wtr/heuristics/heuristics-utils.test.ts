@@ -387,6 +387,14 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
     });
 
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('確認')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('了解')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('了解しました')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('同意する')).to.not.equal('acknowledge');
+    });
+
     it('does not treat Russian subscription buttons as reject', () => {
         expect(classifyButtonTextRegex('Отказаться от подписки')).to.equal('other');
     });
