@@ -120,6 +120,12 @@ describe('getPotentialPopups', () => {
             expect(getButtonData(container).map((b) => b.text)).to.deep.equal(['Reject all']);
         });
 
+        it('finds a web component button whose shadow root has textless button-like parts', () => {
+            container.innerHTML = '<div><p>We use cookies.</p><div id="button-host" role="button">Reject all</div></div>';
+            attachShadow(container.querySelector('#button-host')!, '<div class="button-container"><span><slot></slot></span></div>');
+            expect(getButtonData(container).map((b) => b.text)).to.deep.equal(['Reject all']);
+        });
+
         it('makes a shadow DOM popup actionable', () => {
             shadowHost('', fixedBanner('banner'));
 

@@ -263,18 +263,23 @@ function getPopupLikeElements(deadline: number): { elements: HTMLElement[]; shad
  * @param shadowHosts open shadow hosts on the page, if already known; otherwise they are searched for under el
  */
 export function getButtonData(el: HTMLElement, shadowHosts?: HTMLElement[]): ButtonData[] {
-    const buttons: ButtonData[] = [];
-    for (const b of excludeContainers(getButtonLikeElements(el, shadowHosts))) {
-        if (!isElementVisible(b) || isDisabled(b)) {
-            continue;
-        }
+    const texts = new Map<HTMLElement, string>();
+    for (const b of getButtonLikeElements(el, shadowHosts)) {
         const text =
             getElementText(b).trim() ||
             // <input> values do not appear in innerText
             (b instanceof HTMLInputElement && ['submit', 'button'].includes(b.type) ? b.value?.trim() : '');
         if (text) {
-            buttons.push({ text, element: b });
+            texts.set(b, text);
         }
+    }
+    const buttons: ButtonData[] = [];
+    // Textless parts, such as a web component button's shadow internals, should not displace the button itself.
+    for (const b of excludeContainers(Array.from(texts.keys()))) {
+        if (!isElementVisible(b) || isDisabled(b)) {
+            continue;
+        }
+        buttons.push({ text: texts.get(b)!, element: b });
     }
     return buttons;
 }
