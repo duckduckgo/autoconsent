@@ -1,0 +1,23 @@
+{
+    "name": "meta-cookie-dialog",
+    "vendorUrl": "https://www.meta.com/",
+    "prehideSelectors": ["[data-testid=\"cookie-policy-dialog\"]", "[data-testid=\"cookie-policy-manage-dialog\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookie-policy-dialog\"] [data-cookiebanner=\"accept_only_essential_button\"], [data-testid=\"cookie-policy-manage-dialog\"] [data-cookiebanner=\"accept_only_essential_button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-policy-dialog\"] [data-cookiebanner=\"accept_only_essential_button\"], [data-testid=\"cookie-policy-manage-dialog\"] [data-cookiebanner=\"accept_only_essential_button\"]"
+        }
+    ],
+    "optIn": [
+        { "waitForThenClick": "[data-cookiebanner=\"accept_button\"]" },
+        { "waitForVisible": "[data-cookiebanner=\"accept_button\"]", "check": "none" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "[data-cookiebanner=\"accept_only_essential_button\"]" },
+        { "waitForVisible": "[data-cookiebanner=\"accept_only_essential_button\"]", "check": "none" }
+    ]
+}
