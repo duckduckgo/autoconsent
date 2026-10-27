@@ -1,0 +1,10 @@
+{
+    "name": "thewatchagency",
+    "vendorUrl": "https://www.thewatchagency.com/",
+    "prehideSelectors": ["app-cookie-consent > .cookie-banner"],
+    "detectCmp": [{ "exists": "app-cookie-consent > .cookie-banner > .flex-column > button.btn-outline-dark" }],
+    "detectPopup": [{ "visible": "app-cookie-consent > .cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "app-cookie-consent > .cookie-banner > .flex-column > button:nth-child(1)" }],
+    "optOut": [{ "waitForThenClick": "app-cookie-consent > .cookie-banner > .flex-column > button:nth-child(2)" }],
+    "test": [{ "cookieContains": "%22marketing%22%3Afalse" }]
+}
