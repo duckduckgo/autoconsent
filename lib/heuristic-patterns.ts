@@ -373,7 +373,17 @@ const REJECT_PATTERNS_DANISH = [
     /^nej(,?\s+tak)?$/is,
 ];
 
-const REJECT_PATTERNS_CATALAN = [/(^|\s)rebutj/is, 'no accepto', 'no, gràcies'];
+const REJECT_PATTERNS_CATALAN = [
+    /(^|\s)rebutj/is,
+    'no accepto',
+    'no, gràcies',
+
+    // accept/allow/use (only) necessary / essential / technical / functional
+    /^\s*(acceptar?|accepto|permetre|utilitzar|usar)?\s*(només|sols|únicament)?\s*(les\s+|els\s+)?(galetes\s+|cookies?\s+)?(estrictament\s+)?(necess[aà]ri\w*|essencial\w*|tècni\w*|funcional\w*|imprescindibles)\s*$/is,
+
+    // continue without accepting
+    /^continuar sense acceptar/is,
+];
 
 const REJECT_PATTERNS_GALICIAN = [/(^|\s)rexeitar/is];
 
@@ -561,6 +571,9 @@ export const SETTINGS_PATTERNS = [
     'configura-les',
     'personalitza',
     'veure preferències',
+    /^(configuració|personalitzar|preferències|més opcions)$/,
+    /^(configuració|preferències|opcions)( de( les)?)? (galetes|cookies?)$/is,
+    /^(gestiona|gestionar|configura|configurar|personalitza|personalitzar|veure|establir|administrar)( les)?( meves)? (preferències|galetes|cookies?|opcions)$/is,
 
     // Galician (GL)
     'xestionar preferencias',
@@ -872,6 +885,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     'seguir',
     'vale',
     '¡vamos!',
+
+    // Catalan (CA)
+    /^(ho )?(entenc|entès|entesos)[ !.]*$/s,
 
     // Polish (PL)
     'kontynuuj',
