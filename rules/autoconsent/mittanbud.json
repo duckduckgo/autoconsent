@@ -1,0 +1,33 @@
+{
+    "name": "mittanbud",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div[role=\"dialog\"]:has(button#necessary[role=\"switch\"]):has(button#marketing[role=\"switch\"]) [role=\"tablist\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=\"dialog\"]:has(button#necessary[role=\"switch\"]):has(button#marketing[role=\"switch\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=\"dialog\"]:has(button#necessary[role=\"switch\"]) div:not([role=\"tablist\"]) > button:first-child:nth-last-child(3)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role=\"dialog\"]:has(button#necessary[role=\"switch\"]) div:not([role=\"tablist\"]) > button:nth-child(3):last-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "decided=true"
+        },
+        {
+            "cookieContains": "marketing=false"
+        }
+    ]
+}
