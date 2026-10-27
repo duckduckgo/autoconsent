@@ -6,7 +6,9 @@ generateCMPTests(
         // 'https://www.phaseone.com/', // appears only on user iteraction
         'https://www.georgjensen.com/',
         'https://www.power.no/',
-        'https://www.yourhearing.com/',
+        'https://panduro.com/',
+        'https://skylum.com/',
+        'https://www.danfoss.com/',
     ],
     {},
 );
