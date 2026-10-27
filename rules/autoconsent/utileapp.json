@@ -1,0 +1,25 @@
+{
+    "name": "utileapp",
+    "vendorUrl": "https://www.utileapp.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?utileapp\\.com/"
+    },
+    "prehideSelectors": [".fc-consent-root,.fc-dialog-container,.fc-dialog-overlay,.fc-dialog-content"],
+    "detectCmp": [{ "exists": "script[src*='fundingchoicesmessages.google.com']" }],
+    "detectPopup": [{ "exists": ".fc-consent-root .fc-dialog-container" }],
+    "optOut": [
+        {
+            "if": { "exists": ".fc-li-only-placeholder" },
+            "then": [
+                { "click": ".fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-data-preferences-dialog .fc-confirm-choices" }
+            ],
+            "else": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "optIn": [{ "click": ".fc-cta-consent" }]
+}

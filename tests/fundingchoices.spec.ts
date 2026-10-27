@@ -7,3 +7,13 @@ generateCMPTests(
         skipRegions: ['US', 'GB'],
     },
 );
+
+// legitimate-interest-only notice has no consent button
+generateCMPTests('funding-choices', ['https://schulferien.nrw/', 'https://www.feiertage.info/'], {
+    onlyRegions: ['DE'],
+    testOptIn: false,
+});
+generateCMPTests('funding-choices', ['https://www.knitting-bee.com/'], {
+    onlyRegions: ['GB'],
+    testOptIn: false,
+});
