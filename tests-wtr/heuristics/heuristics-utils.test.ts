@@ -317,7 +317,52 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with more notice phrasings', () => {
+    it('detects cookie notices in each language', () => {
+        const texts = [
+            'May we use cookies to see how the site is used?',
+            'Allow analytics cookies? They help us improve the site.',
+            'We use privacy-friendly analytics to see which pages are most useful.',
+            'You can revoke your consent at any time.',
+            'Für die Reichweitenmessung nutzen wir Cookies.',
+            'Hierfür werden Analyse-Cookies auf Ihrem Gerät gespeichert.',
+            'Onze cookies geven je de best mogelijke ervaring.',
+            'Nous utilisons certains cookies pour mesurer l’audience.',
+            'Informativa sull’utilizzo dei cookie',
+            'Usiamo Google Analytics solo con il tuo consenso.',
+            'På den här webbplatsen används kakor.',
+            'Genom att fortsätta godkänner du användningen av kakor.',
+            'Godkänn alla\nEndast nödvändiga',
+            'Vi bruker informasjonskapsler for å forbedre nettsiden.',
+            'Vi anvender cookies for at forbedre din oplevelse.',
+            'Strona wykorzystuje pliki „cookies” w celach statystycznych.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated text', () => {
+        for (const text of [
+            'Vi använder förnybar energi och endast nödvändiga resurser',
+            'We use data analytics tools in our consulting work',
+            'Le ultime notizie su fisco, tasse e dichiarazione dei redditi',
+        ]) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('isExcludedPopup', () => {
+    it('flags professional investor gates', () => {
+        expect(
+            isExcludedPopup(
+                'Please confirm that you are a professional investor. This website uses cookies. The information is not intended for retail clients.',
+            ),
+        ).to.be.true;
+        expect(isExcludedPopup('We use cookies to improve your experience. Accept all Reject all')).to.be.false;
+    });
+
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
         const text =
