@@ -6,4 +6,7 @@ generateCMPTests('cookiesjsr', [
     'https://www.csir.co.za/',
     'https://www.drive.gr/',
     'https://www.sralab.org/',
+    'https://sede.transportes.gob.es/',
+    'https://www.openfoam.com/',
+    'https://www.santander.com.uy/',
 ]);

@@ -1,16 +1,16 @@
 {
     "name": "cookiesjsr",
     "_metadata": { "vendorUrl": "https://github.com/jfeltkamp/cookiesjsr" },
-    "prehideSelectors": [".cookiesjsr-banner.active"],
+    "prehideSelectors": [".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active)"],
     "detectCmp": [{ "exists": ".cookiesjsr-banner" }],
-    "detectPopup": [{ "visible": ".cookiesjsr-banner.active" }],
-    "optIn": [{ "waitForThenClick": ".cookiesjsr-banner.active .allowAll" }],
+    "detectPopup": [{ "visible": ".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active)" }],
+    "optIn": [{ "waitForThenClick": ".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active) .allowAll" }],
     "optOut": [
         {
-            "if": { "visible": ".cookiesjsr-banner.active .denyAll" },
-            "then": [{ "click": ".cookiesjsr-banner.active .denyAll" }],
+            "if": { "visible": ".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active) .denyAll" },
+            "then": [{ "click": ".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active) .denyAll" }],
             "else": [
-                { "waitForThenClick": ".cookiesjsr-banner.active .cookiesjsr-settings" },
+                { "waitForThenClick": ".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active) .cookiesjsr-settings" },
                 { "waitForVisible": ".cookiesjsr-layer" },
                 {
                     "if": { "visible": ".cookiesjsr-layer .denyAll" },
@@ -22,6 +22,6 @@
                 }
             ]
         },
-        { "waitForVisible": ".cookiesjsr-banner.active", "timeout": 2000, "check": "none" }
+        { "waitForVisible": ".cookiesjsr-banner:is(.active, .cookiesjsr-banner--active)", "timeout": 2000, "check": "none" }
     ]
 }
