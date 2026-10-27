@@ -1,0 +1,39 @@
+{
+    "name": "comune-padova",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?comune\\.padova\\.it/"
+    },
+    "prehideSelectors": ["app-cookie-banner .cookiebar"],
+    "detectCmp": [
+        {
+            "exists": "app-cookie-banner .cookiebar .cookiebar-confirm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "app-cookie-banner .cookiebar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "app-cookie-banner .cookiebar-confirm"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "app-cookie-banner a.cookiebar-btn[href$=\"/cookie-preferences\"]"
+        },
+        {
+            "waitForThenClick": "app-cookie-preferences button.consent-refuse"
+        },
+        {
+            "waitForVisible": "app-cookie-banner .cookiebar",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"multimedia\":{\"wanted\":false}"
+        }
+    ]
+}
