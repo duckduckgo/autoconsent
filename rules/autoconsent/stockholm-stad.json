@@ -1,0 +1,42 @@
+{
+    "name": "stockholm-stad",
+    "vendorUrl": "https://start.stockholm/",
+    "prehideSelectors": [".js-cookie-banner.cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-banner.cookie-banner #cookie-banner__settings .js-cookie-settings__form"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-banner.cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-banner.cookie-banner .cookie-banner__actions .js-cookie-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-banner.cookie-banner .cookie-banner__actions .js-cookie-banner-settings-btn"
+        },
+        {
+            "waitForVisible": "#cookie-banner__settings .js-cookie-settings__form",
+            "timeout": 2000
+        },
+        {
+            "click": "#cookie-banner__settings .js-cookie-settings__checkbox:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#cookie-banner__settings .cookie-settings__submit-btn"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "-consent-necessary=1"
+        }
+    ]
+}
