@@ -194,6 +194,23 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with inverted German and Dutch word order', () => {
+    it('detects notices with the verb before the subject', () => {
+        const texts = [
+            'Auf dieser Website verwenden wir Cookies und ähnliche Tools nur, um dir Dienste bereitzustellen.',
+            'Op deze site gebruiken we cookies en soortgelijke hulpmiddelen alleen om diensten aan je te leveren.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated text', () => {
+        expect(checkHeuristicPatterns('Für unsere Brötchen verwenden wir nur regionales Mehl').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Voor onze broodjes gebruiken we alleen lokaal meel').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -313,6 +330,17 @@ describe('classifyButtonTextRegex', () => {
 
     it('does not match partial exact string patterns', () => {
         expect(classifyButtonTextRegex('no problem')).to.equal('other');
+    });
+
+    it('matches "I understand" acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Ich verstehe')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ich habe verstanden.')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ho capito')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
+    });
+
+    it('does not classify Polish subscription links as reject', () => {
+        expect(classifyButtonTextRegex('Zarządzaj subskrypcjami lub z nich zrezygnuj')).to.equal('other');
     });
 
     it('matches Russian reject buttons', () => {

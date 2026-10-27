@@ -64,6 +64,8 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    // inverted word order, e.g. "auf dieser Website verwenden wir Cookies"
+    /(?:verwenden|nutzen) wir.{0,20}cookies/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -76,6 +78,8 @@ export const DETECT_PATTERNS = [
     // NL
     /gebruik.{0,100}van.{0,100}cookies/gi,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
+    // inverted word order, e.g. "op deze site gebruiken we cookies"
+    /gebruiken (?:we|wij).{0,20}cookies/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
 
     /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
@@ -476,6 +480,7 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
 
     // Polish (PL)
     /subskrybuj/,
+    /subskrypc/,
 
     // Russian (RU): paywall/subscription wording, e.g. "отказаться от подписки", "оплатить"
     /подписатьс|подписк|оплатит|оплачива/is,
@@ -842,7 +847,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^(ok|okay|oké|okey|k)([ .!,]*)(got it|verstanden|compris|rozumiem|thanks|gracias|ik begrijp( dat| het)?|continue to website|pour moi|fermer)?[ .!]*$/is,
 
     // "understood" / "got it" / "that's ok" (multilingual)
-    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
+    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|ich verstehe|ich habe verstanden|ho capito|jag förstår|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
 
     // confirm
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
