@@ -1,0 +1,22 @@
+{
+    "name": "beetle-tracking",
+    "vendorUrl": "https://beetle-tracking.com/",
+    "prehideSelectors": ["beetle-tracking-consent-modal"],
+    "detectCmp": [{ "exists": ["beetle-tracking-consent-modal", ".consent"] }],
+    "detectPopup": [{ "visible": ["beetle-tracking-consent-modal", ".consent__dialog-wrapper"] }],
+    "optIn": [
+        {
+            "waitForThenClick": ["beetle-tracking-consent-modal", ".consent__button-accept-all"],
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["beetle-tracking-consent-modal", ".consent__button-decline-all"],
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [{ "cookieContains": "\"bt_marketing\":false" }]
+}
