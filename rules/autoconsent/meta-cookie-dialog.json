@@ -13,11 +13,25 @@
         }
     ],
     "optIn": [
-        { "waitForThenClick": "[data-cookiebanner=\"accept_button\"]" },
-        { "waitForVisible": "[data-cookiebanner=\"accept_button\"]", "check": "none" }
+        {
+            "waitForThenClick": "[data-cookiebanner=\"accept_button\"]",
+            "retry": 3,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "[data-cookiebanner=\"accept_button\"]",
+            "check": "none"
+        }
     ],
     "optOut": [
-        { "waitForThenClick": "[data-cookiebanner=\"accept_only_essential_button\"]" },
-        { "waitForVisible": "[data-cookiebanner=\"accept_only_essential_button\"]", "check": "none" }
+        {
+            "waitForThenClick": "[data-cookiebanner=\"accept_only_essential_button\"]",
+            "retry": 3,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "[data-cookiebanner=\"accept_only_essential_button\"]",
+            "check": "none"
+        }
     ]
 }
