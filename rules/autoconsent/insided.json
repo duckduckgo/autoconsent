@@ -1,0 +1,15 @@
+{
+    "name": "insided",
+    "vendorUrl": "https://www.gainsight.com/customer-communities/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["[data-preact=\"cookie-banner/index\"] .js-cookiebar"],
+    "detectCmp": [{ "exists": "[data-preact=\"cookie-banner/index\"] .js-cookiebar .js-cookie-deny" }],
+    "detectPopup": [{ "visible": "[data-preact=\"cookie-banner/index\"] .js-cookiebar .js-cookie-deny" }],
+    "optIn": [{ "waitForThenClick": "[data-preact=\"cookie-banner/index\"] .js-cookiebar .js-cookie-accept" }],
+    "optOut": [{ "waitForThenClick": "[data-preact=\"cookie-banner/index\"] .js-cookiebar .js-cookie-deny" }],
+    "test": [{ "visible": "[data-preact=\"cookie-banner/index\"] .js-cookiebar .js-cookie-deny", "check": "none" }]
+}
