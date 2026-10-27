@@ -1,0 +1,18 @@
+{
+    "name": "jquery-eu-cookie-law-popup",
+    "prehideSelectors": [".eupopup-container"],
+    "detectCmp": [{ "visible": ".eupopup-container .eupopup-closebutton", "check": "any" }],
+    "detectPopup": [{ "visible": ".eupopup-container .eupopup-closebutton", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": ".eupopup-container .eupopup-button_1" },
+            "then": [{ "click": ".eupopup-container .eupopup-button_1", "all": true }],
+            "else": [{ "click": ".eupopup-container .eupopup-closebutton", "all": true }]
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".eupopup-container .eupopup-closebutton", "all": true },
+        { "waitForVisible": ".eupopup-container", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "EU_COOKIE_LAW_CONSENT" }]
+}
