@@ -4,7 +4,7 @@
     "prehideSelectors": [".cc-individual-cookie-settings"],
     "detectCmp": [
         {
-            "exists": ".cc-individual-cookie-settings"
+            "exists": ".cc-individual-cookie-settings #cookie-settings-reject-all"
         }
     ],
     "detectPopup": [
