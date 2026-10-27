@@ -72,6 +72,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects Google cookie notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'go.dev uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic. Learn more.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
