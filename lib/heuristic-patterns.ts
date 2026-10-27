@@ -330,7 +330,7 @@ const REJECT_PATTERNS_SPANISH = [
     /(^|\s)(rechaz|recház|deneg|negar|declin)/is,
 
     // accept/allow/use (only) necessary / essential / technical / functional / own
-    /^\s*(aceptar?|acepta|permitir|permite|usar|utilizar)?\s*(solo|sólo|només|únicamente)?\s*(las?\s+|los\s+)?(cookies?\s+)?(estrictamente\s+)?(necesari\w*|esencial\w*|técnic\w*|obligatori\w*|funcional\w*|propias)\s*$/is,
+    /^\s*(aceptar?|acepta|permitir|permite|usar|utilizar)?\s*(solo|sólo|només|únicamente)?\s*(las?\s+|los\s+)?(cookies?\s+)?(estrictamente\s+)?(necesari\w*|esencial\w*|imprescindibl\w*|técnic\w*|obligatori\w*|funcional\w*|propias)\s*$/is,
 
     // "solo/sólo/no, sólo ... necessary/essential"
     /^(no,?\s+)?(solo|sólo|només)\s+(usar\s+|las?\s+|los\s+|lo\s+)?.{0,20}(necesari|esencial|estrictamente)/is,
