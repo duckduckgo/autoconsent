@@ -1,0 +1,34 @@
+{
+    "name": "vortex-consent",
+    "vendorUrl": "https://www.uio.no/tjenester/it/web/vortex/",
+    "prehideSelectors": ["div.consent[role='dialog']"],
+    "detectCmp": [
+        {
+            "exists": "div.consent[role='dialog'] .consent-main-buttons .consent-decline-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.consent[role='dialog'] .consent-main-buttons .consent-decline-all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.consent[role='dialog'] .consent-main-buttons .consent-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.consent[role='dialog'] .consent-main-buttons .consent-decline-all"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "PrivacyPolicyOptOut"
+        },
+        {
+            "cookieContains": "UsageAnalysisConsent=yes",
+            "negated": true
+        }
+    ]
+}
