@@ -1,0 +1,22 @@
+{
+    "name": "nord-security",
+    "vendorUrl": "https://nordsecurity.com/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#consent-widget-container [data-testid=consent-widget-view]" }],
+    "detectPopup": [{ "visible": "#consent-widget-container [data-testid=consent-widget-view]" }],
+    "optIn": [
+        {
+            "if": { "exists": "#widget-button-accept" },
+            "then": [{ "waitForThenClick": "#widget-button-accept" }],
+            "else": [{ "waitForThenClick": "#widget-button-understood" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#widget-button-reject" },
+            "then": [{ "waitForThenClick": "#widget-button-reject" }],
+            "else": [{ "waitForThenClick": "#widget-button-privacy-controls" }, { "waitForThenClick": "#modal-button-reject-all" }]
+        }
+    ],
+    "test": [{ "cookieContains": "consent=rejected" }]
+}
