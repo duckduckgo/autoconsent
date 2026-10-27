@@ -194,6 +194,26 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            // testkontrollen.no
+            'Vi bruker informasjonskapsler for å forbedre opplevelsen din, analysere trafikk og vise relevante annonser.',
+            'Dette nettstedet bruker cookies for å gi deg en bedre opplevelse.',
+            'Les mer om vår bruk av informasjonskapsler',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker norske råvarer i alle produktene våre. Ny bruker? Opprett konto').patterns).to.have.length(
+            0,
+        );
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
