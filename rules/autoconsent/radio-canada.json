@@ -1,0 +1,28 @@
+{
+    "name": "radio-canada",
+    "cosmetic": true,
+    "prehideSelectors": [
+        "#js-legal-disclaimer.g-alert-cookie, #js-legal-disclaimer.cookie-consent-banner, #info-shell-legal-disclaimer, #oh-shell-legal-disclaimer"
+    ],
+    "detectCmp": [
+        {
+            "exists": "#js-legal-disclaimer.g-alert-cookie, #js-legal-disclaimer.cookie-consent-banner, #info-shell-legal-disclaimer, #oh-shell-legal-disclaimer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#js-legal-disclaimer.g-alert-cookie, #js-legal-disclaimer.cookie-consent-banner, #info-shell-legal-disclaimer, #oh-shell-legal-disclaimer",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#js-legal-disclaimer button.e-button-close, #js-legal-disclaimer button[data-close-cookie-disclaimer], #info-shell-legal-disclaimer button, #oh-shell-legal-disclaimer button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#js-legal-disclaimer.g-alert-cookie, #js-legal-disclaimer.cookie-consent-banner, #info-shell-legal-disclaimer, #oh-shell-legal-disclaimer"
+        }
+    ]
+}

@@ -478,7 +478,17 @@ const REJECT_PATTERNS_DANISH = [
     /^nej(,?\s+tak)?$/is,
 ];
 
-const REJECT_PATTERNS_CATALAN = [/(^|\s)rebutj/is, 'no accepto', 'no, gràcies'];
+const REJECT_PATTERNS_CATALAN = [
+    /(^|\s)rebutj/is,
+    'no accepto',
+    'no, gràcies',
+
+    // accept/allow/use (only) necessary / essential / technical / functional
+    /^\s*(acceptar?|accepto|permetre|utilitzar|usar)?\s*(només|sols|únicament)?\s*(les\s+|els\s+)?(galetes\s+|cookies?\s+)?(estrictament\s+)?(necess[aà]ri\w*|essencial\w*|tècni\w*|funcional\w*|imprescindibles)\s*$/is,
+
+    // continue without accepting
+    /^continuar sense acceptar/is,
+];
 
 const REJECT_PATTERNS_GALICIAN = [/(^|\s)rexeitar/is];
 
@@ -588,24 +598,31 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
 
 // Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
 // Applied only to popup-scoped text (via getActionablePopups); NOT applied to full-document detection, where these terms produce too many false positives.
-// a cookie choice or dismiss control, or consent dialog wording, in the core languages
-const CONSENT_CHOICE = new RegExp(
-    [
-        '\\b(?:accept|reject|decline|refuse|deny|allow|manage|customi[sz]e)\\b[^\\n]{0,25}\\bcookies?\\b',
-        '\\b(?:accept|reject|decline|deny|allow|refuse) all\\b',
-        '\\bcookies? (?:notice|settings|preferences|banner)\\b',
-        '\\b(?:alle )?(?:cookies )?(?:akzeptieren|ablehnen|erlauben|zulassen)\\b',
-        '\\b(?:alles |alle cookies )?(?:accepteren|accepteer|weigeren|weiger|afwijzen|toestaan)\\b',
-        '\\b(?:tout )?(?:accepter|refuser)\\b',
-        '\\b(?:aceptar|rechazar)(?: todas?)?\\b',
-        '\\b(?:accetta|rifiuta)(?: tutti)?\\b',
-        // purposes and vendors as a button or heading line: some consent dialogs ask "under 18?"
-        '^[^\\n]{0,40}\\b(?:purposes|finalités|propósitos|zwecke|doeleinden|finalità|vendors|fournisseurs|proveedores|leveranciers|fornitori)\\b[^\\n]{0,10}$',
-        '\\b(?:legitimate (?:business )?interest|intérêt légitime|interés legítimo|berechtigtes interesse|gerechtvaardigd belang|legittimo interesse)\\b',
-        '\\b(?:we|nous|wir|wij|noi|nosotros) (?:and|et|und|en|e|y) (?:our|nos|unsere|onze|i nostri|nuestros) (?:\\d+ )?(?:partners|partenaires|partner|socios)\\b',
-    ].join('|'),
-    'im',
-);
+// a cookie choice or dismiss control, or consent dialog wording, in the core languages, except a bare accept
+const COOKIE_CHOICE = [
+    '\\b(?:accept|reject|decline|refuse|deny|allow|manage|customi[sz]e)\\b[^\\n]{0,25}\\bcookies?\\b',
+    '\\b(?:reject|decline|deny|refuse) all\\b',
+    '\\bcookies? (?:notice|settings|preferences|banner)\\b',
+    '\\b(?:alle )?(?:cookies )?ablehnen\\b',
+    '\\b(?:alles |alle cookies )?(?:weigeren|weiger|afwijzen)\\b',
+    '\\b(?:tout )?refuser\\b',
+    '\\brechazar(?: todas?)?\\b',
+    '\\brifiuta(?: tutti)?\\b',
+    // purposes and vendors as a button or heading line: some consent dialogs ask "under 18?"
+    '^[^\\n]{0,40}\\b(?:purposes|finalités|propósitos|zwecke|doeleinden|finalità|vendors|fournisseurs|proveedores|leveranciers|fornitori)\\b[^\\n]{0,10}$',
+    '\\b(?:legitimate (?:business )?interest|intérêt légitime|interés legítimo|berechtigtes interesse|gerechtvaardigd belang|legittimo interesse)\\b',
+    '\\b(?:we|nous|wir|wij|noi|nosotros) (?:and|et|und|en|e|y) (?:our|nos|unsere|onze|i nostri|nuestros) (?:\\d+ )?(?:partners|partenaires|partner|socios)\\b',
+].join('|');
+// a bare accept or allow (all), which can also be an age gate's own confirmation
+const BARE_ACCEPT = [
+    '\\b(?:accept|allow) all\\b',
+    '\\b(?:alle )?(?:cookies )?(?:akzeptieren|erlauben|zulassen)\\b',
+    '\\b(?:alles |alle cookies )?(?:accepteren|accepteer|toestaan)\\b',
+    '\\b(?:tout )?accepter\\b',
+    '\\baceptar(?: todas?)?\\b',
+    '\\baccetta(?: tutti)?\\b',
+].join('|');
+const CONSENT_CHOICE = new RegExp(`${COOKIE_CHOICE}|${BARE_ACCEPT}`, 'im');
 
 // an age limit, an adults-only statement or an age check, in the core languages
 const AGE_WORDING = new RegExp(
@@ -667,7 +684,8 @@ const LEGAL_AGREEMENT =
 
 export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [
     // popups with their own age confirmation are age gates, not cookie popups, even when they mention cookies
-    { pattern: AGE_WORDING, unless: ageGateUnless(CONSENT_CHOICE) },
+    // a bare accept doesn't count as a cookie choice here: it may confirm the age
+    { pattern: AGE_WORDING, unless: ageGateUnless(new RegExp(COOKIE_CHOICE, 'im')) },
     // a license or terms agreement may mention cookies, and its decline button must not be clicked as a cookie reject
     LEGAL_AGREEMENT,
 ];
@@ -778,6 +796,9 @@ export const SETTINGS_PATTERNS = [
     'configura-les',
     'personalitza',
     'veure preferències',
+    /^(configuració|personalitzar|preferències|més opcions)$/,
+    /^(configuració|preferències|opcions)( de( les)?)? (galetes|cookies?)$/is,
+    /^(gestiona|gestionar|configura|configurar|personalitza|personalitzar|veure|establir|administrar)( les)?( meves)? (preferències|galetes|cookies?|opcions)$/is,
 
     // Galician (GL)
     'xestionar preferencias',
@@ -1089,6 +1110,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     'seguir',
     'vale',
     '¡vamos!',
+
+    // Catalan (CA)
+    /^(ho )?(entenc|entès|entesos)[ !.]*$/s,
 
     // Polish (PL)
     'kontynuuj',

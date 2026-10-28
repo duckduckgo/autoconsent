@@ -1,0 +1,47 @@
+{
+    "name": "romeo",
+    "vendorUrl": "https://www.romeo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?romeo\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "[role=dialog] form #cookie_consent_accept_all_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=dialog] form #cookie_consent_accept_all_button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=dialog] form #cookie_consent_accept_all_button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=dialog] form:has(#cookie_consent_accept_all_button) button[type=button]"
+        },
+        {
+            "waitForVisible": "[role=dialog] form input#analytical"
+        },
+        {
+            "if": {
+                "exists": "[role=dialog] form input#analytical:checked"
+            },
+            "then": [
+                {
+                    "click": "[role=dialog] form input#analytical"
+                }
+            ]
+        },
+        {
+            "click": "[role=dialog] form:has(input#analytical) button[type=submit]:not(#cookie_consent_accept_all_button)"
+        },
+        {
+            "waitForVisible": "[role=dialog] form #cookie_consent_accept_all_button",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,64 @@
+{
+    "name": "bold-cookie-consent",
+    "vendorUrl": "https://www.bold.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-consent-banner", "#ccpa-consent-banner"],
+    "detectCmp": [{ "exists": "#cookie-consent-banner [data-id=\"cookie-consent-banner-modal\"]" }],
+    "detectPopup": [
+        {
+            "if": { "visible": "#ccpa-consent-banner" },
+            "then": [{ "visible": "#ccpa-consent-banner" }],
+            "else": [
+                { "visible": "#cookie-consent-banner" },
+                { "visible": "#cookie-consent-banner .banner-gdpr, #cookie-consent-banner #gdpr-modal", "check": "any" }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": "#ccpa-consent-banner" },
+            "then": [{ "click": "#ccpa-consent-banner [data-id=\"btn-close-ccpa\"]" }],
+            "else": [{ "click": "#cookie-consent-banner [data-id=\"btn-accept-ccokies\"]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#ccpa-consent-banner" },
+            "then": [
+                { "click": "#ccpa-consent-banner [data-id=\"btn-close-ccpa\"]" },
+                { "waitForVisible": "#ccpa-consent-banner", "check": "none", "timeout": 3000, "optional": true }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "#cookie-consent-banner [data-id=\"btnGdprRejectAll\"], #cookie-consent-banner [data-id=\"btn-contd-without-accpting\"]",
+                        "check": "any"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie-consent-banner [data-id=\"btnGdprRejectAll\"], #cookie-consent-banner [data-id=\"btn-contd-without-accpting\"]"
+                        }
+                    ],
+                    "else": [
+                        { "click": "#cookie-consent-banner [data-id=\"pre-banner-btn\"]" },
+                        { "waitForVisible": "#cookie-consent-banner [data-id=\"cookie-consent-banner-modal\"]" },
+                        {
+                            "click": "#cookie-consent-banner [data-id=\"cookie-consent-banner-modal\"] input[type=\"checkbox\"]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "click": "#cookie-consent-banner [data-id=\"btn-save-preference\"]" }
+                    ]
+                },
+                { "waitForVisible": "#cookie-consent-banner", "check": "none", "timeout": 3000, "optional": true }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "if": { "exists": "#ccpa-consent-banner" },
+            "then": [{ "visible": "#ccpa-consent-banner", "check": "none" }],
+            "else": [{ "visible": "#cookie-consent-banner", "check": "none" }]
+        }
+    ]
+}

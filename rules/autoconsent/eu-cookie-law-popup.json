@@ -1,0 +1,33 @@
+{
+    "name": "eu-cookie-law-popup",
+    "vendorUrl": "https://github.com/wimagguc/jquery-eu-cookie-law-popup",
+    "prehideSelectors": [".eupopup-container"],
+    "detectCmp": [
+        {
+            "exists": ".eupopup-container > .eupopup-closebutton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".eupopup-container > .eupopup-closebutton",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".eupopup-container .eupopup-button_1"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".eupopup-container > .eupopup-closebutton"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".eupopup-container > .eupopup-closebutton",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

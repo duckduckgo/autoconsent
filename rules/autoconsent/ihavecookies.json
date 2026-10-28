@@ -1,0 +1,20 @@
+{
+    "name": "ihavecookies",
+    "vendorUrl": "https://github.com/ketanmistry/ihavecookies",
+    "prehideSelectors": ["#gdpr-cookie-message"],
+    "detectCmp": [{ "exists": "#gdpr-cookie-message #gdpr-cookie-advanced" }],
+    "detectPopup": [{ "visible": "#gdpr-cookie-message" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#gdpr-cookie-message #gdpr-cookie-advanced" },
+        { "waitForVisible": "#gdpr-cookie-types" },
+        { "click": "#gdpr-cookie-types input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        {
+            "if": { "visible": "#gdpr-cookie-message #gdpr-cookie-accept2" },
+            "then": [{ "click": "#gdpr-cookie-message #gdpr-cookie-accept2" }],
+            "else": [{ "click": "#gdpr-cookie-message #gdpr-cookie-accept" }]
+        },
+        { "waitForVisible": "#gdpr-cookie-message", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "cookieControl=true" }]
+}

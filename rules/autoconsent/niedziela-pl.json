@@ -1,0 +1,35 @@
+{
+    "name": "niedziela-pl",
+    "vendorUrl": "https://niedziela.pl/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?niedziela\\.pl/"
+    },
+    "prehideSelectors": [".cookies:has(.closecookies)"],
+    "detectCmp": [
+        {
+            "exists": ".cookies .closecookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies .closecookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies .closecookies"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookies:has(.closecookies)"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookies .closecookies",
+            "check": "none"
+        }
+    ]
+}

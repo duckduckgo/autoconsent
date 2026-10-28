@@ -18,7 +18,28 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": ["iframe[srcdoc*='frame-root']", ".button__skip"]
+            "waitFor": ["iframe[srcdoc*='frame-root']", ".button__skip, .button__openPrivacyCenter"]
+        },
+        {
+            "if": {
+                "exists": ["iframe[srcdoc*='frame-root']", ".button__skip"]
+            },
+            "then": [
+                {
+                    "click": ["iframe[srcdoc*='frame-root']", ".button__skip"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["iframe[srcdoc*='frame-root']", ".button__openPrivacyCenter"]
+                },
+                {
+                    "waitForThenClick": ["iframe[srcdoc*='frame-root']", ".button__refuseAll"]
+                },
+                {
+                    "waitForThenClick": ["iframe[srcdoc*='frame-root']", ".button__save"]
+                }
+            ]
         }
     ],
     "test": [

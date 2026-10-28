@@ -5,6 +5,7 @@ import {
     cleanButtonText,
     classifyButtonTextRegex,
     classifyButtons,
+    classifyPopup,
     isExcludedPopup,
     negativeContext,
     DETECT_PATTERNS,
@@ -331,6 +332,13 @@ describe('isExcludedPopup', () => {
         expect(isExcludedPopup('Age verification\nYou must confirm your age to continue.')).to.be.true;
     });
 
+    it('flags an age gate whose only button is a bare accept, but not one with a cookie reject', () => {
+        const gate = 'Age verification\nYou must be over 18 years old to enter. This site uses cookies.';
+        expect(isExcludedPopup(`${gate}\nAccept all`)).to.be.true;
+        expect(isExcludedPopup(`${gate}\nAccepter`)).to.be.true;
+        expect(isExcludedPopup(`${gate}\nAccept all\nReject all`)).to.be.false;
+    });
+
     it('flags "must be 18 or older" disclaimers', () => {
         expect(isExcludedPopup('You must be 18 years or older to enter this site.')).to.be.true;
     });
@@ -553,6 +561,38 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
     });
 
+    it('matches Catalan acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Entenc')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ho entenc')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entès!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entesos')).to.equal('acknowledge');
+    });
+
+    it('matches Catalan necessary-only buttons as reject', () => {
+        expect(classifyButtonTextRegex('Només les necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Només necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Acceptar només les galetes necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Només galetes tècniques')).to.equal('reject');
+        expect(classifyButtonTextRegex('Només les essencials')).to.equal('reject');
+        expect(classifyButtonTextRegex('Continuar sense acceptar')).to.equal('reject');
+    });
+
+    it('matches Catalan settings buttons', () => {
+        expect(classifyButtonTextRegex('Configuració')).to.equal('settings');
+        expect(classifyButtonTextRegex('Personalitzar')).to.equal('settings');
+        expect(classifyButtonTextRegex('Preferències')).to.equal('settings');
+        expect(classifyButtonTextRegex('Més opcions')).to.equal('settings');
+        expect(classifyButtonTextRegex('Configuració de galetes')).to.equal('settings');
+        expect(classifyButtonTextRegex('Gestionar les meves preferències')).to.equal('settings');
+        expect(classifyButtonTextRegex('Gestiona les galetes')).to.equal('settings');
+    });
+
+    it('does not treat Catalan save or accept buttons as settings or reject', () => {
+        expect(classifyButtonTextRegex('Desar preferències')).to.not.equal('settings');
+        expect(classifyButtonTextRegex('Acceptar')).to.equal('accept');
+    });
+
     it('does not treat Russian subscription buttons as reject', () => {
         expect(classifyButtonTextRegex('Отказаться от подписки')).to.equal('other');
     });
@@ -575,6 +615,22 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Zustimmen schliessen')).to.equal('accept');
         expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
         expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
+    });
+});
+
+describe('classifyPopup', () => {
+    function classify(texts: string[]) {
+        return classifyPopup(texts.map((text) => ({ text, regexClassification: classifyButtonTextRegex(text) })));
+    }
+
+    it('dismisses a Catalan notice-only banner as tier1', () => {
+        expect(classify(['Entenc'])).to.equal('tier1');
+    });
+
+    it('does not acknowledge a Catalan banner that offers necessary-only or settings', () => {
+        expect(classify(['Entès', 'Només les necessàries'])).to.equal('reject');
+        expect(classify(['Entès', 'Preferències'])).to.equal('none');
+        expect(classify(['Entès', 'Personalitzar'])).to.equal('none');
     });
 });
 

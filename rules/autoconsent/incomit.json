@@ -1,0 +1,30 @@
+{
+    "name": "incomit",
+    "vendorUrl": "https://incomit.dk/",
+    "prehideSelectors": ["cookie-consent-element"],
+    "detectCmp": [
+        {
+            "exists": ["cookie-consent-element", ".incom-cookie-module"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["cookie-consent-element", ".incom-cookie-module #main-cookie-view"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["cookie-consent-element", "#main-cookie-view #cookie-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["cookie-consent-element", "#main-cookie-view nav button.btn:not(#cookie-accept-all)"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"isSelected\":false"
+        }
+    ]
+}

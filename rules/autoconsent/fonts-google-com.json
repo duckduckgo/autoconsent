@@ -1,0 +1,24 @@
+{
+    "name": "fonts.google.com",
+    "runContext": { "urlPattern": "^https?://fonts\\.google\\.com/" },
+    "prehideSelectors": ["gf-notifications .notification:has(a[href^=\"https://policies.google.com/technologies/cookies\"])"],
+    "detectCmp": [{ "exists": "gf-notifications .notification a[href^=\"https://policies.google.com/technologies/cookies\"]" }],
+    "detectPopup": [{ "visible": "gf-notifications .notification:has(a[href^=\"https://policies.google.com/technologies/cookies\"])" }],
+    "optIn": [
+        {
+            "waitForThenClick": "gf-notifications .notification:has(a[href^=\"https://policies.google.com/technologies/cookies\"]) button.notification__close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "gf-notifications .notification:has(a[href^=\"https://policies.google.com/technologies/cookies\"]) button.notification__close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "gf-notifications .notification:has(a[href^=\"https://policies.google.com/technologies/cookies\"])",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
