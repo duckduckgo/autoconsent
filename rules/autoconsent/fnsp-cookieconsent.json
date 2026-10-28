@@ -1,0 +1,30 @@
+{
+    "name": "fnsp-cookieconsent",
+    "vendorUrl": "https://www.helse-bergen.no/",
+    "prehideSelectors": ["[class*=\"_cookieconsent-banner--open_\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"_cookieconsent-banner_\"] [class*=\"_cookieconsent__button-container_\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"_cookieconsent-banner--open_\"] [class*=\"_cookieconsent--initial_\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"_cookieconsent--initial_\"] [class*=\"_cookieconsent__button-container_\"] > button:nth-child(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"_cookieconsent--initial_\"] [class*=\"_cookieconsent__button-container_\"] > button:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analyticsConsent%22%3Afalse%2C%22thirdPartyConsent%22%3Afalse%2C%22surveyConsent%22%3Afalse"
+        }
+    ]
+}
