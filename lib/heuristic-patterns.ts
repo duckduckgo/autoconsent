@@ -2,8 +2,10 @@
 export type HeuristicInput = 'popup' | 'page';
 /** A detect pattern, optionally limited to one input. */
 export type DetectPattern = RegExp | { pattern: RegExp; input: HeuristicInput };
+/** A test on a text: a regex that must match it, or a predicate. */
+export type TextTest = RegExp | ((text: string) => boolean);
 /** A never-match pattern excludes a popup when it matches, unless `unless` also matches. */
-export type NeverMatchPattern = RegExp | { pattern: RegExp; unless?: RegExp };
+export type NeverMatchPattern = RegExp | { pattern: RegExp; unless?: TextTest };
 /**
  * Drops a single detect pattern match when its context matches `pattern` and not `unless` (with only `unless`, when the
  * context lacks it). The context is `window` chars either side of the match, or its line and `lines` lines either side
@@ -12,7 +14,7 @@ export type NeverMatchPattern = RegExp | { pattern: RegExp; unless?: RegExp };
 export type ContextNegative = {
     name: string;
     pattern?: RegExp;
-    unless?: RegExp;
+    unless?: TextTest;
     window?: number;
     lines?: number | [number, number];
     input?: HeuristicInput;
@@ -622,6 +624,7 @@ const BARE_ACCEPT = [
     '\\baceptar(?: todas?)?\\b',
     '\\baccetta(?: tutti)?\\b',
 ].join('|');
+const COOKIE_CHOICE_RE = new RegExp(COOKIE_CHOICE, 'im');
 const CONSENT_CHOICE = new RegExp(`${COOKIE_CHOICE}|${BARE_ACCEPT}`, 'im');
 
 // an age limit, an adults-only statement or an age check, in the core languages
@@ -656,9 +659,6 @@ const NOTICE_CONTROL = new RegExp(`${CONSENT_CHOICE.source}|${DISMISS_LINE.sourc
 // an age gate's leave button on its own line, or "I am under 18" in the core languages
 const LEAVE_LINE =
     /^\s*(?:(?:no,? )?(?:i )?(?:want to )?(?:leave|exit|verlassen|quitter|sortir|salir|abandonar|esci|uscire|verlaten)\b[^\n]{0,30}|no,? take me away|(?:seite|hier) verlassen|(?:i am|i'm|ich bin|ik ben|je suis|soy|sono) (?:under|unter|onder|jonger dan|menor de(?: edad)?|minorenne|mineur)\b[^\n]{0,10})\s*[!.]?\s*$/im;
-// a consent control and no leave button: an age gate's "OK" next to "Leave" confirms the age, not cookies
-const consentNotAgeGate = (control: RegExp) =>
-    new RegExp(`(?<![\\s\\S])(?![\\s\\S]*(?:${LEAVE_LINE.source}))[\\s\\S]*?(?:${control.source})`, 'im');
 // a notice's own control: manage or configure cookies, a bare settings button line, or "close this popup"
 const NOTICE_OWN_CONTROL = new RegExp(
     [
@@ -672,8 +672,12 @@ const NOTICE_OWN_CONTROL = new RegExp(
     ].join('|'),
     'im',
 );
-// the age-gate exclusions' unless: a consent or notice control, and no leave button (an age gate keeps its own confirmation)
-const ageGateUnless = (control: RegExp) => consentNotAgeGate(new RegExp(`${control.source}|${NOTICE_OWN_CONTROL.source}`, 'im'));
+// the age-gate exclusions' unless: a consent or notice control, and no leave button. An age gate's "OK" next to "Leave"
+// confirms the age, not cookies.
+const ageGateUnless =
+    (control: RegExp) =>
+    (text: string): boolean =>
+        !LEAVE_LINE.test(text) && (control.test(text) || NOTICE_OWN_CONTROL.test(text));
 // consent vocabulary beyond "privacy", for patterns that also match terms of use and login text
 const CONSENT_WORDS =
     /cookie|consent|track|partner|personali[sz]|advertis|analytic|privacy (?:options|choices|settings|rights)|do not sell|opt[- ]out/i;
@@ -685,7 +689,7 @@ const LEGAL_AGREEMENT =
 export const DETECT_NEVER_MATCH_PATTERNS: NeverMatchPattern[] = [
     // popups with their own age confirmation are age gates, not cookie popups, even when they mention cookies
     // a bare accept doesn't count as a cookie choice here: it may confirm the age
-    { pattern: AGE_WORDING, unless: ageGateUnless(new RegExp(COOKIE_CHOICE, 'im')) },
+    { pattern: AGE_WORDING, unless: ageGateUnless(COOKIE_CHOICE_RE) },
     // a license or terms agreement may mention cookies, and its decline button must not be clicked as a cookie reject
     LEGAL_AGREEMENT,
 ];

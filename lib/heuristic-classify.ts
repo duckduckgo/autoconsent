@@ -13,6 +13,7 @@ import {
     DetectPattern,
     HeuristicInput,
     NeverMatchPattern,
+    TextTest,
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
@@ -37,10 +38,18 @@ type CompiledPatterns = { detect: CompiledPattern[]; literals: ReturnType<typeof
 
 // a regex without the global and sticky flags, so `test` keeps no state between calls
 const stateless = (re: RegExp) => new RegExp(re.source, re.flags.replace(/[gy]/g, ''));
+// a TextTest as a predicate
+function toPredicate(test: TextTest): (text: string) => boolean {
+    if (typeof test === 'function') {
+        return test;
+    }
+    const re = stateless(test);
+    return (text) => re.test(text);
+}
 
 const compiledPatterns = new WeakMap<DetectPattern[], CompiledPatterns>();
 const compiledNegatives = new WeakMap<ContextNegative[], CompiledNegative[]>();
-const compiledNeverMatch = new WeakMap<NeverMatchPattern[], { pattern: RegExp; unless: RegExp | null }[]>();
+const compiledNeverMatch = new WeakMap<NeverMatchPattern[], { pattern: RegExp; unless: ((text: string) => boolean) | null }[]>();
 
 function compilePatterns(detectPatterns: DetectPattern[]): CompiledPatterns {
     let compiled = compiledPatterns.get(detectPatterns);
@@ -65,10 +74,10 @@ function compileNegatives(negatives: ContextNegative[]): CompiledNegative[] {
     if (!compiled) {
         compiled = negatives.map((n) => {
             const pattern = n.pattern ? stateless(n.pattern) : null;
-            const unless = n.unless ? stateless(n.unless) : null;
+            const unless = n.unless ? toPredicate(n.unless) : null;
             return {
                 ...n,
-                hits: (context: string) => (!pattern || pattern.test(context)) && !(unless && unless.test(context)),
+                hits: (context: string) => (!pattern || pattern.test(context)) && !(unless && unless(context)),
                 applies: n.appliesTo ? new Set(n.appliesTo.map(String)) : null,
             };
         });
@@ -193,12 +202,12 @@ export function isExcludedPopup(popupText: string, excludePatterns: NeverMatchPa
         compiled = excludePatterns.map((p) =>
             p instanceof RegExp
                 ? { pattern: stateless(p), unless: null }
-                : { pattern: stateless(p.pattern), unless: p.unless ? stateless(p.unless) : null },
+                : { pattern: stateless(p.pattern), unless: p.unless ? toPredicate(p.unless) : null },
         );
         compiledNeverMatch.set(excludePatterns, compiled);
     }
     const truncated = popupText.slice(0, TEXT_LIMIT);
-    return compiled.some(({ pattern, unless }) => pattern.test(truncated) && !(unless && unless.test(truncated)));
+    return compiled.some(({ pattern, unless }) => pattern.test(truncated) && !(unless && unless(truncated)));
 }
 
 export function classifyPopup(buttons: ClassifiableButton[]): PopupClassification {
