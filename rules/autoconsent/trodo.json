@@ -1,0 +1,31 @@
+{
+    "name": "trodo",
+    "vendorUrl": "https://www.trodo.com/",
+    "prehideSelectors": ["section.cookie-consent:has(.-trodo-btn.decline)"],
+    "detectCmp": [
+        {
+            "exists": "section.cookie-consent .consent-action .-trodo-btn.decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie-consent .consent-action .-trodo-btn.decline"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie-consent .consent-action .-trodo-btn.accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cookie-consent .consent-action .-trodo-btn.decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "section.cookie-consent",
+            "check": "none"
+        }
+    ]
+}
