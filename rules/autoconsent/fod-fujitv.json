@@ -1,0 +1,13 @@
+{
+    "name": "fod-fujitv",
+    "vendorUrl": "https://fod.fujitv.co.jp/",
+    "runContext": {
+        "urlPattern": "^https?://fod\\.fujitv\\.co\\.jp/"
+    },
+    "prehideSelectors": [".cookieCheckContainer"],
+    "detectCmp": [{ "visible": ".cookieCheckContainer .closeBtn" }],
+    "detectPopup": [{ "visible": ".cookieCheckContainer" }],
+    "optIn": [{ "waitForThenClick": ".cookieCheckContainer .closeBtn" }],
+    "optOut": [{ "waitForThenClick": ".cookieCheckContainer .closeBtn" }],
+    "test": [{ "cookieContains": "ACP=1" }]
+}
