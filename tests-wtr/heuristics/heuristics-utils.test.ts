@@ -407,6 +407,19 @@ describe('popup exclusions', () => {
         ).to.be.false;
     });
 
+    it('flags "must be 18" and "21+ years" age gates', () => {
+        expect(isExcludedPopup('You must be 18 to enter this site. This site uses cookies.\nYes\nNo')).to.be.true;
+        expect(isExcludedPopup('Visitors must be at least 21 to continue. We use cookies.\nEnter')).to.be.true;
+        expect(isExcludedPopup('This site is 21+ years of age only. We use cookies.\nYes\nNo')).to.be.true;
+        expect(isExcludedPopup('Content for 18+ years old visitors. This site uses cookies.\nEnter')).to.be.true;
+    });
+
+    it('does not flag a cookie notice that states an age and offers essential-only cookies', () => {
+        expect(isExcludedPopup('You must be 18+ to use this site.\nWe use cookies to remember your preferences.\nEssential only\nAccept'))
+            .to.be.false;
+        expect(isExcludedPopup('You must be 18 to use this site.\nWe use cookies.\nOnly necessary\nAccept all')).to.be.false;
+    });
+
     it('suppresses every match of an excluded popup, and leaves page text alone', () => {
         const gate = 'Age verification\nYou must be over 18 years old to enter. This site uses cookies.\nAccept all';
         const popup = checkHeuristicPatterns(gate, 'popup');

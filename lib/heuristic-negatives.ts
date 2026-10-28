@@ -38,6 +38,7 @@ export type ContextNegative = {
 const COOKIE_CHOICE = [
     '\\b(?:accept|reject|decline|refuse|deny|allow|manage|customi[sz]e)\\b[^\\n]{0,25}\\bcookies?\\b',
     '\\b(?:reject|decline|deny|refuse) all\\b',
+    '\\b(?:essential|necessary|required) (?:cookies )?only\\b|\\bonly (?:essential|necessary|required)\\b',
     '\\bcookies? (?:notice|settings|preferences|banner)\\b',
     '\\b(?:alle )?(?:cookies )?ablehnen\\b',
     '\\b(?:alles |alle cookies )?(?:weigeren|weiger|afwijzen)\\b',
@@ -65,7 +66,9 @@ const CONSENT_CHOICE = new RegExp(`${COOKIE_CHOICE}|${BARE_ACCEPT}`, 'im');
 const AGE_WORDING = new RegExp(
     [
         '\\b(?:over|above|at least|older than|minimum(?: age of)?)\\s*(?:18|21|eighteen)\\b',
-        '\\b(?:18|21)\\s*(?:\\+|years?(?: of age| old)?|yo|or older|or over)\\b',
+        // "18+" only with age words after it: a bare "18+" also appears in cookie banners on adult sites
+        '\\b(?:18|21)\\+?\\s*(?:years?(?: of age| old)?|yo|or older|or over)\\b',
+        '\\b(?:you|users?|visitors?) must be (?:over |above |at least )?(?:18|21)\\b',
         "\\b(?:i'?m|i am) (?:over |at least )?(?:18|21)\\b",
         '\\bage (?:verification|confirmation|check|gate|restriction)\\b',
         '\\b(?:adults? only|adult[\\s-](?:oriented|content|material|website)|legal age|age of majority|not a minor|minors)\\b',
