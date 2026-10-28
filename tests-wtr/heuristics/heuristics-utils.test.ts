@@ -195,6 +195,23 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            'Vi samler anonym statistikk og bruker informasjonskapsler for å tilpasse innhold og annonser.',
+            'Nettstaden brukar informasjonskapslar for å gje deg ei betre oppleving.',
+            'Nettsiden benytter cookies for å forbedre brukeropplevelsen.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Velg flyplass og finn informasjon om din reise').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
@@ -347,6 +364,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
+    });
+
+    it('matches Norwegian reject buttons', () => {
+        expect(classifyButtonTextRegex('Avvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avvis')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avslå alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Bare nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta kun nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta alle')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Tilpass')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Avslutt')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
