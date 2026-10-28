@@ -1,0 +1,32 @@
+{
+    "name": "fnsp-cookieconsent",
+    "_metadata": {
+        "vendorUrl": "https://www.helse-sorost.no/"
+    },
+    "prehideSelectors": ["[class*='_cookieconsent-banner_']"],
+    "detectCmp": [
+        {
+            "exists": "[class*='_cookieconsent-banner_'] #cookieconsent-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*='_cookieconsent-banner_'] [class*='_cookieconsent__button-container_']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*='_cookieconsent-banner_'] [class*='_cookieconsent__button-container_'] > button:nth-child(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*='_cookieconsent-banner_'] [class*='_cookieconsent__button-container_'] > button:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22hasReadConsent%22%3Atrue%2C%22analyticsConsent%22%3Afalse%2C%22thirdPartyConsent%22%3Afalse"
+        }
+    ]
+}
