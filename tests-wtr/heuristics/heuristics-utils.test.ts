@@ -195,6 +195,23 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            // vy.no
+            'Vi bruker informasjonskapsler for å sikre at nettsidene fungerer, analysere bruken av sidene og tilby relevant markedsføring.',
+            'Nettstedet benytter seg av informasjonskapsler',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker elektriske tog på alle strekninger').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
