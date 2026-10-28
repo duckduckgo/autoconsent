@@ -5,4 +5,5 @@ generateCMPTests('fnsp-cookieconsent', [
     'https://www.helse-vest.no/',
     'https://www.oslo-universitetssykehus.no/',
     'https://www.stolav.no/',
+    'https://www.ahus.no/',
 ]);
