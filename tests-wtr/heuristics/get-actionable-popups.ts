@@ -246,6 +246,33 @@ describe('getActionablePopups', () => {
         });
     });
 
+    describe('Turkish popups', () => {
+        it('finds a Turkish cookie popup with a reject button', () => {
+            showPopup('popup-turkish-reject');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(1);
+            expect(rejectButtons(popups[0].buttons).map((b) => b.text)).to.deep.equal(['Reddet']);
+        });
+
+        it('does not treat accept as the only choice when a settings button is present', () => {
+            showPopup('popup-turkish-settings');
+
+            const popups = getActionablePopups('tier2');
+
+            expect(popups.length).to.equal(0);
+        });
+
+        it('ignores a popup that uses "çerez" in its snack sense', () => {
+            showPopup('popup-turkish-snack');
+
+            const popups = getActionablePopups();
+
+            expect(popups.length).to.equal(0);
+        });
+    });
+
     describe('button classification', () => {
         it('separates reject buttons from other buttons', () => {
             showPopup('popup-multiple-buttons');
