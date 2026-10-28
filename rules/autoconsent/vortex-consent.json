@@ -1,0 +1,24 @@
+{
+    "name": "vortex-consent",
+    "prehideSelectors": ["div.consent[role=\"dialog\"][aria-labelledby=\"consent-dialog-title\"]"],
+    "detectCmp": [
+        {
+            "exists": "div.consent[role=\"dialog\"] button.consent-decline-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.consent[role=\"dialog\"] button.consent-decline-all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.consent[role=\"dialog\"] button.consent-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.consent[role=\"dialog\"] button.consent-decline-all"
+        }
+    ]
+}
