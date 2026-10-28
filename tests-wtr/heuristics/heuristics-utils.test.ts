@@ -195,6 +195,26 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            // lanekassen.no
+            'Vi bruker nødvendige informasjonskapsler for at nettstedet skal fungere og være trygt å bruke.',
+            'Nettstedet bruker informasjonskapsler (cookies) for å forbedre tjenestene våre.',
+            'Vi brukar informasjonskapslar for å gje deg ei betre oppleving.',
+            'Denne siden bruker cookies for å gi deg en bedre opplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker opplysningene dine for å beregne studielånet ditt').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Les mer om informasjonskapsler').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)

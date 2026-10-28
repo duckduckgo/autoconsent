@@ -182,6 +182,11 @@ export const DETECT_PATTERNS = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /bruger cookies/gi,
+
+    // Norwegian (NO)
+    // e.g. "vi bruker nødvendige informasjonskapsler", "nettstedet bruker informasjonskapsler (cookies)", "vi brukar informasjonskapslar"
+    /(?:vi|nettstedet|nettsiden|nettstaden|nettsida)\s+(?:bruker|brukar|benytter|nyttar)\s.{0,60}(?:informasjonskapsl|cookies)/gi,
+    /bruker cookies/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
