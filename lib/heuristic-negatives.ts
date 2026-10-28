@@ -46,7 +46,7 @@ const COOKIE_CHOICE = [
     '\\brechazar(?: todas?)?\\b',
     '\\brifiuta(?: tutti)?\\b',
     // purposes and vendors as a button or heading line: some consent dialogs ask "under 18?"
-    '^[^\\n]{0,40}\\b(?:purposes|finalités|propósitos|zwecke|doeleinden|finalità|vendors|fournisseurs|proveedores|leveranciers|fornitori)\\b[^\\n]{0,10}$',
+    '^[^\\n]{0,40}\\b(?:purposes|finalités|propósitos|zwecke|doeleinden|finalità|vendors|fournisseurs|proveedores|leveranciers|fornitori)(?!\\w)[^\\n]{0,10}$',
     '\\b(?:legitimate (?:business )?interest|intérêt légitime|interés legítimo|berechtigtes interesse|gerechtvaardigd belang|legittimo interesse)\\b',
     '\\b(?:we|nous|wir|wij|noi|nosotros) (?:and|et|und|en|e|y) (?:our|nos|unsere|onze|i nostri|nuestros) (?:\\d+ )?(?:partners|partenaires|partner|socios)\\b',
 ].join('|');
@@ -78,11 +78,12 @@ const AGE_WORDING = new RegExp(
         '\\b(?:18|21) jaar\\b',
         '\\b(?:volwassenen|meerderjarig|minderjarigen|leeftijdsverificatie)\\b',
         '\\b(?:18|21) ans\\b',
-        '\\b(?:pour adultes|âge légal|vérification de l.âge|mineurs)\\b',
+        // no \\b before an accented letter: without the u flag it is not a word character
+        '\\b(?:pour adultes|vérification de l.âge|mineurs)\\b|âge légal\\b',
         '\\b(?:18|21) años\\b',
         '\\b(?:mayor(?:es)? de edad|menores de edad|para adultos|verificación de edad)\\b',
         '\\b(?:18|21) anni\\b',
-        '\\b(?:maggiorenne|minorenni|per adulti|verifica dell.età)\\b',
+        '\\b(?:maggiorenne|minorenni|per adulti)\\b|\\bverifica dell.età(?!\\w)',
     ].join('|'),
     'i',
 );

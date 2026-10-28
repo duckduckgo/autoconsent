@@ -224,7 +224,7 @@ export const DETECT_PATTERN_LITERALS: Record<string, string[]> = {
     ],
     '/cookies pròpies i de tercers/gi': ['cookies pròpies i de tercers'],
     '/utilitzem galetes/gi': ['utilitzem galetes'],
-    '/\\búnicament utilitza galetes pròpies amb finalitat tècnica\\b/gi': ['únicament utilitza galetes pròpies amb finalitat tècnica'],
+    '/únicament utilitza galetes pròpies amb finalitat tècnica\\b/gi': ['únicament utilitza galetes pròpies amb finalitat tècnica'],
     '/este lloc web utilitza només cookies tècniques necessàries per al seu funcionament/gi': [
         'este lloc web utilitza només cookies tècniques necessàries per al seu funcionament',
     ],

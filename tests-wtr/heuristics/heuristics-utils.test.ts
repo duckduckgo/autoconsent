@@ -414,6 +414,11 @@ describe('popup exclusions', () => {
         expect(isExcludedPopup('Content for 18+ years old visitors. This site uses cookies.\nEnter')).to.be.true;
     });
 
+    it('flags French and Italian age gates worded with accented letters', () => {
+        expect(isExcludedPopup("Vous devez avoir l'âge légal pour entrer. Ce site utilise des cookies.\nOui\nNon")).to.be.true;
+        expect(isExcludedPopup("Prima di entrare: verifica dell'età. Questo sito usa cookie.\nSì\nNo")).to.be.true;
+    });
+
     it('does not flag a cookie notice that states an age and offers essential-only cookies', () => {
         expect(isExcludedPopup('You must be 18+ to use this site.\nWe use cookies to remember your preferences.\nEssential only\nAccept'))
             .to.be.false;
