@@ -1,0 +1,40 @@
+{
+    "name": "meta-cookie-dialog-v2",
+    "vendorUrl": "https://www.meta.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?meta\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[@role='dialog' and @aria-modal='true']//div[following-sibling::div[@aria-hidden='true'][.//div[@role='button' and @aria-disabled='true']]]/div[@role='button' and @tabindex='0']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[@role='dialog' and @aria-modal='true']//div[following-sibling::div[@aria-hidden='true'][.//div[@role='button' and @aria-disabled='true']]]/div[@role='button' and @tabindex='0']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and @aria-modal='true']//div[preceding-sibling::div[@aria-hidden='true'][.//div[@role='button' and @aria-disabled='true']]]/div[@role='button' and @tabindex='0']",
+            "retry": 20,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "xpath///div[@role='dialog' and @aria-modal='true']//div[preceding-sibling::div[@aria-hidden='true'][.//div[@role='button' and @aria-disabled='true']]]/div[@role='button' and @tabindex='0']",
+            "check": "none"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and @aria-modal='true']//div[following-sibling::div[@aria-hidden='true'][.//div[@role='button' and @aria-disabled='true']]]/div[@role='button' and @tabindex='0']",
+            "retry": 20,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "xpath///div[@role='dialog' and @aria-modal='true']//div[following-sibling::div[@aria-hidden='true'][.//div[@role='button' and @aria-disabled='true']]]/div[@role='button' and @tabindex='0']",
+            "check": "none"
+        }
+    ]
+}
