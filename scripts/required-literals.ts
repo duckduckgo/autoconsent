@@ -64,6 +64,31 @@ function plainAlternatives(inner: string): string[] | null {
     return plain.every((p) => p && !/[\\.^$*+?()[\]{}|]/.test(p)) ? plain.map((p) => p.toLowerCase()) : null;
 }
 
+/** The index after the escape that starts at src[i] (a backslash), including multi-character escapes such as \\uXXXX. */
+function escapeEnd(src: string, i: number): number {
+    const n = src[i + 1];
+    const through = (close: string) => {
+        const at = src.indexOf(close, i + 2);
+        return at === -1 ? src.length : at + 1;
+    };
+    if (n === 'u') {
+        return src[i + 2] === '{' ? through('}') : i + 6;
+    }
+    if (n === 'x') {
+        return i + 4;
+    }
+    if (n === 'c') {
+        return i + 3;
+    }
+    if ((n === 'p' || n === 'P') && src[i + 2] === '{') {
+        return through('}');
+    }
+    if (n === 'k' && src[i + 2] === '<') {
+        return through('>');
+    }
+    return i + 2;
+}
+
 function literalsOf(src: string): string[] {
     const alts = alternatives(src);
     if (alts.length > 1) {
@@ -106,8 +131,9 @@ function literalsOf(src: string): string[] {
             if (/[^A-Za-z0-9]/.test(n)) {
                 i = literalChar(n, i + 2);
             } else {
+                // a class escape (\\s, \\b…) or a character, property or backreference escape ends the run
                 end();
-                i = quantifier(i + 2).next;
+                i = quantifier(escapeEnd(src, i)).next;
             }
         } else if (c === '[') {
             end();

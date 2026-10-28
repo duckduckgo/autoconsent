@@ -285,6 +285,18 @@ describe('requiredLiterals', () => {
         expect(requiredLiterals(/by continuing|\bab\b/gi)).to.deep.equal([]);
     });
 
+    it('does not read the characters of a multi-character escape as literals', () => {
+        // built from strings: the bundler would turn some escapes in regex literals into the characters themselves
+        const literals = (source: string, flags = 'i') => requiredLiterals(new RegExp(source, flags));
+        // each literal must appear in text the pattern matches, such as "café cookies" or "Abcde"
+        expect(literals('caf\\u00e9 cookies')).to.deep.equal([' cookies']);
+        expect(literals('\\u{e9}tat des cookies', 'iu')).to.deep.equal(['tat des cookies']);
+        expect(literals('\\x41bcde')).to.deep.equal(['bcde']);
+        expect(literals('\\p{L}+ cookie banner', 'iu')).to.deep.equal([' cookie banner']);
+        expect(literals('(?<w>allow)\\k<w> cookies')).to.deep.equal([' cookies']);
+        expect(literals('\\cJcookie notice', '')).to.deep.equal(['cookie notice']);
+    });
+
     it('does not change results: the same patterns match as without the prefilter', () => {
         const plain = DETECT_PATTERNS.filter((p): p is RegExp => p instanceof RegExp);
         const texts = ['ACCEPT ALL COOKIES', 'We use analytics Cookies', 'nothing here', 'Tout refuser', 'Utilizziamo i cookie', ''];
