@@ -12,3 +12,8 @@ generateCMPTests('cookie-script', [
     'https://n8n.io/',
     'https://hearthis.at/',
 ]);
+
+// category checkboxes in the banner, no manage button, hidden "Save & Close"; site is blocked outside Europe
+generateCMPTests('cookie-script', ['https://alledaek365.dk/'], {
+    onlyRegions: ['DE', 'FR', 'NL', 'PL', 'DK'],
+});
