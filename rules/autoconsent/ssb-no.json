@@ -1,0 +1,10 @@
+{
+    "name": "ssb.no",
+    "runContext": { "urlPattern": "^https?://(www\\.)?ssb\\.no/" },
+    "prehideSelectors": ["#cookieBanner .cookie-banner"],
+    "detectCmp": [{ "exists": "#cookieBanner .cookie-banner .cookie-button-decline" }],
+    "detectPopup": [{ "visible": "#cookieBanner .cookie-banner" }, { "cookieContains": "ssbno-consent=unidentified" }],
+    "optIn": [{ "wait": 1000 }, { "waitForThenClick": "#cookieBanner .cookie-button-accept" }],
+    "optOut": [{ "wait": 1000 }, { "waitForThenClick": "#cookieBanner .cookie-button-decline" }],
+    "test": [{ "wait": 1000 }, { "cookieContains": "ssbno-consent=necessary" }]
+}
