@@ -1,3 +1,46 @@
+# v16.63.0 (Wed Oct 28 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #3: gva.es [#2203](https://github.com/duckduckgo/autoconsent/pull/2203) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: volvocars-com [#2195](https://github.com/duckduckgo/autoconsent/pull/2195) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: AppConsent legacy [#2194](https://github.com/duckduckgo/autoconsent/pull/2194) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: romeo [#2196](https://github.com/duckduckgo/autoconsent/pull/2196) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ckies, funding-choices [#2197](https://github.com/duckduckgo/autoconsent/pull/2197) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: casier-judiciaire-justice-gouv-fr [#2198](https://github.com/duckduckgo/autoconsent/pull/2198) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eu-cookie-law-popup [#2199](https://github.com/duckduckgo/autoconsent/pull/2199) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stockholm-stad [#2200](https://github.com/duckduckgo/autoconsent/pull/2200) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiesinfo-closecookies [#2201](https://github.com/duckduckgo/autoconsent/pull/2201) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vue-cookie-accept-decline [#2202](https://github.com/duckduckgo/autoconsent/pull/2202) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: urvaerket [#2193](https://github.com/duckduckgo/autoconsent/pull/2193) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: polisen-se [#2180](https://github.com/duckduckgo/autoconsent/pull/2180) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: meta-cookie-dialog [#2182](https://github.com/duckduckgo/autoconsent/pull/2182) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stright [#2185](https://github.com/duckduckgo/autoconsent/pull/2185) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: poki [#2177](https://github.com/duckduckgo/autoconsent/pull/2177) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stripchat.com [#2178](https://github.com/duckduckgo/autoconsent/pull/2178) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fascicolosanitario-lombardia [#2179](https://github.com/duckduckgo/autoconsent/pull/2179) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tvp [#2181](https://github.com/duckduckgo/autoconsent/pull/2181) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: luxmed [#2183](https://github.com/duckduckgo/autoconsent/pull/2183) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kartverket [#2184](https://github.com/duckduckgo/autoconsent/pull/2184) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: civilservicejobs-service-gov-uk [#2186](https://github.com/duckduckgo/autoconsent/pull/2186) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: insided [#2187](https://github.com/duckduckgo/autoconsent/pull/2187) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hyrabostad.se [#2188](https://github.com/duckduckgo/autoconsent/pull/2188) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mittanbud [#2189](https://github.com/duckduckgo/autoconsent/pull/2189) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dack365 [#2190](https://github.com/duckduckgo/autoconsent/pull/2190) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: beetle-tracking [#2192](https://github.com/duckduckgo/autoconsent/pull/2192) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Bump the dev-dependencies group across 1 directory with 6 updates [#2176](https://github.com/duckduckgo/autoconsent/pull/2176) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v16.62.0 (Tue Oct 27 2026)
 
 #### Rules
