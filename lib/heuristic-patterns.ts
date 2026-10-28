@@ -174,6 +174,8 @@ export const DETECT_PATTERNS = [
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
     /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // e.g. "tillåter du kakor för att ...", "godkänner du att vi sparar cookies"
+    /(?:tillåter|godkänner|accepterar)\s+du.{0,40}(?:cookies|kakor)/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"

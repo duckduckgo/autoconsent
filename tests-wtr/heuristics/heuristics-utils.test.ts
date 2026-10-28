@@ -151,6 +151,8 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
             'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
             'Vi använder cookies för att förbättra din upplevelse',
             'Webbplatsen använder kakor',
+            // artfakta.se
+            'Vi vill ge dig en bättre upplevelse. Tillåter du kakor för att analysera våra digitala tjänster?',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -159,6 +161,7 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
 
     it('does not detect unrelated Swedish text', () => {
         expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Tillåter du husdjur i lägenheten?').patterns).to.have.length(0);
     });
 });
 
