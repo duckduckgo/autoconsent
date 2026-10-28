@@ -10,6 +10,7 @@ generateCMPTests(
         'https://www.nih.no/',
         'https://www.himolde.no/',
         'https://www.samordnaopptak.no/',
+        'https://www.aho.no/',
     ],
     {
         testSelfTest: false,
