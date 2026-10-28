@@ -96,6 +96,24 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            'Vi bruker informasjonskapsler for å forstå hvordan siden brukes.',
+            'Nettstedet benytter seg av informasjonskapsler',
+            'Vi benytter informasjonskapsler for å gi deg en bedre opplevelse',
+            'Denne siden bruker cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect a bare cookie policy link', () => {
+        expect(checkHeuristicPatterns('Personvern og informasjonskapsler').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
@@ -347,6 +365,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
+    });
+
+    it('matches Norwegian reject buttons', () => {
+        expect(classifyButtonTextRegex('Avvis')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avslå')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Tilpass')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
