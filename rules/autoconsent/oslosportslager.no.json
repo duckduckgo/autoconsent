@@ -1,0 +1,34 @@
+{
+    "name": "oslosportslager.no",
+    "vendorUrl": "https://oslosportslager.no/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?oslosportslager\\.no/"
+    },
+    "prehideSelectors": ["#footerCurtainCookie"],
+    "detectCmp": [
+        {
+            "exists": "#footerCurtainCookie .footerCookieLink"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#footerCurtainCookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#footerCurtainCookie .footerButtonFix"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#footerCurtainCookie .footerCookieLink"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "SL_cookie=NO"
+        }
+    ]
+}
