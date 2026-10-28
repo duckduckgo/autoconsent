@@ -1,0 +1,43 @@
+{
+    "name": "prosiebensat1",
+    "_metadata": {
+        "vendorUrl": "https://www.prosiebensat1.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": ["cmp-banner", "dialog#cmp-dialog-focus cmp-dialog"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["cmp-banner", ".banner:not(.banner--hidden) cmp-dialog", ".dialog--tcf"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["cmp-banner", "cmp-dialog", ".dialog__action--primary cmp-button"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["cmp-banner", "cmp-dialog", ".dialog--splash .dialog__topright cmp-link"]
+            },
+            "then": [
+                {
+                    "comment": "\"continue without selection\" rejects all non-essential purposes",
+                    "waitForThenClick": ["cmp-banner", "cmp-dialog", ".dialog--splash .dialog__topright cmp-link"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["cmp-banner", "cmp-dialog", ".dialog--splash .dialog__action--secondary cmp-button"]
+                },
+                {
+                    "waitForThenClick": ["cmp-banner", "cmp-dialog", ".dialog--configuration .dialog__action--secondary cmp-button"]
+                }
+            ]
+        }
+    ],
+    "test": []
+}
