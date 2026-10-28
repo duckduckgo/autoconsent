@@ -1,0 +1,99 @@
+{
+    "name": "livejasmin",
+    "vendorUrl": "https://www.livejasmin.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?livejasmin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#consent_modal [data-testid=\"Over18ModalVariant1Content\"] > button, #legalAgreementModal #manage-cookies-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent_modal [data-testid=\"Over18ModalVariant1Content\"] > button, #legalAgreementModal.open #manage-cookies-link",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent_modal [data-testid=\"Over18ModalVariant1Content\"] > button:first-of-type, #legalAgreementModal #accept-all-cookies-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#reject-all-cookies-btn"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#consent_modal #reject-all-cookies-btn, #legalAgreementModal.open #reject-all-cookies-btn:not([disabled])",
+                    "comment": "Reject All",
+                    "retry": 10,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": "#legalAgreementModal #manage-cookies-link"
+                    },
+                    "then": [
+                        {
+                            "waitFor": "#modals-container[class]",
+                            "timeout": 20000,
+                            "comment": "clicking before the app has mounted loses the navigation"
+                        },
+                        {
+                            "waitForThenClick": "#legalAgreementModal #manage-cookies-link:not(.disabled)",
+                            "comment": "Manage or reject Cookies"
+                        },
+                        {
+                            "waitForVisible": "#ManageCookies button[data-test-id=\"confirm-my-choices\"]"
+                        },
+                        {
+                            "click": "#ManageCookies input[type=\"checkbox\"]:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "#ManageCookies button[data-test-id=\"confirm-my-choices\"]",
+                            "comment": "Confirm My Choices",
+                            "retry": 5,
+                            "retryInterval": 500
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#consent_modal [data-testid=\"Over18ModalVariant1Content\"] > button:last-of-type",
+                            "comment": "Manage or reject Cookies",
+                            "retry": 10,
+                            "retryInterval": 500
+                        },
+                        {
+                            "waitForVisible": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieContent\"]"
+                        },
+                        {
+                            "click": "input[data-testid=\"PrivacyPreferenceCenterWithConsentCookieSwitch\"]:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "[data-testid=\"PrivacyPreferenceCenterWithConsentCookieContent\"] > button[data-testid=\"ButtonStyledButton\"]",
+                            "comment": "Confirm My Choices",
+                            "retry": 3
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#consent_modal [data-testid=\"Over18ModalVariant1Content\"] > button, [data-testid=\"PrivacyPreferenceCenterWithConsentCookieModal\"], #legalAgreementModal.open, #ManageCookies button[data-test-id=\"confirm-my-choices\"]",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
