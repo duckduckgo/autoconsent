@@ -1,9 +1,13 @@
-import { classifyButtons, classifyPopup, hasHeuristicPatterns, isExcludedPopup } from './heuristic-classify';
+import { classifyButtons, classifyPopup, DETECT_CONTEXT_NEGATIVES, hasHeuristicPatterns } from './heuristic-classify';
 import { ButtonData, HeuristicLevel, HitTestGrid, PopupClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
 const POPUP_SEARCH_MAX_TIME = 100;
+// the search climbs to a popup's root before isConsentPopup applies the whole-text exclusions, such as age gates
+const FRAGMENT_NEGATIVES = DETECT_CONTEXT_NEGATIVES.filter((n) => !n.whole);
+// the text looks like part of a consent popup, before the whole-text exclusions
+const hasFragmentPatterns = (text: string) => hasHeuristicPatterns(text, 'popup', { negatives: FRAGMENT_NEGATIVES });
 
 // popup classifications the heuristic rule can act on, by heuristic mode
 const ACCEPTED_LEVELS: Record<HeuristicLevel, PopupClassification[]> = {
@@ -71,7 +75,7 @@ function isConsentPopup(popup: PopupData): boolean {
     let result = consentPopups.get(popup);
     if (result === undefined) {
         const popupText = popup.text.trim();
-        result = !!popupText && !isExcludedPopup(popupText) && hasHeuristicPatterns(popupText, 'popup');
+        result = !!popupText && hasHeuristicPatterns(popupText, 'popup');
         consentPopups.set(popup, result);
     }
     return result;
@@ -250,7 +254,7 @@ function isOnlyButtonText(text: string, buttons: ButtonData[]): boolean {
 function toPopupRoot(el: HTMLElement, shadowHosts?: HTMLElement[]): PopupData | null {
     // check the text first: it is cheaper than collecting buttons
     const text = getElementText(el);
-    if (!text || !hasHeuristicPatterns(text, 'popup')) {
+    if (!text || !hasFragmentPatterns(text)) {
         return null;
     }
     const popup = toPopupData(el, shadowHosts, text);
@@ -295,7 +299,7 @@ function climbToPopup(
  */
 function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): PopupData {
     // the same acceptance check as toPopupRoot, on the buttons already collected
-    if (hasHeuristicPatterns(popup.text, 'popup') && hasPopupButtons(popup.text, popup.buttons)) {
+    if (hasFragmentPatterns(popup.text) && hasPopupButtons(popup.text, popup.buttons)) {
         return popup;
     }
     const parent = getComposedParent(popup.element);

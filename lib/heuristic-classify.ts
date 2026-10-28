@@ -8,11 +8,9 @@ import {
     BUTTON_NEVER_MATCH_PATTERNS,
     ContextNegative,
     DETECT_CONTEXT_NEGATIVES,
-    DETECT_NEVER_MATCH_PATTERNS,
     DETECT_PATTERNS,
     DetectPattern,
     HeuristicInput,
-    NeverMatchPattern,
     TextTest,
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
@@ -49,7 +47,6 @@ function toPredicate(test: TextTest): (text: string) => boolean {
 
 const compiledPatterns = new WeakMap<DetectPattern[], CompiledPatterns>();
 const compiledNegatives = new WeakMap<ContextNegative[], CompiledNegative[]>();
-const compiledNeverMatch = new WeakMap<NeverMatchPattern[], { pattern: RegExp; unless: ((text: string) => boolean) | null }[]>();
 
 function compilePatterns(detectPatterns: DetectPattern[]): CompiledPatterns {
     let compiled = compiledPatterns.get(detectPatterns);
@@ -88,6 +85,9 @@ function compileNegatives(negatives: ContextNegative[]): CompiledNegative[] {
 
 /** The text around a match that a context negative is tested on. */
 export function negativeContext(text: string, start: number, end: number, negative: ContextNegative): string {
+    if (negative.whole) {
+        return text;
+    }
     if (negative.lines === undefined) {
         const w = negative.window ?? DEFAULT_WINDOW;
         return text.slice(Math.max(0, start - w), end + w);
@@ -138,6 +138,19 @@ function matchHeuristicPatterns(
     const compiled = compilePatterns(detectPatterns);
     const applicable = compileNegatives(negatives).filter((n) => !n.input || n.input === input);
     let present: Set<string> | undefined;
+    // a whole-text negative gives the same answer for every match, so it is tested once
+    const wholeHits = new Map<CompiledNegative, boolean>();
+    const hitsAt = (n: CompiledNegative, start: number, end: number) => {
+        if (!n.whole) {
+            return n.hits(negativeContext(allText, start, end, n));
+        }
+        let hit = wholeHits.get(n);
+        if (hit === undefined) {
+            hit = n.hits(allText);
+            wholeHits.set(n, hit);
+        }
+        return hit;
+    };
 
     for (const d of compiled.detect) {
         if (d.input && d.input !== input) {
@@ -160,7 +173,7 @@ function matchHeuristicPatterns(
             // matchAll clones the regex, so the shared global copy keeps no state
             for (const m of allText.matchAll(d.global)) {
                 const start = m.index ?? 0;
-                const hit = own.find((n) => n.hits(negativeContext(allText, start, start + m[0].length, n)));
+                const hit = own.find((n) => hitsAt(n, start, start + m[0].length));
                 if (!hit) {
                     kept = true;
                     break;
@@ -193,21 +206,15 @@ export function classifyButtons(buttons: ClassifiableButton[]) {
     }
 }
 
-export function isExcludedPopup(popupText: string, excludePatterns: NeverMatchPattern[] = DETECT_NEVER_MATCH_PATTERNS): boolean {
-    if (!popupText) {
-        return false;
-    }
-    let compiled = compiledNeverMatch.get(excludePatterns);
-    if (!compiled) {
-        compiled = excludePatterns.map((p) =>
-            p instanceof RegExp
-                ? { pattern: stateless(p), unless: null }
-                : { pattern: stateless(p.pattern), unless: p.unless ? toPredicate(p.unless) : null },
-        );
-        compiledNeverMatch.set(excludePatterns, compiled);
-    }
-    const truncated = popupText.slice(0, TEXT_LIMIT);
-    return compiled.some(({ pattern, unless }) => pattern.test(truncated) && !(unless && unless(truncated)));
+/**
+ * Names of the whole-text context negatives that exclude a text as this input, whether or not detect patterns match it:
+ * why a popup is not a consent popup.
+ */
+export function excludedBy(text: string, input?: HeuristicInput, negatives: ContextNegative[] = DETECT_CONTEXT_NEGATIVES): string[] {
+    const truncated = (text || '').slice(0, TEXT_LIMIT);
+    return compileNegatives(negatives)
+        .filter((n) => n.whole && (!n.input || n.input === input) && n.hits(truncated))
+        .map((n) => n.name);
 }
 
 export function classifyPopup(buttons: ClassifiableButton[]): PopupClassification {

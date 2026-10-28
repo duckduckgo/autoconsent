@@ -6,7 +6,7 @@ import {
     classifyButtonTextRegex,
     classifyButtons,
     classifyPopup,
-    isExcludedPopup,
+    excludedBy,
     negativeContext,
     DETECT_PATTERNS,
 } from '../../lib/heuristic-classify';
@@ -318,7 +318,10 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
-describe('isExcludedPopup', () => {
+// excluded as a popup by a whole-text context negative
+const isExcludedPopup = (text: string) => excludedBy(text, 'popup').length > 0;
+
+describe('popup exclusions', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
         const text =
@@ -402,6 +405,15 @@ describe('isExcludedPopup', () => {
                 'We and our partners use cookies and other technologies (together hereinafter: "Cookies") to store and/or access device information.\nAccept all\nReject all',
             ),
         ).to.be.false;
+    });
+
+    it('suppresses every match of an excluded popup, and leaves page text alone', () => {
+        const gate = 'Age verification\nYou must be over 18 years old to enter. This site uses cookies.\nAccept all';
+        const popup = checkHeuristicPatterns(gate, 'popup');
+        expect(popup.patterns).to.have.length(0);
+        expect(popup.suppressed.map((s) => s.negative)).to.include('age-gate-popup');
+        expect(hasHeuristicPatterns(gate, 'popup')).to.be.false;
+        expect(excludedBy(gate, 'page')).to.have.length(0);
     });
 });
 
