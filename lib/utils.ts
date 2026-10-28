@@ -109,6 +109,7 @@ export function normalizeConfig(providedConfig: any): Config {
         },
         performanceLoggingEnabled: false,
         heuristicPopupSearchTimeout: 100,
+        enableHeuristicHitTest: false,
         heuristicMode: 'off', // heuristic disabled by default
     };
     const updatedConfig: Config = copyObject(defaultConfig);
