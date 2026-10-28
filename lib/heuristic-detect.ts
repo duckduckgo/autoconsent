@@ -111,6 +111,11 @@ function matchHeuristicPatterns(
     { patterns: detectPatterns = DETECT_PATTERNS, negatives = DETECT_CONTEXT_NEGATIVES }: HeuristicPatternOptions,
     firstOnly: boolean,
 ) {
+    // the second argument used to be a pattern list: fail loudly rather than silently use the built-in patterns
+    if (input !== undefined && input !== 'popup' && input !== 'page') {
+        const got = Array.isArray(input) ? 'a pattern list (pass it as the `patterns` option)' : JSON.stringify(input);
+        throw new TypeError(`heuristic input must be 'popup', 'page' or undefined, got ${got}`);
+    }
     allText = (allText || '').slice(0, TEXT_LIMIT);
     const patterns = [];
     const snippets = [];

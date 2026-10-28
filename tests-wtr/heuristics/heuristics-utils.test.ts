@@ -251,6 +251,12 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
         }
     });
 
+    it('rejects a pattern list as the input argument', () => {
+        const legacy = checkHeuristicPatterns as unknown as (text: string, patterns: RegExp[]) => unknown;
+        expect(() => legacy('We use cookies', [/we use cookies/gi])).to.throw(TypeError, /patterns/);
+        expect(() => (hasHeuristicPatterns as unknown as (t: string, i: string) => boolean)('We use cookies', 'frame')).to.throw(TypeError);
+    });
+
     it('takes the line or neighbouring lines as the context', () => {
         const text = 'one\ntwo\nthree four\nfive\nsix';
         const at = text.indexOf('four');

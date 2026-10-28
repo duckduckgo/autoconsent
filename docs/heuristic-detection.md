@@ -25,6 +25,15 @@ Every call says what the text is:
 
 A detect pattern (`{ pattern, input }`) or a context negative (`input`) can be limited to one input. Without an input, only unscoped ones apply.
 
+## Using the lists
+
+The `./heuristics` entry exports the lists. Their entries aren't all regexes:
+
+- **`DETECT_PATTERNS`:** each entry is a `RegExp` or `{ pattern, input }`. Use `p instanceof RegExp ? p : p.pattern` to get the regex. Passing an object to `String.prototype.match` would turn it into the regex `/[object Object]/`.
+- **`DETECT_CONTEXT_NEGATIVES`:** each entry is a `ContextNegative`. Its `unless` may be a predicate rather than a regex.
+
+To match text, call `checkHeuristicPatterns` or `hasHeuristicPatterns` rather than running the regexes yourself: they apply scopes, the prefilter and negatives. Custom lists go in the `patterns` and `negatives` options. The second argument is the input, and the functions throw if they get a list there, as older callers passed one.
+
 ## Matching a text
 
 `checkHeuristicPatterns(text, input, { patterns?, negatives? })` returns `{ patterns, snippets, suppressed }`. `hasHeuristicPatterns` gives the same answer as a boolean, and stops at the first pattern that counts.
