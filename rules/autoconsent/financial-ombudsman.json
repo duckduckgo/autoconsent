@@ -1,0 +1,36 @@
+{
+    "name": "financial-ombudsman",
+    "vendorUrl": "https://www.financial-ombudsman.org.uk/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?financial-ombudsman\\.org\\.uk/"
+    },
+    "prehideSelectors": ["#cookie-banner.cookie-banner-wrapper", ".cookie-banner-body-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner.cookie-banner-wrapper #cookie-accept-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner.show-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #cookie-accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the only reject path navigates away to a preferences page; no stored choice already means no optional cookies",
+            "hide": "#cookie-banner.cookie-banner-wrapper, .cookie-banner-body-overlay"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie-banner.show-cookie-banner",
+            "check": "none"
+        }
+    ]
+}
