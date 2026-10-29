@@ -1,0 +1,13 @@
+{
+    "name": "greatschools",
+    "vendorUrl": "https://www.greatschools.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?greatschools\\.org/"
+    },
+    "prehideSelectors": ["#privacy-banner"],
+    "detectCmp": [{ "exists": "#privacy-banner #privacy-banner-close" }],
+    "detectPopup": [{ "visible": "#privacy-banner" }],
+    "optIn": [{ "waitForThenClick": "#privacy-banner #privacy-banner-close" }],
+    "optOut": [{ "waitForThenClick": "#privacy-banner #privacy-banner-close" }],
+    "test": [{ "cookieContains": "gs_privacy_accepted=true" }]
+}
