@@ -1,3 +1,44 @@
+# v17.0.0 (Thu Oct 29 2026)
+
+#### Rules
+
+- Rule update: radio-canada [#2205](https://github.com/duckduckgo/autoconsent/pull/2205) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: regjeringen.no [#2206](https://github.com/duckduckgo/autoconsent/pull/2206) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vortex-consent [#2207](https://github.com/duckduckgo/autoconsent/pull/2207) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: onecom-cookie-banner [#2209](https://github.com/duckduckgo/autoconsent/pull/2209) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: oslosportslager.no [#2211](https://github.com/duckduckgo/autoconsent/pull/2211) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fnsp-cookieconsent [#2212](https://github.com/duckduckgo/autoconsent/pull/2212) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: sparebank1-optin [#2213](https://github.com/duckduckgo/autoconsent/pull/2213) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mars-cookies-prompt [#2214](https://github.com/duckduckgo/autoconsent/pull/2214) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jokul-cookie-consent [#2215](https://github.com/duckduckgo/autoconsent/pull/2215) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lego [#2216](https://github.com/duckduckgo/autoconsent/pull/2216) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: roll20 [#2217](https://github.com/duckduckgo/autoconsent/pull/2217) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fod-fujitv [#2218](https://github.com/duckduckgo/autoconsent/pull/2218) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vinnova-se [#2219](https://github.com/duckduckgo/autoconsent/pull/2219) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: epaas [#2220](https://github.com/duckduckgo/autoconsent/pull/2220) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Sirdata [#2221](https://github.com/duckduckgo/autoconsent/pull/2221) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nikkeibp [#2222](https://github.com/duckduckgo/autoconsent/pull/2222) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tri-table [#2223](https://github.com/duckduckgo/autoconsent/pull/2223) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: asrock [#2224](https://github.com/duckduckgo/autoconsent/pull/2224) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: niedziela-pl [#2225](https://github.com/duckduckgo/autoconsent/pull/2225) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-script [#2226](https://github.com/duckduckgo/autoconsent/pull/2226) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: site-notifications-cookie-usage [#2227](https://github.com/duckduckgo/autoconsent/pull/2227) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hkdir [#2228](https://github.com/duckduckgo/autoconsent/pull/2228) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consentmo [#2229](https://github.com/duckduckgo/autoconsent/pull/2229) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: plex.tv, remove auto_CA_plex.tv_ee4, remove auto_CA_support.plex.tv_gn3 [#2230](https://github.com/duckduckgo/autoconsent/pull/2230) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- elementAtPoint popup detection [#2008](https://github.com/duckduckgo/autoconsent/pull/2008) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.63.0 (Wed Oct 28 2026)
 
 #### Rules
