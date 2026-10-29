@@ -10,8 +10,7 @@ import {
     negativeContext,
     DETECT_PATTERNS,
 } from '../../lib/heuristic-classify';
-import { literalIndexSource } from '../../lib/heuristic-prefilter';
-import { requiredLiterals } from '../../scripts/required-literals';
+import { detectLiteralTable, requiredLiterals } from '../../scripts/required-literals';
 import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from '../../lib/heuristic-literals';
 import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
@@ -268,13 +267,9 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
 
 describe('requiredLiterals', () => {
     it('matches the generated table for the built-in patterns (run npm run build-heuristic-literals if not)', () => {
-        const expected: Record<string, string[]> = {};
-        for (const p of DETECT_PATTERNS) {
-            const pattern = p instanceof RegExp ? p : p.pattern;
-            expected[pattern.toString()] = requiredLiterals(pattern);
-        }
-        expect(DETECT_PATTERN_LITERALS).to.deep.equal(expected);
-        expect(DETECT_LITERAL_INDEX).to.deep.equal(literalIndexSource(Object.values(expected).flat()));
+        const { literals, index } = detectLiteralTable();
+        expect(DETECT_PATTERN_LITERALS).to.deep.equal(literals);
+        expect(DETECT_LITERAL_INDEX).to.deep.equal(index);
     });
 
     it('finds literals every match contains', () => {

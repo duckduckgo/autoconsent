@@ -2,6 +2,8 @@
 export type HeuristicInput = 'popup' | 'page';
 /** A detect pattern, optionally limited to one input. */
 export type DetectPattern = RegExp | { pattern: RegExp; input: HeuristicInput };
+/** A detect pattern's regex. */
+export const patternOf = (p: DetectPattern): RegExp => (p instanceof RegExp ? p : p.pattern);
 // detect patterns that context negatives refer to
 export const BY_CONTINUING_PRIVACY = /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi;
 export const ACCEPT_ALL = /accept all/gi;

@@ -65,11 +65,8 @@ const c = tseslint.config(
             'no-restricted-syntax': [
                 'error',
                 {
-                    selector: 'Literal[regex.pattern=/\\(\\?<[=!]/]',
-                    message: 'RegExp lookbehind is not supported by all target browsers.',
-                },
-                {
-                    selector: 'Literal[value=/\\(\\?<[=!]/], TemplateElement[value.raw=/\\(\\?<[=!]/]',
+                    selector:
+                        'Literal[regex.pattern=/\\(\\?<[=!]/], Literal[value=/\\(\\?<[=!]/], TemplateElement[value.raw=/\\(\\?<[=!]/]',
                     message: 'RegExp lookbehind is not supported by all target browsers.',
                 },
             ],

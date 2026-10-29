@@ -2,18 +2,24 @@
  * Matching heuristic detect patterns against a text: input scopes, the required-literal prefilter and context negatives.
  * Text only, no DOM APIs. See docs/heuristic-detection.md.
  */
-import { DETECT_PATTERNS, DetectPattern, HeuristicInput } from './heuristic-patterns';
+import { DETECT_PATTERNS, DetectPattern, HeuristicInput, patternOf } from './heuristic-patterns';
 import { ContextNegative, DETECT_CONTEXT_NEGATIVES, TextTest } from './heuristic-negatives';
 import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from './heuristic-literals';
-import { literalIndex, literalIndexFrom } from './heuristic-prefilter';
+import { literalIndexFrom } from './heuristic-prefilter';
 
 const TEXT_LIMIT = 100000;
 const DEFAULT_WINDOW = 150;
 
 type CompiledNegative = ContextNegative & { hits: (context: string) => boolean; applies: Set<string> | null };
 type CompiledPattern = { id: string; pattern: RegExp; global: RegExp; input?: HeuristicInput; literals: string[] };
-type CompiledPatterns = { detect: CompiledPattern[]; literals: ReturnType<typeof literalIndex> };
 
+// every pattern's literals come from the generated table, so its index covers custom lists too
+let literalIndex: ReturnType<typeof literalIndexFrom> | undefined;
+const literalsIn = (lower: string) => (literalIndex ??= literalIndexFrom(DETECT_LITERAL_INDEX)).present(lower);
+
+const truncate = (text: string) => (text || '').slice(0, TEXT_LIMIT);
+// whether a pattern or negative applies to this input
+const forInput = (scoped: { input?: HeuristicInput }, input?: HeuristicInput) => !scoped.input || scoped.input === input;
 // a regex without the global and sticky flags, so `test` keeps no state between calls
 const stateless = (re: RegExp) => new RegExp(re.source, re.flags.replace(/[gy]/g, ''));
 // a TextTest as a predicate
@@ -25,22 +31,20 @@ function toPredicate(test: TextTest): (text: string) => boolean {
     return (text) => re.test(text);
 }
 
-const compiledPatterns = new WeakMap<DetectPattern[], CompiledPatterns>();
+const compiledPatterns = new WeakMap<DetectPattern[], CompiledPattern[]>();
 const compiledNegatives = new WeakMap<ContextNegative[], CompiledNegative[]>();
 
-function compilePatterns(detectPatterns: DetectPattern[]): CompiledPatterns {
+function compilePatterns(detectPatterns: DetectPattern[]): CompiledPattern[] {
     let compiled = compiledPatterns.get(detectPatterns);
     if (!compiled) {
-        const detect = detectPatterns.map((p) => {
-            const { pattern, input } = p instanceof RegExp ? { pattern: p, input: undefined } : p;
+        compiled = detectPatterns.map((p) => {
+            const pattern = patternOf(p);
+            const input = p instanceof RegExp ? undefined : p.input;
             const global = pattern.flags.includes('g') ? pattern : new RegExp(pattern.source, `${pattern.flags}g`);
             const id = pattern.toString();
             // prefilter literals come from the generated table only; a pattern without an entry is never skipped
             return { id, pattern, global, input, literals: DETECT_PATTERN_LITERALS[id] ?? [] };
         });
-        const literals =
-            detectPatterns === DETECT_PATTERNS ? literalIndexFrom(DETECT_LITERAL_INDEX) : literalIndex(detect.flatMap((d) => d.literals));
-        compiled = { detect, literals };
         compiledPatterns.set(detectPatterns, compiled);
     }
     return compiled;
@@ -116,12 +120,11 @@ function matchHeuristicPatterns(
         const got = Array.isArray(input) ? 'a pattern list (pass it as the `patterns` option)' : JSON.stringify(input);
         throw new TypeError(`heuristic input must be 'popup', 'page' or undefined, got ${got}`);
     }
-    allText = (allText || '').slice(0, TEXT_LIMIT);
+    allText = truncate(allText);
     const patterns = [];
     const snippets = [];
     const suppressed: { pattern: string; negative: string }[] = [];
-    const compiled = compilePatterns(detectPatterns);
-    const applicable = compileNegatives(negatives).filter((n) => !n.input || n.input === input);
+    const applicable = compileNegatives(negatives).filter((n) => forInput(n, input));
     let present: Set<string> | undefined;
     // a whole-text negative gives the same answer for every match, so it is tested once
     const wholeHits = new Map<CompiledNegative, boolean>();
@@ -137,50 +140,51 @@ function matchHeuristicPatterns(
         return hit;
     };
 
-    for (const d of compiled.detect) {
-        if (d.input && d.input !== input) {
+    for (const d of compilePatterns(detectPatterns)) {
+        if (!forInput(d, input)) {
             continue;
         }
         if (d.literals.length) {
-            const found = (present ??= compiled.literals.present(allText.toLowerCase()));
-            if (!d.literals.some((l) => found.has(l))) {
+            const inText = (present ??= literalsIn(allText.toLowerCase()));
+            if (!d.literals.some((l) => inText.has(l))) {
                 continue;
             }
-        }
-        const matches = allText.match(d.pattern);
-        if (!matches) {
-            continue;
         }
         const own = applicable.filter((n) => !n.applies || n.applies.has(d.id));
-        if (own.length) {
-            const dropped = new Set<string>();
-            let kept = false;
-            // matchAll clones the regex, so the shared global copy keeps no state
-            for (const m of allText.matchAll(d.global)) {
+        const matched: string[] = [];
+        const dropped = new Set<string>();
+        let found = false;
+        let kept = own.length === 0;
+        // one pass: negatives are tested until a match survives them; matchAll clones the regex, so the shared global
+        // copy keeps no state
+        for (const m of allText.matchAll(d.global)) {
+            found = true;
+            if (!kept) {
                 const start = m.index ?? 0;
                 const hit = own.find((n) => hitsAt(n, start, start + m[0].length));
-                if (!hit) {
+                if (hit) {
+                    dropped.add(hit.name);
+                } else {
                     kept = true;
-                    break;
                 }
-                dropped.add(hit.name);
             }
-            if (!kept) {
-                dropped.forEach((negative) => suppressed.push({ pattern: d.id, negative }));
-                continue;
+            if (kept && firstOnly) {
+                break;
             }
+            matched.push(m[0].substring(0, 200));
+        }
+        if (!found) {
+            continue;
+        }
+        if (!kept) {
+            dropped.forEach((negative) => suppressed.push({ pattern: d.id, negative }));
+            continue;
         }
         patterns.push(d.id);
-        // When a non-global regex has capture groups, `String.prototype.match`
-        // returns undefined entries for optional groups that did not match.
-        for (const m of matches) {
-            if (typeof m === 'string') {
-                snippets.push(m.substring(0, 200));
-            }
-        }
         if (firstOnly) {
             break;
         }
+        snippets.push(...matched);
     }
     return { patterns, snippets, suppressed };
 }
@@ -190,8 +194,8 @@ function matchHeuristicPatterns(
  * why a popup is not a consent popup.
  */
 export function excludedBy(text: string, input?: HeuristicInput, negatives: ContextNegative[] = DETECT_CONTEXT_NEGATIVES): string[] {
-    const truncated = (text || '').slice(0, TEXT_LIMIT);
+    const truncated = truncate(text);
     return compileNegatives(negatives)
-        .filter((n) => n.whole && (!n.input || n.input === input) && n.hits(truncated))
+        .filter((n) => n.whole && forInput(n, input) && n.hits(truncated))
         .map((n) => n.name);
 }

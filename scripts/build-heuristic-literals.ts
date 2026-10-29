@@ -5,18 +5,12 @@
  */
 import fs from 'fs';
 import path from 'path';
-import { DETECT_PATTERNS } from '../lib/heuristic-patterns';
-import { literalIndexSource } from '../lib/heuristic-prefilter';
-import { requiredLiterals } from './required-literals';
+import { detectLiteralTable } from './required-literals';
 
 const OUT = path.join(__dirname, '../lib/heuristic-literals.ts');
 
-const table: Record<string, string[]> = {};
-for (const p of DETECT_PATTERNS) {
-    const pattern = p instanceof RegExp ? p : p.pattern;
-    table[pattern.toString()] = requiredLiterals(pattern);
-}
-const entries = Object.entries(table).map(([id, literals]) => `    ${JSON.stringify(id)}: ${JSON.stringify(literals)},`);
+const { literals, index } = detectLiteralTable();
+const entries = Object.entries(literals).map(([id, literals]) => `    ${JSON.stringify(id)}: ${JSON.stringify(literals)},`);
 fs.writeFileSync(
     OUT,
     [
@@ -27,7 +21,7 @@ fs.writeFileSync(
         '};',
         '',
         '// The literal index over them (see literalIndexSource in heuristic-prefilter.ts).',
-        `export const DETECT_LITERAL_INDEX = ${JSON.stringify(literalIndexSource(Object.values(table).flat()))};`,
+        `export const DETECT_LITERAL_INDEX = ${JSON.stringify(index)};`,
         '',
     ].join('\n'),
 );

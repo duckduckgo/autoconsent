@@ -1,14 +1,16 @@
 /**
  * Works out the prefilter literals of a detect pattern from its regex source (see docs/heuristic-prefilter.md).
- * Build-time only: `build-heuristic-literals.ts` runs it over DETECT_PATTERNS to generate lib/heuristic-literals.ts,
- * and a unit test checks that table. It is not part of the library, so pages never parse pattern sources.
+ * Build-time only: `build-heuristic-literals.ts` writes `detectLiteralTable()` to lib/heuristic-literals.ts, and a unit
+ * test checks that file against it. It is not part of the library, so pages never parse pattern sources.
  *
  * The literals must be sound: every match of the pattern contains at least one of them, or the prefilter would skip a
  * pattern that matches. When that can't be shown from the source, a pattern gets no literals and is never skipped.
  */
+import { DETECT_PATTERNS, patternOf } from '../lib/heuristic-patterns';
+import { literalIndexSource } from '../lib/heuristic-prefilter';
 
 /** The index of the `]` closing the character class that opens at `open`, skipping escapes. */
-function classEnd(src: string, open: number): number {
+export function classEnd(src: string, open: number): number {
     let i = open + 1;
     while (i < src.length && src[i] !== ']') {
         i += src[i] === '\\' ? 2 : 1;
@@ -17,7 +19,7 @@ function classEnd(src: string, open: number): number {
 }
 
 /** The index of the `)` closing the group that opens at `open`, skipping escapes and classes. */
-function groupEnd(src: string, open: number): number {
+export function groupEnd(src: string, open: number): number {
     let depth = 0;
     for (let i = open; i < src.length; i++) {
         const c = src[i];
@@ -35,7 +37,7 @@ function groupEnd(src: string, open: number): number {
 }
 
 /** Splits a regex source at its top-level `|`. */
-function alternatives(src: string): string[] {
+export function alternatives(src: string): string[] {
     const parts = [];
     let from = 0;
     for (let i = 0; i < src.length; i++) {
@@ -57,10 +59,11 @@ function alternatives(src: string): string[] {
 
 /** A group's alternatives as lowercased plain literals (word boundaries dropped), or null if any has other syntax. */
 function plainAlternatives(inner: string): string[] | null {
-    if (/^\?(?:!|<!)/.test(inner)) {
+    if (inner.startsWith('?!')) {
         return null;
     }
-    const plain = alternatives(inner.replace(/^\?(?::|=|<=)/, '')).map((p) => p.replace(/\\b/g, '').replace(/\\([^A-Za-z0-9])/g, '$1'));
+    // lookbehind isn't allowed in lib/, and would not count as plain
+    const plain = alternatives(inner.replace(/^\?[:=]/, '')).map((p) => p.replace(/\\b/g, '').replace(/\\([^A-Za-z0-9])/g, '$1'));
     return plain.every((p) => p && !/[\\.^$*+?()[\]{}|]/.test(p)) ? plain.map((p) => p.toLowerCase()) : null;
 }
 
@@ -143,7 +146,7 @@ function literalsOf(src: string): string[] {
             const close = groupEnd(src, i);
             const q = quantifier(close + 1);
             const plain = q.zero ? null : plainAlternatives(src.slice(i + 1, close));
-            if (plain && plain.every((p) => p.length >= 3)) {
+            if (plain) {
                 candidates.push(plain);
             }
             i = q.next;
@@ -159,7 +162,7 @@ function literalsOf(src: string): string[] {
     const shortest = (l: string[]) => Math.min(...l.map((x) => x.length));
     const usable = candidates.filter((l) => l.every((x) => x.trim().length >= 3));
     const best = usable.reduce((a, b) => (shortest(b) > shortest(a) ? b : a), ['']);
-    return best[0] && shortest(best) >= 4 ? [...new Set(best)] : [];
+    return shortest(best) >= 4 ? [...new Set(best)] : [];
 }
 
 /**
@@ -167,4 +170,14 @@ function literalsOf(src: string): string[] {
  */
 export function requiredLiterals(re: RegExp): string[] {
     return literalsOf(re.source);
+}
+
+/** The contents of lib/heuristic-literals.ts: each built-in detect pattern's literals, and the literal index over them. */
+export function detectLiteralTable(): { literals: Record<string, string[]>; index: ReturnType<typeof literalIndexSource> } {
+    const literals: Record<string, string[]> = {};
+    for (const p of DETECT_PATTERNS) {
+        const pattern = patternOf(p);
+        literals[pattern.toString()] = requiredLiterals(pattern);
+    }
+    return { literals, index: literalIndexSource(Object.values(literals).flat()) };
 }

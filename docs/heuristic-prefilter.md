@@ -32,7 +32,7 @@ DETECT_PATTERNS ──(npm run build-heuristic-literals)──> lib/heuristic-li
   - `DETECT_PATTERN_LITERALS` maps each pattern (by `pattern.toString()`) to its literals.
   - `DETECT_LITERAL_INDEX` is the prepared source of the literal index over all of them.
 - **`lib/heuristic-prefilter.ts`** (run time) builds the literal index from that prepared source and reports which literals a text contains.
-- **`lib/heuristic-detect.ts`** takes each pattern's literals from `DETECT_PATTERN_LITERALS`. For the built-in list it uses `DETECT_LITERAL_INDEX`.
+- **`lib/heuristic-detect.ts`** takes each pattern's literals from `DETECT_PATTERN_LITERALS`, and builds the index from `DETECT_LITERAL_INDEX` once, for every pattern list.
 
 A **custom pattern list**, passed to `checkHeuristicPatterns` or `hasHeuristicPatterns` as the `patterns` option, uses the same table. Built-in patterns in it keep their literals, and patterns not in the table get none, so they are always run. Results are therefore the same for any list. Only custom patterns miss the speed-up.
 

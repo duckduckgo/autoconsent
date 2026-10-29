@@ -5,14 +5,6 @@
  * result.
  */
 
-/**
- * Finds which literals a text contains in one pass: a zero-width lookahead over the literals, longest first, reports
- * the longest one starting at each position, and any other literal starting there is a prefix of it.
- */
-export function literalIndex(all: string[]): { present: (lower: string) => Set<string> } {
-    return literalIndexFrom(literalIndexSource(all));
-}
-
 /** The literals, distinct and longest first, and the source of the lookahead regex over them. */
 export function literalIndexSource(all: string[]): { literals: string[]; source: string } {
     const literals = [...new Set(all)].sort((a, b) => b.length - a.length);
@@ -20,7 +12,11 @@ export function literalIndexSource(all: string[]): { literals: string[]; source:
     return { literals, source: literals.length ? `(?=(${literals.map(escape).join('|')}))` : '' };
 }
 
-/** A literal index from a prepared `literalIndexSource`, such as the generated one for the built-in patterns. */
+/**
+ * A literal index from a prepared `literalIndexSource`: it finds which literals a text contains in one pass. A zero-width
+ * lookahead over the literals, longest first, reports the longest one starting at each position, and any other literal
+ * starting there is a prefix of it.
+ */
 export function literalIndexFrom({ literals: distinct, source }: { literals: string[]; source: string }): {
     present: (lower: string) => Set<string>;
 } {

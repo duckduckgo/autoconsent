@@ -8,33 +8,16 @@ import {
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from '../../lib/heuristic-classify';
+import { patternOf } from '../../lib/heuristic-patterns';
+import { alternatives, classEnd, groupEnd } from '../../scripts/required-literals';
 
 const nonAsciiLetter = (c: string | undefined) => c !== undefined && c.charCodeAt(0) > 127 && /\p{L}/u.test(c);
 
 /** The top-level alternatives of the group that opens at src[open], and where it closes. */
 function groupAlternatives(src: string, open: number): { alts: string[]; close: number } {
-    const alts: string[] = [];
-    let from = src.startsWith('(?:', open) ? open + 3 : open + 1;
-    let depth = 0;
-    for (let i = open; i < src.length; i++) {
-        const c = src[i];
-        if (c === '\\') {
-            i++;
-        } else if (c === '[') {
-            while (i < src.length && src[i] !== ']') {
-                i += src[i] === '\\' ? 2 : 1;
-            }
-        } else if (c === '(') {
-            depth++;
-        } else if (c === ')' && --depth === 0) {
-            alts.push(src.slice(from, i));
-            return { alts, close: i };
-        } else if (c === '|' && depth === 1) {
-            alts.push(src.slice(from, i));
-            from = i + 1;
-        }
-    }
-    return { alts, close: src.length };
+    const close = groupEnd(src, open);
+    const from = src.startsWith('(?:', open) ? open + 3 : open + 1;
+    return { alts: alternatives(src.slice(from, close)), close };
 }
 
 /**
@@ -49,8 +32,12 @@ function accentBoundaries(re: RegExp): string[] {
     const found: string[] = [];
     const groupOpens = new Map<number, number>();
     for (let i = 0; i < src.length; i++) {
-        if (src[i] === '(' && src[i - 1] !== '\\') {
-            groupOpens.set(groupAlternatives(src, i).close, i);
+        if (src[i] === '\\') {
+            i++;
+        } else if (src[i] === '[') {
+            i = classEnd(src, i);
+        } else if (src[i] === '(') {
+            groupOpens.set(groupEnd(src, i), i);
         }
     }
     for (let i = 0; i < src.length - 1; i++) {
@@ -73,7 +60,7 @@ function accentBoundaries(re: RegExp): string[] {
 
 describe('heuristic regex syntax', () => {
     const regexes: RegExp[] = [
-        ...DETECT_PATTERNS.map((p) => (p instanceof RegExp ? p : p.pattern)),
+        ...DETECT_PATTERNS.map(patternOf),
         ...DETECT_CONTEXT_NEGATIVES.flatMap((n) => [n.pattern, n.unless].filter((r): r is RegExp => r instanceof RegExp)),
         ...[REJECT_PATTERNS, SETTINGS_PATTERNS, ACCEPT_PATTERNS, ACKNOWLEDGE_PATTERNS, BUTTON_NEVER_MATCH_PATTERNS]
             .flat()
