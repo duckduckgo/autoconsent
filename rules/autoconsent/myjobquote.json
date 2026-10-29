@@ -1,0 +1,19 @@
+{
+    "name": "myjobquote",
+    "_metadata": {
+        "vendorUrl": "https://www.myjobquote.co.uk/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?myjobquote\\.co\\.uk/"
+    },
+    "prehideSelectors": [".cookie-new-bg"],
+    "detectCmp": [{ "exists": "#cookie-popup-short" }],
+    "detectPopup": [{ "visible": "#cookie-popup-short" }],
+    "optIn": [{ "waitForThenClick": "#cookie-popup-short .accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-popup-short .manage-cookies" },
+        { "waitForVisible": "#cookie-popup-detailed .save-settings" },
+        { "click": "#cookie-popup-detailed input.cookie-toggle:checked", "all": true, "optional": true },
+        { "click": "#cookie-popup-detailed .save-settings" }
+    ]
+}
