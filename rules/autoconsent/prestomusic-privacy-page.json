@@ -1,0 +1,37 @@
+{
+    "name": "prestomusic-privacy-page",
+    "vendorUrl": "https://www.prestomusic.com/privacy",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?prestomusic\\.com/privacy\\?back="
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#privacy_cookies_form button[name=\"confirm_choices\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#privacy_cookies_form button[name=\"confirm_choices\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#privacy_cookies_form button[name=\"accept_all\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#privacy_cookies_form #cookie_prefs:checked",
+            "optional": true
+        },
+        {
+            "click": "#privacy_cookies_form #cookie_mktg:checked",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#privacy_cookies_form button[name=\"confirm_choices\"]"
+        }
+    ]
+}

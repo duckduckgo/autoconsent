@@ -1,0 +1,29 @@
+{
+    "name": "prestomusic",
+    "vendorUrl": "https://www.prestomusic.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?prestomusic\\.com/"
+    },
+    "prehideSelectors": ["#cookie-flash-message"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-flash-message .js-manage-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-flash-message"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-flash-message .js-accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-flash-message .js-manage-cookies"
+        }
+    ]
+}
