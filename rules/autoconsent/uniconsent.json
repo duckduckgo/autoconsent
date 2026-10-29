@@ -1,0 +1,36 @@
+{
+    "name": "Uniconsent",
+    "vendorUrl": "https://www.uniconsent.com/",
+    "prehideSelectors": ["#uniccmp"],
+    "detectCmp": [
+        {
+            "exists": ["#uniccmp", ".unic .unic-box,.unic .unic-bar,.unic .unic-modal"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#uniccmp", ".unic .unic-box,.unic .unic-bar,.unic .unic-modal"],
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_UNICONSENT_OPT_IN"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_UNICONSENT_OPT_OUT"
+        },
+        {
+            "waitForVisible": ["#uniccmp", ".unic .unic-box,.unic .unic-bar,.unic .unic-modal"],
+            "check": "none",
+            "timeout": 3000
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_UNICONSENT_TEST"
+        }
+    ]
+}

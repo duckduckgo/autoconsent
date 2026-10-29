@@ -278,6 +278,12 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    EVAL_UNICONSENT_OPT_IN: () => typeof window.__unicapi === 'function' && (window.__unicapi('agreeAll') || true),
+    EVAL_UNICONSENT_OPT_OUT: () => typeof window.__unicapi === 'function' && (window.__unicapi('rejectAll') || true),
+    EVAL_UNICONSENT_TEST: () => {
+        const mode = JSON.parse(localStorage.getItem('__unic_consent_mode') || '{}');
+        return mode.ad_user_data === 'denied' && mode.ad_personalization === 'denied';
+    },
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
