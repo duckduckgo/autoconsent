@@ -1,0 +1,19 @@
+{
+    "name": "christianbook",
+    "vendorUrl": "https://www.christianbook.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?christianbook\\.com/"
+    },
+    "prehideSelectors": [".CCPA-Drawer"],
+    "detectCmp": [{ "exists": ".CCPA-Drawer .CCPA-Close button" }],
+    "detectPopup": [{ "visible": ".CCPA-Drawer" }],
+    "optIn": [
+        { "waitFor": ".CCPA-Drawer[style*=width]", "timeout": 5000, "optional": true },
+        { "waitForThenClick": ".CCPA-Drawer .CCPA-Close button" }
+    ],
+    "optOut": [
+        { "waitFor": ".CCPA-Drawer[style*=width]", "timeout": 5000, "optional": true },
+        { "waitForThenClick": ".CCPA-Drawer .CCPA-Close button" }
+    ],
+    "test": [{ "cookieContains": "ccpa_click_consent=1" }]
+}
