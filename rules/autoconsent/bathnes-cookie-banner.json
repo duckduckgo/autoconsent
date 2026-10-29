@@ -1,0 +1,31 @@
+{
+    "name": "bathnes-cookie-banner",
+    "prehideSelectors": ["[id$=\"bathnes-cookie-consent-banner\"] #cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "[id$=\"bathnes-cookie-consent-banner\"] #cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[id$=\"bathnes-cookie-consent-banner\"] #cookie-banner button[onclick^=\"rejectCookies\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[id$=\"bathnes-cookie-consent-banner\"] #cookie-banner button[onclick^=\"acceptCookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[id$=\"bathnes-cookie-consent-banner\"] #cookie-banner button[onclick^=\"rejectCookies\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[id$=\"bathnes-cookie-consent-banner\"] #cookie-banner",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}
