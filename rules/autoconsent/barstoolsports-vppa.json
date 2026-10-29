@@ -1,0 +1,13 @@
+{
+    "name": "barstoolsports-vppa",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://union\\.barstoolsports\\.com/v2/vppa-consent"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".banner button.btn.secondary" }],
+    "detectPopup": [{ "visible": ".banner button.btn.secondary" }],
+    "optIn": [{ "waitForThenClick": ".banner button.btn.primary" }],
+    "optOut": [{ "waitForThenClick": ".banner button.btn.secondary" }]
+}
