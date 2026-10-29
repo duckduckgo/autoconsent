@@ -286,6 +286,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
     });
 
+    it('matches "limit cookies"', () => {
+        expect(classifyButtonTextRegex('Limit Cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Limit cookie usage to protect your privacy')).to.equal('other');
+    });
+
     it('matches German continue-without-accepting variants', () => {
         expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');

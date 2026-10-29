@@ -202,6 +202,9 @@ const REJECT_PATTERNS_ENGLISH = [
     /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s+((cookies\s+)?only|only\s+cookies)\s*$/is,
 
+    // e.g. "limit cookies"
+    /^\s*limit\s+cookies\s*$/is,
+
     // e.g. "do not sell or share my personal information", "do not share my personal information", "opt out of sale ..." (CCPA)
     // "do not sell page" is a link; "do not sellcookie settings" is two concatenated buttons
     /do\s+not\s+sell(?!\s*(page|cookie settings))|do\s+not\s+share\s+my\s+(personal\s+)?(information|info|data)|opt\s+out\s+of\s+sale/is,
