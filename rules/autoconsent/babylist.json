@@ -1,0 +1,23 @@
+{
+    "name": "babylist",
+    "vendorUrl": "https://www.babylist.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?babylist\\.com/"
+    },
+    "prehideSelectors": ["[data-react-class=\"CookieNotice\"]", ".cc-window[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": "[data-react-class=\"CookieNotice\"]" }],
+    "detectPopup": [{ "visible": "[data-react-class=\"CookieNotice\"] button" }],
+    "optIn": [
+        { "waitForThenClick": "[data-react-class=\"CookieNotice\"] button" },
+        { "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss", "timeout": 2000, "optional": true }
+    ],
+    "optOut": [
+        { "waitForThenClick": "[data-react-class=\"CookieNotice\"] button" },
+        {
+            "comment": "notice-only cookieconsent bar shown on top in some regions, initialised on window load",
+            "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss",
+            "timeout": 2000,
+            "optional": true
+        }
+    ]
+}
