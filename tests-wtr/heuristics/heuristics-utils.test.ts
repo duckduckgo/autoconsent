@@ -73,6 +73,15 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects analytics consent notices that do not mention cookies', () => {
+        const { patterns, snippets } = checkHeuristicPatterns(
+            'We use product analytics and session replay to understand signup, dashboard, and checkout friction. You can reject non-essential analytics and still use the site.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets).to.include('reject non-essential analytics');
+    });
 });
 
 describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {

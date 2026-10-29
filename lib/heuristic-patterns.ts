@@ -21,6 +21,8 @@ export const DETECT_PATTERNS = [
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
+    // consent popups that do not mention cookies, e.g. "you can reject non-essential analytics"
+    /(?:reject|decline|refuse|opt out of) (?:all )?(?:non-essential|optional|non-necessary) (?:analytics|tracking)/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
