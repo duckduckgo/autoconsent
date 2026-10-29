@@ -9,6 +9,7 @@ generateCMPTests(
         'https://www.livecareer.de/',
         'https://www.moncvparfait.fr/',
         'https://www.hetperfectecv.nl/',
+        'https://www.monster.com/',
     ],
     {},
 );
