@@ -274,6 +274,10 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Reject All (except Necessary)')).to.equal('reject');
     });
 
+    it('matches "reject site cookies"', () => {
+        expect(classifyButtonTextRegex('Reject site cookies')).to.equal('reject');
+    });
+
     it('matches "do not accept" variants', () => {
         expect(classifyButtonTextRegex('I do not accept')).to.equal('reject');
         expect(classifyButtonTextRegex('Do not accept cookies')).to.equal('reject');
