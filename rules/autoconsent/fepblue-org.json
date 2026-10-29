@@ -1,0 +1,13 @@
+{
+    "name": "fepblue.org",
+    "vendorUrl": "https://www.fepblue.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fepblue\\.org/"
+    },
+    "prehideSelectors": [".c-cookie-notice.js-cookie-bar"],
+    "detectCmp": [{ "exists": ".c-cookie-notice.js-cookie-bar .c-cookie-notice__button" }],
+    "detectPopup": [{ "visible": ".c-cookie-notice.js-cookie-bar.show .c-cookie-notice__button" }],
+    "optIn": [{ "waitForThenClick": ".c-cookie-notice.js-cookie-bar .c-cookie-notice__button" }],
+    "optOut": [{ "waitForThenClick": ".c-cookie-notice.js-cookie-bar .c-cookie-notice__button" }],
+    "test": [{ "waitForVisible": ".c-cookie-notice.js-cookie-bar .c-cookie-notice__button", "check": "none", "timeout": 2000 }]
+}
