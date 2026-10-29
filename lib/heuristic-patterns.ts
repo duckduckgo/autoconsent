@@ -7,8 +7,8 @@ export const DETECT_PATTERNS = [
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
     /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi,
-    // a single qualifier is common: "optional", "essential", "necessary", "analytics", ...
-    /we (?:use|serve)(?: \w+)? cookies/gi,
+    // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
+    /we (?:use|serve)(?: \w+){0,2} cookies/gi,
     /we are using cookies/gi,
     /use of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,
