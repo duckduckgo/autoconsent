@@ -108,59 +108,6 @@ jobs:
                   echo "TASK_GID=$RELEASE_TASK_GID" >> "$GITHUB_OUTPUT"
 
     # ------------------------------------------------------------------------------
-    # Check whether the release changes library code, which only reaches users
-    # through app updates: any of its PRs labelled needs-code-update.
-    # ------------------------------------------------------------------------------
-    check-code-update:
-        needs: release
-        if: ${{ needs.release.outputs.tag_name != '' }}
-        runs-on: ubuntu-latest
-        outputs:
-            needed: ${{ steps.check.outputs.needed }}
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                  fetch-depth: 0
-            - name: Check the release's PRs for needs-code-update
-              id: check
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  TAG: ${{ needs.release.outputs.tag_name }}
-              run: |
-                  previous="$(git describe --tags --abbrev=0 "$TAG^")"
-                  needed=false
-                  for sha in $(git rev-list "$previous..$TAG"); do
-                      # Fail open: an unneeded propagation only updates the open app PRs.
-                      labels="$(gh api "repos/$GITHUB_REPOSITORY/commits/$sha/pulls" --jq '.[].labels[].name')" || {
-                          echo "Could not read the PRs for $sha; propagating to be safe."
-                          needed=true
-                          continue
-                      }
-                      if grep -qx 'needs-code-update' <<< "$labels"; then
-                          echo "$sha is from a PR labelled needs-code-update."
-                          needed=true
-                      fi
-                  done
-                  echo "needed=$needed" >> "$GITHUB_OUTPUT"
-
-    # ------------------------------------------------------------------------------
-    # Open or update the app PRs. Each app's PR uses a fixed branch, so a release
-    # updates the open PR rather than opening another.
-    # ------------------------------------------------------------------------------
-    app-release:
-        name: Propagate code changes to the apps
-        needs:
-            - release
-            - create_asana_tasks
-            - check-code-update
-        if: ${{ needs.check-code-update.outputs.needed == 'true' }}
-        uses: ./.github/workflows/ddg-release.yml
-        secrets: inherit
-        with:
-            tag_name: ${{ needs.release.outputs.tag_name }}
-            release_task_url: https://app.asana.com/1/137249556945/project/1201844467387842/task/${{ needs.create_asana_tasks.outputs.task-gid }}
-
-    # ------------------------------------------------------------------------------
     # Create PR to privacy-configuration repository
     # ------------------------------------------------------------------------------
     rule-release:
