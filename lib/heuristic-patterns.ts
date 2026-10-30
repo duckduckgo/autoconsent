@@ -870,8 +870,8 @@ export const ACKNOWLEDGE_PATTERNS = [
     // "ok" / "okay" / "oké" (optionally followed by a short acknowledgement)
     /^(ok|okay|oké|okey|k)([ .!,]*)(got it|verstanden|compris|rozumiem|thanks|gracias|ik begrijp( dat| het)?|continue to website|pour moi|fermer)?[ .!]*$/is,
 
-    // "understood" / "got it" / "that's ok" (multilingual)
-    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
+    // "understood" / "got it" / "that's ok" (multilingual), optionally followed by "don't show this (again)"
+    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner|dont show (this|this again|again))?[ !.]*$/is,
 
     // confirm
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,

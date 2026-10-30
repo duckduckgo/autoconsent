@@ -335,6 +335,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('no problem')).to.equal('other');
     });
 
+    it('matches acknowledge buttons with a "don\'t show this" suffix', () => {
+        expect(classifyButtonTextRegex("I understand, don't show this")).to.equal('acknowledge');
+        expect(classifyButtonTextRegex("Got it, don't show again")).to.equal('acknowledge');
+        expect(classifyButtonTextRegex("Don't show again")).to.equal('other');
+    });
+
     it('matches Russian reject buttons', () => {
         expect(classifyButtonTextRegex('Отклонить всё')).to.equal('reject');
         expect(classifyButtonTextRegex('Отклонить все файлы cookie')).to.equal('reject');
