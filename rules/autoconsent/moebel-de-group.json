@@ -1,0 +1,20 @@
+{
+    "name": "moebel-de-group",
+    "vendorUrl": "https://www.moebel.de/",
+    "prehideSelectors": ["dialog[data-testid=\"modal-dialog\"]:has([data-testid=\"uc-button-decline\"])"],
+    "detectCmp": [{ "exists": "dialog[data-testid=\"modal-dialog\"] [data-testid=\"uc-button-decline\"]" }],
+    "detectPopup": [{ "visible": "dialog[data-testid=\"modal-dialog\"] [data-testid=\"uc-button-decline\"]" }],
+    "optIn": [
+        { "waitForThenClick": "dialog[data-testid=\"modal-dialog\"] [data-testid=\"uc-button-accept\"]", "retry": 2, "retryInterval": 3500 }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog[data-testid=\"modal-dialog\"] [data-testid=\"uc-button-decline\"]",
+            "retry": 2,
+            "retryInterval": 3500
+        }
+    ],
+    "test": [
+        { "waitForVisible": "dialog[data-testid=\"modal-dialog\"] [data-testid=\"uc-button-decline\"]", "timeout": 4000, "check": "none" }
+    ]
+}
