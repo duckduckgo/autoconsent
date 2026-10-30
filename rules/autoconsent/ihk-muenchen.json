@@ -1,0 +1,13 @@
+{
+    "name": "ihk-muenchen.de",
+    "vendorUrl": "https://www.ihk-muenchen.de/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ihk-muenchen\\.de/"
+    },
+    "prehideSelectors": ["#cookie-banner", "#cookie-banner-overlay"],
+    "detectCmp": [{ "exists": "#cookie-banner [data-action=\"decline-cookies\"]" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner [data-action=\"accept-cookies\"]" }],
+    "optOut": [{ "waitForThenClick": "#cookie-banner [data-action=\"decline-cookies\"]" }],
+    "test": [{ "cookieContains": "site_cookie_consent_declined=1" }]
+}
