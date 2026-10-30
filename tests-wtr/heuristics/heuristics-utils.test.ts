@@ -98,6 +98,22 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German "without optional cookies" notices', () => {
+    it('detects notices offering to use the site without extra cookies', () => {
+        const texts = [
+            'Selbstverständlich können Sie unser Portal auch ohne diese zusätzlichen Cookies nutzen.',
+            'Sie können die Website auch ohne optionale Cookies besuchen.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match unrelated text', () => {
+        expect(checkHeuristicPatterns('Ohne weitere Kosten liefern wir Ihre Bestellung.').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
