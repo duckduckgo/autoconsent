@@ -1,0 +1,30 @@
+{
+    "name": "ncsoft-cookie-toast",
+    "vendorUrl": "https://www.nc.com/",
+    "prehideSelectors": ["#gCookieConfirmToast", "#gCookieConfirmDimmed"],
+    "detectCmp": [
+        {
+            "exists": "#gCookieConfirmToast"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gCookieConfirmToast .g-cookie-btn-deny"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gCookieConfirmToast .g-cookie-btn-apply"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gCookieConfirmToast .g-cookie-btn-deny"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "applyCookie=%7B%22typeArr%22%3A%5B%22NECESSARY%22%5D"
+        }
+    ]
+}
