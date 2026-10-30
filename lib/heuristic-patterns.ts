@@ -72,6 +72,7 @@ export const DETECT_PATTERNS = [
     /nur funktionale cookies akzeptieren/gi,
     /optionale ablehnen/gi,
     /zustimmung verweigern/gi,
+    /nur notwendige\b/gi,
 
     // NL
     /gebruik.{0,100}van.{0,100}cookies/gi,
