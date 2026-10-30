@@ -146,6 +146,23 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects German cookie notices', () => {
+        const texts = [
+            'Diese Seite nutzt technisch notwendige Cookies. Zusätzlich möchten wir mit deiner Einwilligung anonym messen, wie die Seite genutzt wird.',
+            'Diese Website nutzt Cookies, um die Nutzung zu analysieren',
+            'Unsere Webseite nutzt Cookies und ähnliche Technologien',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Diese Seite nutzt moderne Technik, um dir bei Problemen zu helfen').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [
