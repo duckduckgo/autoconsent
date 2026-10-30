@@ -73,6 +73,12 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects singular "site uses cookie" notices', () => {
+        const { patterns } = checkHeuristicPatterns('This site uses cookie tracking technologies. Learn more in our Cookie Policy.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
