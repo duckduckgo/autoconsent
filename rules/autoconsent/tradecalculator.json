@@ -1,0 +1,49 @@
+{
+    "name": "tradecalculator.co.uk",
+    "vendorUrl": "https://tradecalculator.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tradecalculator\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div[role=dialog][aria-labelledby=privacy-notice-title]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=dialog][aria-labelledby=privacy-notice-title]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[aria-labelledby=privacy-notice-title] button:not([role=switch]):first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "div[aria-labelledby=privacy-notice-title] button[role=switch][aria-checked=true]"
+            },
+            "then": [
+                {
+                    "click": "div[aria-labelledby=privacy-notice-title] button[role=switch][aria-checked=true]"
+                },
+                {
+                    "waitFor": "div[aria-labelledby=privacy-notice-title] button[role=switch][aria-checked=false]",
+                    "timeout": 1000
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "div[aria-labelledby=privacy-notice-title] button:not([role=switch]):last-child"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div[role=dialog][aria-labelledby=privacy-notice-title]",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}
