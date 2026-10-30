@@ -1,0 +1,33 @@
+{
+    "name": "rittal",
+    "vendorUrl": "https://www.rittal.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?rittal\\.com/"
+    },
+    "prehideSelectors": [".cookie-overlay"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-overlay .cookie-consent .cc-controls"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-overlay .cookie-consent .cc-controls"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent .cc-controls .custom-button.--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent .cc-controls .custom-button.--secondary-option + .custom-button.--secondary-option"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "rittalCC=1"
+        }
+    ]
+}
