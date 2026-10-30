@@ -1,0 +1,35 @@
+{
+    "name": "foto-erhardt",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?foto-erhardt\\.(de|com|fr)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cmp__consent .cmp__preferences-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cmp__consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cmp__consent .cmp__enable-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cmp__consent .cmp__preferences-button"
+        },
+        {
+            "waitForThenClick": ".cmp__service-groups__buttons button:not(.button--primary)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "C0002:0,C0003:0,C0004:0"
+        }
+    ]
+}

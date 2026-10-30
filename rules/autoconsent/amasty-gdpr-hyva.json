@@ -1,0 +1,131 @@
+{
+    "name": "amasty-gdpr-hyva",
+    "vendorUrl": "https://amasty.com/gdpr-for-magento-2.html",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#am-cookie-bar [x-ref=\"am-cookie-bar\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])"
+        },
+        {
+            "exists": "#am-cookie-bar[style*=\"translateY(100%)\"]",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-allow\"], .ambar-btn-accept)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "[x-ref=\"am-cookie-bar-settings\"] :is([x-ref=\"ambar-settings-done\"], button[\\@click*=\"cookiebar-action-accept\"])",
+            "check": "none",
+            "timeout": 5000
+        },
+        {
+            "if": {
+                "exists": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-accept\"], .ambar-btn-decline)"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-accept\"], .ambar-btn-decline)"
+                },
+                {
+                    "waitForVisible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])",
+                    "check": "none",
+                    "timeout": 3000,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "visible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])"
+                    },
+                    "then": [
+                        {
+                            "click": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-accept\"], .ambar-btn-decline)"
+                        }
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-settings\"], .ambar-btn-settings)"
+                },
+                {
+                    "waitForVisible": "[x-ref=\"am-cookie-bar-settings\"] :is([x-ref=\"ambar-settings-done\"], button[\\@click*=\"cookiebar-action-accept\"])",
+                    "timeout": 2000,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "visible": "[x-ref=\"am-cookie-bar-settings\"] :is([x-ref=\"ambar-settings-done\"], button[\\@click*=\"cookiebar-action-accept\"])"
+                    },
+                    "then": [],
+                    "else": [
+                        {
+                            "click": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-settings\"], .ambar-btn-settings)"
+                        }
+                    ]
+                },
+                {
+                    "waitForVisible": "[x-ref=\"am-cookie-bar-settings\"] :is([x-ref=\"ambar-settings-done\"], button[\\@click*=\"cookiebar-action-accept\"])"
+                },
+                {
+                    "waitForVisible": "[x-ref=\"am-cookie-bar-settings\"] input[type=\"checkbox\"]",
+                    "timeout": 5000
+                },
+                {
+                    "click": "[x-ref=\"am-cookie-bar-settings\"] input[type=\"checkbox\"]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[x-ref=\"am-cookie-bar-settings\"] :is([x-ref=\"ambar-settings-done\"], button[\\@click*=\"cookiebar-action-accept\"])"
+                },
+                {
+                    "waitForVisible": "[x-ref=\"am-cookie-bar-settings\"] :is([x-ref=\"ambar-settings-done\"], button[\\@click*=\"cookiebar-action-accept\"])",
+                    "check": "none",
+                    "timeout": 10000,
+                    "optional": true
+                },
+                {
+                    "waitForVisible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])",
+                    "check": "none",
+                    "timeout": 1000,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "visible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])"
+                    },
+                    "then": [
+                        {
+                            "click": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is(button[\\@click=\"closeCookieBarHandler\"], button[\\@click*=\"close-cookie-bar\"])",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "exists": "#am-cookie-bar[style*=\"translateY(100%)\"]"
+                },
+                {
+                    "waitForVisible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])",
+                    "check": "none",
+                    "timeout": 5000
+                }
+            ]
+        }
+    ]
+}

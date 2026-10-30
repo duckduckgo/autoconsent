@@ -1,0 +1,13 @@
+{
+    "name": "pcspecialist",
+    "vendorUrl": "https://www.pcspecialist.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?pcspecialist\\.[a-z.]+/"
+    },
+    "prehideSelectors": [".cc-policy-overlay", ".cc-policy"],
+    "detectCmp": [{ "exists": ".cc-policy .cc-settings" }],
+    "detectPopup": [{ "visible": ".cc-policy" }],
+    "optIn": [{ "waitForThenClick": ".cc-policy .cc-accept" }],
+    "optOut": [{ "waitForThenClick": ".cc-policy .cc-settings" }],
+    "test": [{ "cookieContains": "consent=S.false-T.false" }]
+}

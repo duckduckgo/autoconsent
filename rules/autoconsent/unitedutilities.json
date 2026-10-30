@@ -1,0 +1,52 @@
+{
+    "name": "unitedutilities",
+    "vendorUrl": "https://www.unitedutilities.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unitedutilities\\.com/"
+    },
+    "prehideSelectors": [".js-cookie-preferences"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-preferences .js-manage-cta"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-preferences.is-active"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-preferences .js-accept-all-cta"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-preferences .js-manage-cta"
+        },
+        {
+            "waitForVisible": ".js-cookie-preferences .js-manage-panel button[type=submit]"
+        },
+        {
+            "click": "label[for=performace-no]",
+            "optional": true
+        },
+        {
+            "click": "label[for=targeted-advertising-no]",
+            "optional": true
+        },
+        {
+            "click": ".js-cookie-preferences .js-manage-panel button[type=submit]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "advertisingCookies=false"
+        },
+        {
+            "cookieContains": "performanceAnalyticsCookies=false"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "klimatabelle.com",
+    "vendorUrl": "https://klimatabelle.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?klimatabelle\\.com/"
+    },
+    "prehideSelectors": ["#cookie-notice"],
+    "detectCmp": [{ "exists": "#cookie-notice #close-notice" }],
+    "detectPopup": [{ "visible": "#cookie-notice #close-notice" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice #close-notice" }],
+    "optOut": [{ "waitForThenClick": "#cookie-notice #close-notice" }],
+    "test": [{ "cookieContains": "notice=true" }]
+}

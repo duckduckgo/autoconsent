@@ -1,0 +1,29 @@
+{
+    "name": "shimano-bike",
+    "vendorUrl": "https://bike.shimano.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://bike\\.shimano\\.com/"
+    },
+    "prehideSelectors": [".cmp-cookies-notification"],
+    "detectCmp": [
+        {
+            "exists": ".cmp-cookies-notification .cmp-cookies-notification__btn-cookie-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cmp-cookies-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cmp-cookies-notification .cmp-cookies-notification__btn-cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cmp-cookies-notification"
+        }
+    ]
+}

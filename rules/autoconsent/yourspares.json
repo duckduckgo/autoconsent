@@ -1,0 +1,39 @@
+{
+    "name": "yourspares",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?yourspares\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#colorbox.colorbox-cookie-consent", "#cboxOverlay.colorbox-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent form.cookie-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#colorbox.colorbox-cookie-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#colorbox input.cookie-consent-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": "#colorbox input.cookie-consent-reject-all"
+        },
+        {
+            "click": "#colorbox input.cookie-consent-reject-all"
+        },
+        {
+            "waitForVisible": "#colorbox.colorbox-cookie-consent",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ConsentMarketing=False"
+        }
+    ]
+}

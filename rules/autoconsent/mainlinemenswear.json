@@ -1,0 +1,39 @@
+{
+    "name": "mainlinemenswear",
+    "vendorUrl": "https://www.mainlinemenswear.co.uk/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?mainlinemenswear\\.co\\.uk/"
+    },
+    "prehideSelectors": [".c-cookie-modal"],
+    "detectCmp": [
+        {
+            "exists": ".c-cookie-modal #cookieModal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".c-cookie-modal #cookieModal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c-cookie-modal__buttons--container button[aria-label=\"Accept All Cookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c-cookie-modal__buttons--container button[aria-label=\"Settings\"]"
+        },
+        {
+            "waitForVisible": ".c-cookie-modal__options"
+        },
+        {
+            "click": ".c-cookie-modal__options input[role=\"switch\"]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".c-cookie-modal__buttons--container button[aria-label=\"Save Cookie Settings\"]"
+        }
+    ]
+}

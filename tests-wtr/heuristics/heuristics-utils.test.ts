@@ -84,7 +84,7 @@ describe('checkHeuristicPatterns', () => {
     });
 });
 
-describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
+describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     it('detects "we use <qualifier> cookies" notices', () => {
         const texts = [
             // openrouter.ai
@@ -92,6 +92,8 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
             'We use optional cookies to measure traffic',
             'We use analytics cookies and similar technologies',
             'We serve necessary cookies only',
+            'We use Google Analytics cookies to understand which pages and tools are useful.',
+            'We use third party cookies for advertising',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -100,8 +102,9 @@ describe('checkHeuristicPatterns with a qualifier before "cookies"', () => {
 
     it('does not match when "cookies" is further away', () => {
         expect(
-            checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, { patterns: [/we use(?: \w+)? cookies/gi] })
-                .patterns,
+            checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, {
+                patterns: [/we (?:use|serve)(?: \w+){0,2} cookies/gi],
+            }).patterns,
         ).to.have.length(0);
     });
 });
@@ -328,6 +331,23 @@ describe('checkHeuristicPatterns with Danish popups', () => {
 
     it('does not detect unrelated Danish text', () => {
         expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            'Kan vi bruke valgfrie informasjonskapsler for å forbedre tjenestene våre?',
+            'Vi bruker informasjonskapsler for å gi deg en bedre opplevelse.',
+            'Nettstedet bruker cookies til statistikk.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker skattemeldingen til å beregne skatten din').patterns).to.have.length(0);
     });
 });
 
@@ -563,6 +583,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
+    });
+
+    it('matches Norwegian reject buttons', () => {
+        expect(classifyButtonTextRegex('Nei')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nei takk')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avslå')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {

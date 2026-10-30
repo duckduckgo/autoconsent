@@ -1,0 +1,17 @@
+{
+    "name": "planned-parenthood",
+    "vendorUrl": "https://www.plannedparenthood.org/",
+    "prehideSelectors": ["#cookieBanner"],
+    "detectCmp": [
+        { "exists": "#cookieBanner #openCookieBannerSettings" },
+        { "exists": "#cookieBannerSettings #CookieBannerSettingsRejectAll" }
+    ],
+    "detectPopup": [{ "visible": "#cookieBanner" }],
+    "optIn": [{ "waitForThenClick": "#cookieBanner #CookieBannerAllowAll" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieBanner #openCookieBannerSettings" },
+        { "waitForVisible": "#cookieBannerSettings" },
+        { "waitForThenClick": "#cookieBannerSettings #CookieBannerSettingsRejectAll" }
+    ],
+    "test": [{ "cookieContains": "hpa=true" }]
+}
