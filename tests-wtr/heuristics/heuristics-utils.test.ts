@@ -73,6 +73,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "uses cookies to ensure you get the best experience" notices', () => {
+        const { snippets } = checkHeuristicPatterns(
+            'AOMEI uses cookies to ensure you get the best experience on our website. Learn more Got it',
+        );
+
+        expect(snippets).to.include('uses cookies to ensure you get the best experience');
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
