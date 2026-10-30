@@ -98,6 +98,18 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German analytics notices', () => {
+    it('detects analytics notices that do not mention cookies', () => {
+        // grusskarten-schreiben.de
+        const text = 'Wir nutzen Google Analytics, um zu verstehen, wie unsere Seite genutzt wird und sie zu verbessern.';
+        expect(checkHeuristicPatterns(text).patterns.length).to.be.greaterThan(0);
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Wir nutzen Google Maps für die Anfahrt').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
@@ -153,6 +165,8 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
             'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
             'Vi använder cookies för att förbättra din upplevelse',
             'Webbplatsen använder kakor',
+            // spv.se
+            'På spv.se använder vi nödvändiga kakor (cookies) för att webbplatsen ska fungera så bra som möjligt för dig.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -161,6 +175,7 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
 
     it('does not detect unrelated Swedish text', () => {
         expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('I våra bullar använder vi svenska råvaror').patterns).to.have.length(0);
     });
 });
 

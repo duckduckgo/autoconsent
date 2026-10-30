@@ -64,6 +64,8 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    // analytics notices that do not mention cookies, e.g. "Wir nutzen Google Analytics, um zu verstehen ..."
+    /wir (?:nutzen|verwenden) google analytics/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -172,8 +174,8 @@ export const DETECT_PATTERNS = [
     /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
 
     // Swedish (SV)
-    // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
-    /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor", "på x använder vi kakor"
+    /(?:(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder|använder\s+vi)\s.{0,60}(?:cookies|kakor)/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
