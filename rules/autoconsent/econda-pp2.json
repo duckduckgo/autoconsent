@@ -1,0 +1,33 @@
+{
+    "name": "econda-pp2",
+    "vendorUrl": "https://www.econda.de/",
+    "cosmetic": false,
+    "prehideSelectors": ["#econda-pp2-banner", "#econda-pp2-banner-modal"],
+    "detectCmp": [
+        {
+            "exists": "#econda-pp2-banner, #econda-pp2-banner-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "comment": "the banner can be a top-layer dialog, which isElementVisible() reports as hidden",
+            "visible": "#econda-pp2-banner-reject-all-channels-button",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#econda-pp2-banner-accept-all-channels-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#econda-pp2-banner-reject-all-channels-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "econda.privacy.protection={\"profile\":{\"state\":\"DENY\""
+        }
+    ]
+}
