@@ -1,0 +1,33 @@
+{
+    "name": "skiddle",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?skiddle\\.com/" },
+    "prehideSelectors": ["#cookie-widget-root [data-testid=\"test-consent-modal\"]", "#cookie-message"],
+    "detectCmp": [{ "any": [{ "exists": "#cookie-widget-root [data-testid=\"test-consent-modal\"]" }, { "visible": "#cookie-message" }] }],
+    "detectPopup": [
+        { "any": [{ "visible": "#cookie-widget-root [data-testid=\"test-consent-modal\"]" }, { "visible": "#cookie-message" }] }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": "#cookie-widget-root [data-testid=\"test-consent-modal\"]" },
+            "then": [{ "waitForThenClick": "[data-testid=\"test-consent-modal-accept-button\"]" }],
+            "else": [{ "waitForThenClick": "#cookie-message #close", "retry": 3, "retryInterval": 500 }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#cookie-widget-root [data-testid=\"test-consent-modal\"]" },
+            "then": [
+                { "waitForThenClick": "[data-testid=\"test-consent-modal-manage-button\"]" },
+                { "waitForThenClick": "#cookie-widget-root [class*=\"_offcanvasRejectButton_\"]" }
+            ],
+            "else": [{ "waitForThenClick": "#cookie-message #close", "retry": 3, "retryInterval": 500 }]
+        }
+    ],
+    "test": [
+        {
+            "if": { "exists": "#cookie-widget-root [data-testid=\"test-offcanvas\"]" },
+            "then": [{ "cookieContains": "%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" }],
+            "else": [{ "cookieContains": "acceptCookiePolicy=1" }]
+        }
+    ]
+}
