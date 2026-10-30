@@ -30,6 +30,12 @@ export const snippets = {
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
+    // purposes are loaded with the rest of the config, after which pay-or-consent (PUR) mode is known
+    EVAL_CONSENTMANAGER_CONFIG_PENDING: () => {
+        const purposes = window.__cmp?.('getCMPData')?.purposesList;
+        return !!purposes && Object.keys(purposes).length === 0;
+    },
+    EVAL_CONSENTMANAGER_PUR: () => !!window.__cmp?.('getCMPData')?.purModeActive || !!window.cmp_has_contentpass,
     EVAL_CONSENTMANAGER_NCMP_REJECT: () => {
         if (typeof window.__npcmp !== 'function') return false;
         window.__npcmp('reject');

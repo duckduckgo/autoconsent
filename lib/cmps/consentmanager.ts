@@ -30,13 +30,25 @@ export default class ConsentManager extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
+        // pay-or-consent walls (PUR mode, e.g. contentpass) have no reject option and are not handled
+        if (this.elementExists('#cmpbox.cmpboxcontentpass')) {
+            return false;
+        }
         if (this.elementVisible('#cmpbox .cmpmore', 'any')) {
-            return true;
+            return !(await this.mainWorldEval('EVAL_CONSENTMANAGER_PUR'));
         } else if (this.apiAvailable) {
             // wait before making this check because early in the page lifecycle this may incorrectly return
             // true, causing an opt-out when it is not needed.
             await this.wait(500);
-            return await this.mainWorldEval('EVAL_CONSENTMANAGER_2');
+            if (!(await this.mainWorldEval('EVAL_CONSENTMANAGER_2'))) {
+                return false;
+            }
+            // the API can be ready before the config that tells whether this is a pay-or-consent wall
+            const deadline = Date.now() + 5000;
+            while (Date.now() < deadline && (await this.mainWorldEval('EVAL_CONSENTMANAGER_CONFIG_PENDING'))) {
+                await this.wait(250);
+            }
+            return !(await this.mainWorldEval('EVAL_CONSENTMANAGER_PUR'));
         }
         return false;
     }
