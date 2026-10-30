@@ -1,0 +1,15 @@
+{
+    "name": "gkv-cookie-banner",
+    "prehideSelectors": [".cb-banner"],
+    "detectCmp": [{ "exists": ".cb-banner .cb-form #cb-acceptall" }],
+    "detectPopup": [{ "visible": ".cb-banner.is-visible .cb-form" }],
+    "optIn": [{ "waitForThenClick": ".cb-banner #cb-acceptall" }],
+    "optOut": [
+        {
+            "if": { "exists": ".cb-banner #option_statistic:checked" },
+            "then": [{ "click": ".cb-banner #option_statistic" }]
+        },
+        { "waitForThenClick": ".cb-banner .cb-form button[type=submit]" }
+    ],
+    "test": [{ "eval": "EVAL_GKV_COOKIE_BANNER_TEST" }]
+}
