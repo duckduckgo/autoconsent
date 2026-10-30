@@ -197,6 +197,22 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects German cookie notices', () => {
+        const texts = [
+            'Einige Cookies brauchen wir, damit dieser Shop zuverlässig funktioniert. Alle weiteren setzen wir nur mit Ihrem Einverständnis ein.',
+            'Einige Cookies braucht der Shop zum Funktionieren. Alles Weitere nur mit Ihrem Einverständnis.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated German text', () => {
+        expect(checkHeuristicPatterns('Mit Ihrem Einverständnis senden wir Ihnen unseren Newsletter').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Norwegian popups', () => {
     it('detects Norwegian cookie notices', () => {
         const texts = [
