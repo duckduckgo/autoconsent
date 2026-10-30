@@ -1,0 +1,51 @@
+{
+    "name": "gesetze-legal",
+    "vendorUrl": "https://gesetze.legal/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?gesetze\\.legal/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[role=dialog][aria-labelledby=user-consent-title]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=dialog][aria-labelledby=user-consent-title]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[aria-labelledby=user-consent-title] .MuiDialogActions-root button.MuiButton-contained"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[aria-labelledby=user-consent-title] .MuiDialogActions-root button.MuiButton-outlined"
+        },
+        {
+            "waitForVisible": "#user-consent-configuration-description input[type=checkbox]"
+        },
+        {
+            "click": "#user-consent-configuration-description input[type=checkbox]:not(:checked)",
+            "all": true
+        },
+        {
+            "click": "xpath///*[@id='user-consent-configuration-description']//label[contains(., 'Google Analytics')]//input[@type='checkbox']",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[aria-labelledby=user-consent-configuration-title] .MuiDialogActions-root button.MuiButton-contained"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gl_uc=true"
+        },
+        {
+            "cookieContains": "gl_uc_ga=true",
+            "negated": true
+        }
+    ]
+}
