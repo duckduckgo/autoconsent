@@ -98,6 +98,19 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with German popups', () => {
+    it('detects German notices with inverted word order', () => {
+        const texts = [
+            'Zur Verbesserung der Funktion unserer Seite verwenden wir Cookies.',
+            'Auf unserer Website nutzen wir Cookies, um die Seite zu verbessern.',
+            'Für den Betrieb dieser Seite setzen wir technisch notwendige Cookies ein.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
