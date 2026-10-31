@@ -1,0 +1,19 @@
+{
+    "name": "google-cookiechoices",
+    "vendorUrl": "https://github.com/google/cookiechoices",
+    "prehideSelectors": ["#cookieChoiceInfo"],
+    "detectCmp": [{ "exists": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "detectPopup": [{ "visible": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "optIn": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "optOut": [
+        {
+            "comment": "the dismiss text is site-configurable: hide instead of clicking when it is an accept label",
+            "if": {
+                "exists": "xpath///div[@id='cookieChoiceInfo']//a[@id='cookieChoiceDismiss'][contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'accept') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'accett') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'acept') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'aceit') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'akzept') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'agree') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'accord') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'akkoord') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'zustimm') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'einverstanden') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'consent')]"
+            },
+            "then": [{ "hide": "#cookieChoiceInfo" }],
+            "else": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#cookieChoiceInfo #cookieChoiceDismiss", "timeout": 1000, "check": "none" }]
+}
