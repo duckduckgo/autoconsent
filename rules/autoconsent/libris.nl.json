@@ -1,9 +1,6 @@
 {
     "name": "libris.nl",
     "vendorUrl": "https://libris.nl/",
-    "runContext": {
-        "urlPattern": "^https?://(www\\.)?libris\\.nl/"
-    },
     "prehideSelectors": ["#cookie-consent-popup"],
     "detectCmp": [{ "exists": "#cookie-consent-popup #cookie-consent-accept-selected" }],
     "detectPopup": [{ "visible": "#cookie-consent-popup #cookie-consent-accept-selected" }],
