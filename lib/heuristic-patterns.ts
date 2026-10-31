@@ -10,7 +10,7 @@ export const DETECT_PATTERNS = [
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
     /we (?:use|serve)(?: \w+){0,2} cookies/gi,
     /we are using cookies/gi,
-    /use of cookies/gi,
+    /(?:use|usage) of cookies/gi,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
     /cookies (?:and|or) .{0,100} technologies/gi,
@@ -64,6 +64,7 @@ export const DETECT_PATTERNS = [
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
+    /wir cookies (?:verwenden|einsetzen|nutzen)/gi,
 
     /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
@@ -865,7 +866,7 @@ export const ACCEPT_PATTERNS = [
 export const ACKNOWLEDGE_PATTERNS = [
     // close / dismiss the banner/dialog/message (multilingual). The negative lookahead avoids
     // accept/save phrases (e.g. "agree and close", "akkoord en sluiten", "speichern schließen").
-    /^(?!.*\b(accept\w*|accepter|accepteer|accepteren|agree|allow|akkoord|aanvaard\w*|zustimm\w*|annehm\w*|akzeptier\w*|aceptar|acepta|permit\w*|consent\w*|einverstanden|zezw\w*|zgadzam|zgoda|guardar|opslaan|enregistrer|speicher\w*|zapisz)\b)(x\s+|nee,?\s+)?(close|dismiss|schlie(ß|ss)en|sluiten|afsluiten|fermer|cerrar|tanca|beenden|masquer|zamknij)( (this|the|ce|le|el|de|des|het|la|een)?\s*(banner|bandeau|banier|bar|dialog|dialogue|window|okno|melding|message|notification|informa\w*|notificaci\w*|cookie\w*|bannière|rgpd|gdpr|hier|des cookies|de cookies|x))*\.?\s*$/is,
+    /^(?!.*\b(accept\w*|accepter|accepteer|accepteren|agree|allow|akkoord|aanvaard\w*|zustimm\w*|annehm\w*|akzeptier\w*|aceptar|acepta|permit\w*|consent\w*|einverstanden|zezw\w*|zgadzam|zgoda|guardar|opslaan|enregistrer|speicher\w*|zapisz)\b)(x\s+|nee,?\s+)?(close|dismiss|schlie(ß|ss)en|sluiten|afsluiten|fermer|cerrar|tanca|beenden|masquer|zamknij)( (this|the|ce|le|el|de|des|het|la|een)?\s*(banner|bandeau|banier|bar|dialog|dialogue|window|okno|melding|message|note|notice|notification|informa\w*|notificaci\w*|cookie\w*|bannière|rgpd|gdpr|hier|des cookies|de cookies|x))*\.?\s*$/is,
 
     // "ok" / "okay" / "oké" (optionally followed by a short acknowledgement)
     /^(ok|okay|oké|okey|k)([ .!,]*)(got it|verstanden|compris|rozumiem|thanks|gracias|ik begrijp( dat| het)?|continue to website|pour moi|fermer)?[ .!]*$/is,
@@ -889,6 +890,8 @@ export const ACKNOWLEDGE_PATTERNS = [
 
     // German (DE)
     'speichern schließen',
+    // "close notice"
+    /^hinweis schlie(ß|ss)en$/is,
 
     // Spanish (ES)
     /^.?( lo)?(entendido|entiendo).?$/s,
