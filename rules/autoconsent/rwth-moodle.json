@@ -1,0 +1,33 @@
+{
+    "name": "rwth-moodle",
+    "vendorUrl": "https://moodle.rwth-aachen.de/",
+    "runContext": {
+        "urlPattern": "^https?://moodle\\.rwth-aachen\\.de/"
+    },
+    "prehideSelectors": ["#cookie-container"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-container #cookie-confirm-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-container #cookie-confirm-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-container #cookie-confirm-btn"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies-confirm=true"
+        }
+    ]
+}
