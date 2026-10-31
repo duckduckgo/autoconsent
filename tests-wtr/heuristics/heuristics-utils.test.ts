@@ -181,6 +181,22 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch cookie notices', () => {
+        const texts = [
+            'Wij gebruiken cookies voor statistieken en advertenties (Google Analytics en Google Ads). Deze plaatsen wij alleen met uw toestemming.',
+            'We gebruiken analytische cookies voor het verbeteren van de website.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Wij gebruiken alleen verse ingrediënten in onze koekjes').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Danish popups', () => {
     it('detects Danish cookie notices', () => {
         const texts = [
