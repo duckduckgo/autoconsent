@@ -50,6 +50,7 @@ export const DETECT_PATTERNS = [
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
+    /uniquement les cookies (?:fonctionnels|essentiels|nécessaires)/gi,
     /nécessaires uniquement/gi,
 
     // DE
@@ -83,7 +84,8 @@ export const DETECT_PATTERNS = [
     /cookies weigeren/gi,
     /weiger.{0,100}(?:cookies|alles)/gi,
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
-    /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
+    // Flemish uses "enkel" for "only"
+    /(?:alleen|\benkel\b).{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
     /wijs alles af/gi,
 
     // Spanish (ES)
@@ -201,8 +203,8 @@ const REJECT_PATTERNS_ENGLISH = [
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
-    // "allow necessary cookies continue", "use essential cookies only", "functional only", "essential only cookies", "i confirm necessary"
-    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    // "allow necessary cookies continue", "use essential cookies only", "proceed with functional cookies only", "functional only", "essential only cookies", "i confirm necessary"
+    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|proceed\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s+((cookies\s+)?only|only\s+cookies)\s*$/is,
 

@@ -197,6 +197,28 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Flemish "enkel" cookie notices', () => {
+        const texts = ['Ga verder met enkel functionele cookies', 'Aanvaard enkel noodzakelijke cookies'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Wij bakken enkele koekjes met functionele ingrediënten').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with French popups', () => {
+    it('detects "uniquement les cookies" notices', () => {
+        const texts = ['Continuez avec uniquement les cookies fonctionnels', 'Utiliser uniquement les cookies nécessaires'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Norwegian popups', () => {
     it('detects Norwegian cookie notices', () => {
         const texts = [
@@ -297,6 +319,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('I do not accept')).to.equal('reject');
         expect(classifyButtonTextRegex('Do not accept cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
+    });
+
+    it('matches "proceed with ... only" variants', () => {
+        expect(classifyButtonTextRegex('Proceed with functional cookies only')).to.equal('reject');
+        expect(classifyButtonTextRegex('Proceed with necessary cookies only')).to.equal('reject');
     });
 
     it('matches CCPA "do not sell/share" variants', () => {
