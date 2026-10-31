@@ -73,6 +73,15 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects German "nutzt cookies" notices', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'Dieses Angebot nutzt zur Themensammlung-Auswahl, für den App-Modus sowie zum Cache-Handling technisch notwendige Cookies.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(classifyButtonTextRegex('Ist OK!')).to.equal('acknowledge');
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
