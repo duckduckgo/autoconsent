@@ -9,7 +9,27 @@
         {
             "if": { "visible": ".as-oil .as-js-reject-all, .AvacyBanner .as-js-reject-all", "check": "any" },
             "then": [{ "waitForThenClick": ".as-oil .as-js-reject-all, .AvacyBanner .as-js-reject-all" }],
-            "else": [{ "waitForThenClick": ".as-oil .as-js-close-banner, .AvacyBanner .as-js-close-banner" }]
+            "else": [
+                {
+                    "if": { "visible": ".as-oil .as-js-only-essentials", "check": "any" },
+                    "then": [{ "click": ".as-oil .as-js-only-essentials" }],
+                    "else": [
+                        {
+                            "if": { "exists": ".as-oil .as-js-close-banner, .AvacyBanner .as-js-close-banner" },
+                            "then": [{ "waitForThenClick": ".as-oil .as-js-close-banner, .AvacyBanner .as-js-close-banner" }],
+                            "else": [
+                                { "waitForThenClick": ".as-oil .as-js-advanced-settings" },
+                                { "waitForVisible": "#as-oil-cpc .as-js-optin" },
+                                {
+                                    "if": { "visible": "#as-oil-cpc .as-js-btn-deactivate-all" },
+                                    "then": [{ "click": "#as-oil-cpc .as-js-btn-deactivate-all" }]
+                                },
+                                { "click": "#as-oil-cpc .as-js-optin" }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
