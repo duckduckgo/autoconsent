@@ -1,0 +1,9 @@
+{
+    "name": "cwarn",
+    "cosmetic": true,
+    "prehideSelectors": ["#cwarn-box"],
+    "detectCmp": [{ "exists": "#cwarn-box #cwarn-button" }],
+    "detectPopup": [{ "visible": "#cwarn-box" }],
+    "optIn": [{ "waitForThenClick": "#cwarn-button" }],
+    "optOut": [{ "hide": "#cwarn-box" }]
+}
