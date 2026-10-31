@@ -6,28 +6,27 @@
     "cosmetic": false,
     "runContext": {
         "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(?:www\\.)?(?:onlinebibliotheek|bibliotheek)\\.nl/"
+        "frame": false
     },
-    "prehideSelectors": [".modalwindow-container.bar .modalwindow"],
+    "prehideSelectors": [".modalwindow-container:has(.modalwindow-footer button.button.primary.notok)"],
     "detectCmp": [
         {
-            "exists": "#bibliotheek-nl-page"
+            "exists": "#bibliotheek-nl-page .modalwindow-container .modalwindow-footer button.button.primary.notok"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".modalwindow-container.bar .modalwindow"
+            "visible": "#bibliotheek-nl-page .modalwindow-container .modalwindow-footer button.button.primary.notok"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".modalwindow-container.bar .modalwindow button.button.primary.ok"
+            "waitForThenClick": "#bibliotheek-nl-page .modalwindow-container .modalwindow-footer button.button.primary.ok"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".modalwindow-container.bar .modalwindow button.button.primary.notok"
+            "waitForThenClick": "#bibliotheek-nl-page .modalwindow-container .modalwindow-footer button.button.primary.notok"
         }
     ]
 }
