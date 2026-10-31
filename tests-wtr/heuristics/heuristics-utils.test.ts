@@ -214,6 +214,26 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch cookie notices', () => {
+        const texts = [
+            // blckbx.tv
+            'Wij plaatsen cookies om deze website goed te laten functioneren, campagnes op jouw voorkeuren af te stemmen en de website te analyseren.',
+            'We plaatsen analytische cookies om het gebruik te meten',
+            'Wij plaatsen ook marketing cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(
+            checkHeuristicPatterns('Wij plaatsen uw bestelling direct na betaling. Heerlijke koekjes en cookies bakken.').patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
