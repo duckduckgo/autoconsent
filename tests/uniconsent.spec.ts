@@ -1,14 +1,7 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests(
-    'Uniconsent',
-    [
-        // 'https://sport-stimme.de/', // see https://github.com/duckduckgo/autoconsent/issues/81
-        'https://www.sharethrough.com/',
-    ],
-    {},
-);
+generateCMPTests('Uniconsent', ['https://www.sharethrough.com/', 'https://www.officialcharts.com/'], {});
 
-generateCMPTests('Uniconsent', ['https://www.vivobarefoot.com/eu/'], {
+generateCMPTests('Uniconsent', ['http://soundchapter.com/', 'https://www.synonymer.se/', 'https://www.ruck.co.uk/'], {
     skipRegions: ['US'],
 });

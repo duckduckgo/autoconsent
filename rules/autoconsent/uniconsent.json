@@ -1,0 +1,60 @@
+{
+    "name": "Uniconsent",
+    "vendorUrl": "https://www.uniconsent.com/",
+    "prehideSelectors": ["#uniccmp"],
+    "detectCmp": [
+        {
+            "exists": ["#uniccmp", ".unic .unic-modal, .unic .unic-bar"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#uniccmp", ".unic .unic-modal, .unic .unic-bar"],
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#uniccmp", ".unic .unic-agree-all-button"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ["#uniccmp", ".unic .unic-opt-out-data-button"]
+            },
+            "then": [
+                {
+                    "click": ["#uniccmp", ".unic .unic-opt-out-data-button"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": ["#uniccmp", ".unic .unic-reject-all-button"]
+                    },
+                    "then": [
+                        {
+                            "click": ["#uniccmp", ".unic .unic-reject-all-button"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ["#uniccmp", ".unic .unic-manage-options-button"]
+                        },
+                        {
+                            "waitForThenClick": ["#uniccmp", ".unic .unic-reject-all-button"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#uniccmp", ".unic .unic-modal, .unic .unic-bar"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
