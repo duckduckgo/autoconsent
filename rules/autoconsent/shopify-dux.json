@@ -1,0 +1,32 @@
+{
+    "name": "shopify-dux",
+    "vendorUrl": "https://www.shopify.com/legal/cookies",
+    "cosmetic": false,
+    "prehideSelectors": ["#dux-privacy"],
+    "detectCmp": [
+        {
+            "exists": "#dux-privacy [data-component-name=\"reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#dux-privacy:not([style*=\"opacity: 0\"]) [data-component-name=\"reject\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#dux-privacy [data-component-name=\"accept\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#dux-privacy [data-component-name=\"reject\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitFor": "#dux-privacy[style*=\"opacity: 0\"]",
+            "timeout": 2000
+        }
+    ]
+}
