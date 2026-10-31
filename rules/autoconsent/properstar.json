@@ -1,0 +1,56 @@
+{
+    "name": "properstar",
+    "vendorUrl": "https://www.properstar.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?properstar\\.[a-z.]+/"
+    },
+    "prehideSelectors": [".consent:has(> .consent-body .consent-buttons)"],
+    "detectCmp": [
+        {
+            "exists": ".consent > .consent-body .consent-buttons > .btn-outline-secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent > .consent-body .consent-buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": ".ReactModalPortal",
+            "timeout": 15000
+        },
+        {
+            "waitForThenClick": ".consent > .consent-body .consent-buttons > .btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": ".ReactModalPortal",
+            "timeout": 15000
+        },
+        {
+            "waitForThenClick": ".consent > .consent-body .consent-buttons > .btn-outline-secondary"
+        },
+        {
+            "waitForVisible": ".consent-settings-modal .consent-switchers",
+            "timeout": 3000
+        },
+        {
+            "click": ".consent-settings-modal .consent-switchers input[type=checkbox]:checked:not([disabled]) + label",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".consent-settings-modal .consent-settings-modal-content > .consent-buttons > .btn-primary",
+            "retry": 2
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".consent > .consent-body .consent-buttons",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
