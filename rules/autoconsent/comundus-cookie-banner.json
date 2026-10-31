@@ -1,0 +1,43 @@
+{
+    "name": "comundus-cookie-banner",
+    "prehideSelectors": ["#cookieDisclaimer"],
+    "detectCmp": [
+        {
+            "exists": "#cookieDisclaimer #_com_comundus_cookies_CookieBanner_cookieConsentForm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieDisclaimer"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#_com_comundus_cookies_CookieBanner_acceptAllCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookieDisclaimer #showCookieSettingsBtn"
+            },
+            "then": [
+                {
+                    "click": "#cookieDisclaimer #showCookieSettingsBtn"
+                },
+                {
+                    "waitForVisible": "#_com_comundus_cookies_CookieBanner_updateCookieConsentBtn",
+                    "timeout": 2000
+                }
+            ]
+        },
+        {
+            "click": "#cookieDisclaimer input.banner-group-consent:not(.disabled):checked + label",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#_com_comundus_cookies_CookieBanner_updateCookieConsentBtn"
+        }
+    ]
+}
