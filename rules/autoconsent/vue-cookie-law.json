@@ -1,0 +1,42 @@
+{
+    "name": "vue-cookie-law",
+    "vendorUrl": "https://github.com/apertureless/vue-cookie-law",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".Cookie:has(> .Cookie__content + .Cookie__buttons)"],
+    "detectCmp": [
+        {
+            "exists": ".Cookie > .Cookie__content + .Cookie__buttons"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".Cookie:has(> .Cookie__content + .Cookie__buttons)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".Cookie > .Cookie__buttons > button.Cookie__button:not(.Cookie__button--decline)"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".Cookie > .Cookie__buttons > button.Cookie__button--decline"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".Cookie > .Cookie__buttons > button.Cookie__button--decline"
+                }
+            ],
+            "else": [
+                {
+                    "hide": ".Cookie:has(> .Cookie__content + .Cookie__buttons)"
+                }
+            ]
+        }
+    ]
+}
