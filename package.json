@@ -34,6 +34,7 @@
     "test:chrome": "playwright test --project chrome",
     "test:lib": "web-test-runner",
     "test:sample": "playwright test tests/_sample-test.spec.ts --project webkit",
+    "build-heuristic-literals": "ts-node scripts/build-heuristic-literals.ts && prettier --write lib/heuristic-literals.ts",
     "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",

@@ -59,6 +59,21 @@ const c = tseslint.config(
     },
 
     {
+        // the library runs on engines without RegExp lookbehind (Safari before 16.4), where it fails to load
+        files: ['lib/**/*.ts'],
+        rules: {
+            'no-restricted-syntax': [
+                'error',
+                {
+                    selector:
+                        'Literal[regex.pattern=/\\(\\?<[=!]/], Literal[value=/\\(\\?<[=!]/], TemplateElement[value.raw=/\\(\\?<[=!]/]',
+                    message: 'RegExp lookbehind is not supported by all target browsers.',
+                },
+            ],
+        },
+    },
+
+    {
         files: ['tests/**/*', 'tests-wtr/**/*'],
         languageOptions: {
             globals: {
