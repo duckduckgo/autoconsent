@@ -181,6 +181,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch "met cookies ... we" notices', () => {
+        const texts = [
+            // dezaak.nl
+            'Met cookies zien we welke artikelen en tools ondernemers écht helpen, en maken we De Zaak daar beter op.',
+            'Met behulp van cookies kunnen wij de website verbeteren',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Koffie met cookies en thee serveren we de hele dag').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Danish popups', () => {
     it('detects Danish cookie notices', () => {
         const texts = [
