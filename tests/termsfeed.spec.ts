@@ -8,4 +8,7 @@ generateCMPTests('termsfeed', [
     'https://grovemade.com/',
     'https://loot.farm/',
     'https://tcdecks.net/',
+    // iwt.com.tr variant
+    'https://www.rufnummerfinder.de/',
+    'https://dirmakmakina.com/',
 ]);
