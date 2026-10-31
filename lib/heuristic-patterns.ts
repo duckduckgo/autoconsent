@@ -83,7 +83,8 @@ export const DETECT_PATTERNS = [
     /cookies weigeren/gi,
     /weiger.{0,100}(?:cookies|alles)/gi,
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
-    /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
+    // Flemish uses "enkel" for "alleen"; \b skips "enkele" ("a few")
+    /(?:alleen|\benkel\b).{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
     /wijs alles af/gi,
 
     // Spanish (ES)

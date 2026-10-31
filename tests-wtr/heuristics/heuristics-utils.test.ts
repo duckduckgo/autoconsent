@@ -98,6 +98,16 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Flemish "enkel ... cookies" notices', () => {
+        expect(checkHeuristicPatterns('Ga verder met enkel functionele cookies').patterns.length).to.be.greaterThan(0);
+    });
+
+    it('does not treat "enkele" (a few) as "enkel"', () => {
+        expect(checkHeuristicPatterns('Wij hebben enkele functionele cookies').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
