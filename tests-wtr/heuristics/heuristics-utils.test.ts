@@ -98,6 +98,26 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects "wij gebruiken <qualifier> cookies" notices', () => {
+        const texts = [
+            "Cookie-instellingen Wij gebruiken cookies voor twee dingen: video's van externe platforms zoals YouTube en Vimeo, en statistieken over het gebruik van de site.",
+            'We gebruiken analytische cookies voor statistieken',
+            'Wij gebruiken alleen functionele cookies',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match when "cookies" is further away', () => {
+        expect(
+            checkHeuristicPatterns('Wij gebruiken de beste chocolade in onze cookies', [/(?:we|wij) gebruiken(?: \w+){0,2} cookies/gi])
+                .patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
