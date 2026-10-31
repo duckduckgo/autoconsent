@@ -285,6 +285,12 @@ export const snippets = {
     EVAL_USERCENTRICS_API_4: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_5: () => UC_UI.areAllConsentsAccepted() === true,
     EVAL_USERCENTRICS_API_6: () => UC_UI.areAllConsentsAccepted() === false,
+    // the error view's close icon is an SVG, which has no click() method
+    EVAL_USERCENTRICS_ERROR_CLOSE: () =>
+        document
+            .querySelector('#usercentrics-cmp-error')
+            .shadowRoot.querySelector('.close-error-icon')
+            .dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,

@@ -1,0 +1,18 @@
+{
+    "name": "usercentrics-error",
+    "vendorUrl": "https://usercentrics.com/",
+    "prehideSelectors": ["#usercentrics-cmp-error"],
+    "detectCmp": [{ "exists": ["#usercentrics-cmp-error", ".usercentrics-error"] }],
+    "detectPopup": [{ "visible": ["#usercentrics-cmp-error", ".usercentrics-error"] }],
+    "optIn": [
+        { "waitFor": ["#usercentrics-cmp-error", ".close-error-icon"], "timeout": 2000 },
+        { "eval": "EVAL_USERCENTRICS_ERROR_CLOSE" },
+        { "waitForVisible": ["#usercentrics-cmp-error", ".usercentrics-error"], "check": "none", "timeout": 2000 }
+    ],
+    "optOut": [
+        { "waitFor": ["#usercentrics-cmp-error", ".close-error-icon"], "timeout": 2000 },
+        { "eval": "EVAL_USERCENTRICS_ERROR_CLOSE" },
+        { "waitForVisible": ["#usercentrics-cmp-error", ".usercentrics-error"], "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "visible": ["#usercentrics-cmp-error", ".usercentrics-error"], "check": "none" }]
+}
