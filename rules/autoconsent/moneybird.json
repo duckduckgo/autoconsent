@@ -1,0 +1,61 @@
+{
+    "name": "moneybird",
+    "vendorUrl": "https://www.moneybird.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?moneybird\\.(nl|com|de|be)/"
+    },
+    "detectCmp": [
+        {
+            "exists": ["mb-cookie-modal-component", "#mb-cookie-modal"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["mb-cookie-modal-component", "#mb-cookie-modal[open]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["mb-cookie-modal-component", "#main-view .button-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["mb-cookie-modal-component", "#show-preferences"]
+        },
+        {
+            "waitForVisible": ["mb-cookie-modal-component", "#preferences-view"]
+        },
+        {
+            "if": {
+                "exists": ["mb-cookie-modal-component", "#check-analytical:checked"]
+            },
+            "then": [
+                {
+                    "click": ["mb-cookie-modal-component", "#check-analytical"]
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": ["mb-cookie-modal-component", "#check-thirdparty:checked"]
+            },
+            "then": [
+                {
+                    "click": ["mb-cookie-modal-component", "#check-thirdparty"]
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ["mb-cookie-modal-component", "#save-preferences"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analytical_cookie_consent=0"
+        },
+        {
+            "cookieContains": "third_party_cookie_consent=0"
+        }
+    ]
+}
