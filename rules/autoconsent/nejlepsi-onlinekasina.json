@@ -1,0 +1,35 @@
+{
+    "name": "nejlepsi-onlinekasina",
+    "vendorUrl": "https://nejlepsi-onlinekasina.cz/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?nejlepsi-onlinekasina\\.cz/"
+    },
+    "prehideSelectors": ["[role=region][aria-label='Cookie notice']"],
+    "detectCmp": [
+        {
+            "exists": "[role=region][aria-label='Cookie notice'] button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=region][aria-label='Cookie notice']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=region][aria-label='Cookie notice'] button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[role=region][aria-label='Cookie notice']"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[role=region][aria-label='Cookie notice']",
+            "check": "none"
+        }
+    ]
+}
