@@ -1,0 +1,31 @@
+{
+    "name": "twz-cookie-monster",
+    "vendorUrl": "https://www.twize.nl/",
+    "prehideSelectors": [".twz-cookiemonster.twz-cm-popup"],
+    "detectCmp": [{ "exists": ".twz-cookiemonster.twz-cm-popup [data-submit]" }],
+    "detectPopup": [{ "visible": ".twz-cookiemonster.twz-cm-popup" }],
+    "optIn": [{ "waitForThenClick": ".twz-cm-popup__buttons [data-submit='all']" }],
+    "optOut": [
+        {
+            "if": { "exists": ".twz-cm-popup__buttons [data-submit='refuse']" },
+            "then": [{ "click": ".twz-cm-popup__buttons [data-submit='refuse']" }],
+            "else": [
+                {
+                    "click": ".twz-cm-popup__cookies-cookie__check input[type='checkbox']:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".twz-cm-popup__buttons [data-submit='selected']" }
+            ]
+        },
+        { "waitForVisible": ".twz-cookiemonster.twz-cm-popup", "check": "none" }
+    ],
+    "test": [
+        { "wait": 500 },
+        { "cookieContains": "twz-cm-cookiemonster-allowed=" },
+        { "cookieContains": "\"2\":1", "negated": true },
+        { "cookieContains": "\"3\":1", "negated": true },
+        { "cookieContains": "\"4\":1", "negated": true },
+        { "cookieContains": "\"5\":1", "negated": true }
+    ]
+}
