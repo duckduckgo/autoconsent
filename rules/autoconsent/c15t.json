@@ -1,0 +1,32 @@
+{
+    "name": "c15t",
+    "vendorUrl": "https://c15t.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["[data-testid=cookie-banner-root][class*=c15t-]", "[data-testid=consent-banner-root][class*=c15t-]"],
+    "detectCmp": [{ "exists": "[data-testid=cookie-banner-root][class*=c15t-], [data-testid=consent-banner-root][class*=c15t-]" }],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=cookie-banner-root][class*=c15t-] [data-testid=cookie-banner-card], [data-testid=consent-banner-root][class*=c15t-] [data-testid=consent-banner-card]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=cookie-banner-root][class*=c15t-] [data-testid=cookie-banner-accept-button], [data-testid=consent-banner-root][class*=c15t-] [data-testid=consent-banner-accept-button]",
+            "retry": 2
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=cookie-banner-root][class*=c15t-] [data-testid=cookie-banner-reject-button], [data-testid=consent-banner-root][class*=c15t-] [data-testid=consent-banner-reject-button]",
+            "retry": 2
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[data-testid=cookie-banner-root][class*=c15t-] [data-testid=cookie-banner-card], [data-testid=consent-banner-root][class*=c15t-] [data-testid=consent-banner-card]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
