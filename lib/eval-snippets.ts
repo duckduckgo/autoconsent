@@ -212,6 +212,7 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).status === 'deny',
+    EVAL_PORSCHE_USERCENTRICS_TEST: () => JSON.parse(localStorage.getItem('uc_settings')).services.some((s) => !s.status),
     EVAL_POVR_GOBACK: () => window.history.back() || true,
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&

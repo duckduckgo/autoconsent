@@ -1,0 +1,9 @@
+{
+    "name": "porsche-usercentrics",
+    "prehideSelectors": ["uc-layer2"],
+    "detectCmp": [{ "exists": ["uc-layer2", "uc-p-modal"] }],
+    "detectPopup": [{ "visible": ["uc-layer2", "uc-p-modal", "div.modal"] }],
+    "optIn": [{ "waitForThenClick": ["uc-layer2", "uc-footer", "uc-p-button.accept"] }],
+    "optOut": [{ "waitForThenClick": ["uc-layer2", "uc-footer", "uc-p-button.deny"] }],
+    "test": [{ "eval": "EVAL_PORSCHE_USERCENTRICS_TEST" }]
+}
