@@ -1,0 +1,65 @@
+{
+    "name": "funatic-avg-cookiebanner",
+    "vendorUrl": "https://enovationgroup.com/nl/enovation-funatic/",
+    "prehideSelectors": ["#avg-cookiebanner"],
+    "detectCmp": [
+        {
+            "exists": "#avg-cookiebanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#avg-cookiebanner.state-banner .banner-panel, #avg-cookiebanner.state-settings .settings-panel",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#avg-cookiebanner .acceptAll"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#avg-cookiebanner .acceptAll"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#avg-cookie-settings input.avg-cookie:not(:checked):not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#avg-cookiebanner .save"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#avg-cookiebanner .rejectAll"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#avg-cookiebanner .rejectAll"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#avg-cookie-settings input.avg-cookie:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#avg-cookiebanner .save"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__avgAskUser=false"
+        }
+    ]
+}
