@@ -1,0 +1,38 @@
+{
+    "name": "sg-cookies",
+    "prehideSelectors": ["#sg-cookiesBar #cookies-bar"],
+    "detectCmp": [{ "exists": "#sg-cookiesBar #cookies-bar" }],
+    "detectPopup": [
+        { "visible": "#sg-cookiesBar #cookies-bar" },
+        {
+            "exists": "#cookies-bar .btn-disable-all, #sg-settings-modal-cookiesBar .cookies-decline-all, #cookies-bar [data-target='#sg-settings-modal-cookiesBar']"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#cookies-bar .btn-accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookies-bar .btn-disable-all" },
+            "then": [{ "waitForThenClick": "#cookies-bar .btn-disable-all" }],
+            "else": [
+                {
+                    "if": { "exists": "#sg-settings-modal-cookiesBar .cookies-decline-all" },
+                    "then": [
+                        { "waitForThenClick": "#cookies-bar .cookie-btn-default" },
+                        { "waitForThenClick": "#sg-settings-modal-cookiesBar .cookies-decline-all" }
+                    ],
+                    "else": [
+                        { "waitForThenClick": "#cookies-bar [data-target='#sg-settings-modal-cookiesBar']" },
+                        { "waitForVisible": "#cookies-manage-save-modal" },
+                        {
+                            "click": "#sg-settings-modal-cookiesBar input[type=checkbox]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "click": "#cookies-manage-save-modal" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#sg-cookiesBar #cookies-bar", "check": "none" }]
+}
