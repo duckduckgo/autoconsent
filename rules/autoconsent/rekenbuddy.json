@@ -1,0 +1,30 @@
+{
+    "name": "rekenbuddy",
+    "vendorUrl": "https://rekenbuddy.nl/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookie-banner.cb:not(.is-hidden) #cookie-settings-content #accept-cookies" }],
+    "detectPopup": [{ "visible": "#cookie-banner.cb:not(.is-hidden)" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner #accept-all-cookies" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-settings-button[aria-expanded=false]" },
+            "then": [{ "waitForThenClick": "#cookie-settings-button[aria-expanded=false]", "retry": 5, "retryInterval": 500 }]
+        },
+        { "waitForVisible": "#cookie-settings-content #accept-cookies" },
+        { "click": "#cookie-settings-content input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#cookie-settings-content #accept-cookies", "retry": 3, "retryInterval": 500 },
+        { "waitForVisible": "#cookie-banner", "check": "none" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "waitFor": ".fc-confirm-choices", "timeout": 2000, "optional": true },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_REKENBUDDY_TEST" }]
+}
