@@ -10,6 +10,9 @@ generateCMPTests(
         'https://www.wnl.tv/',
         'https://npo.nl/',
         'https://www.ntr.nl/',
+        'https://www.zapp.nl/',
+        'https://schooltv.nl/',
+        'https://www.zappelin.nl/',
     ],
     {
         testSelfTest: false,
