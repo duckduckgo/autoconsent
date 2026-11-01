@@ -1,0 +1,52 @@
+{
+    "name": "properstar",
+    "vendorUrl": "https://www.properstar.com/",
+    "prehideSelectors": ["#app div.consent > div.consent-header + div.consent-body"],
+    "detectCmp": [
+        {
+            "exists": "#app div.consent > div.consent-header + div.consent-body > div.consent-buttons"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#app div.consent > div.consent-body > div.consent-buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#app div.consent div.consent-buttons button.btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#app div.consent div.consent-buttons button.btn-outline-secondary"
+        },
+        {
+            "waitForVisible": ".consent-settings-modal .consent-buttons button.btn-primary",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ".consent-settings-modal .consent-buttons button.btn-primary",
+                "check": "none"
+            },
+            "then": [
+                {
+                    "click": "#app div.consent div.consent-buttons button.btn-outline-secondary"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".consent-settings-modal .consent-buttons button.btn-primary"
+        },
+        {
+            "click": ".consent-settings-modal .consent-switchers input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".consent-settings-modal .consent-buttons button.btn-primary"
+        }
+    ]
+}
