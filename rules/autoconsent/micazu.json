@@ -1,0 +1,29 @@
+{
+    "name": "micazu",
+    "vendorUrl": "https://www.micazu.nl/",
+    "intermediate": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?micazu\\.(nl|com|de|fr|es)/"
+    },
+    "prehideSelectors": ["#cookie-alert.rh-cookie-popup"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-alert.rh-cookie-popup"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-alert.rh-cookie-popup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-alert .rh-close-cookie"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-alert a.btn[href*='returnUrl=']"
+        }
+    ]
+}

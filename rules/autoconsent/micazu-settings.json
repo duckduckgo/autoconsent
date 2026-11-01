@@ -1,0 +1,52 @@
+{
+    "name": "micazu-settings",
+    "vendorUrl": "https://www.micazu.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?micazu\\.(nl|com|de|fr|es)/"
+    },
+    "detectCmp": [
+        {
+            "exists": "#rh-save-cookie-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#rh-save-cookie-settings"
+        },
+        {
+            "cookieContains": "AcceptNonFunctionalCookies=",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "#rh-accept-analytics-cookies:not(:checked)" },
+            "then": [{ "click": "#rh-accept-analytics-cookies" }]
+        },
+        {
+            "if": { "exists": "#rh-accept-non-functional-cookies:not(:checked)" },
+            "then": [{ "click": "#rh-accept-non-functional-cookies" }]
+        },
+        {
+            "click": "#rh-save-cookie-settings"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#rh-accept-analytics-cookies:checked" },
+            "then": [{ "click": "#rh-accept-analytics-cookies" }]
+        },
+        {
+            "if": { "exists": "#rh-accept-non-functional-cookies:checked" },
+            "then": [{ "click": "#rh-accept-non-functional-cookies" }]
+        },
+        {
+            "click": "#rh-save-cookie-settings"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "AcceptNonFunctionalCookies=~req~~nostat~~nomkt~"
+        }
+    ]
+}
