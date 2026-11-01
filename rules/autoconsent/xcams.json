@@ -1,0 +1,35 @@
+{
+    "name": "xcams",
+    "vendorUrl": "https://www.xcams.com/",
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#disclaimer [data-testid=\"cookie-management-link\"]" }],
+    "detectPopup": [
+        { "visible": "#disclaimer [data-testid=\"cookie-management-link\"]" },
+        { "cookieContains": "cookie_consent=", "negated": true }
+    ],
+    "optIn": [
+        { "waitForThenClick": "#disclaimer [data-testid=\"cookie-management-link\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-toggle-complementary\"]" },
+        {
+            "if": { "exists": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-toggle-complementary\"]:not(.active)" },
+            "then": [{ "click": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-toggle-complementary\"]" }]
+        },
+        { "waitForThenClick": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-save-button\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-management-modal\"]", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "optOut": [
+        { "waitForThenClick": "#disclaimer [data-testid=\"cookie-management-link\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-toggle-complementary\"]" },
+        {
+            "if": { "exists": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-toggle-complementary\"].active" },
+            "then": [{ "click": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-toggle-complementary\"]" }]
+        },
+        { "waitForThenClick": "[data-testid=\"cookie-management-modal\"] [data-testid=\"cookie-save-button\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-management-modal\"]", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "%22categoryComplementary%22%3Afalse" }]
+}
