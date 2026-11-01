@@ -98,6 +98,19 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Dutch popups', () => {
+    it('detects Dutch "may we use cookies" questions', () => {
+        const texts = ['Mogen wij cookies gebruiken?', 'Mogen we cookies plaatsen?', 'Mogen wij ook cookies gebruiken?'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Dutch text', () => {
+        expect(checkHeuristicPatterns('Mogen wij je iets vragen over je energiecontract?').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
