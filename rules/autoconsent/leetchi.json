@@ -1,0 +1,16 @@
+{
+    "name": "leetchi",
+    "vendorUrl": "https://www.leetchi.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?leetchi\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[data-testid=\"CookieModal\"], .klaro > .cookie-modal" }],
+    "detectPopup": [{ "visible": "[data-testid=\"CookieModal-ConsentRefuse-Button\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=\"CookieModal-ConsentAccept-Button\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[data-testid=\"CookieModal-ConsentRefuse-Button\"]" },
+        { "waitForVisible": "[data-testid=\"CookieModal-ConsentRefuse-Button\"]", "timeout": 3000, "check": "none" }
+    ],
+    "test": [{ "cookieContains": "LeetchiRGPDCookie=%7B%22security%22%3Atrue%2C%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" }]
+}
