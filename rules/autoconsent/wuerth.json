@@ -1,0 +1,64 @@
+{
+    "name": "wuerth",
+    "vendorUrl": "https://www.wuerth.de/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#consent-container.banner-show #consent-linkCustomConsent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-container",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-container.banner-show #consent-buttonConfirm"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#consent-container.banner-show #consent-buttonReject"
+            },
+            "then": [
+                {
+                    "click": "#consent-container.banner-show #consent-buttonReject"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#consent-container.banner-show #consent-linkCustomConsent"
+                },
+                {
+                    "waitForVisible": "#consent-container.banner-show #consent-buttonSaveChoices",
+                    "timeout": 2000
+                },
+                {
+                    "comment": "untick any pre-selected optional purposes",
+                    "click": "#consent-container.banner-show input.consent-checkbox:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#consent-container.banner-show #consent-buttonSaveChoices"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#consent-container",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ppms_privacy_"
+        },
+        {
+            "cookieContains": "%22status%22:0"
+        }
+    ]
+}
