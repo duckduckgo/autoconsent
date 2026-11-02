@@ -1,0 +1,37 @@
+{
+    "name": "r42-st-popup",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#st_popup #st_popup_declineButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#st_popup #st_popup_declineButton"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#st_popup #st_popup_acceptButton"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#st_popup #st_popup_declineButton",
+            "comment": "Nee, ik wil geen optimale ervaring"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#st_popup",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
