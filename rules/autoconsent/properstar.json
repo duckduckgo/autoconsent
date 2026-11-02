@@ -2,7 +2,7 @@
     "name": "properstar",
     "vendorUrl": "https://www.properstar.com/",
     "runContext": {
-        "urlPattern": "^https?://(www\\.)?properstar\\.[a-z.]+/"
+        "urlPattern": "^https?://((www\\.)?properstar\\.[a-z.]+|international\\.immobiliare\\.it)/"
     },
     "prehideSelectors": [".consent:has(> .consent-body .consent-buttons)"],
     "detectCmp": [
