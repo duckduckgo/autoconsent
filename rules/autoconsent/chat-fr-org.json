@@ -1,0 +1,64 @@
+{
+    "name": "chat-fr-org",
+    "comment": "the InMobi Choice dialog is loaded in a same-origin iframe hosted by the site",
+    "prehideSelectors": ["#qc-cmp2-container"],
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?chat-fr\\.org/tools/themoneytizer-cmp\\.html",
+        "main": false,
+        "frame": true
+    },
+    "detectCmp": [
+        {
+            "exists": "#qc-cmp2-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#qc-cmp2-ui"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the summary screen has no reject button: open 'more options'",
+            "waitForThenClick": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]",
+            "timeout": 2000
+        },
+        {
+            "waitForVisible": "#qc-cmp2-ui .qc-cmp2-consent-info"
+        },
+        {
+            "comment": "turn off the purposes that are switched on by default",
+            "click": ".qc-cmp2-toggle-switch > button[aria-checked=\"true\"]",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "xpath///button[contains(., 'TOUT REFUSER') or contains(., 'REJECT ALL')]",
+            "optional": true
+        },
+        {
+            "waitForVisible": "#qc-cmp2-ui",
+            "check": "none",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "comment": "only save if 'Reject all' left the dialog open",
+            "if": {
+                "visible": "#qc-cmp2-ui"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".qc-cmp2-footer button[mode=\"primary\"]",
+                    "timeout": 2000
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".qc-cmp2-summary-buttons button[mode=\"primary\"]",
+            "timeout": 2000
+        }
+    ]
+}
