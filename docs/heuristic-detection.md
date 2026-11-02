@@ -13,7 +13,7 @@ Heuristic detection decides from text alone whether something looks like a cooki
 | `lib/heuristic-patterns.ts` | `DETECT_PATTERNS`, the regexes that indicate a consent notice, and the button patterns |
 | `lib/heuristic-negatives.ts` | `DETECT_CONTEXT_NEGATIVES`, and the vocabulary they test: consent choices, age wording, leave buttons, legal clauses |
 | `lib/heuristic-detect.ts` | The matching engine: `checkHeuristicPatterns`, `hasHeuristicPatterns`, `excludedBy` |
-| `lib/heuristic-prefilter.ts`, `lib/heuristic-literals.ts` | The required-literal prefilter; the literals file is generated and not committed (see [heuristic-prefilter.md](heuristic-prefilter.md)) |
+| `lib/heuristic-prefilter.ts`, `lib/heuristic-literals.ts` | The required-literal prefilter; the literals file is generated (see [heuristic-prefilter.md](heuristic-prefilter.md)) |
 | `lib/heuristic-classify.ts` | Button and popup classification, and the `./heuristics` entry, which re-exports the modules above |
 
 ## Inputs
@@ -73,6 +73,6 @@ Page text has its own age-gate negative (`age-gate`), tested on a few lines arou
 
 ## Adding a pattern or negative
 
-- **A detect pattern:** add it to `DETECT_PATTERNS` and add a test with an example text and a near-miss that must not match.
+- **A detect pattern:** add it to `DETECT_PATTERNS`, run `npm run build-heuristic-literals`, and add a test with an example text and a near-miss that must not match.
 - **A negative:** prefer narrow `appliesTo` and a short context. Add a test that drops the false positive and keeps a real notice with the same wording.
 - **Compatibility:** don't use RegExp lookbehind in `lib/`, because some supported engines lack it (ESLint rejects it). Without the `u` flag, `\b` doesn't treat accented letters as word characters, so don't put `\b` next to one.

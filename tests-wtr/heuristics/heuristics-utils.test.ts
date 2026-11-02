@@ -269,7 +269,7 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
 });
 
 describe('requiredLiterals', () => {
-    it('matches the generated table for the built-in patterns (npm run test:lib regenerates it)', () => {
+    it('matches the generated table for the built-in patterns (run npm run build-heuristic-literals if not)', () => {
         expect(DETECT_PATTERN_LITERALS).to.deep.equal(detectLiteralTable());
     });
 

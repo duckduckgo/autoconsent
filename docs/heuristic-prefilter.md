@@ -24,7 +24,7 @@ Detecting on a text works like this:
 ```text
 DETECT_PATTERNS ──(npm run build-heuristic-literals)──> lib/heuristic-literals.ts ──> checkHeuristicPatterns
                     scripts/required-literals.ts            DETECT_PATTERN_LITERALS       lib/heuristic-prefilter.ts
-                    (parses each regex source)              (not committed)               (literal index at run time)
+                    (parses each regex source)                                            (literal index at run time)
 ```
 
 - **`scripts/required-literals.ts`** (build time only) works out a pattern's literals from its regex source. It is not bundled into the library, so pages never parse pattern sources.
@@ -36,9 +36,13 @@ A **custom pattern list**, passed to `checkHeuristicPatterns` or `hasHeuristicPa
 
 ## Changing detect patterns
 
-`lib/heuristic-literals.ts` is generated and gitignored. The npm scripts that load `lib/` regenerate it first, through their pre-scripts: `lint`, `test:lib`, `bundle`, `build-rules` (so also `prepublish`, which `npm install` runs, and `watch`), `benchmark-buttons` and `get-text-for-xpath`. So there is nothing to run or commit after changing `DETECT_PATTERNS`. Run `npm run build-heuristic-literals` yourself only before using `lib/` some other way, such as running `web-test-runner` directly.
+After adding, changing or removing a pattern in `DETECT_PATTERNS`, regenerate the table and commit it:
 
-If the table is stale anyway, a unit test in `tests-wtr/heuristics/heuristics-utils.test.ts` fails. A table whose length differs from `DETECT_PATTERNS` is ignored, so an added or removed pattern can't shift literals onto the wrong patterns: no pattern is skipped until the table is regenerated.
+```bash
+npm run build-heuristic-literals
+```
+
+A unit test in `tests-wtr/heuristics/heuristics-utils.test.ts` fails while the table is stale. A table whose length differs from `DETECT_PATTERNS` is ignored, so an added or removed pattern can't shift literals onto the wrong patterns: no pattern is skipped until the table is regenerated. An in-place edit of a pattern keeps the length, so it relies on that test.
 
 ## How the literals are worked out
 

@@ -1,7 +1,7 @@
 /**
  * Works out the prefilter literals of a detect pattern from its regex source (see docs/heuristic-prefilter.md).
- * Build-time only: `build-heuristic-literals.ts` writes `detectLiteralTable()` to lib/heuristic-literals.ts before lint,
- * tests and bundling. It is not part of the library, so pages never parse pattern sources.
+ * Build-time only: `build-heuristic-literals.ts` writes `detectLiteralTable()` to lib/heuristic-literals.ts, and a unit
+ * test checks that file against it. It is not part of the library, so pages never parse pattern sources.
  *
  * The literals must be sound: every match of the pattern contains at least one of them, or the prefilter would skip a
  * pattern that matches. When that can't be shown from the source, a pattern gets no literals and is never skipped.
