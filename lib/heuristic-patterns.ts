@@ -51,6 +51,7 @@ export const DETECT_PATTERNS = [
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
     /nécessaires uniquement/gi,
+    /cookies publicitaires/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,

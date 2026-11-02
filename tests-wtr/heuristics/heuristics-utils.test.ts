@@ -123,6 +123,14 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with French popups', () => {
+    it('detects French advertising cookie notices', () => {
+        const text =
+            "Ce site utilise Google AdSense pour financer ses contenus. Le chargement de Google et de ses cookies publicitaires n'a lieu qu'avec votre accord.";
+        expect(checkHeuristicPatterns(text).snippets).to.include('cookies publicitaires');
+    });
+});
+
 describe('checkHeuristicPatterns with Italian popups', () => {
     it('detects Italian cookie notices', () => {
         const texts = [
