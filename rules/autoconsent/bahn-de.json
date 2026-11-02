@@ -5,7 +5,7 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https://(www\\.)?bahn\\.de/"
+        "urlPattern": "^https://([\\w-]+\\.)?bahn\\.de/"
     },
     "intermediate": false,
     "prehideSelectors": [],
