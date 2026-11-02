@@ -146,6 +146,26 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with French popups', () => {
+    it('detects "avec votre accord" ad consent notices', () => {
+        const texts = [
+            // calculette.com
+            'Votre choix compte. Les calculs fonctionnent sans cookie et restent dans votre navigateur. Avec votre accord, des services publicitaires peuvent être chargés. En savoir plus.',
+            'Avec votre accord, nous déposons des cookies de mesure d’audience',
+            'Avec votre accord, des traceurs sont utilisés',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated "avec votre accord" text', () => {
+        expect(
+            checkHeuristicPatterns('Avec votre accord, votre conseiller vous rappellera dans les meilleurs délais.').patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [

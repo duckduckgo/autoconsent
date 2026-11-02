@@ -37,6 +37,8 @@ export const DETECT_PATTERNS = [
     /stocker.{0,100}et.{0,100}ou.{0,100}accéder/gi,
     /consentement.{0,100}à.{0,100}tout.{0,100}moment/gi,
     /votre.{0,100}consentement/gi,
+    // "avec votre accord, des services publicitaires peuvent être chargés"
+    /avec votre accord.{0,100}(?:cookies|traceurs|publicit)/gi,
     /accepter.{0,100}tout/gi,
     /utilisation.{0,100}des.{0,100}cookies/gi,
     /cookies.{0,100}ou.{0,100}technologies/gi,
