@@ -39,6 +39,8 @@
     "prebundle": "npm run build-heuristic-literals",
     "pretest:lib": "npm run build-heuristic-literals",
     "prelint": "npm run build-heuristic-literals",
+    "preget-text-for-xpath": "npm run build-heuristic-literals",
+    "prebuild-rules": "npm run build-heuristic-literals",
     "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",
     "vendor-copy": "mkdir -p addon/vendor && cp node_modules/mocha/mocha.* addon/vendor/ && cp node_modules/chai/chai.js addon/vendor/",

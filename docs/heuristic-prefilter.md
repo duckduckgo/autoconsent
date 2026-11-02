@@ -36,7 +36,7 @@ A **custom pattern list**, passed to `checkHeuristicPatterns` or `hasHeuristicPa
 
 ## Changing detect patterns
 
-`lib/heuristic-literals.ts` is generated and gitignored. `npm run lint`, `npm run test:lib` and `npm run bundle` (so also `prepublish` and `watch`) regenerate it first, through their npm pre-scripts, so there is nothing to run or commit after changing `DETECT_PATTERNS`. Run `npm run build-heuristic-literals` yourself only before using `lib/` some other way, such as running `web-test-runner` directly.
+`lib/heuristic-literals.ts` is generated and gitignored. The npm scripts that load `lib/` regenerate it first, through their pre-scripts: `lint`, `test:lib`, `bundle`, `build-rules` (so also `prepublish`, which `npm install` runs, and `watch`), `benchmark-buttons` and `get-text-for-xpath`. So there is nothing to run or commit after changing `DETECT_PATTERNS`. Run `npm run build-heuristic-literals` yourself only before using `lib/` some other way, such as running `web-test-runner` directly.
 
 If the table is stale anyway, a unit test in `tests-wtr/heuristics/heuristics-utils.test.ts` fails. A table whose length differs from `DETECT_PATTERNS` is ignored, so an added or removed pattern can't shift literals onto the wrong patterns: no pattern is skipped until the table is regenerated.
 
