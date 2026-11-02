@@ -1,0 +1,13 @@
+{
+    "name": "vszutphen.nl",
+    "vendorUrl": "https://github.com/giuseppegarbin/JQuery-Cookies-Message",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vszutphen\\.nl/"
+    },
+    "prehideSelectors": ["#band-cookies"],
+    "detectCmp": [{ "exists": "#band-cookies" }],
+    "detectPopup": [{ "visible": "#band-cookies" }],
+    "optIn": [{ "waitForThenClick": "#band-cookies-ok" }],
+    "optOut": [{ "waitForThenClick": "#band-cookies-close" }],
+    "test": [{ "waitForVisible": "#band-cookies", "check": "none", "timeout": 2000 }]
+}
