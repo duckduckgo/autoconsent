@@ -1,0 +1,33 @@
+{
+    "name": "localpartner",
+    "vendorUrl": "https://www.localpartner.fr/",
+    "prehideSelectors": ["#cookieModal"],
+    "detectCmp": [
+        {
+            "exists": "#cookieModal #privacy-cookie-banner__privacy-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieModal.show #privacy-cookie-banner__privacy-accept",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieModal.show #privacy-cookie-banner__privacy-accept",
+            "retry": 3
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieModal.show #privacy-cookie-banner__privacy-accept",
+            "retry": 3
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "privacyCookieAccepted=1"
+        }
+    ]
+}
