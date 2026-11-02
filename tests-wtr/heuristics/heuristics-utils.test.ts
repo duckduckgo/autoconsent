@@ -98,6 +98,25 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with analytics consent banners', () => {
+    it('detects analytics consent notices without "cookies"', () => {
+        const texts = [
+            'Your privacy choices Allow Google Analytics to measure visits and game-link clicks? Reject analytics Allow analytics',
+            'Help us improve Allow optional Google Analytics to measure use. Allow analytics Decline analytics',
+            'Optional analytics stays off until you allow it. Essential only Allow analytics',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated analytics text', () => {
+        expect(
+            checkHeuristicPatterns('Google Analytics helps you understand your audience. Learn about analytics').patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
