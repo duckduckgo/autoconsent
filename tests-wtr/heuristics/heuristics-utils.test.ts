@@ -73,6 +73,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects French "nous utilisons <qualifier> cookies" notices', () => {
+        const { snippets } = checkHeuristicPatterns(
+            'Nous utilisons nos propres cookies et ceux de tiers pour fournir des fonctionnalités.',
+        );
+
+        expect(snippets).to.include('Nous utilisons nos propres cookies');
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {

@@ -28,6 +28,8 @@ export const DETECT_PATTERNS = [
 
     // FR
     /utilisons.{0,100}des.{0,100}cookies/gi,
+    // e.g. "nous utilisons nos propres cookies"
+    /nous utilisons(?: \w+){0,2} cookies/gi,
     /des.{0,100}cookies.{0,100}pour/gi,
     /retirer.{0,100}votre.{0,100}consentement/gi,
     /et.{0,100}nos.{0,100}partenaires/gi,
