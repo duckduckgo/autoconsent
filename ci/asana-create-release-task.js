@@ -15,6 +15,9 @@ const templateTaskGid = '1206774921409831';
 const autoconsentProjectGid = '1201844467387842';
 const releaseSectionGid = '1202253736774466';
 const scheduledForReleaseSectionGid = '1207140808076253';
+// "Autoconsent release task" in the CPM project: the CPM release follow-ups
+// read it to tell when a fix has reached browsers.
+const releaseTaskFieldGid = '1219539452291138';
 
 let asana;
 
@@ -68,11 +71,13 @@ const waitForJobSuccess = async (job_gid) => {
 
 /**
  * Generates an HTML summary of the tasks in the "Scheduled for Release"
- * section, then marks those tasks as completed.
+ * section, then marks those tasks as completed and records the release task
+ * on each.
  *
+ * @param {string} releaseTaskGid
  * @returns {Promise<string>}
  */
-const processReleaseTasks = async () => {
+const processReleaseTasks = async (releaseTaskGid) => {
     const { data: tasks } = await asana.tasks.getTasksForSection(scheduledForReleaseSectionGid, {
         opt_fields: 'name,permalink_url,completed',
         completed_since: 'now', // Fetch only incomplete tasks
@@ -85,7 +90,10 @@ const processReleaseTasks = async () => {
     let taskListHtml = '<strong>Tasks included in this release:</strong>\n<ul>\n';
     for (const task of tasks) {
         taskListHtml += '<li>' + getLink(task.permalink_url) + '</li>\n';
-        await asana.tasks.updateTask(task.gid, { completed: true });
+        await asana.tasks.updateTask(task.gid, {
+            completed: true,
+            custom_fields: { [releaseTaskFieldGid]: releaseTaskGid },
+        });
     }
     taskListHtml += '</ul>';
 
@@ -103,7 +111,7 @@ const asanaCreateTasks = async () => {
     const updatedNotes = notes
         .replace('[[version]]', version)
         .replace('[[release_url]]', getLink(releaseUrl, 'Autoconsent Release'))
-        .replace('[[notes]]', [await processReleaseTasks(), releaseNotes].filter(Boolean).join('\n\n'))
+        .replace('[[notes]]', [await processReleaseTasks(new_task.gid), releaseNotes].filter(Boolean).join('\n\n'))
         .replace(/<\/?p>/gi, '\n')
         // Asana supports only h1 and h2
         .replace(/<(h3|h4)>/gi, '<h2>')
