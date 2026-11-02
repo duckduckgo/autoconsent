@@ -214,6 +214,19 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with French popups', () => {
+    it('detects French analytics notices that ask for agreement', () => {
+        const text =
+            'Nous comptons les visites avec Google Analytics : cliquez « Refuser » pour ne pas être compté. ' +
+            "Avec votre accord, nous mesurons aussi l'efficacité de nos annonces.";
+        expect(checkHeuristicPatterns(text).patterns.length).to.be.greaterThan(0);
+    });
+
+    it('does not detect unrelated French text', () => {
+        expect(checkHeuristicPatterns('Nous réalisons votre dossier de permis de construire').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
