@@ -1,0 +1,30 @@
+{
+    "name": "holidu",
+    "vendorUrl": "https://www.holidu.com/",
+    "prehideSelectors": ["#cookie-selector"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-selector [data-testid='CookiesCheckbox__DeclineNonEssential']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-selector [data-testid='CookiesCheckbox__DeclineNonEssential']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-selector [data-testid='CookiesCheckbox__SaveAllButton']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-selector [data-testid='CookiesCheckbox__DeclineNonEssential']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__mcons=false"
+        }
+    ]
+}
