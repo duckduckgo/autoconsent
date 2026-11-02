@@ -1,0 +1,66 @@
+{
+    "name": "orejime",
+    "vendorUrl": "https://github.com/empreinte-digitale/orejime",
+    "prehideSelectors": [".orejime-NoticePortal", ".orejime-BannerWrapper", ".orejime-banner-portal"],
+    "detectCmp": [
+        {
+            "exists": ".orejime-Notice, .orejime-Banner, .orejime-banner-portal .fr-consent-banner, .orejime-ModalWrapper"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".orejime-Notice, .orejime-Banner, .orejime-banner-portal .fr-consent-banner, .orejime-ModalWrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".orejime-Notice-saveButton, .orejime-Banner-saveButton, .orejime-banner-portal .fr-consent-banner"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".orejime-Notice-saveButton, .orejime-Banner-saveButton, .orejime-banner-portal .fr-consent-banner__buttons li:nth-child(1) button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".orejime-ModalWrapper .orejime-AppToggles-enableAll, .orejime-ModalWrapper .orejime-PurposeToggles-enableAll",
+                    "optional": true,
+                    "timeout": 1000
+                },
+                {
+                    "waitForThenClick": ".orejime-ModalWrapper .orejime-Modal-saveButton"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".orejime-Notice-declineButton, .orejime-Banner-declineButton, .orejime-banner-portal .fr-consent-banner"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".orejime-Notice-declineButton, .orejime-Banner-declineButton, .orejime-banner-portal .fr-consent-banner__buttons li:nth-child(2) button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".orejime-ModalWrapper .orejime-AppToggles-disableAll, .orejime-ModalWrapper .orejime-PurposeToggles-disableAll",
+                    "optional": true,
+                    "timeout": 1000
+                },
+                {
+                    "waitForThenClick": ".orejime-ModalWrapper .orejime-Modal-saveButton"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".orejime-Notice, .orejime-Banner, .orejime-banner-portal .fr-consent-banner, .orejime-ModalWrapper",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
