@@ -11,7 +11,7 @@ import {
     DETECT_PATTERNS,
 } from '../../lib/heuristic-classify';
 import { detectLiteralTable, requiredLiterals } from '../../scripts/required-literals';
-import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from '../../lib/heuristic-literals';
+import { DETECT_PATTERN_LITERALS } from '../../lib/heuristic-literals';
 import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
 import { ButtonData } from '../../lib/types';
 
@@ -269,10 +269,8 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
 });
 
 describe('requiredLiterals', () => {
-    it('matches the generated table for the built-in patterns (run npm run build-heuristic-literals if not)', () => {
-        const { literals, index } = detectLiteralTable();
-        expect(DETECT_PATTERN_LITERALS).to.deep.equal(literals);
-        expect(DETECT_LITERAL_INDEX).to.deep.equal(index);
+    it('matches the generated table for the built-in patterns (npm run test:lib regenerates it)', () => {
+        expect(DETECT_PATTERN_LITERALS).to.deep.equal(detectLiteralTable());
     });
 
     it('finds literals every match contains', () => {
@@ -311,7 +309,6 @@ describe('requiredLiterals', () => {
     });
 
     it('never skips a custom pattern, which has no generated literals', () => {
-        expect(DETECT_PATTERN_LITERALS['/zorblax consent/gi']).to.equal(undefined);
         expect(
             checkHeuristicPatterns('Zorblax consent', undefined, { patterns: [/zorblax consent/gi], negatives: [] }).patterns,
         ).to.deep.equal(['/zorblax consent/gi']);

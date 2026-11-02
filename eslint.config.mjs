@@ -8,7 +8,7 @@ const c = tseslint.config(
     ...ddgConfig,
 
     {
-        ignores: ['dist/**/*', '.agents/**/*'],
+        ignores: ['dist/**/*', '.agents/**/*', 'lib/heuristic-literals.ts'],
     },
 
     {

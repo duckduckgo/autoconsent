@@ -24,27 +24,21 @@ Detecting on a text works like this:
 ```text
 DETECT_PATTERNS ──(npm run build-heuristic-literals)──> lib/heuristic-literals.ts ──> checkHeuristicPatterns
                     scripts/required-literals.ts            DETECT_PATTERN_LITERALS       lib/heuristic-prefilter.ts
-                    (parses each regex source)              DETECT_LITERAL_INDEX          (literal index at run time)
+                    (parses each regex source)              (not committed)               (literal index at run time)
 ```
 
 - **`scripts/required-literals.ts`** (build time only) works out a pattern's literals from its regex source. It is not bundled into the library, so pages never parse pattern sources.
-- **`scripts/build-heuristic-literals.ts`** runs it over `DETECT_PATTERNS` and writes **`lib/heuristic-literals.ts`**:
-  - `DETECT_PATTERN_LITERALS` maps each pattern (by `pattern.toString()`) to its literals.
-  - `DETECT_LITERAL_INDEX` is the prepared source of the literal index over all of them.
-- **`lib/heuristic-prefilter.ts`** (run time) builds the literal index from that prepared source and reports which literals a text contains.
-- **`lib/heuristic-detect.ts`** takes each pattern's literals from `DETECT_PATTERN_LITERALS`, and builds the index from `DETECT_LITERAL_INDEX` once, for every pattern list.
+- **`scripts/build-heuristic-literals.ts`** runs it over `DETECT_PATTERNS` and writes **`lib/heuristic-literals.ts`**. Its `DETECT_PATTERN_LITERALS` is an array in `DETECT_PATTERNS` order: entry `i` holds pattern `i`'s literals, so the bundle doesn't repeat the pattern sources as keys.
+- **`lib/heuristic-prefilter.ts`** (run time) builds the literal index over all the literals, once per page, and reports which literals a text contains.
+- **`lib/heuristic-detect.ts`** pairs each built-in regex with its table entry.
 
-A **custom pattern list**, passed to `checkHeuristicPatterns` or `hasHeuristicPatterns` as the `patterns` option, uses the same table. Built-in patterns in it keep their literals, and patterns not in the table get none, so they are always run. Results are therefore the same for any list. Only custom patterns miss the speed-up.
+A **custom pattern list**, passed to `checkHeuristicPatterns` or `hasHeuristicPatterns` as the `patterns` option, uses the same table. Built-in regexes in it (the same objects, such as those imported from `heuristic-patterns.ts`) keep their literals, and other patterns get none, so they are always run. Results are therefore the same for any list. Only custom patterns miss the speed-up.
 
 ## Changing detect patterns
 
-After adding, changing or removing a pattern in `DETECT_PATTERNS`, regenerate the table and commit it:
+`lib/heuristic-literals.ts` is generated and gitignored. `npm run lint`, `npm run test:lib` and `npm run bundle` (so also `prepublish` and `watch`) regenerate it first, through their npm pre-scripts, so there is nothing to run or commit after changing `DETECT_PATTERNS`. Run `npm run build-heuristic-literals` yourself only before using `lib/` some other way, such as running `web-test-runner` directly.
 
-```bash
-npm run build-heuristic-literals
-```
-
-A unit test in `tests-wtr/heuristics/heuristics-utils.test.ts` fails while the table is stale. A stale table never causes a missed match: a changed pattern has a new `toString()`, finds no entry, and is always run. Until the table is regenerated, it only costs speed.
+If the table is stale anyway, a unit test in `tests-wtr/heuristics/heuristics-utils.test.ts` fails. A table whose length differs from `DETECT_PATTERNS` is ignored, so an added or removed pattern can't shift literals onto the wrong patterns: no pattern is skipped until the table is regenerated.
 
 ## How the literals are worked out
 

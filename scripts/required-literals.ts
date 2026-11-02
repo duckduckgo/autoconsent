@@ -1,13 +1,12 @@
 /**
  * Works out the prefilter literals of a detect pattern from its regex source (see docs/heuristic-prefilter.md).
- * Build-time only: `build-heuristic-literals.ts` writes `detectLiteralTable()` to lib/heuristic-literals.ts, and a unit
- * test checks that file against it. It is not part of the library, so pages never parse pattern sources.
+ * Build-time only: `build-heuristic-literals.ts` writes `detectLiteralTable()` to lib/heuristic-literals.ts before lint,
+ * tests and bundling. It is not part of the library, so pages never parse pattern sources.
  *
  * The literals must be sound: every match of the pattern contains at least one of them, or the prefilter would skip a
  * pattern that matches. When that can't be shown from the source, a pattern gets no literals and is never skipped.
  */
 import { DETECT_PATTERNS, patternOf } from '../lib/heuristic-patterns';
-import { literalIndexSource } from '../lib/heuristic-prefilter';
 
 /** The index of the `]` closing the character class that opens at `open`, skipping escapes. */
 export function classEnd(src: string, open: number): number {
@@ -172,12 +171,7 @@ export function requiredLiterals(re: RegExp): string[] {
     return literalsOf(re.source);
 }
 
-/** The contents of lib/heuristic-literals.ts: each built-in detect pattern's literals, and the literal index over them. */
-export function detectLiteralTable(): { literals: Record<string, string[]>; index: ReturnType<typeof literalIndexSource> } {
-    const literals: Record<string, string[]> = {};
-    for (const p of DETECT_PATTERNS) {
-        const pattern = patternOf(p);
-        literals[pattern.toString()] = requiredLiterals(pattern);
-    }
-    return { literals, index: literalIndexSource(Object.values(literals).flat()) };
+/** The contents of lib/heuristic-literals.ts: each built-in detect pattern's literals, in DETECT_PATTERNS order. */
+export function detectLiteralTable(): string[][] {
+    return DETECT_PATTERNS.map((p) => requiredLiterals(patternOf(p)));
 }

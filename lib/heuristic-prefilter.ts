@@ -5,25 +5,17 @@
  * result.
  */
 
-/** The literals, distinct and longest first, and the source of the lookahead regex over them. */
-export function literalIndexSource(all: string[]): { literals: string[]; source: string } {
-    const literals = [...new Set(all)].sort((a, b) => b.length - a.length);
-    const escape = (l: string) => l.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
-    return { literals, source: literals.length ? `(?=(${literals.map(escape).join('|')}))` : '' };
-}
-
 /**
- * A literal index from a prepared `literalIndexSource`: it finds which literals a text contains in one pass. A zero-width
- * lookahead over the literals, longest first, reports the longest one starting at each position, and any other literal
- * starting there is a prefix of it.
+ * Finds which literals a text contains in one pass: a zero-width lookahead over the literals, longest first, reports
+ * the longest one starting at each position, and any other literal starting there is a prefix of it.
  */
-export function literalIndexFrom({ literals: distinct, source }: { literals: string[]; source: string }): {
-    present: (lower: string) => Set<string>;
-} {
+export function literalIndex(all: string[]): { present: (lower: string) => Set<string> } {
+    const distinct = [...new Set(all)].sort((a, b) => b.length - a.length);
     if (distinct.length === 0) {
         return { present: () => new Set() };
     }
-    const any = new RegExp(source, 'g');
+    const escape = (l: string) => l.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+    const any = new RegExp(`(?=(${distinct.map(escape).join('|')}))`, 'g');
     // which literals a reported one implies (itself and its prefixes), worked out only for literals a page contains
     const implies = new Map<string, string[]>();
     const impliedBy = (m: string) => {

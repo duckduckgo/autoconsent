@@ -4,8 +4,8 @@
  */
 import { DETECT_PATTERNS, DetectPattern, HeuristicInput, patternOf } from './heuristic-patterns';
 import { ContextNegative, DETECT_CONTEXT_NEGATIVES, TextTest } from './heuristic-negatives';
-import { DETECT_LITERAL_INDEX, DETECT_PATTERN_LITERALS } from './heuristic-literals';
-import { literalIndexFrom } from './heuristic-prefilter';
+import { DETECT_PATTERN_LITERALS } from './heuristic-literals';
+import { literalIndex } from './heuristic-prefilter';
 
 const TEXT_LIMIT = 100000;
 const DEFAULT_WINDOW = 150;
@@ -13,9 +13,19 @@ const DEFAULT_WINDOW = 150;
 type CompiledNegative = ContextNegative & { hits: (context: string) => boolean; applies: Set<string> | null };
 type CompiledPattern = { id: string; pattern: RegExp; global: RegExp; input?: HeuristicInput; literals: string[] };
 
-// every pattern's literals come from the generated table, so its index covers custom lists too
-let literalIndex: ReturnType<typeof literalIndexFrom> | undefined;
-const literalsIn = (lower: string) => (literalIndex ??= literalIndexFrom(DETECT_LITERAL_INDEX)).present(lower);
+// Prefilter literals of the built-in patterns, by regex, from the generated table in DETECT_PATTERNS order. A table of
+// another length (stale) is ignored: no pattern is skipped. A pattern without an entry, such as a custom one, never is.
+let builtinLiterals: Map<RegExp, string[]> | undefined;
+function literalsOf(pattern: RegExp): string[] {
+    if (!builtinLiterals) {
+        const fresh = DETECT_PATTERN_LITERALS.length === DETECT_PATTERNS.length;
+        builtinLiterals = new Map(fresh ? DETECT_PATTERNS.map((p, i) => [patternOf(p), DETECT_PATTERN_LITERALS[i]]) : []);
+    }
+    return builtinLiterals.get(pattern) ?? [];
+}
+// every pattern's literals come from the built-in table, so its index covers custom lists too
+let index: ReturnType<typeof literalIndex> | undefined;
+const literalsIn = (lower: string) => (index ??= literalIndex(DETECT_PATTERN_LITERALS.flat())).present(lower);
 
 const truncate = (text: string) => (text || '').slice(0, TEXT_LIMIT);
 // whether a pattern or negative applies to this input
@@ -41,9 +51,7 @@ function compilePatterns(detectPatterns: DetectPattern[]): CompiledPattern[] {
             const pattern = patternOf(p);
             const input = p instanceof RegExp ? undefined : p.input;
             const global = pattern.flags.includes('g') ? pattern : new RegExp(pattern.source, `${pattern.flags}g`);
-            const id = pattern.toString();
-            // prefilter literals come from the generated table only; a pattern without an entry is never skipped
-            return { id, pattern, global, input, literals: DETECT_PATTERN_LITERALS[id] ?? [] };
+            return { id: pattern.toString(), pattern, global, input, literals: literalsOf(pattern) };
         });
         compiledPatterns.set(detectPatterns, compiled);
     }
