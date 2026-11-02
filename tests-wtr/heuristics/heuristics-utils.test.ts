@@ -91,6 +91,13 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
         }
     });
 
+    it('detects analytics consent prompts without the word "cookies"', () => {
+        const text =
+            'Your analytics choice Allow optional website analytics to help us understand visits and improve the site? Declining still lets you browse, sign in and buy.';
+        expect(checkHeuristicPatterns(text).patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Our dashboard includes optional analytics for your account').patterns).to.have.length(0);
+    });
+
     it('does not match when "cookies" is further away', () => {
         expect(
             checkHeuristicPatterns('We use the best chocolate in our cookies', [/we (?:use|serve)(?: \w+){0,2} cookies/gi]).patterns,

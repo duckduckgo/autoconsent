@@ -21,6 +21,8 @@ export const DETECT_PATTERNS = [
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
+    // analytics consent prompts that never mention cookies
+    /(?:allow|accept|enable) optional (?:website |site )?analytics/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
