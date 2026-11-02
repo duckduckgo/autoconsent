@@ -1,0 +1,50 @@
+{
+    "name": "kunstmaan-cookie-bar",
+    "vendorUrl": "https://github.com/Kunstmaan/KunstmaanBundlesCMS",
+    "prehideSelectors": ["#kmcc-cookie-bar"],
+    "detectCmp": [
+        {
+            "exists": "#kmcc-cookie-bar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#kmcc-cookie-bar.kmcc-cookie-bar--visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#kmcc-accept-all-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#kmcc-cookie-bar .js-kmcc-extended-modal-button[data-url$=\"cookie_preferences\"]"
+        },
+        {
+            "waitForVisible": "#kmcc-accept-some-cookies"
+        },
+        {
+            "if": {
+                "exists": ".js-kmcc-btn-toggle:checked"
+            },
+            "then": [
+                {
+                    "click": ".js-kmcc-btn-toggle:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "click": "#kmcc-accept-some-cookies"
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "analyzing_cookie%22%3A%22false%22%2C%22marketing_cookie%22%3A%22false"
+        }
+    ]
+}
