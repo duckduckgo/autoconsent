@@ -51,10 +51,21 @@
     ],
     "test": [
         {
-            "cookieContains": "c.necessary:1"
+            "any": [
+                {
+                    "cookieContains": "c.necessary:1"
+                },
+                {
+                    "cookieContains": "c15t=v="
+                }
+            ]
         },
         {
             "cookieContains": "c.marketing:1",
+            "negated": true
+        },
+        {
+            "cookieContains": "mk=1.",
             "negated": true
         }
     ]
