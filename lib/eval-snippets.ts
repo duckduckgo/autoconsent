@@ -186,6 +186,10 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_KALLES_THEME_TEST: () => {
+        const consent = window.Shopify.customerPrivacy.currentVisitorConsent();
+        return consent.marketing === 'no' && consent.analytics === 'no';
+    },
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
