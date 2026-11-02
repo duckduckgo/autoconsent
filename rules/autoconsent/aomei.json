@@ -1,0 +1,30 @@
+{
+    "name": "aomei",
+    "vendorUrl": "https://www.aomeitech.com/",
+    "prehideSelectors": [".ensureCookie"],
+    "detectCmp": [
+        {
+            "exists": ".ensureCookie .button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ensureCookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ensureCookie .button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".ensureCookie .button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_notification-cookie=AGREE"
+        }
+    ]
+}
