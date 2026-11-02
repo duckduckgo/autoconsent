@@ -1,0 +1,81 @@
+{
+    "name": "avg-cookiebanner",
+    "prehideSelectors": ["#avg-cookiebanner"],
+    "detectCmp": [
+        {
+            "exists": "#avg-cookiebanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "cookieContains": "__avgAskUser=false",
+            "negated": true
+        },
+        {
+            "visible": "#avg-cookiebanner:not(.state-close)"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#avg-cookiebanner .acceptAll"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#avg-cookiebanner .acceptAll"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#avg-cookiebanner .avg-cookie:not(:checked)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#avg-cookiebanner .save"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#avg-cookiebanner .rejectAll"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#avg-cookiebanner .rejectAll"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#avg-cookiebanner .avg-cookie:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "if": {
+                        "exists": "#avg-cookiebanner .banner-panel .close"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#avg-cookiebanner .banner-panel .close",
+                            "retry": 3
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#avg-cookiebanner .save",
+                            "retry": 3
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__avgAskUser=false"
+        }
+    ]
+}
