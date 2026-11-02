@@ -1,0 +1,11 @@
+{
+    "name": "flexclip.com",
+    "comment": "Reject all is only in the Manage layer. Opt-out stores FJCookies1.0.0=1000 (functional only) in localStorage.",
+    "runContext": { "urlPattern": "^https?://(www\\.)?flexclip\\.com/" },
+    "prehideSelectors": [".cookie_ban"],
+    "detectCmp": [{ "exists": ".cookie_ban .cookie_btn .manage" }],
+    "detectPopup": [{ "visible": ".cookie_ban" }],
+    "optIn": [{ "waitForThenClick": ".cookie_ban .cookie_btn .accept" }],
+    "optOut": [{ "waitForThenClick": ".cookie_ban .cookie_btn .manage" }, { "waitForThenClick": ".cookie_manage .reject_all" }],
+    "test": [{ "eval": "EVAL_FLEXCLIP_TEST" }]
+}
