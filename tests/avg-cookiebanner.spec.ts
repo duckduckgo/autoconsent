@@ -8,6 +8,7 @@ generateCMPTests(
         'https://www.ommelanderziekenhuis.nl/',
         'https://www.gelreziekenhuizen.nl/',
         'https://www.geldersevallei.nl/',
+        'https://www.werkenbijgeldersevallei.nl/',
     ],
     {
         // the banner reloads the page after a choice, so the self test cannot run
