@@ -4,13 +4,14 @@
     "runContext": {
         "urlPattern": "^https?://(\\w+\\.)?plex\\.tv/"
     },
-    "prehideSelectors": ["[data-testid=cookieBar]", ".notification-bar.cookie-consent"],
+    "prehideSelectors": ["[data-testid=cookieBar]", ".notification-bar.cookie-consent", ".notification-bar-mobile.cookie-consent"],
     "detectCmp": [
         {
             "any": [
                 { "exists": "[data-testid=cookieBar]" },
                 { "exists": "[data-testid=adConsentModal]" },
-                { "exists": ".notification-bar.cookie-consent" }
+                { "exists": ".notification-bar.cookie-consent" },
+                { "exists": ".notification-bar-mobile.cookie-consent" }
             ]
         }
     ],
@@ -19,7 +20,8 @@
             "any": [
                 { "visible": "[data-testid=cookieBar]" },
                 { "visible": "[data-testid=adConsentModal]" },
-                { "visible": ".notification-bar.cookie-consent" }
+                { "visible": ".notification-bar.cookie-consent" },
+                { "visible": ".notification-bar-mobile.cookie-consent" }
             ]
         }
     ],
@@ -30,7 +32,22 @@
                 { "waitForThenClick": "[data-testid=adConsentAgreeButton]" },
                 { "waitForThenClick": "[data-testid=cookieBarAcceptButton]", "timeout": 5000, "optional": true }
             ],
-            "else": [{ "waitForThenClick": "[data-testid=cookieBarAcceptButton], .notification-bar.cookie-consent .cookie-consent-accept" }]
+            "else": [
+                {
+                    "if": { "visible": ".notification-bar-mobile.cookie-consent" },
+                    "then": [
+                        {
+                            "waitForThenClick": ".notification-bar-mobile.cookie-consent.remodal-is-opened .cookie-consent-accept",
+                            "comment": "the modal ignores close requests until its opening animation ends"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "[data-testid=cookieBarAcceptButton], .notification-bar.cookie-consent .cookie-consent-accept"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "optOut": [
@@ -45,7 +62,22 @@
                     "comment": "the cookie bar is shown once the ad consent modal is dismissed"
                 }
             ],
-            "else": [{ "waitForThenClick": "[data-testid=cookieBarRejectButton], .notification-bar.cookie-consent .cookie-consent-reject" }]
+            "else": [
+                {
+                    "if": { "visible": ".notification-bar-mobile.cookie-consent" },
+                    "then": [
+                        {
+                            "waitForThenClick": ".notification-bar-mobile.cookie-consent.remodal-is-opened .cookie-consent-reject",
+                            "comment": "the modal ignores close requests until its opening animation ends"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "[data-testid=cookieBarRejectButton], .notification-bar.cookie-consent .cookie-consent-reject"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [{ "cookieContains": "plex_tv_cookie_consent=2" }]
