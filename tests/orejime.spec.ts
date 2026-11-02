@@ -9,4 +9,12 @@ generateCMPTests('orejime', [
     'https://www.ecologie.gouv.fr/',
     'https://www.mer.gouv.fr/',
     'https://www.octo.com/',
+    'https://www.afdas.com/',
+    'https://www.ifrap.org/',
+    'https://www.cre.fr/',
+    'https://www.euroairport.com/',
+    'https://www.leforem.be/',
 ]);
+
+// page reloads after the choice is saved, so the self-test cannot run
+generateCMPTests('orejime', ['https://www.naval-group.com/'], { testSelfTest: false });
