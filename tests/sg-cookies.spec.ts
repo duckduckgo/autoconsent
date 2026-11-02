@@ -4,6 +4,10 @@ generateCMPTests('sg-cookies', [
     // Reject button only in the hidden settings modal
     'https://www.thuisbatterij-actie.nl/',
     'https://www.nationaalbespaarcentrum.nl/',
+    'https://www.bestewarmtepomp.nl/',
+    'https://www.satt.cz/',
+    'https://epassage24.de/',
+    'https://www.babetkovo.sk/',
     // Reject button in the bar
     'https://www.geneva-arena.ch/',
 ]);
@@ -18,6 +22,7 @@ generateCMPTests(
         // Only a settings modal
         'https://www.zengo.eu/',
         'https://www.tanteanna.de/',
+        'https://ceceurope.org/',
     ],
     { testSelfTest: false },
 );
