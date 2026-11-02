@@ -1,0 +1,21 @@
+{
+    "name": "kixell",
+    "prehideSelectors": ["#kixell_st .kstp,#kixell_st .kstoverlay"],
+    "detectCmp": [{ "exists": "#kixell_st" }],
+    "detectPopup": [{ "visible": "#kixell_st .kstp" }],
+    "optIn": [{ "waitForThenClick": "#kixell_st .stpfooter.stinfos .stacceptall" }],
+    "optOut": [
+        {
+            "if": { "visible": "#kixell_st .stinfos .stno:not(:empty)" },
+            "then": [{ "click": "#kixell_st .stinfos .stno:not(:empty)" }],
+            "else": [
+                { "waitForThenClick": "#kixell_st .stpfooter.stinfos .stchoose" },
+                { "waitForVisible": "#kixell_st .stpfooter.stprefs .stdone" },
+                { "click": "#kixell_st .kt_switch.kt_checked[id^='kst_legIntPurposes_']", "all": true, "optional": true },
+                { "click": "#kixell_st .stpfooter.stprefs .stdone" }
+            ]
+        },
+        { "waitForVisible": "#kixell_st .kstp", "check": "none" }
+    ],
+    "test": [{ "wait": 1000, "comment": "consent cookie is set after a server round trip" }, { "cookieContains": "_kt_token=" }]
+}
