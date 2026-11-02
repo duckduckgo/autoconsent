@@ -1,0 +1,21 @@
+{
+    "name": "lastdodo",
+    "vendorUrl": "https://www.lastdodo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lastdodo\\.(nl|com|de|fr)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[data-controller=cookie-bar]" }],
+    "detectPopup": [{ "visible": "[data-controller=cookie-bar].show" }],
+    "optIn": [{ "waitForThenClick": "[data-controller=cookie-bar] [data-action='click->cookie-bar#acceptAll']" }],
+    "optOut": [
+        { "waitForThenClick": "[data-controller=cookie-bar] [data-action='click->cookie-bar#customize']" },
+        { "waitForVisible": "[data-controller=cookie-bar] [data-cookie-bar-target=consentOptions]" },
+        {
+            "click": "[data-cookie-bar-target=analytics]:checked,[data-cookie-bar-target=preferences]:checked,[data-cookie-bar-target=marketing]:checked",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "[data-controller=cookie-bar] [data-action='click->cookie-bar#acceptSelection']" }
+    ]
+}
