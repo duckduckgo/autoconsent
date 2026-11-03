@@ -1,0 +1,45 @@
+{
+    "name": "altamar-cookieconsent",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsent #cookiesButtomCustomize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsent #cookiesButtomCustomize"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsent #cookiesButtomAccept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieConsent #cookiesButtomCustomize"
+        },
+        {
+            "waitForVisible": "#cookieCustomizeWrap"
+        },
+        {
+            "if": {
+                "exists": "#cookieAnalyticsChk:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookieAnalyticsChk"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookieConsent #cookiesButtomAccept[data-mode='custom']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "Analytics=no"
+        }
+    ]
+}
