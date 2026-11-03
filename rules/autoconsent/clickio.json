@@ -2,15 +2,34 @@
     "name": "click.io",
     "prehideSelectors": ["#cl-consent"],
     "detectCmp": [{ "exists": "#cl-consent" }],
-    "detectPopup": [{ "visible": "#cl-consent" }],
+    "detectPopup": [
+        {
+            "visible": "#cl-consent:not(.cl-consent-cl-pw):not(.cl-consent-ext-pw)",
+            "comment": "pay-or-consent variants: opting out leads to a subscription wall"
+        }
+    ],
     "optIn": [{ "waitForThenClick": "#cl-consent [data-role=\"b_agree\"]" }],
     "optOut": [
-        { "waitFor": "#cl-consent [data-role=\"b_options\"]" },
-        { "wait": 500 },
-        { "click": "#cl-consent [data-role=\"b_options\"]" },
-        { "waitFor": ".cl-consent-popup.cl-consent-visible [data-role=\"alloff\"]" },
-        { "click": ".cl-consent-popup.cl-consent-visible [data-role=\"alloff\"]", "all": true },
-        { "click": "[data-role=\"b_save\"]" }
+        {
+            "if": { "exists": "#cl-consent [data-role=\"banner\"].cl-consent-visible" },
+            "then": [
+                { "waitForThenClick": "#cl-consent [data-role=\"banner\"] [data-role=\"b_privacy\"]" },
+                { "waitFor": "#cl-consent [data-role=\"center\"].cl-consent-visible [data-role=\"b_save\"]" },
+                {
+                    "if": { "exists": "#cl-consent [data-role=\"center\"] [data-role=\"b_checkbox\"]:not(:checked)" },
+                    "then": [{ "click": "#cl-consent [data-role=\"center\"] [data-role=\"b_checkbox\"]" }]
+                },
+                { "click": "#cl-consent [data-role=\"center\"] [data-role=\"b_save\"]" }
+            ],
+            "else": [
+                { "waitFor": "#cl-consent [data-role=\"b_options\"]" },
+                { "wait": 500 },
+                { "click": "#cl-consent [data-role=\"b_options\"]" },
+                { "waitFor": ".cl-consent-popup.cl-consent-visible [data-role=\"alloff\"]" },
+                { "click": ".cl-consent-popup.cl-consent-visible [data-role=\"alloff\"]", "all": true },
+                { "click": "[data-role=\"b_save\"]" }
+            ]
+        }
     ],
-    "test": [{ "cookieContains": "__lxG__consent__v2_daisybit=", "comment": "TODO: this only checks if we interacted at all" }]
+    "test": [{ "cookieContains": "__lxG__consent__v2", "comment": "TODO: this only checks if we interacted at all" }]
 }
