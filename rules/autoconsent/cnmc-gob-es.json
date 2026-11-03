@@ -1,0 +1,14 @@
+{
+    "name": "cnmc.gob.es",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?cnmc\\.gob\\.es/"
+    },
+    "prehideSelectors": ["#cookiesjsr #cookiesSize.cookiesjsr-banner"],
+    "detectCmp": [{ "exists": "#cookiesjsr #cookiesSize.cookiesjsr-banner" }],
+    "detectPopup": [{ "visible": "#cookiesjsr" }, { "exists": "#cookiesSize.cookiesjsr-banner.active" }],
+    "optIn": [{ "waitForThenClick": "#cookiesSize .cookiesjsr-banner--action .cookiesjsr-btn.important" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiesSize .cookiesjsr-banner--action .cookiesjsr-btn:not(.important)" },
+        { "waitForVisible": "#cookiesjsr", "timeout": 2000, "check": "none" }
+    ]
+}
