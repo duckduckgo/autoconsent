@@ -242,6 +242,27 @@ describe('isExcludedPopup', () => {
         expect(isExcludedPopup('Adult website ahead.')).to.be.true;
     });
 
+    it('flags localized age gates', () => {
+        // headers of the same entrance-terms age gate, which also asks for consent to tracking technologies
+        expect(isExcludedPopup('SIE MÜSSEN ÜBER 18 JAHRE ALT SEIN UND DEN NACHSTEHENDEN BEDINGUNGEN ZUSTIMMEN')).to.be.true;
+        expect(isExcludedPopup('VOUS DEVEZ AVOIR PLUS DE 18 ANS ET ACCEPTER LES CONDITIONS CI-DESSOUS POUR CONTINUER')).to.be.true;
+        expect(isExcludedPopup('ANTES DE CONTINUAR, DEBE SER MAYOR DE 18 AÑOS Y ACEPTAR LOS TÉRMINOS')).to.be.true;
+        expect(isExcludedPopup('DEVI AVERE PIÙ DI 18 ANNI E ACCETTARE I TERMINI DI SEGUITO RIPORTATI')).to.be.true;
+        expect(isExcludedPopup('ABY KONTYNUOWAĆ, MUSISZ MIEĆ SKOŃCZONE 18 LAT I WYRAZIĆ ZGODĘ NA PONIŻSZE WARUNKI')).to.be.true;
+        expect(isExcludedPopup('Je moet ouder dan 18 jaar zijn om deze website te bezoeken')).to.be.true;
+        expect(isExcludedPopup('Altersverifikation erforderlich')).to.be.true;
+        expect(isExcludedPopup("Vérification de l'âge")).to.be.true;
+    });
+
+    it('does not flag consent popups that mention a minimum age for consent', () => {
+        expect(
+            isExcludedPopup(
+                'Wenn Sie unter 16 Jahre alt sind, müssen Sie Ihre Erziehungsberechtigten um Erlaubnis bitten. Alle akzeptieren',
+            ),
+        ).to.be.false;
+        expect(isExcludedPopup('Si eres menor de 14 años, necesitas el permiso de tus padres. Aceptar Rechazar')).to.be.false;
+    });
+
     it('does not flag a normal cookie consent popup', () => {
         expect(isExcludedPopup('We use cookies to enhance your experience. Accept All Reject All')).to.be.false;
     });
