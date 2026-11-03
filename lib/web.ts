@@ -101,21 +101,14 @@ export default class AutoConsent {
                 this.prehideElements(); // prehide as early as possible to prevent flickering
             } else {
                 // we're injected really early
-                const delayedPrehide = () => {
-                    window.removeEventListener('DOMContentLoaded', delayedPrehide);
-                    this.prehideElements();
-                };
-                window.addEventListener('DOMContentLoaded', delayedPrehide);
+                // capture phase: pages can stop DOMContentLoaded propagation before it bubbles to window
+                window.addEventListener('DOMContentLoaded', () => this.prehideElements(), { once: true, capture: true });
             }
         }
 
         // start detection
         if (document.readyState === 'loading') {
-            const onReady = () => {
-                window.removeEventListener('DOMContentLoaded', onReady);
-                this.start();
-            };
-            window.addEventListener('DOMContentLoaded', onReady);
+            window.addEventListener('DOMContentLoaded', () => this.start(), { once: true, capture: true });
         } else {
             this.start();
         }
