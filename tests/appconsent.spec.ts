@@ -11,3 +11,9 @@ generateCMPTests('AppConsent', ['https://www.bestwordlist.com/', 'https://www.sp
     testOptOut: true,
     onlyRegions: ['GB', 'US', 'DE'],
 });
+
+generateCMPTests('AppConsent', ['https://en.akinator.com/'], {
+    testOptIn: false,
+    testOptOut: true,
+    onlyRegions: ['GB', 'DE'],
+});
