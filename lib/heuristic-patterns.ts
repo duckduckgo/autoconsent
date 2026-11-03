@@ -95,6 +95,8 @@ export const DETECT_PATTERNS = [
     /al utilizar nuestro sitio web.{0,80}cookie/gi,
     /almacenar la información en un dispositivo y\/?o acceder a ella/gi,
     /cookie.{0,30} utiliza/gi,
+    // e.g. "acerca de las cookies en este sitio"
+    /cookies en (?:este|nuestro) (?:sitio|portal|web)/gi,
     /cookies propias y de/gi,
     /cookies.{0,80}son necesarias/gi,
     /est[ea] (sitio|página|web)( web)?( también)? (usa|utiliza|requiere del uso de|se sirven|emplea) cookies?/gi,

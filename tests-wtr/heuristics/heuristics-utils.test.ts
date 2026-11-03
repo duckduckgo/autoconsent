@@ -146,6 +146,23 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Spanish popups', () => {
+    it('detects Spanish cookie notices', () => {
+        const texts = [
+            // enjoyzaragoza.es
+            'Acerca de las cookies en este sitio Si le das a "Aceptar y navegar" tendremos la posibilidad de personalizar tu experiencia',
+            'Utilizamos cookies en nuestro sitio web para mejorar tu experiencia',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Spanish text', () => {
+        expect(checkHeuristicPatterns('Recetas de galletas en este sitio de repostería').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [
