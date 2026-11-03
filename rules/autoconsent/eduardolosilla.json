@@ -1,0 +1,12 @@
+{
+    "name": "eduardolosilla.es",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?eduardolosilla\\.es/"
+    },
+    "prehideSelectors": ["app-aviso-cookies .c-aviso-cookies"],
+    "detectCmp": [{ "exists": "app-aviso-cookies .c-aviso-cookies" }],
+    "detectPopup": [{ "visible": "app-aviso-cookies .c-aviso-cookies" }],
+    "optIn": [{ "waitForThenClick": "app-aviso-cookies .c-aviso-cookies__btn" }],
+    "optOut": [{ "waitForThenClick": "app-aviso-cookies .c-aviso-cookies__btn" }],
+    "test": [{ "waitForVisible": "app-aviso-cookies .c-aviso-cookies", "check": "none", "timeout": 1000 }]
+}
