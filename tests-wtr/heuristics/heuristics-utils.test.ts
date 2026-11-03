@@ -280,6 +280,7 @@ describe('cleanButtonText', () => {
 describe('classifyButtonTextRegex', () => {
     it('matches reject patterns', () => {
         expect(classifyButtonTextRegex('Reject All')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reject non-functional cookies')).to.equal('reject');
     });
 
     it('does not match never match patterns', () => {

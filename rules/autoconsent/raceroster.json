@@ -1,0 +1,33 @@
+{
+    "name": "raceroster",
+    "vendorUrl": "https://raceroster.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?raceroster\\.com/"
+    },
+    "prehideSelectors": [".cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner .cookie-banner__button--nonfunctional"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner .cookie-banner__box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner .cookie-banner__button--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner .cookie-banner__button--nonfunctional"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_c=1%3B0%3B0"
+        }
+    ]
+}
