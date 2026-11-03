@@ -108,6 +108,10 @@ export const snippets = {
             ),
         ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
+    EVAL_CHINA_AIRLINES_TEST: () => {
+        const consent = JSON.parse(localStorage.getItem('cookie-consent'));
+        return !!consent && !consent.analytics && !consent.personalization && !consent.marketing;
+    },
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,

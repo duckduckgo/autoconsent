@@ -1,0 +1,45 @@
+{
+    "name": "china-airlines",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?china-airlines\\.com/"
+    },
+    "prehideSelectors": ["div[role=dialog]:has(> header .gModalCloseButton):has(input[type=checkbox][disabled]:checked)"],
+    "detectCmp": [
+        {
+            "exists": "div[role=dialog]:has(> header .gModalCloseButton):has(input[type=checkbox][disabled]:checked)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=dialog]:has(> header .gModalCloseButton):has(input[type=checkbox][disabled]:checked)"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "div[role=dialog]:has(> header .gModalCloseButton) label:has(input[type=checkbox]:not([disabled]):not(:checked))",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "div[role=dialog]:has(> header .gModalCloseButton):has(input[type=checkbox][disabled]:checked) footer button"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "div[role=dialog]:has(> header .gModalCloseButton) label:has(input[type=checkbox]:not([disabled]):checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "div[role=dialog]:has(> header .gModalCloseButton):has(input[type=checkbox][disabled]:checked) footer button"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_CHINA_AIRLINES_TEST"
+        }
+    ],
+    "_metadata": {
+        "vendorUrl": "https://www.china-airlines.com/"
+    }
+}
