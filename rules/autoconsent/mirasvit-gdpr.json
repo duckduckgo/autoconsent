@@ -1,27 +1,31 @@
 {
     "name": "mirasvit-gdpr",
     "prehideSelectors": ["#gdprCookieBar", "#gdprCookieBarOverlay", ".mst-gdpr__cookie-bar-wrapper", ".mst-gdpr__cookie-bar-overlay"],
-    "detectCmp": [{ "exists": ".mst-gdpr__cookie-bar .mst-gdpr__buttons" }],
-    "detectPopup": [{ "visible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons", "check": "any" }],
+    "detectCmp": [{ "exists": ".mst-gdpr__cookie-bar .mst-gdpr__buttons,.mst-gdpr-cookie-bar-wrapper .mst-gdpr-buttons" }],
+    "detectPopup": [
+        { "visible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons,.mst-gdpr-cookie-bar-wrapper .mst-gdpr-buttons", "check": "any" }
+    ],
     "optIn": [
         {
             "any": [
                 { "click": ".mst-gdpr__buttons [data-trigger-settings=agree]" },
-                { "click": ".mst-gdpr__buttons button[\\@click^=handleAllow]" }
+                { "click": ".mst-gdpr__buttons button[\\@click^=handleAllow]" },
+                { "click": ".mst-gdpr-buttons button[\\@click^=handleAllow]" }
             ]
         }
     ],
     "optOut": [
         {
             "if": {
-                "visible": ".mst-gdpr__buttons [data-trigger-settings=decline],.mst-gdpr__buttons button[\\@click=handleDecline]",
+                "visible": ".mst-gdpr__buttons [data-trigger-settings=decline],.mst-gdpr__buttons button[\\@click=handleDecline],.mst-gdpr-cookie-bar-wrapper button[\\@click=handleDecline]",
                 "check": "any"
             },
             "then": [
                 {
                     "any": [
                         { "click": ".mst-gdpr__buttons [data-trigger-settings=decline]" },
-                        { "click": ".mst-gdpr__buttons button[\\@click=handleDecline]" }
+                        { "click": ".mst-gdpr__buttons button[\\@click=handleDecline]" },
+                        { "click": ".mst-gdpr-cookie-bar-wrapper button[\\@click=handleDecline]" }
                     ]
                 }
             ],
@@ -52,7 +56,14 @@
                 }
             ]
         },
-        { "waitForVisible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons", "check": "none", "timeout": 10000 }
+        {
+            "waitForVisible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons,.mst-gdpr-cookie-bar-wrapper .mst-gdpr-buttons",
+            "check": "none",
+            "timeout": 10000
+        }
     ],
-    "test": [{ "cookieContains": "gdpr_cookie_consent=" }, { "visible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons", "check": "none" }]
+    "test": [
+        { "cookieContains": "gdpr_cookie_consent=" },
+        { "visible": ".mst-gdpr__cookie-bar .mst-gdpr__buttons,.mst-gdpr-cookie-bar-wrapper .mst-gdpr-buttons", "check": "none" }
+    ]
 }
