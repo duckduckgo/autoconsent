@@ -1,0 +1,40 @@
+{
+    "name": "react-cookie-consent-cosmetic",
+    "_metadata": {
+        "vendorUrl": "https://github.com/Mastermindzh/react-cookie-consent"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["*:has(> * > #rcc-confirm-button):not(:has(#rcc-decline-button))"],
+    "detectCmp": [
+        {
+            "visible": "#rcc-confirm-button"
+        },
+        {
+            "exists": "#rcc-decline-button",
+            "negated": true
+        },
+        {
+            "exists": "*:has(> * > #rcc-confirm-button) button:not(#rcc-confirm-button)",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#rcc-confirm-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#rcc-confirm-button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "*:has(> * > #rcc-confirm-button)"
+        },
+        {
+            "hide": "*:has(> * > * > #rcc-confirm-button)[style*=\"position: fixed\"][style*=\"height: 100%\"]",
+            "optional": true
+        }
+    ]
+}
