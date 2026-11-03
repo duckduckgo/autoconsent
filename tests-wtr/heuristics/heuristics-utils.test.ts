@@ -214,6 +214,22 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Spanish popups', () => {
+    it('detects Spanish cookie notices', () => {
+        const texts = [
+            'Las cookies de este sitio se usan para personalizar el contenido y los anuncios, para ofrecer funciones de redes sociales y para analizar el tráfico.',
+            'Las cookies de esta web se utilizan para analizar el tráfico.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Spanish text', () => {
+        expect(checkHeuristicPatterns('Las placas solares de este sitio se usan para autoconsumo').patterns).to.have.length(0);
+    });
+});
+
 describe('isExcludedPopup', () => {
     it('flags doublelist-style age verification popups', () => {
         // Real-world text from the doublelist.com age gate (listings page)
