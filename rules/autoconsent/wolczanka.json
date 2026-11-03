@@ -1,0 +1,45 @@
+{
+    "name": "wolczanka.pl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?wolczanka\\.pl/"
+    },
+    "prehideSelectors": ["#bottom-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#bottom-cookies #openCookiesSettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#bottom-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acceptAllCookiesBottom"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#openCookiesSettings"
+        },
+        {
+            "waitForVisible": "#cookiesModal #saveSelectedCookies"
+        },
+        {
+            "click": "#cookiesForm input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": "#cookiesModal #saveSelectedCookies"
+        },
+        {
+            "waitForVisible": "#cookiesModal, #bottom-cookies",
+            "check": "none"
+        }
+    ]
+}
