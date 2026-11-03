@@ -97,6 +97,13 @@ export const snippets = {
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
+    // the close handler listens for mouseup, which element.click() does not dispatch
+    EVAL_BING_NOTICE_CLOSE: () => {
+        const close = document.querySelector('#bnp_ttc_close');
+        close.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }));
+        close.click();
+        return true;
+    },
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>
         !JSON.parse(
