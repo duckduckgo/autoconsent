@@ -73,6 +73,18 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects analytics consent prompts without the word "cookies"', () => {
+        const { patterns } = checkHeuristicPatterns(
+            'Help improve the guides Allow site usage measurement with Google Analytics? Your game and local tools work with either choice.',
+        );
+
+        expect(patterns).to.include('/(?:allow|accept|consent to|agree to).{0,100}google analytics/gi');
+    });
+
+    it('does not detect a plain mention of Google Analytics', () => {
+        expect(checkHeuristicPatterns('This site uses Google Analytics to count visits.').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
