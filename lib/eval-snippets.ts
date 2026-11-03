@@ -216,6 +216,8 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
+    EVAL_SCANBOAT_TEST: () =>
+        localStorage.getItem('consent_statistics') === 'false' && localStorage.getItem('consent_marketing') === 'false',
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&

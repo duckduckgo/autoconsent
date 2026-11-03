@@ -1,0 +1,54 @@
+{
+    "name": "scanboat",
+    "vendorUrl": "https://www.scanboat.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?scanboat\\.com/"
+    },
+    "prehideSelectors": ["#modalCookieConsentDialogContainer"],
+    "detectCmp": [
+        {
+            "exists": "#modalCookieConsentDialogContainer #cookie-consent-btn-accept-some"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#modalCookieConsentDialogContainer.show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-btn-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#consent-analytics:checked"
+            },
+            "then": [
+                {
+                    "click": "#consent-analytics"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#consent-marketing:checked"
+            },
+            "then": [
+                {
+                    "click": "#consent-marketing"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-consent-btn-accept-some"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_SCANBOAT_TEST"
+        }
+    ]
+}
