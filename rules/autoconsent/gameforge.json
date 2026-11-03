@@ -1,0 +1,42 @@
+{
+    "name": "gameforge",
+    "vendorUrl": "https://gameforge.com/",
+    "prehideSelectors": [".cookiebanner1"],
+    "detectCmp": [
+        {
+            "exists": "script[src*='consent.gameforge.com/']"
+        },
+        {
+            "exists": ".cookiebanner1 .cookiebanner4 > button.cookiebanner6"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiebanner1 .cookiebanner2"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiebanner1 .cookiebanner4 > button:not(.cookiebanner6)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookiebanner1 .cookiebanner4 > button.cookiebanner6"
+        },
+        {
+            "waitForVisible": ".cookiebanner1 .cookiebanner11"
+        },
+        {
+            "waitForThenClick": ".cookiebanner1 .cookiebanner11 > button:last-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gf-cookie-consent-"
+        },
+        {
+            "cookieContains": "=|0|"
+        }
+    ]
+}
