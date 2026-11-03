@@ -1,0 +1,18 @@
+{
+    "name": "mites.gob.es",
+    "vendorUrl": "https://www.mites.gob.es/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mites\\.gob\\.es/"
+    },
+    "prehideSelectors": ["#avisoUsoCookies", "#cookies-modal"],
+    "detectCmp": [{ "exists": "#avisoUsoCookies .configurar-cookies" }],
+    "detectPopup": [{ "visible": "#avisoUsoCookies .configurar-cookies" }],
+    "optIn": [{ "waitForThenClick": "#avisoUsoCookies .aceptar-cookies" }],
+    "optOut": [
+        { "waitForThenClick": "#avisoUsoCookies .configurar-cookies" },
+        { "waitForVisible": "#cookies-modal .cookies-btn-guardar" },
+        { "click": "#cookies-modal input[id^=check-]:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": "#cookies-modal .cookies-btn-guardar" }
+    ],
+    "test": [{ "cookieContains": "TRABAJO_POLICYv2=true" }, { "cookieContains": "TRABAJO_GA=", "negated": true }]
+}
