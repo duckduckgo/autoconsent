@@ -1,0 +1,10 @@
+{
+    "name": "acceptrics",
+    "vendorUrl": "https://acceptrics.com/",
+    "prehideSelectors": ["#acceptricsCookieBanner"],
+    "detectCmp": [{ "exists": "#acceptricsCookieBanner" }],
+    "detectPopup": [{ "visible": "#acceptricsCookieBanner" }],
+    "optIn": [{ "waitForThenClick": "#acceptricsAcceptAllBtn" }],
+    "optOut": [{ "waitForThenClick": "#acceptricsRejectAllBtn" }],
+    "test": [{ "waitForVisible": "#acceptricsCookieBanner", "check": "none", "timeout": 1000 }]
+}
