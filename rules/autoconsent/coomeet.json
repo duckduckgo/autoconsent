@@ -1,0 +1,15 @@
+{
+    "name": "coomeet",
+    "vendorUrl": "https://coomeet.com/",
+    "prehideSelectors": ["#cookie-modal"],
+    "detectCmp": [{ "exists": "#cookie-modal #tech-select .checkbox-item" }],
+    "detectPopup": [{ "visible": "#cookie-modal #accept-cookie" }],
+    "optIn": [{ "waitForThenClick": "#cookie-modal #accept-cookie" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-modal #disable-cookie" },
+        { "waitForVisible": "#cookie-modal #tech-select" },
+        { "click": "#cookie-modal .checkbox-item:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#cookie-modal #accept-cookie" }
+    ],
+    "test": [{ "eval": "EVAL_COOMEET_TEST" }]
+}
