@@ -348,6 +348,35 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Greek popups', () => {
+    it('detects Greek cookie notices', () => {
+        const texts = [
+            // e-shop.gr
+            'Η ιστοσελίδα χρησιμοποιεί cookies για την ευκολία της περιήγησης, την εξατομίκευση περιεχομένου και διαφημίσεων',
+            // efood.gr
+            'Χρησιμοποιούμε cookies και άλλες παρόμοιες τεχνολογίες για να σου παρέχουμε την καλύτερη δυνατή εξυπηρέτηση',
+            'ΧΡΗΣΙΜΟΠΟΙΟΥΜΕ COOKIES',
+            'Ο ιστότοπος χρησιμοποιεί αρχεία cookie',
+            'Μπορείτε να ανακαλέσετε τη συγκατάθεσή σας για τα cookies οποιαδήποτε στιγμή',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Greek text', () => {
+        const texts = [
+            // skai.gr push notification prompt
+            'Θα θέλατε να λαμβάνετε ενημερώσεις για σημαντικά θέματα από το skai.gr; ΟΧΙ, ΕΥΧΑΡΙΣΤΩ ΝΑΙ, ΘΕΛΩ',
+            'Χρησιμοποιούμε τα δεδομένα σας για να βελτιώσουμε την υπηρεσία',
+            'Mε ενδιαφέρει το newsletter Αποδέχομαι την Πολιτική Προστασίας Προσωπικών Δεδομένων',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 // excluded as a popup by a whole-text context negative
 const isExcludedPopup = (text: string) => excludedBy(text, 'popup').length > 0;
 
@@ -591,6 +620,31 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
+    });
+
+    it('matches Greek buttons, with and without tonos', () => {
+        const expected: Record<string, string[]> = {
+            reject: [
+                'Απόρριψη',
+                'ΑΠΟΡΡΙΨΗ ΟΛΩΝ',
+                'Απορρίπτω',
+                'Αποδοχή υποχρεωτικών',
+                'Μόνο τα απαραίτητα cookies',
+                'ΜΟΝΟ ΑΠΑΡΑΙΤΗΤΑ',
+                'Συνέχεια χωρίς αποδοχή',
+                'Δε συμφωνώ',
+                'Όχι, ευχαριστώ',
+            ],
+            settings: ['Ρυθμίσεις', 'ΡΥΘΜΙΣΕΙΣ', 'Πληροφορίες και Ρυθμίσεις', 'Διαχείριση cookies', 'Περισσότερες επιλογές'],
+            accept: ['Αποδοχή', 'ΑΠΟΔΟΧΗ ΟΛΩΝ', 'Αποδέχομαι όλα τα cookies', 'Συμφωνώ', 'Να επιτρέπονται όλα', 'Επιτρέπεται η επιλογή'],
+            acknowledge: ['Εντάξει', 'ΕΝΤΑΞΕΙ', 'Το κατάλαβα', 'Κλείσιμο', 'Αποθήκευση επιλογών'],
+            other: ['Απόρρητο', 'Πολιτική cookies', 'Πληροφορίες', 'Πολιτική απορρήτου', 'ΝΑΙ, ΘΕΛΩ', 'Εγγραφή', 'Περισσότερα'],
+        };
+        for (const [label, texts] of Object.entries(expected)) {
+            for (const text of texts) {
+                expect(classifyButtonTextRegex(text), text).to.equal(label);
+            }
+        }
     });
 
     it('matches Russian settings buttons', () => {

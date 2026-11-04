@@ -204,4 +204,9 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["cookie","クッキー"],
     ["bruger cookies"],
     ["informasjonskapsler","cookies"],
+    ["χρησιμοποι"],
+    ["τεχνολογ"],
+    ["συγκατ"],
+    ["αποδοχ"],
+    ["ρριψη"],
 ];
