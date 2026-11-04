@@ -1,16 +1,33 @@
+/** Which text a detect pattern or context negative applies to: a popup element's text, or a whole page's text. */
+export type HeuristicInput = 'popup' | 'page';
+/** A detect pattern, optionally limited to one input. */
+export type DetectPattern = RegExp | { pattern: RegExp; input: HeuristicInput };
+/** A detect pattern's regex. */
+export const patternOf = (p: DetectPattern): RegExp => (p instanceof RegExp ? p : p.pattern);
+// detect patterns that context negatives refer to
+export const BY_CONTINUING_PRIVACY = /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi;
+export const ACCEPT_ALL = /accept all/gi;
+export const USE_OF_COOKIES = /use of cookies/gi;
+export const UTILISATION_DES_COOKIES = /utilisation.{0,100}des.{0,100}cookies/gi;
+export const ACCEPTEZ_UTILISATION = /acceptez.{0,100}l.{0,100}utilisation/gi;
+export const VERWENDUNG_VON_COOKIES = /verwendung.{0,100}von.{0,100}cookies/gi;
+export const DE_COOKIE_VERB =
+    /\b(?:nutzen|nutzt|verwenden|verwendet|setzen|setzt|benutzen|benutzt|speichert|platzieren)\b(?: \S+){0,4} cookies\b/gi;
+export const GEBRUIK_VAN_COOKIES = /gebruik.{0,100}van.{0,100}cookies/gi;
+
 // TODO: check for false positive detections per pattern
 // these patterns are matched against popup-like elements or full document text to detect unknown cookie popups
-export const DETECT_PATTERNS = [
+export const DETECT_PATTERNS: DetectPattern[] = [
     /accept cookies/gi,
-    /accept all/gi,
+    ACCEPT_ALL,
     /reject all/gi,
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
-    /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi,
+    BY_CONTINUING_PRIVACY,
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
     /we (?:use|serve)(?: \w+){0,2} cookies/gi,
     /we are using cookies/gi,
-    /use of cookies/gi,
+    USE_OF_COOKIES,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
     /cookies (?:and|or) .{0,100} technologies/gi,
@@ -21,6 +38,33 @@ export const DETECT_PATTERNS = [
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
+    // TCF wording: "store and/or access information", "and our partners ask for your consent", "we and our N partners"
+    /\b(?:store|stores|storing) and\/or access(?:ing)? information\b/gi,
+    /\band our partners ask for your consent\b/gi,
+    /\bwe and (?:our|up to) (?:\d+ )?(?:partners|vendors)\b/gi,
+    // a partner count, in each language: "our 186 partners", "unseren 107 Partnern", "nuestros 1064 socios"
+    /\b(?:our|unseren|onze|nos|nuestros|i nostri) \d{2,4} (?:partners|partnern|partner|partenaires|socios|vendors|fornitori)\b/gi,
+    /\b\d{2,4} iab[- ]partner/gi,
+    // "technologies like cookies", in each language
+    /\btechnolog(?:ies|ien|ieën|ías|ie) (?:like|such as|wie|zoals|como(?: las)?|telles que(?: les)?|come(?: i)?) cookies?\b/gi,
+    /\buses (?:\S+ ){0,2}cookies\b/gi,
+    /\b(?:like|want) to (?:use|set) (?:\S+ ){0,2}cookies\b/gi,
+    /\b(?:optional|additional|non-essential) cookies\b/gi,
+    /\bstoring of cookies\b|\bplaced cookies\b/gi,
+    /\b(?:store|stores) and access (?:data|information) on your device\b|\baccess and store (?:data|information) on your device\b/gi,
+    /\bwe use (?:\S+ ){1,4}cookies\b/gi,
+    // US privacy notices: opt-out sentences, not the footer link labels
+    /\byou (?:can|may) opt[- ]out of (?:the |this )?(?:sale|sharing|use|selling)\b/gi,
+    /\b(?:if you wish to|to) opt[- ]out of the sale\b/gi,
+    /\bthis website or its third[- ]party tools (?:process|use)\b/gi,
+    /["“]?(?:share|sell)["”]? or ["“]?(?:sell|share)["”]? (?:your )?(?:personal )?information\b/gi,
+    /\bresidents have (?:certain )?rights with regard to the sale\b/gi,
+    /\bwe use technologies (?:on this website )?(?:that may )?(?:to )?collect\b/gi,
+    // pay-or-consent walls
+    /\bcontinue reading with advertising\b|\b(?:with|mit) (?:advertising|werbung) (?:and|und) tracking\b/gi,
+    /\bconsent and continue\b/gi,
+    // preference centres are often in the page but hidden, so popup text only
+    { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -38,27 +82,33 @@ export const DETECT_PATTERNS = [
     /consentement.{0,100}à.{0,100}tout.{0,100}moment/gi,
     /votre.{0,100}consentement/gi,
     /accepter.{0,100}tout/gi,
-    /utilisation.{0,100}des.{0,100}cookies/gi,
+    UTILISATION_DES_COOKIES,
     /cookies.{0,100}ou.{0,100}technologies/gi,
-    /acceptez.{0,100}l.{0,100}utilisation/gi,
+    ACCEPTEZ_UTILISATION,
     /continuer sans accepter/gi,
     /tout refuser/gi,
     /(?:refuser|rejeter) tous les cookies/gi,
-    /je refuse/gi,
+    // not "je refuse d'…" in a headline
+    /je refuse(?! d['’e])/gi,
     /refuser et continuer/gi,
     /refuser les cookies/gi,
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
     /nécessaires uniquement/gi,
+    /\b(?:stocker|stockons) et\/ou (?:accéder|accédons)\b/gi,
+    /\bnos partenaires demandent votre consentement\b/gi,
+    /\bconsentez à l.utilisation (?:de |des )?cookies\b|\bdépôt (?:de|des) cookies\b/gi,
+    /\bles cookies nous permettent\b|\bnos partenaires et nous(?:-mêmes)?\b/gi,
+    /\baccepter (?:&|et) fermer\b/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
     /wir.{0,100}und.{0,100}unsere.{0,100}partner/gi,
-    /zugriff.{0,100}auf.{0,100}informationen.{0,100}auf/gi,
+    /zugriff auf informationen auf/gi,
     /inhalte.{0,100}messung.{0,100}von.{0,100}werbeleistung.{0,100}und/gi,
     /cookies.{0,100}und.{0,100}andere/gi,
-    /verwendung.{0,100}von.{0,100}cookies/gi,
+    VERWENDUNG_VON_COOKIES,
     /wir.{0,100}nutzen.{0,100}cookies/gi,
     /verwendet.{0,100}cookies/gi,
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
@@ -72,9 +122,21 @@ export const DETECT_PATTERNS = [
     /nur funktionale cookies akzeptieren/gi,
     /optionale ablehnen/gi,
     /zustimmung verweigern/gi,
+    /\bspeichern und\/oder (?:zugreifen|abrufen)\b/gi,
+    /\bunsere partner bitten um ihre zustimmung\b/gi,
+    DE_COOKIE_VERB,
+    /\b(?:werden|wird) (?:\S+ ){0,3}cookies (?:verwendet|eingesetzt|gesetzt|genutzt)\b/gi,
+    /\bcookies? zum einsatz\b|\beinsatz von cookies\b/gi,
+    /\beinverstanden\b.{0,60}\bcookies\b|\bcookies\b.{0,80}\beinverstanden\b/gi,
+    /\b(?:alle|alles) (?:cookies |optionalen \S+ )?(?:akzeptieren|zulassen|erlauben|zustimmen)\b/gi,
+    /\bzustimmen und weiter\b|\bweiter,? ohne zu (?:akzeptieren|zustimmen)\b/gi,
+    /\b(?:einwilligung|zustimmung) (?:zu|zur|in die) (?:\S+ )?cookies\b|\bcookie-(?:zustimmung|einwilligung)\b/gi,
+    /\btracking-technologien\b/gi,
+    /\bakzeptier\w* (?:du |sie )?(?:die )?verwendung (?:\S+ )?cookies\b/gi,
+    /\bmit werbetracking weiterlesen\b|\bweiter mit werbung\b|\bcon tracking e annunci\b/gi,
 
     // NL
-    /gebruik.{0,100}van.{0,100}cookies/gi,
+    GEBRUIK_VAN_COOKIES,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
 
@@ -85,6 +147,13 @@ export const DETECT_PATTERNS = [
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
     /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
     /wijs alles af/gi,
+    /\b(?:op te slaan en\/of te (?:raadplegen|openen|lezen)|opslaan en\/of (?:openen|raadplegen|lezen)|slaan informatie\b.{0,60}\bop en\/of)\b/gi,
+    /\bonze partners vragen om (?:jouw|uw|je) toestemming\b/gi,
+    /\bwij en onze (?:\d+ )?partners\b/gi,
+    /\b(?:gebruiken|gebruikt|plaatsen|plaatst)\b(?: \S+){0,3} cookies\b/gi,
+    /\baccepteer (?:alles|alle cookies)\b/gi,
+    // Dutch words only: "tracking cookies" and "marketing cookies" are also English prose and footer links
+    /\b(?:analytische|functionele|essentiële|noodzakelijke) cookies\b/gi,
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
@@ -102,6 +171,15 @@ export const DETECT_PATTERNS = [
     /nosotros y nuestros( \d+)? (socios|proveedores).{0,180} cookies/gi,
     /recopilamos y almacenamos datos de usted y de su dispositivo/gi,
     /utilizamos tecnolog[ií]as como las cookies/gi,
+    /\b(?:almacenar|almacenamos) y\/o (?:acceder|accedemos)\b/gi,
+    /\bnuestros socios solicitan su consentimiento\b/gi,
+    /\b(?:tanto nosotros como|nosotros y) nuestros (?:\d+ )?socios\b/gi,
+    /\b(?:aceptar|rechazar) todas\b|\bcontinuar sin aceptar\b|\bsolo las necesarias\b/gi,
+    /\bacept\w* (?:\S+ ){0,3}uso de (?:las )?cookies\b/gi,
+    /\bcookies (?:técnicas|analíticas|propias|de terceros|opcionales|necesarias)\b/gi,
+    /\blas cookies nos (?:ayudan|permiten)\b/gi,
+    /\b(?:instalamos|empleamos)\b(?: \S+){0,4} cookies\b/gi,
+    /\bacept(?:a|ar|as)? (?:el uso de |las )?(?:\S+ )?cookies\b|\bnecesitamos usar cookies\b/gi,
 
     // Polish (PL)
     // examples:
@@ -132,10 +210,11 @@ export const DETECT_PATTERNS = [
     // Catalan (CA)
     /cookies pròpies i de tercers/gi,
     /utilitzem galetes/gi,
-    /\búnicament utilitza galetes pròpies amb finalitat tècnica\b/gi,
+    /únicament utilitza galetes pròpies amb finalitat tècnica\b/gi,
     /este lloc web utilitza només cookies tècniques necessàries per al seu funcionament/gi,
     /utilitza cookies tècniques,\s*de personalització i anàlisi/gi,
     /utilitzem cookies i altres tecnologies/gi,
+    /\b(?:utilitz\w*|fa servir|fem servir|usem)\b(?: \S+){0,3} (?:cookies|galetes)\b/gi,
 
     // Basque (EU)
     /cookie propio eta hirugarrenenak helburu teknikoarekin erabiltzen ditu/gi,
@@ -169,7 +248,18 @@ export const DETECT_PATTERNS = [
     /(?:usiamo|utilizziamo).{0,20}cookie/gi,
     /sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi,
     /noi e i nostri.{0,20}partner.{0,100}cookie/gi,
-    /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
+    /\b(?:utilizziamo|usiamo|impieghiamo|installiamo)\b(?: \S+){0,3} cookies?\b/gi,
+    /\b(?:utilizza|utilizzano|usa|usano|impiega|installa|fa uso di)\b(?: \S+){0,3} cookies?\b/gi,
+    /\bcookies? (?:tecnici|di profilazione|di terze parti|analitici|statistici|di marketing)\b/gi,
+    /\b(?:acconsent|accett)\w*\b.{0,40}\b(?:uso|utilizzo|installazione)\b.{0,15}\bcookies?\b/gi,
+    /\b(?:continuando|proseguendo)(?: la| nella)? navigazione\b.{0,80}\b(?:accett|acconsent)\w*/gi,
+    /\b(?:accetta|accetto|accettare|rifiuta|rifiuto|rifiutare)(?: tutti| tutto)\b/gi,
+    /\b(?:continua|prosegui|chiudi) senza accettare\b/gi,
+    /\brifiuta e abbonati\b/gi,
+    /\bconsenso (?:all.(?:uso|utilizzo) (?:dei |di )?)?cookies?\b/gi,
+    /\b(?:insieme ai|con i) nostri (?:\d+ )?partner\b/gi,
+    /\bterze parti selezionate\b/gi,
+    /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
@@ -507,29 +597,12 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
     /подписатьс|подписк|оплатит|оплачива/is,
 ];
 
-// Popup body-text patterns that suppress heuristic detection. Currently targets age gates and adult-content disclaimers whose "reject" button leads to a dead end.
-// Applied only to popup-scoped text (via getActionablePopups); NOT applied to full-document detection, where these terms produce too many false positives.
-export const DETECT_NEVER_MATCH_PATTERNS = [
-    // e.g. "age verification", "age confirmation", "age check", "age gate", "age restriction"
-    /age\s+(?:verification|confirmation|check|gate|restriction)/i,
-    // e.g. "over 18 years", "at least 21 years", "older than 21", "18+"
-    /(?:over|above|at\s*least|minimum|older\s+than)\s*(?:18|21)\s*(?:years|yo|y\.?o\.?|\+)?/i,
-    // e.g. "18 years of age", "18+ years old", "21 years or older"
-    /(?:18|21)\s*(?:\+|years?)\s*(?:of\s*age|or\s*older|or\s*above)/i,
-    // e.g. "I am 18+", "I am over 18", "I'm 21 or older"
-    /(?:i'?m|i\s*am)\s*(?:over|above|at\s*least)?\s*(?:18|21)(?:\+|\s*(?:or\s*older|years))?/i,
-    // e.g. "you must be 18", "users must be at least 21", "visitors must be over 18"
-    /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
-    // e.g. "adult oriented material", "adult content", "adult-only website"
-    /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
-];
-
 export const SETTINGS_PATTERNS = [
     // Multilingual "open customization" patterns: a customization verb next to a
     // cookie/preference/settings/options/details/purposes noun (both word orders).
     // The negative lookahead avoids policy links and save/confirm/accept phrases (those are accept/acknowledge/other).
-    /^(?!.*\b(policy|policies|notice|statement|impressum|\w*richtlinie\w*|\w*erklärung|page|beschrijving|privacy$|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|einstellen|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)\b.{0,20}(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b/is,
-    /^(?!.*\b(policy|policies|notice|statement|impressum|\w*richtlinie\w*|\w*erklärung|page|beschrijving|privacy$|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b(.{0,14}\W)?(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|einstellen|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)\b/is,
+    /^(?!.*\b(policy|policies|notice|statement|impressum|\w*richtlinie\w*|\w*erklärung|page|beschrijving|privacy$|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|einstellen|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)(?!\w).{0,20}(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b/is,
+    /^(?!.*\b(policy|policies|notice|statement|impressum|\w*richtlinie\w*|\w*erklärung|page|beschrijving|privacy$|beleid|politique|política|polityk|speichern|guardar|opslaan|zapisz|enregistrer|sauvegarder|bevestig|bestätig|confirm|save|submit|akzeptier|accept|zaakcept)\b)(cookies?|preferences?|settings?|options?|choices?|controls?|details?|purposes?|services?|consent|einstellung\w*|optionen|präferenzen|einzelheiten|zwecke|dienste|datenschutz\w*|auswahl|voorkeur\w*|instelling\w*|opties|diensten|préférences|paramètres|réglages|choix|détails|finalités|témoins|preferencia\w*|opciones|ajustes|configuraci\w*|detalles|servicios|elección|preferencj\w*|ustawie\w*|opcje|szczegół\w*|cele|galetes)\b(.{0,14}\W)?(customi[sz]e|manage|adjust|configure|personali[sz]e|let me choose|edit|change|set|select|view|see|review|update|open|show|choose|anpassen|verwalten|konfigurieren|bearbeiten|öffnen|anzeigen|einblenden|einstellen|festlegen|auswählen|wählen|aanpassen|beheren|instellen|wijzig\w*|personaliseren|personaliseer|kies|bekijk|toon|personnaliser|paramétrer|gérer|configurer|choisir|afficher|définir|modifier|configurar|personalizar|gestionar|administrar|ajustar|seleccionar|modificar|establecer|dostosuj|zarządzaj|personalizuj|ustaw\w*|zmień|pokaż|wybierz)(?!\w)/is,
 
     // settings noun + cookies, e.g. "paramètres des cookies", "ajustes de cookies", "instellingen voor cookies en diensten"
     /^(paramètres|préférences|réglages|ajustes|opciones|elección|preferencias|instellingen)( (de|des|les|voor|van))? cookies( (et des|en|y) (services|diensten|servicios))?$/is,

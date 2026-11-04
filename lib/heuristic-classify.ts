@@ -1,17 +1,19 @@
 /**
  * Text-only heuristic classification: popup text and button labels in, classifications out.
  * Must not depend on DOM APIs, so that it can be used from Node (e.g. by tracker-radar-collector).
+ * This is the `./heuristics` package entry: it also exports the detect patterns, context negatives and the matching
+ * functions (heuristic-patterns.ts, heuristic-negatives.ts, heuristic-detect.ts).
  */
 import {
     ACCEPT_PATTERNS,
     ACKNOWLEDGE_PATTERNS,
     BUTTON_NEVER_MATCH_PATTERNS,
-    DETECT_NEVER_MATCH_PATTERNS,
-    DETECT_PATTERNS,
     REJECT_PATTERNS,
     SETTINGS_PATTERNS,
 } from './heuristic-patterns';
 export * from './heuristic-patterns';
+export * from './heuristic-negatives';
+export * from './heuristic-detect';
 
 export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
 export type PopupClassification = 'none' | 'reject' | 'tier1' | 'tier2';
@@ -21,47 +23,10 @@ export type ClassifiableButton = {
     regexClassification?: ButtonRegexClassification;
 };
 
-const TEXT_LIMIT = 100000;
-
-export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
-    allText = allText.slice(0, TEXT_LIMIT);
-    const patterns = [];
-    const snippets = [];
-
-    for (const p of detectPatterns) {
-        const matches = allText?.match(p);
-        if (matches) {
-            patterns.push(p.toString());
-            // When a non-global regex has capture groups, `String.prototype.match`
-            // returns undefined entries for optional groups that did not match.
-            for (const m of matches) {
-                if (typeof m === 'string') {
-                    snippets.push(m.substring(0, 200));
-                }
-            }
-        }
-    }
-    return { patterns, snippets };
-}
-
-// same result as checking checkHeuristicPatterns() for patterns, but stops at the first match
-export function hasHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS): boolean {
-    const text = allText.slice(0, TEXT_LIMIT);
-    return detectPatterns.some((p) => text.search(p) !== -1);
-}
-
 export function classifyButtons(buttons: ClassifiableButton[]) {
     for (const button of buttons) {
         button.regexClassification = classifyButtonTextRegex(button.text);
     }
-}
-
-export function isExcludedPopup(popupText: string, excludePatterns = DETECT_NEVER_MATCH_PATTERNS): boolean {
-    if (!popupText) {
-        return false;
-    }
-    const truncated = popupText.slice(0, TEXT_LIMIT);
-    return excludePatterns.some((p) => p.test(truncated));
 }
 
 export function classifyPopup(buttons: ClassifiableButton[]): PopupClassification {
