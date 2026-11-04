@@ -522,6 +522,10 @@ export const DETECT_NEVER_MATCH_PATTERNS = [
     /(?:you|users?|visitors?)\s+must\s+be\s+(?:over|above|at\s*least)?\s*(?:18|21)/i,
     // e.g. "adult oriented material", "adult content", "adult-only website"
     /adult[\s-]+(?:oriented|only|content|material|websites?)/i,
+    // e.g. "Altersverifikation", "vérification de l'âge", "verificación de edad", "weryfikacja wieku", "leeftijdsverificatie"
+    /altersverifi(?:kation|zierung)|altersbestätigung|alters(?:über)?prüfung|v[ée]rification\s+(?:de\s+l'|d')\s*[âa]ge|verificaci[óo]n\s+de\s+(?:la\s+)?edad|verifica\s+dell'\s*et[àa]|weryfikacja\s+wieku|leeftijdsverificatie/i,
+    // e.g. "über 18 Jahre", "plus de 18 ans", "mayor de 18 años", "almeno 18 anni", "skończone 18 lat", "18 jaar of ouder"
+    /(?:über|mindestens|plus\s+de|au\s+moins|mayor(?:es)?\s+de|al\s+menos|maggiore\s+di|pi[ùu]\s+di|almeno|sko[ńn]czone|uko[ńn]czon[eay]c?h?|minimaal|ouder\s+dan)\s*(?:18|21)\s*(?:jahre|ans|años|anni|lat|jaar)|(?:18|21)\s*jaar\s+of\s+ouder/i,
 ];
 
 export const SETTINGS_PATTERNS = [

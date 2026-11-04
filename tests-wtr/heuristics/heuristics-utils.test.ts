@@ -242,6 +242,32 @@ describe('isExcludedPopup', () => {
         expect(isExcludedPopup('Adult website ahead.')).to.be.true;
     });
 
+    it('flags non-English age gates', () => {
+        const texts = [
+            'SIE MÜSSEN ÜBER 18 JAHRE ALT SEIN UND DEN NACHSTEHENDEN BEDINGUNGEN ZUSTIMMEN, BEVOR SIE FORTFAHREN KÖNNEN: Verlassen ICH STIMME ZU',
+            'VOUS DEVEZ AVOIR PLUS DE 18 ANS ET ACCEPTER LES CONDITIONS CI-DESSOUS POUR CONTINUER : Quitter ACCEPTER',
+            'ANTES DE CONTINUAR, DEBE SER MAYOR DE 18 AÑOS Y ACEPTAR LOS TÉRMINOS QUE SE INDICAN A CONTINUACIÓN: Salir ACEPTO',
+            'ABY KONTYNUOWAĆ, MUSISZ MIEĆ SKOŃCZONE 18 LAT I WYRAZIĆ ZGODĘ NA PONIŻSZE WARUNKI: Wyjdź ZGADZAM SIĘ',
+            'Devi avere almeno 18 anni per accedere. Accetto',
+            'DEVI AVERE PIÙ DI 18 ANNI E ACCETTARE I TERMINI DI SEGUITO RIPORTATI PRIMA DI CONTINUARE: Esci ACCETTO',
+            'Je moet 18 jaar of ouder zijn om deze website te bezoeken. Akkoord',
+            'Bestätigen Sie Ihr Alter. Altersverifikation erforderlich.',
+            "Vérification de l'âge requise pour continuer.",
+        ];
+        for (const text of texts) {
+            expect(isExcludedPopup(text), text).to.be.true;
+        }
+    });
+
+    it('does not flag non-English cookie popups that mention a minimum age', () => {
+        expect(
+            isExcludedPopup(
+                'Wenn Sie unter 16 Jahre alt sind, müssen Sie Ihre Erziehungsberechtigten um Erlaubnis bitten. Alle akzeptieren',
+            ),
+        ).to.be.false;
+        expect(isExcludedPopup('Nous utilisons des cookies. Tout accepter Tout refuser')).to.be.false;
+    });
+
     it('does not flag a normal cookie consent popup', () => {
         expect(isExcludedPopup('We use cookies to enhance your experience. Accept All Reject All')).to.be.false;
     });
