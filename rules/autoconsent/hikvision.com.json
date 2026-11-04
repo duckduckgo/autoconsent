@@ -1,0 +1,18 @@
+{
+    "name": "hikvision.com",
+    "comment": "Variant without a reject button. The only dismiss control is an SVG close icon, which just hides the banner without storing a choice.",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?hikvision\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": "section.gdpr-wrapper .gdpr-button-accept" },
+        { "exists": "section.gdpr-wrapper .gdpr-button-reject", "negated": true }
+    ],
+    "detectPopup": [{ "visible": "section.gdpr-wrapper" }],
+    "optIn": [{ "waitForThenClick": "section.gdpr-wrapper .gdpr-button-accept" }],
+    "optOut": [{ "hide": "section.gdpr-wrapper" }]
+}
