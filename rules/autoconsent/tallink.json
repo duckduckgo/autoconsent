@@ -1,0 +1,13 @@
+{
+    "name": "tallink",
+    "vendorUrl": "https://www.tallink.com/",
+    "prehideSelectors": ["#cms-web-consent-modal"],
+    "detectCmp": [{ "exists": "#cms-web-consent-root #cms-web-consent-modal" }],
+    "detectPopup": [{ "visible": "#cms-web-consent-modal" }],
+    "optIn": [{ "waitForThenClick": "#cms-web-consent-modal [data-cy=consent-agree-all]" }],
+    "optOut": [
+        { "waitForThenClick": "#cms-web-consent-modal [data-cy=consent-agree-necessary]" },
+        { "waitForVisible": "#cms-web-consent-modal", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "tlnk_cwc=necessary_cookies=true" }, { "cookieContains": "marketing_cookies=true", "negated": true }]
+}
