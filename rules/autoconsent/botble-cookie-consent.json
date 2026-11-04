@@ -1,0 +1,16 @@
+{
+    "name": "botble-cookie-consent",
+    "vendorUrl": "https://botble.com/",
+    "prehideSelectors": [".js-cookie-consent:has(.js-cookie-consent-reject)"],
+    "detectCmp": [{ "exists": ".js-cookie-consent .js-cookie-consent-reject" }],
+    "detectPopup": [{ "visible": ".js-cookie-consent:not(.is-hidden) .js-cookie-consent-reject" }],
+    "optIn": [{ "waitForThenClick": ".js-cookie-consent :is(.js-cookie-consent-agree, .js-cookie-consent-accept)" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-consent:not(.is-hidden) .js-cookie-consent-reject",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "test": [{ "visible": ".js-cookie-consent:not(.is-hidden) .js-cookie-consent-reject", "check": "none" }]
+}
